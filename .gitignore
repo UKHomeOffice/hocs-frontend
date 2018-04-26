@@ -57,3 +57,13 @@ typings/
 # dotenv environment variables file
 .env
 
+# build
+public/js
+public/styles
+server.js
+
+# IDE
+.vscode
+.idea
+*.iml
+

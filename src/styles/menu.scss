@@ -1,0 +1,65 @@
+#proposition-header {
+  overflow: auto;
+  clear: both;
+  color: $white;
+  & a {
+    float: left;
+  }
+  & span {
+    float: right;
+  }
+}
+
+#proposition-menu {
+  display: block;
+}
+
+#proposition-menu #main-menu,
+#proposition-menu > input {
+  @include core-19();
+  display: none;
+}
+
+#proposition-menu > label {
+  @include bold-19();
+  font-size: 19px;
+  display: inline-block;
+  float: right;
+  color: $white;
+}
+
+#proposition-menu > input:checked + #main-menu {
+  clear: both;
+  display: block;
+}
+
+#main-menu {
+  list-style: none;
+  & li > a {
+    @include bold-16();
+    color: white;
+    text-decoration: none;
+    &.active {
+      color: $govuk-blue;
+    }
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+@media only screen and (min-device-width: $tablet-breakpoint) {
+  #proposition-menu {
+    height: auto;
+  }
+  #proposition-menu #main-menu {
+    display: block;
+  }
+  #proposition-menu > label {
+    display: none
+  }
+  #proposition-menu ul li {
+    display: inline-block;
+    margin-right: 30px;
+  }
+}
