@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 
-class Button extends Component {
+class Submit extends Component {
 
   render() {
     const {
@@ -12,7 +12,7 @@ class Button extends Component {
       <Fragment>
         <input
           className={`button${className ? ' ' + className : ''}`}
-          disabled={isDisabled} 
+          disabled={isDisabled ? "true" : null}
           type="submit"
           value={label}
         />
@@ -21,9 +21,9 @@ class Button extends Component {
   }
 }
 
-Button.defaultProps = {
+Submit.defaultProps = {
   label: 'Submit',
   isDisabled: false
 };
 
-export default Button;
+export default Submit;

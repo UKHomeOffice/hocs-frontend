@@ -37,4 +37,13 @@ class Error extends Component {
     }
 }
 
+Error.defaultProps = {
+    title: 'Something has gone wrong',
+    error: 'An error has occurred',
+    stack: null,
+    location: {
+        pathname: null
+    }
+};
+
 export default Error;

@@ -15,3 +15,8 @@ export default class PhaseBannerComponent extends Component {
         )
     }
 }
+
+PhaseBannerComponent.defaultProps = {
+    phase: 'PROTOTYPE',
+    feedback: '/'
+};

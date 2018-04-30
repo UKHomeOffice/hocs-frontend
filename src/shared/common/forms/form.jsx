@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
-import Button from './button.jsx';
+import Submit from './submit.jsx';
 
 class Form extends Component {
 
   submitAction(e) {
     e.preventDefault();
-    console.log('test');
+    console.log('Submitted');
   };
 
   render() {
     return (
       <form action='/test' onSubmit={e => this.submitAction(e)}>
-        <Button />
+        <Submit />
       </form>
     )
   }

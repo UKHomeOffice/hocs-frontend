@@ -6,6 +6,9 @@ import { renderToString } from 'react-dom/server';
 import React from 'react';
 import App from '../shared/index.jsx';
 import config from './config';
+import assets from "../../public/assets.json";
+
+html.use(assets);
 
 const app = express();
 const port = config.server.port;
@@ -28,7 +31,7 @@ app.get('*', (req, res, next) => {
     res.redirect(context.url);
   } else {
     res.status(context.status);
-    res.send(html({
+    res.send(html.render({
       js: ['vendor'],
       css: ['main'],
       react: 'main',

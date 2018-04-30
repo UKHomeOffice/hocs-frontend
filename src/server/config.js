@@ -12,10 +12,7 @@ export default {
         serviceLink: 'https://www.gov.uk',
         logoLinkTitle: '',
         propositionHeader: 'Application Title',
-        propositionHeaderLink: '/',
-        menu: {
-          isVisible: false
-        }
+        propositionHeaderLink: '/'
       },
       body: {
         phaseBanner: {

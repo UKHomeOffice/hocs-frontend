@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Layout body component should render with default props 1`] = `
+<main
+  id="content"
+/>
+`;
+
+exports[`Layout body component should render with phase banner when passed 1`] = `
+<main
+  id="content"
+>
+  <div
+    class="phase-banner"
+  >
+    <p>
+      <strong
+        class="phase-tag"
+      >
+        PROTOTYPE
+      </strong>
+      <span>
+        This is a new service – your 
+        <a
+          href="/"
+        >
+          feedback
+        </a>
+         will help us to improve it.
+      </span>
+    </p>
+  </div>
+</main>
+`;
