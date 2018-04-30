@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Error component should render with a stack trace when passed 1`] = `
+<div
+  class="grid-row"
+>
+  <div
+    class="column-full"
+  >
+    <h1
+      class="heading-xlarge"
+    >
+      An error has occurred
+      <span
+        class="heading-secondary"
+      >
+        Something has gone wrong
+      </span>
+    </h1>
+    <p
+      class="code overflow-scroll"
+    >
+      Stack trace...
+    </p>
+  </div>
+</div>
+`;
+
+exports[`Error component should render with default props 1`] = `
+<div
+  class="grid-row"
+>
+  <div
+    class="column-full"
+  >
+    <h1
+      class="heading-xlarge"
+    >
+      An error has occurred
+      <span
+        class="heading-secondary"
+      >
+        Something has gone wrong
+      </span>
+    </h1>
+  </div>
+</div>
+`;
+
+exports[`Error component should render with location when passed 1`] = `
+<div
+  class="grid-row"
+>
+  <div
+    class="column-full"
+  >
+    <h1
+      class="heading-xlarge"
+    >
+      An error has occurred
+      <span
+        class="heading-secondary"
+      >
+        Something has gone wrong
+      </span>
+    </h1>
+    <p
+      class="code"
+    >
+      /some/unknown/path
+    </p>
+  </div>
+</div>
+`;

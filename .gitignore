@@ -58,8 +58,7 @@ typings/
 .env
 
 # build
-public/js
-public/styles
+public/
 server.js
 
 # IDE

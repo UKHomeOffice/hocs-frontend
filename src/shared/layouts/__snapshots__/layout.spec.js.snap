@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Page layout component should render with children when passed 1`] = `
+<React.Fragment>
+  <Header
+    logoLinkTitle=""
+    menu={null}
+    menuItems={
+      Array [
+        Object {
+          "label": "Test 1",
+          "target": "/",
+        },
+        Object {
+          "label": "Test 2",
+          "target": "/",
+        },
+      ]
+    }
+    propositionHeader="My React Application"
+    propositionHeaderLink="/"
+    service="GOV.UK"
+    serviceLink="https://www.gov.uk"
+    userName={null}
+  />
+  <Body
+    phaseBanner={
+      Object {
+        "isVisible": false,
+      }
+    }
+  >
+    Inside my layout
+  </Body>
+  <Footer
+    links={Array []}
+  />
+</React.Fragment>
+`;
+
+exports[`Page layout component should render with default props 1`] = `
+<React.Fragment>
+  <Header
+    logoLinkTitle=""
+    menu={null}
+    menuItems={
+      Array [
+        Object {
+          "label": "Test 1",
+          "target": "/",
+        },
+        Object {
+          "label": "Test 2",
+          "target": "/",
+        },
+      ]
+    }
+    propositionHeader="My React Application"
+    propositionHeaderLink="/"
+    service="GOV.UK"
+    serviceLink="https://www.gov.uk"
+    userName={null}
+  />
+  <Body
+    phaseBanner={
+      Object {
+        "isVisible": false,
+      }
+    }
+  />
+  <Footer
+    links={Array []}
+  />
+</React.Fragment>
+`;

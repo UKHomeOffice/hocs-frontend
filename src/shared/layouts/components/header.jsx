@@ -26,13 +26,12 @@ class Header extends Component {
             propositionHeader,
             propositionHeaderLink,         
             menu,
-            menuItems,
             userName
         } = this.props;
 
         return (
             <Fragment>
-                <header role="banner" id="global-header" className={propositionHeader ? 'with-proposition' : ''}>
+                <header role="banner" id="global-header" className="with-proposition">
                     <div className="header-wrapper">
                         <div className="header-global">
                             <div className="header-logo">
@@ -49,7 +48,7 @@ class Header extends Component {
                                         <a href={propositionHeaderLink} id="proposition-name">{propositionHeader}</a>
                                         {userName ? <span>Logged in as {userName}</span> : null}
                                     </div>
-                                    {menu.isVisible ? this.createMenu(menuItems) : null}
+                                    {menu ? this.createMenu(menu) : null}
                                 </nav>
                             </div>
                         </div>
@@ -67,7 +66,7 @@ Header.defaultProps = {
     logoLinkTitle: '',
     propositionHeader: 'My React Application',
     propositionHeaderLink: '/',             
-    menu: { isVisible: false },
+    menu: null,
     menuItems: [{ target: '/', label: 'Test 1' }, { target: '/', label: 'Test 2' }],
     userName: null
 };

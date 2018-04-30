@@ -1,0 +1,473 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HTML module should default to proposition header when no title is passed 1`] = `
+"<!DOCTYPE html>
+                <html>
+                <head>
+                    <meta charSet=\\"utf-8\\"/>
+                    <title>Proposition Header</title>                            
+                
+                    <link rel=\\"shortcut icon\\" href=\\"public/images/favicon.ico\\" type=\\"image/x-icon\\"/>
+                    <link rel=\\"stylesheet\\" media=\\"screen\\" href=\\"public/stylesheets/govuk-template.css\\"/>
+                    <link rel=\\"stylesheet\\" media=\\"print\\" href=\\"public/stylesheets/govuk-template-print.css\\"/>
+                    <link rel=\\"stylesheet\\" media=\\"all\\" href=\\"public/stylesheets/fonts.css\\"/>
+                    <link rel=\\"mask-icon\\" href=\\"public/images/gov.uk_logotype_crown.svg\\" color=\\"#0b0c0c\\">
+                    <link rel=\\"apple-touch-icon\\" sizes=\\"180x180\\" href=\\"public/images/apple-touch-icon-180x180.png\\">
+                    <link rel=\\"apple-touch-icon\\" sizes=\\"167x167\\" href=\\"public/images/apple-touch-icon-167x167.png\\">
+                    <link rel=\\"apple-touch-icon\\" sizes=\\"152x152\\" href=\\"public/images/apple-touch-icon-152x152.png\\">
+                    <link rel=\\"apple-touch-icon\\" href=\\"public/images/apple-touch-icon.png\\">            
+                    
+                    
+                    <script>window.__INITIAL_DATA__ = {}</script>
+                    
+                    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\"/>
+                    <meta property=\\"og:image\\" content=public/images/opengraph-image.png/>                    
+                </head>
+                
+                <body>
+                    <script>
+                        document.body.className = ((document.body.className) ? 
+                        document.body.className + ' js-enabled' :
+                        'js-enabled');
+                    </script>
+                    
+                    <div id=\\"skiplink-container\\">
+                        <div>
+                            <a href=\\"#content\\" class=\\"skiplink\\">Skip to main content</a>
+                        </div>
+                    </div>
+                    
+                    <div id=\\"global-cookie-message\\">
+                        <p>
+                            GOV.UK uses cookies to make the site simpler.
+                            <a href=\\"https://www.gov.uk/help/cookies\\">Find out more about cookies</a>
+                        </p>
+                    </div>
+                        
+                    <div id=\\"app\\"></div>
+                    <script src=\\"public/js/main.js\\" defer></script>
+                    
+                    <div id=\\"global-app-error\\" className=\\"app-error hidden\\"></div>
+                
+                    <script src=public/javascripts/govuk-template.js></script>
+                    <script src=\\"public/javascripts/ie.js\\"></script>
+                    <script>
+                        if (typeof window.GOVUK === 'undefined') 
+                        document.body.className = document.body.className.replace('js-enabled', '');
+                    </script>
+                </body>
+                </html>"
+`;
+
+exports[`HTML module should include additional CSS and JS when passed 1`] = `
+"<!DOCTYPE html>
+                <html>
+                <head>
+                    <meta charSet=\\"utf-8\\"/>
+                    <title>My React Application</title>                            
+                
+                    <link rel=\\"shortcut icon\\" href=\\"public/images/favicon.ico\\" type=\\"image/x-icon\\"/>
+                    <link rel=\\"stylesheet\\" media=\\"screen\\" href=\\"public/stylesheets/govuk-template.css\\"/>
+                    <link rel=\\"stylesheet\\" media=\\"print\\" href=\\"public/stylesheets/govuk-template-print.css\\"/>
+                    <link rel=\\"stylesheet\\" media=\\"all\\" href=\\"public/stylesheets/fonts.css\\"/>
+                    <link rel=\\"mask-icon\\" href=\\"public/images/gov.uk_logotype_crown.svg\\" color=\\"#0b0c0c\\">
+                    <link rel=\\"apple-touch-icon\\" sizes=\\"180x180\\" href=\\"public/images/apple-touch-icon-180x180.png\\">
+                    <link rel=\\"apple-touch-icon\\" sizes=\\"167x167\\" href=\\"public/images/apple-touch-icon-167x167.png\\">
+                    <link rel=\\"apple-touch-icon\\" sizes=\\"152x152\\" href=\\"public/images/apple-touch-icon-152x152.png\\">
+                    <link rel=\\"apple-touch-icon\\" href=\\"public/images/apple-touch-icon.png\\">            
+                    <link rel=\\"stylesheet\\" media=\\"screen\\" href=\\"public/styles/first.css\\" />
+                    <script src=\\"public/js/first.js\\"></script><script src=\\"public/js/second.js\\"></script>
+                    <script>window.__INITIAL_DATA__ = {}</script>
+                    
+                    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\"/>
+                    <meta property=\\"og:image\\" content=public/images/opengraph-image.png/>                    
+                </head>
+                
+                <body>
+                    <script>
+                        document.body.className = ((document.body.className) ? 
+                        document.body.className + ' js-enabled' :
+                        'js-enabled');
+                    </script>
+                    
+                    <div id=\\"skiplink-container\\">
+                        <div>
+                            <a href=\\"#content\\" class=\\"skiplink\\">Skip to main content</a>
+                        </div>
+                    </div>
+                    
+                    <div id=\\"global-cookie-message\\">
+                        <p>
+                            GOV.UK uses cookies to make the site simpler.
+                            <a href=\\"https://www.gov.uk/help/cookies\\">Find out more about cookies</a>
+                        </p>
+                    </div>
+                        
+                    <div id=\\"app\\"></div>
+                    <script src=\\"public/js/main.js\\" defer></script>
+                    
+                    <div id=\\"global-app-error\\" className=\\"app-error hidden\\"></div>
+                
+                    <script src=public/javascripts/govuk-template.js></script>
+                    <script src=\\"public/javascripts/ie.js\\"></script>
+                    <script>
+                        if (typeof window.GOVUK === 'undefined') 
+                        document.body.className = document.body.className.replace('js-enabled', '');
+                    </script>
+                </body>
+                </html>"
+`;
+
+exports[`HTML module should include application props in the head when passed 1`] = `
+"<!DOCTYPE html>
+                <html>
+                <head>
+                    <meta charSet=\\"utf-8\\"/>
+                    <title>My React Application</title>                            
+                
+                    <link rel=\\"shortcut icon\\" href=\\"public/images/favicon.ico\\" type=\\"image/x-icon\\"/>
+                    <link rel=\\"stylesheet\\" media=\\"screen\\" href=\\"public/stylesheets/govuk-template.css\\"/>
+                    <link rel=\\"stylesheet\\" media=\\"print\\" href=\\"public/stylesheets/govuk-template-print.css\\"/>
+                    <link rel=\\"stylesheet\\" media=\\"all\\" href=\\"public/stylesheets/fonts.css\\"/>
+                    <link rel=\\"mask-icon\\" href=\\"public/images/gov.uk_logotype_crown.svg\\" color=\\"#0b0c0c\\">
+                    <link rel=\\"apple-touch-icon\\" sizes=\\"180x180\\" href=\\"public/images/apple-touch-icon-180x180.png\\">
+                    <link rel=\\"apple-touch-icon\\" sizes=\\"167x167\\" href=\\"public/images/apple-touch-icon-167x167.png\\">
+                    <link rel=\\"apple-touch-icon\\" sizes=\\"152x152\\" href=\\"public/images/apple-touch-icon-152x152.png\\">
+                    <link rel=\\"apple-touch-icon\\" href=\\"public/images/apple-touch-icon.png\\">            
+                    
+                    
+                    <script>window.__INITIAL_DATA__ = {\\"first\\":\\"value\\",\\"second\\":\\"value\\"}</script>
+                    
+                    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\"/>
+                    <meta property=\\"og:image\\" content=public/images/opengraph-image.png/>                    
+                </head>
+                
+                <body>
+                    <script>
+                        document.body.className = ((document.body.className) ? 
+                        document.body.className + ' js-enabled' :
+                        'js-enabled');
+                    </script>
+                    
+                    <div id=\\"skiplink-container\\">
+                        <div>
+                            <a href=\\"#content\\" class=\\"skiplink\\">Skip to main content</a>
+                        </div>
+                    </div>
+                    
+                    <div id=\\"global-cookie-message\\">
+                        <p>
+                            GOV.UK uses cookies to make the site simpler.
+                            <a href=\\"https://www.gov.uk/help/cookies\\">Find out more about cookies</a>
+                        </p>
+                    </div>
+                        
+                    <div id=\\"app\\"></div>
+                    <script src=\\"public/js/main.js\\" defer></script>
+                    
+                    <div id=\\"global-app-error\\" className=\\"app-error hidden\\"></div>
+                
+                    <script src=public/javascripts/govuk-template.js></script>
+                    <script src=\\"public/javascripts/ie.js\\"></script>
+                    <script>
+                        if (typeof window.GOVUK === 'undefined') 
+                        document.body.className = document.body.className.replace('js-enabled', '');
+                    </script>
+                </body>
+                </html>"
+`;
+
+exports[`HTML module should include the appropriate react application bundle when passed 1`] = `
+"<!DOCTYPE html>
+                <html>
+                <head>
+                    <meta charSet=\\"utf-8\\"/>
+                    <title>My React Application</title>                            
+                
+                    <link rel=\\"shortcut icon\\" href=\\"public/images/favicon.ico\\" type=\\"image/x-icon\\"/>
+                    <link rel=\\"stylesheet\\" media=\\"screen\\" href=\\"public/stylesheets/govuk-template.css\\"/>
+                    <link rel=\\"stylesheet\\" media=\\"print\\" href=\\"public/stylesheets/govuk-template-print.css\\"/>
+                    <link rel=\\"stylesheet\\" media=\\"all\\" href=\\"public/stylesheets/fonts.css\\"/>
+                    <link rel=\\"mask-icon\\" href=\\"public/images/gov.uk_logotype_crown.svg\\" color=\\"#0b0c0c\\">
+                    <link rel=\\"apple-touch-icon\\" sizes=\\"180x180\\" href=\\"public/images/apple-touch-icon-180x180.png\\">
+                    <link rel=\\"apple-touch-icon\\" sizes=\\"167x167\\" href=\\"public/images/apple-touch-icon-167x167.png\\">
+                    <link rel=\\"apple-touch-icon\\" sizes=\\"152x152\\" href=\\"public/images/apple-touch-icon-152x152.png\\">
+                    <link rel=\\"apple-touch-icon\\" href=\\"public/images/apple-touch-icon.png\\">            
+                    
+                    
+                    <script>window.__INITIAL_DATA__ = {}</script>
+                    
+                    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\"/>
+                    <meta property=\\"og:image\\" content=public/images/opengraph-image.png/>                    
+                </head>
+                
+                <body>
+                    <script>
+                        document.body.className = ((document.body.className) ? 
+                        document.body.className + ' js-enabled' :
+                        'js-enabled');
+                    </script>
+                    
+                    <div id=\\"skiplink-container\\">
+                        <div>
+                            <a href=\\"#content\\" class=\\"skiplink\\">Skip to main content</a>
+                        </div>
+                    </div>
+                    
+                    <div id=\\"global-cookie-message\\">
+                        <p>
+                            GOV.UK uses cookies to make the site simpler.
+                            <a href=\\"https://www.gov.uk/help/cookies\\">Find out more about cookies</a>
+                        </p>
+                    </div>
+                        
+                    <div id=\\"app\\"></div>
+                    <script src=\\"public/js/myBundle.js\\" defer></script>
+                    
+                    <div id=\\"global-app-error\\" className=\\"app-error hidden\\"></div>
+                
+                    <script src=public/javascripts/govuk-template.js></script>
+                    <script src=\\"public/javascripts/ie.js\\"></script>
+                    <script>
+                        if (typeof window.GOVUK === 'undefined') 
+                        document.body.className = document.body.className.replace('js-enabled', '');
+                    </script>
+                </body>
+                </html>"
+`;
+
+exports[`HTML module should include the correct asset path when passed 1`] = `
+"<!DOCTYPE html>
+                <html>
+                <head>
+                    <meta charSet=\\"utf-8\\"/>
+                    <title>My React Application</title>                            
+                
+                    <link rel=\\"shortcut icon\\" href=\\"some/public/folder/that/contains/my/assets/images/favicon.ico\\" type=\\"image/x-icon\\"/>
+                    <link rel=\\"stylesheet\\" media=\\"screen\\" href=\\"some/public/folder/that/contains/my/assets/stylesheets/govuk-template.css\\"/>
+                    <link rel=\\"stylesheet\\" media=\\"print\\" href=\\"some/public/folder/that/contains/my/assets/stylesheets/govuk-template-print.css\\"/>
+                    <link rel=\\"stylesheet\\" media=\\"all\\" href=\\"some/public/folder/that/contains/my/assets/stylesheets/fonts.css\\"/>
+                    <link rel=\\"mask-icon\\" href=\\"some/public/folder/that/contains/my/assets/images/gov.uk_logotype_crown.svg\\" color=\\"#0b0c0c\\">
+                    <link rel=\\"apple-touch-icon\\" sizes=\\"180x180\\" href=\\"some/public/folder/that/contains/my/assets/images/apple-touch-icon-180x180.png\\">
+                    <link rel=\\"apple-touch-icon\\" sizes=\\"167x167\\" href=\\"some/public/folder/that/contains/my/assets/images/apple-touch-icon-167x167.png\\">
+                    <link rel=\\"apple-touch-icon\\" sizes=\\"152x152\\" href=\\"some/public/folder/that/contains/my/assets/images/apple-touch-icon-152x152.png\\">
+                    <link rel=\\"apple-touch-icon\\" href=\\"some/public/folder/that/contains/my/assets/images/apple-touch-icon.png\\">            
+                    
+                    
+                    <script>window.__INITIAL_DATA__ = {}</script>
+                    
+                    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\"/>
+                    <meta property=\\"og:image\\" content=some/public/folder/that/contains/my/assets/images/opengraph-image.png/>                    
+                </head>
+                
+                <body>
+                    <script>
+                        document.body.className = ((document.body.className) ? 
+                        document.body.className + ' js-enabled' :
+                        'js-enabled');
+                    </script>
+                    
+                    <div id=\\"skiplink-container\\">
+                        <div>
+                            <a href=\\"#content\\" class=\\"skiplink\\">Skip to main content</a>
+                        </div>
+                    </div>
+                    
+                    <div id=\\"global-cookie-message\\">
+                        <p>
+                            GOV.UK uses cookies to make the site simpler.
+                            <a href=\\"https://www.gov.uk/help/cookies\\">Find out more about cookies</a>
+                        </p>
+                    </div>
+                        
+                    <div id=\\"app\\"></div>
+                    <script src=\\"some/public/folder/that/contains/my/assets/js/main.js\\" defer></script>
+                    
+                    <div id=\\"global-app-error\\" className=\\"app-error hidden\\"></div>
+                
+                    <script src=some/public/folder/that/contains/my/assets/javascripts/govuk-template.js></script>
+                    <script src=\\"some/public/folder/that/contains/my/assets/javascripts/ie.js\\"></script>
+                    <script>
+                        if (typeof window.GOVUK === 'undefined') 
+                        document.body.className = document.body.className.replace('js-enabled', '');
+                    </script>
+                </body>
+                </html>"
+`;
+
+exports[`HTML module should include the server rendered markup when passed 1`] = `
+"<!DOCTYPE html>
+                <html>
+                <head>
+                    <meta charSet=\\"utf-8\\"/>
+                    <title>My React Application</title>                            
+                
+                    <link rel=\\"shortcut icon\\" href=\\"public/images/favicon.ico\\" type=\\"image/x-icon\\"/>
+                    <link rel=\\"stylesheet\\" media=\\"screen\\" href=\\"public/stylesheets/govuk-template.css\\"/>
+                    <link rel=\\"stylesheet\\" media=\\"print\\" href=\\"public/stylesheets/govuk-template-print.css\\"/>
+                    <link rel=\\"stylesheet\\" media=\\"all\\" href=\\"public/stylesheets/fonts.css\\"/>
+                    <link rel=\\"mask-icon\\" href=\\"public/images/gov.uk_logotype_crown.svg\\" color=\\"#0b0c0c\\">
+                    <link rel=\\"apple-touch-icon\\" sizes=\\"180x180\\" href=\\"public/images/apple-touch-icon-180x180.png\\">
+                    <link rel=\\"apple-touch-icon\\" sizes=\\"167x167\\" href=\\"public/images/apple-touch-icon-167x167.png\\">
+                    <link rel=\\"apple-touch-icon\\" sizes=\\"152x152\\" href=\\"public/images/apple-touch-icon-152x152.png\\">
+                    <link rel=\\"apple-touch-icon\\" href=\\"public/images/apple-touch-icon.png\\">            
+                    
+                    
+                    <script>window.__INITIAL_DATA__ = {}</script>
+                    
+                    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\"/>
+                    <meta property=\\"og:image\\" content=public/images/opengraph-image.png/>                    
+                </head>
+                
+                <body>
+                    <script>
+                        document.body.className = ((document.body.className) ? 
+                        document.body.className + ' js-enabled' :
+                        'js-enabled');
+                    </script>
+                    
+                    <div id=\\"skiplink-container\\">
+                        <div>
+                            <a href=\\"#content\\" class=\\"skiplink\\">Skip to main content</a>
+                        </div>
+                    </div>
+                    
+                    <div id=\\"global-cookie-message\\">
+                        <p>
+                            GOV.UK uses cookies to make the site simpler.
+                            <a href=\\"https://www.gov.uk/help/cookies\\">Find out more about cookies</a>
+                        </p>
+                    </div>
+                        
+                    <div id=\\"app\\"><--- REACT APPLICATION ---></div>
+                    <script src=\\"public/js/main.js\\" defer></script>
+                    
+                    <div id=\\"global-app-error\\" className=\\"app-error hidden\\"></div>
+                
+                    <script src=public/javascripts/govuk-template.js></script>
+                    <script src=\\"public/javascripts/ie.js\\"></script>
+                    <script>
+                        if (typeof window.GOVUK === 'undefined') 
+                        document.body.className = document.body.className.replace('js-enabled', '');
+                    </script>
+                </body>
+                </html>"
+`;
+
+exports[`HTML module should not contain the react bundle js when clientside is set to false 1`] = `
+"<!DOCTYPE html>
+                <html>
+                <head>
+                    <meta charSet=\\"utf-8\\"/>
+                    <title>My React Application</title>                            
+                
+                    <link rel=\\"shortcut icon\\" href=\\"public/images/favicon.ico\\" type=\\"image/x-icon\\"/>
+                    <link rel=\\"stylesheet\\" media=\\"screen\\" href=\\"public/stylesheets/govuk-template.css\\"/>
+                    <link rel=\\"stylesheet\\" media=\\"print\\" href=\\"public/stylesheets/govuk-template-print.css\\"/>
+                    <link rel=\\"stylesheet\\" media=\\"all\\" href=\\"public/stylesheets/fonts.css\\"/>
+                    <link rel=\\"mask-icon\\" href=\\"public/images/gov.uk_logotype_crown.svg\\" color=\\"#0b0c0c\\">
+                    <link rel=\\"apple-touch-icon\\" sizes=\\"180x180\\" href=\\"public/images/apple-touch-icon-180x180.png\\">
+                    <link rel=\\"apple-touch-icon\\" sizes=\\"167x167\\" href=\\"public/images/apple-touch-icon-167x167.png\\">
+                    <link rel=\\"apple-touch-icon\\" sizes=\\"152x152\\" href=\\"public/images/apple-touch-icon-152x152.png\\">
+                    <link rel=\\"apple-touch-icon\\" href=\\"public/images/apple-touch-icon.png\\">            
+                    
+                    
+                    
+                    
+                    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\"/>
+                    <meta property=\\"og:image\\" content=public/images/opengraph-image.png/>                    
+                </head>
+                
+                <body>
+                    <script>
+                        document.body.className = ((document.body.className) ? 
+                        document.body.className + ' js-enabled' :
+                        'js-enabled');
+                    </script>
+                    
+                    <div id=\\"skiplink-container\\">
+                        <div>
+                            <a href=\\"#content\\" class=\\"skiplink\\">Skip to main content</a>
+                        </div>
+                    </div>
+                    
+                    <div id=\\"global-cookie-message\\">
+                        <p>
+                            GOV.UK uses cookies to make the site simpler.
+                            <a href=\\"https://www.gov.uk/help/cookies\\">Find out more about cookies</a>
+                        </p>
+                    </div>
+                        
+                    <div id=\\"app\\"></div>
+                    
+                    
+                    <div id=\\"global-app-error\\" className=\\"app-error hidden\\"></div>
+                
+                    <script src=public/javascripts/govuk-template.js></script>
+                    <script src=\\"public/javascripts/ie.js\\"></script>
+                    <script>
+                        if (typeof window.GOVUK === 'undefined') 
+                        document.body.className = document.body.className.replace('js-enabled', '');
+                    </script>
+                </body>
+                </html>"
+`;
+
+exports[`HTML module should return the default html when no additional configuration is passed 1`] = `
+"<!DOCTYPE html>
+                <html>
+                <head>
+                    <meta charSet=\\"utf-8\\"/>
+                    <title>My React Application</title>                            
+                
+                    <link rel=\\"shortcut icon\\" href=\\"public/images/favicon.ico\\" type=\\"image/x-icon\\"/>
+                    <link rel=\\"stylesheet\\" media=\\"screen\\" href=\\"public/stylesheets/govuk-template.css\\"/>
+                    <link rel=\\"stylesheet\\" media=\\"print\\" href=\\"public/stylesheets/govuk-template-print.css\\"/>
+                    <link rel=\\"stylesheet\\" media=\\"all\\" href=\\"public/stylesheets/fonts.css\\"/>
+                    <link rel=\\"mask-icon\\" href=\\"public/images/gov.uk_logotype_crown.svg\\" color=\\"#0b0c0c\\">
+                    <link rel=\\"apple-touch-icon\\" sizes=\\"180x180\\" href=\\"public/images/apple-touch-icon-180x180.png\\">
+                    <link rel=\\"apple-touch-icon\\" sizes=\\"167x167\\" href=\\"public/images/apple-touch-icon-167x167.png\\">
+                    <link rel=\\"apple-touch-icon\\" sizes=\\"152x152\\" href=\\"public/images/apple-touch-icon-152x152.png\\">
+                    <link rel=\\"apple-touch-icon\\" href=\\"public/images/apple-touch-icon.png\\">            
+                    
+                    
+                    <script>window.__INITIAL_DATA__ = {}</script>
+                    
+                    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\"/>
+                    <meta property=\\"og:image\\" content=public/images/opengraph-image.png/>                    
+                </head>
+                
+                <body>
+                    <script>
+                        document.body.className = ((document.body.className) ? 
+                        document.body.className + ' js-enabled' :
+                        'js-enabled');
+                    </script>
+                    
+                    <div id=\\"skiplink-container\\">
+                        <div>
+                            <a href=\\"#content\\" class=\\"skiplink\\">Skip to main content</a>
+                        </div>
+                    </div>
+                    
+                    <div id=\\"global-cookie-message\\">
+                        <p>
+                            GOV.UK uses cookies to make the site simpler.
+                            <a href=\\"https://www.gov.uk/help/cookies\\">Find out more about cookies</a>
+                        </p>
+                    </div>
+                        
+                    <div id=\\"app\\"></div>
+                    <script src=\\"public/js/main.js\\" defer></script>
+                    
+                    <div id=\\"global-app-error\\" className=\\"app-error hidden\\"></div>
+                
+                    <script src=public/javascripts/govuk-template.js></script>
+                    <script src=\\"public/javascripts/ie.js\\"></script>
+                    <script>
+                        if (typeof window.GOVUK === 'undefined') 
+                        document.body.className = document.body.className.replace('js-enabled', '');
+                    </script>
+                </body>
+                </html>"
+`;
