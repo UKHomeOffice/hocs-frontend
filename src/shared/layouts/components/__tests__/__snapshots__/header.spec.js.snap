@@ -42,7 +42,7 @@ Array [
                 href="/"
                 id="proposition-name"
               >
-                My React Application
+                React Application
               </a>
               <span>
                 Logged in as Test user
@@ -101,7 +101,7 @@ exports[`Layout header component should render the menu when passed 1`] = `
                 href="/"
                 id="proposition-name"
               >
-                My React Application
+                React Application
               </a>
             </div>
             <React.Fragment>
@@ -193,7 +193,7 @@ Array [
                 href="/"
                 id="proposition-name"
               >
-                My React Application
+                React Application
               </a>
             </div>
           </nav>

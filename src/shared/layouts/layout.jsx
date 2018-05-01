@@ -18,10 +18,16 @@ class Layout extends Component {
                 <Body {...body}>
                     {children}
                 </Body>
-                <Footer {...footer}/>
+                {footer.isVisible && <Footer {...footer}/>}
             </Fragment>
         )
     }
 }
+
+Layout.defaultProps = {
+    footer: {
+        isVisible: false
+    }
+};
 
 export default Layout;

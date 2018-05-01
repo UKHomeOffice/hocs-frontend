@@ -1,5 +1,5 @@
 import React from 'react';
-import Submit from './submit.jsx';
+import Submit from '../submit.jsx';
 
 describe('Form button component', () => {
     it('should render with default props', () => {

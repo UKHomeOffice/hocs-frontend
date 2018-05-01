@@ -1,5 +1,5 @@
 import React from "react";
-import Layout from "./layout.jsx";
+import Layout from "../layout.jsx";
 
 describe('Page layout component', () => {
     it('should render with default props', () => {

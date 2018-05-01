@@ -58,8 +58,7 @@ typings/
 .env
 
 # build
-public/
-server.js
+build/
 
 # IDE
 .vscode

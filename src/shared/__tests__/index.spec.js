@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {MemoryRouter} from "react-router-dom";
-import App from "./index.jsx";
+import App from "../index.jsx";
 
 describe('Shared entry point', () => {
     it('should display the correct component for the given route', () => {
