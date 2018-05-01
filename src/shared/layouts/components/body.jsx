@@ -9,7 +9,7 @@ class Body extends Component {
         } = this.props;
         return (
             <main id="content">
-                {phaseBanner.isVisible ? <PhaseBanner {...phaseBanner} /> : null}
+                {phaseBanner.isVisible && <PhaseBanner {...phaseBanner} />}
                 {children}
             </main>
         );

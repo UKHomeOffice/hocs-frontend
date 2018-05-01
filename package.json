@@ -1,12 +1,14 @@
 {
-  "name": "react-app",
+  "name": "hocs-frontend",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node server.js",
-    "start-dev": "webpack -w --mode=development & nodemon server.js",
-    "start-prod": "webpack -w --mode=production & nodemon server.js",
+    "start": "node index.js",
+    "build-dev": "webpack --mode=development --env.NODE_ENV=development",
+    "build-prod": "webpack --mode=production --env.NODE_ENV=production",
+    "start-dev": "webpack -w --mode=development --env.NODE_ENV=development & nodemon index.js",
+    "start-prod": "webpack -w --mode=production --env.NODE_ENV=production & nodemon index.js",
     "test": "jest --coverage"
   },
   "jest": {
@@ -25,6 +27,7 @@
   "dependencies": {
     "express": "^4.16.3",
     "govuk-elements-sass": "^3.1.2",
+    "govuk-react-components": "^0.6.0",
     "govuk_frontend_toolkit": "^7.4.2",
     "govuk_template_mustache": "^0.23.2",
     "isomorphic-fetch": "^2.2.1",

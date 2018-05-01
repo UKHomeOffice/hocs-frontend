@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 class Header extends Component {
 
-    createMenu(menuItems) {
+    static createMenu(menuItems) {
         return (
             <Fragment>
                 <label htmlFor="toggle-mobile-menu" aria-label="menu">Menu</label>
@@ -46,9 +46,9 @@ class Header extends Component {
                                 <nav id="proposition-menu">
                                     <div id="proposition-header">
                                         <a href={propositionHeaderLink} id="proposition-name">{propositionHeader}</a>
-                                        {userName ? <span>Logged in as {userName}</span> : null}
+                                        {userName && <span>Logged in as {userName}</span>}
                                     </div>
-                                    {menu ? this.createMenu(menu) : null}
+                                    {menu && Header.createMenu(menu)}
                                 </nav>
                             </div>
                         </div>
@@ -64,10 +64,10 @@ Header.defaultProps = {
     service: 'GOV.UK',
     serviceLink: 'https://www.gov.uk',
     logoLinkTitle: '',
-    propositionHeader: 'My React Application',
+    propositionHeader: 'React Application',
     propositionHeaderLink: '/',             
     menu: null,
-    menuItems: [{ target: '/', label: 'Test 1' }, { target: '/', label: 'Test 2' }],
+    menuItems: [],
     userName: null
 };
 

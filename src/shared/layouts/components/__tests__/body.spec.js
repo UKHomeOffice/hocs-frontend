@@ -1,5 +1,5 @@
 import React from "react";
-import Body from "./body.jsx";
+import Body from "../body.jsx";
 
 describe('Layout body component', () => {
     it('should render with default props', () => {

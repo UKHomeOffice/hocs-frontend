@@ -1,4 +1,4 @@
-import serialize from "serialize-javascript";
+const serialize = require('serialize-javascript');
 
 let assets = {
     js: [],
@@ -23,20 +23,20 @@ const render = ({
                     <title>${title || propositionHeader}</title>                            
                 
                     <link rel="shortcut icon" href="${assetPath}/images/favicon.ico" type="image/x-icon"/>
-                    <link rel="stylesheet" media="screen" href="${assetPath}/stylesheets/govuk-template.css"/>
-                    <link rel="stylesheet" media="print" href="${assetPath}/stylesheets/govuk-template-print.css"/>
-                    <link rel="stylesheet" media="all" href="${assetPath}/stylesheets/fonts.css"/>
+                    <link rel="stylesheet" media="screen" href="${assetPath}/stylesheets/govuk-template.css?0.23.0"/>
+                    <link rel="stylesheet" media="print" href="${assetPath}/stylesheets/govuk-template-print.css?0.23.0"/>
+                    <link rel="stylesheet" media="all" href="${assetPath}/stylesheets/fonts.css?0.23.0"/>
                     <link rel="mask-icon" href="${assetPath}/images/gov.uk_logotype_crown.svg" color="#0b0c0c">
-                    <link rel="apple-touch-icon" sizes="180x180" href="${assetPath}/images/apple-touch-icon-180x180.png">
-                    <link rel="apple-touch-icon" sizes="167x167" href="${assetPath}/images/apple-touch-icon-167x167.png">
-                    <link rel="apple-touch-icon" sizes="152x152" href="${assetPath}/images/apple-touch-icon-152x152.png">
-                    <link rel="apple-touch-icon" href="${assetPath}/images/apple-touch-icon.png">            
-                    ${css.map(style => `<link rel="stylesheet" media="screen" href="${assetPath}/${assets.css[style]}" />`).join('')}
-                    ${clientside ? js.map(script => `<script src="${assetPath}/${assets.js[script]}"></script>`).join('') : ''}
-                    ${clientside ? `<script>window.__INITIAL_DATA__ = ${serialize(props)}</script>` : ''}
+                    <link rel="apple-touch-icon" sizes="180x180" href="${assetPath}/images/apple-touch-icon-180x180.png?0.23.0">
+                    <link rel="apple-touch-icon" sizes="167x167" href="${assetPath}/images/apple-touch-icon-167x167.png?0.23.0">
+                    <link rel="apple-touch-icon" sizes="152x152" href="${assetPath}/images/apple-touch-icon-152x152.png?0.23.0">
+                    <link rel="apple-touch-icon" href="${assetPath}/images/apple-touch-icon.png?0.23.0">            
+                    ${css.map(style => `<link rel="stylesheet" media="screen" href="${assetPath}/styles/${assets.css[style]}" />`).join('\n')}
+                    ${clientside && js.map(script => `<script src="${assetPath}/js/${assets.js[script]}"></script>`).join('\n')}
+                    ${clientside && `<script>window.__INITIAL_DATA__ = ${serialize(props)}</script>`}
                     
                     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-                    <meta property="og:image" content=${assetPath}/images/opengraph-image.png/>                    
+                    <meta property="og:image" content=${assetPath}/images/opengraph-image.png?0.23.0/>                    
                 </head>
                 
                 <body>
@@ -60,7 +60,7 @@ const render = ({
                     </div>
                         
                     <div id="app">${markup}</div>
-                    ${clientside ? `<script src="${assetPath}/${assets.js[react]}" defer></script>` : ''}
+                    ${clientside && `<script src="${assetPath}/js/${assets.js[react]}" defer></script>`}
                     
                     <div id="global-app-error" className="app-error hidden"></div>
                 
@@ -74,7 +74,7 @@ const render = ({
                 </html>`);
 };
 
-export default {
+module.exports = {
     use: (a) => assets = a,
     render
 };

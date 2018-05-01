@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "./header.jsx";
+import Header from "../header.jsx";
 
 describe('Layout header component', () => {
     it('should render with default props', () => {
