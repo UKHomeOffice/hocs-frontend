@@ -6,13 +6,13 @@ class Submit extends Component {
     const {
       label,
       className,
-      isDisabled
+      disabled
     } = this.props;
     return (
       <Fragment>
         <input
           className={`button${className ? ' ' + className : ''}`}
-          disabled={isDisabled && "true"}
+          disabled={disabled && "true"}
           type="submit"
           value={label}
         />
@@ -23,7 +23,7 @@ class Submit extends Component {
 
 Submit.defaultProps = {
   label: 'Submit',
-  isDisabled: false
+  disabled: false
 };
 
 export default Submit;

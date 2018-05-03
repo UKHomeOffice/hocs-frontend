@@ -64,11 +64,6 @@ exports[`Error component should render with location when passed 1`] = `
         Something has gone wrong
       </span>
     </h1>
-    <p
-      class="code"
-    >
-      /some/unknown/path
-    </p>
   </div>
 </div>
 `;

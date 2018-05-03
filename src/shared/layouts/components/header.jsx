@@ -44,10 +44,9 @@ class Header extends Component {
                         <div className="header-proposition">
                             <div className="content">
                                 <nav id="proposition-menu">
-                                    <div id="proposition-header">
-                                        <a href={propositionHeaderLink} id="proposition-name">{propositionHeader}</a>
-                                        {userName && <span>Logged in as {userName}</span>}
-                                    </div>
+                                    {propositionHeader && <div id="proposition-header">
+                                         <a href={propositionHeaderLink} id="proposition-name">{propositionHeader}</a>
+                                    </div>}
                                     {menu && Header.createMenu(menu)}
                                 </nav>
                             </div>
@@ -64,11 +63,9 @@ Header.defaultProps = {
     service: 'GOV.UK',
     serviceLink: 'https://www.gov.uk',
     logoLinkTitle: '',
-    propositionHeader: 'React Application',
+    propositionHeader: 'Service Name',
     propositionHeaderLink: '/',             
-    menu: null,
-    menuItems: [],
-    userName: null
+    menu: [{label: 'Logout', target: '/'}]
 };
 
 export default Header;

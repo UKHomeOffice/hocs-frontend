@@ -6,7 +6,7 @@ let assets = {
 };
 
 const render = ({
-                    assetPath = 'public',
+                    assetPath = '/public',
                     css = [],
                     js = [],
                     react = 'main',
@@ -32,8 +32,8 @@ const render = ({
                     <link rel="apple-touch-icon" sizes="152x152" href="${assetPath}/images/apple-touch-icon-152x152.png?0.23.0">
                     <link rel="apple-touch-icon" href="${assetPath}/images/apple-touch-icon.png?0.23.0">            
                     ${css.map(style => `<link rel="stylesheet" media="screen" href="${assetPath}/styles/${assets.css[style]}" />`).join('\n')}
-                    ${clientside && js.map(script => `<script src="${assetPath}/js/${assets.js[script]}"></script>`).join('\n')}
-                    ${clientside && `<script>window.__INITIAL_DATA__ = ${serialize(props)}</script>`}
+                    ${clientside ? js.map(script => `<script src="${assetPath}/js/${assets.js[script]}"></script>`).join('\n') : ''}
+                    ${clientside ? `<script>window.__INITIAL_DATA__ = ${serialize(props)}</script>` : ''}
                     
                     <meta name="viewport" content="width=device-width, initial-scale=1"/>
                     <meta property="og:image" content=${assetPath}/images/opengraph-image.png?0.23.0/>                    
@@ -60,7 +60,7 @@ const render = ({
                     </div>
                         
                     <div id="app">${markup}</div>
-                    ${clientside && `<script src="${assetPath}/js/${assets.js[react]}" defer></script>`}
+                    ${clientside ? `<script src="${assetPath}/js/${assets.js[react]}" defer></script> `: ''}
                     
                     <div id="global-app-error" className="app-error hidden"></div>
                 

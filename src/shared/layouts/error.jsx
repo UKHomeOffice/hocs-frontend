@@ -4,7 +4,7 @@ class Error extends Component {
     componentWillMount() {
         const { staticContext } = this.props;
         if (staticContext) {
-            staticContext.status = 404;
+            staticContext.status = this.props.errorCode;
         }
     }
 
@@ -12,6 +12,7 @@ class Error extends Component {
         const {
             title,
             error,
+            errorCode,
             stack,
             location: { pathname }
         } = this.props;
@@ -23,7 +24,7 @@ class Error extends Component {
                         {`${error}`}
                         <span className="heading-secondary">{title}</span>
                     </h1>
-                    {pathname && <p className="code">{pathname}</p>}
+                    {errorCode === 404 && pathname && <p className="code">{pathname}</p>}
                     {stack && <p className="code overflow-scroll">{stack}</p>}
                 </div>
             </div>
@@ -34,6 +35,7 @@ class Error extends Component {
 Error.defaultProps = {
     title: 'Something has gone wrong',
     error: 'An error has occurred',
+    errorCode: 500,
     stack: null,
     location: {
         pathname: null

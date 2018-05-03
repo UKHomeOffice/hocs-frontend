@@ -18,12 +18,4 @@ describe('Layout header component', () => {
             shallow(<Header {...props}/>)
         ).toMatchSnapshot();
     });
-    it('should render a username when passed', () => {
-        const props = {
-            userName: 'Test user'
-        };
-        expect(
-            render(<Header {...props}/>)
-        ).toMatchSnapshot();
-    });
 });

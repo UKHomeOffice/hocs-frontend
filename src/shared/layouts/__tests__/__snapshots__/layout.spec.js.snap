@@ -4,13 +4,18 @@ exports[`Page layout component should render with children when passed 1`] = `
 <React.Fragment>
   <Header
     logoLinkTitle=""
-    menu={null}
-    menuItems={Array []}
-    propositionHeader="React Application"
+    menu={
+      Array [
+        Object {
+          "label": "Logout",
+          "target": "/",
+        },
+      ]
+    }
+    propositionHeader="Service Name"
     propositionHeaderLink="/"
     service="GOV.UK"
     serviceLink="https://www.gov.uk"
-    userName={null}
   />
   <Body
     phaseBanner={
@@ -28,13 +33,18 @@ exports[`Page layout component should render with default props 1`] = `
 <React.Fragment>
   <Header
     logoLinkTitle=""
-    menu={null}
-    menuItems={Array []}
-    propositionHeader="React Application"
+    menu={
+      Array [
+        Object {
+          "label": "Logout",
+          "target": "/",
+        },
+      ]
+    }
+    propositionHeader="Service Name"
     propositionHeaderLink="/"
     service="GOV.UK"
     serviceLink="https://www.gov.uk"
-    userName={null}
   />
   <Body
     phaseBanner={

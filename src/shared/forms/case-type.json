@@ -1,0 +1,19 @@
+[
+  {
+    "component": "heading",
+    "props": {
+      "label": "Case types"
+    }
+  },
+  {
+    "component": "radio",
+    "validation": ["required"],
+    "props": {
+      "name": "case-type",
+      "className": "inline",
+      "choices": [
+        {"label": "UKVI", "value": "UKVI"}
+      ]
+    }
+  }
+]

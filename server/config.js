@@ -2,10 +2,10 @@ module.exports = {
     applications: {
         application: {
             header: {
-                service: 'HOCS',
-                serviceLink: 'https://www.gov.uk',
+                service: 'Home Office Correspondence System',
+                serviceLink: '/',
                 logoLinkTitle: '',
-                propositionHeader: 'Application Title',
+                propositionHeader: '',
                 propositionHeaderLink: '/'
             },
             body: {
@@ -16,11 +16,8 @@ module.exports = {
                 }
             },
             footer: {
-                isVisible: false,
-                links: [
-                    {target: '/', label: 'Test Link'}
-                ]
+                isVisible: false
             }
         }
     }
-}
+};

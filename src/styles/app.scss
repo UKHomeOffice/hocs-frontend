@@ -31,3 +31,11 @@ $path: "/public/images/";
 html {
   background-color: $white;
 }
+
+#global-header.with-proposition .header-wrapper .header-proposition {
+  width: auto;
+}
+
+#global-header.with-proposition .header-wrapper .header-global {
+  width: auto;
+}

@@ -31,6 +31,6 @@ describe('Error component', () => {
         };
         const wrapper = mount(<Error {...props}/>);
         expect(wrapper).toBeDefined();
-        expect(wrapper.prop('staticContext')).toEqual({status: 404});
+        expect(wrapper.prop('staticContext')).toEqual({status: 500});
     });
 });
