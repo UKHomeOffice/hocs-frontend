@@ -3,7 +3,6 @@
 exports[`Form button component should render disabled when isDisabled is passed 1`] = `
 <input
   class="button"
-  disabled=""
   type="submit"
   value="Submit"
 />

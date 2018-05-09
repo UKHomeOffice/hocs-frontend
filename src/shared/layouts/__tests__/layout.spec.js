@@ -7,6 +7,11 @@ describe('Page layout component', () => {
             shallow(<Layout/>)
         ).toMatchSnapshot();
     });
+    it('should render with footer when set', () => {
+        expect(
+            shallow(<Layout footer={{isVisible: true}}/>)
+        ).toMatchSnapshot();
+    });
     it('should render with children when passed', () => {
         expect(
             shallow(<Layout>Inside my layout</Layout>)

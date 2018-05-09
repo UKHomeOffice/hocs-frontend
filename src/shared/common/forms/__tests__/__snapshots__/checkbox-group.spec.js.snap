@@ -1,0 +1,381 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Form checkbox group component should render disabled when passed 1`] = `
+<div
+  class="form-group"
+>
+  <fieldset
+    disabled=""
+  >
+    <legend
+      id="checkbox-group-legend"
+    >
+      <span
+        class="form-label-bold"
+      />
+    </legend>
+    <div
+      class="multiple-choice"
+    >
+      <input
+        id="checkbox-group-A"
+        name="checkbox-group"
+        type="checkbox"
+        value="A"
+      />
+      <label
+        for="checkbox-group-A"
+      >
+        isA
+      </label>
+    </div>
+    <div
+      class="multiple-choice"
+    >
+      <input
+        id="checkbox-group-B"
+        name="checkbox-group"
+        type="checkbox"
+        value="B"
+      />
+      <label
+        for="checkbox-group-B"
+      >
+        isB
+      </label>
+    </div>
+    <div
+      class="multiple-choice"
+    >
+      <input
+        id="checkbox-group-C"
+        name="checkbox-group"
+        type="checkbox"
+        value="C"
+      />
+      <label
+        for="checkbox-group-C"
+      >
+        isC
+      </label>
+    </div>
+  </fieldset>
+</div>
+`;
+
+exports[`Form checkbox group component should render with default props 1`] = `
+<div
+  class="form-group"
+>
+  <fieldset>
+    <legend
+      id="checkbox-group-legend"
+    >
+      <span
+        class="form-label-bold"
+      />
+    </legend>
+    <div
+      class="multiple-choice"
+    >
+      <input
+        id="checkbox-group-A"
+        name="checkbox-group"
+        type="checkbox"
+        value="A"
+      />
+      <label
+        for="checkbox-group-A"
+      >
+        isA
+      </label>
+    </div>
+    <div
+      class="multiple-choice"
+    >
+      <input
+        id="checkbox-group-B"
+        name="checkbox-group"
+        type="checkbox"
+        value="B"
+      />
+      <label
+        for="checkbox-group-B"
+      >
+        isB
+      </label>
+    </div>
+    <div
+      class="multiple-choice"
+    >
+      <input
+        id="checkbox-group-C"
+        name="checkbox-group"
+        type="checkbox"
+        value="C"
+      />
+      <label
+        for="checkbox-group-C"
+      >
+        isC
+      </label>
+    </div>
+  </fieldset>
+</div>
+`;
+
+exports[`Form checkbox group component should render with error when passed 1`] = `
+<div
+  class="form-group form-group-error"
+>
+  <fieldset>
+    <legend
+      id="checkbox-group-legend"
+    >
+      <span
+        class="form-label-bold"
+      />
+      <span
+        class="error-message"
+      >
+        Some error message
+      </span>
+    </legend>
+    <div
+      class="multiple-choice"
+    >
+      <input
+        id="checkbox-group-A"
+        name="checkbox-group"
+        type="checkbox"
+        value="A"
+      />
+      <label
+        for="checkbox-group-A"
+      >
+        isA
+      </label>
+    </div>
+    <div
+      class="multiple-choice"
+    >
+      <input
+        id="checkbox-group-B"
+        name="checkbox-group"
+        type="checkbox"
+        value="B"
+      />
+      <label
+        for="checkbox-group-B"
+      >
+        isB
+      </label>
+    </div>
+    <div
+      class="multiple-choice"
+    >
+      <input
+        id="checkbox-group-C"
+        name="checkbox-group"
+        type="checkbox"
+        value="C"
+      />
+      <label
+        for="checkbox-group-C"
+      >
+        isC
+      </label>
+    </div>
+  </fieldset>
+</div>
+`;
+
+exports[`Form checkbox group component should render with hint when passed 1`] = `
+<div
+  class="form-group"
+>
+  <fieldset>
+    <legend
+      id="checkbox-group-legend"
+    >
+      <span
+        class="form-label-bold"
+      />
+      <span
+        class="form-hint"
+      >
+        Put some text in the box below
+      </span>
+    </legend>
+    <div
+      class="multiple-choice"
+    >
+      <input
+        id="checkbox-group-A"
+        name="checkbox-group"
+        type="checkbox"
+        value="A"
+      />
+      <label
+        for="checkbox-group-A"
+      >
+        isA
+      </label>
+    </div>
+    <div
+      class="multiple-choice"
+    >
+      <input
+        id="checkbox-group-B"
+        name="checkbox-group"
+        type="checkbox"
+        value="B"
+      />
+      <label
+        for="checkbox-group-B"
+      >
+        isB
+      </label>
+    </div>
+    <div
+      class="multiple-choice"
+    >
+      <input
+        id="checkbox-group-C"
+        name="checkbox-group"
+        type="checkbox"
+        value="C"
+      />
+      <label
+        for="checkbox-group-C"
+      >
+        isC
+      </label>
+    </div>
+  </fieldset>
+</div>
+`;
+
+exports[`Form checkbox group component should render with label when passed 1`] = `
+<div
+  class="form-group"
+>
+  <fieldset>
+    <legend
+      id="checkbox-group-legend"
+    >
+      <span
+        class="form-label-bold"
+      >
+        My text field
+      </span>
+    </legend>
+    <div
+      class="multiple-choice"
+    >
+      <input
+        id="checkbox-group-A"
+        name="checkbox-group"
+        type="checkbox"
+        value="A"
+      />
+      <label
+        for="checkbox-group-A"
+      >
+        isA
+      </label>
+    </div>
+    <div
+      class="multiple-choice"
+    >
+      <input
+        id="checkbox-group-B"
+        name="checkbox-group"
+        type="checkbox"
+        value="B"
+      />
+      <label
+        for="checkbox-group-B"
+      >
+        isB
+      </label>
+    </div>
+    <div
+      class="multiple-choice"
+    >
+      <input
+        id="checkbox-group-C"
+        name="checkbox-group"
+        type="checkbox"
+        value="C"
+      />
+      <label
+        for="checkbox-group-C"
+      >
+        isC
+      </label>
+    </div>
+  </fieldset>
+</div>
+`;
+
+exports[`Form checkbox group component should render with value when passed 1`] = `
+<div
+  class="form-group"
+>
+  <fieldset>
+    <legend
+      id="checkbox-group-legend"
+    >
+      <span
+        class="form-label-bold"
+      />
+    </legend>
+    <div
+      class="multiple-choice"
+    >
+      <input
+        id="checkbox-group-A"
+        name="checkbox-group"
+        type="checkbox"
+        value="A"
+      />
+      <label
+        for="checkbox-group-A"
+      >
+        isA
+      </label>
+    </div>
+    <div
+      class="multiple-choice"
+    >
+      <input
+        id="checkbox-group-B"
+        name="checkbox-group"
+        type="checkbox"
+        value="B"
+      />
+      <label
+        for="checkbox-group-B"
+      >
+        isB
+      </label>
+    </div>
+    <div
+      class="multiple-choice"
+    >
+      <input
+        id="checkbox-group-C"
+        name="checkbox-group"
+        type="checkbox"
+        value="C"
+      />
+      <label
+        for="checkbox-group-C"
+      >
+        isC
+      </label>
+    </div>
+  </fieldset>
+</div>
+`;

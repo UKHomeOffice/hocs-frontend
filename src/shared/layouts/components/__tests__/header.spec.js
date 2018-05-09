@@ -4,7 +4,7 @@ import Header from "../header.jsx";
 describe('Layout header component', () => {
     it('should render with default props', () => {
         expect(
-            render(<Header/>)
+            shallow(<Header/>)
         ).toMatchSnapshot();
     });
     it('should render the menu when passed', () => {
@@ -16,14 +16,6 @@ describe('Layout header component', () => {
         };
         expect(
             shallow(<Header {...props}/>)
-        ).toMatchSnapshot();
-    });
-    it('should render a username when passed', () => {
-        const props = {
-            userName: 'Test user'
-        };
-        expect(
-            render(<Header {...props}/>)
         ).toMatchSnapshot();
     });
 });

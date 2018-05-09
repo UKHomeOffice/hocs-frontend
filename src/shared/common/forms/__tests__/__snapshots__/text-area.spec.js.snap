@@ -1,0 +1,142 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Form text area component should render disabled when passed 1`] = `
+<div
+  class="form-group"
+>
+  <label
+    id="undefined-label"
+  >
+    <span
+      class="form-label-bold"
+    />
+  </label>
+  <textarea
+    class="form-control form-control-3-4 "
+    disabled=""
+    rows="5"
+  />
+</div>
+`;
+
+exports[`Form text area component should render of type when passed 1`] = `
+<div
+  class="form-group"
+>
+  <label
+    id="undefined-label"
+  >
+    <span
+      class="form-label-bold"
+    />
+  </label>
+  <textarea
+    class="form-control form-control-3-4 "
+    rows="5"
+  />
+</div>
+`;
+
+exports[`Form text area component should render with default props 1`] = `
+<div
+  class="form-group"
+>
+  <label
+    id="undefined-label"
+  >
+    <span
+      class="form-label-bold"
+    />
+  </label>
+  <textarea
+    class="form-control form-control-3-4 "
+    rows="5"
+  />
+</div>
+`;
+
+exports[`Form text area component should render with error when passed 1`] = `
+<div
+  class="form-group form-group-error"
+>
+  <label
+    id="undefined-label"
+  >
+    <span
+      class="form-label-bold"
+    />
+    <span
+      class="error-message"
+    >
+      Some error message
+    </span>
+  </label>
+  <textarea
+    class="form-control form-control-3-4 form-control-error"
+    rows="5"
+  />
+</div>
+`;
+
+exports[`Form text area component should render with hint when passed 1`] = `
+<div
+  class="form-group"
+>
+  <label
+    id="undefined-label"
+  >
+    <span
+      class="form-label-bold"
+    />
+    <span
+      class="form-hint"
+    >
+      Put some text in the box below
+    </span>
+  </label>
+  <textarea
+    class="form-control form-control-3-4 "
+    rows="5"
+  />
+</div>
+`;
+
+exports[`Form text area component should render with label when passed 1`] = `
+<div
+  class="form-group"
+>
+  <label
+    id="undefined-label"
+  >
+    <span
+      class="form-label-bold"
+    >
+      My text field
+    </span>
+  </label>
+  <textarea
+    class="form-control form-control-3-4 "
+    rows="5"
+  />
+</div>
+`;
+
+exports[`Form text area component should render with value when passed 1`] = `
+<div
+  class="form-group"
+>
+  <label
+    id="undefined-label"
+  >
+    <span
+      class="form-label-bold"
+    />
+  </label>
+  <textarea
+    class="form-control form-control-3-4 "
+    rows="5"
+  >
+    field value
+  </textarea>
+</div>
+`;

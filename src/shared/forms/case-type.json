@@ -1,0 +1,16 @@
+{
+  "submit": "CREATE",
+  "fields":[
+  {
+    "component": "radio",
+    "validation": ["required"],
+    "props": {
+      "name": "case-type",
+      "label": "Case type",
+      "className": "inline",
+      "choices": [
+        {"label": "Test", "value": "TEST"}
+      ]
+    }
+  }
+]}

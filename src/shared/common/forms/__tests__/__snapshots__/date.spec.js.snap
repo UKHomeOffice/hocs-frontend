@@ -1,0 +1,483 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Form date component should render disabled when passed 1`] = `
+<div
+  class="form-group"
+>
+  <fieldset
+    disabled=""
+  >
+    <legend>
+      <span
+        class="form-label-bold"
+      />
+    </legend>
+    <div
+      class="form-date"
+    >
+      <div
+        class="form-group form-group-day"
+      >
+        <label
+          class="form-label"
+          for="date-field-day"
+        >
+          Day
+        </label>
+        <input
+          class="form-control "
+          id="date-field-day"
+          max="31"
+          min="1"
+          name="date-field-day"
+          pattern="[0-9]*"
+          type="number"
+          value=""
+        />
+      </div>
+      <div
+        class="form-group form-group-month"
+      >
+        <label
+          class="form-label"
+          for="date-field-month"
+        >
+          Month
+        </label>
+        <input
+          class="form-control "
+          id="date-field-month"
+          max="12"
+          min="1"
+          name="date-field-month"
+          pattern="[0-9]*"
+          type="number"
+          value=""
+        />
+      </div>
+      <div
+        class="form-group form-group-year"
+      >
+        <label
+          class="form-label"
+          for="date-field-year"
+        >
+          Year
+        </label>
+        <input
+          class="form-control "
+          id="date-field-year"
+          max="2100"
+          min="1900"
+          name="date-field-year"
+          pattern="[0-9]*"
+          type="number"
+          value=""
+        />
+      </div>
+    </div>
+  </fieldset>
+</div>
+`;
+
+exports[`Form date component should render with default props 1`] = `
+<div
+  class="form-group"
+>
+  <fieldset>
+    <legend>
+      <span
+        class="form-label-bold"
+      />
+    </legend>
+    <div
+      class="form-date"
+    >
+      <div
+        class="form-group form-group-day"
+      >
+        <label
+          class="form-label"
+          for="date-field-day"
+        >
+          Day
+        </label>
+        <input
+          class="form-control "
+          id="date-field-day"
+          max="31"
+          min="1"
+          name="date-field-day"
+          pattern="[0-9]*"
+          type="number"
+          value=""
+        />
+      </div>
+      <div
+        class="form-group form-group-month"
+      >
+        <label
+          class="form-label"
+          for="date-field-month"
+        >
+          Month
+        </label>
+        <input
+          class="form-control "
+          id="date-field-month"
+          max="12"
+          min="1"
+          name="date-field-month"
+          pattern="[0-9]*"
+          type="number"
+          value=""
+        />
+      </div>
+      <div
+        class="form-group form-group-year"
+      >
+        <label
+          class="form-label"
+          for="date-field-year"
+        >
+          Year
+        </label>
+        <input
+          class="form-control "
+          id="date-field-year"
+          max="2100"
+          min="1900"
+          name="date-field-year"
+          pattern="[0-9]*"
+          type="number"
+          value=""
+        />
+      </div>
+    </div>
+  </fieldset>
+</div>
+`;
+
+exports[`Form date component should render with error when passed 1`] = `
+<div
+  class="form-group form-group-error"
+>
+  <fieldset>
+    <legend>
+      <span
+        class="form-label-bold"
+      />
+      <span
+        class="error-message"
+      >
+        Some error message
+      </span>
+    </legend>
+    <div
+      class="form-date"
+    >
+      <div
+        class="form-group form-group-day"
+      >
+        <label
+          class="form-label"
+          for="date-field-day"
+        >
+          Day
+        </label>
+        <input
+          class="form-control form-control-error"
+          id="date-field-day"
+          max="31"
+          min="1"
+          name="date-field-day"
+          pattern="[0-9]*"
+          type="number"
+          value=""
+        />
+      </div>
+      <div
+        class="form-group form-group-month"
+      >
+        <label
+          class="form-label"
+          for="date-field-month"
+        >
+          Month
+        </label>
+        <input
+          class="form-control form-control-error"
+          id="date-field-month"
+          max="12"
+          min="1"
+          name="date-field-month"
+          pattern="[0-9]*"
+          type="number"
+          value=""
+        />
+      </div>
+      <div
+        class="form-group form-group-year"
+      >
+        <label
+          class="form-label"
+          for="date-field-year"
+        >
+          Year
+        </label>
+        <input
+          class="form-control form-control-error"
+          id="date-field-year"
+          max="2100"
+          min="1900"
+          name="date-field-year"
+          pattern="[0-9]*"
+          type="number"
+          value=""
+        />
+      </div>
+    </div>
+  </fieldset>
+</div>
+`;
+
+exports[`Form date component should render with hint when passed 1`] = `
+<div
+  class="form-group"
+>
+  <fieldset>
+    <legend>
+      <span
+        class="form-label-bold"
+      />
+      <span
+        class="form-hint"
+      >
+        Put some text in the box below
+      </span>
+    </legend>
+    <div
+      class="form-date"
+    >
+      <div
+        class="form-group form-group-day"
+      >
+        <label
+          class="form-label"
+          for="date-field-day"
+        >
+          Day
+        </label>
+        <input
+          class="form-control "
+          id="date-field-day"
+          max="31"
+          min="1"
+          name="date-field-day"
+          pattern="[0-9]*"
+          type="number"
+          value=""
+        />
+      </div>
+      <div
+        class="form-group form-group-month"
+      >
+        <label
+          class="form-label"
+          for="date-field-month"
+        >
+          Month
+        </label>
+        <input
+          class="form-control "
+          id="date-field-month"
+          max="12"
+          min="1"
+          name="date-field-month"
+          pattern="[0-9]*"
+          type="number"
+          value=""
+        />
+      </div>
+      <div
+        class="form-group form-group-year"
+      >
+        <label
+          class="form-label"
+          for="date-field-year"
+        >
+          Year
+        </label>
+        <input
+          class="form-control "
+          id="date-field-year"
+          max="2100"
+          min="1900"
+          name="date-field-year"
+          pattern="[0-9]*"
+          type="number"
+          value=""
+        />
+      </div>
+    </div>
+  </fieldset>
+</div>
+`;
+
+exports[`Form date component should render with label when passed 1`] = `
+<div
+  class="form-group"
+>
+  <fieldset>
+    <legend>
+      <span
+        class="form-label-bold"
+      >
+        My text field
+      </span>
+    </legend>
+    <div
+      class="form-date"
+    >
+      <div
+        class="form-group form-group-day"
+      >
+        <label
+          class="form-label"
+          for="date-field-day"
+        >
+          Day
+        </label>
+        <input
+          class="form-control "
+          id="date-field-day"
+          max="31"
+          min="1"
+          name="date-field-day"
+          pattern="[0-9]*"
+          type="number"
+          value=""
+        />
+      </div>
+      <div
+        class="form-group form-group-month"
+      >
+        <label
+          class="form-label"
+          for="date-field-month"
+        >
+          Month
+        </label>
+        <input
+          class="form-control "
+          id="date-field-month"
+          max="12"
+          min="1"
+          name="date-field-month"
+          pattern="[0-9]*"
+          type="number"
+          value=""
+        />
+      </div>
+      <div
+        class="form-group form-group-year"
+      >
+        <label
+          class="form-label"
+          for="date-field-year"
+        >
+          Year
+        </label>
+        <input
+          class="form-control "
+          id="date-field-year"
+          max="2100"
+          min="1900"
+          name="date-field-year"
+          pattern="[0-9]*"
+          type="number"
+          value=""
+        />
+      </div>
+    </div>
+  </fieldset>
+</div>
+`;
+
+exports[`Form date component should render with value when passed 1`] = `
+<div
+  class="form-group"
+>
+  <fieldset>
+    <legend>
+      <span
+        class="form-label-bold"
+      />
+    </legend>
+    <div
+      class="form-date"
+    >
+      <div
+        class="form-group form-group-day"
+      >
+        <label
+          class="form-label"
+          for="date-field-day"
+        >
+          Day
+        </label>
+        <input
+          class="form-control "
+          id="date-field-day"
+          max="31"
+          min="1"
+          name="date-field-day"
+          pattern="[0-9]*"
+          type="number"
+          value="19"
+        />
+      </div>
+      <div
+        class="form-group form-group-month"
+      >
+        <label
+          class="form-label"
+          for="date-field-month"
+        >
+          Month
+        </label>
+        <input
+          class="form-control "
+          id="date-field-month"
+          max="12"
+          min="1"
+          name="date-field-month"
+          pattern="[0-9]*"
+          type="number"
+          value="01"
+        />
+      </div>
+      <div
+        class="form-group form-group-year"
+      >
+        <label
+          class="form-label"
+          for="date-field-year"
+        >
+          Year
+        </label>
+        <input
+          class="form-control "
+          id="date-field-year"
+          max="2100"
+          min="1900"
+          name="date-field-year"
+          pattern="[0-9]*"
+          type="number"
+          value="2018"
+        />
+      </div>
+    </div>
+  </fieldset>
+</div>
+`;

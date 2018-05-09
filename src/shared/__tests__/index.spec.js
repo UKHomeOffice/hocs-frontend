@@ -10,7 +10,7 @@ describe('Shared entry point', () => {
             </MemoryRouter>
         );
         expect(wrapper).toBeDefined();
-        expect(wrapper.find('TestComponent')).toHaveLength(1);
+        expect(wrapper.find('WorkstackPage')).toHaveLength(1);
         expect(wrapper.find('Error')).toHaveLength(0);
     });
 });
@@ -23,7 +23,7 @@ describe('Shared entry point', () => {
             </MemoryRouter>
         );
         expect(wrapper).toBeDefined();
-        expect(wrapper.find('TestComponent')).toHaveLength(0);
+        expect(wrapper.find('WorkstackPage')).toHaveLength(0);
         expect(wrapper.find('Error')).toHaveLength(1);
     });
 });

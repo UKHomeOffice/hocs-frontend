@@ -1,11 +1,21 @@
-module.exports = {
+const config = {
     applications: {
-        application: {
+        server: {
+            port: process.env.PORT || 8080
+        },
+        render: {
+            clientSide: process.env.USE_CLIENTSIDE || true,
+            js: ['vendor'],
+            css: ['main'],
+            react: 'main',
+            title: 'Home Office Correspondence System',
+        },
+        case: {
             header: {
-                service: 'HOCS',
-                serviceLink: 'https://www.gov.uk',
+                service: 'Home Office Correspondence System',
+                serviceLink: '/',
                 logoLinkTitle: '',
-                propositionHeader: 'Application Title',
+                propositionHeader: '',
                 propositionHeaderLink: '/'
             },
             body: {
@@ -16,11 +26,18 @@ module.exports = {
                 }
             },
             footer: {
-                isVisible: false,
-                links: [
-                    {target: '/', label: 'Test Link'}
-                ]
+                isVisible: false
             }
         }
     }
-}
+};
+
+module.exports = {
+    forContext: context => {
+        try {
+            return config.applications[context];
+        } catch (e) {
+            throw new Error('Specified application configuration does not exist');
+        }
+    }
+};

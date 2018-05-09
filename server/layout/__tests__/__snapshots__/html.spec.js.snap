@@ -7,21 +7,21 @@ exports[`HTML module should default to proposition header when no title is passe
                     <meta charSet=\\"utf-8\\"/>
                     <title>Proposition Header</title>                            
                 
-                    <link rel=\\"shortcut icon\\" href=\\"public/images/favicon.ico\\" type=\\"image/x-icon\\"/>
-                    <link rel=\\"stylesheet\\" media=\\"screen\\" href=\\"public/stylesheets/govuk-template.css?0.23.0\\"/>
-                    <link rel=\\"stylesheet\\" media=\\"print\\" href=\\"public/stylesheets/govuk-template-print.css?0.23.0\\"/>
-                    <link rel=\\"stylesheet\\" media=\\"all\\" href=\\"public/stylesheets/fonts.css?0.23.0\\"/>
-                    <link rel=\\"mask-icon\\" href=\\"public/images/gov.uk_logotype_crown.svg\\" color=\\"#0b0c0c\\">
-                    <link rel=\\"apple-touch-icon\\" sizes=\\"180x180\\" href=\\"public/images/apple-touch-icon-180x180.png?0.23.0\\">
-                    <link rel=\\"apple-touch-icon\\" sizes=\\"167x167\\" href=\\"public/images/apple-touch-icon-167x167.png?0.23.0\\">
-                    <link rel=\\"apple-touch-icon\\" sizes=\\"152x152\\" href=\\"public/images/apple-touch-icon-152x152.png?0.23.0\\">
-                    <link rel=\\"apple-touch-icon\\" href=\\"public/images/apple-touch-icon.png?0.23.0\\">            
+                    <link rel=\\"shortcut icon\\" href=\\"/public/images/favicon.ico\\" type=\\"image/x-icon\\"/>
+                    <link rel=\\"stylesheet\\" media=\\"screen\\" href=\\"/public/stylesheets/govuk-template.css?0.23.0\\"/>
+                    <link rel=\\"stylesheet\\" media=\\"print\\" href=\\"/public/stylesheets/govuk-template-print.css?0.23.0\\"/>
+                    <link rel=\\"stylesheet\\" media=\\"all\\" href=\\"/public/stylesheets/fonts.css?0.23.0\\"/>
+                    <link rel=\\"mask-icon\\" href=\\"/public/images/gov.uk_logotype_crown.svg\\" color=\\"#0b0c0c\\">
+                    <link rel=\\"apple-touch-icon\\" sizes=\\"180x180\\" href=\\"/public/images/apple-touch-icon-180x180.png?0.23.0\\">
+                    <link rel=\\"apple-touch-icon\\" sizes=\\"167x167\\" href=\\"/public/images/apple-touch-icon-167x167.png?0.23.0\\">
+                    <link rel=\\"apple-touch-icon\\" sizes=\\"152x152\\" href=\\"/public/images/apple-touch-icon-152x152.png?0.23.0\\">
+                    <link rel=\\"apple-touch-icon\\" href=\\"/public/images/apple-touch-icon.png?0.23.0\\">            
                     
                     
                     <script>window.__INITIAL_DATA__ = {}</script>
                     
                     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\"/>
-                    <meta property=\\"og:image\\" content=public/images/opengraph-image.png?0.23.0/>                    
+                    <meta property=\\"og:image\\" content=/public/images/opengraph-image.png?0.23.0/>                    
                 </head>
                 
                 <body>
@@ -45,12 +45,12 @@ exports[`HTML module should default to proposition header when no title is passe
                     </div>
                         
                     <div id=\\"app\\"></div>
-                    <script src=\\"public/js/js/main.js\\" defer></script>
+                    <script src=\\"/public/js/js/main.js\\" defer></script> 
                     
                     <div id=\\"global-app-error\\" className=\\"app-error hidden\\"></div>
                 
-                    <script src=public/javascripts/govuk-template.js></script>
-                    <script src=\\"public/javascripts/ie.js\\"></script>
+                    <script src=/public/javascripts/govuk-template.js></script>
+                    <script src=\\"/public/javascripts/ie.js\\"></script>
                     <script>
                         if (typeof window.GOVUK === 'undefined') 
                         document.body.className = document.body.className.replace('js-enabled', '');
@@ -66,22 +66,22 @@ exports[`HTML module should include additional CSS and JS when passed 1`] = `
                     <meta charSet=\\"utf-8\\"/>
                     <title>My React Application</title>                            
                 
-                    <link rel=\\"shortcut icon\\" href=\\"public/images/favicon.ico\\" type=\\"image/x-icon\\"/>
-                    <link rel=\\"stylesheet\\" media=\\"screen\\" href=\\"public/stylesheets/govuk-template.css?0.23.0\\"/>
-                    <link rel=\\"stylesheet\\" media=\\"print\\" href=\\"public/stylesheets/govuk-template-print.css?0.23.0\\"/>
-                    <link rel=\\"stylesheet\\" media=\\"all\\" href=\\"public/stylesheets/fonts.css?0.23.0\\"/>
-                    <link rel=\\"mask-icon\\" href=\\"public/images/gov.uk_logotype_crown.svg\\" color=\\"#0b0c0c\\">
-                    <link rel=\\"apple-touch-icon\\" sizes=\\"180x180\\" href=\\"public/images/apple-touch-icon-180x180.png?0.23.0\\">
-                    <link rel=\\"apple-touch-icon\\" sizes=\\"167x167\\" href=\\"public/images/apple-touch-icon-167x167.png?0.23.0\\">
-                    <link rel=\\"apple-touch-icon\\" sizes=\\"152x152\\" href=\\"public/images/apple-touch-icon-152x152.png?0.23.0\\">
-                    <link rel=\\"apple-touch-icon\\" href=\\"public/images/apple-touch-icon.png?0.23.0\\">            
-                    <link rel=\\"stylesheet\\" media=\\"screen\\" href=\\"public/styles/styles/first.css\\" />
-                    <script src=\\"public/js/js/first.js\\"></script>
-<script src=\\"public/js/js/second.js\\"></script>
+                    <link rel=\\"shortcut icon\\" href=\\"/public/images/favicon.ico\\" type=\\"image/x-icon\\"/>
+                    <link rel=\\"stylesheet\\" media=\\"screen\\" href=\\"/public/stylesheets/govuk-template.css?0.23.0\\"/>
+                    <link rel=\\"stylesheet\\" media=\\"print\\" href=\\"/public/stylesheets/govuk-template-print.css?0.23.0\\"/>
+                    <link rel=\\"stylesheet\\" media=\\"all\\" href=\\"/public/stylesheets/fonts.css?0.23.0\\"/>
+                    <link rel=\\"mask-icon\\" href=\\"/public/images/gov.uk_logotype_crown.svg\\" color=\\"#0b0c0c\\">
+                    <link rel=\\"apple-touch-icon\\" sizes=\\"180x180\\" href=\\"/public/images/apple-touch-icon-180x180.png?0.23.0\\">
+                    <link rel=\\"apple-touch-icon\\" sizes=\\"167x167\\" href=\\"/public/images/apple-touch-icon-167x167.png?0.23.0\\">
+                    <link rel=\\"apple-touch-icon\\" sizes=\\"152x152\\" href=\\"/public/images/apple-touch-icon-152x152.png?0.23.0\\">
+                    <link rel=\\"apple-touch-icon\\" href=\\"/public/images/apple-touch-icon.png?0.23.0\\">            
+                    <link rel=\\"stylesheet\\" media=\\"screen\\" href=\\"/public/styles/styles/first.css\\" />
+                    <script src=\\"/public/js/js/first.js\\"></script>
+<script src=\\"/public/js/js/second.js\\"></script>
                     <script>window.__INITIAL_DATA__ = {}</script>
                     
                     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\"/>
-                    <meta property=\\"og:image\\" content=public/images/opengraph-image.png?0.23.0/>                    
+                    <meta property=\\"og:image\\" content=/public/images/opengraph-image.png?0.23.0/>                    
                 </head>
                 
                 <body>
@@ -105,12 +105,12 @@ exports[`HTML module should include additional CSS and JS when passed 1`] = `
                     </div>
                         
                     <div id=\\"app\\"></div>
-                    <script src=\\"public/js/js/main.js\\" defer></script>
+                    <script src=\\"/public/js/js/main.js\\" defer></script> 
                     
                     <div id=\\"global-app-error\\" className=\\"app-error hidden\\"></div>
                 
-                    <script src=public/javascripts/govuk-template.js></script>
-                    <script src=\\"public/javascripts/ie.js\\"></script>
+                    <script src=/public/javascripts/govuk-template.js></script>
+                    <script src=\\"/public/javascripts/ie.js\\"></script>
                     <script>
                         if (typeof window.GOVUK === 'undefined') 
                         document.body.className = document.body.className.replace('js-enabled', '');
@@ -126,21 +126,21 @@ exports[`HTML module should include application props in the head when passed 1`
                     <meta charSet=\\"utf-8\\"/>
                     <title>My React Application</title>                            
                 
-                    <link rel=\\"shortcut icon\\" href=\\"public/images/favicon.ico\\" type=\\"image/x-icon\\"/>
-                    <link rel=\\"stylesheet\\" media=\\"screen\\" href=\\"public/stylesheets/govuk-template.css?0.23.0\\"/>
-                    <link rel=\\"stylesheet\\" media=\\"print\\" href=\\"public/stylesheets/govuk-template-print.css?0.23.0\\"/>
-                    <link rel=\\"stylesheet\\" media=\\"all\\" href=\\"public/stylesheets/fonts.css?0.23.0\\"/>
-                    <link rel=\\"mask-icon\\" href=\\"public/images/gov.uk_logotype_crown.svg\\" color=\\"#0b0c0c\\">
-                    <link rel=\\"apple-touch-icon\\" sizes=\\"180x180\\" href=\\"public/images/apple-touch-icon-180x180.png?0.23.0\\">
-                    <link rel=\\"apple-touch-icon\\" sizes=\\"167x167\\" href=\\"public/images/apple-touch-icon-167x167.png?0.23.0\\">
-                    <link rel=\\"apple-touch-icon\\" sizes=\\"152x152\\" href=\\"public/images/apple-touch-icon-152x152.png?0.23.0\\">
-                    <link rel=\\"apple-touch-icon\\" href=\\"public/images/apple-touch-icon.png?0.23.0\\">            
+                    <link rel=\\"shortcut icon\\" href=\\"/public/images/favicon.ico\\" type=\\"image/x-icon\\"/>
+                    <link rel=\\"stylesheet\\" media=\\"screen\\" href=\\"/public/stylesheets/govuk-template.css?0.23.0\\"/>
+                    <link rel=\\"stylesheet\\" media=\\"print\\" href=\\"/public/stylesheets/govuk-template-print.css?0.23.0\\"/>
+                    <link rel=\\"stylesheet\\" media=\\"all\\" href=\\"/public/stylesheets/fonts.css?0.23.0\\"/>
+                    <link rel=\\"mask-icon\\" href=\\"/public/images/gov.uk_logotype_crown.svg\\" color=\\"#0b0c0c\\">
+                    <link rel=\\"apple-touch-icon\\" sizes=\\"180x180\\" href=\\"/public/images/apple-touch-icon-180x180.png?0.23.0\\">
+                    <link rel=\\"apple-touch-icon\\" sizes=\\"167x167\\" href=\\"/public/images/apple-touch-icon-167x167.png?0.23.0\\">
+                    <link rel=\\"apple-touch-icon\\" sizes=\\"152x152\\" href=\\"/public/images/apple-touch-icon-152x152.png?0.23.0\\">
+                    <link rel=\\"apple-touch-icon\\" href=\\"/public/images/apple-touch-icon.png?0.23.0\\">            
                     
                     
                     <script>window.__INITIAL_DATA__ = {\\"first\\":\\"value\\",\\"second\\":\\"value\\"}</script>
                     
                     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\"/>
-                    <meta property=\\"og:image\\" content=public/images/opengraph-image.png?0.23.0/>                    
+                    <meta property=\\"og:image\\" content=/public/images/opengraph-image.png?0.23.0/>                    
                 </head>
                 
                 <body>
@@ -164,12 +164,12 @@ exports[`HTML module should include application props in the head when passed 1`
                     </div>
                         
                     <div id=\\"app\\"></div>
-                    <script src=\\"public/js/js/main.js\\" defer></script>
+                    <script src=\\"/public/js/js/main.js\\" defer></script> 
                     
                     <div id=\\"global-app-error\\" className=\\"app-error hidden\\"></div>
                 
-                    <script src=public/javascripts/govuk-template.js></script>
-                    <script src=\\"public/javascripts/ie.js\\"></script>
+                    <script src=/public/javascripts/govuk-template.js></script>
+                    <script src=\\"/public/javascripts/ie.js\\"></script>
                     <script>
                         if (typeof window.GOVUK === 'undefined') 
                         document.body.className = document.body.className.replace('js-enabled', '');
@@ -185,21 +185,21 @@ exports[`HTML module should include the appropriate react application bundle whe
                     <meta charSet=\\"utf-8\\"/>
                     <title>My React Application</title>                            
                 
-                    <link rel=\\"shortcut icon\\" href=\\"public/images/favicon.ico\\" type=\\"image/x-icon\\"/>
-                    <link rel=\\"stylesheet\\" media=\\"screen\\" href=\\"public/stylesheets/govuk-template.css?0.23.0\\"/>
-                    <link rel=\\"stylesheet\\" media=\\"print\\" href=\\"public/stylesheets/govuk-template-print.css?0.23.0\\"/>
-                    <link rel=\\"stylesheet\\" media=\\"all\\" href=\\"public/stylesheets/fonts.css?0.23.0\\"/>
-                    <link rel=\\"mask-icon\\" href=\\"public/images/gov.uk_logotype_crown.svg\\" color=\\"#0b0c0c\\">
-                    <link rel=\\"apple-touch-icon\\" sizes=\\"180x180\\" href=\\"public/images/apple-touch-icon-180x180.png?0.23.0\\">
-                    <link rel=\\"apple-touch-icon\\" sizes=\\"167x167\\" href=\\"public/images/apple-touch-icon-167x167.png?0.23.0\\">
-                    <link rel=\\"apple-touch-icon\\" sizes=\\"152x152\\" href=\\"public/images/apple-touch-icon-152x152.png?0.23.0\\">
-                    <link rel=\\"apple-touch-icon\\" href=\\"public/images/apple-touch-icon.png?0.23.0\\">            
+                    <link rel=\\"shortcut icon\\" href=\\"/public/images/favicon.ico\\" type=\\"image/x-icon\\"/>
+                    <link rel=\\"stylesheet\\" media=\\"screen\\" href=\\"/public/stylesheets/govuk-template.css?0.23.0\\"/>
+                    <link rel=\\"stylesheet\\" media=\\"print\\" href=\\"/public/stylesheets/govuk-template-print.css?0.23.0\\"/>
+                    <link rel=\\"stylesheet\\" media=\\"all\\" href=\\"/public/stylesheets/fonts.css?0.23.0\\"/>
+                    <link rel=\\"mask-icon\\" href=\\"/public/images/gov.uk_logotype_crown.svg\\" color=\\"#0b0c0c\\">
+                    <link rel=\\"apple-touch-icon\\" sizes=\\"180x180\\" href=\\"/public/images/apple-touch-icon-180x180.png?0.23.0\\">
+                    <link rel=\\"apple-touch-icon\\" sizes=\\"167x167\\" href=\\"/public/images/apple-touch-icon-167x167.png?0.23.0\\">
+                    <link rel=\\"apple-touch-icon\\" sizes=\\"152x152\\" href=\\"/public/images/apple-touch-icon-152x152.png?0.23.0\\">
+                    <link rel=\\"apple-touch-icon\\" href=\\"/public/images/apple-touch-icon.png?0.23.0\\">            
                     
                     
                     <script>window.__INITIAL_DATA__ = {}</script>
                     
                     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\"/>
-                    <meta property=\\"og:image\\" content=public/images/opengraph-image.png?0.23.0/>                    
+                    <meta property=\\"og:image\\" content=/public/images/opengraph-image.png?0.23.0/>                    
                 </head>
                 
                 <body>
@@ -223,12 +223,12 @@ exports[`HTML module should include the appropriate react application bundle whe
                     </div>
                         
                     <div id=\\"app\\"></div>
-                    <script src=\\"public/js/js/myBundle.js\\" defer></script>
+                    <script src=\\"/public/js/js/myBundle.js\\" defer></script> 
                     
                     <div id=\\"global-app-error\\" className=\\"app-error hidden\\"></div>
                 
-                    <script src=public/javascripts/govuk-template.js></script>
-                    <script src=\\"public/javascripts/ie.js\\"></script>
+                    <script src=/public/javascripts/govuk-template.js></script>
+                    <script src=\\"/public/javascripts/ie.js\\"></script>
                     <script>
                         if (typeof window.GOVUK === 'undefined') 
                         document.body.className = document.body.className.replace('js-enabled', '');
@@ -282,7 +282,7 @@ exports[`HTML module should include the correct asset path when passed 1`] = `
                     </div>
                         
                     <div id=\\"app\\"></div>
-                    <script src=\\"some/public/folder/that/contains/my/assets/js/js/main.js\\" defer></script>
+                    <script src=\\"some/public/folder/that/contains/my/assets/js/js/main.js\\" defer></script> 
                     
                     <div id=\\"global-app-error\\" className=\\"app-error hidden\\"></div>
                 
@@ -303,21 +303,21 @@ exports[`HTML module should include the server rendered markup when passed 1`] =
                     <meta charSet=\\"utf-8\\"/>
                     <title>My React Application</title>                            
                 
-                    <link rel=\\"shortcut icon\\" href=\\"public/images/favicon.ico\\" type=\\"image/x-icon\\"/>
-                    <link rel=\\"stylesheet\\" media=\\"screen\\" href=\\"public/stylesheets/govuk-template.css?0.23.0\\"/>
-                    <link rel=\\"stylesheet\\" media=\\"print\\" href=\\"public/stylesheets/govuk-template-print.css?0.23.0\\"/>
-                    <link rel=\\"stylesheet\\" media=\\"all\\" href=\\"public/stylesheets/fonts.css?0.23.0\\"/>
-                    <link rel=\\"mask-icon\\" href=\\"public/images/gov.uk_logotype_crown.svg\\" color=\\"#0b0c0c\\">
-                    <link rel=\\"apple-touch-icon\\" sizes=\\"180x180\\" href=\\"public/images/apple-touch-icon-180x180.png?0.23.0\\">
-                    <link rel=\\"apple-touch-icon\\" sizes=\\"167x167\\" href=\\"public/images/apple-touch-icon-167x167.png?0.23.0\\">
-                    <link rel=\\"apple-touch-icon\\" sizes=\\"152x152\\" href=\\"public/images/apple-touch-icon-152x152.png?0.23.0\\">
-                    <link rel=\\"apple-touch-icon\\" href=\\"public/images/apple-touch-icon.png?0.23.0\\">            
+                    <link rel=\\"shortcut icon\\" href=\\"/public/images/favicon.ico\\" type=\\"image/x-icon\\"/>
+                    <link rel=\\"stylesheet\\" media=\\"screen\\" href=\\"/public/stylesheets/govuk-template.css?0.23.0\\"/>
+                    <link rel=\\"stylesheet\\" media=\\"print\\" href=\\"/public/stylesheets/govuk-template-print.css?0.23.0\\"/>
+                    <link rel=\\"stylesheet\\" media=\\"all\\" href=\\"/public/stylesheets/fonts.css?0.23.0\\"/>
+                    <link rel=\\"mask-icon\\" href=\\"/public/images/gov.uk_logotype_crown.svg\\" color=\\"#0b0c0c\\">
+                    <link rel=\\"apple-touch-icon\\" sizes=\\"180x180\\" href=\\"/public/images/apple-touch-icon-180x180.png?0.23.0\\">
+                    <link rel=\\"apple-touch-icon\\" sizes=\\"167x167\\" href=\\"/public/images/apple-touch-icon-167x167.png?0.23.0\\">
+                    <link rel=\\"apple-touch-icon\\" sizes=\\"152x152\\" href=\\"/public/images/apple-touch-icon-152x152.png?0.23.0\\">
+                    <link rel=\\"apple-touch-icon\\" href=\\"/public/images/apple-touch-icon.png?0.23.0\\">            
                     
                     
                     <script>window.__INITIAL_DATA__ = {}</script>
                     
                     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\"/>
-                    <meta property=\\"og:image\\" content=public/images/opengraph-image.png?0.23.0/>                    
+                    <meta property=\\"og:image\\" content=/public/images/opengraph-image.png?0.23.0/>                    
                 </head>
                 
                 <body>
@@ -341,12 +341,12 @@ exports[`HTML module should include the server rendered markup when passed 1`] =
                     </div>
                         
                     <div id=\\"app\\"><--- REACT APPLICATION ---></div>
-                    <script src=\\"public/js/js/main.js\\" defer></script>
+                    <script src=\\"/public/js/js/main.js\\" defer></script> 
                     
                     <div id=\\"global-app-error\\" className=\\"app-error hidden\\"></div>
                 
-                    <script src=public/javascripts/govuk-template.js></script>
-                    <script src=\\"public/javascripts/ie.js\\"></script>
+                    <script src=/public/javascripts/govuk-template.js></script>
+                    <script src=\\"/public/javascripts/ie.js\\"></script>
                     <script>
                         if (typeof window.GOVUK === 'undefined') 
                         document.body.className = document.body.className.replace('js-enabled', '');
@@ -362,21 +362,21 @@ exports[`HTML module should not contain the react bundle js when clientside is s
                     <meta charSet=\\"utf-8\\"/>
                     <title>My React Application</title>                            
                 
-                    <link rel=\\"shortcut icon\\" href=\\"public/images/favicon.ico\\" type=\\"image/x-icon\\"/>
-                    <link rel=\\"stylesheet\\" media=\\"screen\\" href=\\"public/stylesheets/govuk-template.css?0.23.0\\"/>
-                    <link rel=\\"stylesheet\\" media=\\"print\\" href=\\"public/stylesheets/govuk-template-print.css?0.23.0\\"/>
-                    <link rel=\\"stylesheet\\" media=\\"all\\" href=\\"public/stylesheets/fonts.css?0.23.0\\"/>
-                    <link rel=\\"mask-icon\\" href=\\"public/images/gov.uk_logotype_crown.svg\\" color=\\"#0b0c0c\\">
-                    <link rel=\\"apple-touch-icon\\" sizes=\\"180x180\\" href=\\"public/images/apple-touch-icon-180x180.png?0.23.0\\">
-                    <link rel=\\"apple-touch-icon\\" sizes=\\"167x167\\" href=\\"public/images/apple-touch-icon-167x167.png?0.23.0\\">
-                    <link rel=\\"apple-touch-icon\\" sizes=\\"152x152\\" href=\\"public/images/apple-touch-icon-152x152.png?0.23.0\\">
-                    <link rel=\\"apple-touch-icon\\" href=\\"public/images/apple-touch-icon.png?0.23.0\\">            
+                    <link rel=\\"shortcut icon\\" href=\\"/public/images/favicon.ico\\" type=\\"image/x-icon\\"/>
+                    <link rel=\\"stylesheet\\" media=\\"screen\\" href=\\"/public/stylesheets/govuk-template.css?0.23.0\\"/>
+                    <link rel=\\"stylesheet\\" media=\\"print\\" href=\\"/public/stylesheets/govuk-template-print.css?0.23.0\\"/>
+                    <link rel=\\"stylesheet\\" media=\\"all\\" href=\\"/public/stylesheets/fonts.css?0.23.0\\"/>
+                    <link rel=\\"mask-icon\\" href=\\"/public/images/gov.uk_logotype_crown.svg\\" color=\\"#0b0c0c\\">
+                    <link rel=\\"apple-touch-icon\\" sizes=\\"180x180\\" href=\\"/public/images/apple-touch-icon-180x180.png?0.23.0\\">
+                    <link rel=\\"apple-touch-icon\\" sizes=\\"167x167\\" href=\\"/public/images/apple-touch-icon-167x167.png?0.23.0\\">
+                    <link rel=\\"apple-touch-icon\\" sizes=\\"152x152\\" href=\\"/public/images/apple-touch-icon-152x152.png?0.23.0\\">
+                    <link rel=\\"apple-touch-icon\\" href=\\"/public/images/apple-touch-icon.png?0.23.0\\">            
                     
-                    false
-                    false
+                    
+                    
                     
                     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\"/>
-                    <meta property=\\"og:image\\" content=public/images/opengraph-image.png?0.23.0/>                    
+                    <meta property=\\"og:image\\" content=/public/images/opengraph-image.png?0.23.0/>                    
                 </head>
                 
                 <body>
@@ -400,12 +400,12 @@ exports[`HTML module should not contain the react bundle js when clientside is s
                     </div>
                         
                     <div id=\\"app\\"></div>
-                    false
+                    
                     
                     <div id=\\"global-app-error\\" className=\\"app-error hidden\\"></div>
                 
-                    <script src=public/javascripts/govuk-template.js></script>
-                    <script src=\\"public/javascripts/ie.js\\"></script>
+                    <script src=/public/javascripts/govuk-template.js></script>
+                    <script src=\\"/public/javascripts/ie.js\\"></script>
                     <script>
                         if (typeof window.GOVUK === 'undefined') 
                         document.body.className = document.body.className.replace('js-enabled', '');
@@ -421,21 +421,21 @@ exports[`HTML module should return the default html when no additional configura
                     <meta charSet=\\"utf-8\\"/>
                     <title>My React Application</title>                            
                 
-                    <link rel=\\"shortcut icon\\" href=\\"public/images/favicon.ico\\" type=\\"image/x-icon\\"/>
-                    <link rel=\\"stylesheet\\" media=\\"screen\\" href=\\"public/stylesheets/govuk-template.css?0.23.0\\"/>
-                    <link rel=\\"stylesheet\\" media=\\"print\\" href=\\"public/stylesheets/govuk-template-print.css?0.23.0\\"/>
-                    <link rel=\\"stylesheet\\" media=\\"all\\" href=\\"public/stylesheets/fonts.css?0.23.0\\"/>
-                    <link rel=\\"mask-icon\\" href=\\"public/images/gov.uk_logotype_crown.svg\\" color=\\"#0b0c0c\\">
-                    <link rel=\\"apple-touch-icon\\" sizes=\\"180x180\\" href=\\"public/images/apple-touch-icon-180x180.png?0.23.0\\">
-                    <link rel=\\"apple-touch-icon\\" sizes=\\"167x167\\" href=\\"public/images/apple-touch-icon-167x167.png?0.23.0\\">
-                    <link rel=\\"apple-touch-icon\\" sizes=\\"152x152\\" href=\\"public/images/apple-touch-icon-152x152.png?0.23.0\\">
-                    <link rel=\\"apple-touch-icon\\" href=\\"public/images/apple-touch-icon.png?0.23.0\\">            
+                    <link rel=\\"shortcut icon\\" href=\\"/public/images/favicon.ico\\" type=\\"image/x-icon\\"/>
+                    <link rel=\\"stylesheet\\" media=\\"screen\\" href=\\"/public/stylesheets/govuk-template.css?0.23.0\\"/>
+                    <link rel=\\"stylesheet\\" media=\\"print\\" href=\\"/public/stylesheets/govuk-template-print.css?0.23.0\\"/>
+                    <link rel=\\"stylesheet\\" media=\\"all\\" href=\\"/public/stylesheets/fonts.css?0.23.0\\"/>
+                    <link rel=\\"mask-icon\\" href=\\"/public/images/gov.uk_logotype_crown.svg\\" color=\\"#0b0c0c\\">
+                    <link rel=\\"apple-touch-icon\\" sizes=\\"180x180\\" href=\\"/public/images/apple-touch-icon-180x180.png?0.23.0\\">
+                    <link rel=\\"apple-touch-icon\\" sizes=\\"167x167\\" href=\\"/public/images/apple-touch-icon-167x167.png?0.23.0\\">
+                    <link rel=\\"apple-touch-icon\\" sizes=\\"152x152\\" href=\\"/public/images/apple-touch-icon-152x152.png?0.23.0\\">
+                    <link rel=\\"apple-touch-icon\\" href=\\"/public/images/apple-touch-icon.png?0.23.0\\">            
                     
                     
                     <script>window.__INITIAL_DATA__ = {}</script>
                     
                     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\"/>
-                    <meta property=\\"og:image\\" content=public/images/opengraph-image.png?0.23.0/>                    
+                    <meta property=\\"og:image\\" content=/public/images/opengraph-image.png?0.23.0/>                    
                 </head>
                 
                 <body>
@@ -459,12 +459,12 @@ exports[`HTML module should return the default html when no additional configura
                     </div>
                         
                     <div id=\\"app\\"></div>
-                    <script src=\\"public/js/js/main.js\\" defer></script>
+                    <script src=\\"/public/js/js/main.js\\" defer></script> 
                     
                     <div id=\\"global-app-error\\" className=\\"app-error hidden\\"></div>
                 
-                    <script src=public/javascripts/govuk-template.js></script>
-                    <script src=\\"public/javascripts/ie.js\\"></script>
+                    <script src=/public/javascripts/govuk-template.js></script>
+                    <script src=\\"/public/javascripts/ie.js\\"></script>
                     <script>
                         if (typeof window.GOVUK === 'undefined') 
                         document.body.className = document.body.className.replace('js-enabled', '');

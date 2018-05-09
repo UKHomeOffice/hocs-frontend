@@ -1,0 +1,111 @@
+{
+  "submit": "SUBMIT",
+  "fields": [
+    {
+      "component": "text",
+      "validation": [
+        "required"
+      ],
+      "props": {
+        "name": "name",
+        "label": "Name"
+      }
+    },
+    {
+      "component": "text",
+      "validation": [
+        "required"
+      ],
+      "props": {
+        "name": "surname",
+        "label": "Surname"
+      }
+    },
+    {
+      "component": "date",
+      "validation": [
+        "required"
+      ],
+      "props": {
+        "name": "date",
+        "label": "Date"
+      }
+    },
+    {
+      "component": "checkbox",
+      "validation": [
+        "required"
+      ],
+      "props": {
+        "name": "checkboxContext",
+        "label": "Checkbox Group",
+        "className": "inline",
+        "choices": [
+          {
+            "label": "Test1",
+            "value": "Has1"
+          },
+          {
+            "label": "Test2",
+            "value": "Has2"
+          },
+          {
+            "label": "Test3",
+            "value": "Has3"
+          }
+        ]
+      }
+    },
+    {
+      "component": "checkbox",
+      "validation": [
+        "required"
+      ],
+      "props": {
+        "name": "checkbox",
+        "className": "inline",
+        "choices": [
+          {
+            "label": "Is checked",
+            "value": "IsChecked"
+          }
+        ]
+      }
+    },
+    {
+      "component": "text-area",
+      "validation": [
+        "required"
+      ],
+      "props": {
+        "name": "text-area",
+        "label": "Text Area"
+      }
+    },
+    {
+      "component": "radio",
+      "validation": [
+        "someUnsupportedValidator"
+      ],
+      "props": {
+        "name": "case-type",
+        "label": "Radio Group",
+        "className": "inline",
+        "choices": [
+          {
+            "label": "A",
+            "value": "isA"
+          },
+          {
+            "label": "B",
+            "value": "isB"
+          },
+          {
+            "label": "C",
+            "value": "isC"
+          }
+        ]
+      }
+    }
+  ]
+}
