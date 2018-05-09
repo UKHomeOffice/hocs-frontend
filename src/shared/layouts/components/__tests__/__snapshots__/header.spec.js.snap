@@ -93,23 +93,23 @@ exports[`Layout header component should render the menu when passed 1`] = `
 `;
 
 exports[`Layout header component should render with default props 1`] = `
-Array [
+<React.Fragment>
   <header
-    class="with-proposition"
+    className="with-proposition"
     id="global-header"
     role="banner"
   >
     <div
-      class="header-wrapper"
+      className="header-wrapper"
     >
       <div
-        class="header-global"
+        className="header-global"
       >
         <div
-          class="header-logo"
+          className="header-logo"
         >
           <a
-            class="content"
+            className="content"
             href="https://www.gov.uk"
             id="header-application"
             title=""
@@ -119,10 +119,10 @@ Array [
         </div>
       </div>
       <div
-        class="header-proposition"
+        className="header-proposition"
       >
         <div
-          class="content"
+          className="content"
         >
           <nav
             id="proposition-menu"
@@ -134,16 +134,42 @@ Array [
                 href="/"
                 id="proposition-name"
               >
-                React Application
+                Service Name
               </a>
             </div>
+            <React.Fragment>
+              <label
+                aria-label="menu"
+                htmlFor="toggle-mobile-menu"
+              >
+                Menu
+              </label>
+              <input
+                id="toggle-mobile-menu"
+                type="checkbox"
+              />
+              <ul
+                id="main-menu"
+              >
+                <li
+                  key="Logout"
+                >
+                  <Link
+                    replace={false}
+                    to="/"
+                  >
+                    Logout
+                  </Link>
+                </li>
+              </ul>
+            </React.Fragment>
           </nav>
         </div>
       </div>
     </div>
-  </header>,
+  </header>
   <div
     id="global-header-bar"
-  />,
-]
+  />
+</React.Fragment>
 `;

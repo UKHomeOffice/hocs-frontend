@@ -3,8 +3,11 @@ import {Redirect} from "react-router-dom";
 import axios from "axios";
 import ErrorSummary from "./error-summary.jsx";
 import Text from "./text.jsx";
-import Radio from "./radio.jsx";
+import Radio from "./radio-group.jsx";
+import Date from "./date.jsx";
+import Checkbox from "./checkbox-group.jsx";
 import Submit from "./submit.jsx";
+import TextArea from "./text-area.jsx";
 
 class Form extends Component {
 
@@ -34,12 +37,27 @@ class Form extends Component {
             case 'radio':
                 return <Radio key={i}
                               {...field.props}
-                              error={this.props.errors && this.props.errors[field.name]}
+                              error={this.props.errors && this.props.errors[field.props.name]}
                               updateState={data => this.updateFormState(data)}/>;
             case 'text':
                 return <Text key={i}
                              {...field.props}
-                             error={this.props.errors && this.props.errors[field.name]}
+                             error={this.props.errors && this.props.errors[field.props.name]}
+                             updateState={data => this.updateFormState(data)}/>;
+            case 'date':
+                return <Date key={i}
+                             {...field.props}
+                             error={this.props.errors && this.props.errors[field.props.name]}
+                             updateState={data => this.updateFormState(data)}/>;
+            case 'checkbox':
+                return <Checkbox key={i}
+                             {...field.props}
+                             error={this.props.errors && this.props.errors[field.props.name]}
+                             updateState={data => this.updateFormState(data)}/>;
+            case 'text-area':
+                return <TextArea key={i}
+                             {...field.props}
+                             error={this.props.errors && this.props.errors[field.props.name]}
                              updateState={data => this.updateFormState(data)}/>;
             case 'heading':
                 return <h2 key={i} className="heading-medium">{field.props.label}</h2>;
@@ -47,7 +65,7 @@ class Form extends Component {
     }
 
     render() {
-        const {errors, action, method, defaultActionLabel} = this.props;
+        const {errors, action, method, defaultActionLabel, children} = this.props;
         return (
             <div>
 
@@ -58,10 +76,10 @@ class Form extends Component {
                     method={method}
                     onSubmit={e => this.handleSubmit(e)}
                 >
-
                     {this.props.fields.map((field, i) => {
                         return this.renderFormComponent(field, i);
                     })}
+                    {children}
                     <Submit label={defaultActionLabel}/>
 
                 </form>

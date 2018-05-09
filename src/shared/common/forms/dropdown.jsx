@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from "react";
 
-class Text extends Component {
+class Dropdown extends Component {
 
     constructor(props) {
         super(props);
@@ -14,6 +14,7 @@ class Text extends Component {
     handleChange(e) {
         this.setState({value: e.target.value});
         this.props.updateState({[this.props.name]: e.target.value});
+        e.preventDefault();
     }
 
     render() {
@@ -23,7 +24,7 @@ class Text extends Component {
             name,
             error,
             disabled,
-            type
+            choices,
         } = this.props;
         return (
             <div className={`form-group${error ? ' form-group-error' : ''}`}>
@@ -36,24 +37,27 @@ class Text extends Component {
 
                 </label>
 
-                <input className={`form-control${error ? 'form-control-error' : ''}`}
-                       id={name}
-                       type={type}
-                       name={name}
-                       disabled={disabled}
-                       value={this.state.value}
-                       onChange={e => this.handleChange(e)}
-                />
+                <select className={`form-control ${error ? 'form-control-error' : ''}`}
+                        id={name}
+                        name={name}
+                        disabled={disabled}
+                        value={this.state.value}
+                        onChange={e => this.handleChange(e)}
+                >
+                    {choices.map(choice => {
+                        return (
+                            <option value={choice.value}>{choice.label}</option>
+                        )
+                    })}
+                </select>
             </div>
         )
     }
 }
 
-Text.defaultProps = {
-    type: 'text',
+Dropdown.defaultProps = {
     value: '',
-    label: 'TextArea field',
     disabled: false
 };
 
-export default Text;
+export default Dropdown;

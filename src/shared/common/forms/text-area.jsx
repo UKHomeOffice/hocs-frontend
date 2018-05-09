@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from "react";
 
-class Text extends Component {
+class TextArea extends Component {
 
     constructor(props) {
         super(props);
@@ -23,7 +23,7 @@ class Text extends Component {
             name,
             error,
             disabled,
-            type
+            rows
         } = this.props;
         return (
             <div className={`form-group${error ? ' form-group-error' : ''}`}>
@@ -36,24 +36,24 @@ class Text extends Component {
 
                 </label>
 
-                <input className={`form-control${error ? 'form-control-error' : ''}`}
-                       id={name}
-                       type={type}
-                       name={name}
-                       disabled={disabled}
-                       value={this.state.value}
-                       onChange={e => this.handleChange(e)}
-                />
+                <textarea className={`form-control form-control-3-4 ${error ? 'form-control-error' : ''}`}
+                          id={name}
+                          name={name}
+                          disabled={disabled}
+                          rows={rows}
+                          onChange={e => this.handleChange(e)}
+                          defaultValue={this.state.value}
+               />
             </div>
         )
     }
 }
 
-Text.defaultProps = {
+TextArea.defaultProps = {
     type: 'text',
     value: '',
-    label: 'TextArea field',
+    rows: 5,
     disabled: false
 };
 
-export default Text;
+export default TextArea;

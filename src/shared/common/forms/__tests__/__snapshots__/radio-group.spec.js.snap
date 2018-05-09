@@ -1,0 +1,387 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Form radio group component should render disabled when passed 1`] = `
+<div
+  class="form-group"
+>
+  <fieldset
+    disabled=""
+  >
+    <legend
+      id="radio-group-legend"
+    >
+      <span
+        class="form-label-bold"
+      />
+    </legend>
+    <div
+      class="multiple-choice"
+    >
+      <input
+        checked=""
+        id="radio-group-A"
+        name="radio-group"
+        type="radio"
+        value="A"
+      />
+      <label
+        for="radio-group-A"
+      >
+        isA
+      </label>
+    </div>
+    <div
+      class="multiple-choice"
+    >
+      <input
+        id="radio-group-B"
+        name="radio-group"
+        type="radio"
+        value="B"
+      />
+      <label
+        for="radio-group-B"
+      >
+        isB
+      </label>
+    </div>
+    <div
+      class="multiple-choice"
+    >
+      <input
+        id="radio-group-C"
+        name="radio-group"
+        type="radio"
+        value="C"
+      />
+      <label
+        for="radio-group-C"
+      >
+        isC
+      </label>
+    </div>
+  </fieldset>
+</div>
+`;
+
+exports[`Form radio group component should render with default props 1`] = `
+<div
+  class="form-group"
+>
+  <fieldset>
+    <legend
+      id="radio-group-legend"
+    >
+      <span
+        class="form-label-bold"
+      />
+    </legend>
+    <div
+      class="multiple-choice"
+    >
+      <input
+        checked=""
+        id="radio-group-A"
+        name="radio-group"
+        type="radio"
+        value="A"
+      />
+      <label
+        for="radio-group-A"
+      >
+        isA
+      </label>
+    </div>
+    <div
+      class="multiple-choice"
+    >
+      <input
+        id="radio-group-B"
+        name="radio-group"
+        type="radio"
+        value="B"
+      />
+      <label
+        for="radio-group-B"
+      >
+        isB
+      </label>
+    </div>
+    <div
+      class="multiple-choice"
+    >
+      <input
+        id="radio-group-C"
+        name="radio-group"
+        type="radio"
+        value="C"
+      />
+      <label
+        for="radio-group-C"
+      >
+        isC
+      </label>
+    </div>
+  </fieldset>
+</div>
+`;
+
+exports[`Form radio group component should render with error when passed 1`] = `
+<div
+  class="form-group form-group-error"
+>
+  <fieldset>
+    <legend
+      id="radio-group-legend"
+    >
+      <span
+        class="form-label-bold"
+      />
+      <span
+        class="error-message"
+      >
+        Some error message
+      </span>
+    </legend>
+    <div
+      class="multiple-choice"
+    >
+      <input
+        checked=""
+        id="radio-group-A"
+        name="radio-group"
+        type="radio"
+        value="A"
+      />
+      <label
+        for="radio-group-A"
+      >
+        isA
+      </label>
+    </div>
+    <div
+      class="multiple-choice"
+    >
+      <input
+        id="radio-group-B"
+        name="radio-group"
+        type="radio"
+        value="B"
+      />
+      <label
+        for="radio-group-B"
+      >
+        isB
+      </label>
+    </div>
+    <div
+      class="multiple-choice"
+    >
+      <input
+        id="radio-group-C"
+        name="radio-group"
+        type="radio"
+        value="C"
+      />
+      <label
+        for="radio-group-C"
+      >
+        isC
+      </label>
+    </div>
+  </fieldset>
+</div>
+`;
+
+exports[`Form radio group component should render with hint when passed 1`] = `
+<div
+  class="form-group"
+>
+  <fieldset>
+    <legend
+      id="radio-group-legend"
+    >
+      <span
+        class="form-label-bold"
+      />
+      <span
+        class="form-hint"
+      >
+        Put some text in the box below
+      </span>
+    </legend>
+    <div
+      class="multiple-choice"
+    >
+      <input
+        checked=""
+        id="radio-group-A"
+        name="radio-group"
+        type="radio"
+        value="A"
+      />
+      <label
+        for="radio-group-A"
+      >
+        isA
+      </label>
+    </div>
+    <div
+      class="multiple-choice"
+    >
+      <input
+        id="radio-group-B"
+        name="radio-group"
+        type="radio"
+        value="B"
+      />
+      <label
+        for="radio-group-B"
+      >
+        isB
+      </label>
+    </div>
+    <div
+      class="multiple-choice"
+    >
+      <input
+        id="radio-group-C"
+        name="radio-group"
+        type="radio"
+        value="C"
+      />
+      <label
+        for="radio-group-C"
+      >
+        isC
+      </label>
+    </div>
+  </fieldset>
+</div>
+`;
+
+exports[`Form radio group component should render with label when passed 1`] = `
+<div
+  class="form-group"
+>
+  <fieldset>
+    <legend
+      id="radio-group-legend"
+    >
+      <span
+        class="form-label-bold"
+      >
+        My text field
+      </span>
+    </legend>
+    <div
+      class="multiple-choice"
+    >
+      <input
+        checked=""
+        id="radio-group-A"
+        name="radio-group"
+        type="radio"
+        value="A"
+      />
+      <label
+        for="radio-group-A"
+      >
+        isA
+      </label>
+    </div>
+    <div
+      class="multiple-choice"
+    >
+      <input
+        id="radio-group-B"
+        name="radio-group"
+        type="radio"
+        value="B"
+      />
+      <label
+        for="radio-group-B"
+      >
+        isB
+      </label>
+    </div>
+    <div
+      class="multiple-choice"
+    >
+      <input
+        id="radio-group-C"
+        name="radio-group"
+        type="radio"
+        value="C"
+      />
+      <label
+        for="radio-group-C"
+      >
+        isC
+      </label>
+    </div>
+  </fieldset>
+</div>
+`;
+
+exports[`Form radio group component should render with value when passed 1`] = `
+<div
+  class="form-group"
+>
+  <fieldset>
+    <legend
+      id="radio-group-legend"
+    >
+      <span
+        class="form-label-bold"
+      />
+    </legend>
+    <div
+      class="multiple-choice"
+    >
+      <input
+        checked=""
+        id="radio-group-A"
+        name="radio-group"
+        type="radio"
+        value="A"
+      />
+      <label
+        for="radio-group-A"
+      >
+        isA
+      </label>
+    </div>
+    <div
+      class="multiple-choice"
+    >
+      <input
+        id="radio-group-B"
+        name="radio-group"
+        type="radio"
+        value="B"
+      />
+      <label
+        for="radio-group-B"
+      >
+        isB
+      </label>
+    </div>
+    <div
+      class="multiple-choice"
+    >
+      <input
+        id="radio-group-C"
+        name="radio-group"
+        type="radio"
+        value="C"
+      />
+      <label
+        for="radio-group-C"
+      >
+        isC
+      </label>
+    </div>
+  </fieldset>
+</div>
+`;

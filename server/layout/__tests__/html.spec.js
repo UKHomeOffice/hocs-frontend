@@ -29,7 +29,7 @@ describe('HTML module', () => {
     });
     it('should not contain the react bundle js when clientside is set to false', () => {
         const configuration = {
-            clientside: false
+            clientSide: false
         };
         const markup = html.render(configuration);
         expect(markup).toBeDefined();

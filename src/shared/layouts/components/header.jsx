@@ -25,8 +25,7 @@ class Header extends Component {
             logoLinkTitle,
             propositionHeader,
             propositionHeaderLink,         
-            menu,
-            userName
+            menu
         } = this.props;
 
         return (

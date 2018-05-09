@@ -1,19 +1,16 @@
-[
-  {
-    "component": "heading",
-    "props": {
-      "label": "Case types"
-    }
-  },
+{
+  "submit": "CREATE",
+  "fields":[
   {
     "component": "radio",
     "validation": ["required"],
     "props": {
       "name": "case-type",
+      "label": "Case type",
       "className": "inline",
       "choices": [
-        {"label": "UKVI", "value": "UKVI"}
+        {"label": "Test", "value": "TEST"}
       ]
     }
   }
-]
+]}

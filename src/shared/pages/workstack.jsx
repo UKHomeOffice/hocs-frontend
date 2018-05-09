@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import Form from "../common/forms/form.jsx";
-import formConfiguration from "../forms/case-type.json";
+import Forms from "../forms/index";
 
 class WorkstackPage extends Component {
 
@@ -21,8 +21,8 @@ class WorkstackPage extends Component {
                         {subTitle && <span className="heading-secondary">{subTitle}</span>}
                     </h1>
                     <Form
-                        action="/api/case/create"
-                        fields={formConfiguration}
+                        action={`/api/case/${Forms.caseType.submit}`}
+                        fields={Forms.caseType.fields}
                         defaultActionLabel="Create"
                     />
                 </div>

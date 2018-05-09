@@ -1,23 +1,26 @@
 import React, {Component, Fragment} from "react";
 
-class Radio extends Component {
+class Checkbox extends Component {
 
     constructor(props) {
         super(props);
-        const value = this.props.value || this.props.choices[0].value;
-        this.state = {value: value}
+        this.state = {value: new Set(this.props.value)};
     }
 
+
     componentDidMount() {
-        this.props.updateState({[this.props.name]: this.state.value});
+        this.props.updateState({[this.props.name]: Array.from(this.state.value)});
     }
 
     handleChange(e) {
-        this.setState({value: e.target.value});
-    }
-
-    handleClick(e) {
-        this.props.updateState({[this.props.name]: e.target.value});
+        const selection = this.state.value;
+        if(selection.has(e.target.value)) {
+            selection.delete(e.target.value);
+        } else {
+            selection.add(e.target.value);
+        }
+        this.setState({value: selection});
+        this.props.updateState({[this.props.name]: Array.from(this.state.value)});
     }
 
     render() {
@@ -49,12 +52,10 @@ class Radio extends Component {
                                        type={type}
                                        name={name}
                                        value={choice.value}
-                                       checked={this.state.value ?
-                                           this.state.value === choice.value :
-                                           i === 0
+                                       checked={
+                                           this.state[`${name}-${choice.value}`]
                                        }
                                        onChange={e => this.handleChange(e)}
-                                       onClick={e => this.handleClick(e)}
                                 />
                                 <label htmlFor={`${name}-${choice.value}`}>{choice.label}</label>
                             </div>
@@ -68,10 +69,11 @@ class Radio extends Component {
     }
 }
 
-Radio.defaultProps = {
-    type: 'radio',
+Checkbox.defaultProps = {
+    type: 'checkbox',
     choices: [],
+    value: [],
     disabled: false
 };
 
-export default Radio;
+export default Checkbox;

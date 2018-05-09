@@ -10,7 +10,7 @@ const routes = [
         title: 'Workstack'
     },
     {
-        path: '/case/create/',
+        path: '/case/:caseId/create/',
         exact: true,
         component: CreatePage,
         title: 'Create case'

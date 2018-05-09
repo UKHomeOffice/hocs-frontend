@@ -12,7 +12,7 @@ class Submit extends Component {
       <Fragment>
         <input
           className={`button${className ? ' ' + className : ''}`}
-          disabled={disabled && "true"}
+          disabled={disabled}
           type="submit"
           value={label}
         />

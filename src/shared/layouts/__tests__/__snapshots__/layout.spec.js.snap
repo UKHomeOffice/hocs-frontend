@@ -55,3 +55,34 @@ exports[`Page layout component should render with default props 1`] = `
   />
 </React.Fragment>
 `;
+
+exports[`Page layout component should render with footer when set 1`] = `
+<React.Fragment>
+  <Header
+    logoLinkTitle=""
+    menu={
+      Array [
+        Object {
+          "label": "Logout",
+          "target": "/",
+        },
+      ]
+    }
+    propositionHeader="Service Name"
+    propositionHeaderLink="/"
+    service="GOV.UK"
+    serviceLink="https://www.gov.uk"
+  />
+  <Body
+    phaseBanner={
+      Object {
+        "isVisible": false,
+      }
+    }
+  />
+  <Footer
+    isVisible={true}
+    links={Array []}
+  />
+</React.Fragment>
+`;
