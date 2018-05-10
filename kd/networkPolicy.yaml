@@ -29,11 +29,11 @@ spec:
       port: 53
   - to:
     - ipBlock:
-       cidr: 52.56.89.215
+       cidr: 52.56.89.215/32
     - ipBlock:
-       cidr: 35.177.113.133
+       cidr: 35.177.113.133/32
     - ipBlock:
-       cidr: 35.176.234.249
+       cidr: 35.176.234.249/32
     ports:
     - protocol: UDP
       port: 443
