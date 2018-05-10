@@ -19,21 +19,4 @@ spec:
     ports:
     - port: 10443
       protocol: TCP
-  egress:
-  - to:
-    - namespaceSelector:
-        matchLabels:
-          name: kube-system
-    ports:
-    - protocol: UDP
-      port: 53
-  - to:
-    - ipBlock:
-       cidr: 52.56.89.215/32
-    - ipBlock:
-       cidr: 35.177.113.133/32
-    - ipBlock:
-       cidr: 35.176.234.249/32
-    ports:
-    - protocol: UDP
-      port: 443
+  egress: {}
