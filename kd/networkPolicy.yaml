@@ -2,9 +2,38 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: allow-all
+  name: allow-frontend-ingress
   namespace: {{.KUBE_NAMESPACE}}
 spec:
-  podSelector: {}
+  podSelector:
+    matchLabels:
+      name: hocs-frontend
+  policyTypes:
+  - Ingress
+  - Egress
   ingress:
-    - {}
+  - from:
+    - namespaceSelector:
+      matchLabels:
+        name: ingress-external
+    ports:
+    - port: 10443
+      protocol: TCP
+  egress:
+  - to:
+    - namespaceSelector:
+      matchLabels:
+        name: kube-system
+    ports:
+    - protocol: UDP
+      port: 53
+  - to:
+    - ipBlock:
+       cidr: 52.56.89.215
+    - ipBlock:
+       cidr: 35.177.113.133
+    - ipBlock:
+       cidr: 35.176.234.249
+    ports:
+    - protocol: UDP
+      port: 443

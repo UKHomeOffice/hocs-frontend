@@ -1,0 +1,24 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    ingress.kubernetes.io/secure-backends: "true"
+    kubernetes.io/ingress.class: nginx-external
+    stable.k8s.psg.io/kcm.provider: http
+  labels:
+    stable.k8s.psg.io/kcm.class: default
+  name: hocs-frontend
+spec:
+  rules:
+  - host: {{.DOMAIN_NAME}}
+    http:
+      paths:
+      - backend:
+          serviceName: hocs-frontend
+          servicePort: 443
+        path: /
+  tls:
+  - hosts:
+    - {{.DOMAIN_NAME}}
+    secretName: hocs-frontend-external-tls

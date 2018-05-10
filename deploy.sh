@@ -25,9 +25,26 @@ if [[ -z ${KUBE_TOKEN} ]] ; then
     exit -1
 fi
 
+if [ "${ENVIRONMENT}" == "prod" ] ; then
+    export DNS_PREFIX=
+    export KC_REALM=hocs
+else
+    export DNS_PREFIX=${ENVIRONMENT}.notprod.
+    export KC_REALM=hocs-notprod
+fi
+
+export DOMAIN_NAME=frontend.${DNS_PREFIX}cs.homeoffice.gov.uk
+
+echo
+echo "Deploying hocs-frontend to ${ENVIRONMENT}"
+echo "Keycloak realm: ${KC_REALM}"
+echo "domain name: ${DOMAIN_NAME}"
+echo
+
 cd kd
 
 kd --insecure-skip-tls-verify \
     -f networkPolicy.yaml \
+    -f ingress.yaml \
     -f deployment.yaml \
     -f service.yaml
