@@ -121,10 +121,6 @@ spec:
         ports:
           - name: keycloak-http
             containerPort: 8081
-        volumeMounts:
-        - name: frontend-keycloak-secret
-          mountPath: /etc/secrets
-          readOnly: true
         resources:
           limits:
             memory: 256Mi
