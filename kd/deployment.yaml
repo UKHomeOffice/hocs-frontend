@@ -152,3 +152,14 @@ spec:
         ports:
           - name: http
             containerPort: 8080
+        volumeMounts:
+          - mountPath: /certs
+            name: certs
+            readOnly: true
+      volumes:
+        - name: certs
+          emptyDir:
+            medium: "Memory"
+        - name: bundle
+          configMap:
+            name: bundle
