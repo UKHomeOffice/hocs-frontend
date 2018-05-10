@@ -79,6 +79,10 @@ spec:
             value: /certs/tls-key.pem
           - name: ADD_NGINX_SERVER_CFG
             value: 'gzip off; location = /reload { allow 127.0.0.1; deny all; content_by_lua_block { os.execute("touch /tmp/nginx-reload-triggered; /usr/local/openresty/nginx/sbin/nginx -s reload; touch /tmp/nginx-reload-complete;") } }'
+        volumeMounts:
+          - name: certs
+            mountPath: /certs
+            readOnly: true
         ports:
           - name: https
             containerPort: 10443
