@@ -10,7 +10,6 @@ spec:
       name: hocs-frontend
   policyTypes:
   - Ingress
-  - Egress
   ingress:
   - from:
     - namespaceSelector:
@@ -19,4 +18,5 @@ spec:
     ports:
     - port: 10443
       protocol: TCP
-  egress: {}
+  egress:
+    - {}
