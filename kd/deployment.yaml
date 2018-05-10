@@ -121,6 +121,10 @@ spec:
         ports:
           - name: keycloak-http
             containerPort: 8081
+        volumeMounts:
+          - mountPath: /etc/secrets
+            name: frontend-keycloak-secret
+            readOnly: true
         resources:
           limits:
             memory: 256Mi
@@ -163,3 +167,6 @@ spec:
         - name: bundle
           configMap:
             name: bundle
+        - name: frontend-keycloak-secret
+          secret:
+            secretName: frontend-keycloak-secret
