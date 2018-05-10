@@ -27,10 +27,10 @@ fi
 
 if [ "${ENVIRONMENT}" == "prod" ] ; then
     export DNS_PREFIX=
-    export KC_REALM=hocs
+    export KC_REALM=https://sso-dev.notprod.homeoffice.gov.uk/auth/realms/hocs-notprod
 else
     export DNS_PREFIX=${ENVIRONMENT}.notprod.
-    export KC_REALM=hocs-notprod
+    export KC_REALM=https://sso-dev.notprod.homeoffice.gov.uk/auth/realms/hocs-notprod
 fi
 
 export DOMAIN_NAME=frontend.${DNS_PREFIX}cs.homeoffice.gov.uk

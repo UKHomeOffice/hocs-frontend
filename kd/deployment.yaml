@@ -100,7 +100,7 @@ spec:
           cpu: 100m
         args:
           - --config=/etc/secrets/data.yml
-          - --discovery-url=https://sso.digital.homeoffice.gov.uk/auth/realms/{{.KC_REALM}}
+          - --discovery-url={{.KC_REALM}}
           - --listen=127.0.0.1:8081 # nginx
           - --enable-logging=true
           - --enable-json-logging=true
