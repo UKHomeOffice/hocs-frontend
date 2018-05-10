@@ -14,16 +14,16 @@ spec:
   ingress:
   - from:
     - namespaceSelector:
-      matchLabels:
-        name: ingress-external
+        matchLabels:
+          name: ingress-external
     ports:
     - port: 10443
       protocol: TCP
   egress:
   - to:
     - namespaceSelector:
-      matchLabels:
-        name: kube-system
+        matchLabels:
+          name: kube-system
     ports:
     - protocol: UDP
       port: 53
