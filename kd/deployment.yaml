@@ -30,11 +30,11 @@ spec:
             drop:
              - SETUID
              - SETGID
-          args:
-            - --certs=/certs
-            - --domain=hocs-frontend.${KUBE_NAMESPACE}.svc.cluster.local
-            - --expiry=8760h
-            - --command=/usr/local/scripts/trigger_nginx_reload.sh
+        args:
+          - --certs=/certs
+          - --domain=hocs-frontend.${KUBE_NAMESPACE}.svc.cluster.local
+          - --expiry=8760h
+          - --command=/usr/local/scripts/trigger_nginx_reload.sh
         env:
           - name: KUBE_NAMESPACE
             valueFrom:
