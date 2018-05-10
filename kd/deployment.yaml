@@ -140,7 +140,7 @@ spec:
              - SETGID
         env:
           - name: PORT
-            value: 8080
+            value: '8080'
           - name: USE_CLIENTSIDE
             valueFrom:
               configMapKeyRef:
