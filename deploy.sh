@@ -44,7 +44,6 @@ echo
 cd kd
 
 kd --insecure-skip-tls-verify \
-    -f networkPolicy.yaml \
     -f ingress.yaml \
     -f deployment.yaml \
     -f service.yaml
