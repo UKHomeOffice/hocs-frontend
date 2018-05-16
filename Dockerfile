@@ -1,4 +1,4 @@
-FROM quay.io/ukhomeofficedigital/nodejs-base:v8.9.4
+FROM quay.io/ukhomeofficedigital/nodejs-base:v8
 
 WORKDIR /tmp
 COPY . /tmp
