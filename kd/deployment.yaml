@@ -101,7 +101,7 @@ spec:
         args:
           - --config=/etc/secrets/data.yml
           - --discovery-url={{.KC_REALM}}
-          - --openid-provider-proxy=http://hocs-outbound-proxy.${KUBE_NAMESPACE}.svc.cluster.local:31290
+          - --openid-provider-proxy=http://hocs-outbound-proxy.{{.KUBE_NAMESPACE}}.svc.cluster.local:31290
           - --listen=127.0.0.1:8081 # nginx
           - --enable-logging=true
           - --enable-json-logging=true
