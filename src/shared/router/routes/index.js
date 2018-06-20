@@ -1,18 +1,25 @@
-import WorkstackPage from "../pages/workstack.jsx";
-import CreatePage from "../pages/create.jsx";
-import Error from "../layouts/error.jsx";
+import ActionPage from "../../pages/action.jsx";
+import CasePage from "../../pages/case.jsx";
+import Error from "../../layouts/error.jsx";
+import Test from "../../pages/test.jsx";
 
 const routes = [
     {
-        path: '/',
+        path: '/action/:action',
         exact: true,
-        component: WorkstackPage,
-        title: 'Workstack'
+        component: ActionPage,
+        title: 'Create case'
     },
     {
         path: '/case/:caseId/create/',
         exact: true,
-        component: CreatePage,
+        component: CasePage,
+        title: 'Create case'
+    },
+    {
+        path: '/test',
+        exact: true,
+        component: Test,
         title: 'Create case'
     },
     {

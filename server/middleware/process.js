@@ -1,4 +1,4 @@
-const {default: forms} = require('../../build/server/forms.server');
+const forms = require('../forms/index');
 
 const processDate = ({year, month, day}) => {
     if (year && month && day) {

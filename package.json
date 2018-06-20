@@ -7,8 +7,8 @@
     "start": "node index.js",
     "build-dev": "webpack --mode=development --env.NODE_ENV=development",
     "build-prod": "webpack --mode=production --env.NODE_ENV=production",
-    "start-dev": "webpack -w --mode=development --env.NODE_ENV=development & nodemon index.js",
-    "start-prod": "webpack -w --mode=production --env.NODE_ENV=production & nodemon index.js",
+    "start-dev": "webpack -w --mode=development --env.NODE_ENV=development & nodemon index.js --env.NODE_ENV=development",
+    "start-prod": "webpack -w --mode=production --env.NODE_ENV=production & nodemon index.js --env.NODE_ENV=production",
     "test": "jest --coverage"
   },
   "jest": {
@@ -25,6 +25,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@lennym/redis-session": "^1.0.4",
     "axios": "^0.18.0",
     "body-parser": "^1.18.2",
     "express": "^4.16.3",
@@ -32,10 +33,11 @@
     "govuk-react-components": "^0.6.0",
     "govuk_frontend_toolkit": "^7.4.2",
     "govuk_template_mustache": "^0.23.2",
-    "react": "^16.3.2",
-    "react-dom": "^16.3.2",
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0",
     "react-router-dom": "^4.2.2",
-    "serialize-javascript": "^1.5.0"
+    "serialize-javascript": "^1.5.0",
+    "winston": "^2.4.2"
   },
   "devDependencies": {
     "autoprefixer": "^8.3.0",

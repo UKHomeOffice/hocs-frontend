@@ -9,7 +9,7 @@ const actions = {
     submit: (data) => {
         // Call case service
         return {
-            callbackUrl: '/'
+            callbackUrl: '/action/create'
         }
     }
 };

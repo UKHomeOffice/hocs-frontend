@@ -39,3 +39,20 @@ html {
 #global-header.with-proposition .header-wrapper .header-global {
   width: auto;
 }
+
+.button-secondary {
+  background-color: $govuk-blue;
+  display: block;
+  margin-bottom: 15px;
+  &:hover, &:focus {
+  background-color: $govuk-blue;
+}
+}
+
+.button-secondary-action {
+  background-color: $govuk-blue;
+  margin-right: 15px;
+  &:hover, &:focus {
+    background-color: $govuk-blue;
+  }
+}

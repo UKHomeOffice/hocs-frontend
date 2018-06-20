@@ -1,5 +1,4 @@
-import React, {Component} from "react";
-import {Redirect} from "react-router-dom";
+import React, {Component, Fragment} from "react";
 import axios from "axios";
 import ErrorSummary from "./error-summary.jsx";
 import Text from "./text.jsx";
@@ -8,27 +7,32 @@ import Date from "./date.jsx";
 import Checkbox from "./checkbox-group.jsx";
 import Submit from "./submit.jsx";
 import TextArea from "./text-area.jsx";
+import Button from "./button.jsx";
+import {ApplicationConsumer} from "../../contexts/application.jsx";
+import {redirect, updateFormData} from "../../contexts/actions/index.jsx";
 
 class Form extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {};
     }
 
     updateFormState(data) {
         this.setState(data);
+        this.props.dispatch(updateFormData(data));
     }
 
     handleSubmit(e) {
         e.preventDefault();
-        axios.post(this.props.action, {...this.state})
+        const url = '/api' + this.props.action;
+        axios.post(url, {...this.state})
             .then(res => {
-                this.setState({redirect: res.data.redirect});
+                this.props.dispatch(redirect(res.data.redirect));
             })
             .catch(err => {
                 console.error(err);
-                this.setState({redirect: '/error'});
+                this.props.dispatch(redirect('/error'));
             });
     };
 
@@ -51,49 +55,52 @@ class Form extends Component {
                              updateState={data => this.updateFormState(data)}/>;
             case 'checkbox':
                 return <Checkbox key={i}
-                             {...field.props}
-                             error={this.props.errors && this.props.errors[field.props.name]}
-                             updateState={data => this.updateFormState(data)}/>;
+                                 {...field.props}
+                                 error={this.props.errors && this.props.errors[field.props.name]}
+                                 updateState={data => this.updateFormState(data)}/>;
             case 'text-area':
                 return <TextArea key={i}
-                             {...field.props}
-                             error={this.props.errors && this.props.errors[field.props.name]}
-                             updateState={data => this.updateFormState(data)}/>;
+                                 {...field.props}
+                                 error={this.props.errors && this.props.errors[field.props.name]}
+                                 updateState={data => this.updateFormState(data)}/>;
+            case 'button':
+                return <Button key={i}
+                               {...field.props}/>;
             case 'heading':
                 return <h2 key={i} className="heading-medium">{field.props.label}</h2>;
         }
     }
 
     render() {
-        const {errors, action, method, defaultActionLabel, children} = this.props;
+        const {errors, method, defaultActionLabel, children, fields, action} = this.props;
         return (
-            <div>
-
+            <Fragment>
                 {errors && <ErrorSummary errors={errors}/>}
-
                 <form
-                    action={`${action}?noScript=true`}
+                    action={'/api' + action + '?noScript=true'}
                     method={method}
                     onSubmit={e => this.handleSubmit(e)}
                 >
-                    {this.props.fields.map((field, i) => {
+                    {fields.map((field, i) => {
                         return this.renderFormComponent(field, i);
                     })}
                     {children}
                     <Submit label={defaultActionLabel}/>
-
                 </form>
-                {this.state.redirect && <Redirect to={this.state.redirect} push/>}
-            </div>
-
-        )
+            </Fragment>
+        );
     }
 }
 
 Form.defaultProps = {
     method: 'POST',
-    fields: [],
     defaultActionLabel: 'Submit'
 };
 
-export default Form;
+const WrappedForm = props => (
+    <ApplicationConsumer>
+        {({dispatch, redirect}) => <Form {...props} dispatch={dispatch} redirect={redirect}/>}
+    </ApplicationConsumer>
+);
+
+export default WrappedForm;

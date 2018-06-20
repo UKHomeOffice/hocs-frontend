@@ -3,12 +3,17 @@ const {StaticRouter} = require('react-router-dom');
 const {renderToString} = require('react-dom/server');
 const React = require('react');
 const {default: App} = require('../../build/server/app.server');
+const logger = require('../libs/logger');
 
 const render = (req, res, next) => {
-    console.log('RENDER MIDDLEWARE');
+    logger.info('RENDER MIDDLEWARE');
 
-    const props = require('../config').forContext('case');
-    const config = require('../config').forContext('render');
+    const renderConfig = require('../config').forContext('render');
+
+    const config = {
+        layout: require('../config').forContext('case'),
+        form:  res.locals.form
+    };
 
     const context = {
         status: 200
@@ -16,7 +21,7 @@ const render = (req, res, next) => {
 
     const markup = renderToString(
         React.createElement(StaticRouter, {location: req.originalUrl, context},
-            React.createElement(App, {config: props})
+            React.createElement(App, {config})
         )
     );
 
@@ -25,8 +30,8 @@ const render = (req, res, next) => {
     } else {
         res.status(context.status || 200);
         res.rendered = html.render({
-            ...config,
-            props,
+            ...renderConfig,
+            props: config,
             markup
         });
     }
