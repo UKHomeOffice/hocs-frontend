@@ -60,7 +60,7 @@ const render = ({
                     </div>
                         
                     <div id="app">${markup}</div>
-                    ${clientSide ? `<script src="${assetPath}/js/${assets.js[react]}" defer></script> `: ''}
+                    ${clientSide ? `<script src="${assetPath}/js/${assets.js[react]}" defer></script>` : ''}
                     
                     <div id="global-app-error" className="app-error hidden"></div>
                 

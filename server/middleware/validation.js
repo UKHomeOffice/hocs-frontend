@@ -1,4 +1,5 @@
-const {default: forms} = require('../../build/server/forms.server');
+const logger = require('../libs/logger');
+const forms = require('../forms/index');
 
 const validationErrors = {
     required: 'is required'
@@ -15,7 +16,7 @@ const validators = {
 };
 
 const validation = (req, res, next) => {
-        console.log('VALIDATION MIDDLEWARE');
+        logger.info('VALIDATION MIDDLEWARE');
         const data = req.form.data;
         req.form.errors = forms.create.fields.reduce((result, field) => {
             const name = field.props.name;
@@ -27,7 +28,7 @@ const validation = (req, res, next) => {
                         result[field.props.name] = `${field.props.label} ${validationError}`;
                     }
                 } catch(e) {
-                    console.warn(`WARNING: Unsupported validator passed - ${validator}`);
+                    logger.warn(`Unsupported validator passed - ${validator}`);
                 }
 
             });

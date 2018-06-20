@@ -1,8 +1,8 @@
-import React, { Component, Fragment } from 'react';
+import React, {Component, Fragment} from "react";
 
 class Error extends Component {
     componentWillMount() {
-        const { staticContext } = this.props;
+        const {staticContext} = this.props;
         if (staticContext) {
             staticContext.status = this.props.errorCode;
         }
@@ -14,13 +14,13 @@ class Error extends Component {
             error,
             errorCode,
             stack,
-            location: { pathname }
+            location: {pathname}
         } = this.props;
 
         return (
             <div className="grid-row">
                 <div className="column-full">
-                    <h1 className="heading-xlarge">                        
+                    <h1 className="heading-xlarge">
                         {`${error}`}
                         <span className="heading-secondary">{title}</span>
                     </h1>

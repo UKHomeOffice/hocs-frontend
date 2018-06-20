@@ -1,8 +1,5 @@
 const config = {
     applications: {
-        server: {
-            port: process.env.PORT || 8080
-        },
         render: {
             clientSide: process.env.USE_CLIENTSIDE || true,
             js: ['vendor'],

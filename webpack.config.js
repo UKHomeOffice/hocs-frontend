@@ -130,8 +130,7 @@ const browserConfig = env => {
 
 const serverConfig = {
     entry: {
-        app: './src/shared/index.jsx',
-        forms: './src/shared/forms/index.js'
+        app: './src/shared/index.jsx'
     },
     output: {
         path: __dirname,

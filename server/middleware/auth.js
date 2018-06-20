@@ -1,5 +1,7 @@
+const logger = require('../libs/logger');
+
 const authentication = (req, res, next) => {
-    console.log('AUTH MIDDLEWARE');
+    logger.info('AUTH MIDDLEWARE');
     next();
 };
 

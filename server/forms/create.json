@@ -1,5 +1,5 @@
 {
-  "submit": "SUBMIT",
+  "action": "SUBMIT",
   "fields": [
     {
       "component": "text",
@@ -85,7 +85,7 @@
     {
       "component": "radio",
       "validation": [
-        "someUnsupportedValidator"
+        "required"
       ],
       "props": {
         "name": "case-type",
