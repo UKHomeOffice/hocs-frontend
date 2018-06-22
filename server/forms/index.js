@@ -1,9 +1,9 @@
-const caseType = require('./document-upload.json');
-const caseCreate = require('./create.json');
+const caseCreate = require('./case-create.json');
+const testForm = require('./case-test.json');
 
 const forms = {
-    'caseType': caseType,
-    'create': caseCreate
+    caseCreate: caseCreate,
+    testForm: testForm
 };
 
 module.exports = forms;

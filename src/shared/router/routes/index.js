@@ -1,9 +1,15 @@
 import ActionPage from "../../pages/action.jsx";
 import CasePage from "../../pages/case.jsx";
 import Error from "../../layouts/error.jsx";
-import Test from "../../pages/test.jsx";
+import MainPage from "../../pages/main.jsx";
 
 const routes = [
+    {
+        path: '/',
+        exact: true,
+        component: MainPage,
+        title: 'Main'
+    },
     {
         path: '/action/:action',
         exact: true,
@@ -17,10 +23,11 @@ const routes = [
         title: 'Create case'
     },
     {
-        path: '/test',
-        exact: true,
-        component: Test,
-        title: 'Create case'
+        path: '/unauthorised',
+        component: Error,
+        title: 'You do not have the required permission to view this resource',
+        error: 'Access denied',
+        errorCode: 403
     },
     {
         path: '/error',

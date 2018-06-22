@@ -12,4 +12,14 @@ class App extends Component {
     }
 }
 
+App.defaultProps = {
+    config: {
+        layout: {
+            header: {},
+            body: {},
+            footer: {}
+        }
+    }
+}
+
 export default App;

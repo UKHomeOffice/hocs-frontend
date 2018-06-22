@@ -19,12 +19,14 @@ class Action extends Component {
         const url = '/api' + this.props.match.url;
         axios.get(url)
             .then(res => {
-                console.log('FORM RECEIVED');
                 this.props.dispatch(updateForm(res.data));
             })
             .catch(err => {
-                console.error(err);
-                this.props.dispatch(redirect('/error'));
+                console.error(err.response.status);
+                if (err.response.status === 403) {
+                    return this.props.dispatch(redirect('/unauthorised'));
+                }
+                return this.props.dispatch(redirect('/error'));
             });
     }
 
@@ -48,8 +50,9 @@ class Action extends Component {
                     />}
                 </div>
             </div>
-        )
+        );
     }
+
 }
 
 const WrappedPage = props => (

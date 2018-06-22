@@ -1,4 +1,4 @@
-import process from "../process";
+import processMiddleware from "../process";
 
 describe('Process middleware', () => {
     it('should process form data when passed', () => {
@@ -9,7 +9,7 @@ describe('Process middleware', () => {
         };
         const res = {};
 
-        process(req, res, () => {
+        processMiddleware(req, res, () => {
             expect(req.form).toBeDefined();
             expect(req.form.data).toBeDefined();
         });

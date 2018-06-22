@@ -1,15 +1,15 @@
 const actions = {
     create: (data) => {
-        // Call case service
+        // TODO: Post to create case
         const stage = 'create';
         return {
             callbackUrl: `/case/${data['case-type']}/${stage}`
         }
     },
     submit: (data) => {
-        // Call case service
+        // TODO: Post to persist case
         return {
-            callbackUrl: '/action/create'
+            callbackUrl: '/'
         }
     }
 };
@@ -18,7 +18,7 @@ const performAction = (action, data) => {
     try {
         return actions[action.toLowerCase()].call(this, data);
     } catch (e) {
-        throw new Error('Unable to perform action');
+        throw new Error(`Unable to perform action ${action}`);
     }
 };
 

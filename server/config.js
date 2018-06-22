@@ -5,11 +5,11 @@ const config = {
             js: ['vendor'],
             css: ['main'],
             react: 'main',
-            title: 'Home Office Correspondence System',
+            title: 'Correspondence System',
         },
         case: {
             header: {
-                service: 'Home Office Correspondence System',
+                service: 'Correspondence System',
                 serviceLink: '/',
                 logoLinkTitle: '',
                 propositionHeader: '',

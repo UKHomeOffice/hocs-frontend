@@ -17,23 +17,26 @@ const validators = {
 
 const validation = (req, res, next) => {
         logger.info('VALIDATION MIDDLEWARE');
-        const data = req.form.data;
-        req.form.errors = forms.create.fields.reduce((result, field) => {
-            const name = field.props.name;
+        const {data, schema} = req.form;
+        req.form.errors = schema.fields.reduce((result, field) => {
+            const {validation, props: {name}} = field;
             const value = data[name];
-            field.validation.map(validator => {
-                try {
-                    const validationError = validators[validator].call(this, value);
-                    if (validationError) {
-                        result[field.props.name] = `${field.props.label} ${validationError}`;
+            if (validation) {
+                validation.map(validator => {
+                    try {
+                        const validationError = validators[validator].call(this, value);
+                        if (validationError) {
+                            result[field.props.name] = `${field.props.label} ${validationError}`;
+                        }
+                    } catch(e) {
+                        logger.warn(`Unsupported validator passed (${validator}) in form`);
                     }
-                } catch(e) {
-                    logger.warn(`Unsupported validator passed - ${validator}`);
-                }
 
-            });
+                });
+            }
             return result;
         }, {});
+        logger.debug(`Validation errors: ${JSON.stringify(req.form.errors)}`);
         next();
 };
 
