@@ -1,9 +1,9 @@
-const html = require('../layout/html');
+const React = require('react');
 const {StaticRouter} = require('react-router-dom');
 const {renderToString} = require('react-dom/server');
-const React = require('react');
 const {default: App} = require('../../build/server/app.server');
 const logger = require('../libs/logger');
+const html = require('../layout/html');
 
 const render = (req, res, next) => {
     logger.info('RENDER MIDDLEWARE');

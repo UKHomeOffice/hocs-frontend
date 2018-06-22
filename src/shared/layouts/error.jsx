@@ -24,7 +24,7 @@ class Error extends Component {
                         {`${error}`}
                         <span className="heading-secondary">{title}</span>
                     </h1>
-                    {errorCode === 404 && pathname && <p className="code">{pathname}</p>}
+                    {(errorCode === 403 || errorCode === 404) && pathname && <p className="code">{pathname}</p>}
                     {stack && <p className="code overflow-scroll">{stack}</p>}
                 </div>
             </div>

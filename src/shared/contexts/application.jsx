@@ -46,6 +46,7 @@ export class ApplicationProvider extends Component {
         super(props);
         this.state = {
             ...props.config,
+            apiStatus: null,
             dispatch: action => {
                 this.setState(state => reducer(state, action));
             }

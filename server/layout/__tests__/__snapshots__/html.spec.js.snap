@@ -45,7 +45,7 @@ exports[`HTML module should default to proposition header when no title is passe
                     </div>
                         
                     <div id=\\"app\\"></div>
-                    <script src=\\"/public/js/js/main.js\\" defer></script> 
+                    <script src=\\"/public/js/js/main.js\\" defer></script>
                     
                     <div id=\\"global-app-error\\" className=\\"app-error hidden\\"></div>
                 
@@ -105,7 +105,7 @@ exports[`HTML module should include additional CSS and JS when passed 1`] = `
                     </div>
                         
                     <div id=\\"app\\"></div>
-                    <script src=\\"/public/js/js/main.js\\" defer></script> 
+                    <script src=\\"/public/js/js/main.js\\" defer></script>
                     
                     <div id=\\"global-app-error\\" className=\\"app-error hidden\\"></div>
                 
@@ -164,7 +164,7 @@ exports[`HTML module should include application props in the head when passed 1`
                     </div>
                         
                     <div id=\\"app\\"></div>
-                    <script src=\\"/public/js/js/main.js\\" defer></script> 
+                    <script src=\\"/public/js/js/main.js\\" defer></script>
                     
                     <div id=\\"global-app-error\\" className=\\"app-error hidden\\"></div>
                 
@@ -223,7 +223,7 @@ exports[`HTML module should include the appropriate react application bundle whe
                     </div>
                         
                     <div id=\\"app\\"></div>
-                    <script src=\\"/public/js/js/myBundle.js\\" defer></script> 
+                    <script src=\\"/public/js/js/myBundle.js\\" defer></script>
                     
                     <div id=\\"global-app-error\\" className=\\"app-error hidden\\"></div>
                 
@@ -282,7 +282,7 @@ exports[`HTML module should include the correct asset path when passed 1`] = `
                     </div>
                         
                     <div id=\\"app\\"></div>
-                    <script src=\\"some/public/folder/that/contains/my/assets/js/js/main.js\\" defer></script> 
+                    <script src=\\"some/public/folder/that/contains/my/assets/js/js/main.js\\" defer></script>
                     
                     <div id=\\"global-app-error\\" className=\\"app-error hidden\\"></div>
                 
@@ -341,7 +341,7 @@ exports[`HTML module should include the server rendered markup when passed 1`] =
                     </div>
                         
                     <div id=\\"app\\"><--- REACT APPLICATION ---></div>
-                    <script src=\\"/public/js/js/main.js\\" defer></script> 
+                    <script src=\\"/public/js/js/main.js\\" defer></script>
                     
                     <div id=\\"global-app-error\\" className=\\"app-error hidden\\"></div>
                 
@@ -459,7 +459,7 @@ exports[`HTML module should return the default html when no additional configura
                     </div>
                         
                     <div id=\\"app\\"></div>
-                    <script src=\\"/public/js/js/main.js\\" defer></script> 
+                    <script src=\\"/public/js/js/main.js\\" defer></script>
                     
                     <div id=\\"global-app-error\\" className=\\"app-error hidden\\"></div>
                 

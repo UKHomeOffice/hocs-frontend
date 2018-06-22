@@ -9,14 +9,14 @@ describe('Action model', () => {
         expect(response).toBeDefined();
         expect(response).toHaveProperty('callbackUrl', '/');
     });
-    it('should support the CREATE action type', () => {
+    it('should support the "create" action type', () => {
         const action = 'create';
         const data = {};
         const response = actionModel.performAction(action, data);
 
         expect(response).toBeDefined();
     });
-    it('should support the SUBMIT action type', () => {
+    it('should support the "submit" action type', () => {
         const action = 'submit';
         const data = {};
         const response = actionModel.performAction(action, data);

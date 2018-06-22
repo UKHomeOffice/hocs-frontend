@@ -9,7 +9,7 @@ import Submit from "./submit.jsx";
 import TextArea from "./text-area.jsx";
 import Button from "./button.jsx";
 import {ApplicationConsumer} from "../../contexts/application.jsx";
-import {redirect, updateFormData} from "../../contexts/actions/index.jsx";
+import {redirect, updateFormData, updateForm} from "../../contexts/actions/index.jsx";
 
 class Form extends Component {
 
@@ -28,6 +28,7 @@ class Form extends Component {
         const url = '/api' + this.props.action;
         axios.post(url, {...this.state})
             .then(res => {
+                this.props.dispatch(updateForm(null));
                 this.props.dispatch(redirect(res.data.redirect));
             })
             .catch(err => {

@@ -10,7 +10,7 @@ COPY . /app
 RUN cp -a /tmp/build /app/build
 RUN npm  --loglevel warn install --production --no-optional
 
-USER nodejs
+USER 999
 
 EXPOSE 8080
 

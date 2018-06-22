@@ -1,4 +1,5 @@
 const forms = require('../forms/index');
+const logger = require('../libs/logger');
 
 const processDate = ({year, month, day}) => {
     if (year && month && day) {
@@ -23,26 +24,26 @@ const processCheckbox = (name, value, choices) => {
 };
 
 const process = (req, res, next) => {
+    logger.info('PROCESS MIDDLEWARE');
     const data = req.body;
-    req.form = {};
-    req.form.data = forms.create.fields.reduce((processed, field) => {
+    req.form.data = req.form.schema.fields.reduce((reducer, field) => {
         const {name} = field.props;
         const component = field.component;
         switch(component) {
             case 'date':
-                processed[name] = processDate({
+                reducer[name] = processDate({
                     year: data[`${name}-year`],
                     month: data[`${name}-month`],
                     day: data[`${name}-day`]
                 });
                 break;
             case 'checkbox':
-                processed = Object.assign({}, processed, processCheckbox(name, data[name], field.props.choices));
+                reducer = Object.assign({}, reducer, processCheckbox(name, data[name], field.props.choices));
                 break;
             default:
-                processed[name] = data[name] || null;
+                reducer[name] = data[name] || null;
         }
-        return processed;
+        return reducer;
     }, {});
     next();
 };
