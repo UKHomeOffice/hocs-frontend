@@ -4,8 +4,9 @@ class Radio extends Component {
 
     constructor(props) {
         super(props);
-        const value = this.props.value || this.props.choices[0].value;
-        this.state = {value: value}
+        const fallbackValue = this.props.choices[0] ? this.props.choices[0].value : null;
+        const value = this.props.value || fallbackValue;
+        this.state = {value}
     }
 
     componentDidMount() {
@@ -39,7 +40,7 @@ class Radio extends Component {
                         {error && <span className="error-message">{error}</span>}
                     </legend>
 
-                    {choices.map((choice, i) => {
+                    {choices && choices.map((choice, i) => {
                         return (
                             <div key={i} className="multiple-choice">
                                 <input id={`${name}-${choice.value}`}
@@ -53,6 +54,7 @@ class Radio extends Component {
                             </div>
                         );
                     })}
+                    {choices.length === 0 && <Fragment>No options available</Fragment>}
 
                 </fieldset>
 
