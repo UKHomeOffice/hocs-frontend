@@ -30,7 +30,6 @@
     "body-parser": "^1.18.2",
     "express": "^4.16.3",
     "govuk-elements-sass": "^3.1.2",
-    "govuk-react-components": "^0.6.0",
     "govuk_frontend_toolkit": "^7.4.2",
     "govuk_template_mustache": "^0.23.2",
     "react": "^16.4.0",
