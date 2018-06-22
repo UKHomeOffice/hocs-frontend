@@ -1,11 +1,11 @@
-const forms = require('../forms/index');
+const formRepository = require('../forms/index');
 const listService = require('./list');
 
 const actions = {
     action: ({action, user}) => {
         switch(action) {
             case 'create':
-                const form = forms.caseCreate;
+                const form = formRepository.getForm('caseCreate');
                 form.fields = form.fields.map(field => {
                     const choices = field.props.choices;
                     if (choices && typeof choices === 'string') {
@@ -18,7 +18,7 @@ const actions = {
     },
     workflow: ({type, action}) => {
         // TODO: call workflow service for form
-        return forms.testForm;
+        return formRepository.getForm('testForm');
     }
 };
 
