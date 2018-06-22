@@ -6,4 +6,6 @@ const forms = {
     testForm: testForm
 };
 
-module.exports = forms;
+module.exports = {
+    getForm: (form) => JSON.parse(JSON.stringify(forms[form]))
+};

@@ -14,8 +14,6 @@ const authentication = (req, res, next) => {
                 email: req.get('X-Auth-Email')
             });
         }
-        logger.info(`User role header: ${req.get('X-Auth-Roles')}`);
-        logger.info(`User roles: ${JSON.stringify(req.user.roles)}`);
         return next();
     }
     if (req.originalUrl !== '/unauthorised') {
