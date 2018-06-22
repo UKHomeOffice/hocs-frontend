@@ -143,6 +143,8 @@ spec:
         env:
           - name: PORT
             value: '8080'
+          - name: NODE_ENV
+            value: 'production'
           - name: USE_CLIENTSIDE
             valueFrom:
               configMapKeyRef:
