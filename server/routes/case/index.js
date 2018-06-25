@@ -3,14 +3,19 @@ const logger = require('../../libs/logger');
 const formService = require('../../services/form');
 const actionService = require('../../services/action');
 const processMiddleware = require('../../middleware/process');
+const fileMiddleware = require('../../middleware/file');
 const validationMiddleware = require('../../middleware/validation');
+const renderMiddleware = require('../../middleware/render');
 
 router.use('/:type/:action', (req, res, next) => {
     const {type, action} = req.params;
+    const {noScript = false} = req.query;
     req.form = {
         data: {},
-        schema: formService.getForm('workflow', {type, action})
+        schema: formService.getForm('workflow', {type, action}),
+        errors: {}
     };
+    res.noscript = noScript;
     next();
 });
 
@@ -23,24 +28,30 @@ router.get('/:type/:action', (req, res) => {
     }
 });
 
-router.use('/:type/:stage', processMiddleware);
+router.post('/:type/:action', fileMiddleware.any(), processMiddleware, validationMiddleware);
 
-router.use('/:type/:stage', validationMiddleware);
-
-router.post('/:type/:stage', (req, res) => {
+router.post('/:type/:action', (req, res, next) => {
 
     const {noScript = false} = req.query;
 
-    const response = actionService.performAction('submit', req.form.data);
-
-    res.status(200);
-
-    if (noScript) {
-        res.redirect(response.callbackUrl);
-        return;
+    if(Object.keys(req.form.errors).length === 0) {
+        const response = actionService.performAction('submit', req.form.data);
+        res.status(200);
+        if (noScript) {
+            return res.redirect(response.callbackUrl);
+        }
+        return res.send({redirect: response.callbackUrl, response: {}});
     }
+    next();
+});
 
-    res.send({redirect: response.callbackUrl, response: {}});
+router.post('/:type/:action', renderMiddleware);
+
+router.post('/:type/:action', (req, res) => {
+    if (res.noscript) {
+        return res.send(res.rendered);
+    }
+    res.send({errors: req.form.errors});
 });
 
 module.exports = router;

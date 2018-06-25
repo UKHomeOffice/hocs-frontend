@@ -7,9 +7,10 @@ import Date from "./date.jsx";
 import Checkbox from "./checkbox-group.jsx";
 import Submit from "./submit.jsx";
 import TextArea from "./text-area.jsx";
+import AddDocument from "./composite/document-add.jsx";
 import Button from "./button.jsx";
 import {ApplicationConsumer} from "../../contexts/application.jsx";
-import {redirect, updateFormData, updateForm} from "../../contexts/actions/index.jsx";
+import {redirect, updateForm, updateFormData, updateFormErrors} from "../../contexts/actions/index.jsx";
 
 class Form extends Component {
 
@@ -26,10 +27,16 @@ class Form extends Component {
     handleSubmit(e) {
         e.preventDefault();
         const url = '/api' + this.props.action;
-        axios.post(url, {...this.state})
+        const formData = new FormData();
+        Object.keys(this.state).map(e => formData.append(e, this.state[e]));
+        axios.post(url, formData, {headers: {'Content-Type': 'multipart/form-data'}})
             .then(res => {
-                this.props.dispatch(updateForm(null));
-                this.props.dispatch(redirect(res.data.redirect));
+                if(res.data.errors) {
+                    this.props.dispatch(updateFormErrors(res.data.errors));
+                } else {
+                    this.props.dispatch(updateForm(null));
+                    this.props.dispatch(redirect(res.data.redirect));
+                }
             })
             .catch(err => {
                 console.error(err);
@@ -67,6 +74,11 @@ class Form extends Component {
             case 'button':
                 return <Button key={i}
                                {...field.props}/>;
+            case 'addDocument':
+                return <AddDocument key={i}
+                                    {...field.props}
+                                    error={this.props.errors && this.props.errors[field.props.name]}
+                                    updateState={data => this.updateFormState(data)}/>;
             case 'heading':
                 return <h2 key={i} className="heading-medium">{field.props.label}</h2>;
         }
@@ -81,11 +93,12 @@ class Form extends Component {
                     action={'/api' + action + '?noScript=true'}
                     method={method}
                     onSubmit={e => this.handleSubmit(e)}
+                    encType="multipart/form-data"
                 >
+                    {children}
                     {fields.map((field, i) => {
                         return this.renderFormComponent(field, i);
                     })}
-                    {children}
                     <Submit label={defaultActionLabel}/>
                 </form>
             </Fragment>

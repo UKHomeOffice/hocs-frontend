@@ -41,18 +41,28 @@ html {
 }
 
 .button-secondary {
-  background-color: $govuk-blue;
+  @include button($govuk-blue);
   display: block;
   margin-bottom: 15px;
-  &:hover, &:focus {
-  background-color: $govuk-blue;
-}
 }
 
 .button-secondary-action {
-  background-color: $govuk-blue;
+  @include button($govuk-blue);
   margin-right: 15px;
-  &:hover, &:focus {
-    background-color: $govuk-blue;
-  }
+}
+
+input[type='file'] {
+}
+
+.button-file-upload {
+  display: block;
+  margin-bottom: 15px;
+}
+
+::-webkit-file-upload-button {
+  @include button($govuk-blue);
+}
+
+::-ms-browse {
+  @include button($govuk-blue);
 }
