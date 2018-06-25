@@ -1,5 +1,7 @@
 {
   "action": "CREATE",
+  "title": "Create case",
+  "defaultActionLabel": "Add document",
   "fields":[
     {
       "component": "radio",

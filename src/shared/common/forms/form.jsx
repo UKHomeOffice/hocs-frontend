@@ -27,6 +27,7 @@ class Form extends Component {
     handleSubmit(e) {
         e.preventDefault();
         const url = '/api' + this.props.action;
+        console.debug(url);
         const formData = new FormData();
         Object.keys(this.state).map(e => formData.append(e, this.state[e]));
         axios.post(url, formData, {headers: {'Content-Type': 'multipart/form-data'}})

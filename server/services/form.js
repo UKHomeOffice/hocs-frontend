@@ -30,6 +30,30 @@ const getForm = (action, options) => {
     }
 };
 
+const getFormForAction = (req, res, callback) => {
+    const {action} = req.params;
+    const {noScript = false} = req.query;
+    req.form = {
+        data: {},
+        schema: getForm('action', {action, user: req.user})
+    };
+    res.noScript = noScript;
+    callback();
+};
+
+const getFormForCase = (req, res, callback) => {
+    const {type, action} = req.params;
+    const {noScript = false} = req.query;
+    req.form = {
+        data: {},
+        schema: getForm('workflow', {type, action})
+    };
+    res.noScript = noScript;
+    callback();
+};
+
 module.exports = {
-    getForm
+    getForm,
+    getFormForAction,
+    getFormForCase
 };
