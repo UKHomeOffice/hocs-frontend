@@ -1,5 +1,5 @@
 const caseCreate = require('./case-create.json');
-const testForm = require('./case-test.json');
+const testForm = require('./document-add.json');
 
 const forms = {
     caseCreate: caseCreate,

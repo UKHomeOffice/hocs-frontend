@@ -17,11 +17,17 @@ const routes = [
         title: 'Create case'
     },
     {
-        path: '/case/:caseId/create/',
+        path: '/case/:caseId/:stage/',
         exact: true,
         component: CasePage,
         title: 'Create case'
     },
+    // {
+    //     path: '/api/case/:caseId/:stage/',
+    //     exact: true,
+    //     component: CasePage,
+    //     title: 'Create case'
+    // },
     {
         path: '/unauthorised',
         component: Error,

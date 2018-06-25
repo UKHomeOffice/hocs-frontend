@@ -1,5 +1,7 @@
 {
   "action": "CREATE",
+  "title": "Create case",
+  "defaultActionLabel": "Add document",
   "fields":[
     {
       "component": "radio",
@@ -16,7 +18,7 @@
       "component": "button",
       "props": {
         "name": "cancel",
-        "action": "CANCEL",
+        "action": "/",
         "className": "button-secondary-action",
         "label": "Cancel"
       }

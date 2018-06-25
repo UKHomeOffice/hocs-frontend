@@ -1,46 +1,33 @@
 const router = require('express').Router();
 const logger = require('../../libs/logger');
-const formService = require('../../services/form');
 const actionService = require('../../services/action');
 const processMiddleware = require('../../middleware/process');
+const fileMiddleware = require('../../middleware/file');
 const validationMiddleware = require('../../middleware/validation');
+const renderMiddleware = require('../../middleware/render');
 
-router.use('/:type/:action', (req, res, next) => {
-    const {type, action} = req.params;
-    req.form = {
-        data: {},
-        schema: formService.getForm('workflow', {type, action})
-    };
+router.post('/:type/:action', fileMiddleware.any(), processMiddleware, validationMiddleware);
+
+router.post('/:type/:action', (req, res, next) => {
+    logger.debug(`Sending form ${JSON.stringify(req.form)}`);
+    if (Object.keys(req.form.errors).length === 0) {
+        const response = actionService.performAction(req.params.action, req.form.data);
+        if (res.noScript) {
+            return res.redirect(response.callbackUrl);
+        }
+        return res.status(200).send({redirect: response.callbackUrl, response: {}});
+    }
     next();
 });
 
-router.get('/:type/:action', (req, res) => {
-    const {noScript = false} = req.query;
-    if (noScript) {
+router.post('/:type/:action', renderMiddleware);
 
-    } else {
-        res.status(200).send(req.form.schema);
+router.post('/:type/:action', (req, res) => {
+    logger.debug(`Validation errors, returning page: ${JSON.stringify(req.form.errors)}`);
+    if (res.noScript) {
+        return res.status(200).send(res.rendered);
     }
-});
-
-router.use('/:type/:stage', processMiddleware);
-
-router.use('/:type/:stage', validationMiddleware);
-
-router.post('/:type/:stage', (req, res) => {
-
-    const {noScript = false} = req.query;
-
-    const response = actionService.performAction('submit', req.form.data);
-
-    res.status(200);
-
-    if (noScript) {
-        res.redirect(response.callbackUrl);
-        return;
-    }
-
-    res.send({redirect: response.callbackUrl, response: {}});
+    res.status(200).send({errors: req.form.errors});
 });
 
 module.exports = router;

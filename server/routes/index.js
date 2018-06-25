@@ -1,33 +1,47 @@
 const router = require('express').Router();
 const assets = require('../../build/assets.json');
-const formService = require('../services/form');
 const html = require('../layout/html');
-const User = require('../models/user');
 const authMiddleware = require('../middleware/auth');
 const renderMiddleware = require('../middleware/render');
 const apiRouter = require('./api');
+const {getFormForCase, getFormForAction} = require('../services/form');
+const User = require('../models/user');
 
 html.use(assets);
 
 router.use('*', authMiddleware);
 
-router.use('/api', apiRouter);
+router.use('/action/:action', (req, res, next) => {
+    getFormForAction(req, res, next);
+});
 
 router.use('/case/:type/:action', (req, res, next) => {
-    const {type, action} = req.params;
-    res.locals.form = formService.getForm('workflow', {type, action});
-    next();
+    getFormForCase(req, res, next);
 });
 
-router.use('/action/:action', (req, res, next) => {
+router.use('/api/action/:action', (req, res, next) => {
+    getFormForAction(req, res, next);
+});
+
+router.use('/api/case/:type/:action', (req, res, next) => {
+    getFormForCase(req, res, next);
+});
+
+router.get('/api/action/:action', (req, res, next) => {
     const {action} = req.params;
     if (req.user && User.hasRole(req.user, action.toUpperCase())) {
-        res.locals.form = formService.getForm('action', {action, user: req.user});
-        next();
+        res.status(200).send(req.form.schema);
     } else {
-        res.redirect('/unauthorised');
+        res.status(403).send();
     }
 });
+
+router.get('/api/case/:type/:action', (req, res) => {
+    res.status(200).send(req.form.schema);
+
+});
+
+router.use('/', apiRouter);
 
 router.use('*', renderMiddleware);
 

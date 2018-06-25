@@ -20,6 +20,6 @@ App.defaultProps = {
             footer: {}
         }
     }
-}
+};
 
 export default App;
