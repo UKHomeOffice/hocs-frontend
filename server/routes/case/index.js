@@ -1,23 +1,10 @@
 const router = require('express').Router();
 const logger = require('../../libs/logger');
-const {getFormForCase} = require('../../services/form');
 const actionService = require('../../services/action');
 const processMiddleware = require('../../middleware/process');
 const fileMiddleware = require('../../middleware/file');
 const validationMiddleware = require('../../middleware/validation');
 const renderMiddleware = require('../../middleware/render');
-
-router.use('/:type/:action', (req, res, next) => {
-    getFormForCase(req, res, next);
-});
-
-router.get('/:type/:action', (req, res, next) => {
-    if (res.noScript) {
-        next();
-    } else {
-        res.status(200).send(req.form.schema);
-    }
-});
 
 router.post('/:type/:action', fileMiddleware.any(), processMiddleware, validationMiddleware);
 

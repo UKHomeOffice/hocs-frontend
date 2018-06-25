@@ -26,7 +26,7 @@ class Form extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        const url = '/api' + this.props.action;
+        const url = this.props.action;
         console.debug(url);
         const formData = new FormData();
         Object.keys(this.state).map(e => formData.append(e, this.state[e]));
@@ -91,7 +91,7 @@ class Form extends Component {
             <Fragment>
                 {errors && <ErrorSummary errors={errors}/>}
                 <form
-                    action={'/api' + action + '?noScript=true'}
+                    action={action + '?noScript=true'}
                     method={method}
                     onSubmit={e => this.handleSubmit(e)}
                     encType="multipart/form-data"

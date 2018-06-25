@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import {Link} from 'react-router-dom';
 import {ApplicationConsumer} from '../../contexts/application.jsx';
 
 class Submit extends Component {
@@ -12,15 +13,11 @@ class Submit extends Component {
     } = this.props;
     return (
       <Fragment>
-        <button
+        <Link
           className={`button${className ? ' ' + className : ''}`}
           disabled={disabled}
-          onClick={ e => {
-            e.preventDefault();
-            this.props.dispatch({type: action});
-          }}
-          formAction={`/action/${action}`}
-        >{label}</button>
+          to={action}
+        >{label}</Link>
       </Fragment>
     )
   }
