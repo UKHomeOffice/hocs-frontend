@@ -43,9 +43,10 @@ class Case extends Component {
                         {title}
                         <span className="heading-secondary">{`${caseId}`}</span>
                     </h1>
-                    {form && <Form
+                    {form && form.schema && <Form
                         action={url}
-                        fields={form.fields}
+                        fields={form.schema.fields}
+                        errors={form.errors}
                     />}
                 </div>
             </div>
@@ -53,10 +54,11 @@ class Case extends Component {
     }
 }
 
-const WrappedPage = props => (
-    <ApplicationConsumer>
-        {({dispatch, form}) => <Case {...props} dispatch={dispatch} form={form}/>}
-    </ApplicationConsumer>
-);
+const
+    WrappedPage = props => (
+        <ApplicationConsumer>
+            {({dispatch, form}) => <Case {...props} dispatch={dispatch} form={form}/>}
+        </ApplicationConsumer>
+    );
 
 export default WrappedPage;

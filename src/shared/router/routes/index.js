@@ -23,6 +23,12 @@ const routes = [
         title: 'Create case'
     },
     {
+        path: '/api/case/:caseId/create/',
+        exact: true,
+        component: CasePage,
+        title: 'Create case'
+    },
+    {
         path: '/unauthorised',
         component: Error,
         title: 'You do not have the required permission to view this resource',
