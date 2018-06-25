@@ -22,6 +22,15 @@
         "label": "Document",
         "allowMultiple": true
       }
+    },
+    {
+      "component": "button",
+      "props": {
+        "name": "cancel",
+        "action": "/",
+        "className": "button-secondary-action",
+        "label": "Cancel"
+      }
     }
   ]
 }
