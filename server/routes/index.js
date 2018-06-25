@@ -4,7 +4,7 @@ const html = require('../layout/html');
 const authMiddleware = require('../middleware/auth');
 const renderMiddleware = require('../middleware/render');
 const apiRouter = require('./api');
-const formService = require('../services/form');
+const {getFormForCase, getFormForAction} = require('../services/form');
 
 html.use(assets);
 
@@ -13,25 +13,11 @@ router.use('*', authMiddleware);
 router.use('/api', apiRouter);
 
 router.use('/action/:action', (req, res, next) => {
-    const {action} = req.params;
-    const {noScript = false} = req.query;
-    req.form = {
-        data: {},
-        schema: formService.getForm('action', {action, user: req.user})
-    };
-    res.noscript = noScript;
-    next();
+    getFormForAction(req, res, next);
 });
 
 router.use('/case/:type/:action', (req, res, next) => {
-    const {type, action} = req.params;
-    const {noScript = false} = req.query;
-    req.form = {
-        data: {},
-        schema: formService.getForm('workflow', {type, action})
-    };
-    res.noscript = noScript;
-    next();
+    getFormForCase(req, res, next);
 });
 
 router.use('*', renderMiddleware);
