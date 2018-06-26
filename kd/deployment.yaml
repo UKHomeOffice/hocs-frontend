@@ -150,6 +150,11 @@ spec:
               configMapKeyRef:
                 name: hocs-frontend
                 key: clientside
+          - name: MAX_UPLOAD_SIZE
+            valueFrom:
+              configMapKeyRef:
+                name: hocs-converter
+                key: max_filesize
         resources:
           limits:
             cpu: 1000m
