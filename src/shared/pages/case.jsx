@@ -16,7 +16,7 @@ class Case extends Component {
     }
 
     getForm() {
-        const url = '/api' + this.props.match.url;
+        const url = '/forms' + this.props.match.url;
         axios.get(url)
             .then(res => {
                 this.props.dispatch(updateForm(res.data));
