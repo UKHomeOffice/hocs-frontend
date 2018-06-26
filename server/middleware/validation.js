@@ -2,7 +2,10 @@ const logger = require('../libs/logger');
 const forms = require('../forms/index');
 
 const validationErrors = {
-    required: 'is required'
+    required: 'is required',
+    tooBig: 'is too big',
+    tooBigMany: 'is too many big files at once',
+    uploadDisabled: 'uploads are disabled'
 };
 
 const validators = {
@@ -12,6 +15,22 @@ const validators = {
         } else {
             return validationErrors.required;
         }
+    },
+    isSensibleSize: (files) => {
+        if (!process.env.MAX_UPLOAD_SIZE) return validationErrors.uploadDisabled;
+
+        let allowableBatchSize = process.env.MAX_UPLOAD_SIZE_BATCH ? process.env.MAX_UPLOAD_SIZE_BATCH : Infinity;
+        const maxSingleSize = process.env.MAX_UPLOAD_SIZE;
+
+        for (let file of files) {
+            if (file.size > maxSingleSize) return validationErrors.tooBig;
+            allowableBatchSize -= file.size;
+            if (allowableBatchSize < 0) {
+                // user uploading too many big files at once
+                return validationErrors.tooBigMany;
+            }
+        }
+        return null;
     }
 };
 

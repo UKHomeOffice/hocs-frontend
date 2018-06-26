@@ -13,7 +13,8 @@
     {
       "component": "addDocument",
       "validation": [
-        "required"
+        "required",
+        "isSensibleSize"
       ],
       "props": {
         "name": "add_document",
