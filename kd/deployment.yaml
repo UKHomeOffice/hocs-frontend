@@ -150,6 +150,25 @@ spec:
               configMapKeyRef:
                 name: hocs-frontend
                 key: clientside
+          - name: S3_ACCESS_KEY
+            valueFrom:
+              secretKeyRef:
+                name: cs-dev-untrusted-s3
+                key: access_key_id
+          - name: S3_SECRET_ACCESS_KEY
+            valueFrom:
+              secretKeyRef:
+                name: cs-dev-untrusted-s3
+                key: secret_access_key
+          - name: S3_REGION
+            value: 'eu-west-2'
+          - name: S3_BUCKET
+            valueFrom:
+              secretKeyRef:
+                name: cs-dev-untrusted-s3
+                key: bucket_name
+          - name: WORKFLOW_SERVICE
+            value: 'hocs-workflow.{{.KUBE_NAMESPACE}}.svc.cluster.local:10443'
         resources:
           limits:
             cpu: 1000m
