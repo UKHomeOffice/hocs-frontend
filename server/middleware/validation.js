@@ -17,9 +17,9 @@ const validators = {
 
 const validation = (req, res, next) => {
         logger.info('VALIDATION MIDDLEWARE');
-        logger.debug(JSON.stringify(Object.keys(req.form.data)));
         const {data, schema} = req.form;
-        req.form.errors = schema.fields.reduce((result, field) => {
+        const fields = schema.fields.filter(field => field.type !== 'display');
+        req.form.errors = fields.reduce((result, field) => {
             const {validation, props: {name}} = field;
             const value = data[name];
             if (validation) {

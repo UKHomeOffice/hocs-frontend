@@ -9,15 +9,21 @@ const renderMiddleware = require('../../middleware/render');
 router.post('/:type/:action', fileMiddleware.any(), processMiddleware, validationMiddleware);
 
 router.post('/:type/:action', (req, res, next) => {
-    logger.debug(`Sending form ${JSON.stringify(req.form)}`);
     if (Object.keys(req.form.errors).length === 0) {
-        const response = actionService.performAction(req.params.action, req.form.data);
-        if (res.noScript) {
-            return res.redirect(response.callbackUrl);
-        }
-        return res.status(200).send({redirect: response.callbackUrl, response: {}});
+        const {action} = req.params;
+        actionService.performAction(action, {form: req.form, user: req.user}, (callbackUrl, err) => {
+            if (err) {
+                return res.redirect('/error');
+            } else {
+                if (res.noScript) {
+                    return res.redirect(callbackUrl);
+                }
+                return res.status(200).send({redirect: callbackUrl, response: {}});
+            }
+        });
+    } else {
+        next();
     }
-    next();
 });
 
 router.post('/:type/:action', renderMiddleware);

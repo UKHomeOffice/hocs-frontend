@@ -2,7 +2,7 @@ const User = require('../models/user');
 
 const lists = {
     'case_type': ({user}) => {
-        // TODO: add call to external service
+        // TODO: add call to workflow service
         const list = [
             {
                 "requiredRole": "DCU",

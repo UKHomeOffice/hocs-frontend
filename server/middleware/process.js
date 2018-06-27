@@ -26,12 +26,9 @@ const processCheckbox = (name, value, choices) => {
 const process = (req, res, next) => {
     logger.info('PROCESS MIDDLEWARE');
     const data = req.body;
-    // TODO: refactor, remove non functional elements from for schema for processing and validation
-    req.form.schema.fields = req.form.schema.fields.filter(f => f.type !== 'display');
-    logger.debug(JSON.stringify(req.originalUrl));
-    logger.debug(JSON.stringify(req.body));
-    logger.debug(`Number of files: ${req.files.length}`);
-    req.form.data = req.form.schema.fields.reduce((reducer, field) => {
+    const {schema} = req.form;
+    const fields = schema.fields.filter(field => field.type !== 'display');
+    req.form.data = fields.reduce((reducer, field) => {
         const {name} = field.props;
         const component = field.component;
         switch(component) {
@@ -50,6 +47,7 @@ const process = (req, res, next) => {
                     reducer[name] = null;
                 } else {
                     reducer[name] = req.files.filter(f => f.fieldname.indexOf(name) === 0);
+                    logger.debug(`Successfully attached ${reducer[name].length} documents to ${name}`);
                 }
                 break;
             default:

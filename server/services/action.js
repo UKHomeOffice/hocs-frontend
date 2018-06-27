@@ -1,29 +1,56 @@
-const uuid = require('uuid/v4');
 const logger = require('../libs/logger');
+const uuid = require('uuid/v4');
+const axios = require('axios');
+const path = require('path');
+
+const workflowService = process.env.WORKFLOW_SERVICE || 'http://localhost:8081';
 
 const actions = {
-    create: (data) => {
+    create: ({form, user}, callback) => {
         // TODO: Post to create case
-        const stage = 'document';
-        return {
-            callbackUrl: `/case/${uuid()}/${stage}`
-        }
+        const url = `${workflowService}/case`;
+        const createCaseRequest = {
+            caseType: form.data['case-type']
+        };
+        const headers = null;
+        axios.post(url, createCaseRequest, headers)
+            .then(response => {
+                const stage = 'document';
+                callback(`/case/${response.data.caseId}/${stage}`, null);
+            })
+            .catch(err => {
+                logger.error(err);
+                callback(null, 'Failed to perform action');
+            });
     },
-    document: (data) => {
-        // TODO: Post to persist case
-        return {
-            callbackUrl: '/'
-        }
+    document: ({form, user}, callback) => {
+        // TODO: Post S3 URLs to workflow service
+        const documents = form.schema.fields.reduce((reducer, field) => {
+            if (field.component === 'addDocument') {
+                form.data[field.props.name].map(file => {
+                    reducer.push({
+                        displayName: file.originalname,
+                        type: field.props.documentType,
+                        s3UntrustedUrl: file.location || 'location'
+                    });
+                });
+            }
+            return reducer;
+        }, []);
+        const url = `${workflowService}/case/someId/document`;
+        axios.post(url, documents)
+            .then(response => {
+                callback('/', null);
+            })
+            .catch(err => {
+                logger.error(err);
+                callback(null, 'Failed to perform action');
+            });
     }
 };
 
-const performAction = (action, data) => {
-    try {
-        logger.debug(`Calling action for ${action} - ${JSON.stringify(data)}`);
-        return actions[action.toLowerCase()].call(this, data);
-    } catch (e) {
-        throw new Error(`Unable to perform action ${action}`);
-    }
+const performAction = (action, options, callback) => {
+    actions[action].call(this, options, callback);
 };
 
 module.exports = {

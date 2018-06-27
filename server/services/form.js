@@ -53,7 +53,6 @@ const getFormForCase = (req, res, callback) => {
 };
 
 module.exports = {
-    getForm,
     getFormForAction,
     getFormForCase
 };

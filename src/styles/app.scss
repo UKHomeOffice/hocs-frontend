@@ -43,12 +43,10 @@ html {
 .button-secondary {
   @include button($govuk-blue);
   display: block;
-  margin-bottom: 15px;
 }
 
 .button-secondary-action {
   @include button($govuk-blue);
-  margin-right: 15px;
 }
 
 input[type='file'] {
@@ -59,10 +57,17 @@ input[type='file'] {
   margin-bottom: 15px;
 }
 
-::-webkit-file-upload-button {
+input[type=file]::-webkit-file-upload-button {
   @include button($govuk-blue);
 }
 
-::-ms-browse {
+input[type=file]::-ms-browse {
   @include button($govuk-blue);
+}
+
+@media only screen and (min-device-width: $tablet-breakpoint) {
+  .button-secondary-action {
+    margin-right: 15px;
+    margin-bottom: 15px;
+  }
 }
