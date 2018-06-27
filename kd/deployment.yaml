@@ -152,7 +152,7 @@ spec:
                 key: clientside
         resources:
           limits:
-            cpu: 1000m
+            cpu: 400m
             memory: 400Mi
           requests:
             cpu: 200m
