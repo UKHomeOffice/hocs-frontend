@@ -38,7 +38,7 @@ const actions = {
             return reducer;
         }, []);
         const url = `${workflowService}/case/${caseId}/document`;
-        axios.post(url, documents)
+        axios.post(url, {documents})
             .then(response => {
                 callback('/', null);
             })
