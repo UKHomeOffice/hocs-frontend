@@ -16,7 +16,7 @@ const actions = {
         axios.post(url, createCaseRequest, headers)
             .then(response => {
                 const stage = 'document';
-                callback(`/case/${response.data.caseReference}/${stage}`, null);
+                callback(`/case/${response.data.uuid}/${stage}`, null);
             })
             .catch(err => {
                 logger.error(err);
