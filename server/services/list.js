@@ -7,17 +7,17 @@ const lists = {
             {
                 "requiredRole": "DCU",
                 "label": "DCU Ministerial",
-                "value": "DCU_MINISTERIAL"
+                "value": "MIN"
             },
             {
                 "requiredRole": "UKVI",
                 "label": "UKVI MREF",
-                "value": "UKVI_MREF"
+                "value": "MREF"
             },
             {
                 "requiredRole": "FOI",
                 "label": "FOI Complaint",
-                "value": "FOI_COMPLAINT"
+                "value": "COM"
             }
         ];
         return list.filter(listItem => User.hasRole(user, listItem.requiredRole));

@@ -16,14 +16,14 @@ const actions = {
         axios.post(url, createCaseRequest, headers)
             .then(response => {
                 const stage = 'document';
-                callback(`/case/${response.data.caseId}/${stage}`, null);
+                callback(`/case/${response.data.caseReference}/${stage}`, null);
             })
             .catch(err => {
                 logger.error(err);
                 callback(null, 'Failed to perform action');
             });
     },
-    document: ({form, user}, callback) => {
+    document: ({form, user, caseId}, callback) => {
         // TODO: Post S3 URLs to workflow service
         const documents = form.schema.fields.reduce((reducer, field) => {
             if (field.component === 'addDocument') {
@@ -37,7 +37,7 @@ const actions = {
             }
             return reducer;
         }, []);
-        const url = `${workflowService}/case/someId/document`;
+        const url = `${workflowService}/case/${caseId}/document`;
         axios.post(url, documents)
             .then(response => {
                 callback('/', null);
