@@ -150,6 +150,11 @@ spec:
               configMapKeyRef:
                 name: hocs-frontend
                 key: clientside
+          - name: ALLOWED_FILE_EXTENSIONS
+            valueFrom:
+              configMapKeyRef:
+                  name: hocs-converter
+                  key: supported_types
         resources:
           limits:
             cpu: 1000m
