@@ -1,4 +1,4 @@
-import authenticationMiddleware from "../auth";
+import authenticationMiddleware from '../auth';
 
 const mockRedirect = jest.fn();
 const mockHeaders = {
@@ -20,7 +20,7 @@ describe('Authentication middleware', () => {
         mockRedirect.mockReset();
         mockRequest = {
             get: (header) => {
-                return mockHeaders[header]
+                return mockHeaders[header];
             }
         };
     });
@@ -50,7 +50,7 @@ describe('Authentication middleware', () => {
     });
 
     it('should not recreate the user object if exists', () => {
-        mockRequest.user = "TEST";
+        mockRequest.user = 'TEST';
         authenticationMiddleware(mockRequest, mockResponse, () => {
             expect(mockRequest.user).toBeDefined();
             expect(mockRequest.user).toEqual('TEST');
@@ -63,6 +63,6 @@ describe('Authentication middleware', () => {
         authenticationMiddleware(mockRequest, mockResponse, () => {
             expect(mockRequest.user).toBeUndefined();
             expect(mockRedirect).toHaveBeenCalledTimes(0);
-        })
+        });
     });
 });

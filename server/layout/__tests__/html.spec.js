@@ -1,14 +1,14 @@
-import html from "../html";
+import html from '../html';
 
 html.use({
-    "js": {
-        "main": "js/main.js",
-        "first": "js/first.js",
-        "second": "js/second.js",
-        "myBundle": "js/myBundle.js"
+    'js': {
+        'main': 'js/main.js',
+        'first': 'js/first.js',
+        'second': 'js/second.js',
+        'myBundle': 'js/myBundle.js'
     },
-    "css": {
-        "first": "styles/first.css"
+    'css': {
+        'first': 'styles/first.css'
     }
 });
 

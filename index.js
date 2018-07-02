@@ -16,7 +16,7 @@ app.use(session({secret: 'SOME SUPER SECRET'}));
 app.use('/', caseRouter);
 
 app.post('*', (req, res) => {
-   res.redirect('/error');
+    res.redirect('/error');
 });
 
 app.listen(port, () => {

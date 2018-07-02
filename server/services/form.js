@@ -4,31 +4,31 @@ const listService = require('./list');
 const actions = {
     action: ({action, user}) => {
         switch(action) {
-            case 'create':
-                const form = formRepository.getForm('caseCreate');
-                form.fields = form.fields.map(field => {
-                    const choices = field.props.choices;
-                    if (choices && typeof choices === 'string') {
-                        field.props.choices = listService.getList(choices, {user});
-                    }
-                    return field;
-                });
-                return form;
+        case 'create':
+            const form = formRepository.getForm('caseCreate');
+            form.fields = form.fields.map(field => {
+                const choices = field.props.choices;
+                if (choices && typeof choices === 'string') {
+                    field.props.choices = listService.getList(choices, {user});
+                }
+                return field;
+            });
+            return form;
         }
     },
     workflow: ({type, action}) => {
         // TODO: call workflow service for form
         //return formRepository.getForm('testForm');
   
-      const form = formRepository.getForm('testForm');
-      form.fields = form.fields.map(field => {
-        const whitelist = field.props.whitelist;
-        if (whitelist && typeof whitelist === 'string') {
-          field.props.whitelist = listService.getList(whitelist);
-        }
-        return field;
-      });
-      return form;
+        const form = formRepository.getForm('testForm');
+        form.fields = form.fields.map(field => {
+            const whitelist = field.props.whitelist;
+            if (whitelist && typeof whitelist === 'string') {
+                field.props.whitelist = listService.getList(whitelist);
+            }
+            return field;
+        });
+        return form;
     }
 };
 

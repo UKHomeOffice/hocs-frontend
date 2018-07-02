@@ -1,7 +1,7 @@
-import ActionPage from "../../pages/action.jsx";
-import CasePage from "../../pages/case.jsx";
-import Error from "../../layouts/error.jsx";
-import MainPage from "../../pages/main.jsx";
+import ActionPage from '../../pages/action.jsx';
+import CasePage from '../../pages/case.jsx';
+import Error from '../../layouts/error.jsx';
+import MainPage from '../../pages/main.jsx';
 
 const routes = [
     {

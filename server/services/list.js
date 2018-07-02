@@ -5,19 +5,19 @@ const lists = {
         // TODO: add call to workflow service
         const list = [
             {
-                "requiredRole": "DCU",
-                "label": "DCU Ministerial",
-                "value": "MIN"
+                'requiredRole': 'DCU',
+                'label': 'DCU Ministerial',
+                'value': 'MIN'
             },
             {
-                "requiredRole": "UKVI",
-                "label": "UKVI MREF",
-                "value": "MREF"
+                'requiredRole': 'UKVI',
+                'label': 'UKVI MREF',
+                'value': 'MREF'
             },
             {
-                "requiredRole": "FOI",
-                "label": "FOI Complaint",
-                "value": "COM"
+                'requiredRole': 'FOI',
+                'label': 'FOI Complaint',
+                'value': 'COM'
             }
         ];
         return list.filter(listItem => User.hasRole(user, listItem.requiredRole));
