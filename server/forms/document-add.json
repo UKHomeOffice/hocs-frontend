@@ -13,7 +13,8 @@
     {
       "component": "addDocument",
       "validation": [
-        "required"
+        "required",
+        "hasWhitelistedExtension"
       ],
       "props": {
         "name": "add_document",
@@ -21,7 +22,8 @@
         "documentType": "ORIGINAL",
         "className": "button-secondary-action",
         "label": "Document",
-        "allowMultiple": true
+        "allowMultiple": true,
+        "whitelist": "DOCUMENT_EXTENSION_WHITELIST"
       }
     },
     {

@@ -2,7 +2,13 @@ const logger = require('../libs/logger');
 const forms = require('../forms/index');
 
 const validationErrors = {
-    required: 'is required'
+    required: 'is required',
+    invalidFileExtension: (extension) => {
+        if (extension) {
+            return 'is a ' + extension.toUpperCase() + ' file which is not allowed';
+        }
+        return 'has a file extension that is not allowed';
+    }
 };
 
 const validators = {
@@ -12,6 +18,28 @@ const validators = {
         } else {
             return validationErrors.required;
         }
+    },
+    hasWhitelistedExtension: (files) => {
+      logger.info('Whitelisted extension validator')
+      if (!process.env.ALLOWED_FILE_EXTENSIONS) {
+        logger.warn('No file extension whitelist found: not validating extensions');
+        return null;
+      }
+      const allowableExtensions = process.env.ALLOWED_FILE_EXTENSIONS.split(',');
+  
+      for (let file of files) {
+        let fileExtension = file.originalname.split('.').slice(-1)[0];
+        logger.debug('Validating extension: ' + fileExtension);
+        if (allowableExtensions.includes(fileExtension)) {
+            logger.debug('Accepting extension: ' + fileExtension);
+            return null;
+        }
+
+        logger.debug('Rejecting extension: ' + fileExtension);
+        return validationErrors.invalidFileExtension;
+      }
+      // no files to check:
+      return null;
     }
 };
 
