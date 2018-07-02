@@ -16,7 +16,7 @@ class Action extends Component {
     }
 
     getForm() {
-        const url = '/api' + this.props.match.url;
+        const url = '/forms' + this.props.match.url;
         axios.get(url)
             .then(res => {
                 this.props.dispatch(updateForm(res.data));
@@ -41,18 +41,18 @@ class Action extends Component {
             <div className="grid-row">
                 <div className="column-full">
                     <h1 className="heading-xlarge">
-                        {title}
+                        {form && form.schema && form.schema.title}
                         {subTitle && <span className="heading-secondary">{subTitle}</span>}
                     </h1>
-                    {form && <Form
+                    {form && form.schema && <Form
                         action={url}
-                        fields={form.fields}
+                        fields={form.schema.fields}
+                        errors={form.errors}
                     />}
                 </div>
             </div>
         );
     }
-
 }
 
 const WrappedPage = props => (

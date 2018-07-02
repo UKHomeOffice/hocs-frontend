@@ -14,6 +14,13 @@ export function updateFormData(data) {
     }
 }
 
+export function updateFormErrors(data) {
+    return {
+        type: types.UPDATE_FORM_ERRORS,
+        payload: data
+    }
+}
+
 export function setPhase(phase) {
     return {
         type: types.SET_PHASE,

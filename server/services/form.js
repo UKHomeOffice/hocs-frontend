@@ -18,7 +18,17 @@ const actions = {
     },
     workflow: ({type, action}) => {
         // TODO: call workflow service for form
-        return formRepository.getForm('testForm');
+        //return formRepository.getForm('testForm');
+  
+      const form = formRepository.getForm('testForm');
+      form.fields = form.fields.map(field => {
+        const whitelist = field.props.whitelist;
+        if (whitelist && typeof whitelist === 'string') {
+          field.props.whitelist = listService.getList(whitelist);
+        }
+        return field;
+      });
+      return form;
     }
 };
 
@@ -30,6 +40,30 @@ const getForm = (action, options) => {
     }
 };
 
+const getFormForAction = (req, res, callback) => {
+    const {action} = req.params;
+    const {noScript = false} = req.query;
+    req.form = {
+        data: {},
+        schema: getForm('action', {action, user: req.user})
+    };
+    res.noScript = noScript;
+    callback();
+};
+
+const getFormForCase = (req, res, callback) => {
+    const {type, action} = req.params;
+    const {noScript = false} = req.query;
+    req.form = {
+        data: {},
+        schema: getForm('workflow', {type, action})
+    };
+    res.noScript = noScript;
+    callback();
+};
+
 module.exports = {
-    getForm
+    getForm,
+    getFormForAction,
+    getFormForCase
 };
