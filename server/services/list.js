@@ -21,6 +21,10 @@ const lists = {
             }
         ];
         return list.filter(listItem => User.hasRole(user, listItem.requiredRole));
+    },
+    'document_extension_whitelist': () => {
+        const list = process.env.ALLOWED_FILE_EXTENSIONS.split(',');
+        return list;
     }
 };
 
