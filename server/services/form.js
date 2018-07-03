@@ -18,7 +18,17 @@ const actions = {
     },
     workflow: ({type, action}) => {
         // TODO: call workflow service for form
-        return formRepository.getForm('testForm');
+        //return formRepository.getForm('testForm');
+  
+      const form = formRepository.getForm('testForm');
+      form.fields = form.fields.map(field => {
+        const whitelist = field.props.whitelist;
+        if (whitelist && typeof whitelist === 'string') {
+          field.props.whitelist = listService.getList(whitelist);
+        }
+        return field;
+      });
+      return form;
     }
 };
 
@@ -53,7 +63,6 @@ const getFormForCase = (req, res, callback) => {
 };
 
 module.exports = {
-    getForm,
     getFormForAction,
     getFormForCase
 };

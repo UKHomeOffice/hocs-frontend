@@ -2,25 +2,29 @@ const User = require('../models/user');
 
 const lists = {
     'case_type': ({user}) => {
-        // TODO: add call to external service
+        // TODO: add call to workflow service
         const list = [
             {
                 "requiredRole": "DCU",
                 "label": "DCU Ministerial",
-                "value": "DCU_MINISTERIAL"
+                "value": "MIN"
             },
             {
                 "requiredRole": "UKVI",
                 "label": "UKVI MREF",
-                "value": "UKVI_MREF"
+                "value": "MREF"
             },
             {
                 "requiredRole": "FOI",
                 "label": "FOI Complaint",
-                "value": "FOI_COMPLAINT"
+                "value": "COM"
             }
         ];
         return list.filter(listItem => User.hasRole(user, listItem.requiredRole));
+    },
+    'document_extension_whitelist': () => {
+        const list = process.env.ALLOWED_FILE_EXTENSIONS.split(',');
+        return list;
     }
 };
 

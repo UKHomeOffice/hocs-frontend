@@ -6,23 +6,29 @@ const fileMiddleware = require('../../middleware/file');
 const validationMiddleware = require('../../middleware/validation');
 const renderMiddleware = require('../../middleware/render');
 
-router.post('/:type/:action', fileMiddleware.any(), processMiddleware, validationMiddleware);
+router.post('/:caseId/:action', fileMiddleware.any(), processMiddleware, validationMiddleware);
 
-router.post('/:type/:action', (req, res, next) => {
-    logger.debug(`Sending form ${JSON.stringify(req.form)}`);
+router.post('/:caseId/:action', (req, res, next) => {
     if (Object.keys(req.form.errors).length === 0) {
-        const response = actionService.performAction(req.params.action, req.form.data);
-        if (res.noScript) {
-            return res.redirect(response.callbackUrl);
-        }
-        return res.status(200).send({redirect: response.callbackUrl, response: {}});
+        const {action, caseId} = req.params;
+        actionService.performAction(action, {form: req.form, user: req.user, caseId}, (callbackUrl, err) => {
+            if (err) {
+                return res.redirect('/error');
+            } else {
+                if (res.noScript) {
+                    return res.redirect(callbackUrl);
+                }
+                return res.status(200).send({redirect: callbackUrl, response: {}});
+            }
+        });
+    } else {
+        next();
     }
-    next();
 });
 
-router.post('/:type/:action', renderMiddleware);
+router.post('/:caseId/:action', renderMiddleware);
 
-router.post('/:type/:action', (req, res) => {
+router.post('/:caseId/:action', (req, res) => {
     logger.debug(`Validation errors, returning page: ${JSON.stringify(req.form.errors)}`);
     if (res.noScript) {
         return res.status(200).send(res.rendered);

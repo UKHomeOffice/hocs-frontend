@@ -1,6 +1,6 @@
 {
   "action": "ADD_DOCUMENT",
-  "title": "Add document",
+  "title": "Add documents",
   "defaultActionLabel": "Add document",
   "fields": [
     {
@@ -14,14 +14,17 @@
       "component": "addDocument",
       "validation": [
         "required",
-        "isSensibleSize"
+        "isSensibleSize",
+        "hasWhitelistedExtension"
       ],
       "props": {
         "name": "add_document",
         "action": "ADD_DOCUMENT",
+        "documentType": "ORIGINAL",
         "className": "button-secondary-action",
         "label": "Document",
-        "allowMultiple": true
+        "allowMultiple": true,
+        "whitelist": "DOCUMENT_EXTENSION_WHITELIST"
       }
     },
     {
