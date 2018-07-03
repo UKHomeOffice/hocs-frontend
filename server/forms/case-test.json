@@ -1,5 +1,7 @@
 {
   "action": "SUBMIT",
+  "title": "Test form",
+  "defaultActionLabel": "Submit",
   "fields": [
     {
       "component": "text",

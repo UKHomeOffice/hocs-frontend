@@ -1,5 +1,9 @@
 {
-  "action": "ADD_DOCUMENT",
+  "action": "add_document",
+  "callback": {
+    "action": "case",
+    "value": "start"
+  },
   "title": "Add documents",
   "defaultActionLabel": "Add document",
   "fields": [

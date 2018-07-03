@@ -1,5 +1,6 @@
 const logger = require('../libs/logger');
 const forms = require('../forms/index');
+const {DOCUMENT_WHITELIST} = require('../config').forContext('server');
 
 const validationErrors = {
     required: 'is required',
@@ -20,12 +21,12 @@ const validators = {
         }
     },
     hasWhitelistedExtension: (files) => {
-      logger.info('Whitelisted extension validator')
-      if (!process.env.ALLOWED_FILE_EXTENSIONS) {
+      if (!DOCUMENT_WHITELIST) {
         logger.warn('No file extension whitelist found: not validating extensions');
         return null;
       }
-      const allowableExtensions = process.env.ALLOWED_FILE_EXTENSIONS.split(',');
+
+      const allowableExtensions = DOCUMENT_WHITELIST.split(',');
   
       for (let file of files) {
         let fileExtension = file.originalname.split('.').slice(-1)[0];
@@ -36,7 +37,7 @@ const validators = {
         }
 
         logger.debug('Rejecting extension: ' + fileExtension);
-        return validationErrors.invalidFileExtension;
+        return validationErrors.invalidFileExtension(fileExtension);
       }
       // no files to check:
       return null;
@@ -50,7 +51,7 @@ const validation = (req, res, next) => {
         req.form.errors = fields.reduce((result, field) => {
             const {validation, props: {name}} = field;
             const value = data[name];
-            if (validation) {
+            if (validation && validation.length > 0) {
                 validation.map(validator => {
                     try {
                         const validationError = validators[validator].call(this, value);

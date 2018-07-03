@@ -1,15 +1,22 @@
 const aws = require('aws-sdk');
 const uuid = require('uuid/v4');
-
-const isProduction = process.env.NODE_ENV === 'production';
+const {
+    S3: {
+        ACCESS_KEY,
+        SECRET_ACCESS_KEY,
+        REGION, ENDPOINT,
+        SSL_ENABLED,
+        FORCE_PATH_STYLE
+    }
+} = require('../config').forContext('AWS');
 
 const s3 = new aws.S3({
-    accessKeyId: process.env.S3_ACCESS_KEY || 'UNSET',
-    secretAccessKey: process.env.S3_SECRET_ACCESS_KEY || 'UNSET',
-    endpoint: isProduction ? null : 'http://localhost:4572',
-    region: isProduction ? process.env.S3_REGION : null,
-    sslEnabled: isProduction,
-    s3ForcePathStyle: !isProduction
+    accessKeyId: ACCESS_KEY,
+    secretAccessKey: SECRET_ACCESS_KEY,
+    endpoint: ENDPOINT,
+    region: REGION,
+    sslEnabled: SSL_ENABLED,
+    s3ForcePathStyle: FORCE_PATH_STYLE
 });
 
 module.exports = {

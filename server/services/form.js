@@ -1,9 +1,12 @@
 const formRepository = require('../forms/index');
 const listService = require('./list');
+const {WORKFLOW_SERVICE} = require('../config').forContext('server');
+const logger = require('../libs/logger');
+const axios = require('axios');
 
 const actions = {
     action: ({action, user}) => {
-        switch(action) {
+        switch (action) {
             case 'create':
                 const form = formRepository.getForm('caseCreate');
                 form.fields = form.fields.map(field => {
@@ -18,17 +21,30 @@ const actions = {
     },
     workflow: ({type, action}) => {
         // TODO: call workflow service for form
-        //return formRepository.getForm('testForm');
-  
-      const form = formRepository.getForm('testForm');
-      form.fields = form.fields.map(field => {
-        const whitelist = field.props.whitelist;
-        if (whitelist && typeof whitelist === 'string') {
-          field.props.whitelist = listService.getList(whitelist);
-        }
-        return field;
-      });
-      return form;
+        //return formRepository.getForm('addDocument');
+
+        const form = formRepository.getForm('addDocument');
+
+        form.fields = form.fields.map(field => {
+            if (field.component === 'addDocument') {
+                const whitelist = field.props.whitelist;
+                if (whitelist && typeof whitelist === 'string') {
+                    field.props.whitelist = listService.getList(whitelist);
+                }
+            }
+            return field;
+        });
+        return form;
+    },
+    stage: ({caseId, stageId}) => {
+        axios.get(`${WORKFLOW_SERVICE}/case/${caseId}/stage/${stageId}`)
+            .then((response) => {
+                return response.data.form.schema;
+            })
+            .catch((err) => {
+
+            });
+        return formRepository.getForm('testForm');
     }
 };
 
@@ -62,7 +78,19 @@ const getFormForCase = (req, res, callback) => {
     callback();
 };
 
+const getFormForStage = (req, res, callback) => {
+    const {caseId, stageId} = req.params;
+    const {noScript = false} = req.query;
+    req.form = {
+        data: {},
+        schema: getForm('stage', {caseId, stageId})
+    };
+    res.noScript = noScript;
+    callback();
+};
+
 module.exports = {
     getFormForAction,
-    getFormForCase
+    getFormForCase,
+    getFormForStage
 };
