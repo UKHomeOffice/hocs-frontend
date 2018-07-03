@@ -36,21 +36,21 @@ const actions = {
         });
         return form;
     },
-    stage: ({caseId, stageId}) => {
+    stage: ({caseId, stageId}, callback) => {
         axios.get(`${WORKFLOW_SERVICE}/case/${caseId}/stage/${stageId}`)
             .then((response) => {
-                return response.data.form.schema;
+                callback(response.data.form.schema);
             })
             .catch((err) => {
 
             });
-        return formRepository.getForm('testForm');
+        //return formRepository.getForm('testForm');
     }
 };
 
-const getForm = (action, options) => {
+const getForm = (action, options, callback) => {
     try {
-        return actions[action.toLowerCase()].call(this, options);
+        return actions[action.toLowerCase()].call(this, options, callback);
     } catch (e) {
         throw new Error(`Unable to get form for ${action}: ${e}`);
     }
@@ -81,12 +81,15 @@ const getFormForCase = (req, res, callback) => {
 const getFormForStage = (req, res, callback) => {
     const {caseId, stageId} = req.params;
     const {noScript = false} = req.query;
-    req.form = {
-        data: {},
-        schema: getForm('stage', {caseId, stageId})
-    };
-    res.noScript = noScript;
-    callback();
+    getForm('stage', {caseId, stageId}, form => {
+        req.form = {
+            data: {},
+            schema: form
+        };
+        res.noScript = noScript;
+        callback();
+    });
+
 };
 
 module.exports = {

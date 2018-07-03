@@ -6,9 +6,9 @@ const fileMiddleware = require('../../middleware/file');
 const validationMiddleware = require('../../middleware/validation');
 const renderMiddleware = require('../../middleware/render');
 
-router.post('/:caseId/:caseId/stage/:stageId', fileMiddleware.any(), processMiddleware, validationMiddleware);
+router.post('/:caseId/stage/:stageId', fileMiddleware.any(), processMiddleware, validationMiddleware);
 
-router.post('/:caseId/:caseId/stage/:stageId', (req, res, next) => {
+router.post('/:caseId/stage/:stageId', (req, res, next) => {
     if (Object.keys(req.form.errors).length === 0) {
         const {caseId, stageId} = req.params;
         const {form} = req;
@@ -27,9 +27,9 @@ router.post('/:caseId/:caseId/stage/:stageId', (req, res, next) => {
     }
 });
 
-router.post('/:caseId/:caseId/stage/:stageId', renderMiddleware);
+router.post('/:caseId/stage/:stageId', renderMiddleware);
 
-router.post('/:caseId/:caseId/stage/:stageId', (req, res) => {
+router.post('/:caseId/stage/:stageId', (req, res) => {
     logger.debug(`Validation errors, returning page: ${JSON.stringify(req.form.errors)}`);
     if (res.noScript) {
         return res.status(200).send(res.rendered);
