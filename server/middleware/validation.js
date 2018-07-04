@@ -21,26 +21,28 @@ const validators = {
         }
     },
     hasWhitelistedExtension: (files) => {
-      if (!DOCUMENT_WHITELIST) {
-        logger.warn('No file extension whitelist found: not validating extensions');
-        return null;
-      }
+        if (files) {
+            if (!DOCUMENT_WHITELIST) {
+                logger.warn('No file extension whitelist found: not validating extensions');
+                return null;
+            }
 
-      const allowableExtensions = DOCUMENT_WHITELIST.split(',');
-  
-      for (let file of files) {
-        let fileExtension = file.originalname.split('.').slice(-1)[0];
-        logger.debug('Validating extension: ' + fileExtension);
-        if (allowableExtensions.includes(fileExtension)) {
-            logger.debug('Accepting extension: ' + fileExtension);
+            const allowableExtensions = DOCUMENT_WHITELIST.split(',');
+
+            for (let file of files) {
+                let fileExtension = file.originalname.split('.').slice(-1)[0];
+                logger.debug('Validating extension: ' + fileExtension);
+                if (allowableExtensions.includes(fileExtension)) {
+                    logger.debug('Accepting extension: ' + fileExtension);
+                    return null;
+                }
+
+                logger.debug('Rejecting extension: ' + fileExtension);
+                return validationErrors.invalidFileExtension(fileExtension);
+            }
+            // no files to check:
             return null;
         }
-
-        logger.debug('Rejecting extension: ' + fileExtension);
-        return validationErrors.invalidFileExtension(fileExtension);
-      }
-      // no files to check:
-      return null;
     }
 };
 
@@ -59,7 +61,7 @@ const validation = (req, res, next) => {
                             result[field.props.name] = `${field.props.label} ${validationError}`;
                         }
                     } catch(e) {
-                        logger.warn(`Unsupported validator passed (${validator}) in form`);
+                        logger.warn(`Validator (${validator}): ${e.stack}`);
                     }
 
                 });

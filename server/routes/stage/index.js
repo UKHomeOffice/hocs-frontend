@@ -27,14 +27,17 @@ router.post('/:caseId/stage/:stageId', (req, res, next) => {
     }
 });
 
+router.post('/:caseId/stage/:stageId', (req, res, next) => {
+    if (!res.noScript) {
+        return res.status(200).send({errors: req.form.errors});
+    }
+    next();
+});
+
 router.post('/:caseId/stage/:stageId', renderMiddleware);
 
 router.post('/:caseId/stage/:stageId', (req, res) => {
-    logger.debug(`Validation errors, returning page: ${JSON.stringify(req.form.errors)}`);
-    if (res.noScript) {
-        return res.status(200).send(res.rendered);
-    }
-    res.status(200).send({errors: req.form.errors});
+    return res.status(200).send(res.rendered);
 });
 
 module.exports = router;

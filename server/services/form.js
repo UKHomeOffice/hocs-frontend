@@ -8,21 +8,21 @@ const actions = {
     action: ({action, user}) => {
         switch (action) {
             case 'create':
-                const {form} = formRepository.getForm('caseCreate');
-                form.schema.fields = form.schema.fields.map(field => {
+                const {form: {schema, data}} = formRepository.getForm('caseCreate');
+               schema.fields = schema.fields.map(field => {
                     const choices = field.props.choices;
                     if (choices && typeof choices === 'string') {
                         field.props.choices = listService.getList(choices, {user});
                     }
                     return field;
                 });
-                return form;
+                return {schema, data};
         }
     },
-    workflow: ({type, action}) => {
+    workflow: ({caseId, action}) => {
         // TODO: call workflow service for form
-        const {form} = formRepository.getForm('addDocument');
-        form.schema.fields = form.schema.fields.map(field => {
+        const {form: {schema, data}} = formRepository.getForm('addDocument');
+        schema.fields = schema.fields.map(field => {
             if (field.component === 'addDocument') {
                 const whitelist = field.props.whitelist;
                 if (whitelist && typeof whitelist === 'string') {
@@ -31,7 +31,7 @@ const actions = {
             }
             return field;
         });
-        return form;
+        return {schema, data, meta: {caseId}};
     },
     stage: ({caseId, stageId}, callback) => {
         axios.get(`${WORKFLOW_SERVICE}/case/${caseId}/stage/${stageId}`)
