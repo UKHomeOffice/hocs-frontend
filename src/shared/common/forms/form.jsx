@@ -11,6 +11,7 @@ import AddDocument from "./composite/document-add.jsx";
 import Button from "./button.jsx";
 import {ApplicationConsumer} from "../../contexts/application.jsx";
 import {redirect, updateForm, updateFormData, updateFormErrors} from "../../contexts/actions/index.jsx";
+import Dropdown from "./dropdown.jsx";
 
 class Form extends Component {
 
@@ -69,6 +70,11 @@ class Form extends Component {
                                  updateState={data => this.updateFormState(data)}/>;
             case 'text-area':
                 return <TextArea key={i}
+                                 {...field.props}
+                                 error={this.props.errors && this.props.errors[field.props.name]}
+                                 updateState={data => this.updateFormState(data)}/>;
+            case 'dropdown':
+                return <Dropdown key={i}
                                  {...field.props}
                                  error={this.props.errors && this.props.errors[field.props.name]}
                                  updateState={data => this.updateFormState(data)}/>;

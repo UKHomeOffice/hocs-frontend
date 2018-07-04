@@ -6,7 +6,7 @@ const logger = require('../libs/logger');
 const html = require('../layout/html');
 
 const render = (req, res, next) => {
-    logger.info('RENDER MIDDLEWARE');
+    logger.debug('RENDER MIDDLEWARE');
 
     const renderConfig = require('../config').forContext('render');
 

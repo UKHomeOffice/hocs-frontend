@@ -45,7 +45,7 @@ const validators = {
 };
 
 const validation = (req, res, next) => {
-        logger.info('VALIDATION MIDDLEWARE');
+        logger.debug('VALIDATION MIDDLEWARE');
         const {data, schema} = req.form;
         const fields = schema.fields.filter(field => field.type !== 'display');
         req.form.errors = fields.reduce((result, field) => {

@@ -9,7 +9,7 @@ const actions = {
         // TODO: Post to create case
         const url = `${WORKFLOW_SERVICE}/case`;
         const createCaseRequest = {
-            caseType: form.data['case-type']
+            type: form.data['case-type']
         };
         const headers = null;
         axios.post(url, createCaseRequest, headers)
@@ -24,7 +24,7 @@ const actions = {
     },
     document: ({form, caseId}, callback) => {
         // TODO: Post S3 URLs to workflow service
-        const documents = form.schema.fields.reduce((reducer, field) => {
+        const documentSummaries = form.schema.fields.reduce((reducer, field) => {
             if (field.component === 'addDocument') {
                 form.data[field.props.name].map(file => {
                     reducer.push({
@@ -37,10 +37,10 @@ const actions = {
             return reducer;
         }, []);
         logger.debug(form.action);
-        axios.post(`${WORKFLOW_SERVICE}/case/${caseId}/${form.schema.callback.value}`, {documents})
+        axios.post(`${WORKFLOW_SERVICE}/case/${caseId}/${form.schema.callback.value}`, {documentSummaries})
             .then(response => {
                 const {stageId} = response.data;
-                callback(`/case/${caseId}/stage/${stageId}`, null);
+                callback(`/`, null);
             })
             .catch(err => {
                 logger.error(err);
