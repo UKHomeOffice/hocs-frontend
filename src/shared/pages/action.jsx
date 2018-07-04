@@ -32,7 +32,6 @@ class Action extends Component {
 
     render() {
         const {
-            title,
             subTitle,
             form,
             match: {url}
@@ -46,7 +45,8 @@ class Action extends Component {
                     </h1>
                     {form && form.schema && <Form
                         action={url}
-                        fields={form.schema.fields}
+                        schema={form.schema}
+                        data={form.data}
                         errors={form.errors}
                     />}
                 </div>

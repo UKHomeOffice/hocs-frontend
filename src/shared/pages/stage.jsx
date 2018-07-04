@@ -45,7 +45,8 @@ class Stage extends Component {
                     </h1>
                     {form && form.schema && <Form
                         action={url}
-                        fields={form.schema.fields}
+                        schema={form.schema}
+                        data={form.data}
                         errors={form.errors}
                     />}
                 </div>
