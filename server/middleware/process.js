@@ -24,7 +24,7 @@ const processCheckbox = (name, value, choices) => {
 };
 
 const process = (req, res, next) => {
-    logger.info('PROCESS MIDDLEWARE');
+    logger.debug('PROCESS MIDDLEWARE');
     const data = req.body;
     const {schema} = req.form;
     const fields = schema.fields.filter(field => field.type !== 'display');
@@ -55,6 +55,7 @@ const process = (req, res, next) => {
         }
         return reducer;
     }, {});
+    logger.debug(`FORM DATA = ${JSON.stringify(req.form.data)}`);
     next();
 };
 

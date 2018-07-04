@@ -1,5 +1,6 @@
 const logger = require('../libs/logger');
 const forms = require('../forms/index');
+const {DOCUMENT_WHITELIST} = require('../config').forContext('server');
 
 const validationErrors = {
     required: 'is required',
@@ -20,26 +21,28 @@ const validators = {
         }
     },
     hasWhitelistedExtension: (files) => {
-        logger.info('Whitelisted extension validator');
-        if (!process.env.ALLOWED_FILE_EXTENSIONS) {
-            logger.warn('No file extension whitelist found: not validating extensions');
-            return null;
-        }
-        const allowableExtensions = process.env.ALLOWED_FILE_EXTENSIONS.split(',');
-  
-        for (let file of files) {
-            let fileExtension = file.originalname.split('.').slice(-1)[0];
-            logger.debug('Validating extension: ' + fileExtension);
-            if (allowableExtensions.includes(fileExtension)) {
-                logger.debug('Accepting extension: ' + fileExtension);
+        if (files) {
+            if (!DOCUMENT_WHITELIST) {
+                logger.warn('No file extension whitelist found: not validating extensions');
                 return null;
             }
 
-            logger.debug('Rejecting extension: ' + fileExtension);
-            return validationErrors.invalidFileExtension;
+            const allowableExtensions = DOCUMENT_WHITELIST.split(',');
+
+            for (let file of files) {
+                let fileExtension = file.originalname.split('.').slice(-1)[0];
+                logger.debug('Validating extension: ' + fileExtension);
+                if (allowableExtensions.includes(fileExtension)) {
+                    logger.debug('Accepting extension: ' + fileExtension);
+                    return null;
+                }
+
+                logger.debug('Rejecting extension: ' + fileExtension);
+                return validationErrors.invalidFileExtension(fileExtension);
+            }
+            // no files to check:
+            return null;
         }
-        // no files to check:
-        return null;
     }
 };
 

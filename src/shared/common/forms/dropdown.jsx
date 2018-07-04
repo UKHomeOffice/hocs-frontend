@@ -44,7 +44,7 @@ class Dropdown extends Component {
                         value={this.state.value}
                         onChange={e => this.handleChange(e)}
                 >
-                    {choices.map(choice => {
+                    {choices && choices.map(choice => {
                         return (
                             <option value={choice.value}>{choice.label}</option>
                         )

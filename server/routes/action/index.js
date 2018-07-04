@@ -3,6 +3,7 @@ const actionService = require('../../services/action');
 const fileMiddleware = require('../../middleware/file');
 const processMiddleware = require('../../middleware/process');
 const validationMiddleware = require('../../middleware/validation');
+const logger = require('../../libs/logger');
 
 router.post('/:action', fileMiddleware.any(), processMiddleware, validationMiddleware);
 

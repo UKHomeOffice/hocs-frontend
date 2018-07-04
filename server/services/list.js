@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const {DOCUMENT_WHITELIST} = require('../config').forContext('server');
 
 const lists = {
     'case_type': ({user}) => {
@@ -23,8 +24,7 @@ const lists = {
         return list.filter(listItem => User.hasRole(user, listItem.requiredRole));
     },
     'document_extension_whitelist': () => {
-        const list = process.env.ALLOWED_FILE_EXTENSIONS.split(',');
-        return list;
+        return DOCUMENT_WHITELIST.split(',');
     }
 };
 

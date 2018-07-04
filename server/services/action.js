@@ -1,31 +1,30 @@
 const logger = require('../libs/logger');
+const {WORKFLOW_SERVICE} = require('../config').forContext('server');
 const uuid = require('uuid/v4');
 const axios = require('axios');
 const path = require('path');
 
-const workflowService = process.env.WORKFLOW_SERVICE || 'http://localhost:8081';
-
 const actions = {
     create: ({form, user}, callback) => {
         // TODO: Post to create case
-        const url = `${workflowService}/case`;
+        const url = `${WORKFLOW_SERVICE}/case`;
         const createCaseRequest = {
-            caseType: form.data['case-type']
+            type: form.data['case-type']
         };
         const headers = null;
         axios.post(url, createCaseRequest, headers)
             .then(response => {
                 const stage = 'document';
-                callback(`/case/${response.data.uuid}/${stage}`, null);
+                callback(`/case/${response.data.caseReference}/${stage}`, null);
             })
             .catch(err => {
                 logger.error(err);
                 callback(null, 'Failed to perform action');
             });
     },
-    document: ({form, user, caseId}, callback) => {
+    document: ({form, caseId}, callback) => {
         // TODO: Post S3 URLs to workflow service
-        const documents = form.schema.fields.reduce((reducer, field) => {
+        const documentSummaries = form.schema.fields.reduce((reducer, field) => {
             if (field.component === 'addDocument') {
                 form.data[field.props.name].map(file => {
                     reducer.push({
@@ -37,16 +36,18 @@ const actions = {
             }
             return reducer;
         }, []);
-        const url = `${workflowService}/case/${caseId}/document`;
-        axios.post(url, {documents})
+        logger.debug(form.action);
+        axios.post(`${WORKFLOW_SERVICE}/case/${caseId}/${form.schema.callback.value}`, {documentSummaries})
             .then(response => {
-                callback('/', null);
+                const {stageId} = response.data;
+                callback(`/`, null);
             })
             .catch(err => {
                 logger.error(err);
                 callback(null, 'Failed to perform action');
             });
-    }
+    },
+    workflow: ({caseId, stageId, form}, callback) => callback('/')
 };
 
 const performAction = (action, options, callback) => {
