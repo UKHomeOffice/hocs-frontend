@@ -17,17 +17,20 @@ class Stage extends Component {
 
     getForm() {
         const url = '/forms' + this.props.match.url;
-        axios.get(url)
-            .then(res => {
-                this.props.dispatch(updateForm(res.data));
-            })
-            .catch(err => {
-                console.error(err.response.status);
-                if (err.response.status === 403) {
-                    return this.props.dispatch(redirect('/unauthorised'));
-                }
-                return this.props.dispatch(redirect('/error'));
-            });
+        const {form} = this.props;
+        if (!form) {
+            axios.get(url)
+                .then(res => {
+                    this.props.dispatch(updateForm(res.data));
+                })
+                .catch(err => {
+                    console.error(err.response.status);
+                    if (err.response.status === 403) {
+                        return this.props.dispatch(redirect('/unauthorised'));
+                    }
+                    return this.props.dispatch(redirect('/error'));
+                });
+        }
     }
 
     render() {

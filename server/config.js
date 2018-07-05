@@ -3,7 +3,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 const config = {
     applications: {
         render: {
-            clientSide: false,//process.env.USE_CLIENTSIDE || true,
+            clientSide: process.env.USE_CLIENTSIDE || true,
             js: ['vendor'],
             css: ['main'],
             react: 'main',
