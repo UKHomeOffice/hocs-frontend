@@ -16,7 +16,7 @@ const browserConfig = env => {
             ],
             main: './src/browser/index.js'
         },
-        devtool: "sourcemap",
+        devtool: 'sourcemap',
         output: {
             path: path.resolve(__dirname, 'build'),
             filename: mode === 'development' ? 'public/js/[name].js' : 'public/js/[name]-[hash].js',
@@ -38,18 +38,18 @@ const browserConfig = env => {
                             loader: ExtractTextPlugin.loader
                         },
                         {
-                            loader: "css-loader"
+                            loader: 'css-loader'
                         },
                         {
-                            loader: "postcss-loader",
+                            loader: 'postcss-loader',
                             options: {plugins: [AutoPrefixer()]}
                         },
                         {
-                            loader: "sass-loader",
+                            loader: 'sass-loader',
                             options: {
                                 includePaths: [
-                                    path.resolve(__dirname, "node_modules"),
-                                    path.resolve(__dirname, "./src/styles"),
+                                    path.resolve(__dirname, 'node_modules'),
+                                    path.resolve(__dirname, './src/styles'),
                                 ]
                             }
                         }
@@ -60,7 +60,7 @@ const browserConfig = env => {
         },
         optimization: {
             splitChunks: {
-                chunks: "all",
+                chunks: 'all',
                 name: true,
                 cacheGroups: {
                     default: {
@@ -76,14 +76,14 @@ const browserConfig = env => {
         },
         plugins: [
             new webpack.DefinePlugin({
-                __isBrowser__: "true"
+                __isBrowser__: 'true'
             }),
             new UglifyJsPlugin({
                 sourceMap: true,
                 parallel: true
             }),
             new ExtractTextPlugin({
-                filename: mode === 'development' ? "public/styles/[name].css" : "public/styles/[name]-[hash].css"
+                filename: mode === 'development' ? 'public/styles/[name].css' : 'public/styles/[name]-[hash].css'
             }),
             new AssetsPlugin({
                 output: 'assets.json',
@@ -101,7 +101,7 @@ const browserConfig = env => {
                             type,
                             asset: value
                         }
-                    }
+                    };
                 },
                 transform: (assets, manifest) => {
                     const js = Object.keys(assets).reduce((r, a) => {
@@ -120,11 +120,11 @@ const browserConfig = env => {
                     }, {});
                     return {
                         js, css
-                    }
+                    };
                 }
             })
         ]
-    }
+    };
 };
 
 
@@ -140,7 +140,7 @@ const serverConfig = {
     module: {
         rules: [
             {test: [/\.(js)$/, /\.(jsx)$/], loader: 'babel-loader', query: {presets: ['react']}},
-            {test: /\.scss$/, loader: "css-loader/locals"}
+            {test: /\.scss$/, loader: 'css-loader/locals'}
         ]
     }
 };

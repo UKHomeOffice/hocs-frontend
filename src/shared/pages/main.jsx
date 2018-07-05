@@ -24,7 +24,7 @@ class MainPage extends Component {
                     return (
                         <div className="grid-row">
                             <div className="column-full">
-                                <h1 className="heading-xlarge">
+                                <h1 className="heading-large">
                                     {title}
                                     {subTitle && <span className="heading-secondary">{subTitle}</span>}
                                 </h1>

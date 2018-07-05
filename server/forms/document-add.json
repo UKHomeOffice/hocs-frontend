@@ -1,0 +1,47 @@
+{
+  "form": {
+    "schema": {
+      "action": "add_document",
+      "callback": {
+        "action": "case",
+        "value": "documents"
+      },
+      "title": "Add documents",
+      "defaultActionLabel": "Add document",
+      "fields": [
+        {
+          "component": "paragraph",
+          "type": "display",
+          "props": {
+            "content": "Description to go here"
+          }
+        },
+        {
+          "component": "addDocument",
+          "validation": [
+            "required",
+            "hasWhitelistedExtension"
+          ],
+          "props": {
+            "name": "add_document",
+            "action": "ADD_DOCUMENT",
+            "documentType": "ORIGINAL",
+            "className": "button-secondary-action",
+            "label": "Document",
+            "allowMultiple": true,
+            "whitelist": "DOCUMENT_EXTENSION_WHITELIST"
+          }
+        },
+        {
+          "component": "button",
+          "props": {
+            "name": "cancel",
+            "action": "/",
+            "className": "button-secondary-action",
+            "label": "Cancel"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -4,7 +4,9 @@ import types from "./actions/types.jsx";
 const Context = React.createContext();
 
 const reducer = (state, action) => {
+    // TODO: REMOVE
     console.log(`ACTION: ${action.type} PAYLOAD: ${JSON.stringify(action.payload)}`);
+    // ------------
     switch (action.type) {
         case types.UPDATE_FORM:
             return {...state, form: action.payload};
@@ -14,6 +16,12 @@ const reducer = (state, action) => {
                     ...state.form, data: {
                         ...state.form.data, ...action.payload
                     }
+                }
+            };
+        case types.UPDATE_FORM_ERRORS:
+            return {
+                ...state, form: {
+                    ...state.form, errors: action.payload
                 }
             };
         case types.SET_PHASE:

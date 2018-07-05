@@ -1,4 +1,4 @@
-import User from "../user";
+import User from '../user';
 
 const testUser = new User({
     token: 'token',

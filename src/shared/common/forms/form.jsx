@@ -7,9 +7,11 @@ import Date from "./date.jsx";
 import Checkbox from "./checkbox-group.jsx";
 import Submit from "./submit.jsx";
 import TextArea from "./text-area.jsx";
+import AddDocument from "./composite/document-add.jsx";
 import Button from "./button.jsx";
 import {ApplicationConsumer} from "../../contexts/application.jsx";
-import {redirect, updateFormData, updateForm} from "../../contexts/actions/index.jsx";
+import {redirect, updateForm, updateFormData, updateFormErrors} from "../../contexts/actions/index.jsx";
+import Dropdown from "./dropdown.jsx";
 
 class Form extends Component {
 
@@ -25,11 +27,22 @@ class Form extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        const url = '/api' + this.props.action;
-        axios.post(url, {...this.state})
+        const url = this.props.action;
+        console.debug(url);
+        const formData = new FormData();
+        Object.keys(this.state).map(e => formData.append(e, this.state[e]));
+        axios.post(url, formData, {headers: {'Content-Type': 'multipart/form-data'}})
             .then(res => {
-                this.props.dispatch(updateForm(null));
-                this.props.dispatch(redirect(res.data.redirect));
+                if(res.data.errors) {
+                    this.props.dispatch(updateFormErrors(res.data.errors));
+                } else {
+                    if (res.data.redirect === url) {
+                        this.props.dispatch(updateForm(null));
+                        return this.props.getForm();
+                    }
+                    this.props.dispatch(updateForm(null));
+                    this.props.dispatch(redirect(res.data.redirect));
+                }
             })
             .catch(err => {
                 console.error(err);
@@ -43,50 +56,67 @@ class Form extends Component {
                 return <Radio key={i}
                               {...field.props}
                               error={this.props.errors && this.props.errors[field.props.name]}
+                              value={this.props.data && this.props.data[field.props.name]}
                               updateState={data => this.updateFormState(data)}/>;
             case 'text':
                 return <Text key={i}
                              {...field.props}
                              error={this.props.errors && this.props.errors[field.props.name]}
+                             value={this.props.data && this.props.data[field.props.name]}
                              updateState={data => this.updateFormState(data)}/>;
             case 'date':
                 return <Date key={i}
                              {...field.props}
                              error={this.props.errors && this.props.errors[field.props.name]}
+                             value={this.props.data && this.props.data[field.props.name]}
                              updateState={data => this.updateFormState(data)}/>;
             case 'checkbox':
                 return <Checkbox key={i}
                                  {...field.props}
                                  error={this.props.errors && this.props.errors[field.props.name]}
+                                 // TODO: implement value={}
                                  updateState={data => this.updateFormState(data)}/>;
             case 'text-area':
                 return <TextArea key={i}
                                  {...field.props}
                                  error={this.props.errors && this.props.errors[field.props.name]}
+                                 value={this.props.data && this.props.data[field.props.name]}
+                                 updateState={data => this.updateFormState(data)}/>;
+            case 'dropdown':
+                return <Dropdown key={i}
+                                 {...field.props}
+                                 error={this.props.errors && this.props.errors[field.props.name]}
+                                 value={this.props.data && this.props.data[field.props.name]}
                                  updateState={data => this.updateFormState(data)}/>;
             case 'button':
                 return <Button key={i}
                                {...field.props}/>;
+            case 'addDocument':
+                return <AddDocument key={i}
+                                    {...field.props}
+                                    error={this.props.errors && this.props.errors[field.props.name]}
+                                    updateState={data => this.updateFormState(data)}/>;
             case 'heading':
                 return <h2 key={i} className="heading-medium">{field.props.label}</h2>;
         }
     }
 
     render() {
-        const {errors, method, defaultActionLabel, children, fields, action} = this.props;
+        const {errors, method, children, schema, action} = this.props;
         return (
             <Fragment>
                 {errors && <ErrorSummary errors={errors}/>}
                 <form
-                    action={'/api' + action + '?noScript=true'}
+                    action={action + '?noScript=true'}
                     method={method}
                     onSubmit={e => this.handleSubmit(e)}
+                    encType="multipart/form-data"
                 >
-                    {fields.map((field, i) => {
+                    {children}
+                    {schema && schema.fields.map((field, i) => {
                         return this.renderFormComponent(field, i);
                     })}
-                    {children}
-                    <Submit label={defaultActionLabel}/>
+                    <Submit label={schema.defaultActionLabel}/>
                 </form>
             </Fragment>
         );

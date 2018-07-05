@@ -16,18 +16,21 @@ class Case extends Component {
     }
 
     getForm() {
-        const url = '/api' + this.props.match.url;
-        axios.get(url)
-            .then(res => {
-                this.props.dispatch(updateForm(res.data));
-            })
-            .catch(err => {
-                console.error(err.response.status);
-                if (err.response.status === 403) {
-                    return this.props.dispatch(redirect('/unauthorised'));
-                }
-                return this.props.dispatch(redirect('/error'));
-            });
+        const url = '/forms' + this.props.match.url;
+        const {form} = this.props;
+        if (!form) {
+            axios.get(url)
+                .then(res => {
+                    this.props.dispatch(updateForm(res.data));
+                })
+                .catch(err => {
+                    console.error(err.response.status);
+                    if (err.response.status === 403) {
+                        return this.props.dispatch(redirect('/unauthorised'));
+                    }
+                    return this.props.dispatch(redirect('/error'));
+                });
+        }
     }
 
     render() {
@@ -39,13 +42,15 @@ class Case extends Component {
         return (
             <div className="grid-row">
                 <div className="column-full">
-                    <h1 className="heading-xlarge">
-                        {title}
+                    <h1 className="heading-large">
+                        {form && form.schema && form.schema.title}
                         <span className="heading-secondary">{`${caseId}`}</span>
                     </h1>
-                    {form && <Form
+                    {form && form.schema && <Form
                         action={url}
-                        fields={form.fields}
+                        schema={form.schema}
+                        data={form.data}
+                        errors={form.errors}
                     />}
                 </div>
             </div>
@@ -53,10 +58,11 @@ class Case extends Component {
     }
 }
 
-const WrappedPage = props => (
-    <ApplicationConsumer>
-        {({dispatch, form}) => <Case {...props} dispatch={dispatch} form={form}/>}
-    </ApplicationConsumer>
-);
+const
+    WrappedPage = props => (
+        <ApplicationConsumer>
+            {({dispatch, form}) => <Case {...props} dispatch={dispatch} form={form}/>}
+        </ApplicationConsumer>
+    );
 
 export default WrappedPage;

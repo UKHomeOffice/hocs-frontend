@@ -1,25 +1,31 @@
 {
-  "action": "CREATE",
-  "fields":[
-    {
-      "component": "radio",
-      "validation": [
-        "required"
-      ],
-      "props": {
-        "name": "case-type",
-        "label": "Case type",
-        "choices": "CASE_TYPE"
-      }
-    },
-    {
-      "component": "button",
-      "props": {
-        "name": "cancel",
-        "action": "CANCEL",
-        "className": "button-secondary-action",
-        "label": "Cancel"
-      }
+  "form": {
+    "schema": {
+      "action": "CREATE",
+      "title": "Create case",
+      "defaultActionLabel": "Add document",
+      "fields": [
+        {
+          "component": "radio",
+          "validation": [
+            "required"
+          ],
+          "props": {
+            "name": "case-type",
+            "label": "Case type",
+            "choices": "CASE_TYPE"
+          }
+        },
+        {
+          "component": "button",
+          "props": {
+            "name": "cancel",
+            "action": "/",
+            "className": "button-secondary-action",
+            "label": "Cancel"
+          }
+        }
+      ]
     }
-  ]
+  }
 }

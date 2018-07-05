@@ -1,5 +1,5 @@
-import React from "react";
-import Error from "../error.jsx";
+import React from 'react';
+import Error from '../error.jsx';
 
 describe('Error component', () => {
     it('should render with default props', () => {

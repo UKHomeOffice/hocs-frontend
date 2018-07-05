@@ -1,26 +1,30 @@
 const User = require('../models/user');
+const {DOCUMENT_WHITELIST} = require('../config').forContext('server');
 
 const lists = {
     'case_type': ({user}) => {
-        // TODO: add call to external service
+        // TODO: add call to workflow service
         const list = [
             {
-                "requiredRole": "DCU",
-                "label": "DCU Ministerial",
-                "value": "DCU_MINISTERIAL"
+                'requiredRole': 'DCU',
+                'label': 'DCU Ministerial',
+                'value': 'MIN'
             },
             {
-                "requiredRole": "UKVI",
-                "label": "UKVI MREF",
-                "value": "UKVI_MREF"
+                'requiredRole': 'UKVI',
+                'label': 'UKVI MREF',
+                'value': 'MREF'
             },
             {
-                "requiredRole": "FOI",
-                "label": "FOI Complaint",
-                "value": "FOI_COMPLAINT"
+                'requiredRole': 'FOI',
+                'label': 'FOI Complaint',
+                'value': 'COM'
             }
         ];
         return list.filter(listItem => User.hasRole(user, listItem.requiredRole));
+    },
+    'document_extension_whitelist': () => {
+        return DOCUMENT_WHITELIST.split(',');
     }
 };
 

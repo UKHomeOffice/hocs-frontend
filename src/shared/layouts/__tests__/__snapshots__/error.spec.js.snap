@@ -8,7 +8,7 @@ exports[`Error component should render with a stack trace when passed 1`] = `
     class="column-full"
   >
     <h1
-      class="heading-xlarge"
+      class="heading-large"
     >
       An error has occurred
       <span
@@ -34,7 +34,7 @@ exports[`Error component should render with default props 1`] = `
     class="column-full"
   >
     <h1
-      class="heading-xlarge"
+      class="heading-large"
     >
       An error has occurred
       <span
@@ -55,7 +55,7 @@ exports[`Error component should render with location when passed 1`] = `
     class="column-full"
   >
     <h1
-      class="heading-xlarge"
+      class="heading-large"
     >
       An error has occurred
       <span

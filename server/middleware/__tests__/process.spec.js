@@ -1,4 +1,4 @@
-import processMiddleware from "../process";
+import processMiddleware from '../process';
 
 describe('Process middleware', () => {
     it('should process form data when passed', () => {
