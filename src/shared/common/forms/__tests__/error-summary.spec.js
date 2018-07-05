@@ -1,5 +1,5 @@
-import React from "react";
-import ErrorSummary from "../error-summary.jsx";
+import React from 'react';
+import ErrorSummary from '../error-summary.jsx';
 
 const errors = {
     field1: 'Error 1',
