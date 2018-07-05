@@ -168,7 +168,12 @@ spec:
                 name: cs-dev-untrusted-s3
                 key: bucket_name
           - name: WORKFLOW_SERVICE
-            value: 'https://hocs-workflow.{{.KUBE_NAMESPACE}}.svc.cluster.local:443'
+            value: 'hocs-workflow.{{.KUBE_NAMESPACE}}.svc.cluster.local:443'
+          - name: WORKFLOW_BASIC_AUTH
+            valueFrom:
+              secretKeyRef:
+                name: ui-casework-creds
+                key: plaintext          
           - name: OUTBOUND_PROXY
             value: 'hocs-outbound-proxy.{{.KUBE_NAMESPACE}}.svc.cluster.local:31290'
           - name: ALLOWED_FILE_EXTENSIONS
