@@ -38,10 +38,9 @@ class Stage extends Component {
         return (
             <div className="grid-row">
                 <div className="column-full">
-                    <h1 className="heading-xlarge">
+                    <h1 className="heading-large">
                         {form && form.schema && form.schema.title}
-                        <span className="heading-secondary">{`${caseId}`}</span>
-                        <span className="heading-secondary">{`${stageId}`}</span>
+                        <span className="heading-secondary">{`${form && form.meta && form.meta.caseRef}`}</span>
                     </h1>
                     {form && form.schema && <Form
                         action={url}

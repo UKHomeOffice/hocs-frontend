@@ -38,13 +38,13 @@ const actions = {
             .then((response) => {
                 if(response && response.data && response.data && response.data.form) {
                     const stageUUID = response.data.stageUUID;
+                    const caseRef = response.data.caseReference;
                     const {schema, data} = response.data.form;
-                    return callback({schema, data, meta: {stageUUID}});
+                    return callback({schema, data, meta: {caseRef, stageUUID}});
                 }
                 callback();
             })
             .catch((err) => {
-
             });
         //return formRepository.getForm('testForm');
     }

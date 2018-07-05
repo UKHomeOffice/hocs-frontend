@@ -33,13 +33,15 @@ class Action extends Component {
     render() {
         const {
             subTitle,
+            caseRef,
             form,
             match: {url}
         } = this.props;
         return (
             <div className="grid-row">
                 <div className="column-full">
-                    <h1 className="heading-xlarge">
+                    <h1 className="heading-large">
+                        {caseRef}
                         {form && form.schema && form.schema.title}
                         {subTitle && <span className="heading-secondary">{subTitle}</span>}
                     </h1>

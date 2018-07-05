@@ -22,12 +22,12 @@ class Date extends Component {
     }
 
     parseValue() {
-        const parts = this.props.value.split('-');
-        return {
-            [this.datePart('day')]: parts[2] || '',
-            [this.datePart('month')]: parts[1] || '',
-            [this.datePart('year')]: parts[0] || ''
-        };
+        const parts = this.props.value && this.props.value.split('-');
+            return {
+                [this.datePart('day')]: parts && parts[2] || '',
+                [this.datePart('month')]: parts && parts[1] || '',
+                [this.datePart('year')]: parts && parts[0] || ''
+            };
     }
 
     render() {

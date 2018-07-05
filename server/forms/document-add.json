@@ -4,7 +4,7 @@
       "action": "add_document",
       "callback": {
         "action": "case",
-        "value": "start"
+        "value": "documents"
       },
       "title": "Add documents",
       "defaultActionLabel": "Add document",

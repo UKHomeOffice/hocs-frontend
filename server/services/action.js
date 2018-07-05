@@ -15,7 +15,7 @@ const actions = {
         axios.post(url, createCaseRequest, headers)
             .then(response => {
                 const stage = 'document';
-                callback(`/case/${response.data.caseReference}/${stage}`, null);
+                callback(`/case/${response.data.uuid}/${stage}`, null);
             })
             .catch(err => {
                 logger.error(err);
@@ -50,7 +50,7 @@ const actions = {
     workflow: ({caseId, stageId, form}, callback) => {
         axios.post(`${WORKFLOW_SERVICE}/case/${caseId}/stage/${stageId}`, {...form.data})
             .then(response => {
-                if (response.data && response.data.callback === 'NEXT') {
+                if (response.data && response.data.screenName !== 'FINISH') {
                     return callback(`/case/${caseId}/stage/${stageId}`, null);
                 } else {
                     return callback('/', null);

@@ -3,7 +3,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 const config = {
     applications: {
         render: {
-            clientSide: process.env.USE_CLIENTSIDE || true,
+            clientSide: false,//process.env.USE_CLIENTSIDE || true,
             js: ['vendor'],
             css: ['main'],
             react: 'main',
@@ -19,7 +19,7 @@ const config = {
             },
             body: {
                 phaseBanner: {
-                    isVisible: true,
+                    isVisible: false,
                     phase: 'ALPHA',
                     feedbackUrl: '#'
                 }
