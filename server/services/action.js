@@ -5,7 +5,7 @@ const axios = require('axios');
 const path = require('path');
 
 const workflowService = axios.create({
-    baseUrl: WORKFLOW_SERVICE,
+    baseURL: WORKFLOW_SERVICE,
     auth: WORKFLOW_BASIC_AUTH
 });
 
