@@ -1,18 +1,20 @@
 const logger = require('../libs/logger');
-const {WORKFLOW_SERVICE} = require('../config').forContext('server');
+const {WORKFLOW_SERVICE, WORKFLOW_BASIC_AUTH} = require('../config').forContext('server');
 const uuid = require('uuid/v4');
 const axios = require('axios');
 const path = require('path');
 
+const workflowService = axios.create({
+    baseUrl: WORKFLOW_SERVICE,
+    auth: WORKFLOW_BASIC_AUTH
+});
+
 const actions = {
     create: ({form, user}, callback) => {
-        // TODO: Post to create case
-        const url = `${WORKFLOW_SERVICE}/case`;
         const createCaseRequest = {
             type: form.data['case-type']
         };
-        const headers = null;
-        axios.post(url, createCaseRequest, headers)
+        workflowService.post('/case', createCaseRequest)
             .then(response => {
                 const stage = 'document';
                 callback(`/case/${response.data.uuid}/${stage}`, null);
@@ -37,7 +39,7 @@ const actions = {
             return reducer;
         }, []);
         logger.debug(form.action);
-        axios.post(`${WORKFLOW_SERVICE}/case/${caseId}/${form.schema.callback.value}`, {documentSummaries})
+        workflowService.post(`/case/${caseId}/${form.schema.callback.value}`, {documentSummaries})
             .then(response => {
                 const {stageId} = response.data;
                 callback(`/`, null);
@@ -48,7 +50,7 @@ const actions = {
             });
     },
     workflow: ({caseId, stageId, form}, callback) => {
-        axios.post(`${WORKFLOW_SERVICE}/case/${caseId}/stage/${stageId}`, {...form.data})
+        workflowService.post(`/case/${caseId}/stage/${stageId}`, {...form.data})
             .then(response => {
                 if (response.data && response.data.screenName !== 'FINISH') {
                     return callback(`/case/${caseId}/stage/${stageId}`, null);
