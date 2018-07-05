@@ -168,7 +168,7 @@ spec:
                 name: cs-dev-untrusted-s3
                 key: bucket_name
           - name: WORKFLOW_SERVICE
-            value: 'hocs-workflow.{{.KUBE_NAMESPACE}}.svc.cluster.local:443'
+            value: 'https://hocs-workflow.{{.KUBE_NAMESPACE}}.svc.cluster.local'
           - name: WORKFLOW_BASIC_AUTH
             valueFrom:
               secretKeyRef:
