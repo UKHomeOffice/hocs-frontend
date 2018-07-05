@@ -1,4 +1,5 @@
 const isProduction = process.env.NODE_ENV === 'production';
+const workflowAuth = (process.env.WORKFLOW_BASIC_AUTH || 'UNSET:UNSET').split(':');
 
 const config = {
     applications: {
@@ -30,6 +31,8 @@ const config = {
         },
         server: {
             WORKFLOW_SERVICE: process.env.WORKFLOW_SERVICE || 'http://localhost:8081',
+            WORKFLOW_BASIC_AUTH: process.env.WORKFLOW_BASIC_AUTH ?
+                {username: workflowAuth[0], password: workflowAuth[1]} : null,
             DOCUMENT_WHITELIST: process.env.ALLOWED_FILE_EXTENSIONS || 'txt,doc,docx',
         },
         AWS: {
