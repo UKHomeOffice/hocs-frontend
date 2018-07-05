@@ -50,7 +50,7 @@ const actions = {
                 callback();
             })
             .catch((err) => {
-                logger.error(err);
+                logger.error(`${err.message}`);
                 callback();
             });
     }

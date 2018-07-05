@@ -20,7 +20,7 @@ const actions = {
                 callback(`/case/${response.data.uuid}/${stage}`, null);
             })
             .catch(err => {
-                logger.error(err);
+                logger.error(`${err.message}`);
                 callback(null, 'Failed to perform action');
             });
     },
@@ -45,7 +45,7 @@ const actions = {
                 callback(`/`, null);
             })
             .catch(err => {
-                logger.error(err);
+                logger.error(`${err.message}`);
                 callback(null, 'Failed to perform action');
             });
     },
@@ -59,7 +59,7 @@ const actions = {
                 }
             })
             .catch(err => {
-                logger.error(err);
+                logger.error(`${err.message}`);
                 callback(null, 'Failed to perform action');
             });
     }
