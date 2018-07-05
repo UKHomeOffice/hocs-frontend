@@ -48,6 +48,7 @@ class Stage extends Component {
                         schema={form.schema}
                         data={form.data}
                         errors={form.errors}
+                        getForm={() => this.getForm()}
                     />}
                 </div>
             </div>

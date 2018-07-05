@@ -36,6 +36,10 @@ class Form extends Component {
                 if(res.data.errors) {
                     this.props.dispatch(updateFormErrors(res.data.errors));
                 } else {
+                    if (res.data.redirect === url) {
+                        this.props.dispatch(updateForm(null));
+                        return this.props.getForm();
+                    }
                     this.props.dispatch(updateForm(null));
                     this.props.dispatch(redirect(res.data.redirect));
                 }
@@ -98,7 +102,7 @@ class Form extends Component {
     }
 
     render() {
-        const {errors, method, defaultActionLabel, children, schema, action} = this.props;
+        const {errors, method, children, schema, action} = this.props;
         return (
             <Fragment>
                 {errors && <ErrorSummary errors={errors}/>}
@@ -112,7 +116,7 @@ class Form extends Component {
                     {schema && schema.fields.map((field, i) => {
                         return this.renderFormComponent(field, i);
                     })}
-                    <Submit label={defaultActionLabel}/>
+                    <Submit label={schema.defaultActionLabel}/>
                 </form>
             </Fragment>
         );

@@ -47,7 +47,20 @@ const actions = {
                 callback(null, 'Failed to perform action');
             });
     },
-    workflow: ({caseId, stageId, form}, callback) => callback('/')
+    workflow: ({caseId, stageId, form}, callback) => {
+        axios.post(`${WORKFLOW_SERVICE}/case/${caseId}/stage/${stageId}`, {...form.data})
+            .then(response => {
+                if (response.data && response.data.callback === 'NEXT') {
+                    return callback(`/case/${caseId}/stage/${stageId}`, null);
+                } else {
+                    return callback('/', null);
+                }
+            })
+            .catch(err => {
+                logger.error(err);
+                callback(null, 'Failed to perform action');
+            });
+    }
 };
 
 const performAction = (action, options, callback) => {
