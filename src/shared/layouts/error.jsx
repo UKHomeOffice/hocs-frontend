@@ -20,7 +20,7 @@ class Error extends Component {
         return (
             <div className="grid-row">
                 <div className="column-full">
-                    <h1 className="heading-xlarge">
+                    <h1 className="heading-large">
                         {`${error}`}
                         <span className="heading-secondary">{title}</span>
                     </h1>

@@ -4,19 +4,17 @@ const html = require('../layout/html');
 const authMiddleware = require('../middleware/auth');
 const renderMiddleware = require('../middleware/render');
 const formsRouter = require('./forms');
-const {getFormForCase, getFormForAction} = require('../services/form');
+const {getFormForCase, getFormForAction, getFormForStage} = require('../services/form');
 
 html.use(assets);
 
 router.use('*', authMiddleware);
 
-router.use('/action/:action', (req, res, next) => {
-    getFormForAction(req, res, next);
-});
+router.use('/action/:action', getFormForAction);
 
-router.use('/case/:type/:action', (req, res, next) => {
-    getFormForCase(req, res, next);
-});
+router.use('/case/:type/:action', getFormForCase);
+
+router.use('/case/:caseId/stage/:stageId', getFormForStage);
 
 router.use('/', formsRouter);
 

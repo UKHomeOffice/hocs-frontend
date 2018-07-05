@@ -4,7 +4,7 @@ import {ApplicationConsumer} from "../contexts/application.jsx";
 import axios from "axios";
 import {redirect, updateForm, updateLocation} from "../contexts/actions/index.jsx";
 
-class Action extends Component {
+class Stage extends Component {
 
     constructor(props) {
         super(props);
@@ -35,24 +35,22 @@ class Action extends Component {
 
     render() {
         const {
-            subTitle,
-            caseRef,
             form,
-            match: {url}
+            match: {url, params: {caseId, stageId}}
         } = this.props;
         return (
             <div className="grid-row">
                 <div className="column-full">
                     <h1 className="heading-large">
-                        {caseRef}
                         {form && form.schema && form.schema.title}
-                        {subTitle && <span className="heading-secondary">{subTitle}</span>}
+                        <span className="heading-secondary">{`${form && form.meta && form.meta.caseRef}`}</span>
                     </h1>
                     {form && form.schema && <Form
                         action={url}
                         schema={form.schema}
                         data={form.data}
                         errors={form.errors}
+                        getForm={() => this.getForm()}
                     />}
                 </div>
             </div>
@@ -60,10 +58,11 @@ class Action extends Component {
     }
 }
 
-const WrappedPage = props => (
-    <ApplicationConsumer>
-        {({dispatch, form}) => <Action {...props} dispatch={dispatch} form={form}/>}
-    </ApplicationConsumer>
-);
+const
+    WrappedStage = props => (
+        <ApplicationConsumer>
+            {({dispatch, form}) => <Stage {...props} dispatch={dispatch} form={form}/>}
+        </ApplicationConsumer>
+    );
 
-export default WrappedPage;
+export default WrappedStage;

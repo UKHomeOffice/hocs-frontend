@@ -1,5 +1,5 @@
-import React from "react";
-import Footer from "../footer.jsx";
+import React from 'react';
+import Footer from '../footer.jsx';
 
 describe('Layout footer component', () => {
     it('should render with default props', () => {
@@ -9,10 +9,10 @@ describe('Layout footer component', () => {
     });
     it('should render with links when passed', () => {
         const props = {
-          links: [
-              {label: 'first', target: '/'},
-              {label: 'second', target: '/'}
-          ]
+            links: [
+                {label: 'first', target: '/'},
+                {label: 'second', target: '/'}
+            ]
         };
         expect(
             render(<Footer {...props}/>)

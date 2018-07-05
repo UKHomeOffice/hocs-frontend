@@ -11,6 +11,7 @@ import AddDocument from "./composite/document-add.jsx";
 import Button from "./button.jsx";
 import {ApplicationConsumer} from "../../contexts/application.jsx";
 import {redirect, updateForm, updateFormData, updateFormErrors} from "../../contexts/actions/index.jsx";
+import Dropdown from "./dropdown.jsx";
 
 class Form extends Component {
 
@@ -35,6 +36,10 @@ class Form extends Component {
                 if(res.data.errors) {
                     this.props.dispatch(updateFormErrors(res.data.errors));
                 } else {
+                    if (res.data.redirect === url) {
+                        this.props.dispatch(updateForm(null));
+                        return this.props.getForm();
+                    }
                     this.props.dispatch(updateForm(null));
                     this.props.dispatch(redirect(res.data.redirect));
                 }
@@ -51,26 +56,37 @@ class Form extends Component {
                 return <Radio key={i}
                               {...field.props}
                               error={this.props.errors && this.props.errors[field.props.name]}
+                              value={this.props.data && this.props.data[field.props.name]}
                               updateState={data => this.updateFormState(data)}/>;
             case 'text':
                 return <Text key={i}
                              {...field.props}
                              error={this.props.errors && this.props.errors[field.props.name]}
+                             value={this.props.data && this.props.data[field.props.name]}
                              updateState={data => this.updateFormState(data)}/>;
             case 'date':
                 return <Date key={i}
                              {...field.props}
                              error={this.props.errors && this.props.errors[field.props.name]}
+                             value={this.props.data && this.props.data[field.props.name]}
                              updateState={data => this.updateFormState(data)}/>;
             case 'checkbox':
                 return <Checkbox key={i}
                                  {...field.props}
                                  error={this.props.errors && this.props.errors[field.props.name]}
+                                 // TODO: implement value={}
                                  updateState={data => this.updateFormState(data)}/>;
             case 'text-area':
                 return <TextArea key={i}
                                  {...field.props}
                                  error={this.props.errors && this.props.errors[field.props.name]}
+                                 value={this.props.data && this.props.data[field.props.name]}
+                                 updateState={data => this.updateFormState(data)}/>;
+            case 'dropdown':
+                return <Dropdown key={i}
+                                 {...field.props}
+                                 error={this.props.errors && this.props.errors[field.props.name]}
+                                 value={this.props.data && this.props.data[field.props.name]}
                                  updateState={data => this.updateFormState(data)}/>;
             case 'button':
                 return <Button key={i}
@@ -86,7 +102,7 @@ class Form extends Component {
     }
 
     render() {
-        const {errors, method, defaultActionLabel, children, fields, action} = this.props;
+        const {errors, method, children, schema, action} = this.props;
         return (
             <Fragment>
                 {errors && <ErrorSummary errors={errors}/>}
@@ -97,10 +113,10 @@ class Form extends Component {
                     encType="multipart/form-data"
                 >
                     {children}
-                    {fields.map((field, i) => {
+                    {schema && schema.fields.map((field, i) => {
                         return this.renderFormComponent(field, i);
                     })}
-                    <Submit label={defaultActionLabel}/>
+                    <Submit label={schema.defaultActionLabel}/>
                 </form>
             </Fragment>
         );

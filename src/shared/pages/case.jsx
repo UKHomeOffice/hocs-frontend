@@ -17,17 +17,20 @@ class Case extends Component {
 
     getForm() {
         const url = '/forms' + this.props.match.url;
-        axios.get(url)
-            .then(res => {
-                this.props.dispatch(updateForm(res.data));
-            })
-            .catch(err => {
-                console.error(err.response.status);
-                if (err.response.status === 403) {
-                    return this.props.dispatch(redirect('/unauthorised'));
-                }
-                return this.props.dispatch(redirect('/error'));
-            });
+        const {form} = this.props;
+        if (!form) {
+            axios.get(url)
+                .then(res => {
+                    this.props.dispatch(updateForm(res.data));
+                })
+                .catch(err => {
+                    console.error(err.response.status);
+                    if (err.response.status === 403) {
+                        return this.props.dispatch(redirect('/unauthorised'));
+                    }
+                    return this.props.dispatch(redirect('/error'));
+                });
+        }
     }
 
     render() {
@@ -39,13 +42,14 @@ class Case extends Component {
         return (
             <div className="grid-row">
                 <div className="column-full">
-                    <h1 className="heading-xlarge">
+                    <h1 className="heading-large">
                         {form && form.schema && form.schema.title}
                         <span className="heading-secondary">{`${caseId}`}</span>
                     </h1>
                     {form && form.schema && <Form
                         action={url}
-                        fields={form.schema.fields}
+                        schema={form.schema}
+                        data={form.data}
                         errors={form.errors}
                     />}
                 </div>

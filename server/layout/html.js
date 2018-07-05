@@ -6,16 +6,16 @@ let assets = {
 };
 
 const render = ({
-                    assetPath = '/public',
-                    css = [],
-                    js = [],
-                    react = 'main',
-                    title = 'My React Application',
-                    propositionHeader = '',
-                    markup = '',
-                    props = {},
-                    clientSide = true
-                }) => {
+    assetPath = '/public',
+    css = [],
+    js = [],
+    react = 'main',
+    title = 'My React Application',
+    propositionHeader = '',
+    markup = '',
+    props = {},
+    clientSide = true
+}) => {
     return (`<!DOCTYPE html>
                 <html>
                 <head>

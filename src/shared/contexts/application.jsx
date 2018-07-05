@@ -9,9 +9,7 @@ const reducer = (state, action) => {
     // ------------
     switch (action.type) {
         case types.UPDATE_FORM:
-            return {...state, form: {
-                schema: action.payload
-            }};
+            return {...state, form: action.payload};
         case types.UPDATE_FORM_DATA:
             return {
                 ...state, form: {
@@ -23,9 +21,7 @@ const reducer = (state, action) => {
         case types.UPDATE_FORM_ERRORS:
             return {
                 ...state, form: {
-                    ...state.form, errors: {
-                        ...state.form.errors, ...action.payload
-                    }
+                    ...state.form, errors: action.payload
                 }
             };
         case types.SET_PHASE:

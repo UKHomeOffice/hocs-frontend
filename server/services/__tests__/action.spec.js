@@ -1,4 +1,4 @@
-import actionModel from "../action";
+import actionModel from '../action';
 
 describe('Action model', () => {
     it('should return a callback url for a supported action', () => {
@@ -24,10 +24,10 @@ describe('Action model', () => {
         expect(response).toBeDefined();
     });
     it('should throw when passed unsupported action', () => {
-       const action = 'unsupportedAction';
-       const data = {};
-       expect(() => {
-           actionModel.performAction(action, data);
-       }).toThrow();
+        const action = 'unsupportedAction';
+        const data = {};
+        expect(() => {
+            actionModel.performAction(action, data);
+        }).toThrow();
     });
 });
