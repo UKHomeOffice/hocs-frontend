@@ -6,10 +6,7 @@ const fs = require('fs');
 
 const getHttpsClient = () => {
     return new https.Agent({
-        // DSP/ACP certs do not include root ca - so we can not validate entire chain that OpenSSL requires
-        // so until we have entire chain in bundle lets not be strict
-        ca: fs.readFileSync('/certs/tls.pem'),
-        rejectUnauthorized: false
+        ca: fs.readFileSync('/etc/ssl/certs/ca-bundle.crt')
     });
 };
 
