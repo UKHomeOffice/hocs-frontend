@@ -7,9 +7,7 @@ ENV GROUP group_hocs_frontend
 RUN groupadd -r ${GROUP} && \
     useradd -r -u ${USER_ID} -g ${GROUP} ${USER} -d /app && \
     mkdir -p /app && \
-    mkdir -p /tmp && \
-    chown -R ${USER}:${GROUP} /app \
-    chown -R ${USER}:${GROUP} /tmp
+    chown -R ${USER}:${GROUP} /app
 
 WORKDIR /tmp
 COPY . /tmp
