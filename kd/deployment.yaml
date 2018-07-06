@@ -194,7 +194,6 @@ spec:
         volumeMounts:
           - mountPath: /certs
             name: certs
-            readOnly: true
       volumes:
         - name: certs
           emptyDir:
