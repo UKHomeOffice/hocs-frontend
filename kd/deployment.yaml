@@ -198,7 +198,6 @@ spec:
       volumes:
         - name: certs
           emptyDir:
-            defaultMode: 444
             medium: "Memory"
         - name: bundle
           configMap:
