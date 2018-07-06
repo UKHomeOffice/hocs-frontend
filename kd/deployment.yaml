@@ -197,6 +197,7 @@ spec:
             readOnly: true
       volumes:
         - name: certs
+          defaultMode: 444
           emptyDir:
             medium: "Memory"
         - name: bundle
