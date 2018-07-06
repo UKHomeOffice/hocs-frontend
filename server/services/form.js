@@ -1,13 +1,7 @@
 const formRepository = require('../forms/index');
 const listService = require('./list');
-const {WORKFLOW_SERVICE, WORKFLOW_BASIC_AUTH} = require('../config').forContext('server');
 const logger = require('../libs/logger');
-const axios = require('axios');
-
-const workflowService = axios.create({
-    baseURL: WORKFLOW_SERVICE,
-    auth: WORKFLOW_BASIC_AUTH
-});
+const {workflowServiceClient} = require('../libs/request');
 
 const actions = {
     action: ({action, user}) => {
@@ -39,7 +33,7 @@ const actions = {
         return {schema, data, meta: {caseId}};
     },
     stage: ({caseId, stageId}, callback) => {
-        workflowService.get(`/case/${caseId}/stage/${stageId}`)
+        workflowServiceClient.get(`/case/${caseId}/stage/${stageId}`)
             .then((response) => {
                 if(response && response.data && response.data && response.data.form) {
                     const stageUUID = response.data.stageUUID;
