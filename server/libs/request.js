@@ -6,7 +6,10 @@ const fs = require('fs');
 
 const getHttpsClient = () => {
     return new https.Agent({
-        ca: fs.readFileSync('/etc/ssl/certs/ca-bundle.crt')
+        cert: fs.readFileSync('/certs/tls.pem'),
+        key: fs.readFileSync('/certs/tls-key.pem'),
+        ca: fs.readFileSync('/etc/ssl/certs/ca-bundle.crt'),
+        rejectUnauthorized: false
     });
 };
 
