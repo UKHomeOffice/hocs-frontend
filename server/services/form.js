@@ -6,21 +6,21 @@ const {workflowServiceClient} = require('../libs/request');
 const actions = {
     action: ({action, user}) => {
         switch (action) {
-            case 'create':
-                const {form: {schema, data}} = formRepository.getForm('caseCreate');
-               schema.fields = schema.fields.map(field => {
-                    const choices = field.props.choices;
-                    if (choices && typeof choices === 'string') {
-                        field.props.choices = listService.getList(choices, {user});
-                    }
-                    return field;
-                });
-                return {schema, data};
-          case 'bulk':
-                return actions.workflow({caseId: 'caseid', action: 'action'});
+        case 'create':
+            const {form: {schema, data}} = formRepository.getForm('caseCreate'); // eslint-disable-line no-case-declarations
+            schema.fields = schema.fields.map(field => {
+                const choices = field.props.choices;
+                if (choices && typeof choices === 'string') {
+                    field.props.choices = listService.getList(choices, {user});
+                }
+                return field;
+            });
+            return {schema, data};
+        case 'bulk':
+            return actions.workflow({caseId: 'caseid', action: 'action'});
         }
     },
-    workflow: ({caseId, action}) => {
+    workflow: ({caseId}) => {
         // TODO: call workflow service for form
         const {form: {schema, data}} = formRepository.getForm('addDocument');
         schema.fields = schema.fields.map(field => {
