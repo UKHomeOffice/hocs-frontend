@@ -33,7 +33,7 @@ const lists = {
         if (listRepository.workflowTypes) {
             return listRepository.workflowTypes.filter(listItem => User.hasRole(user, listItem.requiredRole));
         } else {
-            throw new Error('List not available');
+            return [];
         }
     },
     'document_extension_whitelist': () => {
