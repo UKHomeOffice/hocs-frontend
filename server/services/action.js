@@ -1,10 +1,8 @@
 const logger = require('../libs/logger');
-const uuid = require('uuid/v4');
-const path = require('path');
 const {workflowServiceClient} = require('../libs/request');
 
 const actions = {
-    create: ({form, user}, callback) => {
+    create: ({form}, callback) => {
         const createCaseRequest = {
             type: form.data['case-type']
         };
@@ -18,7 +16,7 @@ const actions = {
                 callback(null, 'Failed to perform action');
             });
     },
-    bulk: ({form, user}, callback) => {
+    bulk: ({form}, callback) => {
         const documentSummaries = form.schema.fields.reduce((reducer, field) => {
             if (field.component === 'addDocument') {
                 form.data[field.props.name].map(file => {
@@ -33,8 +31,7 @@ const actions = {
         }, []);
         logger.debug(form.action);
         workflowServiceClient.post('/case/bulk', {type: 'MIN', documentSummaries}) // FIXME: discern type properly
-            .then(response => {
-                const {stageId} = response.data;
+            .then(() => {
                 callback('/', null);
             })
             .catch(err => {
@@ -58,9 +55,8 @@ const actions = {
         }, []);
         logger.debug(form.action);
         workflowServiceClient.post(`/case/${caseId}/${form.schema.callback.value}`, {documentSummaries})
-            .then(response => {
-                const {stageId} = response.data;
-                callback(`/`, null);
+            .then(() => {
+                callback('/', null);
             })
             .catch(err => {
                 logger.error(`${err.message}`);
