@@ -8,7 +8,7 @@ const actions = {
         switch (action) {
             case 'create':
                 const {form: {schema, data}} = formRepository.getForm('caseCreate');
-               schema.fields = schema.fields.map(field => {
+                schema.fields = schema.fields.map(field => {
                     const choices = field.props.choices;
                     if (choices && typeof choices === 'string') {
                         field.props.choices = listService.getList(choices, {user});
@@ -35,7 +35,7 @@ const actions = {
     stage: ({caseId, stageId}, callback) => {
         workflowServiceClient.get(`/case/${caseId}/stage/${stageId}`)
             .then((response) => {
-                if(response && response.data && response.data && response.data.form) {
+                if (response && response.data && response.data && response.data.form) {
                     const stageUUID = response.data.stageUUID;
                     const caseRef = response.data.caseReference;
                     const {schema, data} = response.data.form;
