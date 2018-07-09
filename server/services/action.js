@@ -18,6 +18,30 @@ const actions = {
                 callback(null, 'Failed to perform action');
             });
     },
+    bulk: ({form, user}, callback) => {
+        const documentSummaries = form.schema.fields.reduce((reducer, field) => {
+            if (field.component === 'addDocument') {
+                form.data[field.props.name].map(file => {
+                    reducer.push({
+                        displayName: file.originalname,
+                        type: field.props.documentType,
+                        s3UntrustedUrl: file.location || 'location'
+                    });
+                });
+            }
+            return reducer;
+        }, []);
+        logger.debug(form.action);
+        workflowServiceClient.post('/case/bulk', {type: 'MIN', documentSummaries}) // FIXME: discern type properly
+            .then(response => {
+                const {stageId} = response.data;
+                callback('/', null);
+            })
+            .catch(err => {
+                logger.error(`${err.message}`);
+                callback(null, 'Failed to perform action');
+            });
+    },
     document: ({form, caseId}, callback) => {
         // TODO: Post S3 URLs to workflow service
         const documentSummaries = form.schema.fields.reduce((reducer, field) => {

@@ -28,8 +28,17 @@ class MainPage extends Component {
                                     {title}
                                     {subTitle && <span className="heading-secondary">{subTitle}</span>}
                                 </h1>
-                                <ul>
-                                    <li><Link to={'/action/create'}>Create case</Link></li>
+                                <h2 className="heading-medium">
+                                  Primary actions
+                                </h2>
+                                <ul className="list list-bullet">
+                                    <li><Link to={'/action/create'}>Create single case</Link></li>
+                                    <li><Link to={'/action/bulk'}>Create cases in bulk</Link></li>
+                                </ul>
+                                <h2 className="heading-medium">
+                                  Secondary routes
+                                </h2>
+                                <ul className="list list-bullet">
                                     <li><Link to={'/some/random/url'}>Test 404</Link></li>
                                     <li><Link to={'/action/test'}>Test 403</Link></li>
                                     <li><Link to={'/error'}>Test 500</Link></li>
