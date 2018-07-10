@@ -1,28 +1,29 @@
-import React, {Component, Fragment} from "react";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class Text extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {value: this.props.value};
+        this.state = { value: this.props.value };
     }
 
     componentDidMount() {
-        this.props.updateState({[this.props.name]: this.state.value});
+        this.props.updateState({ [this.props.name]: this.state.value });
     }
 
     handleChange(e) {
-        this.setState({value: e.target.value});
-        this.props.updateState({[this.props.name]: e.target.value});
+        this.setState({ value: e.target.value });
+        this.props.updateState({ [this.props.name]: e.target.value });
     }
 
     render() {
         const {
-            label,
-            hint,
-            name,
-            error,
             disabled,
+            error,
+            hint,
+            label,
+            name,
             type
         } = this.props;
         return (
@@ -37,23 +38,33 @@ class Text extends Component {
                 </label>
 
                 <input className={`form-control${error ? 'form-control-error' : ''}`}
-                       id={name}
-                       type={type}
-                       name={name}
-                       disabled={disabled}
-                       value={this.state.value}
-                       onChange={e => this.handleChange(e)}
+                    id={name}
+                    type={type}
+                    name={name}
+                    disabled={disabled}
+                    value={this.state.value}
+                    onChange={e => this.handleChange(e)}
                 />
             </div>
-        )
+        );
     }
 }
 
+Text.propTypes = {
+    disabled: PropTypes.bool,
+    error: PropTypes.string,
+    hint: PropTypes.string,
+    label: PropTypes.string,
+    name: PropTypes.string.isRequired,
+    type: PropTypes.string,
+    updateState: PropTypes.func.isRequired,
+    value: PropTypes.string
+};
+
 Text.defaultProps = {
-    type: 'text',
-    value: '',
+    disabled: false,
     label: 'TextArea field',
-    disabled: false
+    type: 'text'
 };
 
 export default Text;

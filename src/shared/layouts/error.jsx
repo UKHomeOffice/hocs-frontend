@@ -1,8 +1,9 @@
-import React, {Component, Fragment} from "react";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class Error extends Component {
-    componentWillMount() {
-        const {staticContext} = this.props;
+    UNSAFE_componentWillMount() {
+        const { staticContext } = this.props;
         if (staticContext) {
             staticContext.status = this.props.errorCode;
         }
@@ -10,11 +11,11 @@ class Error extends Component {
 
     render() {
         const {
-            title,
             error,
             errorCode,
+            location: { pathname },
             stack,
-            location: {pathname}
+            title,
         } = this.props;
 
         return (
@@ -28,18 +29,25 @@ class Error extends Component {
                     {stack && <p className="code overflow-scroll">{stack}</p>}
                 </div>
             </div>
-        )
+        );
     }
 }
 
+Error.propTypes = {
+    error: PropTypes.string,
+    errorCode: PropTypes.number,
+    location: { pathname: PropTypes.string },
+    stack: PropTypes.string,
+    staticContext: PropTypes.object,
+    title: PropTypes.string,
+};
+
 Error.defaultProps = {
-    title: 'Something has gone wrong',
     error: 'An error has occurred',
     errorCode: 500,
+    location: { pathname: null },
     stack: null,
-    location: {
-        pathname: null
-    }
+    title: 'Something has gone wrong'
 };
 
 export default Error;

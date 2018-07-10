@@ -1,6 +1,5 @@
 const logger = require('../libs/logger');
-const forms = require('../forms/index');
-const {DOCUMENT_WHITELIST} = require('../config').forContext('server');
+const { DOCUMENT_WHITELIST } = require('../config').forContext('server');
 
 const validationErrors = {
     required: 'is required',
@@ -48,10 +47,10 @@ const validators = {
 
 const validation = (req, res, next) => {
     logger.debug('VALIDATION MIDDLEWARE');
-    const {data, schema} = req.form;
+    const { data, schema } = req.form;
     const fields = schema.fields.filter(field => field.type !== 'display');
     req.form.errors = fields.reduce((result, field) => {
-        const {validation, props: {name}} = field;
+        const { validation, props: { name } } = field;
         const value = data[name];
         if (validation) {
             validation.map(validator => {
@@ -60,7 +59,7 @@ const validation = (req, res, next) => {
                     if (validationError) {
                         result[field.props.name] = `${field.props.label} ${validationError}`;
                     }
-                } catch(e) {
+                } catch (e) {
                     logger.warn(`Unsupported validator passed (${validator}) in form`);
                 }
 

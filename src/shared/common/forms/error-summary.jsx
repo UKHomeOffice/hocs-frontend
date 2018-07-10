@@ -1,12 +1,13 @@
-import React, {Component} from "react";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class ErrorSummary extends Component {
 
     render() {
         const {
-            heading,
             description,
-            errors
+            errors,
+            heading
         } = this.props;
         return (
             <div className="error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabIndex="-1">
@@ -30,9 +31,15 @@ class ErrorSummary extends Component {
                 </ul>
 
             </div>
-        )
+        );
     }
 }
+
+ErrorSummary.propTypes = {
+    description: PropTypes.string,
+    errors: PropTypes.object,
+    heading: PropTypes.string
+};
 
 ErrorSummary.defaultProps = {
     heading: 'Please fix the following errors',

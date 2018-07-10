@@ -4,7 +4,7 @@ const html = require('../layout/html');
 const authMiddleware = require('../middleware/auth');
 const renderMiddleware = require('../middleware/render');
 const formsRouter = require('./forms');
-const {getFormForCase, getFormForAction, getFormForStage} = require('../services/form');
+const { getFormForCase, getFormForAction, getFormForStage } = require('../services/form');
 
 html.use(assets);
 

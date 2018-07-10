@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 class Header extends Component {
@@ -20,12 +21,12 @@ class Header extends Component {
 
     render() {
         const {
-            service,
-            serviceLink,
             logoLinkTitle,
+            menu,
             propositionHeader,
-            propositionHeaderLink,         
-            menu
+            propositionHeaderLink,
+            service,
+            serviceLink
         } = this.props;
 
         return (
@@ -44,7 +45,7 @@ class Header extends Component {
                             <div className="content">
                                 <nav id="proposition-menu">
                                     {propositionHeader && <div id="proposition-header">
-                                         <a href={propositionHeaderLink} id="proposition-name">{propositionHeader}</a>
+                                        <a href={propositionHeaderLink} id="proposition-name">{propositionHeader}</a>
                                     </div>}
                                     {menu && Header.createMenu(menu)}
                                 </nav>
@@ -58,13 +59,22 @@ class Header extends Component {
     }
 }
 
+Header.propTypes = {
+    logoLinkTitle: PropTypes.string,
+    menu: PropTypes.arrayOf(PropTypes.object),
+    propositionHeader: PropTypes.string.isRequired,
+    propositionHeaderLink: PropTypes.string.isRequired,
+    service: PropTypes.string.isRequired,
+    serviceLink: PropTypes.string.isRequired,
+};
+
 Header.defaultProps = {
-    service: 'GOV.UK',
-    serviceLink: 'https://www.gov.uk',
     logoLinkTitle: '',
+    menu: [{ label: 'Logout', target: '/' }],
     propositionHeader: 'Service Name',
-    propositionHeaderLink: '/',             
-    menu: [{label: 'Logout', target: '/'}]
+    propositionHeaderLink: '/',
+    service: 'GOV.UK',
+    serviceLink: 'https://www.gov.uk'
 };
 
 export default Header;
