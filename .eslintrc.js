@@ -31,7 +31,7 @@ module.exports = {
             "error",
             "always"
         ],
-        "space-in-brackets": [
+        "object-curly-spacing": [
             "error", "always"
         ]
     },
