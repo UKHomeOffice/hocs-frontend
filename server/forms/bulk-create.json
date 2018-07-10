@@ -42,6 +42,14 @@
             "whitelist": "DOCUMENT_EXTENSION_WHITELIST"
           }
         }
+      ],
+      "secondaryActions": [
+        {
+            "component": "backlink",
+            "props": {
+                "label": "Cancel"
+            }
+        }
       ]
     }
   }
