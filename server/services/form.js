@@ -8,6 +8,8 @@ const actions = {
         switch (action) {
         case 'create':
             return getCreateForm(user);
+        case 'bulk':
+            return getBulkCreateForm(user);
         }
     },
     workflow: ({ caseId }) => {
@@ -86,12 +88,22 @@ module.exports = {
 
 function getCreateForm(user) {
     const { form: { schema, data } } = formRepository.getForm('caseCreate');
-    schema.fields = schema.fields.map(field => {
+    schema.fields = populateFields(schema.fields, user);
+    return { schema, data };
+}
+
+function getBulkCreateForm(user) {
+    const { form: { schema, data } } = formRepository.getForm('bulkCreate');
+    schema.fields = populateFields(schema.fields, user);
+    return { schema, data };
+}
+
+function populateFields(fields, user) {
+    return fields.map(field => {
         const choices = field.props.choices;
         if (choices && typeof choices === 'string') {
             field.props.choices = listService.getList(choices, { user });
         }
         return field;
     });
-    return { schema, data };
 }
