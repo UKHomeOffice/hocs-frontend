@@ -16,6 +16,8 @@ const actions = {
                     return field;
                 });
                 return {schema, data};
+          case 'bulk':
+                return actions.workflow({caseId: 'caseid', action: 'action'});
         }
     },
     workflow: ({caseId, action}) => {
