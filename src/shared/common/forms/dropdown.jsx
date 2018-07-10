@@ -1,30 +1,31 @@
-import React, {Component, Fragment} from "react";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class Dropdown extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {value: this.props.value};
+        this.state = { value: this.props.value };
     }
 
     componentDidMount() {
-        this.props.updateState({[this.props.name]: this.state.value});
+        this.props.updateState({ [this.props.name]: this.state.value });
     }
 
     handleChange(e) {
-        this.setState({value: e.target.value});
-        this.props.updateState({[this.props.name]: e.target.value});
+        this.setState({ value: e.target.value });
+        this.props.updateState({ [this.props.name]: e.target.value });
         e.preventDefault();
     }
 
     render() {
         const {
-            label,
-            hint,
-            name,
-            error,
-            disabled,
             choices,
+            disabled,
+            error,
+            hint,
+            label,
+            name
         } = this.props;
         return (
             <div className={`form-group${error ? ' form-group-error' : ''}`}>
@@ -38,26 +39,38 @@ class Dropdown extends Component {
                 </label>
 
                 <select className={`form-control ${error ? 'form-control-error' : ''}`}
-                        id={name}
-                        name={name}
-                        disabled={disabled}
-                        value={this.state.value}
-                        onChange={e => this.handleChange(e)}
+                    id={name}
+                    name={name}
+                    disabled={disabled}
+                    value={this.state.value}
+                    onChange={e => this.handleChange(e)}
                 >
-                    {choices && choices.map(choice => {
+                    {choices && choices.map((choice, i) => {
                         return (
-                            <option value={choice.value}>{choice.label}</option>
-                        )
+                            <option key={i} value={choice.value}>{choice.label}</option>
+                        );
                     })}
                 </select>
             </div>
-        )
+        );
     }
 }
 
+Dropdown.propTypes = {
+    choices: PropTypes.arrayOf(PropTypes.object),
+    disabled: PropTypes.bool,
+    error: PropTypes.string,
+    hint: PropTypes.string,
+    label: PropTypes.string,
+    name: PropTypes.string.isRequired,
+    updateState: PropTypes.func.isRequired,
+    value: PropTypes.string
+};
+
 Dropdown.defaultProps = {
     value: '',
-    disabled: false
+    disabled: false,
+    choices: []
 };
 
 export default Dropdown;

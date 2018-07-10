@@ -1,8 +1,9 @@
-import React, {Component} from "react";
-import Form from "../common/forms/form.jsx";
-import {ApplicationConsumer} from "../contexts/application.jsx";
-import axios from "axios";
-import {redirect, updateForm, updateLocation} from "../contexts/actions/index.jsx";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import Form from '../common/forms/form.jsx';
+import { ApplicationConsumer } from '../contexts/application.jsx';
+import axios from 'axios';
+import { redirect, updateForm, updateLocation } from '../contexts/actions/index.jsx';
 
 class Stage extends Component {
 
@@ -17,14 +18,13 @@ class Stage extends Component {
 
     getForm() {
         const url = '/forms' + this.props.match.url;
-        const {form} = this.props;
+        const { form } = this.props;
         if (!form) {
             axios.get(url)
                 .then(res => {
                     this.props.dispatch(updateForm(res.data));
                 })
                 .catch(err => {
-                    console.error(err.response.status);
                     if (err.response.status === 403) {
                         return this.props.dispatch(redirect('/unauthorised'));
                     }
@@ -36,7 +36,7 @@ class Stage extends Component {
     render() {
         const {
             form,
-            match: {url, params: {caseId, stageId}}
+            match: { url }
         } = this.props;
         return (
             <div className="grid-row">
@@ -58,11 +58,16 @@ class Stage extends Component {
     }
 }
 
-const
-    WrappedStage = props => (
-        <ApplicationConsumer>
-            {({dispatch, form}) => <Stage {...props} dispatch={dispatch} form={form}/>}
-        </ApplicationConsumer>
-    );
+Stage.propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    form: PropTypes.object,
+    match: { url: PropTypes.String }
+};
+
+const WrappedStage = props => (
+    <ApplicationConsumer>
+        {({ dispatch, form }) => <Stage {...props} dispatch={dispatch} form={form} />}
+    </ApplicationConsumer>
+);
 
 export default WrappedStage;

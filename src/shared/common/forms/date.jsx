@@ -1,11 +1,12 @@
-import React, {Component, Fragment} from "react";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class Date extends Component {
 
     constructor(props) {
         super(props);
         const dateComponents = this.parseValue();
-        this.state = {...dateComponents};
+        this.state = { ...dateComponents };
     }
 
     datePart(field) {
@@ -17,25 +18,25 @@ class Date extends Component {
     }
 
     handleChange(field, value) {
-        this.setState({[field]: value});
-        this.props.updateState({[field]: value});
+        this.setState({ [field]: value });
+        this.props.updateState({ [field]: value });
     }
 
     parseValue() {
         const parts = this.props.value && this.props.value.split('-');
-            return {
-                [this.datePart('day')]: parts && parts[2] || '',
-                [this.datePart('month')]: parts && parts[1] || '',
-                [this.datePart('year')]: parts && parts[0] || ''
-            };
+        return {
+            [this.datePart('day')]: parts && parts[2] || '',
+            [this.datePart('month')]: parts && parts[1] || '',
+            [this.datePart('year')]: parts && parts[0] || ''
+        };
     }
 
     render() {
         const {
-            label,
-            hint,
+            disabled,
             error,
-            disabled
+            hint,
+            label
         } = this.props;
         return (
             <div className={`form-group${error ? ' form-group-error' : ''}`}>
@@ -91,13 +92,23 @@ class Date extends Component {
                     </div>
                 </fieldset>
             </div>
-        )
+        );
     }
 }
 
+Date.propTypes = {
+    disabled: PropTypes.bool,
+    error: PropTypes.string,
+    hint: PropTypes.string,
+    label: PropTypes.string,
+    name: PropTypes.string.isRequired,
+    updateState: PropTypes.func.isRequired,
+    value: PropTypes.string
+};
+
 Date.defaultProps = {
-    value: '',
-    disabled: false
+    disabled: false,
+    value: ''
 };
 
 export default Date;

@@ -1,4 +1,5 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class Footer extends Component {
     render() {
@@ -42,6 +43,10 @@ class Footer extends Component {
         );
     }
 }
+
+Footer.propTypes = {
+    links: PropTypes.arrayOf(PropTypes.object)
+};
 
 Footer.defaultProps = {
     links: []
