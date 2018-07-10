@@ -31,7 +31,9 @@
             "allowMultiple": true,
             "whitelist": "DOCUMENT_EXTENSION_WHITELIST"
           }
-        },
+        }
+      ],
+      "secondaryActions": [
         {
           "component": "button",
           "props": {
