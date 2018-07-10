@@ -9,14 +9,14 @@ const actions = {
         workflowServiceClient.post('/case', createCaseRequest)
             .then(response => {
                 const stage = 'document';
-                callback(`/case/${response.data.uuid}/${stage}`, null);
+                callback(`/case/${response.data.uuid}/${ stage }`, null);
             })
             .catch(err => {
                 logger.error(`${err.message}`);
                 callback(null, 'Failed to perform action');
             });
     },
-    bulk: ({form, user}, callback) => {
+    bulk: ({ form }, callback) => {
         const documentSummaries = form.schema.fields.reduce((reducer, field) => {
             if (field.component === 'addDocument') {
                 form.data[field.props.name].map(file => {
@@ -30,9 +30,8 @@ const actions = {
             return reducer;
         }, []);
         logger.debug(form.action);
-        workflowServiceClient.post('/case/bulk', {type: 'MIN', documentSummaries}) // FIXME: discern type properly
-            .then(response => {
-                const {stageId} = response.data;
+        workflowServiceClient.post('/case/bulk', { type: form.data['case-type'], documentSummaries })
+            .then(() => {
                 callback('/', null);
             })
             .catch(err => {
