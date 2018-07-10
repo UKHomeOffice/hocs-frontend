@@ -1,7 +1,8 @@
-import React, {Component} from "react";
-import {Link} from "react-router-dom";
-import {ApplicationConsumer} from "../contexts/application.jsx";
-import {updateLocation} from "../contexts/actions/index.jsx";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import { ApplicationConsumer } from '../contexts/application.jsx';
+import { updateLocation } from '../contexts/actions/index.jsx';
 
 class MainPage extends Component {
 
@@ -15,12 +16,12 @@ class MainPage extends Component {
 
     render() {
         const {
-            title,
-            subTitle
+            subTitle,
+            title
         } = this.props;
         return (
             <ApplicationConsumer>
-                {({dispatch}) => {
+                {() => {
                     return (
                         <div className="grid-row">
                             <div className="column-full">
@@ -48,13 +49,20 @@ class MainPage extends Component {
                     );
                 }}
             </ApplicationConsumer>
-        )
+        );
     }
 }
 
+MainPage.propTypes = {
+    dispatch: PropTypes.string.isRequired,
+    match: PropTypes.object,
+    subTitle: PropTypes.string,
+    title: PropTypes.string
+};
+
 const WrappedPage = props => (
     <ApplicationConsumer>
-        {({dispatch}) => <MainPage {...props} dispatch={dispatch}/>}
+        {({ dispatch }) => <MainPage {...props} dispatch={dispatch} />}
     </ApplicationConsumer>
 );
 
