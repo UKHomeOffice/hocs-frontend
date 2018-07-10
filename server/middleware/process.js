@@ -1,7 +1,6 @@
-const forms = require('../forms/index');
 const logger = require('../libs/logger');
 
-const processDate = ({year, month, day}) => {
+const processDate = ({ year, month, day }) => {
     if (year && month && day) {
         return `${year}-${month}-${day}`;
     } else {
@@ -26,12 +25,12 @@ const processCheckbox = (name, value, choices) => {
 const process = (req, res, next) => {
     logger.debug('PROCESS MIDDLEWARE');
     const data = req.body;
-    const {schema} = req.form;
+    const { schema } = req.form;
     const fields = schema.fields.filter(field => field.type !== 'display');
     req.form.data = fields.reduce((reducer, field) => {
-        const {name} = field.props;
+        const { name } = field.props;
         const component = field.component;
-        switch(component) {
+        switch (component) {
         case 'date':
             reducer[name] = processDate({
                 year: data[`${name}-year`],
@@ -43,7 +42,7 @@ const process = (req, res, next) => {
             reducer = Object.assign({}, reducer, processCheckbox(name, data[name], field.props.choices));
             break;
         case 'addDocument':
-            if(req.files.length === 0) {
+            if (req.files.length === 0) {
                 reducer[name] = null;
             } else {
                 reducer[name] = req.files.filter(f => f.fieldname.indexOf(name) === 0);

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import PhaseBanner from '../../common/components/phase-banner.jsx';
 
 class Body extends Component {
     render() {
         const {
-            phaseBanner,
-            children
+            children,
+            phaseBanner
         } = this.props;
         return (
             <main id="content">
@@ -15,6 +16,11 @@ class Body extends Component {
         );
     }
 }
+
+Body.propTypes = {
+    children: PropTypes.node,
+    phaseBanner: PropTypes.object
+};
 
 Body.defaultProps = {
     phaseBanner: {

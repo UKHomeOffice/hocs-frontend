@@ -1,10 +1,11 @@
-import React, {Component, Fragment} from "react";
-import Header from "./components/header.jsx";
-import Body from "./components/body.jsx";
-import Footer from "./components/footer.jsx";
-import {ApplicationConsumer} from "../contexts/application.jsx";
-import {Redirect} from "react-router-dom";
-import {redirected} from "../contexts/actions/index.jsx";
+import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
+import Header from './components/header.jsx';
+import Body from './components/body.jsx';
+import Footer from './components/footer.jsx';
+import { ApplicationConsumer } from '../contexts/application.jsx';
+import { Redirect } from 'react-router-dom';
+import { redirected } from '../contexts/actions/index.jsx';
 
 class Layout extends Component {
 
@@ -15,7 +16,7 @@ class Layout extends Component {
 
     componentDidMount() {
         if (this.props.redirect) {
-            this.setState({redirect: this.props.redirect});
+            this.setState({ redirect: this.props.redirect });
             this.props.dispatch(redirected());
         }
     }
@@ -26,15 +27,15 @@ class Layout extends Component {
         } = this.props;
         return (
             <ApplicationConsumer>
-                {({layout: {header, body, footer}}) => {
+                {({ layout: { header, body, footer } }) => {
                     return (
                         <Fragment>
-                            <Header {...header}/>
+                            <Header {...header} />
                             <Body {...body}>
-                            {children}
+                                {children}
                             </Body>
-                            {footer.isVisible && <Footer {...footer}/>}
-                            {this.props.redirect && <Redirect to={this.props.redirect} push/>}
+                            {footer.isVisible && <Footer {...footer} />}
+                            {this.props.redirect && <Redirect to={this.props.redirect} push />}
                         </Fragment>
                     );
                 }}
@@ -42,6 +43,12 @@ class Layout extends Component {
         );
     }
 }
+
+Layout.propTypes = {
+    children: PropTypes.node,
+    dispatch: PropTypes.func.isRequired,
+    redirect: PropTypes.func
+};
 
 Layout.defaultProps = {
     footer: {
@@ -51,7 +58,7 @@ Layout.defaultProps = {
 
 const WrappedLayout = props => (
     <ApplicationConsumer>
-        {({dispatch, redirect}) => <Layout {...props} dispatch={dispatch} redirect={redirect}/>}
+        {({ dispatch, redirect }) => <Layout {...props} dispatch={dispatch} redirect={redirect} />}
     </ApplicationConsumer>
 );
 

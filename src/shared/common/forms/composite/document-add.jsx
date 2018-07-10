@@ -1,29 +1,30 @@
-import React, {Component, Fragment} from "react";
-import {ApplicationConsumer} from "../../../contexts/application.jsx";
+import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
+import { ApplicationConsumer } from '../../../contexts/application.jsx';
 
 class DocumentAdd extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {value: this.props.value};
+        this.state = { value: this.props.value };
     }
 
     componentDidMount() {
-        this.props.updateState({[this.props.name]: this.state.value});
+        this.props.updateState({ [this.props.name]: this.state.value });
     }
 
     handleChange(e) {
         e.preventDefault();
-        Object.keys(e.target.files).map(file => this.props.updateState({[`${this.props.name}_${file}`]: e.target.files[file]}));
+        Object.keys(e.target.files).map(file => this.props.updateState({ [`${this.props.name}_${file}`]: e.target.files[file] }));
     }
 
     render() {
         const {
-            label,
-            hint,
-            name,
+            allowMultiple,
             error,
-            allowMultiple
+            hint,
+            label,
+            name
         } = this.props;
         return (
             <Fragment>
@@ -43,19 +44,30 @@ class DocumentAdd extends Component {
                     multiple={allowMultiple}
                 />
             </Fragment>
-        )
+        );
     }
 }
 
+DocumentAdd.propTypes = {
+    allowMultiple: PropTypes.bool,
+    disabled: PropTypes.bool,
+    error: PropTypes.string,
+    hint: PropTypes.string,
+    label: PropTypes.string,
+    name: PropTypes.string.isRequired,
+    updateState: PropTypes.func.isRequired,
+    value: PropTypes.string
+};
+
 DocumentAdd.defaultProps = {
-    label: 'Add document',
+    allowMultiple: false,
     disabled: false,
-    allowMultiple: false
+    label: 'Add document'
 };
 
 const WrappedButton = props => (
     <ApplicationConsumer>
-        {({dispatch}) => <DocumentAdd {...props} dispatch={dispatch}/>}
+        {() => <DocumentAdd {...props} />}
     </ApplicationConsumer>
 );
 

@@ -58,7 +58,7 @@ describe('Authentication middleware', () => {
     });
 
     it('should not redirect if already at unauthorised page', () => {
-        mockRequest.get = () => {};
+        mockRequest.get = () => { };
         mockRequest.originalUrl = '/unauthorised';
         authenticationMiddleware(mockRequest, mockResponse, () => {
             expect(mockRequest.user).toBeUndefined();

@@ -1,5 +1,5 @@
 const aws = require('aws-sdk');
-const uuid = require('uuid/v4');
+
 const {
     S3: {
         ACCESS_KEY,

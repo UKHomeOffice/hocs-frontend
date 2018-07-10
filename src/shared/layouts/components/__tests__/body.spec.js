@@ -4,7 +4,7 @@ import Body from '../body.jsx';
 describe('Layout body component', () => {
     it('should render with default props', () => {
         expect(
-            render(<Body/>)
+            render(<Body />)
         ).toMatchSnapshot();
     });
     it('should render with phase banner when passed', () => {
@@ -14,7 +14,7 @@ describe('Layout body component', () => {
             }
         };
         expect(
-            render(<Body {...props}/>)
+            render(<Body {...props} />)
         ).toMatchSnapshot();
     });
 });

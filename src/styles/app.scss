@@ -49,9 +49,6 @@ html {
   @include button($govuk-blue);
 }
 
-input[type='file'] {
-}
-
 .button-file-upload {
   display: block;
   margin-bottom: 15px;
