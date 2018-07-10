@@ -29,7 +29,7 @@ const browserConfig = env => {
                 {
                     test: /\.(js|jsx)$/,
                     loader: 'babel-loader',
-                    query: {presets: ['react']}
+                    query: { presets: ['react'] }
                 },
                 {
                     test: /\.s?[ac]ss$/,
@@ -42,7 +42,7 @@ const browserConfig = env => {
                         },
                         {
                             loader: 'postcss-loader',
-                            options: {plugins: [AutoPrefixer()]}
+                            options: { plugins: [AutoPrefixer()] }
                         },
                         {
                             loader: 'sass-loader',
@@ -88,12 +88,13 @@ const browserConfig = env => {
             new AssetsPlugin({
                 output: 'assets.json',
                 writeToDisk: true,
-                customize: (entry, original, manifest, asset) => {
+                customize: (entry) => {
+                    /* eslint-disable-next-line no-console */
                     console.log(entry);
                     entry.type = entry.key.slice(entry.key.lastIndexOf('.') + 1);
                     entry.key = entry.key.slice(0, entry.key.lastIndexOf('.'));
                     entry.value = entry.value.slice(entry.value.lastIndexOf('/') + 1);
-                    const {key, value, type} = entry;
+                    const { key, value, type } = entry;
                     return {
                         key: `${key}.${type}`,
                         value: {
@@ -103,17 +104,17 @@ const browserConfig = env => {
                         }
                     };
                 },
-                transform: (assets, manifest) => {
+                transform: (assets) => {
                     const js = Object.keys(assets).reduce((r, a) => {
                         if (assets[a].type === 'js') {
-                            const {key, asset} = assets[a];
+                            const { key, asset } = assets[a];
                             r[key] = asset;
                         }
                         return r;
                     }, {});
                     const css = Object.keys(assets).reduce((r, a) => {
                         if (assets[a].type === 'css') {
-                            const {key, asset} = assets[a];
+                            const { key, asset } = assets[a];
                             r[key] = asset;
                         }
                         return r;
@@ -139,8 +140,8 @@ const serverConfig = {
     },
     module: {
         rules: [
-            {test: [/\.(js)$/, /\.(jsx)$/], loader: 'babel-loader', query: {presets: ['react']}},
-            {test: /\.scss$/, loader: 'css-loader/locals'}
+            { test: [/\.(js)$/, /\.(jsx)$/], loader: 'babel-loader', query: { presets: ['react'] } },
+            { test: /\.scss$/, loader: 'css-loader/locals' }
         ]
     }
 };

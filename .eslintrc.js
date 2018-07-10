@@ -8,7 +8,7 @@ module.exports = {
         "plugin:react/recommended"
     ],
     "parserOptions": {
-        "ecmaVersion": 6,
+        "ecmaVersion": 2018,
         "sourceType": "module"
     },
     "rules": {
@@ -27,6 +27,9 @@ module.exports = {
         "semi": [
             "error",
             "always"
+        ],
+        "object-curly-spacing": [
+            "error", "always"
         ]
     },
     "overrides": [
@@ -41,6 +44,10 @@ module.exports = {
                 "wrapper": false,
                 "mount": false
             }
+        },
+        {
+            "files": [ "**/__snapshots__/**" ],
+            "excludedFiles": "*.js.snap"
         },
         {
             "files": [ "src/**" ],

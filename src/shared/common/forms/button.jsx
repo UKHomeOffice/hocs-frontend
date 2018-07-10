@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import {Link} from 'react-router-dom';
-import {ApplicationConsumer} from '../../contexts/application.jsx';
-import {cancel} from '../../contexts/actions/index.jsx';
+import { Link } from 'react-router-dom';
+import { ApplicationConsumer } from '../../contexts/application.jsx';
+import { cancel } from '../../contexts/actions/index.jsx';
 
 class Submit extends Component {
 
@@ -13,10 +13,10 @@ class Submit extends Component {
 
     render() {
         const {
-            label,
+            action,
             className,
             disabled,
-            action
+            label
         } = this.props;
         return (
             <Fragment>
@@ -32,21 +32,21 @@ class Submit extends Component {
 }
 
 Submit.propTypes = {
-    label: PropTypes.string,
+    action: PropTypes.string.isRequired,
     className: PropTypes.string,
     disabled: PropTypes.bool,
-    action: PropTypes.func,
-    dispatch: PropTypes.func
+    dispatch: PropTypes.func.isRequired,
+    label: PropTypes.string
 };
 
 Submit.defaultProps = {
-    label: 'Submit',
-    disabled: false
+    disabled: false,
+    label: 'Submit'
 };
 
 const WrappedButton = props => (
     <ApplicationConsumer>
-        {({dispatch}) => <Submit {...props} dispatch={dispatch}/>}
+        {({ dispatch }) => <Submit {...props} dispatch={dispatch} />}
     </ApplicationConsumer>
 );
 

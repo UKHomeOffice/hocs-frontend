@@ -1,8 +1,9 @@
-import React, {Component} from "react";
-import Form from "../common/forms/form.jsx";
-import {ApplicationConsumer} from "../contexts/application.jsx";
-import axios from "axios";
-import {redirect, updateForm, updateLocation} from "../contexts/actions/index.jsx";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import Form from '../common/forms/form.jsx';
+import { ApplicationConsumer } from '../contexts/application.jsx';
+import axios from 'axios';
+import { redirect, updateForm, updateLocation } from '../contexts/actions/index.jsx';
 
 class Action extends Component {
 
@@ -17,14 +18,13 @@ class Action extends Component {
 
     getForm() {
         const url = '/forms' + this.props.match.url;
-        const {form} = this.props;
+        const { form } = this.props;
         if (!form) {
             axios.get(url)
                 .then(res => {
                     this.props.dispatch(updateForm(res.data));
                 })
                 .catch(err => {
-                    console.error(err.response.status);
                     if (err.response.status === 403) {
                         return this.props.dispatch(redirect('/unauthorised'));
                     }
@@ -35,10 +35,10 @@ class Action extends Component {
 
     render() {
         const {
-            subTitle,
             caseRef,
             form,
-            match: {url}
+            match: { url },
+            subTitle
         } = this.props;
         return (
             <div className="grid-row">
@@ -53,6 +53,7 @@ class Action extends Component {
                         schema={form.schema}
                         data={form.data}
                         errors={form.errors}
+                        getForm={() => this.getForm()}
                     />}
                 </div>
             </div>
@@ -60,9 +61,17 @@ class Action extends Component {
     }
 }
 
+Action.propTypes = {
+    caseRef: PropTypes.string,
+    dispatch: PropTypes.func.isRequired,
+    form: PropTypes.object,
+    match: PropTypes.object,
+    subTitle: PropTypes.string
+};
+
 const WrappedPage = props => (
     <ApplicationConsumer>
-        {({dispatch, form}) => <Action {...props} dispatch={dispatch} form={form}/>}
+        {({ dispatch, form }) => <Action {...props} dispatch={dispatch} form={form} />}
     </ApplicationConsumer>
 );
 

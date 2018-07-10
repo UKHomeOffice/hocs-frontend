@@ -4,17 +4,17 @@ import PhaseBanner from '../phase-banner.jsx';
 describe('Phase Banner component', () => {
     it('should render with default props', () => {
         expect(
-            render(<PhaseBanner/>)
+            render(<PhaseBanner />)
         ).toMatchSnapshot();
     });
     it('should display the correct phase when passed', () => {
         expect(
-            render(<PhaseBanner phase="BETA"/>)
+            render(<PhaseBanner phase="BETA" />)
         ).toMatchSnapshot();
     });
     it('should display the correct feedback url when passed', () => {
         expect(
-            render(<PhaseBanner feedback="http://some.domain"/>)
+            render(<PhaseBanner feedback="http://some.domain" />)
         ).toMatchSnapshot();
     });
 });

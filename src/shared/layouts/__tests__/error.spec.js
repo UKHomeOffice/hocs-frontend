@@ -4,7 +4,7 @@ import Error from '../error.jsx';
 describe('Error component', () => {
     it('should render with default props', () => {
         expect(
-            render(<Error/>)
+            render(<Error />)
         ).toMatchSnapshot();
     });
     it('should render with location when passed', () => {
@@ -14,7 +14,7 @@ describe('Error component', () => {
             }
         };
         expect(
-            render(<Error {...props}/>)
+            render(<Error {...props} />)
         ).toMatchSnapshot();
     });
     it('should render with a stack trace when passed', () => {
@@ -22,15 +22,15 @@ describe('Error component', () => {
             stack: 'Stack trace...'
         };
         expect(
-            render(<Error {...props}/>)
+            render(<Error {...props} />)
         ).toMatchSnapshot();
     });
     it('should pass the error code to the static context', () => {
         const props = {
             staticContext: {}
         };
-        const wrapper = mount(<Error {...props}/>);
+        const wrapper = mount(<Error {...props} />);
         expect(wrapper).toBeDefined();
-        expect(wrapper.prop('staticContext')).toEqual({status: 500});
+        expect(wrapper.prop('staticContext')).toEqual({ status: 500 });
     });
 });

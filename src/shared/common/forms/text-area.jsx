@@ -1,28 +1,29 @@
-import React, {Component, Fragment} from "react";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class TextArea extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {value: this.props.value};
+        this.state = { value: this.props.value };
     }
 
     componentDidMount() {
-        this.props.updateState({[this.props.name]: this.state.value});
+        this.props.updateState({ [this.props.name]: this.state.value });
     }
 
     handleChange(e) {
-        this.setState({value: e.target.value});
-        this.props.updateState({[this.props.name]: e.target.value});
+        this.setState({ value: e.target.value });
+        this.props.updateState({ [this.props.name]: e.target.value });
     }
 
     render() {
         const {
-            label,
-            hint,
-            name,
-            error,
             disabled,
+            error,
+            hint,
+            label,
+            name,
             rows
         } = this.props;
         return (
@@ -37,23 +38,33 @@ class TextArea extends Component {
                 </label>
 
                 <textarea className={`form-control form-control-3-4 ${error ? 'form-control-error' : ''}`}
-                          id={name}
-                          name={name}
-                          disabled={disabled}
-                          rows={rows}
-                          onChange={e => this.handleChange(e)}
-                          defaultValue={this.state.value}
-               />
+                    id={name}
+                    name={name}
+                    disabled={disabled}
+                    rows={rows}
+                    onChange={e => this.handleChange(e)}
+                    defaultValue={this.state.value}
+                />
             </div>
-        )
+        );
     }
 }
 
+TextArea.propTypes = {
+    disabled: PropTypes.bool,
+    error: PropTypes.string,
+    hint: PropTypes.string,
+    label: PropTypes.string,
+    name: PropTypes.string.isRequired,
+    rows: PropTypes.number,
+    updateState: PropTypes.func.isRequired,
+    value: PropTypes.string
+};
+
 TextArea.defaultProps = {
-    type: 'text',
-    value: '',
+    disabled: false,
     rows: 5,
-    disabled: false
+    type: 'text',
 };
 
 export default TextArea;

@@ -3,7 +3,7 @@ const User = require('../models/user');
 
 const authentication = (req, res, next) => {
     logger.debug('AUTH MIDDLEWARE');
-    if(req.get('X-Auth-Token')) {
+    if (req.get('X-Auth-Token')) {
         if (!req.user) {
             req.user = new User({
                 token: req.get('X-Auth-Token'),

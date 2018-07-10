@@ -11,7 +11,7 @@ app.use('/public', express.static(path.join(__dirname, 'build', 'public')));
 app.use('/public', express.static(path.join(__dirname, 'node_modules', 'govuk_frontend_toolkit')));
 app.use('/public', express.static(path.join(__dirname, 'node_modules', 'govuk_template_mustache', 'assets')));
 
-app.use(session({secret: 'SOME SUPER SECRET'}));
+app.use(session({ secret: 'SOME SUPER SECRET' }));
 
 app.use('/', caseRouter);
 

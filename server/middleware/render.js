@@ -1,7 +1,7 @@
 const React = require('react');
-const {StaticRouter} = require('react-router-dom');
-const {renderToString} = require('react-dom/server');
-const {default: App} = require('../../build/server/app.server');
+const { StaticRouter } = require('react-router-dom');
+const { renderToString } = require('react-dom/server');
+const { default: App } = require('../../build/server/app.server');
 const logger = require('../libs/logger');
 const html = require('../layout/html');
 
@@ -12,7 +12,7 @@ const render = (req, res, next) => {
 
     const config = {
         layout: require('../config').forContext('case'),
-        form:  req.form,
+        form: req.form,
     };
 
     const context = {
@@ -20,8 +20,8 @@ const render = (req, res, next) => {
     };
 
     const markup = renderToString(
-        React.createElement(StaticRouter, {location: req.originalUrl, context},
-            React.createElement(App, {config})
+        React.createElement(StaticRouter, { location: req.originalUrl, context },
+            React.createElement(App, { config })
         )
     );
 

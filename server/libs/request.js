@@ -1,5 +1,5 @@
-const {WORKFLOW_SERVICE, WORKFLOW_BASIC_AUTH} = require('../config').forContext('server');
-const {isProduction} = require('../config');
+const { WORKFLOW_SERVICE, WORKFLOW_BASIC_AUTH } = require('../config').forContext('server');
+const { isProduction } = require('../config');
 const axios = require('axios');
 const https = require('https');
 const fs = require('fs');

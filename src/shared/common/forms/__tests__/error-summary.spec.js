@@ -15,17 +15,17 @@ describe('Form text component', () => {
     });
     it('should render with heading when passed', () => {
         expect(
-            render(<ErrorSummary heading="Error summary"/>)
+            render(<ErrorSummary heading="Error summary" />)
         ).toMatchSnapshot();
     });
     it('should render with description when passed', () => {
         expect(
-            render(<ErrorSummary description="Displaying a list of the errors on the page"/>)
+            render(<ErrorSummary description="Displaying a list of the errors on the page" />)
         ).toMatchSnapshot();
     });
     it('should render list of errors when passed', () => {
         expect(
-            render(<ErrorSummary errors={errors}/>)
+            render(<ErrorSummary errors={errors} />)
         ).toMatchSnapshot();
     });
 });
