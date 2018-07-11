@@ -30,6 +30,9 @@ module.exports = {
         ],
         "object-curly-spacing": [
             "error", "always"
+        ],
+        "no-trailing-spaces": [
+            "error"
         ]
     },
     "overrides": [
