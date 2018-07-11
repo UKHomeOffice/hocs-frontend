@@ -6,6 +6,12 @@
       "defaultActionLabel": "Submit",
       "fields": [
         {
+          "component": "paragraph",
+          "props": {
+              "content": "The Magic Words are Squeamish Ossifrage."
+          }
+        },
+        {
           "component": "text",
           "validation": [
             "required"
@@ -74,6 +80,12 @@
                 "value": "IsChecked"
               }
             ]
+          }
+        },
+        {
+          "component": "panel",
+          "props": {
+            "content": "Doing this thing will make that thing happen."
           }
         },
         {
