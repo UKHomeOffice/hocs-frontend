@@ -31,13 +31,13 @@ const validators = {
             for (let file of files) {
                 let fileExtension = file.originalname.split('.').slice(-1)[0];
                 logger.debug('Validating extension: ' + fileExtension);
-                if (allowableExtensions.includes(fileExtension)) {
-                    logger.debug('Accepting extension: ' + fileExtension);
-                    return null;
+
+                if (!allowableExtensions.includes(fileExtension)) {
+                    logger.debug('Rejecting extension: ' + fileExtension);
+                    return validationErrors.invalidFileExtension(fileExtension);
                 }
 
-                logger.debug('Rejecting extension: ' + fileExtension);
-                return validationErrors.invalidFileExtension(fileExtension);
+                logger.debug('Accepting extension: ' + fileExtension);
             }
             // no files to check:
             return null;
