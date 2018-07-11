@@ -54,7 +54,6 @@ const process = (req, res, next) => {
         }
         return reducer;
     }, {});
-    logger.debug(`FORM DATA = ${JSON.stringify(req.form.data)}`);
     next();
 };
 
