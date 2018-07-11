@@ -36,15 +36,13 @@ BackLink.propTypes = {
     to: PropTypes.string.isRequired,
     className: PropTypes.string,
     dispatch: PropTypes.func.isRequired,
-    label: PropTypes.string,
-    isAllowedInFooter: PropTypes.bool,
+    label: PropTypes.string
 };
 
 BackLink.defaultProps = {
     disabled: false,
     to: '/',
-    label: 'Back',
-    isAllowedInFooter: PropTypes.bool
+    label: 'Back'
 };
 
 const WrappedButton = props => (

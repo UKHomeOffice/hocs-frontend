@@ -10,12 +10,12 @@ class DocumentAdd extends Component {
     }
 
     componentDidMount() {
-        this.props.updateState({ [this.props.name]: this.state.value });
+        this.props.updateState({ [this.props.name]: null });
     }
 
     handleChange(e) {
         e.preventDefault();
-        Object.keys(e.target.files).map(file => this.props.updateState({ [`${this.props.name}_${file}`]: e.target.files[file] }));
+        this.props.updateState({ [this.props.name]: Array.from(e.target.files) });
     }
 
     render() {

@@ -15,15 +15,14 @@
             "label": "Case type",
             "choices": "CASE_TYPE"
           }
-        },
+        }
+      ],
+      "secondaryActions": [
         {
-          "component": "button",
-          "props": {
-            "name": "cancel",
-            "action": "/",
-            "className": "button-secondary-action",
-            "label": "Cancel"
-          }
+            "component": "backlink",
+            "props": {
+                "label": "Cancel"
+            }
         }
       ]
     }

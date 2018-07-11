@@ -61,7 +61,7 @@ class Case extends Component {
 Case.propTypes = {
     dispatch: PropTypes.func.isRequired,
     form: PropTypes.object,
-    match: { url: PropTypes.string, params: { caseId: PropTypes.string } }
+    match: PropTypes.object
 };
 
 const WrappedPage = props => (
