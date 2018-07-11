@@ -42,9 +42,9 @@ const process = (req, res, next) => {
             reducer = Object.assign({}, reducer, processCheckbox(name, data[name], field.props.choices));
             break;
         case 'addDocument':
-            if (req.files.length === 0) {                
+            if (req.files.length === 0) {
                 reducer[name] = null;
-            } else {                                
+            } else {
                 reducer[name] = req.files.filter(f => f.fieldname.indexOf(name) === 0);
                 logger.debug(`Successfully attached ${reducer[name].length} documents to ${name}`);
             }
