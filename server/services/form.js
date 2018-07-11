@@ -46,7 +46,8 @@ const getForm = (action, options, callback) => {
     try {
         return actions[action.toLowerCase()].call(this, options, callback);
     } catch (e) {
-        throw new Error(`Unable to get form for ${action}: ${e}`);
+        logger.error(`Unable to get form for ${action}`);
+        throw e;
     }
 };
 

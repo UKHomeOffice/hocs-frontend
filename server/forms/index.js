@@ -9,5 +9,10 @@ const forms = {
 };
 
 module.exports = {
-    getForm: (form) => JSON.parse(JSON.stringify(forms[form]))
+    getForm: (form) => {
+        if (typeof forms[forms] === 'undefined') {
+            throw new ReferenceError(`Form ${form} does not exist`);
+        }
+        return JSON.parse(JSON.stringify(forms[form]));
+    }
 };
