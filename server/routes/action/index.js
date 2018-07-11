@@ -3,6 +3,7 @@ const actionService = require('../../services/action');
 const fileMiddleware = require('../../middleware/file');
 const processMiddleware = require('../../middleware/process');
 const validationMiddleware = require('../../middleware/validation');
+const renderMiddleware = require('../../middleware/render');
 
 router.post('/:action', fileMiddleware.any(), processMiddleware, validationMiddleware);
 
@@ -21,6 +22,19 @@ router.post('/:action', (req, res, next) => {
             return res.status(200).send({ redirect: callbackUrl, response: {} });
         }
     });
+});
+
+router.post('/:action', (req, res, next) => {
+    if (!res.noScript) {
+        return res.status(200).send({ errors: req.form.errors });
+    }
+    next();
+});
+
+router.post('/:action', renderMiddleware);
+
+router.post('/:action', (req, res) => {
+    return res.status(200).send(res.rendered);
 });
 
 module.exports = router;
