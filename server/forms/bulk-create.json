@@ -1,17 +1,27 @@
 {
   "form": {
     "schema": {
-      "action": "add_document",
+      "action": "bulk_upload",
       "callback": {
         "action": "case",
         "value": "documents"
       },
-      "title": "Add documents",
-      "defaultActionLabel": "Add document",
+      "title": "Create cases in bulk",
+      "defaultActionLabel": "Create multiple cases",
       "fields": [
         {
+          "component": "radio",
+          "validation": [
+            "required"
+          ],
+          "props": {
+            "name": "case-type",
+            "label": "Case type",
+            "choices": "CASE_TYPE"
+          }
+        },
+        {
           "component": "paragraph",
-          "type": "display",
           "props": {
             "content": "Description to go here"
           }
@@ -27,7 +37,7 @@
             "action": "ADD_DOCUMENT",
             "documentType": "ORIGINAL",
             "className": "button-secondary-action",
-            "label": "Document",
+            "label": "Documents",
             "allowMultiple": true,
             "whitelist": "DOCUMENT_EXTENSION_WHITELIST"
           }
@@ -35,13 +45,10 @@
       ],
       "secondaryActions": [
         {
-          "component": "button",
-          "props": {
-            "name": "cancel",
-            "action": "/",
-            "className": "button-secondary-action",
-            "label": "Cancel"
-          }
+            "component": "backlink",
+            "props": {
+                "label": "Cancel"
+            }
         }
       ]
     }

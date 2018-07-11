@@ -9,7 +9,30 @@ const actions = {
         workflowServiceClient.post('/case', createCaseRequest)
             .then(response => {
                 const stage = 'document';
-                callback(`/case/${response.data.uuid}/${stage}`, null);
+                callback(`/case/${response.data.uuid}/${ stage }`, null);
+            })
+            .catch(err => {
+                logger.error(`${err.message}`);
+                callback(null, 'Failed to perform action');
+            });
+    },
+    bulk: ({ form }, callback) => {
+        const documentSummaries = form.schema.fields.reduce((reducer, field) => {
+            if (field.component === 'addDocument') {
+                form.data[field.props.name].map(file => {
+                    reducer.push({
+                        displayName: file.originalname,
+                        type: field.props.documentType,
+                        s3UntrustedUrl: file.location || 'location'
+                    });
+                });
+            }
+            return reducer;
+        }, []);
+        logger.debug(form.action);
+        workflowServiceClient.post('/case/bulk', { type: form.data['case-type'], documentSummaries })
+            .then(() => {
+                callback('/', null);
             })
             .catch(err => {
                 logger.error(`${err.message}`);
