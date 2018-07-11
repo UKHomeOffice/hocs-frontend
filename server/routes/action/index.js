@@ -6,7 +6,10 @@ const validationMiddleware = require('../../middleware/validation');
 
 router.post('/:action', fileMiddleware.any(), processMiddleware, validationMiddleware);
 
-router.post('/:action', (req, res) => {
+router.post('/:action', (req, res, next) => {
+    if (Object.keys(req.form.errors).length > 0) {
+        return next();
+    }
     const { action } = req.params;
     actionService.performAction(action, { form: req.form, user: req.user }, (callbackUrl, err) => {
         if (err) {
