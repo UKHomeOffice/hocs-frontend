@@ -11,6 +11,8 @@ import TextArea from './text-area.jsx';
 import AddDocument from './composite/document-add.jsx';
 import Button from './button.jsx';
 import BackLink from './backlink.jsx';
+import Paragraph from './paragraph.jsx';
+import Panel from './panel.jsx';
 import { ApplicationConsumer } from '../../contexts/application.jsx';
 import { redirect, updateForm, updateFormData, updateFormErrors } from '../../contexts/actions/index.jsx';
 import Dropdown from './dropdown.jsx';
@@ -94,19 +96,29 @@ class Form extends Component {
         case 'button':
             return <Button key={i}
                 {...field.props} />;
-        case 'backlink':
-            return <BackLink key={i}
-                {...field.props} />;
+
         case 'addDocument':
             return <AddDocument key={i}
                 {...field.props}
                 error={this.props.errors && this.props.errors[field.props.name]}
                 updateState={data => this.updateFormState(data)} />;
+
+        // Non-form elements:
+        case 'backlink':
+            return <BackLink key={i}
+                {...field.props} />;
         case 'heading':
             return <h2 key={i} className="heading-medium">{field.props.label}</h2>;
+        case 'panel':
+            return <Panel key={i}
+                {...field.props} />;
+        case 'paragraph':
+            return <Paragraph key={i}
+                {...field.props} />;
+
         }
     }
-    
+
     renderSecondaryAction(field, i) {
         switch (field.component) {
         // Whitelist of boring elements that are allowed to be below the "submit" button
