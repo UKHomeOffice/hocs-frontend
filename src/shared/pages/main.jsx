@@ -54,7 +54,7 @@ class MainPage extends Component {
 }
 
 MainPage.propTypes = {
-    dispatch: PropTypes.string.isRequired,
+    dispatch: PropTypes.func.isRequired,
     match: PropTypes.object,
     subTitle: PropTypes.string,
     title: PropTypes.string
