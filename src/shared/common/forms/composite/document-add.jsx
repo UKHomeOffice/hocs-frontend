@@ -4,11 +4,6 @@ import { ApplicationConsumer } from '../../../contexts/application.jsx';
 
 class DocumentAdd extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = { value: this.props.value };
-    }
-
     componentDidMount() {
         this.props.updateState({ [this.props.name]: null });
     }

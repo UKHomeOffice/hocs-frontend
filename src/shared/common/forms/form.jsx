@@ -32,7 +32,15 @@ class Form extends Component {
         const url = this.props.action;
         /* eslint-disable-next-line no-undef */
         const formData = new FormData();
-        Object.keys(this.state).map(e => formData.append(e, this.state[e]));
+        Object.keys(this.state).map(field => {
+            if (Array.isArray(this.state[field])) {
+                this.state[field].map(value => {
+                    formData.append(`${field}[]`, value);
+                });
+            } else {
+                formData.append(field, this.state[field]);
+            }            
+        });        
         axios.post(url, formData, { headers: { 'Content-Type': 'multipart/form-data' } })
             .then(res => {
                 if (res.data.errors) {
