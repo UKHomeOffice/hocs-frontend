@@ -48,7 +48,7 @@ class Radio extends Component {
                                     type={type}
                                     name={name}
                                     value={choice.value}
-                                    checked={(this.state.value === choice.value) || choice.checked}
+                                    checked={(this.state.value === choice.value)}
                                     onChange={e => this.handleChange(e)}
                                 />
                                 <label htmlFor={`${name}-${choice.value}`}>{choice.label}</label>
