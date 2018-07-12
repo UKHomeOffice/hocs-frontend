@@ -41,8 +41,8 @@ class Form extends Component {
                 });
             } else {
                 formData.append(field, this.state[field]);
-            }            
-        });        
+            }
+        });
         axios.post(url, formData, { headers: { 'Content-Type': 'multipart/form-data' } })
             .then(res => {
                 if (res.data.errors) {
