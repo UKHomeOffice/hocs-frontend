@@ -10,7 +10,7 @@ html.use(assets);
 
 router.use('*', authMiddleware);
 
-router.use(['/:context/:action', '/:action'], getFormForAction);
+router.use(['/action/:context/:action', '/action/:action'], getFormForAction);
 
 router.use('/case/:type/:action', getFormForCase);
 

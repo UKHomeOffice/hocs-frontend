@@ -3,7 +3,6 @@ const actionService = require('../../services/action');
 const processMiddleware = require('../../middleware/process');
 const fileMiddleware = require('../../middleware/file');
 const validationMiddleware = require('../../middleware/validation');
-const renderMiddleware = require('../../middleware/render');
 
 router.post('/:caseId/stage/:stageId', fileMiddleware.any(), processMiddleware, validationMiddleware);
 
@@ -24,19 +23,6 @@ router.post('/:caseId/stage/:stageId', (req, res, next) => {
     } else {
         next();
     }
-});
-
-router.post('/:caseId/stage/:stageId', (req, res, next) => {
-    if (!res.noScript) {
-        return res.status(200).send({ errors: req.form.errors });
-    }
-    next();
-});
-
-router.post('/:caseId/stage/:stageId', renderMiddleware);
-
-router.post('/:caseId/stage/:stageId', (req, res) => {
-    return res.status(200).send(res.rendered);
 });
 
 module.exports = router;

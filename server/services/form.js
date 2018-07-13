@@ -81,6 +81,7 @@ function preProcessFields(fields, options) {
 
 const getFormForAction = (req, res, callback) => {
     const { action } = req.params;
+    logger.debug(`ACTION: ${action}`);
     req.form = getForm('action', { action, user: req.user });
     callback();
 };

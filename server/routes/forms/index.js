@@ -8,7 +8,7 @@ router.use('/case/:type/:action', getFormForCase);
 
 router.use('/case/:caseId/stage/:stageId', getFormForStage);
 
-router.get(['/action/:context/:action', '/action/:action'], (req, res) => {
+router.get(['/action/:action', '/action/:context/:action'], (req, res) => {
     const { action } = req.params;
     if (req.user && User.hasRole(req.user, action.toUpperCase())) {
         res.status(200).send(req.form);
