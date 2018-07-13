@@ -7,33 +7,32 @@ const actions = {
     action: ({ action, user }) => {
         switch (action) {
         case 'create':
-            return getCreateForm(user);
+            return getFormSchema('caseCreate', { user });
         case 'bulk':
-            return getBulkCreateForm(user);
+            return getFormSchema('bulkCreate', { user });
         case 'document':
-            return getAddDocumentForm();
+            return getFormSchema('addDocument');
         case 'bulkDocument':
-            return getBulkAddDocumentForm();
+            return getFormSchema('bulkAddDocument');
         }
     },
     /* eslint-disable-next-line no-unused-vars */
-    workflow: ({ action, context }) => {
+    workflow: ({ action }) => {
         // TODO: populate meta object
         switch (action) {
         case 'document':
-            return getAddDocumentForm();
+            return getFormSchema('addDocument');
         case 'bulkDocument':
-            return getBulkAddDocumentForm();
+            return getFormSchema('bulkAddDocument');
         }
     },
     stage: ({ caseId, stageId }, callback) => {
         workflowServiceClient.get(`/case/${caseId}/stage/${stageId}`)
             .then((response) => {
-                if (response && response.data && response.data && response.data.form) {
-                    const stageUUID = response.data.stageUUID;
-                    const caseRef = response.data.caseReference;
+                if (response && response.data && response.data.form) {
+                    const { stageUUID, caseReference } = response.data;
                     const { schema, data } = response.data.form;
-                    return callback({ schema, data, meta: { caseRef, stageUUID } });
+                    return callback({ schema, data, meta: { caseReference, stageUUID } });
                 }
                 callback();
             })
@@ -44,40 +43,60 @@ const actions = {
     }
 };
 
-const getForm = (action, options, callback) => {
+function getForm (action, options, callback) {
     try {
         return actions[action.toLowerCase()].call(this, options, callback);
     } catch (e) {
         logger.error(`Unable to get form for ${action}`);
         throw e;
     }
-};
+}
+
+function getFormSchema(form, options) {
+    const { form: { schema, data } } = formRepository.getForm(form);
+    preProcessFields(schema.fields, options);
+    return { schema, data, meta: {} };
+}
+
+function preProcessFields(fields, options) {
+    return fields.map(field => {
+        switch (field.component) {
+        case 'radio':
+        case 'checkbox':
+        case 'dropdown':
+            if (field.props && field.props.choices && typeof field.props.choices === 'string') {
+                field.props.choices = listService.getList(field.props.choices, { user: options.user });
+            }
+            break;
+        case 'addDocument':
+        case 'bulkAddDocument':
+            if (field.props && field.props.whitelist && typeof field.props.whitelist === 'string') {
+                field.props.whitelist = listService.getList(field.props.whitelist);
+            }
+            break;
+        }
+        return field;
+    });
+}
 
 const getFormForAction = (req, res, callback) => {
     const { action } = req.params;
-    const { noScript = false } = req.query;
     req.form = getForm('action', { action, user: req.user });
-    res.noScript = noScript;
     callback();
 };
 
 const getFormForCase = (req, res, callback) => {
-    const { type, action } = req.params;
-    const { noScript = false } = req.query;
-    req.form = getForm('workflow', { type, action });
-    res.noScript = noScript;
+    const { action } = req.params;
+    req.form = getForm('workflow', { action });
     callback();
 };
 
 const getFormForStage = (req, res, callback) => {
     const { caseId, stageId } = req.params;
-    const { noScript = false } = req.query;
     getForm('stage', { caseId, stageId }, form => {
         req.form = form;
-        res.noScript = noScript;
         callback();
     });
-
 };
 
 module.exports = {
@@ -85,44 +104,3 @@ module.exports = {
     getFormForCase,
     getFormForStage
 };
-
-function getCreateForm(user) {
-    const { form: { schema, data } } = formRepository.getForm('caseCreate');
-    schema.fields = populateFields(schema.fields, user);
-    return { schema, data };
-}
-
-function getBulkCreateForm(user) {
-    const { form: { schema, data } } = formRepository.getForm('bulkCreate');
-    schema.fields = populateFields(schema.fields, user);
-    return { schema, data };
-}
-
-function getAddDocumentForm() {
-    logger.info('GET DOCUMENT FORM');
-    const { form: { schema, data } } = formRepository.getForm('addDocument');
-    schema.fields = populateFields(schema.fields);
-    return { schema, data };
-}
-
-function getBulkAddDocumentForm() {
-    const { form: { schema, data } } = formRepository.getForm('bulkAddDocument');
-    schema.fields = populateFields(schema.fields);
-    return { schema, data };
-}
-
-function populateFields(fields, user) {
-    return fields.map(field => {
-        const choices = field.props.choices;
-        if (choices && typeof choices === 'string') {
-            field.props.choices = listService.getList(choices, { user });
-        }
-        if (field.component === 'addDocument' || field.component === 'bulkAddDocument') {
-            const whitelist = field.props.whitelist;
-            if (whitelist && typeof whitelist === 'string') {
-                field.props.whitelist = listService.getList(whitelist);
-            }
-        }
-        return field;
-    });
-}

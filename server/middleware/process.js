@@ -24,6 +24,8 @@ const processCheckbox = (name, value, choices) => {
 
 const process = (req, res, next) => {
     logger.debug('PROCESS MIDDLEWARE');
+    const { noScript = false } = req.query;
+    res.noScript = noScript;
     const data = req.body;
     const { schema } = req.form;
     const fields = schema.fields.filter(field => field.type !== 'display');

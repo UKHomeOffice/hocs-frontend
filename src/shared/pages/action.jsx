@@ -35,7 +35,6 @@ class Action extends Component {
 
     render() {
         const {
-            caseRef,
             form,
             match: { url },
             subTitle
@@ -44,7 +43,6 @@ class Action extends Component {
             <div className="grid-row">
                 <div className="column-full">
                     <h1 className="heading-large">
-                        {caseRef}
                         {form && form.schema && form.schema.title}
                         {subTitle && <span className="heading-secondary">{subTitle}</span>}
                     </h1>
@@ -62,7 +60,6 @@ class Action extends Component {
 }
 
 Action.propTypes = {
-    caseRef: PropTypes.string,
     dispatch: PropTypes.func.isRequired,
     form: PropTypes.object,
     match: PropTypes.object,
