@@ -43,7 +43,7 @@ class Radio extends Component {
 
                     {choices && choices.map((choice, i) => {
                         return (
-                            <div key={i} className="multiple-choice">
+                            <div key={i} className='multiple-choice'>
                                 <input id={`${name}-${choice.value}`}
                                     type={type}
                                     name={name}

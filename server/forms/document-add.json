@@ -31,6 +31,48 @@
             "allowMultiple": true,
             "whitelist": "DOCUMENT_EXTENSION_WHITELIST"
           }
+        },
+        {
+          "component": "entityList",
+          "validation": [
+            "required"
+          ],
+          "props": {
+            "name": "primary_topic",
+            "label": "Topic",
+            "action": "TOPIC",
+            "choices": [
+              {
+                "label": "Topic A",
+                "value": "TOPIC_A"
+              },
+              {
+                "label": "Topic B",
+                "value": "TOPIC_B"
+              }
+            ]
+          }
+        },
+        {
+          "component": "entityList",
+          "validation": [
+            "required"
+          ],
+          "props": {
+            "name": "primary_correspondent",
+            "label": "Correspondent",
+            "action": "CORRESPONDENT",
+            "choices": [
+              {
+                "label": "Correspondent A",
+                "value": "CORRESPONDENT_A"
+              },
+              {
+                "label": "Correspondent B",
+                "value": "CORRESPONDENT_B"
+              }
+            ]
+          }
         }
       ],
       "secondaryActions": [

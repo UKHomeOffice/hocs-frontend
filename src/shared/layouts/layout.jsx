@@ -47,7 +47,7 @@ class Layout extends Component {
 Layout.propTypes = {
     children: PropTypes.node,
     dispatch: PropTypes.func.isRequired,
-    redirect: PropTypes.func
+    redirect: PropTypes.string
 };
 
 Layout.defaultProps = {
