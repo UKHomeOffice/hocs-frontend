@@ -1,23 +1,23 @@
 {
   "form": {
     "schema": {
-      "action": "add_document",
+      "action": "bulk_add_document",
       "callback": {
         "action": "case",
-        "value": "documents"
+        "value": "bulkDocuments"
       },
-      "title": "Add documents",
+      "title": "Bulk add documents",
       "defaultActionLabel": "Create",
       "fields": [
         {
-          "component": "addDocument",
+          "component": "bulkAddDocument",
           "validation": [
             "required",
             "hasWhitelistedExtension"
           ],
           "props": {
-            "name": "add_document",
-            "action": "ADD_DOCUMENT",
+            "name": "bulk_add_document",
+            "action": "BULK_ADD_DOCUMENT",
             "documentType": "ORIGINAL",
             "className": "button-secondary-action",
             "label": "Document",

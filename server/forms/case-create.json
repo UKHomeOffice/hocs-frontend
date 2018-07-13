@@ -3,7 +3,7 @@
     "schema": {
       "action": "CREATE",
       "title": "Create case",
-      "defaultActionLabel": "Add document",
+      "defaultActionLabel": "Next",
       "fields": [
         {
           "component": "radio",

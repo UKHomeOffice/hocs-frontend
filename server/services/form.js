@@ -12,11 +12,20 @@ const actions = {
             return getBulkCreateForm(user);
         }
     },
-    workflow: ({ caseId }) => {
+    workflow: ({ action, caseId }) => {
         // TODO: call workflow service for form
-        const { form: { schema, data } } = formRepository.getForm('addDocument');
+        let form;
+        switch (action) {
+        case 'document':
+            form = formRepository.getForm('addDocument');
+            break;
+        case 'bulkDocument':
+            form = formRepository.getForm('bulkAddDocument');
+            break;
+        }
+        const { form: { schema, data } } = form;
         schema.fields = schema.fields.map(field => {
-            if (field.component === 'addDocument') {
+            if (field.component === 'addDocument' || field.component === 'bulkAddDocument') {
                 const whitelist = field.props.whitelist;
                 if (whitelist && typeof whitelist === 'string') {
                     field.props.whitelist = listService.getList(whitelist);

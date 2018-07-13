@@ -9,6 +9,7 @@ import Checkbox from './checkbox-group.jsx';
 import Submit from './submit.jsx';
 import TextArea from './text-area.jsx';
 import AddDocument from './composite/document-add.jsx';
+import BulkAddDocument from './composite/bulk-document-add.jsx';
 import Button from './button.jsx';
 import BackLink from './backlink.jsx';
 import Paragraph from './paragraph.jsx';
@@ -104,13 +105,16 @@ class Form extends Component {
         case 'button':
             return <Button key={i}
                 {...field.props} />;
-
         case 'addDocument':
             return <AddDocument key={i}
                 {...field.props}
                 error={this.props.errors && this.props.errors[field.props.name]}
                 updateState={data => this.updateFormState(data)} />;
-
+        case 'bulkAddDocument':
+            return <BulkAddDocument key={i}
+                {...field.props}
+                error={this.props.errors && this.props.errors[field.props.name]}
+                updateState={data => this.updateFormState(data)} />;
         // Non-form elements:
         case 'backlink':
             return <BackLink key={i}
