@@ -5,9 +5,9 @@ const processMiddleware = require('../../middleware/process');
 const validationMiddleware = require('../../middleware/validation');
 const renderMiddleware = require('../../middleware/render');
 
-router.post('/:action', fileMiddleware.any(), processMiddleware, validationMiddleware);
+router.post(['/:context/:action', '/:action'], fileMiddleware.any(), processMiddleware, validationMiddleware);
 
-router.post('/:action', (req, res, next) => {
+router.post(['/:context/:action', '/:action'], (req, res, next) => {
     if (Object.keys(req.form.errors).length > 0) {
         return next();
     }
@@ -24,16 +24,16 @@ router.post('/:action', (req, res, next) => {
     });
 });
 
-router.post('/:action', (req, res, next) => {
+router.post(['/:context/:action', '/:action'], (req, res, next) => {
     if (!res.noScript) {
         return res.status(200).send({ errors: req.form.errors });
     }
     next();
 });
 
-router.post('/:action', renderMiddleware);
+router.post(['/:context/:action', '/:action'], renderMiddleware);
 
-router.post('/:action', (req, res) => {
+router.post(['/:context/:action', '/:action'], (req, res) => {
     return res.status(200).send(res.rendered);
 });
 

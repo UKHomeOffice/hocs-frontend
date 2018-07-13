@@ -10,30 +10,21 @@ const actions = {
             return getCreateForm(user);
         case 'bulk':
             return getBulkCreateForm(user);
+        case 'document':
+            return getAddDocumentForm();
+        case 'bulkDocument':
+            return getBulkAddDocumentForm();
         }
     },
-    workflow: ({ action, caseId }) => {
-        // TODO: call workflow service for form
-        let form;
+    /* eslint-disable-next-line no-unused-vars */
+    workflow: ({ action, context }) => {
+        // TODO: populate meta object
         switch (action) {
         case 'document':
-            form = formRepository.getForm('addDocument');
-            break;
+            return getAddDocumentForm();
         case 'bulkDocument':
-            form = formRepository.getForm('bulkAddDocument');
-            break;
+            return getBulkAddDocumentForm();
         }
-        const { form: { schema, data } } = form;
-        schema.fields = schema.fields.map(field => {
-            if (field.component === 'addDocument' || field.component === 'bulkAddDocument') {
-                const whitelist = field.props.whitelist;
-                if (whitelist && typeof whitelist === 'string') {
-                    field.props.whitelist = listService.getList(whitelist);
-                }
-            }
-            return field;
-        });
-        return { schema, data, meta: { caseId } };
     },
     stage: ({ caseId, stageId }, callback) => {
         workflowServiceClient.get(`/case/${caseId}/stage/${stageId}`)
@@ -107,11 +98,30 @@ function getBulkCreateForm(user) {
     return { schema, data };
 }
 
+function getAddDocumentForm() {
+    logger.info('GET DOCUMENT FORM');
+    const { form: { schema, data } } = formRepository.getForm('addDocument');
+    schema.fields = populateFields(schema.fields);
+    return { schema, data };
+}
+
+function getBulkAddDocumentForm() {
+    const { form: { schema, data } } = formRepository.getForm('bulkAddDocument');
+    schema.fields = populateFields(schema.fields);
+    return { schema, data };
+}
+
 function populateFields(fields, user) {
     return fields.map(field => {
         const choices = field.props.choices;
         if (choices && typeof choices === 'string') {
             field.props.choices = listService.getList(choices, { user });
+        }
+        if (field.component === 'addDocument' || field.component === 'bulkAddDocument') {
+            const whitelist = field.props.whitelist;
+            if (whitelist && typeof whitelist === 'string') {
+                field.props.whitelist = listService.getList(whitelist);
+            }
         }
         return field;
     });

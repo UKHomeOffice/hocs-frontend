@@ -5,12 +5,12 @@ const actions = {
     create: ({ form }, callback) => {
         const caseType = form.data['case-type'];
         const stage = 'document';
-        callback(`/case/${ caseType }/${ stage }`, null);
+        callback(`/action/${ caseType }/${ stage }`, null);
     },
     bulk: ({ form }, callback) => {
         const caseType = form.data['case-type'];
         const stage = 'bulkDocument';
-        callback(`/case/${ caseType }/${ stage }`, null);
+        callback(`/action/${ caseType }/${ stage }`, null);
     },
     document: ({ form, caseId }, callback) => {
         // TODO: Post S3 URLs to workflow service
