@@ -43,7 +43,7 @@ class Stage extends Component {
                 <div className="column-full">
                     <h1 className="heading-large">
                         {form && form.schema && form.schema.title}
-                        <span className="heading-secondary">{`${form && form.meta && form.meta.caseRef}`}</span>
+                        <span className="heading-secondary">{`${form && form.meta && form.meta.caseReference}`}</span>
                     </h1>
                     {form && form.schema && <Form
                         action={url}
