@@ -3,41 +3,14 @@ const { workflowServiceClient } = require('../libs/request');
 
 const actions = {
     create: ({ form }, callback) => {
-        const createCaseRequest = {
-            type: form.data['case-type']
-        };
-        workflowServiceClient.post('/case', createCaseRequest)
-            .then(response => {
-                const stage = 'document';
-                callback(`/case/${response.data.uuid}/${ stage }`, null);
-            })
-            .catch(err => {
-                logger.error(`${err.message}`);
-                callback(null, 'Failed to perform action');
-            });
+        const caseType = form.data['case-type'];
+        const stage = 'document';
+        callback(`/case/${ caseType }/${ stage }`, null);
     },
     bulk: ({ form }, callback) => {
-        const documentSummaries = form.schema.fields.reduce((reducer, field) => {
-            if (field.component === 'addDocument') {
-                form.data[field.props.name].map(file => {
-                    reducer.push({
-                        displayName: file.originalname,
-                        type: field.props.documentType,
-                        s3UntrustedUrl: file.location || 'location'
-                    });
-                });
-            }
-            return reducer;
-        }, []);
-        logger.debug(form.action);
-        workflowServiceClient.post('/case/bulk', { type: form.data['case-type'], documentSummaries })
-            .then(() => {
-                callback('/', null);
-            })
-            .catch(err => {
-                logger.error(`${err.message}`);
-                callback(null, 'Failed to perform action');
-            });
+        const caseType = form.data['case-type'];
+        const stage = 'bulkDocument';
+        callback(`/case/${ caseType }/${ stage }`, null);
     },
     document: ({ form, caseId }, callback) => {
         // TODO: Post S3 URLs to workflow service
@@ -54,7 +27,39 @@ const actions = {
             return reducer;
         }, []);
         logger.debug(form.action);
-        workflowServiceClient.post(`/case/${caseId}/${form.schema.callback.value}`, { documentSummaries })
+        const createCaseRequest = {
+            type:  caseId,
+            documents: documentSummaries
+        };
+        workflowServiceClient.post('/case', createCaseRequest)
+            .then(() => {
+                callback('/', null);
+            })
+            .catch(err => {
+                logger.error(`${err.message}`);
+                callback(null, 'Failed to perform action');
+            });
+    },
+    bulkDocument: ({ form, caseId }, callback) => {
+        // TODO: Post S3 URLs to workflow service
+        const documentSummaries = form.schema.fields.reduce((reducer, field) => {
+            if (field.component === 'bulkAddDocument') {
+                form.data[field.props.name].map(file => {
+                    reducer.push({
+                        displayName: file.originalname,
+                        type: field.props.documentType,
+                        s3UntrustedUrl: file.location || 'location'
+                    });
+                });
+            }
+            return reducer;
+        }, []);
+        logger.debug(form.action);
+        const createBulkCaseRequest = {
+            type:  caseId,
+            documents: documentSummaries
+        };
+        workflowServiceClient.post('/case/bulk', createBulkCaseRequest)
             .then(() => {
                 callback('/', null);
             })
