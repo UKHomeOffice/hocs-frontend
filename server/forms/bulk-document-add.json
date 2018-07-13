@@ -10,7 +10,7 @@
       "defaultActionLabel": "Create",
       "fields": [
         {
-          "component": "bulkAddDocument",
+          "component": "addDocument",
           "validation": [
             "required",
             "hasWhitelistedExtension"

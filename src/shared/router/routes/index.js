@@ -14,8 +14,12 @@ const routes = [
     {
         path: '/action/:action',
         exact: true,
-        component: ActionPage,
-        title: 'Create case'
+        component: ActionPage
+    },
+    {
+        path: '/action/:context/:action',
+        exact: true,
+        component: ActionPage
     },
     {
         path: '/case/:caseId/:stage/',

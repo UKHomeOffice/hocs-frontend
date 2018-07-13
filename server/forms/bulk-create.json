@@ -2,7 +2,7 @@
   "form": {
     "schema": {
       "action": "CREATE",
-      "title": "Bulk Create Cases",
+      "title": "Bulk create cases",
       "defaultActionLabel": "Next",
       "fields": [
         {

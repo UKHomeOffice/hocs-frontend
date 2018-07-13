@@ -4,7 +4,7 @@ const workflowAuth = (process.env.WORKFLOW_BASIC_AUTH || 'UNSET:UNSET').split(':
 const config = {
     applications: {
         render: {
-            clientSide: process.env.USE_CLIENTSIDE || false,
+            clientSide: process.env.USE_CLIENTSIDE || true,
             js: ['vendor'],
             css: ['main'],
             react: 'main',
