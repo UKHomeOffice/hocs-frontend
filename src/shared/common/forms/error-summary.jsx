@@ -42,7 +42,7 @@ ErrorSummary.propTypes = {
 };
 
 ErrorSummary.defaultProps = {
-    heading: 'Please fix the following errors',
+    heading: 'There’s a problem',
     description: null,
     errors: {}
 };
