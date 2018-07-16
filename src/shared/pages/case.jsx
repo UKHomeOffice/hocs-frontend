@@ -36,11 +36,11 @@ class Case extends Component {
             match: { url, params: { caseId } }
         } = this.props;
         return (
-            <div className="grid-row">
-                <div className="column-full">
-                    <h1 className="heading-large">
+            <div className="govuk-grid-row">
+                <div className="govuk-grid-column-full">
+                    <h1 className="govuk-heading-l">
+                        <span className="govuk-caption-l">{`${caseId}`}</span>
                         {form && form.schema && form.schema.title}
-                        <span className="heading-secondary">{`${caseId}`}</span>
                     </h1>
                     {form && form.schema && <Form
                         action={url}

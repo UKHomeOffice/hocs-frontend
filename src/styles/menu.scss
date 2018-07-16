@@ -1,3 +1,6 @@
+$white: #fff;
+$tablet-breakpoint: 641px !default;
+
 #proposition-header {
   overflow: auto;
   clear: both;
@@ -16,12 +19,12 @@
 
 #proposition-menu #main-menu,
 #proposition-menu > input {
-  @include core-19();
+  @include govuk-font(80);
   display: none;
 }
 
 #proposition-menu > label {
-  @include bold-19();
+  @include govuk-font(19, $weight: bold);
   font-size: 19px;
   float: right;
   color: $white;
@@ -35,11 +38,11 @@
 #main-menu {
   list-style: none;
   & li > a {
-    @include bold-16();
+    @include govuk-font(16, $weight: bold);
     color: white;
     text-decoration: none;
     &.active {
-      color: $govuk-blue;
+      color: govuk-colour("blue");
     }
     &:hover {
       text-decoration: underline;

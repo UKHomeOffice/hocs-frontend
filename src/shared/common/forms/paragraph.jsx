@@ -6,7 +6,7 @@ export default class Paragraph extends Component {
         const { content } = this.props;
 
         return (
-            <p>{content}</p>
+            <p className="govuk-body">{content}</p>
         );
     }
 }
