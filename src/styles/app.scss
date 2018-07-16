@@ -3,7 +3,6 @@ $govuk-fonts-path: "/public/assets/fonts/";
 $tablet-breakpoint: 641px !default;
 
 @import "govuk-frontend/all.scss";
-@import "menu";
 
 // Overrides the GOV.UK width when longer
 .govuk-header__logo--wide {
@@ -15,59 +14,4 @@ code {
   padding: 0 govuk-spacing(1);
   color: govuk-colour("pink");
   background-color: govuk-colour("grey-4");
-}
-
-#header-application {
-  @include govuk-font(27, $weight: bold);
-  color: white;
-  text-decoration: none;
-  &:hover {
-    text-decoration: underline;
-  }
-}
-
-.left-divider {
-  border-left: 1px solid govuk-colour("grey-2");
-}
-
-
-html {
-  background-color: $white;
-}
-
-#global-header.with-proposition .header-wrapper .header-proposition {
-  width: auto;
-}
-
-#global-header.with-proposition .header-wrapper .header-global {
-  width: auto;
-}
-
-.button-secondary {
-  @include button($govuk-blue);
-  display: block;
-}
-
-.button-secondary-action {
-  @include button($govuk-blue);
-}
-
-.button-file-upload {
-  display: block;
-  margin-bottom: 15px;
-}
-
-input[type=file]::-webkit-file-upload-button {
-  @include button($govuk-blue);
-}
-
-input[type=file]::-ms-browse {
-  @include button($govuk-blue);
-}
-
-@media only screen and (min-device-width: $tablet-breakpoint) {
-  .button-secondary-action {
-    margin-right: 15px;
-    margin-bottom: 15px;
-  }
 }
