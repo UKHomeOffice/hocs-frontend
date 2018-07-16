@@ -35,6 +35,7 @@ class MainPage extends Component {
                                 <ul className="govuk-list govuk-list--bullet">
                                     <li><Link to={'/action/create'}>Create single case</Link></li>
                                     <li><Link to={'/action/bulk'}>Create cases in bulk</Link></li>
+                                    <li><Link to={'/action/test'}>View test form</Link></li>
                                 </ul>
                                 <h2 className="govuk-heading-m">
                                   Secondary routes

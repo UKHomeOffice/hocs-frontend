@@ -14,6 +14,8 @@ const actions = {
             return getFormSchema('addDocument');
         case 'bulkDocument':
             return getFormSchema('bulkAddDocument');
+        case 'test':
+            return getFormSchema('testForm');
         }
     },
     /* eslint-disable-next-line no-unused-vars */
