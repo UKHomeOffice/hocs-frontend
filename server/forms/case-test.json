@@ -6,6 +6,13 @@
       "defaultActionLabel": "Submit",
       "fields": [
         {
+          "component": "panel",
+          "props": {
+              "title": "Application complete",
+              "body": "Everything is excellent"
+            }
+        },
+        {
           "component": "paragraph",
           "props": {
               "content": "The Magic Words are Squeamish Ossifrage."
@@ -83,7 +90,7 @@
           }
         },
         {
-          "component": "panel",
+          "component": "inset",
           "props": {
             "content": "Doing this thing will make that thing happen."
           }

@@ -12,10 +12,11 @@ import AddDocument from './composite/document-add.jsx';
 import Button from './button.jsx';
 import BackLink from './backlink.jsx';
 import Paragraph from './paragraph.jsx';
-import Panel from './panel.jsx';
+import Inset from './inset.jsx';
 import { ApplicationConsumer } from '../../contexts/application.jsx';
 import { redirect, updateForm, updateFormData, updateFormErrors } from '../../contexts/actions/index.jsx';
 import Dropdown from './dropdown.jsx';
+import Panel from './panel.jsx';
 
 class Form extends Component {
 
@@ -117,6 +118,9 @@ class Form extends Component {
             return <h2 key={i} className="heading-medium">{field.props.label}</h2>;
         case 'panel':
             return <Panel key={i}
+                {...field.props} />;
+        case 'inset':
+            return <Inset key={i}
                 {...field.props} />;
         case 'paragraph':
             return <Paragraph key={i}
