@@ -6,9 +6,9 @@ export default class PhaseBannerComponent extends Component {
         const { feedback, phase } = this.props;
 
         return (
-            <div className="phase-banner">
-                <p>
-                    <strong className="phase-tag">{phase}</strong>
+            <div className="govuk-phase-banner">
+                <p className="govuk-phase-banner__content">
+                    <strong className="govuk-tag govuk-phase-banner__content__tag">{phase}</strong>
                     <span>This is a new service – your <a
                         href={feedback}>feedback</a> will help us to improve it.</span>
                 </p>

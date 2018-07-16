@@ -21,7 +21,7 @@ class BackLink extends Component {
             <p>
                 <Fragment>
                     <Link
-                        className={`link-back ${className ? ' ' + className : ''}`}
+                        className={`govuk-back-link ${className ? ' ' + className : ''}`}
                         to={to}
                         onClick={e => this.handleClick(e)}
                     >{label}</Link>
