@@ -26,13 +26,7 @@ const workflowDefinitions = {
         },
         TEST: {
             FORM: {
-                schema: testForm,
-                next: {
-                    action: 'DOCUMENT',
-                    context: {
-                        field: 'case-type'
-                    }
-                }
+                schema: testForm
             }
         },
         BULK: {
