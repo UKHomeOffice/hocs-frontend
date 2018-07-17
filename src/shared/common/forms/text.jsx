@@ -5,7 +5,7 @@ class Text extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { value: this.props.value };
+        this.state = { value: this.props.value || '' };
     }
 
     componentDidMount() {

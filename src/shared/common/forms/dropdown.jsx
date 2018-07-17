@@ -5,7 +5,9 @@ class Dropdown extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { value: this.props.value };
+        const fallbackValue = this.props.choices[0] ? this.props.choices[0].value : null;
+        const value = this.props.value || fallbackValue;
+        this.state = { value };
     }
 
     componentDidMount() {
