@@ -20,13 +20,13 @@ const config = {
             },
             body: {
                 phaseBanner: {
-                    isVisible: false,
+                    isVisible: true,
                     phase: 'ALPHA',
                     feedbackUrl: '#'
                 }
             },
             footer: {
-                isVisible: false
+                isVisible: true
             }
         },
         server: {
