@@ -38,19 +38,17 @@ class Date extends Component {
             hint,
             label
         } = this.props;
-        return (
-            <div className={`form-group${error ? ' form-group-error' : ''}`}>
-                <fieldset disabled={disabled}>
-                    <legend>
-                        <span className="form-label-bold">{label}</span>
-                        {hint && <span className="form-hint">{hint}</span>}
-                        {error && <span className="error-message">{error}</span>}
-                    </legend>
-                    <div className="form-date">
-                        <div className="form-group form-group-day">
-                            <label className="form-label" htmlFor={this.datePart('day')}>Day</label>
+        return <div className={`govuk-form-group${error ? ' govuk-form-group--error' : ''}`}>
+            <fieldset disabled={disabled} className="govuk-fieldset" role="group">
+                <legend className="govuk-fieldset__legend">{label}</legend>
+                {hint && <span className="govuk-hint">{hint}</span>}
+                {error && <span className="govuk-error-message">{error}</span>}
+                <div className="govuk-date-input">
+                    <div className="govuk-date-input__item">
+                        <div className="govuk-form-group">
+                            <label className="govuk-label govuk-date-input__label" htmlFor={this.datePart('day')}>Day</label>
                             <input
-                                className={`form-control ${error ? 'form-control-error' : ''}`}
+                                className={`govuk-input govuk-date-input__input govuk-input--width-2 ${error ? 'govuk-input--error' : ''}`}
                                 id={this.datePart('day')}
                                 name={this.datePart('day')}
                                 type="number"
@@ -61,10 +59,12 @@ class Date extends Component {
                                 onChange={e => this.handleChange(this.datePart('day'), e.target.value)}
                             />
                         </div>
-                        <div className="form-group form-group-month">
-                            <label className="form-label" htmlFor={this.datePart('month')}>Month</label>
+                    </div>
+                    <div className='govuk-date-input__item'>
+                        <div className="govuk-form-group">
+                            <label className="govuk-label govuk-date-input__label" htmlFor={this.datePart('month')}>Month</label>
                             <input
-                                className={`form-control ${error ? 'form-control-error' : ''}`}
+                                className={`govuk-input govuk-date-input__input govuk-input--width-2 ${error ? 'govuk-input--error' : ''}`}
                                 id={this.datePart('month')}
                                 name={this.datePart('month')}
                                 type="number"
@@ -75,10 +75,12 @@ class Date extends Component {
                                 onChange={e => this.handleChange(this.datePart('month'), e.target.value)}
                             />
                         </div>
-                        <div className="form-group form-group-year">
-                            <label className="form-label" htmlFor={this.datePart('year')}>Year</label>
+                    </div>
+                    <div className='govuk-date-input__item'>
+                        <div className="govuk-form-group">
+                            <label className="govuk-label govuk-date-input__label" htmlFor={this.datePart('year')}>Year</label>
                             <input
-                                className={`form-control ${error ? 'form-control-error' : ''}`}
+                                className={`govuk-input govuk-date-input__input govuk-input--width-4  ${error ? 'govuk-input--error' : ''}`}
                                 id={this.datePart('year')}
                                 name={this.datePart('year')}
                                 type="number"
@@ -90,9 +92,9 @@ class Date extends Component {
                             />
                         </div>
                     </div>
-                </fieldset>
-            </div>
-        );
+                </div>
+            </fieldset>
+        </div>;
     }
 }
 

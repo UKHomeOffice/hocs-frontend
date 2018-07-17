@@ -6,6 +6,13 @@
       "defaultActionLabel": "Submit",
       "fields": [
         {
+          "component": "panel",
+          "props": {
+              "title": "Application complete",
+              "body": "Everything is excellent"
+            }
+        },
+        {
           "component": "paragraph",
           "props": {
               "content": "The Magic Words are Squeamish Ossifrage."
@@ -83,7 +90,7 @@
           }
         },
         {
-          "component": "panel",
+          "component": "inset",
           "props": {
             "content": "Doing this thing will make that thing happen."
           }
@@ -120,6 +127,34 @@
                 "label": "C",
                 "value": "isC"
               }
+            ]
+          }
+        },
+        {
+          "component": "dropdown",
+          "validation": [
+            "required"
+          ],
+          "props": {
+            "name": "dropdown-test",
+            "label": "Dropdown",
+            "choices": [
+              {"value": 1, "label": "Iago"},
+              {"value": 2, "label": "Desdemona"},
+              {"value": 3, "label": "Cassio"},
+              {"value": 4, "label": "Othello"},
+              {"value": 5, "label": "Roderigo"},
+              {"value": 6, "label": "Emilia"},
+              {"value": 7, "label": "Brabantio"},
+              {"value": 8, "label": "Bianca"},
+              {"value": 9, "label": "Duke of Venice"},
+              {"value": 10, "label": "Gratiano"},
+              {"value": 11, "label": "Lodovico"},
+              {"value": 12, "label": "Montano"},
+              {"value": 13, "label": "Clown"},
+              {"value": 14, "label": "Soldier 1"},
+              {"value": 15, "label": "Soldier 2"},
+              {"value": 16, "label": "Soldier 3"}
             ]
           }
         }

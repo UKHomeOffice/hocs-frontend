@@ -11,7 +11,7 @@ class Submit extends Component {
         return (
             <Fragment>
                 <input
-                    className={`button${className ? ' ' + className : ''}`}
+                    className={`govuk-button${className ? ' ' + className : ''}`}
                     disabled={disabled}
                     type="submit"
                     value={label}
