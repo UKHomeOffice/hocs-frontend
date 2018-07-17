@@ -19,9 +19,9 @@ pipeline:
     commands:
       - docker login -u="ukhomeofficedigital+hocs" -p=$${DOCKER_PASSWORD} quay.io
       - docker tag hocs-frontend quay.io/ukhomeofficedigital/hocs-frontend:build-$${DRONE_BUILD_NUMBER}
-      - docker tag hocs-frontend quay.io/ukhomeofficedigital/hocs-frontend:branch-$${DRONE_COMMIT_BRANCH}
+      - docker tag hocs-frontend quay.io/ukhomeofficedigital/hocs-frontend:latest
       - docker push quay.io/ukhomeofficedigital/hocs-frontend:build-$${DRONE_BUILD_NUMBER}
-      - docker push quay.io/ukhomeofficedigital/hocs-frontend:branch-$${DRONE_COMMIT_BRANCH}
+      - docker push quay.io/ukhomeofficedigital/hocs-frontend:latest
     when:
       branch: master
       event: push
