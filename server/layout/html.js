@@ -47,6 +47,7 @@ const render = ({
     <a href="#main-content" class="govuk-skip-link">Skip to main content</a>
     <div id="app">${markup}</div>
 
+    ${clientSide ? `<script src="${assetPath}/js/${assets.js[react]}" defer></script>` : ''}
     <script src="${assetPath}/all.js"></script>
     <script>
         window.GOVUKFrontend.initAll()

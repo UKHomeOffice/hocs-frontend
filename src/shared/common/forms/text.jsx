@@ -60,7 +60,8 @@ Text.propTypes = {
 Text.defaultProps = {
     disabled: false,
     label: 'TextArea field',
-    type: 'text'
+    type: 'text',
+    value: ''
 };
 
 export default Text;
