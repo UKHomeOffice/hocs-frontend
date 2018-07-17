@@ -64,6 +64,7 @@ TextArea.defaultProps = {
     disabled: false,
     rows: 5,
     type: 'text',
+    value: ''
 };
 
 export default TextArea;
