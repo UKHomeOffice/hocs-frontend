@@ -12,24 +12,24 @@ const routes = [
         title: 'Main'
     },
     {
-        path: '/action/:action',
+        path: '/action/:workflow/:action',
         exact: true,
         component: ActionPage
     },
     {
-        path: '/action/:context/:action',
+        path: '/action/:workflow/:context/:action',
         exact: true,
         component: ActionPage
     },
     {
-        path: '/case/:caseId/:stage/',
-        exact: true,
-        component: CasePage,
-    },
-    {
-        path: '/case/:caseId/stage/:stageId',
+        path: '/stage/:stageId/case/:caseId',
         exact: true,
         component: StagePage,
+    },
+    {
+        path: '/case/:caseId/:entity/:action/',
+        exact: true,
+        component: CasePage,
     },
     {
         path: '/unauthorised',

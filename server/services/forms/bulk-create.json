@@ -1,7 +1,4 @@
 {
-  "form": {
-    "schema": {
-      "action": "CREATE",
       "title": "Bulk create cases",
       "defaultActionLabel": "Next",
       "fields": [
@@ -25,6 +22,4 @@
             }
         }
       ]
-    }
-  }
 }
