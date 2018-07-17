@@ -1,5 +1,6 @@
 const caseCreate = require('./case-create.json');
 const addDocument = require('./document-add.json');
+const testForm = require('./case-test.json');
 const { CREATE_CASE, CREATE_BULK_CASE, ADD_DOCUMENT } = require('../actions/types');
 const logger = require('../../libs/logger');
 
@@ -21,6 +22,17 @@ const workflowDefinitions = {
             DOCUMENT: {
                 schema: addDocument,
                 action: CREATE_CASE
+            }
+        },
+        TEST: {
+            FORM: {
+                schema: testForm,
+                next: {
+                    action: 'DOCUMENT',
+                    context: {
+                        field: 'case-type'
+                    }
+                }
             }
         },
         BULK: {

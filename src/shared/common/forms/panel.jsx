@@ -3,23 +3,21 @@ import PropTypes from 'prop-types';
 
 export default class Panel extends Component {
     /*
-     *  Bordered inset text to draw attention to important content on the page.
+     * A visible container used on confirmation or results pages to highlight important content
      */
     render() {
-        const { content, width } = this.props;
+        const { title, body } = this.props;
 
         return (
-            <p className={`panel panel-border-${width}`}>{content}</p>
+            <div className="govuk-panel govuk-panel--confirmation">
+                <h1 className="govuk-panel__title">{title}</h1>
+                <div className="govuk-panel__body">{body}</div>
+            </div>
         );
     }
 }
 
 Panel.propTypes = {
-    content: PropTypes.string,
-    width: PropTypes.string
-};
-
-Panel.defaultProps = {
-    content: '',
-    width: 'wide'
+    title: PropTypes.string,
+    body: PropTypes.string
 };

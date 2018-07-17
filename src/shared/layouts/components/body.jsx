@@ -9,10 +9,12 @@ class Body extends Component {
             phaseBanner
         } = this.props;
         return (
-            <main id="content">
+            <div className="govuk-width-container">
                 {phaseBanner.isVisible && <PhaseBanner {...phaseBanner} />}
-                {children}
-            </main>
+                <main className="govuk-main-wrapper " id="main-content" role="main">
+                    {children}
+                </main>
+            </div>
         );
     }
 }

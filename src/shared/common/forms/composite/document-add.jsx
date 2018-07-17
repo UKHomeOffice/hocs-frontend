@@ -23,21 +23,24 @@ class DocumentAdd extends Component {
         } = this.props;
         return (
             <Fragment>
-                <label htmlFor={name} id={`${name}-label`}>
+                <div className={'govuk-form-group'}>
+                    <label className="govuk-label" htmlFor={name} id={`${name}-label`}>
 
-                    <span className="form-label-bold">{label}</span>
-                    {hint && <span className="form-hint">{hint}</span>}
-                    {error && <span className="error-message">{error}</span>}
 
-                </label>
-                <input
-                    className="button-file-upload"
-                    type={'file'}
-                    id={name}
-                    name={name}
-                    onChange={e => this.handleChange(e)}
-                    multiple={allowMultiple}
-                />
+                        <label htmlFor={name} id={`${name}-label`} className="govuk-label">{label}</label>
+                        {hint && <span className="govuk-hint">{hint}</span>}
+                        {error && <span className="govuk-error-message">{error}</span>}
+
+                    </label>
+                    <input
+                        className="govuk-file-upload"
+                        type={'file'}
+                        id={name}
+                        name={name}
+                        onChange={e => this.handleChange(e)}
+                        multiple={allowMultiple}
+                    />
+                </div>
             </Fragment>
         );
     }

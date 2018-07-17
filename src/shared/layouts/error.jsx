@@ -19,13 +19,13 @@ class Error extends Component {
         } = this.props;
 
         return (
-            <div className="grid-row">
-                <div className="column-full">
-                    <h1 className="heading-large">
-                        {`${error}`}
-                        <span className="heading-secondary">{title}</span>
+            <div className="govuk-grid-row">
+                <div className="govuk-grid-column-full">
+                    <h1 className="govuk-heading-l">
+                        <span className="govuk-caption-l">{error}</span>
+                        {`${title}`}
                     </h1>
-                    {(errorCode === 403 || errorCode === 404) && pathname && <p className="code">{pathname}</p>}
+                    {(errorCode === 403 || errorCode === 404) && pathname && <p><code>{pathname}</code></p>}
                     {stack && <p className="code overflow-scroll">{stack}</p>}
                 </div>
             </div>

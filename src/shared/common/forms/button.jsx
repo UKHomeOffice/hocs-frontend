@@ -21,7 +21,7 @@ class Submit extends Component {
         return (
             <Fragment>
                 <Link
-                    className={`button${className ? ' ' + className : ''}`}
+                    className={`govuk-button${className ? ' ' + className : ''}`}
                     disabled={disabled}
                     to={action}
                     onClick={e => this.handleClick(e)}

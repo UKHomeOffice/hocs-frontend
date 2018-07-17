@@ -28,17 +28,13 @@ class Dropdown extends Component {
             name
         } = this.props;
         return (
-            <div className={`form-group${error ? ' form-group-error' : ''}`}>
+            <div className={`govuk-form-group${error ? ' govuk-form-group--error' : ''}`}>
 
-                <label htmlFor={name} id={`${name}-label`}>
+                <label htmlFor={name} id={`${name}-label`} className="govuk-label">{label}</label>
+                {hint && <span className="govuk-hint">{hint}</span>}
+                {error && <span className="govuk-error-message">{error}</span>}
 
-                    <span className="form-label-bold">{label}</span>
-                    {hint && <span className="form-hint">{hint}</span>}
-                    {error && <span className="error-message">{error}</span>}
-
-                </label>
-
-                <select className={`form-control ${error ? 'form-control-error' : ''}`}
+                <select className={`govuk-select ${error ? 'govuk-select--error' : ''}`}
                     id={name}
                     name={name}
                     disabled={disabled}

@@ -34,14 +34,15 @@ class Action extends Component {
         const {
             form,
             match: { url },
-            subTitle
+            caption
         } = this.props;
         return (
-            <div className="grid-row">
-                <div className="column-full">
-                    <h1 className="heading-large">
+            <div className="govuk-grid-row">
+                <div className="govuk-grid-column-full">
+                    <h1 className="govuk-heading-l">
+                        {caption && <span className="govuk-caption-l">{caption}</span>}
                         {form && form.schema && form.schema.title}
-                        {subTitle && <span className="heading-secondary">{subTitle}</span>}
+
                     </h1>
                     {form && form.schema && <Form
                         action={url}
@@ -60,7 +61,7 @@ Action.propTypes = {
     dispatch: PropTypes.func.isRequired,
     form: PropTypes.object,
     match: PropTypes.object,
-    subTitle: PropTypes.string
+    caption: PropTypes.string
 };
 
 const WrappedPage = props => (
