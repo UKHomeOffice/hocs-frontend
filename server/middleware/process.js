@@ -24,6 +24,8 @@ const processCheckbox = (name, value, choices) => {
 
 const process = (req, res, next) => {
     logger.debug('PROCESS MIDDLEWARE');
+    const { noScript = false } = req.query;
+    res.noScript = noScript;
     const data = req.body;
     const { schema } = req.form;
     const fields = schema.fields.filter(field => field.type !== 'display');
@@ -42,6 +44,7 @@ const process = (req, res, next) => {
             reducer = Object.assign({}, reducer, processCheckbox(name, data[name], field.props.choices));
             break;
         case 'addDocument':
+        case 'bulkAddDocument':
             if (req.files.length === 0) {
                 reducer[name] = null;
             } else {

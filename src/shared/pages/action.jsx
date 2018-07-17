@@ -18,35 +18,31 @@ class Action extends Component {
 
     getForm() {
         const url = '/forms' + this.props.match.url;
-        const { form } = this.props;
-        if (!form) {
-            axios.get(url)
-                .then(res => {
-                    this.props.dispatch(updateForm(res.data));
-                })
-                .catch(err => {
-                    if (err.response.status === 403) {
-                        return this.props.dispatch(redirect('/unauthorised'));
-                    }
-                    return this.props.dispatch(redirect('/error'));
-                });
-        }
+        axios.get(url)
+            .then(res => {
+                this.props.dispatch(updateForm(res.data));
+            })
+            .catch(err => {
+                if (err.response.status === 403) {
+                    return this.props.dispatch(redirect('/unauthorised'));
+                }
+                return this.props.dispatch(redirect('/error'));
+            });
     }
 
     render() {
         const {
-            caseRef,
             form,
             match: { url },
-            subTitle
+            caption
         } = this.props;
         return (
-            <div className="grid-row">
-                <div className="column-full">
-                    <h1 className="heading-large">
-                        {caseRef}
+            <div className="govuk-grid-row">
+                <div className="govuk-grid-column-full">
+                    <h1 className="govuk-heading-l">
+                        {caption && <span className="govuk-caption-l">{caption}</span>}
                         {form && form.schema && form.schema.title}
-                        {subTitle && <span className="heading-secondary">{subTitle}</span>}
+
                     </h1>
                     {form && form.schema && <Form
                         action={url}
@@ -62,11 +58,10 @@ class Action extends Component {
 }
 
 Action.propTypes = {
-    caseRef: PropTypes.string,
     dispatch: PropTypes.func.isRequired,
     form: PropTypes.object,
     match: PropTypes.object,
-    subTitle: PropTypes.string
+    caption: PropTypes.string
 };
 
 const WrappedPage = props => (

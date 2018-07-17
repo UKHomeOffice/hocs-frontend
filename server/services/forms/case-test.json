@@ -1,0 +1,249 @@
+{
+  "title": "Test form",
+  "defaultActionLabel": "Submit",
+  "fields": [
+    {
+      "component": "panel",
+      "props": {
+        "title": "Application complete",
+        "body": "Everything is excellent"
+      }
+    },
+    {
+      "component": "paragraph",
+      "props": {
+        "content": "The Magic Words are Squeamish Ossifrage."
+      }
+    },
+    {
+      "component": "text",
+      "validation": [
+        "required"
+      ],
+      "props": {
+        "name": "name",
+        "label": "Name"
+      }
+    },
+    {
+      "component": "text",
+      "validation": [
+        "required"
+      ],
+      "props": {
+        "name": "surname",
+        "label": "Surname"
+      }
+    },
+    {
+      "component": "date",
+      "validation": [
+        "required"
+      ],
+      "props": {
+        "name": "date",
+        "label": "Date"
+      }
+    },
+    {
+      "component": "checkbox",
+      "validation": [
+        "required"
+      ],
+      "props": {
+        "name": "checkboxContext",
+        "label": "Checkbox Group",
+        "className": "inline",
+        "choices": [
+          {
+            "label": "Test1",
+            "value": "Has1"
+          },
+          {
+            "label": "Test2",
+            "value": "Has2"
+          },
+          {
+            "label": "Test3",
+            "value": "Has3"
+          }
+        ]
+      }
+    },
+    {
+      "component": "checkbox",
+      "validation": [
+        "required"
+      ],
+      "props": {
+        "name": "checkbox",
+        "className": "inline",
+        "choices": [
+          {
+            "label": "Is checked",
+            "value": "IsChecked"
+          }
+        ]
+      }
+    },
+    {
+      "component": "inset",
+      "props": {
+        "content": "Doing this thing will make that thing happen."
+      }
+    },
+    {
+      "component": "text-area",
+      "validation": [
+        "required"
+      ],
+      "props": {
+        "name": "text-area",
+        "label": "Text Area"
+      }
+    },
+    {
+      "component": "radio",
+      "validation": [
+        "required"
+      ],
+      "props": {
+        "name": "case-type",
+        "label": "Radio Group",
+        "className": "inline",
+        "choices": [
+          {
+            "label": "A",
+            "value": "isA"
+          },
+          {
+            "label": "B",
+            "value": "isB"
+          },
+          {
+            "label": "C",
+            "value": "isC"
+          }
+        ]
+      }
+    },
+    {
+      "component": "dropdown",
+      "validation": [
+        "required"
+      ],
+      "props": {
+        "name": "dropdown-test",
+        "label": "Dropdown",
+        "choices": [
+          {
+            "value": 1,
+            "label": "Iago"
+          },
+          {
+            "value": 2,
+            "label": "Desdemona"
+          },
+          {
+            "value": 3,
+            "label": "Cassio"
+          },
+          {
+            "value": 4,
+            "label": "Othello"
+          },
+          {
+            "value": 5,
+            "label": "Roderigo"
+          },
+          {
+            "value": 6,
+            "label": "Emilia"
+          },
+          {
+            "value": 7,
+            "label": "Brabantio"
+          },
+          {
+            "value": 8,
+            "label": "Bianca"
+          },
+          {
+            "value": 9,
+            "label": "Duke of Venice"
+          },
+          {
+            "value": 10,
+            "label": "Gratiano"
+          },
+          {
+            "value": 11,
+            "label": "Lodovico"
+          },
+          {
+            "value": 12,
+            "label": "Montano"
+          },
+          {
+            "value": 13,
+            "label": "Clown"
+          },
+          {
+            "value": 14,
+            "label": "Soldier 1"
+          },
+          {
+            "value": 15,
+            "label": "Soldier 2"
+          },
+          {
+            "value": 16,
+            "label": "Soldier 3"
+          }
+        ]
+      }
+    },
+    {
+      "component": "entityList",
+      "validation": [
+        "required"
+      ],
+      "props": {
+        "name": "primary_topic",
+        "label": "Topic",
+        "action": "TOPIC",
+        "choices": [
+          {
+            "label": "Topic A",
+            "value": "TOPIC_A"
+          },
+          {
+            "label": "Topic B",
+            "value": "TOPIC_B"
+          }
+        ]
+      }
+    },
+    {
+      "component": "entityList",
+      "validation": [
+        "required"
+      ],
+      "props": {
+        "name": "primary_correspondent",
+        "label": "Correspondent",
+        "action": "CORRESPONDENT",
+        "choices": [
+          {
+            "label": "Correspondent A",
+            "value": "CORRESPONDENT_A"
+          },
+          {
+            "label": "Correspondent B",
+            "value": "CORRESPONDENT_B"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,83 +1,70 @@
-const formRepository = require('../forms/index');
+const formRepository = require('./forms/index');
 const listService = require('./list');
 const logger = require('../libs/logger');
 const { workflowServiceClient } = require('../libs/request');
 
-const actions = {
-    action: ({ action, user }) => {
-        switch (action) {
-        case 'create':
-            return getCreateForm(user);
-        case 'bulk':
-            return getBulkCreateForm(user);
-        }
-    },
-    workflow: ({ caseId }) => {
-        // TODO: call workflow service for form
-        const { form: { schema, data } } = formRepository.getForm('addDocument');
-        schema.fields = schema.fields.map(field => {
-            if (field.component === 'addDocument') {
-                const whitelist = field.props.whitelist;
-                if (whitelist && typeof whitelist === 'string') {
-                    field.props.whitelist = listService.getList(whitelist);
-                }
+function getFormSchemaFromWorkflowService({ caseId, stageId }, callback) {
+    workflowServiceClient.get(`/case/${caseId}/stage/${stageId}`)
+        .then((response) => {
+            if (response && response.data && response.data.form) {
+                const { stageUUID, caseReference } = response.data;
+                const { schema, data } = response.data.form;
+                return callback({ schema, data, meta: { caseReference, stageUUID } });
             }
-            return field;
+            callback();
+        })
+        .catch((err) => {
+            logger.error(`${err.message}`);
+            callback();
         });
-        return { schema, data, meta: { caseId } };
-    },
-    stage: ({ caseId, stageId }, callback) => {
-        workflowServiceClient.get(`/case/${caseId}/stage/${stageId}`)
-            .then((response) => {
-                if (response && response.data && response.data && response.data.form) {
-                    const stageUUID = response.data.stageUUID;
-                    const caseRef = response.data.caseReference;
-                    const { schema, data } = response.data.form;
-                    return callback({ schema, data, meta: { caseRef, stageUUID } });
-                }
-                callback();
-            })
-            .catch((err) => {
-                logger.error(`${err.message}`);
-                callback();
-            });
-    }
-};
+}
 
-const getForm = (action, options, callback) => {
-    try {
-        return actions[action.toLowerCase()].call(this, options, callback);
-    } catch (e) {
-        logger.error(`Unable to get form for ${action}`);
-        throw e;
-    }
-};
+function getFormSchema(options) {
+    const { user } = options;
+    const form = formRepository.getForm(options);
+    hydrateFields(form.schema.fields, { user });
+    return { ...form, data: {}, meta: {} };
+}
+
+function hydrateFields(fields, options) {
+    return fields.map(field => {
+        switch (field.component) {
+        case 'radio':
+        case 'checkbox':
+        case 'dropdown':
+            if (field.props && field.props.choices && typeof field.props.choices === 'string') {
+                field.props.choices = listService.getList(field.props.choices, { ...options });
+            }
+            break;
+        case 'addDocument':
+        case 'bulkAddDocument':
+            if (field.props && field.props.whitelist && typeof field.props.whitelist === 'string') {
+                field.props.whitelist = listService.getList(field.props.whitelist);
+            }
+            break;
+        }
+        return field;
+    });
+}
 
 const getFormForAction = (req, res, callback) => {
-    const { action } = req.params;
-    const { noScript = false } = req.query;
-    req.form = getForm('action', { action, user: req.user });
-    res.noScript = noScript;
+    const { workflow, action } = req.params;
+    req.form = getFormSchema({ context: 'ACTION', workflow, action, user: req.user });
     callback();
 };
 
 const getFormForCase = (req, res, callback) => {
-    const { type, action } = req.params;
-    const { noScript = false } = req.query;
-    req.form = getForm('workflow', { type, action });
-    res.noScript = noScript;
+    const { action } = req.params;
+    req.form = getFormSchema({ context: 'WORKFLOW', action, user: req.user });
     callback();
 };
 
 const getFormForStage = (req, res, callback) => {
     const { caseId, stageId } = req.params;
-    const { noScript = false } = req.query;
-    getForm('stage', { caseId, stageId }, form => {
+    getFormSchemaFromWorkflowService({ caseId, stageId, user: req.user }, form => {
         req.form = form;
-        res.noScript = noScript;
         callback();
     });
-
 };
 
 module.exports = {
@@ -85,25 +72,3 @@ module.exports = {
     getFormForCase,
     getFormForStage
 };
-
-function getCreateForm(user) {
-    const { form: { schema, data } } = formRepository.getForm('caseCreate');
-    schema.fields = populateFields(schema.fields, user);
-    return { schema, data };
-}
-
-function getBulkCreateForm(user) {
-    const { form: { schema, data } } = formRepository.getForm('bulkCreate');
-    schema.fields = populateFields(schema.fields, user);
-    return { schema, data };
-}
-
-function populateFields(fields, user) {
-    return fields.map(field => {
-        const choices = field.props.choices;
-        if (choices && typeof choices === 'string') {
-            field.props.choices = listService.getList(choices, { user });
-        }
-        return field;
-    });
-}

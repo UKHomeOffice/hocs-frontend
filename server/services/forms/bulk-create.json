@@ -1,9 +1,6 @@
 {
-  "form": {
-    "schema": {
-      "action": "CREATE",
-      "title": "Create case",
-      "defaultActionLabel": "Add document",
+      "title": "Bulk create cases",
+      "defaultActionLabel": "Next",
       "fields": [
         {
           "component": "radio",
@@ -25,6 +22,4 @@
             }
         }
       ]
-    }
-  }
 }

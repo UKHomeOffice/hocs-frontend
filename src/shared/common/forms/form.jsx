@@ -13,10 +13,11 @@ import EntityList from './composite/entity-list.jsx';
 import Button from './button.jsx';
 import BackLink from './backlink.jsx';
 import Paragraph from './paragraph.jsx';
-import Panel from './panel.jsx';
+import Inset from './inset.jsx';
 import { ApplicationConsumer } from '../../contexts/application.jsx';
 import { redirect, updateForm, updateFormData, updateFormErrors } from '../../contexts/actions/index.jsx';
 import Dropdown from './dropdown.jsx';
+import Panel from './panel.jsx';
 
 class Form extends Component {
 
@@ -105,7 +106,6 @@ class Form extends Component {
         case 'button':
             return <Button key={i}
                 {...field.props} />;
-
         case 'addDocument':
             return <AddDocument key={i}
                 {...field.props}
@@ -120,7 +120,6 @@ class Form extends Component {
                 updateState={data => this.updateFormState(data)}
                 // TODO: Use real caseId from Form.Meta object
                 actionUrl={String.prototype.toLowerCase.call(`/case/1234/${field.props.action}`)} />;
-
         // Non-form elements:
         case 'backlink':
             return <BackLink key={i}
@@ -129,6 +128,9 @@ class Form extends Component {
             return <h2 key={i} className="heading-medium">{field.props.label}</h2>;
         case 'panel':
             return <Panel key={i}
+                {...field.props} />;
+        case 'inset':
+            return <Inset key={i}
                 {...field.props} />;
         case 'paragraph':
             return <Paragraph key={i}

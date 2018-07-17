@@ -16,30 +16,31 @@ class MainPage extends Component {
 
     render() {
         const {
-            subTitle,
+            caption,
             title
         } = this.props;
         return (
             <ApplicationConsumer>
                 {() => {
                     return (
-                        <div className="grid-row">
-                            <div className="column-full">
-                                <h1 className="heading-large">
+                        <div className="govuk-grid-row">
+                            <div className="govuk-grid-column-full">
+                                <h1 className="govuk-heading-l">
+                                    {caption && <span className="govuk-caption-l">{caption}</span>}
                                     {title}
-                                    {subTitle && <span className="heading-secondary">{subTitle}</span>}
                                 </h1>
-                                <h2 className="heading-medium">
+                                <h2 className="govuk-heading-m">
                                   Primary actions
                                 </h2>
-                                <ul className="list list-bullet">
-                                    <li><Link to={'/action/create'}>Create single case</Link></li>
-                                    <li><Link to={'/action/bulk'}>Create cases in bulk</Link></li>
+                                <ul className="govuk-list govuk-list--bullet">
+                                    <li><Link to={'/action/create/workflow'}>Create single case</Link></li>
+                                    <li><Link to={'/action/bulk/workflow'}>Create cases in bulk</Link></li>
+                                    <li><Link to={'/action/test/form'}>View test form</Link></li>
                                 </ul>
-                                <h2 className="heading-medium">
+                                <h2 className="govuk-heading-m">
                                   Secondary routes
                                 </h2>
-                                <ul className="list list-bullet">
+                                <ul className="govuk-list govuk-list--bullet">
                                     <li><Link to={'/some/random/url'}>Test 404</Link></li>
                                     <li><Link to={'/action/test'}>Test 403</Link></li>
                                     <li><Link to={'/error'}>Test 500</Link></li>
@@ -56,7 +57,7 @@ class MainPage extends Component {
 MainPage.propTypes = {
     dispatch: PropTypes.func.isRequired,
     match: PropTypes.object,
-    subTitle: PropTypes.string,
+    caption: PropTypes.string,
     title: PropTypes.string
 };
 

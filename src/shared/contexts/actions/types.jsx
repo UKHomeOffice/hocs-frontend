@@ -1,5 +1,4 @@
 const types = {
-    ADD_DOCUMENT: 'ADD_DOCUMENT',
     CANCEL: 'CANCEL',
     REDIRECT: 'REDIRECT',
     REDIRECTED: 'REDIRECTED',

@@ -33,48 +33,61 @@ class EntityList extends Component {
             type
         } = this.props;
         return (
-            <fieldset className={className} disabled={disabled}>
-                <legend htmlFor={name} id={`${name}-label`}>
-                    <span className="form-label-bold">{label}</span>
-                    {hint && <span className="form-hint">{hint}</span>}
-                    {error && <span className="error-message">{error}</span>}
-                </legend>
-                <table>
-                    <tbody>
-                        <tr>
-                            <td width='40px'>Primary</td>
-                            <td>Name</td>
-                        </tr>
-                        {choices && choices.map((choice, i) => {
-                            return (
-                                <tr key={i}>
-                                    <td>
-                                        <div className='multiple-choice fix-entity-list-multiple-choice'>
-                                            <input id={`${name}-${choice.value}`}
-                                                type={type}
-                                                name={name}
-                                                value={choice.value}
-                                                checked={(this.state.value === choice.value)}
-                                                onChange={e => this.handleChange(e)}
-                                            />
-                                            <label htmlFor={`${name}-${choice.value}`}></label>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <label htmlFor={`${name}-${choice.value}`}>{choice.label}</label>
-                                    </td>
-                                    <td>
-                                        <Link></Link>
-                                    </td>
-                                </tr>
-                            );
-                        })}
-                        {choices.length === 0 && <Fragment>No EntityList</Fragment>}
-                    </tbody>
-                </table>
-                <br />
-                <Link to={actionUrl} className="button-secondary-action">Add a {label}</Link>
-            </fieldset>
+            <div className={`govuk-form-group${error ? ' govuk-form-group--error' : ''}`}>
+
+                <fieldset className={`govuk-fieldset ${className ? className : ''}`} disabled={disabled}>
+
+                    <legend id={`${name}-legend`} className="govuk-fieldset__legend">
+                        <span className="govuk-fieldset__heading">{`Primary ${label}`}</span>
+
+                    </legend>
+
+                    {hint && <span className="govuk-form-hint">{hint}</span>}
+                    {error && <span className="govuk-error-message">{error}</span>}
+
+                    <table className='govuk-table'>
+                        <thead className='govuk-table__head'>
+                            <tr className='govuk-table__row'>
+                                <th className='govuk-table__header'>{label}</th>
+                                <th className='govuk-table__header'></th>
+                            </tr>
+                        </thead>
+                        <tbody className='govuk-table__body'>
+                            <div className='govuk-radios'>
+
+
+                                {choices && choices.map((choice, i) => {
+                                    return (
+                                        <tr className='govuk-table__row' key={i}>
+                                            <td className='govuk-table__cell'>
+                                                <div className='govuk-radios__item'>
+                                                    <input id={`${name}-${choice.value}`}
+                                                        type={type}
+                                                        name={name}
+                                                        value={choice.value}
+                                                        checked={(this.state.value === choice.value)}
+                                                        onChange={e => this.handleChange(e)}
+                                                        className={'govuk-radios__input'}
+                                                    />
+
+                                                    <label className="govuk-label govuk-radios__label" htmlFor={`${name}-${choice.value}`}>{choice.label}</label>
+                                                </div>
+                                            </td>
+                                            <td className='govuk-table__cell'>
+                                                <Link to='/' className="govuk-link">Remove</Link>
+                                            </td>
+                                        </tr>
+                                    );
+                                })}
+                                {choices.length === 0 && <Fragment>No EntityList</Fragment>}
+
+                            </div>
+                        </tbody>
+                    </table>
+                    <Link to={actionUrl} className="govuk-body govuk-link">Add a {label}</Link>
+                </fieldset>
+
+            </div>
         );
     }
 }

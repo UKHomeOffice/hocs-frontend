@@ -18,19 +18,16 @@ class Stage extends Component {
 
     getForm() {
         const url = '/forms' + this.props.match.url;
-        const { form } = this.props;
-        if (!form) {
-            axios.get(url)
-                .then(res => {
-                    this.props.dispatch(updateForm(res.data));
-                })
-                .catch(err => {
-                    if (err.response.status === 403) {
-                        return this.props.dispatch(redirect('/unauthorised'));
-                    }
-                    return this.props.dispatch(redirect('/error'));
-                });
-        }
+        axios.get(url)
+            .then(res => {
+                this.props.dispatch(updateForm(res.data));
+            })
+            .catch(err => {
+                if (err.response.status === 403) {
+                    return this.props.dispatch(redirect('/unauthorised'));
+                }
+                return this.props.dispatch(redirect('/error'));
+            });
     }
 
     render() {
@@ -43,7 +40,7 @@ class Stage extends Component {
                 <div className="column-full">
                     <h1 className="heading-large">
                         {form && form.schema && form.schema.title}
-                        <span className="heading-secondary">{`${form && form.meta && form.meta.caseRef}`}</span>
+                        <span className="heading-secondary">{`${form && form.meta && form.meta.caseReference}`}</span>
                     </h1>
                     {form && form.schema && <Form
                         action={url}

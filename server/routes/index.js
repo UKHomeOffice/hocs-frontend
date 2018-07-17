@@ -3,25 +3,25 @@ const assets = require('../../build/assets.json');
 const html = require('../layout/html');
 const authMiddleware = require('../middleware/auth');
 const renderMiddleware = require('../middleware/render');
-const formsRouter = require('./forms');
+const apiRouter = require('./api');
 const { getFormForCase, getFormForAction, getFormForStage } = require('../services/form');
 
 html.use(assets);
 
 router.use('*', authMiddleware);
 
-router.use('/action/:action', getFormForAction);
+router.use(['/action/:workflow/:context/:action', '/action/:workflow/:action'], getFormForAction);
 
-router.use('/case/:type/:action', getFormForCase);
+router.use('/stage/:stageId/case/:caseId', getFormForStage);
 
-router.use('/case/:caseId/stage/:stageId', getFormForStage);
+router.use('/case/:type/:entity/:action', getFormForCase);
 
-router.use('/', formsRouter);
+router.use('/', apiRouter);
 
 router.use('*', renderMiddleware);
 
-router.get('*', (req, res) => {
-    res.send(res.rendered);
+router.use('*', (req, res) => {
+    return res.status(200).send(res.rendered);
 });
 
 module.exports = router;

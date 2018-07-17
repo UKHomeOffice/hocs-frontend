@@ -1,0 +1,25 @@
+{
+  "title": "Create case",
+  "defaultActionLabel": "Next",
+  "fields": [
+    {
+      "component": "radio",
+      "validation": [
+        "required"
+      ],
+      "props": {
+        "name": "case-type",
+        "label": "Case type",
+        "choices": "CASE_TYPE"
+      }
+    }
+  ],
+  "secondaryActions": [
+    {
+      "component": "backlink",
+      "props": {
+        "label": "Cancel"
+      }
+    }
+  ]
+}
