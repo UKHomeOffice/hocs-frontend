@@ -20,7 +20,7 @@ function createDocumentSummaryObjects(form) {
 function createCaseRequest(type, form) {
     return {
         type,
-        documentSummaries: createDocumentSummaryObjects(form)
+        documents: createDocumentSummaryObjects(form)
     };
 }
 
