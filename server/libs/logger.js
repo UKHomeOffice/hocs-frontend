@@ -33,7 +33,7 @@ loggingTransports.push(
 exceptionTransports.push(
     new (winston.transports.Console)({
         json: isProduction,
-        logstash: true,
+        logstash: isProduction,
         timestamp: true,
         colorize: true,
         stringify: function stringify(obj) {
