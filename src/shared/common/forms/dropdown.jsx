@@ -66,7 +66,6 @@ Dropdown.propTypes = {
 };
 
 Dropdown.defaultProps = {
-    value: '',
     disabled: false,
     choices: []
 };

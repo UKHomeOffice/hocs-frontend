@@ -5,7 +5,7 @@ class TextArea extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { value: this.props.value || '' };
+        this.state = { value: this.props.value };
     }
 
     componentDidMount() {
@@ -64,6 +64,7 @@ TextArea.defaultProps = {
     disabled: false,
     rows: 5,
     type: 'text',
+    value: ''
 };
 
 export default TextArea;
