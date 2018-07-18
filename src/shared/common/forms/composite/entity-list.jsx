@@ -27,6 +27,7 @@ class EntityList extends Component {
             className,
             disabled,
             error,
+            hasAddLink,
             hasRemoveLink,
             hint,
             label,
@@ -72,7 +73,7 @@ class EntityList extends Component {
                             {choices.length === 0 && <Fragment>No EntityList</Fragment>}
                         </tbody>
                     </table>
-                    <Link to={actionUrl} className="govuk-body govuk-link">Add a {label}</Link>
+                    {hasAddLink && <Link to={actionUrl} className="govuk-body govuk-link">Add a {label}</Link>}
                 </fieldset>
 
             </div>
@@ -86,6 +87,7 @@ EntityList.propTypes = {
     className: PropTypes.string,
     disabled: PropTypes.bool,
     error: PropTypes.string,
+    hasAddLink: PropTypes.bool,
     hasRemoveLink: PropTypes.bool,
     hint: PropTypes.string,
     label: PropTypes.string,

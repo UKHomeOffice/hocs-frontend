@@ -213,6 +213,7 @@
         "label": "Topic",
         "action": "TOPIC",
         "hasRemoveLink": true,
+        "hasAddLink": true,
         "choices": [
           {
             "label": "Topic A",
@@ -233,6 +234,7 @@
       "props": {
         "name": "primary_correspondent",
         "label": "Correspondent",
+        "disabled": true,
         "action": "CORRESPONDENT",
         "choices": [
           {
