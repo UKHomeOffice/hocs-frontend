@@ -48,7 +48,7 @@ spec:
             mountPath: /etc/ssl/certs
             readOnly: true
       - name: proxy
-        image: quay.io/ukhomeofficedigital/nginx-proxy-govuk:v3.2.6
+        image: quay.io/ukhomeofficedigital/nginx-proxy-govuk:v3.2.11
         imagePullPolicy: Always
         securityContext:
           runAsNonRoot: true
@@ -155,9 +155,40 @@ spec:
               configMapKeyRef:
                 name: hocs-converter
                 key: max_filesize
+          - name: S3_ACCESS_KEY
+            valueFrom:
+              secretKeyRef:
+                name: cs-dev-untrusted-s3
+                key: access_key_id
+          - name: S3_SECRET_ACCESS_KEY
+            valueFrom:
+              secretKeyRef:
+                name: cs-dev-untrusted-s3
+                key: secret_access_key
+          - name: S3_REGION
+            value: 'eu-west-2'
+          - name: S3_BUCKET
+            valueFrom:
+              secretKeyRef:
+                name: cs-dev-untrusted-s3
+                key: bucket_name
+          - name: WORKFLOW_SERVICE
+            value: 'https://hocs-workflow.{{.KUBE_NAMESPACE}}.svc.cluster.local'
+          - name: WORKFLOW_BASIC_AUTH
+            valueFrom:
+              secretKeyRef:
+                name: ui-casework-creds
+                key: plaintext          
+          - name: OUTBOUND_PROXY
+            value: 'hocs-outbound-proxy.{{.KUBE_NAMESPACE}}.svc.cluster.local:31290'
+          - name: ALLOWED_FILE_EXTENSIONS
+            valueFrom:
+              configMapKeyRef:
+                  name: hocs-converter
+                  key: supported_types
         resources:
           limits:
-            cpu: 1000m
+            cpu: 400m
             memory: 400Mi
           requests:
             cpu: 200m
