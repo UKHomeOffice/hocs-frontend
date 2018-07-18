@@ -4,7 +4,7 @@ import axios from 'axios';
 import ErrorSummary from './error-summary.jsx';
 import Text from './text.jsx';
 import Radio from './radio-group.jsx';
-import Date from './date.jsx';
+import DateInput from './date.jsx';
 import Checkbox from './checkbox-group.jsx';
 import Submit from './submit.jsx';
 import TextArea from './text-area.jsx';
@@ -80,7 +80,7 @@ class Form extends Component {
                 value={this.props.data && this.props.data[field.props.name]}
                 updateState={data => this.updateFormState(data)} />;
         case 'date':
-            return <Date key={i}
+            return <DateInput key={i}
                 {...field.props}
                 error={this.props.errors && this.props.errors[field.props.name]}
                 value={this.props.data && this.props.data[field.props.name]}

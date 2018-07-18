@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-class Date extends Component {
+class DateInput extends Component {
 
     constructor(props) {
         super(props);
@@ -37,7 +37,9 @@ class Date extends Component {
             disabled,
             error,
             hint,
-            label
+            label,
+            minYear,
+            maxYear
         } = this.props;
         return <div className={`govuk-form-group${error ? ' govuk-form-group--error' : ''}`}>
             <fieldset id={name} disabled={disabled} className="govuk-fieldset" role="group">
@@ -86,8 +88,8 @@ class Date extends Component {
                                 name={this.datePart('year')}
                                 type="number"
                                 pattern="[0-9]*"
-                                min="1900"
-                                max="2100"
+                                min={minYear}
+                                max={maxYear}
                                 value={this.state[this.datePart('year')]}
                                 onChange={e => this.handleChange(this.datePart('year'), e.target.value)}
                             />
@@ -99,19 +101,24 @@ class Date extends Component {
     }
 }
 
-Date.propTypes = {
+DateInput.propTypes = {
     disabled: PropTypes.bool,
     error: PropTypes.string,
     hint: PropTypes.string,
     label: PropTypes.string,
     name: PropTypes.string.isRequired,
     updateState: PropTypes.func.isRequired,
-    value: PropTypes.string
+    value: PropTypes.string,
+    maxYear: PropTypes.number,
+    minYear: PropTypes.number
 };
 
-Date.defaultProps = {
+DateInput.defaultProps = {
     disabled: false,
-    value: ''
+    value: '',
+    minYear: 1900,
+    maxYear: (new Date().getFullYear() + 100),
+    hint: 'For example, 31 03 1980'
 };
 
-export default Date;
+export default DateInput;
