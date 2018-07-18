@@ -106,12 +106,12 @@ class Form extends Component {
         case 'button':
             return <Button key={i}
                 {...field.props} />;
-        case 'addDocument':
+        case 'add-document':
             return <AddDocument key={i}
                 {...field.props}
                 error={this.props.errors && this.props.errors[field.props.name]}
                 updateState={data => this.updateFormState(data)} />;
-        case 'entityList':
+        case 'entity-list':
             return <EntityList
                 key={i}
                 {...field.props}
