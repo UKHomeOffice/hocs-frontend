@@ -43,7 +43,7 @@ class DateInput extends Component {
         } = this.props;
         return <div className={`govuk-form-group${error ? ' govuk-form-group--error' : ''}`}>
             <fieldset id={name} disabled={disabled} className="govuk-fieldset" role="group">
-                <legend className="govuk-fieldset__legend govuk-!-font-weight-bold">{label}</legend>
+                <legend className="govuk-fieldset__legend govuk-label--s">{label}</legend>
                 {hint && <span className="govuk-hint">{hint}</span>}
                 {error && <span className="govuk-error-message">{error}</span>}
                 <div className="govuk-date-input">

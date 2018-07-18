@@ -40,7 +40,7 @@ class EntityList extends Component {
                 <fieldset className={`govuk-fieldset ${className ? className : ''}`} disabled={disabled}>
 
                     <legend id={`${name}-legend`} className="govuk-fieldset__legend">
-                        <span className="govuk-fieldset__heading govuk-!-font-weight-bold">{`Primary ${label}`}</span>
+                        <span className="govuk-fieldset__heading govuk-label--s">{`Primary ${label}`}</span>
                     </legend>
 
                     {hint && <span className="govuk-form-hint">{hint}</span>}
