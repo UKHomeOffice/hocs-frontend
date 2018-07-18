@@ -202,6 +202,51 @@
           }
         ]
       }
+    },
+    {
+      "component": "entity-list",
+      "validation": [
+        "required"
+      ],
+      "props": {
+        "name": "primary_topic",
+        "label": "Topic",
+        "action": "TOPIC",
+        "hasRemoveLink": true,
+        "hasAddLink": true,
+        "choices": [
+          {
+            "label": "Topic A",
+            "value": "TOPIC_A"
+          },
+          {
+            "label": "Topic B",
+            "value": "TOPIC_B"
+          }
+        ]
+      }
+    },
+    {
+      "component": "entity-list",
+      "validation": [
+        "required"
+      ],
+      "props": {
+        "name": "primary_correspondent",
+        "label": "Correspondent",
+        "disabled": true,
+        "action": "CORRESPONDENT",
+        "choices": [
+          {
+            "label": "Correspondent A",
+            "value": "CORRESPONDENT_A"
+          },
+          {
+            "label": "Correspondent B",
+            "value": "CORRESPONDENT_B"
+          }
+        ]
+      }
     }
   ]
 }

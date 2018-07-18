@@ -3,7 +3,7 @@
   "defaultActionLabel": "Create",
   "fields": [
     {
-      "component": "addDocument",
+      "component": "add-document",
       "validation": [
         "required",
         "hasWhitelistedExtension"

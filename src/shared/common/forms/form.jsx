@@ -9,6 +9,7 @@ import Checkbox from './checkbox-group.jsx';
 import Submit from './submit.jsx';
 import TextArea from './text-area.jsx';
 import AddDocument from './composite/document-add.jsx';
+import EntityList from './composite/entity-list.jsx';
 import Button from './button.jsx';
 import BackLink from './backlink.jsx';
 import Paragraph from './paragraph.jsx';
@@ -105,11 +106,20 @@ class Form extends Component {
         case 'button':
             return <Button key={i}
                 {...field.props} />;
-        case 'addDocument':
+        case 'add-document':
             return <AddDocument key={i}
                 {...field.props}
                 error={this.props.errors && this.props.errors[field.props.name]}
                 updateState={data => this.updateFormState(data)} />;
+        case 'entity-list':
+            return <EntityList
+                key={i}
+                {...field.props}
+                error={this.props.errors && this.props.errors[field.props.name]}
+                value={this.props.data && this.props.data[field.props.name]}
+                updateState={data => this.updateFormState(data)}
+                // TODO: Use real caseId from Form.Meta object
+                actionUrl={'/'} />;
         // Non-form elements:
         case 'backlink':
             return <BackLink key={i}
