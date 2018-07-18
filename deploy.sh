@@ -33,7 +33,7 @@ else
     export KC_REALM=https://sso-dev.notprod.homeoffice.gov.uk/auth/realms/hocs-notprod
 fi
 
-export DOMAIN_NAME=frontend.${DNS_PREFIX}cs.homeoffice.gov.uk
+export DOMAIN_NAME=${DNS_PREFIX}cs.homeoffice.gov.uk
 
 echo
 echo "Deploying hocs-frontend to ${ENVIRONMENT}"
