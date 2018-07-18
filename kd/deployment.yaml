@@ -180,7 +180,7 @@ spec:
                 name: ui-casework-creds
                 key: plaintext          
           - name: OUTBOUND_PROXY
-            value: 'https://hocs-outbound-proxy.{{.KUBE_NAMESPACE}}.svc.cluster.local:31290'
+            value: 'http://hocs-outbound-proxy.{{.KUBE_NAMESPACE}}.svc.cluster.local:31290'
           - name: ALLOWED_FILE_EXTENSIONS
             valueFrom:
               configMapKeyRef:
