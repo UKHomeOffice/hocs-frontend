@@ -212,6 +212,7 @@
         "name": "primary_topic",
         "label": "Topic",
         "action": "TOPIC",
+        "hasRemoveLink": true,
         "choices": [
           {
             "label": "Topic A",

@@ -27,7 +27,7 @@ class DocumentAdd extends Component {
                     <label className="govuk-label" htmlFor={name} id={`${name}-label`}>
 
 
-                        <label htmlFor={name} id={`${name}-label`} className="govuk-label">{label}</label>
+                        <label htmlFor={name} id={`${name}-label`} className="govuk-label govuk-!-font-weight-bold">{label}</label>
                         {hint && <span className="govuk-hint">{hint}</span>}
                         {error && <span className="govuk-error-message">{error}</span>}
 

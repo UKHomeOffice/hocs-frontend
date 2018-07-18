@@ -32,7 +32,7 @@ class Dropdown extends Component {
         return (
             <div className={`govuk-form-group${error ? ' govuk-form-group--error' : ''}`}>
 
-                <label htmlFor={name} id={`${name}-label`} className="govuk-label">{label}</label>
+                <label htmlFor={name} id={`${name}-label`} className="govuk-label govuk-!-font-weight-bold">{label}</label>
                 {hint && <span className="govuk-hint">{hint}</span>}
                 {error && <span className="govuk-error-message">{error}</span>}
 

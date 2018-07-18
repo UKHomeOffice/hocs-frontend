@@ -119,7 +119,7 @@ class Form extends Component {
                 value={this.props.data && this.props.data[field.props.name]}
                 updateState={data => this.updateFormState(data)}
                 // TODO: Use real caseId from Form.Meta object
-                actionUrl={String.prototype.toLowerCase.call(`/case/1234/${field.props.action}`)} />;
+                actionUrl={'/'} />;
         // Non-form elements:
         case 'backlink':
             return <BackLink key={i}

@@ -33,14 +33,15 @@ class Date extends Component {
 
     render() {
         const {
+            name,
             disabled,
             error,
             hint,
             label
         } = this.props;
         return <div className={`govuk-form-group${error ? ' govuk-form-group--error' : ''}`}>
-            <fieldset disabled={disabled} className="govuk-fieldset" role="group">
-                <legend className="govuk-fieldset__legend">{label}</legend>
+            <fieldset id={name} disabled={disabled} className="govuk-fieldset" role="group">
+                <legend className="govuk-fieldset__legend govuk-!-font-weight-bold">{label}</legend>
                 {hint && <span className="govuk-hint">{hint}</span>}
                 {error && <span className="govuk-error-message">{error}</span>}
                 <div className="govuk-date-input">

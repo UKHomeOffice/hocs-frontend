@@ -9,7 +9,7 @@ router.use('/action', actionRouter);
 router.use('/case', caseRouter);
 router.use('/stage', stageRouter);
 
-router.post(['/case/*', '/action/*'], (req, res, next) => {
+router.post(['/case/*', '/action/*', '/stage/*'], (req, res, next) => {
     if (!res.noScript) {
         return res.status(200).send({ errors: req.form.errors });
     }
