@@ -44,7 +44,8 @@ const config = {
                 PROXY: isProduction ? process.env.OUTBOUND_PROXY : null,
                 REGION: isProduction ? process.env.S3_REGION : null,
                 SSL_ENABLED: isProduction,
-                FORCE_PATH_STYLE: !isProduction
+                FORCE_PATH_STYLE: !isProduction,
+                SSE_KEY: isProduction ? process.env.S3_SSE_KEY : null
             }
         }
     }
