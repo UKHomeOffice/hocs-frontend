@@ -43,8 +43,7 @@ const process = (req, res, next) => {
         case 'checkbox':
             reducer = Object.assign({}, reducer, processCheckbox(name, data[name], field.props.choices));
             break;
-        case 'addDocument':
-        case 'bulkAddDocument':
+        case 'add-document':
             if (req.files.length === 0) {
                 reducer[name] = null;
             } else {

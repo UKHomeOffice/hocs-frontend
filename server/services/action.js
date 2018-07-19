@@ -4,7 +4,7 @@ const { CREATE_CASE, CREATE_BULK_CASE } = require('./actions/types');
 
 function createDocumentSummaryObjects(form) {
     return form.schema.fields.reduce((reducer, field) => {
-        if (field.component === 'addDocument') {
+        if (field.component === 'add-document') {
             form.data[field.props.name].map(file => {
                 reducer.push({
                     displayName: file.originalname,
