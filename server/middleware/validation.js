@@ -8,10 +8,31 @@ const validationErrors = {
             return 'is a ' + extension.toUpperCase() + ' file which is not allowed';
         }
         return 'has a file extension that is not allowed';
-    }
+    },
+    nonsensicalDate: 'must be a date', // TODO: better error message
+    mustBeInPast: 'must be a date in the past',
+    mustBeInFuture: 'must be a date in the future'
 };
 
 const validators = {
+    isValidDate: (date) => {
+        if (isNaN(new Date(date).getDate())) {
+            return validationErrors.nonsensicalDate;
+        }
+        return null;
+    },
+    isBeforeToday (date) {
+        if (new Date(date) >= new Date()) {
+            return validationErrors.mustBeInPast;
+        }
+        return null;
+    },
+    isAfterToday (date) {
+        if (new Date(date) <= new Date()) {
+            return validationErrors.mustBeInFuture;
+        }
+        return null;
+    },
     required: (value) => {
         if (value !== null && value !== '') {
             return null;
@@ -60,7 +81,7 @@ const validation = (req, res, next) => {
                         result[field.props.name] = `${field.props.label} ${validationError}`;
                     }
                 } catch (e) {
-                    logger.warn(`Unsupported validator passed (${validator}) in form`);
+                    logger.warn(`Error calling validator passed (${validator}) in form`);
                 }
 
             });
