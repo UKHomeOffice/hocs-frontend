@@ -172,13 +172,18 @@ spec:
               secretKeyRef:
                 name: cs-dev-untrusted-s3
                 key: bucket_name
+          - name: S3_SSE_KEY
+            valueFrom:
+              secretKeyRef:
+                name: cs-dev-untrusted-s3
+                key: kms_key_id
           - name: WORKFLOW_SERVICE
             value: 'https://hocs-workflow.{{.KUBE_NAMESPACE}}.svc.cluster.local'
           - name: WORKFLOW_BASIC_AUTH
             valueFrom:
               secretKeyRef:
                 name: ui-casework-creds
-                key: plaintext          
+                key: plaintext
           - name: OUTBOUND_PROXY
             value: 'http://hocs-outbound-proxy.{{.KUBE_NAMESPACE}}.svc.cluster.local:31290'
           - name: ALLOWED_FILE_EXTENSIONS
