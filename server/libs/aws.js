@@ -12,6 +12,7 @@ const {
 } = require('../config').forContext('AWS');
 
 const s3 = new aws.S3({
+    signatureVersion: 'v4',
     accessKeyId: ACCESS_KEY,
     secretAccessKey: SECRET_ACCESS_KEY,
     endpoint: ENDPOINT,

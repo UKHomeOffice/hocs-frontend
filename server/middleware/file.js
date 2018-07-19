@@ -7,7 +7,7 @@ const uuid = require('uuid/v4');
 
 const sseConfiguration = {
     serverSideEncryption: 'aws:kms',
-    key: SSE_KEY
+    sseKmsKeyId: SSE_KEY
 };
 
 const storage = multerS3({
