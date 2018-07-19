@@ -36,7 +36,7 @@ class Error extends Component {
 Error.propTypes = {
     error: PropTypes.string,
     errorCode: PropTypes.number,
-    location: { pathname: PropTypes.string },
+    location: PropTypes.object,
     stack: PropTypes.string,
     staticContext: PropTypes.object,
     title: PropTypes.string,

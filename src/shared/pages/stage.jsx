@@ -36,11 +36,12 @@ class Stage extends Component {
             match: { url }
         } = this.props;
         return (
-            <div className="grid-row">
-                <div className="column-full">
-                    <h1 className="heading-large">
+            <div className="govuk-grid-row">
+                <div className="govuk-grid-column-full">
+                    <h1 className="govuk-heading-l">
+                        {form && <span className="govuk-caption-l">{form && form.meta && form.meta.caseReference}</span>}
                         {form && form.schema && form.schema.title}
-                        <span className="heading-secondary">{`${form && form.meta && form.meta.caseReference}`}</span>
+
                     </h1>
                     {form && form.schema && <Form
                         action={url}
@@ -58,7 +59,7 @@ class Stage extends Component {
 Stage.propTypes = {
     dispatch: PropTypes.func.isRequired,
     form: PropTypes.object,
-    match: { url: PropTypes.String }
+    match: PropTypes.func
 };
 
 const WrappedStage = props => (
