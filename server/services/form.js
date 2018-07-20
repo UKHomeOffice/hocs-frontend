@@ -36,8 +36,7 @@ function hydrateFields(fields, options) {
                 field.props.choices = listService.getList(field.props.choices, { ...options });
             }
             break;
-        case 'addDocument':
-        case 'bulkAddDocument':
+        case 'add-document':
             if (field.props && field.props.whitelist && typeof field.props.whitelist === 'string') {
                 field.props.whitelist = listService.getList(field.props.whitelist);
             }
