@@ -1,16 +1,16 @@
 const router = require('express').Router();
 const assets = require('../../build/assets.json');
 const html = require('../layout/html');
-const authMiddleware = require('../middleware/auth');
+const { buildUserModel, protectAction } = require('../middleware/auth');
 const renderMiddleware = require('../middleware/render');
 const apiRouter = require('./api');
 const { getFormForCase, getFormForAction, getFormForStage } = require('../services/form');
 
 html.use(assets);
 
-router.use('*', authMiddleware);
+router.use('*', buildUserModel);
 
-router.use(['/action/:workflow/:context/:action', '/action/:workflow/:action'], getFormForAction);
+router.use(['/action/:workflow/:context/:action', '/action/:workflow/:action'], getFormForAction, protectAction());
 
 router.use('/stage/:stageId/case/:caseId', getFormForStage);
 

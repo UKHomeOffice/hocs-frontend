@@ -10,6 +10,7 @@ const workflowDefinitions = {
     // /:workflow/:context/:action'
     ACTION: {
         CREATE: {
+            requiredRole: 'CREATE_CASE',
             WORKFLOW: {
                 schema: caseCreate,
                 next: {
@@ -25,11 +26,13 @@ const workflowDefinitions = {
             }
         },
         TEST: {
+            requiredRole: 'TEST',
             FORM: {
                 schema: testForm
             }
         },
         BULK: {
+            requiredRole: 'BULK_CREATE_CASE',
             WORKFLOW: {
                 schema: caseCreate,
                 next: {
@@ -73,7 +76,8 @@ module.exports = {
         if (context && workflow && action) {
             try {
                 const form = workflowDefinitions[context.toUpperCase()][workflow.toUpperCase()][action.toUpperCase()];
-                return JSON.parse(JSON.stringify(form));
+                const requiredRole = workflowDefinitions[context.toUpperCase()][workflow.toUpperCase()].requiredRole;
+                return JSON.parse(JSON.stringify({ ...form, requiredRole }));
             } catch (e) {
                 throw new ReferenceError(`Unable to retrieve schema: ${e.message}`);
             }
