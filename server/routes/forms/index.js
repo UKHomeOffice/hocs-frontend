@@ -1,16 +1,11 @@
 const router = require('express').Router();
 const { getFormForAction, getFormForCase, getFormForStage } = require('../../services/form');
-const User = require('../../models/user');
+const { protectAction } = require('../../middleware/auth');
 
-router.use(['/action/:workflow/:context/:action', '/action/:workflow/:action'], getFormForAction);
+router.use(['/action/:workflow/:context/:action', '/action/:workflow/:action'], getFormForAction, protectAction({ redirect: false }));
 
 router.get(['/action/:workflow/:context/:action', '/action/:workflow/:action'], (req, res) => {
-    const { workflow } = req.params;
-    if (req.user && User.hasRole(req.user, workflow.toUpperCase())) {
-        res.status(200).send(req.form);
-    } else {
-        res.status(403).send();
-    }
+    res.status(200).send(req.form);
 });
 
 router.use('/stage/:stageId/case/:caseId', getFormForStage);

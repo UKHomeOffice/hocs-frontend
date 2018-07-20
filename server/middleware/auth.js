@@ -1,7 +1,7 @@
 const logger = require('../libs/logger');
 const User = require('../models/user');
 
-const authentication = (req, res, next) => {
+function buildUserModel(req, res, next) {
     logger.debug('AUTH MIDDLEWARE');
     if (req.get('X-Auth-Token')) {
         if (!req.user) {
@@ -20,6 +20,40 @@ const authentication = (req, res, next) => {
         res.redirect('/unauthorised');
     }
     next();
-};
+}
 
-module.exports = authentication;
+function protectAction({ redirect }) {
+    return (req, res, next) => {
+        if (User.hasRole(req.user, req.form.requiredRole.toUpperCase())) {
+            return next();
+        } else if (redirect) {
+            return res.redirect('/unauthorized');
+        } else {
+            return res.status(403).send();
+        }
+    };
+}
+
+/*
+    router.get('/some/test/route', protect('SOME_PERMISSION'), (req, res) => {
+        res.send('ALLOWED');
+    });
+*/
+
+function protect(permission, { redirect }) {
+    return (req, res, next) => {
+        if (User.hasRole(req.user, permission)) {
+            return next();
+        } else if (redirect) {
+            return res.redirect('/unauthorized');
+        } else {
+            return res.status(403).send();
+        }
+    };
+}
+
+module.exports = {
+    buildUserModel,
+    protectAction,
+    protect
+};

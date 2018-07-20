@@ -4,8 +4,8 @@ class user {
         this.id = id;
         this.email = email;
         this.username = username;
-        this.roles = roles ? roles.split(',') : [];
-        this.groups = groups ? groups.split(',') : [];
+        this.roles = roles ? roles.toUpperCase().split(',').map(p => p.trim()) : [];
+        this.groups = groups ? groups.toUpperCase().split(',').map(g => g.trim()) : [];
     }
 
     static hasRole(user, role) {
