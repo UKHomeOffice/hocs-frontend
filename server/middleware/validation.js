@@ -92,4 +92,7 @@ const validation = (req, res, next) => {
     next();
 };
 
-module.exports = validation;
+module.exports = {
+    validator: validation,
+    validators: validators
+};

@@ -2,7 +2,7 @@ const router = require('express').Router();
 const actionService = require('../../services/action');
 const processMiddleware = require('../../middleware/process');
 const fileMiddleware = require('../../middleware/file');
-const validationMiddleware = require('../../middleware/validation');
+const validationMiddleware = require('../../middleware/validation').validator;
 
 router.post('/:caseId/:entity/:action', fileMiddleware.any(), processMiddleware, validationMiddleware);
 
