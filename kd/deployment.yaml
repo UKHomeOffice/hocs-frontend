@@ -193,7 +193,7 @@ spec:
                   key: supported_types
         resources:
           limits:
-            cpu: 400m
+            cpu: 350m
             memory: 400Mi
           requests:
             cpu: 200m
