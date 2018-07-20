@@ -22,12 +22,15 @@ function buildUserModel(req, res, next) {
     next();
 }
 
-function protectAction() {
+function protectAction({ redirect }) {
     return (req, res, next) => {
         if (User.hasRole(req.user, req.form.requiredRole.toUpperCase())) {
             return next();
+        } else if (redirect) {
+            return res.redirect('/unauthorized');
+        } else {
+            return res.status(403).send();
         }
-        return res.status(403).send();
     };
 }
 
@@ -37,12 +40,15 @@ function protectAction() {
     });
 */
 
-function protect(permission) {
+function protect(permission, { redirect }) {
     return (req, res, next) => {
         if (User.hasRole(req.user, permission)) {
             return next();
+        } else if (redirect) {
+            return res.redirect('/unauthorized');
+        } else {
+            return res.status(403).send();
         }
-        return res.status(403).send();
     };
 }
 

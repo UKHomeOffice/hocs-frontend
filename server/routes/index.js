@@ -10,7 +10,7 @@ html.use(assets);
 
 router.use('*', buildUserModel);
 
-router.use(['/action/:workflow/:context/:action', '/action/:workflow/:action'], getFormForAction, protectAction());
+router.use(['/action/:workflow/:context/:action', '/action/:workflow/:action'], getFormForAction, protectAction({ redirect: true }));
 
 router.use('/stage/:stageId/case/:caseId', getFormForStage);
 
