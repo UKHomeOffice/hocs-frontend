@@ -59,7 +59,7 @@ class Stage extends Component {
 Stage.propTypes = {
     dispatch: PropTypes.func.isRequired,
     form: PropTypes.object,
-    match: PropTypes.func
+    match: PropTypes.object
 };
 
 const WrappedStage = props => (
