@@ -38,7 +38,8 @@
     {
       "component": "date",
       "validation": [
-        "required"
+        "required",
+        "isValidDate"
       ],
       "props": {
         "name": "date",
