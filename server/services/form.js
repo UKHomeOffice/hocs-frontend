@@ -3,52 +3,48 @@ const listService = require('./list');
 const logger = require('../libs/logger');
 const { workflowServiceClient } = require('../libs/request');
 
-function getFormSchemaFromWorkflowService({ caseId, stageId }, callback) {
-    workflowServiceClient.get(`/case/${caseId}/stage/${stageId}`)
-        .then((response) => {
-            if (response && response.data && response.data.form) {
-                const { stageUUID, caseReference } = response.data;
-                const { schema, data } = response.data.form;
-                return callback({ schema, data, meta: { caseReference, stageUUID } });
-            }
-            callback();
-        })
-        .catch((err) => {
-            logger.error(`${err.message}`);
-            callback();
-        });
+async function getFormSchemaFromWorkflowService({ caseId, stageId }) {
+    const response = await workflowServiceClient.get(`/case/${caseId}/stage/${stageId}`);
+    try {
+        const { stageUUID, caseReference } = response.data;
+        const { schema, data } = response.data.form;
+        return { schema, data, meta: { caseReference, stageUUID } };
+    } catch (err) {
+        logger.error(`${err.message}`);
+    }
 }
 
-function getFormSchema(options) {
+async function getFormSchema(options) {
     const { user } = options;
     const form = formRepository.getForm(options);
-    hydrateFields(form.schema.fields, { user });
+    await hydrateFields(form.schema.fields, { user });
     return { ...form, data: {}, meta: {} };
 }
 
 function hydrateFields(fields, options) {
-    return fields.map(field => {
+    const promises = fields.map(async field => {
         switch (field.component) {
         case 'radio':
         case 'checkbox':
         case 'dropdown':
             if (field.props && field.props.choices && typeof field.props.choices === 'string') {
-                field.props.choices = listService.getList(field.props.choices, { ...options });
+                field.props.choices = await listService.getList(field.props.choices, { ...options });
             }
             break;
         case 'add-document':
             if (field.props && field.props.whitelist && typeof field.props.whitelist === 'string') {
-                field.props.whitelist = listService.getList(field.props.whitelist);
+                field.props.whitelist = await listService.getList(field.props.whitelist);
             }
             break;
         }
         return field;
     });
+    return Promise.all(promises);
 }
 
-const getFormForAction = (req, res, callback) => {
+const getFormForAction = async (req, res, callback) => {
     const { workflow, action } = req.params;
-    req.form = getFormSchema({ context: 'ACTION', workflow, action, user: req.user });
+    req.form = await getFormSchema({ context: 'ACTION', workflow, action, user: req.user });
     callback();
 };
 
@@ -58,12 +54,10 @@ const getFormForCase = (req, res, callback) => {
     callback();
 };
 
-const getFormForStage = (req, res, callback) => {
+const getFormForStage = async (req, res, callback) => {
     const { caseId, stageId } = req.params;
-    getFormSchemaFromWorkflowService({ caseId, stageId, user: req.user }, form => {
-        req.form = form;
-        callback();
-    });
+    req.form = await getFormSchemaFromWorkflowService({ caseId, stageId, user: req.user });
+    callback();
 };
 
 module.exports = {
