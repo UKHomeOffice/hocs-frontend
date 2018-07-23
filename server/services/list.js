@@ -33,7 +33,7 @@ function fetchList(list) {
 
 function handleListSuccess(listId, response) {
     logger.info(`Successfully fetched list: ${listId}`);
-    // listRepository[listId] = response.data[listId] || [];
+    listRepository[listId] = response.data[listId] || [];
 }
 
 function handleListFailure(listId, error) {
