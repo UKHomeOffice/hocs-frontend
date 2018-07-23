@@ -9,45 +9,67 @@ const listDefinitions = {
     workflowTypes: '/workflow'
 };
 
-const initialise = () => {
+function initialise() {
     const listRequests = Object.keys(listDefinitions).reduce((reducer, list) => {
         logger.info(`Fetching list: ${list}`);
-        reducer.push({ list, request: workflowServiceClient.get(listDefinitions[list]) });
+        reducer.push({ list, request: fetchList(list) });
         return reducer;
     }, []);
 
     listRequests.map(({ list, request }) => {
         request
             .then(response => {
-                logger.info(`Successfully fetched list: ${list}`);
-                listRepository[list] = response.data[list];
+                handleListSuccess(list, response);
             })
             .catch(err => {
-                logger.error(`Unable to retrieve list ${list}: ${err.message}`);
+                handleListFailure(list, err);
             });
     });
-};
+}
+
+function fetchList(list) {
+    return workflowServiceClient.get(listDefinitions[list]);
+}
+
+function handleListSuccess(listId, response) {
+    logger.info(`Successfully fetched list: ${listId}`);
+    // listRepository[listId] = response.data[listId] || [];
+}
+
+function handleListFailure(listId, error) {
+    logger.error(`Unable to retrieve list ${listId}: ${error.message}`);
+}
 
 const lists = {
-    'case_type': ({ user }) => {
+    'case_type': async ({ user }) => {
         if (listRepository.workflowTypes) {
-            return listRepository.workflowTypes.filter(listItem => User.hasRole(user, listItem.requiredRole));
+            return listRepository.workflowTypes
+                .filter(listItem => User.hasRole(user, listItem.requiredRole));
         } else {
-            return [];
+            const list = 'workflowTypes';
+            logger.info(`List ${list} unavailable, attempting to retrieve`);
+            try {
+                const response = await fetchList(list);
+                handleListSuccess(list, response);
+                return response.data.workflowTypes
+                    .filter(listItem => User.hasRole(user, listItem.requiredRole));
+            } catch (err) {
+                handleListFailure(list, err);
+            }
         }
     },
     'document_extension_whitelist': () => {
-        return DOCUMENT_WHITELIST.split(',');
+        return Promise.resolve(DOCUMENT_WHITELIST.split(','));
     }
 };
 
-const getList = (field, options) => {
+function getList(field, options) {
     try {
         return lists[field.toLowerCase()].call(this, options);
     } catch (e) {
         throw new Error(`Unable to get list for ${field}: ${e}`);
     }
-};
+}
 
 initialise();
 
