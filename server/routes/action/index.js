@@ -2,7 +2,7 @@ const router = require('express').Router();
 const actionService = require('../../services/action');
 const fileMiddleware = require('../../middleware/file');
 const processMiddleware = require('../../middleware/process');
-const validationMiddleware = require('../../middleware/validation');
+const validationMiddleware = require('../../middleware/validation').validator;
 
 router.post(['/:workflow/:context/:action', '/:workflow/:action'], fileMiddleware.any(), processMiddleware, validationMiddleware);
 
