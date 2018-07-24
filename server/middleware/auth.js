@@ -22,7 +22,7 @@ function buildUserModel(req, res, next) {
     next();
 }
 
-function protectAction({ redirect }) {
+function protectAction() {
     return (req, res, next) => {
         if (req.form) {
             if (User.hasRole(req.user, req.form.requiredRole.toUpperCase())) {
