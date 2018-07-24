@@ -15,7 +15,7 @@ import BackLink from './backlink.jsx';
 import Paragraph from './paragraph.jsx';
 import Inset from './inset.jsx';
 import { ApplicationConsumer } from '../../contexts/application.jsx';
-import { redirect, updateForm, updateFormData, updateFormErrors } from '../../contexts/actions/index.jsx';
+import { redirect, updateForm, updateFormData, updateFormErrors, setError } from '../../contexts/actions/index.jsx';
 import Dropdown from './dropdown.jsx';
 import Panel from './panel.jsx';
 
@@ -61,7 +61,7 @@ class Form extends Component {
             .catch(err => {
                 /* eslint-disable-next-line no-console */
                 console.error(err);
-                this.props.dispatch(redirect('/error'));
+                return this.props.dispatch(setError(err.response.data));
             });
     }
 

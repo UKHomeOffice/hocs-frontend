@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Form from '../common/forms/form.jsx';
 import { ApplicationConsumer } from '../contexts/application.jsx';
 import axios from 'axios';
-import { redirect, updateForm, updateLocation } from '../contexts/actions/index.jsx';
+import { setError, updateForm, updateLocation } from '../contexts/actions/index.jsx';
 
 class Case extends Component {
 
@@ -23,10 +23,7 @@ class Case extends Component {
                 this.props.dispatch(updateForm(res.data));
             })
             .catch(err => {
-                if (err.response.status === 403) {
-                    return this.props.dispatch(redirect('/unauthorised'));
-                }
-                return this.props.dispatch(redirect('/error'));
+                return this.props.dispatch(setError(err.response.data));
             });
     }
 
