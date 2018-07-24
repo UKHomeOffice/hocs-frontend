@@ -23,9 +23,6 @@ class Action extends Component {
                 this.props.dispatch(updateForm(res.data));
             })
             .catch(err => {
-                if (err.response.status === 403) {
-                    return this.props.dispatch(setError(err.response.data));
-                }
                 return this.props.dispatch(setError(err.response.data));
             });
     }
