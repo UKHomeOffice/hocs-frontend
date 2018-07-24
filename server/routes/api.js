@@ -7,6 +7,6 @@ const formRouter = require('./forms/index');
 router.use('/forms', formRouter);
 router.use('/action', actionRouter);
 router.use('/case', caseRouter);
-router.use('/stage', stageRouter);
+router.use('/case', stageRouter);
 
 module.exports = router;
