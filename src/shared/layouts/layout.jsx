@@ -5,7 +5,7 @@ import Body from './components/body.jsx';
 import Footer from './components/footer.jsx';
 import { ApplicationConsumer } from '../contexts/application.jsx';
 import { Redirect } from 'react-router-dom';
-import { redirected } from '../contexts/actions/index.jsx';
+import { redirected, unsetForm, unsetError } from '../contexts/actions/index.jsx';
 
 class Layout extends Component {
 
@@ -21,9 +21,17 @@ class Layout extends Component {
         }
     }
 
+    componentWillUnmount() {
+        if (this.props.history && this.props.history.action === 'POP') {
+            this.props.dispatch(unsetForm());
+            this.props.dispatch(unsetError());
+        }
+    }
+
     render() {
         const {
             children,
+            error
         } = this.props;
         return (
             <ApplicationConsumer>
@@ -31,7 +39,7 @@ class Layout extends Component {
                     return (
                         <Fragment>
                             <Header {...header} />
-                            <Body {...body}>
+                            <Body {...body} error={error}>
                                 {children}
                             </Body>
                             {footer.isVisible && <Footer {...footer} />}
@@ -47,6 +55,8 @@ class Layout extends Component {
 Layout.propTypes = {
     children: PropTypes.node,
     dispatch: PropTypes.func.isRequired,
+    history: PropTypes.object,
+    error: PropTypes.object,
     redirect: PropTypes.string
 };
 
@@ -58,7 +68,7 @@ Layout.defaultProps = {
 
 const WrappedLayout = props => (
     <ApplicationConsumer>
-        {({ dispatch, redirect }) => <Layout {...props} dispatch={dispatch} redirect={redirect} />}
+        {({ dispatch, redirect, error }) => <Layout {...props} dispatch={dispatch} redirect={redirect} error={error} />}
     </ApplicationConsumer>
 );
 

@@ -21,6 +21,25 @@ export function updateFormErrors(data) {
     };
 }
 
+export function setError(error) {
+    return {
+        type: types.SET_ERROR,
+        payload: error
+    };
+}
+
+export function unsetError() {
+    return {
+        type: types.UNSET_ERROR,
+    };
+}
+
+export function unsetForm() {
+    return {
+        type: types.UNSET_FORM,
+    };
+}
+
 export function setPhase(phase) {
     return {
         type: types.SET_PHASE,

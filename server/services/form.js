@@ -44,7 +44,11 @@ function hydrateFields(fields, options) {
 
 const getFormForAction = async (req, res, callback) => {
     const { workflow, action } = req.params;
-    req.form = await getFormSchema({ context: 'ACTION', workflow, action, user: req.user });
+    try {
+        req.form = await getFormSchema({ context: 'ACTION', workflow, action, user: req.user });
+    } catch (err) {
+        req.error = { errorCode: 404, title: 'Error', error: 'Form not found' };
+    }
     callback();
 };
 
@@ -56,7 +60,11 @@ const getFormForCase = (req, res, callback) => {
 
 const getFormForStage = async (req, res, callback) => {
     const { caseId, stageId } = req.params;
-    req.form = await getFormSchemaFromWorkflowService({ caseId, stageId, user: req.user });
+    try {
+        req.form = await getFormSchemaFromWorkflowService({ caseId, stageId, user: req.user });
+    } catch (err) {
+        req.error = { errorCode: 404, title: 'Error', error: 'Form not found', stack: err.stack };
+    }
     callback();
 };
 
