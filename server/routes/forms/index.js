@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { getFormForAction, getFormForCase, getFormForStage } = require('../../services/form');
 const { protectAction } = require('../../middleware/auth');
 
-router.use(['/action/:workflow/:context/:action', '/action/:workflow/:action'], getFormForAction, protectAction({ redirect: false }));
+router.use(['/action/:workflow/:context/:action', '/action/:workflow/:action'], getFormForAction, protectAction());
 
 router.use('/stage/:stageId/case/:caseId', getFormForStage);
 

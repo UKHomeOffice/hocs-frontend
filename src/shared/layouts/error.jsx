@@ -26,7 +26,18 @@ class Error extends Component {
                         {`${title}`}
                     </h1>
                     {(errorCode === 403 || errorCode === 404) && pathname && <p><code>{pathname}</code></p>}
-                    {stack && <p className="code overflow-scroll">{stack}</p>}
+                    {stack &&
+                        <details className="govuk-details" open={true}>
+                            <summary className="govuk-details__summary">
+                                <span className="govuk-details__summary-text">
+                                    Stack trace
+                                </span>
+                            </summary>
+                            <div className="govuk-details__text">
+                                <pre className="code overflow-scroll">{stack}</pre>
+                            </div>
+                        </details>
+                    }
                 </div>
             </div>
         );
