@@ -32,76 +32,84 @@ function updateCase({ caseId, stageId, form }) {
     return workflowServiceClient.post(`/case/${caseId}/stage/${stageId}`, { data: form.data });
 }
 
-function handleActionSuccess(workflow, form, callback) {
+function handleActionSuccess(workflow, form) {
     const { next, data } = form;
     if (next && next.action) {
         if (next.context) {
             const context = data[next.context.field];
-            return callback(`/action/${workflow}/${context}/${next.action}`, null);
+            return { callbackUrl: `/action/${workflow}/${context}/${next.action}` };
         }
-        return callback(`/action/${workflow}/${next.action}`, null);
+        return { callbackUrl: `/action/${workflow}/${next.action}` };
     } else {
-        return callback('/', null);
+        return { callbackUrl: '/' };
     }
 }
 
 function handleWorkflowSuccess(response, { stageId, caseId }, callback) {
     if (response.data && response.data.screenName !== 'FINISH') {
-        return callback(`/stage/${stageId}/case/${caseId}`, null);
+        return callback(null, `/stage/${stageId}/case/${caseId}`);
     } else {
-        return callback('/', null);
+        return { callbackUrl: '/' };
     }
 }
 
 function handleActionFailure(error) {
     logger.error(error);
+    return { error };
 }
 
 function handleWorkflowErrror(error) {
     logger.error(error);
+    return { error };
 }
 
 const actions = {
-    ACTION: (({ workflow, context, form }, callback) => {
-        if (form && form.action) {
+    ACTION: async ({ workflow, context, form }) => {
+        if (form) {
             switch (form.action) {
-            case CREATE_CASE: {
-                createCase('/case', { caseType: context, form })
-                    .then(() => handleActionSuccess(workflow, form, callback))
-                    .catch(err => handleActionFailure(err));
-                break;
-            }
+            case CREATE_CASE:
+                try {
+                    await createCase('/case', { caseType: context, form });
+                    return handleActionSuccess(workflow, form);
+                } catch (err) {
+                    return handleActionFailure(err);
+                }
             case CREATE_BULK_CASE: {
-                createCase('/case/bulk', { caseType: context, form })
-                    .then(() => handleActionSuccess(workflow, form, callback))
-                    .catch(err => handleActionFailure(err));
-                break;
+                try {
+                    await createCase('/case/bulk', { caseType: context, form });
+                    return handleActionSuccess(workflow, form);
+                } catch (err) {
+                    return handleActionFailure(err);
+                }
             }
             default: {
-                callback();
+                return handleActionSuccess(workflow, form);
             }
             }
         }
-        handleActionSuccess(workflow, form, callback);
-    }),
-    CASE: (({ entity, action }) => {
+    },
+    CASE: async ({ entity, action }) => {
         if (entity && action) {
             // Handle case event
         }
-    }),
-    WORKFLOW: (({ caseId, stageId, entity, action, form }, callback) => {
+    },
+    WORKFLOW: async ({ caseId, stageId, entity, action, form }) => {
         if (entity && action) {
             // Handle case event
         }
         // Update stage
-        updateCase({ caseId, stageId, form })
-            .then(res => handleWorkflowSuccess(res, { stageId, caseId }, callback))
-            .catch(err => handleWorkflowErrror(err));
-    })
+
+        try {
+            const response = await updateCase({ caseId, stageId, form });
+            return handleWorkflowSuccess(response, { stageId, caseId });
+        } catch (err) {
+            return handleWorkflowErrror(err);
+        }
+    }
 };
 
-const performAction = (type, options, callback) => {
-    actions[type].call(this, options, callback);
+const performAction = (type, options) => {
+    return actions[type].call(this, options);
 };
 
 module.exports = {
