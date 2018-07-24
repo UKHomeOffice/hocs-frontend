@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { ApplicationConsumer } from '../contexts/application.jsx';
 
 class Error extends Component {
     UNSAFE_componentWillMount() {
