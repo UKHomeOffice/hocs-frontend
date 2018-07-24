@@ -29,7 +29,7 @@ function protectAction() {
             if (User.hasRole(req.user, req.form.requiredRole.toUpperCase())) {
                 return next();
             } else {
-                req.error = new ErrorModel({ status: 403, title: 'Unauthorised', summary: 'You do not have permission to access the requested page', stack: `Required role: ${req.form.requiredRole.toUpperCase()}` }).toJson();
+                req.error = new ErrorModel({ status: 403, title: 'Unauthorised', summary: 'You do not have permission to access the requested page', stackTrace: `Required role: ${req.form.requiredRole.toUpperCase()}` }).toJson();
             }
         }
         next();
