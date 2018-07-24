@@ -72,7 +72,6 @@ const workflowDefinitions = {
 
 module.exports = {
     getForm: ({ context, workflow, action }) => {
-        logger.info(`${context}, ${workflow}, ${action}`);
         if (context && workflow && action) {
             try {
                 const form = workflowDefinitions[context.toUpperCase()][workflow.toUpperCase()][action.toUpperCase()];
