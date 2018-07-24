@@ -2,7 +2,6 @@ const caseCreate = require('./case-create.json');
 const addDocument = require('./document-add.json');
 const testForm = require('./case-test.json');
 const { CREATE_CASE, CREATE_BULK_CASE, ADD_DOCUMENT } = require('../actions/types');
-const logger = require('../../libs/logger');
 
 const workflowDefinitions = {
     // '/:workflow/:action'
