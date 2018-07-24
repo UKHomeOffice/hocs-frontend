@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Form from '../common/forms/form.jsx';
 import { ApplicationConsumer } from '../contexts/application.jsx';
 import axios from 'axios';
-import { redirect, updateForm, updateLocation } from '../contexts/actions/index.jsx';
+import { updateForm, updateLocation, setError } from '../contexts/actions/index.jsx';
 
 class Action extends Component {
 
@@ -24,9 +24,9 @@ class Action extends Component {
             })
             .catch(err => {
                 if (err.response.status === 403) {
-                    return this.props.dispatch(redirect('/unauthorised'));
+                    return this.props.dispatch(setError(err.response.data));
                 }
-                return this.props.dispatch(redirect('/error'));
+                return this.props.dispatch(setError(err.response.data));
             });
     }
 
@@ -61,7 +61,8 @@ Action.propTypes = {
     dispatch: PropTypes.func.isRequired,
     form: PropTypes.object,
     match: PropTypes.object,
-    caption: PropTypes.string
+    caption: PropTypes.string,
+    history: PropTypes.object.isRequired
 };
 
 const WrappedPage = props => (

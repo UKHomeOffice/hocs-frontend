@@ -14,7 +14,7 @@ class Router extends Component {
                         path={path}
                         exact={exact}
                         render={(props) => (
-                            <Layout>
+                            <Layout history={props.history}>
                                 <Component {...props} {...rest} />
                             </Layout>
                         )}

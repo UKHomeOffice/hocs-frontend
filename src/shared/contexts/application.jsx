@@ -48,6 +48,12 @@ const reducer = (state, action) => {
         return { ...state, redirect: action.payload };
     case types.REDIRECTED:
         return { ...state, redirect: null };
+    case types.SET_ERROR:
+        return { ...state, error: action.payload };
+    case types.UNSET_ERROR:
+        return { ...state, error: null };
+    case types.UNSET_FORM:
+        return { ...state, form: { schema: null, data: null, errors: null } };
     default:
         /* eslint-disable-next-line  no-console*/
         console.warn('Unsupported action');

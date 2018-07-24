@@ -41,8 +41,8 @@ class MainPage extends Component {
                                   Secondary routes
                                 </h2>
                                 <ul className="govuk-list govuk-list--bullet">
-                                    <li><Link to={'/some/random/url'}>Test 404</Link></li>
-                                    <li><Link to={'/action/test'}>Test 403</Link></li>
+                                    <li><Link to={'/action/random/url'}>Test 404</Link></li>
+                                    <li><Link to={'/action/test/form'}>Test 403</Link></li>
                                     <li><Link to={'/error'}>Test 500</Link></li>
                                 </ul>
                             </div>

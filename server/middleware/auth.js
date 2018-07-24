@@ -24,13 +24,14 @@ function buildUserModel(req, res, next) {
 
 function protectAction({ redirect }) {
     return (req, res, next) => {
-        if (User.hasRole(req.user, req.form.requiredRole.toUpperCase())) {
-            return next();
-        } else if (redirect) {
-            return res.redirect('/unauthorized');
-        } else {
-            return res.status(403).send();
+        if (req.form) {
+            if (User.hasRole(req.user, req.form.requiredRole.toUpperCase())) {
+                return next();
+            } else {
+                req.error = { errorCode: 403, title: 'Unauthorised', error: 'You shall not pass!!' };
+            }
         }
+        next();
     };
 }
 

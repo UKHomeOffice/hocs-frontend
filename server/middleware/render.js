@@ -13,6 +13,7 @@ const render = (req, res, next) => {
     const config = {
         layout: require('../config').forContext('case'),
         form: req.form,
+        error: req.error
     };
 
     const context = {

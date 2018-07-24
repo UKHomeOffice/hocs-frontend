@@ -4,16 +4,16 @@ const { protectAction } = require('../../middleware/auth');
 
 router.use(['/action/:workflow/:context/:action', '/action/:workflow/:action'], getFormForAction, protectAction({ redirect: false }));
 
-router.get(['/action/:workflow/:context/:action', '/action/:workflow/:action'], (req, res) => {
-    res.status(200).send(req.form);
-});
-
 router.use('/stage/:stageId/case/:caseId', getFormForStage);
 
 router.use('/case/:type/:entity/:action', getFormForCase);
 
-router.get(['/case/*', '/stage/*'], (req, res) => {
-    res.status(200).send(req.form);
+router.get(['/action/*', '/case/*', '/stage/*'], (req, res) => {
+    if (!req.error) {
+        res.status(200).send(req.form);
+    } else {
+        res.status(req.error.errorCode).send(req.error);
+    }
 });
 
 module.exports = router;

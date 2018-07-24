@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Form from '../common/forms/form.jsx';
 import { ApplicationConsumer } from '../contexts/application.jsx';
 import axios from 'axios';
-import { redirect, updateForm, updateLocation } from '../contexts/actions/index.jsx';
+import { redirect, updateForm, updateLocation, setError } from '../contexts/actions/index.jsx';
 
 class Stage extends Component {
 
@@ -26,7 +26,7 @@ class Stage extends Component {
                 if (err.response.status === 403) {
                     return this.props.dispatch(redirect('/unauthorised'));
                 }
-                return this.props.dispatch(redirect('/error'));
+                return this.props.dispatch(setError({ error: 'Failed to get form', errorCode: 500, title: 'Error' }));
             });
     }
 
