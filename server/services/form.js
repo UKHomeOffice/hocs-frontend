@@ -48,7 +48,12 @@ const getFormForAction = async (req, res, callback) => {
     try {
         req.form = await getFormSchema({ context: 'ACTION', workflow, action, user: req.user });
     } catch (err) {
-        req.error = new ErrorModel({ status: 404, title: 'Error', summary: 'Form not found', stackTrace: err.stack }).toJson();
+        req.error = new ErrorModel({
+            status: 404,
+            title: 'Error',
+            summary: 'Form not found',
+            stackTrace: err.stack
+        }).toJson();
     }
     callback();
 };
@@ -58,7 +63,12 @@ const getFormForCase = (req, res, callback) => {
     try {
         req.form = getFormSchema({ context: 'WORKFLOW', action, user: req.user });
     } catch (err) {
-        req.error = new ErrorModel({ status: 404, title: 'Error', summary: 'Form not found', stackTrace: err.stack }).toJson();
+        req.error = new ErrorModel({
+            status: 404,
+            title: 'Error',
+            summary: 'Form not found',
+            stackTrace: err.stack
+        }).toJson();
     }
     callback();
 };
@@ -68,7 +78,12 @@ const getFormForStage = async (req, res, callback) => {
     try {
         req.form = await getFormSchemaFromWorkflowService({ caseId, stageId, user: req.user });
     } catch (err) {
-        req.error = new ErrorModel({ status: 404, title: 'Error', summary: 'Form not found', stackTrace: err.stack }).toJson();
+        req.error = new ErrorModel({
+            status: 404,
+            title: 'Error',
+            summary: 'Form not found',
+            stackTrace: err.stack
+        }).toJson();
     }
     callback();
 };

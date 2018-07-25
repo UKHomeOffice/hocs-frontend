@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Header from './components/header.jsx';
 import Body from './components/body.jsx';
 import Footer from './components/footer.jsx';
+import Error from './error.jsx';
 import { ApplicationConsumer } from '../contexts/application.jsx';
 import { Redirect } from 'react-router-dom';
 import { redirected, unsetForm, unsetError } from '../contexts/actions/index.jsx';
@@ -40,7 +41,7 @@ class Layout extends Component {
                         <Fragment>
                             <Header {...header} />
                             <Body {...body} error={error}>
-                                {children}
+                                {error ? <Error {...error}/> : children}
                             </Body>
                             {footer.isVisible && <Footer {...footer} />}
                             {this.props.redirect && <Redirect to={this.props.redirect} push />}

@@ -29,7 +29,7 @@ router.use('*', (err, req, res, next) => {
     next();
 });
 
-router.post(['/case/*', '/action/*', '/stage/*'], (req, res, next) => {
+router.post(['/action/*', '/case/*', '/stage/*'], (req, res, next) => {
     if (!res.noScript) {
         if (!req.error) {
             return res.status(200).send({ errors: req.form.errors });

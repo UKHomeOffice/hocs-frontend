@@ -4,8 +4,8 @@ const caseRouter = require('./case/index');
 const stageRouter = require('./stage/index');
 const formRouter = require('./forms/index');
 
-router.use('/forms', formRouter);
 router.use('/action', actionRouter);
+router.use('/forms', formRouter);
 router.use('/case', caseRouter);
 router.use('/case', stageRouter);
 
