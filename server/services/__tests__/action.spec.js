@@ -1,33 +1,29 @@
 import actionModel from '../action';
 
 describe('Action model', () => {
-    it('should return a callback url for a supported action', () => {
-        const action = 'submit';
-        const data = {};
-        const response = actionModel.performAction(action, data);
+    it('should return a callback url when passed supported workflow and action', async () => {
+        const response = await actionModel.performAction('ACTION', {
+            workflow: 'CREATE',
+            action: 'WORKFLOW',
+            form: {
+            }
+        });
 
         expect(response).toBeDefined();
         expect(response).toHaveProperty('callbackUrl', '/');
     });
-    it('should support the "create" action type', () => {
-        const action = 'create';
-        const data = {};
-        const response = actionModel.performAction(action, data);
+
+    it('should return error object when passed unsupported form action', async () => {
+
+        const response = await actionModel.performAction('ACTION', {
+            workflow: 'CREATE',
+            action: 'WORKFLOW',
+            form: {
+                action: 'SOME_RANDOM_ACTION'
+            },
+        });
 
         expect(response).toBeDefined();
-    });
-    it('should support the "submit" action type', () => {
-        const action = 'submit';
-        const data = {};
-        const response = actionModel.performAction(action, data);
-
-        expect(response).toBeDefined();
-    });
-    it('should throw when passed unsupported action', () => {
-        const action = 'unsupportedAction';
-        const data = {};
-        expect(() => {
-            actionModel.performAction(action, data);
-        }).toThrow();
+        expect(response).toHaveProperty('error');
     });
 });
