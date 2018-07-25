@@ -6,13 +6,16 @@ exports[`Form text component should render disabled when passed 1`] = `
 >
   <label
     class="govuk-label govuk-label--s"
-    id="undefined-label"
+    for="text-field"
+    id="text-field-label"
   >
     TextArea field
   </label>
   <input
     class="govuk-input"
     disabled=""
+    id="text-field"
+    name="text-field"
     type="text"
     value=""
   />
@@ -25,12 +28,15 @@ exports[`Form text component should render of type when passed 1`] = `
 >
   <label
     class="govuk-label govuk-label--s"
-    id="undefined-label"
+    for="text-field"
+    id="text-field-label"
   >
     TextArea field
   </label>
   <input
     class="govuk-input"
+    id="text-field"
+    name="text-field"
     type="password"
     value=""
   />
@@ -43,12 +49,15 @@ exports[`Form text component should render with default props 1`] = `
 >
   <label
     class="govuk-label govuk-label--s"
-    id="undefined-label"
+    for="text-field"
+    id="text-field-label"
   >
     TextArea field
   </label>
   <input
     class="govuk-input"
+    id="text-field"
+    name="text-field"
     type="text"
     value=""
   />
@@ -61,7 +70,8 @@ exports[`Form text component should render with error when passed 1`] = `
 >
   <label
     class="govuk-label govuk-label--s"
-    id="undefined-label"
+    for="text-field"
+    id="text-field-label"
   >
     TextArea field
   </label>
@@ -72,6 +82,8 @@ exports[`Form text component should render with error when passed 1`] = `
   </span>
   <input
     class="govuk-input govuk-input--error"
+    id="text-field"
+    name="text-field"
     type="text"
     value=""
   />
@@ -84,7 +96,8 @@ exports[`Form text component should render with hint when passed 1`] = `
 >
   <label
     class="govuk-label govuk-label--s"
-    id="undefined-label"
+    for="text-field"
+    id="text-field-label"
   >
     TextArea field
   </label>
@@ -95,6 +108,8 @@ exports[`Form text component should render with hint when passed 1`] = `
   </span>
   <input
     class="govuk-input"
+    id="text-field"
+    name="text-field"
     type="text"
     value=""
   />
@@ -107,12 +122,15 @@ exports[`Form text component should render with label when passed 1`] = `
 >
   <label
     class="govuk-label govuk-label--s"
-    id="undefined-label"
+    for="text-field"
+    id="text-field-label"
   >
     My text field
   </label>
   <input
     class="govuk-input"
+    id="text-field"
+    name="text-field"
     type="text"
     value=""
   />
@@ -125,12 +143,15 @@ exports[`Form text component should render with value when passed 1`] = `
 >
   <label
     class="govuk-label govuk-label--s"
-    id="undefined-label"
+    for="text-field"
+    id="text-field-label"
   >
     TextArea field
   </label>
   <input
     class="govuk-input"
+    id="text-field"
+    name="text-field"
     type="text"
     value="field value"
   />

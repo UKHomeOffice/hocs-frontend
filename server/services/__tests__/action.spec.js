@@ -5,7 +5,7 @@ jest.mock('../../libs/request', () => {
         if (body.type === 'SUPPORTED_CASETYPE')
             return Promise.resolve();
         else
-            return Promise.reject(new Error('TEST_ERROR'));
+            return Promise.reject('TEST_ERROR');
     }
     return {
         workflowServiceClient: {

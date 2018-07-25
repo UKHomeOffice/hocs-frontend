@@ -10,32 +10,32 @@ const choices = [
 describe('Form radio group component', () => {
     it('should render with default props', () => {
         expect(
-            render(<RadioGroup name="radio-group" choices={choices} />)
+            render(<RadioGroup name="radio-group" choices={choices} updateState={() => null} />)
         ).toMatchSnapshot();
     });
     it('should render with value when passed', () => {
         expect(
-            render(<RadioGroup name="radio-group" choices={choices} value="A" />)
+            render(<RadioGroup name="radio-group" choices={choices} value="A" updateState={() => null} />)
         ).toMatchSnapshot();
     });
     it('should render with label when passed', () => {
         expect(
-            render(<RadioGroup name="radio-group" choices={choices} label="My text field" />)
+            render(<RadioGroup name="radio-group" choices={choices} label="My text field" updateState={() => null} />)
         ).toMatchSnapshot();
     });
     it('should render with hint when passed', () => {
         expect(
-            render(<RadioGroup name="radio-group" choices={choices} hint="Put some text in the box below" />)
+            render(<RadioGroup name="radio-group" choices={choices} hint="Put some text in the box below" updateState={() => null} />)
         ).toMatchSnapshot();
     });
     it('should render with error when passed', () => {
         expect(
-            render(<RadioGroup name="radio-group" choices={choices} error="Some error message" />)
+            render(<RadioGroup name="radio-group" choices={choices} error="Some error message" updateState={() => null} />)
         ).toMatchSnapshot();
     });
     it('should render disabled when passed', () => {
         expect(
-            render(<RadioGroup name="radio-group" choices={choices} disabled={true} />)
+            render(<RadioGroup name="radio-group" choices={choices} disabled={true} updateState={() => null} />)
         ).toMatchSnapshot();
     });
     it('should execute callback on initialization', () => {

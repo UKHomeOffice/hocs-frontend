@@ -6,11 +6,14 @@ exports[`Form text area component should render disabled when passed 1`] = `
 >
   <label
     class="govuk-label govuk-label--s"
-    id="undefined-label"
+    for="text-field"
+    id="text-field-label"
   />
   <textarea
     class="govuk-textarea form-control-3-4 "
     disabled=""
+    id="text-field"
+    name="text-field"
     rows="5"
   />
 </div>
@@ -22,10 +25,13 @@ exports[`Form text area component should render of type when passed 1`] = `
 >
   <label
     class="govuk-label govuk-label--s"
-    id="undefined-label"
+    for="text-field"
+    id="text-field-label"
   />
   <textarea
     class="govuk-textarea form-control-3-4 "
+    id="text-field"
+    name="text-field"
     rows="5"
   />
 </div>
@@ -37,10 +43,13 @@ exports[`Form text area component should render with default props 1`] = `
 >
   <label
     class="govuk-label govuk-label--s"
-    id="undefined-label"
+    for="text-field"
+    id="text-field-label"
   />
   <textarea
     class="govuk-textarea form-control-3-4 "
+    id="text-field"
+    name="text-field"
     rows="5"
   />
 </div>
@@ -52,7 +61,8 @@ exports[`Form text area component should render with error when passed 1`] = `
 >
   <label
     class="govuk-label govuk-label--s"
-    id="undefined-label"
+    for="text-field"
+    id="text-field-label"
   />
   <span
     class="govuk-error-message"
@@ -61,6 +71,8 @@ exports[`Form text area component should render with error when passed 1`] = `
   </span>
   <textarea
     class="govuk-textarea form-control-3-4 govuk-textarea--error"
+    id="text-field"
+    name="text-field"
     rows="5"
   />
 </div>
@@ -72,7 +84,8 @@ exports[`Form text area component should render with hint when passed 1`] = `
 >
   <label
     class="govuk-label govuk-label--s"
-    id="undefined-label"
+    for="text-field"
+    id="text-field-label"
   />
   <span
     class="govuk-hint"
@@ -81,6 +94,8 @@ exports[`Form text area component should render with hint when passed 1`] = `
   </span>
   <textarea
     class="govuk-textarea form-control-3-4 "
+    id="text-field"
+    name="text-field"
     rows="5"
   />
 </div>
@@ -92,12 +107,15 @@ exports[`Form text area component should render with label when passed 1`] = `
 >
   <label
     class="govuk-label govuk-label--s"
-    id="undefined-label"
+    for="text-field"
+    id="text-field-label"
   >
     My text field
   </label>
   <textarea
     class="govuk-textarea form-control-3-4 "
+    id="text-field"
+    name="text-field"
     rows="5"
   />
 </div>
@@ -109,10 +127,13 @@ exports[`Form text area component should render with value when passed 1`] = `
 >
   <label
     class="govuk-label govuk-label--s"
-    id="undefined-label"
+    for="text-field"
+    id="text-field-label"
   />
   <textarea
     class="govuk-textarea form-control-3-4 "
+    id="text-field"
+    name="text-field"
     rows="5"
   >
     field value
