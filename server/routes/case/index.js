@@ -5,9 +5,9 @@ const fileMiddleware = require('../../middleware/file');
 const validationMiddleware = require('../../middleware/validation').validator;
 const ErrorModel = require('../../models/error');
 
-router.post('/:caseId/:entity/:action', fileMiddleware.any(), processMiddleware, validationMiddleware);
+router.post('/:caseId/action/:entity/:action', fileMiddleware.any(), processMiddleware, validationMiddleware);
 
-router.post('/:caseId/:entity/:action', async (req, res, next) => {
+router.post('/:caseId/action/:entity/:action', async (req, res, next) => {
     if (Object.keys(req.form.errors).length > 0) {
         return next();
     }

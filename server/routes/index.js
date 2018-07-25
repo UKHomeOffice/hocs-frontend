@@ -13,9 +13,9 @@ router.use('*', buildUserModel);
 
 router.use(['/action/:workflow/:context/:action', '/action/:workflow/:action'], getFormForAction, protectAction({ redirect: true }));
 
-router.use('/stage/:stageId/case/:caseId', getFormForStage);
+router.use('/case/:caseId/stage/:stageId', getFormForStage);
 
-router.use('/case/:type/:entity/:action', getFormForCase);
+router.use('/case/:caseId/action/:entity/:action', getFormForCase);
 
 router.use('/', apiRouter);
 
