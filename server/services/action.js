@@ -65,7 +65,7 @@ function handleWorkflowError(error) {
 
 const actions = {
     ACTION: async ({ workflow, context, form }) => {
-        if (form) {
+        if (form && form.action) {
             switch (form.action) {
             case CREATE_CASE:
                 try {
@@ -83,9 +83,11 @@ const actions = {
                 }
             }
             default: {
-                return handleActionSuccess(workflow, form);
+                return handleActionFailure({ message: 'Unsupported action' });
             }
             }
+        } else {
+            return handleActionSuccess(workflow, form);
         }
     },
     CASE: async ({ entity, action }) => {
