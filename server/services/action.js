@@ -58,7 +58,7 @@ function handleActionFailure(error) {
     return { error };
 }
 
-function handleWorkflowErrror(error) {
+function handleWorkflowError(error) {
     logger.error(error);
     return { error };
 }
@@ -105,7 +105,7 @@ const actions = {
             const response = await updateCase({ caseId, stageId, form });
             return handleWorkflowSuccess(response, { stageId, caseId });
         } catch (err) {
-            return handleWorkflowErrror(err);
+            return handleWorkflowError(err);
         }
     }
 };

@@ -22,8 +22,8 @@ class Error extends Component {
             <div className="govuk-grid-row">
                 <div className="govuk-grid-column-full">
                     <h1 className="govuk-heading-l">
-                        <span className="govuk-caption-l">{error}</span>
-                        {`${title}`}
+                        <span className="govuk-caption-l">{title}</span>
+                        {`${error}`}
                     </h1>
                     {(errorCode === 403 || errorCode === 404) && pathname && <p><code>{pathname}</code></p>}
                     {stack &&

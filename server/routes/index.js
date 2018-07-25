@@ -13,9 +13,9 @@ router.use('*', buildUserModel);
 
 router.use(['/action/:workflow/:context/:action', '/action/:workflow/:action'], getFormForAction, protectAction({ redirect: true }));
 
-router.use('/stage/:stageId/case/:caseId', getFormForStage);
+router.use('/case/:caseId/stage/:stageId', getFormForStage);
 
-router.use('/case/:type/:entity/:action', getFormForCase);
+router.use('/case/:caseId/action/:entity/:action', getFormForCase);
 
 router.use('/', apiRouter);
 
@@ -29,7 +29,7 @@ router.use('*', (err, req, res, next) => {
     next();
 });
 
-router.post(['/case/*', '/action/*', '/stage/*'], (req, res, next) => {
+router.post(['/action/*', '/case/*', '/stage/*'], (req, res, next) => {
     if (!res.noScript) {
         if (!req.error) {
             return res.status(200).send({ errors: req.form.errors });

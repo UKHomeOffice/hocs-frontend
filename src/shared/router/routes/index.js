@@ -22,33 +22,26 @@ const routes = [
         component: ActionPage
     },
     {
-        path: '/stage/:stageId/case/:caseId',
+        path: '/case/:caseId/stage/:stageId',
         exact: true,
         component: StagePage,
     },
     {
-        path: '/case/:caseId/:entity/:action/',
+        path: '/case/:caseId/action/:entity/:action/',
         exact: true,
         component: CasePage,
     },
     {
-        path: '/unauthorised',
-        component: Error,
-        title: 'You do not have the required permission to view this resource',
-        error: 'Access denied',
-        errorCode: 403
-    },
-    {
         path: '/error',
         component: Error,
-        title: 'The server has encountered an error',
-        error: 'Server error',
+        error: 'The server has encountered an error',
+        title: 'Error',
         errorCode: 500
     },
     {
         component: Error,
-        title: 'The requested resource can not be found or does not exist',
-        error: 'Not found',
+        error: 'The requested resource can not be found or does not exist',
+        title: 'Not found',
         errorCode: 404
     }
 ];
