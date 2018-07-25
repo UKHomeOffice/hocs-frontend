@@ -16,9 +16,12 @@ function buildUserModel(req, res, next) {
             });
         }
         return next();
-    }
-    if (req.originalUrl !== '/unauthorised') {
-        res.redirect('/unauthorised');
+    } else {
+        req.error = new ErrorModel({
+            status: 403,
+            title: 'Unauthorised',
+            summary: 'You are not logged in'
+        }).toJson();
     }
     next();
 }

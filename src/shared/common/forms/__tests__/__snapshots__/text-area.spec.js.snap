@@ -2,17 +2,14 @@
 
 exports[`Form text area component should render disabled when passed 1`] = `
 <div
-  class="form-group"
+  class="govuk-form-group"
 >
   <label
+    class="govuk-label govuk-label--s"
     id="undefined-label"
-  >
-    <span
-      class="form-label-bold"
-    />
-  </label>
+  />
   <textarea
-    class="form-control form-control-3-4 "
+    class="govuk-textarea form-control-3-4 "
     disabled=""
     rows="5"
   />
@@ -21,17 +18,14 @@ exports[`Form text area component should render disabled when passed 1`] = `
 
 exports[`Form text area component should render of type when passed 1`] = `
 <div
-  class="form-group"
+  class="govuk-form-group"
 >
   <label
+    class="govuk-label govuk-label--s"
     id="undefined-label"
-  >
-    <span
-      class="form-label-bold"
-    />
-  </label>
+  />
   <textarea
-    class="form-control form-control-3-4 "
+    class="govuk-textarea form-control-3-4 "
     rows="5"
   />
 </div>
@@ -39,17 +33,14 @@ exports[`Form text area component should render of type when passed 1`] = `
 
 exports[`Form text area component should render with default props 1`] = `
 <div
-  class="form-group"
+  class="govuk-form-group"
 >
   <label
+    class="govuk-label govuk-label--s"
     id="undefined-label"
-  >
-    <span
-      class="form-label-bold"
-    />
-  </label>
+  />
   <textarea
-    class="form-control form-control-3-4 "
+    class="govuk-textarea form-control-3-4 "
     rows="5"
   />
 </div>
@@ -57,22 +48,19 @@ exports[`Form text area component should render with default props 1`] = `
 
 exports[`Form text area component should render with error when passed 1`] = `
 <div
-  class="form-group form-group-error"
+  class="govuk-form-group govuk-form-group--error"
 >
   <label
+    class="govuk-label govuk-label--s"
     id="undefined-label"
+  />
+  <span
+    class="govuk-error-message"
   >
-    <span
-      class="form-label-bold"
-    />
-    <span
-      class="error-message"
-    >
-      Some error message
-    </span>
-  </label>
+    Some error message
+  </span>
   <textarea
-    class="form-control form-control-3-4 form-control-error"
+    class="govuk-textarea form-control-3-4 govuk-textarea--error"
     rows="5"
   />
 </div>
@@ -80,22 +68,19 @@ exports[`Form text area component should render with error when passed 1`] = `
 
 exports[`Form text area component should render with hint when passed 1`] = `
 <div
-  class="form-group"
+  class="govuk-form-group"
 >
   <label
+    class="govuk-label govuk-label--s"
     id="undefined-label"
+  />
+  <span
+    class="govuk-hint"
   >
-    <span
-      class="form-label-bold"
-    />
-    <span
-      class="form-hint"
-    >
-      Put some text in the box below
-    </span>
-  </label>
+    Put some text in the box below
+  </span>
   <textarea
-    class="form-control form-control-3-4 "
+    class="govuk-textarea form-control-3-4 "
     rows="5"
   />
 </div>
@@ -103,19 +88,16 @@ exports[`Form text area component should render with hint when passed 1`] = `
 
 exports[`Form text area component should render with label when passed 1`] = `
 <div
-  class="form-group"
+  class="govuk-form-group"
 >
   <label
+    class="govuk-label govuk-label--s"
     id="undefined-label"
   >
-    <span
-      class="form-label-bold"
-    >
-      My text field
-    </span>
+    My text field
   </label>
   <textarea
-    class="form-control form-control-3-4 "
+    class="govuk-textarea form-control-3-4 "
     rows="5"
   />
 </div>
@@ -123,17 +105,14 @@ exports[`Form text area component should render with label when passed 1`] = `
 
 exports[`Form text area component should render with value when passed 1`] = `
 <div
-  class="form-group"
+  class="govuk-form-group"
 >
   <label
+    class="govuk-label govuk-label--s"
     id="undefined-label"
-  >
-    <span
-      class="form-label-bold"
-    />
-  </label>
+  />
   <textarea
-    class="form-control form-control-3-4 "
+    class="govuk-textarea form-control-3-4 "
     rows="5"
   >
     field value

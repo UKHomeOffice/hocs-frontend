@@ -2,7 +2,7 @@
 
 exports[`Form button component should render disabled when isDisabled is passed 1`] = `
 <input
-  class="button"
+  class="govuk-button"
   type="submit"
   value="Submit"
 />
@@ -10,7 +10,7 @@ exports[`Form button component should render disabled when isDisabled is passed 
 
 exports[`Form button component should render with additional styles when className is passed 1`] = `
 <input
-  class="button start"
+  class="govuk-button start"
   type="submit"
   value="Submit"
 />
@@ -18,7 +18,7 @@ exports[`Form button component should render with additional styles when classNa
 
 exports[`Form button component should render with correct when label is passed 1`] = `
 <input
-  class="button"
+  class="govuk-button"
   type="submit"
   value="Submit my form"
 />
@@ -26,7 +26,7 @@ exports[`Form button component should render with correct when label is passed 1
 
 exports[`Form button component should render with default props 1`] = `
 <input
-  class="button"
+  class="govuk-button"
   type="submit"
   value="Submit"
 />

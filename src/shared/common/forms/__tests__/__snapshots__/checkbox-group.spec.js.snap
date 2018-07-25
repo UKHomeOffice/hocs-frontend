@@ -2,62 +2,74 @@
 
 exports[`Form checkbox group component should render disabled when passed 1`] = `
 <div
-  class="form-group"
+  class="govuk-form-group"
 >
   <fieldset
+    class="govuk-fieldset "
     disabled=""
   >
     <legend
+      class="govuk-fieldset__legend"
       id="checkbox-group-legend"
     >
       <span
-        class="form-label-bold"
+        class="govuk-fieldset__heading govuk-label--s"
       />
     </legend>
     <div
-      class="multiple-choice"
+      class="govuk-checkboxes"
     >
-      <input
-        id="checkbox-group-A"
-        name="checkbox-group"
-        type="checkbox"
-        value="A"
-      />
-      <label
-        for="checkbox-group-A"
+      <div
+        class="govuk-checkboxes__item"
       >
-        isA
-      </label>
-    </div>
-    <div
-      class="multiple-choice"
-    >
-      <input
-        id="checkbox-group-B"
-        name="checkbox-group"
-        type="checkbox"
-        value="B"
-      />
-      <label
-        for="checkbox-group-B"
+        <input
+          class="govuk-checkboxes__input"
+          id="checkbox-group-A"
+          name="checkbox-group"
+          type="checkbox"
+          value="A"
+        />
+        <label
+          class="govuk-label govuk-checkboxes__label"
+          for="checkbox-group-A"
+        >
+          isA
+        </label>
+      </div>
+      <div
+        class="govuk-checkboxes__item"
       >
-        isB
-      </label>
-    </div>
-    <div
-      class="multiple-choice"
-    >
-      <input
-        id="checkbox-group-C"
-        name="checkbox-group"
-        type="checkbox"
-        value="C"
-      />
-      <label
-        for="checkbox-group-C"
+        <input
+          class="govuk-checkboxes__input"
+          id="checkbox-group-B"
+          name="checkbox-group"
+          type="checkbox"
+          value="B"
+        />
+        <label
+          class="govuk-label govuk-checkboxes__label"
+          for="checkbox-group-B"
+        >
+          isB
+        </label>
+      </div>
+      <div
+        class="govuk-checkboxes__item"
       >
-        isC
-      </label>
+        <input
+          class="govuk-checkboxes__input"
+          id="checkbox-group-C"
+          name="checkbox-group"
+          type="checkbox"
+          value="C"
+        />
+        <label
+          class="govuk-label govuk-checkboxes__label"
+          for="checkbox-group-C"
+        >
+          isC
+        </label>
+      </div>
     </div>
   </fieldset>
 </div>
@@ -65,60 +77,73 @@ exports[`Form checkbox group component should render disabled when passed 1`] = 
 
 exports[`Form checkbox group component should render with default props 1`] = `
 <div
-  class="form-group"
+  class="govuk-form-group"
 >
-  <fieldset>
+  <fieldset
+    class="govuk-fieldset "
+  >
     <legend
+      class="govuk-fieldset__legend"
       id="checkbox-group-legend"
     >
       <span
-        class="form-label-bold"
+        class="govuk-fieldset__heading govuk-label--s"
       />
     </legend>
     <div
-      class="multiple-choice"
+      class="govuk-checkboxes"
     >
-      <input
-        id="checkbox-group-A"
-        name="checkbox-group"
-        type="checkbox"
-        value="A"
-      />
-      <label
-        for="checkbox-group-A"
+      <div
+        class="govuk-checkboxes__item"
       >
-        isA
-      </label>
-    </div>
-    <div
-      class="multiple-choice"
-    >
-      <input
-        id="checkbox-group-B"
-        name="checkbox-group"
-        type="checkbox"
-        value="B"
-      />
-      <label
-        for="checkbox-group-B"
+        <input
+          class="govuk-checkboxes__input"
+          id="checkbox-group-A"
+          name="checkbox-group"
+          type="checkbox"
+          value="A"
+        />
+        <label
+          class="govuk-label govuk-checkboxes__label"
+          for="checkbox-group-A"
+        >
+          isA
+        </label>
+      </div>
+      <div
+        class="govuk-checkboxes__item"
       >
-        isB
-      </label>
-    </div>
-    <div
-      class="multiple-choice"
-    >
-      <input
-        id="checkbox-group-C"
-        name="checkbox-group"
-        type="checkbox"
-        value="C"
-      />
-      <label
-        for="checkbox-group-C"
+        <input
+          class="govuk-checkboxes__input"
+          id="checkbox-group-B"
+          name="checkbox-group"
+          type="checkbox"
+          value="B"
+        />
+        <label
+          class="govuk-label govuk-checkboxes__label"
+          for="checkbox-group-B"
+        >
+          isB
+        </label>
+      </div>
+      <div
+        class="govuk-checkboxes__item"
       >
-        isC
-      </label>
+        <input
+          class="govuk-checkboxes__input"
+          id="checkbox-group-C"
+          name="checkbox-group"
+          type="checkbox"
+          value="C"
+        />
+        <label
+          class="govuk-label govuk-checkboxes__label"
+          for="checkbox-group-C"
+        >
+          isC
+        </label>
+      </div>
     </div>
   </fieldset>
 </div>
@@ -126,65 +151,78 @@ exports[`Form checkbox group component should render with default props 1`] = `
 
 exports[`Form checkbox group component should render with error when passed 1`] = `
 <div
-  class="form-group form-group-error"
+  class="govuk-form-group govuk-form-group--error"
 >
-  <fieldset>
+  <fieldset
+    class="govuk-fieldset "
+  >
     <legend
+      class="govuk-fieldset__legend"
       id="checkbox-group-legend"
     >
       <span
-        class="form-label-bold"
+        class="govuk-fieldset__heading govuk-label--s"
       />
-      <span
-        class="error-message"
-      >
-        Some error message
-      </span>
     </legend>
-    <div
-      class="multiple-choice"
+    <span
+      class="govuk-error-message"
     >
-      <input
-        id="checkbox-group-A"
-        name="checkbox-group"
-        type="checkbox"
-        value="A"
-      />
-      <label
-        for="checkbox-group-A"
-      >
-        isA
-      </label>
-    </div>
+      Some error message
+    </span>
     <div
-      class="multiple-choice"
+      class="govuk-checkboxes"
     >
-      <input
-        id="checkbox-group-B"
-        name="checkbox-group"
-        type="checkbox"
-        value="B"
-      />
-      <label
-        for="checkbox-group-B"
+      <div
+        class="govuk-checkboxes__item"
       >
-        isB
-      </label>
-    </div>
-    <div
-      class="multiple-choice"
-    >
-      <input
-        id="checkbox-group-C"
-        name="checkbox-group"
-        type="checkbox"
-        value="C"
-      />
-      <label
-        for="checkbox-group-C"
+        <input
+          class="govuk-checkboxes__input"
+          id="checkbox-group-A"
+          name="checkbox-group"
+          type="checkbox"
+          value="A"
+        />
+        <label
+          class="govuk-label govuk-checkboxes__label"
+          for="checkbox-group-A"
+        >
+          isA
+        </label>
+      </div>
+      <div
+        class="govuk-checkboxes__item"
       >
-        isC
-      </label>
+        <input
+          class="govuk-checkboxes__input"
+          id="checkbox-group-B"
+          name="checkbox-group"
+          type="checkbox"
+          value="B"
+        />
+        <label
+          class="govuk-label govuk-checkboxes__label"
+          for="checkbox-group-B"
+        >
+          isB
+        </label>
+      </div>
+      <div
+        class="govuk-checkboxes__item"
+      >
+        <input
+          class="govuk-checkboxes__input"
+          id="checkbox-group-C"
+          name="checkbox-group"
+          type="checkbox"
+          value="C"
+        />
+        <label
+          class="govuk-label govuk-checkboxes__label"
+          for="checkbox-group-C"
+        >
+          isC
+        </label>
+      </div>
     </div>
   </fieldset>
 </div>
@@ -192,65 +230,78 @@ exports[`Form checkbox group component should render with error when passed 1`] 
 
 exports[`Form checkbox group component should render with hint when passed 1`] = `
 <div
-  class="form-group"
+  class="govuk-form-group"
 >
-  <fieldset>
+  <fieldset
+    class="govuk-fieldset "
+  >
     <legend
+      class="govuk-fieldset__legend"
       id="checkbox-group-legend"
     >
       <span
-        class="form-label-bold"
+        class="govuk-fieldset__heading govuk-label--s"
       />
-      <span
-        class="form-hint"
-      >
-        Put some text in the box below
-      </span>
     </legend>
-    <div
-      class="multiple-choice"
+    <span
+      class="govuk-form-hint"
     >
-      <input
-        id="checkbox-group-A"
-        name="checkbox-group"
-        type="checkbox"
-        value="A"
-      />
-      <label
-        for="checkbox-group-A"
-      >
-        isA
-      </label>
-    </div>
+      Put some text in the box below
+    </span>
     <div
-      class="multiple-choice"
+      class="govuk-checkboxes"
     >
-      <input
-        id="checkbox-group-B"
-        name="checkbox-group"
-        type="checkbox"
-        value="B"
-      />
-      <label
-        for="checkbox-group-B"
+      <div
+        class="govuk-checkboxes__item"
       >
-        isB
-      </label>
-    </div>
-    <div
-      class="multiple-choice"
-    >
-      <input
-        id="checkbox-group-C"
-        name="checkbox-group"
-        type="checkbox"
-        value="C"
-      />
-      <label
-        for="checkbox-group-C"
+        <input
+          class="govuk-checkboxes__input"
+          id="checkbox-group-A"
+          name="checkbox-group"
+          type="checkbox"
+          value="A"
+        />
+        <label
+          class="govuk-label govuk-checkboxes__label"
+          for="checkbox-group-A"
+        >
+          isA
+        </label>
+      </div>
+      <div
+        class="govuk-checkboxes__item"
       >
-        isC
-      </label>
+        <input
+          class="govuk-checkboxes__input"
+          id="checkbox-group-B"
+          name="checkbox-group"
+          type="checkbox"
+          value="B"
+        />
+        <label
+          class="govuk-label govuk-checkboxes__label"
+          for="checkbox-group-B"
+        >
+          isB
+        </label>
+      </div>
+      <div
+        class="govuk-checkboxes__item"
+      >
+        <input
+          class="govuk-checkboxes__input"
+          id="checkbox-group-C"
+          name="checkbox-group"
+          type="checkbox"
+          value="C"
+        />
+        <label
+          class="govuk-label govuk-checkboxes__label"
+          for="checkbox-group-C"
+        >
+          isC
+        </label>
+      </div>
     </div>
   </fieldset>
 </div>
@@ -258,62 +309,75 @@ exports[`Form checkbox group component should render with hint when passed 1`] =
 
 exports[`Form checkbox group component should render with label when passed 1`] = `
 <div
-  class="form-group"
+  class="govuk-form-group"
 >
-  <fieldset>
+  <fieldset
+    class="govuk-fieldset "
+  >
     <legend
+      class="govuk-fieldset__legend"
       id="checkbox-group-legend"
     >
       <span
-        class="form-label-bold"
+        class="govuk-fieldset__heading govuk-label--s"
       >
         My text field
       </span>
     </legend>
     <div
-      class="multiple-choice"
+      class="govuk-checkboxes"
     >
-      <input
-        id="checkbox-group-A"
-        name="checkbox-group"
-        type="checkbox"
-        value="A"
-      />
-      <label
-        for="checkbox-group-A"
+      <div
+        class="govuk-checkboxes__item"
       >
-        isA
-      </label>
-    </div>
-    <div
-      class="multiple-choice"
-    >
-      <input
-        id="checkbox-group-B"
-        name="checkbox-group"
-        type="checkbox"
-        value="B"
-      />
-      <label
-        for="checkbox-group-B"
+        <input
+          class="govuk-checkboxes__input"
+          id="checkbox-group-A"
+          name="checkbox-group"
+          type="checkbox"
+          value="A"
+        />
+        <label
+          class="govuk-label govuk-checkboxes__label"
+          for="checkbox-group-A"
+        >
+          isA
+        </label>
+      </div>
+      <div
+        class="govuk-checkboxes__item"
       >
-        isB
-      </label>
-    </div>
-    <div
-      class="multiple-choice"
-    >
-      <input
-        id="checkbox-group-C"
-        name="checkbox-group"
-        type="checkbox"
-        value="C"
-      />
-      <label
-        for="checkbox-group-C"
+        <input
+          class="govuk-checkboxes__input"
+          id="checkbox-group-B"
+          name="checkbox-group"
+          type="checkbox"
+          value="B"
+        />
+        <label
+          class="govuk-label govuk-checkboxes__label"
+          for="checkbox-group-B"
+        >
+          isB
+        </label>
+      </div>
+      <div
+        class="govuk-checkboxes__item"
       >
-        isC
-      </label>
+        <input
+          class="govuk-checkboxes__input"
+          id="checkbox-group-C"
+          name="checkbox-group"
+          type="checkbox"
+          value="C"
+        />
+        <label
+          class="govuk-label govuk-checkboxes__label"
+          for="checkbox-group-C"
+        >
+          isC
+        </label>
+      </div>
     </div>
   </fieldset>
 </div>
@@ -321,60 +385,73 @@ exports[`Form checkbox group component should render with label when passed 1`] 
 
 exports[`Form checkbox group component should render with value when passed 1`] = `
 <div
-  class="form-group"
+  class="govuk-form-group"
 >
-  <fieldset>
+  <fieldset
+    class="govuk-fieldset "
+  >
     <legend
+      class="govuk-fieldset__legend"
       id="checkbox-group-legend"
     >
       <span
-        class="form-label-bold"
+        class="govuk-fieldset__heading govuk-label--s"
       />
     </legend>
     <div
-      class="multiple-choice"
+      class="govuk-checkboxes"
     >
-      <input
-        id="checkbox-group-A"
-        name="checkbox-group"
-        type="checkbox"
-        value="A"
-      />
-      <label
-        for="checkbox-group-A"
+      <div
+        class="govuk-checkboxes__item"
       >
-        isA
-      </label>
-    </div>
-    <div
-      class="multiple-choice"
-    >
-      <input
-        id="checkbox-group-B"
-        name="checkbox-group"
-        type="checkbox"
-        value="B"
-      />
-      <label
-        for="checkbox-group-B"
+        <input
+          class="govuk-checkboxes__input"
+          id="checkbox-group-A"
+          name="checkbox-group"
+          type="checkbox"
+          value="A"
+        />
+        <label
+          class="govuk-label govuk-checkboxes__label"
+          for="checkbox-group-A"
+        >
+          isA
+        </label>
+      </div>
+      <div
+        class="govuk-checkboxes__item"
       >
-        isB
-      </label>
-    </div>
-    <div
-      class="multiple-choice"
-    >
-      <input
-        id="checkbox-group-C"
-        name="checkbox-group"
-        type="checkbox"
-        value="C"
-      />
-      <label
-        for="checkbox-group-C"
+        <input
+          class="govuk-checkboxes__input"
+          id="checkbox-group-B"
+          name="checkbox-group"
+          type="checkbox"
+          value="B"
+        />
+        <label
+          class="govuk-label govuk-checkboxes__label"
+          for="checkbox-group-B"
+        >
+          isB
+        </label>
+      </div>
+      <div
+        class="govuk-checkboxes__item"
       >
-        isC
-      </label>
+        <input
+          class="govuk-checkboxes__input"
+          id="checkbox-group-C"
+          name="checkbox-group"
+          type="checkbox"
+          value="C"
+        />
+        <label
+          class="govuk-label govuk-checkboxes__label"
+          for="checkbox-group-C"
+        >
+          isC
+        </label>
+      </div>
     </div>
   </fieldset>
 </div>
