@@ -1,15 +1,12 @@
 const caseCreate = require('./case-create.json');
 const addDocument = require('./document-add.json');
 const testForm = require('./case-test.json');
-const { CREATE_CASE, CREATE_BULK_CASE, ADD_DOCUMENT } = require('../actions/types');
+const { CREATE_CASE, BULK_CREATE_CASE, ADD_DOCUMENT } = require('../actions/types');
 
 const workflowDefinitions = {
-    // '/:workflow/:action'
-    // or
-    // /:workflow/:context/:action'
     ACTION: {
         CREATE: {
-            requiredRole: 'CREATE_CASE',
+            requiredRole: CREATE_CASE,
             WORKFLOW: {
                 schema: caseCreate,
                 next: {
@@ -31,7 +28,7 @@ const workflowDefinitions = {
             }
         },
         BULK: {
-            requiredRole: 'BULK_CREATE_CASE',
+            requiredRole: BULK_CREATE_CASE,
             WORKFLOW: {
                 schema: caseCreate,
                 next: {
@@ -43,25 +40,21 @@ const workflowDefinitions = {
             },
             DOCUMENT: {
                 schema: addDocument,
-                action: CREATE_BULK_CASE
+                action: BULK_CREATE_CASE
             }
         }
     },
-    // e.g /case/:caseId/:entity/:action
-    CASE: { // CONTEXT
-        DOCUMENT: { // Entity
-            ADD: { // Action
+    CASE: {
+        DOCUMENT: {
+            ADD: {
                 schema: addDocument,
                 action: ADD_DOCUMENT
             }
         }
     },
-    // e.g /case/:caseId/stage/:stageId
-    // or
-    // e.g /case/:caseId/stage/:stageId/:entity/:action
-    STAGE: { // CONTEXT
-        DOCUMENT: { // Entity
-            ADD: { // Action
+    STAGE: {
+        DOCUMENT: {
+            ADD: {
                 schema: addDocument,
                 action: ADD_DOCUMENT
             }

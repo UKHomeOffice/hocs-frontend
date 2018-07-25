@@ -13,9 +13,9 @@ exports[`Error component should render with a stack trace when passed 1`] = `
       <span
         class="govuk-caption-l"
       >
-        An error has occurred
+        Something has gone wrong
       </span>
-      Something has gone wrong
+      An error has occurred
     </h1>
     <details
       class="govuk-details"
@@ -57,10 +57,62 @@ exports[`Error component should render with default props 1`] = `
       <span
         class="govuk-caption-l"
       >
-        An error has occurred
+        Something has gone wrong
       </span>
-      Something has gone wrong
+      An error has occurred
     </h1>
+  </div>
+</div>
+`;
+
+exports[`Error component should render with location when 403 passed 1`] = `
+<div
+  class="govuk-grid-row"
+>
+  <div
+    class="govuk-grid-column-full"
+  >
+    <h1
+      class="govuk-heading-l"
+    >
+      <span
+        class="govuk-caption-l"
+      >
+        Something has gone wrong
+      </span>
+      An error has occurred
+    </h1>
+    <p>
+      <code>
+        /SOME/UNSUPPORTED/ENDPOINT
+      </code>
+    </p>
+  </div>
+</div>
+`;
+
+exports[`Error component should render with location when 404 passed 1`] = `
+<div
+  class="govuk-grid-row"
+>
+  <div
+    class="govuk-grid-column-full"
+  >
+    <h1
+      class="govuk-heading-l"
+    >
+      <span
+        class="govuk-caption-l"
+      >
+        Something has gone wrong
+      </span>
+      An error has occurred
+    </h1>
+    <p>
+      <code>
+        /SOME/UNSUPPORTED/ENDPOINT
+      </code>
+    </p>
   </div>
 </div>
 `;
@@ -78,9 +130,9 @@ exports[`Error component should render with location when passed 1`] = `
       <span
         class="govuk-caption-l"
       >
-        An error has occurred
+        Something has gone wrong
       </span>
-      Something has gone wrong
+      An error has occurred
     </h1>
   </div>
 </div>

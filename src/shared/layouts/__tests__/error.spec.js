@@ -17,6 +17,28 @@ describe('Error component', () => {
             render(<Error {...props} />)
         ).toMatchSnapshot();
     });
+    it('should render with location when 404 passed', () => {
+        const props = {
+            errorCode: 404,
+            location: {
+                pathname: '/SOME/UNSUPPORTED/ENDPOINT'
+            }
+        };
+        expect(
+            render(<Error {...props} />)
+        ).toMatchSnapshot();
+    });
+    it('should render with location when 403 passed', () => {
+        const props = {
+            errorCode: 403,
+            location: {
+                pathname: '/SOME/UNSUPPORTED/ENDPOINT'
+            }
+        };
+        expect(
+            render(<Error {...props} />)
+        ).toMatchSnapshot();
+    });
     it('should render with a stack trace when passed', () => {
         const props = {
             stack: 'Stack trace...'

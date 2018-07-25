@@ -50,15 +50,19 @@ function protectAction() {
     });
 */
 
-function protect(permission, { redirect }) {
+function protect(permission) {
     return (req, res, next) => {
         if (User.hasRole(req.user, permission)) {
             return next();
-        } else if (redirect) {
-            return res.redirect('/unauthorized');
         } else {
-            return res.status(403).send();
+            req.error = new ErrorModel({
+                status: 403,
+                title: 'Unauthorised',
+                summary: 'You do not have permission to access the requested page',
+                stackTrace: `Required role: ${permission}`
+            }).toJson();
         }
+        next();
     };
 }
 

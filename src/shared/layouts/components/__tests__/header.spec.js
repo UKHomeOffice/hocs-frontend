@@ -7,15 +7,10 @@ describe('Layout header component', () => {
             shallow(<Header />)
         ).toMatchSnapshot();
     });
-    it('should render the menu when passed', () => {
-        const props = {
-            menu: [
-                { label: 'first', target: '/' },
-                { label: 'second', target: '/' }
-            ]
-        };
+
+    it('should render without crest when service is not GOV.UK', () => {
         expect(
-            shallow(<Header {...props} />)
+            shallow(<Header service={'Test Service'}/>)
         ).toMatchSnapshot();
     });
 });

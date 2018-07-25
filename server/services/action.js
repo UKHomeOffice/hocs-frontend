@@ -1,6 +1,6 @@
 const logger = require('../libs/logger');
 const { workflowServiceClient } = require('../libs/request');
-const { CREATE_CASE, CREATE_BULK_CASE } = require('./actions/types');
+const { CREATE_CASE, BULK_CREATE_CASE } = require('./actions/types');
 
 function createDocumentSummaryObjects(form) {
     return form.schema.fields.reduce((reducer, field) => {
@@ -74,7 +74,7 @@ const actions = {
                 } catch (err) {
                     return handleActionFailure(err);
                 }
-            case CREATE_BULK_CASE: {
+            case BULK_CREATE_CASE: {
                 try {
                     await createCase('/case/bulk', { caseType: context, form });
                     return handleActionSuccess(workflow, form);

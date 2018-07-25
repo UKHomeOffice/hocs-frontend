@@ -1,4 +1,5 @@
-import { buildUserModel } from '../auth';
+import { buildUserModel, protect, protectAction } from '../auth';
+import User from '../../models/user';
 
 const mockHeaders = {
     'X-Auth-Token': 'token',
@@ -9,8 +10,7 @@ const mockHeaders = {
     'X-Auth-Email': 'test@email.com'
 };
 let req = null;
-const res = {
-};
+let res = null;
 
 describe('Authentication middleware', () => {
 
@@ -20,6 +20,7 @@ describe('Authentication middleware', () => {
                 return mockHeaders[header];
             }
         };
+        res = {};
     });
 
     it('should redirect when no X-Auth-Token', () => {
@@ -55,11 +56,73 @@ describe('Authentication middleware', () => {
         });
     });
 
-    it('should not redirect if already at unauthorised page', () => {
-        req.get = () => { };
-        req.originalUrl = '/unauthorised';
-        buildUserModel(req, res, () => {
-            expect(req.user).toBeUndefined();
+});
+
+describe('Protect middleware', () => {
+
+    beforeEach(() => {
+        req = {
+            user: new User({
+                roles:'TEST_ROLE'
+            })
+        };
+        res = {};
+    });
+
+    it('should call next when required role is on the user object', () => {
+        const protectMiddleware = protect('TEST_ROLE');
+        protectMiddleware(req, res, () => {
+            expect(req.error).toBeUndefined();
         });
     });
+
+    it('should create an instance of the Error model on the request object when required role is missing', () => {
+        const protectMiddleware = protect('SOME_UNDEFINED_ROLE');
+        protectMiddleware(req, res, () => {
+            expect(req.error).toBeDefined();
+            expect(req.error.errorCode).toEqual(403);
+        });
+    });
+
+});
+
+describe('Protect Action middleware', () => {
+
+    beforeEach(() => {
+        req = {
+            user: new User({
+                roles: 'TEST_ROLE'
+            })
+        };
+        res = {};
+    });
+
+    it('should call next when required role is on the user object', () => {
+        const protectMiddleware = protectAction();
+        req.form = {
+            requiredRole: 'TEST_ROLE'
+        };
+        protectMiddleware(req, res, () => {
+            expect(req.error).toBeUndefined();
+        });
+    });
+
+    it('should call next when no form is on the request object', () => {
+        const protectMiddleware = protectAction();
+        protectMiddleware(req, res, () => {
+            expect(req.error).toBeUndefined();
+        });
+    });
+
+    it('should create and instance of the Error model on the request object when required role is missing', () => {
+        const protectMiddleware = protectAction();
+        req.form = {
+            requiredRole: 'NOT_TEST_ROLE'
+        };
+        protectMiddleware(req, res, () => {
+            expect(req.error).toBeDefined();
+            expect(req.error.errorCode).toEqual(403);
+        });
+    });
+
 });

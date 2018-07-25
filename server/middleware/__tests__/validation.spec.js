@@ -1,4 +1,4 @@
-const validators = require('../validation.js').validators;
+const { validators } = require('../validation.js');
 
 describe('Validation methods', () => {
     describe('Required validator', () => {

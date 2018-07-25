@@ -1,23 +1,7 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 
 class Header extends Component {
-
-    static createMenu(menuItems) {
-        return (
-            <Fragment>
-                <label htmlFor="toggle-mobile-menu" aria-label="menu">Menu</label>
-                <input id="toggle-mobile-menu" type="checkbox" />
-                {
-                    menuItems.length && (
-                        <ul id="main-menu">
-                            {menuItems.map(i => <li key={i.label}><Link to={i.target}>{i.label}</Link></li>)}
-                        </ul>)
-                }
-            </Fragment>
-        );
-    }
 
     static createLogotype(service, serviceLink) {
         if (service !== 'GOV.UK') {
