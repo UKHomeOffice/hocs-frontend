@@ -1,5 +1,7 @@
 import actionModel from '../action';
 
+const mockRequestClient = jest.fn();
+
 jest.mock('../../libs/request', () => {
     function handleMockWorkflowCreateRequest(body) {
         if (body.type === 'SUPPORTED_CASETYPE')
@@ -10,14 +12,29 @@ jest.mock('../../libs/request', () => {
     return {
         workflowServiceClient: {
             post: (url, body) => {
-                if (url === '/case')
+                if (url === '/case') {
+                    mockRequestClient(body);
                     return handleMockWorkflowCreateRequest(body);
-                if (url === '/case/bulk')
+                }
+                if (url === '/case/bulk') {
+                    mockRequestClient(body);
                     return handleMockWorkflowCreateRequest(body);
+                }
             }
         }
     };
 });
+
+const createCaseRequest = {
+    type: 'SUPPORTED_CASETYPE',
+    documents: [
+        {
+            displayName: 'test_document.txt',
+            type: 'ORIGINAL',
+            s3UntrustedUrl: '/location/to/the/file'
+        }
+    ]
+};
 
 const testCreateCaseForm = {
     schema: {
@@ -25,7 +42,8 @@ const testCreateCaseForm = {
             {
                 component: 'add-document',
                 props: {
-                    name: 'document_field'
+                    name: 'document_field',
+                    documentType: 'ORIGINAL'
                 }
             }
         ]
@@ -34,7 +52,6 @@ const testCreateCaseForm = {
         document_field: [
             {
                 originalname: 'test_document.txt',
-                type: 'ORIGINAL',
                 location: '/location/to/the/file'
             }
         ]
@@ -42,6 +59,9 @@ const testCreateCaseForm = {
 };
 
 describe('Action model', () => {
+    beforeEach(() => {
+        mockRequestClient.mockReset();
+    });
     it('should return a callback url when passed supported workflow and action', async () => {
         const response = await actionModel.performAction('ACTION', {
             workflow: 'CREATE',
@@ -51,6 +71,7 @@ describe('Action model', () => {
         });
 
         expect(response).toBeDefined();
+        expect(mockRequestClient).toHaveBeenCalledTimes(0);
         expect(response).toHaveProperty('callbackUrl', '/');
     });
 
@@ -63,7 +84,8 @@ describe('Action model', () => {
             context: 'SUPPORTED_CASETYPE',
             form: testForm
         });
-
+        expect(mockRequestClient).toHaveBeenCalledTimes(1);
+        expect(mockRequestClient).toHaveBeenCalledWith(createCaseRequest);
         expect(response).toBeDefined();
         expect(response).toHaveProperty('callbackUrl', '/');
     });
@@ -77,7 +99,9 @@ describe('Action model', () => {
             context: 'UNSUPPORTED_CASETYPE',
             form: testForm
         });
-
+        expect(mockRequestClient).toHaveBeenCalledTimes(1);
+        const unsupportedCasetypeCreateCaseRequest = { ...createCaseRequest, type: 'UNSUPPORTED_CASETYPE' };
+        expect(mockRequestClient).toHaveBeenCalledWith(unsupportedCasetypeCreateCaseRequest);
         expect(response).toBeDefined();
         expect(response).toHaveProperty('error');
     });
@@ -91,7 +115,8 @@ describe('Action model', () => {
             context: 'SUPPORTED_CASETYPE',
             form: testForm
         });
-
+        expect(mockRequestClient).toHaveBeenCalledTimes(1);
+        expect(mockRequestClient).toHaveBeenCalledWith(createCaseRequest);
         expect(response).toBeDefined();
         expect(response).toHaveProperty('callbackUrl', '/');
     });
@@ -105,7 +130,9 @@ describe('Action model', () => {
             context: 'UNSUPPORTED_CASETYPE',
             form: testForm
         });
-
+        expect(mockRequestClient).toHaveBeenCalledTimes(1);
+        const unsupportedCasetypeCreateCaseRequest = { ...createCaseRequest, type: 'UNSUPPORTED_CASETYPE' };
+        expect(mockRequestClient).toHaveBeenCalledWith(unsupportedCasetypeCreateCaseRequest);
         expect(response).toBeDefined();
         expect(response).toHaveProperty('error');
     });
@@ -119,7 +146,7 @@ describe('Action model', () => {
                 action: 'SOME_RANDOM_ACTION'
             },
         });
-
+        expect(mockRequestClient).toHaveBeenCalledTimes(0);
         expect(response).toBeDefined();
         expect(response).toHaveProperty('error');
     });
