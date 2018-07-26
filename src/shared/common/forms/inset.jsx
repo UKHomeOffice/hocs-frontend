@@ -6,18 +6,17 @@ export default class Inset extends Component {
      *  Bordered inset text to draw attention to important content on the page.
      */
     render() {
-        const { content } = this.props;
+        const { children } = this.props;
 
         return (
-            <p className="govuk-inset-text">{content}</p>
+            <p className="govuk-inset-text">{children}</p>
         );
     }
 }
 
 Inset.propTypes = {
-    content: PropTypes.string
+    children: PropTypes.node
 };
 
 Inset.defaultProps = {
-    content: ''
 };

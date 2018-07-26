@@ -1,0 +1,106 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Form button component should render disabled when isDisabled is passed 1`] = `
+<Button
+  action="/SOME/URL"
+  disabled={true}
+  dispatch={[MockFunction]}
+  label="Submit"
+>
+  <Link
+    className="govuk-button"
+    disabled={true}
+    onClick={[Function]}
+    replace={false}
+    to="/SOME/URL"
+  >
+    <a
+      className="govuk-button"
+      disabled={true}
+      href="/SOME/URL"
+      onClick={[Function]}
+    >
+      Submit
+    </a>
+  </Link>
+</Button>
+`;
+
+exports[`Form button component should render with additional styles when className is passed 1`] = `
+<Button
+  action="/SOME/URL"
+  className="test-class"
+  disabled={false}
+  dispatch={[MockFunction]}
+  label="Submit"
+>
+  <Link
+    className="govuk-button test-class"
+    disabled={false}
+    onClick={[Function]}
+    replace={false}
+    to="/SOME/URL"
+  >
+    <a
+      className="govuk-button test-class"
+      disabled={false}
+      href="/SOME/URL"
+      onClick={[Function]}
+    >
+      Submit
+    </a>
+  </Link>
+</Button>
+`;
+
+exports[`Form button component should render with correct label when passed 1`] = `
+<Button
+  action="/SOME/URL"
+  disabled={false}
+  dispatch={[MockFunction]}
+  label="My Button"
+>
+  <Link
+    className="govuk-button"
+    disabled={false}
+    onClick={[Function]}
+    replace={false}
+    to="/SOME/URL"
+  >
+    <a
+      className="govuk-button"
+      disabled={false}
+      href="/SOME/URL"
+      onClick={[Function]}
+    >
+      My Button
+    </a>
+  </Link>
+</Button>
+`;
+
+exports[`Form button component should render with default props 1`] = `
+<Button
+  action="/SOME/URL"
+  disabled={false}
+  dispatch={[MockFunction]}
+  label="Submit"
+>
+  <Link
+    className="govuk-button"
+    disabled={false}
+    onClick={[Function]}
+    replace={false}
+    to="/SOME/URL"
+  >
+    <a
+      className="govuk-button"
+      disabled={false}
+      href="/SOME/URL"
+      onClick={[Function]}
+    >
+      Submit
+    </a>
+  </Link>
+</Button>
+`;

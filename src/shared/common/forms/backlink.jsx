@@ -13,7 +13,8 @@ class BackLink extends Component {
 
     render() {
         const {
-            to,
+            action,
+            disabled,
             className,
             label
         } = this.props;
@@ -21,11 +22,11 @@ class BackLink extends Component {
             <p>
                 <Fragment>
                     <Link
-                        className={`govuk-back-link ${className ? ' ' + className : ''}`}
-                        to={to}
+                        className={`govuk-back-link${className ? ' ' + className : ''}`}
+                        disabled={disabled}
+                        to={action}
                         onClick={e => this.handleClick(e)}
                     >{label}</Link>
-
                 </Fragment>
             </p>
         );
@@ -33,15 +34,16 @@ class BackLink extends Component {
 }
 
 BackLink.propTypes = {
-    to: PropTypes.string.isRequired,
+    action: PropTypes.string.isRequired,
     className: PropTypes.string,
+    disabled: PropTypes.bool,
     dispatch: PropTypes.func.isRequired,
     label: PropTypes.string
 };
 
 BackLink.defaultProps = {
     disabled: false,
-    to: '/',
+    action: '/',
     label: 'Back'
 };
 
