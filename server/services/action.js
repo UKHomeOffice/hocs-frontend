@@ -45,9 +45,9 @@ function handleActionSuccess(workflow, form) {
     }
 }
 
-function handleWorkflowSuccess(response, { stageId, caseId }, callback) {
+function handleWorkflowSuccess(response, { caseId, stageId }) {
     if (response.data && response.data.screenName !== 'FINISH') {
-        return callback(null, `/stage/${stageId}/case/${caseId}`);
+        return { callbackUrl: `/case/${caseId}/stage/${stageId}` };
     } else {
         return { callbackUrl: '/' };
     }
@@ -103,7 +103,7 @@ const actions = {
 
         try {
             const response = await updateCase({ caseId, stageId, form });
-            return handleWorkflowSuccess(response, { stageId, caseId });
+            return handleWorkflowSuccess(response, { caseId, stageId });
         } catch (err) {
             return handleWorkflowError(err);
         }
