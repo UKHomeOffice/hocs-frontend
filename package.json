@@ -22,6 +22,7 @@
     "moduleNameMapper": {
       "\\.(css|less|scss|sass)$": "identity-obj-proxy"
     },
+    "testPathIgnorePatterns": ["\\.spec.utils.(js|jsx)$"],
     "collectCoverage": true,
     "collectCoverageFrom": ["src/**/*.{js,jsx}", "server/**/*.js"]
   },

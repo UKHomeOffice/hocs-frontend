@@ -1,29 +1,17 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import ErrorSummary from './error-summary.jsx';
-import Text from './text.jsx';
-import Radio from './radio-group.jsx';
-import DateInput from './date.jsx';
-import Checkbox from './checkbox-group.jsx';
 import Submit from './submit.jsx';
-import TextArea from './text-area.jsx';
-import AddDocument from './composite/document-add.jsx';
-import EntityList from './composite/entity-list.jsx';
-import Button from './button.jsx';
-import BackLink from './backlink.jsx';
-import Paragraph from './paragraph.jsx';
-import Inset from './inset.jsx';
+import ErrorSummary from './error-summary.jsx';
+import { formComponentFactory, secondaryActionFactory } from './form-repository.jsx';
 import { ApplicationConsumer } from '../../contexts/application.jsx';
 import { redirect, updateForm, updateFormData, updateFormErrors, setError } from '../../contexts/actions/index.jsx';
-import Dropdown from './dropdown.jsx';
-import Panel from './panel.jsx';
 
 class Form extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = { ...props.data };
     }
 
     updateFormState(data) {
@@ -65,95 +53,11 @@ class Form extends Component {
             });
     }
 
-    renderFormComponent(field, i) {
-        switch (field.component) {
-        case 'radio':
-            return <Radio key={i}
-                {...field.props}
-                error={this.props.errors && this.props.errors[field.props.name]}
-                value={this.props.data && this.props.data[field.props.name]}
-                updateState={data => this.updateFormState(data)} />;
-        case 'text':
-            return <Text key={i}
-                {...field.props}
-                error={this.props.errors && this.props.errors[field.props.name]}
-                value={this.props.data && this.props.data[field.props.name]}
-                updateState={data => this.updateFormState(data)} />;
-        case 'date':
-            return <DateInput key={i}
-                {...field.props}
-                error={this.props.errors && this.props.errors[field.props.name]}
-                value={this.props.data && this.props.data[field.props.name]}
-                updateState={data => this.updateFormState(data)} />;
-        case 'checkbox':
-            return <Checkbox key={i}
-                {...field.props}
-                error={this.props.errors && this.props.errors[field.props.name]}
-                // TODO: implement value={}
-                updateState={data => this.updateFormState(data)} />;
-        case 'text-area':
-            return <TextArea key={i}
-                {...field.props}
-                error={this.props.errors && this.props.errors[field.props.name]}
-                value={this.props.data && this.props.data[field.props.name]}
-                updateState={data => this.updateFormState(data)} />;
-        case 'dropdown':
-            return <Dropdown key={i}
-                {...field.props}
-                error={this.props.errors && this.props.errors[field.props.name]}
-                value={this.props.data && this.props.data[field.props.name]}
-                updateState={data => this.updateFormState(data)} />;
-        case 'button':
-            return <Button key={i}
-                {...field.props} />;
-        case 'add-document':
-            return <AddDocument key={i}
-                {...field.props}
-                error={this.props.errors && this.props.errors[field.props.name]}
-                updateState={data => this.updateFormState(data)} />;
-        case 'entity-list':
-            return <EntityList
-                key={i}
-                {...field.props}
-                error={this.props.errors && this.props.errors[field.props.name]}
-                value={this.props.data && this.props.data[field.props.name]}
-                updateState={data => this.updateFormState(data)}
-                // TODO: Use real caseId from Form.Meta object
-                actionUrl={'/'} />;
-        // Non-form elements:
-        case 'backlink':
-            return <BackLink key={i}
-                {...field.props} />;
-        case 'heading':
-            return <h2 key={i} className="heading-medium">{field.props.label}</h2>;
-        case 'panel':
-            return <Panel key={i}
-                {...field.props} />;
-        case 'inset':
-            return <Inset key={i}
-                {...field.props} />;
-        case 'paragraph':
-            return <Paragraph key={i}
-                {...field.props} />;
-
-        }
-    }
-
-    renderSecondaryAction(field, i) {
-        switch (field.component) {
-        // Whitelist of boring elements that are allowed to be below the "submit" button
-        case 'backlink':
-        case 'button':
-            return this.renderFormComponent(field, i);
-        default:
-            return null;
-        }
-    }
-
     render() {
         const {
             action,
             children,
+            data,
             errors,
             method,
             schema
@@ -168,12 +72,24 @@ class Form extends Component {
                     encType="multipart/form-data"
                 >
                     {children}
-                    {schema && schema.fields.map((field, i) => {
-                        return this.renderFormComponent(field, i);
+                    {schema && schema.fields && schema.fields.map((field, key) => {
+                        return formComponentFactory(field.component, {
+                            key,
+                            config: field.props,
+                            data,
+                            errors,
+                            callback: this.updateFormState.bind(this)
+                        });
                     })}
                     <Submit label={schema.defaultActionLabel} />
-                    {schema && schema.secondaryActions && schema.secondaryActions.map((field, i) => {
-                        return this.renderSecondaryAction(field, i);
+                    {schema && schema.secondaryActions && schema.secondaryActions.map((field, key) => {
+                        return secondaryActionFactory(field.component, {
+                            key,
+                            config: field.props,
+                            data,
+                            errors,
+                            callback: this.updateFormState.bind(this)
+                        });
                     })}
                 </form>
             </Fragment>
