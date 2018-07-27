@@ -24,6 +24,7 @@ const supportedFormComponents = [
     { component: 'paragraph', props: { name: 'paragraph' } },
 ];
 
+/* eslint-disable-next-line */
 const testData = {
     'text-component': 'TEST',
     'radio-component': 'A',
