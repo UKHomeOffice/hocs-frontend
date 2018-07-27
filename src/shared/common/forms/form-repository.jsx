@@ -13,11 +13,21 @@ import Inset from './inset.jsx';
 import Dropdown from './dropdown.jsx';
 import Panel from './panel.jsx';
 
+function defaultDataAdapter(name, data) {
+    return data[name];
+}
+
+function checkboxDataAdapter(name, data) {
+    return Object.entries(data)
+        .filter(e => e.key.startsWith(name) && e.value === true)
+        .reduce((acc, e) => acc.push(e.value), []);
+}
+
 function renderFormComponent(Component, options) {
     const { key, config, data, errors, callback, dataAdapter } = options;
     let value = null;
     if (data) {
-        value = dataAdapter ? dataAdapter(data) : data[config.name];
+        value = dataAdapter ? dataAdapter(data) : defaultDataAdapter(config.name, data);
     }
     return <Component key={key}
         {...config}
@@ -36,7 +46,7 @@ export function formComponentFactory(field, options) {
     case 'date':
         return renderFormComponent(DateInput, { key, config, data, errors, callback });
     case 'checkbox':
-        return renderFormComponent(Checkbox, { key, config, data, errors, callback });
+        return renderFormComponent(Checkbox, { key, config, data, errors, callback, dataAdapter: checkboxDataAdapter });
     case 'text-area':
         return renderFormComponent(TextArea, { key, config, data, errors, callback });
     case 'dropdown':
@@ -56,7 +66,7 @@ export function formComponentFactory(field, options) {
     case 'heading':
         return (
             <h2 key={key} className="heading-medium">
-                {field.props.label}
+                {config.label}
             </h2>
         );
     case 'panel':
