@@ -40,13 +40,6 @@ export function unsetForm() {
     };
 }
 
-export function setPhase(phase) {
-    return {
-        type: types.SET_PHASE,
-        payload: phase
-    };
-}
-
 export function updateLocation(location) {
     return {
         type: types.UPDATE_LOCATION,

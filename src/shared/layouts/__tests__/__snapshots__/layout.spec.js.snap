@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Page layout component should render with children when passed 1`] = `<[object Object] />`;
-
-exports[`Page layout component should render with default props 1`] = `<[object Object] />`;
-
-exports[`Page layout component should render with footer when set 1`] = `<[object Object] />`;

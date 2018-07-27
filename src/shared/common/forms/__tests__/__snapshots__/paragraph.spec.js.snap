@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Paragraph component should render with content when passed 1`] = `
+<p
+  class="govuk-body"
+>
+  Testing the Paragraph component
+</p>
+`;
+
+exports[`Paragraph component should render with default props 1`] = `
+<p
+  class="govuk-body"
+/>
+`;

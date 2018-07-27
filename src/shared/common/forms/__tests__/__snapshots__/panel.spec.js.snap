@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Panel component should render with content when passed 1`] = `
+<div
+  class="govuk-panel govuk-panel--confirmation"
+>
+  <h1
+    class="govuk-panel__title"
+  />
+  <div
+    class="govuk-panel__body"
+  >
+    Testing the Panel component
+  </div>
+</div>
+`;
+
+exports[`Panel component should render with default props 1`] = `
+<div
+  class="govuk-panel govuk-panel--confirmation"
+>
+  <h1
+    class="govuk-panel__title"
+  />
+  <div
+    class="govuk-panel__body"
+  />
+</div>
+`;
+
+exports[`Panel component should render with title when passed 1`] = `
+<div
+  class="govuk-panel govuk-panel--confirmation"
+>
+  <h1
+    class="govuk-panel__title"
+  >
+    Testing
+  </h1>
+  <div
+    class="govuk-panel__body"
+  >
+    Testing the Panel component
+  </div>
+</div>
+`;

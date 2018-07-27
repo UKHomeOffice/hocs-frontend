@@ -17,7 +17,6 @@ class Dropdown extends Component {
     handleChange(e) {
         this.setState({ value: e.target.value });
         this.props.updateState({ [this.props.name]: e.target.value });
-        e.preventDefault();
     }
 
     render() {

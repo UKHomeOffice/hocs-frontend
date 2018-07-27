@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { ApplicationConsumer } from '../../contexts/application.jsx';
 import { cancel } from '../../contexts/actions/index.jsx';
 
-class Submit extends Component {
+class Button extends Component {
 
     handleClick(e) {
         e.preventDefault();
@@ -31,7 +31,7 @@ class Submit extends Component {
     }
 }
 
-Submit.propTypes = {
+Button.propTypes = {
     action: PropTypes.string.isRequired,
     className: PropTypes.string,
     disabled: PropTypes.bool,
@@ -39,14 +39,14 @@ Submit.propTypes = {
     label: PropTypes.string
 };
 
-Submit.defaultProps = {
+Button.defaultProps = {
     disabled: false,
     label: 'Submit'
 };
 
 const WrappedButton = props => (
     <ApplicationConsumer>
-        {({ dispatch }) => <Submit {...props} dispatch={dispatch} />}
+        {({ dispatch }) => <Button {...props} dispatch={dispatch} />}
     </ApplicationConsumer>
 );
 

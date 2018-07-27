@@ -3,19 +3,14 @@ import PropTypes from 'prop-types';
 
 export default class Paragraph extends Component {
     render() {
-        const { content } = this.props;
+        const { children } = this.props;
 
         return (
-            <p className="govuk-body">{content}</p>
+            <p className="govuk-body">{children}</p>
         );
     }
 }
 
 Paragraph.propTypes = {
-    content: PropTypes.string,
-    phase: PropTypes.string
-};
-
-Paragraph.defaultProps = {
-    content: ''
+    children: PropTypes.node
 };

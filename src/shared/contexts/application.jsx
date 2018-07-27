@@ -28,24 +28,12 @@ const reducer = (state, action) => {
                 ...state.form, errors: action.payload
             }
         };
-    case types.SET_PHASE:
-        return {
-            ...state, layout: {
-                ...state.layout,
-                body: {
-                    ...state.layout.body,
-                    phaseBanner: {
-                        ...state.layout.body.phaseBanner, phase: action.payload
-                    }
-                }
-            }
-        };
     case types.UPDATE_LOCATION:
         return { ...state, location: action.payload };
     case types.CANCEL:
         return { ...state, redirect: '/', form: null };
     case types.REDIRECT:
-        return { ...state, redirect: action.payload };
+        return { ...state, redirect: action.payload, form: null };
     case types.REDIRECTED:
         return { ...state, redirect: null };
     case types.SET_ERROR:
@@ -53,7 +41,7 @@ const reducer = (state, action) => {
     case types.UNSET_ERROR:
         return { ...state, error: null };
     case types.UNSET_FORM:
-        return { ...state, form: { schema: null, data: null, errors: null } };
+        return { ...state, form: null };
     default:
         /* eslint-disable-next-line  no-console*/
         console.warn('Unsupported action');

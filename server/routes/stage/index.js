@@ -13,7 +13,7 @@ router.post('/:caseId/stage/:stageId', async (req, res, next) => {
     }
     const { caseId, stageId } = req.params;
     const { form, user } = req;
-    const response = actionService.performAction('WORKFLOW', { caseId, stageId, form, user });
+    const response = await actionService.performAction('WORKFLOW', { caseId, stageId, form, user });
     const { error, callbackUrl } = response;
     if (error) {
         req.error = new ErrorModel({
