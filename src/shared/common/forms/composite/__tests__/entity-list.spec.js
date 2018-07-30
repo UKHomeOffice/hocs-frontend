@@ -37,7 +37,7 @@ describe('Document add component', () => {
     });
 
     it('should render with correct label when passed', () => {
-        const label = 'MY_LABEL'
+        const label = 'MY_LABEL';
         const wrapper = mount(<EntityList name={FIELD_NAME} updateState={() => null} label={label}/>);
         expect(wrapper).toBeDefined();
         expect(wrapper.find('EntityList').props().label).toEqual(label);
