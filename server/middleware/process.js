@@ -1,63 +1,75 @@
 const logger = require('../libs/logger');
+const ErrorModel = require('../models/error');
 
-const processDate = ({ year, month, day }) => {
-    if (year && month && day) {
-        return `${year}-${month}-${day}`;
-    } else {
-        return null;
-    }
-};
-
-const processCheckbox = (name, value, choices) => {
-    let selected = [];
-    const processed = {};
-    if (!Array.isArray(value)) {
-        selected.push(value);
-    } else {
-        selected = value;
-    }
-    choices.map(choice => {
-        processed[`${name}${choice.value}`] = selected.includes(choice.value);
-    });
-    return processed;
-};
-
-const process = (req, res, next) => {
-    logger.debug('PROCESS MIDDLEWARE');
-    const { noScript = false } = req.query;
-    res.noScript = noScript;
-    const data = req.body;
-    const { schema } = req.form;
-    const fields = schema.fields.filter(field => field.type !== 'display');
-    req.form.data = fields.reduce((reducer, field) => {
+const customAdapters = {
+    'date': (reducer, field, data) => {
         const { name } = field.props;
-        const component = field.component;
-        switch (component) {
-        case 'date':
-            reducer[name] = processDate({
-                year: data[`${name}-year`],
-                month: data[`${name}-month`],
-                day: data[`${name}-day`]
-            });
-            break;
-        case 'checkbox':
-            reducer = Object.assign({}, reducer, processCheckbox(name, data[name], field.props.choices));
-            break;
-        case 'add-document':
-            if (req.files.length === 0) {
-                reducer[name] = null;
-            } else {
-                reducer[name] = req.files.filter(f => f.fieldname.indexOf(name) === 0);
-                logger.debug(`Successfully attached ${reducer[name].length} documents to ${name}`);
-            }
-            break;
-        default:
-            reducer[name] = data[name] || null;
+        const date = {
+            year: data[`${name}-year`],
+            month: data[`${name}-month`],
+            day: data[`${name}-day`],
+        };
+        if (date.year && date.month && date.day) {
+            reducer[name] = `${date.year}-${date.month}-${date.day}`;
+        } else {
+            reducer[name] = null;
         }
-        return reducer;
-    }, {});
-    logger.debug(`PROCESS DATA: ${JSON.stringify(req.form.data)}`);
-    next();
+    },
+    'checkbox': (reducer, field, data) => {
+        const { name, choices } = field.props;
+        let selected = [];
+        const value = data[name];
+        if (!Array.isArray(value)) {
+            selected.push(value);
+        } else {
+            selected = value;
+        }
+        choices.map(choice => {
+            reducer[`${name}-${choice.value}`] = selected.includes(choice.value);
+        });
+    },
+    'add-document': (reducer, field, data, req) => {
+        const { name } = field.props;
+        if (req.files && req.files.length === 0) {
+            reducer[name] = null;
+        } else {
+            reducer[name] = req.files.filter(f => f.fieldname.startsWith(name));
+            logger.debug(`Successfully attached ${reducer[name].length} documents to ${name}`);
+        }
+    },
 };
+
+function defaultAdapter(reducer, field, data) {
+    const { name } = field.props;
+    reducer[name] = data[name] || null;
+}
+
+function process(req, res, next) {
+    logger.debug('PROCESS MIDDLEWARE');
+    res.noScript = req.query && req.query.noScript;
+    try {
+        const data = req.body;
+        const { schema } = req.form;
+        req.form.data = schema.fields
+            .filter(field => field.type !== 'display')
+            .reduce((reducer, field) => {
+                const component = field.component;
+                if (customAdapters.hasOwnProperty(component)) {
+                    customAdapters[component].call(this, reducer, field, data, req);
+                } else {
+                    defaultAdapter(reducer, field, data);
+                }
+                return reducer;
+            }, {});
+    } catch (error) {
+        req.error = new ErrorModel({
+            status: 500,
+            title: 'Server error',
+            summary: 'Unable to process form data',
+            stackTrace: error.stack
+        }).toJson();
+    }
+    next();
+}
 
 module.exports = process;

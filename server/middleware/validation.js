@@ -40,9 +40,7 @@ const validators = {
     },
     hasWhitelistedExtension: (files) => {
         if (files && files.length > 0) {
-
             const allowableExtensions = DOCUMENT_WHITELIST;
-
             for (let file of files) {
                 let fileExtension = file.originalname.split('.').slice(-1)[0];
                 logger.debug('Validating extension: ' + fileExtension);
@@ -54,43 +52,46 @@ const validators = {
                 logger.debug('Accepting extension: ' + fileExtension);
             }
         }
-        // no files to check:
         return null;
     }
 };
 
-const validation = (req, res, next) => {
+function validation(req, res, next) {
     logger.debug('VALIDATION MIDDLEWARE');
     if (req.form) {
-        const { data, schema } = req.form;
-        req.form.errors = schema.fields
-            .filter(field => field.type !== 'display')
-            .reduce((result, field) => {
-                const { validation, props: { name } } = field;
-                const value = data[name];
-                if (validation) {
-                    validation.map(validator => {
-                        try {
-                            const validationError = validators[validator].call(this, value);
-                            if (validationError) {
-                                result[field.props.name] = `${field.props.label} ${validationError}`;
+        try {
+            const { data, schema } = req.form;
+            req.form.errors = schema.fields
+                .filter(field => field.type !== 'display')
+                .reduce((result, field) => {
+                    const { validation, props: { name } } = field;
+                    const value = data[name];
+                    if (validation) {
+                        validation.map(validator => {
+                            if (validators.hasOwnProperty(validator)) {
+                                const validationError = validators[validator].call(this, value);
+                                if (validationError) {
+                                    result[field.props.name] = `${field.props.label} ${validationError}`;
+                                }
+                            } else {
+                                throw new Error('Validator does not exist');
                             }
-                        } catch (error) {
-                            req.error = new ErrorModel({
-                                status: 500,
-                                title: 'Server error',
-                                summary: `Unsupported validator: ${validator}`,
-                                stackTrace: error.stack
-                            }).toJson();
-                        }
-                    });
-                }
-                return result;
-            }, {});
-        logger.debug(`Validation errors: ${JSON.stringify(req.form.errors)}`);
+                        });
+                    }
+                    return result;
+                }, {});
+            logger.debug(`Validation errors: ${JSON.stringify(req.form.errors)}`);
+        } catch (error) {
+            req.error = new ErrorModel({
+                status: 500,
+                title: 'Server error',
+                summary: 'Unable to validate form data',
+                stackTrace: error.stack
+            }).toJson();
+        }
     }
     next();
-};
+}
 
 module.exports = {
     validator: validation,

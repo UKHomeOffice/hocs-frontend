@@ -149,8 +149,6 @@ describe('Validation middleware', () => {
         };
         validator(req, res, next);
         expect(req.form).toBeDefined();
-        expect(req.form.errors).toBeDefined();
-        expect(req.form.errors['test-field']).toBeUndefined();
         expect(req.error).toBeDefined();
         expect(req.error.errorCode).toEqual(500);
     });
