@@ -24,15 +24,19 @@ const supportedFormComponents = [
     { component: 'paragraph', props: { name: 'paragraph' } },
 ];
 
-/* eslint-disable-next-line */
+const supportedSecondaryActions = [
+    { component: 'backlink', props: { action: '/', dispatch: jest.fn() } },
+    { component: 'button', props: { action: '/', dispatch: jest.fn() } },
+];
+
 const testData = {
     'text-component': 'TEST',
-    'radio-component': 'A',
-    'date-component': '19-01-1989',
-    'checkBoxComponentA': true,
-    'checkBoxComponentB': false,
-    'text-area-component': 'TEST',
-    'dropdown-component': 'A'
+    'checkbox-component-A': true,
+    'checkbox-component-B': false
+};
+
+const testValidationErrors = {
+    'text-component': 'VALIDATION_ERROR'
 };
 
 describe('Form repository', () => {
@@ -48,6 +52,11 @@ describe('Form repository', () => {
         expect(typeof secondaryActionFactory).toEqual('function');
     });
 
+    it('should return null if form component is not supported', () => {
+        const Component = formComponentFactory('SOME_UNSUPPORTED_COMPONENT', {});
+        expect(Component).toBeNull();
+    });
+
     it('should support components in the supportedFormComponents list', () => {
         supportedFormComponents.map(({ component, props }) => {
             const Component = formComponentFactory(component, {
@@ -58,6 +67,72 @@ describe('Form repository', () => {
             const wrapper = shallow(Component);
             expect(wrapper).toBeDefined();
         });
+    });
+
+    it('should pass errors when passed in options', () => {
+        const componentConfiguration = supportedFormComponents
+            .filter(field => field.component === 'text')
+            .reduce((reducer, field) => reducer = field, null);
+        const Component = formComponentFactory(componentConfiguration.component, {
+            key: 1,
+            config: componentConfiguration.props,
+            errors: testValidationErrors,
+            callback: mockCallback
+        });
+        const wrapper = mount(Component);
+        expect(wrapper).toBeDefined();
+        expect(wrapper.find('Text').length).toEqual(1);
+        expect(wrapper.props().error).toEqual('VALIDATION_ERROR');
+    });
+
+    it('should pass data using the defaultDataAdapter when no other adapter passed', () => {
+        const componentConfiguration = supportedFormComponents
+            .filter(field => field.component === 'text')
+            .reduce((reducer, field) => reducer = field, null);
+        const Component = formComponentFactory(componentConfiguration.component, {
+            key: 1,
+            config: componentConfiguration.props,
+            data: testData,
+            callback: mockCallback
+        });
+        const wrapper = mount(Component);
+        expect(wrapper).toBeDefined();
+        expect(wrapper.find('Text').length).toEqual(1);
+        expect(wrapper.props().value).toEqual(testData[componentConfiguration.props.name]);
+    });
+
+    it('should pass data using the checkboxDataAdapter when passed in options', () => {
+        const componentConfiguration = supportedFormComponents
+            .filter(field => field.component === 'checkbox')
+            .reduce((reducer, field) => reducer = field, null);
+        const Component = formComponentFactory(componentConfiguration.component, {
+            key: 1,
+            config: componentConfiguration.props,
+            data: testData,
+            callback: mockCallback
+        });
+        expect(Component).toBeDefined();
+        const wrapper = mount(Component);
+        expect(wrapper).toBeDefined();
+        expect(wrapper.find('Checkbox').length).toEqual(1);
+        expect(wrapper.props().value).toEqual(['checkbox-component-A']);
+    });
+
+    it('should support components in the supportedSecondaryActions list', () => {
+        supportedSecondaryActions.map(({ component, props }) => {
+            const Component = secondaryActionFactory(component, {
+                key: 1,
+                config: props,
+                callback: mockCallback
+            });
+            const wrapper = shallow(Component);
+            expect(wrapper).toBeDefined();
+        });
+    });
+
+    it('should return null if secondary action component is not supported', () => {
+        const Component = secondaryActionFactory('SOME_UNSUPPORTED_COMPONENT', {});
+        expect(Component).toBeNull();
     });
 
 });

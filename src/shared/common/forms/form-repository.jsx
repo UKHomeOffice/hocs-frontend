@@ -18,16 +18,21 @@ function defaultDataAdapter(name, data) {
 }
 
 function checkboxDataAdapter(name, data) {
-    return Object.entries(data)
-        .filter(e => e.key.startsWith(name) && e.value === true)
-        .reduce((acc, e) => acc.push(e.value), []);
+    const result =  Object.entries(data)
+        .filter(([key, value]) => key.startsWith(name) && value === true);
+    const result2 = result
+        .reduce((reducer, [key]) => {
+            reducer.push(key);
+            return reducer;
+        }, []);
+    return result2;
 }
 
 function renderFormComponent(Component, options) {
     const { key, config, data, errors, callback, dataAdapter } = options;
     let value = null;
     if (data) {
-        value = dataAdapter ? dataAdapter(data) : defaultDataAdapter(config.name, data);
+        value = dataAdapter ? dataAdapter(config.name, data) : defaultDataAdapter(config.name, data);
     }
     return <Component key={key}
         {...config}
