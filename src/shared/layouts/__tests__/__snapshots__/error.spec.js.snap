@@ -8,14 +8,9 @@ exports[`Error component should render with a stack trace when passed 1`] = `
     class="govuk-grid-column-full"
   >
     <h1
-      class="govuk-heading-l"
+      class="govuk-heading-xl"
     >
-      <span
-        class="govuk-caption-l"
-      >
-        Something has gone wrong
-      </span>
-      An error has occurred
+      Something has gone wrong
     </h1>
     <details
       class="govuk-details"
@@ -52,14 +47,9 @@ exports[`Error component should render with default props 1`] = `
     class="govuk-grid-column-full"
   >
     <h1
-      class="govuk-heading-l"
+      class="govuk-heading-xl"
     >
-      <span
-        class="govuk-caption-l"
-      >
-        Something has gone wrong
-      </span>
-      An error has occurred
+      Something has gone wrong
     </h1>
   </div>
 </div>
@@ -73,17 +63,14 @@ exports[`Error component should render with location when 403 passed 1`] = `
     class="govuk-grid-column-full"
   >
     <h1
-      class="govuk-heading-l"
+      class="govuk-heading-xl"
     >
-      <span
-        class="govuk-caption-l"
-      >
-        Something has gone wrong
-      </span>
-      An error has occurred
+      Something has gone wrong
     </h1>
     <p>
-      <code>
+      <code
+        class="code"
+      >
         /SOME/UNSUPPORTED/ENDPOINT
       </code>
     </p>
@@ -99,17 +86,14 @@ exports[`Error component should render with location when 404 passed 1`] = `
     class="govuk-grid-column-full"
   >
     <h1
-      class="govuk-heading-l"
+      class="govuk-heading-xl"
     >
-      <span
-        class="govuk-caption-l"
-      >
-        Something has gone wrong
-      </span>
-      An error has occurred
+      Something has gone wrong
     </h1>
     <p>
-      <code>
+      <code
+        class="code"
+      >
         /SOME/UNSUPPORTED/ENDPOINT
       </code>
     </p>
@@ -125,14 +109,9 @@ exports[`Error component should render with location when passed 1`] = `
     class="govuk-grid-column-full"
   >
     <h1
-      class="govuk-heading-l"
+      class="govuk-heading-xl"
     >
-      <span
-        class="govuk-caption-l"
-      >
-        Something has gone wrong
-      </span>
-      An error has occurred
+      Something has gone wrong
     </h1>
   </div>
 </div>
