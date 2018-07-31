@@ -31,7 +31,7 @@ const renderMiddleware = (req, res, next) => {
     if (context.url) {
         res.redirect(context.status, context.url);
     } else {
-        res.status(context.status || 200);
+        res.status(context.status);
         res.rendered = html.render({
             ...renderConfig,
             props: config,

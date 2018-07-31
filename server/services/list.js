@@ -59,7 +59,7 @@ const lists = {
         }
     },
     'document_extension_whitelist': () => {
-        return Promise.resolve(DOCUMENT_WHITELIST.split(','));
+        return Promise.resolve(DOCUMENT_WHITELIST);
     }
 };
 

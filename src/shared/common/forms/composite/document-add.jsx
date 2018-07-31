@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { ApplicationConsumer } from '../../../contexts/application.jsx';
 
 class DocumentAdd extends Component {
 
@@ -16,6 +15,7 @@ class DocumentAdd extends Component {
     render() {
         const {
             allowMultiple,
+            disabled,
             error,
             hint,
             label,
@@ -39,6 +39,7 @@ class DocumentAdd extends Component {
                         name={name}
                         onChange={e => this.handleChange(e)}
                         multiple={allowMultiple}
+                        disabled={disabled}
                     />
                 </div>
             </Fragment>
@@ -63,10 +64,4 @@ DocumentAdd.defaultProps = {
     label: 'Add document'
 };
 
-const WrappedButton = props => (
-    <ApplicationConsumer>
-        {() => <DocumentAdd {...props} />}
-    </ApplicationConsumer>
-);
-
-export default WrappedButton;
+export default DocumentAdd;
