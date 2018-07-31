@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { ApplicationConsumer } from '../contexts/application.jsx';
 import { updateLocation } from '../contexts/actions/index.jsx';
+import Workstack from '../common/components/workstack.jsx';
 
 class MainPage extends Component {
 
@@ -46,6 +47,7 @@ class MainPage extends Component {
                                     <li><Link to={'/error'}>Test 500</Link></li>
                                 </ul>
                             </div>
+                            <Workstack />
                         </div>
                     );
                 }}

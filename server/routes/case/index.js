@@ -4,6 +4,8 @@ const processMiddleware = require('../../middleware/process');
 const fileMiddleware = require('../../middleware/file');
 const validationMiddleware = require('../../middleware/validation').validator;
 const ErrorModel = require('../../models/error');
+const { caseworkServiceClient } = require('../../libs/request');
+const logger = require('../../libs/logger');
 
 router.post('/:caseId/action/:entity/:action', fileMiddleware.any(), processMiddleware, validationMiddleware);
 
@@ -28,6 +30,15 @@ router.post('/:caseId/action/:entity/:action', async (req, res, next) => {
             return res.redirect(callbackUrl);
         }
         return res.status(200).send({ redirect: callbackUrl, response: {} });
+    }
+});
+
+router.get('/active', async (req, res) => {
+    try {
+        const response = await caseworkServiceClient.get('/case/active');
+        res.send(response.data);
+    } catch (e) {
+        logger.error(e.stack);
     }
 });
 
