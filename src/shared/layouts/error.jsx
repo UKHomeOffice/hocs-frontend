@@ -9,23 +9,34 @@ class Error extends Component {
         }
     }
 
+    buildParagraphs(body) {
+        if (!body) return null;
+        return body.map((paragraph, index) => {
+            return <p key={index} className={'govuk-body'}>{paragraph}</p>;
+        });
+    }
+
+
     render() {
         const {
-            error,
+            title,
             errorCode,
             location: { pathname },
             stack,
-            title,
+            body,
+            caption,
         } = this.props;
 
         return (
             <div className="govuk-grid-row">
                 <div className="govuk-grid-column-full">
-                    <h1 className="govuk-heading-l">
-                        <span className="govuk-caption-l">{title}</span>
-                        {`${error}`}
+                    <h1 className="govuk-heading-xl">
+                        {caption && <span className="govuk-caption-xl">{caption}</span>}
+                        {`${title}`}
                     </h1>
-                    {(errorCode === 403 || errorCode === 404) && pathname && <p><code>{pathname}</code></p>}
+
+                    {this.buildParagraphs(body)}
+                    {(errorCode === 403 || errorCode === 404) && pathname && <p><code className="code">{pathname}</code></p>}
                     {stack &&
                         <details className="govuk-details" open={true}>
                             <summary className="govuk-details__summary">
@@ -45,16 +56,16 @@ class Error extends Component {
 }
 
 Error.propTypes = {
-    error: PropTypes.string,
+    caption: PropTypes.string,
     errorCode: PropTypes.number,
     location: PropTypes.object,
     stack: PropTypes.string,
+    body: PropTypes.arrayOf(PropTypes.string),
     staticContext: PropTypes.object,
     title: PropTypes.string,
 };
 
 Error.defaultProps = {
-    error: 'An error has occurred',
     errorCode: 500,
     location: { pathname: null },
     stack: null,
