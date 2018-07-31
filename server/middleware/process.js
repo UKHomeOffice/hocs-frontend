@@ -22,7 +22,7 @@ const processCheckbox = (name, value, choices) => {
     return processed;
 };
 
-const process = (req, res, next) => {
+const processMiddleware = (req, res, next) => {
     logger.debug('PROCESS MIDDLEWARE');
     const { noScript = false } = req.query;
     res.noScript = noScript;
@@ -60,4 +60,6 @@ const process = (req, res, next) => {
     next();
 };
 
-module.exports = process;
+module.exports = {
+    processMiddleware
+};

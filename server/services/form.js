@@ -48,7 +48,7 @@ const getFormForAction = async (req, res, callback) => {
     try {
         req.form = await getFormSchema({ context: 'ACTION', workflow, action, user: req.user });
     } catch (err) {
-        req.error = new ErrorModel({
+        res.error = new ErrorModel({
             status: 404,
             title: 'Error',
             summary: 'Form not found',
@@ -63,7 +63,7 @@ const getFormForCase = (req, res, callback) => {
     try {
         req.form = getFormSchema({ context: 'WORKFLOW', action, user: req.user });
     } catch (err) {
-        req.error = new ErrorModel({
+        res.error = new ErrorModel({
             status: 404,
             title: 'Error',
             summary: 'Form not found',
@@ -78,7 +78,7 @@ const getFormForStage = async (req, res, callback) => {
     try {
         req.form = await getFormSchemaFromWorkflowService({ caseId, stageId, user: req.user });
     } catch (err) {
-        req.error = new ErrorModel({
+        res.error = new ErrorModel({
             status: 404,
             title: 'Error',
             summary: 'Form not found',

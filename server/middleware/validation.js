@@ -66,7 +66,7 @@ const validators = {
     }
 };
 
-const validation = (req, res, next) => {
+const validationMiddleware = (req, res, next) => {
     logger.debug('VALIDATION MIDDLEWARE');
     const { data, schema } = req.form;
     const fields = schema.fields.filter(field => field.type !== 'display');
@@ -93,6 +93,6 @@ const validation = (req, res, next) => {
 };
 
 module.exports = {
-    validator: validation,
-    validators: validators
+    validationMiddleware,
+    validators
 };
