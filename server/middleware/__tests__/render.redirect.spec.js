@@ -1,4 +1,4 @@
-import render from '../render';
+import { renderMiddleware } from '../render';
 
 jest.mock('../../config.js', () => {
     return {
@@ -54,7 +54,7 @@ const next = jest.fn();
 describe('Render middleware', () => {
 
     it('should redirect if url passed back from react StaticRouter context', () => {
-        render(req, res, next);
+        renderMiddleware(req, res, next);
         expect(res.redirect).toHaveBeenCalled();
     });
 

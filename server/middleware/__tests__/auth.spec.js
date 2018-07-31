@@ -1,4 +1,4 @@
-import { buildUserModel, protect, protectAction } from '../auth';
+import { authMiddleware, protect, protectAction } from '../auth';
 import User from '../../models/user';
 
 const mockHeaders = {
@@ -26,16 +26,16 @@ describe('Authentication middleware', () => {
     it('should redirect when no X-Auth-Token', () => {
         req.get = () => {
         };
-        buildUserModel(req, res, () => {
+        authMiddleware(req, res, () => {
             expect(req.user).toBeUndefined();
-            expect(req.error).toBeDefined();
-            expect(req.error.errorCode).toEqual(403);
-            expect(req.error.title).toEqual('Unauthorised');
+            expect(res.error).toBeDefined();
+            expect(res.error.errorCode).toEqual(403);
+            expect(res.error.title).toEqual('Unauthorised');
         });
     });
 
     it('should create and attach a User object to the request object', () => {
-        buildUserModel(req, res, () => {
+        authMiddleware(req, res, () => {
             expect(req.user).toBeDefined();
             expect(req.user.token).toEqual(mockHeaders['X-Auth-Token']);
             expect(req.user.username).toEqual(mockHeaders['X-Auth-Username']);
@@ -50,7 +50,7 @@ describe('Authentication middleware', () => {
 
     it('should not recreate the user object if exists', () => {
         req.user = 'TEST';
-        buildUserModel(req, res, () => {
+        authMiddleware(req, res, () => {
             expect(req.user).toBeDefined();
             expect(req.user).toEqual('TEST');
         });
@@ -79,8 +79,8 @@ describe('Protect middleware', () => {
     it('should create an instance of the Error model on the request object when required role is missing', () => {
         const protectMiddleware = protect('SOME_UNDEFINED_ROLE');
         protectMiddleware(req, res, () => {
-            expect(req.error).toBeDefined();
-            expect(req.error.errorCode).toEqual(403);
+            expect(res.error).toBeDefined();
+            expect(res.error.errorCode).toEqual(403);
         });
     });
 
@@ -120,8 +120,8 @@ describe('Protect Action middleware', () => {
             requiredRole: 'NOT_TEST_ROLE'
         };
         protectMiddleware(req, res, () => {
-            expect(req.error).toBeDefined();
-            expect(req.error.errorCode).toEqual(403);
+            expect(res.error).toBeDefined();
+            expect(res.error.errorCode).toEqual(403);
         });
     });
 

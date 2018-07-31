@@ -44,7 +44,7 @@ function defaultAdapter(reducer, field, data) {
     reducer[name] = data[name] || null;
 }
 
-function process(req, res, next) {
+const processMiddleware = (req, res, next) => {
     logger.debug('PROCESS MIDDLEWARE');
     res.noScript = req.query && req.query.noScript;
     try {
@@ -70,6 +70,8 @@ function process(req, res, next) {
         }).toJson();
     }
     next();
-}
+};
 
-module.exports = process;
+module.exports = {
+    processMiddleware
+};

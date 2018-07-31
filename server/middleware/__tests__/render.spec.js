@@ -1,4 +1,4 @@
-import render from '../render';
+import { renderMiddleware } from '../render';
 
 jest.mock('../../config.js', () => {
     return {
@@ -57,7 +57,7 @@ const next = jest.fn();
 describe('Render middleware', () => {
 
     it('should render and set rendered on the response object', () => {
-        render(req, res, next);
+        renderMiddleware(req, res, next);
         expect(mockRender).toHaveBeenCalledTimes(1);
         expect(res.status).toHaveBeenCalled();
         expect(res.status).toHaveBeenCalledWith(200);

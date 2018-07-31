@@ -34,14 +34,17 @@ const routes = [
     {
         path: '/error',
         component: Error,
-        error: 'The server has encountered an error',
-        title: 'Error',
+        title: 'There is a problem with the service',
+        body: ['Try again later.'],
         errorCode: 500
     },
     {
         component: Error,
-        error: 'The requested resource can not be found or does not exist',
         title: 'Not found',
+        body: [
+            'If you typed the web address, check it is correct.',
+            'If you pasted the web address, check you copied the entire address.'
+        ],
         errorCode: 404
     }
 ];

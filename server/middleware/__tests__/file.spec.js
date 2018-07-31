@@ -1,4 +1,4 @@
-import fileMiddleware from '../file';
+import { fileMiddleware } from '../file';
 
 describe('File Middleware', () => {
     it('should export an instance of Multer', () => {

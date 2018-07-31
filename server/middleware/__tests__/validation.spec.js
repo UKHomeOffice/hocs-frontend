@@ -1,4 +1,4 @@
-const { validators, validator } = require('../validation.js');
+const { validators, validationMiddleware } = require('../validation.js');
 
 jest.mock('../../config.js', () => {
     return {
@@ -110,7 +110,7 @@ describe('Validation middleware', () => {
                 }
             }
         };
-        validator(req, res, next);
+        validationMiddleware(req, res, next);
         expect(req.form).toBeDefined();
         expect(req.form.errors).toBeDefined();
         expect(req.form.errors['test-pass']).toBeUndefined();
@@ -129,7 +129,7 @@ describe('Validation middleware', () => {
                 }
             }
         };
-        validator(req, res, next);
+        validationMiddleware(req, res, next);
         expect(req.form).toBeDefined();
         expect(req.form.errors).toBeDefined();
         expect(req.form.errors['test-pass']).toBeUndefined();
@@ -147,14 +147,14 @@ describe('Validation middleware', () => {
                 }
             }
         };
-        validator(req, res, next);
+        validationMiddleware(req, res, next);
         expect(req.form).toBeDefined();
         expect(req.error).toBeDefined();
         expect(req.error.errorCode).toEqual(500);
     });
     it('should skip if no form present', () => {
         const req = {};
-        validator(req, res, next);
+        validationMiddleware(req, res, next);
         expect(req.form).toBeUndefined();
         expect(next).toHaveBeenCalled();
         expect(next).toHaveBeenCalledTimes(1);

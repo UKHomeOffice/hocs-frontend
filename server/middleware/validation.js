@@ -56,7 +56,7 @@ const validators = {
     }
 };
 
-function validation(req, res, next) {
+const validationMiddleware = (req, res, next) => {
     logger.debug('VALIDATION MIDDLEWARE');
     if (req.form) {
         try {
@@ -91,9 +91,9 @@ function validation(req, res, next) {
         }
     }
     next();
-}
+};
 
 module.exports = {
-    validator: validation,
-    validators: validators
+    validationMiddleware,
+    validators
 };
