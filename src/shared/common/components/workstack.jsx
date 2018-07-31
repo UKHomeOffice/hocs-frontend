@@ -11,7 +11,7 @@ class Workstack extends Component {
     }
 
     componentDidMount() {
-        axios.get('/case/active')
+        axios.get('/page/workstack')
             .then(res => {
                 this.setState({ cases: res.data });
             })

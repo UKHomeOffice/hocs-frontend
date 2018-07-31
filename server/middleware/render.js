@@ -5,15 +5,17 @@ const { default: App } = require('../../build/server/app.server');
 const logger = require('../libs/logger');
 const html = require('../layout/html');
 
-const render = (req, res, next) => {
+const renderMiddleware = (req, res, next) => {
     logger.debug('RENDER MIDDLEWARE');
 
     const renderConfig = require('../config').forContext('render');
 
+    const { form, data, error } = req;
     const config = {
         layout: require('../config').forContext('case'),
-        form: req.form,
-        error: req.error
+        form,
+        error,
+        data
     };
 
     const context = {
@@ -39,4 +41,12 @@ const render = (req, res, next) => {
     next();
 };
 
-module.exports = render;
+const renderResponseMiddleware = (req, res) => {
+    return res.status(200).send(res.rendered);
+};
+
+
+module.exports = {
+    renderMiddleware,
+    renderResponseMiddleware
+};

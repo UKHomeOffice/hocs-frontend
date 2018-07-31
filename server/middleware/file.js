@@ -22,6 +22,8 @@ const storage = multerS3({
     ...(isProduction ? sseConfiguration : {})
 });
 
-const upload = multer({ storage });
+const fileMiddleware = multer({ storage });
 
-module.exports = upload;
+module.exports = {
+    fileMiddleware
+};

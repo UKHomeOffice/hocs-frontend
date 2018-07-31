@@ -1,49 +1,37 @@
 const router = require('express').Router();
 const assets = require('../../build/assets.json');
 const html = require('../layout/html');
-const { buildUserModel, protectAction } = require('../middleware/auth');
-const renderMiddleware = require('../middleware/render');
-const apiRouter = require('./api');
-const { getFormForCase, getFormForAction, getFormForStage } = require('../services/form');
-const ErrorModel = require('../models/error');
+const { authMiddleware } = require('../middleware/auth');
+const { workstackMiddleware, workstackAjaxResponseMiddleware } = require('../middleware/workstack');
+const { errorAjaxResponseMiddleware, errorMiddleware } = require('../middleware/request');
+const { renderMiddleware, renderResponseMiddleware } = require('../middleware/render');
+const formRouter = require('./forms/index');
+const actionRouter = require('./action/index');
+const caseRouter = require('./case/index');
+const stageRouter = require('./stage/index');
 
 html.use(assets);
 
-router.use('*', buildUserModel);
+router.use('*', authMiddleware);
 
-router.use(['/action/:workflow/:context/:action', '/action/:workflow/:action'], getFormForAction, protectAction({ redirect: true }));
+router.get(['/', '/page/workstack'], workstackMiddleware);
 
-router.use('/case/:caseId/stage/:stageId', getFormForStage);
+router.get('/page/workstack', workstackAjaxResponseMiddleware);
 
-router.use('/case/:caseId/action/:entity/:action', getFormForCase);
+router.use('/action', actionRouter);
 
-router.use('/', apiRouter);
+router.use('/case', caseRouter);
 
-router.use('*', (err, req, res, next) => {
-    req.error = new ErrorModel({
-        status: 500,
-        title: 'Server Error',
-        summary: err.message,
-        stackTrace: err.stack
-    }).toJson();
-    next();
-});
+router.use('/case', stageRouter);
 
-router.post(['/action/*', '/case/*', '/stage/*'], (req, res, next) => {
-    if (!res.noScript) {
-        if (!req.error) {
-            return res.status(200).send({ errors: req.form.errors });
-        } else {
-            return res.status(req.error.errorCode).send(req.error);
-        }
-    }
-    next();
-});
+router.post(['/action/*', '/case/*'], errorAjaxResponseMiddleware);
 
-router.use('*', renderMiddleware);
+router.use('/forms', formRouter);
 
-router.use('*', (req, res) => {
-    return res.status(200).send(res.rendered);
-});
+router.use('*',
+    errorMiddleware,
+    renderMiddleware,
+    renderResponseMiddleware
+);
 
 module.exports = router;

@@ -1,4 +1,4 @@
-import processMiddleware from '../process';
+import { processMiddleware } from '../process';
 
 const formSchema = {
     fields: [
