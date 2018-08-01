@@ -2,28 +2,24 @@ const User = require('../models/user');
 const { DOCUMENT_WHITELIST } = require('../config').forContext('server');
 const { workflowServiceClient } = require('../libs/request');
 const logger = require('../libs/logger');
+const { listDefinitions } = require('./lists/index');
 
 const listRepository = {};
 
-const listDefinitions = {
-    workflowTypes: '/workflow'
-};
-
-function initialise() {
+async function initialise() {
     const listRequests = Object.keys(listDefinitions).reduce((reducer, list) => {
         logger.info(`Fetching list: ${list}`);
         reducer.push({ list, request: fetchList(list) });
         return reducer;
     }, []);
 
-    listRequests.map(({ list, request }) => {
-        request
-            .then(response => {
-                handleListSuccess(list, response);
-            })
-            .catch(err => {
-                handleListFailure(list, err);
-            });
+    await listRequests.map( async ({ list, request }) => {
+        try {
+            const response = await request;
+            handleListSuccess(list, response);
+        } catch (error) {
+            handleListFailure(list, error);
+        }
     });
 }
 
@@ -41,7 +37,7 @@ function handleListFailure(listId, error) {
 }
 
 const lists = {
-    'case_type': async ({ user }) => {
+    'CASE_TYPES': async ({ user }) => {
         if (listRepository.workflowTypes) {
             return listRepository.workflowTypes
                 .filter(listItem => User.hasRole(user, listItem.requiredRole));
@@ -58,21 +54,20 @@ const lists = {
             }
         }
     },
-    'document_extension_whitelist': () => {
-        return Promise.resolve(DOCUMENT_WHITELIST);
+    'DOCUMENT_EXTENSION_WHITELIST': async () => {
+        return DOCUMENT_WHITELIST;
     }
 };
 
-function getList(field, options) {
+async function getList(list, options) {
     try {
-        return lists[field.toLowerCase()].call(this, options);
+        return await lists[list.toUpperCase()].call(this, options);
     } catch (e) {
-        throw new Error(`Unable to get list for ${field}: ${e}`);
+        throw new Error(`Unable to get list for ${list}: ${e}`);
     }
 }
 
-initialise();
-
 module.exports = {
-    getList
+    getList,
+    initialise
 };
