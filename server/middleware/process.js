@@ -67,7 +67,7 @@ const processMiddleware = (req, res, next) => {
             title: 'Server error',
             summary: 'Unable to process form data',
             stackTrace: error.stack
-        }).toJson();
+        });
     }
     next();
 };

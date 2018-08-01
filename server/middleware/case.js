@@ -15,7 +15,7 @@ const caseResponseMiddleware = async (req, res, next) => {
             title: 'Error',
             summary: 'Failed to perform action',
             stackTrace: error.message
-        }).toJson();
+        });
         return next();
     } else {
         if (res.noScript) {

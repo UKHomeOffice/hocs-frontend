@@ -16,7 +16,7 @@ const errorMiddleware = (err, req, res, next) => {
         title: 'Server Error',
         summary: err.message,
         stackTrace: err.stack
-    }).toJson();
+    });
     next();
 };
 

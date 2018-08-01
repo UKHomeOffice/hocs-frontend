@@ -87,7 +87,7 @@ const validationMiddleware = (req, res, next) => {
                 title: 'Server error',
                 summary: 'Unable to validate form data',
                 stackTrace: error.stack
-            }).toJson();
+            });
         }
     }
     next();

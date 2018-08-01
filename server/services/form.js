@@ -43,7 +43,7 @@ function hydrateFields(fields, options) {
     return Promise.all(promises);
 }
 
-const getFormForAction = async (req, res, callback) => {
+const getFormForAction = async (req, res, next) => {
     const { workflow, action } = req.params;
     try {
         req.form = await getFormSchema({ context: 'ACTION', workflow, action, user: req.user });
@@ -53,12 +53,12 @@ const getFormForAction = async (req, res, callback) => {
             title: 'Error',
             summary: 'Form not found',
             stackTrace: err.stack
-        }).toJson();
+        });
     }
-    callback();
+    next();
 };
 
-const getFormForCase = (req, res, callback) => {
+const getFormForCase = (req, res, next) => {
     const { action } = req.params;
     try {
         req.form = getFormSchema({ context: 'WORKFLOW', action, user: req.user });
@@ -68,12 +68,12 @@ const getFormForCase = (req, res, callback) => {
             title: 'Error',
             summary: 'Form not found',
             stackTrace: err.stack
-        }).toJson();
+        });
     }
-    callback();
+    next();
 };
 
-const getFormForStage = async (req, res, callback) => {
+const getFormForStage = async (req, res, next) => {
     const { caseId, stageId } = req.params;
     try {
         req.form = await getFormSchemaFromWorkflowService({ caseId, stageId, user: req.user });
@@ -83,9 +83,9 @@ const getFormForStage = async (req, res, callback) => {
             title: 'Error',
             summary: 'Form not found',
             stackTrace: err.stack
-        }).toJson();
+        });
     }
-    callback();
+    next();
 };
 
 module.exports = {
