@@ -1,0 +1,80 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Action page component should render with caption when passed in props 1`] = `
+<Action
+  caption="MY_CAPTION"
+  dispatch={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          Object {
+            "payload": Object {
+              "url": "/",
+            },
+            "type": "UPDATE_LOCATION",
+          },
+        ],
+      ],
+    }
+  }
+  match={
+    Object {
+      "url": "/",
+    }
+  }
+>
+  <div
+    className="govuk-grid-row"
+  >
+    <div
+      className="govuk-grid-column-full"
+    >
+      <h1
+        className="govuk-heading-l"
+      >
+        <span
+          className="govuk-caption-l"
+        >
+          MY_CAPTION
+        </span>
+      </h1>
+    </div>
+  </div>
+</Action>
+`;
+
+exports[`Action page component should render with default props 1`] = `
+<Action
+  dispatch={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          Object {
+            "payload": Object {
+              "url": "/",
+            },
+            "type": "UPDATE_LOCATION",
+          },
+        ],
+      ],
+    }
+  }
+  match={
+    Object {
+      "url": "/",
+    }
+  }
+>
+  <div
+    className="govuk-grid-row"
+  >
+    <div
+      className="govuk-grid-column-full"
+    >
+      <h1
+        className="govuk-heading-l"
+      />
+    </div>
+  </div>
+</Action>
+`;

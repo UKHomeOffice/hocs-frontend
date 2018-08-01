@@ -23,7 +23,7 @@ class Action extends Component {
                 this.props.dispatch(updateForm(res.data));
             })
             .catch(err => {
-                return this.props.dispatch(setError(err.response.data));
+                this.props.dispatch(setError(err.response.data));
             });
     }
 
@@ -39,7 +39,6 @@ class Action extends Component {
                     <h1 className="govuk-heading-l">
                         {caption && <span className="govuk-caption-l">{caption}</span>}
                         {form && form.schema && form.schema.title}
-
                     </h1>
                     {form && form.schema && <Form
                         action={url}
@@ -57,9 +56,8 @@ class Action extends Component {
 Action.propTypes = {
     dispatch: PropTypes.func.isRequired,
     form: PropTypes.object,
-    match: PropTypes.object,
-    caption: PropTypes.string,
-    history: PropTypes.object.isRequired
+    match: PropTypes.object.isRequired,
+    caption: PropTypes.string
 };
 
 const WrappedPage = props => (
