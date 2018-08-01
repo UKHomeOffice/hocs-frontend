@@ -1,0 +1,342 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Main page component should render with caption when passed in props 1`] = `
+<MainPage
+  caption="MY_CAPTION"
+  dispatch={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          Object {
+            "payload": undefined,
+            "type": "UPDATE_LOCATION",
+          },
+        ],
+      ],
+    }
+  }
+>
+  <div
+    className="govuk-grid-row"
+  >
+    <div
+      className="govuk-grid-column-full"
+    >
+      <h1
+        className="govuk-heading-l"
+      >
+        <span
+          className="govuk-caption-l"
+        >
+          MY_CAPTION
+        </span>
+      </h1>
+      <h2
+        className="govuk-heading-m"
+      >
+        Primary actions
+      </h2>
+      <ul
+        className="govuk-list govuk-list--bullet"
+      >
+        <li>
+          <Link
+            replace={false}
+            to="/action/create/workflow"
+          >
+            <a
+              href="/action/create/workflow"
+              onClick={[Function]}
+            >
+              Create single case
+            </a>
+          </Link>
+        </li>
+        <li>
+          <Link
+            replace={false}
+            to="/action/bulk/workflow"
+          >
+            <a
+              href="/action/bulk/workflow"
+              onClick={[Function]}
+            >
+              Create cases in bulk
+            </a>
+          </Link>
+        </li>
+        <li>
+          <Link
+            replace={false}
+            to="/action/test/form"
+          >
+            <a
+              href="/action/test/form"
+              onClick={[Function]}
+            >
+              View test form
+            </a>
+          </Link>
+        </li>
+      </ul>
+      <h2
+        className="govuk-heading-m"
+      >
+        Secondary routes
+      </h2>
+      <ul
+        className="govuk-list govuk-list--bullet"
+      >
+        <li>
+          <Link
+            replace={false}
+            to="/action/random/url"
+          >
+            <a
+              href="/action/random/url"
+              onClick={[Function]}
+            >
+              Test 404
+            </a>
+          </Link>
+        </li>
+        <li>
+          <Link
+            replace={false}
+            to="/action/test/form"
+          >
+            <a
+              href="/action/test/form"
+              onClick={[Function]}
+            >
+              Test 403
+            </a>
+          </Link>
+        </li>
+        <li>
+          <Link
+            replace={false}
+            to="/error"
+          >
+            <a
+              href="/error"
+              onClick={[Function]}
+            >
+              Test 500
+            </a>
+          </Link>
+        </li>
+      </ul>
+      <Workstack>
+        <table
+          className="govuk-table"
+        >
+          <caption
+            className="govuk-table__caption"
+          >
+            Workstack
+          </caption>
+          <thead
+            className="govuk-table__head"
+          >
+            <tr
+              className="govuk-radios govuk-table__row"
+            >
+              <th
+                className="govuk-table__header"
+              >
+                Type
+              </th>
+              <th
+                className="govuk-table__header"
+              >
+                Reference
+              </th>
+              <th
+                className="govuk-table__header"
+              >
+                Stage
+              </th>
+              <th
+                className="govuk-table__header"
+              >
+                Actions
+              </th>
+            </tr>
+          </thead>
+          <tbody
+            className="govuk-table__body"
+          />
+        </table>
+      </Workstack>
+    </div>
+  </div>
+</MainPage>
+`;
+
+exports[`Main page component should render with default props 1`] = `
+<MainPage
+  dispatch={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          Object {
+            "payload": undefined,
+            "type": "UPDATE_LOCATION",
+          },
+        ],
+      ],
+    }
+  }
+>
+  <div
+    className="govuk-grid-row"
+  >
+    <div
+      className="govuk-grid-column-full"
+    >
+      <h1
+        className="govuk-heading-l"
+      />
+      <h2
+        className="govuk-heading-m"
+      >
+        Primary actions
+      </h2>
+      <ul
+        className="govuk-list govuk-list--bullet"
+      >
+        <li>
+          <Link
+            replace={false}
+            to="/action/create/workflow"
+          >
+            <a
+              href="/action/create/workflow"
+              onClick={[Function]}
+            >
+              Create single case
+            </a>
+          </Link>
+        </li>
+        <li>
+          <Link
+            replace={false}
+            to="/action/bulk/workflow"
+          >
+            <a
+              href="/action/bulk/workflow"
+              onClick={[Function]}
+            >
+              Create cases in bulk
+            </a>
+          </Link>
+        </li>
+        <li>
+          <Link
+            replace={false}
+            to="/action/test/form"
+          >
+            <a
+              href="/action/test/form"
+              onClick={[Function]}
+            >
+              View test form
+            </a>
+          </Link>
+        </li>
+      </ul>
+      <h2
+        className="govuk-heading-m"
+      >
+        Secondary routes
+      </h2>
+      <ul
+        className="govuk-list govuk-list--bullet"
+      >
+        <li>
+          <Link
+            replace={false}
+            to="/action/random/url"
+          >
+            <a
+              href="/action/random/url"
+              onClick={[Function]}
+            >
+              Test 404
+            </a>
+          </Link>
+        </li>
+        <li>
+          <Link
+            replace={false}
+            to="/action/test/form"
+          >
+            <a
+              href="/action/test/form"
+              onClick={[Function]}
+            >
+              Test 403
+            </a>
+          </Link>
+        </li>
+        <li>
+          <Link
+            replace={false}
+            to="/error"
+          >
+            <a
+              href="/error"
+              onClick={[Function]}
+            >
+              Test 500
+            </a>
+          </Link>
+        </li>
+      </ul>
+      <Workstack>
+        <table
+          className="govuk-table"
+        >
+          <caption
+            className="govuk-table__caption"
+          >
+            Workstack
+          </caption>
+          <thead
+            className="govuk-table__head"
+          >
+            <tr
+              className="govuk-radios govuk-table__row"
+            >
+              <th
+                className="govuk-table__header"
+              >
+                Type
+              </th>
+              <th
+                className="govuk-table__header"
+              >
+                Reference
+              </th>
+              <th
+                className="govuk-table__header"
+              >
+                Stage
+              </th>
+              <th
+                className="govuk-table__header"
+              >
+                Actions
+              </th>
+            </tr>
+          </thead>
+          <tbody
+            className="govuk-table__body"
+          />
+        </table>
+      </Workstack>
+    </div>
+  </div>
+</MainPage>
+`;

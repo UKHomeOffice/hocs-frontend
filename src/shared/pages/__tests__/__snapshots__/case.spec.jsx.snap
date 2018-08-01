@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Case page component should render with default props 1`] = `
+<Case
+  dispatch={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          Object {
+            "payload": Object {
+              "params": Object {
+                "caseId": "CASE_ID",
+              },
+              "url": "/",
+            },
+            "type": "UPDATE_LOCATION",
+          },
+        ],
+      ],
+    }
+  }
+  match={
+    Object {
+      "params": Object {
+        "caseId": "CASE_ID",
+      },
+      "url": "/",
+    }
+  }
+>
+  <div
+    className="govuk-grid-row"
+  >
+    <div
+      className="govuk-grid-column-full"
+    >
+      <h1
+        className="govuk-heading-l"
+      >
+        <span
+          className="govuk-caption-l"
+        >
+          CASE_ID
+        </span>
+      </h1>
+    </div>
+  </div>
+</Case>
+`;

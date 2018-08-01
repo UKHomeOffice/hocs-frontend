@@ -20,38 +20,33 @@ class MainPage extends Component {
             caption,
             title
         } = this.props;
+
         return (
-            <ApplicationConsumer>
-                {() => {
-                    return (
-                        <div className="govuk-grid-row">
-                            <div className="govuk-grid-column-full">
-                                <h1 className="govuk-heading-l">
-                                    {caption && <span className="govuk-caption-l">{caption}</span>}
-                                    {title}
-                                </h1>
-                                <h2 className="govuk-heading-m">
-                                    Primary actions
-                                </h2>
-                                <ul className="govuk-list govuk-list--bullet">
-                                    <li><Link to={'/action/create/workflow'}>Create single case</Link></li>
-                                    <li><Link to={'/action/bulk/workflow'}>Create cases in bulk</Link></li>
-                                    <li><Link to={'/action/test/form'}>View test form</Link></li>
-                                </ul>
-                                <h2 className="govuk-heading-m">
-                                    Secondary routes
-                                </h2>
-                                <ul className="govuk-list govuk-list--bullet">
-                                    <li><Link to={'/action/random/url'}>Test 404</Link></li>
-                                    <li><Link to={'/action/test/form'}>Test 403</Link></li>
-                                    <li><Link to={'/error'}>Test 500</Link></li>
-                                </ul>
-                                <Workstack />
-                            </div>
-                        </div>
-                    );
-                }}
-            </ApplicationConsumer>
+            <div className="govuk-grid-row">
+                <div className="govuk-grid-column-full">
+                    <h1 className="govuk-heading-l">
+                        {caption && <span className="govuk-caption-l">{caption}</span>}
+                        {title}
+                    </h1>
+                    <h2 className="govuk-heading-m">
+                        Primary actions
+                    </h2>
+                    <ul className="govuk-list govuk-list--bullet">
+                        <li><Link to={'/action/create/workflow'}>Create single case</Link></li>
+                        <li><Link to={'/action/bulk/workflow'}>Create cases in bulk</Link></li>
+                        <li><Link to={'/action/test/form'}>View test form</Link></li>
+                    </ul>
+                    <h2 className="govuk-heading-m">
+                        Secondary routes
+                    </h2>
+                    <ul className="govuk-list govuk-list--bullet">
+                        <li><Link to={'/action/random/url'}>Test 404</Link></li>
+                        <li><Link to={'/action/test/form'}>Test 403</Link></li>
+                        <li><Link to={'/error'}>Test 500</Link></li>
+                    </ul>
+                    <Workstack />
+                </div>
+            </div>
         );
     }
 }
