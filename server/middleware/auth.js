@@ -21,7 +21,7 @@ function authMiddleware(req, res, next) {
             status: 403,
             title: 'Unauthorised',
             summary: 'You are not logged in'
-        }).toJson();
+        });
     }
     next();
 }
@@ -37,7 +37,7 @@ function protectAction() {
                     title: 'Unauthorised',
                     summary: 'You do not have permission to access the requested page',
                     stackTrace: `Required role: ${req.form.requiredRole.toUpperCase()}`
-                }).toJson();
+                });
             }
         }
         next();
@@ -54,7 +54,7 @@ function protect(permission) {
                 title: 'Unauthorised',
                 summary: 'You do not have permission to access the requested page',
                 stackTrace: `Required role: ${permission}`
-            }).toJson();
+            });
         }
         next();
     };

@@ -2,21 +2,12 @@ const { isProduction } = require('../config');
 
 class ErrorModel {
     constructor({ title, summary, status, stackTrace }) {
-        this.status = status;
+        this.errorCode = status;
         this.title = title;
-        this.summary = summary;
+        this.error = summary;
         if (!isProduction) {
-            this.stackTrace = stackTrace;
+            this.stack = stackTrace;
         }
-    }
-
-    toJson() {
-        return ({
-            errorCode: this.status,
-            title: this.title,
-            error: this.summary,
-            stack: this.stackTrace
-        });
     }
 }
 
