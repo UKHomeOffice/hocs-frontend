@@ -1,18 +1,13 @@
 const formRepository = require('./forms/index');
 const listService = require('./list');
-const logger = require('../libs/logger');
 const { workflowServiceClient } = require('../libs/request');
 const ErrorModel = require('../models/error');
 
 async function getFormSchemaFromWorkflowService({ caseId, stageId }) {
     const response = await workflowServiceClient.get(`/case/${caseId}/stage/${stageId}`);
-    try {
-        const { stageUUID, caseReference } = response.data;
-        const { schema, data } = response.data.form;
-        return { schema, data, meta: { caseReference, stageUUID } };
-    } catch (err) {
-        logger.error(`${err.message}`);
-    }
+    const { stageUUID, caseReference } = response.data;
+    const { schema, data } = response.data.form;
+    return { schema, data, meta: { caseReference, stageUUID } };
 }
 
 async function getFormSchema(options) {
@@ -58,10 +53,10 @@ const getFormForAction = async (req, res, next) => {
     next();
 };
 
-const getFormForCase = (req, res, next) => {
+const getFormForCase = async (req, res, next) => {
     const { action } = req.params;
     try {
-        req.form = getFormSchema({ context: 'WORKFLOW', action, user: req.user });
+        req.form = await getFormSchema({ context: 'WORKFLOW', action, user: req.user });
     } catch (err) {
         res.error = new ErrorModel({
             status: 404,

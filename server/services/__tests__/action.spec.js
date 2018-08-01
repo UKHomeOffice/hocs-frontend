@@ -1,4 +1,4 @@
-import actionModel from '../action';
+import actionService from '../action';
 
 const mockRequestClient = jest.fn();
 
@@ -58,12 +58,12 @@ const testCreateCaseForm = {
     }
 };
 
-describe('Action model', () => {
+describe('Action service', () => {
     beforeEach(() => {
         mockRequestClient.mockReset();
     });
     it('should return a callback url when passed supported workflow and action', async () => {
-        const response = await actionModel.performAction('ACTION', {
+        const response = await actionService.performAction('ACTION', {
             workflow: 'CREATE',
             action: 'WORKFLOW',
             form: {
@@ -78,7 +78,7 @@ describe('Action model', () => {
     it('should return a callback url when "CREATE_CASE" action succeeds', async () => {
         const testForm = { ...testCreateCaseForm, action: 'CREATE_CASE' };
 
-        const response = await actionModel.performAction('ACTION', {
+        const response = await actionService.performAction('ACTION', {
             workflow: 'CREATE',
             action: 'WORKFLOW',
             context: 'SUPPORTED_CASETYPE',
@@ -93,7 +93,7 @@ describe('Action model', () => {
     it('should return an error object when when "CREATE_CASE" action fails', async () => {
         const testForm = { ...testCreateCaseForm, action: 'CREATE_CASE' };
 
-        const response = await actionModel.performAction('ACTION', {
+        const response = await actionService.performAction('ACTION', {
             workflow: 'CREATE',
             action: 'WORKFLOW',
             context: 'UNSUPPORTED_CASETYPE',
@@ -109,7 +109,7 @@ describe('Action model', () => {
     it('should return a callback url when "BULK_CREATE_CASE" action succeeds', async () => {
         const testForm = { ...testCreateCaseForm, action: 'BULK_CREATE_CASE' };
 
-        const response = await actionModel.performAction('ACTION', {
+        const response = await actionService.performAction('ACTION', {
             workflow: 'BULK',
             action: 'WORKFLOW',
             context: 'SUPPORTED_CASETYPE',
@@ -124,7 +124,7 @@ describe('Action model', () => {
     it('should return an error object when when "BULK_CREATE_CASE" action fails', async () => {
         const testForm = { ...testCreateCaseForm, action: 'BULK_CREATE_CASE' };
 
-        const response = await actionModel.performAction('ACTION', {
+        const response = await actionService.performAction('ACTION', {
             workflow: 'BULK',
             action: 'WORKFLOW',
             context: 'UNSUPPORTED_CASETYPE',
@@ -139,7 +139,7 @@ describe('Action model', () => {
 
     it('should return error object when passed unsupported form action', async () => {
 
-        const response = await actionModel.performAction('ACTION', {
+        const response = await actionService.performAction('ACTION', {
             workflow: 'CREATE',
             action: 'WORKFLOW',
             form: {
