@@ -37,7 +37,6 @@ describe('Authentication middleware', () => {
     it('should create and attach a User object to the request object', () => {
         authMiddleware(req, res, () => {
             expect(req.user).toBeDefined();
-            expect(req.user.token).toEqual(mockHeaders['X-Auth-Token']);
             expect(req.user.username).toEqual(mockHeaders['X-Auth-Username']);
             expect(req.user.id).toEqual(mockHeaders['X-Auth-UserId']);
             expect(req.user.email).toEqual(mockHeaders['X-Auth-Email']);

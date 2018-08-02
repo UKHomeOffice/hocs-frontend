@@ -7,7 +7,6 @@ function authMiddleware(req, res, next) {
     if (req.get('X-Auth-Token')) {
         if (!req.user) {
             req.user = new User({
-                token: req.get('X-Auth-Token'),
                 username: req.get('X-Auth-Username'),
                 id: req.get('X-Auth-UserId'),
                 groups: req.get('X-Auth-Groups'),

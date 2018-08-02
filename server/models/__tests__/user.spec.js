@@ -1,7 +1,6 @@
 import User from '../user';
 
 const testUser = new User({
-    token: 'token',
     username: 'username',
     id: 'id',
     groups: 'A,B,C',
@@ -10,7 +9,6 @@ const testUser = new User({
 });
 
 const testUserNoGroupsOrRoles = new User({
-    token: 'token',
     username: 'username',
     id: 'id',
     groups: null,
