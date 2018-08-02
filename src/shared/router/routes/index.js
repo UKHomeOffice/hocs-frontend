@@ -1,6 +1,7 @@
 import ActionPage from '../../pages/action.jsx';
 import CasePage from '../../pages/case.jsx';
 import StagePage from '../../pages/stage.jsx';
+import CaseSummaryPage from '../../pages/summary.jsx';
 import Error from '../../layouts/error.jsx';
 import MainPage from '../../pages/main.jsx';
 
@@ -20,6 +21,11 @@ const routes = [
         path: '/action/:workflow/:context/:action',
         exact: true,
         component: ActionPage
+    },
+    {
+        path: '/case/:caseId/summary',
+        exact: true,
+        component: CaseSummaryPage,
     },
     {
         path: '/case/:caseId/stage/:stageId',
