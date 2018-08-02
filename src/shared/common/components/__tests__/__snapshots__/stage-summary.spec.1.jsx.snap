@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Case details summary component should render with default props 1`] = `
+Array [
+  <h2
+    class="govuk-heading-m"
+  >
+    Details
+  </h2>,
+  <table
+    class="govuk-table"
+  >
+    <tbody
+      class="govuk-table__body"
+    >
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header"
+          scope="row"
+        >
+          Type
+        </th>
+        <td
+          class="govuk-table__cell "
+        >
+          CASE_TYPE
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header"
+          scope="row"
+        >
+          Created
+        </th>
+        <td
+          class="govuk-table__cell "
+        >
+          CASE_TIMESTAMP
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header"
+          scope="row"
+        >
+          UUID
+        </th>
+        <td
+          class="govuk-table__cell "
+        >
+          CASE_UUID
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+]
+`;

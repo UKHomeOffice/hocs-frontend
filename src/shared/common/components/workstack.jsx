@@ -46,7 +46,8 @@ class Workstack extends Component {
                                         <td className='govuk-table__cell'>{c.caseReference}</td>
                                         <td className='govuk-table__cell'>{c.type}</td>
                                         <td className='govuk-table__cell'>
-                                            <Link to={`/case/${c.caseUUID}/stage/${c.stageUUID}`} className="govuk-body govuk-link">View</Link>
+                                            <Link to={`/case/${c.caseUUID}/stage/${c.stageUUID}`} className="govuk-link govuk-!-margin-right-3">View</Link>
+                                            <Link to={`/case/${c.caseUUID}/summary`} className="govuk-link">Summary</Link>
                                         </td>
                                     </tr>
                                 );
