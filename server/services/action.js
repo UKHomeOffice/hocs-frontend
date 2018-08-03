@@ -5,13 +5,15 @@ const { CREATE_CASE, BULK_CREATE_CASE } = require('./actions/types');
 function createDocumentSummaryObjects(form) {
     return form.schema.fields.reduce((reducer, field) => {
         if (field.component === 'add-document') {
-            form.data[field.props.name].map(file => {
-                reducer.push({
-                    displayName: file.originalname,
-                    type: field.props.documentType,
-                    s3UntrustedUrl: file.location || 'location'
+            if (form.data[field.props.name]) {
+                form.data[field.props.name].map(file => {
+                    reducer.push({
+                        displayName: file.originalname,
+                        type: field.props.documentType,
+                        s3UntrustedUrl: file.location || 'location'
+                    });
                 });
-            });
+            }
         }
         return reducer;
     }, []);

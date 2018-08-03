@@ -32,6 +32,7 @@ class Workstack extends Component {
                             <th className='govuk-table__header'>Type</th>
                             <th className='govuk-table__header'>Reference</th>
                             <th className='govuk-table__header'>Stage</th>
+                            <th className='govuk-table__header'>Member</th>
                             <th className='govuk-table__header'>Actions</th>
                         </tr>
                     </thead>
@@ -44,9 +45,11 @@ class Workstack extends Component {
                                             <strong className='govuk-tag'>{c.caseType}</strong>
                                         </td>
                                         <td className='govuk-table__cell'>{c.caseReference}</td>
-                                        <td className='govuk-table__cell'>{c.type}</td>
+                                        <td className='govuk-table__cell'>{c.stageTypeDisplay}</td>
+                                        {/* We don't need this on the User stack, only the Team stack */}
+                                        <td className='govuk-table__cell'>{c.assignedUserDisplay}</td>
                                         <td className='govuk-table__cell'>
-                                            <Link to={`/case/${c.caseUUID}/stage/${c.stageUUID}`} className="govuk-link govuk-!-margin-right-3">View</Link>
+                                            <Link to={`/case/${c.caseUUID}/stage/${c.stageUUID}`} className="govuk-link govuk-!-margin-right-3">Casework</Link>
                                             <Link to={`/case/${c.caseUUID}/summary`} className="govuk-link">Summary</Link>
                                         </td>
                                     </tr>
