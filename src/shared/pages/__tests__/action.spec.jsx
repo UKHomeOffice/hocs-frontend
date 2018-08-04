@@ -96,7 +96,7 @@ describe('Action page component', () => {
         expect(mockDispatch.mock.calls[1][0].type).toEqual('UPDATE_FORM');
     });
 
-    it('should disatch UPDATE_LOCATION and SET_ERROR if getForm fails', async () => {
+    it('should dispatch UPDATE_LOCATION and SET_ERROR if getForm fails', async () => {
         mockMatch.url = '/invalid';
         const outer = shallow(<Action match={mockMatch} />);
         const Children = outer.props().children;

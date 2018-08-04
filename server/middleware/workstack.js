@@ -5,7 +5,7 @@ const workstackMiddleware = async (req, res, next) => {
     try {
         res.data = {};
         const response = await caseworkServiceClient.get('/case/active');
-        res.data.workstack = response.data;
+        res.data.workstack = response.data.activeStages;
         next();
     } catch (e) {
         logger.error(e.stack);

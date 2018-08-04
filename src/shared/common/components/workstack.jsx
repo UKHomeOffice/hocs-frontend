@@ -32,7 +32,7 @@ class Workstack extends Component {
                             <th className='govuk-table__header'>Type</th>
                             <th className='govuk-table__header'>Reference</th>
                             <th className='govuk-table__header'>Stage</th>
-                            <th className='govuk-table__header'>Member</th>
+                            <th className='govuk-table__header'>User</th>
                             <th className='govuk-table__header'>Actions</th>
                         </tr>
                     </thead>

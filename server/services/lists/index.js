@@ -1,5 +1,5 @@
 const listDefinitions = {
-    workflowTypes: '/workflow'
+    workflowTypes: '/caseType'
 };
 
 module.exports = {

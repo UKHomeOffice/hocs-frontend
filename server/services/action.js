@@ -48,7 +48,7 @@ function handleActionSuccess(workflow, form) {
 }
 
 function handleWorkflowSuccess(response, { caseId, stageId }) {
-    if (response.data && response.data.screenName !== 'FINISH') {
+    if (response.data && response.data.form) {
         return { callbackUrl: `/case/${caseId}/stage/${stageId}` };
     } else {
         return { callbackUrl: '/' };
