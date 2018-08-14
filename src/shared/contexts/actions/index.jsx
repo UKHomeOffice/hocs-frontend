@@ -65,3 +65,19 @@ export function redirect(url) {
         payload: url
     };
 }
+
+export function updateApiStatus(status) {
+    return {
+        type: types.UPDATE_API_STATUS,
+        payload: {
+            status,
+            timeStamp: Date.now()
+        }
+    };
+}
+
+export function clearApiStatus() {
+    return {
+        type: types.CLEAR_API_STATUS
+    };
+}

@@ -42,6 +42,10 @@ const reducer = (state, action) => {
         return { ...state, error: null };
     case types.UNSET_FORM:
         return { ...state, form: null };
+    case types.UPDATE_API_STATUS:
+        return { ...state, apiStatus: action.payload };
+    case types.CLEAR_API_STATUS:
+        return { ...state, apiStatus: null };
     default:
         /* eslint-disable-next-line  no-console*/
         console.warn('Unsupported action');
@@ -55,7 +59,12 @@ export class ApplicationProvider extends Component {
             ...props.config,
             apiStatus: null,
             dispatch: action => {
-                this.setState(state => reducer(state, action));
+                try {
+                    this.setState(state => reducer(state, action));
+                    return Promise.resolve();
+                } catch (error) {
+                    return Promise.reject(error);
+                }
             }
         };
     }

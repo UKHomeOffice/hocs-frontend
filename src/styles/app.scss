@@ -18,3 +18,17 @@ $tablet-breakpoint: 641px !default;
   color: govuk-colour("pink");
   background-color: govuk-colour("grey-4");
 }
+
+.notification {
+  @extend %govuk-body-s;
+  background-color: govuk-colour("blue");
+  color: govuk-colour("white");
+  padding: govuk-spacing(2);
+  top: 0px;
+  right: 0px;
+  position: absolute;
+}
+
+.notification--error {
+  background-color: govuk-colour("red");
+}

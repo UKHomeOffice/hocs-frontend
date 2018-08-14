@@ -4,6 +4,7 @@ import StagePage from '../../pages/stage.jsx';
 import CaseSummaryPage from '../../pages/summary.jsx';
 import Error from '../../layouts/error.jsx';
 import MainPage from '../../pages/main.jsx';
+import formEnabled from '../../pages/form-enabled.jsx';
 
 const routes = [
     {
@@ -15,12 +16,12 @@ const routes = [
     {
         path: '/action/:workflow/:action',
         exact: true,
-        component: ActionPage
+        component: formEnabled(ActionPage)
     },
     {
         path: '/action/:workflow/:context/:action',
         exact: true,
-        component: ActionPage
+        component: formEnabled(ActionPage)
     },
     {
         path: '/case/:caseId/summary',
@@ -30,7 +31,7 @@ const routes = [
     {
         path: '/case/:caseId/stage/:stageId',
         exact: true,
-        component: StagePage,
+        component: formEnabled(StagePage),
     },
     {
         path: '/case/:caseId/action/:entity/:action/',

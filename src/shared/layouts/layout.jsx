@@ -23,6 +23,7 @@ class Layout extends Component {
     }
 
     componentWillUnmount() {
+        clearInterval(this.interval);
         if (this.props.history && this.props.history.action === 'POP') {
             this.props.dispatch(unsetForm());
             this.props.dispatch(unsetError());
@@ -31,12 +32,18 @@ class Layout extends Component {
 
     render() {
         const {
+            apiStatus,
             children,
             error,
             layout: { header, body, footer }
         } = this.props;
         return (
             <Fragment>
+                {apiStatus &&
+                    <div className={`notification${apiStatus.status.type === 'ERROR' ? ' notification--error' : ''}`}>
+                        {apiStatus.status.display}
+                    </div>
+                }
                 <Header {...header} />
                 <Body {...body} error={error}>
                     {error ? <Error {...error} /> : children}
@@ -49,6 +56,7 @@ class Layout extends Component {
 }
 
 Layout.propTypes = {
+    apiStatus: PropTypes.object,
     children: PropTypes.node,
     dispatch: PropTypes.func.isRequired,
     history: PropTypes.object,
@@ -62,7 +70,13 @@ Layout.defaultProps = {
 
 const WrappedLayout = props => (
     <ApplicationConsumer>
-        {({ dispatch, redirect, error, layout }) => <Layout {...props} dispatch={dispatch} redirect={redirect} error={error} layout={layout}/>}
+        {({
+            apiStatus,
+            dispatch,
+            redirect,
+            error,
+            layout
+        }) => <Layout {...props} dispatch={dispatch} redirect={redirect} error={error} layout={layout} apiStatus={apiStatus} />}
     </ApplicationConsumer>
 );
 

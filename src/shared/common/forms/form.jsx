@@ -5,7 +5,15 @@ import Submit from './submit.jsx';
 import ErrorSummary from './error-summary.jsx';
 import { formComponentFactory, secondaryActionFactory } from './form-repository.jsx';
 import { ApplicationConsumer } from '../../contexts/application.jsx';
-import { redirect, updateForm, updateFormData, updateFormErrors, setError } from '../../contexts/actions/index.jsx';
+import {
+    redirect,
+    updateForm,
+    updateFormData,
+    updateFormErrors,
+    setError,
+    updateApiStatus
+} from '../../contexts/actions/index.jsx';
+import status from '../../helpers/api-status.js';
 
 class Form extends Component {
 
@@ -21,7 +29,7 @@ class Form extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        const url = this.props.action;
+        const { action, dispatch } = this.props;
         /* eslint-disable-next-line no-undef */
         const formData = new FormData();
         Object.keys(this.state).map(field => {
@@ -33,23 +41,30 @@ class Form extends Component {
                 formData.append(field, this.state[field]);
             }
         });
-        axios.post(url, formData, { headers: { 'Content-Type': 'multipart/form-data' } })
+        dispatch(updateApiStatus(status.SUBMIT_FORM));
+        axios.post(action, formData, { headers: { 'Content-Type': 'multipart/form-data' } })
             .then(res => {
-                if (res.data.errors) {
-                    this.props.dispatch(updateFormErrors(res.data.errors));
-                } else {
-                    if (res.data.redirect === url) {
-                        this.props.dispatch(updateForm(null));
-                        return this.props.getForm();
-                    }
-                    this.props.dispatch(updateForm(null));
-                    this.props.dispatch(redirect(res.data.redirect));
-                }
+                dispatch(updateApiStatus(status.SUBMIT_FORM_SUCCESS))
+                    .then(() => {
+                        if (res.data.errors) {
+                            dispatch(updateApiStatus(status.SUBMIT_FORM_VALIDATION_ERROR))
+                                .then(() => dispatch(updateFormErrors(res.data.errors)));
+
+                        } else {
+                            if (res.data.redirect === action) {
+                                return dispatch(updateForm(null))
+                                    .then(() => this.props.getForm());
+
+                            }
+                            dispatch(updateForm(null))
+                                .then(() => dispatch(redirect(res.data.redirect)));
+                        }
+                    });
             })
             .catch(err => {
                 /* eslint-disable-next-line no-console */
-                console.error(err);
-                return this.props.dispatch(setError(err.response.data));
+                return dispatch(updateApiStatus(status.SUBMIT_FORM_FAILURE))
+                    .then(() => dispatch(setError(err.response.data)));
             });
     }
 
@@ -65,34 +80,38 @@ class Form extends Component {
         return (
             <Fragment>
                 {errors && <ErrorSummary errors={errors} />}
-                <form
+                < form
                     action={action + '?noScript=true'}
                     method={method}
                     onSubmit={e => this.handleSubmit(e)}
                     encType="multipart/form-data"
                 >
                     {children}
-                    {schema && schema.fields && schema.fields.map((field, key) => {
-                        return formComponentFactory(field.component, {
-                            key,
-                            config: field.props,
-                            data,
-                            errors,
-                            callback: this.updateFormState.bind(this)
-                        });
-                    })}
-                    <Submit label={schema.defaultActionLabel} />
-                    {schema && schema.secondaryActions && schema.secondaryActions.map((field, key) => {
-                        return secondaryActionFactory(field.component, {
-                            key,
-                            config: field.props,
-                            data,
-                            errors,
-                            callback: this.updateFormState.bind(this)
-                        });
-                    })}
-                </form>
-            </Fragment>
+                    {
+                        schema && schema.fields && schema.fields.map((field, key) => {
+                            return formComponentFactory(field.component, {
+                                key,
+                                config: field.props,
+                                data,
+                                errors,
+                                callback: this.updateFormState.bind(this)
+                            });
+                        })
+                    }
+                    < Submit label={schema.defaultActionLabel} />
+                    {
+                        schema && schema.secondaryActions && schema.secondaryActions.map((field, key) => {
+                            return secondaryActionFactory(field.component, {
+                                key,
+                                config: field.props,
+                                data,
+                                errors,
+                                callback: this.updateFormState.bind(this)
+                            });
+                        })
+                    }
+                </form >
+            </Fragment >
         );
     }
 }
