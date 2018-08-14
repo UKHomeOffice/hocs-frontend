@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { allocateCase } = require('../../middleware/stage');
 const { getFormForAction, getFormForCase, getFormForStage } = require('../../services/form');
 const { protectAction } = require('../../middleware/auth');
 
@@ -15,7 +16,9 @@ router.use(['/action/:workflow/:context/:action', '/action/:workflow/:action'],
     protectAction()
 );
 
-router.use('/case/:caseId/stage/:stageId', getFormForStage);
+router.use('/case/:caseId/stage/:stageId/allocate', allocateCase);
+
+router.use(['/case/:caseId/stage/:stageId', '/case/:caseId/stage/:stageId/allocate'], getFormForStage);
 
 router.use('/case/:caseId/action/:entity/:action', getFormForCase);
 

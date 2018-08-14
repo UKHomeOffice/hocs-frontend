@@ -51,7 +51,11 @@ class Workstack extends Component {
                                         <td className='govuk-table__cell'>{c.assignedUserDisplay}</td>
                                         <td className='govuk-table__cell'>{c.assignedTeamDisplay}</td>
                                         <td className='govuk-table__cell'>
-                                            <Link to={`/case/${c.caseUUID}/stage/${c.stageUUID}`} className="govuk-link govuk-!-margin-right-3">Casework</Link>
+                                            {
+                                                c.assignedUserDisplay === 'Unassigned' ?
+                                                    <Link to={`/case/${c.caseUUID}/stage/${c.stageUUID}/allocate`} className="govuk-link govuk-!-margin-right-3">Allocate</Link> :
+                                                    <Link to={`/case/${c.caseUUID}/stage/${c.stageUUID}`} className="govuk-link govuk-!-margin-right-3">Casework</Link>
+                                            }
                                             <Link to={`/case/${c.caseUUID}/summary`} className="govuk-link">Summary</Link>
                                         </td>
                                     </tr>
