@@ -13,11 +13,6 @@ exports[`Form date component should render disabled when passed 1`] = `
     <legend
       class="govuk-fieldset__legend govuk-label--s"
     />
-    <span
-      class="govuk-hint"
-    >
-      For example, 31 03 1980
-    </span>
     <div
       class="govuk-date-input"
     >
@@ -110,11 +105,6 @@ exports[`Form date component should render with default props 1`] = `
     <legend
       class="govuk-fieldset__legend govuk-label--s"
     />
-    <span
-      class="govuk-hint"
-    >
-      For example, 31 03 1980
-    </span>
     <div
       class="govuk-date-input"
     >
@@ -207,11 +197,6 @@ exports[`Form date component should render with error when passed 1`] = `
     <legend
       class="govuk-fieldset__legend govuk-label--s"
     />
-    <span
-      class="govuk-hint"
-    >
-      For example, 31 03 1980
-    </span>
     <span
       class="govuk-error-message"
     >
@@ -408,11 +393,6 @@ exports[`Form date component should render with label when passed 1`] = `
     >
       My text field
     </legend>
-    <span
-      class="govuk-hint"
-    >
-      For example, 31 03 1980
-    </span>
     <div
       class="govuk-date-input"
     >
@@ -505,11 +485,6 @@ exports[`Form date component should render with value when passed 1`] = `
     <legend
       class="govuk-fieldset__legend govuk-label--s"
     />
-    <span
-      class="govuk-hint"
-    >
-      For example, 31 03 1980
-    </span>
     <div
       class="govuk-date-input"
     >

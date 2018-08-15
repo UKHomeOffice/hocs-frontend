@@ -7,7 +7,7 @@ jest.mock('../../libs/request.js', () => {
             get: (url) => {
                 mockCaseworkSeviceClient(url);
                 return Promise.resolve({
-                    data: 'WORKSTACK_DATA'
+                    data: { activeStages: 'WORKSTACK_DATA' }
                 });
             }
         }
@@ -29,7 +29,7 @@ describe('Workstack middleware', () => {
     it('should call the caseworkServiceClient and attach workstack data to the response object', async () => {
         await workstackMiddleware(req, res, next);
         expect(mockCaseworkSeviceClient).toHaveBeenCalled();
-        expect(mockCaseworkSeviceClient).toHaveBeenLastCalledWith('/case/active');
+        expect(mockCaseworkSeviceClient).toHaveBeenLastCalledWith('/stage/active');
         expect(next).toHaveBeenCalled();
         expect(res.data).toBeDefined();
         expect(res.data.workstack).toBeDefined();

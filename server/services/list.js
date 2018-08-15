@@ -39,8 +39,7 @@ function handleListFailure(listId, error) {
 const lists = {
     'CASE_TYPES': async ({ user }) => {
         if (listRepository.workflowTypes) {
-            return listRepository.workflowTypes
-                .filter(listItem => User.hasRole(user, listItem.requiredRole));
+            return listRepository.workflowTypes;
         } else {
             const list = 'workflowTypes';
             logger.info(`List ${list} unavailable, attempting to retrieve`);
