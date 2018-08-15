@@ -78,14 +78,14 @@ const actions = {
             case CREATE_CASE:
                 try {
                     const response = await createCase('/case', { caseType: context, form });
-                    const clientResponse = { callbackUrl: `/case/${response.data.caseId}/stage/${response.data.stageId}/allocate` };
+                    const clientResponse = { summary: `${response.data.reference}` };
                     return handleActionSuccess(clientResponse, workflow, form);
                 } catch (err) {
                     return handleActionFailure(err);
                 }
             case BULK_CREATE_CASE: {
                 try {
-                    const response = await createCase('/bulk', { caseType: context, form });
+                    const response = await createCase('/case/bulk', { caseType: context, form });
                     const clientResponse = { summary: `Successfully submitted ${response.data.count} files` };
                     return handleActionSuccess(clientResponse, workflow, form);
                 } catch (err) {

@@ -20,7 +20,10 @@ const workflowDefinitions = {
             },
             DOCUMENT: {
                 schema: addDocument,
-                action: CREATE_CASE
+                action: CREATE_CASE,
+                next: {
+                    action: 'CONFIRMATION_SUMMARY'
+                }
             }
         },
         TEST: {
