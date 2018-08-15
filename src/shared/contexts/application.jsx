@@ -15,11 +15,10 @@ const reducer = (state, action) => {
             ...state, form: action.payload
         };
     case types.UPDATE_FORM_DATA:
+
         return {
             ...state, form: {
-                ...state.form, data: {
-                    ...state.form.data, ...action.payload
-                }
+                ...state.form, data: state.form && state.form.data ? { ...state.form.data, ...action.payload } : { ...action.payload }
             }
         };
     case types.UPDATE_FORM_ERRORS:

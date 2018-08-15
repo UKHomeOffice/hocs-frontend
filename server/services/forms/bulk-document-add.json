@@ -1,10 +1,11 @@
 {
   "title": "Add documents",
-  "defaultActionLabel": "Next",
+  "defaultActionLabel": "Create",
   "fields": [
     {
       "component": "add-document",
       "validation": [
+        "required",
         "hasWhitelistedExtension"
       ],
       "props": {

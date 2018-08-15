@@ -36,7 +36,7 @@ const routes = [
     {
         path: '/case/:caseId/stage/:stageId/allocate',
         exact: true,
-        component: StagePage,
+        component: formEnabled(StagePage),
     },
     {
         path: '/case/:caseId/action/:entity/:action/',

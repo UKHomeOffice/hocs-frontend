@@ -6,28 +6,12 @@ import Footer from './components/footer.jsx';
 import Error from './error.jsx';
 import { ApplicationConsumer } from '../contexts/application.jsx';
 import { Redirect } from 'react-router-dom';
-import { redirected, unsetForm, unsetError } from '../contexts/actions/index.jsx';
 
 class Layout extends Component {
 
     constructor(props) {
         super(props);
         this.state = {};
-    }
-
-    componentDidMount() {
-        if (this.props.redirect) {
-            this.setState({ redirect: this.props.redirect });
-            this.props.dispatch(redirected());
-        }
-    }
-
-    componentWillUnmount() {
-        clearInterval(this.interval);
-        if (this.props.history && this.props.history.action === 'POP') {
-            this.props.dispatch(unsetForm());
-            this.props.dispatch(unsetError());
-        }
     }
 
     render() {

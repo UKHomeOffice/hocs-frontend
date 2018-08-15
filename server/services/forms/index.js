@@ -1,5 +1,7 @@
 const caseCreate = require('./case-create.json');
 const addDocument = require('./document-add.json');
+const bulkCaseCreate = require('./bulk-case-create.json');
+const bulkAddDocument = require('./bulk-document-add.json');
 const testForm = require('./case-test.json');
 const { CREATE_CASE, BULK_CREATE_CASE, ADD_DOCUMENT } = require('../actions/types');
 
@@ -30,7 +32,7 @@ const workflowDefinitions = {
         BULK: {
             requiredRole: BULK_CREATE_CASE,
             WORKFLOW: {
-                schema: caseCreate,
+                schema: bulkCaseCreate,
                 next: {
                     action: 'DOCUMENT',
                     context: {
@@ -39,8 +41,11 @@ const workflowDefinitions = {
                 }
             },
             DOCUMENT: {
-                schema: addDocument,
-                action: BULK_CREATE_CASE
+                schema: bulkAddDocument,
+                action: BULK_CREATE_CASE,
+                next: {
+                    action: 'CONFIRMATION_SUMMARY'
+                }
             }
         }
     },
