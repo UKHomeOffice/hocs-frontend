@@ -7,7 +7,7 @@ jest.mock('../../libs/request.js', () => {
             get: (url) => {
                 mockCaseworkSeviceClient(url);
                 return Promise.resolve({
-                    data: 'WORKSTACK_DATA'
+                    data: { activeStages: 'WORKSTACK_DATA' }
                 });
             }
         }
