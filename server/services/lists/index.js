@@ -1,7 +1,12 @@
+const staticListDefinitions = {
+};
+
 const listDefinitions = {
-    workflowTypes: '/caseType'
+    workflowTypes: '/casetype/single',
+    workflowTypesBulk: '/casetype/bulk'
 };
 
 module.exports = {
+    staticListDefinitions,
     listDefinitions
 };

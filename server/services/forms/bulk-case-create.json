@@ -10,7 +10,7 @@
       "props": {
         "name": "case-type",
         "label": "Case type",
-        "choices": "CASE_TYPES"
+        "choices": "CASE_TYPES_BULK"
       }
     }
   ],
