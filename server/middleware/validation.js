@@ -1,12 +1,13 @@
 const logger = require('../libs/logger');
 const ErrorModel = require('../models/error');
-const { DOCUMENT_WHITELIST } = require('../config').forContext('server');
+const { DOCUMENT_WHITELIST, DOCUMENT_BULK_LIMIT } = require('../config').forContext('server');
 
 const validationErrors = {
     required: 'is required',
     invalidFileExtension: (extension) => {
         return 'is a ' + extension.toUpperCase() + ' file which is not allowed';
     },
+    fileLimit: 'exceeds the maximum number of files allowed in a single transaction',
     nonsensicalDate: 'must be a date', // TODO: better error message
     mustBeInPast: 'must be a date in the past',
     mustBeInFuture: 'must be a date in the future'
@@ -32,11 +33,10 @@ const validators = {
         return null;
     },
     required: (value) => {
-        if (value !== null && value !== '') {
-            return null;
-        } else {
+        if (value === null || value === '') {
             return validationErrors.required;
         }
+        return null;
     },
     hasWhitelistedExtension: (files) => {
         if (files && files.length > 0) {
@@ -51,6 +51,12 @@ const validators = {
                 }
                 logger.debug('Accepting extension: ' + fileExtension);
             }
+        }
+        return null;
+    },
+    fileLimit: (files) => {
+        if (files && files.length > DOCUMENT_BULK_LIMIT) {
+            return validationErrors.fileLimit;
         }
         return null;
     }

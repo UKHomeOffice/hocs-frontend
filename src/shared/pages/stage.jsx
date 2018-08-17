@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import formEnabled from './form-enabled.jsx';
 
 class Stage extends Component {
 
@@ -29,4 +30,4 @@ Stage.propTypes = {
     title: PropTypes.string
 };
 
-export default Stage;
+export default formEnabled(Stage);

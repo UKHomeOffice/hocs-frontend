@@ -67,10 +67,10 @@ Form.propTypes = {
     data: PropTypes.object,
     dispatch: PropTypes.func.isRequired,
     errors: PropTypes.object,
-    getForm: PropTypes.func.isRequired,
     method: PropTypes.string,
     schema: PropTypes.object.isRequired,
-    submitHandler: PropTypes.func.isRequired
+    submitHandler: PropTypes.func.isRequired,
+    updateFormState: PropTypes.func.isRequired
 };
 
 Form.defaultProps = {

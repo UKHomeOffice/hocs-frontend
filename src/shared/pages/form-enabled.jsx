@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import Form from '../common/forms/form.jsx';
@@ -8,17 +8,13 @@ import {
     updateForm,
     updateFormData,
     updateFormErrors,
-    updateLocation,
     setError,
-    redirect,
     updateApiStatus,
     clearApiStatus,
-    redirected,
-    unsetForm,
-    unsetError
-
+    unsetForm
 } from '../contexts/actions/index.jsx';
 import status from '../helpers/api-status.js';
+import BackLink from '../common/forms/backlink.jsx';
 
 function withForm(Page) {
 
@@ -26,61 +22,58 @@ function withForm(Page) {
 
         constructor(props) {
             super(props);
-            this.state = { ...props, formData: {} };
+            this.state = { formData: {} };
         }
 
         componentDidMount() {
-            const { match, dispatch } = this.props;
-            dispatch(updateLocation(match))
-                .then(() => {
-                    if (this.props.redirect) {
-                        this.props.dispatch(redirected());
-                    }
-                });
-            this.getFormFromServer();
+            this.getForm();
         }
 
         componentWillUnmount() {
-            this.props.dispatch(unsetForm());
-            this.props.dispatch(unsetError());
+            const { dispatch } = this.props;
+            return dispatch(unsetForm());
         }
 
-        getFormFromServer() {
-            const { match, dispatch } = this.props;
-            const { url } = match;
-            {
-                return dispatch(updateApiStatus(status.REQUEST_FORM))
-                    .then(() => {
-                        axios.get(`/forms/${url}`)
-                            .then(res => {
-                                dispatch(updateApiStatus(status.REQUEST_FORM_SUCCESS))
-                                    .then(() => dispatch(updateForm(res.data)))
-                                    .then(() => dispatch(clearApiStatus()))
-                                    .catch(error => {
-                                        dispatch(updateApiStatus(status.UPDATE_FORM_FAILURE));
-                                        dispatch(setError(error));
-                                    });
-                            })
-                            .catch(({ response }) => {
-                                dispatch(updateApiStatus(status.REQUEST_FORM_FAILURE));
-                                dispatch(setError(response.data));
-                            });
-                    });
-            }
+        shouldComponentUpdate(nextProps, nextState) {
+            return (JSON.stringify(this.props) !== JSON.stringify(nextProps))
+                || (JSON.stringify(this.state) !== JSON.stringify(nextState));
+        }
+
+        getForm() {
+            const { dispatch, match: { url } } = this.props;
+            const endpoint = `/forms${url}`;
+            return dispatch(updateApiStatus(status.REQUEST_FORM))
+                .then(() => {
+                    axios.get(endpoint)
+                        .then(response => {
+                            dispatch(updateApiStatus(status.REQUEST_FORM_SUCCESS))
+                                .then(() => dispatch(updateForm(response.data)))
+                                .then(() => dispatch(clearApiStatus()))
+                                .catch(error => {
+                                    dispatch(updateApiStatus(status.UPDATE_FORM_FAILURE))
+                                        .then(dispatch(setError(error)));
+                                });
+                        })
+                        .catch(({ response }) => {
+                            dispatch(updateApiStatus(status.REQUEST_FORM_FAILURE))
+                                .then(() => dispatch(setError(response.data)));
+                        });
+
+                });
         }
 
         submitHandler(e) {
             e.preventDefault();
-            const { match: { url }, dispatch } = this.props;
+            const { dispatch, history, match: { url } } = this.props;
             /* eslint-disable-next-line no-undef */
             const formData = new FormData();
-            Object.keys(this.state.formData).map(field => {
-                if (Array.isArray(this.state.formData[field])) {
-                    this.state.formData[field].map(value => {
+            Object.keys(this.props.form.data).map(field => {
+                if (Array.isArray(this.props.form.data[field])) {
+                    this.props.form.data[field].map(value => {
                         formData.append(`${field}[]`, value);
                     });
                 } else {
-                    formData.append(field, this.state.formData[field]);
+                    formData.append(field, this.props.form.data[field]);
                 }
             });
             return dispatch(updateApiStatus(status.SUBMIT_FORM))
@@ -105,7 +98,7 @@ function withForm(Page) {
                                         }
                                         return dispatch(updateForm(null))
                                             .then(() => dispatch(clearApiStatus()))
-                                            .then(() => dispatch(redirect(res.data.redirect)));
+                                            .then((() => history.push(res.data.redirect)));
                                     }
                                 });
                         })
@@ -119,27 +112,27 @@ function withForm(Page) {
         }
 
         updateState(data) {
-            this.setState({ formData: data });
             this.props.dispatch(updateFormData(data));
         }
 
         renderConfirmation() {
             return (
-                <Panel>
-                    {this.state.confirmation.summary}
-                </Panel >
+                <Fragment>
+                    <Panel title='Success'>
+                        {this.state.confirmation.summary}
+                    </Panel >
+                    <BackLink />
+                </Fragment>
             );
         }
 
         renderForm() {
-            const { form, match } = this.props;
-            const { url, params } = match;
+            const { form, match: { url } } = this.props;
             return (
-                <Page {...params} title={form.schema.title} form={form.meta} >
+                <Page title={form.schema.title} form={form.meta} >
                     {form.schema && <Form
                         {...form}
                         action={url}
-                        getForm={this.getFormFromServer.bind(this)}
                         submitHandler={this.submitHandler.bind(this)}
                         updateFormState={this.updateState.bind(this)}
                     />}
@@ -150,20 +143,20 @@ function withForm(Page) {
         render() {
             const { form } = this.props;
             const { confirmation } = this.state;
-            if (confirmation) {
-                return this.renderConfirmation();
-            } else if (form && form.schema) {
-                return this.renderForm();
-            } else {
-                return null;
-            }
+            return (
+                <Fragment>
+                    {confirmation && this.renderConfirmation()}
+                    {!confirmation && form && form.schema && this.renderForm()}
+                </Fragment>
+            );
         }
     }
 
     FormEnabled.propTypes = {
         dispatch: PropTypes.func.isRequired,
         form: PropTypes.object,
-        match: PropTypes.object
+        history: PropTypes.object.isRequired,
+        match: PropTypes.object.isRequired
     };
 
     return FormEnabled;
@@ -175,18 +168,16 @@ const FormEnabledWrapper = Page => {
         const WrappedPage = withForm(Page);
         return (
             <ApplicationConsumer>
-                {({ dispatch, form, redirect }) => (
+                {({ dispatch, form }) => (
                     <WrappedPage
                         {...props}
                         dispatch={dispatch}
                         form={form}
-                        redirect={redirect}
                     />
                 )}
             </ApplicationConsumer>
         );
     };
-
 };
 
 export default FormEnabledWrapper;

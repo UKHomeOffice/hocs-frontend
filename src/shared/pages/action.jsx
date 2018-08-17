@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import formEnabled from './form-enabled.jsx';
 
 class Action extends Component {
 
@@ -29,4 +30,4 @@ Action.propTypes = {
     subTitle: PropTypes.string
 };
 
-export default Action;
+export default formEnabled(Action);

@@ -17,7 +17,6 @@ class CaseSummary extends Component {
     }
 
     componentDidMount() {
-        this.props.dispatch(updateLocation(this.props.match));
         this.getSummary();
     }
 

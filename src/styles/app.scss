@@ -20,12 +20,12 @@ $tablet-breakpoint: 641px !default;
 }
 
 .notification {
-  @extend %govuk-body-s;
+  @include govuk-font(14, $weight: bold);
   background-color: govuk-colour("blue");
   color: govuk-colour("white");
   padding: govuk-spacing(2);
   top: 0px;
-  right: 0px;
+  right: govuk-spacing(2);
   position: absolute;
 }
 

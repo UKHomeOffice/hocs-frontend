@@ -6,7 +6,8 @@
       "component": "add-document",
       "validation": [
         "required",
-        "hasWhitelistedExtension"
+        "hasWhitelistedExtension",
+        "fileLimit"
       ],
       "props": {
         "name": "add_document",
