@@ -1,4 +1,3 @@
-const User = require('../models/user');
 const { DOCUMENT_WHITELIST } = require('../config').forContext('server');
 const { infoServiceClient } = require('../libs/request');
 const logger = require('../libs/logger');
@@ -7,9 +6,9 @@ const { listDefinitions, staticListDefinitions } = require('./lists/index');
 const listRepository = {};
 
 async function initialise() {
-    const listRequests = Object.entries(staticListDefinitions).reduce((reducer, list) => {
-        logger.info(`Fetching list: ${list}`);
-        reducer.push({ list, request: fetchList(list.value) });
+    const listRequests = Object.entries(staticListDefinitions).reduce((reducer, [key, value]) => {
+        logger.info(`Fetching list: ${key}`);
+        reducer.push({ key, request: fetchList(value) });
         return reducer;
     }, []);
 

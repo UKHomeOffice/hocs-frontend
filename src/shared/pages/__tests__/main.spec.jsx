@@ -11,11 +11,9 @@ describe('Main page component', () => {
     });
 
     it('should render with default props', () => {
-        const outer = shallow(<Main />);
-        const Children = outer.props().children;
         const wrapper = mount(
             <MemoryRouter>
-                <Children dispatch={mockDispatch} />
+                <Main />
             </MemoryRouter>
         );
         expect(wrapper).toBeDefined();
@@ -23,11 +21,9 @@ describe('Main page component', () => {
     });
 
     it('should render with caption when passed in props', () => {
-        const outer = shallow(<Main caption='MY_CAPTION' />);
-        const Children = outer.props().children;
         const wrapper = mount(
             <MemoryRouter>
-                <Children dispatch={mockDispatch} />
+                <Main caption='MY CAPTION' />
             </MemoryRouter>
         );
         expect(wrapper).toBeDefined();

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import Submit from './submit.jsx';
 import ErrorSummary from './error-summary.jsx';
 import { formComponentFactory, secondaryActionFactory } from './form-repository.jsx';
-import { ApplicationConsumer } from '../../contexts/application.jsx';
 
 class Form extends Component {
 
@@ -65,7 +64,6 @@ Form.propTypes = {
     children: PropTypes.node,
     secondaryActions: PropTypes.node,
     data: PropTypes.object,
-    dispatch: PropTypes.func.isRequired,
     errors: PropTypes.object,
     method: PropTypes.string,
     schema: PropTypes.object.isRequired,
@@ -78,10 +76,4 @@ Form.defaultProps = {
     method: 'POST'
 };
 
-const WrappedForm = props => (
-    <ApplicationConsumer>
-        {({ dispatch, redirect }) => <Form {...props} dispatch={dispatch} redirect={redirect} />}
-    </ApplicationConsumer>
-);
-
-export default WrappedForm;
+export default Form;

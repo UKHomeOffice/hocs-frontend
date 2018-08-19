@@ -5,7 +5,11 @@ const mockRequestClient = jest.fn();
 jest.mock('../../libs/request', () => {
     function handleMockWorkflowCreateRequest(body) {
         if (body.type === 'SUPPORTED_CASETYPE')
-            return Promise.resolve();
+            return Promise.resolve({
+                data: {
+                    reference: 'CASE_REFERENCE'
+                }
+            });
         else
             return Promise.reject('TEST_ERROR');
     }
@@ -55,6 +59,9 @@ const testCreateCaseForm = {
                 location: '/location/to/the/file'
             }
         ]
+    },
+    next: {
+        action: 'CONFIRMATION_SUMMARY'
     }
 };
 
@@ -87,7 +94,7 @@ describe('Action service', () => {
         expect(mockRequestClient).toHaveBeenCalledTimes(1);
         expect(mockRequestClient).toHaveBeenCalledWith(createCaseRequest);
         expect(response).toBeDefined();
-        expect(response).toHaveProperty('callbackUrl', '/');
+        expect(response).toHaveProperty('confirmation');
     });
 
     it('should return an error object when when "CREATE_CASE" action fails', async () => {
@@ -118,7 +125,7 @@ describe('Action service', () => {
         expect(mockRequestClient).toHaveBeenCalledTimes(1);
         expect(mockRequestClient).toHaveBeenCalledWith(createCaseRequest);
         expect(response).toBeDefined();
-        expect(response).toHaveProperty('callbackUrl', '/');
+        expect(response).toHaveProperty('confirmation');
     });
 
     it('should return an error object when when "BULK_CREATE_CASE" action fails', async () => {

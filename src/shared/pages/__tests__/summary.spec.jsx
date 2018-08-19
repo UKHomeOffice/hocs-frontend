@@ -71,40 +71,4 @@ describe('Summary page component', () => {
         expect(axios.get).toHaveBeenCalled();
     });
 
-    it('should disatch UPDATE_LOCATION and UPDATE_FORM on mount', async () => {
-        mockMatch.url = '/valid';
-        const outer = shallow(<Summary match={mockMatch} />);
-        const Children = outer.props().children;
-        const wrapper = mount(
-            <MemoryRouter>
-                <Children dispatch={mockDispatch} />
-            </MemoryRouter>
-        );
-        expect(wrapper).toBeDefined();
-        expect(axios.get).toHaveBeenCalled();
-        expect(mockDispatch).toHaveBeenCalled();
-        await mockDispatch;
-        expect(mockDispatch).toHaveBeenCalledTimes(1);
-        expect(mockDispatch.mock.calls[0][0].type).toEqual('UPDATE_LOCATION');
-    });
-
-    it('should disatch UPDATE_LOCATION and SET_ERROR if getForm fails', async () => {
-        mockMatch.url = '/invalid';
-        const outer = shallow(<Summary match={mockMatch} />);
-        const Children = outer.props().children;
-        const wrapper = mount(
-            <MemoryRouter>
-                <Children dispatch={mockDispatch} />
-            </MemoryRouter>
-        );
-        expect(wrapper).toBeDefined();
-        expect(axios.get).toHaveBeenCalled();
-        expect(mockDispatch).toHaveBeenCalled();
-        await mockDispatch;
-        await mockDispatch;
-        expect(mockDispatch).toHaveBeenCalledTimes(2);
-        expect(mockDispatch.mock.calls[0][0].type).toEqual('UPDATE_LOCATION');
-        expect(mockDispatch.mock.calls[1][0].type).toEqual('SET_ERROR');
-    });
-
 });
