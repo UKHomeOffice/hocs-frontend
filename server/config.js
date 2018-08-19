@@ -34,7 +34,9 @@ const config = {
             WORKFLOW_BASIC_AUTH: process.env.WORKFLOW_BASIC_AUTH ?
                 { username: workflowAuth[0], password: workflowAuth[1] } : null,
             CASEWORK_SERVICE: process.env.CASEWORK_SERVICE || 'http://localhost:8082',
-            DOCUMENT_WHITELIST: (process.env.ALLOWED_FILE_EXTENSIONS || 'txt,doc,docx').split(',').map(extension => extension.trim())
+            INFO_SERVICE: process.env.INFO_SERVICE || 'http://localhost:8085',
+            DOCUMENT_WHITELIST: (process.env.ALLOWED_FILE_EXTENSIONS || 'txt,doc,docx').split(',').map(extension => extension.trim()),
+            DOCUMENT_BULK_LIMIT: process.env.DOCUMENT_BULK_LIMIT || 40,
         },
         AWS: {
             S3: {

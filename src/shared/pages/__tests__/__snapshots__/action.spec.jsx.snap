@@ -1,80 +1,66 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Action page component should render with caption when passed in props 1`] = `
-<Action
-  caption="MY_CAPTION"
-  dispatch={
-    [MockFunction] {
-      "calls": Array [
-        Array [
-          Object {
-            "payload": Object {
-              "url": "/",
-            },
-            "type": "UPDATE_LOCATION",
-          },
-        ],
-      ],
-    }
-  }
-  match={
-    Object {
-      "url": "/",
-    }
-  }
+exports[`Action page component should render children when passed 1`] = `
+<div
+  class="govuk-grid-row"
 >
   <div
-    className="govuk-grid-row"
+    class="govuk-grid-column-full"
   >
-    <div
-      className="govuk-grid-column-full"
-    >
-      <h1
-        className="govuk-heading-l"
-      >
-        <span
-          className="govuk-caption-l"
-        >
-          MY_CAPTION
-        </span>
-      </h1>
-    </div>
+    <h1
+      class="govuk-heading-l"
+    />
+    FORM
   </div>
-</Action>
+</div>
 `;
 
 exports[`Action page component should render with default props 1`] = `
-<Action
-  dispatch={
-    [MockFunction] {
-      "calls": Array [
-        Array [
-          Object {
-            "payload": Object {
-              "url": "/",
-            },
-            "type": "UPDATE_LOCATION",
-          },
-        ],
-      ],
-    }
-  }
-  match={
-    Object {
-      "url": "/",
-    }
-  }
+<div
+  class="govuk-grid-row"
 >
   <div
-    className="govuk-grid-row"
+    class="govuk-grid-column-full"
   >
-    <div
-      className="govuk-grid-column-full"
-    >
-      <h1
-        className="govuk-heading-l"
-      />
-    </div>
+    <h1
+      class="govuk-heading-l"
+    />
   </div>
-</Action>
+</div>
+`;
+
+exports[`Action page component should render with subTitle when passed in props 1`] = `
+<div
+  class="govuk-grid-row"
+>
+  <div
+    class="govuk-grid-column-full"
+  >
+    <h1
+      class="govuk-heading-l"
+    >
+      <span
+        class="govuk-caption-l"
+      >
+        MY_SUBTITLE
+      </span>
+    </h1>
+  </div>
+</div>
+`;
+
+exports[`Action page component should render with title when passed in props 1`] = `
+<div
+  class="govuk-grid-row"
+>
+  <div
+    class="govuk-grid-column-full"
+  >
+    <h1
+      class="govuk-heading-l"
+    >
+      MY_TITLE
+    </h1>
+  </div>
+</div>
 `;

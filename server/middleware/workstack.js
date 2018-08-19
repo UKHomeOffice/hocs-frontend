@@ -9,6 +9,8 @@ const workstackMiddleware = async (req, res, next) => {
         next();
     } catch (e) {
         logger.error(e.stack);
+        res.data.workstack = [];
+        next();
     }
 };
 const workstackAjaxResponseMiddleware = async (req, res) => {

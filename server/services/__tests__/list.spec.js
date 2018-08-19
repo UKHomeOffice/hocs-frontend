@@ -1,5 +1,5 @@
 jest.mock('../../libs/request.js', () => ({
-    workflowServiceClient: {
+    infoServiceClient: {
         get: jest.fn(() => Promise.resolve())
     }
 }));
@@ -14,9 +14,19 @@ jest.mock('../../config', () => ({
     })
 }));
 
+jest.mock('../../services/lists/index.js', () => ({
+    listDefinitions: {
+        workflowTypes: '/test/url',
+        workflowTypesBulk: '/test/url'
+    },
+    staticListDefinitions: {
+        test: '/test/url'
+    }
+}));
+
 describe('List service', () => {
 
-    const { workflowServiceClient } = require('../../libs/request');
+    const { infoServiceClient } = require('../../libs/request');
 
     beforeEach(() => {
         jest.resetAllMocks();
@@ -26,16 +36,16 @@ describe('List service', () => {
         const listService = require('../list');
         const { initialise } = listService;
         await initialise();
-        expect(workflowServiceClient.get).toHaveBeenCalled();
-        expect(workflowServiceClient.get).toHaveBeenCalledTimes(1);
+        expect(infoServiceClient.get).toHaveBeenCalled();
+        expect(infoServiceClient.get).toHaveBeenCalledTimes(1);
     });
 
     it('should handle failure to retrieve list', async () => {
-        workflowServiceClient.get.mockImplementation(jest.fn(() => Promise.reject()));
+        infoServiceClient.get.mockImplementation(jest.fn(() => Promise.reject()));
         const { initialise } = require('../list');
         await initialise();
-        expect(workflowServiceClient.get).toHaveBeenCalled();
-        expect(workflowServiceClient.get).toHaveBeenCalledTimes(1);
+        expect(infoServiceClient.get).toHaveBeenCalled();
+        expect(infoServiceClient.get).toHaveBeenCalledTimes(1);
     });
 
     it('should expose a getList method', () => {
@@ -48,11 +58,11 @@ describe('List service', () => {
 
 describe('getList', () => {
 
-    const { workflowServiceClient } = require('../../libs/request');
+    const { infoServiceClient } = require('../../libs/request');
 
     beforeEach(() => {
         jest.resetAllMocks();
-        expect(workflowServiceClient).toBeDefined();
+        expect(infoServiceClient).toBeDefined();
     });
 
     it('should throw when called with incorrect parameters', async () => {
@@ -64,15 +74,27 @@ describe('getList', () => {
     });
 
     it('should support the CASE_TYPES list', async () => {
-        workflowServiceClient.get.mockImplementation(jest.fn(() => Promise.resolve({
+        infoServiceClient.get.mockImplementation(jest.fn(() => Promise.resolve({
             data: {
-                workflowTypes: ['1', '2', '3']
+                caseTypes: ['1', '2', '3']
             }
         })));
         const listService = require('../list');
-        const { getList, initialise } = listService;
-        await initialise();
-        const list = await getList('CASE_TYPES', { user: {} });
+        const { getList } = listService;
+        const list = await getList('CASE_TYPES', { user: { roles: [] } });
+        expect(list).toBeDefined();
+        expect(list.length).toEqual(3);
+    });
+
+    it('should support the CASE_TYPES_BULK list', async () => {
+        infoServiceClient.get.mockImplementation(jest.fn(() => Promise.resolve({
+            data: {
+                caseTypes: ['1', '2', '3']
+            }
+        })));
+        const listService = require('../list');
+        const { getList } = listService;
+        const list = await getList('CASE_TYPES_BULK', { user: { roles: [] } });
         expect(list).toBeDefined();
         expect(list.length).toEqual(3);
     });

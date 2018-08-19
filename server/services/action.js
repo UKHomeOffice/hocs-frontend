@@ -34,9 +34,15 @@ function updateCase({ caseId, stageId, form }) {
     return workflowServiceClient.post(`/case/${caseId}/stage/${stageId}`, { data: form.data });
 }
 
-function handleActionSuccess(workflow, form) {
+function handleActionSuccess(response, workflow, form) {
     const { next, data } = form;
+    if (response && response.callbackUrl) {
+        return { callbackUrl: response.callbackUrl };
+    }
     if (next && next.action) {
+        if (next.action === 'CONFIRMATION_SUMMARY') {
+            return { confirmation: response };
+        }
         if (next.context) {
             const context = data[next.context.field];
             return { callbackUrl: `/action/${workflow}/${context}/${next.action}` };
@@ -71,15 +77,17 @@ const actions = {
             switch (form.action) {
             case CREATE_CASE:
                 try {
-                    await createCase('/case', { caseType: context, form });
-                    return handleActionSuccess(workflow, form);
+                    const response = await createCase('/case', { caseType: context, form });
+                    const clientResponse = { summary: `Created case ${response.data.reference}` };
+                    return handleActionSuccess(clientResponse, workflow, form);
                 } catch (err) {
                     return handleActionFailure(err);
                 }
             case BULK_CREATE_CASE: {
                 try {
-                    await createCase('/case/bulk', { caseType: context, form });
-                    return handleActionSuccess(workflow, form);
+                    const response = await createCase('/case/bulk', { caseType: context, form });
+                    const clientResponse = { summary: `Submitted ${response.data.count} file${response.data.count > 1 ? 's': ''}` };
+                    return handleActionSuccess(clientResponse, workflow, form);
                 } catch (err) {
                     return handleActionFailure(err);
                 }
@@ -89,7 +97,7 @@ const actions = {
             }
             }
         } else {
-            return handleActionSuccess(workflow, form);
+            return handleActionSuccess(null, workflow, form);
         }
     },
     CASE: async ({ entity, action }) => {

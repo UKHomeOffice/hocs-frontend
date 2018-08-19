@@ -1,49 +1,66 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Case page component should render with default props 1`] = `
-<Case
-  dispatch={
-    [MockFunction] {
-      "calls": Array [
-        Array [
-          Object {
-            "payload": Object {
-              "params": Object {
-                "caseId": "CASE_ID",
-              },
-              "url": "/",
-            },
-            "type": "UPDATE_LOCATION",
-          },
-        ],
-      ],
-    }
-  }
-  match={
-    Object {
-      "params": Object {
-        "caseId": "CASE_ID",
-      },
-      "url": "/",
-    }
-  }
+exports[`Case page component should render children when passed 1`] = `
+<div
+  class="govuk-grid-row"
 >
   <div
-    className="govuk-grid-row"
+    class="govuk-grid-column-full"
   >
-    <div
-      className="govuk-grid-column-full"
-    >
-      <h1
-        className="govuk-heading-l"
-      >
-        <span
-          className="govuk-caption-l"
-        >
-          CASE_ID
-        </span>
-      </h1>
-    </div>
+    <h1
+      class="govuk-heading-l"
+    />
+    FORM
   </div>
-</Case>
+</div>
+`;
+
+exports[`Case page component should render with default props 1`] = `
+<div
+  class="govuk-grid-row"
+>
+  <div
+    class="govuk-grid-column-full"
+  >
+    <h1
+      class="govuk-heading-l"
+    />
+  </div>
+</div>
+`;
+
+exports[`Case page component should render with subTitle when passed in props 1`] = `
+<div
+  class="govuk-grid-row"
+>
+  <div
+    class="govuk-grid-column-full"
+  >
+    <h1
+      class="govuk-heading-l"
+    >
+      <span
+        class="govuk-caption-l"
+      >
+        ABC123
+      </span>
+    </h1>
+  </div>
+</div>
+`;
+
+exports[`Case page component should render with title when passed in props 1`] = `
+<div
+  class="govuk-grid-row"
+>
+  <div
+    class="govuk-grid-column-full"
+  >
+    <h1
+      class="govuk-heading-l"
+    >
+      MY_TITLE
+    </h1>
+  </div>
+</div>
 `;

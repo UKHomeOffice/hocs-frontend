@@ -12,8 +12,8 @@ const formResponseMiddleware = (req, res) => {
 };
 
 router.use(['/action/:workflow/:context/:action', '/action/:workflow/:action'],
-    getFormForAction,
-    protectAction()
+    protectAction(),
+    getFormForAction
 );
 
 router.use('/case/:caseId/stage/:stageId/allocate', allocateCase);

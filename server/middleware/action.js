@@ -8,7 +8,7 @@ const actionResponseMiddleware = async (req, res, next) => {
     const { workflow, context, action } = req.params;
     const { form, user } = req;
     const response = await actionService.performAction('ACTION', { workflow, context, action, form, user });
-    const { error, callbackUrl } = response;
+    const { error, callbackUrl, confirmation } = response;
     if (error) {
         res.error = new ErrorModel({
             status: 500,
@@ -17,11 +17,16 @@ const actionResponseMiddleware = async (req, res, next) => {
             stackTrace: error.message
         });
         return next();
+    } else if (confirmation) {
+        if (res.noScript) {
+            next();
+        }
+        return res.status(200).send({ confirmation });
     } else {
         if (res.noScript) {
             return res.redirect(callbackUrl);
         }
-        return res.status(200).send({ redirect: callbackUrl, response: {} });
+        return res.status(200).send({ redirect: callbackUrl });
     }
 };
 

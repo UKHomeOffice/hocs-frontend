@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { ApplicationConsumer } from '../contexts/application.jsx';
 import axios from 'axios';
-import { updateLocation, setError } from '../contexts/actions/index.jsx';
 import DocumentSummary from '../common/components/document-summary.jsx';
 import StageSummary from '../common/components/stage-summary.jsx';
 import CaseDetailsSummary from '../common/components/case-details-summary.jsx';
+import { setError } from '../contexts/actions/index.jsx';
 
 class CaseSummary extends Component {
 
@@ -17,18 +17,18 @@ class CaseSummary extends Component {
     }
 
     componentDidMount() {
-        this.props.dispatch(updateLocation(this.props.match));
         this.getSummary();
     }
 
     getSummary() {
         const url = this.props.match.url + '/api';
+        const { dispatch } = this.props;
         axios.get(url)
             .then(res => {
                 this.setState({ caseData: res.data.summary });
             })
             .catch(err => {
-                return this.props.dispatch(setError(err.response.data));
+                dispatch(setError(err.response.data));
             });
     }
 

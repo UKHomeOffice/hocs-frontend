@@ -1,18 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { ApplicationConsumer } from '../contexts/application.jsx';
-import { updateLocation } from '../contexts/actions/index.jsx';
 import Workstack from '../common/components/workstack.jsx';
 
 class MainPage extends Component {
 
     constructor(props) {
         super(props);
-    }
-
-    componentDidMount() {
-        this.props.dispatch(updateLocation(this.props.match));
     }
 
     render() {
@@ -52,16 +46,9 @@ class MainPage extends Component {
 }
 
 MainPage.propTypes = {
-    dispatch: PropTypes.func.isRequired,
-    match: PropTypes.object,
     caption: PropTypes.string,
+    match: PropTypes.object,
     title: PropTypes.string
 };
 
-const WrappedPage = props => (
-    <ApplicationConsumer>
-        {({ dispatch }) => <MainPage {...props} dispatch={dispatch} />}
-    </ApplicationConsumer>
-);
-
-export default WrappedPage;
+export default MainPage;

@@ -11,11 +11,9 @@ describe('Form backlink component', () => {
     });
 
     it('should render with default props', () => {
-        const outer = shallow(<Backlink action="/SOME/URL" />);
-        const Children = outer.props().children;
         const wrapper = mount(
             <MemoryRouter>
-                <Children dispatch={mockDispatch} />
+                <Backlink action="/SOME/URL" />
             </MemoryRouter>
         );
         expect(wrapper).toBeDefined();
@@ -23,11 +21,9 @@ describe('Form backlink component', () => {
     });
 
     it('should render disabled when isDisabled is passed', () => {
-        const outer = shallow(<Backlink disabled={true} action="/SOME/URL" />);
-        const Children = outer.props().children;
         const wrapper = mount(
             <MemoryRouter>
-                <Children dispatch={mockDispatch} />
+                <Backlink disabled={true} action="/SOME/URL" />
             </MemoryRouter>
         );
         expect(wrapper).toBeDefined();
@@ -36,42 +32,25 @@ describe('Form backlink component', () => {
     });
 
     it('should render with correct label when passed', () => {
-        const outer = shallow(<Backlink label={'My Button'} action="/SOME/URL" />);
-        const Children = outer.props().children;
         const wrapper = mount(
             <MemoryRouter>
-                <Children dispatch={mockDispatch} />
+                <Backlink label='MY_LABEL' action="/SOME/URL" />
             </MemoryRouter>
         );
         expect(wrapper).toBeDefined();
         expect(wrapper.find('BackLink')).toMatchSnapshot();
-        expect(wrapper.find('Link').props().children).toEqual('My Button');
+        expect(wrapper.find('Link').props().children).toEqual('MY_LABEL');
     });
 
     it('should render with additional styles when className is passed', () => {
-        const outer = shallow(<Backlink className={'test-class'} action="/SOME/URL" />);
-        const Children = outer.props().children;
         const wrapper = mount(
             <MemoryRouter>
-                <Children dispatch={mockDispatch} />
+                <Backlink className='test-class' action="/SOME/URL" />
             </MemoryRouter>
         );
         expect(wrapper).toBeDefined();
         expect(wrapper.find('BackLink')).toMatchSnapshot();
         expect(wrapper.find('Link').props().className).toEqual('govuk-back-link test-class');
-    });
-
-    it('should dispatch action when clicked', () => {
-        const outer = shallow(<Backlink action="/SOME/URL" />);
-        const Children = outer.props().children;
-        const wrapper = mount(
-            <MemoryRouter>
-                <Children dispatch={mockDispatch} />
-            </MemoryRouter>
-        );
-        expect(wrapper).toBeDefined();
-        wrapper.find('Link').simulate('click');
-        expect(mockDispatch).toHaveBeenCalledTimes(1);
     });
 
 });

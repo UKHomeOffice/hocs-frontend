@@ -1,0 +1,25 @@
+{
+  "title": "Bulk create",
+  "defaultActionLabel": "Next",
+  "fields": [
+    {
+      "component": "radio",
+      "validation": [
+        "required"
+      ],
+      "props": {
+        "name": "case-type",
+        "label": "Case type",
+        "choices": "CASE_TYPES_BULK"
+      }
+    }
+  ],
+  "secondaryActions": [
+    {
+      "component": "backlink",
+      "props": {
+        "label": "Cancel"
+      }
+    }
+  ]
+}

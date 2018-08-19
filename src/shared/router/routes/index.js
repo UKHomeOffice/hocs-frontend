@@ -25,22 +25,22 @@ const routes = [
     {
         path: '/case/:caseId/summary',
         exact: true,
-        component: CaseSummaryPage,
+        component: CaseSummaryPage
     },
     {
         path: '/case/:caseId/stage/:stageId',
         exact: true,
-        component: StagePage,
+        component: StagePage
     },
     {
         path: '/case/:caseId/stage/:stageId/allocate',
         exact: true,
-        component: StagePage,
+        component: StagePage
     },
     {
         path: '/case/:caseId/action/:entity/:action/',
         exact: true,
-        component: CasePage,
+        component: CasePage
     },
     {
         path: '/error',
