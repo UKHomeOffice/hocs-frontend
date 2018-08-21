@@ -158,6 +158,11 @@ exports[`Main page component should render with caption when passed in props 1`]
               <th
                 className="govuk-table__header"
               >
+                Deadline
+              </th>
+              <th
+                className="govuk-table__header"
+              >
                 Actions
               </th>
             </tr>
@@ -318,6 +323,11 @@ exports[`Main page component should render with default props 1`] = `
                 className="govuk-table__header"
               >
                 Team
+              </th>
+              <th
+                className="govuk-table__header"
+              >
+                Deadline
               </th>
               <th
                 className="govuk-table__header"

@@ -34,6 +34,7 @@ class Workstack extends Component {
                             <th className='govuk-table__header'>Stage</th>
                             <th className='govuk-table__header'>User</th>
                             <th className='govuk-table__header'>Team</th>
+                            <th className='govuk-table__header'>Deadline</th>
                             <th className='govuk-table__header'>Actions</th>
                         </tr>
                     </thead>
@@ -50,6 +51,7 @@ class Workstack extends Component {
                                         {/* We don't need this on the User stack, only the Team stack */}
                                         <td className='govuk-table__cell'>{c.assignedUserDisplay}</td>
                                         <td className='govuk-table__cell'>{c.assignedTeamDisplay}</td>
+                                        <td className='govuk-table__cell'>{c.deadline}</td>
                                         <td className='govuk-table__cell'>
                                             {
                                                 c.assignedUserDisplay === 'Unassigned' ?
