@@ -23,6 +23,7 @@ async function initialise() {
 }
 
 function fetchList(listEndpoint, options) {
+    logger.info(`Fetching list: ${listEndpoint}`);
     return infoServiceClient.get(listEndpoint, options);
 }
 
@@ -54,9 +55,11 @@ const lists = {
     'CASE_TYPES': async ({ user }) => {
         const list = 'workflowTypes';
         try {
+            const headerRoles = user.roles.join();
+            logger.info(`Roles ${ headerRoles }`);
             const response = await fetchList(listDefinitions[list], {
                 headers: {
-                    'X-Auth-Roles': user.roles.join()
+                    'X-Auth-Roles': headerRoles
                 }
             });
             logger.info(JSON.stringify(response.data));
@@ -69,9 +72,11 @@ const lists = {
     'CASE_TYPES_BULK': async ({ user }) => {
         const list = 'workflowTypesBulk';
         try {
+            const headerRoles = user.roles.join();
+            logger.info(`Roles ${ headerRoles }`);
             const response = await fetchList(listDefinitions[list], {
                 headers: {
-                    'X-Auth-Roles': user.roles.join()
+                    'X-Auth-Roles': headerRoles
                 }
             });
             return response.data.caseTypes;
