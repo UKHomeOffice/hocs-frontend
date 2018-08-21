@@ -13,8 +13,14 @@ async function getFormSchemaFromWorkflowService({ caseId, stageId }) {
 async function getFormSchema(options) {
     const { user } = options;
     const form = formRepository.getForm(options);
+    let data = {};
+    switch(options.action) {
+    case 'DOCUMENT':
+        data = { 'DateReceived': new Date().toISOString().substr(0,10) };
+        break;
+    }
     await hydrateFields(form.schema.fields, { user });
-    return { ...form, data: {}, meta: {} };
+    return { ...form, data: data, meta: {} };
 }
 
 function hydrateFields(fields, options) {
