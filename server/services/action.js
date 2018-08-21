@@ -22,12 +22,13 @@ function createDocumentSummaryObjects(form) {
 function createCaseRequest(type, form) {
     return {
         type,
+        dateReceived: form.data['DateReceived'],
         documents: createDocumentSummaryObjects(form)
     };
 }
 
 function createCase(url, { caseType, form }) {
-    return workflowServiceClient.post(url, createCaseRequest(caseType, form));
+    return workflowServiceClient.post(url,createCaseRequest(caseType, form));
 }
 
 function updateCase({ caseId, stageId, form }) {

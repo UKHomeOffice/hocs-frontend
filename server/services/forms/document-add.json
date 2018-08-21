@@ -1,7 +1,17 @@
 {
-  "title": "Add documents",
-  "defaultActionLabel": "Next",
+  "title": "Create Case",
+  "defaultActionLabel": "Finish",
   "fields": [
+    {
+      "component":"date",
+      "validation":[
+        "required"
+      ],
+      "props":{
+        "name":"DateReceived",
+        "label":"Date Received"
+      }
+    },
     {
       "component": "add-document",
       "validation": [
@@ -13,7 +23,7 @@
         "action": "ADD_DOCUMENT",
         "documentType": "ORIGINAL",
         "className": "button-secondary-action",
-        "label": "Document",
+        "label": "Documents",
         "allowMultiple": true,
         "whitelist": "DOCUMENT_EXTENSION_WHITELIST"
       }
