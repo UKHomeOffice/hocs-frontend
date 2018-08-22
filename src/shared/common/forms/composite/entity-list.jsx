@@ -40,7 +40,7 @@ class EntityList extends Component {
                 <fieldset className={`govuk-fieldset ${className ? className : ''}`} disabled={disabled}>
 
                     <legend id={`${name}-legend`} className="govuk-fieldset__legend">
-                        <span className="govuk-fieldset__heading govuk-label--s">{`Primary ${label}`}</span>
+                        <span className="govuk-fieldset__heading govuk-label--s">{`${label}s`}</span>
                     </legend>
 
                     {hint && <span className="govuk-form-hint">{hint}</span>}
@@ -70,7 +70,7 @@ class EntityList extends Component {
                                     </tr>
                                 );
                             })}
-                            {choices.length === 0 && <Fragment>No EntityList</Fragment>}
+                            {choices.length === 0 && <Fragment>No {label}s</Fragment>}
                         </tbody>
                     </table>
                     {hasAddLink && <Link to={actionUrl} className="govuk-body govuk-link">Add a {label}</Link>}

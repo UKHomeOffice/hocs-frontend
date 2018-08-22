@@ -1,6 +1,7 @@
 const formRepository = require('./forms/index');
 const listService = require('./list');
 const { workflowServiceClient } = require('../libs/request');
+const logger = require('../libs/logger');
 const ErrorModel = require('../models/error');
 
 async function getFormSchemaFromWorkflowService({ caseId, stageId }) {
@@ -12,6 +13,7 @@ async function getFormSchemaFromWorkflowService({ caseId, stageId }) {
 
 async function getFormSchema(options) {
     const { user } = options;
+    logger.debug({ ...options });
     const form = formRepository.getForm(options);
     let data = {};
     switch(options.action) {
@@ -45,9 +47,9 @@ function hydrateFields(fields, options) {
 }
 
 const getFormForAction = async (req, res, next) => {
-    const { workflow, action } = req.params;
+    const { workflow, context, action } = req.params;
     try {
-        req.form = await getFormSchema({ context: 'ACTION', workflow, action, user: req.user });
+        req.form = await getFormSchema({ context: 'ACTION', workflow, entity:context, action, user: req.user });
     } catch (err) {
         res.error = new ErrorModel({
             status: 404,

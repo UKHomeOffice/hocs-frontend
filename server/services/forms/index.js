@@ -1,9 +1,11 @@
 const caseCreate = require('./case-create.json');
 const addDocument = require('./document-add.json');
+const addDTENDocument = require('./dten-document-add.json');
 const bulkCaseCreate = require('./bulk-case-create.json');
 const bulkAddDocument = require('./bulk-document-add.json');
 const testForm = require('./case-test.json');
 const { CREATE_CASE, BULK_CREATE_CASE, ADD_DOCUMENT } = require('../actions/types');
+
 
 const workflowDefinitions = {
     ACTION: {
@@ -18,11 +20,28 @@ const workflowDefinitions = {
                     }
                 }
             },
+            /** I see this as temp code, we should move this to a getCreateForType method in the list/workflow service **/
             DOCUMENT: {
-                schema: addDocument,
-                action: CREATE_CASE,
-                next: {
-                    action: 'CONFIRMATION_SUMMARY'
+                MIN : {
+                    schema: addDocument,
+                    action: CREATE_CASE,
+                    next: {
+                        action: 'CONFIRMATION_SUMMARY'
+                    }
+                },
+                TRO : {
+                    schema: addDocument,
+                    action: CREATE_CASE,
+                    next: {
+                        action: 'CONFIRMATION_SUMMARY'
+                    }
+                },
+                DTEN : {
+                    schema: addDTENDocument,
+                    action: CREATE_CASE,
+                    next: {
+                        action: 'CONFIRMATION_SUMMARY'
+                    }
                 }
             }
         },
@@ -71,10 +90,16 @@ const workflowDefinitions = {
 };
 
 module.exports = {
-    getForm: ({ context, workflow, action }) => {
+    getForm: ({ context, workflow, action, entity }) => {
         if (context && workflow && action) {
             try {
-                const form = workflowDefinitions[context.toUpperCase()][workflow.toUpperCase()][action.toUpperCase()];
+                let form;
+                if(action === 'DOCUMENT') {
+                    form = workflowDefinitions[context.toUpperCase()][workflow.toUpperCase()][action.toUpperCase()][entity.toUpperCase()];
+                } else {
+                    form = workflowDefinitions[context.toUpperCase()][workflow.toUpperCase()][action.toUpperCase()];
+                }
+
                 const requiredRole = workflowDefinitions[context.toUpperCase()][workflow.toUpperCase()].requiredRole;
                 return JSON.parse(JSON.stringify({ ...form, requiredRole }));
             } catch (e) {

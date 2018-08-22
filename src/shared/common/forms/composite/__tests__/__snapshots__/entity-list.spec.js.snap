@@ -14,7 +14,7 @@ exports[`Document add component should render default with first option when no 
       <span
         class="govuk-fieldset__heading govuk-label--s"
       >
-        Primary undefined
+        undefineds
       </span>
     </legend>
     <table
@@ -136,7 +136,7 @@ exports[`Document add component should render disabled when passed 1`] = `
         <span
           className="govuk-fieldset__heading govuk-label--s"
         >
-          Primary undefined
+          undefineds
         </span>
       </legend>
       <table
@@ -145,7 +145,8 @@ exports[`Document add component should render disabled when passed 1`] = `
         <tbody
           className="govuk-table__body"
         >
-          No EntityList
+          No 
+          s
         </tbody>
       </table>
     </fieldset>
@@ -176,7 +177,7 @@ exports[`Document add component should render with correct label when passed 1`]
         <span
           className="govuk-fieldset__heading govuk-label--s"
         >
-          Primary MY_LABEL
+          MY_LABELs
         </span>
       </legend>
       <table
@@ -185,7 +186,9 @@ exports[`Document add component should render with correct label when passed 1`]
         <tbody
           className="govuk-table__body"
         >
-          No EntityList
+          No 
+          MY_LABEL
+          s
         </tbody>
       </table>
     </fieldset>
@@ -207,10 +210,10 @@ exports[`Document add component should render with default props 1`] = `
       <span
         class="govuk-fieldset__heading govuk-label--s"
       >
-        Primary undefined
+        undefineds
       </span>
     </legend>
-    No EntityList
+    No s
     <table
       class="govuk-table"
     >
@@ -260,7 +263,7 @@ exports[`Document add component should render with hint when passed 1`] = `
         <span
           className="govuk-fieldset__heading govuk-label--s"
         >
-          Primary undefined
+          undefineds
         </span>
       </legend>
       <span
@@ -397,7 +400,7 @@ exports[`Document add component should render with validation error when passed 
         <span
           className="govuk-fieldset__heading govuk-label--s"
         >
-          Primary undefined
+          undefineds
         </span>
       </legend>
       <span
@@ -411,7 +414,8 @@ exports[`Document add component should render with validation error when passed 
         <tbody
           className="govuk-table__body"
         >
-          No EntityList
+          No 
+          s
         </tbody>
       </table>
     </fieldset>
@@ -433,7 +437,7 @@ exports[`Document add component should render with value when passed 1`] = `
       <span
         class="govuk-fieldset__heading govuk-label--s"
       >
-        Primary undefined
+        undefineds
       </span>
     </legend>
     <table
