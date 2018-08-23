@@ -4,6 +4,7 @@ import { ApplicationConsumer } from '../contexts/application.jsx';
 import axios from 'axios';
 import DocumentSummary from '../common/components/document-summary.jsx';
 import StageSummary from '../common/components/stage-summary.jsx';
+import DeadlineSummary from '../common/components/deadline-summary.jsx';
 import CaseDetailsSummary from '../common/components/case-details-summary.jsx';
 import { setError } from '../contexts/actions/index.jsx';
 
@@ -37,7 +38,7 @@ class CaseSummary extends Component {
             caseData
         } = this.state;
         if (caseData) {
-            const { reference, type, timestamp, stages, uuid, documents } = caseData;
+            const { reference, type, timestamp, stages, uuid, documents, deadlines } = caseData;
             return (
                 <div className="govuk-grid-row">
                     <div className="govuk-grid-column-full">
@@ -47,6 +48,7 @@ class CaseSummary extends Component {
                         </h1>
                         <CaseDetailsSummary type={type} timestamp={timestamp} uuid={uuid} />
                         {stages && <StageSummary stages={stages} />}
+                        {deadlines && <DeadlineSummary deadlines={deadlines} />}
                         {documents && <DocumentSummary documents={documents} />}
                     </div>
                 </div>
