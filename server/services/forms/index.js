@@ -63,10 +63,19 @@ const workflowDefinitions = {
                 }
             },
             DOCUMENT: {
-                schema: bulkAddDocument,
-                action: BULK_CREATE_CASE,
-                next: {
-                    action: 'CONFIRMATION_SUMMARY'
+                MIN : {
+                    schema: bulkAddDocument,
+                    action: BULK_CREATE_CASE,
+                    next: {
+                        action: 'CONFIRMATION_SUMMARY'
+                    }
+                },
+                TRO : {
+                    schema: bulkAddDocument,
+                    action: BULK_CREATE_CASE,
+                    next: {
+                        action: 'CONFIRMATION_SUMMARY'
+                    }
                 }
             }
         }
@@ -94,7 +103,7 @@ module.exports = {
         if (context && workflow && action) {
             try {
                 let form;
-                if(action === 'DOCUMENT') {
+                if(action === 'DOCUMENT' || action == 'BULK_CREATE_CASE') {
                     form = workflowDefinitions[context.toUpperCase()][workflow.toUpperCase()][action.toUpperCase()][entity.toUpperCase()];
                 } else {
                     form = workflowDefinitions[context.toUpperCase()][workflow.toUpperCase()][action.toUpperCase()];
