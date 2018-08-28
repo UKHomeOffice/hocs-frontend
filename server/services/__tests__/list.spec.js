@@ -76,7 +76,11 @@ describe('getList', () => {
     it('should support the CASE_TYPES list', async () => {
         infoServiceClient.get.mockImplementation(jest.fn(() => Promise.resolve({
             data: {
-                caseTypes: ['1', '2', '3']
+                caseTypes: [
+                    { label: 'A' },
+                    { label: 'B' },
+                    { label: 'C' }
+                ]
             }
         })));
         const listService = require('../list');
@@ -89,7 +93,11 @@ describe('getList', () => {
     it('should support the CASE_TYPES_BULK list', async () => {
         infoServiceClient.get.mockImplementation(jest.fn(() => Promise.resolve({
             data: {
-                caseTypes: ['1', '2', '3']
+                caseTypes: [
+                    { label: 'A' },
+                    { label: 'B' },
+                    { label: 'C' }
+                ]
             }
         })));
         const listService = require('../list');
