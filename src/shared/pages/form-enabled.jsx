@@ -26,7 +26,10 @@ function withForm(Page) {
         }
 
         componentDidMount() {
-            this.getForm();
+            const { form } = this.props;
+            if (!form) {
+                this.getForm();
+            }
         }
 
         componentWillUnmount() {
@@ -64,16 +67,16 @@ function withForm(Page) {
 
         submitHandler(e) {
             e.preventDefault();
-            const { dispatch, history, match: { url } } = this.props;
+            const { dispatch, form,  history, match: { url } } = this.props;
             /* eslint-disable-next-line no-undef */
             const formData = new FormData();
-            Object.keys(this.props.form.data).map(field => {
-                if (Array.isArray(this.props.form.data[field])) {
-                    this.props.form.data[field].map(value => {
+            Object.keys(form.data).map(field => {
+                if (Array.isArray(form.data[field])) {
+                    form.data[field].map(value => {
                         formData.append(`${field}[]`, value);
                     });
                 } else {
-                    formData.append(field, this.props.form.data[field]);
+                    formData.append(field, form.data[field]);
                 }
             });
             return dispatch(updateApiStatus(status.SUBMIT_FORM))

@@ -1,8 +1,8 @@
 const caseCreate = require('./case-create.json');
-const addDocument = require('./document-add.json');
-const addDTENDocument = require('./dten-document-add.json');
+const addDocument = require('./document-add.js');
+const addDTENDocument = require('./dten-document-add.js');
 const bulkCaseCreate = require('./bulk-case-create.json');
-const bulkAddDocument = require('./bulk-document-add.json');
+const bulkAddDocument = require('./bulk-document-add.js');
 const testForm = require('./case-test.json');
 const { CREATE_CASE, BULK_CREATE_CASE, ADD_DOCUMENT } = require('../actions/types');
 
