@@ -51,6 +51,12 @@ function handleListFailure(listId, error) {
 //     }
 // }
 
+function compareListItems(first, second) {
+    const firstLabel = first.label.toUpperCase();
+    const secondLabel = second.label.toUpperCase();
+    return (firstLabel < secondLabel) ? -1 : 1;
+}
+
 const lists = {
     'CASE_TYPES': async ({ user }) => {
         const list = 'workflowTypes';
@@ -63,7 +69,7 @@ const lists = {
                 }
             });
             logger.info(JSON.stringify(response.data));
-            return response.data.caseTypes;
+            return response.data.caseTypes.sort(compareListItems);
         } catch (error) {
             handleListFailure(list, error);
         }
@@ -79,7 +85,7 @@ const lists = {
                     'X-Auth-Roles': headerRoles
                 }
             });
-            return response.data.caseTypes;
+            return response.data.caseTypes.sort(compareListItems);
         } catch (error) {
             handleListFailure(list, error);
         }
