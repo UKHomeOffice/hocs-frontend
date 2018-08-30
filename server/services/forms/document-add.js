@@ -1,7 +1,7 @@
 const { DOCUMENT_BULK_LIMIT } = require('../../config').forContext('server');
 
 module.exports = {
-    title: 'Create Case',
+    title: 'Create a new case',
     defaultActionLabel: 'Finish',
     fields: [
         {
@@ -11,7 +11,7 @@ module.exports = {
             ],
             'props': {
                 name: 'DateReceived',
-                label: 'Date Received'
+                label: 'When was the correspondence received?'
             }
         },
         {
@@ -26,7 +26,7 @@ module.exports = {
                 hint: `There is a limit of ${DOCUMENT_BULK_LIMIT} files per transaction`,
                 documentType: 'ORIGINAL',
                 className: 'button-secondary-action',
-                label: 'Documents',
+                label: 'Are there any documents to include?',
                 allowMultiple: true,
                 whitelist: 'DOCUMENT_EXTENSION_WHITELIST'
             }

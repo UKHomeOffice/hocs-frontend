@@ -13,9 +13,7 @@ exports[`Document add component should render default with first option when no 
     >
       <span
         class="govuk-fieldset__heading govuk-label--s"
-      >
-        undefineds
-      </span>
+      />
     </legend>
     <table
       class="govuk-table"
@@ -135,9 +133,7 @@ exports[`Document add component should render disabled when passed 1`] = `
       >
         <span
           className="govuk-fieldset__heading govuk-label--s"
-        >
-          undefineds
-        </span>
+        />
       </legend>
       <table
         className="govuk-table"
@@ -145,8 +141,7 @@ exports[`Document add component should render disabled when passed 1`] = `
         <tbody
           className="govuk-table__body"
         >
-          No 
-          s
+          No Data.
         </tbody>
       </table>
     </fieldset>
@@ -177,7 +172,7 @@ exports[`Document add component should render with correct label when passed 1`]
         <span
           className="govuk-fieldset__heading govuk-label--s"
         >
-          MY_LABELs
+          MY_LABEL
         </span>
       </legend>
       <table
@@ -186,9 +181,7 @@ exports[`Document add component should render with correct label when passed 1`]
         <tbody
           className="govuk-table__body"
         >
-          No 
-          MY_LABEL
-          s
+          No Data.
         </tbody>
       </table>
     </fieldset>
@@ -209,11 +202,9 @@ exports[`Document add component should render with default props 1`] = `
     >
       <span
         class="govuk-fieldset__heading govuk-label--s"
-      >
-        undefineds
-      </span>
+      />
     </legend>
-    No s
+    No Data.
     <table
       class="govuk-table"
     >
@@ -262,9 +253,7 @@ exports[`Document add component should render with hint when passed 1`] = `
       >
         <span
           className="govuk-fieldset__heading govuk-label--s"
-        >
-          undefineds
-        </span>
+        />
       </legend>
       <span
         className="govuk-form-hint"
@@ -399,9 +388,7 @@ exports[`Document add component should render with validation error when passed 
       >
         <span
           className="govuk-fieldset__heading govuk-label--s"
-        >
-          undefineds
-        </span>
+        />
       </legend>
       <span
         className="govuk-error-message"
@@ -414,8 +401,7 @@ exports[`Document add component should render with validation error when passed 
         <tbody
           className="govuk-table__body"
         >
-          No 
-          s
+          No Data.
         </tbody>
       </table>
     </fieldset>
@@ -436,9 +422,7 @@ exports[`Document add component should render with value when passed 1`] = `
     >
       <span
         class="govuk-fieldset__heading govuk-label--s"
-      >
-        undefineds
-      </span>
+      />
     </legend>
     <table
       class="govuk-table"

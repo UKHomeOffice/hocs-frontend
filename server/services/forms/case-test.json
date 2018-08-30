@@ -12,7 +12,7 @@
     {
       "component": "paragraph",
       "props": {
-        "content": "The Magic Words are Squeamish Ossifrage."
+        "children": "The Magic Words are Squeamish Ossifrage."
       }
     },
     {
@@ -90,7 +90,7 @@
     {
       "component": "inset",
       "props": {
-        "content": "Doing this thing will make that thing happen."
+        "children": "Doing this thing will make that thing happen."
       }
     },
     {
