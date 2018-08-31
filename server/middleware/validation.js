@@ -33,7 +33,7 @@ const validators = {
         return null;
     },
     required: (value, label) => {
-        if (value === null || value === '') {
+        if (!value || value === '') {
             return `${label} ${validationErrors.required}`;
         }
         return null;

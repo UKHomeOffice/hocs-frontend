@@ -48,7 +48,7 @@ const processMiddleware = (req, res, next) => {
     logger.debug('PROCESS MIDDLEWARE');
     res.noScript = req.query && req.query.noScript;
     try {
-        const data = req.body;
+        const data = JSON.parse(req.body);
         const { schema } = req.form;
         req.form.data = schema.fields
             .filter(field => field.type !== 'display')

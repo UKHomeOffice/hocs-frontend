@@ -40,7 +40,7 @@ class Workstack extends Component {
                     </thead>
                     <tbody className='govuk-table__body'>
                         {
-                            cases.map((c, i) => {
+                            cases.sort((first, second) => first.caseReference.split('/')[1] > second.caseReference.split('/')[1] ? 1 : -1).map((c, i) => {
                                 return (
                                     <tr key={i} className='govuk-radios govuk-table__row'>
                                         <td className='govuk-table__cell'>

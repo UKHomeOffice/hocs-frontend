@@ -5,9 +5,7 @@ class Radio extends Component {
 
     constructor(props) {
         super(props);
-        const fallbackValue = this.props.choices[0] ? this.props.choices[0].value : null;
-        const value = this.props.value || fallbackValue;
-        this.state = { value };
+        this.state = { value: this.props.value };
     }
 
     componentDidMount() {

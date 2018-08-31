@@ -45,6 +45,8 @@ const reducer = (state, action) => {
         return { ...state, apiStatus: action.payload };
     case types.CLEAR_API_STATUS:
         return { ...state, apiStatus: null };
+    case types.UPDATE_PAGE_META:
+        return { ...state, page: { ...action.payload } };
     default:
         /* eslint-disable-next-line  no-console*/
         console.warn('Unsupported action');

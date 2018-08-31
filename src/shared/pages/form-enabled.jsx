@@ -11,7 +11,8 @@ import {
     setError,
     updateApiStatus,
     clearApiStatus,
-    unsetForm
+    unsetForm,
+    updatePageMeta
 } from '../contexts/actions/index.jsx';
 import status from '../helpers/api-status.js';
 import BackLink from '../common/forms/backlink.jsx';
@@ -26,10 +27,11 @@ function withForm(Page) {
         }
 
         componentDidMount() {
-            const { form } = this.props;
+            const { dispatch, form, match } = this.props;
             if (!form) {
                 this.getForm();
             }
+            dispatch(updatePageMeta(match.params));
         }
 
         componentWillUnmount() {
@@ -57,9 +59,9 @@ function withForm(Page) {
                                         .then(dispatch(setError(error)));
                                 });
                         })
-                        .catch(({ response }) => {
+                        .catch(error => {
                             dispatch(updateApiStatus(status.REQUEST_FORM_FAILURE))
-                                .then(() => dispatch(setError(response.data)));
+                                .then(() => dispatch(setError(error.response.data)));
                         });
 
                 });
@@ -105,10 +107,10 @@ function withForm(Page) {
                                     }
                                 });
                         })
-                        .catch(err => {
+                        .catch(error => {
                             /* eslint-disable-next-line no-console */
                             return dispatch(updateApiStatus(status.SUBMIT_FORM_FAILURE))
-                                .then(() => dispatch(setError(err.response.data)));
+                                .then(() => dispatch(setError(error.response.data)));
                         });
 
                 });
