@@ -29,17 +29,11 @@ router.use('/case', caseRouter);
 router.use('/case', stageRouter);
 
 router.get('/case/:caseId/document/:documentId', (req, res) => {
-    caseworkServiceClient.get(`/case/${req.params.caseId}/document/${req.params.caseId}`, { responseType: 'stream' })
-        .then(response => {
-            res.setHeader('Cache-Control', 'max-age=86400');
-            s3.getObject({
-                Bucket: 'hocs-secure-bucket',
-                Key: req.params.documentId
-            }).createReadStream().pipe(res);
-        })
-        .catch(error => {
-            res.status(404).send();
-        });
+    res.setHeader('Cache-Control', 'max-age=86400');
+    s3.getObject({
+        Bucket: 'hocs-secure-bucket',
+        Key: req.params.documentId
+    }).createReadStream().pipe(res);
 });
 
 router.get('/case/:caseId/document', (req, res) => {
