@@ -1,9 +1,7 @@
-const logger = require('../libs/logger');
 const User = require('../models/user');
 const ErrorModel = require('../models/error');
 
 function authMiddleware(req, res, next) {
-    logger.debug('AUTH MIDDLEWARE');
     if (req.get('X-Auth-Token')) {
         if (!req.user) {
             req.user = new User({

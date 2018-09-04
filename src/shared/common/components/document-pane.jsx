@@ -15,15 +15,20 @@ class DocumentPanel extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { ...props };
+        let activeDocument;
+        if (props.documents && props.documents.length > 0) {
+            activeDocument = props.documents[0].s3_pdf_link;
+        }
+        this.state = { ...props, activeDocument };
     }
 
     componentDidMount() {
-        const { dispatch, page } = this.props;
-        if (page) {
+        const { dispatch } = this.props;
+        const { documents, page } = this.state;
+        if (page && !documents) {
             return dispatch(updateApiStatus(status.REQUEST_DOCUMENT_LIST))
                 .then(() => {
-                    axios.get(`/case/${page.caseId}/document`)
+                    axios.get(`/api/case/${page.caseId}/document`)
                         .then(response => {
                             dispatch(updateApiStatus(status.REQUEST_DOCUMENT_LIST_SUCCESS))
                                 .then(() => dispatch(clearApiStatus()))
@@ -67,7 +72,6 @@ class DocumentPanel extends Component {
 }
 
 DocumentPanel.defaultProps = {
-    documents: [],
     page: {}
 };
 
@@ -79,7 +83,7 @@ DocumentPanel.propTypes = {
 
 const WrappedDocumentPanel = props => (
     <ApplicationConsumer>
-        {({ dispatch, page }) => <DocumentPanel {...props} dispatch={dispatch} page={page} />}
+        {({ dispatch, documents, page }) => <DocumentPanel {...props} dispatch={dispatch} documents={documents} page={page} />}
     </ApplicationConsumer>
 );
 

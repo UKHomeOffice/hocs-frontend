@@ -1,8 +1,9 @@
 const router = require('express').Router();
 const { allocateCase } = require('../../middleware/stage');
-const { getFormForAction, getFormForCase, getFormForStage } = require('../../services/form');
+const { getFormForAction, getFormForStage } = require('../../services/form');
 const { protectAction } = require('../../middleware/auth');
 
+// TODO: GET RID OF THIS!
 const formResponseMiddleware = (req, res) => {
     if (!res.error) {
         res.status(200).send(req.form);
@@ -15,13 +16,8 @@ router.use(['/action/:workflow/:context/:action', '/action/:workflow/:action'],
     getFormForAction,
     protectAction()
 );
-
 router.use('/case/:caseId/stage/:stageId/allocate', allocateCase);
-
 router.use(['/case/:caseId/stage/:stageId', '/case/:caseId/stage/:stageId/allocate'], getFormForStage);
-
-router.use('/case/:caseId/action/:entity/:action', getFormForCase);
-
-router.get(['/action/*', '/case/*', '/stage/*'], formResponseMiddleware);
+router.get(['/action/*', '/case/*'], formResponseMiddleware);
 
 module.exports = router;

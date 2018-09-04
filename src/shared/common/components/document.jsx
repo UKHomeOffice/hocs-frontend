@@ -7,7 +7,7 @@ class DocumentPreview extends Component {
         const { activeDocument, caseId } = this.props;
         return (
             <embed
-                src={`/case/${caseId}/document/${activeDocument}`}
+                src={`/api/case/${caseId}/document/${activeDocument}`}
                 type='application/pdf'
                 width='100%' height='100%'
                 alt='pdf'

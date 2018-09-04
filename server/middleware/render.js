@@ -2,20 +2,18 @@ const React = require('react');
 const { StaticRouter } = require('react-router-dom');
 const { renderToString } = require('react-dom/server');
 const { default: App } = require('../../build/server/app.server');
-const logger = require('../libs/logger');
 const html = require('../layout/html');
 
 const renderMiddleware = (req, res, next) => {
-    logger.debug('RENDER MIDDLEWARE');
-
     const renderConfig = require('../config').forContext('render');
 
     const { form, data, error } = req;
     const config = {
-        layout: require('../config').forContext('case'),
-        form,
+        ...res.locals,
+        data,
         error,
-        data
+        form,
+        layout: require('../config').forContext('case'),
     };
 
     const context = {

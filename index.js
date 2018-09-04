@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const caseRouter = require('./server/routes/index');
+const applicationRouter = require('./server/routes/index');
 const logger = require('./server/libs/logger');
 const listService = require('./server/services/list');
 
@@ -11,7 +11,7 @@ app.use('/public', express.static(path.join(__dirname, 'node_modules', 'govuk-fr
 app.use('/public', express.static(path.join(__dirname, 'build', 'public')));
 
 listService.initialise();
-app.use('/', caseRouter);
+app.use('/', applicationRouter);
 
 app.listen(port, () => {
     logger.info(`App listening on port ${port}`);

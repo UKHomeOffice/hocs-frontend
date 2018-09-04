@@ -62,8 +62,7 @@ const validators = {
     }
 };
 
-const validationMiddleware = (req, res, next) => {
-    logger.debug('VALIDATION MIDDLEWARE');
+function validationMiddleware(req, res, next) {
     if (req.form) {
         try {
             const { data, schema } = req.form;
@@ -97,9 +96,19 @@ const validationMiddleware = (req, res, next) => {
         }
     }
     next();
-};
+}
+
+function apiValidationResponseMiddleware(req, res, next) {
+    if (Object.keys(req.form.errors).length > 0) {
+        return res.status(200).send({
+            errors: req.form.errors
+        });
+    }
+    next();
+}
 
 module.exports = {
     validationMiddleware,
+    apiValidationResponseMiddleware,
     validators
 };

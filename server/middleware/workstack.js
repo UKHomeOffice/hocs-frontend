@@ -3,18 +3,17 @@ const logger = require('../libs/logger');
 
 const workstackMiddleware = async (req, res, next) => {
     try {
-        res.data = {};
         const response = await caseworkServiceClient.get('/stage/active');
-        res.data.workstack = response.data.activeStages;
+        res.locals.workstack = response.data.activeStages;
         next();
     } catch (e) {
         logger.error(e.stack);
-        res.data.workstack = [];
+        res.locals.workstack = [];
         next();
     }
 };
 const workstackAjaxResponseMiddleware = async (req, res) => {
-    res.send(res.data.workstack);
+    res.send(req.locals.workstack);
 };
 
 module.exports = {

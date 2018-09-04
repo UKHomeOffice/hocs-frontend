@@ -46,7 +46,7 @@ function withForm(Page) {
 
         getForm() {
             const { dispatch, match: { url } } = this.props;
-            const endpoint = `/forms${url}`;
+            const endpoint = '/api/form' + url;
             return dispatch(updateApiStatus(status.REQUEST_FORM))
                 .then(() => {
                     axios.get(endpoint)
@@ -83,7 +83,7 @@ function withForm(Page) {
             });
             return dispatch(updateApiStatus(status.SUBMIT_FORM))
                 .then(() => {
-                    axios.post(url, formData, { headers: { 'Content-Type': 'multipart/form-data' } })
+                    axios.post('/api' + url, formData, { headers: { 'Content-Type': 'multipart/form-data' } })
                         .then(res => {
                             return dispatch(updateApiStatus(status.SUBMIT_FORM_SUCCESS))
                                 .then(() => {

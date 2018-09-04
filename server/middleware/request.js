@@ -1,6 +1,6 @@
 const ErrorModel = require('../models/error');
 
-const errorAjaxResponseMiddleware = (req, res, next) => {
+function errorAjaxResponseMiddleware(req, res, next) {
     if (!res.noScript) {
         if (!res.error) {
             return res.status(200).send({ errors: req.form.errors });
@@ -9,8 +9,9 @@ const errorAjaxResponseMiddleware = (req, res, next) => {
         }
     }
     next();
-};
-const errorMiddleware = (err, req, res, next) => {
+}
+
+function errorMiddleware(err, req, res, next) {
     res.error = new ErrorModel({
         status: 500,
         title: 'Server Error',
@@ -18,9 +19,15 @@ const errorMiddleware = (err, req, res, next) => {
         stackTrace: err.stack
     });
     next();
-};
+}
+
+function initRequest(req, res, next) {
+    res.locals = {};
+    next();
+}
 
 module.exports = {
     errorAjaxResponseMiddleware,
-    errorMiddleware
+    errorMiddleware,
+    initRequest
 };
