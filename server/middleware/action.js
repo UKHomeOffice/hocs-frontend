@@ -7,6 +7,7 @@ async function actionResponseMiddleware(req, res, next) {
         const { form, user } = req;
         const response = await actionService.performAction('ACTION', { workflow, context, action, form, user });
         const { error, callbackUrl } = response;
+        res.locals.confirmation = response.confirmation;
         if (error) {
             res.error = new ErrorModel({
                 status: 500,

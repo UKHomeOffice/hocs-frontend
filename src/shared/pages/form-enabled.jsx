@@ -23,7 +23,10 @@ function withForm(Page) {
 
         constructor(props) {
             super(props);
-            this.state = { formData: {} };
+            this.state = {
+                formData: {},
+                confirmation: props.confirmation
+            };
         }
 
         componentDidMount() {
@@ -69,7 +72,7 @@ function withForm(Page) {
 
         submitHandler(e) {
             e.preventDefault();
-            const { dispatch, form,  history, match: { url } } = this.props;
+            const { dispatch, form, history, match: { url } } = this.props;
             /* eslint-disable-next-line no-undef */
             const formData = new FormData();
             Object.keys(form.data).map(field => {
@@ -158,6 +161,7 @@ function withForm(Page) {
     }
 
     FormEnabled.propTypes = {
+        confirmation: PropTypes.object,
         dispatch: PropTypes.func.isRequired,
         form: PropTypes.object,
         history: PropTypes.object.isRequired,
@@ -173,9 +177,10 @@ const FormEnabledWrapper = Page => {
         const WrappedPage = withForm(Page);
         return (
             <ApplicationConsumer>
-                {({ dispatch, form }) => (
+                {({ confirmation, dispatch, form }) => (
                     <WrappedPage
                         {...props}
+                        confirmation={confirmation}
                         dispatch={dispatch}
                         form={form}
                     />
