@@ -69,7 +69,7 @@ const actions = {
             case CREATE_CASE:
                 try {
                     const response = await createCase('/case', { caseType: context, form });
-                    const clientResponse = { summary: `Created case ${response.data.reference}` };
+                    const clientResponse = { summary: `Created a new case: ${response.data.reference}` };
                     return handleActionSuccess(clientResponse, workflow, form);
                 } catch (e) {
                     throw new ActionError(e);
@@ -77,7 +77,7 @@ const actions = {
             case BULK_CREATE_CASE: {
                 try {
                     const response = await createCase('/case/bulk', { caseType: context, form });
-                    const clientResponse = { summary: `Submitted ${response.data.count} file${response.data.count > 1 ? 's': ''}` };
+                    const clientResponse = { summary: `Created ${response.data.count} new case${response.data.count > 1 ? 's': ''}` };
                     return handleActionSuccess(clientResponse, workflow, form);
                 } catch (e) {
                     throw new ActionError(e);

@@ -1,5 +1,5 @@
 {
-  "title": "Bulk Create Cases",
+  "title": "Create new cases in bulk",
   "defaultActionLabel": "Next",
   "fields": [
     {
@@ -9,7 +9,7 @@
       ],
       "props": {
         "name": "case-type",
-        "label": "Case type",
+        "label": "What type of correspondence do you have?",
         "choices": "CASE_TYPES_BULK"
       }
     }
