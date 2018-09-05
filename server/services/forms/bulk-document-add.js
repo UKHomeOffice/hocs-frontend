@@ -24,7 +24,7 @@ module.exports = {
             props: {
                 name: 'add_document',
                 action: 'ADD_DOCUMENT',
-                hint: `There is a limit of ${DOCUMENT_BULK_LIMIT} files per transaction`,
+                hint: `There is a limit of ${DOCUMENT_BULK_LIMIT} files`,
                 documentType: 'ORIGINAL',
                 className: 'button-secondary-action',
                 label: 'Documents',
