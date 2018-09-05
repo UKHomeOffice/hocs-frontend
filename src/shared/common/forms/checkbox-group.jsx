@@ -44,11 +44,11 @@ class Checkbox extends Component {
                         <span className="govuk-fieldset__heading govuk-label--s">{label}</span>
                     </legend>
 
-                    {hint && <span className="govuk-form-hint">{hint}</span>}
+                    {hint && <span className="govuk-hint">{hint}</span>}
                     {error && <span className="govuk-error-message">{error}</span>}
 
                     <div className={'govuk-checkboxes'}>
-                        {choices.map((choice, i) => {
+                        {choices && choices.map((choice, i) => {
                             return (
                                 <div key={i} className="govuk-checkboxes__item">
                                     <input id={`${name}-${choice.value}`}
@@ -65,10 +65,10 @@ class Checkbox extends Component {
                                 </div>
                             );
                         })}
+
+                        {choices.length === 0 && <p className="govuk-body">No options available</p>}
                     </div>
-
                 </fieldset>
-
             </div>
         );
     }

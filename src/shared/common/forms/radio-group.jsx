@@ -37,7 +37,7 @@ class Radio extends Component {
                         <span className="govuk-fieldset__heading govuk-label--s">{label}</span>
                     </legend>
 
-                    {hint && <span className="govuk-form-hint">{hint}</span>}
+                    {hint && <span className="govuk-hint">{hint}</span>}
                     {error && <span className="govuk-error-message">{error}</span>}
 
                     <div className={'govuk-radios'}>
@@ -57,10 +57,9 @@ class Radio extends Component {
                             );
                         })}
 
-                        {choices.length === 0 && <Fragment>No options available</Fragment>}
+                        {choices.length === 0 && <p className="govuk-body">No options available</p>}
                     </div>
                 </fieldset>
-
             </div>
         );
     }
