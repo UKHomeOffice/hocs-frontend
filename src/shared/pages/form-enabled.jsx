@@ -24,16 +24,13 @@ function withForm(Page) {
         constructor(props) {
             super(props);
             this.state = {
-                formData: {},
                 confirmation: props.confirmation
             };
         }
 
         componentDidMount() {
-            const { dispatch, form, match } = this.props;
-            if (!form) {
-                this.getForm();
-            }
+            const { dispatch, match } = this.props;
+            this.getForm();
             dispatch(updatePageMeta(match.params));
         }
 
