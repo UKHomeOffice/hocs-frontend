@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { fileMiddleware } = require('../../middleware/file');
 const { processMiddleware } = require('../../middleware/process');
 const { validationMiddleware, apiValidationResponseMiddleware } = require('../../middleware/validation');
-const { stageResponseMiddleware, allocateCase } = require('../../middleware/stage');
+const { apiStageResponseMiddleware, allocateCase } = require('../../middleware/stage');
 const { caseSummaryMiddleware, caseAjaxResponseMiddleware } = require('../../middleware/case');
 const { getFormForStage } = require('../../services/form');
 
@@ -13,7 +13,7 @@ router.post(['/:caseId/stage/:stageId', '/:caseId/stage/:stageId/allocate'],
     processMiddleware,
     validationMiddleware,
     apiValidationResponseMiddleware,
-    stageResponseMiddleware
+    apiStageResponseMiddleware
 );
 router.get('/:caseId/summary', caseSummaryMiddleware, caseAjaxResponseMiddleware);
 

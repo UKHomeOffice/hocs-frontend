@@ -1,7 +1,7 @@
 const { caseworkServiceClient } = require('../libs/request');
 const logger = require('../libs/logger');
 
-const workstackMiddleware = async (req, res, next) => {
+async function workstackMiddleware(req, res, next) {
     try {
         const response = await caseworkServiceClient.get('/stage/active');
         res.locals.workstack = response.data.activeStages;
@@ -11,10 +11,11 @@ const workstackMiddleware = async (req, res, next) => {
         res.locals.workstack = [];
         next();
     }
-};
-const workstackAjaxResponseMiddleware = async (req, res) => {
-    res.send(req.locals.workstack);
-};
+}
+
+async function workstackAjaxResponseMiddleware(req, res) {
+    res.json(res.locals.workstack);
+}
 
 module.exports = {
     workstackMiddleware,

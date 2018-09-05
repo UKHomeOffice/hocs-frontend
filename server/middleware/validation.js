@@ -1,5 +1,5 @@
 const logger = require('../libs/logger');
-const ErrorModel = require('../models/error');
+const { FormSubmissionError } = require('../models/error');
 const { DOCUMENT_WHITELIST, DOCUMENT_BULK_LIMIT } = require('../config').forContext('server');
 
 const validationErrors = {
@@ -86,13 +86,8 @@ function validationMiddleware(req, res, next) {
                     return result;
                 }, {});
             logger.debug(`Validation errors: ${JSON.stringify(req.form.errors)}`);
-        } catch (error) {
-            req.error = new ErrorModel({
-                status: 500,
-                title: 'Server error',
-                summary: 'Unable to validate form data',
-                stackTrace: error.stack
-            });
+        } catch (e) {
+            return next(new FormSubmissionError('Unable to validate form data'));
         }
     }
     next();

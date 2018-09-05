@@ -17,7 +17,6 @@ router.use('/api', apiRouter);
 router.use('/action', actionRouter);
 router.use('/case', caseRouter);
 
-
 router.use('*',
     errorMiddleware,
     renderMiddleware,

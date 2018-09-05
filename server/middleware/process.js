@@ -1,5 +1,5 @@
 const logger = require('../libs/logger');
-const ErrorModel = require('../models/error');
+const { FormSubmissionError } = require('../models/error');
 
 const customAdapters = {
     'date': (reducer, field, data) => {
@@ -45,7 +45,7 @@ function defaultAdapter(reducer, field, data) {
     reducer[name] = result;
 }
 
-const processMiddleware = (req, res, next) => {
+function processMiddleware(req, res, next) {
     try {
         const data = JSON.parse(JSON.stringify(req.body));
         const { schema } = req.form;
@@ -61,15 +61,10 @@ const processMiddleware = (req, res, next) => {
                 return reducer;
             }, {});
     } catch (error) {
-        req.error = new ErrorModel({
-            status: 500,
-            title: 'Server error',
-            summary: 'Unable to process form data',
-            stackTrace: error.stack
-        });
+        return next(new FormSubmissionError('Unable to process form data'));
     }
     next();
-};
+}
 
 module.exports = {
     processMiddleware

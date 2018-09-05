@@ -51,7 +51,6 @@ DocumentList.propTypes = {
     activeDocument: PropTypes.string,
     caseId: PropTypes.string.isRequired,
     clickHandler: PropTypes.func.isRequired,
-    stageId: PropTypes.string.isRequired,
     documents: PropTypes.array.isRequired
 };
 

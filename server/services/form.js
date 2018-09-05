@@ -2,7 +2,7 @@ const formRepository = require('./forms/index');
 const listService = require('./list');
 const { workflowServiceClient } = require('../libs/request');
 const logger = require('../libs/logger');
-const ErrorModel = require('../models/error');
+const { FormServiceError } = require('../models/error');
 
 async function getFormSchemaFromWorkflowService({ caseId, stageId }) {
     const response = await workflowServiceClient.get(`/case/${caseId}/stage/${stageId}`);
@@ -50,13 +50,8 @@ const getFormForAction = async (req, res, next) => {
     const { workflow, context, action } = req.params;
     try {
         req.form = await getFormSchema({ context: 'ACTION', workflow, entity:context, action, user: req.user });
-    } catch (err) {
-        res.error = new ErrorModel({
-            status: 404,
-            title: 'Error',
-            summary: 'Form not found',
-            stackTrace: err.stack
-        });
+    } catch (e) {
+        return next(new FormServiceError());
     }
     next();
 };
@@ -65,13 +60,8 @@ const getFormForCase = async (req, res, next) => {
     const { action } = req.params;
     try {
         req.form = await getFormSchema({ context: 'WORKFLOW', action, user: req.user });
-    } catch (err) {
-        res.error = new ErrorModel({
-            status: 404,
-            title: 'Error',
-            summary: 'Form not found',
-            stackTrace: err.stack
-        });
+    } catch (e) {
+        return next(new FormServiceError());
     }
     next();
 };
@@ -80,13 +70,8 @@ const getFormForStage = async (req, res, next) => {
     const { caseId, stageId } = req.params;
     try {
         req.form = await getFormSchemaFromWorkflowService({ caseId, stageId, user: req.user });
-    } catch (err) {
-        res.error = new ErrorModel({
-            status: 404,
-            title: 'Error',
-            summary: 'Form not found',
-            stackTrace: err.stack
-        });
+    } catch (e) {
+        return next(new FormServiceError());
     }
     next();
 };

@@ -4,14 +4,13 @@ const { renderToString } = require('react-dom/server');
 const { default: App } = require('../../build/server/app.server');
 const html = require('../layout/html');
 
-const renderMiddleware = (req, res, next) => {
+function renderMiddleware (req, res, next) {
     const renderConfig = require('../config').forContext('render');
 
-    const { form, data, error } = req;
+    const { form, data } = req;
     const config = {
         ...res.locals,
         data,
-        error,
         form,
         layout: require('../config').forContext('case'),
     };
@@ -37,11 +36,11 @@ const renderMiddleware = (req, res, next) => {
         });
     }
     next();
-};
+}
 
-const renderResponseMiddleware = (req, res) => {
+function renderResponseMiddleware (req, res) {
     return res.status(200).send(res.rendered);
-};
+}
 
 
 module.exports = {

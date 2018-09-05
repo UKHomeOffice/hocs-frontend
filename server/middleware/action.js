@@ -1,43 +1,39 @@
 const actionService = require('../services/action');
-const ErrorModel = require('../models/error');
 
 async function actionResponseMiddleware(req, res, next) {
     if (Object.keys(req.form.errors).length === 0) {
         const { workflow, context, action } = req.params;
         const { form, user } = req;
-        const response = await actionService.performAction('ACTION', { workflow, context, action, form, user });
-        const { error, callbackUrl } = response;
-        res.locals.confirmation = response.confirmation;
-        if (error) {
-            res.error = new ErrorModel({
-                status: 500,
-                title: 'Error',
-                summary: 'Failed to perform action',
-                stackTrace: error.message
-            });
-        } else if (callbackUrl) {
-            return res.redirect(callbackUrl);
+        try {
+            const response = await actionService.performAction('ACTION', { workflow, context, action, form, user });
+            const { callbackUrl, confirmation } = response;
+            if (confirmation) {
+                res.locals.confirmation = confirmation;
+            } else if (callbackUrl) {
+                return res.redirect(callbackUrl);
+            }
+        } catch (e) {
+            return next(e);
+        } finally {
+            next();
         }
     }
     next();
 }
 
-async function apiActionResponseMiddleware(req, res) {
+async function apiActionResponseMiddleware(req, res, next) {
     const { workflow, context, action } = req.params;
     const { form, user } = req;
-    const response = await actionService.performAction('ACTION', { workflow, context, action, form, user });
-    const { error, callbackUrl, confirmation } = response;
-    if (error) {
-        return res.status(500).json(new ErrorModel({
-            status: 500,
-            title: 'Error',
-            summary: 'Failed to perform action',
-            stackTrace: error.message
-        }));
-    } else if (confirmation) {
-        return res.status(200).send({ confirmation });
-    } else {
-        return res.status(200).send({ redirect: callbackUrl });
+    try {
+        const response = await actionService.performAction('ACTION', { workflow, context, action, form, user });
+        const { callbackUrl, confirmation } = response;
+        if (confirmation) {
+            return res.status(200).json({ confirmation });
+        } else {
+            return res.status(200).json({ redirect: callbackUrl });
+        }
+    } catch (e) {
+        return next(e);
     }
 }
 

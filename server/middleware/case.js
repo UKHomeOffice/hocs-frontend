@@ -3,7 +3,7 @@ const ErrorModel = require('../models/error');
 const logger = require('../libs/logger');
 const { caseworkServiceClient } = require('../libs/request');
 
-const caseResponseMiddleware = async (req, res, next) => {
+async function caseResponseMiddleware(req, res, next) {
     if (Object.keys(req.form.errors).length > 0) {
         return next();
     }
@@ -25,9 +25,9 @@ const caseResponseMiddleware = async (req, res, next) => {
         }
         return res.status(200).send({ redirect: callbackUrl, response: {} });
     }
-};
+}
 
-const caseSummaryMiddleware = async (req, res, next) => {
+async function caseSummaryMiddleware(req, res, next) {
     try {
         res.data = {};
         const { caseId } = req.params;
@@ -37,10 +37,11 @@ const caseSummaryMiddleware = async (req, res, next) => {
     } catch (e) {
         logger.error(e.stack);
     }
-};
-const caseAjaxResponseMiddleware = async (req, res) => {
+}
+
+async function caseAjaxResponseMiddleware(req, res) {
     res.send({ ...res.data });
-};
+}
 
 module.exports = {
     caseResponseMiddleware,
