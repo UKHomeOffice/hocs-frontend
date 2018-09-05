@@ -44,7 +44,7 @@ describe('Form radio group component', () => {
             <RadioGroup name="radio-group" choices={choices} updateState={mockCallback} />
         );
         expect(mockCallback).toHaveBeenCalledTimes(1);
-        expect(mockCallback).toHaveBeenCalledWith({ 'radio-group': 'A' });
+        expect(mockCallback).toHaveBeenCalledWith({ 'radio-group': undefined });
     });
     it('should execute callback on change', () => {
         const mockCallback = jest.fn();

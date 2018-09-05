@@ -41,7 +41,7 @@ const customAdapters = {
 
 function defaultAdapter(reducer, field, data) {
     const { name } = field.props;
-    const result = data[name] === 'undefined' ? undefined : data[name];
+    const result = data[name] === 'undefined' ? null : data[name];
     reducer[name] = result;
 }
 

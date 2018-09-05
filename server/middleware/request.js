@@ -11,7 +11,7 @@ function apiErrorMiddleware(err, req, res, next) {
         logger.error(err.message);
         return res.status(err.status || 500).json({
             message: err.message,
-            status: err.status,
+            status: err.status || 500,
             stack: err.stack,
             title: err.title
         });
@@ -26,7 +26,7 @@ function errorMiddleware(err, req, res, next) {
         logger.error(err.message);
         res.locals.error = {
             message: err.message,
-            status: err.status,
+            status: err.status || 500,
             stack: err.stack,
             title: err.title
         };

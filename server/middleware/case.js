@@ -1,26 +1,18 @@
 const actionService = require('../services/action');
-const ErrorModel = require('../models/error');
 const logger = require('../libs/logger');
 const { caseworkServiceClient } = require('../libs/request');
 
 async function caseResponseMiddleware(req, res, next) {
     const { caseId, entity, action } = req.params;
     const { form, user } = req;
-    const response = await actionService.performAction('CASE', { caseId, entity, action, form, user });
-    const { error, callbackUrl } = response;
-    if (error) {
-        res.error = new ErrorModel({
-            status: 500,
-            title: 'Error',
-            summary: 'Failed to perform action',
-            stackTrace: error.message
-        });
-        return next();
-    } else {
-        if (res.noScript) {
-            return res.redirect(callbackUrl);
-        }
-        return res.status(200).send({ redirect: callbackUrl, response: {} });
+    try {
+        const response = await actionService.performAction('CASE', { caseId, entity, action, form, user });
+        const { callbackUrl } = response;
+        return res.redirect(callbackUrl);
+    } catch (e) {
+        return next(e);
+    } finally {
+        next();
     }
 }
 

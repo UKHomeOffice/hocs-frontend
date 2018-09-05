@@ -2,6 +2,10 @@ import React from 'react';
 import Main from '../main.jsx';
 import { MemoryRouter } from 'react-router-dom';
 
+jest.mock('../../common/components/workstack.jsx', () => (
+    'MOCK_WORKSTACK'
+));
+
 describe('Main page component', () => {
 
     const mockDispatch = jest.fn();

@@ -5,12 +5,17 @@ exports[`Stage page component should render children when passed 1`] = `
   class="govuk-grid-row"
 >
   <div
-    class="govuk-grid-column-full"
+    class="govuk-grid-column-one-half"
   >
     <h1
       class="govuk-heading-l"
     />
     FORM
+  </div>
+  <div
+    class="govuk-grid-column-one-half"
+  >
+    <document_preview />
   </div>
 </div>
 `;
@@ -20,11 +25,16 @@ exports[`Stage page component should render with default props 1`] = `
   class="govuk-grid-row"
 >
   <div
-    class="govuk-grid-column-full"
+    class="govuk-grid-column-one-half"
   >
     <h1
       class="govuk-heading-l"
     />
+  </div>
+  <div
+    class="govuk-grid-column-one-half"
+  >
+    <document_preview />
   </div>
 </div>
 `;
@@ -34,7 +44,7 @@ exports[`Stage page component should render with subTitle when passed in props 1
   class="govuk-grid-row"
 >
   <div
-    class="govuk-grid-column-full"
+    class="govuk-grid-column-one-half"
   >
     <h1
       class="govuk-heading-l"
@@ -46,6 +56,11 @@ exports[`Stage page component should render with subTitle when passed in props 1
       </span>
     </h1>
   </div>
+  <div
+    class="govuk-grid-column-one-half"
+  >
+    <document_preview />
+  </div>
 </div>
 `;
 
@@ -54,13 +69,18 @@ exports[`Stage page component should render with title when passed in props 1`] 
   class="govuk-grid-row"
 >
   <div
-    class="govuk-grid-column-full"
+    class="govuk-grid-column-one-half"
   >
     <h1
       class="govuk-heading-l"
     >
       MY_TITLE
     </h1>
+  </div>
+  <div
+    class="govuk-grid-column-one-half"
+  >
+    <document_preview />
   </div>
 </div>
 `;

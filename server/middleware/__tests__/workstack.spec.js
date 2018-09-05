@@ -1,4 +1,4 @@
-import { workstackMiddleware, workstackAjaxResponseMiddleware } from '../workstack.js';
+import { workstackMiddleware, workstackApiResponseMiddleware } from '../workstack.js';
 
 const mockCaseworkSeviceClient = jest.fn();
 jest.mock('../../libs/request.js', () => {
@@ -22,7 +22,7 @@ describe('Workstack middleware', () => {
 
     beforeEach(() => {
         req = {};
-        res = {};
+        res = { locals: {} };
         next.mockReset();
     });
 
@@ -31,9 +31,9 @@ describe('Workstack middleware', () => {
         expect(mockCaseworkSeviceClient).toHaveBeenCalled();
         expect(mockCaseworkSeviceClient).toHaveBeenLastCalledWith('/stage/active');
         expect(next).toHaveBeenCalled();
-        expect(res.data).toBeDefined();
-        expect(res.data.workstack).toBeDefined();
-        expect(res.data.workstack).toEqual('WORKSTACK_DATA');
+        expect(res.locals).toBeDefined();
+        expect(res.locals.workstack).toBeDefined();
+        expect(res.locals.workstack).toEqual('WORKSTACK_DATA');
     });
 
 });
@@ -42,22 +42,22 @@ describe('Workstack AJAX response middleware', () => {
 
     let req = {};
     let res = {};
-    const send = jest.fn();
+    const json = jest.fn();
 
     beforeEach(() => {
         req = {};
         res = {
-            send,
-            data: {
+            json,
+            locals: {
                 workstack: 'WORKSTACK_DATA'
             }
         };
-        send.mockReset();
+        json.mockReset();
     });
 
     it('should return the workstack object from the response object', () => {
-        workstackAjaxResponseMiddleware(req, res);
-        expect(res.send).toHaveBeenCalled();
-        expect(res.send).toHaveBeenLastCalledWith('WORKSTACK_DATA');
+        workstackApiResponseMiddleware(req, res);
+        expect(res.json).toHaveBeenCalled();
+        expect(res.json).toHaveBeenLastCalledWith('WORKSTACK_DATA');
     });
 });

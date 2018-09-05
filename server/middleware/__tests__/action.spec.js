@@ -31,50 +31,27 @@ describe('Action middleware', () => {
         redirect.mockReset();
     });
 
-    it('should send a 200/OK response and a callback URL when noScript is false', async () => {
+    it('should send a 200/OK response and a callback URL', async () => {
         const actionService = require('../../services/action.js');
         actionService.performAction.mockImplementation(() => {
-            return { callbackUrl: '/' };
-        });
-        const { actionResponseMiddleware } = require('../action.js');
-        await actionResponseMiddleware(req, res, next);
-        expect(send).toHaveBeenCalled();
-        expect(send.mock.calls[0][0].redirect).toBeDefined();
-        expect(send.mock.calls[0][0].redirect).toEqual('/');
-        expect(status).toHaveBeenCalled();
-        expect(status).toHaveBeenCalledWith(200);
-        expect(redirect).not.toHaveBeenCalled();
-        expect(next).not.toHaveBeenCalled();
-    });
-
-    it('should redirect to the callback URL when noScript is true', async () => {
-        res = {
-            status, redirect, noScript: true
-        };
-        const actionService = require('../../services/action.js');
-        actionService.performAction.mockImplementation(() => {
-            return { callbackUrl: '/' };
+            return Promise.resolve({ callbackUrl: '/' });
         });
         const { actionResponseMiddleware } = require('../action.js');
         await actionResponseMiddleware(req, res, next);
         expect(redirect).toHaveBeenCalled();
-        expect(redirect.mock.calls[0][0]).toBeDefined();
-        expect(redirect.mock.calls[0][0]).toEqual('/');
-        expect(send).not.toHaveBeenCalled();
-        expect(next).not.toHaveBeenCalled();
+        expect(redirect).toHaveBeenCalledWith('/');
     });
 
     it('should create an ErrorModel instance on the response object if the call to Action Service fails', async () => {
         const actionService = require('../../services/action.js');
+        const mockError = new Error('TEST_ERROR');
         actionService.performAction.mockImplementation(() => {
-            return { error: { message: 'TEST_ERROR' } };
+            return Promise.reject(mockError);
         });
         const { actionResponseMiddleware } = require('../action.js');
         await actionResponseMiddleware(req, res, next);
         expect(next).toHaveBeenCalled();
-        expect(send).not.toHaveBeenCalled();
-        expect(redirect).not.toHaveBeenCalled();
-        expect(res.error).toBeDefined();
+        expect(next).toHaveBeenCalledWith(mockError);
     });
 
     it('should call the next middleware if form validation errors are on the request object', async () => {
