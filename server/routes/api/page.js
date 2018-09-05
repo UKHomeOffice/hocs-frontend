@@ -1,9 +1,9 @@
 const router = require('express').Router();
-const { workstackMiddleware, workstackAjaxResponseMiddleware } = require('../../middleware/workstack');
+const { workstackMiddleware, workstackApiResponseMiddleware } = require('../../middleware/workstack');
 
 router.get('/workstack',
     workstackMiddleware,
-    workstackAjaxResponseMiddleware
+    workstackApiResponseMiddleware
 );
 
 module.exports = router;

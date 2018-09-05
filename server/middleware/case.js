@@ -4,9 +4,6 @@ const logger = require('../libs/logger');
 const { caseworkServiceClient } = require('../libs/request');
 
 async function caseResponseMiddleware(req, res, next) {
-    if (Object.keys(req.form.errors).length > 0) {
-        return next();
-    }
     const { caseId, entity, action } = req.params;
     const { form, user } = req;
     const response = await actionService.performAction('CASE', { caseId, entity, action, form, user });
@@ -39,12 +36,12 @@ async function caseSummaryMiddleware(req, res, next) {
     }
 }
 
-async function caseAjaxResponseMiddleware(req, res) {
+async function caseApiResponseMiddleware(req, res) {
     res.send({ ...res.data });
 }
 
 module.exports = {
     caseResponseMiddleware,
     caseSummaryMiddleware,
-    caseAjaxResponseMiddleware
+    caseApiResponseMiddleware
 };

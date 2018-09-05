@@ -1,5 +1,5 @@
 const logger = require('../libs/logger');
-const { FormSubmissionError } = require('../models/error');
+const { FormSubmissionError, ValidationError } = require('../models/error');
 const { DOCUMENT_WHITELIST, DOCUMENT_BULK_LIMIT } = require('../config').forContext('server');
 
 const validationErrors = {
@@ -66,7 +66,7 @@ function validationMiddleware(req, res, next) {
     if (req.form) {
         try {
             const { data, schema } = req.form;
-            req.form.errors = schema.fields
+            const validationErrors = schema.fields
                 .filter(field => field.type !== 'display')
                 .reduce((result, field) => {
                     const { validation, props: { name, label } } = field;
@@ -85,7 +85,9 @@ function validationMiddleware(req, res, next) {
                     }
                     return result;
                 }, {});
-            logger.debug(`Validation errors: ${JSON.stringify(req.form.errors)}`);
+            if (Object.keys(validationErrors).length > 0) {
+                return next(new ValidationError('Form validation failed', validationErrors));
+            }
         } catch (e) {
             return next(new FormSubmissionError('Unable to validate form data'));
         }
@@ -93,17 +95,7 @@ function validationMiddleware(req, res, next) {
     next();
 }
 
-function apiValidationResponseMiddleware(req, res, next) {
-    if (Object.keys(req.form.errors).length > 0) {
-        return res.status(200).send({
-            errors: req.form.errors
-        });
-    }
-    next();
-}
-
 module.exports = {
     validationMiddleware,
-    apiValidationResponseMiddleware,
     validators
 };

@@ -51,10 +51,18 @@ class AllocationError extends ErrorModel {
     }
 }
 
+class ValidationError extends ErrorModel {
+    constructor(message, fields) {
+        super(message, 200, 'Form validation failed');
+        this.fields = fields;
+    }
+}
+
 module.exports = {
     ActionError,
     AllocationError,
     AuthenticationError,
     FormSubmissionError,
-    FormServiceError
+    FormServiceError,
+    ValidationError
 };

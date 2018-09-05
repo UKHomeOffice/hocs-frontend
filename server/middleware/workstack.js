@@ -13,11 +13,11 @@ async function workstackMiddleware(req, res, next) {
     }
 }
 
-async function workstackAjaxResponseMiddleware(req, res) {
+async function workstackApiResponseMiddleware(req, res) {
     res.json(res.locals.workstack);
 }
 
 module.exports = {
     workstackMiddleware,
-    workstackAjaxResponseMiddleware
+    workstackApiResponseMiddleware
 };

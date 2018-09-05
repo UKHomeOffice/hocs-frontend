@@ -3,22 +3,20 @@ const { AllocationError } = require('../models/error');
 const { workflowServiceClient } = require('../libs/request');
 
 async function stageResponseMiddleware(req, res, next) {
-    if (Object.keys(req.form.errors).length > 0) {
-        const { caseId, stageId } = req.params;
-        const { form, user } = req;
-        try {
-            const response = await actionService.performAction('WORKFLOW', { caseId, stageId, form, user });
-            const { callbackUrl } = response;
-            return res.redirect(callbackUrl);
-        } catch (e) {
-            return next(e);
-        } finally {
-            next();
-        }
+    const { caseId, stageId } = req.params;
+    const { form, user } = req;
+    try {
+        const response = await actionService.performAction('WORKFLOW', { caseId, stageId, form, user });
+        const { callbackUrl } = response;
+        return res.redirect(callbackUrl);
+    } catch (e) {
+        return next(e);
+    } finally {
+        next();
     }
 }
 
-async function apiStageResponseMiddleware(req, res, next) {
+async function stageApiResponseMiddleware(req, res, next) {
     const { caseId, stageId } = req.params;
     const { form, user } = req;
     try {
@@ -44,7 +42,7 @@ async function allocateCase(req, res, next) {
 }
 
 module.exports = {
-    apiStageResponseMiddleware,
+    stageApiResponseMiddleware,
     stageResponseMiddleware,
     allocateCase
 };
