@@ -54,18 +54,4 @@ describe('Action middleware', () => {
         expect(next).toHaveBeenCalledWith(mockError);
     });
 
-    it('should call the next middleware if form validation errors are on the request object', async () => {
-        req.form.errors = ['1', '2', '3'];
-        const actionService = require('../../services/action.js');
-        actionService.performAction.mockImplementation(() => {
-            return {};
-        });
-        const { actionResponseMiddleware } = require('../action.js');
-        await actionResponseMiddleware(req, res, next);
-        expect(next).toHaveBeenCalled();
-        expect(send).not.toHaveBeenCalled();
-        expect(redirect).not.toHaveBeenCalled();
-        expect(res.error).not.toBeDefined();
-    });
-
 });
