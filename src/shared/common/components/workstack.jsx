@@ -14,7 +14,7 @@ class Workstack extends Component {
     componentDidMount() {
         axios.get('/api/page/workstack')
             .then(res => {
-                this.setState({ cases: res.data });
+                this.setState({ cases: res.data.activeStages });
             })
             .catch(err => {
                 /* eslint-disable-next-line */
