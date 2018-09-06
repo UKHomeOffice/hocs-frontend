@@ -188,4 +188,45 @@ describe('Application context', () => {
         expect(wrapper.state().form).toBeNull();
     });
 
+    it('should handle the UPDATE_API_STATUS action', () => {
+        const action = {
+            type: ActionTypes.UPDATE_API_STATUS,
+            payload: 'TEST_STATUS'
+        };
+        const defaultState = {
+            apiStatus: null
+        };
+        const wrapper = shallow(<ApplicationProvider config={defaultState} />);
+        wrapper.state().dispatch(action);
+        expect(wrapper.state().apiStatus).toEqual('TEST_STATUS');
+    });
+
+    it('should handle the CLEAR_API_STATUS action', () => {
+        const action = {
+            type: ActionTypes.CLEAR_API_STATUS
+        };
+        const defaultState = {
+            apiStatus: 'TEST_STATUS'
+        };
+        const wrapper = shallow(<ApplicationProvider config={defaultState} />);
+        wrapper.state().dispatch(action);
+        expect(wrapper.state().apiStatus).toBeNull();
+    });
+
+    it('should handle the UPDATE_PAGE_META action', () => {
+        const pageMeta = {
+            TEST_KEY: 'TEST_VALUE'
+        };
+        const action = {
+            type: ActionTypes.UPDATE_PAGE_META,
+            payload: pageMeta
+        };
+        const defaultState = {
+            page: {}
+        };
+        const wrapper = shallow(<ApplicationProvider config={defaultState} />);
+        wrapper.state().dispatch(action);
+        expect(wrapper.state().page.TEST_KEY).toEqual('TEST_VALUE');
+    });
+
 });
