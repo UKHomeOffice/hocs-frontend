@@ -5,6 +5,10 @@ jest.mock('../form-enabled.jsx', () => (
     (C) => C
 ));
 
+jest.mock('../../common/components/document-pane.jsx', () => (
+    'DOCUMENT_PREVIEW'
+));
+
 describe('Stage page component', () => {
 
     it('should render with default props', () => {

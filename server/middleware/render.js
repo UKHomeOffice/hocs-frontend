@@ -2,20 +2,17 @@ const React = require('react');
 const { StaticRouter } = require('react-router-dom');
 const { renderToString } = require('react-dom/server');
 const { default: App } = require('../../build/server/app.server');
-const logger = require('../libs/logger');
 const html = require('../layout/html');
 
-const renderMiddleware = (req, res, next) => {
-    logger.debug('RENDER MIDDLEWARE');
-
+function renderMiddleware (req, res, next) {
     const renderConfig = require('../config').forContext('render');
 
-    const { form, data, error } = req;
+    const { form, data } = req;
     const config = {
-        layout: require('../config').forContext('case'),
+        ...res.locals,
+        data,
         form,
-        error,
-        data
+        layout: require('../config').forContext('case'),
     };
 
     const context = {
@@ -39,11 +36,11 @@ const renderMiddleware = (req, res, next) => {
         });
     }
     next();
-};
+}
 
-const renderResponseMiddleware = (req, res) => {
+function renderResponseMiddleware (req, res) {
     return res.status(200).send(res.rendered);
-};
+}
 
 
 module.exports = {

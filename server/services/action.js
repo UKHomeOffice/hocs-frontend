@@ -1,6 +1,6 @@
-const logger = require('../libs/logger');
 const { workflowServiceClient } = require('../libs/request');
 const { CREATE_CASE, BULK_CREATE_CASE } = require('./actions/types');
+const { ActionError } = require('../models/error');
 
 function createDocumentSummaryObjects(form) {
     return form.schema.fields.reduce((reducer, field) => {
@@ -62,16 +62,6 @@ function handleWorkflowSuccess(response, { caseId, stageId }) {
     }
 }
 
-function handleActionFailure(error) {
-    logger.error(error);
-    return { error };
-}
-
-function handleWorkflowError(error) {
-    logger.error(error);
-    return { error };
-}
-
 const actions = {
     ACTION: async ({ workflow, context, form }) => {
         if (form && form.action) {
@@ -81,20 +71,20 @@ const actions = {
                     const response = await createCase('/case', { caseType: context, form });
                     const clientResponse = { summary: `Created a new case: ${response.data.reference}` };
                     return handleActionSuccess(clientResponse, workflow, form);
-                } catch (err) {
-                    return handleActionFailure(err);
+                } catch (e) {
+                    throw new ActionError(e);
                 }
             case BULK_CREATE_CASE: {
                 try {
                     const response = await createCase('/case/bulk', { caseType: context, form });
                     const clientResponse = { summary: `Created ${response.data.count} new case${response.data.count > 1 ? 's': ''}` };
                     return handleActionSuccess(clientResponse, workflow, form);
-                } catch (err) {
-                    return handleActionFailure(err);
+                } catch (e) {
+                    throw new ActionError(e);
                 }
             }
             default: {
-                return handleActionFailure({ message: 'Unsupported action' });
+                throw new ActionError('Unsupported action');
             }
             }
         } else {
@@ -115,8 +105,8 @@ const actions = {
         try {
             const response = await updateCase({ caseId, stageId, form });
             return handleWorkflowSuccess(response, { caseId, stageId });
-        } catch (err) {
-            return handleWorkflowError(err);
+        } catch (e) {
+            throw new ActionError(e);
         }
     }
 };

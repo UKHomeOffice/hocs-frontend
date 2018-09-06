@@ -1,5 +1,5 @@
 const logger = require('../libs/logger');
-const ErrorModel = require('../models/error');
+const { FormSubmissionError, ValidationError } = require('../models/error');
 const { DOCUMENT_WHITELIST, DOCUMENT_BULK_LIMIT } = require('../config').forContext('server');
 
 const validationErrors = {
@@ -33,7 +33,7 @@ const validators = {
         return null;
     },
     required: (value, label) => {
-        if (value === null || value === '') {
+        if (!value || value === '') {
             return `${label} ${validationErrors.required}`;
         }
         return null;
@@ -62,12 +62,11 @@ const validators = {
     }
 };
 
-const validationMiddleware = (req, res, next) => {
-    logger.debug('VALIDATION MIDDLEWARE');
+function validationMiddleware(req, res, next) {
     if (req.form) {
         try {
             const { data, schema } = req.form;
-            req.form.errors = schema.fields
+            const validationErrors = schema.fields
                 .filter(field => field.type !== 'display')
                 .reduce((result, field) => {
                     const { validation, props: { name, label } } = field;
@@ -86,18 +85,15 @@ const validationMiddleware = (req, res, next) => {
                     }
                     return result;
                 }, {});
-            logger.debug(`Validation errors: ${JSON.stringify(req.form.errors)}`);
-        } catch (error) {
-            req.error = new ErrorModel({
-                status: 500,
-                title: 'Server error',
-                summary: 'Unable to validate form data',
-                stackTrace: error.stack
-            });
+            if (Object.keys(validationErrors).length > 0) {
+                return next(new ValidationError('Form validation failed', validationErrors));
+            }
+        } catch (e) {
+            return next(new FormSubmissionError('Unable to validate form data'));
         }
     }
     next();
-};
+}
 
 module.exports = {
     validationMiddleware,

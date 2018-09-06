@@ -1,26 +1,46 @@
-const ErrorModel = require('../models/error');
+const logger = require('../libs/logger');
+const { ValidationError } = require('../models/error');
 
-const errorAjaxResponseMiddleware = (req, res, next) => {
-    if (!res.noScript) {
-        if (!res.error) {
-            return res.status(200).send({ errors: req.form.errors });
-        } else {
-            return res.status(res.error.errorCode).send(res.error);
-        }
+/* eslint-disable-next-line  no-unused-vars*/
+function apiErrorMiddleware(err, req, res, next) {
+
+    if (err instanceof ValidationError) {
+        logger.debug(err.message);
+        return res.status(err.status).json({ errors: err.fields });
+    } else {
+        logger.error(err.message);
+        return res.status(err.status || 500).json({
+            message: err.message,
+            status: err.status || 500,
+            stack: err.stack,
+            title: err.title
+        });
+    }
+}
+
+function errorMiddleware(err, req, res, next) {
+    if (err instanceof ValidationError) {
+        logger.debug(err.message);
+        req.form.errors = err.fields;
+    } else {
+        logger.error(err.message);
+        res.locals.error = {
+            message: err.message,
+            status: err.status || 500,
+            stack: err.stack,
+            title: err.title
+        };
     }
     next();
-};
-const errorMiddleware = (err, req, res, next) => {
-    res.error = new ErrorModel({
-        status: 500,
-        title: 'Server Error',
-        summary: err.message,
-        stackTrace: err.stack
-    });
+}
+
+function initRequest(req, res, next) {
+    res.locals = {};
     next();
-};
+}
 
 module.exports = {
-    errorAjaxResponseMiddleware,
-    errorMiddleware
+    apiErrorMiddleware,
+    errorMiddleware,
+    initRequest
 };

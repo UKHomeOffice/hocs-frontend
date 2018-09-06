@@ -54,6 +54,7 @@
       "props": {
         "name": "checkboxContext",
         "label": "Checkbox Group",
+        "hint": "Here's a hint",
         "className": "inline",
         "choices": [
           {
@@ -111,6 +112,7 @@
       "props": {
         "name": "case-type",
         "label": "Radio Group",
+        "hint": "Here's a hint",
         "className": "inline",
         "choices": [
           {

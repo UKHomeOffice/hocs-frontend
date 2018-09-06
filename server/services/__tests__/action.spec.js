@@ -66,6 +66,7 @@ const testCreateCaseForm = {
 };
 
 describe('Action service', () => {
+
     beforeEach(() => {
         mockRequestClient.mockReset();
     });
@@ -97,20 +98,17 @@ describe('Action service', () => {
         expect(response).toHaveProperty('confirmation');
     });
 
-    it('should return an error object when when "CREATE_CASE" action fails', async () => {
+    it('should return an error object when "CREATE_CASE" action fails', () => {
         const testForm = { ...testCreateCaseForm, action: 'CREATE_CASE' };
 
-        const response = await actionService.performAction('ACTION', {
+        actionService.performAction('ACTION', {
             workflow: 'CREATE',
             action: 'WORKFLOW',
             context: 'UNSUPPORTED_CASETYPE',
             form: testForm
-        });
-        expect(mockRequestClient).toHaveBeenCalledTimes(1);
-        const unsupportedCasetypeCreateCaseRequest = { ...createCaseRequest, type: 'UNSUPPORTED_CASETYPE' };
-        expect(mockRequestClient).toHaveBeenCalledWith(unsupportedCasetypeCreateCaseRequest);
-        expect(response).toBeDefined();
-        expect(response).toHaveProperty('error');
+        })
+            .then(() => { })
+            .catch(e => { expect(e).toBeInstanceOf(Error); });
     });
 
     it('should return a callback url when "BULK_CREATE_CASE" action succeeds', async () => {
@@ -128,33 +126,29 @@ describe('Action service', () => {
         expect(response).toHaveProperty('confirmation');
     });
 
-    it('should return an error object when when "BULK_CREATE_CASE" action fails', async () => {
+    it('should return an error object when when "BULK_CREATE_CASE" action fails', () => {
         const testForm = { ...testCreateCaseForm, action: 'BULK_CREATE_CASE' };
 
-        const response = await actionService.performAction('ACTION', {
+        actionService.performAction('ACTION', {
             workflow: 'BULK',
             action: 'WORKFLOW',
             context: 'UNSUPPORTED_CASETYPE',
             form: testForm
-        });
-        expect(mockRequestClient).toHaveBeenCalledTimes(1);
-        const unsupportedCasetypeCreateCaseRequest = { ...createCaseRequest, type: 'UNSUPPORTED_CASETYPE' };
-        expect(mockRequestClient).toHaveBeenCalledWith(unsupportedCasetypeCreateCaseRequest);
-        expect(response).toBeDefined();
-        expect(response).toHaveProperty('error');
+        })
+            .then(() => { })
+            .catch(e => { expect(e).toBeInstanceOf(Error); });
     });
 
-    it('should return error object when passed unsupported form action', async () => {
+    it('should return error object when passed unsupported form action', () => {
 
-        const response = await actionService.performAction('ACTION', {
+        actionService.performAction('ACTION', {
             workflow: 'CREATE',
             action: 'WORKFLOW',
             form: {
                 action: 'SOME_RANDOM_ACTION'
             },
-        });
-        expect(mockRequestClient).toHaveBeenCalledTimes(0);
-        expect(response).toBeDefined();
-        expect(response).toHaveProperty('error');
+        })
+            .then(() => { })
+            .catch(e => { expect(e).toBeInstanceOf(Error); });
     });
 });

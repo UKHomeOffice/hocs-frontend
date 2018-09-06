@@ -1,9 +1,7 @@
-const logger = require('../libs/logger');
 const User = require('../models/user');
-const ErrorModel = require('../models/error');
+const { AuthenticationError } = require('../models/error');
 
 function authMiddleware(req, res, next) {
-    logger.debug('AUTH MIDDLEWARE');
     if (req.get('X-Auth-Token')) {
         if (!req.user) {
             req.user = new User({
@@ -16,14 +14,8 @@ function authMiddleware(req, res, next) {
             });
         }
         return next();
-    } else {
-        res.error = new ErrorModel({
-            status: 403,
-            title: 'Unauthorised',
-            summary: 'You are not logged in'
-        });
     }
-    next();
+    next(new AuthenticationError('You are not logged in'));
 }
 
 function protectAction() {
@@ -31,16 +23,9 @@ function protectAction() {
         if (req.form) {
             if (User.hasRole(req.user, req.form.requiredRole.toUpperCase())) {
                 return next();
-            } else {
-                res.error = new ErrorModel({
-                    status: 403,
-                    title: 'Unauthorised',
-                    summary: 'You do not have permission to access the requested page',
-                    stackTrace: `Required role: ${req.form.requiredRole.toUpperCase()}`
-                });
             }
         }
-        next();
+        next(new AuthenticationError('You do not have permission to access the requested page'));
     };
 }
 
@@ -48,15 +33,8 @@ function protect(permission) {
     return (req, res, next) => {
         if (User.hasRole(req.user, permission)) {
             return next();
-        } else {
-            res.error = new ErrorModel({
-                status: 403,
-                title: 'Unauthorised',
-                summary: 'You do not have permission to access the requested page',
-                stackTrace: `Required role: ${permission}`
-            });
         }
-        next();
+        next(new AuthenticationError('You do not have permission to access the requested page'));
     };
 }
 

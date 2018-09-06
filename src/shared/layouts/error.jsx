@@ -5,7 +5,7 @@ class Error extends Component {
     UNSAFE_componentWillMount() {
         const { staticContext } = this.props;
         if (staticContext) {
-            staticContext.status = this.props.errorCode;
+            staticContext.status = this.props.status;
         }
     }
 
@@ -20,23 +20,23 @@ class Error extends Component {
     render() {
         const {
             title,
-            errorCode,
+            status,
             location: { pathname },
             stack,
             body,
-            caption,
+            message,
         } = this.props;
 
         return (
             <div className="govuk-grid-row">
                 <div className="govuk-grid-column-full">
                     <h1 className="govuk-heading-xl">
-                        {caption && <span className="govuk-caption-xl">{caption}</span>}
+                        {message && <span className="govuk-caption-xl">{message}</span>}
                         {`${title}`}
                     </h1>
 
                     {this.buildParagraphs(body)}
-                    {(errorCode === 403 || errorCode === 404) && pathname && <p><code className="code">{pathname}</code></p>}
+                    {(status === 403 || status === 404) && pathname && <p><code className="code">{pathname}</code></p>}
                     {stack &&
                         <details className="govuk-details" open={true}>
                             <summary className="govuk-details__summary">
@@ -56,8 +56,8 @@ class Error extends Component {
 }
 
 Error.propTypes = {
-    caption: PropTypes.string,
-    errorCode: PropTypes.number,
+    message: PropTypes.string,
+    status: PropTypes.number,
     location: PropTypes.object,
     stack: PropTypes.string,
     body: PropTypes.arrayOf(PropTypes.string),
@@ -66,7 +66,7 @@ Error.propTypes = {
 };
 
 Error.defaultProps = {
-    errorCode: 500,
+    status: 500,
     location: { pathname: null },
     stack: null,
     title: 'Something has gone wrong'

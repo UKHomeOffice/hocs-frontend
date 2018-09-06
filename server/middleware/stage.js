@@ -1,32 +1,34 @@
 const actionService = require('../services/action');
-const ErrorModel = require('../models/error');
+const { AllocationError } = require('../models/error');
 const { workflowServiceClient } = require('../libs/request');
 
-const stageResponseMiddleware = async (req, res, next) => {
-    if (Object.keys(req.form.errors).length > 0) {
-        return next();
-    }
+async function stageResponseMiddleware(req, res, next) {
     const { caseId, stageId } = req.params;
     const { form, user } = req;
-    const response = await actionService.performAction('WORKFLOW', { caseId, stageId, form, user });
-    const { error, callbackUrl } = response;
-    if (error) {
-        res.error = new ErrorModel({
-            status: 500,
-            title: 'Error',
-            summary: 'Failed to perform action',
-            stackTrace: error.message
-        });
-        return next();
-    } else {
-        if (res.noScript) {
-            return res.redirect(callbackUrl);
-        }
-        return res.status(200).send({ redirect: callbackUrl, response: {} });
+    try {
+        const response = await actionService.performAction('WORKFLOW', { caseId, stageId, form, user });
+        const { callbackUrl } = response;
+        return res.redirect(callbackUrl);
+    } catch (e) {
+        return next(e);
+    } finally {
+        next();
     }
-};
+}
 
-const allocateCase = async (req, res, next) => {
+async function stageApiResponseMiddleware(req, res, next) {
+    const { caseId, stageId } = req.params;
+    const { form, user } = req;
+    try {
+        const response = await actionService.performAction('WORKFLOW', { caseId, stageId, form, user });
+        const { callbackUrl } = response;
+        return res.status(200).json({ redirect: callbackUrl });
+    } catch (e) {
+        return next(e);
+    }
+}
+
+async function allocateCase(req, res, next) {
     const { caseId, stageId } = req.params;
     try {
         await workflowServiceClient.post(`/case/${caseId}/stage/${stageId}/allocate`, {
@@ -34,19 +36,13 @@ const allocateCase = async (req, res, next) => {
             teamUUID: '33333333-3333-3333-3333-333333333333'
         });
         next();
-    } catch (error) {
-        res.error = new ErrorModel({
-            status: 500,
-            title: 'Error',
-            summary: 'Failed to perform action',
-            stackTrace: error.message
-        });
-        next();
+    } catch (e) {
+        next(new AllocationError());
     }
-
-};
+}
 
 module.exports = {
+    stageApiResponseMiddleware,
     stageResponseMiddleware,
     allocateCase
 };

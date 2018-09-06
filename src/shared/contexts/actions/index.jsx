@@ -81,3 +81,10 @@ export function clearApiStatus() {
         type: types.CLEAR_API_STATUS
     };
 }
+
+export function updatePageMeta(meta) {
+    return {
+        type: types.UPDATE_PAGE_META,
+        payload: meta
+    };
+}

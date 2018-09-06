@@ -11,7 +11,8 @@ import {
     setError,
     updateApiStatus,
     clearApiStatus,
-    unsetForm
+    unsetForm,
+    updatePageMeta
 } from '../contexts/actions/index.jsx';
 import status from '../helpers/api-status.js';
 import BackLink from '../common/forms/backlink.jsx';
@@ -22,14 +23,15 @@ function withForm(Page) {
 
         constructor(props) {
             super(props);
-            this.state = { formData: {} };
+            this.state = {
+                confirmation: props.confirmation
+            };
         }
 
         componentDidMount() {
-            const { form } = this.props;
-            if (!form) {
-                this.getForm();
-            }
+            const { dispatch, match } = this.props;
+            this.getForm();
+            dispatch(updatePageMeta(match.params));
         }
 
         componentWillUnmount() {
@@ -44,7 +46,7 @@ function withForm(Page) {
 
         getForm() {
             const { dispatch, match: { url } } = this.props;
-            const endpoint = `/forms${url}`;
+            const endpoint = '/api/form' + url;
             return dispatch(updateApiStatus(status.REQUEST_FORM))
                 .then(() => {
                     axios.get(endpoint)
@@ -57,9 +59,9 @@ function withForm(Page) {
                                         .then(dispatch(setError(error)));
                                 });
                         })
-                        .catch(({ response }) => {
+                        .catch(error => {
                             dispatch(updateApiStatus(status.REQUEST_FORM_FAILURE))
-                                .then(() => dispatch(setError(response.data)));
+                                .then(() => dispatch(setError(error.response.data)));
                         });
 
                 });
@@ -67,7 +69,7 @@ function withForm(Page) {
 
         submitHandler(e) {
             e.preventDefault();
-            const { dispatch, form,  history, match: { url } } = this.props;
+            const { dispatch, form, history, match: { url } } = this.props;
             /* eslint-disable-next-line no-undef */
             const formData = new FormData();
             Object.keys(form.data).map(field => {
@@ -81,7 +83,7 @@ function withForm(Page) {
             });
             return dispatch(updateApiStatus(status.SUBMIT_FORM))
                 .then(() => {
-                    axios.post(url, formData, { headers: { 'Content-Type': 'multipart/form-data' } })
+                    axios.post('/api' + url, formData, { headers: { 'Content-Type': 'multipart/form-data' } })
                         .then(res => {
                             return dispatch(updateApiStatus(status.SUBMIT_FORM_SUCCESS))
                                 .then(() => {
@@ -105,10 +107,10 @@ function withForm(Page) {
                                     }
                                 });
                         })
-                        .catch(err => {
+                        .catch(error => {
                             /* eslint-disable-next-line no-console */
                             return dispatch(updateApiStatus(status.SUBMIT_FORM_FAILURE))
-                                .then(() => dispatch(setError(err.response.data)));
+                                .then(() => dispatch(setError(error.response.data)));
                         });
 
                 });
@@ -156,6 +158,7 @@ function withForm(Page) {
     }
 
     FormEnabled.propTypes = {
+        confirmation: PropTypes.object,
         dispatch: PropTypes.func.isRequired,
         form: PropTypes.object,
         history: PropTypes.object.isRequired,
@@ -171,9 +174,10 @@ const FormEnabledWrapper = Page => {
         const WrappedPage = withForm(Page);
         return (
             <ApplicationConsumer>
-                {({ dispatch, form }) => (
+                {({ confirmation, dispatch, form }) => (
                     <WrappedPage
                         {...props}
+                        confirmation={confirmation}
                         dispatch={dispatch}
                         form={form}
                     />

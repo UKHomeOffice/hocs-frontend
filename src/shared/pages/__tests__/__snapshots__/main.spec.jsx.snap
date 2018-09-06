@@ -115,63 +115,7 @@ exports[`Main page component should render with caption when passed in props 1`]
           </Link>
         </li>
       </ul>
-      <Workstack>
-        <table
-          className="govuk-table"
-        >
-          <caption
-            className="govuk-table__caption"
-          >
-            Workstack
-          </caption>
-          <thead
-            className="govuk-table__head"
-          >
-            <tr
-              className="govuk-radios govuk-table__row"
-            >
-              <th
-                className="govuk-table__header"
-              >
-                Type
-              </th>
-              <th
-                className="govuk-table__header"
-              >
-                Reference
-              </th>
-              <th
-                className="govuk-table__header"
-              >
-                Stage
-              </th>
-              <th
-                className="govuk-table__header"
-              >
-                User
-              </th>
-              <th
-                className="govuk-table__header"
-              >
-                Team
-              </th>
-              <th
-                className="govuk-table__header"
-              >
-                Deadline
-              </th>
-              <th
-                className="govuk-table__header"
-              >
-                Actions
-              </th>
-            </tr>
-          </thead>
-          <tbody
-            className="govuk-table__body"
-          />
-        </table>
-      </Workstack>
+      <MOCK_WORKSTACK />
     </div>
   </div>
 </MainPage>
@@ -284,63 +228,7 @@ exports[`Main page component should render with default props 1`] = `
           </Link>
         </li>
       </ul>
-      <Workstack>
-        <table
-          className="govuk-table"
-        >
-          <caption
-            className="govuk-table__caption"
-          >
-            Workstack
-          </caption>
-          <thead
-            className="govuk-table__head"
-          >
-            <tr
-              className="govuk-radios govuk-table__row"
-            >
-              <th
-                className="govuk-table__header"
-              >
-                Type
-              </th>
-              <th
-                className="govuk-table__header"
-              >
-                Reference
-              </th>
-              <th
-                className="govuk-table__header"
-              >
-                Stage
-              </th>
-              <th
-                className="govuk-table__header"
-              >
-                User
-              </th>
-              <th
-                className="govuk-table__header"
-              >
-                Team
-              </th>
-              <th
-                className="govuk-table__header"
-              >
-                Deadline
-              </th>
-              <th
-                className="govuk-table__header"
-              >
-                Actions
-              </th>
-            </tr>
-          </thead>
-          <tbody
-            className="govuk-table__body"
-          />
-        </table>
-      </Workstack>
+      <MOCK_WORKSTACK />
     </div>
   </div>
 </MainPage>

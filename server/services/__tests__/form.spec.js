@@ -72,10 +72,8 @@ describe('getFormForAction', () => {
         expect(formRepository.getForm.mock.calls[0][0].context).toEqual('ACTION');
         expect(formRepository.getForm.mock.calls[0][0].workflow).toEqual('WORKFLOW');
         expect(formRepository.getForm.mock.calls[0][0].user).toEqual('USER');
-        expect(req.form).toBeUndefined();
-        expect(res.error).toBeDefined();
-        expect(res.error.errorCode).toEqual(404);
         expect(next).toHaveBeenCalled();
+        expect(next.mock.calls[0][0]).toBeInstanceOf(Error);
     });
 
 });
@@ -133,9 +131,8 @@ describe('getFormForCase', () => {
         expect(formRepository.getForm.mock.calls[0][0].action).toEqual('ACTION');
         expect(formRepository.getForm.mock.calls[0][0].user).toEqual('USER');
         expect(req.form).toBeUndefined();
-        expect(res.error).toBeDefined();
-        expect(res.error.errorCode).toEqual(404);
         expect(next).toHaveBeenCalled();
+        expect(next.mock.calls[0][0]).toBeInstanceOf(Error);
     });
 
 });
@@ -179,9 +176,8 @@ describe('getFormForStage', () => {
         const { getFormForStage } = require('../form');
         await getFormForStage(req, res, next);
         expect(req.form).toBeUndefined();
-        expect(res.error).toBeDefined();
-        expect(res.error.errorCode).toEqual(404);
         expect(next).toHaveBeenCalled();
+        expect(next.mock.calls[0][0]).toBeInstanceOf(Error);
     });
 
 });

@@ -22,9 +22,8 @@ class CaseSummary extends Component {
     }
 
     getSummary() {
-        const url = this.props.match.url + '/api';
-        const { dispatch } = this.props;
-        axios.get(url)
+        const { dispatch, match: { url } } = this.props;
+        axios.get('/api/' + url)
             .then(res => {
                 this.setState({ caseData: res.data.summary });
             })

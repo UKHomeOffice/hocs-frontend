@@ -244,7 +244,7 @@ exports[`Form checkbox group component should render with hint when passed 1`] =
       />
     </legend>
     <span
-      class="govuk-form-hint"
+      class="govuk-hint"
     >
       Put some text in the box below
     </span>

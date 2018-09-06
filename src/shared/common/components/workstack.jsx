@@ -1,19 +1,20 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { ApplicationConsumer } from '../../contexts/application.jsx';
 
 // TODO: Tidy up and implement context to dispatch errors when failed to retrieve
 class Workstack extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { cases: [] };
+        this.state = { ...props };
     }
 
     componentDidMount() {
-        axios.get('/page/workstack')
+        axios.get('/api/page/workstack')
             .then(res => {
-                this.setState({ cases: res.data });
+                this.setState({ cases: res.data.activeStages });
             })
             .catch(err => {
                 /* eslint-disable-next-line */
@@ -40,7 +41,7 @@ class Workstack extends Component {
                     </thead>
                     <tbody className='govuk-table__body'>
                         {
-                            cases.map((c, i) => {
+                            cases && cases.sort((first, second) => first.caseReference.split('/')[1] > second.caseReference.split('/')[1] ? -1 : 1).map((c, i) => {
                                 return (
                                     <tr key={i} className='govuk-radios govuk-table__row'>
                                         <td className='govuk-table__cell'>
@@ -71,4 +72,10 @@ class Workstack extends Component {
     }
 }
 
-export default Workstack;
+const WrappedWorkstack = props => (
+    <ApplicationConsumer>
+        {({ workstack }) => <Workstack {...props} cases={workstack} />}
+    </ApplicationConsumer>
+);
+
+export default WrappedWorkstack;
