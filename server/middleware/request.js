@@ -1,5 +1,6 @@
 const logger = require('../libs/logger');
 const { ValidationError } = require('../models/error');
+const { isProduction } = require('../config');
 
 /* eslint-disable-next-line  no-unused-vars*/
 function apiErrorMiddleware(err, req, res, next) {
@@ -12,7 +13,7 @@ function apiErrorMiddleware(err, req, res, next) {
         return res.status(err.status || 500).json({
             message: err.message,
             status: err.status || 500,
-            stack: err.stack,
+            stack: isProduction ? null : err.stack,
             title: err.title
         });
     }
@@ -27,7 +28,7 @@ function errorMiddleware(err, req, res, next) {
         res.locals.error = {
             message: err.message,
             status: err.status || 500,
-            stack: err.stack,
+            stack: isProduction ? null : err.stack,
             title: err.title
         };
     }
