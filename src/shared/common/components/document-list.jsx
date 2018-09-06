@@ -28,7 +28,7 @@ class DocumentList extends Component {
                                     {d.name}
                                 </td>
                                 <td className='govuk-table__cell'>
-                                    {d.document_uuid && caseId && activeDocument !== d.s3_pdf_link && <a href={`/case/${caseId}/document/${d.s3_pdf_link}`} className='govuk-link' download={`${this.getFileName(d.name)}.pdf`} onClick={e => this._onClick(e, `${this.getFileName(d.s3_pdf_link)}.pdf`)}>Preview</a>}
+                                    {d.document_uuid && caseId && activeDocument !== d.s3_pdf_link && <a id={`${d.document_uuid}-pdf`} href={`/case/${caseId}/document/${d.s3_pdf_link}`} className='govuk-link' download={`${this.getFileName(d.name)}.pdf`} onClick={e => this._onClick(e, `${this.getFileName(d.s3_pdf_link)}.pdf`)}>Preview</a>}
                                 </td>
                                 <td className='govuk-table__cell'>
                                     {d.document_uuid && caseId && <a href={`/case/${caseId}/document/${d.s3_orig_link}`} className='govuk-link' download={d.name} >Download</a>}

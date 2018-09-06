@@ -28,7 +28,7 @@ class DocumentPreview extends Component {
 }
 
 DocumentPreview.propTypes = {
-    activeDocument: PropTypes.string,
+    activeDocument: PropTypes.string.isRequired,
     caseId: PropTypes.string.isRequired,
 };
 
