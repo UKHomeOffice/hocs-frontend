@@ -14,6 +14,6 @@ listService.initialise();
 app.use('/', applicationRouter);
 
 app.listen(port, () => {
-    logger.info(`App listening on port ${port}`);
+    logger.info(`Application listening on port ${port}`);
 });
 
