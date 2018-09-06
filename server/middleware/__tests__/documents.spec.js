@@ -54,7 +54,6 @@ describe('Document middleware', () => {
     const next = jest.fn();
     let req, res;
 
-
     beforeEach(() => {
         next.mockReset();
         status.mockReset();
@@ -129,6 +128,7 @@ describe('Get document', () => {
 
     beforeEach(() => {
         mockGetObject.mockReset();
+        mockCreateReadStream.mockReset();
         mockStream.mockReset();
         mockPipe.mockReset();
     });

@@ -1,5 +1,4 @@
 const { caseworkServiceClient } = require('../libs/request');
-const logger = require('../libs/logger');
 
 async function workstackMiddleware(req, res, next) {
     try {
@@ -7,17 +6,20 @@ async function workstackMiddleware(req, res, next) {
         res.locals.workstack = response.data.activeStages;
         next();
     } catch (e) {
-        logger.error(e.stack);
-        res.locals.workstack = [];
-        next();
+        throw new Error('Unable to retrieve workstack');
     }
 }
 
-async function workstackApiResponseMiddleware(req, res) {
-    res.json(res.locals.workstack);
+async function apiWorkstackMiddleware(req, res) {
+    try {
+        const response = await caseworkServiceClient.get('/stage/active', { responseType: 'stream' });
+        response.data.pipe(res);
+    } catch (e) {
+        throw new Error('Unable to retrieve workstack');
+    }
 }
 
 module.exports = {
     workstackMiddleware,
-    workstackApiResponseMiddleware
+    apiWorkstackMiddleware
 };
