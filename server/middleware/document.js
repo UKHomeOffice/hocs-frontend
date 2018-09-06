@@ -1,4 +1,5 @@
 const { caseworkServiceClient } = require('../libs/request');
+const { DocumentError } = require('../models/error');
 const { s3 } = require('../libs/aws');
 
 function getDocument(req, res) {
@@ -9,25 +10,24 @@ function getDocument(req, res) {
     }).createReadStream().pipe(res);
 }
 
-function getDocumentList(req, res, next) {
-    caseworkServiceClient.get(`/case/${req.params.caseId}/document`)
-        .then(response => {
-            res.locals.documents = response.data;
-            next();
-        })
-        .catch(error => {
-            res.status(404).send(error);
-        });
+async function getDocumentList(req, res, next) {
+    try {
+        const response = await caseworkServiceClient.get(`/case/${req.params.caseId}/document`);
+        res.locals.documents = response.data;
+    } catch (e) {
+        throw new DocumentError('Request failed');
+    } finally {
+        next();
+    }
 }
 
-function apiGetDocumentList(req, res) {
-    caseworkServiceClient.get(`/case/${req.params.caseId}/document`, { responseType: 'stream' })
-        .then(response => {
-            response.data.pipe(res);
-        })
-        .catch(error => {
-            res.status(404).send(error);
-        });
+async function apiGetDocumentList(req, res) {
+    try {
+        const response = await caseworkServiceClient.get(`/case/${req.params.caseId}/document`, { responseType: 'stream' });
+        response.data.pipe(res);
+    } catch (e) {
+        throw new DocumentError('Request failed');
+    }
 }
 
 module.exports = {
