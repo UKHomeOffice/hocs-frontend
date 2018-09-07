@@ -6,10 +6,10 @@ const { isProduction } = require('../config');
 function apiErrorMiddleware(err, req, res, next) {
 
     if (err instanceof ValidationError) {
-        logger.debug(err.message);
+        logger.debug(err);
         return res.status(err.status).json({ errors: err.fields });
     } else {
-        logger.error(err.message);
+        logger.error(err);
         return res.status(err.status || 500).json({
             message: err.message,
             status: err.status || 500,
@@ -21,10 +21,11 @@ function apiErrorMiddleware(err, req, res, next) {
 
 function errorMiddleware(err, req, res, next) {
     if (err instanceof ValidationError) {
-        logger.debug(err.message);
+        logger.debug(err);
+        res.status(err.status || 500);
         req.form.errors = err.fields;
     } else {
-        logger.error(err.message);
+        logger.error(err);
         res.locals.error = {
             message: err.message,
             status: err.status || 500,

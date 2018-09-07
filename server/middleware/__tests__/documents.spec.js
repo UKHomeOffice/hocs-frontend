@@ -29,6 +29,7 @@ jest.mock('../../libs/request.js', () => {
 const mockCreateReadStream = jest.fn();
 const mockPipe = jest.fn();
 const mockGetObject = jest.fn();
+const mockOn = jest.fn();
 jest.mock('../../libs/aws.js', () => ({
     s3: {
         getObject: (options) => {
@@ -37,6 +38,7 @@ jest.mock('../../libs/aws.js', () => ({
                 createReadStream: () => {
                     mockCreateReadStream();
                     return {
+                        on: mockOn,
                         pipe: mockPipe
                     };
                 }
@@ -138,6 +140,8 @@ describe('Get document', () => {
         expect(mockGetObject).toHaveBeenCalled();
         expect(mockGetObject.mock.calls[0][0].Key).toEqual(req.params.documentId);
         expect(mockCreateReadStream).toHaveBeenCalled();
+        expect(mockOn).toHaveBeenCalled();
+        expect(mockOn.mock.calls[0][0]).toEqual('error');
         expect(mockPipe).toHaveBeenCalled();
         expect(mockPipe).toHaveBeenCalledWith(res);
     });
