@@ -19,7 +19,7 @@ class DocumentList extends Component {
                 <caption className='govuk-table__caption'>Documents</caption>
                 <tbody className='govuk-table__body'>
                     {
-                        documents.map((d, i) => (
+                        caseId && documents.map((d, i) => (
                             <tr key={i} className='govuk-table__row'>
                                 <td className='govuk-table__cell'>
                                     <strong className='govuk-tag'>{d.type}</strong>
@@ -49,7 +49,7 @@ DocumentList.defaultProps = {
 
 DocumentList.propTypes = {
     activeDocument: PropTypes.string,
-    caseId: PropTypes.string.isRequired,
+    caseId: PropTypes.string,
     clickHandler: PropTypes.func.isRequired,
     documents: PropTypes.array.isRequired
 };
