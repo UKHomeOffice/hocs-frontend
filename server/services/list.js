@@ -59,11 +59,11 @@ function compareListItems(first, second) {
 
 const lists = {
     'CASE_TYPES': async ({ user }) => {
-        const list = 'workflowTypes';
+        const list = listDefinitions['workflowTypes'].call(this);
         try {
             const headerRoles = user.roles.join();
             logger.info(`Roles ${ headerRoles }`);
-            const response = await fetchList(listDefinitions[list], {
+            const response = await fetchList(list, {
                 headers: {
                     'X-Auth-Roles': headerRoles
                 }
@@ -76,11 +76,11 @@ const lists = {
 
     },
     'CASE_TYPES_BULK': async ({ user }) => {
-        const list = 'workflowTypesBulk';
+        const list = listDefinitions['workflowTypesBulk'].call(this);
         try {
             const headerRoles = user.roles.join();
             logger.info(`Roles ${ headerRoles }`);
-            const response = await fetchList(listDefinitions[list], {
+            const response = await fetchList(list, {
                 headers: {
                     'X-Auth-Roles': headerRoles
                 }
@@ -93,6 +93,15 @@ const lists = {
     },
     'DOCUMENT_EXTENSION_WHITELIST': async () => {
         return DOCUMENT_WHITELIST;
+    },
+    'MEMBER_LIST': async () => {
+        const list = listDefinitions['memberList'].call(this, { caseType: 'MIN' });
+        try {
+            const response = await fetchList(list);
+            return response.data.members.sort(compareListItems);
+        } catch (error) {
+            handleListFailure(list, error);
+        }
     }
 };
 

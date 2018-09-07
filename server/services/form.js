@@ -8,6 +8,7 @@ async function getFormSchemaFromWorkflowService({ caseId, stageId }) {
     const response = await workflowServiceClient.get(`/case/${caseId}/stage/${stageId}`);
     const { stageUUID, caseReference } = response.data;
     const { schema, data } = response.data.form;
+    await hydrateFields(schema.fields);
     return { schema, data, meta: { caseReference, stageUUID } };
 }
 
@@ -71,6 +72,7 @@ const getFormForStage = async (req, res, next) => {
     try {
         req.form = await getFormSchemaFromWorkflowService({ caseId, stageId, user: req.user });
     } catch (e) {
+        logger.error(e);
         return next(new FormServiceError());
     }
     next();
