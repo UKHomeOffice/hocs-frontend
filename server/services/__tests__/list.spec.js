@@ -16,8 +16,8 @@ jest.mock('../../config', () => ({
 
 jest.mock('../../services/lists/index.js', () => ({
     listDefinitions: {
-        workflowTypes: '/test/url',
-        workflowTypesBulk: '/test/url'
+        workflowTypes: () => '/test/url',
+        workflowTypesBulk: () => '/test/url'
     },
     staticListDefinitions: {
         test: '/test/url'
