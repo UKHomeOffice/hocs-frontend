@@ -15,8 +15,10 @@ function renderMiddleware (req, res, next) {
         layout: require('../config').forContext('case'),
     };
 
+    const status = res.locals.error ? res.locals.error.status : 200;
+
     const context = {
-        status: 200
+        status
     };
 
     const markup = renderToString(
@@ -39,7 +41,7 @@ function renderMiddleware (req, res, next) {
 }
 
 function renderResponseMiddleware (req, res) {
-    return res.status(200).send(res.rendered);
+    return res.send(res.rendered);
 }
 
 
