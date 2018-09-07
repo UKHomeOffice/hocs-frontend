@@ -78,6 +78,8 @@ spec:
             value: /certs/tls.pem
           - name: SERVER_KEY
             value: /certs/tls-key.pem
+          - name: ERROR_REDIRECT_CODES
+            value: '501 502 503 504'
           - name: ADD_NGINX_SERVER_CFG
             value: 'gzip off; location = /reload { allow 127.0.0.1; deny all; content_by_lua_block { os.execute("touch /tmp/nginx-reload-triggered; /usr/local/openresty/nginx/sbin/nginx -s reload; touch /tmp/nginx-reload-complete;") } }'
         volumeMounts:
