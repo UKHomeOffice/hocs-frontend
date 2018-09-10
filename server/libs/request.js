@@ -1,4 +1,4 @@
-const { WORKFLOW_SERVICE, WORKFLOW_BASIC_AUTH, CASEWORK_SERVICE, INFO_SERVICE } = require('../config').forContext('server');
+const { WORKFLOW_SERVICE, WORKFLOW_BASIC_AUTH, CASEWORK_SERVICE, INFO_SERVICE, DOCUMENT_SERVICE } = require('../config').forContext('server');
 const { isProduction } = require('../config');
 const axios = require('axios');
 const https = require('https');
@@ -31,8 +31,15 @@ const infoServiceClient = axios.create({
     httpsAgent: isProduction ? getHttpsClient() : null
 });
 
+const docsServiceClient = axios.create({
+    baseURL: DOCUMENT_SERVICE,
+    auth: WORKFLOW_BASIC_AUTH,
+    httpsAgent: isProduction ? getHttpsClient() : null
+});
+
 module.exports = {
     workflowServiceClient,
     caseworkServiceClient,
-    infoServiceClient
+    infoServiceClient,
+    docsServiceClient
 };

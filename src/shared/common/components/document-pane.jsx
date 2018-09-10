@@ -33,9 +33,9 @@ class DocumentPanel extends Component {
                             dispatch(updateApiStatus(status.REQUEST_DOCUMENT_LIST_SUCCESS))
                                 .then(() => dispatch(clearApiStatus()))
                                 .then(() => this.setState({
-                                    documents: response.data,
-                                    activeDocument: response.data[0] ?
-                                        response.data[0].s3_pdf_link :
+                                    documents: response.data.documents,
+                                    activeDocument: response.data.documents[0] ?
+                                        response.data.documents[0].s3_pdf_link :
                                         null
                                 }));
                         })
