@@ -4,11 +4,11 @@ const { workflowServiceClient } = require('../libs/request');
 const logger = require('../libs/logger');
 const { FormServiceError } = require('../models/error');
 
-async function getFormSchemaFromWorkflowService({ caseId, stageId }) {
+async function getFormSchemaFromWorkflowService({ caseId, stageId, user }) {
     const response = await workflowServiceClient.get(`/case/${caseId}/stage/${stageId}`);
     const { stageUUID, caseReference } = response.data;
     const { schema, data } = response.data.form;
-    await hydrateFields(schema.fields);
+    await hydrateFields(schema.fields, { user });
     return { schema, data, meta: { caseReference, stageUUID } };
 }
 

@@ -62,7 +62,7 @@ const lists = {
         const list = listDefinitions['workflowTypes'].call(this);
         try {
             const headerRoles = user.roles.join();
-            logger.info(`Roles ${ headerRoles }`);
+            logger.info(`Roles ${headerRoles}`);
             const response = await fetchList(list, {
                 headers: {
                     'X-Auth-Roles': headerRoles
@@ -79,7 +79,7 @@ const lists = {
         const list = listDefinitions['workflowTypesBulk'].call(this);
         try {
             const headerRoles = user.roles.join();
-            logger.info(`Roles ${ headerRoles }`);
+            logger.info(`Roles ${headerRoles}`);
             const response = await fetchList(list, {
                 headers: {
                     'X-Auth-Roles': headerRoles
@@ -94,10 +94,16 @@ const lists = {
     'DOCUMENT_EXTENSION_WHITELIST': async () => {
         return DOCUMENT_WHITELIST;
     },
-    'MEMBER_LIST': async () => {
+    'MEMBER_LIST': async ({ user }) => {
         const list = listDefinitions['memberList'].call(this, { caseType: 'MIN' });
         try {
-            const response = await fetchList(list);
+            const headerRoles = user.roles.join();
+            logger.info(`Roles ${headerRoles}`);
+            const response = await fetchList(list, {
+                headers: {
+                    'X-Auth-Roles': headerRoles
+                }
+            });
             return response.data.members.sort(compareListItems);
         } catch (error) {
             handleListFailure(list, error);
