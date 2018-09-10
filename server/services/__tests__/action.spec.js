@@ -56,7 +56,7 @@ const testCreateCaseForm = {
         document_field: [
             {
                 originalname: 'test_document.txt',
-                location: '/location/to/the/file'
+                key: '/location/to/the/file'
             }
         ]
     },

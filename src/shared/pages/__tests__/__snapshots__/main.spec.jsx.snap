@@ -115,7 +115,7 @@ exports[`Main page component should render with caption when passed in props 1`]
           </Link>
         </li>
       </ul>
-      <MOCK_WORKSTACK />
+      <div />
     </div>
   </div>
 </MainPage>
@@ -228,7 +228,7 @@ exports[`Main page component should render with default props 1`] = `
           </Link>
         </li>
       </ul>
-      <MOCK_WORKSTACK />
+      <div />
     </div>
   </div>
 </MainPage>
