@@ -60,7 +60,7 @@ class ValidationError extends ErrorModel {
 
 class DocumentError extends ErrorModel {
     constructor(message) {
-        super(message, 500, 'Unable to retrieve document list');
+        super(message, 500, 'Request failed');
     }
 }
 

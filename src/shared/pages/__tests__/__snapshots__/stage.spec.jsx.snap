@@ -15,7 +15,7 @@ exports[`Stage page component should render children when passed 1`] = `
   <div
     class="govuk-grid-column-one-half"
   >
-    <document_preview />
+    <div />
   </div>
 </div>
 `;
@@ -34,7 +34,7 @@ exports[`Stage page component should render with default props 1`] = `
   <div
     class="govuk-grid-column-one-half"
   >
-    <document_preview />
+    <div />
   </div>
 </div>
 `;
@@ -59,7 +59,7 @@ exports[`Stage page component should render with subTitle when passed in props 1
   <div
     class="govuk-grid-column-one-half"
   >
-    <document_preview />
+    <div />
   </div>
 </div>
 `;
@@ -80,7 +80,7 @@ exports[`Stage page component should render with title when passed in props 1`] 
   <div
     class="govuk-grid-column-one-half"
   >
-    <document_preview />
+    <div />
   </div>
 </div>
 `;

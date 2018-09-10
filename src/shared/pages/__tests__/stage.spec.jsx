@@ -6,7 +6,7 @@ jest.mock('../form-enabled.jsx', () => (
 ));
 
 jest.mock('../../common/components/document-pane.jsx', () => (
-    'DOCUMENT_PREVIEW'
+    'div'
 ));
 
 describe('Stage page component', () => {

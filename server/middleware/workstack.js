@@ -6,16 +6,16 @@ async function workstackMiddleware(req, res, next) {
         res.locals.workstack = response.data.activeStages;
         next();
     } catch (e) {
-        throw new Error('Unable to retrieve workstack');
+        next(new Error('Unable to retrieve workstack'));
     }
 }
 
-async function apiWorkstackMiddleware(req, res) {
+async function apiWorkstackMiddleware(req, res, next) {
     try {
         const response = await caseworkServiceClient.get('/stage/active', { responseType: 'stream' });
         response.data.pipe(res);
     } catch (e) {
-        throw new Error('Unable to retrieve workstack');
+        next(new Error('Unable to retrieve workstack'));
     }
 }
 

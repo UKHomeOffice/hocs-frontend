@@ -10,7 +10,7 @@ function createDocumentSummaryObjects(form) {
                     reducer.push({
                         displayName: file.originalname,
                         type: field.props.documentType,
-                        s3UntrustedUrl: file.location || 'location'
+                        s3UntrustedUrl: file.key || 'key'
                     });
                 });
             }
