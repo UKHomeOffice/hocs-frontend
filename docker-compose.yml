@@ -1,0 +1,143 @@
+version: '3.1'
+
+services:
+
+  postgres:
+    image: postgres
+    restart: always
+    ports:
+      - 5432:5432
+    networks:
+      - hocs-network
+    environment:
+     POSTGRES_USER: root
+     POSTGRES_PASSWORD: dev
+    tmpfs:
+      - /var/lib/postgresql
+
+  clamd:
+    image: quay.io/ukhomeofficedigital/clamav:v1.4.0
+    ports:
+      - "3310:3310/tcp"
+
+  clamav-rest:
+     image: lokori/clamav-rest
+     environment:
+       - CLAMD_HOST=clamd
+     ports:
+       - "8086:8080"
+
+  localstack:
+    image: localstack/localstack:latest
+    ports:
+      - 9000:8080
+      - 4572:4572
+      - 4576:4576
+    networks:
+      - hocs-network
+    environment:
+      HOSTNAME_EXTERNAL: localstack
+      DEFAULT_REGION: eu-west-2
+      SERVICES: sqs,s3
+
+  aws_cli:
+    image: garland/aws-cli-docker
+    networks:
+      - hocs-network
+    command:
+          - /bin/sh
+          - -c
+          - |
+              aws --endpoint-url=http://localstack:4572 s3 mb s3://untrusted-bucket
+              aws --endpoint-url=http://localstack:4572 s3 mb s3://trusted-bucket
+              aws --endpoint-url=http://localstack:4576 sqs create-queue --queue-name case-queue
+              aws --endpoint-url=http://localstack:4576 sqs create-queue --queue-name case-queue-dlq
+              aws --endpoint-url=http://localstack:4576 sqs create-queue --queue-name document-queue
+              aws --endpoint-url=http://localstack:4576 sqs create-queue --queue-name document-queue-dlq
+              aws --endpoint-url=http://localstack:4576 sqs create-queue --queue-name reporting-queue
+              aws --endpoint-url=http://localstack:4576 sqs create-queue --queue-name reporting-queue-dlq
+    environment:
+      AWS_ACCESS_KEY_ID: UNSET
+      AWS_SECRET_ACCESS_KEY: UNSET
+      AWS_DEFAULT_REGION: eu-west-2
+    depends_on:
+     - localstack
+
+  frontend:
+    image: quay.io/ukhomeofficedigital/hocs-frontend
+    ports:
+      - 8080:8080
+    networks:
+      - hocs-network
+    environment:
+      USE_CLIENTSIDE: true
+      WORKFLOW_SERVICE: http://workflow:8080
+      CASEWORK_SERVICE: http://casework:8080
+      INFO_SERVICE: http://info:8080
+      ALLOWED_FILE_EXTENSIONS: 'txt,doc,docx'
+      DOCUMENT_BULK_LIMIT: 40
+      S3_BUCKET: untrusted-bucket
+      S3_ENDPOINT: http://localstack:4572
+
+  casework:
+    image: quay.io/ukhomeofficedigital/hocs-casework
+    ports:
+      - 8080:8080
+    networks:
+      - hocs-network
+    environment:
+      SPRING_PROFILES_ACTIVE: 'development, local'
+      SERVER_PORT: 8080
+      CASE_QUEUE_NAME: 'case-queue'
+      CASE_QUEUE_DLQ_NAME: 'case-queue-dlq'
+
+  workflow:
+    image: quay.io/ukhomeofficedigital/hocs-workflow
+    ports:
+      - 8080:8080
+    networks:
+      - hocs-network
+    environment:
+      SPRING_PROFILES_ACTIVE: 'development, local'
+      SERVER_PORT: 8080
+      CASE_QUEUE_NAME: 'case-queue'
+      CASE_QUEUE_DLQ_NAME: 'case-queue-dlq'
+      HOCS_URL: 'http://localhost:8080'
+      HOCS_CASE_SERVICE: 'http://casework:8080'
+      HOCS_INFO_SERVICE: 'http://info:8080'
+
+  info:
+    image: quay.io/ukhomeofficedigital/hocs-info-service
+      ports:
+        - 8080:8080
+      networks:
+        - hocs-network
+      environment:
+        SPRING_PROFILES_ACTIVE: 'development, local'
+        SERVER_PORT: 8080
+
+  converter:
+    image: quay.io/ukhomeofficedigital/hocs-converter
+    ports:
+      - 8080:8080
+    networks:
+      - hocs-network
+
+  documents:
+    image: quay.io/ukhomeofficedigital/hocs-docs
+    ports:
+      - 8080:8080
+    networks:
+      - hocs-network
+    environment:
+      SPRING_PROFILES_ACTIVE: 'development, local'
+      SERVER_PORT: 8080
+      DOCS_QUEUE_NAME: 'document-queue'
+      DOCS_QUEUE_DLQ_NAME: 'document-queue-dlq'
+      CASE_QUEUE_NAME: 'case-queue'
+      DOCS_TRUSTEDS3BUCKETNAME: 'trusted-bucket'
+      DOCS_UNTRUSTEDS3BUCKETNAME: 'untrusted-bucket'
+      HOCSCONVERTER_ROOT: 'http://converter:8080'
+
+networks:
+  hocs-network:
