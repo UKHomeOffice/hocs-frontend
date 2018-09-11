@@ -11,6 +11,7 @@ const { renderMiddleware, renderResponseMiddleware } = require('../middleware/re
 const { errorMiddleware, initRequest } = require('../middleware/request');
 const { protect } = require('../middleware/auth');
 const { infoServiceClient } = require('../libs/request');
+const logger = require('../libs/logger');
 
 html.use(assets);
 
@@ -26,6 +27,7 @@ router.get('/members/refresh',
     async (req, res, next) => {
         try {
             await infoServiceClient.get('/members/refresh');
+            logger.info('request to update members in info service');
             res.status(200).send();
         } catch (e) {
             next(e);
