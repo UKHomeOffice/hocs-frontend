@@ -1,5 +1,6 @@
 import React from 'react';
-import WrappedDocumentPane from '../document-pane';
+import WrappedDocumentPanel from '../document-pane';
+import { MemoryRouter } from 'react-router-dom';
 
 jest.mock('axios', () => ({
     get: jest.fn(() => Promise.resolve())
@@ -25,20 +26,28 @@ describe('Document pane component', () => {
     });
 
     it('should have the dispatch method in props from the context consumer', () => {
-        const outer = shallow(<WrappedDocumentPane />);
-        const DocumentPane = outer.props().children;
-        const wrapper = mount(<DocumentPane dispatch={mockDispatch} page={mockPage} />);
+        const outer = shallow(<WrappedDocumentPanel />);
+        const DocumentPanel = outer.props().children;
+        const wrapper = mount(
+            <MemoryRouter>
+                <DocumentPanel dispatch={mockDispatch} page={mockPage} />
+            </MemoryRouter>
+        );
         expect(wrapper).toBeDefined();
-        expect(wrapper.props().dispatch).toBeDefined();
+        expect(wrapper.find('DocumentPanel').props().dispatch).toBeDefined();
     });
 
     it('should render the document list and store an active document in state when documents passed in props', () => {
-        const outer = shallow(<WrappedDocumentPane />);
-        const DocumentPane = outer.props().children;
-        const wrapper = mount(<DocumentPane dispatch={mockDispatch} page={mockPage} documents={documentList} />);
+        const outer = shallow(<WrappedDocumentPanel />);
+        const DocumentPanel = outer.props().children;
+        const wrapper = mount(
+            <MemoryRouter>
+                <DocumentPanel dispatch={mockDispatch} page={mockPage} documents={documentList} />
+            </MemoryRouter>
+        );
         expect(wrapper).toBeDefined();
-        expect(wrapper.props().dispatch).toBeDefined();
-        expect(wrapper.props().documents).toBeDefined();
+        expect(wrapper.find('DocumentPanel').props().dispatch).toBeDefined();
+        expect(wrapper.find('DocumentPanel').props().documents).toBeDefined();
     });
 
 });

@@ -5,9 +5,9 @@ class Dropdown extends Component {
 
     constructor(props) {
         super(props);
-        const fallbackValue = this.props.choices[0] ? this.props.choices[0].value : null;
-        const value = this.props.value || fallbackValue;
-        this.state = { value };
+        const choices = Array.from(props.choices);
+        choices.unshift({ label: '', value: '' });
+        this.state = { value: this.props.value, choices };
     }
 
     componentDidMount() {
@@ -21,13 +21,13 @@ class Dropdown extends Component {
 
     render() {
         const {
-            choices,
             disabled,
             error,
             hint,
             label,
             name
         } = this.props;
+        const { choices } = this.state;
         return (
             <div className={`govuk-form-group${error ? ' govuk-form-group--error' : ''}`}>
 
@@ -39,12 +39,12 @@ class Dropdown extends Component {
                     id={name}
                     name={name}
                     disabled={disabled}
-                    value={this.state.value}
                     onChange={e => this.handleChange(e)}
+                    value={this.state.value}
                 >
                     {choices && choices.map((choice, i) => {
                         return (
-                            <option key={i} value={choice.value}>{choice.label}</option>
+                            <option key={i} value={choice.value} >{choice.label}</option>
                         );
                     })}
                 </select>

@@ -12,14 +12,20 @@ async function getFormSchemaFromWorkflowService({ caseId, stageId, user }) {
     return { schema, data, meta: { caseReference, stageUUID } };
 }
 
+async function getFormSchemaForCase(options) {
+    logger.debug({ ...options });
+    const form = await formRepository.getFormForCase(options);
+    return { ...form };
+}
+
 async function getFormSchema(options) {
     const { user } = options;
     logger.debug({ ...options });
     const form = formRepository.getForm(options);
     let data = {};
-    switch(options.action) {
+    switch (options.action) {
     case 'DOCUMENT':
-        data = { 'DateReceived': new Date().toISOString().substr(0,10) };
+        data = { 'DateReceived': new Date().toISOString().substr(0, 10) };
         break;
     }
     await hydrateFields(form.schema.fields, { user });
@@ -50,7 +56,7 @@ function hydrateFields(fields, options) {
 const getFormForAction = async (req, res, next) => {
     const { workflow, context, action } = req.params;
     try {
-        req.form = await getFormSchema({ context: 'ACTION', workflow, entity:context, action, user: req.user });
+        req.form = await getFormSchema({ context: 'ACTION', workflow, entity: context, action, user: req.user });
     } catch (e) {
         return next(new FormServiceError());
     }
@@ -58,10 +64,11 @@ const getFormForAction = async (req, res, next) => {
 };
 
 const getFormForCase = async (req, res, next) => {
-    const { action } = req.params;
+    const { entity, context, action } = req.params;
     try {
-        req.form = await getFormSchema({ context: 'WORKFLOW', action, user: req.user });
+        req.form = await getFormSchemaForCase({ entity, context, action });
     } catch (e) {
+        logger.error(e);
         return next(new FormServiceError());
     }
     next();

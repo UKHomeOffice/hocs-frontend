@@ -1,10 +1,12 @@
-const caseCreate = require('./case-create.json');
+const caseCreate = require('./case-create.js');
 const addDocument = require('./document-add.js');
+const addDocumentNew = require('./add-document.js');
+const removeDocument = require('./remove-document.js');
 const addDTENDocument = require('./dten-document-add.js');
-const bulkCaseCreate = require('./bulk-case-create.json');
+const bulkCaseCreate = require('./bulk-case-create.js');
 const bulkAddDocument = require('./bulk-document-add.js');
 const testForm = require('./case-test.json');
-const { CREATE_CASE, BULK_CREATE_CASE, ADD_DOCUMENT } = require('../actions/types');
+const { CREATE_CASE, BULK_CREATE_CASE, ADD_DOCUMENT, REMOVE_DOCUMENT } = require('../actions/types');
 
 
 const workflowDefinitions = {
@@ -22,21 +24,21 @@ const workflowDefinitions = {
             },
             /** I see this as temp code, we should move this to a getCreateForType method in the list/workflow service **/
             DOCUMENT: {
-                MIN : {
+                MIN: {
                     schema: addDocument,
                     action: CREATE_CASE,
                     next: {
                         action: 'CONFIRMATION_SUMMARY'
                     }
                 },
-                TRO : {
+                TRO: {
                     schema: addDocument,
                     action: CREATE_CASE,
                     next: {
                         action: 'CONFIRMATION_SUMMARY'
                     }
                 },
-                DTEN : {
+                DTEN: {
                     schema: addDTENDocument,
                     action: CREATE_CASE,
                     next: {
@@ -63,14 +65,14 @@ const workflowDefinitions = {
                 }
             },
             DOCUMENT: {
-                MIN : {
+                MIN: {
                     schema: bulkAddDocument,
                     action: BULK_CREATE_CASE,
                     next: {
                         action: 'CONFIRMATION_SUMMARY'
                     }
                 },
-                TRO : {
+                TRO: {
                     schema: bulkAddDocument,
                     action: BULK_CREATE_CASE,
                     next: {
@@ -83,16 +85,12 @@ const workflowDefinitions = {
     CASE: {
         DOCUMENT: {
             ADD: {
-                schema: addDocument,
+                schema: addDocumentNew,
                 action: ADD_DOCUMENT
-            }
-        }
-    },
-    STAGE: {
-        DOCUMENT: {
-            ADD: {
-                schema: addDocument,
-                action: ADD_DOCUMENT
+            },
+            REMOVE: {
+                schema: removeDocument,
+                action: REMOVE_DOCUMENT
             }
         }
     }
@@ -103,20 +101,27 @@ module.exports = {
         if (context && workflow && action) {
             try {
                 let form;
-                if(action === 'DOCUMENT' || action == 'BULK_CREATE_CASE') {
+                if (action === 'DOCUMENT' || action == 'BULK_CREATE_CASE') {
                     form = workflowDefinitions[context.toUpperCase()][workflow.toUpperCase()][action.toUpperCase()][entity.toUpperCase()];
                 } else {
                     form = workflowDefinitions[context.toUpperCase()][workflow.toUpperCase()][action.toUpperCase()];
                 }
 
                 const requiredRole = workflowDefinitions[context.toUpperCase()][workflow.toUpperCase()].requiredRole;
-                return JSON.parse(JSON.stringify({ ...form, requiredRole }));
+                return { schema: form.schema.call(this, {}), next: form.next, action: form.action, requiredRole };
             } catch (e) {
                 throw new ReferenceError(`Unable to retrieve schema: ${e.message}`);
             }
         } else {
             throw new ReferenceError('Unable to retrieve schema: incorrect parameters');
         }
-
+    },
+    getFormForCase: async ({ entity, context, action }) => {
+        let options = { context };
+        if (entity && action) {
+            let form;
+            form = workflowDefinitions['CASE'][entity.toUpperCase()][action.toUpperCase()];
+            return { schema: await form.schema.call(this, options), action: form.action, data: {} };
+        }
     }
 };

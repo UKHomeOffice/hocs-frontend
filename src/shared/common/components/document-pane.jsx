@@ -10,6 +10,7 @@ import {
     setError
 } from '../../contexts/actions/index.jsx';
 import status from '../../helpers/api-status.js';
+import { Link } from 'react-router-dom';
 
 class DocumentPanel extends Component {
 
@@ -61,10 +62,12 @@ class DocumentPanel extends Component {
                 {activeDocument && <Document caseId={page.caseId} activeDocument={activeDocument} />}
                 {documents && documents.length > 0 && <DocumentList
                     caseId={page.caseId}
+                    stageId={page.stageId}
                     documents={documents}
                     activeDocument={activeDocument}
                     clickHandler={this.setActiveDocument.bind(this)}
                 />}
+                <Link className='govuk-body govuk-link' to={`/case/${page.caseId}/stage/${page.stageId}/entity/document/add`} >Add document</Link>
             </Fragment>
         );
     }

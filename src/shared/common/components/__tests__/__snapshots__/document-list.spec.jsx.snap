@@ -52,6 +52,9 @@ exports[`Document list component should render with a document list when provide
           Download
         </a>
       </td>
+      <td
+        class="govuk-table__cell"
+      />
     </tr>
     <tr
       class="govuk-table__row"
@@ -93,6 +96,9 @@ exports[`Document list component should render with a document list when provide
           Download
         </a>
       </td>
+      <td
+        class="govuk-table__cell"
+      />
     </tr>
     <tr
       class="govuk-table__row"
@@ -134,6 +140,9 @@ exports[`Document list component should render with a document list when provide
           Download
         </a>
       </td>
+      <td
+        class="govuk-table__cell"
+      />
     </tr>
   </tbody>
 </table>
