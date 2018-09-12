@@ -188,6 +188,8 @@ spec:
             value: 'https://hocs-workflow.{{.KUBE_NAMESPACE}}.svc.cluster.local'
           - name: CASEWORK_SERVICE
             value: 'https://hocs-casework.{{.KUBE_NAMESPACE}}.svc.cluster.local'
+          - name: DOCUMENT_SERVICE
+            value: 'https://hocs-docs.{{.KUBE_NAMESPACE}}.svc.cluster.local'
           - name: INFO_SERVICE
             value: 'https://hocs-info-service.{{.KUBE_NAMESPACE}}.svc.cluster.local'
           - name: OUTBOUND_PROXY
