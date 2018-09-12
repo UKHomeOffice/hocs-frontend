@@ -27,8 +27,19 @@ function createCaseRequest(type, form) {
     };
 }
 
+function addDocumentRequest(form) {
+    return {
+        name: form.data['add_document'][0].key,
+        type: form.data['document_type']
+    };
+}
+
 function createCase(url, { caseType, form }) {
     return workflowServiceClient.post(url, createCaseRequest(caseType, form));
+}
+
+function addDocument(url, form) {
+    return docsServiceClient.post(url, addDocumentRequest(form));
 }
 
 function updateCase({ caseId, stageId, form }) {
@@ -96,7 +107,7 @@ const actions = {
             if (entity === 'document') {
                 switch (action) {
                 case 'add':
-                    await docsServiceClient.post(`/case/${caseId}/document`, form);
+                    await addDocument(`/case/${caseId}/document`, form);
                     break;
                 case 'remove':
                     if (!context) {

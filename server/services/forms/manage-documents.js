@@ -31,7 +31,6 @@ module.exports = async options => {
                 entity: 'document'
             }
         })
-        .withPrimaryActionLabel('Finish')
         .withSecondaryAction({
             component: 'backlink',
             props: {
