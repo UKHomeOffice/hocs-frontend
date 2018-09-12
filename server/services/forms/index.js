@@ -5,7 +5,7 @@ const removeDocument = require('./remove-document.js');
 const addDTENDocument = require('./dten-document-add.js');
 const bulkCaseCreate = require('./bulk-case-create.js');
 const bulkAddDocument = require('./bulk-document-add.js');
-const testForm = require('./case-test.json');
+const testForm = require('./case-test.js');
 const { CREATE_CASE, BULK_CREATE_CASE, ADD_DOCUMENT, REMOVE_DOCUMENT } = require('../actions/types');
 
 
