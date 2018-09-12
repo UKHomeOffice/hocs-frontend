@@ -51,7 +51,8 @@ DocumentList.propTypes = {
     activeDocument: PropTypes.string,
     caseId: PropTypes.string,
     clickHandler: PropTypes.func.isRequired,
-    documents: PropTypes.array.isRequired
+    documents: PropTypes.array.isRequired,
+    stageId: PropTypes.string
 };
 
 export default DocumentList;

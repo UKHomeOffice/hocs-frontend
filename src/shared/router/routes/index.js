@@ -38,7 +38,12 @@ const routes = [
         component: StagePage
     },
     {
-        path: '/case/:caseId/action/:entity/:action/',
+        path: '/case/:caseId/stage/:stageId/entity/:entity/:action/',
+        exact: true,
+        component: CasePage
+    },
+    {
+        path: '/case/:caseId/stage/:stageId/entity/:entity/:context/:action/',
         exact: true,
         component: CasePage
     },

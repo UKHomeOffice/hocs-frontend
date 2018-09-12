@@ -1,5 +1,6 @@
 jest.mock('../forms/index.js', () => ({
-    getForm: jest.fn()
+    getForm: jest.fn(),
+    getFormForCase: jest.fn()
 }));
 
 jest.mock('../../libs/request.js', () => ({
@@ -93,21 +94,23 @@ describe('getFormForCase', () => {
     it('should add the form to the request object when the call to the form repository succeeds ', async () => {
         req = {
             params: {
+                entity: 'ENTITY',
+                context: 'CONTEXT',
                 action: 'ACTION'
             },
             user: 'USER'
         };
         const formRepository = require('../forms/index.js');
-        formRepository.getForm.mockImplementation(() => {
+        formRepository.getFormForCase.mockImplementation(() => {
             return mockActionForm;
         });
         const { getFormForCase } = require('../form');
         await getFormForCase(req, res, next);
-        expect(formRepository.getForm).toHaveBeenCalled();
-        expect(formRepository.getForm).toHaveBeenCalledTimes(1);
-        expect(formRepository.getForm.mock.calls[0][0].context).toEqual('WORKFLOW');
-        expect(formRepository.getForm.mock.calls[0][0].action).toEqual('ACTION');
-        expect(formRepository.getForm.mock.calls[0][0].user).toEqual('USER');
+        expect(formRepository.getFormForCase).toHaveBeenCalled();
+        expect(formRepository.getFormForCase).toHaveBeenCalledTimes(1);
+        expect(formRepository.getFormForCase.mock.calls[0][0].entity).toEqual('ENTITY');
+        expect(formRepository.getFormForCase.mock.calls[0][0].context).toEqual('CONTEXT');
+        expect(formRepository.getFormForCase.mock.calls[0][0].action).toEqual('ACTION');
         expect(req.form).toBeDefined();
         expect(next).toHaveBeenCalled();
     });
@@ -115,21 +118,21 @@ describe('getFormForCase', () => {
     it('should add an intance of the ErrorModel on the response object when the call to the form repository fails', async () => {
         req = {
             params: {
+                entity: 'ENTITY',
                 action: 'ACTION'
             },
             user: 'USER'
         };
         const formRepository = require('../forms/index.js');
-        formRepository.getForm.mockImplementation(() => {
+        formRepository.getFormForCase.mockImplementation(() => {
             throw new Error('SOMETHING_WENT_WRONG');
         });
         const { getFormForCase } = require('../form');
         await getFormForCase(req, res, next);
-        expect(formRepository.getForm).toHaveBeenCalled();
-        expect(formRepository.getForm).toHaveBeenCalledTimes(1);
-        expect(formRepository.getForm.mock.calls[0][0].context).toEqual('WORKFLOW');
-        expect(formRepository.getForm.mock.calls[0][0].action).toEqual('ACTION');
-        expect(formRepository.getForm.mock.calls[0][0].user).toEqual('USER');
+        expect(formRepository.getFormForCase).toHaveBeenCalled();
+        expect(formRepository.getFormForCase).toHaveBeenCalledTimes(1);
+        expect(formRepository.getFormForCase.mock.calls[0][0].entity).toEqual('ENTITY');
+        expect(formRepository.getFormForCase.mock.calls[0][0].action).toEqual('ACTION');
         expect(req.form).toBeUndefined();
         expect(next).toHaveBeenCalled();
         expect(next.mock.calls[0][0]).toBeInstanceOf(Error);

@@ -61,7 +61,9 @@ class EntityList extends Component {
                                                     onChange={e => this.handleChange(e)}
                                                     className={'govuk-radios__input'}
                                                 />
-                                                <label className="govuk-label govuk-radios__label" htmlFor={`${name}-${choice.value}`}>{choice.label}</label>
+                                                <label className="govuk-label govuk-radios__label" htmlFor={`${name}-${choice.value}`}>
+                                                    {choice.label}
+                                                </label>
                                             </div>
                                         </td>
                                         <td className='govuk-table__cell'>
