@@ -3,7 +3,8 @@ module.exports = (options) => {
     const schema = {
         title: options.title || 'Form',
         defaultActionLabel: options.primaryActionLabel || 'Submit',
-        fields: options.fields || []
+        fields: options.fields || [],
+        showPrimaryAction: true
     };
     return {
         build: () => schema,
@@ -32,6 +33,10 @@ module.exports = (options) => {
             if (action) {
                 schema.secondaryActions.push(action);
             }
+            return this;
+        },
+        withNoPrimaryAction: function() {
+            schema.showPrimaryAction = false;
             return this;
         }
     };

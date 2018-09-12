@@ -43,3 +43,10 @@ $govuk-page-width: 1100px !default;
   margin-bottom: 30px;
   padding: govuk-spacing(1);
 }
+
+.margin-right--small {
+  margin-right: govuk-spacing(1);
+  & :last-of-type {
+    margin-right: 0
+  }
+}

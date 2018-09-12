@@ -41,7 +41,7 @@ class Form extends Component {
                             });
                         })
                     }
-                    < Submit label={schema.defaultActionLabel} />
+                    { schema.showPrimaryAction !== false && < Submit label={schema.defaultActionLabel} />}
                     {
                         schema && schema.secondaryActions && schema.secondaryActions.map((field, key) => {
                             return secondaryActionFactory(field.component, {

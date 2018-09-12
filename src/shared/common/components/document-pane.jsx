@@ -67,7 +67,7 @@ class DocumentPanel extends Component {
                     activeDocument={activeDocument}
                     clickHandler={this.setActiveDocument.bind(this)}
                 />}
-                <Link className='govuk-body govuk-link' to={`/case/${page.caseId}/stage/${page.stageId}/entity/document/add`} >Add document</Link>
+                <Link className='govuk-body govuk-link' to={`/case/${page.caseId}/stage/${page.stageId}/entity/document/manage`} >Manage documents</Link>
             </Fragment>
         );
     }

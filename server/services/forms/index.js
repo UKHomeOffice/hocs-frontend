@@ -2,11 +2,12 @@ const caseCreate = require('./case-create.js');
 const addDocument = require('./document-add.js');
 const addDocumentNew = require('./add-document.js');
 const removeDocument = require('./remove-document.js');
+const manageDocuments = require('./manage-documents.js');
 const addDTENDocument = require('./dten-document-add.js');
 const bulkCaseCreate = require('./bulk-case-create.js');
 const bulkAddDocument = require('./bulk-document-add.js');
 const testForm = require('./case-test.js');
-const { CREATE_CASE, BULK_CREATE_CASE, ADD_DOCUMENT, REMOVE_DOCUMENT } = require('../actions/types');
+const { CREATE_CASE, BULK_CREATE_CASE, ADD_DOCUMENT, REMOVE_DOCUMENT, MANAGE_DOCUMENTS } = require('../actions/types');
 
 
 const workflowDefinitions = {
@@ -91,6 +92,10 @@ const workflowDefinitions = {
             REMOVE: {
                 schema: removeDocument,
                 action: REMOVE_DOCUMENT
+            },
+            MANAGE: {
+                schema: manageDocuments,
+                action: MANAGE_DOCUMENTS
             }
         }
     }
@@ -116,8 +121,8 @@ module.exports = {
             throw new ReferenceError('Unable to retrieve schema: incorrect parameters');
         }
     },
-    getFormForCase: async ({ entity, context, action }) => {
-        let options = { context };
+    getFormForCase: async (options) => {
+        let { entity, action } = options;
         if (entity && action) {
             let form;
             form = workflowDefinitions['CASE'][entity.toUpperCase()][action.toUpperCase()];

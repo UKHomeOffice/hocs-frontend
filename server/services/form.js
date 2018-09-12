@@ -64,9 +64,8 @@ const getFormForAction = async (req, res, next) => {
 };
 
 const getFormForCase = async (req, res, next) => {
-    const { entity, context, action } = req.params;
     try {
-        req.form = await getFormSchemaForCase({ entity, context, action });
+        req.form = await getFormSchemaForCase(req.params);
     } catch (e) {
         logger.error(e);
         return next(new FormServiceError());

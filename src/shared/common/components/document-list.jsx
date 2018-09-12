@@ -13,7 +13,7 @@ class DocumentList extends Component {
     }
 
     render() {
-        const { activeDocument, caseId, stageId, documents, showRemove } = this.props;
+        const { activeDocument, caseId, documents } = this.props;
         return (
             <table className='govuk-table'>
                 <caption className='govuk-table__caption'>Documents</caption>
@@ -33,9 +33,6 @@ class DocumentList extends Component {
                                 <td className='govuk-table__cell'>
                                     {d.document_uuid && caseId && <a href={`/case/${caseId}/document/${d.s3_orig_link}`} className='govuk-link' download={d.name} >Download</a>}
                                 </td>
-                                {showRemove && <td className='govuk-table__cell'>
-                                    {d.document_uuid && caseId && stageId && <a href={`/case/${caseId}/stage/${stageId}/entity/document/${d.document_uuid}/remove`} className='govuk-link' >Remove</a>}
-                                </td>}
                             </tr>
                         ))
                     }
@@ -47,8 +44,7 @@ class DocumentList extends Component {
 }
 
 DocumentList.defaultProps = {
-    documents: [],
-    showRemove: false
+    documents: []
 };
 
 DocumentList.propTypes = {
@@ -56,7 +52,6 @@ DocumentList.propTypes = {
     caseId: PropTypes.string,
     clickHandler: PropTypes.func.isRequired,
     documents: PropTypes.array.isRequired,
-    showRemove: PropTypes.bool,
     stageId: PropTypes.string
 };
 
