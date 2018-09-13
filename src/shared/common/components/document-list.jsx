@@ -23,6 +23,7 @@ class DocumentList extends Component {
                             <tr key={i} className='govuk-table__row'>
                                 <td className='govuk-table__cell'>
                                     <strong className='govuk-tag'>{d.type}</strong>
+                                    <strong className='govuk-tag'>{d.status}</strong>
                                 </td>
                                 <td className='govuk-table__cell'>
                                     {d.name}

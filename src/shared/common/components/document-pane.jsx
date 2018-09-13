@@ -25,8 +25,8 @@ class DocumentPanel extends Component {
 
     componentDidMount() {
         const { dispatch } = this.props;
-        const { documents, page } = this.state;
-        if (page && !documents) {
+        const { page } = this.state;
+        if (page && page.caseId) {
             return dispatch(updateApiStatus(status.REQUEST_DOCUMENT_LIST))
                 .then(() => {
                     axios.get(`/api/case/${page.caseId}/document`)

@@ -4,6 +4,7 @@ const { docsServiceClient } = require('../../libs/request');
 function documentAdapter(document) {
     const tags = [];
     tags.push(document.type);
+    tags.push(document.status);
     return {
         label: document.name,
         value: document.document_uuid,
@@ -34,7 +35,7 @@ module.exports = async options => {
         .withSecondaryAction({
             component: 'backlink',
             props: {
-                label: 'Cancel'
+                label: 'Back'
             }
         })
         .withNoPrimaryAction()

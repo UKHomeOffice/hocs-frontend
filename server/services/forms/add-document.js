@@ -1,7 +1,7 @@
 const Form = require('./form-builder');
 
 module.exports = () => Form()
-    .withTitle('Add document to case')
+    .withTitle('Add documents to case')
     .withField({
         component: 'dropdown',
         validation: [
@@ -27,8 +27,8 @@ module.exports = () => Form()
             name: 'add_document',
             action: 'ADD_DOCUMENT',
             documentType: 'ORIGINAL',
-            label: 'Document',
-            allowMultiple: false,
+            label: 'Documents',
+            allowMultiple: true,
             whitelist: 'DOCUMENT_EXTENSION_WHITELIST'
         }
     })
