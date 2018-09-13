@@ -1,4 +1,4 @@
-const { docsServiceClient, workflowServiceClient } = require('../libs/request');
+const { workflowServiceClient } = require('../libs/request');
 const { CREATE_CASE, BULK_CREATE_CASE } = require('./actions/types');
 const { ActionError } = require('../models/error');
 
@@ -100,29 +100,28 @@ const actions = {
         }
     },
     CASE: async ({ caseId, stageId, entity, context, action, form }) => {
-        if (entity && action) {
-            if (entity === 'document') {
-                switch (action) {
-                case 'add':
-                    await addDocument(`/case/${caseId}/document`, form);
-                    break;
-                case 'remove':
-                    if (!context) {
-                        throw new ActionError('Unable to remove, no context provided');
+        try {
+            if (entity && action) {
+                if (entity === 'document') {
+                    switch (action) {
+                    case 'add':
+                        await addDocument(`/case/${caseId}/document`, form);
+                        break;
+                    case 'remove':
+                        if (!context) {
+                            throw new ActionError('Unable to remove, no context provided');
+                        }
+                        await workflowServiceClient.delete(`/case/${caseId}/document/${context}`);
+                        break;
                     }
-                    await workflowServiceClient.delete(`/case/${caseId}/document/${context}`);
-                    break;
+                    return ({ callbackUrl: `/case/${caseId}/stage/${stageId}/entity/${entity}/manage` });
                 }
-                return ({ callbackUrl: `/case/${caseId}/stage/${stageId}/entity/${entity}/manage` });
             }
+        } catch (e) {
+            throw new ActionError(e);
         }
     },
-    WORKFLOW: async ({ caseId, stageId, entity, action, form }) => {
-        if (entity && action) {
-            // Handle case event
-        }
-        // Update stage
-
+    WORKFLOW: async ({ caseId, stageId, form }) => {
         try {
             const response = await updateCase({ caseId, stageId, form });
             return handleWorkflowSuccess(response, { caseId, stageId });

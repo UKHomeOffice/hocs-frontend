@@ -58,6 +58,7 @@ const getFormForAction = async (req, res, next) => {
     try {
         req.form = await getFormSchema({ context: 'ACTION', workflow, entity: context, action, user: req.user });
     } catch (e) {
+        logger.error(e);
         return next(new FormServiceError());
     }
     next();

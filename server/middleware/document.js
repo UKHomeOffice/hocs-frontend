@@ -26,21 +26,21 @@ async function getDocumentList(req, res, next) {
     try {
         const response = await docsServiceClient.get(`/case/${req.params.caseId}/document`);
         res.locals.documents = response.data.documents;
-        next();
     } catch (e) {
         logger.warn(e);
         res.locals.documents = [];
+    } finally {
         next();
     }
 }
 
-async function apiGetDocumentList(req, res, next) {
+async function apiGetDocumentList(req, res) {
     try {
         const response = await docsServiceClient.get(`/case/${req.params.caseId}/document`);
         res.send(response.data);
     } catch (e) {
         logger.warn(e);
-        res.send([]);
+        res.send({ documents: [] });
     }
 }
 
