@@ -15,7 +15,11 @@ function documentAdapter(document) {
 
 module.exports = async options => {
     const response = await docsServiceClient.get(`/case/${options.caseId}/document`);
-    const choices = response.data.documents.map(documentAdapter);
+    const choices = response.data.documents.map(documentAdapter).sort((first, second) => {
+        const firstTimeStamp = first.timeStamp.toUpperCase();
+        const secondTimeStamp = second.timeStamp.toUpperCase();
+        return (firstTimeStamp < secondTimeStamp) ? 1 : -1;
+    });
     return Form()
         .withTitle('Manage documents')
         .withField({
