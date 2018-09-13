@@ -35,7 +35,8 @@ module.exports = async options => {
         .withSecondaryAction({
             component: 'backlink',
             props: {
-                label: 'Back'
+                label: 'Back',
+                action: `/case/${options.caseId}/stage/${options.stageId}`
             }
         })
         .withNoPrimaryAction()
