@@ -23,6 +23,9 @@ exports[`Document list component should render with a document list when provide
         >
           ORIGINAL
         </strong>
+        <strong
+          class="govuk-tag"
+        />
       </td>
       <td
         class="govuk-table__cell"
@@ -64,6 +67,9 @@ exports[`Document list component should render with a document list when provide
         >
           ORIGINAL
         </strong>
+        <strong
+          class="govuk-tag"
+        />
       </td>
       <td
         class="govuk-table__cell"
@@ -105,6 +111,9 @@ exports[`Document list component should render with a document list when provide
         >
           ORIGINAL
         </strong>
+        <strong
+          class="govuk-tag"
+        />
       </td>
       <td
         class="govuk-table__cell"

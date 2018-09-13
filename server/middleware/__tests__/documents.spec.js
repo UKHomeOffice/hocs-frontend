@@ -5,20 +5,12 @@ const mockStream = jest.fn();
 jest.mock('../../libs/request.js', () => {
     return {
         docsServiceClient: {
-            get: (url, options) => {
+            get: (url) => {
                 mockServiceClient(url);
                 if (url === '/case/TEST_CASE_ID/document') {
-                    if (options && options.responseType === 'stream') {
-                        return Promise.resolve({
-                            data: {
-                                pipe: mockStream
-                            }
-                        });
-                    } else {
-                        return Promise.resolve({
-                            data: { documents: 'MOCK_DOCUMENT_LIST' }
-                        });
-                    }
+                    return Promise.resolve({
+                        data: { documents: 'MOCK_DOCUMENT_LIST' }
+                    });
                 } else {
                     return Promise.reject(new Error('MOCK_ERROR'));
                 }
@@ -98,10 +90,9 @@ describe('Document API response middleware', () => {
 
     beforeEach(() => {
         req = {};
-        res = { status };
+        res = { send };
         next.mockReset();
         send.mockReset();
-        mockStream.mockReset();
     });
 
     it('should return the document object from the response object', async () => {
@@ -110,9 +101,7 @@ describe('Document API response middleware', () => {
         expect(mockServiceClient).toHaveBeenCalled();
         expect(mockServiceClient).toHaveBeenLastCalledWith(`/case/${req.params.caseId}/document`);
         expect(status).not.toHaveBeenCalled();
-        expect(send).not.toHaveBeenCalled();
-        expect(mockStream).toHaveBeenCalled();
-        expect(mockStream).toHaveBeenCalledWith(res);
+        expect(send).toHaveBeenCalled();
     });
 
     it('should return a 404 and error if the request fails', () => {

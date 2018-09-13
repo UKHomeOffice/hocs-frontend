@@ -49,7 +49,7 @@ jest.mock('react-router-dom', () => {
 const req = {};
 
 const res = {
-    locals: {},
+    locals: { form: {} },
     status: jest.fn()
 };
 
