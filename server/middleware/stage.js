@@ -1,5 +1,5 @@
 const actionService = require('../services/action');
-const { AllocationError } = require('../models/error');
+const logger = require('../libs/logger');
 const { workflowServiceClient } = require('../libs/request');
 
 async function stageResponseMiddleware(req, res, next) {
@@ -35,9 +35,10 @@ async function allocateCase(req, res, next) {
             userUUID: '22222222-2222-2222-2222-222222222222',
             teamUUID: '33333333-3333-3333-3333-333333333333'
         });
-        next();
     } catch (e) {
-        next(new AllocationError());
+        logger.warn(e);
+    } finally {
+        next();
     }
 }
 
