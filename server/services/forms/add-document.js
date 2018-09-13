@@ -1,6 +1,6 @@
 const Form = require('./form-builder');
 
-module.exports = () => Form()
+module.exports = options => Form()
     .withTitle('Add documents to case')
     .withField({
         component: 'dropdown',
@@ -33,4 +33,11 @@ module.exports = () => Form()
         }
     })
     .withPrimaryActionLabel('Add')
+    .withSecondaryAction({
+        component: 'backlink',
+        props: {
+            label: 'Back',
+            action: `/case/${options.caseId}/stage/${options.stageId}/entity/document/manage`
+        }
+    })
     .build();

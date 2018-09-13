@@ -13,5 +13,12 @@ module.exports = async options => {
             }
         })
         .withPrimaryActionLabel('Remove')
+        .withSecondaryAction({
+            component: 'backlink',
+            props: {
+                label: 'Back',
+                action: `/case/${options.caseId}/stage/${options.stageId}/entity/document/manage`
+            }
+        })
         .build();
 };
