@@ -19,7 +19,7 @@ exports[`Document list component should render with a document list when provide
         class="govuk-table__cell"
       >
         <strong
-          class="govuk-tag"
+          class="govuk-tag margin-right--small"
         >
           ORIGINAL
         </strong>
@@ -63,7 +63,7 @@ exports[`Document list component should render with a document list when provide
         class="govuk-table__cell"
       >
         <strong
-          class="govuk-tag"
+          class="govuk-tag margin-right--small"
         >
           ORIGINAL
         </strong>
@@ -107,7 +107,7 @@ exports[`Document list component should render with a document list when provide
         class="govuk-table__cell"
       >
         <strong
-          class="govuk-tag"
+          class="govuk-tag margin-right--small"
         >
           ORIGINAL
         </strong>

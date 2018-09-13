@@ -22,7 +22,7 @@ class DocumentList extends Component {
                         caseId && documents.map((d, i) => (
                             <tr key={i} className='govuk-table__row'>
                                 <td className='govuk-table__cell'>
-                                    <strong className='govuk-tag'>{d.type}</strong>
+                                    <strong className='govuk-tag margin-right--small'>{d.type}</strong>
                                     <strong className='govuk-tag'>{d.status}</strong>
                                 </td>
                                 <td className='govuk-table__cell'>
