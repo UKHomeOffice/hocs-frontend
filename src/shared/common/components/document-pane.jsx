@@ -31,12 +31,17 @@ class DocumentPanel extends Component {
                 .then(() => {
                     axios.get(`/api/case/${page.caseId}/document`)
                         .then(response => {
+                            const sortedDocuments = response.data.documents.sort((first, second) => {
+                                const firstTimeStamp = first.timestamp.toUpperCase();
+                                const secondTimeStamp = second.timestamp.toUpperCase();
+                                return (firstTimeStamp < secondTimeStamp) ? 1 : -1;
+                            });
                             dispatch(updateApiStatus(status.REQUEST_DOCUMENT_LIST_SUCCESS))
                                 .then(() => dispatch(clearApiStatus()))
                                 .then(() => this.setState({
-                                    documents: response.data.documents,
-                                    activeDocument: response.data.documents[0] ?
-                                        response.data.documents[0].s3_pdf_link :
+                                    documents: sortedDocuments,
+                                    activeDocument: sortedDocuments ?
+                                        sortedDocuments[0].s3_pdf_link :
                                         null
                                 }));
                         })
