@@ -29,6 +29,9 @@ class EntityManager extends Component {
                                         {choice.label}
                                     </td>
                                     <td className='govuk-table__cell'>
+                                        {choice.timeStamp}
+                                    </td>
+                                    <td className='govuk-table__cell'>
                                         {hasRemoveLink && <Link to={`${baseUrl}/${entity}/${choice.value}/remove`} className="govuk-link">Remove</Link>}
                                     </td>
                                 </tr>

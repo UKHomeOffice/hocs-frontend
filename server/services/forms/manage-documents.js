@@ -8,6 +8,7 @@ function documentAdapter(document) {
     return {
         label: document.name,
         value: document.document_uuid,
+        timestamp: document.timestamp,
         tags: tags.length > 0 ? tags : null
     };
 }
