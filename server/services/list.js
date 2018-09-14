@@ -1,5 +1,5 @@
 const { DOCUMENT_WHITELIST } = require('../config').forContext('server');
-const { infoServiceClient } = require('../libs/request');
+const { infoServiceClient, workflowServiceClient } = require('../libs/request');
 const logger = require('../libs/logger');
 const { listDefinitions, staticListDefinitions } = require('./lists/index');
 
@@ -123,19 +123,13 @@ const lists = {
             { label: 'Second', value: 'SECOND' }
         ];
     },
-    'CASE_PARENT_TOPICS': async () => {
-        // TODO: Implement me!!!
-        return [
-            { label: 'Parent topic A', value: 'A' },
-            { label: 'Parent topic B', value: 'B' }
-        ];
+    'CASE_PARENT_TOPICS': async ({ caseId }) => {
+        const response = await workflowServiceClient(`/case/${caseId}/topic`);
+        return response.data.topics;
     },
-    'CASE_TOPICS': async () => {
-        // TODO: Implement me!!!
-        return [
-            { label: 'Child topic A', value: 'A' },
-            { label: 'Child topic B', value: 'B' }
-        ];
+    'CASE_TOPICS': async ({ context }) => {
+        const response = await infoServiceClient(`/topic/all/${context}`);
+        return response.data.topics;
     }
 };
 

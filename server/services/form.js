@@ -4,32 +4,31 @@ const { workflowServiceClient } = require('../libs/request');
 const logger = require('../libs/logger');
 const { FormServiceError } = require('../models/error');
 
-async function getFormSchemaFromWorkflowService({ caseId, stageId, user }) {
+async function getFormSchemaFromWorkflowService(options) {
+    const { caseId, stageId } = options;
     const response = await workflowServiceClient.get(`/case/${caseId}/stage/${stageId}`);
     const { stageUUID, caseReference } = response.data;
     const { schema, data } = response.data.form;
-    await hydrateFields(schema.fields, { user });
+    await hydrateFields(schema.fields, options);
     return { schema, data, meta: { caseReference, stageUUID } };
 }
 
 async function getFormSchemaForCase(options) {
-    logger.debug({ ...options });
     const form = await formRepository.getFormForCase(options);
-    await hydrateFields(form.schema.fields);
+    await hydrateFields(form.schema.fields, options);
     return { ...form };
 }
 
 async function getFormSchema(options) {
-    const { user } = options;
-    logger.debug({ ...options });
+    const { action } = options;
     const form = formRepository.getForm(options);
     let data = {};
-    switch (options.action) {
+    switch (action) {
     case 'DOCUMENT':
         data = { 'DateReceived': new Date().toISOString().substr(0, 10) };
         break;
     }
-    await hydrateFields(form.schema.fields, { user });
+    await hydrateFields(form.schema.fields, options);
     return { ...form, data: data, meta: {} };
 }
 
@@ -78,9 +77,8 @@ const getFormForCase = async (req, res, next) => {
 };
 
 const getFormForStage = async (req, res, next) => {
-    const { caseId, stageId } = req.params;
     try {
-        req.form = await getFormSchemaFromWorkflowService({ caseId, stageId, user: req.user });
+        req.form = await getFormSchemaFromWorkflowService(req.params);
     } catch (e) {
         logger.error(e);
         return next(new FormServiceError());
