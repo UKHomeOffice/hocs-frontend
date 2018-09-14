@@ -109,27 +109,42 @@ const lists = {
             handleListFailure(list, error);
         }
     },
-    'CASE_STANDARD_LINES': async () => {
-        // TODO: Implement me!!!
-        return [
-            { label: 'First', value: 'FIRST' },
-            { label: 'Second', value: 'SECOND' }
-        ];
+    'CASE_STANDARD_LINES': async ({ caseId }) => {
+        const response = await workflowServiceClient(`/case/${caseId}/standard_lines`);
+        if (response.data.standardLines) {
+            return response.data.standardLines;
+        } else {
+            logger.warn(`No standard lines returned for case: ${caseId}`);
+            return [];
+        }
     },
-    'CASE_TEMPLATES': async () => {
-        // TODO: Implement me!!!
-        return [
-            { label: 'First', value: 'FIRST' },
-            { label: 'Second', value: 'SECOND' }
-        ];
+    'CASE_TEMPLATES': async ({ caseId }) => {
+        const response = await workflowServiceClient(`/case/${caseId}/templates`);
+        if (response.data.templates) {
+            return response.data.templates;
+        } else {
+            logger.warn(`No templates returned for case: ${caseId}`);
+            return [];
+        }
+
     },
     'CASE_PARENT_TOPICS': async ({ caseId }) => {
         const response = await workflowServiceClient(`/case/${caseId}/topic`);
-        return response.data.parentTopics;
+        if (response.data.parentTopics) {
+            return response.data.parentTopics;
+        } else {
+            logger.warn(`No parent topics returned for case: ${caseId}`);
+            return [];
+        }
     },
     'CASE_TOPICS': async ({ context }) => {
         const response = await infoServiceClient(`/topic/all/${context}`);
-        return response.data.topics;
+        if (response.data.topics) {
+            return response.data.topics;
+        } else {
+            logger.warn(`No topics returned for topic: ${context}`);
+            return [];
+        }
     }
 };
 
