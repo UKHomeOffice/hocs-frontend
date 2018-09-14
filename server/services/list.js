@@ -125,7 +125,7 @@ const lists = {
     },
     'CASE_PARENT_TOPICS': async ({ caseId }) => {
         const response = await workflowServiceClient(`/case/${caseId}/topic`);
-        return response.data.topics;
+        return response.data.parentTopics;
     },
     'CASE_TOPICS': async ({ context }) => {
         const response = await infoServiceClient(`/topic/all/${context}`);

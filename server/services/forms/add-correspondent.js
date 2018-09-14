@@ -5,7 +5,7 @@ module.exports = options => Form()
     .withField({
         component: 'text',
         props: {
-            name: 'full_name',
+            name: 'fullName',
             label: 'Full Name'
         }
     })
@@ -33,14 +33,14 @@ module.exports = options => Form()
     .withField({
         component: 'text',
         props: {
-            name: 'town_city',
+            name: 'townCity',
             label: 'Town or City'
         }
     })
     .withField({
         component: 'checkbox',
         props: {
-            name: 'is_correspondent_in_uk',
+            name: 'isCorrespondentInTheUK',
             className: 'inline',
             choices: [
                 {

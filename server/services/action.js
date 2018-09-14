@@ -120,16 +120,15 @@ const actions = {
                 if (entity === 'topic') {
                     switch (action) {
                     case 'add':
-                        // TODO: // Implement me!!!
                         return ({ callbackUrl: `/case/${caseId}/stage/${stageId}/entity/topic/${form.data['parent_topic']}/add_2` });
                     case 'add_2':
-                        // TODO: // Implement me!!!
+                        await workflowServiceClient.post(`/case/${caseId}/topic`, { ...form.data });
                         break;
                     case 'remove':
                         if (!context) {
                             throw new ActionError('Unable to remove, no context provided');
                         }
-                        // TODO: // Implement me!!!
+                        await workflowServiceClient.delete(`/case/${caseId}/topic`, { topic: context });
                         break;
                     }
                     return ({ callbackUrl: `/case/${caseId}/stage/${stageId}` });
@@ -137,13 +136,13 @@ const actions = {
                 if (entity === 'correspondent') {
                     switch (action) {
                     case 'add':
-                        // TODO: // Implement me!!!
+                        await workflowServiceClient.post(`/case/${caseId}/correspondent`, { ...form.data });
                         return ({ callbackUrl: `/case/${caseId}/stage/${stageId}` });
                     case 'remove':
                         if (!context) {
                             throw new ActionError('Unable to remove, no context provided');
                         }
-                        // TODO: // Implement me!!!
+                        await workflowServiceClient.delete(`/case/${caseId}/correspondent`, { topic: context });
                         break;
                     }
                     return ({ callbackUrl: `/case/${caseId}/stage/${stageId}` });
