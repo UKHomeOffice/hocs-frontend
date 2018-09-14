@@ -35,7 +35,7 @@ class EntityManager extends Component {
                                         {new Date(choice.timeStamp).toLocaleDateString()}
                                     </td>}
                                     {hasDownloadLink && <td className='govuk-table__cell'>
-                                        <Link to={`${baseUrl}/${entity}/${choice.value}/download`} className="govuk-link" download={choice.label} >Download</Link>
+                                        <Link to={`${baseUrl}/download/${entity}/${choice.value}`} className="govuk-link" download={choice.label} >Download</Link>
                                     </td>}
                                     {hasRemoveLink && <td className='govuk-table__cell'>
                                         <Link to={`${baseUrl}/${entity}/${choice.value}/remove`} className="govuk-link">Remove</Link>
