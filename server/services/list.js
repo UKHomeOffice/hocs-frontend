@@ -108,6 +108,34 @@ const lists = {
         } catch (error) {
             handleListFailure(list, error);
         }
+    },
+    'CASE_STANDARD_LINES': async () => {
+        // TODO: Implement me!!!
+        return [
+            { label: 'First', value: 'FIRST' },
+            { label: 'Second', value: 'SECOND' }
+        ];
+    },
+    'CASE_TEMPLATES': async () => {
+        // TODO: Implement me!!!
+        return [
+            { label: 'First', value: 'FIRST' },
+            { label: 'Second', value: 'SECOND' }
+        ];
+    },
+    'CASE_PARENT_TOPICS': async () => {
+        // TODO: Implement me!!!
+        return [
+            { label: 'Parent topic A', value: 'A' },
+            { label: 'Parent topic B', value: 'B' }
+        ];
+    },
+    'CASE_TOPICS': async () => {
+        // TODO: Implement me!!!
+        return [
+            { label: 'Child topic A', value: 'A' },
+            { label: 'Child topic B', value: 'B' }
+        ];
     }
 };
 

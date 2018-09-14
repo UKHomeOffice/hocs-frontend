@@ -213,10 +213,11 @@ module.exports = () => Form()
         ],
         props: {
             name: 'primary_topic',
-            label: 'Topic',
+            label: 'Primary topic',
             action: 'TOPIC',
             hasRemoveLink: true,
             hasAddLink: true,
+            entity: 'topic',
             choices: [
                 {
                     label: 'Topic A',
@@ -236,9 +237,10 @@ module.exports = () => Form()
         ],
         props: {
             name: 'primary_correspondent',
-            label: 'Correspondent',
+            label: 'Primary correspondent',
             disabled: true,
             action: 'CORRESPONDENT',
+            entity: 'correspondent',
             choices: [
                 {
                     label: 'Correspondent A',

@@ -2,10 +2,11 @@ const Form = require('./form-builder');
 const { docsServiceClient } = require('../../libs/request');
 
 module.exports = async options => {
+    // TODO: Move in to list service
     const response = await docsServiceClient.get(`/case/${options.caseId}/document/${options.context}`);
     const displayName = response.data.name;
     return Form(options)
-        .withTitle('Remove Document')
+        .withTitle('Remove document')
         .withField({
             component: 'paragraph',
             props: {

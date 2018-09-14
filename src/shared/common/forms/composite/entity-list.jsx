@@ -22,10 +22,11 @@ class EntityList extends Component {
 
     render() {
         const {
-            actionUrl,
+            baseUrl,
             choices,
             className,
             disabled,
+            entity,
             error,
             hasAddLink,
             hasRemoveLink,
@@ -67,7 +68,7 @@ class EntityList extends Component {
                                             </div>
                                         </td>
                                         <td className='govuk-table__cell'>
-                                            {hasRemoveLink && <Link to='/' className="govuk-link">Remove</Link>}
+                                            {hasRemoveLink && <Link to={`${baseUrl}/${entity}/${choice.value}/remove`} className="govuk-link">Remove</Link>}
                                         </td>
                                     </tr>
                                 );
@@ -75,7 +76,7 @@ class EntityList extends Component {
                             {choices.length === 0 && <Fragment>No Data.</Fragment>}
                         </tbody>
                     </table>
-                    {hasAddLink && <Link to={actionUrl} className="govuk-body govuk-link">Add a {label}</Link>}
+                    {hasAddLink && <Link to={`${baseUrl}/${entity}/add`} className="govuk-body govuk-link">Add a {entity}</Link>}
                 </fieldset>
 
             </div>
@@ -84,11 +85,12 @@ class EntityList extends Component {
 }
 
 EntityList.propTypes = {
-    actionUrl: PropTypes.string,
+    baseUrl: PropTypes.string.isRequired,
     choices: PropTypes.arrayOf(PropTypes.object),
     className: PropTypes.string,
     disabled: PropTypes.bool,
     error: PropTypes.string,
+    entity: PropTypes.string.isRequired,
     hasAddLink: PropTypes.bool,
     hasRemoveLink: PropTypes.bool,
     hint: PropTypes.string,

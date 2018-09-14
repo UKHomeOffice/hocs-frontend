@@ -1,4 +1,9 @@
 const caseCreate = require('./case-create.js');
+const addCorrespondent = require('./add-correspondent.js');
+const removeCorrespondent = require('./remove-correspondent.js');
+const addParentTopic = require('./add-parent-topic.js');
+const addTopic = require('./add-topic.js');
+const removeTopic = require('./remove-topic.js');
 const addDocument = require('./document-add.js');
 const addDocumentNew = require('./add-document.js');
 const removeDocument = require('./remove-document.js');
@@ -7,7 +12,7 @@ const addDTENDocument = require('./dten-document-add.js');
 const bulkCaseCreate = require('./bulk-case-create.js');
 const bulkAddDocument = require('./bulk-document-add.js');
 const testForm = require('./case-test.js');
-const { CREATE_CASE, BULK_CREATE_CASE, ADD_DOCUMENT, REMOVE_DOCUMENT, MANAGE_DOCUMENTS } = require('../actions/types');
+const { ADD_CORRESPONDENT, REMOVE_CORRESPONDENT, ADD_TOPIC, REMOVE_TOPIC, ADD_PARENT_TOPIC, CREATE_CASE, BULK_CREATE_CASE, ADD_DOCUMENT, REMOVE_DOCUMENT, MANAGE_DOCUMENTS } = require('../actions/types');
 
 
 const workflowDefinitions = {
@@ -96,6 +101,30 @@ const workflowDefinitions = {
             MANAGE: {
                 schema: manageDocuments,
                 action: MANAGE_DOCUMENTS
+            }
+        },
+        TOPIC: {
+            ADD: {
+                schema: addParentTopic,
+                action: ADD_PARENT_TOPIC
+            },
+            ADD_2: {
+                schema: addTopic,
+                action: ADD_TOPIC
+            },
+            REMOVE: {
+                schema: removeTopic,
+                action: REMOVE_TOPIC
+            }
+        },
+        CORRESPONDENT: {
+            ADD: {
+                schema: addCorrespondent,
+                action: ADD_CORRESPONDENT
+            },
+            REMOVE: {
+                schema: removeCorrespondent,
+                action: REMOVE_CORRESPONDENT
             }
         }
     }

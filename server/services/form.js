@@ -15,6 +15,7 @@ async function getFormSchemaFromWorkflowService({ caseId, stageId, user }) {
 async function getFormSchemaForCase(options) {
     logger.debug({ ...options });
     const form = await formRepository.getFormForCase(options);
+    await hydrateFields(form.schema.fields);
     return { ...form };
 }
 
@@ -38,6 +39,8 @@ function hydrateFields(fields, options) {
         case 'radio':
         case 'checkbox':
         case 'dropdown':
+        case 'entity-list':
+        case 'entity-manager':
             if (field.props && field.props.choices && typeof field.props.choices === 'string') {
                 field.props.choices = await listService.getList(field.props.choices, { ...options });
             }

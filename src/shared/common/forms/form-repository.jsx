@@ -64,7 +64,7 @@ export function formComponentFactory(field, options) {
     case 'entity-list':
         return renderFormComponent(EntityList, {
             key,
-            config: { ...config, actionUrl: '/' },
+            config: { ...config, baseUrl: options.baseUrl },
             data,
             errors,
             callback

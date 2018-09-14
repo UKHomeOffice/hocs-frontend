@@ -14,6 +14,7 @@ function documentAdapter(document) {
 }
 
 module.exports = async options => {
+    // TODO: Move in to list service
     const response = await docsServiceClient.get(`/case/${options.caseId}/document`);
     const choices = response.data.documents.map(documentAdapter).sort((first, second) => {
         const firstTimeStamp = first.timeStamp.toUpperCase();

@@ -99,6 +99,7 @@ const actions = {
             return handleActionSuccess(null, workflow, form);
         }
     },
+    // TODO: Refactor to use switch case on form.action!!!
     CASE: async ({ caseId, stageId, entity, context, action, form }) => {
         try {
             if (entity && action) {
@@ -115,6 +116,37 @@ const actions = {
                         break;
                     }
                     return ({ callbackUrl: `/case/${caseId}/stage/${stageId}/entity/${entity}/manage` });
+                }
+                if (entity === 'topic') {
+                    switch (action) {
+                    case 'add':
+                        // TODO: // Implement me!!!
+                        return ({ callbackUrl: `/case/${caseId}/stage/${stageId}/entity/topic/${form.data['parent_topic']}/add_2` });
+                    case 'add_2':
+                        // TODO: // Implement me!!!
+                        break;
+                    case 'remove':
+                        if (!context) {
+                            throw new ActionError('Unable to remove, no context provided');
+                        }
+                        // TODO: // Implement me!!!
+                        break;
+                    }
+                    return ({ callbackUrl: `/case/${caseId}/stage/${stageId}` });
+                }
+                if (entity === 'correspondent') {
+                    switch (action) {
+                    case 'add':
+                        // TODO: // Implement me!!!
+                        return ({ callbackUrl: `/case/${caseId}/stage/${stageId}` });
+                    case 'remove':
+                        if (!context) {
+                            throw new ActionError('Unable to remove, no context provided');
+                        }
+                        // TODO: // Implement me!!!
+                        break;
+                    }
+                    return ({ callbackUrl: `/case/${caseId}/stage/${stageId}` });
                 }
             }
         } catch (e) {
