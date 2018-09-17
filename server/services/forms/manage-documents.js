@@ -4,16 +4,23 @@ const { docsServiceClient } = require('../../libs/request');
 function documentAdapter(document) {
     const tags = [];
     tags.push(document.type);
+    tags.push(document.status);
     return {
         label: document.name,
         value: document.document_uuid,
+        timeStamp: document.timestamp,
         tags: tags.length > 0 ? tags : null
     };
 }
 
 module.exports = async options => {
+    // TODO: Move in to list service
     const response = await docsServiceClient.get(`/case/${options.caseId}/document`);
-    const choices = response.data.documents.map(documentAdapter);
+    const choices = response.data.documents.map(documentAdapter).sort((first, second) => {
+        const firstTimeStamp = first.timeStamp.toUpperCase();
+        const secondTimeStamp = second.timeStamp.toUpperCase();
+        return (firstTimeStamp < secondTimeStamp) ? 1 : -1;
+    });
     return Form()
         .withTitle('Manage documents')
         .withField({
@@ -34,7 +41,8 @@ module.exports = async options => {
         .withSecondaryAction({
             component: 'backlink',
             props: {
-                label: 'Cancel'
+                label: 'Back',
+                action: `/case/${options.caseId}/stage/${options.stageId}`
             }
         })
         .withNoPrimaryAction()

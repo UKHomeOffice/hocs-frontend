@@ -13,7 +13,7 @@ class DocumentList extends Component {
     }
 
     render() {
-        const { activeDocument, caseId, documents } = this.props;
+        const { activeDocument, caseId, stageId, documents } = this.props;
         return (
             <table className='govuk-table'>
                 <caption className='govuk-table__caption'>Documents</caption>
@@ -22,7 +22,8 @@ class DocumentList extends Component {
                         caseId && documents.map((d, i) => (
                             <tr key={i} className='govuk-table__row'>
                                 <td className='govuk-table__cell'>
-                                    <strong className='govuk-tag'>{d.type}</strong>
+                                    <strong className='govuk-tag margin-right--small'>{d.type}</strong>
+                                    <strong className='govuk-tag'>{d.status}</strong>
                                 </td>
                                 <td className='govuk-table__cell'>
                                     {d.name}
@@ -31,7 +32,7 @@ class DocumentList extends Component {
                                     {d.document_uuid && caseId && activeDocument !== d.s3_pdf_link && <a id={`${d.document_uuid}-pdf`} href={`/case/${caseId}/document/${d.s3_pdf_link}`} className='govuk-link' download={`${this.getFileName(d.name)}.pdf`} onClick={e => this._onClick(e, `${this.getFileName(d.s3_pdf_link)}.pdf`)}>Preview</a>}
                                 </td>
                                 <td className='govuk-table__cell'>
-                                    {d.document_uuid && caseId && <a href={`/case/${caseId}/document/${d.s3_orig_link}`} className='govuk-link' download={d.name} >Download</a>}
+                                    {d.document_uuid && caseId && <a href={`/case/${caseId}/stage/${stageId}/download/document/${d.s3_orig_link}`} className='govuk-link' download={d.name} >Download</a>}
                                 </td>
                             </tr>
                         ))

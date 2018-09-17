@@ -37,7 +37,8 @@ class Form extends Component {
                                 config: field.props,
                                 data,
                                 errors,
-                                callback: this.props.updateFormState
+                                callback: this.props.updateFormState,
+                                baseUrl: '/case/caseId/stage/stageId/entity'
                             });
                         })
                     }

@@ -1,7 +1,7 @@
 const Form = require('./form-builder');
 
-module.exports = () => Form()
-    .withTitle('Add document to case')
+module.exports = options => Form()
+    .withTitle('Add documents to case')
     .withField({
         component: 'dropdown',
         validation: [
@@ -27,10 +27,17 @@ module.exports = () => Form()
             name: 'add_document',
             action: 'ADD_DOCUMENT',
             documentType: 'ORIGINAL',
-            label: 'Document',
-            allowMultiple: false,
+            label: 'Documents',
+            allowMultiple: true,
             whitelist: 'DOCUMENT_EXTENSION_WHITELIST'
         }
     })
     .withPrimaryActionLabel('Add')
+    .withSecondaryAction({
+        component: 'backlink',
+        props: {
+            label: 'Back',
+            action: `/case/${options.caseId}/stage/${options.stageId}/entity/document/manage`
+        }
+    })
     .build();

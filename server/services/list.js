@@ -1,5 +1,5 @@
 const { DOCUMENT_WHITELIST } = require('../config').forContext('server');
-const { infoServiceClient } = require('../libs/request');
+const { infoServiceClient, workflowServiceClient } = require('../libs/request');
 const logger = require('../libs/logger');
 const { listDefinitions, staticListDefinitions } = require('./lists/index');
 
@@ -107,6 +107,43 @@ const lists = {
             return response.data.members.sort(compareListItems);
         } catch (error) {
             handleListFailure(list, error);
+        }
+    },
+    'CASE_STANDARD_LINES': async ({ caseId }) => {
+        const response = await workflowServiceClient(`/case/${caseId}/standard_lines`);
+        if (response.data.standardLines) {
+            return response.data.standardLines;
+        } else {
+            logger.warn(`No standard lines returned for case: ${caseId}`);
+            return [];
+        }
+    },
+    'CASE_TEMPLATES': async ({ caseId }) => {
+        const response = await workflowServiceClient(`/case/${caseId}/templates`);
+        if (response.data.templates) {
+            return response.data.templates;
+        } else {
+            logger.warn(`No templates returned for case: ${caseId}`);
+            return [];
+        }
+
+    },
+    'CASE_PARENT_TOPICS': async ({ caseId }) => {
+        const response = await workflowServiceClient(`/case/${caseId}/topic`);
+        if (response.data.parentTopics) {
+            return response.data.parentTopics;
+        } else {
+            logger.warn(`No parent topics returned for case: ${caseId}`);
+            return [];
+        }
+    },
+    'CASE_TOPICS': async ({ context }) => {
+        const response = await infoServiceClient(`/topic/all/${context}`);
+        if (response.data.topics) {
+            return response.data.topics;
+        } else {
+            logger.warn(`No topics returned for topic: ${context}`);
+            return [];
         }
     }
 };
