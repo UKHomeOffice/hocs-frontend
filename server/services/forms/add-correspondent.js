@@ -4,8 +4,11 @@ module.exports = options => Form()
     .withTitle('Record Correspondent Details')
     .withField({
         component: 'dropdown',
+        validation: [
+            'required'
+        ],
         props: {
-            name: 'correspondentType',
+            name: 'type',
             label: 'What is the correspondent type?',
             choices: [
                 {
@@ -21,29 +24,32 @@ module.exports = options => Form()
     })
     .withField({
         component: 'text',
+        validation: [
+            'required'
+        ],
         props: {
-            name: 'fullName',
+            name: 'fullname',
             label: 'Full Name'
         }
     })
     .withField({
         component: 'text',
         props: {
-            name: 'building',
+            name: 'address1',
             label: 'Building'
         }
     })
     .withField({
         component: 'text',
         props: {
-            name: 'street',
+            name: 'address2',
             label: 'Street'
         }
     })
     .withField({
         component: 'text',
         props: {
-            name: 'townCity',
+            name: 'address3',
             label: 'Town or City'
         }
     })
@@ -74,7 +80,7 @@ module.exports = options => Form()
     .withField({
         component: 'text',
         props: {
-            name: 'phone',
+            name: 'telephone',
             label: 'Telephone'
         }
     })

@@ -1,5 +1,5 @@
 const { DOCUMENT_WHITELIST } = require('../config').forContext('server');
-const { infoServiceClient, workflowServiceClient } = require('../libs/request');
+const { infoServiceClient, workflowServiceClient, caseworkServiceClient } = require('../libs/request');
 const logger = require('../libs/logger');
 const { listDefinitions, staticListDefinitions } = require('./lists/index');
 
@@ -143,6 +143,15 @@ const lists = {
             return response.data.topics;
         } else {
             logger.warn(`No topics returned for topic: ${context}`);
+            return [];
+        }
+    },
+    'CASE_CORRESPONDENTS': async ({ caseId }) => {
+        const response = await caseworkServiceClient(`/case/${caseId}/correspondent`);
+        if (response.data.correspondents) {
+            return response.data.correspondents;
+        } else {
+            logger.warn(`No correspondents returned for topic: ${caseId}`);
             return [];
         }
     }
