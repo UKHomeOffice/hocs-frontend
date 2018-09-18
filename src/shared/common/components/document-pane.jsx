@@ -64,6 +64,7 @@ class DocumentPanel extends Component {
         const { page } = this.props;
         return (
             <Fragment>
+                <h2>&nbsp;</h2>
                 {activeDocument && <Document caseId={page.caseId} activeDocument={activeDocument} />}
                 {documents && documents.length > 0 && <DocumentList
                     caseId={page.caseId}

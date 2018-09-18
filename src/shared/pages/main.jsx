@@ -30,14 +30,6 @@ class MainPage extends Component {
                         <li><Link to={'/action/bulk/workflow'}>Create cases in bulk</Link></li>
                         <li><Link to={'/action/test/form'}>View test form</Link></li>
                     </ul>
-                    <h2 className="govuk-heading-m">
-                        Secondary routes
-                    </h2>
-                    <ul className="govuk-list govuk-list--bullet">
-                        <li><Link to={'/action/random/url'}>Test 404</Link></li>
-                        <li><Link to={'/action/test/form'}>Test 403</Link></li>
-                        <li><Link to={'/error'}>Test 500</Link></li>
-                    </ul>
                     <Workstack />
                 </div>
             </div>

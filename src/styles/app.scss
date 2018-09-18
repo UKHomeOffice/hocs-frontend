@@ -40,8 +40,9 @@ $govuk-page-width: 1300px !default;
   display: block;
   height: 700px;
   width: 100%;
+  margin-top: 30px;
   margin-bottom: 30px;
-  padding: govuk-spacing(1);
+  padding: govuk-spacing(0);
 }
 
 .margin-right--small {

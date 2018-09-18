@@ -13,14 +13,14 @@ class Stage extends Component {
         } = this.props;
         return (
             <div className="govuk-grid-row">
-                <div className="govuk-grid-column-one-half">
+                <div className="govuk-grid-column-one-third">
                     <h1 className="govuk-heading-l">
                         {form && <span className="govuk-caption-l">{form && form.caseReference}</span>}
                         {title}
                     </h1>
                     {children}
                 </div>
-                <div className="govuk-grid-column-one-half">
+                <div className="govuk-grid-column-two-thirds">
                     <DocumentPane />
                 </div>
             </div>

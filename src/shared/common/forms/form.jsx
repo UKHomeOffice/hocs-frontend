@@ -68,8 +68,8 @@ Form.propTypes = {
     errors: PropTypes.object,
     method: PropTypes.string,
     schema: PropTypes.object.isRequired,
-    submitHandler: PropTypes.func.isRequired,
-    updateFormState: PropTypes.func.isRequired
+    submitHandler: PropTypes.func,
+    updateFormState: PropTypes.func
 };
 
 Form.defaultProps = {

@@ -7,6 +7,8 @@ const { workflowServiceClient } = require('../libs/request');
 
 // TODO: REFACTOR THIS, ALL OF IT, EURGH!
 
+router.get('/:caseId/document/:documentId', getDocument);
+
 router.get('/:caseId/stage/:stageId/download/document/:documentId', getDocument);
 
 router.get('/:caseId/stage/:stageId/download/standard_line/:documentId', (req, res, next) => {
