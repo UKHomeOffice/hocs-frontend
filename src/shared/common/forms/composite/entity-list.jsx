@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { ApplicationConsumer } from '../../../contexts/application.jsx';
 
 class EntityList extends Component {
 
@@ -8,7 +9,7 @@ class EntityList extends Component {
         super(props);
         const fallbackValue = this.props.choices[0] ? this.props.choices[0].value : null;
         const value = this.props.value || fallbackValue;
-        this.state = { value };
+        this.state = { ...props, value };
     }
 
     componentDidMount() {
@@ -22,7 +23,7 @@ class EntityList extends Component {
 
     render() {
         const {
-            baseUrl,
+            page,
             choices,
             className,
             disabled,
@@ -68,7 +69,7 @@ class EntityList extends Component {
                                             </div>
                                         </td>
                                         <td className='govuk-table__cell'>
-                                            {hasRemoveLink && <Link to={`${baseUrl}/${entity}/${choice.value}/remove`} className="govuk-link">Remove</Link>}
+                                            {hasRemoveLink && <Link to={`/case/${page.caseId}/stage/${page.stageId}/entity//${entity}/${choice.value}/remove`} className="govuk-link">Remove</Link>}
                                         </td>
                                     </tr>
                                 );
@@ -76,7 +77,7 @@ class EntityList extends Component {
                             {choices.length === 0 && <Fragment>No Data.</Fragment>}
                         </tbody>
                     </table>
-                    {hasAddLink && <Link to={`${baseUrl}/${entity}/add`} className="govuk-body govuk-link">Add a {entity}</Link>}
+                    {hasAddLink && <Link to={`/case/${page.caseId}/stage/${page.stageId}/entity/${entity}/add`} className="govuk-body govuk-link">Add a {entity}</Link>}
                 </fieldset>
 
             </div>
@@ -98,13 +99,21 @@ EntityList.propTypes = {
     name: PropTypes.string.isRequired,
     type: PropTypes.string,
     updateState: PropTypes.func.isRequired,
-    value: PropTypes.string
+    value: PropTypes.string,
+    page: PropTypes.object.isRequired
 };
 
 EntityList.defaultProps = {
     choices: [],
     disabled: false,
-    type: 'radio'
+    type: 'radio',
+    page: {}
 };
 
-export default EntityList;
+const WrappedEntityList = props => (
+    <ApplicationConsumer>
+        {({ page }) => <EntityList {...props} page={page} />}
+    </ApplicationConsumer>
+);
+
+export default WrappedEntityList;

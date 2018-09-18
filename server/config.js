@@ -41,7 +41,7 @@ const config = {
         },
         AWS: {
             S3: {
-                BUCKET_NAME: process.env.S3_BUCKET || 'hocs-untrusted-bucket',
+                BUCKET_NAME: process.env.S3_BUCKET || 'cs-dev-untrusted-s3',
                 ACCESS_KEY: process.env.S3_ACCESS_KEY || 'UNSET',
                 SECRET_ACCESS_KEY: process.env.S3_SECRET_ACCESS_KEY || 'UNSET',
                 ENDPOINT: isProduction ? null : process.env.S3_ENDPOINT || 'http://localhost:4572',

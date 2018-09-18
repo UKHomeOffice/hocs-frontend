@@ -1,19 +1,29 @@
 const Form = require('./form-builder');
 
 module.exports = options => Form()
-    .withTitle('Add correspondent to case')
+    .withTitle('Record Correspondent Details')
     .withField({
-        component: 'text',
+        component: 'dropdown',
         props: {
-            name: 'fullName',
-            label: 'Full Name'
+            name: 'correspondentType',
+            label: 'What is the correspondent type?',
+            choices: [
+                {
+                    label: 'Correspondent',
+                    value: 'CORRESPONDENT'
+                },
+                {
+                    label: 'Other',
+                    value: 'OTHER'
+                }
+            ]
         }
     })
     .withField({
         component: 'text',
         props: {
-            name: 'postcode',
-            label: 'Postcode'
+            name: 'fullName',
+            label: 'Full Name'
         }
     })
     .withField({
@@ -38,16 +48,34 @@ module.exports = options => Form()
         }
     })
     .withField({
-        component: 'checkbox',
+        component: 'text',
         props: {
-            name: 'isCorrespondentInTheUK',
-            className: 'inline',
+            name: 'postcode',
+            label: 'Postcode'
+        }
+    })
+    .withField({
+        component: 'dropdown',
+        props: {
+            name: 'country',
+            label: 'Country',
             choices: [
                 {
-                    label: 'Is the correspondent in the UK?',
-                    value: 'is_in_uk'
+                    label: 'United Kingdom',
+                    value: 'United Kingdom'
+                },
+                {
+                    label: 'Other',
+                    value: 'Other'
                 }
             ]
+        }
+    })
+    .withField({
+        component: 'text',
+        props: {
+            name: 'phone',
+            label: 'Telephone'
         }
     })
     .withField({
@@ -60,8 +88,8 @@ module.exports = options => Form()
     .withField({
         component: 'text',
         props: {
-            name: 'phone',
-            label: 'Telephone'
+            name: 'reference',
+            label: 'Does this correspondent give a case reference?'
         }
     })
     .withPrimaryActionLabel('Add')
