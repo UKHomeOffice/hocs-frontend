@@ -23,7 +23,7 @@ const mockPipe = jest.fn();
 const mockGetObject = jest.fn();
 const mockOn = jest.fn();
 jest.mock('../../libs/aws.js', () => ({
-    s3: {
+    s3_trusted: {
         getObject: (options) => {
             mockGetObject(options);
             return {

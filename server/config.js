@@ -50,6 +50,16 @@ const config = {
                 SSL_ENABLED: isProduction,
                 FORCE_PATH_STYLE: !isProduction,
                 SSE_KEY: isProduction ? process.env.S3_SSE_KEY : null
+            },
+            S3_TRUSTED: {
+                TRUSTED_BUCKET_NAME: process.env.TRUSTED_S3_BUCKET || 'cs-dev-trusted-s3',
+                TRUSTED_ACCESS_KEY: process.env.TRUSTED_S3_ACCESS_KEY || 'UNSET',
+                TRUSTED_SECRET_ACCESS_KEY: process.env.TRUSTED_S3_SECRET_ACCESS_KEY || 'UNSET',
+                TRUSTED_ENDPOINT: isProduction ? null : process.env.TRUSTED_S3_ENDPOINT || 'http://localhost:4572',
+                TRUSTED_PROXY: isProduction ? process.env.TRUSTED_OUTBOUND_PROXY : null,
+                TRUSTED_REGION: isProduction ? process.env.TRUSTED_S3_REGION : null,
+                TRUSTED_SSL_ENABLED: isProduction,
+                TRUSTED_FORCE_PATH_STYLE: !isProduction,
             }
         }
     }
