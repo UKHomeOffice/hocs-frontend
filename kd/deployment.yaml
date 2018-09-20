@@ -179,6 +179,23 @@ spec:
               secretKeyRef:
                 name: cs-dev-untrusted-s3
                 key: kms_key_id
+          - name: TRUSTED_S3_ACCESS_KEY
+            valueFrom:
+              secretKeyRef:
+                name: cs-dev-trusted-s3
+                key: access_key_id
+          - name: TRUSTED_S3_SECRET_ACCESS_KEY
+            valueFrom:
+              secretKeyRef:
+                name: cs-dev-trusted-s3
+                key: secret_access_key
+          - name: TRUSTESD_S3_REGION
+            value: 'eu-west-2'
+          - name: TRUSTED_S3_BUCKET
+            valueFrom:
+              secretKeyRef:
+                name: cs-dev-trusted-s3
+                key: bucket_name
           - name: WORKFLOW_BASIC_AUTH
             valueFrom:
               secretKeyRef:
