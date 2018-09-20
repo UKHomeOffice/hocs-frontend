@@ -4,7 +4,7 @@ const { DocumentError, DocumentNotFoundError } = require('../models/error');
 const { s3_trusted } = require('../libs/aws');
 
 function getDocument(req, res, next) {
-    logger.debug(`Requesting document: ${req.params.documentId}`);
+    logger.info(`Requesting document: ${req.params.documentId}`);
     res.setHeader('Cache-Control', 'max-age=86400');
     const readStream = s3_trusted.getObject({
         Bucket: 'cs-dev-trusted-s3',
@@ -13,8 +13,10 @@ function getDocument(req, res, next) {
 
     readStream.on('error', e => {
         if (e.statusCode === 404) {
+            logger.warn(e);
             next(new DocumentNotFoundError(`Unable to retrieve document: ${req.params.documentId}`));
         } else {
+            logger.warn(e);
             next(new DocumentError(e.message));
         }
     });
