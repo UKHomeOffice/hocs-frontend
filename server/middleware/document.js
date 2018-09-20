@@ -1,12 +1,12 @@
 const { docsServiceClient } = require('../libs/request');
 const logger = require('../libs/logger');
 const { DocumentError, DocumentNotFoundError } = require('../models/error');
-const { s3 } = require('../libs/aws');
+const { s3_trusted } = require('../libs/aws');
 
 function getDocument(req, res, next) {
     logger.debug(`Requesting document: ${req.params.documentId}`);
     res.setHeader('Cache-Control', 'max-age=86400');
-    const readStream = s3.getObject({
+    const readStream = s3_trusted.getObject({
         Bucket: 'cs-dev-trusted-s3',
         Key: req.params.documentId
     }).createReadStream();
