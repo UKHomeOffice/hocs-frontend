@@ -20,11 +20,14 @@ function getDocument(req, res, next) {
             next(new DocumentError(e.message));
         }
     });
+    logger.info(`loaded document: ${req.params.documentId}`);
 
     readStream.pipe(res);
 }
 
 async function getDocumentList(req, res, next) {
+    logger.info(`getting document list: ${req.params.caseId}`);
+
     try {
         const response = await docsServiceClient.get(`/case/${req.params.caseId}/document`);
         res.locals.documents = response.data.documents;
