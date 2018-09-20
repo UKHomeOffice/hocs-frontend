@@ -23,14 +23,18 @@
     "moduleNameMapper": {
       "\\.(css|less|scss|sass)$": "identity-obj-proxy"
     },
-    "testPathIgnorePatterns": ["\\.spec.utils.(js|jsx)$"],
+    "testPathIgnorePatterns": [
+      "\\.spec.utils.(js|jsx)$"
+    ],
     "collectCoverage": true,
-    "collectCoverageFrom": ["src/**/*.{js,jsx}", "server/**/*.js"]
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}",
+      "server/**/*.js"
+    ]
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@lennym/redis-session": "^1.0.4",
     "aws-sdk": "^2.263.1",
     "axios": "^0.18.0",
     "body-parser": "^1.18.2",
@@ -77,7 +81,10 @@
     "webpack-cli": "^2.0.15",
     "webpack-node-externals": "^1.7.2"
   },
-  "pre-commit": ["lint-staged", "jest"],
+  "pre-commit": [
+    "lint-staged",
+    "jest"
+  ],
   "lint-staged": {
     "*.js": "node_modules/eslint/bin/eslint.js --ignore-path .gitignore",
     "*.jsx": "node_modules/eslint/bin/eslint.js --ignore-path .gitignore"

@@ -54,7 +54,7 @@ describe('Form text component', () => {
             <Text name={fieldName} updateState={mockCallback} />
         );
         mockCallback.mockReset();
-        wrapper.find('input').simulate('change', event);
+        wrapper.find('input').simulate('blur', event);
         expect(mockCallback).toHaveBeenCalledTimes(1);
         expect(mockCallback).toHaveBeenCalledWith({ [fieldName]: 'Text value' });
     });

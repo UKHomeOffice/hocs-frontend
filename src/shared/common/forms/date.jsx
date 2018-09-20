@@ -118,7 +118,6 @@ DateInput.defaultProps = {
     value: '',
     minYear: 1900,
     maxYear: (new Date().getFullYear() + 100),
-    hint: 'For example, 31 03 1980'
 };
 
 export default DateInput;

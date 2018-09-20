@@ -23,7 +23,6 @@ exports[`Form radio group component should render disabled when passed 1`] = `
         class="govuk-radios__item"
       >
         <input
-          checked=""
           class="govuk-radios__input"
           id="radio-group-A"
           name="radio-group"
@@ -98,7 +97,6 @@ exports[`Form radio group component should render with default props 1`] = `
         class="govuk-radios__item"
       >
         <input
-          checked=""
           class="govuk-radios__input"
           id="radio-group-A"
           name="radio-group"
@@ -178,7 +176,6 @@ exports[`Form radio group component should render with error when passed 1`] = `
         class="govuk-radios__item"
       >
         <input
-          checked=""
           class="govuk-radios__input"
           id="radio-group-A"
           name="radio-group"
@@ -247,7 +244,7 @@ exports[`Form radio group component should render with hint when passed 1`] = `
       />
     </legend>
     <span
-      class="govuk-form-hint"
+      class="govuk-hint"
     >
       Put some text in the box below
     </span>
@@ -258,7 +255,6 @@ exports[`Form radio group component should render with hint when passed 1`] = `
         class="govuk-radios__item"
       >
         <input
-          checked=""
           class="govuk-radios__input"
           id="radio-group-A"
           name="radio-group"
@@ -335,7 +331,6 @@ exports[`Form radio group component should render with label when passed 1`] = `
         class="govuk-radios__item"
       >
         <input
-          checked=""
           class="govuk-radios__input"
           id="radio-group-A"
           name="radio-group"

@@ -1,7 +1,19 @@
-const caseCreate = require('./case-create.json');
-const addDocument = require('./document-add.json');
-const testForm = require('./case-test.json');
-const { CREATE_CASE, BULK_CREATE_CASE, ADD_DOCUMENT } = require('../actions/types');
+const caseCreate = require('./case-create.js');
+const addCorrespondent = require('./add-correspondent.js');
+const removeCorrespondent = require('./remove-correspondent.js');
+const addParentTopic = require('./add-parent-topic.js');
+const addTopic = require('./add-topic.js');
+const removeTopic = require('./remove-topic.js');
+const addDocument = require('./document-add.js');
+const addDocumentNew = require('./add-document.js');
+const removeDocument = require('./remove-document.js');
+const manageDocuments = require('./manage-documents.js');
+const addDTENDocument = require('./dten-document-add.js');
+const bulkCaseCreate = require('./bulk-case-create.js');
+const bulkAddDocument = require('./bulk-document-add.js');
+const testForm = require('./case-test.js');
+const { ADD_CORRESPONDENT, REMOVE_CORRESPONDENT, ADD_TOPIC, REMOVE_TOPIC, ADD_PARENT_TOPIC, CREATE_CASE, BULK_CREATE_CASE, ADD_DOCUMENT, REMOVE_DOCUMENT, MANAGE_DOCUMENTS } = require('../actions/types');
+
 
 const workflowDefinitions = {
     ACTION: {
@@ -16,9 +28,29 @@ const workflowDefinitions = {
                     }
                 }
             },
+            /** I see this as temp code, we should move this to a getCreateForType method in the list/workflow service **/
             DOCUMENT: {
-                schema: addDocument,
-                action: CREATE_CASE
+                MIN: {
+                    schema: addDocument,
+                    action: CREATE_CASE,
+                    next: {
+                        action: 'CONFIRMATION_SUMMARY'
+                    }
+                },
+                TRO: {
+                    schema: addDocument,
+                    action: CREATE_CASE,
+                    next: {
+                        action: 'CONFIRMATION_SUMMARY'
+                    }
+                },
+                DTEN: {
+                    schema: addDTENDocument,
+                    action: CREATE_CASE,
+                    next: {
+                        action: 'CONFIRMATION_SUMMARY'
+                    }
+                }
             }
         },
         TEST: {
@@ -30,7 +62,7 @@ const workflowDefinitions = {
         BULK: {
             requiredRole: BULK_CREATE_CASE,
             WORKFLOW: {
-                schema: caseCreate,
+                schema: bulkCaseCreate,
                 next: {
                     action: 'DOCUMENT',
                     context: {
@@ -39,42 +71,91 @@ const workflowDefinitions = {
                 }
             },
             DOCUMENT: {
-                schema: addDocument,
-                action: BULK_CREATE_CASE
+                MIN: {
+                    schema: bulkAddDocument,
+                    action: BULK_CREATE_CASE,
+                    next: {
+                        action: 'CONFIRMATION_SUMMARY'
+                    }
+                },
+                TRO: {
+                    schema: bulkAddDocument,
+                    action: BULK_CREATE_CASE,
+                    next: {
+                        action: 'CONFIRMATION_SUMMARY'
+                    }
+                }
             }
         }
     },
     CASE: {
         DOCUMENT: {
             ADD: {
-                schema: addDocument,
+                schema: addDocumentNew,
                 action: ADD_DOCUMENT
+            },
+            REMOVE: {
+                schema: removeDocument,
+                action: REMOVE_DOCUMENT
+            },
+            MANAGE: {
+                schema: manageDocuments,
+                action: MANAGE_DOCUMENTS
             }
-        }
-    },
-    STAGE: {
-        DOCUMENT: {
+        },
+        TOPIC: {
             ADD: {
-                schema: addDocument,
-                action: ADD_DOCUMENT
+                schema: addParentTopic,
+                action: ADD_PARENT_TOPIC
+            },
+            ADD_2: {
+                schema: addTopic,
+                action: ADD_TOPIC
+            },
+            REMOVE: {
+                schema: removeTopic,
+                action: REMOVE_TOPIC
+            }
+        },
+        CORRESPONDENT: {
+            ADD: {
+                schema: addCorrespondent,
+                action: ADD_CORRESPONDENT
+            },
+            REMOVE: {
+                schema: removeCorrespondent,
+                action: REMOVE_CORRESPONDENT
             }
         }
     }
 };
 
 module.exports = {
-    getForm: ({ context, workflow, action }) => {
+    getForm: ({ context, workflow, action, entity }) => {
         if (context && workflow && action) {
             try {
-                const form = workflowDefinitions[context.toUpperCase()][workflow.toUpperCase()][action.toUpperCase()];
+                let form;
+                if (action === 'DOCUMENT' || action == 'BULK_CREATE_CASE') {
+                    form = workflowDefinitions[context.toUpperCase()][workflow.toUpperCase()][action.toUpperCase()][entity.toUpperCase()];
+                } else {
+                    form = workflowDefinitions[context.toUpperCase()][workflow.toUpperCase()][action.toUpperCase()];
+                }
+
                 const requiredRole = workflowDefinitions[context.toUpperCase()][workflow.toUpperCase()].requiredRole;
-                return JSON.parse(JSON.stringify({ ...form, requiredRole }));
+                return { schema: form.schema.call(this, {}), next: form.next, action: form.action, requiredRole };
             } catch (e) {
                 throw new ReferenceError(`Unable to retrieve schema: ${e.message}`);
             }
         } else {
             throw new ReferenceError('Unable to retrieve schema: incorrect parameters');
         }
-
+    },
+    getFormForCase: async (options) => {
+        let { entity, action } = options;
+        if (entity && action) {
+            let form;
+            form = workflowDefinitions['CASE'][entity.toUpperCase()][action.toUpperCase()];
+            return { schema: await form.schema.call(this, options), action: form.action, data: {} };
+        }
     }
 };

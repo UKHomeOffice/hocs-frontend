@@ -1,21 +1,18 @@
 const router = require('express').Router();
+const { getFormForAction } = require('../../services/form');
+const authMiddleware = require('../../middleware/auth');
 const { fileMiddleware } = require('../../middleware/file');
 const { processMiddleware } = require('../../middleware/process');
 const { validationMiddleware } = require('../../middleware/validation');
-const { actionResponseMiddleware } = require('../../middleware/action');
-const authMiddleware = require('../../middleware/auth');
-const { getFormForAction } = require('../../services/form');
-
-router.use(['/:workflow/:context/:action', '/:workflow/:action'],
-    getFormForAction,
-    authMiddleware.protectAction()
-);
+const { apiActionResponseMiddleware } = require('../../middleware/action');
 
 router.post(['/:workflow/:context/:action', '/:workflow/:action'],
+    getFormForAction,
+    authMiddleware.protectAction(),
     fileMiddleware.any(),
     processMiddleware,
     validationMiddleware,
-    actionResponseMiddleware
+    apiActionResponseMiddleware
 );
 
 module.exports = router;

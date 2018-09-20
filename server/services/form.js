@@ -1,25 +1,35 @@
 const formRepository = require('./forms/index');
 const listService = require('./list');
-const logger = require('../libs/logger');
 const { workflowServiceClient } = require('../libs/request');
-const ErrorModel = require('../models/error');
+const logger = require('../libs/logger');
+const { FormServiceError } = require('../models/error');
 
-async function getFormSchemaFromWorkflowService({ caseId, stageId }) {
+async function getFormSchemaFromWorkflowService(options) {
+    const { caseId, stageId } = options;
     const response = await workflowServiceClient.get(`/case/${caseId}/stage/${stageId}`);
-    try {
-        const { stageUUID, caseReference } = response.data;
-        const { schema, data } = response.data.form;
-        return { schema, data, meta: { caseReference, stageUUID } };
-    } catch (err) {
-        logger.error(`${err.message}`);
-    }
+    const { stageUUID, caseReference } = response.data;
+    const { schema, data } = response.data.form;
+    await hydrateFields(schema.fields, options);
+    return { schema, data, meta: { caseReference, stageUUID } };
+}
+
+async function getFormSchemaForCase(options) {
+    const form = await formRepository.getFormForCase(options);
+    await hydrateFields(form.schema.fields, options);
+    return { ...form };
 }
 
 async function getFormSchema(options) {
-    const { user } = options;
+    const { action } = options;
     const form = formRepository.getForm(options);
-    await hydrateFields(form.schema.fields, { user });
-    return { ...form, data: {}, meta: {} };
+    let data = {};
+    switch (action) {
+    case 'DOCUMENT':
+        data = { 'DateReceived': new Date().toISOString().substr(0, 10) };
+        break;
+    }
+    await hydrateFields(form.schema.fields, options);
+    return { ...form, data: data, meta: {} };
 }
 
 function hydrateFields(fields, options) {
@@ -28,6 +38,8 @@ function hydrateFields(fields, options) {
         case 'radio':
         case 'checkbox':
         case 'dropdown':
+        case 'entity-list':
+        case 'entity-manager':
             if (field.props && field.props.choices && typeof field.props.choices === 'string') {
                 field.props.choices = await listService.getList(field.props.choices, { ...options });
             }
@@ -43,49 +55,35 @@ function hydrateFields(fields, options) {
     return Promise.all(promises);
 }
 
-const getFormForAction = async (req, res, callback) => {
-    const { workflow, action } = req.params;
+const getFormForAction = async (req, res, next) => {
+    const { workflow, context, action } = req.params;
     try {
-        req.form = await getFormSchema({ context: 'ACTION', workflow, action, user: req.user });
-    } catch (err) {
-        res.error = new ErrorModel({
-            status: 404,
-            title: 'Error',
-            summary: 'Form not found',
-            stackTrace: err.stack
-        }).toJson();
+        req.form = await getFormSchema({ context: 'ACTION', workflow, entity: context, action, user: req.user });
+    } catch (e) {
+        logger.error(e);
+        return next(new FormServiceError());
     }
-    callback();
+    next();
 };
 
-const getFormForCase = (req, res, callback) => {
-    const { action } = req.params;
+const getFormForCase = async (req, res, next) => {
     try {
-        req.form = getFormSchema({ context: 'WORKFLOW', action, user: req.user });
-    } catch (err) {
-        res.error = new ErrorModel({
-            status: 404,
-            title: 'Error',
-            summary: 'Form not found',
-            stackTrace: err.stack
-        }).toJson();
+        req.form = await getFormSchemaForCase(req.params);
+    } catch (e) {
+        logger.error(e);
+        return next(new FormServiceError());
     }
-    callback();
+    next();
 };
 
-const getFormForStage = async (req, res, callback) => {
-    const { caseId, stageId } = req.params;
+const getFormForStage = async (req, res, next) => {
     try {
-        req.form = await getFormSchemaFromWorkflowService({ caseId, stageId, user: req.user });
-    } catch (err) {
-        res.error = new ErrorModel({
-            status: 404,
-            title: 'Error',
-            summary: 'Form not found',
-            stackTrace: err.stack
-        }).toJson();
+        req.form = await getFormSchemaFromWorkflowService(req.params);
+    } catch (e) {
+        logger.error(e);
+        return next(new FormServiceError());
     }
-    callback();
+    next();
 };
 
 module.exports = {

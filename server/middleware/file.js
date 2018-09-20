@@ -14,7 +14,7 @@ const storage = multerS3({
     s3,
     bucket: BUCKET_NAME,
     metadata: (req, file, callback) => {
-        callback(null, { fieldName: file.fieldname });
+        callback(null, { originalName: file.originalname });
     },
     key: (req, file, callback) => {
         callback(null, uuid());

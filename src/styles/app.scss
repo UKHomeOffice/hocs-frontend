@@ -1,6 +1,7 @@
 $govuk-images-path: "/public/assets/images/";
 $govuk-fonts-path: "/public/assets/fonts/";
 $tablet-breakpoint: 641px !default;
+$govuk-page-width: 1300px !default;
 
 @import "govuk-frontend/all.scss";
 
@@ -17,4 +18,36 @@ $tablet-breakpoint: 641px !default;
   overflow-x: auto;
   color: govuk-colour("pink");
   background-color: govuk-colour("grey-4");
+}
+
+.notification {
+  @include govuk-font(14, $weight: bold);
+  background-color: govuk-colour("blue");
+  color: govuk-colour("white");
+  padding: govuk-spacing(2);
+  top: 0px;
+  right: govuk-spacing(2);
+  position: absolute;
+}
+
+.notification--error {
+  background-color: govuk-colour("red");
+}
+
+.document-preview {
+  background-color: govuk-colour("grey-4");
+  box-sizing: border-box;
+  display: block;
+  height: 700px;
+  width: 100%;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding: govuk-spacing(0);
+}
+
+.margin-right--small {
+  margin-right: govuk-spacing(1);
+  & :last-of-type {
+    margin-right: 0
+  }
 }

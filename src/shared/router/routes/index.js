@@ -1,6 +1,7 @@
 import ActionPage from '../../pages/action.jsx';
 import CasePage from '../../pages/case.jsx';
 import StagePage from '../../pages/stage.jsx';
+import CaseSummaryPage from '../../pages/summary.jsx';
 import Error from '../../layouts/error.jsx';
 import MainPage from '../../pages/main.jsx';
 
@@ -22,14 +23,29 @@ const routes = [
         component: ActionPage
     },
     {
-        path: '/case/:caseId/stage/:stageId',
+        path: '/case/:caseId/summary',
         exact: true,
-        component: StagePage,
+        component: CaseSummaryPage
     },
     {
-        path: '/case/:caseId/action/:entity/:action/',
+        path: '/case/:caseId/stage/:stageId',
         exact: true,
-        component: CasePage,
+        component: StagePage
+    },
+    {
+        path: '/case/:caseId/stage/:stageId/allocate',
+        exact: true,
+        component: StagePage
+    },
+    {
+        path: '/case/:caseId/stage/:stageId/entity/:entity/:action/',
+        exact: true,
+        component: CasePage
+    },
+    {
+        path: '/case/:caseId/stage/:stageId/entity/:entity/:context/:action/',
+        exact: true,
+        component: CasePage
     },
     {
         path: '/error',

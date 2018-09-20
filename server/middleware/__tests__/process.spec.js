@@ -41,7 +41,7 @@ describe('Process middleware', () => {
         expect(next).toHaveBeenCalledTimes(1);
     });
 
-    it('return null for fields without values', () => {
+    it('return not return data for fields without values', () => {
         const req = {
             body: {},
             query: {},
@@ -66,8 +66,7 @@ describe('Process middleware', () => {
         processMiddleware(req, res, next);
         expect(req.form).toBeDefined();
         expect(req.form.data).toBeDefined();
-        expect(req.form.data['test-field']).toBeDefined();
-        expect(req.form.data['test-field']).toBeNull();
+        expect(req.form.data['test-field']).toBeUndefined();
         expect(next).toHaveBeenCalled();
         expect(next).toHaveBeenCalledTimes(1);
     });
@@ -219,8 +218,9 @@ describe('Process middleware', () => {
 
     it('should process files when passed and attach to field', () => {
         const req = {
+            body: {},
             files: [
-                { fieldname: 'test-field-first', value: 'A' },
+                { fieldname: 'test-field', value: 'A' },
                 { fieldname: 'other-field', value: 'B' }
             ],
             query: {},
@@ -254,6 +254,7 @@ describe('Process middleware', () => {
 
     it('should process files when passed and return null for fields where no file is present', () => {
         const req = {
+            body: {},
             files: [
             ],
             query: {},

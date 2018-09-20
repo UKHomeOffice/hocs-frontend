@@ -14,6 +14,8 @@ let res = null;
 
 describe('Authentication middleware', () => {
 
+    const next = jest.fn();
+
     beforeEach(() => {
         req = {
             get: (header) => {
@@ -21,17 +23,17 @@ describe('Authentication middleware', () => {
             }
         };
         res = {};
+        next.mockReset();
     });
 
-    it('should redirect when no X-Auth-Token', () => {
+    it('should call next with error when no X-Auth-Token', () => {
         req.get = () => {
         };
-        authMiddleware(req, res, () => {
-            expect(req.user).toBeUndefined();
-            expect(res.error).toBeDefined();
-            expect(res.error.errorCode).toEqual(403);
-            expect(res.error.title).toEqual('Unauthorised');
-        });
+        authMiddleware(req, res, next);
+        expect(req.user).toBeUndefined();
+        expect(next).toHaveBeenCalled();
+        expect(next.mock.calls[0][0]).toBeInstanceOf(Error);
+        expect(next.mock.calls[0][0].status).toEqual(403);
     });
 
     it('should create and attach a User object to the request object', () => {
@@ -59,13 +61,16 @@ describe('Authentication middleware', () => {
 
 describe('Protect middleware', () => {
 
+    const next = jest.fn();
+
     beforeEach(() => {
         req = {
             user: new User({
-                roles:'TEST_ROLE'
+                roles: 'TEST_ROLE'
             })
         };
         res = {};
+        next.mockReset();
     });
 
     it('should call next when required role is on the user object', () => {
@@ -77,15 +82,17 @@ describe('Protect middleware', () => {
 
     it('should create an instance of the Error model on the request object when required role is missing', () => {
         const protectMiddleware = protect('SOME_UNDEFINED_ROLE');
-        protectMiddleware(req, res, () => {
-            expect(res.error).toBeDefined();
-            expect(res.error.errorCode).toEqual(403);
-        });
+        protectMiddleware(req, res, next);
+        expect(next).toHaveBeenCalled();
+        expect(next.mock.calls[0][0]).toBeInstanceOf(Error);
+        expect(next.mock.calls[0][0].status).toEqual(403);
     });
 
 });
 
 describe('Protect Action middleware', () => {
+
+    const next = jest.fn();
 
     beforeEach(() => {
         req = {
@@ -94,6 +101,7 @@ describe('Protect Action middleware', () => {
             })
         };
         res = {};
+        next.mockReset();
     });
 
     it('should call next when required role is on the user object', () => {
@@ -118,10 +126,10 @@ describe('Protect Action middleware', () => {
         req.form = {
             requiredRole: 'NOT_TEST_ROLE'
         };
-        protectMiddleware(req, res, () => {
-            expect(res.error).toBeDefined();
-            expect(res.error.errorCode).toEqual(403);
-        });
+        protectMiddleware(req, res, next);
+        expect(next).toHaveBeenCalled();
+        expect(next.mock.calls[0][0]).toBeInstanceOf(Error);
+        expect(next.mock.calls[0][0].status).toEqual(403);
     });
 
 });

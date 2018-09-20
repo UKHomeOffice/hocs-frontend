@@ -6,6 +6,7 @@ import Checkbox from './checkbox-group.jsx';
 import TextArea from './text-area.jsx';
 import AddDocument from './composite/document-add.jsx';
 import EntityList from './composite/entity-list.jsx';
+import EntityManager from './composite/entity-manager.jsx';
 import Button from './button.jsx';
 import BackLink from './backlink.jsx';
 import Paragraph from './paragraph.jsx';
@@ -63,7 +64,7 @@ export function formComponentFactory(field, options) {
     case 'entity-list':
         return renderFormComponent(EntityList, {
             key,
-            config: { ...config, actionUrl: '/' },
+            config: { ...config, baseUrl: options.baseUrl },
             data,
             errors,
             callback
@@ -80,6 +81,8 @@ export function formComponentFactory(field, options) {
         return renderFormComponent(Inset, { key, config });
     case 'paragraph':
         return renderFormComponent(Paragraph, { key, config });
+    case 'entity-manager':
+        return renderFormComponent(EntityManager, { key, config });
     default:
         return null;
     }

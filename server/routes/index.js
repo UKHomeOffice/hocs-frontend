@@ -2,31 +2,37 @@ const router = require('express').Router();
 const assets = require('../../build/assets.json');
 const html = require('../layout/html');
 const { authMiddleware } = require('../middleware/auth');
-const { workstackMiddleware, workstackAjaxResponseMiddleware } = require('../middleware/workstack');
-const { errorAjaxResponseMiddleware, errorMiddleware } = require('../middleware/request');
+const apiRouter = require('./api/index');
+const pageRouter = require('./page');
+const actionRouter = require('./action');
+const caseRouter = require('./case');
+const documentRouter = require('./document');
 const { renderMiddleware, renderResponseMiddleware } = require('../middleware/render');
-const formRouter = require('./forms/index');
-const actionRouter = require('./action/index');
-const caseRouter = require('./case/index');
-const stageRouter = require('./stage/index');
+const { errorMiddleware, initRequest } = require('../middleware/request');
+const { protect } = require('../middleware/auth');
+const { infoServiceClient } = require('../libs/request');
+const logger = require('../libs/logger');
 
 html.use(assets);
 
-router.use('*', authMiddleware);
-
-router.get(['/', '/page/workstack'], workstackMiddleware);
-
-router.get('/page/workstack', workstackAjaxResponseMiddleware);
-
+router.use('*', authMiddleware, initRequest);
+router.use('/', pageRouter);
+router.use('/api', apiRouter);
 router.use('/action', actionRouter);
-
 router.use('/case', caseRouter);
+router.use('/case', documentRouter);
 
-router.use('/case', stageRouter);
-
-router.post(['/action/*', '/case/*'], errorAjaxResponseMiddleware);
-
-router.use('/forms', formRouter);
+router.get('/members/refresh',
+    protect('REFRESH_MEMBERS'),
+    async (req, res, next) => {
+        try {
+            await infoServiceClient.get('/members/refresh');
+            logger.info('request to update members in info service');
+            res.status(200).send();
+        } catch (e) {
+            next(e);
+        }
+    });
 
 router.use('*',
     errorMiddleware,

@@ -12,8 +12,11 @@ class TextArea extends Component {
         this.props.updateState({ [this.props.name]: this.state.value });
     }
 
-    handleChange(e) {
+    _onChange(e) {
         this.setState({ value: e.target.value });
+    }
+
+    _onBlur(e) {
         this.props.updateState({ [this.props.name]: e.target.value });
     }
 
@@ -41,7 +44,8 @@ class TextArea extends Component {
                     name={name}
                     disabled={disabled}
                     rows={rows}
-                    onChange={e => this.handleChange(e)}
+                    onChange={e => this._onChange(e)}
+                    onBlur={e => this._onBlur(e)}
                     defaultValue={this.state.value}
                 />
             </div>

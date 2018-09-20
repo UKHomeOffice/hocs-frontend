@@ -33,12 +33,15 @@ const config = {
             WORKFLOW_SERVICE: process.env.WORKFLOW_SERVICE || 'http://localhost:8081',
             WORKFLOW_BASIC_AUTH: process.env.WORKFLOW_BASIC_AUTH ?
                 { username: workflowAuth[0], password: workflowAuth[1] } : null,
-            CASEWORK_SERVICE: process.env.CASEWORK_SERVICE || 'http://localhost:8081',
-            DOCUMENT_WHITELIST: (process.env.ALLOWED_FILE_EXTENSIONS || 'txt,doc,docx').split(',').map(extension => extension.trim())
+            CASEWORK_SERVICE: process.env.CASEWORK_SERVICE || 'http://localhost:8082',
+            DOCUMENT_SERVICE: process.env.DOCUMENT_SERVICE || 'http://localhost:8087',
+            INFO_SERVICE: process.env.INFO_SERVICE || 'http://localhost:8085',
+            DOCUMENT_WHITELIST: (process.env.ALLOWED_FILE_EXTENSIONS || 'txt,doc,docx').split(',').map(extension => extension.trim()),
+            DOCUMENT_BULK_LIMIT: process.env.DOCUMENT_BULK_LIMIT || 40
         },
         AWS: {
             S3: {
-                BUCKET_NAME: process.env.S3_BUCKET || 'hocs-untrusted-bucket',
+                BUCKET_NAME: process.env.S3_BUCKET || 'cs-dev-untrusted-s3',
                 ACCESS_KEY: process.env.S3_ACCESS_KEY || 'UNSET',
                 SECRET_ACCESS_KEY: process.env.S3_SECRET_ACCESS_KEY || 'UNSET',
                 ENDPOINT: isProduction ? null : process.env.S3_ENDPOINT || 'http://localhost:4572',
@@ -47,6 +50,16 @@ const config = {
                 SSL_ENABLED: isProduction,
                 FORCE_PATH_STYLE: !isProduction,
                 SSE_KEY: isProduction ? process.env.S3_SSE_KEY : null
+            },
+            S3_TRUSTED: {
+                TRUSTED_BUCKET_NAME: process.env.TRUSTED_S3_BUCKET || 'cs-dev-trusted-s3',
+                TRUSTED_ACCESS_KEY: process.env.TRUSTED_S3_ACCESS_KEY || 'UNSET',
+                TRUSTED_SECRET_ACCESS_KEY: process.env.TRUSTED_S3_SECRET_ACCESS_KEY || 'UNSET',
+                TRUSTED_ENDPOINT: isProduction ? null : process.env.TRUSTED_S3_ENDPOINT || 'http://localhost:4572',
+                TRUSTED_PROXY: isProduction ? process.env.TRUSTED_OUTBOUND_PROXY : null,
+                TRUSTED_REGION: isProduction ? process.env.TRUSTED_S3_REGION : null,
+                TRUSTED_SSL_ENABLED: isProduction,
+                TRUSTED_FORCE_PATH_STYLE: !isProduction,
             }
         }
     }

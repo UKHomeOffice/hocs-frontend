@@ -112,9 +112,8 @@ describe('Validation middleware', () => {
         };
         validationMiddleware(req, res, next);
         expect(req.form).toBeDefined();
-        expect(req.form.errors).toBeDefined();
-        expect(req.form.errors['test-pass']).toBeUndefined();
-        expect(req.form.errors['test-fail']).toBeDefined();
+        expect(next).toHaveBeenCalled();
+        expect(next.mock.calls[0][0]).toBeInstanceOf(Error);
     });
     it('should skip when no validation rules passed', () => {
         const req = {
@@ -130,11 +129,10 @@ describe('Validation middleware', () => {
             }
         };
         validationMiddleware(req, res, next);
-        expect(req.form).toBeDefined();
-        expect(req.form.errors).toBeDefined();
-        expect(req.form.errors['test-pass']).toBeUndefined();
+        expect(next).toHaveBeenCalled();
+        expect(next).toHaveBeenCalledWith();
     });
-    it('should create and error when validator does not exist', () => {
+    it('should create an error when validator does not exist', () => {
         const req = {
             form: {
                 data: {
@@ -148,9 +146,8 @@ describe('Validation middleware', () => {
             }
         };
         validationMiddleware(req, res, next);
-        expect(req.form).toBeDefined();
-        expect(req.error).toBeDefined();
-        expect(req.error.errorCode).toEqual(500);
+        expect(next).toHaveBeenCalled();
+        expect(next.mock.calls[0][0]).toBeInstanceOf(Error);
     });
     it('should skip if no form present', () => {
         const req = {};

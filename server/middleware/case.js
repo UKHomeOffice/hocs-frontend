@@ -1,30 +1,52 @@
 const actionService = require('../services/action');
-const ErrorModel = require('../models/error');
+const logger = require('../libs/logger');
+const { caseworkServiceClient } = require('../libs/request');
 
-const caseResponseMiddleware = async (req, res, next) => {
-    if (Object.keys(req.form.errors).length > 0) {
-        return next();
-    }
-    const { caseId, entity, action } = req.params;
+async function caseResponseMiddleware(req, res, next) {
+    const { caseId, stageId, entity, context, action } = req.params;
     const { form, user } = req;
-    const response = await actionService.performAction('CASE', { caseId, entity, action, form, user });
-    const { error, callbackUrl } = response;
-    if (error) {
-        res.error = new ErrorModel({
-            status: 500,
-            title: 'Error',
-            summary: 'Failed to perform action',
-            stackTrace: error.message
-        }).toJson();
-        return next();
-    } else {
-        if (res.noScript) {
-            return res.redirect(callbackUrl);
-        }
-        return res.status(200).send({ redirect: callbackUrl, response: {} });
+    try {
+        const response = await actionService.performAction('CASE', { caseId, stageId, entity, context, action, form, user });
+        const { callbackUrl } = response;
+        return res.redirect(callbackUrl);
+    } catch (e) {
+        return next(e);
+    } finally {
+        next();
     }
-};
+}
+
+async function caseApiResponseMiddleware(req, res, next) {
+    const { caseId, stageId, entity, context, action } = req.params;
+    const { form, user } = req;
+    try {
+        const response = await actionService.performAction('CASE', { caseId, stageId, entity, context, action, form, user });
+        const { callbackUrl } = response;
+        return res.status(200).json({ redirect: callbackUrl });
+    } catch (e) {
+        return next(e);
+    }
+}
+
+async function caseSummaryMiddleware(req, res, next) {
+    try {
+        res.data = {};
+        const { caseId } = req.params;
+        const response = await caseworkServiceClient.get(`/case/${caseId}`);
+        res.data.summary = response.data;
+        next();
+    } catch (e) {
+        logger.error(e.stack);
+    }
+}
+
+async function caseSummaryApiResponseMiddleware(req, res) {
+    res.send({ ...res.data });
+}
 
 module.exports = {
-    caseResponseMiddleware
+    caseResponseMiddleware,
+    caseApiResponseMiddleware,
+    caseSummaryMiddleware,
+    caseSummaryApiResponseMiddleware
 };

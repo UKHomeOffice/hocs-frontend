@@ -15,11 +15,10 @@ const reducer = (state, action) => {
             ...state, form: action.payload
         };
     case types.UPDATE_FORM_DATA:
+
         return {
             ...state, form: {
-                ...state.form, data: {
-                    ...state.form.data, ...action.payload
-                }
+                ...state.form, data: state.form && state.form.data ? { ...state.form.data, ...action.payload } : { ...action.payload }
             }
         };
     case types.UPDATE_FORM_ERRORS:
@@ -42,6 +41,12 @@ const reducer = (state, action) => {
         return { ...state, error: null };
     case types.UNSET_FORM:
         return { ...state, form: null };
+    case types.UPDATE_API_STATUS:
+        return { ...state, apiStatus: action.payload };
+    case types.CLEAR_API_STATUS:
+        return { ...state, apiStatus: null };
+    case types.UPDATE_PAGE_META:
+        return { ...state, page: { ...action.payload } };
     default:
         /* eslint-disable-next-line  no-console*/
         console.warn('Unsupported action');
@@ -55,7 +60,12 @@ export class ApplicationProvider extends Component {
             ...props.config,
             apiStatus: null,
             dispatch: action => {
-                this.setState(state => reducer(state, action));
+                try {
+                    this.setState(state => reducer(state, action));
+                    return Promise.resolve();
+                } catch (error) {
+                    return Promise.reject(error);
+                }
             }
         };
     }

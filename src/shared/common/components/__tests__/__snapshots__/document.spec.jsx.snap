@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Document preview component should render with default props 1`] = `
+<div
+  class="document-preview"
+>
+  <embed
+    alt="pdf"
+    height="100%"
+    pluginspage="http://www.adobe.com/products/acrobat/readstep2.html"
+    src="/case/MOCK_CASE_ID/document/MOCK_DOCUMENT_ID"
+    type="application/pdf"
+    width="100%"
+  />
+</div>
+`;
