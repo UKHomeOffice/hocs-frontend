@@ -18,7 +18,7 @@ class DocumentPanel extends Component {
         super(props);
         let activeDocument;
         if (props.documents && props.documents.length > 0) {
-            activeDocument = props.documents[0].s3_pdf_link;
+            activeDocument = props.documents[0].document_uuid;
         }
         this.state = { ...props, activeDocument };
     }
@@ -41,7 +41,7 @@ class DocumentPanel extends Component {
                                 .then(() => this.setState({
                                     documents: sortedDocuments,
                                     activeDocument: sortedDocuments ?
-                                        sortedDocuments[0].s3_pdf_link :
+                                        sortedDocuments[0].document_uuid :
                                         null
                                 }));
                         })
