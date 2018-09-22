@@ -20,8 +20,8 @@ const mockCaseData = {
             type: 'DOCUMENT_TYPE',
             name: 'DOCUMENT_NAME',
             status: 'DOCUMENT_STATUS',
-            document_uuid: 'DOCUMENT_UUID',
-            timestamp: 'DOCUMENT_TIMESTAMP'
+            uuid: 'UUID',
+            created: 'DOCUMENT_TIMESTAMP'
         }
     ]
 };

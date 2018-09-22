@@ -6,7 +6,7 @@ const mockDocuments = [
         type: 'DOCUMENT_TYPE',
         name: 'DOCUMENT_NAME',
         status: 'DOCUMENT_STATUS',
-        document_uuid: 'DOCUMENT_UUID',
+        uuid: 'UUID',
         timestamp: 'DOCUMENT_TIMESTAMP'
     }
 ];

@@ -30,7 +30,7 @@ Array [
         <td
           class="govuk-table__cell "
         >
-          DOCUMENT_UUID
+          UUID
         </td>
       </tr>
       <tr
@@ -74,9 +74,7 @@ Array [
         </th>
         <td
           class="govuk-table__cell "
-        >
-          DOCUMENT_TIMESTAMP
-        </td>
+        />
       </tr>
     </tbody>
   </table>,
