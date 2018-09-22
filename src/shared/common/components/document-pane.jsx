@@ -18,7 +18,7 @@ class DocumentPanel extends Component {
         super(props);
         let activeDocument;
         if (props.documents && props.documents.length > 0) {
-            activeDocument = props.documents[0].document_uuid;
+            activeDocument = props.documents[0].uuid;
         }
         this.state = { ...props, activeDocument };
     }
@@ -32,8 +32,8 @@ class DocumentPanel extends Component {
                     axios.get(`/api/case/${page.caseId}/document`)
                         .then(response => {
                             const sortedDocuments = response.data.documents.sort((first, second) => {
-                                const firstTimeStamp = first.timestamp.toUpperCase();
-                                const secondTimeStamp = second.timestamp.toUpperCase();
+                                const firstTimeStamp = first.created.toUpperCase();
+                                const secondTimeStamp = second.created.toUpperCase();
                                 return (firstTimeStamp < secondTimeStamp) ? 1 : -1;
                             });
                             dispatch(updateApiStatus(status.REQUEST_DOCUMENT_LIST_SUCCESS))
@@ -41,7 +41,7 @@ class DocumentPanel extends Component {
                                 .then(() => this.setState({
                                     documents: sortedDocuments,
                                     activeDocument: sortedDocuments ?
-                                        sortedDocuments[0].document_uuid :
+                                        sortedDocuments[0].uuid :
                                         null
                                 }));
                         })
@@ -64,7 +64,6 @@ class DocumentPanel extends Component {
         const { page } = this.props;
         return (
             <Fragment>
-                <h2>&nbsp;</h2>
                 {activeDocument && <Document caseId={page.caseId} activeDocument={activeDocument} />}
                 {documents && documents.length > 0 && <DocumentList
                     caseId={page.caseId}

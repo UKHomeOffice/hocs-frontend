@@ -3,8 +3,8 @@ const { docsServiceClient } = require('../../libs/request');
 
 module.exports = async options => {
     // TODO: Move in to list service
-    const response = await docsServiceClient.get(`/case/${options.caseId}/document/${options.context}`);
-    const displayName = response.data.name;
+    const response = await docsServiceClient.get(`/document/${options.context}`);
+    const displayName = response.data.displayName;
     return Form(options)
         .withTitle('Remove document')
         .withField({

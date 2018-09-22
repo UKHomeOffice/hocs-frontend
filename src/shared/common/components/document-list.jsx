@@ -22,13 +22,13 @@ class DocumentList extends Component {
                                     <strong className='govuk-tag'>{d.status}</strong>
                                 </td>
                                 <td className='govuk-table__cell'>
-                                    {d.name}
+                                    {d.displayName}
                                 </td>
                                 <td className='govuk-table__cell'>
-                                    {d.document_uuid && caseId && activeDocument !== d.document_uuid && <a id={`${d.document_uuid}-pdf`} href={`/case/${caseId}/stage/${stageId}/download/document/${d.document_uuid}/pdf`} className='govuk-link' download={`${d.document_uuid}`} onClick={e => this._onClick(e, `${d.document_uuid}`)}>Preview</a>}
+                                    {d.uuid && caseId && activeDocument !== d.uuid && <a id={`${d.uuid}-pdf`} href={`/case/${caseId}/stage/${stageId}/download/document/${d.uuid}/pdf`} className='govuk-link' download={`${d.uuid}`} onClick={e => this._onClick(e, `${d.uuid}`)}>Preview</a>}
                                 </td>
                                 <td className='govuk-table__cell'>
-                                    {d.document_uuid && caseId && <a href={`/case/${caseId}/stage/${stageId}/download/document/${d.document_uuid}/original`} className='govuk-link' download={d.name} >Download</a>}
+                                    {d.uuid && caseId && <a href={`/case/${caseId}/stage/${stageId}/download/document/${d.uuid}/original`} className='govuk-link' download={d.displayName} >Download</a>}
                                 </td>
                             </tr>
                         ))

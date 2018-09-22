@@ -9,7 +9,8 @@ class Case extends Component {
         const {
             children,
             form,
-            title
+            title,
+            hasDocPreview
         } = this.props;
         return (
             <div className="govuk-grid-row">
@@ -21,17 +22,22 @@ class Case extends Component {
                     {children}
                 </div>
                 <div className="govuk-grid-column-two-thirds">
-                    <DocumentPane />
+                    { hasDocPreview && <DocumentPane/> }
                 </div>
             </div>
         );
     }
 }
 
+Case.defaultProps = {
+    hasDocPreview : true
+};
+
 Case.propTypes = {
     children: PropTypes.node,
     form: PropTypes.object,
-    title: PropTypes.string
+    title: PropTypes.string,
+    hasDocPreview : PropTypes.bool
 };
 
 export default formEnabled(Case);

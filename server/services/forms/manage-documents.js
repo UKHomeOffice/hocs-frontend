@@ -6,16 +6,16 @@ function documentAdapter(document) {
     tags.push(document.type);
     tags.push(document.status);
     return {
-        label: document.name,
-        value: document.document_uuid,
-        timeStamp: document.timestamp,
+        label: document.displayName,
+        value: document.uuid,
+        timeStamp: document.created,
         tags: tags.length > 0 ? tags : null
     };
 }
 
 module.exports = async options => {
     // TODO: Move in to list service
-    const response = await docsServiceClient.get(`/case/${options.caseId}/document`);
+    const response = await docsServiceClient.get(`/document/case/${options.caseId}`);
     const choices = response.data.documents.map(documentAdapter).sort((first, second) => {
         const firstTimeStamp = first.timeStamp.toUpperCase();
         const secondTimeStamp = second.timeStamp.toUpperCase();
