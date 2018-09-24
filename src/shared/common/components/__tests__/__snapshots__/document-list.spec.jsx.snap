@@ -19,23 +19,24 @@ exports[`Document list component should render with a document list when provide
         class="govuk-table__cell"
       >
         <strong
-          class="govuk-tag"
+          class="govuk-tag margin-right--small"
         >
           ORIGINAL
         </strong>
+        <strong
+          class="govuk-tag"
+        />
       </td>
       <td
         class="govuk-table__cell"
-      >
-        TEST_DOCUMENT_1
-      </td>
+      />
       <td
         class="govuk-table__cell"
       >
         <a
           class="govuk-link"
-          download="TEST_DOCUMENT_1.pdf"
-          href="/case/MOCK_CASE_ID/document/MOCK_S3_LINK_1"
+          download="MOCK_DOC_ID_1"
+          href="/case/MOCK_CASE_ID/stage/undefined/download/document/MOCK_DOC_ID_1/pdf"
           id="MOCK_DOC_ID_1-pdf"
         >
           Preview
@@ -46,8 +47,7 @@ exports[`Document list component should render with a document list when provide
       >
         <a
           class="govuk-link"
-          download="TEST_DOCUMENT_1"
-          href="/case/MOCK_CASE_ID/document/MOCK_ORIG_LINK_1"
+          href="/case/MOCK_CASE_ID/stage/undefined/download/document/MOCK_DOC_ID_1/original"
         >
           Download
         </a>
@@ -60,23 +60,24 @@ exports[`Document list component should render with a document list when provide
         class="govuk-table__cell"
       >
         <strong
-          class="govuk-tag"
+          class="govuk-tag margin-right--small"
         >
           ORIGINAL
         </strong>
+        <strong
+          class="govuk-tag"
+        />
       </td>
       <td
         class="govuk-table__cell"
-      >
-        TEST_DOCUMENT_2
-      </td>
+      />
       <td
         class="govuk-table__cell"
       >
         <a
           class="govuk-link"
-          download="TEST_DOCUMENT_2.pdf"
-          href="/case/MOCK_CASE_ID/document/MOCK_S3_LINK_2"
+          download="MOCK_DOC_ID_2"
+          href="/case/MOCK_CASE_ID/stage/undefined/download/document/MOCK_DOC_ID_2/pdf"
           id="MOCK_DOC_ID_2-pdf"
         >
           Preview
@@ -87,8 +88,7 @@ exports[`Document list component should render with a document list when provide
       >
         <a
           class="govuk-link"
-          download="TEST_DOCUMENT_2"
-          href="/case/MOCK_CASE_ID/document/MOCK_ORIG_LINK_2"
+          href="/case/MOCK_CASE_ID/stage/undefined/download/document/MOCK_DOC_ID_2/original"
         >
           Download
         </a>
@@ -101,23 +101,24 @@ exports[`Document list component should render with a document list when provide
         class="govuk-table__cell"
       >
         <strong
-          class="govuk-tag"
+          class="govuk-tag margin-right--small"
         >
           ORIGINAL
         </strong>
+        <strong
+          class="govuk-tag"
+        />
       </td>
       <td
         class="govuk-table__cell"
-      >
-        TEST_DOCUMENT_3
-      </td>
+      />
       <td
         class="govuk-table__cell"
       >
         <a
           class="govuk-link"
-          download="TEST_DOCUMENT_3.pdf"
-          href="/case/MOCK_CASE_ID/document/MOCK_S3_LINK_3"
+          download="MOCK_DOC_ID_3"
+          href="/case/MOCK_CASE_ID/stage/undefined/download/document/MOCK_DOC_ID_3/pdf"
           id="MOCK_DOC_ID_3-pdf"
         >
           Preview
@@ -128,8 +129,7 @@ exports[`Document list component should render with a document list when provide
       >
         <a
           class="govuk-link"
-          download="TEST_DOCUMENT_3"
-          href="/case/MOCK_CASE_ID/document/MOCK_ORIG_LINK_3"
+          href="/case/MOCK_CASE_ID/stage/undefined/download/document/MOCK_DOC_ID_3/original"
         >
           Download
         </a>

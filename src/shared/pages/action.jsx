@@ -12,7 +12,7 @@ class Action extends Component {
         } = this.props;
         return (
             <div className="govuk-grid-row">
-                <div className="govuk-grid-column-full">
+                <div className="govuk-grid-column-one-half">
                     <h1 className="govuk-heading-l">
                         {subTitle && <span className="govuk-caption-l">{subTitle}</span>}
                         {title}

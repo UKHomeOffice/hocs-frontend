@@ -1,40 +1,43 @@
-const { DOCUMENT_BULK_LIMIT } = require('../../config').forContext('server');
 const Form = require('./form-builder');
 
-module.exports = () => Form()
-    .withTitle('Create a new case')
+module.exports = options => Form()
+    .withTitle('Add documents to case')
     .withField({
-        component: 'date',
+        component: 'dropdown',
         validation: [
             'required'
         ],
-        'props': {
-            name: 'DateReceived',
-            label: 'When was the correspondence received?'
+        props: {
+            name: 'document_type',
+            label: 'Document type',
+            choices: [
+                { label: 'Original', value: 'ORIGINAL' },
+                { label: 'Draft', value: 'DRAFT' }
+            ]
         }
     })
     .withField({
         component: 'add-document',
         validation: [
             'hasWhitelistedExtension',
-            'fileLimit'
+            'fileLimit',
+            'required'
         ],
         props: {
             name: 'add_document',
             action: 'ADD_DOCUMENT',
-            hint: `There is a limit of ${DOCUMENT_BULK_LIMIT} files`,
             documentType: 'ORIGINAL',
-            className: 'button-secondary-action',
-            label: 'Are there any documents to include?',
+            label: 'Documents',
             allowMultiple: true,
             whitelist: 'DOCUMENT_EXTENSION_WHITELIST'
         }
     })
-    .withPrimaryActionLabel('Finish')
+    .withPrimaryActionLabel('Add')
     .withSecondaryAction({
         component: 'backlink',
         props: {
-            label: 'Cancel'
+            label: 'Back',
+            action: `/case/${options.caseId}/stage/${options.stageId}/entity/document/manage`
         }
     })
     .build();

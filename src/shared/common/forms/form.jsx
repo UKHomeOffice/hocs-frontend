@@ -37,11 +37,12 @@ class Form extends Component {
                                 config: field.props,
                                 data,
                                 errors,
-                                callback: this.props.updateFormState
+                                callback: this.props.updateFormState,
+                                baseUrl: '/case/caseId/stage/stageId/entity'
                             });
                         })
                     }
-                    < Submit label={schema.defaultActionLabel} />
+                    { schema.showPrimaryAction !== false && < Submit label={schema.defaultActionLabel} />}
                     {
                         schema && schema.secondaryActions && schema.secondaryActions.map((field, key) => {
                             return secondaryActionFactory(field.component, {
@@ -67,8 +68,8 @@ Form.propTypes = {
     errors: PropTypes.object,
     method: PropTypes.string,
     schema: PropTypes.object.isRequired,
-    submitHandler: PropTypes.func.isRequired,
-    updateFormState: PropTypes.func.isRequired
+    submitHandler: PropTypes.func,
+    updateFormState: PropTypes.func
 };
 
 Form.defaultProps = {

@@ -34,13 +34,14 @@ const config = {
             WORKFLOW_BASIC_AUTH: process.env.WORKFLOW_BASIC_AUTH ?
                 { username: workflowAuth[0], password: workflowAuth[1] } : null,
             CASEWORK_SERVICE: process.env.CASEWORK_SERVICE || 'http://localhost:8082',
+            DOCUMENT_SERVICE: process.env.DOCUMENT_SERVICE || 'http://localhost:8087',
             INFO_SERVICE: process.env.INFO_SERVICE || 'http://localhost:8085',
             DOCUMENT_WHITELIST: (process.env.ALLOWED_FILE_EXTENSIONS || 'txt,doc,docx').split(',').map(extension => extension.trim()),
             DOCUMENT_BULK_LIMIT: process.env.DOCUMENT_BULK_LIMIT || 40
         },
         AWS: {
             S3: {
-                BUCKET_NAME: process.env.S3_BUCKET || 'hocs-untrusted-bucket',
+                BUCKET_NAME: process.env.S3_BUCKET || 'cs-dev-untrusted-s3',
                 ACCESS_KEY: process.env.S3_ACCESS_KEY || 'UNSET',
                 SECRET_ACCESS_KEY: process.env.S3_SECRET_ACCESS_KEY || 'UNSET',
                 ENDPOINT: isProduction ? null : process.env.S3_ENDPOINT || 'http://localhost:4572',

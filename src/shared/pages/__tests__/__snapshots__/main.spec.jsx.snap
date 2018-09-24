@@ -67,55 +67,7 @@ exports[`Main page component should render with caption when passed in props 1`]
           </Link>
         </li>
       </ul>
-      <h2
-        className="govuk-heading-m"
-      >
-        Secondary routes
-      </h2>
-      <ul
-        className="govuk-list govuk-list--bullet"
-      >
-        <li>
-          <Link
-            replace={false}
-            to="/action/random/url"
-          >
-            <a
-              href="/action/random/url"
-              onClick={[Function]}
-            >
-              Test 404
-            </a>
-          </Link>
-        </li>
-        <li>
-          <Link
-            replace={false}
-            to="/action/test/form"
-          >
-            <a
-              href="/action/test/form"
-              onClick={[Function]}
-            >
-              Test 403
-            </a>
-          </Link>
-        </li>
-        <li>
-          <Link
-            replace={false}
-            to="/error"
-          >
-            <a
-              href="/error"
-              onClick={[Function]}
-            >
-              Test 500
-            </a>
-          </Link>
-        </li>
-      </ul>
-      <MOCK_WORKSTACK />
+      <div />
     </div>
   </div>
 </MainPage>
@@ -180,55 +132,7 @@ exports[`Main page component should render with default props 1`] = `
           </Link>
         </li>
       </ul>
-      <h2
-        className="govuk-heading-m"
-      >
-        Secondary routes
-      </h2>
-      <ul
-        className="govuk-list govuk-list--bullet"
-      >
-        <li>
-          <Link
-            replace={false}
-            to="/action/random/url"
-          >
-            <a
-              href="/action/random/url"
-              onClick={[Function]}
-            >
-              Test 404
-            </a>
-          </Link>
-        </li>
-        <li>
-          <Link
-            replace={false}
-            to="/action/test/form"
-          >
-            <a
-              href="/action/test/form"
-              onClick={[Function]}
-            >
-              Test 403
-            </a>
-          </Link>
-        </li>
-        <li>
-          <Link
-            replace={false}
-            to="/error"
-          >
-            <a
-              href="/error"
-              onClick={[Function]}
-            >
-              Test 500
-            </a>
-          </Link>
-        </li>
-      </ul>
-      <MOCK_WORKSTACK />
+      <div />
     </div>
   </div>
 </MainPage>

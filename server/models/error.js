@@ -59,9 +59,14 @@ class ValidationError extends ErrorModel {
 }
 
 class DocumentError extends ErrorModel {
-    constructor(message, fields) {
-        super(message, 404, 'Unable to retrieve document list');
-        this.fields = fields;
+    constructor(message) {
+        super(message, 500, 'Request failed');
+    }
+}
+
+class DocumentNotFoundError extends ErrorModel {
+    constructor(message) {
+        super(message, 404, 'Request failed');
     }
 }
 
@@ -70,6 +75,7 @@ module.exports = {
     AllocationError,
     AuthenticationError,
     DocumentError,
+    DocumentNotFoundError,
     FormSubmissionError,
     FormServiceError,
     ValidationError

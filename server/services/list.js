@@ -1,5 +1,5 @@
 const { DOCUMENT_WHITELIST } = require('../config').forContext('server');
-const { infoServiceClient } = require('../libs/request');
+const { infoServiceClient, workflowServiceClient, caseworkServiceClient } = require('../libs/request');
 const logger = require('../libs/logger');
 const { listDefinitions, staticListDefinitions } = require('./lists/index');
 
@@ -59,11 +59,11 @@ function compareListItems(first, second) {
 
 const lists = {
     'CASE_TYPES': async ({ user }) => {
-        const list = 'workflowTypes';
+        const list = listDefinitions['workflowTypes'].call(this);
         try {
             const headerRoles = user.roles.join();
-            logger.info(`Roles ${ headerRoles }`);
-            const response = await fetchList(listDefinitions[list], {
+            logger.info(`Roles ${headerRoles}`);
+            const response = await fetchList(list, {
                 headers: {
                     'X-Auth-Roles': headerRoles
                 }
@@ -76,11 +76,11 @@ const lists = {
 
     },
     'CASE_TYPES_BULK': async ({ user }) => {
-        const list = 'workflowTypesBulk';
+        const list = listDefinitions['workflowTypesBulk'].call(this);
         try {
             const headerRoles = user.roles.join();
-            logger.info(`Roles ${ headerRoles }`);
-            const response = await fetchList(listDefinitions[list], {
+            logger.info(`Roles ${headerRoles}`);
+            const response = await fetchList(list, {
                 headers: {
                     'X-Auth-Roles': headerRoles
                 }
@@ -93,6 +93,67 @@ const lists = {
     },
     'DOCUMENT_EXTENSION_WHITELIST': async () => {
         return DOCUMENT_WHITELIST;
+    },
+    'MEMBER_LIST': async ({ user }) => {
+        const list = listDefinitions['memberList'].call(this, { caseType: 'MIN' });
+        try {
+            const headerRoles = user.roles.join();
+            logger.info(`Roles ${headerRoles}`);
+            const response = await fetchList(list, {
+                headers: {
+                    'X-Auth-Roles': headerRoles
+                }
+            });
+            return response.data.members.sort(compareListItems);
+        } catch (error) {
+            handleListFailure(list, error);
+        }
+    },
+    'CASE_STANDARD_LINES': async ({ caseId }) => {
+        const response = await workflowServiceClient(`/case/${caseId}/standard_lines`);
+        if (response.data.standardLines) {
+            return response.data.standardLines;
+        } else {
+            logger.warn(`No standard lines returned for case: ${caseId}`);
+            return [];
+        }
+    },
+    'CASE_TEMPLATES': async ({ caseId }) => {
+        const response = await workflowServiceClient(`/case/${caseId}/templates`);
+        if (response.data.templates) {
+            return response.data.templates;
+        } else {
+            logger.warn(`No templates returned for case: ${caseId}`);
+            return [];
+        }
+
+    },
+    'CASE_PARENT_TOPICS': async ({ caseId }) => {
+        const response = await workflowServiceClient(`/case/${caseId}/topic`);
+        if (response.data.parentTopics) {
+            return response.data.parentTopics;
+        } else {
+            logger.warn(`No parent topics returned for case: ${caseId}`);
+            return [];
+        }
+    },
+    'CASE_TOPICS': async ({ context }) => {
+        const response = await infoServiceClient(`/topic/all/${context}`);
+        if (response.data.topics) {
+            return response.data.topics;
+        } else {
+            logger.warn(`No topics returned for topic: ${context}`);
+            return [];
+        }
+    },
+    'CASE_CORRESPONDENTS': async ({ caseId }) => {
+        const response = await caseworkServiceClient(`/case/${caseId}/correspondent`);
+        if (response.data.correspondents) {
+            return response.data.correspondents;
+        } else {
+            logger.warn(`No correspondents returned for topic: ${caseId}`);
+            return [];
+        }
     }
 };
 

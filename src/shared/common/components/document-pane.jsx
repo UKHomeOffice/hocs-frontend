@@ -10,6 +10,7 @@ import {
     setError
 } from '../../contexts/actions/index.jsx';
 import status from '../../helpers/api-status.js';
+import { Link } from 'react-router-dom';
 
 class DocumentPanel extends Component {
 
@@ -17,25 +18,30 @@ class DocumentPanel extends Component {
         super(props);
         let activeDocument;
         if (props.documents && props.documents.length > 0) {
-            activeDocument = props.documents[0].s3_pdf_link;
+            activeDocument = props.documents[0].uuid;
         }
         this.state = { ...props, activeDocument };
     }
 
     componentDidMount() {
         const { dispatch } = this.props;
-        const { documents, page } = this.state;
-        if (page && !documents) {
+        const { page } = this.state;
+        if (page && page.caseId) {
             return dispatch(updateApiStatus(status.REQUEST_DOCUMENT_LIST))
                 .then(() => {
                     axios.get(`/api/case/${page.caseId}/document`)
                         .then(response => {
+                            const sortedDocuments = response.data.documents.sort((first, second) => {
+                                const firstTimeStamp = first.created.toUpperCase();
+                                const secondTimeStamp = second.created.toUpperCase();
+                                return (firstTimeStamp < secondTimeStamp) ? 1 : -1;
+                            });
                             dispatch(updateApiStatus(status.REQUEST_DOCUMENT_LIST_SUCCESS))
                                 .then(() => dispatch(clearApiStatus()))
                                 .then(() => this.setState({
-                                    documents: response.data,
-                                    activeDocument: response.data[0] ?
-                                        response.data[0].s3_pdf_link :
+                                    documents: sortedDocuments,
+                                    activeDocument: sortedDocuments ?
+                                        sortedDocuments[0].uuid :
                                         null
                                 }));
                         })
@@ -61,10 +67,12 @@ class DocumentPanel extends Component {
                 {activeDocument && <Document caseId={page.caseId} activeDocument={activeDocument} />}
                 {documents && documents.length > 0 && <DocumentList
                     caseId={page.caseId}
+                    stageId={page.stageId}
                     documents={documents}
                     activeDocument={activeDocument}
                     clickHandler={this.setActiveDocument.bind(this)}
                 />}
+                <Link className='govuk-body govuk-link' to={`/case/${page.caseId}/stage/${page.stageId}/entity/document/manage`} >Manage documents</Link>
             </Fragment>
         );
     }

@@ -3,16 +3,28 @@ const logger = require('../libs/logger');
 const { caseworkServiceClient } = require('../libs/request');
 
 async function caseResponseMiddleware(req, res, next) {
-    const { caseId, entity, action } = req.params;
+    const { caseId, stageId, entity, context, action } = req.params;
     const { form, user } = req;
     try {
-        const response = await actionService.performAction('CASE', { caseId, entity, action, form, user });
+        const response = await actionService.performAction('CASE', { caseId, stageId, entity, context, action, form, user });
         const { callbackUrl } = response;
         return res.redirect(callbackUrl);
     } catch (e) {
         return next(e);
     } finally {
         next();
+    }
+}
+
+async function caseApiResponseMiddleware(req, res, next) {
+    const { caseId, stageId, entity, context, action } = req.params;
+    const { form, user } = req;
+    try {
+        const response = await actionService.performAction('CASE', { caseId, stageId, entity, context, action, form, user });
+        const { callbackUrl } = response;
+        return res.status(200).json({ redirect: callbackUrl });
+    } catch (e) {
+        return next(e);
     }
 }
 
@@ -28,12 +40,13 @@ async function caseSummaryMiddleware(req, res, next) {
     }
 }
 
-async function caseApiResponseMiddleware(req, res) {
+async function caseSummaryApiResponseMiddleware(req, res) {
     res.send({ ...res.data });
 }
 
 module.exports = {
     caseResponseMiddleware,
+    caseApiResponseMiddleware,
     caseSummaryMiddleware,
-    caseApiResponseMiddleware
+    caseSummaryApiResponseMiddleware
 };

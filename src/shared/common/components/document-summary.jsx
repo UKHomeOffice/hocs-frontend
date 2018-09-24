@@ -14,7 +14,7 @@ class DocumentSummary extends Component {
                             <tbody className="govuk-table__body">
                                 <tr className="govuk-table__row">
                                     <th className="govuk-table__header" scope="row">UUID</th>
-                                    <td className="govuk-table__cell ">{document.document_uuid}</td>
+                                    <td className="govuk-table__cell ">{document.uuid}</td>
                                 </tr>
                                 <tr className="govuk-table__row">
                                     <th className="govuk-table__header" scope="row">Type</th>
@@ -26,7 +26,7 @@ class DocumentSummary extends Component {
                                 </tr>
                                 <tr className="govuk-table__row">
                                     <th className="govuk-table__header" scope="row">Date added</th>
-                                    <td className="govuk-table__cell ">{document.timestamp}</td>
+                                    <td className="govuk-table__cell ">{document.created}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -38,7 +38,7 @@ class DocumentSummary extends Component {
 }
 
 DocumentSummary.propTypes = {
-    documents: PropTypes.object.isRequired
+    documents: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
 export default DocumentSummary;

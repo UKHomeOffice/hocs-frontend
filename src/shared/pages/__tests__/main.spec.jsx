@@ -3,7 +3,7 @@ import Main from '../main.jsx';
 import { MemoryRouter } from 'react-router-dom';
 
 jest.mock('../../common/components/workstack.jsx', () => (
-    'MOCK_WORKSTACK'
+    'div'
 ));
 
 describe('Main page component', () => {
