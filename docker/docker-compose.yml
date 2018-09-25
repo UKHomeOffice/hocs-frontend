@@ -17,15 +17,21 @@ services:
 
   clamd:
     image: quay.io/ukhomeofficedigital/clamav:v1.4.0
+    networks:
+      - hocs-network
     ports:
       - "3310:3310/tcp"
 
-  clamav-rest:
-     image: lokori/clamav-rest
-     environment:
-       - CLAMD_HOST=clamd
-     ports:
-       - "8086:8080"
+  clamav:
+    image: lokori/clamav-rest
+    networks:
+      - hocs-network
+    environment:
+      - CLAMD_HOST=clamd
+    ports:
+      - 8086:8080
+    depends_on:
+      - clamd
 
   localstack:
     image: localstack/localstack:latest
@@ -59,7 +65,7 @@ services:
     environment:
       AWS_ACCESS_KEY_ID: UNSET
       AWS_SECRET_ACCESS_KEY: UNSET
-      AWS_DEFAULT_REGION: eu-west-2
+      AWS_DEFAULT_REGION: 'eu-west-2'
     depends_on:
      - localstack
 
@@ -70,19 +76,26 @@ services:
     networks:
       - hocs-network
     environment:
-      USE_CLIENTSIDE: true
+      USE_CLIENTSIDE: 'true'
       WORKFLOW_SERVICE: http://workflow:8080
       CASEWORK_SERVICE: http://casework:8080
       INFO_SERVICE: http://info:8080
+      DOCUMENT_SERVICE: http://documents:8080
       ALLOWED_FILE_EXTENSIONS: 'txt,doc,docx'
       DOCUMENT_BULK_LIMIT: 40
-      S3_BUCKET: untrusted-bucket
+      S3_BUCKET: 'untrusted-bucket'
       S3_ENDPOINT: http://localstack:4572
+    depends_on:
+     - aws_cli
+     - workflow
+     - casework
+     - info
+     - documents
 
   casework:
     image: quay.io/ukhomeofficedigital/hocs-casework
     ports:
-      - 8080:8080
+      - 8081:8080
     networks:
       - hocs-network
     environment:
@@ -90,11 +103,16 @@ services:
       SERVER_PORT: 8080
       CASE_QUEUE_NAME: 'case-queue'
       CASE_QUEUE_DLQ_NAME: 'case-queue-dlq'
+      DB_HOST: 'postgres'
+      AWS_LOCAL_HOST: 'localstack'
+    depends_on:
+      - aws_cli
+      - postgres
 
   workflow:
     image: quay.io/ukhomeofficedigital/hocs-workflow
     ports:
-      - 8080:8080
+      - 8082:8080
     networks:
       - hocs-network
     environment:
@@ -102,42 +120,61 @@ services:
       SERVER_PORT: 8080
       CASE_QUEUE_NAME: 'case-queue'
       CASE_QUEUE_DLQ_NAME: 'case-queue-dlq'
+      DOCS_QUEUE_NAME: 'document-queue'
+      DOCS_QUEUE_DLQ_NAME: 'document-queue-dlq'
       HOCS_URL: 'http://localhost:8080'
       HOCS_CASE_SERVICE: 'http://casework:8080'
+      HOCS_DOCUMENT_SERVICE: 'http://documents:8080'
       HOCS_INFO_SERVICE: 'http://info:8080'
+      DB_HOST: 'postgres'
+      AWS_LOCAL_HOST: 'localstack'
+    depends_on:
+      - aws_cli
+      - postgres
 
   info:
     image: quay.io/ukhomeofficedigital/hocs-info-service
     ports:
-      - 8080:8080
+      - 8083:8080
     networks:
       - hocs-network
     environment:
       SPRING_PROFILES_ACTIVE: 'development, local'
       SERVER_PORT: 8080
+      DB_HOST: 'postgres'
+    depends_on:
+      - aws_cli
+      - postgres
 
   converter:
-    image: quay.io/ukhomeofficedigital/hocs-converter
+    image: quay.io/ukhomeofficedigital/hocs-docs-converter
     ports:
-      - 8080:8080
+      - 8084:8080
     networks:
       - hocs-network
 
   documents:
     image: quay.io/ukhomeofficedigital/hocs-docs
     ports:
-      - 8080:8080
+      - 8085:8080
     networks:
       - hocs-network
     environment:
-      SPRING_PROFILES_ACTIVE: 'development, local'
+      SPRING_PROFILES_ACTIVE: 'development, local, postgres'
       SERVER_PORT: 8080
       DOCS_QUEUE_NAME: 'document-queue'
       DOCS_QUEUE_DLQ_NAME: 'document-queue-dlq'
       CASE_QUEUE_NAME: 'case-queue'
       DOCS_TRUSTEDS3BUCKETNAME: 'trusted-bucket'
       DOCS_UNTRUSTEDS3BUCKETNAME: 'untrusted-bucket'
-      HOCSCONVERTER_ROOT: 'http://converter:8080'
+      HOCSCONVERTER_ROOT: 'http4://converter:8080'
+      CLAMAV_ROOT: 'http4://clamav:8080'
+      DB_HOST: 'postgres'
+      AWS_LOCAL_HOST: 'localstack'
+    depends_on:
+      - converter
+      - aws_cli
+      - postgres
 
 networks:
   hocs-network:
