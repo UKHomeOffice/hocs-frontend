@@ -1,19 +1,25 @@
 const Form = require('./form-builder');
+const { workflowServiceClient } = require('../../libs/request');
 
-module.exports = options => Form()
-    .withTitle('Remove topic')
-    .withField({
-        component: 'paragraph',
-        props: {
-            children: 'Remove <TOPIC> from case?'
-        }
-    })
-    .withPrimaryActionLabel('Remove')
-    .withSecondaryAction({
-        component: 'backlink',
-        props: {
-            label: 'Back',
-            action: `/case/${options.caseId}/stage/${options.stageId}`
-        }
-    })
-    .build();
+module.exports = async options => {
+    // TODO: Move in to list service
+    const response = await workflowServiceClient.get(`/case/${options.caseId}/topic/${options.context}`);
+    const displayName = response.data.label;
+    return Form()
+        .withTitle('Remove topic')
+        .withField({
+            component: 'paragraph',
+            props: {
+                children: `Remove ${displayName} from case?`
+            }
+        })
+        .withPrimaryActionLabel('Remove')
+        .withSecondaryAction({
+            component: 'backlink',
+            props: {
+                label: 'Back',
+                action: `/case/${options.caseId}/stage/${options.stageId}`
+            }
+        })
+        .build();
+};

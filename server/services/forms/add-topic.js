@@ -3,14 +3,14 @@ const Form = require('./form-builder');
 module.exports = options => Form()
     .withTitle('Add topic to case')
     .withField({
-        component: 'dropdown',
+        component: 'type-ahead',
         validation: [
             'required'
         ],
         props: {
             name: 'topic',
             label: 'Topic',
-            choices: 'CASE_TOPICS'
+            choices: 'TOPICS_CASETYPE'
         }
     })
     .withPrimaryActionLabel('Add')
@@ -18,7 +18,7 @@ module.exports = options => Form()
         component: 'backlink',
         props: {
             label: 'Back',
-            action: `/case/${options.caseId}/stage/${options.stageId}/entity/topic/add`
+            action: `/case/${options.caseId}/stage/${options.stageId}`
         }
     })
     .build();

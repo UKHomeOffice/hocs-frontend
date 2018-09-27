@@ -86,14 +86,14 @@ services:
       S3_BUCKET: 'untrusted-bucket'
       S3_ENDPOINT: http://localstack:4572
     depends_on:
-     - aws_cli
      - workflow
      - casework
      - info
      - documents
 
   casework:
-    image: quay.io/ukhomeofficedigital/hocs-casework
+    # image: quay.io/ukhomeofficedigital/hocs-casework
+    image: hocs-casework-test
     ports:
       - 8081:8080
     networks:
@@ -106,11 +106,11 @@ services:
       DB_HOST: 'postgres'
       AWS_LOCAL_HOST: 'localstack'
     depends_on:
-      - aws_cli
       - postgres
 
   workflow:
-    image: quay.io/ukhomeofficedigital/hocs-workflow
+    # image: quay.io/ukhomeofficedigital/hocs-workflow
+    image: hocs-workflow-test
     ports:
       - 8082:8080
     networks:
@@ -129,7 +129,6 @@ services:
       DB_HOST: 'postgres'
       AWS_LOCAL_HOST: 'localstack'
     depends_on:
-      - aws_cli
       - postgres
 
   info:
@@ -143,7 +142,6 @@ services:
       SERVER_PORT: 8080
       DB_HOST: 'postgres'
     depends_on:
-      - aws_cli
       - postgres
 
   converter:
@@ -173,7 +171,6 @@ services:
       AWS_LOCAL_HOST: 'localstack'
     depends_on:
       - converter
-      - aws_cli
       - postgres
 
 networks:

@@ -1,6 +1,7 @@
 const { workflowServiceClient } = require('../libs/request');
-const { CREATE_CASE, BULK_CREATE_CASE } = require('./actions/types');
+const actionTypes = require('./actions/types');
 const { ActionError } = require('../models/error');
+const logger = require('../libs/logger');
 
 function createDocumentSummaryObjects(form, type) {
     return form.schema.fields.reduce((reducer, field) => {
@@ -74,7 +75,7 @@ const actions = {
     ACTION: async ({ workflow, context, form }) => {
         if (form && form.action) {
             switch (form.action) {
-            case CREATE_CASE:
+            case actionTypes.CREATE_CASE:
                 try {
                     const response = await createCase('/case', { caseType: context, form });
                     const clientResponse = { summary: `Created a new case: ${response.data.reference}` };
@@ -82,7 +83,7 @@ const actions = {
                 } catch (e) {
                     throw new ActionError(e);
                 }
-            case BULK_CREATE_CASE: {
+            case actionTypes.BULK_CREATE_CASE: {
                 try {
                     const response = await createCase('/case/bulk', { caseType: context, form });
                     const clientResponse = { summary: `Created ${response.data.count} new case${response.data.count > 1 ? 's' : ''}` };
@@ -102,51 +103,46 @@ const actions = {
     // TODO: Refactor to use switch case on form.action!!!
     CASE: async ({ caseId, stageId, entity, context, action, form }) => {
         try {
-            if (entity && action) {
-                if (entity === 'document') {
-                    switch (action) {
-                    case 'add':
-                        await addDocument(`/case/${caseId}/document`, form);
-                        break;
-                    case 'remove':
-                        if (!context) {
-                            throw new ActionError('Unable to remove, no context provided');
-                        }
-                        await workflowServiceClient.delete(`/case/${caseId}/document/${context}`);
-                        break;
+            if (form && form.action && entity) {
+                logger.debug(`Performing action ${form.action} for case ${caseId}`);
+                switch (form.action) {
+                case actionTypes.ADD_DOCUMENT:
+                    await addDocument(`/case/${caseId}/document`, form);
+                    break;
+                case actionTypes.REMOVE_DOCUMENT:
+                    if (!context) {
+                        throw new ActionError('Unable to remove, no context provided');
                     }
-                    return ({ callbackUrl: `/case/${caseId}/stage/${stageId}/entity/${entity}/manage` });
-                }
-                if (entity === 'topic') {
-                    switch (action) {
-                    case 'add':
-                        return ({ callbackUrl: `/case/${caseId}/stage/${stageId}/entity/topic/${form.data['parent_topic']}/add_2` });
-                    case 'add_2':
-                        await workflowServiceClient.post(`/case/${caseId}/topic`, { ...form.data });
-                        break;
-                    case 'remove':
-                        if (!context) {
-                            throw new ActionError('Unable to remove, no context provided');
-                        }
-                        await workflowServiceClient.delete(`/case/${caseId}/topic`, { topic: context });
-                        break;
+                    await workflowServiceClient.delete(`/case/${caseId}/document/${context}`);
+                    break;
+                case actionTypes.ADD_TOPIC:
+                    await workflowServiceClient.post(`/case/${caseId}/topic`, { topicUUID: form.data['topic'] });
+                    break;
+                case actionTypes.REMOVE_TOPIC:
+                    if (!context) {
+                        throw new ActionError('Unable to remove, no context provided');
                     }
+                    await workflowServiceClient.delete(`/case/${caseId}/topic/${context}`);
+                    break;
+                case actionTypes.IS_MEMBER:
+                    if (form.data['isMember'] === 'true') {
+                        return ({ callbackUrl: `/case/${caseId}/stage/${stageId}/entity/member/add` });
+                    } else {
+                        return ({ callbackUrl: `/case/${caseId}/stage/${stageId}/entity/correspondent/details` });
+                    }
+                case actionTypes.SELECT_MEMBER:
+                    return ({ callbackUrl: `/case/${caseId}/stage/${stageId}/entity/member/${form.data['member']}/details` });
+                case actionTypes.ADD_CORRESPONDENT: case actionTypes.ADD_MEMBER:
+                    await workflowServiceClient.post(`/case/${caseId}/correspondent`, { ...form.data });
                     return ({ callbackUrl: `/case/${caseId}/stage/${stageId}` });
-                }
-                if (entity === 'correspondent') {
-                    switch (action) {
-                    case 'add':
-                        await workflowServiceClient.post(`/case/${caseId}/correspondent`, { ...form.data });
-                        return ({ callbackUrl: `/case/${caseId}/stage/${stageId}` });
-                    case 'remove':
-                        if (!context) {
-                            throw new ActionError('Unable to remove, no context provided');
-                        }
-                        await workflowServiceClient.delete(`/case/${caseId}/correspondent`, { topic: context });
-                        break;
+                case actionTypes.REMOVE_CORRESPONDENT:
+                    if (!context) {
+                        throw new ActionError('Unable to remove, no context provided');
                     }
-                    return ({ callbackUrl: `/case/${caseId}/stage/${stageId}` });
+                    await workflowServiceClient.delete(`/case/${caseId}/correspondent`, { correspondent: context });
+                    break;
                 }
+                return ({ callbackUrl: `/case/${caseId}/stage/${stageId}` });
             }
         } catch (e) {
             throw new ActionError(e);

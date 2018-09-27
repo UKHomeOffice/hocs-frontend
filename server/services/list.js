@@ -104,7 +104,20 @@ const lists = {
                     'X-Auth-Roles': headerRoles
                 }
             });
-            return response.data.members.sort(compareListItems);
+            const groupedList = response.data.members
+                .sort(compareListItems)
+                .reduce((reducer, item) => {
+                    const groupIndex = reducer.map(e => e.label).indexOf(item.group);
+                    if (groupIndex === -1) {
+                        reducer.push({ label: item.group, options: [{
+                            label: item.label, value: item.value }]
+                        });
+                        return reducer;
+                    }
+                    reducer[groupIndex].options.push({ label: item.label, value: item.value });
+                    return reducer;
+                }, []);
+            return groupedList;
         } catch (error) {
             handleListFailure(list, error);
         }
@@ -128,21 +141,22 @@ const lists = {
         }
 
     },
-    'CASE_PARENT_TOPICS': async ({ caseId }) => {
+    'CASE_TOPICS': async ({ caseId }) => {
         const response = await workflowServiceClient(`/case/${caseId}/topic`);
-        if (response.data.parentTopics) {
-            return response.data.parentTopics;
-        } else {
-            logger.warn(`No parent topics returned for case: ${caseId}`);
-            return [];
-        }
-    },
-    'CASE_TOPICS': async ({ context }) => {
-        const response = await infoServiceClient(`/topic/all/${context}`);
+        logger.info(JSON.stringify(response.data));
         if (response.data.topics) {
             return response.data.topics;
         } else {
-            logger.warn(`No topics returned for topic: ${context}`);
+            logger.warn(`No returned for topic for case: ${caseId}`);
+            return [];
+        }
+    },
+    'TOPICS_CASETYPE': async () => {
+        const response = await infoServiceClient('/topics/MIN');
+        if (response.data.parentTopics) {
+            return response.data.parentTopics;
+        } else {
+            logger.warn(`No returned for topic for casetype: ${''}`);
             return [];
         }
     },
@@ -151,17 +165,19 @@ const lists = {
         if (response.data.correspondents) {
             return response.data.correspondents;
         } else {
-            logger.warn(`No correspondents returned for topic: ${caseId}`);
+            logger.warn(`No correspondents returned for case: ${caseId}`);
             return [];
         }
     }
 };
 
-async function getList(list, options) {
+async function getList(listName, options) {
     try {
-        return await lists[list.toUpperCase()].call(this, options);
+        const list = await lists[listName.toUpperCase()].call(this, options);
+        logger.debug(`Returning ${list.length} items for ${listName}`);
+        return list;
     } catch (e) {
-        throw new Error(`Unable to get list for ${list}: ${e}`);
+        throw new Error(`Unable to get list for ${listName}: ${e}`);
     }
 }
 

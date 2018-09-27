@@ -43,7 +43,7 @@ class EntityManager extends Component {
                                 </tr>
                             );
                         })}
-                        {choices.length === 0 && <p className='govuk-body'>No Data.</p>}
+                        {choices.length === 0 && <p className='govuk-body'>No {entity}s</p>}
                     </tbody>
                 </table>
                 {hasAddLink && <Link to={`${baseUrl}/${entity}/add`} className="govuk-body govuk-link">{`Add ${entity}`}</Link>}

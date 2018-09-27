@@ -1,24 +1,24 @@
 const Form = require('./form-builder');
 
 module.exports = options => Form()
-    .withTitle('Add topic to case')
+    .withTitle('Add member of parliament')
     .withField({
-        component: 'dropdown',
+        component: 'type-ahead',
         validation: [
             'required'
         ],
         props: {
-            name: 'parent_topic',
-            label: 'Parent topic',
-            choices: 'CASE_PARENT_TOPICS'
+            name: 'member',
+            label: 'Member',
+            choices: 'MEMBER_LIST'
         }
     })
-    .withPrimaryActionLabel('Get topics')
+    .withPrimaryActionLabel('Add')
     .withSecondaryAction({
         component: 'backlink',
         props: {
             label: 'Back',
-            action: `/case/${options.caseId}/stage/${options.stageId}`
+            action: `/case/${options.caseId}/stage/${options.stageId}/entity/correspondent/add`
         }
     })
     .build();

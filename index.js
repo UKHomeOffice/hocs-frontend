@@ -5,7 +5,7 @@ const logger = require('./server/libs/logger');
 const listService = require('./server/services/list');
 
 const app = express();
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 7890;
 
 app.use('/public', express.static(path.join(__dirname, 'node_modules', 'govuk-frontend')));
 app.use('/public', express.static(path.join(__dirname, 'build', 'public')));
