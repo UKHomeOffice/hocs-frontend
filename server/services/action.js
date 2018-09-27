@@ -101,7 +101,7 @@ const actions = {
         }
     },
     // TODO: Refactor to use switch case on form.action!!!
-    CASE: async ({ caseId, stageId, entity, context, action, form }) => {
+    CASE: async ({ caseId, stageId, entity, context, form }) => {
         try {
             if (form && form.action && entity) {
                 logger.debug(`Performing action ${form.action} for case ${caseId}`);
