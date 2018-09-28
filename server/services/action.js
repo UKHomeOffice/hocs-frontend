@@ -139,7 +139,7 @@ const actions = {
                     if (!context) {
                         throw new ActionError('Unable to remove, no context provided');
                     }
-                    await workflowServiceClient.delete(`/case/${caseId}/correspondent`, { correspondent: context });
+                    await workflowServiceClient.delete(`/case/${caseId}/correspondent/${context}`);
                     break;
                 }
                 return ({ callbackUrl: `/case/${caseId}/stage/${stageId}` });

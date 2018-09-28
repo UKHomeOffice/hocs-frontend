@@ -160,6 +160,15 @@ const lists = {
             return [];
         }
     },
+    'CORRESPONDENT_TYPES': async ({ caseId }) => {
+        const response = await infoServiceClient('/correspondenttype');
+        if (response.data.correspondentTypes) {
+            return response.data.correspondentTypes;
+        } else {
+            logger.warn(`No correspondent types returned for case: ${caseId}`);
+            return [];
+        }
+    },
     'CASE_CORRESPONDENTS': async ({ caseId }) => {
         const response = await caseworkServiceClient(`/case/${caseId}/correspondent`);
         if (response.data.correspondents) {

@@ -10,16 +10,7 @@ module.exports = options => Form()
         props: {
             name: 'type',
             label: 'What is the correspondent type?',
-            choices: [
-                {
-                    label: 'Correspondent',
-                    value: 'CORRESPONDENT'
-                },
-                {
-                    label: 'Other',
-                    value: 'OTHER'
-                }
-            ]
+            choices: 'CORRESPONDENT_TYPES'
         }
     })
     .withField({
