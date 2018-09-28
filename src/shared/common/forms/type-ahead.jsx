@@ -18,14 +18,10 @@ class TypeAhead extends Component {
 
     componentDidMount() {
         this.setState({ componentMounted: true });
+        this.props.updateState({ [this.props.name]: this.state.value });
     }
 
     handleChange(e) {
-        this.setState({ value: e.target.value });
-        this.props.updateState({ [this.props.name]: e.target.value });
-    }
-
-    handleSelectChange(e) {
         const value = e ? e.value : null;
         this.setState({ value });
         this.props.updateState({ [this.props.name]: value });
@@ -93,7 +89,7 @@ class TypeAhead extends Component {
                     isDisabled={disabled}
                     isClearable={clearable}
                     error={error}
-                    onChange={e => this.handleSelectChange(e)}
+                    onChange={this.handleChange.bind(this)}
                     loadOptions={this.getOptions.bind(this)}
                 />
             </div >
@@ -120,7 +116,6 @@ class TypeAhead extends Component {
                     id={name}
                     name={name}
                     disabled={disabled}
-                    onChange={e => this.handleChange(e)}
                     value={this.state.value}
                 >
                     {choices && choices.map((group, i) => {
