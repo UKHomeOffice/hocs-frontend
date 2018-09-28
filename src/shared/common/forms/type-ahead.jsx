@@ -26,8 +26,9 @@ class TypeAhead extends Component {
     }
 
     handleSelectChange(e) {
-        this.setState({ value: e.value });
-        this.props.updateState({ [this.props.name]: e.value });
+        const value = e ? e.value : null;
+        this.setState({ value });
+        this.props.updateState({ [this.props.name]: value });
     }
 
     getOptions(input, callback) {
@@ -51,6 +52,7 @@ class TypeAhead extends Component {
 
     renderSelect() {
         const {
+            clearable,
             disabled,
             error,
             hint,
@@ -89,6 +91,7 @@ class TypeAhead extends Component {
                     classNamePrefix='govuk-typeahead'
                     options={choices}
                     isDisabled={disabled}
+                    isClearable={clearable}
                     error={error}
                     onChange={e => this.handleSelectChange(e)}
                     loadOptions={this.getOptions.bind(this)}
@@ -148,6 +151,7 @@ class TypeAhead extends Component {
 
 TypeAhead.propTypes = {
     choices: PropTypes.arrayOf(PropTypes.object),
+    clearable: PropTypes.bool,
     disabled: PropTypes.bool,
     error: PropTypes.string,
     hint: PropTypes.string,
@@ -158,6 +162,7 @@ TypeAhead.propTypes = {
 };
 
 TypeAhead.defaultProps = {
+    clearable: true,
     disabled: false,
     choices: []
 };
