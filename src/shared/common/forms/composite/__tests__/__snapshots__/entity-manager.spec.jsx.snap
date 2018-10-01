@@ -1,0 +1,266 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Entity list component should render with add link when passed in props 1`] = `
+Array [
+  <p
+    class="govuk-body"
+  >
+    No entitys
+  </p>,
+  <table
+    class="govuk-table"
+  >
+    <tbody
+      class="govuk-table__body"
+    />
+  </table>,
+  <a
+    class="govuk-body govuk-link"
+    href="http://localhost:8080/entity/add"
+  >
+    Add entity
+  </a>,
+]
+`;
+
+exports[`Entity list component should render with additional css when passed in props 1`] = `
+Array [
+  <p
+    class="govuk-body"
+  >
+    No entitys
+  </p>,
+  <table
+    class="govuk-table"
+  >
+    <tbody
+      class="govuk-table__body"
+    />
+  </table>,
+]
+`;
+
+exports[`Entity list component should render with created date when passed in props on choice entries 1`] = `
+<table
+  class="govuk-table"
+>
+  <tbody
+    class="govuk-table__body"
+  >
+    <tr
+      class="govuk-radios govuk-table__row"
+    >
+      <td
+        class="govuk-table__cell"
+      >
+        Choice A
+      </td>
+      <td
+        class="govuk-table__cell"
+      >
+        2018-10-1
+      </td>
+    </tr>
+    <tr
+      class="govuk-radios govuk-table__row"
+    >
+      <td
+        class="govuk-table__cell"
+      >
+        Choice B
+      </td>
+      <td
+        class="govuk-table__cell"
+      >
+        2018-10-1
+      </td>
+    </tr>
+  </tbody>
+</table>
+`;
+
+exports[`Entity list component should render with default props 1`] = `
+Array [
+  <p
+    class="govuk-body"
+  >
+    No entitys
+  </p>,
+  <table
+    class="govuk-table"
+  >
+    <tbody
+      class="govuk-table__body"
+    />
+  </table>,
+]
+`;
+
+exports[`Entity list component should render with download link when passed in props 1`] = `
+<table
+  class="govuk-table"
+>
+  <tbody
+    class="govuk-table__body"
+  >
+    <tr
+      class="govuk-radios govuk-table__row"
+    >
+      <td
+        class="govuk-table__cell"
+      >
+        Choice A
+      </td>
+      <td
+        class="govuk-table__cell"
+      >
+        <a
+          class="govuk-link"
+          download="Choice A"
+          href="http://localhost:8080/download/entity/CHOICE_A"
+        >
+          Download
+        </a>
+      </td>
+    </tr>
+    <tr
+      class="govuk-radios govuk-table__row"
+    >
+      <td
+        class="govuk-table__cell"
+      >
+        Choice B
+      </td>
+      <td
+        class="govuk-table__cell"
+      >
+        <a
+          class="govuk-link"
+          download="Choice B"
+          href="http://localhost:8080/download/entity/CHOICE_B"
+        >
+          Download
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+`;
+
+exports[`Entity list component should render with label when passed in props 1`] = `
+Array [
+  <p
+    class="govuk-body"
+  >
+    No entitys
+  </p>,
+  <table
+    class="govuk-table"
+  >
+    <caption
+      class="govuk-table__caption"
+    >
+      Test entity manager
+    </caption>
+    <tbody
+      class="govuk-table__body"
+    />
+  </table>,
+]
+`;
+
+exports[`Entity list component should render with remove link when passed in props 1`] = `
+<table
+  class="govuk-table"
+>
+  <tbody
+    class="govuk-table__body"
+  >
+    <tr
+      class="govuk-radios govuk-table__row"
+    >
+      <td
+        class="govuk-table__cell"
+      >
+        Choice A
+      </td>
+      <td
+        class="govuk-table__cell"
+      >
+        <a
+          class="govuk-link"
+          href="http://localhost:8080/entity/CHOICE_A/remove"
+        >
+          Remove
+        </a>
+      </td>
+    </tr>
+    <tr
+      class="govuk-radios govuk-table__row"
+    >
+      <td
+        class="govuk-table__cell"
+      >
+        Choice B
+      </td>
+      <td
+        class="govuk-table__cell"
+      >
+        <a
+          class="govuk-link"
+          href="http://localhost:8080/entity/CHOICE_B/remove"
+        >
+          Remove
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+`;
+
+exports[`Entity list component should render with tags when passed in props on choice entries 1`] = `
+<table
+  class="govuk-table"
+>
+  <tbody
+    class="govuk-table__body"
+  >
+    <tr
+      class="govuk-radios govuk-table__row"
+    >
+      <td
+        class="govuk-table__cell"
+      >
+        <strong
+          class="govuk-tag margin-right--small"
+        >
+          A
+        </strong>
+      </td>
+      <td
+        class="govuk-table__cell"
+      >
+        Choice A
+      </td>
+    </tr>
+    <tr
+      class="govuk-radios govuk-table__row"
+    >
+      <td
+        class="govuk-table__cell"
+      >
+        <strong
+          class="govuk-tag margin-right--small"
+        >
+          B
+        </strong>
+      </td>
+      <td
+        class="govuk-table__cell"
+      >
+        Choice B
+      </td>
+    </tr>
+  </tbody>
+</table>
+`;
