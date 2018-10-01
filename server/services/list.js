@@ -123,7 +123,7 @@ const lists = {
         }
     },
     'CASE_STANDARD_LINES': async ({ caseId }) => {
-        const response = await workflowServiceClient(`/case/${caseId}/standard_lines`);
+        const response = await workflowServiceClient.get(`/case/${caseId}/standard_lines`);
         if (response.data.standardLines) {
             return response.data.standardLines;
         } else {
@@ -132,7 +132,7 @@ const lists = {
         }
     },
     'CASE_TEMPLATES': async ({ caseId }) => {
-        const response = await workflowServiceClient(`/case/${caseId}/templates`);
+        const response = await workflowServiceClient.get(`/case/${caseId}/templates`);
         if (response.data.templates) {
             return response.data.templates;
         } else {
@@ -142,7 +142,7 @@ const lists = {
 
     },
     'CASE_TOPICS': async ({ caseId }) => {
-        const response = await workflowServiceClient(`/case/${caseId}/topic`);
+        const response = await workflowServiceClient.get(`/case/${caseId}/topic`);
         logger.info(JSON.stringify(response.data));
         if (response.data.topics) {
             return response.data.topics;
@@ -152,7 +152,7 @@ const lists = {
         }
     },
     'TOPICS_CASETYPE': async () => {
-        const response = await infoServiceClient('/topics/MIN');
+        const response = await infoServiceClient.get('/topics/MIN');
         if (response.data.parentTopics) {
             return response.data.parentTopics;
         } else {
@@ -161,7 +161,7 @@ const lists = {
         }
     },
     'CORRESPONDENT_TYPES': async ({ caseId }) => {
-        const response = await infoServiceClient('/correspondenttype');
+        const response = await infoServiceClient.get('/correspondenttype');
         if (response.data.correspondentTypes) {
             return response.data.correspondentTypes;
         } else {
@@ -170,7 +170,7 @@ const lists = {
         }
     },
     'CASE_CORRESPONDENTS': async ({ caseId }) => {
-        const response = await caseworkServiceClient(`/case/${caseId}/correspondent`);
+        const response = await caseworkServiceClient.get(`/case/${caseId}/correspondent`);
         if (response.data.correspondents) {
             return response.data.correspondents;
         } else {
