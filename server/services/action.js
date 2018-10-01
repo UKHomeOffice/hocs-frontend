@@ -100,7 +100,6 @@ const actions = {
             return handleActionSuccess(null, workflow, form);
         }
     },
-    // TODO: Refactor to use switch case on form.action!!!
     CASE: async ({ caseId, stageId, entity, context, form }) => {
         try {
             if (form && form.action && entity) {

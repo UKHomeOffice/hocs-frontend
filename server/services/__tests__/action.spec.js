@@ -1,4 +1,5 @@
-import actionService from '../action';
+const actionService = require('../action');
+const actionTypes = require('../actions/types');
 
 const mockRequestClient = jest.fn();
 
@@ -24,6 +25,10 @@ jest.mock('../../libs/request', () => {
                     mockRequestClient(body);
                     return handleMockWorkflowCreateRequest(body);
                 }
+                mockRequestClient(body);
+            },
+            delete: (url, body) => {
+                mockRequestClient(body);
             }
         }
     };
@@ -84,7 +89,7 @@ describe('Action service', () => {
     });
 
     it('should return a callback url when "CREATE_CASE" action succeeds', async () => {
-        const testForm = { ...testCreateCaseForm, action: 'CREATE_CASE' };
+        const testForm = { ...testCreateCaseForm, action: actionTypes.CREATE_CASE };
 
         const response = await actionService.performAction('ACTION', {
             workflow: 'CREATE',
@@ -99,7 +104,7 @@ describe('Action service', () => {
     });
 
     it('should return an error object when "CREATE_CASE" action fails', () => {
-        const testForm = { ...testCreateCaseForm, action: 'CREATE_CASE' };
+        const testForm = { ...testCreateCaseForm, action: actionTypes.CREATE_CASE };
 
         actionService.performAction('ACTION', {
             workflow: 'CREATE',
@@ -112,7 +117,7 @@ describe('Action service', () => {
     });
 
     it('should return a callback url when "BULK_CREATE_CASE" action succeeds', async () => {
-        const testForm = { ...testCreateCaseForm, action: 'BULK_CREATE_CASE' };
+        const testForm = { ...testCreateCaseForm, action: actionTypes.BULK_CREATE_CASE };
 
         const response = await actionService.performAction('ACTION', {
             workflow: 'BULK',
@@ -127,7 +132,7 @@ describe('Action service', () => {
     });
 
     it('should return an error object when when "BULK_CREATE_CASE" action fails', () => {
-        const testForm = { ...testCreateCaseForm, action: 'BULK_CREATE_CASE' };
+        const testForm = { ...testCreateCaseForm, action: actionTypes.BULK_CREATE_CASE };
 
         actionService.performAction('ACTION', {
             workflow: 'BULK',
@@ -151,4 +156,136 @@ describe('Action service', () => {
             .then(() => { })
             .catch(e => { expect(e).toBeInstanceOf(Error); });
     });
+
+    it('should return a callback url when "ADD_DOCUMENT" action succeeds', async () => {
+        const testForm = {
+            schema: {
+                fields: [{ component: 'add-document', props: { name: 'document_field', documentType: 'ORIGINAL' } }]
+            },
+            data: {
+                document_field: [{ originalname: 'test_document.txt', key: '/location/to/the/file' }]
+            },
+            action: actionTypes.ADD_DOCUMENT
+        };
+        const response = await actionService.performAction('CASE', {
+            caseId: 1234,
+            stageId: 5678,
+            entity: 'document',
+            context: null,
+            form: testForm
+        });
+        expect(mockRequestClient).toHaveBeenCalledTimes(1);
+        expect(response).toBeDefined();
+        expect(response).toHaveProperty('callbackUrl');
+    });
+
+    it('should return a callback url when "REMOVE_DOCUMENT" action succeeds', async () => {
+        const testForm = {
+            schema: {},
+            data: {},
+            action: actionTypes.REMOVE_DOCUMENT
+        };
+        const response = await actionService.performAction('CASE', {
+            caseId: 1234,
+            stageId: 5678,
+            entity: 'document',
+            context: 1234,
+            form: testForm
+        });
+        expect(mockRequestClient).toHaveBeenCalledTimes(1);
+        expect(response).toBeDefined();
+        expect(response).toHaveProperty('callbackUrl');
+    });
+
+    it('should return a callback url when "ADD_TOPIC" action succeeds', async () => {
+        const testForm = {
+            schema: {},
+            data: { topic: 'TEST_TOPIC' },
+            action: actionTypes.ADD_TOPIC
+        };
+        const response = await actionService.performAction('CASE', {
+            caseId: 1234,
+            stageId: 5678,
+            entity: 'topic',
+            context: null,
+            form: testForm
+        });
+        expect(mockRequestClient).toHaveBeenCalledTimes(1);
+        expect(mockRequestClient).toHaveBeenCalledWith({ topicUUID: 'TEST_TOPIC' });
+        expect(response).toBeDefined();
+        expect(response).toHaveProperty('callbackUrl');
+    });
+
+    it('should return a callback url when "REMOVE_TOPIC" action succeeds', async () => {
+        const testForm = {
+            schema: {},
+            data: {},
+            action: actionTypes.REMOVE_TOPIC
+        };
+        const response = await actionService.performAction('CASE', {
+            caseId: 1234,
+            stageId: 5678,
+            entity: 'topic',
+            context: 1234,
+            form: testForm
+        });
+        expect(mockRequestClient).toHaveBeenCalledTimes(1);
+        expect(response).toBeDefined();
+        expect(response).toHaveProperty('callbackUrl');
+    });
+
+    it('should return a callback url when "ADD_CORRESPONDENT" action succeeds', async () => {
+        const testForm = {
+            schema: {},
+            data: {},
+            action: actionTypes.ADD_CORRESPONDENT
+        };
+        const response = await actionService.performAction('CASE', {
+            caseId: 1234,
+            stageId: 5678,
+            entity: 'topic',
+            context: null,
+            form: testForm
+        });
+        expect(mockRequestClient).toHaveBeenCalledTimes(1);
+        expect(response).toBeDefined();
+        expect(response).toHaveProperty('callbackUrl');
+    });
+
+    it('should return a callback url when "ADD_MEMBER" action succeeds', async () => {
+        const testForm = {
+            schema: {},
+            data: {},
+            action: actionTypes.ADD_MEMBER
+        };
+        const response = await actionService.performAction('CASE', {
+            caseId: 1234,
+            stageId: 5678,
+            entity: 'correspondent',
+            context: null,
+            form: testForm
+        });
+        expect(mockRequestClient).toHaveBeenCalledTimes(1);
+        expect(response).toBeDefined();
+        expect(response).toHaveProperty('callbackUrl');
+    });
+
+    it('should return a callback url when "REMOVE_CORRESPONDENT" action succeeds', async () => {
+        const testForm = {
+            schema: {},
+            data: {},
+            action: actionTypes.REMOVE_CORRESPONDENT
+        };
+        const response = await actionService.performAction('CASE', {
+            caseId: 1234,
+            stageId: 5678,
+            entity: 'correspondent',
+            context: 1234,
+            form: testForm
+        });
+        expect(mockRequestClient).toHaveBeenCalledTimes(1);
+        expect(response).toBeDefined();
+        expect(response).toHaveProperty('callbackUrl');
+    });
+
 });
