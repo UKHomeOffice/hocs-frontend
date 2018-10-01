@@ -12,6 +12,7 @@ import BackLink from './backlink.jsx';
 import Paragraph from './paragraph.jsx';
 import Inset from './inset.jsx';
 import Dropdown from './dropdown.jsx';
+import TypeAhead from './type-ahead.jsx';
 import Panel from './panel.jsx';
 
 function defaultDataAdapter(name, data) {
@@ -57,6 +58,8 @@ export function formComponentFactory(field, options) {
         return renderFormComponent(TextArea, { key, config, data, errors, callback });
     case 'dropdown':
         return renderFormComponent(Dropdown, { key, config, data, errors, callback });
+    case 'type-ahead':
+        return renderFormComponent(TypeAhead, { key, config, data, errors, callback });
     case 'button':
         return renderFormComponent(Button, { key, config });
     case 'add-document':

@@ -1,5 +1,5 @@
 import React from 'react';
-import CaseDetailsSummary from '../case-details-summary.jsx';
+import CaseDetailsSummary from '../case-details-summary';
 
 const mockStages = {
     uuid: 'CASE_UUID',

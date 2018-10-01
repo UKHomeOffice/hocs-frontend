@@ -40,6 +40,7 @@ function hydrateFields(fields, options) {
         case 'dropdown':
         case 'entity-list':
         case 'entity-manager':
+        case 'type-ahead':
             if (field.props && field.props.choices && typeof field.props.choices === 'string') {
                 field.props.choices = await listService.getList(field.props.choices, { ...options });
             }
@@ -68,7 +69,7 @@ const getFormForAction = async (req, res, next) => {
 
 const getFormForCase = async (req, res, next) => {
     try {
-        req.form = await getFormSchemaForCase(req.params);
+        req.form = await getFormSchemaForCase({ ...req.params, user: req.user });
     } catch (e) {
         logger.error(e);
         return next(new FormServiceError());

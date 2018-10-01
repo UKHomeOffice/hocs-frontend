@@ -207,6 +207,16 @@ module.exports = () => Form()
         }
     })
     .withField({
+        component: 'type-ahead',
+        validation: [
+            'required'
+        ],
+        props: {
+            name: 'type-ahead',
+            label: 'Type-ahead'
+        }
+    })
+    .withField({
         component: 'entity-list',
         validation: [
             'required'

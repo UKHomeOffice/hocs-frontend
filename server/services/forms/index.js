@@ -1,7 +1,9 @@
 const caseCreate = require('./case-create.js');
 const addCorrespondent = require('./add-correspondent.js');
+const addMember = require('./add-member.js');
+const addCorrespondentDetails = require('./add-correspondent-details.js');
+const addMemberDetails = require('./add-member-details.js');
 const removeCorrespondent = require('./remove-correspondent.js');
-const addParentTopic = require('./add-parent-topic.js');
 const addTopic = require('./add-topic.js');
 const removeTopic = require('./remove-topic.js');
 const addDocument = require('./document-add.js');
@@ -12,7 +14,7 @@ const addDTENDocument = require('./dten-document-add.js');
 const bulkCaseCreate = require('./bulk-case-create.js');
 const bulkAddDocument = require('./bulk-document-add.js');
 const testForm = require('./case-test.js');
-const { ADD_CORRESPONDENT, REMOVE_CORRESPONDENT, ADD_TOPIC, REMOVE_TOPIC, ADD_PARENT_TOPIC, CREATE_CASE, BULK_CREATE_CASE, ADD_DOCUMENT, REMOVE_DOCUMENT, MANAGE_DOCUMENTS } = require('../actions/types');
+const { IS_MEMBER, ADD_MEMBER, SELECT_MEMBER, ADD_CORRESPONDENT, REMOVE_CORRESPONDENT, ADD_TOPIC, REMOVE_TOPIC, CREATE_CASE, BULK_CREATE_CASE, ADD_DOCUMENT, REMOVE_DOCUMENT, MANAGE_DOCUMENTS } = require('../actions/types');
 
 
 const workflowDefinitions = {
@@ -105,10 +107,6 @@ const workflowDefinitions = {
         },
         TOPIC: {
             ADD: {
-                schema: addParentTopic,
-                action: ADD_PARENT_TOPIC
-            },
-            ADD_2: {
                 schema: addTopic,
                 action: ADD_TOPIC
             },
@@ -120,11 +118,25 @@ const workflowDefinitions = {
         CORRESPONDENT: {
             ADD: {
                 schema: addCorrespondent,
+                action: IS_MEMBER
+            },
+            DETAILS: {
+                schema: addCorrespondentDetails,
                 action: ADD_CORRESPONDENT
             },
             REMOVE: {
                 schema: removeCorrespondent,
                 action: REMOVE_CORRESPONDENT
+            }
+        },
+        MEMBER: {
+            ADD: {
+                schema: addMember,
+                action: SELECT_MEMBER
+            },
+            DETAILS: {
+                schema: addMemberDetails,
+                action: ADD_MEMBER
             }
         }
     }

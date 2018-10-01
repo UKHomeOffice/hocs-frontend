@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { ApplicationConsumer } from '../../../contexts/application.jsx';
@@ -69,12 +69,12 @@ class EntityList extends Component {
                                             </div>
                                         </td>
                                         <td className='govuk-table__cell'>
-                                            {hasRemoveLink && <Link to={`/case/${page.caseId}/stage/${page.stageId}/entity//${entity}/${choice.value}/remove`} className="govuk-link">Remove</Link>}
+                                            {hasRemoveLink && <Link to={`/case/${page.caseId}/stage/${page.stageId}/entity/${entity}/${choice.value}/remove`} className="govuk-link">Remove</Link>}
                                         </td>
                                     </tr>
                                 );
                             })}
-                            {choices.length === 0 && <Fragment>No Data.</Fragment>}
+                            {choices.length === 0 && <p className='govuk-body'>No {entity}s</p>}
                         </tbody>
                     </table>
                     {hasAddLink && <Link to={`/case/${page.caseId}/stage/${page.stageId}/entity/${entity}/add`} className="govuk-body govuk-link">Add a {entity}</Link>}
