@@ -101,6 +101,6 @@ module.exports = async options => {
                 action: `/case/${options.caseId}/stage/${options.stageId}/entity/correspondent/add`
             }
         })
-        .withData({ ...response.data, type: 'MEMBER' })
+        .withData({ ...response.data })
         .build();
 };
