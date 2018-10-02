@@ -37,4 +37,7 @@ module.exports = () => Form()
             label: 'Cancel'
         }
     })
+    .withData({
+        'DateReceived': new Date().toISOString().substr(0, 10)
+    })
     .build();

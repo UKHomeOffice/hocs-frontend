@@ -17,12 +17,12 @@ const testForm = require('./case-test.js');
 const { IS_MEMBER, ADD_MEMBER, SELECT_MEMBER, ADD_CORRESPONDENT, REMOVE_CORRESPONDENT, ADD_TOPIC, REMOVE_TOPIC, CREATE_CASE, BULK_CREATE_CASE, ADD_DOCUMENT, REMOVE_DOCUMENT, MANAGE_DOCUMENTS } = require('../actions/types');
 
 
-const workflowDefinitions = {
+const formDefinitions = {
     ACTION: {
         CREATE: {
             requiredRole: CREATE_CASE,
             WORKFLOW: {
-                schema: caseCreate,
+                builder: caseCreate,
                 next: {
                     action: 'DOCUMENT',
                     context: {
@@ -33,21 +33,21 @@ const workflowDefinitions = {
             /** I see this as temp code, we should move this to a getCreateForType method in the list/workflow service **/
             DOCUMENT: {
                 MIN: {
-                    schema: addDocument,
+                    builder: addDocument,
                     action: CREATE_CASE,
                     next: {
                         action: 'CONFIRMATION_SUMMARY'
                     }
                 },
                 TRO: {
-                    schema: addDocument,
+                    builder: addDocument,
                     action: CREATE_CASE,
                     next: {
                         action: 'CONFIRMATION_SUMMARY'
                     }
                 },
                 DTEN: {
-                    schema: addDTENDocument,
+                    builder: addDTENDocument,
                     action: CREATE_CASE,
                     next: {
                         action: 'CONFIRMATION_SUMMARY'
@@ -58,13 +58,13 @@ const workflowDefinitions = {
         TEST: {
             requiredRole: 'TEST',
             FORM: {
-                schema: testForm
+                builder: testForm
             }
         },
         BULK: {
             requiredRole: BULK_CREATE_CASE,
             WORKFLOW: {
-                schema: bulkCaseCreate,
+                builder: bulkCaseCreate,
                 next: {
                     action: 'DOCUMENT',
                     context: {
@@ -74,14 +74,14 @@ const workflowDefinitions = {
             },
             DOCUMENT: {
                 MIN: {
-                    schema: bulkAddDocument,
+                    builder: bulkAddDocument,
                     action: BULK_CREATE_CASE,
                     next: {
                         action: 'CONFIRMATION_SUMMARY'
                     }
                 },
                 TRO: {
-                    schema: bulkAddDocument,
+                    builder: bulkAddDocument,
                     action: BULK_CREATE_CASE,
                     next: {
                         action: 'CONFIRMATION_SUMMARY'
@@ -93,49 +93,49 @@ const workflowDefinitions = {
     CASE: {
         DOCUMENT: {
             ADD: {
-                schema: addDocumentNew,
+                builder: addDocumentNew,
                 action: ADD_DOCUMENT
             },
             REMOVE: {
-                schema: removeDocument,
+                builder: removeDocument,
                 action: REMOVE_DOCUMENT
             },
             MANAGE: {
-                schema: manageDocuments,
+                builder: manageDocuments,
                 action: MANAGE_DOCUMENTS
             }
         },
         TOPIC: {
             ADD: {
-                schema: addTopic,
+                builder: addTopic,
                 action: ADD_TOPIC
             },
             REMOVE: {
-                schema: removeTopic,
+                builder: removeTopic,
                 action: REMOVE_TOPIC
             }
         },
         CORRESPONDENT: {
             ADD: {
-                schema: addCorrespondent,
+                builder: addCorrespondent,
                 action: IS_MEMBER
             },
             DETAILS: {
-                schema: addCorrespondentDetails,
+                builder: addCorrespondentDetails,
                 action: ADD_CORRESPONDENT
             },
             REMOVE: {
-                schema: removeCorrespondent,
+                builder: removeCorrespondent,
                 action: REMOVE_CORRESPONDENT
             }
         },
         MEMBER: {
             ADD: {
-                schema: addMember,
+                builder: addMember,
                 action: SELECT_MEMBER
             },
             DETAILS: {
-                schema: addMemberDetails,
+                builder: addMemberDetails,
                 action: ADD_MEMBER
             }
         }
@@ -143,18 +143,24 @@ const workflowDefinitions = {
 };
 
 module.exports = {
-    getForm: ({ context, workflow, action, entity }) => {
+    getForm: async ({ context, workflow, action, entity }) => {
         if (context && workflow && action) {
             try {
-                let form;
+                let formDefinition;
                 if (action === 'DOCUMENT' || action == 'BULK_CREATE_CASE') {
-                    form = workflowDefinitions[context.toUpperCase()][workflow.toUpperCase()][action.toUpperCase()][entity.toUpperCase()];
+                    formDefinition = formDefinitions[context.toUpperCase()][workflow.toUpperCase()][action.toUpperCase()][entity.toUpperCase()];
                 } else {
-                    form = workflowDefinitions[context.toUpperCase()][workflow.toUpperCase()][action.toUpperCase()];
+                    formDefinition = formDefinitions[context.toUpperCase()][workflow.toUpperCase()][action.toUpperCase()];
                 }
-
-                const requiredRole = workflowDefinitions[context.toUpperCase()][workflow.toUpperCase()].requiredRole;
-                return { schema: form.schema.call(this, {}), next: form.next, action: form.action, requiredRole };
+                const requiredRole = formDefinitions[context.toUpperCase()][workflow.toUpperCase()].requiredRole;
+                const form = await formDefinition.builder.call(this, {});
+                return {
+                    schema: form.schema,
+                    next: formDefinition.next,
+                    action: formDefinition.action,
+                    requiredRole,
+                    data: form.data
+                };
             } catch (e) {
                 throw new ReferenceError(`Unable to retrieve schema: ${e.message}`);
             }
@@ -165,9 +171,10 @@ module.exports = {
     getFormForCase: async (options) => {
         let { entity, action } = options;
         if (entity && action) {
-            let form;
-            form = workflowDefinitions['CASE'][entity.toUpperCase()][action.toUpperCase()];
-            return { schema: await form.schema.call(this, options), action: form.action, data: {} };
+            let formDefinition;
+            formDefinition = formDefinitions['CASE'][entity.toUpperCase()][action.toUpperCase()];
+            const form = await formDefinition.builder.call(this, options);
+            return { schema: form.schema, action: formDefinition.action, data: form.data };
         }
     }
 };

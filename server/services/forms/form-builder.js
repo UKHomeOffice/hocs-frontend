@@ -6,8 +6,9 @@ module.exports = (options) => {
         fields: options.fields || [],
         showPrimaryAction: true
     };
+    let data = options.data || {};
     return {
-        build: () => schema,
+        build: () => ({ schema, data }),
         withTitle: function(title) {
             if (title) {
                 schema.title = title;
@@ -37,6 +38,10 @@ module.exports = (options) => {
         },
         withNoPrimaryAction: function() {
             schema.showPrimaryAction = false;
+            return this;
+        },
+        withData: function(newData) {
+            data = Object.assign({}, data, newData);
             return this;
         }
     };

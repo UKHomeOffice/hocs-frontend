@@ -1,6 +1,8 @@
 const Form = require('./form-builder');
+const { infoServiceClient } = require('../../libs/request');
 
 module.exports = async options => {
+    const response = await infoServiceClient.get(`/member/${options.context}/address`);
     return Form()
         .withTitle('Member details')
         .withField({
@@ -99,5 +101,6 @@ module.exports = async options => {
                 action: `/case/${options.caseId}/stage/${options.stageId}/entity/correspondent/add`
             }
         })
+        .withData({ ...response.data, type: 'MEMBER' })
         .build();
 };

@@ -5,16 +5,14 @@ const logger = require('../libs/logger');
 
 function createDocumentSummaryObjects(form, type) {
     return form.schema.fields.reduce((reducer, field) => {
-        if (field.component === 'add-document') {
-            if (form.data[field.props.name]) {
-                form.data[field.props.name].map(file => {
-                    reducer.push({
-                        displayName: file.originalname,
-                        type: type,
-                        s3UntrustedUrl: file.key || 'key'
-                    });
+        if (field.component === 'add-document' && form.data[field.props.name]) {
+            form.data[field.props.name].map(file => {
+                reducer.push({
+                    displayName: file.originalname,
+                    type: type,
+                    s3UntrustedUrl: file.key || 'key'
                 });
-            }
+            });
         }
         return reducer;
     }, []);
@@ -73,31 +71,26 @@ function handleWorkflowSuccess(response, { caseId, stageId }) {
 
 const actions = {
     ACTION: async ({ workflow, context, form }) => {
-        if (form && form.action) {
-            switch (form.action) {
-            case actionTypes.CREATE_CASE:
-                try {
-                    const response = await createCase('/case', { caseType: context, form });
-                    const clientResponse = { summary: `Created a new case: ${response.data.reference}` };
+        try {
+            if (form && form.action) {
+                logger.debug(`Performing action ${form.action}`);
+                let response;
+                let clientResponse;
+                switch (form.action) {
+                case actionTypes.CREATE_CASE:
+                    response = await createCase('/case', { caseType: context, form });
+                    clientResponse = { summary: `Created a new case: ${response.data.reference}` };
                     return handleActionSuccess(clientResponse, workflow, form);
-                } catch (e) {
-                    throw new ActionError(e);
-                }
-            case actionTypes.BULK_CREATE_CASE: {
-                try {
-                    const response = await createCase('/case/bulk', { caseType: context, form });
-                    const clientResponse = { summary: `Created ${response.data.count} new case${response.data.count > 1 ? 's' : ''}` };
+                case actionTypes.BULK_CREATE_CASE:
+                    response = await createCase('/case/bulk', { caseType: context, form });
+                    clientResponse = { summary: `Created ${response.data.count} new case${response.data.count > 1 ? 's' : ''}` };
                     return handleActionSuccess(clientResponse, workflow, form);
-                } catch (e) {
-                    throw new ActionError(e);
                 }
+            } else {
+                return handleActionSuccess(null, workflow, form);
             }
-            default: {
-                throw new ActionError('Unsupported action');
-            }
-            }
-        } else {
-            return handleActionSuccess(null, workflow, form);
+        } catch (e) {
+            throw new ActionError(e);
         }
     },
     CASE: async ({ caseId, stageId, entity, context, form }) => {

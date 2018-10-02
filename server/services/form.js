@@ -20,36 +20,21 @@ async function getFormSchemaForCase(options) {
 }
 
 async function getFormSchema(options) {
-    const { action } = options;
-    const form = formRepository.getForm(options);
-    let data = {};
-    switch (action) {
-    case 'DOCUMENT':
-        data = { 'DateReceived': new Date().toISOString().substr(0, 10) };
-        break;
-    }
+    const form = await formRepository.getForm(options);
     await hydrateFields(form.schema.fields, options);
-    return { ...form, data: data, meta: {} };
+    return { ...form, meta: {} };
 }
 
 function hydrateFields(fields, options) {
     const promises = fields.map(async field => {
-        switch (field.component) {
-        case 'radio':
-        case 'checkbox':
-        case 'dropdown':
-        case 'entity-list':
-        case 'entity-manager':
-        case 'type-ahead':
-            if (field.props && field.props.choices && typeof field.props.choices === 'string') {
-                field.props.choices = await listService.getList(field.props.choices, { ...options });
+        if (field.props && field.props.choices) {
+            if (typeof field.props.choices === 'string') {
+                if(field.component === 'add-document') {
+                    field.props.whitelist = await listService.getList(field.props.whitelist);
+                } else {
+                    field.props.choices = await listService.getList(field.props.choices, { ...options });
+                }
             }
-            break;
-        case 'add-document':
-            if (field.props && field.props.whitelist && typeof field.props.whitelist === 'string') {
-                field.props.whitelist = await listService.getList(field.props.whitelist);
-            }
-            break;
         }
         return field;
     });

@@ -133,6 +133,7 @@ services:
 
   info:
     image: quay.io/ukhomeofficedigital/hocs-info-service
+    # image: hocs-info-service-test
     ports:
       - 8083:8080
     networks:
