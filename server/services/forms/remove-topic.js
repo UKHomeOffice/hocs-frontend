@@ -2,7 +2,6 @@ const Form = require('./form-builder');
 const { workflowServiceClient } = require('../../libs/request');
 
 module.exports = async options => {
-    // TODO: Move in to list service
     const response = await workflowServiceClient.get(`/case/${options.caseId}/topic/${options.context}`);
     const displayName = response.data.label;
     return Form()

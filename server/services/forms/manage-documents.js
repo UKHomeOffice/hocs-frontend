@@ -1,5 +1,5 @@
 const Form = require('./form-builder');
-const { docsServiceClient } = require('../../libs/request');
+const { getList } = require('../../services/list');
 
 function documentAdapter(document) {
     const tags = [];
@@ -14,13 +14,8 @@ function documentAdapter(document) {
 }
 
 module.exports = async options => {
-    // TODO: Move in to list service
-    const response = await docsServiceClient.get(`/document/case/${options.caseId}`);
-    const choices = response.data.documents.map(documentAdapter).sort((first, second) => {
-        const firstTimeStamp = first.timeStamp.toUpperCase();
-        const secondTimeStamp = second.timeStamp.toUpperCase();
-        return (firstTimeStamp > secondTimeStamp) ? 1 : -1;
-    });
+    const response = await getList('CASE_DOCUMENT_LIST', { caseId: options.caseId });
+    const choices = response.map(documentAdapter);
     return Form()
         .withTitle('Manage documents')
         .withField({
