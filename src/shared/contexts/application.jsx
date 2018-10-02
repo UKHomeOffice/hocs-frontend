@@ -48,6 +48,7 @@ const reducer = (state, action) => {
     case types.UPDATE_PAGE_META:
         return { ...state, page: { ...action.payload } };
     default:
+        // TODO: Remove
         /* eslint-disable-next-line  no-console*/
         console.warn('Unsupported action');
     }
