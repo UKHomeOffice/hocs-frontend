@@ -1,43 +1,34 @@
 const Form = require('./form-builder');
+const { Component, Choice } = require('./component-builder');
 
 module.exports = options => Form()
     .withTitle('Add documents to case')
-    .withField({
-        component: 'dropdown',
-        validation: [
-            'required'
-        ],
-        props: {
-            name: 'document_type',
-            label: 'Document type',
-            choices: [
-                { label: 'Original', value: 'ORIGINAL' },
-                { label: 'Draft', value: 'DRAFT' }
-            ]
-        }
-    })
-    .withField({
-        component: 'add-document',
-        validation: [
-            'hasWhitelistedExtension',
-            'fileLimit',
-            'required'
-        ],
-        props: {
-            name: 'add_document',
-            action: 'ADD_DOCUMENT',
-            documentType: 'ORIGINAL',
-            label: 'Documents',
-            allowMultiple: true,
-            whitelist: 'DOCUMENT_EXTENSION_WHITELIST'
-        }
-    })
+    .withField(
+        Component('dropdown', 'document_type')
+            .withValidator('required', 'Document type is required')
+            .withProp('label', 'Document type')
+            .withProp('choices', [
+                Choice('Original', 'ORIGINAL'),
+                Choice('Draft', 'DRAFT')
+            ])
+            .build()
+    )
+    .withField(
+        Component('add-document', 'add_document')
+            .withValidator('required', 'Document is required')
+            .withValidator('hasWhitelistedExtension')
+            .withValidator('fileLimit')
+            .withProp('documentType', 'ORIGINAL')
+            .withProp('label', 'Documents')
+            .withProp('allowMultiple', true)
+            .withlist('whitelist', 'DOCUMENT_EXTENSION_WHITELIST')
+            .build()
+    )
     .withPrimaryActionLabel('Add')
-    .withSecondaryAction({
-        component: 'backlink',
-        props: {
-            label: 'Back',
-            action: `/case/${options.caseId}/stage/${options.stageId}/entity/document/manage`
-        }
-    })
+    .withSecondaryAction(
+        Component('backlink')
+            .withProp('label', 'Back')
+            .withProp('action', `/case/${options.caseId}/stage/${options.stageId}`)
+            .build()
+    )
     .build();

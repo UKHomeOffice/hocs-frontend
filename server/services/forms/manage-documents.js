@@ -1,4 +1,5 @@
 const Form = require('./form-builder');
+const { Component } = require('./component-builder');
 const { getList } = require('../../services/list');
 
 function documentAdapter(document) {
@@ -18,28 +19,22 @@ module.exports = async options => {
     const choices = response.map(documentAdapter);
     return Form()
         .withTitle('Manage documents')
-        .withField({
-            component: 'entity-manager',
-            validation: [
-                'required'
-            ],
-            props: {
-                name: 'document_list',
-                label: 'Documents',
-                hasRemoveLink: true,
-                hasAddLink: true,
-                choices,
-                baseUrl: `/case/${options.caseId}/stage/${options.stageId}/entity`,
-                entity: 'document'
-            }
-        })
-        .withSecondaryAction({
-            component: 'backlink',
-            props: {
-                label: 'Back',
-                action: `/case/${options.caseId}/stage/${options.stageId}`
-            }
-        })
+        .withField(
+            Component('entity-manager', 'document_list')
+                .withProp('label', 'Documents')
+                .withProp('hasRemoveLink', true)
+                .withProp('hasAddLink', true)
+                .withProp('choices', choices)
+                .withProp('baseUrl', `/case/${options.caseId}/stage/${options.stageId}/entity`)
+                .withProp('entity', 'document')
+                .build()
+        )
+        .withSecondaryAction(
+            Component('backlink')
+                .withProp('label', 'Back')
+                .withProp('action', `/case/${options.caseId}/stage/${options.stageId}`)
+                .build()
+        )
         .withNoPrimaryAction()
         .build();
 };

@@ -1,23 +1,19 @@
 const Form = require('./form-builder');
+const { Component } = require('./component-builder');
 
 module.exports = () => Form()
     .withTitle('Create a new case')
-    .withField({
-        component: 'radio',
-        validation: [
-            'required'
-        ],
-        props: {
-            name: 'case-type',
-            label: 'What type of correspondence do you have?',
-            choices: 'CASE_TYPES'
-        }
-    })
+    .withField(
+        Component('radio', 'case-type')
+            .withValidator('required', 'Case type is required')
+            .withProp('label', 'What type of correspondence do you have?')
+            .withProp('choices', 'CASE_TYPES')
+            .build()
+    )
     .withPrimaryActionLabel('Next')
-    .withSecondaryAction({
-        component: 'backlink',
-        props: {
-            label: 'Cancel'
-        }
-    })
+    .withSecondaryAction(
+        Component('backlink')
+            .withProp('label', 'Cancel')
+            .build()
+    )
     .build();

@@ -1,100 +1,70 @@
 const Form = require('./form-builder');
+const { Component, Choice } = require('./component-builder');
 
 module.exports = options => Form()
     .withTitle('Record correspondent details')
-    .withField({
-        component: 'dropdown',
-        validation: [
-            'required'
-        ],
-        props: {
-            name: 'type',
-            label: 'What is the correspondent type?',
-            choices: 'CORRESPONDENT_TYPES'
-        }
-    })
-    .withField({
-        component: 'text',
-        validation: [
-            'required'
-        ],
-        props: {
-            name: 'fullname',
-            label: 'Full Name'
-        }
-    })
-    .withField({
-        component: 'text',
-        props: {
-            name: 'address1',
-            label: 'Building'
-        }
-    })
-    .withField({
-        component: 'text',
-        props: {
-            name: 'address2',
-            label: 'Street'
-        }
-    })
-    .withField({
-        component: 'text',
-        props: {
-            name: 'address3',
-            label: 'Town or City'
-        }
-    })
-    .withField({
-        component: 'text',
-        props: {
-            name: 'postcode',
-            label: 'Postcode'
-        }
-    })
-    .withField({
-        component: 'dropdown',
-        props: {
-            name: 'country',
-            label: 'Country',
-            choices: [
-                {
-                    label: 'United Kingdom',
-                    value: 'United Kingdom'
-                },
-                {
-                    label: 'Other',
-                    value: 'Other'
-                }
-            ]
-        }
-    })
-    .withField({
-        component: 'text',
-        props: {
-            name: 'telephone',
-            label: 'Telephone'
-        }
-    })
-    .withField({
-        component: 'text',
-        props: {
-            name: 'email',
-            label: 'Email address'
-        }
-    })
-    .withField({
-        component: 'text',
-        props: {
-            name: 'reference',
-            label: 'Does this correspondent give a case reference?'
-        }
-    })
+    .withField(
+        Component('dropdown', 'type')
+            .withValidator('required', 'The correspondent must have a type')
+            .withProp('label', 'Correspondent type')
+            .withProp('choices', 'CORRESPONDENT_TYPES')
+            .build()
+    )
+    .withField(
+        Component('text', 'fullname')
+            .withValidator('required', 'The correspondent\'s full name is required')
+            .withProp('label', 'Full Name')
+            .build()
+    )
+    .withField(
+        Component('text', 'address1')
+            .withProp('label', 'Building')
+            .build()
+    )
+    .withField(
+        Component('text', 'address2')
+            .withProp('label', 'Street')
+            .build()
+    )
+    .withField(
+        Component('text', 'address3')
+            .withProp('label', 'Town or City')
+            .build()
+    )
+    .withField(
+        Component('text', 'postcode')
+            .withProp('label', 'Postcode')
+            .build()
+    )
+    .withField(
+        Component('dropdown', 'country')
+            .withProp('label', 'Country')
+            .withProp('choices', [
+                Choice('United Kingdom', 'United Kingdom'),
+                Choice('Other', 'Other')
+            ])
+            .build()
+    )
+    .withField(
+        Component('text', 'telephone')
+            .withProp('label', 'Telephone')
+            .build()
+    )
+    .withField(
+        Component('text', 'email')
+            .withProp('label', 'Email address')
+            .build()
+    )
+    .withField(
+        Component('text', 'reference')
+            .withProp('label', 'Does this correspondent give a case reference?')
+            .build()
+    )
     .withPrimaryActionLabel('Add')
-    .withSecondaryAction({
-        component: 'backlink',
-        props: {
-            label: 'Back',
-            action: `/case/${options.caseId}/stage/${options.stageId}/entity/correspondent/add`
-        }
-    })
+    .withSecondaryAction(
+        Component('backlink')
+            .withProp('label', 'Back')
+            .withProp('action', `/case/${options.caseId}/stage/${options.stageId}/entity/correspondent/add`)
+            .build()
+    )
     .build();
