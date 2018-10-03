@@ -6,8 +6,7 @@ import DocumentList from './document-list.jsx';
 import { ApplicationConsumer } from '../../contexts/application.jsx';
 import {
     updateApiStatus,
-    clearApiStatus,
-    setError
+    clearApiStatus
 } from '../../contexts/actions/index.jsx';
 import status from '../../helpers/api-status.js';
 import { Link } from 'react-router-dom';
@@ -18,41 +17,55 @@ class DocumentPanel extends Component {
         super(props);
         let activeDocument;
         if (props.documents && props.documents.length > 0) {
-            activeDocument = props.documents[0].uuid;
+            activeDocument = props.documents[0].uuid || null;
         }
         this.state = { ...props, activeDocument };
     }
 
     componentDidMount() {
+        this.interval = setInterval(() => this.updateDocuments(), 3000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.interval);
+    }
+
+    hasPendingDocuments(documents) {
+        return documents.some(d => d.status === 'PENDING');
+    }
+
+    updateDocuments() {
         const { dispatch } = this.props;
         const { page } = this.state;
         if (page && page.caseId) {
+            // TODO: Remove
+            /* eslint-disable-next-line  no-console*/
+            console.log(`Updating documents for case: ${page.caseId}`);
             return dispatch(updateApiStatus(status.REQUEST_DOCUMENT_LIST))
                 .then(() => {
                     axios.get(`/api/case/${page.caseId}/document`)
                         .then(response => {
-                            const sortedDocuments = response.data.documents.sort((first, second) => {
-                                const firstTimeStamp = first.created.toUpperCase();
-                                const secondTimeStamp = second.created.toUpperCase();
-                                return (firstTimeStamp < secondTimeStamp) ? 1 : -1;
-                            });
                             dispatch(updateApiStatus(status.REQUEST_DOCUMENT_LIST_SUCCESS))
                                 .then(() => dispatch(clearApiStatus()))
-                                .then(() => this.setState({
-                                    documents: sortedDocuments,
-                                    activeDocument: sortedDocuments ?
-                                        sortedDocuments[0].uuid :
-                                        null
-                                }));
+                                .then(() => {
+                                    this.setState({
+                                        documents: response.data,
+                                        activeDocument: this.state.activeDocument || response.data[0].uuid
+                                    });
+                                    if (!this.hasPendingDocuments(response.data)) {
+                                        // TODO: Remove
+                                        /* eslint-disable-next-line  no-console*/
+                                        console.log('No documents pending conversion, clearing interval');
+                                        clearInterval(this.interval);
+                                    }
+                                });
                         })
-                        .catch(({ response }) => {
+                        .catch(() => {
                             dispatch(updateApiStatus(status.REQUEST_DOCUMENT_LIST_FAILURE))
-                                .then(() => dispatch(setError(response.data)));
+                                .then(() => clearInterval(this.interval));
                         });
                 });
-
         }
-
     }
 
     setActiveDocument(document) {
@@ -64,7 +77,7 @@ class DocumentPanel extends Component {
         const { page } = this.props;
         return (
             <Fragment>
-                {activeDocument && <Document caseId={page.caseId} activeDocument={activeDocument} />}
+                {activeDocument && page.caseId && <Document caseId={page.caseId} activeDocument={activeDocument} />}
                 {documents && documents.length > 0 && <DocumentList
                     caseId={page.caseId}
                     stageId={page.stageId}

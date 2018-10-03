@@ -1,25 +1,23 @@
 const Form = require('./form-builder');
+const { Component } = require('./component-builder');
 const { docsServiceClient } = require('../../libs/request');
 
 module.exports = async options => {
-    // TODO: Move in to list service
     const response = await docsServiceClient.get(`/document/${options.context}`);
     const displayName = response.data.displayName;
-    return Form(options)
+    return Form()
         .withTitle('Remove document')
-        .withField({
-            component: 'paragraph',
-            props: {
-                children: `Remove ${displayName} from case?`
-            }
-        })
+        .withField(
+            Component('paragraph')
+                .withProp('children', `Remove ${displayName} from case?`)
+                .build()
+        )
         .withPrimaryActionLabel('Remove')
-        .withSecondaryAction({
-            component: 'backlink',
-            props: {
-                label: 'Back',
-                action: `/case/${options.caseId}/stage/${options.stageId}/entity/document/manage`
-            }
-        })
+        .withSecondaryAction(
+            Component('backlink')
+                .withProp('label', 'Back')
+                .withProp('action', `/case/${options.caseId}/stage/${options.stageId}/entity/document/manage`)
+                .build()
+        )
         .build();
 };

@@ -1,24 +1,20 @@
 const Form = require('./form-builder');
+const { Component } = require('./component-builder');
 
 module.exports = options => Form()
     .withTitle('Add member of parliament')
-    .withField({
-        component: 'type-ahead',
-        validation: [
-            'required'
-        ],
-        props: {
-            name: 'member',
-            label: 'Member',
-            choices: 'MEMBER_LIST'
-        }
-    })
+    .withField(
+        Component('type-ahead', 'member')
+            .withValidator('required', 'Member is required')
+            .withProp('label', 'Member')
+            .withProp('choices', 'MEMBER_LIST')
+            .build()
+    )
     .withPrimaryActionLabel('Add')
-    .withSecondaryAction({
-        component: 'backlink',
-        props: {
-            label: 'Back',
-            action: `/case/${options.caseId}/stage/${options.stageId}/entity/correspondent/add`
-        }
-    })
+    .withSecondaryAction(
+        Component('backlink')
+            .withProp('label', 'Back')
+            .withProp('action', `/case/${options.caseId}/stage/${options.stageId}/entity/correspondent/add`)
+            .build()
+    )
     .build();

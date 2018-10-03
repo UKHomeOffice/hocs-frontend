@@ -58,7 +58,7 @@ exports[`Entity list component should render with created date when passed in pr
       <td
         class="govuk-table__cell"
       >
-        2018-10-1
+        2018-10-3
       </td>
     </tr>
     <tr
@@ -72,7 +72,7 @@ exports[`Entity list component should render with created date when passed in pr
       <td
         class="govuk-table__cell"
       >
-        2018-10-1
+        2018-10-3
       </td>
     </tr>
   </tbody>

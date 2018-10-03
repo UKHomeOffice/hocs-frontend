@@ -70,6 +70,7 @@ function withForm(Page) {
         submitHandler(e) {
             e.preventDefault();
             const { dispatch, form, history, match: { url } } = this.props;
+            // TODO: Remove
             /* eslint-disable-next-line no-undef */
             const formData = new FormData();
             Object.keys(form.data).map(field => {
@@ -108,6 +109,7 @@ function withForm(Page) {
                                 });
                         })
                         .catch(error => {
+                            // TODO: Remove
                             /* eslint-disable-next-line no-console */
                             return dispatch(updateApiStatus(status.SUBMIT_FORM_FAILURE))
                                 .then(() => dispatch(setError(error.response.data)));

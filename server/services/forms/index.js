@@ -16,7 +16,6 @@ const bulkAddDocument = require('./bulk-document-add.js');
 const testForm = require('./case-test.js');
 const { IS_MEMBER, ADD_MEMBER, SELECT_MEMBER, ADD_CORRESPONDENT, REMOVE_CORRESPONDENT, ADD_TOPIC, REMOVE_TOPIC, CREATE_CASE, BULK_CREATE_CASE, ADD_DOCUMENT, REMOVE_DOCUMENT, MANAGE_DOCUMENTS } = require('../actions/types');
 
-
 const formDefinitions = {
     ACTION: {
         CREATE: {

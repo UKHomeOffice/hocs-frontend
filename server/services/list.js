@@ -1,7 +1,7 @@
 const { DOCUMENT_WHITELIST } = require('../config').forContext('server');
-const { infoServiceClient, workflowServiceClient, caseworkServiceClient } = require('../libs/request');
-const logger = require('../libs/logger');
+const { infoServiceClient, workflowServiceClient, caseworkServiceClient, docsServiceClient } = require('../libs/request');
 const { listDefinitions, staticListDefinitions } = require('./lists/index');
+const logger = require('../libs/logger');
 
 const listRepository = {};
 
@@ -28,12 +28,12 @@ function fetchList(listEndpoint, options) {
 }
 
 function handleListSuccess(listId, response) {
-    logger.info(`Successfully fetched list: ${listId}`);
+    logger.info(`Successfully intialised list: ${listId}`);
     listRepository[listId] = response.data[listId] || [];
 }
 
 function handleListFailure(listId, error) {
-    logger.error(`Unable to retrieve list ${listId}: ${error.message}`);
+    logger.error(`Unable to intialise list ${listId}: ${error.message}`);
 }
 // Cache miss pattern for static lists
 // if (listRepository.workflowTypes) {
@@ -60,57 +60,71 @@ function compareListItems(first, second) {
 const lists = {
     'CASE_TYPES': async ({ user }) => {
         const list = listDefinitions['workflowTypes'].call(this);
-        try {
-            const headerRoles = user.roles.join();
-            logger.info(`Roles ${headerRoles}`);
-            const response = await fetchList(list, {
-                headers: {
-                    'X-Auth-Roles': headerRoles
-                }
-            });
-            logger.info(JSON.stringify(response.data));
+        const headerRoles = user.roles.join();
+        const response = await fetchList(list, {
+            headers: {
+                'X-Auth-Roles': headerRoles
+            }
+        });
+        if (response.data.caseTypes) {
             return response.data.caseTypes.sort(compareListItems);
-        } catch (error) {
-            handleListFailure(list, error);
+        } else {
+            logger.warn(`No Case Types returned for roles: ${headerRoles}`);
+            return [];
         }
 
     },
     'CASE_TYPES_BULK': async ({ user }) => {
         const list = listDefinitions['workflowTypesBulk'].call(this);
-        try {
-            const headerRoles = user.roles.join();
-            logger.info(`Roles ${headerRoles}`);
-            const response = await fetchList(list, {
-                headers: {
-                    'X-Auth-Roles': headerRoles
-                }
-            });
+        const headerRoles = user.roles.join();
+        const response = await fetchList(list, {
+            headers: {
+                'X-Auth-Roles': headerRoles
+            }
+        });
+        if (response.data.caseTypes) {
             return response.data.caseTypes.sort(compareListItems);
-        } catch (error) {
-            handleListFailure(list, error);
+        } else {
+            logger.warn(`No Case Types returned for roles: ${headerRoles}`);
+            return [];
         }
-
+    },
+    'CASE_DOCUMENT_LIST': async ({ caseId }) => {
+        const list = listDefinitions['caseDocuments'].call(this, { caseId });
+        const response = await docsServiceClient.get(list);
+        if (response.data.documents) {
+            return response.data.documents
+                .sort((first, second) => {
+                    const firstTimeStamp = first.created.toUpperCase();
+                    const secondTimeStamp = second.created.toUpperCase();
+                    return (firstTimeStamp > secondTimeStamp) ? 1 : -1;
+                });
+        } else {
+            logger.warn(`No documents returned for case: ${caseId}`);
+            return [];
+        }
     },
     'DOCUMENT_EXTENSION_WHITELIST': async () => {
         return DOCUMENT_WHITELIST;
     },
     'MEMBER_LIST': async ({ user }) => {
         const list = listDefinitions['memberList'].call(this, { caseType: 'MIN' });
-        try {
-            const headerRoles = user.roles.join();
-            logger.info(`Roles ${headerRoles}`);
-            const response = await fetchList(list, {
-                headers: {
-                    'X-Auth-Roles': headerRoles
-                }
-            });
+        const headerRoles = user.roles.join();
+        const response = await fetchList(list, {
+            headers: {
+                'X-Auth-Roles': headerRoles
+            }
+        });
+        if (response.data.members) {
             const groupedList = response.data.members
                 .sort(compareListItems)
                 .reduce((reducer, item) => {
                     const groupIndex = reducer.map(e => e.label).indexOf(item.group);
                     if (groupIndex === -1) {
-                        reducer.push({ label: item.group, options: [{
-                            label: item.label, value: item.value }]
+                        reducer.push({
+                            label: item.group, options: [{
+                                label: item.label, value: item.value
+                            }]
                         });
                         return reducer;
                     }
@@ -118,8 +132,9 @@ const lists = {
                     return reducer;
                 }, []);
             return groupedList;
-        } catch (error) {
-            handleListFailure(list, error);
+        } else {
+            logger.warn('No members returned for case');
+            return [];
         }
     },
     'CASE_STANDARD_LINES': async ({ caseId }) => {
@@ -143,7 +158,6 @@ const lists = {
     },
     'CASE_TOPICS': async ({ caseId }) => {
         const response = await workflowServiceClient.get(`/case/${caseId}/topic`);
-        logger.info(JSON.stringify(response.data));
         if (response.data.topics) {
             return response.data.topics;
         } else {
@@ -180,13 +194,14 @@ const lists = {
     }
 };
 
-async function getList(listName, options) {
+async function getList(listId, options) {
     try {
-        const list = await lists[listName.toUpperCase()].call(this, options);
-        logger.debug(`Returning ${list.length} items for ${listName}`);
+        logger.debug(`Fetching list '${listId}' with parameters: ${JSON.stringify(options)}`);
+        const list = await lists[listId.toUpperCase()].call(this, options);
+        logger.debug(`Returning ${list.length} items for ${listId}`);
         return list;
     } catch (e) {
-        throw new Error(`Unable to get list for ${listName}: ${e}`);
+        throw new Error(`Unable to get list for ${listId}: ${e}`);
     }
 }
 

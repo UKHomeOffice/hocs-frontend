@@ -17,25 +17,25 @@ describe('Validators', () => {
 
     describe('Required validator', () => {
         it('should reject an empty field', () => {
-            expect(validators.required(null)).not.toEqual(null);
+            expect(validators.required({})).not.toEqual(null);
         });
         it('should accept a filled field', () => {
-            expect(validators.required('data')).toEqual(null);
+            expect(validators.required({ value: 'data' })).toEqual(null);
         });
     });
 
     describe('Valid date validator', () => {
         it('should reject not-real dates', () => {
-            expect(validators.isValidDate('2011-02-33')).not.toEqual(null);
+            expect(validators.isValidDate({ value: '2011-02-33' })).not.toEqual(null);
         });
         it('should reject things that aren\'t numbers', () => {
-            expect(validators.isValidDate('belgium')).not.toEqual(null);
+            expect(validators.isValidDate({ value: 'belgium' })).not.toEqual(null);
         });
         it('should accept a valid date', () => {
-            expect(validators.required('2011-02-30')).toEqual(null);
+            expect(validators.required({ value: '2011-02-30' })).toEqual(null);
         });
         it('should reject a malformed date', () => {
-            expect(validators.isValidDate('2011--01')).not.toEqual(null);
+            expect(validators.isValidDate({ value: '2011--01' })).not.toEqual(null);
         });
     });
 
@@ -44,16 +44,16 @@ describe('Validators', () => {
             expect(validators.isBeforeToday('1970-01-01')).toEqual(null);
         });
         it('should reject a date in the future', () => {
-            expect(validators.isBeforeToday('3000-01-01')).not.toEqual(null);
+            expect(validators.isBeforeToday({ value: '3000-01-01' })).not.toEqual(null);
         });
     });
 
     describe('After today validator', () => {
         it('should reject a date in the past', () => {
-            expect(validators.isAfterToday('1970-01-01')).not.toEqual(null);
+            expect(validators.isAfterToday({ value: '1970-01-01' })).not.toEqual(null);
         });
         it('should accept a date in the future', () => {
-            expect(validators.isAfterToday('3000-01-01')).toEqual(null);
+            expect(validators.isAfterToday({ value: '3000-01-01' })).toEqual(null);
         });
     });
 
@@ -62,20 +62,20 @@ describe('Validators', () => {
             const testFiles = [
                 { originalname: 'some-file.invalidExtension' }
             ];
-            expect(validators.hasWhitelistedExtension(testFiles)).not.toEqual(null);
+            expect(validators.hasWhitelistedExtension({ value: testFiles })).not.toEqual(null);
         });
         it('should accept a valid file extension', () => {
             const testFiles = [
                 { originalname: 'some-file.validExtension' }
             ];
-            expect(validators.hasWhitelistedExtension(testFiles)).toEqual(null);
+            expect(validators.hasWhitelistedExtension({ value: testFiles })).toEqual(null);
         });
         it('should support multiple files', () => {
             const testFiles = [
                 { originalname: 'some-file.validExtension' },
                 { originalname: 'some-file.invalidExtension' }
             ];
-            expect(validators.hasWhitelistedExtension(testFiles)).not.toEqual(null);
+            expect(validators.hasWhitelistedExtension({ value: testFiles })).not.toEqual(null);
         });
         it('should skip if no files passed', () => {
             const testFiles = [

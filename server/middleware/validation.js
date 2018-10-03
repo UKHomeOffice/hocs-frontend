@@ -3,60 +3,60 @@ const { FormSubmissionError, ValidationError } = require('../models/error');
 const { DOCUMENT_WHITELIST, DOCUMENT_BULK_LIMIT } = require('../config').forContext('server');
 
 const validationErrors = {
-    required: 'is required',
-    invalidFileExtension: (extension) => {
-        return 'is a ' + extension.toUpperCase() + ' file which is not allowed';
+    required: label => `${label} is required`,
+    hasWhitelistedExtension: (label, extension) => {
+        return `${label} is a ${extension.toUpperCase()} file which is not allowed`;
     },
-    fileLimit: `The number of files you have tried to upload exceeded the limit of ${DOCUMENT_BULK_LIMIT}`,
-    nonsensicalDate: 'must be a date', // TODO: better error message
-    mustBeInPast: 'must be a date in the past',
-    mustBeInFuture: 'must be a date in the future'
+    fileLimit: () => `The number of files you have tried to upload exceeded the limit of ${DOCUMENT_BULK_LIMIT}`,
+    isValidDate: label => `${label} must be a date`,
+    isBeforeToday: label => `${label} must be a date in the past`,
+    isAfterToday: label => `${label} must be a date in the future`
 };
 
 const validators = {
-    isValidDate: (date, label) => {
-        if (isNaN(new Date(date).getDate())) {
-            return `${label} ${validationErrors.nonsensicalDate}`;
+    isValidDate: ({ label, value, message }) => {
+        if (isNaN(new Date(value).getDate())) {
+            return message || validationErrors.isValidDate(label);
         }
         return null;
     },
-    isBeforeToday(date, label) {
-        if (new Date(date) >= new Date()) {
-            return `${label} ${validationErrors.mustBeInPast}`;
+    isBeforeToday({ label, value, message }) {
+        if (new Date(value) >= new Date()) {
+            return message || validationErrors.isBeforeToday(label);
         }
         return null;
     },
-    isAfterToday(date, label) {
-        if (new Date(date) <= new Date()) {
-            return `${label} ${validationErrors.mustBeInFuture}`;
+    isAfterToday({ label, value, message }) {
+        if (new Date(value) <= new Date()) {
+            return message || validationErrors.isAfterToday(label);
         }
         return null;
     },
-    required: (value, label) => {
+    required: ({ label, value, message }) => {
         if (!value || value === '') {
-            return `${label} ${validationErrors.required}`;
+            return message || validationErrors.required(label);
         }
         return null;
     },
-    hasWhitelistedExtension: (files, label) => {
-        if (files && files.length > 0) {
+    hasWhitelistedExtension: ({ label, value, message }) => {
+        if (value && value.length > 0) {
             const allowableExtensions = DOCUMENT_WHITELIST;
-            for (let file of files) {
+            for (let file of value) {
                 let fileExtension = file.originalname.split('.').slice(-1)[0];
                 logger.debug('Validating extension: ' + fileExtension);
 
                 if (!allowableExtensions.includes(fileExtension)) {
                     logger.debug('Rejecting extension: ' + fileExtension);
-                    return `${label} ${validationErrors.invalidFileExtension(fileExtension)}`;
+                    return message || validationErrors.hasWhitelistedExtension(label, fileExtension);
                 }
                 logger.debug('Accepting extension: ' + fileExtension);
             }
         }
         return null;
     },
-    fileLimit: (files) => {
-        if (files && files.length > DOCUMENT_BULK_LIMIT) {
-            return validationErrors.fileLimit;
+    fileLimit: ({ value, message }) => {
+        if (value && value.length > DOCUMENT_BULK_LIMIT) {
+            return message || validationErrors.fileLimit;
         }
         return null;
     }
@@ -73,13 +73,25 @@ function validationMiddleware(req, res, next) {
                     const value = data[name];
                     if (validation) {
                         validation.map(validator => {
-                            if (validators.hasOwnProperty(validator)) {
-                                const validationError = validators[validator].call(this, value, label);
-                                if (validationError) {
-                                    result[field.props.name] = validationError;
+                            if (typeof validator === 'string') {
+                                if (validators.hasOwnProperty(validator)) {
+                                    const validationError = validators[validator].call(this, { label, value });
+                                    if (validationError) {
+                                        result[field.props.name] = validationError;
+                                    }
+                                } else {
+                                    throw new Error(`Validator ${validator} does not exist`);
                                 }
                             } else {
-                                throw new Error('Validator does not exist');
+                                const { type, message } = validator;
+                                if (validators.hasOwnProperty(type)) {
+                                    const validationError = validators[type].call(this, { label, value, message });
+                                    if (validationError) {
+                                        result[field.props.name] = validationError;
+                                    }
+                                } else {
+                                    throw new Error(`Validator ${type} does not exist`);
+                                }
                             }
                         });
                     }
