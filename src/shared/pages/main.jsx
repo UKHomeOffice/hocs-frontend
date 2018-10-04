@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Workstack from '../common/components/workstack.jsx';
+import Dashboard from '../common/components/dashboard.jsx';
 
 class MainPage extends Component {
 
@@ -25,12 +26,14 @@ class MainPage extends Component {
                     <h2 className="govuk-heading-m">
                         Primary actions
                     </h2>
-                    <ul className="govuk-list govuk-list--bullet">
+                    <ul className="govuk-list">
                         <li><Link to={'/action/create/workflow'}>Create single case</Link></li>
                         <li><Link to={'/action/bulk/workflow'}>Create cases in bulk</Link></li>
                         <li><Link to={'/action/test/form'}>View test form</Link></li>
                     </ul>
+                    <Dashboard />
                     <Workstack />
+
                 </div>
             </div>
         );

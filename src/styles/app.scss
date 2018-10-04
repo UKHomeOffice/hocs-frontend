@@ -52,6 +52,10 @@ $govuk-page-width: 1300px !default;
   }
 }
 
+.margin-left--small {
+  margin-left: govuk-spacing(4);
+}
+
 // .govuk-typeahead__container {
 
 // }
@@ -225,4 +229,84 @@ $govuk-page-width: 1300px !default;
 
 .govuk-typeahead__option--is-focused {
   background-color: $govuk-focus-colour;
+}
+
+$panel-colour: govuk-colour("grey-3");
+$text-colour: govuk-colour("blue");
+$highlight-colour: govuk-colour("grey-4");
+$link-colour: $govuk-link-colour;
+$link-hover-colour: $govuk-link-hover-colour;
+
+.card {
+  font-weight: bold;
+  display: block;
+  float: left;
+  margin-bottom: 30px;
+}
+
+.card__body {
+  font-weight: bold;
+  display: block;
+  background-color: $panel-colour;
+  padding: 1em;
+  background-color: $panel-colour;
+  color: $text-colour;
+  text-decoration: none;
+
+  span {
+    display: block;
+  }
+}
+
+a.card__body {
+  color: $link-colour;
+
+  &:hover, &:focus {
+    cursor: pointer;
+    background-color: $highlight-colour;
+    color: $link-hover-colour;
+    text-decoration: none;
+  }
+}
+
+.card__footer {
+  display: block;
+  background-color: $highlight-colour;
+  padding: 1em;
+
+  & span {
+    width: 100%;
+    display: block;
+  }
+}
+
+.dashboard__todo {
+  padding: 0;
+}
+
+.dashboard__teams {
+  list-style-type: none;
+  padding: 0;
+}
+
+.dashboard__workflows {
+  list-style-type: none;
+  padding: 0;
+}
+
+.dashboard__stages {
+  list-style-type: none;
+  padding: 0;
+}
+
+.dashboard__tag {
+  box-sizing: border-box;
+  margin-bottom: govuk-spacing(2);
+  & :last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+.dashboard__tag--red {
+  background-color: govuk-colour("red");
 }
