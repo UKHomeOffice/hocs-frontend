@@ -47,6 +47,14 @@ const reducer = (state, action) => {
         return { ...state, apiStatus: null };
     case types.UPDATE_PAGE_META:
         return { ...state, page: { ...action.payload } };
+    case types.UPDATE_DASHBOARD:
+        return { ...state, dashboard: action.payload };
+    case types.CLEAR_DASHBOARD:
+        return { ...state, dashboard: null };
+    case types.UPDATE_WORKSTACK:
+        return { ...state, workstack: action.payload };
+    case types.CLEAR_WORKSTACK:
+        return { ...state, workstack: null };
     default:
         // TODO: Remove
         /* eslint-disable-next-line  no-console*/

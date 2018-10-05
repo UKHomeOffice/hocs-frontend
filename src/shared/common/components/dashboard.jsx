@@ -1,58 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { ApplicationConsumer } from '../../contexts/application.jsx';
 import Card from '../forms/card.jsx';
-
-const my_cases = { label: 'Cases', count: 9, tags: { overdue: 1 } };
-
-const cases = [
-    {
-        label: 'Performance and process team',
-        value: 'DCU_PPT',
-        items: [
-            {
-                label: 'DCU Ministerial',
-                value: 'DCU_MIN',
-                items: [
-                    { label: 'Data Entry', value: 'DATA_ENTRY', count: 5, tags: { allocated: 2 } },
-                    { label: 'Dispatch', value: 'DISPATCH', count: 3 }
-                ]
-            },
-            {
-                label: 'DCU Treat official',
-                value: 'DCU_TRO',
-                items: [
-                    { label: 'Dispatch', value: 'DISPATCH', count: 2, tags: { allocated: 1 } }
-                ]
-            }
-        ]
-    },
-    {
-        label: 'Central drafting team',
-        value: 'DCU_CDT',
-        items: [
-            {
-                label: 'DCU Ministerial',
-                value: 'DCU_MIN',
-                items: [
-                    { label: 'Draft', value: 'DRAFT', count: 2, tags: { overdue: 2 } },
-                    { label: 'QA', value: 'QA', count: 6, tags: { allocated: 2, overdue: 3 } },
-                ]
-            },
-            {
-                label: 'DCU Treat official',
-                value: 'DCU_TRO',
-                items: []
-            }
-        ]
-    },
-    {
-        label: 'Transfers and No.10 team',
-        value: 'DCU_TNT',
-        items: []
-    }
-];
 
 class Dashboard extends Component {
 
@@ -126,17 +75,17 @@ class Dashboard extends Component {
     }
 
     render() {
-        const { baseUrl } = this.props;
+        const { baseUrl, dashboard: { user, teams } } = this.props;
 
         return (
             <Fragment>
                 <h2 className='govuk-heading-l'>My work</h2>
                 <div className='govuk-grid-row'>
                     <div className='govuk-grid-column-full dashboard__todo'>
-                        <Card url={'/workstack/user'} {...my_cases}>
-                            {my_cases.tags && my_cases.tags.overdue &&
+                        <Card url={'/workstack/user'} {...user}>
+                            {user.tags && user.tags.overdue &&
                                 <span className='govuk-!-font-size-16 govuk-!-font-weight-bold govuk-tag dashboard__tag dashboard__tag--red'>
-                                    {my_cases.tags.overdue} Overdue
+                                    {user.tags.overdue} Overdue
                                 </span>
                             }
                         </Card>
@@ -144,7 +93,7 @@ class Dashboard extends Component {
                 </div>
                 <h2 className='govuk-heading-l'>My teams work</h2>
                 <ul className='govuk-grid-row dashboard__teams'>
-                    {cases && this.renderTeams(cases, baseUrl)}
+                    {teams && this.renderTeams(teams, baseUrl)}
                 </ul>
             </Fragment>
         );
@@ -152,17 +101,12 @@ class Dashboard extends Component {
 }
 
 Dashboard.propTypes = {
-    baseUrl: PropTypes.string
+    baseUrl: PropTypes.string,
+    dashboard: PropTypes.object.isRequired,
 };
 
 Dashboard.defaultProps = {
     baseUrl: '/workstack'
 };
 
-const WrappedDashboard = props => (
-    <ApplicationConsumer>
-        {() => <Dashboard {...props} />}
-    </ApplicationConsumer>
-);
-
-export default WrappedDashboard;
+export default Dashboard;

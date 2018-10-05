@@ -15,7 +15,7 @@ describe('Main page component', () => {
     });
 
     it('should render with default props', () => {
-        const wrapper = mount(
+        const wrapper = shallow(
             <MemoryRouter>
                 <Main />
             </MemoryRouter>
@@ -25,7 +25,7 @@ describe('Main page component', () => {
     });
 
     it('should render with caption when passed in props', () => {
-        const wrapper = mount(
+        const wrapper = shallow(
             <MemoryRouter>
                 <Main caption='MY CAPTION' />
             </MemoryRouter>
