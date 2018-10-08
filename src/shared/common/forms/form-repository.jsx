@@ -32,7 +32,7 @@ function checkboxDataAdapter(name, data) {
 
 function renderFormComponent(Component, options) {
     const { key, config, data, errors, callback, dataAdapter } = options;
-    let value = null;
+    let value = '';
     if (data) {
         value = dataAdapter ? dataAdapter(config.name, data) : defaultDataAdapter(config.name, data);
     }
