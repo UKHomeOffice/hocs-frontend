@@ -1,25 +1,53 @@
-const { caseworkServiceClient } = require('../libs/request');
+const { getList } = require('../services/list');
 
-async function workstackMiddleware(req, res, next) {
+async function userWorkstackMiddleware(req, res, next) {
     try {
-        const response = await caseworkServiceClient.get('/stage/active');
-        res.locals.workstack = response.data.activeStages;
+        const response = await getList('WORKSTACK_USER', { ...req.params, user: req.user });
+        res.locals.workstack = response;
         next();
     } catch (e) {
-        next(new Error('Unable to retrieve workstack'));
+        next(e);
     }
 }
 
-async function apiWorkstackMiddleware(req, res, next) {
+async function teamWorkstackMiddleware(req, res, next) {
     try {
-        const response = await caseworkServiceClient.get('/stage/active', { responseType: 'stream' });
-        response.data.pipe(res);
+        const response = await getList('WORKSTACK_TEAM', { ...req.params, user: req.user });
+        res.locals.workstack = response;
+        next();
     } catch (e) {
-        next(new Error('Unable to retrieve workstack'));
+        next(e);
     }
+}
+
+async function workflowWorkstackMiddleware(req, res, next) {
+    try {
+        const response = await getList('WORKSTACK_WORKFLOW', { ...req.params, user: req.user });
+        res.locals.workstack = response;
+        next();
+    } catch (e) {
+        next(e);
+    }
+}
+
+async function stageWorkstackMiddleware(req, res, next) {
+    try {
+        const response = await getList('WORKSTACK_STAGE', { ...req.params, user: req.user });
+        res.locals.workstack = response;
+        next();
+    } catch (e) {
+        next(e);
+    }
+}
+
+function workstackApiResponseMiddleware(req, res) {
+    res.json(res.locals.workstack);
 }
 
 module.exports = {
-    workstackMiddleware,
-    apiWorkstackMiddleware
+    userWorkstackMiddleware,
+    teamWorkstackMiddleware,
+    workflowWorkstackMiddleware,
+    stageWorkstackMiddleware,
+    workstackApiResponseMiddleware
 };

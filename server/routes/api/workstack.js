@@ -1,24 +1,18 @@
 const router = require('express').Router();
-const { getList } = require('../../services/list');
+const {
+    userWorkstackMiddleware,
+    teamWorkstackMiddleware,
+    workflowWorkstackMiddleware,
+    stageWorkstackMiddleware,
+    workstackApiResponseMiddleware
+} = require('../../middleware/workstack');
 
-router.get('/user', async (req, res) => {
-    const workstack = await getList('WORKSTACK_USER', { ...req.params, user: req.user });
-    res.json(workstack);
-});
+router.get('/user', userWorkstackMiddleware, workstackApiResponseMiddleware);
 
-router.get('/team/:teamId', async (req, res) => {
-    const workstack = await getList('WORKSTACK_TEAM', { ...req.params, user: req.user });
-    res.json(workstack);
-});
+router.get('/team/:teamId', teamWorkstackMiddleware, workstackApiResponseMiddleware);
 
-router.get('/team/:teamId/workflow/:workflowId', async (req, res) => {
-    const workstack = await getList('WORKSTACK_WORKFLOW', { ...req.params, user: req.user });
-    res.json(workstack);
-});
+router.get('/team/:teamId/workflow/:workflowId', workflowWorkstackMiddleware, workstackApiResponseMiddleware);
 
-router.get('/team/:teamId/workflow/:workflowId/stage/:stageId', async (req, res) => {
-    const workstack = await getList('WORKSTACK_STAGE', { ...req.params, user: req.user });
-    res.json(workstack);
-});
+router.get('/team/:teamId/workflow/:workflowId/stage/:stageId', stageWorkstackMiddleware, workstackApiResponseMiddleware);
 
 module.exports = router;
