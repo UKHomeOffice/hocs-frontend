@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Error component should render the error page when error passed in props 1`] = `null`;
+
+exports[`Error component should render with default props 1`] = `null`;

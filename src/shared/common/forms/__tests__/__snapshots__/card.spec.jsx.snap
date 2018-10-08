@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Card component should render with default props 1`] = `
+<li
+  class="card govuk-body govuk-grid-column-one-quarter"
+>
+  <a
+    class="card__body"
+    href="/"
+  >
+    <span
+      class="govuk-!-font-size-48"
+    >
+      5
+    </span>
+    <span
+      class="govuk-!-font-size-19 govuk-!-font-weight-bold"
+    >
+      Test Item
+    </span>
+  </a>
+</li>
+`;
+
+exports[`Card component should render with footer when children passed in props 1`] = `
+<li
+  class="card govuk-body govuk-grid-column-one-quarter"
+>
+  <a
+    class="card__body"
+    href="/"
+  >
+    <span
+      class="govuk-!-font-size-48"
+    >
+      5
+    </span>
+    <span
+      class="govuk-!-font-size-19 govuk-!-font-weight-bold"
+    >
+      Test Item
+    </span>
+  </a>
+  <div
+    class="card__footer"
+  >
+    Footer
+  </div>
+</li>
+`;

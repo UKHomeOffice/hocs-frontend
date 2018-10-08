@@ -53,19 +53,19 @@ class Dashboard extends Component {
         );
     }
 
-    renderTeams(cases, location) {
+    renderTeams(teams, location) {
         return (
             <Fragment>
-                {cases && cases.length > 0 ? cases.map((c, i) => {
-                    const url = `${location}/team/${c.value}`;
+                {teams && teams.length > 0 ? teams.map((t, i) => {
+                    const url = `${location}/team/${t.value}`;
                     return (
                         <li className='govuk-grid-column-full dashboard__teams--item' key={i}>
                             <h3 className='govuk-heading-m' >
-                                {c.label}
-                                {c.items && c.items.length > 0 && <Link to={url} className='govuk-body govuk-link margin-left--small'>view</Link>}
+                                {t.label}
+                                {t.items && t.items.length > 0 && <Link to={url} className='govuk-body govuk-link margin-left--small'>view</Link>}
                             </h3>
                             <ul className='govuk-grid-row dashboard__workflows'>
-                                {c.items && this.renderWorkflows(c.items, url)}
+                                {t.items && this.renderWorkflows(t.items, url)}
                             </ul>
                         </li>
                     );

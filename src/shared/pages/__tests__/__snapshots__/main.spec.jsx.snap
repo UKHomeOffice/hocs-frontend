@@ -1,9 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Main page component should render with caption when passed in props 1`] = `
-<MainPage
-  caption="MY CAPTION"
-/>
-`;
-
-exports[`Main page component should render with default props 1`] = `<MainPage />`;
+exports[`Main page component should render with default props 1`] = `null`;

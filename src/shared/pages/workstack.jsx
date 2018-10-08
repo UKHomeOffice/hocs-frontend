@@ -9,7 +9,7 @@ import {
     clearApiStatus
 } from '../contexts/actions/index.jsx';
 import status from '../helpers/api-status.js';
-import Workstack from '../common/components/workstack-two-point-oh.jsx';
+import Workstack from '../common/components/workstack.jsx';
 
 class WorkstackPage extends Component {
 
@@ -73,7 +73,6 @@ class WorkstackPage extends Component {
 WorkstackPage.propTypes = {
     workstack: PropTypes.object,
     dispatch: PropTypes.func.isRequired,
-    history: PropTypes.object.isRequired,
     match: PropTypes.object.isRequired
 };
 

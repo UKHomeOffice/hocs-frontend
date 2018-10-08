@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Dashboard from '../pages/dashboard.jsx';
 
@@ -27,11 +26,5 @@ class MainPage extends Component {
         );
     }
 }
-
-MainPage.propTypes = {
-    caption: PropTypes.string,
-    match: PropTypes.object,
-    title: PropTypes.string
-};
 
 export default MainPage;
