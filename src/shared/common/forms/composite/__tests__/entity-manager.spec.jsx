@@ -22,7 +22,7 @@ describe('Entity list component', () => {
     });
 
     it('should render with default props', () => {
-        const WRAPPER = render(<EntityManager />);
+        const WRAPPER = render(<EntityManager baseUrl={'/'}/>);
         expect(WRAPPER).toBeDefined();
         expect(WRAPPER).toMatchSnapshot();
     });

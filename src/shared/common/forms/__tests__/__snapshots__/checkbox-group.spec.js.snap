@@ -24,14 +24,14 @@ exports[`Form checkbox group component should render disabled when passed 1`] = 
       >
         <input
           class="govuk-checkboxes__input"
-          id="checkbox-group-A"
+          id="checkbox-group_A"
           name="checkbox-group"
           type="checkbox"
           value="A"
         />
         <label
           class="govuk-label govuk-checkboxes__label"
-          for="checkbox-group-A"
+          for="checkbox-group_A"
         >
           isA
         </label>
@@ -41,14 +41,14 @@ exports[`Form checkbox group component should render disabled when passed 1`] = 
       >
         <input
           class="govuk-checkboxes__input"
-          id="checkbox-group-B"
+          id="checkbox-group_B"
           name="checkbox-group"
           type="checkbox"
           value="B"
         />
         <label
           class="govuk-label govuk-checkboxes__label"
-          for="checkbox-group-B"
+          for="checkbox-group_B"
         >
           isB
         </label>
@@ -58,14 +58,14 @@ exports[`Form checkbox group component should render disabled when passed 1`] = 
       >
         <input
           class="govuk-checkboxes__input"
-          id="checkbox-group-C"
+          id="checkbox-group_C"
           name="checkbox-group"
           type="checkbox"
           value="C"
         />
         <label
           class="govuk-label govuk-checkboxes__label"
-          for="checkbox-group-C"
+          for="checkbox-group_C"
         >
           isC
         </label>
@@ -98,14 +98,14 @@ exports[`Form checkbox group component should render with default props 1`] = `
       >
         <input
           class="govuk-checkboxes__input"
-          id="checkbox-group-A"
+          id="checkbox-group_A"
           name="checkbox-group"
           type="checkbox"
           value="A"
         />
         <label
           class="govuk-label govuk-checkboxes__label"
-          for="checkbox-group-A"
+          for="checkbox-group_A"
         >
           isA
         </label>
@@ -115,14 +115,14 @@ exports[`Form checkbox group component should render with default props 1`] = `
       >
         <input
           class="govuk-checkboxes__input"
-          id="checkbox-group-B"
+          id="checkbox-group_B"
           name="checkbox-group"
           type="checkbox"
           value="B"
         />
         <label
           class="govuk-label govuk-checkboxes__label"
-          for="checkbox-group-B"
+          for="checkbox-group_B"
         >
           isB
         </label>
@@ -132,14 +132,14 @@ exports[`Form checkbox group component should render with default props 1`] = `
       >
         <input
           class="govuk-checkboxes__input"
-          id="checkbox-group-C"
+          id="checkbox-group_C"
           name="checkbox-group"
           type="checkbox"
           value="C"
         />
         <label
           class="govuk-label govuk-checkboxes__label"
-          for="checkbox-group-C"
+          for="checkbox-group_C"
         >
           isC
         </label>
@@ -177,14 +177,14 @@ exports[`Form checkbox group component should render with error when passed 1`] 
       >
         <input
           class="govuk-checkboxes__input"
-          id="checkbox-group-A"
+          id="checkbox-group_A"
           name="checkbox-group"
           type="checkbox"
           value="A"
         />
         <label
           class="govuk-label govuk-checkboxes__label"
-          for="checkbox-group-A"
+          for="checkbox-group_A"
         >
           isA
         </label>
@@ -194,14 +194,14 @@ exports[`Form checkbox group component should render with error when passed 1`] 
       >
         <input
           class="govuk-checkboxes__input"
-          id="checkbox-group-B"
+          id="checkbox-group_B"
           name="checkbox-group"
           type="checkbox"
           value="B"
         />
         <label
           class="govuk-label govuk-checkboxes__label"
-          for="checkbox-group-B"
+          for="checkbox-group_B"
         >
           isB
         </label>
@@ -211,14 +211,14 @@ exports[`Form checkbox group component should render with error when passed 1`] 
       >
         <input
           class="govuk-checkboxes__input"
-          id="checkbox-group-C"
+          id="checkbox-group_C"
           name="checkbox-group"
           type="checkbox"
           value="C"
         />
         <label
           class="govuk-label govuk-checkboxes__label"
-          for="checkbox-group-C"
+          for="checkbox-group_C"
         >
           isC
         </label>
@@ -256,14 +256,14 @@ exports[`Form checkbox group component should render with hint when passed 1`] =
       >
         <input
           class="govuk-checkboxes__input"
-          id="checkbox-group-A"
+          id="checkbox-group_A"
           name="checkbox-group"
           type="checkbox"
           value="A"
         />
         <label
           class="govuk-label govuk-checkboxes__label"
-          for="checkbox-group-A"
+          for="checkbox-group_A"
         >
           isA
         </label>
@@ -273,14 +273,14 @@ exports[`Form checkbox group component should render with hint when passed 1`] =
       >
         <input
           class="govuk-checkboxes__input"
-          id="checkbox-group-B"
+          id="checkbox-group_B"
           name="checkbox-group"
           type="checkbox"
           value="B"
         />
         <label
           class="govuk-label govuk-checkboxes__label"
-          for="checkbox-group-B"
+          for="checkbox-group_B"
         >
           isB
         </label>
@@ -290,14 +290,14 @@ exports[`Form checkbox group component should render with hint when passed 1`] =
       >
         <input
           class="govuk-checkboxes__input"
-          id="checkbox-group-C"
+          id="checkbox-group_C"
           name="checkbox-group"
           type="checkbox"
           value="C"
         />
         <label
           class="govuk-label govuk-checkboxes__label"
-          for="checkbox-group-C"
+          for="checkbox-group_C"
         >
           isC
         </label>
@@ -332,14 +332,14 @@ exports[`Form checkbox group component should render with label when passed 1`] 
       >
         <input
           class="govuk-checkboxes__input"
-          id="checkbox-group-A"
+          id="checkbox-group_A"
           name="checkbox-group"
           type="checkbox"
           value="A"
         />
         <label
           class="govuk-label govuk-checkboxes__label"
-          for="checkbox-group-A"
+          for="checkbox-group_A"
         >
           isA
         </label>
@@ -349,14 +349,14 @@ exports[`Form checkbox group component should render with label when passed 1`] 
       >
         <input
           class="govuk-checkboxes__input"
-          id="checkbox-group-B"
+          id="checkbox-group_B"
           name="checkbox-group"
           type="checkbox"
           value="B"
         />
         <label
           class="govuk-label govuk-checkboxes__label"
-          for="checkbox-group-B"
+          for="checkbox-group_B"
         >
           isB
         </label>
@@ -366,14 +366,14 @@ exports[`Form checkbox group component should render with label when passed 1`] 
       >
         <input
           class="govuk-checkboxes__input"
-          id="checkbox-group-C"
+          id="checkbox-group_C"
           name="checkbox-group"
           type="checkbox"
           value="C"
         />
         <label
           class="govuk-label govuk-checkboxes__label"
-          for="checkbox-group-C"
+          for="checkbox-group_C"
         >
           isC
         </label>
@@ -406,14 +406,14 @@ exports[`Form checkbox group component should render with value when passed 1`] 
       >
         <input
           class="govuk-checkboxes__input"
-          id="checkbox-group-A"
+          id="checkbox-group_A"
           name="checkbox-group"
           type="checkbox"
           value="A"
         />
         <label
           class="govuk-label govuk-checkboxes__label"
-          for="checkbox-group-A"
+          for="checkbox-group_A"
         >
           isA
         </label>
@@ -423,14 +423,14 @@ exports[`Form checkbox group component should render with value when passed 1`] 
       >
         <input
           class="govuk-checkboxes__input"
-          id="checkbox-group-B"
+          id="checkbox-group_B"
           name="checkbox-group"
           type="checkbox"
           value="B"
         />
         <label
           class="govuk-label govuk-checkboxes__label"
-          for="checkbox-group-B"
+          for="checkbox-group_B"
         >
           isB
         </label>
@@ -440,14 +440,14 @@ exports[`Form checkbox group component should render with value when passed 1`] 
       >
         <input
           class="govuk-checkboxes__input"
-          id="checkbox-group-C"
+          id="checkbox-group_C"
           name="checkbox-group"
           type="checkbox"
           value="C"
         />
         <label
           class="govuk-label govuk-checkboxes__label"
-          for="checkbox-group-C"
+          for="checkbox-group_C"
         >
           isC
         </label>
