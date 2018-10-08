@@ -51,17 +51,17 @@ class Checkbox extends Component {
                         {choices && choices.map((choice, i) => {
                             return (
                                 <div key={i} className="govuk-checkboxes__item">
-                                    <input id={`${name}-${choice.value}`}
+                                    <input id={`${name}_${choice.value}`}
                                         type={type}
                                         name={name}
                                         value={choice.value}
                                         checked={
-                                            this.state[`${name}-${choice.value}`]
+                                            this.state[`${name}_${choice.value}`]
                                         }
                                         onChange={e => this.handleChange(e)}
                                         className={'govuk-checkboxes__input'}
                                     />
-                                    <label className="govuk-label govuk-checkboxes__label" htmlFor={`${name}-${choice.value}`}>{choice.label}</label>
+                                    <label className="govuk-label govuk-checkboxes__label" htmlFor={`${name}_${choice.value}`}>{choice.label}</label>
                                 </div>
                             );
                         })}

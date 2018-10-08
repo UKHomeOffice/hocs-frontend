@@ -171,11 +171,11 @@ describe('Process middleware', () => {
         processMiddleware(req, res, next);
         expect(req.form).toBeDefined();
         expect(req.form.data).toBeDefined();
-        expect(req.form.data['test-field-A']).toBeDefined();
-        expect(req.form.data['test-field-A']).toEqual(true);
-        expect(req.form.data['test-field-B']).toBeDefined();
-        expect(req.form.data['test-field-B']).toEqual(false);
-        expect(req.form.data['test-field-C']).toBeUndefined();
+        expect(req.form.data['test-field_A']).toBeDefined();
+        expect(req.form.data['test-field_A']).toEqual(true);
+        expect(req.form.data['test-field_B']).toBeDefined();
+        expect(req.form.data['test-field_B']).toEqual(false);
+        expect(req.form.data['test-field_C']).toBeUndefined();
         expect(next).toHaveBeenCalled();
         expect(next).toHaveBeenCalledTimes(1);
     });
@@ -210,8 +210,8 @@ describe('Process middleware', () => {
         processMiddleware(req, res, next);
         expect(req.form).toBeDefined();
         expect(req.form.data).toBeDefined();
-        expect(req.form.data['test-field-A']).toBeDefined();
-        expect(req.form.data['test-field-A']).toEqual(true);
+        expect(req.form.data['test-field_A']).toBeDefined();
+        expect(req.form.data['test-field_A']).toEqual(true);
         expect(next).toHaveBeenCalled();
         expect(next).toHaveBeenCalledTimes(1);
     });

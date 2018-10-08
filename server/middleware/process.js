@@ -25,7 +25,7 @@ const customAdapters = {
             selected = value;
         }
         choices.map(choice => {
-            reducer[`${name}-${choice.value}`] = selected.includes(choice.value);
+            reducer[`${name}_${choice.value}`] = selected.includes(choice.value);
         });
     },
     'add-document': (reducer, field, data, req) => {

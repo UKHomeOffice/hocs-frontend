@@ -55,15 +55,15 @@ describe('Form checkbox group component', () => {
         );
         mockCallback.mockReset();
 
-        wrapper.find(`#checkbox-group-${firstValue}`).simulate('change', { target: { value: firstValue } });
+        wrapper.find(`#checkbox-group_${firstValue}`).simulate('change', { target: { value: firstValue } });
         expect(mockCallback).toHaveBeenCalledTimes(1);
         expect(mockCallback).toHaveBeenCalledWith({ 'checkbox-group': [firstValue] });
 
-        wrapper.find(`#checkbox-group-${secondValue}`).simulate('change', { target: { value: secondValue } });
+        wrapper.find(`#checkbox-group_${secondValue}`).simulate('change', { target: { value: secondValue } });
         expect(mockCallback).toHaveBeenCalledTimes(2);
         expect(mockCallback).toHaveBeenCalledWith({ 'checkbox-group': [firstValue, secondValue] });
 
-        wrapper.find(`#checkbox-group-${firstValue}`).simulate('change', { target: { value: firstValue } });
+        wrapper.find(`#checkbox-group_${firstValue}`).simulate('change', { target: { value: firstValue } });
         expect(mockCallback).toHaveBeenCalledTimes(3);
         expect(mockCallback).toHaveBeenCalledWith({ 'checkbox-group': [secondValue] });
     });
