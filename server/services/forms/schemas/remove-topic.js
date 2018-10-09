@@ -1,6 +1,6 @@
-const Form = require('./form-builder');
-const { Component } = require('./component-builder');
-const { workflowServiceClient } = require('../../libs/request');
+const Form = require('../form-builder');
+const { Component } = require('../component-builder');
+const { workflowServiceClient } = require('../../../libs/request');
 
 module.exports = async options => {
     const response = await workflowServiceClient.get(`/case/${options.caseId}/topic/${options.context}`);

@@ -1,6 +1,6 @@
-const Form = require('./form-builder');
-const { Component } = require('./component-builder');
-const { docsServiceClient } = require('../../libs/request');
+const Form = require('../form-builder');
+const { Component } = require('../component-builder');
+const { docsServiceClient } = require('../../../libs/request');
 
 module.exports = async options => {
     const response = await docsServiceClient.get(`/document/${options.context}`);

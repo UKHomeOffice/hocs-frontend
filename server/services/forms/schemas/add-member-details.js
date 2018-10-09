@@ -1,6 +1,6 @@
-const Form = require('./form-builder');
-const { Component, Choice } = require('./component-builder');
-const { infoServiceClient } = require('../../libs/request');
+const Form = require('../form-builder');
+const { Component, Choice } = require('../component-builder');
+const { infoServiceClient } = require('../../../libs/request');
 
 module.exports = async options => {
     const response = await infoServiceClient.get(`/member/${options.context}/address`);
