@@ -1,12 +1,8 @@
 module.exports = {
 
-    Component: (component, name, options) => {
-        options = options || {
-            validation: [],
-            props: { name }
-        };
-        let validation = options.validation || {};
-        const props = { ...options.props, name } || {};
+    Component: (component, name, options = {}) => {
+        const validation = options.validation || [];
+        const props = { ...options.props, name };
 
         return {
             build: () => ({ component, validation, props }),

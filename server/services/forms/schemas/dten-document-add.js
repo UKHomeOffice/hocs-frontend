@@ -1,6 +1,6 @@
-const { DOCUMENT_BULK_LIMIT } = require('../../config').forContext('server');
-const Form = require('./form-builder');
-const { Component } = require('./component-builder');
+const { DOCUMENT_BULK_LIMIT } = require('../../../config').forContext('server');
+const Form = require('../form-builder');
+const { Component } = require('../component-builder');
 
 module.exports = () => Form()
     .withTitle('Create a new case')
@@ -8,6 +8,18 @@ module.exports = () => Form()
         Component('date', 'DateReceived')
             .withValidator('required', 'Date received is required')
             .withProp('label', 'When was the correspondence received?')
+            .build()
+    )
+    .withField(
+        Component('date', 'DTENDispatchDeadline')
+            .withValidator('required', 'Dispatch deadline is required')
+            .withProp('label', 'What is the deadline for dispatch?')
+            .build()
+    )
+    .withField(
+        Component('date', 'DTENDraftDeadline')
+            .withValidator('required', 'Draft deadline is required')
+            .withProp('label', 'What is the deadline for drafting?')
             .build()
     )
     .withField(

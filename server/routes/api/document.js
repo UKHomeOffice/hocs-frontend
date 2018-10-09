@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const { apiGetDocumentList } = require('../../middleware/document');
+const { getDocumentList, apiGetDocumentList } = require('../../middleware/document');
 
-router.get('/:caseId/document/', apiGetDocumentList);
+router.get('/:caseId/document/', getDocumentList, apiGetDocumentList);
 
 module.exports = router;

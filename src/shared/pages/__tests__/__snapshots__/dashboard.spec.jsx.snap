@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Dashboard page component should render with default props 1`] = `
+<Component
+  dispatch={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          undefined,
+        ],
+        Array [
+          undefined,
+        ],
+        Array [
+          undefined,
+        ],
+        Array [
+          undefined,
+        ],
+      ],
+    }
+  }
+>
+  <DashboardPage
+    dispatch={
+      [MockFunction] {
+        "calls": Array [
+          Array [
+            undefined,
+          ],
+          Array [
+            undefined,
+          ],
+          Array [
+            undefined,
+          ],
+          Array [
+            undefined,
+          ],
+        ],
+      }
+    }
+  >
+    <p
+      className="govuk-body"
+    >
+       No dashboard data 
+    </p>
+  </DashboardPage>
+</Component>
+`;

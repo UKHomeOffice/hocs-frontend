@@ -56,8 +56,115 @@ function compareListItems(first, second) {
     const secondLabel = second.label.toUpperCase();
     return (firstLabel < secondLabel) ? -1 : 1;
 }
+// TODO: Cry in to my hands, temporary code..
+function temporaryWorkstackToDashboardAdapter(workstack) {
+    const temp = workstack.reduce((reducer, item) => {
+        if (!reducer[item.teamUUID]) {
+            reducer[item.teamUUID] = { label: item.assignedTeamDisplay, value: item.teamUUID, items: {} };
+        }
+        if (!reducer[item.teamUUID].items[item.caseType]) {
+            reducer[item.teamUUID].items[item.caseType] = { label: item.caseTypeDisplay, value: item.caseType, items: {} };
+        }
+        if (!reducer[item.teamUUID].items[item.caseType].items[item.stageType]) {
+            reducer[item.teamUUID].items[item.caseType].items[item.stageType] = { label: item.stageTypeDisplay, value: item.stageType, count: 0 };
+        }
+        reducer[item.teamUUID].items[item.caseType].items[item.stageType].count++;
+        return reducer;
+    }, {});
+    /* eslint-disable-next-line  no-unused-vars*/
+    const teams = Object.entries(temp).reduce((reducer_2, [key, team]) => {
+        reducer_2.push({
+            label: `Team ${team.label}`,
+            value: team.value,
+            /* eslint-disable-next-line  no-unused-vars*/
+            items: Object.entries(team.items).reduce((reducer_3, [key_2, workflow]) => {
+                reducer_3.push({
+                    label: workflow.label,
+                    value: workflow.value,
+                    /* eslint-disable-next-line  no-unused-vars*/
+                    items: Object.entries(workflow.items).reduce((reducer_4, [key_3, stage]) => {
+                        reducer_4.push({ label: stage.label, value: stage.value, count: stage.count });
+                        return reducer_4;
+                    }, [])
+                });
+                return reducer_3;
+            }, [])
+        });
+        return reducer_2;
+    }, []);
+    const userValues = workstack.filter(i => i.userUUID !== null);
+    const dashboard = {
+        user: {
+            label: 'Cases', count: userValues.length, tags: {}
+        },
+        teams
+    };
+    return dashboard;
+}
 
 const lists = {
+    // TODO: Temporary code to support current workstack implementation
+    'DASHBOARD': async ({ user }) => {
+        const list = listDefinitions['dashboard'].call(this);
+        const response = await caseworkServiceClient.get(list, {
+            'X-Auth-UserId': user.id,
+            'X-Auth-Roles': user.roles.join()
+        });
+        const dashboadData = response.data.activeStages;
+        return temporaryWorkstackToDashboardAdapter(dashboadData);
+    },
+    // TODO: Temporary code to support current workstack implementation
+    'WORKSTACK_USER': async ({ user }) => {
+        const list = listDefinitions['dashboard'].call(this);
+        const response = await caseworkServiceClient.get(list, {
+            'X-Auth-UserId': user.id,
+            'X-Auth-Roles': user.roles.join()
+        });
+        const dashboadData = response.data.activeStages;
+        return {
+            label: 'User workstack',
+            items: dashboadData.filter(item => item.userUUID !== null)
+        };
+    },
+    // TODO: Temporary code to support current workstack implementation
+    'WORKSTACK_TEAM': async ({ user, teamId }) => {
+        const list = listDefinitions['dashboard'].call(this);
+        const response = await caseworkServiceClient.get(list, {
+            'X-Auth-UserId': user.id,
+            'X-Auth-Roles': user.roles.join()
+        });
+        const dashboadData = response.data.activeStages;
+        return {
+            label: 'Team workstack',
+            items: dashboadData.filter(item => item.teamUUID === teamId)
+        };
+    },
+    // TODO: Temporary code to support current workstack implementation
+    'WORKSTACK_WORKFLOW': async ({ user, teamId, workflowId }) => {
+        const list = listDefinitions['dashboard'].call(this);
+        const response = await caseworkServiceClient.get(list, {
+            'X-Auth-UserId': user.id,
+            'X-Auth-Roles': user.roles.join()
+        });
+        const dashboadData = response.data.activeStages;
+        return {
+            label: 'Case type workstack',
+            items: dashboadData.filter(item => item.teamUUID === teamId && item.caseType === workflowId)
+        };
+    },
+    // TODO: Temporary code to support current workstack implementation
+    'WORKSTACK_STAGE': async ({ user, teamId, workflowId, stageId }) => {
+        const list = listDefinitions['dashboard'].call(this);
+        const response = await caseworkServiceClient.get(list, {
+            'X-Auth-UserId': user.id,
+            'X-Auth-Roles': user.roles.join()
+        });
+        const dashboadData = response.data.activeStages;
+        return {
+            label: 'Stage workstack',
+            items: dashboadData.filter(item => item.teamUUID === teamId && item.caseType === workflowId && item.stageType === stageId)
+        };
+    },
     'CASE_TYPES': async ({ user }) => {
         const list = listDefinitions['workflowTypes'].call(this);
         const headerRoles = user.roles.join();
