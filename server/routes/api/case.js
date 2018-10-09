@@ -21,6 +21,7 @@ router.post(['/:caseId/stage/:stageId', '/:caseId/stage/:stageId/allocate'],
     validationMiddleware,
     stageApiResponseMiddleware
 );
+
 router.get('/:caseId/summary', caseSummaryMiddleware, caseSummaryApiResponseMiddleware);
 
 module.exports = router;

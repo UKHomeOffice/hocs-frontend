@@ -114,7 +114,7 @@ describe('Entity list component', () => {
     });
 
     it('should render with created date when passed in props on choice entries', () => {
-        const choice = value => ({ label: `Choice ${value}`, value: `CHOICE_${value}`, created: new Date().toString() });
+        const choice = value => ({ label: `Choice ${value}`, value: `CHOICE_${value}`, created: '2020-01-01' });
         const PROPS = {
             ...DEFAULT_PROPS,
             choices: [
