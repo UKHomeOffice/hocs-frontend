@@ -85,13 +85,25 @@ function temporaryWorkstackToDashboardAdapter(workstack) {
                     items: Object.entries(workflow.items).reduce((reducer_4, [key_3, stage]) => {
                         reducer_4.push({ label: stage.label, value: stage.value, count: stage.count });
                         return reducer_4;
-                    }, [])
+                    }, []).sort((first, second) => {
+                        const firstCount = first.count;
+                        const secondCount = second.count;
+                        return (firstCount < secondCount) ? 1 : -1;
+                    })
                 });
                 return reducer_3;
-            }, [])
+            }, []).sort((first, second) => {
+                const firstLabel = first.label.toUpperCase();
+                const secondLabel = second.label.toUpperCase();
+                return (firstLabel > secondLabel) ? 1 : -1;
+            })
         });
         return reducer_2;
-    }, []);
+    }, []).sort((first, second) => {
+        const firstLabel = first.label.toUpperCase();
+        const secondLabel = second.label.toUpperCase();
+        return (firstLabel > secondLabel) ? 1 : -1;
+    });
     const userValues = workstack.filter(i => i.userUUID !== null);
     const dashboard = {
         user: {
