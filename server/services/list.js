@@ -83,7 +83,7 @@ function temporaryWorkstackToDashboardAdapter(workstack) {
                     value: workflow.value,
                     /* eslint-disable-next-line  no-unused-vars*/
                     items: Object.entries(workflow.items).reduce((reducer_4, [key_3, stage]) => {
-                        reducer_4.push({ label: stage.label, value: stage.value, count: stage.count, tags: { overdue: 4, allocated: 2} });
+                        reducer_4.push({ label: stage.label, value: stage.value, count: stage.count });
                         return reducer_4;
                     }, []).sort((first, second) => {
                         const firstCount = first.count;
