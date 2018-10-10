@@ -81,7 +81,7 @@ export function formComponentFactory(field, options) {
     case 'panel':
         return renderFormComponent(Panel, { key, config });
     case 'inset':
-        return renderFormComponent(Inset, { key, config });
+        return renderFormComponent(Inset, { key, data, config });
     case 'paragraph':
         return renderFormComponent(Paragraph, { key, config });
     case 'entity-manager':
