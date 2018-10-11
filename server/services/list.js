@@ -256,6 +256,17 @@ const lists = {
             return [];
         }
     },
+    'MINISTERS': async () => {
+        const list = listDefinitions['ministerList'].call(this);
+        const response = await fetchList(list);
+        if (response.data.ministers) {
+            return response.data.ministers
+                .sort((first, second) => first.label > second.label ? 1 : -1);
+        } else {
+            logger.warn('No ministers returned for case');
+            return [];
+        }
+    },
     'CASE_STANDARD_LINES': async ({ caseId }) => {
         const response = await workflowServiceClient.get(`/case/${caseId}/standard_lines`);
         if (response.data.standardLines) {
