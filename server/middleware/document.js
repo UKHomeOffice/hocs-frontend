@@ -7,9 +7,7 @@ async function getOriginalDocument(req, res, next) {
     logger.debug(`Requesting Original: ${req.params.documentId}`);
     try {
         const response = await docsServiceClient.get(`/document/${req.params.documentId}/file`, { responseType: 'stream' });
-        if(response && response.status === 200) {
-            res.setHeader('Cache-Control', 'max-age=86400');
-        }
+        res.setHeader('Cache-Control', 'max-age=86400');
         response.data.on('finish', logger.info(`Got Original Document: ${req.params.documentId} for Case: ${req.params.caseId}`));
         response.data.pipe(res);
     } catch (e) {
@@ -23,10 +21,8 @@ async function getPdfDocument(req, res, next) {
     logger.debug(`Requesting PDF: ${req.params.documentId}`);
     try {
         const response = await docsServiceClient.get(`/document/${req.params.documentId}/pdf`, { responseType: 'stream' });
-        if(response && response.status === 200) {
-            res.setHeader('Cache-Control', 'max-age=86400');
-        }
-        response.data.on('finish', () => logger.info(`Got PDF Document: ${req.params.documentId} for Case: ${req.params.caseId}`));
+        res.setHeader('Cache-Control', 'max-age=86400');
+        response.data.on('finish', logger.info(`Got PDF Document: ${req.params.documentId} for Case: ${req.params.caseId}`));
         response.data.pipe(res);
     } catch (e) {
         logger.warn(`Failed getting PDF Document: ${req.params.documentId} for Case: ${req.params.caseId}`);
@@ -49,14 +45,8 @@ async function getDocumentList(req, res, next) {
     }
 }
 
-async function apiGetDocumentList(req, res, next) {
-    try {
-        const response = await getList('CASE_DOCUMENT_LIST', { caseId: req.params.caseId });
-        res.send(response);
-    } catch (e) {
-        logger.warn(`Failed getting api document list for Case: ${req.params.caseId}`);
-        next(e);
-    }
+function apiGetDocumentList(req, res) {
+    res.status(200).json(res.locals.documents);
 }
 
 module.exports = {

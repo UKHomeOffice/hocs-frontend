@@ -1,96 +1,140 @@
-import { workstackMiddleware, apiWorkstackMiddleware } from '../workstack.js';
+const {
+    userWorkstackMiddleware,
+    teamWorkstackMiddleware,
+    workflowWorkstackMiddleware,
+    stageWorkstackMiddleware,
+    workstackApiResponseMiddleware
+} = require('../workstack');
 
-const mockCaseworkSeviceClient = jest.fn();
-jest.mock('../../libs/request.js', () => {
-    return {
-        caseworkServiceClient: {
-            get: jest.fn((url) => {
-                mockCaseworkSeviceClient(url);
-                return Promise.resolve({
-                    data: { activeStages: 'WORKSTACK_DATA' }
-                });
-            })
-        }
-    };
-});
+jest.mock('../../services/list', () => ({
+    getList: jest.fn()
+}));
+
+let req = {};
+let res = {};
+const next = jest.fn();
+const listService = require('../../services/list');
 
 describe('Workstack middleware', () => {
 
-    const send = jest.fn();
-    const status = jest.fn(() => ({
-        send: send
-    }));
-    const next = jest.fn();
-    let req, res;
+    describe('User workstack middleware', () => {
+        beforeEach(() => {
+            next.mockReset();
+            req = {};
+            res = {
+                locals: {}
+            };
+        });
 
-    beforeEach(() => {
-        next.mockReset();
-        status.mockReset();
-        send.mockReset();
-        req = {};
-        res = { status, locals: {} };
+        it('should create a workstack object on res.locals', async () => {
+            listService.getList.mockImplementation(() => Promise.resolve('MOCK_WORKSTACK'));
+            await userWorkstackMiddleware(req, res, next);
+            expect(res.locals.workstack).toBeDefined();
+            expect(res.locals.workstack).toEqual('MOCK_WORKSTACK');
+            expect(next).toHaveBeenCalled();
+        });
+
+        it('should call next with an error if unable to retrieve workstack data', async () => {
+            listService.getList.mockImplementation(() => Promise.reject('MOCK_ERROR'));
+            await userWorkstackMiddleware(req, res, next);
+            expect(res.locals.workstack).not.toBeDefined();
+            expect(next).toHaveBeenCalled();
+            expect(next).toHaveBeenCalledWith('MOCK_ERROR');
+        });
     });
 
-    it('should call the caseworkServiceClient and attach workstack data to the response object', async () => {
-        await workstackMiddleware(req, res, next);
-        expect(mockCaseworkSeviceClient).toHaveBeenCalled();
-        expect(mockCaseworkSeviceClient).toHaveBeenLastCalledWith('/stage/active');
-        expect(next).toHaveBeenCalled();
-        expect(res.locals).toBeDefined();
-        expect(res.locals.workstack).toBeDefined();
-        expect(res.locals.workstack).toEqual('WORKSTACK_DATA');
+    describe('Team workstack middleware', () => {
+        beforeEach(() => {
+            next.mockReset();
+            req = {};
+            res = {
+                locals: {}
+            };
+        });
+
+        it('should create a workstack object on res.locals', async () => {
+            listService.getList.mockImplementation(() => Promise.resolve('MOCK_WORKSTACK'));
+            await teamWorkstackMiddleware(req, res, next);
+            expect(res.locals.workstack).toBeDefined();
+            expect(res.locals.workstack).toEqual('MOCK_WORKSTACK');
+            expect(next).toHaveBeenCalled();
+        });
+
+        it('should call next with an error if unable to retrieve workstack data', async () => {
+            listService.getList.mockImplementation(() => Promise.reject('MOCK_ERROR'));
+            await teamWorkstackMiddleware(req, res, next);
+            expect(res.locals.workstack).not.toBeDefined();
+            expect(next).toHaveBeenCalled();
+            expect(next).toHaveBeenCalledWith('MOCK_ERROR');
+        });
     });
 
-    it('should return a 500 and error if the request fails', () => {
-        const { caseworkServiceClient } = require('../../libs/request');
-        caseworkServiceClient.get.mockImplementation(() => (
-            Promise.reject()
-        ));
-        workstackMiddleware(req, res, next)
-            .then(() => { throw Error('SHOULD_CATCH'); })
-            .catch(e => {
-                expect(e).toBeDefined();
-                expect(e).toBeInstanceOf(Error);
-            });
-    });
-});
+    describe('Workflow workstack middleware', () => {
+        beforeEach(() => {
+            next.mockReset();
+            req = {};
+            res = {
+                locals: {}
+            };
+        });
 
-describe('Workstack API response middleware', () => {
+        it('should create a workstack object on res.locals', async () => {
+            listService.getList.mockImplementation(() => Promise.resolve('MOCK_WORKSTACK'));
+            await workflowWorkstackMiddleware(req, res, next);
+            expect(res.locals.workstack).toBeDefined();
+            expect(res.locals.workstack).toEqual('MOCK_WORKSTACK');
+            expect(next).toHaveBeenCalled();
+        });
 
-    let req = {};
-    let res = {};
-    const next = jest.fn();
-    const mockPipe = jest.fn();
-
-    beforeEach(() => {
-        next.mockReset();
-        mockPipe.mockReset();
-    });
-
-    it('should return the workstack object from the response object', async () => {
-        const { caseworkServiceClient } = require('../../libs/request');
-        caseworkServiceClient.get.mockImplementation(() => (
-            Promise.resolve({
-                data: {
-                    pipe: mockPipe
-                }
-            })
-        ));
-        await apiWorkstackMiddleware(req, res);
-        expect(mockPipe).toHaveBeenCalled();
-        expect(mockPipe).toHaveBeenCalledWith(res);
+        it('should call next with an error if unable to retrieve workstack data', async () => {
+            listService.getList.mockImplementation(() => Promise.reject('MOCK_ERROR'));
+            await workflowWorkstackMiddleware(req, res, next);
+            expect(res.locals.workstack).not.toBeDefined();
+            expect(next).toHaveBeenCalled();
+            expect(next).toHaveBeenCalledWith('MOCK_ERROR');
+        });
     });
 
-    it('should return a 500 and error if the request fails', () => {
-        const { caseworkServiceClient } = require('../../libs/request');
-        caseworkServiceClient.get.mockImplementation(() => (
-            Promise.reject()
-        ));
-        apiWorkstackMiddleware(req, res)
-            .then(() => { throw Error('SHOULD_CATCH'); })
-            .catch(e => {
-                expect(e).toBeDefined();
-                expect(e).toBeInstanceOf(Error);
-            });
+    describe('Stage workstack middleware', () => {
+        beforeEach(() => {
+            next.mockReset();
+            req = {};
+            res = {
+                locals: {}
+            };
+        });
+
+        it('should create a workstack object on res.locals', async () => {
+            listService.getList.mockImplementation(() => Promise.resolve('MOCK_WORKSTACK'));
+            await stageWorkstackMiddleware(req, res, next);
+            expect(res.locals.workstack).toBeDefined();
+            expect(res.locals.workstack).toEqual('MOCK_WORKSTACK');
+            expect(next).toHaveBeenCalled();
+        });
+
+        it('should call next with an error if unable to retrieve workstack data', async () => {
+            listService.getList.mockImplementation(() => Promise.reject('MOCK_ERROR'));
+            await stageWorkstackMiddleware(req, res, next);
+            expect(res.locals.workstack).not.toBeDefined();
+            expect(next).toHaveBeenCalled();
+            expect(next).toHaveBeenCalledWith('MOCK_ERROR');
+        });
+    });
+
+    describe('Workstack API response.middleware', () => {
+
+        beforeEach(() => {
+            req = {};
+            res = {
+                locals: { workstack: 'MOCK_WORKSTACK' },
+                json: jest.fn()
+            };
+        });
+
+        it('should send the workstack data from res.locals', () => {
+            workstackApiResponseMiddleware(req, res);
+            expect(res.json).toHaveBeenCalled();
+            expect(res.json).toHaveBeenCalledWith('MOCK_WORKSTACK');
+        });
     });
 });

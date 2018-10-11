@@ -1,19 +1,4 @@
-const caseCreate = require('./case-create.js');
-const addCorrespondent = require('./add-correspondent.js');
-const addMember = require('./add-member.js');
-const addCorrespondentDetails = require('./add-correspondent-details.js');
-const addMemberDetails = require('./add-member-details.js');
-const removeCorrespondent = require('./remove-correspondent.js');
-const addTopic = require('./add-topic.js');
-const removeTopic = require('./remove-topic.js');
-const addDocument = require('./document-add.js');
-const addDocumentNew = require('./add-document.js');
-const removeDocument = require('./remove-document.js');
-const manageDocuments = require('./manage-documents.js');
-const addDTENDocument = require('./dten-document-add.js');
-const bulkCaseCreate = require('./bulk-case-create.js');
-const bulkAddDocument = require('./bulk-document-add.js');
-const testForm = require('./case-test.js');
+const formRepository = require('./schemas/index');
 const { IS_MEMBER, ADD_MEMBER, SELECT_MEMBER, ADD_CORRESPONDENT, REMOVE_CORRESPONDENT, ADD_TOPIC, REMOVE_TOPIC, CREATE_CASE, BULK_CREATE_CASE, ADD_DOCUMENT, REMOVE_DOCUMENT, MANAGE_DOCUMENTS } = require('../actions/types');
 
 const formDefinitions = {
@@ -21,7 +6,7 @@ const formDefinitions = {
         CREATE: {
             requiredRole: CREATE_CASE,
             WORKFLOW: {
-                builder: caseCreate,
+                builder: formRepository.caseCreate,
                 next: {
                     action: 'DOCUMENT',
                     context: {
@@ -32,21 +17,21 @@ const formDefinitions = {
             /** I see this as temp code, we should move this to a getCreateForType method in the list/workflow service **/
             DOCUMENT: {
                 MIN: {
-                    builder: addDocument,
+                    builder: formRepository.addDocument,
                     action: CREATE_CASE,
                     next: {
                         action: 'CONFIRMATION_SUMMARY'
                     }
                 },
                 TRO: {
-                    builder: addDocument,
+                    builder: formRepository.addDocument,
                     action: CREATE_CASE,
                     next: {
                         action: 'CONFIRMATION_SUMMARY'
                     }
                 },
                 DTEN: {
-                    builder: addDTENDocument,
+                    builder: formRepository.addDTENDocument,
                     action: CREATE_CASE,
                     next: {
                         action: 'CONFIRMATION_SUMMARY'
@@ -57,13 +42,13 @@ const formDefinitions = {
         TEST: {
             requiredRole: 'TEST',
             FORM: {
-                builder: testForm
+                builder: formRepository.testForm
             }
         },
         BULK: {
             requiredRole: BULK_CREATE_CASE,
             WORKFLOW: {
-                builder: bulkCaseCreate,
+                builder: formRepository.bulkCaseCreate,
                 next: {
                     action: 'DOCUMENT',
                     context: {
@@ -73,14 +58,14 @@ const formDefinitions = {
             },
             DOCUMENT: {
                 MIN: {
-                    builder: bulkAddDocument,
+                    builder: formRepository.bulkAddDocument,
                     action: BULK_CREATE_CASE,
                     next: {
                         action: 'CONFIRMATION_SUMMARY'
                     }
                 },
                 TRO: {
-                    builder: bulkAddDocument,
+                    builder: formRepository.bulkAddDocument,
                     action: BULK_CREATE_CASE,
                     next: {
                         action: 'CONFIRMATION_SUMMARY'
@@ -92,49 +77,49 @@ const formDefinitions = {
     CASE: {
         DOCUMENT: {
             ADD: {
-                builder: addDocumentNew,
+                builder: formRepository.addDocumentNew,
                 action: ADD_DOCUMENT
             },
             REMOVE: {
-                builder: removeDocument,
+                builder: formRepository.removeDocument,
                 action: REMOVE_DOCUMENT
             },
             MANAGE: {
-                builder: manageDocuments,
+                builder: formRepository.manageDocuments,
                 action: MANAGE_DOCUMENTS
             }
         },
         TOPIC: {
             ADD: {
-                builder: addTopic,
+                builder: formRepository.addTopic,
                 action: ADD_TOPIC
             },
             REMOVE: {
-                builder: removeTopic,
+                builder: formRepository.removeTopic,
                 action: REMOVE_TOPIC
             }
         },
         CORRESPONDENT: {
             ADD: {
-                builder: addCorrespondent,
+                builder: formRepository.addCorrespondent,
                 action: IS_MEMBER
             },
             DETAILS: {
-                builder: addCorrespondentDetails,
+                builder: formRepository.addCorrespondentDetails,
                 action: ADD_CORRESPONDENT
             },
             REMOVE: {
-                builder: removeCorrespondent,
+                builder: formRepository.removeCorrespondent,
                 action: REMOVE_CORRESPONDENT
             }
         },
         MEMBER: {
             ADD: {
-                builder: addMember,
+                builder: formRepository.addMember,
                 action: SELECT_MEMBER
             },
             DETAILS: {
-                builder: addMemberDetails,
+                builder: formRepository.addMemberDetails,
                 action: ADD_MEMBER
             }
         }

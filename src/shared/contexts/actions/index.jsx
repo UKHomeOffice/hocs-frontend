@@ -88,3 +88,31 @@ export function updatePageMeta(meta) {
         payload: meta
     };
 }
+
+export function updateDashboard(data) {
+    return {
+        type: types.UPDATE_DASHBOARD,
+        payload: data
+    };
+}
+
+export function clearDashboard() {
+    return {
+        type: types.CLEAR_DASHBOARD,
+        payload: null
+    };
+}
+
+export function updateWorkstack(data) {
+    return {
+        type: types.UPDATE_WORKSTACK,
+        payload: data
+    };
+}
+
+export function clearWorkstack() {
+    return {
+        type: types.CLEAR_WORKSTACK,
+        payload: null
+    };
+}

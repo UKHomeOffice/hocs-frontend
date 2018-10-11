@@ -1,0 +1,168 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Dashboard component should render with default props 1`] = `
+<table
+  class="govuk-table"
+>
+  <caption
+    class="govuk-table__caption"
+  >
+    Workstack
+  </caption>
+  <thead
+    class="govuk-table__head"
+  >
+    <tr
+      class="govuk-radios govuk-table__row"
+    >
+      <th
+        class="govuk-table__header"
+      >
+        Type
+      </th>
+      <th
+        class="govuk-table__header"
+      >
+        Reference
+      </th>
+      <th
+        class="govuk-table__header"
+      >
+        Stage
+      </th>
+      <th
+        class="govuk-table__header"
+      >
+        User
+      </th>
+      <th
+        class="govuk-table__header"
+      >
+        Team
+      </th>
+      <th
+        class="govuk-table__header"
+      >
+        Deadline
+      </th>
+      <th
+        class="govuk-table__header"
+      >
+        Actions
+      </th>
+    </tr>
+  </thead>
+  <tbody
+    class="govuk-table__body"
+  >
+    <tr
+      class="govuk-radios govuk-table__row"
+    >
+      <td
+        class="govuk-table__cell"
+      >
+        <strong
+          class="govuk-tag"
+        >
+          ABC
+        </strong>
+      </td>
+      <td
+        class="govuk-table__cell"
+      >
+        ABC/0000002/AA
+      </td>
+      <td
+        class="govuk-table__cell"
+      >
+        Stage type
+      </td>
+      <td
+        class="govuk-table__cell"
+      >
+        Unassigned
+      </td>
+      <td
+        class="govuk-table__cell"
+      >
+        Team 1
+      </td>
+      <td
+        class="govuk-table__cell"
+      >
+        2020-01-01
+      </td>
+      <td
+        class="govuk-table__cell"
+      >
+        <a
+          class="govuk-link govuk-!-margin-right-3"
+          href="/case/undefined/stage/STAGE_UUID/allocate"
+        >
+          Allocate
+        </a>
+        <a
+          class="govuk-link"
+          href="/case/undefined/summary"
+        >
+          Summary
+        </a>
+      </td>
+    </tr>
+    <tr
+      class="govuk-radios govuk-table__row"
+    >
+      <td
+        class="govuk-table__cell"
+      >
+        <strong
+          class="govuk-tag"
+        >
+          ABC
+        </strong>
+      </td>
+      <td
+        class="govuk-table__cell"
+      >
+        ABC/0000001/AA
+      </td>
+      <td
+        class="govuk-table__cell"
+      >
+        Stage type
+      </td>
+      <td
+        class="govuk-table__cell"
+      >
+        User 1
+      </td>
+      <td
+        class="govuk-table__cell"
+      >
+        Team 1
+      </td>
+      <td
+        class="govuk-table__cell"
+      >
+        2020-01-01
+      </td>
+      <td
+        class="govuk-table__cell"
+      >
+        <a
+          class="govuk-link govuk-!-margin-right-3"
+          href="/case/undefined/stage/STAGE_UUID"
+        >
+          Casework
+        </a>
+        <a
+          class="govuk-link"
+          href="/case/undefined/summary"
+        >
+          Summary
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+`;

@@ -1,9 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
-import { ApplicationConsumer } from '../../contexts/application.jsx';
 
-// TODO: Tidy up and implement context to dispatch errors when failed to retrieve
 class Workstack extends Component {
 
     constructor(props) {
@@ -11,19 +8,8 @@ class Workstack extends Component {
         this.state = { ...props };
     }
 
-    componentDidMount() {
-        axios.get('/api/page/workstack')
-            .then(res => {
-                this.setState({ cases: res.data.activeStages });
-            })
-            .catch(err => {
-                /* eslint-disable-next-line */
-                console.error(`UNABLE TO RETRIEVE WORKSTACK: ${err.stack}`);
-            });
-    }
-
     render() {
-        const cases = this.state.cases;
+        const cases = this.state.workstack;
         return (
             <Fragment>
                 <table className='govuk-table'>
@@ -49,7 +35,6 @@ class Workstack extends Component {
                                         </td>
                                         <td className='govuk-table__cell'>{c.caseReference}</td>
                                         <td className='govuk-table__cell'>{c.stageTypeDisplay}</td>
-                                        {/* We don't need this on the User stack, only the Team stack */}
                                         <td className='govuk-table__cell'>{c.assignedUserDisplay}</td>
                                         <td className='govuk-table__cell'>{c.assignedTeamDisplay}</td>
                                         <td className='govuk-table__cell'>{c.deadline}</td>
@@ -72,10 +57,4 @@ class Workstack extends Component {
     }
 }
 
-const WrappedWorkstack = props => (
-    <ApplicationConsumer>
-        {({ workstack }) => <Workstack {...props} cases={workstack} />}
-    </ApplicationConsumer>
-);
-
-export default WrappedWorkstack;
+export default Workstack;

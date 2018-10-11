@@ -1,12 +1,12 @@
 module.exports = (options) => {
     options = options || { schema: {}, data: {} };
-    let schema = {
+    const schema = {
         title: options.schema.title || 'Form',
         defaultActionLabel: options.schema.primaryActionLabel || 'Submit',
         fields: options.schema.fields || [],
         showPrimaryAction: options.schema.showPrimaryAction || true
     };
-    let data = options.data || {};
+    let data = options.data;
     return {
         build: () => ({ schema, data }),
         withTitle: function(title) {

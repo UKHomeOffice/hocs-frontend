@@ -1,13 +1,13 @@
-const Form = require('./form-builder');
-const { Component } = require('./component-builder');
+const Form = require('../form-builder');
+const { Component } = require('../component-builder');
 
 module.exports = () => Form()
-    .withTitle('Create new cases in bulk')
+    .withTitle('Create a new case')
     .withField(
         Component('radio', 'case-type')
             .withValidator('required', 'Case type is required')
             .withProp('label', 'What type of correspondence do you have?')
-            .withProp('choices', 'CASE_TYPES_BULK')
+            .withProp('choices', 'CASE_TYPES')
             .build()
     )
     .withPrimaryActionLabel('Next')

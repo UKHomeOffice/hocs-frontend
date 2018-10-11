@@ -8,13 +8,13 @@ async function actionResponseMiddleware(req, res, next) {
         const { callbackUrl, confirmation } = response;
         if (confirmation) {
             res.locals.confirmation = confirmation;
-        } else if (callbackUrl) {
+        }
+        if (callbackUrl) {
             return res.redirect(callbackUrl);
         }
+        next();
     } catch (e) {
         return next(e);
-    } finally {
-        next();
     }
 }
 

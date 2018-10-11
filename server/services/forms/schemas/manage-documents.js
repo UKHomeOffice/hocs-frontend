@@ -1,6 +1,6 @@
-const Form = require('./form-builder');
-const { Component } = require('./component-builder');
-const { getList } = require('../../services/list');
+const Form = require('../form-builder');
+const { Component } = require('../component-builder');
+const { getList } = require('../../../services/list');
 
 function documentAdapter(document) {
     const tags = [];

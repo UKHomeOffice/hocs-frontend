@@ -63,7 +63,6 @@ function withForm(Page) {
                             dispatch(updateApiStatus(status.REQUEST_FORM_FAILURE))
                                 .then(() => dispatch(setError(error.response.data)));
                         });
-
                 });
         }
 

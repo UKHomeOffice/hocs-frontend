@@ -1,6 +1,6 @@
-const { DOCUMENT_BULK_LIMIT } = require('../../config').forContext('server');
-const Form = require('./form-builder');
-const { Component } = require('./component-builder');
+const { DOCUMENT_BULK_LIMIT } = require('../../../config').forContext('server');
+const Form = require('../form-builder');
+const { Component } = require('../component-builder');
 
 module.exports = () => Form()
     .withTitle('Create new cases in bulk')
