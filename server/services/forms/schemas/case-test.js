@@ -54,8 +54,14 @@ module.exports = () => Form()
             .build()
     )
     .withField(
-        Component('inset')
-            .withProp('children', 'Doing this thing will make that thing happen.')
+        Component('text', 'sign-off-minister')
+            .withValidator('required', 'A sign off minister is required')
+            .withProp('label', 'Sign off minister')
+            .build()
+    )
+    .withField(
+        Component('inset', 'sign-off-minister')
+            .withProp('children', 'Minister:')
             .build()
     )
     .withField(
@@ -150,4 +156,5 @@ module.exports = () => Form()
             .build()
     )
     .withPrimaryActionLabel('Submit')
+    .withData({ 'test_data': 'TESTING' })
     .build();
