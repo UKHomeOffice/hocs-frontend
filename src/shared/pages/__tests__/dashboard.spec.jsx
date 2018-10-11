@@ -24,7 +24,7 @@ jest.mock('../../contexts/actions/index.jsx', () => ({
     updateApiStatus: jest.fn(),
     clearApiStatus: jest.fn(),
     updateDashboard: jest.fn(),
-    clearDashboard: jest.fn(),
+    clearDashboard: jest.fn()
 }));
 
 import axios from 'axios';
@@ -52,7 +52,6 @@ describe('Dashboard page component', () => {
         expect(WRAPPER).toBeDefined();
         expect(WRAPPER).toMatchSnapshot();
         expect(MOCK_DISPATCH).toHaveBeenCalled();
-        expect(actions.updateDashboard).toHaveBeenCalled();
         expect(axios.get).toHaveBeenCalled();
         expect(axios.get).toHaveBeenCalledWith(DASHBOARD_ENDPOINT);
     });
@@ -69,8 +68,8 @@ describe('Dashboard page component', () => {
         );
         await FLUSH_PROMISES();
         expect(WRAPPER).toBeDefined();
-        expect(MOCK_DISPATCH).not.toHaveBeenCalled();
-        expect(actions.updateDashboard).not.toHaveBeenCalled();
+        expect(MOCK_DISPATCH).toHaveBeenCalled();
+        expect(MOCK_DISPATCH).toHaveBeenCalledWith(actions.clearDashboard());
         expect(axios.get).not.toHaveBeenCalled();
     });
 

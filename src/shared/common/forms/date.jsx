@@ -5,25 +5,22 @@ class DateInput extends Component {
 
     constructor(props) {
         super(props);
-        const dateComponents = this.parseValue();
-        this.state = { ...dateComponents };
-    }
-
-    datePart(field) {
-        return `${this.props.name}-${field}`;
+        this.state = this.parseValue(props);
     }
 
     componentDidMount() {
         this.props.updateState(this.state);
     }
 
-    handleChange(field, value) {
+    _onChange(field, value) {
         this.setState({ [field]: value });
         this.props.updateState({ [field]: value });
     }
 
-    parseValue() {
-        const parts = this.props.value && this.props.value.split('-');
+    datePart(field) { return `${this.props.name}-${field}`; }
+
+    parseValue({ value }) {
+        const parts = value && value.split('-');
         return {
             [this.datePart('day')]: parts && parts[2] || '',
             [this.datePart('month')]: parts && parts[1] || '',
@@ -59,7 +56,7 @@ class DateInput extends Component {
                                 min="1"
                                 max="31"
                                 value={this.state[this.datePart('day')]}
-                                onChange={e => this.handleChange(this.datePart('day'), e.target.value)}
+                                onChange={e => this._onChange(this.datePart('day'), e.target.value)}
                             />
                         </div>
                     </div>
@@ -75,7 +72,7 @@ class DateInput extends Component {
                                 min="1"
                                 max="12"
                                 value={this.state[this.datePart('month')]}
-                                onChange={e => this.handleChange(this.datePart('month'), e.target.value)}
+                                onChange={e => this._onChange(this.datePart('month'), e.target.value)}
                             />
                         </div>
                     </div>
@@ -91,7 +88,7 @@ class DateInput extends Component {
                                 min={minYear}
                                 max={maxYear}
                                 value={this.state[this.datePart('year')]}
-                                onChange={e => this.handleChange(this.datePart('year'), e.target.value)}
+                                onChange={e => this._onChange(this.datePart('year'), e.target.value)}
                             />
                         </div>
                     </div>

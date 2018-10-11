@@ -5,9 +5,6 @@ import Form from '../common/forms/form.jsx';
 import Panel from '../common/forms/panel.jsx';
 import { ApplicationConsumer } from '../contexts/application.jsx';
 import {
-    updateForm,
-    updateFormData,
-    updateFormErrors,
     setError,
     updateApiStatus,
     clearApiStatus,
@@ -23,20 +20,23 @@ function withForm(Page) {
 
         constructor(props) {
             super(props);
+            const { confirmation, form = {} } = props;
             this.state = {
-                confirmation: props.confirmation
+                confirmation,
+                form_data: form.data,
+                form_errors: form.errors,
+                form_schema: form.schema,
+                form_meta: form.meta
             };
         }
 
         componentDidMount() {
-            const { dispatch, match } = this.props;
-            this.getForm();
+            const { dispatch, form, match } = this.props;
+            if (!form) {
+                return this.getForm();
+            }
             dispatch(updatePageMeta(match.params));
-        }
-
-        componentWillUnmount() {
-            const { dispatch } = this.props;
-            return dispatch(unsetForm());
+            dispatch(unsetForm());
         }
 
         shouldComponentUpdate(nextProps, nextState) {
@@ -52,7 +52,12 @@ function withForm(Page) {
                     axios.get(endpoint)
                         .then(response => {
                             dispatch(updateApiStatus(status.REQUEST_FORM_SUCCESS))
-                                .then(() => dispatch(updateForm(response.data)))
+                                .then(() => this.setState({
+                                    form_data: response.data.data,
+                                    form_errors: response.data.errors,
+                                    form_schema: response.data.schema,
+                                    form_meta: response.data.meta
+                                }))
                                 .then(() => dispatch(clearApiStatus()))
                                 .catch(error => {
                                     dispatch(updateApiStatus(status.UPDATE_FORM_FAILURE))
@@ -68,17 +73,18 @@ function withForm(Page) {
 
         submitHandler(e) {
             e.preventDefault();
-            const { dispatch, form, history, match: { url } } = this.props;
+            const { dispatch, history, match: { url } } = this.props;
+            const { form_data } = this.state;
             // TODO: Remove
             /* eslint-disable-next-line no-undef */
             const formData = new FormData();
-            Object.keys(form.data).map(field => {
-                if (Array.isArray(form.data[field])) {
-                    form.data[field].map(value => {
+            Object.keys(form_data).map(field => {
+                if (Array.isArray(form_data[field])) {
+                    form_data[field].map(value => {
                         formData.append(`${field}[]`, value);
                     });
                 } else {
-                    formData.append(field, form.data[field]);
+                    formData.append(field, form_data[field]);
                 }
             });
             return dispatch(updateApiStatus(status.SUBMIT_FORM))
@@ -89,7 +95,7 @@ function withForm(Page) {
                                 .then(() => {
                                     if (res.data.errors) {
                                         dispatch(updateApiStatus(status.SUBMIT_FORM_VALIDATION_ERROR))
-                                            .then(() => dispatch(updateFormErrors(res.data.errors)));
+                                            .then(() => this.setState({ form_errors: res.data.errors }));
 
                                     } else {
                                         if (res.data.confirmation) {
@@ -97,12 +103,10 @@ function withForm(Page) {
                                             return dispatch(clearApiStatus());
                                         }
                                         if (res.data.redirect === url) {
-                                            return dispatch(updateForm(null))
-                                                .then(() => dispatch(clearApiStatus()))
+                                            return dispatch(clearApiStatus())
                                                 .then(() => this.getForm());
                                         }
-                                        return dispatch(updateForm(null))
-                                            .then(() => dispatch(clearApiStatus()))
+                                        return dispatch(clearApiStatus())
                                             .then((() => history.push(res.data.redirect)));
                                     }
                                 });
@@ -118,7 +122,9 @@ function withForm(Page) {
         }
 
         updateState(data) {
-            this.props.dispatch(updateFormData(data));
+            this.setState((state) => ({
+                form_data: { ...state.form_data, ...data }
+            }));
         }
 
         renderConfirmation() {
@@ -133,11 +139,17 @@ function withForm(Page) {
         }
 
         renderForm() {
-            const { form, match: { url } } = this.props;
+            const { match: { url } } = this.props;
+            const { form_data, form_errors, form_meta, form_schema } = this.state;
             return (
-                <Page title={form.schema.title} form={form.meta} >
-                    {form.schema && <Form
-                        {...form}
+                <Page title={form_schema.title} form={form_meta} >
+                    {form_schema && <Form
+                        {...{
+                            schema: form_schema,
+                            data: form_data,
+                            errors: form_errors,
+                            meta: form_meta
+                        }}
                         action={url}
                         submitHandler={this.submitHandler.bind(this)}
                         updateFormState={this.updateState.bind(this)}
@@ -147,12 +159,11 @@ function withForm(Page) {
         }
 
         render() {
-            const { form } = this.props;
-            const { confirmation } = this.state;
+            const { confirmation, form_schema } = this.state;
             return (
                 <Fragment>
                     {confirmation && this.renderConfirmation()}
-                    {!confirmation && form && form.schema && this.renderForm()}
+                    {!confirmation && form_schema && this.renderForm()}
                 </Fragment>
             );
         }

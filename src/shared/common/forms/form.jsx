@@ -8,7 +8,6 @@ class Form extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { ...props.data };
     }
 
     render() {
@@ -24,7 +23,7 @@ class Form extends Component {
             <Fragment>
                 {errors && <ErrorSummary errors={errors} />}
                 < form
-                    action={action + '?noScript=true'}
+                    action={action}
                     method={method}
                     onSubmit={this.props.submitHandler}
                     encType="multipart/form-data"

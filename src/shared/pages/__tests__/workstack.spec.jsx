@@ -25,7 +25,7 @@ jest.mock('../../contexts/actions/index.jsx', () => ({
     updateApiStatus: jest.fn(),
     clearApiStatus: jest.fn(),
     updateWorkstack: jest.fn(),
-    clearWorkstack: jest.fn(),
+    clearWorkstack: jest.fn()
 }));
 
 import axios from 'axios';
@@ -53,7 +53,6 @@ describe('Workstack page component', () => {
         expect(WRAPPER).toBeDefined();
         expect(WRAPPER).toMatchSnapshot();
         expect(MOCK_DISPATCH).toHaveBeenCalled();
-        expect(actions.updateWorkstack).toHaveBeenCalled();
         expect(axios.get).toHaveBeenCalled();
         expect(axios.get).toHaveBeenCalledWith(BASE_URL + MOCK_MATCH.url);
     });
@@ -67,8 +66,8 @@ describe('Workstack page component', () => {
         );
         await FLUSH_PROMISES();
         expect(WRAPPER).toBeDefined();
-        expect(MOCK_DISPATCH).not.toHaveBeenCalled();
-        expect(actions.updateWorkstack).not.toHaveBeenCalled();
+        expect(MOCK_DISPATCH).toHaveBeenCalled();
+        expect(MOCK_DISPATCH).toHaveBeenCalledWith(actions.clearWorkstack());
         expect(axios.get).not.toHaveBeenCalled();
     });
 
