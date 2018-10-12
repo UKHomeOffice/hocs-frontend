@@ -206,6 +206,7 @@ exports[`Document add component should render with validation error when passed 
       </label>
       <span
         className="govuk-error-message"
+        id="add-document-error"
       >
         MY_ERROR
       </span>

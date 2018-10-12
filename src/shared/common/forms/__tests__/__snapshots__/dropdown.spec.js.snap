@@ -69,6 +69,7 @@ exports[`Form dropdown component should render with error when passed 1`] = `
   />
   <span
     class="govuk-error-message"
+    id="radio-group-error"
   >
     Some error message
   </span>

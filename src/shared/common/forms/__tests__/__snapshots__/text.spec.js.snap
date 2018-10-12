@@ -77,6 +77,7 @@ exports[`Form text component should render with error when passed 1`] = `
   </label>
   <span
     class="govuk-error-message"
+    id="text-field-error"
   >
     Some error message
   </span>

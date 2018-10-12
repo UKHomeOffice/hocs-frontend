@@ -20,13 +20,14 @@ function withForm(Page) {
 
         constructor(props) {
             super(props);
-            const { confirmation, form = {} } = props;
+            const { confirmation, form } = props;
+            const { data, errors, schema, meta } = form === null ? {} : form;
             this.state = {
                 confirmation,
-                form_data: form.data,
-                form_errors: form.errors,
-                form_schema: form.schema,
-                form_meta: form.meta
+                form_data: data,
+                form_errors: errors,
+                form_schema: schema,
+                form_meta: meta
             };
         }
 

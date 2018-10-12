@@ -174,6 +174,7 @@ exports[`Form type ahead component (select) should render disabled when passed 1
           }
         }
         defaultOptions={false}
+        id="type-ahead"
         isClearable={true}
         isDisabled={true}
         loadOptions={[Function]}
@@ -221,6 +222,7 @@ exports[`Form type ahead component (select) should render disabled when passed 1
           defaultOptions={false}
           defaultValue={null}
           filterOption={null}
+          id="type-ahead"
           isClearable={true}
           isDisabled={true}
           isLoading={false}
@@ -267,6 +269,7 @@ exports[`Form type ahead component (select) should render disabled when passed 1
             formatGroupLabel={[Function]}
             getOptionLabel={[Function]}
             getOptionValue={[Function]}
+            id="type-ahead"
             inputValue=""
             isClearable={true}
             isDisabled={true}
@@ -321,7 +324,7 @@ exports[`Form type ahead component (select) should render disabled when passed 1
               hasValue={false}
               innerProps={
                 Object {
-                  "id": undefined,
+                  "id": "type-ahead",
                   "onKeyDown": [Function],
                 }
               }
@@ -354,6 +357,7 @@ exports[`Form type ahead component (select) should render disabled when passed 1
                   "formatGroupLabel": [Function],
                   "getOptionLabel": [Function],
                   "getOptionValue": [Function],
+                  "id": "type-ahead",
                   "inputValue": "",
                   "isClearable": true,
                   "isDisabled": true,
@@ -403,6 +407,7 @@ exports[`Form type ahead component (select) should render disabled when passed 1
             >
               <div
                 className="css-1sontr1 govuk-typeahead--is-disabled"
+                id="type-ahead"
                 onKeyDown={[Function]}
               >
                 <Control
@@ -447,6 +452,7 @@ exports[`Form type ahead component (select) should render disabled when passed 1
                       "formatGroupLabel": [Function],
                       "getOptionLabel": [Function],
                       "getOptionValue": [Function],
+                      "id": "type-ahead",
                       "inputValue": "",
                       "isClearable": true,
                       "isDisabled": true,
@@ -537,6 +543,7 @@ exports[`Form type ahead component (select) should render disabled when passed 1
                         "formatGroupLabel": [Function],
                         "getOptionLabel": [Function],
                         "getOptionValue": [Function],
+                        "id": "type-ahead",
                         "inputValue": "",
                         "isClearable": true,
                         "isDisabled": true,
@@ -623,6 +630,7 @@ exports[`Form type ahead component (select) should render disabled when passed 1
                             "formatGroupLabel": [Function],
                             "getOptionLabel": [Function],
                             "getOptionValue": [Function],
+                            "id": "type-ahead",
                             "inputValue": "",
                             "isClearable": true,
                             "isDisabled": true,
@@ -708,6 +716,7 @@ exports[`Form type ahead component (select) should render disabled when passed 1
                                 "formatGroupLabel": [Function],
                                 "getOptionLabel": [Function],
                                 "getOptionValue": [Function],
+                                "id": "type-ahead",
                                 "inputValue": "",
                                 "isClearable": true,
                                 "isDisabled": true,
@@ -902,6 +911,7 @@ exports[`Form type ahead component (select) should render disabled when passed 1
                             "formatGroupLabel": [Function],
                             "getOptionLabel": [Function],
                             "getOptionValue": [Function],
+                            "id": "type-ahead",
                             "inputValue": "",
                             "isClearable": true,
                             "isDisabled": true,
@@ -987,6 +997,7 @@ exports[`Form type ahead component (select) should render disabled when passed 1
                                 "formatGroupLabel": [Function],
                                 "getOptionLabel": [Function],
                                 "getOptionValue": [Function],
+                                "id": "type-ahead",
                                 "inputValue": "",
                                 "isClearable": true,
                                 "isDisabled": true,
@@ -1080,6 +1091,7 @@ exports[`Form type ahead component (select) should render disabled when passed 1
                                 "formatGroupLabel": [Function],
                                 "getOptionLabel": [Function],
                                 "getOptionValue": [Function],
+                                "id": "type-ahead",
                                 "inputValue": "",
                                 "isClearable": true,
                                 "isDisabled": true,
@@ -1194,6 +1206,7 @@ exports[`Form type ahead component (select) should render with default props 1`]
           }
         }
         defaultOptions={false}
+        id="type-ahead"
         isClearable={true}
         isDisabled={false}
         loadOptions={[Function]}
@@ -1241,6 +1254,7 @@ exports[`Form type ahead component (select) should render with default props 1`]
           defaultOptions={false}
           defaultValue={null}
           filterOption={null}
+          id="type-ahead"
           isClearable={true}
           isDisabled={false}
           isLoading={false}
@@ -1287,6 +1301,7 @@ exports[`Form type ahead component (select) should render with default props 1`]
             formatGroupLabel={[Function]}
             getOptionLabel={[Function]}
             getOptionValue={[Function]}
+            id="type-ahead"
             inputValue=""
             isClearable={true}
             isDisabled={false}
@@ -1341,7 +1356,7 @@ exports[`Form type ahead component (select) should render with default props 1`]
               hasValue={false}
               innerProps={
                 Object {
-                  "id": undefined,
+                  "id": "type-ahead",
                   "onKeyDown": [Function],
                 }
               }
@@ -1374,6 +1389,7 @@ exports[`Form type ahead component (select) should render with default props 1`]
                   "formatGroupLabel": [Function],
                   "getOptionLabel": [Function],
                   "getOptionValue": [Function],
+                  "id": "type-ahead",
                   "inputValue": "",
                   "isClearable": true,
                   "isDisabled": false,
@@ -1423,6 +1439,7 @@ exports[`Form type ahead component (select) should render with default props 1`]
             >
               <div
                 className="css-10nd86i"
+                id="type-ahead"
                 onKeyDown={[Function]}
               >
                 <Control
@@ -1467,6 +1484,7 @@ exports[`Form type ahead component (select) should render with default props 1`]
                       "formatGroupLabel": [Function],
                       "getOptionLabel": [Function],
                       "getOptionValue": [Function],
+                      "id": "type-ahead",
                       "inputValue": "",
                       "isClearable": true,
                       "isDisabled": false,
@@ -1557,6 +1575,7 @@ exports[`Form type ahead component (select) should render with default props 1`]
                         "formatGroupLabel": [Function],
                         "getOptionLabel": [Function],
                         "getOptionValue": [Function],
+                        "id": "type-ahead",
                         "inputValue": "",
                         "isClearable": true,
                         "isDisabled": false,
@@ -1643,6 +1662,7 @@ exports[`Form type ahead component (select) should render with default props 1`]
                             "formatGroupLabel": [Function],
                             "getOptionLabel": [Function],
                             "getOptionValue": [Function],
+                            "id": "type-ahead",
                             "inputValue": "",
                             "isClearable": true,
                             "isDisabled": false,
@@ -1728,6 +1748,7 @@ exports[`Form type ahead component (select) should render with default props 1`]
                                 "formatGroupLabel": [Function],
                                 "getOptionLabel": [Function],
                                 "getOptionValue": [Function],
+                                "id": "type-ahead",
                                 "inputValue": "",
                                 "isClearable": true,
                                 "isDisabled": false,
@@ -1922,6 +1943,7 @@ exports[`Form type ahead component (select) should render with default props 1`]
                             "formatGroupLabel": [Function],
                             "getOptionLabel": [Function],
                             "getOptionValue": [Function],
+                            "id": "type-ahead",
                             "inputValue": "",
                             "isClearable": true,
                             "isDisabled": false,
@@ -2007,6 +2029,7 @@ exports[`Form type ahead component (select) should render with default props 1`]
                                 "formatGroupLabel": [Function],
                                 "getOptionLabel": [Function],
                                 "getOptionValue": [Function],
+                                "id": "type-ahead",
                                 "inputValue": "",
                                 "isClearable": true,
                                 "isDisabled": false,
@@ -2100,6 +2123,7 @@ exports[`Form type ahead component (select) should render with default props 1`]
                                 "formatGroupLabel": [Function],
                                 "getOptionLabel": [Function],
                                 "getOptionValue": [Function],
+                                "id": "type-ahead",
                                 "inputValue": "",
                                 "isClearable": true,
                                 "isDisabled": false,
@@ -2208,6 +2232,7 @@ exports[`Form type ahead component (select) should render with error when passed
       />
       <span
         className="govuk-error-message"
+        id="type-ahead-error"
       >
         Some error message
       </span>
@@ -2221,6 +2246,7 @@ exports[`Form type ahead component (select) should render with error when passed
         }
         defaultOptions={false}
         error="Some error message"
+        id="type-ahead"
         isClearable={true}
         isDisabled={false}
         loadOptions={[Function]}
@@ -2269,6 +2295,7 @@ exports[`Form type ahead component (select) should render with error when passed
           defaultValue={null}
           error="Some error message"
           filterOption={null}
+          id="type-ahead"
           isClearable={true}
           isDisabled={false}
           isLoading={false}
@@ -2316,6 +2343,7 @@ exports[`Form type ahead component (select) should render with error when passed
             formatGroupLabel={[Function]}
             getOptionLabel={[Function]}
             getOptionValue={[Function]}
+            id="type-ahead"
             inputValue=""
             isClearable={true}
             isDisabled={false}
@@ -2370,7 +2398,7 @@ exports[`Form type ahead component (select) should render with error when passed
               hasValue={false}
               innerProps={
                 Object {
-                  "id": undefined,
+                  "id": "type-ahead",
                   "onKeyDown": [Function],
                 }
               }
@@ -2403,6 +2431,7 @@ exports[`Form type ahead component (select) should render with error when passed
                   "formatGroupLabel": [Function],
                   "getOptionLabel": [Function],
                   "getOptionValue": [Function],
+                  "id": "type-ahead",
                   "inputValue": "",
                   "isClearable": true,
                   "isDisabled": false,
@@ -2452,6 +2481,7 @@ exports[`Form type ahead component (select) should render with error when passed
             >
               <div
                 className="css-10nd86i"
+                id="type-ahead"
                 onKeyDown={[Function]}
               >
                 <Control
@@ -2496,6 +2526,7 @@ exports[`Form type ahead component (select) should render with error when passed
                       "formatGroupLabel": [Function],
                       "getOptionLabel": [Function],
                       "getOptionValue": [Function],
+                      "id": "type-ahead",
                       "inputValue": "",
                       "isClearable": true,
                       "isDisabled": false,
@@ -2586,6 +2617,7 @@ exports[`Form type ahead component (select) should render with error when passed
                         "formatGroupLabel": [Function],
                         "getOptionLabel": [Function],
                         "getOptionValue": [Function],
+                        "id": "type-ahead",
                         "inputValue": "",
                         "isClearable": true,
                         "isDisabled": false,
@@ -2672,6 +2704,7 @@ exports[`Form type ahead component (select) should render with error when passed
                             "formatGroupLabel": [Function],
                             "getOptionLabel": [Function],
                             "getOptionValue": [Function],
+                            "id": "type-ahead",
                             "inputValue": "",
                             "isClearable": true,
                             "isDisabled": false,
@@ -2757,6 +2790,7 @@ exports[`Form type ahead component (select) should render with error when passed
                                 "formatGroupLabel": [Function],
                                 "getOptionLabel": [Function],
                                 "getOptionValue": [Function],
+                                "id": "type-ahead",
                                 "inputValue": "",
                                 "isClearable": true,
                                 "isDisabled": false,
@@ -2951,6 +2985,7 @@ exports[`Form type ahead component (select) should render with error when passed
                             "formatGroupLabel": [Function],
                             "getOptionLabel": [Function],
                             "getOptionValue": [Function],
+                            "id": "type-ahead",
                             "inputValue": "",
                             "isClearable": true,
                             "isDisabled": false,
@@ -3036,6 +3071,7 @@ exports[`Form type ahead component (select) should render with error when passed
                                 "formatGroupLabel": [Function],
                                 "getOptionLabel": [Function],
                                 "getOptionValue": [Function],
+                                "id": "type-ahead",
                                 "inputValue": "",
                                 "isClearable": true,
                                 "isDisabled": false,
@@ -3129,6 +3165,7 @@ exports[`Form type ahead component (select) should render with error when passed
                                 "formatGroupLabel": [Function],
                                 "getOptionLabel": [Function],
                                 "getOptionValue": [Function],
+                                "id": "type-ahead",
                                 "inputValue": "",
                                 "isClearable": true,
                                 "isDisabled": false,
@@ -3249,6 +3286,7 @@ exports[`Form type ahead component (select) should render with hint when passed 
           }
         }
         defaultOptions={false}
+        id="type-ahead"
         isClearable={true}
         isDisabled={false}
         loadOptions={[Function]}
@@ -3296,6 +3334,7 @@ exports[`Form type ahead component (select) should render with hint when passed 
           defaultOptions={false}
           defaultValue={null}
           filterOption={null}
+          id="type-ahead"
           isClearable={true}
           isDisabled={false}
           isLoading={false}
@@ -3342,6 +3381,7 @@ exports[`Form type ahead component (select) should render with hint when passed 
             formatGroupLabel={[Function]}
             getOptionLabel={[Function]}
             getOptionValue={[Function]}
+            id="type-ahead"
             inputValue=""
             isClearable={true}
             isDisabled={false}
@@ -3396,7 +3436,7 @@ exports[`Form type ahead component (select) should render with hint when passed 
               hasValue={false}
               innerProps={
                 Object {
-                  "id": undefined,
+                  "id": "type-ahead",
                   "onKeyDown": [Function],
                 }
               }
@@ -3429,6 +3469,7 @@ exports[`Form type ahead component (select) should render with hint when passed 
                   "formatGroupLabel": [Function],
                   "getOptionLabel": [Function],
                   "getOptionValue": [Function],
+                  "id": "type-ahead",
                   "inputValue": "",
                   "isClearable": true,
                   "isDisabled": false,
@@ -3478,6 +3519,7 @@ exports[`Form type ahead component (select) should render with hint when passed 
             >
               <div
                 className="css-10nd86i"
+                id="type-ahead"
                 onKeyDown={[Function]}
               >
                 <Control
@@ -3522,6 +3564,7 @@ exports[`Form type ahead component (select) should render with hint when passed 
                       "formatGroupLabel": [Function],
                       "getOptionLabel": [Function],
                       "getOptionValue": [Function],
+                      "id": "type-ahead",
                       "inputValue": "",
                       "isClearable": true,
                       "isDisabled": false,
@@ -3612,6 +3655,7 @@ exports[`Form type ahead component (select) should render with hint when passed 
                         "formatGroupLabel": [Function],
                         "getOptionLabel": [Function],
                         "getOptionValue": [Function],
+                        "id": "type-ahead",
                         "inputValue": "",
                         "isClearable": true,
                         "isDisabled": false,
@@ -3698,6 +3742,7 @@ exports[`Form type ahead component (select) should render with hint when passed 
                             "formatGroupLabel": [Function],
                             "getOptionLabel": [Function],
                             "getOptionValue": [Function],
+                            "id": "type-ahead",
                             "inputValue": "",
                             "isClearable": true,
                             "isDisabled": false,
@@ -3783,6 +3828,7 @@ exports[`Form type ahead component (select) should render with hint when passed 
                                 "formatGroupLabel": [Function],
                                 "getOptionLabel": [Function],
                                 "getOptionValue": [Function],
+                                "id": "type-ahead",
                                 "inputValue": "",
                                 "isClearable": true,
                                 "isDisabled": false,
@@ -3977,6 +4023,7 @@ exports[`Form type ahead component (select) should render with hint when passed 
                             "formatGroupLabel": [Function],
                             "getOptionLabel": [Function],
                             "getOptionValue": [Function],
+                            "id": "type-ahead",
                             "inputValue": "",
                             "isClearable": true,
                             "isDisabled": false,
@@ -4062,6 +4109,7 @@ exports[`Form type ahead component (select) should render with hint when passed 
                                 "formatGroupLabel": [Function],
                                 "getOptionLabel": [Function],
                                 "getOptionValue": [Function],
+                                "id": "type-ahead",
                                 "inputValue": "",
                                 "isClearable": true,
                                 "isDisabled": false,
@@ -4155,6 +4203,7 @@ exports[`Form type ahead component (select) should render with hint when passed 
                                 "formatGroupLabel": [Function],
                                 "getOptionLabel": [Function],
                                 "getOptionValue": [Function],
+                                "id": "type-ahead",
                                 "inputValue": "",
                                 "isClearable": true,
                                 "isDisabled": false,
@@ -4272,6 +4321,7 @@ exports[`Form type ahead component (select) should render with label when passed
           }
         }
         defaultOptions={false}
+        id="type-ahead"
         isClearable={true}
         isDisabled={false}
         loadOptions={[Function]}
@@ -4319,6 +4369,7 @@ exports[`Form type ahead component (select) should render with label when passed
           defaultOptions={false}
           defaultValue={null}
           filterOption={null}
+          id="type-ahead"
           isClearable={true}
           isDisabled={false}
           isLoading={false}
@@ -4365,6 +4416,7 @@ exports[`Form type ahead component (select) should render with label when passed
             formatGroupLabel={[Function]}
             getOptionLabel={[Function]}
             getOptionValue={[Function]}
+            id="type-ahead"
             inputValue=""
             isClearable={true}
             isDisabled={false}
@@ -4419,7 +4471,7 @@ exports[`Form type ahead component (select) should render with label when passed
               hasValue={false}
               innerProps={
                 Object {
-                  "id": undefined,
+                  "id": "type-ahead",
                   "onKeyDown": [Function],
                 }
               }
@@ -4452,6 +4504,7 @@ exports[`Form type ahead component (select) should render with label when passed
                   "formatGroupLabel": [Function],
                   "getOptionLabel": [Function],
                   "getOptionValue": [Function],
+                  "id": "type-ahead",
                   "inputValue": "",
                   "isClearable": true,
                   "isDisabled": false,
@@ -4501,6 +4554,7 @@ exports[`Form type ahead component (select) should render with label when passed
             >
               <div
                 className="css-10nd86i"
+                id="type-ahead"
                 onKeyDown={[Function]}
               >
                 <Control
@@ -4545,6 +4599,7 @@ exports[`Form type ahead component (select) should render with label when passed
                       "formatGroupLabel": [Function],
                       "getOptionLabel": [Function],
                       "getOptionValue": [Function],
+                      "id": "type-ahead",
                       "inputValue": "",
                       "isClearable": true,
                       "isDisabled": false,
@@ -4635,6 +4690,7 @@ exports[`Form type ahead component (select) should render with label when passed
                         "formatGroupLabel": [Function],
                         "getOptionLabel": [Function],
                         "getOptionValue": [Function],
+                        "id": "type-ahead",
                         "inputValue": "",
                         "isClearable": true,
                         "isDisabled": false,
@@ -4721,6 +4777,7 @@ exports[`Form type ahead component (select) should render with label when passed
                             "formatGroupLabel": [Function],
                             "getOptionLabel": [Function],
                             "getOptionValue": [Function],
+                            "id": "type-ahead",
                             "inputValue": "",
                             "isClearable": true,
                             "isDisabled": false,
@@ -4806,6 +4863,7 @@ exports[`Form type ahead component (select) should render with label when passed
                                 "formatGroupLabel": [Function],
                                 "getOptionLabel": [Function],
                                 "getOptionValue": [Function],
+                                "id": "type-ahead",
                                 "inputValue": "",
                                 "isClearable": true,
                                 "isDisabled": false,
@@ -5000,6 +5058,7 @@ exports[`Form type ahead component (select) should render with label when passed
                             "formatGroupLabel": [Function],
                             "getOptionLabel": [Function],
                             "getOptionValue": [Function],
+                            "id": "type-ahead",
                             "inputValue": "",
                             "isClearable": true,
                             "isDisabled": false,
@@ -5085,6 +5144,7 @@ exports[`Form type ahead component (select) should render with label when passed
                                 "formatGroupLabel": [Function],
                                 "getOptionLabel": [Function],
                                 "getOptionValue": [Function],
+                                "id": "type-ahead",
                                 "inputValue": "",
                                 "isClearable": true,
                                 "isDisabled": false,
@@ -5178,6 +5238,7 @@ exports[`Form type ahead component (select) should render with label when passed
                                 "formatGroupLabel": [Function],
                                 "getOptionLabel": [Function],
                                 "getOptionValue": [Function],
+                                "id": "type-ahead",
                                 "inputValue": "",
                                 "isClearable": true,
                                 "isDisabled": false,
