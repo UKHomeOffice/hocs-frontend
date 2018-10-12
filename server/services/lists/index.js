@@ -6,7 +6,7 @@ const listDefinitions = {
     workflowTypes: () => '/casetype/single',
     workflowTypesBulk: () => '/casetype/bulk',
     memberList: ({ caseType }) => `/casetype/${caseType}/allmembers`,
-    ministerList: () => '/casetype/ministers',
+    ministerList: () => '/ministers',
     caseDocuments: ({ caseId }) => `/document/case/${caseId}`
 };
 

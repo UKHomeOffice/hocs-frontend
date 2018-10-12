@@ -295,12 +295,12 @@ const lists = {
             return [];
         }
     },
-    'TOPICS_CASETYPE': async () => {
-        const response = await infoServiceClient.get('/topics/MIN');
+    'TOPICS_CASETYPE': async ({ caseId }) => {
+        const response = await workflowServiceClient.get(`/case/${caseId}/topiclist`);
         if (response.data.parentTopics) {
             return response.data.parentTopics;
         } else {
-            logger.warn(`No returned for topic for casetype: ${''}`);
+            logger.warn('No returned for topic for case');
             return [];
         }
     },
