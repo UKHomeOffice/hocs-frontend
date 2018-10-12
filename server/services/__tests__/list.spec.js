@@ -183,7 +183,7 @@ describe('getList', () => {
     it('should support the TOPICS_CASETYPE list', async () => {
         const group = (label, options) => ({ label, options });
         const choice = value => ({ label: `Choice ${value}`, value: `CHOICE_${value}` });
-        infoServiceClient.get.mockImplementation(jest.fn(() => Promise.resolve({
+        workflowServiceClient.get.mockImplementation(jest.fn(() => Promise.resolve({
             data: {
                 parentTopics: [
                     group('First group', [
