@@ -21,7 +21,7 @@ function withForm(Page) {
         constructor(props) {
             super(props);
             const { confirmation, form } = props;
-            const { data, errors, schema, meta } = form === null ? {} : form;
+            const { data, errors, schema, meta } = form ? form : {};
             this.state = {
                 confirmation,
                 form_data: data,
