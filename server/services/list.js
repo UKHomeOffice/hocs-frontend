@@ -58,7 +58,7 @@ function compareListItems(first, second) {
 }
 
 const helpers = {
-    isOverdue: deadline => deadline && deadline < Date.now(),
+    isOverdue: deadline => deadline && new Date(deadline) < Date.now(),
     isAllocated: user => user !== null,
     setTag: current => current ? current + 1 : 1,
 };
