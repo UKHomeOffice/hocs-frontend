@@ -242,6 +242,9 @@ $link-hover-colour: $govuk-link-hover-colour;
   display: block;
   float: left;
   margin-bottom: 30px;
+  @media screen and (min-width: $tablet-breakpoint) {
+    height: 200px;
+  }
 }
 
 .card__body {
