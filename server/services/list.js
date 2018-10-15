@@ -57,6 +57,12 @@ function compareListItems(first, second) {
     return (firstLabel < secondLabel) ? -1 : 1;
 }
 
+const helpers = {
+    isOverdue: deadline => deadline && deadline < Date.now(),
+    isAllocated: user => user !== null,
+    setTag: current => current ? current + 1 : 1,
+};
+
 const lists = {
     // TODO: Temporary code to support current workstack implementation
     'DASHBOARD': async ({ user }) => {
@@ -66,11 +72,19 @@ const lists = {
             'X-Auth-Roles': user.roles.join()
         });
         const workstackData = response.data.activeStages
-            .sort((first, second) => first.caseReference > second.caseReference ? 1 : -1);
+            .sort((first, second) => first.caseReference > second.caseReference);
+        const { isOverdue, isAllocated, setTag } = helpers;
+        const createOverdueTag = data => {
+            const overdueCases = data.filter(r => isOverdue(r.deadline));
+            return overdueCases.length > 0 ? overdueCases.count : null;
+        };
         const userData = [{
             label: 'Cases',
             count: workstackData
-                .filter(i => i.userUUID !== null).length
+                .filter(i => i.userUUID !== null).length,
+            tags: {
+                overdue: createOverdueTag(workstackData)
+            }
         }];
         const dashboardData = workstackData
             .reduce((result, row) => {
@@ -80,14 +94,24 @@ const lists = {
                         label: row.assignedTeamDisplay,
                         value: row.teamUUID,
                         type: 'team',
-                        count: 1
+                        count: 1,
+                        tags: {
+                            overdue: isOverdue(row.deadline) ? setTag(0) : null,
+                            allocated: isAllocated(row.userUUID) ? setTag(0) : null
+                        }
                     });
                 } else {
                     result[index].count++;
+                    if (isOverdue(row.deadline)) {
+                        result[index].tags.overdue = setTag(result[index].tags.overdue);
+                    }
+                    if (isAllocated(row.userUUID)) {
+                        result[index].tags.allocated = setTag(result[index].tags.allocated);
+                    }
                 }
                 return result;
             }, [])
-            .sort((first, second) => first.count < second.count ? 1 : -1);
+            .sort((first, second) => first.count < second.count);
         return {
             user: userData,
             teams: dashboardData
@@ -101,9 +125,7 @@ const lists = {
             'X-Auth-Roles': user.roles.join()
         });
         const workstackData = response.data.activeStages
-            .sort((first, second) => {
-                return (first.caseReference > second.caseReference) ? 1 : -1;
-            });
+            .sort((first, second) => first.caseReference > second.caseReference);
         return {
             label: 'User workstack',
             items: workstackData.filter(item => item.userUUID !== null)
@@ -118,7 +140,8 @@ const lists = {
         });
         const workstackData = response.data.activeStages
             .filter(item => item.teamUUID === teamId)
-            .sort((first, second) => first.caseReference > second.caseReference ? 1 : -1);
+            .sort((first, second) => first.caseReference > second.caseReference);
+        const { isOverdue, isAllocated, setTag } = helpers;
         const dashboardData = workstackData
             .reduce((result, row) => {
                 const index = result.map(c => c.value).indexOf(row.caseType);
@@ -127,10 +150,20 @@ const lists = {
                         label: row.caseTypeDisplay,
                         value: row.caseType,
                         type: 'workflow',
-                        count: 1
+                        count: 1,
+                        tags: {
+                            overdue: isOverdue(row.deadline) ? setTag(0) : null,
+                            allocated: isAllocated(row.userUUID) ? setTag(0) : null
+                        }
                     });
                 } else {
                     result[index].count++;
+                    if (isOverdue(row.deadline)) {
+                        result[index].tags.overdue = setTag(result[index].tags.overdue);
+                    }
+                    if (isAllocated(row.userUUID)) {
+                        result[index].tags.allocated = setTag(result[index].tags.allocated);
+                    }
                 }
                 return result;
             }, [])
@@ -150,9 +183,8 @@ const lists = {
         });
         const workstackData = response.data.activeStages
             .filter(item => item.teamUUID === teamId && item.caseType === workflowId)
-            .sort((first, second) => {
-                return (first.caseReference > second.caseReference) ? 1 : -1;
-            });
+            .sort((first, second) => first.caseReference > second.caseReference);
+        const { isOverdue, isAllocated, setTag } = helpers;
         const dashboardData = workstackData
             .reduce((result, row) => {
                 const index = result.map(c => c.value).indexOf(row.stageType);
@@ -161,14 +193,24 @@ const lists = {
                         label: row.stageTypeDisplay,
                         value: row.stageType,
                         type: 'stage',
-                        count: 1
+                        count: 1,
+                        tags: {
+                            overdue: isOverdue(row.deadline) ? setTag(0) : null,
+                            allocated: isAllocated(row.userUUID) ? setTag(0) : null
+                        }
                     });
                 } else {
                     result[index].count++;
+                    if (isOverdue(row.deadline)) {
+                        result[index].tags.overdue = setTag(result[index].tags.overdue);
+                    }
+                    if (isAllocated(row.userUUID)) {
+                        result[index].tags.allocated = setTag(result[index].tags.allocated);
+                    }
                 }
                 return result;
             }, [])
-            .sort((first, second) => first.count < second.count ? 1 : -1);
+            .sort((first, second) => first.count < second.count);
         return {
             label: 'Placeholder Workflow',
             items: workstackData,
@@ -184,9 +226,7 @@ const lists = {
         });
         const workstackData = response.data.activeStages
             .filter(item => item.teamUUID === teamId && item.caseType === workflowId && item.stageType === stageId)
-            .sort((first, second) => {
-                return (first.caseReference > second.caseReference) ? 1 : -1;
-            });
+            .sort((first, second) => first.caseReference > second.caseReference);
         return {
             label: 'Placeholder Stage',
             items: workstackData
@@ -276,7 +316,7 @@ const lists = {
         const response = await fetchList(list);
         if (response.data.ministers) {
             return response.data.ministers
-                .sort((first, second) => first.label > second.label ? 1 : -1);
+                .sort((first, second) => first.label > second.label);
         } else {
             logger.warn('No ministers returned for case');
             return [];
