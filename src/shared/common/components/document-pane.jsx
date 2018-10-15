@@ -23,7 +23,8 @@ class DocumentPanel extends Component {
     }
 
     componentDidMount() {
-        this.interval = setInterval(() => this.updateDocuments(), 3000);
+        this.updateDocuments();
+        this.interval = setInterval(() => this.updateDocuments(), 5000);
     }
 
     componentWillUnmount() {
@@ -50,13 +51,13 @@ class DocumentPanel extends Component {
                                 .then(() => {
                                     this.setState({
                                         documents: response.data,
-                                        activeDocument: this.state.activeDocument || response.data[0].uuid
+                                        activeDocument: this.state.activeDocument || response.data[0] ? response.data[0].uuid : null
                                     });
                                     if (!this.hasPendingDocuments(response.data)) {
                                         // TODO: Remove
                                         /* eslint-disable-next-line  no-console*/
                                         console.log('No documents pending conversion, clearing interval');
-                                        clearInterval(this.interval);
+                                        if (this.interval) { clearInterval(this.interval); }
                                     }
                                 });
                         })

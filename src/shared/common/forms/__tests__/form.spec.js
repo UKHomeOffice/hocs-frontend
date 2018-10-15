@@ -24,11 +24,6 @@ describe('Form component', () => {
         fields: []
     };
 
-    const mockFormData = {
-        field: 'value',
-        fieldArray: ['one', 'two', 'three']
-    };
-
     const mockSubmitHandler = jest.fn();
 
     beforeEach(() => {
@@ -38,13 +33,6 @@ describe('Form component', () => {
     it('should render with default props', () => {
         const wrapper = mount(<Form schema={mockFormSchema}/>);
         expect(wrapper).toBeDefined();
-    });
-
-    it('should pass form data in to state when data passed in props', () => {
-        const wrapper = mount(<Form schema={mockFormSchema} data={mockFormData} />);
-        expect(wrapper).toBeDefined();
-        expect(wrapper.state().field).toBeDefined();
-        expect(wrapper.state().fieldArray).toBeDefined();
     });
 
     it('should render form fields when passed in props', () => {

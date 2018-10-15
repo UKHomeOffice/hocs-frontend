@@ -34,7 +34,7 @@ class Text extends Component {
 
                 <label htmlFor={name} id={`${name}-label`} className="govuk-label govuk-label--s">{label}</label>
                 {hint && <span className="govuk-hint">{hint}</span>}
-                {error && <span className="govuk-error-message">{error}</span>}
+                {error && <span id={`${name}-error`} className="govuk-error-message">{error}</span>}
 
                 <input className={`govuk-input${error ? ' govuk-input--error' : ''}`}
                     id={name}

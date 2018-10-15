@@ -3,6 +3,15 @@ import PropTypes from 'prop-types';
 
 class ErrorSummary extends Component {
 
+    scrollInToView(e, link) {
+        e.preventDefault();
+        /* eslint-disable-next-line no-undef */
+        const element = document.getElementById(link);
+        if (element) {
+            element.scrollIntoView();
+        }
+    }
+
     render() {
         const {
             description,
@@ -21,10 +30,11 @@ class ErrorSummary extends Component {
                     </p>}
 
                     <ul className="govuk-list govuk-error-summary__list">
-                        {Object.entries(errors).map(error => {
+                        {Object.entries(errors).map(([key, value]) => {
+                            const link = `${key}-error`;
                             return (
-                                <li key={error[0]}>
-                                    <a href={`#${error[0]}`}>{error[1]}</a>
+                                <li key={key}>
+                                    <a href={`#${link}`} onClick={(e) => this.scrollInToView(e, link)} >{value}</a>
                                 </li>
                             );
                         })}

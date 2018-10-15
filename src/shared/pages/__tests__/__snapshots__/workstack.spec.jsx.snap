@@ -14,9 +14,6 @@ exports[`Workstack page component should render with default props 1`] = `
         Array [
           undefined,
         ],
-        Array [
-          undefined,
-        ],
       ],
     }
   }
@@ -25,9 +22,6 @@ exports[`Workstack page component should render with default props 1`] = `
     dispatch={
       [MockFunction] {
         "calls": Array [
-          Array [
-            undefined,
-          ],
           Array [
             undefined,
           ],
@@ -49,7 +43,7 @@ exports[`Workstack page component should render with default props 1`] = `
     <p
       className="govuk-body"
     >
-       No workstack data 
+      No items to display
     </p>
   </WorkstackPage>
 </Component>

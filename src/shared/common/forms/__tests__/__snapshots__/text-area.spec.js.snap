@@ -66,6 +66,7 @@ exports[`Form text area component should render with error when passed 1`] = `
   />
   <span
     class="govuk-error-message"
+    id="text-field-error"
   >
     Some error message
   </span>

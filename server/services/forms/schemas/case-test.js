@@ -33,7 +33,6 @@ module.exports = () => Form()
             .build())
     .withField(
         Component('checkbox', 'checkboxContext')
-            .withValidator('required', 'Choose at least one option')
             .withProp('label', 'Checkbox group')
             .withProp('hint', 'Here\'s a hint')
             .withProp('className', 'inline')
@@ -45,7 +44,7 @@ module.exports = () => Form()
             .build()
     )
     .withField(
-        Component()
+        Component('checkbox', 'checkbox-inline')
             .withValidator('required', 'This checkbox is required')
             .withProp('className', 'inline')
             .withProp('choices', [

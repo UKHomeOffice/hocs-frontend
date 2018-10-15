@@ -31,14 +31,14 @@ class Radio extends Component {
         return (
             <div className={`govuk-form-group${error ? ' govuk-form-group--error' : ''}`}>
 
-                <fieldset className={`govuk-fieldset ${className ?  className : ''}`} disabled={disabled}>
+                <fieldset id={name} className={`govuk-fieldset ${className ?  className : ''}`} disabled={disabled}>
 
                     <legend id={`${name}-legend`} className="govuk-fieldset__legend">
                         <span className="govuk-fieldset__heading govuk-label--s">{label}</span>
                     </legend>
 
                     {hint && <span className="govuk-hint">{hint}</span>}
-                    {error && <span className="govuk-error-message">{error}</span>}
+                    {error && <span id={`${name}-error`} className="govuk-error-message">{error}</span>}
 
                     <div className={'govuk-radios'}>
                         {choices && choices.map((choice, i) => {

@@ -199,6 +199,7 @@ exports[`Form date component should render with error when passed 1`] = `
     />
     <span
       class="govuk-error-message"
+      id="date-field-error"
     >
       Some error message
     </span>

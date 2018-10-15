@@ -7,6 +7,7 @@ exports[`Form checkbox group component should render disabled when passed 1`] = 
   <fieldset
     class="govuk-fieldset "
     disabled=""
+    id="checkbox-group"
   >
     <legend
       class="govuk-fieldset__legend"
@@ -81,6 +82,7 @@ exports[`Form checkbox group component should render with default props 1`] = `
 >
   <fieldset
     class="govuk-fieldset "
+    id="checkbox-group"
   >
     <legend
       class="govuk-fieldset__legend"
@@ -155,6 +157,7 @@ exports[`Form checkbox group component should render with error when passed 1`] 
 >
   <fieldset
     class="govuk-fieldset "
+    id="checkbox-group"
   >
     <legend
       class="govuk-fieldset__legend"
@@ -166,6 +169,7 @@ exports[`Form checkbox group component should render with error when passed 1`] 
     </legend>
     <span
       class="govuk-error-message"
+      id="checkbox-group-error"
     >
       Some error message
     </span>
@@ -234,6 +238,7 @@ exports[`Form checkbox group component should render with hint when passed 1`] =
 >
   <fieldset
     class="govuk-fieldset "
+    id="checkbox-group"
   >
     <legend
       class="govuk-fieldset__legend"
@@ -313,6 +318,7 @@ exports[`Form checkbox group component should render with label when passed 1`] 
 >
   <fieldset
     class="govuk-fieldset "
+    id="checkbox-group"
   >
     <legend
       class="govuk-fieldset__legend"
@@ -389,6 +395,7 @@ exports[`Form checkbox group component should render with value when passed 1`] 
 >
   <fieldset
     class="govuk-fieldset "
+    id="checkbox-group"
   >
     <legend
       class="govuk-fieldset__legend"

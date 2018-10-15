@@ -14,9 +14,6 @@ exports[`Dashboard page component should render with default props 1`] = `
         Array [
           undefined,
         ],
-        Array [
-          undefined,
-        ],
       ],
     }
   }
@@ -34,18 +31,20 @@ exports[`Dashboard page component should render with default props 1`] = `
           Array [
             undefined,
           ],
-          Array [
-            undefined,
-          ],
         ],
       }
     }
   >
-    <p
-      className="govuk-body"
+    <h2
+      className="govuk-heading-l"
     >
-       No dashboard data 
-    </p>
+      My work
+    </h2>
+    <h2
+      className="govuk-heading-l"
+    >
+      My teams work
+    </h2>
   </DashboardPage>
 </Component>
 `;

@@ -6,6 +6,7 @@ exports[`Entity list component should render with add link when passed in props 
 >
   <fieldset
     class="govuk-fieldset "
+    id="entity_list"
   >
     <legend
       class="govuk-fieldset__legend"
@@ -48,6 +49,7 @@ exports[`Entity list component should render with additional when passed in prop
 >
   <fieldset
     class="govuk-fieldset my-css-class"
+    id="entity_list"
   >
     <legend
       class="govuk-fieldset__legend"
@@ -84,6 +86,7 @@ exports[`Entity list component should render with default props 1`] = `
 >
   <fieldset
     class="govuk-fieldset "
+    id="entity_list"
   >
     <legend
       class="govuk-fieldset__legend"
@@ -120,6 +123,7 @@ exports[`Entity list component should render with error when passed in props 1`]
 >
   <fieldset
     class="govuk-fieldset "
+    id="entity_list"
   >
     <legend
       class="govuk-fieldset__legend"
@@ -131,6 +135,7 @@ exports[`Entity list component should render with error when passed in props 1`]
     </legend>
     <span
       class="govuk-error-message"
+      id="entity_list-error"
     >
       Validation has failed
     </span>
@@ -161,6 +166,7 @@ exports[`Entity list component should render with hint when passed in props 1`] 
 >
   <fieldset
     class="govuk-fieldset "
+    id="entity_list"
   >
     <legend
       class="govuk-fieldset__legend"
@@ -202,6 +208,7 @@ exports[`Entity list component should render with label when passed in props 1`]
 >
   <fieldset
     class="govuk-fieldset "
+    id="entity_list"
   >
     <legend
       class="govuk-fieldset__legend"
@@ -240,6 +247,7 @@ exports[`Entity list component should render with remove link when passed in pro
 >
   <fieldset
     class="govuk-fieldset "
+    id="entity_list"
   >
     <legend
       class="govuk-fieldset__legend"

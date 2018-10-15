@@ -4,29 +4,25 @@ import axios from 'axios';
 import { ApplicationConsumer } from '../contexts/application.jsx';
 import {
     updateApiStatus,
-    updateDashboard,
     clearDashboard,
     clearApiStatus,
 } from '../contexts/actions/index.jsx';
 import status from '../helpers/api-status.js';
-import Dashboard from '../common/components/dashboard.jsx';
+import Dashboard from '../common/components/dashboard-new.jsx';
 
 class DashboardPage extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { ...props };
+        this.state = { dashboard: props.dashboard };
     }
 
     componentDidMount() {
-        if (!this.props.dashboard) {
-            this.getDashboardData();
+        const { dashboard } = this.props;
+        if (!dashboard) {
+            return this.getDashboardData();
         }
-    }
-
-    componentWillUnmount() {
-        const { dispatch } = this.props;
-        return dispatch(clearDashboard());
+        this.props.dispatch(clearDashboard());
     }
 
     getDashboardData() {
@@ -36,7 +32,7 @@ class DashboardPage extends Component {
                 axios.get('/api/dashboard')
                     .then(response => {
                         dispatch(updateApiStatus(status.REQUEST_DASHBOARD_DATA_SUCCESS))
-                            .then(() => dispatch(updateDashboard(response.data)))
+                            .then(() => this.setState({ dashboard: response.data }))
                             .then(() => dispatch(clearApiStatus()))
                             .catch(() => {
                                 dispatch(updateApiStatus(status.UPDATE_DASHBOARD_DATA_FAILURE));
@@ -49,10 +45,13 @@ class DashboardPage extends Component {
     }
 
     render() {
-        const { dashboard } = this.props;
+        const { dashboard } = this.state;
         return (
             <Fragment>
-                {dashboard ? <Dashboard dashboard={dashboard} /> : <p className='govuk-body'> No dashboard data </p>}
+                <h2 className='govuk-heading-l'>My work</h2>
+                {dashboard && dashboard.user && <Dashboard dashboard={dashboard.user} absoluteUrl={'/workstack/user'} />}
+                <h2 className='govuk-heading-l'>My teams work</h2>
+                {dashboard && dashboard.teams && <Dashboard dashboard={dashboard.teams} baseUrl={'/workstack'} />}
             </Fragment>
         );
     }

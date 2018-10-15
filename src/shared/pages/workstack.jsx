@@ -3,30 +3,27 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { ApplicationConsumer } from '../contexts/application.jsx';
 import {
-    updateWorkstack,
     clearWorkstack,
     updateApiStatus,
     clearApiStatus
 } from '../contexts/actions/index.jsx';
 import status from '../helpers/api-status.js';
 import Workstack from '../common/components/workstack.jsx';
+import Dashboard from '../common/components/dashboard-new.jsx';
 
 class WorkstackPage extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { ...props };
+        this.state = { workstack: props.workstack };
     }
 
     componentDidMount() {
-        if (!this.props.workstack) {
-            this.getWorkstackData();
+        const { dispatch, workstack } = this.props;
+        if (!workstack) {
+            return this.getWorkstackData();
         }
-    }
-
-    componentWillUnmount() {
-        const { dispatch } = this.props;
-        return dispatch(clearWorkstack());
+        dispatch(clearWorkstack());
     }
 
     getWorkstackData() {
@@ -37,7 +34,7 @@ class WorkstackPage extends Component {
                 axios.get(endpoint)
                     .then(response => {
                         dispatch(updateApiStatus(status.REQUEST_WORKSTACK_DATA_SUCCESS))
-                            .then(() => dispatch(updateWorkstack(response.data)))
+                            .then(() => this.setState({ workstack: response.data }))
                             .then(() => dispatch(clearApiStatus()))
                             .catch(() => {
                                 dispatch(updateApiStatus(status.UPDATE_WORKSTACK_DATA_FAILURE));
@@ -52,19 +49,34 @@ class WorkstackPage extends Component {
     renderWorkstack(workstack) {
         return (
             <Fragment>
-                <h1 className="govuk-heading-l">
-                    {workstack.label}
-                </h1>
-                <Workstack workstack={workstack.items} />
+                <Workstack workstack={workstack} />
+            </Fragment>
+        );
+    }
+
+    renderDashboard(dashboard) {
+        const { match: { url } } = this.props;
+        return (
+            <Fragment>
+                <Dashboard dashboard={dashboard} baseUrl={url} />
             </Fragment>
         );
     }
 
     render() {
-        const { workstack } = this.props;
+        const { workstack } = this.state;
         return (
             <Fragment>
-                {workstack ? this.renderWorkstack(workstack) : <p className='govuk-body'> No workstack data </p>}
+                {workstack ?
+                    <Fragment>
+                        <h1 className="govuk-heading-l">
+                            {workstack.label}
+                        </h1>
+                        {workstack.dashboard && this.renderDashboard(workstack.dashboard)}
+                        {this.renderWorkstack(workstack.items)}
+                    </Fragment>
+                    : <p className='govuk-body'>No items to display</p>
+                }
             </Fragment>
         );
     }
@@ -79,9 +91,10 @@ WorkstackPage.propTypes = {
 const WrappedWorkstackPage = props => {
     return (
         <ApplicationConsumer>
-            {({ dispatch, workstack }) => (
+            {({ dispatch, workstack, ref }) => (
                 <WorkstackPage
                     {...props}
+                    ref={ref}
                     dispatch={dispatch}
                     workstack={workstack}
                 />

@@ -21,21 +21,21 @@ exports[`Form text component should render list of errors when passed 1`] = `
     >
       <li>
         <a
-          href="#field1"
+          href="#field1-error"
         >
           Error 1
         </a>
       </li>
       <li>
         <a
-          href="#field2"
+          href="#field2-error"
         >
           Error 2
         </a>
       </li>
       <li>
         <a
-          href="#field3"
+          href="#field3-error"
         >
           Error 3
         </a>
