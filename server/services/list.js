@@ -238,6 +238,22 @@ const lists = {
             return [];
         }
     },
+    'CASE_DOCUMENT_LIST_DRAFT': async ({ caseId }) => {
+        const list = listDefinitions['caseDocumentsType'].call(this, { caseId, type: 'DRAFT' });
+        const response = await docsServiceClient.get(list);
+        if (response.data.documents) {
+            return response.data.documents
+                .sort((first, second) => {
+                    const firstTimeStamp = first.created.toUpperCase();
+                    const secondTimeStamp = second.created.toUpperCase();
+                    return (firstTimeStamp > secondTimeStamp) ? 1 : -1;
+                })
+                .map(d => ({ label: d.displayName, value: d.uuid }));
+        } else {
+            logger.warn(`No documents returned for case: ${caseId}`);
+            return [];
+        }
+    },
     'DOCUMENT_EXTENSION_WHITELIST': async () => {
         return DOCUMENT_WHITELIST;
     },
