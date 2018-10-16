@@ -8,6 +8,7 @@ const actionRouter = require('./action');
 const caseRouter = require('./case');
 const documentRouter = require('./document');
 const { renderMiddleware, renderResponseMiddleware } = require('../middleware/render');
+const { liveness, readiness } = require('../middleware/health');
 const { errorMiddleware, initRequest } = require('../middleware/request');
 const { protect } = require('../middleware/auth');
 const { infoServiceClient } = require('../libs/request');
@@ -33,6 +34,9 @@ router.get('/members/refresh',
             next(e);
         }
     });
+
+router.get('/health', liveness);
+router.get('/health/status', readiness);
 
 router.use('*',
     errorMiddleware,
