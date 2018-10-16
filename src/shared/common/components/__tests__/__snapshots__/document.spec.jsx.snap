@@ -8,7 +8,7 @@ exports[`Document preview component should render with default props 1`] = `
     alt="pdf"
     height="100%"
     pluginspage="http://www.adobe.com/products/acrobat/readstep2.html"
-    src="/case/MOCK_CASE_ID/document/MOCK_DOCUMENT_ID"
+    src="/case/MOCK_CASE_ID/document/MOCK_DOCUMENT_ID/preview"
     type="application/pdf"
     width="100%"
   />

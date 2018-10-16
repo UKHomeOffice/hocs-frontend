@@ -28,8 +28,7 @@ const browserConfig = env => {
             rules: [
                 {
                     test: /\.(js|jsx)$/,
-                    loader: 'babel-loader',
-                    query: { presets: ['react'] }
+                    loader: 'babel-loader'
                 },
                 {
                     test: /\.s?[ac]ss$/,
@@ -63,9 +62,7 @@ const browserConfig = env => {
                 chunks: 'all',
                 name: true,
                 cacheGroups: {
-                    default: {
-                        reuseExistingChunk: true,
-                    },
+                    default: false,
                     vendors: {
                         chunks: 'all',
                         name: 'vendor',
@@ -140,7 +137,7 @@ const serverConfig = {
     },
     module: {
         rules: [
-            { test: [/\.(js)$/, /\.(jsx)$/], loader: 'babel-loader', query: { presets: ['react'] } },
+            { test: [/\.(js)$/, /\.(jsx)$/], loader: 'babel-loader' },
             { test: /\.scss$/, loader: 'css-loader/locals' }
         ]
     }
