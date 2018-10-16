@@ -1,12 +1,12 @@
 const router = require('express').Router();
-const { getOriginalDocument, getPdfDocument } = require('../middleware/document');
+const { getOriginalDocument, getPdfDocument, getPdfDocumentPreview } = require('../middleware/document');
 //const logger = require('../libs/logger');
 const { DocumentError } = require('../models/error');
 const { workflowServiceClient } = require('../libs/request');
 
 // TODO: REFACTOR THIS, ALL OF IT, EURGH!
 
-router.get('/:caseId/document/:documentId', getPdfDocument);
+router.get('/:caseId/document/:documentId/preview', getPdfDocumentPreview);
 
 router.get('/:caseId/stage/:stageId/download/document/:documentId/pdf', getPdfDocument);
 

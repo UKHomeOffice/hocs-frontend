@@ -1,9 +1,28 @@
 {
-  "presets": [
-    "react",
-    "es2015"
-  ],
-  "plugins": [
-    "transform-object-rest-spread"
-  ]
+    "presets": [
+        "@babel/preset-react",
+        [
+            "@babel/preset-env",
+            {
+                "targets": {
+                    "edge": 13,
+                    "chrome": 43,
+                    "ie": 11
+                },
+                "modules": false,
+                "useBuiltIns": "usage",
+                "debug": false,
+                "forceAllTransforms": true
+            }
+        ]
+    ],
+    "plugins": [
+        [
+            "@babel/plugin-proposal-object-rest-spread",
+            {
+                "useBuiltIns": true
+            }
+        ],
+        "@babel/plugin-transform-modules-commonjs"
+    ]
 }
