@@ -226,6 +226,26 @@ spec:
         ports:
           - name: http
             containerPort: 8080
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: http
+            httpHeaders:
+              - name: X-probe
+                value: kubelet
+          initialDelaySeconds: 90
+          periodSeconds: 20
+          timeoutSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: http
+            httpHeaders:
+              - name: X-probe
+                value: kubelet
+          initialDelaySeconds: 120
+          periodSeconds: 20
+          timeoutSeconds: 10            
         volumeMounts:
           - mountPath: /certs
             name: certs
