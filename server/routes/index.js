@@ -7,8 +7,8 @@ const pageRouter = require('./page');
 const actionRouter = require('./action');
 const caseRouter = require('./case');
 const documentRouter = require('./document');
+const healthRouter = require('./health');
 const { renderMiddleware, renderResponseMiddleware } = require('../middleware/render');
-const { liveness, readiness } = require('../middleware/health');
 const { errorMiddleware, initRequest } = require('../middleware/request');
 const { protect } = require('../middleware/auth');
 const { infoServiceClient } = require('../libs/request');
@@ -16,6 +16,7 @@ const logger = require('../libs/logger');
 
 html.use(assets);
 
+router.use('/health', healthRouter);
 router.use('*', authMiddleware, initRequest);
 router.use('/', pageRouter);
 router.use('/api', apiRouter);
@@ -35,8 +36,6 @@ router.get('/members/refresh',
         }
     });
 
-router.get('/health', liveness);
-router.get('/health/status', readiness);
 
 router.use('*',
     errorMiddleware,

@@ -18,5 +18,3 @@ router.get('/workstack/team/:teamId/workflow/:workflowId', workflowWorkstackMidd
 router.get('/workstack/team/:teamId/workflow/:workflowId/stage/:stageId', stageWorkstackMiddleware);
 
 module.exports = router;
-
-module.exports = router;
