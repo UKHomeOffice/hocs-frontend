@@ -1,168 +1,172 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Dashboard component should render with default props 1`] = `
-<table
-  class="govuk-table"
+<div
+  class="workstack"
 >
-  <caption
-    class="govuk-table__caption"
+  <table
+    class="govuk-table"
   >
-    Workstack
-  </caption>
-  <thead
-    class="govuk-table__head"
-  >
-    <tr
-      class="govuk-radios govuk-table__row"
+    <caption
+      class="govuk-table__caption"
     >
-      <th
-        class="govuk-table__header"
-      >
-        Type
-      </th>
-      <th
-        class="govuk-table__header"
-      >
-        Reference
-      </th>
-      <th
-        class="govuk-table__header"
-      >
-        Stage
-      </th>
-      <th
-        class="govuk-table__header"
-      >
-        User
-      </th>
-      <th
-        class="govuk-table__header"
-      >
-        Team
-      </th>
-      <th
-        class="govuk-table__header"
-      >
-        Deadline
-      </th>
-      <th
-        class="govuk-table__header"
-      >
-        Actions
-      </th>
-    </tr>
-  </thead>
-  <tbody
-    class="govuk-table__body"
-  >
-    <tr
-      class="govuk-radios govuk-table__row"
+      Workstack
+    </caption>
+    <thead
+      class="govuk-table__head"
     >
-      <td
-        class="govuk-table__cell"
+      <tr
+        class="govuk-radios govuk-table__row"
       >
-        <strong
-          class="govuk-tag"
+        <th
+          class="govuk-table__header"
         >
-          ABC
-        </strong>
-      </td>
-      <td
-        class="govuk-table__cell"
-      >
-        ABC/0000002/AA
-      </td>
-      <td
-        class="govuk-table__cell"
-      >
-        Stage type
-      </td>
-      <td
-        class="govuk-table__cell"
-      >
-        Unassigned
-      </td>
-      <td
-        class="govuk-table__cell"
-      >
-        Team 1
-      </td>
-      <td
-        class="govuk-table__cell"
-      >
-        2020-01-01
-      </td>
-      <td
-        class="govuk-table__cell"
-      >
-        <a
-          class="govuk-link govuk-!-margin-right-3"
-          href="/case/undefined/stage/STAGE_UUID/allocate"
+          Type
+        </th>
+        <th
+          class="govuk-table__header"
         >
-          Allocate
-        </a>
-        <a
-          class="govuk-link"
-          href="/case/undefined/summary"
+          Reference
+        </th>
+        <th
+          class="govuk-table__header"
         >
-          Summary
-        </a>
-      </td>
-    </tr>
-    <tr
-      class="govuk-radios govuk-table__row"
+          Stage
+        </th>
+        <th
+          class="govuk-table__header"
+        >
+          User
+        </th>
+        <th
+          class="govuk-table__header"
+        >
+          Team
+        </th>
+        <th
+          class="govuk-table__header"
+        >
+          Deadline
+        </th>
+        <th
+          class="govuk-table__header"
+        >
+          Actions
+        </th>
+      </tr>
+    </thead>
+    <tbody
+      class="govuk-table__body"
     >
-      <td
-        class="govuk-table__cell"
+      <tr
+        class="govuk-radios govuk-table__row"
       >
-        <strong
-          class="govuk-tag"
+        <td
+          class="govuk-table__cell"
         >
-          ABC
-        </strong>
-      </td>
-      <td
-        class="govuk-table__cell"
-      >
-        ABC/0000001/AA
-      </td>
-      <td
-        class="govuk-table__cell"
-      >
-        Stage type
-      </td>
-      <td
-        class="govuk-table__cell"
-      >
-        User 1
-      </td>
-      <td
-        class="govuk-table__cell"
-      >
-        Team 1
-      </td>
-      <td
-        class="govuk-table__cell"
-      >
-        2020-01-01
-      </td>
-      <td
-        class="govuk-table__cell"
-      >
-        <a
-          class="govuk-link govuk-!-margin-right-3"
-          href="/case/undefined/stage/STAGE_UUID"
+          <strong
+            class="govuk-tag"
+          >
+            ABC
+          </strong>
+        </td>
+        <td
+          class="govuk-table__cell"
         >
-          Casework
-        </a>
-        <a
-          class="govuk-link"
-          href="/case/undefined/summary"
+          ABC/0000002/AA
+        </td>
+        <td
+          class="govuk-table__cell"
         >
-          Summary
-        </a>
-      </td>
-    </tr>
-  </tbody>
-</table>
+          Stage type
+        </td>
+        <td
+          class="govuk-table__cell"
+        >
+          Unassigned
+        </td>
+        <td
+          class="govuk-table__cell"
+        >
+          Team 1
+        </td>
+        <td
+          class="govuk-table__cell"
+        >
+          2020-01-01
+        </td>
+        <td
+          class="govuk-table__cell"
+        >
+          <a
+            class="govuk-link govuk-!-margin-right-3"
+            href="/case/undefined/stage/STAGE_UUID/allocate"
+          >
+            Allocate
+          </a>
+          <a
+            class="govuk-link"
+            href="/case/undefined/summary"
+          >
+            Summary
+          </a>
+        </td>
+      </tr>
+      <tr
+        class="govuk-radios govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell"
+        >
+          <strong
+            class="govuk-tag"
+          >
+            ABC
+          </strong>
+        </td>
+        <td
+          class="govuk-table__cell"
+        >
+          ABC/0000001/AA
+        </td>
+        <td
+          class="govuk-table__cell"
+        >
+          Stage type
+        </td>
+        <td
+          class="govuk-table__cell"
+        >
+          User 1
+        </td>
+        <td
+          class="govuk-table__cell"
+        >
+          Team 1
+        </td>
+        <td
+          class="govuk-table__cell"
+        >
+          2020-01-01
+        </td>
+        <td
+          class="govuk-table__cell"
+        >
+          <a
+            class="govuk-link govuk-!-margin-right-3"
+            href="/case/undefined/stage/STAGE_UUID"
+          >
+            Casework
+          </a>
+          <a
+            class="govuk-link"
+            href="/case/undefined/summary"
+          >
+            Summary
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 `;

@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 class Workstack extends Component {
@@ -11,7 +11,7 @@ class Workstack extends Component {
     render() {
         const cases = this.state.workstack;
         return (
-            <Fragment>
+            <div className='workstack'>
                 <table className='govuk-table'>
                     <caption className='govuk-table__caption'>Workstack</caption>
                     <thead className='govuk-table__head'>
@@ -52,7 +52,7 @@ class Workstack extends Component {
                         }
                     </tbody>
                 </table>
-            </Fragment>
+            </div>
         );
     }
 }
