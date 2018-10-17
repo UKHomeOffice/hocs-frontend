@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 class Workstack extends Component {
@@ -8,10 +9,43 @@ class Workstack extends Component {
         this.state = { ...props };
     }
 
+    componentDidMount() {
+        this.setState({ mounted: true });
+    }
+
+    _onChange(e) {
+        const workstack = this.props.workstack;
+        const filter = e.target.value ? e.target.value.toUpperCase() : '';
+        if (filter !== '') {
+            const filtered = workstack.filter(r => {
+                return (r.caseReference && r.caseReference.toUpperCase().indexOf(filter) !== -1) ||
+                    (r.assignedUserDisplay && r.assignedUserDisplay.toUpperCase().indexOf(filter) !== -1) ||
+                    (r.assignedTeamDisplay && r.assignedTeamDisplay.toUpperCase().indexOf(filter) !== -1) ||
+                    (r.deadline && r.deadline.toUpperCase().indexOf(filter) !== -1) ||
+                    (r.stageTypeDisplay && r.stageTypeDisplay.toUpperCase().indexOf(filter) !== -1);
+            });
+            this.setState({ workstack: filtered });
+        } else {
+            this.setState({ workstack });
+        }
+    }
+
     render() {
         const cases = this.state.workstack;
+        const mounted = this.state.mounted;
         return (
             <div className='workstack'>
+                {mounted &&
+                    <div className='govuk-form-group'>
+                        <label htmlFor='workstack-filter' id='workstack-filter-label' className="govuk-label govuk-label--s">Filter</label>
+                        <input className='govuk-input'
+                            id='workstack-filter'
+                            type='text'
+                            name='workstack-filter'
+                            onChange={e => this._onChange(e)}
+                        />
+                    </div>
+                }
                 <table className='govuk-table'>
                     <caption className='govuk-table__caption'>Workstack</caption>
                     <thead className='govuk-table__head'>
@@ -56,5 +90,9 @@ class Workstack extends Component {
         );
     }
 }
+
+Workstack.propTypes = {
+    workstack: PropTypes.object.isRequired
+};
 
 export default Workstack;
