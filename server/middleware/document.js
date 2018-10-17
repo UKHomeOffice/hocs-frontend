@@ -8,6 +8,7 @@ async function getOriginalDocument(req, res, next) {
     try {
         const response = await docsServiceClient.get(`/document/${req.params.documentId}/file`, { responseType: 'stream' });
         res.setHeader('Cache-Control', 'max-age=86400');
+        res.setHeader('Content-Disposition', response.headers['content-disposition']);
         response.data.on('finish', () => logger.info(`Got Original Document: ${req.params.documentId} for Case: ${req.params.caseId}`));
         response.data.pipe(res);
     } catch (e) {
@@ -18,6 +19,21 @@ async function getOriginalDocument(req, res, next) {
 }
 
 async function getPdfDocument(req, res, next) {
+    logger.debug(`Requesting PDF: ${req.params.documentId}`);
+    try {
+        const response = await docsServiceClient.get(`/document/${req.params.documentId}/pdf`, { responseType: 'stream' });
+        res.setHeader('Cache-Control', 'max-age=86400');
+        res.setHeader('Content-Disposition', response.headers['content-disposition']);
+        response.data.on('finish', () => logger.info(`Got PDF Document: ${req.params.documentId} for Case: ${req.params.caseId}`));
+        response.data.pipe(res);
+    } catch (e) {
+        logger.warn(`Failed getting PDF Document: ${req.params.documentId} for Case: ${req.params.caseId}`);
+        logger.warn(e);
+        next(new DocumentError(e.message));
+    }
+}
+
+async function getPdfDocumentPreview(req, res, next) {
     logger.debug(`Requesting PDF: ${req.params.documentId}`);
     try {
         const response = await docsServiceClient.get(`/document/${req.params.documentId}/pdf`, { responseType: 'stream' });
@@ -52,6 +68,7 @@ function apiGetDocumentList(req, res) {
 module.exports = {
     getOriginalDocument,
     getPdfDocument,
+    getPdfDocumentPreview,
     getDocumentList,
     apiGetDocumentList
 };

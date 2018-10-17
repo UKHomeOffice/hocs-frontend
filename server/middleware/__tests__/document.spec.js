@@ -26,7 +26,7 @@ describe('Document middleware', () => {
 
         let req = {};
         let res = {};
-        const mockResponse = { data: {} };
+        const mockResponse = { data: {}, headers: { 'content-disposition': 'TEST' } };
         const next = jest.fn();
 
         beforeEach(() => {
@@ -64,7 +64,7 @@ describe('Document middleware', () => {
 
         let req = {};
         let res = {};
-        const mockResponse = { data: {} };
+        const mockResponse = { data: {}, headers: { 'content-disposition': 'TEST' } };
         const next = jest.fn();
 
         beforeEach(() => {

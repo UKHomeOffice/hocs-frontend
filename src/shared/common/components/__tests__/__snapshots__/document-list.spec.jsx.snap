@@ -37,7 +37,6 @@ exports[`Document list component should render with a document list when provide
       >
         <a
           class="govuk-link"
-          download="MOCK_DOC_ID_1"
           href="/case/MOCK_CASE_ID/stage/undefined/download/document/MOCK_DOC_ID_1/pdf"
           id="MOCK_DOC_ID_1-pdf"
         >
@@ -80,7 +79,6 @@ exports[`Document list component should render with a document list when provide
       >
         <a
           class="govuk-link"
-          download="MOCK_DOC_ID_2"
           href="/case/MOCK_CASE_ID/stage/undefined/download/document/MOCK_DOC_ID_2/pdf"
           id="MOCK_DOC_ID_2-pdf"
         >
@@ -123,7 +121,6 @@ exports[`Document list component should render with a document list when provide
       >
         <a
           class="govuk-link"
-          download="MOCK_DOC_ID_3"
           href="/case/MOCK_CASE_ID/stage/undefined/download/document/MOCK_DOC_ID_3/pdf"
           id="MOCK_DOC_ID_3-pdf"
         >
