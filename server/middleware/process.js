@@ -1,4 +1,3 @@
-const logger = require('../libs/logger');
 const { FormSubmissionError } = require('../models/error');
 
 const customAdapters = {
@@ -34,7 +33,6 @@ const customAdapters = {
             reducer[name] = null;
         } else {
             reducer[name] = req.files.filter(f => f.fieldname.startsWith(name));
-            logger.debug(`Successfully attached ${reducer[name].length} documents to ${name}`);
         }
     },
 };

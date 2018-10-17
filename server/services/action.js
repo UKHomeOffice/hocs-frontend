@@ -2,6 +2,7 @@ const { workflowServiceClient } = require('../libs/request');
 const actionTypes = require('./actions/types');
 const { ActionError } = require('../models/error');
 const logger = require('../libs/logger');
+const events = require('../models/events');
 
 function createDocumentSummaryObjects(form, type) {
     return form.schema.fields.reduce((reducer, field) => {
@@ -70,10 +71,10 @@ function handleWorkflowSuccess(response, { caseId, stageId }) {
 }
 
 const actions = {
-    ACTION: async ({ workflow, context, form }) => {
+    ACTION: async ({ workflow, context, form, user }) => {
         try {
             if (form && form.action) {
-                logger.debug(`Performing action ${form.action}`);
+                logger.info({ event: events.ACTION, user: user.username, action: form.action });
                 let response;
                 let clientResponse;
                 switch (form.action) {
@@ -90,13 +91,14 @@ const actions = {
                 return handleActionSuccess(null, workflow, form);
             }
         } catch (e) {
+            logger.error({ event: events.ACTION_FAILURE, user: user.username, action: form.action });
             throw new ActionError(e);
         }
     },
-    CASE: async ({ caseId, stageId, entity, context, form }) => {
+    CASE: async ({ caseId, stageId, entity, context, form, user }) => {
         try {
             if (form && form.action && entity) {
-                logger.debug(`Performing action ${form.action} for case ${caseId}`);
+                logger.info({ event: events.CASE_ACTION, user: user.username, action: form.action, case: caseId });
                 switch (form.action) {
                 case actionTypes.ADD_DOCUMENT:
                     await addDocument(`/case/${caseId}/document`, form);
@@ -137,14 +139,17 @@ const actions = {
                 return ({ callbackUrl: `/case/${caseId}/stage/${stageId}` });
             }
         } catch (e) {
+            logger.error({ event: events.CASE_ACTION_FAILURE, user: user.username, action: form.action, case: caseId });
             throw new ActionError(e);
         }
     },
-    WORKFLOW: async ({ caseId, stageId, form }) => {
+    WORKFLOW: async ({ caseId, stageId, form, user }) => {
+        logger.info({ event: events.WORKFLOW_ACTION, user: user.username, action: actionTypes.UPDATE_CASE, case: caseId });
         try {
             const response = await updateCase({ caseId, stageId, form });
             return handleWorkflowSuccess(response, { caseId, stageId });
         } catch (e) {
+            logger.error({ event: events.WORKFLOW_ACTION_FAILURE, user: user.username, action: actionTypes.UPDATE_CASE, case: caseId });
             throw new ActionError(e);
         }
     }

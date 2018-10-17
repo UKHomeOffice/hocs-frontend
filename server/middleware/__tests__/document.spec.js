@@ -51,7 +51,7 @@ describe('Document middleware', () => {
         });
 
         it('should call next with an error if request fails', async () => {
-            const mockError = new Error('Something went wrong');
+            const mockError = new Error('Unable to retrieve original document');
             docsServiceClient.get.mockImplementation(() => Promise.reject(mockError));
             await getOriginalDocument(req, res, next);
             expect(next).toHaveBeenCalled();
@@ -89,7 +89,7 @@ describe('Document middleware', () => {
         });
 
         it('should call next with an error if request fails', async () => {
-            const mockError = new Error('Something went wrong');
+            const mockError = new Error('Unable to retrieve PDF document');
             docsServiceClient.get.mockImplementation(() => Promise.reject(mockError));
             await getPdfDocument(req, res, next);
             expect(next).toHaveBeenCalled();

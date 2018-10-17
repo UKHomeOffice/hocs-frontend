@@ -1,4 +1,3 @@
-const logger = require('../libs/logger');
 const { FormSubmissionError, ValidationError } = require('../models/error');
 const { DOCUMENT_WHITELIST, DOCUMENT_BULK_LIMIT } = require('../config').forContext('server');
 
@@ -43,13 +42,10 @@ const validators = {
             const allowableExtensions = DOCUMENT_WHITELIST;
             for (let file of value) {
                 let fileExtension = file.originalname.split('.').slice(-1)[0];
-                logger.debug('Validating extension: ' + fileExtension);
 
                 if (!allowableExtensions.includes(fileExtension)) {
-                    logger.debug('Rejecting extension: ' + fileExtension);
                     return message || validationErrors.hasWhitelistedExtension(label, fileExtension);
                 }
-                logger.debug('Accepting extension: ' + fileExtension);
             }
         }
         return null;

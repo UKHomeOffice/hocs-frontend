@@ -70,6 +70,8 @@ const testCreateCaseForm = {
     }
 };
 
+const mockUser = { username: 'TEST_USER' };
+
 describe('Action service', () => {
 
     beforeEach(() => {
@@ -80,7 +82,8 @@ describe('Action service', () => {
             workflow: 'CREATE',
             action: 'WORKFLOW',
             form: {
-            }
+            },
+            user: mockUser
         });
 
         expect(response).toBeDefined();
@@ -95,7 +98,8 @@ describe('Action service', () => {
             workflow: 'CREATE',
             action: 'WORKFLOW',
             context: 'SUPPORTED_CASETYPE',
-            form: testForm
+            form: testForm,
+            user: mockUser
         });
         expect(mockRequestClient).toHaveBeenCalledTimes(1);
         expect(mockRequestClient).toHaveBeenCalledWith(createCaseRequest);
@@ -110,7 +114,8 @@ describe('Action service', () => {
             workflow: 'CREATE',
             action: 'WORKFLOW',
             context: 'UNSUPPORTED_CASETYPE',
-            form: testForm
+            form: testForm,
+            user: mockUser
         })
             .then(() => { })
             .catch(e => { expect(e).toBeInstanceOf(Error); });
@@ -123,7 +128,8 @@ describe('Action service', () => {
             workflow: 'BULK',
             action: 'WORKFLOW',
             context: 'SUPPORTED_CASETYPE',
-            form: testForm
+            form: testForm,
+            user: mockUser
         });
         expect(mockRequestClient).toHaveBeenCalledTimes(1);
         expect(mockRequestClient).toHaveBeenCalledWith(createCaseRequest);
@@ -138,7 +144,8 @@ describe('Action service', () => {
             workflow: 'BULK',
             action: 'WORKFLOW',
             context: 'UNSUPPORTED_CASETYPE',
-            form: testForm
+            form: testForm,
+            user: mockUser
         })
             .then(() => { })
             .catch(e => { expect(e).toBeInstanceOf(Error); });
@@ -152,6 +159,7 @@ describe('Action service', () => {
             form: {
                 action: 'SOME_RANDOM_ACTION'
             },
+            user: mockUser
         })
             .then(() => { })
             .catch(e => { expect(e).toBeInstanceOf(Error); });
@@ -172,7 +180,8 @@ describe('Action service', () => {
             stageId: 5678,
             entity: 'document',
             context: null,
-            form: testForm
+            form: testForm,
+            user: mockUser
         });
         expect(mockRequestClient).toHaveBeenCalledTimes(1);
         expect(response).toBeDefined();
@@ -190,7 +199,8 @@ describe('Action service', () => {
             stageId: 5678,
             entity: 'document',
             context: 1234,
-            form: testForm
+            form: testForm,
+            user: mockUser
         });
         expect(mockRequestClient).toHaveBeenCalledTimes(1);
         expect(response).toBeDefined();
@@ -208,7 +218,8 @@ describe('Action service', () => {
             stageId: 5678,
             entity: 'topic',
             context: null,
-            form: testForm
+            form: testForm,
+            user: mockUser
         });
         expect(mockRequestClient).toHaveBeenCalledTimes(1);
         expect(mockRequestClient).toHaveBeenCalledWith({ topicUUID: 'TEST_TOPIC' });
@@ -227,7 +238,8 @@ describe('Action service', () => {
             stageId: 5678,
             entity: 'topic',
             context: 1234,
-            form: testForm
+            form: testForm,
+            user: mockUser
         });
         expect(mockRequestClient).toHaveBeenCalledTimes(1);
         expect(response).toBeDefined();
@@ -245,7 +257,8 @@ describe('Action service', () => {
             stageId: 5678,
             entity: 'topic',
             context: null,
-            form: testForm
+            form: testForm,
+            user: mockUser
         });
         expect(mockRequestClient).toHaveBeenCalledTimes(1);
         expect(response).toBeDefined();
@@ -263,7 +276,8 @@ describe('Action service', () => {
             stageId: 5678,
             entity: 'correspondent',
             context: null,
-            form: testForm
+            form: testForm,
+            user: mockUser
         });
         expect(mockRequestClient).toHaveBeenCalledTimes(1);
         expect(response).toBeDefined();
@@ -281,7 +295,8 @@ describe('Action service', () => {
             stageId: 5678,
             entity: 'correspondent',
             context: 1234,
-            form: testForm
+            form: testForm,
+            user: mockUser
         });
         expect(mockRequestClient).toHaveBeenCalledTimes(1);
         expect(response).toBeDefined();

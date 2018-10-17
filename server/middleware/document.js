@@ -1,60 +1,58 @@
-const { docsServiceClient } = require('../libs/request');
 const { getList } = require('../services/list');
+const { docsServiceClient } = require('../libs/request');
 const logger = require('../libs/logger');
+const events = require('../models/events');
 const { DocumentError } = require('../models/error');
 
 async function getOriginalDocument(req, res, next) {
-    logger.debug(`Requesting Original: ${req.params.documentId}`);
+    const { documentId } = req.params;
+    logger.info({ event: events.REQUEST_DOCUMENT_ORIGINAL, ...req.params });
     try {
-        const response = await docsServiceClient.get(`/document/${req.params.documentId}/file`, { responseType: 'stream' });
+        const response = await docsServiceClient.get(`/document/${documentId}/file`, { responseType: 'stream' });
         res.setHeader('Cache-Control', 'max-age=86400');
         res.setHeader('Content-Disposition', response.headers['content-disposition']);
-        response.data.on('finish', () => logger.info(`Got Original Document: ${req.params.documentId} for Case: ${req.params.caseId}`));
+        response.data.on('finish', () => logger.debug({ event: events.REQUEST_DOCUMENT_ORIGINAL_SUCCESS, ...req.params }));
         response.data.pipe(res);
     } catch (e) {
-        logger.warn(`Failed getting Original Document: ${req.params.documentId} for Case: ${req.params.caseId}`);
-        logger.warn(e);
-        next(new DocumentError(e.message));
+        logger.error({ event: events.REQUEST_DOCUMENT_ORIGINAL_FAILURE, ...req.params });
+        next(new DocumentError('Unable to retrieve original document'));
     }
 }
 
 async function getPdfDocument(req, res, next) {
-    logger.debug(`Requesting PDF: ${req.params.documentId}`);
+    const { documentId } = req.params;
+    logger.info({ event: events.REQUEST_DOCUMENT_PDF, ...req.params });
     try {
-        const response = await docsServiceClient.get(`/document/${req.params.documentId}/pdf`, { responseType: 'stream' });
+        const response = await docsServiceClient.get(`/document/${documentId}/pdf`, { responseType: 'stream' });
         res.setHeader('Cache-Control', 'max-age=86400');
         res.setHeader('Content-Disposition', response.headers['content-disposition']);
-        response.data.on('finish', () => logger.info(`Got PDF Document: ${req.params.documentId} for Case: ${req.params.caseId}`));
+        response.data.on('finish', () => logger.debug({ event: events.REQUEST_DOCUMENT_PDF_SUCCESS, ...req.params }));
         response.data.pipe(res);
     } catch (e) {
-        logger.warn(`Failed getting PDF Document: ${req.params.documentId} for Case: ${req.params.caseId}`);
-        logger.warn(e);
-        next(new DocumentError(e.message));
+        logger.error({ event: events.REQUEST_DOCUMENT_PDF_FAILURE, ...req.params });
+        next(new DocumentError('Unable to retrieve PDF document'));
     }
 }
 
 async function getPdfDocumentPreview(req, res, next) {
-    logger.debug(`Requesting PDF: ${req.params.documentId}`);
+    const { documentId } = req.params;
+    logger.info({ event: events.REQUEST_DOCUMENT_PREVIEW, ...req.params });
     try {
-        const response = await docsServiceClient.get(`/document/${req.params.documentId}/pdf`, { responseType: 'stream' });
+        const response = await docsServiceClient.get(`/document/${documentId}/pdf`, { responseType: 'stream' });
         res.setHeader('Cache-Control', 'max-age=86400');
-        response.data.on('finish', () => logger.info(`Got PDF Document: ${req.params.documentId} for Case: ${req.params.caseId}`));
+        response.data.on('finish', () => logger.debug({ event: events.REQUEST_DOCUMENT_PREVIEW_SUCCESS, ...req.params }));
         response.data.pipe(res);
     } catch (e) {
-        logger.warn(`Failed getting PDF Document: ${req.params.documentId} for Case: ${req.params.caseId}`);
-        logger.warn(e);
-        next(new DocumentError(e.message));
+        logger.error({ event: events.REQUEST_DOCUMENT_PREVIEW_FAILURE, ...req.params });
+        next(new DocumentError('Unable to retrieve document for PDF preview'));
     }
 }
 
 async function getDocumentList(req, res, next) {
     try {
         const response = await getList('CASE_DOCUMENT_LIST', { caseId: req.params.caseId });
-        logger.info(`Got document list for Case: ${req.params.caseId}`);
         res.locals.documents = response;
     } catch (e) {
-        logger.warn(`Failed getting document list for Case: ${req.params.caseId}`);
-        logger.warn(e);
         res.locals.documents = [];
     } finally {
         next();
