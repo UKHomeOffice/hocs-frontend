@@ -8,7 +8,13 @@ const listDefinitions = {
     memberList: ({ caseType }) => `/casetype/${caseType}/allmembers`,
     ministerList: () => '/ministers',
     caseDocuments: ({ caseId }) => `/document/case/${caseId}`,
-    caseDocumentsType: ({ caseId, type }) => `/document/case/${caseId}/${type}`
+    caseDocumentsType: ({ caseId, type }) => `/document/case/${caseId}/${type}`,
+    standardLines: ({ caseId }) => `/case/${caseId}/standard_lines`,
+    templates: ({ caseId }) => `/case/${caseId}/templates`,
+    caseTopics: ({ caseId }) => `/case/${caseId}/topic`,
+    topicsCaseType: ({ caseId }) => `/case/${caseId}/topiclist`,
+    correspondentTypes: () => '/correspondenttype',
+    caseCorrespondents: ({ caseId }) => `/case/${caseId}/correspondent`
 };
 
 module.exports = {

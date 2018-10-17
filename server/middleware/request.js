@@ -1,4 +1,5 @@
 const logger = require('../libs/logger');
+const events = require('../models/events');
 const { ValidationError } = require('../models/error');
 const { isProduction } = require('../config');
 
@@ -9,7 +10,7 @@ function apiErrorMiddleware(err, req, res, next) {
         logger.debug(err);
         return res.status(err.status).json({ errors: err.fields });
     } else {
-        logger.error(err);
+        logger.error({ event: events.ERROR, message: err.message, stack: err.stack });
         return res.status(err.status || 500).json({
             message: err.message,
             status: err.status || 500,
@@ -25,7 +26,7 @@ function errorMiddleware(err, req, res, next) {
         res.status(err.status || 500);
         req.form.errors = err.fields;
     } else {
-        logger.error(err);
+        logger.error({ event: events.ERROR, message: err.message, stack: err.stack });
         res.locals.error = {
             message: err.message,
             status: err.status || 500,

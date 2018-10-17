@@ -22,9 +22,19 @@ jest.mock('../../config', () => ({
 
 jest.mock('../../services/lists/index.js', () => ({
     listDefinitions: {
+        dashboard: () => '/test/url',
         workflowTypes: () => '/test/url',
         workflowTypesBulk: () => '/test/url',
-        memberList: () => '/test/url'
+        memberList: () => '/test/url',
+        ministerList: () => '/test/url',
+        caseDocuments: () => '/test/url',
+        caseDocumentsType: () => '/test/url',
+        standardLines: () => '/test/url',
+        templates: () => '/test/url',
+        caseTopics: () => '/test/url',
+        topicsCaseType: () => '/test/url',
+        correspondentTypes: () => '/test/url',
+        caseCorrespondents: () => '/test/url',
     },
     staticListDefinitions: {
         test: '/test/url'

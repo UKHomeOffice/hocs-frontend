@@ -1,5 +1,7 @@
 const User = require('../models/user');
 const { AuthenticationError } = require('../models/error');
+const logger = require('../libs/logger');
+const events = require('../models/events');
 
 function authMiddleware(req, res, next) {
     if (req.get('X-Auth-Token')) {
@@ -15,6 +17,7 @@ function authMiddleware(req, res, next) {
         }
         return next();
     }
+    logger.error({ event: events.AUTH_FAILURE });
     next(new AuthenticationError('You are not logged in'));
 }
 
@@ -24,8 +27,11 @@ function protectAction() {
             if (User.hasRole(req.user, req.form.requiredRole.toUpperCase())) {
                 return next();
             }
+            logger.error({ event: events.AUTH_FAILURE, expected: req.form.requiredRole.toUpperCase(), user: req.user.username, roles: req.user.roles });
+            return next(new AuthenticationError('You do not have permission to access the requested page'));
         }
-        next(new AuthenticationError('You do not have permission to access the requested page'));
+        logger.error({ event: events.AUTH_FAILURE, user: req.user.username, roles: req.user.roles });
+        next(new AuthenticationError('Unable to authenticate'));
     };
 }
 
@@ -34,6 +40,7 @@ function protect(permission) {
         if (User.hasRole(req.user, permission)) {
             return next();
         }
+        logger.error({ event: events.AUTH_FAILURE, expected: permission, user: req.user.username, roles: req.user.roles });
         next(new AuthenticationError('You do not have permission to access the requested page'));
     };
 }
