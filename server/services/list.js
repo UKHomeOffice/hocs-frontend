@@ -388,7 +388,7 @@ const lists = {
 };
 
 async function getList(listId, options) {
-    const userRoles = options.user ? options.user.roles : null;
+    const userRoles = options && options.user ? options.user.roles : null;
     try {
         logger.info({ event: events.FETCH_LIST, list: listId, ...options, user: { roles: userRoles } });
         const list = await lists[listId.toUpperCase()].call(this, options);
