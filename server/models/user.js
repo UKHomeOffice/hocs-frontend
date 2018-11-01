@@ -1,3 +1,5 @@
+const logger = require('../libs/logger');
+
 class user {
     constructor({ token, id, email, username, roles, groups }) {
         this.token = token;
