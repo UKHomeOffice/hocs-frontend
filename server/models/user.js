@@ -8,7 +8,7 @@ class user {
         this.username = username;
         this.roles = roles ? roles.toUpperCase().split(',').map(p => p.trim()) : [];
         this.groups = groups ? groups.toUpperCase().split(',').map(g => g.trim()) : [];
-        logger.info({event: DEBUG, roles, groups});
+        logger.info({event: 'DEBUG', roles, groups});
     }
 
     static hasRole(user, role) {
