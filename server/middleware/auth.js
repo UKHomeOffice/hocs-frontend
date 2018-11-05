@@ -24,11 +24,14 @@ function authMiddleware(req, res, next) {
 function protectAction() {
     return (req, res, next) => {
         if (req.form) {
-            if (User.hasRole(req.user, req.form.requiredRole.toUpperCase())) {
-                return next();
+            if (req.form.requiredRole) {
+                if (User.hasRole(req.user, req.form.requiredRole.toUpperCase())) {
+                    return next();
+                }
+                logger.error({ event: events.AUTH_FAILURE, expected: req.form.requiredRole.toUpperCase(), user: req.user.username, roles: req.user.roles });
+                return next(new AuthenticationError('You do not have permission to access the requested page'));
             }
-            logger.error({ event: events.AUTH_FAILURE, expected: req.form.requiredRole.toUpperCase(), user: req.user.username, roles: req.user.roles });
-            return next(new AuthenticationError('You do not have permission to access the requested page'));
+            return next();
         }
         logger.error({ event: events.AUTH_FAILURE, user: req.user.username, roles: req.user.roles });
         next(new AuthenticationError('Unable to authenticate'));

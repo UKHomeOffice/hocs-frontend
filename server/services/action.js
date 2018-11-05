@@ -1,4 +1,4 @@
-const { workflowServiceClient } = require('../libs/request');
+const { workflowServiceClient, infoServiceClient } = require('../libs/request');
 const actionTypes = require('./actions/types');
 const { ActionError } = require('../models/error');
 const logger = require('../libs/logger');
@@ -86,6 +86,19 @@ const actions = {
                     response = await createCase('/case/bulk', { caseType: context, form });
                     clientResponse = { summary: `Created ${response.data.count} new case${response.data.count > 1 ? 's' : ''}` };
                     return handleActionSuccess(clientResponse, workflow, form);
+                case actionTypes.ADD_STANDARD_LINE:
+                    /* eslint-disable no-case-declarations */
+                    const document = form.data.document[0];
+                    const request = {
+                        s3UntrustedUrl: document.key,
+                        displayName: document.originalname,
+                        topicUUID: form.data['topic'],
+                        expires: new Date().toISOString()
+                    };
+                    response = await infoServiceClient.get('/standardline/document', request);
+                    clientResponse = { summary: 'Created a new standard line' };
+                    return handleActionSuccess(clientResponse, workflow, form);
+                    /* eslint-enable no-case-declarations */
                 }
             } else {
                 return handleActionSuccess(null, workflow, form);

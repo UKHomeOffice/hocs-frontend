@@ -365,6 +365,16 @@ const lists = {
             return [];
         }
     },
+    'TOPICS_USER': async () => {
+        const list = listDefinitions['userTopics'].call(this);
+        const response = await fetchList(list, null, workflowServiceClient);
+        if (response.data.topics) {
+            return response.data.topics;
+        } else {
+            logger.warn({ event: events.FETCH_LIST_RETURN_EMPTY, list: 'TOPICS_USER' });
+            return [];
+        }
+    },
     'CORRESPONDENT_TYPES': async () => {
         const list = listDefinitions['correspondentTypes'].call(this);
         const response = await fetchList(list, null, infoServiceClient);
@@ -387,7 +397,7 @@ const lists = {
     }
 };
 
-async function getList(listId, options) {
+async function getList(listId, options = {}) {
     const userRoles = options.user ? options.user.roles : null;
     try {
         logger.info({ event: events.FETCH_LIST, list: listId, ...options, user: { roles: userRoles } });
