@@ -76,13 +76,14 @@ pipeline:
       - KUBE_SERVER=https://kube-api-notprod.notprod.acp.homeoffice.gov.uk
     secrets:
       - hocs_frontend_dev
+      - hocs_frontend_demo
       - hocs_frontend_qa
     commands:
       - cd kube-hocs-frontend
       - ./deploy.sh
     when:
       event: deployment
-      environment: [dev, qa]
+      environment: [dev, qa, demo]
 
   deploy-to-prod:
     image: quay.io/ukhomeofficedigital/kd:v0.8.0
