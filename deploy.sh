@@ -36,14 +36,14 @@ if [[ -z ${KUBE_TOKEN} ]] ; then
 fi
 
 if [ "${ENVIRONMENT}" == "prod" ] ; then
-    export DNS_PREFIX=
+    export DNS_PREFIX=cs
     export KC_REALM=https://sso-dev.notprod.homeoffice.gov.uk/auth/realms/hocs-notprod
 else
-    export DNS_PREFIX=${ENVIRONMENT}.notprod.
+    export DNS_PREFIX=${ENVIRONMENT}.cs-notprod
     export KC_REALM=https://sso-dev.notprod.homeoffice.gov.uk/auth/realms/hocs-notprod
 fi
 
-export DOMAIN_NAME=${DNS_PREFIX}cs.homeoffice.gov.uk
+export DOMAIN_NAME=${DNS_PREFIX}.homeoffice.gov.uk
 
 echo
 echo "Deploying hocs-frontend to ${ENVIRONMENT}"
