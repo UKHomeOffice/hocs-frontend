@@ -95,7 +95,7 @@ const actions = {
                         topicUUID: form.data['topic'],
                         expires: new Date().toISOString()
                     };
-                    response = await infoServiceClient.get('/standardline/document', request);
+                    response = await infoServiceClient.post('/standardline/document', request);
                     clientResponse = { summary: 'Created a new standard line' };
                     return handleActionSuccess(clientResponse, workflow, form);
                     /* eslint-enable no-case-declarations */
