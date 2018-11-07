@@ -6,13 +6,14 @@ const html = require('../layout/html');
 
 function renderMiddleware (req, res, next) {
     const renderConfig = require('../config').forContext('render');
-
     const { form, data } = req;
     const config = {
         ...res.locals,
+        ...req.query,
         data,
         form,
         layout: require('../config').forContext('case'),
+        page: { url: req.baseUrl, params: req.params }
     };
 
     const status = res.locals.error ? res.locals.error.status : 200;

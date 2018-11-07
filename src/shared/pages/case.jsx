@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import formEnabled from './form-enabled.jsx';
-import DocumentPane from '../common/components/document-pane.jsx';
 
 class Case extends Component {
 
@@ -9,20 +8,16 @@ class Case extends Component {
         const {
             children,
             form,
-            title,
-            hasDocPreview
+            title
         } = this.props;
         return (
             <div className="govuk-grid-row">
-                <div className="govuk-grid-column-one-third">
+                <div className="govuk-grid-column-one-half">
                     <h1 className="govuk-heading-l">
                         {form && <span className="govuk-caption-l">{form && form.caseReference}</span>}
                         {title}
                     </h1>
                     {children}
-                </div>
-                <div className="govuk-grid-column-two-thirds">
-                    { hasDocPreview && <DocumentPane/> }
                 </div>
             </div>
         );

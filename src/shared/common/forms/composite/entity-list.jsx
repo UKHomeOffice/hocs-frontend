@@ -69,7 +69,7 @@ class EntityList extends Component {
                                             </div>
                                         </td>
                                         <td className='govuk-table__cell'>
-                                            {hasRemoveLink && <Link to={`/case/${page.caseId}/stage/${page.stageId}/entity/${entity}/${choice.value}/remove`} className="govuk-link">Remove</Link>}
+                                            {hasRemoveLink && <Link to={`/case/${page.params.caseId}/stage/${page.params.stageId}/entity/${entity}/${choice.value}/remove`} className="govuk-link">Remove</Link>}
                                         </td>
                                     </tr>
                                 );
@@ -77,7 +77,7 @@ class EntityList extends Component {
                             {choices.length === 0 && <tr><td><p className='govuk-body'>No {entity}s</p></td></tr>}
                         </tbody>
                     </table>
-                    {hasAddLink && <Link to={`/case/${page.caseId}/stage/${page.stageId}/entity/${entity}/add`} className="govuk-body govuk-link">Add a {entity}</Link>}
+                    {hasAddLink && <Link to={`/case/${page.params.caseId}/stage/${page.params.stageId}/entity/${entity}/add`} className="govuk-body govuk-link">Add a {entity}</Link>}
                 </fieldset>
 
             </div>

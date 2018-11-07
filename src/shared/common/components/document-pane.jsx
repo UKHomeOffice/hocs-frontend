@@ -38,13 +38,13 @@ class DocumentPanel extends Component {
     updateDocuments() {
         const { dispatch } = this.props;
         const { page } = this.state;
-        if (page && page.caseId) {
+        if (page && page.params && page.params.caseId) {
             // TODO: Remove
             /* eslint-disable-next-line  no-console*/
-            console.log(`Updating documents for case: ${page.caseId}`);
+            console.log(`Updating documents for case: ${page.params.caseId}`);
             return dispatch(updateApiStatus(status.REQUEST_DOCUMENT_LIST))
                 .then(() => {
-                    axios.get(`/api/case/${page.caseId}/document`)
+                    axios.get(`/api/case/${page.params.caseId}/document`)
                         .then(response => {
                             dispatch(updateApiStatus(status.REQUEST_DOCUMENT_LIST_SUCCESS))
                                 .then(() => dispatch(clearApiStatus()))
@@ -78,15 +78,19 @@ class DocumentPanel extends Component {
         const { page } = this.props;
         return (
             <Fragment>
-                {activeDocument && page.caseId && <Document caseId={page.caseId} activeDocument={activeDocument} />}
-                {documents && documents.length > 0 && <DocumentList
-                    caseId={page.caseId}
-                    stageId={page.stageId}
-                    documents={documents}
-                    activeDocument={activeDocument}
-                    clickHandler={this.setActiveDocument.bind(this)}
-                />}
-                <Link className='govuk-body govuk-link' to={`/case/${page.caseId}/stage/${page.stageId}/entity/document/manage`} >Manage documents</Link>
+                <div className='govuk-grid-row'>
+                    <div className='govuk-grid-column-full'>
+                        {activeDocument && page.params.caseId && <Document caseId={page.params.caseId} activeDocument={activeDocument} />}
+                        {documents && documents.length > 0 && <DocumentList
+                            caseId={page.params.caseId}
+                            stageId={page.params.stageId}
+                            documents={documents}
+                            activeDocument={activeDocument}
+                            clickHandler={this.setActiveDocument.bind(this)}
+                        />}
+                        <Link className='govuk-body govuk-link' to={`/case/${page.params.caseId}/stage/${page.params.stageId}/entity/document/manage`} >Manage documents</Link>
+                    </div>
+                </div>
             </Fragment>
         );
     }
