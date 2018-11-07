@@ -33,7 +33,7 @@ function withForm(Page) {
 
         componentDidMount() {
             const { dispatch, form, match } = this.props;
-            dispatch(updatePageMeta(match.params))
+            dispatch(updatePageMeta(match))
                 .then(() => {
                     if (!form) {
                         return this.getForm();

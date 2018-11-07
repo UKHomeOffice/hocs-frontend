@@ -317,3 +317,197 @@ a.card__body {
 .workstack {
   overflow: scroll;
 }
+
+.timeline {
+  @extend %govuk-body-m;
+  padding: govuk-spacing(2);
+  margin: 0 auto govuk-spacing(3) auto;
+
+  .recent-action {
+    background-color: $panel-colour;
+    padding: 5px 20px 5px 15px;
+
+    h2 {
+      font-size: 1.2em;
+    }
+
+    &:before {
+      content: "";
+      display: block;
+      width: calc(2 * 5px);
+      height: calc(2 * 5px);
+      border-radius: 50%;
+      background-color: #6e777a;
+      border: 8px solid #6f777b;
+      position: absolute;
+      z-index: 2;
+      left: -35px;
+      top: 16px;
+    }
+  }
+
+  ul {
+    list-style-type: none;
+    position: relative;
+    padding: 0 0 0 10px;
+    margin: 0 0 20px 0;
+    &:after {
+      content: "";
+      position: absolute;
+      top: 45px;
+      left: -4.5px;
+      bottom: 0;
+      border-left: 4px solid #6f777b;
+      height: 96%;
+    }
+
+    li {
+      margin: 4px 0 20px 10px;
+      padding-left: 15px;
+      position: relative;
+      display: block;
+      border-bottom: 1px solid $panel-colour;
+      &:last-child {
+        margin-bottom: 0px;
+      }
+
+      .timeline-reference {
+        @include govuk-font(19, $weight: bold);
+        display: table;
+        position: relative;
+        &:before {
+          content: "";
+          position: absolute;
+          left: -20px;
+          width: 20px;
+          top: 9px;
+          z-index: -1;
+        }
+      }
+
+      &:before {
+        content: "";
+        display: block;
+        width: govuk-spacing(2);
+        height: govuk-spacing(2);
+        border-radius: 50%;
+        background-color: white;
+        border: 4px solid govuk-colour("grey-1");
+        position: absolute;
+        z-index: 2;
+        left: -31px;
+        top: 0px;
+      }
+
+      h2 {
+        @include govuk-font(19, $weight: bold);
+        margin-top: 0.5em;
+        font-size: 0.9em;
+      }
+    }
+  }
+}
+
+.timeline-details {
+  margin: 10px 0;
+
+  summary {
+    font-size: 0.9em;
+  }
+
+  span {
+    display: block;
+    font-size: 0.8em;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    border-left: 4px solid govuk-colour("blue");
+  }
+}
+
+.time {
+  color: #555;
+  font-size: 16px;
+}
+
+.ribbon {
+  @extend %govuk-body-m;
+  background-color: govuk-colour("turquoise");
+  color: govuk-colour("white");
+  padding: govuk-spacing(3);
+
+  & h1 {
+    @include govuk-font(19, $weight: bold);
+  }
+
+  & p {
+    @include govuk-font(16, $weight: bold);
+  }
+}
+
+$border-colour: govuk-colour("grey-2");
+
+.tabs > ol, .tabs > ul {
+  @include govuk-clearfix;
+  list-style: none;
+  margin: 0 16px;
+  padding: 0;
+  border-top: 1px solid $border-colour;
+
+  @include govuk-media-query($from: tablet) {
+    border-top: 0;
+    border-bottom: 2px solid $border-colour;
+    margin-bottom: govuk-spacing(4);
+  }
+}
+
+.tabs > ul li, .tabs > ol li {
+  margin: 0;
+
+  @include govuk-media-query($from: tablet) {
+    float: left;
+    margin: 0 3px 0 0;
+  }
+}
+
+.tab {
+  @include govuk-font(19, $weight: bold);
+  color: govuk-colour("black");
+  text-decoration: none;
+  display: block;
+  line-height: 3.5em;
+  padding: 0 16px;
+  text-align: left;
+  border-bottom: 1px solid $border-colour;
+
+  &:hover {
+    background-color: $highlight-colour;
+  }
+
+  @include govuk-media-query($from: tablet) {
+    border-bottom: none;
+    float: left;
+    height: 2.25em;
+    line-height: 2.25em;
+    margin-bottom: -2px;
+    padding: 0 20px;
+  }
+}
+
+.tab__active {
+  background-color: govuk-colour("white");
+  border-bottom: 1px solid $border-colour;
+  color: $text-colour;
+  text-decoration: none;
+  pointer-events: none;
+  cursor: default;
+
+  &:hover {
+    color: inherit;
+  }
+
+  @include govuk-media-query($from: tablet) {
+    border: solid 2px $border-colour;
+    border-bottom: none;
+    padding-bottom: 2px;
+  }
+}
