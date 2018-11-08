@@ -17,6 +17,7 @@ class Form extends Component {
             data,
             errors,
             method,
+            page,
             schema
         } = this.props;
         return (
@@ -37,7 +38,7 @@ class Form extends Component {
                                 data,
                                 errors,
                                 callback: this.props.updateFormState,
-                                baseUrl: '/case/caseId/stage/stageId/entity'
+                                baseUrl: `/case/${page.caseId}/stage/${page.stageId}`
                             });
                         })
                     }
@@ -61,6 +62,7 @@ class Form extends Component {
 
 Form.propTypes = {
     action: PropTypes.string,
+    page: PropTypes.object.isRequired,
     children: PropTypes.node,
     secondaryActions: PropTypes.node,
     data: PropTypes.object,

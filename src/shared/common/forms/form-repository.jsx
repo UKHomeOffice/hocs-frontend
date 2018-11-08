@@ -85,7 +85,7 @@ export function formComponentFactory(field, options) {
     case 'paragraph':
         return renderFormComponent(Paragraph, { key, config });
     case 'entity-manager':
-        return renderFormComponent(EntityManager, { key, config });
+        return renderFormComponent(EntityManager, { key, config: { ...config, baseUrl: options.baseUrl } });
     default:
         return null;
     }

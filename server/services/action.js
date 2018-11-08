@@ -93,10 +93,21 @@ const actions = {
                         s3UntrustedUrl: document.key,
                         displayName: document.originalname,
                         topicUUID: form.data['topic'],
-                        expires: new Date().toISOString()
+                        expires: form.data['expiry_date']
                     };
                     response = await infoServiceClient.post('/standardline/document', request);
                     clientResponse = { summary: 'Created a new standard line' };
+                    return handleActionSuccess(clientResponse, workflow, form);
+                case actionTypes.ADD_TEMPLATE:
+                    /* eslint-disable no-case-declarations */
+                    const document1 = form.data.document[0];
+                    const request1 = {
+                        s3UntrustedUrl: document1.key,
+                        displayName: document1.originalname,
+                        caseType: form.data['caseType']
+                    };
+                    response = await infoServiceClient.post('/template/document', request1);
+                    clientResponse = { summary: 'Created a new template' };
                     return handleActionSuccess(clientResponse, workflow, form);
                     /* eslint-enable no-case-declarations */
                 }

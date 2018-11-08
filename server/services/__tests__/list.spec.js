@@ -155,39 +155,31 @@ describe('getList', () => {
     });
 
     it('should support the CASE_STANDARD_LINES list', async () => {
-        const choice = value => ({ label: `Choice ${value}`, value: `CHOICE_${value}` });
         workflowServiceClient.get.mockImplementation(jest.fn(() => Promise.resolve({
             data: {
-                standardLines: [
-                    choice('A'),
-                    choice('B'),
-                    choice('C')
-                ]
+                label: 'Test Standard Line',
+                value: '1234'
             }
         })));
         const listService = require('../list');
         const { getList } = listService;
         const list = await getList('CASE_STANDARD_LINES', { user: { roles: [] } });
         expect(list).toBeDefined();
-        expect(list.length).toEqual(3);
+        expect(list.length).toEqual(1);
     });
 
     it('should support the CASE_TEMPLATES list', async () => {
-        const choice = value => ({ label: `Choice ${value}`, value: `CHOICE_${value}` });
         workflowServiceClient.get.mockImplementation(jest.fn(() => Promise.resolve({
             data: {
-                templates: [
-                    choice('A'),
-                    choice('B'),
-                    choice('C')
-                ]
+                label: 'Test Template',
+                value: '1234'
             }
         })));
         const listService = require('../list');
         const { getList } = listService;
         const list = await getList('CASE_TEMPLATES', { user: { roles: [] } });
         expect(list).toBeDefined();
-        expect(list.length).toEqual(3);
+        expect(list.length).toEqual(1);
     });
 
     it('should support the TOPICS_CASETYPE list', async () => {

@@ -19,6 +19,7 @@ class MainPage extends Component {
                         <li><Link to={'/action/create/workflow'}>Create single case</Link></li>
                         <li><Link to={'/action/bulk/workflow'}>Create cases in bulk</Link></li>
                         <li><Link to={'/action/standard_line/add'}>Add standard line</Link></li>
+                        <li><Link to={'/action/template/add'}>Add template</Link></li>
                         <li><Link to={'/action/test/form'}>View test form</Link></li>
                     </ul>
                     <Dashboard />

@@ -24,6 +24,13 @@ describe('Form component', () => {
         fields: []
     };
 
+    const mockProps = {
+        page: {
+            caseId: 'CASE_ID',
+            stageId: 'STAGE_ID'
+        }
+    };
+
     const mockSubmitHandler = jest.fn();
 
     beforeEach(() => {
@@ -41,7 +48,7 @@ describe('Form component', () => {
                 { component: 'text', props: { name: 'Text Area' } }
             ]
         };
-        const wrapper = shallow(<Form schema={mockFormSchemaWithFields} />);
+        const wrapper = shallow(<Form {...mockProps} schema={mockFormSchemaWithFields} />);
         expect(wrapper).toBeDefined();
         expect(wrapper.find('#text').length).toEqual(1);
     });
@@ -52,7 +59,7 @@ describe('Form component', () => {
                 { component: 'button', props: { name: 'Click Me' } }
             ]
         };
-        const wrapper = shallow(<Form schema={mockFormSchemaWithSecondaryAction} />);
+        const wrapper = shallow(<Form {...mockProps} schema={mockFormSchemaWithSecondaryAction} />);
         expect(wrapper).toBeDefined();
         expect(wrapper.find('#button').length).toEqual(1);
     });
@@ -61,13 +68,13 @@ describe('Form component', () => {
         const errors = {
             field: 'Failed validation'
         };
-        const wrapper = shallow(<Form schema={mockFormSchema} errors={errors} />);
+        const wrapper = shallow(<Form {...mockProps} schema={mockFormSchema} errors={errors} />);
         expect(wrapper).toBeDefined();
         expect(wrapper.find('ErrorSummary').length).toEqual(1);
     });
 
     it('should handle submit using provided callback method', async () => {
-        const wrapper = mount(<Form schema={mockFormSchema} submitHandler={mockSubmitHandler}/>);
+        const wrapper = mount(<Form {...mockProps} schema={mockFormSchema} submitHandler={mockSubmitHandler}/>);
         expect(wrapper).toBeDefined();
         expect(wrapper.find('Submit').length).toEqual(1);
         wrapper.find('Submit').simulate('submit');
