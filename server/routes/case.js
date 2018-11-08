@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { getDocumentList } = require('../middleware/document');
+const { getCaseNotes } = require('../middleware/case-notes');
 const { fileMiddleware } = require('../middleware/file');
 const { processMiddleware } = require('../middleware/process');
 const { validationMiddleware } = require('../middleware/validation');
@@ -11,7 +12,8 @@ router.get('/:caseId/summary', caseSummaryMiddleware);
 router.get('/:caseId/stage/:stageId/allocate', allocateCase);
 router.use(['/:caseId/stage/:stageId', '/:caseId/stage/:stageId/allocate'],
     getFormForStage,
-    getDocumentList);
+    getDocumentList,
+    getCaseNotes);
 router.use(['/:caseId/stage/:stageId/entity/:entity/:context/:action', '/:caseId/stage/:stageId/entity/:entity/:action'], getFormForCase);
 router.post(['/:caseId/stage/:stageId', '/:caseId/stage/:stageId/allocate'],
     fileMiddleware.any(),

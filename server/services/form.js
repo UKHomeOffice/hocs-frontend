@@ -8,10 +8,15 @@ const { FormServiceError } = require('../models/error');
 async function getFormSchemaFromWorkflowService(options) {
     const { caseId, stageId } = options;
     const response = await workflowServiceClient.get(`/case/${caseId}/stage/${stageId}`);
-    const { stageUUID, caseReference } = response.data;
+    const { stageUUID, caseReference, allocationNote } = response.data;
+    // TODO: Remove placeholder
+    const mockAllocationNote = allocationNote || {
+        type: 'Allocation Note',
+        message: 'You just sort of have to make almighty decisions. Just leave that space open. Let\'s start with an almighty sky here.'
+    }
     const { schema, data } = response.data.form;
     await hydrateFields(schema.fields, options);
-    return { schema, data, meta: { caseReference, stageUUID } };
+    return { schema, data, meta: { caseReference, stageUUID, allocationNote: mockAllocationNote } };
 }
 
 async function getFormSchemaForCase(options) {
