@@ -35,7 +35,7 @@ exports[`Entity list component should render with add link when passed in props 
     </table>
     <a
       class="govuk-body govuk-link"
-      href="/case/undefined/stage/undefined/entity/entity/add"
+      href="/case/1234/stage/5678/entity/entity/add"
     >
       Add a entity
     </a>
@@ -293,7 +293,7 @@ exports[`Entity list component should render with remove link when passed in pro
           >
             <a
               class="govuk-link"
-              href="/case/undefined/stage/undefined/entity/entity/CHOICE_A/remove"
+              href="/case/1234/stage/5678/entity/entity/CHOICE_A/remove"
             >
               Remove
             </a>
@@ -328,7 +328,7 @@ exports[`Entity list component should render with remove link when passed in pro
           >
             <a
               class="govuk-link"
-              href="/case/undefined/stage/undefined/entity/entity/CHOICE_B/remove"
+              href="/case/1234/stage/5678/entity/entity/CHOICE_B/remove"
             >
               Remove
             </a>

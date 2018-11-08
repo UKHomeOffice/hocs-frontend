@@ -81,7 +81,7 @@ function withForm(Page) {
             // TODO: Remove
             /* eslint-disable-next-line no-undef */
             const formData = new FormData();
-            Object.keys(form_data).map(field => {
+            Object.keys(form_data).forEach(field => {
                 if (Array.isArray(form_data[field])) {
                     form_data[field].map(value => {
                         formData.append(`${field}[]`, value);
