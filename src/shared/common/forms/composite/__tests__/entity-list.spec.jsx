@@ -4,7 +4,7 @@ import { MemoryRouter } from 'react-router-dom';
 
 describe('Entity list component', () => {
 
-    const PAGE = { caseId: '1234', stageId: '5678' };
+    const PAGE = { params: { caseId: '1234', stageId: '5678' } };
     const NAME = 'entity_list';
     const ENTITY = 'entity';
     const BASE_URL = 'http://localhost:8080';
@@ -92,7 +92,7 @@ describe('Entity list component', () => {
         const EntityList = OUTER.props().children;
         const WRAPPER = render(
             <MemoryRouter>
-                <EntityList />
+                <EntityList page={PAGE} />
             </MemoryRouter>);
         expect(WRAPPER).toBeDefined();
         expect(WRAPPER).toMatchSnapshot();
@@ -107,7 +107,7 @@ describe('Entity list component', () => {
         const EntityList = OUTER.props().children;
         const WRAPPER = render(
             <MemoryRouter>
-                <EntityList />
+                <EntityList page={PAGE} />
             </MemoryRouter>);
         expect(WRAPPER).toBeDefined();
         expect(WRAPPER).toMatchSnapshot();

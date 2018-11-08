@@ -1,14 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
-import Document from './document.jsx';
-import DocumentList from './document-list.jsx';
 import { ApplicationConsumer } from '../../contexts/application.jsx';
-import {
-    updateApiStatus,
-    clearApiStatus
-} from '../../contexts/actions/index.jsx';
-import status from '../../helpers/api-status.js';
 import { Link } from 'react-router-dom';
 import DocumentPane from './document-pane.jsx';
 import CaseNotes from './case-notes.jsx';
@@ -31,15 +23,25 @@ class SideBar extends Component {
         return this.state.active === tab;
     }
 
-    render() {
+    renderTabButton(label, value) {
         const { page } = this.props;
+        return (
+            <li>
+                <Link onClick={(e) => this.setActive(e, value)} className={this.isActive(value) ? 'tab tab__active' : 'tab'} to={`${page.url}/?activeTab=${value}`}>
+                    {label}
+                </Link>
+            </li>
+        );
+    }
+
+    render() {
         return (
             <Fragment>
                 <div className='tabs'>
                     <ul>
-                        <li><Link onClick={(e) => this.setActive(e, 'SUMMARY')} className={this.isActive('SUMMARY') ? 'tab tab__active' : 'tab'} to={`${page.url}/?activeTab=SUMMARY`}>Summary</Link></li>
-                        <li><Link onClick={(e) => this.setActive(e, 'DOCUMENTS')} className={this.isActive('DOCUMENTS') ? 'tab tab__active' : 'tab'} to={`${page.url}/?activeTab=DOCUMENTS`}>Documents</Link></li>
-                        <li><Link onClick={(e) => this.setActive(e, 'TIMELINE')} className={this.isActive('TIMELINE') ? 'tab tab__active' : 'tab'} to={`${page.url}/?activeTab=TIMELINE`}>Timeline</Link></li>
+                        {this.renderTabButton('Summary', 'SUMMARY')}
+                        {this.renderTabButton('Documents', 'DOCUMENTS')}
+                        {this.renderTabButton('Timeline', 'TIMELINE')}
                     </ul>
                     {this.isActive('SUMMARY') && <div className='govuk-body'>PLACEHOLDER_SUMMARY</div>}
                     {this.isActive('DOCUMENTS') && <DocumentPane />}
@@ -51,10 +53,8 @@ class SideBar extends Component {
 
 }
 
-SideBar.defaultProps = {
-};
-
 SideBar.propTypes = {
+    activeTab: PropTypes.string,
     page: PropTypes.object.isRequired
 };
 

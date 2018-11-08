@@ -9,7 +9,7 @@ jest.mock('axios', () => ({
 describe('Document pane component', () => {
 
     let mockDispatch;
-    const mockPage = { caseId: 'MOCK_CASE_ID' };
+    const mockPage = { params: { caseId: 'MOCK_CASE_ID' } };
 
     const documentList = [
         { name: 'TEST_DOCUMENT_1', uuid: 'MOCK_DOC_ID_1', type: 'ORIGINAL', pdf_link: 'MOCK_S3_LINK_1', file_link: 'MOCK_ORIG_LINK_1' },

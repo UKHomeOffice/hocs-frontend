@@ -12,26 +12,26 @@ jest.mock('../../common/components/document-pane.jsx', () => (
 describe('Stage page component', () => {
 
     it('should render with default props', () => {
-        const wrapper = render(<Stage />);
+        const wrapper = shallow(<Stage />);
         expect(wrapper).toBeDefined();
         expect(wrapper).toMatchSnapshot();
     });
 
     it('should render with title when passed in props', () => {
-        const wrapper = render(<Stage title='MY_TITLE' />);
+        const wrapper = shallow(<Stage title='MY_TITLE' />);
         expect(wrapper).toBeDefined();
         expect(wrapper).toMatchSnapshot();
     });
 
     it('should render with subTitle when passed in props', () => {
         const mockForm = { caseReference: 'ABC123' };
-        const wrapper = render(<Stage form={mockForm} />);
+        const wrapper = shallow(<Stage form={mockForm} />);
         expect(wrapper).toBeDefined();
         expect(wrapper).toMatchSnapshot();
     });
 
     it('should render children when passed', () => {
-        const wrapper = render(
+        const wrapper = shallow(
             <Stage>
                 FORM
             </Stage>
