@@ -15,7 +15,8 @@ const listDefinitions = {
     topicsCaseType: ({ caseId }) => `/case/${caseId}/topiclist`,
     correspondentTypes: () => '/correspondenttype',
     caseCorrespondents: ({ caseId }) => `/case/${caseId}/correspondent`,
-    userTopics: () => '/topics/user'
+    // userTopics: () => '/topics/user'
+    userTopics: () => '/topics/MIN'
 };
 
 module.exports = {

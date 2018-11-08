@@ -142,7 +142,7 @@ function withForm(Page) {
         }
 
         renderForm() {
-            const { match: { url } } = this.props;
+            const { match: { url, params } } = this.props;
             const { form_data, form_errors, form_meta, form_schema } = this.state;
             return (
                 <Page title={form_schema.title} form={form_meta} >
@@ -151,7 +151,8 @@ function withForm(Page) {
                             schema: form_schema,
                             data: form_data,
                             errors: form_errors,
-                            meta: form_meta
+                            meta: form_meta,
+                            page: params
                         }}
                         action={url}
                         submitHandler={this.submitHandler.bind(this)}

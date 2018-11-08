@@ -327,8 +327,11 @@ const lists = {
     'CASE_STANDARD_LINES': async ({ caseId }) => {
         const list = listDefinitions['standardLines'].call(this, { caseId });
         const response = await fetchList(list, null, workflowServiceClient);
-        if (response.data.standardLines) {
-            return response.data.standardLines;
+        if (response.data.label && response.data.value) {
+            const { label, value } = response.data;
+            return [
+                { label, value }
+            ];
         } else {
             logger.warn({ event: events.FETCH_LIST_RETURN_EMPTY, list: 'CASE_STANDARD_LINES' });
             return [];
@@ -337,8 +340,11 @@ const lists = {
     'CASE_TEMPLATES': async ({ caseId }) => {
         const list = listDefinitions['templates'].call(this, { caseId });
         const response = await fetchList(list, null, workflowServiceClient);
-        if (response.data.templates) {
-            return response.data.templates;
+        if (response.data.label && response.data.value) {
+            const { label, value } = response.data;
+            return [
+                { label, value }
+            ];
         } else {
             logger.warn({ event: events.FETCH_LIST_RETURN_EMPTY, list: 'CASE_TEMPLATES' });
             return [];
@@ -367,9 +373,9 @@ const lists = {
     },
     'TOPICS_USER': async () => {
         const list = listDefinitions['userTopics'].call(this);
-        const response = await fetchList(list, null, workflowServiceClient);
-        if (response.data.topics) {
-            return response.data.topics;
+        const response = await fetchList(list, null, infoServiceClient);
+        if (response.data.parentTopics) {
+            return response.data.parentTopics;
         } else {
             logger.warn({ event: events.FETCH_LIST_RETURN_EMPTY, list: 'TOPICS_USER' });
             return [];

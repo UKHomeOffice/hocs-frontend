@@ -15,5 +15,6 @@ module.exports = {
     bulkCaseCreate: require('./bulk-case-create.js'),
     bulkAddDocument: require('./bulk-document-add.js'),
     testForm: require('./case-test.js'),
-    addStandardLine: require('./add-standard-line.js')
+    addStandardLine: require('./add-standard-line.js'),
+    addTemplate: require('./add-template')
 };
