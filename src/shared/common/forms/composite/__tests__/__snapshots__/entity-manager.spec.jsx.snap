@@ -116,7 +116,8 @@ exports[`Entity list component should render with download link when passed in p
       >
         <a
           class="govuk-link"
-          href="/http://localhost:8080/download/entity/CHOICE_A"
+          download="Choice A"
+          href="http://localhost:8080/download/entity/CHOICE_A"
         >
           Download
         </a>
@@ -135,7 +136,8 @@ exports[`Entity list component should render with download link when passed in p
       >
         <a
           class="govuk-link"
-          href="/http://localhost:8080/download/entity/CHOICE_B"
+          download="Choice B"
+          href="http://localhost:8080/download/entity/CHOICE_B"
         >
           Download
         </a>
@@ -187,7 +189,7 @@ exports[`Entity list component should render with remove link when passed in pro
       >
         <a
           class="govuk-link"
-          href="/http://localhost:8080/entity/CHOICE_A/remove"
+          href="http://localhost:8080/entity/CHOICE_A/remove"
         >
           Remove
         </a>
@@ -206,7 +208,7 @@ exports[`Entity list component should render with remove link when passed in pro
       >
         <a
           class="govuk-link"
-          href="/http://localhost:8080/entity/CHOICE_B/remove"
+          href="http://localhost:8080/entity/CHOICE_B/remove"
         >
           Remove
         </a>
