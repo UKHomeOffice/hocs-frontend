@@ -110,7 +110,7 @@ const lists = {
             'X-Auth-UserId': user.id,
             'X-Auth-Roles': user.roles.join()
         }, caseworkServiceClient);
-        const workstackData = response.data.activeStages
+        const workstackData = response.data.stages
             .sort((first, second) => first.caseReference > second.caseReference);
         return {
             label: 'User workstack',
@@ -124,7 +124,7 @@ const lists = {
             'X-Auth-UserId': user.id,
             'X-Auth-Roles': user.roles.join()
         }, caseworkServiceClient);
-        const workstackData = response.data.activeStages
+        const workstackData = response.data.stages
             .filter(item => item.teamUUID === teamId)
             .sort((first, second) => first.caseReference > second.caseReference);
         const { isOverdue, isAllocated, setTag } = helpers;
@@ -167,7 +167,7 @@ const lists = {
             'X-Auth-UserId': user.id,
             'X-Auth-Roles': user.roles.join()
         }, caseworkServiceClient);
-        const workstackData = response.data.activeStages
+        const workstackData = response.data.stages
             .filter(item => item.teamUUID === teamId && item.caseType === workflowId)
             .sort((first, second) => first.caseReference > second.caseReference);
         const { isOverdue, isAllocated, setTag } = helpers;
@@ -210,7 +210,7 @@ const lists = {
             'X-Auth-UserId': user.id,
             'X-Auth-Roles': user.roles.join()
         }, caseworkServiceClient);
-        const workstackData = response.data.activeStages
+        const workstackData = response.data.stages
             .filter(item => item.teamUUID === teamId && item.caseType === workflowId && item.stageType === stageId)
             .sort((first, second) => first.caseReference > second.caseReference);
         return {
