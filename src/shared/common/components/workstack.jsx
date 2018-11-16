@@ -19,10 +19,10 @@ class Workstack extends Component {
         if (filter !== '') {
             const filtered = workstack.filter(r => {
                 return (r.caseReference && r.caseReference.toUpperCase().indexOf(filter) !== -1) ||
-                    (r.assignedUserDisplay && r.assignedUserDisplay.toUpperCase().indexOf(filter) !== -1) ||
-                    (r.assignedTeamDisplay && r.assignedTeamDisplay.toUpperCase().indexOf(filter) !== -1) ||
+                    (r.userUUID && r.userUUID.toUpperCase().indexOf(filter) !== -1) ||
+                    (r.teamUUID && r.teamUUID.toUpperCase().indexOf(filter) !== -1) ||
                     (r.deadline && r.deadline.toUpperCase().indexOf(filter) !== -1) ||
-                    (r.stageTypeDisplay && r.stageTypeDisplay.toUpperCase().indexOf(filter) !== -1);
+                    (r.stageType && r.stageType.toUpperCase().indexOf(filter) !== -1);
             });
             this.setState({ workstack: filtered });
         } else {
@@ -69,15 +69,15 @@ class Workstack extends Component {
                                                 <strong className='govuk-tag'>{c.caseType}</strong>
                                             </td>
                                             <td className='govuk-table__cell'>{c.caseReference}</td>
-                                            <td className='govuk-table__cell'>{c.stageTypeDisplay}</td>
-                                            <td className='govuk-table__cell'>{c.assignedUserDisplay}</td>
-                                            <td className='govuk-table__cell'>{c.assignedTeamDisplay}</td>
+                                            <td className='govuk-table__cell'>{c.stageType}</td>
+                                            <td className='govuk-table__cell'>{c.userUUID}</td>
+                                            <td className='govuk-table__cell'>{c.teamUUID}</td>
                                             <td className='govuk-table__cell'>{c.deadline}</td>
                                             <td className='govuk-table__cell'>
                                                 {
-                                                    c.assignedUserDisplay === 'Unassigned' ?
-                                                        <Link to={`/case/${c.caseUUID}/stage/${c.stageUUID}/allocate`} className="govuk-link govuk-!-margin-right-3">Allocate</Link> :
-                                                        <Link to={`/case/${c.caseUUID}/stage/${c.stageUUID}`} className="govuk-link govuk-!-margin-right-3">Casework</Link>
+                                                    c.userUUID === null ?
+                                                        <Link to={`/case/${c.caseUUID}/stage/${c.uuid}/allocate`} className="govuk-link govuk-!-margin-right-3">Allocate</Link> :
+                                                        <Link to={`/case/${c.caseUUID}/stage/${c.uuid}`} className="govuk-link govuk-!-margin-right-3">Casework</Link>
                                                 }
                                                 <Link to={`/case/${c.caseUUID}/summary`} className="govuk-link">Summary</Link>
                                             </td>
