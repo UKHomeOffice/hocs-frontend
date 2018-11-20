@@ -353,7 +353,7 @@ const lists = {
     },
     'CASE_TOPICS': async ({ caseId }) => {
         const list = listDefinitions['caseTopics'].call(this, { caseId });
-        const response = await fetchList(list, null, workflowServiceClient);
+        const response = await fetchList(list, null, caseworkServiceClient);
         if (response.data.topics) {
             return response.data.topics;
         } else {
