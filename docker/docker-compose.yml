@@ -68,8 +68,6 @@ services:
       AWS_DEFAULT_REGION: 'eu-west-2'
     depends_on:
      - localstack
-     - postgres
-     - info
 
   frontend:
     image: quay.io/ukhomeofficedigital/hocs-frontend
