@@ -68,6 +68,8 @@ services:
       AWS_DEFAULT_REGION: 'eu-west-2'
     depends_on:
      - localstack
+     - postgres
+     - info
 
   frontend:
     image: quay.io/ukhomeofficedigital/hocs-frontend
@@ -135,7 +137,7 @@ services:
     image: quay.io/ukhomeofficedigital/hocs-info-service
     # image: hocs-info-service-test
     ports:
-      - 8083:8080
+      - 8085:8080
     networks:
       - hocs-network
     environment:
@@ -155,7 +157,7 @@ services:
   documents:
     image: quay.io/ukhomeofficedigital/hocs-docs
     ports:
-      - 8085:8080
+      - 8083:8080
     networks:
       - hocs-network
     environment:

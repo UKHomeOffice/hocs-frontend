@@ -55,21 +55,21 @@ class EntityList extends Component {
                                     <tr className='govuk-radios govuk-table__row' key={i}>
                                         <td className='govuk-table__cell'>
                                             <div className='govuk-radios__item'>
-                                                <input id={`${name}-${choice.value}`}
+                                                <input id={`${name}-${choice.type}`}
                                                     type={type}
                                                     name={name}
-                                                    value={choice.value}
+                                                    value={choice.fullname}
                                                     checked={(this.state.value === choice.value)}
                                                     onChange={e => this.handleChange(e)}
                                                     className={'govuk-radios__input'}
                                                 />
-                                                <label className="govuk-label govuk-radios__label" htmlFor={`${name}-${choice.value}`}>
-                                                    {choice.label}
+                                                <label className="govuk-label govuk-radios__label" htmlFor={`${name}-${choice.fullname}`}>
+                                                    {choice.fullname}
                                                 </label>
                                             </div>
                                         </td>
                                         <td className='govuk-table__cell'>
-                                            {hasRemoveLink && <Link to={`/case/${page.params.caseId}/stage/${page.params.stageId}/entity/${entity}/${choice.value}/remove`} className="govuk-link">Remove</Link>}
+                                            {hasRemoveLink && <Link to={`/case/${page.params.caseId}/stage/${page.params.stageId}/entity/${entity}/${choice.uuid}/remove`} className="govuk-link">Remove</Link>}
                                         </td>
                                     </tr>
                                 );

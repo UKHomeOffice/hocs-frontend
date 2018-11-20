@@ -1,4 +1,4 @@
-const { workflowServiceClient, infoServiceClient } = require('../libs/request');
+const { workflowServiceClient, infoServiceClient, caseworkServiceClient, docsServiceClient } = require('../libs/request');
 const actionTypes = require('./actions/types');
 const { ActionError } = require('../models/error');
 const logger = require('../libs/logger');
@@ -131,7 +131,7 @@ const actions = {
                     if (!context) {
                         throw new ActionError('Unable to remove, no context provided');
                     }
-                    await workflowServiceClient.delete(`/case/${caseId}/document/${context}`);
+                    await docsServiceClient.delete(`/case/${caseId}/document/${context}`);
                     break;
                 case actionTypes.ADD_TOPIC:
                     await workflowServiceClient.post(`/case/${caseId}/topic`, { topicUUID: form.data['topic'] });
@@ -140,7 +140,7 @@ const actions = {
                     if (!context) {
                         throw new ActionError('Unable to remove, no context provided');
                     }
-                    await workflowServiceClient.delete(`/case/${caseId}/topic/${context}`);
+                    await caseworkServiceClient.delete(`/case/${caseId}/topic/${context}`);
                     break;
                 case actionTypes.IS_MEMBER:
                     if (form.data['isMember'] === 'true') {
@@ -157,7 +157,7 @@ const actions = {
                     if (!context) {
                         throw new ActionError('Unable to remove, no context provided');
                     }
-                    await workflowServiceClient.delete(`/case/${caseId}/correspondent/${context}`);
+                    await caseworkServiceClient.delete(`/case/${caseId}/correspondent/${context}`);
                     break;
                 }
                 return ({ callbackUrl: `/case/${caseId}/stage/${stageId}` });
