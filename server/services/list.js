@@ -326,7 +326,7 @@ const lists = {
     },
     'CASE_STANDARD_LINES': async ({ caseId }) => {
         const list = listDefinitions['standardLines'].call(this, { caseId });
-        const response = await fetchList(list, null, workflowServiceClient);
+        const response = await fetchList(list, null, infoServiceClient);
         if (response.data.label && response.data.value) {
             const { label, value } = response.data;
             return [
@@ -339,7 +339,7 @@ const lists = {
     },
     'CASE_TEMPLATES': async ({ caseId }) => {
         const list = listDefinitions['templates'].call(this, { caseId });
-        const response = await fetchList(list, null, workflowServiceClient);
+        const response = await fetchList(list, null, infoServiceClient);
         if (response.data.label && response.data.value) {
             const { label, value } = response.data;
             return [
@@ -363,7 +363,7 @@ const lists = {
     },
     'TOPICS_CASETYPE': async ({ caseId }) => {
         const list = listDefinitions['topicsCaseType'].call(this, { caseId });
-        const response = await fetchList(list, null, workflowServiceClient);
+        const response = await fetchList(list, null, infoServiceClient);
         if (response.data.parentTopics) {
             return response.data.parentTopics;
         } else {
