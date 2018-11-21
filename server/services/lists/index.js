@@ -2,7 +2,7 @@ const staticListDefinitions = {
 };
 
 const listDefinitions = {
-    dashboard: () => '/stage/active',
+    dashboard: () => '/stage',
     workflowTypes: () => '/casetype/single',
     workflowTypesBulk: () => '/casetype/bulk',
     memberList: ({ caseType }) => `/casetype/${caseType}/allmembers`,
