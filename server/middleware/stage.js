@@ -31,9 +31,8 @@ async function stageApiResponseMiddleware(req, res, next) {
 async function allocateCase(req, res, next) {
     const { caseId, stageId } = req.params;
     try {
-        await workflowServiceClient.post(`/case/${caseId}/stage/${stageId}/allocate`, {
+        await workflowServiceClient.post(`/case/${caseId}/stage/${stageId}/userUUID`, {
             userUUID: '22222222-2222-2222-2222-222222222222',
-            teamUUID: '33333333-3333-3333-3333-333333333333'
         });
     } catch (e) {
         logger.warn(e);
