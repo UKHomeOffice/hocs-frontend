@@ -64,8 +64,6 @@ spec:
           memory: "50Mi"
           cpu: 100m
         env:
-          - name: HTTPS_LISTEN_PORT
-            value: '10443 http2'
           - name: PROXY_SERVICE_HOST
             value: '127.0.0.1'  
           - name: PROXY_SERVICE_PORT
