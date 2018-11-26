@@ -64,8 +64,10 @@ spec:
           memory: "50Mi"
           cpu: 100m
         env:
+          - name: HTTPS_LISTEN_PORT
+            value 10443 http2
           - name: PROXY_SERVICE_HOST
-            value: '127.0.0.1'
+            value: '127.0.0.1'  
           - name: PROXY_SERVICE_PORT
             value: '8081'
           - name: NAXSI_USE_DEFAULT_RULES
@@ -81,7 +83,7 @@ spec:
           - name: ERROR_REDIRECT_CODES
             value: '501 502 503 504'
           - name: ADD_NGINX_SERVER_CFG
-            value: 'gzip off; location = /reload { allow 127.0.0.1; deny all; content_by_lua_block { os.execute("touch /tmp/nginx-reload-triggered; /usr/local/openresty/nginx/sbin/nginx -s reload; touch /tmp/nginx-reload-complete;") } }'
+            value: 'location = /reload { allow 127.0.0.1; deny all; content_by_lua_block { os.execute("touch /tmp/nginx-reload-triggered; /usr/local/openresty/nginx/sbin/nginx -s reload; touch /tmp/nginx-reload-complete;") } }'
         volumeMounts:
           - name: certs
             mountPath: /certs
