@@ -3,6 +3,9 @@ $govuk-fonts-path: "/public/assets/fonts/";
 $tablet-breakpoint: 641px !default;
 $govuk-page-width: 1300px !default;
 
+$govuk-font-family: 'helvetica neue', Arial, Helvetica, sans-serif !default;
+$govuk-font-family-tabular: 'helvetica neue',Arial, Helvetica, sans-serif !default;
+
 @import "govuk-frontend/all.scss";
 
 // Overrides the GOV.UK width when longer
