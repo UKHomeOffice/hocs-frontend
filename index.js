@@ -23,6 +23,7 @@ if(isProduction) {
         cert: fs.readFileSync('/certs/tls.pem'),
         key: fs.readFileSync('/certs/tls-key.pem'),
     };
+    logger.info('Production: using SPDY/H2 and SSL if possible');
 } else {
     options = {
         spdy: {
@@ -30,6 +31,7 @@ if(isProduction) {
             plain: true
         }
     };
+    logger.info('Not production: Using HTTP/1.1');
 }
 
 spdy.createServer(options, app).listen(port, () => {
