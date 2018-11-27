@@ -108,7 +108,7 @@ spec:
           - --listen=127.0.0.1:8081 # nginx
           - --enable-logging=true
           - --enable-json-logging=true
-          - --upstream-url=https://127.0.0.1:443 # app
+          - --upstream-url=https://127.0.0.1:10443 # app
           - --upstream-response-header-timeout=60s
           - --upstream-expect-continue-timeout=60s
           - --upstream-keepalive-timeout=60s
@@ -144,7 +144,7 @@ spec:
              - SETGID
         env:
           - name: PORT
-            value: '443'
+            value: '10443'
           - name: NODE_ENV
             value: 'production'
           - name: USE_CLIENTSIDE
@@ -225,7 +225,7 @@ spec:
             memory: 128Mi
         ports:
           - name: https
-            containerPort: 443
+            containerPort: 10443
         livenessProbe:
           httpGet:
             path: /health
