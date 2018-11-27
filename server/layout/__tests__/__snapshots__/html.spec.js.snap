@@ -18,24 +18,22 @@ exports[`HTML module should default to proposition header when no title is passe
     <link rel=\\"apple-touch-icon\\" href=\\"/public/assets/images/govuk-apple-touch-icon.png\\">
     
     
-    <script>window.__INITIAL_DATA__ = {}</script>
-
+    <script defer >window.__INITIAL_DATA__ = {}</script>
+     <script defer>
+        document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
+    </script>
+    <script defer src=\\"/public/js/js/main.js\\"></script>
+    <script defer src=\\"/public/all.js\\"></script>
+    <script defer>
+        window.GOVUKFrontend.initAll()
+    </script>
     <meta property=\\"og:image\\" content=\\"/public/assets/images/govuk-opengraph-image.png\\">
 </head>
 
 <body class=\\"govuk-template__body \\">
-    <script>
-        document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
-    </script>
 
-    <a href=\\"#main-content\\" class=\\"govuk-skip-link\\">Skip to main content</a>
     <div id=\\"app\\"></div>
 
-    <script src=\\"/public/js/js/main.js\\" defer></script>
-    <script src=\\"/public/all.js\\"></script>
-    <script>
-        window.GOVUKFrontend.initAll()
-    </script>
 </body>
 
 </html>"
@@ -58,26 +56,24 @@ exports[`HTML module should include additional CSS and JS when passed 1`] = `
     <link rel=\\"apple-touch-icon\\" sizes=\\"152x152\\" href=\\"/public/assets/images/govuk-apple-touch-icon-152x152.png\\">
     <link rel=\\"apple-touch-icon\\" href=\\"/public/assets/images/govuk-apple-touch-icon.png\\">
     <link rel=\\"stylesheet\\" media=\\"screen\\" href=\\"/public/styles/styles/first.css\\" />
-    <script src=\\"/public/js/js/first.js\\"></script>
-<script src=\\"/public/js/js/second.js\\"></script>
-    <script>window.__INITIAL_DATA__ = {}</script>
-
+    <script defer src=\\"/public/js/js/first.js\\"></script>
+<script defer src=\\"/public/js/js/second.js\\"></script>
+    <script defer >window.__INITIAL_DATA__ = {}</script>
+     <script defer>
+        document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
+    </script>
+    <script defer src=\\"/public/js/js/main.js\\"></script>
+    <script defer src=\\"/public/all.js\\"></script>
+    <script defer>
+        window.GOVUKFrontend.initAll()
+    </script>
     <meta property=\\"og:image\\" content=\\"/public/assets/images/govuk-opengraph-image.png\\">
 </head>
 
 <body class=\\"govuk-template__body \\">
-    <script>
-        document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
-    </script>
 
-    <a href=\\"#main-content\\" class=\\"govuk-skip-link\\">Skip to main content</a>
     <div id=\\"app\\"></div>
 
-    <script src=\\"/public/js/js/main.js\\" defer></script>
-    <script src=\\"/public/all.js\\"></script>
-    <script>
-        window.GOVUKFrontend.initAll()
-    </script>
 </body>
 
 </html>"
@@ -101,24 +97,22 @@ exports[`HTML module should include application props in the head when passed 1`
     <link rel=\\"apple-touch-icon\\" href=\\"/public/assets/images/govuk-apple-touch-icon.png\\">
     
     
-    <script>window.__INITIAL_DATA__ = {\\"first\\":\\"value\\",\\"second\\":\\"value\\"}</script>
-
+    <script defer >window.__INITIAL_DATA__ = {\\"first\\":\\"value\\",\\"second\\":\\"value\\"}</script>
+     <script defer>
+        document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
+    </script>
+    <script defer src=\\"/public/js/js/main.js\\"></script>
+    <script defer src=\\"/public/all.js\\"></script>
+    <script defer>
+        window.GOVUKFrontend.initAll()
+    </script>
     <meta property=\\"og:image\\" content=\\"/public/assets/images/govuk-opengraph-image.png\\">
 </head>
 
 <body class=\\"govuk-template__body \\">
-    <script>
-        document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
-    </script>
 
-    <a href=\\"#main-content\\" class=\\"govuk-skip-link\\">Skip to main content</a>
     <div id=\\"app\\"></div>
 
-    <script src=\\"/public/js/js/main.js\\" defer></script>
-    <script src=\\"/public/all.js\\"></script>
-    <script>
-        window.GOVUKFrontend.initAll()
-    </script>
 </body>
 
 </html>"
@@ -142,24 +136,22 @@ exports[`HTML module should include the appropriate react application bundle whe
     <link rel=\\"apple-touch-icon\\" href=\\"/public/assets/images/govuk-apple-touch-icon.png\\">
     
     
-    <script>window.__INITIAL_DATA__ = {}</script>
-
+    <script defer >window.__INITIAL_DATA__ = {}</script>
+     <script defer>
+        document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
+    </script>
+    <script defer src=\\"/public/js/js/myBundle.js\\"></script>
+    <script defer src=\\"/public/all.js\\"></script>
+    <script defer>
+        window.GOVUKFrontend.initAll()
+    </script>
     <meta property=\\"og:image\\" content=\\"/public/assets/images/govuk-opengraph-image.png\\">
 </head>
 
 <body class=\\"govuk-template__body \\">
-    <script>
-        document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
-    </script>
 
-    <a href=\\"#main-content\\" class=\\"govuk-skip-link\\">Skip to main content</a>
     <div id=\\"app\\"></div>
 
-    <script src=\\"/public/js/js/myBundle.js\\" defer></script>
-    <script src=\\"/public/all.js\\"></script>
-    <script>
-        window.GOVUKFrontend.initAll()
-    </script>
 </body>
 
 </html>"
@@ -183,24 +175,22 @@ exports[`HTML module should include the correct asset path when passed 1`] = `
     <link rel=\\"apple-touch-icon\\" href=\\"some/public/folder/that/contains/my/assets/assets/images/govuk-apple-touch-icon.png\\">
     
     
-    <script>window.__INITIAL_DATA__ = {}</script>
-
+    <script defer >window.__INITIAL_DATA__ = {}</script>
+     <script defer>
+        document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
+    </script>
+    <script defer src=\\"some/public/folder/that/contains/my/assets/js/js/main.js\\"></script>
+    <script defer src=\\"some/public/folder/that/contains/my/assets/all.js\\"></script>
+    <script defer>
+        window.GOVUKFrontend.initAll()
+    </script>
     <meta property=\\"og:image\\" content=\\"some/public/folder/that/contains/my/assets/assets/images/govuk-opengraph-image.png\\">
 </head>
 
 <body class=\\"govuk-template__body \\">
-    <script>
-        document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
-    </script>
 
-    <a href=\\"#main-content\\" class=\\"govuk-skip-link\\">Skip to main content</a>
     <div id=\\"app\\"></div>
 
-    <script src=\\"some/public/folder/that/contains/my/assets/js/js/main.js\\" defer></script>
-    <script src=\\"some/public/folder/that/contains/my/assets/all.js\\"></script>
-    <script>
-        window.GOVUKFrontend.initAll()
-    </script>
 </body>
 
 </html>"
@@ -224,24 +214,22 @@ exports[`HTML module should include the server rendered markup when passed 1`] =
     <link rel=\\"apple-touch-icon\\" href=\\"/public/assets/images/govuk-apple-touch-icon.png\\">
     
     
-    <script>window.__INITIAL_DATA__ = {}</script>
-
+    <script defer >window.__INITIAL_DATA__ = {}</script>
+     <script defer>
+        document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
+    </script>
+    <script defer src=\\"/public/js/js/main.js\\"></script>
+    <script defer src=\\"/public/all.js\\"></script>
+    <script defer>
+        window.GOVUKFrontend.initAll()
+    </script>
     <meta property=\\"og:image\\" content=\\"/public/assets/images/govuk-opengraph-image.png\\">
 </head>
 
 <body class=\\"govuk-template__body \\">
-    <script>
-        document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
-    </script>
 
-    <a href=\\"#main-content\\" class=\\"govuk-skip-link\\">Skip to main content</a>
     <div id=\\"app\\"><--- REACT APPLICATION ---></div>
 
-    <script src=\\"/public/js/js/main.js\\" defer></script>
-    <script src=\\"/public/all.js\\"></script>
-    <script>
-        window.GOVUKFrontend.initAll()
-    </script>
 </body>
 
 </html>"
@@ -266,23 +254,21 @@ exports[`HTML module should not contain the react bundle js when clientside is s
     
     
     
-
+     <script defer>
+        document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
+    </script>
+    
+    <script defer src=\\"/public/all.js\\"></script>
+    <script defer>
+        window.GOVUKFrontend.initAll()
+    </script>
     <meta property=\\"og:image\\" content=\\"/public/assets/images/govuk-opengraph-image.png\\">
 </head>
 
 <body class=\\"govuk-template__body \\">
-    <script>
-        document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
-    </script>
 
-    <a href=\\"#main-content\\" class=\\"govuk-skip-link\\">Skip to main content</a>
     <div id=\\"app\\"></div>
 
-    
-    <script src=\\"/public/all.js\\"></script>
-    <script>
-        window.GOVUKFrontend.initAll()
-    </script>
 </body>
 
 </html>"
@@ -306,24 +292,22 @@ exports[`HTML module should return the default html when no additional configura
     <link rel=\\"apple-touch-icon\\" href=\\"/public/assets/images/govuk-apple-touch-icon.png\\">
     
     
-    <script>window.__INITIAL_DATA__ = {}</script>
-
+    <script defer >window.__INITIAL_DATA__ = {}</script>
+     <script defer>
+        document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
+    </script>
+    <script defer src=\\"/public/js/js/main.js\\"></script>
+    <script defer src=\\"/public/all.js\\"></script>
+    <script defer>
+        window.GOVUKFrontend.initAll()
+    </script>
     <meta property=\\"og:image\\" content=\\"/public/assets/images/govuk-opengraph-image.png\\">
 </head>
 
 <body class=\\"govuk-template__body \\">
-    <script>
-        document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
-    </script>
 
-    <a href=\\"#main-content\\" class=\\"govuk-skip-link\\">Skip to main content</a>
     <div id=\\"app\\"></div>
 
-    <script src=\\"/public/js/js/main.js\\" defer></script>
-    <script src=\\"/public/all.js\\"></script>
-    <script>
-        window.GOVUKFrontend.initAll()
-    </script>
 </body>
 
 </html>"
