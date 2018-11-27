@@ -57,12 +57,12 @@ spec:
              - SETUID
              - SETGID
         resources:
-         limits:
-          memory: "100Mi"
-          cpu: 100m
-         requests:
-          memory: "50Mi"
-          cpu: 100m
+          limits:
+            memory: 512Mi
+            cpu: 250m
+          requests:
+            memory: 256Mi
+            cpu: 150m
         env:
           - name: PROXY_SERVICE_HOST
             value: '127.0.0.1'  
@@ -88,7 +88,7 @@ spec:
             readOnly: true
         ports:
           - name: https
-            containerPort: 10444
+            containerPort: 10443
       - name: keycloak-proxy
         image: quay.io/ukhomeofficedigital/go-keycloak-proxy:v2.1.1
         imagePullPolicy: Always
@@ -108,7 +108,7 @@ spec:
           - --listen=127.0.0.1:8081 # nginx
           - --enable-logging=true
           - --enable-json-logging=true
-          - --upstream-url=https://127.0.0.1:8080 # app
+          - --upstream-url=https://127.0.0.1:443 # app
           - --upstream-response-header-timeout=60s
           - --upstream-expect-continue-timeout=60s
           - --upstream-keepalive-timeout=60s
@@ -144,7 +144,7 @@ spec:
              - SETGID
         env:
           - name: PORT
-            value: '10443'
+            value: '443'
           - name: NODE_ENV
             value: 'production'
           - name: USE_CLIENTSIDE
@@ -225,7 +225,7 @@ spec:
             memory: 128Mi
         ports:
           - name: https
-            containerPort: 10443
+            containerPort: 443
         livenessProbe:
           httpGet:
             path: /health
