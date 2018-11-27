@@ -77,19 +77,13 @@ exports[`Dashboard component should render with default props 1`] = `
         </td>
         <td
           class="govuk-table__cell"
-        >
-          Stage type
-        </td>
+        />
         <td
           class="govuk-table__cell"
-        >
-          Unassigned
-        </td>
+        />
         <td
           class="govuk-table__cell"
-        >
-          Team 1
-        </td>
+        />
         <td
           class="govuk-table__cell"
         >
@@ -100,9 +94,9 @@ exports[`Dashboard component should render with default props 1`] = `
         >
           <a
             class="govuk-link govuk-!-margin-right-3"
-            href="/case/undefined/stage/STAGE_UUID/allocate"
+            href="/case/undefined/stage/undefined"
           >
-            Allocate
+            Casework
           </a>
           <a
             class="govuk-link"
@@ -131,19 +125,13 @@ exports[`Dashboard component should render with default props 1`] = `
         </td>
         <td
           class="govuk-table__cell"
-        >
-          Stage type
-        </td>
+        />
         <td
           class="govuk-table__cell"
-        >
-          User 1
-        </td>
+        />
         <td
           class="govuk-table__cell"
-        >
-          Team 1
-        </td>
+        />
         <td
           class="govuk-table__cell"
         >
@@ -154,7 +142,7 @@ exports[`Dashboard component should render with default props 1`] = `
         >
           <a
             class="govuk-link govuk-!-margin-right-3"
-            href="/case/undefined/stage/STAGE_UUID"
+            href="/case/undefined/stage/undefined"
           >
             Casework
           </a>
