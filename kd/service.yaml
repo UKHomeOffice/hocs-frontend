@@ -12,6 +12,6 @@ spec:
     targetPort: 10443
   - name: http
     port: 80
-    targetPort: 8081  
+    targetPort: 8080  
   selector:
     name: hocs-frontend
