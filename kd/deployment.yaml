@@ -88,7 +88,7 @@ spec:
             readOnly: true
         ports:
           - name: https
-            containerPort: 10443
+            containerPort: 10444
       - name: keycloak-proxy
         image: quay.io/ukhomeofficedigital/go-keycloak-proxy:v2.1.1
         imagePullPolicy: Always
@@ -144,7 +144,7 @@ spec:
              - SETGID
         env:
           - name: PORT
-            value: '8080'
+            value: '10443'
           - name: NODE_ENV
             value: 'production'
           - name: USE_CLIENTSIDE
@@ -224,12 +224,12 @@ spec:
             cpu: 100m
             memory: 128Mi
         ports:
-          - name: http
-            containerPort: 8080
+          - name: https
+            containerPort: 10443
         livenessProbe:
           httpGet:
             path: /health
-            port: http
+            port: https
             scheme: HTTPS
             httpHeaders:
               - name: X-probe
@@ -240,7 +240,7 @@ spec:
         readinessProbe:
           httpGet:
             path: /health
-            port: http
+            port: https
             scheme: HTTPS
             httpHeaders:
               - name: X-probe
