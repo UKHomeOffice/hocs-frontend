@@ -108,7 +108,7 @@ spec:
           - --listen=127.0.0.1:8081 # nginx
           - --enable-logging=true
           - --enable-json-logging=true
-          - --upstream-url=https://127.0.0.1:8080 # app
+          - --upstream-url=http://127.0.0.1:8080 # app
           - --upstream-response-header-timeout=60s
           - --upstream-expect-continue-timeout=60s
           - --upstream-keepalive-timeout=60s
