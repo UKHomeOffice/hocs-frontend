@@ -108,7 +108,7 @@ spec:
           - --listen=127.0.0.1:8081 # nginx
           - --enable-logging=true
           - --enable-json-logging=true
-          - --upstream-url=https://127.0.0.1:8443 # app
+          - --upstream-url=https://127.0.0.1:8080 # app
           - --upstream-response-header-timeout=60s
           - --upstream-expect-continue-timeout=60s
           - --upstream-keepalive-timeout=60s
@@ -144,7 +144,7 @@ spec:
              - SETGID
         env:
           - name: PORT
-            value: '8443'
+            value: '8080'
           - name: NODE_ENV
             value: 'production'
           - name: USE_CLIENTSIDE
@@ -224,13 +224,12 @@ spec:
             cpu: 100m
             memory: 128Mi
         ports:
-          - name: https
-            containerPort: 8443
+          - name: http
+            containerPort: 8080
         livenessProbe:
           httpGet:
             path: /health
-            port: https
-            scheme: HTTPS
+            port: http
             httpHeaders:
               - name: X-probe
                 value: kubelet
@@ -240,8 +239,7 @@ spec:
         readinessProbe:
           httpGet:
             path: /health
-            port: https
-            scheme: HTTPS
+            port: http
             httpHeaders:
               - name: X-probe
                 value: kubelet
