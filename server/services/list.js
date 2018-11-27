@@ -1,5 +1,5 @@
 const { DOCUMENT_WHITELIST } = require('../config').forContext('server');
-const { infoServiceClient, workflowServiceClient, caseworkServiceClient, docsServiceClient } = require('../libs/request');
+const { infoServiceClient, caseworkServiceClient, docsServiceClient } = require('../libs/request');
 const { listDefinitions, staticListDefinitions } = require('./lists/index');
 const logger = require('../libs/logger');
 const events = require('../models/events');

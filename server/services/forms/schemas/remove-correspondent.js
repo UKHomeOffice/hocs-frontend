@@ -1,6 +1,6 @@
 const Form = require('../form-builder');
 const { Component } = require('../component-builder');
-const {caseworkServiceClient} = require('../../../libs/request');
+const { caseworkServiceClient } = require('../../../libs/request');
 
 module.exports = async options => {
     const response = await caseworkServiceClient.get(`/case/${options.caseId}/correspondent/${options.context}`);

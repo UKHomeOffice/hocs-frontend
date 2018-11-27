@@ -30,6 +30,38 @@ jest.mock('../../libs/request', () => {
             delete: (url, body) => {
                 mockRequestClient(body);
             }
+        },
+        caseworkServiceClient: {
+            post: (url, body) => {
+                if (url === '/case') {
+                    mockRequestClient(body);
+                    return handleMockWorkflowCreateRequest(body);
+                }
+                if (url === '/case/bulk') {
+                    mockRequestClient(body);
+                    return handleMockWorkflowCreateRequest(body);
+                }
+                mockRequestClient(body);
+            },
+            delete: (url, body) => {
+                mockRequestClient(body);
+            }
+        },
+        docsServiceClient: {
+            post: (url, body) => {
+                if (url === '/case') {
+                    mockRequestClient(body);
+                    return handleMockWorkflowCreateRequest(body);
+                }
+                if (url === '/case/bulk') {
+                    mockRequestClient(body);
+                    return handleMockWorkflowCreateRequest(body);
+                }
+                mockRequestClient(body);
+            },
+            delete: (url, body) => {
+                mockRequestClient(body);
+            }
         }
     };
 });

@@ -25,7 +25,7 @@ const mockCaseNotes = [
             { date: '19 August 2018 at 1.01pm', note: { message: 'Allocated to Bob Ross' } }
         ]
     }
-]
+];
 
 async function getCaseNotes(req, res, next) {
     res.locals.caseNotes = mockCaseNotes || [];
@@ -39,4 +39,4 @@ async function getCaseNotesApiResponse(req, res) {
 module.exports = {
     getCaseNotes,
     getCaseNotesApiResponse
-}
+};
