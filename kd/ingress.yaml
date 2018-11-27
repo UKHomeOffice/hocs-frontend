@@ -18,6 +18,13 @@ spec:
           serviceName: hocs-frontend
           servicePort: 443
         path: /
+  - host: {{.DOMAIN_NAME}}/public
+    http:
+      paths:
+      - backend:
+          serviceName: hocs-frontend
+          servicePort: 80
+        path: /public      
   tls:
   - hosts:
     - {{.DOMAIN_NAME}}
