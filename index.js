@@ -10,7 +10,7 @@ const app = express();
 const port = process.env.PORT || 8080;
 
 app.use('/public', express.static(path.join(__dirname, 'node_modules', 'govuk-frontend'), { maxAge: 36000000 }));
-app.use('/public', express.static(path.join(__dirname, 'build', 'public'), { maxAge: 3600000 }));
+app.use('/public', express.static(path.join(__dirname, 'build', 'public'), { maxAge: 36000000 }));
 
 listService.initialise();
 app.use('/', applicationRouter);
