@@ -33,25 +33,23 @@ const render = ({
     <link rel="apple-touch-icon" sizes="152x152" href="${assetPath}/assets/images/govuk-apple-touch-icon-152x152.png">
     <link rel="apple-touch-icon" href="${assetPath}/assets/images/govuk-apple-touch-icon.png">
     ${css.map(style => `<link rel="stylesheet" media="screen" href="${assetPath}/styles/${assets.css[style]}" />`).join('\n')}
-    ${clientSide ? js.map(script => `<script src="${assetPath}/js/${assets.js[script]}"></script>`).join('\n') : ''}
-    ${clientSide ? `<script>window.__INITIAL_DATA__ = ${serialize(props)}</script>` : ''}
-
+    ${clientSide ? js.map(script => `<script defer src="${assetPath}/js/${assets.js[script]}"></script>`).join('\n') : ''}
+    ${clientSide ? `<script defer >window.__INITIAL_DATA__ = ${serialize(props)}</script>` : ''}
+     <script defer>
+        document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
+    </script>
+    ${clientSide ? `<script defer src="${assetPath}/js/${assets.js[react]}"></script>` : ''}
+    <script defer src="${assetPath}/all.js"></script>
+    <script defer>
+        window.GOVUKFrontend.initAll()
+    </script>
     <meta property="og:image" content="${assetPath}/assets/images/govuk-opengraph-image.png">
 </head>
 
 <body class="govuk-template__body ">
-    <script>
-        document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
-    </script>
 
-    <a href="#main-content" class="govuk-skip-link">Skip to main content</a>
     <div id="app">${markup}</div>
 
-    ${clientSide ? `<script src="${assetPath}/js/${assets.js[react]}" defer></script>` : ''}
-    <script src="${assetPath}/all.js"></script>
-    <script>
-        window.GOVUKFrontend.initAll()
-    </script>
 </body>
 
 </html>`);
