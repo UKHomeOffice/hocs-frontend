@@ -102,7 +102,7 @@ const testCreateCaseForm = {
     }
 };
 
-const mockUser = { username: 'TEST_USER' };
+const mockUser = { username: 'TEST_USER', id: 'TEST', roles: [], groups: []  };
 
 describe('Action service', () => {
 
