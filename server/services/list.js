@@ -54,9 +54,11 @@ const lists = {
     'DASHBOARD': async ({ user }) => {
         const list = listDefinitions['dashboard'].call(this);
         const response = await fetchList(list, {
-            'X-Auth-UserId': user.id,
-            'X-Auth-Roles': user.roles.join(),
-            'X-Auth-Groups': user.groups.join()
+            headers: {
+                'X-Auth-UserId': user.id,
+                'X-Auth-Roles': user.roles.join(),
+                'X-Auth-Groups': user.groups.join()
+            }
         }, caseworkServiceClient);
         const workstackData = response.data.stages
             .sort((first, second) => first.caseReference > second.caseReference);
@@ -108,9 +110,11 @@ const lists = {
     'WORKSTACK_USER': async ({ user }) => {
         const list = listDefinitions['dashboard'].call(this);
         const response = await fetchList(list, {
-            'X-Auth-UserId': user.id,
-            'X-Auth-Roles': user.roles.join(),
-            'X-Auth-Groups': user.groups.join()
+            headers: {
+                'X-Auth-UserId': user.id,
+                'X-Auth-Roles': user.roles.join(),
+                'X-Auth-Groups': user.groups.join()
+            }
         }, caseworkServiceClient);
         const workstackData = response.data.stages
             .sort((first, second) => first.caseReference > second.caseReference);
@@ -123,9 +127,11 @@ const lists = {
     'WORKSTACK_TEAM': async ({ user, teamId }) => {
         const list = listDefinitions['dashboard'].call(this);
         const response = await fetchList(list, {
-            'X-Auth-UserId': user.id,
-            'X-Auth-Roles': user.roles.join(),
-            'X-Auth-Groups': user.groups.join()
+            headers: {
+                'X-Auth-UserId': user.id,
+                'X-Auth-Roles': user.roles.join(),
+                'X-Auth-Groups': user.groups.join()
+            }
         }, caseworkServiceClient);
         const workstackData = response.data.stages
             .filter(item => item.teamUUID === teamId)
@@ -167,9 +173,11 @@ const lists = {
     'WORKSTACK_WORKFLOW': async ({ user, teamId, workflowId }) => {
         const list = listDefinitions['dashboard'].call(this);
         const response = await fetchList(list, {
-            'X-Auth-UserId': user.id,
-            'X-Auth-Roles': user.roles.join(),
-            'X-Auth-Groups': user.groups.join()
+            headers: {
+                'X-Auth-UserId': user.id,
+                'X-Auth-Roles': user.roles.join(),
+                'X-Auth-Groups': user.groups.join()
+            }
         }, caseworkServiceClient);
         const workstackData = response.data.stages
             .filter(item => item.teamUUID === teamId && item.caseType === workflowId)
@@ -211,9 +219,11 @@ const lists = {
     'WORKSTACK_STAGE': async ({ user, teamId, workflowId, stageId }) => {
         const list = listDefinitions['dashboard'].call(this);
         const response = await fetchList(list, {
-            'X-Auth-UserId': user.id,
-            'X-Auth-Roles': user.roles.join(),
-            'X-Auth-Groups': user.groups.join()
+            headers: {
+                'X-Auth-UserId': user.id,
+                'X-Auth-Roles': user.roles.join(),
+                'X-Auth-Groups': user.groups.join()
+            }
         }, caseworkServiceClient);
         const workstackData = response.data.stages
             .filter(item => item.teamUUID === teamId && item.caseType === workflowId && item.stageType === stageId)
