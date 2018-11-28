@@ -72,6 +72,11 @@ function handleWorkflowSuccess(response, { caseId, stageId }) {
 
 const actions = {
     ACTION: async ({ workflow, context, form, user }) => {
+        let headers = {
+            'X-Auth-UserId': user.id,
+            'X-Auth-Roles': user.roles.join(),
+            'X-Auth-Groups': user.groups.join()
+        };
         try {
             if (form && form.action) {
                 logger.info({ event: events.ACTION, user: user.username, action: form.action });
@@ -79,11 +84,11 @@ const actions = {
                 let clientResponse;
                 switch (form.action) {
                 case actionTypes.CREATE_CASE:
-                    response = await createCase('/case', { caseType: context, form });
+                    response = await createCase('/case', { caseType: context, form }, headers);
                     clientResponse = { summary: `Created a new case: ${response.data.reference}` };
                     return handleActionSuccess(clientResponse, workflow, form);
                 case actionTypes.BULK_CREATE_CASE:
-                    response = await createCase('/case/bulk', { caseType: context, form });
+                    response = await createCase('/case/bulk', { caseType: context, form }, headers);
                     clientResponse = { summary: `Created ${response.data.count} new case${response.data.count > 1 ? 's' : ''}` };
                     return handleActionSuccess(clientResponse, workflow, form);
                 case actionTypes.ADD_STANDARD_LINE:
@@ -95,7 +100,7 @@ const actions = {
                         topicUUID: form.data['topic'],
                         expires: form.data['expiry_date']
                     };
-                    response = await infoServiceClient.post('/standardline/document', request);
+                    response = await infoServiceClient.post('/standardline/document', request, headers);
                     clientResponse = { summary: 'Created a new standard line' };
                     return handleActionSuccess(clientResponse, workflow, form);
                 case actionTypes.ADD_TEMPLATE:
@@ -106,7 +111,7 @@ const actions = {
                         displayName: document1.originalname,
                         caseType: form.data['caseType']
                     };
-                    response = await infoServiceClient.post('/template/document', request1);
+                    response = await infoServiceClient.post('/template/document', request1, headers);
                     clientResponse = { summary: 'Created a new template' };
                     return handleActionSuccess(clientResponse, workflow, form);
                     /* eslint-enable no-case-declarations */
@@ -120,13 +125,11 @@ const actions = {
         }
     },
     CASE: async ({ caseId, stageId, entity, context, form, user }) => {
-
         let headers = {
             'X-Auth-UserId': user.id,
             'X-Auth-Roles': user.roles.join(),
             'X-Auth-Groups': user.groups.join()
         };
-
         try {
             if (form && form.action && entity) {
                 logger.info({ event: events.CASE_ACTION, user: user.username, action: form.action, case: caseId });
