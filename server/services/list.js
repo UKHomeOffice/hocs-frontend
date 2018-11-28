@@ -55,7 +55,8 @@ const lists = {
         const list = listDefinitions['dashboard'].call(this);
         const response = await fetchList(list, {
             'X-Auth-UserId': user.id,
-            'X-Auth-Roles': user.roles.join()
+            'X-Auth-Roles': user.roles.join(),
+            'X-Auth-Groups': user.groups.join()
         }, caseworkServiceClient);
         const workstackData = response.data.stages
             .sort((first, second) => first.caseReference > second.caseReference);
@@ -108,7 +109,8 @@ const lists = {
         const list = listDefinitions['dashboard'].call(this);
         const response = await fetchList(list, {
             'X-Auth-UserId': user.id,
-            'X-Auth-Roles': user.roles.join()
+            'X-Auth-Roles': user.roles.join(),
+            'X-Auth-Groups': user.groups.join()
         }, caseworkServiceClient);
         const workstackData = response.data.stages
             .sort((first, second) => first.caseReference > second.caseReference);
@@ -122,7 +124,8 @@ const lists = {
         const list = listDefinitions['dashboard'].call(this);
         const response = await fetchList(list, {
             'X-Auth-UserId': user.id,
-            'X-Auth-Roles': user.roles.join()
+            'X-Auth-Roles': user.roles.join(),
+            'X-Auth-Groups': user.groups.join()
         }, caseworkServiceClient);
         const workstackData = response.data.stages
             .filter(item => item.teamUUID === teamId)
@@ -165,7 +168,8 @@ const lists = {
         const list = listDefinitions['dashboard'].call(this);
         const response = await fetchList(list, {
             'X-Auth-UserId': user.id,
-            'X-Auth-Roles': user.roles.join()
+            'X-Auth-Roles': user.roles.join(),
+            'X-Auth-Groups': user.groups.join()
         }, caseworkServiceClient);
         const workstackData = response.data.stages
             .filter(item => item.teamUUID === teamId && item.caseType === workflowId)
@@ -208,7 +212,8 @@ const lists = {
         const list = listDefinitions['dashboard'].call(this);
         const response = await fetchList(list, {
             'X-Auth-UserId': user.id,
-            'X-Auth-Roles': user.roles.join()
+            'X-Auth-Roles': user.roles.join(),
+            'X-Auth-Groups': user.groups.join()
         }, caseworkServiceClient);
         const workstackData = response.data.stages
             .filter(item => item.teamUUID === teamId && item.caseType === workflowId && item.stageType === stageId)

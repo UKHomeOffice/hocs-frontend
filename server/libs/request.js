@@ -22,12 +22,7 @@ const workflowServiceClient = axios.create({
 const caseworkServiceClient = axios.create({
     baseURL: CASEWORK_SERVICE,
     auth: WORKFLOW_BASIC_AUTH,
-    httpsAgent: isProduction ? getHttpsClient() : null,
-    headers: {
-        'X-Auth-UserId': req.user.id,
-        'X-Auth-Roles': req.user.roles.join(),
-        'X-Auth-Groups': req.user.groups.join()
-    }
+    httpsAgent: isProduction ? getHttpsClient() : null
 });
 
 const infoServiceClient = axios.create({
