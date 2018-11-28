@@ -31,16 +31,16 @@ function addDocumentRequest(form) {
     return { documents: createDocumentSummaryObjects(form, form.data['document_type']) };
 }
 
-function createCase(url, { caseType, form }) {
-    return workflowServiceClient.post(url, createCaseRequest(caseType, form));
+function createCase(url, { caseType, form }, headers) {
+    return workflowServiceClient.post(url, createCaseRequest(caseType, form), headers);
 }
 
-function addDocument(url, form) {
-    return workflowServiceClient.post(url, addDocumentRequest(form));
+function addDocument(url, form, headers) {
+    return workflowServiceClient.post(url, addDocumentRequest(form),headers);
 }
 
-function updateCase({ caseId, stageId, form }) {
-    return workflowServiceClient.post(`/case/${caseId}/stage/${stageId}`, { data: form.data });
+function updateCase({ caseId, stageId, form }, headers) {
+    return workflowServiceClient.post(`/case/${caseId}/stage/${stageId}`, { data: form.data }, headers);
 }
 
 function handleActionSuccess(response, workflow, form) {
@@ -120,21 +120,28 @@ const actions = {
         }
     },
     CASE: async ({ caseId, stageId, entity, context, form, user }) => {
+
+        let headers = {
+            'X-Auth-UserId': user.id,
+            'X-Auth-Roles': user.roles.join(),
+            'X-Auth-Groups': user.groups.join()
+        };
+
         try {
             if (form && form.action && entity) {
                 logger.info({ event: events.CASE_ACTION, user: user.username, action: form.action, case: caseId });
                 switch (form.action) {
                 case actionTypes.ADD_DOCUMENT:
-                    await addDocument(`/case/${caseId}/document`, form);
+                    await addDocument(`/case/${caseId}/document`, form, headers);
                     break;
                 case actionTypes.REMOVE_DOCUMENT:
                     if (!context) {
                         throw new ActionError('Unable to remove, no context provided');
                     }
-                    await docsServiceClient.delete(`/case/${caseId}/document/${context}`);
+                    await docsServiceClient.delete(`/case/${caseId}/document/${context}`, headers);
                     break;
                 case actionTypes.ADD_TOPIC:
-                    await workflowServiceClient.post(`/case/${caseId}/topic`, { topicUUID: form.data['topic'] });
+                    await workflowServiceClient.post(`/case/${caseId}/topic`, { topicUUID: form.data['topic'] },headers);
                     break;
                 case actionTypes.REMOVE_TOPIC:
                     if (!context) {
@@ -146,18 +153,18 @@ const actions = {
                     if (form.data['isMember'] === 'true') {
                         return ({ callbackUrl: `/case/${caseId}/stage/${stageId}/entity/member/add` });
                     } else {
-                        return ({ callbackUrl: `/case/${caseId}/stage/${stageId}/entity/correspondent/details` });
+                        return ({ callbackUrl: `/case/${caseId}/stage/${stageId}/entity/correspondent/details` }, headers);
                     }
                 case actionTypes.SELECT_MEMBER:
                     return ({ callbackUrl: `/case/${caseId}/stage/${stageId}/entity/member/${form.data['member']}/details` });
                 case actionTypes.ADD_CORRESPONDENT: case actionTypes.ADD_MEMBER:
-                    await workflowServiceClient.post(`/case/${caseId}/correspondent`, { ...form.data });
+                    await workflowServiceClient.post(`/case/${caseId}/correspondent`, { ...form.data },headers);
                     return ({ callbackUrl: `/case/${caseId}/stage/${stageId}` });
                 case actionTypes.REMOVE_CORRESPONDENT:
                     if (!context) {
                         throw new ActionError('Unable to remove, no context provided');
                     }
-                    await caseworkServiceClient.delete(`/case/${caseId}/correspondent/${context}`);
+                    await caseworkServiceClient.delete(`/case/${caseId}/correspondent/${context}`, headers);
                     break;
                 }
                 return ({ callbackUrl: `/case/${caseId}/stage/${stageId}` });
