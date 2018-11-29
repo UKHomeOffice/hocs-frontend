@@ -117,7 +117,7 @@ services:
     networks:
       - hocs-network
     environment:
-      SPRING_PROFILES_ACTIVE: 'local'
+      SPRING_PROFILES_ACTIVE: 'development, local'
       SERVER_PORT: 8080
       CASE_QUEUE_NAME: 'case-queue'
       CASE_QUEUE_DLQ_NAME: 'case-queue-dlq'
