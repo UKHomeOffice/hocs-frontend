@@ -72,13 +72,11 @@ function handleWorkflowSuccess(response, { caseId, stageId }) {
 
 const actions = {
     ACTION: async ({ workflow, context, form, user }) => {
-        let headers = {
-            headers: {
-                'X-Auth-UserId': user.id,
-                'X-Auth-Roles': user.roles.join(),
-                'X-Auth-Groups': user.groups.join()
-            }
-
+        let headers = {};
+        headers.headers = {
+            'X-Auth-UserId': user.id,
+            'X-Auth-Roles': user.roles.join(),
+            'X-Auth-Groups': user.groups.join()
         };
         try {
             if (form && form.action) {
@@ -183,9 +181,15 @@ const actions = {
         }
     },
     WORKFLOW: async ({ caseId, stageId, form, user }) => {
+        let headers = {};
+        headers.headers = {
+            'X-Auth-UserId': user.id,
+            'X-Auth-Roles': user.roles.join(),
+            'X-Auth-Groups': user.groups.join()
+        };
         logger.info({ event: events.WORKFLOW_ACTION, user: user.username, action: actionTypes.UPDATE_CASE, case: caseId });
         try {
-            const response = await updateCase({ caseId, stageId, form });
+            const response = await updateCase({ caseId, stageId, form }, headers);
             return handleWorkflowSuccess(response, { caseId, stageId });
         } catch (e) {
             logger.error({ event: events.WORKFLOW_ACTION_FAILURE, user: user.username, action: actionTypes.UPDATE_CASE, case: caseId });
