@@ -70,7 +70,8 @@ services:
      - localstack
 
   frontend:
-    image: quay.io/ukhomeofficedigital/hocs-frontend
+    # image: quay.io/ukhomeofficedigital/hocs-frontend
+    image: hocs-frontend-test
     ports:
       - 8080:8080
     networks:
@@ -116,7 +117,7 @@ services:
     networks:
       - hocs-network
     environment:
-      SPRING_PROFILES_ACTIVE: 'development, local'
+      SPRING_PROFILES_ACTIVE: 'local'
       SERVER_PORT: 8080
       CASE_QUEUE_NAME: 'case-queue'
       CASE_QUEUE_DLQ_NAME: 'case-queue-dlq'

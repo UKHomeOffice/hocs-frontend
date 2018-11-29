@@ -73,9 +73,11 @@ function handleWorkflowSuccess(response, { caseId, stageId }) {
 const actions = {
     ACTION: async ({ workflow, context, form, user }) => {
         let headers = {
-            'X-Auth-UserId': user.id,
-            'X-Auth-Roles': user.roles.join(),
-            'X-Auth-Groups': user.groups.join()
+            headers: {
+                'X-Auth-UserId': user.id,
+                'X-Auth-Roles': user.roles.join(),
+                'X-Auth-Groups': user.groups.join()
+            }
         };
         try {
             if (form && form.action) {
@@ -126,9 +128,11 @@ const actions = {
     },
     CASE: async ({ caseId, stageId, entity, context, form, user }) => {
         let headers = {
-            'X-Auth-UserId': user.id,
-            'X-Auth-Roles': user.roles.join(),
-            'X-Auth-Groups': user.groups.join()
+            headers: {
+                'X-Auth-UserId': user.id,
+                'X-Auth-Roles': user.roles.join(),
+                'X-Auth-Groups': user.groups.join()
+            }
         };
         try {
             if (form && form.action && entity) {
