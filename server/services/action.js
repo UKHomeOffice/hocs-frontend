@@ -78,6 +78,7 @@ const actions = {
                 'X-Auth-Roles': user.roles.join(),
                 'X-Auth-Groups': user.groups.join()
             }
+
         };
         try {
             if (form && form.action) {
