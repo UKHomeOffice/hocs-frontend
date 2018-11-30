@@ -5,9 +5,9 @@ const logger = require('../libs/logger');
 const events = require('../models/events');
 const { FormServiceError } = require('../models/error');
 
-async function getFormSchemaFromWorkflowService(options) {
+async function getFormSchemaFromWorkflowService(options, headers) {
     const { caseId, stageId } = options;
-    const response = await workflowServiceClient.get(`/case/${caseId}/stage/${stageId}`);
+    const response = await workflowServiceClient.get(`/case/${caseId}/stage/${stageId}`, headers);
     const { stageUUID, caseReference, allocationNote } = response.data;
     // TODO: Remove placeholder
     const mockAllocationNote = allocationNote || {
@@ -82,9 +82,16 @@ const getFormForCase = async (req, res, next) => {
 };
 
 const getFormForStage = async (req, res, next) => {
+    const { user } = req;
+    let headers = {};
+    headers.headers = {
+        'X-Auth-UserId': user.id,
+        'X-Auth-Roles': user.roles.join(),
+        'X-Auth-Groups': user.groups.join()
+    };
     try {
         logger.info({ event: events.WORKFLOW_FORM, ...req.params, user: req.user.username });
-        req.form = await getFormSchemaFromWorkflowService(req.params);
+        req.form = await getFormSchemaFromWorkflowService(req.params, headers);
     } catch (e) {
         logger.error({ event: events.WORKFLOW_FORM_FAILURE, message: e.message, stack: e.stack });
         return next(new FormServiceError());

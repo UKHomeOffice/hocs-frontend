@@ -22,9 +22,16 @@ async function caseApiResponseMiddleware(req, res, next) {
 }
 
 async function caseSummaryMiddleware(req, res, next) {
+    const { user } = req;
     try {
+        let headers = {};
+        headers.headers = {
+            'X-Auth-UserId': user.id,
+            'X-Auth-Roles': user.roles.join(),
+            'X-Auth-Groups': user.groups.join()
+        };
         const { caseId } = req.params;
-        const response = await caseworkServiceClient.get(`/case/${caseId}`);
+        const response = await caseworkServiceClient.get(`/case/${caseId}`, headers);
         res.locals.summary = response.data;
         next();
     } catch (e) {

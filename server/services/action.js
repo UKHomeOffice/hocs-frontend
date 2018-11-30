@@ -192,7 +192,7 @@ const actions = {
             const response = await updateCase({ caseId, stageId, form }, headers);
             return handleWorkflowSuccess(response, { caseId, stageId });
         } catch (e) {
-            logger.error({ event: events.WORKFLOW_ACTION_FAILURE, user: user.username, action: actionTypes.UPDATE_CASE, case: caseId });
+            logger.error({ event: events.WORKFLOW_ACTION_FAILURE, user: user.uuid, action: actionTypes.UPDATE_CASE, case: caseId });
             throw new ActionError(e);
         }
     }

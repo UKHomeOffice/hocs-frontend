@@ -252,7 +252,7 @@ describe('getList', () => {
         })));
         const listService = require('../list');
         const { getList } = listService;
-        const list = await getList('CASE_CORRESPONDENTS', { user: { roles: [] } });
+        const list = await getList('CASE_CORRESPONDENTS', { user: {id: 'test', groups:[], roles: [] } });
         expect(list).toBeDefined();
         expect(list.length).toEqual(3);
     });

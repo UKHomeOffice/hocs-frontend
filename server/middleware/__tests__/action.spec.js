@@ -20,6 +20,11 @@ describe('Action middleware', () => {
                 params: {
                     caseId: 'CASE_ID',
                     stageId: 'STAGE_ID'
+                },
+                user: {
+                    id: 'test',
+                    roles: [],
+                    groups: []
                 }
             };
             res = {
@@ -76,6 +81,11 @@ describe('Action middleware', () => {
                 params: {
                     caseId: 'CASE_ID',
                     stageId: 'STAGE_ID'
+                },
+                user: {
+                    id: 'test',
+                    roles: [],
+                    groups: []
                 }
             };
             res = {

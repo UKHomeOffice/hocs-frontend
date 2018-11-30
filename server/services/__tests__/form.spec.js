@@ -37,7 +37,11 @@ describe('getFormForAction', () => {
                 workflow: 'WORKFLOW',
                 action: 'ACTION'
             },
-            user: 'USER'
+            user: {
+                id: 'test',
+                roles: [],
+                groups: []
+            }
         };
         const formRepository = require('../forms/index.js');
         formRepository.getForm.mockImplementation(() => {
@@ -49,7 +53,7 @@ describe('getFormForAction', () => {
         expect(formRepository.getForm).toHaveBeenCalledTimes(1);
         expect(formRepository.getForm.mock.calls[0][0].context).toEqual('ACTION');
         expect(formRepository.getForm.mock.calls[0][0].workflow).toEqual('WORKFLOW');
-        expect(formRepository.getForm.mock.calls[0][0].user).toEqual('USER');
+        expect(formRepository.getForm.mock.calls[0][0].user.id).toEqual('test');
         expect(req.form).toBeDefined();
         expect(next).toHaveBeenCalled();
     });
@@ -60,7 +64,11 @@ describe('getFormForAction', () => {
                 workflow: 'WORKFLOW',
                 action: 'ACTION'
             },
-            user: 'USER'
+            user: {
+                id: 'test',
+                roles: [],
+                groups: []
+            }
         };
         const formRepository = require('../forms/index.js');
         formRepository.getForm.mockImplementation(() => {
@@ -72,7 +80,7 @@ describe('getFormForAction', () => {
         expect(formRepository.getForm).toHaveBeenCalledTimes(1);
         expect(formRepository.getForm.mock.calls[0][0].context).toEqual('ACTION');
         expect(formRepository.getForm.mock.calls[0][0].workflow).toEqual('WORKFLOW');
-        expect(formRepository.getForm.mock.calls[0][0].user).toEqual('USER');
+        expect(formRepository.getForm.mock.calls[0][0].user.id).toEqual("test");
         expect(next).toHaveBeenCalled();
         expect(next.mock.calls[0][0]).toBeInstanceOf(Error);
     });
@@ -98,7 +106,11 @@ describe('getFormForCase', () => {
                 context: 'CONTEXT',
                 action: 'ACTION'
             },
-            user: 'USER'
+            user: {
+                id: 'test',
+                roles: [],
+                groups: []
+            }
         };
         const formRepository = require('../forms/index.js');
         formRepository.getFormForCase.mockImplementation(() => {
@@ -121,7 +133,11 @@ describe('getFormForCase', () => {
                 entity: 'ENTITY',
                 action: 'ACTION'
             },
-            user: 'USER'
+            user: {
+                id: 'test',
+                roles: [],
+                groups: []
+            }
         };
         const formRepository = require('../forms/index.js');
         formRepository.getFormForCase.mockImplementation(() => {
@@ -157,7 +173,11 @@ describe('getFormForStage', () => {
             params: {
                 action: 'ACTION'
             },
-            user: 'USER'
+            user: {
+                id: 'test',
+                roles: [],
+                groups: []
+            }
         };
         const request = require('../../libs/request.js');
         request.workflowServiceClient.get.mockImplementation(() => Promise.resolve({ data: { form: mockActionForm } }));
@@ -172,7 +192,11 @@ describe('getFormForStage', () => {
             params: {
                 action: 'ACTION'
             },
-            user: 'USER'
+            user: {
+                id: 'test',
+                roles: [],
+                groups: []
+            }
         };
         const request = require('../../libs/request.js');
         request.workflowServiceClient.get.mockImplementation(() => Promise.reject({ stack: 'ERR_STACK' }));
