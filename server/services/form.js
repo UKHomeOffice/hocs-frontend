@@ -5,9 +5,14 @@ const logger = require('../libs/logger');
 const events = require('../models/events');
 const { FormServiceError } = require('../models/error');
 
-async function getFormSchemaFromWorkflowService(options, headers) {
+async function getFormSchemaFromWorkflowService(options, user) {
     const { caseId, stageId } = options;
-    const response = await workflowServiceClient.get(`/case/${caseId}/stage/${stageId}`, headers);
+    const headers = {
+        'X-Auth-UserId': user.id,
+        'X-Auth-Roles': user.roles.join(),
+        'X-Auth-Groups': user.groups.join()
+    };
+    const response = await workflowServiceClient.get(`/case/${caseId}/stage/${stageId}`, {headers});
     const { stageUUID, caseReference, allocationNote } = response.data;
     // TODO: Remove placeholder
     const mockAllocationNote = allocationNote || {
@@ -15,7 +20,7 @@ async function getFormSchemaFromWorkflowService(options, headers) {
         message: 'You just sort of have to make almighty decisions. Just leave that space open. Let\'s start with an almighty sky here.'
     };
     const { schema, data } = response.data.form;
-    await hydrateFields(schema.fields, options);
+    await hydrateFields(schema.fields, { ...options, user });
     return { schema, data, meta: { caseReference, stageUUID, allocationNote: mockAllocationNote } };
 }
 
@@ -83,15 +88,9 @@ const getFormForCase = async (req, res, next) => {
 
 const getFormForStage = async (req, res, next) => {
     const { user } = req;
-    let headers = {};
-    headers.headers = {
-        'X-Auth-UserId': user.id,
-        'X-Auth-Roles': user.roles.join(),
-        'X-Auth-Groups': user.groups.join()
-    };
     try {
         logger.info({ event: events.WORKFLOW_FORM, ...req.params, user: req.user.username });
-        req.form = await getFormSchemaFromWorkflowService(req.params, headers);
+        req.form = await getFormSchemaFromWorkflowService(req.params, user);
     } catch (e) {
         logger.error({ event: events.WORKFLOW_FORM_FAILURE, message: e.message, stack: e.stack });
         return next(new FormServiceError());
