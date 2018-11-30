@@ -159,12 +159,12 @@ const actions = {
                     if (form.data['isMember'] === 'true') {
                         return ({ callbackUrl: `/case/${caseId}/stage/${stageId}/entity/member/add` });
                     } else {
-                        return ({ callbackUrl: `/case/${caseId}/stage/${stageId}/entity/correspondent/details` }, headers);
+                        return ({ callbackUrl: `/case/${caseId}/stage/${stageId}/entity/correspondent/details` });
                     }
                 case actionTypes.SELECT_MEMBER:
                     return ({ callbackUrl: `/case/${caseId}/stage/${stageId}/entity/member/${form.data['member']}/details` });
                 case actionTypes.ADD_CORRESPONDENT: case actionTypes.ADD_MEMBER:
-                    await workflowServiceClient.post(`/case/${caseId}/correspondent`, { ...form.data },headers);
+                    await workflowServiceClient.post(`/case/${caseId}/correspondent`, { ...form.data }, headers);
                     return ({ callbackUrl: `/case/${caseId}/stage/${stageId}` });
                 case actionTypes.REMOVE_CORRESPONDENT:
                     if (!context) {
