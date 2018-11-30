@@ -415,7 +415,7 @@ const lists = {
                 'X-Auth-Groups': user.groups.join()
             } }, caseworkServiceClient);
         if (response.data.correspondents) {
-            return response.data.correspondents;
+            return response.data.correspondents.map(c => ({ label: c.fullname, value: c.uuid }));
         } else {
             logger.warn({ event: events.FETCH_LIST_RETURN_EMPTY, list: 'CASE_CORRESPONDENTS' });
             return [];
