@@ -70,8 +70,8 @@ services:
      - localstack
 
   frontend:
-    # image: quay.io/ukhomeofficedigital/hocs-frontend
-    image: hocs-frontend-test
+    image: quay.io/ukhomeofficedigital/hocs-frontend
+    # image: hocs-frontend-test
     ports:
       - 8080:8080
     networks:
