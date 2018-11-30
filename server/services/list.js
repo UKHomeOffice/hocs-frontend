@@ -70,7 +70,7 @@ const lists = {
         const userData = [{
             label: 'Cases',
             count: workstackData
-                .filter(i => i.userUUID !== null).length,
+                .filter(i => i.userUUID === user.id).length,
             tags: {
                 overdue: createOverdueTag(workstackData)
             }
@@ -120,7 +120,7 @@ const lists = {
             .sort((first, second) => first.caseReference > second.caseReference);
         return {
             label: 'User workstack',
-            items: workstackData.filter(item => item.userUUID !== null)
+            items: workstackData.filter(item => item.userUUID === user.id)
         };
     },
     // TODO: Temporary code to support current workstack implementation
