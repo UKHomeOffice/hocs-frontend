@@ -2,7 +2,6 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Header from './components/header.jsx';
 import Body from './components/body.jsx';
-import Footer from './components/footer.jsx';
 import { ApplicationConsumer } from '../contexts/application.jsx';
 
 class Layout extends Component {
@@ -15,7 +14,7 @@ class Layout extends Component {
         const {
             apiStatus,
             children,
-            layout: { header, body, footer }
+            layout: { header, body }
         } = this.props;
         return (
             <Fragment>
@@ -28,7 +27,6 @@ class Layout extends Component {
                 <Body {...body}>
                     {children}
                 </Body>
-                {footer.isVisible && <Footer {...footer} />}
             </Fragment>
         );
     }

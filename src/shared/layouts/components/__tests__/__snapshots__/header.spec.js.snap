@@ -2,7 +2,7 @@
 
 exports[`Layout header component should render with default props 1`] = `
 <header
-  className="govuk-header "
+  className="govuk-header"
   data-module="header"
   role="banner"
 >
@@ -15,20 +15,16 @@ exports[`Layout header component should render with default props 1`] = `
       <div
         className="govuk-header__logo"
       >
-        <a
-          className="govuk-header__link govuk-header__link--homepage"
-          href="https://www.gov.uk"
+        <span
+          className="govuk-header__logotype"
         >
-          <span
-            className="govuk-header__logotype"
+          <Component
+            className="govuk-header__link govuk-header__link--homepage govuk-header__logotype-text"
+            to="/"
           >
-            <span
-              className="govuk-header__logotype-text"
-            >
-              GOV.UK
-            </span>
-          </span>
-        </a>
+            Correspondence Service
+          </Component>
+        </span>
       </div>
       <div
         className="govuk-header__content"
@@ -42,52 +38,52 @@ exports[`Layout header component should render with default props 1`] = `
             <li
               class="govuk-header__navigation-item"
             >
-              <a
-                class="govuk-header__link"
-                href="/action/create/workflow"
+              <Component
+                className="govuk-header__link"
+                to="/action/create/workflow"
               >
                 Create single case
-              </a>
+              </Component>
             </li>
             <li
               className="govuk-header__navigation-item"
             >
-              <a
+              <Component
                 className="govuk-header__link"
-                href="/action/bulk/workflow"
+                to="/action/bulk/workflow"
               >
                 Create cases in bulk
-              </a>
+              </Component>
             </li>
             <li
               className="govuk-header__navigation-item"
             >
-              <a
+              <Component
                 className="govuk-header__link"
-                href="/action/standard_line/add"
+                to="/action/standard_line/add"
               >
                 Add standard line
-              </a>
+              </Component>
             </li>
             <li
               className="govuk-header__navigation-item"
             >
-              <a
+              <Component
                 className="govuk-header__link"
-                href="/action/template/add"
+                to="/action/template/add"
               >
                 Add template
-              </a>
+              </Component>
             </li>
             <li
               className="govuk-header__navigation-item"
             >
-              <a
+              <Component
                 className="govuk-header__link"
-                href="/action/test/form"
+                to="/action/test/form"
               >
                 View test form
-              </a>
+              </Component>
             </li>
           </ul>
         </nav>
@@ -99,7 +95,7 @@ exports[`Layout header component should render with default props 1`] = `
 
 exports[`Layout header component should render without crest when service is not GOV.UK 1`] = `
 <header
-  className="govuk-header "
+  className="govuk-header"
   data-module="header"
   role="banner"
 >
@@ -112,20 +108,16 @@ exports[`Layout header component should render without crest when service is not
       <div
         className="govuk-header__logo"
       >
-        <a
-          className="govuk-header__link govuk-header__link--homepage"
-          href="https://www.gov.uk"
+        <span
+          className="govuk-header__logotype"
         >
-          <span
-            className="govuk-header__logotype"
+          <Component
+            className="govuk-header__link govuk-header__link--homepage govuk-header__logotype-text"
+            to="/"
           >
-            <span
-              className="govuk-header__logotype-text"
-            >
-              Test Service
-            </span>
-          </span>
-        </a>
+            Correspondence Service
+          </Component>
+        </span>
       </div>
       <div
         className="govuk-header__content"
@@ -139,52 +131,52 @@ exports[`Layout header component should render without crest when service is not
             <li
               class="govuk-header__navigation-item"
             >
-              <a
-                class="govuk-header__link"
-                href="/action/create/workflow"
+              <Component
+                className="govuk-header__link"
+                to="/action/create/workflow"
               >
                 Create single case
-              </a>
+              </Component>
             </li>
             <li
               className="govuk-header__navigation-item"
             >
-              <a
+              <Component
                 className="govuk-header__link"
-                href="/action/bulk/workflow"
+                to="/action/bulk/workflow"
               >
                 Create cases in bulk
-              </a>
+              </Component>
             </li>
             <li
               className="govuk-header__navigation-item"
             >
-              <a
+              <Component
                 className="govuk-header__link"
-                href="/action/standard_line/add"
+                to="/action/standard_line/add"
               >
                 Add standard line
-              </a>
+              </Component>
             </li>
             <li
               className="govuk-header__navigation-item"
             >
-              <a
+              <Component
                 className="govuk-header__link"
-                href="/action/template/add"
+                to="/action/template/add"
               >
                 Add template
-              </a>
+              </Component>
             </li>
             <li
               className="govuk-header__navigation-item"
             >
-              <a
+              <Component
                 className="govuk-header__link"
-                href="/action/test/form"
+                to="/action/test/form"
               >
                 View test form
-              </a>
+              </Component>
             </li>
           </ul>
         </nav>
