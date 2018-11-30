@@ -406,9 +406,14 @@ const lists = {
             return [];
         }
     },
-    'CASE_CORRESPONDENTS': async ({ caseId }) => {
+    'CASE_CORRESPONDENTS': async ({ caseId, user }) => {
         const list = listDefinitions['caseCorrespondents'].call(this, { caseId });
-        const response = await fetchList(list, null, caseworkServiceClient);
+        const response = await fetchList(list, {
+            headers: {
+                'X-Auth-UserId': user.id,
+                'X-Auth-Roles': user.roles.join(),
+                'X-Auth-Groups': user.groups.join()
+            } }, caseworkServiceClient);
         if (response.data.correspondents) {
             return response.data.correspondents;
         } else {
@@ -426,6 +431,7 @@ async function getList(listId, options = {}) {
         return list;
     } catch (e) {
         logger.error({ event: events.FETCH_LIST_FAILURE, list: listId, options });
+        logger.error(e.stack);
         throw new Error(`Unable to get list for ${listId}`);
     }
 }

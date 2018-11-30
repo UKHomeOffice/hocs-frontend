@@ -31,6 +31,11 @@ describe('Case middleware', () => {
                 params: {
                     caseId: 'CASE_ID',
                     stageId: 'STAGE_ID'
+                },
+                user: {
+                    id: 'test',
+                    roles: [],
+                    groups: []
                 }
             };
             res = {
@@ -77,6 +82,11 @@ describe('Case middleware', () => {
                 params: {
                     caseId: 'CASE_ID',
                     stageId: 'STAGE_ID'
+                },
+                user: {
+                    id: 'test',
+                    roles: [],
+                    groups: []
                 }
             };
             res = {
@@ -123,8 +133,14 @@ describe('Case middleware', () => {
             req = {
                 params: {
                     caseId: 'CASE_ID'
+                },
+                user: {
+                    id: 'test',
+                    roles: [],
+                    groups: []
                 }
             };
+
             res = {
                 status: null,
                 locals: {}

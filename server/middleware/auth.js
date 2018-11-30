@@ -12,9 +12,11 @@ function authMiddleware(req, res, next) {
                 id: req.get('X-Auth-UserId'),
                 groups: req.get('X-Auth-Groups'),
                 roles: req.get('X-Auth-Roles'),
-                email: req.get('X-Auth-Email')
+                email: req.get('X-Auth-Email'),
+                uuid: req.get('X-Auth-Subject')
             });
         }
+        logger.info(req.user);
         return next();
     }
     logger.error({ event: events.AUTH_FAILURE });
