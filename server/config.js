@@ -24,9 +24,6 @@ const config = {
                     phase: 'ALPHA',
                     feedbackUrl: '#'
                 }
-            },
-            footer: {
-                isVisible: false
             }
         },
         server: {
