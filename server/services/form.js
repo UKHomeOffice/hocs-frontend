@@ -12,7 +12,7 @@ async function getFormSchemaFromWorkflowService(options, user) {
         'X-Auth-Roles': user.roles.join(),
         'X-Auth-Groups': user.groups.join()
     };
-    const response = await workflowServiceClient.get(`/case/${caseId}/stage/${stageId}`, {headers});
+    const response = await workflowServiceClient.get(`/case/${caseId}/stage/${stageId}`, { headers });
     const { stageUUID, caseReference, allocationNote } = response.data;
     // TODO: Remove placeholder
     const mockAllocationNote = allocationNote || {

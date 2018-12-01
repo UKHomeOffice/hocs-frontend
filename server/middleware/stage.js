@@ -44,7 +44,7 @@ async function stageApiResponseMiddleware(req, res, next) {
 
 async function allocateCase(req, res, next) {
     const { caseId, stageId } = req.params;
-    const { form, user } = req;
+    const { user } = req;
     let headers = {
         headers: {
             'X-Auth-UserId': user.id,

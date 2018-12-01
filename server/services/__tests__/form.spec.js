@@ -80,7 +80,7 @@ describe('getFormForAction', () => {
         expect(formRepository.getForm).toHaveBeenCalledTimes(1);
         expect(formRepository.getForm.mock.calls[0][0].context).toEqual('ACTION');
         expect(formRepository.getForm.mock.calls[0][0].workflow).toEqual('WORKFLOW');
-        expect(formRepository.getForm.mock.calls[0][0].user.id).toEqual("test");
+        expect(formRepository.getForm.mock.calls[0][0].user.id).toEqual('test');
         expect(next).toHaveBeenCalled();
         expect(next.mock.calls[0][0]).toBeInstanceOf(Error);
     });
