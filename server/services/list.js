@@ -45,7 +45,7 @@ function compareListItems(first, second) {
 
 const helpers = {
     isOverdue: deadline => deadline && new Date(deadline) < Date.now(),
-    isAllocated: user => user !== null,
+    isUnallocated: user => user === null,
     setTag: current => current ? current + 1 : 1,
 };
 
@@ -62,7 +62,7 @@ const lists = {
         }, caseworkServiceClient);
         const workstackData = response.data.stages
             .sort((first, second) => first.caseReference > second.caseReference);
-        const { isOverdue, isAllocated, setTag } = helpers;
+        const { isOverdue, isUnallocated, setTag } = helpers;
         const createOverdueTag = data => {
             const overdueCases = data.filter(r => isOverdue(r.deadline));
             return overdueCases.length > 0 ? overdueCases.count : null;
@@ -86,7 +86,7 @@ const lists = {
                         count: 1,
                         tags: {
                             overdue: isOverdue(row.deadline) ? setTag(0) : null,
-                            allocated: isAllocated(row.userUUID) ? setTag(0) : null
+                            allocated: isUnallocated(row.userUUID) ? setTag(0) : null
                         }
                     });
                 } else {
@@ -94,7 +94,7 @@ const lists = {
                     if (isOverdue(row.deadline)) {
                         result[index].tags.overdue = setTag(result[index].tags.overdue);
                     }
-                    if (isAllocated(row.userUUID)) {
+                    if (isUnallocated(row.userUUID)) {
                         result[index].tags.allocated = setTag(result[index].tags.allocated);
                     }
                 }
@@ -136,7 +136,7 @@ const lists = {
         const workstackData = response.data.stages
             .filter(item => item.teamUUID === teamId)
             .sort((first, second) => first.caseReference > second.caseReference);
-        const { isOverdue, isAllocated, setTag } = helpers;
+        const { isOverdue, isUnallocated, setTag } = helpers;
         const dashboardData = workstackData
             .reduce((result, row) => {
                 const index = result.map(c => c.value).indexOf(row.caseType);
@@ -148,7 +148,7 @@ const lists = {
                         count: 1,
                         tags: {
                             overdue: isOverdue(row.deadline) ? setTag(0) : null,
-                            allocated: isAllocated(row.userUUID) ? setTag(0) : null
+                            allocated: isUnallocated(row.userUUID) ? setTag(0) : null
                         }
                     });
                 } else {
@@ -156,7 +156,7 @@ const lists = {
                     if (isOverdue(row.deadline)) {
                         result[index].tags.overdue = setTag(result[index].tags.overdue);
                     }
-                    if (isAllocated(row.userUUID)) {
+                    if (isUnallocated(row.userUUID)) {
                         result[index].tags.allocated = setTag(result[index].tags.allocated);
                     }
                 }
@@ -182,7 +182,7 @@ const lists = {
         const workstackData = response.data.stages
             .filter(item => item.teamUUID === teamId && item.caseType === workflowId)
             .sort((first, second) => first.caseReference > second.caseReference);
-        const { isOverdue, isAllocated, setTag } = helpers;
+        const { isOverdue, isUnallocated, setTag } = helpers;
         const dashboardData = workstackData
             .reduce((result, row) => {
                 const index = result.map(c => c.value).indexOf(row.stageType);
@@ -194,7 +194,7 @@ const lists = {
                         count: 1,
                         tags: {
                             overdue: isOverdue(row.deadline) ? setTag(0) : null,
-                            allocated: isAllocated(row.userUUID) ? setTag(0) : null
+                            allocated: isUnallocated(row.userUUID) ? setTag(0) : null
                         }
                     });
                 } else {
@@ -202,7 +202,7 @@ const lists = {
                     if (isOverdue(row.deadline)) {
                         result[index].tags.overdue = setTag(result[index].tags.overdue);
                     }
-                    if (isAllocated(row.userUUID)) {
+                    if (isUnallocated(row.userUUID)) {
                         result[index].tags.allocated = setTag(result[index].tags.allocated);
                     }
                 }
