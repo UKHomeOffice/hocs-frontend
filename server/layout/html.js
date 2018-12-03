@@ -35,14 +35,8 @@ const render = ({
     ${css.map(style => `<link rel="stylesheet" media="screen" href="${assetPath}/styles/${assets.css[style]}" />`).join('\n')}
     ${clientSide ? js.map(script => `<script defer src="${assetPath}/js/${assets.js[script]}"></script>`).join('\n') : ''}
     ${clientSide ? `<script defer >window.__INITIAL_DATA__ = ${serialize(props)}</script>` : ''}
-     <script defer>
-        document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
-    </script>
     ${clientSide ? `<script defer src="${assetPath}/js/${assets.js[react]}"></script>` : ''}
     <script defer src="${assetPath}/all.js"></script>
-    <script defer>
-        window.GOVUKFrontend.initAll()
-    </script>
     <meta property="og:image" content="${assetPath}/assets/images/govuk-opengraph-image.png">
 </head>
 
