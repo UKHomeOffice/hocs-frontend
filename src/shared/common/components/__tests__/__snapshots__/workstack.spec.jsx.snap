@@ -48,11 +48,6 @@ exports[`Dashboard component should render with default props 1`] = `
         >
           Deadline
         </th>
-        <th
-          class="govuk-table__header"
-        >
-          Actions
-        </th>
       </tr>
     </thead>
     <tbody
@@ -73,7 +68,12 @@ exports[`Dashboard component should render with default props 1`] = `
         <td
           class="govuk-table__cell"
         >
-          ABC/0000002/AA
+          <a
+            class="govuk-link govuk-!-margin-right-3"
+            href="/case/undefined/stage/undefined"
+          >
+            ABC/0000002/AA
+          </a>
         </td>
         <td
           class="govuk-table__cell"
@@ -88,22 +88,6 @@ exports[`Dashboard component should render with default props 1`] = `
           class="govuk-table__cell"
         >
           2020-01-01
-        </td>
-        <td
-          class="govuk-table__cell"
-        >
-          <a
-            class="govuk-link govuk-!-margin-right-3"
-            href="/case/undefined/stage/undefined"
-          >
-            Casework
-          </a>
-          <a
-            class="govuk-link"
-            href="/case/undefined/summary"
-          >
-            Summary
-          </a>
         </td>
       </tr>
       <tr
@@ -121,7 +105,12 @@ exports[`Dashboard component should render with default props 1`] = `
         <td
           class="govuk-table__cell"
         >
-          ABC/0000001/AA
+          <a
+            class="govuk-link govuk-!-margin-right-3"
+            href="/case/undefined/stage/undefined"
+          >
+            ABC/0000001/AA
+          </a>
         </td>
         <td
           class="govuk-table__cell"
@@ -136,22 +125,6 @@ exports[`Dashboard component should render with default props 1`] = `
           class="govuk-table__cell"
         >
           2020-01-01
-        </td>
-        <td
-          class="govuk-table__cell"
-        >
-          <a
-            class="govuk-link govuk-!-margin-right-3"
-            href="/case/undefined/stage/undefined"
-          >
-            Casework
-          </a>
-          <a
-            class="govuk-link"
-            href="/case/undefined/summary"
-          >
-            Summary
-          </a>
         </td>
       </tr>
     </tbody>

@@ -57,7 +57,6 @@ class Workstack extends Component {
                                 <th className='govuk-table__header'>User</th>
                                 <th className='govuk-table__header'>Team</th>
                                 <th className='govuk-table__header'>Deadline</th>
-                                <th className='govuk-table__header'>Actions</th>
                             </tr>
                         </thead>
                         <tbody className='govuk-table__body'>
@@ -68,19 +67,15 @@ class Workstack extends Component {
                                             <td className='govuk-table__cell'>
                                                 <strong className='govuk-tag'>{c.caseType}</strong>
                                             </td>
-                                            <td className='govuk-table__cell'>{c.caseReference}</td>
+                                            <td className='govuk-table__cell'>{
+                                                c.userUUID === null ?
+                                                    <Link to={`/case/${c.caseUUID}/stage/${c.uuid}/allocate`} className="govuk-link govuk-!-margin-right-3">{c.caseReference}</Link> :
+                                                    <Link to={`/case/${c.caseUUID}/stage/${c.uuid}`} className="govuk-link govuk-!-margin-right-3">{c.caseReference}</Link>
+                                            }</td>
                                             <td className='govuk-table__cell'>{c.stageType}</td>
                                             <td className='govuk-table__cell'>{c.userUUID}</td>
                                             <td className='govuk-table__cell'>{c.teamUUID}</td>
                                             <td className='govuk-table__cell'>{c.deadline}</td>
-                                            <td className='govuk-table__cell'>
-                                                {
-                                                    c.userUUID === null ?
-                                                        <Link to={`/case/${c.caseUUID}/stage/${c.uuid}/allocate`} className="govuk-link govuk-!-margin-right-3">Allocate</Link> :
-                                                        <Link to={`/case/${c.caseUUID}/stage/${c.uuid}`} className="govuk-link govuk-!-margin-right-3">Casework</Link>
-                                                }
-                                                <Link to={`/case/${c.caseUUID}/summary`} className="govuk-link">Summary</Link>
-                                            </td>
                                         </tr>
                                     );
                                 })
