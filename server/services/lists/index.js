@@ -1,4 +1,6 @@
 const staticListDefinitions = {
+    users: '/users',
+    teams: '/teams'
 };
 
 const listDefinitions = {
