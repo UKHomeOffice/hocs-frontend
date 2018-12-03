@@ -62,9 +62,9 @@ const lists = {
         }, caseworkServiceClient);
         const workstackData = response.data.stages
             .map(row => {
-                row.assignedTeamDisplay = listRepository.teams[row.teamUUID].displayName;
+                row.assignedTeamDisplay = listRepository.teams.find(i => i.teamUUID === row.teamUUID).displayName;
                 if (row.userUUID) {
-                    row.assignedUserDisplay = listRepository.users[row.userUUID].username;
+                    row.assignedUserDisplay = listRepository.users(i => i.userUUID === row.userUUID).username;
                 }
                 return row;
             })
@@ -130,9 +130,9 @@ const lists = {
             items: workstackData
                 .filter(item => String(item.userUUID) === String(user.uuid))
                 .map(row => {
-                    row.assignedTeamDisplay = listRepository.teams[row.teamUUID].displayName;
+                    row.assignedTeamDisplay = listRepository.teams.find(i => i.teamUUID === row.teamUUID).displayName;
                     if (row.userUUID) {
-                        row.assignedUserDisplay = listRepository.users[row.userUUID].username;
+                        row.assignedUserDisplay = listRepository.users(i => i.userUUID === row.userUUID).username;
                     }
                     return row;
                 })
@@ -151,9 +151,9 @@ const lists = {
         const workstackData = response.data.stages
             .filter(item => item.teamUUID === teamId)
             .map(row => {
-                row.assignedTeamDisplay = listRepository.teams[row.teamUUID].displayName;
+                row.assignedTeamDisplay = listRepository.teams.find(i => i.teamUUID === row.teamUUID).displayName;
                 if (row.userUUID) {
-                    row.assignedUserDisplay = listRepository.users[row.userUUID].username;
+                    row.assignedUserDisplay = listRepository.users(i => i.userUUID === row.userUUID).username;
                 }
                 return row;
             })
@@ -204,9 +204,9 @@ const lists = {
         const workstackData = response.data.stages
             .filter(item => item.teamUUID === teamId && item.caseType === workflowId)
             .map(row => {
-                row.assignedTeamDisplay = listRepository.teams[row.teamUUID].displayName;
+                row.assignedTeamDisplay = listRepository.teams.find(i => i.teamUUID === row.teamUUID).displayName;
                 if (row.userUUID) {
-                    row.assignedUserDisplay = listRepository.users[row.userUUID].username;
+                    row.assignedUserDisplay = listRepository.users(i => i.userUUID === row.userUUID).username;
                 }
                 return row;
             })
@@ -257,9 +257,9 @@ const lists = {
         const workstackData = response.data.stages
             .filter(item => item.teamUUID === teamId && item.caseType === workflowId && item.stageType === stageId)
             .map(row => {
-                row.assignedTeamDisplay = listRepository.teams[row.teamUUID].displayName;
+                row.assignedTeamDisplay = listRepository.teams.find(i => i.teamUUID === row.teamUUID).displayName;
                 if (row.userUUID) {
-                    row.assignedUserDisplay = listRepository.users[row.userUUID].username;
+                    row.assignedUserDisplay = listRepository.users(i => i.userUUID === row.userUUID).username;
                 }
                 return row;
             })
