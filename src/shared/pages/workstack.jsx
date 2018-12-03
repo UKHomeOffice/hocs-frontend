@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { ApplicationConsumer } from '../contexts/application.jsx';
@@ -10,6 +11,31 @@ import {
 import status from '../helpers/api-status.js';
 import Workstack from '../common/components/workstack.jsx';
 import Dashboard from '../common/components/dashboard-new.jsx';
+
+const renderBreadCrumb = ({ key, label, to, isLast }) => (
+    <li key={key} className='govuk-breadcrumbs__list-item'>
+        {isLast ? label : <Link className='govuk-breadcrumbs__link' to={to}>{label}</Link>}
+    </li>
+);
+
+renderBreadCrumb.propTypes = {
+    key: PropTypes.number.isRequired,
+    label: PropTypes.string.isRequired,
+    to: PropTypes.string.isRequired,
+    isLast: PropTypes.bool.isRequired
+};
+
+const Breadcrumbs = ({ items }) => (
+    <div className='govuk-breadcrumbs'>
+        <ol className='govuk-breadcrumbs__list'>
+            {items.map((item, i) => renderBreadCrumb({ ...item, key: i, isLast: (items.length > 1 && i === (items.length - 1)) }))}
+        </ol>
+    </div>
+);
+
+Breadcrumbs.propTypes = {
+    items: PropTypes.array.isRequired
+};
 
 class WorkstackPage extends Component {
 
@@ -63,19 +89,24 @@ class WorkstackPage extends Component {
         );
     }
 
+    renderBreadCrumb(items) {
+        return (<Breadcrumbs items={items} />);
+    }
+
     render() {
         const { workstack } = this.state;
         return (
             <Fragment>
                 {workstack ?
                     <Fragment>
+                        {workstack.breadcrumbs && this.renderBreadCrumb(workstack.breadcrumbs)}
                         <h1 className="govuk-heading-l">
                             {workstack.label}
                         </h1>
                         {workstack.dashboard && this.renderDashboard(workstack.dashboard)}
                         {this.renderWorkstack(workstack.items)}
                     </Fragment>
-                    : <p className='govuk-body'>No items to display</p>
+                    : null
                 }
             </Fragment>
         );

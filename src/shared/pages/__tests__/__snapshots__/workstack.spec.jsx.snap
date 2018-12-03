@@ -67,12 +67,6 @@ exports[`Workstack page component should render with default props 1`] = `
         "url": "/test",
       }
     }
-  >
-    <p
-      className="govuk-body"
-    >
-      No items to display
-    </p>
-  </WorkstackPage>
+  />
 </Component>
 `;
