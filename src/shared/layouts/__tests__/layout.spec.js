@@ -3,7 +3,7 @@ import Layout from '../layout.jsx';
 
 jest.mock('react-router-dom', () => {
     return {
-        Redirect: () => jest.fn()
+        Link: () => jest.fn()
     };
 });
 
@@ -18,14 +18,6 @@ describe('Page layout component', () => {
 
     beforeEach(() => {
         mockDispatch.mockReset();
-    });
-
-    it('should have the dispatch method in props from the context consumer', () => {
-        const outer = shallow(<Layout />);
-        const Children = outer.props().children;
-        const wrapper = mount(<Children dispatch={mockDispatch} layout={mockLayout} />);
-        expect(wrapper).toBeDefined();
-        expect(wrapper.props().dispatch).toBeDefined();
     });
 
     it('should render the footer when provided', () => {

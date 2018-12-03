@@ -37,7 +37,7 @@ exports[`Layout header component should render with default props 1`] = `
             id="navigation"
           >
             <li
-              class="govuk-header__navigation-item"
+              className="govuk-header__navigation-item"
             >
               <Link
                 className="govuk-header__link"
@@ -136,7 +136,7 @@ exports[`Layout header component should render without crest when service is not
             id="navigation"
           >
             <li
-              class="govuk-header__navigation-item"
+              className="govuk-header__navigation-item"
             >
               <Link
                 className="govuk-header__link"
