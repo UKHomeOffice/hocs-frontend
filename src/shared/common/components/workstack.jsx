@@ -19,8 +19,8 @@ class Workstack extends Component {
         if (filter !== '') {
             const filtered = workstack.filter(r => {
                 return (r.caseReference && r.caseReference.toUpperCase().indexOf(filter) !== -1) ||
-                    (r.userUUID && r.userUUID.toUpperCase().indexOf(filter) !== -1) ||
-                    (r.teamUUID && r.teamUUID.toUpperCase().indexOf(filter) !== -1) ||
+                    (r.assignedUserDisplay && r.assignedUserDisplay.toUpperCase().indexOf(filter) !== -1) ||
+                    (r.assignedTeamDisplay && r.assignedTeamDisplay.toUpperCase().indexOf(filter) !== -1) ||
                     (r.deadline && r.deadline.toUpperCase().indexOf(filter) !== -1) ||
                     (r.stageType && r.stageType.toUpperCase().indexOf(filter) !== -1);
             });
@@ -73,8 +73,8 @@ class Workstack extends Component {
                                                     <Link to={`/case/${c.caseUUID}/stage/${c.uuid}`} className="govuk-link govuk-!-margin-right-3">{c.caseReference}</Link>
                                             }</td>
                                             <td className='govuk-table__cell'>{c.stageType}</td>
-                                            <td className='govuk-table__cell'>{c.userUUID}</td>
-                                            <td className='govuk-table__cell'>{c.teamUUID}</td>
+                                            <td className='govuk-table__cell'>{c.assignedUserDisplay}</td>
+                                            <td className='govuk-table__cell'>{c.assignedTeamDisplay}</td>
                                             <td className='govuk-table__cell'>{c.deadline}</td>
                                         </tr>
                                     );

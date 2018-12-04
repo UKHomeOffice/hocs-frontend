@@ -80,10 +80,14 @@ exports[`Dashboard component should render with default props 1`] = `
         />
         <td
           class="govuk-table__cell"
-        />
+        >
+          Unassigned
+        </td>
         <td
           class="govuk-table__cell"
-        />
+        >
+          Team 1
+        </td>
         <td
           class="govuk-table__cell"
         >
@@ -117,10 +121,14 @@ exports[`Dashboard component should render with default props 1`] = `
         />
         <td
           class="govuk-table__cell"
-        />
+        >
+          User 1
+        </td>
         <td
           class="govuk-table__cell"
-        />
+        >
+          Team 1
+        </td>
         <td
           class="govuk-table__cell"
         >
