@@ -49,9 +49,9 @@ class DashboardPage extends Component {
         return (
             <Fragment>
                 <h2 className='govuk-heading-l'>My work</h2>
-                {dashboard && dashboard.user && <Dashboard dashboard={dashboard.user} absoluteUrl={'/workstack/user'} />}
+                {dashboard && dashboard.user && <Dashboard dashboard={dashboard.user} absoluteUrl={'/workstack/user'} alwaysLink={true} />}
                 <h2 className='govuk-heading-l'>My teams work</h2>
-                {dashboard && dashboard.teams && <Dashboard dashboard={dashboard.teams} baseUrl={'/workstack'} />}
+                {dashboard && dashboard.teams && <Dashboard dashboard={dashboard.teams} baseUrl={'/workstack'} alwaysLink={true} />}
             </Fragment>
         );
     }
