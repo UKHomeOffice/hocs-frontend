@@ -4,7 +4,12 @@ const { listDefinitions, staticListDefinitions } = require('./lists/index');
 const logger = require('../libs/logger');
 const events = require('../models/events');
 
-const listRepository = {};
+const listRepository = {
+    teams: [{type: 'ASSIGNED_TEAM', displayName: 'Assigned team'}],
+    users: [{id: 'ASSIGNED_USER', displayName: 'Assigned user'}],
+    caseTypes: [{value: 'CASE_TYPE', label: 'Case type'}],
+    stageTypes: [{value: 'STAGE_TYPE', label: 'Stage type'}],
+};
 
 async function initialise() {
     const listRequests = Object.entries(staticListDefinitions).reduce((reducer, [key, value]) => {
@@ -35,7 +40,7 @@ function handleListSuccess(listId, response) {
 
 function handleListFailure(listId, error) {
     logger.error({ event: events.FETCH_LIST_FAILURE, list: listId, stack: error.stack });
-    listRepository[listId] = [];
+    // listRepository[listId] = [];
 }
 
 function compareListItems(first, second) {
@@ -63,14 +68,14 @@ const lists = {
         }, caseworkServiceClient);
         const workstackData = response.data.stages
             .map(row => {
-                const assignedTeam = listRepository.teams.find(i => i.teamUUID === row.teamUUID) || {};
+                const assignedTeam = listRepository.teams.find(i => i.type === row.teamUUID) || {};
                 row.assignedTeamDisplay = assignedTeam.displayName;
-                const caseType = listRepository.caseTypes.find(i => i.caseType === row.caseType) || {};
+                const caseType = listRepository.caseTypes.find(i => i.value === row.caseType) || {};
                 row.caseTypeDisplay = caseType.label;
-                const stageType = listRepository.stageTypes.find(i => i.stageType === row.stageType) || {};
+                const stageType = listRepository.stageTypes.find(i => i.value === row.stageType) || {};
                 row.stageTypeDisplay = stageType.label;
                 if (row.userUUID) {
-                    const assignedUser = listRepository.users.find(i => i.userUUID === row.userUUID) || {};
+                    const assignedUser = listRepository.users.find(i => i.id === row.userUUID) || {};
                     row.assignedUserDisplay = assignedUser.username;
                 }
                 return row;
@@ -133,8 +138,8 @@ const lists = {
         const response = {
             data: {
                 stages: [
-                    { userUUID: '1234', caseReference: 'ABC/0000001/AA', caseType: 'ABC', stageTypeDisplay: 'Stage type', assignedUserDisplay: 'User 1', assignedTeamDisplay: 'Team 1', deadline: '2020-01-01', stageUUID: 'STAGE_UUID' },
-                    { userUUID: '1234', caseReference: 'ABC/0000002/AA', caseType: 'ABC', stageTypeDisplay: 'Stage type', assignedUserDisplay: 'Unassigned', assignedTeamDisplay: 'Team 1', deadline: '2020-01-01', stageUUID: 'STAGE_UUID' }
+                    { caseReference: 'ABC/0000001/AA', caseType: 'CASE_TYPE', stageType: 'STAGE_TYPE', userUUID: 'ASSIGNED_USER', teamUUID: 'ASSIGNED_TEAM', deadline: '2020-01-01' },
+                    { caseReference: 'ABC/0000002/AA', caseType: 'CASE_TYPE', stageType: 'STAGE_TYPE', userUUID: null, teamUUID: 'ASSIGNED_TEAM', deadline: '2020-01-01' }
                 ]
             }
         };
@@ -146,14 +151,14 @@ const lists = {
             items: workstackData
                 // .filter(item => String(item.userUUID) === String(user.uuid))
                 .map(row => {
-                    const assignedTeam = listRepository.teams.find(i => i.teamUUID === row.teamUUID) || {};
+                    const assignedTeam = listRepository.teams.find(i => i.type === row.teamUUID) || {};
                     row.assignedTeamDisplay = assignedTeam.displayName;
-                    const caseType = listRepository.caseTypes.find(i => i.caseType === row.caseType) || {};
+                    const caseType = listRepository.caseTypes.find(i => i.value === row.caseType) || {};
                     row.caseTypeDisplay = caseType.label;
-                    const stageType = listRepository.stageTypes.find(i => i.stageType === row.stageType) || {};
+                    const stageType = listRepository.stageTypes.find(i => i.value === row.stageType) || {};
                     row.stageTypeDisplay = stageType.label;
                     if (row.userUUID) {
-                        const assignedUser = listRepository.users.find(i => i.userUUID === row.userUUID) || {};
+                        const assignedUser = listRepository.users.find(i => i.id === row.userUUID) || {};
                         row.assignedUserDisplay = assignedUser.username;
                     }
                     return row;
@@ -173,14 +178,14 @@ const lists = {
         const workstackData = response.data.stages
             .filter(item => item.teamUUID === teamId)
             .map(row => {
-                const assignedTeam = listRepository.teams.find(i => i.teamUUID === row.teamUUID) || {};
+                const assignedTeam = listRepository.teams.find(i => i.type === row.teamUUID) || {};
                 row.assignedTeamDisplay = assignedTeam.displayName;
-                const caseType = listRepository.caseTypes.find(i => i.caseType === row.caseType) || {};
+                const caseType = listRepository.caseTypes.find(i => i.value === row.caseType) || {};
                 row.caseTypeDisplay = caseType.label;
-                const stageType = listRepository.stageTypes.find(i => i.stageType === row.stageType) || {};
+                const stageType = listRepository.stageTypes.find(i => i.value === row.stageType) || {};
                 row.stageTypeDisplay = stageType.label;
                 if (row.userUUID) {
-                    const assignedUser = listRepository.users.find(i => i.userUUID === row.userUUID) || {};
+                    const assignedUser = listRepository.users.find(i => i.id === row.userUUID) || {};
                     row.assignedUserDisplay = assignedUser.username;
                 }
                 return row;
@@ -232,14 +237,14 @@ const lists = {
         const workstackData = response.data.stages
             .filter(item => item.teamUUID === teamId && item.caseType === workflowId)
             .map(row => {
-                const assignedTeam = listRepository.teams.find(i => i.teamUUID === row.teamUUID) || {};
+                const assignedTeam = listRepository.teams.find(i => i.type === row.teamUUID) || {};
                 row.assignedTeamDisplay = assignedTeam.displayName;
-                const caseType = listRepository.caseTypes.find(i => i.caseType === row.caseType) || {};
+                const caseType = listRepository.caseTypes.find(i => i.value === row.caseType) || {};
                 row.caseTypeDisplay = caseType.label;
-                const stageType = listRepository.stageTypes.find(i => i.stageType === row.stageType) || {};
+                const stageType = listRepository.stageTypes.find(i => i.value === row.stageType) || {};
                 row.stageTypeDisplay = stageType.label;
                 if (row.userUUID) {
-                    const assignedUser = listRepository.users.find(i => i.userUUID === row.userUUID) || {};
+                    const assignedUser = listRepository.users.find(i => i.id === row.userUUID) || {};
                     row.assignedUserDisplay = assignedUser.username;
                 }
                 return row;
@@ -291,14 +296,14 @@ const lists = {
         const workstackData = response.data.stages
             .filter(item => item.teamUUID === teamId && item.caseType === workflowId && item.stageType === stageId)
             .map(row => {
-                const assignedTeam = listRepository.teams.find(i => i.teamUUID === row.teamUUID) || {};
+                const assignedTeam = listRepository.teams.find(i => i.type === row.teamUUID) || {};
                 row.assignedTeamDisplay = assignedTeam.displayName;
-                const caseType = listRepository.caseTypes.find(i => i.caseType === row.caseType) || {};
+                const caseType = listRepository.caseTypes.find(i => i.value === row.caseType) || {};
                 row.caseTypeDisplay = caseType.label;
-                const stageType = listRepository.stageTypes.find(i => i.stageType === row.stageType) || {};
+                const stageType = listRepository.stageTypes.find(i => i.value === row.stageType) || {};
                 row.stageTypeDisplay = stageType.label;
                 if (row.userUUID) {
-                    const assignedUser = listRepository.users.find(i => i.userUUID === row.userUUID) || {};
+                    const assignedUser = listRepository.users.find(i => i.id === row.userUUID) || {};
                     row.assignedUserDisplay = assignedUser.username;
                 }
                 return row;
