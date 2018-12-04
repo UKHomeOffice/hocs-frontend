@@ -35,6 +35,7 @@ function handleListSuccess(listId, response) {
 
 function handleListFailure(listId, error) {
     logger.error({ event: events.FETCH_LIST_FAILURE, list: listId, message: error.message, stack: error.stack });
+    listRepository[listId] = [];
 }
 
 function compareListItems(first, second) {
