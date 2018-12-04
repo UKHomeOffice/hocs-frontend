@@ -30,11 +30,11 @@ function fetchList(endpoint, headers, client = infoServiceClient) {
 
 function handleListSuccess(listId, response) {
     logger.debug({ event: events.FETCH_LIST_SUCCESS, list: listId });
-    listRepository[listId] = response.data[listId] || [];
+    listRepository[listId] = response.data || [];
 }
 
 function handleListFailure(listId, error) {
-    logger.error({ event: events.FETCH_LIST_FAILURE, list: listId, message: error.message, stack: error.stack });
+    logger.error({ event: events.FETCH_LIST_FAILURE, list: listId, stack: error.stack });
 }
 
 function compareListItems(first, second) {
@@ -61,6 +61,15 @@ const lists = {
             }
         }, caseworkServiceClient);
         const workstackData = response.data.stages
+            .map(row => {
+                row.assignedTeamDisplay = listRepository.teams.find(i => i.teamUUID === row.teamUUID).displayName;
+                row.caseTypeDisplay = listRepository.caseTypes.find(i => i.caseType === row.caseType).label;
+                row.stageTypeDisplay = listRepository.stageTypes.find(i => i.stageType === row.stageType).label;
+                if (row.userUUID) {
+                    row.assignedUserDisplay = listRepository.users(i => i.userUUID === row.userUUID).username;
+                }
+                return row;
+            })
             .sort((first, second) => first.caseReference > second.caseReference);
         const { isOverdue, isUnallocated, setTag } = helpers;
         const createOverdueTag = data => {
@@ -120,7 +129,15 @@ const lists = {
             .sort((first, second) => first.caseReference > second.caseReference);
         return {
             label: 'User workstack',
-            items: workstackData.filter(item => String(item.userUUID) === String(user.uuid))
+            items: workstackData
+                .filter(item => String(item.userUUID) === String(user.uuid))
+                .map(row => {
+                    row.assignedTeamDisplay = listRepository.teams.find(i => i.teamUUID === row.teamUUID).displayName;
+                    if (row.userUUID) {
+                        row.assignedUserDisplay = listRepository.users(i => i.userUUID === row.userUUID).username;
+                    }
+                    return row;
+                })
         };
     },
     // TODO: Temporary code to support current workstack implementation
@@ -135,6 +152,15 @@ const lists = {
         }, caseworkServiceClient);
         const workstackData = response.data.stages
             .filter(item => item.teamUUID === teamId)
+            .map(row => {
+                row.assignedTeamDisplay = listRepository.teams.find(i => i.teamUUID === row.teamUUID).displayName;
+                row.caseTypeDisplay = listRepository.caseTypes.find(i => i.caseType === row.caseType).label;
+                row.stageTypeDisplay = listRepository.stageTypes.find(i => i.stageType === row.stageType).label;
+                if (row.userUUID) {
+                    row.assignedUserDisplay = listRepository.users(i => i.userUUID === row.userUUID).username;
+                }
+                return row;
+            })
             .sort((first, second) => first.caseReference > second.caseReference);
         const { isOverdue, isUnallocated, setTag } = helpers;
         const dashboardData = workstackData
@@ -181,6 +207,15 @@ const lists = {
         }, caseworkServiceClient);
         const workstackData = response.data.stages
             .filter(item => item.teamUUID === teamId && item.caseType === workflowId)
+            .map(row => {
+                row.assignedTeamDisplay = listRepository.teams.find(i => i.teamUUID === row.teamUUID).displayName;
+                row.caseTypeDisplay = listRepository.caseTypes.find(i => i.caseType === row.caseType).label;
+                row.stageTypeDisplay = listRepository.stageTypes.find(i => i.stageType === row.stageType).label;
+                if (row.userUUID) {
+                    row.assignedUserDisplay = listRepository.users(i => i.userUUID === row.userUUID).username;
+                }
+                return row;
+            })
             .sort((first, second) => first.caseReference > second.caseReference);
         const { isOverdue, isUnallocated, setTag } = helpers;
         const dashboardData = workstackData
@@ -227,6 +262,15 @@ const lists = {
         }, caseworkServiceClient);
         const workstackData = response.data.stages
             .filter(item => item.teamUUID === teamId && item.caseType === workflowId && item.stageType === stageId)
+            .map(row => {
+                row.assignedTeamDisplay = listRepository.teams.find(i => i.teamUUID === row.teamUUID).displayName;
+                row.caseTypeDisplay = listRepository.caseTypes.find(i => i.caseType === row.caseType).label;
+                row.stageTypeDisplay = listRepository.stageTypes.find(i => i.stageType === row.stageType).label;
+                if (row.userUUID) {
+                    row.assignedUserDisplay = listRepository.users(i => i.userUUID === row.userUUID).username;
+                }
+                return row;
+            })
             .sort((first, second) => first.caseReference > second.caseReference);
         return {
             label: 'Placeholder Stage',
@@ -413,7 +457,8 @@ const lists = {
                 'X-Auth-UserId': user.id,
                 'X-Auth-Roles': user.roles.join(),
                 'X-Auth-Groups': user.groups.join()
-            } }, caseworkServiceClient);
+            }
+        }, caseworkServiceClient);
         if (response.data.correspondents) {
             return response.data.correspondents.map(c => ({ label: c.fullname, value: c.uuid }));
         } else {
