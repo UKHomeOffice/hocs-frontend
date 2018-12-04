@@ -1,6 +1,8 @@
 const staticListDefinitions = {
     users: '/users',
-    teams: '/teams'
+    teams: '/teams',
+    caseTypes: '/casetype',
+    stageTypes: '/stagetype'
 };
 
 const listDefinitions = {

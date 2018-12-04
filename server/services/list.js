@@ -63,6 +63,8 @@ const lists = {
         const workstackData = response.data.stages
             .map(row => {
                 row.assignedTeamDisplay = listRepository.teams.find(i => i.teamUUID === row.teamUUID).displayName;
+                row.caseTypeDisplay = listRepository.caseTypes.find(i => i.caseType === row.caseType).label;
+                row.stageTypeDisplay = listRepository.stageTypes.find(i => i.stageType === row.stageType).label;
                 if (row.userUUID) {
                     row.assignedUserDisplay = listRepository.users(i => i.userUUID === row.userUUID).username;
                 }
@@ -152,6 +154,8 @@ const lists = {
             .filter(item => item.teamUUID === teamId)
             .map(row => {
                 row.assignedTeamDisplay = listRepository.teams.find(i => i.teamUUID === row.teamUUID).displayName;
+                row.caseTypeDisplay = listRepository.caseTypes.find(i => i.caseType === row.caseType).label;
+                row.stageTypeDisplay = listRepository.stageTypes.find(i => i.stageType === row.stageType).label;
                 if (row.userUUID) {
                     row.assignedUserDisplay = listRepository.users(i => i.userUUID === row.userUUID).username;
                 }
@@ -164,7 +168,7 @@ const lists = {
                 const index = result.map(c => c.value).indexOf(row.caseType);
                 if (index === -1) {
                     result.push({
-                        label: row.caseType,
+                        label: row.caseTypeDisplay,
                         value: row.caseType,
                         type: 'workflow',
                         count: 1,
@@ -205,6 +209,8 @@ const lists = {
             .filter(item => item.teamUUID === teamId && item.caseType === workflowId)
             .map(row => {
                 row.assignedTeamDisplay = listRepository.teams.find(i => i.teamUUID === row.teamUUID).displayName;
+                row.caseTypeDisplay = listRepository.caseTypes.find(i => i.caseType === row.caseType).label;
+                row.stageTypeDisplay = listRepository.stageTypes.find(i => i.stageType === row.stageType).label;
                 if (row.userUUID) {
                     row.assignedUserDisplay = listRepository.users(i => i.userUUID === row.userUUID).username;
                 }
@@ -217,7 +223,7 @@ const lists = {
                 const index = result.map(c => c.value).indexOf(row.stageType);
                 if (index === -1) {
                     result.push({
-                        label: row.stageType,
+                        label: row.stageTypeDisplay,
                         value: row.stageType,
                         type: 'stage',
                         count: 1,
@@ -258,6 +264,8 @@ const lists = {
             .filter(item => item.teamUUID === teamId && item.caseType === workflowId && item.stageType === stageId)
             .map(row => {
                 row.assignedTeamDisplay = listRepository.teams.find(i => i.teamUUID === row.teamUUID).displayName;
+                row.caseTypeDisplay = listRepository.caseTypes.find(i => i.caseType === row.caseType).label;
+                row.stageTypeDisplay = listRepository.stageTypes.find(i => i.stageType === row.stageType).label;
                 if (row.userUUID) {
                     row.assignedUserDisplay = listRepository.users(i => i.userUUID === row.userUUID).username;
                 }
