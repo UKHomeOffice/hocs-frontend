@@ -9,7 +9,7 @@ import {
     clearApiStatus
 } from '../contexts/actions/index.jsx';
 import status from '../helpers/api-status.js';
-import Workstack from '../common/components/workstack.jsx';
+import Workstack from '../common/components/workstack-allocate.jsx';
 import Dashboard from '../common/components/dashboard-new.jsx';
 
 const renderBreadCrumb = ({ key, label, to, isLast }) => (

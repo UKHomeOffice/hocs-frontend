@@ -22,7 +22,7 @@ class Workstack extends Component {
                     (r.assignedUserDisplay && r.assignedUserDisplay.toUpperCase().indexOf(filter) !== -1) ||
                     (r.assignedTeamDisplay && r.assignedTeamDisplay.toUpperCase().indexOf(filter) !== -1) ||
                     (r.deadline && r.deadline.toUpperCase().indexOf(filter) !== -1) ||
-                    (r.stageType && r.stageType.toUpperCase().indexOf(filter) !== -1);
+                    (r.stageTypeDisplay && r.stageTypeDisplay.toUpperCase().indexOf(filter) !== -1);
             });
             this.setState({ workstack: filtered });
         } else {
@@ -65,14 +65,14 @@ class Workstack extends Component {
                                     return (
                                         <tr key={i} className='govuk-radios govuk-table__row'>
                                             <td className='govuk-table__cell'>
-                                                <strong className='govuk-tag'>{c.caseType}</strong>
+                                                {c.caseTypeDisplay && <strong className='govuk-tag'>{c.caseTypeDisplay}</strong>}
                                             </td>
                                             <td className='govuk-table__cell'>{
                                                 c.userUUID === null ?
                                                     <Link to={`/case/${c.caseUUID}/stage/${c.uuid}/allocate`} className="govuk-link govuk-!-margin-right-3">{c.caseReference}</Link> :
                                                     <Link to={`/case/${c.caseUUID}/stage/${c.uuid}`} className="govuk-link govuk-!-margin-right-3">{c.caseReference}</Link>
                                             }</td>
-                                            <td className='govuk-table__cell'>{c.stageType}</td>
+                                            <td className='govuk-table__cell'>{c.stageTypeDisplay}</td>
                                             <td className='govuk-table__cell'>{c.assignedUserDisplay}</td>
                                             <td className='govuk-table__cell'>{c.assignedTeamDisplay}</td>
                                             <td className='govuk-table__cell'>{c.deadline}</td>
