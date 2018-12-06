@@ -72,10 +72,11 @@ class WorkstackPage extends Component {
             });
     }
 
-    renderWorkstack(workstack) {
+    renderWorkstack() {
+        const { workstack } = this.state;
         return (
             <Fragment>
-                <Workstack workstack={workstack} />
+                <Workstack {...workstack} />
             </Fragment>
         );
     }
@@ -104,7 +105,7 @@ class WorkstackPage extends Component {
                             {workstack.label}
                         </h1>
                         {workstack.dashboard && this.renderDashboard(workstack.dashboard)}
-                        {this.renderWorkstack(workstack.items)}
+                        {this.renderWorkstack()}
                     </Fragment>
                     : null
                 }

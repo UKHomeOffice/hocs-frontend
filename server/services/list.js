@@ -5,10 +5,10 @@ const logger = require('../libs/logger');
 const events = require('../models/events');
 
 const listRepository = {
-    teams: [{type: 'ASSIGNED_TEAM', displayName: 'Assigned team'}],
-    users: [{id: 'ASSIGNED_USER', displayName: 'Assigned user'}],
-    caseTypes: [{value: 'CASE_TYPE', label: 'Case type'}],
-    stageTypes: [{value: 'STAGE_TYPE', label: 'Stage type'}],
+    teams: [{ type: 'ASSIGNED_TEAM', displayName: 'Assigned team' }],
+    users: [{ id: 'ASSIGNED_USER', username: 'Assigned user' }],
+    caseTypes: [{ value: 'CASE_TYPE', label: 'Case type' }],
+    stageTypes: [{ value: 'STAGE_TYPE', label: 'Stage type' }],
 };
 
 async function initialise() {
@@ -52,7 +52,22 @@ function compareListItems(first, second) {
 const helpers = {
     isOverdue: deadline => deadline && new Date(deadline) < Date.now(),
     isUnallocated: user => user === null,
-    setTag: current => current ? current + 1 : 1
+    setTag: current => current ? current + 1 : 1,
+    bindDisplayElements: row => {
+        const assignedTeam = listRepository.teams.find(i => i.type === row.teamUUID) || {};
+        row.assignedTeamDisplay = assignedTeam.displayName;
+        const caseType = listRepository.caseTypes.caseTypes.find(i => i.value === row.caseType) || {};
+        row.caseTypeDisplay = caseType.displayCode;
+        row.caseTypeDisplayFull = caseType.label;
+        const stageType = listRepository.stageTypes.stageTypes.find(i => i.value === row.stageType) || {};
+        row.stageTypeDisplay = stageType.label;
+        if (row.userUUID) {
+            const assignedUser = listRepository.users.find(i => i.id === row.userUUID) || {};
+            row.assignedUserDisplay = assignedUser.username;
+        }
+        row.deadlineDisplay = new Intl.DateTimeFormat('en-GB').format(new Date(row.deadline));
+        return row;
+    }
 };
 
 const lists = {
@@ -66,22 +81,10 @@ const lists = {
                 'X-Auth-Groups': user.groups.join()
             }
         }, caseworkServiceClient);
+        const { isOverdue, isUnallocated, setTag, bindDisplayElements } = helpers;
         const workstackData = response.data.stages
-            .map(row => {
-                const assignedTeam = listRepository.teams.find(i => i.type === row.teamUUID) || {};
-                row.assignedTeamDisplay = assignedTeam.displayName;
-                const caseType = listRepository.caseTypes.find(i => i.value === row.caseType) || {};
-                row.caseTypeDisplay = caseType.label;
-                const stageType = listRepository.stageTypes.find(i => i.value === row.stageType) || {};
-                row.stageTypeDisplay = stageType.label;
-                if (row.userUUID) {
-                    const assignedUser = listRepository.users.find(i => i.id === row.userUUID) || {};
-                    row.assignedUserDisplay = assignedUser.username;
-                }
-                return row;
-            })
+            .map(bindDisplayElements)
             .sort((first, second) => first.caseReference > second.caseReference);
-        const { isOverdue, isUnallocated, setTag } = helpers;
         const createOverdueTag = data => {
             const overdueCases = data.filter(r => isOverdue(r.deadline));
             return overdueCases.length > 0 ? overdueCases.count : null;
@@ -126,43 +129,24 @@ const lists = {
         };
     },
     // TODO: Temporary code to support current workstack implementation
-    'WORKSTACK_USER': async ({ user }) => {
+    'WORKSTACK_USER': async ({ teamId = '44444444-2222-2222-2222-222222222222', user }) => {
         const list = listDefinitions['dashboard'].call(this);
-        // const response = await fetchList(list, {
-        //     headers: {
-        //         'X-Auth-UserId': user.id,
-        //         'X-Auth-Roles': user.roles.join(),
-        //         'X-Auth-Groups': user.groups.join()
-        //     }
-        // }, caseworkServiceClient);
-        const response = {
-            data: {
-                stages: [
-                    { caseReference: 'ABC/0000001/AA', caseType: 'CASE_TYPE', stageType: 'STAGE_TYPE', userUUID: 'ASSIGNED_USER', teamUUID: 'ASSIGNED_TEAM', deadline: '2020-01-01' },
-                    { caseReference: 'ABC/0000002/AA', caseType: 'CASE_TYPE', stageType: 'STAGE_TYPE', userUUID: null, teamUUID: 'ASSIGNED_TEAM', deadline: '2020-01-01' }
-                ]
+        const response = await fetchList(list, {
+            headers: {
+                'X-Auth-UserId': user.id,
+                'X-Auth-Roles': user.roles.join(),
+                'X-Auth-Groups': user.groups.join()
             }
-        };
-
+        }, caseworkServiceClient);
+        const { bindDisplayElements } = helpers;
         const workstackData = response.data.stages
+            .filter(item => item.userUUID === user.uuid)
+            .map(bindDisplayElements)
             .sort((first, second) => first.caseReference > second.caseReference);
         return {
             label: 'User workstack',
-            items: workstackData
-                // .filter(item => String(item.userUUID) === String(user.uuid))
-                .map(row => {
-                    const assignedTeam = listRepository.teams.find(i => i.type === row.teamUUID) || {};
-                    row.assignedTeamDisplay = assignedTeam.displayName;
-                    const caseType = listRepository.caseTypes.find(i => i.value === row.caseType) || {};
-                    row.caseTypeDisplay = caseType.label;
-                    const stageType = listRepository.stageTypes.find(i => i.value === row.stageType) || {};
-                    row.stageTypeDisplay = stageType.label;
-                    if (row.userUUID) {
-                        const assignedUser = listRepository.users.find(i => i.id === row.userUUID) || {};
-                        row.assignedUserDisplay = assignedUser.username;
-                    }
-                    return row;
-                })
+            items: workstackData,
+            allocateToWorkstackEndpoint: '/workstack/unallocate/'
         };
     },
     // TODO: Temporary code to support current workstack implementation
@@ -175,29 +159,24 @@ const lists = {
                 'X-Auth-Groups': user.groups.join()
             }
         }, caseworkServiceClient);
+        const userTeamsResponse = await fetchList(`/teams/${teamId}/members`, {
+            headers: {
+                'X-Auth-UserId': user.id,
+                'X-Auth-Roles': user.roles.join(),
+                'X-Auth-Groups': user.groups.join()
+            }
+        }, infoServiceClient);
+        const { isOverdue, isUnallocated, setTag, bindDisplayElements } = helpers;
         const workstackData = response.data.stages
             .filter(item => item.teamUUID === teamId)
-            .map(row => {
-                const assignedTeam = listRepository.teams.find(i => i.type === row.teamUUID) || {};
-                row.assignedTeamDisplay = assignedTeam.displayName;
-                const caseType = listRepository.caseTypes.find(i => i.value === row.caseType) || {};
-                row.caseTypeDisplay = caseType.label;
-                const stageType = listRepository.stageTypes.find(i => i.value === row.stageType) || {};
-                row.stageTypeDisplay = stageType.label;
-                if (row.userUUID) {
-                    const assignedUser = listRepository.users.find(i => i.id === row.userUUID) || {};
-                    row.assignedUserDisplay = assignedUser.username;
-                }
-                return row;
-            })
+            .map(bindDisplayElements)
             .sort((first, second) => first.caseReference > second.caseReference);
-        const { isOverdue, isUnallocated, setTag } = helpers;
         const dashboardData = workstackData
             .reduce((result, row) => {
                 const index = result.map(c => c.value).indexOf(row.caseType);
                 if (index === -1) {
                     result.push({
-                        label: row.caseTypeDisplay,
+                        label: row.caseTypeDisplayFull,
                         value: row.caseType,
                         type: 'workflow',
                         count: 1,
@@ -219,9 +198,13 @@ const lists = {
             }, [])
             .sort((first, second) => first.count < second.count ? 1 : -1);
         return {
-            label: 'Placeholder Team',
+            label: ((team = {}) => team.displayName || 'Placeholder team')(listRepository.teams.find(i => i.type === teamId)),
             items: workstackData,
-            dashboard: dashboardData
+            dashboard: dashboardData,
+            teamMembers: userTeamsResponse.data.map(user => ({ label: user.username, value: user.id })),
+            allocateToUserEndpoint: '/workstack/allocate/user',
+            allocateToTeamEndpoint: '/workstack/allocate/team',
+            allocateToWorkstackEndpoint: '/workstack/unallocate/'
         };
     },
     // TODO: Temporary code to support current workstack implementation
@@ -234,23 +217,18 @@ const lists = {
                 'X-Auth-Groups': user.groups.join()
             }
         }, caseworkServiceClient);
+        const userTeamsResponse = await fetchList(`/teams/${teamId}/members`, {
+            headers: {
+                'X-Auth-UserId': user.id,
+                'X-Auth-Roles': user.roles.join(),
+                'X-Auth-Groups': user.groups.join()
+            }
+        }, infoServiceClient);
+        const { isOverdue, isUnallocated, setTag, bindDisplayElements } = helpers;
         const workstackData = response.data.stages
             .filter(item => item.teamUUID === teamId && item.caseType === workflowId)
-            .map(row => {
-                const assignedTeam = listRepository.teams.find(i => i.type === row.teamUUID) || {};
-                row.assignedTeamDisplay = assignedTeam.displayName;
-                const caseType = listRepository.caseTypes.find(i => i.value === row.caseType) || {};
-                row.caseTypeDisplay = caseType.label;
-                const stageType = listRepository.stageTypes.find(i => i.value === row.stageType) || {};
-                row.stageTypeDisplay = stageType.label;
-                if (row.userUUID) {
-                    const assignedUser = listRepository.users.find(i => i.id === row.userUUID) || {};
-                    row.assignedUserDisplay = assignedUser.username;
-                }
-                return row;
-            })
+            .map(bindDisplayElements)
             .sort((first, second) => first.caseReference > second.caseReference);
-        const { isOverdue, isUnallocated, setTag } = helpers;
         const dashboardData = workstackData
             .reduce((result, row) => {
                 const index = result.map(c => c.value).indexOf(row.stageType);
@@ -278,9 +256,13 @@ const lists = {
             }, [])
             .sort((first, second) => first.count < second.count);
         return {
-            label: 'Placeholder Workflow',
+            label: ((workflow = {}) => workflow.label || 'Placeholder workflow')(listRepository.caseTypes.caseTypes.find(i => i.value === workflowId)),
             items: workstackData,
-            dashboard: dashboardData
+            dashboard: dashboardData,
+            teamMembers: userTeamsResponse.data.map(user => ({ label: user.username, value: user.id })),
+            allocateToUserEndpoint: '/workstack/allocate/user',
+            allocateToTeamEndpoint: '/workstack/allocate/team',
+            allocateToWorkstackEndpoint: '/workstack/unallocate/'
         };
     },
     // TODO: Temporary code to support current workstack implementation
@@ -293,25 +275,25 @@ const lists = {
                 'X-Auth-Groups': user.groups.join()
             }
         }, caseworkServiceClient);
+        const userTeamsResponse = await fetchList(`/teams/${teamId}/members`, {
+            headers: {
+                'X-Auth-UserId': user.id,
+                'X-Auth-Roles': user.roles.join(),
+                'X-Auth-Groups': user.groups.join()
+            }
+        }, infoServiceClient);
+        const { bindDisplayElements } = helpers;
         const workstackData = response.data.stages
             .filter(item => item.teamUUID === teamId && item.caseType === workflowId && item.stageType === stageId)
-            .map(row => {
-                const assignedTeam = listRepository.teams.find(i => i.type === row.teamUUID) || {};
-                row.assignedTeamDisplay = assignedTeam.displayName;
-                const caseType = listRepository.caseTypes.find(i => i.value === row.caseType) || {};
-                row.caseTypeDisplay = caseType.label;
-                const stageType = listRepository.stageTypes.find(i => i.value === row.stageType) || {};
-                row.stageTypeDisplay = stageType.label;
-                if (row.userUUID) {
-                    const assignedUser = listRepository.users.find(i => i.id === row.userUUID) || {};
-                    row.assignedUserDisplay = assignedUser.username;
-                }
-                return row;
-            })
+            .map(bindDisplayElements)
             .sort((first, second) => first.caseReference > second.caseReference);
         return {
-            label: 'Placeholder Stage',
-            items: workstackData
+            label: ((stage = {}) => stage.label || 'Placeholder stage')(listRepository.stageTypes.stageTypes.find(i => i.value === stageId)),
+            items: workstackData,
+            teamMembers: userTeamsResponse.data.map(user => ({ label: user.username, value: user.id })),
+            allocateToUserEndpoint: '/workstack/allocate/user',
+            allocateToTeamEndpoint: '/workstack/allocate/team',
+            allocateToWorkstackEndpoint: '/workstack/unallocate'
         };
     },
     'CASE_TYPES': async ({ user }) => {
