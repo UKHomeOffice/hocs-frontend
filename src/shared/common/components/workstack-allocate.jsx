@@ -27,9 +27,9 @@ class Workstack extends Component {
                     (r.deadlineDisplay && r.deadlineDisplay.toUpperCase().indexOf(filter) !== -1) ||
                     (r.stageTypeDisplay && r.stageTypeDisplay.toUpperCase().indexOf(filter) !== -1);
             });
-            this.setState({ workstack: filtered });
+            this.setState(state => ({ workstack: filtered, data: { ...state.data, selected_cases: filtered.filter(i => state.data.selected_cases.includes(`${i.caseUUID}:${i.uuid}`)).map(i => `${i.caseUUID}:${i.uuid}`) } }));
         } else {
-            this.setState({ workstack });
+            this.setState(state => ({ workstack, data: state.data }));
         }
     }
 
@@ -99,6 +99,7 @@ class Workstack extends Component {
                                                 <tbody className='govuk-table__body'>
                                                     {
                                                         cases && cases.sort((first, second) => first.caseReference.split('/')[1] > second.caseReference.split('/')[1] ? -1 : 1).map((c, i) => {
+                                                            const value = `${c.caseUUID}:${c.uuid}`;
                                                             return (
                                                                 <tr key={i} className='govuk-radios govuk-table__row'>
                                                                     <td className='govuk-table__cell'>
@@ -107,7 +108,8 @@ class Workstack extends Component {
                                                                                 <input id={`selected_cases_${c.caseUUID}`}
                                                                                     type='checkbox'
                                                                                     name={'selected_cases'}
-                                                                                    value={`${c.caseUUID}:${c.uuid}`}
+                                                                                    value={value}
+                                                                                    checked={this.state.data.selected_cases.includes(value)}
                                                                                     onChange={e => {
                                                                                         const selection = new Set(this.state.data.selected_cases || []);
                                                                                         if (selection.has(e.target.value)) {
@@ -151,7 +153,7 @@ class Workstack extends Component {
                                         </h1>
                                         <ul className="govuk-list">
                                             {allocateToUserEndpoint && <li>
-                                                <button type='button' onClick={e => this.handleSubmit(e, allocateToUserEndpoint)} className='govuk-button--link govuk-link' formMethod='POST' formEncType='multipart/form-data'  formAction={allocateToUserEndpoint}>Allocate selected to me</button>
+                                                <button type='button' onClick={e => this.handleSubmit(e, allocateToUserEndpoint)} className='govuk-button--link govuk-link' formMethod='POST' formEncType='multipart/form-data' formAction={allocateToUserEndpoint}>Allocate selected to me</button>
                                             </li>}
                                             {allocateToWorkstackEndpoint && <li>
                                                 <button type='button' onClick={e => this.handleSubmit(e, allocateToWorkstackEndpoint)} className='govuk-button--link govuk-link' formMethod='POST' formEncType='multipart/form-data' formAction={allocateToWorkstackEndpoint}>Return selected to the workstack</button>
