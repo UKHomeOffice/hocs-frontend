@@ -58,13 +58,7 @@ exports[`Dashboard component should render with default props 1`] = `
       >
         <td
           class="govuk-table__cell"
-        >
-          <strong
-            class="govuk-tag"
-          >
-            ABC
-          </strong>
-        </td>
+        />
         <td
           class="govuk-table__cell"
         >
@@ -77,7 +71,9 @@ exports[`Dashboard component should render with default props 1`] = `
         </td>
         <td
           class="govuk-table__cell"
-        />
+        >
+          Stage type
+        </td>
         <td
           class="govuk-table__cell"
         >
@@ -99,13 +95,7 @@ exports[`Dashboard component should render with default props 1`] = `
       >
         <td
           class="govuk-table__cell"
-        >
-          <strong
-            class="govuk-tag"
-          >
-            ABC
-          </strong>
-        </td>
+        />
         <td
           class="govuk-table__cell"
         >
@@ -118,7 +108,9 @@ exports[`Dashboard component should render with default props 1`] = `
         </td>
         <td
           class="govuk-table__cell"
-        />
+        >
+          Stage type
+        </td>
         <td
           class="govuk-table__cell"
         >

@@ -129,7 +129,7 @@ const lists = {
         };
     },
     // TODO: Temporary code to support current workstack implementation
-    'WORKSTACK_USER': async ({ teamId = '44444444-2222-2222-2222-222222222222', user }) => {
+    'WORKSTACK_USER': async ({ user }) => {
         const list = listDefinitions['dashboard'].call(this);
         const response = await fetchList(list, {
             headers: {
