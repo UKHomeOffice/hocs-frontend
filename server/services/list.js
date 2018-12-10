@@ -3,6 +3,7 @@ const { infoServiceClient, caseworkServiceClient, docsServiceClient } = require(
 const { listDefinitions, staticListDefinitions } = require('./lists/index');
 const logger = require('../libs/logger');
 const events = require('../models/events');
+const User = require('../models/user');
 
 const listRepository = {
     teams: [{ type: 'ASSIGNED_TEAM', displayName: 'Assigned team' }],
@@ -75,11 +76,7 @@ const lists = {
     'DASHBOARD': async ({ user }) => {
         const list = listDefinitions['dashboard'].call(this);
         const response = await fetchList(list, {
-            headers: {
-                'X-Auth-UserId': user.id,
-                'X-Auth-Roles': user.roles.join(),
-                'X-Auth-Groups': user.groups.join()
-            }
+            headers: User.createHeaders(user)
         }, caseworkServiceClient);
         const { isOverdue, isUnallocated, setTag, bindDisplayElements } = helpers;
         const workstackData = response.data.stages
@@ -132,11 +129,7 @@ const lists = {
     'WORKSTACK_USER': async ({ user }) => {
         const list = listDefinitions['dashboard'].call(this);
         const response = await fetchList(list, {
-            headers: {
-                'X-Auth-UserId': user.id,
-                'X-Auth-Roles': user.roles.join(),
-                'X-Auth-Groups': user.groups.join()
-            }
+            headers: User.createHeaders(user)
         }, caseworkServiceClient);
         const { bindDisplayElements } = helpers;
         const workstackData = response.data.stages
@@ -153,18 +146,10 @@ const lists = {
     'WORKSTACK_TEAM': async ({ user, teamId }) => {
         const list = listDefinitions['dashboard'].call(this);
         const response = await fetchList(list, {
-            headers: {
-                'X-Auth-UserId': user.id,
-                'X-Auth-Roles': user.roles.join(),
-                'X-Auth-Groups': user.groups.join()
-            }
+            headers: User.createHeaders(user)
         }, caseworkServiceClient);
         const userTeamsResponse = await fetchList(`/teams/${teamId}/members`, {
-            headers: {
-                'X-Auth-UserId': user.id,
-                'X-Auth-Roles': user.roles.join(),
-                'X-Auth-Groups': user.groups.join()
-            }
+            headers: User.createHeaders(user)
         }, infoServiceClient);
         const { isOverdue, isUnallocated, setTag, bindDisplayElements } = helpers;
         const workstackData = response.data.stages
@@ -211,18 +196,10 @@ const lists = {
     'WORKSTACK_WORKFLOW': async ({ user, teamId, workflowId }) => {
         const list = listDefinitions['dashboard'].call(this);
         const response = await fetchList(list, {
-            headers: {
-                'X-Auth-UserId': user.id,
-                'X-Auth-Roles': user.roles.join(),
-                'X-Auth-Groups': user.groups.join()
-            }
+            headers: User.createHeaders(user)
         }, caseworkServiceClient);
         const userTeamsResponse = await fetchList(`/teams/${teamId}/members`, {
-            headers: {
-                'X-Auth-UserId': user.id,
-                'X-Auth-Roles': user.roles.join(),
-                'X-Auth-Groups': user.groups.join()
-            }
+            headers: User.createHeaders(user)
         }, infoServiceClient);
         const { isOverdue, isUnallocated, setTag, bindDisplayElements } = helpers;
         const workstackData = response.data.stages
@@ -269,18 +246,10 @@ const lists = {
     'WORKSTACK_STAGE': async ({ user, teamId, workflowId, stageId }) => {
         const list = listDefinitions['dashboard'].call(this);
         const response = await fetchList(list, {
-            headers: {
-                'X-Auth-UserId': user.id,
-                'X-Auth-Roles': user.roles.join(),
-                'X-Auth-Groups': user.groups.join()
-            }
+            headers: User.createHeaders(user)
         }, caseworkServiceClient);
         const userTeamsResponse = await fetchList(`/teams/${teamId}/members`, {
-            headers: {
-                'X-Auth-UserId': user.id,
-                'X-Auth-Roles': user.roles.join(),
-                'X-Auth-Groups': user.groups.join()
-            }
+            headers: User.createHeaders(user)
         }, infoServiceClient);
         const { bindDisplayElements } = helpers;
         const workstackData = response.data.stages
@@ -298,11 +267,8 @@ const lists = {
     },
     'CASE_TYPES': async ({ user }) => {
         const list = listDefinitions['workflowTypes'].call(this);
-        const headerRoles = user.roles.join();
         const response = await fetchList(list, {
-            headers: {
-                'X-Auth-Roles': headerRoles
-            }
+            headers: User.createHeaders(user)
         });
         if (response.data.caseTypes) {
             return response.data.caseTypes.sort(compareListItems);
@@ -314,11 +280,8 @@ const lists = {
     },
     'CASE_TYPES_BULK': async ({ user }) => {
         const list = listDefinitions['workflowTypesBulk'].call(this);
-        const headerRoles = user.roles.join();
         const response = await fetchList(list, {
-            headers: {
-                'X-Auth-Roles': headerRoles
-            }
+            headers: User.createHeaders(user)
         });
         if (response.data.caseTypes) {
             return response.data.caseTypes.sort(compareListItems);
@@ -327,9 +290,11 @@ const lists = {
             return [];
         }
     },
-    'CASE_DOCUMENT_LIST': async ({ caseId }) => {
+    'CASE_DOCUMENT_LIST': async ({ user, caseId }) => {
         const list = listDefinitions['caseDocuments'].call(this, { caseId });
-        const response = await fetchList(list, null, docsServiceClient);
+        const response = await fetchList(list, {
+            headers: User.createHeaders(user)
+        }, docsServiceClient);
         if (response.data.documents) {
             return response.data.documents
                 .sort((first, second) => {
@@ -342,9 +307,11 @@ const lists = {
             return [];
         }
     },
-    'CASE_DOCUMENT_LIST_DRAFT': async ({ caseId }) => {
+    'CASE_DOCUMENT_LIST_DRAFT': async ({ user, caseId }) => {
         const list = listDefinitions['caseDocumentsType'].call(this, { caseId, type: 'DRAFT' });
-        const response = await fetchList(list, null, docsServiceClient);
+        const response = await fetchList(list, {
+            headers: User.createHeaders(user)
+        }, docsServiceClient);
         if (response.data.documents) {
             return response.data.documents
                 .sort((first, second) => {
@@ -363,11 +330,8 @@ const lists = {
     },
     'MEMBER_LIST': async ({ user }) => {
         const list = listDefinitions['memberList'].call(this, { caseType: 'MIN' });
-        const headerRoles = user.roles.join();
         const response = await fetchList(list, {
-            headers: {
-                'X-Auth-Roles': headerRoles
-            }
+            headers: User.createHeaders(user)
         });
         if (response.data.members) {
             const groupedList = response.data.members
@@ -391,9 +355,11 @@ const lists = {
             return [];
         }
     },
-    'MINISTERS': async () => {
+    'MINISTERS': async ({ user }) => {
         const list = listDefinitions['ministerList'].call(this);
-        const response = await fetchList(list);
+        const response = await fetchList(list, {
+            headers: User.createHeaders(user)
+        });
         if (response.data.ministers) {
             return response.data.ministers
                 .sort((first, second) => first.label > second.label);
@@ -402,9 +368,11 @@ const lists = {
             return [];
         }
     },
-    'CASE_STANDARD_LINES': async ({ caseId }) => {
+    'CASE_STANDARD_LINES': async ({ user, caseId }) => {
         const list = listDefinitions['standardLines'].call(this, { caseId });
-        const response = await fetchList(list, null, infoServiceClient);
+        const response = await fetchList(list, {
+            headers: User.createHeaders(user)
+        }, infoServiceClient);
         if (response.data.label && response.data.value) {
             const { label, value } = response.data;
             return [
@@ -415,9 +383,11 @@ const lists = {
             return [];
         }
     },
-    'CASE_TEMPLATES': async ({ caseId }) => {
+    'CASE_TEMPLATES': async ({ user, caseId }) => {
         const list = listDefinitions['templates'].call(this, { caseId });
-        const response = await fetchList(list, null, infoServiceClient);
+        const response = await fetchList(list, {
+            headers: User.createHeaders(user)
+        }, infoServiceClient);
         if (response.data.label && response.data.value) {
             const { label, value } = response.data;
             return [
@@ -429,9 +399,11 @@ const lists = {
         }
 
     },
-    'CASE_TOPICS': async ({ caseId }) => {
+    'CASE_TOPICS': async ({ user, caseId }) => {
         const list = listDefinitions['caseTopics'].call(this, { caseId });
-        const response = await fetchList(list, null, caseworkServiceClient);
+        const response = await fetchList(list, {
+            headers: User.createHeaders(user)
+        }, caseworkServiceClient);
         if (response.data.topics) {
             return response.data.topics;
         } else {
@@ -439,9 +411,11 @@ const lists = {
             return [];
         }
     },
-    'TOPICS_CASETYPE': async ({ caseId }) => {
+    'TOPICS_CASETYPE': async ({ user, caseId }) => {
         const list = listDefinitions['topicsCaseType'].call(this, { caseId });
-        const response = await fetchList(list, null, infoServiceClient);
+        const response = await fetchList(list, {
+            headers: User.createHeaders(user)
+        }, infoServiceClient);
         if (response.data.parentTopics) {
             return response.data.parentTopics;
         } else {
@@ -449,9 +423,11 @@ const lists = {
             return [];
         }
     },
-    'TOPICS_USER': async () => {
+    'TOPICS_USER': async ({ user }) => {
         const list = listDefinitions['userTopics'].call(this);
-        const response = await fetchList(list, null, infoServiceClient);
+        const response = await fetchList(list, {
+            headers: User.createHeaders(user)
+        }, infoServiceClient);
         if (response.data.parentTopics) {
             return response.data.parentTopics;
         } else {
@@ -459,9 +435,11 @@ const lists = {
             return [];
         }
     },
-    'CORRESPONDENT_TYPES': async () => {
+    'CORRESPONDENT_TYPES': async ({ user }) => {
         const list = listDefinitions['correspondentTypes'].call(this);
-        const response = await fetchList(list, null, infoServiceClient);
+        const response = await fetchList(list, {
+            headers: User.createHeaders(user)
+        }, infoServiceClient);
         if (response.data.correspondentTypes) {
             return response.data.correspondentTypes;
         } else {
@@ -472,11 +450,7 @@ const lists = {
     'CASE_CORRESPONDENTS': async ({ caseId, user }) => {
         const list = listDefinitions['caseCorrespondents'].call(this, { caseId });
         const response = await fetchList(list, {
-            headers: {
-                'X-Auth-UserId': user.id,
-                'X-Auth-Roles': user.roles.join(),
-                'X-Auth-Groups': user.groups.join()
-            }
+            headers: User.createHeaders(user)
         }, caseworkServiceClient);
         if (response.data.correspondents) {
             return response.data.correspondents.map(c => ({ label: c.fullname, value: c.uuid }));
@@ -488,9 +462,8 @@ const lists = {
 };
 
 async function getList(listId, options = {}) {
-    const userRoles = options.user ? options.user.roles : null;
     try {
-        logger.info({ event: events.FETCH_LIST, list: listId, ...options, user: { roles: userRoles } });
+        logger.info({ event: events.FETCH_LIST, list: listId, ...options });
         const list = await lists[listId.toUpperCase()].call(this, options);
         return list;
     } catch (e) {
