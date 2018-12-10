@@ -42,22 +42,23 @@ class Workstack extends Component {
         Object.keys(data).forEach(field => {
             if (Array.isArray(data[field])) {
                 data[field].map(value => {
-                    formData.append(`${field}[]`, value);
+                    formData.append(`${field}`, value);
                 });
             } else {
                 formData.append(field, data[field]);
             }
         });
-        axios.post(endpoint, formData, { headers: { 'Content-Type': 'multipart/form-data' } })
-            .then(() => console.log('SUBMITTED_ALLOCATION'));
+        axios.post('/api' + endpoint, formData, { headers: { 'Content-Type': 'multipart/form-data' } })
+            .then(({ data: { workstack, notification } }) => this.setState({ workstack: workstack.items, notification }));
     }
 
     render() {
-        const { workstack: cases, mounted } = this.state;
-        const { teamMembers, allocateToUserEndpoint, allocateToTeamEndpoint, allocateToWorkstackEndpoint } = this.props;
+        const { workstack: cases, mounted, notification } = this.state;
+        const { baseUrl, teamMembers, allocateToUserEndpoint, allocateToTeamEndpoint, allocateToWorkstackEndpoint } = this.props;
         let name = 'test', className, error, disabled;
         return (
             <Fragment>
+                {notification && <div className='ribbon ribbon--warning'><p>{notification}</p></div>}
                 <div className="govuk-grid-row">
                     <div className="govuk-grid-column-full">
                         {mounted &&
@@ -77,7 +78,7 @@ class Workstack extends Component {
                 </div>
                 <div className="govuk-grid-row">
                     <div className="govuk-grid-column-full">
-                        <form action={allocateToTeamEndpoint} method='POST' onSubmit={e => this.handleSubmit(e, allocateToTeamEndpoint)} encType="multipart/form-data">
+                        <form action={baseUrl + allocateToTeamEndpoint} method='POST' onSubmit={e => this.handleSubmit(e, baseUrl + allocateToTeamEndpoint)} encType="multipart/form-data">
                             <fieldset id={name} className={`govuk-fieldset ${className ? className : ''}`} disabled={disabled}>
                                 <div className="govuk-grid-row">
                                     <div className="govuk-grid-column-full">
@@ -107,7 +108,7 @@ class Workstack extends Component {
                                                                             <div key={i} className="govuk-checkboxes__item">
                                                                                 <input id={`selected_cases_${c.caseUUID}`}
                                                                                     type='checkbox'
-                                                                                    name={'selected_cases'}
+                                                                                    name={'selected_cases[]'}
                                                                                     value={value}
                                                                                     checked={this.state.data.selected_cases.includes(value)}
                                                                                     onChange={e => {
@@ -153,10 +154,10 @@ class Workstack extends Component {
                                         </h1>
                                         <ul className="govuk-list">
                                             {allocateToUserEndpoint && <li>
-                                                <button type='button' onClick={e => this.handleSubmit(e, allocateToUserEndpoint)} className='govuk-button--link govuk-link' formMethod='POST' formEncType='multipart/form-data' formAction={allocateToUserEndpoint}>Allocate selected to me</button>
+                                                <button type='submit' onClick={e => this.handleSubmit(e, baseUrl + allocateToUserEndpoint)} className='govuk-button--link govuk-link' formMethod='POST' formEncType='multipart/form-data' formAction={baseUrl + allocateToUserEndpoint}>Allocate selected to me</button>
                                             </li>}
                                             {allocateToWorkstackEndpoint && <li>
-                                                <button type='button' onClick={e => this.handleSubmit(e, allocateToWorkstackEndpoint)} className='govuk-button--link govuk-link' formMethod='POST' formEncType='multipart/form-data' formAction={allocateToWorkstackEndpoint}>Return selected to the workstack</button>
+                                                <button type='submit' onClick={e => this.handleSubmit(e, baseUrl + allocateToWorkstackEndpoint)} className='govuk-button--link govuk-link' formMethod='POST' formEncType='multipart/form-data' formAction={baseUrl + allocateToWorkstackEndpoint}>Return selected to the workstack</button>
                                             </li>}
                                         </ul>
                                         {teamMembers &&
@@ -181,7 +182,17 @@ class Workstack extends Component {
 }
 
 Workstack.propTypes = {
+    baseUrl: PropTypes.string.isRequired,
+    teamMembers: PropTypes.array,
+    allocateToTeamEndpoint: PropTypes.string.isRequired,
+    allocateToUserEndpoint: PropTypes.string.isRequired,
+    allocateToWorkstackEndpoint: PropTypes.string.isRequired,
     items: PropTypes.array.isRequired
+};
+
+Workstack.defaultProps = {
+    items: [],
+    teamMembers: []
 };
 
 export default Workstack;

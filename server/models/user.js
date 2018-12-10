@@ -18,6 +18,14 @@ class user {
     static hasGroup(user, group) {
         return user.groups.includes(group);
     }
+
+    static createHeaders(user) {
+        return {
+            'X-Auth-UserId': user.id,
+            'X-Auth-Roles': user.roles.join(),
+            'X-Auth-Groups': user.groups.join()
+        };
+    }
 }
 
 module.exports = user;

@@ -74,9 +74,10 @@ class WorkstackPage extends Component {
 
     renderWorkstack() {
         const { workstack } = this.state;
+        const { match: { url } } = this.props;
         return (
             <Fragment>
-                <Workstack {...workstack} />
+                <Workstack baseUrl={url} {...workstack} />
             </Fragment>
         );
     }
