@@ -191,8 +191,7 @@ Workstack.propTypes = {
 };
 
 Workstack.defaultProps = {
-    items: [],
-    teamMembers: []
+    items: []
 };
 
 export default Workstack;
