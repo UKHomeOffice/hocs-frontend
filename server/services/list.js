@@ -146,7 +146,7 @@ const lists = {
         return {
             label: 'User workstack',
             items: workstackData,
-            allocateToWorkstackEndpoint: '/workstack/unallocate/'
+            allocateToWorkstackEndpoint: '/unallocate/'
         };
     },
     // TODO: Temporary code to support current workstack implementation
@@ -202,9 +202,9 @@ const lists = {
             items: workstackData,
             dashboard: dashboardData,
             teamMembers: userTeamsResponse.data.map(user => ({ label: user.username, value: user.id })),
-            allocateToUserEndpoint: '/workstack/allocate/user',
-            allocateToTeamEndpoint: '/workstack/allocate/team',
-            allocateToWorkstackEndpoint: '/workstack/unallocate/'
+            allocateToUserEndpoint: '/allocate/user',
+            allocateToTeamEndpoint: '/allocate/team',
+            allocateToWorkstackEndpoint: '/unallocate/'
         };
     },
     // TODO: Temporary code to support current workstack implementation
@@ -260,9 +260,9 @@ const lists = {
             items: workstackData,
             dashboard: dashboardData,
             teamMembers: userTeamsResponse.data.map(user => ({ label: user.username, value: user.id })),
-            allocateToUserEndpoint: '/workstack/allocate/user',
-            allocateToTeamEndpoint: '/workstack/allocate/team',
-            allocateToWorkstackEndpoint: '/workstack/unallocate/'
+            allocateToUserEndpoint: '/allocate/user',
+            allocateToTeamEndpoint: '/allocate/team',
+            allocateToWorkstackEndpoint: '/unallocate/'
         };
     },
     // TODO: Temporary code to support current workstack implementation
@@ -291,9 +291,9 @@ const lists = {
             label: ((stage = {}) => stage.label || 'Placeholder stage')(listRepository.stageTypes.stageTypes.find(i => i.value === stageId)),
             items: workstackData,
             teamMembers: userTeamsResponse.data.map(user => ({ label: user.username, value: user.id })),
-            allocateToUserEndpoint: '/workstack/allocate/user',
-            allocateToTeamEndpoint: '/workstack/allocate/team',
-            allocateToWorkstackEndpoint: '/workstack/unallocate'
+            allocateToUserEndpoint: '/allocate/user',
+            allocateToTeamEndpoint: '/allocate/team',
+            allocateToWorkstackEndpoint: '/unallocate'
         };
     },
     'CASE_TYPES': async ({ user }) => {

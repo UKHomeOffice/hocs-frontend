@@ -4,8 +4,13 @@ const {
     teamWorkstackMiddleware,
     workflowWorkstackMiddleware,
     stageWorkstackMiddleware,
-    workstackApiResponseMiddleware
+    workstackApiResponseMiddleware,
+    allocateToUser,
+    allocateToTeam,
+    unallocate
 } = require('../../middleware/workstack');
+
+const { fileMiddleware } = require('../../middleware/file');
 
 router.get('/user', userWorkstackMiddleware, (req, res, next) => {
     res.locals.workstack.breadcrumbs = [
@@ -40,5 +45,82 @@ router.get('/team/:teamId/workflow/:workflowId/stage/:stageId',stageWorkstackMid
     ];
     next();
 }, workstackApiResponseMiddleware);
+
+function sendWorkstackAllocateApiResponse(req, res) {
+    res.json({
+        notification: res.locals.notification,
+        workstack: res.locals.workstack
+    });
+}
+
+router.post('/team/:teamId/allocate/user',
+    fileMiddleware.any(),
+    allocateToUser,
+    teamWorkstackMiddleware,
+    sendWorkstackAllocateApiResponse
+);
+
+router.post('/team/:teamId/workflow/:workflowId/allocate/user',
+    fileMiddleware.any(),
+    allocateToUser,
+    workflowWorkstackMiddleware,
+    sendWorkstackAllocateApiResponse
+);
+
+router.post('/team/:teamId/workflow/:workflowId/stage/:stageId/allocate/user',
+    fileMiddleware.any(),
+    allocateToUser,
+    stageWorkstackMiddleware,
+    sendWorkstackAllocateApiResponse
+);
+
+router.post('/team/:teamId/allocate/team',
+    fileMiddleware.any(),
+    allocateToTeam,
+    teamWorkstackMiddleware,
+    sendWorkstackAllocateApiResponse
+);
+
+router.post('/team/:teamId/workflow/:workflowId/allocate/team',
+    fileMiddleware.any(),
+    allocateToTeam,
+    workflowWorkstackMiddleware,
+    sendWorkstackAllocateApiResponse
+);
+
+router.post('/team/:teamId/workflow/:workflowId/stage/:stageId/allocate/team',
+    fileMiddleware.any(),
+    allocateToTeam,
+    stageWorkstackMiddleware,
+    sendWorkstackAllocateApiResponse
+);
+
+router.post('/user/unallocate',
+    fileMiddleware.any(),
+    unallocate,
+    userWorkstackMiddleware,
+    sendWorkstackAllocateApiResponse
+);
+
+router.post('/team/:teamId/unallocate',
+    fileMiddleware.any(),
+    unallocate,
+    teamWorkstackMiddleware,
+    sendWorkstackAllocateApiResponse
+);
+
+router.post('/team/:teamId/workflow/:workflowId/unallocate',
+    fileMiddleware.any(),
+    unallocate,
+    workflowWorkstackMiddleware,
+    sendWorkstackAllocateApiResponse
+);
+
+router.post('/team/:teamId/workflow/:workflowId/stage/:stageId/unallocate',
+    fileMiddleware.any(),
+    unallocate,
+    stageWorkstackMiddleware,
+    sendWorkstackAllocateApiResponse
+);
 
 module.exports = router;

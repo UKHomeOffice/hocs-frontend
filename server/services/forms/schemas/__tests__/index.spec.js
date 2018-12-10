@@ -22,7 +22,7 @@ jest.mock('../../../../services/list.js', () => ({
 describe('Form schema definitions', async () => {
     await Object.entries(formRepository).map(async ([label, form]) => {
         it(`${label} should be a valid schema definition `, async () => {
-            const result = await form.call(this, {});
+            const result = await form.call(this, { user: { id: 1234, roles: [], groups: [] } });
             expect(result).toBeDefined();
             expect(result.schema).toBeDefined();
             expect(result.schema.title).toBeDefined();

@@ -457,6 +457,10 @@ a.card__body {
   }
 }
 
+.ribbon--warning {
+  background-color: $govuk-error-colour;
+}
+
 $border-colour: govuk-colour("grey-2");
 
 .tabs > ol, .tabs > ul {
