@@ -153,7 +153,7 @@ const actions = {
                     if (!context) {
                         throw new ActionError('Unable to remove, no context provided');
                     }
-                    await caseworkServiceClient.delete(`/case/${caseId}/topic/${context}`);
+                    await caseworkServiceClient.delete(`/case/${caseId}/topic/${context}`, headers);
                     break;
                 case actionTypes.IS_MEMBER:
                     if (form.data['isMember'] === 'true') {
