@@ -13,6 +13,16 @@ $govuk-font-family-tabular: 'helvetica neue',Arial, Helvetica, sans-serif !defau
   width: inherit;
 }
 
+.govuk-button--link {
+  @extend %govuk-link;
+  @extend %govuk-body-m;
+  color: $govuk-link-colour;
+  cursor: pointer;
+  background: none;
+  border: none;
+  text-align: left;
+}
+
 // Code block styling:
 .code {
   font-family: monospace;

@@ -33,6 +33,22 @@ services:
     depends_on:
       - clamd
 
+  keycloak:
+    image: jboss/keycloak
+    restart: always
+    ports:
+    - 9990:9990
+    - 9081:8080
+    networks:
+    - hocs-network
+    environment:
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: password1
+      KEYCLOAK_IMPORT: /tmp/local-realm.json
+      DB_VENDOR: h2
+    volumes:
+    - ${PWD}/keycloak:/tmp
+
   localstack:
     image: localstack/localstack:latest
     ports:
@@ -106,6 +122,7 @@ services:
       CASE_QUEUE_DLQ_NAME: 'case-queue-dlq'
       DB_HOST: 'postgres'
       AWS_LOCAL_HOST: 'localstack'
+      HOCS_INFO_SERVICE: 'http://info:8080'
     depends_on:
       - postgres
 
@@ -143,6 +160,11 @@ services:
       SPRING_PROFILES_ACTIVE: 'development, local'
       SERVER_PORT: 8080
       DB_HOST: 'postgres'
+      CASE_QUEUE_NAME: 'case-queue'
+      DOCS_QUEUE_NAME: 'document-queue'
+      HOCS_CASE_SERVICE: 'http://casework:8080'
+      HOCS_DOCUMENT_SERVICE: 'http://documents:8080'
+      KEYCLOAK_SERVER_ROOT: 'http://keycloak:8080'
     depends_on:
       - postgres
 

@@ -9,7 +9,7 @@ import {
     clearApiStatus
 } from '../contexts/actions/index.jsx';
 import status from '../helpers/api-status.js';
-import Workstack from '../common/components/workstack.jsx';
+import Workstack from '../common/components/workstack-allocate.jsx';
 import Dashboard from '../common/components/dashboard-new.jsx';
 
 const renderBreadCrumb = ({ key, label, to, isLast }) => (
@@ -72,10 +72,11 @@ class WorkstackPage extends Component {
             });
     }
 
-    renderWorkstack(workstack) {
+    renderWorkstack() {
+        const { workstack } = this.state;
         return (
             <Fragment>
-                <Workstack workstack={workstack} />
+                <Workstack {...workstack} />
             </Fragment>
         );
     }
@@ -104,7 +105,7 @@ class WorkstackPage extends Component {
                             {workstack.label}
                         </h1>
                         {workstack.dashboard && this.renderDashboard(workstack.dashboard)}
-                        {this.renderWorkstack(workstack.items)}
+                        {this.renderWorkstack()}
                     </Fragment>
                     : null
                 }
