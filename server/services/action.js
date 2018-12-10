@@ -3,6 +3,7 @@ const actionTypes = require('./actions/types');
 const { ActionError } = require('../models/error');
 const logger = require('../libs/logger');
 const events = require('../models/events');
+const User = require('../models/user');
 
 function createDocumentSummaryObjects(form, type) {
     return form.schema.fields.reduce((reducer, field) => {
@@ -36,7 +37,7 @@ function createCase(url, { caseType, form }, headers) {
 }
 
 function addDocument(url, form, headers) {
-    return workflowServiceClient.post(url, addDocumentRequest(form),headers);
+    return workflowServiceClient.post(url, addDocumentRequest(form), headers);
 }
 
 function updateCase({ caseId, stageId, form }, headers) {
@@ -72,11 +73,8 @@ function handleWorkflowSuccess(response, { caseId, stageId }) {
 
 const actions = {
     ACTION: async ({ workflow, context, form, user }) => {
-        let headers = {};
-        headers.headers = {
-            'X-Auth-UserId': user.id,
-            'X-Auth-Roles': user.roles.join(),
-            'X-Auth-Groups': user.groups.join()
+        let headers = {
+            headers: User.createHeaders(user)
         };
         try {
             if (form && form.action) {
@@ -127,11 +125,7 @@ const actions = {
     },
     CASE: async ({ caseId, stageId, entity, context, form, user }) => {
         let headers = {
-            headers: {
-                'X-Auth-UserId': user.id,
-                'X-Auth-Roles': user.roles.join(),
-                'X-Auth-Groups': user.groups.join()
-            }
+            headers: User.createHeaders(user)
         };
         try {
             if (form && form.action && entity) {
@@ -147,7 +141,7 @@ const actions = {
                     await docsServiceClient.delete(`/case/${caseId}/document/${context}`, headers);
                     break;
                 case actionTypes.ADD_TOPIC:
-                    await caseworkServiceClient.post(`/case/${caseId}/topic`, { topicUUID: form.data['topic'] },headers);
+                    await caseworkServiceClient.post(`/case/${caseId}/topic`, { topicUUID: form.data['topic'] }, headers);
                     break;
                 case actionTypes.REMOVE_TOPIC:
                     if (!context) {
@@ -181,11 +175,8 @@ const actions = {
         }
     },
     WORKFLOW: async ({ caseId, stageId, form, user }) => {
-        let headers = {};
-        headers.headers = {
-            'X-Auth-UserId': user.id,
-            'X-Auth-Roles': user.roles.join(),
-            'X-Auth-Groups': user.groups.join()
+        let headers = {
+            headers: User.createHeaders(user)
         };
         logger.info({ event: events.WORKFLOW_ACTION, user: user.username, action: actionTypes.UPDATE_CASE, case: caseId });
         try {

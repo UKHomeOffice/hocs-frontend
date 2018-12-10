@@ -10,10 +10,6 @@ jest.mock('../../libs/request.js', () => ({
     }
 }));
 
-jest.mock('../../models/user.js', () => ({
-    hasRole: () => true
-}));
-
 jest.mock('../../config', () => ({
     forContext: () => ({
         DOCUMENT_WHITELIST: ['1', '2', '3']
@@ -103,7 +99,7 @@ describe('getList', () => {
         })));
         const listService = require('../list');
         const { getList } = listService;
-        const list = await getList('CASE_TYPES', { user: { roles: [] } });
+        const list = await getList('CASE_TYPES', { user: { uuid: '529d8b3d-4c07-45f7-b6d3-b53ea57177cf', groups: [], roles: [] } });
         expect(list).toBeDefined();
         expect(list.length).toEqual(3);
     });
@@ -120,7 +116,7 @@ describe('getList', () => {
         })));
         const listService = require('../list');
         const { getList } = listService;
-        const list = await getList('CASE_TYPES_BULK', { user: { roles: [] } });
+        const list = await getList('CASE_TYPES_BULK', { user: { uuid: '529d8b3d-4c07-45f7-b6d3-b53ea57177cf', groups: [], roles: [] } });
         expect(list).toBeDefined();
         expect(list.length).toEqual(3);
     });
@@ -147,7 +143,7 @@ describe('getList', () => {
         })));
         const listService = require('../list');
         const { getList } = listService;
-        const list = await getList('MEMBER_LIST', { user: { roles: [] } });
+        const list = await getList('MEMBER_LIST', { user: { uuid: '529d8b3d-4c07-45f7-b6d3-b53ea57177cf', groups: [], roles: [] } });
         expect(list).toBeDefined();
         expect(list.length).toEqual(2);
         expect(list[0].options.length).toEqual(2);
@@ -163,7 +159,7 @@ describe('getList', () => {
         })));
         const listService = require('../list');
         const { getList } = listService;
-        const list = await getList('CASE_STANDARD_LINES', { user: { roles: [] } });
+        const list = await getList('CASE_STANDARD_LINES', { user: { uuid: '529d8b3d-4c07-45f7-b6d3-b53ea57177cf', groups: [], roles: [] } });
         expect(list).toBeDefined();
         expect(list.length).toEqual(1);
     });
@@ -177,7 +173,7 @@ describe('getList', () => {
         })));
         const listService = require('../list');
         const { getList } = listService;
-        const list = await getList('CASE_TEMPLATES', { user: { roles: [] } });
+        const list = await getList('CASE_TEMPLATES', { user: { uuid: '529d8b3d-4c07-45f7-b6d3-b53ea57177cf', groups: [], roles: [] } });
         expect(list).toBeDefined();
         expect(list.length).toEqual(1);
     });
@@ -197,7 +193,7 @@ describe('getList', () => {
         })));
         const listService = require('../list');
         const { getList } = listService;
-        const list = await getList('TOPICS_CASETYPE', { user: { roles: [] } });
+        const list = await getList('TOPICS_CASETYPE', { user: { uuid: '529d8b3d-4c07-45f7-b6d3-b53ea57177cf', groups: [], roles: [] } });
         expect(list).toBeDefined();
         expect(list.length).toEqual(1);
         expect(list[0].options.length).toEqual(3);
@@ -216,7 +212,7 @@ describe('getList', () => {
         })));
         const listService = require('../list');
         const { getList } = listService;
-        const list = await getList('CASE_TOPICS', { user: { roles: [] } });
+        const list = await getList('CASE_TOPICS', { user: { uuid: '529d8b3d-4c07-45f7-b6d3-b53ea57177cf', groups: [], roles: [] } });
         expect(list).toBeDefined();
         expect(list.length).toEqual(3);
     });
@@ -234,7 +230,7 @@ describe('getList', () => {
         })));
         const listService = require('../list');
         const { getList } = listService;
-        const list = await getList('CORRESPONDENT_TYPES', { user: { roles: [] } });
+        const list = await getList('CORRESPONDENT_TYPES', { user: { uuid: '529d8b3d-4c07-45f7-b6d3-b53ea57177cf', groups: [], roles: [] } });
         expect(list).toBeDefined();
         expect(list.length).toEqual(3);
     });
@@ -252,7 +248,7 @@ describe('getList', () => {
         })));
         const listService = require('../list');
         const { getList } = listService;
-        const list = await getList('CASE_CORRESPONDENTS', { user: { id: 'test', groups:[], roles: [] } });
+        const list = await getList('CASE_CORRESPONDENTS', { user: { uuid: '529d8b3d-4c07-45f7-b6d3-b53ea57177cf', groups: [], roles: [] } });
         expect(list).toBeDefined();
         expect(list.length).toEqual(3);
     });
