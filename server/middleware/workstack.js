@@ -1,7 +1,7 @@
 const { getList } = require('../services/list');
 const logger = require('../libs/logger');
 const User = require('../models/user');
-const { workflowServiceClient } = require('../libs/request');
+const { caseworkServiceClient } = require('../libs/request');
 
 async function userWorkstackMiddleware(req, res, next) {
     try {
@@ -49,7 +49,7 @@ function workstackApiResponseMiddleware(req, res) {
 
 const allocateUser = async (res, [endpoint, body, headers]) => {
     try {
-        await workflowServiceClient.post(endpoint, body, headers);
+        await caseworkServiceClient.post(endpoint, body, headers);
         return;
     } catch (error) {
         logger.error({ event: 'ALLOCATION_FAILED', endpoint, body, headers, status: error.response.status });
@@ -66,7 +66,7 @@ async function allocateToTeam(req, res, next) {
     if (selected_cases.length > 0 && selected_user) {
         const requests = selected_cases
             .map(selected => selected.split(':'))
-            .map(([caseId, stageId]) => [`/case/${caseId}/stage/${stageId}/userUUID`, { userUUID: selected_user }, {
+            .map(([caseId, stageId]) => [`/case/${caseId}/stage/${stageId}/user`, { userUUID: selected_user }, {
                 headers: User.createHeaders(req.user)
             }])
             .map(async options => await allocateUser(res, options));
@@ -83,7 +83,7 @@ async function allocateToUser(req, res, next) {
     if (selected_cases.length > 0) {
         const requests = selected_cases
             .map(selected => selected.split(':'))
-            .map(([caseId, stageId]) => [`/case/${caseId}/stage/${stageId}/userUUID`, { userUUID: req.user.id }, {
+            .map(([caseId, stageId]) => [`/case/${caseId}/stage/${stageId}/user`, { userUUID: req.user.id }, {
                 headers: User.createHeaders(req.user)
             }])
             .map(async options => await allocateUser(res, options));
@@ -100,7 +100,7 @@ async function unallocate(req, res, next) {
     if (selected_cases.length > 0) {
         const requests = selected_cases
             .map(selected => selected.split(':'))
-            .map(([caseId, stageId]) => [`/case/${caseId}/stage/${stageId}/userUUID`, { userUUID: null }, {
+            .map(([caseId, stageId]) => [`/case/${caseId}/stage/${stageId}/user`, { userUUID: null }, {
                 headers: User.createHeaders(req.user)
             }])
             .map(async options => await allocateUser(res, options));

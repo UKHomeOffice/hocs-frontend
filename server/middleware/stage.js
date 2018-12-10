@@ -1,6 +1,6 @@
 const actionService = require('../services/action');
 const logger = require('../libs/logger');
-const { workflowServiceClient } = require('../libs/request');
+const { caseworkServiceClient } = require('../libs/request');
 
 async function stageResponseMiddleware(req, res, next) {
     const { caseId, stageId } = req.params;
@@ -53,7 +53,7 @@ async function allocateCase(req, res, next) {
         }
     };
     try {
-        await workflowServiceClient.post(`/case/${caseId}/stage/${stageId}/userUUID`, {
+        await caseworkServiceClient.post(`/case/${caseId}/stage/${stageId}/user`, {
             userUUID: user.uuid,
         }, headers);
     } catch (e) {
