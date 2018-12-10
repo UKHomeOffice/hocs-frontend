@@ -99,7 +99,7 @@ router.post('/workstack/user/unallocate',
     fileMiddleware.any(),
     unallocate,
     (req, res) => {
-        res.redirect(`/workstack/user`);
+        res.redirect('/workstack/user');
     }
 );
 
