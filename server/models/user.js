@@ -21,7 +21,7 @@ class user {
 
     static createHeaders(user) {
         return {
-            'X-Auth-UserId': user.id,
+            'X-Auth-UserId': user.uuid,
             'X-Auth-Roles': user.roles.join(),
             'X-Auth-Groups': user.groups.join()
         };
