@@ -83,7 +83,7 @@ async function allocateToUser(req, res, next) {
     if (selected_cases.length > 0) {
         const requests = selected_cases
             .map(selected => selected.split(':'))
-            .map(([caseId, stageId]) => [`/case/${caseId}/stage/${stageId}/user`, { userUUID: req.user.id }, {
+            .map(([caseId, stageId]) => [`/case/${caseId}/stage/${stageId}/user`, { userUUID: req.user.uuid }, {
                 headers: User.createHeaders(req.user)
             }])
             .map(async options => await allocateUser(res, options));
