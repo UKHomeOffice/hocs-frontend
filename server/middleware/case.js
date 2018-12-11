@@ -1,5 +1,5 @@
 const actionService = require('../services/action');
-const { caseworkServiceClient } = require('../libs/request');
+const { getList } = require('../services/list');
 
 async function caseResponseMiddleware(req, res, next) {
     const { form, user } = req;
@@ -22,17 +22,9 @@ async function caseApiResponseMiddleware(req, res, next) {
 }
 
 async function caseSummaryMiddleware(req, res, next) {
-    const { user } = req;
     try {
-        let headers = {};
-        headers.headers = {
-            'X-Auth-UserId': user.id,
-            'X-Auth-Roles': user.roles.join(),
-            'X-Auth-Groups': user.groups.join()
-        };
-        const { caseId } = req.params;
-        const response = await caseworkServiceClient.get(`/case/${caseId}`, headers);
-        res.locals.summary = response.data;
+        const summary = await getList('CASE_SUMMARY', { ...req.params, user: req.user })
+        res.locals.summary = summary;
         next();
     } catch (e) {
         next(e);

@@ -7,7 +7,7 @@ const { caseSummaryMiddleware, caseSummaryApiResponseMiddleware, caseApiResponse
 const { getFormForCase, getFormForStage } = require('../../services/form');
 
 router.get('/:caseId/stage/:stageId/allocate', allocateCase);
-router.post(['/:caseId/stage/:stageId/entity/:entity/:context/:action','/:caseId/stage/:stageId/entity/:entity/:action'],
+router.post(['/:caseId/stage/:stageId/entity/:entity/:context/:action', '/:caseId/stage/:stageId/entity/:entity/:action'],
     getFormForCase,
     fileMiddleware.any(),
     processMiddleware,

@@ -1,32 +1,64 @@
 import React, { Component, Fragment } from 'react';
+import axios from 'axios';
+import { ApplicationConsumer } from '../../contexts/application.jsx';
 import PropTypes from 'prop-types';
 
 class StageSummary extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = { summary: props.summary };
+    }
+
+    componentDidMount() {
+        const { summary } = this.props;
+        if (!summary) {
+            this.getSummary();
+        }
+    }
+
+    getSummary() {
+        const { page } = this.props;
+        if (page && page.params && page.params.caseId) {
+            axios.get(`/api/case/${page.params.caseId}/summary`)
+                .then(response => {
+                    this.setState({ summary: response.data });
+                });
+        }
+    }
+
+    renderActiveStage({ stage, assignedTeam, assignedUser }) {
+        return (
+            <Fragment key={stage}>
+                <h3 className='govuk-heading-m'>{stage}</h3>
+                <div className='margin-left--small'>
+                    <p className='govuk-body'><strong>Team</strong> {assignedTeam}</p>
+                    <p className='govuk-body'><strong>User</strong> {assignedUser}</p>
+                </div>
+            </Fragment>
+        );
+    }
+
     render() {
-        const { stages } = this.props;
+        const { summary } = this.state;
         return (
             <Fragment>
-                <h2 className="govuk-heading-m">Stages</h2>
-                {
-                    stages && stages.map((stage, i) => (
-                        <table key={i} className="govuk-table">
-                            <caption className="govuk-table__caption">{stage.type}</caption>
-                            <tbody className="govuk-table__body">
-                                <tr className="govuk-table__row">
-                                    <th className="govuk-table__header" scope="row">UUID</th>
-                                    <td className="govuk-table__cell ">{stage.uuid}</td>
-                                </tr>
-                                {
-                                    stage.data && Object.entries(JSON.parse(stage.data)).map(([field, value], i) => (
-                                        <tr key={i} className="govuk-table__row">
-                                            <th className="govuk-table__header" scope="row">{field}</th>
-                                            <td className="govuk-table__cell ">{value}</td>
-                                        </tr>
-                                    ))
-                                }
-                            </tbody>
-                        </table>
-                    ))
+                {summary &&
+                    <Fragment>
+                        <h3 className='govuk-heading-m'>Case</h3>
+                        <div className='margin-left--small'>
+                            {summary.case && summary.case.received && <p className='govuk-body'>
+                                <strong>Date received</strong> {summary.case.received}
+                            </p>}
+                            {summary.case && summary.case.deadline && <p className='govuk-body'>
+                                <strong>Deadline</strong> {summary.case.deadline}
+                            </p>}
+                        </div>
+                        <h3 className='govuk-heading-m'>Active stages</h3>
+                        <div className='margin-left--small'>
+                            {summary.stages.map(stage => this.renderActiveStage(stage))}
+                        </div>
+                    </Fragment>
                 }
             </Fragment>
         );
@@ -34,7 +66,10 @@ class StageSummary extends Component {
 }
 
 StageSummary.propTypes = {
-    stages: PropTypes.array.isRequired
 };
 
-export default StageSummary;
+export default props => (
+    <ApplicationConsumer>
+        {({ dispatch, summary, page }) => <StageSummary {...props} dispatch={dispatch} summary={summary} page={page} />}
+    </ApplicationConsumer>
+);

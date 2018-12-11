@@ -4,6 +4,7 @@ import { ApplicationConsumer } from '../../contexts/application.jsx';
 import { Link } from 'react-router-dom';
 import DocumentPane from './document-pane.jsx';
 import CaseNotes from './case-notes.jsx';
+import StageSummary from './stage-summary.jsx';
 
 class SideBar extends Component {
 
@@ -43,7 +44,7 @@ class SideBar extends Component {
                         {this.renderTabButton('Documents', 'DOCUMENTS')}
                         {this.renderTabButton('Timeline', 'TIMELINE')}
                     </ul>
-                    {this.isActive('SUMMARY') && <div className='govuk-body'>PLACEHOLDER_SUMMARY</div>}
+                    {this.isActive('SUMMARY') && <StageSummary />}
                     {this.isActive('DOCUMENTS') && <DocumentPane />}
                     {this.isActive('TIMELINE') && <CaseNotes />}
                 </div>
