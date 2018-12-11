@@ -186,7 +186,7 @@ const lists = {
             label: ((team = {}) => team.displayName || 'Placeholder team')(listRepository.teams.find(i => i.type === teamId)),
             items: workstackData,
             dashboard: dashboardData,
-            teamMembers: userTeamsResponse.data.map(user => ({ label: `${user.firstname} ${user.lastname}(${user.username})`, value: user.id })),
+            teamMembers: userTeamsResponse.data.map(user => ({ label: `${user.firstName} ${user.lastName}(${user.username})`, value: user.id })),
             allocateToUserEndpoint: '/allocate/user',
             allocateToTeamEndpoint: '/allocate/team',
             allocateToWorkstackEndpoint: '/unallocate/'
@@ -236,7 +236,7 @@ const lists = {
             label: ((workflow = {}) => workflow.label || 'Placeholder workflow')(listRepository.caseTypes.caseTypes.find(i => i.value === workflowId)),
             items: workstackData,
             dashboard: dashboardData,
-            teamMembers: userTeamsResponse.data.map(user => ({ label: `${user.firstname} ${user.lastname}(${user.username})`, value: user.id })),
+            teamMembers: userTeamsResponse.data.map(user => ({ label: `${user.firstName} ${user.lastName}(${user.username})`, value: user.id })),
             allocateToUserEndpoint: '/allocate/user',
             allocateToTeamEndpoint: '/allocate/team',
             allocateToWorkstackEndpoint: '/unallocate/'
@@ -259,7 +259,7 @@ const lists = {
         return {
             label: ((stage = {}) => stage.label || 'Placeholder stage')(listRepository.stageTypes.stageTypes.find(i => i.value === stageId)),
             items: workstackData,
-            teamMembers: userTeamsResponse.data.map(user => ({ label: `${user.firstname} ${user.lastname}(${user.username})`, value: user.id })),
+            teamMembers: userTeamsResponse.data.map(user => ({ label: `${user.firstName} ${user.lastName}(${user.username})`, value: user.id })),
             allocateToUserEndpoint: '/allocate/user',
             allocateToTeamEndpoint: '/allocate/team',
             allocateToWorkstackEndpoint: '/unallocate'
