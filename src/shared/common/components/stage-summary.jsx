@@ -29,13 +29,19 @@ class StageSummary extends Component {
 
     renderActiveStage({ stage, assignedTeam, assignedUser }) {
         return (
-            <Fragment key={stage}>
-                <h3 className='govuk-heading-m'>{stage}</h3>
-                <div className='margin-left--small'>
-                    <p className='govuk-body'><strong>Team</strong> {assignedTeam}</p>
-                    <p className='govuk-body'><strong>User</strong> {assignedUser}</p>
-                </div>
-            </Fragment>
+            <table key={stage} className='govuk-table margin-left--small'>
+                <caption className='govuk-table__caption' >{stage}</caption>
+                <tbody className='govuk-table__body'>
+                    <tr className='govuk-table__row'>
+                        <th className='govuk-table__header'>Team</th>
+                        <td className='govuk-table__cell'>{assignedTeam}</td>
+                    </tr>
+                    <tr className='govuk-table__cell'>
+                        <th className='govuk-table__header'>User</th>
+                        <td className='govuk-table__cell'>{assignedUser}</td>
+                    </tr>
+                </tbody>
+            </table>
         );
     }
 
@@ -45,19 +51,22 @@ class StageSummary extends Component {
             <Fragment>
                 {summary &&
                     <Fragment>
-                        <h3 className='govuk-heading-m'>Case</h3>
-                        <div className='margin-left--small'>
-                            {summary.case && summary.case.received && <p className='govuk-body'>
-                                <strong>Date received</strong> {summary.case.received}
-                            </p>}
-                            {summary.case && summary.case.deadline && <p className='govuk-body'>
-                                <strong>Deadline</strong> {summary.case.deadline}
-                            </p>}
-                        </div>
-                        <h3 className='govuk-heading-m'>Active stages</h3>
-                        <div className='margin-left--small'>
-                            {summary.stages.map(stage => this.renderActiveStage(stage))}
-                        </div>
+                        <h2 className='govuk-heading-m'>Case</h2>
+                        <table className='govuk-table margin-left--small'>
+                            <caption className='govuk-table__caption' >Summary</caption>
+                            <tbody className='govuk-table__body'>
+                                {summary.case && summary.case.received && <tr className='govuk-table__row'>
+                                    <th className='govuk-table__header'>Date received</th>
+                                    <td className='govuk-table__cell'>{summary.case.received}</td>
+                                </tr>}
+                                {summary.case && summary.case.deadline && <tr className='govuk-table__cell'>
+                                    <th className='govuk-table__header'>Deadline</th>
+                                    <td className='govuk-table__cell'>{summary.case.deadline}</td>
+                                </tr>}
+                            </tbody>
+                        </table>
+                        <h2 className='govuk-heading-m'>Active stages</h2>
+                        {summary.stages.map(stage => this.renderActiveStage(stage))}
                     </Fragment>
                 }
             </Fragment>
@@ -66,10 +75,14 @@ class StageSummary extends Component {
 }
 
 StageSummary.propTypes = {
+    summary: PropTypes.object,
+    page: PropTypes.object
 };
 
-export default props => (
+const WrappedStageSummary = props => (
     <ApplicationConsumer>
         {({ dispatch, summary, page }) => <StageSummary {...props} dispatch={dispatch} summary={summary} page={page} />}
     </ApplicationConsumer>
 );
+
+export default WrappedStageSummary;

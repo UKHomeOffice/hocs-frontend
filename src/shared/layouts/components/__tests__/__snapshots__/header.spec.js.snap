@@ -91,6 +91,16 @@ exports[`Layout header component should render with default props 1`] = `
                 View test form
               </Link>
             </li>
+            <li
+              className="govuk-header__navigation-item"
+            >
+              <a
+                className="govuk-header__link"
+                href="/logout"
+              >
+                Logout
+              </a>
+            </li>
           </ul>
         </nav>
       </div>
@@ -189,6 +199,16 @@ exports[`Layout header component should render without crest when service is not
               >
                 View test form
               </Link>
+            </li>
+            <li
+              className="govuk-header__navigation-item"
+            >
+              <a
+                className="govuk-header__link"
+                href="/logout"
+              >
+                Logout
+              </a>
             </li>
           </ul>
         </nav>

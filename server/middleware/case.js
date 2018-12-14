@@ -23,7 +23,7 @@ async function caseApiResponseMiddleware(req, res, next) {
 
 async function caseSummaryMiddleware(req, res, next) {
     try {
-        const summary = await getList('CASE_SUMMARY', { ...req.params, user: req.user })
+        const summary = await getList('CASE_SUMMARY', { ...req.params, user: req.user });
         res.locals.summary = summary;
         next();
     } catch (e) {

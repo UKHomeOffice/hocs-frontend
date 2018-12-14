@@ -1,5 +1,5 @@
 import React from 'react';
-import Stage from '../stage-summary.jsx';
+import WrappedSummary from '../stage-summary.jsx';
 
 const mockStages = [
     {
@@ -11,7 +11,9 @@ const mockStages = [
 describe('Stage summary component', () => {
 
     it('should render with default props', () => {
-        const wrapper = render(<Stage stages={mockStages} />);
+        const outer = shallow(<WrappedSummary dispatch={jest.fn()} stages={mockStages} />);
+        const Summary = outer.props().children;
+        const wrapper = render(<Summary />);
         expect(wrapper).toBeDefined();
         expect(wrapper).toMatchSnapshot();
     });

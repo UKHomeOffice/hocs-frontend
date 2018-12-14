@@ -266,21 +266,16 @@ const lists = {
         };
     },
     'CASE_TYPES': async ({ user }) => {
-        // const list = listDefinitions['workflowTypes'].call(this);
-        // const response = await fetchList(list, {
-        //     headers: User.createHeaders(user)
-        // });
-        // if (response.data.caseTypes) {
-        //     return response.data.caseTypes.sort(compareListItems);
-        // } else {
-        //     logger.warn({ event: events.FETCH_LIST_RETURN_EMPTY, list: 'CASE_TYPES' });
-        //     return [];
-        // }
-
-        return [
-            { label: 'Ministerial', value: 'MIN' }
-        ]
-
+        const list = listDefinitions['workflowTypes'].call(this);
+        const response = await fetchList(list, {
+            headers: User.createHeaders(user)
+        });
+        if (response.data.caseTypes) {
+            return response.data.caseTypes.sort(compareListItems);
+        } else {
+            logger.warn({ event: events.FETCH_LIST_RETURN_EMPTY, list: 'CASE_TYPES' });
+            return [];
+        }
     },
     'CASE_TYPES_BULK': async ({ user }) => {
         const list = listDefinitions['workflowTypesBulk'].call(this);
