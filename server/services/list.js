@@ -272,7 +272,6 @@ const lists = {
             logger.warn({ event: events.FETCH_LIST_RETURN_EMPTY, list: 'CASE_TYPES' });
             return [];
         }
-
     },
     'CASE_TYPES_BULK': async ({ user }) => {
         const list = listDefinitions['workflowTypesBulk'].call(this);
@@ -450,6 +449,39 @@ const lists = {
         }, caseworkServiceClient);
         if (response.data.correspondents) {
             return response.data.correspondents.map(c => ({ label: c.fullname, value: c.uuid }));
+        } else {
+            logger.warn({ event: events.FETCH_LIST_RETURN_EMPTY, list: 'CASE_CORRESPONDENTS' });
+            return [];
+        }
+    },
+    'CASE_SUMMARY': async ({ caseId, user }) => {
+        const list = listDefinitions['caseSummary'].call(this, { caseId });
+        const response = await fetchList(list, {
+            headers: User.createHeaders(user)
+        }, caseworkServiceClient);
+        if (response.data) {
+            return ({
+                case: {
+                    received: response.data.DateReceived ? Intl.DateTimeFormat('en-GB').format(new Date(response.data.DateReceived)) : null,
+                    deadline: response.data.caseDeadline ? Intl.DateTimeFormat('en-GB').format(new Date(response.data.caseDeadline)) : null
+                },
+                stages: response.data.activeStages.map(activeStage => ({
+                    stage: (stage => {
+                        const stageType = listRepository.stageTypes.stageTypes.find(i => i.value === stage) || {};
+                        return stageType.label;
+                    })(activeStage.stage),
+                    assignedUser: (user => {
+                        if (user) {
+                            const assignedUser = listRepository.users.find(i => i.id === user) || {};
+                            return assignedUser.username;
+                        }
+                    })(activeStage.assignedToUserUUID),
+                    assignedTeam: (team => {
+                        const assignedTeam = listRepository.teams.find(i => i.type === team) || {};
+                        return assignedTeam.displayName;
+                    })(activeStage.assignedToTeamUUID)
+                }))
+            });
         } else {
             logger.warn({ event: events.FETCH_LIST_RETURN_EMPTY, list: 'CASE_CORRESPONDENTS' });
             return [];

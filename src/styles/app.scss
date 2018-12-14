@@ -478,7 +478,6 @@ $border-colour: govuk-colour("grey-2");
 .tabs > ol, .tabs > ul {
   @include govuk-clearfix;
   list-style: none;
-  margin: 0 16px;
   padding: 0;
   border-top: 1px solid $border-colour;
 
