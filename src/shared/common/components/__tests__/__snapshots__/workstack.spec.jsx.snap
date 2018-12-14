@@ -21,22 +21,17 @@ exports[`Dashboard component should render with default props 1`] = `
         <th
           class="govuk-table__header"
         >
-          Type
+          Case Reference
         </th>
         <th
           class="govuk-table__header"
         >
-          Reference
+          Current Stage
         </th>
         <th
           class="govuk-table__header"
         >
-          Stage
-        </th>
-        <th
-          class="govuk-table__header"
-        >
-          User
+          Owner
         </th>
         <th
           class="govuk-table__header"
@@ -46,7 +41,7 @@ exports[`Dashboard component should render with default props 1`] = `
         <th
           class="govuk-table__header"
         >
-          Deadline
+          Stage Deadline
         </th>
       </tr>
     </thead>
@@ -56,46 +51,6 @@ exports[`Dashboard component should render with default props 1`] = `
       <tr
         class="govuk-radios govuk-table__row"
       >
-        <td
-          class="govuk-table__cell"
-        />
-        <td
-          class="govuk-table__cell"
-        >
-          <a
-            class="govuk-link govuk-!-margin-right-3"
-            href="/case/undefined/stage/undefined"
-          >
-            ABC/0000002/AA
-          </a>
-        </td>
-        <td
-          class="govuk-table__cell"
-        >
-          Stage type
-        </td>
-        <td
-          class="govuk-table__cell"
-        >
-          Unassigned
-        </td>
-        <td
-          class="govuk-table__cell"
-        >
-          Team 1
-        </td>
-        <td
-          class="govuk-table__cell"
-        >
-          2020-01-01
-        </td>
-      </tr>
-      <tr
-        class="govuk-radios govuk-table__row"
-      >
-        <td
-          class="govuk-table__cell"
-        />
         <td
           class="govuk-table__cell"
         >
@@ -115,6 +70,40 @@ exports[`Dashboard component should render with default props 1`] = `
           class="govuk-table__cell"
         >
           User 1
+        </td>
+        <td
+          class="govuk-table__cell"
+        >
+          Team 1
+        </td>
+        <td
+          class="govuk-table__cell"
+        >
+          2020-01-01
+        </td>
+      </tr>
+      <tr
+        class="govuk-radios govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell"
+        >
+          <a
+            class="govuk-link govuk-!-margin-right-3"
+            href="/case/undefined/stage/undefined"
+          >
+            ABC/0000002/AA
+          </a>
+        </td>
+        <td
+          class="govuk-table__cell"
+        >
+          Stage type
+        </td>
+        <td
+          class="govuk-table__cell"
+        >
+          Unassigned
         </td>
         <td
           class="govuk-table__cell"

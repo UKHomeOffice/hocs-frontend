@@ -102,7 +102,7 @@ class WorkstackPage extends Component {
                 {workstack ?
                     <Fragment>
                         {workstack.breadcrumbs && this.renderBreadCrumb(workstack.breadcrumbs)}
-                        <h1 className="govuk-heading-l">
+                        <h1 className="govuk-heading-m">
                             {workstack.label}
                         </h1>
                         {workstack.dashboard && this.renderDashboard(workstack.dashboard)}

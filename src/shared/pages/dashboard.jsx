@@ -48,9 +48,9 @@ class DashboardPage extends Component {
         const { dashboard } = this.state;
         return (
             <Fragment>
-                <h2 className='govuk-heading-l'>My work</h2>
+                <h2 className='govuk-heading-m'>My Cases</h2>
                 {dashboard && dashboard.user && <Dashboard dashboard={dashboard.user} absoluteUrl={'/workstack/user'} alwaysLink={true} />}
-                <h2 className='govuk-heading-l'>My teams work</h2>
+                <h2 className='govuk-heading-m'>Team Cases</h2>
                 {dashboard && dashboard.teams && <Dashboard dashboard={dashboard.teams} baseUrl={'/workstack'} alwaysLink={true} />}
             </Fragment>
         );

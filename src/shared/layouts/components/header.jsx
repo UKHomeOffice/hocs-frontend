@@ -27,9 +27,6 @@ class Header extends Component {
                             <li className='govuk-header__navigation-item'>
                                 <Link to='/action/template/add' className='govuk-header__link'>Add template</Link>
                             </li>
-                            <li className='govuk-header__navigation-item'>
-                                <Link to='/action/test/form' className='govuk-header__link'>View test form</Link>
-                            </li>
                         </ul>
                     </nav>
                 </div>

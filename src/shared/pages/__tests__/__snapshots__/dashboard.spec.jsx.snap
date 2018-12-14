@@ -18,15 +18,39 @@ exports[`Dashboard page component should render with default props 1`] = `
       "results": Array [
         Object {
           "isThrow": false,
-          "value": Promise {},
+          "value": Promise {
+            "_a": undefined,
+            "_c": Array [],
+            "_d": true,
+            "_h": 0,
+            "_n": false,
+            "_s": 1,
+            "_v": undefined,
+          },
         },
         Object {
           "isThrow": false,
-          "value": Promise {},
+          "value": Promise {
+            "_a": undefined,
+            "_c": Array [],
+            "_d": true,
+            "_h": 0,
+            "_n": false,
+            "_s": 1,
+            "_v": undefined,
+          },
         },
         Object {
           "isThrow": false,
-          "value": Promise {},
+          "value": Promise {
+            "_a": undefined,
+            "_c": Array [],
+            "_d": true,
+            "_h": 0,
+            "_n": false,
+            "_s": 1,
+            "_v": undefined,
+          },
         },
       ],
     }
@@ -49,29 +73,53 @@ exports[`Dashboard page component should render with default props 1`] = `
         "results": Array [
           Object {
             "isThrow": false,
-            "value": Promise {},
+            "value": Promise {
+              "_a": undefined,
+              "_c": Array [],
+              "_d": true,
+              "_h": 0,
+              "_n": false,
+              "_s": 1,
+              "_v": undefined,
+            },
           },
           Object {
             "isThrow": false,
-            "value": Promise {},
+            "value": Promise {
+              "_a": undefined,
+              "_c": Array [],
+              "_d": true,
+              "_h": 0,
+              "_n": false,
+              "_s": 1,
+              "_v": undefined,
+            },
           },
           Object {
             "isThrow": false,
-            "value": Promise {},
+            "value": Promise {
+              "_a": undefined,
+              "_c": Array [],
+              "_d": true,
+              "_h": 0,
+              "_n": false,
+              "_s": 1,
+              "_v": undefined,
+            },
           },
         ],
       }
     }
   >
     <h2
-      className="govuk-heading-l"
+      className="govuk-heading-m"
     >
-      My work
+      My Cases
     </h2>
     <h2
-      className="govuk-heading-l"
+      className="govuk-heading-m"
     >
-      My teams work
+      Team Cases
     </h2>
   </DashboardPage>
 </Component>
