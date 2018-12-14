@@ -8,10 +8,10 @@ const { caseSummaryMiddleware } = require('../middleware/case');
 const { allocateCase } = require('../middleware/stage');
 const { getFormForCase, getFormForStage } = require('../services/form');
 
-router.get('/:caseId/summary', caseSummaryMiddleware);
 router.get('/:caseId/stage/:stageId/allocate', allocateCase);
 router.use(['/:caseId/stage/:stageId', '/:caseId/stage/:stageId/allocate'],
     getFormForStage,
+    caseSummaryMiddleware,
     getDocumentList,
     getCaseNotes);
 router.use(['/:caseId/stage/:stageId/entity/:entity/:context/:action', '/:caseId/stage/:stageId/entity/:entity/:action'], getFormForCase);

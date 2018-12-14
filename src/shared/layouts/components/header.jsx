@@ -30,6 +30,9 @@ class Header extends Component {
                             <li className='govuk-header__navigation-item'>
                                 <Link to='/action/test/form' className='govuk-header__link'>View test form</Link>
                             </li>
+                            <li className='govuk-header__navigation-item'>
+                                <a href='/logout' className='govuk-header__link'>Logout</a>
+                            </li>
                         </ul>
                     </nav>
                 </div>
