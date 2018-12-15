@@ -58,7 +58,6 @@ const helpers = {
         const assignedTeam = listRepository.teams.find(i => i.type === row.teamUUID) || {};
         row.assignedTeamDisplay = assignedTeam.displayName;
         const caseType = listRepository.caseTypes.caseTypes.find(i => i.value === row.caseType) || {};
-        row.caseTypeDisplay = caseType.displayCode;
         row.caseTypeDisplayFull = caseType.label;
         const stageType = listRepository.stageTypes.stageTypes.find(i => i.value === row.stageType) || {};
         row.stageTypeDisplay = stageType.label;
@@ -118,8 +117,7 @@ const lists = {
                     }
                 }
                 return result;
-            }, [])
-            .sort((first, second) => first.count < second.count);
+            }, []);
         return {
             user: userData,
             teams: dashboardData
@@ -137,7 +135,7 @@ const lists = {
             .map(bindDisplayElements)
             .sort((first, second) => first.caseReference > second.caseReference);
         return {
-            label: 'User workstack',
+            label: '',
             items: workstackData,
             allocateToWorkstackEndpoint: '/unallocate/'
         };
@@ -155,7 +153,7 @@ const lists = {
         const workstackData = response.data.stages
             .filter(item => item.teamUUID === teamId)
             .map(bindDisplayElements)
-            .sort((first, second) => first.caseReference > second.caseReference);
+            .sort((first, second) => first.caseReference < second.caseReference);
         const dashboardData = workstackData
             .reduce((result, row) => {
                 const index = result.map(c => c.value).indexOf(row.caseType);
@@ -180,13 +178,12 @@ const lists = {
                     }
                 }
                 return result;
-            }, [])
-            .sort((first, second) => first.count < second.count ? 1 : -1);
+            }, []);
         return {
             label: ((team = {}) => team.displayName || 'Placeholder team')(listRepository.teams.find(i => i.type === teamId)),
             items: workstackData,
             dashboard: dashboardData,
-            teamMembers: userTeamsResponse.data.map(user => ({ label: `${user.firstName} ${user.lastName}(${user.username})`, value: user.id })),
+            teamMembers: userTeamsResponse.data.map(user => ({ label: `${user.firstName} ${user.lastName} (${user.username})`, value: user.id })),
             allocateToUserEndpoint: '/allocate/user',
             allocateToTeamEndpoint: '/allocate/team',
             allocateToWorkstackEndpoint: '/unallocate/'
@@ -205,7 +202,7 @@ const lists = {
         const workstackData = response.data.stages
             .filter(item => item.teamUUID === teamId && item.caseType === workflowId)
             .map(bindDisplayElements)
-            .sort((first, second) => first.caseReference > second.caseReference);
+            .sort((first, second) => first.caseReference < second.caseReference);
         const dashboardData = workstackData
             .reduce((result, row) => {
                 const index = result.map(c => c.value).indexOf(row.stageType);
@@ -230,13 +227,12 @@ const lists = {
                     }
                 }
                 return result;
-            }, [])
-            .sort((first, second) => first.count < second.count);
+            }, []);
         return {
             label: ((workflow = {}) => workflow.label || 'Placeholder workflow')(listRepository.caseTypes.caseTypes.find(i => i.value === workflowId)),
             items: workstackData,
             dashboard: dashboardData,
-            teamMembers: userTeamsResponse.data.map(user => ({ label: `${user.firstName} ${user.lastName}(${user.username})`, value: user.id })),
+            teamMembers: userTeamsResponse.data.map(user => ({ label: `${user.firstName} ${user.lastName} (${user.username})`, value: user.id })),
             allocateToUserEndpoint: '/allocate/user',
             allocateToTeamEndpoint: '/allocate/team',
             allocateToWorkstackEndpoint: '/unallocate/'
@@ -255,11 +251,11 @@ const lists = {
         const workstackData = response.data.stages
             .filter(item => item.teamUUID === teamId && item.caseType === workflowId && item.stageType === stageId)
             .map(bindDisplayElements)
-            .sort((first, second) => first.caseReference > second.caseReference);
+            .sort((first, second) => first.caseReference < second.caseReference);
         return {
             label: ((stage = {}) => stage.label || 'Placeholder stage')(listRepository.stageTypes.stageTypes.find(i => i.value === stageId)),
             items: workstackData,
-            teamMembers: userTeamsResponse.data.map(user => ({ label: `${user.firstName} ${user.lastName}(${user.username})`, value: user.id })),
+            teamMembers: userTeamsResponse.data.map(user => ({ label: `${user.firstName} ${user.lastName} (${user.username})`, value: user.id })),
             allocateToUserEndpoint: '/allocate/user',
             allocateToTeamEndpoint: '/allocate/team',
             allocateToWorkstackEndpoint: '/unallocate'

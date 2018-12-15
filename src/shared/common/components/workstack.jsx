@@ -36,8 +36,8 @@ class Workstack extends Component {
         return (
             <Fragment>
                 {mounted &&
-                    <div className='govuk-form-group'>
-                        <label htmlFor='workstack-filter' id='workstack-filter-label' className="govuk-label govuk-label--s">Filter</label>
+                    <div className='govuk-form-group filter-row'>
+                        <label htmlFor='workstack-filter' id='workstack-filter-label' className="govuk-label govuk-label--s">Case Filter</label>
                         <input className='govuk-input govuk-!-width-one-third'
                             id='workstack-filter'
                             type='text'
@@ -51,22 +51,23 @@ class Workstack extends Component {
                         <caption className='govuk-table__caption'>Workstack</caption>
                         <thead className='govuk-table__head'>
                             <tr className='govuk-radios govuk-table__row'>
-                                <th className='govuk-table__header'>Type</th>
-                                <th className='govuk-table__header'>Reference</th>
-                                <th className='govuk-table__header'>Stage</th>
-                                <th className='govuk-table__header'>User</th>
+                                <th className='govuk-table__header'>Case Reference</th>
+                                <th className='govuk-table__header'>Current Stage</th>
+                                <th className='govuk-table__header'>Owner</th>
                                 <th className='govuk-table__header'>Team</th>
-                                <th className='govuk-table__header'>Deadline</th>
+                                <th className='govuk-table__header'>Stage Deadline</th>
                             </tr>
                         </thead>
                         <tbody className='govuk-table__body'>
-                            {
-                                cases && cases.sort((first, second) => first.caseReference.split('/')[1] > second.caseReference.split('/')[1] ? -1 : 1).map((c, i) => {
-                                    return (
+                        {
+                            cases && cases.sort((first, second) => {
+                                if(first.deadline === second.deadline) {
+                                    return first.caseReference.split('/')[1] < second.caseReference.split('/')[1] ? -1 : 1
+                                }
+                                return first.deadline < second.deadline ? -1 : 1
+                            }).map((c, i) => {
+                                return (
                                         <tr key={i} className='govuk-radios govuk-table__row'>
-                                            <td className='govuk-table__cell'>
-                                                {c.caseTypeDisplay && <strong className='govuk-tag'>{c.caseTypeDisplay}</strong>}
-                                            </td>
                                             <td className='govuk-table__cell'>{
                                                 c.userUUID === null ?
                                                     <Link to={`/case/${c.caseUUID}/stage/${c.uuid}/allocate`} className="govuk-link govuk-!-margin-right-3">{c.caseReference}</Link> :

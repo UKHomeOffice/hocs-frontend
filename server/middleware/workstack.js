@@ -49,7 +49,7 @@ function workstackApiResponseMiddleware(req, res) {
 
 const allocateUser = async (res, [endpoint, body, headers]) => {
     try {
-        await caseworkServiceClient.post(endpoint, body, headers);
+        await caseworkServiceClient.put(endpoint, body, headers);
         return;
     } catch (error) {
         logger.error({ event: 'ALLOCATION_FAILED', endpoint, body, headers, status: error.response.status });

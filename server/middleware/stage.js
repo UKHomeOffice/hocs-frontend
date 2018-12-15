@@ -53,7 +53,7 @@ async function allocateCase(req, res, next) {
         }
     };
     try {
-        await caseworkServiceClient.post(`/case/${caseId}/stage/${stageId}/user`, {
+        await caseworkServiceClient.put(`/case/${caseId}/stage/${stageId}/user`, {
             userUUID: user.uuid,
         }, headers);
     } catch (e) {

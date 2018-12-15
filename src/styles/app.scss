@@ -8,6 +8,10 @@ $govuk-font-family-tabular: 'helvetica neue',Arial, Helvetica, sans-serif !defau
 
 @import "govuk-frontend/all.scss";
 
+@function tint($color, $percentage) {
+  @return mix(white, $color, $percentage);
+}
+
 // Overrides the GOV.UK width when longer
 .govuk-header__logo--wide {
   width: inherit;
@@ -250,13 +254,17 @@ $highlight-colour: govuk-colour("grey-4");
 $link-colour: $govuk-link-colour;
 $link-hover-colour: $govuk-link-hover-colour;
 
+.filter-row {
+  margin-bottom: govuk-spacing(0);
+}
+
 .card {
   font-weight: bold;
   display: block;
   float: left;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   @media screen and (min-width: $tablet-breakpoint) {
-    height: 200px;
+    min-height: 100px;
   }
 }
 
@@ -264,13 +272,14 @@ $link-hover-colour: $govuk-link-hover-colour;
   font-weight: bold;
   display: block;
   background-color: $panel-colour;
-  padding: 1em;
+  padding: 1em 1em 0.5em;
   background-color: $panel-colour;
   color: $text-colour;
   text-decoration: none;
 
   span {
     display: block;
+    width: 100%;
   }
 }
 
@@ -288,11 +297,11 @@ a.card__body {
 .card__footer {
   display: block;
   background-color: $highlight-colour;
-  padding: govuk-spacing(2);
 
   & span {
     width: 100%;
     display: block;
+    padding: 0em 1.2em 0em;
   }
 }
 
@@ -317,18 +326,21 @@ a.card__body {
 
 .dashboard__tag {
   box-sizing: border-box;
-  margin-bottom: govuk-spacing(2);
-  &:last-of-type {
-    margin-bottom: 0;
-  }
+  margin-top: 0;
+  padding-bottom: govuk-spacing(1);
+  background-color: tint(#005EA5 ,20%);
 }
 
 .dashboard__tag--red {
-  background-color: govuk-colour("red");
+  background-color: tint(#B10E1E, 20%);
 }
 
 .workstack {
   overflow: scroll;
+
+  td,th {
+    padding-left: 0.2em;
+  }
 }
 
 .timeline {

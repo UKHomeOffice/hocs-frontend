@@ -15,7 +15,8 @@ router.get('/', dashboardMiddleware);
 
 router.get('/workstack/user', userWorkstackMiddleware, (req, res, next) => {
     res.locals.workstack.breadcrumbs = [
-        { to: '/', label: 'Dashboard' }
+        { to: '/', label: 'Dashboard' },
+        { to: '/workstack/user', label: 'User' }
     ];
     next();
 });
