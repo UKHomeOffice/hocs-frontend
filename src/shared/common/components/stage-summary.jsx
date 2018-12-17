@@ -30,18 +30,27 @@ class StageSummary extends Component {
     renderActiveStage({ stage, assignedTeam, assignedUser }) {
         return (
             <table key={stage} className='govuk-table margin-left--small'>
-                <caption className='govuk-table__caption' >{stage}</caption>
+                <caption className='govuk-table__caption margin-bottom--small' >{stage}</caption>
                 <tbody className='govuk-table__body'>
                     <tr className='govuk-table__row'>
-                        <th className='govuk-table__header'>Team</th>
+                        <th className='govuk-table__header padding-left--small'>Team</th>
                         <td className='govuk-table__cell'>{assignedTeam}</td>
                     </tr>
                     <tr className='govuk-table__cell'>
-                        <th className='govuk-table__header'>User</th>
+                        <th className='govuk-table__header padding-left--small'>User</th>
                         <td className='govuk-table__cell'>{assignedUser}</td>
                     </tr>
                 </tbody>
             </table>
+        );
+    }
+
+    renderStageDeadline({ label, value }) {
+        return (
+            <tr key={label} className='govuk-table__row'>
+                <th className='govuk-table__header padding-left--small'>{label}</th>
+                <td className='govuk-table__cell'>{value}</td>
+            </tr>
         );
     }
 
@@ -53,16 +62,22 @@ class StageSummary extends Component {
                     <Fragment>
                         <h2 className='govuk-heading-m'>Case</h2>
                         <table className='govuk-table margin-left--small'>
-                            <caption className='govuk-table__caption' >Summary</caption>
+                            <caption className='govuk-table__caption margin-bottom--small' >Summary</caption>
                             <tbody className='govuk-table__body'>
                                 {summary.case && summary.case.received && <tr className='govuk-table__row'>
-                                    <th className='govuk-table__header'>Date received</th>
+                                    <th className='govuk-table__header padding-left--small'>Date received</th>
                                     <td className='govuk-table__cell'>{summary.case.received}</td>
                                 </tr>}
                                 {summary.case && summary.case.deadline && <tr className='govuk-table__cell'>
-                                    <th className='govuk-table__header'>Deadline</th>
+                                    <th className='govuk-table__header padding-left--small'>Deadline</th>
                                     <td className='govuk-table__cell'>{summary.case.deadline}</td>
                                 </tr>}
+                            </tbody>
+                        </table>
+                        <table className='govuk-table margin-left--small'>
+                            <caption className='govuk-table__caption margin-bottom--small' >Stage deadlines</caption>
+                            <tbody className='govuk-table__body'>
+                                {summary.deadlines.map(stage => this.renderStageDeadline(stage))}
                             </tbody>
                         </table>
                         <h2 className='govuk-heading-m'>Active stages</h2>
