@@ -38,7 +38,7 @@ class EntityManager extends Component {
                                         <a href={`${baseUrl}/download/${entity}/${choice.value}`} className="govuk-link" download={choice.label}>Download</a>
                                     </td>}
                                     {hasRemoveLink && <td className='govuk-table__cell'>
-                                        <a href={`${baseUrl}/${entity}/${choice.value}/remove`} className="govuk-link">Remove</a>
+                                        <a href={`${baseUrl}/entity/${entity}/${choice.value}/remove`} className="govuk-link">Remove</a>
                                     </td>}
                                 </tr>
                             );
@@ -46,7 +46,7 @@ class EntityManager extends Component {
                         {choices.length === 0 && <p className='govuk-body'>No {entity}s</p>}
                     </tbody>
                 </table>
-                {hasAddLink && <Link to={`${baseUrl}/${entity}/add`} className="govuk-body govuk-link">{`Add ${entity}`}</Link>}
+                {hasAddLink && <Link to={`${baseUrl}/entity/${entity}/add`} className="govuk-body govuk-link">{`Add ${entity}`}</Link>}
             </Fragment>
         );
     }
