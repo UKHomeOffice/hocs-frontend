@@ -465,6 +465,15 @@ const lists = {
                     received: response.data.DateReceived ? Intl.DateTimeFormat('en-GB').format(new Date(response.data.DateReceived)) : null,
                     deadline: response.data.caseDeadline ? Intl.DateTimeFormat('en-GB').format(new Date(response.data.caseDeadline)) : null
                 },
+                deadlines: Object.entries(response.data.stageDeadlines)
+                    .sort((first, second) => (first[1] > second[1]) ? 1 : -1)
+                    .map(([stage, deadline]) => ({
+                        label: (stage => {
+                            const stageType = listRepository.stageTypes.stageTypes.find(i => i.value === stage) || {};
+                            return stageType.label;
+                        })(stage),
+                        value: deadline ? Intl.DateTimeFormat('en-GB').format(new Date(deadline)) : null
+                    })),
                 stages: response.data.activeStages.map(activeStage => ({
                     stage: (stage => {
                         const stageType = listRepository.stageTypes.stageTypes.find(i => i.value === stage) || {};
