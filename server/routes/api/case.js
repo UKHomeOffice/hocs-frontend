@@ -2,11 +2,16 @@ const router = require('express').Router();
 const { fileMiddleware } = require('../../middleware/file');
 const { processMiddleware } = require('../../middleware/process');
 const { validationMiddleware } = require('../../middleware/validation');
-const { stageApiResponseMiddleware, allocateCase } = require('../../middleware/stage');
+const { stageApiResponseMiddleware, allocateCase, allocateCaseToTeamMember } = require('../../middleware/stage');
 const { caseSummaryMiddleware, caseSummaryApiResponseMiddleware, caseApiResponseMiddleware } = require('../../middleware/case');
 const { getFormForCase, getFormForStage } = require('../../services/form');
 
 router.get('/:caseId/stage/:stageId/allocate', allocateCase);
+router.post('/:caseId/stage/:stageId/allocate/team',
+    fileMiddleware.any(),
+    allocateCaseToTeamMember,
+    (req, res) => res.json({ redirect: '/' })
+);
 router.post(['/:caseId/stage/:stageId/entity/:entity/:context/:action', '/:caseId/stage/:stageId/entity/:entity/:action'],
     getFormForCase,
     fileMiddleware.any(),

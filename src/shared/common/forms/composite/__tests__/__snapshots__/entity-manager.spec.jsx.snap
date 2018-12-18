@@ -16,7 +16,7 @@ Array [
   </table>,
   <a
     class="govuk-body govuk-link"
-    href="/http://localhost:8080/entity/add"
+    href="/http://localhost:8080/entity/entity/add"
   >
     Add entity
   </a>,
@@ -189,7 +189,7 @@ exports[`Entity list component should render with remove link when passed in pro
       >
         <a
           class="govuk-link"
-          href="http://localhost:8080/entity/CHOICE_A/remove"
+          href="http://localhost:8080/entity/entity/CHOICE_A/remove"
         >
           Remove
         </a>
@@ -208,7 +208,7 @@ exports[`Entity list component should render with remove link when passed in pro
       >
         <a
           class="govuk-link"
-          href="http://localhost:8080/entity/CHOICE_B/remove"
+          href="http://localhost:8080/entity/entity/CHOICE_B/remove"
         >
           Remove
         </a>

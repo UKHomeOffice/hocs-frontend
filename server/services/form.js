@@ -1,6 +1,6 @@
 const formRepository = require('./forms/index');
 const listService = require('./list');
-const { workflowServiceClient } = require('../libs/request');
+const { workflowServiceClient, caseworkServiceClient } = require('../libs/request');
 const logger = require('../libs/logger');
 const events = require('../models/events');
 const { FormServiceError } = require('../models/error');
@@ -12,9 +12,53 @@ async function getFormSchemaFromWorkflowService(options, user) {
         'X-Auth-Roles': user.roles.join(),
         'X-Auth-Groups': user.groups.join()
     };
-    const response = await workflowServiceClient.get(`/case/${caseId}/stage/${stageId}`, { headers });
+    let response;
+    try {
+        response = await workflowServiceClient.get(`/case/${caseId}/stage/${stageId}`, { headers });
+    } catch (error) {
+        switch (error.response.status) {
+        case 401:
+            // handle as error
+            throw new Error('Permission denied');
+        case 403:
+            // handle not allocated
+            /* eslint-disable-next-line no-case-declarations */
+            let usersInTeam;
+            try {
+                const { data: owningTeam } = await caseworkServiceClient.get(`/case/${caseId}/stage/${stageId}/team`, { headers });
+                usersInTeam = await listService.getList('USERS_IN_TEAM', { teamId: owningTeam, user });
+            } catch (error) {
+                usersInTeam = [];
+            }
+            return {
+                schema: {
+                    title: 'Allocate case',
+                    action: `/case/${caseId}/stage/${stageId}/allocate/team`,
+                    fields: [
+                        {
+                            component: 'link', props: {
+                                name: 'allocate-to-me',
+                                label: 'Allocate to me',
+                                className: 'govuk-body margin-bottom--small',
+                                target: `/case/${caseId}/stage/${stageId}/allocate`
+                            }
+                        },
+                        {
+                            component: 'dropdown', props: {
+                                name: 'user-id',
+                                label: 'Allocate to a team member',
+                                choices: usersInTeam
+                            }
+                        }
+                    ],
+                    defaultActionLabel: 'Allocate'
+                }
+            };
+        default:
+            throw new Error('System error');
+        }
+    }
     const { stageUUID, caseReference, allocationNote } = response.data;
-    // TODO: Remove placeholder
     const mockAllocationNote = allocationNote || {
         type: 'Allocation Note',
         message: 'You just sort of have to make almighty decisions. Just leave that space open. Let\'s start with an almighty sky here.'
@@ -93,7 +137,7 @@ const getFormForStage = async (req, res, next) => {
         req.form = await getFormSchemaFromWorkflowService(req.params, user);
     } catch (e) {
         logger.error({ event: events.WORKFLOW_FORM_FAILURE, message: e.message, stack: e.stack });
-        return next(new FormServiceError());
+        return next(new FormServiceError(e.message));
     }
     next();
 };

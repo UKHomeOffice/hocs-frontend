@@ -8,6 +8,7 @@ import AddDocument from './composite/document-add.jsx';
 import EntityList from './composite/entity-list.jsx';
 import EntityManager from './composite/entity-manager.jsx';
 import Button from './button.jsx';
+import Link from './link.jsx';
 import BackLink from './backlink.jsx';
 import Paragraph from './paragraph.jsx';
 import Inset from './inset.jsx';
@@ -20,7 +21,7 @@ function defaultDataAdapter(name, data) {
 }
 
 function checkboxDataAdapter(name, data) {
-    const result =  Object.entries(data)
+    const result = Object.entries(data)
         .filter(([key, value]) => key.startsWith(name) && value === true);
     const result2 = result
         .reduce((reducer, [key]) => {
@@ -62,6 +63,8 @@ export function formComponentFactory(field, options) {
         return renderFormComponent(TypeAhead, { key, config, data, errors, callback });
     case 'button':
         return renderFormComponent(Button, { key, config });
+    case 'link':
+        return renderFormComponent(Link, { key, config });
     case 'add-document':
         return renderFormComponent(AddDocument, { key, config, errors, callback });
     case 'entity-list':
