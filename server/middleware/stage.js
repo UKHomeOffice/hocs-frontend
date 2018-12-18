@@ -47,7 +47,7 @@ async function allocateCase(req, res, next) {
     const { user } = req;
     let headers = {
         headers: {
-            'X-Auth-UserId': user.id,
+            'X-Auth-UserId': user.uuid,
             'X-Auth-Roles': user.roles.join(),
             'X-Auth-Groups': user.groups.join()
         }
