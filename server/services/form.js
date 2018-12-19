@@ -4,58 +4,55 @@ const { workflowServiceClient, caseworkServiceClient } = require('../libs/reques
 const logger = require('../libs/logger');
 const events = require('../models/events');
 const { FormServiceError } = require('../models/error');
+const User = require('../models/user');
 
 async function getFormSchemaFromWorkflowService(options, user) {
     const { caseId, stageId } = options;
-    const headers = {
-        'X-Auth-UserId': user.id,
-        'X-Auth-Roles': user.roles.join(),
-        'X-Auth-Groups': user.groups.join()
-    };
+    const headers = User.createHeaders(user);
     let response;
     try {
         response = await workflowServiceClient.get(`/case/${caseId}/stage/${stageId}`, { headers });
     } catch (error) {
         switch (error.response.status) {
-        case 401:
-            // handle as error
-            throw new Error('Permission denied');
-        case 403:
-            // handle not allocated
-            /* eslint-disable-next-line no-case-declarations */
-            let usersInTeam;
-            try {
-                const { data: owningTeam } = await caseworkServiceClient.get(`/case/${caseId}/stage/${stageId}/team`, { headers });
-                usersInTeam = await listService.getList('USERS_IN_TEAM', { teamId: owningTeam, user });
-            } catch (error) {
-                usersInTeam = [];
-            }
-            return {
-                schema: {
-                    title: 'Allocate case',
-                    action: `/case/${caseId}/stage/${stageId}/allocate/team`,
-                    fields: [
-                        {
-                            component: 'link', props: {
-                                name: 'allocate-to-me',
-                                label: 'Allocate to me',
-                                className: 'govuk-body margin-bottom--small',
-                                target: `/case/${caseId}/stage/${stageId}/allocate`
-                            }
-                        },
-                        {
-                            component: 'dropdown', props: {
-                                name: 'user-id',
-                                label: 'Allocate to a team member',
-                                choices: usersInTeam
-                            }
-                        }
-                    ],
-                    defaultActionLabel: 'Allocate'
+            case 401:
+                // handle as error
+                throw new Error('Permission denied');
+            case 403:
+                // handle not allocated
+                /* eslint-disable-next-line no-case-declarations */
+                let usersInTeam;
+                try {
+                    const { data: owningTeam } = await caseworkServiceClient.get(`/case/${caseId}/stage/${stageId}/team`, { headers });
+                    usersInTeam = await listService.getList('USERS_IN_TEAM', { teamId: owningTeam, user });
+                } catch (error) {
+                    usersInTeam = [];
                 }
-            };
-        default:
-            throw new Error('System error');
+                return {
+                    schema: {
+                        title: 'Allocate case',
+                        action: `/case/${caseId}/stage/${stageId}/allocate/team`,
+                        fields: [
+                            {
+                                component: 'link', props: {
+                                    name: 'allocate-to-me',
+                                    label: 'Allocate to me',
+                                    className: 'govuk-body margin-bottom--small',
+                                    target: `/case/${caseId}/stage/${stageId}/allocate`
+                                }
+                            },
+                            {
+                                component: 'dropdown', props: {
+                                    name: 'user-id',
+                                    label: 'Allocate to a team member',
+                                    choices: usersInTeam
+                                }
+                            }
+                        ],
+                        defaultActionLabel: 'Allocate'
+                    }
+                };
+            default:
+                throw new Error('System error');
         }
     }
     const { stageUUID, caseReference, allocationNote } = response.data;
