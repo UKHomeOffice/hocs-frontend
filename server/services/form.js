@@ -14,45 +14,45 @@ async function getFormSchemaFromWorkflowService(options, user) {
         response = await workflowServiceClient.get(`/case/${caseId}/stage/${stageId}`, { headers });
     } catch (error) {
         switch (error.response.status) {
-            case 401:
-                // handle as error
-                throw new Error('Permission denied');
-            case 403:
-                // handle not allocated
-                /* eslint-disable-next-line no-case-declarations */
-                let usersInTeam;
-                try {
-                    const { data: owningTeam } = await caseworkServiceClient.get(`/case/${caseId}/stage/${stageId}/team`, { headers });
-                    usersInTeam = await listService.getList('USERS_IN_TEAM', { teamId: owningTeam, user });
-                } catch (error) {
-                    usersInTeam = [];
-                }
-                return {
-                    schema: {
-                        title: 'Allocate case',
-                        action: `/case/${caseId}/stage/${stageId}/allocate/team`,
-                        fields: [
-                            {
-                                component: 'link', props: {
-                                    name: 'allocate-to-me',
-                                    label: 'Allocate to me',
-                                    className: 'govuk-body margin-bottom--small',
-                                    target: `/case/${caseId}/stage/${stageId}/allocate`
-                                }
-                            },
-                            {
-                                component: 'dropdown', props: {
-                                    name: 'user-id',
-                                    label: 'Allocate to a team member',
-                                    choices: usersInTeam
-                                }
+        case 401:
+            // handle as error
+            throw new Error('Permission denied');
+        case 403:
+            // handle not allocated
+            /* eslint-disable-next-line no-case-declarations */
+            let usersInTeam;
+            try {
+                const { data: owningTeam } = await caseworkServiceClient.get(`/case/${caseId}/stage/${stageId}/team`, { headers });
+                usersInTeam = await listService.getList('USERS_IN_TEAM', { teamId: owningTeam, user });
+            } catch (error) {
+                usersInTeam = [];
+            }
+            return {
+                schema: {
+                    title: 'Allocate case',
+                    action: `/case/${caseId}/stage/${stageId}/allocate/team`,
+                    fields: [
+                        {
+                            component: 'link', props: {
+                                name: 'allocate-to-me',
+                                label: 'Allocate to me',
+                                className: 'govuk-body margin-bottom--small',
+                                target: `/case/${caseId}/stage/${stageId}/allocate`
                             }
-                        ],
-                        defaultActionLabel: 'Allocate'
-                    }
-                };
-            default:
-                throw new Error('System error');
+                        },
+                        {
+                            component: 'dropdown', props: {
+                                name: 'user-id',
+                                label: 'Allocate to a team member',
+                                choices: usersInTeam
+                            }
+                        }
+                    ],
+                    defaultActionLabel: 'Allocate'
+                }
+            };
+        default:
+            throw new Error('System error');
         }
     }
     const { stageUUID, caseReference, allocationNote } = response.data;
