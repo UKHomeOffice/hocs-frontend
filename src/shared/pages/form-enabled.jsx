@@ -77,7 +77,7 @@ function withForm(Page) {
         submitHandler(e) {
             e.preventDefault();
             const { dispatch, history, match: { url } } = this.props;
-            const { form_data } = this.state;
+            const { form_schema, form_data } = this.state;
             // TODO: Remove
             /* eslint-disable-next-line no-undef */
             const formData = new FormData();
@@ -92,7 +92,7 @@ function withForm(Page) {
             });
             return dispatch(updateApiStatus(status.SUBMIT_FORM))
                 .then(() => {
-                    axios.post('/api' + url, formData, { headers: { 'Content-Type': 'multipart/form-data' } })
+                    axios.post('/api' + (form_schema.action || url), formData, { headers: { 'Content-Type': 'multipart/form-data' } })
                         .then(res => {
                             return dispatch(updateApiStatus(status.SUBMIT_FORM_SUCCESS))
                                 .then(() => {
@@ -154,7 +154,7 @@ function withForm(Page) {
                             meta: form_meta,
                             page: params
                         }}
-                        action={url}
+                        action={form_schema.action || url}
                         submitHandler={this.submitHandler.bind(this)}
                         updateFormState={this.updateState.bind(this)}
                     />}

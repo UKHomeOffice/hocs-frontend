@@ -495,6 +495,21 @@ const lists = {
             logger.warn({ event: events.FETCH_LIST_RETURN_EMPTY, list: 'CASE_CORRESPONDENTS' });
             return [];
         }
+    },
+    'USERS_IN_TEAM': async ({ user, teamId }) => {
+        const response = await fetchList(`/teams/${teamId}/members`, {
+            headers: User.createHeaders(user)
+        }, infoServiceClient);
+        if (response.data) {
+            return response.data
+                .map(user => ({
+                    label: `${user.firstName} ${user.lastName} (${user.username})`,
+                    value: user.id
+                }));
+        } else {
+            logger.warn({ event: events.FETCH_LIST_RETURN_EMPTY, list: 'CASE_CORRESPONDENTS' });
+            return [];
+        }
     }
 };
 

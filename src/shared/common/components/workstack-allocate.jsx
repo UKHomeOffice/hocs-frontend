@@ -98,10 +98,10 @@ class Workstack extends Component {
                                                 <tbody className='govuk-table__body'>
                                                     {
                                                         cases && cases.sort((first, second) => {
-                                                            if(first.deadline === second.deadline) {
-                                                                return first.caseReference.split('/')[1] < second.caseReference.split('/')[1] ? -1 : 1
+                                                            if (first.deadline === second.deadline) {
+                                                                return first.caseReference.split('/')[1] < second.caseReference.split('/')[1] ? -1 : 1;
                                                             }
-                                                            return first.deadline < second.deadline ? -1 : 1
+                                                            return first.deadline < second.deadline ? -1 : 1;
                                                         }).map((c, i) => {
                                                             const value = `${c.caseUUID}:${c.uuid}`;
                                                             return (
@@ -129,11 +129,9 @@ class Workstack extends Component {
                                                                             </div>
                                                                         </div>
                                                                     </td>
-                                                                    <td className='govuk-table__cell'>{
-                                                                        c.userUUID === null ?
-                                                                            <Link to={`/case/${c.caseUUID}/stage/${c.uuid}/allocate`} className="govuk-link govuk-!-margin-right-3">{c.caseReference}</Link> :
-                                                                            <Link to={`/case/${c.caseUUID}/stage/${c.uuid}`} className="govuk-link govuk-!-margin-right-3">{c.caseReference}</Link>
-                                                                    }</td>
+                                                                    <td className='govuk-table__cell'>
+                                                                        <Link to={`/case/${c.caseUUID}/stage/${c.uuid}`} className="govuk-link govuk-!-margin-right-3">{c.caseReference}</Link>
+                                                                    </td>
                                                                     <td className='govuk-table__cell'>{c.stageTypeDisplay}</td>
                                                                     <td className='govuk-table__cell'>{c.assignedUserDisplay}</td>
                                                                     <td className='govuk-table__cell'>{c.assignedTeamDisplay}</td>
@@ -150,27 +148,27 @@ class Workstack extends Component {
                                 <div className="govuk-grid-row">
                                     <div className="govuk-grid-column-one-half">
                                         {teamMembers &&
-                                        <Fragment>
-                                            <Dropdown label='Allocate cases to a user' name="selected_user" updateState={values => {
-                                                this.setState(state => ({
-                                                    ...state, data: { ...state.data, ...values }
-                                                }));
-                                            }} choices={teamMembers} />
-                                            <Submit label='Allocate' />
-                                        </Fragment>
+                                            <Fragment>
+                                                <Dropdown label='Allocate cases to a user' name="selected_user" updateState={values => {
+                                                    this.setState(state => ({
+                                                        ...state, data: { ...state.data, ...values }
+                                                    }));
+                                                }} choices={teamMembers} />
+                                                <Submit label='Allocate' />
+                                            </Fragment>
                                         }
                                         <h3 className="govuk-heading-s">
                                             Quick Actions
                                         </h3>
                                         <ul className="govuk-list">
                                             {allocateToUserEndpoint &&
-                                            <li>
-                                                 <button type='submit' onClick={e => this.handleSubmit(e, baseUrl + allocateToUserEndpoint)} className='govuk-button--link govuk-link' formMethod='POST' formEncType='multipart/form-data' formAction={baseUrl + allocateToUserEndpoint}>Allocate cases to me</button>
-                                            </li>}
+                                                <li>
+                                                    <button type='submit' onClick={e => this.handleSubmit(e, baseUrl + allocateToUserEndpoint)} className='govuk-button--link govuk-link' formMethod='POST' formEncType='multipart/form-data' formAction={baseUrl + allocateToUserEndpoint}>Allocate cases to me</button>
+                                                </li>}
                                             {allocateToWorkstackEndpoint &&
-                                             <li>
-                                                 <button type='submit' onClick={e => this.handleSubmit(e, baseUrl + allocateToWorkstackEndpoint)} className='govuk-button--link govuk-link' formMethod='POST' formEncType='multipart/form-data' formAction={baseUrl + allocateToWorkstackEndpoint}>Unallocate cases</button>
-                                            </li>}
+                                                <li>
+                                                    <button type='submit' onClick={e => this.handleSubmit(e, baseUrl + allocateToWorkstackEndpoint)} className='govuk-button--link govuk-link' formMethod='POST' formEncType='multipart/form-data' formAction={baseUrl + allocateToWorkstackEndpoint}>Unallocate cases</button>
+                                                </li>}
 
                                         </ul>
                                     </div>

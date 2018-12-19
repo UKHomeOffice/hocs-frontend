@@ -1,5 +1,6 @@
 const actionService = require('../services/action');
 const logger = require('../libs/logger');
+const User = require('../models/user');
 const { caseworkServiceClient } = require('../libs/request');
 
 async function stageResponseMiddleware(req, res, next) {
@@ -63,8 +64,22 @@ async function allocateCase(req, res, next) {
     }
 }
 
+async function allocateCaseToTeamMember(req, res, next) {
+    const { caseId, stageId } = req.params;
+    try {
+        await caseworkServiceClient.put(`/case/${caseId}/stage/${stageId}/user`, {
+            userUUID: req.body['user-id'],
+        }, { headers: User.createHeaders(req.user) });
+    } catch (e) {
+        logger.warn(e);
+    } finally {
+        next();
+    }
+}
+
 module.exports = {
     stageApiResponseMiddleware,
     stageResponseMiddleware,
-    allocateCase
+    allocateCase,
+    allocateCaseToTeamMember
 };
