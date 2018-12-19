@@ -147,16 +147,6 @@ class Workstack extends Component {
                                 </div>
                                 <div className="govuk-grid-row">
                                     <div className="govuk-grid-column-one-half">
-                                        {teamMembers &&
-                                            <Fragment>
-                                                <Dropdown label='Allocate cases to a user' name="selected_user" updateState={values => {
-                                                    this.setState(state => ({
-                                                        ...state, data: { ...state.data, ...values }
-                                                    }));
-                                                }} choices={teamMembers} />
-                                                <Submit label='Allocate' />
-                                            </Fragment>
-                                        }
                                         <h3 className="govuk-heading-s">
                                             Quick Actions
                                         </h3>
@@ -171,6 +161,16 @@ class Workstack extends Component {
                                                 </li>}
 
                                         </ul>
+                                        {teamMembers &&
+                                            <Fragment>
+                                                <Dropdown label='Allocate cases to a user' name="selected_user" updateState={values => {
+                                                    this.setState(state => ({
+                                                        ...state, data: { ...state.data, ...values }
+                                                    }));
+                                                }} choices={teamMembers} />
+                                                <Submit label='Allocate' />
+                                            </Fragment>
+                                        }
                                     </div>
                                 </div>
                             </fieldset>
