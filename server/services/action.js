@@ -82,37 +82,37 @@ const actions = {
                 let response;
                 let clientResponse;
                 switch (form.action) {
-                    case actionTypes.CREATE_CASE:
-                        response = await createCase('/case', { caseType: context, form }, headers);
-                        clientResponse = { summary: `Created a new case: ${response.data.reference}` };
-                        return handleActionSuccess(clientResponse, workflow, form);
-                    case actionTypes.BULK_CREATE_CASE:
-                        response = await createCase('/case/bulk', { caseType: context, form }, headers);
-                        clientResponse = { summary: `Created ${response.data.count} new case${response.data.count > 1 ? 's' : ''}` };
-                        return handleActionSuccess(clientResponse, workflow, form);
-                    case actionTypes.ADD_STANDARD_LINE:
-                        /* eslint-disable no-case-declarations */
-                        const document = form.data.document[0];
-                        const request = {
-                            s3UntrustedUrl: document.key,
-                            displayName: document.originalname,
-                            topicUUID: form.data['topic'],
-                            expires: form.data['expiry_date']
-                        };
-                        response = await infoServiceClient.post('/standardline/document', request, headers);
-                        clientResponse = { summary: 'Created a new standard line' };
-                        return handleActionSuccess(clientResponse, workflow, form);
-                    case actionTypes.ADD_TEMPLATE:
-                        /* eslint-disable no-case-declarations */
-                        const document1 = form.data.document[0];
-                        const request1 = {
-                            s3UntrustedUrl: document1.key,
-                            displayName: document1.originalname,
-                            caseType: form.data['caseType']
-                        };
-                        response = await infoServiceClient.post('/template/document', request1, headers);
-                        clientResponse = { summary: 'Created a new template' };
-                        return handleActionSuccess(clientResponse, workflow, form);
+                case actionTypes.CREATE_CASE:
+                    response = await createCase('/case', { caseType: context, form }, headers);
+                    clientResponse = { summary: `Created a new case: ${response.data.reference}` };
+                    return handleActionSuccess(clientResponse, workflow, form);
+                case actionTypes.BULK_CREATE_CASE:
+                    response = await createCase('/case/bulk', { caseType: context, form }, headers);
+                    clientResponse = { summary: `Created ${response.data.count} new case${response.data.count > 1 ? 's' : ''}` };
+                    return handleActionSuccess(clientResponse, workflow, form);
+                case actionTypes.ADD_STANDARD_LINE:
+                    /* eslint-disable no-case-declarations */
+                    const document = form.data.document[0];
+                    const request = {
+                        s3UntrustedUrl: document.key,
+                        displayName: document.originalname,
+                        topicUUID: form.data['topic'],
+                        expires: form.data['expiry_date']
+                    };
+                    response = await infoServiceClient.post('/standardline/document', request, headers);
+                    clientResponse = { summary: 'Created a new standard line' };
+                    return handleActionSuccess(clientResponse, workflow, form);
+                case actionTypes.ADD_TEMPLATE:
+                    /* eslint-disable no-case-declarations */
+                    const document1 = form.data.document[0];
+                    const request1 = {
+                        s3UntrustedUrl: document1.key,
+                        displayName: document1.originalname,
+                        caseType: form.data['caseType']
+                    };
+                    response = await infoServiceClient.post('/template/document', request1, headers);
+                    clientResponse = { summary: 'Created a new template' };
+                    return handleActionSuccess(clientResponse, workflow, form);
                     /* eslint-enable no-case-declarations */
                 }
             } else {
@@ -131,41 +131,41 @@ const actions = {
             if (form && form.action && entity) {
                 logger.info({ event: events.CASE_ACTION, user: user.username, action: form.action, case: caseId });
                 switch (form.action) {
-                    case actionTypes.ADD_DOCUMENT:
-                        await addDocument(`/case/${caseId}/document`, form, headers);
-                        break;
-                    case actionTypes.REMOVE_DOCUMENT:
-                        if (!context) {
-                            throw new ActionError('Unable to remove, no context provided');
-                        }
-                        await docsServiceClient.delete(`/case/${caseId}/document/${context}`, headers);
-                        break;
-                    case actionTypes.ADD_TOPIC:
-                        await caseworkServiceClient.post(`/case/${caseId}/stage/${stageId}/topic`, { topicUUID: form.data['topic'] }, headers);
-                        break;
-                    case actionTypes.REMOVE_TOPIC:
-                        if (!context) {
-                            throw new ActionError('Unable to remove, no context provided');
-                        }
-                        await caseworkServiceClient.delete(`/case/${caseId}/stage/${stageId}/topic/${context}`, headers);
-                        break;
-                    case actionTypes.IS_MEMBER:
-                        if (form.data['isMember'] === 'true') {
-                            return ({ callbackUrl: `/case/${caseId}/stage/${stageId}/entity/member/add` });
-                        } else {
-                            return ({ callbackUrl: `/case/${caseId}/stage/${stageId}/entity/correspondent/details` });
-                        }
-                    case actionTypes.SELECT_MEMBER:
-                        return ({ callbackUrl: `/case/${caseId}/stage/${stageId}/entity/member/${form.data['member']}/details` });
-                    case actionTypes.ADD_CORRESPONDENT: case actionTypes.ADD_MEMBER:
-                        await caseworkServiceClient.post(`/case/${caseId}/stage/${stageId}/correspondent`, { ...form.data }, headers);
-                        return ({ callbackUrl: `/case/${caseId}/stage/${stageId}` });
-                    case actionTypes.REMOVE_CORRESPONDENT:
-                        if (!context) {
-                            throw new ActionError('Unable to remove, no context provided');
-                        }
-                        await caseworkServiceClient.delete(`/case/${caseId}/stage/${stageId}/correspondent/${context}`, headers);
-                        break;
+                case actionTypes.ADD_DOCUMENT:
+                    await addDocument(`/case/${caseId}/document`, form, headers);
+                    break;
+                case actionTypes.REMOVE_DOCUMENT:
+                    if (!context) {
+                        throw new ActionError('Unable to remove, no context provided');
+                    }
+                    await docsServiceClient.delete(`/case/${caseId}/document/${context}`, headers);
+                    break;
+                case actionTypes.ADD_TOPIC:
+                    await caseworkServiceClient.post(`/case/${caseId}/stage/${stageId}/topic`, { topicUUID: form.data['topic'] }, headers);
+                    break;
+                case actionTypes.REMOVE_TOPIC:
+                    if (!context) {
+                        throw new ActionError('Unable to remove, no context provided');
+                    }
+                    await caseworkServiceClient.delete(`/case/${caseId}/stage/${stageId}/topic/${context}`, headers);
+                    break;
+                case actionTypes.IS_MEMBER:
+                    if (form.data['isMember'] === 'true') {
+                        return ({ callbackUrl: `/case/${caseId}/stage/${stageId}/entity/member/add` });
+                    } else {
+                        return ({ callbackUrl: `/case/${caseId}/stage/${stageId}/entity/correspondent/details` });
+                    }
+                case actionTypes.SELECT_MEMBER:
+                    return ({ callbackUrl: `/case/${caseId}/stage/${stageId}/entity/member/${form.data['member']}/details` });
+                case actionTypes.ADD_CORRESPONDENT: case actionTypes.ADD_MEMBER:
+                    await caseworkServiceClient.post(`/case/${caseId}/stage/${stageId}/correspondent`, { ...form.data }, headers);
+                    return ({ callbackUrl: `/case/${caseId}/stage/${stageId}` });
+                case actionTypes.REMOVE_CORRESPONDENT:
+                    if (!context) {
+                        throw new ActionError('Unable to remove, no context provided');
+                    }
+                    await caseworkServiceClient.delete(`/case/${caseId}/stage/${stageId}/correspondent/${context}`, headers);
+                    break;
                 }
                 return ({ callbackUrl: `/case/${caseId}/stage/${stageId}` });
             }
