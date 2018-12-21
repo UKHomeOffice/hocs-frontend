@@ -158,13 +158,13 @@ const actions = {
                 case actionTypes.SELECT_MEMBER:
                     return ({ callbackUrl: `/case/${caseId}/stage/${stageId}/entity/member/${form.data['member']}/details` });
                 case actionTypes.ADD_CORRESPONDENT: case actionTypes.ADD_MEMBER:
-                    await caseworkServiceClient.post(`/case/${caseId}/correspondent`, { ...form.data }, headers);
+                    await caseworkServiceClient.post(`/case/${caseId}/stage/${stageId}/correspondent`, { ...form.data }, headers);
                     return ({ callbackUrl: `/case/${caseId}/stage/${stageId}` });
                 case actionTypes.REMOVE_CORRESPONDENT:
                     if (!context) {
                         throw new ActionError('Unable to remove, no context provided');
                     }
-                    await caseworkServiceClient.delete(`/case/${caseId}/correspondent/${context}`, headers);
+                    await caseworkServiceClient.delete(`/case/${caseId}/stage/${stageId}/correspondent/${context}`, headers);
                     break;
                 }
                 return ({ callbackUrl: `/case/${caseId}/stage/${stageId}` });
