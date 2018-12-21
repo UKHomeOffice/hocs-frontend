@@ -141,13 +141,13 @@ const actions = {
                     await docsServiceClient.delete(`/case/${caseId}/document/${context}`, headers);
                     break;
                 case actionTypes.ADD_TOPIC:
-                    await caseworkServiceClient.post(`/case/${caseId}/topic`, { topicUUID: form.data['topic'] }, headers);
+                    await caseworkServiceClient.post(`/case/${caseId}/stage/${stageId}/topic`, { topicUUID: form.data['topic'] }, headers);
                     break;
                 case actionTypes.REMOVE_TOPIC:
                     if (!context) {
                         throw new ActionError('Unable to remove, no context provided');
                     }
-                    await caseworkServiceClient.delete(`/case/${caseId}/topic/${context}`, headers);
+                    await caseworkServiceClient.delete(`/case/${caseId}/stage/${stageId}/topic/${context}`, headers);
                     break;
                 case actionTypes.IS_MEMBER:
                     if (form.data['isMember'] === 'true') {
