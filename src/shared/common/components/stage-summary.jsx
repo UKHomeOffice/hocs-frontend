@@ -45,7 +45,7 @@ class StageSummary extends Component {
         );
     }
 
-    renderStageDeadline({ label, value }) {
+    renderRow({ label, value }) {
         return (
             <tr key={label} className='govuk-table__row'>
                 <th className='govuk-table__header padding-left--small'>{label}</th>
@@ -72,12 +72,13 @@ class StageSummary extends Component {
                                     <th className='govuk-table__header padding-left--small'>Deadline</th>
                                     <td className='govuk-table__cell'>{summary.case.deadline}</td>
                                 </tr>}
+                                {summary.additionalFields && Object.entries(summary.additionalFields).map(([label, value]) => this.renderRow({ label, value }))}
                             </tbody>
                         </table>
                         <table className='govuk-table margin-left--small'>
                             <caption className='govuk-table__caption margin-bottom--small' >Stage deadlines</caption>
                             <tbody className='govuk-table__body'>
-                                {summary.deadlines.map(stage => this.renderStageDeadline(stage))}
+                                {summary.deadlines.map(stage => this.renderRow(stage))}
                             </tbody>
                         </table>
                         <h2 className='govuk-heading-m'>Active stages</h2>
