@@ -3,7 +3,7 @@ const { Component, Choice } = require('../component-builder');
 const { infoServiceClient } = require('../../../libs/request');
 
 module.exports = async options => {
-    const response = await infoServiceClient.get(`/member/${options.context}/address`);
+    const response = await infoServiceClient.get(`/member/${options.context}`);
     return Form()
         .withTitle('Member details')
         .withField(
