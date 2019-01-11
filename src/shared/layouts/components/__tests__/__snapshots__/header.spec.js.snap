@@ -85,7 +85,7 @@ exports[`Layout header component should render with default props 1`] = `
             >
               <a
                 className="govuk-header__link"
-                href="/logout"
+                href="/oauth/logout"
               >
                 Logout
               </a>
@@ -183,7 +183,7 @@ exports[`Layout header component should render without crest when service is not
             >
               <a
                 className="govuk-header__link"
-                href="/logout"
+                href="/oauth/logout"
               >
                 Logout
               </a>
