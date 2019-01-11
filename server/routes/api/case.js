@@ -31,7 +31,9 @@ router.post('/:caseId/note',
     fileMiddleware.any(),
     createCaseNote,
     (req, res) => {
-        res.send();
+        res.json({
+            error: res.locals.error
+        });
     }
 );
 

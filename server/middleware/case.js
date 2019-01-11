@@ -39,6 +39,10 @@ function caseSummaryApiResponseMiddleware(req, res) {
 
 async function createCaseNote(req, res, next) {
     try {
+        if (!req.body.caseNote) {
+            res.locals.error = 'Case note must not be blank';
+            next();
+        }
         await caseworkServiceClient.post(`/case/${req.params.caseId}/note`, {
             text: req.body.caseNote,
             type: 'MANUAL'
@@ -46,6 +50,7 @@ async function createCaseNote(req, res, next) {
     } catch (error) {
         next(new Error(`Failed to attach case note to case ${req.params.caseId} `));
     }
+    next();
 }
 
 function returnToCase(req, res) {

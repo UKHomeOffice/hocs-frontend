@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { ApplicationConsumer } from '../../contexts/application.jsx';
@@ -15,7 +14,7 @@ class CaseNotes extends Component {
     constructor(props) {
         super(props);
         const { caseNotes } = props;
-        this.state = { caseNotes, caseNote: '' }
+        this.state = { caseNotes, caseNote: '' };
     }
 
     componentDidMount() {
@@ -66,18 +65,23 @@ class CaseNotes extends Component {
         e.preventDefault();
         const { page } = this.props;
         const { caseNote } = this.state;
+        // TODO: Remove
+        /* eslint-disable-next-line no-undef */
         const formData = new FormData();
         formData.append('caseNote', caseNote);
         axios.post(`/api/case/${page.params.caseId}/note`, formData, { headers: { 'Content-Type': 'multipart/form-data' } })
             .then(response => {
+                this.setState({ caseNote: '', submissionError: response.data.error });
                 this.getCaseNotes();
             })
-            .catch(error => console.error('Failed to submit case note'));
+            // TODO: Remove
+            /* eslint-disable-next-line  no-console*/
+            .catch(() => console.error('Failed to submit case note'));
     }
 
     render() {
         const { page } = this.props;
-        const { caseNotes } = this.state;
+        const { caseNote, caseNotes, submissionError } = this.state;
         return (
             <Fragment>
                 <div className='govuk-grid-row'>
@@ -90,19 +94,26 @@ class CaseNotes extends Component {
                             </summary>
                             <div className='govuk-details__text'>
                                 <form action={`/case/${page.params.caseId}/stage/${page.params.stageId}/note`} onSubmit={e => this.onSubmit(e)}>
-                                    <textarea className={'govuk-textarea form-control-3-4'}
-                                        id='case-note'
-                                        name='case-note'
-                                        disabled={false}
-                                        rows={5}
-                                        onBlur={e => this.setState({ caseNote: e.target.value })}
-                                        defaultValue={''}
-                                    />
+                                    <div className={`govuk-form-group${submissionError ? ' govuk-form-group--error' : ''}`}>
+
+                                        <label htmlFor={'case-note'} id={'case-note-label'} className='govuk-label govuk-label--s'>Case note</label>
+
+                                        {submissionError && <span id={'case-note-error'} className='govuk-error-message'>{submissionError}</span>}
+
+                                        <textarea className={'govuk-textarea form-control-3-4'}
+                                            id='case-note'
+                                            name='case-note'
+                                            disabled={false}
+                                            rows={5}
+                                            onBlur={e => this.setState({ caseNote: e.target.value })}
+                                            onChange={e => this.setState({ caseNote: e.target.value })}
+                                            value={caseNote}
+                                        />
+                                    </div>
                                     <Submit label='Add' />
                                 </form>
                             </div>
                         </details>
-                        {/* <Link classNam='govuk-body govuk-link' to={`/case/${page.params.caseId}/stage/${page.params.stageId}/entity/note/add`} >Add case note</Link> */}
                         <div className='timeline'>
                             <ul>
                                 {caseNotes && caseNotes.map((n, i) => this.renderCaseNote(n, i))}
@@ -122,6 +133,7 @@ CaseNotes.defaultProps = {
 
 CaseNotes.propTypes = {
     caseNotes: PropTypes.array.isRequired,
+    dispatch: PropTypes.func.isRequired,
     page: PropTypes.object.isRequired
 };
 
