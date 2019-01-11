@@ -4,6 +4,7 @@ import axios from 'axios';
 import { ApplicationConsumer } from '../../contexts/application.jsx';
 import {
     updateApiStatus,
+    unsetCaseNotes,
     clearApiStatus
 } from '../../contexts/actions/index.jsx';
 import status from '../../helpers/api-status.js';
@@ -19,6 +20,7 @@ class CaseNotes extends Component {
 
     componentDidMount() {
         this.getCaseNotes();
+        this.props.dispatch(unsetCaseNotes());
     }
 
     getCaseNotes() {

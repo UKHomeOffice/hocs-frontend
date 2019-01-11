@@ -116,3 +116,10 @@ export function clearWorkstack() {
         payload: null
     };
 }
+
+export function unsetCaseNotes() {
+    return {
+        type: types.UNSET_CASE_NOTES,
+        payload: null
+    };
+}

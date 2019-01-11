@@ -55,6 +55,8 @@ const reducer = (state, action) => {
         return { ...state, workstack: action.payload };
     case types.CLEAR_WORKSTACK:
         return { ...state, workstack: null };
+    case types.UNSET_CASE_NOTES:
+        return { ...state, caseNotes: [] };
     default:
         // TODO: Remove
         /* eslint-disable-next-line  no-console*/
