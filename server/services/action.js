@@ -99,7 +99,7 @@ const actions = {
                             topicUUID: form.data['topic'],
                             expires: form.data['expiry_date']
                         };
-                        response = await infoServiceClient.post('/standardline/document', request, headers);
+                        response = await infoServiceClient.post('/standardline', request, headers);
                         clientResponse = { summary: 'Created a new standard line' };
                         return handleActionSuccess(clientResponse, workflow, form);
                     case actionTypes.ADD_TEMPLATE:
@@ -110,7 +110,7 @@ const actions = {
                             displayName: document1.originalname,
                             caseType: form.data['caseType']
                         };
-                        response = await infoServiceClient.post('/template/document', request1, headers);
+                        response = await infoServiceClient.post('/template', request1, headers);
                         clientResponse = { summary: 'Created a new template' };
                         return handleActionSuccess(clientResponse, workflow, form);
                     /* eslint-enable no-case-declarations */
