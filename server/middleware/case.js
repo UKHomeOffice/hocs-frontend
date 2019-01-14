@@ -1,4 +1,6 @@
 const actionService = require('../services/action');
+const { caseworkServiceClient } = require('../libs/request');
+const User = require('../models/user');
 const { getList } = require('../services/list');
 
 async function caseResponseMiddleware(req, res, next) {
@@ -35,9 +37,31 @@ function caseSummaryApiResponseMiddleware(req, res) {
     return res.status(200).json(res.locals.summary);
 }
 
+async function createCaseNote(req, res, next) {
+    try {
+        if (!req.body.caseNote) {
+            res.locals.error = 'Case note must not be blank';
+            next();
+        }
+        await caseworkServiceClient.post(`/case/${req.params.caseId}/note`, {
+            text: req.body.caseNote,
+            type: 'MANUAL'
+        }, { headers: User.createHeaders(req.user) });
+    } catch (error) {
+        next(new Error(`Failed to attach case note to case ${req.params.caseId} `));
+    }
+    next();
+}
+
+function returnToCase(req, res) {
+    res.redirect(`/case/${req.params.caseId}/stage/${req.params.stageId}`);
+}
+
 module.exports = {
     caseResponseMiddleware,
     caseApiResponseMiddleware,
     caseSummaryMiddleware,
-    caseSummaryApiResponseMiddleware
+    caseSummaryApiResponseMiddleware,
+    createCaseNote,
+    returnToCase
 };

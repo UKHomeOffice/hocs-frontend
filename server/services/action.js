@@ -113,7 +113,7 @@ const actions = {
                     response = await infoServiceClient.post('/template', request1, headers);
                     clientResponse = { summary: 'Created a new template' };
                     return handleActionSuccess(clientResponse, workflow, form);
-                    /* eslint-enable no-case-declarations */
+                /* eslint-enable no-case-declarations */
                 }
             } else {
                 return handleActionSuccess(null, workflow, form);
@@ -166,7 +166,11 @@ const actions = {
                     }
                     await caseworkServiceClient.delete(`/case/${caseId}/stage/${stageId}/correspondent/${context}`, headers);
                     break;
+                case actionTypes.ADD_CASE_NOTE:
+                    await caseworkServiceClient.post(`/case/${caseId}/note`, { type: 'MANUAL', text: form.data['case-note'] }, headers);
+                    break;
                 }
+
                 return ({ callbackUrl: `/case/${caseId}/stage/${stageId}` });
             }
         } catch (e) {

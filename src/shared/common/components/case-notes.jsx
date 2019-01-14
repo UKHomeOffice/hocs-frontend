@@ -4,20 +4,23 @@ import axios from 'axios';
 import { ApplicationConsumer } from '../../contexts/application.jsx';
 import {
     updateApiStatus,
+    unsetCaseNotes,
     clearApiStatus
 } from '../../contexts/actions/index.jsx';
 import status from '../../helpers/api-status.js';
+import Submit from '../forms/submit.jsx';
 
 class CaseNotes extends Component {
 
     constructor(props) {
         super(props);
         const { caseNotes } = props;
-        this.state = { caseNotes }
+        this.state = { caseNotes, caseNote: '' };
     }
 
     componentDidMount() {
         this.getCaseNotes();
+        this.props.dispatch(unsetCaseNotes());
     }
 
     getCaseNotes() {
@@ -60,12 +63,59 @@ class CaseNotes extends Component {
         </li>);
     }
 
+    onSubmit(e) {
+        e.preventDefault();
+        const { page } = this.props;
+        const { caseNote } = this.state;
+        // TODO: Remove
+        /* eslint-disable-next-line no-undef */
+        const formData = new FormData();
+        formData.append('caseNote', caseNote);
+        axios.post(`/api/case/${page.params.caseId}/note`, formData, { headers: { 'Content-Type': 'multipart/form-data' } })
+            .then(response => {
+                this.setState({ caseNote: '', submissionError: response.data.error });
+                this.getCaseNotes();
+            })
+            // TODO: Remove
+            /* eslint-disable-next-line  no-console*/
+            .catch(() => console.error('Failed to submit case note'));
+    }
+
     render() {
-        const { caseNotes } = this.state;
+        const { page } = this.props;
+        const { caseNote, caseNotes, submissionError } = this.state;
         return (
             <Fragment>
                 <div className='govuk-grid-row'>
                     <div className='govuk-grid-column-full'>
+                        <details className='govuk-details'>
+                            <summary className='govuk-details__summary'>
+                                <span className='govuk-details__summary-text'>
+                                    Add case note
+                                </span>
+                            </summary>
+                            <div className='govuk-details__text'>
+                                <form action={`/case/${page.params.caseId}/stage/${page.params.stageId}/note`} onSubmit={e => this.onSubmit(e)}>
+                                    <div className={`govuk-form-group${submissionError ? ' govuk-form-group--error' : ''}`}>
+
+                                        <label htmlFor={'case-note'} id={'case-note-label'} className='govuk-label govuk-label--s'>Case note</label>
+
+                                        {submissionError && <span id={'case-note-error'} className='govuk-error-message'>{submissionError}</span>}
+
+                                        <textarea className={'govuk-textarea form-control-3-4'}
+                                            id='case-note'
+                                            name='case-note'
+                                            disabled={false}
+                                            rows={5}
+                                            onBlur={e => this.setState({ caseNote: e.target.value })}
+                                            onChange={e => this.setState({ caseNote: e.target.value })}
+                                            value={caseNote}
+                                        />
+                                    </div>
+                                    <Submit label='Add' />
+                                </form>
+                            </div>
+                        </details>
                         <div className='timeline'>
                             <ul>
                                 {caseNotes && caseNotes.map((n, i) => this.renderCaseNote(n, i))}
@@ -85,6 +135,7 @@ CaseNotes.defaultProps = {
 
 CaseNotes.propTypes = {
     caseNotes: PropTypes.array.isRequired,
+    dispatch: PropTypes.func.isRequired,
     page: PropTypes.object.isRequired
 };
 

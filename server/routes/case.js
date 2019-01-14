@@ -4,7 +4,7 @@ const { getCaseNotes } = require('../middleware/case-notes');
 const { fileMiddleware } = require('../middleware/file');
 const { processMiddleware } = require('../middleware/process');
 const { validationMiddleware } = require('../middleware/validation');
-const { caseSummaryMiddleware } = require('../middleware/case');
+const { caseSummaryMiddleware, createCaseNote, returnToCase } = require('../middleware/case');
 const { allocateCase, allocateCaseToTeamMember } = require('../middleware/stage');
 const { getFormForCase, getFormForStage } = require('../services/form');
 
@@ -20,6 +20,12 @@ router.post(['/:caseId/stage/:stageId', '/:caseId/stage/:stageId/allocate'],
     fileMiddleware.any(),
     processMiddleware,
     validationMiddleware
+);
+
+router.post('/:caseId/stage/:stageId/note',
+    fileMiddleware.any(),
+    createCaseNote,
+    returnToCase
 );
 
 module.exports = router;
