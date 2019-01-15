@@ -125,7 +125,6 @@ spec:
           - --secure-cookie=true
           - --http-only-cookie=true
           - --verbose
-          - --enable-token-header=false
         ports:
           - name: keycloak-http
             containerPort: 8081
