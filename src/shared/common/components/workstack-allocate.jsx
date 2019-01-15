@@ -9,7 +9,7 @@ class Workstack extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { workstack: props.items, data: { selected_cases: [], selected_user: null } };
+        this.state = { workstack: props.items, filtered: props.items, data: { selected_cases: [], selected_user: null } };
     }
 
     componentDidMount() {
@@ -17,7 +17,7 @@ class Workstack extends Component {
     }
 
     _onChange(e) {
-        const workstack = this.props.items;
+        const workstack = this.state.workstack;
         const filter = e.target.value ? e.target.value.toUpperCase() : '';
         if (filter !== '') {
             const filtered = workstack.filter(r => {
@@ -27,9 +27,9 @@ class Workstack extends Component {
                     (r.deadlineDisplay && r.deadlineDisplay.toUpperCase().indexOf(filter) !== -1) ||
                     (r.stageTypeDisplay && r.stageTypeDisplay.toUpperCase().indexOf(filter) !== -1);
             });
-            this.setState(state => ({ workstack: filtered, data: { ...state.data, selected_cases: filtered.filter(i => state.data.selected_cases.includes(`${i.caseUUID}:${i.uuid}`)).map(i => `${i.caseUUID}:${i.uuid}`) } }));
+            this.setState(state => ({ workstack, filtered, data: { ...state.data, selected_cases: filtered.filter(i => state.data.selected_cases.includes(`${i.caseUUID}:${i.uuid}`)).map(i => `${i.caseUUID}:${i.uuid}`) } }));
         } else {
-            this.setState(state => ({ workstack, data: state.data }));
+            this.setState(state => ({ workstack, filtered: workstack, data: state.data }));
         }
     }
 
@@ -49,11 +49,16 @@ class Workstack extends Component {
             }
         });
         axios.post('/api' + endpoint, formData, { headers: { 'Content-Type': 'multipart/form-data' } })
-            .then(({ data: { workstack, notification } }) => this.setState({ workstack: workstack.items, notification }));
+            .then(({ data: { workstack, notification } }) => this.setState({
+                workstack: workstack.items,
+                filtered: workstack.items
+                    .filter(({ caseReference }) => this.state.filtered.map(({ caseReference }) => caseReference).includes(caseReference)),
+                notification
+            }));
     }
 
     render() {
-        const { workstack: cases, mounted, notification } = this.state;
+        const { filtered: cases, mounted, notification } = this.state;
         const { baseUrl, teamMembers, allocateToUserEndpoint, allocateToTeamEndpoint, allocateToWorkstackEndpoint } = this.props;
         let name = 'test', className, error, disabled;
         return (
