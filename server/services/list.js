@@ -455,6 +455,7 @@ const lists = {
         }
     },
     'CASE_SUMMARY': async ({ caseId, user }) => {
+        const formatDate = date => Intl.DateTimeFormat('en-GB').format(new Date(date));
         const list = listDefinitions['caseSummary'].call(this, { caseId });
         const response = await fetchList(list, {
             headers: User.createHeaders(user)
@@ -462,10 +463,12 @@ const lists = {
         if (response.data) {
             return ({
                 case: {
-                    received: response.data.DateReceived ? Intl.DateTimeFormat('en-GB').format(new Date(response.data.DateReceived)) : null,
-                    deadline: response.data.caseDeadline ? Intl.DateTimeFormat('en-GB').format(new Date(response.data.caseDeadline)) : null
+                    received: response.data.DateReceived ? formatDate(response.data.DateReceived) : null,
+                    deadline: response.data.caseDeadline ? formatDate(response.data.caseDeadline) : null
                 },
-                additionalFields: response.data.additionalFields,
+                additionalFields: response.data.additionalFields.map(({ label, value, type }) => type === 'date' ? ({ label, value: formatDate(value) }) : ({ label, value })),
+                primaryTopic: response.data.primaryTopic ? response.data.primaryTopic.label : null,
+                primaryCorrespondent: response.data.primaryCorrespondent ? response.data.primaryCorrespondent.fullname : null,
                 deadlines: Object.entries(response.data.stageDeadlines)
                     .sort((first, second) => (first[1] > second[1]) ? 1 : -1)
                     .map(([stage, deadline]) => ({
@@ -473,7 +476,7 @@ const lists = {
                             const stageType = listRepository.stageTypes.stageTypes.find(i => i.value === stage) || {};
                             return stageType.label;
                         })(stage),
-                        value: deadline ? Intl.DateTimeFormat('en-GB').format(new Date(deadline)) : null
+                        value: deadline ? formatDate(deadline) : null
                     })),
                 stages: response.data.activeStages.map(activeStage => ({
                     stage: (stage => {
