@@ -467,8 +467,8 @@ const lists = {
                     deadline: response.data.caseDeadline ? formatDate(response.data.caseDeadline) : null
                 },
                 additionalFields: response.data.additionalFields.map(({ label, value, type }) => type === 'date' ? ({ label, value: formatDate(value) }) : ({ label, value })),
-                primaryTopic: response.data.primaryTopic.label,
-                primaryCorrespondent: response.data.primaryCorrespondent.fullname,
+                primaryTopic: response.data.primaryTopic ? response.data.primaryTopic.label : null,
+                primaryCorrespondent: response.data.primaryCorrespondent ? response.data.primaryCorrespondent.fullname : null,
                 deadlines: Object.entries(response.data.stageDeadlines)
                     .sort((first, second) => (first[1] > second[1]) ? 1 : -1)
                     .map(([stage, deadline]) => ({
