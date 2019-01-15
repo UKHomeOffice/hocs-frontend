@@ -1,4 +1,4 @@
-import { authMiddleware, protect, protectAction } from '../auth';
+import { authMiddleware, protect } from '../auth';
 import User from '../../models/user';
 
 const mockHeaders = {
@@ -82,50 +82,6 @@ describe('Protect middleware', () => {
 
     it('should create an instance of the Error model on the request object when required role is missing', () => {
         const protectMiddleware = protect('SOME_UNDEFINED_ROLE');
-        protectMiddleware(req, res, next);
-        expect(next).toHaveBeenCalled();
-        expect(next.mock.calls[0][0]).toBeInstanceOf(Error);
-        expect(next.mock.calls[0][0].status).toEqual(403);
-    });
-
-});
-
-describe('Protect Action middleware', () => {
-
-    const next = jest.fn();
-
-    beforeEach(() => {
-        req = {
-            user: new User({
-                roles: 'TEST_ROLE'
-            })
-        };
-        res = {};
-        next.mockReset();
-    });
-
-    it('should call next when required role is on the user object', () => {
-        const protectMiddleware = protectAction();
-        req.form = {
-            requiredRole: 'TEST_ROLE'
-        };
-        protectMiddleware(req, res, () => {
-            expect(req.error).toBeUndefined();
-        });
-    });
-
-    it('should call next when no form is on the request object', () => {
-        const protectMiddleware = protectAction();
-        protectMiddleware(req, res, () => {
-            expect(req.error).toBeUndefined();
-        });
-    });
-
-    it('should create and instance of the Error model on the request object when required role is missing', () => {
-        const protectMiddleware = protectAction();
-        req.form = {
-            requiredRole: 'NOT_TEST_ROLE'
-        };
         protectMiddleware(req, res, next);
         expect(next).toHaveBeenCalled();
         expect(next.mock.calls[0][0]).toBeInstanceOf(Error);

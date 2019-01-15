@@ -4,7 +4,6 @@ const { ADD_TEMPLATE, ADD_STANDARD_LINE, IS_MEMBER, ADD_MEMBER, SELECT_MEMBER, A
 const formDefinitions = {
     ACTION: {
         CREATE: {
-            requiredRole: CREATE_CASE,
             WORKFLOW: {
                 builder: formRepository.caseCreate,
                 next: {
@@ -40,13 +39,11 @@ const formDefinitions = {
             }
         },
         TEST: {
-            requiredRole: 'TEST',
             FORM: {
                 builder: formRepository.testForm
             }
         },
         BULK: {
-            requiredRole: BULK_CREATE_CASE,
             WORKFLOW: {
                 builder: formRepository.bulkCaseCreate,
                 next: {
@@ -148,13 +145,11 @@ module.exports = {
                 } else {
                     formDefinition = formDefinitions[context.toUpperCase()][workflow.toUpperCase()][action.toUpperCase()];
                 }
-                const requiredRole = formDefinitions[context.toUpperCase()][workflow.toUpperCase()].requiredRole;
                 const form = await formDefinition.builder.call(this, {});
                 return {
                     schema: form.schema,
                     next: formDefinition.next,
                     action: formDefinition.action,
-                    requiredRole,
                     data: form.data
                 };
             } catch (e) {
