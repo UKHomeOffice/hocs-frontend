@@ -2,7 +2,7 @@ const Form = require('../form-builder');
 const { Component, Choice } = require('../component-builder');
 
 module.exports = options => Form()
-    .withTitle('Record correspondent details')
+    .withTitle('Record Correspondent Details')
     .withField(
         Component('dropdown', 'type')
             .withValidator('required', 'The correspondent must have a type')
@@ -52,12 +52,12 @@ module.exports = options => Form()
     )
     .withField(
         Component('text', 'email')
-            .withProp('label', 'Email address')
+            .withProp('label', 'Email Address')
             .build()
     )
     .withField(
         Component('text', 'reference')
-            .withProp('label', 'Does this correspondent give a case reference?')
+            .withProp('label', 'Does this correspondent give a reference?')
             .build()
     )
     .withPrimaryActionLabel('Add')

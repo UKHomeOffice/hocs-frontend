@@ -80,7 +80,7 @@ class StageSummary extends Component {
                                     <th className='govuk-table__header padding-left--small'>Primary correspondent</th>
                                     <td className='govuk-table__cell'>{summary.primaryCorrespondent}</td>
                                 </tr>}
-                                {summary.additionalFields && Object.entries(summary.additionalFields).map(([label, value]) => this.renderRow({ label, value }))}
+                                {summary.additionalFields && summary.additionalFields.map(({label, value}) => this.renderRow({ label, value }))}
                             </tbody>
                         </table>
                         <table className='govuk-table margin-left--small'>

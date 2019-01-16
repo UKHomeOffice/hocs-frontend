@@ -56,12 +56,12 @@ module.exports = async options => {
         )
         .withField(
             Component('text', 'email')
-                .withProp('label', 'Email address')
+                .withProp('label', 'Email Address')
                 .build()
         )
         .withField(
             Component('text', 'reference')
-                .withProp('label', 'Does this correspondent give a case reference?')
+                .withProp('label', 'Does this correspondent give a reference?')
                 .build()
         )
         .withPrimaryActionLabel('Add')
