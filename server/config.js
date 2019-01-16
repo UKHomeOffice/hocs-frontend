@@ -20,9 +20,9 @@ const config = {
             },
             body: {
                 phaseBanner: {
-                    isVisible: false,
-                    phase: 'ALPHA',
-                    feedbackUrl: '#'
+                    isVisible: true,
+                    phase: 'BETA',
+                    feedbackUrl: 'mailto:HOCS@homeoffice.gov.uk'
                 }
             },
             footer: {
