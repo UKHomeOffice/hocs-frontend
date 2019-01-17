@@ -54,19 +54,26 @@ class WorkstackPage extends Component {
         //submit the allocation form
     }
 
-    updateFormData(update) {
-        this.setState(state => ({ ...state, data: { ...state.data, ...update } }));
+    updateFormData(e) {
+        const selection = new Set(this.state.formData.selected_cases || []);
+        if (selection.has(e.target.value)) {
+            selection.delete(e.target.value);
+        } else {
+            selection.add(e.target.value);
+        }
+        this.setState(state => ({ ...state, formData: { ...state.formData, selected_cases: Array.from(selection) } }));
     }
 
     renderWorkstack() {
         const { match: { url } } = this.props;
-        const { workstack = {} } = this.state;
+        const { workstack = {}, formData } = this.state;
         const { allocateToUserEndpoint, allocateToTeamEndpoint, allocateToWorkstackEndpoint, items, teamMembers } = workstack;
         return (
             <Fragment>
                 <Workstack
                     baseUrl={url}
                     items={items}
+                    selectedCases={formData['selected_cases[]']}
                     teamMembers={teamMembers}
                     allocateToUserEndpoint={allocateToUserEndpoint}
                     allocateToTeamEndpoint={allocateToTeamEndpoint}

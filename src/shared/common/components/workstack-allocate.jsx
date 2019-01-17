@@ -28,7 +28,6 @@ export default class WorkstackAllocate extends Component {
     }
 
     filter(e) {
-        // filter the stack
         const { items } = this.props;
         const filter = e.target.value ? e.target.value.toUpperCase() : '';
         if (filter !== '') {
@@ -39,9 +38,9 @@ export default class WorkstackAllocate extends Component {
                     (r.deadlineDisplay && r.deadlineDisplay.toUpperCase().indexOf(filter) !== -1) ||
                     (r.stageTypeDisplay && r.stageTypeDisplay.toUpperCase().indexOf(filter) !== -1);
             });
-            this.setState(state => ({ items: filtered }));
+            this.setState({ items: filtered });
         } else {
-            this.setState(state => ({ items }));
+            this.setState({ items });
         }
     }
 
@@ -76,8 +75,8 @@ export default class WorkstackAllocate extends Component {
                                 type='checkbox'
                                 name={'selected_cases[]'}
                                 value={value}
-                                checked={false}
-                                onChange={() => { }}
+                                // checked={e => {}}
+                                onChange={e => this.props.updateFormData(e)}
                                 className={'govuk-checkboxes__input'}
                             />
                             <label className='govuk-label govuk-checkboxes__label' htmlFor={caseUUID}></label>
@@ -131,7 +130,7 @@ export default class WorkstackAllocate extends Component {
                                                     </tr>
                                                 </thead>
                                                 <tbody className='govuk-table__body'>
-                                                    {items && items.map(this.renderRow)}
+                                                    {items && items.map((row, key) => this.renderRow.call(this, row, key))}
                                                 </tbody>
                                             </table>
                                         </div>
