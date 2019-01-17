@@ -1,8 +1,7 @@
 import React, { Component, Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import { ApplicationConsumer } from '../contexts/application.jsx';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import { ApplicationConsumer } from '../contexts/application.jsx';
 import {
     clearWorkstack,
     updateApiStatus,
@@ -10,49 +9,26 @@ import {
 } from '../contexts/actions/index.jsx';
 import status from '../helpers/api-status.js';
 import Workstack from '../common/components/workstack-allocate.jsx';
-import Dashboard from '../common/components/dashboard-new.jsx';
-
-const renderBreadCrumb = ({ key, label, to, isLast }) => (
-    <li key={key} className='govuk-breadcrumbs__list-item'>
-        {isLast ? label : <Link className='govuk-breadcrumbs__link' to={to}>{label}</Link>}
-    </li>
-);
-
-renderBreadCrumb.propTypes = {
-    key: PropTypes.number.isRequired,
-    label: PropTypes.string.isRequired,
-    to: PropTypes.string.isRequired,
-    isLast: PropTypes.bool.isRequired
-};
-
-const Breadcrumbs = ({ items }) => (
-    <div className='govuk-breadcrumbs'>
-        <ol className='govuk-breadcrumbs__list'>
-            {items.map((item, i) => renderBreadCrumb({ ...item, key: i, isLast: (items.length > 1 && i === (items.length - 1)) }))}
-        </ol>
-    </div>
-);
-
-Breadcrumbs.propTypes = {
-    items: PropTypes.array.isRequired
-};
 
 class WorkstackPage extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { workstack: props.workstack };
+        this.state = { workstack: props.workstack, formData: {} };
     }
 
     componentDidMount() {
-        const { dispatch, workstack } = this.props;
+        const { workstack } = this.state;
+        const { dispatch } = this.props;
+
         if (!workstack) {
-            return this.getWorkstackData();
+            this.getWorkstack();
         }
+
         dispatch(clearWorkstack());
     }
 
-    getWorkstackData() {
+    getWorkstack() {
         const { dispatch, match: { url } } = this.props;
         const endpoint = '/api' + url;
         return dispatch(updateApiStatus(status.REQUEST_WORKSTACK_DATA))
@@ -72,68 +48,62 @@ class WorkstackPage extends Component {
             });
     }
 
+    submitHandler(e) {
+        e.preventDefault();
+        console.log('ALLLOCATING');
+        //submit the allocation form
+    }
+
+    updateFormData(update) {
+        this.setState(state => ({ ...state, data: { ...state.data, ...update } }));
+    }
+
     renderWorkstack() {
-        const { workstack } = this.state;
         const { match: { url } } = this.props;
+        const { workstack = {} } = this.state;
+        const { allocateToUserEndpoint, allocateToTeamEndpoint, allocateToWorkstackEndpoint, items, teamMembers } = workstack;
         return (
             <Fragment>
-                <Workstack baseUrl={url} {...workstack} />
+                <Workstack
+                    baseUrl={url}
+                    items={items}
+                    teamMembers={teamMembers}
+                    allocateToUserEndpoint={allocateToUserEndpoint}
+                    allocateToTeamEndpoint={allocateToTeamEndpoint}
+                    allocateToWorkstackEndpoint={allocateToWorkstackEndpoint}
+                    submitHandler={this.submitHandler.bind(this)}
+                    updateFormData={this.updateFormData.bind(this)}
+                />
             </Fragment>
         );
     }
 
-    renderDashboard(dashboard) {
-        const { match: { url } } = this.props;
+    renderEmpty() {
         return (
-            <Fragment>
-                <Dashboard dashboard={dashboard} baseUrl={url} />
-            </Fragment>
+            <span className='govuk-body'>Nothing to display</span>
         );
-    }
-
-    renderBreadCrumb(items) {
-        return (<Breadcrumbs items={items} />);
     }
 
     render() {
         const { workstack } = this.state;
         return (
-            <Fragment>
-                {workstack ?
-                    <Fragment>
-                        {workstack.breadcrumbs && this.renderBreadCrumb(workstack.breadcrumbs)}
-                        <h1 className="govuk-heading-m">
-                            {workstack.label}
-                        </h1>
-                        {workstack.dashboard && this.renderDashboard(workstack.dashboard)}
-                        {this.renderWorkstack()}
-                    </Fragment>
-                    : null
-                }
-            </Fragment>
+            <div>
+                {workstack ? this.renderWorkstack() : this.renderEmpty()}
+            </div>
         );
     }
+
 }
 
 WorkstackPage.propTypes = {
-    workstack: PropTypes.object,
     dispatch: PropTypes.func.isRequired,
-    match: PropTypes.object.isRequired
-};
+    workstack: PropTypes.object.isRequired
+}
 
-const WrappedWorkstackPage = props => {
-    return (
-        <ApplicationConsumer>
-            {({ dispatch, workstack, ref }) => (
-                <WorkstackPage
-                    {...props}
-                    ref={ref}
-                    dispatch={dispatch}
-                    workstack={workstack}
-                />
-            )}
-        </ApplicationConsumer>
-    );
-};
-
-export default WrappedWorkstackPage;
+export default (props) => (
+    <ApplicationConsumer>
+        {({ dispatch, workstack }) => (
+            <WorkstackPage {...props} dispatch={dispatch} workstack={workstack} />
+        )}
+    </ApplicationConsumer>
+)

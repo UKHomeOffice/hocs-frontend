@@ -41,7 +41,7 @@ function handleListSuccess(listId, response) {
 
 function handleListFailure(listId, error) {
     logger.error({ event: events.FETCH_LIST_FAILURE, list: listId, stack: error.stack });
-    // listRepository[listId] = [];
+    listRepository[listId] = [];
 }
 
 function compareListItems(first, second) {
@@ -146,9 +146,10 @@ const lists = {
         const response = await fetchList(list, {
             headers: User.createHeaders(user)
         }, caseworkServiceClient);
-        const userTeamsResponse = await fetchList(`/teams/${teamId}/members`, {
-            headers: User.createHeaders(user)
-        }, infoServiceClient);
+        // const userTeamsResponse = await fetchList(`/teams/${teamId}/members`, {
+        //     headers: User.createHeaders(user)
+        // }, infoServiceClient);
+        const userTeamsResponse = { data: [] };
         const { isOverdue, isUnallocated, setTag, bindDisplayElements } = helpers;
         const workstackData = response.data.stages
             .filter(item => item.teamUUID === teamId)
