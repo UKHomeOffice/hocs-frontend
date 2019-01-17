@@ -146,10 +146,9 @@ const lists = {
         const response = await fetchList(list, {
             headers: User.createHeaders(user)
         }, caseworkServiceClient);
-        // const userTeamsResponse = await fetchList(`/teams/${teamId}/members`, {
-        //     headers: User.createHeaders(user)
-        // }, infoServiceClient);
-        const userTeamsResponse = { data: [] };
+        const userTeamsResponse = await fetchList(`/teams/${teamId}/members`, {
+            headers: User.createHeaders(user)
+        }, infoServiceClient);
         const { isOverdue, isUnallocated, setTag, bindDisplayElements } = helpers;
         const workstackData = response.data.stages
             .filter(item => item.teamUUID === teamId)
