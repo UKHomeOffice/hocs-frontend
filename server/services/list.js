@@ -467,8 +467,8 @@ const lists = {
                     deadline: response.data.caseDeadline ? formatDate(response.data.caseDeadline) : null
                 },
                 additionalFields: response.data.additionalFields.map(({ label, value, type }) => type === 'date' ? ({ label, value: formatDate(value) }) : ({ label, value })),
-                primaryTopic: response.data.primaryTopic.label,
-                primaryCorrespondent: response.data.primaryCorrespondent.fullname,
+                primaryTopic: response.data.primaryTopic ? response.data.primaryTopic.label : null,
+                primaryCorrespondent: response.data.primaryCorrespondent ? response.data.primaryCorrespondent.fullname : null,
                 deadlines: Object.entries(response.data.stageDeadlines)
                     .sort((first, second) => (first[1] > second[1]) ? 1 : -1)
                     .map(([stage, deadline]) => ({
@@ -506,12 +506,42 @@ const lists = {
         }, infoServiceClient);
         if (response.data) {
             return response.data
-                .map(user => ({
-                    label: `${user.firstName} ${user.lastName} (${user.username})`,
-                    value: user.id
+                .map(({ id, firstName, lastName, username }) => ({
+                    label: `${firstName} ${lastName} (${username})`,
+                    value: id
                 }));
         } else {
-            logger.warn({ event: events.FETCH_LIST_RETURN_EMPTY, list: 'CASE_CORRESPONDENTS' });
+            logger.warn({ event: events.FETCH_LIST_RETURN_EMPTY, list: 'USERS_IN_TEAM' });
+            return [];
+        }
+    },
+    'USERS_FOR_CASE': async ({ user, caseId, stageId }) => {
+        const response = await fetchList(`/case/${caseId}/stage/${stageId}/team/members`, {
+            headers: User.createHeaders(user)
+        }, infoServiceClient);
+        if (response.data) {
+            return response.data
+                .map(({ id, firstName, lastName, username }) => ({
+                    label: `${firstName} ${lastName} (${username})`,
+                    value: id
+                }));
+        } else {
+            logger.warn({ event: events.FETCH_LIST_RETURN_EMPTY, list: 'USERS_FOR_CASE' });
+            return [];
+        }
+    },
+    'PRIVATE_OFFICE_TEAMS': async ({ user }) => {
+        const response = await fetchList('/teams?unit=privateOffice', {
+            headers: User.createHeaders(user)
+        }, infoServiceClient);
+        if (response.data) {
+            return response.data
+                .map(({ displayName, type }) => ({
+                    label: displayName,
+                    value: type
+                }));
+        } else {
+            logger.warn({ event: events.FETCH_LIST_RETURN_EMPTY, list: 'PRIVATE_OFFICE_TEAMS' });
             return [];
         }
     }
