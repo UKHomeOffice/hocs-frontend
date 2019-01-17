@@ -506,12 +506,42 @@ const lists = {
         }, infoServiceClient);
         if (response.data) {
             return response.data
-                .map(user => ({
-                    label: `${user.firstName} ${user.lastName} (${user.username})`,
-                    value: user.id
+                .map(({ id, firstName, lastName, username }) => ({
+                    label: `${firstName} ${lastName} (${username})`,
+                    value: id
                 }));
         } else {
-            logger.warn({ event: events.FETCH_LIST_RETURN_EMPTY, list: 'CASE_CORRESPONDENTS' });
+            logger.warn({ event: events.FETCH_LIST_RETURN_EMPTY, list: 'USERS_IN_TEAM' });
+            return [];
+        }
+    },
+    'USERS_FOR_CASE': async ({ user, caseId, stageId }) => {
+        const response = await fetchList(`/case/${caseId}/stage/${stageId}/team/members`, {
+            headers: User.createHeaders(user)
+        }, infoServiceClient);
+        if (response.data) {
+            return response.data
+                .map(({ id, firstName, lastName, username }) => ({
+                    label: `${firstName} ${lastName} (${username})`,
+                    value: id
+                }));
+        } else {
+            logger.warn({ event: events.FETCH_LIST_RETURN_EMPTY, list: 'USERS_FOR_CASE' });
+            return [];
+        }
+    },
+    'PRIVATE_OFFICE_TEAMS': async ({ user }) => {
+        const response = await fetchList('/teams?unit=privateOffice', {
+            headers: User.createHeaders(user)
+        }, infoServiceClient);
+        if (response.data) {
+            return response.data
+                .map(({ displayName, type }) => ({
+                    label: displayName,
+                    value: type
+                }));
+        } else {
+            logger.warn({ event: events.FETCH_LIST_RETURN_EMPTY, list: 'PRIVATE_OFFICE_TEAMS' });
             return [];
         }
     }
