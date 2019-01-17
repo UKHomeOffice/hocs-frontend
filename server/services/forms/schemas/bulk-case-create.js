@@ -2,7 +2,7 @@ const Form = require('../form-builder');
 const { Component } = require('../component-builder');
 
 module.exports = () => Form()
-    .withTitle('Create new cases in bulk')
+    .withTitle('Create Bulk Cases')
     .withField(
         Component('radio', 'case-type')
             .withValidator('required', 'Case type is required')

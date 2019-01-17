@@ -27,6 +27,11 @@ $govuk-font-family-tabular: 'helvetica neue',Arial, Helvetica, sans-serif !defau
   text-align: left;
 }
 
+.govuk-input:disabled, .govuk-textarea:disabled{
+  background-color: govuk-colour("grey-4");
+  border-color: govuk-colour("grey-4");
+}
+
 // Code block styling:
 .code {
   font-family: monospace;
