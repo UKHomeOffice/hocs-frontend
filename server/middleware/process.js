@@ -39,13 +39,13 @@ const customAdapters = {
 
 function defaultAdapter(reducer, field, data) {
     const { name } = field.props;
-    const result = data[name] === 'undefined' ? null : data[name];
+    const result = data[name] === 'null' ? null : data[name];
     reducer[name] = result;
 }
 
 function processMiddleware(req, res, next) {
     try {
-        const data = JSON.parse(JSON.stringify(req.body));
+        const data = req.body;
         const { schema } = req.form;
         req.form.data = schema.fields
             .filter(field => field.type !== 'display')
