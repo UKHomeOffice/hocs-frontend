@@ -20,15 +20,30 @@ export default class WorkstackAllocate extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { items: props.items };
+        const { items, selectedCases = [] } = props;
+        this.state = { items, selectedCases };
     }
 
     componentDidMount() {
         this.setState({ isMounted: true })
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (this.props.items != nextProps.items) {
+            this.setState({ items: nextProps.items });
+        }
+    }
+
+    filterBySelected(selected) {
+        const { selectedCases } = this.state;
+        return selected
+            .filter(({ uuid, caseUUID }) => selectedCases.includes(`${caseUUID}:${uuid}`))
+            .map(({ uuid, caseUUID }) => `${caseUUID}:${uuid}`)
+    }
+
     filter(e) {
-        const { items } = this.props;
+        const { items, updateFormData } = this.props;
+        const { selectedCases } = this.state;
         const filter = e.target.value ? e.target.value.toUpperCase() : '';
         if (filter !== '') {
             const filtered = items.filter(r => {
@@ -38,9 +53,10 @@ export default class WorkstackAllocate extends Component {
                     (r.deadlineDisplay && r.deadlineDisplay.toUpperCase().indexOf(filter) !== -1) ||
                     (r.stageTypeDisplay && r.stageTypeDisplay.toUpperCase().indexOf(filter) !== -1);
             });
-            this.setState({ items: filtered });
+            this.setState({ items: filtered, selectedCases: this.filterBySelected(filtered) });
+            updateFormData({ selected_cases: this.filterBySelected(filtered) });
         } else {
-            this.setState({ items });
+            this.setState({ items, selectedCases });
         }
     }
 
@@ -66,8 +82,19 @@ export default class WorkstackAllocate extends Component {
 
     renderRow({ uuid, caseUUID, caseReference, stageTypeDisplay, assignedUserDisplay, assignedTeamDisplay, deadlineDisplay }, key) {
         const value = `${caseUUID}:${uuid}`;
+        const handleChange = (e) => {
+            const { selectedCases } = this.state;
+            const selection = new Set(selectedCases);
+            if (selection.has(e.target.value)) {
+                selection.delete(e.target.value);
+            } else {
+                selection.add(e.target.value);
+            }
+            this.setState(state => ({ ...state, selectedCases: Array.from(selection) }));
+            this.props.updateFormData({ selected_cases: Array.from(selection) })
+        }
         return (
-            <tr key={key} className='govuk-radios govuk-table__row'>
+            <tr key={uuid} className='govuk-radios govuk-table__row'>
                 <td className='govuk-table__cell'>
                     <div className='govuk-checkboxes'>
                         <div key={key} className='govuk-checkboxes__item'>
@@ -75,8 +102,8 @@ export default class WorkstackAllocate extends Component {
                                 type='checkbox'
                                 name={'selected_cases[]'}
                                 value={value}
-                                // checked={e => {}}
-                                onChange={e => this.props.updateFormData(e)}
+                                checked={this.state.selectedCases.includes(value)}
+                                onChange={handleChange.bind(this)}
                                 className={'govuk-checkboxes__input'}
                             />
                             <label className='govuk-label govuk-checkboxes__label' htmlFor={caseUUID}></label>
@@ -130,7 +157,7 @@ export default class WorkstackAllocate extends Component {
                                                     </tr>
                                                 </thead>
                                                 <tbody className='govuk-table__body'>
-                                                    {items && items.map((row, key) => this.renderRow.call(this, row, key))}
+                                                    {items && items.map(this.renderRow.bind(this))}
                                                 </tbody>
                                             </table>
                                         </div>

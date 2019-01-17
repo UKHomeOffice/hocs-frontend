@@ -48,20 +48,27 @@ class WorkstackPage extends Component {
             });
     }
 
-    submitHandler(e) {
+    submitHandler(e, endpoint) {
         e.preventDefault();
-        console.log('ALLLOCATING');
-        //submit the allocation form
+        const { formData } = this.state;
+        // TODO: Remove
+        /* eslint-disable-next-line no-undef */
+        const payload = new FormData();
+        Object.keys(formData).forEach(field => {
+            if (Array.isArray(formData[field])) {
+                formData[field].map(value => {
+                    payload.append(`${field}`, value);
+                });
+            } else {
+                payload.append(field, formData[field]);
+            }
+        });
+        axios.post('/api' + endpoint, payload, { headers: { 'Content-Type': 'multipart/form-data' } })
+            .then(({ data: { workstack } }) => this.setState({ workstack }));
     }
 
-    updateFormData(e) {
-        const selection = new Set(this.state.formData.selected_cases || []);
-        if (selection.has(e.target.value)) {
-            selection.delete(e.target.value);
-        } else {
-            selection.add(e.target.value);
-        }
-        this.setState(state => ({ ...state, formData: { ...state.formData, selected_cases: Array.from(selection) } }));
+    updateFormData(update) {
+        this.setState(state => ({ ...state, formData: { ...state.formData, ...update } }));
     }
 
     renderWorkstack() {
@@ -73,7 +80,7 @@ class WorkstackPage extends Component {
                 <Workstack
                     baseUrl={url}
                     items={items}
-                    selectedCases={formData['selected_cases[]']}
+                    selectedCases={formData['selected_cases']}
                     teamMembers={teamMembers}
                     allocateToUserEndpoint={allocateToUserEndpoint}
                     allocateToTeamEndpoint={allocateToTeamEndpoint}
