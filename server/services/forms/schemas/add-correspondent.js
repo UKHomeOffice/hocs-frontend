@@ -2,7 +2,7 @@ const Form = require('../form-builder');
 const { Component, Choice } = require('../component-builder');
 
 module.exports = options => Form()
-    .withTitle('Add correspondent')
+    .withTitle('Add Correspondent')
     .withField(
         Component('radio', 'isMember')
             .withValidator('required', 'The correspondent type must be provided')
