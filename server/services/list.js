@@ -544,6 +544,21 @@ const lists = {
             logger.warn({ event: events.FETCH_LIST_RETURN_EMPTY, list: 'PRIVATE_OFFICE_TEAMS' });
             return [];
         }
+    },
+    'DRAFT_TEAMS': async ({ user }) => {
+        const response = await fetchList('/teams/drafters', {
+            headers: User.createHeaders(user)
+        }, infoServiceClient);
+        if (response.data) {
+            return response.data
+                .map(({ displayName, type }) => ({
+                    label: displayName,
+                    value: type
+                }));
+        } else {
+            logger.warn({ event: events.FETCH_LIST_RETURN_EMPTY, list: 'DRAFT_TEAMS' });
+            return [];
+        }
     }
 };
 
