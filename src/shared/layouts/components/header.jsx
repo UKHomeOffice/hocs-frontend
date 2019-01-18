@@ -16,16 +16,16 @@ class Header extends Component {
                     <nav>
                         <ul id='navigation' className='govuk-header__navigation ' aria-label='Top Level Navigation'>
                             <li className='govuk-header__navigation-item'>
-                                <Link to='/action/create/workflow' className='govuk-header__link'>Create single case</Link>
+                                <Link to='/action/create/workflow' className='govuk-header__link'>Create Single Case</Link>
                             </li>
                             <li className='govuk-header__navigation-item'>
-                                <Link to='/action/bulk/workflow' className='govuk-header__link'>Create cases in bulk</Link>
+                                <Link to='/action/bulk/workflow' className='govuk-header__link'>Create Bulk Cases</Link>
                             </li>
                             <li className='govuk-header__navigation-item'>
-                                <Link to='/action/standard_line/add' className='govuk-header__link'>Add standard line</Link>
+                                <Link to='/action/standard_line/add' className='govuk-header__link'>Add Standard Line</Link>
                             </li>
                             <li className='govuk-header__navigation-item'>
-                                <Link to='/action/template/add' className='govuk-header__link'>Add template</Link>
+                                <Link to='/action/template/add' className='govuk-header__link'>Add Template</Link>
                             </li>
                             <li className='govuk-header__navigation-item'>
                                 <a href='/oauth/logout' className='govuk-header__link'>Logout</a>

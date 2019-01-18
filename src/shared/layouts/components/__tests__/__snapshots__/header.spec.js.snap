@@ -44,7 +44,7 @@ exports[`Layout header component should render with default props 1`] = `
                 replace={false}
                 to="/action/create/workflow"
               >
-                Create single case
+                Create Single Case
               </Link>
             </li>
             <li
@@ -55,7 +55,7 @@ exports[`Layout header component should render with default props 1`] = `
                 replace={false}
                 to="/action/bulk/workflow"
               >
-                Create cases in bulk
+                Create Bulk Cases
               </Link>
             </li>
             <li
@@ -66,7 +66,7 @@ exports[`Layout header component should render with default props 1`] = `
                 replace={false}
                 to="/action/standard_line/add"
               >
-                Add standard line
+                Add Standard Line
               </Link>
             </li>
             <li
@@ -77,7 +77,7 @@ exports[`Layout header component should render with default props 1`] = `
                 replace={false}
                 to="/action/template/add"
               >
-                Add template
+                Add Template
               </Link>
             </li>
             <li
@@ -142,7 +142,7 @@ exports[`Layout header component should render without crest when service is not
                 replace={false}
                 to="/action/create/workflow"
               >
-                Create single case
+                Create Single Case
               </Link>
             </li>
             <li
@@ -153,7 +153,7 @@ exports[`Layout header component should render without crest when service is not
                 replace={false}
                 to="/action/bulk/workflow"
               >
-                Create cases in bulk
+                Create Bulk Cases
               </Link>
             </li>
             <li
@@ -164,7 +164,7 @@ exports[`Layout header component should render without crest when service is not
                 replace={false}
                 to="/action/standard_line/add"
               >
-                Add standard line
+                Add Standard Line
               </Link>
             </li>
             <li
@@ -175,7 +175,7 @@ exports[`Layout header component should render without crest when service is not
                 replace={false}
                 to="/action/template/add"
               >
-                Add template
+                Add Template
               </Link>
             </li>
             <li

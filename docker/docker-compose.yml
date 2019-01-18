@@ -123,6 +123,8 @@ services:
       DB_HOST: 'postgres'
       AWS_LOCAL_HOST: 'localstack'
       HOCS_INFO_SERVICE: 'http://info:8080'
+      AUDIT_QUEUE_NAME: 'reporting-queue'
+      AUDIT_QUEUE_DLQ_NAME: 'reporting-queue-dlq'
     depends_on:
       - postgres
 
@@ -149,6 +151,23 @@ services:
     depends_on:
       - postgres
 
+  audit:
+    image: quay.io/ukhomeofficedigital/hocs-audit
+    # image: hocs-workflow-test
+    ports:
+      - 8087:8080
+    networks:
+      - hocs-network
+    environment:
+      SPRING_PROFILES_ACTIVE: 'development, local'
+      SERVER_PORT: 8080
+      DB_HOST: 'postgres'
+      AUDIT_QUEUE_NAME: 'reporting-queue'
+      AUDIT_QUEUE_DLQ_NAME: 'reporting-queue-dlq'
+      AWS_LOCAL_HOST: 'localstack'
+    depends_on:
+      - postgres
+
   info:
     image: quay.io/ukhomeofficedigital/hocs-info-service
     # image: hocs-info-service-test
@@ -161,10 +180,15 @@ services:
       SERVER_PORT: 8080
       DB_HOST: 'postgres'
       CASE_QUEUE_NAME: 'case-queue'
+      CASE_QUEUE_DLQ_NAME: 'case-queue-dlq'
       DOCS_QUEUE_NAME: 'document-queue'
+      DOCS_QUEUE_DLQ_NAME: 'document-queue-dlq'
       HOCS_CASE_SERVICE: 'http://casework:8080'
       HOCS_DOCUMENT_SERVICE: 'http://documents:8080'
       KEYCLOAK_SERVER_ROOT: 'http://keycloak:8080'
+      AUDIT_QUEUE_NAME: 'reporting-queue'
+      AUDIT_QUEUE_DLQ_NAME: 'reporting-queue-dlq'
+      HOCS_AUDIT_SERVICE: 'http://audit:8080'
     depends_on:
       - postgres
 
@@ -187,6 +211,7 @@ services:
       DOCS_QUEUE_NAME: 'document-queue'
       DOCS_QUEUE_DLQ_NAME: 'document-queue-dlq'
       CASE_QUEUE_NAME: 'case-queue'
+      CASE_QUEUE_DLQ_NAME: 'case-queue-dlq'
       DOCS_TRUSTEDS3BUCKETNAME: 'trusted-bucket'
       DOCS_UNTRUSTEDS3BUCKETNAME: 'untrusted-bucket'
       HOCSCONVERTER_ROOT: 'http4://converter:8080'

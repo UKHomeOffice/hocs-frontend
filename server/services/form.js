@@ -56,10 +56,7 @@ async function getFormSchemaFromWorkflowService(options, user) {
         }
     }
     const { stageUUID, caseReference, allocationNote } = response.data;
-    const mockAllocationNote = allocationNote || {
-        type: 'Allocation Note',
-        message: 'You just sort of have to make almighty decisions. Just leave that space open. Let\'s start with an almighty sky here.'
-    };
+    const mockAllocationNote = allocationNote || null;
     const { schema, data } = response.data.form;
     await hydrateFields(schema.fields, { ...options, user });
     return { schema, data, meta: { caseReference, stageUUID, allocationNote: mockAllocationNote } };
