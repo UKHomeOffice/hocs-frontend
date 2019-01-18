@@ -41,7 +41,7 @@ function handleListSuccess(listId, response) {
 
 function handleListFailure(listId, error) {
     logger.error({ event: events.FETCH_LIST_FAILURE, list: listId, stack: error.stack });
-    // listRepository[listId] = [];
+    listRepository[listId] = [];
 }
 
 function compareListItems(first, second) {
@@ -63,7 +63,7 @@ const helpers = {
         row.stageTypeDisplay = stageType.label;
         if (row.userUUID) {
             const assignedUser = listRepository.users.find(i => i.id === row.userUUID) || {};
-            row.assignedUserDisplay = assignedUser.username;
+            row.assignedUserDisplay = assignedUser.username || 'Allocated';
         }
         row.deadlineDisplay = new Intl.DateTimeFormat('en-GB').format(new Date(row.deadline));
         return row;

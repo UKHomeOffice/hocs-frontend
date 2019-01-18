@@ -14,8 +14,15 @@ exports[`Workstack page component should render with default props 1`] = `
         Array [
           undefined,
         ],
+        Array [
+          undefined,
+        ],
       ],
       "results": Array [
+        Object {
+          "isThrow": false,
+          "value": Promise {},
+        },
         Object {
           "isThrow": false,
           "value": Promise {},
@@ -45,8 +52,15 @@ exports[`Workstack page component should render with default props 1`] = `
           Array [
             undefined,
           ],
+          Array [
+            undefined,
+          ],
         ],
         "results": Array [
+          Object {
+            "isThrow": false,
+            "value": Promise {},
+          },
           Object {
             "isThrow": false,
             "value": Promise {},
@@ -67,6 +81,19 @@ exports[`Workstack page component should render with default props 1`] = `
         "url": "/test",
       }
     }
-  />
+  >
+    <div>
+      <span
+        className="govuk-body"
+      >
+        Nothing to display
+      </span>
+      <span
+        className="govuk-body"
+      >
+        Nothing to display
+      </span>
+    </div>
+  </WorkstackPage>
 </Component>
 `;

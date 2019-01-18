@@ -8,7 +8,7 @@ import {
     clearApiStatus,
 } from '../contexts/actions/index.jsx';
 import status from '../helpers/api-status.js';
-import Dashboard from '../common/components/dashboard-new.jsx';
+import Dashboard from '../common/components/dashboard.jsx';
 
 class DashboardPage extends Component {
 

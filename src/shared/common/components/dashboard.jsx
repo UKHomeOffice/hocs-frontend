@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Card from '../forms/card.jsx';
+import Card, { StaticCard } from '../forms/card.jsx';
 
 class Dashboard extends Component {
 
@@ -10,90 +9,35 @@ class Dashboard extends Component {
         this.state = { ...props };
     }
 
-    renderNoItems() {
-        return (
-            <p className='govuk-body govuk-grid-column-full'>No items to display</p>
-        );
-    }
-
-    renderStages(stages, location) {
-        return (
-            <Fragment>
-                {stages && stages.length > 0 ? stages.map((s, i) => {
-                    const url = `${location}/stage/${s.value}`;
-                    return (
-                        <Card key={i} url={url} {...s}>
-                            {s.tags && s.tags.overdue && <span className='govuk-!-font-size-16 govuk-!-font-weight-bold govuk-tag dashboard__tag dashboard__tag--red'>{s.tags.overdue} Overdue</span>}
-                            {s.tags && s.tags.allocated && <span className='govuk-!-font-size-16 govuk-!-font-weight-bold govuk-tag dashboard__tag'>{s.tags.allocated} Allocated</span>}
-                        </Card>
-                    );
-                }) : this.renderNoItems()}
-            </Fragment>
-        );
-    }
-
-    renderWorkflows(workflows, location) {
-        return (
-            <Fragment>
-                {workflows && workflows.length > 0 ? workflows.map((w, i) => {
-                    const url = `${location}/workflow/${w.value}`;
-                    return (
-                        <li className='govuk-grid-column-full dashboard__workflows--item' key={i}>
-                            <h4 className='govuk-heading-s' >
-                                {w.label}
-                                {w.items && w.items.length > 0 && <Link to={url} className='govuk-body govuk-link margin-left--small'>view</Link>}
-                            </h4>
-                            <ul className='govuk-grid-row dashboard__stages'>
-                                {w.items && this.renderStages(w.items, url)}
-                            </ul>
-                        </li>
-                    );
-                }) : this.renderNoItems()}
-            </Fragment>
-        );
-    }
-
-    renderTeams(teams, location) {
-        return (
-            <Fragment>
-                {teams && teams.length > 0 ? teams.map((t, i) => {
-                    const url = `${location}/team/${t.value}`;
-                    return (
-                        <li className='govuk-grid-column-full dashboard__teams--item' key={i}>
-                            <h3 className='govuk-heading-m' >
-                                {t.label}
-                                {t.items && t.items.length > 0 && <Link to={url} className='govuk-body govuk-link margin-left--small'>view</Link>}
-                            </h3>
-                            <ul className='govuk-grid-row dashboard__workflows'>
-                                {t.items && this.renderWorkflows(t.items, url)}
-                            </ul>
-                        </li>
-                    );
-                }) : this.renderNoItems()}
-            </Fragment>
-        );
+    constructUrl(item) {
+        const { baseUrl } = this.props;
+        return `${baseUrl}/${item.type}/${item.value}`;
     }
 
     render() {
-        const { baseUrl, dashboard: { user, teams } } = this.props;
+        const { absoluteUrl, dashboard, alwaysLink } = this.props;
 
         return (
             <Fragment>
-                <h2 className='govuk-heading-l'>My work</h2>
-                <div className='govuk-grid-row'>
-                    <div className='govuk-grid-column-full dashboard__todo'>
-                        <Card url={'/workstack/user'} {...user}>
-                            {user.tags && user.tags.overdue &&
-                                <span className='govuk-!-font-size-16 govuk-!-font-weight-bold govuk-tag dashboard__tag dashboard__tag--red'>
-                                    {user.tags.overdue} Overdue
-                                </span>
-                            }
-                        </Card>
-                    </div>
-                </div>
-                <h2 className='govuk-heading-l'>My teams work</h2>
                 <ul className='govuk-grid-row dashboard__teams'>
-                    {teams && this.renderTeams(teams, baseUrl)}
+                    {dashboard && dashboard.length > 0 && dashboard.map((item, i) => {
+                        const url = absoluteUrl ? absoluteUrl : this.constructUrl(item);
+                        if (alwaysLink || dashboard.length > 1) {
+                            return (
+                                <Card key={i} url={url} {...item}>
+                                    {item.tags && item.tags.allocated && <span className='govuk-!-font-size-16 govuk-!-font-weight-bold govuk-tag dashboard__tag'>{item.tags.allocated} Unallocated</span>}
+                                    {item.tags && item.tags.overdue && <span className='govuk-!-font-size-16 govuk-!-font-weight-bold govuk-tag dashboard__tag dashboard__tag--red'>{item.tags.overdue} Overdue</span>}
+                                </Card>
+                            );
+                        } else {
+                            return (
+                                <StaticCard key={i} {...item}>
+                                    {item.tags && item.tags.allocated && <span className='govuk-!-font-size-16 govuk-!-font-weight-bold govuk-tag dashboard__tag'>{item.tags.allocated} Unallocated</span>}
+                                    {item.tags && item.tags.overdue && <span className='govuk-!-font-size-16 govuk-!-font-weight-bold govuk-tag dashboard__tag dashboard__tag--red'>{item.tags.overdue} Overdue</span>}
+                                </StaticCard>
+                            );
+                        }
+                    })}
                 </ul>
             </Fragment>
         );
@@ -101,12 +45,15 @@ class Dashboard extends Component {
 }
 
 Dashboard.propTypes = {
+    absoluteUrl: PropTypes.string,
     baseUrl: PropTypes.string,
-    dashboard: PropTypes.object.isRequired,
+    dashboard: PropTypes.array.isRequired,
+    alwaysLink: PropTypes.bool
 };
 
 Dashboard.defaultProps = {
-    baseUrl: '/workstack'
+    baseUrl: '/workstack',
+    alwaysLink: false
 };
 
 export default Dashboard;

@@ -1,58 +1,35 @@
 import React, { Component, Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import { ApplicationConsumer } from '../contexts/application.jsx';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import { ApplicationConsumer } from '../contexts/application.jsx';
 import {
     clearWorkstack,
     updateApiStatus,
     clearApiStatus
 } from '../contexts/actions/index.jsx';
 import status from '../helpers/api-status.js';
-import Workstack from '../common/components/workstack-allocate.jsx';
-import Dashboard from '../common/components/dashboard-new.jsx';
-
-const renderBreadCrumb = ({ key, label, to, isLast }) => (
-    <li key={key} className='govuk-breadcrumbs__list-item'>
-        {isLast ? label : <Link className='govuk-breadcrumbs__link' to={to}>{label}</Link>}
-    </li>
-);
-
-renderBreadCrumb.propTypes = {
-    key: PropTypes.number.isRequired,
-    label: PropTypes.string.isRequired,
-    to: PropTypes.string.isRequired,
-    isLast: PropTypes.bool.isRequired
-};
-
-const Breadcrumbs = ({ items }) => (
-    <div className='govuk-breadcrumbs'>
-        <ol className='govuk-breadcrumbs__list'>
-            {items.map((item, i) => renderBreadCrumb({ ...item, key: i, isLast: (items.length > 1 && i === (items.length - 1)) }))}
-        </ol>
-    </div>
-);
-
-Breadcrumbs.propTypes = {
-    items: PropTypes.array.isRequired
-};
+import Workstack from '../common/components/workstack.jsx';
+import Dashboard from '../common/components/dashboard.jsx';
 
 class WorkstackPage extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { workstack: props.workstack };
+        this.state = { workstack: props.workstack, formData: {} };
     }
 
     componentDidMount() {
-        const { dispatch, workstack } = this.props;
+        const { workstack } = this.state;
+        const { dispatch } = this.props;
+
         if (!workstack) {
-            return this.getWorkstackData();
+            this.getWorkstack();
         }
+
         dispatch(clearWorkstack());
     }
 
-    getWorkstackData() {
+    getWorkstack() {
         const { dispatch, match: { url } } = this.props;
         const endpoint = '/api' + url;
         return dispatch(updateApiStatus(status.REQUEST_WORKSTACK_DATA))
@@ -72,68 +49,90 @@ class WorkstackPage extends Component {
             });
     }
 
-    renderWorkstack() {
+    submitHandler(e, endpoint) {
+        e.preventDefault();
+        const { formData } = this.state;
+        // TODO: Remove
+        /* eslint-disable-next-line no-undef */
+        const payload = new FormData();
+        Object.keys(formData).forEach(field => {
+            if (Array.isArray(formData[field])) {
+                formData[field].map(value => {
+                    payload.append(`${field}`, value);
+                });
+            } else {
+                payload.append(field, formData[field]);
+            }
+        });
+        axios.post('/api' + endpoint, payload, { headers: { 'Content-Type': 'multipart/form-data' } })
+            .then(({ data: { workstack } }) => this.setState({ workstack }));
+    }
+
+    updateFormData(update) {
+        this.setState(state => ({ ...state, formData: { ...state.formData, ...update } }));
+    }
+
+    renderDashboard() {
+        const { match: { url } } = this.props;
         const { workstack } = this.state;
-        const { match: { url } } = this.props;
         return (
             <Fragment>
-                <Workstack baseUrl={url} {...workstack} />
+                <Dashboard dashboard={workstack.dashboard} baseUrl={url} />
             </Fragment>
         );
     }
 
-    renderDashboard(dashboard) {
+    renderWorkstack() {
         const { match: { url } } = this.props;
+        const { workstack, formData } = this.state;
+        const { allocateToUserEndpoint, allocateToTeamEndpoint, allocateToWorkstackEndpoint, items, teamMembers } = workstack;
         return (
             <Fragment>
-                <Dashboard dashboard={dashboard} baseUrl={url} />
+                <Workstack
+                    baseUrl={url}
+                    items={items}
+                    selectedCases={formData['selected_cases']}
+                    teamMembers={teamMembers}
+                    allocateToUserEndpoint={allocateToUserEndpoint}
+                    allocateToTeamEndpoint={allocateToTeamEndpoint}
+                    allocateToWorkstackEndpoint={allocateToWorkstackEndpoint}
+                    submitHandler={this.submitHandler.bind(this)}
+                    updateFormData={this.updateFormData.bind(this)}
+                />
             </Fragment>
         );
     }
 
-    renderBreadCrumb(items) {
-        return (<Breadcrumbs items={items} />);
+    renderEmpty() {
+        return (
+            <span className='govuk-body'>Nothing to display</span>
+        );
     }
 
     render() {
         const { workstack } = this.state;
         return (
-            <Fragment>
-                {workstack ?
-                    <Fragment>
-                        {workstack.breadcrumbs && this.renderBreadCrumb(workstack.breadcrumbs)}
-                        <h1 className="govuk-heading-m">
-                            {workstack.label}
-                        </h1>
-                        {workstack.dashboard && this.renderDashboard(workstack.dashboard)}
-                        {this.renderWorkstack()}
-                    </Fragment>
-                    : null
-                }
-            </Fragment>
+            <div>
+                {workstack && workstack.dashboard ? this.renderDashboard() : this.renderEmpty()}
+                {workstack && workstack.items ? this.renderWorkstack() : this.renderEmpty()}
+            </div>
         );
     }
+
 }
 
 WorkstackPage.propTypes = {
-    workstack: PropTypes.object,
     dispatch: PropTypes.func.isRequired,
-    match: PropTypes.object.isRequired
+    match: PropTypes.object.isRequired,
+    workstack: PropTypes.object
 };
 
-const WrappedWorkstackPage = props => {
-    return (
-        <ApplicationConsumer>
-            {({ dispatch, workstack, ref }) => (
-                <WorkstackPage
-                    {...props}
-                    ref={ref}
-                    dispatch={dispatch}
-                    workstack={workstack}
-                />
-            )}
-        </ApplicationConsumer>
-    );
-};
+const WrappedWorkstack = (props) => (
+    <ApplicationConsumer>
+        {({ dispatch, workstack }) => (
+            <WorkstackPage {...props} dispatch={dispatch} workstack={workstack} />
+        )}
+    </ApplicationConsumer>
+);
 
-export default WrappedWorkstackPage;
+export default WrappedWorkstack;
