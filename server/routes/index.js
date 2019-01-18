@@ -28,7 +28,7 @@ router.get('/members/refresh',
     protect('REFRESH_MEMBERS'),
     async (req, res, next) => {
         try {
-            await infoServiceClient.get('/members/refresh');
+            await infoServiceClient.get('/admin/member/refresh');
             logger.info('request to update members in info service');
             res.status(200).send();
         } catch (e) {
