@@ -8,7 +8,8 @@ import {
     clearApiStatus
 } from '../contexts/actions/index.jsx';
 import status from '../helpers/api-status.js';
-import Workstack from '../common/components/workstack-allocate.jsx';
+import Workstack from '../common/components/workstack.jsx';
+import Dashboard from '../common/components/dashboard.jsx';
 
 class WorkstackPage extends Component {
 
@@ -71,9 +72,19 @@ class WorkstackPage extends Component {
         this.setState(state => ({ ...state, formData: { ...state.formData, ...update } }));
     }
 
+    renderDashboard() {
+        const { match: { url } } = this.props;
+        const { workstack } = this.state;
+        return (
+            <Fragment>
+                <Dashboard dashboard={workstack.dashboard} baseUrl={url} />
+            </Fragment>
+        );
+    }
+
     renderWorkstack() {
         const { match: { url } } = this.props;
-        const { workstack = {}, formData } = this.state;
+        const { workstack, formData } = this.state;
         const { allocateToUserEndpoint, allocateToTeamEndpoint, allocateToWorkstackEndpoint, items, teamMembers } = workstack;
         return (
             <Fragment>
@@ -102,7 +113,8 @@ class WorkstackPage extends Component {
         const { workstack } = this.state;
         return (
             <div>
-                {workstack ? this.renderWorkstack() : this.renderEmpty()}
+                {workstack && workstack.dashboard ? this.renderDashboard() : this.renderEmpty()}
+                {workstack && workstack.items ? this.renderWorkstack() : this.renderEmpty()}
             </div>
         );
     }
@@ -111,13 +123,16 @@ class WorkstackPage extends Component {
 
 WorkstackPage.propTypes = {
     dispatch: PropTypes.func.isRequired,
-    workstack: PropTypes.object.isRequired
-}
+    match: PropTypes.object.isRequired,
+    workstack: PropTypes.object
+};
 
-export default (props) => (
+const WrappedWorkstack = (props) => (
     <ApplicationConsumer>
         {({ dispatch, workstack }) => (
             <WorkstackPage {...props} dispatch={dispatch} workstack={workstack} />
         )}
     </ApplicationConsumer>
-)
+);
+
+export default WrappedWorkstack;
