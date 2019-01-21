@@ -29,7 +29,7 @@ async function getFormSchemaFromWorkflowService(options, user) {
             }
             return {
                 schema: {
-                    title: 'Allocate case',
+                    title: 'Allocate Case',
                     action: `/case/${caseId}/stage/${stageId}/allocate/team`,
                     fields: [
                         {
@@ -44,6 +44,7 @@ async function getFormSchemaFromWorkflowService(options, user) {
                             component: 'dropdown', props: {
                                 name: 'user-id',
                                 label: 'Allocate to a team member',
+                                className: 'govuk-body',
                                 choices: usersInTeam
                             }
                         }

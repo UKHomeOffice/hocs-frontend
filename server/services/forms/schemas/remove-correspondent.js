@@ -7,7 +7,7 @@ module.exports = async options => {
     const response = await caseworkServiceClient.get(`/case/${options.caseId}/correspondent/${options.context}`, { headers: User.createHeaders(options.user) });
     const displayName = response.data.fullname;
     return Form()
-        .withTitle('Remove correspondent')
+        .withTitle('Remove Correspondent')
         .withField(
             Component('paragraph')
                 .withProp('children', `Remove ${displayName} from case?`)

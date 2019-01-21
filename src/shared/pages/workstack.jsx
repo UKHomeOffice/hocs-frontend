@@ -105,7 +105,7 @@ class WorkstackPage extends Component {
 
     renderEmpty() {
         return (
-            <span className='govuk-body'>Nothing to display</span>
+            <span className='govuk-body'></span>
         );
     }
 
