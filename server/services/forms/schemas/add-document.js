@@ -2,14 +2,15 @@ const Form = require('../form-builder');
 const { Component, Choice } = require('../component-builder');
 
 module.exports = options => Form()
-    .withTitle('Add documents to case')
+    .withTitle('Add Documents')
     .withField(
         Component('dropdown', 'document_type')
             .withValidator('required', 'Document type is required')
             .withProp('label', 'Document type')
             .withProp('choices', [
                 Choice('Original', 'ORIGINAL'),
-                Choice('Draft', 'DRAFT')
+                Choice('Draft', 'DRAFT'),
+                Choice('Final', 'FINAL')
             ])
             .build()
     )

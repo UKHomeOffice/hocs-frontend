@@ -6,32 +6,32 @@ services:
     image: postgres
     restart: always
     ports:
-      - 5432:5432
+    - 5432:5432
     networks:
-      - hocs-network
+    - hocs-network
     environment:
-     POSTGRES_USER: root
-     POSTGRES_PASSWORD: dev
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: dev
     tmpfs:
-      - /var/lib/postgresql
+    - /var/lib/postgresql
 
   clamd:
     image: quay.io/ukhomeofficedigital/clamav:v1.4.0
     networks:
-      - hocs-network
+    - hocs-network
     ports:
-      - "3310:3310/tcp"
+    - "3310:3310/tcp"
 
   clamav:
     image: lokori/clamav-rest
     networks:
-      - hocs-network
+    - hocs-network
     environment:
-      - CLAMD_HOST=clamd
+    - CLAMD_HOST=clamd
     ports:
-      - 8086:8080
+    - 8086:8080
     depends_on:
-      - clamd
+    - clamd
 
   keycloak:
     image: jboss/keycloak
@@ -52,11 +52,11 @@ services:
   localstack:
     image: localstack/localstack:latest
     ports:
-      - 9000:8080
-      - 4572:4572
-      - 4576:4576
+    - 9000:8080
+    - 4572:4572
+    - 4576:4576
     networks:
-      - hocs-network
+    - hocs-network
     environment:
       HOSTNAME_EXTERNAL: localstack
       DEFAULT_REGION: eu-west-2
@@ -65,33 +65,33 @@ services:
   aws_cli:
     image: garland/aws-cli-docker
     networks:
-      - hocs-network
+    - hocs-network
     command:
-          - /bin/sh
-          - -c
-          - |
-              aws --endpoint-url=http://localstack:4572 s3 mb s3://untrusted-bucket
-              aws --endpoint-url=http://localstack:4572 s3 mb s3://trusted-bucket
-              aws --endpoint-url=http://localstack:4576 sqs create-queue --queue-name case-queue
-              aws --endpoint-url=http://localstack:4576 sqs create-queue --queue-name case-queue-dlq
-              aws --endpoint-url=http://localstack:4576 sqs create-queue --queue-name document-queue
-              aws --endpoint-url=http://localstack:4576 sqs create-queue --queue-name document-queue-dlq
-              aws --endpoint-url=http://localstack:4576 sqs create-queue --queue-name reporting-queue
-              aws --endpoint-url=http://localstack:4576 sqs create-queue --queue-name reporting-queue-dlq
+    - /bin/sh
+    - -c
+    - |
+      aws --endpoint-url=http://localstack:4572 s3 mb s3://untrusted-bucket
+      aws --endpoint-url=http://localstack:4572 s3 mb s3://trusted-bucket
+      aws --endpoint-url=http://localstack:4576 sqs create-queue --queue-name case-queue
+      aws --endpoint-url=http://localstack:4576 sqs create-queue --queue-name case-queue-dlq
+      aws --endpoint-url=http://localstack:4576 sqs create-queue --queue-name document-queue
+      aws --endpoint-url=http://localstack:4576 sqs create-queue --queue-name document-queue-dlq
+      aws --endpoint-url=http://localstack:4576 sqs create-queue --queue-name reporting-queue
+      aws --endpoint-url=http://localstack:4576 sqs create-queue --queue-name reporting-queue-dlq
     environment:
       AWS_ACCESS_KEY_ID: UNSET
       AWS_SECRET_ACCESS_KEY: UNSET
       AWS_DEFAULT_REGION: 'eu-west-2'
     depends_on:
-     - localstack
+    - localstack
 
   frontend:
     image: quay.io/ukhomeofficedigital/hocs-frontend
     # image: hocs-frontend-test
     ports:
-      - 8080:8080
+    - 8080:8080
     networks:
-      - hocs-network
+    - hocs-network
     environment:
       USE_CLIENTSIDE: 'true'
       WORKFLOW_SERVICE: http://workflow:8080
@@ -103,18 +103,18 @@ services:
       S3_BUCKET: 'untrusted-bucket'
       S3_ENDPOINT: http://localstack:4572
     depends_on:
-     - workflow
-     - casework
-     - info
-     - documents
+    - workflow
+    - casework
+    - info
+    - documents
 
   casework:
     image: quay.io/ukhomeofficedigital/hocs-casework
     # image: hocs-casework-test
     ports:
-      - 8082:8080
+    - 8082:8080
     networks:
-      - hocs-network
+    - hocs-network
     environment:
       SPRING_PROFILES_ACTIVE: 'development, local'
       SERVER_PORT: 8080
@@ -126,15 +126,15 @@ services:
       AUDIT_QUEUE_NAME: 'reporting-queue'
       AUDIT_QUEUE_DLQ_NAME: 'reporting-queue-dlq'
     depends_on:
-      - postgres
+    - postgres
 
   workflow:
     image: quay.io/ukhomeofficedigital/hocs-workflow
     # image: hocs-workflow-test
     ports:
-      - 8081:8080
+    - 8081:8080
     networks:
-      - hocs-network
+    - hocs-network
     environment:
       SPRING_PROFILES_ACTIVE: 'development, local'
       SERVER_PORT: 8080
@@ -149,15 +149,15 @@ services:
       DB_HOST: 'postgres'
       AWS_LOCAL_HOST: 'localstack'
     depends_on:
-      - postgres
+    - postgres
 
   audit:
     image: quay.io/ukhomeofficedigital/hocs-audit
     # image: hocs-workflow-test
     ports:
-      - 8087:8080
+    - 8087:8080
     networks:
-      - hocs-network
+    - hocs-network
     environment:
       SPRING_PROFILES_ACTIVE: 'development, local'
       SERVER_PORT: 8080
@@ -166,15 +166,15 @@ services:
       AUDIT_QUEUE_DLQ_NAME: 'reporting-queue-dlq'
       AWS_LOCAL_HOST: 'localstack'
     depends_on:
-      - postgres
+    - postgres
 
   info:
     image: quay.io/ukhomeofficedigital/hocs-info-service
     # image: hocs-info-service-test
     ports:
-      - 8085:8080
+    - 8085:8080
     networks:
-      - hocs-network
+    - hocs-network
     environment:
       SPRING_PROFILES_ACTIVE: 'development, local'
       SERVER_PORT: 8080
@@ -190,21 +190,21 @@ services:
       AUDIT_QUEUE_DLQ_NAME: 'reporting-queue-dlq'
       HOCS_AUDIT_SERVICE: 'http://audit:8080'
     depends_on:
-      - postgres
+    - postgres
 
   converter:
     image: quay.io/ukhomeofficedigital/hocs-docs-converter
     ports:
-      - 8084:8080
+    - 8084:8080
     networks:
-      - hocs-network
+    - hocs-network
 
   documents:
     image: quay.io/ukhomeofficedigital/hocs-docs
     ports:
-      - 8083:8080
+    - 8083:8080
     networks:
-      - hocs-network
+    - hocs-network
     environment:
       SPRING_PROFILES_ACTIVE: 'development, local, postgres'
       SERVER_PORT: 8080
@@ -219,8 +219,8 @@ services:
       DB_HOST: 'postgres'
       AWS_LOCAL_HOST: 'localstack'
     depends_on:
-      - converter
-      - postgres
+    - converter
+    - postgres
 
 networks:
   hocs-network:

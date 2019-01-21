@@ -2,7 +2,7 @@ const Form = require('../form-builder');
 const { Component } = require('../component-builder');
 
 module.exports = options => Form()
-    .withTitle('Add topic to case')
+    .withTitle('Add Topic')
     .withField(
         Component('type-ahead', 'topic')
             .withValidator('required', 'Topic is required')

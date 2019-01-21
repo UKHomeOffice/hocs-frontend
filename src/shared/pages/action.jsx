@@ -14,8 +14,8 @@ class Action extends Component {
             <div className="govuk-grid-row">
                 <div className="govuk-grid-column-one-half">
                     <h1 className="govuk-heading-l">
-                        {subTitle && <span className="govuk-caption-l">{subTitle}</span>}
                         {title}
+                        {subTitle && <span className="govuk-caption-l">{subTitle}</span>}
                     </h1>
                     {children}
                 </div>

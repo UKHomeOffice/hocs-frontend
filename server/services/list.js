@@ -349,6 +349,24 @@ const lists = {
             return [];
         }
     },
+    'CASE_DOCUMENT_LIST_FINAL': async ({ user, caseId }) => {
+        const list = listDefinitions['caseDocumentsType'].call(this, { caseId, type: 'FINAL' });
+        const response = await fetchList(list, {
+            headers: User.createHeaders(user)
+        }, docsServiceClient);
+        if (response.data.documents) {
+            return response.data.documents
+                .sort((first, second) => {
+                    const firstTimeStamp = first.created.toUpperCase();
+                    const secondTimeStamp = second.created.toUpperCase();
+                    return (firstTimeStamp > secondTimeStamp) ? 1 : -1;
+                })
+                .map(d => ({ label: d.displayName, value: d.uuid }));
+        } else {
+            logger.warn({ event: events.FETCH_LIST_RETURN_EMPTY, list: 'CASE_DOCUMENT_LIST_FINAL' });
+            return [];
+        }
+    },
     'DOCUMENT_EXTENSION_WHITELIST': async () => {
         return DOCUMENT_WHITELIST;
     },
@@ -563,7 +581,7 @@ const lists = {
         }
     },
     'PRIVATE_OFFICE_TEAMS': async ({ user }) => {
-        const response = await fetchList('/teams?unit=privateOffice', {
+        const response = await fetchList('/teams?unit=PRIVATE_OFFICE', {
             headers: User.createHeaders(user)
         }, infoServiceClient);
         if (response.data) {
