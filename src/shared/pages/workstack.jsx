@@ -103,18 +103,12 @@ class WorkstackPage extends Component {
         );
     }
 
-    renderEmpty() {
-        return (
-            <span className='govuk-body'>Nothing to display</span>
-        );
-    }
-
     render() {
         const { workstack } = this.state;
         return (
             <div>
-                {workstack && workstack.dashboard ? this.renderDashboard() : this.renderEmpty()}
-                {workstack && workstack.items ? this.renderWorkstack() : this.renderEmpty()}
+                {workstack && workstack.dashboard ? this.renderDashboard() : null}
+                {workstack && workstack.items ? this.renderWorkstack() : null}
             </div>
         );
     }

@@ -82,18 +82,7 @@ exports[`Workstack page component should render with default props 1`] = `
       }
     }
   >
-    <div>
-      <span
-        className="govuk-body"
-      >
-        Nothing to display
-      </span>
-      <span
-        className="govuk-body"
-      >
-        Nothing to display
-      </span>
-    </div>
+    <div />
   </WorkstackPage>
 </Component>
 `;
