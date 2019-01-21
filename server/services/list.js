@@ -6,10 +6,12 @@ const events = require('../models/events');
 const User = require('../models/user');
 
 const listRepository = {
-    teams: [{ type: 'ASSIGNED_TEAM', displayName: 'Assigned team' }],
-    users: [{ id: 'ASSIGNED_USER', username: 'Assigned user' }],
-    caseTypes: [{ value: 'CASE_TYPE', label: 'Case type' }],
-    stageTypes: [{ value: 'STAGE_TYPE', label: 'Stage type' }],
+    lists: {},
+    hasList: function (key) { return this.lists.hasOwnProperty(key); },
+    listIsValid: function (key) { return this.lists[key].status === 'OK'; },
+    addList: function (key, value) { return this.lists[key] = value; },
+    getList: function (key) { return this.lists[key].data || null; },
+    flush: function () { this.lists = {}; }
 };
 
 async function initialise() {
@@ -36,12 +38,32 @@ function fetchList(endpoint, headers, client = infoServiceClient) {
 
 function handleListSuccess(listId, response) {
     logger.debug({ event: events.FETCH_LIST_SUCCESS, list: listId });
-    listRepository[listId] = response.data || [];
+    listRepository.addList(listId, { data: response.data, status: 'OK' });
 }
 
 function handleListFailure(listId, error) {
     logger.error({ event: events.FETCH_LIST_FAILURE, list: listId, stack: error.stack });
-    listRepository[listId] = [];
+    listRepository.addList(listId, { data: [], status: 'FAILED' });
+}
+
+function flushCachedLists() {
+    listRepository.flush();
+}
+
+async function getListFromCache(listId) {
+    if (listRepository.hasList(listId) && listRepository.listIsValid(listId)) {
+        return listRepository.getList(listId);
+    } else {
+        logger.info({ event: 'LIST_SERVICE_CACHE_MISS', list: listId });
+        try {
+            const response = await fetchList(staticListDefinitions[listId]);
+            handleListSuccess(listId, response);
+            return listRepository.getList(listId);
+        } catch (error) {
+            handleListFailure(listId, error);
+            return [];
+        }
+    }
 }
 
 function compareListItems(first, second) {
@@ -54,15 +76,19 @@ const helpers = {
     isOverdue: deadline => deadline && new Date(deadline) < Date.now(),
     isUnallocated: user => user === null,
     setTag: current => current ? current + 1 : 1,
-    bindDisplayElements: row => {
-        const assignedTeam = listRepository.teams.find(i => i.type === row.teamUUID) || {};
+    bindDisplayElements: async row => {
+        const sTeams = await getListFromCache('teams');
+        const sUsers = await getListFromCache('users');
+        const sCaseTypes = await getListFromCache('caseTypes');
+        const sStageTypes = await getListFromCache('stageTypes');
+        const assignedTeam = sTeams.find(i => i.type === row.teamUUID) || {};
         row.assignedTeamDisplay = assignedTeam.displayName;
-        const caseType = listRepository.caseTypes.caseTypes.find(i => i.value === row.caseType) || {};
+        const caseType = sCaseTypes.caseTypes.find(i => i.value === row.caseType) || {};
         row.caseTypeDisplayFull = caseType.label;
-        const stageType = listRepository.stageTypes.stageTypes.find(i => i.value === row.stageType) || {};
+        const stageType = sStageTypes.stageTypes.find(i => i.value === row.stageType) || {};
         row.stageTypeDisplay = stageType.label;
         if (row.userUUID) {
-            const assignedUser = listRepository.users.find(i => i.id === row.userUUID) || {};
+            const assignedUser = sUsers.find(i => i.id === row.userUUID) || {};
             row.assignedUserDisplay = assignedUser.username || 'Allocated';
         }
         row.deadlineDisplay = new Intl.DateTimeFormat('en-GB').format(new Date(row.deadline));
@@ -78,9 +104,9 @@ const lists = {
             headers: User.createHeaders(user)
         }, caseworkServiceClient);
         const { isOverdue, isUnallocated, setTag, bindDisplayElements } = helpers;
-        const workstackData = response.data.stages
-            .map(bindDisplayElements)
-            .sort((first, second) => first.caseReference > second.caseReference);
+        const workstackData = await Promise.all(response.data.stages
+            .map(async (r) => bindDisplayElements(r)));
+        workstackData.sort((first, second) => first.caseReference > second.caseReference);
         const createOverdueTag = data => {
             const overdueCases = data.filter(r => isOverdue(r.deadline));
             return overdueCases.length > 0 ? overdueCases.count : null;
@@ -130,10 +156,10 @@ const lists = {
             headers: User.createHeaders(user)
         }, caseworkServiceClient);
         const { bindDisplayElements } = helpers;
-        const workstackData = response.data.stages
+        const workstackData = await Promise.all(response.data.stages
             .filter(item => item.userUUID === user.uuid)
-            .map(bindDisplayElements)
-            .sort((first, second) => first.caseReference > second.caseReference);
+            .sort((first, second) => first.caseReference > second.caseReference)
+            .map(async (r) => bindDisplayElements(r)));
         return {
             label: '',
             items: workstackData,
@@ -150,10 +176,10 @@ const lists = {
             headers: User.createHeaders(user)
         }, infoServiceClient);
         const { isOverdue, isUnallocated, setTag, bindDisplayElements } = helpers;
-        const workstackData = response.data.stages
+        const workstackData = await Promise.all(response.data.stages
             .filter(item => item.teamUUID === teamId)
-            .map(bindDisplayElements)
-            .sort((first, second) => first.caseReference < second.caseReference);
+            .sort((first, second) => first.caseReference > second.caseReference)
+            .map(async (r) => bindDisplayElements(r)));
         const dashboardData = workstackData
             .reduce((result, row) => {
                 const index = result.map(c => c.value).indexOf(row.caseType);
@@ -179,8 +205,9 @@ const lists = {
                 }
                 return result;
             }, []);
+        const sTeams = await getListFromCache('teams');
         return {
-            label: ((team = {}) => team.displayName || 'Placeholder team')(listRepository.teams.find(i => i.type === teamId)),
+            label: ((team = {}) => team.displayName || 'Placeholder team')(sTeams.find(i => i.type === teamId)),
             items: workstackData,
             dashboard: dashboardData,
             teamMembers: userTeamsResponse.data.map(user => ({ label: `${user.firstName} ${user.lastName} (${user.username})`, value: user.id })),
@@ -199,10 +226,10 @@ const lists = {
             headers: User.createHeaders(user)
         }, infoServiceClient);
         const { isOverdue, isUnallocated, setTag, bindDisplayElements } = helpers;
-        const workstackData = response.data.stages
+        const workstackData = await Promise.all(response.data.stages
             .filter(item => item.teamUUID === teamId && item.caseType === workflowId)
-            .map(bindDisplayElements)
-            .sort((first, second) => first.caseReference < second.caseReference);
+            .sort((first, second) => first.caseReference > second.caseReference)
+            .map(async (r) => bindDisplayElements(r)));
         const dashboardData = workstackData
             .reduce((result, row) => {
                 const index = result.map(c => c.value).indexOf(row.stageType);
@@ -228,8 +255,9 @@ const lists = {
                 }
                 return result;
             }, []);
+        const sCaseTypes = await getListFromCache('caseTypes');
         return {
-            label: ((workflow = {}) => workflow.label || 'Placeholder workflow')(listRepository.caseTypes.caseTypes.find(i => i.value === workflowId)),
+            label: ((workflow = {}) => workflow.label || 'Placeholder workflow')(sCaseTypes.caseTypes.find(i => i.value === workflowId)),
             items: workstackData,
             dashboard: dashboardData,
             teamMembers: userTeamsResponse.data.map(user => ({ label: `${user.firstName} ${user.lastName} (${user.username})`, value: user.id })),
@@ -248,12 +276,13 @@ const lists = {
             headers: User.createHeaders(user)
         }, infoServiceClient);
         const { bindDisplayElements } = helpers;
-        const workstackData = response.data.stages
+        const workstackData = await Promise.all(response.data.stages
             .filter(item => item.teamUUID === teamId && item.caseType === workflowId && item.stageType === stageId)
-            .map(bindDisplayElements)
-            .sort((first, second) => first.caseReference < second.caseReference);
+            .sort((first, second) => first.caseReference > second.caseReference)
+            .map(async (r) => bindDisplayElements(r)));
+        const sStageTypes = await getListFromCache('stageTypes');
         return {
-            label: ((stage = {}) => stage.label || 'Placeholder stage')(listRepository.stageTypes.stageTypes.find(i => i.value === stageId)),
+            label: ((stage = {}) => stage.label || 'Placeholder stage')(sStageTypes.stageTypes.find(i => i.value === stageId)),
             items: workstackData,
             teamMembers: userTeamsResponse.data.map(user => ({ label: `${user.firstName} ${user.lastName} (${user.username})`, value: user.id })),
             allocateToUserEndpoint: '/allocate/user',
@@ -479,6 +508,9 @@ const lists = {
             headers: User.createHeaders(user)
         }, caseworkServiceClient);
         if (response.data) {
+            const sTeams = await getListFromCache('teams');
+            const sUsers = await getListFromCache('users');
+            const sStageTypes = await getListFromCache('stageTypes');
             return ({
                 case: {
                     received: response.data.DateReceived ? formatDate(response.data.DateReceived) : null,
@@ -491,24 +523,24 @@ const lists = {
                     .sort((first, second) => (first[1] > second[1]) ? 1 : -1)
                     .map(([stage, deadline]) => ({
                         label: (stage => {
-                            const stageType = listRepository.stageTypes.stageTypes.find(i => i.value === stage) || {};
+                            const stageType = sStageTypes.stageTypes.find(i => i.value === stage) || {};
                             return stageType.label;
                         })(stage),
                         value: deadline ? formatDate(deadline) : null
                     })),
                 stages: response.data.activeStages.map(activeStage => ({
                     stage: (stage => {
-                        const stageType = listRepository.stageTypes.stageTypes.find(i => i.value === stage) || {};
+                        const stageType = sStageTypes.stageTypes.find(i => i.value === stage) || {};
                         return stageType.label;
                     })(activeStage.stage),
                     assignedUser: (user => {
                         if (user) {
-                            const assignedUser = listRepository.users.find(i => i.id === user) || {};
+                            const assignedUser = sUsers.find(i => i.id === user) || {};
                             return assignedUser.username;
                         }
                     })(activeStage.assignedToUserUUID),
                     assignedTeam: (team => {
-                        const assignedTeam = listRepository.teams.find(i => i.type === team) || {};
+                        const assignedTeam = sTeams.find(i => i.type === team) || {};
                         return assignedTeam.displayName;
                     })(activeStage.assignedToTeamUUID)
                 }))
@@ -594,5 +626,6 @@ async function getList(listId, options = {}) {
 
 module.exports = {
     getList,
-    initialise
+    initialise,
+    flushCachedLists
 };

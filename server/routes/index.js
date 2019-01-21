@@ -13,6 +13,7 @@ const { errorMiddleware, initRequest } = require('../middleware/request');
 const { protect } = require('../middleware/auth');
 const { infoServiceClient } = require('../libs/request');
 const logger = require('../libs/logger');
+const { flushCachedLists } = require('../services/list');
 
 html.use(assets);
 
@@ -31,8 +32,21 @@ router.get('/members/refresh',
             await infoServiceClient.get('/admin/member/refresh');
             logger.info('request to update members in info service');
             res.status(200).send();
-        } catch (e) {
-            next(e);
+        } catch (error) {
+            next(error);
+        }
+    }
+);
+
+router.get('/admin/list/flush',
+    protect('SYS_ADMIN'),
+    (req, res, next) => {
+        try {
+            logger.info({ event: 'LIST_SERVICE_FLUSH_CACHE', user: req.user.username });
+            flushCachedLists();
+            res.status(200).send();
+        } catch (error) {
+            next(error);
         }
     }
 );
