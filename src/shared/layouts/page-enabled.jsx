@@ -11,6 +11,16 @@ class PageWrapper extends Component {
         super(props);
     }
 
+    UNSAFE_componentWillReceiveProps(nextProps) {
+        const { track } = this.props;
+        const nextPage = nextProps.match.url;
+
+        if (nextProps.error && nextProps.error.status) {
+            track('PAGE_VIEW', { title: `Error: ${nextProps.error.status}`, path: nextPage });
+        }
+
+    }
+
     componentWillUnmount() {
         const { dispatch, error } = this.props;
         if (error) {
@@ -37,10 +47,11 @@ PageWrapper.propTypes = {
 
 const PageEnabledWrapper = props => (
     <ApplicationConsumer >
-        {({ dispatch, error }) => (
+        {({ dispatch, error, track }) => (
             <PageWrapper
                 {...props}
                 dispatch={dispatch}
+                track={track}
                 error={error}
             />
         )}

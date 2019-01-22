@@ -70,7 +70,7 @@ describe('Error component', () => {
             ...DEFAULT_PROPS,
             error: {}
         };
-        const OUTER = shallow(<WrappedPage />);
+        const OUTER = shallow(<WrappedPage match={{ url: '/' }} />);
         const Page = OUTER.props().children;
         const WRAPPER = mount(
             <Page {...PROPS}>

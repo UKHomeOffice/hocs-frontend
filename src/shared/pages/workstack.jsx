@@ -46,12 +46,12 @@ class WorkstackPage extends Component {
 
     componentDidMount() {
         const { workstack } = this.state;
-        const { dispatch } = this.props;
+        const { dispatch, track, title, match } = this.props;
 
         if (!workstack) {
             this.getWorkstack();
         }
-
+        track('PAGE_VIEW', { title, path: match.url });
         dispatch(clearWorkstack());
     }
 
@@ -77,7 +77,8 @@ class WorkstackPage extends Component {
 
     submitHandler(e, endpoint) {
         e.preventDefault();
-        const { formData } = this.state;
+        const { formData, workstack } = this.state;
+        const { track, title, match } = this.props;
         // TODO: Remove
         /* eslint-disable-next-line no-undef */
         const payload = new FormData();
@@ -91,7 +92,9 @@ class WorkstackPage extends Component {
             }
         });
         axios.post('/api' + endpoint, payload, { headers: { 'Content-Type': 'multipart/form-data' } })
-            .then(({ data: { workstack } }) => this.setState({ workstack }));
+            .then(({ data: { workstack } }) => this.setState({ workstack }))
+            .then(() => endpoint === match.url + workstack.allocateToUserEndpoint ? 'Allocate to self' : endpoint === match.url + workstack.allocateToTeamEndpoint ? 'Allocate to team member' : 'Unallocate')
+            .then(label => track('EVENT', { category: title, action: 'Submit', label }));
     }
 
     updateFormData(update) {
@@ -149,13 +152,15 @@ class WorkstackPage extends Component {
 WorkstackPage.propTypes = {
     dispatch: PropTypes.func.isRequired,
     match: PropTypes.object.isRequired,
-    workstack: PropTypes.object
+    workstack: PropTypes.object,
+    track: PropTypes.func.isRequired,
+    title: PropTypes.string.isRequired
 };
 
 const WrappedWorkstack = (props) => (
     <ApplicationConsumer>
-        {({ dispatch, workstack }) => (
-            <WorkstackPage {...props} dispatch={dispatch} workstack={workstack} />
+        {({ dispatch, track, workstack }) => (
+            <WorkstackPage {...props} track={track} dispatch={dispatch} workstack={workstack} />
         )}
     </ApplicationConsumer>
 );

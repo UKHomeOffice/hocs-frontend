@@ -1,8 +1,9 @@
 import React, { Component, Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Submit from '../forms/submit.jsx';
 import Dropdown from '../forms/dropdown.jsx';
-import { Link } from 'react-router-dom';
+import { ApplicationConsumer } from '../../contexts/application.jsx';
 
 const LinkButton = ({ label, endpoint, submitHandler }) => (
     <button
@@ -22,7 +23,7 @@ LinkButton.propTypes = {
     submitHandler: PropTypes.func.isRequired
 };
 
-export default class WorkstackAllocate extends Component {
+class WorkstackAllocate extends Component {
 
     constructor(props) {
         super(props);
@@ -84,6 +85,7 @@ export default class WorkstackAllocate extends Component {
                             type='text'
                             name='workstack-filter'
                             onChange={this.filter.bind(this)}
+                            onBlur={() => this.props.track('EVENT', { category: 'Workstack', action: 'Filter' })}
                         />
                     </div>
                 </div>
@@ -204,12 +206,21 @@ export default class WorkstackAllocate extends Component {
 
 WorkstackAllocate.propTypes = {
     items: PropTypes.array.isRequired,
-    selectedCases: PropTypes.array.isRequired,
-    teamMembers: PropTypes.array.isRequired,
-    allocateToUserEndpoint: PropTypes.string.isRequired,
-    allocateToTeamEndpoint: PropTypes.string.isRequired,
+    selectedCases: PropTypes.array,
+    teamMembers: PropTypes.array,
+    allocateToUserEndpoint: PropTypes.string,
+    allocateToTeamEndpoint: PropTypes.string,
     allocateToWorkstackEndpoint: PropTypes.string.isRequired,
     baseUrl: PropTypes.string.isRequired,
     submitHandler: PropTypes.func.isRequired,
-    updateFormData: PropTypes.func.isRequired
+    updateFormData: PropTypes.func.isRequired,
+    track: PropTypes.func.isRequired
 };
+
+const WrappedWorkstackAllocate = props => (
+    <ApplicationConsumer>
+        {({ track }) => <WorkstackAllocate {...props} track={track} />}
+    </ApplicationConsumer>
+);
+
+export default WrappedWorkstackAllocate;

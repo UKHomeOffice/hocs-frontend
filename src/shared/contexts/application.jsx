@@ -77,6 +77,17 @@ export class ApplicationProvider extends Component {
                 } catch (error) {
                     return Promise.reject(error);
                 }
+            },
+            track: (event, payload) => {
+                if (this.state.analytics) {
+                    // TODO: REMOVE
+                    /* eslint-disable-next-line  no-console*/
+                    console.debug(`${event}, ${JSON.stringify({
+                        user: 'test',
+                        tracker: '1234',
+                        ...payload
+                    })}`);
+                }
             }
         };
     }

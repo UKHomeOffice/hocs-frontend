@@ -65,7 +65,7 @@ class CaseNotes extends Component {
 
     onSubmit(e) {
         e.preventDefault();
-        const { page } = this.props;
+        const { page, track } = this.props;
         const { caseNote } = this.state;
         // TODO: Remove
         /* eslint-disable-next-line no-undef */
@@ -76,6 +76,7 @@ class CaseNotes extends Component {
                 this.setState({ caseNote: '', submissionError: response.data.error });
                 this.getCaseNotes();
             })
+            .then(() => track('EVENT', { category: 'Case notes', action: 'Add' }))
             // TODO: Remove
             /* eslint-disable-next-line  no-console*/
             .catch(() => console.error('Failed to submit case note'));
@@ -136,12 +137,13 @@ CaseNotes.defaultProps = {
 CaseNotes.propTypes = {
     caseNotes: PropTypes.array.isRequired,
     dispatch: PropTypes.func.isRequired,
+    track: PropTypes.func.isRequired,
     page: PropTypes.object.isRequired
 };
 
 const WrappedCaseNotes = props => (
     <ApplicationConsumer>
-        {({ dispatch, caseNotes, page }) => <CaseNotes {...props} dispatch={dispatch} page={page} caseNotes={caseNotes} />}
+        {({ dispatch, track, caseNotes, page }) => <CaseNotes {...props} dispatch={dispatch} track={track} page={page} caseNotes={caseNotes} />}
     </ApplicationConsumer>
 );
 

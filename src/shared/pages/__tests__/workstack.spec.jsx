@@ -35,9 +35,11 @@ const FLUSH_PROMISES = () => new Promise(resolve => setImmediate(resolve));
 describe('Workstack page component', () => {
 
     const MOCK_DISPATCH = jest.fn();
+    const MOCK_TRACK = jest.fn();
 
     beforeEach(() => {
         MOCK_DISPATCH.mockReset();
+        MOCK_TRACK.mockReset();
         MOCK_DISPATCH.mockReturnValue(Promise.resolve());
         axios.get.mockClear();
         actions.updateWorkstack.mockReset();
@@ -47,7 +49,7 @@ describe('Workstack page component', () => {
         const OUTER = shallow(<WrappedWorkstackPage match={MOCK_MATCH} />);
         const WorkstackPage = OUTER.props().children;
         const WRAPPER = mount(
-            <WorkstackPage dispatch={MOCK_DISPATCH} />
+            <WorkstackPage dispatch={MOCK_DISPATCH} track={MOCK_TRACK} />
         );
         await FLUSH_PROMISES();
         expect(WRAPPER).toBeDefined();
@@ -59,10 +61,10 @@ describe('Workstack page component', () => {
 
     it('should should not call workstack endpoint if data exists in props', async () => {
         const MOCK_WORKSTACK_DATA = { label: 'Workstack', items: [] };
-        const OUTER = shallow(<WrappedWorkstackPage  match={MOCK_MATCH} />);
+        const OUTER = shallow(<WrappedWorkstackPage match={MOCK_MATCH} />);
         const WorkstackPage = OUTER.props().children;
         const WRAPPER = mount(
-            <WorkstackPage dispatch={MOCK_DISPATCH} workstack={MOCK_WORKSTACK_DATA} />
+            <WorkstackPage dispatch={MOCK_DISPATCH} track={MOCK_TRACK} workstack={MOCK_WORKSTACK_DATA} />
         );
         await FLUSH_PROMISES();
         expect(WRAPPER).toBeDefined();

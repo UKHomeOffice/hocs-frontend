@@ -14,8 +14,15 @@ exports[`Dashboard page component should render with default props 1`] = `
         Array [
           undefined,
         ],
+        Array [
+          undefined,
+        ],
       ],
       "results": Array [
+        Object {
+          "isThrow": false,
+          "value": Promise {},
+        },
         Object {
           "isThrow": false,
           "value": Promise {},
@@ -31,11 +38,33 @@ exports[`Dashboard page component should render with default props 1`] = `
       ],
     }
   }
+  track={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          "PAGE_VIEW",
+          Object {
+            "path": "/",
+            "title": undefined,
+          },
+        ],
+      ],
+      "results": Array [
+        Object {
+          "isThrow": false,
+          "value": undefined,
+        },
+      ],
+    }
+  }
 >
   <DashboardPage
     dispatch={
       [MockFunction] {
         "calls": Array [
+          Array [
+            undefined,
+          ],
           Array [
             undefined,
           ],
@@ -59,20 +88,56 @@ exports[`Dashboard page component should render with default props 1`] = `
             "isThrow": false,
             "value": Promise {},
           },
+          Object {
+            "isThrow": false,
+            "value": Promise {},
+          },
+        ],
+      }
+    }
+    match={
+      Object {
+        "url": "/",
+      }
+    }
+    track={
+      [MockFunction] {
+        "calls": Array [
+          Array [
+            "PAGE_VIEW",
+            Object {
+              "path": "/",
+              "title": undefined,
+            },
+          ],
+        ],
+        "results": Array [
+          Object {
+            "isThrow": false,
+            "value": undefined,
+          },
         ],
       }
     }
   >
-    <h2
-      className="govuk-heading-m"
+    <div
+      className="govuk-grid-row"
     >
-      My Cases
-    </h2>
-    <h2
-      className="govuk-heading-m"
-    >
-      Team Cases
-    </h2>
+      <div
+        className="govuk-grid-column-full"
+      >
+        <h2
+          className="govuk-heading-m"
+        >
+          My Cases
+        </h2>
+        <h2
+          className="govuk-heading-m"
+        >
+          Team Cases
+        </h2>
+      </div>
+    </div>
   </DashboardPage>
 </Component>
 `;
