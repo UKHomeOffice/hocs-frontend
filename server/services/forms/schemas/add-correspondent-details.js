@@ -6,7 +6,7 @@ module.exports = options => Form()
     .withField(
         Component('dropdown', 'type')
             .withValidator('required', 'The correspondent must have a type')
-            .withProp('label', 'Correspondent type')
+            .withProp('label', 'Correspondent Type')
             .withProp('choices', 'CORRESPONDENT_TYPES')
             .build()
     )

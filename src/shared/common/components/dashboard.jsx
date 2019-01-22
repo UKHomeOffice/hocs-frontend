@@ -15,7 +15,7 @@ class Dashboard extends Component {
     }
 
     render() {
-        const { absoluteUrl, dashboard, alwaysLink } = this.props;
+        const { absoluteUrl, dashboard, alwaysLink, alwaysShow } = this.props;
 
         return (
             <Fragment>
@@ -25,14 +25,14 @@ class Dashboard extends Component {
                         if (alwaysLink || dashboard.length > 1) {
                             return (
                                 <Card key={i} url={url} {...item}>
-                                    {item.tags && item.tags.allocated && <span className='govuk-!-font-size-16 govuk-!-font-weight-bold govuk-tag dashboard__tag'>{item.tags.allocated} Unallocated</span>}
+                                    {!alwaysShow || item.tags  && <span className='govuk-!-font-size-16 govuk-!-font-weight-bold govuk-tag dashboard__tag'>{item.tags.allocated ? item.tags.allocated : 0} Unallocated</span>}
                                     {item.tags && item.tags.overdue && <span className='govuk-!-font-size-16 govuk-!-font-weight-bold govuk-tag dashboard__tag dashboard__tag--red'>{item.tags.overdue} Overdue</span>}
                                 </Card>
                             );
                         } else {
                             return (
                                 <StaticCard key={i} {...item}>
-                                    {item.tags && item.tags.allocated && <span className='govuk-!-font-size-16 govuk-!-font-weight-bold govuk-tag dashboard__tag'>{item.tags.allocated} Unallocated</span>}
+                                    {item.tags && <span className='govuk-!-font-size-16 govuk-!-font-weight-bold govuk-tag dashboard__tag'>{item.tags.allocated ? item.tags.allocated : 0} Unallocated</span>}
                                     {item.tags && item.tags.overdue && <span className='govuk-!-font-size-16 govuk-!-font-weight-bold govuk-tag dashboard__tag dashboard__tag--red'>{item.tags.overdue} Overdue</span>}
                                 </StaticCard>
                             );

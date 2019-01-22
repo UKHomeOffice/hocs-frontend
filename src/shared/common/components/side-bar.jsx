@@ -11,7 +11,7 @@ class SideBar extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            active: props.activeTab || 'SUMMARY'
+            active: props.activeTab || 'DOCUMENTS'
         };
     }
 
@@ -43,12 +43,12 @@ class SideBar extends Component {
             <Fragment>
                 <div className='tabs'>
                     <ul>
-                        {this.renderTabButton('Summary', 'SUMMARY')}
                         {this.renderTabButton('Documents', 'DOCUMENTS')}
+                        {this.renderTabButton('Summary', 'SUMMARY')}
                         {this.renderTabButton('Timeline', 'TIMELINE')}
                     </ul>
-                    {this.isActive('SUMMARY') && <StageSummary />}
                     {this.isActive('DOCUMENTS') && <DocumentPane />}
+                    {this.isActive('SUMMARY') && <StageSummary />}
                     {this.isActive('TIMELINE') && <CaseNotes />}
                 </div>
             </Fragment>

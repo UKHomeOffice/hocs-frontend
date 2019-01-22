@@ -51,9 +51,9 @@ class DashboardPage extends Component {
             <div className="govuk-grid-row">
                 <div className="govuk-grid-column-full">
                     <h2 className='govuk-heading-m'>My Cases</h2>
-                    {dashboard && dashboard.user && <Dashboard dashboard={dashboard.user} absoluteUrl={'/workstack/user'} alwaysLink={true} />}
+                    {dashboard && dashboard.user && <Dashboard dashboard={dashboard.user} absoluteUrl={'/workstack/user'} alwaysLink={true} alwaysShow={false} />}
                     <h2 className='govuk-heading-m'>Team Cases</h2>
-                    {dashboard && dashboard.teams && <Dashboard dashboard={dashboard.teams} baseUrl={'/workstack'} alwaysLink={true} />}
+                    {dashboard && dashboard.teams && <Dashboard dashboard={dashboard.teams} baseUrl={'/workstack'} alwaysLink={true} alwaysShow={false} />}
                 </div>
             </div>
         );

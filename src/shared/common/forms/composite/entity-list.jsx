@@ -74,10 +74,10 @@ class EntityList extends Component {
                                     </tr>
                                 );
                             })}
-                            {choices.length === 0 && <tr><td><p className='govuk-body'>No {entity}s</p></td></tr>}
+                            <br />
+                            {hasAddLink && <Link to={`/case/${page.params.caseId}/stage/${page.params.stageId}/entity/${entity}/add`} className="govuk-body govuk-link">Add a {entity}</Link>}
                         </tbody>
                     </table>
-                    {hasAddLink && <Link to={`/case/${page.params.caseId}/stage/${page.params.stageId}/entity/${entity}/add`} className="govuk-body govuk-link">Add a {entity}</Link>}
                 </fieldset>
 
             </div>

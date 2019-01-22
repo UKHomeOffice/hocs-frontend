@@ -16,29 +16,20 @@ exports[`Entity list component should render with add link when passed in props 
         class="govuk-fieldset__heading govuk-label--s"
       />
     </legend>
-    <table
-      class="govuk-table"
-    >
-      <tbody
-        class="govuk-table__body"
-      >
-        <tr>
-          <td>
-            <p
-              class="govuk-body"
-            >
-              No entitys
-            </p>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <br />
     <a
       class="govuk-body govuk-link"
       href="/case/1234/stage/5678/entity/entity/add"
     >
       Add a entity
     </a>
+    <table
+      class="govuk-table"
+    >
+      <tbody
+        class="govuk-table__body"
+      />
+    </table>
   </fieldset>
 </div>
 `;
@@ -59,22 +50,13 @@ exports[`Entity list component should render with additional when passed in prop
         class="govuk-fieldset__heading govuk-label--s"
       />
     </legend>
+    <br />
     <table
       class="govuk-table"
     >
       <tbody
         class="govuk-table__body"
-      >
-        <tr>
-          <td>
-            <p
-              class="govuk-body"
-            >
-              No entitys
-            </p>
-          </td>
-        </tr>
-      </tbody>
+      />
     </table>
   </fieldset>
 </div>
@@ -96,22 +78,13 @@ exports[`Entity list component should render with default props 1`] = `
         class="govuk-fieldset__heading govuk-label--s"
       />
     </legend>
+    <br />
     <table
       class="govuk-table"
     >
       <tbody
         class="govuk-table__body"
-      >
-        <tr>
-          <td>
-            <p
-              class="govuk-body"
-            >
-              No entitys
-            </p>
-          </td>
-        </tr>
-      </tbody>
+      />
     </table>
   </fieldset>
 </div>
@@ -139,22 +112,13 @@ exports[`Entity list component should render with error when passed in props 1`]
     >
       Validation has failed
     </span>
+    <br />
     <table
       class="govuk-table"
     >
       <tbody
         class="govuk-table__body"
-      >
-        <tr>
-          <td>
-            <p
-              class="govuk-body"
-            >
-              No entitys
-            </p>
-          </td>
-        </tr>
-      </tbody>
+      />
     </table>
   </fieldset>
 </div>
@@ -181,22 +145,13 @@ exports[`Entity list component should render with hint when passed in props 1`] 
     >
       Select one of the below entities
     </span>
+    <br />
     <table
       class="govuk-table"
     >
       <tbody
         class="govuk-table__body"
-      >
-        <tr>
-          <td>
-            <p
-              class="govuk-body"
-            >
-              No entitys
-            </p>
-          </td>
-        </tr>
-      </tbody>
+      />
     </table>
   </fieldset>
 </div>
@@ -220,22 +175,13 @@ exports[`Entity list component should render with label when passed in props 1`]
         Test entity list
       </span>
     </legend>
+    <br />
     <table
       class="govuk-table"
     >
       <tbody
         class="govuk-table__body"
-      >
-        <tr>
-          <td>
-            <p
-              class="govuk-body"
-            >
-              No entitys
-            </p>
-          </td>
-        </tr>
-      </tbody>
+      />
     </table>
   </fieldset>
 </div>
@@ -257,6 +203,7 @@ exports[`Entity list component should render with remove link when passed in pro
         class="govuk-fieldset__heading govuk-label--s"
       />
     </legend>
+    <br />
     <table
       class="govuk-table"
     >

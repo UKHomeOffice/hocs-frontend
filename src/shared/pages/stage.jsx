@@ -14,9 +14,9 @@ class Stage extends Component {
         return (
             <div className="govuk-grid-row">
                 <div className="govuk-grid-column-one-half">
-                    <h1 className="govuk-heading-l">
-                        {form && <span className="govuk-caption-l">{form && form.caseReference}</span>}
-                        {title}
+                    <h1 className="govuk-heading-m">
+                        {form && form.caseReference}
+                        {<span className="govuk-caption-l">{title}</span>}
                     </h1>
                     {children}
                 </div>

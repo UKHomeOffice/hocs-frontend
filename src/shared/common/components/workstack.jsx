@@ -75,12 +75,12 @@ class WorkstackAllocate extends Component {
     renderFilter() {
         return (
             <div className='govuk-grid-row'>
-                <div className='govuk-grid-column-full'>
+                <div className='govuk-grid-column-one-third'>
                     <div className='govuk-form-group filter-row'>
                         <legend id={'workstack-filter-legend'} className='govuk-fieldset__legend'>
                             <span className='govuk-fieldset__heading govuk-label--s'>Case Filter</span>
                         </legend>
-                        <input className='govuk-input govuk-!-width-one-third'
+                        <input className='govuk-input'
                             id='workstack-filter'
                             type='text'
                             name='workstack-filter'
@@ -138,7 +138,7 @@ class WorkstackAllocate extends Component {
         const { teamMembers } = this.props;
         return (
             <Fragment>
-                <Dropdown label='Allocate cases to a user' name='selected_user' updateState={() => { }} choices={teamMembers} />
+                <Dropdown label='Allocate to a team member' name='selected_user' updateState={() => { }} choices={teamMembers} />
                 <Submit label='Allocate' />
             </Fragment>
         );
@@ -151,6 +151,7 @@ class WorkstackAllocate extends Component {
         return (
             <Fragment>
                 {isMounted && this.renderFilter()}
+                <br/>
                 <div className='govuk-grid-row'>
                     <div className='govuk-grid-column-full'>
                         <form action={baseUrl + allocateToTeamEndpoint} method='POST' onSubmit={e => submitHandler(e, baseUrl + allocateToTeamEndpoint)} encType='multipart/form-data'>
@@ -158,15 +159,18 @@ class WorkstackAllocate extends Component {
                                 <div className='govuk-grid-row'>
                                     <div className='govuk-grid-column-full'>
                                         <div className='workstack'>
+                                            <span className='govuk-hint' aria-live='polite'>
+                                                {items.length} Items
+                                            </span>
                                             <table className='govuk-table'>
                                                 <thead className='govuk-table__head'>
                                                     <tr className='govuk-radios govuk-table__row'>
                                                         <th className='govuk-table__header'>Select</th>
-                                                        <th className='govuk-table__header'>Case Reference</th>
+                                                        <th className='govuk-table__header'>Reference</th>
                                                         <th className='govuk-table__header'>Current Stage</th>
-                                                        <th className='govuk-table__header'>Owner</th>
-                                                        <th className='govuk-table__header'>Team</th>
-                                                        <th className='govuk-table__header'>Stage Deadline</th>
+                                                        <th className='govuk-table__header govuk-!-width-one-quarter'>Owner</th>
+                                                        <th className='govuk-table__header govuk-!-width-one-quarter'>Team</th>
+                                                        <th className='govuk-table__header'>Deadline</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody className='govuk-table__body'>
@@ -174,22 +178,19 @@ class WorkstackAllocate extends Component {
                                                 </tbody>
                                             </table>
                                             <span className='govuk-hint' aria-live='polite'>
-                                                {items.length} items
+                                                {items.length} Items
                                             </span>
                                         </div>
                                     </div>
                                 </div>
                                 <div className='govuk-grid-row'>
-                                    <div className='govuk-grid-column-one-half'>
-                                        <h3 className='govuk-heading-s'>
-                                            Quick Actions
-                                        </h3>
+                                    <div className='govuk-grid-column-one-third'>
                                         <ul className='govuk-list'>
                                             <li>
-                                                {allocateToUserEndpoint && LinkButton({ label: 'Allocate cases to me', endpoint: (baseUrl + allocateToUserEndpoint), submitHandler })}
+                                                {allocateToUserEndpoint && LinkButton({ label: 'Allocate selected to me', endpoint: (baseUrl + allocateToUserEndpoint), submitHandler })}
                                             </li>
                                             <li>
-                                                {allocateToWorkstackEndpoint && LinkButton({ label: 'Unallocate cases', endpoint: (baseUrl + allocateToWorkstackEndpoint), submitHandler })}
+                                                {allocateToWorkstackEndpoint && LinkButton({ label: 'Unallocate selected', endpoint: (baseUrl + allocateToWorkstackEndpoint), submitHandler })}
                                             </li>
                                         </ul>
                                         {teamMembers && this.renderTeamsDropdown()}

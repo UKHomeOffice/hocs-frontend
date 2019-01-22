@@ -14,8 +14,8 @@ class Case extends Component {
             <div className="govuk-grid-row">
                 <div className="govuk-grid-column-one-half">
                     <h1 className="govuk-heading-l">
-                        {form && <span className="govuk-caption-l">{form && form.caseReference}</span>}
                         {title}
+                        {form && <span className="govuk-caption-l">{form && form.caseReference}</span>}
                     </h1>
                     {children}
                 </div>

@@ -18,7 +18,7 @@ module.exports = async options => {
     const response = await getList('CASE_DOCUMENT_LIST', { caseId: options.caseId, user: options.user });
     const choices = response.map(documentAdapter);
     return Form()
-        .withTitle('Manage documents')
+        .withTitle('Manage Documents')
         .withField(
             Component('entity-manager', 'document_list')
                 .withProp('label', 'Documents')

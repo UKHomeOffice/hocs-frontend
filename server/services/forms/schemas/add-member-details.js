@@ -5,11 +5,11 @@ const { infoServiceClient } = require('../../../libs/request');
 module.exports = async options => {
     const response = await infoServiceClient.get(`/member/${options.context}`);
     return Form()
-        .withTitle('Member details')
+        .withTitle('Member Details')
         .withField(
             Component('dropdown', 'type')
                 .withValidator('required', 'The correspondent must have a type')
-                .withProp('label', 'Correspondent type')
+                .withProp('label', 'Correspondent Type')
                 .withProp('disabled', true)
                 .withProp('choices', 'CORRESPONDENT_TYPES')
                 .build()
