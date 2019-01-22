@@ -150,6 +150,11 @@ spec:
             value: '8080'
           - name: NODE_ENV
             value: 'production'
+          - name: GA_TRACKER
+            valueFrom:
+              configMapKeyRef:
+                name: hocs-frontend
+                key: ga_tracker            
           - name: USE_CLIENTSIDE
             valueFrom:
               configMapKeyRef:
