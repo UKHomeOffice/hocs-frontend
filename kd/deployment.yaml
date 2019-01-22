@@ -152,7 +152,7 @@ spec:
             value: 'production'
           - name: GA_TRACKER
             valueFrom:
-              configMapKeyRef:
+              secretKeyRef:
                 name: hocs-frontend
                 key: ga_tracker            
           - name: USE_CLIENTSIDE
