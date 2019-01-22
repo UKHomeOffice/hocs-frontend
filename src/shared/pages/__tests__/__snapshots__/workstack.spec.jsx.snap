@@ -38,6 +38,25 @@ exports[`Workstack page component should render with default props 1`] = `
       ],
     }
   }
+  track={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          "PAGE_VIEW",
+          Object {
+            "path": "/test",
+            "title": undefined,
+          },
+        ],
+      ],
+      "results": Array [
+        Object {
+          "isThrow": false,
+          "value": undefined,
+        },
+      ],
+    }
+  }
 >
   <WorkstackPage
     dispatch={
@@ -79,6 +98,25 @@ exports[`Workstack page component should render with default props 1`] = `
     match={
       Object {
         "url": "/test",
+      }
+    }
+    track={
+      [MockFunction] {
+        "calls": Array [
+          Array [
+            "PAGE_VIEW",
+            Object {
+              "path": "/test",
+              "title": undefined,
+            },
+          ],
+        ],
+        "results": Array [
+          Object {
+            "isThrow": false,
+            "value": undefined,
+          },
+        ],
       }
     }
   >

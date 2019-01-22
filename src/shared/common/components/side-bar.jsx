@@ -17,6 +17,9 @@ class SideBar extends Component {
 
     setActive(e, tab) {
         e.preventDefault();
+        if (tab !== this.state.active) {
+            this.props.track('EVENT', { category: 'Side bar', action: 'Select tab', label: tab });
+        }
         this.setState({ active: tab });
     }
 
@@ -56,12 +59,14 @@ class SideBar extends Component {
 
 SideBar.propTypes = {
     activeTab: PropTypes.string,
-    page: PropTypes.object.isRequired
+    page: PropTypes.object.isRequired,
+    track: PropTypes.func.isRequired
+
 };
 
 const WrappedSideBar = props => (
     <ApplicationConsumer>
-        {({ dispatch, page, activeTab }) => <SideBar {...props} dispatch={dispatch} page={page} activeTab={activeTab} />}
+        {({ track, page, activeTab }) => <SideBar {...props} track={track} page={page} activeTab={activeTab} />}
     </ApplicationConsumer>
 );
 

@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { ApplicationConsumer } from '../contexts/application.jsx';
@@ -18,10 +18,11 @@ class DashboardPage extends Component {
     }
 
     componentDidMount() {
-        const { dashboard } = this.props;
+        const { dashboard, match, title, track } = this.props;
         if (!dashboard) {
-            return this.getDashboardData();
+            this.getDashboardData();
         }
+        track('PAGE_VIEW', { title, path: match.url });
         this.props.dispatch(clearDashboard());
     }
 
@@ -47,28 +48,34 @@ class DashboardPage extends Component {
     render() {
         const { dashboard } = this.state;
         return (
-            <Fragment>
-                <h2 className='govuk-heading-m'>My Cases</h2>
-                {dashboard && dashboard.user && <Dashboard dashboard={dashboard.user} absoluteUrl={'/workstack/user'} alwaysLink={true} alwaysShow={false} />}
-                <h2 className='govuk-heading-m'>Team Cases</h2>
-                {dashboard && dashboard.teams && <Dashboard dashboard={dashboard.teams} baseUrl={'/workstack'} alwaysLink={true} alwaysShow={true}/>}
-            </Fragment>
+            <div className="govuk-grid-row">
+                <div className="govuk-grid-column-full">
+                    <h2 className='govuk-heading-m'>My Cases</h2>
+                    {dashboard && dashboard.user && <Dashboard dashboard={dashboard.user} absoluteUrl={'/workstack/user'} alwaysLink={true} alwaysShow={false} />}
+                    <h2 className='govuk-heading-m'>Team Cases</h2>
+                    {dashboard && dashboard.teams && <Dashboard dashboard={dashboard.teams} baseUrl={'/workstack'} alwaysLink={true} alwaysShow={false} />}
+                </div>
+            </div>
         );
     }
 }
 
 DashboardPage.propTypes = {
     dashboard: PropTypes.object,
-    dispatch: PropTypes.func.isRequired
+    dispatch: PropTypes.func.isRequired,
+    match: PropTypes.object.isRequired,
+    track: PropTypes.func.isRequired,
+    title: PropTypes.string.isRequired
 };
 
 const WrappedPageDashboard = props => {
     return (
         <ApplicationConsumer>
-            {({ dispatch, dashboard }) => (
+            {({ dispatch, dashboard, track }) => (
                 <DashboardPage
                     {...props}
                     dispatch={dispatch}
+                    track={track}
                     dashboard={dashboard}
                 />
             )}

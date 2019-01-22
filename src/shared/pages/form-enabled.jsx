@@ -32,7 +32,10 @@ function withForm(Page) {
         }
 
         componentDidMount() {
-            const { dispatch, form, match } = this.props;
+            const { dispatch, track, form, match } = this.props;
+            if (this.state.form_schema) {
+                track('PAGE_VIEW', { title: this.state.form_schema.title, path: match.url });
+            }
             dispatch(updatePageMeta(match))
                 .then(() => {
                     if (!form) {
@@ -40,6 +43,15 @@ function withForm(Page) {
                     }
                     dispatch(unsetForm());
                 });
+        }
+
+        componentDidUpdate(prevProps, prevState) {
+            const { track, match: { url } } = this.props;
+            if (this.state.form_schema) {
+                if (!prevState.form_schema || this.state.form_schema.title !== prevState.form_schema.title) {
+                    track('PAGE_VIEW', { title: this.state.form_schema.title, path: url });
+                }
+            }
         }
 
         shouldComponentUpdate(nextProps, nextState) {
@@ -76,12 +88,12 @@ function withForm(Page) {
 
         submitHandler(e) {
             e.preventDefault();
-            const { dispatch, history, match: { url } } = this.props;
+            const { dispatch, track, history, match: { url } } = this.props;
             const { form_schema, form_data } = this.state;
             // TODO: Remove
             /* eslint-disable-next-line no-undef */
             const formData = new FormData();
-            Object.keys(form_data).filter(field => form_data[field] !== null).forEach(field => {
+            Object.keys(form_data).filter(field => form_data[field] !== null && form_data[field] !== '').forEach(field => {
                 if (Array.isArray(form_data[field])) {
                     form_data[field].map(value => {
                         formData.append(`${field}[]`, value);
@@ -98,7 +110,8 @@ function withForm(Page) {
                                 .then(() => {
                                     if (res.data.errors) {
                                         dispatch(updateApiStatus(status.SUBMIT_FORM_VALIDATION_ERROR))
-                                            .then(() => this.setState({ form_errors: res.data.errors }));
+                                            .then(() => this.setState({ form_errors: res.data.errors }))
+                                            .then(() => track('EVENT', { category: form_schema.title, action: 'Submit', label: 'Validation Error' }));
 
                                     } else {
                                         if (res.data.confirmation) {
@@ -190,11 +203,12 @@ const FormEnabledWrapper = Page => {
         const WrappedPage = withForm(Page);
         return (
             <ApplicationConsumer>
-                {({ confirmation, dispatch, form }) => (
+                {({ confirmation, dispatch, track, form }) => (
                     <WrappedPage
                         {...props}
                         confirmation={confirmation}
                         dispatch={dispatch}
+                        track={track}
                         form={form}
                     />
                 )}

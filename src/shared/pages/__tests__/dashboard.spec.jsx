@@ -19,7 +19,7 @@ jest.mock('axios', () => ({
         }
     })
 }));
-jest.mock('../../common/components/dashboard.jsx',  () => () => 'MOCK_DASHBOARD');
+jest.mock('../../common/components/dashboard.jsx', () => () => 'MOCK_DASHBOARD');
 jest.mock('../../contexts/actions/index.jsx', () => ({
     updateApiStatus: jest.fn(),
     clearApiStatus: jest.fn(),
@@ -34,19 +34,21 @@ const FLUSH_PROMISES = () => new Promise(resolve => setImmediate(resolve));
 describe('Dashboard page component', () => {
 
     const MOCK_DISPATCH = jest.fn();
+    const MOCK_TRACK = jest.fn();
 
     beforeEach(() => {
         MOCK_DISPATCH.mockReset();
+        MOCK_TRACK.mockReset();
         MOCK_DISPATCH.mockReturnValue(Promise.resolve());
         axios.get.mockClear();
         actions.updateDashboard.mockReset();
     });
 
     it('should render with default props', async () => {
-        const OUTER = shallow(<WrappedDashboardPage />);
+        const OUTER = shallow(<WrappedDashboardPage match={{ url: '/' }} />);
         const DashboardPage = OUTER.props().children;
         const WRAPPER = mount(
-            <DashboardPage dispatch={MOCK_DISPATCH} />
+            <DashboardPage dispatch={MOCK_DISPATCH} track={MOCK_TRACK} />
         );
         await FLUSH_PROMISES();
         expect(WRAPPER).toBeDefined();
@@ -61,10 +63,10 @@ describe('Dashboard page component', () => {
             user: { label: 'My cases', count: 0, items: [] },
             teams: []
         };
-        const OUTER = shallow(<WrappedDashboardPage />);
+        const OUTER = shallow(<WrappedDashboardPage match={{ url: '/' }} />);
         const DashboardPage = OUTER.props().children;
         const WRAPPER = mount(
-            <DashboardPage dispatch={MOCK_DISPATCH} dashboard={MOCK_DASHBOARD_DATA} />
+            <DashboardPage dispatch={MOCK_DISPATCH} dashboard={MOCK_DASHBOARD_DATA} track={MOCK_TRACK} />
         );
         await FLUSH_PROMISES();
         expect(WRAPPER).toBeDefined();

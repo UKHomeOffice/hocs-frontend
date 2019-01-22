@@ -16,7 +16,7 @@ class Router extends Component {
                                 path={path}
                                 exact={exact}
                                 render={(props) => (
-                                    <PageWrapper>
+                                    <PageWrapper match={props.match}>
                                         <Page {...props} {...rest} />
                                     </PageWrapper>
                                 )}

@@ -3,7 +3,7 @@ import CasePage from '../../pages/case.jsx';
 import StagePage from '../../pages/stage.jsx';
 import CaseSummaryPage from '../../pages/summary.jsx';
 import Error from '../../layouts/error.jsx';
-import MainPage from '../../pages/main.jsx';
+import MainPage from '../../pages/dashboard.jsx';
 import WorkstackPage from '../../pages/workstack.jsx';
 
 const routes = [
@@ -11,6 +11,7 @@ const routes = [
         path: '/',
         exact: true,
         component: MainPage,
+        title: 'Dashboard'
     },
     {
         path: '/action/:workflow/:action',
@@ -50,22 +51,26 @@ const routes = [
     {
         path: '/workstack/user',
         exact: true,
-        component: WorkstackPage
+        component: WorkstackPage,
+        title: 'User Workstack'
     },
     {
         path: '/workstack/team/:teamId/',
         exact: true,
-        component: WorkstackPage
+        component: WorkstackPage,
+        title: 'Team Workstack'
     },
     {
         path: '/workstack/team/:teamId/workflow/:workflowId',
         exact: true,
-        component: WorkstackPage
+        component: WorkstackPage,
+        title: 'Workflow Workstack'
     },
     {
         path: '/workstack/team/:teamId/workflow/:workflowId/stage/:stagId',
         exact: true,
-        component: WorkstackPage
+        component: WorkstackPage,
+        title: 'Stage Workstack'
     },
     {
         path: '/error',

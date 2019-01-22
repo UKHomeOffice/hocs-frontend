@@ -17,7 +17,7 @@ import TypeAhead from './type-ahead.jsx';
 import Panel from './panel.jsx';
 
 function defaultDataAdapter(name, data) {
-    return data[name] || null;
+    return data[name] || '';
 }
 
 function checkboxDataAdapter(name, data) {
