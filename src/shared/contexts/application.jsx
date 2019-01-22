@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import types from './actions/types.jsx';
+import ReactGA from 'react-ga';
 
 const Context = React.createContext();
 
@@ -67,6 +68,12 @@ const reducer = (state, action) => {
 export class ApplicationProvider extends Component {
     constructor(props) {
         super(props);
+        const { config } = props;
+        if (config && config.analytics &&
+            ReactGA.initialize(config.analytics.tracker, { titleCase: true, gaOptions: { userId: config.analytics.userId } })) {
+            /* eslint-disable-next-line  no-console*/
+            this.useAnalytics = true;
+        }
         this.state = {
             ...props.config,
             apiStatus: null,
@@ -78,18 +85,33 @@ export class ApplicationProvider extends Component {
                     return Promise.reject(error);
                 }
             },
-            track: (event, payload) => {
-                if (this.state.analytics) {
-                    // TODO: REMOVE
-                    /* eslint-disable-next-line  no-console*/
-                    console.debug(`${event}, ${JSON.stringify({
-                        user: 'test',
-                        tracker: '1234',
-                        ...payload
-                    })}`);
-                }
-            }
+            track: this.track.bind(this)
         };
+    }
+
+
+    track(event, payload) {
+        if (this.useAnalytics) {
+            switch (event) {
+            case 'EVENT':
+                ReactGA.event({
+                    category: payload.category,
+                    action: payload.action,
+                    label: payload.label
+                });
+                break;
+            case 'PAGE_VIEW':
+                ReactGA.pageview(
+                    payload.path,
+                    null,
+                    payload.title
+                );
+                break;
+            default:
+                /* eslint-disable-next-line  no-console*/
+                console.warn('Unsupported analytics event');
+            }
+        }
     }
 
     render() {
