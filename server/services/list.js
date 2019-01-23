@@ -459,7 +459,11 @@ const lists = {
             headers: User.createHeaders(user)
         }, infoServiceClient);
         if (response.data.parentTopics) {
-            return response.data.parentTopics;
+            return response.data.parentTopics
+                .map(parent => {
+                    parent.options = parent.options.sort((first, second) => first.label > second.label);
+                    return parent;
+                }).sort((first, second) => first.label > second.label);
         } else {
             logger.warn({ event: events.FETCH_LIST_RETURN_EMPTY, list: 'TOPICS_CASETYPE' });
             return [];
@@ -471,7 +475,11 @@ const lists = {
             headers: User.createHeaders(user)
         }, infoServiceClient);
         if (response.data.parentTopics) {
-            return response.data.parentTopics;
+            response.data.parentTopics
+                .map(parent => {
+                    parent.options = parent.options.sort((first, second) => first.label > second.label);
+                    return parent;
+                }).sort((first, second) => first.label > second.label);
         } else {
             logger.warn({ event: events.FETCH_LIST_RETURN_EMPTY, list: 'TOPICS_USER' });
             return [];
@@ -483,7 +491,7 @@ const lists = {
             headers: User.createHeaders(user)
         }, infoServiceClient);
         if (response.data.correspondentTypes) {
-            return response.data.correspondentTypes;
+            return response.data.correspondentTypes.sort((first, second) => first.label > second.label);
         } else {
             logger.warn({ event: events.FETCH_LIST_RETURN_EMPTY, list: 'CORRESPONDENT_TYPES' });
             return [];
@@ -559,7 +567,8 @@ const lists = {
                 .map(({ id, firstName, lastName, username }) => ({
                     label: `${firstName} ${lastName} (${username})`,
                     value: id
-                }));
+                }))
+                .sort((first, second) => first.label > second.label);
         } else {
             logger.warn({ event: events.FETCH_LIST_RETURN_EMPTY, list: 'USERS_IN_TEAM' });
             return [];
@@ -574,7 +583,8 @@ const lists = {
                 .map(({ id, firstName, lastName, username }) => ({
                     label: `${firstName} ${lastName} (${username})`,
                     value: id
-                }));
+                }))
+                .sort((first, second) => first.label > second.label);
         } else {
             logger.warn({ event: events.FETCH_LIST_RETURN_EMPTY, list: 'USERS_FOR_CASE' });
             return [];
@@ -589,7 +599,8 @@ const lists = {
                 .map(({ displayName, type }) => ({
                     label: displayName,
                     value: type
-                }));
+                }))
+                .sort((first, second) => first.label > second.label);
         } else {
             logger.warn({ event: events.FETCH_LIST_RETURN_EMPTY, list: 'PRIVATE_OFFICE_TEAMS' });
             return [];
@@ -604,7 +615,8 @@ const lists = {
                 .map(({ displayName, type }) => ({
                     label: displayName,
                     value: type
-                }));
+                }))
+                .sort((first, second) => first.label > second.label);
         } else {
             logger.warn({ event: events.FETCH_LIST_RETURN_EMPTY, list: 'DRAFT_TEAMS' });
             return [];
