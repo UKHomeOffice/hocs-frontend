@@ -5,8 +5,8 @@ class user {
         this.id = id;
         this.email = email;
         this.username = username;
-        this.roles = roles ? roles.toUpperCase().split(',').map(p => p.trim()) : [];
-        this.groups = groups ? groups.toUpperCase().split(',').map(g => g.trim()) : [];
+        this.roles = roles ? roles.split(',').map(p => p.trim()) : [];
+        this.groups = groups ? groups.split(',').map(g => g.trim()) : [];
         this.uuid = uuid;
         logger.info({ event: 'DEBUG', roles, groups, uuid });
     }
