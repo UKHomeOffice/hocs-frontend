@@ -53,7 +53,7 @@ class DashboardPage extends Component {
                     <h2 className='govuk-heading-m'>My Cases</h2>
                     {dashboard && dashboard.user && <Dashboard dashboard={dashboard.user} absoluteUrl={'/workstack/user'} alwaysLink={true} alwaysShow={false} />}
                     <h2 className='govuk-heading-m'>Team Cases</h2>
-                    {dashboard && dashboard.teams && <Dashboard dashboard={dashboard.teams} baseUrl={'/workstack'} alwaysLink={true} alwaysShow={false} />}
+                    {dashboard && dashboard.teams && <Dashboard dashboard={dashboard.teams} baseUrl={'/workstack'} alwaysLink={true} alwaysShow={true} />}
                 </div>
             </div>
         );
