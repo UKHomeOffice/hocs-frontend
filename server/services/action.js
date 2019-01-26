@@ -138,7 +138,7 @@ const actions = {
                     if (!context) {
                         throw new ActionError('Unable to remove, no context provided');
                     }
-                    await docsServiceClient.delete(`/case/${caseId}/document/${context}`, headers);
+                    await docsServiceClient.delete(`/document/${context}`, headers);
                     break;
                 case actionTypes.ADD_TOPIC:
                     await caseworkServiceClient.post(`/case/${caseId}/stage/${stageId}/topic`, { topicUUID: form.data['topic'] }, headers);
