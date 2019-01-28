@@ -475,7 +475,7 @@ const lists = {
             headers: User.createHeaders(user)
         }, infoServiceClient);
         if (response.data.parentTopics) {
-            response.data.parentTopics
+            return response.data.parentTopics
                 .map(parent => {
                     parent.options = parent.options.sort((first, second) => first.label > second.label);
                     return parent;
