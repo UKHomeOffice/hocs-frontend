@@ -85,7 +85,7 @@ spec:
           - name: ADD_NGINX_SERVER_CFG
             value: 'location = /reload { allow 127.0.0.1; deny all; content_by_lua_block { os.execute("touch /tmp/nginx-reload-triggered; /usr/local/openresty/nginx/sbin/nginx -s reload; touch /tmp/nginx-reload-complete;") } }'
           - name: ADD_NGINX_HTTP_CFG
-            value: 'location = / { fastcgi_buffers 16 16k; fastcgi_buffer_size 32k; }'
+            value: 'fastcgi_buffers 16 16k; fastcgi_buffer_size 32k; proxy_buffer_size 128k; proxy_buffers 4 256k; proxy_busy_buffers_size 256k;'
         volumeMounts:
           - name: certs
             mountPath: /certs
