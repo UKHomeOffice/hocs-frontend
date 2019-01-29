@@ -151,10 +151,10 @@ describe('getList', () => {
     });
 
     it('should support the CASE_STANDARD_LINES list', async () => {
-        infoServiceClient.get.mockImplementation(jest.fn(() => Promise.resolve({
+        caseworkServiceClient.get.mockImplementation(jest.fn(() => Promise.resolve({
             data: {
-                label: 'Test Standard Line',
-                value: '1234'
+                displayName: 'Test Standard Line',
+                uuid: '1234'
             }
         })));
         const listService = require('../list');
@@ -165,10 +165,10 @@ describe('getList', () => {
     });
 
     it('should support the CASE_TEMPLATES list', async () => {
-        infoServiceClient.get.mockImplementation(jest.fn(() => Promise.resolve({
+        caseworkServiceClient.get.mockImplementation(jest.fn(() => Promise.resolve({
             data: {
-                label: 'Test Template',
-                value: '1234'
+                displayName: 'Test Template',
+                uuid: '1234'
             }
         })));
         const listService = require('../list');

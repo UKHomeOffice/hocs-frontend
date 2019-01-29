@@ -414,11 +414,10 @@ const lists = {
         const list = listDefinitions['standardLines'].call(this, { caseId });
         const response = await fetchList(list, {
             headers: User.createHeaders(user)
-        }, infoServiceClient);
-        if (response.data.label && response.data.value) {
-            const { label, value } = response.data;
+        }, caseworkServiceClient);
+        if (response.data.displayName && response.data.uuid) {
             return [
-                { label, value }
+                { label: response.data.displayName, value: response.data.uuid }
             ];
         } else {
             logger.warn({ event: events.FETCH_LIST_RETURN_EMPTY, list: 'CASE_STANDARD_LINES' });
@@ -429,11 +428,10 @@ const lists = {
         const list = listDefinitions['templates'].call(this, { caseId });
         const response = await fetchList(list, {
             headers: User.createHeaders(user)
-        }, infoServiceClient);
-        if (response.data.label && response.data.value) {
-            const { label, value } = response.data;
+        }, caseworkServiceClient);
+        if (response.data.displayName && response.data.uuid) {
             return [
-                { label, value }
+                { label: response.data.displayName, value: response.data.uuid }
             ];
         } else {
             logger.warn({ event: events.FETCH_LIST_RETURN_EMPTY, list: 'CASE_TEMPLATES' });
