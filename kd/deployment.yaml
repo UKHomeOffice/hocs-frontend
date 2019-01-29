@@ -91,6 +91,10 @@ spec:
                 }
               }
               location = /api/ {
+                set $proxy_address "http://127.0.0.1:8081";
+
+                include  /usr/local/openresty/naxsi/locations/1/*.rules ;
+
                 set $backend_upstream "$proxy_address";
                 proxy_set_header    Host $http_host;
                 proxy_pass $backend_upstream;
@@ -99,6 +103,12 @@ spec:
                 return 307 /oauth/authorize;
               }
               location = / {
+                error_page 501 /nginx-proxy/501.shtml; error_page 502 /nginx-proxy/502.shtml; error_page 503 /nginx-proxy/503.shtml; error_page 504 /nginx-proxy/504.shtml;
+
+                set $proxy_address "http://127.0.0.1:8081";
+
+                include  /usr/local/openresty/naxsi/locations/1/*.rules ;
+
                 set $backend_upstream "$proxy_address";
                 proxy_pass $backend_upstream;
                 proxy_redirect  off;
