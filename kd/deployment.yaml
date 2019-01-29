@@ -83,30 +83,30 @@ spec:
           - name: ERROR_REDIRECT_CODES
             value: '501 502 503 504'
           - name: ADD_NGINX_SERVER_CFG
-            value: 'location = /reload { \
-                allow 127.0.0.1; \
-                deny all; \
-                content_by_lua_block { \
-                  os.execute("touch /tmp/nginx-reload-triggered; /usr/local/openresty/nginx/sbin/nginx -s reload; touch /tmp/nginx-reload-complete;") \
-                } \
-              } \
-              location = /api/ { \
-                proxy_set_header    Host $http_host; \
-                proxy_pass          http://backend; \
-              } \
-              location = @error401 { \
-                return 307 /oauth/authorize; \
-              } \
-              location = / { \
-                set $backend_upstream "$proxy_address"; \
-                proxy_pass $backend_upstream; \
-                proxy_redirect  off; \
-                proxy_intercept_errors on; \
-                proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for; \
-                proxy_set_header  X-Forwarded-Proto $scheme; \
-                proxy_set_header  Host $http_host; \
-                error_page 401 = @error401; \
-              } \'
+            value: 'location = /reload {
+                allow 127.0.0.1;
+                deny all;
+                content_by_lua_block {
+                  os.execute("touch /tmp/nginx-reload-triggered; /usr/local/openresty/nginx/sbin/nginx -s reload; touch /tmp/nginx-reload-complete;")
+                }
+              }
+              location = /api/ {
+                proxy_set_header    Host $http_host;
+                proxy_pass          http://backend;
+              }
+              location = @error401 {
+                return 307 /oauth/authorize;
+              }
+              location = / {
+                set $backend_upstream "$proxy_address";
+                proxy_pass $backend_upstream;
+                proxy_redirect  off;
+                proxy_intercept_errors on;
+                proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header  X-Forwarded-Proto $scheme;
+                proxy_set_header  Host $http_host;
+                error_page 401 = @error401;
+              }'
           - name: ADD_NGINX_HTTP_CFG
             value: 'fastcgi_buffers 16 16k; fastcgi_buffer_size 32k; proxy_buffer_size 128k; proxy_buffers 4 256k; proxy_busy_buffers_size 256k;'
         volumeMounts:
