@@ -82,42 +82,42 @@ spec:
             value: /certs/tls-key.pem
           - name: ERROR_REDIRECT_CODES
             value: '501 502 503 504'
-          - name: ADD_NGINX_SERVER_CFG
-            value: 'location = /reload {
-                allow 127.0.0.1;
-                deny all;
-                content_by_lua_block {
-                  os.execute("touch /tmp/nginx-reload-triggered; /usr/local/openresty/nginx/sbin/nginx -s reload; touch /tmp/nginx-reload-complete;")
-                }
-              }
-              location = /api/ {
-                set $proxy_address "http://127.0.0.1:8081";
+          # - name: ADD_NGINX_SERVER_CFG
+          #   value: 'location = /reload {
+          #       allow 127.0.0.1;
+          #       deny all;
+          #       content_by_lua_block {
+          #         os.execute("touch /tmp/nginx-reload-triggered; /usr/local/openresty/nginx/sbin/nginx -s reload; touch /tmp/nginx-reload-complete;")
+          #       }
+          #     }
+          #     location = /api/ {
+          #       set $proxy_address "http://127.0.0.1:8081";
 
-                include  /usr/local/openresty/naxsi/locations/1/*.rules ;
+          #       include  /usr/local/openresty/naxsi/locations/1/*.rules ;
 
-                set $backend_upstream "$proxy_address";
-                proxy_set_header    Host $http_host;
-                proxy_pass $backend_upstream;
-              }
-              location = @error401 {
-                return 307 /oauth/authorize;
-              }
-              location = / {
-                error_page 501 /nginx-proxy/501.shtml; error_page 502 /nginx-proxy/502.shtml; error_page 503 /nginx-proxy/503.shtml; error_page 504 /nginx-proxy/504.shtml;
+          #       set $backend_upstream "$proxy_address";
+          #       proxy_set_header    Host $http_host;
+          #       proxy_pass $backend_upstream;
+          #     }
+          #     location = @error401 {
+          #       return 307 /oauth/authorize;
+          #     }
+          #     location = / {
+          #       error_page 501 /nginx-proxy/501.shtml; error_page 502 /nginx-proxy/502.shtml; error_page 503 /nginx-proxy/503.shtml; error_page 504 /nginx-proxy/504.shtml;
 
-                set $proxy_address "http://127.0.0.1:8081";
+          #       set $proxy_address "http://127.0.0.1:8081";
 
-                include  /usr/local/openresty/naxsi/locations/1/*.rules ;
+          #       include  /usr/local/openresty/naxsi/locations/1/*.rules ;
 
-                set $backend_upstream "$proxy_address";
-                proxy_pass $backend_upstream;
-                proxy_redirect  off;
-                proxy_intercept_errors on;
-                proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
-                proxy_set_header  X-Forwarded-Proto $scheme;
-                proxy_set_header  Host $http_host;
-                error_page 401 = @error401;
-              }'
+          #       set $backend_upstream "$proxy_address";
+          #       proxy_pass $backend_upstream;
+          #       proxy_redirect  off;
+          #       proxy_intercept_errors on;
+          #       proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
+          #       proxy_set_header  X-Forwarded-Proto $scheme;
+          #       proxy_set_header  Host $http_host;
+          #       error_page 401 = @error401;
+          #     }'
           - name: ADD_NGINX_HTTP_CFG
             value: 'fastcgi_buffers 16 16k; fastcgi_buffer_size 32k; proxy_buffer_size 128k; proxy_buffers 4 256k; proxy_busy_buffers_size 256k;'
         volumeMounts:
@@ -152,7 +152,7 @@ spec:
           - --upstream-keepalive-timeout=60s
           - --server-read-timeout=60s
           - --server-write-timeout=60s
-          - --no-redirects=true
+          - --no-redirects=false
           - --redirection-url=https://{{.DOMAIN_NAME}}
           - --cors-origins='*'
           - --resources=uri=/health|white-listed=true
