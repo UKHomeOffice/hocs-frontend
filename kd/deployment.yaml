@@ -142,7 +142,7 @@ spec:
           - --upstream-keepalive-timeout=60s
           - --server-read-timeout=60s
           - --server-write-timeout=60s
-          - --no-redirects=false
+          - --no-redirects=true
           - --redirection-url=https://{{.DOMAIN_NAME}}
           - --cors-origins='*'
           - --resources=uri=/health|white-listed=true
