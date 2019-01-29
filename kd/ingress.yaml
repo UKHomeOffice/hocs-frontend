@@ -7,6 +7,11 @@ metadata:
     ingress.kubernetes.io/backend-protocol: "HTTPS"
     kubernetes.io/ingress.class: nginx-external
     stable.k8s.psg.io/kcm.provider: http
+    nginx.org/proxy-buffer-size: "32k"
+    nginx.org/server-snippets: |
+      location / {
+        large_client_header_buffers: 4 32k
+      }
   labels:
     stable.k8s.psg.io/kcm.class: default
   name: hocs-frontend
