@@ -10,6 +10,7 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-buffer-size: 32k
     nginx.ingress.kubernetes.io/server-snippets: |
       location / {
++       client_header_buffer_size     8k;
         large_client_header_buffers 4 32k
       }
   labels:
