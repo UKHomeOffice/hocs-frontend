@@ -119,7 +119,7 @@ spec:
           #       error_page 401 = @error401;
           #     }'
           - name: ADD_NGINX_HTTP_CFG
-            value: 'fastcgi_buffers 16 16k; fastcgi_buffer_size 32k; proxy_buffer_size 128k; proxy_buffers 4 256k; proxy_busy_buffers_size 256k;'
+            value: 'fastcgi_buffers 16 128k; fastcgi_buffer_size 256k; proxy_buffer_size 128k; proxy_buffers 4 256k; client_header_buffer_size 12k; large_client_header_buffers 4 256k;'
         volumeMounts:
           - name: certs
             mountPath: /certs

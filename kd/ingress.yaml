@@ -9,7 +9,7 @@ metadata:
     stable.k8s.psg.io/kcm.provider: http
     ingress.kubernetes.io/proxy-buffer-size: 128k
     ingress.kubernetes.io/server-snippets: |
-      client_header_buffer_size     8k;
+      client_header_buffer_size     12k;
       large_client_header_buffers   4 128k;
   
   labels:
