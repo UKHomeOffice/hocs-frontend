@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class Error extends Component {
+
     UNSAFE_componentWillMount() {
         const { staticContext } = this.props;
         if (staticContext) {
@@ -16,36 +17,71 @@ class Error extends Component {
         });
     }
 
+    getDefaultContent(status) {
+        switch (status) {
+        case 401:
+            return {
+                defaultTitle: 'You are not logged in',
+                defaultBody: [
+                    <a key='login' href='/oauth/login' >Please login to continue</a>
+                ]
+            };
+        case 403:
+            return {
+                defaultTitle: 'You do not have permission',
+                defaultBody: [
+                    'If you expect permission to perform this action, raise a ticket.'
+                ]
+            };
+        case 404:
+            return {
+                defaultTitle: 'Page does not exist',
+                defaultBody: [
+                    'If you typed the web address, check it is correct.',
+                    'If you pasted the web address, check you copied the entire address.'
+                ]
+            };
+        default:
+            return {
+                defaultTitle: 'Something has gone wrong',
+                defaultBody: [
+                    'Please try again'
+                ]
+            };
+        }
+    }
 
     render() {
+
+        const status = this.props.status;
         const {
             title,
-            status,
-            location: { pathname },
+            location,
             stack,
             body,
             message,
-        } = this.props;
+        } = this.props.data;
+
+        const { defaultTitle, defaultBody } = this.getDefaultContent(status);
 
         return (
-            <div className="govuk-grid-row">
-                <div className="govuk-grid-column-full">
-                    <h1 className="govuk-heading-xl">
-                        {message && <span className="govuk-caption-xl">{message}</span>}
-                        {`${title}`}
+            <div className='govuk-grid-row'>
+                <div className='govuk-grid-column-full'>
+                    <h1 className='govuk-heading-xl'>
+                        {message && <span className='govuk-caption-xl'>{message}</span>}
+                        {title ? title : defaultTitle}
                     </h1>
-
-                    {this.buildParagraphs(body)}
-                    {(status === 403 || status === 404) && pathname && <p><code className="code">{pathname}</code></p>}
+                    {body ? this.buildParagraphs(body) : this.buildParagraphs(defaultBody)}
+                    {status === 404 && location && location.pathname && <p><code className='code'>{location.pathname}</code></p>}
                     {stack &&
-                        <details className="govuk-details" open={true}>
-                            <summary className="govuk-details__summary">
-                                <span className="govuk-details__summary-text">
+                        <details className='govuk-details' open={true}>
+                            <summary className='govuk-details__summary'>
+                                <span className='govuk-details__summary-text'>
                                     Stack trace
                                 </span>
                             </summary>
-                            <div className="govuk-details__text">
-                                <pre className="code overflow-scroll">{stack}</pre>
+                            <div className='govuk-details__text'>
+                                <pre className='code overflow-scroll'>{stack}</pre>
                             </div>
                         </details>
                     }
@@ -56,20 +92,14 @@ class Error extends Component {
 }
 
 Error.propTypes = {
-    message: PropTypes.string,
-    status: PropTypes.number,
-    location: PropTypes.object,
-    stack: PropTypes.string,
-    body: PropTypes.arrayOf(PropTypes.string),
+    status: PropTypes.number.isRequired,
+    data: PropTypes.object.isRequired,
     staticContext: PropTypes.object,
-    title: PropTypes.string,
 };
 
 Error.defaultProps = {
     status: 500,
-    location: { pathname: null },
-    stack: null,
-    title: 'Something has gone wrong'
+    data: {}
 };
 
 export default Error;

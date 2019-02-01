@@ -74,14 +74,14 @@ function withForm(Page) {
                                     form_meta: response.data.meta
                                 }))
                                 .then(() => dispatch(clearApiStatus()))
-                                .catch(error => {
+                                .catch(() => {
                                     dispatch(updateApiStatus(status.UPDATE_FORM_FAILURE))
-                                        .then(dispatch(setError(error)));
+                                        .then(dispatch(setError({ status: 500 })));
                                 });
                         })
                         .catch(error => {
                             dispatch(updateApiStatus(status.REQUEST_FORM_FAILURE))
-                                .then(() => dispatch(setError(error.response.data)));
+                                .then(() => dispatch(setError(error.response)));
                         });
                 });
         }
@@ -131,7 +131,7 @@ function withForm(Page) {
                             // TODO: Remove
                             /* eslint-disable-next-line no-console */
                             return dispatch(updateApiStatus(status.SUBMIT_FORM_FAILURE))
-                                .then(() => dispatch(setError(error.response.data)));
+                                .then(() => dispatch(setError(error.response)));
                         });
 
                 });
