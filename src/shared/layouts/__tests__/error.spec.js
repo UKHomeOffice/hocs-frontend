@@ -9,8 +9,10 @@ describe('Error component', () => {
     });
     it('should render with location when passed', () => {
         const props = {
-            location: {
-                pathname: '/some/unknown/path'
+            error: {
+                location: {
+                    pathname: '/some/unknown/path'
+                }
             }
         };
         expect(
@@ -19,9 +21,11 @@ describe('Error component', () => {
     });
     it('should render with location when 404 passed', () => {
         const props = {
-            status: 404,
-            location: {
-                pathname: '/SOME/UNSUPPORTED/ENDPOINT'
+            error: {
+                status: 404,
+                location: {
+                    pathname: '/SOME/UNSUPPORTED/ENDPOINT'
+                }
             }
         };
         expect(
@@ -30,9 +34,11 @@ describe('Error component', () => {
     });
     it('should render with location when 403 passed', () => {
         const props = {
-            status: 403,
-            location: {
-                pathname: '/SOME/UNSUPPORTED/ENDPOINT'
+            error: {
+                status: 403,
+                location: {
+                    pathname: '/SOME/UNSUPPORTED/ENDPOINT'
+                }
             }
         };
         expect(
@@ -41,7 +47,9 @@ describe('Error component', () => {
     });
     it('should render with a stack trace when passed', () => {
         const props = {
-            stack: 'Stack trace...'
+            error: {
+                stack: 'Stack trace...'
+            }
         };
         expect(
             render(<Error {...props} />)
@@ -49,6 +57,9 @@ describe('Error component', () => {
     });
     it('should pass the error code to the static context', () => {
         const props = {
+            error: {
+                status: 500
+            },
             staticContext: {}
         };
         const wrapper = mount(<Error {...props} />);

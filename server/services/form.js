@@ -69,13 +69,13 @@ async function getFormSchemaFromWorkflowService(options, user) {
 async function getFormSchemaForCase(options) {
     const form = await formRepository.getFormForCase(options);
     await hydrateFields(form.schema.fields, options);
-    return { form };
+    return form;
 }
 
 async function getFormSchema(options) {
     const form = await formRepository.getForm(options);
     await hydrateFields(form.schema.fields, options);
-    return { form };
+    return form;
 }
 
 function hydrateFields(fields, options) {

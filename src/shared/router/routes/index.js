@@ -68,7 +68,7 @@ const routes = [
     },
     {
         component: Error,
-        status: 404
+        error: { status: 404 }
     }
 ];
 

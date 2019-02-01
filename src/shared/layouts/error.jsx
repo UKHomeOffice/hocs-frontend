@@ -6,7 +6,7 @@ class Error extends Component {
     UNSAFE_componentWillMount() {
         const { staticContext } = this.props;
         if (staticContext) {
-            staticContext.status = this.props.status;
+            staticContext.status = this.props.error.status;
         }
     }
 
@@ -23,7 +23,7 @@ class Error extends Component {
             return {
                 defaultTitle: 'You are not logged in',
                 defaultBody: [
-                    <a key='login' href='/oauth/login' >Please login to continue</a>
+                    <a className='govuk-link' key='login' href='/oauth/login' >Please login to continue</a>
                 ]
             };
         case 403:
@@ -53,14 +53,14 @@ class Error extends Component {
 
     render() {
 
-        const status = this.props.status;
         const {
             title,
             location,
             stack,
+            status,
             body,
             message,
-        } = this.props.data;
+        } = this.props.error;
 
         const { defaultTitle, defaultBody } = this.getDefaultContent(status);
 
@@ -92,14 +92,12 @@ class Error extends Component {
 }
 
 Error.propTypes = {
-    status: PropTypes.number.isRequired,
-    data: PropTypes.object.isRequired,
+    error: PropTypes.object.isRequired,
     staticContext: PropTypes.object,
 };
 
 Error.defaultProps = {
-    status: 500,
-    data: {}
+    error: {}
 };
 
 export default Error;

@@ -17,6 +17,29 @@ exports[`Error component should render with a stack trace when passed 1`] = `
     >
       Please try again
     </p>
+    <details
+      class="govuk-details"
+      open=""
+    >
+      <summary
+        class="govuk-details__summary"
+      >
+        <span
+          class="govuk-details__summary-text"
+        >
+          Stack trace
+        </span>
+      </summary>
+      <div
+        class="govuk-details__text"
+      >
+        <pre
+          class="code overflow-scroll"
+        >
+          Stack trace...
+        </pre>
+      </div>
+    </details>
   </div>
 </div>
 `;
@@ -84,6 +107,13 @@ exports[`Error component should render with location when 404 passed 1`] = `
       class="govuk-body"
     >
       If you pasted the web address, check you copied the entire address.
+    </p>
+    <p>
+      <code
+        class="code"
+      >
+        /SOME/UNSUPPORTED/ENDPOINT
+      </code>
     </p>
   </div>
 </div>
