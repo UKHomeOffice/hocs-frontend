@@ -2,12 +2,11 @@ const { isProduction } = require('../config');
 
 class ErrorModel extends Error {
 
-    constructor(message, status, title) {
+    constructor(message, status) {
         super(message);
         this.name = this.constructor.name;
         Error.captureStackTrace(this, this.constructor);
         this.status = status || 500;
-        this.title = title || 'Error';
     }
 
     toJSON() {
@@ -22,32 +21,32 @@ class ErrorModel extends Error {
 }
 
 class AuthenticationError extends ErrorModel {
-    constructor(message) {
-        super(message, 403, 'Authentication error');
+    constructor(message, status = 403) {
+        super(message, status, 'Authentication error');
     }
 }
 
 class ActionError extends ErrorModel {
-    constructor(message) {
-        super(message, 500, 'Unable to perform action');
+    constructor(message, status = 500) {
+        super(message, status);
     }
 }
 
 class FormSubmissionError extends ErrorModel {
-    constructor(message) {
-        super(message, 500, 'Form submission failed');
+    constructor(message, status = 500) {
+        super(message, status, 'Form submission failed');
     }
 }
 
 class FormServiceError extends ErrorModel {
-    constructor(message) {
-        super(message, 500, 'Unable to retrieve form');
+    constructor(message, status = 500) {
+        super(message, status, 'Unable to retrieve form');
     }
 }
 
 class AllocationError extends ErrorModel {
-    constructor(message) {
-        super(message, 500, 'Unable to allocate case');
+    constructor(message, status = 500) {
+        super(message, status, 'Unable to allocate case');
     }
 }
 
@@ -59,14 +58,14 @@ class ValidationError extends ErrorModel {
 }
 
 class DocumentError extends ErrorModel {
-    constructor(message) {
-        super(message, 500, 'Request failed');
+    constructor(message, status = 500) {
+        super(message, status, 'Request failed');
     }
 }
 
 class DocumentNotFoundError extends ErrorModel {
-    constructor(message) {
-        super(message, 404, 'Request failed');
+    constructor(message, status = 404) {
+        super(message, status, 'Request failed');
     }
 }
 

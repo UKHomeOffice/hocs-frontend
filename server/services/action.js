@@ -113,7 +113,7 @@ const actions = {
                     response = await infoServiceClient.post('/template', request1, headers);
                     clientResponse = { summary: 'Created a new template' };
                     return handleActionSuccess(clientResponse, workflow, form);
-                /* eslint-enable no-case-declarations */
+                    /* eslint-enable no-case-declarations */
                 }
             } else {
                 return handleActionSuccess(null, workflow, form);
@@ -173,9 +173,9 @@ const actions = {
 
                 return ({ callbackUrl: `/case/${caseId}/stage/${stageId}` });
             }
-        } catch (e) {
+        } catch (error) {
             logger.error({ event: events.CASE_ACTION_FAILURE, user: user.username, action: form.action, case: caseId });
-            throw new ActionError(e);
+            throw new ActionError('Failed to perform action', error.response.status);
         }
     },
     WORKFLOW: async ({ caseId, stageId, form, user }) => {
@@ -186,9 +186,9 @@ const actions = {
         try {
             const response = await updateCase({ caseId, stageId, form }, headers);
             return handleWorkflowSuccess(response, { caseId, stageId });
-        } catch (e) {
+        } catch (error) {
             logger.error({ event: events.WORKFLOW_ACTION_FAILURE, user: user.uuid, action: actionTypes.UPDATE_CASE, case: caseId });
-            throw new ActionError(e);
+            throw new ActionError('Failed to update case', error.response.status);
         }
     }
 };

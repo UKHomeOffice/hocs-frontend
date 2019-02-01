@@ -16,9 +16,10 @@ async function getFormSchemaFromWorkflowService(options, user) {
         switch (error.response.status) {
         case 401:
             // handle as error
-            throw new Error('Permission denied');
+            return { error: { status: 401 } };
         case 403:
             // handle not allocated
+            // TODO: Move to form schema
             /* eslint-disable-next-line no-case-declarations */
             let usersInTeam;
             try {
@@ -28,51 +29,53 @@ async function getFormSchemaFromWorkflowService(options, user) {
                 usersInTeam = [];
             }
             return {
-                schema: {
-                    title: 'Allocate Case',
-                    action: `/case/${caseId}/stage/${stageId}/allocate/team`,
-                    fields: [
-                        {
-                            component: 'link', props: {
-                                name: 'allocate-to-me',
-                                label: 'Allocate to me',
-                                className: 'govuk-body margin-bottom--small',
-                                target: `/case/${caseId}/stage/${stageId}/allocate`
+                form: {
+                    schema: {
+                        title: 'Allocate Case',
+                        action: `/case/${caseId}/stage/${stageId}/allocate/team`,
+                        fields: [
+                            {
+                                component: 'link', props: {
+                                    name: 'allocate-to-me',
+                                    label: 'Allocate to me',
+                                    className: 'govuk-body margin-bottom--small',
+                                    target: `/case/${caseId}/stage/${stageId}/allocate`
+                                }
+                            },
+                            {
+                                component: 'dropdown', props: {
+                                    name: 'user-id',
+                                    label: 'Allocate to a team member',
+                                    className: 'govuk-body',
+                                    choices: usersInTeam
+                                }
                             }
-                        },
-                        {
-                            component: 'dropdown', props: {
-                                name: 'user-id',
-                                label: 'Allocate to a team member',
-                                className: 'govuk-body',
-                                choices: usersInTeam
-                            }
-                        }
-                    ],
-                    defaultActionLabel: 'Allocate'
+                        ],
+                        defaultActionLabel: 'Allocate'
+                    }
                 }
             };
         default:
-            throw new Error('System error');
+            return { error: { status: 500 } };
         }
     }
     const { stageUUID, caseReference, allocationNote } = response.data;
     const mockAllocationNote = allocationNote || null;
     const { schema, data } = response.data.form;
     await hydrateFields(schema.fields, { ...options, user });
-    return { schema, data, meta: { caseReference, stageUUID, allocationNote: mockAllocationNote } };
+    return { form: { schema, data, meta: { caseReference, stageUUID, allocationNote: mockAllocationNote } } };
 }
 
 async function getFormSchemaForCase(options) {
     const form = await formRepository.getFormForCase(options);
     await hydrateFields(form.schema.fields, options);
-    return { ...form };
+    return { form };
 }
 
 async function getFormSchema(options) {
     const form = await formRepository.getForm(options);
     await hydrateFields(form.schema.fields, options);
-    return { ...form, meta: {} };
+    return { form };
 }
 
 function hydrateFields(fields, options) {
@@ -83,15 +86,15 @@ function hydrateFields(fields, options) {
                 if (field.component === 'add-document') {
                     try {
                         field.props.whitelist = await listService.getList(field.props.whitelist);
-                    } catch (e) {
-                        logger.error(e);
+                    } catch (error) {
+                        logger.error(error);
                         field.props.whitelist = [];
                     }
                 } else {
                     try {
                         field.props.choices = await listService.getList(field.props.choices, { ...options });
-                    } catch (e) {
-                        logger.error(e);
+                    } catch (error) {
+                        logger.error(error);
                         field.props.choices = [];
                     }
                 }
@@ -106,35 +109,42 @@ const getFormForAction = async (req, res, next) => {
     const { workflow, context, action } = req.params;
     logger.info({ event: events.ACTION_FORM, workflow, context, action, user: req.user.username });
     try {
-        req.form = await getFormSchema({ context: 'ACTION', workflow, entity: context, action, user: req.user });
-    } catch (e) {
-        logger.error({ event: events.ACTION_FORM_FAILURE, message: e.message, stack: e.stack });
-        return next(new FormServiceError());
+        const form = await getFormSchema({ context: 'ACTION', workflow, entity: context, action, user: req.user });
+        req.form = form;
+        next();
+    } catch (error) {
+        logger.error({ event: events.ACTION_FORM_FAILURE, message: error.message, stack: error.stack });
+        return next(new FormServiceError('Failed to fetch form'));
     }
-    next();
 };
 
 const getFormForCase = async (req, res, next) => {
     try {
         logger.info({ event: events.CASE_FORM, ...req.params, user: req.user.username });
-        req.form = await getFormSchemaForCase({ ...req.params, user: req.user });
-    } catch (e) {
-        logger.error({ event: events.CASE_FORM_FAILURE, message: e.message, stack: e.stack });
-        return next(new FormServiceError());
+        const form = await getFormSchemaForCase({ ...req.params, user: req.user });
+        req.form = form;
+        next();
+    } catch (error) {
+        logger.error({ event: events.CASE_FORM_FAILURE, message: error.message, stack: error.stack });
+        return next(new FormServiceError('Failed to fetch form'));
     }
-    next();
 };
 
 const getFormForStage = async (req, res, next) => {
     const { user } = req;
     try {
         logger.info({ event: events.WORKFLOW_FORM, ...req.params, user: req.user.username });
-        req.form = await getFormSchemaFromWorkflowService(req.params, user);
-    } catch (e) {
-        logger.error({ event: events.WORKFLOW_FORM_FAILURE, message: e.message, stack: e.stack });
-        return next(new FormServiceError(e.message));
+        const { form, error } = await getFormSchemaFromWorkflowService(req.params, user);
+        if (error) {
+            return next(new FormServiceError('Failed top fetch form', error.status));
+        } else {
+            req.form = form;
+            next();
+        }
+    } catch (error) {
+        logger.error({ event: events.WORKFLOW_FORM_FAILURE, message: error.message, stack: error.stack });
+        return next(new FormServiceError('Failed to fetch form'));
     }
-    next();
 };
 
 module.exports = {

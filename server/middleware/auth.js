@@ -19,7 +19,7 @@ function authMiddleware(req, res, next) {
         return next();
     }
     logger.error({ event: events.AUTH_FAILURE });
-    next(new AuthenticationError('You are not logged in'));
+    next(new AuthenticationError('You are not logged in', 401));
 }
 
 function protect(permission) {

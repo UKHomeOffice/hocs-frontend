@@ -13,7 +13,7 @@ async function getOriginalDocument(req, res, next) {
         res.setHeader('Content-Disposition', response.headers['content-disposition']);
         response.data.on('finish', () => logger.debug({ event: events.REQUEST_DOCUMENT_ORIGINAL_SUCCESS, ...req.params }));
         response.data.pipe(res);
-    } catch (e) {
+    } catch (error) {
         logger.error({ event: events.REQUEST_DOCUMENT_ORIGINAL_FAILURE, ...req.params });
         next(new DocumentError('Unable to retrieve original document'));
     }
@@ -28,7 +28,7 @@ async function getPdfDocument(req, res, next) {
         res.setHeader('Content-Disposition', response.headers['content-disposition']);
         response.data.on('finish', () => logger.debug({ event: events.REQUEST_DOCUMENT_PDF_SUCCESS, ...req.params }));
         response.data.pipe(res);
-    } catch (e) {
+    } catch (error) {
         logger.error({ event: events.REQUEST_DOCUMENT_PDF_FAILURE, ...req.params });
         next(new DocumentError('Unable to retrieve PDF document'));
     }
@@ -42,7 +42,7 @@ async function getPdfDocumentPreview(req, res, next) {
         res.setHeader('Cache-Control', 'max-age=86400');
         response.data.on('finish', () => logger.debug({ event: events.REQUEST_DOCUMENT_PREVIEW_SUCCESS, ...req.params }));
         response.data.pipe(res);
-    } catch (e) {
+    } catch (error) {
         logger.error({ event: events.REQUEST_DOCUMENT_PREVIEW_FAILURE, ...req.params });
         next(new DocumentError('Unable to retrieve document for PDF preview'));
     }
@@ -52,7 +52,7 @@ async function getDocumentList(req, res, next) {
     try {
         const response = await getList('CASE_DOCUMENT_LIST', { caseId: req.params.caseId, user: req.user });
         res.locals.documents = response;
-    } catch (e) {
+    } catch (error) {
         res.locals.documents = [];
     } finally {
         next();
