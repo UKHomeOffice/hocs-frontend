@@ -33,7 +33,7 @@ describe('Authentication middleware', () => {
         expect(req.user).toBeUndefined();
         expect(next).toHaveBeenCalled();
         expect(next.mock.calls[0][0]).toBeInstanceOf(Error);
-        expect(next.mock.calls[0][0].status).toEqual(403);
+        expect(next.mock.calls[0][0].status).toEqual(401);
     });
 
     it('should create and attach a User object to the request object', () => {

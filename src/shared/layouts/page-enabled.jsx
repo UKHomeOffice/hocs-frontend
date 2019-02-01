@@ -32,7 +32,7 @@ class PageWrapper extends Component {
         const { children, error } = this.props;
         return (
             <Fragment>
-                {error ? <Error {...error} /> : children}
+                {error ? <Error error={error} /> : children}
             </Fragment>
         );
     }
@@ -41,6 +41,7 @@ class PageWrapper extends Component {
 PageWrapper.propTypes = {
     children: PropTypes.node.isRequired,
     dispatch: PropTypes.func.isRequired,
+    track: PropTypes.func.isRequired,
     error: PropTypes.object,
     match: PropTypes.object
 };

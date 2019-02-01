@@ -1,7 +1,6 @@
 import ActionPage from '../../pages/action.jsx';
 import CasePage from '../../pages/case.jsx';
 import StagePage from '../../pages/stage.jsx';
-import CaseSummaryPage from '../../pages/summary.jsx';
 import Error from '../../layouts/error.jsx';
 import MainPage from '../../pages/dashboard.jsx';
 import WorkstackPage from '../../pages/workstack.jsx';
@@ -22,11 +21,6 @@ const routes = [
         path: '/action/:workflow/:context/:action',
         exact: true,
         component: ActionPage
-    },
-    {
-        path: '/case/:caseId/summary',
-        exact: true,
-        component: CaseSummaryPage
     },
     {
         path: '/case/:caseId/stage/:stageId',
@@ -73,20 +67,8 @@ const routes = [
         title: 'Stage Workstack'
     },
     {
-        path: '/error',
         component: Error,
-        title: 'There is a problem with the service',
-        body: ['Try again later.'],
-        errorCode: 500
-    },
-    {
-        component: Error,
-        title: 'Not found',
-        body: [
-            'If you typed the web address, check it is correct.',
-            'If you pasted the web address, check you copied the entire address.'
-        ],
-        errorCode: 404
+        error: { status: 404 }
     }
 ];
 

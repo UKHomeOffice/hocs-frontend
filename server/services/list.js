@@ -627,10 +627,9 @@ async function getList(listId, options = {}) {
         logger.info({ event: events.FETCH_LIST, list: listId, ...options });
         const list = await lists[listId.toUpperCase()].call(this, options);
         return list;
-    } catch (e) {
+    } catch (error) {
         logger.error({ event: events.FETCH_LIST_FAILURE, list: listId, options });
-        logger.error(e.stack);
-        throw new Error(`Unable to get list for ${listId}`);
+        throw new Error('Failed to fetch list', error.response.status);
     }
 }
 

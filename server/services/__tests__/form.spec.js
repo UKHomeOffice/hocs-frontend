@@ -199,7 +199,7 @@ describe('getFormForStage', () => {
             }
         };
         const request = require('../../libs/request.js');
-        request.workflowServiceClient.get.mockImplementation(() => Promise.reject({ stack: 'ERR_STACK' }));
+        request.workflowServiceClient.get.mockImplementation(() => Promise.reject({ stack: 'ERR_STACK', response: { status: 500 } }));
         const { getFormForStage } = require('../form');
         await getFormForStage(req, res, next);
         expect(req.form).toBeUndefined();

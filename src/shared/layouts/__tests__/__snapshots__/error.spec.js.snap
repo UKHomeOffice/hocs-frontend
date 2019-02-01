@@ -12,6 +12,11 @@ exports[`Error component should render with a stack trace when passed 1`] = `
     >
       Something has gone wrong
     </h1>
+    <p
+      class="govuk-body"
+    >
+      Please try again
+    </p>
     <details
       class="govuk-details"
       open=""
@@ -51,6 +56,11 @@ exports[`Error component should render with default props 1`] = `
     >
       Something has gone wrong
     </h1>
+    <p
+      class="govuk-body"
+    >
+      Please try again
+    </p>
   </div>
 </div>
 `;
@@ -65,14 +75,12 @@ exports[`Error component should render with location when 403 passed 1`] = `
     <h1
       class="govuk-heading-xl"
     >
-      Something has gone wrong
+      You do not have permission
     </h1>
-    <p>
-      <code
-        class="code"
-      >
-        /SOME/UNSUPPORTED/ENDPOINT
-      </code>
+    <p
+      class="govuk-body"
+    >
+      If you expect permission to perform this action, raise a ticket.
     </p>
   </div>
 </div>
@@ -88,8 +96,18 @@ exports[`Error component should render with location when 404 passed 1`] = `
     <h1
       class="govuk-heading-xl"
     >
-      Something has gone wrong
+      Page does not exist
     </h1>
+    <p
+      class="govuk-body"
+    >
+      If you typed the web address, check it is correct.
+    </p>
+    <p
+      class="govuk-body"
+    >
+      If you pasted the web address, check you copied the entire address.
+    </p>
     <p>
       <code
         class="code"
@@ -113,6 +131,11 @@ exports[`Error component should render with location when passed 1`] = `
     >
       Something has gone wrong
     </h1>
+    <p
+      class="govuk-body"
+    >
+      Please try again
+    </p>
   </div>
 </div>
 `;

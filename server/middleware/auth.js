@@ -19,7 +19,7 @@ function authMiddleware(req, res, next) {
         return next();
     }
     logger.error({ event: events.AUTH_FAILURE });
-    next(new AuthenticationError('You are not logged in'));
+    next(new AuthenticationError('Unauthorised', 401));
 }
 
 function protect(permission) {
@@ -28,7 +28,7 @@ function protect(permission) {
             return next();
         }
         logger.error({ event: events.AUTH_FAILURE, expected: permission, user: req.user.username, roles: req.user.roles });
-        next(new AuthenticationError('You do not have permission to access the requested page'));
+        next(new AuthenticationError('Unauthorised'));
     };
 }
 
