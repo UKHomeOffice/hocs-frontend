@@ -23,7 +23,7 @@ class Error extends Component {
             return {
                 defaultTitle: 'You are not logged in',
                 defaultBody: [
-                    <a className='govuk-link' key='login' href='/oauth/login' >Please login to continue</a>
+                    <a className='govuk-link' key='login' href='/' >Please login to continue</a>
                 ]
             };
         case 403:
