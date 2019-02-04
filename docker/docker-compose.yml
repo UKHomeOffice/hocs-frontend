@@ -109,8 +109,8 @@ services:
     - documents
 
   casework:
-    # image: quay.io/ukhomeofficedigital/hocs-casework
-    image: hocs-casework-test
+    image: quay.io/ukhomeofficedigital/hocs-casework
+    # image: hocs-casework-test
     ports:
     - 8082:8080
     networks:
@@ -129,8 +129,8 @@ services:
     - postgres
 
   workflow:
-    # image: quay.io/ukhomeofficedigital/hocs-workflow
-    image: hocs-workflow-test
+    image: quay.io/ukhomeofficedigital/hocs-workflow
+    # image: hocs-workflow-test
     ports:
     - 8081:8080
     networks:
@@ -169,8 +169,8 @@ services:
     - postgres
 
   info:
-    # image: quay.io/ukhomeofficedigital/hocs-info-service
-    image: hocs-info-service-test
+    image: quay.io/ukhomeofficedigital/hocs-info-service
+    # image: hocs-info-service-test
     ports:
     - 8085:8080
     networks:
