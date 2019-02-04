@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import formEnabled from './form-enabled.jsx';
+import SideBar from '../common/components/side-bar.jsx';
 
 class Case extends Component {
 
     render() {
         const {
             children,
+            hasSidebar,
             form,
             title
         } = this.props;
@@ -19,20 +21,23 @@ class Case extends Component {
                     </h1>
                     {children}
                 </div>
+                {hasSidebar && <div className="govuk-grid-column-one-half">
+                    <SideBar />
+                </div>}
             </div>
         );
     }
 }
 
 Case.defaultProps = {
-    hasDocPreview : true
+    hasSidebar: false
 };
 
 Case.propTypes = {
     children: PropTypes.node,
     form: PropTypes.object,
     title: PropTypes.string,
-    hasDocPreview : PropTypes.bool
+    hasSidebar: PropTypes.bool
 };
 
 export default formEnabled(Case);

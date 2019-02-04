@@ -68,8 +68,8 @@ class Error extends Component {
             <div className='govuk-grid-row'>
                 <div className='govuk-grid-column-full'>
                     <h1 className='govuk-heading-xl'>
-                        {message && <span className='govuk-caption-xl'>{message}</span>}
                         {title ? title : defaultTitle}
+                        {message && <span className='govuk-caption-xl'>{message}</span>}
                     </h1>
                     {body ? this.buildParagraphs(body) : this.buildParagraphs(defaultBody)}
                     {status === 404 && location && location.pathname && <p><code className='code'>{location.pathname}</code></p>}

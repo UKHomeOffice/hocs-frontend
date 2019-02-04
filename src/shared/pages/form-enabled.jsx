@@ -155,10 +155,10 @@ function withForm(Page) {
         }
 
         renderForm() {
-            const { match: { url, params } } = this.props;
+            const { match: { url, params }, hasSidebar } = this.props;
             const { form_data, form_errors, form_meta, form_schema } = this.state;
             return (
-                <Page title={form_schema.title} form={form_meta} >
+                <Page title={form_schema.title} form={form_meta} hasSidebar={hasSidebar} >
                     {form_schema && <Form
                         {...{
                             schema: form_schema,
