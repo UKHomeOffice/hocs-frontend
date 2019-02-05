@@ -51,7 +51,17 @@ async function getFormSchemaFromWorkflowService(options, user) {
                                 }
                             }
                         ],
-                        defaultActionLabel: 'Allocate'
+                        defaultActionLabel: 'Allocate',
+                        secondaryActions: [
+                            {
+                                component: 'backlink',
+                                validation: [],
+                                props: {
+                                    label: 'Back to dashboard',
+                                    action: '/'
+                                }
+                            }
+                        ]
                     }
                 }
             };
