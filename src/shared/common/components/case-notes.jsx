@@ -19,7 +19,10 @@ class CaseNotes extends Component {
     }
 
     componentDidMount() {
-        this.getCaseNotes();
+        const { caseNotes } = this.props;
+        if (!caseNotes) {
+            this.getCaseNotes();
+        }
         this.props.dispatch(unsetCaseNotes());
     }
 
