@@ -89,7 +89,7 @@ const helpers = {
         row.stageTypeDisplay = stageType.label;
         if (row.userUUID) {
             const assignedUser = sUsers.find(i => i.id === row.userUUID) || {};
-            row.assignedUserDisplay = assignedUser.username || 'Allocated';
+            row.assignedUserDisplay = assignedUser.email || 'Allocated';
         }
         row.deadlineDisplay = new Intl.DateTimeFormat('en-GB').format(new Date(row.deadline));
         return row;
@@ -562,8 +562,9 @@ const lists = {
         }, infoServiceClient);
         if (response.data) {
             return response.data
-                .map(({ id, firstName, lastName, username }) => ({
-                    label: `${firstName} ${lastName} (${username})`,
+                .filter(u => u.email !== user.email)
+                .map(({ id, firstName, lastName, email }) => ({
+                    label: `${firstName} ${lastName} (${email})`,
                     value: id
                 }))
                 .sort((first, second) => first.label > second.label);
@@ -578,8 +579,8 @@ const lists = {
         }, infoServiceClient);
         if (response.data) {
             return response.data
-                .map(({ id, firstName, lastName, username }) => ({
-                    label: `${firstName} ${lastName} (${username})`,
+                .map(({ id, firstName, lastName, email }) => ({
+                    label: `${firstName} ${lastName} (${email})`,
                     value: id
                 }))
                 .sort((first, second) => first.label > second.label);
