@@ -33,7 +33,12 @@ const routes = [
         component: StagePage
     },
     {
-        path: '/case/:caseId/stage/:stageId/entity/correspondent',
+        path: '/case/:caseId/stage/:stageId/entity/correspondent/:action/',
+        component: CasePage,
+        hasSidebar: true
+    },
+    {
+        path: '/case/:caseId/stage/:stageId/entity/correspondent/:context/:action/',
         component: CasePage,
         hasSidebar: true
     },
