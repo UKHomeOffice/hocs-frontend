@@ -33,6 +33,11 @@ const routes = [
         component: StagePage
     },
     {
+        path: '/case/:caseId/stage/:stageId/entity/correspondent',
+        component: CasePage,
+        hasSidebar: true
+    },
+    {
         path: '/case/:caseId/stage/:stageId/entity/:entity/:action/',
         exact: true,
         component: CasePage
