@@ -7,6 +7,7 @@ module.exports = () => Form()
     .withField(
         Component('date', 'DateReceived')
             .withValidator('required', 'Date received is required')
+            .withValidator('isValidDate', 'Date received must be a valid date')
             .withProp('label', 'When was the correspondence received?')
             .build()
     )

@@ -10,18 +10,17 @@ const { getFormForCase, getFormForStage } = require('../services/form');
 
 router.get('/:caseId/stage/:stageId/allocate', allocateCase);
 router.get('/:caseId/stage/:stageId/allocate/team', allocateCaseToTeamMember, (req, res) => res.redirect(`/case/${req.params.caseId}/stage/${req.params.stageId}`));
-router.use(['/:caseId/stage/:stageId', '/:caseId/stage/:stageId/allocate'],
+router.all(['/:caseId/stage/:stageId', '/:caseId/stage/:stageId/allocate'],
     getFormForStage,
     caseSummaryMiddleware,
     getDocumentList,
     getCaseNotes);
-router.use(['/:caseId/stage/:stageId/entity/:entity/:context/:action', '/:caseId/stage/:stageId/entity/:entity/:action'], getFormForCase);
+router.all(['/:caseId/stage/:stageId/entity/:entity/:context/:action', '/:caseId/stage/:stageId/entity/:entity/:action'], getFormForCase);
 router.post(['/:caseId/stage/:stageId', '/:caseId/stage/:stageId/allocate'],
     fileMiddleware.any(),
     processMiddleware,
     validationMiddleware
 );
-
 router.post('/:caseId/stage/:stageId/note',
     fileMiddleware.any(),
     createCaseNote,
