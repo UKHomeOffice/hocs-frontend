@@ -58,6 +58,8 @@ const reducer = (state, action) => {
         return { ...state, workstack: null };
     case types.UNSET_CASE_NOTES:
         return { ...state, caseNotes: [] };
+    case types.UNSET_CASE_SUMMARY:
+        return { ...state, summary: null };
     default:
         // TODO: Remove
         /* eslint-disable-next-line  no-console*/
