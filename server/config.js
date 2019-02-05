@@ -22,7 +22,7 @@ const config = {
                 phaseBanner: {
                     isVisible: true,
                     phase: 'BETA',
-                    feedbackUrl: 'mailto:HOCS@homeoffice.gov.uk'
+                    feedback: 'mailto:HOCS@homeoffice.gov.uk'
                 }
             },
             footer: {
