@@ -1,6 +1,12 @@
 import React, { Component, Fragment } from 'react';
 import axios from 'axios';
 import { ApplicationConsumer } from '../../contexts/application.jsx';
+import {
+    updateApiStatus,
+    unsetCaseSummary,
+    clearApiStatus
+} from '../../contexts/actions/index.jsx';
+import status from '../../helpers/api-status.js';
 import PropTypes from 'prop-types';
 
 class StageSummary extends Component {
@@ -11,18 +17,32 @@ class StageSummary extends Component {
     }
 
     componentDidMount() {
-        const { summary } = this.props;
+        const { summary, dispatch } = this.props;
         if (!summary) {
             this.getSummary();
         }
+        dispatch(unsetCaseSummary());
     }
 
     getSummary() {
-        const { page } = this.props;
+        const { page, dispatch } = this.props;
         if (page && page.params && page.params.caseId) {
-            axios.get(`/api/case/${page.params.caseId}/summary`)
-                .then(response => {
-                    this.setState({ summary: response.data });
+            return dispatch(updateApiStatus(status.REQUEST_CASE_SUMMARY))
+                .then(() => {
+                    axios.get(`/api/case/${page.params.caseId}/summary`)
+                        .then(response => {
+                            dispatch(updateApiStatus(status.REQUEST_CASE_SUMMARY_SUCCESS))
+                                .then(() => dispatch(clearApiStatus()))
+                                .then(() => {
+                                    this.setState({
+                                        summary: response.data
+                                    });
+                                });
+                        });
+                })
+                .catch(() => {
+                    dispatch(updateApiStatus(status.REQUEST_CASE_SUMMARY_FAILURE))
+                        .then(() => clearInterval(this.interval));
                 });
         }
     }
@@ -99,6 +119,7 @@ class StageSummary extends Component {
 }
 
 StageSummary.propTypes = {
+    dispatch: PropTypes.func.isRequired,
     summary: PropTypes.object,
     page: PropTypes.object
 };
