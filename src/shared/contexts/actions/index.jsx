@@ -117,6 +117,13 @@ export function clearWorkstack() {
     };
 }
 
+export function unsetCaseSummary() {
+    return {
+        type: types.UNSET_CASE_SUMMARY,
+        payload: null
+    };
+}
+
 export function unsetCaseNotes() {
     return {
         type: types.UNSET_CASE_NOTES,
