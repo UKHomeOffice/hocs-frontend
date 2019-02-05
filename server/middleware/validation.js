@@ -14,7 +14,8 @@ const validationErrors = {
 
 const validators = {
     isValidDate: ({ label, value, message }) => {
-        if (isNaN(new Date(value).getDate())) {
+        const date = new Date(value).getDate();
+        if (isNaN(date) || date != value.split('-')[2]) {
             return message || validationErrors.isValidDate(label);
         }
         return null;
