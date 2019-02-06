@@ -133,12 +133,8 @@ class CaseNotes extends Component {
 
 }
 
-CaseNotes.defaultProps = {
-    caseNotes: []
-};
-
 CaseNotes.propTypes = {
-    caseNotes: PropTypes.array.isRequired,
+    caseNotes: PropTypes.array,
     dispatch: PropTypes.func.isRequired,
     track: PropTypes.func.isRequired,
     page: PropTypes.object.isRequired
