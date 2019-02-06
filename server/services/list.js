@@ -522,34 +522,38 @@ const lists = {
                     received: response.data.DateReceived ? formatDate(response.data.DateReceived) : null,
                     deadline: response.data.caseDeadline ? formatDate(response.data.caseDeadline) : null
                 },
-                additionalFields: response.data.additionalFields.map(({ label, value, type }) => type === 'date' ? ({ label, value: formatDate(value) }) : ({ label, value })),
+                additionalFields: ((additionalFields = []) => additionalFields.map(({ label, value, type }) => type === 'date' ? ({ label, value: formatDate(value) }) : ({ label, value })))(response.data.additionalFields),
                 primaryTopic: response.data.primaryTopic ? response.data.primaryTopic.label : null,
                 primaryCorrespondent: response.data.primaryCorrespondent ? response.data.primaryCorrespondent.fullname : null,
-                deadlines: Object.entries(response.data.stageDeadlines)
-                    .sort((first, second) => (first[1] > second[1]) ? 1 : -1)
-                    .map(([stage, deadline]) => ({
-                        label: (stage => {
+                deadlines: ((deadlines = {}) => {
+                    Object.entries(deadlines)
+                        .sort((first, second) => (first[1] > second[1]) ? 1 : -1)
+                        .map(([stage, deadline]) => ({
+                            label: (stage => {
+                                const stageType = sStageTypes.stageTypes.find(i => i.value === stage) || {};
+                                return stageType.label;
+                            })(stage),
+                            value: deadline ? formatDate(deadline) : null
+                        }));
+                })(response.data.stageDeadlines),
+                stages: ((stages = []) => {
+                    stages.map(activeStage => ({
+                        stage: (stage => {
                             const stageType = sStageTypes.stageTypes.find(i => i.value === stage) || {};
                             return stageType.label;
-                        })(stage),
-                        value: deadline ? formatDate(deadline) : null
-                    })),
-                stages: response.data.activeStages.map(activeStage => ({
-                    stage: (stage => {
-                        const stageType = sStageTypes.stageTypes.find(i => i.value === stage) || {};
-                        return stageType.label;
-                    })(activeStage.stage),
-                    assignedUser: (user => {
-                        if (user) {
-                            const assignedUser = sUsers.find(i => i.id === user) || {};
-                            return assignedUser.username;
-                        }
-                    })(activeStage.assignedToUserUUID),
-                    assignedTeam: (team => {
-                        const assignedTeam = sTeams.find(i => i.type === team) || {};
-                        return assignedTeam.displayName;
-                    })(activeStage.assignedToTeamUUID)
-                }))
+                        })(activeStage.stage),
+                        assignedUser: (user => {
+                            if (user) {
+                                const assignedUser = sUsers.find(i => i.id === user) || {};
+                                return assignedUser.username;
+                            }
+                        })(activeStage.assignedToUserUUID),
+                        assignedTeam: (team => {
+                            const assignedTeam = sTeams.find(i => i.type === team) || {};
+                            return assignedTeam.displayName;
+                        })(activeStage.assignedToTeamUUID)
+                    }));
+                })(response.data.activeStages)
             });
         } else {
             logger.warn({ event: events.FETCH_LIST_RETURN_EMPTY, list: 'CASE_CORRESPONDENTS' });
