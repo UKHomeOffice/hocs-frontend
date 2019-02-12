@@ -51,7 +51,17 @@ async function getFormSchemaFromWorkflowService(options, user) {
                                 }
                             }
                         ],
-                        defaultActionLabel: 'Allocate'
+                        defaultActionLabel: 'Allocate',
+                        secondaryActions: [
+                            {
+                                component: 'backlink',
+                                validation: [],
+                                props: {
+                                    label: 'Back to dashboard',
+                                    action: '/'
+                                }
+                            }
+                        ]
                     }
                 }
             };
@@ -136,7 +146,7 @@ const getFormForStage = async (req, res, next) => {
         logger.info({ event: events.WORKFLOW_FORM, ...req.params, user: req.user.username });
         const { form, error } = await getFormSchemaFromWorkflowService(req.params, user);
         if (error) {
-            return next(new FormServiceError('Failed top fetch form', error.status));
+            return next(new FormServiceError('Failed to fetch form', error.status));
         } else {
             req.form = form;
             next();

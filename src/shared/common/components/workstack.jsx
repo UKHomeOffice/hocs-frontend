@@ -138,7 +138,7 @@ class WorkstackAllocate extends Component {
         const { teamMembers } = this.props;
         return (
             <Fragment>
-                <Dropdown label='Allocate to a team member' name='selected_user' updateState={() => { }} choices={teamMembers} />
+                <Dropdown label='Allocate to a team member' name='selected_user' updateState={this.props.updateFormData} choices={teamMembers} />
                 <Submit label='Allocate' />
             </Fragment>
         );
@@ -151,7 +151,7 @@ class WorkstackAllocate extends Component {
         return (
             <Fragment>
                 {isMounted && this.renderFilter()}
-                <br/>
+                <br />
                 <div className='govuk-grid-row'>
                     <div className='govuk-grid-column-full'>
                         <form action={baseUrl + allocateToTeamEndpoint} method='POST' onSubmit={e => submitHandler(e, baseUrl + allocateToTeamEndpoint)} encType='multipart/form-data'>

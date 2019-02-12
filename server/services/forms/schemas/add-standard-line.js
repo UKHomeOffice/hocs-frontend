@@ -13,6 +13,8 @@ module.exports = options => Form()
     .withField(
         Component('date', 'expiry_date')
             .withValidator('required', 'Expiration date is required')
+            .withValidator('isValidDate', 'Expiration date must be a valid date')
+            .withValidator('isAfterToday', 'Expiration date must not be in the past')
             .withProp('label', 'Expiration date')
             .build()
     )
