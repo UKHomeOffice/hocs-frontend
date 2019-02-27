@@ -23,6 +23,11 @@ const routes = [
         component: ActionPage
     },
     {
+        path: '/search',
+        exact: true,
+        component: ActionPage
+    },
+    {
         path: '/case/:caseId/stage/:stageId',
         exact: true,
         component: StagePage

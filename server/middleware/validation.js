@@ -23,7 +23,7 @@ const validators = {
         return null;
     },
     isBeforeToday({ label, value, message }) {
-        if (new Date(value) >= new Date()) {
+        if (new Date(value).valueOf() >= new Date(Date.now()).valueOf()) {
             return message || validationErrors.isBeforeToday(label);
         }
         return null;

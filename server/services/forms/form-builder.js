@@ -9,25 +9,25 @@ module.exports = (options) => {
     let data = options.data;
     return {
         build: () => ({ schema, data }),
-        withTitle: function(title) {
+        withTitle: function (title) {
             if (title) {
                 schema.title = title;
             }
             return this;
         },
-        withField: function(field) {
+        withField: function (field) {
             if (field) {
                 schema.fields.push(field);
             }
             return this;
         },
-        withPrimaryActionLabel: function(label) {
+        withPrimaryActionLabel: function (label) {
             if (label) {
                 schema.defaultActionLabel = label;
             }
             return this;
         },
-        withSecondaryAction: function(action) {
+        withSecondaryAction: function (action) {
             if (!schema.secondaryActions) {
                 schema.secondaryActions = [];
             }
@@ -36,11 +36,15 @@ module.exports = (options) => {
             }
             return this;
         },
-        withNoPrimaryAction: function() {
+        withNoPrimaryAction: function () {
             schema.showPrimaryAction = false;
             return this;
         },
-        withData: function(newData) {
+        withSubmissionUrl: function (submissionUrl) {
+            schema.action = submissionUrl;
+            return this;
+        },
+        withData: function (newData) {
             data = Object.assign({}, data, newData);
             return this;
         }
