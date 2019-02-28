@@ -14,59 +14,59 @@ async function getFormSchemaFromWorkflowService(options, user) {
         response = await workflowServiceClient.get(`/case/${caseId}/stage/${stageId}`, { headers });
     } catch (error) {
         switch (error.response.status) {
-            case 401:
-                // handle as error
-                return { error: { status: 401 } };
-            case 403:
-                // handle not allocated
-                // TODO: Move to form schema
-                /* eslint-disable-next-line no-case-declarations */
-                let usersInTeam;
-                try {
-                    const { data: owningTeam } = await caseworkServiceClient.get(`/case/${caseId}/stage/${stageId}/team`, { headers });
-                    usersInTeam = await listService.getList('USERS_IN_TEAM', { teamId: owningTeam, user });
-                } catch (error) {
-                    usersInTeam = [];
-                }
-                return {
-                    form: {
-                        schema: {
-                            title: 'Allocate Case',
-                            action: `/case/${caseId}/stage/${stageId}/allocate/team`,
-                            fields: [
-                                {
-                                    component: 'link', props: {
-                                        name: 'allocate-to-me',
-                                        label: 'Allocate to me',
-                                        className: 'govuk-body margin-bottom--small',
-                                        target: `/case/${caseId}/stage/${stageId}/allocate`
-                                    }
-                                },
-                                {
-                                    component: 'dropdown', props: {
-                                        name: 'user-id',
-                                        label: 'Allocate to a team member',
-                                        className: 'govuk-body',
-                                        choices: usersInTeam
-                                    }
+        case 401:
+            // handle as error
+            return { error: { status: 401 } };
+        case 403:
+            // handle not allocated
+            // TODO: Move to form schema
+            /* eslint-disable-next-line no-case-declarations */
+            let usersInTeam;
+            try {
+                const { data: owningTeam } = await caseworkServiceClient.get(`/case/${caseId}/stage/${stageId}/team`, { headers });
+                usersInTeam = await listService.getList('USERS_IN_TEAM', { teamId: owningTeam, user });
+            } catch (error) {
+                usersInTeam = [];
+            }
+            return {
+                form: {
+                    schema: {
+                        title: 'Allocate Case',
+                        action: `/case/${caseId}/stage/${stageId}/allocate/team`,
+                        fields: [
+                            {
+                                component: 'link', props: {
+                                    name: 'allocate-to-me',
+                                    label: 'Allocate to me',
+                                    className: 'govuk-body margin-bottom--small',
+                                    target: `/case/${caseId}/stage/${stageId}/allocate`
                                 }
-                            ],
-                            defaultActionLabel: 'Allocate',
-                            secondaryActions: [
-                                {
-                                    component: 'backlink',
-                                    validation: [],
-                                    props: {
-                                        label: 'Back to dashboard',
-                                        action: '/'
-                                    }
+                            },
+                            {
+                                component: 'dropdown', props: {
+                                    name: 'user-id',
+                                    label: 'Allocate to a team member',
+                                    className: 'govuk-body',
+                                    choices: usersInTeam
                                 }
-                            ]
-                        }
+                            }
+                        ],
+                        defaultActionLabel: 'Allocate',
+                        secondaryActions: [
+                            {
+                                component: 'backlink',
+                                validation: [],
+                                props: {
+                                    label: 'Back to dashboard',
+                                    action: '/'
+                                }
+                            }
+                        ]
                     }
-                };
-            default:
-                return { error: { status: 500 } };
+                }
+            };
+        default:
+            return { error: { status: 500 } };
         }
     }
     const { stageUUID, caseReference, allocationNote } = response.data;
