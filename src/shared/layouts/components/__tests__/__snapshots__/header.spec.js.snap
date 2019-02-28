@@ -83,6 +83,17 @@ exports[`Layout header component should render with default props 1`] = `
             <li
               className="govuk-header__navigation-item"
             >
+              <Link
+                className="govuk-header__link"
+                replace={false}
+                to="/search"
+              >
+                Search
+              </Link>
+            </li>
+            <li
+              className="govuk-header__navigation-item"
+            >
               <a
                 className="govuk-header__link"
                 href="/oauth/logout"
@@ -176,6 +187,17 @@ exports[`Layout header component should render without crest when service is not
                 to="/action/template/add"
               >
                 Add Template
+              </Link>
+            </li>
+            <li
+              className="govuk-header__navigation-item"
+            >
+              <Link
+                className="govuk-header__link"
+                replace={false}
+                to="/search"
+              >
+                Search
               </Link>
             </li>
             <li

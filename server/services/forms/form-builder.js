@@ -47,6 +47,16 @@ module.exports = (options) => {
         withData: function (newData) {
             data = Object.assign({}, data, newData);
             return this;
+        },
+        getFields: function () {
+            return schema.fields.reduce((reducer, field) => {
+                if (field.component === 'date') {
+                    reducer.push(`${field.props.name}-day`, `${field.props.name}-month`, `${field.props.name}-year`);
+                    return reducer;
+                }
+                reducer.push({ name: field.props.name });
+                return reducer;
+            }, []);
         }
     };
 };

@@ -119,7 +119,7 @@ const getForm = (form) => {
     return async (req, res, next) => {
         logger.info({ event: 'GET_FORM', user: req.user.username });
         try {
-            const { schema, data, meta } = await form({ submissionUrl: req.url });
+            const { schema, data, meta } = await form({ submissionUrl: req.url }).build();
             await hydrateFields(schema.fields, { user: req.user });
             req.form = { schema, data, meta };
             next();

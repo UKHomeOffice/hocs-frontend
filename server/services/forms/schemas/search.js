@@ -8,13 +8,21 @@ module.exports = (options = {}) => {
         .withField(
             Component('text', 'case-reference')
                 .withProp('label', 'Case Reference')
-                // TODO: Implement validator in validation middleware
-                // .withValidator('isCaseReference', 'Case reference is invalid format')
+                .withProp('hint', 'For example ABC/123456/12')
+                .withValidator('isValidCaseReference', 'Case reference is invalid format')
                 .build()
         )
         .withField(
-            Component('date', 'date-received')
-                .withProp('label', 'Date received')
+            Component('date', 'date-received-from')
+                .withProp('label', 'Received after')
+                .withValidator('isValidDate', 'Date received must be valid')
+                .withValidator('isBeforeToday', 'Date received cannot be in the past')
+                .build()
+        )
+        .withField(
+            Component('date', 'date-received-to')
+                .withProp('label', 'Received before')
+                .withValidator('isValidDate', 'Date received must be valid')
                 .withValidator('isBeforeToday', 'Date received cannot be in the past')
                 .build()
         )
@@ -34,9 +42,9 @@ module.exports = (options = {}) => {
                 .build()
         )
         .withField(
-            Component('checkbox', 'active')
-                .withProp('label', 'Active case?')
-                .withProp('choices', [Choice('Yes', 'true')])
+            Component('checkbox', 'case-status')
+                .withProp('label', 'Case status')
+                .withProp('choices', [Choice('Active', 'active')])
                 .build()
         )
         .withPrimaryActionLabel('Search')
@@ -46,6 +54,5 @@ module.exports = (options = {}) => {
                 .withProp('action', '/')
                 .build()
         )
-        .withSubmissionUrl(submissionUrl)
-        .build();
+        .withSubmissionUrl(submissionUrl);
 };
