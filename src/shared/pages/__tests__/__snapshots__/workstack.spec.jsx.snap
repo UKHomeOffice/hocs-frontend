@@ -120,7 +120,11 @@ exports[`Workstack page component should render with default props 1`] = `
       }
     }
   >
-    <div />
+    <div>
+      <h1
+        className="govuk-heading-l"
+      />
+    </div>
   </WorkstackPage>
 </Component>
 `;

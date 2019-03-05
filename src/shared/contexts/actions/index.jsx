@@ -130,3 +130,10 @@ export function unsetCaseNotes() {
         payload: null
     };
 }
+
+export function passForwardProps(props) {
+    return {
+        type: types.PASS_FORWARD_PROPS,
+        payload: props
+    };
+}

@@ -106,7 +106,7 @@ describe('Process middleware', () => {
         expect(next).toHaveBeenCalledTimes(1);
     });
 
-    it('should return null values for fields with incomplete dates', () => {
+    it('should return no values for fields with incomplete dates', () => {
         const req = {
             body: {
                 ['test-field-year']: '1989',
@@ -134,8 +134,7 @@ describe('Process middleware', () => {
         processMiddleware(req, res, next);
         expect(req.form).toBeDefined();
         expect(req.form.data).toBeDefined();
-        expect(req.form.data['test-field']).toBeDefined();
-        expect(req.form.data['test-field']).toBeNull();
+        expect(req.form.data['test-field']).toBeUndefined();
         expect(next).toHaveBeenCalled();
         expect(next).toHaveBeenCalledTimes(1);
     });
@@ -171,11 +170,9 @@ describe('Process middleware', () => {
         processMiddleware(req, res, next);
         expect(req.form).toBeDefined();
         expect(req.form.data).toBeDefined();
-        expect(req.form.data['test-field_A']).toBeDefined();
-        expect(req.form.data['test-field_A']).toEqual(true);
-        expect(req.form.data['test-field_B']).toBeDefined();
-        expect(req.form.data['test-field_B']).toEqual(false);
-        expect(req.form.data['test-field_C']).toBeUndefined();
+        expect(req.form.data['test-field']).toBeDefined();
+        expect(Array.isArray(req.form.data['test-field'])).toBeTruthy();
+        expect(req.form.data['test-field'].length).toEqual(2);
         expect(next).toHaveBeenCalled();
         expect(next).toHaveBeenCalledTimes(1);
     });
@@ -210,8 +207,9 @@ describe('Process middleware', () => {
         processMiddleware(req, res, next);
         expect(req.form).toBeDefined();
         expect(req.form.data).toBeDefined();
-        expect(req.form.data['test-field_A']).toBeDefined();
-        expect(req.form.data['test-field_A']).toEqual(true);
+        expect(req.form.data['test-field']).toBeDefined();
+        expect(Array.isArray(req.form.data['test-field'])).toEqual(true);
+        expect(req.form.data['test-field'].length).toEqual(1);
         expect(next).toHaveBeenCalled();
         expect(next).toHaveBeenCalledTimes(1);
     });

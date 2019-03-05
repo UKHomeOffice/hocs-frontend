@@ -137,9 +137,19 @@ const serverConfig = {
     },
     module: {
         rules: [
-            { test: [/\.(js)$/, /\.(jsx)$/], loader: 'babel-loader' },
+            { test: [/\.(js)$/, /\.(jsx)$/], loader: 'babel-loader', exclude: /node_modules/ },
             { test: /\.scss$/, loader: 'css-loader/locals' }
         ]
+    },
+    // resolve: {
+    //     alias: {
+    //         react: path.resolve(__dirname, 'node_modules/react'),
+    //         'react-dom': path.resolve(__dirname, 'node_modules/react-dom')
+    //     }
+    // },
+    externals: {
+        'react': 'react',
+        'react-dom': 'react-dom'
     }
 };
 

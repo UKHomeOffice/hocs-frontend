@@ -10,22 +10,20 @@ const customAdapters = {
         };
         if (date.year && date.month && date.day) {
             reducer[name] = `${date.year}-${date.month}-${date.day}`;
-        } else {
-            reducer[name] = null;
         }
     },
     'checkbox': (reducer, field, data) => {
-        const { name, choices } = field.props;
-        let selected = [];
-        const value = data[name];
-        if (!Array.isArray(value)) {
-            selected.push(value);
-        } else {
-            selected = value;
+        const { name } = field.props;
+        if (Object.prototype.hasOwnProperty.call(data, name) && data[name] !== '') {
+            let selected = [];
+            const value = data[name];
+            if (!Array.isArray(value)) {
+                selected.push(value);
+            } else {
+                selected = value;
+            }
+            reducer[name] = selected;
         }
-        choices.map(choice => {
-            reducer[`${name}_${choice.value}`] = selected.includes(choice.value);
-        });
     },
     'add-document': (reducer, field, data, req) => {
         const { name } = field.props;
@@ -39,8 +37,9 @@ const customAdapters = {
 
 function defaultAdapter(reducer, field, data) {
     const { name } = field.props;
-    const result = data[name] === 'null' ? null : data[name];
-    reducer[name] = result;
+    if (Object.prototype.hasOwnProperty.call(data, name) && data[name] !== '') {
+        reducer[name] = data[name];
+    }
 }
 
 function processMiddleware(req, res, next) {
