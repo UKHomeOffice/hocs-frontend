@@ -5,6 +5,7 @@ const { validationMiddleware: validateForm } = require('../middleware/validation
 const { getForm } = require('../services/form');
 const form = require('../services/forms/schemas/search');
 const { ValidationError } = require('../models/error');
+const { getList } = require('../services/list');
 
 router.all(['/search', '/api/search', '/api/form/search'], getForm(form, { submissionUrl: '/search/results' }));
 router.get('/api/form/search', (req, res) => res.json(req.form));
@@ -15,19 +16,16 @@ router.post(['/search/results', '/api/search/results'],
     processForm,
     validateForm,
     (req, res, next) => Object.keys(req.form.data).length > 0 ? next() : res.json({ errors: { form: 'No search criteria specified' } }),
+    async (req, res, next) => {
+        try {
+            const results = await getList('SEARCH', { user: req.user, form: req.form.data });
+            res.locals.workstack = results;
+            next();
+        } catch (e) {
+            next(e);
+        }
+    },
     (req, res, next) => {
-        // Get search results
-        // Transform data to match workstack
-        // Attach to res.locals
-        res.locals.workstack = {
-            label: 'Workstack',
-            items: [
-                { uuid: '123456789', caseUUID: '123456789', caseReference: 'ABC/123456/19', stageTypeDisplay: 'Stage', assignedUserDisplay: 'He-Man', assignedTeamDisplay: 'Team A', deadlineDisplay: '01/01/2020' },
-                { uuid: '123456789', caseUUID: '123456789', caseReference: 'ABC/123457/19', stageTypeDisplay: 'Stage', assignedUserDisplay: 'He-Man', assignedTeamDisplay: 'Team A', deadlineDisplay: '01/01/2020' },
-                { uuid: '123456789', caseUUID: '123456789', caseReference: 'ABC/123458/19', stageTypeDisplay: 'Stage', assignedUserDisplay: 'He-Man', assignedTeamDisplay: 'Team A', deadlineDisplay: '01/01/2020' },
-                { uuid: '123456789', caseUUID: '123456789', caseReference: 'ABC/123459/19', stageTypeDisplay: 'Stage', assignedUserDisplay: 'He-Man', assignedTeamDisplay: 'Team A', deadlineDisplay: '01/01/2020' }
-            ]
-        };
         res.locals.workstack.breadcrumbs = [
             { to: '/', label: 'Dashboard' },
             { to: '/search', label: 'Search' },

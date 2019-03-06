@@ -9,6 +9,7 @@ const caseRouter = require('./case');
 const documentRouter = require('./document');
 const healthRouter = require('./health');
 const search = require('./search');
+const dashboard = require('./dashboard');
 const { renderMiddleware, renderResponseMiddleware } = require('../middleware/render');
 const { errorMiddleware, initRequest } = require('../middleware/request');
 const { protect } = require('../middleware/auth');
@@ -26,6 +27,7 @@ router.use('/api', apiRouter);
 router.use('/action', actionRouter);
 router.use('/case', caseRouter);
 router.use('/case', documentRouter);
+router.use('/', dashboard);
 router.use('/', search);
 
 router.get('/members/refresh',

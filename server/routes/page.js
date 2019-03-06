@@ -8,10 +8,7 @@ const {
     allocateToTeam,
     unallocate
 } = require('../middleware/workstack');
-const { dashboardMiddleware } = require('../middleware/dashboard');
 const { fileMiddleware } = require('../middleware/file');
-
-router.get('/', dashboardMiddleware);
 
 router.get('/workstack/user', userWorkstackMiddleware, (req, res, next) => {
     res.locals.workstack.breadcrumbs = [

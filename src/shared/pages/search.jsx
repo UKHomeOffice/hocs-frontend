@@ -10,14 +10,10 @@ import status from '../helpers/api-status.js';
 const FormWrapper = (C) => ({ match, history, ...props }) => {
     const { dispatch, track, form: contextForm } = useContext(Context);
 
-    const [form, setForm] = useState(contextForm);
+    const [form, setForm] = useState(null);
     const [confirmation, setConfirmation] = useState(null);
 
     const getForm = () => {
-        if (contextForm) {
-            dispatch(unsetForm());
-            return;
-        }
         dispatch(updateApiStatus(status.REQUEST_FORM))
             .then(() => axios.get('/api/form' + match.url))
             .then(response => setForm(response.data))
@@ -52,10 +48,13 @@ const FormWrapper = (C) => ({ match, history, ...props }) => {
     };
 
     useEffect(() => {
-        if (form == null) {
+        if (contextForm) {
+            setForm(contextForm);
+            dispatch(unsetForm());
+        } else {
             getForm();
         }
-    }, [form]);
+    }, []);
 
     return form ? (
         <C {...props} title={form.schema.title}>

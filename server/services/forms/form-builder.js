@@ -7,8 +7,9 @@ module.exports = (options) => {
         showPrimaryAction: options.schema.showPrimaryAction || true
     };
     let data = options.data;
+    let meta = {};
     return {
-        build: () => ({ schema, data }),
+        build: () => ({ schema, data, meta }),
         withTitle: function (title) {
             if (title) {
                 schema.title = title;

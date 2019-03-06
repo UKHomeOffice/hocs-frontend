@@ -6,24 +6,17 @@ module.exports = (options = {}) => {
     return Form()
         .withTitle('Search')
         .withField(
-            Component('text', 'case-reference')
-                .withProp('label', 'Case Reference')
-                .withProp('hint', 'For example ABC/123456/12')
-                .withValidator('isValidCaseReference', 'Case reference is invalid format')
-                .build()
-        )
-        .withField(
             Component('date', 'date-received-from')
                 .withProp('label', 'Received after')
                 .withValidator('isValidDate', 'Date received must be valid')
-                .withValidator('isBeforeToday', 'Date received cannot be in the past')
+                .withValidator('isBeforeToday', 'Date received after cannot be in the future')
                 .build()
         )
         .withField(
             Component('date', 'date-received-to')
                 .withProp('label', 'Received before')
                 .withValidator('isValidDate', 'Date received must be valid')
-                .withValidator('isBeforeToday', 'Date received cannot be in the past')
+                .withValidator('isBeforeToday', 'Date received before cannot be in the future')
                 .build()
         )
         .withField(

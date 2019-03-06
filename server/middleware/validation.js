@@ -30,7 +30,7 @@ const validators = {
         return null;
     },
     isAfterToday({ label, value, message }) {
-        if (new Date(value) <= new Date()) {
+        if (new Date(value).valueOf() <= new Date(Date.now()).valueOf()) {
             return message || validationErrors.isAfterToday(label);
         }
         return null;

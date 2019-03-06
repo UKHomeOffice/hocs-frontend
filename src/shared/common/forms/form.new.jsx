@@ -18,14 +18,14 @@ AllocationNote.propTypes = {
     message: PropTypes.string
 };
 
-const Form = ({ schema, data, errors, meta, action, method = 'POST', submitHandler }) => {
+const Form = ({ schema, data, errors, meta, action, method = 'POST', submitHandler, showErrorSummary = true }) => {
 
     const createField = createTemplate(formComponentFactory, { data, errors, meta, callback: () => { }, baseUrl: '/' });
 
     return (
         <Fragment>
             {meta && meta.allocationNote && <AllocationNote {...meta.allocationNote} />}
-            {errors && <ErrorSummary errors={errors} />}
+            {showErrorSummary && errors && <ErrorSummary errors={errors} />}
             <form
                 action={action}
                 method={method}
@@ -33,7 +33,7 @@ const Form = ({ schema, data, errors, meta, action, method = 'POST', submitHandl
                 encType='multipart/form-data'
             >
                 {schema && Array.isArray(schema.fields) && schema.fields.map(createField)}
-                {schema.showPrimaryAction && < Submit label={schema.defaultActionLabel} />}
+                {schema.showPrimaryAction && <Submit label={schema.defaultActionLabel} />}
             </form>
         </Fragment>
     );

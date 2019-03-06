@@ -290,6 +290,24 @@ const lists = {
             allocateToWorkstackEndpoint: '/unallocate'
         };
     },
+    'SEARCH': async ({ user, form }) => {
+        const request = Object.entries(form).reduce((reducer, [key, value]) => {
+            reducer.push({ [key]: value });
+            return reducer;
+        }, []);
+        const response = await caseworkServiceClient.post('/search', request, {
+            headers: User.createHeaders(user)
+        });
+        const { bindDisplayElements } = helpers;
+        const workstackData = await Promise.all(response.data.stages
+            .filter(item => item.userUUID === user.uuid)
+            .sort((first, second) => first.caseReference > second.caseReference)
+            .map(async (r) => bindDisplayElements(r)));
+        return {
+            label: 'Search Results',
+            items: workstackData
+        };
+    },
     'CASE_TYPES': async ({ user }) => {
         const list = listDefinitions['workflowTypes'].call(this);
         const response = await fetchList(list, {
