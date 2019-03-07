@@ -6,8 +6,7 @@ const { dashboardMiddleware: getDashboardData } = require('../middleware/dashboa
 const { getForm } = require('../services/form');
 const form = require('../services/forms/schemas/dashboard-search');
 const { ValidationError } = require('../models/error');
-const { caseworkServiceClient } = require('../libs/request');
-const User = require('../models/user');
+const { getList } = require('../services/list');
 
 router.all(['/', '/api/form'],
     getForm(form, { submissionUrl: '/search/reference' }),
@@ -18,30 +17,37 @@ router.post(['/search/reference', '/api/search/reference'],
     processRequestBody(form().getFields()),
     getForm(form, { submissionUrl: '/search/results' }),
     processForm,
-    validateForm
+    validateForm,
+    async (req, res, next) => {
+        try {
+            const results = await getList('SEARCH_REFERENCE', { user: req.user, form: req.form.data });
+            res.locals.workstack = results;
+            next();
+        } catch (e) {
+            next(e);
+        }
+    }
 );
 
 router.post('/search/reference', async (req, res, next) => {
-    const reference = encodeURI(req.form.data['case-reference']);
-    try {
-        const response = await caseworkServiceClient.get(`/search/${reference}`, {
-            headers: User.createHeaders(req.user)
-        });
-        const { caseUUID, stageUUID } = response.data;
-        res.redirect(`/case/${caseUUID}/stage/${stageUUID}`);
-    } catch (error) {
-        next('Failed to find case');
+    if (res.locals.workstack.items.length === 1) {
+        const { uuid, caseUUID } = res.locals.workstack.items[0];
+        return res.redirect(`/case/${caseUUID}/stage/${uuid}`);
     }
+    next();
 });
 
 router.post('/api/search/reference', async (req, res) => {
-    const reference = encodeURI(req.form.data['case-reference']);
     try {
-        const response = await caseworkServiceClient.get(`/search/${reference}`, {
-            headers: User.createHeaders(req.user)
-        });
-        const { caseUUID, stageUUID } = response.data;
-        res.json({ redirectUrl: `/case/${caseUUID}/stage/${stageUUID}` });
+        if (res.locals.workstack.items.length > 0) {
+            if (res.locals.workstack.items.length === 1) {
+                const { uuid, caseUUID } = res.locals.workstack.items[0];
+                return res.json({ redirect: `/case/${caseUUID}/stage/${uuid}` });
+            } else {
+                return res.json({ forwardProps: { workstack: res.locals.workstack }, redirect: '/search/reference' });
+            }
+        }
+        res.json({ errors: { 'case-reference': 'No active workflows for case' } });
     } catch (error) {
         res.json({ errors: { 'case-reference': 'Failed to find case' } });
     }

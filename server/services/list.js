@@ -300,11 +300,24 @@ const lists = {
         });
         const { bindDisplayElements } = helpers;
         const workstackData = await Promise.all(response.data.stages
-            .filter(item => item.userUUID === user.uuid)
             .sort((first, second) => first.caseReference > second.caseReference)
             .map(async (r) => bindDisplayElements(r)));
         return {
             label: 'Search Results',
+            items: workstackData
+        };
+    },
+    'SEARCH_REFERENCE': async ({ user, form }) => {
+        const reference = encodeURI(form['case-reference']);
+        const response = await caseworkServiceClient.get(`/case/${reference}/stage`, {
+            headers: User.createHeaders(user)
+        });
+        const { bindDisplayElements } = helpers;
+        const workstackData = await Promise.all(response.data.stages
+            .sort((first, second) => first.caseReference > second.caseReference)
+            .map(async (r) => bindDisplayElements(r)));
+        return {
+            label: 'Case workflows',
             items: workstackData
         };
     },

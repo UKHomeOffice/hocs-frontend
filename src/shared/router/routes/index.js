@@ -36,6 +36,13 @@ const routes = [
         title: 'Search results'
     },
     {
+        path: '/search/reference',
+        exact: true,
+        component: WorkstackPage,
+        selectable: false,
+        title: 'Search results'
+    },
+    {
         path: '/case/:caseId/stage/:stageId',
         exact: true,
         component: StagePage
