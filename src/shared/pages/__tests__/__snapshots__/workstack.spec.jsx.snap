@@ -20,19 +20,19 @@ exports[`Workstack page component should render with default props 1`] = `
       ],
       "results": Array [
         Object {
-          "isThrow": false,
+          "type": "return",
           "value": Promise {},
         },
         Object {
-          "isThrow": false,
+          "type": "return",
           "value": Promise {},
         },
         Object {
-          "isThrow": false,
+          "type": "return",
           "value": Promise {},
         },
         Object {
-          "isThrow": false,
+          "type": "return",
           "value": Promise {},
         },
       ],
@@ -51,7 +51,7 @@ exports[`Workstack page component should render with default props 1`] = `
       ],
       "results": Array [
         Object {
-          "isThrow": false,
+          "type": "return",
           "value": undefined,
         },
       ],
@@ -77,19 +77,19 @@ exports[`Workstack page component should render with default props 1`] = `
         ],
         "results": Array [
           Object {
-            "isThrow": false,
+            "type": "return",
             "value": Promise {},
           },
           Object {
-            "isThrow": false,
+            "type": "return",
             "value": Promise {},
           },
           Object {
-            "isThrow": false,
+            "type": "return",
             "value": Promise {},
           },
           Object {
-            "isThrow": false,
+            "type": "return",
             "value": Promise {},
           },
         ],
@@ -113,14 +113,18 @@ exports[`Workstack page component should render with default props 1`] = `
         ],
         "results": Array [
           Object {
-            "isThrow": false,
+            "type": "return",
             "value": undefined,
           },
         ],
       }
     }
   >
-    <div />
+    <div>
+      <h1
+        className="govuk-heading-l"
+      />
+    </div>
   </WorkstackPage>
 </Component>
 `;

@@ -25,5 +25,6 @@ const storage = multerS3({
 const fileMiddleware = multer({ storage });
 
 module.exports = {
-    fileMiddleware
+    fileMiddleware,
+    secureFileMiddleware: fields => fileMiddleware.fields(fields)
 };

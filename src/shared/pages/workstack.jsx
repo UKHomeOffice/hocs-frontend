@@ -51,6 +51,7 @@ class WorkstackPage extends Component {
         if (!workstack) {
             this.getWorkstack();
         }
+
         track('PAGE_VIEW', { title, path: match.url });
         dispatch(clearWorkstack());
     }
@@ -116,7 +117,7 @@ class WorkstackPage extends Component {
     }
 
     renderWorkstack() {
-        const { match: { url } } = this.props;
+        const { match: { url }, selectable = true } = this.props;
         const { workstack, formData } = this.state;
         const { allocateToUserEndpoint, allocateToTeamEndpoint, allocateToWorkstackEndpoint, items, teamMembers } = workstack;
         return (
@@ -124,6 +125,7 @@ class WorkstackPage extends Component {
                 <Workstack
                     baseUrl={url}
                     items={items}
+                    selectable={selectable}
                     selectedCases={formData['selected_cases']}
                     teamMembers={teamMembers}
                     allocateToUserEndpoint={allocateToUserEndpoint}
@@ -137,10 +139,14 @@ class WorkstackPage extends Component {
     }
 
     render() {
+        const { title } = this.props;
         const { workstack } = this.state;
         return (
             <div>
                 {workstack && workstack.breadcrumbs ? this.renderBreadCrumb(workstack.breadcrumbs) : null}
+                <h1 className="govuk-heading-l">
+                    {title}
+                </h1>
                 {workstack && workstack.dashboard ? this.renderDashboard() : null}
                 {workstack && workstack.items ? this.renderWorkstack() : null}
             </div>
@@ -154,7 +160,8 @@ WorkstackPage.propTypes = {
     match: PropTypes.object.isRequired,
     workstack: PropTypes.object,
     track: PropTypes.func.isRequired,
-    title: PropTypes.string.isRequired
+    title: PropTypes.string.isRequired,
+    selectable: PropTypes.bool
 };
 
 const WrappedWorkstack = (props) => (

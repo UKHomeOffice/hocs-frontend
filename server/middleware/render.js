@@ -1,10 +1,10 @@
 const React = require('react');
-const { StaticRouter } = require('react-router-dom');
 const { renderToString } = require('react-dom/server');
+const { StaticRouter } = require('react-router-dom');
 const { default: App } = require('../../build/server/app.server');
 const html = require('../layout/html');
 
-function renderMiddleware (req, res, next) {
+function renderMiddleware(req, res, next) {
     const renderConfig = require('../config').forContext('render');
     const { form, data } = req;
     const config = {
@@ -41,7 +41,7 @@ function renderMiddleware (req, res, next) {
     next();
 }
 
-function renderResponseMiddleware (req, res) {
+function renderResponseMiddleware(req, res) {
     return res.send(res.rendered);
 }
 

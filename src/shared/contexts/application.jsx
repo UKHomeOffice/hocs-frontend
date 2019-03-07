@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import types from './actions/types.jsx';
 import ReactGA from 'react-ga';
 
-const Context = React.createContext();
+export const Context = React.createContext();
 
 const reducer = (state, action) => {
     // TODO: REMOVE
@@ -60,6 +60,9 @@ const reducer = (state, action) => {
         return { ...state, caseNotes: [] };
     case types.UNSET_CASE_SUMMARY:
         return { ...state, summary: null };
+    case types.PASS_FORWARD_PROPS: {
+        return { ...state, ...action.payload };
+    }
     default:
         // TODO: Remove
         /* eslint-disable-next-line  no-console*/

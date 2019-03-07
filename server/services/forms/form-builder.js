@@ -7,27 +7,28 @@ module.exports = (options) => {
         showPrimaryAction: options.schema.showPrimaryAction || true
     };
     let data = options.data;
+    let meta = {};
     return {
-        build: () => ({ schema, data }),
-        withTitle: function(title) {
+        build: () => ({ schema, data, meta }),
+        withTitle: function (title) {
             if (title) {
                 schema.title = title;
             }
             return this;
         },
-        withField: function(field) {
+        withField: function (field) {
             if (field) {
                 schema.fields.push(field);
             }
             return this;
         },
-        withPrimaryActionLabel: function(label) {
+        withPrimaryActionLabel: function (label) {
             if (label) {
                 schema.defaultActionLabel = label;
             }
             return this;
         },
-        withSecondaryAction: function(action) {
+        withSecondaryAction: function (action) {
             if (!schema.secondaryActions) {
                 schema.secondaryActions = [];
             }
@@ -36,13 +37,27 @@ module.exports = (options) => {
             }
             return this;
         },
-        withNoPrimaryAction: function() {
+        withNoPrimaryAction: function () {
             schema.showPrimaryAction = false;
             return this;
         },
-        withData: function(newData) {
+        withSubmissionUrl: function (submissionUrl) {
+            schema.action = submissionUrl;
+            return this;
+        },
+        withData: function (newData) {
             data = Object.assign({}, data, newData);
             return this;
+        },
+        getFields: function () {
+            return schema.fields.reduce((reducer, field) => {
+                if (field.component === 'date') {
+                    reducer.push(`${field.props.name}-day`, `${field.props.name}-month`, `${field.props.name}-year`);
+                    return reducer;
+                }
+                reducer.push({ name: field.props.name });
+                return reducer;
+            }, []);
         }
     };
 };

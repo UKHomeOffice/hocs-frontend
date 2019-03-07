@@ -27,8 +27,8 @@ class WorkstackAllocate extends Component {
 
     constructor(props) {
         super(props);
-        const { items, selectedCases = [] } = props;
-        this.state = { items, selectedCases, filter: '' };
+        const { items, selectedCases = [], selectable } = props;
+        this.state = { selectable, items, selectedCases, filter: '' };
     }
 
     componentDidMount() {
@@ -108,7 +108,7 @@ class WorkstackAllocate extends Component {
         };
         return (
             <tr key={uuid} className='govuk-radios govuk-table__row'>
-                <td className='govuk-table__cell'>
+                {this.state.selectable && <td className='govuk-table__cell'>
                     <div className='govuk-checkboxes'>
                         <div key={key} className='govuk-checkboxes__item'>
                             <input id={`selected_cases_${caseUUID}`}
@@ -122,7 +122,7 @@ class WorkstackAllocate extends Component {
                             <label className='govuk-label govuk-checkboxes__label' htmlFor={caseUUID}></label>
                         </div>
                     </div>
-                </td>
+                </td>}
                 <td className='govuk-table__cell'>
                     <Link to={`/case/${caseUUID}/stage/${uuid}`} className='govuk-link govuk-!-margin-right-3'>{caseReference}</Link>
                 </td>
@@ -145,7 +145,7 @@ class WorkstackAllocate extends Component {
     }
 
     render() {
-        const { isMounted, items } = this.state;
+        const { isMounted, items, selectable } = this.state;
         const { baseUrl, teamMembers, submitHandler, allocateToTeamEndpoint, allocateToWorkstackEndpoint, allocateToUserEndpoint } = this.props;
 
         return (
@@ -165,7 +165,7 @@ class WorkstackAllocate extends Component {
                                             <table className='govuk-table'>
                                                 <thead className='govuk-table__head'>
                                                     <tr className='govuk-radios govuk-table__row'>
-                                                        <th className='govuk-table__header'>Select</th>
+                                                        {selectable && <th className='govuk-table__header'>Select</th>}
                                                         <th className='govuk-table__header'>Reference</th>
                                                         <th className='govuk-table__header'>Current Stage</th>
                                                         <th className='govuk-table__header govuk-!-width-one-quarter'>Owner</th>
@@ -207,6 +207,7 @@ class WorkstackAllocate extends Component {
 
 WorkstackAllocate.propTypes = {
     items: PropTypes.array.isRequired,
+    selectable: PropTypes.bool.isRequired,
     selectedCases: PropTypes.array,
     teamMembers: PropTypes.array,
     allocateToUserEndpoint: PropTypes.string,

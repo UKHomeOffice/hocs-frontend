@@ -5,6 +5,7 @@ import App from '../shared/index.jsx';
 /* eslint-disable-next-line  no-unused-vars*/
 import Styles from '../styles/app.scss';
 
+
 /* eslint-disable no-undef*/
 hydrate(
     <BrowserRouter>

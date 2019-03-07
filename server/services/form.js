@@ -115,6 +115,20 @@ function hydrateFields(fields, options) {
     return Promise.all(promises);
 }
 
+const getForm = (form, options) => {
+    return async (req, res, next) => {
+        logger.info({ event: 'GET_FORM', user: req.user.username });
+        try {
+            const { schema, data, meta } = await form({ ...options }).build();
+            await hydrateFields(schema.fields, { user: req.user });
+            req.form = { schema, data, meta };
+            next();
+        } catch (error) {
+            next('Something went wrong');
+        }
+    };
+};
+
 const getFormForAction = async (req, res, next) => {
     const { workflow, context, action } = req.params;
     logger.info({ event: events.ACTION_FORM, workflow, context, action, user: req.user.username });
@@ -158,6 +172,7 @@ const getFormForStage = async (req, res, next) => {
 };
 
 module.exports = {
+    getForm,
     getFormForAction,
     getFormForCase,
     getFormForStage

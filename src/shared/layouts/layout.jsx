@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Header from './components/header.jsx';
 import Body from './components/body.jsx';
 import Footer from './components/footer.jsx';
+import Notification from './notifaction.jsx';
 import { ApplicationConsumer } from '../contexts/application.jsx';
 
 class Layout extends Component {
@@ -19,11 +20,7 @@ class Layout extends Component {
         } = this.props;
         return (
             <Fragment>
-                {apiStatus &&
-                    <div className={`notification${apiStatus.status.type === 'ERROR' ? ' notification--error' : ''}`}>
-                        {apiStatus.status.display}
-                    </div>
-                }
+                {apiStatus && <Notification {...apiStatus.status} />}
                 <Header {...header} />
                 <Body {...body}>
                     {children}

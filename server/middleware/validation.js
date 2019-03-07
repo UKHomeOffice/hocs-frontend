@@ -9,7 +9,8 @@ const validationErrors = {
     fileLimit: () => `The number of files you have tried to upload exceeded the limit of ${DOCUMENT_BULK_LIMIT}`,
     isValidDate: label => `${label} must be a date`,
     isBeforeToday: label => `${label} must be a date in the past`,
-    isAfterToday: label => `${label} must be a date in the future`
+    isAfterToday: label => `${label} must be a date in the future`,
+    validCaseReference: () => 'Case reference is not valid'
 };
 
 const validators = {
@@ -23,13 +24,13 @@ const validators = {
         return null;
     },
     isBeforeToday({ label, value, message }) {
-        if (new Date(value) >= new Date()) {
+        if (new Date(value).valueOf() >= new Date(Date.now()).valueOf()) {
             return message || validationErrors.isBeforeToday(label);
         }
         return null;
     },
     isAfterToday({ label, value, message }) {
-        if (new Date(value) <= new Date()) {
+        if (new Date(value).valueOf() <= new Date(Date.now()).valueOf()) {
             return message || validationErrors.isAfterToday(label);
         }
         return null;
@@ -56,6 +57,13 @@ const validators = {
     fileLimit: ({ value, message }) => {
         if (value && value.length > DOCUMENT_BULK_LIMIT) {
             return message || validationErrors.fileLimit;
+        }
+        return null;
+    },
+    isValidCaseReference: ({ value, message }) => {
+        const format = /\b[a-zA-Z]{2,4}\/[0-9]{7}\/[0-9]{2}\b/i;
+        if (value && !format.test(value)) {
+            return message || validationErrors.validCaseReference;
         }
         return null;
     }

@@ -4,6 +4,7 @@ import StagePage from '../../pages/stage.jsx';
 import Error from '../../layouts/error.jsx';
 import MainPage from '../../pages/dashboard.jsx';
 import WorkstackPage from '../../pages/workstack.jsx';
+import Search from '../../pages/search.jsx';
 
 const routes = [
     {
@@ -21,6 +22,25 @@ const routes = [
         path: '/action/:workflow/:context/:action',
         exact: true,
         component: ActionPage
+    },
+    {
+        path: '/search',
+        exact: true,
+        component: Search
+    },
+    {
+        path: '/search/results',
+        exact: true,
+        component: WorkstackPage,
+        selectable: false,
+        title: 'Search results'
+    },
+    {
+        path: '/search/reference',
+        exact: true,
+        component: WorkstackPage,
+        selectable: false,
+        title: 'Search results'
     },
     {
         path: '/case/:caseId/stage/:stageId',
