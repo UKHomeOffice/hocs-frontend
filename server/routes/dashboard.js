@@ -24,7 +24,7 @@ router.post(['/search/reference', '/api/search/reference'],
             res.locals.workstack = results;
             next();
         } catch (e) {
-            next(e);
+            return res.json({ errors: { 'case-reference': 'Failed to perform search' } });
         }
     }
 );
