@@ -308,7 +308,7 @@ const lists = {
         };
     },
     'SEARCH_REFERENCE': async ({ user, form }) => {
-        const reference = encodeURI(form['case-reference']);
+        const reference = encodeURIComponent(form['case-reference']);
         const response = await caseworkServiceClient.get(`/case/${reference}/stage`, {
             headers: User.createHeaders(user)
         });
