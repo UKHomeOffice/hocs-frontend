@@ -31,13 +31,13 @@ const { caseworkServiceClient } = require('../libs/request');
 const User = require('../models/user');
 
 async function getCaseNotes(req, res, next) {
-    const { data } = await caseworkServiceClient.get(`/case/${req.params.caseId}/note`, { headers: User.createHeaders(req.user) });
+    const { data } = await caseworkServiceClient.get(`/case/${req.params.caseId}/timeline`, { headers: User.createHeaders(req.user) });
     res.locals.caseNotes = data.caseNotes
-        .sort((first, second) => first.created > second.created ? -1 : 1)
-        .map(({ created, text }) => ({
-            type: 'Case note',
+        .sort((first, second) => first.eventTime > second.eventTime ? -1 : 1)
+        .map(({ type, eventTime, message, userName: author }) => ({
+            type,
             events: [
-                { date: Intl.DateTimeFormat('en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }).format(new Date(created)), note: { message: text } }
+                { date: Intl.DateTimeFormat('en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }).format(new Date(eventTime)), note: { message, author } }
             ]
         })) || [];
     next();
