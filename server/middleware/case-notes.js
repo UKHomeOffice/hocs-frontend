@@ -31,8 +31,8 @@ const { caseworkServiceClient } = require('../libs/request');
 const User = require('../models/user');
 
 async function getCaseNotes(req, res, next) {
-    const { data } = await caseworkServiceClient.get(`/case/${req.params.caseId}/timeline`, { headers: User.createHeaders(req.user) });
-    res.locals.caseNotes = data.caseNotes
+    const { data = [] } = await caseworkServiceClient.get(`/case/${req.params.caseId}/timeline`, { headers: User.createHeaders(req.user) });
+    res.locals.caseNotes = data
         .sort((first, second) => first.eventTime > second.eventTime ? -1 : 1)
         .map(({ type, eventTime, message, userName: author }) => ({
             type,
