@@ -48,7 +48,7 @@ async function getCaseNotes(req, res, next) {
         }
     } catch (error) {
         logger.error({ message: error.message, stack: error.stack });
-        next('Failed to fetch timeline');
+        return next('Failed to fetch timeline');
     }
     next();
 }
