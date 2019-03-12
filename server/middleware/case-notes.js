@@ -29,17 +29,27 @@
 
 const { caseworkServiceClient } = require('../libs/request');
 const User = require('../models/user');
+const logger = require('../libs/logger');
 
 async function getCaseNotes(req, res, next) {
-    const { data = [] } = await caseworkServiceClient.get(`/case/${req.params.caseId}/timeline`, { headers: User.createHeaders(req.user) });
-    res.locals.caseNotes = data
-        .sort((first, second) => first.eventTime > second.eventTime ? -1 : 1)
-        .map(({ type, eventTime, message, userName: author }) => ({
-            type,
-            events: [
-                { date: Intl.DateTimeFormat('en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }).format(new Date(eventTime)), note: { message, author } }
-            ]
-        })) || [];
+    try {
+        const { data } = await caseworkServiceClient.get(`/case/${req.params.caseId}/timeline`, { headers: User.createHeaders(req.user) });
+        if (data && Array.isArray(data)) {
+            res.locals.caseNotes = data
+                .sort((first, second) => first.eventTime > second.eventTime ? -1 : 1)
+                .map(({ type, eventTime, message, userName: author }) => ({
+                    type,
+                    events: [
+                        { date: Intl.DateTimeFormat('en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }).format(new Date(eventTime)), note: { message, author } }
+                    ]
+                }));
+        } else {
+            res.locals.caseNotes = [];
+        }
+    } catch (error) {
+        logger.error({ message: error.message, stack: error.stack });
+        next('Failed to fetch timeline');
+    }
     next();
 }
 
