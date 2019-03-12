@@ -55,7 +55,9 @@ class CaseNotes extends Component {
     renderCaseNoteEvent(event, key) {
         return (<Fragment key={key}>
             <p className='time'>{event.date}</p>
-            {event.note.author ? <p>{`${event.note.author}: "${event.note.message}"`}</p> : <p>{event.note.message}</p>}
+            {event.user && <p>{event.user}</p>}
+            {event.stage && <p>{event.stage}</p>}
+            {event.author ? <p>{`${event.author}: "${event.note}"`}</p> : <p>{event.note}</p>}
         </Fragment>);
     }
 
