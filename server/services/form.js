@@ -16,7 +16,7 @@ async function getFormSchemaFromWorkflowService(options, user) {
         switch (error.response.status) {
         case 401:
             // handle as error
-            return { error: { status: 401 } };
+            return { error: { status: 401, message: 'You are not authorised to work on this case' } };
         case 403:
             // handle not allocated
             // TODO: Move to form schema

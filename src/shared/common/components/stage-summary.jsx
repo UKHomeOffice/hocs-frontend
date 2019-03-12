@@ -106,7 +106,7 @@ class StageSummary extends Component {
                         <table className='govuk-table margin-left--small'>
                             <caption className='govuk-table__caption margin-bottom--small' >Stage deadlines</caption>
                             <tbody className='govuk-table__body'>
-                                {summary.deadlines.map(stage => this.renderRow(stage))}
+                                {summary.deadlines && Array.isArray(summary.deadlines) && summary.deadlines.map(stage => this.renderRow(stage))}
                             </tbody>
                         </table>
                         <h2 className='govuk-heading-m'>Active stages</h2>
