@@ -670,9 +670,14 @@ const lists = {
         const { data } = response;
         const sStageTypes = await getListFromCache('stageTypes');
         const sUsers = await getListFromCache('users');
+        const sTeams = await getListFromCache('teams');
         const getUser = (userId) => {
             const user = sUsers.find(u => u.id === userId) || {};
             return user.email;
+        };
+        const getTeam = (teamId) => {
+            const user = sTeams.find(t => t.id === teamId) || {};
+            return user.displayName;
         };
         const getStage = (stageId) => {
             const stage = sStageTypes.find(s => s.value === stageId) || {};
@@ -686,6 +691,7 @@ const lists = {
                 CORRESPONDENT_DELETED: 'Correspondent Removed',
                 CASE_TOPIC_CREATED: 'Topic Added',
                 CASE_TOPIC_DELETED: 'Topic Removed',
+                CASE_CREATED: 'Case Created',
                 MANUAL: 'Case Note'
             };
             return types.hasOwnProperty(type) ? types[type] : 'System event';
@@ -693,8 +699,8 @@ const lists = {
         if (Array.isArray(data)) {
             return data
                 .sort((first, second) => first.eventTime > second.eventTime ? -1 : 1)
-                .map(({ eventTime, type, userName: authorId, stage: stageId, body = {} }) => {
-                    const { caseNote, user: userId } = body;
+                .map(({ eventTime, type, userName: authorId, body = {} }) => {
+                    const { caseNote, userUUID: userId, teamUUID: teamId, stage: stageId, ...rest } = body;
                     return {
                         type,
                         title: getTitle(type),
@@ -710,7 +716,9 @@ const lists = {
                             note: caseNote,
                             author: authorId ? getUser(authorId) : null,
                             user: userId ? getUser(userId) : null,
-                            stage: stageId ? getStage(stageId) : null
+                            team: teamId ? getTeam(teamId) : null,
+                            stage: stageId ? getStage(stageId) : null,
+                            ...rest
                         }
                     };
                 });

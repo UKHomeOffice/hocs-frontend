@@ -13,8 +13,8 @@ import Submit from '../forms/submit.jsx';
 const CaseNote = ({ date, author, note }) => (
     <Fragment>
         {date && <p>{date}</p>}
-        {author && <p>{author}</p>}
-        {note && <p>{note}</p>}
+        {author && <p><strong>Author:</strong> {author}</p>}
+        {note && <p><strong>Message:</strong> {note}</p>}
     </Fragment>
 );
 
@@ -24,17 +24,21 @@ CaseNote.propTypes = {
     note: PropTypes.string
 };
 
-const AuditEvent = ({ date, user, stage }) => (
+const AuditEvent = ({ date, author, user, team, stage }) => (
     <Fragment>
         {date && <p>{date}</p>}
-        {user && <p>{user}</p>}
-        {stage && <p>{stage}</p>}
+        {author && <p><strong>Author:</strong> {author}</p>}
+        {stage && <p><strong>Stage:</strong> {stage}</p>}
+        {team && <p><strong>Assigned team:</strong> {team}</p>}
+        {user && <p><strong>Assigned user:</strong> {user}</p>}
     </Fragment>
 );
 
 AuditEvent.propTypes = {
     date: PropTypes.string,
+    author: PropTypes.string,
     user: PropTypes.string,
+    team: PropTypes.string,
     stage: PropTypes.string
 };
 
