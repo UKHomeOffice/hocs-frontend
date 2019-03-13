@@ -27,29 +27,13 @@
 //     }
 // ];
 
-const { caseworkServiceClient } = require('../libs/request');
-const User = require('../models/user');
 const logger = require('../libs/logger');
+const { getList } = require('../services/list');
 
 async function getCaseNotes(req, res, next) {
     try {
-        const response = await caseworkServiceClient.get(`/case/${req.params.caseId}/timeline`, { headers: User.createHeaders(req.user) });
-        const { data } = response;
-        if (Array.isArray(data)) {
-            res.locals.caseNotes = data
-                .sort((first, second) => first.eventTime > second.eventTime ? -1 : 1)
-                .map(({ type, eventTime, userName: author, body = {} }) => {
-                    const { note, stage, user } = body;
-                    return {
-                        type,
-                        events: [
-                            { date: Intl.DateTimeFormat('en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }).format(new Date(eventTime)), note, author, stage, user }
-                        ]
-                    };
-                });
-        } else {
-            res.locals.caseNotes = [];
-        }
+        const results = await getList('CASE_NOTES', { user: req.user, ...req.params });
+        res.locals.caseNotes = results;
     } catch (error) {
         logger.error({ message: error.message, stack: error.stack });
         return next('Failed to fetch timeline');

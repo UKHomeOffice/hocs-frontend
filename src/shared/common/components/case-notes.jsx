@@ -10,7 +10,42 @@ import {
 import status from '../../helpers/api-status.js';
 import Submit from '../forms/submit.jsx';
 
-class CaseNotes extends Component {
+const CaseNote = ({ date, author, note }) => (
+    <Fragment>
+        {date && <p>{date}</p>}
+        {author && <p>{author}</p>}
+        {note && <p>{note}</p>}
+    </Fragment>
+);
+
+CaseNote.propTypes = {
+    date: PropTypes.string,
+    author: PropTypes.string,
+    note: PropTypes.string
+};
+
+const AuditEvent = ({ date, user, stage }) => (
+    <Fragment>
+        {date && <p>{date}</p>}
+        {user && <p>{user}</p>}
+        {stage && <p>{stage}</p>}
+    </Fragment>
+);
+
+AuditEvent.propTypes = {
+    date: PropTypes.string,
+    user: PropTypes.string,
+    stage: PropTypes.string
+};
+
+const TimelineItem = ({ type, title, body }, i) => (
+    <li key={i} className={i === 0 ? 'recent-action' : null}>
+        <h2>{title}</h2>
+        {body && type === 'MANUAL' ? <CaseNote {...body} /> : <AuditEvent  {...body} />}
+    </li>
+);
+
+class Timeline extends Component {
 
     constructor(props) {
         super(props);
@@ -50,22 +85,6 @@ class CaseNotes extends Component {
                         });
                 });
         }
-    }
-
-    renderCaseNoteEvent(event, key) {
-        return (<Fragment key={key}>
-            {event.user && <p>{event.user}</p>}
-            {event.stage && <p>{event.stage}</p>}
-            {event.topic && <p>{event.topic}</p>}
-            {event.author ? <p>{`${event.author}: "${event.note}"`}</p> : <p>{event.note}</p>}
-        </Fragment>);
-    }
-
-    renderCaseNote(caseNote, key) {
-        return (<li key={key} className={key === 0 ? 'recent-action' : null}>
-            <h2>{caseNote.type}</h2>
-            {caseNote.events && caseNote.events.map((e, i) => this.renderCaseNoteEvent(e, i))}
-        </li>);
     }
 
     onSubmit(e) {
@@ -124,7 +143,7 @@ class CaseNotes extends Component {
                         </details>
                         <div className='timeline'>
                             <ul>
-                                {caseNotes && caseNotes.map((n, i) => this.renderCaseNote(n, i))}
+                                {caseNotes && caseNotes.map(TimelineItem)}
                             </ul>
                         </div>
                     </div>
@@ -135,17 +154,17 @@ class CaseNotes extends Component {
 
 }
 
-CaseNotes.propTypes = {
+Timeline.propTypes = {
     caseNotes: PropTypes.array,
     dispatch: PropTypes.func.isRequired,
     track: PropTypes.func.isRequired,
     page: PropTypes.object.isRequired
 };
 
-const WrappedCaseNotes = props => (
+const WrappedTimeline = props => (
     <ApplicationConsumer>
-        {({ dispatch, track, caseNotes, page }) => <CaseNotes {...props} dispatch={dispatch} track={track} page={page} caseNotes={caseNotes} />}
+        {({ dispatch, track, caseNotes, page }) => <Timeline {...props} dispatch={dispatch} track={track} page={page} caseNotes={caseNotes} />}
     </ApplicationConsumer>
 );
 
-export default WrappedCaseNotes;
+export default WrappedTimeline;
