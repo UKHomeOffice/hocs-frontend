@@ -147,7 +147,7 @@ class Timeline extends Component {
                         </details>
                         <div className='timeline'>
                             <ul>
-                                {caseNotes && caseNotes.map(TimelineItem)}
+                                {Array.isArray(caseNotes) && caseNotes.map(TimelineItem)}
                             </ul>
                         </div>
                     </div>

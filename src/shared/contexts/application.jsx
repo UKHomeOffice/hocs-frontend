@@ -57,7 +57,7 @@ const reducer = (state, action) => {
     case types.CLEAR_WORKSTACK:
         return { ...state, workstack: null };
     case types.UNSET_CASE_NOTES:
-        return { ...state, caseNotes: [] };
+        return { ...state, caseNotes: null };
     case types.UNSET_CASE_SUMMARY:
         return { ...state, summary: null };
     case types.PASS_FORWARD_PROPS: {
