@@ -566,7 +566,7 @@ const lists = {
                 primaryTopic: response.data.primaryTopic ? response.data.primaryTopic.label : null,
                 primaryCorrespondent: response.data.primaryCorrespondent ? response.data.primaryCorrespondent.fullname : null,
                 deadlines: ((deadlines = {}) => {
-                    Object.entries(deadlines)
+                    return Object.entries(deadlines)
                         .sort((first, second) => (first[1] > second[1]) ? 1 : -1)
                         .map(([stage, deadline]) => ({
                             label: (stage => {
@@ -577,7 +577,7 @@ const lists = {
                         }));
                 })(response.data.stageDeadlines),
                 stages: ((stages = []) => {
-                    stages.map(activeStage => ({
+                    return stages.map(activeStage => ({
                         stage: (stage => {
                             const stageType = sStageTypes.stageTypes.find(i => i.value === stage) || {};
                             return stageType.label;

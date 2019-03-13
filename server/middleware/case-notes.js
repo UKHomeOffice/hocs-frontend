@@ -33,8 +33,9 @@ const logger = require('../libs/logger');
 
 async function getCaseNotes(req, res, next) {
     try {
-        const { data } = await caseworkServiceClient.get(`/case/${req.params.caseId}/timeline`, { headers: User.createHeaders(req.user) });
-        if (data && Array.isArray(data)) {
+        const response = await caseworkServiceClient.get(`/case/${req.params.caseId}/timeline`, { headers: User.createHeaders(req.user) });
+        const { data } = response;
+        if (Array.isArray(data)) {
             res.locals.caseNotes = data
                 .sort((first, second) => first.eventTime > second.eventTime ? -1 : 1)
                 .map(({ type, eventTime, userName: author, body }) => {
