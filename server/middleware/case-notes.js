@@ -38,8 +38,8 @@ async function getCaseNotes(req, res, next) {
         if (Array.isArray(data)) {
             res.locals.caseNotes = data
                 .sort((first, second) => first.eventTime > second.eventTime ? -1 : 1)
-                .map(({ type, eventTime, userName: author, body }) => {
-                    const { note, stage, user } = body ? JSON.parse(body) : {};
+                .map(({ type, eventTime, userName: author, body = {} }) => {
+                    const { note, stage, user } = body;
                     return {
                         type,
                         events: [
