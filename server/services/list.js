@@ -680,7 +680,7 @@ const lists = {
             return team.displayName;
         };
         const getStage = (stageId) => {
-            const stage = sStageTypes.find(s => s.value === stageId) || {};
+            const stage = sStageTypes.stageTypes.find(s => s.value === stageId) || {};
             return stage.label;
         };
         const getTitle = (type) => {
