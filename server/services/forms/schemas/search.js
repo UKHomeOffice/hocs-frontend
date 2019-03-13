@@ -6,14 +6,20 @@ module.exports = (options = {}) => {
     return Form()
         .withTitle('Search')
         .withField(
-            Component('date', 'date-received-from')
+            Component('checkbox', 'caseTypes')
+                .withProp('label', 'Case type')
+                .withProp('choices', 'CASE_TYPES')
+                .build()
+        )
+        .withField(
+            Component('date', 'dateReceivedFrom')
                 .withProp('label', 'Received after')
                 .withValidator('isValidDate', 'Date received must be valid')
                 .withValidator('isBeforeToday', 'Date received after cannot be in the future')
                 .build()
         )
         .withField(
-            Component('date', 'date-received-to')
+            Component('date', 'dateReceivedTo')
                 .withProp('label', 'Received before')
                 .withValidator('isValidDate', 'Date received must be valid')
                 .withValidator('isBeforeToday', 'Date received before cannot be in the future')
@@ -30,12 +36,13 @@ module.exports = (options = {}) => {
                 .build()
         )
         .withField(
-            Component('text', 'minister')
+            Component('dropdown', 'signOffMinister')
                 .withProp('label', 'Sign-off Minister')
+                .withProp('choices', 'MINISTERS')
                 .build()
         )
         .withField(
-            Component('checkbox', 'case-status')
+            Component('checkbox', 'caseStatus')
                 .withProp('label', 'Case status')
                 .withProp('choices', [Choice('Active', 'active')])
                 .build()
