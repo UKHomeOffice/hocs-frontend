@@ -676,8 +676,8 @@ const lists = {
             return user.email;
         };
         const getTeam = (teamId) => {
-            const user = sTeams.find(t => t.id === teamId) || {};
-            return user.displayName;
+            const team = sTeams.find(t => t.type === teamId) || {};
+            return team.displayName;
         };
         const getStage = (stageId) => {
             const stage = sStageTypes.find(s => s.value === stageId) || {};
@@ -700,7 +700,7 @@ const lists = {
             return data
                 .sort((first, second) => first.eventTime > second.eventTime ? -1 : 1)
                 .map(({ eventTime, type, userName: authorId, body = {} }) => {
-                    const { caseNote, userUUID: userId, teamUUID: teamId, stage: stageId, ...rest } = body;
+                    const { caseNote, userUUID: userId, teamUUID: teamId, stage: stageId } = body;
                     return {
                         type,
                         title: getTitle(type),
@@ -717,8 +717,7 @@ const lists = {
                             author: authorId ? getUser(authorId) : null,
                             user: userId ? getUser(userId) : null,
                             team: teamId ? getTeam(teamId) : null,
-                            stage: stageId ? getStage(stageId) : null,
-                            ...rest
+                            stage: stageId ? getStage(stageId) : null
                         }
                     };
                 });
