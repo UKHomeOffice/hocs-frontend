@@ -300,7 +300,7 @@ const lists = {
             correspondentName: form['correspondent'],
             topic: form['topic'],
             data: [
-                { signofminister: form['signOffMinister'] }
+                { POTeamName: form['signOffMinister'] }
             ],
             activeOnly: Array.isArray(form['caseStatus']) && form['caseStatus'].includes('active')
         };

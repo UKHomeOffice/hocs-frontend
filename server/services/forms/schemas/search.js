@@ -36,8 +36,9 @@ module.exports = (options = {}) => {
                 .build()
         )
         .withField(
-            Component('text', 'signOffMinister')
+            Component('dropdown', 'signOffMinister')
                 .withProp('label', 'Sign-off Minister')
+                .withProp('choices', 'MINISTERS')
                 .build()
         )
         .withField(
