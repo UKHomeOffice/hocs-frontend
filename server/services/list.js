@@ -291,10 +291,19 @@ const lists = {
         };
     },
     'SEARCH': async ({ user, form }) => {
-        const request = Object.entries(form).reduce((reducer, [key, value]) => {
-            reducer.push({ [key]: value });
-            return reducer;
-        }, []);
+        const request = {
+            caseType: form['caseTypes'],
+            dateReceived: {
+                to: form['dateReceivedTo'],
+                from: form['dateReceivedFrom']
+            },
+            correspondentName: form['correspondent'],
+            topic: form['topic'],
+            data: [
+                { signofminister: form['signOffMinister'] }
+            ],
+            activeOnly: Array.isArray(form['caseStatus']) && form['caseStatus'].includes('active')
+        };
         const response = await caseworkServiceClient.post('/search', request, {
             headers: User.createHeaders(user)
         });
