@@ -664,6 +664,60 @@ const lists = {
             logger.warn({ event: events.FETCH_LIST_RETURN_EMPTY, list: 'DRAFT_TEAMS' });
             return [];
         }
+    },
+    'CASE_NOTES': async ({ caseId, user }) => {
+        const response = await caseworkServiceClient.get(`/case/${caseId}/timeline`, { headers: User.createHeaders(user) });
+        const { data } = response;
+        const sStageTypes = await getListFromCache('stageTypes');
+        const sUsers = await getListFromCache('users');
+        const getUser = (userId) => {
+            const user = sUsers.find(u => u.id === userId) || {};
+            return user.email;
+        };
+        const getStage = (stageId) => {
+            const stage = sStageTypes.find(s => s.value === stageId) || {};
+            return stage.label;
+        };
+        const getTitle = (type) => {
+            const types = {
+                STAGE_ALLOCATED_TO_USER: 'Allocated to User',
+                STAGE_ALLOCATED_TO_TEAM: 'Allocated to Team',
+                CORRESPONDENT_CREATED: 'Correspondent Added',
+                CORRESPONDENT_DELETED: 'Correspondent Removed',
+                CASE_TOPIC_CREATED: 'Topic Added',
+                CASE_TOPIC_DELETED: 'Topic Removed',
+                MANUAL: 'Case Note'
+            };
+            return types.hasOwnProperty(type) ? types[type] : 'System event';
+        };
+        if (Array.isArray(data)) {
+            return data
+                .sort((first, second) => first.eventTime > second.eventTime ? -1 : 1)
+                .map(({ eventTime, type, userName: authorId, stage: stageId, body = {} }) => {
+                    const { caseNote, user: userId } = body;
+                    return {
+                        type,
+                        title: getTitle(type),
+                        body: {
+                            date: Intl.DateTimeFormat('en-GB', {
+                                weekday: 'long',
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric',
+                                hour: 'numeric',
+                                minute: 'numeric'
+                            }).format(new Date(eventTime)),
+                            note: caseNote,
+                            author: authorId ? getUser(authorId) : null,
+                            user: userId ? getUser(userId) : null,
+                            stage: stageId ? getStage(stageId) : null
+                        }
+                    };
+                });
+        } else {
+            logger.warn({ event: events.FETCH_LIST_RETURN_EMPTY, list: 'CASE_NOTES' });
+            return [];
+        }
     }
 };
 
