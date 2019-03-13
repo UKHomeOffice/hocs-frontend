@@ -692,6 +692,7 @@ const lists = {
                 CASE_TOPIC_CREATED: 'Topic Added',
                 CASE_TOPIC_DELETED: 'Topic Removed',
                 CASE_CREATED: 'Case Created',
+                CASE_UPDATED: 'Case Updated',
                 MANUAL: 'Case Note'
             };
             return types.hasOwnProperty(type) ? types[type] : 'System event';
