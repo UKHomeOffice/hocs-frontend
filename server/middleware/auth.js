@@ -15,10 +15,9 @@ function authMiddleware(req, res, next) {
                 uuid: req.get('X-Auth-Subject')
             });
         }
-        logger.info(req.user);
         return next();
     }
-    logger.error({ event: events.AUTH_FAILURE });
+    logger.error({ event_id: events.AUTH_FAILURE });
     next(new AuthenticationError('Unauthorised', 401));
 }
 
@@ -27,7 +26,7 @@ function protect(permission) {
         if (User.hasRole(req.user, permission)) {
             return next();
         }
-        logger.error({ event: events.AUTH_FAILURE, expected: permission, user: req.user.username, roles: req.user.roles });
+        logger.error({ event_id: events.AUTH_FAILURE, expected: permission, user: req.user.username, roles: req.user.roles });
         next(new AuthenticationError('Unauthorised'));
     };
 }

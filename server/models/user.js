@@ -1,5 +1,3 @@
-const logger = require('../libs/logger');
-
 class user {
     constructor({ id, email, username, roles, groups, uuid }) {
         this.id = id;
@@ -8,7 +6,6 @@ class user {
         this.roles = roles ? roles.split(',').map(p => p.trim()) : [];
         this.groups = groups ? groups.split(',').map(g => g.trim()) : [];
         this.uuid = uuid;
-        logger.info({ event: 'DEBUG', roles, groups, uuid });
     }
 
     static hasRole(user, role) {

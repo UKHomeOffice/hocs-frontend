@@ -47,7 +47,7 @@ router.get('/admin/list/flush',
     protect('SYS_ADMIN'),
     (req, res, next) => {
         try {
-            logger.info({ event: 'LIST_SERVICE_FLUSH_CACHE', user: req.user.username });
+            logger.info({ event_id: 'LIST_SERVICE_FLUSH_CACHE', user: req.user.username });
             flushCachedLists();
             res.status(200).send();
         } catch (error) {

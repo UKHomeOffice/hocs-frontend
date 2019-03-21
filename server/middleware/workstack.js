@@ -1,11 +1,10 @@
-const { getList } = require('../services/list');
 const logger = require('../libs/logger');
 const User = require('../models/user');
 const { caseworkServiceClient } = require('../libs/request');
 
 async function userWorkstackMiddleware(req, res, next) {
     try {
-        const response = await getList('WORKSTACK_USER', { ...req.params, user: req.user });
+        const response = await req.fetchList('USER_WORKSTACK', req.params);
         res.locals.workstack = response;
         next();
     } catch (e) {
@@ -15,7 +14,7 @@ async function userWorkstackMiddleware(req, res, next) {
 
 async function teamWorkstackMiddleware(req, res, next) {
     try {
-        const response = await getList('WORKSTACK_TEAM', { ...req.params, user: req.user });
+        const response = await req.fetchList('TEAM_WORKSTACK', req.params);
         res.locals.workstack = response;
         next();
     } catch (e) {
@@ -25,7 +24,7 @@ async function teamWorkstackMiddleware(req, res, next) {
 
 async function workflowWorkstackMiddleware(req, res, next) {
     try {
-        const response = await getList('WORKSTACK_WORKFLOW', { ...req.params, user: req.user });
+        const response = await await req.fetchList('WORKFLOW_WORKSTACK', req.params);
         res.locals.workstack = response;
         next();
     } catch (e) {
@@ -35,7 +34,7 @@ async function workflowWorkstackMiddleware(req, res, next) {
 
 async function stageWorkstackMiddleware(req, res, next) {
     try {
-        const response = await getList('WORKSTACK_STAGE', { ...req.params, user: req.user });
+        const response = await req.fetchList('STAGE_WORKSTACK', req.params);
         res.locals.workstack = response;
         next();
     } catch (e) {
@@ -52,7 +51,7 @@ const allocateUser = async (res, [endpoint, body, headers]) => {
         await caseworkServiceClient.put(endpoint, body, headers);
         return;
     } catch (error) {
-        logger.error({ event: 'ALLOCATION_FAILED', endpoint, body, headers, status: error.response.status });
+        logger.error({ event_id: 'ALLOCATION_FAILED', endpoint, body, headers, status: error.response.status });
         res.locals.notification = 'Failed to allocate all cases';
         return;
     }

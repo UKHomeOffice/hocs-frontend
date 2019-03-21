@@ -16,7 +16,7 @@ const listRepository = {
 
 async function initialise() {
     const listRequests = Object.entries(staticListDefinitions).reduce((reducer, [key, value]) => {
-        logger.info({ event: events.INITIALISE_LIST, list: key });
+        logger.info({ event_id: events.INITIALISE_LIST, list: key });
         reducer.push({ list: key, request: fetchList(value) });
         return reducer;
     }, []);
@@ -32,17 +32,17 @@ async function initialise() {
 }
 
 function fetchList(endpoint, headers, client = infoServiceClient) {
-    logger.debug({ event: events.FETCH_LIST_REQUEST, endpoint });
+    logger.debug({ event_id: events.FETCH_LIST_REQUEST, endpoint });
     return client.get(endpoint, headers);
 }
 
 function handleListSuccess(listId, response) {
-    logger.debug({ event: events.FETCH_LIST_SUCCESS, list: listId });
+    logger.debug({ event_id: events.FETCH_LIST_SUCCESS, list: listId });
     listRepository.addList(listId, { data: response.data, status: 'OK' });
 }
 
 function handleListFailure(listId, error) {
-    logger.error({ event: events.FETCH_LIST_FAILURE, list: listId, stack: error.stack });
+    logger.error({ event_id: events.FETCH_LIST_FAILURE, list: listId, stack: error.stack });
     listRepository.addList(listId, { data: [], status: 'FAILED' });
 }
 
@@ -54,7 +54,7 @@ async function getListFromCache(listId) {
     if (listRepository.hasList(listId) && listRepository.listIsValid(listId)) {
         return listRepository.getList(listId);
     } else {
-        logger.info({ event: 'LIST_SERVICE_CACHE_MISS', list: listId });
+        logger.info({ event_id: 'LIST_SERVICE_CACHE_MISS', list: listId });
         try {
             const response = await fetchList(staticListDefinitions[listId]);
             handleListSuccess(listId, response);
@@ -338,7 +338,7 @@ const lists = {
         if (response.data.caseTypes) {
             return response.data.caseTypes.sort(compareListItems);
         } else {
-            logger.warn({ event: events.FETCH_LIST_RETURN_EMPTY, list: 'CASE_TYPES' });
+            logger.warn({ event_id: events.FETCH_LIST_RETURN_EMPTY, list: 'CASE_TYPES' });
             return [];
         }
     },
@@ -350,7 +350,7 @@ const lists = {
         if (response.data.caseTypes) {
             return response.data.caseTypes.sort(compareListItems);
         } else {
-            logger.warn({ event: events.FETCH_LIST_RETURN_EMPTY, list: 'CASE_TYPES_BULK' });
+            logger.warn({ event_id: events.FETCH_LIST_RETURN_EMPTY, list: 'CASE_TYPES_BULK' });
             return [];
         }
     },
@@ -367,7 +367,7 @@ const lists = {
                     return (firstTimeStamp > secondTimeStamp) ? 1 : -1;
                 });
         } else {
-            logger.warn({ event: events.FETCH_LIST_RETURN_EMPTY, list: 'CASE_DOCUMENT_LIST' });
+            logger.warn({ event_id: events.FETCH_LIST_RETURN_EMPTY, list: 'CASE_DOCUMENT_LIST' });
             return [];
         }
     },
@@ -385,7 +385,7 @@ const lists = {
                 })
                 .map(d => ({ label: d.displayName, value: d.uuid }));
         } else {
-            logger.warn({ event: events.FETCH_LIST_RETURN_EMPTY, list: 'CASE_DOCUMENT_LIST_DRAFT' });
+            logger.warn({ event_id: events.FETCH_LIST_RETURN_EMPTY, list: 'CASE_DOCUMENT_LIST_DRAFT' });
             return [];
         }
     },
@@ -403,7 +403,7 @@ const lists = {
                 })
                 .map(d => ({ label: d.displayName, value: d.uuid }));
         } else {
-            logger.warn({ event: events.FETCH_LIST_RETURN_EMPTY, list: 'CASE_DOCUMENT_LIST_FINAL' });
+            logger.warn({ event_id: events.FETCH_LIST_RETURN_EMPTY, list: 'CASE_DOCUMENT_LIST_FINAL' });
             return [];
         }
     },
@@ -433,7 +433,7 @@ const lists = {
                 }, []);
             return groupedList;
         } else {
-            logger.warn({ event: events.FETCH_LIST_RETURN_EMPTY, list: 'MEMBER_LIST' });
+            logger.warn({ event_id: events.FETCH_LIST_RETURN_EMPTY, list: 'MEMBER_LIST' });
             return [];
         }
     },
@@ -446,7 +446,7 @@ const lists = {
             return response.data.ministers
                 .sort((first, second) => first.label > second.label);
         } else {
-            logger.warn({ event: events.FETCH_LIST_RETURN_EMPTY, list: 'MINISTERS' });
+            logger.warn({ event_id: events.FETCH_LIST_RETURN_EMPTY, list: 'MINISTERS' });
             return [];
         }
     },
@@ -460,7 +460,7 @@ const lists = {
                 { label: response.data.displayName, value: response.data.uuid }
             ];
         } else {
-            logger.warn({ event: events.FETCH_LIST_RETURN_EMPTY, list: 'CASE_STANDARD_LINES' });
+            logger.warn({ event_id: events.FETCH_LIST_RETURN_EMPTY, list: 'CASE_STANDARD_LINES' });
             return [];
         }
     },
@@ -474,7 +474,7 @@ const lists = {
                 { label: response.data.displayName, value: response.data.uuid }
             ];
         } else {
-            logger.warn({ event: events.FETCH_LIST_RETURN_EMPTY, list: 'CASE_TEMPLATES' });
+            logger.warn({ event_id: events.FETCH_LIST_RETURN_EMPTY, list: 'CASE_TEMPLATES' });
             return [];
         }
 
@@ -487,7 +487,7 @@ const lists = {
         if (response.data.topics) {
             return response.data.topics;
         } else {
-            logger.warn({ event: events.FETCH_LIST_RETURN_EMPTY, list: 'CASE_TOPICS' });
+            logger.warn({ event_id: events.FETCH_LIST_RETURN_EMPTY, list: 'CASE_TOPICS' });
             return [];
         }
     },
@@ -503,7 +503,7 @@ const lists = {
                     return parent;
                 }).sort((first, second) => first.label > second.label);
         } else {
-            logger.warn({ event: events.FETCH_LIST_RETURN_EMPTY, list: 'TOPICS_CASETYPE' });
+            logger.warn({ event_id: events.FETCH_LIST_RETURN_EMPTY, list: 'TOPICS_CASETYPE' });
             return [];
         }
     },
@@ -519,7 +519,7 @@ const lists = {
                     return parent;
                 }).sort((first, second) => first.label > second.label);
         } else {
-            logger.warn({ event: events.FETCH_LIST_RETURN_EMPTY, list: 'TOPICS_USER' });
+            logger.warn({ event_id: events.FETCH_LIST_RETURN_EMPTY, list: 'TOPICS_USER' });
             return [];
         }
     },
@@ -531,7 +531,7 @@ const lists = {
         if (response.data.correspondentTypes) {
             return response.data.correspondentTypes.sort((first, second) => first.label > second.label);
         } else {
-            logger.warn({ event: events.FETCH_LIST_RETURN_EMPTY, list: 'CORRESPONDENT_TYPES' });
+            logger.warn({ event_id: events.FETCH_LIST_RETURN_EMPTY, list: 'CORRESPONDENT_TYPES' });
             return [];
         }
     },
@@ -543,7 +543,7 @@ const lists = {
         if (response.data.correspondents) {
             return response.data.correspondents.map(c => ({ label: c.fullname, value: c.uuid }));
         } else {
-            logger.warn({ event: events.FETCH_LIST_RETURN_EMPTY, list: 'CASE_CORRESPONDENTS' });
+            logger.warn({ event_id: events.FETCH_LIST_RETURN_EMPTY, list: 'CASE_CORRESPONDENTS' });
             return [];
         }
     },
@@ -596,7 +596,7 @@ const lists = {
                 })(response.data.activeStages)
             });
         } else {
-            logger.warn({ event: events.FETCH_LIST_RETURN_EMPTY, list: 'CASE_CORRESPONDENTS' });
+            logger.warn({ event_id: events.FETCH_LIST_RETURN_EMPTY, list: 'CASE_CORRESPONDENTS' });
             return [];
         }
     },
@@ -613,7 +613,7 @@ const lists = {
                 }))
                 .sort((first, second) => first.label > second.label);
         } else {
-            logger.warn({ event: events.FETCH_LIST_RETURN_EMPTY, list: 'USERS_IN_TEAM' });
+            logger.warn({ event_id: events.FETCH_LIST_RETURN_EMPTY, list: 'USERS_IN_TEAM' });
             return [];
         }
     },
@@ -629,7 +629,7 @@ const lists = {
                 }))
                 .sort((first, second) => first.label > second.label);
         } else {
-            logger.warn({ event: events.FETCH_LIST_RETURN_EMPTY, list: 'USERS_FOR_CASE' });
+            logger.warn({ event_id: events.FETCH_LIST_RETURN_EMPTY, list: 'USERS_FOR_CASE' });
             return [];
         }
     },
@@ -645,7 +645,7 @@ const lists = {
                 }))
                 .sort((first, second) => first.label > second.label);
         } else {
-            logger.warn({ event: events.FETCH_LIST_RETURN_EMPTY, list: 'PRIVATE_OFFICE_TEAMS' });
+            logger.warn({ event_id: events.FETCH_LIST_RETURN_EMPTY, list: 'PRIVATE_OFFICE_TEAMS' });
             return [];
         }
     },
@@ -661,7 +661,7 @@ const lists = {
                 }))
                 .sort((first, second) => first.label > second.label);
         } else {
-            logger.warn({ event: events.FETCH_LIST_RETURN_EMPTY, list: 'DRAFT_TEAMS' });
+            logger.warn({ event_id: events.FETCH_LIST_RETURN_EMPTY, list: 'DRAFT_TEAMS' });
             return [];
         }
     },
@@ -723,7 +723,7 @@ const lists = {
                     };
                 });
         } else {
-            logger.warn({ event: events.FETCH_LIST_RETURN_EMPTY, list: 'CASE_NOTES' });
+            logger.warn({ event_id: events.FETCH_LIST_RETURN_EMPTY, list: 'CASE_NOTES' });
             return [];
         }
     }
@@ -731,12 +731,12 @@ const lists = {
 
 async function getList(listId, options = {}) {
     try {
-        logger.info({ event: events.FETCH_LIST, list: listId, ...options });
+        logger.info({ event_id: events.FETCH_LIST, list: listId, ...options });
         const list = await lists[listId.toUpperCase()].call(this, options);
         return list;
     } catch (error) {
         logger.error({ message: error.message, stack: error.stack });
-        logger.error({ event: events.FETCH_LIST_FAILURE, list: listId, options });
+        logger.error({ event_id: events.FETCH_LIST_FAILURE, list: listId, options });
         throw new Error('Failed to fetch list', error.response.status);
     }
 }

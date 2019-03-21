@@ -5,7 +5,7 @@ const config = {
     applications: {
         render: {
             clientSide: process.env.USE_CLIENTSIDE || true,
-            js: ['vendor'],
+            js: ['runtime', 'vendor'],
             css: ['main'],
             react: 'main',
             title: 'Correspondence System',

@@ -1,12 +1,12 @@
 const formRepository = require('./forms/index');
-const listService = require('./list');
+const { fetchList } = require('../list/service');
 const { workflowServiceClient, caseworkServiceClient } = require('../libs/request');
 const logger = require('../libs/logger');
 const events = require('../models/events');
 const { FormServiceError } = require('../models/error');
 const User = require('../models/user');
 
-async function getFormSchemaFromWorkflowService(options, user) {
+async function getFormSchemaFromWorkflowService(requestId, options, user) {
     const { caseId, stageId } = options;
     const headers = User.createHeaders(user);
     let response;
@@ -14,113 +14,110 @@ async function getFormSchemaFromWorkflowService(options, user) {
         response = await workflowServiceClient.get(`/case/${caseId}/stage/${stageId}`, { headers });
     } catch (error) {
         switch (error.response.status) {
-        case 401:
-            // handle as error
-            return { error: { status: 401, message: 'You are not authorised to work on this case' } };
-        case 403:
-            // handle not allocated
-            // TODO: Move to form schema
-            /* eslint-disable-next-line no-case-declarations */
-            let usersInTeam;
-            try {
-                const { data: owningTeam } = await caseworkServiceClient.get(`/case/${caseId}/stage/${stageId}/team`, { headers });
-                usersInTeam = await listService.getList('USERS_IN_TEAM', { teamId: owningTeam, user });
-            } catch (error) {
-                usersInTeam = [];
-            }
-            return {
-                form: {
-                    schema: {
-                        title: 'Allocate Case',
-                        action: `/case/${caseId}/stage/${stageId}/allocate/team`,
-                        fields: [
-                            {
-                                component: 'link', props: {
-                                    name: 'allocate-to-me',
-                                    label: 'Allocate to me',
-                                    className: 'govuk-body margin-bottom--small',
-                                    target: `/case/${caseId}/stage/${stageId}/allocate`
-                                }
-                            },
-                            {
-                                component: 'dropdown', props: {
-                                    name: 'user-id',
-                                    label: 'Allocate to a team member',
-                                    className: 'govuk-body',
-                                    choices: usersInTeam
-                                }
-                            }
-                        ],
-                        defaultActionLabel: 'Allocate',
-                        secondaryActions: [
-                            {
-                                component: 'backlink',
-                                validation: [],
-                                props: {
-                                    label: 'Back to dashboard',
-                                    action: '/'
-                                }
-                            }
-                        ]
-                    }
+            case 401:
+                // handle as error
+                return { error: { status: 401, message: 'You are not authorised to work on this case' } };
+            case 403:
+                // handle not allocated
+                // TODO: Move to form schema
+                /* eslint-disable-next-line no-case-declarations */
+                let usersInTeam;
+                try {
+                    const { data: owningTeam } = await caseworkServiceClient.get(`/case/${caseId}/stage/${stageId}/team`, { headers });
+                    usersInTeam = await fetchList(requestId)('USERS_IN_TEAM', User.createHeaders(user), { teamId: owningTeam });
+                } catch (error) {
+                    usersInTeam = [];
                 }
-            };
-        default:
-            return { error: { status: 500 } };
+                return {
+                    form: {
+                        schema: {
+                            title: 'Allocate Case',
+                            action: `/case/${caseId}/stage/${stageId}/allocate/team`,
+                            fields: [
+                                {
+                                    component: 'link', props: {
+                                        name: 'allocate-to-me',
+                                        label: 'Allocate to me',
+                                        className: 'govuk-body margin-bottom--small',
+                                        target: `/case/${caseId}/stage/${stageId}/allocate`
+                                    }
+                                },
+                                {
+                                    component: 'dropdown', props: {
+                                        name: 'user-id',
+                                        label: 'Allocate to a team member',
+                                        className: 'govuk-body',
+                                        choices: usersInTeam
+                                    }
+                                }
+                            ],
+                            defaultActionLabel: 'Allocate',
+                            secondaryActions: [
+                                {
+                                    component: 'backlink',
+                                    validation: [],
+                                    props: {
+                                        label: 'Back to dashboard',
+                                        action: '/'
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                };
+            default:
+                return { error: { status: 500 } };
         }
     }
     const { stageUUID, caseReference, allocationNote } = response.data;
     const mockAllocationNote = allocationNote || null;
     const { schema, data } = response.data.form;
-    await hydrateFields(schema.fields, { ...options, user });
     return { form: { schema, data, meta: { caseReference, stageUUID, allocationNote: mockAllocationNote } } };
 }
 
 async function getFormSchemaForCase(options) {
     const form = await formRepository.getFormForCase(options);
-    await hydrateFields(form.schema.fields, options);
     return form;
 }
 
 async function getFormSchema(options) {
     const form = await formRepository.getForm(options);
-    await hydrateFields(form.schema.fields, options);
     return form;
 }
 
-function hydrateFields(fields, options) {
-    logger.debug({ event: events.HYDRATE_FORM_FIELDS });
-    const promises = fields.map(async field => {
-        if (field.props && field.props.choices) {
-            if (typeof field.props.choices === 'string') {
-                if (field.component === 'add-document') {
-                    try {
-                        field.props.whitelist = await listService.getList(field.props.whitelist);
-                    } catch (error) {
-                        logger.error(error);
-                        field.props.whitelist = [];
-                    }
-                } else {
-                    try {
-                        field.props.choices = await listService.getList(field.props.choices, { ...options });
-                    } catch (error) {
-                        logger.error(error);
-                        field.props.choices = [];
-                    }
+const hydrateFields = async (req, res, next) => {
+    if (req.form) {
+        const { schema } = req.form;
+        logger.debug({ requestId: req.requestId, event_id: events.HYDRATE_FORM_FIELDS, count: schema.fields.length });
+        const requests = schema.fields.map(async field => {
+            if (field.props) {
+                const { choices, items } = field.props;
+                if (choices && typeof choices === 'string') {
+                    field.props.choices = await req.fetchList(
+                        choices,
+                        req.params
+                    );
+                } else if (items && typeof items === 'string') {
+                    field.props.items = await req.fetchList(
+                        items,
+                        req.params
+                    );
                 }
             }
-        }
-        return field;
-    });
-    return Promise.all(promises);
-}
+            return field;
+        });
+        await Promise.all(requests);
+        next();
+    } else {
+        next();
+    }
+};
 
 const getForm = (form, options) => {
     return async (req, res, next) => {
-        logger.info({ event: 'GET_FORM', user: req.user.username });
+        logger.info({ event_id: 'GET_FORM', user: req.user.username });
         try {
             const { schema, data, meta } = await form({ ...options }).build();
-            await hydrateFields(schema.fields, { user: req.user });
             req.form = { schema, data, meta };
             next();
         } catch (error) {
@@ -131,25 +128,25 @@ const getForm = (form, options) => {
 
 const getFormForAction = async (req, res, next) => {
     const { workflow, context, action } = req.params;
-    logger.info({ event: events.ACTION_FORM, workflow, context, action, user: req.user.username });
+    logger.info({ event_id: events.ACTION_FORM, workflow, context, action, user: req.user.username });
     try {
         const form = await getFormSchema({ context: 'ACTION', workflow, entity: context, action, user: req.user });
         req.form = form;
         next();
     } catch (error) {
-        logger.error({ event: events.ACTION_FORM_FAILURE, message: error.message, stack: error.stack });
+        logger.error({ event_id: events.ACTION_FORM_FAILURE, message: error.message, stack: error.stack });
         return next(new FormServiceError('Failed to fetch form'));
     }
 };
 
 const getFormForCase = async (req, res, next) => {
     try {
-        logger.info({ event: events.CASE_FORM, ...req.params, user: req.user.username });
+        logger.info({ event_id: events.CASE_FORM, ...req.params, user: req.user.username });
         const form = await getFormSchemaForCase({ ...req.params, user: req.user });
         req.form = form;
         next();
     } catch (error) {
-        logger.error({ event: events.CASE_FORM_FAILURE, message: error.message, stack: error.stack });
+        logger.error({ event_id: events.CASE_FORM_FAILURE, message: error.message, stack: error.stack });
         return next(new FormServiceError('Failed to fetch form'));
     }
 };
@@ -157,8 +154,8 @@ const getFormForCase = async (req, res, next) => {
 const getFormForStage = async (req, res, next) => {
     const { user } = req;
     try {
-        logger.info({ event: events.WORKFLOW_FORM, ...req.params, user: req.user.username });
-        const { form, error } = await getFormSchemaFromWorkflowService(req.params, user);
+        logger.info({ event_id: events.WORKFLOW_FORM, ...req.params, user: req.user.username });
+        const { form, error } = await getFormSchemaFromWorkflowService(req.requestId, req.params, user);
         if (error) {
             return next(new FormServiceError('Failed to fetch form', error.status));
         } else {
@@ -166,7 +163,7 @@ const getFormForStage = async (req, res, next) => {
             next();
         }
     } catch (error) {
-        logger.error({ event: events.WORKFLOW_FORM_FAILURE, message: error.message, stack: error.stack });
+        logger.error({ event_id: events.WORKFLOW_FORM_FAILURE, message: error.message, stack: error.stack });
         return next(new FormServiceError('Failed to fetch form'));
     }
 };
@@ -175,5 +172,6 @@ module.exports = {
     getForm,
     getFormForAction,
     getFormForCase,
-    getFormForStage
+    getFormForStage,
+    hydrateFields
 };

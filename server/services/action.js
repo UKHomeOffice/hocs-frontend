@@ -78,7 +78,7 @@ const actions = {
         };
         try {
             if (form && form.action) {
-                logger.info({ event: events.ACTION, user: user.username, action: form.action });
+                logger.info({ event_id: events.ACTION, user: user.username, action: form.action });
                 let response;
                 let clientResponse;
                 switch (form.action) {
@@ -119,7 +119,7 @@ const actions = {
                 return handleActionSuccess(null, workflow, form);
             }
         } catch (e) {
-            logger.error({ event: events.ACTION_FAILURE, user: user.username, action: form.action });
+            logger.error({ event_id: events.ACTION_FAILURE, user: user.username, action: form.action });
             throw new ActionError(e);
         }
     },
@@ -129,7 +129,7 @@ const actions = {
         };
         try {
             if (form && form.action && entity) {
-                logger.info({ event: events.CASE_ACTION, user: user.username, action: form.action, case: caseId });
+                logger.info({ event_id: events.CASE_ACTION, user: user.username, action: form.action, case: caseId });
                 switch (form.action) {
                 case actionTypes.ADD_DOCUMENT:
                     await addDocument(`/case/${caseId}/document`, form, headers);
@@ -174,7 +174,7 @@ const actions = {
                 return ({ callbackUrl: `/case/${caseId}/stage/${stageId}` });
             }
         } catch (error) {
-            logger.error({ event: events.CASE_ACTION_FAILURE, user: user.username, action: form.action, case: caseId });
+            logger.error({ event_id: events.CASE_ACTION_FAILURE, user: user.username, action: form.action, case: caseId });
             throw new ActionError('Failed to perform action', error.response.status);
         }
     },
@@ -182,12 +182,12 @@ const actions = {
         let headers = {
             headers: User.createHeaders(user)
         };
-        logger.info({ event: events.WORKFLOW_ACTION, user: user.username, action: actionTypes.UPDATE_CASE, case: caseId });
+        logger.info({ event_id: events.WORKFLOW_ACTION, user: user.username, action: actionTypes.UPDATE_CASE, case: caseId });
         try {
             const response = await updateCase({ caseId, stageId, form }, headers);
             return handleWorkflowSuccess(response, { caseId, stageId });
         } catch (error) {
-            logger.error({ event: events.WORKFLOW_ACTION_FAILURE, user: user.uuid, action: actionTypes.UPDATE_CASE, case: caseId });
+            logger.error({ event_id: events.WORKFLOW_ACTION_FAILURE, user: user.uuid, action: actionTypes.UPDATE_CASE, case: caseId });
             throw new ActionError('Failed to update case', error.response.status);
         }
     }
