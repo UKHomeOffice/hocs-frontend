@@ -1,6 +1,7 @@
 const { caseworkService, infoService, documentService } = require('../clients/index');
 const listService = require('../list');
-const { Choice } = require('../services/forms/component-builder');
+const statics = require('./adapters/statics');
+const caseTypeAdapter = require('./adapters/case-type');
 const workstack = require('./adapters/workstacks');
 const topicAdapter = require('./adapters/topics');
 const usersAdapter = require('./adapters/users');
@@ -10,8 +11,11 @@ const membersAdapter = require('./adapters/members');
 const documentsAdapter = require('./adapters/documents');
 const caseNoteAdapter = require('./adapters/case-notes');
 const caseSummaryAdapter = require('./adapters/case-summary');
-
-const byLabel = (a, b) => a.label.localeCompare(b.label);
+const ministerAdapter = require('./adapters/ministers');
+const {
+    caseCorrespondentAdapter,
+    correspondentTypeAdapter
+} = require('./adapters/correspondents');
 
 module.exports = {
     lists: {
@@ -19,43 +23,35 @@ module.exports = {
             client: 'INFO',
             endpoint: '/team',
             type: listService.types.STATIC,
-            adapter: data => data
-                .map(({ type, displayName }) => ({ key: type, value: displayName }))
+            adapter: statics.teamsAdapter
         },
         S_USERS: {
             client: 'INFO',
             endpoint: '/users',
             type: listService.types.STATIC,
-            adapter: data => data
-                .map(({ id, username }) => ({ key: id, value: username }))
+            adapter: statics.usersAdapter
         },
         S_CASETYPES: {
             client: 'INFO',
             endpoint: '/caseType',
             type: listService.types.STATIC,
-            adapter: data => data.caseTypes
-                .map(({ label, value }) => ({ key: value, value: label }))
+            adapter: statics.caseTypesAdapter
         },
         S_STAGETYPES: {
             client: 'INFO',
             endpoint: '/stageType',
             type: listService.types.STATIC,
-            adapter: data => data.stageTypes
-                .map(({ label, value }) => ({ key: value, value: label }))
+            adapter: statics.stageTypesAdapter
         },
         CASE_TYPES: {
             client: 'INFO',
             endpoint: '/caseType?bulkOnly=false',
-            adapter: data => data.caseTypes
-                .sort(byLabel)
-                .map(({ label, value }) => Choice(label, value))
+            adapter: caseTypeAdapter
         },
         CASE_TYPES_BULK: {
             client: 'INFO',
             endpoint: '/caseType?bulkOnly=true',
-            adapter: data => data.caseTypes
-                .sort(byLabel)
-                .map(({ label, value }) => Choice(label, value))
+            adapter: caseTypeAdapter
         },
         DASHBOARD: {
             client: 'CASEWORK',
@@ -105,12 +101,12 @@ module.exports = {
         CASE_CORRESPONDENTS: {
             client: 'CASEWORK',
             endpoint: '/case/${caseId}/correspondent',
-            adapter: data => data.map(c => ({ label: c.fullname, value: c.uuid }))
+            adapter: caseCorrespondentAdapter
         },
         CORRESPONDENT_TYPES: {
             client: 'INFO',
             endpoint: '/correspondentType',
-            adapter: data => data.map().sort(byLabel)
+            adapter: correspondentTypeAdapter
         },
         TOPICS_USER: {
             client: 'INFO',
@@ -139,7 +135,7 @@ module.exports = {
         MINISTERS: {
             client: 'INFO',
             endpoint: '/minister',
-            adapter: data => data.ministers.sort(byLabel)
+            adapter: ministerAdapter
         },
         MEMBER_LIST: {
             client: 'INFO',

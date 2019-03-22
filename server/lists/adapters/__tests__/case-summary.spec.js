@@ -42,7 +42,7 @@ describe('Case Summary Adapter', () => {
                 { label: 'Test additional field date', value: '01-01-2020', type: 'date' }
             ],
             primaryTopic: { label: 'Topic A' },
-            primaryCorrespondent: { fullName: 'Test User' },
+            primaryCorrespondent: { fullname: 'Test Correspondent' },
             deadlines: {
                 1: '01-01-2020',
                 2: '01-01-2019',

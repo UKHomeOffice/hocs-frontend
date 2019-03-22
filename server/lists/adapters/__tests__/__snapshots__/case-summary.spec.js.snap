@@ -30,7 +30,7 @@ Object {
       "value": "1/1/2020",
     },
   ],
-  "primaryCorrespondent": undefined,
+  "primaryCorrespondent": "Test Correspondent",
   "primaryTopic": "Topic A",
   "stages": Array [
     Object {

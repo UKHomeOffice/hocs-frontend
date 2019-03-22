@@ -20,7 +20,7 @@ const getPrimaryCorrespondent = (correspondent) => correspondent ? correspondent
 
 const formatDate = (date) => date ? Intl.DateTimeFormat('en-GB').format(new Date(date)) : null;
 
-module.exports = (summary, { fromStaticList }) => ({
+module.exports = async (summary, { fromStaticList }) => ({
     case: {
         received: formatDate(summary.dateReceived),
         deadline: formatDate(summary.caseDeadline)
