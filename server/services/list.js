@@ -299,9 +299,9 @@ const lists = {
             },
             correspondentName: form['correspondent'],
             topic: form['topic'],
-            data: [
-                { POTeamName: form['signOffMinister'] }
-            ],
+            data: {
+                POTeamName: form['signOffMinister']
+            },
             activeOnly: Array.isArray(form['caseStatus']) && form['caseStatus'].includes('active')
         };
         const response = await caseworkServiceClient.post('/search', request, {
