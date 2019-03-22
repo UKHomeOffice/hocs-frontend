@@ -7,172 +7,172 @@ const usersAdapter = require('./adapters/users');
 const teamsAdapter = require('./adapters/teams');
 const templatesAdapter = require('./adapters/templates');
 const membersAdapter = require('./adapters/members');
-const documentsAdapter = require('./adapters/document');
+const documentsAdapter = require('./adapters/documents');
 const caseNoteAdapter = require('./adapters/case-notes');
 const caseSummaryAdapter = require('./adapters/case-summary');
 
 const byLabel = (a, b) => a.label.localeCompare(b.label);
 
 module.exports = {
-    Lists: {
+    lists: {
         S_TEAMS: {
-            Client: 'INFO',
-            Endpoint: '/team',
-            Type: listService.types.STATIC,
-            Adapter: data => data
+            client: 'INFO',
+            endpoint: '/team',
+            type: listService.types.STATIC,
+            adapter: data => data
                 .map(({ type, displayName }) => ({ key: type, value: displayName }))
         },
         S_USERS: {
-            Client: 'INFO',
-            Endpoint: '/users',
-            Type: listService.types.STATIC,
-            Adapter: data => data
+            client: 'INFO',
+            endpoint: '/users',
+            type: listService.types.STATIC,
+            adapter: data => data
                 .map(({ id, username }) => ({ key: id, value: username }))
         },
         S_CASETYPES: {
-            Client: 'INFO',
-            Endpoint: '/caseType',
-            Type: listService.types.STATIC,
-            Adapter: data => data.caseTypes
+            client: 'INFO',
+            endpoint: '/caseType',
+            type: listService.types.STATIC,
+            adapter: data => data.caseTypes
                 .map(({ label, value }) => ({ key: value, value: label }))
         },
         S_STAGETYPES: {
-            Client: 'INFO',
-            Endpoint: '/stageType',
-            Type: listService.types.STATIC,
-            Adapter: data => data.stageTypes
+            client: 'INFO',
+            endpoint: '/stageType',
+            type: listService.types.STATIC,
+            adapter: data => data.stageTypes
                 .map(({ label, value }) => ({ key: value, value: label }))
         },
         CASE_TYPES: {
-            Client: 'INFO',
-            Endpoint: '/caseType?bulkOnly=false',
-            Adapter: data => data.caseTypes
+            client: 'INFO',
+            endpoint: '/caseType?bulkOnly=false',
+            adapter: data => data.caseTypes
                 .sort(byLabel)
                 .map(({ label, value }) => Choice(label, value))
         },
         CASE_TYPES_BULK: {
-            Client: 'INFO',
-            Endpoint: '/caseType?bulkOnly=true',
-            Adapter: data => data.caseTypes
+            client: 'INFO',
+            endpoint: '/caseType?bulkOnly=true',
+            adapter: data => data.caseTypes
                 .sort(byLabel)
                 .map(({ label, value }) => Choice(label, value))
         },
         DASHBOARD: {
-            Client: 'CASEWORK',
-            Endpoint: '/stage',
-            Adapter: workstack.dashboardAdapter
+            client: 'CASEWORK',
+            endpoint: '/stage',
+            adapter: workstack.dashboardAdapter
         },
         USER_WORKSTACK: {
-            Client: 'CASEWORK',
-            Endpoint: '/stage',
-            Adapter: workstack.userAdapter
+            client: 'CASEWORK',
+            endpoint: '/stage',
+            adapter: workstack.userAdapter
         },
         TEAM_WORKSTACK: {
-            Client: 'CASEWORK',
-            Endpoint: '/stage',
-            Adapter: workstack.teamAdapter
+            client: 'CASEWORK',
+            endpoint: '/stage',
+            adapter: workstack.teamAdapter
         },
         WORKFLOW_WORKSTACK: {
-            Client: 'CASEWORK',
-            Endpoint: '/stage',
-            Adapter: workstack.workflowAdapter
+            client: 'CASEWORK',
+            endpoint: '/stage',
+            adapter: workstack.workflowAdapter
         },
         STAGE_WORKSTACK: {
-            Client: 'CASEWORK',
-            Endpoint: '/stage',
-            Adapter: workstack.stageAdapter
+            client: 'CASEWORK',
+            endpoint: '/stage',
+            adapter: workstack.stageAdapter
         },
         DRAFT_TEAMS: {
-            Client: 'INFO',
-            Endpoint: '/teams/drafter',
-            Adapter: teamsAdapter
+            client: 'INFO',
+            endpoint: '/teams/drafter',
+            adapter: teamsAdapter
         },
         PRIVATE_OFFICE_TEAMS: {
-            Client: 'INFO',
-            Endpoint: '/teams?unit=PRIVATE_OFFICE',
-            Adapter: teamsAdapter
+            client: 'INFO',
+            endpoint: '/teams?unit=PRIVATE_OFFICE',
+            adapter: teamsAdapter
         },
         USERS_FOR_CASE: {
-            Client: 'INFO',
-            Endpoint: '/case/${caseId}/stage/${stageId}/team/members',
-            Adapter: usersAdapter
+            client: 'INFO',
+            endpoint: '/case/${caseId}/stage/${stageId}/team/members',
+            adapter: usersAdapter
         },
         USERS_IN_TEAM: {
-            Client: 'INFO',
-            Endpoint: '/teams/${teamId}/members',
-            Adapter: usersAdapter
+            client: 'INFO',
+            endpoint: '/teams/${teamId}/members',
+            adapter: usersAdapter
         },
         CASE_CORRESPONDENTS: {
-            Client: 'CASEWORK',
-            Endpoint: '/case/${caseId}/correspondent',
-            Adapter: data => data.map(c => ({ label: c.fullname, value: c.uuid }))
+            client: 'CASEWORK',
+            endpoint: '/case/${caseId}/correspondent',
+            adapter: data => data.map(c => ({ label: c.fullname, value: c.uuid }))
         },
         CORRESPONDENT_TYPES: {
-            Client: 'INFO',
-            Endpoint: '/correspondentType',
-            Adapter: data => data.map().sort(byLabel)
+            client: 'INFO',
+            endpoint: '/correspondentType',
+            adapter: data => data.map().sort(byLabel)
         },
         TOPICS_USER: {
-            Client: 'INFO',
-            Endpoint: '/topics/MIN',
-            Adapter: topicAdapter
+            client: 'INFO',
+            endpoint: '/topics/MIN',
+            adapter: topicAdapter
         },
         TOPICS_CASETYPE: {
-            Client: 'INFO',
-            Endpoint: '/case/${caseId}/topiclist',
-            Adapter: topicAdapter
+            client: 'INFO',
+            endpoint: '/case/${caseId}/topiclist',
+            adapter: topicAdapter
         },
         CASE_TOPICS: {
-            Client: 'CASEWORK',
-            Endpoint: '/case/${caseId}/topic'
+            client: 'CASEWORK',
+            endpoint: '/case/${caseId}/topic'
         },
         CASE_TEMPLATES: {
-            Client: 'CASEWORK',
-            Endpoint: '/case/${caseId}/topic',
-            Adapter: templatesAdapter
+            client: 'CASEWORK',
+            endpoint: '/case/${caseId}/topic',
+            adapter: templatesAdapter
         },
         CASE_STANDARD_LINES: {
-            Client: 'CASEWORK',
-            Endpoint: '/case/${caseId}/topic',
-            Adapter: templatesAdapter
+            client: 'CASEWORK',
+            endpoint: '/case/${caseId}/topic',
+            adapter: templatesAdapter
         },
         MINISTERS: {
-            Client: 'INFO',
-            Endpoint: '/minister',
-            Adapter: data => data.ministers.sort(byLabel)
+            client: 'INFO',
+            endpoint: '/minister',
+            adapter: data => data.ministers.sort(byLabel)
         },
         MEMBER_LIST: {
-            Client: 'INFO',
-            Endpoint: '/member',
-            Adapter: membersAdapter
+            client: 'INFO',
+            endpoint: '/member',
+            adapter: membersAdapter
         },
         CASE_DOCUMENT_LIST: {
-            Client: 'DOCUMENT',
-            Endpoint: '/document/case/${caseId}/${type}',
-            Adapter: documentsAdapter
+            client: 'DOCUMENT',
+            endpoint: '/document/case/${caseId}/${type}',
+            adapter: documentsAdapter
         },
         CASE_DOCUMENT_LIST_FINAL: {
-            Client: 'DOCUMENT',
-            Endpoint: '/document/case/${caseId}/FINAL',
-            Adapter: documentsAdapter
+            client: 'DOCUMENT',
+            endpoint: '/document/case/${caseId}/FINAL',
+            adapter: documentsAdapter
         },
         CASE_DOCUMENT_LIST_DRAFT: {
-            Client: 'DOCUMENT',
-            Endpoint: '/document/case/${caseId}/DRAFT',
-            Adapter: documentsAdapter
+            client: 'DOCUMENT',
+            endpoint: '/document/case/${caseId}/DRAFT',
+            adapter: documentsAdapter
         },
         CASE_NOTES: {
-            Client: 'CASEWORK',
-            Endpoint: '/case/${caseId/timeline}',
-            Adapter: caseNoteAdapter
+            client: 'CASEWORK',
+            endpoint: '/case/${caseId/timeline}',
+            adapter: caseNoteAdapter
         },
         CASE_SUMMARY: {
-            Client: 'CASEWORK',
-            Endpoint: '/case/${caseId}/summary',
-            Adapter: caseSummaryAdapter
+            client: 'CASEWORK',
+            endpoint: '/case/${caseId}/summary',
+            adapter: caseSummaryAdapter
         },
     },
-    Clients: {
+    clients: {
         CASEWORK: caseworkService,
         INFO: infoService,
         DOCUMENT: documentService

@@ -4,7 +4,7 @@ const isUnallocated = user => user === null;
 const isOverdue = deadline => deadline && new Date(deadline) < Date.now();
 const getOverdue = data => {
     const overdueCases = data.filter(({ deadline }) => isOverdue(deadline));
-    return overdueCases.length > 0 ? overdueCases.count : null;
+    return overdueCases.length;
 };
 
 const formatDate = (date) => date ? Intl.DateTimeFormat('en-GB').format(new Date(date)) : null;
@@ -32,7 +32,7 @@ class Card {
         };
     }
     incrementOverdue() { this.tags.overdue++; }
-    incrementUnallocated() { this.tags.allocted++; }
+    incrementUnallocated() { this.tags.allocated++; }
     incrementCount() { this.count++; }
 }
 

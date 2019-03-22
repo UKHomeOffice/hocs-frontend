@@ -1,3 +1,1 @@
-module.exports = data => ([
-    { label: data.displayName, value: data.uuid }
-]);
+module.exports = async ({ displayName, uuid }) => ([{ label: displayName, value: uuid }]);

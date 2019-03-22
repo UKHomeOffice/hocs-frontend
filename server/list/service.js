@@ -1,6 +1,6 @@
 const listType = require('./types');
 const { createRepository } = require('./repository');
-const logger = require('../libs/logger');
+const getLogger = require('../libs/logger.v2');
 const User = require('../models/user');
 
 const configureEndpoint = (endpoint, data, baseUrl = '') => {
@@ -18,99 +18,118 @@ const configureEndpoint = (endpoint, data, baseUrl = '') => {
     return baseUrl + endpoint;
 };
 
-const listRepository = createRepository();
-const clientRepository = createRepository();
-const listCache = createRepository();
+let listRepository;
+let clientRepository;
+let listCache;
 
-const initialise = async ({ Lists = {}, Clients = {} }) => {
+const applyAdapter = async (response, adapter, options) => {
+    if (adapter) {
+        return await adapter(response, { ...options });
+    }
+    return response;
+}
 
-    logger.debug({ event_id: 'INITIALISE_LIST_SERVICE', clients: Object.keys(Clients).length, lists: Object.keys(Lists).length });
+const initialise = async (lists = {}, clients = {}, initialState = {}) => {
 
-    Object.entries(Clients).forEach(([name, client]) => {
+    const logger = getLogger();
+
+    listRepository = initialState.listRepository || createRepository();
+    clientRepository = initialState.listRepository || createRepository();
+    listCache = initialState.listRepository || createRepository();
+
+    logger.debug('INITIALISE_LIST_SERVICE', { lists: Object.keys(lists).length, clients: Object.keys(clients).length });
+
+    Object.entries(clients).forEach(([name, client]) => {
         clientRepository.store(name, client);
     });
 
-    await Object.entries(Lists).forEach(async ([id, { Endpoint, Type = listType.DYNAMIC, Client, Adapter, Data }]) => {
-        listRepository.store(id, { Endpoint, Type, Client, Adapter });
-        if (Type === listType.STATIC) {
-            if (Data) {
-                listCache.store(id, Data);
-            } else {
-                try {
-                    const client = clientRepository.fetch(Client);
-                    const { data } = await client.get(Endpoint);
-                    if (data) {
-                        const processedData = Adapter ? Adapter(data) : data;
-                        listCache.store(id, processedData);
-                        logger.debug({ event_id: 'FETCH_STATIC_LIST_SUCCESS', list: id, client: Client, endpoint: Endpoint });
+    const handleFailure = (listId) => listCache.store(listId, null);
+
+    await Promise.all(Object.entries(lists).map(async ([listId, { endpoint, type = listType.DYNAMIC, client, adapter, data }]) => {
+        try {
+            listRepository.store(listId, { endpoint, type, client, adapter });
+            if (type === listType.STATIC) {
+                if (data) {
+                    listCache.store(listId, data);
+                } else {
+                    const clientInstance = clientRepository.fetch(client);
+                    let response;
+                    try {
+                        response = await clientInstance.get(endpoint);
+                    } catch (error) {
+                        logger.error('INITIALISE_STATIC_LIST_REQUEST_FAILURE', { list: listId, status: error.response.status });
+                        return handleFailure(listId);
                     }
-                } catch (error) {
-                    logger.error({ event_id: 'FETCH_STATIC_LIST_FAILURE', status: error.response ? error.response.status : null });
-                    listCache.store(id, null);
+                    const listData = await applyAdapter(response.data, adapter);
+                    listCache.store(listId, listData);
+                    logger.debug('INITIALISE_STATIC_LIST_SUCCESS', { list: listId, client: client, endpoint: endpoint });
                 }
             }
+        } catch (error) {
+            logger.error('INITIALISE_STATIC_LIST_FAILURE', { list: listId, message: error.message, stack: error.stack });
+            handleFailure(listId);
         }
-    });
-
+    }));
 };
 
-const fetchList = (requestId, user) => async (id, options) => {
+const getInstance = (requestId, user) => {
 
-    const handleFailure = () => {
-        logger.error({ requestId, event_id: 'FETCH_LIST_RETURN_EMPTY' });
-        return [];
-    };
+    const logger = getLogger(requestId);
 
-    const handleSuccess = async (response, adapter, options) => {
-        logger.debug({ requestId, event_id: 'FETCH_LIST_SUCCESS', count: Array.isArray(response) ? response.length : 'N/A' });
-        if (adapter) {
-            return await adapter(response, {
-                ...options, user,
-                fromStaticList: fromStaticList(requestId)
-            });
-        }
-        return response;
-    };
+    const handleFailure = () => null;
 
-    try {
-        if (listRepository.hasResource(id)) {
-            const list = listRepository.fetch(id);
-            if (list.Type === listType.STATIC && listCache.hasResource(id)) {
-                return listCache.fetch(id);
-            }
-            logger.info({ requestId, event_id: 'FETCH_LIST', list: id, client: list.Client, endpoint: list.Endpoint });
-            const client = clientRepository.fetch(list.Client);
-            const endpoint = options ? configureEndpoint(list.Endpoint, options) : list.Endpoint;
-            const { data } = await client.get(endpoint, { headers: { ...User.createHeaders(user), 'X-Correlation-Id': requestId } });
-            if (list.Type === listType.STATIC && data) {
-                listCache.store(id, data);
-            }
-            return await handleSuccess(data, list.Adapter, options);
+    const fromStaticList = async (listId, key) => {
+        const defaultValue = null;
+        if (listCache.hasResource(listId)) {
+            const item = await fetchList(listId);
+            const result = item.find(item => item.key === key);
+            return result ? result.value : defaultValue;
         } else {
-            logger.error({ requestId, event_id: 'LIST_NOT_IMPLEMENTED', list: id });
+            return defaultValue;
+        }
+    };
+
+    const fetchList = async (listId, options) => {
+        try {
+            if (listRepository.hasResource(listId)) {
+                const { endpoint, type, client, adapter } = listRepository.fetch(listId);
+                if (type === listType.STATIC && listCache.hasResource(listId)) {
+                    return listCache.fetch(listId);
+                }
+                logger.info('FETCH_LIST', { list: listId, client, endpoint });
+                const clientInstance = clientRepository.fetch(client);
+                const configuredEndpoint = options ? configureEndpoint(endpoint, options) : endpoint;
+                let response;
+                try {
+                    response = await clientInstance.get(configuredEndpoint, { headers: { ...User.createHeaders(user), 'X-Correlation-listId': requestId } });
+                } catch (error) {
+                    logger.error('FETCH_LIST_REQUEST_FAILURE', { list: listId, status: error.response.status });
+                    return handleFailure(listId);
+                }
+                const listData =  await applyAdapter(response.data, adapter, { ...options, user, fromStaticList });
+                if (type === listType.STATIC && listData) {
+                    listCache.store(listId, listData);
+                }
+                return listData;
+            } else {
+                logger.error('LIST_NOT_IMPLEMENTED', { list: listId });
+                return handleFailure();
+            }
+        } catch (error) {
+            logger.error('FETCH_LIST_FAILURE', { list: listId, message: error.message, stack: error.stack });
             return handleFailure();
         }
-    } catch (error) {
-        logger.error({ requestId, event_id: 'FETCH_LIST_FAILURE', stack: error.stack, list: id, options: JSON.stringify(options) });
-        return handleFailure();
-    }
+    };
+
+    return fetchList;
 
 };
 
-const fromStaticList = (requestId) => async (list, key) => {
-    const defaultValue = null;
-    if (listCache.hasResource(list)) {
-        const item = await fetchList(requestId)(list);
-        const result = item.find(item => item.key === key);
-        return result ? result.value : defaultValue;
-    } else {
-        return defaultValue;
-    }
-};
+const flush = (key) => listCache.flush(key);
 
 module.exports = {
-    init: initialise,
-    fetchList,
-    fromStaticList,
+    initialise,
+    getInstance,
+    flush,
     types: listType
 };

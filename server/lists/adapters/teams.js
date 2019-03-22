@@ -1,6 +1,6 @@
-const byLabel = (a, b) => a.label.toUpperCase().localeCompare(b.label.toUpperCase());
+const byLabel = (a, b) => a.label.localeCompare(b.label);
 
-module.exports = data => data
+module.exports = async (data) => data
     .map(({ displayName, type }) => ({
         label: displayName,
         value: type

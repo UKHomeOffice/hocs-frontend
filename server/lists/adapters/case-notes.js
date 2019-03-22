@@ -1,18 +1,3 @@
-const getUser = (id, users) => {
-    const user = users.find(user => user.id === id);
-    return user ? user.email : null;
-};
-
-const getTeam = (id, teams) => {
-    const team = teams.find(team => team.type === id);
-    return team ? team.displayName : null;
-};
-
-const getStage = (id, stages) => {
-    const stage = stages.find(stage => stage.value === id);
-    return stage ? stage.label : null;
-};
-
 const getTitle = (type) => {
     const types = {
         STAGE_ALLOCATED_TO_USER: 'Allocated to User',
@@ -41,20 +26,22 @@ const formatDate = (date) => {
     }).format(new Date(date));
 };
 
-module.exports = async (data, { getStaticList }) => data
-    .sort.sort((a, b) => Date.parse(a.eventTime) > Date.parse(b.eventTime))
-    .map(({ eventTime, type, userName: authorId, body = {} }) => {
-        const { caseNote, userUUID: userId, teamUUID: teamId, stage: stageId } = body;
-        return {
-            type,
-            title: getTitle(type),
-            body: {
-                date: formatDate(eventTime),
-                note: caseNote,
-                author: getUser(authorId, getStaticList('S_USERS')),
-                user: getUser(userId, getStaticList('S_USERS')),
-                team: getTeam(teamId, getStaticList('S_TEAMS')),
-                stage: getStage(stageId, getStaticList('S_STAGETYPES'))
-            }
-        };
-    });
+module.exports = async (data, { fromStaticList }) => {
+    return data
+        .sort((a, b) => Date.parse(a.eventTime) > Date.parse(b.eventTime))
+        .map(({ eventTime, type, userName: authorId, body = {} }) => {
+            const { caseNote, userUUID: userId, teamUUID: teamId, stage: stageId } = body;
+            return {
+                type,
+                title: getTitle(type),
+                body: {
+                    date: formatDate(eventTime),
+                    note: caseNote,
+                    author: fromStaticList('S_USERS', authorId),
+                    user: fromStaticList('S_USERS', userId),
+                    team: fromStaticList('S_TEAMS', teamId),
+                    stage: fromStaticList('S_STAGETYPES', stageId)
+                }
+            };
+        });
+};

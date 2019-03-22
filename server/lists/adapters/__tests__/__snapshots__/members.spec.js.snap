@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Members Adapter should transform member data 1`] = `
+Array [
+  Object {
+    "label": "A",
+    "options": Array [
+      Object {
+        "label": "Member 1",
+        "value": "MEMBER_1",
+      },
+      Object {
+        "label": "Member 2",
+        "value": "MEMBER_2",
+      },
+    ],
+  },
+  Object {
+    "label": "B",
+    "options": Array [
+      Object {
+        "label": "Member 3",
+        "value": "MEMBER_3",
+      },
+    ],
+  },
+  Object {
+    "label": "C",
+    "options": Array [
+      Object {
+        "label": "Member 4",
+        "value": "MEMBER_4",
+      },
+    ],
+  },
+]
+`;

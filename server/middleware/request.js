@@ -3,7 +3,7 @@ const events = require('../models/events');
 const { ValidationError } = require('../models/error');
 const { isProduction } = require('../config');
 const uuid = require('uuid/v4');
-const { fetchList } = require('../list/service');
+const listService = require('../list/');
 
 /* eslint-disable-next-line  no-unused-vars*/
 function apiErrorMiddleware(err, req, res, next) {
@@ -43,7 +43,7 @@ function initRequest(req, res, next) {
     const requestId = uuid();
     res.locals = {};
     req.requestId = requestId;
-    req.fetchList = fetchList(requestId, req.user);
+    req.fetchList = listService.getInstance(requestId, req.user);
     logger(requestId).info('REQUEST_RECEIVED', { method: req.method, endpoint: req.originalUrl });
     next();
 }

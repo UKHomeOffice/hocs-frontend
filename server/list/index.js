@@ -1,7 +1,7 @@
-const { init, fetchList, types } = require('./service');
+const { initialise, getInstance, types } = require('./service');
 
 module.exports = {
-    init,
-    fetchList,
+    initialise,
+    getInstance,
     types
 };

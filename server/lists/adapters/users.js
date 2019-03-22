@@ -1,7 +1,7 @@
 const byLabel = (a, b) => a.label.toUpperCase().localeCompare(b.label.toUpperCase());
 
-module.exports = (data, { options }) => data
-    .filter(u => u.email !== options.user.email)
+module.exports = async (data, { user }) => data
+    .filter(u => u.id !== user.id)
     .map(({ id, firstName, lastName, email }) => ({
         label: `${firstName} ${lastName} (${email})`,
         value: id

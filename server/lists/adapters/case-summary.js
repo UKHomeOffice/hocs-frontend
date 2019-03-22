@@ -1,45 +1,33 @@
-const getUser = (id, users) => {
-    const user = users.find(user => user.id === id);
-    return user ? user.email : null;
-};
-
-const getTeam = (id, teams) => {
-    const team = teams.find(team => team.type === id);
-    return team ? team.displayName : null;
-};
-
-const getStage = (id, stages) => {
-    const stage = stages.find(stage => stage.value === id);
-    return stage ? stage.label : null;
-};
-
 const createAdditionalFields = (additionalFields = []) => additionalFields.map(({ label, value, type }) => type === 'date' ? ({ label, value: formatDate(value) }) : ({ label, value }));
-const createDeadlines = (deadlines, stageTypes) => Object.entries(deadlines)
-    .sort((first, second) => (first[1] > second[1]) ? 1 : -1)
+
+const createDeadlines = (deadlines, fromStaticList) => Object.entries(deadlines)
+    .sort((a, b) => Date.parse(a[1]) > Date.parse(b[1]) ? 1 : 0)
     .map(([stageId, deadline]) => ({
-        label: getStage(stageId, stageTypes),
+        label: fromStaticList('S_STAGETYPES', stageId),
         value: formatDate(deadline)
     }));
-const getActiveStages = (deadlines, users, teams, stages) => deadlines
+
+const getActiveStages = (deadlines, fromStaticList) => deadlines
     .map(({ stage: stageId, assignedToUserUUID: userId, assignedToTeamUUID: teamId }) => ({
-        stage: getStage(stageId, stages),
-        assignedUser: getUser(userId, users),
-        assignedTeam: getTeam(teamId, teams)
+        stage: fromStaticList('S_STAGETYPES', stageId),
+        assignedUser: fromStaticList('S_USERS', userId),
+        assignedTeam: fromStaticList('S_TEAMS', teamId)
     }));
 
 const getPrimaryTopic = (topic) => topic ? topic.label : null;
+
 const getPrimaryCorrespondent = (correspondent) => correspondent ? correspondent.fullname : null;
 
 const formatDate = (date) => date ? Intl.DateTimeFormat('en-GB').format(new Date(date)) : null;
 
-module.exports = (summary, { getStaticList }) => ({
+module.exports = (summary, { fromStaticList }) => ({
     case: {
-        received: formatDate(summary.DateReceived),
+        received: formatDate(summary.dateReceived),
         deadline: formatDate(summary.caseDeadline)
     },
     additionalFields: createAdditionalFields(summary.additionalFields),
     primaryTopic: getPrimaryTopic(summary.primaryTopic),
     primaryCorrespondent: getPrimaryCorrespondent(summary.primaryCorrespondent),
-    deadlines: createDeadlines(summary.deadlines, getStaticList('S_STAGETYPES')),
-    stages: getActiveStages(summary.activeStages, getStaticList('S_USERS'), getStaticList('S_TEAMS'), getStaticList('S_STAGETYPES'))
+    deadlines: createDeadlines(summary.deadlines, fromStaticList),
+    stages: getActiveStages(summary.activeStages, fromStaticList)
 });

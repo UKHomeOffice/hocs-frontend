@@ -1,0 +1,315 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Dashboard Adapter should transform a stage array to a dashboard schema 1`] = `
+Object {
+  "teams": Array [
+    Card {
+      "count": 3,
+      "label": "MOCK_TEAM",
+      "tags": Object {
+        "allocated": 1,
+        "overdue": 2,
+      },
+      "type": "team",
+      "value": 1,
+    },
+    Card {
+      "count": 1,
+      "label": "MOCK_TEAM",
+      "tags": Object {
+        "allocated": 1,
+        "overdue": 0,
+      },
+      "type": "team",
+      "value": 2,
+    },
+  ],
+  "user": Array [
+    Card {
+      "count": 1,
+      "label": "Cases",
+      "tags": Object {
+        "allocated": undefined,
+        "overdue": 2,
+      },
+      "type": undefined,
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`Team Workstack Adapter should transform a stage array to a team workstack schema 1`] = `
+Object {
+  "allocateToTeamEndpoint": "/allocate/team",
+  "allocateToUserEndpoint": "/allocate/user",
+  "allocateToWorkstackEndpoint": "/unallocate/",
+  "dashboard": Array [
+    Card {
+      "count": 1,
+      "label": "MOCK_CASETYPE",
+      "tags": Object {
+        "allocated": 1,
+        "overdue": 1,
+      },
+      "type": "workflow",
+      "value": "C",
+    },
+    Card {
+      "count": 4,
+      "label": "MOCK_CASETYPE",
+      "tags": Object {
+        "allocated": 2,
+        "overdue": 2,
+      },
+      "type": "workflow",
+      "value": "B",
+    },
+  ],
+  "items": Array [
+    Object {
+      "assignedTeamDisplay": "MOCK_TEAM",
+      "caseReference": "A/1234568/19",
+      "caseType": "C",
+      "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "deadline": "01-01-1900",
+      "deadlineDisplay": "1/1/1900",
+      "stageType": "A",
+      "stageTypeDisplay": "MOCK_STAGETYPE",
+      "teamUUID": 2,
+      "userUUID": null,
+    },
+    Object {
+      "assignedTeamDisplay": "MOCK_TEAM",
+      "assignedUserDisplay": "MOCK_USER",
+      "caseReference": "A/1234568/19",
+      "caseType": "B",
+      "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "deadline": "01-01-2200",
+      "deadlineDisplay": "1/1/2200",
+      "stageType": "A",
+      "stageTypeDisplay": "MOCK_STAGETYPE",
+      "teamUUID": 2,
+      "userUUID": 2,
+    },
+    Object {
+      "assignedTeamDisplay": "MOCK_TEAM",
+      "caseReference": "A/1234569/19",
+      "caseType": "B",
+      "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "deadline": "01-01-1900",
+      "deadlineDisplay": "1/1/1900",
+      "stageType": "A",
+      "stageTypeDisplay": "MOCK_STAGETYPE",
+      "teamUUID": 2,
+      "userUUID": null,
+    },
+    Object {
+      "assignedTeamDisplay": "MOCK_TEAM",
+      "assignedUserDisplay": "MOCK_USER",
+      "caseReference": "A/1234569/19",
+      "caseType": "B",
+      "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "deadline": "01-01-2200",
+      "deadlineDisplay": "1/1/2200",
+      "stageType": "A",
+      "stageTypeDisplay": "MOCK_STAGETYPE",
+      "teamUUID": 2,
+      "userUUID": 1,
+    },
+    Object {
+      "assignedTeamDisplay": "MOCK_TEAM",
+      "caseReference": "A/1234570/19",
+      "caseType": "B",
+      "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "deadline": "01-01-1900",
+      "deadlineDisplay": "1/1/1900",
+      "stageType": "A",
+      "stageTypeDisplay": "MOCK_STAGETYPE",
+      "teamUUID": 2,
+      "userUUID": null,
+    },
+  ],
+  "label": "MOCK_TEAM",
+  "teamMembers": Array [],
+}
+`;
+
+exports[`User Workstack Adapter should transform a stage array to a user workstack schema 1`] = `
+Object {
+  "allocateToWorkstackEndpoint": "/unallocate/",
+  "items": Array [
+    Object {
+      "assignedTeamDisplay": "MOCK_TEAM",
+      "assignedUserDisplay": "MOCK_USER",
+      "caseType": "A",
+      "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "deadline": "01-01-2200",
+      "deadlineDisplay": "1/1/2200",
+      "stageType": "A",
+      "stageTypeDisplay": "MOCK_STAGETYPE",
+      "teamUUID": 1,
+      "userUUID": 1,
+    },
+  ],
+  "label": "My Cases",
+}
+`;
+
+exports[`Workflow Workstack Adapter should transform a stage array to a workflow workstack schema 1`] = `
+Object {
+  "allocateToTeamEndpoint": "/allocate/team",
+  "allocateToUserEndpoint": "/allocate/user",
+  "allocateToWorkstackEndpoint": "/unallocate/",
+  "dashboard": Array [
+    Card {
+      "count": 4,
+      "label": "MOCK_STAGETYPE",
+      "tags": Object {
+        "allocated": 2,
+        "overdue": 2,
+      },
+      "type": "stage",
+      "value": "A",
+    },
+    Card {
+      "count": 1,
+      "label": "MOCK_STAGETYPE",
+      "tags": Object {
+        "allocated": 1,
+        "overdue": 1,
+      },
+      "type": "stage",
+      "value": "B",
+    },
+  ],
+  "items": Array [
+    Object {
+      "assignedTeamDisplay": "MOCK_TEAM",
+      "assignedUserDisplay": "MOCK_USER",
+      "caseReference": "A/1234568/19",
+      "caseType": "B",
+      "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "deadline": "01-01-2200",
+      "deadlineDisplay": "1/1/2200",
+      "stageType": "A",
+      "stageTypeDisplay": "MOCK_STAGETYPE",
+      "teamUUID": 2,
+      "userUUID": 2,
+    },
+    Object {
+      "assignedTeamDisplay": "MOCK_TEAM",
+      "caseReference": "A/1234569/19",
+      "caseType": "B",
+      "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "deadline": "01-01-1900",
+      "deadlineDisplay": "1/1/1900",
+      "stageType": "A",
+      "stageTypeDisplay": "MOCK_STAGETYPE",
+      "teamUUID": 2,
+      "userUUID": null,
+    },
+    Object {
+      "assignedTeamDisplay": "MOCK_TEAM",
+      "assignedUserDisplay": "MOCK_USER",
+      "caseReference": "A/1234569/19",
+      "caseType": "B",
+      "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "deadline": "01-01-2200",
+      "deadlineDisplay": "1/1/2200",
+      "stageType": "A",
+      "stageTypeDisplay": "MOCK_STAGETYPE",
+      "teamUUID": 2,
+      "userUUID": 1,
+    },
+    Object {
+      "assignedTeamDisplay": "MOCK_TEAM",
+      "caseReference": "A/1234569/19",
+      "caseType": "B",
+      "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "deadline": "01-01-1900",
+      "deadlineDisplay": "1/1/1900",
+      "stageType": "B",
+      "stageTypeDisplay": "MOCK_STAGETYPE",
+      "teamUUID": 2,
+      "userUUID": null,
+    },
+    Object {
+      "assignedTeamDisplay": "MOCK_TEAM",
+      "caseReference": "A/1234570/19",
+      "caseType": "B",
+      "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "deadline": "01-01-1900",
+      "deadlineDisplay": "1/1/1900",
+      "stageType": "A",
+      "stageTypeDisplay": "MOCK_STAGETYPE",
+      "teamUUID": 2,
+      "userUUID": null,
+    },
+  ],
+  "label": "MOCK_CASETYPE",
+  "teamMembers": Array [],
+}
+`;
+
+exports[`Workflow Workstack Adapter should transform a stage array to a workflow workstack schema 2`] = `
+Object {
+  "allocateToTeamEndpoint": "/allocate/team",
+  "allocateToUserEndpoint": "/allocate/user",
+  "allocateToWorkstackEndpoint": "/unallocate/",
+  "items": Array [
+    Object {
+      "assignedTeamDisplay": "MOCK_TEAM",
+      "assignedUserDisplay": "MOCK_USER",
+      "caseReference": "A/1234568/19",
+      "caseType": "B",
+      "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "deadline": "01-01-2200",
+      "deadlineDisplay": "1/1/2200",
+      "stageType": "A",
+      "stageTypeDisplay": "MOCK_STAGETYPE",
+      "teamUUID": 2,
+      "userUUID": 2,
+    },
+    Object {
+      "assignedTeamDisplay": "MOCK_TEAM",
+      "caseReference": "A/1234569/19",
+      "caseType": "B",
+      "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "deadline": "01-01-1900",
+      "deadlineDisplay": "1/1/1900",
+      "stageType": "A",
+      "stageTypeDisplay": "MOCK_STAGETYPE",
+      "teamUUID": 2,
+      "userUUID": null,
+    },
+    Object {
+      "assignedTeamDisplay": "MOCK_TEAM",
+      "assignedUserDisplay": "MOCK_USER",
+      "caseReference": "A/1234569/19",
+      "caseType": "B",
+      "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "deadline": "01-01-2200",
+      "deadlineDisplay": "1/1/2200",
+      "stageType": "A",
+      "stageTypeDisplay": "MOCK_STAGETYPE",
+      "teamUUID": 2,
+      "userUUID": 1,
+    },
+    Object {
+      "assignedTeamDisplay": "MOCK_TEAM",
+      "caseReference": "A/1234570/19",
+      "caseType": "B",
+      "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "deadline": "01-01-1900",
+      "deadlineDisplay": "1/1/1900",
+      "stageType": "A",
+      "stageTypeDisplay": "MOCK_STAGETYPE",
+      "teamUUID": 2,
+      "userUUID": null,
+    },
+  ],
+  "label": "MOCK_STAGETYPE",
+  "teamMembers": Array [],
+}
+`;
