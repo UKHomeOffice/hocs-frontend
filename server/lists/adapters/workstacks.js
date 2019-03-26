@@ -1,5 +1,6 @@
 const byUser = (userId) => ({ userUUID }) => userUUID === userId;
 const byCaseReference = (a, b) => a.caseReference.localeCompare(b.caseReference);
+const byLabel = (a, b) => a.label.localeCompare(b.label);
 const isUnallocated = user => user === null;
 const isOverdue = deadline => deadline && new Date(deadline) < Date.now();
 const getOverdue = data => {
@@ -110,7 +111,8 @@ const teamAdapter = async (data, { fromStaticList, teamId }) => {
                 }));
             }
             return cards;
-        }, []);
+        }, [])
+        .sort(byLabel);
     return {
         label: await fromStaticList('S_TEAMS', teamId),
         items: workstackData,
@@ -149,7 +151,8 @@ const workflowAdapter = async (data, { fromStaticList, teamId, workflowId }) => 
                 }));
             }
             return cards;
-        }, []);
+        }, [])
+        .sort(byLabel);
     return {
         label: await fromStaticList('S_CASETYPES', workflowId),
         items: workstackData,

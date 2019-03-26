@@ -28,11 +28,10 @@
 // ];
 
 const logger = require('../libs/logger');
-const { getList } = require('../services/list');
 
 async function getCaseNotes(req, res, next) {
     try {
-        const results = await getList('CASE_NOTES', { user: req.user, ...req.params });
+        const results = await req.fetchList('CASE_NOTES', req.params);
         res.locals.caseNotes = results;
     } catch (error) {
         logger.error({ message: error.message, stack: error.stack });

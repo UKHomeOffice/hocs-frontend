@@ -1,4 +1,3 @@
-const { getList } = require('../services/list');
 const { docsServiceClient } = require('../libs/request');
 const logger = require('../libs/logger');
 const events = require('../models/events');
@@ -50,7 +49,7 @@ async function getPdfDocumentPreview(req, res, next) {
 
 async function getDocumentList(req, res, next) {
     try {
-        const response = await getList('CASE_DOCUMENT_LIST', { caseId: req.params.caseId, user: req.user });
+        const response = await req.fetchList('CASE_DOCUMENT_LIST', req.params);
         res.locals.documents = response;
     } catch (error) {
         res.locals.documents = [];

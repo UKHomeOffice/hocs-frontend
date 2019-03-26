@@ -1,5 +1,5 @@
 const formRepository = require('./forms/index');
-const { fetchList } = require('../list/service');
+const { fetchList } = require('./list/service');
 const { workflowServiceClient, caseworkServiceClient } = require('../libs/request');
 const logger = require('../libs/logger');
 const events = require('../models/events');
@@ -24,7 +24,7 @@ async function getFormSchemaFromWorkflowService(requestId, options, user) {
                 let usersInTeam;
                 try {
                     const { data: owningTeam } = await caseworkServiceClient.get(`/case/${caseId}/stage/${stageId}/team`, { headers });
-                    usersInTeam = await fetchList(requestId)('USERS_IN_TEAM', User.createHeaders(user), { teamId: owningTeam });
+                    usersInTeam = await fetchList(requestId)('USERS_IN_TEAM', { teamId: owningTeam });
                 } catch (error) {
                     usersInTeam = [];
                 }
@@ -106,7 +106,11 @@ const hydrateFields = async (req, res, next) => {
             }
             return field;
         });
-        await Promise.all(requests);
+        try {
+            await Promise.all(requests);
+        } catch (error) {
+            next();
+        }
         next();
     } else {
         next();

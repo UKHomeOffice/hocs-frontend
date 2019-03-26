@@ -1,15 +1,15 @@
 const listType = require('./types');
 const { createRepository } = require('./repository');
-const getLogger = require('../libs/logger.v2');
-const User = require('../models/user');
+const getLogger = require('../../libs/logger.v2');
+const User = require('../../models/user');
 
 const configureEndpoint = (endpoint, data, baseUrl = '') => {
     if (data) {
         const configuredEndpoint = Object.keys(data).reduce((processed, key) => {
             const value = data[key];
             if (value) {
-                const matcher = new RegExp(/${key}/gi);
-                processed.replace(matcher, value);
+                const matcher = new RegExp('\\${' + key + '}', 'gi');
+                return processed.replace(matcher, value);
             }
             return processed;
         }, endpoint);
@@ -76,8 +76,6 @@ const getInstance = (requestId, user) => {
 
     const logger = getLogger(requestId);
 
-    const handleFailure = () => null;
-
     const fromStaticList = async (listId, key) => {
         const defaultValue = null;
         if (listCache.hasResource(listId)) {
@@ -103,21 +101,21 @@ const getInstance = (requestId, user) => {
                 try {
                     response = await clientInstance.get(configuredEndpoint, { headers: { ...User.createHeaders(user), 'X-Correlation-listId': requestId } });
                 } catch (error) {
-                    logger.error('FETCH_LIST_REQUEST_FAILURE', { list: listId, status: error.response.status });
-                    return handleFailure(listId);
+                    logger.error('FETCH_LIST_REQUEST_FAILURE', { list: listId, message: error.message, stack: error.stack });
+                    throw new Error('Failed to request list');
                 }
-                const listData =  await applyAdapter(response.data, adapter, { ...options, user, fromStaticList });
+                const listData = await applyAdapter(response.data, adapter, { ...options, user, fromStaticList });
                 if (type === listType.STATIC && listData) {
                     listCache.store(listId, listData);
                 }
                 return listData;
             } else {
                 logger.error('LIST_NOT_IMPLEMENTED', { list: listId });
-                return handleFailure();
+                throw new Error('List not implemented');
             }
         } catch (error) {
             logger.error('FETCH_LIST_FAILURE', { list: listId, message: error.message, stack: error.stack });
-            return handleFailure();
+            throw new Error('Unable to fetch list');
         }
     };
 

@@ -7,8 +7,8 @@ async function userWorkstackMiddleware(req, res, next) {
         const response = await req.fetchList('USER_WORKSTACK', req.params);
         res.locals.workstack = response;
         next();
-    } catch (e) {
-        next(e);
+    } catch (error) {
+        next(error);
     }
 }
 
@@ -17,8 +17,8 @@ async function teamWorkstackMiddleware(req, res, next) {
         const response = await req.fetchList('TEAM_WORKSTACK', req.params);
         res.locals.workstack = response;
         next();
-    } catch (e) {
-        next(e);
+    } catch (error) {
+        next(error);
     }
 }
 
@@ -27,8 +27,8 @@ async function workflowWorkstackMiddleware(req, res, next) {
         const response = await await req.fetchList('WORKFLOW_WORKSTACK', req.params);
         res.locals.workstack = response;
         next();
-    } catch (e) {
-        next(e);
+    } catch (error) {
+        next(error);
     }
 }
 
@@ -37,8 +37,18 @@ async function stageWorkstackMiddleware(req, res, next) {
         const response = await req.fetchList('STAGE_WORKSTACK', req.params);
         res.locals.workstack = response;
         next();
-    } catch (e) {
-        next(e);
+    } catch (error) {
+        next(error);
+    }
+}
+
+async function getTeamMembers(req, res, next) {
+    try {
+        const response = await req.fetchList('USERS_IN_TEAM', req.params);
+        res.locals.workstack.teamMembers = response;
+        next();
+    } catch (error) {
+        next(error);
     }
 }
 
@@ -113,6 +123,7 @@ module.exports = {
     teamWorkstackMiddleware,
     workflowWorkstackMiddleware,
     stageWorkstackMiddleware,
+    getTeamMembers,
     workstackApiResponseMiddleware,
     allocateToTeam,
     allocateToUser,

@@ -1,7 +1,6 @@
 const actionService = require('../services/action');
 const { caseworkServiceClient } = require('../libs/request');
 const User = require('../models/user');
-const { getList } = require('../services/list');
 
 async function caseResponseMiddleware(req, res, next) {
     const { form, user } = req;
@@ -25,7 +24,7 @@ async function caseApiResponseMiddleware(req, res, next) {
 
 async function caseSummaryMiddleware(req, res, next) {
     try {
-        const summary = await getList('CASE_SUMMARY', { ...req.params, user: req.user });
+        const summary = await req.fetchList('CASE_SUMMARY', req.params);
         res.locals.summary = summary;
         next();
     } catch (e) {

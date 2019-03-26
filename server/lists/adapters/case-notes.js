@@ -27,9 +27,9 @@ const formatDate = (date) => {
 };
 
 module.exports = async (data, { fromStaticList }) => {
-    return data
+    return await Promise.all(data
         .sort((a, b) => Date.parse(a.eventTime) > Date.parse(b.eventTime))
-        .map(({ eventTime, type, userName: authorId, body = {} }) => {
+        .map(async ({ eventTime, type, userName: authorId, body = {} }) => {
             const { caseNote, userUUID: userId, teamUUID: teamId, stage: stageId } = body;
             return {
                 type,
@@ -37,11 +37,11 @@ module.exports = async (data, { fromStaticList }) => {
                 body: {
                     date: formatDate(eventTime),
                     note: caseNote,
-                    author: fromStaticList('S_USERS', authorId),
-                    user: fromStaticList('S_USERS', userId),
-                    team: fromStaticList('S_TEAMS', teamId),
-                    stage: fromStaticList('S_STAGETYPES', stageId)
+                    author: await fromStaticList('S_USERS', authorId),
+                    user: await fromStaticList('S_USERS', userId),
+                    team: await fromStaticList('S_TEAMS', teamId),
+                    stage: await fromStaticList('S_STAGETYPES', stageId)
                 }
             };
-        });
+        }));
 };

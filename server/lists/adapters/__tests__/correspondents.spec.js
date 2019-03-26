@@ -2,11 +2,13 @@ const { caseCorrespondentAdapter, correspondentTypeAdapter } = require('../corre
 
 describe('Case Correspondent Adapter', () => {
     it('should transform and sort case correspondent data', async () => {
-        const mockData = [
-            { fullname: 'Correspondent A', uuid: 1 },
-            { fullname: 'Correspondent B', uuid: 2 },
-            { fullname: 'Correspondent C', uuid: 3 }
-        ];
+        const mockData = {
+            correspondents: [
+                { fullname: 'Correspondent A', uuid: 1 },
+                { fullname: 'Correspondent B', uuid: 2 },
+                { fullname: 'Correspondent C', uuid: 3 }
+            ]
+        };
 
         const results = await caseCorrespondentAdapter(mockData);
         expect(results).toBeDefined();

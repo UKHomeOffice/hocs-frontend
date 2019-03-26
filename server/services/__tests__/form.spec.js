@@ -9,10 +9,6 @@ jest.mock('../../libs/request.js', () => ({
     }
 }));
 
-jest.mock('../list.js', () => ({
-    getList: jest.fn(() => Promise.resolve())
-}));
-
 const mockActionForm = {
     schema: {
         fields: []

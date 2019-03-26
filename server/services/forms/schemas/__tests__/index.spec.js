@@ -15,10 +15,6 @@ jest.mock('../../../../libs/request.js', () => ({
     }
 }));
 
-jest.mock('../../../../services/list.js', () => ({
-    getList: jest.fn(() => Promise.resolve([]))
-}));
-
 describe('Form schema definitions', async () => {
     await Object.entries(formRepository).map(async ([label, form]) => {
         it(`${label} should be a valid schema definition `, async () => {

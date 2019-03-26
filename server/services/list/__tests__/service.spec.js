@@ -1,5 +1,5 @@
 const listService = require('../service');
-const User = require('../../models/user');
+const User = require('../../../models/user');
 
 describe('List Service', () => {
 
@@ -58,9 +58,7 @@ describe('List Service', () => {
 
             listService.initialise(lists, clients);
             const fetchList = await listService.getInstance(mockUUID, mockUser);
-            const result = await fetchList('test');
-
-            expect(result).toBeNull();
+            await expect(fetchList('test')).rejects.toThrow('Unable to fetch list');
         });
 
         it('should transform the response with an adapter if supplied', async () => {
@@ -107,10 +105,7 @@ describe('List Service', () => {
 
             listService.initialise(lists, clients);
             const fetchList = await listService.getInstance(mockUUID, mockUser);
-            const result = await fetchList('test');
-
-            expect(result).toBeDefined();
-            expect(result).toEqual(null);
+            await expect(fetchList('test')).rejects.toThrow('Unable to fetch list');
         });
 
         it('should cache static lists on initialisation', async () => {
@@ -226,9 +221,7 @@ describe('List Service', () => {
 
             listService.initialise(lists, clients);
             const fetchList = await listService.getInstance(mockUUID, mockUser);
-            const result = await fetchList('test');
-
-            expect(result).toBeNull();
+            await expect(fetchList('test')).rejects.toThrow('Unable to fetch list');
         });
 
         it('should supply a "fromStaticList" utility method to adapters to fetch values from static lists', async () => {

@@ -9,10 +9,6 @@ jest.mock('../../services/action.js', () => ({
     performAction: jest.fn()
 }));
 
-jest.mock('../../services/list.js', () => ({
-    getList: jest.fn()
-}));
-
 jest.mock('../../libs/request.js', () => ({
     caseworkServiceClient: {
         get: jest.fn()
@@ -20,7 +16,6 @@ jest.mock('../../libs/request.js', () => ({
 }));
 
 const { caseworkServiceClient } = require('../../libs/request');
-const listService = require('../../services/list');
 
 describe('Case middleware', () => {
 
@@ -143,7 +138,13 @@ describe('Case middleware', () => {
                     id: 'test',
                     roles: [],
                     groups: []
-                }
+                },
+                fetchList: jest.fn(async (list) => {
+                    if (list === 'CASE_SUMMARY') {
+                        return Promise.resolve('MOCK_SUMMARY');
+                    }
+                    return Promise.reject();
+                })
             };
 
             res = {
@@ -154,7 +155,6 @@ describe('Case middleware', () => {
         });
 
         it('should add summary to res.locals if returned from call to API', async () => {
-            listService.getList.mockImplementation(() => Promise.resolve('MOCK_SUMMARY'));
             await caseSummaryMiddleware(req, res, next);
             expect(res.locals.summary).toBeDefined();
             expect(res.locals.summary).toEqual('MOCK_SUMMARY');
@@ -163,7 +163,7 @@ describe('Case middleware', () => {
 
         it('should call next with error if call to API fails', async () => {
             const mockError = new Error('Something went wrong');
-            listService.getList.mockImplementation(() => Promise.reject(mockError));
+            req.fetchList.mockImplementation(() => Promise.reject(mockError));
             await caseSummaryMiddleware(req, res, next);
             expect(res.locals.summary).not.toBeDefined();
             expect(next).toHaveBeenCalled();

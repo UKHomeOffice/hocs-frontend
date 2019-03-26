@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const applicationRouter = require('./server/routes/index');
 const logger = require('./server/libs/logger');
-const listService = require('./server/list');
+const listService = require('./server/services/list');
 const listConfiguration = require('./server/lists');
 
 const app = express();

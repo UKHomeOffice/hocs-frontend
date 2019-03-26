@@ -6,7 +6,8 @@ const { dashboardMiddleware: getDashboardData } = require('../middleware/dashboa
 const { getForm } = require('../services/form');
 const form = require('../services/forms/schemas/dashboard-search');
 const { ValidationError } = require('../models/error');
-const { getList } = require('../services/list');
+// TODO: Remove temp stub
+const getList = async () => { };
 
 router.all(['/', '/api/form'],
     getForm(form, { submissionUrl: '/search/reference' }),
@@ -20,6 +21,7 @@ router.post(['/search/reference', '/api/search/reference'],
     validateForm,
     async (req, res, next) => {
         try {
+            // TODO: Call client direct
             const results = await getList('SEARCH_REFERENCE', { user: req.user, form: req.form.data });
             res.locals.workstack = results;
             next();

@@ -5,20 +5,12 @@ const {
     apiGetDocumentList
 } = require('../document');
 
-jest.mock('../../services/list', () => ({
-    getList: jest.fn()
-}));
-
 jest.mock('../../libs/request.js', () => ({
     docsServiceClient: {
         get: jest.fn()
     }
 }));
-
-const { getList } = require('../../services/list');
 const { docsServiceClient } = require('../../libs/request');
-
-
 
 describe('Document middleware', () => {
 
@@ -106,21 +98,33 @@ describe('Document middleware', () => {
 
         beforeEach(() => {
             next.mockReset();
-            req = { params: { caseId: '1234' } };
+            req = {
+                params: {
+                    caseId: '1234'
+                },
+                fetchList: jest.fn(async (list) => {
+                    if (list === 'CASE_DOCUMENT_LIST') {
+                        return Promise.resolve('MOCK_DOCUMENT_LIST');
+                    }
+                    return Promise.reject();
+                })
+            };
             res = { locals: {} };
 
         });
 
-        it('should create a documents object on res.locals', async () => {
-            getList.mockImplementation(() => Promise.resolve('MOCK_DOCUMENT_LIST'));
+        it('should create a documents list on res.locals', async () => {
             await getDocumentList(req, res, next);
             expect(res.locals.documents).toBeDefined();
             expect(res.locals.documents).toEqual('MOCK_DOCUMENT_LIST');
+            expect(next).toHaveBeenCalled();
         });
 
-        it('should call next with an error if request fails', async () => {
-            getList.mockImplementation(() => Promise.reject(new Error()));
+        it('should create an empty documents list on res.locals if fetchList fails', async () => {
+            req.fetchList.mockImplementation(() => Promise.reject());
             await getDocumentList(req, res, next);
+            expect(res.locals.documents).toBeDefined();
+            expect(res.locals.documents).toEqual([]);
             expect(next).toHaveBeenCalled();
         });
 

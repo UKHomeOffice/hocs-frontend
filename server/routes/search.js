@@ -5,7 +5,8 @@ const { validationMiddleware: validateForm } = require('../middleware/validation
 const { getForm, hydrateFields } = require('../services/form');
 const form = require('../services/forms/schemas/search');
 const { ValidationError } = require('../models/error');
-const { getList } = require('../services/list');
+// TODO: Remove temp stub
+const getList = async () => { };
 
 router.all(['/search', '/api/search', '/api/form/search'], getForm(form, { submissionUrl: '/search/results' }), hydrateFields);
 router.get('/api/form/search', (req, res) => res.json(req.form));
@@ -19,6 +20,7 @@ router.post(['/search/results', '/api/search/results'],
     (req, res, next) => Object.keys(req.form.data).length > 0 ? next() : res.json({ errors: { form: 'No search criteria specified' } }),
     async (req, res, next) => {
         try {
+            // TODO: Call client direct
             const results = await getList('SEARCH', { user: req.user, form: req.form.data });
             res.locals.workstack = results;
             next();

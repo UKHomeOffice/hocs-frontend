@@ -1,7 +1,7 @@
 const { caseworkService, infoService, documentService } = require('../clients/index');
-const listService = require('../list');
+const listService = require('../services/list');
 const statics = require('./adapters/statics');
-const caseTypeAdapter = require('./adapters/case-type');
+const caseTypeAdapter = require('./adapters/case-types');
 const workstack = require('./adapters/workstacks');
 const topicAdapter = require('./adapters/topics');
 const usersAdapter = require('./adapters/users');
@@ -120,16 +120,17 @@ module.exports = {
         },
         CASE_TOPICS: {
             client: 'CASEWORK',
-            endpoint: '/case/${caseId}/topic'
+            endpoint: '/case/${caseId}/topic',
+            adapter: (data) => data.topics
         },
         CASE_TEMPLATES: {
             client: 'CASEWORK',
-            endpoint: '/case/${caseId}/topic',
+            endpoint: '/case/${caseId}/template',
             adapter: templatesAdapter
         },
         CASE_STANDARD_LINES: {
             client: 'CASEWORK',
-            endpoint: '/case/${caseId}/topic',
+            endpoint: '/case/${caseId}/standardLine',
             adapter: templatesAdapter
         },
         MINISTERS: {
@@ -159,7 +160,7 @@ module.exports = {
         },
         CASE_NOTES: {
             client: 'CASEWORK',
-            endpoint: '/case/${caseId/timeline}',
+            endpoint: '/case/${caseId}/timeline',
             adapter: caseNoteAdapter
         },
         CASE_SUMMARY: {
