@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const { getOriginalDocument, getPdfDocument, getPdfDocumentPreview } = require('../middleware/document');
-//const logger = require('../libs/logger');
 
 router.get('/:caseId/document/:documentId/preview', getPdfDocumentPreview);
 

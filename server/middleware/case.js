@@ -1,5 +1,5 @@
 const actionService = require('../services/action');
-const { caseworkServiceClient } = require('../libs/request');
+const { caseworkService } = require('../clients')
 const User = require('../models/user');
 
 async function caseResponseMiddleware(req, res, next) {
@@ -7,8 +7,8 @@ async function caseResponseMiddleware(req, res, next) {
     try {
         const { callbackUrl } = await actionService.performAction('CASE', { ...req.params, form, user });
         return res.redirect(callbackUrl);
-    } catch (e) {
-        return next(e);
+    } catch (error) {
+        return next(error);
     }
 }
 
@@ -17,18 +17,18 @@ async function caseApiResponseMiddleware(req, res, next) {
     try {
         const { callbackUrl } = await actionService.performAction('CASE', { ...req.params, form, user });
         return res.status(200).json({ redirect: callbackUrl });
-    } catch (e) {
-        next(e);
+    } catch (error) {
+        next(error);
     }
 }
 
 async function caseSummaryMiddleware(req, res, next) {
     try {
-        const summary = await req.fetchList('CASE_SUMMARY', req.params);
+        const summary = await req.listService.fetch('CASE_SUMMARY', req.params);
         res.locals.summary = summary;
         next();
-    } catch (e) {
-        next(e);
+    } catch (error) {
+        next(error);
     }
 }
 
@@ -42,7 +42,7 @@ async function createCaseNote(req, res, next) {
             res.locals.error = 'Case note must not be blank';
             next();
         }
-        await caseworkServiceClient.post(`/case/${req.params.caseId}/note`, {
+        await caseworkService.post(`/case/${req.params.caseId}/note`, {
             text: req.body.caseNote,
             type: 'MANUAL'
         }, { headers: User.createHeaders(req.user) });

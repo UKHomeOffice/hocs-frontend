@@ -1,10 +1,10 @@
 const Form = require('../form-builder');
 const { Component } = require('../component-builder');
-const { docsServiceClient } = require('../../../libs/request');
+const { documentService } = require('../../../clients');
 const User = require('../../../models/user');
 
 module.exports = async options => {
-    const response = await docsServiceClient.get(`/document/${options.context}`,  { headers: User.createHeaders(options.user) });
+    const response = await documentService.get(`/document/${options.context}`, { headers: User.createHeaders(options.user) });
     const displayName = response.data.displayName;
     return Form()
         .withTitle('Remove document')

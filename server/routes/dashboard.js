@@ -6,8 +6,10 @@ const { dashboardMiddleware: getDashboardData } = require('../middleware/dashboa
 const { getForm } = require('../services/form');
 const form = require('../services/forms/schemas/dashboard-search');
 const { ValidationError } = require('../models/error');
-// TODO: Remove temp stub
-const getList = async () => { };
+const { bindDisplayElements } = require('../lists/adapters/workstacks');
+const getLogger = require('../libs/logger');
+const { caseworkService } = require('../clients');
+const User = require('../models/user');
 
 router.all(['/', '/api/form'],
     getForm(form, { submissionUrl: '/search/reference' }),
@@ -20,12 +22,29 @@ router.post(['/search/reference', '/api/search/reference'],
     processForm,
     validateForm,
     async (req, res, next) => {
+        const logger = getLogger(req.requestId);
         try {
-            // TODO: Call client direct
-            const results = await getList('SEARCH_REFERENCE', { user: req.user, form: req.form.data });
-            res.locals.workstack = results;
+            const formData = req.form.data;
+            const reference = encodeURIComponent(formData['case-reference']);
+
+            const response = await caseworkService.get(`/case/${reference}/stage`, {
+                headers: User.createHeaders(req.user)
+            });
+
+            const fromStaticList = req.listService.getFromStaticList;
+
+            const workstackData = await Promise.all(response.data.stages
+                .sort((first, second) => first.caseReference > second.caseReference)
+                .map(bindDisplayElements(fromStaticList)));
+
+            res.locals.workstack = {
+                label: 'Case workflows',
+                items: workstackData
+            };
+
             next();
-        } catch (e) {
+        } catch (error) {
+            logger.error('SEARCH_FAILED', { message: error.message, stack: error.stack });
             return res.json({ errors: { 'case-reference': 'Failed to perform search' } });
         }
     }

@@ -1,4 +1,4 @@
-const { createClient } = require('../libs/request.v2');
+const { createClient } = require('../libs/request');
 
 const {
     CASEWORK_SERVICE,

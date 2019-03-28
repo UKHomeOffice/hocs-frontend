@@ -1,10 +1,10 @@
-const logger = require('../libs/logger');
+const getlogger = require('../libs/logger');
 const User = require('../models/user');
-const { caseworkServiceClient } = require('../libs/request');
+const { caseworkService } = require('../clients');
 
 async function userWorkstackMiddleware(req, res, next) {
     try {
-        const response = await req.fetchList('USER_WORKSTACK', req.params);
+        const response = await req.listService.fetch('USER_WORKSTACK', req.params);
         res.locals.workstack = response;
         next();
     } catch (error) {
@@ -14,7 +14,7 @@ async function userWorkstackMiddleware(req, res, next) {
 
 async function teamWorkstackMiddleware(req, res, next) {
     try {
-        const response = await req.fetchList('TEAM_WORKSTACK', req.params);
+        const response = await req.listService.fetch('TEAM_WORKSTACK', req.params);
         res.locals.workstack = response;
         next();
     } catch (error) {
@@ -24,7 +24,7 @@ async function teamWorkstackMiddleware(req, res, next) {
 
 async function workflowWorkstackMiddleware(req, res, next) {
     try {
-        const response = await await req.fetchList('WORKFLOW_WORKSTACK', req.params);
+        const response = await await req.listService.fetch('WORKFLOW_WORKSTACK', req.params);
         res.locals.workstack = response;
         next();
     } catch (error) {
@@ -34,7 +34,7 @@ async function workflowWorkstackMiddleware(req, res, next) {
 
 async function stageWorkstackMiddleware(req, res, next) {
     try {
-        const response = await req.fetchList('STAGE_WORKSTACK', req.params);
+        const response = await req.listService.fetch('STAGE_WORKSTACK', req.params);
         res.locals.workstack = response;
         next();
     } catch (error) {
@@ -44,7 +44,7 @@ async function stageWorkstackMiddleware(req, res, next) {
 
 async function getTeamMembers(req, res, next) {
     try {
-        const response = await req.fetchList('USERS_IN_TEAM', req.params);
+        const response = await req.listService.fetch('USERS_IN_TEAM', req.params);
         res.locals.workstack.teamMembers = response;
         next();
     } catch (error) {
@@ -56,12 +56,13 @@ function workstackApiResponseMiddleware(req, res) {
     res.json(res.locals.workstack);
 }
 
-const allocateUser = async (res, [endpoint, body, headers]) => {
+const allocateUser = async (req, res, [endpoint, body, headers]) => {
+    const logger = getLogger(req.requestId);
     try {
-        await caseworkServiceClient.put(endpoint, body, headers);
+        await caseworkService.put(endpoint, body, headers);
         return;
     } catch (error) {
-        logger.error({ event_id: 'ALLOCATION_FAILED', endpoint, body, headers, status: error.response.status });
+        logger.error('ALLOCATION_FAILED', { endpoint, body, status: error.response.status });
         res.locals.notification = 'Failed to allocate all cases';
         return;
     }
@@ -78,7 +79,7 @@ async function allocateToTeam(req, res, next) {
             .map(([caseId, stageId]) => [`/case/${caseId}/stage/${stageId}/user`, { userUUID: selected_user }, {
                 headers: User.createHeaders(req.user)
             }])
-            .map(async options => await allocateUser(res, options));
+            .map(async options => await allocateUser(req, res, options));
         await Promise.all(requests);
     }
     next();
@@ -95,7 +96,7 @@ async function allocateToUser(req, res, next) {
             .map(([caseId, stageId]) => [`/case/${caseId}/stage/${stageId}/user`, { userUUID: req.user.uuid }, {
                 headers: User.createHeaders(req.user)
             }])
-            .map(async options => await allocateUser(res, options));
+            .map(async options => await allocateUser(req, res, options));
         await Promise.all(requests);
     }
     next();
@@ -112,7 +113,7 @@ async function unallocate(req, res, next) {
             .map(([caseId, stageId]) => [`/case/${caseId}/stage/${stageId}/user`, { userUUID: null }, {
                 headers: User.createHeaders(req.user)
             }])
-            .map(async options => await allocateUser(res, options));
+            .map(async options => await allocateUser(req, res, options));
         await Promise.all(requests);
     }
     next();

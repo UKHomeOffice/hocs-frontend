@@ -35,8 +35,8 @@ describe('List Service', () => {
             };
 
             listService.initialise(lists, clients);
-            const fetchList = await listService.getInstance(mockUUID, mockUser);
-            const result = await fetchList('test');
+            const instance = await listService.getInstance(mockUUID, mockUser);
+            const result = await instance.fetch('test');
 
             expect(result).toBeDefined();
             expect(result).toEqual(mockResponse);
@@ -57,8 +57,8 @@ describe('List Service', () => {
             };
 
             listService.initialise(lists, clients);
-            const fetchList = await listService.getInstance(mockUUID, mockUser);
-            await expect(fetchList('test')).rejects.toThrow('Unable to fetch list');
+            const instance = await listService.getInstance(mockUUID, mockUser);
+            await expect(instance.fetch('test')).rejects.toThrow('Unable to fetch list');
         });
 
         it('should transform the response with an adapter if supplied', async () => {
@@ -79,8 +79,8 @@ describe('List Service', () => {
             };
 
             listService.initialise(lists, clients);
-            const fetchList = await listService.getInstance(mockUUID, mockUser);
-            const result = await fetchList('test');
+            const instance = await listService.getInstance(mockUUID, mockUser);
+            const result = await instance.fetch('test');
 
             expect(result).toBeDefined();
             expect(result).toEqual([{ a: 1, b: 2 }]);
@@ -104,8 +104,8 @@ describe('List Service', () => {
             };
 
             listService.initialise(lists, clients);
-            const fetchList = await listService.getInstance(mockUUID, mockUser);
-            await expect(fetchList('test')).rejects.toThrow('Unable to fetch list');
+            const instance = await listService.getInstance(mockUUID, mockUser);
+            await expect(instance.fetch('test')).rejects.toThrow('Unable to fetch list');
         });
 
         it('should cache static lists on initialisation', async () => {
@@ -148,8 +148,8 @@ describe('List Service', () => {
             };
 
             await listService.initialise(lists, clients);
-            const fetchList = await listService.getInstance(mockUUID, mockUser);
-            const result = await fetchList('test');
+            const instance = await listService.getInstance(mockUUID, mockUser);
+            const result = await instance.fetch('test');
             expect(clients.test.get).not.toHaveBeenCalled();
             expect(result).toEqual(mockData);
         });
@@ -170,8 +170,8 @@ describe('List Service', () => {
             };
 
             await listService.initialise(lists, clients);
-            const fetchList = await listService.getInstance(mockUUID, mockUser);
-            const result = await fetchList('test');
+            const instance = await listService.getInstance(mockUUID, mockUser);
+            const result = await instance.fetch('test');
 
             expect(clients.test.get).toHaveBeenCalled();
             expect(clients.test.get).toHaveBeenCalledTimes(1);
@@ -195,16 +195,16 @@ describe('List Service', () => {
 
             await listService.initialise(lists, clients);
             listService.flush('test');
-            const fetchList = await listService.getInstance(mockUUID, mockUser);
+            const instance = await listService.getInstance(mockUUID, mockUser);
 
             clients.test.get.mockImplementation(() => Promise.resolve({ data: [] }));
 
-            const result1 = await fetchList('test');
+            const result1 = await instance.fetch('test');
             expect(clients.test.get).toHaveBeenCalled();
             expect(clients.test.get).toHaveBeenCalledTimes(2);
             expect(result1).toBeDefined();
 
-            const result2 = await fetchList('test');
+            const result2 = await instance.fetch('test');
             expect(clients.test.get).toHaveBeenCalledTimes(2);
             expect(result2).toBeDefined();
         });
@@ -220,8 +220,8 @@ describe('List Service', () => {
             };
 
             listService.initialise(lists, clients);
-            const fetchList = await listService.getInstance(mockUUID, mockUser);
-            await expect(fetchList('test')).rejects.toThrow('Unable to fetch list');
+            const instance = await listService.getInstance(mockUUID, mockUser);
+            await expect(instance.fetch('test')).rejects.toThrow('Unable to fetch list');
         });
 
         it('should supply a "fromStaticList" utility method to adapters to fetch values from static lists', async () => {
@@ -257,8 +257,8 @@ describe('List Service', () => {
             };
 
             listService.initialise(lists, clients);
-            const fetchList = await listService.getInstance(mockUUID, mockUser);
-            const result = await fetchList('test');
+            const instance = await listService.getInstance(mockUUID, mockUser);
+            const result = await instance.fetch('test');
 
             expect(result).toBeDefined();
             expect(result).toEqual(mockResponse);
@@ -296,8 +296,8 @@ describe('List Service', () => {
             };
 
             listService.initialise(lists, clients);
-            const fetchList = await listService.getInstance(mockUUID, mockUser);
-            const result = await fetchList('test');
+            const instance = await listService.getInstance(mockUUID, mockUser);
+            const result = await instance.fetch('test');
 
             expect(result).toBeDefined();
             expect(result).toEqual(mockResponse);
@@ -329,8 +329,8 @@ describe('List Service', () => {
             };
 
             listService.initialise(lists, clients);
-            const fetchList = await listService.getInstance(mockUUID, mockUser);
-            const result = await fetchList('test');
+            const instance = await listService.getInstance(mockUUID, mockUser);
+            const result = await instance.fetch('test');
 
             expect(result).toBeDefined();
             expect(result).toEqual(mockResponse);

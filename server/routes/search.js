@@ -5,8 +5,10 @@ const { validationMiddleware: validateForm } = require('../middleware/validation
 const { getForm, hydrateFields } = require('../services/form');
 const form = require('../services/forms/schemas/search');
 const { ValidationError } = require('../models/error');
-// TODO: Remove temp stub
-const getList = async () => { };
+const { bindDisplayElements } = require('../lists/adapters/workstacks');
+const getLogger = require('../libs/logger');
+const { caseworkService } = require('../clients');
+const User = require('../models/user');
 
 router.all(['/search', '/api/search', '/api/form/search'], getForm(form, { submissionUrl: '/search/results' }), hydrateFields);
 router.get('/api/form/search', (req, res) => res.json(req.form));
@@ -19,13 +21,42 @@ router.post(['/search/results', '/api/search/results'],
     validateForm,
     (req, res, next) => Object.keys(req.form.data).length > 0 ? next() : res.json({ errors: { form: 'No search criteria specified' } }),
     async (req, res, next) => {
+        const logger = getLogger(req.requestId);
         try {
-            // TODO: Call client direct
-            const results = await getList('SEARCH', { user: req.user, form: req.form.data });
-            res.locals.workstack = results;
+            const formData = req.form.data;
+            const request = {
+                caseType: formData['caseTypes'],
+                dateReceived: {
+                    to: formData['dateReceivedTo'],
+                    from: formData['dateReceivedFrom']
+                },
+                correspondentName: formData['correspondent'],
+                topic: formData['topic'],
+                data: {
+                    POTeamName: formData['signOffMinister']
+                },
+                activeOnly: Array.isArray(formData['caseStatus']) && formData['caseStatus'].includes('active')
+            };
+
+            const response = await caseworkService.post('/search', request, {
+                headers: User.createHeaders(req.user)
+            });
+
+            const fromStaticList = req.listService.getFromStaticList;
+
+            const workstackData = await Promise.all(response.data.stages
+                .sort((first, second) => first.caseReference > second.caseReference)
+                .map(bindDisplayElements(fromStaticList)));
+
+            res.locals.workstack = {
+                label: 'Search Results',
+                items: workstackData
+            };
+
             next();
-        } catch (e) {
-            next(e);
+        } catch (error) {
+            logger.error('SEARCH_FAILED', { message: error.message, stack: error.stack });
+            next(error);
         }
     },
     (req, res, next) => {

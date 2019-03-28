@@ -183,5 +183,6 @@ module.exports = {
     userAdapter,
     teamAdapter,
     workflowAdapter,
-    stageAdapter
+    stageAdapter,
+    bindDisplayElements
 };

@@ -16,6 +16,6 @@ app.use('/', applicationRouter);
 listService.initialise(listConfiguration.lists, listConfiguration.clients);
 
 app.listen(port, () => {
-    logger.info(`Application listening on port ${port}`);
+    logger().debug('SERVER_START', { port });
 });
 

@@ -1,55 +1,57 @@
-const { docsServiceClient } = require('../libs/request');
-const logger = require('../libs/logger');
-const events = require('../models/events');
+const { documentService } = require('../clients');
+const getLogger = require('../libs/logger');
 const { DocumentError } = require('../models/error');
 
 async function getOriginalDocument(req, res, next) {
+    const logger = getLogger(req.requestId);
     const { documentId } = req.params;
-    logger.info({ event_id: events.REQUEST_DOCUMENT_ORIGINAL, ...req.params });
+    logger.info('REQUEST_DOCUMENT_ORIGINAL', { ...req.params });
     try {
-        const response = await docsServiceClient.get(`/document/${documentId}/file`, { responseType: 'stream' });
+        const response = await documentService.get(`/document/${documentId}/file`, { responseType: 'stream' });
         res.setHeader('Cache-Control', 'max-age=86400');
         res.setHeader('Content-Disposition', response.headers['content-disposition']);
-        response.data.on('finish', () => logger.debug({ event_id: events.REQUEST_DOCUMENT_ORIGINAL_SUCCESS, ...req.params }));
+        response.data.on('finish', () => logger.debug('REQUEST_DOCUMENT_ORIGINAL_SUCCESS', { ...req.params }));
         response.data.pipe(res);
     } catch (error) {
-        logger.error({ event_id: events.REQUEST_DOCUMENT_ORIGINAL_FAILURE, ...req.params });
+        logger.error('REQUEST_DOCUMENT_ORIGINAL_FAILURE', { ...req.params });
         next(new DocumentError('Unable to retrieve original document'));
     }
 }
 
 async function getPdfDocument(req, res, next) {
+    const logger = getLogger(req.requestId);
     const { documentId } = req.params;
-    logger.info({ event_id: events.REQUEST_DOCUMENT_PDF, ...req.params });
+    logger.info('REQUEST_DOCUMENT_PDF', { ...req.params });
     try {
-        const response = await docsServiceClient.get(`/document/${documentId}/pdf`, { responseType: 'stream' });
+        const response = await documentService.get(`/document/${documentId}/pdf`, { responseType: 'stream' });
         res.setHeader('Cache-Control', 'max-age=86400');
         res.setHeader('Content-Disposition', response.headers['content-disposition']);
-        response.data.on('finish', () => logger.debug({ event_id: events.REQUEST_DOCUMENT_PDF_SUCCESS, ...req.params }));
+        response.data.on('finish', () => logger.debug('REQUEST_DOCUMENT_PDF_SUCCESS', { ...req.params }));
         response.data.pipe(res);
     } catch (error) {
-        logger.error({ event_id: events.REQUEST_DOCUMENT_PDF_FAILURE, ...req.params });
+        logger.error('REQUEST_DOCUMENT_PDF_FAILURE', { ...req.params });
         next(new DocumentError('Unable to retrieve PDF document'));
     }
 }
 
 async function getPdfDocumentPreview(req, res, next) {
+    const logger = getLogger(req.requestId);
     const { documentId } = req.params;
-    logger.info({ event_id: events.REQUEST_DOCUMENT_PREVIEW, ...req.params });
+    logger.info('REQUEST_DOCUMENT_PREVIEW', { ...req.params });
     try {
-        const response = await docsServiceClient.get(`/document/${documentId}/pdf`, { responseType: 'stream' });
+        const response = await documentService.get(`/document/${documentId}/pdf`, { responseType: 'stream' });
         res.setHeader('Cache-Control', 'max-age=86400');
-        response.data.on('finish', () => logger.debug({ event_id: events.REQUEST_DOCUMENT_PREVIEW_SUCCESS, ...req.params }));
+        response.data.on('finish', () => logger.debug('REQUEST_DOCUMENT_PREVIEW_SUCCESS', { ...req.params }));
         response.data.pipe(res);
     } catch (error) {
-        logger.error({ event_id: events.REQUEST_DOCUMENT_PREVIEW_FAILURE, ...req.params });
+        logger.error('REQUEST_DOCUMENT_PREVIEW_FAILURE', { ...req.params });
         next(new DocumentError('Unable to retrieve document for PDF preview'));
     }
 }
 
 async function getDocumentList(req, res, next) {
     try {
-        const response = await req.fetchList('CASE_DOCUMENT_LIST', req.params);
+        const response = await req.listService.fetch('CASE_DOCUMENT_LIST', req.params);
         res.locals.documents = response;
     } catch (error) {
         res.locals.documents = [];

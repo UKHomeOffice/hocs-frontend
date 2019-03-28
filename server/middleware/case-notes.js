@@ -27,14 +27,15 @@
 //     }
 // ];
 
-const logger = require('../libs/logger');
+const getLogger = require('../libs/logger');
 
 async function getCaseNotes(req, res, next) {
+    const logger = getLogger(req.requestId);
     try {
-        const results = await req.fetchList('CASE_NOTES', req.params);
+        const results = await req.listService.fetch('CASE_NOTES', req.params);
         res.locals.caseNotes = results;
     } catch (error) {
-        logger.error({ message: error.message, stack: error.stack });
+        logger.error('ERROR', { message: error.message, stack: error.stack });
         return next('Failed to fetch timeline');
     }
     next();

@@ -1,6 +1,6 @@
 const listType = require('./types');
 const { createRepository } = require('./repository');
-const getLogger = require('../../libs/logger.v2');
+const getLogger = require('../../libs/logger');
 const User = require('../../models/user');
 
 const configureEndpoint = (endpoint, data, baseUrl = '') => {
@@ -119,7 +119,10 @@ const getInstance = (requestId, user) => {
         }
     };
 
-    return fetchList;
+    return {
+        fetch: fetchList,
+        getFromStaticList: fromStaticList
+    };
 
 };
 

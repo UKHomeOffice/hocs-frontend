@@ -16,12 +16,14 @@ describe('Workstack middleware', () => {
         beforeEach(() => {
             next.mockReset();
             req = {
-                fetchList: jest.fn(async (list) => {
-                    if (list === 'USER_WORKSTACK') {
-                        return Promise.resolve('MOCK_WORKSTACK');
-                    }
-                    return Promise.reject();
-                })
+                listService: {
+                    fetch: jest.fn(async (list) => {
+                        if (list === 'USER_WORKSTACK') {
+                            return Promise.resolve('MOCK_WORKSTACK');
+                        }
+                        return Promise.reject();
+                    })
+                }
             };
             res = {
                 locals: {}
@@ -36,7 +38,7 @@ describe('Workstack middleware', () => {
         });
 
         it('should call next with an error if unable to retrieve workstack data', async () => {
-            req.fetchList.mockImplementation(() => Promise.reject('MOCK_ERROR'));
+            req.listService.fetch.mockImplementation(() => Promise.reject('MOCK_ERROR'));
             await userWorkstackMiddleware(req, res, next);
             expect(res.locals.workstack).not.toBeDefined();
             expect(next).toHaveBeenCalled();
@@ -48,12 +50,14 @@ describe('Workstack middleware', () => {
         beforeEach(() => {
             next.mockReset();
             req = {
-                fetchList: jest.fn(async (list) => {
-                    if (list === 'TEAM_WORKSTACK') {
-                        return Promise.resolve('MOCK_WORKSTACK');
-                    }
-                    return Promise.reject();
-                })
+                listService: {
+                    fetch: jest.fn(async (list) => {
+                        if (list === 'TEAM_WORKSTACK') {
+                            return Promise.resolve('MOCK_WORKSTACK');
+                        }
+                        return Promise.reject();
+                    })
+                }
             };
             res = {
                 locals: {}
@@ -68,7 +72,7 @@ describe('Workstack middleware', () => {
         });
 
         it('should call next with an error if unable to retrieve workstack data', async () => {
-            req.fetchList.mockImplementation(() => Promise.reject('MOCK_ERROR'));
+            req.listService.fetch.mockImplementation(() => Promise.reject('MOCK_ERROR'));
             await teamWorkstackMiddleware(req, res, next);
             expect(res.locals.workstack).not.toBeDefined();
             expect(next).toHaveBeenCalled();
@@ -80,12 +84,14 @@ describe('Workstack middleware', () => {
         beforeEach(() => {
             next.mockReset();
             req = {
-                fetchList: jest.fn(async (list) => {
-                    if (list === 'WORKFLOW_WORKSTACK') {
-                        return Promise.resolve('MOCK_WORKSTACK');
-                    }
-                    return Promise.reject();
-                })
+                listService: {
+                    fetch: jest.fn(async (list) => {
+                        if (list === 'WORKFLOW_WORKSTACK') {
+                            return Promise.resolve('MOCK_WORKSTACK');
+                        }
+                        return Promise.reject();
+                    })
+                }
             };
             res = {
                 locals: {}
@@ -100,7 +106,7 @@ describe('Workstack middleware', () => {
         });
 
         it('should call next with an error if unable to retrieve workstack data', async () => {
-            req.fetchList.mockImplementation(() => Promise.reject('MOCK_ERROR'));
+            req.listService.fetch.mockImplementation(() => Promise.reject('MOCK_ERROR'));
             await workflowWorkstackMiddleware(req, res, next);
             expect(res.locals.workstack).not.toBeDefined();
             expect(next).toHaveBeenCalled();
@@ -112,12 +118,14 @@ describe('Workstack middleware', () => {
         beforeEach(() => {
             next.mockReset();
             req = {
-                fetchList: jest.fn(async (list) => {
-                    if (list === 'STAGE_WORKSTACK') {
-                        return Promise.resolve('MOCK_WORKSTACK');
-                    }
-                    return Promise.reject();
-                })
+                listService: {
+                    fetch: jest.fn(async (list) => {
+                        if (list === 'STAGE_WORKSTACK') {
+                            return Promise.resolve('MOCK_WORKSTACK');
+                        }
+                        return Promise.reject();
+                    })
+                }
             };
             res = {
                 locals: {}
@@ -132,7 +140,7 @@ describe('Workstack middleware', () => {
         });
 
         it('should call next with an error if unable to retrieve workstack data', async () => {
-            req.fetchList.mockImplementation(() => Promise.reject('MOCK_ERROR'));
+            req.listService.fetch.mockImplementation(() => Promise.reject('MOCK_ERROR'));
             await stageWorkstackMiddleware(req, res, next);
             expect(res.locals.workstack).not.toBeDefined();
             expect(next).toHaveBeenCalled();

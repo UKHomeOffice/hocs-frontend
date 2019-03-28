@@ -1,5 +1,4 @@
-const logger = require('../libs/logger.v2');
-const events = require('../models/events');
+const logger = require('../libs/logger');
 const { ValidationError } = require('../models/error');
 const { isProduction } = require('../config');
 const uuid = require('uuid/v4');
@@ -9,10 +8,10 @@ const listService = require('../services/list/');
 function apiErrorMiddleware(err, req, res, next) {
 
     if (err instanceof ValidationError) {
-        logger().debug(err);
+        logger(req.requestId).debug(err);
         return res.status(err.status).json({ errors: err.fields });
     } else {
-        logger().error({ event_id: events.ERROR, message: err.message, stack: err.stack });
+        logger(req.requestId).error('ERROR', { message: err.message, stack: err.stack });
         return res.status(err.status || 500).json({
             message: err.message,
             status: err.status || 500,
@@ -24,11 +23,11 @@ function apiErrorMiddleware(err, req, res, next) {
 
 function errorMiddleware(err, req, res, next) {
     if (err instanceof ValidationError) {
-        logger().debug(err);
+        logger(req.requestId).debug(err);
         res.status(err.status || 500);
         req.form.errors = err.fields;
     } else {
-        logger().error({ event_id: events.ERROR, message: err.message, stack: err.stack });
+        logger(req.requestId).error('ERROR', { message: err.message, stack: err.stack });
         res.locals.error = {
             message: err.message,
             status: err.status || 500,
@@ -43,7 +42,7 @@ function initRequest(req, res, next) {
     const requestId = uuid();
     res.locals = {};
     req.requestId = requestId;
-    req.fetchList = listService.getInstance(requestId, req.user);
+    req.listService = listService.getInstance(requestId, req.user);
     logger(requestId).info('REQUEST_RECEIVED', { method: req.method, endpoint: req.originalUrl });
     next();
 }
