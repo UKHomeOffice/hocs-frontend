@@ -1,7 +1,6 @@
 const User = require('../models/user');
 const { AuthenticationError } = require('../models/error');
 const getLogger = require('../libs/logger');
-const events = require('../models/events');
 
 function authMiddleware(req, res, next) {
     const logger = getLogger(req.requestId);

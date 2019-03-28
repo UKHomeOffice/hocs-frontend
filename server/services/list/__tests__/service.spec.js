@@ -91,7 +91,7 @@ describe('List Service', () => {
                 test: {
                     client: 'test',
                     endpoint: '/test/api',
-                    adapter: () => { throw new Error('Failed to apply adapter') }
+                    adapter: () => { throw new Error('Failed to apply adapter'); }
                 }
             };
 

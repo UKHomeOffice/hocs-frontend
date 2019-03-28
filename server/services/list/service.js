@@ -27,7 +27,7 @@ const applyAdapter = async (response, adapter, options) => {
         return await adapter(response, { ...options });
     }
     return response;
-}
+};
 
 const initialise = async (lists = {}, clients = {}, initialState = {}) => {
 

@@ -15,7 +15,7 @@ const { errorMiddleware, initRequest } = require('../middleware/request');
 const { protect } = require('../middleware/auth');
 const { createAnalyticsObject } = require('../middleware/analytics');
 const { infoService } = require('../clients');
-const getLogger = require('../libs/logger');
+const logger = require('../libs/logger');
 const { flushCachedLists } = require('../services/list');
 
 html.use(assets);

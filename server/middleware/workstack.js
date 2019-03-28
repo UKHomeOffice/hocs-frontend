@@ -1,4 +1,4 @@
-const getlogger = require('../libs/logger');
+const getLogger = require('../libs/logger');
 const User = require('../models/user');
 const { caseworkService } = require('../clients');
 

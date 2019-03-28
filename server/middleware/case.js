@@ -1,5 +1,5 @@
 const actionService = require('../services/action');
-const { caseworkService } = require('../clients')
+const { caseworkService } = require('../clients');
 const User = require('../models/user');
 
 async function caseResponseMiddleware(req, res, next) {
