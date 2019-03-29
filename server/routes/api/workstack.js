@@ -4,6 +4,7 @@ const {
     teamWorkstackMiddleware,
     workflowWorkstackMiddleware,
     stageWorkstackMiddleware,
+    getTeamMembers,
     workstackApiResponseMiddleware,
     allocateToUser,
     allocateToTeam,
@@ -19,7 +20,7 @@ router.get('/user', userWorkstackMiddleware, (req, res, next) => {
     next();
 }, workstackApiResponseMiddleware);
 
-router.get('/team/:teamId',teamWorkstackMiddleware, (req, res, next) => {
+router.get('/team/:teamId', teamWorkstackMiddleware, getTeamMembers, (req, res, next) => {
     res.locals.workstack.breadcrumbs = [
         { to: '/', label: 'Dashboard' },
         { to: `/workstack/team/${req.params.teamId}`, label: 'Team' }
@@ -27,7 +28,7 @@ router.get('/team/:teamId',teamWorkstackMiddleware, (req, res, next) => {
     next();
 }, workstackApiResponseMiddleware);
 
-router.get('/team/:teamId/workflow/:workflowId',workflowWorkstackMiddleware, (req, res, next) => {
+router.get('/team/:teamId/workflow/:workflowId', workflowWorkstackMiddleware, getTeamMembers, (req, res, next) => {
     res.locals.workstack.breadcrumbs = [
         { to: '/', label: 'Dashboard' },
         { to: `/workstack/team/${req.params.teamId}`, label: 'Team' },
@@ -36,7 +37,7 @@ router.get('/team/:teamId/workflow/:workflowId',workflowWorkstackMiddleware, (re
     next();
 }, workstackApiResponseMiddleware);
 
-router.get('/team/:teamId/workflow/:workflowId/stage/:stageId',stageWorkstackMiddleware, (req, res, next) => {
+router.get('/team/:teamId/workflow/:workflowId/stage/:stageId', stageWorkstackMiddleware, getTeamMembers, (req, res, next) => {
     res.locals.workstack.breadcrumbs = [
         { to: '/', label: 'Dashboard' },
         { to: `/workstack/team/${req.params.teamId}`, label: 'Team' },

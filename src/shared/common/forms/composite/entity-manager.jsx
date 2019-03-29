@@ -22,7 +22,7 @@ class EntityManager extends Component {
                 <table className='govuk-table'>
                     {label && <caption className='govuk-table__caption'>{label}</caption>}
                     <tbody className='govuk-table__body'>
-                        {choices && choices.map((choice, i) => {
+                        {Array.isArray(choices) && choices.map((choice, i) => {
                             return (
                                 <tr className='govuk-radios govuk-table__row' key={i}>
                                     {choice.tags && <td className='govuk-table__cell' >

@@ -9,11 +9,6 @@ const browserConfig = env => {
     const mode = env.NODE_ENV;
     return {
         entry: {
-            vendor: [
-                'react',
-                'react-dom',
-                'react-router-dom'
-            ],
             main: './src/browser/index.js'
         },
         devtool: 'sourcemap',
@@ -28,7 +23,8 @@ const browserConfig = env => {
             rules: [
                 {
                     test: /\.(js|jsx)$/,
-                    loader: 'babel-loader'
+                    loader: 'babel-loader',
+                    exclude: /node_modules/
                 },
                 {
                     test: /\.s?[ac]ss$/,
@@ -55,15 +51,20 @@ const browserConfig = env => {
                     ]
 
                 }
+            ],
+        },
+        resolve: {
+            extensions: [
+                '.js',
+                '.jsx'
             ]
         },
         optimization: {
+            runtimeChunk: 'single',
             splitChunks: {
-                chunks: 'all',
-                name: true,
                 cacheGroups: {
                     default: false,
-                    vendors: {
+                    vendor: {
                         chunks: 'all',
                         name: 'vendor',
                         test: /[\\/]node_modules[\\/]/,
@@ -137,20 +138,20 @@ const serverConfig = {
     },
     module: {
         rules: [
-            { test: [/\.(js)$/, /\.(jsx)$/], loader: 'babel-loader', exclude: /node_modules/ },
+            { test: /\.(js|jsx)$/, loader: 'babel-loader', exclude: /node_modules/ },
             { test: /\.scss$/, loader: 'css-loader/locals' }
         ]
     },
-    // resolve: {
-    //     alias: {
-    //         react: path.resolve(__dirname, 'node_modules/react'),
-    //         'react-dom': path.resolve(__dirname, 'node_modules/react-dom')
-    //     }
-    // },
     externals: {
         'react': 'react',
         'react-dom': 'react-dom'
-    }
+    },
+    plugins: [
+        new MinificationPlugin({
+            sourceMap: true,
+            parallel: true
+        })
+    ],
 };
 
 

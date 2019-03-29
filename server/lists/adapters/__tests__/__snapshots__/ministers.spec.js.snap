@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Minister Adapter should transform and sort minister data 1`] = `
+Array [
+  Object {
+    "label": "Minister A",
+    "value": 1,
+  },
+  Object {
+    "label": "Minister B",
+    "value": 2,
+  },
+  Object {
+    "label": "Minister C",
+    "value": 3,
+  },
+]
+`;

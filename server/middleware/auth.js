@@ -1,9 +1,9 @@
 const User = require('../models/user');
 const { AuthenticationError } = require('../models/error');
-const logger = require('../libs/logger');
-const events = require('../models/events');
+const getLogger = require('../libs/logger');
 
 function authMiddleware(req, res, next) {
+    const logger = getLogger(req.requestId);
     if (req.get('X-Auth-Token')) {
         if (!req.user) {
             req.user = new User({
@@ -15,19 +15,19 @@ function authMiddleware(req, res, next) {
                 uuid: req.get('X-Auth-Subject')
             });
         }
-        logger.info(req.user);
         return next();
     }
-    logger.error({ event: events.AUTH_FAILURE });
+    logger.error('AUTH_FAILURE');
     next(new AuthenticationError('Unauthorised', 401));
 }
 
 function protect(permission) {
     return (req, res, next) => {
+        const logger = getLogger(req.requestId);
         if (User.hasRole(req.user, permission)) {
             return next();
         }
-        logger.error({ event: events.AUTH_FAILURE, expected: permission, user: req.user.username, roles: req.user.roles });
+        logger.error('AUTH_FAILURE', { expected: permission, user: req.user.username, roles: req.user.roles });
         next(new AuthenticationError('Unauthorised'));
     };
 }

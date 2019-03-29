@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`User Adapter should transform and sort team data 1`] = `
+Array [
+  Object {
+    "label": "Team A",
+    "value": "TEAM_A",
+  },
+  Object {
+    "label": "Team B",
+    "value": "TEAM_B",
+  },
+  Object {
+    "label": "Team C",
+    "value": "TEAM_C",
+  },
+]
+`;

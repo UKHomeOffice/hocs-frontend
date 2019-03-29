@@ -1,8 +1,7 @@
-const { workflowServiceClient, infoServiceClient, caseworkServiceClient, docsServiceClient } = require('../libs/request');
+const { workflowService, infoService, caseworkService, documentService } = require('../clients');
 const actionTypes = require('./actions/types');
 const { ActionError } = require('../models/error');
-const logger = require('../libs/logger');
-const events = require('../models/events');
+const getLogger = require('../libs/logger');
 const User = require('../models/user');
 
 function createDocumentSummaryObjects(form, type) {
@@ -33,15 +32,15 @@ function addDocumentRequest(form) {
 }
 
 function createCase(url, { caseType, form }, headers) {
-    return workflowServiceClient.post(url, createCaseRequest(caseType, form), headers);
+    return workflowService.post(url, createCaseRequest(caseType, form), headers);
 }
 
 function addDocument(url, form, headers) {
-    return workflowServiceClient.post(url, addDocumentRequest(form), headers);
+    return workflowService.post(url, addDocumentRequest(form), headers);
 }
 
 function updateCase({ caseId, stageId, form }, headers) {
-    return workflowServiceClient.post(`/case/${caseId}/stage/${stageId}`, { data: form.data }, headers);
+    return workflowService.post(`/case/${caseId}/stage/${stageId}`, { data: form.data }, headers);
 }
 
 function handleActionSuccess(response, workflow, form) {
@@ -76,9 +75,10 @@ const actions = {
         let headers = {
             headers: User.createHeaders(user)
         };
+        const logger = getLogger();
         try {
             if (form && form.action) {
-                logger.info({ event: events.ACTION, user: user.username, action: form.action });
+                logger.info('ACTION', { action: form.action });
                 let response;
                 let clientResponse;
                 switch (form.action) {
@@ -99,7 +99,7 @@ const actions = {
                         topicUUID: form.data['topic'],
                         expires: form.data['expiry_date']
                     };
-                    response = await infoServiceClient.post('/standardLine', request, headers);
+                    response = await infoService.post('/standardLine', request, headers);
                     clientResponse = { summary: 'Created a new standard line' };
                     return handleActionSuccess(clientResponse, workflow, form);
                 case actionTypes.ADD_TEMPLATE:
@@ -110,7 +110,7 @@ const actions = {
                         displayName: document1.originalname,
                         caseType: form.data['caseType']
                     };
-                    response = await infoServiceClient.post('/template', request1, headers);
+                    response = await infoService.post('/template', request1, headers);
                     clientResponse = { summary: 'Created a new template' };
                     return handleActionSuccess(clientResponse, workflow, form);
                     /* eslint-enable no-case-declarations */
@@ -118,18 +118,19 @@ const actions = {
             } else {
                 return handleActionSuccess(null, workflow, form);
             }
-        } catch (e) {
-            logger.error({ event: events.ACTION_FAILURE, user: user.username, action: form.action });
-            throw new ActionError(e);
+        } catch (error) {
+            logger.error('ACTION_FAILURE', { action: form.action });
+            throw new ActionError(error);
         }
     },
     CASE: async ({ caseId, stageId, entity, context, form, user }) => {
         let headers = {
             headers: User.createHeaders(user)
         };
+        const logger = getLogger();
         try {
             if (form && form.action && entity) {
-                logger.info({ event: events.CASE_ACTION, user: user.username, action: form.action, case: caseId });
+                logger.info('CASE_ACTION', { action: form.action, case: caseId });
                 switch (form.action) {
                 case actionTypes.ADD_DOCUMENT:
                     await addDocument(`/case/${caseId}/document`, form, headers);
@@ -138,16 +139,16 @@ const actions = {
                     if (!context) {
                         throw new ActionError('Unable to remove, no context provided');
                     }
-                    await docsServiceClient.delete(`/document/${context}`, headers);
+                    await documentService.delete(`/document/${context}`, headers);
                     break;
                 case actionTypes.ADD_TOPIC:
-                    await caseworkServiceClient.post(`/case/${caseId}/stage/${stageId}/topic`, { topicUUID: form.data['topic'] }, headers);
+                    await caseworkService.post(`/case/${caseId}/stage/${stageId}/topic`, { topicUUID: form.data['topic'] }, headers);
                     break;
                 case actionTypes.REMOVE_TOPIC:
                     if (!context) {
                         throw new ActionError('Unable to remove, no context provided');
                     }
-                    await caseworkServiceClient.delete(`/case/${caseId}/stage/${stageId}/topic/${context}`, headers);
+                    await caseworkService.delete(`/case/${caseId}/stage/${stageId}/topic/${context}`, headers);
                     break;
                 case actionTypes.IS_MEMBER:
                     if (form.data['isMember'] === 'true') {
@@ -158,23 +159,23 @@ const actions = {
                 case actionTypes.SELECT_MEMBER:
                     return ({ callbackUrl: `/case/${caseId}/stage/${stageId}/entity/member/${form.data['member']}/details` });
                 case actionTypes.ADD_CORRESPONDENT: case actionTypes.ADD_MEMBER:
-                    await caseworkServiceClient.post(`/case/${caseId}/stage/${stageId}/correspondent`, { ...form.data }, headers);
+                    await caseworkService.post(`/case/${caseId}/stage/${stageId}/correspondent`, { ...form.data }, headers);
                     return ({ callbackUrl: `/case/${caseId}/stage/${stageId}` });
                 case actionTypes.REMOVE_CORRESPONDENT:
                     if (!context) {
                         throw new ActionError('Unable to remove, no context provided');
                     }
-                    await caseworkServiceClient.delete(`/case/${caseId}/stage/${stageId}/correspondent/${context}`, headers);
+                    await caseworkService.delete(`/case/${caseId}/stage/${stageId}/correspondent/${context}`, headers);
                     break;
                 case actionTypes.ADD_CASE_NOTE:
-                    await caseworkServiceClient.post(`/case/${caseId}/note`, { type: 'MANUAL', text: form.data['case-note'] }, headers);
+                    await caseworkService.post(`/case/${caseId}/note`, { type: 'MANUAL', text: form.data['case-note'] }, headers);
                     break;
                 }
 
                 return ({ callbackUrl: `/case/${caseId}/stage/${stageId}` });
             }
         } catch (error) {
-            logger.error({ event: events.CASE_ACTION_FAILURE, user: user.username, action: form.action, case: caseId });
+            logger.error('CASE_ACTION_FAILURE', { action: form.action, case: caseId });
             throw new ActionError('Failed to perform action', error.response.status);
         }
     },
@@ -182,12 +183,13 @@ const actions = {
         let headers = {
             headers: User.createHeaders(user)
         };
-        logger.info({ event: events.WORKFLOW_ACTION, user: user.username, action: actionTypes.UPDATE_CASE, case: caseId });
+        const logger = getLogger();
+        logger.info('WORKFLOW_ACTION', { action: actionTypes.UPDATE_CASE, case: caseId });
         try {
             const response = await updateCase({ caseId, stageId, form }, headers);
             return handleWorkflowSuccess(response, { caseId, stageId });
         } catch (error) {
-            logger.error({ event: events.WORKFLOW_ACTION_FAILURE, user: user.uuid, action: actionTypes.UPDATE_CASE, case: caseId });
+            logger.error('UPDATE_CASE_FAILURE', { case: caseId });
             throw new ActionError('Failed to update case', error.response.status);
         }
     }

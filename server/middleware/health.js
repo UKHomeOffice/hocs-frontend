@@ -1,4 +1,4 @@
-const { caseworkServiceClient, workflowServiceClient, infoServiceClient, docsServiceClient } = require('../libs/request');
+const { caseworkService, workflowService, infoService, documentService } = require('../clients');
 const { s3 } = require('../libs/aws');
 const { S3: { BUCKET_NAME } } = require('../config').forContext('AWS');
 
@@ -33,25 +33,25 @@ async function readiness(req, res) {
     const resources = {};
     const storage = {};
     try {
-        const casework = await caseworkServiceClient.get('/actuator/health');
+        const casework = await caseworkService.get('/actuator/health');
         resources.casework = setStatus(casework);
     } catch (e) {
         resources.casework = status.FAIL;
     }
     try {
-        const workflow = await workflowServiceClient.get('/actuator/health');
+        const workflow = await workflowService.get('/actuator/health');
         resources.workflow = setStatus(workflow);
     } catch (e) {
         resources.workflow = status.FAIL;
     }
     try {
-        const info = await infoServiceClient.get('/actuator/health');
+        const info = await infoService.get('/actuator/health');
         resources.info = setStatus(info);
     } catch (e) {
         resources.info = status.FAIL;
     }
     try {
-        const documents = await docsServiceClient.get('/actuator/health');
+        const documents = await documentService.get('/actuator/health');
         resources.documents = setStatus(documents);
     } catch (e) {
         resources.documents = status.FAIL;

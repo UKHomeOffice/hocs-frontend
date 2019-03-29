@@ -3,7 +3,7 @@ const actionTypes = require('../actions/types');
 
 const mockRequestClient = jest.fn();
 
-jest.mock('../../libs/request', () => {
+jest.mock('../../clients', () => {
     function handleMockWorkflowCreateRequest(body) {
         if (body.type === 'SUPPORTED_CASETYPE')
             return Promise.resolve({
@@ -15,7 +15,7 @@ jest.mock('../../libs/request', () => {
             return Promise.reject('TEST_ERROR');
     }
     return {
-        workflowServiceClient: {
+        workflowService: {
             post: (url, body) => {
                 if (url === '/case') {
                     mockRequestClient(body);
@@ -31,7 +31,7 @@ jest.mock('../../libs/request', () => {
                 mockRequestClient(body);
             }
         },
-        caseworkServiceClient: {
+        caseworkService: {
             post: (url, body) => {
                 if (url === '/case') {
                     mockRequestClient(body);
@@ -47,7 +47,7 @@ jest.mock('../../libs/request', () => {
                 mockRequestClient(body);
             }
         },
-        docsServiceClient: {
+        documentService: {
             post: (url, body) => {
                 if (url === '/case') {
                     mockRequestClient(body);

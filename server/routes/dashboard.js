@@ -5,8 +5,11 @@ const { validationMiddleware: validateForm } = require('../middleware/validation
 const { dashboardMiddleware: getDashboardData } = require('../middleware/dashboard');
 const { getForm } = require('../services/form');
 const form = require('../services/forms/schemas/dashboard-search');
-const { ValidationError } = require('../models/error');
-const { getList } = require('../services/list');
+const { apiErrorMiddleware } = require('../middleware/request');
+const { bindDisplayElements } = require('../lists/adapters/workstacks');
+const getLogger = require('../libs/logger');
+const { caseworkService } = require('../clients');
+const User = require('../models/user');
 
 router.all(['/', '/api/form'],
     getForm(form, { submissionUrl: '/search/reference' }),
@@ -19,11 +22,29 @@ router.post(['/search/reference', '/api/search/reference'],
     processForm,
     validateForm,
     async (req, res, next) => {
+        const logger = getLogger(req.requestId);
         try {
-            const results = await getList('SEARCH_REFERENCE', { user: req.user, form: req.form.data });
-            res.locals.workstack = results;
+            const formData = req.form.data;
+            const reference = encodeURIComponent(formData['case-reference']);
+
+            const response = await caseworkService.get(`/case/${reference}/stage`, {
+                headers: User.createHeaders(req.user)
+            });
+
+            const fromStaticList = req.listService.getFromStaticList;
+            logger.info('SEARCH_REFERENCE', { reference: formData['case-reference'] });
+            const workstackData = await Promise.all(response.data.stages
+                .sort((first, second) => first.caseReference > second.caseReference)
+                .map(bindDisplayElements(fromStaticList)));
+
+            res.locals.workstack = {
+                label: 'Case workflows',
+                items: workstackData
+            };
+
             next();
-        } catch (e) {
+        } catch (error) {
+            logger.error('SEARCH_REFERENCE_FAILED', { message: error.message, stack: error.stack });
             return res.json({ errors: { 'case-reference': 'Failed to perform search' } });
         }
     }
@@ -55,17 +76,6 @@ router.post('/api/search/reference', async (req, res) => {
 
 router.get('/api/form', (req, res) => res.json(req.form));
 
-/* eslint-disable-next-line no-unused-vars */
-router.use('/api*', (err, req, res, next) => {
-    if (err instanceof ValidationError) {
-        return res.status(err.status).json({ errors: err.fields });
-    } else {
-        return res.status(err.status || 500).json({
-            message: err.message,
-            status: err.status || 500,
-            title: err.title
-        });
-    }
-});
+router.use('/api*', apiErrorMiddleware);
 
 module.exports = router;

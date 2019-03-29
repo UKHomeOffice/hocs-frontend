@@ -1,45 +1,54 @@
-const { getList } = require('../services/list');
-const logger = require('../libs/logger');
+const getLogger = require('../libs/logger');
 const User = require('../models/user');
-const { caseworkServiceClient } = require('../libs/request');
+const { caseworkService } = require('../clients');
 
 async function userWorkstackMiddleware(req, res, next) {
     try {
-        const response = await getList('WORKSTACK_USER', { ...req.params, user: req.user });
+        const response = await req.listService.fetch('USER_WORKSTACK', req.params);
         res.locals.workstack = response;
         next();
-    } catch (e) {
-        next(e);
+    } catch (error) {
+        next(error);
     }
 }
 
 async function teamWorkstackMiddleware(req, res, next) {
     try {
-        const response = await getList('WORKSTACK_TEAM', { ...req.params, user: req.user });
+        const response = await req.listService.fetch('TEAM_WORKSTACK', req.params);
         res.locals.workstack = response;
         next();
-    } catch (e) {
-        next(e);
+    } catch (error) {
+        next(error);
     }
 }
 
 async function workflowWorkstackMiddleware(req, res, next) {
     try {
-        const response = await getList('WORKSTACK_WORKFLOW', { ...req.params, user: req.user });
+        const response = await await req.listService.fetch('WORKFLOW_WORKSTACK', req.params);
         res.locals.workstack = response;
         next();
-    } catch (e) {
-        next(e);
+    } catch (error) {
+        next(error);
     }
 }
 
 async function stageWorkstackMiddleware(req, res, next) {
     try {
-        const response = await getList('WORKSTACK_STAGE', { ...req.params, user: req.user });
+        const response = await req.listService.fetch('STAGE_WORKSTACK', req.params);
         res.locals.workstack = response;
         next();
-    } catch (e) {
-        next(e);
+    } catch (error) {
+        next(error);
+    }
+}
+
+async function getTeamMembers(req, res, next) {
+    try {
+        const response = await req.listService.fetch('USERS_IN_TEAM', req.params);
+        res.locals.workstack.teamMembers = response;
+        next();
+    } catch (error) {
+        next(error);
     }
 }
 
@@ -47,12 +56,13 @@ function workstackApiResponseMiddleware(req, res) {
     res.json(res.locals.workstack);
 }
 
-const allocateUser = async (res, [endpoint, body, headers]) => {
+const allocateUser = async (req, res, [endpoint, body, headers]) => {
+    const logger = getLogger(req.requestId);
     try {
-        await caseworkServiceClient.put(endpoint, body, headers);
+        await caseworkService.put(endpoint, body, headers);
         return;
     } catch (error) {
-        logger.error({ event: 'ALLOCATION_FAILED', endpoint, body, headers, status: error.response.status });
+        logger.error('ALLOCATION_FAILED', { endpoint, body, status: error.response.status });
         res.locals.notification = 'Failed to allocate all cases';
         return;
     }
@@ -69,7 +79,7 @@ async function allocateToTeam(req, res, next) {
             .map(([caseId, stageId]) => [`/case/${caseId}/stage/${stageId}/user`, { userUUID: selected_user }, {
                 headers: User.createHeaders(req.user)
             }])
-            .map(async options => await allocateUser(res, options));
+            .map(async options => await allocateUser(req, res, options));
         await Promise.all(requests);
     }
     next();
@@ -86,7 +96,7 @@ async function allocateToUser(req, res, next) {
             .map(([caseId, stageId]) => [`/case/${caseId}/stage/${stageId}/user`, { userUUID: req.user.uuid }, {
                 headers: User.createHeaders(req.user)
             }])
-            .map(async options => await allocateUser(res, options));
+            .map(async options => await allocateUser(req, res, options));
         await Promise.all(requests);
     }
     next();
@@ -103,7 +113,7 @@ async function unallocate(req, res, next) {
             .map(([caseId, stageId]) => [`/case/${caseId}/stage/${stageId}/user`, { userUUID: null }, {
                 headers: User.createHeaders(req.user)
             }])
-            .map(async options => await allocateUser(res, options));
+            .map(async options => await allocateUser(req, res, options));
         await Promise.all(requests);
     }
     next();
@@ -114,6 +124,7 @@ module.exports = {
     teamWorkstackMiddleware,
     workflowWorkstackMiddleware,
     stageWorkstackMiddleware,
+    getTeamMembers,
     workstackApiResponseMiddleware,
     allocateToTeam,
     allocateToUser,
