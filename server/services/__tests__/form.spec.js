@@ -3,14 +3,10 @@ jest.mock('../forms/index.js', () => ({
     getFormForCase: jest.fn()
 }));
 
-jest.mock('../../libs/request.js', () => ({
-    workflowServiceClient: {
+jest.mock('../../clients', () => ({
+    workflowService: {
         get: jest.fn(() => Promise.resolve())
     }
-}));
-
-jest.mock('../list.js', () => ({
-    getList: jest.fn(() => Promise.resolve())
 }));
 
 const mockActionForm = {
@@ -179,8 +175,8 @@ describe('getFormForStage', () => {
                 groups: []
             }
         };
-        const request = require('../../libs/request.js');
-        request.workflowServiceClient.get.mockImplementation(() => Promise.resolve({ data: { form: mockActionForm } }));
+        const { workflowService } = require('../../clients');
+        workflowService.get.mockImplementation(() => Promise.resolve({ data: { form: mockActionForm } }));
         const { getFormForStage } = require('../form');
         await getFormForStage(req, res, next);
         expect(req.form).toBeDefined();
@@ -198,8 +194,8 @@ describe('getFormForStage', () => {
                 groups: []
             }
         };
-        const request = require('../../libs/request.js');
-        request.workflowServiceClient.get.mockImplementation(() => Promise.reject({ stack: 'ERR_STACK', response: { status: 500 } }));
+        const { workflowService } = require('../../clients');
+        workflowService.get.mockImplementation(() => Promise.reject({ stack: 'ERR_STACK', response: { status: 500 } }));
         const { getFormForStage } = require('../form');
         await getFormForStage(req, res, next);
         expect(req.form).toBeUndefined();

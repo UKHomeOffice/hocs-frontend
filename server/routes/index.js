@@ -14,7 +14,7 @@ const { renderMiddleware, renderResponseMiddleware } = require('../middleware/re
 const { errorMiddleware, initRequest } = require('../middleware/request');
 const { protect } = require('../middleware/auth');
 const { createAnalyticsObject } = require('../middleware/analytics');
-const { infoServiceClient } = require('../libs/request');
+const { infoService } = require('../clients');
 const logger = require('../libs/logger');
 const { flushCachedLists } = require('../services/list');
 
@@ -34,8 +34,8 @@ router.get('/members/refresh',
     protect('REFRESH_MEMBERS'),
     async (req, res, next) => {
         try {
-            await infoServiceClient.get('/admin/member/refresh');
-            logger.info('request to update members in info service');
+            await infoService.get('/admin/member/refresh');
+            logger(req.requestId).info('REFRESH_MEMBERS', { user: req.user.email });
             res.status(200).send();
         } catch (error) {
             next(error);
@@ -47,7 +47,7 @@ router.get('/admin/list/flush',
     protect('SYS_ADMIN'),
     (req, res, next) => {
         try {
-            logger.info({ event: 'LIST_SERVICE_FLUSH_CACHE', user: req.user.username });
+            logger(req.requestId).info('FLUSH_CACHE', { user: req.user.email });
             flushCachedLists();
             res.status(200).send();
         } catch (error) {

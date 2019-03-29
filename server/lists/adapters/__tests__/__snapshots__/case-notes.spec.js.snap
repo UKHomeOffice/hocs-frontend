@@ -1,0 +1,150 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Case Notes Adapter should transform case-note data and sort by event time 1`] = `
+Array [
+  Object {
+    "body": Object {
+      "author": "MOCK_USER",
+      "date": "Friday, November 1, 2019, 12:00 AM",
+      "note": "A test case note",
+      "stage": "MOCK_STAGETYPE",
+      "team": "MOCK_TEAM",
+      "user": "MOCK_USER",
+    },
+    "title": "Topic Removed",
+    "type": "CASE_TOPIC_DELETED",
+  },
+  Object {
+    "body": Object {
+      "author": "MOCK_USER",
+      "date": "Tuesday, January 1, 2019, 12:00 AM",
+      "note": "A test case note",
+      "stage": "MOCK_STAGETYPE",
+      "team": "MOCK_TEAM",
+      "user": "MOCK_USER",
+    },
+    "title": "Case Note",
+    "type": "MANUAL",
+  },
+  Object {
+    "body": Object {
+      "author": "MOCK_USER",
+      "date": "Tuesday, January 1, 2019, 12:00 AM",
+      "note": undefined,
+      "stage": "MOCK_STAGETYPE",
+      "team": "MOCK_TEAM",
+      "user": "MOCK_USER",
+    },
+    "title": "System event",
+    "type": "TEST_UNKNOWN_TYPE",
+  },
+  Object {
+    "body": Object {
+      "author": "MOCK_USER",
+      "date": "Friday, February 1, 2019, 12:00 AM",
+      "note": "A test case note",
+      "stage": "MOCK_STAGETYPE",
+      "team": "MOCK_TEAM",
+      "user": "MOCK_USER",
+    },
+    "title": "Document Deleted",
+    "type": "DOCUMENT_DELETED",
+  },
+  Object {
+    "body": Object {
+      "author": "MOCK_USER",
+      "date": "Friday, March 1, 2019, 12:00 AM",
+      "note": "A test case note",
+      "stage": "MOCK_STAGETYPE",
+      "team": "MOCK_TEAM",
+      "user": "MOCK_USER",
+    },
+    "title": "Allocated to User",
+    "type": "STAGE_ALLOCATED_TO_USER",
+  },
+  Object {
+    "body": Object {
+      "author": "MOCK_USER",
+      "date": "Monday, April 1, 2019, 12:00 AM",
+      "note": "A test case note",
+      "stage": "MOCK_STAGETYPE",
+      "team": "MOCK_TEAM",
+      "user": "MOCK_USER",
+    },
+    "title": "Document Created",
+    "type": "DOCUMENT_CREATED",
+  },
+  Object {
+    "body": Object {
+      "author": "MOCK_USER",
+      "date": "Wednesday, May 1, 2019, 12:00 AM",
+      "note": "A test case note",
+      "stage": "MOCK_STAGETYPE",
+      "team": "MOCK_TEAM",
+      "user": "MOCK_USER",
+    },
+    "title": "Allocated to Team",
+    "type": "STAGE_ALLOCATED_TO_TEAM",
+  },
+  Object {
+    "body": Object {
+      "author": "MOCK_USER",
+      "date": "Saturday, June 1, 2019, 12:00 AM",
+      "note": "A test case note",
+      "stage": "MOCK_STAGETYPE",
+      "team": "MOCK_TEAM",
+      "user": "MOCK_USER",
+    },
+    "title": "Case Updated",
+    "type": "CASE_UPDATED",
+  },
+  Object {
+    "body": Object {
+      "author": "MOCK_USER",
+      "date": "Monday, July 1, 2019, 12:00 AM",
+      "note": "A test case note",
+      "stage": "MOCK_STAGETYPE",
+      "team": "MOCK_TEAM",
+      "user": "MOCK_USER",
+    },
+    "title": "Correspondent Added",
+    "type": "CORRESPONDENT_CREATED",
+  },
+  Object {
+    "body": Object {
+      "author": "MOCK_USER",
+      "date": "Thursday, August 1, 2019, 12:00 AM",
+      "note": "A test case note",
+      "stage": "MOCK_STAGETYPE",
+      "team": "MOCK_TEAM",
+      "user": "MOCK_USER",
+    },
+    "title": "Case Created",
+    "type": "CASE_CREATED",
+  },
+  Object {
+    "body": Object {
+      "author": "MOCK_USER",
+      "date": "Sunday, September 1, 2019, 12:00 AM",
+      "note": "A test case note",
+      "stage": "MOCK_STAGETYPE",
+      "team": "MOCK_TEAM",
+      "user": "MOCK_USER",
+    },
+    "title": "Correspondent Removed",
+    "type": "CORRESPONDENT_DELETED",
+  },
+  Object {
+    "body": Object {
+      "author": "MOCK_USER",
+      "date": "Tuesday, October 1, 2019, 12:00 AM",
+      "note": "A test case note",
+      "stage": "MOCK_STAGETYPE",
+      "team": "MOCK_TEAM",
+      "user": "MOCK_USER",
+    },
+    "title": "Topic Added",
+    "type": "CASE_TOPIC_CREATED",
+  },
+]
+`;

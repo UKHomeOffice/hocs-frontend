@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Documents Adapter should transform document data and sort by creation date 1`] = `
+Array [
+  Object {
+    "label": "Document B",
+    "tags": Array [
+      undefined,
+      undefined,
+    ],
+    "timeStamp": "01-01-2019",
+    "value": 2,
+  },
+  Object {
+    "label": "Document A",
+    "tags": Array [
+      undefined,
+      undefined,
+    ],
+    "timeStamp": "02-01-2019",
+    "value": 1,
+  },
+  Object {
+    "label": "Document C",
+    "tags": Array [
+      undefined,
+      undefined,
+    ],
+    "timeStamp": "03-01-2019",
+    "value": 3,
+  },
+]
+`;

@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Case Correspondent Adapter should transform and sort case correspondent data 1`] = `
+Array [
+  Object {
+    "label": "Correspondent A",
+    "value": 1,
+  },
+  Object {
+    "label": "Correspondent B",
+    "value": 2,
+  },
+  Object {
+    "label": "Correspondent C",
+    "value": 3,
+  },
+]
+`;
+
+exports[`Correspondent Type Adapter should transform and sort correspondent type data 1`] = `
+Array [
+  Object {
+    "label": "Type A",
+    "value": "TYPE_A",
+  },
+  Object {
+    "label": "Type B",
+    "value": "TYPE_B",
+  },
+  Object {
+    "label": "Type C",
+    "value": "TYPE_C",
+  },
+]
+`;

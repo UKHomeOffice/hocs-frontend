@@ -1,10 +1,10 @@
 const Form = require('../form-builder');
 const { Component } = require('../component-builder');
-const { caseworkServiceClient } = require('../../../libs/request');
+const { caseworkService } = require('../../../clients');
 const User = require('../../../models/user');
 
 module.exports = async options => {
-    const response = await caseworkServiceClient.get(`/case/${options.caseId}/topic/${options.context}`, { headers: User.createHeaders(options.user) });
+    const response = await caseworkService.get(`/case/${options.caseId}/topic/${options.context}`, { headers: User.createHeaders(options.user) });
     const displayName = response.data.label;
     return Form()
         .withTitle('Remove Topic')

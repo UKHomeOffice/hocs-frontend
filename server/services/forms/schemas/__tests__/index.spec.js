@@ -1,22 +1,18 @@
 const formRepository = require('../index');
 
-jest.mock('../../../../libs/request.js', () => ({
-    caseworkServiceClient: {
+jest.mock('../../../../clients', () => ({
+    caseworkService: {
         get: jest.fn(() => Promise.resolve({ data: {} }))
     },
-    workflowServiceClient: {
+    workflowService: {
         get: jest.fn(() => Promise.resolve({ data: {} }))
     },
-    infoServiceClient: {
+    infoService: {
         get: jest.fn(() => Promise.resolve({ data: {} }))
     },
-    docsServiceClient: {
+    documentService: {
         get: jest.fn(() => Promise.resolve({ data: {} }))
     }
-}));
-
-jest.mock('../../../../services/list.js', () => ({
-    getList: jest.fn(() => Promise.resolve([]))
 }));
 
 describe('Form schema definitions', async () => {

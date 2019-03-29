@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`User Adapter should transform and sort user data 1`] = `
+Array [
+  Object {
+    "label": "User B (user.b@test.com)",
+    "value": 2,
+  },
+  Object {
+    "label": "User C (user.c@test.com)",
+    "value": 3,
+  },
+]
+`;

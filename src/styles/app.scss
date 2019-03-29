@@ -276,9 +276,11 @@ $link-hover-colour: $govuk-link-hover-colour;
   font-weight: bold;
   display: block;
   float: left;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  width: 100%;
   @media screen and (min-width: $tablet-breakpoint) {
-    min-height: 100px;
+    height: 200px;
+    width: percentage(1/3);
   }
 }
 
@@ -314,6 +316,9 @@ a.card__body {
 
   & span {
     width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
     display: block;
     padding: govuk-spacing(2) govuk-spacing(4);
   }

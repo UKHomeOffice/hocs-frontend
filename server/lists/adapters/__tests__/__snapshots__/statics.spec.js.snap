@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Static Casetypes Adapter should transform static casetype data 1`] = `
+Array [
+  Object {
+    "key": "CASETYPE_A",
+    "value": "Casetype A",
+  },
+  Object {
+    "key": "CASETYPE_C",
+    "value": "Casetype C",
+  },
+  Object {
+    "key": "CASETYPE_B",
+    "value": "Casetype B",
+  },
+]
+`;
+
+exports[`Static Stagetypes Adapter should transform and stagetype data 1`] = `
+Array [
+  Object {
+    "key": "STAGETYPE_A",
+    "value": "Stagetype A",
+  },
+  Object {
+    "key": "STAGETYPE_C",
+    "value": "Stagetype C",
+  },
+  Object {
+    "key": "STAGETYPE_B",
+    "value": "Stagetype B",
+  },
+]
+`;
+
+exports[`Static Teams Adapter should transformstatic team data 1`] = `
+Array [
+  Object {
+    "key": "TEAM_A",
+    "value": "Team A",
+  },
+  Object {
+    "key": "TEAM_C",
+    "value": "Team C",
+  },
+  Object {
+    "key": "TEAM_B",
+    "value": "Team B",
+  },
+]
+`;
+
+exports[`Static Users Adapter should transform static user data 1`] = `
+Array [
+  Object {
+    "key": 1,
+    "value": "User A",
+  },
+  Object {
+    "key": 3,
+    "value": "User C",
+  },
+  Object {
+    "key": 2,
+    "value": "User B",
+  },
+]
+`;

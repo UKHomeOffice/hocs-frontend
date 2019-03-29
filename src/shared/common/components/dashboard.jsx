@@ -25,15 +25,15 @@ class Dashboard extends Component {
                         if (alwaysLink || dashboard.length > 1) {
                             return (
                                 <Card key={i} url={url} {...item}>
-                                    {(alwaysShow || (item.tags && item.tags.allocated)) && <span className='govuk-!-font-size-16 govuk-!-font-weight-bold govuk-tag dashboard__tag'>{item.tags.allocated ? item.tags.allocated : 0} Unallocated</span>}
-                                    {item.tags && item.tags.overdue && <span className='govuk-!-font-size-16 govuk-!-font-weight-bold govuk-tag dashboard__tag dashboard__tag--red'>{item.tags.overdue ? item.tags.overdue : 0} Overdue</span>}
+                                    {(alwaysShow || (item.tags && item.tags.allocated > 0)) && <span className='govuk-!-font-size-16 govuk-!-font-weight-bold govuk-tag dashboard__tag'>{item.tags.allocated ? item.tags.allocated : 0} Unallocated</span>}
+                                    {item.tags && item.tags.overdue > 0 && <span className='govuk-!-font-size-16 govuk-!-font-weight-bold govuk-tag dashboard__tag dashboard__tag--red'>{item.tags.overdue ? item.tags.overdue : 0} Overdue</span>}
                                 </Card>
                             );
                         } else {
                             return (
                                 <StaticCard key={i} {...item}>
-                                    {(alwaysShow || (item.tags && item.tags.allocated)) && <span className='govuk-!-font-size-16 govuk-!-font-weight-bold govuk-tag dashboard__tag'>{item.tags.allocated ? item.tags.allocated : 0} Unallocated</span>}
-                                    {item.tags && item.tags.overdue && <span className='govuk-!-font-size-16 govuk-!-font-weight-bold govuk-tag dashboard__tag dashboard__tag--red'>{item.tags.overdue} Overdue</span>}
+                                    {(alwaysShow || (item.tags && item.tags.allocated > 0)) && <span className='govuk-!-font-size-16 govuk-!-font-weight-bold govuk-tag dashboard__tag'>{item.tags.allocated ? item.tags.allocated : 0} Unallocated</span>}
+                                    {item.tags && item.tags.overdue > 0 && <span className='govuk-!-font-size-16 govuk-!-font-weight-bold govuk-tag dashboard__tag dashboard__tag--red'>{item.tags.overdue} Overdue</span>}
                                 </StaticCard>
                             );
                         }
@@ -53,7 +53,7 @@ Dashboard.propTypes = {
 
 Dashboard.defaultProps = {
     baseUrl: '/workstack',
-    alwaysLink: false
+    alwaysLink: true
 };
 
 export default Dashboard;

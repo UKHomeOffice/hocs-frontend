@@ -138,17 +138,24 @@ class WorkstackPage extends Component {
         );
     }
 
+    renderWS({ breadcrumbs, label, dashboard, items }) {
+        return (
+            <Fragment>
+                {breadcrumbs && this.renderBreadCrumb(breadcrumbs)}
+                <h1 className='govuk-heading-l'>
+                    {label}
+                </h1>
+                {dashboard && this.renderDashboard()}
+                {items && this.renderWorkstack()}
+            </Fragment>
+        )
+    }
+
     render() {
-        const { title } = this.props;
         const { workstack } = this.state;
         return (
             <div>
-                {workstack && workstack.breadcrumbs ? this.renderBreadCrumb(workstack.breadcrumbs) : null}
-                <h1 className="govuk-heading-l">
-                    {title}
-                </h1>
-                {workstack && workstack.dashboard ? this.renderDashboard() : null}
-                {workstack && workstack.items ? this.renderWorkstack() : null}
+                {workstack && this.renderWS(workstack)}
             </div>
         );
     }

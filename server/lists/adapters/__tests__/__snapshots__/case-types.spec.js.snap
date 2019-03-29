@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Casetypes Adapter should transform and sort user data 1`] = `
+Array [
+  Object {
+    "label": "Casetype A",
+    "value": "A",
+  },
+  Object {
+    "label": "Casetype B",
+    "value": "B",
+  },
+  Object {
+    "label": "Casetype C",
+    "value": "C",
+  },
+]
+`;
