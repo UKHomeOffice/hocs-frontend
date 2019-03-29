@@ -17,19 +17,19 @@ services:
 
   clamd:
     image: quay.io/ukhomeofficedigital/clamav:v1.4.0
-    networks:
-    - hocs-network
     ports:
     - "3310:3310/tcp"
+    networks:
+    - hocs-network
 
   clamav:
     image: lokori/clamav-rest
-    networks:
-    - hocs-network
     environment:
     - CLAMD_HOST=clamd
     ports:
     - 8086:8080
+    networks:
+    - hocs-network
     depends_on:
     - clamd
 
@@ -52,36 +52,42 @@ services:
   localstack:
     image: localstack/localstack:latest
     ports:
-    - 9000:8080
-    - 4572:4572
-    - 4576:4576
+      - 9000:8080
+      - 4572:4572
+      - 4576:4576
+      - 4575:4575
+      - 4571:4571
+      - 4578:4578
     networks:
     - hocs-network
     environment:
-      HOSTNAME_EXTERNAL: localstack
       DEFAULT_REGION: eu-west-2
-      SERVICES: sqs,s3
+      SERVICES: sqs,s3,sns,es
 
   aws_cli:
     image: garland/aws-cli-docker
-    networks:
-    - hocs-network
     command:
     - /bin/sh
     - -c
     - |
       aws --endpoint-url=http://localstack:4572 s3 mb s3://untrusted-bucket
       aws --endpoint-url=http://localstack:4572 s3 mb s3://trusted-bucket
-      aws --endpoint-url=http://localstack:4576 sqs create-queue --queue-name case-queue
-      aws --endpoint-url=http://localstack:4576 sqs create-queue --queue-name case-queue-dlq
       aws --endpoint-url=http://localstack:4576 sqs create-queue --queue-name document-queue
       aws --endpoint-url=http://localstack:4576 sqs create-queue --queue-name document-queue-dlq
-      aws --endpoint-url=http://localstack:4576 sqs create-queue --queue-name reporting-queue
-      aws --endpoint-url=http://localstack:4576 sqs create-queue --queue-name reporting-queue-dlq
+      aws --endpoint-url=http://localstack:4576 sqs create-queue --queue-name audit-queue
+      aws --endpoint-url=http://localstack:4576 sqs create-queue --queue-name audit-queue-dlq
+      aws --endpoint-url=http://localstack:4576 sqs create-queue --queue-name search-queue
+      aws --endpoint-url=http://localstack:4576 sqs create-queue --queue-name search-queue-dlq
+      aws --endpoint-url=http://localstack:4575 sns create-topic --name hocs-audit-topic
+      aws --endpoint-url=http://localstack:4575 sns subscribe --topic-arn arn:aws:sns:eu-west-2:123456789012:hocs-audit-topic --protocol sqs --notification-endpoint arn:aws:sns:eu-west-2:123456789012:audit-queue
+      aws --endpoint-url=http://localstack:4575 sns subscribe --topic-arn arn:aws:sns:eu-west-2:123456789012:hocs-audit-topic --protocol sqs --notification-endpoint arn:aws:sns:eu-west-2:123456789012:search-queue
+      aws --endpoint-url=http://localstack:4575 sns list-subscriptions
     environment:
       AWS_ACCESS_KEY_ID: UNSET
       AWS_SECRET_ACCESS_KEY: UNSET
       AWS_DEFAULT_REGION: 'eu-west-2'
+    networks:
+    - hocs-network
     depends_on:
     - localstack
 
@@ -107,6 +113,7 @@ services:
     - casework
     - info
     - documents
+    - localstack
 
   casework:
     image: quay.io/ukhomeofficedigital/hocs-casework
@@ -118,15 +125,13 @@ services:
     environment:
       SPRING_PROFILES_ACTIVE: 'development, local'
       SERVER_PORT: 8080
-      CASE_QUEUE_NAME: 'case-queue'
-      CASE_QUEUE_DLQ_NAME: 'case-queue-dlq'
       DB_HOST: 'postgres'
       AWS_LOCAL_HOST: 'localstack'
       HOCS_INFO_SERVICE: 'http://info:8080'
-      AUDIT_QUEUE_NAME: 'reporting-queue'
-      AUDIT_QUEUE_DLQ_NAME: 'reporting-queue-dlq'
+      AUDIT_TOPIC_NAME: "hocs-audit-topic"
     depends_on:
     - postgres
+    - localstack
 
   workflow:
     image: quay.io/ukhomeofficedigital/hocs-workflow
@@ -150,6 +155,7 @@ services:
       AWS_LOCAL_HOST: 'localstack'
     depends_on:
     - postgres
+    - localstack
 
   audit:
     image: quay.io/ukhomeofficedigital/hocs-audit
@@ -162,11 +168,30 @@ services:
       SPRING_PROFILES_ACTIVE: 'development, local'
       SERVER_PORT: 8080
       DB_HOST: 'postgres'
-      AUDIT_QUEUE_NAME: 'reporting-queue'
-      AUDIT_QUEUE_DLQ_NAME: 'reporting-queue-dlq'
+      AUDIT_QUEUE_NAME: 'audit-queue'
+      AUDIT_QUEUE_DLQ_NAME: 'audit-queue-dlq'
       AWS_LOCAL_HOST: 'localstack'
     depends_on:
     - postgres
+    - localstack
+
+  search:
+    image: quay.io/ukhomeofficedigital/hocs-search
+    # image: hocs-search-test
+    ports:
+    - 8088:8080
+    networks:
+    - hocs-network
+    environment:
+      SPRING_PROFILES_ACTIVE: 'development, local'
+      SERVER_PORT: 8080
+      DB_HOST: 'postgres'
+      SEARCH_QUEUE_NAME: 'search-queue'
+      SEARCH_QUEUE_DLQ_NAME: 'search-queue-dlq'
+      AWS_LOCAL_HOST: 'localstack'
+    depends_on:
+    - postgres
+    - localstack
 
   info:
     image: quay.io/ukhomeofficedigital/hocs-info-service
@@ -186,18 +211,17 @@ services:
       HOCS_CASE_SERVICE: 'http://casework:8080'
       HOCS_DOCUMENT_SERVICE: 'http://documents:8080'
       KEYCLOAK_SERVER_ROOT: 'http://keycloak:8080'
-      AUDIT_QUEUE_NAME: 'reporting-queue'
-      AUDIT_QUEUE_DLQ_NAME: 'reporting-queue-dlq'
+      AUDIT_QUEUE_NAME: 'audit-queue'
+      AUDIT_QUEUE_DLQ_NAME: 'audit-queue-dlq'
       HOCS_AUDIT_SERVICE: 'http://audit:8080'
     depends_on:
     - postgres
+    - localstack
 
   converter:
     image: quay.io/ukhomeofficedigital/hocs-docs-converter
     ports:
     - 8084:8080
-    networks:
-    - hocs-network
 
   documents:
     image: quay.io/ukhomeofficedigital/hocs-docs
@@ -221,6 +245,7 @@ services:
     depends_on:
     - converter
     - postgres
+    - localstack
 
 networks:
   hocs-network:
