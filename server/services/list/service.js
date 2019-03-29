@@ -99,7 +99,7 @@ const getInstance = (requestId, user) => {
                 const configuredEndpoint = options ? configureEndpoint(endpoint, options) : endpoint;
                 let response;
                 try {
-                    response = await clientInstance.get(configuredEndpoint, { headers: { ...User.createHeaders(user), 'X-Correlation-listId': requestId } });
+                    response = await clientInstance.get(configuredEndpoint, { headers: { ...User.createHeaders(user), 'X-Correlation-Id': requestId } });
                 } catch (error) {
                     logger.error('FETCH_LIST_REQUEST_FAILURE', { list: listId, message: error.message, stack: error.stack });
                     throw new Error('Failed to request list');
