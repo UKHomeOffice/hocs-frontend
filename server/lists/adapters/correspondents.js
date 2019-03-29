@@ -7,7 +7,7 @@ const caseCorrespondentAdapter = async (data, { logger }) => {
 
 const correspondentTypeAdapter = async (data, { logger }) => {
     logger.debug('REQUEST_CORRESPONDENT_TYPES', { types: data.length });
-    return data.map(({ type, displayName }) => ({ label: displayName, value: type })).sort(byLabel);
+    return data.correspondentTypes.map(({ type, displayName }) => ({ label: displayName, value: type })).sort(byLabel);
 };
 
 module.exports = {
