@@ -80,7 +80,7 @@ module.exports = {
         },
         DRAFT_TEAMS: {
             client: 'INFO',
-            endpoint: '/teams/drafter',
+            endpoint: '/teams/drafters',
             adapter: teamsAdapter
         },
         PRIVATE_OFFICE_TEAMS: {
