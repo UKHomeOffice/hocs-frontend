@@ -38,6 +38,7 @@ router.post(['/search/results', '/api/search/results'],
                 activeOnly: Array.isArray(formData['caseStatus']) && formData['caseStatus'].includes('active')
             };
 
+            logger.info('SEARCH', { request });
             const response = await caseworkService.post('/search', request, {
                 headers: User.createHeaders(req.user)
             });

@@ -60,9 +60,9 @@ const initialise = async (lists = {}, clients = {}, initialState = {}) => {
                         logger.error('INITIALISE_STATIC_LIST_REQUEST_FAILURE', { list: listId, status: error.response.status });
                         return handleFailure(listId);
                     }
-                    const listData = await applyAdapter(response.data, adapter);
+                    const listData = await applyAdapter(response.data, adapter, { logger });
                     listCache.store(listId, listData);
-                    logger.debug('INITIALISE_STATIC_LIST_SUCCESS', { list: listId, client: client, endpoint: endpoint });
+                    logger.info('INITIALISE_STATIC_LIST_SUCCESS', { list: listId, client: client, endpoint: endpoint });
                 }
             }
         } catch (error) {
@@ -104,7 +104,7 @@ const getInstance = (requestId, user) => {
                     logger.error('FETCH_LIST_REQUEST_FAILURE', { list: listId, message: error.message, stack: error.stack });
                     throw new Error('Failed to request list');
                 }
-                const listData = await applyAdapter(response.data, adapter, { ...options, user, fromStaticList });
+                const listData = await applyAdapter(response.data, adapter, { ...options, user, fromStaticList, logger });
                 if (type === listType.STATIC && listData) {
                     listCache.store(listId, listData);
                 }

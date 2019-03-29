@@ -1,5 +1,12 @@
 const membersAdapter = require('../members');
 
+const mockLogger = {
+    debug: () => { },
+    info: () => { },
+    warn: () => { },
+    error: () => { }
+};
+
 describe('Members Adapter', () => {
 
     it('should transform member data', async () => {
@@ -12,7 +19,7 @@ describe('Members Adapter', () => {
             ]
         };
 
-        const results = await membersAdapter(mockData);
+        const results = await membersAdapter(mockData, { logger: mockLogger });
 
         expect(results).toBeDefined();
         expect(results).toMatchSnapshot();

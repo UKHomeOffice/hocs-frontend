@@ -1,20 +1,28 @@
 const { dashboardAdapter, userAdapter, teamAdapter, workflowAdapter, stageAdapter } = require('../workstacks');
 
 const mockUser = { uuid: 1 };
+
 const mockFromStaticList = jest.fn((list) => {
     switch (list) {
-        case 'S_TEAMS':
-            return 'MOCK_TEAM';
-        case 'S_CASETYPES':
-            return 'MOCK_CASETYPE';
-        case 'S_STAGETYPES':
-            return 'MOCK_STAGETYPE';
-        case 'S_USERS':
-            return 'MOCK_USER';
-        default:
-            return null;
+    case 'S_TEAMS':
+        return 'MOCK_TEAM';
+    case 'S_CASETYPES':
+        return 'MOCK_CASETYPE';
+    case 'S_STAGETYPES':
+        return 'MOCK_STAGETYPE';
+    case 'S_USERS':
+        return 'MOCK_USER';
+    default:
+        return null;
     }
 });
+
+const mockLogger = {
+    debug: () => { },
+    info: () => { },
+    warn: () => { },
+    error: () => { }
+};
 
 describe('Dashboard Adapter', () => {
     it('should transform a stage array to a dashboard schema', async () => {
@@ -51,7 +59,7 @@ describe('Dashboard Adapter', () => {
             ]
         };
 
-        const result = await dashboardAdapter(mockData, { user: mockUser, fromStaticList: mockFromStaticList });
+        const result = await dashboardAdapter(mockData, { user: mockUser, fromStaticList: mockFromStaticList, logger: mockLogger });
         expect(result).toMatchSnapshot();
     });
 });
@@ -84,7 +92,7 @@ describe('User Workstack Adapter', () => {
             ]
         };
 
-        const result = await userAdapter(mockData, { user: mockUser, fromStaticList: mockFromStaticList });
+        const result = await userAdapter(mockData, { user: mockUser, fromStaticList: mockFromStaticList, logger: mockLogger });
         expect(result).toMatchSnapshot();
     });
 });
@@ -144,7 +152,7 @@ describe('Team Workstack Adapter', () => {
             ]
         };
 
-        const result = await teamAdapter(mockData, { user: mockUser, fromStaticList: mockFromStaticList, teamId: 2 });
+        const result = await teamAdapter(mockData, { user: mockUser, fromStaticList: mockFromStaticList, logger: mockLogger, teamId: 2 });
         expect(result).toMatchSnapshot();
     });
 });
@@ -220,7 +228,7 @@ describe('Workflow Workstack Adapter', () => {
             ]
         };
 
-        const result = await workflowAdapter(mockData, { user: mockUser, fromStaticList: mockFromStaticList, teamId: 2, workflowId: 'B' });
+        const result = await workflowAdapter(mockData, { user: mockUser, fromStaticList: mockFromStaticList, logger: mockLogger, teamId: 2, workflowId: 'B' });
         expect(result).toMatchSnapshot();
     });
 });
@@ -296,7 +304,7 @@ describe('Workflow Workstack Adapter', () => {
             ]
         };
 
-        const result = await stageAdapter(mockData, { user: mockUser, fromStaticList: mockFromStaticList, teamId: 2, workflowId: 'B', stageId: 'A' });
+        const result = await stageAdapter(mockData, { user: mockUser, fromStaticList: mockFromStaticList, logger: mockLogger, teamId: 2, workflowId: 'B', stageId: 'A' });
         expect(result).toMatchSnapshot();
     });
 });

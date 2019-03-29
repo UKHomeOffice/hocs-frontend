@@ -35,9 +35,10 @@ class Card {
     incrementOverdue() { this.tags.overdue++; }
     incrementUnallocated() { this.tags.allocated++; }
     incrementCount() { this.count++; }
+    getCount() { return this.count; }
 }
 
-const dashboardAdapter = async (data, { fromStaticList, user }) => {
+const dashboardAdapter = async (data, { fromStaticList, logger, user }) => {
     const dashboardData = await Promise.all(data.stages
         .map(bindDisplayElements(fromStaticList)));
     const userCard = [new Card({
@@ -69,14 +70,16 @@ const dashboardAdapter = async (data, { fromStaticList, user }) => {
             return cards;
         }, [])
         .sort((a, b) => a.label.localeCompare(b.label));
+    logger.debug('REQUEST_DASHBOARD', { user_cases: userCard[0].getCount(), teams: teamCards.length });
     return { user: userCard, teams: teamCards };
 };
 
-const userAdapter = async (data, { fromStaticList, user }) => {
+const userAdapter = async (data, { fromStaticList, logger, user }) => {
     const workstackData = await Promise.all(data.stages
         .filter(stage => stage.userUUID === user.uuid)
         .sort(byCaseReference)
         .map(bindDisplayElements(fromStaticList)));
+    logger.debug('REQUEST_USER_WORKSTACK', { user_cases: workstackData.length });
     return {
         label: 'My Cases',
         items: workstackData,
@@ -84,7 +87,7 @@ const userAdapter = async (data, { fromStaticList, user }) => {
     };
 };
 
-const teamAdapter = async (data, { fromStaticList, teamId }) => {
+const teamAdapter = async (data, { fromStaticList, logger, teamId }) => {
     const workstackData = await Promise.all(data.stages
         .filter(stage => stage.teamUUID === teamId)
         .sort(byCaseReference)
@@ -113,8 +116,10 @@ const teamAdapter = async (data, { fromStaticList, teamId }) => {
             return cards;
         }, [])
         .sort(byLabel);
+    const teamDisplayName = await fromStaticList('S_TEAMS', teamId);
+    logger.debug('REQUEST_TEAM_WORKSTACK', { team: teamDisplayName, workflows: workflowCards.length, rows: workstackData.length });
     return {
-        label: await fromStaticList('S_TEAMS', teamId),
+        label: teamDisplayName,
         items: workstackData,
         dashboard: workflowCards,
         teamMembers: [],
@@ -124,7 +129,7 @@ const teamAdapter = async (data, { fromStaticList, teamId }) => {
     };
 };
 
-const workflowAdapter = async (data, { fromStaticList, teamId, workflowId }) => {
+const workflowAdapter = async (data, { fromStaticList, logger, teamId, workflowId }) => {
     const workstackData = await Promise.all(data.stages
         .filter(stage => stage.teamUUID === teamId && stage.caseType === workflowId)
         .sort(byCaseReference)
@@ -153,8 +158,10 @@ const workflowAdapter = async (data, { fromStaticList, teamId, workflowId }) => 
             return cards;
         }, [])
         .sort(byLabel);
+    const workflowDisplayName = await fromStaticList('S_CASETYPES', workflowId);
+    logger.debug('REQUEST_WORKFLOW_WORKSTACK', { workflow: workflowDisplayName, stages: stageCards.length, rows: workstackData.length });
     return {
-        label: await fromStaticList('S_CASETYPES', workflowId),
+        label: workflowDisplayName,
         items: workstackData,
         dashboard: stageCards,
         teamMembers: [],
@@ -163,11 +170,13 @@ const workflowAdapter = async (data, { fromStaticList, teamId, workflowId }) => 
         allocateToWorkstackEndpoint: '/unallocate/'
     };
 };
-const stageAdapter = async (data, { fromStaticList, teamId, workflowId, stageId }) => {
+const stageAdapter = async (data, { fromStaticList, logger, teamId, workflowId, stageId }) => {
     const workstackData = await Promise.all(data.stages
         .filter(stage => stage.teamUUID === teamId && stage.caseType === workflowId && stage.stageType === stageId)
         .sort(byCaseReference)
         .map(bindDisplayElements(fromStaticList)));
+    const stageDisplayName = await fromStaticList('S_STAGETYPES', stageId);
+    logger.debug('REQUEST_STAGE_WORKSTACK', { stage: stageDisplayName, rows: workstackData.length });
     return {
         label: await fromStaticList('S_STAGETYPES', stageId),
         items: workstackData,

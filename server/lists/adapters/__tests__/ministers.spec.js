@@ -1,5 +1,12 @@
 const ministerAdapter = require('../ministers');
 
+const mockLogger = {
+    debug: () => { },
+    info: () => { },
+    warn: () => { },
+    error: () => { }
+};
+
 describe('Minister Adapter', () => {
     it('should transform and sort minister data', async () => {
         const mockData = {
@@ -10,7 +17,7 @@ describe('Minister Adapter', () => {
             ]
         };
 
-        const results = await ministerAdapter(mockData);
+        const results = await ministerAdapter(mockData, { logger: mockLogger });
         expect(results).toBeDefined();
         expect(results).toMatchSnapshot();
     });

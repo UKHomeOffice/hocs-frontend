@@ -1,5 +1,12 @@
 const { caseCorrespondentAdapter, correspondentTypeAdapter } = require('../correspondents');
 
+const mockLogger = {
+    debug: () => { },
+    info: () => { },
+    warn: () => { },
+    error: () => { }
+};
+
 describe('Case Correspondent Adapter', () => {
     it('should transform and sort case correspondent data', async () => {
         const mockData = {
@@ -10,7 +17,7 @@ describe('Case Correspondent Adapter', () => {
             ]
         };
 
-        const results = await caseCorrespondentAdapter(mockData);
+        const results = await caseCorrespondentAdapter(mockData, { logger: mockLogger });
         expect(results).toBeDefined();
         expect(results).toMatchSnapshot();
     });
@@ -24,7 +31,7 @@ describe('Correspondent Type Adapter', () => {
             { uuid: 1234, displayName: 'Type C', type: 'TYPE_C' }
         ];
 
-        const results = await correspondentTypeAdapter(mockData);
+        const results = await correspondentTypeAdapter(mockData, { logger: mockLogger });
         expect(results).toBeDefined();
         expect(results).toMatchSnapshot();
     });

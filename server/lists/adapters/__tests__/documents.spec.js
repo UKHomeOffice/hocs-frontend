@@ -1,5 +1,12 @@
 const documentsAdapter = require('../documents');
 
+const mockLogger = {
+    debug: () => { },
+    info: () => { },
+    warn: () => { },
+    error: () => { }
+};
+
 describe('Documents Adapter', () => {
 
     it('should transform document data and sort by creation date', async () => {
@@ -11,7 +18,7 @@ describe('Documents Adapter', () => {
             ]
         };
 
-        const results = await documentsAdapter(mockData);
+        const results = await documentsAdapter(mockData, { logger: mockLogger });
 
         expect(results).toBeDefined();
         expect(results).toMatchSnapshot();

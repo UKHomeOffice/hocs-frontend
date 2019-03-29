@@ -1,5 +1,12 @@
 const topicsAdapter = require('../topics');
 
+const mockLogger = {
+    debug: () => { },
+    info: () => { },
+    warn: () => { },
+    error: () => { }
+};
+
 describe('Topic Adapter', () => {
     it('should transform and sort topic data', async () => {
         const mockData = {
@@ -14,7 +21,7 @@ describe('Topic Adapter', () => {
             ]
         };
 
-        const results = await topicsAdapter(mockData);
+        const results = await topicsAdapter(mockData, { logger: mockLogger });
 
         expect(results).toBeDefined();
         expect(results).toMatchSnapshot();

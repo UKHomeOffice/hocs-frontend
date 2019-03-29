@@ -8,7 +8,7 @@ const listService = require('../services/list/');
 function apiErrorMiddleware(err, req, res, next) {
 
     if (err instanceof ValidationError) {
-        logger(req.requestId).debug(err);
+        logger(req.requestId).info('VALIDATION_FAILED', { errors: Object.keys(err.fields) });
         return res.status(err.status).json({ errors: err.fields });
     } else {
         logger(req.requestId).error('ERROR', { message: err.message, stack: err.stack });
@@ -23,7 +23,7 @@ function apiErrorMiddleware(err, req, res, next) {
 
 function errorMiddleware(err, req, res, next) {
     if (err instanceof ValidationError) {
-        logger(req.requestId).debug(err);
+        logger(req.requestId).info('VALIDATION_FAILED', { errors: Object.keys(err.fields) });
         res.status(err.status || 500);
         req.form.errors = err.fields;
     } else {

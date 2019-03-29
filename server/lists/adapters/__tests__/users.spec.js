@@ -1,5 +1,12 @@
 const usersAdapter = require('../users');
 
+const mockLogger = {
+    debug: () => { },
+    info: () => { },
+    warn: () => { },
+    error: () => { }
+};
+
 describe('User Adapter', () => {
 
     it('should transform and sort user data', async () => {
@@ -9,7 +16,7 @@ describe('User Adapter', () => {
             { firstName: 'User', lastName: 'B', email: 'user.b@test.com', id: 2 }
         ];
 
-        const results = await usersAdapter(mockData, { user: { id: 1 } });
+        const results = await usersAdapter(mockData, { user: { id: 1 }, logger: mockLogger });
 
         expect(results).toBeDefined();
         expect(results).toMatchSnapshot();

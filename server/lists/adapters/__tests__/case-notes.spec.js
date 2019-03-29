@@ -2,18 +2,25 @@ const caseNotesAdapter = require('../case-notes');
 
 const mockFromStaticList = jest.fn((list) => {
     switch (list) {
-        case 'S_TEAMS':
-            return 'MOCK_TEAM';
-        case 'S_CASETYPES':
-            return 'MOCK_CASETYPE';
-        case 'S_STAGETYPES':
-            return 'MOCK_STAGETYPE';
-        case 'S_USERS':
-            return 'MOCK_USER';
-        default:
-            return null;
+    case 'S_TEAMS':
+        return 'MOCK_TEAM';
+    case 'S_CASETYPES':
+        return 'MOCK_CASETYPE';
+    case 'S_STAGETYPES':
+        return 'MOCK_STAGETYPE';
+    case 'S_USERS':
+        return 'MOCK_USER';
+    default:
+        return null;
     }
 });
+
+const mockLogger = {
+    debug: () => { },
+    info: () => { },
+    warn: () => { },
+    error: () => { }
+};
 
 describe('Case Notes Adapter', () => {
 
@@ -33,7 +40,7 @@ describe('Case Notes Adapter', () => {
             { eventTime: '01-01-2019', type: 'TEST_UNKNOWN_TYPE', userName: 'User A' }
         ];
 
-        const results = await caseNotesAdapter(mockData, { fromStaticList: mockFromStaticList });
+        const results = await caseNotesAdapter(mockData, { fromStaticList: mockFromStaticList, logger: mockLogger });
 
         expect(results).toBeDefined();
         expect(results).toMatchSnapshot();

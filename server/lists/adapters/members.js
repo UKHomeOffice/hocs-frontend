@@ -1,6 +1,7 @@
 const byLabel = (a, b) => a.label.toUpperCase().localeCompare(b.label.toUpperCase());
 
-module.exports = async (data) => {
+module.exports = async (data, { logger }) => {
+    logger.debug('REQUEST_MEMBERS', { members: data.members.length });
     return data.members
         .sort(byLabel)
         .reduce((groups, { group, label, value }) => {

@@ -1,5 +1,12 @@
 const caseTypesAdapter = require('../case-types');
 
+const mockLogger = {
+    debug: () => { },
+    info: () => { },
+    warn: () => { },
+    error: () => { }
+};
+
 describe('Casetypes Adapter', () => {
 
     it('should transform and sort user data', async () => {
@@ -11,7 +18,7 @@ describe('Casetypes Adapter', () => {
             ]
         };
 
-        const results = await caseTypesAdapter(mockData);
+        const results = await caseTypesAdapter(mockData, { logger: mockLogger });
         expect(results).toBeDefined();
         expect(results).toMatchSnapshot();
     });

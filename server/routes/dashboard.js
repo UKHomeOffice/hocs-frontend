@@ -5,7 +5,7 @@ const { validationMiddleware: validateForm } = require('../middleware/validation
 const { dashboardMiddleware: getDashboardData } = require('../middleware/dashboard');
 const { getForm } = require('../services/form');
 const form = require('../services/forms/schemas/dashboard-search');
-const { ValidationError } = require('../models/error');
+const { apiErrorMiddleware } = require('../middleware/request');
 const { bindDisplayElements } = require('../lists/adapters/workstacks');
 const getLogger = require('../libs/logger');
 const { caseworkService } = require('../clients');
@@ -32,7 +32,7 @@ router.post(['/search/reference', '/api/search/reference'],
             });
 
             const fromStaticList = req.listService.getFromStaticList;
-
+            logger.info('SEARCH_REFERENCE', { reference: formData['case-reference'] });
             const workstackData = await Promise.all(response.data.stages
                 .sort((first, second) => first.caseReference > second.caseReference)
                 .map(bindDisplayElements(fromStaticList)));
@@ -44,7 +44,7 @@ router.post(['/search/reference', '/api/search/reference'],
 
             next();
         } catch (error) {
-            logger.error('SEARCH_FAILED', { message: error.message, stack: error.stack });
+            logger.error('SEARCH_REFERENCE_FAILED', { message: error.message, stack: error.stack });
             return res.json({ errors: { 'case-reference': 'Failed to perform search' } });
         }
     }
@@ -76,17 +76,6 @@ router.post('/api/search/reference', async (req, res) => {
 
 router.get('/api/form', (req, res) => res.json(req.form));
 
-/* eslint-disable-next-line no-unused-vars */
-router.use('/api*', (err, req, res, next) => {
-    if (err instanceof ValidationError) {
-        return res.status(err.status).json({ errors: err.fields });
-    } else {
-        return res.status(err.status || 500).json({
-            message: err.message,
-            status: err.status || 500,
-            title: err.title
-        });
-    }
-});
+router.use('/api*', apiErrorMiddleware);
 
 module.exports = router;

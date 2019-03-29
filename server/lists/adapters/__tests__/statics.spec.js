@@ -1,5 +1,12 @@
 const { usersAdapter, teamsAdapter, caseTypesAdapter, stageTypesAdapter } = require('../statics');
 
+const mockLogger = {
+    debug: () => { },
+    info: () => { },
+    warn: () => { },
+    error: () => { }
+};
+
 describe('Static Users Adapter', () => {
     it('should transform static user data', async () => {
         const mockData = [
@@ -8,7 +15,7 @@ describe('Static Users Adapter', () => {
             { username: 'User B', id: 2 }
         ];
 
-        const results = await usersAdapter(mockData);
+        const results = await usersAdapter(mockData, { logger: mockLogger });
         expect(results).toBeDefined();
         expect(results).toMatchSnapshot();
     });
@@ -22,7 +29,7 @@ describe('Static Teams Adapter', () => {
             { displayName: 'Team B', type: 'TEAM_B' }
         ];
 
-        const results = await teamsAdapter(mockData);
+        const results = await teamsAdapter(mockData, { logger: mockLogger });
         expect(results).toBeDefined();
         expect(results).toMatchSnapshot();
     });
@@ -38,7 +45,7 @@ describe('Static Casetypes Adapter', () => {
             ]
         };
 
-        const results = await caseTypesAdapter(mockData);
+        const results = await caseTypesAdapter(mockData, { logger: mockLogger });
         expect(results).toBeDefined();
         expect(results).toMatchSnapshot();
     });
@@ -54,7 +61,7 @@ describe('Static Stagetypes Adapter', () => {
             ]
         };
 
-        const results = await stageTypesAdapter(mockData);
+        const results = await stageTypesAdapter(mockData, { logger: mockLogger });
         expect(results).toBeDefined();
         expect(results).toMatchSnapshot();
     });

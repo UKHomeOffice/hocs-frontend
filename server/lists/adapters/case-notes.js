@@ -26,7 +26,8 @@ const formatDate = (date) => {
     }).format(new Date(date));
 };
 
-module.exports = async (data, { fromStaticList }) => {
+module.exports = async (data, { fromStaticList, logger }) => {
+    logger.debug('REQUEST_CASE_NOTES', { notes: data.length });
     return await Promise.all(data
         .sort((a, b) => Date.parse(a.eventTime) > Date.parse(b.eventTime))
         .map(async ({ eventTime, type, userName: authorId, body = {} }) => {

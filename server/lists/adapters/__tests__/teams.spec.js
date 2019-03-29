@@ -1,5 +1,12 @@
 const teamsAdapter = require('../teams');
 
+const mockLogger = {
+    debug: () => { },
+    info: () => { },
+    warn: () => { },
+    error: () => { }
+};
+
 describe('User Adapter', () => {
 
     it('should transform and sort team data', async () => {
@@ -9,7 +16,7 @@ describe('User Adapter', () => {
             { displayName: 'Team C', type: 'TEAM_C' },
         ];
 
-        const results = await teamsAdapter(mockData);
+        const results = await teamsAdapter(mockData, { logger: mockLogger });
 
         expect(results).toBeDefined();
         expect(results).toMatchSnapshot();
