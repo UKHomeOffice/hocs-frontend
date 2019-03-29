@@ -41,10 +41,11 @@ class Card {
 const dashboardAdapter = async (data, { fromStaticList, logger, user }) => {
     const dashboardData = await Promise.all(data.stages
         .map(bindDisplayElements(fromStaticList)));
+    const userCases = dashboardData.filter(byUser(user.uuid));
     const userCard = [new Card({
         label: 'Cases',
-        count: dashboardData.filter(byUser(user.uuid)).length,
-        overdue: getOverdue(dashboardData)
+        count: userCases.length,
+        overdue: getOverdue(userCases)
     })];
     const teamCards = dashboardData
         .reduce((cards, stage) => {
