@@ -15,7 +15,7 @@ class DocumentList extends Component {
                 <caption className='govuk-table__caption'>Documents</caption>
                 <tbody className='govuk-table__body'>
                     {
-                        caseId && documents.map((d, i) => (
+                        caseId && Array.isArray(documents) && documents.map((d, i) => (
                             <tr key={i} className='govuk-table__row'>
                                 <td className='govuk-table__cell'>
                                     <strong className='govuk-tag margin-right--small'>{d.type}</strong>
