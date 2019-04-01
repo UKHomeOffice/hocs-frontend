@@ -18,17 +18,16 @@ class DocumentList extends Component {
                         caseId && documents.map((d, i) => (
                             <tr key={i} className='govuk-table__row'>
                                 <td className='govuk-table__cell'>
-                                    <strong className='govuk-tag margin-right--small'>{d.type}</strong>
-                                    <strong className='govuk-tag'>{d.status}</strong>
+                                    {Array.isArray(d.tags) && d.tags.map((tag) => <strong className='govuk-tag margin-right--small'>{tag}</strong>)}
                                 </td>
                                 <td className='govuk-table__cell'>
-                                    {d.displayName}
+                                    {d.label}
                                 </td>
                                 <td className='govuk-table__cell'>
-                                    {d.uuid && d.status === 'UPLOADED' && caseId && activeDocument !== d.uuid && <a id={`${d.uuid}-pdf`} href={`/case/${caseId}/stage/${stageId}/download/document/${d.uuid}/pdf`} className='govuk-link' onClick={e => this._onClick(e, `${d.uuid}`)}>Preview</a>}
+                                    {d.value && d.status === 'UPLOADED' && caseId && activeDocument !== d.value && <a id={`${d.value}-pdf`} href={`/case/${caseId}/stage/${stageId}/download/document/${d.value}/pdf`} className='govuk-link' onClick={e => this._onClick(e, `${d.value}`)}>Preview</a>}
                                 </td>
                                 <td className='govuk-table__cell'>
-                                    {d.uuid && d.status === 'UPLOADED' && caseId && <a href={`/case/${caseId}/stage/${stageId}/download/document/${d.uuid}/original`} className='govuk-link' download={d.displayName} >Download</a>}
+                                    {d.value && d.status === 'UPLOADED' && caseId && <a href={`/case/${caseId}/stage/${stageId}/download/document/${d.value}/original`} className='govuk-link' download={d.label} >Download</a>}
                                 </td>
                             </tr>
                         ))
