@@ -90,7 +90,7 @@ const getInstance = (requestId, user) => {
     const fetchList = async (listId, options) => {
         try {
             if (listRepository.hasResource(listId)) {
-                const { endpoint, type, client, adapter } = listRepository.fetch(listId);
+                const { endpoint, type, client, adapter, defaultValue } = listRepository.fetch(listId);
                 if (type === listType.STATIC && listCache.hasResource(listId)) {
                     return listCache.fetch(listId);
                 }
@@ -102,6 +102,9 @@ const getInstance = (requestId, user) => {
                     response = await clientInstance.get(configuredEndpoint, { headers: { ...User.createHeaders(user), 'X-Correlation-Id': requestId } });
                 } catch (error) {
                     logger.error('FETCH_LIST_REQUEST_FAILURE', { list: listId, message: error.message, stack: error.stack });
+                    if (error.response && error.response.status === 404 && defaultValue) {
+                        return defaultValue;
+                    }
                     throw new Error('Failed to request list');
                 }
                 const listData = await applyAdapter(response.data, adapter, { ...options, user, fromStaticList, logger });

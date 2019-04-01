@@ -126,12 +126,14 @@ module.exports = {
         CASE_TEMPLATES: {
             client: 'CASEWORK',
             endpoint: '/case/${caseId}/template',
-            adapter: templatesAdapter
+            adapter: templatesAdapter,
+            defaultValue: []
         },
         CASE_STANDARD_LINES: {
             client: 'CASEWORK',
             endpoint: '/case/${caseId}/standardLine',
-            adapter: templatesAdapter
+            adapter: templatesAdapter,
+            defaultValue: []
         },
         MINISTERS: {
             client: 'INFO',
