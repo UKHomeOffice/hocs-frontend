@@ -51,7 +51,7 @@ class DocumentPanel extends Component {
                                 .then(() => {
                                     this.setState({
                                         documents: response.data,
-                                        activeDocument: this.state.activeDocument || response.data[0] ? response.data[0].uuid : null
+                                        activeDocument: this.state.activeDocument || response.data[0] ? response.data[0].value : null
                                     });
                                     if (!this.hasPendingDocuments(response.data)) {
                                         // TODO: Remove

@@ -29,7 +29,8 @@ module.exports = {
             client: 'INFO',
             endpoint: '/users',
             type: listService.types.STATIC,
-            adapter: statics.usersAdapter
+            adapter: statics.usersAdapter,
+            default: []
         },
         S_CASETYPES: {
             client: 'INFO',
@@ -126,12 +127,14 @@ module.exports = {
         CASE_TEMPLATES: {
             client: 'CASEWORK',
             endpoint: '/case/${caseId}/template',
-            adapter: templatesAdapter
+            adapter: templatesAdapter,
+            defaultValue: []
         },
         CASE_STANDARD_LINES: {
             client: 'CASEWORK',
             endpoint: '/case/${caseId}/standardLine',
-            adapter: templatesAdapter
+            adapter: templatesAdapter,
+            defaultValue: []
         },
         MINISTERS: {
             client: 'INFO',
