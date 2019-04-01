@@ -111,7 +111,7 @@ const hydrateFields = async (req, res, next) => {
         try {
             await Promise.all(requests);
         } catch (error) {
-            return next(new Error('Failed to hydrate form fields'));
+            return next(new Error('Failed to populate form fields'));
         }
         next();
     } else {

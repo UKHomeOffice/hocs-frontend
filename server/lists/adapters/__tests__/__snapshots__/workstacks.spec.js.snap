@@ -30,7 +30,7 @@ Object {
       "label": "Cases",
       "tags": Object {
         "allocated": undefined,
-        "overdue": 2,
+        "overdue": 1,
       },
       "type": undefined,
       "value": undefined,

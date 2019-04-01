@@ -17,7 +17,7 @@ class DocumentPanel extends Component {
         super(props);
         let activeDocument;
         if (props.documents && props.documents.length > 0) {
-            activeDocument = props.documents[0].uuid || null;
+            activeDocument = props.documents[0].value || null;
         }
         this.state = { ...props, activeDocument };
     }

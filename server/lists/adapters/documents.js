@@ -6,6 +6,6 @@ module.exports = async (data, { logger }) => {
             const tags = [];
             tags.push(type);
             tags.push(status);
-            return { label: displayName, value: uuid, timeStamp: created, tags: tags.length > 0 ? tags : null };
+            return { label: displayName, value: uuid, timeStamp: created, status, tags: tags.length > 0 ? tags : null };
         });
 };

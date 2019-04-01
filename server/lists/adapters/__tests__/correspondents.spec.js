@@ -25,11 +25,13 @@ describe('Case Correspondent Adapter', () => {
 
 describe('Correspondent Type Adapter', () => {
     it('should transform and sort correspondent type data', async () => {
-        const mockData = [
-            { uuid: 1234, displayName: 'Type A', type: 'TYPE_A' },
-            { uuid: 1234, displayName: 'Type B', type: 'TYPE_B' },
-            { uuid: 1234, displayName: 'Type C', type: 'TYPE_C' }
-        ];
+        const mockData = {
+            correspondentTypes: [
+                { uuid: 1234, displayName: 'Type A', type: 'TYPE_A' },
+                { uuid: 1234, displayName: 'Type B', type: 'TYPE_B' },
+                { uuid: 1234, displayName: 'Type C', type: 'TYPE_C' }
+            ]
+        };
 
         const results = await correspondentTypeAdapter(mockData, { logger: mockLogger });
         expect(results).toBeDefined();

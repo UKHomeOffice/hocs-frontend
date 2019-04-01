@@ -29,7 +29,7 @@ const formatDate = (date) => {
 module.exports = async (data, { fromStaticList, logger }) => {
     logger.debug('REQUEST_CASE_NOTES', { notes: data.length });
     return await Promise.all(data
-        .sort((a, b) => Date.parse(a.eventTime) > Date.parse(b.eventTime))
+        .sort((a, b) => new Date(a.eventTime) < new Date(b.eventTime) ? 1 : -1)
         .map(async ({ eventTime, type, userName: authorId, body = {} }) => {
             const { caseNote, userUUID: userId, teamUUID: teamId, stage: stageId } = body;
             return {
