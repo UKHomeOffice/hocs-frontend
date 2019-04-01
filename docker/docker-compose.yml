@@ -61,6 +61,7 @@ services:
     networks:
     - hocs-network
     environment:
+      HOSTNAME_EXTERNAL: localstack
       DEFAULT_REGION: eu-west-2
       SERVICES: sqs,s3,sns,es
 
@@ -70,6 +71,7 @@ services:
     - /bin/sh
     - -c
     - |
+      sleep 15
       aws --endpoint-url=http://localstack:4572 s3 mb s3://untrusted-bucket
       aws --endpoint-url=http://localstack:4572 s3 mb s3://trusted-bucket
       aws --endpoint-url=http://localstack:4576 sqs create-queue --queue-name document-queue
@@ -128,6 +130,8 @@ services:
       DB_HOST: 'postgres'
       AWS_LOCAL_HOST: 'localstack'
       HOCS_INFO_SERVICE: 'http://info:8080'
+      HOCS_AUDITSERVICE: 'http://audit:8080'
+      HOCS_SEARCH_SERVICE: 'http://search:8080'
       AUDIT_TOPIC_NAME: "hocs-audit-topic"
     depends_on:
     - postgres
@@ -183,12 +187,18 @@ services:
     networks:
     - hocs-network
     environment:
-      SPRING_PROFILES_ACTIVE: 'development, local'
+      SPRING_PROFILES_ACTIVE: 'development, local, awselastic'
       SERVER_PORT: 8080
       DB_HOST: 'postgres'
       SEARCH_QUEUE_NAME: 'search-queue'
       SEARCH_QUEUE_DLQ_NAME: 'search-queue-dlq'
       AWS_LOCAL_HOST: 'localstack'
+      ELASTIC_INDEX_PREFIX: 'local'
+      ELASTICSEARCH_HOST: 'http://localstack:4578'
+      ELASTICSEARCH_ACCESS_KEY: 'UNSET'
+      ELASTICSEARCH_SECRET_KEY: 'UNSET'
+      AWS_SQS_ACCESS_KEY: 'UNSET'
+      AWS_SQS_SECRET_KEY: 'UNSET'
     depends_on:
     - postgres
     - localstack
