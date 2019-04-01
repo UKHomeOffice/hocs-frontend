@@ -17,21 +17,12 @@ exports[`Document list component should render with a document list when provide
     >
       <td
         class="govuk-table__cell"
-      >
-        <strong
-          class="govuk-tag margin-right--small"
-        >
-          ORIGINAL
-        </strong>
-        <strong
-          class="govuk-tag"
-        >
-          UPLOADED
-        </strong>
-      </td>
+      />
       <td
         class="govuk-table__cell"
-      />
+      >
+        TEST_DOCUMENT_1
+      </td>
       <td
         class="govuk-table__cell"
       >
@@ -48,6 +39,7 @@ exports[`Document list component should render with a document list when provide
       >
         <a
           class="govuk-link"
+          download="TEST_DOCUMENT_1"
           href="/case/MOCK_CASE_ID/stage/undefined/download/document/MOCK_DOC_ID_1/original"
         >
           Download
@@ -59,21 +51,12 @@ exports[`Document list component should render with a document list when provide
     >
       <td
         class="govuk-table__cell"
-      >
-        <strong
-          class="govuk-tag margin-right--small"
-        >
-          ORIGINAL
-        </strong>
-        <strong
-          class="govuk-tag"
-        >
-          UPLOADED
-        </strong>
-      </td>
+      />
       <td
         class="govuk-table__cell"
-      />
+      >
+        TEST_DOCUMENT_2
+      </td>
       <td
         class="govuk-table__cell"
       >
@@ -90,6 +73,7 @@ exports[`Document list component should render with a document list when provide
       >
         <a
           class="govuk-link"
+          download="TEST_DOCUMENT_2"
           href="/case/MOCK_CASE_ID/stage/undefined/download/document/MOCK_DOC_ID_2/original"
         >
           Download
@@ -101,21 +85,12 @@ exports[`Document list component should render with a document list when provide
     >
       <td
         class="govuk-table__cell"
-      >
-        <strong
-          class="govuk-tag margin-right--small"
-        >
-          ORIGINAL
-        </strong>
-        <strong
-          class="govuk-tag"
-        >
-          UPLOADED
-        </strong>
-      </td>
+      />
       <td
         class="govuk-table__cell"
-      />
+      >
+        TEST_DOCUMENT_3
+      </td>
       <td
         class="govuk-table__cell"
       >
@@ -132,6 +107,7 @@ exports[`Document list component should render with a document list when provide
       >
         <a
           class="govuk-link"
+          download="TEST_DOCUMENT_3"
           href="/case/MOCK_CASE_ID/stage/undefined/download/document/MOCK_DOC_ID_3/original"
         >
           Download

@@ -50,10 +50,12 @@ async function getPdfDocumentPreview(req, res, next) {
 }
 
 async function getDocumentList(req, res, next) {
+    const logger = getLogger(req.requestId);
     try {
-        const response = await req.listService.fetch('CASE_DOCUMENT_LIST', req.params);
+        const response = await req.listService.fetch('CASE_DOCUMENT_LIST', { ...req.params });
         res.locals.documents = response;
     } catch (error) {
+        logger.info('CASE_DOCUMENT_LIST_RETURN_EMPTY');
         res.locals.documents = [];
     } finally {
         next();

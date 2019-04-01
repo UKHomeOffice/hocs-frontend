@@ -12,9 +12,9 @@ describe('Document pane component', () => {
     const mockPage = { params: { caseId: 'MOCK_CASE_ID' } };
 
     const documentList = [
-        { name: 'TEST_DOCUMENT_1', uuid: 'MOCK_DOC_ID_1', type: 'ORIGINAL', pdf_link: 'MOCK_S3_LINK_1', file_link: 'MOCK_ORIG_LINK_1' },
-        { name: 'TEST_DOCUMENT_2', uuid: 'MOCK_DOC_ID_2', type: 'ORIGINAL', pdf_link: 'MOCK_S3_LINK_2', file_link: 'MOCK_ORIG_LINK_2' },
-        { name: 'TEST_DOCUMENT_3', uuid: 'MOCK_DOC_ID_3', type: 'ORIGINAL', pdf_link: 'MOCK_S3_LINK_3', file_link: 'MOCK_ORIG_LINK_3' },
+        { label: 'TEST_DOCUMENT_1', value: 'MOCK_DOC_ID_1', type: 'ORIGINAL', pdf_link: 'MOCK_S3_LINK_1', file_link: 'MOCK_ORIG_LINK_1' },
+        { label: 'TEST_DOCUMENT_2', value: 'MOCK_DOC_ID_2', type: 'ORIGINAL', pdf_link: 'MOCK_S3_LINK_2', file_link: 'MOCK_ORIG_LINK_2' },
+        { label: 'TEST_DOCUMENT_3', value: 'MOCK_DOC_ID_3', type: 'ORIGINAL', pdf_link: 'MOCK_S3_LINK_3', file_link: 'MOCK_ORIG_LINK_3' },
     ];
 
     beforeEach(() => {
