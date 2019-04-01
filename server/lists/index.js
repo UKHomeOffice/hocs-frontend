@@ -29,8 +29,7 @@ module.exports = {
             client: 'INFO',
             endpoint: '/users',
             type: listService.types.STATIC,
-            adapter: statics.usersAdapter,
-            default: []
+            adapter: statics.usersAdapter
         },
         S_CASETYPES: {
             client: 'INFO',
