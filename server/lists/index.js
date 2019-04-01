@@ -145,7 +145,7 @@ module.exports = {
         },
         CASE_DOCUMENT_LIST: {
             client: 'DOCUMENT',
-            endpoint: '/document/case/${caseId}/${type}',
+            endpoint: '/document/case/${caseId}',
             adapter: documentsAdapter
         },
         CASE_DOCUMENT_LIST_FINAL: {

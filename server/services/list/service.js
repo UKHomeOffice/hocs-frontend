@@ -94,9 +94,9 @@ const getInstance = (requestId, user) => {
                 if (type === listType.STATIC && listCache.hasResource(listId)) {
                     return listCache.fetch(listId);
                 }
-                logger.info('FETCH_LIST', { list: listId, client, endpoint });
                 const clientInstance = clientRepository.fetch(client);
                 const configuredEndpoint = options ? configureEndpoint(endpoint, options) : endpoint;
+                logger.info('FETCH_LIST', { list: listId, client, endpoint: configuredEndpoint });
                 let response;
                 try {
                     response = await clientInstance.get(configuredEndpoint, { headers: { ...User.createHeaders(user), 'X-Correlation-Id': requestId } });
