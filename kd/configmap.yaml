@@ -3,4 +3,4 @@ apiVersion: v1
 metadata:
   name: hocs-frontend
 data:
-  clientside: 'true
+  clientside: 'true'
