@@ -48,6 +48,7 @@ export DOMAIN_NAME=${DNS_PREFIX}.homeoffice.gov.uk
 echo
 echo "Deploying hocs-frontend to ${ENVIRONMENT}"
 echo "Keycloak realm: ${KC_REALM}"
+echo "Keycloak domain: ${KC_DOMAIN}"
 echo "domain name: ${DOMAIN_NAME}"
 echo
 
