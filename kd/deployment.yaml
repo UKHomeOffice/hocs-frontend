@@ -96,7 +96,7 @@ spec:
           - name: https
             containerPort: 10443
       - name: keycloak-proxy-web
-        image: quay.io/ukhomeofficedigital/go-keycloak-proxy:v2.1.1
+        image: quay.io/ukhomeofficedigital/go-keycloak-proxy:v2.3.0
         imagePullPolicy: Always
         securityContext:
           runAsNonRoot: true
@@ -139,7 +139,7 @@ spec:
             name: frontend-keycloak-secret
             readOnly: true
       - name: keycloak-proxy-api
-        image: quay.io/ukhomeofficedigital/go-keycloak-proxy:v2.1.1
+        image: quay.io/ukhomeofficedigital/go-keycloak-proxy:v2.3.0
         imagePullPolicy: Always
         securityContext:
           runAsNonRoot: true
