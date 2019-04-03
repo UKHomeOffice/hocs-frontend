@@ -129,6 +129,7 @@ spec:
           - --secure-cookie=true
           - --http-only-cookie=true
           - --revocation-url={{.KC_REALM}}/protocol/openid-connect/logout
+          - --enable-logout-redirect=true
           - --verbose
         ports:
           - name: keycloak-http
