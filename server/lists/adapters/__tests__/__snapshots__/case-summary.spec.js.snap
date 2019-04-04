@@ -9,25 +9,25 @@ Object {
     },
     Object {
       "label": "Test additional field date",
-      "value": "1/1/2020",
+      "value": "01/01/2020",
     },
   ],
   "case": Object {
-    "deadline": "1/1/2020",
-    "received": "1/1/2019",
+    "deadline": "01/01/2020",
+    "received": "01/01/2019",
   },
   "deadlines": Array [
     Object {
       "label": "MOCK_STAGETYPE",
-      "value": "1/1/2019",
+      "value": "01/01/2019",
     },
     Object {
       "label": "MOCK_STAGETYPE",
-      "value": "1/6/2019",
+      "value": "06/01/2019",
     },
     Object {
       "label": "MOCK_STAGETYPE",
-      "value": "1/1/2020",
+      "value": "01/01/2020",
     },
   ],
   "primaryCorrespondent": "Test Correspondent",
@@ -47,7 +47,7 @@ Object {
   "additionalFields": Array [],
   "case": Object {
     "deadline": null,
-    "received": "1/1/2019",
+    "received": "01/01/2019",
   },
   "deadlines": Array [],
   "primaryCorrespondent": null,

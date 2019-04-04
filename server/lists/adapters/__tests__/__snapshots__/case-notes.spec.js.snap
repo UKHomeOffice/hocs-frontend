@@ -5,7 +5,7 @@ Array [
   Object {
     "body": Object {
       "author": "MOCK_USER",
-      "date": "Friday, January 11, 2019, 12:00 AM",
+      "date": "Monday, February 11, 2019, 12:00 AM",
       "note": "A test case note",
       "stage": "MOCK_STAGETYPE",
       "team": "MOCK_TEAM",
@@ -17,7 +17,7 @@ Array [
   Object {
     "body": Object {
       "author": "MOCK_USER",
-      "date": "Thursday, January 10, 2019, 12:00 AM",
+      "date": "Sunday, February 10, 2019, 12:00 AM",
       "note": "A test case note",
       "stage": "MOCK_STAGETYPE",
       "team": "MOCK_TEAM",
@@ -29,7 +29,7 @@ Array [
   Object {
     "body": Object {
       "author": "MOCK_USER",
-      "date": "Wednesday, January 9, 2019, 12:00 AM",
+      "date": "Saturday, February 9, 2019, 12:00 AM",
       "note": "A test case note",
       "stage": "MOCK_STAGETYPE",
       "team": "MOCK_TEAM",
@@ -41,7 +41,7 @@ Array [
   Object {
     "body": Object {
       "author": "MOCK_USER",
-      "date": "Tuesday, January 8, 2019, 12:00 AM",
+      "date": "Friday, February 8, 2019, 12:00 AM",
       "note": "A test case note",
       "stage": "MOCK_STAGETYPE",
       "team": "MOCK_TEAM",
@@ -53,7 +53,7 @@ Array [
   Object {
     "body": Object {
       "author": "MOCK_USER",
-      "date": "Monday, January 7, 2019, 12:00 AM",
+      "date": "Thursday, February 7, 2019, 12:00 AM",
       "note": "A test case note",
       "stage": "MOCK_STAGETYPE",
       "team": "MOCK_TEAM",
@@ -65,7 +65,7 @@ Array [
   Object {
     "body": Object {
       "author": "MOCK_USER",
-      "date": "Sunday, January 6, 2019, 12:00 AM",
+      "date": "Wednesday, February 6, 2019, 12:00 AM",
       "note": "A test case note",
       "stage": "MOCK_STAGETYPE",
       "team": "MOCK_TEAM",
@@ -77,7 +77,7 @@ Array [
   Object {
     "body": Object {
       "author": "MOCK_USER",
-      "date": "Saturday, January 5, 2019, 12:00 AM",
+      "date": "Tuesday, February 5, 2019, 12:00 AM",
       "note": "A test case note",
       "stage": "MOCK_STAGETYPE",
       "team": "MOCK_TEAM",
@@ -89,7 +89,7 @@ Array [
   Object {
     "body": Object {
       "author": "MOCK_USER",
-      "date": "Friday, January 4, 2019, 12:00 AM",
+      "date": "Monday, February 4, 2019, 12:00 AM",
       "note": "A test case note",
       "stage": "MOCK_STAGETYPE",
       "team": "MOCK_TEAM",
@@ -101,7 +101,7 @@ Array [
   Object {
     "body": Object {
       "author": "MOCK_USER",
-      "date": "Thursday, January 3, 2019, 12:00 AM",
+      "date": "Sunday, February 3, 2019, 12:00 AM",
       "note": "A test case note",
       "stage": "MOCK_STAGETYPE",
       "team": "MOCK_TEAM",
@@ -113,7 +113,7 @@ Array [
   Object {
     "body": Object {
       "author": "MOCK_USER",
-      "date": "Wednesday, January 2, 2019, 12:00 AM",
+      "date": "Saturday, February 2, 2019, 12:00 AM",
       "note": "A test case note",
       "stage": "MOCK_STAGETYPE",
       "team": "MOCK_TEAM",
@@ -125,7 +125,7 @@ Array [
   Object {
     "body": Object {
       "author": "MOCK_USER",
-      "date": "Tuesday, January 1, 2019, 12:00 AM",
+      "date": "Friday, February 1, 2019, 12:00 AM",
       "note": "A test case note",
       "stage": "MOCK_STAGETYPE",
       "team": "MOCK_TEAM",
@@ -137,7 +137,7 @@ Array [
   Object {
     "body": Object {
       "author": "MOCK_USER",
-      "date": "Tuesday, January 1, 2019, 12:00 AM",
+      "date": "Friday, February 1, 2019, 12:00 AM",
       "note": undefined,
       "stage": "MOCK_STAGETYPE",
       "team": "MOCK_TEAM",
