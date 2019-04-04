@@ -14,7 +14,7 @@ const CaseNote = ({ date, author, note }) => (
     <Fragment>
         {date && <p>{date}</p>}
         {author && <p><strong>Author:</strong> {author}</p>}
-        {note && <p><strong>Message:</strong> {note}</p>}
+        {note && <p><strong>Message:</strong>{note.replace(/\n/gi, '<br>')}</p>}
     </Fragment>
 );
 
