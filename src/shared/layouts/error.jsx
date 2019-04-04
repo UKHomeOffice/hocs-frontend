@@ -21,10 +21,7 @@ class Error extends Component {
         switch (status) {
         case 401:
             return {
-                defaultTitle: 'You are not logged in',
-                defaultBody: [
-                    <a className='govuk-link' key='login' href='/' >Please login to continue</a>
-                ]
+                defaultTitle: 'Unauthorised'
             };
         case 403:
             return {

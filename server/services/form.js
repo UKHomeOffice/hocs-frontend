@@ -2,7 +2,7 @@ const formRepository = require('./forms/index');
 const listService = require('./list/service');
 const { workflowService, caseworkService } = require('../clients');
 const getLogger = require('../libs/logger');
-const { FormServiceError } = require('../models/error');
+const { FormServiceError, PermissionError } = require('../models/error');
 const User = require('../models/user');
 
 async function getFormSchemaFromWorkflowService(requestId, options, user) {
@@ -15,7 +15,7 @@ async function getFormSchemaFromWorkflowService(requestId, options, user) {
         switch (error.response.status) {
         case 401:
             // handle as error
-            return { error: { status: 401, message: 'You are not authorised to work on this case' } };
+            return { error: new PermissionError('You are not authorised to work on this case') };
         case 403:
             // handle not allocated
             // TODO: Move to form schema
@@ -65,7 +65,7 @@ async function getFormSchemaFromWorkflowService(requestId, options, user) {
                 }
             };
         default:
-            return { error: { status: 500 } };
+            return { error: new Error() };
         }
     }
     const { stageUUID, caseReference, allocationNote } = response.data;
@@ -175,7 +175,7 @@ const getFormForStage = async (req, res, next) => {
     try {
         const { form, error } = await getFormSchemaFromWorkflowService(req.requestId, req.params, user);
         if (error) {
-            return next(new FormServiceError('Failed to fetch form', error.status));
+            return next(error);
         } else {
             req.form = form;
             next();
