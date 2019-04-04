@@ -33,28 +33,28 @@ describe('Dashboard Adapter', () => {
                     caseType: 'A',
                     stageType: 'A',
                     userUUID: 1,
-                    deadline: '01-01-1900'
+                    deadline: '1900-01-01'
                 },
                 {
                     teamUUID: 1,
                     caseType: 'A',
                     stageType: 'A',
                     userUUID: null,
-                    deadline: '01-01-1900'
+                    deadline: '1900-01-02'
                 },
                 {
                     teamUUID: 1,
                     caseType: 'A',
                     stageType: 'A',
                     userUUID: 2,
-                    deadline: '01-01-2200'
+                    deadline: '2200-01-03'
                 },
                 {
                     teamUUID: 2,
                     caseType: 'B',
                     stageType: 'A',
                     userUUID: null,
-                    deadline: '01-01-2200'
+                    deadline: '2200-04-01'
                 }
             ]
         };
@@ -73,21 +73,21 @@ describe('User Workstack Adapter', () => {
                     caseType: 'A',
                     stageType: 'A',
                     userUUID: 1,
-                    deadline: '01-01-2200'
+                    deadline: '2200-01-01'
                 },
                 {
                     teamUUID: 2,
                     caseType: 'B',
                     stageType: 'A',
                     userUUID: 2,
-                    deadline: '01-01-2200'
+                    deadline: '2200-01-02'
                 },
                 {
                     teamUUID: 2,
                     caseType: 'B',
                     stageType: 'A',
                     userUUID: null,
-                    deadline: '01-01-2200'
+                    deadline: '2200-01-03'
                 }
             ]
         };
@@ -106,7 +106,7 @@ describe('Team Workstack Adapter', () => {
                     caseType: 'A',
                     stageType: 'A',
                     userUUID: 1,
-                    deadline: '01-01-2200',
+                    deadline: '2200-01-01',
                     caseReference: 'A/1234567/19'
                 },
                 {
@@ -114,7 +114,7 @@ describe('Team Workstack Adapter', () => {
                     caseType: 'C',
                     stageType: 'A',
                     userUUID: null,
-                    deadline: '01-01-1900',
+                    deadline: '1900-01-02',
                     caseReference: 'A/1234568/19'
                 },
                 {
@@ -122,7 +122,7 @@ describe('Team Workstack Adapter', () => {
                     caseType: 'B',
                     stageType: 'A',
                     userUUID: 2,
-                    deadline: '01-01-2200',
+                    deadline: '2200-01-03',
                     caseReference: 'A/1234568/19'
                 },
                 {
@@ -130,7 +130,7 @@ describe('Team Workstack Adapter', () => {
                     caseType: 'B',
                     stageType: 'A',
                     userUUID: null,
-                    deadline: '01-01-1900',
+                    deadline: '1900-01-04',
                     caseReference: 'A/1234569/19'
                 },
                 {
@@ -138,7 +138,7 @@ describe('Team Workstack Adapter', () => {
                     caseType: 'B',
                     stageType: 'A',
                     userUUID: null,
-                    deadline: '01-01-1900',
+                    deadline: '1900-01-05',
                     caseReference: 'A/1234570/19'
                 },
                 {
@@ -146,7 +146,7 @@ describe('Team Workstack Adapter', () => {
                     caseType: 'B',
                     stageType: 'A',
                     userUUID: 1,
-                    deadline: '01-01-2200',
+                    deadline: '06-01-2200',
                     caseReference: 'A/1234569/19'
                 },
             ]
@@ -166,7 +166,7 @@ describe('Workflow Workstack Adapter', () => {
                     caseType: 'A',
                     stageType: 'A',
                     userUUID: 1,
-                    deadline: '01-01-2200',
+                    deadline: '2200-01-01',
                     caseReference: 'A/1234567/19'
                 },
                 {
@@ -174,7 +174,7 @@ describe('Workflow Workstack Adapter', () => {
                     caseType: 'C',
                     stageType: 'A',
                     userUUID: null,
-                    deadline: '01-01-1900',
+                    deadline: '1900-01-02',
                     caseReference: 'A/1234568/19'
                 },
                 {
@@ -182,7 +182,7 @@ describe('Workflow Workstack Adapter', () => {
                     caseType: 'B',
                     stageType: 'A',
                     userUUID: 2,
-                    deadline: '01-01-2200',
+                    deadline: '2200-01-03',
                     caseReference: 'A/1234568/19'
                 },
                 {
@@ -190,7 +190,7 @@ describe('Workflow Workstack Adapter', () => {
                     caseType: 'B',
                     stageType: 'A',
                     userUUID: null,
-                    deadline: '01-01-1900',
+                    deadline: '1900-01-04',
                     caseReference: 'A/1234569/19'
                 },
                 {
@@ -198,7 +198,7 @@ describe('Workflow Workstack Adapter', () => {
                     caseType: 'B',
                     stageType: 'A',
                     userUUID: null,
-                    deadline: '01-01-1900',
+                    deadline: '1900-01-05',
                     caseReference: 'A/1234570/19'
                 },
                 {
@@ -206,7 +206,7 @@ describe('Workflow Workstack Adapter', () => {
                     caseType: 'B',
                     stageType: 'A',
                     userUUID: 1,
-                    deadline: '01-01-2200',
+                    deadline: '2200-01-06',
                     caseReference: 'A/1234569/19'
                 },
                 {
@@ -214,7 +214,7 @@ describe('Workflow Workstack Adapter', () => {
                     caseType: 'B',
                     stageType: 'B',
                     userUUID: null,
-                    deadline: '01-01-1900',
+                    deadline: '1900-01-07',
                     caseReference: 'A/1234569/19'
                 },
                 {
@@ -222,7 +222,7 @@ describe('Workflow Workstack Adapter', () => {
                     caseType: 'C',
                     stageType: 'A',
                     userUUID: 1,
-                    deadline: '01-01-2200',
+                    deadline: '2200-01-08',
                     caseReference: 'A/1234569/19'
                 }
             ]
@@ -242,7 +242,7 @@ describe('Workflow Workstack Adapter', () => {
                     caseType: 'A',
                     stageType: 'A',
                     userUUID: 1,
-                    deadline: '01-01-2200',
+                    deadline: '2200-01-01',
                     caseReference: 'A/1234567/19'
                 },
                 {
@@ -250,7 +250,7 @@ describe('Workflow Workstack Adapter', () => {
                     caseType: 'C',
                     stageType: 'A',
                     userUUID: null,
-                    deadline: '01-01-1900',
+                    deadline: '1900-01-02',
                     caseReference: 'A/1234568/19'
                 },
                 {
@@ -258,7 +258,7 @@ describe('Workflow Workstack Adapter', () => {
                     caseType: 'B',
                     stageType: 'A',
                     userUUID: 2,
-                    deadline: '01-01-2200',
+                    deadline: '2200-01-03',
                     caseReference: 'A/1234568/19'
                 },
                 {
@@ -266,7 +266,7 @@ describe('Workflow Workstack Adapter', () => {
                     caseType: 'B',
                     stageType: 'A',
                     userUUID: null,
-                    deadline: '01-01-1900',
+                    deadline: '1900-01-04',
                     caseReference: 'A/1234569/19'
                 },
                 {
@@ -274,7 +274,7 @@ describe('Workflow Workstack Adapter', () => {
                     caseType: 'B',
                     stageType: 'A',
                     userUUID: null,
-                    deadline: '01-01-1900',
+                    deadline: '1900-01-05',
                     caseReference: 'A/1234570/19'
                 },
                 {
@@ -282,7 +282,7 @@ describe('Workflow Workstack Adapter', () => {
                     caseType: 'B',
                     stageType: 'A',
                     userUUID: 1,
-                    deadline: '01-01-2200',
+                    deadline: '2200-01-06',
                     caseReference: 'A/1234569/19'
                 },
                 {
@@ -290,7 +290,7 @@ describe('Workflow Workstack Adapter', () => {
                     caseType: 'B',
                     stageType: 'B',
                     userUUID: null,
-                    deadline: '01-01-1900',
+                    deadline: '1900-01-07',
                     caseReference: 'A/1234569/19'
                 },
                 {
@@ -298,7 +298,7 @@ describe('Workflow Workstack Adapter', () => {
                     caseType: 'C',
                     stageType: 'A',
                     userUUID: 1,
-                    deadline: '01-01-2200',
+                    deadline: '2200-01-08',
                     caseReference: 'A/1234569/19'
                 }
             ]

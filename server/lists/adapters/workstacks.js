@@ -8,7 +8,15 @@ const getOverdue = data => {
     return overdueCases.length;
 };
 
-const formatDate = (date) => date ? Intl.DateTimeFormat('en-GB').format(new Date(date)) : null;
+const parseDate = (rawDate) => {
+    const [date] = rawDate.match(/[0-9]{4}-[0-1][0-9]-[0-3][0-9]/g) || [];
+    if (!date) {
+        return null;
+    }
+    const [year, month, day] = date.split('-');
+    return `${day}/${month}/${year}`;
+};
+const formatDate = (date) => date ? parseDate(date) : null;
 
 const bindDisplayElements = fromStaticList => async (stage) => {
     stage.assignedTeamDisplay = await fromStaticList('S_TEAMS', stage.teamUUID);
