@@ -15,6 +15,7 @@ import Inset from './inset.jsx';
 import Dropdown from './dropdown.jsx';
 import TypeAhead from './type-ahead.jsx';
 import Panel from './panel.jsx';
+import Accordion from './accordion.jsx';
 
 function defaultDataAdapter(name, data) {
     return data[name] || '';
@@ -77,7 +78,7 @@ export function formComponentFactory(field, options) {
         });
     case 'heading':
         return (
-            <h2 key={key} className="heading-medium">
+            <h2 key={key} className='govuk-heading-m'>
                 {config.label}
             </h2>
         );
@@ -89,6 +90,12 @@ export function formComponentFactory(field, options) {
         return renderFormComponent(Paragraph, { key, config });
     case 'entity-manager':
         return renderFormComponent(EntityManager, { key, config: { ...config, baseUrl: options.baseUrl } });
+    case 'display':
+        return (
+            <span className='govuk-body full-width'><strong>{config.label}: </strong>{data[config.name]}</span>
+        );
+    case 'accordion':
+        return renderFormComponent(Accordion(data), { key, config });
     default:
         return null;
     }

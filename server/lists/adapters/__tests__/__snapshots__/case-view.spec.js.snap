@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Case-view Adapter should build a schema from the provided template 1`] = `
+Object {
+  "data": Object {
+    "my_date_field": "19/01/2020",
+    "my_field": "Some Value",
+  },
+  "meta": Object {},
+  "schema": Object {
+    "defaultActionLabel": "Submit",
+    "fields": Array [
+      Object {
+        "component": "heading",
+        "props": Object {
+          "label": "Case Details",
+          "name": "case-view-heading",
+        },
+        "validation": Array [],
+      },
+      Object {
+        "component": "accordion",
+        "props": Object {
+          "name": "case-view",
+          "sections": Array [
+            Object {
+              "items": Array [
+                Object {
+                  "component": "display",
+                  "props": Object {
+                    "label": "My Field",
+                    "name": "my_field",
+                  },
+                  "validation": Array [],
+                },
+                Object {
+                  "component": "display",
+                  "props": Object {
+                    "label": "My Date Field",
+                    "name": "my_date_field",
+                  },
+                  "validation": Array [],
+                },
+              ],
+              "title": "STAGE_NAME",
+            },
+          ],
+        },
+        "validation": Array [],
+      },
+    ],
+    "showPrimaryAction": false,
+    "title": "MIN/1234567/18",
+  },
+}
+`;
