@@ -64,7 +64,7 @@ async function getFormSchemaFromWorkflowService(requestId, options, user) {
                 .build();
             return { form: response };
         default:
-            return { error: new Error('Failed to retrieve form') };
+            return { error: new Error(`Failed to retrieve form: ${error.response.status}`) };
         }
     }
     const { stageUUID, caseReference, allocationNote } = response.data;
