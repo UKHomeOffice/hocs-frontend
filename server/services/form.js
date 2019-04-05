@@ -4,6 +4,8 @@ const { workflowService, caseworkService } = require('../clients');
 const getLogger = require('../libs/logger');
 const { FormServiceError, PermissionError } = require('../models/error');
 const User = require('../models/user');
+const FormBuilder = require('./forms/form-builder');
+const { Component } = require('./forms/component-builder');
 
 async function getFormSchemaFromWorkflowService(requestId, options, user) {
     const { caseId, stageId } = options;
@@ -14,58 +16,55 @@ async function getFormSchemaFromWorkflowService(requestId, options, user) {
     } catch (error) {
         switch (error.response.status) {
         case 401:
-            // handle as error
-            return { error: new PermissionError('You are not authorised to work on this case') };
+            // handle no permission to allocate
+            try {
+                const response = await listService.getInstance(requestId, user).fetch('CASE_VIEW', { caseId });
+                return { form: response };
+            } catch (error) {
+                return { error: new PermissionError('You are not authorised to work on this case') };
+            }
         case 403:
             // handle not allocated
-            // TODO: Move to form schema
             /* eslint-disable-next-line no-case-declarations */
             let usersInTeam;
+            /* eslint-disable-next-line no-case-declarations */
+            let caseView;
             try {
                 const { data: owningTeam } = await caseworkService.get(`/case/${caseId}/stage/${stageId}/team`, { headers });
-                usersInTeam = await listService.getInstance(requestId).fetch('USERS_IN_TEAM', { teamId: owningTeam });
+                usersInTeam = await listService.getInstance(requestId, user).fetch('USERS_IN_TEAM', { teamId: owningTeam });
             } catch (error) {
                 usersInTeam = [];
             }
-            return {
-                form: {
-                    schema: {
-                        title: 'Allocate Case',
-                        action: `/case/${caseId}/stage/${stageId}/allocate/team`,
-                        fields: [
-                            {
-                                component: 'link', props: {
-                                    name: 'allocate-to-me',
-                                    label: 'Allocate to me',
-                                    className: 'govuk-body margin-bottom--small',
-                                    target: `/case/${caseId}/stage/${stageId}/allocate`
-                                }
-                            },
-                            {
-                                component: 'dropdown', props: {
-                                    name: 'user-id',
-                                    label: 'Allocate to a team member',
-                                    className: 'govuk-body',
-                                    choices: usersInTeam
-                                }
-                            }
-                        ],
-                        defaultActionLabel: 'Allocate',
-                        secondaryActions: [
-                            {
-                                component: 'backlink',
-                                validation: [],
-                                props: {
-                                    label: 'Back to dashboard',
-                                    action: '/'
-                                }
-                            }
-                        ]
-                    }
-                }
-            };
+            try {
+                caseView = await listService.getInstance(requestId, user).fetch('CASE_VIEW', { caseId });
+            } catch (error) {
+                caseView = null;
+            }
+            /* eslint-disable-next-line no-case-declarations */
+            const response = FormBuilder(caseView)
+                .withField(Component('heading', 'allocate-header')
+                    .withProp('label', 'Allocate')
+                    .build())
+                .withField(Component('link', 'allocate-to-me')
+                    .withProp('label', 'Allocate to me')
+                    .withProp('className', 'govuk-body margin-bottom--small')
+                    .withProp('target', `/case/${caseId}/stage/${stageId}/allocate`)
+                    .build())
+                .withField(Component('dropdown', 'user-id')
+                    .withProp('label', 'Allocate to a team member')
+                    .withProp('className', 'govuk-body')
+                    .withProp('choices', usersInTeam)
+                    .build())
+                .withPrimaryAction('Allocate')
+                .withSecondaryAction(
+                    Component('backlink')
+                        .withProp('label', 'Cancel')
+                        .build()
+                )
+                .build();
+            return { form: response };
         default:
-            return { error: new Error(`Unhandled Exception: ${error.response.status}`) };
+            return { error: new Error(`Failed to retrieve form: ${error.response.status}`) };
         }
     }
     const { stageUUID, caseReference, allocationNote } = response.data;
@@ -113,10 +112,8 @@ const hydrateFields = async (req, res, next) => {
         } catch (error) {
             return next(new Error('Failed to populate form fields'));
         }
-        next();
-    } else {
-        next();
     }
+    next();
 };
 
 const getForm = (form, options) => {

@@ -33,7 +33,7 @@ class Card {
     constructor({ label, value, type, count, overdue, unallocated }) {
         this.label = label;
         this.value = value;
-        this.count = count || 1;
+        this.count = count || 0;
         this.type = type;
         this.tags = {
             overdue: overdue,
@@ -72,6 +72,7 @@ const dashboardAdapter = async (data, { fromStaticList, logger, user }) => {
                     label: stage.assignedTeamDisplay,
                     value: stage.teamUUID,
                     type: 'team',
+                    count: 1,
                     overdue: isOverdue(stage.deadline) ? 1 : 0,
                     unallocated: isUnallocated(stage.userUUID) ? 1 : 0
                 }));
@@ -118,6 +119,7 @@ const teamAdapter = async (data, { fromStaticList, logger, teamId }) => {
                     label: stage.caseTypeDisplayFull,
                     value: stage.caseType,
                     type: 'workflow',
+                    count: 1,
                     overdue: isOverdue(stage.deadline) ? 1 : 0,
                     unallocated: isUnallocated(stage.userUUID) ? 1 : 0
                 }));
@@ -160,6 +162,7 @@ const workflowAdapter = async (data, { fromStaticList, logger, teamId, workflowI
                     label: stage.stageTypeDisplay,
                     value: stage.stageType,
                     type: 'stage',
+                    count: 1,
                     overdue: isOverdue(stage.deadline) ? 1 : 0,
                     unallocated: isUnallocated(stage.userUUID) ? 1 : 0
                 }));
