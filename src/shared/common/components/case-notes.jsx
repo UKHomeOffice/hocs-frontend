@@ -13,8 +13,8 @@ import Submit from '../forms/submit.jsx';
 const CaseNote = ({ date, author, note }) => (
     <Fragment>
         {date && <p>{date}</p>}
-        {author && <p><strong>Author:</strong> {author}</p>}
-        {note && <p><strong>Message:</strong> {note}</p>}
+        {author && <p><strong>Author: </strong>{author}</p>}
+        {note && <p><strong>Message: </strong><br />{note.split(/\n/).map((line, i) => (<Fragment key={i}>{line}<br /></Fragment>))}</p>}
     </Fragment>
 );
 

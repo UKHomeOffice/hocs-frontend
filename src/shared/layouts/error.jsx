@@ -3,6 +3,17 @@ import PropTypes from 'prop-types';
 
 class Error extends Component {
 
+    componentDidMount() {
+        // A 401 with empty response will be a keycloak auth error, redirect to home/login
+        if (this.props.error && this.props.error.status === 401 && !this.props.error.message) {
+            /* eslint-disable no-undef*/
+            if (window) {
+                window.location.replace('/');
+            }
+            /* eslint-enable no-undef*/
+        }
+    }
+
     UNSAFE_componentWillMount() {
         const { staticContext } = this.props;
         if (staticContext) {
@@ -21,10 +32,7 @@ class Error extends Component {
         switch (status) {
         case 401:
             return {
-                defaultTitle: 'You are not logged in',
-                defaultBody: [
-                    <a className='govuk-link' key='login' href='/' >Please login to continue</a>
-                ]
+                defaultTitle: 'Unauthorised'
             };
         case 403:
             return {

@@ -14,8 +14,19 @@ const getTitle = (type) => {
     };
     return types.hasOwnProperty(type) ? types[type] : 'System event';
 };
-
-const formatDate = (date) => {
+const parseDate = (rawDate) => {
+    const [date] = rawDate.match(/[0-9]{4}-[0-1][0-9]-[0-3][0-9]/g) || [];
+    if (!date) {
+        return null;
+    }
+    const [year, month, day] = date.split('-');
+    return new Date(year, month, day);
+};
+const formatDate = (rawDate) => {
+    const date = parseDate(rawDate);
+    if (!date) {
+        return null;
+    }
     return Intl.DateTimeFormat('en-GB', {
         weekday: 'long',
         year: 'numeric',
@@ -23,7 +34,7 @@ const formatDate = (date) => {
         day: 'numeric',
         hour: 'numeric',
         minute: 'numeric'
-    }).format(new Date(date));
+    }).format(date);
 };
 
 module.exports = async (data, { fromStaticList, logger }) => {

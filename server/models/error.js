@@ -69,6 +69,12 @@ class DocumentNotFoundError extends ErrorModel {
     }
 }
 
+class PermissionError extends ErrorModel {
+    constructor(message, status = 401) {
+        super(message, status, 'Unauthorised');
+    }
+}
+
 module.exports = {
     ActionError,
     AllocationError,
@@ -77,5 +83,6 @@ module.exports = {
     DocumentNotFoundError,
     FormSubmissionError,
     FormServiceError,
-    ValidationError
+    ValidationError,
+    PermissionError
 };

@@ -22,6 +22,7 @@ module.exports = (options) => {
             }
             return this;
         },
+        // TODO: Remove
         withPrimaryActionLabel: function (label) {
             if (label) {
                 schema.defaultActionLabel = label;
@@ -39,6 +40,14 @@ module.exports = (options) => {
         },
         withNoPrimaryAction: function () {
             schema.showPrimaryAction = false;
+            delete schema.primaryActionLabel;
+            return this;
+        },
+        withPrimaryAction: function (label) {
+            schema.showPrimaryAction = true;
+            if (label) {
+                schema.defaultActionLabel = label;
+            }
             return this;
         },
         withSubmissionUrl: function (submissionUrl) {
