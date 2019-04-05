@@ -31,7 +31,7 @@ const AuditEvent = ({ date, author, user, team, stage, document }) => (
         {stage && <p><strong>Stage:</strong> {stage}</p>}
         {team && <p><strong>Assigned team:</strong> {team}</p>}
         {user && <p><strong>Assigned user:</strong> {user}</p>}
-        {document && <p>Document:{document}</p>}
+        {document && <p><strong>Document:</strong> {document}</p>}
     </Fragment>
 );
 
