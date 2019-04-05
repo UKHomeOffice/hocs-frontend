@@ -80,8 +80,10 @@ const getInstance = (requestId, user) => {
         const defaultValue = null;
         if (listCache.hasResource(listId)) {
             const item = await fetchList(listId);
+            if(item) {
             const result = item.find(item => item.key === key);
             return result ? result.value : defaultValue;
+            } else return defaultValue;
         } else {
             return defaultValue;
         }
