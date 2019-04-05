@@ -1,4 +1,4 @@
-const { caseworkService, infoService, documentService } = require('../clients/index');
+const { caseworkService, infoService, documentService, workflowService } = require('../clients/index');
 const listService = require('../services/list');
 const statics = require('./adapters/statics');
 const caseTypeAdapter = require('./adapters/case-types');
@@ -11,6 +11,7 @@ const membersAdapter = require('./adapters/members');
 const documentsAdapter = require('./adapters/documents');
 const caseNoteAdapter = require('./adapters/case-notes');
 const caseSummaryAdapter = require('./adapters/case-summary');
+const caseViewAdapter = require('./adapters/case-view');
 const ministerAdapter = require('./adapters/ministers');
 const {
     caseCorrespondentAdapter,
@@ -170,9 +171,15 @@ module.exports = {
             endpoint: '/case/${caseId}/summary',
             adapter: caseSummaryAdapter
         },
+        CASE_VIEW: {
+            client: 'WORKFLOW',
+            endpoint: '/case/${caseId}',
+            adapter: caseViewAdapter
+        }
     },
     clients: {
         CASEWORK: caseworkService,
+        WORKFLOW: workflowService,
         INFO: infoService,
         DOCUMENT: documentService
     }

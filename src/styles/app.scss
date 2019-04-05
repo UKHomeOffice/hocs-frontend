@@ -17,6 +17,11 @@ $govuk-font-family-tabular: 'helvetica neue',Arial, Helvetica, sans-serif !defau
   width: inherit;
 }
 
+.full-width {
+  display: block;
+  width: 100%;
+}
+
 .govuk-button--link {
   @extend %govuk-link;
   @extend %govuk-body-m;
@@ -411,6 +416,7 @@ a.card__body {
       position: relative;
       display: block;
       border-bottom: 1px solid $panel-colour;
+      overflow-wrap: break-word;
       &:last-child {
         margin-bottom: 0px;
       }
