@@ -31,7 +31,7 @@ module.exports = async (data, { fromStaticList, logger }) => {
     return await Promise.all(data
         .sort((a, b) => new Date(a.eventTime) < new Date(b.eventTime) ? 1 : -1)
         .map(async ({ eventTime, type, userName: authorId, body = {} }) => {
-            const { caseNote, userUUID: userId, teamUUID: teamId, stage: stageId } = body;
+            const { caseNote, userUUID: userId, teamUUID: teamId, stage: stageId, documentTitle: document } = body;
             return {
                 type,
                 title: getTitle(type),
@@ -41,7 +41,8 @@ module.exports = async (data, { fromStaticList, logger }) => {
                     author: await fromStaticList('S_USERS', authorId),
                     user: await fromStaticList('S_USERS', userId),
                     team: await fromStaticList('S_TEAMS', teamId),
-                    stage: await fromStaticList('S_STAGETYPES', stageId)
+                    stage: await fromStaticList('S_STAGETYPES', stageId),
+                    document
                 }
             };
         }));

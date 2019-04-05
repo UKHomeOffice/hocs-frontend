@@ -3,7 +3,7 @@ version: '3.1'
 services:
 
   postgres:
-    image: postgres
+    image: postgres:9.6
     restart: always
     ports:
     - 5432:5432
@@ -66,12 +66,13 @@ services:
       SERVICES: sqs,s3,sns,es
 
   aws_cli:
-    image: garland/aws-cli-docker
+    image: xueshanf/awscli
     command:
     - /bin/sh
     - -c
     - |
-      sleep 15
+      sleep 30
+      aws --version
       aws --endpoint-url=http://localstack:4572 s3 mb s3://untrusted-bucket
       aws --endpoint-url=http://localstack:4572 s3 mb s3://trusted-bucket
       aws --endpoint-url=http://localstack:4576 sqs create-queue --queue-name document-queue
@@ -81,8 +82,10 @@ services:
       aws --endpoint-url=http://localstack:4576 sqs create-queue --queue-name search-queue
       aws --endpoint-url=http://localstack:4576 sqs create-queue --queue-name search-queue-dlq
       aws --endpoint-url=http://localstack:4575 sns create-topic --name hocs-audit-topic
-      aws --endpoint-url=http://localstack:4575 sns subscribe --topic-arn arn:aws:sns:eu-west-2:123456789012:hocs-audit-topic --protocol sqs --notification-endpoint arn:aws:sns:eu-west-2:123456789012:audit-queue
-      aws --endpoint-url=http://localstack:4575 sns subscribe --topic-arn arn:aws:sns:eu-west-2:123456789012:hocs-audit-topic --protocol sqs --notification-endpoint arn:aws:sns:eu-west-2:123456789012:search-queue
+      aws --endpoint-url=http://localstack:4575 sns subscribe --topic-arn arn:aws:sns:eu-west-2:123456789012:hocs-audit-topic --attributes RawMessageDelivery=true --protocol sqs --notification-endpoint arn:aws:sns:eu-west-2:123456789012:audit-queue
+      aws --endpoint-url=http://localstack:4575 sns subscribe --topic-arn arn:aws:sns:eu-west-2:123456789012:hocs-audit-topic --attributes RawMessageDelivery=true --protocol sqs --notification-endpoint arn:aws:sns:eu-west-2:123456789012:search-queue
+      aws --endpoint-url=http://localstack:4575 sns set-subscription-attributes --subscription-arn $$(aws --endpoint-url=http://localstack:4575 sns list-subscriptions-by-topic --topic-arn arn:aws:sns:eu-west-2:123456789012:hocs-audit-topic --output json | jq --raw-output '.Subscriptions[0].SubscriptionArn') --attribute-name RawMessageDelivery --attribute-value true
+      aws --endpoint-url=http://localstack:4575 sns set-subscription-attributes --subscription-arn $$(aws --endpoint-url=http://localstack:4575 sns list-subscriptions-by-topic --topic-arn arn:aws:sns:eu-west-2:123456789012:hocs-audit-topic --output json | jq --raw-output '.Subscriptions[1].SubscriptionArn') --attribute-name RawMessageDelivery --attribute-value true
       aws --endpoint-url=http://localstack:4575 sns list-subscriptions
     environment:
       AWS_ACCESS_KEY_ID: UNSET
@@ -187,14 +190,15 @@ services:
     networks:
     - hocs-network
     environment:
-      SPRING_PROFILES_ACTIVE: 'development, local, awselastic'
+      SPRING_PROFILES_ACTIVE: 'development, local, localelastic'
       SERVER_PORT: 8080
       DB_HOST: 'postgres'
       SEARCH_QUEUE_NAME: 'search-queue'
       SEARCH_QUEUE_DLQ_NAME: 'search-queue-dlq'
       AWS_LOCAL_HOST: 'localstack'
       ELASTIC_INDEX_PREFIX: 'local'
-      ELASTICSEARCH_HOST: 'http://localstack:4578'
+      ELASTICSEARCH_HOST: 'localstack'
+      ELASTICSEARCH_PORT: '4571'
       ELASTICSEARCH_ACCESS_KEY: 'UNSET'
       ELASTICSEARCH_SECRET_KEY: 'UNSET'
       AWS_SQS_ACCESS_KEY: 'UNSET'
@@ -232,6 +236,8 @@ services:
     image: quay.io/ukhomeofficedigital/hocs-docs-converter
     ports:
     - 8084:8080
+    networks:
+    - hocs-network
 
   documents:
     image: quay.io/ukhomeofficedigital/hocs-docs
