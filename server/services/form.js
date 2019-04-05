@@ -65,7 +65,7 @@ async function getFormSchemaFromWorkflowService(requestId, options, user) {
                 }
             };
         default:
-            return { error: new Error() };
+            return { error: new Error(`Unhandled Exception: ${error.response.status}`) };
         }
     }
     const { stageUUID, caseReference, allocationNote } = response.data;
