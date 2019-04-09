@@ -7,7 +7,6 @@ const getTitle = (type) => {
         CASE_TOPIC_CREATED: 'Topic Added',
         CASE_TOPIC_DELETED: 'Topic Removed',
         CASE_CREATED: 'Case Created',
-        CASE_UPDATED: 'Case Updated',
         DOCUMENT_CREATED: 'Document Created',
         DOCUMENT_DELETED: 'Document Deleted',
         MANUAL: 'Case Note'
@@ -42,7 +41,7 @@ module.exports = async (data, { fromStaticList, logger }) => {
     return await Promise.all(data
         .sort((a, b) => new Date(a.eventTime) < new Date(b.eventTime) ? 1 : -1)
         .map(async ({ eventTime, type, userName: authorId, body = {} }) => {
-            const { caseNote, userUUID: userId, teamUUID: teamId, stage: stageId, documentTitle: document } = body;
+            const { caseNote, userUUID: userId, teamUUID: teamId, stage: stageId, documentTitle: document, topicName: topic, fullname: correspondent } = body;
             return {
                 type,
                 title: getTitle(type),
@@ -53,7 +52,9 @@ module.exports = async (data, { fromStaticList, logger }) => {
                     user: await fromStaticList('S_USERS', userId),
                     team: await fromStaticList('S_TEAMS', teamId),
                     stage: await fromStaticList('S_STAGETYPES', stageId),
-                    document
+                    document,
+                    topic,
+                    correspondent
                 }
             };
         }));
