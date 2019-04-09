@@ -37,13 +37,11 @@ describe('Static Teams Adapter', () => {
 
 describe('Static Casetypes Adapter', () => {
     it('should transform static casetype data', async () => {
-        const mockData = {
-            caseTypes: [
-                { label: 'Casetype A', value: 'CASETYPE_A' },
-                { label: 'Casetype C', value: 'CASETYPE_C' },
-                { label: 'Casetype B', value: 'CASETYPE_B' }
-            ]
-        };
+        const mockData = [
+            { label: 'Casetype A', value: 'CASETYPE_A' },
+            { label: 'Casetype C', value: 'CASETYPE_C' },
+            { label: 'Casetype B', value: 'CASETYPE_B' }
+        ];
 
         const results = await caseTypesAdapter(mockData, { logger: mockLogger });
         expect(results).toBeDefined();
@@ -53,13 +51,11 @@ describe('Static Casetypes Adapter', () => {
 
 describe('Static Stagetypes Adapter', () => {
     it('should transform and stagetype data', async () => {
-        const mockData = {
-            stageTypes: [
-                { label: 'Stagetype A', value: 'STAGETYPE_A' },
-                { label: 'Stagetype C', value: 'STAGETYPE_C' },
-                { label: 'Stagetype B', value: 'STAGETYPE_B' }
-            ]
-        };
+        const mockData = [
+            { label: 'Stagetype A', value: 'STAGETYPE_A' },
+            { label: 'Stagetype C', value: 'STAGETYPE_C' },
+            { label: 'Stagetype B', value: 'STAGETYPE_B' }
+        ];
 
         const results = await stageTypesAdapter(mockData, { logger: mockLogger });
         expect(results).toBeDefined();
