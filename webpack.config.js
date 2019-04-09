@@ -14,9 +14,9 @@ const browserConfig = env => {
         devtool: 'sourcemap',
         output: {
             path: path.resolve(__dirname, 'build'),
-            filename: mode === 'development' ? 'public/js/[name].js' : 'public/js/[name]-[hash].js',
+            filename: 'public/js/[name]-[hash].js',
             sourceMapFilename: '[file].map',
-            chunkFilename: mode === 'development' ? 'public/js/[name].js' : 'public/js/[name]-[chunkHash].js',
+            chunkFilename: 'public/js/[name]-[chunkHash].js',
             publicPath: '/'
         },
         module: {
