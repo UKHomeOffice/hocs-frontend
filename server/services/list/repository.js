@@ -4,6 +4,11 @@ function createRepository(defaultStore = {}) {
 
     return {
         store: function (key, data) {
+            if(data != null) {
+                if(data.constructor !== Array || (data.constructor === Array && data.length > 0)) {
+                    store[key] = data;
+                }
+            }
             store[key] = data;
         },
         fetch: function (key) {

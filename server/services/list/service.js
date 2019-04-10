@@ -43,7 +43,7 @@ const initialise = async (lists = {}, clients = {}, initialState = {}) => {
         clientRepository.store(name, client);
     });
 
-    const handleFailure = (listId) => listCache.store(listId, null);
+    const handleFailure = (listId) => listCache.flush(listId);
 
     await Promise.all(Object.entries(lists).map(async ([listId, { endpoint, type = listType.DYNAMIC, client, adapter, data, defaultValue }]) => {
         try {
