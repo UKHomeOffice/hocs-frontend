@@ -181,7 +181,7 @@ describe('Application context', () => {
             type: ActionTypes.UNSET_FORM
         };
         const defaultState = {
-            form: 'FORM'
+            form: null
         };
         const wrapper = shallow(<ApplicationProvider config={defaultState} />);
         wrapper.state().dispatch(action);
