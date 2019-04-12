@@ -43,7 +43,9 @@ const initialise = async (lists = {}, clients = {}, initialState = {}) => {
         clientRepository.store(name, client);
     });
 
-    const handleFailure = (listId) => listCache.flush(listId);
+    const handleFailure = () => {
+        process.exit(1);
+    }
 
     await Promise.all(Object.entries(lists).map(async ([listId, { endpoint, type = listType.DYNAMIC, client, adapter, data, defaultValue }]) => {
         try {
@@ -57,7 +59,7 @@ const initialise = async (lists = {}, clients = {}, initialState = {}) => {
                     try {
                         response = await clientInstance.get(endpoint);
                     } catch (error) {
-                        logger.error('INITIALISE_STATIC_LIST_REQUEST_FAILURE', { list: listId, status: error.response.status });
+                        logger.error('INITIALISE_STATIC_LIST_REQUEST_FAILURE', { list: listId, status: error.response ? error.response.status : error.code });
                         return handleFailure(listId);
                     }
                     const listData = await applyAdapter(response.data, adapter, { logger });
