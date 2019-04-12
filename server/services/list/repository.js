@@ -4,7 +4,7 @@ function createRepository(defaultStore = {}) {
 
     return {
         store: function (key, data) {
-            if((data.constructor !== Array && data != null)|| (data.constructor === Array && data.length > 0)) {
+            if((data && data.constructor !== Array)|| (data && data.constructor === Array && data.length > 0)) {
                 store[key] = data;
             }
         },
