@@ -1,7 +1,7 @@
 module.exports = (options) => {
     options = options || { schema: {}, data: {} };
     const schema = {
-        title: options.schema.title || 'Form',
+        title: options.schema.title,
         defaultActionLabel: options.schema.primaryActionLabel || 'Submit',
         fields: options.schema.fields || [],
         showPrimaryAction: options.schema.showPrimaryAction || true
