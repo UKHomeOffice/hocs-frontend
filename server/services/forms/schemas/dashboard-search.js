@@ -12,6 +12,6 @@ module.exports = (options = {}) => {
                 .withValidator('required', 'Case reference is required')
                 .build()
         )
-        .withPrimaryActionLabel('Go')
+        .withNoPrimaryAction()
         .withSubmissionUrl(submissionUrl);
 };
