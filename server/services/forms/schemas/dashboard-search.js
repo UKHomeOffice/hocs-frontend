@@ -7,7 +7,7 @@ module.exports = (options = {}) => {
         .withField(
             Component('text', 'case-reference')
                 .withProp('label', 'Load Case')
-                .withProp('hint', 'For example ABC/123456/12')
+                .withProp('hint', 'For example ABC/1234567/12')
                 .withValidator('isValidCaseReference', 'Case reference is invalid format')
                 .withValidator('required', 'Case reference is required')
                 .build()
