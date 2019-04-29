@@ -37,6 +37,6 @@ module.exports = async (summary, { fromStaticList }) => ({
     additionalFields: createAdditionalFields(summary.additionalFields),
     primaryTopic: getPrimaryTopic(summary.primaryTopic),
     primaryCorrespondent: getPrimaryCorrespondent(summary.primaryCorrespondent),
-    deadlines: summary.deadlines ? await createDeadlines(summary.deadlines, fromStaticList) : null,
+    deadlines: summary.stageDeadlines ? await createDeadlines(summary.stageDeadlines, fromStaticList) : null,
     stages: await getActiveStages(summary.activeStages, fromStaticList)
 });
