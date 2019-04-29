@@ -48,7 +48,7 @@ spec:
             mountPath: /etc/ssl/certs
             readOnly: true
       - name: proxy
-        image: quay.io/ukhomeofficedigital/nginx-proxy-govuk:v3.2.11
+        image: quay.io/ukhomeofficedigital/nginx-proxy-govuk:v3.2.12
         imagePullPolicy: Always
         securityContext:
           runAsNonRoot: true
@@ -284,7 +284,7 @@ spec:
             httpHeaders:
               - name: X-probe
                 value: kubelet
-          initialDelaySeconds: 30
+          initialDelaySeconds: 45
           periodSeconds: 20
           timeoutSeconds: 10
         readinessProbe:
@@ -294,7 +294,7 @@ spec:
             httpHeaders:
               - name: X-probe
                 value: kubelet
-          initialDelaySeconds: 30
+          initialDelaySeconds: 45
           periodSeconds: 20
           timeoutSeconds: 10
         volumeMounts:
