@@ -48,7 +48,7 @@ spec:
             mountPath: /etc/ssl/certs
             readOnly: true
       - name: proxy
-        image: quay.io/ukhomeofficedigital/nginx-proxy-govuk:v3.2.12
+        image: quay.io/ukhomeofficedigital/nginx-proxy-govuk:v3.4.12
         imagePullPolicy: Always
         securityContext:
           runAsNonRoot: true
