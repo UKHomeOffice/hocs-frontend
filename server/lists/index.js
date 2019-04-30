@@ -12,7 +12,6 @@ const documentsAdapter = require('./adapters/documents');
 const caseNoteAdapter = require('./adapters/case-notes');
 const caseSummaryAdapter = require('./adapters/case-summary');
 const caseViewAdapter = require('./adapters/case-view');
-const ministerAdapter = require('./adapters/ministers');
 const {
     caseCorrespondentAdapter,
     correspondentTypeAdapter
