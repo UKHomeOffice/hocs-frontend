@@ -11,7 +11,6 @@ module.exports = {
     addDocumentNew: require('./add-document.js'),
     removeDocument: require('./remove-document.js'),
     manageDocuments: require('./manage-documents.js'),
-    addDTENDocument: require('./dten-document-add.js'),
     bulkCaseCreate: require('./bulk-case-create.js'),
     bulkAddDocument: require('./bulk-document-add.js'),
     addStandardLine: require('./add-standard-line.js'),
