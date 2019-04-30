@@ -135,11 +135,6 @@ module.exports = {
             adapter: templatesAdapter,
             defaultValue: []
         },
-        MINISTERS: {
-            client: 'INFO',
-            endpoint: '/minister',
-            adapter: ministerAdapter
-        },
         MEMBER_LIST: {
             client: 'INFO',
             endpoint: '/member',
