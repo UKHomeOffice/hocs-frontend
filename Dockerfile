@@ -3,6 +3,11 @@ FROM quay.io/ukhomeofficedigital/nodejs-base:v8
 ENV USER user_hocs_frontend
 ENV USER_ID 1000
 ENV GROUP group_hocs_frontend
+ENV NAME hocs-frontend
+
+RUN yum update -y glibc && \
+    yum update -y nss && \
+    yum update -y bind-license
 
 RUN groupadd -r ${GROUP} && \
     useradd -r -u ${USER_ID} -g ${GROUP} ${USER} -d /app && \
