@@ -12,7 +12,6 @@ const documentsAdapter = require('./adapters/documents');
 const caseNoteAdapter = require('./adapters/case-notes');
 const caseSummaryAdapter = require('./adapters/case-summary');
 const caseViewAdapter = require('./adapters/case-view');
-const ministerAdapter = require('./adapters/ministers');
 const {
     caseCorrespondentAdapter,
     correspondentTypeAdapter
@@ -135,11 +134,6 @@ module.exports = {
             endpoint: '/case/${caseId}/standardLine',
             adapter: templatesAdapter,
             defaultValue: []
-        },
-        MINISTERS: {
-            client: 'INFO',
-            endpoint: '/minister',
-            adapter: ministerAdapter
         },
         MEMBER_LIST: {
             client: 'INFO',
