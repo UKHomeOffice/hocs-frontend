@@ -27,10 +27,9 @@ pipeline:
       event: push
 
   sonar-scanner:
-    image: quay.io/ukhomeofficedigital/sonar-scanner:v0.0.2
+    image: quay.io/ukhomeofficedigital/sonar-scanner:v3.0.2
     when:
-      event: push
-      branch: master
+      event: [push, pull_request, tag]
 
   docker-semver-tag:
     image: quay.io/ukhomeofficedigital/hocs-version-bot:build-25
@@ -54,6 +53,38 @@ pipeline:
     when:
       event: [push, deployment, tag]
 
+  deploy-to-dev-from-build-number:
+    image: quay.io/ukhomeofficedigital/kd:v1.12.2
+    environment:
+      - KUBE_NAMESPACE=cs-dev
+      - ENVIRONMENT=dev
+      - VERSION=build-${DRONE_BUILD_NUMBER}
+      - KUBE_SERVER=https://kube-api-notprod.notprod.acp.homeoffice.gov.uk
+    secrets:
+      - hocs_frontend_dev
+    commands:
+      - cd kube-hocs-frontend
+      - ./deploy.sh
+    when:
+      branch: master
+      event: [push, tag]
+
+  deployment:
+    image: quay.io/ukhomeofficedigital/kd:v1.12.2
+    environment:
+      - KUBE_NAMESPACE=cs-${DRONE_DEPLOY_TO}
+      - ENVIRONMENT=${DRONE_DEPLOY_TO}
+      - KUBE_SERVER=https://kube-api-notprod.notprod.acp.homeoffice.gov.uk
+    secrets:
+      - hocs_frontend_dev
+      - hocs_frontend_demo
+    commands:
+      - cd kube-hocs-frontend
+      - ./deploy.sh
+    when:
+      event: deployment
+      environment: [dev, demo]
+
   deploy-to-qa:
     image: quay.io/ukhomeofficedigital/kd:v1.12.1
     environment:
@@ -71,44 +102,11 @@ pipeline:
       event: deployment
       environment: qa
 
-  deploy-to-dev-from-build-number:
-    image: quay.io/ukhomeofficedigital/kd:v0.8.0
-    environment:
-      - KUBE_NAMESPACE=cs-dev
-      - ENVIRONMENT=dev
-      - VERSION=build-${DRONE_BUILD_NUMBER}
-      - KUBE_SERVER=https://kube-api-notprod.notprod.acp.homeoffice.gov.uk
-    secrets:
-      - hocs_frontend_dev
-    commands:
-      - cd kube-hocs-frontend
-      - ./deploy.sh
-    when:
-      branch: master
-      event: [push, tag]
-
-  deployment:
-    image: quay.io/ukhomeofficedigital/kd:v0.8.0
-    environment:
-      - KUBE_NAMESPACE=cs-${DRONE_DEPLOY_TO}
-      - ENVIRONMENT=${DRONE_DEPLOY_TO}
-      - KUBE_SERVER=https://kube-api-notprod.notprod.acp.homeoffice.gov.uk
-    secrets:
-      - hocs_frontend_dev
-      - hocs_frontend_demo
-    commands:
-      - cd kube-hocs-frontend
-      - ./deploy.sh
-    when:
-      event: deployment
-      environment: [dev, demo]
-
   deploy-to-prod:
-    image: quay.io/ukhomeofficedigital/kd:v0.8.0
+    image: quay.io/ukhomeofficedigital/kd:v1.12.2
     environment:
       - KUBE_NAMESPACE=cs-prod
       - ENVIRONMENT=prod
-      - VERSION=${IMAGE_VERSION}
       - KUBE_SERVER=https://kube-api-prod.prod.acp.homeoffice.gov.uk
     secrets:
       - hocs_frontend_prod
