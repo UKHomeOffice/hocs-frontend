@@ -13,16 +13,9 @@ const getTitle = (type) => {
     };
     return types.hasOwnProperty(type) ? types[type] : 'System event';
 };
-const parseDate = (rawDate) => {
-    const [date] = rawDate.match(/[0-9]{4}-[0-1][0-9]-[0-3][0-9]/g) || [];
-    if (!date) {
-        return null;
-    }
-    const [year, month, day] = date.split('-');
-    return new Date(year, month, day);
-};
+
 const formatDate = (rawDate) => {
-    const date = parseDate(rawDate);
+    const date = Date.parse(rawDate);
     if (!date) {
         return null;
     }
