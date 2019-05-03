@@ -22,7 +22,12 @@ spec:
       - backend:
           serviceName: hocs-frontend
           servicePort: 443
-        path: /   
+        path: /
+      - backend:
+          serviceName: hocs-audit
+          servicePort: 443
+        path: /export
+
   tls:
   - hosts:
     - {{.DOMAIN_NAME}}
