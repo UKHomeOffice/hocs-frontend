@@ -1,7 +1,7 @@
 module.exports = async (data) => {
     return data
-        .map(({ displayName, uuid }) => ({
+        .map(({ displayName, documentUUID }) => ({
             label: displayName,
-            value: uuid
+            value: documentUUID
         }))
 };

@@ -5,7 +5,7 @@ describe('Template Adapter', () => {
     it('should transform template data', async () => {
         const mockData = {
             displayName: 'MOCK_TEMPLATE',
-            uuid: 'aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee'
+            documentUUID: 'aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee'
         };
 
         const results = await templatesAdapter(mockData);
