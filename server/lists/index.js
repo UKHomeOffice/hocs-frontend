@@ -142,17 +142,17 @@ module.exports = {
         },
         CASE_DOCUMENT_LIST: {
             client: 'DOCUMENT',
-            endpoint: '/document/case/${caseId}',
+            endpoint: '/document/reference/${caseId}',
             adapter: documentsAdapter
         },
         CASE_DOCUMENT_LIST_FINAL: {
             client: 'DOCUMENT',
-            endpoint: '/document/case/${caseId}/FINAL',
+            endpoint: '/document/reference/${caseId}/?type=FINAL',
             adapter: documentsAdapter
         },
         CASE_DOCUMENT_LIST_DRAFT: {
             client: 'DOCUMENT',
-            endpoint: '/document/case/${caseId}/DRAFT',
+            endpoint: '/document/reference/${caseId}/?type=DRAFT',
             adapter: documentsAdapter
         },
         CASE_NOTES: {
