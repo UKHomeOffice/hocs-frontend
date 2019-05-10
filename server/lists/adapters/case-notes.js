@@ -25,7 +25,8 @@ const formatDate = (rawDate) => {
         month: 'long',
         day: 'numeric',
         hour: 'numeric',
-        minute: 'numeric'
+        minute: 'numeric',
+        timeZone: 'Europe/London'
     }).format(date);
 };
 
