@@ -417,6 +417,7 @@ a.card__body {
       display: block;
       border-bottom: 1px solid $panel-colour;
       overflow-wrap: break-word;
+      word-wrap: break-word;
       &:last-child {
         margin-bottom: 0px;
       }
