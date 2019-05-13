@@ -7,9 +7,6 @@ exports[`Action page component should render children when passed 1`] = `
   <div
     class="govuk-grid-column-one-half"
   >
-    <h1
-      class="govuk-heading-l"
-    />
     FORM
   </div>
 </div>
@@ -21,11 +18,7 @@ exports[`Action page component should render with default props 1`] = `
 >
   <div
     class="govuk-grid-column-one-half"
-  >
-    <h1
-      class="govuk-heading-l"
-    />
-  </div>
+  />
 </div>
 `;
 
@@ -35,17 +28,7 @@ exports[`Action page component should render with subTitle when passed in props 
 >
   <div
     class="govuk-grid-column-one-half"
-  >
-    <h1
-      class="govuk-heading-l"
-    >
-      <span
-        class="govuk-caption-l"
-      >
-        MY_SUBTITLE
-      </span>
-    </h1>
-  </div>
+  />
 </div>
 `;
 
