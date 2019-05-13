@@ -2,8 +2,8 @@ import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-class EntityManager extends Component {
 
+class EntityManager extends Component {
     constructor(props) {
         super(props);
     }
@@ -15,6 +15,7 @@ class EntityManager extends Component {
             hasAddLink,
             hasRemoveLink,
             hasDownloadLink,
+            hasTemplateLink,
             label
         } = this.props;
         return (
@@ -36,6 +37,9 @@ class EntityManager extends Component {
                                     </td>}
                                     {hasDownloadLink && <td className='govuk-table__cell'>
                                         <a href={`${baseUrl}/download/${entity}/${choice.value}`} className="govuk-link" download={choice.label}>Download</a>
+                                    </td>}
+                                    {hasTemplateLink && <td className='govuk-table__cell'>
+                                        <a href={`${baseUrl}/template`} className="govuk-link" download={choice.label}>Download</a>
                                     </td>}
                                     {hasRemoveLink && <td className='govuk-table__cell'>
                                         <a href={`${baseUrl}/entity/${entity}/${choice.value}/remove`} className="govuk-link">Remove</a>
@@ -60,6 +64,7 @@ EntityManager.propTypes = {
     hasAddLink: PropTypes.bool,
     hasRemoveLink: PropTypes.bool,
     hasDownloadLink: PropTypes.bool,
+    hasTemplateLink: PropTypes.bool,
     label: PropTypes.string
 };
 
