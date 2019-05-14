@@ -1,4 +1,4 @@
-const { templateService } = require('../clients');
+const { templatesService } = require('../clients');
 const getLogger = require('../libs/logger');
 const { DocumentError } = require('../models/error');
 
@@ -7,7 +7,7 @@ async function getTemplate(req, res, next) {
     const { caseId } = req.params;
     logger.info('REQUEST_TEMPLATE', { ...req.params });
     try {
-        const response = await templateService.get(`/template/${caseId}`, { responseType: 'stream' });
+        const response = await templatesService.get(`/template/${caseId}`, { responseType: 'stream' });
         res.setHeader('Cache-Control', 'max-age=86400');
         res.setHeader('Content-Disposition', response.headers['content-disposition']);
         response.data.on('finish', () => logger.debug('REQUEST_TEMPLATE_SUCCESS', { ...req.params }));
