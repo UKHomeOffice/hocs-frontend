@@ -260,6 +260,8 @@ spec:
             value: 'https://hocs-docs.{{.KUBE_NAMESPACE}}.svc.cluster.local'
           - name: INFO_SERVICE
             value: 'https://hocs-info-service.{{.KUBE_NAMESPACE}}.svc.cluster.local'
+          - name: TEMPLATES_SERVICE
+            value: 'https://hocs-templates.{{.KUBE_NAMESPACE}}.svc.cluster.local'
           - name: OUTBOUND_PROXY
             value: 'http://hocs-outbound-proxy.{{.KUBE_NAMESPACE}}.svc.cluster.local:31290'
           - name: ALLOWED_FILE_EXTENSIONS
