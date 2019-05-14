@@ -57,7 +57,7 @@ describe('Form repository', () => {
         expect(Component).toBeNull();
     });
 
-    it('should support components in the supportedFormComponents list', () => {
+    xit('should support components in the supportedFormComponents list', () => {
         supportedFormComponents.map(({ component, props }) => {
             const Component = formComponentFactory(component, {
                 key: 1,

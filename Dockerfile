@@ -17,6 +17,7 @@ RUN groupadd -r ${GROUP} && \
 WORKDIR /tmp
 COPY . /tmp
 RUN npm --loglevel warn install --development --no-optional
+RUN npm test
 RUN npm run build-prod
 
 WORKDIR /app
