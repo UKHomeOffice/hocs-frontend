@@ -96,6 +96,24 @@ describe('Entity list component', () => {
         expect(WRAPPER).toMatchSnapshot();
     });
 
+    it('should render with download link when passed in props', () => {
+        const choice = value => ({ label: `Choice ${value}`, value: `CHOICE_${value}` });
+        const PROPS = {
+            ...DEFAULT_PROPS,
+            choices: [
+                choice('A'),
+                choice('B')
+            ],
+            hasTemplateLink: true
+        };
+        const WRAPPER = render(
+            <MemoryRouter>
+                <EntityManager {...PROPS} />
+            </MemoryRouter>);
+        expect(WRAPPER).toBeDefined();
+        expect(WRAPPER).toMatchSnapshot();
+    });
+
     it('should render with tags when passed in props on choice entries', () => {
         const choice = value => ({ label: `Choice ${value}`, value: `CHOICE_${value}`, tags: [value] });
         const PROPS = {

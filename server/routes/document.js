@@ -9,6 +9,4 @@ router.get('/:caseId/stage/:stageId/download/document/:documentId/original', get
 
 router.get('/:caseId/stage/:stageId/download/standard_line/:documentId', getOriginalDocument);
 
-router.get('/:caseId/stage/:stageId/download/template/:documentId', getOriginalDocument);
-
 module.exports = router;
