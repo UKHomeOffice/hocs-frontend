@@ -5,7 +5,7 @@ const {
     WORKFLOW_SERVICE,
     INFO_SERVICE,
     DOCUMENT_SERVICE,
-    TEMPLATE_SERVICE,
+    TEMPLATES_SERVICE,
     WORKFLOW_BASIC_AUTH
 } = require('../config').forContext('server');
 
@@ -29,8 +29,8 @@ const documentService = createClient({
     auth: WORKFLOW_BASIC_AUTH
 });
 
-const templateService = createClient({
-    baseURL: TEMPLATE_SERVICE,
+const templatesService = createClient({
+    baseURL: TEMPLATES_SERVICE,
     auth: WORKFLOW_BASIC_AUTH
 });
 
@@ -39,5 +39,5 @@ module.exports = {
     workflowService,
     infoService,
     documentService,
-    templateService
+    templatesService
 };
