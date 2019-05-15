@@ -64,6 +64,11 @@ module.exports = async options => {
                 .withProp('label', 'Does this correspondent give a reference?')
                 .build()
         )
+        .withField(
+            Component('hidden', 'externalKey')
+                .withProp('label', 'External member reference')
+                .build()
+        )
         .withPrimaryActionLabel('Add')
         .withSecondaryAction(
             Component('backlink')
