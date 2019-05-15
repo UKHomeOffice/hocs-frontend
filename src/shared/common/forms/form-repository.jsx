@@ -16,6 +16,7 @@ import Dropdown from './dropdown.jsx';
 import TypeAhead from './type-ahead.jsx';
 import Panel from './panel.jsx';
 import Accordion from './accordion.jsx';
+import Hidden from './hidden.jsx';
 
 function defaultDataAdapter(name, data) {
     return data[name] || '';
@@ -52,6 +53,8 @@ export function formComponentFactory(field, options) {
         return renderFormComponent(Radio, { key, config, data, errors, callback });
     case 'text':
         return renderFormComponent(TextInput, { key, config, data, errors, callback });
+    case 'hidden':
+        return renderFormComponent(Hidden, { key, config, data, errors, callback });
     case 'date':
         return renderFormComponent(DateInput, { key, config, data, errors, callback });
     case 'checkbox':

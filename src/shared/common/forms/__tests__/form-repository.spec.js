@@ -22,6 +22,7 @@ const supportedFormComponents = [
     { component: 'panel', props: { name: 'panel' } },
     { component: 'inset', props: { name: 'inset' } },
     { component: 'paragraph', props: { name: 'paragraph' } },
+    { component: 'hidden', props: { name: 'hidden' } },
 ];
 
 const supportedSecondaryActions = [
