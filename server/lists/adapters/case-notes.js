@@ -11,7 +11,10 @@ const getTitle = (type) => {
         CASE_CREATED: 'Case Created',
         DOCUMENT_CREATED: 'Document Created',
         DOCUMENT_DELETED: 'Document Deleted',
-        MANUAL: 'Case Note'
+        MANUAL: 'Case Note',
+        ALLOCATE: 'Allocation Note',
+        REJECT: 'Rejection Note'
+
     };
     return types.hasOwnProperty(type) ? types[type] : 'System event';
 };

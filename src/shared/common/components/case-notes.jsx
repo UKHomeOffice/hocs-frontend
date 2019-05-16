@@ -52,7 +52,7 @@ AuditEvent.propTypes = {
 const TimelineItem = ({ type, title, body }, i) => (
     <li key={i} className={i === 0 ? 'recent-action' : null}>
         <h2>{title}</h2>
-        {body && type === 'MANUAL' ? <CaseNote {...body} /> : <AuditEvent  {...body} />}
+        {body && ['MANUAL', 'ALLOCATE', 'REJECT'].includes(type) ? <CaseNote {...body} /> : <AuditEvent  {...body} />}
     </li>
 );
 
