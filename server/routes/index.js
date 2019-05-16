@@ -7,7 +7,7 @@ const pageRouter = require('./page');
 const actionRouter = require('./action');
 const caseRouter = require('./case');
 const documentRouter = require('./document');
-const templateRouter = require('./templates');
+const templatesRouter = require('./templates');
 const healthRouter = require('./health');
 const search = require('./search');
 const dashboard = require('./dashboard');
@@ -28,7 +28,7 @@ router.use('/api', apiRouter);
 router.use('/action', actionRouter);
 router.use('/case', caseRouter);
 router.use('/case', documentRouter);
-router.use('/case', templateRouter);
+router.use('/case', templatesRouter);
 router.use('/', dashboard);
 router.use('/', search);
 
