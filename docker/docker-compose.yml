@@ -185,8 +185,8 @@ services:
     - localstack
 
   search:
-    #image: quay.io/ukhomeofficedigital/hocs-search
-    image: hocs-search-test
+    image: quay.io/ukhomeofficedigital/hocs-search
+    #image: hocs-search-test
     ports:
     - 8088:8080
     networks:
@@ -210,8 +210,8 @@ services:
     - localstack
 
   info:
-    #image: quay.io/ukhomeofficedigital/hocs-info-service
-    image: hocs-info-service-test
+    image: quay.io/ukhomeofficedigital/hocs-info-service
+    #image: hocs-info-service-test
     ports:
     - 8085:8080
     networks:
