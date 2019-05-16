@@ -40,7 +40,7 @@ module.exports = async (data, { fromStaticList, logger }) => {
     return await Promise.all(data
         .sort((a, b) => new Date(a.eventTime) < new Date(b.eventTime) ? 1 : -1)
         .map(async ({ eventTime, type, userName: authorId, body = {} }) => {
-            const { caseNote, userUUID: userId, teamUUID: teamId, stage: stageId, documentTitle: document, topicName: topic, fullname: correspondent } = body;
+            const { caseNote, allocatedToUUID: allocationId, stage: stageId, documentTitle: document, topicName: topic, fullname: correspondent } = body;
             return {
                 type,
                 title: getTitle(type),
@@ -48,8 +48,8 @@ module.exports = async (data, { fromStaticList, logger }) => {
                     date: formatDate(eventTime),
                     note: caseNote,
                     author: await fromStaticList('S_USERS', authorId),
-                    user: await fromStaticList('S_USERS', userId),
-                    team: await fromStaticList('S_TEAMS', teamId),
+                    user: await fromStaticList('S_USERS', allocationId),
+                    team: await fromStaticList('S_TEAMS', allocationId),
                     stage: await fromStaticList('S_STAGETYPES', stageId),
                     document,
                     topic,
