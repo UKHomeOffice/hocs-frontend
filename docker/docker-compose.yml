@@ -265,5 +265,17 @@ services:
     - postgres
     - localstack
 
+  templates:
+    image: quay.io/ukhomeofficedigital/hocs-templates
+    ports:
+      - 8090:8080
+    networks:
+      - hocs-network
+    environment:
+      SERVER_PORT: 8080
+      HOCS_INFO_SERVICE: 'http://info:8080'
+      HOCS_AUDITSERVICE: 'http://casework:8080'
+      HOCS_SEARCH_SERVICE: 'http://documents:8080'
+
 networks:
   hocs-network:
