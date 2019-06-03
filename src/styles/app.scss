@@ -417,6 +417,7 @@ a.card__body {
       display: block;
       border-bottom: 1px solid $panel-colour;
       overflow-wrap: break-word;
+      word-wrap: break-word;
       &:last-child {
         margin-bottom: 0px;
       }
@@ -568,3 +569,12 @@ $border-colour: govuk-colour("grey-2");
 .govuk-breadcrumbs{
   margin-top:0px;
 }
+
+.govuk-button-panel--link {
+  color: govuk-colour("white");
+  text-decoration: none;
+  font-size: 2.25rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+  margin: 0; }

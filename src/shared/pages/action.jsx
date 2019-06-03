@@ -13,10 +13,10 @@ class Action extends Component {
         return (
             <div className="govuk-grid-row">
                 <div className="govuk-grid-column-one-half">
-                    <h1 className="govuk-heading-l">
+                    { title && <h1 className="govuk-heading-l">
                         {title}
                         {subTitle && <span className="govuk-caption-l">{subTitle}</span>}
-                    </h1>
+                    </h1> }
                     {children}
                 </div>
             </div>

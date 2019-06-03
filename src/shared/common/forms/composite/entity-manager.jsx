@@ -2,8 +2,8 @@ import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-class EntityManager extends Component {
 
+class EntityManager extends Component {
     constructor(props) {
         super(props);
     }
@@ -15,6 +15,7 @@ class EntityManager extends Component {
             hasAddLink,
             hasRemoveLink,
             hasDownloadLink,
+            hasTemplateLink,
             label
         } = this.props;
         return (
@@ -37,13 +38,16 @@ class EntityManager extends Component {
                                     {hasDownloadLink && <td className='govuk-table__cell'>
                                         <a href={`${baseUrl}/download/${entity}/${choice.value}`} className="govuk-link" download={choice.label}>Download</a>
                                     </td>}
+                                    {hasTemplateLink && <td className='govuk-table__cell'>
+                                        <a href={`${baseUrl}/template`} className="govuk-link" download={choice.label}>Download</a>
+                                    </td>}
                                     {hasRemoveLink && <td className='govuk-table__cell'>
                                         <a href={`${baseUrl}/entity/${entity}/${choice.value}/remove`} className="govuk-link">Remove</a>
                                     </td>}
                                 </tr>
                             );
                         })}
-                        {choices.length === 0 && <p className='govuk-body'>No {entity}s</p>}
+                        {choices.length === 0 && <p className='govuk-body'>None</p>}
                     </tbody>
                 </table>
                 {hasAddLink && <Link to={`${baseUrl}/entity/${entity}/add`} className="govuk-body govuk-link">{`Add ${entity}`}</Link>}
@@ -60,6 +64,7 @@ EntityManager.propTypes = {
     hasAddLink: PropTypes.bool,
     hasRemoveLink: PropTypes.bool,
     hasDownloadLink: PropTypes.bool,
+    hasTemplateLink: PropTypes.bool,
     label: PropTypes.string
 };
 

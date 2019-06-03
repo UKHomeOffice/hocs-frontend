@@ -84,7 +84,7 @@ const actions = {
                 switch (form.action) {
                 case actionTypes.CREATE_CASE:
                     response = await createCase('/case', { caseType: context, form }, headers);
-                    clientResponse = { summary: `Created a new case: ${response.data.reference}` };
+                    clientResponse = { summary: 'Created a new case ', link: `${response.data.reference}`};
                     return handleActionSuccess(clientResponse, workflow, form);
                 case actionTypes.BULK_CREATE_CASE:
                     response = await createCase('/case/bulk', { caseType: context, form }, headers);

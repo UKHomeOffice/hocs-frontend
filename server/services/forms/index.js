@@ -13,7 +13,6 @@ const formDefinitions = {
                     }
                 }
             },
-            /** I see this as temp code, we should move this to a getCreateForType method in the list/workflow service **/
             DOCUMENT: {
                 MIN: {
                     builder: formRepository.addDocument,
@@ -30,7 +29,7 @@ const formDefinitions = {
                     }
                 },
                 DTEN: {
-                    builder: formRepository.addDTENDocument,
+                    builder: formRepository.addDocument,
                     action: CREATE_CASE,
                     next: {
                         action: 'CONFIRMATION_SUMMARY'
@@ -62,6 +61,13 @@ const formDefinitions = {
                     }
                 },
                 TRO: {
+                    builder: formRepository.bulkAddDocument,
+                    action: BULK_CREATE_CASE,
+                    next: {
+                        action: 'CONFIRMATION_SUMMARY'
+                    }
+                },
+                DTEN: {
                     builder: formRepository.bulkAddDocument,
                     action: BULK_CREATE_CASE,
                     next: {

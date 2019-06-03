@@ -11,7 +11,18 @@ export default class Panel extends Component {
         return (
             <div className="govuk-panel govuk-panel--confirmation">
                 <h1 className="govuk-panel__title">{title}</h1>
-                <div className="govuk-panel__body">{children}</div>
+                <div className="govuk-panel__body">{children.summary}
+                    { children.link &&
+                        <form action='/search/reference' method='POST'
+                              onSubmit={e => submitHandler(e, baseUrl + allocateToTeamEndpoint)}
+                              encType='multipart/form-data'>
+                            <input className="govuk-input" id="case-reference" type="hidden" name="case-reference"
+                                   value={children.link}/>
+                            <input className="govuk-button-panel--link" id="submit" type="submit"
+                                   value={children.link}/>
+                        </form>
+                    }
+                </div>
             </div>
         );
     }

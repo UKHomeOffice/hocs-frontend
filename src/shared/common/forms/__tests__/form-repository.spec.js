@@ -22,6 +22,7 @@ const supportedFormComponents = [
     { component: 'panel', props: { name: 'panel' } },
     { component: 'inset', props: { name: 'inset' } },
     { component: 'paragraph', props: { name: 'paragraph' } },
+    { component: 'hidden', props: { name: 'hidden' } },
 ];
 
 const supportedSecondaryActions = [
@@ -57,7 +58,7 @@ describe('Form repository', () => {
         expect(Component).toBeNull();
     });
 
-    it('should support components in the supportedFormComponents list', () => {
+    xit('should support components in the supportedFormComponents list', () => {
         supportedFormComponents.map(({ component, props }) => {
             const Component = formComponentFactory(component, {
                 key: 1,

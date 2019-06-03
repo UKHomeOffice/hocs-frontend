@@ -13,16 +13,16 @@ module.exports = (options = {}) => {
         )
         .withField(
             Component('date', 'dateReceivedFrom')
-                .withProp('label', 'Received after')
+                .withProp('label', 'Received on or after')
                 .withValidator('isValidDate', 'Date received must be valid')
-                .withValidator('isBeforeToday', 'Date received after cannot be in the future')
+                .withValidator('isBeforeToday', 'Date received cannot be in the future')
                 .build()
         )
         .withField(
             Component('date', 'dateReceivedTo')
-                .withProp('label', 'Received before')
+                .withProp('label', 'Received on or before')
                 .withValidator('isValidDate', 'Date received must be valid')
-                .withValidator('isBeforeToday', 'Date received before cannot be in the future')
+                .withValidator('isBeforeToday', 'Date received cannot be in the future')
                 .build()
         )
         .withField(
@@ -37,14 +37,14 @@ module.exports = (options = {}) => {
         )
         .withField(
             Component('dropdown', 'signOffMinister')
-                .withProp('label', 'Sign-off Minister')
-                .withProp('choices', 'MINISTERS')
+                .withProp('label', 'Sign-off Team')
+                .withProp('choices', 'PRIVATE_OFFICE_TEAMS')
                 .build()
         )
         .withField(
             Component('checkbox', 'caseStatus')
                 .withProp('label', 'Case status')
-                .withProp('choices', [Choice('Active', 'active')])
+                .withProp('choices', [Choice('Include Active Only', 'active')])
                 .build()
         )
         .withPrimaryActionLabel('Search')

@@ -79,7 +79,7 @@ const dashboardAdapter = async (data, { fromStaticList, logger, user }) => {
             }
             return cards;
         }, [])
-        .sort((a, b) => a.label.localeCompare(b.label));
+        .sort((a, b) => (a.label && b.label) ? a.label.localeCompare(b.label) : 0);
     logger.debug('REQUEST_DASHBOARD', { user_cases: userCard[0].getCount(), teams: teamCards.length });
     return { user: userCard, teams: teamCards };
 };

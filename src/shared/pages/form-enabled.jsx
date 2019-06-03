@@ -147,7 +147,7 @@ function withForm(Page) {
             return (
                 <Fragment>
                     <Panel title='Success'>
-                        {this.state.confirmation.summary}
+                        {this.state.confirmation}
                     </Panel >
                     <BackLink />
                 </Fragment>

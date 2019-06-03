@@ -122,7 +122,7 @@ services:
 
   casework:
     image: quay.io/ukhomeofficedigital/hocs-casework
-    # image: hocs-casework-test
+    #image: hocs-casework-test
     ports:
     - 8082:8080
     networks:
@@ -159,6 +159,7 @@ services:
       HOCS_DOCUMENT_SERVICE: 'http://documents:8080'
       HOCS_INFO_SERVICE: 'http://info:8080'
       DB_HOST: 'postgres'
+      DB_SCHEMA_NAME: 'public'
       AWS_LOCAL_HOST: 'localstack'
     depends_on:
     - postgres
@@ -166,7 +167,7 @@ services:
 
   audit:
     image: quay.io/ukhomeofficedigital/hocs-audit
-    # image: hocs-workflow-test
+    #image: hocs-audit-test
     ports:
     - 8087:8080
     networks:
@@ -177,6 +178,7 @@ services:
       DB_HOST: 'postgres'
       AUDIT_QUEUE_NAME: 'audit-queue'
       AUDIT_QUEUE_DLQ_NAME: 'audit-queue-dlq'
+      HOCS_INFO_SERVICE: 'http://info:8080'
       AWS_LOCAL_HOST: 'localstack'
     depends_on:
     - postgres
@@ -184,7 +186,7 @@ services:
 
   search:
     image: quay.io/ukhomeofficedigital/hocs-search
-    # image: hocs-search-test
+    #image: hocs-search-test
     ports:
     - 8088:8080
     networks:
@@ -209,7 +211,7 @@ services:
 
   info:
     image: quay.io/ukhomeofficedigital/hocs-info-service
-    # image: hocs-info-service-test
+    #image: hocs-info-service-test
     ports:
     - 8085:8080
     networks:
@@ -262,6 +264,18 @@ services:
     - converter
     - postgres
     - localstack
+
+  templates:
+    image: quay.io/ukhomeofficedigital/hocs-templates
+    ports:
+      - 8090:8080
+    networks:
+      - hocs-network
+    environment:
+      SERVER_PORT: 8080
+      HOCS_INFO_SERVICE: 'http://info:8080'
+      HOCS_AUDITSERVICE: 'http://casework:8080'
+      HOCS_SEARCH_SERVICE: 'http://documents:8080'
 
 networks:
   hocs-network:

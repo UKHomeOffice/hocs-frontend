@@ -5,7 +5,7 @@ Array [
   <p
     class="govuk-body"
   >
-    No entitys
+    None
   </p>,
   <table
     class="govuk-table"
@@ -28,7 +28,7 @@ Array [
   <p
     class="govuk-body"
   >
-    No entitys
+    None
   </p>,
   <table
     class="govuk-table"
@@ -84,7 +84,7 @@ Array [
   <p
     class="govuk-body"
   >
-    No entitys
+    None
   </p>,
   <table
     class="govuk-table"
@@ -147,12 +147,63 @@ exports[`Entity list component should render with download link when passed in p
 </table>
 `;
 
+exports[`Entity list component should render with download link when passed in props 2`] = `
+<table
+  class="govuk-table"
+>
+  <tbody
+    class="govuk-table__body"
+  >
+    <tr
+      class="govuk-radios govuk-table__row"
+    >
+      <td
+        class="govuk-table__cell"
+      >
+        Choice A
+      </td>
+      <td
+        class="govuk-table__cell"
+      >
+        <a
+          class="govuk-link"
+          download="Choice A"
+          href="http://localhost:8080/template"
+        >
+          Download
+        </a>
+      </td>
+    </tr>
+    <tr
+      class="govuk-radios govuk-table__row"
+    >
+      <td
+        class="govuk-table__cell"
+      >
+        Choice B
+      </td>
+      <td
+        class="govuk-table__cell"
+      >
+        <a
+          class="govuk-link"
+          download="Choice B"
+          href="http://localhost:8080/template"
+        >
+          Download
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+`;
+
 exports[`Entity list component should render with label when passed in props 1`] = `
 Array [
   <p
     class="govuk-body"
   >
-    No entitys
+    None
   </p>,
   <table
     class="govuk-table"

@@ -24,7 +24,7 @@ CaseNote.propTypes = {
     note: PropTypes.string
 };
 
-const AuditEvent = ({ date, author, user, team, stage, document }) => (
+const AuditEvent = ({ date, author, user, team, stage, document, topic, correspondent }) => (
     <Fragment>
         {date && <p>{date}</p>}
         {author && <p><strong>Author:</strong> {author}</p>}
@@ -32,6 +32,8 @@ const AuditEvent = ({ date, author, user, team, stage, document }) => (
         {team && <p><strong>Assigned team:</strong> {team}</p>}
         {user && <p><strong>Assigned user:</strong> {user}</p>}
         {document && <p><strong>Document:</strong> {document}</p>}
+        {correspondent && <p><strong>Name:</strong> {correspondent}</p>}
+        {topic && <p><strong>Name:</strong> {topic}</p>}
     </Fragment>
 );
 
@@ -41,13 +43,16 @@ AuditEvent.propTypes = {
     user: PropTypes.string,
     team: PropTypes.string,
     stage: PropTypes.string,
-    document: PropTypes.string
+    document: PropTypes.string,
+    topic: PropTypes.string,
+    correspondent: PropTypes.string
+
 };
 
 const TimelineItem = ({ type, title, body }, i) => (
     <li key={i} className={i === 0 ? 'recent-action' : null}>
         <h2>{title}</h2>
-        {body && type === 'MANUAL' ? <CaseNote {...body} /> : <AuditEvent  {...body} />}
+        {body && ['MANUAL', 'ALLOCATE', 'REJECT'].includes(type) ? <CaseNote {...body} /> : <AuditEvent  {...body} />}
     </li>
 );
 

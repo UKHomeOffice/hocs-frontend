@@ -63,7 +63,7 @@ const Dashboard = ({ title, match, history }) => {
         <Fragment>
             <div className='govuk-grid-row'>
                 <div className='govuk-grid-column-one-third'>
-                    <h1 className='govuk-heading-l'>{form.schema.title}</h1>
+                    {form.schema.title && <h1 className='govuk-heading-l'>{form.schema.title}</h1>}
                     <Form {...form} action={form.schema.action || match.url} submitHandler={submitHandler} showErrorSummary={false} />
                 </div>
             </div>
