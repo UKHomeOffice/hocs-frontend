@@ -9,13 +9,13 @@ const usersAdapter = async (data, { logger }) => {
 };
 
 const caseTypesAdapter = async (data, { logger }) => {
-    logger.debug('REQUEST_CASETYPES', { caseTypes: data.length });
-    return data.map(({ label, value }) => ({ key: value, value: label }));
+    logger.debug('REQUEST_CASETYPES', { caseTypes: data.caseTypes.length });
+    return data.caseTypes.map(({ label, value }) => ({ key: value, value: label }));
 };
 
 const stageTypesAdapter = async (data, { logger }) => {
-    logger.debug('REQUEST_STAGETYPE', { stageTypes: data.length });
-    return data.map(({ label, value }) => ({ key: value, value: label }));
+    logger.debug('REQUEST_STAGETYPE', { stageTypes: data.stageTypes.length });
+    return data.stageTypes.map(({ label, value }) => ({ key: value, value: label }));
 };
 
 module.exports = {
