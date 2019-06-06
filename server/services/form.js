@@ -135,7 +135,7 @@ const getForm = (form, options) => {
 const getFormForAction = async (req, res, next) => {
 
     const logger = getLogger(req.requestId);
-    logger.info('GET_FORM', { ...req.params });
+    logger.info('GET_FORM_FOR_ACTION', { ...req.params });
 
     try {
         const { workflow, context, action } = req.params;
@@ -151,7 +151,7 @@ const getFormForAction = async (req, res, next) => {
 const getFormForCase = async (req, res, next) => {
 
     const logger = getLogger(req.requestId);
-    logger.info('GET_FORM', { ...req.params });
+    logger.info('GET_FORM_FOR_CASE', { ...req.params });
 
     try {
         const form = await getFormSchemaForCase({ ...req.params, user: req.user });
@@ -166,7 +166,7 @@ const getFormForCase = async (req, res, next) => {
 const getFormForStage = async (req, res, next) => {
 
     const logger = getLogger(req.requestId);
-    logger.info('GET_FORM', { ...req.params });
+    logger.info('GET_FORM_FOR_STAGE', { ...req.params });
 
     const { user } = req;
     try {

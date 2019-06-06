@@ -2,7 +2,7 @@ const Form = require('../form-builder');
 const { Component, Choice } = require('../component-builder');
 
 module.exports = options => Form()
-    .withTitle('Record Correspondent Details')
+    .withTitle('Correspondent Details')
     .withField(
         Component('dropdown', 'type')
             .withValidator('required', 'The correspondent must have a type')

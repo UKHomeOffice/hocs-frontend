@@ -37,11 +37,6 @@ const formDefinitions = {
                 }
             }
         },
-        TEST: {
-            FORM: {
-                builder: formRepository.testForm
-            }
-        },
         BULK: {
             WORKFLOW: {
                 builder: formRepository.bulkCaseCreate,

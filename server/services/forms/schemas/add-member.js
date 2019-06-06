@@ -2,7 +2,7 @@ const Form = require('../form-builder');
 const { Component } = require('../component-builder');
 
 module.exports = options => Form()
-    .withTitle('Add member of parliament')
+    .withTitle('Add Member Of Parliament')
     .withField(
         Component('type-ahead', 'member')
             .withValidator('required', 'Member is required')
