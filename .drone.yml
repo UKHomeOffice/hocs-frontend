@@ -78,6 +78,7 @@ pipeline:
     secrets:
       - hocs_frontend_dev
       - hocs_frontend_demo
+      - poise_whitelist
     commands:
       - cd kube-hocs-frontend
       - ./deploy.sh
@@ -93,6 +94,7 @@ pipeline:
       - KUBE_SERVER=https://kube-api-notprod.notprod.acp.homeoffice.gov.uk
     secrets:
       - hocs_frontend_qa
+      - poise_whitelist
     commands:
       - source version.txt
       - echo $VERSION
@@ -110,6 +112,7 @@ pipeline:
       - KUBE_SERVER=https://kube-api-prod.prod.acp.homeoffice.gov.uk
     secrets:
       - hocs_frontend_prod
+      - poise_whitelist
     commands:
       - cd kube-hocs-frontend
       - ./deploy.sh
