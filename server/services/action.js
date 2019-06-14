@@ -158,7 +158,8 @@ const actions = {
                     }
                 case actionTypes.SELECT_MEMBER:
                     return ({ callbackUrl: `/case/${caseId}/stage/${stageId}/entity/member/${form.data['member']}/details` });
-                case actionTypes.ADD_CORRESPONDENT: case actionTypes.ADD_MEMBER:
+                case actionTypes.ADD_CORRESPONDENT:
+                case actionTypes.ADD_MEMBER:
                     await caseworkService.post(`/case/${caseId}/stage/${stageId}/correspondent`, { ...form.data }, headers);
                     return ({ callbackUrl: `/case/${caseId}/stage/${stageId}` });
                 case actionTypes.REMOVE_CORRESPONDENT:

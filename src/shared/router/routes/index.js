@@ -53,29 +53,35 @@ const routes = [
         component: StagePage
     },
     {
-        path: '/case/:caseId/stage/:stageId/entity/correspondent/:action/',
-        component: CasePage,
-        hasSidebar: true
-    },
-    {
-        path: '/case/:caseId/stage/:stageId/entity/correspondent/:context/:action/',
-        component: CasePage,
-        hasSidebar: true
-    },
-    {
         path: '/case/:caseId/stage/:stageId/entity/member/:action/',
+        exact: true,
         component: CasePage,
         hasSidebar: true
     },
     {
         path: '/case/:caseId/stage/:stageId/entity/member/:context/:action/',
+        exact: true,
+        component: CasePage,
+        hasSidebar: true
+    },
+    {
+        path: '/case/:caseId/stage/:stageId/entity/correspondent/:action/',
+        exact: true,
+        component: CasePage,
+        hasSidebar: true
+    },
+    {
+        path: '/case/:caseId/stage/:stageId/entity/correspondent/:context/:action/',
+        exact: true,
         component: CasePage,
         hasSidebar: true
     },
     {
         path: '/case/:caseId/stage/:stageId/entity/:entity/:action/',
         exact: true,
-        component: CasePage
+        component: CasePage,
+        hasSidebar: false
+
     },
     {
         path: '/case/:caseId/stage/:stageId/entity/:entity/:context/:action/',
