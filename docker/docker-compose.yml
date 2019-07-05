@@ -34,7 +34,7 @@ services:
     - clamd
 
   keycloak:
-    image: jboss/keycloak
+    image: jboss/keycloak:5.0.0
     restart: always
     ports:
     - 9990:9990
