@@ -144,7 +144,7 @@ services:
     image: quay.io/ukhomeofficedigital/hocs-workflow
     # image: hocs-workflow-test
     ports:
-    - 8091:8090
+    - 8091:8080
     networks:
     - hocs-network
     environment:
