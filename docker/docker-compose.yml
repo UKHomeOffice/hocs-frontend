@@ -144,7 +144,7 @@ services:
     image: quay.io/ukhomeofficedigital/hocs-workflow
     # image: hocs-workflow-test
     ports:
-    - 8081:8080
+    - 8091:8090
     networks:
     - hocs-network
     environment:
@@ -159,7 +159,7 @@ services:
       HOCS_DOCUMENT_SERVICE: 'http://documents:8080'
       HOCS_INFO_SERVICE: 'http://info:8080'
       DB_HOST: 'postgres'
-      DB_SCHEMA_NAME: 'public'
+      DB_SCHEMA_NAME: 'workflow'
       AWS_LOCAL_HOST: 'localstack'
     depends_on:
     - postgres
@@ -249,6 +249,7 @@ services:
     - hocs-network
     environment:
       SPRING_PROFILES_ACTIVE: 'development, local, postgres'
+      SPRING_FLYWAY_SCHEMAS: 'docs'
       SERVER_PORT: 8080
       DOCS_QUEUE_NAME: 'document-queue'
       DOCS_QUEUE_DLQ_NAME: 'document-queue-dlq'
