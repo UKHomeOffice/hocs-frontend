@@ -15,56 +15,56 @@ async function getFormSchemaFromWorkflowService(requestId, options, user) {
         response = await workflowService.get(`/case/${caseId}/stage/${stageId}`, { headers });
     } catch (error) {
         switch (error.response.status) {
-        case 401:
-            // handle no permission to allocate
-            try {
-                const response = await listService.getInstance(requestId, user).fetch('CASE_VIEW', { caseId });
+            case 401:
+                // handle no permission to allocate
+                try {
+                    const response = await listService.getInstance(requestId, user).fetch('CASE_VIEW', { caseId });
+                    return { form: response };
+                } catch (error) {
+                    return { error: new PermissionError('You are not authorised to work on this case') };
+                }
+            case 403:
+                // handle not allocated
+                /* eslint-disable-next-line no-case-declarations */
+                let usersInTeam;
+                /* eslint-disable-next-line no-case-declarations */
+                let caseView;
+                try {
+                    const { data: owningTeam } = await caseworkService.get(`/case/${caseId}/stage/${stageId}/team`, { headers });
+                    usersInTeam = await listService.getInstance(requestId, user).fetch('USERS_IN_TEAM', { teamId: owningTeam });
+                } catch (error) {
+                    usersInTeam = [];
+                }
+                try {
+                    caseView = await listService.getInstance(requestId, user).fetch('CASE_VIEW', { caseId });
+                } catch (error) {
+                    caseView = null;
+                }
+                /* eslint-disable-next-line no-case-declarations */
+                const response = FormBuilder(caseView)
+                    .withField(Component('heading', 'allocate-header')
+                        .withProp('label', 'Allocate')
+                        .build())
+                    .withField(Component('link', 'allocate-to-me')
+                        .withProp('label', 'Allocate to me')
+                        .withProp('className', 'govuk-body margin-bottom--small')
+                        .withProp('target', `/case/${caseId}/stage/${stageId}/allocate`)
+                        .build())
+                    .withField(Component('dropdown', 'user-id')
+                        .withProp('label', 'Allocate to a team member')
+                        .withProp('className', 'govuk-body')
+                        .withProp('choices', usersInTeam)
+                        .build())
+                    .withPrimaryAction('Allocate')
+                    .withSecondaryAction(
+                        Component('backlink')
+                            .withProp('label', 'Cancel')
+                            .build()
+                    )
+                    .build();
                 return { form: response };
-            } catch (error) {
-                return { error: new PermissionError('You are not authorised to work on this case') };
-            }
-        case 403:
-            // handle not allocated
-            /* eslint-disable-next-line no-case-declarations */
-            let usersInTeam;
-            /* eslint-disable-next-line no-case-declarations */
-            let caseView;
-            try {
-                const { data: owningTeam } = await caseworkService.get(`/case/${caseId}/stage/${stageId}/team`, { headers });
-                usersInTeam = await listService.getInstance(requestId, user).fetch('USERS_IN_TEAM', { teamId: owningTeam });
-            } catch (error) {
-                usersInTeam = [];
-            }
-            try {
-                caseView = await listService.getInstance(requestId, user).fetch('CASE_VIEW', { caseId });
-            } catch (error) {
-                caseView = null;
-            }
-            /* eslint-disable-next-line no-case-declarations */
-            const response = FormBuilder(caseView)
-                .withField(Component('heading', 'allocate-header')
-                    .withProp('label', 'Allocate')
-                    .build())
-                .withField(Component('link', 'allocate-to-me')
-                    .withProp('label', 'Allocate to me')
-                    .withProp('className', 'govuk-body margin-bottom--small')
-                    .withProp('target', `/case/${caseId}/stage/${stageId}/allocate`)
-                    .build())
-                .withField(Component('dropdown', 'user-id')
-                    .withProp('label', 'Allocate to a team member')
-                    .withProp('className', 'govuk-body')
-                    .withProp('choices', usersInTeam)
-                    .build())
-                .withPrimaryAction('Allocate')
-                .withSecondaryAction(
-                    Component('backlink')
-                        .withProp('label', 'Cancel')
-                        .build()
-                )
-                .build();
-            return { form: response };
-        default:
-            return { error: new Error(`Failed to retrieve form: ${error.response.status}`) };
+            default:
+                return { error: new Error(`Failed to retrieve form: ${error.response.status}`) };
         }
     }
     const { stageUUID, caseReference, allocationNote } = response.data;
@@ -110,7 +110,10 @@ const hydrateFields = async (req, res, next) => {
         try {
             await Promise.all(requests);
         } catch (error) {
-            return next(new Error('Failed to populate form fields'));
+            if (error.response !== undefined && error.response.status === 401) {
+                return next(new PermissionError('You are not authorised to work on this case'));
+            }
+            return next(new FormServiceError('Failed to fetch form'));
         }
     }
     next();
@@ -144,6 +147,9 @@ const getFormForAction = async (req, res, next) => {
         next();
     } catch (error) {
         logger.error('ACTION_FORM_FAILURE', { message: error.message, stack: error.stack });
+        if (error.response !== undefined && error.response.status === 401) {
+            return next(new PermissionError('You are not authorised to work on this case'));
+        }
         return next(new FormServiceError('Failed to fetch form'));
     }
 };
@@ -159,7 +165,11 @@ const getFormForCase = async (req, res, next) => {
         next();
     } catch (error) {
         logger.error('CASE_FORM_FAILURE', { message: error.message, stack: error.stack });
+        if (error.response !== undefined && error.response.status === 401) {
+            return next(new PermissionError('You are not authorised to work on this case'));
+        }
         return next(new FormServiceError('Failed to fetch form'));
+
     }
 };
 
@@ -179,6 +189,9 @@ const getFormForStage = async (req, res, next) => {
         }
     } catch (error) {
         logger.error('WORKFLOW_FORM_FAILURE', { message: error.message, stack: error.stack });
+        if (error.response !== undefined && error.response.status === 401) {
+            return next(new PermissionError('You are not authorised to work on this case'));
+        }
         return next(new FormServiceError('Failed to fetch form'));
     }
 };

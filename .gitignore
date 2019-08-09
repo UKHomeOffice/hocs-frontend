@@ -66,3 +66,8 @@ build/
 *.iml
 
 docker/keycloak/hsperfdata_jboss
+docker/scripts/keycloak/.DS_Store
+.DS_Store
+docker/.DS_Store
+docker/keycloak/.DS_Store
+docker/scripts/.DS_Store

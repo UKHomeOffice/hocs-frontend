@@ -141,18 +141,18 @@ module.exports = {
             adapter: membersAdapter
         },
         CASE_DOCUMENT_LIST: {
-            client: 'DOCUMENT',
-            endpoint: '/document/reference/${caseId}',
+            client: 'CASEWORK',
+            endpoint: '/case/document/reference/${caseId}',
             adapter: documentsAdapter
         },
         CASE_DOCUMENT_LIST_FINAL: {
-            client: 'DOCUMENT',
-            endpoint: '/document/reference/${caseId}/?type=FINAL',
+            client: 'CASEWORK',
+            endpoint: '/case/document/reference/${caseId}/?type=FINAL',
             adapter: documentsAdapter
         },
         CASE_DOCUMENT_LIST_DRAFT: {
-            client: 'DOCUMENT',
-            endpoint: '/document/reference/${caseId}/?type=DRAFT',
+            client: 'CASEWORK',
+            endpoint: '/case/document/reference/${caseId}/?type=DRAFT',
             adapter: documentsAdapter
         },
         CASE_NOTES: {

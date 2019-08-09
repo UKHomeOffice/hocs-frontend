@@ -1,51 +1,84 @@
-const { documentService } = require('../clients');
+const { caseworkService } = require('../clients');
 const getLogger = require('../libs/logger');
-const { DocumentError } = require('../models/error');
+const { DocumentError, PermissionError } = require('../models/error');
+const User = require('../models/user');
 
 async function getOriginalDocument(req, res, next) {
     const logger = getLogger(req.requestId);
-    const { documentId } = req.params;
+    const { caseId, stageId, documentId } = req.params;
+    let options = {
+        headers: User.createHeaders(req.user),
+        responseType: 'stream'
+    };
     logger.info('REQUEST_DOCUMENT_ORIGINAL', { ...req.params });
     try {
-        const response = await documentService.get(`/document/${documentId}/file`, { responseType: 'stream' });
+        const response = await caseworkService.get(`/case/${caseId}/document/${documentId}/file`, options);
         res.setHeader('Cache-Control', 'max-age=86400');
         res.setHeader('Content-Disposition', response.headers['content-disposition']);
         response.data.on('finish', () => logger.debug('REQUEST_DOCUMENT_ORIGINAL_SUCCESS', { ...req.params }));
         response.data.pipe(res);
     } catch (error) {
         logger.error('REQUEST_DOCUMENT_ORIGINAL_FAILURE', { ...req.params });
-        next(new DocumentError('Unable to retrieve original document'));
+        switch (error.response.status) {
+            case 401:
+                return next(new PermissionError('You are not authorised to work on this case'));
+            default:
+                return next(new DocumentError('Unable to retrieve original document'));
+        }
+
     }
 }
 
 async function getPdfDocument(req, res, next) {
     const logger = getLogger(req.requestId);
-    const { documentId } = req.params;
+    const { caseId, stageId, documentId } = req.params;
     logger.info('REQUEST_DOCUMENT_PDF', { ...req.params });
+
+    let options = {
+        headers: User.createHeaders(req.user),
+        responseType: 'stream'
+    };
+
     try {
-        const response = await documentService.get(`/document/${documentId}/pdf`, { responseType: 'stream' });
+        const response = await caseworkService.get(`/case/${caseId}/document/${documentId}/pdf`, options);
         res.setHeader('Cache-Control', 'max-age=86400');
         res.setHeader('Content-Disposition', response.headers['content-disposition']);
         response.data.on('finish', () => logger.debug('REQUEST_DOCUMENT_PDF_SUCCESS', { ...req.params }));
         response.data.pipe(res);
     } catch (error) {
         logger.error('REQUEST_DOCUMENT_PDF_FAILURE', { ...req.params });
-        next(new DocumentError('Unable to retrieve PDF document'));
+        switch (error.response.status) {
+            case 401:
+                return next(new PermissionError('You are not authorised to work on this case'));
+            default:
+                return next(new DocumentError('Unable to retrieve PDF document'));
+        }
     }
 }
 
 async function getPdfDocumentPreview(req, res, next) {
     const logger = getLogger(req.requestId);
-    const { documentId } = req.params;
+    const { caseId, documentId } = req.params;
+
+    let options = {
+        headers: User.createHeaders(req.user),
+        responseType: 'stream'
+    };
+
     logger.info('REQUEST_DOCUMENT_PREVIEW', { ...req.params });
     try {
-        const response = await documentService.get(`/document/${documentId}/pdf`, { responseType: 'stream' });
+        const response = await caseworkService.get(`/case/${caseId}/document/${documentId}/pdf`, options);
         res.setHeader('Cache-Control', 'max-age=86400');
         response.data.on('finish', () => logger.debug('REQUEST_DOCUMENT_PREVIEW_SUCCESS', { ...req.params }));
         response.data.pipe(res);
     } catch (error) {
         logger.error('REQUEST_DOCUMENT_PREVIEW_FAILURE', { ...req.params });
-        next(new DocumentError('Unable to retrieve document for PDF preview'));
+        switch (error.response.status) {
+            case 401:
+                return next(new PermissionError('You are not authorised to work on this case'));
+            default:
+                return next(new DocumentError('Unable to retrieve document for PDF preview'));
+        }
     }
 }
 
@@ -55,8 +88,14 @@ async function getDocumentList(req, res, next) {
         const response = await req.listService.fetch('CASE_DOCUMENT_LIST', { ...req.params });
         res.locals.documents = response;
     } catch (error) {
-        logger.info('CASE_DOCUMENT_LIST_RETURN_EMPTY');
         res.locals.documents = [];
+        switch (error.response.status) {
+            case 401:
+                return { error: new PermissionError('You are not authorised to work on this case') };
+            default:
+                logger.info('CASE_DOCUMENT_LIST_RETURN_EMPTY');
+                return { error: new Error(`Failed to retrieve form: ${error.response.status}`) };
+        }
     } finally {
         next();
     }
