@@ -33,7 +33,7 @@ router.post(['/search/results', '/api/search/results'],
                 correspondentName: formData['correspondent'],
                 topic: formData['topic'],
                 data: {
-                    POTeamName: formData['signOffMinister']
+                    POTeamUUID: formData['signOffMinister']
                 },
                 activeOnly: Array.isArray(formData['caseStatus']) && formData['caseStatus'].includes('active')
             };
