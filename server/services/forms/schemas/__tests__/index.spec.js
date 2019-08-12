@@ -9,9 +9,6 @@ jest.mock('../../../../clients', () => ({
     },
     infoService: {
         get: jest.fn(() => Promise.resolve({ data: {} }))
-    },
-    documentService: {
-        get: jest.fn(() => Promise.resolve({ data: {} }))
     }
 }));
 

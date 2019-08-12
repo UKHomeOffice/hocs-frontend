@@ -46,22 +46,6 @@ jest.mock('../../clients', () => {
             delete: (url, body) => {
                 mockRequestClient(body);
             }
-        },
-        documentService: {
-            post: (url, body) => {
-                if (url === '/case') {
-                    mockRequestClient(body);
-                    return handleMockWorkflowCreateRequest(body);
-                }
-                if (url === '/case/bulk') {
-                    mockRequestClient(body);
-                    return handleMockWorkflowCreateRequest(body);
-                }
-                mockRequestClient(body);
-            },
-            delete: (url, body) => {
-                mockRequestClient(body);
-            }
         }
     };
 });

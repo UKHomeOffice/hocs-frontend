@@ -1,4 +1,4 @@
-const { caseworkService, infoService, documentService, workflowService } = require('../clients/index');
+const { caseworkService, infoService, workflowService } = require('../clients/index');
 const listService = require('../services/list');
 const statics = require('./adapters/statics');
 const caseTypeAdapter = require('./adapters/case-types');
@@ -174,7 +174,6 @@ module.exports = {
     clients: {
         CASEWORK: caseworkService,
         WORKFLOW: workflowService,
-        INFO: infoService,
-        DOCUMENT: documentService
+        INFO: infoService
     }
 };
