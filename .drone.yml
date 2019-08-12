@@ -120,4 +120,15 @@ pipeline:
       event: deployment
       environment: prod
 
+  execute-tests:
+    image: quay.io/ukhomeofficedigital/hocs-serenity-automation
+    secrets:
+       - artifactory_username
+       - artifactory_password
+    commands:
+      - sh bin/smoke-tests.sh
+    when:
+      event: deployment
+      environment: qa
+
   
