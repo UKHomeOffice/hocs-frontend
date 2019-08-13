@@ -6,11 +6,11 @@ const {
 } = require('../document');
 
 jest.mock('../../clients', () => ({
-    documentService: {
+    caseworkService: {
         get: jest.fn()
     }
 }));
-const { documentService } = require('../../clients');
+const { caseworkService } = require('../../clients');
 
 describe('Document middleware', () => {
 
@@ -20,10 +20,11 @@ describe('Document middleware', () => {
         let res = {};
         const mockResponse = { data: {}, headers: { 'content-disposition': 'TEST' } };
         const next = jest.fn();
+        const mockUser = { username: 'TEST_USER', uuid: 'TEST', roles: [], groups: [] };
 
         beforeEach(() => {
             next.mockReset();
-            req = { params: { documentId: '1234', caseId: '1234' } };
+            req = { params: { documentId: '1234', caseId: '5522' }, user: mockUser};
             res = { setHeader: jest.fn() };
             mockResponse.status = 200;
             mockResponse.data.on = jest.fn();
@@ -31,11 +32,16 @@ describe('Document middleware', () => {
 
         });
 
+        const expecteOptions = {
+            headers: { 'X-Auth-Groups': '', 'X-Auth-Roles': '', 'X-Auth-UserId': 'TEST'},
+            responseType: 'stream'
+        };
+
         it('should pipe the response on success', async () => {
-            documentService.get.mockImplementation(() => Promise.resolve(mockResponse));
+            caseworkService.get.mockImplementation(() => Promise.resolve(mockResponse));
             await getOriginalDocument(req, res, next);
-            expect(documentService.get).toHaveBeenCalled();
-            expect(documentService.get).toHaveBeenCalledWith('/document/1234/file', { responseType: 'stream' });
+            expect(caseworkService.get).toHaveBeenCalled();
+            expect(caseworkService.get).toHaveBeenCalledWith('/case/5522/document/1234/file', expecteOptions);
             expect(res.setHeader).toHaveBeenCalled();
             expect(res.setHeader).toHaveBeenCalledWith('Cache-Control', 'max-age=86400');
             expect(mockResponse.data.pipe).toHaveBeenCalled();
@@ -44,7 +50,7 @@ describe('Document middleware', () => {
 
         it('should call next with an error if request fails', async () => {
             const mockError = new Error('Unable to retrieve original document');
-            documentService.get.mockImplementation(() => Promise.reject(mockError));
+            caseworkService.get.mockImplementation(() => Promise.reject(mockError));
             await getOriginalDocument(req, res, next);
             expect(next).toHaveBeenCalled();
             expect(next).toHaveBeenCalledWith(mockError);
@@ -58,10 +64,11 @@ describe('Document middleware', () => {
         let res = {};
         const mockResponse = { data: {}, headers: { 'content-disposition': 'TEST' } };
         const next = jest.fn();
+        const mockUser = { username: 'TEST_USER', uuid: 'TEST', roles: [], groups: [] };
 
         beforeEach(() => {
             next.mockReset();
-            req = { params: { documentId: '1234', caseId: '1234' } };
+            req = { params: { documentId: '1234', caseId: '5522' }, user: mockUser};
             res = { setHeader: jest.fn() };
             mockResponse.status = 200;
             mockResponse.data.on = jest.fn();
@@ -69,11 +76,16 @@ describe('Document middleware', () => {
 
         });
 
+        const expecteOptions = {
+            headers: { 'X-Auth-Groups': '', 'X-Auth-Roles': '', 'X-Auth-UserId': 'TEST'},
+            responseType: 'stream'
+        };
+
         it('should pipe the response on success', async () => {
-            documentService.get.mockImplementation(() => Promise.resolve(mockResponse));
+            caseworkService.get.mockImplementation(() => Promise.resolve(mockResponse));
             await getPdfDocument(req, res, next);
-            expect(documentService.get).toHaveBeenCalled();
-            expect(documentService.get).toHaveBeenCalledWith('/document/1234/pdf', { responseType: 'stream' });
+            expect(caseworkService.get).toHaveBeenCalled();
+            expect(caseworkService.get).toHaveBeenCalledWith('/case/5522/document/1234/pdf', expecteOptions);
             expect(res.setHeader).toHaveBeenCalled();
             expect(res.setHeader).toHaveBeenCalledWith('Cache-Control', 'max-age=86400');
             expect(mockResponse.data.pipe).toHaveBeenCalled();
@@ -82,7 +94,7 @@ describe('Document middleware', () => {
 
         it('should call next with an error if request fails', async () => {
             const mockError = new Error('Unable to retrieve PDF document');
-            documentService.get.mockImplementation(() => Promise.reject(mockError));
+            caseworkService.get.mockImplementation(() => Promise.reject(mockError));
             await getPdfDocument(req, res, next);
             expect(next).toHaveBeenCalled();
             expect(next).toHaveBeenCalledWith(mockError);
@@ -123,7 +135,7 @@ describe('Document middleware', () => {
         });
 
         it('should create an empty documents list on res.locals if fetchList fails', async () => {
-            req.listService.fetch.mockImplementation(() => Promise.reject());
+            req.listService.fetch.mockImplementation(() => Promise.reject(new Error('Promise failed')));
             await getDocumentList(req, res, next);
             expect(res.locals.documents).toBeDefined();
             expect(res.locals.documents).toEqual([]);

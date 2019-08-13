@@ -1,4 +1,4 @@
-const { caseworkService, infoService, documentService, workflowService } = require('../clients/index');
+const { caseworkService, infoService, workflowService } = require('../clients/index');
 const listService = require('../services/list');
 const statics = require('./adapters/statics');
 const caseTypeAdapter = require('./adapters/case-types');
@@ -141,18 +141,18 @@ module.exports = {
             adapter: membersAdapter
         },
         CASE_DOCUMENT_LIST: {
-            client: 'DOCUMENT',
-            endpoint: '/document/reference/${caseId}',
+            client: 'CASEWORK',
+            endpoint: '/case/document/reference/${caseId}',
             adapter: documentsAdapter
         },
         CASE_DOCUMENT_LIST_FINAL: {
-            client: 'DOCUMENT',
-            endpoint: '/document/reference/${caseId}/?type=FINAL',
+            client: 'CASEWORK',
+            endpoint: '/case/document/reference/${caseId}/?type=FINAL',
             adapter: documentsAdapter
         },
         CASE_DOCUMENT_LIST_DRAFT: {
-            client: 'DOCUMENT',
-            endpoint: '/document/reference/${caseId}/?type=DRAFT',
+            client: 'CASEWORK',
+            endpoint: '/case/document/reference/${caseId}/?type=DRAFT',
             adapter: documentsAdapter
         },
         CASE_NOTES: {
@@ -174,7 +174,6 @@ module.exports = {
     clients: {
         CASEWORK: caseworkService,
         WORKFLOW: workflowService,
-        INFO: infoService,
-        DOCUMENT: documentService
+        INFO: infoService
     }
 };

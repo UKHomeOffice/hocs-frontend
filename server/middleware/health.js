@@ -1,4 +1,4 @@
-const { caseworkService, workflowService, infoService, documentService } = require('../clients');
+const { caseworkService, workflowService, infoService } = require('../clients');
 const { s3 } = require('../libs/aws');
 const { S3: { BUCKET_NAME } } = require('../config').forContext('AWS');
 
@@ -49,12 +49,6 @@ async function readiness(req, res) {
         resources.info = setStatus(info);
     } catch (e) {
         resources.info = status.FAIL;
-    }
-    try {
-        const documents = await documentService.get('/actuator/health');
-        resources.documents = setStatus(documents);
-    } catch (e) {
-        resources.documents = status.FAIL;
     }
     s3.listObjects({ Bucket: BUCKET_NAME, MaxKeys: 1 }, err => {
         storage.s3 = !err ? status.READY : status.FAIL;
