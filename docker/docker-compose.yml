@@ -137,6 +137,7 @@ services:
       HOCS_INFO_SERVICE: 'http://info:8080'
       HOCS_AUDITSERVICE: 'http://audit:8080'
       HOCS_SEARCH_SERVICE: 'http://search:8080'
+      HOCS_DOCUMENT_SERVICE: 'http://documents:8080'
       AUDIT_TOPIC_NAME: "hocs-audit-topic"
     depends_on:
     - postgres
