@@ -15,6 +15,7 @@ const { renderMiddleware, renderResponseMiddleware } = require('../middleware/re
 const { errorMiddleware, initRequest } = require('../middleware/request');
 const { protect } = require('../middleware/auth');
 const { createAnalyticsObject } = require('../middleware/analytics');
+const { setCacheControl } = require('../middleware/cacheControl');
 const { infoService } = require('../clients');
 const logger = require('../libs/logger');
 const { flushCachedLists } = require('../services/list');
@@ -22,7 +23,7 @@ const { flushCachedLists } = require('../services/list');
 html.use(assets);
 
 router.use('/health', healthRouter);
-router.use('*', authMiddleware, initRequest, createAnalyticsObject);
+router.use('*', authMiddleware, initRequest, createAnalyticsObject, setCacheControl);
 router.use('/', pageRouter);
 router.use('/api', apiRouter);
 router.use('/action', actionRouter);
