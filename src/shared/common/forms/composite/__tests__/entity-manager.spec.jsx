@@ -132,6 +132,7 @@ describe('Entity list component', () => {
     });
 
     it('should render with created date when passed in props on choice entries', () => {
+        Date.prototype.toLocaleDateString = jest.fn(function () { return `${this.getFullYear()}-${this.getMonth()+1}-${this.getDate()}`; });
         const choice = value => ({ label: `Choice ${value}`, value: `CHOICE_${value}`, created: '2020-01-01' });
         const PROPS = {
             ...DEFAULT_PROPS,
