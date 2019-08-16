@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const cookieParser = require('cookie-parser');
 const assets = require('../../build/assets.json');
 const html = require('../layout/html');
 const { authMiddleware } = require('../middleware/auth');
@@ -16,14 +17,18 @@ const { errorMiddleware, initRequest } = require('../middleware/request');
 const { protect } = require('../middleware/auth');
 const { createAnalyticsObject } = require('../middleware/analytics');
 const { setCacheControl } = require('../middleware/cacheControl');
+const { csrfMiddleware } = require('../middleware/csrf');
 const { infoService } = require('../clients');
 const logger = require('../libs/logger');
 const { flushCachedLists } = require('../services/list');
 
 html.use(assets);
 
+router.use(cookieParser());
+router.use(csrfMiddleware);
 router.use('/health', healthRouter);
 router.use('*', authMiddleware, initRequest, createAnalyticsObject, setCacheControl);
+
 router.use('/', pageRouter);
 router.use('/api', apiRouter);
 router.use('/action', actionRouter);

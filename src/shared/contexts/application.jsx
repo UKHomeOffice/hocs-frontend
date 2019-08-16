@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import types from './actions/types.jsx';
 import ReactGA from 'react-ga';
+import PropTypes from 'prop-types';
+import * as axios from 'axios';
+import types from './actions/types.jsx';
 
 export const Context = React.createContext();
 
@@ -73,12 +74,18 @@ const reducer = (state, action) => {
 export class ApplicationProvider extends Component {
     constructor(props) {
         super(props);
-        const { config } = props;
+        const { csrf, ...config } = props.config;
+
         if (config && config.analytics &&
             ReactGA.initialize(config.analytics.tracker, { titleCase: true, gaOptions: { userId: config.analytics.userId } })) {
             /* eslint-disable-next-line  no-console*/
             this.useAnalytics = true;
         }
+
+        axios.defaults.headers.common = {
+            'CSRF-Token': csrf
+        };
+
         this.state = {
             ...props.config,
             apiStatus: null,

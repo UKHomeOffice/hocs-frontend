@@ -3,19 +3,21 @@ import React from 'react';
 import ActionTypes from '../actions/types';
 
 describe('Application Provider', () => {
+    const testConfig = {
+        A: 'A',
+        B: 'B',
+        csrf: '__token__'
+    };
 
     it('should take configuration and add to component state', () => {
-        const testConfig = {
-            A: 'A',
-            B: 'B'
-        };
         const wrapper = shallow(<ApplicationProvider config={testConfig} />);
         expect(wrapper.state().A).toEqual('A');
         expect(wrapper.state().B).toEqual('B');
+        expect(wrapper.state().csrf).toEqual('__token__');
     });
 
     it('should provide a dispatch method', () => {
-        const wrapper = shallow(<ApplicationProvider config={null} />);
+        const wrapper = shallow(<ApplicationProvider config={testConfig} />);
         expect(wrapper.state().dispatch).toBeDefined();
         expect(typeof wrapper.state().dispatch).toEqual('function');
     });

@@ -13,7 +13,8 @@ function renderMiddleware(req, res, next) {
         data,
         form,
         layout: require('../config').forContext('case'),
-        page: { url: req.baseUrl, params: req.params }
+        page: { url: req.baseUrl, params: req.params },
+        csrf: req.csrfToken()
     };
 
     const status = res.locals.error ? res.locals.error.status : 200;
