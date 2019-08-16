@@ -2,6 +2,7 @@ const listType = require('./types');
 const { createRepository } = require('./repository');
 const getLogger = require('../../libs/logger');
 const User = require('../../models/user');
+const { PermissionError } = require('../../models/error');
 
 const configureEndpoint = (endpoint, data, baseUrl = '') => {
     if (data) {
@@ -106,8 +107,12 @@ const getInstance = (requestId, user) => {
                     response = await clientInstance.get(configuredEndpoint, { headers: { ...User.createHeaders(user), 'X-Correlation-Id': requestId } });
                 } catch (error) {
                     logger.error('FETCH_LIST_REQUEST_FAILURE', { list: listId, message: error.message, stack: error.stack });
-                    if (error.response && error.response.status === 404 && defaultValue) {
-                        return defaultValue;
+                    if (error.response){
+                        if(error.response.status === 404 && defaultValue) {
+                            return defaultValue;
+                        }else if(error.response.status === 401){
+                            throw new PermissionError('You are not authorised to work on this case');
+                        }
                     }
                     throw new Error('Failed to request list');
                 }
@@ -121,6 +126,9 @@ const getInstance = (requestId, user) => {
                 throw new Error('List not implemented');
             }
         } catch (error) {
+            if(error instanceof PermissionError){
+                throw error;
+            }
             logger.error('FETCH_LIST_FAILURE', { list: listId, message: error.message, stack: error.stack });
             throw new Error('Unable to fetch list');
         }

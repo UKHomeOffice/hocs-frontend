@@ -110,6 +110,9 @@ const hydrateFields = async (req, res, next) => {
         try {
             await Promise.all(requests);
         } catch (error) {
+            if(error instanceof PermissionError){
+                return next(error)
+            }
             if (error.response !== undefined && error.response.status === 401) {
                 return next(new PermissionError('You are not authorised to work on this case'));
             }
