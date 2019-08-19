@@ -56,6 +56,7 @@ async function getFormSchemaFromWorkflowService(requestId, options, user) {
                         .withProp('choices', usersInTeam)
                         .build())
                     .withPrimaryAction('Allocate')
+                    .withSubmissionUrl(`/case/${caseId}/stage/${stageId}/allocate/team`)
                     .withSecondaryAction(
                         Component('backlink')
                             .withProp('label', 'Cancel')
@@ -111,7 +112,7 @@ const hydrateFields = async (req, res, next) => {
             await Promise.all(requests);
         } catch (error) {
             if(error instanceof PermissionError){
-                return next(error)
+                return next(error);
             }
             if (error.response !== undefined && error.response.status === 401) {
                 return next(new PermissionError('You are not authorised to work on this case'));
