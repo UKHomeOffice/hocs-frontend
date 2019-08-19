@@ -5,8 +5,7 @@ const csrfMiddleware = csurf({
     cookie: {
         path: '*',
         httpOnly: true,
-        secure: isProduction,
-        maxAge: 3600
+        secure: isProduction
     }
 });
 
