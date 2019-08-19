@@ -11,7 +11,7 @@ exports[`Panel component should render with content when passed 1`] = `
     class="govuk-panel__body"
   >
     <form
-      action="/search/reference"
+      action="/search/reference?_csrf=__token__"
       enctype="multipart/form-data"
       method="POST"
     >
@@ -57,7 +57,7 @@ exports[`Panel component should render with title when passed 1`] = `
     class="govuk-panel__body"
   >
     <form
-      action="/search/reference"
+      action="/search/reference?_csrf=__token__"
       enctype="multipart/form-data"
       method="POST"
     >
