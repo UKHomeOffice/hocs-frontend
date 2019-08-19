@@ -56,6 +56,7 @@ async function getFormSchemaFromWorkflowService(requestId, options, user) {
                         .withProp('choices', usersInTeam)
                         .build())
                     .withPrimaryAction('Allocate')
+                    .withSubmissionUrl(`/case/${caseId}/stage/${stageId}/allocate/team`)
                     .withSecondaryAction(
                         Component('backlink')
                             .withProp('label', 'Cancel')
