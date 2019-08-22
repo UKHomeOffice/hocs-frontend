@@ -38,7 +38,9 @@ const FormWrapper = (C) => ({ match, history, ...props }) => {
                         .then(() => {
                             const { workstack } = data.forwardProps;
                             if (workstack.items.length === maxSearchResults) {
-                                workstack.errors = [ `The search has been capped to ${maxSearchResults} results.  Please narrow your search criteria.` ];
+                                workstack.errors = {
+                                    searchLimitError: `The search has been capped to ${maxSearchResults} results.  Please narrow your search criteria.`
+                                };
                                 workstack.errorHeading = `Only the first ${maxSearchResults} results have been displayed`;
                             }
                         })
