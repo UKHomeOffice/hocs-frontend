@@ -11,6 +11,7 @@ import {
 import status from '../helpers/api-status.js';
 import Workstack from '../common/components/workstack.jsx';
 import Dashboard from '../common/components/dashboard.jsx';
+import ErrorSummary from '../common/forms/error-summary.jsx';
 
 const renderBreadCrumb = ({ key, label, to, isLast }) => (
     <li key={key} className='govuk-breadcrumbs__list-item'>
@@ -119,9 +120,10 @@ class WorkstackPage extends Component {
     renderWorkstack() {
         const { match: { url }, selectable = true } = this.props;
         const { workstack, formData } = this.state;
-        const { allocateToUserEndpoint, allocateToTeamEndpoint, allocateToWorkstackEndpoint, items, teamMembers } = workstack;
+        const { allocateToUserEndpoint, allocateToTeamEndpoint, allocateToWorkstackEndpoint, items, teamMembers, errors, errorHeading } = workstack;
         return (
             <Fragment>
+                {errors && <ErrorSummary errors={errors} heading={errorHeading} />}
                 <Workstack
                     baseUrl={url}
                     items={items}
@@ -148,7 +150,7 @@ class WorkstackPage extends Component {
                 {dashboard && this.renderDashboard()}
                 {items && this.renderWorkstack()}
             </Fragment>
-        )
+        );
     }
 
     render() {

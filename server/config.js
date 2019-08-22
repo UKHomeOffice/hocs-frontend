@@ -27,7 +27,8 @@ const config = {
             },
             footer: {
                 isVisible: false
-            }
+            },
+            maxSearchResults: 500
         },
         server: {
             WORKFLOW_SERVICE: process.env.WORKFLOW_SERVICE || 'http://localhost:8091',
