@@ -8,10 +8,12 @@ import Confirmation from '../common/components/confirmation.jsx';
 import status from '../helpers/api-status.js';
 
 const FormWrapper = (C) => ({ match, history, ...props }) => {
-    const { dispatch, track, form: contextForm } = useContext(Context);
+    const { dispatch, track, form: contextForm, layout } = useContext(Context);
 
     const [form, setForm] = useState(null);
     const [confirmation, setConfirmation] = useState(null);
+
+    const maxSearchResults = layout.maxSearchResults;
 
     const getForm = () => {
         dispatch(updateApiStatus(status.REQUEST_FORM))
@@ -33,6 +35,15 @@ const FormWrapper = (C) => ({ match, history, ...props }) => {
                         .then(() => track('EVENT', { category: form.schema.title, action: 'Submit', label: 'Validation Error' }));
                 } else {
                     dispatch(updateApiStatus(status.SUBMIT_FORM_SUCCESS))
+                        .then(() => {
+                            const { workstack } = data.forwardProps;
+                            if (workstack.items.length === maxSearchResults) {
+                                workstack.errors = {
+                                    searchLimitError: `The search has been capped to ${maxSearchResults} results.  Please narrow your search criteria.`
+                                };
+                                workstack.errorHeading = `Only the first ${maxSearchResults} results have been displayed`;
+                            }
+                        })
                         .then(() => dispatch(passForwardProps(data.forwardProps)))
                         .then(() => {
                             if (data.confirmation) {
