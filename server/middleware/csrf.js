@@ -1,11 +1,10 @@
 const csurf = require('csurf');
-const { isProduction } = require('../config');
 
 const csrfMiddleware = csurf({
     cookie: {
-        path: '*',
+        path: '/',
         httpOnly: false,
-        secure: isProduction
+        secure: false
     }
 });
 
