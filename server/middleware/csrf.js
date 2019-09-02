@@ -4,7 +4,7 @@ const { isProduction } = require('../config');
 const csrfMiddleware = csurf({
     cookie: {
         path: '*',
-        httpOnly: true,
+        httpOnly: false,
         secure: isProduction
     }
 });
