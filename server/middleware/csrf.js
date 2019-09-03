@@ -3,8 +3,8 @@ const csurf = require('csurf');
 const csrfMiddleware = csurf({
     cookie: {
         path: '/',
-        httpOnly: false,
-        secure: false
+        httpOnly: true,
+        secure: true
     }
 });
 
