@@ -81,13 +81,6 @@ const formDefinitions = {
                         action: 'CONFIRMATION_SUMMARY'
                     }
                 },
-                UKVI: {
-                    builder: formRepository.bulkAddDocument,
-                    action: CREATE_CASE,
-                    next: {
-                        action: 'CONFIRMATION_SUMMARY'
-                    }
-                },
                 WCS: {
                     builder: formRepository.bulkAddDocument,
                     action: CREATE_CASE,
