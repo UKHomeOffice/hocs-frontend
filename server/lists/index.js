@@ -53,6 +53,16 @@ module.exports = {
             endpoint: '/caseType?bulkOnly=true',
             adapter: caseTypeAdapter
         },
+        COUNTRIES_CURRENT: {
+            client: 'INFO',
+            endpoint: '/teams?unit=COUNTRIES_CURRENT',
+            adapter: teamsAdapter
+        },
+        COUNTRIES_HISTORIC: {
+            client: 'INFO',
+            endpoint: '/teams?unit=COUNTRIES_HISTORIC',
+            adapter: teamsAdapter
+        },
         DASHBOARD: {
             client: 'CASEWORK',
             endpoint: '/stage',
@@ -71,6 +81,11 @@ module.exports = {
         WCS_CASEWORK_UNIT: {
             client: 'INFO',
             endpoint: '/teams?unit=WCS_CASEWORK_UNIT',
+            adapter: teamsAdapter
+        },
+        WCS_COHORTS: {
+            client: 'INFO',
+            endpoint: '/teams?unit=WCS_COHORTS',
             adapter: teamsAdapter
         },
         WORKFLOW_WORKSTACK: {
