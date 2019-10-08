@@ -34,6 +34,13 @@ const formDefinitions = {
                     next: {
                         action: 'CONFIRMATION_SUMMARY'
                     }
+                },
+                WCS: {
+                    builder: formRepository.addDocument,
+                    action: CREATE_CASE,
+                    next: {
+                        action: 'CONFIRMATION_SUMMARY'
+                    }
                 }
             }
         },
@@ -70,6 +77,13 @@ const formDefinitions = {
                 DTEN: {
                     builder: formRepository.bulkAddDocument,
                     action: BULK_CREATE_CASE,
+                    next: {
+                        action: 'CONFIRMATION_SUMMARY'
+                    }
+                },
+                WCS: {
+                    builder: formRepository.bulkAddDocument,
+                    action: CREATE_CASE,
                     next: {
                         action: 'CONFIRMATION_SUMMARY'
                     }
