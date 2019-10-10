@@ -2,8 +2,17 @@
 
 exports[`String Unsorted Adapter should transform but not sort string data 1`] = `
 Array [
-  "String B",
-  "String C",
-  "String A",
+  Object {
+    "label": "String B",
+    "value": "String B",
+  },
+  Object {
+    "label": "String C",
+    "value": "String C",
+  },
+  Object {
+    "label": "String A",
+    "value": "String A",
+  },
 ]
 `;
