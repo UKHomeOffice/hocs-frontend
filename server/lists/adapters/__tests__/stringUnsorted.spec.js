@@ -7,13 +7,13 @@ const mockLogger = {
     error: () => { }
 };
 
-describe('User Adapter', () => {
+describe('String Unsorted Adapter', () => {
 
-    it('should transform and sort team data', async () => {
+    it('should transform but not sort string data', async () => {
         const mockData = [
-            { displayName: 'Team B', type: 'TEAM_B' },
-            { displayName: 'Team A', type: 'TEAM_A' },
-            { displayName: 'Team C', type: 'TEAM_C' },
+            "String B",
+            "String C",
+            "String A"
         ];
 
         const results = await stringUnsortedAdapter(mockData, { logger: mockLogger });
