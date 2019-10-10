@@ -6,6 +6,7 @@ const workstack = require('./adapters/workstacks');
 const topicAdapter = require('./adapters/topics');
 const usersAdapter = require('./adapters/users');
 const teamsAdapter = require('./adapters/teams');
+const stringUnsortedAdapter = require('./adapters/stringUnsorted');
 const templatesAdapter = require('./adapters/templates');
 const membersAdapter = require('./adapters/members');
 const documentsAdapter = require('./adapters/documents');
@@ -85,8 +86,8 @@ module.exports = {
         },
         WCS_COHORTS: {
             client: 'INFO',
-            endpoint: '/teams?unit=WCS_COHORTS',
-            adapter: teamsAdapter
+            endpoint: '/data/cohorts',
+            adapter: stringUnsortedAdapter
         },
         WORKFLOW_WORKSTACK: {
             client: 'CASEWORK',
