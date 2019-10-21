@@ -6,6 +6,7 @@ const workstack = require('./adapters/workstacks');
 const topicAdapter = require('./adapters/topics');
 const usersAdapter = require('./adapters/users');
 const teamsAdapter = require('./adapters/teams');
+const stringSortedAdapter = require('./adapters/stringSorted');
 const stringUnsortedAdapter = require('./adapters/stringUnsorted');
 const templatesAdapter = require('./adapters/templates');
 const membersAdapter = require('./adapters/members');
@@ -62,13 +63,8 @@ module.exports = {
         },
         COUNTRIES_CURRENT: {
             client: 'INFO',
-            endpoint: '/teams?unit=COUNTRIES_CURRENT',
-            adapter: teamsAdapter
-        },
-        COUNTRIES_HISTORIC: {
-            client: 'INFO',
-            endpoint: '/teams?unit=COUNTRIES_HISTORIC',
-            adapter: teamsAdapter
+            endpoint: '/country',
+            adapter: stringSortedAdapter
         },
         DASHBOARD: {
             client: 'CASEWORK',
