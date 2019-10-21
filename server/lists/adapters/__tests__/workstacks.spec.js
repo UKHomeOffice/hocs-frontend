@@ -4,16 +4,16 @@ const mockUser = { uuid: 1 };
 
 const mockFromStaticList = jest.fn((list) => {
     switch (list) {
-    case 'S_TEAMS':
-        return 'MOCK_TEAM';
-    case 'S_CASETYPES':
-        return 'MOCK_CASETYPE';
-    case 'S_STAGETYPES':
-        return 'MOCK_STAGETYPE';
-    case 'S_USERS':
-        return 'MOCK_USER';
-    default:
-        return null;
+        case 'S_TEAMS':
+            return 'MOCK_TEAM';
+        case 'S_CASETYPES':
+            return 'MOCK_CASETYPE';
+        case 'S_STAGETYPES':
+            return 'MOCK_STAGETYPE';
+        case 'S_USERS':
+            return 'MOCK_USER';
+        default:
+            return null;
     }
 });
 

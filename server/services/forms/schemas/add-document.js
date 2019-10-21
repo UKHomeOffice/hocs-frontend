@@ -1,5 +1,5 @@
 const Form = require('../form-builder');
-const { Component, Choice } = require('../component-builder');
+const { Component } = require('../component-builder');
 
 module.exports = options => Form()
     .withTitle('Add Documents')

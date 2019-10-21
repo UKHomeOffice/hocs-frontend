@@ -54,13 +54,14 @@ jest.mock('../../clients', () => {
 
 jest.mock('../../services/list', () => {
     return {
-        getInstance: (requestId, user) =>{
-            return {fetch: () => {
-                return [{ label : 'Original', value : 'ORIGINAL'}];
-            }
+        getInstance: () => {
+            return {
+                fetch: () => {
+                    return [{ label: 'Original', value: 'ORIGINAL' }];
+                }
             };
         }
-        
+
     };
 });
 

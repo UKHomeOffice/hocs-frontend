@@ -5,7 +5,7 @@ const User = require('../models/user');
 
 async function getOriginalDocument(req, res, next) {
     const logger = getLogger(req.requestId);
-    const { caseId, stageId, documentId } = req.params;
+    const { caseId, documentId } = req.params;
     let options = {
         headers: User.createHeaders(req.user),
         responseType: 'stream'
@@ -19,7 +19,7 @@ async function getOriginalDocument(req, res, next) {
         response.data.pipe(res);
     } catch (error) {
         logger.error('REQUEST_DOCUMENT_ORIGINAL_FAILURE', { ...req.params });
-        if(error.response !== undefined && error.response.status === 401){
+        if (error.response !== undefined && error.response.status === 401) {
             return next(new PermissionError('You are not authorised to work on this case'));
         }
         return next(new DocumentError('Unable to retrieve original document'));
@@ -28,7 +28,7 @@ async function getOriginalDocument(req, res, next) {
 
 async function getPdfDocument(req, res, next) {
     const logger = getLogger(req.requestId);
-    const { caseId, stageId, documentId } = req.params;
+    const { caseId, documentId } = req.params;
     logger.info('REQUEST_DOCUMENT_PDF', { ...req.params });
 
     let options = {
@@ -44,7 +44,7 @@ async function getPdfDocument(req, res, next) {
         response.data.pipe(res);
     } catch (error) {
         logger.error('REQUEST_DOCUMENT_PDF_FAILURE', { ...req.params });
-        if(error.response !== undefined && error.response.status === 401){
+        if (error.response !== undefined && error.response.status === 401) {
             return next(new PermissionError('You are not authorised to work on this case'));
         }
         return next(new DocumentError('Unable to retrieve PDF document'));
@@ -68,7 +68,7 @@ async function getPdfDocumentPreview(req, res, next) {
         response.data.pipe(res);
     } catch (error) {
         logger.error('REQUEST_DOCUMENT_PREVIEW_FAILURE', { ...req.params });
-        if(error.response !== undefined && error.response.status === 401){
+        if (error.response !== undefined && error.response.status === 401) {
             return next(new PermissionError('You are not authorised to work on this case'));
         }
         return next(new DocumentError('Unable to retrieve document for PDF preview'));
@@ -82,7 +82,7 @@ async function getDocumentList(req, res, next) {
         res.locals.documents = response;
     } catch (error) {
         res.locals.documents = [];
-        if(error.response !== undefined && error.response.status === 401){
+        if (error.response !== undefined && error.response.status === 401) {
             return { error: new PermissionError('You are not authorised to work on this case') };
         }
         logger.info('CASE_DOCUMENT_LIST_RETURN_EMPTY');

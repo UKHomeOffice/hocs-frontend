@@ -20,7 +20,7 @@ const stageTypesAdapter = async (data, { logger }) => {
 
 const documentTagsAdapter = async (data, { logger }) => {
     logger.debug('REQUEST_DOCUMENT_TAGS', { types: data.documentLabels.length });
-    return data.documentLabels.map(item => ({ label: item, value: item }))
+    return data.documentLabels.map(item => ({ label: item, value: item }));
 };
 
 module.exports = {
