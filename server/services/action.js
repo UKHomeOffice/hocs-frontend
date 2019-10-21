@@ -3,6 +3,8 @@ const actionTypes = require('./actions/types');
 const { ActionError } = require('../models/error');
 const getLogger = require('../libs/logger');
 const User = require('../models/user');
+const listService = require('../services/list');
+const uuid = require('uuid/v4');
 
 function createDocumentSummaryObjects(form, type) {
     return form.schema.fields.reduce((reducer, field) => {
@@ -19,11 +21,11 @@ function createDocumentSummaryObjects(form, type) {
     }, []);
 }
 
-function createCaseRequest(type, form) {
+function createCaseRequest(type, form, documentTag) {
     return {
         type,
         dateReceived: form.data['DateReceived'],
-        documents: createDocumentSummaryObjects(form, 'ORIGINAL')
+        documents: createDocumentSummaryObjects(form, documentTag)
     };
 }
 
@@ -31,8 +33,8 @@ function addDocumentRequest(form) {
     return { documents: createDocumentSummaryObjects(form, form.data['document_type']) };
 }
 
-function createCase(url, { caseType, form }, headers) {
-    return workflowService.post(url, createCaseRequest(caseType, form), headers);
+function createCase(url, { caseType, form }, documentTag, headers) {
+    return workflowService.post(url, createCaseRequest(caseType, form, documentTag), headers);
 }
 
 function addDocument(url, form, headers) {
@@ -82,16 +84,22 @@ const actions = {
                 let response;
                 let clientResponse;
                 switch (form.action) {
-                    case actionTypes.CREATE_CASE:
-                        response = await createCase('/case', { caseType: context, form }, headers);
+                    case actionTypes.CREATE_CASE:{
+                        const listServiceInstance = listService.getInstance(uuid(), null);
+                        const documentTags = await listServiceInstance.fetch('S_DOCUMENT_TAGS')
+                        response = await createCase('/case', { caseType: context, form }, documentTags[0].value, headers);
                         clientResponse = { summary: 'Created a new case ', link: `${response.data.reference}` };
                         return handleActionSuccess(clientResponse, workflow, form);
-                    case actionTypes.BULK_CREATE_CASE:
-                        response = await createCase('/case/bulk', { caseType: context, form }, headers);
+                    }
+                    case actionTypes.BULK_CREATE_CASE:{
+                        const listServiceInstance = listService.getInstance(uuid(), null);
+                        const documentTags = await listServiceInstance.fetch('S_DOCUMENT_TAGS')
+                        response = await createCase('/case/bulk', { caseType: context, form }, documentTags[0].value, headers);
                         clientResponse = { summary: `Created ${response.data.count} new case${response.data.count > 1 ? 's' : ''}` };
                         return handleActionSuccess(clientResponse, workflow, form);
+                    }
                     case actionTypes.ADD_STANDARD_LINE:
-                        /* eslint-disable no-case-declarations */
+                        /* eslint-disable no-case-declarations *           /
                         const document = form.data.document[0];
                         const request = {
                             s3UntrustedUrl: document.key,

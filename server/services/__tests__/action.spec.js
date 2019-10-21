@@ -14,6 +14,7 @@ jest.mock('../../clients', () => {
         else
             return Promise.reject('TEST_ERROR');
     }
+
     return {
         workflowService: {
             post: (url, body) => {
@@ -49,6 +50,20 @@ jest.mock('../../clients', () => {
         }
     };
 });
+
+
+jest.mock('../../services/list', () => {
+    return {
+        getInstance: (requestId, user) =>{
+            return {fetch: () => {
+                return [{ label : 'Original', value : 'ORIGINAL'}];
+            }
+            };
+        }
+        
+    };
+});
+
 
 const createCaseRequest = {
     type: 'SUPPORTED_CASETYPE',

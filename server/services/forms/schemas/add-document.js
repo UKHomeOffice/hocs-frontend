@@ -7,11 +7,7 @@ module.exports = options => Form()
         Component('dropdown', 'document_type')
             .withValidator('required', 'Document type is required')
             .withProp('label', 'Document type')
-            .withProp('choices', [
-                Choice('Original', 'ORIGINAL'),
-                Choice('Draft', 'DRAFT'),
-                Choice('Final', 'FINAL')
-            ])
+            .withProp('choices', 'S_DOCUMENT_TAGS')
             .build()
     )
     .withField(
@@ -19,7 +15,6 @@ module.exports = options => Form()
             .withValidator('required', 'Document is required')
             .withValidator('hasWhitelistedExtension')
             .withValidator('fileLimit')
-            .withProp('documentType', 'ORIGINAL')
             .withProp('label', 'Documents')
             .withProp('allowMultiple', true)
             .withProp('whitelist', 'DOCUMENT_EXTENSION_WHITELIST')

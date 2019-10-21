@@ -45,6 +45,12 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: statics.stageTypesAdapter
         },
+        S_DOCUMENT_TAGS: {
+            client: 'INFO',
+            endpoint: '/configuration',
+            type: listService.types.STATIC,
+            adapter: statics.documentTagsAdapter
+        },
         CASE_TYPES: {
             client: 'INFO',
             endpoint: '/caseType?bulkOnly=false',
