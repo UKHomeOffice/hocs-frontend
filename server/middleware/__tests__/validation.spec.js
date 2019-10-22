@@ -4,10 +4,10 @@ jest.mock('../../config.js', () => {
     return {
         forContext: context => {
             switch (context) {
-            case 'server':
-                return {
-                    DOCUMENT_WHITELIST: ['validExtension']
-                };
+                case 'server':
+                    return {
+                        DOCUMENT_WHITELIST: ['validExtension']
+                    };
             }
         }
     };

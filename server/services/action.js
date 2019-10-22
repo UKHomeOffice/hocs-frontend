@@ -84,16 +84,16 @@ const actions = {
                 let response;
                 let clientResponse;
                 switch (form.action) {
-                    case actionTypes.CREATE_CASE:{
+                    case actionTypes.CREATE_CASE: {
                         const listServiceInstance = listService.getInstance(uuid(), null);
-                        const documentTags = await listServiceInstance.fetch('S_DOCUMENT_TAGS')
+                        const documentTags = await listServiceInstance.fetch('S_DOCUMENT_TAGS');
                         response = await createCase('/case', { caseType: context, form }, documentTags[0].value, headers);
                         clientResponse = { summary: 'Created a new case ', link: `${response.data.reference}` };
                         return handleActionSuccess(clientResponse, workflow, form);
                     }
-                    case actionTypes.BULK_CREATE_CASE:{
+                    case actionTypes.BULK_CREATE_CASE: {
                         const listServiceInstance = listService.getInstance(uuid(), null);
-                        const documentTags = await listServiceInstance.fetch('S_DOCUMENT_TAGS')
+                        const documentTags = await listServiceInstance.fetch('S_DOCUMENT_TAGS');
                         response = await createCase('/case/bulk', { caseType: context, form }, documentTags[0].value, headers);
                         clientResponse = { summary: `Created ${response.data.count} new case${response.data.count > 1 ? 's' : ''}` };
                         return handleActionSuccess(clientResponse, workflow, form);
@@ -112,8 +112,8 @@ const actions = {
                         return handleActionSuccess(clientResponse, workflow, form);
                     case actionTypes.ADD_TEMPLATE:
                         /* eslint-disable no-case-declarations */
-                        const document1 = form.data.document[0];
-                        const request1 = {
+                        var document1 = form.data.document[0];
+                        var request1 = {
                             s3UntrustedUrl: document1.key,
                             displayName: document1.originalname,
                             caseType: form.data['caseType']
