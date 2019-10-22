@@ -99,7 +99,7 @@ const actions = {
                         return handleActionSuccess(clientResponse, workflow, form);
                     }
                     case actionTypes.ADD_STANDARD_LINE:
-                        /* eslint-disable no-case-declarations *           /
+                        /* eslint-disable no-case-declarations */
                         const document = form.data.document[0];
                         const request = {
                             s3UntrustedUrl: document.key,
