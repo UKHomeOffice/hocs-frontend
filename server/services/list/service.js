@@ -44,9 +44,7 @@ const initialise = async (lists = {}, clients = {}, initialState = {}) => {
         clientRepository.store(name, client);
     });
 
-    const handleFailure = () => {
-        process.exit(1);
-    }
+    const handleFailure = () => process.exit(1);
 
     await Promise.all(Object.entries(lists).map(async ([listId, { endpoint, type = listType.DYNAMIC, client, adapter, data, defaultValue }]) => {
         try {
@@ -84,8 +82,8 @@ const getInstance = (requestId, user) => {
         if (listCache.hasResource(listId)) {
             const item = await fetchList(listId);
             if(item) {
-            const result = item.find(item => item.key === key);
-            return result ? result.value : defaultValue;
+                const result = item.find(item => item.key === key);
+                return result ? result.value : defaultValue;
             } else return defaultValue;
         } else {
             return defaultValue;
