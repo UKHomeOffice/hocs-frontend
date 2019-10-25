@@ -14,7 +14,10 @@ router.all(['/search', '/api/search', '/api/form/search'], getForm(form, { submi
 router.get('/api/form/search', (req, res) => res.json(req.form));
 
 router.post(['/search/results', '/api/search/results'],
-    processRequestBody(form().getFields()),
+    async (req, res, next) => {
+        const formBuilder = await form();
+        processRequestBody(formBuilder.getFields())(req, res, next);
+    },
     getForm(form, { submissionUrl: '/search/results' }),
     hydrateFields,
     processForm,
@@ -33,7 +36,10 @@ router.post(['/search/results', '/api/search/results'],
                 correspondentName: formData['correspondent'],
                 topic: formData['topic'],
                 data: {
-                    POTeamUUID: formData['signOffMinister']
+                    POTeamUUID: formData['signOffMinister'],
+                    FullName: formData['claimantName'],
+                    DateOfBirth: formData['claimantDOB'],
+                    NI: formData['niNumber']
                 },
                 activeOnly: Array.isArray(formData['caseStatus']) && formData['caseStatus'].includes('active')
             };

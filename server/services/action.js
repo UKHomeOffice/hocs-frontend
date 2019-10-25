@@ -86,15 +86,16 @@ const actions = {
                 switch (form.action) {
                     case actionTypes.CREATE_CASE: {
                         const listServiceInstance = listService.getInstance(uuid(), null);
-                        const documentTags = await listServiceInstance.fetch('S_DOCUMENT_TAGS');
-                        response = await createCase('/case', { caseType: context, form }, documentTags[0].value, headers);
+
+                        const documentTags = (await listServiceInstance.fetch('S_SYSTEM_CONFIGURATION')).documentLabels;
+                        response = await createCase('/case', { caseType: context, form }, documentTags[0], headers);
                         clientResponse = { summary: 'Created a new case ', link: `${response.data.reference}` };
                         return handleActionSuccess(clientResponse, workflow, form);
                     }
                     case actionTypes.BULK_CREATE_CASE: {
                         const listServiceInstance = listService.getInstance(uuid(), null);
-                        const documentTags = await listServiceInstance.fetch('S_DOCUMENT_TAGS');
-                        response = await createCase('/case/bulk', { caseType: context, form }, documentTags[0].value, headers);
+                        const documentTags = (await listServiceInstance.fetch('S_SYSTEM_CONFIGURATION')).documentLabels;
+                        response = await createCase('/case/bulk', { caseType: context, form }, documentTags[0], headers);
                         clientResponse = { summary: `Created ${response.data.count} new case${response.data.count > 1 ? 's' : ''}` };
                         return handleActionSuccess(clientResponse, workflow, form);
                     }
