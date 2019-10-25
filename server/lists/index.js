@@ -51,6 +51,11 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: statics.documentTagsAdapter
         },
+        S_SYSTEM_CONFIGURATION: {
+            client: 'INFO',
+            endpoint: '/configuration',
+            type: listService.types.STATIC
+        },
         CASE_TYPES: {
             client: 'INFO',
             endpoint: '/caseType?bulkOnly=false',

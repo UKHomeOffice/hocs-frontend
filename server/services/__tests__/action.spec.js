@@ -57,7 +57,7 @@ jest.mock('../../services/list', () => {
         getInstance: () => {
             return {
                 fetch: () => {
-                    return [{ label: 'Original', value: 'ORIGINAL' }];
+                    return { documentLabels: ['ORIGINAL', 'DRAFT'] };
                 }
             };
         }
