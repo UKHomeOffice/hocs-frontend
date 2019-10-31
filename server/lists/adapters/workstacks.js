@@ -84,7 +84,7 @@ const dashboardAdapter = async (data, { fromStaticList, logger, user }) => {
     return { user: userCard, teams: teamCards };
 };
 
-const userAdapter = async (data, { fromStaticList, logger, user }) => {
+const userAdapter = async (data, { fromStaticList, logger, user, configuration }) => {
     const workstackData = await Promise.all(data.stages
         .filter(stage => stage.userUUID === user.uuid)
         .sort(byCaseReference)
@@ -93,11 +93,12 @@ const userAdapter = async (data, { fromStaticList, logger, user }) => {
     return {
         label: 'My Cases',
         items: workstackData,
+        columns: configuration.workstackColumns,
         allocateToWorkstackEndpoint: '/unallocate/'
     };
 };
 
-const teamAdapter = async (data, { fromStaticList, logger, teamId }) => {
+const teamAdapter = async (data, { fromStaticList, logger, teamId, configuration }) => {
     const workstackData = await Promise.all(data.stages
         .filter(stage => stage.teamUUID === teamId)
         .sort(byCaseReference)
@@ -128,10 +129,12 @@ const teamAdapter = async (data, { fromStaticList, logger, teamId }) => {
         }, [])
         .sort(byLabel);
     const teamDisplayName = await fromStaticList('S_TEAMS', teamId);
+
     logger.debug('REQUEST_TEAM_WORKSTACK', { team: teamDisplayName, workflows: workflowCards.length, rows: workstackData.length });
     return {
         label: teamDisplayName,
         items: workstackData,
+        columns: configuration.workstackColumns,
         dashboard: workflowCards,
         teamMembers: [],
         allocateToUserEndpoint: '/allocate/user',
@@ -140,7 +143,7 @@ const teamAdapter = async (data, { fromStaticList, logger, teamId }) => {
     };
 };
 
-const workflowAdapter = async (data, { fromStaticList, logger, teamId, workflowId }) => {
+const workflowAdapter = async (data, { fromStaticList, logger, teamId, workflowId, configuration }) => {
     const workstackData = await Promise.all(data.stages
         .filter(stage => stage.teamUUID === teamId && stage.caseType === workflowId)
         .sort(byCaseReference)
@@ -175,6 +178,7 @@ const workflowAdapter = async (data, { fromStaticList, logger, teamId, workflowI
     return {
         label: workflowDisplayName,
         items: workstackData,
+        columns: configuration.workstackColumns,
         dashboard: stageCards,
         teamMembers: [],
         allocateToUserEndpoint: '/allocate/user',
@@ -182,7 +186,7 @@ const workflowAdapter = async (data, { fromStaticList, logger, teamId, workflowI
         allocateToWorkstackEndpoint: '/unallocate/'
     };
 };
-const stageAdapter = async (data, { fromStaticList, logger, teamId, workflowId, stageId }) => {
+const stageAdapter = async (data, { fromStaticList, logger, teamId, workflowId, stageId, configuration }) => {
     const workstackData = await Promise.all(data.stages
         .filter(stage => stage.teamUUID === teamId && stage.caseType === workflowId && stage.stageType === stageId)
         .sort(byCaseReference)
@@ -192,6 +196,7 @@ const stageAdapter = async (data, { fromStaticList, logger, teamId, workflowId, 
     return {
         label: await fromStaticList('S_STAGETYPES', stageId),
         items: workstackData,
+        columns: configuration.workstackColumns,
         teamMembers: [],
         allocateToUserEndpoint: '/allocate/user',
         allocateToTeamEndpoint: '/allocate/team',

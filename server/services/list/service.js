@@ -116,7 +116,14 @@ const getInstance = (requestId, user) => {
                     }
                     throw new Error('Failed to request list');
                 }
-                const listData = await applyAdapter(response.data, adapter, { ...options, user, fromStaticList, logger });
+
+                //recursively get the configuration and pass this in for use in any adapters.
+                var configuration = null;
+                if (listId !== 'S_SYSTEM_CONFIGURATION') {
+                    configuration = await fetchList('S_SYSTEM_CONFIGURATION');
+                }
+
+                const listData = await applyAdapter(response.data, adapter, { ...options, user, fromStaticList, logger, configuration });
                 if (type === listType.STATIC && listData) {
                     listCache.store(listId, listData);
                 }

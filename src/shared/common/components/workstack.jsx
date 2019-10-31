@@ -27,27 +27,53 @@ class WorkstackAllocate extends Component {
 
     constructor(props) {
         super(props);
-        const { items, selectedCases = [], selectable } = props;
-        this.state = { selectable, items, selectedCases, filter: '' };
+        const { items, selectedCases = [], selectable, columns } = props;
+        this.state = { selectable, items, selectedCases, filter: '', columns };
     }
 
     componentDidMount() {
         this.setState({ isMounted: true });
     }
 
-    applyFilter(filter, items) {
+    filterMatchColumn(filter, item, column) {
+        const value = this.getValueFromItem(item, column.dataValueKey, column);
+        return value && value.toUpperCase && value.toUpperCase().indexOf(filter) !== -1;
+    }
+
+    getValueFromItem(item, valueKey, column) {
+        const value = item[valueKey] !== undefined ? item[valueKey] : item.data[valueKey];
+        return this.applyDataAdapter(value, column);
+    }
+
+    applyDataAdapter(value, column) {
+
+        if (column.dataAdapter) {
+            if (column.dataAdapter === 'localDateAdapter') {
+                var date = new Date(value);
+                return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+            } else if (column.dataAdapter === 'hideValueNOAdapter') {
+                return value === 'NO' ? '' : value;
+            }
+
+            throw new Error('Data Adapter not implemented: ' + column.dataAdapter);
+        }
+
+        return value;
+
+    }
+
+    applyFilter(filter, items, columns) {
         const { updateFormData } = this.props;
         const { selectedCases } = this.state;
         if (filter !== '') {
-            const filtered = items.filter(r => {
-                return (r.caseReference && r.caseReference.toUpperCase().indexOf(filter) !== -1) ||
-                    (r.assignedUserDisplay && r.assignedUserDisplay.toUpperCase().indexOf(filter) !== -1) ||
-                    (r.assignedTeamDisplay && r.assignedTeamDisplay.toUpperCase().indexOf(filter) !== -1) ||
-                    (r.deadlineDisplay && r.deadlineDisplay.toUpperCase().indexOf(filter) !== -1) ||
-                    (r.stageTypeDisplay && r.stageTypeDisplay.toUpperCase().indexOf(filter) !== -1);
+            const filterableColumns = columns.filter(column => {
+                return column.isFilterable === true;
             });
-            this.setState({ items: filtered, selectedCases: this.filterBySelected(filtered) });
-            updateFormData({ selected_cases: this.filterBySelected(filtered) });
+            const filteredItems = items.filter(item => {
+                return filterableColumns.map(column => this.filterMatchColumn(filter, item, column)).some(matches => matches === true);
+            });
+            this.setState({ items: filteredItems, selectedCases: this.filterBySelected(filteredItems) });
+            updateFormData({ selected_cases: this.filterBySelected(filteredItems) });
         } else {
             this.setState({ items, selectedCases });
         }
@@ -55,7 +81,7 @@ class WorkstackAllocate extends Component {
 
     UNSAFE_componentWillReceiveProps(nextProps) {
         if (this.props.items != nextProps.items) {
-            this.applyFilter(this.state.filter, nextProps.items);
+            this.applyFilter(this.state.filter, nextProps.items, nextProps.columns);
         }
     }
 
@@ -69,7 +95,7 @@ class WorkstackAllocate extends Component {
     filter(e) {
         const filter = e.target.value ? e.target.value.toUpperCase() : '';
         this.setState(state => ({ ...state, filter }));
-        this.applyFilter(filter, this.props.items);
+        this.applyFilter(filter, this.props.items, this.props.columns);
     }
 
     renderFilter() {
@@ -93,8 +119,9 @@ class WorkstackAllocate extends Component {
         );
     }
 
-    renderRow({ uuid, caseUUID, caseReference, stageTypeDisplay, assignedUserDisplay, assignedTeamDisplay, deadlineDisplay }, key) {
-        const value = `${caseUUID}:${uuid}`;
+    renderRow(item, columns) {
+        const value = `${item.caseUUID}:${item.uuid}`;
+        const checkboxKey = item.caseUUID + item.uuid;
         const handleChange = (e) => {
             const { selectedCases } = this.state;
             const selection = new Set(selectedCases);
@@ -107,11 +134,11 @@ class WorkstackAllocate extends Component {
             this.props.updateFormData({ selected_cases: Array.from(selection) });
         };
         return (
-            <tr key={uuid} className='govuk-radios govuk-table__row'>
+            <tr key={item.uuid} className='govuk-radios govuk-table__row'>
                 {this.state.selectable && <td className='govuk-table__cell'>
                     <div className='govuk-checkboxes'>
-                        <div key={key} className='govuk-checkboxes__item'>
-                            <input id={`selected_cases_${caseUUID}`}
+                        <div key={checkboxKey} className='govuk-checkboxes__item'>
+                            <input id={`selected_cases_${item.caseUUID}`}
                                 type='checkbox'
                                 name={'selected_cases[]'}
                                 value={value}
@@ -119,19 +146,25 @@ class WorkstackAllocate extends Component {
                                 onChange={handleChange.bind(this)}
                                 className={'govuk-checkboxes__input'}
                             />
-                            <label className='govuk-label govuk-checkboxes__label' htmlFor={caseUUID}></label>
+                            <label className='govuk-label govuk-checkboxes__label' htmlFor={item.caseUUID}></label>
                         </div>
                     </div>
                 </td>}
-                <td className='govuk-table__cell'>
-                    <Link to={`/case/${caseUUID}/stage/${uuid}`} className='govuk-link govuk-!-margin-right-3'>{caseReference}</Link>
-                </td>
-                <td className='govuk-table__cell'>{stageTypeDisplay}</td>
-                <td className='govuk-table__cell'>{assignedUserDisplay}</td>
-                <td className='govuk-table__cell'>{assignedTeamDisplay}</td>
-                <td className='govuk-table__cell'>{deadlineDisplay}</td>
+                {columns && columns.map(column => this.renderDataCell(column, item))}
             </tr>
         );
+    }
+
+    renderDataCell(column, item) {
+
+        const value = this.getValueFromItem(item, column.dataValueKey, column);
+        if (column.renderer && column.renderer === 'caseLink') {
+            return <td key={item.uuid + column.dataValueKey} className='govuk-table__cell'>
+                <Link to={`/case/${item.caseUUID}/stage/${item.uuid}`} className='govuk-link govuk-!-margin-right-3'>{value}</Link>
+            </td>;
+        }
+        return <td key={item.uuid + column.dataValueKey} className='govuk-table__cell'>{value}</td>;
+
     }
 
     renderTeamsDropdown() {
@@ -145,7 +178,7 @@ class WorkstackAllocate extends Component {
     }
 
     render() {
-        const { isMounted, items, selectable } = this.state;
+        const { isMounted, items, selectable, columns } = this.state;
         const { baseUrl, teamMembers, submitHandler, allocateToTeamEndpoint, allocateToWorkstackEndpoint, allocateToUserEndpoint } = this.props;
 
         return (
@@ -166,15 +199,11 @@ class WorkstackAllocate extends Component {
                                                 <thead className='govuk-table__head'>
                                                     <tr className='govuk-radios govuk-table__row'>
                                                         {selectable && <th className='govuk-table__header'>Select</th>}
-                                                        <th className='govuk-table__header'>Reference</th>
-                                                        <th className='govuk-table__header'>Current Stage</th>
-                                                        <th className='govuk-table__header govuk-!-width-one-quarter'>Owner</th>
-                                                        <th className='govuk-table__header govuk-!-width-one-quarter'>Team</th>
-                                                        <th className='govuk-table__header'>Deadline</th>
+                                                        {columns && columns.map(renderHeader)}
                                                     </tr>
                                                 </thead>
                                                 <tbody className='govuk-table__body'>
-                                                    {items && items.map(this.renderRow.bind(this))}
+                                                    {items && items.map(item => this.renderRow(item, columns))}
                                                 </tbody>
                                             </table>
                                             <span className='govuk-hint' aria-live='polite'>
@@ -207,6 +236,7 @@ class WorkstackAllocate extends Component {
 
 WorkstackAllocate.propTypes = {
     items: PropTypes.array.isRequired,
+    columns: PropTypes.array,
     selectable: PropTypes.bool.isRequired,
     selectedCases: PropTypes.array,
     teamMembers: PropTypes.array,
@@ -224,5 +254,9 @@ const WrappedWorkstackAllocate = props => (
         {({ track }) => <WorkstackAllocate {...props} track={track} />}
     </ApplicationConsumer>
 );
+
+const renderHeader = (column) => {
+    return <th key={column.displayName} className={column.headerClassName}>{column.displayName}</th>;
+};
 
 export default WrappedWorkstackAllocate;
