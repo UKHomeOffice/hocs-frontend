@@ -38,7 +38,7 @@ if [[ -z ${KUBE_TOKEN} ]] ; then
 fi
 
 if [ "${ENVIRONMENT}" == "prod" ] ; then
-    export DNS_PREFIX=www.cs
+    export DNS_PREFIX=www.wcs
     export KC_REALM=https://sso.digital.homeoffice.gov.uk/auth/realms/hocs-prod
 else
     export DNS_PREFIX=${ENVIRONMENT}.wcs-notprod
