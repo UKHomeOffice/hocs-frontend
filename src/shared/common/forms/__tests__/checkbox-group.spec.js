@@ -15,7 +15,7 @@ describe('Form checkbox group component', () => {
     });
     it('should render with value when passed', () => {
         expect(
-            render(<CheckboxGroup name="checkbox-group" choices={choices} value={['A']} updateState={() => null} />)
+            render(<CheckboxGroup name="checkbox-group" choices={choices} value={'A'} updateState={() => null} />)
         ).toMatchSnapshot();
     });
     it('should render with label when passed', () => {
@@ -57,15 +57,15 @@ describe('Form checkbox group component', () => {
 
         wrapper.find(`#checkbox-group_${firstValue}`).simulate('change', { target: { value: firstValue } });
         expect(mockCallback).toHaveBeenCalledTimes(1);
-        expect(mockCallback).toHaveBeenCalledWith({ 'checkbox-group': 'A,' });
+        expect(mockCallback).toHaveBeenCalledWith({ 'checkbox-group': 'A' });
 
         wrapper.find(`#checkbox-group_${secondValue}`).simulate('change', { target: { value: secondValue } });
         expect(mockCallback).toHaveBeenCalledTimes(2);
-        expect(mockCallback).toHaveBeenCalledWith({ 'checkbox-group': 'A,B,' });
+        expect(mockCallback).toHaveBeenCalledWith({ 'checkbox-group': 'A,B' });
 
         wrapper.find(`#checkbox-group_${firstValue}`).simulate('change', { target: { value: firstValue } });
         expect(mockCallback).toHaveBeenCalledTimes(3);
-        expect(mockCallback).toHaveBeenCalledWith({ 'checkbox-group': 'B,' });
+        expect(mockCallback).toHaveBeenCalledWith({ 'checkbox-group': 'B' });
     });
 });
 

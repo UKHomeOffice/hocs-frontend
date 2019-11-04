@@ -5,24 +5,29 @@ class Checkbox extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { value: this.props.value };
+        this.state = { value: this.props.value.split(',').filter(cb => cb !== '') };
     }
 
+    stateString() {
+        var value = this.state.value.join();
+        return value;
+    }
 
     componentDidMount() {
-        this.props.updateState({ [this.props.name]: this.state.value });
+        this.props.updateState({ [this.props.name]: this.stateString() });
     }
 
     handleChange(e) {
-        let targetValue = e.target.value + ',';
-        this.setState((currentState) => {
-            if (currentState.value.includes(targetValue)) {
-                return { value: currentState.value.replace(targetValue, '') };
-            } else {
-                return { value: currentState.value + targetValue };
-            }
+        var selection = this.state.value;
+        if (selection.includes(e.target.value)) {
+            selection = selection.filter(cb => cb !== e.target.value);
+        } else {
+            selection.push(e.target.value);
+        }
+        this.setState(() => {
+            return { value: selection };
         }, () => {
-            this.props.updateState({ [this.props.name]: this.state.value.trim() });
+            this.props.updateState({ [this.props.name]: this.stateString() });
         });
     }
 
