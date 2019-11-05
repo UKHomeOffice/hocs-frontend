@@ -35,7 +35,7 @@ class WorkstackAllocate extends Component {
         this.setState({ isMounted: true });
     }
 
-    filterMatchColumn(filter, item, column) {
+    doesFilterMatchData(filter, item, column) {
         const value = this.getValueFromItem(item, column.dataValueKey, column);
         return value && value.toUpperCase && value.toUpperCase().indexOf(filter) !== -1;
     }
@@ -70,7 +70,7 @@ class WorkstackAllocate extends Component {
                 return column.isFilterable === true;
             });
             const filteredItems = items.filter(item => {
-                return filterableColumns.map(column => this.filterMatchColumn(filter, item, column)).some(matches => matches === true);
+                return filterableColumns.map(column => this.doesFilterMatchData(filter, item, column)).some(matches => matches === true);
             });
             this.setState({ items: filteredItems, selectedCases: this.filterBySelected(filteredItems) });
             updateFormData({ selected_cases: this.filterBySelected(filteredItems) });
@@ -117,6 +117,10 @@ class WorkstackAllocate extends Component {
                 </div>
             </div>
         );
+    }
+
+    renderHeader(column) {
+        return <th key={column.displayName} className={column.headerClassName}>{column.displayName}</th>;
     }
 
     renderRow(item, columns) {
@@ -199,7 +203,7 @@ class WorkstackAllocate extends Component {
                                                 <thead className='govuk-table__head'>
                                                     <tr className='govuk-radios govuk-table__row'>
                                                         {selectable && <th className='govuk-table__header'>Select</th>}
-                                                        {columns && columns.map(renderHeader)}
+                                                        {columns && columns.map(this.renderHeader)}
                                                     </tr>
                                                 </thead>
                                                 <tbody className='govuk-table__body'>
@@ -254,9 +258,5 @@ const WrappedWorkstackAllocate = props => (
         {({ track }) => <WorkstackAllocate {...props} track={track} />}
     </ApplicationConsumer>
 );
-
-const renderHeader = (column) => {
-    return <th key={column.displayName} className={column.headerClassName}>{column.displayName}</th>;
-};
 
 export default WrappedWorkstackAllocate;
