@@ -18,13 +18,14 @@ class Checkbox extends Component {
     }
 
     handleChange(e) {
-        var selection = this.state.value;
-        if (selection.includes(e.target.value)) {
-            selection = selection.filter(cb => cb !== e.target.value);
-        } else {
-            selection.push(e.target.value);
-        }
-        this.setState(() => {
+        const targetValue = e.target.value;
+        this.setState((currentState) => {
+            var selection = [];
+            if (currentState.value.includes(targetValue)) {
+                selection = currentState.value.filter(cb => cb !== targetValue);
+            } else {
+                selection = [...currentState.value, targetValue];
+            }
             return { value: selection };
         }, () => {
             this.props.updateState({ [this.props.name]: this.stateString() });
