@@ -2,6 +2,10 @@ import React from 'react';
 import ErrorSummary from '../error-summary.jsx';
 import { MemoryRouter } from 'react-router-dom';
 
+// eslint-disable-next-line no-console
+const mockScrollIntoView = jest.fn();
+const refSpy = jest.spyOn(React, 'createRef').mockImplementation(() => ( { current: { scrollIntoView: mockScrollIntoView } }));
+
 const errors = {
     field1: 'Error 1',
     field2: 'Error 2',
@@ -34,5 +38,14 @@ describe('Form text component', () => {
             )
         ).toMatchSnapshot();
     });
-});
 
+    it('expect scrollIntoView to be called', async () => {
+        const wrapper = shallow(<ErrorSummary description="Displaying a list of the errors on the page" />);
+        const instance = wrapper.instance();
+
+        await instance.componentDidMount();
+
+        expect(refSpy).toBeCalled();
+        expect(mockScrollIntoView).toBeCalled();
+    });
+});
