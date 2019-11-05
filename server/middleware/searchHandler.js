@@ -34,10 +34,11 @@ async function handleSearch(req, res, next) {
         const workstackData = await Promise.all(response.data.stages
             .sort((first, second) => first.caseReference > second.caseReference)
             .map(bindDisplayElements(fromStaticList)));
-
+        const { workstackColumns } = await req.listService.fetch('S_SYSTEM_CONFIGURATION');
         res.locals.workstack = {
             label: 'Search Results',
-            items: workstackData
+            items: workstackData,
+            columns: workstackColumns
         };
 
         next();

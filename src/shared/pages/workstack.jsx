@@ -120,13 +120,14 @@ class WorkstackPage extends Component {
     renderWorkstack() {
         const { match: { url }, selectable = true } = this.props;
         const { workstack, formData } = this.state;
-        const { allocateToUserEndpoint, allocateToTeamEndpoint, allocateToWorkstackEndpoint, items, teamMembers, errors, errorHeading } = workstack;
+        const { allocateToUserEndpoint, allocateToTeamEndpoint, allocateToWorkstackEndpoint, items, teamMembers, errors, errorHeading, columns } = workstack;
         return (
             <Fragment>
                 {errors && <ErrorSummary errors={errors} heading={errorHeading} />}
                 <Workstack
                     baseUrl={url}
                     items={items}
+                    columns={columns}
                     selectable={selectable}
                     selectedCases={formData['selected_cases']}
                     teamMembers={teamMembers}

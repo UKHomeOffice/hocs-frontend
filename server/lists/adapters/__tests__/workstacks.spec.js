@@ -92,7 +92,7 @@ describe('User Workstack Adapter', () => {
             ]
         };
 
-        const result = await userAdapter(mockData, { user: mockUser, fromStaticList: mockFromStaticList, logger: mockLogger });
+        const result = await userAdapter(mockData, { user: mockUser, fromStaticList: mockFromStaticList, logger: mockLogger, configuration: { workstackColumns: [] } });
         expect(result).toMatchSnapshot();
     });
 });
@@ -152,7 +152,7 @@ describe('Team Workstack Adapter', () => {
             ]
         };
 
-        const result = await teamAdapter(mockData, { user: mockUser, fromStaticList: mockFromStaticList, logger: mockLogger, teamId: 2 });
+        const result = await teamAdapter(mockData, { user: mockUser, fromStaticList: mockFromStaticList, logger: mockLogger, teamId: 2, configuration: { workstackColumns: [] } });
         expect(result).toMatchSnapshot();
     });
 });
@@ -228,7 +228,7 @@ describe('Workflow Workstack Adapter', () => {
             ]
         };
 
-        const result = await workflowAdapter(mockData, { user: mockUser, fromStaticList: mockFromStaticList, logger: mockLogger, teamId: 2, workflowId: 'B' });
+        const result = await workflowAdapter(mockData, { user: mockUser, fromStaticList: mockFromStaticList, logger: mockLogger, teamId: 2, workflowId: 'B', configuration: { workstackColumns: [] } });
         expect(result).toMatchSnapshot();
     });
 });
@@ -304,7 +304,7 @@ describe('Workflow Workstack Adapter', () => {
             ]
         };
 
-        const result = await stageAdapter(mockData, { user: mockUser, fromStaticList: mockFromStaticList, logger: mockLogger, teamId: 2, workflowId: 'B', stageId: 'A' });
+        const result = await stageAdapter(mockData, { user: mockUser, fromStaticList: mockFromStaticList, logger: mockLogger, teamId: 2, workflowId: 'B', stageId: 'A', configuration: { workstackColumns: [] } });
         expect(result).toMatchSnapshot();
     });
 });

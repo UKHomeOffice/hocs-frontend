@@ -44,6 +44,12 @@ describe('handleSearch', () => {
                         return Promise.resolve('StageType1');
                     }
                     return Promise.reject();
+                }),
+                fetch: jest.fn(async (listId) => {
+                    if (listId === 'S_SYSTEM_CONFIGURATION') {
+                        return Promise.resolve({ workstackColumns: [] });
+                    }
+                    return Promise.reject();
                 })
             }
         };

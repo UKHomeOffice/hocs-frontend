@@ -44,6 +44,7 @@ Object {
   "allocateToTeamEndpoint": "/allocate/team",
   "allocateToUserEndpoint": "/allocate/user",
   "allocateToWorkstackEndpoint": "/unallocate/",
+  "columns": Array [],
   "dashboard": Array [
     Card {
       "count": 1,
@@ -138,6 +139,7 @@ Object {
 exports[`User Workstack Adapter should transform a stage array to a user workstack schema 1`] = `
 Object {
   "allocateToWorkstackEndpoint": "/unallocate/",
+  "columns": Array [],
   "items": Array [
     Object {
       "assignedTeamDisplay": "MOCK_TEAM",
@@ -161,6 +163,7 @@ Object {
   "allocateToTeamEndpoint": "/allocate/team",
   "allocateToUserEndpoint": "/allocate/user",
   "allocateToWorkstackEndpoint": "/unallocate/",
+  "columns": Array [],
   "dashboard": Array [
     Card {
       "count": 4,
@@ -257,6 +260,7 @@ Object {
   "allocateToTeamEndpoint": "/allocate/team",
   "allocateToUserEndpoint": "/allocate/user",
   "allocateToWorkstackEndpoint": "/unallocate/",
+  "columns": Array [],
   "items": Array [
     Object {
       "assignedTeamDisplay": "MOCK_TEAM",
