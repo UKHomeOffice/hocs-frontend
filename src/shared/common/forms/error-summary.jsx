@@ -3,6 +3,11 @@ import PropTypes from 'prop-types';
 
 class ErrorSummary extends Component {
 
+    constructor(props){
+        super(props);
+        this.ref = React.createRef();
+    }
+
     scrollInToView(e, link) {
         e.preventDefault();
         /* eslint-disable-next-line no-undef */
@@ -12,6 +17,10 @@ class ErrorSummary extends Component {
         }
     }
 
+    componentDidMount(){
+        this.ref.current && this.ref.current.scrollIntoView && this.ref.current.scrollIntoView();
+    }
+
     render() {
         const {
             description,
@@ -19,7 +28,7 @@ class ErrorSummary extends Component {
             heading
         } = this.props;
         return (
-            <div className="govuk-error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabIndex="-1">
+            <div className="govuk-error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabIndex="-1" ref={this.ref}>
 
                 <h2 className="govuk-error-summary__title" id="error-summary-heading-example-1">
                     {heading}
