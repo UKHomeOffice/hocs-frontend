@@ -139,6 +139,40 @@ describe('Process middleware', () => {
         expect(next).toHaveBeenCalledTimes(1);
     });
 
+    it('should pad single digit day and months with zeros', () => {
+        const req = {
+            body: {
+                ['test-field-year']: '1989',
+                ['test-field-month']: '4',
+                ['test-field-day']: '3'
+            },
+            query: {},
+            form: {
+                schema: {
+                    fields: [
+                        {
+                            component: 'date',
+                            validation: [
+                                'required'
+                            ],
+                            props: {
+                                name: 'test-field',
+                            }
+                        }
+                    ]
+                }
+            }
+        };
+        const res = {};
+
+        processMiddleware(req, res, next);
+        expect(req.form).toBeDefined();
+        expect(req.form.data).toBeDefined();
+        expect(req.form.data['test-field']).toEqual('1989-04-03');
+        expect(next).toHaveBeenCalled();
+        expect(next).toHaveBeenCalledTimes(1);
+    });
+
     it('should process checkbox data passed as an array', () => {
         const req = {
             body: {
