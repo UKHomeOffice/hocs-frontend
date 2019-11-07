@@ -10,6 +10,7 @@ import EntityManager from './composite/entity-manager.jsx';
 import Button from './button.jsx';
 import Link from './link.jsx';
 import BackLink from './backlink.jsx';
+import BackButton from './back-button.jsx';
 import Paragraph from './paragraph.jsx';
 import Inset from './inset.jsx';
 import Dropdown from './dropdown.jsx';
@@ -49,69 +50,72 @@ function renderFormComponent(Component, options) {
 export function formComponentFactory(field, options) {
     const { key, config, data, errors, callback } = options;
     switch (field) {
-    case 'radio':
-        return renderFormComponent(Radio, { key, config, data, errors, callback });
-    case 'text':
-        return renderFormComponent(TextInput, { key, config, data, errors, callback });
-    case 'hidden':
-        return renderFormComponent(Hidden, { key, config, data, errors, callback });
-    case 'date':
-        return renderFormComponent(DateInput, { key, config, data, errors, callback });
-    case 'checkbox':
-        return renderFormComponent(Checkbox, { key, config, data, errors, callback, dataAdapter: checkboxDataAdapter });
-    case 'text-area':
-        return renderFormComponent(TextArea, { key, config, data, errors, callback });
-    case 'dropdown':
-        return renderFormComponent(Dropdown, { key, config, data, errors, callback });
-    case 'type-ahead':
-        return renderFormComponent(TypeAhead, { key, config, data, errors, callback });
-    case 'button':
-        return renderFormComponent(Button, { key, config });
-    case 'link':
-        return renderFormComponent(Link, { key, config });
-    case 'add-document':
-        return renderFormComponent(AddDocument, { key, config, errors, callback });
-    case 'entity-list':
-        return renderFormComponent(EntityList, {
-            key,
-            config: { ...config, baseUrl: options.baseUrl },
-            data,
-            errors,
-            callback
-        });
-    case 'heading':
-        return (
-            <h2 key={key} className='govuk-heading-m'>
-                {config.label}
-            </h2>
-        );
-    case 'panel':
-        return renderFormComponent(Panel, { key, config });
-    case 'inset':
-        return renderFormComponent(Inset, { key, data, config });
-    case 'paragraph':
-        return renderFormComponent(Paragraph, { key, config });
-    case 'entity-manager':
-        return renderFormComponent(EntityManager, { key, config: { ...config, baseUrl: options.baseUrl } });
-    case 'display':
-        return (
-            <span className='govuk-body full-width'><strong>{config.label}: </strong>{data[config.name]}</span>
-        );
-    case 'accordion':
-        return renderFormComponent(Accordion(data), { key, config });
-    default:
-        return null;
+        case 'radio':
+            return renderFormComponent(Radio, { key, config, data, errors, callback });
+        case 'text':
+            return renderFormComponent(TextInput, { key, config, data, errors, callback });
+        case 'hidden':
+            return renderFormComponent(Hidden, { key, config, data, errors, callback });
+        case 'date':
+            return renderFormComponent(DateInput, { key, config, data, errors, callback });
+        case 'checkbox':
+            return renderFormComponent(Checkbox, { key, config, data, errors, callback, dataAdapter: checkboxDataAdapter });
+        case 'text-area':
+            return renderFormComponent(TextArea, { key, config, data, errors, callback });
+        case 'dropdown':
+            return renderFormComponent(Dropdown, { key, config, data, errors, callback });
+        case 'type-ahead':
+            return renderFormComponent(TypeAhead, { key, config, data, errors, callback });
+        case 'button':
+            return renderFormComponent(Button, { key, config });
+        case 'link':
+            return renderFormComponent(Link, { key, config });
+        case 'add-document':
+            return renderFormComponent(AddDocument, { key, config, errors, callback });
+        case 'entity-list':
+            return renderFormComponent(EntityList, {
+                key,
+                config: { ...config, baseUrl: options.baseUrl },
+                data,
+                errors,
+                callback
+            });
+        case 'heading':
+            return (
+                <h2 key={key} className='govuk-heading-m'>
+                    {config.label}
+                </h2>
+            );
+        case 'panel':
+            return renderFormComponent(Panel, { key, config });
+        case 'inset':
+            return renderFormComponent(Inset, { key, data, config });
+        case 'paragraph':
+            return renderFormComponent(Paragraph, { key, config });
+        case 'entity-manager':
+            return renderFormComponent(EntityManager, { key, config: { ...config, baseUrl: options.baseUrl } });
+        case 'display':
+            return (
+                <span className='govuk-body full-width'><strong>{config.label}: </strong>{data[config.name]}</span>
+            );
+        case 'accordion':
+            return renderFormComponent(Accordion(data), { key, config });
+        default:
+            return null;
     }
 }
 
 export function secondaryActionFactory(field, options) {
-    const { key, config } = options;
+    const { key, config, page } = options;
     switch (field) {
-    case 'backlink':
-        return renderFormComponent(BackLink, { key, config });
-    case 'button':
-        return renderFormComponent(Button, { key, config });
-    default:
-        return null;
+        case 'backlink':
+            return renderFormComponent(BackLink, { key, config });
+        case 'button':
+            return renderFormComponent(Button, { key, config });
+        case 'backButton':
+            config.action = `/case/${page.caseId}/stage/${page.stageId}/back`;
+            return renderFormComponent(BackButton, { key, config: { ...config, caseId: page.caseId, stageId: page.stageId } });
+        default:
+            return null;
     }
 }
