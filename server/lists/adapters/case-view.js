@@ -19,13 +19,12 @@ module.exports = async (template, { fromStaticList }) => {
         .withNoPrimaryAction();
 
     const data = {};
-
     const sections = [];
+    const sortedSections = [];
 
-    await Promise.all(Object.entries(template.schema.fields).map(async ([stageId, fields]) => {
+    await Promise.all(Object.entries(template.schema.fields).sort((a,b) => a[0] > b[0]).map(async ([stageId, fields], index) => {
 
         const stageName = await fromStaticList('S_STAGETYPES', stageId);
-
         const stageFields = [];
 
         fields.forEach(fieldTemplate => {
@@ -33,7 +32,6 @@ module.exports = async (template, { fromStaticList }) => {
             const value = template.data[name];
 
             if (value) {
-
                 data[name] = fieldTemplate.component === 'date' ? formatDate(value) : value;
 
                 stageFields.push(
@@ -45,10 +43,13 @@ module.exports = async (template, { fromStaticList }) => {
 
         });
         if (stageFields.length > 0) {
-            sections.push({ title: stageName, items: stageFields });
+            sections.push({ title: stageName, items: stageFields, index });
         }
 
     }));
+
+    sortedSections.push(...sections.sort((a, b) => a.index - b.index));
+
     builder.withField(
         Component('heading', 'case-view-heading')
             .withProp('label', 'Case Details')
@@ -56,10 +57,9 @@ module.exports = async (template, { fromStaticList }) => {
     );
     builder.withField(
         Component('accordion', 'case-view')
-            .withProp('sections', sections)
+            .withProp('sections', sortedSections)
             .build()
     );
-
 
     return builder.withData(data).build();
 };
