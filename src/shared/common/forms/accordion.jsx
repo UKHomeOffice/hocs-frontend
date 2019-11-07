@@ -5,7 +5,6 @@ import { formComponentFactory } from './form-repository.jsx';
 const getComponentFactoryInstance = (factory, options) => ({ component, props }, key) => factory(component, { key, config: props, ...options });
 
 const createSection = (data) => {
-    // eslint-disable-next-line react/prop-types
     function Section({ title, items, index }) {
         const createComponent = getComponentFactoryInstance(formComponentFactory, { data, errors: {}, meta: {}, callback: () => { }, baseUrl: '/' });
         const [isVisible, setVisible] = useState(true);
@@ -35,7 +34,8 @@ const createSection = (data) => {
     }
     Section.propTypes = {
         title: PropTypes.string.isRequired,
-        items: PropTypes.array.isRequired
+        items: PropTypes.array.isRequired,
+        index: PropTypes.number.isRequired
     };
     return Section;
 };
