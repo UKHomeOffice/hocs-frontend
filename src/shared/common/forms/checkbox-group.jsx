@@ -5,23 +5,31 @@ class Checkbox extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { value: new Set(this.props.value) };
+        this.state = { value: this.props.value.split(',').filter(cb => cb !== '') };
     }
 
+    stateString() {
+        var value = this.state.value.join();
+        return value;
+    }
 
     componentDidMount() {
-        this.props.updateState({ [this.props.name]: Array.from(this.state.value) });
+        this.props.updateState({ [this.props.name]: this.stateString() });
     }
 
     handleChange(e) {
-        const selection = this.state.value;
-        if (selection.has(e.target.value)) {
-            selection.delete(e.target.value);
-        } else {
-            selection.add(e.target.value);
-        }
-        this.setState({ value: selection });
-        this.props.updateState({ [this.props.name]: Array.from(this.state.value) });
+        const targetValue = e.target.value;
+        this.setState((currentState) => {
+            var selection = [];
+            if (currentState.value.includes(targetValue)) {
+                selection = currentState.value.filter(cb => cb !== targetValue);
+            } else {
+                selection = [...currentState.value, targetValue];
+            }
+            return { value: selection };
+        }, () => {
+            this.props.updateState({ [this.props.name]: this.stateString() });
+        });
     }
 
     render() {
@@ -56,7 +64,7 @@ class Checkbox extends Component {
                                         name={name}
                                         value={choice.value}
                                         checked={
-                                            this.state[`${name}_${choice.value}`]
+                                            this.state.value.includes(`${choice.value}`)
                                         }
                                         onChange={e => this.handleChange(e)}
                                         className={'govuk-checkboxes__input'}
@@ -84,14 +92,14 @@ Checkbox.propTypes = {
     name: PropTypes.string.isRequired,
     type: PropTypes.string,
     updateState: PropTypes.func.isRequired,
-    value: PropTypes.array
+    value: PropTypes.string
 };
 
 Checkbox.defaultProps = {
     choices: [],
     disabled: false,
     type: 'checkbox',
-    value: []
+    value: ''
 };
 
 export default Checkbox;
