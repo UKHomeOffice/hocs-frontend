@@ -1,15 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
+import memoizeOne from 'memoize-one';
 import { formComponentFactory } from './form-repository.jsx';
 
 const getComponentFactoryInstance = (factory, options) => ({ component, props }, key) => factory(component, { key, config: props, ...options });
 
-const createSection = (data) => {
-    function Section({ title, items }, i) {
-        const createComponent = getComponentFactoryInstance(formComponentFactory, { data, errors: {}, meta: {}, callback: () => { }, baseUrl: '/' });
+const createSection = (data, updateState) => {
+    function Section({ title, items }, key) {
+        const createComponent = getComponentFactoryInstance(formComponentFactory, { data, errors: {}, meta: {}, callback: updateState, baseUrl: '/' });
         const [isVisible, setVisible] = useState(true);
 
-        useEffect(() => setVisible(false), [items]);
+        useEffect(() => {
+            setVisible(false);
+        }, []);
 
         const clickHandler = event => {
             event.preventDefault();
@@ -17,16 +20,16 @@ const createSection = (data) => {
         };
 
         return (
-            <div key={i} className={isVisible ? 'govuk-accordion__section govuk-accordion__section--expanded' : 'govuk-accordion__section'}>
+            <div key={key} className={isVisible ? 'govuk-accordion__section govuk-accordion__section--expanded' : 'govuk-accordion__section'}>
                 <div className='govuk-accordion__section-header' onClick={clickHandler}>
                     <h2 className='govuk-accordion__section-heading'>
-                        <button type='button' className='govuk-accordion__section-button' id={`accordion-default-heading-${i}`}>
+                        <button type='button' className='govuk-accordion__section-button' id={`accordion-default-heading-${key}`}>
                             {title}
                         </button>
                     </h2>
                     <span className='govuk-accordion__icon' aria-hidden='true'></span>
                 </div>
-                <div id={`accordion-default-content-${i}`} className='govuk-accordion__section-content' aria-labelledby={`accordion-default-heading-${i}`}>
+                <div id={`accordion-default-content-${key}`} className='govuk-accordion__section-content' aria-labelledby={`accordion-default-heading-${key}`}>
                     {Array.isArray(items) && items.map(createComponent)}
                 </div>
             </div>
@@ -39,21 +42,22 @@ const createSection = (data) => {
     return Section;
 };
 
-const getAccordionComponent = (data) => {
-    function Accordion({ name, sections }) {
-        return (
-            <div id={name} className='govuk-accordion' data-module='accordion'>
-                {Array.isArray(sections) && sections.map(createSection(data))}
-            </div>
-        );
-    }
-    Accordion.propTypes = {
-        name: PropTypes.string.isRequired,
-        sections: PropTypes.array.isRequired
-    };
-    return Accordion;
+function Accordion({ name, sections, data, updateState }) {
+    return (
+        <div id={name} className='govuk-accordion' data-module='accordion'>
+            {Array.isArray(sections) && sections.map(createSection(data, updateState))}
+        </div>
+    );
+}
+
+Accordion.propTypes = {
+    data: PropTypes.object.isRequired,
+    name: PropTypes.string.isRequired,
+    sections: PropTypes.array.isRequired,
+    updateState: PropTypes.func
 };
 
+// eslint-disable-next-line react/display-name
+const withData = memoizeOne((data) => (props) => <Accordion data={data} {...props} />, () => true);
 
-
-export default getAccordionComponent;
+export default withData;
