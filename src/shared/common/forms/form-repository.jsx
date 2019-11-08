@@ -113,8 +113,12 @@ export function secondaryActionFactory(field, options) {
         case 'button':
             return renderFormComponent(Button, { key, config });
         case 'backButton':
-            config.action = `/case/${page.caseId}/stage/${page.stageId}/back`;
-            return renderFormComponent(BackButton, { key, config: { ...config, caseId: page.caseId, stageId: page.stageId } });
+            return renderFormComponent(BackButton, {
+                key, config: {
+                    ...config, caseId: page.caseId, stageId: page.stageId,
+                    action: `/case/${page.caseId}/stage/${page.stageId}/back`
+                }
+            });
         default:
             return null;
     }

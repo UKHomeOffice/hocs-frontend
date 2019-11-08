@@ -21,24 +21,17 @@ export class BackButton extends Component {
             .then(() => {
                 axios.get(endpoint)
                     .then(response => {
-                        dispatch(updateApiStatus(status.MOVE_BACK_SUCCESS))
-                            .then(() => {
-                                if (response.data.errors) {
-                                    dispatch(updateApiStatus(status.MOVE_BACK_FAILURE));
-                                } else {
-                                    history.push(response.data.redirect);
-                                }
-                            })
-                            .then(() => dispatch(clearApiStatus()))
-                            .catch(() => {
-                                dispatch(updateApiStatus(status.MOVE_BACK_FAILURE))
-                                    .then(dispatch(setError({ status: 500 })));
-                            });
-                    })
-                    .catch(error => {
-                        dispatch(updateApiStatus(status.MOVE_BACK_FAILURE))
-                            .then(() => dispatch(setError(error.response)));
-                    });
+                        if (response.data.errors) {
+                            dispatch(updateApiStatus(status.MOVE_BACK_FAILURE));
+                        } else {
+                            dispatch(updateApiStatus(status.MOVE_BACK_SUCCESS));
+                            history.push(response.data.redirect);
+                        }
+                    }).then(() => dispatch(clearApiStatus()));
+            })
+            .catch(error => {
+                dispatch(updateApiStatus(status.MOVE_BACK_FAILURE))
+                    .then(() => dispatch(setError(error.response)));
             });
     }
 

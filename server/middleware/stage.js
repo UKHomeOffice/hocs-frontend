@@ -68,6 +68,7 @@ async function moveToPreviousStage(req, res, next) {
         }, { headers: User.createHeaders(user) });
     } catch (error) {
         logger.error(error);
+        next(error);
     } finally {
         next();
     }
