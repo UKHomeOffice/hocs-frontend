@@ -4,8 +4,8 @@ import { formComponentFactory } from './form-repository.jsx';
 
 const getComponentFactoryInstance = (factory, options) => ({ component, props }, key) => factory(component, { key, config: props, ...options });
 
-const createSection = (data) => {
-    function Section({ title, items, index }) {
+const createSection = (data, index) => {
+    function Section({ title, items }) {
         const createComponent = getComponentFactoryInstance(formComponentFactory, { data, errors: {}, meta: {}, callback: () => { }, baseUrl: '/' });
         const [isVisible, setVisible] = useState(true);
 
@@ -35,7 +35,6 @@ const createSection = (data) => {
     Section.propTypes = {
         title: PropTypes.string.isRequired,
         items: PropTypes.array.isRequired,
-        index: PropTypes.number.isRequired
     };
     return Section;
 };
