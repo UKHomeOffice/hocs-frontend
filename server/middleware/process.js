@@ -9,7 +9,7 @@ const customAdapters = {
             day: data[`${name}-day`],
         };
         if (date.year && date.month && date.day) {
-            reducer[name] = `${date.year}-${date.month}-${date.day}`;
+            reducer[name] = `${date.year}-${date.month.padStart(2, '0')}-${date.day.padStart(2, '0')}`;
         }
     },
     'checkbox': (reducer, field, data) => {

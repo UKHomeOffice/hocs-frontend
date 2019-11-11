@@ -10,6 +10,7 @@ import EntityManager from './composite/entity-manager.jsx';
 import Button from './button.jsx';
 import Link from './link.jsx';
 import BackLink from './backlink.jsx';
+import BackButton from './back-button.jsx';
 import Paragraph from './paragraph.jsx';
 import Inset from './inset.jsx';
 import Dropdown from './dropdown.jsx';
@@ -105,12 +106,19 @@ export function formComponentFactory(field, options) {
 }
 
 export function secondaryActionFactory(field, options) {
-    const { key, config } = options;
+    const { key, config, page } = options;
     switch (field) {
         case 'backlink':
             return renderFormComponent(BackLink, { key, config });
         case 'button':
             return renderFormComponent(Button, { key, config });
+        case 'backButton':
+            return renderFormComponent(BackButton, {
+                key, config: {
+                    ...config, caseId: page.caseId, stageId: page.stageId,
+                    action: `/case/${page.caseId}/stage/${page.stageId}/back`
+                }
+            });
         default:
             return null;
     }
