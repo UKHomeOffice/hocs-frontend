@@ -57,7 +57,8 @@ class Form extends Component {
                                 config: field.props,
                                 data,
                                 errors,
-                                callback: this.props.updateFormState
+                                callback: this.props.updateFormState,
+                                page
                             });
                         })
                     }
