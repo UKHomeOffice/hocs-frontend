@@ -33,6 +33,13 @@ const customAdapters = {
             reducer[name] = req.files.filter(f => f.fieldname.startsWith(name));
         }
     },
+    'accordion': (reducer, field, data, req) => {
+        if (field.props && field.props.sections) {
+            field.props.sections.map(section => section.items
+                .filter(field => field.type !== 'display')
+                .reduce(createReducer(data, req), reducer));
+        }
+    }
 };
 
 function defaultAdapter(reducer, field, data) {
@@ -42,21 +49,23 @@ function defaultAdapter(reducer, field, data) {
     }
 }
 
+const createReducer = (data, req) => (reducer, field) => {
+    const component = field.component;
+    if (customAdapters.hasOwnProperty(component)) {
+        customAdapters[component].call(this, reducer, field, data, req);
+    } else {
+        defaultAdapter(reducer, field, data);
+    }
+    return reducer;
+};
+
 function processMiddleware(req, res, next) {
     try {
         const data = req.body;
         const { schema } = req.form;
         req.form.data = schema.fields
             .filter(field => field.type !== 'display')
-            .reduce((reducer, field) => {
-                const component = field.component;
-                if (customAdapters.hasOwnProperty(component)) {
-                    customAdapters[component].call(this, reducer, field, data, req);
-                } else {
-                    defaultAdapter(reducer, field, data);
-                }
-                return reducer;
-            }, {});
+            .reduce(createReducer(data, req), {});
     } catch (error) {
         return next(new FormSubmissionError('Unable to process form data'));
     }
