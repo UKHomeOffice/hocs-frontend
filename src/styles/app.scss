@@ -20,6 +20,7 @@ $govuk-font-family-tabular: 'helvetica neue',Arial, Helvetica, sans-serif !defau
 .full-width {
   display: block;
   width: 100%;
+  overflow-wrap: break-word;
 }
 
 .govuk-button--link {

@@ -1,7 +1,7 @@
 const actionService = require('../services/action');
 const getLogger = require('../libs/logger');
 const User = require('../models/user');
-const { caseworkService } = require('../clients');
+const { caseworkService, workflowService } = require('../clients');
 
 async function stageResponseMiddleware(req, res, next) {
     const { caseId, stageId } = req.params;
@@ -58,9 +58,26 @@ async function allocateCaseToTeamMember(req, res, next) {
     }
 }
 
+async function moveToPreviousStage(req, res, next) {
+    const logger = getLogger(req.request);
+    const { caseId, stageId } = req.params;
+    const { user } = req;
+    try {
+        await workflowService.post(`/case/${caseId}/stage/${stageId}/back`, {
+            userUUID: user.uuid,
+        }, { headers: User.createHeaders(user) });
+    } catch (error) {
+        logger.error(error);
+        next(error);
+    } finally {
+        next();
+    }
+}
+
 module.exports = {
     stageApiResponseMiddleware,
     stageResponseMiddleware,
     allocateCase,
-    allocateCaseToTeamMember
+    allocateCaseToTeamMember,
+    moveToPreviousStage
 };
