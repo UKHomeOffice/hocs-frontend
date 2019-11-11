@@ -24,7 +24,6 @@ Object {
           "name": "case-view",
           "sections": Array [
             Object {
-              "index": 0,
               "items": Array [
                 Object {
                   "component": "display",
@@ -46,7 +45,6 @@ Object {
               "title": "STAGE_NAME",
             },
             Object {
-              "index": 1,
               "items": Array [
                 Object {
                   "component": "display",
@@ -68,7 +66,6 @@ Object {
               "title": "STAGE_NAME1",
             },
             Object {
-              "index": 2,
               "items": Array [
                 Object {
                   "component": "display",

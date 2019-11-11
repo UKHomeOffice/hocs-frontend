@@ -22,7 +22,7 @@ module.exports = async (template, { fromStaticList }) => {
     const sections = [];
     const sortedSections = [];
 
-    await Promise.all(Object.entries(template.schema.fields).sort((a,b) => a[0] > b[0]).map(async ([stageId, fields], index) => {
+    await Promise.all(Object.entries(template.schema.fields).map(async ([stageId, fields]) => {
 
         const stageName = await fromStaticList('S_STAGETYPES', stageId);
         const stageFields = [];
@@ -43,12 +43,19 @@ module.exports = async (template, { fromStaticList }) => {
 
         });
         if (stageFields.length > 0) {
-            sections.push({ title: stageName, items: stageFields, index });
+            sections.push({ title: stageName, items: stageFields });
         }
 
     }));
 
-    sortedSections.push(...sections.sort((a, b) => a.index - b.index));
+    sortedSections.push(...sections.sort((a, b) => {
+        if (a.title > b.title) {
+            return 1;
+        } else if (a.title < b.title) {
+            return -1;
+        } else {
+            return 0;
+        } }));
 
     builder.withField(
         Component('heading', 'case-view-heading')
