@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import memoizeOne from 'memoize-one';
 import { formComponentFactory } from './form-repository.jsx';
@@ -57,7 +57,7 @@ Accordion.propTypes = {
     updateState: PropTypes.func
 };
 
-// eslint-disable-next-line react/display-name
-const withData = memoizeOne((data) => (props) => <Accordion data={data} {...props} />, () => true);
-
-export default withData;
+export default memoizeOne(data => {
+    const WithData = props => <Accordion data={data} {...props} />;
+    return WithData;
+}, () => true);

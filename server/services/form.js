@@ -98,7 +98,11 @@ async function hydrateField(field, req) {
                 req.params
             );
         } else if (sections) {
-            sections.map(section => section.items.map((item) => hydrateField(item, req)));
+            const sectionRequests = sections.map(async section => {
+                const fieldRequests = section.items.map(async item => await hydrateField(item, req));
+                await Promise.all(fieldRequests);
+            });
+            await Promise.all(sectionRequests);
         }
     }
     return field;
@@ -111,7 +115,8 @@ const hydrateFields = async (req, res, next) => {
     if (req.form) {
         const { schema } = req.form;
         logger.debug('HYDRATE_FORM_FIELDS', { count: schema.fields.length });
-        const requests = schema.fields.map((field) => hydrateField(field, req));
+        const requests = await schema.fields.map(async (field) => await hydrateField(field, req));
+
         try {
             await Promise.all(requests);
         } catch (error) {
