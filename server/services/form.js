@@ -84,6 +84,30 @@ async function getFormSchema(options) {
     return form;
 }
 
+async function hydrateField(field, req) {
+    if (field.props) {
+        const { choices, items, sections } = field.props;
+        if (choices && typeof choices === 'string') {
+            field.props.choices = await req.listService.fetch(
+                choices,
+                req.params
+            );
+        } else if (items && typeof items === 'string') {
+            field.props.items = await req.listService.fetch(
+                items,
+                req.params
+            );
+        } else if (sections) {
+            const sectionRequests = sections.map(async section => {
+                const fieldRequests = section.items.map(async item => await hydrateField(item, req));
+                await Promise.all(fieldRequests);
+            });
+            await Promise.all(sectionRequests);
+        }
+    }
+    return field;
+}
+
 const hydrateFields = async (req, res, next) => {
 
     const logger = getLogger(req.requestId);
@@ -91,23 +115,8 @@ const hydrateFields = async (req, res, next) => {
     if (req.form) {
         const { schema } = req.form;
         logger.debug('HYDRATE_FORM_FIELDS', { count: schema.fields.length });
-        const requests = schema.fields.map(async field => {
-            if (field.props) {
-                const { choices, items } = field.props;
-                if (choices && typeof choices === 'string') {
-                    field.props.choices = await req.listService.fetch(
-                        choices,
-                        req.params
-                    );
-                } else if (items && typeof items === 'string') {
-                    field.props.items = await req.listService.fetch(
-                        items,
-                        req.params
-                    );
-                }
-            }
-            return field;
-        });
+        const requests = await schema.fields.map(async (field) => await hydrateField(field, req));
+
         try {
             await Promise.all(requests);
         } catch (error) {
