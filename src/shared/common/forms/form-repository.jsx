@@ -23,17 +23,6 @@ function defaultDataAdapter(name, data) {
     return data[name] || '';
 }
 
-function checkboxDataAdapter(name, data) {
-    const result = Object.entries(data)
-        .filter(([key, value]) => key.startsWith(name) && value === true);
-    const result2 = result
-        .reduce((reducer, [key]) => {
-            reducer.push(key);
-            return reducer;
-        }, []);
-    return result2;
-}
-
 function renderFormComponent(Component, options) {
     const { key, config, data, errors, callback, dataAdapter } = options;
     let value = '';
@@ -60,7 +49,7 @@ export function formComponentFactory(field, options) {
         case 'date':
             return renderFormComponent(DateInput, { key, config, data, errors, callback });
         case 'checkbox':
-            return renderFormComponent(Checkbox, { key, config, data, errors, callback, dataAdapter: checkboxDataAdapter });
+            return renderFormComponent(Checkbox, { key, config, data, errors, callback });
         case 'text-area':
             return renderFormComponent(TextArea, { key, config, data, errors, callback });
         case 'dropdown':

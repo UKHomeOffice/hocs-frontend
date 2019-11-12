@@ -242,8 +242,7 @@ describe('Process middleware', () => {
         expect(req.form).toBeDefined();
         expect(req.form.data).toBeDefined();
         expect(req.form.data['test-field']).toBeDefined();
-        expect(Array.isArray(req.form.data['test-field'])).toEqual(true);
-        expect(req.form.data['test-field'].length).toEqual(1);
+        expect(req.form.data['test-field']).toEqual('A');
         expect(next).toHaveBeenCalled();
         expect(next).toHaveBeenCalledTimes(1);
     });

@@ -103,23 +103,6 @@ describe('Form repository', () => {
         expect(wrapper.props().value).toEqual(testData[componentConfiguration.props.name]);
     });
 
-    it('should pass data using the checkboxDataAdapter when passed in options', () => {
-        const componentConfiguration = supportedFormComponents
-            .filter(field => field.component === 'checkbox')
-            .reduce((reducer, field) => reducer = field, null);
-        const Component = formComponentFactory(componentConfiguration.component, {
-            key: 1,
-            config: componentConfiguration.props,
-            data: testData,
-            callback: mockCallback
-        });
-        expect(Component).toBeDefined();
-        const wrapper = mount(Component);
-        expect(wrapper).toBeDefined();
-        expect(wrapper.find('Checkbox').length).toEqual(1);
-        expect(wrapper.props().value).toEqual(['checkbox-component-A']);
-    });
-
     it('should support components in the supportedSecondaryActions list', () => {
         supportedSecondaryActions.map(({ component, props }) => {
             const Component = secondaryActionFactory(component, {
