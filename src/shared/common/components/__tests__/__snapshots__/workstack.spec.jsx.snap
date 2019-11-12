@@ -46,25 +46,39 @@ Array [
                       >
                         Select
                       </th>
-                      <th>
+                      <th
+                        class="govuk-link"
+                      >
                         Reference
                       </th>
-                      <th>
+                      <th
+                        class="govuk-link"
+                      >
                         Full Name
                       </th>
-                      <th>
+                      <th
+                        class="govuk-link"
+                      >
                         Current Stage
                       </th>
-                      <th>
+                      <th
+                        class="govuk-link"
+                      >
                         Owner
                       </th>
-                      <th>
+                      <th
+                        class="govuk-link"
+                      >
                         Team
                       </th>
-                      <th>
+                      <th
+                        class="govuk-link"
+                      >
                         Case Date
                       </th>
-                      <th>
+                      <th
+                        class="govuk-link"
+                      >
                         Active
                       </th>
                     </tr>
@@ -453,37 +467,51 @@ exports[`Workstack component should render with filtering 1`] = `
                               Select
                             </th>
                             <th
+                              className="govuk-link"
                               key="Reference"
+                              onClick={[Function]}
                             >
                               Reference
                             </th>
                             <th
+                              className="govuk-link"
                               key="Full Name"
+                              onClick={[Function]}
                             >
                               Full Name
                             </th>
                             <th
+                              className="govuk-link"
                               key="Current Stage"
+                              onClick={[Function]}
                             >
                               Current Stage
                             </th>
                             <th
+                              className="govuk-link"
                               key="Owner"
+                              onClick={[Function]}
                             >
                               Owner
                             </th>
                             <th
+                              className="govuk-link"
                               key="Team"
+                              onClick={[Function]}
                             >
                               Team
                             </th>
                             <th
+                              className="govuk-link"
                               key="Case Date"
+                              onClick={[Function]}
                             >
                               Case Date
                             </th>
                             <th
+                              className="govuk-link"
                               key="Active"
+                              onClick={[Function]}
                             >
                               Active
                             </th>
