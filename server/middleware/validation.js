@@ -3,6 +3,7 @@ const { DOCUMENT_WHITELIST, DOCUMENT_BULK_LIMIT } = require('../config').forCont
 
 const validationErrors = {
     required: label => `${label} is required`,
+    alphanumeric: label => `${label} must be alphanumeric`,
     hasWhitelistedExtension: (label, extension) => {
         return `${label} is a ${extension.toUpperCase()} file which is not allowed`;
     },
@@ -38,6 +39,13 @@ const validators = {
     required: ({ label, value, message }) => {
         if (!value || value === '') {
             return message || validationErrors.required(label);
+        }
+        return null;
+    },
+    alphanumeric: ({ label, value, message }) => {
+        const format = /^[a-z0-9]+$/i;
+        if (value && !format.test(value)) {
+            return message || validationErrors.alphanumeric(label);
         }
         return null;
     },

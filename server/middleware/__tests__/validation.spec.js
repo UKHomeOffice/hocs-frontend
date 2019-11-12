@@ -24,6 +24,21 @@ describe('Validators', () => {
         });
     });
 
+    describe('Alphanumeric validator', () => {
+        it('should reject symbols', () => {
+            expect(validators.alphanumeric({ value: '!@£$' })).not.toEqual(null);
+        });
+        it('should accept alpha only', () => {
+            expect(validators.alphanumeric({ value: 'data' })).toEqual(null);
+        });
+        it('should accept numeric only', () => {
+            expect(validators.alphanumeric({ value: '1234' })).toEqual(null);
+        });
+        it('should accept alphanumeric', () => {
+            expect(validators.alphanumeric({ value: 'l33t' })).toEqual(null);
+        });
+    });
+
     describe('Valid date validator', () => {
         it('should reject not-real dates', () => {
             expect(validators.isValidDate({ value: '2011-02-33' })).not.toEqual(null);
