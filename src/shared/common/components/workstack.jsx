@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import Submit from '../forms/submit.jsx';
 import Dropdown from '../forms/dropdown.jsx';
 import { ApplicationConsumer } from '../../contexts/application.jsx';
@@ -23,12 +24,17 @@ LinkButton.propTypes = {
     submitHandler: PropTypes.func.isRequired
 };
 
+const DirectionEnum = {
+    ASCENDING: 1,
+    DESCENDING: 2
+};
+
 class WorkstackAllocate extends Component {
 
     constructor(props) {
         super(props);
         const { items, selectedCases = [], selectable, columns } = props;
-        this.state = { selectable, items, selectedCases, filter: '', columns };
+        this.state = { selectable, items, selectedCases, filter: '', columns, sort: { column: undefined, order: DirectionEnum.ASCENDING } };
     }
 
     componentDidMount() {
@@ -119,8 +125,31 @@ class WorkstackAllocate extends Component {
         );
     }
 
+    setSort(selectedColumn) {
+        this.setState((currentState) => {
+            const { sort: { direction: currentDirection, column: currentColumn } } = currentState;
+            let newDirection = DirectionEnum.ASCENDING;
+            let newColumn = selectedColumn;
+
+            if (selectedColumn === currentColumn) {
+                if (currentDirection === DirectionEnum.ASCENDING) {
+                    newDirection = DirectionEnum.DESCENDING;
+                } else if (currentDirection === DirectionEnum.DESCENDING) {
+                    newColumn = undefined;
+                }
+            }
+            return {
+                ...currentState,
+                sort: {
+                    column: newColumn,
+                    direction: newDirection
+                }
+            };
+        });
+    }
+
     renderHeader(column) {
-        return <th key={column.displayName} className={column.headerClassName}>{column.displayName}</th>;
+        return <th onClick={() => this.setSort(column.displayName)} key={column.displayName} className={classNames(column.headerClassName, 'govuk-link')}>{column.displayName}</th>;
     }
 
     renderRow(item, columns) {
@@ -203,7 +232,7 @@ class WorkstackAllocate extends Component {
                                                 <thead className='govuk-table__head'>
                                                     <tr className='govuk-radios govuk-table__row'>
                                                         {selectable && <th className='govuk-table__header'>Select</th>}
-                                                        {columns && columns.map(this.renderHeader)}
+                                                        {columns && columns.map(this.renderHeader.bind(this))}
                                                     </tr>
                                                 </thead>
                                                 <tbody className='govuk-table__body'>
