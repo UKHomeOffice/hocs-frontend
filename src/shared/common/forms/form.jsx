@@ -57,7 +57,8 @@ class Form extends Component {
                                 config: field.props,
                                 data,
                                 errors,
-                                callback: this.props.updateFormState
+                                callback: this.props.updateFormState,
+                                page
                             });
                         })
                     }
@@ -73,11 +74,12 @@ Form.propTypes = {
     children: PropTypes.node,
     secondaryActions: PropTypes.node,
     data: PropTypes.object,
+    meta: PropTypes.object,
     errors: PropTypes.object,
     method: PropTypes.string,
     schema: PropTypes.object.isRequired,
     submitHandler: PropTypes.func,
-    updateFormState: PropTypes.func
+    updateFormState: PropTypes.func,
 };
 
 Form.defaultProps = {

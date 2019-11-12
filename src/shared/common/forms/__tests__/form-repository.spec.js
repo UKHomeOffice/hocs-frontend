@@ -28,6 +28,7 @@ const supportedFormComponents = [
 const supportedSecondaryActions = [
     { component: 'backlink', props: { action: '/', dispatch: jest.fn() } },
     { component: 'button', props: { action: '/', dispatch: jest.fn() } },
+    { component: 'backButton', props: { action: '/', dispatch: jest.fn() } },
 ];
 
 const testData = {
@@ -107,7 +108,11 @@ describe('Form repository', () => {
             const Component = secondaryActionFactory(component, {
                 key: 1,
                 config: props,
-                callback: mockCallback
+                callback: mockCallback,
+                page: {
+                    caseId: 'caseId1234',
+                    stageId: 'stageId1234'
+                }
             });
             const wrapper = shallow(Component);
             expect(wrapper).toBeDefined();
