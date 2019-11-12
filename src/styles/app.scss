@@ -368,6 +368,16 @@ a.card__body {
     &.govuk-link {
         cursor: pointer;
     }
+
+    &.sorted-ascending::after {
+        content: "\2191";
+        margin-left: 0.5rem;
+    }
+
+    &.sorted-descending::after {
+        content: "\2193";
+        margin-left: 0.5rem;
+    }
   }
 }
 

@@ -26,9 +26,17 @@ LinkButton.propTypes = {
 
 const DirectionEnum = {
     ASCENDING: 1,
-    DESCENDING: 2
+    DESCENDING: -1
 };
 
+
+const dataAdapters = {
+    localDateAdapter: (value) => {
+        var date = new Date(value);
+        return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+    },
+    hideValueNOAdapter: value => value === 'NO' ? '' : value
+};
 class WorkstackAllocate extends Component {
 
     constructor(props) {
@@ -41,31 +49,28 @@ class WorkstackAllocate extends Component {
         this.setState({ isMounted: true });
     }
 
-    doesFilterMatchData(filter, item, column) {
-        const value = this.getValueFromItem(item, column.dataValueKey, column);
+    doesFilterMatchData(filter, row, column) {
+        const value = this.getCellValue(row, column.dataValueKey, column);
         return value && value.toUpperCase && value.toUpperCase().indexOf(filter) !== -1;
     }
 
-    getValueFromItem(item, valueKey, column) {
-        const value = item[valueKey] !== undefined ? item[valueKey] : item.data[valueKey];
+    getCellValue(row, column) {
+        const value = row[column.dataValueKey] !== undefined ? row[column.dataValueKey] : row.data[column.dataValueKey];
         return this.applyDataAdapter(value, column);
     }
 
     applyDataAdapter(value, column) {
-
         if (column.dataAdapter) {
-            if (column.dataAdapter === 'localDateAdapter') {
-                var date = new Date(value);
-                return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
-            } else if (column.dataAdapter === 'hideValueNOAdapter') {
-                return value === 'NO' ? '' : value;
+            const dataAdapter = dataAdapters[column.dataAdapter];
+
+            if (dataAdapter) {
+                return dataAdapter(value);
             }
 
             throw new Error('Data Adapter not implemented: ' + column.dataAdapter);
         }
 
         return value;
-
     }
 
     applyFilter(filter, items, columns) {
@@ -75,11 +80,11 @@ class WorkstackAllocate extends Component {
             const filterableColumns = columns.filter(column => {
                 return column.isFilterable === true;
             });
-            const filteredItems = items.filter(item => {
-                return filterableColumns.map(column => this.doesFilterMatchData(filter, item, column)).some(matches => matches === true);
+            const filteredRows = items.filter(row => {
+                return filterableColumns.map(column => this.doesFilterMatchData(filter, row, column)).some(matches => matches === true);
             });
-            this.setState({ items: filteredItems, selectedCases: this.filterBySelected(filteredItems) });
-            updateFormData({ selected_cases: this.filterBySelected(filteredItems) });
+            this.setState({ items: filteredRows, selectedCases: this.filterBySelected(filteredRows) });
+            updateFormData({ selected_cases: this.filterBySelected(filteredRows) });
         } else {
             this.setState({ items, selectedCases });
         }
@@ -149,7 +154,18 @@ class WorkstackAllocate extends Component {
     }
 
     renderHeader(column) {
-        return <th onClick={() => this.setSort(column.displayName)} key={column.displayName} className={classNames(column.headerClassName, 'govuk-link')}>{column.displayName}</th>;
+        const { column: sortColumn, direction } = this.state.sort;
+        const sorted = sortColumn === column;
+        return (
+            <th onClick={() => this.setSort(column)}
+                key={column.displayName}
+                className={classNames(column.headerClassName, 'govuk-link', {
+                    'sorted-ascending': sorted && direction === DirectionEnum.ASCENDING,
+                    'sorted-descending': sorted && direction === DirectionEnum.DESCENDING
+                })}>
+                {column.displayName}
+            </th>
+        );
     }
 
     renderRow(item, columns) {
@@ -188,15 +204,15 @@ class WorkstackAllocate extends Component {
         );
     }
 
-    renderDataCell(column, item) {
+    renderDataCell(column, row) {
 
-        const value = this.getValueFromItem(item, column.dataValueKey, column);
+        const value = this.getCellValue(row, column);
         if (column.renderer && column.renderer === 'caseLink') {
-            return <td key={item.uuid + column.dataValueKey} className='govuk-table__cell'>
-                <Link to={`/case/${item.caseUUID}/stage/${item.uuid}`} className='govuk-link govuk-!-margin-right-3'>{value}</Link>
+            return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>
+                <Link to={`/case/${row.caseUUID}/stage/${row.uuid}`} className='govuk-link govuk-!-margin-right-3'>{value}</Link>
             </td>;
         }
-        return <td key={item.uuid + column.dataValueKey} className='govuk-table__cell'>{value}</td>;
+        return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>{value}</td>;
 
     }
 
@@ -208,6 +224,18 @@ class WorkstackAllocate extends Component {
                 <Submit label='Allocate' />
             </Fragment>
         );
+    }
+
+    compareRows(a, b) {
+        const { column: sortColumn } = this.state.sort;
+        const aValue = sortColumn ? this.getCellValue(a, sortColumn) || '' : a.index;
+        const bValue = sortColumn ? this.getCellValue(b, sortColumn) || '' : b.index;
+        if (aValue > bValue) {
+            return 1 * this.state.sort.direction;
+        } else if (aValue < bValue) {
+            return -1 * this.state.sort.direction;
+        }
+        return 0;
     }
 
     render() {
@@ -236,7 +264,10 @@ class WorkstackAllocate extends Component {
                                                     </tr>
                                                 </thead>
                                                 <tbody className='govuk-table__body'>
-                                                    {items && items.map(item => this.renderRow(item, columns))}
+                                                    {items && items
+                                                        .map((item, index) => ({ ...item, index }))
+                                                        .sort(this.compareRows.bind(this))
+                                                        .map(item => this.renderRow(item, columns))}
                                                 </tbody>
                                             </table>
                                             <span className='govuk-hint' aria-live='polite'>
