@@ -50,7 +50,7 @@ class WorkstackAllocate extends Component {
     }
 
     doesFilterMatchData(filter, row, column) {
-        const value = this.getCellValue(row, column.dataValueKey, column);
+        const value = this.getCellValue(row, column);
         return value && value.toUpperCase && value.toUpperCase().indexOf(filter) !== -1;
     }
 
