@@ -195,7 +195,7 @@ class WorkstackAllocate extends Component {
                                 onChange={handleChange.bind(this)}
                                 className={'govuk-checkboxes__input'}
                             />
-                            <label className='govuk-label govuk-checkboxes__label' htmlFor={item.caseUUID}></label>
+                            <label className='govuk-label govuk-checkboxes__label' htmlFor={`selected_cases_${item.caseUUID}`}></label>
                         </div>
                     </div>
                 </td>}

@@ -4,6 +4,12 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 describe('Workstack component', () => {
 
+    const arraySortSpy = jest.spyOn(Array.prototype, 'sort');
+
+    beforeEach(() => {
+        arraySortSpy.mockClear();
+    });
+
     const MOCK_TRACK = jest.fn();
     const MOCK_SUBMIT_HANDLER = jest.fn();
     const MOCK_UPDATE_FORM_DATA = jest.fn();
@@ -60,4 +66,30 @@ describe('Workstack component', () => {
         expect(WRAPPER).toMatchSnapshot();
     });
 
+    it('should sort when the column heading is clicked', () => {
+
+        const OUTER = shallow(<WrappedWorkstackAllocate {...DEFAULT_PROPS} />);
+        const WorkstackAllocate = OUTER.props().children;
+        const WRAPPER = mount(<Router><WorkstackAllocate track={MOCK_TRACK} /></Router>);
+
+        const links = WRAPPER.find('th.govuk-link');
+        expect(links).toHaveLength(7);
+        links.first().simulate('click');
+        expect(arraySortSpy).toHaveBeenCalledTimes(3);
+        expect(WRAPPER).toMatchSnapshot();
+    });
+
+    it('should sort descending when the column heading is clicked twice', () => {
+
+        const OUTER = shallow(<WrappedWorkstackAllocate {...DEFAULT_PROPS} />);
+        const WorkstackAllocate = OUTER.props().children;
+        const WRAPPER = mount(<Router><WorkstackAllocate track={MOCK_TRACK} /></Router>);
+
+        const links = WRAPPER.find('th.govuk-link');
+        expect(links).toHaveLength(7);
+        links.first().simulate('click');
+        links.first().simulate('click');
+        expect(arraySortSpy).toHaveBeenCalledTimes(4);
+        expect(WRAPPER).toMatchSnapshot();
+    });
 });
