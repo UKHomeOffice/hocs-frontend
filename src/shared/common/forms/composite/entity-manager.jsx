@@ -7,21 +7,20 @@ class EntityManager extends Component {
     constructor(props) {
         super(props);
     }
-    render() {
+
+    renderTable(choices, label) {
         const {
             baseUrl,
-            choices,
             entity,
-            hasAddLink,
-            hasRemoveLink,
             hasDownloadLink,
-            hasTemplateLink,
-            label
+            hasRemoveLink,
+            hasTemplateLink
         } = this.props;
+
         return (
-            <Fragment>
+            <>
+                {label && <h2 className='govuk-heading-m'>{label}</h2>}
                 <table className='govuk-table'>
-                    {label && <caption className='govuk-table__caption'>{label}</caption>}
                     <tbody className='govuk-table__body'>
                         {Array.isArray(choices) && choices.map((choice, i) => {
                             return (
@@ -47,9 +46,28 @@ class EntityManager extends Component {
                                 </tr>
                             );
                         })}
-                        {choices.length === 0 && <p className='govuk-body'>None</p>}
+                        {choices.length === 0 && <tr className='govuk-table__row'>
+                            <td className='govuk-table__cell'>None</td>
+                        </tr>
+                        }
                     </tbody>
                 </table>
+            </>
+        );
+    }
+
+    render() {
+        const {
+            baseUrl,
+            choices,
+            entity,
+            hasAddLink,
+            isGrouped,
+            label
+        } = this.props;
+        return (
+            <Fragment>
+                {isGrouped ? choices.map(([label, choice]) => this.renderTable.bind(this)(choice, label)) : this.renderTable.bind(this)(choices, label)}
                 {hasAddLink && <Link to={`${baseUrl}/entity/${entity}/add`} className="govuk-body govuk-link">{`Add ${entity}`}</Link>}
             </Fragment>
         );
@@ -65,6 +83,7 @@ EntityManager.propTypes = {
     hasRemoveLink: PropTypes.bool,
     hasDownloadLink: PropTypes.bool,
     hasTemplateLink: PropTypes.bool,
+    isGrouped: PropTypes.bool,
     label: PropTypes.string
 };
 

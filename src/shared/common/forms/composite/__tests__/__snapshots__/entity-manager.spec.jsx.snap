@@ -2,17 +2,22 @@
 
 exports[`Entity list component should render with add link when passed in props 1`] = `
 Array [
-  <p
-    class="govuk-body"
-  >
-    None
-  </p>,
   <table
     class="govuk-table"
   >
     <tbody
       class="govuk-table__body"
-    />
+    >
+      <tr
+        class="govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell"
+        >
+          None
+        </td>
+      </tr>
+    </tbody>
   </table>,
   <a
     class="govuk-body govuk-link"
@@ -24,20 +29,23 @@ Array [
 `;
 
 exports[`Entity list component should render with additional css when passed in props 1`] = `
-Array [
-  <p
-    class="govuk-body"
+<table
+  class="govuk-table"
+>
+  <tbody
+    class="govuk-table__body"
   >
-    None
-  </p>,
-  <table
-    class="govuk-table"
-  >
-    <tbody
-      class="govuk-table__body"
-    />
-  </table>,
-]
+    <tr
+      class="govuk-table__row"
+    >
+      <td
+        class="govuk-table__cell"
+      >
+        None
+      </td>
+    </tr>
+  </tbody>
+</table>
 `;
 
 exports[`Entity list component should render with created date when passed in props on choice entries 1`] = `
@@ -80,20 +88,23 @@ exports[`Entity list component should render with created date when passed in pr
 `;
 
 exports[`Entity list component should render with default props 1`] = `
-Array [
-  <p
-    class="govuk-body"
+<table
+  class="govuk-table"
+>
+  <tbody
+    class="govuk-table__body"
   >
-    None
-  </p>,
-  <table
-    class="govuk-table"
-  >
-    <tbody
-      class="govuk-table__body"
-    />
-  </table>,
-]
+    <tr
+      class="govuk-table__row"
+    >
+      <td
+        class="govuk-table__cell"
+      >
+        None
+      </td>
+    </tr>
+  </tbody>
+</table>
 `;
 
 exports[`Entity list component should render with download link when passed in props 1`] = `
@@ -200,22 +211,27 @@ exports[`Entity list component should render with download link when passed in p
 
 exports[`Entity list component should render with label when passed in props 1`] = `
 Array [
-  <p
-    class="govuk-body"
+  <h2
+    class="govuk-heading-m"
   >
-    None
-  </p>,
+    Test entity manager
+  </h2>,
   <table
     class="govuk-table"
   >
-    <caption
-      class="govuk-table__caption"
-    >
-      Test entity manager
-    </caption>
     <tbody
       class="govuk-table__body"
-    />
+    >
+      <tr
+        class="govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell"
+        >
+          None
+        </td>
+      </tr>
+    </tbody>
   </table>,
 ]
 `;
