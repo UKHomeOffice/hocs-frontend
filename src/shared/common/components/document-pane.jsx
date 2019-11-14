@@ -49,9 +49,14 @@ class DocumentPanel extends Component {
                             dispatch(updateApiStatus(status.REQUEST_DOCUMENT_LIST_SUCCESS))
                                 .then(() => dispatch(clearApiStatus()))
                                 .then(() => {
-                                    this.setState({
-                                        documents: response.data,
-                                        activeDocument: this.state.activeDocument || response.data[0] ? response.data[0].value : null
+                                    this.setState((currentState) => {
+                                        const firstDocument = Array.isArray(response.data) &&
+                                            response.data.reduce((allDocs, [, groupDocs]) => [...allDocs, ...Array.isArray(groupDocs) && groupDocs.map(doc => doc.value)], [])[0];
+                                        return {
+                                            ...currentState,
+                                            documents: response.data,
+                                            activeDocument: currentState.activeDocument || firstDocument
+                                        };
                                     });
                                     if (!this.hasPendingDocuments(response.data)) {
                                         // TODO: Remove

@@ -18,7 +18,7 @@ class EntityManager extends Component {
         } = this.props;
 
         return (
-            <>
+            <Fragment key={label}>
                 {label && <h2 className='govuk-heading-m'>{label}</h2>}
                 <table className='govuk-table'>
                     <tbody className='govuk-table__body'>
@@ -52,7 +52,7 @@ class EntityManager extends Component {
                         }
                     </tbody>
                 </table>
-            </>
+            </Fragment>
         );
     }
 
@@ -76,7 +76,7 @@ class EntityManager extends Component {
 
 EntityManager.propTypes = {
     baseUrl: PropTypes.string.isRequired,
-    choices: PropTypes.arrayOf(PropTypes.object),
+    choices: PropTypes.array,
     className: PropTypes.string,
     entity: PropTypes.string.isRequired,
     hasAddLink: PropTypes.bool,
