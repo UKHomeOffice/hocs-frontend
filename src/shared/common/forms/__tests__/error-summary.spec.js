@@ -40,6 +40,7 @@ describe('Form text component', () => {
     });
 
     it('expect scrollIntoView to be called', async () => {
+        expect.assertions(2);
         const wrapper = shallow(<ErrorSummary description="Displaying a list of the errors on the page" />);
         const instance = wrapper.instance();
 

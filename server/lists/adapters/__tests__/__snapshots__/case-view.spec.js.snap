@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Case-view Adapter should build a schema from the provided template 1`] = `
+exports[`Case-view Adapter should build a schema from the provided template and have sections in alphabetical order 1`] = `
 Object {
   "data": Object {
     "my_date_field": "19/01/2020",
@@ -43,6 +43,48 @@ Object {
                 },
               ],
               "title": "STAGE_NAME",
+            },
+            Object {
+              "items": Array [
+                Object {
+                  "component": "display",
+                  "props": Object {
+                    "label": "My Field",
+                    "name": "my_field",
+                  },
+                  "validation": Array [],
+                },
+                Object {
+                  "component": "display",
+                  "props": Object {
+                    "label": "My Date Field",
+                    "name": "my_date_field",
+                  },
+                  "validation": Array [],
+                },
+              ],
+              "title": "STAGE_NAME1",
+            },
+            Object {
+              "items": Array [
+                Object {
+                  "component": "display",
+                  "props": Object {
+                    "label": "My Field",
+                    "name": "my_field",
+                  },
+                  "validation": Array [],
+                },
+                Object {
+                  "component": "display",
+                  "props": Object {
+                    "label": "My Date Field",
+                    "name": "my_date_field",
+                  },
+                  "validation": Array [],
+                },
+              ],
+              "title": "STAGE_NAME2",
             },
           ],
         },

@@ -5,7 +5,7 @@ import { formComponentFactory } from './form-repository.jsx';
 const getComponentFactoryInstance = (factory, options) => ({ component, props }, key) => factory(component, { key, config: props, ...options });
 
 const createSection = (data) => {
-    function Section({ title, items }, i) {
+    function Section({ title, items }, index) {
         const createComponent = getComponentFactoryInstance(formComponentFactory, { data, errors: {}, meta: {}, callback: () => { }, baseUrl: '/' });
         const [isVisible, setVisible] = useState(true);
 
@@ -17,16 +17,16 @@ const createSection = (data) => {
         };
 
         return (
-            <div key={i} className={isVisible ? 'govuk-accordion__section govuk-accordion__section--expanded' : 'govuk-accordion__section'}>
+            <div key={index} className={isVisible ? 'govuk-accordion__section govuk-accordion__section--expanded' : 'govuk-accordion__section'}>
                 <div className='govuk-accordion__section-header' onClick={clickHandler}>
                     <h2 className='govuk-accordion__section-heading'>
-                        <button type='button' className='govuk-accordion__section-button' id={`accordion-default-heading-${i}`}>
+                        <button type='button' className='govuk-accordion__section-button' id={`accordion-default-heading-${index}`}>
                             {title}
                         </button>
                     </h2>
                     <span className='govuk-accordion__icon' aria-hidden='true'></span>
                 </div>
-                <div id={`accordion-default-content-${i}`} className='govuk-accordion__section-content' aria-labelledby={`accordion-default-heading-${i}`}>
+                <div id={`accordion-default-content-${index}`} className='govuk-accordion__section-content' aria-labelledby={`accordion-default-heading-${index}`}>
                     {Array.isArray(items) && items.map(createComponent)}
                 </div>
             </div>
@@ -34,7 +34,7 @@ const createSection = (data) => {
     }
     Section.propTypes = {
         title: PropTypes.string.isRequired,
-        items: PropTypes.array.isRequired
+        items: PropTypes.array.isRequired,
     };
     return Section;
 };
