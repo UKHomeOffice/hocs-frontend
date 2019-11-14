@@ -1,12 +1,5 @@
-module.exports = async (data, { logger }) => {
+module.exports = async (data, { configuration, logger }) => {
     logger.debug('REQUEST_CASE_DOCUMENTS', { documents: data.documents.length });
-
-    const tags = [
-        'Claimant form',
-        'Supporting evidence',
-        'Matrix',
-        'Outbound letter'
-    ];
 
     const reduceDocumentsByType = (groups, document) => {
         const group = groups.get(document.type);
@@ -23,5 +16,5 @@ module.exports = async (data, { logger }) => {
             status,
             type
         }))
-        .reduce(reduceDocumentsByType, new Map(tags.map(tag => [tag, []])))];
+        .reduce(reduceDocumentsByType, new Map(configuration.documentLabels.map(label => [label, []])))];
 };

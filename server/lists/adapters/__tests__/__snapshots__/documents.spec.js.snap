@@ -3,19 +3,38 @@
 exports[`Documents Adapter should transform document data and sort by creation date 1`] = `
 Array [
   Array [
-    "Claimant form",
-    Array [],
+    "type1",
+    Array [
+      Object {
+        "label": "Document B",
+        "status": undefined,
+        "timeStamp": "01-01-2019",
+        "type": "type1",
+        "value": 2,
+      },
+      Object {
+        "label": "Document A",
+        "status": undefined,
+        "timeStamp": "02-01-2019",
+        "type": "type1",
+        "value": 1,
+      },
+    ],
   ],
   Array [
-    "Supporting evidence",
-    Array [],
+    "type2",
+    Array [
+      Object {
+        "label": "Document C",
+        "status": undefined,
+        "timeStamp": "03-01-2019",
+        "type": "type2",
+        "value": 3,
+      },
+    ],
   ],
   Array [
-    "Matrix",
-    Array [],
-  ],
-  Array [
-    "Outbound letter",
+    "type3",
     Array [],
   ],
 ]
