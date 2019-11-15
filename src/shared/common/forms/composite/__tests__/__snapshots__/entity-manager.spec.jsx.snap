@@ -209,6 +209,109 @@ exports[`Entity list component should render with download link when passed in p
 </table>
 `;
 
+exports[`Entity list component should render with grouped documents\` 1`] = `
+Array [
+  <h2
+    class="govuk-heading-m"
+  >
+    group1
+  </h2>,
+  <table
+    class="govuk-table"
+  >
+    <tbody
+      class="govuk-table__body"
+    >
+      <tr
+        class="govuk-radios govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell"
+        >
+          <strong
+            class="govuk-tag margin-right--small"
+          >
+            A
+          </strong>
+        </td>
+        <td
+          class="govuk-table__cell govuk-!-width-full"
+        >
+          Choice A
+        </td>
+      </tr>
+      <tr
+        class="govuk-radios govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell"
+        >
+          <strong
+            class="govuk-tag margin-right--small"
+          >
+            B
+          </strong>
+        </td>
+        <td
+          class="govuk-table__cell govuk-!-width-full"
+        >
+          Choice B
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+  <h2
+    class="govuk-heading-m"
+  >
+    group2
+  </h2>,
+  <table
+    class="govuk-table"
+  >
+    <tbody
+      class="govuk-table__body"
+    >
+      <tr
+        class="govuk-radios govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell"
+        >
+          <strong
+            class="govuk-tag margin-right--small"
+          >
+            C
+          </strong>
+        </td>
+        <td
+          class="govuk-table__cell govuk-!-width-full"
+        >
+          Choice C
+        </td>
+      </tr>
+      <tr
+        class="govuk-radios govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell"
+        >
+          <strong
+            class="govuk-tag margin-right--small"
+          >
+            D
+          </strong>
+        </td>
+        <td
+          class="govuk-table__cell govuk-!-width-full"
+        >
+          Choice D
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+]
+`;
+
 exports[`Entity list component should render with label when passed in props 1`] = `
 Array [
   <h2
