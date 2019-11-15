@@ -28,7 +28,7 @@ class EntityManager extends Component {
                                     {choice.tags && <td className='govuk-table__cell' >
                                         {choice.tags.map((tag, i) => <strong key={i} className='govuk-tag margin-right--small'>{tag}</strong>)}
                                     </td>}
-                                    <td className='govuk-table__cell govuk-!-width-one-half'>
+                                    <td className='govuk-table__cell govuk-!-width-full'>
                                         {choice.label}
                                     </td>
                                     {choice.created && <td className='govuk-table__cell'>

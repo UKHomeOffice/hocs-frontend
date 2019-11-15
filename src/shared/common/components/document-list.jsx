@@ -32,7 +32,7 @@ class DocumentList extends Component {
                                                 )}
                                             </td>
                                             }
-                                            <td className='govuk-table__cell govuk-!-width-one-half'>
+                                            <td className='govuk-table__cell govuk-!-width-full'>
                                                 {label}
                                             </td>
                                             <td className='govuk-table__cell'>

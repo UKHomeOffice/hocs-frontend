@@ -59,7 +59,7 @@ exports[`Entity list component should render with created date when passed in pr
       class="govuk-radios govuk-table__row"
     >
       <td
-        class="govuk-table__cell govuk-!-width-one-half"
+        class="govuk-table__cell govuk-!-width-full"
       >
         Choice A
       </td>
@@ -73,7 +73,7 @@ exports[`Entity list component should render with created date when passed in pr
       class="govuk-radios govuk-table__row"
     >
       <td
-        class="govuk-table__cell govuk-!-width-one-half"
+        class="govuk-table__cell govuk-!-width-full"
       >
         Choice B
       </td>
@@ -118,7 +118,7 @@ exports[`Entity list component should render with download link when passed in p
       class="govuk-radios govuk-table__row"
     >
       <td
-        class="govuk-table__cell govuk-!-width-one-half"
+        class="govuk-table__cell govuk-!-width-full"
       >
         Choice A
       </td>
@@ -138,7 +138,7 @@ exports[`Entity list component should render with download link when passed in p
       class="govuk-radios govuk-table__row"
     >
       <td
-        class="govuk-table__cell govuk-!-width-one-half"
+        class="govuk-table__cell govuk-!-width-full"
       >
         Choice B
       </td>
@@ -169,7 +169,7 @@ exports[`Entity list component should render with download link when passed in p
       class="govuk-radios govuk-table__row"
     >
       <td
-        class="govuk-table__cell govuk-!-width-one-half"
+        class="govuk-table__cell govuk-!-width-full"
       >
         Choice A
       </td>
@@ -189,7 +189,7 @@ exports[`Entity list component should render with download link when passed in p
       class="govuk-radios govuk-table__row"
     >
       <td
-        class="govuk-table__cell govuk-!-width-one-half"
+        class="govuk-table__cell govuk-!-width-full"
       >
         Choice B
       </td>
@@ -247,7 +247,7 @@ exports[`Entity list component should render with remove link when passed in pro
       class="govuk-radios govuk-table__row"
     >
       <td
-        class="govuk-table__cell govuk-!-width-one-half"
+        class="govuk-table__cell govuk-!-width-full"
       >
         Choice A
       </td>
@@ -266,7 +266,7 @@ exports[`Entity list component should render with remove link when passed in pro
       class="govuk-radios govuk-table__row"
     >
       <td
-        class="govuk-table__cell govuk-!-width-one-half"
+        class="govuk-table__cell govuk-!-width-full"
       >
         Choice B
       </td>
@@ -305,7 +305,7 @@ exports[`Entity list component should render with tags when passed in props on c
         </strong>
       </td>
       <td
-        class="govuk-table__cell govuk-!-width-one-half"
+        class="govuk-table__cell govuk-!-width-full"
       >
         Choice A
       </td>
@@ -323,7 +323,7 @@ exports[`Entity list component should render with tags when passed in props on c
         </strong>
       </td>
       <td
-        class="govuk-table__cell govuk-!-width-one-half"
+        class="govuk-table__cell govuk-!-width-full"
       >
         Choice B
       </td>
