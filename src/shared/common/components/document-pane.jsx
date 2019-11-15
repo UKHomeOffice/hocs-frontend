@@ -35,6 +35,10 @@ class DocumentPanel extends Component {
         return documents.some(d => d.status === 'PENDING');
     }
 
+    flattenDocuments(documents) {
+        return Array.isArray(documents) && documents.flatMap(([, groupDocs]) => groupDocs);
+    }
+
     updateDocuments() {
         const { dispatch } = this.props;
         const { page } = this.state;
@@ -49,16 +53,13 @@ class DocumentPanel extends Component {
                             dispatch(updateApiStatus(status.REQUEST_DOCUMENT_LIST_SUCCESS))
                                 .then(() => dispatch(clearApiStatus()))
                                 .then(() => {
-                                    this.setState((currentState) => {
-                                        const firstDocument = Array.isArray(response.data) &&
-                                            response.data.reduce((allDocs, [, groupDocs]) => [...allDocs, ...Array.isArray(groupDocs) && groupDocs.map(doc => doc.value)], [])[0];
-                                        return {
-                                            ...currentState,
-                                            documents: response.data,
-                                            activeDocument: currentState.activeDocument || firstDocument
-                                        };
-                                    });
-                                    if (!this.hasPendingDocuments(response.data)) {
+                                    const allDocuments = this.flattenDocuments(response.data);
+                                    this.setState((currentState) => ({
+                                        ...currentState,
+                                        documents: response.data,
+                                        activeDocument: currentState.activeDocument || allDocuments[0].value
+                                    }));
+                                    if (!this.hasPendingDocuments(allDocuments)) {
                                         // TODO: Remove
                                         /* eslint-disable-next-line  no-console*/
                                         console.log('No documents pending conversion, clearing interval');
