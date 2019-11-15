@@ -47,6 +47,9 @@ describe('Document list component', () => {
         const wrapper = render(<DocumentList caseId={'MOCK_CASE_ID'} clickHandler={() => { }} documents={emptyDocumentList} />);
         expect(wrapper).toBeDefined();
         expect(wrapper).toMatchSnapshot();
-        expect(wrapper.find('td[children="None"]'));
+        const cells = wrapper.find('td');
+        expect(cells).toHaveLength(2);
+        expect(cells.first().text()).toBe('None');
+        expect(cells.last().text()).toBe('None');
     });
 });

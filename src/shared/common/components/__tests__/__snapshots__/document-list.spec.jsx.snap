@@ -12,7 +12,17 @@ Array [
   >
     <tbody
       class="govuk-table__body"
-    />
+    >
+      <tr
+        class="govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell"
+        >
+          None
+        </td>
+      </tr>
+    </tbody>
   </table>,
   <h2
     class="govuk-heading-m"

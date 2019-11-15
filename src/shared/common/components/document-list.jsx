@@ -61,7 +61,7 @@ class DocumentList extends Component {
                                         </tr>
                                     ))
                                 }
-                                {!Array.isArray(groupedDocuments) || groupedDocuments.length === 0 && <tr className='govuk-table__row'>
+                                {(!Array.isArray(groupedDocuments) || groupedDocuments.length === 0) && <tr className='govuk-table__row'>
                                     <td className='govuk-table__cell'>None</td>
                                 </tr>}
                             </tbody>
