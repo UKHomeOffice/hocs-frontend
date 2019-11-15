@@ -43,9 +43,6 @@ class DocumentPanel extends Component {
         const { dispatch } = this.props;
         const { page } = this.state;
         if (page && page.params && page.params.caseId) {
-            // TODO: Remove
-            /* eslint-disable-next-line  no-console*/
-            console.log(`Updating documents for case: ${page.params.caseId}`);
             return dispatch(updateApiStatus(status.REQUEST_DOCUMENT_LIST))
                 .then(() => {
                     axios.get(`/api/case/${page.params.caseId}/document`)
@@ -60,9 +57,6 @@ class DocumentPanel extends Component {
                                         activeDocument: currentState.activeDocument || allDocuments[0].value
                                     }));
                                     if (!this.hasPendingDocuments(allDocuments)) {
-                                        // TODO: Remove
-                                        /* eslint-disable-next-line  no-console*/
-                                        console.log('No documents pending conversion, clearing interval');
                                         if (this.interval) { clearInterval(this.interval); }
                                     }
                                 });
