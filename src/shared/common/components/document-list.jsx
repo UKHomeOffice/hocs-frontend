@@ -22,14 +22,17 @@ class DocumentList extends Component {
                         <table className='govuk-table'>
                             <tbody className='govuk-table__body'>
                                 {
-                                    caseId && groupedDocuments.map(({ label, value, status }, i) => (
+                                    caseId && groupedDocuments.map(({ label, status, tags, value }, i) => (
                                         <tr key={i} className='govuk-table__row'>
-                                            <td className='govuk-table__cell'>
-                                                <strong className='govuk-tag margin-right--small'>
-                                                    {status}
-                                                </strong>
+                                            {Array.isArray(tags) && <td className='govuk-table__cell govuk-!-width-one-quarter'>
+                                                {tags.map(tag =>
+                                                    <strong key={tag} className='govuk-tag margin-right--small'>
+                                                        {tag}
+                                                    </strong>
+                                                )}
                                             </td>
-                                            <td className='govuk-table__cell'>
+                                            }
+                                            <td className='govuk-table__cell govuk-!-width-one-half'>
                                                 {label}
                                             </td>
                                             <td className='govuk-table__cell'>

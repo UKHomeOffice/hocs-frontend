@@ -8,6 +8,9 @@ Array [
       Object {
         "label": "Document B",
         "status": undefined,
+        "tags": Array [
+          undefined,
+        ],
         "timeStamp": "01-01-2019",
         "type": "type1",
         "value": 2,
@@ -15,6 +18,9 @@ Array [
       Object {
         "label": "Document A",
         "status": undefined,
+        "tags": Array [
+          undefined,
+        ],
         "timeStamp": "02-01-2019",
         "type": "type1",
         "value": 1,
@@ -27,6 +33,9 @@ Array [
       Object {
         "label": "Document C",
         "status": undefined,
+        "tags": Array [
+          undefined,
+        ],
         "timeStamp": "03-01-2019",
         "type": "type2",
         "value": 3,
