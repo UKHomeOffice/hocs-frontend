@@ -1,5 +1,44 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Document list component should display None when there are no documents in a group 1`] = `
+Array [
+  <h2
+    class="govuk-heading-m"
+  >
+    group 1
+  </h2>,
+  <table
+    class="govuk-table"
+  >
+    <tbody
+      class="govuk-table__body"
+    />
+  </table>,
+  <h2
+    class="govuk-heading-m"
+  >
+    group 2
+  </h2>,
+  <table
+    class="govuk-table"
+  >
+    <tbody
+      class="govuk-table__body"
+    >
+      <tr
+        class="govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell"
+        >
+          None
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+]
+`;
+
 exports[`Document list component should render with a document list when provided in props 1`] = `
 Array [
   <h2
@@ -16,6 +55,15 @@ Array [
       <tr
         class="govuk-table__row"
       >
+        <td
+          class="govuk-table__cell govuk-!-width-one-quarter"
+        >
+          <strong
+            class="govuk-tag margin-right--small"
+          >
+            UPLOADED
+          </strong>
+        </td>
         <td
           class="govuk-table__cell govuk-!-width-full"
         >
@@ -48,6 +96,15 @@ Array [
         class="govuk-table__row"
       >
         <td
+          class="govuk-table__cell govuk-!-width-one-quarter"
+        >
+          <strong
+            class="govuk-tag margin-right--small"
+          >
+            UPLOADED
+          </strong>
+        </td>
+        <td
           class="govuk-table__cell govuk-!-width-full"
         >
           TEST_DOCUMENT_2
@@ -79,6 +136,15 @@ Array [
         class="govuk-table__row"
       >
         <td
+          class="govuk-table__cell govuk-!-width-one-quarter"
+        >
+          <strong
+            class="govuk-tag margin-right--small"
+          >
+            PENDING
+          </strong>
+        </td>
+        <td
           class="govuk-table__cell govuk-!-width-full"
         >
           TEST_DOCUMENT_3
@@ -106,6 +172,15 @@ Array [
       <tr
         class="govuk-table__row"
       >
+        <td
+          class="govuk-table__cell govuk-!-width-one-quarter"
+        >
+          <strong
+            class="govuk-tag margin-right--small"
+          >
+            UPLOADED
+          </strong>
+        </td>
         <td
           class="govuk-table__cell govuk-!-width-full"
         >
@@ -138,6 +213,15 @@ Array [
         class="govuk-table__row"
       >
         <td
+          class="govuk-table__cell govuk-!-width-one-quarter"
+        >
+          <strong
+            class="govuk-tag margin-right--small"
+          >
+            UPLOADED
+          </strong>
+        </td>
+        <td
           class="govuk-table__cell govuk-!-width-full"
         >
           TEST_DOCUMENT_5
@@ -168,6 +252,15 @@ Array [
       <tr
         class="govuk-table__row"
       >
+        <td
+          class="govuk-table__cell govuk-!-width-one-quarter"
+        >
+          <strong
+            class="govuk-tag margin-right--small"
+          >
+            UPLOADED
+          </strong>
+        </td>
         <td
           class="govuk-table__cell govuk-!-width-full"
         >
@@ -213,6 +306,15 @@ Array [
         class="govuk-table__row"
       >
         <td
+          class="govuk-table__cell govuk-!-width-one-quarter"
+        >
+          <strong
+            class="govuk-tag margin-right--small"
+          >
+            UPLOADED
+          </strong>
+        </td>
+        <td
           class="govuk-table__cell govuk-!-width-full"
         >
           TEST_DOCUMENT_7
@@ -244,6 +346,15 @@ Array [
         class="govuk-table__row"
       >
         <td
+          class="govuk-table__cell govuk-!-width-one-quarter"
+        >
+          <strong
+            class="govuk-tag margin-right--small"
+          >
+            PENDING
+          </strong>
+        </td>
+        <td
           class="govuk-table__cell govuk-!-width-full"
         >
           TEST_DOCUMENT_8
@@ -258,6 +369,15 @@ Array [
       <tr
         class="govuk-table__row"
       >
+        <td
+          class="govuk-table__cell govuk-!-width-one-quarter"
+        >
+          <strong
+            class="govuk-tag margin-right--small"
+          >
+            PENDING
+          </strong>
+        </td>
         <td
           class="govuk-table__cell govuk-!-width-full"
         >

@@ -5,17 +5,17 @@ describe('Document list component', () => {
 
     const documentList = [
         ['group 1', [
-            { label: 'TEST_DOCUMENT_1', value: 'MOCK_DOC_ID_1', status: 'UPLOADED' },
-            { label: 'TEST_DOCUMENT_2', value: 'MOCK_DOC_ID_2', status: 'UPLOADED' },
-            { label: 'TEST_DOCUMENT_3', value: 'MOCK_DOC_ID_3', status: 'PENDING' },
+            { label: 'TEST_DOCUMENT_1', value: 'MOCK_DOC_ID_1', status: 'UPLOADED', tags: ['UPLOADED'] },
+            { label: 'TEST_DOCUMENT_2', value: 'MOCK_DOC_ID_2', status: 'UPLOADED', tags: ['UPLOADED'] },
+            { label: 'TEST_DOCUMENT_3', value: 'MOCK_DOC_ID_3', status: 'PENDING', tags: ['PENDING'] },
         ]], ['group 2', [
-            { label: 'TEST_DOCUMENT_4', value: 'MOCK_DOC_ID_4', status: 'UPLOADED' },
-            { label: 'TEST_DOCUMENT_5', value: 'MOCK_DOC_ID_5', status: 'UPLOADED' },
-            { label: 'TEST_DOCUMENT_6', value: 'MOCK_DOC_ID_6', status: 'UPLOADED' },
+            { label: 'TEST_DOCUMENT_4', value: 'MOCK_DOC_ID_4', status: 'UPLOADED', tags: ['UPLOADED'] },
+            { label: 'TEST_DOCUMENT_5', value: 'MOCK_DOC_ID_5', status: 'UPLOADED', tags: ['UPLOADED'] },
+            { label: 'TEST_DOCUMENT_6', value: 'MOCK_DOC_ID_6', status: 'UPLOADED', tags: ['UPLOADED'] },
         ]], ['group 3', [
-            { label: 'TEST_DOCUMENT_7', value: 'MOCK_DOC_ID_7', status: 'UPLOADED' },
-            { label: 'TEST_DOCUMENT_8', value: 'MOCK_DOC_ID_8', status: 'PENDING' },
-            { label: 'TEST_DOCUMENT_9', value: 'MOCK_DOC_ID_9', status: 'PENDING' },
+            { label: 'TEST_DOCUMENT_7', value: 'MOCK_DOC_ID_7', status: 'UPLOADED', tags: ['UPLOADED'] },
+            { label: 'TEST_DOCUMENT_8', value: 'MOCK_DOC_ID_8', status: 'PENDING', tags: ['PENDING'] },
+            { label: 'TEST_DOCUMENT_9', value: 'MOCK_DOC_ID_9', status: 'PENDING', tags: ['PENDING'] },
         ]]
     ];
 
@@ -39,4 +39,14 @@ describe('Document list component', () => {
         expect(mockClickHandler).toHaveBeenCalled();
     });
 
+    it('should display None when there are no documents in a group', () => {
+        const emptyDocumentList = [
+            ['group 1'], ['group 2', []]
+        ];
+
+        const wrapper = render(<DocumentList caseId={'MOCK_CASE_ID'} clickHandler={() => { }} documents={emptyDocumentList} />);
+        expect(wrapper).toBeDefined();
+        expect(wrapper).toMatchSnapshot();
+        expect(wrapper.find('td[children="None"]'));
+    });
 });

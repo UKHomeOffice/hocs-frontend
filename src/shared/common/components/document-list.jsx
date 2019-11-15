@@ -16,13 +16,13 @@ class DocumentList extends Component {
         const { activeDocument, caseId, stageId, documents } = this.props;
         return (
             <>
-                {documents.map(([groupName, groupedDocuments]) => (
+                {Array.isArray(documents) && documents.map(([groupName, groupedDocuments]) => (
                     <Fragment key={groupName}>
                         <h2 className='govuk-heading-m'>{groupName}</h2>
                         <table className='govuk-table'>
                             <tbody className='govuk-table__body'>
                                 {
-                                    caseId && groupedDocuments.map(({ label, status, tags, value }, i) => (
+                                    caseId && Array.isArray(groupedDocuments) && groupedDocuments.map(({ label, status, tags, value }, i) => (
                                         <tr key={i} className='govuk-table__row'>
                                             {Array.isArray(tags) && <td className='govuk-table__cell govuk-!-width-one-quarter'>
                                                 {tags.map(tag =>
@@ -61,7 +61,7 @@ class DocumentList extends Component {
                                         </tr>
                                     ))
                                 }
-                                {groupedDocuments.length === 0 && <tr className='govuk-table__row'>
+                                {!Array.isArray(groupedDocuments) || groupedDocuments.length === 0 && <tr className='govuk-table__row'>
                                     <td className='govuk-table__cell'>None</td>
                                 </tr>}
                             </tbody>
