@@ -24,6 +24,21 @@ describe('Validators', () => {
         });
     });
 
+    describe('Numeric validator', () => {
+        it('should reject symbols', () => {
+            expect(validators.numeric({ label: 'test', value: '!@£$' })).toEqual('test must be numeric');
+        });
+        it('should reject alpha', () => {
+            expect(validators.numeric({ label: 'test', value: 'data' })).toEqual('test must be numeric');
+        });
+        it('should reject alphanumeric', () => {
+            expect(validators.numeric({ label: 'test', value: 'a1b2' })).toEqual('test must be numeric');
+        });
+        it('should accept numeric only', () => {
+            expect(validators.numeric({ label: 'test', value: '1234' })).toEqual(null);
+        });
+    });
+
     describe('Valid date validator', () => {
         it('should reject not-real dates', () => {
             expect(validators.isValidDate({ value: '2011-02-33' })).not.toEqual(null);
