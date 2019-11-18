@@ -113,7 +113,6 @@ function withForm(Page) {
                                         dispatch(updateApiStatus(status.SUBMIT_FORM_VALIDATION_ERROR))
                                             .then(() => this.setState({ form_errors: res.data.errors }))
                                             .then(() => track('EVENT', { category: form_schema.title, action: 'Submit', label: 'Validation Error' }));
-
                                     } else {
                                         if (res.data.confirmation) {
                                             this.setState({ confirmation: res.data.confirmation });
