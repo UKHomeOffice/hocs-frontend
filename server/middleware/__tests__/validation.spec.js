@@ -26,16 +26,31 @@ describe('Validators', () => {
 
     describe('Alphanumeric validator', () => {
         it('should reject symbols', () => {
-            expect(validators.alphanumeric({ value: '!@£$' })).not.toEqual(null);
+            expect(validators.alphanumeric({  label: 'test',value: '!@£$' })).toEqual('test must be alphanumeric');
         });
         it('should accept alpha only', () => {
-            expect(validators.alphanumeric({ value: 'data' })).toEqual(null);
+            expect(validators.alphanumeric({  label: 'test',value: 'Data' })).toEqual(null);
         });
         it('should accept numeric only', () => {
-            expect(validators.alphanumeric({ value: '1234' })).toEqual(null);
+            expect(validators.alphanumeric({  label: 'test',value: '1234' })).toEqual(null);
         });
         it('should accept alphanumeric', () => {
-            expect(validators.alphanumeric({ value: 'l33t' })).toEqual(null);
+            expect(validators.alphanumeric({  label: 'test',value: 'l33T' })).toEqual(null);
+        });
+    });
+
+    describe('Numeric validator', () => {
+        it('should reject symbols', () => {
+            expect(validators.numeric({ label: 'test', value: '!@£$' })).toEqual('test must be numeric');
+        });
+        it('should reject alpha', () => {
+            expect(validators.numeric({ label: 'test', value: 'data' })).toEqual('test must be numeric');
+        });
+        it('should reject alphanumeric', () => {
+            expect(validators.numeric({ label: 'test', value: 'a1b2' })).toEqual('test must be numeric');
+        });
+        it('should accept numeric only', () => {
+            expect(validators.numeric({ label: 'test', value: '1234' })).toEqual(null);
         });
     });
 
