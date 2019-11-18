@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Submit from './submit.jsx';
 import ErrorSummary from './error-summary.jsx';
@@ -23,14 +23,14 @@ class Form extends Component {
             schema
         } = this.props;
         return (
-            <Fragment>
+            <>
                 {meta && meta.allocationNote &&
                     <Ribbon title={meta.allocationNote.type}>
                         <p>{meta.allocationNote.message}</p>
                     </Ribbon>
                 }
                 {errors && <ErrorSummary errors={errors} />}
-                < form
+                <form
                     action={action}
                     method={method}
                     onSubmit={this.props.submitHandler}
@@ -62,8 +62,8 @@ class Form extends Component {
                             });
                         })
                     }
-                </form >
-            </Fragment >
+                </form>
+            </>
         );
     }
 }

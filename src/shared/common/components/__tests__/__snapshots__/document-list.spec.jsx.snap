@@ -1,134 +1,408 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Document list component should render with a document list when provided in props 1`] = `
-<table
-  class="govuk-table"
->
-  <caption
-    class="govuk-table__caption"
+exports[`Document list component should display None when there are no documents in a group 1`] = `
+Array [
+  <h2
+    class="govuk-heading-m"
   >
-    Documents
-  </caption>
-  <tbody
-    class="govuk-table__body"
+    group 1
+  </h2>,
+  <table
+    class="govuk-table"
   >
-    <tr
-      class="govuk-table__row"
+    <tbody
+      class="govuk-table__body"
     >
-      <td
-        class="govuk-table__cell"
-      />
-      <td
-        class="govuk-table__cell"
+      <tr
+        class="govuk-table__row"
       >
-        TEST_DOCUMENT_1
-      </td>
-      <td
-        class="govuk-table__cell"
-      >
-        <a
-          class="govuk-link"
-          href="/case/MOCK_CASE_ID/stage/undefined/download/document/MOCK_DOC_ID_1/pdf"
-          id="MOCK_DOC_ID_1-pdf"
+        <td
+          class="govuk-table__cell"
         >
-          Preview
-        </a>
-      </td>
-      <td
-        class="govuk-table__cell"
-      >
-        <a
-          class="govuk-link"
-          download="TEST_DOCUMENT_1"
-          href="/case/MOCK_CASE_ID/stage/undefined/download/document/MOCK_DOC_ID_1/original"
-        >
-          Download
-        </a>
-      </td>
-    </tr>
-    <tr
-      class="govuk-table__row"
+          None
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+  <h2
+    class="govuk-heading-m"
+  >
+    group 2
+  </h2>,
+  <table
+    class="govuk-table"
+  >
+    <tbody
+      class="govuk-table__body"
     >
-      <td
-        class="govuk-table__cell"
-      />
-      <td
-        class="govuk-table__cell"
+      <tr
+        class="govuk-table__row"
       >
-        TEST_DOCUMENT_2
-      </td>
-      <td
-        class="govuk-table__cell"
-      >
-        <a
-          class="govuk-link"
-          href="/case/MOCK_CASE_ID/stage/undefined/download/document/MOCK_DOC_ID_2/pdf"
-          id="MOCK_DOC_ID_2-pdf"
+        <td
+          class="govuk-table__cell"
         >
-          Preview
-        </a>
-      </td>
-      <td
-        class="govuk-table__cell"
-      >
-        <a
-          class="govuk-link"
-          download="TEST_DOCUMENT_2"
-          href="/case/MOCK_CASE_ID/stage/undefined/download/document/MOCK_DOC_ID_2/original"
-        >
-          Download
-        </a>
-      </td>
-    </tr>
-    <tr
-      class="govuk-table__row"
-    >
-      <td
-        class="govuk-table__cell"
-      />
-      <td
-        class="govuk-table__cell"
-      >
-        TEST_DOCUMENT_3
-      </td>
-      <td
-        class="govuk-table__cell"
-      >
-        <a
-          class="govuk-link"
-          href="/case/MOCK_CASE_ID/stage/undefined/download/document/MOCK_DOC_ID_3/pdf"
-          id="MOCK_DOC_ID_3-pdf"
-        >
-          Preview
-        </a>
-      </td>
-      <td
-        class="govuk-table__cell"
-      >
-        <a
-          class="govuk-link"
-          download="TEST_DOCUMENT_3"
-          href="/case/MOCK_CASE_ID/stage/undefined/download/document/MOCK_DOC_ID_3/original"
-        >
-          Download
-        </a>
-      </td>
-    </tr>
-  </tbody>
-</table>
+          None
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+]
 `;
 
-exports[`Document list component should render with default props 1`] = `
-<table
-  class="govuk-table"
->
-  <caption
-    class="govuk-table__caption"
+exports[`Document list component should render with a document list when provided in props 1`] = `
+Array [
+  <h2
+    class="govuk-heading-m"
   >
-    Documents
-  </caption>
-  <tbody
-    class="govuk-table__body"
-  />
-</table>
+    group 1
+  </h2>,
+  <table
+    class="govuk-table"
+  >
+    <tbody
+      class="govuk-table__body"
+    >
+      <tr
+        class="govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell govuk-!-width-one-quarter"
+        >
+          <strong
+            class="govuk-tag margin-right--small"
+          >
+            UPLOADED
+          </strong>
+        </td>
+        <td
+          class="govuk-table__cell govuk-!-width-full"
+        >
+          TEST_DOCUMENT_1
+        </td>
+        <td
+          class="govuk-table__cell"
+        >
+          <a
+            class="govuk-link"
+            href="/case/MOCK_CASE_ID/stage/undefined/download/document/MOCK_DOC_ID_1/pdf"
+            id="MOCK_DOC_ID_1-pdf"
+          >
+            Preview
+          </a>
+        </td>
+        <td
+          class="govuk-table__cell"
+        >
+          <a
+            class="govuk-link"
+            download="TEST_DOCUMENT_1"
+            href="/case/MOCK_CASE_ID/stage/undefined/download/document/MOCK_DOC_ID_1/original"
+          >
+            Download
+          </a>
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell govuk-!-width-one-quarter"
+        >
+          <strong
+            class="govuk-tag margin-right--small"
+          >
+            UPLOADED
+          </strong>
+        </td>
+        <td
+          class="govuk-table__cell govuk-!-width-full"
+        >
+          TEST_DOCUMENT_2
+        </td>
+        <td
+          class="govuk-table__cell"
+        >
+          <a
+            class="govuk-link"
+            href="/case/MOCK_CASE_ID/stage/undefined/download/document/MOCK_DOC_ID_2/pdf"
+            id="MOCK_DOC_ID_2-pdf"
+          >
+            Preview
+          </a>
+        </td>
+        <td
+          class="govuk-table__cell"
+        >
+          <a
+            class="govuk-link"
+            download="TEST_DOCUMENT_2"
+            href="/case/MOCK_CASE_ID/stage/undefined/download/document/MOCK_DOC_ID_2/original"
+          >
+            Download
+          </a>
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell govuk-!-width-one-quarter"
+        >
+          <strong
+            class="govuk-tag margin-right--small"
+          >
+            PENDING
+          </strong>
+        </td>
+        <td
+          class="govuk-table__cell govuk-!-width-full"
+        >
+          TEST_DOCUMENT_3
+        </td>
+        <td
+          class="govuk-table__cell"
+        />
+        <td
+          class="govuk-table__cell"
+        />
+      </tr>
+    </tbody>
+  </table>,
+  <h2
+    class="govuk-heading-m"
+  >
+    group 2
+  </h2>,
+  <table
+    class="govuk-table"
+  >
+    <tbody
+      class="govuk-table__body"
+    >
+      <tr
+        class="govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell govuk-!-width-one-quarter"
+        >
+          <strong
+            class="govuk-tag margin-right--small"
+          >
+            UPLOADED
+          </strong>
+        </td>
+        <td
+          class="govuk-table__cell govuk-!-width-full"
+        >
+          TEST_DOCUMENT_4
+        </td>
+        <td
+          class="govuk-table__cell"
+        >
+          <a
+            class="govuk-link"
+            href="/case/MOCK_CASE_ID/stage/undefined/download/document/MOCK_DOC_ID_4/pdf"
+            id="MOCK_DOC_ID_4-pdf"
+          >
+            Preview
+          </a>
+        </td>
+        <td
+          class="govuk-table__cell"
+        >
+          <a
+            class="govuk-link"
+            download="TEST_DOCUMENT_4"
+            href="/case/MOCK_CASE_ID/stage/undefined/download/document/MOCK_DOC_ID_4/original"
+          >
+            Download
+          </a>
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell govuk-!-width-one-quarter"
+        >
+          <strong
+            class="govuk-tag margin-right--small"
+          >
+            UPLOADED
+          </strong>
+        </td>
+        <td
+          class="govuk-table__cell govuk-!-width-full"
+        >
+          TEST_DOCUMENT_5
+        </td>
+        <td
+          class="govuk-table__cell"
+        >
+          <a
+            class="govuk-link"
+            href="/case/MOCK_CASE_ID/stage/undefined/download/document/MOCK_DOC_ID_5/pdf"
+            id="MOCK_DOC_ID_5-pdf"
+          >
+            Preview
+          </a>
+        </td>
+        <td
+          class="govuk-table__cell"
+        >
+          <a
+            class="govuk-link"
+            download="TEST_DOCUMENT_5"
+            href="/case/MOCK_CASE_ID/stage/undefined/download/document/MOCK_DOC_ID_5/original"
+          >
+            Download
+          </a>
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell govuk-!-width-one-quarter"
+        >
+          <strong
+            class="govuk-tag margin-right--small"
+          >
+            UPLOADED
+          </strong>
+        </td>
+        <td
+          class="govuk-table__cell govuk-!-width-full"
+        >
+          TEST_DOCUMENT_6
+        </td>
+        <td
+          class="govuk-table__cell"
+        >
+          <a
+            class="govuk-link"
+            href="/case/MOCK_CASE_ID/stage/undefined/download/document/MOCK_DOC_ID_6/pdf"
+            id="MOCK_DOC_ID_6-pdf"
+          >
+            Preview
+          </a>
+        </td>
+        <td
+          class="govuk-table__cell"
+        >
+          <a
+            class="govuk-link"
+            download="TEST_DOCUMENT_6"
+            href="/case/MOCK_CASE_ID/stage/undefined/download/document/MOCK_DOC_ID_6/original"
+          >
+            Download
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+  <h2
+    class="govuk-heading-m"
+  >
+    group 3
+  </h2>,
+  <table
+    class="govuk-table"
+  >
+    <tbody
+      class="govuk-table__body"
+    >
+      <tr
+        class="govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell govuk-!-width-one-quarter"
+        >
+          <strong
+            class="govuk-tag margin-right--small"
+          >
+            UPLOADED
+          </strong>
+        </td>
+        <td
+          class="govuk-table__cell govuk-!-width-full"
+        >
+          TEST_DOCUMENT_7
+        </td>
+        <td
+          class="govuk-table__cell"
+        >
+          <a
+            class="govuk-link"
+            href="/case/MOCK_CASE_ID/stage/undefined/download/document/MOCK_DOC_ID_7/pdf"
+            id="MOCK_DOC_ID_7-pdf"
+          >
+            Preview
+          </a>
+        </td>
+        <td
+          class="govuk-table__cell"
+        >
+          <a
+            class="govuk-link"
+            download="TEST_DOCUMENT_7"
+            href="/case/MOCK_CASE_ID/stage/undefined/download/document/MOCK_DOC_ID_7/original"
+          >
+            Download
+          </a>
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell govuk-!-width-one-quarter"
+        >
+          <strong
+            class="govuk-tag margin-right--small"
+          >
+            PENDING
+          </strong>
+        </td>
+        <td
+          class="govuk-table__cell govuk-!-width-full"
+        >
+          TEST_DOCUMENT_8
+        </td>
+        <td
+          class="govuk-table__cell"
+        />
+        <td
+          class="govuk-table__cell"
+        />
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell govuk-!-width-one-quarter"
+        >
+          <strong
+            class="govuk-tag margin-right--small"
+          >
+            PENDING
+          </strong>
+        </td>
+        <td
+          class="govuk-table__cell govuk-!-width-full"
+        >
+          TEST_DOCUMENT_9
+        </td>
+        <td
+          class="govuk-table__cell"
+        />
+        <td
+          class="govuk-table__cell"
+        />
+      </tr>
+    </tbody>
+  </table>,
+]
 `;
+
+exports[`Document list component should render with default props 1`] = `null`;

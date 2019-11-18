@@ -35,13 +35,14 @@ class DocumentPanel extends Component {
         return documents.some(d => d.status === 'PENDING');
     }
 
+    flattenDocuments(documents) {
+        return Array.isArray(documents) && documents.flatMap(([, groupDocs]) => groupDocs);
+    }
+
     updateDocuments() {
         const { dispatch } = this.props;
         const { page } = this.state;
         if (page && page.params && page.params.caseId) {
-            // TODO: Remove
-            /* eslint-disable-next-line  no-console*/
-            console.log(`Updating documents for case: ${page.params.caseId}`);
             return dispatch(updateApiStatus(status.REQUEST_DOCUMENT_LIST))
                 .then(() => {
                     axios.get(`/api/case/${page.params.caseId}/document`)
@@ -49,14 +50,13 @@ class DocumentPanel extends Component {
                             dispatch(updateApiStatus(status.REQUEST_DOCUMENT_LIST_SUCCESS))
                                 .then(() => dispatch(clearApiStatus()))
                                 .then(() => {
-                                    this.setState({
+                                    const allDocuments = this.flattenDocuments(response.data);
+                                    this.setState((currentState) => ({
+                                        ...currentState,
                                         documents: response.data,
-                                        activeDocument: this.state.activeDocument || response.data[0] ? response.data[0].value : null
-                                    });
-                                    if (!this.hasPendingDocuments(response.data)) {
-                                        // TODO: Remove
-                                        /* eslint-disable-next-line  no-console*/
-                                        console.log('No documents pending conversion, clearing interval');
+                                        activeDocument: currentState.activeDocument || allDocuments[0].value
+                                    }));
+                                    if (!this.hasPendingDocuments(allDocuments)) {
                                         if (this.interval) { clearInterval(this.interval); }
                                     }
                                 });
