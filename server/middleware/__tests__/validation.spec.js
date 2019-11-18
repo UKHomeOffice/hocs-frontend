@@ -26,16 +26,16 @@ describe('Validators', () => {
 
     describe('Numeric validator', () => {
         it('should reject symbols', () => {
-            expect(validators.numeric({ value: '!@£$' })).not.toEqual(null);
+            expect(validators.numeric({ label: 'test', value: '!@£$' })).toEqual('test must be numeric');
         });
         it('should reject alpha', () => {
-            expect(validators.numeric({ value: 'data' })).not.toEqual(null);
+            expect(validators.numeric({ label: 'test', value: 'data' })).toEqual('test must be numeric');
         });
         it('should reject alphanumeric', () => {
-            expect(validators.numeric({ value: 'a1b2' })).not.toEqual(null);
+            expect(validators.numeric({ label: 'test', value: 'a1b2' })).toEqual('test must be numeric');
         });
         it('should accept numeric only', () => {
-            expect(validators.numeric({ value: '1234' })).toEqual(null);
+            expect(validators.numeric({ label: 'test', value: '1234' })).toEqual(null);
         });
     });
 
