@@ -24,6 +24,21 @@ describe('Validators', () => {
         });
     });
 
+    describe('Alphanumeric validator', () => {
+        it('should reject symbols', () => {
+            expect(validators.alphanumeric({  label: 'test',value: '!@£$' })).toEqual('test must be alphanumeric');
+        });
+        it('should accept alpha only', () => {
+            expect(validators.alphanumeric({  label: 'test',value: 'Data' })).toEqual(null);
+        });
+        it('should accept numeric only', () => {
+            expect(validators.alphanumeric({  label: 'test',value: '1234' })).toEqual(null);
+        });
+        it('should accept alphanumeric', () => {
+            expect(validators.alphanumeric({  label: 'test',value: 'l33T' })).toEqual(null);
+        });
+    });
+
     describe('Numeric validator', () => {
         it('should reject symbols', () => {
             expect(validators.numeric({ label: 'test', value: '!@£$' })).toEqual('test must be numeric');
