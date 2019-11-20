@@ -109,35 +109,35 @@ function validationMiddleware(req, res, next) {
 
         if (component === 'accordion') {
             Array.isArray(sections) && sections.map(({ items }) => Array.isArray(items) && items.map(item => validateField(item, data, result)));
-        }
-
-        const value = data[name];
-        if (validation) {
-            validation.map(validator => {
-                if (typeof validator === 'string') {
-                    if (validators.hasOwnProperty(validator)) {
-                        const validationError = validators[validator].call(this, { label, value });
-                        if (validationError) {
-                            result[field.props.name] = validationError;
+        } else {
+            const value = data[name];
+            if (validation) {
+                validation.map(validator => {
+                    if (typeof validator === 'string') {
+                        if (validators.hasOwnProperty(validator)) {
+                            const validationError = validators[validator].call(this, { label, value });
+                            if (validationError) {
+                                result[field.props.name] = validationError;
+                            }
+                        }
+                        else {
+                            throw new Error(`Validator ${validator} does not exist`);
                         }
                     }
                     else {
-                        throw new Error(`Validator ${validator} does not exist`);
-                    }
-                }
-                else {
-                    const { type, message } = validator;
-                    if (validators.hasOwnProperty(type)) {
-                        const validationError = validators[type].call(this, { label, value, message });
-                        if (validationError) {
-                            result[field.props.name] = validationError;
+                        const { type, message } = validator;
+                        if (validators.hasOwnProperty(type)) {
+                            const validationError = validators[type].call(this, { label, value, message });
+                            if (validationError) {
+                                result[field.props.name] = validationError;
+                            }
+                        }
+                        else {
+                            throw new Error(`Validator ${type} does not exist`);
                         }
                     }
-                    else {
-                        throw new Error(`Validator ${type} does not exist`);
-                    }
-                }
-            });
+                });
+            }
         }
     }
 }

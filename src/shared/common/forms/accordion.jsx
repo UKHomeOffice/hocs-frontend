@@ -6,11 +6,12 @@ const getComponentFactoryInstance = (factory, options) => ({ component, props },
 
 function Section({ data, errors, index, items, title, updateState }) {
     const createComponent = getComponentFactoryInstance(formComponentFactory, { data, errors: errors, meta: {}, callback: updateState, baseUrl: '/' });
-    const [isVisible, setVisible] = useState(true);
+    const sectionHasValidationError = errors && Array.isArray(items) && items.some(item => errors[item.props.name]);
+    const [isVisible, setVisible] = useState(sectionHasValidationError);
 
     useEffect(() => {
-        setVisible(false);
-    }, []);
+        setVisible(sectionHasValidationError);
+    }, [errors]);
 
     const clickHandler = event => {
         event.preventDefault();
