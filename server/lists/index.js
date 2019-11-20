@@ -125,7 +125,7 @@ module.exports = {
         },
         CASE_TEMPLATES: {
             client: 'CASEWORK',
-            endpoint: '/case/${caseId}/template',
+            endpoint: '/case/${caseId}/templates',
             adapter: templatesAdapter,
             defaultValue: []
         },

@@ -39,7 +39,7 @@ class EntityManager extends Component {
                                         <a href={`${baseUrl}/download/${entity}/${choice.value}`} className="govuk-link" download={choice.label}>Download</a>
                                     </td>}
                                     {hasTemplateLink && <td className='govuk-table__cell'>
-                                        <a href={`${baseUrl}/template`} className="govuk-link" download={choice.label}>Download</a>
+                                        <a href={`${baseUrl}/template/${choice.value}`} className="govuk-link" download={choice.label}>Download</a>
                                     </td>}
                                     {hasRemoveLink && <td className='govuk-table__cell'>
                                         <a href={`${baseUrl}/entity/${entity}/${choice.value}/remove`} className="govuk-link">Remove</a>
