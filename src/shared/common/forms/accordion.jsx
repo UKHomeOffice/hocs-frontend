@@ -4,8 +4,8 @@ import { formComponentFactory } from './form-repository.jsx';
 
 const getComponentFactoryInstance = (factory, options) => ({ component, props }, key) => factory(component, { key, config: props, ...options });
 
-function Section({ data, index, items, title, updateState }) {
-    const createComponent = getComponentFactoryInstance(formComponentFactory, { data, errors: {}, meta: {}, callback: updateState, baseUrl: '/' });
+function Section({ data, errors, index, items, title, updateState }) {
+    const createComponent = getComponentFactoryInstance(formComponentFactory, { data, errors: errors, meta: {}, callback: updateState, baseUrl: '/' });
     const [isVisible, setVisible] = useState(true);
 
     useEffect(() => {
@@ -35,22 +35,24 @@ function Section({ data, index, items, title, updateState }) {
 }
 Section.propTypes = {
     data: PropTypes.object.isRequired,
+    errors: PropTypes.object,
     items: PropTypes.array.isRequired,
     index: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     updateState: PropTypes.func.isRequired
 };
 
-function Accordion({ name, sections, data, updateState }) {
+function Accordion({ name, sections, data, updateState, errors }) {
     return (
         <div id={name} className='govuk-accordion' data-module='accordion'>
-            {Array.isArray(sections) && sections.map(({ items, title }, index) => <Section data={data} items={items} index={index} key={index} title={title} updateState={updateState} />)}
+            {Array.isArray(sections) && sections.map(({ items, title }, index) => <Section data={data} errors={errors} items={items} index={index} key={index} title={title} updateState={updateState} />)}
         </div>
     );
 }
 
 Accordion.propTypes = {
     data: PropTypes.object.isRequired,
+    errors: PropTypes.object,
     name: PropTypes.string.isRequired,
     sections: PropTypes.array.isRequired,
     updateState: PropTypes.func
