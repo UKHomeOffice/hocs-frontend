@@ -51,10 +51,11 @@ class DocumentPanel extends Component {
                                 .then(() => dispatch(clearApiStatus()))
                                 .then(() => {
                                     const allDocuments = this.flattenDocuments(response.data);
+                                    const { value: firstDocument } = allDocuments[0] || { value: undefined };
                                     this.setState((currentState) => ({
                                         ...currentState,
                                         documents: response.data,
-                                        activeDocument: currentState.activeDocument || allDocuments[0].value
+                                        activeDocument: currentState.activeDocument || firstDocument
                                     }));
                                     if (!this.hasPendingDocuments(allDocuments)) {
                                         if (this.interval) { clearInterval(this.interval); }
