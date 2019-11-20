@@ -92,11 +92,7 @@ function validationMiddleware(req, res, next) {
             const validationErrors = schema.fields
                 .filter(field => field.type !== 'display')
                 .reduce((result, field) => {
-                    if (field.component === 'accordion') {
-                        field.props.sections.map(section => section.items.map(item => validateField(item, data, result)));
-                    } else {
-                        validateField(field, data, result);
-                    }
+                    validateField(field, data, result);
                     return result;
                 }, {});
             if (Object.keys(validationErrors).length > 0) {
@@ -109,7 +105,12 @@ function validationMiddleware(req, res, next) {
     next();
 
     function validateField(field, data, result) {
-        const { validation, props: { name, label } } = field;
+        const { component, validation, props: { name, label, sections } } = field;
+
+        if (component === 'accordion') {
+            Array.isArray(sections) && sections.map(({ items }) => Array.isArray(items) && items.map(item => validateField(item, data, result)));
+        }
+
         const value = data[name];
         if (validation) {
             validation.map(validator => {
