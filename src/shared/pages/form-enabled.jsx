@@ -90,6 +90,7 @@ function withForm(Page) {
             e.preventDefault();
             const { dispatch, track, history, match: { url } } = this.props;
             const { form_schema, form_data } = this.state;
+            this.setState({ form_errors: undefined });
             // TODO: Remove
             /* eslint-disable-next-line no-undef */
             const formData = new FormData();
@@ -112,7 +113,6 @@ function withForm(Page) {
                                         dispatch(updateApiStatus(status.SUBMIT_FORM_VALIDATION_ERROR))
                                             .then(() => this.setState({ form_errors: res.data.errors }))
                                             .then(() => track('EVENT', { category: form_schema.title, action: 'Submit', label: 'Validation Error' }));
-
                                     } else {
                                         if (res.data.confirmation) {
                                             this.setState({ confirmation: res.data.confirmation });

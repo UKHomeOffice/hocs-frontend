@@ -179,7 +179,7 @@ exports[`Entity list component should render with download link when passed in p
         <a
           class="govuk-link"
           download="Choice A"
-          href="http://localhost:8080/template"
+          href="http://localhost:8080/template/CHOICE_A"
         >
           Download
         </a>
@@ -199,7 +199,7 @@ exports[`Entity list component should render with download link when passed in p
         <a
           class="govuk-link"
           download="Choice B"
-          href="http://localhost:8080/template"
+          href="http://localhost:8080/template/CHOICE_B"
         >
           Download
         </a>

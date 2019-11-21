@@ -5,8 +5,8 @@ const validationErrors = {
     required: label => `${label} is required`,
     alphanumeric: label => `${label} must be alphanumeric`,
     numeric: label => `${label} must be numeric`,
-    hasWhitelistedExtension: (label, extension) => {
-        return `${label} is a ${extension.toUpperCase()} file which is not allowed`;
+    hasWhitelistedExtension: (value, extension) => {
+        return `${value} is a ${extension.toUpperCase()} file which is not allowed`;
     },
     fileLimit: () => `The number of files you have tried to upload exceeded the limit of ${DOCUMENT_BULK_LIMIT}`,
     isValidDate: label => `${label} must be a date`,
@@ -43,6 +43,7 @@ const validators = {
         }
         return null;
     },
+
     alphanumeric: ({ label, value, message }) => {
         const format = /^[a-z0-9]+$/i;
         if (value && !format.test(value)) {
@@ -57,14 +58,16 @@ const validators = {
         }
         return null;
     },
-    hasWhitelistedExtension: ({ label, value, message }) => {
+
+    hasWhitelistedExtension: ({ value, message }) => {
         if (value && value.length > 0) {
             const allowableExtensions = DOCUMENT_WHITELIST;
             for (let file of value) {
                 let fileExtension = file.originalname.split('.').slice(-1)[0];
+                let fileName = file.originalname.split('.').slice(0)[0];
 
                 if (!allowableExtensions.includes(fileExtension)) {
-                    return message || validationErrors.hasWhitelistedExtension(label, fileExtension);
+                    return message || validationErrors.hasWhitelistedExtension(fileName, fileExtension);
                 }
             }
         }
@@ -72,14 +75,14 @@ const validators = {
     },
     fileLimit: ({ value, message }) => {
         if (value && value.length > DOCUMENT_BULK_LIMIT) {
-            return message || validationErrors.fileLimit;
+            return message || validationErrors.fileLimit();
         }
         return null;
     },
     isValidCaseReference: ({ value, message }) => {
         const format = /\b[a-zA-Z]{2,4}\/[0-9]{7}\/[0-9]{2}\b/i;
         if (value && !format.test(value)) {
-            return message || validationErrors.validCaseReference;
+            return message || validationErrors.validCaseReference();
         }
         return null;
     }
