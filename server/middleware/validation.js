@@ -3,6 +3,8 @@ const { DOCUMENT_WHITELIST, DOCUMENT_BULK_LIMIT } = require('../config').forCont
 
 const validationErrors = {
     required: label => `${label} is required`,
+    alphanumeric: label => `${label} must be alphanumeric`,
+    numeric: label => `${label} must be numeric`,
     hasWhitelistedExtension: (value, extension) => {
         return `${value} is a ${extension.toUpperCase()} file which is not allowed`;
     },
