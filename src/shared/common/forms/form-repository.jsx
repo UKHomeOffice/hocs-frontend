@@ -33,6 +33,7 @@ function renderFormComponent(Component, options) {
         {...config}
         data={data}
         error={errors && errors[config.name]}
+        errors={errors}
         value={value}
         updateState={callback ? data => callback(data) : null} />;
 }
@@ -89,7 +90,7 @@ export function formComponentFactory(field, options) {
                 <span className='govuk-body full-width'><strong>{config.label}: </strong>{data[config.name]}</span>
             );
         case 'accordion':
-            return renderFormComponent(Accordion, { data, key, config, callback });
+            return renderFormComponent(Accordion, { data, key, config, errors, callback });
         default:
             return null;
     }
