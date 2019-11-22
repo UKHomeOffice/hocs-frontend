@@ -50,16 +50,16 @@ const Dashboard = ({ title, match, history }) => {
     };
 
     useEffect(() => {
-        if (contextForm) {
+        if (contextForm && contextForm.schema) {
             setForm(contextForm);
             dispatch(unsetForm());
         } else {
             getPage();
         }
         track('PAGE_VIEW', { title, path: match.url });
-    }, []);
+    }, [contextForm]);
 
-    return form ? (
+    return form && form.schema ? (
         <Fragment>
             <div className='govuk-grid-row'>
                 <div className='govuk-grid-column-one-third'>

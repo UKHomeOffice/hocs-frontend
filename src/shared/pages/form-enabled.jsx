@@ -52,6 +52,13 @@ function withForm(Page) {
                     track('PAGE_VIEW', { title: this.state.form_schema.title, path: url });
                 }
             }
+            const { form } = this.props;
+            const { errors } = form || {};
+            const { form: prevForm } = prevProps;
+            const { errors: prevErrors } = prevForm || {};
+            if (errors !== prevErrors) {
+                this.setState({ form_errors: errors });
+            }
         }
 
         shouldComponentUpdate(nextProps, nextState) {
