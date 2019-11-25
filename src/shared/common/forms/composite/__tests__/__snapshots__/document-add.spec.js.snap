@@ -9,6 +9,7 @@ exports[`Document add component should allow multiple files when passed 1`] = `
     disabled={false}
     dispatch={[Function]}
     label="Add document"
+    maxUploadSize={10}
     name="add-document"
     updateState={[Function]}
   >
@@ -46,6 +47,7 @@ exports[`Document add component should render disabled when passed 1`] = `
 <Component
   disabled={true}
   dispatch={[Function]}
+  maxUploadSize={1000}
   name="add-document"
   updateState={[Function]}
 >
@@ -54,6 +56,7 @@ exports[`Document add component should render disabled when passed 1`] = `
     disabled={true}
     dispatch={[Function]}
     label="Add document"
+    maxUploadSize={10}
     name="add-document"
     updateState={[Function]}
   >
@@ -91,6 +94,7 @@ exports[`Document add component should render with correct label when passed 1`]
 <Component
   allowMultiple={true}
   dispatch={[Function]}
+  maxUploadSize={1000}
   name="add-document"
   updateState={[Function]}
 >
@@ -99,6 +103,7 @@ exports[`Document add component should render with correct label when passed 1`]
     disabled={false}
     dispatch={[Function]}
     label="MY_LABEL"
+    maxUploadSize={10}
     name="add-document"
     updateState={[Function]}
   >
@@ -162,6 +167,7 @@ exports[`Document add component should render with hint when passed 1`] = `
 <Component
   dispatch={[Function]}
   hint="MY_HINT"
+  maxUploadSize={1000}
   name="add-document"
   updateState={[Function]}
 >
@@ -171,6 +177,7 @@ exports[`Document add component should render with hint when passed 1`] = `
     dispatch={[Function]}
     hint="MY_HINT"
     label="Add document"
+    maxUploadSize={10}
     name="add-document"
     updateState={[Function]}
   >
@@ -213,6 +220,7 @@ exports[`Document add component should render with validation error when passed 
 <Component
   dispatch={[Function]}
   error="MY_ERROR"
+  maxUploadSize={1000}
   name="add-document"
   updateState={[Function]}
 >
@@ -222,6 +230,7 @@ exports[`Document add component should render with validation error when passed 
     dispatch={[Function]}
     error="MY_ERROR"
     label="Add document"
+    maxUploadSize={10}
     name="add-document"
     updateState={[Function]}
   >

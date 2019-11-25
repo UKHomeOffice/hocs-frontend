@@ -14,17 +14,17 @@ class DocumentAdd extends Component {
 
     handleChange(e) {
         e.preventDefault();
-        const { dispatch, name } = this.props;
+        const { dispatch, maxUploadSize, name, updateState } = this.props;
         let { target: { files } } = e;
         files = Array.from(files);
         dispatch(updateFormErrors(undefined));
         const totalFileSize = files.map(file => file.size).reduce((sum, size) => sum + size, 0);
-        if (totalFileSize > 1000000) {
-            dispatch(updateFormErrors({ [name]: 'The total file size is too large.  Please upload files in smaller batches.' }));
+        if (totalFileSize > maxUploadSize) {
+            dispatch(updateFormErrors({ [name]: 'The total file size is too large.  If you are uploading multiple files. Please try smaller batches.' }));
             e.target.value = '';
-            this.props.updateState({ [name]: undefined });
+            updateState({ [name]: undefined });
         } else {
-            this.props.updateState({ [name]: files });
+            updateState({ [name]: files });
         }
     }
 
@@ -68,6 +68,7 @@ DocumentAdd.propTypes = {
     error: PropTypes.string,
     hint: PropTypes.string,
     label: PropTypes.string,
+    maxUploadSize: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     updateState: PropTypes.func.isRequired,
     value: PropTypes.string
@@ -81,7 +82,7 @@ DocumentAdd.defaultProps = {
 
 const WrappedDocumentAdd = props => (
     <ApplicationConsumer>
-        {({ dispatch }) => <DocumentAdd {...props} dispatch={dispatch} />}
+        {({ dispatch, layout: { maxUploadSize } = { maxUploadSize: 10 } }) => <DocumentAdd {...props} dispatch={dispatch} maxUploadSize={maxUploadSize} />}
     </ApplicationConsumer>
 );
 
