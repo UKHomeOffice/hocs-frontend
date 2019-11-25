@@ -12,7 +12,6 @@ services:
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: dev
-      PGDATA: /var/lib/postgresql/WCS2
     tmpfs:
     - /var/lib/postgresql
 

@@ -93,7 +93,7 @@ function withForm(Page) {
             e.preventDefault();
             const { dispatch, track, history, match: { url } } = this.props;
             const { form_schema, form_data } = this.state;
-            this.setState({ form_errors: undefined });
+            dispatch(updateFormErrors(undefined));
             // TODO: Remove
             /* eslint-disable-next-line no-undef */
             const formData = new FormData();
