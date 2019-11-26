@@ -28,7 +28,8 @@ const config = {
             footer: {
                 isVisible: false
             },
-            maxSearchResults: 500
+            maxSearchResults: 500,
+            maxUploadSize: process.env.MAX_UPLOAD_SIZE || 100000
         },
         server: {
             WORKFLOW_SERVICE: process.env.WORKFLOW_SERVICE || 'http://localhost:8091',

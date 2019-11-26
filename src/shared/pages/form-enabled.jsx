@@ -9,6 +9,7 @@ import {
     updateApiStatus,
     clearApiStatus,
     unsetForm,
+    updateFormErrors,
     updatePageMeta
 } from '../contexts/actions/index.jsx';
 import status from '../helpers/api-status.js';
@@ -21,11 +22,10 @@ function withForm(Page) {
         constructor(props) {
             super(props);
             const { confirmation, form } = props;
-            const { data, errors, schema, meta } = form ? form : {};
+            const { data, schema, meta } = form ? form : {};
             this.state = {
                 confirmation,
                 form_data: data,
-                form_errors: errors,
                 form_schema: schema,
                 form_meta: meta
             };
@@ -33,12 +33,13 @@ function withForm(Page) {
 
         componentDidMount() {
             const { dispatch, track, form, match } = this.props;
+            const { schema } = form || {};
             if (this.state.form_schema) {
                 track('PAGE_VIEW', { title: this.state.form_schema.title, path: match.url });
             }
             dispatch(updatePageMeta(match))
                 .then(() => {
-                    if (!form) {
+                    if (!schema) {
                         return this.getForm();
                     }
                     dispatch(unsetForm());
@@ -67,12 +68,14 @@ function withForm(Page) {
                     axios.get(endpoint)
                         .then(response => {
                             dispatch(updateApiStatus(status.REQUEST_FORM_SUCCESS))
-                                .then(() => this.setState({
-                                    form_data: response.data.data,
-                                    form_errors: response.data.errors,
-                                    form_schema: response.data.schema,
-                                    form_meta: response.data.meta
-                                }))
+                                .then(() => {
+                                    this.setState({
+                                        form_data: response.data.data,
+                                        form_schema: response.data.schema,
+                                        form_meta: response.data.meta
+                                    });
+                                    dispatch(updateFormErrors(response.data.errors));
+                                })
                                 .then(() => dispatch(clearApiStatus()))
                                 .catch(() => {
                                     dispatch(updateApiStatus(status.UPDATE_FORM_FAILURE))
@@ -90,7 +93,7 @@ function withForm(Page) {
             e.preventDefault();
             const { dispatch, track, history, match: { url } } = this.props;
             const { form_schema, form_data } = this.state;
-            this.setState({ form_errors: undefined });
+            dispatch(updateFormErrors(undefined));
             // TODO: Remove
             /* eslint-disable-next-line no-undef */
             const formData = new FormData();
@@ -111,7 +114,7 @@ function withForm(Page) {
                                 .then(() => {
                                     if (res.data.errors) {
                                         dispatch(updateApiStatus(status.SUBMIT_FORM_VALIDATION_ERROR))
-                                            .then(() => this.setState({ form_errors: res.data.errors }))
+                                            .then(() => dispatch(updateFormErrors(res.data.errors)))
                                             .then(() => track('EVENT', { category: form_schema.title, action: 'Submit', label: 'Validation Error' }));
                                     } else {
                                         if (res.data.confirmation) {
@@ -155,15 +158,16 @@ function withForm(Page) {
         }
 
         renderForm() {
-            const { match: { url, params }, hasSidebar } = this.props;
-            const { form_data, form_errors, form_meta, form_schema } = this.state;
+            const { form, match: { url, params }, hasSidebar } = this.props;
+            const { form_data, form_meta, form_schema } = this.state;
+            const { errors } = form || {};
             return (
                 <Page title={form_schema.title} form={form_meta} hasSidebar={hasSidebar} >
                     {form_schema && <Form
                         {...{
                             schema: form_schema,
                             data: form_data,
-                            errors: form_errors,
+                            errors: errors,
                             meta: form_meta,
                             page: params
                         }}
