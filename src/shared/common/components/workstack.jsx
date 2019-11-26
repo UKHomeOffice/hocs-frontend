@@ -33,7 +33,7 @@ const DirectionEnum = {
 const dataAdapters = {
     localDateAdapter: (value) => {
         var date = new Date(value);
-        return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+        return date.getDate().toString().padStart(2, '0') + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
     },
     hideValueNOAdapter: value => value === 'NO' ? '' : value
 };
