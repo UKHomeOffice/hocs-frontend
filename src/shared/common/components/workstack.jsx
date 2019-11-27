@@ -24,25 +24,33 @@ LinkButton.propTypes = {
     submitHandler: PropTypes.func.isRequired
 };
 
-const DirectionEnum = {
+const SortDirection = {
     ASCENDING: 1,
     DESCENDING: -1
 };
 
+const ColumnRenderer = {
+    CASE_LINK: 'caseLink',
+    DATE: 'date',
+    INDICATOR_BLUE: 'indicatorBlue',
+    INDICATOR_RED: 'indicatorRed',
+    WRAP_TEXT: 'wrapText'
+};
 
 const dataAdapters = {
-    localDateAdapter: (value) => {
+    localDate: (value) => {
         var date = new Date(value);
         return date.getDate().toString().padStart(2, '0') + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
     },
-    hideValueNOAdapter: value => value === 'NO' ? '' : value
+    indicator: (value, key) => value === 'YES' ? key.replace(/([a-z])([A-Z])/g, '$1 $2').replace('Is ', '') : undefined
 };
+
 class WorkstackAllocate extends Component {
 
     constructor(props) {
         super(props);
         const { items, selectedCases = [], selectable, columns } = props;
-        this.state = { selectable, items, selectedCases, filter: '', columns, sort: { column: undefined, order: DirectionEnum.ASCENDING } };
+        this.state = { selectable, items, selectedCases, filter: '', columns, sort: { column: undefined, order: SortDirection.ASCENDING } };
     }
 
     componentDidMount() {
@@ -64,7 +72,7 @@ class WorkstackAllocate extends Component {
             const dataAdapter = dataAdapters[column.dataAdapter];
 
             if (dataAdapter) {
-                return dataAdapter(value);
+                return dataAdapter(value, column.dataValueKey);
             }
 
             throw new Error('Data Adapter not implemented: ' + column.dataAdapter);
@@ -133,13 +141,13 @@ class WorkstackAllocate extends Component {
     setSort(selectedColumn) {
         this.setState((currentState) => {
             const { sort: { direction: currentDirection, column: currentColumn } } = currentState;
-            let newDirection = DirectionEnum.ASCENDING;
+            let newDirection = SortDirection.ASCENDING;
             let newColumn = selectedColumn;
 
             if (selectedColumn === currentColumn) {
-                if (currentDirection === DirectionEnum.ASCENDING) {
-                    newDirection = DirectionEnum.DESCENDING;
-                } else if (currentDirection === DirectionEnum.DESCENDING) {
+                if (currentDirection === SortDirection.ASCENDING) {
+                    newDirection = SortDirection.DESCENDING;
+                } else if (currentDirection === SortDirection.DESCENDING) {
                     newColumn = undefined;
                 }
             }
@@ -160,10 +168,10 @@ class WorkstackAllocate extends Component {
             <th onClick={() => this.setSort(column)}
                 key={column.displayName}
                 className={classNames(column.headerClassName, 'govuk-link', {
-                    'sorted-ascending': sorted && direction === DirectionEnum.ASCENDING,
-                    'sorted-descending': sorted && direction === DirectionEnum.DESCENDING
+                    'sorted-ascending': sorted && direction === SortDirection.ASCENDING,
+                    'sorted-descending': sorted && direction === SortDirection.DESCENDING
                 })}>
-                {column.displayName}
+                {column.renderer !== ColumnRenderer.INDICATOR_BLUE && column.renderer !== ColumnRenderer.INDICATOR_RED && column.displayName}
             </th>
         );
     }
@@ -205,15 +213,32 @@ class WorkstackAllocate extends Component {
     }
 
     renderDataCell(column, row) {
-
         const value = this.getCellValue(row, column);
-        if (column.renderer && column.renderer === 'caseLink') {
-            return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>
-                <Link to={`/case/${row.caseUUID}/stage/${row.uuid}`} className='govuk-link govuk-!-margin-right-3'>{value}</Link>
-            </td>;
-        }
-        return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>{value}</td>;
 
+        switch (column.renderer) {
+            case ColumnRenderer.CASE_LINK:
+                return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>
+                    <Link to={`/case/${row.caseUUID}/stage/${row.uuid}`} className='govuk-link govuk-!-margin-right-3'>{value}</Link>
+                </td>;
+            case ColumnRenderer.DATE:
+                return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>{value}</td>;
+            case ColumnRenderer.INDICATOR_BLUE:
+                return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell indicator'>
+                    {value && <span title={value} className='indicator-blue'>
+                        {column.displayName.substring(0, 1)}
+                    </span>}
+                </td>;
+            case ColumnRenderer.INDICATOR_RED:
+                return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell indicator'>
+                    {value && <span title={value} className='indicator-red'>
+                        {column.displayName.substring(0, 1)}
+                    </span>}
+                </td>;
+            case ColumnRenderer.WRAP_TEXT:
+                return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell wrap-text'>{value}</td>;
+            default:
+                return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>{value}</td>;
+        }
     }
 
     renderTeamsDropdown() {
