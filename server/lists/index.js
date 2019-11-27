@@ -86,9 +86,9 @@ module.exports = {
             endpoint: '/stage',
             adapter: workstack.teamAdapter
         },
-        WCS_CASEWORK_UNIT: {
+        WCS_CASEWORK_TEAMS: {
             client: 'INFO',
-            endpoint: '/teams?unit=WCS_CASEWORK_UNIT',
+            endpoint: '/teams?unit=WCS_CASEWORK_TEAMS',
             adapter: teamsAdapter
         },
         WCS_COHORTS: {
