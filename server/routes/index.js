@@ -20,7 +20,7 @@ const { setCacheControl } = require('../middleware/cacheControl');
 const { csrfMiddleware } = require('../middleware/csrf');
 const { infoService } = require('../clients');
 const logger = require('../libs/logger');
-const { flushCachedLists } = require('../services/list');
+const { flush } = require('../services/list');
 
 html.use(assets);
 
@@ -56,7 +56,7 @@ router.get('/admin/list/flush',
     (req, res, next) => {
         try {
             logger(req.requestId).info('FLUSH_CACHE', { user: req.user.email });
-            flushCachedLists();
+            flush('S_USERS');
             res.status(200).send();
         } catch (error) {
             next(error);
