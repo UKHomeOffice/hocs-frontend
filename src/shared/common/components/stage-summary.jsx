@@ -88,6 +88,10 @@ class StageSummary extends Component {
                                     <th className='govuk-table__header padding-left--small'>Date received</th>
                                     <td className='govuk-table__cell'>{summary.case.received}</td>
                                 </tr>}
+                                {summary.case && summary.case.created && <tr className='govuk-table__cell'>
+                                    <th className='govuk-table__header padding-left--small'>Created</th>
+                                    <td className='govuk-table__cell'>{summary.case.created}</td>
+                                </tr>}
                                 {summary.case && summary.case.deadline && <tr className='govuk-table__cell'>
                                     <th className='govuk-table__header padding-left--small'>Deadline</th>
                                     <td className='govuk-table__cell'>{summary.case.deadline}</td>

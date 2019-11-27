@@ -31,6 +31,7 @@ const formatDate = (date) => date ? parseDate(date) : null;
 
 module.exports = async (summary, { fromStaticList }) => ({
     case: {
+        created: formatDate(summary.caseCreated),
         received: formatDate(summary.dateReceived),
         deadline: formatDate(summary.caseDeadline)
     },
