@@ -139,7 +139,10 @@ const getInstance = (requestId, user) => {
 
 };
 
-const flush = (key) => listCache.flush(key);
+const flush = (key) => {
+    listCache.flush(key);
+    getLogger().info('Flushing Cache ' + key);
+};
 
 module.exports = {
     initialise,
