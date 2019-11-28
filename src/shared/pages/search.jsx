@@ -59,7 +59,7 @@ const FormWrapper = (C) => ({ match, history, ...props }) => {
     };
 
     useEffect(() => {
-        if (contextForm) {
+        if (contextForm && contextForm.schema) {
             setForm(contextForm);
             dispatch(unsetForm());
         } else {
