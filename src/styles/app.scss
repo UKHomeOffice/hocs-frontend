@@ -409,43 +409,11 @@ a.card__body {
   padding: govuk-spacing(2);
   margin: 0 auto govuk-spacing(3) auto;
 
-  .recent-action {
-    background-color: $panel-colour;
-    padding: 5px 20px 5px 15px;
-
-    h2 {
-      font-size: 1.2em;
-    }
-
-    &:before {
-      content: "";
-      display: block;
-      width: calc(2 * 5px);
-      height: calc(2 * 5px);
-      border-radius: 50%;
-      background-color: #6e777a;
-      border: 8px solid #6f777b;
-      position: absolute;
-      z-index: 2;
-      left: -35px;
-      top: 16px;
-    }
-  }
-
   ul {
     list-style-type: none;
     position: relative;
     padding: 0 0 0 10px;
     margin: 0 0 20px 0;
-    &:after {
-      content: "";
-      position: absolute;
-      top: 45px;
-      left: -4.5px;
-      bottom: 0;
-      border-left: 4px solid #6f777b;
-      height: 96%;
-    }
 
     li {
       margin: 4px 0 20px 10px;
@@ -457,6 +425,15 @@ a.card__body {
       word-wrap: break-word;
       &:last-child {
         margin-bottom: 0px;
+      }
+
+      &.case-note {
+        background-color: $panel-colour;
+        padding: 5px 20px 5px 15px;
+
+        &:before {
+            top:25px;
+        }
       }
 
       .timeline-reference {
@@ -487,10 +464,32 @@ a.card__body {
         top: 0px;
       }
 
+      &:after {
+        content: "";
+        position: absolute;
+        left: -24px;
+        bottom: 0;
+        border-left: 4px solid #6f777b;
+        height: 116%;
+        top: 10px;
+      }
+
+      &:last-child::after {
+          border: none;
+      }
+
       h2 {
         @include govuk-font(19, $weight: bold);
         margin-top: 0.5em;
         font-size: 0.9em;
+      }
+
+      p {
+          span + span {
+              &:before {
+                  content: " - "
+              }
+          }
       }
     }
   }
@@ -614,4 +613,6 @@ $border-colour: govuk-colour("grey-2");
   cursor: pointer;
   background: none;
   border: none;
-  margin: 0; }
+  margin: 0; 
+}
+
