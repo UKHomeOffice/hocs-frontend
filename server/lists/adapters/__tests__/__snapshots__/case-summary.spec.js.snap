@@ -13,6 +13,7 @@ Object {
     },
   ],
   "case": Object {
+    "created": "03/02/2019",
     "deadline": "01/01/2020",
     "received": "01/01/2019",
   },
@@ -33,6 +34,7 @@ exports[`Case Summary Adapter should transform minimal case summary data 1`] = `
 Object {
   "additionalFields": Array [],
   "case": Object {
+    "created": "03/02/2019",
     "deadline": null,
     "received": "01/01/2019",
   },

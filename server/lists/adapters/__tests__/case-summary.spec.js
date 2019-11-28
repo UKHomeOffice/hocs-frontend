@@ -20,6 +20,7 @@ describe('Case Summary Adapter', () => {
     it('should transform minimal case summary data', async () => {
         const mockData = {
             dateReceived: '2019-01-01',
+            caseCreated: '2019-02-03',
             caseDeadline: null,
             primaryTopic: null,
             primaryCorrespondent: null,
@@ -36,6 +37,7 @@ describe('Case Summary Adapter', () => {
     it('should transform fully populated case summary data', async () => {
         const mockData = {
             dateReceived: '2019-01-01',
+            caseCreated: '2019-02-03',
             caseDeadline: '2020-01-01',
             additionalFields: [
                 { label: 'Test field', value: 'TEST' },
