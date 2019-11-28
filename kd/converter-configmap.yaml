@@ -5,4 +5,5 @@ metadata:
 data:
   converter_timeout: '300000'
   max_filesize: '10485760'
-  supported_types: 'doc,docx,txt,rtf,html,pdf,jpg,jpeg,tif,tiff,png,bmp,gif'
+  supported_types: 'doc,docx,txt,rtf,html,pdf,jpg,jpeg,tif,tiff,png,bmp,gif,xls,xlsx'
+  
