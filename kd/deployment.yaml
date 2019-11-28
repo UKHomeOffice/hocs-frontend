@@ -89,7 +89,7 @@ spec:
           - name: ADD_NGINX_HTTP_CFG
             value: 'fastcgi_buffers 16 64k; fastcgi_buffer_size 128k; proxy_buffer_size 128k; proxy_buffers 4 64k; proxy_busy_buffers_size 128k; client_header_buffer_size 8k; large_client_header_buffers 4 128k;'
           - name: CLIENT_MAX_BODY_SIZE
-            value: '10'
+            value: '12'
         volumeMounts:
           - name: certs
             mountPath: /certs
