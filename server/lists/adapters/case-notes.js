@@ -5,6 +5,7 @@ const getTitle = ({ correspondent, document, stage, team, topic, user }, type) =
         STAGE_ALLOCATED_TO_TEAM: `Allocated to the ${team}`,
         STAGE_CREATED: `Stage: ${stage} Started`,
         STAGE_COMPLETED: `Stage: ${stage} Completed`,
+        STAGE_RECREATED: `Stage: ${stage} Started`,
         CORRESPONDENT_CREATED: `Correspondent: ${correspondent} Added`,
         CORRESPONDENT_DELETED: `Correspondent: ${correspondent} Removed`,
         CASE_TOPIC_CREATED: `Topic: ${topic} Added`,
