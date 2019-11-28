@@ -3,6 +3,7 @@ const getTitle = (type) => {
         STAGE_ALLOCATED_TO_USER: 'Allocated to User',
         STAGE_ALLOCATED_TO_TEAM: 'Allocated to Team',
         STAGE_CREATED: 'Stage Started',
+        STAGE_RECREATED: 'Stage Started',
         STAGE_COMPLETED: 'Stage Completed',
         CORRESPONDENT_CREATED: 'Correspondent Added',
         CORRESPONDENT_DELETED: 'Correspondent Removed',
