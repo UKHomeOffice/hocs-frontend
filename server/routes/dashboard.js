@@ -24,15 +24,15 @@ router.post(['/search/reference', '/api/search/reference'],
     async (req, res, next) => {
         const logger = getLogger(req.requestId);
         try {
-            const formData = req.form.data;
-            const reference = encodeURIComponent(formData['case-reference']);
+            const caseRef = req.form.data['case-reference'].toUpperCase();
+            const reference = encodeURIComponent(caseRef);
 
             const response = await caseworkService.get(`/case/${reference}/stage`, {
                 headers: User.createHeaders(req.user)
             });
 
             const fromStaticList = req.listService.getFromStaticList;
-            logger.info('SEARCH_REFERENCE', { reference: formData['case-reference'] });
+            logger.info('SEARCH_REFERENCE', { reference: caseRef });
             const workstackData = await Promise.all(response.data.stages
                 .sort((first, second) => first.caseReference > second.caseReference)
                 .map(bindDisplayElements(fromStaticList)));
