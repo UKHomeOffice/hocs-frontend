@@ -17,6 +17,11 @@ const mockFromStaticList = jest.fn((list) => {
     }
 });
 
+const mockConfiguration = {
+    workstackColumns: [],
+    deadlinesEnabled: true
+};
+
 const mockLogger = {
     debug: () => { },
     info: () => { },
@@ -59,7 +64,48 @@ describe('Dashboard Adapter', () => {
             ]
         };
 
-        const result = await dashboardAdapter(mockData, { user: mockUser, fromStaticList: mockFromStaticList, logger: mockLogger });
+        const result = await dashboardAdapter(mockData, { user: mockUser, fromStaticList: mockFromStaticList, logger: mockLogger, configuration: mockConfiguration });
+        expect(result).toMatchSnapshot();
+    });
+
+    it('should transform a stage array to a dashboard schema when deadlines are disabled', async () => {
+        const mockData = {
+            stages: [
+                {
+                    teamUUID: 1,
+                    caseType: 'A',
+                    stageType: 'A',
+                    userUUID: 1,
+                    deadline: '1900-01-01'
+                },
+                {
+                    teamUUID: 1,
+                    caseType: 'A',
+                    stageType: 'A',
+                    userUUID: null,
+                    deadline: '1900-01-02'
+                },
+                {
+                    teamUUID: 1,
+                    caseType: 'A',
+                    stageType: 'A',
+                    userUUID: 2,
+                    deadline: '2200-01-03'
+                },
+                {
+                    teamUUID: 2,
+                    caseType: 'B',
+                    stageType: 'A',
+                    userUUID: null,
+                    deadline: '2200-04-01'
+                }
+            ]
+        };
+        const testConfiguration = {
+            workstackColumns: [],
+            deadlinesEnabled: false
+        };
+        const result = await dashboardAdapter(mockData, { user: mockUser, fromStaticList: mockFromStaticList, logger: mockLogger, configuration: testConfiguration });
         expect(result).toMatchSnapshot();
     });
 });
@@ -152,7 +198,7 @@ describe('Team Workstack Adapter', () => {
             ]
         };
 
-        const result = await teamAdapter(mockData, { user: mockUser, fromStaticList: mockFromStaticList, logger: mockLogger, teamId: 2, configuration: { workstackColumns: [] } });
+        const result = await teamAdapter(mockData, { user: mockUser, fromStaticList: mockFromStaticList, logger: mockLogger, teamId: 2, configuration: { workstackColumns: [], deadlinesEnabled: true } });
         expect(result).toMatchSnapshot();
     });
 });
@@ -228,7 +274,7 @@ describe('Workflow Workstack Adapter', () => {
             ]
         };
 
-        const result = await workflowAdapter(mockData, { user: mockUser, fromStaticList: mockFromStaticList, logger: mockLogger, teamId: 2, workflowId: 'B', configuration: { workstackColumns: [] } });
+        const result = await workflowAdapter(mockData, { user: mockUser, fromStaticList: mockFromStaticList, logger: mockLogger, teamId: 2, workflowId: 'B', configuration: mockConfiguration });
         expect(result).toMatchSnapshot();
     });
 });
@@ -304,7 +350,7 @@ describe('Workflow Workstack Adapter', () => {
             ]
         };
 
-        const result = await stageAdapter(mockData, { user: mockUser, fromStaticList: mockFromStaticList, logger: mockLogger, teamId: 2, workflowId: 'B', stageId: 'A', configuration: { workstackColumns: [] } });
+        const result = await stageAdapter(mockData, { user: mockUser, fromStaticList: mockFromStaticList, logger: mockLogger, teamId: 2, workflowId: 'B', stageId: 'A', configuration: mockConfiguration });
         expect(result).toMatchSnapshot();
     });
 });

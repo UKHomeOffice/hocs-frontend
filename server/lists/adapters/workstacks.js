@@ -2,9 +2,12 @@ const byUser = (userId) => ({ userUUID }) => userUUID === userId;
 const byCaseReference = (a, b) => a.caseReference.localeCompare(b.caseReference);
 const byLabel = (a, b) => a.label.localeCompare(b.label);
 const isUnallocated = user => user === null;
-const isOverdue = deadline => deadline && new Date(deadline) < Date.now();
-const getOverdue = data => {
-    const overdueCases = data.filter(({ deadline }) => isOverdue(deadline));
+const isOverdue = (configuration, deadline) => configuration.deadlinesEnabled && deadline && new Date(deadline) < Date.now();
+const getOverdue = (configuration, data) => {
+    if (!configuration.deadlinesEnabled) {
+        return false;
+    }
+    const overdueCases = data.filter(({ deadline }) => isOverdue(configuration, deadline));
     return overdueCases.length;
 };
 
@@ -46,14 +49,14 @@ class Card {
     getCount() { return this.count; }
 }
 
-const dashboardAdapter = async (data, { fromStaticList, logger, user }) => {
+const dashboardAdapter = async (data, { fromStaticList, logger, user, configuration }) => {
     const dashboardData = await Promise.all(data.stages
         .map(bindDisplayElements(fromStaticList)));
     const userCases = dashboardData.filter(byUser(user.uuid));
     const userCard = [new Card({
         label: 'Cases',
         count: userCases.length,
-        overdue: getOverdue(userCases)
+        overdue: getOverdue(configuration, userCases)
     })];
     const teamCards = dashboardData
         .reduce((cards, stage) => {
@@ -61,7 +64,7 @@ const dashboardAdapter = async (data, { fromStaticList, logger, user }) => {
             if (index >= 0) {
                 const card = cards[index];
                 card.incrementCount();
-                if (isOverdue(stage.deadline)) {
+                if (isOverdue(configuration, stage.deadline)) {
                     card.incrementOverdue();
                 }
                 if (isUnallocated(stage.userUUID)) {
@@ -73,7 +76,7 @@ const dashboardAdapter = async (data, { fromStaticList, logger, user }) => {
                     value: stage.teamUUID,
                     type: 'team',
                     count: 1,
-                    overdue: isOverdue(stage.deadline) ? 1 : 0,
+                    overdue: isOverdue(configuration, stage.deadline) ? 1 : 0,
                     unallocated: isUnallocated(stage.userUUID) ? 1 : 0
                 }));
             }
@@ -109,7 +112,7 @@ const teamAdapter = async (data, { fromStaticList, logger, teamId, configuration
             if (index >= 0) {
                 const card = cards[index];
                 card.incrementCount();
-                if (isOverdue(stage.deadline)) {
+                if (isOverdue(configuration, stage.deadline)) {
                     card.incrementOverdue();
                 }
                 if (isUnallocated(stage.userUUID)) {
@@ -121,7 +124,7 @@ const teamAdapter = async (data, { fromStaticList, logger, teamId, configuration
                     value: stage.caseType,
                     type: 'workflow',
                     count: 1,
-                    overdue: isOverdue(stage.deadline) ? 1 : 0,
+                    overdue: isOverdue(configuration, stage.deadline) ? 1 : 0,
                     unallocated: isUnallocated(stage.userUUID) ? 1 : 0
                 }));
             }
@@ -154,7 +157,7 @@ const workflowAdapter = async (data, { fromStaticList, logger, teamId, workflowI
             if (index >= 0) {
                 const card = cards[index];
                 card.incrementCount();
-                if (isOverdue(stage.deadline)) {
+                if (isOverdue(configuration, stage.deadline)) {
                     card.incrementOverdue();
                 }
                 if (isUnallocated(stage.userUUID)) {
@@ -166,7 +169,7 @@ const workflowAdapter = async (data, { fromStaticList, logger, teamId, workflowI
                     value: stage.stageType,
                     type: 'stage',
                     count: 1,
-                    overdue: isOverdue(stage.deadline) ? 1 : 0,
+                    overdue: isOverdue(configuration, stage.deadline) ? 1 : 0,
                     unallocated: isUnallocated(stage.userUUID) ? 1 : 0
                 }));
             }
