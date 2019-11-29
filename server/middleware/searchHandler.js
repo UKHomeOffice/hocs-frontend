@@ -19,7 +19,8 @@ async function handleSearch(req, res, next) {
                 POTeamUUID: formData['signOffMinister'],
                 FullName: formData['claimantName'],
                 DateOfBirth: formData['claimantDOB'],
-                NI: formData['niNumber']
+                NI: formData['niNumber'],
+                PrevHocsRef: formData['PrevHocsRef']
             },
             activeOnly: Array.isArray(formData['caseStatus']) && formData['caseStatus'].includes('active')
         };
