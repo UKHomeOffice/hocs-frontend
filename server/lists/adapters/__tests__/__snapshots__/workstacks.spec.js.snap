@@ -39,6 +39,45 @@ Object {
 }
 `;
 
+exports[`Dashboard Adapter should transform a stage array to a dashboard schema when deadlines are disabled 1`] = `
+Object {
+  "teams": Array [
+    Card {
+      "count": 3,
+      "label": "MOCK_TEAM",
+      "tags": Object {
+        "allocated": 1,
+        "overdue": 0,
+      },
+      "type": "team",
+      "value": 1,
+    },
+    Card {
+      "count": 1,
+      "label": "MOCK_TEAM",
+      "tags": Object {
+        "allocated": 1,
+        "overdue": 0,
+      },
+      "type": "team",
+      "value": 2,
+    },
+  ],
+  "user": Array [
+    Card {
+      "count": 1,
+      "label": "Cases",
+      "tags": Object {
+        "allocated": undefined,
+        "overdue": false,
+      },
+      "type": undefined,
+      "value": undefined,
+    },
+  ],
+}
+`;
+
 exports[`Team Workstack Adapter should transform a stage array to a team workstack schema 1`] = `
 Object {
   "allocateToTeamEndpoint": "/allocate/team",

@@ -92,7 +92,7 @@ class StageSummary extends Component {
                                     <th className='govuk-table__header padding-left--small'>Created</th>
                                     <td className='govuk-table__cell'>{summary.case.created}</td>
                                 </tr>}
-                                {summary.case && summary.case.deadline && <tr className='govuk-table__cell'>
+                                {summary.deadlinesEnabled && summary.case && summary.case.deadline && <tr className='govuk-table__cell'>
                                     <th className='govuk-table__header padding-left--small'>Deadline</th>
                                     <td className='govuk-table__cell'>{summary.case.deadline}</td>
                                 </tr>}
@@ -107,12 +107,12 @@ class StageSummary extends Component {
                                 {summary.additionalFields && summary.additionalFields.map(({ label, value }) => this.renderRow({ label, value }))}
                             </tbody>
                         </table>
-                        <table className='govuk-table margin-left--small'>
+                        {summary.deadlinesEnabled && <table className='govuk-table margin-left--small'>
                             <caption className='govuk-table__caption margin-bottom--small' >Stage deadlines</caption>
                             <tbody className='govuk-table__body'>
                                 {summary.deadlines && Array.isArray(summary.deadlines) && summary.deadlines.map(stage => this.renderRow(stage))}
                             </tbody>
-                        </table>
+                        </table>}
                         <h2 className='govuk-heading-m'>Active stages</h2>
                         {summary.stages.map(stage => this.renderActiveStage(stage))}
                     </Fragment>

@@ -29,7 +29,7 @@ const parseDate = (rawDate) => {
 
 const formatDate = (date) => date ? parseDate(date) : null;
 
-module.exports = async (summary, { fromStaticList }) => ({
+module.exports = async (summary, { fromStaticList, configuration }) => ({
     case: {
         created: formatDate(summary.caseCreated),
         received: formatDate(summary.dateReceived),
@@ -38,6 +38,7 @@ module.exports = async (summary, { fromStaticList }) => ({
     additionalFields: createAdditionalFields(summary.additionalFields),
     primaryTopic: getPrimaryTopic(summary.primaryTopic),
     primaryCorrespondent: getPrimaryCorrespondent(summary.primaryCorrespondent),
-    deadlines: summary.stageDeadlines ? await createDeadlines(summary.stageDeadlines, fromStaticList) : null,
+    deadlinesEnabled: configuration.deadlinesEnabled,
+    deadlines: configuration.deadlinesEnabled && summary.stageDeadlines ? await createDeadlines(summary.stageDeadlines, fromStaticList) : null,
     stages: await getActiveStages(summary.activeStages, fromStaticList)
 });
