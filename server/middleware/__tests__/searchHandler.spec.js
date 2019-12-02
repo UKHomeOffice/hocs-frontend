@@ -27,6 +27,7 @@ describe('handleSearch', () => {
                     'claimantName': 'test Name',
                     'claimantDOB': '12-11-1967',
                     'niNumber': 'SJ0000000',
+                    'PrevHocsRef': 'PREV_HOCS_REF',
                     'caseStatus': ['active']
                 }
             },
@@ -82,7 +83,8 @@ describe('handleSearch', () => {
                 POTeamUUID: 'Min123',
                 FullName: 'test Name',
                 DateOfBirth: '12-11-1967',
-                NI: 'SJ0000000'
+                NI: 'SJ0000000',
+                PrevHocsRef: 'PREV_HOCS_REF'
             },
             activeOnly: true
         };
