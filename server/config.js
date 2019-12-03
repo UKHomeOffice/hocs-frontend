@@ -3,34 +3,6 @@ const workflowAuth = (process.env.WORKFLOW_BASIC_AUTH || 'UNSET:UNSET').split(':
 
 const config = {
     applications: {
-        render: {
-            clientSide: process.env.USE_CLIENTSIDE || true,
-            js: ['runtime', 'vendor'],
-            css: ['main'],
-            react: 'main',
-            title: 'Correspondence System',
-        },
-        case: {
-            header: {
-                service: 'Correspondence System',
-                serviceLink: '/',
-                logoLinkTitle: '',
-                propositionHeader: '',
-                propositionHeaderLink: '/'
-            },
-            body: {
-                phaseBanner: {
-                    isVisible: true,
-                    phase: 'BETA',
-                    feedback: 'mailto:HOCS@homeoffice.gov.uk'
-                }
-            },
-            footer: {
-                isVisible: false
-            },
-            maxSearchResults: 500,
-            maxUploadSize: process.env.MAX_UPLOAD_SIZE || 100000
-        },
         server: {
             WORKFLOW_SERVICE: process.env.WORKFLOW_SERVICE || 'http://localhost:8091',
             WORKFLOW_BASIC_AUTH: process.env.WORKFLOW_BASIC_AUTH ?
