@@ -14,7 +14,7 @@ const customAdapters = {
     },
     'checkbox': (reducer, field, data) => {
         const { name } = field.props;
-        if (Object.prototype.hasOwnProperty.call(data, name) && data[name] !== '') {
+        if (Object.prototype.hasOwnProperty.call(data, name)) {
             const value = data[name];
             reducer[name] = value;
         }
@@ -38,7 +38,7 @@ const customAdapters = {
 
 function defaultAdapter(reducer, field, data) {
     const { name } = field.props;
-    if (Object.prototype.hasOwnProperty.call(data, name) && data[name] !== '') {
+    if (Object.prototype.hasOwnProperty.call(data, name)) {
         reducer[name] = data[name];
     }
 }
