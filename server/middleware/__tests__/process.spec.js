@@ -41,7 +41,7 @@ describe('Process middleware', () => {
         expect(next).toHaveBeenCalledTimes(1);
     });
 
-    it('return not return data for fields without values', () => {
+    it('should not return data for fields without values', () => {
         const req = {
             body: {},
             query: {},
@@ -67,6 +67,38 @@ describe('Process middleware', () => {
         expect(req.form).toBeDefined();
         expect(req.form.data).toBeDefined();
         expect(req.form.data['test-field']).toBeUndefined();
+        expect(next).toHaveBeenCalled();
+        expect(next).toHaveBeenCalledTimes(1);
+    });
+
+    it('should return data for fields with blank values', () => {
+        const req = {
+            body: {
+                ['test-field']: ''
+            },
+            query: {},
+            form: {
+                schema: {
+                    fields: [
+                        {
+                            component: 'text',
+                            validation: [
+                                'required'
+                            ],
+                            props: {
+                                name: 'test-field',
+                            }
+                        }
+                    ]
+                }
+            }
+        };
+        const res = {};
+
+        processMiddleware(req, res, next);
+        expect(req.form).toBeDefined();
+        expect(req.form.data).toBeDefined();
+        expect(req.form.data['test-field']).toEqual('');
         expect(next).toHaveBeenCalled();
         expect(next).toHaveBeenCalledTimes(1);
     });
@@ -245,6 +277,44 @@ describe('Process middleware', () => {
         expect(req.form.data['test-field']).toEqual('A');
         expect(next).toHaveBeenCalled();
         expect(next).toHaveBeenCalledTimes(1);
+    });
+
+    describe('when empty checkbox data is passed', () => {
+        const req = {
+            body: {
+                ['test-field']: ''
+            },
+            query: {},
+            form: {
+                schema: {
+                    fields: [
+                        {
+                            component: 'checkbox',
+                            validation: [
+                                'required'
+                            ],
+                            props: {
+                                name: 'test-field',
+                                choices: [
+                                    { label: 'A', value: 'A' }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        };
+        const res = {};
+
+        it('should save empty strings when passed as a string', () => {
+            processMiddleware(req, res, next);
+            expect(req.form).toBeDefined();
+            expect(req.form.data).toBeDefined();
+            expect(req.form.data['test-field']).toBeDefined();
+            expect(req.form.data['test-field']).toEqual('');
+            expect(next).toHaveBeenCalled();
+            expect(next).toHaveBeenCalledTimes(1);
+        });
     });
 
     it('should process files when passed and attach to field', () => {
