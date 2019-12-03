@@ -17,7 +17,7 @@ class DocumentPanel extends Component {
         super(props);
         let activeDocument;
         if (props.documents && props.documents.length > 0) {
-            activeDocument = props.documents[0].value || null;
+            activeDocument = this.getFirstDocument(this.flattenDocuments(props.documents));
         }
         this.state = { ...props, activeDocument };
     }
@@ -36,7 +36,14 @@ class DocumentPanel extends Component {
     }
 
     flattenDocuments(documents) {
-        return Array.isArray(documents) && documents.flatMap(([, groupDocs]) => groupDocs);
+        return Array.isArray(documents) && documents
+            .map(([, groupDocs]) => groupDocs)
+            .reduce((reducer, value) => [...reducer, ...value]);
+    }
+
+    getFirstDocument(flatDocumentList) {
+        const { value: firstDocument } = flatDocumentList.filter(({ status }) => status !== 'PENDING')[0] || { value: undefined };
+        return firstDocument;
     }
 
     updateDocuments() {
@@ -51,11 +58,10 @@ class DocumentPanel extends Component {
                                 .then(() => dispatch(clearApiStatus()))
                                 .then(() => {
                                     const allDocuments = this.flattenDocuments(response.data);
-                                    const { value: firstDocument } = allDocuments[0] || { value: undefined };
                                     this.setState((currentState) => ({
                                         ...currentState,
                                         documents: response.data,
-                                        activeDocument: currentState.activeDocument || firstDocument
+                                        activeDocument: currentState.activeDocument || this.getFirstDocument(allDocuments)
                                     }));
                                     if (!this.hasPendingDocuments(allDocuments)) {
                                         if (this.interval) { clearInterval(this.interval); }
