@@ -51,7 +51,7 @@ class Header extends Component {
 Header.propTypes = {
     service: PropTypes.string.isRequired,
     serviceLink: PropTypes.string.isRequired,
-    bulkCreateEnabled: PropTypes.string.isRequired
+    bulkCreateEnabled: PropTypes.bool.isRequired
 };
 
 Header.defaultProps = {
