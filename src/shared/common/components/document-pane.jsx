@@ -10,6 +10,7 @@ import {
 } from '../../contexts/actions/index.jsx';
 import status from '../../helpers/api-status.js';
 import { Link } from 'react-router-dom';
+import sortByTimeStamp from '../../helpers/sortByTimeStamp.js';
 
 class DocumentPanel extends Component {
 
@@ -38,7 +39,8 @@ class DocumentPanel extends Component {
     flattenDocuments(documents) {
         return Array.isArray(documents) && documents
             .map(([, groupDocs]) => groupDocs)
-            .reduce((reducer, value) => [...reducer, ...value]);
+            .reduce((reducer, value) => [...reducer, ...value])
+            .sort(sortByTimeStamp);
     }
 
     getFirstDocument(flatDocumentList) {
