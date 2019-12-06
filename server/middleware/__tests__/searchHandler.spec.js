@@ -18,6 +18,7 @@ describe('handleSearch', () => {
         req = {
             form: {
                 data: {
+                    'reference': 'ref',
                     'caseTypes': 'CT1',
                     'dateReceivedTo': '20-10-2019',
                     'dateReceivedFrom': '10-10-2019',
@@ -72,6 +73,7 @@ describe('handleSearch', () => {
         await handleSearch(req, res, next);
 
         const expectedRequest = {
+            reference: 'ref',
             caseType: 'CT1',
             dateReceived: {
                 to: '20-10-2019',
