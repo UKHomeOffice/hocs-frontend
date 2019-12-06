@@ -13,7 +13,7 @@ const mockConfig = {
 
 describe('Documents Adapter', () => {
 
-    it('should transform document data and sort by creation date', async () => {
+    it('should transform document data and sort by creation date descending', async () => {
         const mockData = {
             documents: [
                 { created: '02-01-2019', displayName: 'Document A', type: 'type1', uuid: 1 },

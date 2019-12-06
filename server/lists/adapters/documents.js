@@ -7,8 +7,17 @@ module.exports = async (data, { configuration, logger }) => {
         return groups;
     };
 
+    const sortByTimeStamp = ({ timeStamp: timeStampA }, { timeStamp: timeStampB }) => {
+        if (timeStampA > timeStampB) {
+            return -1;
+        } else if (timeStampA < timeStampB) {
+            return 1;
+        } else {
+            return 0;
+        }
+    };
+
     return [...data.documents
-        .sort((a, b) => Date.parse(a.created) > Date.parse(b.created) ? 1 : 0)
         .map(({ displayName, uuid, created, status, type }) => ({
             label: displayName,
             status,
@@ -17,5 +26,6 @@ module.exports = async (data, { configuration, logger }) => {
             type,
             value: uuid,
         }))
-        .reduce(reduceDocumentsByType, new Map(configuration.documentLabels.map(label => [label, []])))];
+        .reduce(reduceDocumentsByType, new Map(configuration.documentLabels.map(label => [label, []])))]
+        .map(([name, documents]) => [name, documents.sort(sortByTimeStamp)]);
 };
