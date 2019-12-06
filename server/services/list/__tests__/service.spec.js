@@ -1,5 +1,14 @@
 const listService = require('../service');
 const User = require('../../../models/user');
+const getLogger = require('../../../libs/logger');
+
+jest.mock('../../../libs/logger', () => jest.fn().mockReturnValue({
+    debug: jest.fn(),
+    error: jest.fn(),
+    info: jest.fn(),
+    warn: jest.fn(),
+}));
+
 
 describe('List Service', () => {
 
@@ -337,4 +346,17 @@ describe('List Service', () => {
         });
     });
 
+    describe('when the flush method is called', () => {
+        it('should call the flush on the instance', async () => {
+            const listKey = '__listKey__';
+            const mockRepositoryFlush = jest.fn();
+
+            await listService.initialise({}, {}, { listRepository: { flush: mockRepositoryFlush } });
+
+            listService.flush(listKey);
+
+            expect(getLogger).toHaveBeenCalled();
+            expect(mockRepositoryFlush).toHaveBeenCalledWith(listKey);
+        });
+    });
 });
