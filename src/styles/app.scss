@@ -617,7 +617,7 @@ $border-colour: govuk-colour("grey-2");
 }
 
 .govuk-fieldset{
-  &.horizontalChoices{
+  &.horizontal-choices{
     .govuk-radios{
       display: inline-flex;
     }
