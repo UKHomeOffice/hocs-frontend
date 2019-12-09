@@ -616,3 +616,13 @@ $border-colour: govuk-colour("grey-2");
   margin: 0; 
 }
 
+.govuk-fieldset{
+  &.horizontalChoices{
+    .govuk-radios{
+      display: inline-flex;
+    }
+  }
+}
+
+
+
