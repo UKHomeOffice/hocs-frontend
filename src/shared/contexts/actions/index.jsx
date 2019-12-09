@@ -137,3 +137,9 @@ export function passForwardProps(props) {
         payload: props
     };
 }
+
+export function unsetDocuments() {
+    return {
+        type: types.UNSET_DOCUMENTS
+    };
+}
