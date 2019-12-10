@@ -4,7 +4,7 @@ const customAdapters = {
     'date': (reducer, field, data) => {
         const { name } = field.props;
         const value = data[name];
-        const [year, month, day] = value && value.split('-');
+        const [year = '', month = '', day = ''] = (value || '').split('-');
 
         if (year && month && day) {
             reducer[name] = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
