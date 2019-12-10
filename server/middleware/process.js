@@ -3,13 +3,14 @@ const { FormSubmissionError } = require('../models/error');
 const customAdapters = {
     'date': (reducer, field, data) => {
         const { name } = field.props;
-        const date = {
-            year: data[`${name}-year`],
-            month: data[`${name}-month`],
-            day: data[`${name}-day`],
-        };
-        if (date.year && date.month && date.day) {
-            reducer[name] = `${date.year}-${date.month.padStart(2, '0')}-${date.day.padStart(2, '0')}`;
+        const value = data[name];
+        const [year, month, day] = value && value.split('-');
+
+        if (year && month && day) {
+            reducer[name] = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+        }
+        else if (year + month + day === '') {
+            reducer[name] = '';
         }
     },
     'checkbox': (reducer, field, data) => {

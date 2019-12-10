@@ -106,9 +106,7 @@ describe('Process middleware', () => {
     it('should return dates as a string when passed', () => {
         const req = {
             body: {
-                ['test-field-year']: '1989',
-                ['test-field-month']: '01',
-                ['test-field-day']: '19',
+                ['test-field']: '1989-01-19'
             },
             query: {},
             form: {
@@ -141,8 +139,7 @@ describe('Process middleware', () => {
     it('should return no values for fields with incomplete dates', () => {
         const req = {
             body: {
-                ['test-field-year']: '1989',
-                ['test-field-month']: '01'
+                ['test-field']: '1989-01-'
             },
             query: {},
             form: {
@@ -174,9 +171,7 @@ describe('Process middleware', () => {
     it('should pad single digit day and months with zeros', () => {
         const req = {
             body: {
-                ['test-field-year']: '1989',
-                ['test-field-month']: '4',
-                ['test-field-day']: '3'
+                ['test-field']: '1989-04-03'
             },
             query: {},
             form: {
