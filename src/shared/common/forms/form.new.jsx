@@ -46,7 +46,7 @@ Form.propTypes = {
     errors: PropTypes.object,
     data: PropTypes.object,
     meta: PropTypes.object,
-    updateFormState: PropTypes.func,
+    updateFormState: PropTypes.func.isRequired,
 };
 
 export default Form;
