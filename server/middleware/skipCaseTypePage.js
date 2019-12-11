@@ -12,6 +12,8 @@ async function skipCaseTypePage(req, res, next) {
         } catch (e) {
             next(e);
         }
+    } else {
+        next();
     }
 }
 
@@ -22,7 +24,8 @@ async function skipCaseTypePageOnReload(req, res, next) {
         try {
             const caseTypes = await req.listService.fetch('S_CASETYPES');
             if (caseTypes.length === 1) {
-                res.json({ redirect: `/action/create/${caseTypes[0].key}/DOCUMENT` });
+                const url = `/action/create/${caseTypes[0].key}/DOCUMENT`;
+                res.redirect({ url });
             } else {
                 next();
             }
