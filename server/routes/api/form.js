@@ -1,6 +1,11 @@
 const router = require('express').Router();
 const { allocateCase, moveToPreviousStage } = require('../../middleware/stage');
 const { getFormForAction, getFormForCase, getFormForStage, hydrateFields } = require('../../services/form');
+const { skipCaseTypePage } = require('../../middleware/skipCaseTypePage.js');
+
+router.use(['/action/:workflow/:action'],
+    skipCaseTypePage
+);
 
 router.all(['/action/:workflow/:context/:action', '/action/:workflow/:action'],
     getFormForAction
