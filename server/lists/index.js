@@ -11,6 +11,7 @@ const stringUnsortedAdapter = require('./adapters/stringUnsorted');
 const templatesAdapter = require('./adapters/templates');
 const membersAdapter = require('./adapters/members');
 const documentsAdapter = require('./adapters/documents');
+const documentListAdapter = require('./adapters/documentList');
 const caseNoteAdapter = require('./adapters/case-notes');
 const caseSummaryAdapter = require('./adapters/case-summary');
 const caseViewAdapter = require('./adapters/case-view');
@@ -176,12 +177,12 @@ module.exports = {
         CASE_DOCUMENT_LIST_FINAL: {
             client: 'CASEWORK',
             endpoint: '/case/document/reference/${caseId}/?type=FINAL',
-            adapter: documentsAdapter
+            adapter: documentListAdapter
         },
         CASE_DOCUMENT_LIST_DRAFT: {
             client: 'CASEWORK',
             endpoint: '/case/document/reference/${caseId}/?type=DRAFT',
-            adapter: documentsAdapter
+            adapter: documentListAdapter
         },
         CASE_NOTES: {
             client: 'CASEWORK',
