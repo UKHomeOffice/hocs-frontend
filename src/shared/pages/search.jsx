@@ -25,7 +25,11 @@ const FormWrapper = (C) => ({ match, history, ...props }) => {
     const submitHandler = event => {
         event.preventDefault();
         /* eslint-disable-next-line no-undef */
-        const formData = new FormData(event.target);
+        const formData = new FormData();
+        const { data } = form;
+        Object.keys(form.data).filter(field => data[field] !== null).forEach(field => {
+            formData.append(field, data[field]);
+        });
         dispatch(updateApiStatus(status.SUBMIT_FORM))
             .then(() => axios.post('/api' + (form.schema.action || match.url), formData, { headers: { 'Content-Type': 'multipart/form-data' } }))
             .then(({ data }) => {
