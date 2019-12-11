@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext, useCallback } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { Context } from '../contexts/application.jsx';
@@ -58,6 +58,10 @@ const FormWrapper = (C) => ({ match, history, ...props }) => {
             });
     };
 
+    const updateFormData = useCallback((data) => {
+        setForm({ ...form, data: { ...form.data, ...data } });
+    }, [form]);
+
     useEffect(() => {
         if (contextForm && contextForm.schema) {
             setForm(contextForm);
@@ -70,7 +74,7 @@ const FormWrapper = (C) => ({ match, history, ...props }) => {
     return form ? (
         <C {...props} title={form.schema.title}>
             {confirmation && <Confirmation>{confirmation.summary}</Confirmation>}
-            <Form {...form} action={form.schema.action || match.url} submitHandler={submitHandler} />
+            <Form {...form} action={form.schema.action || match.url} submitHandler={submitHandler} updateFormState={updateFormData} />
         </C>
     ) : null;
 };
