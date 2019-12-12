@@ -61,12 +61,12 @@ const validators = {
 
     hasWhitelistedExtension: ({ value, message }) => {
         if (value && value.length > 0) {
-            const allowableExtensions = DOCUMENT_WHITELIST;
+            const allowableExtensions = DOCUMENT_WHITELIST.map(extension => extension.toUpperCase());
             for (let file of value) {
                 let fileExtension = file.originalname.split('.').slice(-1)[0];
                 let fileName = file.originalname.split('.').slice(0)[0];
 
-                if (!allowableExtensions.includes(fileExtension)) {
+                if (!allowableExtensions.includes(fileExtension.toUpperCase())) {
                     return message || validationErrors.hasWhitelistedExtension(fileName, fileExtension);
                 }
             }
