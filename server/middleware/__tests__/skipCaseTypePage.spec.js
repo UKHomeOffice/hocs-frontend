@@ -1,10 +1,6 @@
-jest.mock('../../services/action.js', () => {
-    return {
-        performAction: jest.fn()
-    };
-});
+const { skipCaseTypePage, skipCaseTypePageApi } = require('../skipCaseTypePage.js');
 
-describe('Stage middleware', () => {
+describe('when the skip middleware is called', () => {
 
     let req = {};
     let res = {};
@@ -28,65 +24,112 @@ describe('Stage middleware', () => {
             redirect
         };
 
+        json.mockReset();
         next.mockReset();
         redirect.mockReset();
     });
 
-    it('should send a callback URL', async () => {
-        expect.assertions(2);
-        const { skipCaseTypePage } = require('../skipCaseTypePage.js');
-        const caseTypes = [{ key: 'casetype1' }];
-        req.listService.fetch.mockImplementation(() => Promise.resolve(caseTypes));
-        const object = { redirect: `/action/create/${caseTypes[0].key}/DOCUMENT` };
+    describe('and it is an api request', () => {
+        it('should send a callback URL', async () => {
+            expect.assertions(2);
+            const caseTypes = [{ key: 'casetype1' }];
+            req.listService.fetch.mockImplementation(() => Promise.resolve(caseTypes));
+            const responseData = { redirect: `/action/create/${caseTypes[0].key}/DOCUMENT` };
 
-        await skipCaseTypePage(req, res, next);
+            await skipCaseTypePageApi(req, res, next);
 
-        expect(json).toHaveBeenCalledTimes(1);
-        expect(json).toHaveBeenCalledWith(object);
+            expect(json).toHaveBeenCalledTimes(1);
+            expect(json).toHaveBeenCalledWith(responseData);
+        });
+
+        it('should call next with an error msg when list service is down', async () => {
+            const mockError = new Error('TEST_ERROR');
+            req.listService.fetch.mockReturnValue(Promise.reject(mockError));
+
+            await skipCaseTypePageApi(req, res, next);
+
+            expect(json).not.toHaveBeenCalled();
+            expect(next).toHaveBeenCalledWith(mockError);
+        });
+
+        it('should not redirect when the workflow parameter is not correct', async () => {
+            req.params.action = 'workflow';
+            req.params.workflow = '__workflow__';
+
+            await skipCaseTypePageApi(req, res, next);
+
+            expect(json).not.toHaveBeenCalled();
+            expect(next).toHaveBeenCalledWith();
+        });
+
+        it('should not redirect when the action parameter is not correct', async () => {
+            req.params.action = '__action__';
+            req.params.workflow = 'create';
+
+            await skipCaseTypePageApi(req, res, next);
+
+            expect(json).not.toHaveBeenCalled();
+            expect(next).toHaveBeenCalledWith();
+        });
+
+        it('should not redirect when there are multiple case types', async () => {
+            const caseTypes = [{ key: 'casetype1' }, { key: 'casetype2' }, { key: 'casetype3' }];
+            req.listService.fetch.mockImplementation(() => Promise.resolve(caseTypes));
+
+            await skipCaseTypePageApi(req, res, next);
+
+            expect(json).not.toHaveBeenCalled();
+            expect(next).toHaveBeenCalledWith();
+        });
     });
 
-    it('should call next with an error msg when list service is down', async () => {
-        const { skipCaseTypePage } = require('../skipCaseTypePage.js');
-        const mockError = new Error('TEST_ERROR');
-        req.listService.fetch.mockReturnValue(Promise.reject(mockError));
+    describe('and it is a page route', () => {
+        it('should send a redirect to the create casetype/document url', async () => {
+            const caseTypes = [{ key: 'casetype1' }];
+            req.listService.fetch.mockImplementation(() => Promise.resolve(caseTypes));
 
-        await skipCaseTypePage(req, res, next);
+            await skipCaseTypePage(req, res, next);
+            expect(redirect).toHaveBeenCalledWith(`/action/create/${caseTypes[0].key}/DOCUMENT`);
+        });
 
-        expect(next).toHaveBeenCalled();
-        expect(next).toHaveBeenCalledWith(mockError);
+        it('should call next with an error msg when list service is down', async () => {
+            const mockError = new Error('TEST_ERROR');
+            req.listService.fetch.mockReturnValue(Promise.reject(mockError));
+
+            await skipCaseTypePage(req, res, next);
+
+            expect(redirect).not.toHaveBeenCalled();
+            expect(next).toHaveBeenCalledWith(mockError);
+        });
+
+        it('should not redirect when the workflow parameter is not correct', async () => {
+            req.params.action = 'workflow';
+            req.params.workflow = '__workflow__';
+
+            await skipCaseTypePage(req, res, next);
+
+            expect(redirect).not.toHaveBeenCalled();
+            expect(next).toHaveBeenCalledWith();
+        });
+
+        it('should not redirect when the action parameter is not correct', async () => {
+            req.params.action = '__action__';
+            req.params.workflow = 'create';
+
+            await skipCaseTypePage(req, res, next);
+
+            expect(redirect).not.toHaveBeenCalled();
+            expect(next).toHaveBeenCalledWith();
+        });
+
+        it('should not redirect when there are multiple case types', async () => {
+            const caseTypes = [{ key: 'casetype1' }, { key: 'casetype2' }, { key: 'casetype3' }];
+            req.listService.fetch.mockImplementation(() => Promise.resolve(caseTypes));
+
+            await skipCaseTypePage(req, res, next);
+
+            expect(redirect).not.toHaveBeenCalled();
+            expect(next).toHaveBeenCalledWith();
+        });
     });
-
-    it('should call next when url is wrong', async () => {
-        const { skipCaseTypePage } = require('../skipCaseTypePage.js');
-        req.params.action = 'undefined';
-
-        await skipCaseTypePage(req, res, next);
-
-        expect(next).toHaveBeenCalled();
-    });
-
-
-    it('should send a 200/OK response and a callback URL', async () => {
-        const { skipCaseTypePageOnReload } = require('../skipCaseTypePage.js');
-        const caseTypes = [{ key: 'casetype1' }];
-        req.listService.fetch.mockImplementation(() => Promise.resolve(caseTypes));
-        const object = { url: `/action/create/${caseTypes[0].key}/DOCUMENT` };
-
-        await skipCaseTypePageOnReload(req, res, next);
-
-        expect(redirect).toHaveBeenCalled();
-        expect(redirect).toHaveBeenCalledWith(object);
-    });
-
-    it('should call next with an error msg when list service is down', async () => {
-        const { skipCaseTypePageOnReload } = require('../skipCaseTypePage.js');
-        const mockError = new Error('TEST_ERROR');
-        req.listService.fetch.mockReturnValue(Promise.reject(mockError));
-
-        await skipCaseTypePageOnReload(req, res, next);
-
-        expect(next).toHaveBeenCalled();
-        expect(next).toHaveBeenCalledWith(mockError);
-    });
-
 });

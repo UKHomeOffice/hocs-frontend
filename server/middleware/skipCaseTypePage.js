@@ -1,3 +1,19 @@
+async function skipCaseTypePageApi(req, res, next) {
+    const workflow = req.params.workflow;
+    const action = req.params.action;
+    if (workflow === 'create' && action === 'workflow') {
+        try {
+            const caseTypes = await req.listService.fetch('S_CASETYPES');
+            if (caseTypes.length === 1) {
+                return res.json({ redirect: `/action/create/${caseTypes[0].key}/DOCUMENT` });
+            }
+        } catch (e) {
+            return next(e);
+        }
+    }
+    return next();
+}
+
 async function skipCaseTypePage(req, res, next) {
     const workflow = req.params.workflow;
     const action = req.params.action;
@@ -5,37 +21,17 @@ async function skipCaseTypePage(req, res, next) {
         try {
             const caseTypes = await req.listService.fetch('S_CASETYPES');
             if (caseTypes.length === 1) {
-                res.json({ redirect: `/action/create/${caseTypes[0].key}/DOCUMENT` });
-            } else {
-                next();
-            }
-        } catch (e) {
-            next(e);
-        }
-    } else {
-        next();
-    }
-}
-
-async function skipCaseTypePageOnReload(req, res, next) {
-    const workflow = req.params.workflow;
-    const action = req.params.action;
-    if (workflow && action ) {
-        try {
-            const caseTypes = await req.listService.fetch('S_CASETYPES');
-            if (caseTypes.length === 1) {
                 const url = `/action/create/${caseTypes[0].key}/DOCUMENT`;
-                res.redirect({ url });
-            } else {
-                next();
+                return res.redirect(url);
             }
         } catch (e) {
-            next(e);
+            return next(e);
         }
     }
+    return next();
 }
 
 module.exports = {
     skipCaseTypePage,
-    skipCaseTypePageOnReload
+    skipCaseTypePageApi
 };
