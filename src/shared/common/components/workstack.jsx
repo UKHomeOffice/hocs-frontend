@@ -42,7 +42,7 @@ const dataAdapters = {
         var date = new Date(value);
         return date.getDate().toString().padStart(2, '0') + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
     },
-    indicator: (value, key) => value === 'YES' ? key.replace(/([a-z])([A-Z])/g, '$1 $2').replace('Is ', '') : undefined
+    indicator: (value, key) => value && value.toUpperCase() === 'YES' ? key.replace(/([a-z])([A-Z])/g, '$1 $2').replace('Is ', '') : undefined
 };
 
 class WorkstackAllocate extends Component {
