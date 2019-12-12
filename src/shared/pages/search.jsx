@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext, useCallback } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { Context } from '../contexts/application.jsx';
@@ -25,7 +25,11 @@ const FormWrapper = (C) => ({ match, history, ...props }) => {
     const submitHandler = event => {
         event.preventDefault();
         /* eslint-disable-next-line no-undef */
-        const formData = new FormData(event.target);
+        const formData = new FormData();
+        const { data } = form;
+        Object.keys(form.data).filter(field => data[field] !== null).forEach(field => {
+            formData.append(field, data[field]);
+        });
         dispatch(updateApiStatus(status.SUBMIT_FORM))
             .then(() => axios.post('/api' + (form.schema.action || match.url), formData, { headers: { 'Content-Type': 'multipart/form-data' } }))
             .then(({ data }) => {
@@ -58,6 +62,10 @@ const FormWrapper = (C) => ({ match, history, ...props }) => {
             });
     };
 
+    const updateFormData = useCallback((data) => {
+        setForm({ ...form, data: { ...form.data, ...data } });
+    }, [form]);
+
     useEffect(() => {
         if (contextForm && contextForm.schema) {
             setForm(contextForm);
@@ -70,7 +78,7 @@ const FormWrapper = (C) => ({ match, history, ...props }) => {
     return form ? (
         <C {...props} title={form.schema.title}>
             {confirmation && <Confirmation>{confirmation.summary}</Confirmation>}
-            <Form {...form} action={form.schema.action || match.url} submitHandler={submitHandler} />
+            <Form {...form} action={form.schema.action || match.url} submitHandler={submitHandler} updateFormState={updateFormData} />
         </C>
     ) : null;
 };

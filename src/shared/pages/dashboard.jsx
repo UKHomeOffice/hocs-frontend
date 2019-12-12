@@ -64,7 +64,7 @@ const Dashboard = ({ title, match, history }) => {
             <div className='govuk-grid-row'>
                 <div className='govuk-grid-column-one-third'>
                     {form.schema.title && <h1 className='govuk-heading-l'>{form.schema.title}</h1>}
-                    <Form {...form} action={form.schema.action || match.url} submitHandler={submitHandler} showErrorSummary={false} />
+                    <Form {...form} action={form.schema.action || match.url} submitHandler={submitHandler} showErrorSummary={false} updateFormState={() => { }} />
                 </div>
             </div>
             <div className='govuk-grid-row'>

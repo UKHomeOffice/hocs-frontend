@@ -32,14 +32,6 @@ describe('Form date component', () => {
             render(<DateInput name="date-field" disabled={true} updateState={() => null} />)
         ).toMatchSnapshot();
     });
-    it('should execute callback on initialization', () => {
-        const mockCallback = jest.fn();
-        shallow(
-            <DateInput name="date" updateState={mockCallback} />
-        );
-        expect(mockCallback).toHaveBeenCalledTimes(1);
-        expect(mockCallback).toHaveBeenCalledWith({ 'date-day': '', 'date-month': '', 'date-year': '' });
-    });
     it('should execute callback on change', () => {
         const mockCallback = jest.fn();
         const wrapper = shallow(
@@ -50,19 +42,19 @@ describe('Form date component', () => {
         mockCallback.mockReset();
         wrapper.find('#date-day').simulate('change', event);
         expect(mockCallback).toHaveBeenCalledTimes(1);
-        expect(mockCallback).toHaveBeenCalledWith({ 'date-day': '19' });
+        expect(mockCallback).toHaveBeenCalledWith({ 'date': '--19' });
 
         mockCallback.mockReset();
         event = { target: { value: '01' } };
         wrapper.find('#date-month').simulate('change', event);
         expect(mockCallback).toHaveBeenCalledTimes(1);
-        expect(mockCallback).toHaveBeenCalledWith({ 'date-month': '01' });
+        expect(mockCallback).toHaveBeenCalledWith({ 'date': '-01-' });
 
         mockCallback.mockReset();
         event = { target: { value: '2018' } };
         wrapper.find('#date-year').simulate('change', event);
         expect(mockCallback).toHaveBeenCalledTimes(1);
-        expect(mockCallback).toHaveBeenCalledWith({ 'date-year': '2018' });
+        expect(mockCallback).toHaveBeenCalledWith({ 'date': '2018--' });
     });
 });
 
