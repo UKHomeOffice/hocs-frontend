@@ -8,7 +8,7 @@ async function handleSearch(req, res, next) {
     try {
         const formData = req.form.data;
         const request = {
-            reference: formData['reference'],
+            reference: formData['reference'] ? formData['reference'].toUpperCase() : '',
             caseType: formData['caseTypes'],
             dateReceived: {
                 to: formData['dateReceivedTo'],
