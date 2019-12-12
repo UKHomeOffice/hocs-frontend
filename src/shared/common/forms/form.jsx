@@ -20,7 +20,8 @@ class Form extends Component {
             meta,
             method,
             page,
-            schema
+            schema,
+            submittingForm
         } = this.props;
         return (
             <>
@@ -49,7 +50,7 @@ class Form extends Component {
                             });
                         })
                     }
-                    {schema.showPrimaryAction !== false && < Submit label={schema.defaultActionLabel} />}
+                    {schema.showPrimaryAction !== false && < Submit label={schema.defaultActionLabel} disabled={submittingForm} />}
                     {
                         schema && schema.secondaryActions && schema.secondaryActions.map((field, key) => {
                             return secondaryActionFactory(field.component, {
@@ -80,11 +81,13 @@ Form.propTypes = {
     schema: PropTypes.object.isRequired,
     submitHandler: PropTypes.func,
     updateFormState: PropTypes.func,
+    submittingForm: PropTypes.bool.isRequired
 };
 
 Form.defaultProps = {
     defaultActionLabel: 'Submit',
-    method: 'POST'
+    method: 'POST',
+    submittingForm: false
 };
 
 export default Form;
