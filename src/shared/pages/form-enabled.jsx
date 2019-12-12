@@ -63,8 +63,9 @@ function withForm(Page) {
         }
 
         getForm() {
-            const { dispatch, match: { url } } = this.props;
+            const { dispatch, match: { url }, history } = this.props;
             const endpoint = '/api/form' + url;
+
             return dispatch(updateApiStatus(status.REQUEST_FORM))
                 .then(() => {
                     axios.get(endpoint)
@@ -72,12 +73,16 @@ function withForm(Page) {
                             dispatch(updateApiStatus(status.REQUEST_FORM_SUCCESS))
                                 .then(dispatch(unsetDocuments()))
                                 .then(() => {
-                                    this.setState({
-                                        form_data: response.data.data,
-                                        form_schema: response.data.schema,
-                                        form_meta: response.data.meta
-                                    });
-                                    dispatch(updateFormErrors(response.data.errors));
+                                    if (response.data.redirect) {
+                                        history.push(response.data.redirect);
+                                    } else {
+                                        this.setState({
+                                            form_data: response.data.data,
+                                            form_schema: response.data.schema,
+                                            form_meta: response.data.meta
+                                        });
+                                        dispatch(updateFormErrors(response.data.errors));
+                                    }
                                 })
                                 .then(() => dispatch(clearApiStatus()))
                                 .catch(() => {
