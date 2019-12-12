@@ -395,11 +395,13 @@ a.card__body {
     &.sorted-ascending::after {
         content: "\2191";
         margin-left: 0.5rem;
+        position: absolute;
     }
 
     &.sorted-descending::after {
         content: "\2193";
         margin-left: 0.5rem;
+        position: absolute;
     }
   }
 }
