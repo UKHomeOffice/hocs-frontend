@@ -67,6 +67,10 @@ class WorkstackAllocate extends Component {
         return this.applyDataAdapter(value, column);
     }
 
+    getDataValue(row, column) {
+        return row[column.dataValueKey] !== undefined ? row[column.dataValueKey] : row.data[column.dataValueKey];
+    }
+
     applyDataAdapter(value, column) {
         if (column.dataAdapter) {
             const dataAdapter = dataAdapters[column.dataAdapter];
@@ -253,8 +257,8 @@ class WorkstackAllocate extends Component {
 
     compareRows(a, b) {
         const { column: sortColumn } = this.state.sort;
-        const aValue = sortColumn ? this.getCellValue(a, sortColumn) || '' : a.index;
-        const bValue = sortColumn ? this.getCellValue(b, sortColumn) || '' : b.index;
+        const aValue = sortColumn ? (this.getDataValue(a, sortColumn) || '').toUpperCase() : a.index;
+        const bValue = sortColumn ? (this.getDataValue(b, sortColumn) || '').toUpperCase() : b.index;
         if (aValue > bValue) {
             return 1 * this.state.sort.direction;
         } else if (aValue < bValue) {
