@@ -73,7 +73,7 @@ describe('handleSearch', () => {
         await handleSearch(req, res, next);
 
         const expectedRequest = {
-            reference: 'ref',
+            reference: 'REF',
             caseType: 'CT1',
             dateReceived: {
                 to: '20-10-2019',
