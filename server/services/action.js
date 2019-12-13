@@ -45,7 +45,7 @@ function updateCase({ caseId, stageId, form }, headers) {
     return workflowService.post(`/case/${caseId}/stage/${stageId}`, { data: form.data }, headers);
 }
 
-function handleActionSuccess(response, workflow, form) {
+async function handleActionSuccess(response, workflow, form) {
     const { next, data } = form;
     if (response && response.callbackUrl) {
         return { callbackUrl: response.callbackUrl };
@@ -90,6 +90,14 @@ const actions = {
                         response = await createCase('/case', { caseType: context, form }, documentTags[0], headers);
                         clientResponse = { summary: 'Created a new case ', link: `${response.data.reference}` };
                         return handleActionSuccess(clientResponse, workflow, form);
+                    }
+                    case actionTypes.CREATE_AND_ALLOCATE_CASE: {
+                        const listServiceInstance = listService.getInstance(uuid(), null);
+                        const { documentLabels: documentTags } = await listServiceInstance.fetch('S_SYSTEM_CONFIGURATION');
+                        const { data: { reference } } = await createCase('/case', { caseType: context, form }, documentTags[0], headers);
+                        const { data: { stages } } = await caseworkService.get(`/case/${encodeURIComponent(reference)}/stage`, headers);
+                        const { caseUUID, uuid: stageUUID } = stages[0];
+                        return handleActionSuccess({ callbackUrl: `/case/${caseUUID}/stage/${stageUUID}/allocate` }, workflow, form);
                     }
                     case actionTypes.BULK_CREATE_CASE: {
                         const listServiceInstance = listService.getInstance(uuid(), null);

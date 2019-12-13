@@ -2,10 +2,20 @@ const router = require('express').Router();
 const { allocateCase, moveToPreviousStage } = require('../../middleware/stage');
 const { getFormForAction, getFormForCase, getFormForStage, hydrateFields } = require('../../services/form');
 const { skipCaseTypePageApi } = require('../../middleware/skipCaseTypePage');
+const { apiActionResponseMiddleware } = require('../../middleware/action');
 
 router.get(['/action/:workflow/:action'],
     skipCaseTypePageApi
 );
+
+router.get('/action/:workflow/:context/:action', async (req, res, next) => {
+    const { action, workflow } = req.params;
+
+    if (workflow === 'create' && action === 'DOCUMENT') {
+        await getFormForAction(req, res, async () => await apiActionResponseMiddleware(req, res, next));
+    }
+    next();
+});
 
 router.all(['/action/:workflow/:context/:action', '/action/:workflow/:action'],
     getFormForAction
