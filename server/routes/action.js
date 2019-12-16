@@ -5,10 +5,13 @@ const { validationMiddleware } = require('../middleware/validation');
 const { actionResponseMiddleware } = require('../middleware/action');
 const { getFormForAction, hydrateFields } = require('../services/form');
 const { skipCaseTypePage } = require('../middleware/skipCaseTypePage');
+const { autoCreateAllocate } = require('../middleware/autoCreateAllocate');
 
 router.get(['/:workflow/:action'],
     skipCaseTypePage
 );
+
+router.get('/:workflow/:context/:action', autoCreateAllocate);
 
 router.use(['/:workflow/:context/:action', '/:workflow/:action'],
     getFormForAction,
