@@ -2,27 +2,21 @@ const { actionResponseMiddleware, apiActionResponseMiddleware } = require('../mi
 const { getFormForAction } = require('../services/form');
 const tenantConfig = require('../tenantConfig');
 
-async function autoCreateAllocate(req, res, next) {
-    const { autoCreateAndAllocateEnabled } = await tenantConfig.layoutConfig();
-    const { action, workflow } = req.params;
-
-    try {
-        if (autoCreateAndAllocateEnabled && workflow === 'create' && action === 'DOCUMENT') {
-            return await getFormForAction(req, res, async () => await actionResponseMiddleware(req, res, next));
-        }
-        return next();
-    } catch (e) {
-        return next(e);
-    }
+async function autoCreateAllocateBrowser(req, res, next) {
+    return await autoCreateAllocate(req, res, next, actionResponseMiddleware);
 }
 
 async function autoCreateAllocateApi(req, res, next) {
+    return await autoCreateAllocate(req, res, next, apiActionResponseMiddleware);
+}
+
+async function autoCreateAllocate(req, res, next, responseMiddleware) {
     try {
         const { autoCreateAndAllocateEnabled } = await tenantConfig.layoutConfig();
-        const { action, workflow } = req.params;
+        const { action = '', workflow = '' } = req.params;
 
-        if (autoCreateAndAllocateEnabled && workflow === 'create' && action === 'DOCUMENT') {
-            return await getFormForAction(req, res, async () => await apiActionResponseMiddleware(req, res, next));
+        if (autoCreateAndAllocateEnabled && workflow.toLocaleUpperCase() === 'CREATE' && action.toLocaleUpperCase() === 'DOCUMENT') {
+            return await getFormForAction(req, res, async () => await responseMiddleware(req, res, next));
         }
         return next();
     } catch (e) {
@@ -31,6 +25,6 @@ async function autoCreateAllocateApi(req, res, next) {
 }
 
 module.exports = {
-    autoCreateAllocate,
-    autoCreateAllocateApi
+    autoCreateAllocateApi,
+    autoCreateAllocateBrowser,
 };
