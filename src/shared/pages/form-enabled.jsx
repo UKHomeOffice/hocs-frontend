@@ -8,6 +8,8 @@ import {
     setError,
     updateApiStatus,
     clearApiStatus,
+    unsetCaseNotes,
+    unsetCaseSummary,
     unsetDocuments,
     unsetForm,
     updateFormErrors,
@@ -71,7 +73,11 @@ function withForm(Page) {
                     axios.get(endpoint)
                         .then(response => {
                             dispatch(updateApiStatus(status.REQUEST_FORM_SUCCESS))
-                                .then(dispatch(unsetDocuments()))
+                                .then(() => {
+                                    dispatch(unsetCaseNotes());
+                                    dispatch(unsetCaseSummary());
+                                    dispatch(unsetDocuments());
+                                })
                                 .then(() => {
                                     if (response.data.redirect) {
                                         history.push(response.data.redirect);
