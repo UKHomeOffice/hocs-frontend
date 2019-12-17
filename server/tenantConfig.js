@@ -34,7 +34,8 @@ async function layoutConfig() {
             isVisible: false
         },
         maxSearchResults: 500,
-        maxUploadSize: process.env.MAX_UPLOAD_SIZE || 10485760
+        maxUploadSize: process.env.MAX_UPLOAD_SIZE || 10485760,
+        autoCreateAndAllocateEnabled: configuration.autoCreateAndAllocateEnabled
     };
 }
 

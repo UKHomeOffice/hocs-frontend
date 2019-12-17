@@ -1,7 +1,7 @@
 async function skipCaseTypePageApi(req, res, next) {
     const workflow = req.params.workflow;
     const action = req.params.action;
-    if (workflow === 'create' && action === 'workflow') {
+    if (workflow.toLocaleLowerCase() === 'create' && action.toLocaleLowerCase() === 'workflow') {
         try {
             const caseTypes = await req.listService.fetch('S_CASETYPES');
             if (caseTypes.length === 1) {
@@ -17,7 +17,7 @@ async function skipCaseTypePageApi(req, res, next) {
 async function skipCaseTypePage(req, res, next) {
     const workflow = req.params.workflow;
     const action = req.params.action;
-    if (workflow === 'create' && action === 'workflow') {
+    if (workflow.toLocaleLowerCase() === 'create' && action.toLocaleLowerCase() === 'workflow') {
         try {
             const caseTypes = await req.listService.fetch('S_CASETYPES');
             if (caseTypes.length === 1) {

@@ -2,10 +2,13 @@ const router = require('express').Router();
 const { allocateCase, moveToPreviousStage } = require('../../middleware/stage');
 const { getFormForAction, getFormForCase, getFormForStage, hydrateFields } = require('../../services/form');
 const { skipCaseTypePageApi } = require('../../middleware/skipCaseTypePage');
+const { autoCreateAllocateApi } = require('../../middleware/autoCreateAllocate');
 
 router.get(['/action/:workflow/:action'],
     skipCaseTypePageApi
 );
+
+router.get('/action/:workflow/:context/:action', autoCreateAllocateApi);
 
 router.all(['/action/:workflow/:context/:action', '/action/:workflow/:action'],
     getFormForAction

@@ -158,7 +158,7 @@ const getFormForAction = async (req, res, next) => {
         const { workflow, context, action } = req.params;
         const form = await getFormSchema({ context: 'ACTION', workflow, entity: context, action, user: req.user });
         req.form = form;
-        next();
+        return next();
     } catch (error) {
         logger.error('ACTION_FORM_FAILURE', { message: error.message, stack: error.stack });
         if (error.response !== undefined && error.response.status === 401) {
