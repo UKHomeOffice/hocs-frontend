@@ -6,12 +6,12 @@ const workstack = require('./adapters/workstacks');
 const topicAdapter = require('./adapters/topics');
 const usersAdapter = require('./adapters/users');
 const teamsAdapter = require('./adapters/teams');
-const stringSortedAdapter = require('./adapters/stringSorted');
 const stringUnsortedAdapter = require('./adapters/stringUnsorted');
 const templatesAdapter = require('./adapters/templates');
 const membersAdapter = require('./adapters/members');
 const documentsAdapter = require('./adapters/documents');
 const documentListAdapter = require('./adapters/documentList');
+const countrySortAdapter = require('./adapters/countrySort');
 const caseNoteAdapter = require('./adapters/case-notes');
 const caseSummaryAdapter = require('./adapters/case-summary');
 const caseViewAdapter = require('./adapters/case-view');
@@ -70,7 +70,7 @@ module.exports = {
         COUNTRIES_CURRENT: {
             client: 'INFO',
             endpoint: '/country',
-            adapter: stringSortedAdapter
+            adapter: countrySortAdapter
         },
         DASHBOARD: {
             client: 'CASEWORK',
