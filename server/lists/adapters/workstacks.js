@@ -24,7 +24,11 @@ const formatDate = (date) => date ? parseDate(date) : null;
 const bindDisplayElements = fromStaticList => async (stage) => {
     stage.assignedTeamDisplay = await fromStaticList('S_TEAMS', stage.teamUUID);
     stage.caseTypeDisplayFull = await fromStaticList('S_CASETYPES', stage.caseType);
-    stage.stageTypeDisplay = await fromStaticList('S_STAGETYPES', stage.stageType);
+    if (stage.active) {
+        stage.stageTypeDisplay = await fromStaticList('S_STAGETYPES', stage.stageType);
+    } else {
+        stage.stageTypeDisplay = 'Closed';
+    }
     if (stage.userUUID) {
         stage.assignedUserDisplay = await fromStaticList('S_USERS', stage.userUUID) || 'Allocated';
     }

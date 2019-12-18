@@ -108,6 +108,7 @@ Object {
   ],
   "items": Array [
     Object {
+      "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "caseReference": "A/1234568/19",
       "caseType": "C",
@@ -120,6 +121,7 @@ Object {
       "userUUID": null,
     },
     Object {
+      "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
       "caseReference": "A/1234568/19",
@@ -133,6 +135,7 @@ Object {
       "userUUID": 2,
     },
     Object {
+      "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "caseReference": "A/1234569/19",
       "caseType": "B",
@@ -145,6 +148,7 @@ Object {
       "userUUID": null,
     },
     Object {
+      "active": false,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
       "caseReference": "A/1234569/19",
@@ -153,11 +157,12 @@ Object {
       "deadline": "06-01-2200",
       "deadlineDisplay": null,
       "stageType": "A",
-      "stageTypeDisplay": "MOCK_STAGETYPE",
+      "stageTypeDisplay": "Closed",
       "teamUUID": 2,
       "userUUID": 1,
     },
     Object {
+      "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "caseReference": "A/1234570/19",
       "caseType": "B",
@@ -181,6 +186,7 @@ Object {
   "columns": Array [],
   "items": Array [
     Object {
+      "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
       "caseType": "A",
@@ -227,6 +233,7 @@ Object {
   ],
   "items": Array [
     Object {
+      "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
       "caseReference": "A/1234568/19",
@@ -240,6 +247,7 @@ Object {
       "userUUID": 2,
     },
     Object {
+      "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "caseReference": "A/1234569/19",
       "caseType": "B",
@@ -252,6 +260,7 @@ Object {
       "userUUID": null,
     },
     Object {
+      "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
       "caseReference": "A/1234569/19",
@@ -265,6 +274,7 @@ Object {
       "userUUID": 1,
     },
     Object {
+      "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "caseReference": "A/1234569/19",
       "caseType": "B",
@@ -277,6 +287,7 @@ Object {
       "userUUID": null,
     },
     Object {
+      "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "caseReference": "A/1234570/19",
       "caseType": "B",
@@ -302,6 +313,7 @@ Object {
   "columns": Array [],
   "items": Array [
     Object {
+      "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
       "caseReference": "A/1234568/19",
@@ -315,6 +327,7 @@ Object {
       "userUUID": 2,
     },
     Object {
+      "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "caseReference": "A/1234569/19",
       "caseType": "B",
@@ -327,6 +340,7 @@ Object {
       "userUUID": null,
     },
     Object {
+      "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
       "caseReference": "A/1234569/19",
@@ -340,6 +354,7 @@ Object {
       "userUUID": 1,
     },
     Object {
+      "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "caseReference": "A/1234570/19",
       "caseType": "B",

@@ -61,9 +61,9 @@ describe('handleSearch', () => {
         caseworkService.post.mockImplementation(() => Promise.resolve({
             data: {
                 stages: [
-                    { caseReference: 'ref2', teamUUID: 'T1', caseType: 'CT1', stageType: 'ST1' },
-                    { caseReference: 'ref1', teamUUID: 'T1', caseType: 'CT1', stageType: 'ST1' },
-                    { caseReference: 'ref3', teamUUID: 'T1', caseType: 'CT1', stageType: 'ST1' }
+                    { caseReference: 'ref2', teamUUID: 'T1', caseType: 'CT1', stageType: 'ST1', active: true },
+                    { caseReference: 'ref1', teamUUID: 'T1', caseType: 'CT1', stageType: 'ST1', active: true },
+                    { caseReference: 'ref3', teamUUID: 'T1', caseType: 'CT1', stageType: 'ST1', active: true }
                 ]
             }
         }));
