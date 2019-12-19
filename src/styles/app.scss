@@ -626,5 +626,16 @@ $border-colour: govuk-colour("grey-2");
   }
 }
 
+.govuk-width-container {
+    max-width: unset;
+}
 
+@media (min-width: 1360px) {
+    .govuk-width-container {
+        margin: 0 3rem;
 
+        &.govuk-header__container {
+            margin-bottom: -10px;
+        }
+    }        
+}

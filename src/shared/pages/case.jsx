@@ -14,14 +14,14 @@ class Case extends Component {
         } = this.props;
         return (
             <div className="govuk-grid-row">
-                <div className="govuk-grid-column-one-half">
+                <div className={`govuk-grid-column-one-${hasSidebar ? 'third' : 'half'}`}>
                     {title && <h1 className="govuk-heading-l">
                         {title}
                         {form && <span className="govuk-caption-l">{form && form.caseReference}</span>}
-                    </h1> }
+                    </h1>}
                     {children}
                 </div>
-                {hasSidebar && <div className="govuk-grid-column-one-half">
+                {hasSidebar && <div className="govuk-grid-column-two-thirds">
                     <SideBar />
                 </div>}
             </div>
