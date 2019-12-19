@@ -14,7 +14,8 @@ const documentsAdapter = require('./adapters/documents');
 const documentListAdapter = require('./adapters/documentList');
 const caseNoteAdapter = require('./adapters/case-notes');
 const caseSummaryAdapter = require('./adapters/case-summary');
-const caseViewAdapter = require('./adapters/case-view');
+const caseViewAllStagesAdapter = require('./adapters/case-view-all-stages');
+const caseViewReadOnlyAdapter = require('./adapters/case-view-read-only');
 const {
     caseCorrespondentAdapter,
     correspondentTypeAdapter
@@ -194,10 +195,15 @@ module.exports = {
             endpoint: '/case/${caseId}/summary',
             adapter: caseSummaryAdapter
         },
-        CASE_VIEW: {
+        CASE_VIEW_ALL_STAGES: {
             client: 'WORKFLOW',
             endpoint: '/case/${caseId}',
-            adapter: caseViewAdapter
+            adapter: caseViewAllStagesAdapter
+        },
+        CASE_VIEW_READ_ONLY: {
+            client: 'WORKFLOW',
+            endpoint: '/case/details/${caseId}',
+            adapter: caseViewReadOnlyAdapter
         }
     },
     clients: {
