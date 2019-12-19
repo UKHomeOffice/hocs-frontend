@@ -39,9 +39,7 @@ class Header extends Component {
         const { service, serviceLink, bulkCreateEnabled } = this.props;
         return (
             <header className='govuk-header ' role='banner' data-module='header'>
-                <div className='govuk-header__container govuk-width-container'>
-                    {this.createLogotype(service, serviceLink, bulkCreateEnabled)}
-                </div>
+                {this.createLogotype(service, serviceLink, bulkCreateEnabled)}
             </header>
         );
     }
