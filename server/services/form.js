@@ -18,7 +18,8 @@ async function getFormSchemaFromWorkflowService(requestId, options, user) {
             case 401:
                 // handle no permission to allocate
                 try {
-                    const response = await listService.getInstance(requestId, user).fetch('CASE_VIEW', { caseId });
+                    const { readOnlyCaseViewAdapter } = await listService.getInstance(requestId, user).fetch('S_SYSTEM_CONFIGURATION');
+                    const response = await listService.getInstance(requestId, user).fetch(readOnlyCaseViewAdapter, { caseId });
                     return { form: response };
                 } catch (error) {
                     return { error: new PermissionError('You are not authorised to work on this case') };
@@ -36,7 +37,8 @@ async function getFormSchemaFromWorkflowService(requestId, options, user) {
                     usersInTeam = [];
                 }
                 try {
-                    caseView = await listService.getInstance(requestId, user).fetch('CASE_VIEW', { caseId });
+                    const { readOnlyCaseViewAdapter } = await listService.getInstance(requestId, user).fetch('S_SYSTEM_CONFIGURATION');
+                    caseView = await listService.getInstance(requestId, user).fetch(readOnlyCaseViewAdapter, { caseId });
                 } catch (error) {
                     caseView = null;
                 }
