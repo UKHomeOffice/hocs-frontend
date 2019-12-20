@@ -54,7 +54,7 @@ describe('Form text area component', () => {
             <TextArea name={fieldName} updateState={mockCallback} />
         );
         mockCallback.mockReset();
-        wrapper.find('textarea').simulate('blur', event);
+        wrapper.find('textarea').simulate('change', event);
         expect(mockCallback).toHaveBeenCalledTimes(1);
         expect(mockCallback).toHaveBeenCalledWith({ [fieldName]: 'TextArea value' });
     });

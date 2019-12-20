@@ -14,9 +14,6 @@ class Text extends Component {
 
     _onChange(e) {
         this.setState({ value: e.target.value });
-    }
-
-    _onBlur(e) {
         this.props.updateState({ [this.props.name]: e.target.value });
     }
 
@@ -43,7 +40,6 @@ class Text extends Component {
                     disabled={disabled}
                     value={this.state.value}
                     onChange={e => this._onChange(e)}
-                    onBlur={e => this._onBlur(e)}
                 />
             </div>
         );
