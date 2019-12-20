@@ -4,6 +4,7 @@ const { DOCUMENT_WHITELIST, DOCUMENT_BULK_LIMIT } = require('../config').forCont
 const validationErrors = {
     required: label => `${label} is required`,
     alphanumeric: label => `${label} must be alphanumeric`,
+    currency: label => `${label} must be currency amount`,
     numeric: label => `${label} must be numeric`,
     hasWhitelistedExtension: (value, extension) => {
         return `${value} is a ${extension.toUpperCase()} file which is not allowed`;
@@ -48,6 +49,13 @@ const validators = {
         const format = /^[a-z0-9]+$/i;
         if (value && !format.test(value)) {
             return message || validationErrors.alphanumeric(label);
+        }
+        return null;
+    },
+    currency: ({ label, value, message }) => {
+        const format = /^\d+(\.\d{2})?$/;
+        if (value && !format.test(value)) {
+            return message || validationErrors.currency(label);
         }
         return null;
     },
