@@ -79,3 +79,27 @@ describe('When the Details link is clicked twice', () => {
             .toMatchSnapshot();
     });
 });
+
+describe('When the checkbox clicked', () => {
+    const updateStateMock = jest.fn();
+    const items = [{ component: 'inset', props: {} }, { component: 'inset', props: {} }, { component: 'inset', props: {} }];
+    beforeEach(() => {
+        updateStateMock.mockReset();
+    });
+
+    describe('And it is currently not selected', () => {
+        it('should call the callback with the selected value', () => {
+            const wrapper = mount(<ExpandableCheckbox choice={choice} data={{}} items={items} name="__name__" updateState={updateStateMock} value="__notvalue__" />);
+            wrapper.find('.govuk-checkboxes__input').at(0).simulate('change', { target: { value: '__value__' } });
+            expect(updateStateMock).toHaveBeenCalledWith({ '__name__': '__value__' });
+        });
+    });
+
+    describe('And it is currently selected', () => {
+        it('should call the callback with undefined', () => {
+            const wrapper = mount(<ExpandableCheckbox choice={choice} data={{}} items={items} name="__name__" updateState={updateStateMock} value="__value__" />);
+            wrapper.find('.govuk-checkboxes__input').at(0).simulate('change', { target: { value: '__value__' } });
+            expect(updateStateMock).toHaveBeenCalledWith({ '__name__': undefined });
+        });
+    });
+});
