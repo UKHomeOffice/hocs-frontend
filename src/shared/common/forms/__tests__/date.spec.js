@@ -1,35 +1,37 @@
 import React from 'react';
 import DateInput from '../date.jsx';
 
+const maxYear = 2119;
+
 describe('Form date component', () => {
     it('should render with default props', () => {
         expect(
-            render(<DateInput name="date-field" updateState={() => null} />)
+            render(<DateInput name="date-field" maxYear={maxYear} updateState={() => null} />)
         ).toMatchSnapshot();
     });
     it('should render with value when passed', () => {
         expect(
-            render(<DateInput name="date-field" value="2018-01-19" updateState={() => null} />)
+            render(<DateInput name="date-field" maxYear={maxYear} value="2018-01-19" updateState={() => null} />)
         ).toMatchSnapshot();
     });
     it('should render with label when passed', () => {
         expect(
-            render(<DateInput name="date-field" label="My text field" updateState={() => null} />)
+            render(<DateInput name="date-field" maxYear={maxYear} label="My text field" updateState={() => null} />)
         ).toMatchSnapshot();
     });
     it('should render with hint when passed', () => {
         expect(
-            render(<DateInput name="date-field" hint="Put some text in the box below" updateState={() => null} />)
+            render(<DateInput name="date-field" maxYear={maxYear} hint="Put some text in the box below" updateState={() => null} />)
         ).toMatchSnapshot();
     });
     it('should render with error when passed', () => {
         expect(
-            render(<DateInput name="date-field" error="Some error message" updateState={() => null} />)
+            render(<DateInput name="date-field" maxYear={maxYear} error="Some error message" updateState={() => null} />)
         ).toMatchSnapshot();
     });
     it('should render disabled when passed', () => {
         expect(
-            render(<DateInput name="date-field" disabled={true} updateState={() => null} />)
+            render(<DateInput name="date-field" maxYear={maxYear} disabled={true} updateState={() => null} />)
         ).toMatchSnapshot();
     });
     it('should execute callback on change', () => {
