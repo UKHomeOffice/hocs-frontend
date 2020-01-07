@@ -18,6 +18,7 @@ import TypeAhead from './type-ahead.jsx';
 import Panel from './panel.jsx';
 import Accordion from './accordion.jsx';
 import Hidden from './hidden.jsx';
+import CheckboxGroup from './checkbox-group.jsx';
 
 function defaultDataAdapter(name, data) {
     return data[name] || '';
@@ -91,6 +92,8 @@ export function formComponentFactory(field, options) {
             );
         case 'accordion':
             return renderFormComponent(Accordion, { data, key, config, errors, callback });
+        case 'checkbox-group':
+            return renderFormComponent(CheckboxGroup, { data, key, config, errors, callback });
         default:
             return null;
     }
