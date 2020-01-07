@@ -27,6 +27,11 @@ describe('Form text component', () => {
             render(<Text name="text-field" error="Some error message" updateState={() => null} />)
         ).toMatchSnapshot();
     });
+    it('should render className when passed', () => {
+        expect(
+            render(<Text name="text-field" className="myClass" updateState={() => null} />)
+        ).toMatchSnapshot();
+    });
     it('should render disabled when passed', () => {
         expect(
             render(<Text name="text-field" disabled={true} updateState={() => null} />)
