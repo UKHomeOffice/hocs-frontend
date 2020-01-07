@@ -8,10 +8,7 @@ const expandableCheckbox = ({ choice, data, error, errors, hint, initiallyOpen, 
     const createComponent = getComponentFactoryInstance(formComponentFactory, { data, errors: errors, meta: {}, callback: updateState, baseUrl: '/' });
     const [isOpen, setOpen] = React.useState(initiallyOpen);
 
-    const onOpenClick = React.useCallback((e) => {
-        e.preventDefault();
-        setOpen(!isOpen);
-    }, [isOpen]);
+    const onOpenClick = React.useCallback(() => setOpen(!isOpen), [isOpen]);
 
     const onCheckBoxChange = React.useCallback((e) => {
         const targetValue = e.target.value;

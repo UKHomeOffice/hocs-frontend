@@ -13,6 +13,20 @@ describe('When the component is rendered', () => {
     });
 });
 
+describe('When the component is rendered with a hint', () => {
+    it('should match the snapshot', () => {
+        expect(render(<ExpandableCheckbox choice={choice} data={{}} hint="__hint__" name="__name__" updateState={() => { }} />))
+            .toMatchSnapshot();
+    });
+});
+
+describe('When the component is rendered with a hint', () => {
+    it('should match the snapshot', () => {
+        expect(render(<ExpandableCheckbox choice={choice} data={{}} error="__error__" name="__name__" updateState={() => { }} />))
+            .toMatchSnapshot();
+    });
+});
+
 describe('When the component is rendered and it has child components', () => {
     const items = [{ component: 'inset', props: {} }, { component: 'inset', props: {} }, { component: 'inset', props: {} }];
 
@@ -41,6 +55,27 @@ describe('When the component is rendered', () => {
 describe('When the component is rendered', () => {
     it('should render unchecked if the value doesnt match', () => {
         expect(render(<ExpandableCheckbox choice={choice} data={{}} name="__name__" updateState={() => { }} value="__notvalue__" />))
+            .toMatchSnapshot();
+    });
+});
+
+describe('When the Details link is clicked', () => {
+    it('should show the child items', () => {
+        const items = [{ component: 'inset', props: {} }, { component: 'inset', props: {} }, { component: 'inset', props: {} }];
+        const wrapper = mount(<ExpandableCheckbox choice={choice} data={{}} items={items} name="__name__" updateState={() => { }} value="__notvalue__" />);
+        wrapper.find('.selectable-details-link span').at(0).simulate('click');
+        expect(wrapper.html())
+            .toMatchSnapshot();
+    });
+});
+
+describe('When the Details link is clicked twice', () => {
+    it('should not show the child items', () => {
+        const items = [{ component: 'inset', props: {} }, { component: 'inset', props: {} }, { component: 'inset', props: {} }];
+        const wrapper = mount(<ExpandableCheckbox choice={choice} data={{}} items={items} name="__name__" updateState={() => { }} value="__notvalue__" />);
+        wrapper.find('.selectable-details-link span').at(0).simulate('click');
+        wrapper.find('.selectable-details-link span').at(0).simulate('click');
+        expect(wrapper.html())
             .toMatchSnapshot();
     });
 });
