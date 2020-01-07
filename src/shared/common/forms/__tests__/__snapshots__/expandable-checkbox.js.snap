@@ -19,7 +19,7 @@ exports[`When the component is rendered and it has child components and the init
           id="details-checkbox-__name__"
           name="details-checkbox-__name__"
           type="checkbox"
-          value="__choiceValue__"
+          value="__value__"
         />
         <label
           class="govuk-label govuk-checkboxes__label"
@@ -78,7 +78,7 @@ exports[`When the component is rendered and it has child components should match
           id="details-checkbox-__name__"
           name="details-checkbox-__name__"
           type="checkbox"
-          value="__choiceValue__"
+          value="__value__"
         />
         <label
           class="govuk-label govuk-checkboxes__label"
@@ -118,7 +118,7 @@ exports[`When the component is rendered should match the snapshot 1`] = `
           id="details-checkbox-__name__"
           name="details-checkbox-__name__"
           type="checkbox"
-          value="__choiceValue__"
+          value="__value__"
         />
         <label
           class="govuk-label govuk-checkboxes__label"
