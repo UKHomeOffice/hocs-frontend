@@ -51,18 +51,6 @@ const expandableCheckbox = ({ choice, data, error, errors, hint, initiallyOpen, 
             {hint && <span className="govuk-hint">{hint}</span>}
             {isOpen && <div className="selectable-details-content">
                 {Array.isArray(items) && items.map(createComponent)}
-                <label htmlFor={`${name}-interim`} id={`${name}-interim-label`} className="govuk-label govuk-label--s">Interim payment</label>
-                <input className="govuk-input"
-                    id={`${name}-interim`}
-                    type="text"
-                    name={`${name}-interim`}
-                />
-                <label htmlFor={`${name}-full`} id={`${name}-interim-label`} className="govuk-label govuk-label--s">Full payment</label>
-                <input className="govuk-input"
-                    id={`${name}-full`}
-                    type="text"
-                    name={`${name}-full`}
-                />
             </div>}
         </div>
     </>;
@@ -72,7 +60,7 @@ expandableCheckbox.propTypes = {
     choice: PropTypes.object.isRequired,
     data: PropTypes.object.isRequired,
     error: PropTypes.string,
-    errors: PropTypes.object.isRequired,
+    errors: PropTypes.object,
     hint: PropTypes.string,
     initiallyOpen: PropTypes.bool,
     items: PropTypes.array,
