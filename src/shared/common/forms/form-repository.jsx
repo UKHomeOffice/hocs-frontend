@@ -1,5 +1,6 @@
 import React from 'react';
 import TextInput from './text.jsx';
+import MappedText from './mapped-text.jsx';
 import Radio from './radio-group.jsx';
 import DateInput from './date.jsx';
 import Checkbox from './checkbox-group.jsx';
@@ -45,6 +46,8 @@ export function formComponentFactory(field, options) {
             return renderFormComponent(Radio, { key, config, data, errors, callback });
         case 'text':
             return renderFormComponent(TextInput, { key, config, data, errors, callback });
+        case 'mapped-text':
+            return renderFormComponent(MappedText, { key, config, data, errors, callback });
         case 'hidden':
             return renderFormComponent(Hidden, { key, config, data, errors, callback });
         case 'date':

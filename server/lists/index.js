@@ -6,7 +6,7 @@ const workstack = require('./adapters/workstacks');
 const topicAdapter = require('./adapters/topics');
 const usersAdapter = require('./adapters/users');
 const teamsAdapter = require('./adapters/teams');
-const stringUnsortedAdapter = require('./adapters/stringUnsorted');
+const entityListItemsAdapter = require('./adapters/entityListItems');
 const templatesAdapter = require('./adapters/templates');
 const membersAdapter = require('./adapters/members');
 const documentsAdapter = require('./adapters/documents');
@@ -58,6 +58,21 @@ module.exports = {
             endpoint: '/configuration',
             type: listService.types.STATIC
         },
+        S_WCS_COHORTS: {
+            client: 'INFO',
+            endpoint: '/entity/list/WCS_COHORTS',
+            adapter: entityListItemsAdapter
+        },
+        S_WCS_I_STATUS: {
+            client: 'INFO',
+            endpoint: '/entity/list/WCS_I_STATUS',
+            adapter: entityListItemsAdapter
+        },
+        S_WCS_I_STATUS_OUTCOME: {
+            client: 'INFO',
+            endpoint: '/entity/list/WCS_I_STATUS_OUTCOME',
+            adapter: entityListItemsAdapter
+        },
         CASE_TYPES: {
             client: 'INFO',
             endpoint: '/caseType?bulkOnly=false',
@@ -92,11 +107,6 @@ module.exports = {
             client: 'INFO',
             endpoint: '/teams?unit=WCS_CASEWORK_TEAMS',
             adapter: teamsAdapter
-        },
-        WCS_COHORTS: {
-            client: 'INFO',
-            endpoint: '/data/cohorts',
-            adapter: stringUnsortedAdapter
         },
         WORKFLOW_WORKSTACK: {
             client: 'CASEWORK',
