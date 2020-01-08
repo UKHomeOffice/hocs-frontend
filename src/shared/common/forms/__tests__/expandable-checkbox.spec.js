@@ -36,11 +36,11 @@ describe('When the component is rendered and it has child components', () => {
     });
 });
 
-describe('When the component is rendered and it has child components and the initiallyOpen prop', () => {
+describe('When the component is rendered and it is selected and it has child components and the initiallyOpen prop', () => {
     const items = [{ component: 'inset', props: {} }, { component: 'inset', props: {} }, { component: 'inset', props: {} }];
 
     it('should match the snapshot - the child components should be initially displayed', () => {
-        expect(render(<ExpandableCheckbox choice={choice} data={{}} initiallyOpen={true} items={items} name="__name__" updateState={() => { }} />))
+        expect(render(<ExpandableCheckbox choice={choice} data={{ '__name__': '__value__' }} initiallyOpen={true} items={items} name="__name__" updateState={() => { }} />))
             .toMatchSnapshot();
     });
 });

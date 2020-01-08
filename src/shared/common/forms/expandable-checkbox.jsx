@@ -5,16 +5,17 @@ import { formComponentFactory } from './form-repository.jsx';
 const getComponentFactoryInstance = (factory, options) => ({ component, props }, key) => factory(component, { key, config: props, ...options });
 
 const expandableCheckbox = ({ choice, data, error, errors, hint, initiallyOpen, items, name, updateState, value }) => {
+    const isChecked = choice.value && value && value.toUpperCase() === choice.value.toUpperCase();
     const createComponent = getComponentFactoryInstance(formComponentFactory, { data, errors: errors, meta: {}, callback: updateState, baseUrl: '/' });
     const sectionHasValidationError = errors && Array.isArray(items) && items.some(item => errors[item.props.name]);
-    const [isOpen, setOpen] = React.useState(initiallyOpen || sectionHasValidationError);
+    const [isOpen, setOpen] = React.useState((initiallyOpen && isChecked) || sectionHasValidationError);
 
     const onOpenClick = React.useCallback(() => setOpen(!isOpen), [isOpen]);
 
     const onCheckBoxChange = React.useCallback((e) => {
         const targetValue = e.target.value;
 
-        if (value && value.toUpperCase() === targetValue.toUpperCase()) {
+        if (isChecked) {
             updateState({ [name]: undefined });
         } else {
             updateState({ [name]: targetValue });
@@ -35,20 +36,19 @@ const expandableCheckbox = ({ choice, data, error, errors, hint, initiallyOpen, 
                                 name={`details-checkbox-${name}`}
                                 className={'govuk-checkboxes__input'}
                                 value={choice.value}
-                                checked={
-                                    value && value.toUpperCase() === choice.value.toUpperCase()
-                                }
+                                checked={isChecked}
                                 onChange={onCheckBoxChange}
                             />
                             <label className="govuk-label govuk-checkboxes__label" htmlFor={`details-checkbox-${name}`}>{choice.label}</label>
                         </div>
                     </div>
-                    <div className="selectable-details-link">
+                    {items && items.length > 0 && <div className="selectable-details-link">
                         <span onClick={onOpenClick}>Details</span>
                     </div>
+                    }
                 </div>
                 {hint && <span className="govuk-hint">{hint}</span>}
-                {isOpen && <div className="selectable-details-content">
+                {isOpen && items && items.length > 0 && <div className="selectable-details-content">
                     {Array.isArray(items) && items.map(createComponent)}
                 </div>}
             </div>
