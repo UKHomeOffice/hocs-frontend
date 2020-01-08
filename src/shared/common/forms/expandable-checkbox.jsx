@@ -20,36 +20,38 @@ const expandableCheckbox = ({ choice, data, error, errors, hint, initiallyOpen, 
             updateState({ [name]: targetValue });
             setOpen(true);
         }
-    }, []);
+    }, [value]);
 
     return <>
         <div className="govuk-grid-row selectable-details">
-            {error && <span id={`${name}-error`} className="govuk-error-message">{error}</span>}
-            <div className="selectable-details-header">
-                <div className={'govuk-checkboxes'} style={{ display: 'inline-flex' }}>
-                    <div className="govuk-checkboxes__item">
-                        <input
-                            id={`details-checkbox-${name}`}
-                            type="checkbox"
-                            name={`details-checkbox-${name}`}
-                            className={'govuk-checkboxes__input'}
-                            value={choice.value}
-                            checked={
-                                value && value.toUpperCase() === choice.value.toUpperCase()
-                            }
-                            onChange={onCheckBoxChange}
-                        />
-                        <label className="govuk-label govuk-checkboxes__label" htmlFor={`details-checkbox-${name}`}>{choice.label}</label>
+            <div className="govuk-grid-column-full">
+                {error && <span id={`${name}-error`} className="govuk-error-message">{error}</span>}
+                <div className="selectable-details-header">
+                    <div className={'govuk-checkboxes'} style={{ display: 'inline-flex' }}>
+                        <div className="govuk-checkboxes__item">
+                            <input
+                                id={`details-checkbox-${name}`}
+                                type="checkbox"
+                                name={`details-checkbox-${name}`}
+                                className={'govuk-checkboxes__input'}
+                                value={choice.value}
+                                checked={
+                                    value && value.toUpperCase() === choice.value.toUpperCase()
+                                }
+                                onChange={onCheckBoxChange}
+                            />
+                            <label className="govuk-label govuk-checkboxes__label" htmlFor={`details-checkbox-${name}`}>{choice.label}</label>
+                        </div>
+                    </div>
+                    <div className="selectable-details-link">
+                        <span onClick={onOpenClick}>Details</span>
                     </div>
                 </div>
-                <div className="selectable-details-link">
-                    <span onClick={onOpenClick}>Details</span>
-                </div>
+                {hint && <span className="govuk-hint">{hint}</span>}
+                {isOpen && <div className="selectable-details-content">
+                    {Array.isArray(items) && items.map(createComponent)}
+                </div>}
             </div>
-            {hint && <span className="govuk-hint">{hint}</span>}
-            {isOpen && <div className="selectable-details-content">
-                {Array.isArray(items) && items.map(createComponent)}
-            </div>}
         </div>
     </>;
 };
