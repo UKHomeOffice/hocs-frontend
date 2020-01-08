@@ -6,7 +6,8 @@ const getComponentFactoryInstance = (factory, options) => ({ component, props },
 
 const expandableCheckbox = ({ choice, data, error, errors, hint, initiallyOpen, items, name, updateState, value }) => {
     const createComponent = getComponentFactoryInstance(formComponentFactory, { data, errors: errors, meta: {}, callback: updateState, baseUrl: '/' });
-    const [isOpen, setOpen] = React.useState(initiallyOpen);
+    const sectionHasValidationError = errors && Array.isArray(items) && items.some(item => errors[item.props.name]);
+    const [isOpen, setOpen] = React.useState(initiallyOpen || sectionHasValidationError);
 
     const onOpenClick = React.useCallback(() => setOpen(!isOpen), [isOpen]);
 

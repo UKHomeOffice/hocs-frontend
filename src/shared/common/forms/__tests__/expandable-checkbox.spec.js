@@ -103,3 +103,13 @@ describe('When the checkbox clicked', () => {
         });
     });
 });
+
+
+describe('When the component is rendered a child component has errors', () => {
+    const items = [{ component: 'inset', props: { name: 'child1' } }, { component: 'inset', props: { name: 'child2' } }, { component: 'inset', props: { name: 'child3' } }];
+    const errors = { child1: 'an error' };
+    it('should render expanded', () => {
+        expect(render(<ExpandableCheckbox choice={choice} data={{}} errors={errors} items={items} name="__name__" updateState={() => { }} />))
+            .toMatchSnapshot();
+    });
+});
