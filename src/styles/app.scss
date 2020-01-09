@@ -34,6 +34,13 @@ $govuk-font-family-tabular: 'helvetica neue',Arial, Helvetica, sans-serif !defau
   margin:0;
 }
 
+.govuk-mapped-text {
+  background-color: govuk-colour("grey-4");
+  font-weight: 400;
+  min-height: 20px;
+  padding: 10px;
+}
+
 .govuk-input:disabled, .govuk-textarea:disabled{
   background-color: govuk-colour("grey-4");
   border-color: govuk-colour("grey-4");

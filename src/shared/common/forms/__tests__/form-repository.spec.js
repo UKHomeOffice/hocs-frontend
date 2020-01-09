@@ -10,6 +10,7 @@ const mockChoices = [
 
 const supportedFormComponents = [
     { component: 'text', props: { name: 'text-component' } },
+    { component: 'mapped-text', props: { name: 'mapped-text-component', choices: mockChoices } },
     { component: 'radio', props: { name: 'radio-component', type: 'radio', choices: mockChoices } },
     { component: 'date', props: { name: 'date-component' } },
     { component: 'checkbox', props: { name: 'checkbox-component', type: 'checkbox', choices: mockChoices } },
@@ -59,7 +60,7 @@ describe('Form repository', () => {
         expect(Component).toBeNull();
     });
 
-    xit('should support components in the supportedFormComponents list', () => {
+    it('should support components in the supportedFormComponents list', () => {
         supportedFormComponents.map(({ component, props }) => {
             const Component = formComponentFactory(component, {
                 key: 1,
