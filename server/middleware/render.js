@@ -1,6 +1,7 @@
 const React = require('react');
 const { renderToString } = require('react-dom/server');
 const { StaticRouter } = require('react-router-dom');
+const { HelmetProvider } = require('react-helmet-async');
 const { default: App } = require('../../build/server/app.server');
 const html = require('../layout/html');
 
@@ -33,9 +34,12 @@ async function renderMiddleware(req, res, next) {
         status
     };
 
+
     const markup = renderToString(
         React.createElement(StaticRouter, { location: req.originalUrl, context },
-            React.createElement(App, { config })
+            React.createElement(HelmetProvider, {},
+                React.createElement(App, { config })
+            )
         )
     );
 
@@ -55,7 +59,6 @@ async function renderMiddleware(req, res, next) {
 function renderResponseMiddleware(req, res) {
     return res.send(res.rendered);
 }
-
 
 module.exports = {
     renderMiddleware,

@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { ApplicationProvider } from './contexts/application.jsx';
 import Router from './router/index.jsx';
+import SessionTimer from '../shared/layouts/session-timer.jsx';
 
 class App extends Component {
     render() {
         return (
             <ApplicationProvider config={this.props.config}>
+                <SessionTimer />
                 <Router />
             </ApplicationProvider>
         );
