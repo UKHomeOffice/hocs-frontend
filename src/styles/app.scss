@@ -633,6 +633,25 @@ $border-colour: govuk-colour("grey-2");
   }
 }
 
+.currency{
+  &.govuk-form-group{
+    > div:before {
+      content: "£ ";
+    }
+
+    > div {
+      font-size: 1.1875rem;
+      font-family: "helvetica neue", Arial, Helvetica, sans-serif;
+      font-weight: 700;
+      color: #0b0c0c;
+    }
+
+    > div > input {
+      width: 90%;
+    }
+  }
+}
+
 .govuk-width-container {
     max-width: unset;
 }

@@ -19,6 +19,7 @@ class Text extends Component {
 
     render() {
         const {
+            className,
             disabled,
             error,
             hint,
@@ -27,26 +28,28 @@ class Text extends Component {
             type
         } = this.props;
         return (
-            <div className={`govuk-form-group${error ? ' govuk-form-group--error' : ''}`}>
+            <div className={`govuk-form-group${error ? ' govuk-form-group--error' : ''} ${className ? className : ''}`}>
 
                 <label htmlFor={name} id={`${name}-label`} className="govuk-label govuk-label--s">{label}</label>
                 {hint && <span className="govuk-hint">{hint}</span>}
                 {error && <span id={`${name}-error`} className="govuk-error-message">{error}</span>}
-
-                <input className={`govuk-input${error ? ' govuk-input--error' : ''}`}
-                    id={name}
-                    type={type}
-                    name={name}
-                    disabled={disabled}
-                    value={this.state.value}
-                    onChange={e => this._onChange(e)}
-                />
+                <div>
+                    <input className={`govuk-input${error ? ' govuk-input--error' : ''}`}
+                        id={name}
+                        type={type}
+                        name={name}
+                        disabled={disabled}
+                        value={this.state.value}
+                        onChange={e => this._onChange(e)}
+                    />
+                </div>
             </div>
         );
     }
 }
 
 Text.propTypes = {
+    className: PropTypes.string,
     disabled: PropTypes.bool,
     error: PropTypes.string,
     hint: PropTypes.string,
