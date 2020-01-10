@@ -23,6 +23,7 @@ const supportedFormComponents = [
     { component: 'inset', props: { name: 'inset' } },
     { component: 'paragraph', props: { name: 'paragraph' } },
     { component: 'hidden', props: { name: 'hidden' } },
+    { component: 'expandable-checkbox', props: { name: 'expandable' } },
 ];
 
 const supportedSecondaryActions = [
