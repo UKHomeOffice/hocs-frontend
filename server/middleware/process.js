@@ -34,7 +34,15 @@ const customAdapters = {
                 .filter(field => field.type !== 'display')
                 .reduce(createReducer(data, req), reducer));
         }
-    }
+    },
+    'expandable-checkbox': (reducer, { props: { name, items } = {} }, data, req) => {
+        reducer[name] = data[name];
+        if (items) {
+            items
+                .filter(field => field.type !== 'display')
+                .reduce(createReducer(data, req), reducer);
+        }
+    },
 };
 
 function defaultAdapter(reducer, field, data) {

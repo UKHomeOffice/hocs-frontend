@@ -380,4 +380,101 @@ describe('Process middleware', () => {
         expect(next).toHaveBeenCalled();
         expect(next).toHaveBeenCalledTimes(1);
     });
+
+    describe('when expandable-checkbox data is processed', () => {
+        const req = {
+            body: {
+                ['test-field-1']: 'TEST_VALUE_1',
+                ['test-field-2']: 'TEST_VALUE_2',
+                ['test-field-3']: 'TEST_VALUE_3'
+            },
+            query: {},
+            form: {
+                schema: {
+                    fields: [
+                        {
+                            component: 'expandable-checkbox',
+                            props: {
+                                name: 'test-field-1',
+                                items: [{
+                                    component: 'text',
+                                    props: {
+                                        name: 'test-field-2'
+                                    }
+                                }, {
+                                    component: 'text',
+                                    props: {
+                                        name: 'test-field-3'
+                                    }
+                                }]
+                            }
+                        }
+                    ]
+                }
+            }
+        };
+        const res = {};
+        it('should save the value', () => {
+            processMiddleware(req, res, next);
+            expect(req.form).toBeDefined();
+            expect(req.form.data).toBeDefined();
+            expect(req.form.data['test-field-1']).toEqual('TEST_VALUE_1');
+            expect(next).toHaveBeenCalled();
+            expect(next).toHaveBeenCalledTimes(1);
+        });
+        it('should save the child values', () => {
+            processMiddleware(req, res, next);
+            expect(req.form).toBeDefined();
+            expect(req.form.data).toBeDefined();
+            expect(req.form.data['test-field-2']).toEqual('TEST_VALUE_2');
+            expect(req.form.data['test-field-3']).toEqual('TEST_VALUE_3');
+            expect(next).toHaveBeenCalled();
+            expect(next).toHaveBeenCalledTimes(1);
+        });
+    });
+    describe('when accordion data is processed', () => {
+        const req = {
+            body: {
+                ['test-field-1']: 'TEST_VALUE_1',
+                ['test-field-2']: 'TEST_VALUE_2',
+                ['test-field-3']: 'TEST_VALUE_3'
+            },
+            query: {},
+            form: {
+                schema: {
+                    fields: [
+                        {
+                            component: 'accordion',
+                            props: {
+                                name: 'test-field-1',
+                                sections: [{
+                                    items: [{
+                                        component: 'text',
+                                        props: {
+                                            name: 'test-field-2'
+                                        }
+                                    }, {
+                                        component: 'text',
+                                        props: {
+                                            name: 'test-field-3'
+                                        }
+                                    }]
+                                }]
+                            }
+                        }
+                    ]
+                }
+            }
+        };
+        const res = {};
+        it('should save the child values', () => {
+            processMiddleware(req, res, next);
+            expect(req.form).toBeDefined();
+            expect(req.form.data).toBeDefined();
+            expect(req.form.data['test-field-2']).toEqual('TEST_VALUE_2');
+            expect(req.form.data['test-field-3']).toEqual('TEST_VALUE_3');
+            expect(next).toHaveBeenCalled();
+            expect(next).toHaveBeenCalledTimes(1);
+        });
+    });
 });

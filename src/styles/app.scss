@@ -665,3 +665,43 @@ $border-colour: govuk-colour("grey-2");
         }
     }        
 }
+
+.selectable-details {
+
+    .selectable-details-header {
+        color: #0b0c0c;
+        display: flex;
+        font-family: "helvetica neue", Arial, Helvetica, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        font-size: 16px;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.25;
+        margin-bottom: 20px;
+
+        .selectable-details-link {
+            color: #005ea5;
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            margin-bottom: 5px;
+            margin-left: auto;
+            padding-left: 25px;
+            padding-top: 11px;
+            text-decoration: underline;
+            
+            &:hover {
+                color: #2b8cc4;
+            }
+        }
+    }
+
+    .selectable-details-content {
+        border-left: 5px solid #bfc1c3;
+        padding: 15px;
+        padding-left: 20px;
+        margin-bottom: 20px;
+        margin-top: 0.5rem;
+    }
+}
