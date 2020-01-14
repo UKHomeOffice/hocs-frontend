@@ -5,15 +5,13 @@ class Text extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { value: this.props.value };
     }
 
     componentDidMount() {
-        this.props.updateState({ [this.props.name]: this.state.value });
+        this.props.updateState({ [this.props.name]: this.props.value });
     }
 
     _onChange(e) {
-        this.setState({ value: e.target.value });
         this.props.updateState({ [this.props.name]: e.target.value });
     }
 
@@ -39,7 +37,7 @@ class Text extends Component {
                         type={type}
                         name={name}
                         disabled={disabled}
-                        value={this.state.value}
+                        value={this.props.value}
                         onChange={e => this._onChange(e)}
                     />
                 </div>
@@ -50,7 +48,7 @@ class Text extends Component {
 
 Text.propTypes = {
     className: PropTypes.string,
-    disabled: PropTypes.bool,
+    disabled: PropTypes.string,
     error: PropTypes.string,
     hint: PropTypes.string,
     label: PropTypes.string,
