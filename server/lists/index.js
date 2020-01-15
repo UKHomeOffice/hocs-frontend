@@ -73,6 +73,11 @@ module.exports = {
             endpoint: '/entity/list/WCS_I_STATUS_OUTCOME',
             adapter: entityListItemsAdapter
         },
+        S_WCS_ELIG_REJ_REASON: {
+            client: 'INFO',
+            endpoint: '/entity/list/WCS_ELIG_REJ_REASON',
+            adapter: entityListItemsAdapter
+        },
         CASE_TYPES: {
             client: 'INFO',
             endpoint: '/caseType?bulkOnly=false',
