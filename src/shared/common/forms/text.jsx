@@ -3,10 +3,6 @@ import PropTypes from 'prop-types';
 
 class Text extends Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     componentDidMount() {
         this.props.updateState({ [this.props.name]: this.props.value });
     }
