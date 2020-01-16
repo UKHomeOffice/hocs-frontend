@@ -1,46 +1,40 @@
 import React from 'react';
-import { Context } from '../contexts/application.jsx';
+import axios from 'axios';
 import { Helmet } from 'react-helmet-async';
+import { Context } from '../contexts/application.jsx';
 
 const countDown = 60000;
-const defaultTargetDate = new Date().getTime() + countDown;
+const getTargetDate = () => new Date(new Date().getTime() + countDown);
 
 const SessionTimer = () => {
     const { layout: { header: { service } } } = React.useContext(Context);
-    const [targetDate,] = React.useState(new Date(defaultTargetDate));
+    const [targetDate, setTargetDate] = React.useState(getTargetDate());
     const [remainingSeconds, setRemainingSeconds] = React.useState(countDown / 1000);
-    let requestRef = React.useRef();
-
-    let localRequestAnimationFrame;
-    // eslint-disable-next-line no-undef
-    if (typeof requestAnimationFrame === 'undefined' || !requestAnimationFrame) {
-        localRequestAnimationFrame = setImmediate;
-    } else {
-        // eslint-disable-next-line no-undef
-        localRequestAnimationFrame = requestAnimationFrame;
-    }
-
-    // eslint-disable-next-line no-undef
-    // let localCancelAnimationFrame = typeof cancelAnimationFrame === 'undefined' ? clearImmediate : cancelAnimationFrame;
-
-    const countItDown = () => localRequestAnimationFrame(() => {
-        const diff = Math.floor((targetDate - new Date().getTime()) / 1000);
-        setRemainingSeconds(diff);
-        console.log(diff);
-        if (diff > 0) {
-            countItDown();
-        }
-    });
+    const [showAsterisk, setShowAsterisk] = React.useState(true);
 
     React.useEffect(() => {
-        countItDown();
-        // requestRef = localRequestAnimationFrame(countItDown);
-        // return () => localCancelAnimationFrame(requestRef.current);
-    }, [targetDate]);
+        // Add a request interceptor
+        axios.interceptors.response.use((response) => {
+            setTargetDate(getTargetDate());
+            console.log(response);
+            return response;
+        }, (error) => {
+            console.log(error);
+            return error;
+        });
+    }, []);
 
-    countItDown();
-    return remainingSeconds < 55 && <Helmet defer={false} titleTemplate={`${remainingSeconds}s remaining %s`}>
-        <title>{service.toString()}</title>
+    React.useEffect(() => {
+        const interval = setInterval(() => {
+            const diff = Math.floor((targetDate - new Date().getTime()) / 1000);
+            setRemainingSeconds(diff);
+            setShowAsterisk(showAsterisk => setShowAsterisk(!showAsterisk));
+        }, 500);
+        return () => clearInterval(interval);
+    }, [targetDate, showAsterisk]);
+
+    return typeof window !== 'undefined' && <Helmet defer={false} titleTemplate={`${remainingSeconds > 55 ? '' : `${showAsterisk ? '*' : remainingSeconds}s remaining `}%s`}>
+        {service && <title>{service.toString()}</title>}
     </Helmet>;
 };
 

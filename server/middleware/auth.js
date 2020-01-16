@@ -6,6 +6,7 @@ function authMiddleware(req, res, next) {
     const logger = getLogger(req.requestId);
     if (req.get('X-Auth-Token')) {
         logger.info(req.get('X-Auth-ExpiresIn'));
+        res.setHeader('X-Auth-ExpiresIn', req.get('X-Auth-ExpiresIn'));
         if (!req.user) {
             req.user = new User({
                 username: req.get('X-Auth-Username'),
@@ -13,7 +14,8 @@ function authMiddleware(req, res, next) {
                 groups: req.get('X-Auth-Groups'),
                 roles: req.get('X-Auth-Roles'),
                 email: req.get('X-Auth-Email'),
-                uuid: req.get('X-Auth-Subject')
+                uuid: req.get('X-Auth-Subject'),
+                expiry: req.get('X-Auth-ExpiresIn')
             });
         }
         return next();
