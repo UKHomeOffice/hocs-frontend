@@ -25,10 +25,11 @@ function withForm(Page) {
         constructor(props) {
             super(props);
             const { confirmation, form } = props;
-            const { data, schema, meta } = form ? form : {};
+            const { data, errors, schema, meta } = form ? form : {};
             this.state = {
                 confirmation,
                 form_data: data,
+                form_errors: errors,
                 form_schema: schema,
                 form_meta: meta,
                 submittingForm: false
@@ -84,6 +85,7 @@ function withForm(Page) {
                                     } else {
                                         this.setState({
                                             form_data: response.data.data,
+                                            form_errors: response.data.errors,
                                             form_schema: response.data.schema,
                                             form_meta: response.data.meta
                                         });
@@ -106,14 +108,14 @@ function withForm(Page) {
         submitHandler(e) {
             e.preventDefault();
             if (this.state.submittingForm !== true) {
-                this.setState({ submittingForm: true });
-                const { dispatch, track, history, match: { url } } = this.props;
-                const { form_schema, form_data } = this.state;
-                dispatch(updateFormErrors(undefined));
+                this.setState({submittingForm: true});
+                const {dispatch, track, history, match: {url}} = this.props;
+                const {form_schema, form_data} = this.state;
+                this.setState({form_errors: undefined});
                 // TODO: Remove
                 /* eslint-disable-next-line no-undef */
                 const formData = new FormData();
-                Object.keys(form_data).filter(field => form_data[field] !== null).forEach(field => {
+                Object.keys(form_data).filter(field => form_data[field] !== null && form_data[field] !== '').forEach(field => {
                     if (Array.isArray(form_data[field])) {
                         form_data[field].map(value => {
                             formData.append(`${field}[]`, value);
@@ -124,7 +126,7 @@ function withForm(Page) {
                 });
                 return dispatch(updateApiStatus(status.SUBMIT_FORM))
                     .then(() => {
-                        axios.post('/api' + (form_schema.action || url), formData, { headers: { 'Content-Type': 'multipart/form-data' } })
+                        axios.post('/api' + (form_schema.action || url), formData, {headers: {'Content-Type': 'multipart/form-data'}})
                             .then(res => {
                                 this.setState({ submittingForm: false });
                                 return dispatch(updateApiStatus(status.SUBMIT_FORM_SUCCESS))
@@ -132,10 +134,14 @@ function withForm(Page) {
                                         if (res.data.errors) {
                                             dispatch(updateApiStatus(status.SUBMIT_FORM_VALIDATION_ERROR))
                                                 .then(() => dispatch(updateFormErrors(res.data.errors)))
-                                                .then(() => track('EVENT', { category: form_schema.title, action: 'Submit', label: 'Validation Error' }));
+                                                .then(() => track('EVENT', {
+                                                    category: form_schema.title,
+                                                    action: 'Submit',
+                                                    label: 'Validation Error'
+                                                }));
                                         } else {
                                             if (res.data.confirmation) {
-                                                this.setState({ confirmation: res.data.confirmation });
+                                                this.setState({confirmation: res.data.confirmation});
                                                 return dispatch(clearApiStatus());
                                             }
                                             if (res.data.redirect === url) {

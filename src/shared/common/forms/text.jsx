@@ -14,6 +14,11 @@ class Text extends Component {
 
     _onChange(e) {
         this.setState({ value: e.target.value });
+
+        // Lewis please verify if update state is under change or blur?
+        //    }
+        //
+        //    _onBlur(e) {
         this.props.updateState({ [this.props.name]: e.target.value });
     }
 
@@ -33,16 +38,16 @@ class Text extends Component {
                 <label htmlFor={name} id={`${name}-label`} className="govuk-label govuk-label--s">{label}</label>
                 {hint && <span className="govuk-hint">{hint}</span>}
                 {error && <span id={`${name}-error`} className="govuk-error-message">{error}</span>}
-                <div>
-                    <input className={`govuk-input${error ? ' govuk-input--error' : ''}`}
-                        id={name}
-                        type={type}
-                        name={name}
-                        disabled={disabled}
-                        value={this.state.value}
-                        onChange={e => this._onChange(e)}
-                    />
-                </div>
+
+                <input className={`govuk-input${error ? ' govuk-input--error' : ''}`}
+                    id={name}
+                    type={type}
+                    name={name}
+                    disabled={disabled}
+                    value={this.state.value}
+                    onChange={e => this._onChange(e)}
+           //         onBlur={e => this._onBlur(e)}
+                />
             </div>
         );
     }
