@@ -639,3 +639,16 @@ $border-colour: govuk-colour("grey-2");
         }
     }        
 }
+
+.ReactModal__Overlay {
+    display: flex;
+
+    .ReactModal__Content {
+        bottom: unset;
+        left: unset;
+        margin: auto;
+        position: relative;
+        right: unset;
+        top: unset;
+    }
+}
