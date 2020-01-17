@@ -4,7 +4,7 @@ import { formComponentFactory } from './form-repository.jsx';
 
 const getComponentFactoryInstance = (factory, options) => ({ component, props }, key) => factory(component, { key, config: props, ...options });
 
-const expandableCheckbox = ({ choice, data, error, errors, hint, initiallyOpen, items, name, updateState, value }) => {
+const expandableCheckbox = ({ choice, data, error, errors, hint, initiallyOpen, items, name, updateState, value, disabled }) => {
     const isChecked = choice.value && value && value.toUpperCase() === choice.value.toUpperCase();
     const createComponent = getComponentFactoryInstance(formComponentFactory, { data, errors: errors, meta: {}, callback: updateState, baseUrl: '/' });
     const sectionHasValidationError = errors && Array.isArray(items) && items.some(item => errors[item.props.name]);
@@ -38,6 +38,7 @@ const expandableCheckbox = ({ choice, data, error, errors, hint, initiallyOpen, 
                                 value={choice.value}
                                 checked={isChecked}
                                 onChange={onCheckBoxChange}
+                                disabled={disabled}
                             />
                             <label className="govuk-label govuk-checkboxes__label" htmlFor={`details-checkbox-${name}`}>{choice.label}</label>
                         </div>
@@ -67,6 +68,7 @@ expandableCheckbox.propTypes = {
     name: PropTypes.string.isRequired,
     updateState: PropTypes.func.isRequired,
     value: PropTypes.string,
+    disabled: PropTypes.bool,
 };
 
 export default expandableCheckbox;
