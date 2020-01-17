@@ -6,6 +6,9 @@ import types from './actions/types.jsx';
 
 export const Context = React.createContext();
 
+const countDown = 60000;
+const getTargetDate = () => new Date(new Date().getTime() + countDown);
+
 const reducer = (state, action) => {
     // TODO: REMOVE
     /* eslint-disable-next-line  no-console*/
@@ -44,7 +47,7 @@ const reducer = (state, action) => {
         case types.UNSET_FORM:
             return { ...state, form: null };
         case types.UPDATE_API_STATUS:
-            return { ...state, apiStatus: action.payload };
+            return { ...state, apiStatus: action.payload, tokenExpiry: getTargetDate() };
         case types.CLEAR_API_STATUS:
             return { ...state, apiStatus: null };
         case types.UPDATE_PAGE_META:
@@ -91,6 +94,7 @@ export class ApplicationProvider extends Component {
         this.state = {
             ...props.config,
             apiStatus: null,
+            tokenExpiry: getTargetDate(),
             dispatch: action => {
                 try {
                     this.setState(state => reducer(state, action));
