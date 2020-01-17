@@ -49,7 +49,7 @@ pipeline:
   clone-kube-project:
     image: plugins/git
     commands:
-      - git clone -b feature/WCS-1411-session-timeouts --single-branch https://github.com/UKHomeOffice/kube-hocs-frontend.git
+      - git clone -b feature/WCS-HOCS-1411-session-timeouts --single-branch https://github.com/UKHomeOffice/kube-hocs-frontend.git
     when:
       event: [push, deployment, tag]
 
