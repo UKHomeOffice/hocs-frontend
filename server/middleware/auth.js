@@ -7,7 +7,7 @@ function authMiddleware(req, res, next) {
     if (req.get('X-Auth-Token')) {
         logger.info(req.cookies);
         logger.info(req.get('X-Auth-ExpiresIn'));
-        res.setHeader('X-Auth-ExpiresIn', req.get('X-Auth-ExpiresIn'));
+        //res.setHeader('X-Auth-ExpiresIn', req.get('X-Auth-ExpiresIn'));
         if (!req.user) {
             req.user = new User({
                 username: req.get('X-Auth-Username'),
