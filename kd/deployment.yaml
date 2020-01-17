@@ -90,6 +90,11 @@ spec:
             value: 'fastcgi_buffers 16 64k; fastcgi_buffer_size 128k; proxy_buffer_size 128k; proxy_buffers 4 64k; proxy_busy_buffers_size 128k; client_header_buffer_size 8k; large_client_header_buffers 4 128k;'
           - name: CLIENT_MAX_BODY_SIZE
             value: '12'
+          - name: ENCRYPTION_KEY
+            valueFrom:
+                secretKeyRef:
+                name: hocs-frontend
+                key: encryption_key
         volumeMounts:
           - name: certs
             mountPath: /certs
@@ -109,6 +114,12 @@ spec:
          requests:
           memory: "64Mi"
           cpu: 50m
+        env:
+            - name: ENCRYPTION_KEY
+                valueFrom:
+                    secretKeyRef:
+                    name: hocs-frontend
+                    key: encryption_key
         args:
           - --config=/etc/secrets/data.yml
           - --discovery-url={{.KC_REALM}}
@@ -133,6 +144,8 @@ spec:
           - --revocation-url={{.KC_REALM}}/protocol/openid-connect/logout
           - --enable-logout-redirect=true
           - --verbose
+          - --enable-refresh-tokens=true
+          - --encryption-key=$(ENCRYPTION_KEY)
         ports:
           - name: keycloak-http
             containerPort: 8081
@@ -152,6 +165,12 @@ spec:
          requests:
           memory: "64Mi"
           cpu: 50m
+        env:
+            - name: ENCRYPTION_KEY
+                valueFrom:
+                    secretKeyRef:
+                    name: hocs-frontend
+                    key: encryption_key
         args:
           - --config=/etc/secrets/data.yml
           - --discovery-url={{.KC_REALM}}
@@ -174,6 +193,8 @@ spec:
           - --secure-cookie=true
           - --http-only-cookie=true
           - --verbose
+          - --enable-refresh-tokens=true
+          - --encryption-key=$(ENCRYPTION_KEY)
         ports:
           - name: keycloak-http
             containerPort: 8082
