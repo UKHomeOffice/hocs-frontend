@@ -115,11 +115,11 @@ spec:
           memory: "64Mi"
           cpu: 50m
         env:
-            - name: ENCRYPTION_KEY
-                valueFrom:
-                    secretKeyRef:
-                    name: hocs-frontend
-                    key: encryption_key
+          - name: ENCRYPTION_KEY
+            valueFrom:
+                secretKeyRef:
+                name: hocs-frontend
+                key: encryption_key
         args:
           - --config=/etc/secrets/data.yml
           - --discovery-url={{.KC_REALM}}
