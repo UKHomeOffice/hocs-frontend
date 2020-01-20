@@ -140,7 +140,7 @@ spec:
           - --enable-logout-redirect=true
           - --verbose
           - --enable-refresh-tokens=true
-          - --encryption-key=${ENCRYPTION_KEY}
+          - --encryption-key=$(ENCRYPTION_KEY)
         ports:
           - name: keycloak-http
             containerPort: 8081
@@ -189,7 +189,7 @@ spec:
           - --http-only-cookie=true
           - --verbose
           - --enable-refresh-tokens=true
-          - --encryption-key=${ENCRYPTION_KEY}
+          - --encryption-key=$(ENCRYPTION_KEY)
         ports:
           - name: keycloak-http
             containerPort: 8082
