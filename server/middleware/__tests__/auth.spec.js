@@ -18,6 +18,7 @@ describe('Authentication middleware', () => {
 
     beforeEach(() => {
         req = {
+            cookies: {},
             get: (header) => {
                 return mockHeaders[header];
             }
