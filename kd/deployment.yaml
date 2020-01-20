@@ -90,11 +90,6 @@ spec:
             value: 'fastcgi_buffers 16 64k; fastcgi_buffer_size 128k; proxy_buffer_size 128k; proxy_buffers 4 64k; proxy_busy_buffers_size 128k; client_header_buffer_size 8k; large_client_header_buffers 4 128k;'
           - name: CLIENT_MAX_BODY_SIZE
             value: '12'
-          - name: ENCRYPTION_KEY
-            valueFrom:
-                secretKeyRef:
-                name: hocs-frontend
-                key: encryption_key
         volumeMounts:
           - name: certs
             mountPath: /certs
@@ -117,7 +112,7 @@ spec:
         env:
           - name: ENCRYPTION_KEY
             valueFrom:
-                secretKeyRef:
+              secretKeyRef:
                 name: hocs-frontend
                 key: encryption_key
         args:
@@ -171,7 +166,7 @@ spec:
         env:
           - name: ENCRYPTION_KEY
             valueFrom:
-                secretKeyRef:
+              secretKeyRef:
                 name: hocs-frontend
                 key: encryption_key
         args:
@@ -297,7 +292,12 @@ spec:
             valueFrom:
               configMapKeyRef:
                   name: hocs-converter
-                  key: supported_types
+                  key: supported_types   
+          - name: ENCRYPTION_KEY
+            valueFrom:
+              secretKeyRef:
+                name: hocs-frontend
+                key: encryption_key
         resources:
           limits:
             cpu: 450m
