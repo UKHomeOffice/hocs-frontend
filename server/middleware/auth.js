@@ -10,24 +10,24 @@ function authMiddleware(req, res, next) {
         const tokenEncryptionKey = Buffer.from(process.env.ENCRYPTION_KEY || '');
 
         if (tokenEncryptionKey.length > 0) {
-            logger.debug(tokenEncryptionKey);
+            logger.info(`token encryption key: ${tokenEncryptionKey}`);
             const encryptedRefreshToken = req.cookies['kc-state'];
 
             if (encryptedRefreshToken && encryptedRefreshToken.length > 0) {
-                logger.debug(encryptedRefreshToken);
+                logger.info(`encrypted refresh token: ${encryptedRefreshToken}`);
 
                 const decryptedToken = decrypt(encryptedRefreshToken, tokenEncryptionKey);
-                logger.debug(decryptedToken);
+                logger.info(`decrypted token: ${decryptedToken}`);
 
                 const decodedToken = jwt.decode(decryptedToken);
-                logger.debug(decodedToken);
+                logger.info(`decoded refresh token: ${decodedToken}`);
 
                 const expiresIn = decodedToken.expiry - Date.now();
-                logger.debug(expiresIn);
+                logger.info(`decoded refresh token expires in: ${expiresIn}`);
 
                 res.setHeader('X-Auth-Refresh-ExpiresIn', expiresIn);
 
-                logger.debug(req.get('X-Auth-ExpiresIn'));
+                logger.info(`token expires in: ${req.get('X-Auth-ExpiresIn')}`);
             }
         }
 
