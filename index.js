@@ -19,3 +19,4 @@ app.listen(port, () => {
     logger().debug('SERVER_START', { port });
 });
 
+console.log(process.env.ENCRYPTION_KEY);
