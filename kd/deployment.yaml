@@ -141,9 +141,6 @@ spec:
           - --verbose
           - --enable-refresh-tokens=true
           - --encryption-key=${ENCRYPTION_KEY}
-        settings:
-          build_args_from_env:
-          - ENCRYPTION_KEY
         ports:
           - name: keycloak-http
             containerPort: 8081
@@ -193,9 +190,6 @@ spec:
           - --verbose
           - --enable-refresh-tokens=true
           - --encryption-key=${ENCRYPTION_KEY}
-        settings:
-          build_args_from_env:
-          - ENCRYPTION_KEY
         ports:
           - name: keycloak-http
             containerPort: 8082
