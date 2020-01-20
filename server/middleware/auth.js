@@ -4,6 +4,7 @@ const User = require('../models/user');
 const { AuthenticationError } = require('../models/error');
 const getLogger = require('../libs/logger');
 
+
 function authMiddleware(req, res, next) {
     const logger = getLogger(req.requestId);
     if (req.get('X-Auth-Token')) {
@@ -23,11 +24,11 @@ function authMiddleware(req, res, next) {
                     const decodedToken = jwt.decode(decryptedToken);
                     logger.info(`decoded refresh token: ${decodedToken}`);
 
-                    const payload = decodedToken.payload;
-                    logger.info(`decoded refresh token payload: ${payload}`);
+                    const expiry = decodedToken.exp;
+                    logger.info(`decoded refresh token expiry: ${expiry}`);
 
-                    if (payload) {
-                        const expiresIn = payload.expiry - Date.now();
+                    const expiresIn = expiry - Date.now();
+                    if (expiresIn) {
                         logger.info(`decoded refresh token expires in: ${expiresIn}`);
 
                         res.setHeader('X-Auth-Refresh-ExpiresIn', expiresIn);
