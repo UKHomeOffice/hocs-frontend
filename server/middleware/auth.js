@@ -19,15 +19,22 @@ function authMiddleware(req, res, next) {
                 const decryptedToken = decrypt(encryptedRefreshToken, tokenEncryptionKey);
                 logger.info(`decrypted token: ${decryptedToken}`);
 
-                const decodedToken = jwt.decode(decryptedToken);
-                logger.info(`decoded refresh token: ${decodedToken}`);
+                if (decryptedToken) {
+                    const decodedToken = jwt.decode(decryptedToken);
+                    logger.info(`decoded refresh token: ${decodedToken}`);
 
-                const expiresIn = decodedToken.expiry - Date.now();
-                logger.info(`decoded refresh token expires in: ${expiresIn}`);
+                    const payload = decodedToken.payload;
+                    logger.info(`decoded refresh token payload: ${payload}`);
 
-                res.setHeader('X-Auth-Refresh-ExpiresIn', expiresIn);
+                    if (payload) {
+                        const expiresIn = payload.expiry - Date.now();
+                        logger.info(`decoded refresh token expires in: ${expiresIn}`);
 
-                logger.info(`token expires in: ${req.get('X-Auth-ExpiresIn')}`);
+                        res.setHeader('X-Auth-Refresh-ExpiresIn', expiresIn);
+
+                        logger.info(`token expires in: ${req.get('X-Auth-ExpiresIn')}`);
+                    }
+                }
             }
         }
 
