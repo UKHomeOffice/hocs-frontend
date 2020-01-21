@@ -695,6 +695,11 @@ $border-colour: govuk-colour("grey-2");
                 color: #2b8cc4;
             }
         }
+
+        .govuk-checkboxes__label {
+          opacity: 1;
+        }
+        
     }
 
     .selectable-details-content {

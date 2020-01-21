@@ -1,11 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Case-view-read-only Adapter should build a schema from the provided template and have sections in alphabetical order 1`] = `
+exports[`Case-view-read-only Adapter should build a schema from the provided template 1`] = `
 Object {
   "data": Object {
-    "my_date_field": "19/01/2020",
-    "my_empty_field": undefined,
-    "my_field": "Some Value",
+    "dateFieldA": "2020-01-19",
+    "dateFieldB": "2020-01-20",
+    "dateFieldC": "2020-01-21",
+    "fieldA": "Some Value A",
+    "fieldB": "Some Value B",
+    "fieldC": "Some Value C",
   },
   "meta": Object {},
   "schema": Object {
@@ -14,15 +17,15 @@ Object {
       Object {
         "component": "accordion",
         "props": Object {
-          "name": "case-view",
+          "name": "Accordion",
           "sections": Array [
             Object {
               "items": Array [
                 Object {
                   "component": "text",
                   "props": Object {
-                    "label": "My Field",
-                    "name": "my_field",
+                    "label": "My Field A",
+                    "name": "fieldA",
                   },
                   "validation": Array [
                     "required",
@@ -31,8 +34,8 @@ Object {
                 Object {
                   "component": "date",
                   "props": Object {
-                    "label": "My Date Field",
-                    "name": "my_date_field",
+                    "label": "My Date Field A",
+                    "name": "dateFieldA",
                   },
                   "validation": Array [
                     "required",
@@ -41,23 +44,23 @@ Object {
                 Object {
                   "component": "text",
                   "props": Object {
-                    "label": "My Empty Field",
-                    "name": "my_empty_field",
+                    "label": "My Empty Field A",
+                    "name": "emptyFieldA",
                   },
                   "validation": Array [
                     "required",
                   ],
                 },
               ],
-              "title": "STAGE_NAME",
+              "title": "titleA",
             },
             Object {
               "items": Array [
                 Object {
                   "component": "text",
                   "props": Object {
-                    "label": "My Field",
-                    "name": "my_field",
+                    "label": "My Field B",
+                    "name": "fieldB",
                   },
                   "validation": Array [
                     "required",
@@ -66,8 +69,8 @@ Object {
                 Object {
                   "component": "date",
                   "props": Object {
-                    "label": "My Date Field",
-                    "name": "my_date_field",
+                    "label": "My Date Field  B",
+                    "name": "dateFieldB",
                   },
                   "validation": Array [
                     "required",
@@ -76,23 +79,23 @@ Object {
                 Object {
                   "component": "text",
                   "props": Object {
-                    "label": "My Empty Field",
-                    "name": "my_empty_field",
+                    "label": "My Empty Field B",
+                    "name": "emptyFieldB",
                   },
                   "validation": Array [
                     "required",
                   ],
                 },
               ],
-              "title": "STAGE_NAME1",
+              "title": "titleB",
             },
             Object {
               "items": Array [
                 Object {
                   "component": "text",
                   "props": Object {
-                    "label": "My Field",
-                    "name": "my_field",
+                    "label": "My Field C",
+                    "name": "fieldC",
                   },
                   "validation": Array [
                     "required",
@@ -101,8 +104,8 @@ Object {
                 Object {
                   "component": "date",
                   "props": Object {
-                    "label": "My Date Field",
-                    "name": "my_date_field",
+                    "label": "My Date Field C",
+                    "name": "dateFieldC",
                   },
                   "validation": Array [
                     "required",
@@ -111,19 +114,18 @@ Object {
                 Object {
                   "component": "text",
                   "props": Object {
-                    "label": "My Empty Field",
-                    "name": "my_empty_field",
+                    "label": "My Empty Field C",
+                    "name": "emptyFieldC",
                   },
                   "validation": Array [
                     "required",
                   ],
                 },
               ],
-              "title": "STAGE_NAME2",
+              "title": "titleC",
             },
           ],
         },
-        "validation": Array [],
       },
     ],
     "showPrimaryAction": false,
