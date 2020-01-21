@@ -12,6 +12,7 @@ import {
     unsetCaseSummary,
     unsetDocuments,
     unsetForm,
+    updateFormErrors,
     updatePageMeta
 } from '../contexts/actions/index.jsx';
 import status from '../helpers/api-status.js';
@@ -24,24 +25,25 @@ function withForm(Page) {
         constructor(props) {
             super(props);
             const { confirmation, form } = props;
-            const { data, errors, schema, meta } = form ? form : {};
+            const { data, schema, meta } = form ? form : {};
             this.state = {
                 confirmation,
                 form_data: data,
-                form_errors: errors,
                 form_schema: schema,
-                form_meta: meta
+                form_meta: meta,
+                submittingForm: false
             };
         }
 
         componentDidMount() {
             const { dispatch, track, form, match } = this.props;
+            const { schema } = form || {};
             if (this.state.form_schema) {
                 track('PAGE_VIEW', { title: this.state.form_schema.title, path: match.url });
             }
             dispatch(updatePageMeta(match))
                 .then(() => {
-                    if (!form) {
+                    if (!schema) {
                         return this.getForm();
                     }
                     dispatch(unsetForm());
@@ -63,8 +65,9 @@ function withForm(Page) {
         }
 
         getForm() {
-            const { dispatch, match: { url } } = this.props;
+            const { dispatch, match: { url }, history } = this.props;
             const endpoint = '/api/form' + url;
+
             return dispatch(updateApiStatus(status.REQUEST_FORM))
                 .then(() => {
                     axios.get(endpoint)
@@ -75,12 +78,18 @@ function withForm(Page) {
                                     dispatch(unsetCaseSummary());
                                     dispatch(unsetDocuments());
                                 })
-                                .then(() => this.setState({
-                                    form_data: response.data.data,
-                                    form_errors: response.data.errors,
-                                    form_schema: response.data.schema,
-                                    form_meta: response.data.meta
-                                }))
+                                .then(() => {
+                                    if (response.data.redirect) {
+                                        history.push(response.data.redirect);
+                                    } else {
+                                        this.setState({
+                                            form_data: response.data.data,
+                                            form_schema: response.data.schema,
+                                            form_meta: response.data.meta
+                                        });
+                                        dispatch(updateFormErrors(response.data.errors));
+                                    }
+                                })
                                 .then(() => dispatch(clearApiStatus()))
                                 .catch(() => {
                                     dispatch(updateApiStatus(status.UPDATE_FORM_FAILURE))
@@ -96,53 +105,58 @@ function withForm(Page) {
 
         submitHandler(e) {
             e.preventDefault();
-            const { dispatch, track, history, match: { url } } = this.props;
-            const { form_schema, form_data } = this.state;
-            this.setState({ form_errors: undefined });
-            // TODO: Remove
-            /* eslint-disable-next-line no-undef */
-            const formData = new FormData();
-            Object.keys(form_data).filter(field => form_data[field] !== null && form_data[field] !== '').forEach(field => {
-                if (Array.isArray(form_data[field])) {
-                    form_data[field].map(value => {
-                        formData.append(`${field}[]`, value);
-                    });
-                } else {
-                    formData.append(field, form_data[field]);
-                }
-            });
-            return dispatch(updateApiStatus(status.SUBMIT_FORM))
-                .then(() => {
-                    axios.post('/api' + (form_schema.action || url), formData, { headers: { 'Content-Type': 'multipart/form-data' } })
-                        .then(res => {
-                            return dispatch(updateApiStatus(status.SUBMIT_FORM_SUCCESS))
-                                .then(() => {
-                                    if (res.data.errors) {
-                                        dispatch(updateApiStatus(status.SUBMIT_FORM_VALIDATION_ERROR))
-                                            .then(() => this.setState({ form_errors: res.data.errors }))
-                                            .then(() => track('EVENT', { category: form_schema.title, action: 'Submit', label: 'Validation Error' }));
-                                    } else {
-                                        if (res.data.confirmation) {
-                                            this.setState({ confirmation: res.data.confirmation });
-                                            return dispatch(clearApiStatus());
-                                        }
-                                        if (res.data.redirect === url) {
-                                            return dispatch(clearApiStatus())
-                                                .then(() => this.getForm());
-                                        }
-                                        return dispatch(clearApiStatus())
-                                            .then((() => history.push(res.data.redirect)));
-                                    }
-                                });
-                        })
-                        .catch(error => {
-                            // TODO: Remove
-                            /* eslint-disable-next-line no-console */
-                            return dispatch(updateApiStatus(status.SUBMIT_FORM_FAILURE))
-                                .then(() => dispatch(setError(error.response)));
+            if (this.state.submittingForm !== true) {
+                this.setState({ submittingForm: true });
+                const { dispatch, track, history, match: { url } } = this.props;
+                const { form_schema, form_data } = this.state;
+                dispatch(updateFormErrors(undefined));
+                // TODO: Remove
+                /* eslint-disable-next-line no-undef */
+                const formData = new FormData();
+                Object.keys(form_data).filter(field => form_data[field] !== null).forEach(field => {
+                    if (Array.isArray(form_data[field])) {
+                        form_data[field].map(value => {
+                            formData.append(`${field}[]`, value);
                         });
-
+                    } else {
+                        formData.append(field, form_data[field]);
+                    }
                 });
+                return dispatch(updateApiStatus(status.SUBMIT_FORM))
+                    .then(() => {
+                        axios.post('/api' + (form_schema.action || url), formData, { headers: { 'Content-Type': 'multipart/form-data' } })
+                            .then(res => {
+                                this.setState({ submittingForm: false });
+                                return dispatch(updateApiStatus(status.SUBMIT_FORM_SUCCESS))
+                                    .then(() => {
+                                        if (res.data.errors) {
+                                            dispatch(updateApiStatus(status.SUBMIT_FORM_VALIDATION_ERROR))
+                                                .then(() => dispatch(updateFormErrors(res.data.errors)))
+                                                .then(() => track('EVENT', { category: form_schema.title, action: 'Submit', label: 'Validation Error' }));
+                                        } else {
+                                            if (res.data.confirmation) {
+                                                this.setState({ confirmation: res.data.confirmation });
+                                                return dispatch(clearApiStatus());
+                                            }
+                                            if (res.data.redirect === url) {
+                                                return dispatch(clearApiStatus())
+                                                    .then(() => this.getForm());
+                                            }
+                                            return dispatch(clearApiStatus())
+                                                .then((() => history.push(res.data.redirect)));
+                                        }
+                                    });
+                            })
+                            .catch(error => {
+                                this.setState({ submittingForm: false });
+                                // TODO: Remove
+                                /* eslint-disable-next-line no-console */
+                                return dispatch(updateApiStatus(status.SUBMIT_FORM_FAILURE))
+                                    .then(() => dispatch(setError(error.response)));
+                            });
+
+                    });
+            }
         }
 
         updateState(data) {
@@ -163,17 +177,19 @@ function withForm(Page) {
         }
 
         renderForm() {
-            const { match: { url, params }, hasSidebar } = this.props;
-            const { form_data, form_errors, form_meta, form_schema } = this.state;
+            const { form, match: { url, params }, hasSidebar } = this.props;
+            const { form_data, form_meta, form_schema, submittingForm } = this.state;
+            const { errors } = form || {};
             return (
                 <Page title={form_schema.title} form={form_meta} hasSidebar={hasSidebar} >
                     {form_schema && <Form
                         {...{
                             schema: form_schema,
                             data: form_data,
-                            errors: form_errors,
+                            errors: errors,
                             meta: form_meta,
-                            page: params
+                            page: params,
+                            submittingForm: submittingForm
                         }}
                         action={form_schema.action || url}
                         submitHandler={this.submitHandler.bind(this)}

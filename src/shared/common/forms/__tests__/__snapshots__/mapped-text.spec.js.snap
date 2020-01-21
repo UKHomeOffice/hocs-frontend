@@ -1,0 +1,88 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Form MappedText component should render with default props 1`] = `
+<div
+  class="govuk-form-group"
+>
+  <label
+    class="govuk-label govuk-label--s"
+    for="mapped-text-field"
+    id="mapped-text-field-label"
+  >
+    MappedText field
+  </label>
+  <label
+    class="govuk-label govuk-label--s govuk-mapped-text"
+    id="mapped-text-field"
+    name="mapped-text-field"
+    type="text"
+  />
+</div>
+`;
+
+exports[`Form MappedText component should render with hint when passed 1`] = `
+<div
+  class="govuk-form-group"
+>
+  <label
+    class="govuk-label govuk-label--s"
+    for="mapped-text-field"
+    id="mapped-text-field-label"
+  >
+    MappedText field
+  </label>
+  <span
+    class="govuk-hint"
+  >
+    A hint for mapped-text field
+  </span>
+  <label
+    class="govuk-label govuk-label--s govuk-mapped-text"
+    id="mapped-text-field"
+    name="mapped-text-field"
+    type="text"
+  />
+</div>
+`;
+
+exports[`Form MappedText component should render with label when passed 1`] = `
+<div
+  class="govuk-form-group"
+>
+  <label
+    class="govuk-label govuk-label--s"
+    for="mapped-text-field"
+    id="mapped-text-field-label"
+  >
+    My mapped-text field
+  </label>
+  <label
+    class="govuk-label govuk-label--s govuk-mapped-text"
+    id="mapped-text-field"
+    name="mapped-text-field"
+    type="text"
+  />
+</div>
+`;
+
+exports[`Form MappedText component should render with value when passed 1`] = `
+<div
+  class="govuk-form-group"
+>
+  <label
+    class="govuk-label govuk-label--s"
+    for="mapped-text-field"
+    id="mapped-text-field-label"
+  >
+    MappedText field
+  </label>
+  <label
+    class="govuk-label govuk-label--s govuk-mapped-text"
+    id="mapped-text-field"
+    name="mapped-text-field"
+    type="text"
+  >
+    isA
+  </label>
+</div>
+`;

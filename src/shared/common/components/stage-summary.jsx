@@ -53,11 +53,11 @@ class StageSummary extends Component {
                 <caption className='govuk-table__caption margin-bottom--small' >{stage}</caption>
                 <tbody className='govuk-table__body'>
                     <tr className='govuk-table__row'>
-                        <th className='govuk-table__header padding-left--small'>Team</th>
+                        <th className='govuk-table__header padding-left--small govuk-!-width-one-third'>Team</th>
                         <td className='govuk-table__cell'>{assignedTeam}</td>
                     </tr>
                     <tr className='govuk-table__cell'>
-                        <th className='govuk-table__header padding-left--small'>User</th>
+                        <th className='govuk-table__header padding-left--small govuk-!-width-one-third'>User</th>
                         <td className='govuk-table__cell'>{assignedUser}</td>
                     </tr>
                 </tbody>
@@ -68,7 +68,7 @@ class StageSummary extends Component {
     renderRow({ label, value }) {
         return (
             <tr key={label} className='govuk-table__row'>
-                <th className='govuk-table__header padding-left--small'>{label}</th>
+                <th className='govuk-table__header padding-left--small govuk-!-width-one-third'>{label}</th>
                 <td className='govuk-table__cell'>{value}</td>
             </tr>
         );
@@ -85,30 +85,34 @@ class StageSummary extends Component {
                             <caption className='govuk-table__caption margin-bottom--small' >Summary</caption>
                             <tbody className='govuk-table__body'>
                                 {summary.case && summary.case.received && <tr className='govuk-table__row'>
-                                    <th className='govuk-table__header padding-left--small'>Date received</th>
+                                    <th className='govuk-table__header padding-left--small govuk-!-width-one-third'>Date received</th>
                                     <td className='govuk-table__cell'>{summary.case.received}</td>
                                 </tr>}
-                                {summary.case && summary.case.deadline && <tr className='govuk-table__cell'>
-                                    <th className='govuk-table__header padding-left--small'>Deadline</th>
+                                {summary.case && summary.case.created && <tr className='govuk-table__cell'>
+                                    <th className='govuk-table__header padding-left--small govuk-!-width-one-third'>Created</th>
+                                    <td className='govuk-table__cell'>{summary.case.created}</td>
+                                </tr>}
+                                {summary.deadlinesEnabled && summary.case && summary.case.deadline && <tr className='govuk-table__cell'>
+                                    <th className='govuk-table__header padding-left--small govuk-!-width-one-third'>Deadline</th>
                                     <td className='govuk-table__cell'>{summary.case.deadline}</td>
                                 </tr>}
                                 {summary.primaryTopic && <tr className='govuk-table__cell'>
-                                    <th className='govuk-table__header padding-left--small'>Primary topic</th>
+                                    <th className='govuk-table__header padding-left--small govuk-!-width-one-third'>Primary topic</th>
                                     <td className='govuk-table__cell'>{summary.primaryTopic}</td>
                                 </tr>}
                                 {summary.primaryCorrespondent && <tr className='govuk-table__cell'>
-                                    <th className='govuk-table__header padding-left--small'>Primary correspondent</th>
+                                    <th className='govuk-table__header padding-left--small govuk-!-width-one-third'>Primary correspondent</th>
                                     <td className='govuk-table__cell'>{summary.primaryCorrespondent}</td>
                                 </tr>}
                                 {summary.additionalFields && summary.additionalFields.map(({ label, value }) => this.renderRow({ label, value }))}
                             </tbody>
                         </table>
-                        <table className='govuk-table margin-left--small'>
+                        {summary.deadlinesEnabled && <table className='govuk-table margin-left--small'>
                             <caption className='govuk-table__caption margin-bottom--small' >Stage deadlines</caption>
                             <tbody className='govuk-table__body'>
                                 {summary.deadlines && Array.isArray(summary.deadlines) && summary.deadlines.map(stage => this.renderRow(stage))}
                             </tbody>
-                        </table>
+                        </table>}
                         <h2 className='govuk-heading-m'>Active stages</h2>
                         {summary.stages.map(stage => this.renderActiveStage(stage))}
                     </Fragment>

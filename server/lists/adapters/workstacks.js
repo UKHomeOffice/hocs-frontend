@@ -2,9 +2,12 @@ const byUser = (userId) => ({ userUUID }) => userUUID === userId;
 const byCaseReference = (a, b) => a.caseReference.localeCompare(b.caseReference);
 const byLabel = (a, b) => a.label.localeCompare(b.label);
 const isUnallocated = user => user === null;
-const isOverdue = deadline => deadline && new Date(deadline) < Date.now();
-const getOverdue = data => {
-    const overdueCases = data.filter(({ deadline }) => isOverdue(deadline));
+const isOverdue = (configuration, deadline) => configuration.deadlinesEnabled && deadline && new Date(deadline) < Date.now();
+const getOverdue = (configuration, data) => {
+    if (!configuration.deadlinesEnabled) {
+        return false;
+    }
+    const overdueCases = data.filter(({ deadline }) => isOverdue(configuration, deadline));
     return overdueCases.length;
 };
 
@@ -21,7 +24,11 @@ const formatDate = (date) => date ? parseDate(date) : null;
 const bindDisplayElements = fromStaticList => async (stage) => {
     stage.assignedTeamDisplay = await fromStaticList('S_TEAMS', stage.teamUUID);
     stage.caseTypeDisplayFull = await fromStaticList('S_CASETYPES', stage.caseType);
-    stage.stageTypeDisplay = await fromStaticList('S_STAGETYPES', stage.stageType);
+    if (stage.active) {
+        stage.stageTypeDisplay = await fromStaticList('S_STAGETYPES', stage.stageType);
+    } else {
+        stage.stageTypeDisplay = 'Closed';
+    }
     if (stage.userUUID) {
         stage.assignedUserDisplay = await fromStaticList('S_USERS', stage.userUUID) || 'Allocated';
     }
@@ -46,14 +53,14 @@ class Card {
     getCount() { return this.count; }
 }
 
-const dashboardAdapter = async (data, { fromStaticList, logger, user }) => {
+const dashboardAdapter = async (data, { fromStaticList, logger, user, configuration }) => {
     const dashboardData = await Promise.all(data.stages
         .map(bindDisplayElements(fromStaticList)));
     const userCases = dashboardData.filter(byUser(user.uuid));
     const userCard = [new Card({
         label: 'Cases',
         count: userCases.length,
-        overdue: getOverdue(userCases)
+        overdue: getOverdue(configuration, userCases)
     })];
     const teamCards = dashboardData
         .reduce((cards, stage) => {
@@ -61,7 +68,7 @@ const dashboardAdapter = async (data, { fromStaticList, logger, user }) => {
             if (index >= 0) {
                 const card = cards[index];
                 card.incrementCount();
-                if (isOverdue(stage.deadline)) {
+                if (isOverdue(configuration, stage.deadline)) {
                     card.incrementOverdue();
                 }
                 if (isUnallocated(stage.userUUID)) {
@@ -73,7 +80,7 @@ const dashboardAdapter = async (data, { fromStaticList, logger, user }) => {
                     value: stage.teamUUID,
                     type: 'team',
                     count: 1,
-                    overdue: isOverdue(stage.deadline) ? 1 : 0,
+                    overdue: isOverdue(configuration, stage.deadline) ? 1 : 0,
                     unallocated: isUnallocated(stage.userUUID) ? 1 : 0
                 }));
             }
@@ -84,7 +91,7 @@ const dashboardAdapter = async (data, { fromStaticList, logger, user }) => {
     return { user: userCard, teams: teamCards };
 };
 
-const userAdapter = async (data, { fromStaticList, logger, user }) => {
+const userAdapter = async (data, { fromStaticList, logger, user, configuration }) => {
     const workstackData = await Promise.all(data.stages
         .filter(stage => stage.userUUID === user.uuid)
         .sort(byCaseReference)
@@ -93,11 +100,12 @@ const userAdapter = async (data, { fromStaticList, logger, user }) => {
     return {
         label: 'My Cases',
         items: workstackData,
+        columns: configuration.workstackColumns,
         allocateToWorkstackEndpoint: '/unallocate/'
     };
 };
 
-const teamAdapter = async (data, { fromStaticList, logger, teamId }) => {
+const teamAdapter = async (data, { fromStaticList, logger, teamId, configuration }) => {
     const workstackData = await Promise.all(data.stages
         .filter(stage => stage.teamUUID === teamId)
         .sort(byCaseReference)
@@ -108,7 +116,7 @@ const teamAdapter = async (data, { fromStaticList, logger, teamId }) => {
             if (index >= 0) {
                 const card = cards[index];
                 card.incrementCount();
-                if (isOverdue(stage.deadline)) {
+                if (isOverdue(configuration, stage.deadline)) {
                     card.incrementOverdue();
                 }
                 if (isUnallocated(stage.userUUID)) {
@@ -120,7 +128,7 @@ const teamAdapter = async (data, { fromStaticList, logger, teamId }) => {
                     value: stage.caseType,
                     type: 'workflow',
                     count: 1,
-                    overdue: isOverdue(stage.deadline) ? 1 : 0,
+                    overdue: isOverdue(configuration, stage.deadline) ? 1 : 0,
                     unallocated: isUnallocated(stage.userUUID) ? 1 : 0
                 }));
             }
@@ -128,10 +136,12 @@ const teamAdapter = async (data, { fromStaticList, logger, teamId }) => {
         }, [])
         .sort(byLabel);
     const teamDisplayName = await fromStaticList('S_TEAMS', teamId);
+
     logger.debug('REQUEST_TEAM_WORKSTACK', { team: teamDisplayName, workflows: workflowCards.length, rows: workstackData.length });
     return {
         label: teamDisplayName,
         items: workstackData,
+        columns: configuration.workstackColumns,
         dashboard: workflowCards,
         teamMembers: [],
         allocateToUserEndpoint: '/allocate/user',
@@ -140,7 +150,7 @@ const teamAdapter = async (data, { fromStaticList, logger, teamId }) => {
     };
 };
 
-const workflowAdapter = async (data, { fromStaticList, logger, teamId, workflowId }) => {
+const workflowAdapter = async (data, { fromStaticList, logger, teamId, workflowId, configuration }) => {
     const workstackData = await Promise.all(data.stages
         .filter(stage => stage.teamUUID === teamId && stage.caseType === workflowId)
         .sort(byCaseReference)
@@ -151,7 +161,7 @@ const workflowAdapter = async (data, { fromStaticList, logger, teamId, workflowI
             if (index >= 0) {
                 const card = cards[index];
                 card.incrementCount();
-                if (isOverdue(stage.deadline)) {
+                if (isOverdue(configuration, stage.deadline)) {
                     card.incrementOverdue();
                 }
                 if (isUnallocated(stage.userUUID)) {
@@ -163,7 +173,7 @@ const workflowAdapter = async (data, { fromStaticList, logger, teamId, workflowI
                     value: stage.stageType,
                     type: 'stage',
                     count: 1,
-                    overdue: isOverdue(stage.deadline) ? 1 : 0,
+                    overdue: isOverdue(configuration, stage.deadline) ? 1 : 0,
                     unallocated: isUnallocated(stage.userUUID) ? 1 : 0
                 }));
             }
@@ -175,6 +185,7 @@ const workflowAdapter = async (data, { fromStaticList, logger, teamId, workflowI
     return {
         label: workflowDisplayName,
         items: workstackData,
+        columns: configuration.workstackColumns,
         dashboard: stageCards,
         teamMembers: [],
         allocateToUserEndpoint: '/allocate/user',
@@ -182,7 +193,7 @@ const workflowAdapter = async (data, { fromStaticList, logger, teamId, workflowI
         allocateToWorkstackEndpoint: '/unallocate/'
     };
 };
-const stageAdapter = async (data, { fromStaticList, logger, teamId, workflowId, stageId }) => {
+const stageAdapter = async (data, { fromStaticList, logger, teamId, workflowId, stageId, configuration }) => {
     const workstackData = await Promise.all(data.stages
         .filter(stage => stage.teamUUID === teamId && stage.caseType === workflowId && stage.stageType === stageId)
         .sort(byCaseReference)
@@ -192,6 +203,7 @@ const stageAdapter = async (data, { fromStaticList, logger, teamId, workflowId, 
     return {
         label: await fromStaticList('S_STAGETYPES', stageId),
         items: workstackData,
+        columns: configuration.workstackColumns,
         teamMembers: [],
         allocateToUserEndpoint: '/allocate/user',
         allocateToTeamEndpoint: '/allocate/team',

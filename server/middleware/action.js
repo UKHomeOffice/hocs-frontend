@@ -10,7 +10,7 @@ async function actionResponseMiddleware(req, res, next) {
             res.locals.confirmation = confirmation;
         }
         if (callbackUrl) {
-            return res.redirect(callbackUrl);
+            return await res.redirect(callbackUrl);
         }
         next();
     } catch (e) {

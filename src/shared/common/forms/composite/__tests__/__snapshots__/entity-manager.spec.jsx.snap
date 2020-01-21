@@ -2,17 +2,22 @@
 
 exports[`Entity list component should render with add link when passed in props 1`] = `
 Array [
-  <p
-    class="govuk-body"
-  >
-    None
-  </p>,
   <table
     class="govuk-table"
   >
     <tbody
       class="govuk-table__body"
-    />
+    >
+      <tr
+        class="govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell"
+        >
+          None
+        </td>
+      </tr>
+    </tbody>
   </table>,
   <a
     class="govuk-body govuk-link"
@@ -24,20 +29,23 @@ Array [
 `;
 
 exports[`Entity list component should render with additional css when passed in props 1`] = `
-Array [
-  <p
-    class="govuk-body"
+<table
+  class="govuk-table"
+>
+  <tbody
+    class="govuk-table__body"
   >
-    None
-  </p>,
-  <table
-    class="govuk-table"
-  >
-    <tbody
-      class="govuk-table__body"
-    />
-  </table>,
-]
+    <tr
+      class="govuk-table__row"
+    >
+      <td
+        class="govuk-table__cell"
+      >
+        None
+      </td>
+    </tr>
+  </tbody>
+</table>
 `;
 
 exports[`Entity list component should render with created date when passed in props on choice entries 1`] = `
@@ -51,7 +59,7 @@ exports[`Entity list component should render with created date when passed in pr
       class="govuk-radios govuk-table__row"
     >
       <td
-        class="govuk-table__cell"
+        class="govuk-table__cell govuk-!-width-full"
       >
         Choice A
       </td>
@@ -65,7 +73,7 @@ exports[`Entity list component should render with created date when passed in pr
       class="govuk-radios govuk-table__row"
     >
       <td
-        class="govuk-table__cell"
+        class="govuk-table__cell govuk-!-width-full"
       >
         Choice B
       </td>
@@ -80,20 +88,23 @@ exports[`Entity list component should render with created date when passed in pr
 `;
 
 exports[`Entity list component should render with default props 1`] = `
-Array [
-  <p
-    class="govuk-body"
+<table
+  class="govuk-table"
+>
+  <tbody
+    class="govuk-table__body"
   >
-    None
-  </p>,
-  <table
-    class="govuk-table"
-  >
-    <tbody
-      class="govuk-table__body"
-    />
-  </table>,
-]
+    <tr
+      class="govuk-table__row"
+    >
+      <td
+        class="govuk-table__cell"
+      >
+        None
+      </td>
+    </tr>
+  </tbody>
+</table>
 `;
 
 exports[`Entity list component should render with download link when passed in props 1`] = `
@@ -107,7 +118,7 @@ exports[`Entity list component should render with download link when passed in p
       class="govuk-radios govuk-table__row"
     >
       <td
-        class="govuk-table__cell"
+        class="govuk-table__cell govuk-!-width-full"
       >
         Choice A
       </td>
@@ -127,7 +138,7 @@ exports[`Entity list component should render with download link when passed in p
       class="govuk-radios govuk-table__row"
     >
       <td
-        class="govuk-table__cell"
+        class="govuk-table__cell govuk-!-width-full"
       >
         Choice B
       </td>
@@ -158,7 +169,7 @@ exports[`Entity list component should render with download link when passed in p
       class="govuk-radios govuk-table__row"
     >
       <td
-        class="govuk-table__cell"
+        class="govuk-table__cell govuk-!-width-full"
       >
         Choice A
       </td>
@@ -178,7 +189,7 @@ exports[`Entity list component should render with download link when passed in p
       class="govuk-radios govuk-table__row"
     >
       <td
-        class="govuk-table__cell"
+        class="govuk-table__cell govuk-!-width-full"
       >
         Choice B
       </td>
@@ -198,24 +209,132 @@ exports[`Entity list component should render with download link when passed in p
 </table>
 `;
 
-exports[`Entity list component should render with label when passed in props 1`] = `
+exports[`Entity list component should render with grouped documents\` 1`] = `
 Array [
-  <p
-    class="govuk-body"
+  <h2
+    class="govuk-heading-m"
   >
-    None
-  </p>,
+    group1
+  </h2>,
   <table
     class="govuk-table"
   >
-    <caption
-      class="govuk-table__caption"
-    >
-      Test entity manager
-    </caption>
     <tbody
       class="govuk-table__body"
-    />
+    >
+      <tr
+        class="govuk-radios govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell"
+        >
+          <strong
+            class="govuk-tag margin-right--small"
+          >
+            A
+          </strong>
+        </td>
+        <td
+          class="govuk-table__cell govuk-!-width-full"
+        >
+          Choice A
+        </td>
+      </tr>
+      <tr
+        class="govuk-radios govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell"
+        >
+          <strong
+            class="govuk-tag margin-right--small"
+          >
+            B
+          </strong>
+        </td>
+        <td
+          class="govuk-table__cell govuk-!-width-full"
+        >
+          Choice B
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+  <h2
+    class="govuk-heading-m"
+  >
+    group2
+  </h2>,
+  <table
+    class="govuk-table"
+  >
+    <tbody
+      class="govuk-table__body"
+    >
+      <tr
+        class="govuk-radios govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell"
+        >
+          <strong
+            class="govuk-tag margin-right--small"
+          >
+            C
+          </strong>
+        </td>
+        <td
+          class="govuk-table__cell govuk-!-width-full"
+        >
+          Choice C
+        </td>
+      </tr>
+      <tr
+        class="govuk-radios govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell"
+        >
+          <strong
+            class="govuk-tag margin-right--small"
+          >
+            D
+          </strong>
+        </td>
+        <td
+          class="govuk-table__cell govuk-!-width-full"
+        >
+          Choice D
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+]
+`;
+
+exports[`Entity list component should render with label when passed in props 1`] = `
+Array [
+  <h2
+    class="govuk-heading-m"
+  >
+    Test entity manager
+  </h2>,
+  <table
+    class="govuk-table"
+  >
+    <tbody
+      class="govuk-table__body"
+    >
+      <tr
+        class="govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell"
+        >
+          None
+        </td>
+      </tr>
+    </tbody>
   </table>,
 ]
 `;
@@ -231,7 +350,7 @@ exports[`Entity list component should render with remove link when passed in pro
       class="govuk-radios govuk-table__row"
     >
       <td
-        class="govuk-table__cell"
+        class="govuk-table__cell govuk-!-width-full"
       >
         Choice A
       </td>
@@ -250,7 +369,7 @@ exports[`Entity list component should render with remove link when passed in pro
       class="govuk-radios govuk-table__row"
     >
       <td
-        class="govuk-table__cell"
+        class="govuk-table__cell govuk-!-width-full"
       >
         Choice B
       </td>
@@ -289,7 +408,7 @@ exports[`Entity list component should render with tags when passed in props on c
         </strong>
       </td>
       <td
-        class="govuk-table__cell"
+        class="govuk-table__cell govuk-!-width-full"
       >
         Choice A
       </td>
@@ -307,7 +426,7 @@ exports[`Entity list component should render with tags when passed in props on c
         </strong>
       </td>
       <td
-        class="govuk-table__cell"
+        class="govuk-table__cell govuk-!-width-full"
       >
         Choice B
       </td>

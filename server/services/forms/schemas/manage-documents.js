@@ -12,6 +12,7 @@ module.exports = async (options) => {
                 .withProp('choices', 'CASE_DOCUMENT_LIST')
                 .withProp('baseUrl', `/case/${options.caseId}/stage/${options.stageId}/entity`)
                 .withProp('entity', 'document')
+                .withProp('isGrouped', true)
                 .build()
         )
         .withSecondaryAction(

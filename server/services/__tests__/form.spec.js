@@ -204,3 +204,164 @@ describe('getFormForStage', () => {
     });
 
 });
+
+describe('when the hydrate method is called', () => {
+    const { hydrateFields } = require('../form');
+    const { FormServiceError, PermissionError } = require('../../models/error');
+    const items = ['item1', 'item2', 'item3'];
+
+    describe('and the schema has a flat array of fields ', () => {
+        const items = ['item1', 'item2', 'item3'];
+        const req = {
+            form: {
+                schema: {
+                    fields: [{
+                        props: {
+                            choices: 'CHOICES_LIST'
+                        }
+                    }, {
+                        props: {
+                            items: 'ITEMS_LIST'
+                        }
+                    }]
+                }
+            },
+            listService: {
+                fetch: () => Promise.resolve(items)
+            }
+        };
+        const next = jest.fn();
+
+        it('should hydrate the items', async () => {
+            await hydrateFields(req, null, next);
+
+            expect(next).toHaveBeenCalled();
+            expect(req.form.schema.fields[0].props.choices).toEqual(items);
+            expect(req.form.schema.fields[1].props.items).toEqual(items);
+        });
+    });
+    describe('and the list fetch request fails with a 401', () => {
+        const req = {
+            form: {
+                schema: {
+                    fields: [{
+                        props: {
+                            choices: 'CHOICES_LIST'
+                        }
+                    }, {
+                        props: {
+                            items: 'ITEMS_LIST'
+                        }
+                    }]
+                }
+            },
+            listService: {
+                fetch: () => Promise.reject({
+                    response: {
+                        status: 401
+                    }
+                })
+            }
+        };
+        const next = jest.fn();
+
+        it('should call next with a permission error', async () => {
+            await hydrateFields(req, null, next);
+
+            expect(next).toHaveBeenCalledWith(new PermissionError('You are not authorised to work on this case'));
+        });
+    });
+    describe('and the list fetch request fails with a PermissionError', () => {
+        const req = {
+            form: {
+                schema: {
+                    fields: [{
+                        props: {
+                            choices: 'CHOICES_LIST'
+                        }
+                    }, {
+                        props: {
+                            items: 'ITEMS_LIST'
+                        }
+                    }]
+                }
+            },
+            listService: {
+                fetch: () => Promise.reject(new PermissionError('PermissionError'))
+            }
+        };
+        const next = jest.fn();
+
+        it('should call next with a permission error', async () => {
+            await hydrateFields(req, null, next);
+
+            expect(next).toHaveBeenCalledWith(new PermissionError('PermissionError'));
+        });
+    });
+    describe('and the list fetch request fails with some other error', () => {
+        const req = {
+            form: {
+                schema: {
+                    fields: [{
+                        props: {
+                            choices: 'CHOICES_LIST'
+                        }
+                    }, {
+                        props: {
+                            items: 'ITEMS_LIST'
+                        }
+                    }]
+                }
+            },
+            listService: {
+                fetch: () => Promise.reject({
+                    response: {
+                        status: 404
+                    }
+                })
+            }
+        };
+        const next = jest.fn();
+
+        it('should call next with a permission error', async () => {
+            await hydrateFields(req, null, next);
+
+            expect(next).toHaveBeenCalledWith(new FormServiceError('Failed to fetch form'));
+        });
+    });
+    describe('and the schema has sections containing items', () => {
+        const req = {
+            form: {
+                schema: {
+                    fields: [{
+                        props: {
+                            sections: [{
+                                items: [{
+                                    props: {
+                                        choices: 'CHOICES_LIST'
+                                    }
+                                }, {
+                                    props: {
+                                        items: 'ITEMS_LIST'
+                                    }
+                                }]
+                            }]
+                        }
+                    }],
+                }
+            },
+            listService: {
+                fetch: () => Promise.resolve(items)
+            }
+        };
+        const next = jest.fn();
+
+        it('should hydrate the items', async () => {
+            await hydrateFields(req, null, next);
+
+            expect(next).toHaveBeenCalled();
+            expect(req.form.schema.fields[0].props.sections[0].items[0].props.choices).toEqual(items);
+            expect(req.form.schema.fields[0].props.sections[0].items[1].props.items).toEqual(items);
+        });
+    });
+});

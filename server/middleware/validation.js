@@ -3,6 +3,9 @@ const { DOCUMENT_WHITELIST, DOCUMENT_BULK_LIMIT } = require('../config').forCont
 
 const validationErrors = {
     required: label => `${label} is required`,
+    alphanumeric: label => `${label} must be alphanumeric`,
+    currency: label => `${label} must be currency amount`,
+    numeric: label => `${label} must be numeric`,
     hasWhitelistedExtension: (value, extension) => {
         return `${value} is a ${extension.toUpperCase()} file which is not allowed`;
     },
@@ -41,14 +44,37 @@ const validators = {
         }
         return null;
     },
+
+    alphanumeric: ({ label, value, message }) => {
+        const format = /^[a-z0-9]+$/i;
+        if (value && !format.test(value)) {
+            return message || validationErrors.alphanumeric(label);
+        }
+        return null;
+    },
+    currency: ({ label, value, message }) => {
+        const format = /^\d+(\.\d{2})?$/;
+        if (value && !format.test(value)) {
+            return message || validationErrors.currency(label);
+        }
+        return null;
+    },
+    numeric: ({ label, value, message }) => {
+        const format = /^[0-9]+$/i;
+        if (value && !format.test(value)) {
+            return message || validationErrors.numeric(label);
+        }
+        return null;
+    },
+
     hasWhitelistedExtension: ({ value, message }) => {
         if (value && value.length > 0) {
-            const allowableExtensions = DOCUMENT_WHITELIST;
+            const allowableExtensions = DOCUMENT_WHITELIST.map(extension => extension.toUpperCase());
             for (let file of value) {
                 let fileExtension = file.originalname.split('.').slice(-1)[0];
                 let fileName = file.originalname.split('.').slice(0)[0];
 
-                if (!allowableExtensions.includes(fileExtension)) {
+                if (!allowableExtensions.includes(fileExtension.toUpperCase())) {
                     return message || validationErrors.hasWhitelistedExtension(fileName, fileExtension);
                 }
             }
@@ -77,32 +103,7 @@ function validationMiddleware(req, res, next) {
             const validationErrors = schema.fields
                 .filter(field => field.type !== 'display')
                 .reduce((result, field) => {
-                    const { validation, props: { name, label } } = field;
-                    const value = data[name];
-                    if (validation) {
-                        validation.map(validator => {
-                            if (typeof validator === 'string') {
-                                if (validators.hasOwnProperty(validator)) {
-                                    const validationError = validators[validator].call(this, { label, value });
-                                    if (validationError) {
-                                        result[field.props.name] = validationError;
-                                    }
-                                } else {
-                                    throw new Error(`Validator ${validator} does not exist`);
-                                }
-                            } else {
-                                const { type, message } = validator;
-                                if (validators.hasOwnProperty(type)) {
-                                    const validationError = validators[type].call(this, { label, value, message });
-                                    if (validationError) {
-                                        result[field.props.name] = validationError;
-                                    }
-                                } else {
-                                    throw new Error(`Validator ${type} does not exist`);
-                                }
-                            }
-                        });
-                    }
+                    validateField(field, data, result);
                     return result;
                 }, {});
             if (Object.keys(validationErrors).length > 0) {
@@ -113,6 +114,43 @@ function validationMiddleware(req, res, next) {
         }
     }
     next();
+
+    function validateField(field, data, result) {
+        const { component, validation, props: { name, label, sections } } = field;
+
+        if (component === 'accordion') {
+            Array.isArray(sections) && sections.map(({ items }) => Array.isArray(items) && items.map(item => validateField(item, data, result)));
+        } else {
+            const value = data[name];
+            if (validation) {
+                validation.map(validator => {
+                    if (typeof validator === 'string') {
+                        if (validators.hasOwnProperty(validator)) {
+                            const validationError = validators[validator].call(this, { label, value });
+                            if (validationError) {
+                                result[field.props.name] = validationError;
+                            }
+                        }
+                        else {
+                            throw new Error(`Validator ${validator} does not exist`);
+                        }
+                    }
+                    else {
+                        const { type, message } = validator;
+                        if (validators.hasOwnProperty(type)) {
+                            const validationError = validators[type].call(this, { label, value, message });
+                            if (validationError) {
+                                result[field.props.name] = validationError;
+                            }
+                        }
+                        else {
+                            throw new Error(`Validator ${type} does not exist`);
+                        }
+                    }
+                });
+            }
+        }
+    }
 }
 
 module.exports = {

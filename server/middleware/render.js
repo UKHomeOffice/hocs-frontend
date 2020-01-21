@@ -4,15 +4,25 @@ const { StaticRouter } = require('react-router-dom');
 const { default: App } = require('../../build/server/app.server');
 const html = require('../layout/html');
 
-function renderMiddleware(req, res, next) {
-    const renderConfig = require('../config').forContext('render');
+async function renderMiddleware(req, res, next) {
+    let renderConfig;
+    let layoutConfig;
+    try {
+        const tenantConfig = require('../tenantConfig');
+        renderConfig = await tenantConfig.renderConfig();
+        layoutConfig = await tenantConfig.layoutConfig();
+    }
+    catch (error) {
+        return next(new Error('Failed to retrieve configuration from server'));
+    }
+
     const { form, data } = req;
     const config = {
         ...res.locals,
         ...req.query,
         data,
         form,
-        layout: require('../config').forContext('case'),
+        layout: layoutConfig,
         page: { url: req.baseUrl, params: req.params },
         csrf: req.csrfToken()
     };

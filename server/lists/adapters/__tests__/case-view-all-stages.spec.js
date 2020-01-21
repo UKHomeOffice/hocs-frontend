@@ -1,4 +1,4 @@
-const caseViewAdapter = require('../case-view');
+const caseViewAllStagesAdapter = require('../case-view-all-stages');
 
 const mockFromStaticList = jest.fn((list, stageId) => stageId);
 const mockData = {
@@ -93,10 +93,10 @@ const mockData = {
     }
 };
 
-describe('Case-view Adapter', () => {
+describe('Case-view-all-stages Adapter', () => {
     it('should build a schema from the provided template and have sections in alphabetical order', async () => {
 
-        const result = await caseViewAdapter(mockData, { fromStaticList: mockFromStaticList });
+        const result = await caseViewAllStagesAdapter(mockData, { fromStaticList: mockFromStaticList });
 
         expect(result).toBeDefined();
         expect(result).toMatchSnapshot();

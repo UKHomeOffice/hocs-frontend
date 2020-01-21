@@ -4,9 +4,19 @@ import DocumentList from '../document-list.jsx';
 describe('Document list component', () => {
 
     const documentList = [
-        { label: 'TEST_DOCUMENT_1', value: 'MOCK_DOC_ID_1', type: 'ORIGINAL', pdf_link: 'MOCK_S3_LINK_1', file_link: 'MOCK_ORIG_LINK_1', status: 'UPLOADED' },
-        { label: 'TEST_DOCUMENT_2', value: 'MOCK_DOC_ID_2', type: 'ORIGINAL', pdf_link: 'MOCK_S3_LINK_2', file_link: 'MOCK_ORIG_LINK_2', status: 'UPLOADED' },
-        { label: 'TEST_DOCUMENT_3', value: 'MOCK_DOC_ID_3', type: 'ORIGINAL', pdf_link: 'MOCK_S3_LINK_3', file_link: 'MOCK_ORIG_LINK_3', status: 'UPLOADED' },
+        ['group 1', [
+            { label: 'TEST_DOCUMENT_1', value: 'MOCK_DOC_ID_1', status: 'UPLOADED', tags: ['UPLOADED'] },
+            { label: 'TEST_DOCUMENT_2', value: 'MOCK_DOC_ID_2', status: 'UPLOADED', tags: ['UPLOADED'] },
+            { label: 'TEST_DOCUMENT_3', value: 'MOCK_DOC_ID_3', status: 'PENDING', tags: ['PENDING'] },
+        ]], ['group 2', [
+            { label: 'TEST_DOCUMENT_4', value: 'MOCK_DOC_ID_4', status: 'UPLOADED', tags: ['UPLOADED'] },
+            { label: 'TEST_DOCUMENT_5', value: 'MOCK_DOC_ID_5', status: 'UPLOADED', tags: ['UPLOADED'] },
+            { label: 'TEST_DOCUMENT_6', value: 'MOCK_DOC_ID_6', status: 'UPLOADED', tags: ['UPLOADED'] },
+        ]], ['group 3', [
+            { label: 'TEST_DOCUMENT_7', value: 'MOCK_DOC_ID_7', status: 'UPLOADED', tags: ['UPLOADED'] },
+            { label: 'TEST_DOCUMENT_8', value: 'MOCK_DOC_ID_8', status: 'PENDING', tags: ['PENDING'] },
+            { label: 'TEST_DOCUMENT_9', value: 'MOCK_DOC_ID_9', status: 'PENDING', tags: ['PENDING'] },
+        ]]
     ];
 
     it('should render with default props', () => {
@@ -29,4 +39,17 @@ describe('Document list component', () => {
         expect(mockClickHandler).toHaveBeenCalled();
     });
 
+    it('should display None when there are no documents in a group', () => {
+        const emptyDocumentList = [
+            ['group 1'], ['group 2', []]
+        ];
+
+        const wrapper = render(<DocumentList caseId={'MOCK_CASE_ID'} clickHandler={() => { }} documents={emptyDocumentList} />);
+        expect(wrapper).toBeDefined();
+        expect(wrapper).toMatchSnapshot();
+        const cells = wrapper.find('td');
+        expect(cells).toHaveLength(2);
+        expect(cells.first().text()).toBe('None');
+        expect(cells.last().text()).toBe('None');
+    });
 });

@@ -3,6 +3,8 @@ const actionTypes = require('./actions/types');
 const { ActionError } = require('../models/error');
 const getLogger = require('../libs/logger');
 const User = require('../models/user');
+const listService = require('../services/list');
+const uuid = require('uuid/v4');
 
 function createDocumentSummaryObjects(form, type) {
     return form.schema.fields.reduce((reducer, field) => {
@@ -19,11 +21,11 @@ function createDocumentSummaryObjects(form, type) {
     }, []);
 }
 
-function createCaseRequest(type, form) {
+function createCaseRequest(type, form, documentTag) {
     return {
         type,
         dateReceived: form.data['DateReceived'],
-        documents: createDocumentSummaryObjects(form, 'ORIGINAL')
+        documents: createDocumentSummaryObjects(form, documentTag)
     };
 }
 
@@ -31,8 +33,8 @@ function addDocumentRequest(form) {
     return { documents: createDocumentSummaryObjects(form, form.data['document_type']) };
 }
 
-function createCase(url, { caseType, form }, headers) {
-    return workflowService.post(url, createCaseRequest(caseType, form), headers);
+function createCase(url, { caseType, form }, documentTag, headers) {
+    return workflowService.post(url, createCaseRequest(caseType, form, documentTag), headers);
 }
 
 function addDocument(url, form, headers) {
@@ -43,7 +45,7 @@ function updateCase({ caseId, stageId, form }, headers) {
     return workflowService.post(`/case/${caseId}/stage/${stageId}`, { data: form.data }, headers);
 }
 
-function handleActionSuccess(response, workflow, form) {
+async function handleActionSuccess(response, workflow, form) {
     const { next, data } = form;
     if (response && response.callbackUrl) {
         return { callbackUrl: response.callbackUrl };
@@ -82,14 +84,28 @@ const actions = {
                 let response;
                 let clientResponse;
                 switch (form.action) {
-                    case actionTypes.CREATE_CASE:
-                        response = await createCase('/case', { caseType: context, form }, headers);
+                    case actionTypes.CREATE_CASE: {
+                        const listServiceInstance = listService.getInstance(uuid(), null);
+                        const { documentLabels: documentTags } = await listServiceInstance.fetch('S_SYSTEM_CONFIGURATION');
+                        response = await createCase('/case', { caseType: context, form }, documentTags[0], headers);
                         clientResponse = { summary: 'Created a new case ', link: `${response.data.reference}` };
                         return handleActionSuccess(clientResponse, workflow, form);
-                    case actionTypes.BULK_CREATE_CASE:
-                        response = await createCase('/case/bulk', { caseType: context, form }, headers);
+                    }
+                    case actionTypes.CREATE_AND_ALLOCATE_CASE: {
+                        const listServiceInstance = listService.getInstance(uuid(), null);
+                        const { documentLabels: documentTags } = await listServiceInstance.fetch('S_SYSTEM_CONFIGURATION');
+                        const { data: { reference } } = await createCase('/case', { caseType: context, form }, documentTags[0], headers);
+                        const { data: { stages } } = await caseworkService.get(`/case/${encodeURIComponent(reference)}/stage`, headers);
+                        const { caseUUID, uuid: stageUUID } = stages[0];
+                        return handleActionSuccess({ callbackUrl: `/case/${caseUUID}/stage/${stageUUID}/allocate` }, workflow, form);
+                    }
+                    case actionTypes.BULK_CREATE_CASE: {
+                        const listServiceInstance = listService.getInstance(uuid(), null);
+                        const { documentLabels: documentTags } = await listServiceInstance.fetch('S_SYSTEM_CONFIGURATION');
+                        response = await createCase('/case/bulk', { caseType: context, form }, documentTags[0], headers);
                         clientResponse = { summary: `Created ${response.data.count} new case${response.data.count > 1 ? 's' : ''}` };
                         return handleActionSuccess(clientResponse, workflow, form);
+                    }
                     case actionTypes.ADD_STANDARD_LINE:
                         /* eslint-disable no-case-declarations */
                         const document = form.data.document[0];
@@ -104,8 +120,8 @@ const actions = {
                         return handleActionSuccess(clientResponse, workflow, form);
                     case actionTypes.ADD_TEMPLATE:
                         /* eslint-disable no-case-declarations */
-                        const document1 = form.data.document[0];
-                        const request1 = {
+                        var document1 = form.data.document[0];
+                        var request1 = {
                             s3UntrustedUrl: document1.key,
                             displayName: document1.originalname,
                             caseType: form.data['caseType']

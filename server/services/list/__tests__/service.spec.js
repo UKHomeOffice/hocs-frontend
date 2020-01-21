@@ -32,6 +32,10 @@ describe('List Service', () => {
                 test: {
                     client: 'test',
                     endpoint: '/test/api'
+                },
+                S_SYSTEM_CONFIGURATION: {
+                    client: 'test',
+                    endpoint: '/configuration/api'
                 }
             };
 
@@ -76,6 +80,10 @@ describe('List Service', () => {
                     client: 'test',
                     endpoint: '/test/api',
                     adapter: (data) => data.map(({ first, second }) => ({ a: first, b: second }))
+                },
+                S_SYSTEM_CONFIGURATION: {
+                    client: 'test',
+                    endpoint: '/configuration/api'
                 }
             };
 
@@ -254,6 +262,10 @@ describe('List Service', () => {
                         expect(result).toEqual('TEST_VALUE');
                         return data;
                     }
+                },
+                S_SYSTEM_CONFIGURATION: {
+                    client: 'test',
+                    endpoint: '/configuration/api'
                 }
             };
 
@@ -262,6 +274,52 @@ describe('List Service', () => {
             const clients = {
                 test: {
                     get: jest.fn(() => Promise.resolve({ data: mockResponse }))
+                }
+            };
+
+            listService.initialise(lists, clients);
+            const instance = await listService.getInstance(mockUUID, mockUser);
+            const result = await instance.fetch('test');
+
+            expect(result).toBeDefined();
+            expect(result).toEqual(mockResponse);
+        });
+
+        it('should supply a configuration object to adapters', async () => {
+            const lists = {
+                test_static: {
+                    client: 'test',
+                    endpoint: '/test/api',
+                    type: listService.types.STATIC,
+                    data: [{ key: 'TEST_KEY', value: 'TEST_VALUE' }]
+                },
+                test: {
+                    client: 'test',
+                    endpoint: '/test/api',
+                    adapter: async (data, { configuration }) => {
+                        expect(configuration).toBeDefined();
+                        expect(typeof configuration).toEqual('object');
+                        expect(configuration.systemName).toBeDefined();
+                        expect(configuration.systemName).toEqual('system');
+                        return data;
+                    }
+                },
+                S_SYSTEM_CONFIGURATION: {
+                    client: 'config',
+                    endpoint: '/configuration/api'
+                }
+            };
+
+            const mockResponse = [];
+
+            const mockConfigResponse = { systemName: 'system' };
+
+            const clients = {
+                test: {
+                    get: jest.fn(() => Promise.resolve({ data: mockResponse }))
+                },
+                config: {
+                    get: jest.fn(() => Promise.resolve({ data: mockConfigResponse }))
                 }
             };
 
@@ -293,6 +351,10 @@ describe('List Service', () => {
                         expect(result).toBeNull();
                         return data;
                     }
+                },
+                S_SYSTEM_CONFIGURATION: {
+                    client: 'test',
+                    endpoint: '/configuration/api'
                 }
             };
 
@@ -326,6 +388,10 @@ describe('List Service', () => {
                         expect(result).toBeNull();
                         return data;
                     }
+                },
+                S_SYSTEM_CONFIGURATION: {
+                    client: 'test',
+                    endpoint: '/configuration/api'
                 }
             };
 

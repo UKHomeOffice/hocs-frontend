@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import classnames from 'classnames';
 import { ApplicationConsumer } from '../../contexts/application.jsx';
 import {
     updateApiStatus,
@@ -12,28 +13,33 @@ import Submit from '../forms/submit.jsx';
 
 const CaseNote = ({ date, author, note }) => (
     <Fragment>
-        {date && <p>{date}</p>}
-        {author && <p><strong>Author: </strong>{author}</p>}
-        {note && <p><strong>Message: </strong><br />{note.split(/\n/).map((line, i) => (<Fragment key={i}>{line}<br /></Fragment>))}</p>}
+        {note && <p>{note.split(/\n/).map((line, i) => (<Fragment key={i}>{line}<br /></Fragment>))}</p>}
+        <p>
+            {date && <span>{date}</span>}
+            {author && <span>{author}</span>}
+        </p>
     </Fragment>
 );
 
 CaseNote.propTypes = {
     date: PropTypes.string,
     author: PropTypes.string,
-    note: PropTypes.string
+    note: PropTypes.string,
 };
 
-const AuditEvent = ({ date, author, user, team, stage, document, topic, correspondent }) => (
+const AuditEvent = ({ date, author, user, team, stage, document, topic, correspondent, title }) => (
     <Fragment>
-        {date && <p>{date}</p>}
-        {author && <p><strong>Author:</strong> {author}</p>}
-        {stage && <p><strong>Stage:</strong> {stage}</p>}
-        {team && <p><strong>Assigned team:</strong> {team}</p>}
-        {user && <p><strong>Assigned user:</strong> {user}</p>}
-        {document && <p><strong>Document:</strong> {document}</p>}
-        {correspondent && <p><strong>Name:</strong> {correspondent}</p>}
-        {topic && <p><strong>Name:</strong> {topic}</p>}
+        {<p><strong>{title}</strong></p>}
+        {stage && <p>Stage: {stage}</p>}
+        {team && <p>Assigned team: {team}</p>}
+        {user && <p>Assigned user: {user}</p>}
+        {document && <p>Document: {document}</p>}
+        {correspondent && <p>Name: {correspondent}</p>}
+        {topic && <p>Name: {topic}</p>}
+        <p>
+            {date && <span>{date}</span>}
+            {author && <span>{author}</span>}
+        </p>
     </Fragment>
 );
 
@@ -45,16 +51,18 @@ AuditEvent.propTypes = {
     stage: PropTypes.string,
     document: PropTypes.string,
     topic: PropTypes.string,
-    correspondent: PropTypes.string
-
+    correspondent: PropTypes.string,
+    title: PropTypes.title,
 };
 
-const TimelineItem = ({ type, title, body }, i) => (
-    <li key={i} className={i === 0 ? 'recent-action' : null}>
-        <h2>{title}</h2>
-        {body && ['MANUAL', 'ALLOCATE', 'REJECT'].includes(type) ? <CaseNote {...body} /> : <AuditEvent  {...body} />}
-    </li>
-);
+const TimelineItem = ({ type, body, title }, i) => {
+    const isCaseNote = ['MANUAL', 'ALLOCATE', 'REJECT'].includes(type);
+    return (
+        body && <li key={i} className={classnames({ 'case-note': isCaseNote })}>
+            {isCaseNote ? <CaseNote {...body} /> : <AuditEvent {...body} title={title} />}
+        </li>
+    );
+};
 
 class Timeline extends Component {
 

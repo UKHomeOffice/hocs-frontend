@@ -4,56 +4,59 @@ import { formComponentFactory } from './form-repository.jsx';
 
 const getComponentFactoryInstance = (factory, options) => ({ component, props }, key) => factory(component, { key, config: props, ...options });
 
-const createSection = (data) => {
-    function Section({ title, items }, index) {
-        const createComponent = getComponentFactoryInstance(formComponentFactory, { data, errors: {}, meta: {}, callback: () => { }, baseUrl: '/' });
-        const [isVisible, setVisible] = useState(true);
+function Section({ data, errors, index, items, title, updateState }) {
+    const createComponent = getComponentFactoryInstance(formComponentFactory, { data, errors: errors, meta: {}, callback: updateState, baseUrl: '/' });
+    const sectionHasValidationError = errors && Array.isArray(items) && items.some(item => errors[item.props.name]);
+    const [isVisible, setVisible] = useState(sectionHasValidationError);
 
-        useEffect(() => setVisible(false), [items]);
+    useEffect(() => {
+        setVisible(sectionHasValidationError);
+    }, [errors]);
 
-        const clickHandler = event => {
-            event.preventDefault();
-            setVisible(!isVisible);
-        };
-
-        return (
-            <div key={index} className={isVisible ? 'govuk-accordion__section govuk-accordion__section--expanded' : 'govuk-accordion__section'}>
-                <div className='govuk-accordion__section-header' onClick={clickHandler}>
-                    <h2 className='govuk-accordion__section-heading'>
-                        <button type='button' className='govuk-accordion__section-button' id={`accordion-default-heading-${index}`}>
-                            {title}
-                        </button>
-                    </h2>
-                    <span className='govuk-accordion__icon' aria-hidden='true'></span>
-                </div>
-                <div id={`accordion-default-content-${index}`} className='govuk-accordion__section-content' aria-labelledby={`accordion-default-heading-${index}`}>
-                    {Array.isArray(items) && items.map(createComponent)}
-                </div>
-            </div>
-        );
-    }
-    Section.propTypes = {
-        title: PropTypes.string.isRequired,
-        items: PropTypes.array.isRequired,
+    const clickHandler = event => {
+        event.preventDefault();
+        setVisible(!isVisible);
     };
-    return Section;
+
+    return (
+        <div key={index} className={isVisible ? 'govuk-accordion__section govuk-accordion__section--expanded' : 'govuk-accordion__section'}>
+            <div className='govuk-accordion__section-header' onClick={clickHandler}>
+                <h2 className='govuk-accordion__section-heading'>
+                    <button type='button' className='govuk-accordion__section-button' id={`accordion-default-heading-${index}`}>
+                        {title}
+                    </button>
+                </h2>
+                <span className='govuk-accordion__icon' aria-hidden='true'></span>
+            </div>
+            <div id={`accordion-default-content-${index}`} className='govuk-accordion__section-content' aria-labelledby={`accordion-default-heading-${index}`}>
+                {Array.isArray(items) && items.map(createComponent)}
+            </div>
+        </div>
+    );
+}
+Section.propTypes = {
+    data: PropTypes.object.isRequired,
+    errors: PropTypes.object,
+    items: PropTypes.array.isRequired,
+    index: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    updateState: PropTypes.func.isRequired
 };
 
-const getAccordionComponent = (data) => {
-    function Accordion({ name, sections }) {
-        return (
-            <div id={name} className='govuk-accordion' data-module='accordion'>
-                {Array.isArray(sections) && sections.map(createSection(data))}
-            </div>
-        );
-    }
-    Accordion.propTypes = {
-        name: PropTypes.string.isRequired,
-        sections: PropTypes.array.isRequired
-    };
-    return Accordion;
+function Accordion({ name, sections, data, updateState, errors }) {
+    return (
+        <div id={name} className='govuk-accordion' data-module='accordion'>
+            {Array.isArray(sections) && sections.map(({ items, title }, index) => <Section data={data} errors={errors} items={items} index={index} key={index} title={title} updateState={updateState} />)}
+        </div>
+    );
+}
+
+Accordion.propTypes = {
+    data: PropTypes.object.isRequired,
+    errors: PropTypes.object,
+    name: PropTypes.string.isRequired,
+    sections: PropTypes.array.isRequired,
+    updateState: PropTypes.func
 };
 
-
-
-export default getAccordionComponent;
+export default Accordion;

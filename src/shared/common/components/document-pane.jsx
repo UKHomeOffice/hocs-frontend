@@ -10,6 +10,7 @@ import {
 } from '../../contexts/actions/index.jsx';
 import status from '../../helpers/api-status.js';
 import { Link } from 'react-router-dom';
+import sortByTimeStamp from '../../helpers/sortByTimeStamp.js';
 
 class DocumentPanel extends Component {
 
@@ -17,7 +18,7 @@ class DocumentPanel extends Component {
         super(props);
         let activeDocument;
         if (props.documents && props.documents.length > 0) {
-            activeDocument = props.documents[0].value || null;
+            activeDocument = this.getFirstDocument(this.flattenDocuments(props.documents));
         }
         this.state = { ...props, activeDocument };
     }
@@ -35,13 +36,22 @@ class DocumentPanel extends Component {
         return documents.some(d => d.status === 'PENDING');
     }
 
+    flattenDocuments(documents) {
+        return Array.isArray(documents) && documents
+            .map(([, groupDocs]) => groupDocs)
+            .reduce((reducer, value) => [...reducer, ...value])
+            .sort(sortByTimeStamp);
+    }
+
+    getFirstDocument(flatDocumentList) {
+        const { value: firstDocument } = flatDocumentList.filter(({ status }) => status !== 'PENDING')[0] || { value: undefined };
+        return firstDocument;
+    }
+
     updateDocuments() {
         const { dispatch } = this.props;
         const { page } = this.state;
         if (page && page.params && page.params.caseId) {
-            // TODO: Remove
-            /* eslint-disable-next-line  no-console*/
-            console.log(`Updating documents for case: ${page.params.caseId}`);
             return dispatch(updateApiStatus(status.REQUEST_DOCUMENT_LIST))
                 .then(() => {
                     axios.get(`/api/case/${page.params.caseId}/document`)
@@ -49,14 +59,13 @@ class DocumentPanel extends Component {
                             dispatch(updateApiStatus(status.REQUEST_DOCUMENT_LIST_SUCCESS))
                                 .then(() => dispatch(clearApiStatus()))
                                 .then(() => {
-                                    this.setState({
+                                    const allDocuments = this.flattenDocuments(response.data);
+                                    this.setState((currentState) => ({
+                                        ...currentState,
                                         documents: response.data,
-                                        activeDocument: this.state.activeDocument || response.data[0] ? response.data[0].value : null
-                                    });
-                                    if (!this.hasPendingDocuments(response.data)) {
-                                        // TODO: Remove
-                                        /* eslint-disable-next-line  no-console*/
-                                        console.log('No documents pending conversion, clearing interval');
+                                        activeDocument: currentState.activeDocument || this.getFirstDocument(allDocuments)
+                                    }));
+                                    if (!this.hasPendingDocuments(allDocuments)) {
                                         if (this.interval) { clearInterval(this.interval); }
                                     }
                                 });

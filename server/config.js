@@ -3,33 +3,6 @@ const workflowAuth = (process.env.WORKFLOW_BASIC_AUTH || 'UNSET:UNSET').split(':
 
 const config = {
     applications: {
-        render: {
-            clientSide: process.env.USE_CLIENTSIDE || true,
-            js: ['runtime', 'vendor'],
-            css: ['main'],
-            react: 'main',
-            title: 'Correspondence System',
-        },
-        case: {
-            header: {
-                service: 'Correspondence System',
-                serviceLink: '/',
-                logoLinkTitle: '',
-                propositionHeader: '',
-                propositionHeaderLink: '/'
-            },
-            body: {
-                phaseBanner: {
-                    isVisible: true,
-                    phase: 'BETA',
-                    feedback: 'mailto:HOCS@homeoffice.gov.uk'
-                }
-            },
-            footer: {
-                isVisible: false
-            },
-            maxSearchResults: 500
-        },
         server: {
             WORKFLOW_SERVICE: process.env.WORKFLOW_SERVICE || 'http://localhost:8091',
             WORKFLOW_BASIC_AUTH: process.env.WORKFLOW_BASIC_AUTH ?
@@ -37,7 +10,7 @@ const config = {
             CASEWORK_SERVICE: process.env.CASEWORK_SERVICE || 'http://localhost:8082',
             INFO_SERVICE: process.env.INFO_SERVICE || 'http://localhost:8085',
             TEMPLATES_SERVICE: process.env.TEMPLATES_SERVICE || 'http://localhost:8090',
-            DOCUMENT_WHITELIST: (process.env.ALLOWED_FILE_EXTENSIONS || 'txt,doc,docx').split(',').map(extension => extension.trim()),
+            DOCUMENT_WHITELIST: (process.env.ALLOWED_FILE_EXTENSIONS || 'txt,doc,docx,tiff,tif,xlsx,pdf').split(',').map(extension => extension.trim()),
             DOCUMENT_BULK_LIMIT: process.env.DOCUMENT_BULK_LIMIT || 40
         },
         AWS: {

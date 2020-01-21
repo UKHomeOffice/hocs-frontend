@@ -10,78 +10,74 @@ exports[`Layout header component should render with default props 1`] = `
     className="govuk-header__container govuk-width-container"
   >
     <div
-      className="govuk-header__container govuk-width-container"
+      className="govuk-header__logo"
     >
-      <div
-        className="govuk-header__logo"
+      <span
+        className="govuk-header__logotype"
       >
-        <span
-          className="govuk-header__logotype"
+        <Link
+          className="govuk-header__link govuk-header__link--homepage govuk-header__logotype-text"
+          replace={false}
+          to="/"
         >
-          <Link
-            className="govuk-header__link govuk-header__link--homepage govuk-header__logotype-text"
-            replace={false}
-            to="/"
+          Correspondence Service
+        </Link>
+      </span>
+    </div>
+    <div
+      className="govuk-header__content"
+    >
+      <nav>
+        <ul
+          aria-label="Top Level Navigation"
+          className="govuk-header__navigation "
+          id="navigation"
+        >
+          <li
+            className="govuk-header__navigation-item"
           >
-            Correspondence Service
-          </Link>
-        </span>
-      </div>
-      <div
-        className="govuk-header__content"
-      >
-        <nav>
-          <ul
-            aria-label="Top Level Navigation"
-            className="govuk-header__navigation "
-            id="navigation"
+            <Link
+              className="govuk-header__link"
+              replace={false}
+              to="/action/create/workflow"
+            >
+              Create Single Case
+            </Link>
+          </li>
+          <li
+            className="govuk-header__navigation-item"
           >
-            <li
-              className="govuk-header__navigation-item"
+            <Link
+              className="govuk-header__link"
+              replace={false}
+              to="/action/bulk/workflow"
             >
-              <Link
-                className="govuk-header__link"
-                replace={false}
-                to="/action/create/workflow"
-              >
-                Create Single Case
-              </Link>
-            </li>
-            <li
-              className="govuk-header__navigation-item"
+              Create Bulk Cases
+            </Link>
+          </li>
+          <li
+            className="govuk-header__navigation-item"
+          >
+            <Link
+              className="govuk-header__link"
+              replace={false}
+              to="/search"
             >
-              <Link
-                className="govuk-header__link"
-                replace={false}
-                to="/action/bulk/workflow"
-              >
-                Create Bulk Cases
-              </Link>
-            </li>
-            <li
-              className="govuk-header__navigation-item"
+              Search
+            </Link>
+          </li>
+          <li
+            className="govuk-header__navigation-item"
+          >
+            <a
+              className="govuk-header__link"
+              href="/oauth/logout?redirect=/"
             >
-              <Link
-                className="govuk-header__link"
-                replace={false}
-                to="/search"
-              >
-                Search
-              </Link>
-            </li>
-            <li
-              className="govuk-header__navigation-item"
-            >
-              <a
-                className="govuk-header__link"
-                href="/oauth/logout?redirect=/"
-              >
-                Logout
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </div>
+              Logout
+            </a>
+          </li>
+        </ul>
+      </nav>
     </div>
   </div>
 </header>
@@ -97,78 +93,74 @@ exports[`Layout header component should render without crest when service is not
     className="govuk-header__container govuk-width-container"
   >
     <div
-      className="govuk-header__container govuk-width-container"
+      className="govuk-header__logo"
     >
-      <div
-        className="govuk-header__logo"
+      <span
+        className="govuk-header__logotype"
       >
-        <span
-          className="govuk-header__logotype"
+        <Link
+          className="govuk-header__link govuk-header__link--homepage govuk-header__logotype-text"
+          replace={false}
+          to="/"
         >
-          <Link
-            className="govuk-header__link govuk-header__link--homepage govuk-header__logotype-text"
-            replace={false}
-            to="/"
+          Test Service
+        </Link>
+      </span>
+    </div>
+    <div
+      className="govuk-header__content"
+    >
+      <nav>
+        <ul
+          aria-label="Top Level Navigation"
+          className="govuk-header__navigation "
+          id="navigation"
+        >
+          <li
+            className="govuk-header__navigation-item"
           >
-            Test Service
-          </Link>
-        </span>
-      </div>
-      <div
-        className="govuk-header__content"
-      >
-        <nav>
-          <ul
-            aria-label="Top Level Navigation"
-            className="govuk-header__navigation "
-            id="navigation"
+            <Link
+              className="govuk-header__link"
+              replace={false}
+              to="/action/create/workflow"
+            >
+              Create Single Case
+            </Link>
+          </li>
+          <li
+            className="govuk-header__navigation-item"
           >
-            <li
-              className="govuk-header__navigation-item"
+            <Link
+              className="govuk-header__link"
+              replace={false}
+              to="/action/bulk/workflow"
             >
-              <Link
-                className="govuk-header__link"
-                replace={false}
-                to="/action/create/workflow"
-              >
-                Create Single Case
-              </Link>
-            </li>
-            <li
-              className="govuk-header__navigation-item"
+              Create Bulk Cases
+            </Link>
+          </li>
+          <li
+            className="govuk-header__navigation-item"
+          >
+            <Link
+              className="govuk-header__link"
+              replace={false}
+              to="/search"
             >
-              <Link
-                className="govuk-header__link"
-                replace={false}
-                to="/action/bulk/workflow"
-              >
-                Create Bulk Cases
-              </Link>
-            </li>
-            <li
-              className="govuk-header__navigation-item"
+              Search
+            </Link>
+          </li>
+          <li
+            className="govuk-header__navigation-item"
+          >
+            <a
+              className="govuk-header__link"
+              href="/oauth/logout?redirect=/"
             >
-              <Link
-                className="govuk-header__link"
-                replace={false}
-                to="/search"
-              >
-                Search
-              </Link>
-            </li>
-            <li
-              className="govuk-header__navigation-item"
-            >
-              <a
-                className="govuk-header__link"
-                href="/oauth/logout?redirect=/"
-              >
-                Logout
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </div>
+              Logout
+            </a>
+          </li>
+        </ul>
+      </nav>
     </div>
   </div>
 </header>

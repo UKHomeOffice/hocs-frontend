@@ -6,12 +6,16 @@ const workstack = require('./adapters/workstacks');
 const topicAdapter = require('./adapters/topics');
 const usersAdapter = require('./adapters/users');
 const teamsAdapter = require('./adapters/teams');
+const entityListItemsAdapter = require('./adapters/entityListItems');
 const templatesAdapter = require('./adapters/templates');
 const membersAdapter = require('./adapters/members');
 const documentsAdapter = require('./adapters/documents');
+const documentListAdapter = require('./adapters/documentList');
+const countrySortAdapter = require('./adapters/countrySort');
 const caseNoteAdapter = require('./adapters/case-notes');
 const caseSummaryAdapter = require('./adapters/case-summary');
-const caseViewAdapter = require('./adapters/case-view');
+const caseViewAllStagesAdapter = require('./adapters/case-view-all-stages');
+const caseViewReadOnlyAdapter = require('./adapters/case-view-read-only');
 const {
     caseCorrespondentAdapter,
     correspondentTypeAdapter
@@ -43,6 +47,37 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: statics.stageTypesAdapter
         },
+        S_DOCUMENT_TAGS: {
+            client: 'INFO',
+            endpoint: '/configuration',
+            type: listService.types.STATIC,
+            adapter: statics.documentTagsAdapter
+        },
+        S_SYSTEM_CONFIGURATION: {
+            client: 'INFO',
+            endpoint: '/configuration',
+            type: listService.types.STATIC
+        },
+        S_WCS_COHORTS: {
+            client: 'INFO',
+            endpoint: '/entity/list/WCS_COHORTS',
+            adapter: entityListItemsAdapter
+        },
+        S_WCS_I_STATUS: {
+            client: 'INFO',
+            endpoint: '/entity/list/WCS_I_STATUS',
+            adapter: entityListItemsAdapter
+        },
+        S_WCS_I_STATUS_OUTCOME: {
+            client: 'INFO',
+            endpoint: '/entity/list/WCS_I_STATUS_OUTCOME',
+            adapter: entityListItemsAdapter
+        },
+        S_WCS_ELIG_REJ_REASON: {
+            client: 'INFO',
+            endpoint: '/entity/list/WCS_ELIG_REJ_REASON',
+            adapter: entityListItemsAdapter
+        },
         CASE_TYPES: {
             client: 'INFO',
             endpoint: '/caseType?bulkOnly=false',
@@ -52,6 +87,11 @@ module.exports = {
             client: 'INFO',
             endpoint: '/caseType?bulkOnly=true',
             adapter: caseTypeAdapter
+        },
+        COUNTRIES_CURRENT: {
+            client: 'INFO',
+            endpoint: '/country',
+            adapter: countrySortAdapter
         },
         DASHBOARD: {
             client: 'CASEWORK',
@@ -67,6 +107,11 @@ module.exports = {
             client: 'CASEWORK',
             endpoint: '/stage',
             adapter: workstack.teamAdapter
+        },
+        WCS_CASEWORK_TEAMS: {
+            client: 'INFO',
+            endpoint: '/teams?unit=WCS_CASEWORK_TEAMS',
+            adapter: teamsAdapter
         },
         WORKFLOW_WORKSTACK: {
             client: 'CASEWORK',
@@ -148,12 +193,12 @@ module.exports = {
         CASE_DOCUMENT_LIST_FINAL: {
             client: 'CASEWORK',
             endpoint: '/case/document/reference/${caseId}/?type=FINAL',
-            adapter: documentsAdapter
+            adapter: documentListAdapter
         },
         CASE_DOCUMENT_LIST_DRAFT: {
             client: 'CASEWORK',
             endpoint: '/case/document/reference/${caseId}/?type=DRAFT',
-            adapter: documentsAdapter
+            adapter: documentListAdapter
         },
         CASE_NOTES: {
             client: 'CASEWORK',
@@ -165,10 +210,15 @@ module.exports = {
             endpoint: '/case/${caseId}/summary',
             adapter: caseSummaryAdapter
         },
-        CASE_VIEW: {
+        CASE_VIEW_ALL_STAGES: {
             client: 'WORKFLOW',
             endpoint: '/case/${caseId}',
-            adapter: caseViewAdapter
+            adapter: caseViewAllStagesAdapter
+        },
+        CASE_VIEW_READ_ONLY: {
+            client: 'WORKFLOW',
+            endpoint: '/case/details/${caseId}',
+            adapter: caseViewReadOnlyAdapter
         }
     },
     clients: {

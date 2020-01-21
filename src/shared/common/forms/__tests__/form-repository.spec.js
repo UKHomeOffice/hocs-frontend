@@ -10,6 +10,7 @@ const mockChoices = [
 
 const supportedFormComponents = [
     { component: 'text', props: { name: 'text-component' } },
+    { component: 'mapped-text', props: { name: 'mapped-text-component', choices: mockChoices } },
     { component: 'radio', props: { name: 'radio-component', type: 'radio', choices: mockChoices } },
     { component: 'date', props: { name: 'date-component' } },
     { component: 'checkbox', props: { name: 'checkbox-component', type: 'checkbox', choices: mockChoices } },
@@ -23,6 +24,7 @@ const supportedFormComponents = [
     { component: 'inset', props: { name: 'inset' } },
     { component: 'paragraph', props: { name: 'paragraph' } },
     { component: 'hidden', props: { name: 'hidden' } },
+    { component: 'expandable-checkbox', props: { choice: { label: '__label__', value: '__value__' }, name: 'expandable' } },
 ];
 
 const supportedSecondaryActions = [
@@ -59,7 +61,7 @@ describe('Form repository', () => {
         expect(Component).toBeNull();
     });
 
-    xit('should support components in the supportedFormComponents list', () => {
+    it('should support components in the supportedFormComponents list', () => {
         supportedFormComponents.map(({ component, props }) => {
             const Component = formComponentFactory(component, {
                 key: 1,
@@ -101,23 +103,6 @@ describe('Form repository', () => {
         expect(wrapper).toBeDefined();
         expect(wrapper.find('Text').length).toEqual(1);
         expect(wrapper.props().value).toEqual(testData[componentConfiguration.props.name]);
-    });
-
-    it('should pass data using the checkboxDataAdapter when passed in options', () => {
-        const componentConfiguration = supportedFormComponents
-            .filter(field => field.component === 'checkbox')
-            .reduce((reducer, field) => reducer = field, null);
-        const Component = formComponentFactory(componentConfiguration.component, {
-            key: 1,
-            config: componentConfiguration.props,
-            data: testData,
-            callback: mockCallback
-        });
-        expect(Component).toBeDefined();
-        const wrapper = mount(Component);
-        expect(wrapper).toBeDefined();
-        expect(wrapper.find('Checkbox').length).toEqual(1);
-        expect(wrapper.props().value).toEqual(['checkbox-component-A']);
     });
 
     it('should support components in the supportedSecondaryActions list', () => {

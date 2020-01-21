@@ -18,7 +18,8 @@ async function getFormSchemaFromWorkflowService(requestId, options, user) {
             case 401:
                 // handle no permission to allocate
                 try {
-                    const response = await listService.getInstance(requestId, user).fetch('CASE_VIEW', { caseId });
+                    const { readOnlyCaseViewAdapter } = await listService.getInstance(requestId, user).fetch('S_SYSTEM_CONFIGURATION');
+                    const response = await listService.getInstance(requestId, user).fetch(readOnlyCaseViewAdapter, { caseId });
                     return { form: response };
                 } catch (error) {
                     return { error: new PermissionError('You are not authorised to work on this case') };
@@ -36,7 +37,8 @@ async function getFormSchemaFromWorkflowService(requestId, options, user) {
                     usersInTeam = [];
                 }
                 try {
-                    caseView = await listService.getInstance(requestId, user).fetch('CASE_VIEW', { caseId });
+                    const { readOnlyCaseViewAdapter } = await listService.getInstance(requestId, user).fetch('S_SYSTEM_CONFIGURATION');
+                    caseView = await listService.getInstance(requestId, user).fetch(readOnlyCaseViewAdapter, { caseId });
                 } catch (error) {
                     caseView = null;
                 }
@@ -84,6 +86,30 @@ async function getFormSchema(options) {
     return form;
 }
 
+async function hydrateField(field, req) {
+    if (field.props) {
+        const { choices, items, sections } = field.props;
+        if (choices && typeof choices === 'string') {
+            field.props.choices = await req.listService.fetch(
+                choices,
+                req.params
+            );
+        } else if (items && typeof items === 'string') {
+            field.props.items = await req.listService.fetch(
+                items,
+                req.params
+            );
+        } else if (sections) {
+            const sectionRequests = sections.map(async section => {
+                const fieldRequests = section.items.map(async item => await hydrateField(item, req));
+                await Promise.all(fieldRequests);
+            });
+            await Promise.all(sectionRequests);
+        }
+    }
+    return field;
+}
+
 const hydrateFields = async (req, res, next) => {
 
     const logger = getLogger(req.requestId);
@@ -91,27 +117,12 @@ const hydrateFields = async (req, res, next) => {
     if (req.form) {
         const { schema } = req.form;
         logger.debug('HYDRATE_FORM_FIELDS', { count: schema.fields.length });
-        const requests = schema.fields.map(async field => {
-            if (field.props) {
-                const { choices, items } = field.props;
-                if (choices && typeof choices === 'string') {
-                    field.props.choices = await req.listService.fetch(
-                        choices,
-                        req.params
-                    );
-                } else if (items && typeof items === 'string') {
-                    field.props.items = await req.listService.fetch(
-                        items,
-                        req.params
-                    );
-                }
-            }
-            return field;
-        });
+        const requests = await schema.fields.map(async (field) => await hydrateField(field, req));
+
         try {
             await Promise.all(requests);
         } catch (error) {
-            if(error instanceof PermissionError){
+            if (error instanceof PermissionError) {
                 return next(error);
             }
             if (error.response !== undefined && error.response.status === 401) {
@@ -130,7 +141,8 @@ const getForm = (form, options) => {
 
         logger.info('GET_FORM');
         try {
-            const { schema, data, meta } = await form({ ...options }).build();
+            const formBuilder = await form({ ...options });
+            const { schema, data, meta } = formBuilder.build();
             req.form = { schema, data, meta };
             next();
         } catch (error) {
@@ -148,7 +160,7 @@ const getFormForAction = async (req, res, next) => {
         const { workflow, context, action } = req.params;
         const form = await getFormSchema({ context: 'ACTION', workflow, entity: context, action, user: req.user });
         req.form = form;
-        next();
+        return next();
     } catch (error) {
         logger.error('ACTION_FORM_FAILURE', { message: error.message, stack: error.stack });
         if (error.response !== undefined && error.response.status === 401) {

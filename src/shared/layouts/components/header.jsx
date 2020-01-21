@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 class Header extends Component {
 
-    createLogotype(service, serviceLink) {
+    createLogotype(service, serviceLink, bulkCreateEnabled) {
         return (
             <div className='govuk-header__container govuk-width-container'>
                 <div className='govuk-header__logo'>
@@ -18,9 +18,10 @@ class Header extends Component {
                             <li className='govuk-header__navigation-item'>
                                 <Link to='/action/create/workflow' className='govuk-header__link'>Create Single Case</Link>
                             </li>
-                            <li className='govuk-header__navigation-item'>
+                            {bulkCreateEnabled && <li className='govuk-header__navigation-item'>
                                 <Link to='/action/bulk/workflow' className='govuk-header__link'>Create Bulk Cases</Link>
                             </li>
+                            }
                             <li className='govuk-header__navigation-item'>
                                 <Link to='/search' className='govuk-header__link'>Search</Link>
                             </li>
@@ -35,12 +36,10 @@ class Header extends Component {
     }
 
     render() {
-        const { service, serviceLink } = this.props;
+        const { service, serviceLink, bulkCreateEnabled } = this.props;
         return (
             <header className='govuk-header ' role='banner' data-module='header'>
-                <div className='govuk-header__container govuk-width-container'>
-                    {this.createLogotype(service, serviceLink)}
-                </div>
+                {this.createLogotype(service, serviceLink, bulkCreateEnabled)}
             </header>
         );
     }
@@ -50,11 +49,13 @@ class Header extends Component {
 Header.propTypes = {
     service: PropTypes.string.isRequired,
     serviceLink: PropTypes.string.isRequired,
+    bulkCreateEnabled: PropTypes.bool.isRequired
 };
 
 Header.defaultProps = {
     service: 'Correspondence Service',
-    serviceLink: '/'
+    serviceLink: '/',
+    bulkCreateEnabled: true
 };
 
 export default Header;

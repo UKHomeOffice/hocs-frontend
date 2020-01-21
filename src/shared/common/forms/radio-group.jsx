@@ -5,15 +5,13 @@ class Radio extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { value: this.props.value };
     }
 
     componentDidMount() {
-        this.props.updateState({ [this.props.name]: this.state.value });
+        this.props.updateState({ [this.props.name]: this.props.value });
     }
 
     handleChange(e) {
-        this.setState({ value: e.target.value });
         this.props.updateState({ [this.props.name]: e.target.value });
     }
 
@@ -26,12 +24,13 @@ class Radio extends Component {
             hint,
             label,
             name,
-            type
+            type,
+            value
         } = this.props;
         return (
             <div className={`govuk-form-group${error ? ' govuk-form-group--error' : ''}`}>
 
-                <fieldset id={name} className={`govuk-fieldset ${className ?  className : ''}`} disabled={disabled}>
+                <fieldset id={name} className={`govuk-fieldset ${className ? className : ''}`} disabled={disabled}>
 
                     <legend id={`${name}-legend`} className="govuk-fieldset__legend">
                         <span className="govuk-fieldset__heading govuk-label--s">{label}</span>
@@ -48,7 +47,7 @@ class Radio extends Component {
                                         type={type}
                                         name={name}
                                         value={choice.value}
-                                        checked={(this.state.value === choice.value)}
+                                        checked={(value === choice.value)}
                                         onChange={e => this.handleChange(e)}
                                         className={'govuk-radios__input'}
                                     />

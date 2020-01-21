@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Form text component should render disabled when passed 1`] = `
+exports[`Form text component should render className when passed 1`] = `
 <div
-  class="govuk-form-group"
+  class="govuk-form-group myClass"
 >
   <label
     class="govuk-label govuk-label--s"
@@ -11,20 +11,45 @@ exports[`Form text component should render disabled when passed 1`] = `
   >
     TextArea field
   </label>
-  <input
-    class="govuk-input"
-    disabled=""
-    id="text-field"
-    name="text-field"
-    type="text"
-    value=""
-  />
+  <div>
+    <input
+      class="govuk-input"
+      id="text-field"
+      name="text-field"
+      type="text"
+      value=""
+    />
+  </div>
+</div>
+`;
+
+exports[`Form text component should render disabled when passed 1`] = `
+<div
+  class="govuk-form-group "
+>
+  <label
+    class="govuk-label govuk-label--s"
+    for="text-field"
+    id="text-field-label"
+  >
+    TextArea field
+  </label>
+  <div>
+    <input
+      class="govuk-input"
+      disabled=""
+      id="text-field"
+      name="text-field"
+      type="text"
+      value=""
+    />
+  </div>
 </div>
 `;
 
 exports[`Form text component should render of type when passed 1`] = `
 <div
-  class="govuk-form-group"
+  class="govuk-form-group "
 >
   <label
     class="govuk-label govuk-label--s"
@@ -33,19 +58,21 @@ exports[`Form text component should render of type when passed 1`] = `
   >
     TextArea field
   </label>
-  <input
-    class="govuk-input"
-    id="text-field"
-    name="text-field"
-    type="password"
-    value=""
-  />
+  <div>
+    <input
+      class="govuk-input"
+      id="text-field"
+      name="text-field"
+      type="password"
+      value=""
+    />
+  </div>
 </div>
 `;
 
 exports[`Form text component should render with default props 1`] = `
 <div
-  class="govuk-form-group"
+  class="govuk-form-group "
 >
   <label
     class="govuk-label govuk-label--s"
@@ -54,19 +81,21 @@ exports[`Form text component should render with default props 1`] = `
   >
     TextArea field
   </label>
-  <input
-    class="govuk-input"
-    id="text-field"
-    name="text-field"
-    type="text"
-    value=""
-  />
+  <div>
+    <input
+      class="govuk-input"
+      id="text-field"
+      name="text-field"
+      type="text"
+      value=""
+    />
+  </div>
 </div>
 `;
 
 exports[`Form text component should render with error when passed 1`] = `
 <div
-  class="govuk-form-group govuk-form-group--error"
+  class="govuk-form-group govuk-form-group--error "
 >
   <label
     class="govuk-label govuk-label--s"
@@ -81,19 +110,21 @@ exports[`Form text component should render with error when passed 1`] = `
   >
     Some error message
   </span>
-  <input
-    class="govuk-input govuk-input--error"
-    id="text-field"
-    name="text-field"
-    type="text"
-    value=""
-  />
+  <div>
+    <input
+      class="govuk-input govuk-input--error"
+      id="text-field"
+      name="text-field"
+      type="text"
+      value=""
+    />
+  </div>
 </div>
 `;
 
 exports[`Form text component should render with hint when passed 1`] = `
 <div
-  class="govuk-form-group"
+  class="govuk-form-group "
 >
   <label
     class="govuk-label govuk-label--s"
@@ -107,19 +138,21 @@ exports[`Form text component should render with hint when passed 1`] = `
   >
     Put some text in the box below
   </span>
-  <input
-    class="govuk-input"
-    id="text-field"
-    name="text-field"
-    type="text"
-    value=""
-  />
+  <div>
+    <input
+      class="govuk-input"
+      id="text-field"
+      name="text-field"
+      type="text"
+      value=""
+    />
+  </div>
 </div>
 `;
 
 exports[`Form text component should render with label when passed 1`] = `
 <div
-  class="govuk-form-group"
+  class="govuk-form-group "
 >
   <label
     class="govuk-label govuk-label--s"
@@ -128,19 +161,21 @@ exports[`Form text component should render with label when passed 1`] = `
   >
     My text field
   </label>
-  <input
-    class="govuk-input"
-    id="text-field"
-    name="text-field"
-    type="text"
-    value=""
-  />
+  <div>
+    <input
+      class="govuk-input"
+      id="text-field"
+      name="text-field"
+      type="text"
+      value=""
+    />
+  </div>
 </div>
 `;
 
 exports[`Form text component should render with value when passed 1`] = `
 <div
-  class="govuk-form-group"
+  class="govuk-form-group "
 >
   <label
     class="govuk-label govuk-label--s"
@@ -149,12 +184,14 @@ exports[`Form text component should render with value when passed 1`] = `
   >
     TextArea field
   </label>
-  <input
-    class="govuk-input"
-    id="text-field"
-    name="text-field"
-    type="text"
-    value="field value"
-  />
+  <div>
+    <input
+      class="govuk-input"
+      id="text-field"
+      name="text-field"
+      type="text"
+      value="field value"
+    />
+  </div>
 </div>
 `;

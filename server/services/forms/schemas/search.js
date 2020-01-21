@@ -1,52 +1,19 @@
 const Form = require('../form-builder');
-const { Component, Choice } = require('../component-builder');
+const { Component } = require('../component-builder');
+const uuid = require('uuid/v4');
+const listService = require('../../list');
 
-module.exports = (options = {}) => {
+const search = async (options = {}) => {
     const { submissionUrl } = options;
-    return Form()
-        .withTitle('Search')
-        .withField(
-            Component('checkbox', 'caseTypes')
-                .withProp('label', 'Case type')
-                .withProp('choices', 'CASE_TYPES')
-                .build()
-        )
-        .withField(
-            Component('date', 'dateReceivedFrom')
-                .withProp('label', 'Received on or after')
-                .withValidator('isValidDate', 'Date received must be valid')
-                .withValidator('isBeforeToday', 'Date received cannot be in the future')
-                .build()
-        )
-        .withField(
-            Component('date', 'dateReceivedTo')
-                .withProp('label', 'Received on or before')
-                .withValidator('isValidDate', 'Date received must be valid')
-                .withValidator('isBeforeToday', 'Date received cannot be in the future')
-                .build()
-        )
-        .withField(
-            Component('text', 'correspondent')
-                .withProp('label', 'Correspondent')
-                .build()
-        )
-        .withField(
-            Component('text', 'topic')
-                .withProp('label', 'Topic')
-                .build()
-        )
-        .withField(
-            Component('dropdown', 'signOffMinister')
-                .withProp('label', 'Sign-off Team')
-                .withProp('choices', 'PRIVATE_OFFICE_TEAMS')
-                .build()
-        )
-        .withField(
-            Component('checkbox', 'caseStatus')
-                .withProp('label', 'Case status')
-                .withProp('choices', [Choice('Include Active Only', 'active')])
-                .build()
-        )
+
+    const form = Form();
+
+    const listServiceInstance = listService.getInstance(uuid(), null);
+    const fieldsFromServer = (await listServiceInstance.fetch('S_SYSTEM_CONFIGURATION')).searchFields;
+
+    fieldsFromServer.map(field => form.withField(Component(field.component, field.name, field).build()));
+
+    return form.withTitle('Search')
         .withPrimaryActionLabel('Search')
         .withSecondaryAction(
             Component('backlink')
@@ -56,3 +23,5 @@ module.exports = (options = {}) => {
         )
         .withSubmissionUrl(submissionUrl);
 };
+
+module.exports = search;

@@ -3,22 +3,17 @@ import PropTypes from 'prop-types';
 
 class Text extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = { value: this.props.value };
-    }
-
     componentDidMount() {
-        this.props.updateState({ [this.props.name]: this.state.value });
+        this.props.updateState({ [this.props.name]: this.props.value });
     }
 
     _onChange(e) {
-        this.setState({ value: e.target.value });
         this.props.updateState({ [this.props.name]: e.target.value });
     }
 
     render() {
         const {
+            className,
             disabled,
             error,
             hint,
@@ -27,27 +22,29 @@ class Text extends Component {
             type
         } = this.props;
         return (
-            <div className={`govuk-form-group${error ? ' govuk-form-group--error' : ''}`}>
+            <div className={`govuk-form-group${error ? ' govuk-form-group--error' : ''} ${className ? className : ''}`}>
 
                 <label htmlFor={name} id={`${name}-label`} className="govuk-label govuk-label--s">{label}</label>
                 {hint && <span className="govuk-hint">{hint}</span>}
                 {error && <span id={`${name}-error`} className="govuk-error-message">{error}</span>}
-
-                <input className={`govuk-input${error ? ' govuk-input--error' : ''}`}
-                    id={name}
-                    type={type}
-                    name={name}
-                    disabled={disabled}
-                    value={this.state.value}
-                    onChange={e => this._onChange(e)}
-                />
-            </div>
+                <div>
+                    <input className={`govuk-input${error ? ' govuk-input--error' : ''}`}
+                        id={name}
+                        type={type}
+                        name={name}
+                        disabled={disabled}
+                        value={this.props.value}
+                        onChange={e => this._onChange(e)}
+                    />
+                </div>
+            </div >
         );
     }
 }
 
 Text.propTypes = {
-    disabled: PropTypes.bool,
+    className: PropTypes.string,
+    disabled: PropTypes.string,
     error: PropTypes.string,
     hint: PropTypes.string,
     label: PropTypes.string,

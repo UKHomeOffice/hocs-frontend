@@ -1,0 +1,1603 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Workstack component should render with default props 1`] = `
+Array [
+  <br />,
+  <div
+    class="govuk-grid-row"
+  >
+    <div
+      class="govuk-grid-column-full"
+    >
+      <form
+        action="base.urlundefined"
+        enctype="multipart/form-data"
+        method="POST"
+      >
+        <fieldset
+          class="govuk-fieldset"
+        >
+          <div
+            class="govuk-grid-row"
+          >
+            <div
+              class="govuk-grid-column-full"
+            >
+              <div
+                class="workstack"
+              >
+                <span
+                  aria-live="polite"
+                  class="govuk-hint"
+                >
+                  2 Items
+                </span>
+                <table
+                  class="govuk-table"
+                >
+                  <thead
+                    class="govuk-table__head"
+                  >
+                    <tr
+                      class="govuk-radios govuk-table__row"
+                    >
+                      <th
+                        class="govuk-table__header"
+                      >
+                        Select
+                      </th>
+                      <th
+                        class="govuk-link"
+                      >
+                        Reference
+                      </th>
+                      <th
+                        class="govuk-link"
+                      >
+                        Full Name
+                      </th>
+                      <th
+                        class="govuk-link"
+                      >
+                        Current Stage
+                      </th>
+                      <th
+                        class="govuk-link"
+                      >
+                        Owner
+                      </th>
+                      <th
+                        class="govuk-link"
+                      >
+                        Team
+                      </th>
+                      <th
+                        class="govuk-link"
+                      >
+                        Case Date
+                      </th>
+                      <th
+                        class="govuk-link"
+                      >
+                        Active
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody
+                    class="govuk-table__body"
+                  >
+                    <tr
+                      class="govuk-radios govuk-table__row"
+                    >
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        <div
+                          class="govuk-checkboxes"
+                        >
+                          <div
+                            class="govuk-checkboxes__item"
+                          >
+                            <input
+                              class="govuk-checkboxes__input"
+                              id="selected_cases_case_uuid-123"
+                              name="selected_cases[]"
+                              type="checkbox"
+                              value="case_uuid-123:stage_uuid-456"
+                            />
+                            <label
+                              class="govuk-label govuk-checkboxes__label"
+                              for="selected_cases_case_uuid-123"
+                            />
+                          </div>
+                        </div>
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        <a
+                          class="govuk-link govuk-!-margin-right-3"
+                          href="/case/case_uuid-123/stage/stage_uuid-456"
+                        >
+                          case1
+                        </a>
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        Sam Smith
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        Stage A
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        User1
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        team1
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        29/10/2019
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        is Active
+                      </td>
+                    </tr>
+                    <tr
+                      class="govuk-radios govuk-table__row"
+                    >
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        <div
+                          class="govuk-checkboxes"
+                        >
+                          <div
+                            class="govuk-checkboxes__item"
+                          >
+                            <input
+                              class="govuk-checkboxes__input"
+                              id="selected_cases_case_uuid-789"
+                              name="selected_cases[]"
+                              type="checkbox"
+                              value="case_uuid-789:stage_uuid-432"
+                            />
+                            <label
+                              class="govuk-label govuk-checkboxes__label"
+                              for="selected_cases_case_uuid-789"
+                            />
+                          </div>
+                        </div>
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        <a
+                          class="govuk-link govuk-!-margin-right-3"
+                          href="/case/case_uuid-789/stage/stage_uuid-432"
+                        >
+                          case2
+                        </a>
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        John Alex
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        Stage B
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        User2
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        team2
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        13/12/2018
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      />
+                    </tr>
+                  </tbody>
+                </table>
+                <span
+                  aria-live="polite"
+                  class="govuk-hint"
+                >
+                  2 Items
+                </span>
+              </div>
+            </div>
+          </div>
+          <div
+            class="govuk-grid-row"
+          >
+            <div
+              class="govuk-grid-column-one-third"
+            >
+              <ul
+                class="govuk-list"
+              >
+                <li />
+                <li>
+                  <button
+                    class="govuk-button--link govuk-link"
+                    formaction="base.urlapi/allocate"
+                    formenctype="multipart/form-data"
+                    formmethod="POST"
+                    type="submit"
+                  >
+                    Unallocate selected
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>,
+]
+`;
+
+exports[`Workstack component should render with filtering 1`] = `
+<BrowserRouter>
+  <Router
+    history={
+      Object {
+        "action": "POP",
+        "block": [Function],
+        "createHref": [Function],
+        "go": [Function],
+        "goBack": [Function],
+        "goForward": [Function],
+        "length": 1,
+        "listen": [Function],
+        "location": Object {
+          "hash": "",
+          "pathname": "/",
+          "search": "",
+          "state": undefined,
+        },
+        "push": [Function],
+        "replace": [Function],
+      }
+    }
+  >
+    <Component
+      track={[MockFunction]}
+    >
+      <WorkstackAllocate
+        allocateToWorkstackEndpoint="api/allocate"
+        baseUrl="base.url"
+        columns={
+          Array [
+            Object {
+              "dataAdapter": null,
+              "dataValueKey": "caseReference",
+              "displayName": "Reference",
+              "isFilterable": true,
+              "renderer": "caseLink",
+            },
+            Object {
+              "dataAdapter": null,
+              "dataValueKey": "fullName",
+              "displayName": "Full Name",
+              "isFilterable": true,
+              "renderer": null,
+            },
+            Object {
+              "dataAdapter": null,
+              "dataValueKey": "stageTypeDisplay",
+              "displayName": "Current Stage",
+              "isFilterable": true,
+              "renderer": null,
+            },
+            Object {
+              "dataAdapter": null,
+              "dataValueKey": "assignedUserDisplay",
+              "displayName": "Owner",
+              "isFilterable": true,
+              "renderer": null,
+            },
+            Object {
+              "dataAdapter": null,
+              "dataValueKey": "assignedTeamDisplay",
+              "displayName": "Team",
+              "isFilterable": true,
+              "renderer": null,
+            },
+            Object {
+              "dataAdapter": "localDate",
+              "dataValueKey": "created",
+              "displayName": "Case Date",
+              "isFilterable": true,
+              "renderer": null,
+            },
+            Object {
+              "dataAdapter": "indicator",
+              "dataValueKey": "isActive",
+              "displayName": "Active",
+              "isFilterable": true,
+              "renderer": null,
+            },
+          ]
+        }
+        items={
+          Array [
+            Object {
+              "assignedTeamDisplay": "team1",
+              "assignedUserDisplay": "User1",
+              "caseReference": "case1",
+              "caseUUID": "case_uuid-123",
+              "created": "2019-10-29T11:01:32.656563",
+              "fullName": "Sam Smith",
+              "isActive": "YES",
+              "stageTypeDisplay": "Stage A",
+              "uuid": "stage_uuid-456",
+            },
+            Object {
+              "assignedTeamDisplay": "team2",
+              "assignedUserDisplay": "User2",
+              "caseReference": "case2",
+              "caseUUID": "case_uuid-789",
+              "created": "2018-12-13T11:02:48.546577",
+              "fullName": "John Alex",
+              "isActive": "NO",
+              "stageTypeDisplay": "Stage B",
+              "uuid": "stage_uuid-432",
+            },
+          ]
+        }
+        selectable={true}
+        submitHandler={[MockFunction]}
+        track={[MockFunction]}
+        updateFormData={
+          [MockFunction] {
+            "calls": Array [
+              Array [
+                Object {
+                  "selected_cases": Array [],
+                },
+              ],
+            ],
+            "results": Array [
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+            ],
+          }
+        }
+      >
+        <div
+          className="govuk-grid-row"
+        >
+          <div
+            className="govuk-grid-column-one-third"
+          >
+            <div
+              className="govuk-form-group filter-row"
+            >
+              <legend
+                className="govuk-fieldset__legend"
+                id="workstack-filter-legend"
+              >
+                <span
+                  className="govuk-fieldset__heading govuk-label--s"
+                >
+                  Case Filter
+                </span>
+              </legend>
+              <input
+                className="govuk-input"
+                id="workstack-filter"
+                name="workstack-filter"
+                onBlur={[Function]}
+                onChange={[Function]}
+                type="text"
+              />
+            </div>
+          </div>
+        </div>
+        <br />
+        <div
+          className="govuk-grid-row"
+        >
+          <div
+            className="govuk-grid-column-full"
+          >
+            <form
+              action="base.urlundefined"
+              encType="multipart/form-data"
+              method="POST"
+              onSubmit={[Function]}
+            >
+              <fieldset
+                className="govuk-fieldset"
+              >
+                <div
+                  className="govuk-grid-row"
+                >
+                  <div
+                    className="govuk-grid-column-full"
+                  >
+                    <div
+                      className="workstack"
+                    >
+                      <span
+                        aria-live="polite"
+                        className="govuk-hint"
+                      >
+                        1
+                         Items
+                      </span>
+                      <table
+                        className="govuk-table"
+                      >
+                        <thead
+                          className="govuk-table__head"
+                        >
+                          <tr
+                            className="govuk-radios govuk-table__row"
+                          >
+                            <th
+                              className="govuk-table__header"
+                            >
+                              Select
+                            </th>
+                            <th
+                              className="govuk-link"
+                              key="Reference"
+                              onClick={[Function]}
+                            >
+                              Reference
+                            </th>
+                            <th
+                              className="govuk-link"
+                              key="Full Name"
+                              onClick={[Function]}
+                            >
+                              Full Name
+                            </th>
+                            <th
+                              className="govuk-link"
+                              key="Current Stage"
+                              onClick={[Function]}
+                            >
+                              Current Stage
+                            </th>
+                            <th
+                              className="govuk-link"
+                              key="Owner"
+                              onClick={[Function]}
+                            >
+                              Owner
+                            </th>
+                            <th
+                              className="govuk-link"
+                              key="Team"
+                              onClick={[Function]}
+                            >
+                              Team
+                            </th>
+                            <th
+                              className="govuk-link"
+                              key="Case Date"
+                              onClick={[Function]}
+                            >
+                              Case Date
+                            </th>
+                            <th
+                              className="govuk-link"
+                              key="Active"
+                              onClick={[Function]}
+                            >
+                              Active
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody
+                          className="govuk-table__body"
+                        >
+                          <tr
+                            className="govuk-radios govuk-table__row"
+                            key="stage_uuid-456"
+                          >
+                            <td
+                              className="govuk-table__cell"
+                            >
+                              <div
+                                className="govuk-checkboxes"
+                              >
+                                <div
+                                  className="govuk-checkboxes__item"
+                                  key="case_uuid-123stage_uuid-456"
+                                >
+                                  <input
+                                    checked={false}
+                                    className="govuk-checkboxes__input"
+                                    id="selected_cases_case_uuid-123"
+                                    name="selected_cases[]"
+                                    onChange={[Function]}
+                                    type="checkbox"
+                                    value="case_uuid-123:stage_uuid-456"
+                                  />
+                                  <label
+                                    className="govuk-label govuk-checkboxes__label"
+                                    htmlFor="selected_cases_case_uuid-123"
+                                  />
+                                </div>
+                              </div>
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-456caseReference"
+                            >
+                              <Link
+                                className="govuk-link govuk-!-margin-right-3"
+                                replace={false}
+                                to="/case/case_uuid-123/stage/stage_uuid-456"
+                              >
+                                <a
+                                  className="govuk-link govuk-!-margin-right-3"
+                                  href="/case/case_uuid-123/stage/stage_uuid-456"
+                                  onClick={[Function]}
+                                >
+                                  case1
+                                </a>
+                              </Link>
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-456fullName"
+                            >
+                              Sam Smith
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-456stageTypeDisplay"
+                            >
+                              Stage A
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-456assignedUserDisplay"
+                            >
+                              User1
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-456assignedTeamDisplay"
+                            >
+                              team1
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-456created"
+                            >
+                              29/10/2019
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-456isActive"
+                            >
+                              is Active
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <span
+                        aria-live="polite"
+                        className="govuk-hint"
+                      >
+                        1
+                         Items
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="govuk-grid-row"
+                >
+                  <div
+                    className="govuk-grid-column-one-third"
+                  >
+                    <ul
+                      className="govuk-list"
+                    >
+                      <li />
+                      <li>
+                        <button
+                          className="govuk-button--link govuk-link"
+                          formAction="base.urlapi/allocate"
+                          formEncType="multipart/form-data"
+                          formMethod="POST"
+                          onClick={[Function]}
+                          type="submit"
+                        >
+                          Unallocate selected
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+      </WorkstackAllocate>
+    </Component>
+  </Router>
+</BrowserRouter>
+`;
+
+exports[`Workstack component should sort descending when the column heading is clicked twice 1`] = `
+<BrowserRouter>
+  <Router
+    history={
+      Object {
+        "action": "POP",
+        "block": [Function],
+        "createHref": [Function],
+        "go": [Function],
+        "goBack": [Function],
+        "goForward": [Function],
+        "length": 1,
+        "listen": [Function],
+        "location": Object {
+          "hash": "",
+          "pathname": "/",
+          "search": "",
+          "state": undefined,
+        },
+        "push": [Function],
+        "replace": [Function],
+      }
+    }
+  >
+    <Component
+      track={[MockFunction]}
+    >
+      <WorkstackAllocate
+        allocateToWorkstackEndpoint="api/allocate"
+        baseUrl="base.url"
+        columns={
+          Array [
+            Object {
+              "dataAdapter": null,
+              "dataValueKey": "caseReference",
+              "displayName": "Reference",
+              "isFilterable": true,
+              "renderer": "caseLink",
+            },
+            Object {
+              "dataAdapter": null,
+              "dataValueKey": "fullName",
+              "displayName": "Full Name",
+              "isFilterable": true,
+              "renderer": null,
+            },
+            Object {
+              "dataAdapter": null,
+              "dataValueKey": "stageTypeDisplay",
+              "displayName": "Current Stage",
+              "isFilterable": true,
+              "renderer": null,
+            },
+            Object {
+              "dataAdapter": null,
+              "dataValueKey": "assignedUserDisplay",
+              "displayName": "Owner",
+              "isFilterable": true,
+              "renderer": null,
+            },
+            Object {
+              "dataAdapter": null,
+              "dataValueKey": "assignedTeamDisplay",
+              "displayName": "Team",
+              "isFilterable": true,
+              "renderer": null,
+            },
+            Object {
+              "dataAdapter": "localDate",
+              "dataValueKey": "created",
+              "displayName": "Case Date",
+              "isFilterable": true,
+              "renderer": null,
+            },
+            Object {
+              "dataAdapter": "indicator",
+              "dataValueKey": "isActive",
+              "displayName": "Active",
+              "isFilterable": true,
+              "renderer": null,
+            },
+          ]
+        }
+        items={
+          Array [
+            Object {
+              "assignedTeamDisplay": "team1",
+              "assignedUserDisplay": "User1",
+              "caseReference": "case1",
+              "caseUUID": "case_uuid-123",
+              "created": "2019-10-29T11:01:32.656563",
+              "fullName": "Sam Smith",
+              "isActive": "YES",
+              "stageTypeDisplay": "Stage A",
+              "uuid": "stage_uuid-456",
+            },
+            Object {
+              "assignedTeamDisplay": "team2",
+              "assignedUserDisplay": "User2",
+              "caseReference": "case2",
+              "caseUUID": "case_uuid-789",
+              "created": "2018-12-13T11:02:48.546577",
+              "fullName": "John Alex",
+              "isActive": "NO",
+              "stageTypeDisplay": "Stage B",
+              "uuid": "stage_uuid-432",
+            },
+          ]
+        }
+        selectable={true}
+        submitHandler={[MockFunction]}
+        track={[MockFunction]}
+        updateFormData={
+          [MockFunction] {
+            "calls": Array [
+              Array [
+                Object {
+                  "selected_cases": Array [],
+                },
+              ],
+            ],
+            "results": Array [
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+            ],
+          }
+        }
+      >
+        <div
+          className="govuk-grid-row"
+        >
+          <div
+            className="govuk-grid-column-one-third"
+          >
+            <div
+              className="govuk-form-group filter-row"
+            >
+              <legend
+                className="govuk-fieldset__legend"
+                id="workstack-filter-legend"
+              >
+                <span
+                  className="govuk-fieldset__heading govuk-label--s"
+                >
+                  Case Filter
+                </span>
+              </legend>
+              <input
+                className="govuk-input"
+                id="workstack-filter"
+                name="workstack-filter"
+                onBlur={[Function]}
+                onChange={[Function]}
+                type="text"
+              />
+            </div>
+          </div>
+        </div>
+        <br />
+        <div
+          className="govuk-grid-row"
+        >
+          <div
+            className="govuk-grid-column-full"
+          >
+            <form
+              action="base.urlundefined"
+              encType="multipart/form-data"
+              method="POST"
+              onSubmit={[Function]}
+            >
+              <fieldset
+                className="govuk-fieldset"
+              >
+                <div
+                  className="govuk-grid-row"
+                >
+                  <div
+                    className="govuk-grid-column-full"
+                  >
+                    <div
+                      className="workstack"
+                    >
+                      <span
+                        aria-live="polite"
+                        className="govuk-hint"
+                      >
+                        2
+                         Items
+                      </span>
+                      <table
+                        className="govuk-table"
+                      >
+                        <thead
+                          className="govuk-table__head"
+                        >
+                          <tr
+                            className="govuk-radios govuk-table__row"
+                          >
+                            <th
+                              className="govuk-table__header"
+                            >
+                              Select
+                            </th>
+                            <th
+                              className="govuk-link sorted-descending"
+                              key="Reference"
+                              onClick={[Function]}
+                            >
+                              Reference
+                            </th>
+                            <th
+                              className="govuk-link"
+                              key="Full Name"
+                              onClick={[Function]}
+                            >
+                              Full Name
+                            </th>
+                            <th
+                              className="govuk-link"
+                              key="Current Stage"
+                              onClick={[Function]}
+                            >
+                              Current Stage
+                            </th>
+                            <th
+                              className="govuk-link"
+                              key="Owner"
+                              onClick={[Function]}
+                            >
+                              Owner
+                            </th>
+                            <th
+                              className="govuk-link"
+                              key="Team"
+                              onClick={[Function]}
+                            >
+                              Team
+                            </th>
+                            <th
+                              className="govuk-link"
+                              key="Case Date"
+                              onClick={[Function]}
+                            >
+                              Case Date
+                            </th>
+                            <th
+                              className="govuk-link"
+                              key="Active"
+                              onClick={[Function]}
+                            >
+                              Active
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody
+                          className="govuk-table__body"
+                        >
+                          <tr
+                            className="govuk-radios govuk-table__row"
+                            key="stage_uuid-432"
+                          >
+                            <td
+                              className="govuk-table__cell"
+                            >
+                              <div
+                                className="govuk-checkboxes"
+                              >
+                                <div
+                                  className="govuk-checkboxes__item"
+                                  key="case_uuid-789stage_uuid-432"
+                                >
+                                  <input
+                                    checked={false}
+                                    className="govuk-checkboxes__input"
+                                    id="selected_cases_case_uuid-789"
+                                    name="selected_cases[]"
+                                    onChange={[Function]}
+                                    type="checkbox"
+                                    value="case_uuid-789:stage_uuid-432"
+                                  />
+                                  <label
+                                    className="govuk-label govuk-checkboxes__label"
+                                    htmlFor="selected_cases_case_uuid-789"
+                                  />
+                                </div>
+                              </div>
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-432caseReference"
+                            >
+                              <Link
+                                className="govuk-link govuk-!-margin-right-3"
+                                replace={false}
+                                to="/case/case_uuid-789/stage/stage_uuid-432"
+                              >
+                                <a
+                                  className="govuk-link govuk-!-margin-right-3"
+                                  href="/case/case_uuid-789/stage/stage_uuid-432"
+                                  onClick={[Function]}
+                                >
+                                  case2
+                                </a>
+                              </Link>
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-432fullName"
+                            >
+                              John Alex
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-432stageTypeDisplay"
+                            >
+                              Stage B
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-432assignedUserDisplay"
+                            >
+                              User2
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-432assignedTeamDisplay"
+                            >
+                              team2
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-432created"
+                            >
+                              13/12/2018
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-432isActive"
+                            />
+                          </tr>
+                          <tr
+                            className="govuk-radios govuk-table__row"
+                            key="stage_uuid-456"
+                          >
+                            <td
+                              className="govuk-table__cell"
+                            >
+                              <div
+                                className="govuk-checkboxes"
+                              >
+                                <div
+                                  className="govuk-checkboxes__item"
+                                  key="case_uuid-123stage_uuid-456"
+                                >
+                                  <input
+                                    checked={false}
+                                    className="govuk-checkboxes__input"
+                                    id="selected_cases_case_uuid-123"
+                                    name="selected_cases[]"
+                                    onChange={[Function]}
+                                    type="checkbox"
+                                    value="case_uuid-123:stage_uuid-456"
+                                  />
+                                  <label
+                                    className="govuk-label govuk-checkboxes__label"
+                                    htmlFor="selected_cases_case_uuid-123"
+                                  />
+                                </div>
+                              </div>
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-456caseReference"
+                            >
+                              <Link
+                                className="govuk-link govuk-!-margin-right-3"
+                                replace={false}
+                                to="/case/case_uuid-123/stage/stage_uuid-456"
+                              >
+                                <a
+                                  className="govuk-link govuk-!-margin-right-3"
+                                  href="/case/case_uuid-123/stage/stage_uuid-456"
+                                  onClick={[Function]}
+                                >
+                                  case1
+                                </a>
+                              </Link>
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-456fullName"
+                            >
+                              Sam Smith
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-456stageTypeDisplay"
+                            >
+                              Stage A
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-456assignedUserDisplay"
+                            >
+                              User1
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-456assignedTeamDisplay"
+                            >
+                              team1
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-456created"
+                            >
+                              29/10/2019
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-456isActive"
+                            >
+                              is Active
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <span
+                        aria-live="polite"
+                        className="govuk-hint"
+                      >
+                        2
+                         Items
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="govuk-grid-row"
+                >
+                  <div
+                    className="govuk-grid-column-one-third"
+                  >
+                    <ul
+                      className="govuk-list"
+                    >
+                      <li />
+                      <li>
+                        <button
+                          className="govuk-button--link govuk-link"
+                          formAction="base.urlapi/allocate"
+                          formEncType="multipart/form-data"
+                          formMethod="POST"
+                          onClick={[Function]}
+                          type="submit"
+                        >
+                          Unallocate selected
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+      </WorkstackAllocate>
+    </Component>
+  </Router>
+</BrowserRouter>
+`;
+
+exports[`Workstack component should sort when the column heading is clicked 1`] = `
+<BrowserRouter>
+  <Router
+    history={
+      Object {
+        "action": "POP",
+        "block": [Function],
+        "createHref": [Function],
+        "go": [Function],
+        "goBack": [Function],
+        "goForward": [Function],
+        "length": 1,
+        "listen": [Function],
+        "location": Object {
+          "hash": "",
+          "pathname": "/",
+          "search": "",
+          "state": undefined,
+        },
+        "push": [Function],
+        "replace": [Function],
+      }
+    }
+  >
+    <Component
+      track={[MockFunction]}
+    >
+      <WorkstackAllocate
+        allocateToWorkstackEndpoint="api/allocate"
+        baseUrl="base.url"
+        columns={
+          Array [
+            Object {
+              "dataAdapter": null,
+              "dataValueKey": "caseReference",
+              "displayName": "Reference",
+              "isFilterable": true,
+              "renderer": "caseLink",
+            },
+            Object {
+              "dataAdapter": null,
+              "dataValueKey": "fullName",
+              "displayName": "Full Name",
+              "isFilterable": true,
+              "renderer": null,
+            },
+            Object {
+              "dataAdapter": null,
+              "dataValueKey": "stageTypeDisplay",
+              "displayName": "Current Stage",
+              "isFilterable": true,
+              "renderer": null,
+            },
+            Object {
+              "dataAdapter": null,
+              "dataValueKey": "assignedUserDisplay",
+              "displayName": "Owner",
+              "isFilterable": true,
+              "renderer": null,
+            },
+            Object {
+              "dataAdapter": null,
+              "dataValueKey": "assignedTeamDisplay",
+              "displayName": "Team",
+              "isFilterable": true,
+              "renderer": null,
+            },
+            Object {
+              "dataAdapter": "localDate",
+              "dataValueKey": "created",
+              "displayName": "Case Date",
+              "isFilterable": true,
+              "renderer": null,
+            },
+            Object {
+              "dataAdapter": "indicator",
+              "dataValueKey": "isActive",
+              "displayName": "Active",
+              "isFilterable": true,
+              "renderer": null,
+            },
+          ]
+        }
+        items={
+          Array [
+            Object {
+              "assignedTeamDisplay": "team1",
+              "assignedUserDisplay": "User1",
+              "caseReference": "case1",
+              "caseUUID": "case_uuid-123",
+              "created": "2019-10-29T11:01:32.656563",
+              "fullName": "Sam Smith",
+              "isActive": "YES",
+              "stageTypeDisplay": "Stage A",
+              "uuid": "stage_uuid-456",
+            },
+            Object {
+              "assignedTeamDisplay": "team2",
+              "assignedUserDisplay": "User2",
+              "caseReference": "case2",
+              "caseUUID": "case_uuid-789",
+              "created": "2018-12-13T11:02:48.546577",
+              "fullName": "John Alex",
+              "isActive": "NO",
+              "stageTypeDisplay": "Stage B",
+              "uuid": "stage_uuid-432",
+            },
+          ]
+        }
+        selectable={true}
+        submitHandler={[MockFunction]}
+        track={[MockFunction]}
+        updateFormData={
+          [MockFunction] {
+            "calls": Array [
+              Array [
+                Object {
+                  "selected_cases": Array [],
+                },
+              ],
+            ],
+            "results": Array [
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+            ],
+          }
+        }
+      >
+        <div
+          className="govuk-grid-row"
+        >
+          <div
+            className="govuk-grid-column-one-third"
+          >
+            <div
+              className="govuk-form-group filter-row"
+            >
+              <legend
+                className="govuk-fieldset__legend"
+                id="workstack-filter-legend"
+              >
+                <span
+                  className="govuk-fieldset__heading govuk-label--s"
+                >
+                  Case Filter
+                </span>
+              </legend>
+              <input
+                className="govuk-input"
+                id="workstack-filter"
+                name="workstack-filter"
+                onBlur={[Function]}
+                onChange={[Function]}
+                type="text"
+              />
+            </div>
+          </div>
+        </div>
+        <br />
+        <div
+          className="govuk-grid-row"
+        >
+          <div
+            className="govuk-grid-column-full"
+          >
+            <form
+              action="base.urlundefined"
+              encType="multipart/form-data"
+              method="POST"
+              onSubmit={[Function]}
+            >
+              <fieldset
+                className="govuk-fieldset"
+              >
+                <div
+                  className="govuk-grid-row"
+                >
+                  <div
+                    className="govuk-grid-column-full"
+                  >
+                    <div
+                      className="workstack"
+                    >
+                      <span
+                        aria-live="polite"
+                        className="govuk-hint"
+                      >
+                        2
+                         Items
+                      </span>
+                      <table
+                        className="govuk-table"
+                      >
+                        <thead
+                          className="govuk-table__head"
+                        >
+                          <tr
+                            className="govuk-radios govuk-table__row"
+                          >
+                            <th
+                              className="govuk-table__header"
+                            >
+                              Select
+                            </th>
+                            <th
+                              className="govuk-link sorted-ascending"
+                              key="Reference"
+                              onClick={[Function]}
+                            >
+                              Reference
+                            </th>
+                            <th
+                              className="govuk-link"
+                              key="Full Name"
+                              onClick={[Function]}
+                            >
+                              Full Name
+                            </th>
+                            <th
+                              className="govuk-link"
+                              key="Current Stage"
+                              onClick={[Function]}
+                            >
+                              Current Stage
+                            </th>
+                            <th
+                              className="govuk-link"
+                              key="Owner"
+                              onClick={[Function]}
+                            >
+                              Owner
+                            </th>
+                            <th
+                              className="govuk-link"
+                              key="Team"
+                              onClick={[Function]}
+                            >
+                              Team
+                            </th>
+                            <th
+                              className="govuk-link"
+                              key="Case Date"
+                              onClick={[Function]}
+                            >
+                              Case Date
+                            </th>
+                            <th
+                              className="govuk-link"
+                              key="Active"
+                              onClick={[Function]}
+                            >
+                              Active
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody
+                          className="govuk-table__body"
+                        >
+                          <tr
+                            className="govuk-radios govuk-table__row"
+                            key="stage_uuid-456"
+                          >
+                            <td
+                              className="govuk-table__cell"
+                            >
+                              <div
+                                className="govuk-checkboxes"
+                              >
+                                <div
+                                  className="govuk-checkboxes__item"
+                                  key="case_uuid-123stage_uuid-456"
+                                >
+                                  <input
+                                    checked={false}
+                                    className="govuk-checkboxes__input"
+                                    id="selected_cases_case_uuid-123"
+                                    name="selected_cases[]"
+                                    onChange={[Function]}
+                                    type="checkbox"
+                                    value="case_uuid-123:stage_uuid-456"
+                                  />
+                                  <label
+                                    className="govuk-label govuk-checkboxes__label"
+                                    htmlFor="selected_cases_case_uuid-123"
+                                  />
+                                </div>
+                              </div>
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-456caseReference"
+                            >
+                              <Link
+                                className="govuk-link govuk-!-margin-right-3"
+                                replace={false}
+                                to="/case/case_uuid-123/stage/stage_uuid-456"
+                              >
+                                <a
+                                  className="govuk-link govuk-!-margin-right-3"
+                                  href="/case/case_uuid-123/stage/stage_uuid-456"
+                                  onClick={[Function]}
+                                >
+                                  case1
+                                </a>
+                              </Link>
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-456fullName"
+                            >
+                              Sam Smith
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-456stageTypeDisplay"
+                            >
+                              Stage A
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-456assignedUserDisplay"
+                            >
+                              User1
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-456assignedTeamDisplay"
+                            >
+                              team1
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-456created"
+                            >
+                              29/10/2019
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-456isActive"
+                            >
+                              is Active
+                            </td>
+                          </tr>
+                          <tr
+                            className="govuk-radios govuk-table__row"
+                            key="stage_uuid-432"
+                          >
+                            <td
+                              className="govuk-table__cell"
+                            >
+                              <div
+                                className="govuk-checkboxes"
+                              >
+                                <div
+                                  className="govuk-checkboxes__item"
+                                  key="case_uuid-789stage_uuid-432"
+                                >
+                                  <input
+                                    checked={false}
+                                    className="govuk-checkboxes__input"
+                                    id="selected_cases_case_uuid-789"
+                                    name="selected_cases[]"
+                                    onChange={[Function]}
+                                    type="checkbox"
+                                    value="case_uuid-789:stage_uuid-432"
+                                  />
+                                  <label
+                                    className="govuk-label govuk-checkboxes__label"
+                                    htmlFor="selected_cases_case_uuid-789"
+                                  />
+                                </div>
+                              </div>
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-432caseReference"
+                            >
+                              <Link
+                                className="govuk-link govuk-!-margin-right-3"
+                                replace={false}
+                                to="/case/case_uuid-789/stage/stage_uuid-432"
+                              >
+                                <a
+                                  className="govuk-link govuk-!-margin-right-3"
+                                  href="/case/case_uuid-789/stage/stage_uuid-432"
+                                  onClick={[Function]}
+                                >
+                                  case2
+                                </a>
+                              </Link>
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-432fullName"
+                            >
+                              John Alex
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-432stageTypeDisplay"
+                            >
+                              Stage B
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-432assignedUserDisplay"
+                            >
+                              User2
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-432assignedTeamDisplay"
+                            >
+                              team2
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-432created"
+                            >
+                              13/12/2018
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-432isActive"
+                            />
+                          </tr>
+                        </tbody>
+                      </table>
+                      <span
+                        aria-live="polite"
+                        className="govuk-hint"
+                      >
+                        2
+                         Items
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="govuk-grid-row"
+                >
+                  <div
+                    className="govuk-grid-column-one-third"
+                  >
+                    <ul
+                      className="govuk-list"
+                    >
+                      <li />
+                      <li>
+                        <button
+                          className="govuk-button--link govuk-link"
+                          formAction="base.urlapi/allocate"
+                          formEncType="multipart/form-data"
+                          formMethod="POST"
+                          onClick={[Function]}
+                          type="submit"
+                        >
+                          Unallocate selected
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+      </WorkstackAllocate>
+    </Component>
+  </Router>
+</BrowserRouter>
+`;

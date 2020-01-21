@@ -4,10 +4,10 @@ jest.mock('../../config.js', () => {
     return {
         forContext: context => {
             switch (context) {
-            case 'server':
-                return {
-                    DOCUMENT_WHITELIST: ['validExtension']
-                };
+                case 'server':
+                    return {
+                        DOCUMENT_WHITELIST: ['validExtension']
+                    };
             }
         }
     };
@@ -21,6 +21,60 @@ describe('Validators', () => {
         });
         it('should accept a filled field', () => {
             expect(validators.required({ value: 'data' })).toEqual(null);
+        });
+    });
+
+    describe('Alphanumeric validator', () => {
+        it('should reject symbols', () => {
+            expect(validators.alphanumeric({  label: 'test',value: '!@£$' })).toEqual('test must be alphanumeric');
+        });
+        it('should accept alpha only', () => {
+            expect(validators.alphanumeric({  label: 'test',value: 'Data' })).toEqual(null);
+        });
+        it('should accept numeric only', () => {
+            expect(validators.alphanumeric({  label: 'test',value: '1234' })).toEqual(null);
+        });
+        it('should accept alphanumeric', () => {
+            expect(validators.alphanumeric({  label: 'test',value: 'l33T' })).toEqual(null);
+        });
+    });
+
+    describe('Currency validator', () => {
+        it('should reject symbols', () => {
+            expect(validators.currency({ label: 'test', value: '!@£$' })).toEqual('test must be currency amount');
+        });
+        it('should reject alphanumeric', () => {
+            expect(validators.currency({ label: 'test', value: 'a1b2' })).toEqual('test must be currency amount');
+        });
+        it('should reject zero decimal', () => {
+            expect(validators.currency({ label: 'test', value: '1234.' })).toEqual('test must be currency amount');
+        });
+        it('should reject one decimal', () => {
+            expect(validators.currency({ label: 'test', value: '1234.5' })).toEqual('test must be currency amount');
+        });
+        it('should reject three decimal', () => {
+            expect(validators.currency({ label: 'test', value: '1234.567' })).toEqual('test must be currency amount');
+        });
+        it('should accept numeric only', () => {
+            expect(validators.currency({ label: 'test', value: '1234' })).toEqual(null);
+        });
+        it('should accept double place', () => {
+            expect(validators.currency({ label: 'test', value: '1234.56' })).toEqual(null);
+        });
+    });
+
+    describe('Numeric validator', () => {
+        it('should reject symbols', () => {
+            expect(validators.numeric({ label: 'test', value: '!@£$' })).toEqual('test must be numeric');
+        });
+        it('should reject alpha', () => {
+            expect(validators.numeric({ label: 'test', value: 'data' })).toEqual('test must be numeric');
+        });
+        it('should reject alphanumeric', () => {
+            expect(validators.numeric({ label: 'test', value: 'a1b2' })).toEqual('test must be numeric');
+        });
+        it('should accept numeric only', () => {
+            expect(validators.numeric({ label: 'test', value: '1234' })).toEqual(null);
         });
     });
 

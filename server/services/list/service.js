@@ -44,7 +44,9 @@ const initialise = async (lists = {}, clients = {}, initialState = {}) => {
         clientRepository.store(name, client);
     });
 
-    const handleFailure = () => process.exit(1);
+    const handleFailure = () => {
+        process.exit(1);
+    };
 
     await Promise.all(Object.entries(lists).map(async ([listId, { endpoint, type = listType.DYNAMIC, client, adapter, data, defaultValue }]) => {
         try {
@@ -81,7 +83,7 @@ const getInstance = (requestId, user) => {
         const defaultValue = null;
         if (listCache.hasResource(listId)) {
             const item = await fetchList(listId);
-            if(item) {
+            if (item) {
                 const result = item.find(item => item.key === key);
                 return result ? result.value : defaultValue;
             } else return defaultValue;
@@ -105,16 +107,23 @@ const getInstance = (requestId, user) => {
                     response = await clientInstance.get(configuredEndpoint, { headers: { ...User.createHeaders(user), 'X-Correlation-Id': requestId } });
                 } catch (error) {
                     logger.error('FETCH_LIST_REQUEST_FAILURE', { list: listId, message: error.message, stack: error.stack });
-                    if (error.response){
-                        if(error.response.status === 404 && defaultValue) {
+                    if (error.response) {
+                        if (error.response.status === 404 && defaultValue) {
                             return defaultValue;
-                        }else if(error.response.status === 401){
+                        } else if (error.response.status === 401) {
                             throw new PermissionError('You are not authorised to work on this case');
                         }
                     }
                     throw new Error('Failed to request list');
                 }
-                const listData = await applyAdapter(response.data, adapter, { ...options, user, fromStaticList, logger });
+
+                //recursively get the configuration and pass this in for use in any adapters.
+                var configuration = null;
+                if (listId !== 'S_SYSTEM_CONFIGURATION') {
+                    configuration = await fetchList('S_SYSTEM_CONFIGURATION');
+                }
+
+                const listData = await applyAdapter(response.data, adapter, { ...options, user, fromStaticList, logger, configuration });
                 if (type === listType.STATIC && listData) {
                     listCache.store(listId, listData);
                 }
@@ -124,7 +133,7 @@ const getInstance = (requestId, user) => {
                 throw new Error('List not implemented');
             }
         } catch (error) {
-            if(error instanceof PermissionError){
+            if (error instanceof PermissionError) {
                 throw error;
             }
             logger.error('FETCH_LIST_FAILURE', { list: listId, message: error.message, stack: error.stack });

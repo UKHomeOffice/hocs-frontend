@@ -18,9 +18,9 @@ AllocationNote.propTypes = {
     message: PropTypes.string
 };
 
-const Form = ({ schema, data, errors, meta, action, method = 'POST', submitHandler, showErrorSummary = true }) => {
+const Form = ({ schema, data, errors, meta, action, method = 'POST', submitHandler, showErrorSummary = true, updateFormState }) => {
 
-    const createField = createTemplate(formComponentFactory, { data, errors, meta, callback: () => { }, baseUrl: '/' });
+    const createField = createTemplate(formComponentFactory, { data, errors, meta, callback: updateFormState, baseUrl: '/' });
 
     return (
         <Fragment>
@@ -45,7 +45,8 @@ Form.propTypes = {
     schema: PropTypes.object,
     errors: PropTypes.object,
     data: PropTypes.object,
-    meta: PropTypes.object
+    meta: PropTypes.object,
+    updateFormState: PropTypes.func.isRequired,
 };
 
 export default Form;

@@ -24,7 +24,7 @@ describe('Document middleware', () => {
 
         beforeEach(() => {
             next.mockReset();
-            req = { params: { documentId: '1234', caseId: '5522' }, user: mockUser};
+            req = { params: { documentId: '1234', caseId: '5522' }, user: mockUser };
             res = { setHeader: jest.fn() };
             mockResponse.status = 200;
             mockResponse.data.on = jest.fn();
@@ -33,7 +33,7 @@ describe('Document middleware', () => {
         });
 
         const expecteOptions = {
-            headers: { 'X-Auth-Groups': '', 'X-Auth-Roles': '', 'X-Auth-UserId': 'TEST'},
+            headers: { 'X-Auth-Groups': '', 'X-Auth-Roles': '', 'X-Auth-UserId': 'TEST' },
             responseType: 'stream'
         };
 
@@ -68,7 +68,7 @@ describe('Document middleware', () => {
 
         beforeEach(() => {
             next.mockReset();
-            req = { params: { documentId: '1234', caseId: '5522' }, user: mockUser};
+            req = { params: { documentId: '1234', caseId: '5522' }, user: mockUser };
             res = { setHeader: jest.fn() };
             mockResponse.status = 200;
             mockResponse.data.on = jest.fn();
@@ -77,7 +77,7 @@ describe('Document middleware', () => {
         });
 
         const expecteOptions = {
-            headers: { 'X-Auth-Groups': '', 'X-Auth-Roles': '', 'X-Auth-UserId': 'TEST'},
+            headers: { 'X-Auth-Groups': '', 'X-Auth-Roles': '', 'X-Auth-UserId': 'TEST' },
             responseType: 'stream'
         };
 

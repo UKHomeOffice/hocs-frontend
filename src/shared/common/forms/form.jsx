@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Submit from './submit.jsx';
 import ErrorSummary from './error-summary.jsx';
@@ -20,17 +20,18 @@ class Form extends Component {
             meta,
             method,
             page,
-            schema
+            schema,
+            submittingForm
         } = this.props;
         return (
-            <Fragment>
+            <>
                 {meta && meta.allocationNote &&
                     <Ribbon title={meta.allocationNote.type}>
                         <p>{meta.allocationNote.message}</p>
                     </Ribbon>
                 }
                 {errors && <ErrorSummary errors={errors} />}
-                < form
+                <form
                     action={action}
                     method={method}
                     onSubmit={this.props.submitHandler}
@@ -49,7 +50,7 @@ class Form extends Component {
                             });
                         })
                     }
-                    {schema.showPrimaryAction !== false && < Submit label={schema.defaultActionLabel} />}
+                    {schema.showPrimaryAction !== false && < Submit label={schema.defaultActionLabel} disabled={submittingForm} />}
                     {
                         schema && schema.secondaryActions && schema.secondaryActions.map((field, key) => {
                             return secondaryActionFactory(field.component, {
@@ -62,8 +63,8 @@ class Form extends Component {
                             });
                         })
                     }
-                </form >
-            </Fragment >
+                </form>
+            </>
         );
     }
 }
@@ -80,12 +81,13 @@ Form.propTypes = {
     schema: PropTypes.object.isRequired,
     submitHandler: PropTypes.func,
     updateFormState: PropTypes.func,
-    meta: PropTypes.object
+    submittingForm: PropTypes.bool.isRequired
 };
 
 Form.defaultProps = {
     defaultActionLabel: 'Submit',
-    method: 'POST'
+    method: 'POST',
+    submittingForm: false
 };
 
 export default Form;

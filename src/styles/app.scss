@@ -34,6 +34,13 @@ $govuk-font-family-tabular: 'helvetica neue',Arial, Helvetica, sans-serif !defau
   margin:0;
 }
 
+.govuk-mapped-text {
+  background-color: govuk-colour("grey-4");
+  font-weight: 400;
+  min-height: 20px;
+  padding: 10px;
+}
+
 .govuk-input:disabled, .govuk-textarea:disabled{
   background-color: govuk-colour("grey-4");
   border-color: govuk-colour("grey-4");
@@ -362,8 +369,47 @@ a.card__body {
 .workstack {
   overflow: scroll;
 
+  td {
+      padding-right: 5px;
+      &.wrap-text {
+          word-break: break-all;
+      }
+
+      &.indicator {          
+          span {
+            background-color: black;
+            border-radius: 5px;
+            color: white;
+            padding: 0.25em 0.5em 0.25em 0.5em;
+
+            &.indicator-blue {
+                background-color: govuk-colour("blue");
+            }
+            &.indicator-red {
+                background-color: govuk-colour("red");
+            }
+          }
+      }
+  }
+
   td,th {
     padding-left: 0.2em;
+    
+    &.govuk-link {
+        cursor: pointer;
+    }
+
+    &.sorted-ascending::after {
+        content: "\2191";
+        margin-left: 0.5rem;
+        position: absolute;
+    }
+
+    &.sorted-descending::after {
+        content: "\2193";
+        margin-left: 0.5rem;
+        position: absolute;
+    }
   }
 }
 
@@ -372,43 +418,11 @@ a.card__body {
   padding: govuk-spacing(2);
   margin: 0 auto govuk-spacing(3) auto;
 
-  .recent-action {
-    background-color: $panel-colour;
-    padding: 5px 20px 5px 15px;
-
-    h2 {
-      font-size: 1.2em;
-    }
-
-    &:before {
-      content: "";
-      display: block;
-      width: calc(2 * 5px);
-      height: calc(2 * 5px);
-      border-radius: 50%;
-      background-color: #6e777a;
-      border: 8px solid #6f777b;
-      position: absolute;
-      z-index: 2;
-      left: -35px;
-      top: 16px;
-    }
-  }
-
   ul {
     list-style-type: none;
     position: relative;
     padding: 0 0 0 10px;
     margin: 0 0 20px 0;
-    &:after {
-      content: "";
-      position: absolute;
-      top: 45px;
-      left: -4.5px;
-      bottom: 0;
-      border-left: 4px solid #6f777b;
-      height: 96%;
-    }
 
     li {
       margin: 4px 0 20px 10px;
@@ -420,6 +434,15 @@ a.card__body {
       word-wrap: break-word;
       &:last-child {
         margin-bottom: 0px;
+      }
+
+      &.case-note {
+        background-color: $panel-colour;
+        padding: 5px 20px 5px 15px;
+
+        &:before {
+            top:25px;
+        }
       }
 
       .timeline-reference {
@@ -450,10 +473,32 @@ a.card__body {
         top: 0px;
       }
 
+      &:after {
+        content: "";
+        position: absolute;
+        left: -24px;
+        bottom: 0;
+        border-left: 4px solid #6f777b;
+        height: 116%;
+        top: 10px;
+      }
+
+      &:last-child::after {
+          border: none;
+      }
+
       h2 {
         @include govuk-font(19, $weight: bold);
         margin-top: 0.5em;
         font-size: 0.9em;
+      }
+
+      p {
+          span + span {
+              &:before {
+                  content: " - "
+              }
+          }
       }
     }
   }
@@ -577,4 +622,91 @@ $border-colour: govuk-colour("grey-2");
   cursor: pointer;
   background: none;
   border: none;
-  margin: 0; }
+  margin: 0; 
+}
+
+.govuk-fieldset{
+  &.horizontal-choices{
+    .govuk-radios{
+      display: inline-flex;
+    }
+  }
+}
+
+.currency{
+  &.govuk-form-group{
+    > div:before {
+      content: "£ ";
+    }
+
+    > div {
+      font-size: 1.1875rem;
+      font-family: "helvetica neue", Arial, Helvetica, sans-serif;
+      font-weight: 700;
+      color: #0b0c0c;
+    }
+
+    > div > input {
+      width: 90%;
+    }
+  }
+}
+
+.govuk-width-container {
+    max-width: unset;
+}
+
+@media (min-width: 1360px) {
+    .govuk-width-container {
+        margin: 0 3rem;
+
+        &.govuk-header__container {
+            margin-bottom: -10px;
+        }
+    }        
+}
+
+.selectable-details {
+
+    .selectable-details-header {
+        color: #0b0c0c;
+        display: flex;
+        font-family: "helvetica neue", Arial, Helvetica, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        font-size: 16px;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.25;
+        margin-bottom: 20px;
+
+        .selectable-details-link {
+            color: #005ea5;
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            margin-bottom: 5px;
+            margin-left: auto;
+            padding-left: 25px;
+            padding-top: 11px;
+            text-decoration: underline;
+            
+            &:hover {
+                color: #2b8cc4;
+            }
+        }
+
+        .govuk-checkboxes__label {
+          opacity: 1;
+        }
+        
+    }
+
+    .selectable-details-content {
+        border-left: 5px solid #bfc1c3;
+        padding: 15px;
+        padding-left: 20px;
+        margin-bottom: 20px;
+        margin-top: 0.5rem;
+    }
+}
