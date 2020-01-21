@@ -37,7 +37,7 @@ class Text extends Component {
                         onChange={e => this._onChange(e)}
                     />
                 </div>
-            </div>
+            </div >
         );
     }
 }
