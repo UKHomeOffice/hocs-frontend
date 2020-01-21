@@ -50,10 +50,11 @@ function getSessionExpiry(logger, req) {
                     const expiry = decodedToken.exp;
                     logger.info(`decoded refresh token expiry: ${expiry}`);
                     if (expiry) {
-                        const expiresIn = (expiry - new Date().getTime() / 1000) / 60;
+                        const expiryMilliseconds = expiry * 1000;
+                        const expiresIn = (expiryMilliseconds - new Date().getTime()) / 1000;
                         logger.info(`decoded refresh token expires in: ${expiresIn}`);
+                        const expiresAt = new Date(expiryMilliseconds).toUTCString();
                         logger.info(`decoded refresh token expires at: ${expiresAt}`);
-                        const expiresAt = new Date(expiresIn * 1000).toUTCString();
                         return expiresAt;
                     }
                 }
