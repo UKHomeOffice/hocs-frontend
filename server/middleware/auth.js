@@ -27,7 +27,7 @@ function authMiddleware(req, res, next) {
 
 function sessionExpiryMiddleware(req, res, next) {
     const logger = getLogger(req.requestId);
-    const sessionExpiry = getSessionExpiry(logger, res);
+    const sessionExpiry = getSessionExpiry(logger, req);
     res.setHeader('X-Auth-Session-ExpiresAt', sessionExpiry);
     next();
 }
