@@ -4,27 +4,38 @@ import { Helmet } from 'react-helmet-async';
 import Modal from 'react-modal';
 import { Context } from '../contexts/application.jsx';
 
-const countDown = 60000;
-const getTargetDate = () => new Date(new Date().getTime() + countDown);
+const defaultExpiryMilliseconds = 60000;
+const warningCountdownStart = 55;
+const getDefaultExpiryDate = () => new Date(new Date().getTime() + defaultExpiryMilliseconds);
+const getRemainingSeconds = targetDate => Math.floor((targetDate - new Date().getTime()) / 1000);
 
-const isTimingOut = remainingSeconds => remainingSeconds < 55 && remainingSeconds > 0;
+const isTimingOut = remainingSeconds => remainingSeconds < warningCountdownStart && remainingSeconds > 0;
 const isTimedOut = remainingSeconds => remainingSeconds <= 0;
 const getModalTitle = remainingSeconds => isTimingOut(remainingSeconds) ? `Your session will expire in ${remainingSeconds} seconds` : 'Your session has expired';
 const getModalMessage = remainingSeconds => isTimingOut(remainingSeconds) ? 'We won\'t be able to save what you have done and you\'ll lose your progress. \n Click Continue to extend your session.' : 'You\'ll need to login again.';
 const getButtonText = remainingSeconds => isTimingOut(remainingSeconds) ? 'Continue' : 'Return to login';
 
-const SessionTimer = () => {
+const SessionTimer = ({ location }) => {
     const { layout: { header: { service } } } = React.useContext(Context);
-    const [targetDate, setTargetDate] = React.useState(getTargetDate());
-    const [remainingSeconds, setRemainingSeconds] = React.useState(countDown / 1000);
+    const [targetDate, setTargetDate] = React.useState(getDefaultExpiryDate());
+    const [remainingSeconds, setRemainingSeconds] = React.useState(defaultExpiryMilliseconds / 1000);
 
     React.useEffect(() => {
         Modal.setAppElement('#app');
+
+        axios.interceptors.response.use(function (response) {
+            const sessionTimeoutHeader = response.headers['x-auth-session-expiresat'];
+            if (sessionTimeoutHeader && !isNaN(sessionTimeoutHeader)) {
+                const expiresAt = new Date(sessionTimeoutHeader);
+                setTargetDate(expiresAt);
+            }
+            return response;
+        }, (error) => Promise.reject(error));
     }, []);
 
     React.useEffect(() => {
         const interval = setInterval(() => {
-            const diff = Math.floor((targetDate - new Date().getTime()) / 1000);
+            const diff = getRemainingSeconds(targetDate);
             setRemainingSeconds(diff);
             if (diff <= 0) {
                 clearInterval(interval);
@@ -38,10 +49,11 @@ const SessionTimer = () => {
     const onModalButtonClick = React.useCallback(() => {
         if (isTimingOut(remainingSeconds)) {
             axios.get('/api/keepalive')
-                .then(() => setTargetDate(getTargetDate()))
-                .catch(() => window.location.reload());
+                // eslint-disable-next-line no-console
+                .then(() => console.log('keepalive completed'))
+                .catch(() => location.reload());
         } else {
-            window.location.reload();
+            location.reload();
         }
     }, [remainingSeconds]);
 
