@@ -6,6 +6,10 @@ export KUBE_SERVER=${KUBE_SERVER}
 if [[ -z ${VERSION} ]] ; then
     export VERSION=${IMAGE_VERSION}
 fi
+if [[ -z ${DOMAIN} ]] ; then
+    export DOMAIN="cs"
+fi
+export DOMAIN=${DOMAIN}
 
 export IP_WHITELIST=${POISE_WHITELIST}
 
@@ -38,10 +42,10 @@ if [[ -z ${KUBE_TOKEN} ]] ; then
 fi
 
 if [ "${ENVIRONMENT}" == "prod" ] ; then
-    export DNS_PREFIX=www.cs
+    export DNS_PREFIX=www.${DOMAIN}
     export KC_REALM=https://sso.digital.homeoffice.gov.uk/auth/realms/hocs-prod
 else
-    export DNS_PREFIX=${ENVIRONMENT}.cs-notprod
+    export DNS_PREFIX=${ENVIRONMENT}.${DOMAIN}-notprod
     export KC_REALM=https://sso-dev.notprod.homeoffice.gov.uk/auth/realms/hocs-notprod
 fi
 
