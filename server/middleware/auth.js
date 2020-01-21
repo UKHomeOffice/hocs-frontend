@@ -8,37 +8,6 @@ const getLogger = require('../libs/logger');
 function authMiddleware(req, res, next) {
     const logger = getLogger(req.requestId);
     if (req.get('X-Auth-Token')) {
-        const tokenEncryptionKey = Buffer.from(process.env.ENCRYPTION_KEY || '');
-
-        if (tokenEncryptionKey.length > 0) {
-            logger.info(`token encryption key: ${tokenEncryptionKey}`);
-            const encryptedRefreshToken = req.cookies['kc-state'];
-
-            if (encryptedRefreshToken && encryptedRefreshToken.length > 0) {
-                logger.info(`encrypted refresh token: ${encryptedRefreshToken}`);
-
-                const decryptedToken = decrypt(encryptedRefreshToken, tokenEncryptionKey);
-                logger.info(`decrypted token: ${decryptedToken}`);
-
-                if (decryptedToken) {
-                    const decodedToken = jwt.decode(decryptedToken);
-                    logger.info(`decoded refresh token: ${decodedToken}`);
-
-                    const expiry = decodedToken.exp;
-                    logger.info(`decoded refresh token expiry: ${expiry}`);
-
-                    const expiresIn = expiry - Date.now();
-                    if (expiresIn) {
-                        logger.info(`decoded refresh token expires in: ${expiresIn}`);
-
-                        res.setHeader('X-Auth-Refresh-ExpiresIn', expiresIn);
-
-                        logger.info(`token expires in: ${req.get('X-Auth-ExpiresIn')}`);
-                    }
-                }
-            }
-        }
-
         if (!req.user) {
             req.user = new User({
                 username: req.get('X-Auth-Username'),
@@ -46,14 +15,54 @@ function authMiddleware(req, res, next) {
                 groups: req.get('X-Auth-Groups'),
                 roles: req.get('X-Auth-Roles'),
                 email: req.get('X-Auth-Email'),
-                uuid: req.get('X-Auth-Subject'),
-                expiry: req.get('X-Auth-ExpiresIn')
+                uuid: req.get('X-Auth-Subject')
             });
         }
         return next();
     }
     logger.error('AUTH_FAILURE');
     next(new AuthenticationError('Unauthorised', 401));
+
+}
+
+function sessionExpiryMiddleware(req, res, next) {
+    const logger = getLogger(req.requestId);
+    const sessionExpiry = getSessionExpiry(logger, res);
+    res.setHeader('X-Auth-Session-ExpiresAt', sessionExpiry);
+    next();
+}
+
+function getSessionExpiry(logger, req) {
+    try {
+        const encryptedRefreshToken = req.cookies['kc-state'];
+        if (encryptedRefreshToken && encryptedRefreshToken.length > 0) {
+            logger.info(`encrypted refresh token: ${encryptedRefreshToken}`);
+            const tokenEncryptionKey = Buffer.from(process.env.ENCRYPTION_KEY || '');
+            if (tokenEncryptionKey.length > 0) {
+                logger.info(`token encryption key: ${tokenEncryptionKey}`);
+                const decryptedToken = decrypt(encryptedRefreshToken, tokenEncryptionKey);
+                logger.info(`decrypted token: ${decryptedToken}`);
+                if (decryptedToken) {
+                    const decodedToken = jwt.decode(decryptedToken);
+                    logger.info(`decoded refresh token: ${decodedToken}`);
+                    const expiry = decodedToken.exp;
+                    logger.info(`decoded refresh token expiry: ${expiry}`);
+                    if (expiry) {
+                        const expiresIn = (expiry - new Date().getTime() / 1000) / 60;
+                        logger.info(`decoded refresh token expires in: ${expiresIn}`);
+                        logger.info(`decoded refresh token expires at: ${expiresAt}`);
+                        const expiresAt = new Date(expiresIn * 1000).toUTCString();
+                        return expiresAt;
+                    }
+                }
+            }
+        }
+    } catch (e) {
+        logger.error(`error decoding the refresh token: ${e}`);
+    }
+    const accessTokenExpiry = req.get('X-Auth-ExpiresIn');
+    logger.info(`unable to get session expiry from refresh token. Access token expires at: ${accessTokenExpiry}`);
+    return accessTokenExpiry;
 }
 
 function decrypt(input, key) {
@@ -91,5 +100,6 @@ function protect(permission) {
 
 module.exports = {
     authMiddleware,
-    protect
+    protect,
+    sessionExpiryMiddleware
 };

@@ -2,7 +2,7 @@ const router = require('express').Router();
 const cookieParser = require('cookie-parser');
 const assets = require('../../build/assets.json');
 const html = require('../layout/html');
-const { authMiddleware } = require('../middleware/auth');
+const { authMiddleware, sessionExpiryMiddleware } = require('../middleware/auth');
 const apiRouter = require('./api/index');
 const pageRouter = require('./page');
 const actionRouter = require('./action');
@@ -27,7 +27,7 @@ html.use(assets);
 router.use(cookieParser());
 router.use(csrfMiddleware);
 router.use('/health', healthRouter);
-router.use('*', authMiddleware, initRequest, createAnalyticsObject, setCacheControl);
+router.use('*', authMiddleware, sessionExpiryMiddleware, initRequest, createAnalyticsObject, setCacheControl);
 
 router.use('/', pageRouter);
 router.use('/api', apiRouter);
