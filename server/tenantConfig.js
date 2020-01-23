@@ -36,7 +36,7 @@ async function layoutConfig() {
         maxSearchResults: 500,
         maxUploadSize: process.env.MAX_UPLOAD_SIZE || 10485760,
         autoCreateAndAllocateEnabled: configuration.autoCreateAndAllocateEnabled,
-        defaultTimeoutSeconds: process.env.DEFAULT_TIMEOUT_SECONDS || 300,
+        defaultTimeoutSeconds: process.env.DEFAULT_TIMEOUT_SECONDS || 60,
         countDownForSeconds: process.env.COUNTDOWN_FOR_SECONDS || 55
     };
 }
