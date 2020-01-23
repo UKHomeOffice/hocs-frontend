@@ -1,5 +1,6 @@
 import React from 'react';
 import TextInput from './text.jsx';
+import MappedText from './mapped-text.jsx';
 import Radio from './radio-group.jsx';
 import DateInput from './date.jsx';
 import Checkbox from './checkbox-group.jsx';
@@ -18,6 +19,7 @@ import TypeAhead from './type-ahead.jsx';
 import Panel from './panel.jsx';
 import Accordion from './accordion.jsx';
 import Hidden from './hidden.jsx';
+import ExpandableCheckbox from './expandable-checkbox.jsx';
 
 function defaultDataAdapter(name, data) {
     return data[name] || '';
@@ -45,6 +47,8 @@ export function formComponentFactory(field, options) {
             return renderFormComponent(Radio, { key, config, data, errors, callback });
         case 'text':
             return renderFormComponent(TextInput, { key, config, data, errors, callback });
+        case 'mapped-text':
+            return renderFormComponent(MappedText, { key, config, data, errors, callback });
         case 'hidden':
             return renderFormComponent(Hidden, { key, config, data, errors, callback });
         case 'date':
@@ -91,6 +95,8 @@ export function formComponentFactory(field, options) {
             );
         case 'accordion':
             return renderFormComponent(Accordion, { data, key, config, errors, callback });
+        case 'expandable-checkbox':
+            return renderFormComponent(ExpandableCheckbox, { data, key, config, errors, callback });
         default:
             return null;
     }

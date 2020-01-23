@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState, useContext } from 'react';
+import React, { Fragment, useEffect, useState, useContext, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Context } from '../contexts/application.jsx';
@@ -49,6 +49,10 @@ const Dashboard = ({ title, match, history }) => {
             });
     };
 
+    const updateFormData = useCallback((data) => {
+        setForm({ ...form, data: { ...form.data, ...data } });
+    }, [form]);
+
     useEffect(() => {
         if (contextForm && contextForm.schema) {
             setForm(contextForm);
@@ -64,7 +68,7 @@ const Dashboard = ({ title, match, history }) => {
             <div className='govuk-grid-row'>
                 <div className='govuk-grid-column-one-third'>
                     {form.schema.title && <h1 className='govuk-heading-l'>{form.schema.title}</h1>}
-                    <Form {...form} action={form.schema.action || match.url} submitHandler={submitHandler} showErrorSummary={false} updateFormState={() => { }} />
+                    <Form {...form} action={form.schema.action || match.url} submitHandler={submitHandler} showErrorSummary={false} updateFormState={updateFormData} />
                 </div>
             </div>
             <div className='govuk-grid-row'>
