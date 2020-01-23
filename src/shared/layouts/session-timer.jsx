@@ -4,9 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import Modal from 'react-modal';
 import { Context } from '../contexts/application.jsx';
 
-const defaultExpiryMilliseconds = 60000;
-const warningCountdownStart = 55;
-const getDefaultExpiryDate = () => new Date(new Date().getTime() + defaultExpiryMilliseconds);
+const getDefaultExpiryDate = defaultTimeoutSeconds => new Date(new Date().getTime() + defaultTimeoutSeconds * 1000);
 const getRemainingSeconds = targetDate => Math.floor((targetDate - new Date().getTime()) / 1000);
 const keepAlive = () => axios.get('/api/keepalive')
     // eslint-disable-next-line no-console
@@ -14,16 +12,17 @@ const keepAlive = () => axios.get('/api/keepalive')
     // eslint-disable-next-line no-undef
     .catch(() => window.location.reload());
 
-const isTimingOut = remainingSeconds => remainingSeconds < warningCountdownStart && remainingSeconds > 0;
+const isTimingOut = (countDownForSeconds, remainingSeconds) => remainingSeconds < countDownForSeconds && remainingSeconds > 0;
 const isTimedOut = remainingSeconds => remainingSeconds <= 0;
-const getModalTitle = remainingSeconds => isTimingOut(remainingSeconds) ? `Your session will expire in ${remainingSeconds} seconds` : 'Your session has expired';
-const getModalMessage = remainingSeconds => isTimingOut(remainingSeconds) ? 'We won\'t be able to save what you have done and you\'ll lose your progress. \n Click Continue to extend your session.' : 'You\'ll need to login again.';
-const getButtonText = remainingSeconds => isTimingOut(remainingSeconds) ? 'Continue' : 'Return to login';
+const getModalTitle = (countDownForSeconds, remainingSeconds) => isTimingOut(countDownForSeconds, remainingSeconds) ? `Your session will expire in ${remainingSeconds} seconds` : 'Your session has expired';
+const getModalMessage = (countDownForSeconds, remainingSeconds) => isTimingOut(countDownForSeconds, remainingSeconds) ? 'We won\'t be able to save what you have done and you\'ll lose your progress. \n Click Continue to extend your session.' : 'You\'ll need to login again.';
+const getButtonText = (countDownForSeconds, remainingSeconds) => isTimingOut(countDownForSeconds, remainingSeconds) ? 'Continue' : 'Return to login';
 
 const SessionTimer = () => {
-    const { layout: { header: { service } } } = React.useContext(Context);
-    const [targetDate, setTargetDate] = React.useState(getDefaultExpiryDate());
-    const [remainingSeconds, setRemainingSeconds] = React.useState(defaultExpiryMilliseconds / 1000);
+    const { layout: { countDownForSeconds, defaultTimeoutSeconds, header: { service } } } = React.useContext(Context);
+    // date stored as seconds since epoch to minimise conversions
+    const [targetDate, setTargetDate] = React.useState(getDefaultExpiryDate(defaultTimeoutSeconds));
+    const [remainingSeconds, setRemainingSeconds] = React.useState(defaultTimeoutSeconds);
 
     React.useEffect(() => {
         Modal.setAppElement('#app');
@@ -55,7 +54,7 @@ const SessionTimer = () => {
     }, [targetDate]);
 
     const onModalButtonClick = React.useCallback(() => {
-        if (isTimingOut(remainingSeconds)) {
+        if (isTimingOut(countDownForSeconds, remainingSeconds)) {
             keepAlive();
         } else {
             // eslint-disable-next-line no-undef
@@ -64,11 +63,11 @@ const SessionTimer = () => {
     }, [remainingSeconds]);
 
     return <>
-        {typeof window !== 'undefined' && <Helmet defer={false} titleTemplate={`${isTimingOut(remainingSeconds) ? `${remainingSeconds}s remaining ` : ''}%s`}>
+        {typeof window !== 'undefined' && <Helmet defer={false} titleTemplate={`${isTimingOut(countDownForSeconds, remainingSeconds) ? `${remainingSeconds}s remaining ` : ''}%s`}>
             {service && <title>{service.toString()}</title>}
         </Helmet>}
         <Modal
-            isOpen={isTimingOut(remainingSeconds) || isTimedOut(remainingSeconds)}
+            isOpen={isTimingOut(countDownForSeconds, remainingSeconds) || isTimedOut(remainingSeconds)}
             shouldCloseOnOverlayClick={false}
             shouldCloseOnEsc={false}
             style={{
@@ -83,12 +82,12 @@ const SessionTimer = () => {
                     position: 'relative'
                 }
             }} >
-            <h2 className="govuk-heading-l">{getModalTitle(remainingSeconds)}</h2>
-            {getModalMessage(remainingSeconds).split('\n').map((p, i) =>
+            <h2 className="govuk-heading-l">{getModalTitle(countDownForSeconds, remainingSeconds)}</h2>
+            {getModalMessage(countDownForSeconds, remainingSeconds).split('\n').map((p, i) =>
                 <p className="govuk-body" key={i}>{p}</p>
             )}
             <button className="govuk-button" onClick={onModalButtonClick}>
-                {getButtonText(remainingSeconds)}
+                {getButtonText(countDownForSeconds, remainingSeconds)}
             </button>
         </Modal>
     </>;
