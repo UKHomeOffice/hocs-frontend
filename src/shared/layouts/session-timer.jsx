@@ -7,16 +7,14 @@ import { Context } from '../contexts/application.jsx';
 const getDefaultExpiryDate = defaultTimeoutSeconds => new Date(new Date().getTime() + defaultTimeoutSeconds * 1000);
 const getRemainingSeconds = targetDate => Math.floor((targetDate - new Date().getTime()) / 1000);
 const keepAlive = () => axios.get('/api/keepalive')
-    // eslint-disable-next-line no-console
-    .then(() => console.log('keepalive completed'))
     // eslint-disable-next-line no-undef
     .catch(() => window.location.reload());
 
 const isTimingOut = (countDownForSeconds, remainingSeconds) => remainingSeconds < countDownForSeconds && remainingSeconds > 0;
 const isTimedOut = remainingSeconds => remainingSeconds <= 0;
 const getModalTitle = (remainingSeconds, timingOut) => timingOut ? `Your session will expire in ${remainingSeconds} seconds` : 'Your session has expired';
-const getModalMessage = timingOut => timingOut ? 'We won\'t be able to save what you have done and you\'ll lose your progress. \n Click Continue to extend your session.' : 'You\'ll need to login again.';
-const getButtonText = timingOut => timingOut ? 'Continue' : 'Return to login';
+const getModalMessage = timingOut => timingOut ? 'We won\'t be able to save what you have done and you\'ll lose your progress. \n Click Continue to extend your session.' : 'You\'ll need to re-authenticate.';
+const getButtonText = timingOut => timingOut ? 'Continue' : 'Re-authenticate';
 
 const SessionTimer = () => {
     const { layout: { countDownForSeconds, defaultTimeoutSeconds, header: { service } } } = React.useContext(Context);
@@ -47,7 +45,7 @@ const SessionTimer = () => {
             if (diff <= 0) {
                 clearInterval(interval);
             }
-        }, 500);
+        }, 1000);
         return () => {
             clearInterval(interval);
         };
@@ -65,7 +63,7 @@ const SessionTimer = () => {
     const timingOut = isTimingOut(countDownForSeconds, remainingSeconds);
 
     return <>
-        {typeof window !== 'undefined' && <Helmet defer={false} titleTemplate={`${timingOut ? `${remainingSeconds}s remaining ` : ''}%s`}>
+        {typeof window !== 'undefined' && <Helmet defer={false} titleTemplate={`${timingOut ? `${remainingSeconds}s remaining | ` : ''}%s`}>
             {service && <title>{service.toString()}</title>}
         </Helmet>}
         <Modal
