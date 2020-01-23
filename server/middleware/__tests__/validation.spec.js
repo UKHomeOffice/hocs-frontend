@@ -169,6 +169,29 @@ describe('Validation middleware', () => {
         expect(next).toHaveBeenCalled();
         expect(next.mock.calls[0][0]).toBeInstanceOf(Error);
     });
+    it('should validate fields within expandable checkbox', () => {
+        const req = {
+            form: {
+                data: {
+                    ['checkbox']: null,
+                    ['test-pass']: 'TEST',
+                    ['test-fail']: null
+                },
+                schema: {
+                    fields: [
+                        { component: 'expandable-checkbox', validation:[], props: { name: 'checkbox', label: '', items: [
+                            { validation: ['required'], props: { name: 'test-pass', label: 'Test Pass' } },
+                            { validation: ['required'], props: { name: 'test-fail', label: 'Test Fail' } }] }
+                        }
+                    ]
+                }
+            }
+        };
+        validationMiddleware(req, res, next);
+        expect(req.form).toBeDefined();
+        expect(next).toHaveBeenCalled();
+        expect(next.mock.calls[0][0]).toBeInstanceOf(Error);
+    });
     it('should skip when no validation rules passed', () => {
         const req = {
             form: {
