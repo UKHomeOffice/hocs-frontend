@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { Helmet } from 'react-helmet-async';
 import Modal from 'react-modal';
-import { Context } from '../contexts/application.jsx';
+import { Context } from '../../contexts/application.jsx';
 
 const getDefaultExpiryDate = defaultTimeoutSeconds => new Date(new Date().getTime() + defaultTimeoutSeconds * 1000);
 const getRemainingSeconds = targetDate => Math.floor((targetDate - new Date().getTime()) / 1000);
