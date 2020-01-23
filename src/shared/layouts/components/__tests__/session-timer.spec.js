@@ -25,7 +25,22 @@ describe('Layout header component', () => {
         jest.spyOn(React, 'useContext').mockReturnValue({
             layout: {
                 countDownForSeconds: 5,
-                defaultTimeoutSeconds: 5,
+                defaultTimeoutSeconds: 4,
+                header: {
+                    service: 'service name'
+                }
+            }
+        });
+
+        expect(
+            shallow(<SessionTimer />)
+        ).toMatchSnapshot();
+    });
+    it('should render the modal when timed out', () => {
+        jest.spyOn(React, 'useContext').mockReturnValue({
+            layout: {
+                countDownForSeconds: 5,
+                defaultTimeoutSeconds: 0,
                 header: {
                     service: 'service name'
                 }
