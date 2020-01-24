@@ -295,9 +295,9 @@ spec:
                 name: hocs-frontend
                 key: encryption_key
           - name: DEFAULT_TIMEOUT_SECONDS
-            value: 300
+            value: '300'
           - name: COUNTDOWN_FOR_SECONDS
-            value: 60
+            value: '60'
         resources:
           limits:
             cpu: 450m
