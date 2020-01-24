@@ -1,74 +1,74 @@
 pipeline:
 
-  build-docker-image:
-    image: docker:17.09.1
-    environment:
-      - DOCKER_HOST=tcp://172.17.0.1:2375
-    commands:
-      - docker build -t hocs-frontend .
-    when:
-      branch: master
-      event: push
-
-  install-docker-image:
-    image: docker:17.09.1
-    environment:
-      - DOCKER_HOST=tcp://172.17.0.1:2375
-    secrets:
-      - docker_password
-    commands:
-      - docker login -u="ukhomeofficedigital+hocs" -p=$${DOCKER_PASSWORD} quay.io
-      - docker tag hocs-frontend quay.io/ukhomeofficedigital/hocs-frontend:build-$${DRONE_BUILD_NUMBER}
-      - docker tag hocs-frontend quay.io/ukhomeofficedigital/hocs-frontend:latest
-      - docker push quay.io/ukhomeofficedigital/hocs-frontend:build-$${DRONE_BUILD_NUMBER}
-      - docker push quay.io/ukhomeofficedigital/hocs-frontend:latest
-    when:
-      branch: master
-      event: push
-
-  sonar-scanner:
-    image: quay.io/ukhomeofficedigital/sonar-scanner:v3.0.2
-    when:
-      event: [push, pull_request, tag]
-
-  docker-semver-tag:
-    image: quay.io/ukhomeofficedigital/hocs-version-bot:build-25
-    environment:
-      - DOCKER_HOST=tcp://172.17.0.1:2375
-      - DOCKER_API_VERSION=1.37
-    secrets:
-      - github_password
-      - docker_password
-      - git_password
-    commands:
-      - /app/hocs-deploy --version=$${SEMVER} --serviceGitToken=$${GIT_PASSWORD} --service=hocs-frontend --gitToken=$${GITHUB_PASSWORD} --gitRepo="https://gitlab.digital.homeoffice.gov.uk/hocs/hocs-versions.git" --environment=qa --dockerRepository=quay.io/ukhomeofficedigital --sourceBuild=$${IMAGE_VERSION} --registryUser=ukhomeofficedigital+hocs --registryPassword=$${DOCKER_PASSWORD}
-    when:
-      event: deployment
-      environment: qa
-
-  clone-kube-project:
-    image: plugins/git
-    commands:
-      - git clone https://github.com/UKHomeOffice/kube-hocs-frontend.git
-    when:
-      event: [push, deployment, tag]
-
-  deploy-to-cs-dev-from-build-number:
-    image: quay.io/ukhomeofficedigital/kd:v1.12.2
-    environment:
-      - DOMAIN=cs
-      - KUBE_NAMESPACE=cs-dev
-      - ENVIRONMENT=dev
-      - VERSION=build-${DRONE_BUILD_NUMBER}
-      - KUBE_SERVER=https://kube-api-notprod.notprod.acp.homeoffice.gov.uk
-    secrets:
-      - hocs_frontend_dev
-    commands:
-      - cd kube-hocs-frontend
-      - ./deploy.sh
-    when:
-      branch: master
-      event: [push, tag]
+    build-docker-image:
+      image: docker:17.09.1
+      environment:
+        - DOCKER_HOST=tcp://172.17.0.1:2375
+      commands:
+        - docker build -t hocs-frontend .
+      when:
+        branch: Feature/WCS-HOCS-1411-session-timer
+        event: push
+  
+    install-docker-image:
+      image: docker:17.09.1
+      environment:
+        - DOCKER_HOST=tcp://172.17.0.1:2375
+      secrets:
+        - docker_password
+      commands:
+        - docker login -u="ukhomeofficedigital+hocs" -p=$${DOCKER_PASSWORD} quay.io
+        - docker tag hocs-frontend quay.io/ukhomeofficedigital/hocs-frontend:build-$${DRONE_BUILD_NUMBER}
+        - docker tag hocs-frontend quay.io/ukhomeofficedigital/hocs-frontend:latest
+        - docker push quay.io/ukhomeofficedigital/hocs-frontend:build-$${DRONE_BUILD_NUMBER}
+        - docker push quay.io/ukhomeofficedigital/hocs-frontend:latest
+      when:
+        branch: Feature/WCS-HOCS-1411-session-timer
+        event: push
+  
+    sonar-scanner:
+      image: quay.io/ukhomeofficedigital/sonar-scanner:v3.0.2
+      when:
+        event: [push, pull_request, tag]
+  
+    docker-semver-tag:
+      image: quay.io/ukhomeofficedigital/hocs-version-bot:build-25
+      environment:
+        - DOCKER_HOST=tcp://172.17.0.1:2375
+        - DOCKER_API_VERSION=1.37
+      secrets:
+        - github_password
+        - docker_password
+        - git_password
+      commands:
+        - /app/hocs-deploy --version=$${SEMVER} --serviceGitToken=$${GIT_PASSWORD} --service=hocs-frontend --gitToken=$${GITHUB_PASSWORD} --gitRepo="https://gitlab.digital.homeoffice.gov.uk/hocs/hocs-versions.git" --environment=qa --dockerRepository=quay.io/ukhomeofficedigital --sourceBuild=$${IMAGE_VERSION} --registryUser=ukhomeofficedigital+hocs --registryPassword=$${DOCKER_PASSWORD}
+      when:
+        event: deployment
+        environment: qa
+  
+    clone-kube-project:
+      image: plugins/git
+      commands:
+        - git clone -b feature/WCS-HOCS-1411-session-timeouts --single-branch https://github.com/UKHomeOffice/kube-hocs-frontend.git
+      when:
+        event: [push, deployment, tag]
+  
+    deploy-to-cs-dev-from-build-number:
+      image: quay.io/ukhomeofficedigital/kd:v1.12.2
+      environment:
+        - DOMAIN=cs
+        - KUBE_NAMESPACE=cs-dev
+        - ENVIRONMENT=dev
+        - VERSION=build-${DRONE_BUILD_NUMBER}
+        - KUBE_SERVER=https://kube-api-notprod.notprod.acp.homeoffice.gov.uk
+      secrets:
+        - hocs_frontend_dev
+      commands:
+        - cd kube-hocs-frontend
+        - ./deploy.sh
+      when:
+        branch: master
+        event: [push, tag]
 
   deploy-to-wcs-dev-from-build-number:
     image: quay.io/ukhomeofficedigital/kd:v1.12.2
@@ -84,55 +84,59 @@ pipeline:
       - cd kube-hocs-frontend
       - ./deploy.sh
     when:
-      branch: master
+      branch: Feature/WCS-HOCS-1411-session-timer
       event: [push, tag]
-
-  deployment:
-    image: quay.io/ukhomeofficedigital/kd:v1.12.2
-    environment:
-      - ENVIRONMENT=${DRONE_DEPLOY_TO}
-      - KUBE_SERVER=https://kube-api-notprod.notprod.acp.homeoffice.gov.uk
-    secrets:
-      - hocs_frontend_dev
-      - hocs_frontend_demo
-      - poise_whitelist
-    commands:
-      - cd kube-hocs-frontend
-      - ./deploy.sh
-    when:
-      event: deployment
-      environment: [dev, demo]
-
-  deploy-to-qa:
-    image: quay.io/ukhomeofficedigital/kd:v1.12.1
-    environment:
-      - ENVIRONMENT=qa
-      - KUBE_SERVER=https://kube-api-notprod.notprod.acp.homeoffice.gov.uk
-    secrets:
-      - hocs_frontend_qa
-      - poise_whitelist
-    commands:
-      - source version.txt
-      - echo $VERSION
-      - cd kube-hocs-frontend
-      - ./deploy.sh
-    when:
-      event: deployment
-      environment: qa
-
-  deploy-to-prod:
-    image: quay.io/ukhomeofficedigital/kd:v1.12.2
-    environment:
-      - ENVIRONMENT=prod
-      - KUBE_SERVER=https://kube-api-prod.prod.acp.homeoffice.gov.uk
-    secrets:
-      - hocs_frontend_prod
-      - poise_whitelist
-    commands:
-      - cd kube-hocs-frontend
-      - ./deploy.sh
-    when:
-      event: deployment
-      environment: prod
-
-
+  
+    deployment:
+      image: quay.io/ukhomeofficedigital/kd:v1.12.2
+      environment:
+        - KUBE_NAMESPACE=wcs-${DRONE_DEPLOY_TO}
+        - ENVIRONMENT=${DRONE_DEPLOY_TO}
+        - KUBE_SERVER=https://kube-api-notprod.notprod.acp.homeoffice.gov.uk
+      secrets:
+        - hocs_frontend_dev
+        - hocs_frontend_demo
+        - poise_whitelist
+      commands:
+        - cd kube-hocs-frontend
+        - ./deploy.sh
+      when:
+        event: deployment
+        environment: [dev, demo]
+  
+    deploy-to-qa:
+      image: quay.io/ukhomeofficedigital/kd:v1.12.1
+      environment:
+        - KUBE_NAMESPACE=wcs-qa
+        - ENVIRONMENT=qa
+        - KUBE_SERVER=https://kube-api-notprod.notprod.acp.homeoffice.gov.uk
+      secrets:
+        - hocs_frontend_qa
+        - poise_whitelist
+      commands:
+        - source version.txt
+        - echo $VERSION
+        - cd kube-hocs-frontend
+        - ./deploy.sh
+      when:
+        event: deployment
+        environment: qa
+  
+    deploy-to-prod:
+      image: quay.io/ukhomeofficedigital/kd:v1.12.2
+      environment:
+        - KUBE_NAMESPACE=wcs-prod
+        - ENVIRONMENT=prod
+        - KUBE_SERVER=https://kube-api-prod.prod.acp.homeoffice.gov.uk
+      secrets:
+        - hocs_frontend_prod
+        - poise_whitelist
+      commands:
+        - cd kube-hocs-frontend
+        - ./deploy.sh
+      when:
+        event: deployment
+        environment: prod
+  
+  
+  
