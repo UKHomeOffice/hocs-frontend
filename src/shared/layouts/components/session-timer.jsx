@@ -53,7 +53,8 @@ const SessionTimer = () => {
 
     const onModalButtonClick = React.useCallback(() => {
         if (isTimingOut(countDownForSeconds, remainingSeconds)) {
-            keepAlive();
+            // need to call twice so that we can parse the updated refresh token
+            keepAlive().then(() => keepAlive());
         } else {
             // eslint-disable-next-line no-undef
             window.location.reload();

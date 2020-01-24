@@ -27,21 +27,18 @@ function authMiddleware(req, res, next) {
 
 function sessionExpiryMiddleware(req, res, next) {
     const logger = getLogger(req.requestId);
-    const sessionExpiry = getSessionExpiry(logger, req, res);
+    const sessionExpiry = getSessionExpiry(logger, req);
     if (sessionExpiry) {
         res.setHeader('X-Auth-Session-ExpiresAt', sessionExpiry);
     }
     next();
 }
 
-function getSessionExpiry(logger, req, res) {
+function getSessionExpiry(logger, req) {
     const accessTokenExpiry = req.get('X-Auth-ExpiresIn');
     logger.info(`access token expires at: ${accessTokenExpiry}`);
     try {
         const encryptedRefreshToken = req.cookies['kc-state'];
-        logger.info(`req set-cookie: ${req.get('set-cookie')}`);
-        logger.info(`res set-cookie: ${res.get('set-cookie')}`);
-        logger.info(`res _headers.set-cookie: ${res._headers['set-cookie']}`);
         if (encryptedRefreshToken && encryptedRefreshToken.length > 0) {
             logger.info(`encrypted refresh token: ${encryptedRefreshToken}`);
             const tokenEncryptionKey = Buffer.from(process.env.ENCRYPTION_KEY || '');

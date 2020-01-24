@@ -105,9 +105,7 @@ describe('When the session expiry middleware is called', () => {
             get: mockGetHeaders
         };
         res = {
-            _headers: {},
-            setHeader: mockSetHeader,
-            get: mockGetHeaders
+            setHeader: mockSetHeader
         };
         next.mockReset();
         jest.resetModules();
