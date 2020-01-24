@@ -38,7 +38,8 @@ function getSessionExpiry(logger, req, res) {
     const accessTokenExpiry = req.get('X-Auth-ExpiresIn');
     logger.info(`unable to get session expiry from refresh token. Access token expires at: ${accessTokenExpiry}`);
     try {
-        const encryptedRefreshToken = res.cookies['kc-state'];
+        const encryptedRefreshToken = req.cookies['kc-state'];
+        logger.info(`res set-cookie: ${res.get('set-cookie')}`);
         if (encryptedRefreshToken && encryptedRefreshToken.length > 0) {
             logger.info(`encrypted refresh token: ${encryptedRefreshToken}`);
             const tokenEncryptionKey = Buffer.from(process.env.ENCRYPTION_KEY || '');
