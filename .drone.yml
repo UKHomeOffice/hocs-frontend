@@ -70,22 +70,22 @@ pipeline:
         branch: master
         event: [push, tag]
 
-  deploy-to-wcs-dev-from-build-number:
-    image: quay.io/ukhomeofficedigital/kd:v1.12.2
-    environment:
-      - DOMAIN=wcs
-      - KUBE_NAMESPACE=wcs-dev
-      - ENVIRONMENT=dev
-      - VERSION=build-${DRONE_BUILD_NUMBER}
-      - KUBE_SERVER=https://kube-api-notprod.notprod.acp.homeoffice.gov.uk
-    secrets:
-      - hocs_frontend_dev
-    commands:
-      - cd kube-hocs-frontend
-      - ./deploy.sh
-    when:
-      branch: Feature/WCS-HOCS-1411-session-timer
-      event: [push, tag]
+    deploy-to-wcs-dev-from-build-number:
+      image: quay.io/ukhomeofficedigital/kd:v1.12.2
+      environment:
+        - DOMAIN=wcs
+        - KUBE_NAMESPACE=wcs-dev
+        - ENVIRONMENT=dev
+        - VERSION=build-${DRONE_BUILD_NUMBER}
+        - KUBE_SERVER=https://kube-api-notprod.notprod.acp.homeoffice.gov.uk
+      secrets:
+        - hocs_frontend_dev
+      commands:
+        - cd kube-hocs-frontend
+        - ./deploy.sh
+      when:
+        branch: Feature/WCS-HOCS-1411-session-timer
+        event: [push, tag]
   
     deployment:
       image: quay.io/ukhomeofficedigital/kd:v1.12.2
