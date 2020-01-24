@@ -141,6 +141,7 @@ spec:
           - --verbose
           - --enable-refresh-tokens=true
           - --encryption-key=$(ENCRYPTION_KEY)
+          - --cookie-domain={{.DOMAIN_NAME}}
         ports:
           - name: keycloak-http
             containerPort: 8081
@@ -190,6 +191,7 @@ spec:
           - --verbose
           - --enable-refresh-tokens=true
           - --encryption-key=$(ENCRYPTION_KEY)
+          - --cookie-domain={{.DOMAIN_NAME}}
         ports:
           - name: keycloak-http
             containerPort: 8082
@@ -292,6 +294,10 @@ spec:
               secretKeyRef:
                 name: hocs-frontend
                 key: encryption_key
+          - name: DEFAULT_TIMEOUT_SECONDS
+            value: 300
+          - name: COUNTDOWN_FOR_SECONDS
+            value: 60
         resources:
           limits:
             cpu: 450m
