@@ -99,13 +99,14 @@ describe('When the session expiry middleware is called', () => {
 
     beforeEach(() => {
         req = {
-            get: mockGetHeaders
-        };
-        res = {
             cookies: {
                 'kc-state': '7xiGVmRyhji3oYt82R7L55w44sKRSQ+cPioJHtkBFCm3zezAA0Y3wslt+gJKuMpzCZXOaL8S5x/uFKWE5hGwf3y339OOEjrXaOWlQgBMogpDDp2fTOufar4LENtVjcy7VspNx+0XPptKqLZJvL1XBCgOMl3NSvvWGo78x/7vPsaI6GW7rY5+kpm9UKMoiG6sLHcZSyrkkKrzeCqz0xW58yqA8cemSgl+txqYOxbQGhGiDCm278LkWwM71w9+rE+v22cD/azHP31naL/LJUluJlEo52MBWDgiqdDxJgeBDnhrTUkUNcbe266qTFF7oTd2M/x8+P6LmJlEIWy+pu+buMUvLy+u0dq1YQtUuMn9tVdjQ80TtzIJPahSoGbfMDWce0nLV++JLjdBi1WoU+j3PwDINPuf8q0JcFGd5Vy7kHw/OLaLuC7i6P2/MJ1GyNeXf117mYJqKdWTGQtuC1/oFIVKwJIHaPUA6IgkRuPSEoqeIhRf0PBxylpksbhX3HkydljvvRz3DSpt/OtCx+/nijtJdWzt2kSqhLj/kPEV/hb6cHK1dGXSPVZiZ8iEOjIFRYaShepthS/T2EGt17pxGEwNaV1uYbcVMnoTYCFQNrka89ciX+I358+T3aVmsGMvxR7ApGY50LU9TwQ6OLYJxrAkjq0Lrb3rGY9/NFbCWVeN1+6j+3NXST6CQOUQCtSiHxQP/jgwoZI/pWSMViSaxBG8IdBC4bEfVqeaGRNmNWHGT50wuzfspgL7vcw3D4g5/ciDPI2hHqfP2HNXtVQQnVbFlDvMnS3fYsLKGaJeU6L7DpQJaMnK3ddn5HPPzBI2hjhsDlMaPi7MHIx+O2NSKqPHT2CiFc59jhi92kq5hkBxNDfy9n2ezFRtjKwhs7qjjjOh7BsWjtV11zqw'
             },
-            setHeader: mockSetHeader
+            get: mockGetHeaders
+        };
+        res = {
+            setHeader: mockSetHeader,
+            get: mockGetHeaders
         };
         next.mockReset();
         jest.resetModules();
@@ -148,7 +149,7 @@ describe('When the session expiry middleware is called', () => {
     });
     describe('and the state cookie is not present', () => {
         beforeEach(() => {
-            res.cookies = {};
+            req.cookies = {};
             sessionExpiryMiddleware(req, res, next);
         });
 
