@@ -14,6 +14,8 @@ async function renderConfig() {
 
 async function layoutConfig() {
     const configuration = await fetchConfiguration();
+    const defaultTimeoutSeconds = Number(process.env.DEFAULT_TIMEOUT_SECONDS);
+    const countDownForSeconds = Number(process.env.COUNTDOWN_FOR_SECONDS);
     return {
         header: {
             service: configuration.displayName,
@@ -36,8 +38,8 @@ async function layoutConfig() {
         maxSearchResults: 500,
         maxUploadSize: process.env.MAX_UPLOAD_SIZE || 10485760,
         autoCreateAndAllocateEnabled: configuration.autoCreateAndAllocateEnabled,
-        defaultTimeoutSeconds: process.env.DEFAULT_TIMEOUT_SECONDS || 300,
-        countDownForSeconds: process.env.COUNTDOWN_FOR_SECONDS || 60
+        defaultTimeoutSeconds: isNaN(defaultTimeoutSeconds) ? 300 : defaultTimeoutSeconds,
+        countDownForSeconds: isNaN(countDownForSeconds) ? 60 : countDownForSeconds
     };
 }
 

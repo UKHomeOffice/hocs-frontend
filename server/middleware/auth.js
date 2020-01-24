@@ -39,6 +39,7 @@ function getSessionExpiry(logger, req, res) {
     logger.info(`access token expires at: ${accessTokenExpiry}`);
     try {
         const encryptedRefreshToken = req.cookies['kc-state'];
+        logger.info(`req set-cookie: ${req.get('set-cookie')}`);
         logger.info(`res set-cookie: ${res.get('set-cookie')}`);
         if (encryptedRefreshToken && encryptedRefreshToken.length > 0) {
             logger.info(`encrypted refresh token: ${encryptedRefreshToken}`);
