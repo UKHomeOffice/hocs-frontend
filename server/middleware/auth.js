@@ -41,6 +41,7 @@ function getSessionExpiry(logger, req, res) {
         const encryptedRefreshToken = req.cookies['kc-state'];
         logger.info(`req set-cookie: ${req.get('set-cookie')}`);
         logger.info(`res set-cookie: ${res.get('set-cookie')}`);
+        logger.info(`res _headers.set-cookie: ${res._headers['set-cookie']}`);
         if (encryptedRefreshToken && encryptedRefreshToken.length > 0) {
             logger.info(`encrypted refresh token: ${encryptedRefreshToken}`);
             const tokenEncryptionKey = Buffer.from(process.env.ENCRYPTION_KEY || '');
