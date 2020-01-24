@@ -27,36 +27,36 @@ function authMiddleware(req, res, next) {
 
 function sessionExpiryMiddleware(req, res, next) {
     const logger = getLogger(req.requestId);
-    const sessionExpiry = getSessionExpiry(logger, req);
+    const sessionExpiry = getSessionExpiry(logger, req, res);
     if (sessionExpiry) {
         res.setHeader('X-Auth-Session-ExpiresAt', sessionExpiry);
     }
     next();
 }
 
-function getSessionExpiry(logger, req) {
+function getSessionExpiry(logger, req, res) {
     const accessTokenExpiry = req.get('X-Auth-ExpiresIn');
-    logger.debug(`unable to get session expiry from refresh token. Access token expires at: ${accessTokenExpiry}`);
+    logger.info(`unable to get session expiry from refresh token. Access token expires at: ${accessTokenExpiry}`);
     try {
-        const encryptedRefreshToken = req.cookies['kc-state'];
+        const encryptedRefreshToken = res.cookies['kc-state'];
         if (encryptedRefreshToken && encryptedRefreshToken.length > 0) {
-            logger.debug(`encrypted refresh token: ${encryptedRefreshToken}`);
+            logger.info(`encrypted refresh token: ${encryptedRefreshToken}`);
             const tokenEncryptionKey = Buffer.from(process.env.ENCRYPTION_KEY || '');
             if (tokenEncryptionKey.length > 0) {
-                logger.debug(`token encryption key: ${tokenEncryptionKey}`);
+                logger.info(`token encryption key: ${tokenEncryptionKey}`);
                 const decryptedToken = decrypt(encryptedRefreshToken, tokenEncryptionKey);
-                logger.debug(`decrypted token: ${decryptedToken}`);
+                logger.info(`decrypted token: ${decryptedToken}`);
                 if (decryptedToken) {
                     const decodedToken = jwt.decode(decryptedToken);
-                    logger.debug(`decoded refresh token: ${decodedToken}`);
+                    logger.info(`decoded refresh token: ${decodedToken}`);
                     const expiry = decodedToken.exp;
-                    logger.debug(`decoded refresh token expiry: ${expiry}`);
+                    logger.info(`decoded refresh token expiry: ${expiry}`);
                     if (expiry) {
                         const expiryMilliseconds = expiry * 1000;
                         const expiresIn = (expiryMilliseconds - new Date().getTime()) / 1000;
-                        logger.debug(`decoded refresh token expires in: ${expiresIn}`);
+                        logger.info(`decoded refresh token expires in: ${expiresIn}`);
                         const expiresAt = new Date(expiryMilliseconds).toUTCString();
-                        logger.debug(`decoded refresh token expires at: ${expiresAt}`);
+                        logger.info(`decoded refresh token expires at: ${expiresAt}`);
                         return expiresAt;
                     }
                 }
@@ -65,7 +65,7 @@ function getSessionExpiry(logger, req) {
     } catch (e) {
         logger.error(`error decoding the refresh token: ${e}`);
     }
-    logger.debug('unable to get session expiry from refresh token. Using access token expiry');
+    logger.info('unable to get session expiry from refresh token. Using access token expiry');
     return accessTokenExpiry;
 }
 
