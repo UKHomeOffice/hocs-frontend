@@ -116,7 +116,11 @@ function validationMiddleware(req, res, next) {
     next();
 
     function validateField(field, data, result) {
-        const { component, validation, props: { name, label, sections } } = field;
+        const { component, validation, props: { name, label, sections, items } } = field;
+
+        if (component === 'expandable-checkbox') {
+            Array.isArray(items) && items.map(item => validateField(item, data, result));
+        }
 
         if (component === 'accordion') {
             Array.isArray(sections) && sections.map(({ items }) => Array.isArray(items) && items.map(item => validateField(item, data, result)));
