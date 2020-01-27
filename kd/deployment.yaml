@@ -231,41 +231,41 @@ spec:
           - name: S3_ACCESS_KEY
             valueFrom:
               secretKeyRef:
-                name: cs-{{.ENVIRONMENT}}-untrusted-s3
+                name: {{.KUBE_NAMESPACE}}-untrusted-s3
                 key: access_key_id
           - name: S3_SECRET_ACCESS_KEY
             valueFrom:
               secretKeyRef:
-                name: cs-{{.ENVIRONMENT}}-untrusted-s3
+                name: {{.KUBE_NAMESPACE}}-untrusted-s3
                 key: secret_access_key
           - name: S3_REGION
             value: 'eu-west-2'
           - name: S3_BUCKET
             valueFrom:
               secretKeyRef:
-                name: cs-{{.ENVIRONMENT}}-untrusted-s3
+                name: {{.KUBE_NAMESPACE}}-untrusted-s3
                 key: bucket_name
           - name: S3_SSE_KEY
             valueFrom:
               secretKeyRef:
-                name: cs-{{.ENVIRONMENT}}-untrusted-s3
+                name: {{.KUBE_NAMESPACE}}-untrusted-s3
                 key: kms_key_id
           - name: TRUSTED_S3_ACCESS_KEY
             valueFrom:
               secretKeyRef:
-                name: cs-{{.ENVIRONMENT}}-trusted-s3
+                name: {{.KUBE_NAMESPACE}}-trusted-s3
                 key: access_key_id
           - name: TRUSTED_S3_SECRET_ACCESS_KEY
             valueFrom:
               secretKeyRef:
-                name: cs-{{.ENVIRONMENT}}-trusted-s3
+                name: {{.KUBE_NAMESPACE}}-trusted-s3
                 key: secret_access_key
           - name: TRUSTESD_S3_REGION
             value: 'eu-west-2'
           - name: TRUSTED_S3_BUCKET
             valueFrom:
               secretKeyRef:
-                name: cs-{{.ENVIRONMENT}}-trusted-s3
+                name: {{.KUBE_NAMESPACE}}-trusted-s3
                 key: bucket_name
           - name: WORKFLOW_BASIC_AUTH
             valueFrom:
