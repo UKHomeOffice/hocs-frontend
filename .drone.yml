@@ -105,6 +105,7 @@ pipeline:
     deploy-to-qa:
       image: quay.io/ukhomeofficedigital/kd:v1.12.1
       environment:
+        - KUBE_NAMESPACE=wcs-qa
         - ENVIRONMENT=qa
         - KUBE_SERVER=https://kube-api-notprod.notprod.acp.homeoffice.gov.uk
       secrets:
