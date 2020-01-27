@@ -47,13 +47,13 @@ exports[`Layout header component should render the modal when timed out 1`] = `
       className="govuk-body"
       key="0"
     >
-      You'll need to re-authenticate.
+      You'll need to login again.
     </p>
     <button
       className="govuk-button"
       onClick={[Function]}
     >
-      Re-authenticate
+      Return to login
     </button>
   </Modal>
 </Fragment>

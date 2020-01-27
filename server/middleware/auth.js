@@ -36,27 +36,27 @@ function sessionExpiryMiddleware(req, res, next) {
 
 function getSessionExpiry(logger, req) {
     const accessTokenExpiry = req.get('X-Auth-ExpiresIn');
-    logger.info(`access token expires at: ${accessTokenExpiry}`);
+    logger.debug(`access token expires at: ${accessTokenExpiry}`);
     try {
         const encryptedRefreshToken = req.cookies['kc-state'];
         if (encryptedRefreshToken && encryptedRefreshToken.length > 0) {
-            logger.info(`encrypted refresh token: ${encryptedRefreshToken}`);
+            logger.debug(`encrypted refresh token: ${encryptedRefreshToken}`);
             const tokenEncryptionKey = Buffer.from(process.env.ENCRYPTION_KEY || '');
             if (tokenEncryptionKey.length > 0) {
-                logger.info(`token encryption key: ${tokenEncryptionKey}`);
+                logger.debug(`token encryption key: ${tokenEncryptionKey}`);
                 const decryptedToken = decrypt(encryptedRefreshToken, tokenEncryptionKey);
-                logger.info(`decrypted token: ${decryptedToken}`);
+                logger.debug(`decrypted token: ${decryptedToken}`);
                 if (decryptedToken) {
                     const decodedToken = jwt.decode(decryptedToken);
-                    logger.info(`decoded refresh token: ${decodedToken}`);
+                    logger.debug(`decoded refresh token: ${decodedToken}`);
                     const expiry = decodedToken.exp;
-                    logger.info(`decoded refresh token expiry: ${expiry}`);
+                    logger.debug(`decoded refresh token expiry: ${expiry}`);
                     if (expiry) {
                         const expiryMilliseconds = expiry * 1000;
                         const expiresIn = (expiryMilliseconds - new Date().getTime()) / 1000;
-                        logger.info(`decoded refresh token expires in: ${expiresIn}`);
+                        logger.debug(`decoded refresh token expires in: ${expiresIn}`);
                         const expiresAt = new Date(expiryMilliseconds).toUTCString();
-                        logger.info(`decoded refresh token expires at: ${expiresAt}`);
+                        logger.debug(`decoded refresh token expires at: ${expiresAt}`);
                         return expiresAt;
                     }
                 }

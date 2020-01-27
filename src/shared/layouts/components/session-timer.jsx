@@ -13,8 +13,8 @@ const keepAlive = () => axios.get('/api/keepalive')
 const isTimingOut = (countDownForSeconds, remainingSeconds) => remainingSeconds < countDownForSeconds && remainingSeconds > 0;
 const isTimedOut = remainingSeconds => remainingSeconds <= 0;
 const getModalTitle = (remainingSeconds, timingOut) => timingOut ? `Your session will expire in ${remainingSeconds} seconds` : 'Your session has expired';
-const getModalMessage = timingOut => timingOut ? 'We won\'t be able to save what you have done and you\'ll lose your progress. \n Click Continue to extend your session.' : 'You\'ll need to re-authenticate.';
-const getButtonText = timingOut => timingOut ? 'Continue' : 'Re-authenticate';
+const getModalMessage = timingOut => timingOut ? 'We won\'t be able to save what you have done and you\'ll lose your progress. \n Click Continue to extend your session.' : 'You\'ll need to login again.';
+const getButtonText = timingOut => timingOut ? 'Continue' : 'Return to login';
 
 const SessionTimer = () => {
     const { layout: { countDownForSeconds, defaultTimeoutSeconds, header: { service } } } = React.useContext(Context);
