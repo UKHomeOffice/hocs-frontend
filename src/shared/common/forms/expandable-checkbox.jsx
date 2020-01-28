@@ -15,11 +15,12 @@ const expandableCheckbox = ({ choice, data, error, errors, hint, initiallyOpen, 
     const onCheckBoxChange = React.useCallback((e) => {
         const targetValue = e.target.value;
 
+        setOpen(!isChecked);
+
         if (isChecked) {
             updateState({ [name]: undefined });
         } else {
             updateState({ [name]: targetValue });
-            setOpen(true);
         }
     }, [value]);
 
@@ -43,8 +44,8 @@ const expandableCheckbox = ({ choice, data, error, errors, hint, initiallyOpen, 
                             <label className="govuk-label govuk-checkboxes__label" htmlFor={`details-checkbox-${name}`}>{choice.label}</label>
                         </div>
                     </div>
-                    {items && items.length > 0 && <div className="selectable-details-link">
-                        <span onClick={onOpenClick}>Details</span>
+                    {(items && items.length > 0 && isChecked || sectionHasValidationError) && <div className="selectable-details-link">
+                        <span onClick={onOpenClick}>{`${isOpen ? 'Hide' : 'Show'} Details`} </span>
                     </div>
                     }
                 </div>
