@@ -98,7 +98,7 @@ spec:
           - name: https
             containerPort: 10443
       - name: keycloak-proxy-web
-        image: quay.io/ukhomeofficedigital/go-keycloak-proxy:v2.3.0
+        image: quay.io/keycloak/keycloak-gatekeeper
         imagePullPolicy: Always
         securityContext:
           runAsNonRoot: true
@@ -109,6 +109,12 @@ spec:
          requests:
           memory: "64Mi"
           cpu: 50m
+        env:
+          - name: ENCRYPTION_KEY
+            valueFrom:
+              secretKeyRef:
+                name: hocs-frontend
+                key: encryption_key
         args:
           - --config=/etc/secrets/data.yml
           - --discovery-url={{.KC_REALM}}
@@ -133,6 +139,9 @@ spec:
           - --revocation-url={{.KC_REALM}}/protocol/openid-connect/logout
           - --enable-logout-redirect=true
           - --verbose
+          - --enable-refresh-tokens=true
+          - --encryption-key=$(ENCRYPTION_KEY)
+          - --cookie-domain={{.DOMAIN_NAME}}
         ports:
           - name: keycloak-http
             containerPort: 8081
@@ -141,7 +150,7 @@ spec:
             name: frontend-keycloak-secret
             readOnly: true
       - name: keycloak-proxy-api
-        image: quay.io/ukhomeofficedigital/go-keycloak-proxy:v2.3.0
+        image: quay.io/keycloak/keycloak-gatekeeper
         imagePullPolicy: Always
         securityContext:
           runAsNonRoot: true
@@ -152,6 +161,12 @@ spec:
          requests:
           memory: "64Mi"
           cpu: 50m
+        env:
+          - name: ENCRYPTION_KEY
+            valueFrom:
+              secretKeyRef:
+                name: hocs-frontend
+                key: encryption_key
         args:
           - --config=/etc/secrets/data.yml
           - --discovery-url={{.KC_REALM}}
@@ -174,6 +189,9 @@ spec:
           - --secure-cookie=true
           - --http-only-cookie=true
           - --verbose
+          - --enable-refresh-tokens=true
+          - --encryption-key=$(ENCRYPTION_KEY)
+          - --cookie-domain={{.DOMAIN_NAME}}
         ports:
           - name: keycloak-http
             containerPort: 8082
@@ -270,7 +288,16 @@ spec:
             valueFrom:
               configMapKeyRef:
                   name: hocs-converter
-                  key: supported_types
+                  key: supported_types   
+          - name: ENCRYPTION_KEY
+            valueFrom:
+              secretKeyRef:
+                name: hocs-frontend
+                key: encryption_key
+          - name: DEFAULT_TIMEOUT_SECONDS
+            value: '300'
+          - name: COUNTDOWN_FOR_SECONDS
+            value: '60'
         resources:
           limits:
             cpu: 450m
