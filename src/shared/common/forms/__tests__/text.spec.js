@@ -42,6 +42,11 @@ describe('Form text component', () => {
             render(<Text name="text-field" type="password" updateState={() => null} />)
         ).toMatchSnapshot();
     });
+    it('should render with the element class name when passed', () => {
+        expect(
+            render(<Text name="text-field" elementClassName="__classname__" updateState={() => null} />)
+        ).toMatchSnapshot();
+    });
     it('should execute callback on initialization', () => {
         const mockCallback = jest.fn();
         const fieldName = 'text-field';
