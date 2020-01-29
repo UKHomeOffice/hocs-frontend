@@ -3,14 +3,17 @@ import PropTypes from 'prop-types';
 import { formComponentFactory } from './form-repository.jsx';
 
 const getComponentFactoryInstance = (factory, options) => ({ component, props }, key) => factory(component, { key, config: props, ...options });
-
+const itemHasValidationError = errors => item => errors[item.props.name] || childControlHasValidationError(errors, item);
+const childControlHasValidationError = (errors, { props: { items } = {} } = {}) => Array.isArray(items) && items.some(itemHasValidationError(errors));
 function Section({ data, errors, index, items, title, updateState }) {
     const createComponent = getComponentFactoryInstance(formComponentFactory, { data, errors: errors, meta: {}, callback: updateState, baseUrl: '/' });
-    const sectionHasValidationError = errors && Array.isArray(items) && items.some(item => errors[item.props.name]);
+    const sectionHasValidationError = errors && Array.isArray(items) && items.some(itemHasValidationError(errors));
     const [isVisible, setVisible] = useState(sectionHasValidationError);
 
     useEffect(() => {
-        setVisible(sectionHasValidationError);
+        if (sectionHasValidationError) {
+            setVisible(true);
+        }
     }, [errors]);
 
     const clickHandler = event => {
