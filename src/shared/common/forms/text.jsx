@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 class Text extends Component {
 
@@ -15,6 +16,7 @@ class Text extends Component {
         const {
             className,
             disabled,
+            elementClassName,
             error,
             hint,
             label,
@@ -28,7 +30,7 @@ class Text extends Component {
                 {hint && <span className="govuk-hint">{hint}</span>}
                 {error && <span id={`${name}-error`} className="govuk-error-message">{error}</span>}
                 <div>
-                    <input className={`govuk-input${error ? ' govuk-input--error' : ''}`}
+                    <input className={classNames('govuk-input', { 'govuk-input--error': error }, elementClassName)}
                         id={name}
                         type={type}
                         name={name}
@@ -45,6 +47,7 @@ class Text extends Component {
 Text.propTypes = {
     className: PropTypes.string,
     disabled: PropTypes.string,
+    elementClassName: PropTypes.string,
     error: PropTypes.string,
     hint: PropTypes.string,
     label: PropTypes.string,
