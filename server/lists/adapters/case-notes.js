@@ -11,6 +11,7 @@ const getTitle = ({ correspondent, document, stage, team, topic, user }, type) =
         CASE_TOPIC_CREATED: `Topic: ${topic} Added`,
         CASE_TOPIC_DELETED: `Topic: ${topic} Removed`,
         CASE_CREATED: 'Case Created',
+        CASE_COMPLETED: 'Case Closed',
         DOCUMENT_CREATED: `Document: ${document} Created`,
         DOCUMENT_DELETED: `Document: ${document} Deleted`,
         MANUAL: 'Case Note',
