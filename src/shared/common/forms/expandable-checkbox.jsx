@@ -7,8 +7,14 @@ const getComponentFactoryInstance = (factory, options) => ({ component, props },
 const expandableCheckbox = ({ choice, data, error, errors, hint, initiallyOpen, items, name, updateState, value, disabled }) => {
     const isChecked = choice.value && value && value.toUpperCase() === choice.value.toUpperCase();
     const createComponent = getComponentFactoryInstance(formComponentFactory, { data, errors: errors, meta: {}, callback: updateState, baseUrl: '/' });
-    const sectionHasValidationError = errors && Array.isArray(items) && items.some(item => errors[item.props.name]);
-    const [isOpen, setOpen] = React.useState((initiallyOpen && isChecked) || sectionHasValidationError);
+    const childControlHasValidationError = errors && Array.isArray(items) && items.some(item => errors[item.props.name]);
+    const [isOpen, setOpen] = React.useState((initiallyOpen && isChecked) || childControlHasValidationError);
+
+    React.useEffect(() => {
+        if (childControlHasValidationError) {
+            setOpen(true);
+        }
+    }, [childControlHasValidationError]);
 
     const onOpenClick = React.useCallback(() => setOpen(!isOpen), [isOpen]);
 
@@ -44,7 +50,7 @@ const expandableCheckbox = ({ choice, data, error, errors, hint, initiallyOpen, 
                             <label className="govuk-label govuk-checkboxes__label" htmlFor={`details-checkbox-${name}`}>{choice.label}</label>
                         </div>
                     </div>
-                    {(items && items.length > 0 && isChecked || sectionHasValidationError) && <div className="selectable-details-link">
+                    {(items && items.length > 0 && isChecked || childControlHasValidationError) && <div className="selectable-details-link">
                         <span onClick={onOpenClick}>{`${isOpen ? 'Hide' : 'Show'} Details`} </span>
                     </div>
                     }
