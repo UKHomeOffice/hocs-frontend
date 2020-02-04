@@ -211,9 +211,7 @@ Array [
                       </td>
                       <td
                         class="govuk-table__cell"
-                      >
-                        13/12/2018
-                      </td>
+                      />
                       <td
                         class="govuk-table__cell"
                       />
@@ -361,7 +359,7 @@ exports[`Workstack component should render with filtering 1`] = `
               "assignedUserDisplay": "User2",
               "caseReference": "case2",
               "caseUUID": "case_uuid-789",
-              "created": "2018-12-13T11:02:48.546577",
+              "created": "",
               "fullName": "John Alex",
               "isActive": "NO",
               "stageTypeDisplay": "Stage B",
@@ -753,7 +751,7 @@ exports[`Workstack component should sort descending when the column heading is c
               "assignedUserDisplay": "User2",
               "caseReference": "case2",
               "caseUUID": "case_uuid-789",
-              "created": "2018-12-13T11:02:48.546577",
+              "created": "",
               "fullName": "John Alex",
               "isActive": "NO",
               "stageTypeDisplay": "Stage B",
@@ -987,9 +985,7 @@ exports[`Workstack component should sort descending when the column heading is c
                             <td
                               className="govuk-table__cell"
                               key="stage_uuid-432created"
-                            >
-                              13/12/2018
-                            </td>
+                            />
                             <td
                               className="govuk-table__cell"
                               key="stage_uuid-432isActive"
@@ -1228,7 +1224,7 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
               "assignedUserDisplay": "User2",
               "caseReference": "case2",
               "caseUUID": "case_uuid-789",
-              "created": "2018-12-13T11:02:48.546577",
+              "created": "",
               "fullName": "John Alex",
               "isActive": "NO",
               "stageTypeDisplay": "Stage B",
@@ -1547,9 +1543,7 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                             <td
                               className="govuk-table__cell"
                               key="stage_uuid-432created"
-                            >
-                              13/12/2018
-                            </td>
+                            />
                             <td
                               className="govuk-table__cell"
                               key="stage_uuid-432isActive"

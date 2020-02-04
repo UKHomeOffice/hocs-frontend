@@ -25,7 +25,7 @@ describe('Workstack component', () => {
             {
                 caseReference: 'case2', caseUUID: 'case_uuid-789', uuid: 'stage_uuid-432', fullName: 'John Alex',
                 stageTypeDisplay: 'Stage B', assignedUserDisplay: 'User2', assignedTeamDisplay: 'team2',
-                created: '2018-12-13T11:02:48.546577', isActive: 'NO'
+                created: '', isActive: 'NO'
             },
         ],
         columns: [
