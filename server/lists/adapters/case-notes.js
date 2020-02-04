@@ -1,4 +1,4 @@
-const getTitle = ({ correspondent, document, stage, team, topic, user }, type) => {
+const getTitle = ({ correspondent, document, stage, team, topic, user, noteCount }, type) => {
 
     const types = {
         STAGE_ALLOCATED_TO_USER: `Allocated to ${user}`,
@@ -14,7 +14,7 @@ const getTitle = ({ correspondent, document, stage, team, topic, user }, type) =
         CASE_COMPLETED: 'Case Closed',
         DOCUMENT_CREATED: `Document: ${document} Created`,
         DOCUMENT_DELETED: `Document: ${document} Deleted`,
-        MANUAL: 'Case Note',
+        MANUAL: `${noteCount}`,
         ALLOCATE: 'Allocation Note',
         REJECT: 'Rejection Note',
     };
@@ -44,9 +44,18 @@ const formatDate = (rawDate) => {
 
 module.exports = async (data, { fromStaticList, logger }) => {
     logger.debug('REQUEST_CASE_NOTES', { notes: data.length });
-    return await Promise.all(data
-        .sort((a, b) => new Date(a.eventTime) < new Date(b.eventTime) ? 1 : -1)
-        .map(async ({ eventTime, type, userName: authorId, body = {} }) => {
+    let noteCount = 0;
+    data.sort((a, b) => new Date(a.eventTime) < new Date(b.eventTime) ? -1 : 1);
+    const withNoteCount = data.map(({ type, ...rest }) => {
+        if (type === 'MANUAL') {
+            noteCount++;
+            return { ...rest, type, noteCount };
+        }
+        return { ...rest, type };
+    });
+    return await Promise.all(withNoteCount
+        .reverse()
+        .map(async ({ eventTime, type, userName: authorId, body = {}, noteCount }) => {
             const { caseNote, allocatedToUUID: allocationId, stage: stageId, documentTitle: document, topicName: topic, fullname: correspondent } = body;
 
             const auditBody = {
@@ -59,6 +68,7 @@ module.exports = async (data, { fromStaticList, logger }) => {
                 document,
                 topic,
                 correspondent,
+                noteCount
             };
 
             return {
