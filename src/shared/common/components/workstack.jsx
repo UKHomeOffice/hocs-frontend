@@ -39,9 +39,9 @@ const ColumnRenderer = {
 
 const dataAdapters = {
     localDate: (value) => {
-        if (!value || value == '')
-            return '';
         var date = new Date(value);
+        if (isNaN(date))
+            return '';
         return date.getDate().toString().padStart(2, '0') + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
     },
     indicator: (value, key) => value && value.toUpperCase() === 'YES' ? key.replace(/([a-z])([A-Z])/g, '$1 $2').replace('Is ', '') : undefined
