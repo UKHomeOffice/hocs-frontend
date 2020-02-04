@@ -14,7 +14,7 @@ import Submit from '../forms/submit.jsx';
 const CaseNote = ({ date, author, note, title }) => (
     <Fragment>
         {note && <p>
-            <span className="case-note-number govuk-!-font-weight-bold">{title}.</span>
+            <span className="case-note-number govuk-!-font-weight-bold">Case note {title}.</span>
             {note.split(/\n/).map((line, i) => (<Fragment key={i}>{line}<br /></Fragment>))}
         </p>}
         <p>
