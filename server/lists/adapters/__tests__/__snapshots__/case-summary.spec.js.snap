@@ -19,7 +19,16 @@ Object {
   },
   "deadlines": null,
   "deadlinesEnabled": false,
-  "primaryCorrespondent": "Test Correspondent",
+  "primaryCorrespondent": Object {
+    "address": Object {
+      "address1": "__address1__",
+      "address2": "__address2__",
+      "address3": "__address3__",
+      "country": "__country__",
+      "postcode": "__postcode__",
+    },
+    "fullname": "Test Correspondent",
+  },
   "primaryTopic": "Topic A",
   "stages": Array [
     Object {
@@ -63,7 +72,16 @@ Object {
     },
   ],
   "deadlinesEnabled": true,
-  "primaryCorrespondent": "Test Correspondent",
+  "primaryCorrespondent": Object {
+    "address": Object {
+      "address1": "__address1__",
+      "address2": "__address2__",
+      "address3": "__address3__",
+      "country": "__country__",
+      "postcode": "__postcode__",
+    },
+    "fullname": "Test Correspondent",
+  },
   "primaryTopic": "Topic A",
   "stages": Array [
     Object {
