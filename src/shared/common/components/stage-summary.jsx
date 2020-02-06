@@ -106,11 +106,11 @@ class StageSummary extends Component {
                                     <td className='govuk-table__cell'>
                                         <span>{primaryCorrespondent.fullname}</span>
                                         {primaryCorrespondent.address && <>
-                                            <br /> <span>{primaryCorrespondent.address.address1}</span>
-                                            <br /> <span>{primaryCorrespondent.address.address2}</span>
-                                            <br /> <span>{primaryCorrespondent.address.address3}</span>
-                                            <br /> <span>{primaryCorrespondent.address.country}</span>
-                                            <br /> <span>{primaryCorrespondent.address.postcode}</span>
+                                            {primaryCorrespondent.address.address1 && <> <br /> <span>{primaryCorrespondent.address.address1}</span> </>}
+                                            {primaryCorrespondent.address.address2 && <> <br /> <span>{primaryCorrespondent.address.address2}</span> </>}
+                                            {primaryCorrespondent.address.address3 && <> <br /> <span>{primaryCorrespondent.address.address3}</span> </>}
+                                            {primaryCorrespondent.address.postcode && <> <br /> <span>{primaryCorrespondent.address.postcode}</span> </>}
+                                            {primaryCorrespondent.address.country && <> <br /> <span>{primaryCorrespondent.address.country}</span> </>}
                                         </>}
                                     </td>
                                 </tr>}

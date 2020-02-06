@@ -61,4 +61,14 @@ describe('Stage summary component', () => {
         expect(wrapper).toBeDefined();
         expect(wrapper).toMatchSnapshot();
     });
+
+    it('should not show the empty address lines', () => {
+        const outer = shallow(<WrappedSummary dispatch={jest.fn()} stages={mockStages} />);
+        const Summary = outer.props().children;
+        summary.primaryCorrespondent.address.address2 = undefined;
+        summary.primaryCorrespondent.address.address3 = undefined;
+        const wrapper = render(<Summary dispatch={jest.fn()} summary={summary} />);
+        expect(wrapper).toBeDefined();
+        expect(wrapper).toMatchSnapshot();
+    });
 });
