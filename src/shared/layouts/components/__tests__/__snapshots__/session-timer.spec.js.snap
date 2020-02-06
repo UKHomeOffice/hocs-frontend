@@ -34,6 +34,7 @@ exports[`Layout header component should render the modal when timed out 1`] = `
         "overlay": Object {
           "backgroundColor": "#bdbdbdbd",
           "display": "flex",
+          "zIndex": 3,
         },
       }
     }
@@ -93,6 +94,7 @@ exports[`Layout header component should render the modal when timing out 1`] = `
         "overlay": Object {
           "backgroundColor": "#bdbdbdbd",
           "display": "flex",
+          "zIndex": 3,
         },
       }
     }

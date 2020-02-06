@@ -74,7 +74,8 @@ const SessionTimer = () => {
             style={{
                 overlay: {
                     backgroundColor: '#bdbdbdbd',
-                    display: 'flex'
+                    display: 'flex',
+                    zIndex: 3
                 },
                 content: {
                     border: 'none',
