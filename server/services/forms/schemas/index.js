@@ -3,6 +3,7 @@ module.exports = {
     addCorrespondent: require('./add-correspondent.js'),
     addMember: require('./add-member.js'),
     addCorrespondentDetails: require('./add-correspondent-details.js'),
+    updateCorrespondentDetails: require('./update-correspondent-details.js'),
     addMemberDetails: require('./add-member-details.js'),
     removeCorrespondent: require('./remove-correspondent.js'),
     addTopic: require('./add-topic.js'),

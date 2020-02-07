@@ -69,6 +69,9 @@ class EntityList extends Component {
                                             </div>
                                         </td>
                                         <td className='govuk-table__cell'>
+                                            {true && <Link to={`/case/${page.params.caseId}/stage/${page.params.stageId}/entity/${entity}/${choice.value}/update`} className="govuk-link">Edit</Link>}
+                                        </td>
+                                        <td className='govuk-table__cell'>
                                             {hasRemoveLink && <Link to={`/case/${page.params.caseId}/stage/${page.params.stageId}/entity/${entity}/${choice.value}/remove`} className="govuk-link">Remove</Link>}
                                         </td>
                                     </tr>

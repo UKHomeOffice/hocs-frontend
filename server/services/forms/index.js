@@ -1,5 +1,5 @@
 const formRepository = require('./schemas/index');
-const { ADD_TEMPLATE, ADD_STANDARD_LINE, IS_MEMBER, ADD_MEMBER, SELECT_MEMBER, ADD_CORRESPONDENT, REMOVE_CORRESPONDENT, ADD_TOPIC, REMOVE_TOPIC, CREATE_CASE, CREATE_AND_ALLOCATE_CASE, BULK_CREATE_CASE, ADD_DOCUMENT, REMOVE_DOCUMENT, MANAGE_DOCUMENTS } = require('../actions/types');
+const { ADD_TEMPLATE, ADD_STANDARD_LINE, IS_MEMBER, ADD_MEMBER, SELECT_MEMBER, ADD_CORRESPONDENT, UPDATE_CORRESPONDENT, REMOVE_CORRESPONDENT, ADD_TOPIC, REMOVE_TOPIC, CREATE_CASE, CREATE_AND_ALLOCATE_CASE, BULK_CREATE_CASE, ADD_DOCUMENT, REMOVE_DOCUMENT, MANAGE_DOCUMENTS } = require('../actions/types');
 
 const formDefinitions = {
     ACTION: {
@@ -133,6 +133,10 @@ const formDefinitions = {
             DETAILS: {
                 builder: formRepository.addCorrespondentDetails,
                 action: ADD_CORRESPONDENT
+            },
+            UPDATE: {
+                builder: formRepository.updateCorrespondentDetails,
+                action: UPDATE_CORRESPONDENT
             },
             REMOVE: {
                 builder: formRepository.removeCorrespondent,
