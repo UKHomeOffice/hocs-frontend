@@ -11,9 +11,12 @@ import {
 import status from '../../helpers/api-status.js';
 import Submit from '../forms/submit.jsx';
 
-const CaseNote = ({ date, author, note }) => (
+const CaseNote = ({ date, author, note, title }) => (
     <Fragment>
-        {note && <p>{note.split(/\n/).map((line, i) => (<Fragment key={i}>{line}<br /></Fragment>))}</p>}
+        {note && <p>
+            <span className="case-note-number govuk-!-font-weight-bold">Case note {title}.</span>
+            {note.split(/\n/).map((line, i) => (<Fragment key={i}>{line}<br /></Fragment>))}
+        </p>}
         <p>
             {date && <span>{date}</span>}
             {author && <span>{author}</span>}
@@ -25,6 +28,7 @@ CaseNote.propTypes = {
     date: PropTypes.string,
     author: PropTypes.string,
     note: PropTypes.string,
+    title: PropTypes.title,
 };
 
 const AuditEvent = ({ date, author, user, team, stage, document, topic, correspondent, title }) => (
@@ -59,7 +63,7 @@ const TimelineItem = ({ type, body, title }, i) => {
     const isCaseNote = ['MANUAL', 'ALLOCATE', 'REJECT'].includes(type);
     return (
         body && <li key={i} className={classnames({ 'case-note': isCaseNote })}>
-            {isCaseNote ? <CaseNote {...body} /> : <AuditEvent {...body} title={title} />}
+            {isCaseNote ? <CaseNote {...body} title={title} /> : <AuditEvent {...body} title={title} />}
         </li>
     );
 };

@@ -81,6 +81,8 @@ class StageSummary extends Component {
             <Fragment>
                 {summary &&
                     <Fragment>
+                        <h2 className='govuk-heading-m'>Active stage{summary.stages.length > 1 && 's'}</h2>
+                        {summary.stages.map(stage => this.renderActiveStage(stage))}
                         <h2 className='govuk-heading-m'>Case</h2>
                         <table className='govuk-table margin-left--small'>
                             <caption className='govuk-table__caption margin-bottom--small' >Summary</caption>
@@ -123,8 +125,6 @@ class StageSummary extends Component {
                                 {summary.deadlines && Array.isArray(summary.deadlines) && summary.deadlines.map(stage => this.renderRow(stage))}
                             </tbody>
                         </table>}
-                        <h2 className='govuk-heading-m'>Active stages</h2>
-                        {summary.stages.map(stage => this.renderActiveStage(stage))}
                     </Fragment>
                 }
             </Fragment>

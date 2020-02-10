@@ -441,7 +441,15 @@ a.card__body {
         padding: 5px 20px 5px 15px;
 
         &:before {
-            top:25px;
+            top:28px;
+        }
+        
+        &:first-child::after {
+            top:28px;
+        }
+
+        .case-note-number {
+            margin-right: 0.5rem;
         }
       }
 
@@ -470,17 +478,16 @@ a.card__body {
         position: absolute;
         z-index: 2;
         left: -31px;
-        top: 0px;
+        top: 4px;
       }
 
       &:after {
         content: "";
         position: absolute;
         left: -24px;
-        bottom: 0;
         border-left: 4px solid #6f777b;
-        height: 116%;
-        top: 10px;
+        height: calc(100% + 24px);
+        top: 4px;
       }
 
       &:last-child::after {
