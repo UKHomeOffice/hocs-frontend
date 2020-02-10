@@ -5,6 +5,93 @@ Array [
   <h2
     class="govuk-heading-m"
   >
+    Active stages
+  </h2>,
+  <table
+    class="govuk-table margin-left--small"
+  >
+    <caption
+      class="govuk-table__caption margin-bottom--small"
+    >
+      __stage1__
+    </caption>
+    <tbody
+      class="govuk-table__body"
+    >
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Team
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          __assignedTeam__
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__cell"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          User
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          __assignedUser__
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+  <table
+    class="govuk-table margin-left--small"
+  >
+    <caption
+      class="govuk-table__caption margin-bottom--small"
+    >
+      __stage2__
+    </caption>
+    <tbody
+      class="govuk-table__body"
+    >
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Team
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          __assignedTeam__
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__cell"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          User
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          __assignedUser__
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+  <h2
+    class="govuk-heading-m"
+  >
     Case
   </h2>,
   <table
@@ -180,6 +267,13 @@ Array [
       </tr>
     </tbody>
   </table>,
+]
+`;
+
+exports[`Stage summary component should render with default props 1`] = `null`;
+
+exports[`Stage summary component should render with summary data 1`] = `
+Array [
   <h2
     class="govuk-heading-m"
   >
@@ -191,7 +285,7 @@ Array [
     <caption
       class="govuk-table__caption margin-bottom--small"
     >
-      __stage__
+      __stage1__
     </caption>
     <tbody
       class="govuk-table__body"
@@ -232,7 +326,7 @@ Array [
     <caption
       class="govuk-table__caption margin-bottom--small"
     >
-      __stage__
+      __stage2__
     </caption>
     <tbody
       class="govuk-table__body"
@@ -267,13 +361,6 @@ Array [
       </tr>
     </tbody>
   </table>,
-]
-`;
-
-exports[`Stage summary component should render with default props 1`] = `null`;
-
-exports[`Stage summary component should render with summary data 1`] = `
-Array [
   <h2
     class="govuk-heading-m"
   >
@@ -460,93 +547,6 @@ Array [
           class="govuk-table__cell"
         >
           __value__
-        </td>
-      </tr>
-    </tbody>
-  </table>,
-  <h2
-    class="govuk-heading-m"
-  >
-    Active stages
-  </h2>,
-  <table
-    class="govuk-table margin-left--small"
-  >
-    <caption
-      class="govuk-table__caption margin-bottom--small"
-    >
-      __stage__
-    </caption>
-    <tbody
-      class="govuk-table__body"
-    >
-      <tr
-        class="govuk-table__row"
-      >
-        <th
-          class="govuk-table__header padding-left--small govuk-!-width-one-third"
-        >
-          Team
-        </th>
-        <td
-          class="govuk-table__cell"
-        >
-          __assignedTeam__
-        </td>
-      </tr>
-      <tr
-        class="govuk-table__cell"
-      >
-        <th
-          class="govuk-table__header padding-left--small govuk-!-width-one-third"
-        >
-          User
-        </th>
-        <td
-          class="govuk-table__cell"
-        >
-          __assignedUser__
-        </td>
-      </tr>
-    </tbody>
-  </table>,
-  <table
-    class="govuk-table margin-left--small"
-  >
-    <caption
-      class="govuk-table__caption margin-bottom--small"
-    >
-      __stage__
-    </caption>
-    <tbody
-      class="govuk-table__body"
-    >
-      <tr
-        class="govuk-table__row"
-      >
-        <th
-          class="govuk-table__header padding-left--small govuk-!-width-one-third"
-        >
-          Team
-        </th>
-        <td
-          class="govuk-table__cell"
-        >
-          __assignedTeam__
-        </td>
-      </tr>
-      <tr
-        class="govuk-table__cell"
-      >
-        <th
-          class="govuk-table__header padding-left--small govuk-!-width-one-third"
-        >
-          User
-        </th>
-        <td
-          class="govuk-table__cell"
-        >
-          __assignedUser__
         </td>
       </tr>
     </tbody>

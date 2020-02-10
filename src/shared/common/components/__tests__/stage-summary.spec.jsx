@@ -37,11 +37,11 @@ const summary = {
     stages: [{
         assignedTeam: '__assignedTeam__',
         assignedUser: '__assignedUser__',
-        stage: '__stage__'
+        stage: '__stage1__'
     }, {
         assignedTeam: '__assignedTeam__',
         assignedUser: '__assignedUser__',
-        stage: '__stage__'
+        stage: '__stage2__'
     }]
 };
 
