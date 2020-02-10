@@ -30,6 +30,7 @@ class EntityList extends Component {
             entity,
             error,
             hasAddLink,
+            hasEditLink,
             hasRemoveLink,
             hint,
             label,
@@ -68,9 +69,9 @@ class EntityList extends Component {
                                                 </label>
                                             </div>
                                         </td>
-                                        <td className='govuk-table__cell'>
-                                            {true && <Link to={`/case/${page.params.caseId}/stage/${page.params.stageId}/entity/${entity}/${choice.value}/update`} className="govuk-link">Edit</Link>}
-                                        </td>
+                                        {hasEditLink && <td className='govuk-table__cell'>
+                                            <Link to={`/case/${page.params.caseId}/stage/${page.params.stageId}/entity/${entity}/${choice.value}/update`} className="govuk-link">Edit</Link>
+                                        </td>}
                                         <td className='govuk-table__cell'>
                                             {hasRemoveLink && <Link to={`/case/${page.params.caseId}/stage/${page.params.stageId}/entity/${entity}/${choice.value}/remove`} className="govuk-link">Remove</Link>}
                                         </td>
@@ -96,6 +97,7 @@ EntityList.propTypes = {
     error: PropTypes.string,
     entity: PropTypes.string.isRequired,
     hasAddLink: PropTypes.bool,
+    hasEditLink: PropTypes.bool,
     hasRemoveLink: PropTypes.bool,
     hint: PropTypes.string,
     label: PropTypes.string,
