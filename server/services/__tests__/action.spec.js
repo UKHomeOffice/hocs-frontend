@@ -44,6 +44,13 @@ jest.mock('../../clients', () => {
                 }
                 mockRequestClient(body);
             },
+            put: (url, body) => {
+                if (url === '/case') {
+                    mockRequestClient(body);
+                    return handleMockWorkflowCreateRequest(body);
+                }
+                mockRequestClient(body);
+            },
             delete: (url, body) => {
                 mockRequestClient(body);
             }
@@ -289,6 +296,25 @@ describe('Action service', () => {
             stageId: 5678,
             entity: 'topic',
             context: null,
+            form: testForm,
+            user: mockUser
+        });
+        expect(mockRequestClient).toHaveBeenCalledTimes(1);
+        expect(response).toBeDefined();
+        expect(response).toHaveProperty('callbackUrl');
+    });
+
+    it('should return a callback url when "UPDATE_CORRESPONDENT" action succeeds', async () => {
+        const testForm = {
+            schema: {},
+            data: {},
+            action: actionTypes.UPDATE_CORRESPONDENT
+        };
+        const response = await actionService.performAction('CASE', {
+            caseId: 1234,
+            stageId: 5678,
+            entity: 'correspondent',
+            context: 1234,
             form: testForm,
             user: mockUser
         });
