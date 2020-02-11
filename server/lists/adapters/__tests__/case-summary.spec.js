@@ -54,7 +54,16 @@ describe('Case Summary Adapter', () => {
                 { label: 'Test additional field date', value: '2020-01-01', type: 'date' }
             ],
             primaryTopic: { label: 'Topic A' },
-            primaryCorrespondent: { fullname: 'Test Correspondent' },
+            primaryCorrespondent: {
+                address: {
+                    address1: '__address1__',
+                    address2: '__address2__',
+                    address3: '__address3__',
+                    country: '__country__',
+                    postcode: '__postcode__',
+                },
+                fullname: 'Test Correspondent'
+            },
             stageDeadlines: {
                 1: '2020-01-01',
                 2: '2019-01-01',
@@ -86,7 +95,16 @@ describe('Case Summary Adapter', () => {
                 { label: 'Test additional field date', value: '2020-01-01', type: 'date' }
             ],
             primaryTopic: { label: 'Topic A' },
-            primaryCorrespondent: { fullname: 'Test Correspondent' },
+            primaryCorrespondent: {
+                address: {
+                    address1: '__address1__',
+                    address2: '__address2__',
+                    address3: '__address3__',
+                    country: '__country__',
+                    postcode: '__postcode__',
+                },
+                fullname: 'Test Correspondent'
+            },
             stageDeadlines: {
                 1: '2020-01-01',
                 2: '2019-01-01',

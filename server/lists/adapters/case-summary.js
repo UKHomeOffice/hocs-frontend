@@ -16,7 +16,7 @@ const getActiveStages = async (deadlines, fromStaticList) => await Promise.all(d
 
 const getPrimaryTopic = (topic) => topic ? topic.label : null;
 
-const getPrimaryCorrespondent = (correspondent) => correspondent ? correspondent.fullname : null;
+const getPrimaryCorrespondent = correspondent => correspondent && { address: correspondent.address, fullname: correspondent.fullname };
 
 const parseDate = (rawDate) => {
     const [date] = rawDate.match(/[0-9]{4}-[0-1][0-9]-[0-3][0-9]/g) || [];

@@ -76,6 +76,7 @@ class StageSummary extends Component {
 
     render() {
         const { summary } = this.state;
+        const { primaryCorrespondent } = { ...summary };
         return (
             <Fragment>
                 {summary &&
@@ -102,9 +103,18 @@ class StageSummary extends Component {
                                     <th className='govuk-table__header padding-left--small govuk-!-width-one-third'>Primary topic</th>
                                     <td className='govuk-table__cell'>{summary.primaryTopic}</td>
                                 </tr>}
-                                {summary.primaryCorrespondent && <tr className='govuk-table__cell'>
+                                {primaryCorrespondent && <tr className='govuk-table__cell'>
                                     <th className='govuk-table__header padding-left--small govuk-!-width-one-third'>Primary correspondent</th>
-                                    <td className='govuk-table__cell'>{summary.primaryCorrespondent}</td>
+                                    <td className='govuk-table__cell'>
+                                        <span>{primaryCorrespondent.fullname}</span>
+                                        {primaryCorrespondent.address && <>
+                                            {primaryCorrespondent.address.address1 && <> <br /> <span>{primaryCorrespondent.address.address1}</span> </>}
+                                            {primaryCorrespondent.address.address2 && <> <br /> <span>{primaryCorrespondent.address.address2}</span> </>}
+                                            {primaryCorrespondent.address.address3 && <> <br /> <span>{primaryCorrespondent.address.address3}</span> </>}
+                                            {primaryCorrespondent.address.postcode && <> <br /> <span>{primaryCorrespondent.address.postcode}</span> </>}
+                                            {primaryCorrespondent.address.country && <> <br /> <span>{primaryCorrespondent.address.country}</span> </>}
+                                        </>}
+                                    </td>
                                 </tr>}
                                 {summary.additionalFields && summary.additionalFields.map(({ label, value }) => this.renderRow({ label, value }))}
                             </tbody>
