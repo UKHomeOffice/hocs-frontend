@@ -176,7 +176,7 @@ const getFormForCase = async (req, res, next) => {
     logger.info('GET_FORM', { ...req.params });
 
     try {
-        const form = await getFormSchemaForCase({ ...req.params, user: req.user });
+        const form = await getFormSchemaForCase({ ...req.params, user: req.user, requestId: req.requestId });
         req.form = form;
         next();
     } catch (error) {

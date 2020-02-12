@@ -184,6 +184,12 @@ const actions = {
                         }
                         await caseworkService.delete(`/case/${caseId}/stage/${stageId}/correspondent/${context}`, headers);
                         break;
+                    case actionTypes.UPDATE_CORRESPONDENT:
+                        if (!context) {
+                            throw new ActionError('Unable to update, no context provided');
+                        }
+                        await caseworkService.put(`/case/${caseId}/stage/${stageId}/correspondent/${context}`, { ...form.data }, headers);
+                        break;
                     case actionTypes.ADD_CASE_NOTE:
                         await caseworkService.post(`/case/${caseId}/note`, { type: 'MANUAL', text: form.data['case-note'] }, headers);
                         break;

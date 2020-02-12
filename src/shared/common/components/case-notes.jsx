@@ -56,7 +56,7 @@ AuditEvent.propTypes = {
     document: PropTypes.string,
     topic: PropTypes.string,
     correspondent: PropTypes.string,
-    title: PropTypes.title,
+    title: PropTypes.string,
 };
 
 const TimelineItem = ({ type, body, title }, i) => {

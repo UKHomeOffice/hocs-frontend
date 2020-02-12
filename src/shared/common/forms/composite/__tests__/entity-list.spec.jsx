@@ -98,6 +98,26 @@ describe('Entity list component', () => {
         expect(WRAPPER).toMatchSnapshot();
     });
 
+    it('should render with edit link when passed in props', () => {
+        const choice = value => ({ label: `Choice ${value}`, value: `CHOICE_${value}` });
+        const PROPS = {
+            ...DEFAULT_PROPS,
+            choices: [
+                choice('A'),
+                choice('B')
+            ],
+            hasEditLink: true
+        };
+        const OUTER = shallow(<WrappedEntityList {...PROPS} />);
+        const EntityList = OUTER.props().children;
+        const WRAPPER = render(
+            <MemoryRouter>
+                <EntityList page={PAGE} />
+            </MemoryRouter>);
+        expect(WRAPPER).toBeDefined();
+        expect(WRAPPER).toMatchSnapshot();
+    });
+
     it('should render with add link when passed in props', () => {
         const PROPS = {
             ...DEFAULT_PROPS,
