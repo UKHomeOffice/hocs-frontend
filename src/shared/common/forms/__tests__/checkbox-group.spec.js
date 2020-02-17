@@ -20,7 +20,7 @@ describe('Form checkbox group component', () => {
     });
     it('should render with label when passed', () => {
         expect(
-            render(<CheckboxGroup name="checkbox-group" choices={choices} label="My text field" updateState={() => null} />)
+            render(<CheckboxGroup name="checkbox-group" choices={choices} label="My text field" showLabel={true} updateState={() => null} />)
         ).toMatchSnapshot();
     });
     it('should render with hint when passed', () => {
