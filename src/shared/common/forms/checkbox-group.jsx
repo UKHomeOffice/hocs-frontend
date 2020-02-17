@@ -41,15 +41,16 @@ class Checkbox extends Component {
             hint,
             label,
             name,
+            showLabel,
             type
         } = this.props;
         return (
             <div className={`govuk-form-group${error ? ' govuk-form-group--error' : ''}`}>
 
-                <fieldset id={name} className={`govuk-fieldset ${className ?  className : ''}`} disabled={disabled}>
+                <fieldset id={name} className={`govuk-fieldset ${className ? className : ''}`} disabled={disabled}>
 
                     <legend id={`${name}-legend`} className="govuk-fieldset__legend">
-                        <span className="govuk-fieldset__heading govuk-label--s">{label}</span>
+                        <span className="govuk-fieldset__heading govuk-label--s">{showLabel && label}</span>
                     </legend>
 
                     {hint && <span className="govuk-hint">{hint}</span>}
@@ -90,6 +91,7 @@ Checkbox.propTypes = {
     hint: PropTypes.string,
     label: PropTypes.string,
     name: PropTypes.string.isRequired,
+    showLabel: PropTypes.bool,
     type: PropTypes.string,
     updateState: PropTypes.func.isRequired,
     value: PropTypes.string

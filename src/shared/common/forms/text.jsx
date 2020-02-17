@@ -46,7 +46,7 @@ class Text extends Component {
 
 Text.propTypes = {
     className: PropTypes.string,
-    disabled: PropTypes.string,
+    disabled: PropTypes.bool,
     elementClassName: PropTypes.string,
     error: PropTypes.string,
     hint: PropTypes.string,

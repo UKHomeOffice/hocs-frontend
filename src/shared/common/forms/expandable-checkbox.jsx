@@ -4,7 +4,7 @@ import { formComponentFactory } from './form-repository.jsx';
 
 const getComponentFactoryInstance = (factory, options) => ({ component, props }, key) => factory(component, { key, config: props, ...options });
 
-const expandableCheckbox = ({ choice, data, error, errors, hint, initiallyOpen, items, name, updateState, value, disabled }) => {
+const expandableCheckbox = ({ choice, data, error, errors, hint, initiallyOpen, items, label, name, updateState, value, disabled }) => {
     const isChecked = choice.value && value && value.toUpperCase() === choice.value.toUpperCase();
     const createComponent = getComponentFactoryInstance(formComponentFactory, { data, errors: errors, meta: {}, callback: updateState, baseUrl: '/' });
     const childControlHasValidationError = errors && Array.isArray(items) && items.some(item => errors[item.props.name]);
@@ -47,7 +47,7 @@ const expandableCheckbox = ({ choice, data, error, errors, hint, initiallyOpen, 
                                 onChange={onCheckBoxChange}
                                 disabled={disabled}
                             />
-                            <label className="govuk-label govuk-checkboxes__label" htmlFor={`details-checkbox-${name}`}>{choice.label}</label>
+                            <label className="govuk-label govuk-checkboxes__label" htmlFor={`details-checkbox-${name}`}>{label}</label>
                         </div>
                     </div>
                     {(items && items.length > 0 && isChecked || childControlHasValidationError) && <div className="selectable-details-link">
