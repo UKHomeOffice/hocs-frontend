@@ -146,3 +146,150 @@ exports[`Layout header component should render with default props 1`] = `
   <SessionTimer />
 </ContextProvider>
 `;
+
+exports[`Session timer component should render the modal when timed out 1`] = `
+<Fragment>
+  <Helmet
+    defer={false}
+    encodeSpecialCharacters={true}
+    titleTemplate="%s"
+  >
+    <title>
+      service name
+    </title>
+  </Helmet>
+  <Modal
+    ariaHideApp={true}
+    bodyOpenClassName="ReactModal__Body--open"
+    closeTimeoutMS={0}
+    isOpen={true}
+    parentSelector={[Function]}
+    portalClassName="ReactModalPortal"
+    role="dialog"
+    shouldCloseOnEsc={false}
+    shouldCloseOnOverlayClick={false}
+    shouldFocusAfterRender={true}
+    shouldReturnFocusAfterClose={true}
+    style={
+      Object {
+        "content": Object {
+          "border": "none",
+          "borderRadius": "0px",
+          "margin": "auto",
+          "position": "relative",
+        },
+        "overlay": Object {
+          "backgroundColor": "#bdbdbdbd",
+          "display": "flex",
+          "zIndex": 3,
+        },
+      }
+    }
+  >
+    <h2
+      className="govuk-heading-l"
+    >
+      Your session has expired
+    </h2>
+    <p
+      className="govuk-body"
+      key="0"
+    >
+      You'll need to login again.
+    </p>
+    <button
+      className="govuk-button"
+      onClick={[Function]}
+    >
+      Return to login
+    </button>
+  </Modal>
+</Fragment>
+`;
+
+exports[`Session timer component should render the modal when timing out 1`] = `
+<Fragment>
+  <Helmet
+    defer={false}
+    encodeSpecialCharacters={true}
+    titleTemplate="4s remaining | %s"
+  >
+    <title>
+      service name
+    </title>
+  </Helmet>
+  <Modal
+    ariaHideApp={true}
+    bodyOpenClassName="ReactModal__Body--open"
+    closeTimeoutMS={0}
+    isOpen={true}
+    parentSelector={[Function]}
+    portalClassName="ReactModalPortal"
+    role="dialog"
+    shouldCloseOnEsc={false}
+    shouldCloseOnOverlayClick={false}
+    shouldFocusAfterRender={true}
+    shouldReturnFocusAfterClose={true}
+    style={
+      Object {
+        "content": Object {
+          "border": "none",
+          "borderRadius": "0px",
+          "margin": "auto",
+          "position": "relative",
+        },
+        "overlay": Object {
+          "backgroundColor": "#bdbdbdbd",
+          "display": "flex",
+          "zIndex": 3,
+        },
+      }
+    }
+  >
+    <h2
+      className="govuk-heading-l"
+    >
+      Your session will expire in 4 seconds
+    </h2>
+    <p
+      className="govuk-body"
+      key="0"
+    >
+      We won't be able to save what you have done and you'll lose your progress. 
+    </p>
+    <p
+      className="govuk-body"
+      key="1"
+    >
+       Click Continue to extend your session.
+    </p>
+    <button
+      className="govuk-button"
+      onClick={[Function]}
+    >
+      Continue
+    </button>
+  </Modal>
+</Fragment>
+`;
+
+exports[`Session timer component should render with default props 1`] = `
+<ContextProvider
+  value={
+    Object {
+      "apiStatus": null,
+      "dispatch": [Function],
+      "layout": Object {
+        "countDownForSeconds": 5,
+        "defaultTimeoutSeconds": 10,
+        "header": Object {
+          "service": "service name",
+        },
+      },
+      "track": [Function],
+    }
+  }
+>
+  <SessionTimer />
+</ContextProvider>
+`;
