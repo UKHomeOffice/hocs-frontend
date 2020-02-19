@@ -2,7 +2,7 @@ import React from 'react';
 import SessionTimer from '../session-timer.jsx';
 import { ApplicationProvider } from '../../../contexts/application.jsx';
 
-describe('Layout header component', () => {
+describe('Session timer component', () => {
 
     it('should render with default props', () => {
         const config = {

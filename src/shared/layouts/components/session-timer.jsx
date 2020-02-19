@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import Modal from 'react-modal';
 import { Context } from '../../contexts/application.jsx';
 
-const getDefaultExpiryDate = defaultTimeoutSeconds => new Date(new Date().getTime() + defaultTimeoutSeconds * 1000);
+const getDefaultExpiryDate = defaultTimeoutSeconds => new Date().getTime() + defaultTimeoutSeconds * 1000;
 const getRemainingSeconds = targetDate => Math.floor((targetDate - new Date().getTime()) / 1000);
 const keepAlive = () => axios.get('/api/keepalive')
     // eslint-disable-next-line no-undef
@@ -18,7 +18,7 @@ const getButtonText = timingOut => timingOut ? 'Continue' : 'Return to login';
 
 const SessionTimer = () => {
     const { layout: { countDownForSeconds, defaultTimeoutSeconds, header: { service } } } = React.useContext(Context);
-    // date stored as seconds since epoch to minimise conversions
+    // date stored as milliseconds since epoch
     const [targetDate, setTargetDate] = React.useState(getDefaultExpiryDate(defaultTimeoutSeconds));
     const [remainingSeconds, setRemainingSeconds] = React.useState(defaultTimeoutSeconds);
 
