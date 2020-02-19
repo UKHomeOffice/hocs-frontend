@@ -8,6 +8,7 @@ class DocumentPreview extends Component {
         return (
             <embed
                 id={`document-${activeDocument}`}
+                key={activeDocument}
                 src={`/case/${caseId}/document/${activeDocument}/preview`}
                 type='application/pdf'
                 width='100%' height='100%'
