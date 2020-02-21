@@ -98,7 +98,7 @@ spec:
           - name: https
             containerPort: 10443
       - name: keycloak-proxy-web
-        image: quay.io/keycloak/keycloak-gatekeeper:v9.0.0
+        image: quay.io/keycloak/keycloak-gatekeeper:8.0.2
         imagePullPolicy: Always
         securityContext:
           runAsNonRoot: true
@@ -130,7 +130,6 @@ spec:
           - --server-write-timeout=60s
           - --no-redirects=false
           - --redirection-url=https://{{.DOMAIN_NAME}}
-          - --cors-origins='*'
           - --resources=uri=/health|white-listed=true
           - --resources=uri=/public/*|white-listed=true
           - --resources=uri=/*
@@ -138,7 +137,6 @@ spec:
           - --http-only-cookie=true
           - --revocation-url={{.KC_REALM}}/protocol/openid-connect/logout
           - --enable-logout-redirect=true
-          - --verbose
           - --enable-refresh-tokens=true
           - --encryption-key=$(ENCRYPTION_KEY)
           - --cookie-domain={{.DOMAIN_NAME}}
@@ -150,7 +148,7 @@ spec:
             name: frontend-keycloak-secret
             readOnly: true
       - name: keycloak-proxy-api
-        image: quay.io/keycloak/keycloak-gatekeeper:v9.0.0
+        image: quay.io/keycloak/keycloak-gatekeeper:8.0.2
         imagePullPolicy: Always
         securityContext:
           runAsNonRoot: true
@@ -182,13 +180,11 @@ spec:
           - --server-write-timeout=60s
           - --no-redirects=true
           - --redirection-url=https://{{.DOMAIN_NAME}}
-          - --cors-origins='*'
           - --resources=uri=/health|white-listed=true
           - --resources=uri=/public/*|white-listed=true
           - --resources=uri=/*
           - --secure-cookie=true
           - --http-only-cookie=true
-          - --verbose
           - --enable-refresh-tokens=true
           - --encryption-key=$(ENCRYPTION_KEY)
           - --cookie-domain={{.DOMAIN_NAME}}
