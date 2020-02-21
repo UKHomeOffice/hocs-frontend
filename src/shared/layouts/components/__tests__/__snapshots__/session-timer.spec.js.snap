@@ -32,7 +32,7 @@ exports[`Session timer component should render the modal when timed out 1`] = `
           "position": "relative",
         },
         "overlay": Object {
-          "backgroundColor": "#bdbdbdbd",
+          "backgroundColor": "rgba(189, 189, 189, 0.75)",
           "display": "flex",
           "zIndex": 3,
         },
@@ -92,7 +92,7 @@ exports[`Session timer component should render the modal when timing out 1`] = `
           "position": "relative",
         },
         "overlay": Object {
-          "backgroundColor": "#bdbdbdbd",
+          "backgroundColor": "rgba(189, 189, 189, 0.75)",
           "display": "flex",
           "zIndex": 3,
         },

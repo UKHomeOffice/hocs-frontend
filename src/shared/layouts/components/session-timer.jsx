@@ -73,7 +73,7 @@ const SessionTimer = () => {
             shouldCloseOnEsc={false}
             style={{
                 overlay: {
-                    backgroundColor: '#bdbdbdbd',
+                    backgroundColor: 'rgba(189, 189, 189, 0.75)',
                     display: 'flex',
                     zIndex: 3
                 },
