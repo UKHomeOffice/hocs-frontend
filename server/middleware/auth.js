@@ -53,7 +53,8 @@ function getSessionExpiry(logger, req) {
                     logger.debug(`decoded refresh token expiry: ${expiry}`);
                     if (expiry) {
                         const expiryMilliseconds = expiry * 1000;
-                        const expiresIn = (expiryMilliseconds - new Date().getTime()) / 1000;
+                        // Keycloak allows a 2 minute buffer so we need to add this
+                        const expiresIn = (120000 + expiryMilliseconds - new Date().getTime()) / 1000;
                         logger.debug(`decoded refresh token expires in: ${expiresIn}`);
                         const expiresAt = new Date(expiryMilliseconds).toUTCString();
                         logger.debug(`decoded refresh token expires at: ${expiresAt}`);
