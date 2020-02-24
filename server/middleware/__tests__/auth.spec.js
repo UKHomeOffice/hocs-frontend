@@ -123,7 +123,7 @@ describe('When the session expiry middleware is called', () => {
             });
 
             it('should set the refresh token expiry time in the header', () => {
-                expect(mockSetHeader).toHaveBeenCalledWith('X-Auth-Session-ExpiresAt', 'Sat, 01 Feb 2014 00:27:30 GMT');
+                expect(mockSetHeader).toHaveBeenCalledWith('X-Auth-Session-ExpiresAt', 'Sat, 01 Feb 2014 00:29:30 GMT');
             });
 
             it('should call the next handler', () => {
