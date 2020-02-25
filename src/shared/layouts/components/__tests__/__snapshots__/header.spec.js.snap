@@ -17,7 +17,6 @@ exports[`Layout header component should render with default props 1`] = `
       >
         <Link
           className="govuk-header__link govuk-header__link--homepage govuk-header__logotype-text"
-          replace={false}
           to="/"
         >
           Correspondence Service
@@ -38,7 +37,6 @@ exports[`Layout header component should render with default props 1`] = `
           >
             <Link
               className="govuk-header__link"
-              replace={false}
               to="/action/create/workflow"
             >
               Create Single Case
@@ -49,7 +47,6 @@ exports[`Layout header component should render with default props 1`] = `
           >
             <Link
               className="govuk-header__link"
-              replace={false}
               to="/action/bulk/workflow"
             >
               Create Bulk Cases
@@ -60,7 +57,6 @@ exports[`Layout header component should render with default props 1`] = `
           >
             <Link
               className="govuk-header__link"
-              replace={false}
               to="/search"
             >
               Search
@@ -100,7 +96,6 @@ exports[`Layout header component should render without crest when service is not
       >
         <Link
           className="govuk-header__link govuk-header__link--homepage govuk-header__logotype-text"
-          replace={false}
           to="/"
         >
           Test Service
@@ -121,7 +116,6 @@ exports[`Layout header component should render without crest when service is not
           >
             <Link
               className="govuk-header__link"
-              replace={false}
               to="/action/create/workflow"
             >
               Create Single Case
@@ -132,7 +126,6 @@ exports[`Layout header component should render without crest when service is not
           >
             <Link
               className="govuk-header__link"
-              replace={false}
               to="/action/bulk/workflow"
             >
               Create Bulk Cases
@@ -143,7 +136,6 @@ exports[`Layout header component should render without crest when service is not
           >
             <Link
               className="govuk-header__link"
-              replace={false}
               to="/search"
             >
               Search

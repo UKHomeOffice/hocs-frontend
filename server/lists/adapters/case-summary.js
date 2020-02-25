@@ -1,7 +1,7 @@
 const createAdditionalFields = (additionalFields = []) => additionalFields.map(({ label, value, type }) => type === 'date' ? ({ label, value: formatDate(value) }) : ({ label, value }));
 
 const createDeadlines = async (deadlines, fromStaticList) => await Promise.all(Object.entries(deadlines)
-    .sort((a, b) => Date.parse(a[1]) > Date.parse(b[1]) ? 1 : 0)
+    .sort((a, b) => Date.parse(a[1]) - Date.parse(b[1]))
     .map(async ([stageId, deadline]) => ({
         label: await fromStaticList('S_STAGETYPES', stageId),
         value: formatDate(deadline)

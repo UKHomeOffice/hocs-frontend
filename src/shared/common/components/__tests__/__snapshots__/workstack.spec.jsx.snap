@@ -554,16 +554,21 @@ exports[`Workstack component should render with filtering 1`] = `
                             >
                               <Link
                                 className="govuk-link govuk-!-margin-right-3"
-                                replace={false}
                                 to="/case/case_uuid-123/stage/stage_uuid-456"
                               >
-                                <a
+                                <LinkAnchor
                                   className="govuk-link govuk-!-margin-right-3"
                                   href="/case/case_uuid-123/stage/stage_uuid-456"
-                                  onClick={[Function]}
+                                  navigate={[Function]}
                                 >
-                                  case1
-                                </a>
+                                  <a
+                                    className="govuk-link govuk-!-margin-right-3"
+                                    href="/case/case_uuid-123/stage/stage_uuid-456"
+                                    onClick={[Function]}
+                                  >
+                                    case1
+                                  </a>
+                                </LinkAnchor>
                               </Link>
                             </td>
                             <td
@@ -946,16 +951,21 @@ exports[`Workstack component should sort descending when the column heading is c
                             >
                               <Link
                                 className="govuk-link govuk-!-margin-right-3"
-                                replace={false}
                                 to="/case/case_uuid-789/stage/stage_uuid-432"
                               >
-                                <a
+                                <LinkAnchor
                                   className="govuk-link govuk-!-margin-right-3"
                                   href="/case/case_uuid-789/stage/stage_uuid-432"
-                                  onClick={[Function]}
+                                  navigate={[Function]}
                                 >
-                                  case2
-                                </a>
+                                  <a
+                                    className="govuk-link govuk-!-margin-right-3"
+                                    href="/case/case_uuid-789/stage/stage_uuid-432"
+                                    onClick={[Function]}
+                                  >
+                                    case2
+                                  </a>
+                                </LinkAnchor>
                               </Link>
                             </td>
                             <td
@@ -1027,16 +1037,21 @@ exports[`Workstack component should sort descending when the column heading is c
                             >
                               <Link
                                 className="govuk-link govuk-!-margin-right-3"
-                                replace={false}
                                 to="/case/case_uuid-123/stage/stage_uuid-456"
                               >
-                                <a
+                                <LinkAnchor
                                   className="govuk-link govuk-!-margin-right-3"
                                   href="/case/case_uuid-123/stage/stage_uuid-456"
-                                  onClick={[Function]}
+                                  navigate={[Function]}
                                 >
-                                  case1
-                                </a>
+                                  <a
+                                    className="govuk-link govuk-!-margin-right-3"
+                                    href="/case/case_uuid-123/stage/stage_uuid-456"
+                                    onClick={[Function]}
+                                  >
+                                    case1
+                                  </a>
+                                </LinkAnchor>
                               </Link>
                             </td>
                             <td
@@ -1419,16 +1434,21 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                             >
                               <Link
                                 className="govuk-link govuk-!-margin-right-3"
-                                replace={false}
                                 to="/case/case_uuid-123/stage/stage_uuid-456"
                               >
-                                <a
+                                <LinkAnchor
                                   className="govuk-link govuk-!-margin-right-3"
                                   href="/case/case_uuid-123/stage/stage_uuid-456"
-                                  onClick={[Function]}
+                                  navigate={[Function]}
                                 >
-                                  case1
-                                </a>
+                                  <a
+                                    className="govuk-link govuk-!-margin-right-3"
+                                    href="/case/case_uuid-123/stage/stage_uuid-456"
+                                    onClick={[Function]}
+                                  >
+                                    case1
+                                  </a>
+                                </LinkAnchor>
                               </Link>
                             </td>
                             <td
@@ -1504,16 +1524,21 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                             >
                               <Link
                                 className="govuk-link govuk-!-margin-right-3"
-                                replace={false}
                                 to="/case/case_uuid-789/stage/stage_uuid-432"
                               >
-                                <a
+                                <LinkAnchor
                                   className="govuk-link govuk-!-margin-right-3"
                                   href="/case/case_uuid-789/stage/stage_uuid-432"
-                                  onClick={[Function]}
+                                  navigate={[Function]}
                                 >
-                                  case2
-                                </a>
+                                  <a
+                                    className="govuk-link govuk-!-margin-right-3"
+                                    href="/case/case_uuid-789/stage/stage_uuid-432"
+                                    onClick={[Function]}
+                                  >
+                                    case2
+                                  </a>
+                                </LinkAnchor>
                               </Link>
                             </td>
                             <td

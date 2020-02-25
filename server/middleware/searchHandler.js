@@ -2,6 +2,7 @@ const { caseworkService } = require('../clients');
 const getLogger = require('../libs/logger');
 const User = require('../models/user');
 const { bindDisplayElements } = require('../lists/adapters/workstacks');
+const { sortObjectByProp } = require('../libs/sortHelpers');
 
 async function handleSearch(req, res, next) {
     const logger = getLogger(req.requestId);
@@ -34,7 +35,7 @@ async function handleSearch(req, res, next) {
         const fromStaticList = req.listService.getFromStaticList;
 
         const workstackData = await Promise.all(response.data.stages
-            .sort((first, second) => first.caseReference > second.caseReference)
+            .sort(sortObjectByProp(workstackCase => workstackCase.caseReference))
             .map(bindDisplayElements(fromStaticList)));
         const { workstackColumns } = await req.listService.fetch('S_SYSTEM_CONFIGURATION');
         res.locals.workstack = {
@@ -49,7 +50,6 @@ async function handleSearch(req, res, next) {
         next(error);
     }
 }
-
 
 module.exports = {
     handleSearch

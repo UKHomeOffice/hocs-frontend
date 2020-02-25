@@ -15,17 +15,24 @@ exports[`Form back button component should render disabled when isDisabled is pa
       className="govuk-back-link"
       disabled={true}
       onClick={[Function]}
-      replace={false}
       to="/SOME/URL"
     >
-      <a
+      <LinkAnchor
         className="govuk-back-link"
         disabled={true}
         href="/SOME/URL"
+        navigate={[Function]}
         onClick={[Function]}
       >
-        Submit
-      </a>
+        <a
+          className="govuk-back-link"
+          disabled={true}
+          href="/SOME/URL"
+          onClick={[Function]}
+        >
+          Submit
+        </a>
+      </LinkAnchor>
     </Link>
   </p>
 </BackButton>
@@ -47,17 +54,24 @@ exports[`Form back button component should render with additional styles when cl
       className="govuk-back-link test-class"
       disabled={false}
       onClick={[Function]}
-      replace={false}
       to="/SOME/URL"
     >
-      <a
+      <LinkAnchor
         className="govuk-back-link test-class"
         disabled={false}
         href="/SOME/URL"
+        navigate={[Function]}
         onClick={[Function]}
       >
-        Submit
-      </a>
+        <a
+          className="govuk-back-link test-class"
+          disabled={false}
+          href="/SOME/URL"
+          onClick={[Function]}
+        >
+          Submit
+        </a>
+      </LinkAnchor>
     </Link>
   </p>
 </BackButton>
@@ -78,17 +92,24 @@ exports[`Form back button component should render with correct label when passed
       className="govuk-back-link"
       disabled={false}
       onClick={[Function]}
-      replace={false}
       to="/SOME/URL"
     >
-      <a
+      <LinkAnchor
         className="govuk-back-link"
         disabled={false}
         href="/SOME/URL"
+        navigate={[Function]}
         onClick={[Function]}
       >
-        My Button
-      </a>
+        <a
+          className="govuk-back-link"
+          disabled={false}
+          href="/SOME/URL"
+          onClick={[Function]}
+        >
+          My Button
+        </a>
+      </LinkAnchor>
     </Link>
   </p>
 </BackButton>
@@ -109,17 +130,24 @@ exports[`Form back button component should render with default props 1`] = `
       className="govuk-back-link"
       disabled={false}
       onClick={[Function]}
-      replace={false}
       to="/SOME/URL"
     >
-      <a
+      <LinkAnchor
         className="govuk-back-link"
         disabled={false}
         href="/SOME/URL"
+        navigate={[Function]}
         onClick={[Function]}
       >
-        Submit
-      </a>
+        <a
+          className="govuk-back-link"
+          disabled={false}
+          href="/SOME/URL"
+          onClick={[Function]}
+        >
+          Submit
+        </a>
+      </LinkAnchor>
     </Link>
   </p>
 </BackButton>
