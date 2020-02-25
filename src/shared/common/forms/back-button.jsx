@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { ApplicationConsumer } from '../../contexts/application.jsx';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { withRouter } from 'react-router';
+import { withRouter } from 'react-router-dom';
 import {
     setError,
     updateApiStatus,
