@@ -144,7 +144,8 @@ const serverConfig = {
     },
     externals: {
         'react': 'react',
-        'react-dom': 'react-dom'
+        'react-dom': 'react-dom',
+        'react-router-dom': 'react-router-dom'
     },
     plugins: [
         new MinificationPlugin({

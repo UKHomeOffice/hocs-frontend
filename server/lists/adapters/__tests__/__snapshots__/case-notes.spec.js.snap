@@ -66,10 +66,9 @@ Array [
     "body": Object {
       "author": "MOCK_USER",
       "date": "5 January 2019 at 12:00",
-      "stage": "MOCK_STAGETYPE",
     },
-    "title": "Allocated to the MOCK_TEAM",
-    "type": "STAGE_ALLOCATED_TO_TEAM",
+    "title": "Stage: MOCK_STAGETYPE Started",
+    "type": "STAGE_RECREATED",
   },
   Object {
     "body": Object {
@@ -85,15 +84,16 @@ Array [
       "date": "5 January 2019 at 12:00",
     },
     "title": "Stage: MOCK_STAGETYPE Started",
-    "type": "STAGE_RECREATED",
+    "type": "STAGE_CREATED",
   },
   Object {
     "body": Object {
       "author": "MOCK_USER",
       "date": "5 January 2019 at 12:00",
+      "stage": "MOCK_STAGETYPE",
     },
-    "title": "Stage: MOCK_STAGETYPE Started",
-    "type": "STAGE_CREATED",
+    "title": "Allocated to the MOCK_TEAM",
+    "type": "STAGE_ALLOCATED_TO_TEAM",
   },
   Object {
     "body": Object {
@@ -124,15 +124,6 @@ Array [
   },
   Object {
     "body": Object {
-      "author": "MOCK_USER",
-      "date": "1 January 2019 at 12:00",
-      "note": "A test case note",
-    },
-    "title": "1",
-    "type": "MANUAL",
-  },
-  Object {
-    "body": Object {
       "allocationId": undefined,
       "author": "MOCK_USER",
       "correspondent": undefined,
@@ -145,6 +136,15 @@ Array [
     },
     "title": "System event",
     "type": "TEST_UNKNOWN_TYPE",
+  },
+  Object {
+    "body": Object {
+      "author": "MOCK_USER",
+      "date": "1 January 2019 at 12:00",
+      "note": "A test case note",
+    },
+    "title": "1",
+    "type": "MANUAL",
   },
 ]
 `;

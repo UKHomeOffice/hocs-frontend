@@ -11,17 +11,24 @@ exports[`Form button component should render disabled when isDisabled is passed 
     className="govuk-button"
     disabled={true}
     onClick={[Function]}
-    replace={false}
     to="/SOME/URL"
   >
-    <a
+    <LinkAnchor
       className="govuk-button"
       disabled={true}
       href="/SOME/URL"
+      navigate={[Function]}
       onClick={[Function]}
     >
-      Submit
-    </a>
+      <a
+        className="govuk-button"
+        disabled={true}
+        href="/SOME/URL"
+        onClick={[Function]}
+      >
+        Submit
+      </a>
+    </LinkAnchor>
   </Link>
 </Button>
 `;
@@ -38,17 +45,24 @@ exports[`Form button component should render with additional styles when classNa
     className="govuk-button test-class"
     disabled={false}
     onClick={[Function]}
-    replace={false}
     to="/SOME/URL"
   >
-    <a
+    <LinkAnchor
       className="govuk-button test-class"
       disabled={false}
       href="/SOME/URL"
+      navigate={[Function]}
       onClick={[Function]}
     >
-      Submit
-    </a>
+      <a
+        className="govuk-button test-class"
+        disabled={false}
+        href="/SOME/URL"
+        onClick={[Function]}
+      >
+        Submit
+      </a>
+    </LinkAnchor>
   </Link>
 </Button>
 `;
@@ -64,17 +78,24 @@ exports[`Form button component should render with correct label when passed 1`] 
     className="govuk-button"
     disabled={false}
     onClick={[Function]}
-    replace={false}
     to="/SOME/URL"
   >
-    <a
+    <LinkAnchor
       className="govuk-button"
       disabled={false}
       href="/SOME/URL"
+      navigate={[Function]}
       onClick={[Function]}
     >
-      My Button
-    </a>
+      <a
+        className="govuk-button"
+        disabled={false}
+        href="/SOME/URL"
+        onClick={[Function]}
+      >
+        My Button
+      </a>
+    </LinkAnchor>
   </Link>
 </Button>
 `;
@@ -90,17 +111,24 @@ exports[`Form button component should render with default props 1`] = `
     className="govuk-button"
     disabled={false}
     onClick={[Function]}
-    replace={false}
     to="/SOME/URL"
   >
-    <a
+    <LinkAnchor
       className="govuk-button"
       disabled={false}
       href="/SOME/URL"
+      navigate={[Function]}
       onClick={[Function]}
     >
-      Submit
-    </a>
+      <a
+        className="govuk-button"
+        disabled={false}
+        href="/SOME/URL"
+        onClick={[Function]}
+      >
+        Submit
+      </a>
+    </LinkAnchor>
   </Link>
 </Button>
 `;

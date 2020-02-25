@@ -108,7 +108,7 @@ module.exports = async (data, { fromStaticList, logger }) => {
     logger.debug('REQUEST_CASE_NOTES', { notes: data.length });
     let noteCount = 0;
     return await Promise.all(data
-        .sort((a, b) => new Date(a.eventTime) < new Date(b.eventTime) ? -1 : 1)
+        .sort((a, b) => Date.parse(a.eventTime) - Date.parse(b.eventTime))
         .map(({ type, ...rest }) => {
             if (type === 'MANUAL') {
                 noteCount++;

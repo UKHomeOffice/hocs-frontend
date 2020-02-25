@@ -10,17 +10,23 @@ exports[`Form backlink component should render disabled when isDisabled is passe
     <Link
       className="govuk-back-link"
       disabled={true}
-      replace={false}
       to="/SOME/URL"
     >
-      <a
+      <LinkAnchor
         className="govuk-back-link"
         disabled={true}
         href="/SOME/URL"
-        onClick={[Function]}
+        navigate={[Function]}
       >
-        Back
-      </a>
+        <a
+          className="govuk-back-link"
+          disabled={true}
+          href="/SOME/URL"
+          onClick={[Function]}
+        >
+          Back
+        </a>
+      </LinkAnchor>
     </Link>
   </p>
 </BackLink>
@@ -37,17 +43,23 @@ exports[`Form backlink component should render with additional styles when class
     <Link
       className="govuk-back-link test-class"
       disabled={false}
-      replace={false}
       to="/SOME/URL"
     >
-      <a
+      <LinkAnchor
         className="govuk-back-link test-class"
         disabled={false}
         href="/SOME/URL"
-        onClick={[Function]}
+        navigate={[Function]}
       >
-        Back
-      </a>
+        <a
+          className="govuk-back-link test-class"
+          disabled={false}
+          href="/SOME/URL"
+          onClick={[Function]}
+        >
+          Back
+        </a>
+      </LinkAnchor>
     </Link>
   </p>
 </BackLink>
@@ -63,17 +75,23 @@ exports[`Form backlink component should render with correct label when passed 1`
     <Link
       className="govuk-back-link"
       disabled={false}
-      replace={false}
       to="/SOME/URL"
     >
-      <a
+      <LinkAnchor
         className="govuk-back-link"
         disabled={false}
         href="/SOME/URL"
-        onClick={[Function]}
+        navigate={[Function]}
       >
-        MY_LABEL
-      </a>
+        <a
+          className="govuk-back-link"
+          disabled={false}
+          href="/SOME/URL"
+          onClick={[Function]}
+        >
+          MY_LABEL
+        </a>
+      </LinkAnchor>
     </Link>
   </p>
 </BackLink>
@@ -89,17 +107,23 @@ exports[`Form backlink component should render with default props 1`] = `
     <Link
       className="govuk-back-link"
       disabled={false}
-      replace={false}
       to="/SOME/URL"
     >
-      <a
+      <LinkAnchor
         className="govuk-back-link"
         disabled={false}
         href="/SOME/URL"
-        onClick={[Function]}
+        navigate={[Function]}
       >
-        Back
-      </a>
+        <a
+          className="govuk-back-link"
+          disabled={false}
+          href="/SOME/URL"
+          onClick={[Function]}
+        >
+          Back
+        </a>
+      </LinkAnchor>
     </Link>
   </p>
 </BackLink>
