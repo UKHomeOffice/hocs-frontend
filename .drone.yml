@@ -7,7 +7,7 @@ pipeline:
       commands:
         - docker build -t hocs-frontend .
       when:
-        branch: bug/HOCS-1510-workstack-date-sorting
+        branch: master
         event: push
   
     install-docker-image:
@@ -23,7 +23,7 @@ pipeline:
         - docker push quay.io/ukhomeofficedigital/hocs-frontend:build-$${DRONE_BUILD_NUMBER}
         - docker push quay.io/ukhomeofficedigital/hocs-frontend:latest
       when:
-        branch: bug/HOCS-1510-workstack-date-sorting
+        branch: master
         event: push
   
     sonar-scanner:
@@ -67,7 +67,7 @@ pipeline:
         - cd kube-hocs-frontend
         - ./deploy.sh
       when:
-        branch: bug/HOCS-1510-workstack-date-sorting
+        branch: master
         event: [push, tag]
 
     deploy-to-wcs-dev-from-build-number:
@@ -84,7 +84,7 @@ pipeline:
         - cd kube-hocs-frontend
         - ./deploy.sh
       when:
-        branch: bug/HOCS-1510-workstack-date-sorting
+        branch: master
         event: [push, tag]
   
     deployment:
