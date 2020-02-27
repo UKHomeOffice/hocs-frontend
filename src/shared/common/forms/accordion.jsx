@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import { formComponentFactory } from './form-repository.jsx';
 
 const getComponentFactoryInstance = (factory, options) => ({ component, props }, key) => factory(component, { key, config: props, ...options });
 const itemHasValidationError = errors => item => errors[item.props.name] || childControlHasValidationError(errors, item);
 const childControlHasValidationError = (errors, { props: { items } = {} } = {}) => Array.isArray(items) && items.some(itemHasValidationError(errors));
+
 function Section({ data, errors, index, items, title, updateState }) {
     const createComponent = getComponentFactoryInstance(formComponentFactory, { data, errors: errors, meta: {}, callback: updateState, baseUrl: '/' });
     const sectionHasValidationError = errors && Array.isArray(items) && items.some(itemHasValidationError(errors));
     const [isVisible, setVisible] = useState(sectionHasValidationError);
+    const [isFocussed, setFocussed] = useState(false);
 
     useEffect(() => {
         if (sectionHasValidationError) {
@@ -16,14 +19,17 @@ function Section({ data, errors, index, items, title, updateState }) {
         }
     }, [errors]);
 
-    const clickHandler = event => {
+    const onBlur = React.useCallback(() => setFocussed(false), []);
+    const onFocus = React.useCallback(() => setFocussed(true), []);
+
+    const clickHandler = React.useCallback(event => {
         event.preventDefault();
         setVisible(!isVisible);
-    };
+    }, [isVisible]);
 
     return (
-        <div key={index} className={isVisible ? 'govuk-accordion__section govuk-accordion__section--expanded' : 'govuk-accordion__section'}>
-            <div className='govuk-accordion__section-header' onClick={clickHandler}>
+        <div key={index} className={classNames('govuk-accordion__section', { 'govuk-accordion__section--expanded': isVisible })}>
+            <div className={classNames('govuk-accordion__section-header', { 'govuk-accordion__section-header--focused': isFocussed })} onClick={clickHandler} onFocus={onFocus} onBlur={onBlur}>
                 <h2 className='govuk-accordion__section-heading'>
                     <button type='button' className='govuk-accordion__section-button' id={`accordion-default-heading-${index}`}>
                         {title}
