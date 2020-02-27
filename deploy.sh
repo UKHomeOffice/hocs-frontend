@@ -41,7 +41,10 @@ if [[ -z ${KUBE_TOKEN} ]] ; then
     exit -1
 fi
 
-if [ "${ENVIRONMENT}" == "prod" ] ; then
+if [[ "${KUBE_NAMESPACE}" == "wcs-prod" ]] ; then
+    export DNS_PREFIX=www.${DOMAIN}
+    export KC_REALM=https://sso.digital.homeoffice.gov.uk/auth/realms/HOCS
+elif [[ "${ENVIRONMENT}" == "prod" ]] ; then
     export DNS_PREFIX=www.${DOMAIN}
     export KC_REALM=https://sso.digital.homeoffice.gov.uk/auth/realms/hocs-prod
 else
