@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`When the Details link is clicked should show the child items 1`] = `"<div class=\\"govuk-grid-row selectable-details\\"><div class=\\"govuk-grid-column-full\\"><div class=\\"selectable-details-header\\"><div class=\\"govuk-checkboxes\\" style=\\"display: inline-flex;\\"><div class=\\"govuk-checkboxes__item\\"><input id=\\"details-checkbox-__name__\\" type=\\"checkbox\\" name=\\"details-checkbox-__name__\\" class=\\"govuk-checkboxes__input\\" value=\\"__value__\\" checked=\\"\\"><label class=\\"govuk-label govuk-checkboxes__label\\" for=\\"details-checkbox-__name__\\">__label__</label></div></div><div class=\\"selectable-details-link\\"><span>Hide Details </span></div></div><div class=\\"selectable-details-content\\"><p class=\\"govuk-inset-text\\"> </p><p class=\\"govuk-inset-text\\"> </p><p class=\\"govuk-inset-text\\"> </p></div></div></div>"`;
+exports[`When the Details link is clicked should show the child items 1`] = `"<div class=\\"govuk-grid-row selectable-details\\"><div class=\\"govuk-grid-column-full\\"><div class=\\"selectable-details-header\\"><div class=\\"govuk-checkboxes\\" style=\\"display: inline-flex;\\"><div class=\\"govuk-checkboxes__item\\"><input id=\\"details-checkbox-__name__\\" type=\\"checkbox\\" name=\\"details-checkbox-__name__\\" class=\\"govuk-checkboxes__input\\" value=\\"__value__\\" checked=\\"\\"><label class=\\"govuk-label govuk-checkboxes__label\\" for=\\"details-checkbox-__name__\\">__label__</label></div></div><div class=\\"selectable-details-link\\"><a href=\\"#details-checkbox-__name__\\">Hide Details </a></div></div><div class=\\"selectable-details-content\\"><p class=\\"govuk-inset-text\\"> </p><p class=\\"govuk-inset-text\\"> </p><p class=\\"govuk-inset-text\\"> </p></div></div></div>"`;
 
-exports[`When the Details link is clicked twice should not show the child items 1`] = `"<div class=\\"govuk-grid-row selectable-details\\"><div class=\\"govuk-grid-column-full\\"><div class=\\"selectable-details-header\\"><div class=\\"govuk-checkboxes\\" style=\\"display: inline-flex;\\"><div class=\\"govuk-checkboxes__item\\"><input id=\\"details-checkbox-__name__\\" type=\\"checkbox\\" name=\\"details-checkbox-__name__\\" class=\\"govuk-checkboxes__input\\" value=\\"__value__\\" checked=\\"\\"><label class=\\"govuk-label govuk-checkboxes__label\\" for=\\"details-checkbox-__name__\\">__label__</label></div></div><div class=\\"selectable-details-link\\"><span>Show Details </span></div></div></div></div>"`;
+exports[`When the Details link is clicked twice should not show the child items 1`] = `"<div class=\\"govuk-grid-row selectable-details\\"><div class=\\"govuk-grid-column-full\\"><div class=\\"selectable-details-header\\"><div class=\\"govuk-checkboxes\\" style=\\"display: inline-flex;\\"><div class=\\"govuk-checkboxes__item\\"><input id=\\"details-checkbox-__name__\\" type=\\"checkbox\\" name=\\"details-checkbox-__name__\\" class=\\"govuk-checkboxes__input\\" value=\\"__value__\\" checked=\\"\\"><label class=\\"govuk-label govuk-checkboxes__label\\" for=\\"details-checkbox-__name__\\">__label__</label></div></div><div class=\\"selectable-details-link\\"><a href=\\"#details-checkbox-__name__\\">Show Details </a></div></div></div></div>"`;
 
 exports[`When the component is rendered a child component has errors should render expanded 1`] = `
 <div
@@ -39,9 +39,11 @@ exports[`When the component is rendered a child component has errors should rend
       <div
         class="selectable-details-link"
       >
-        <span>
+        <a
+          href="#details-checkbox-__name__"
+        >
           Hide Details 
-        </span>
+        </a>
       </div>
     </div>
     <div
@@ -103,9 +105,11 @@ exports[`When the component is rendered and it is checked and it has child compo
       <div
         class="selectable-details-link"
       >
-        <span>
+        <a
+          href="#details-checkbox-__name__"
+        >
           Show Details 
-        </span>
+        </a>
       </div>
     </div>
   </div>
@@ -185,9 +189,11 @@ exports[`When the component is rendered and it is selected and it has child comp
       <div
         class="selectable-details-link"
       >
-        <span>
+        <a
+          href="#details-checkbox-__name__"
+        >
           Hide Details 
-        </span>
+        </a>
       </div>
     </div>
     <div

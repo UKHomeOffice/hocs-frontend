@@ -19,7 +19,7 @@ import TypeAhead from './type-ahead.jsx';
 import Panel from './panel.jsx';
 import Accordion from './accordion.jsx';
 import Hidden from './hidden.jsx';
-import ExpandableCheckbox from './expandable-checkbox.jsx'; 
+import ExpandableCheckbox from './expandable-checkbox.jsx';
 
 function defaultDataAdapter(name, data) {
     return data[name] || '';
