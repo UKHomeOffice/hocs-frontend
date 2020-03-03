@@ -72,7 +72,7 @@ describe('When the Details link is clicked', () => {
     it('should show the child items', () => {
         const items = [{ component: 'inset', props: {} }, { component: 'inset', props: {} }, { component: 'inset', props: {} }];
         const wrapper = mount(<ExpandableCheckbox choice={choice} data={{}} items={items} label="__label__" name="__name__" updateState={() => { }} value="__value__" />);
-        wrapper.find('.selectable-details-link span').at(0).simulate('click');
+        wrapper.find('.selectable-details-link a').at(0).simulate('click');
         expect(wrapper.html())
             .toMatchSnapshot();
     });
@@ -82,8 +82,8 @@ describe('When the Details link is clicked twice', () => {
     it('should not show the child items', () => {
         const items = [{ component: 'inset', props: {} }, { component: 'inset', props: {} }, { component: 'inset', props: {} }];
         const wrapper = mount(<ExpandableCheckbox choice={choice} data={{}} items={items} label="__label__" name="__name__" updateState={() => { }} value="__value__" />);
-        wrapper.find('.selectable-details-link span').at(0).simulate('click');
-        wrapper.find('.selectable-details-link span').at(0).simulate('click');
+        wrapper.find('.selectable-details-link a').at(0).simulate('click');
+        wrapper.find('.selectable-details-link a').at(0).simulate('click');
         expect(wrapper.html())
             .toMatchSnapshot();
     });

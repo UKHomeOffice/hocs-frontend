@@ -16,7 +16,10 @@ const expandableCheckbox = ({ choice, data, error, errors, hint, initiallyOpen, 
         }
     }, [childControlHasValidationError]);
 
-    const onOpenClick = React.useCallback(() => setOpen(!isOpen), [isOpen]);
+    const onOpenClick = React.useCallback((e) => {
+        e.preventDefault();
+        setOpen(!isOpen);
+    }, [isOpen]);
 
     const onCheckBoxChange = React.useCallback((e) => {
         const targetValue = e.target.value;
@@ -51,7 +54,7 @@ const expandableCheckbox = ({ choice, data, error, errors, hint, initiallyOpen, 
                         </div>
                     </div>
                     {(items && items.length > 0 && isChecked || childControlHasValidationError) && <div className="selectable-details-link">
-                        <span onClick={onOpenClick}>{`${isOpen ? 'Hide' : 'Show'} Details`} </span>
+                        <a href={`#details-checkbox-${name}`} onClick={onOpenClick}>{`${isOpen ? 'Hide' : 'Show'} Details`} </a>
                     </div>
                     }
                 </div>

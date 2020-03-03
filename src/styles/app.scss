@@ -688,19 +688,12 @@ $border-colour: govuk-colour("grey-2");
         margin-bottom: 20px;
 
         .selectable-details-link {
-            color: #005ea5;
-            cursor: pointer;
             display: inline-block;
             position: relative;
             margin-bottom: 5px;
             margin-left: auto;
             padding-left: 25px;
             padding-top: 11px;
-            text-decoration: underline;
-            
-            &:hover {
-                color: #2b8cc4;
-            }
         }
 
         .govuk-checkboxes__label {
