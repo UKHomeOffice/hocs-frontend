@@ -24,7 +24,7 @@ async function handleSearch(req, res, next) {
                 NI: formData['niNumber'],
                 PrevHocsRef: formData['PrevHocsRef']
             },
-            activeOnly: Array.isArray(formData['caseStatus']) && formData['caseStatus'].includes('active')
+            activeOnly: formData['caseStatus'] === 'active'
         };
 
         logger.info('SEARCH', { request });
