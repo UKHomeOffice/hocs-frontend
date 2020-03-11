@@ -40,7 +40,7 @@ const ColumnRenderer = {
 const dataAdapters = {
     localDate: (value) => {
         var date = new Date(value);
-        if (isNaN(date))
+        if (isNaN(date) || value == null)
             return '';
         return `${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear()}`;
     },

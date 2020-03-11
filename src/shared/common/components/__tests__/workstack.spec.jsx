@@ -27,6 +27,11 @@ describe('Workstack component', () => {
                 stageTypeDisplay: 'Stage B', assignedUserDisplay: 'User2', assignedTeamDisplay: 'team2',
                 created: '', isActive: 'NO'
             },
+            {
+                caseReference: 'case3', caseUUID: 'case_uuid-abc', uuid: 'stage_uuid-444', fullName: 'Pat Brown',
+                stageTypeDisplay: 'Stage C', assignedUserDisplay: 'User3', assignedTeamDisplay: 'team3',
+                created: null, isActive: 'NO'
+            },
         ],
         columns: [
             { displayName: 'Reference', dataAdapter: null, renderer: 'caseLink', dataValueKey: 'caseReference', isFilterable: true },

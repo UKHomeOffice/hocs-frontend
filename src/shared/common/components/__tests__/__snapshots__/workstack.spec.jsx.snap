@@ -30,7 +30,7 @@ Array [
                   aria-live="polite"
                   class="govuk-hint"
                 >
-                  2 Items
+                  3 Items
                 </span>
                 <table
                   class="govuk-table"
@@ -216,13 +216,76 @@ Array [
                         class="govuk-table__cell"
                       />
                     </tr>
+                    <tr
+                      class="govuk-radios govuk-table__row"
+                    >
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        <div
+                          class="govuk-checkboxes"
+                        >
+                          <div
+                            class="govuk-checkboxes__item"
+                          >
+                            <input
+                              class="govuk-checkboxes__input"
+                              id="selected_cases_case_uuid-abc"
+                              name="selected_cases[]"
+                              type="checkbox"
+                              value="case_uuid-abc:stage_uuid-444"
+                            />
+                            <label
+                              class="govuk-label govuk-checkboxes__label"
+                              for="selected_cases_case_uuid-abc"
+                            />
+                          </div>
+                        </div>
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        <a
+                          class="govuk-link govuk-!-margin-right-3"
+                          href="/case/case_uuid-abc/stage/stage_uuid-444"
+                        >
+                          case3
+                        </a>
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        Pat Brown
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        Stage C
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        User3
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        team3
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      />
+                      <td
+                        class="govuk-table__cell"
+                      />
+                    </tr>
                   </tbody>
                 </table>
                 <span
                   aria-live="polite"
                   class="govuk-hint"
                 >
-                  2 Items
+                  3 Items
                 </span>
               </div>
             </div>
@@ -364,6 +427,17 @@ exports[`Workstack component should render with filtering 1`] = `
               "isActive": "NO",
               "stageTypeDisplay": "Stage B",
               "uuid": "stage_uuid-432",
+            },
+            Object {
+              "assignedTeamDisplay": "team3",
+              "assignedUserDisplay": "User3",
+              "caseReference": "case3",
+              "caseUUID": "case_uuid-abc",
+              "created": null,
+              "fullName": "Pat Brown",
+              "isActive": "NO",
+              "stageTypeDisplay": "Stage C",
+              "uuid": "stage_uuid-444",
             },
           ]
         }
@@ -762,6 +836,17 @@ exports[`Workstack component should sort descending when the column heading is c
               "stageTypeDisplay": "Stage B",
               "uuid": "stage_uuid-432",
             },
+            Object {
+              "assignedTeamDisplay": "team3",
+              "assignedUserDisplay": "User3",
+              "caseReference": "case3",
+              "caseUUID": "case_uuid-abc",
+              "created": null,
+              "fullName": "Pat Brown",
+              "isActive": "NO",
+              "stageTypeDisplay": "Stage C",
+              "uuid": "stage_uuid-444",
+            },
           ]
         }
         selectable={true}
@@ -844,7 +929,7 @@ exports[`Workstack component should sort descending when the column heading is c
                         aria-live="polite"
                         className="govuk-hint"
                       >
-                        2
+                        3
                          Items
                       </span>
                       <table
@@ -915,6 +1000,92 @@ exports[`Workstack component should sort descending when the column heading is c
                         <tbody
                           className="govuk-table__body"
                         >
+                          <tr
+                            className="govuk-radios govuk-table__row"
+                            key="stage_uuid-444"
+                          >
+                            <td
+                              className="govuk-table__cell"
+                            >
+                              <div
+                                className="govuk-checkboxes"
+                              >
+                                <div
+                                  className="govuk-checkboxes__item"
+                                  key="case_uuid-abcstage_uuid-444"
+                                >
+                                  <input
+                                    checked={false}
+                                    className="govuk-checkboxes__input"
+                                    id="selected_cases_case_uuid-abc"
+                                    name="selected_cases[]"
+                                    onChange={[Function]}
+                                    type="checkbox"
+                                    value="case_uuid-abc:stage_uuid-444"
+                                  />
+                                  <label
+                                    className="govuk-label govuk-checkboxes__label"
+                                    htmlFor="selected_cases_case_uuid-abc"
+                                  />
+                                </div>
+                              </div>
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-444caseReference"
+                            >
+                              <Link
+                                className="govuk-link govuk-!-margin-right-3"
+                                to="/case/case_uuid-abc/stage/stage_uuid-444"
+                              >
+                                <LinkAnchor
+                                  className="govuk-link govuk-!-margin-right-3"
+                                  href="/case/case_uuid-abc/stage/stage_uuid-444"
+                                  navigate={[Function]}
+                                >
+                                  <a
+                                    className="govuk-link govuk-!-margin-right-3"
+                                    href="/case/case_uuid-abc/stage/stage_uuid-444"
+                                    onClick={[Function]}
+                                  >
+                                    case3
+                                  </a>
+                                </LinkAnchor>
+                              </Link>
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-444fullName"
+                            >
+                              Pat Brown
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-444stageTypeDisplay"
+                            >
+                              Stage C
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-444assignedUserDisplay"
+                            >
+                              User3
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-444assignedTeamDisplay"
+                            >
+                              team3
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-444created"
+                            />
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-444isActive"
+                            />
+                          </tr>
                           <tr
                             className="govuk-radios govuk-table__row"
                             key="stage_uuid-432"
@@ -1097,7 +1268,7 @@ exports[`Workstack component should sort descending when the column heading is c
                         aria-live="polite"
                         className="govuk-hint"
                       >
-                        2
+                        3
                          Items
                       </span>
                     </div>
@@ -1245,6 +1416,17 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
               "stageTypeDisplay": "Stage B",
               "uuid": "stage_uuid-432",
             },
+            Object {
+              "assignedTeamDisplay": "team3",
+              "assignedUserDisplay": "User3",
+              "caseReference": "case3",
+              "caseUUID": "case_uuid-abc",
+              "created": null,
+              "fullName": "Pat Brown",
+              "isActive": "NO",
+              "stageTypeDisplay": "Stage C",
+              "uuid": "stage_uuid-444",
+            },
           ]
         }
         selectable={true}
@@ -1327,7 +1509,7 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                         aria-live="polite"
                         className="govuk-hint"
                       >
-                        2
+                        3
                          Items
                       </span>
                       <table
@@ -1574,13 +1756,99 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                               key="stage_uuid-432isActive"
                             />
                           </tr>
+                          <tr
+                            className="govuk-radios govuk-table__row"
+                            key="stage_uuid-444"
+                          >
+                            <td
+                              className="govuk-table__cell"
+                            >
+                              <div
+                                className="govuk-checkboxes"
+                              >
+                                <div
+                                  className="govuk-checkboxes__item"
+                                  key="case_uuid-abcstage_uuid-444"
+                                >
+                                  <input
+                                    checked={false}
+                                    className="govuk-checkboxes__input"
+                                    id="selected_cases_case_uuid-abc"
+                                    name="selected_cases[]"
+                                    onChange={[Function]}
+                                    type="checkbox"
+                                    value="case_uuid-abc:stage_uuid-444"
+                                  />
+                                  <label
+                                    className="govuk-label govuk-checkboxes__label"
+                                    htmlFor="selected_cases_case_uuid-abc"
+                                  />
+                                </div>
+                              </div>
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-444caseReference"
+                            >
+                              <Link
+                                className="govuk-link govuk-!-margin-right-3"
+                                to="/case/case_uuid-abc/stage/stage_uuid-444"
+                              >
+                                <LinkAnchor
+                                  className="govuk-link govuk-!-margin-right-3"
+                                  href="/case/case_uuid-abc/stage/stage_uuid-444"
+                                  navigate={[Function]}
+                                >
+                                  <a
+                                    className="govuk-link govuk-!-margin-right-3"
+                                    href="/case/case_uuid-abc/stage/stage_uuid-444"
+                                    onClick={[Function]}
+                                  >
+                                    case3
+                                  </a>
+                                </LinkAnchor>
+                              </Link>
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-444fullName"
+                            >
+                              Pat Brown
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-444stageTypeDisplay"
+                            >
+                              Stage C
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-444assignedUserDisplay"
+                            >
+                              User3
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-444assignedTeamDisplay"
+                            >
+                              team3
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-444created"
+                            />
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-444isActive"
+                            />
+                          </tr>
                         </tbody>
                       </table>
                       <span
                         aria-live="polite"
                         className="govuk-hint"
                       >
-                        2
+                        3
                          Items
                       </span>
                     </div>
