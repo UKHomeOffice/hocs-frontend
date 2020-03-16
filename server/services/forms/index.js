@@ -36,7 +36,7 @@ const formDefinitions = {
                     }
                 },
                 WCS: {
-                    builder: formRepository.addDocument,
+                    builder: formRepository.confirmCreateWcs,
                     action: CREATE_AND_ALLOCATE_CASE
                 }
             }
