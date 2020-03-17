@@ -1,5 +1,6 @@
 module.exports = {
     caseCreate: require('./case-create.js'),
+    confirmCreateWcs: require('./confirm-create-wcs.js'),
     addCorrespondent: require('./add-correspondent.js'),
     addMember: require('./add-member.js'),
     addCorrespondentDetails: require('./add-correspondent-details.js'),
