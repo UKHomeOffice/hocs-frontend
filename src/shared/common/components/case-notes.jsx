@@ -40,11 +40,11 @@ AuditEvent.propTypes = {
     title: PropTypes.string,
 };
 
-const TimelineItem = ({ type, body, title }, i) => {
+const TimelineItem = ({ type, body, title, timelineItemUUID }, i) => {
     const isCaseNote = ['MANUAL', 'ALLOCATE', 'REJECT'].includes(type);
     return (
         body && <li key={i} className={classnames({ 'case-note': isCaseNote })}>
-            {isCaseNote ? <CaseNote {...body} title={title} /> : <AuditEvent {...body} title={title} />}
+            {isCaseNote ? <CaseNote {...body} title={title} timelineItemUUID={timelineItemUUID} /> : <AuditEvent {...body} title={title} />}
         </li>
     );
 };

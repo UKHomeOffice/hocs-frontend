@@ -1,45 +1,55 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-// import axios from 'axios';
-// import classnames from 'classnames';
-// import { ApplicationConsumer } from '../../contexts/application.jsx';
-// import {
-//     updateApiStatus,
-//     unsetCaseNotes,
-//     clearApiStatus
-// } from '../../contexts/actions/index.jsx';
-// import status from '../../helpers/api-status.js';
+import axios from 'axios';
+
+import {
+    updateApiStatus,
+    clearApiStatus
+} from '../../contexts/actions/index.jsx';
+import status from '../../helpers/api-status.js';
 import { Context } from '../../contexts/application.jsx';
 import Submit from '../forms/submit.jsx';
 
-
-
-// const onSubmit = (e) => {
-//     e.preventDefault();
-//     const { page, track } = this.props;
-//     const { caseNote } = this.state;
-//     // TODO: Remove
-//     /* eslint-disable-next-line no-undef */
-//     const formData = new FormData();
-//     formData.append('caseNote', caseNote);
-//     axios.post(`/api/case/${page.params.caseId}/note`, formData, { headers: { 'Content-Type': 'multipart/form-data' } })
-//         .then(response => {
-//             this.setState({ caseNote: '', submissionError: response.data.error });
-//             this.getCaseNotes();
-//         })
-//         .then(() => track('EVENT', { category: 'Case notes', action: 'Add' }))
-//         // TODO: Remove
-//         /* eslint-disable-next-line  no-console*/
-//         .catch(() => console.error('Failed to submit case note'));
-// }
-
-const CaseNote = ({ date, author, note, title }) => {
-    const { page } = React.useContext(Context);
+const CaseNote = ({ timelineItemUUID, date, author, note, title }) => {
+    const { dispatch, page, track } = React.useContext(Context);
     const [isEditing, setIsEditing] = React.useState(false);
     const [submissionError, setSubmissionError] = React.useState();
     const [caseNote, setCaseNote] = React.useState(note);
+
+    const onEditClick = React.useCallback(e => {
+        e.preventDefault();
+        setIsEditing(true);
+    });
+
+
+    const onSubmit = React.useCallback(e => {
+        e.preventDefault();
+
+        /* eslint-disable-next-line no-undef */
+        const formData = new FormData();
+        formData.append('caseNote', caseNote);
+        dispatch(updateApiStatus(status.REQUEST_CASE_NOTES))
+            .then(() => {
+                axios.put(`/api/case/${page.params.caseId}/note/${timelineItemUUID}`, formData, { headers: { 'Content-Type': 'multipart/form-data' } })
+                    .then(({ data: { error } = {} }) => {
+                        dispatch(updateApiStatus(status.UPDATE_CASE_NOTES_SUCCESS))
+                            .then(() => dispatch(clearApiStatus()))
+                            .then(() => {
+                                if (error) {
+                                    setSubmissionError(error);
+                                } else {
+                                    setIsEditing(false);
+                                }
+                            });
+                    })
+                    .then(() => track('EVENT', { category: 'Case notes', action: 'Add' }))
+                    .catch(() => dispatch(updateApiStatus(status.UPDATE_CASE_NOTE_FAILURE)));
+            });
+    }, [caseNote]);
+
     return isEditing ? <>
-        <form action={`/case/${page.params.caseId}/stage/${page.params.stageId}/note`} onSubmit={e => this.onSubmit(e)}>
+        <form id={`#edit-case-note${timelineItemUUID}`} action={`/case/${page.params.caseId}/note/${timelineItemUUID}`}
+            onSubmit={onSubmit}>
             <div className={`govuk-form-group${submissionError ? ' govuk-form-group--error' : ''}`}>
 
                 <label htmlFor={'case-note'} id={'case-note-label'} className='govuk-label govuk-label--s'>Case note</label>
@@ -51,8 +61,8 @@ const CaseNote = ({ date, author, note, title }) => {
                     name='case-note'
                     disabled={false}
                     rows={5}
-                    onBlur={e => this.setState({ caseNote: e.target.value })}
-                    onChange={e => this.setState({ caseNote: e.target.value })}
+                    onBlur={e => setCaseNote({ caseNote: e.target.value })}
+                    onChange={e => setCaseNote({ caseNote: e.target.value })}
                     value={caseNote}
                 />
             </div>
@@ -67,7 +77,7 @@ const CaseNote = ({ date, author, note, title }) => {
             <p>
                 {date && <span>{date}</span>}
                 {author && <span>{author}</span>}
-                {<span onClick={() => setIsEditing(true)}>Edit</span>}
+                {<span onClick={onEditClick}><a href={`#edit-case-note${timelineItemUUID}`}>Edit</a></span>}
             </p>
         </Fragment>;
 };
@@ -76,6 +86,7 @@ CaseNote.propTypes = {
     date: PropTypes.string,
     author: PropTypes.string,
     note: PropTypes.string,
+    timelineItemUUID: PropTypes.string,
     title: PropTypes.string,
 };
 
