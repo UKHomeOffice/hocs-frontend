@@ -14,7 +14,8 @@ const convertNote = fromStaticList => async ({ eventTime, type, userName: author
     };
     if (typeAdaptors[type]) {
         const { title, ...content } = await typeAdaptors[type](auditData, fromStaticList);
-        return { title, body: { author, ...content, date }, timelineItemUUID, type };
+        // todo: take correct modified fields once available
+        return { title, body: { author, ...content, date, modifiedBy: author, modifiedDate: date }, timelineItemUUID, type };
     }
     return { title: 'System event', body: { author, ...auditData, date }, timelineItemUUID, type };
 };

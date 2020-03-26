@@ -3,7 +3,7 @@ const { fileMiddleware } = require('../../middleware/file');
 const { processMiddleware } = require('../../middleware/process');
 const { validationMiddleware } = require('../../middleware/validation');
 const { stageApiResponseMiddleware, allocateCase, allocateCaseToTeamMember } = require('../../middleware/stage');
-const { caseSummaryMiddleware, caseSummaryApiResponseMiddleware, caseApiResponseMiddleware, createCaseNote } = require('../../middleware/case');
+const { caseSummaryMiddleware, caseSummaryApiResponseMiddleware, caseApiResponseMiddleware, createCaseNote, updateCaseNote } = require('../../middleware/case');
 const { getFormForCase, getFormForStage } = require('../../services/form');
 
 router.get('/:caseId/stage/:stageId/allocate', allocateCase);
@@ -30,6 +30,16 @@ router.post(['/:caseId/stage/:stageId', '/:caseId/stage/:stageId/allocate'],
 router.post('/:caseId/note',
     fileMiddleware.any(),
     createCaseNote,
+    (req, res) => {
+        res.json({
+            error: res.locals.error
+        });
+    }
+);
+
+router.put('/:caseId/note/:noteId',
+    fileMiddleware.any(),
+    updateCaseNote,
     (req, res) => {
         res.json({
             error: res.locals.error

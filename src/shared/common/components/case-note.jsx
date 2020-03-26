@@ -10,17 +10,25 @@ import status from '../../helpers/api-status.js';
 import { Context } from '../../contexts/application.jsx';
 import Submit from '../forms/submit.jsx';
 
-const CaseNote = ({ timelineItemUUID, date, author, note, title }) => {
+const CaseNote = ({ author, date, modifiedBy, modifiedDate, note, timelineItemUUID, title }) => {
     const { dispatch, page, track } = React.useContext(Context);
     const [isEditing, setIsEditing] = React.useState(false);
     const [submissionError, setSubmissionError] = React.useState();
     const [caseNote, setCaseNote] = React.useState(note);
 
+    const onCancelClick = React.useCallback(e => {
+        e.preventDefault();
+        setIsEditing(false);
+    }, []);
+
+    const onCaseNoteChange = React.useCallback(e => {
+        setCaseNote(e.target.value);
+    }, []);
+
     const onEditClick = React.useCallback(e => {
         e.preventDefault();
         setIsEditing(true);
-    });
-
+    }, []);
 
     const onSubmit = React.useCallback(e => {
         e.preventDefault();
@@ -52,7 +60,7 @@ const CaseNote = ({ timelineItemUUID, date, author, note, title }) => {
             onSubmit={onSubmit}>
             <div className={`govuk-form-group${submissionError ? ' govuk-form-group--error' : ''}`}>
 
-                <label htmlFor={'case-note'} id={'case-note-label'} className='govuk-label govuk-label--s'>Case note</label>
+                <label htmlFor={'case-note'} id={'case-note-label'} className='govuk-label govuk-label--s'>Case note {title}.</label>
 
                 {submissionError && <span id={'case-note-error'} className='govuk-error-message'>{submissionError}</span>}
 
@@ -61,12 +69,15 @@ const CaseNote = ({ timelineItemUUID, date, author, note, title }) => {
                     name='case-note'
                     disabled={false}
                     rows={5}
-                    onBlur={e => setCaseNote({ caseNote: e.target.value })}
-                    onChange={e => setCaseNote({ caseNote: e.target.value })}
+                    onBlur={onCaseNoteChange}
+                    onChange={onCaseNoteChange}
                     value={caseNote}
                 />
             </div>
-            <Submit label='Add' />
+            <div className="form-buttons">
+                <Submit label='Save' />
+                <a className="govuk-link" href="#" onClick={onCancelClick}>Cancel</a>
+            </div>
         </form>
     </> :
         <Fragment>
@@ -74,10 +85,13 @@ const CaseNote = ({ timelineItemUUID, date, author, note, title }) => {
                 <span className="case-note-number govuk-!-font-weight-bold">Case note {title}.</span>
                 {note.split(/\n/).map((line, i) => (<Fragment key={i}>{line}<br /></Fragment>))}
             </p>}
+            {modifiedBy && <p>
+                <span>{`Edited on ${modifiedDate} - ${modifiedBy}`}</span>
+            </p>}
             <p>
                 {date && <span>{date}</span>}
                 {author && <span>{author}</span>}
-                {<span onClick={onEditClick}><a href={`#edit-case-note${timelineItemUUID}`}>Edit</a></span>}
+                {<span className="edit-link" onClick={onEditClick}><a href={`#edit-case-note${timelineItemUUID}`}>Edit</a></span>}
             </p>
         </Fragment>;
 };
@@ -85,6 +99,8 @@ const CaseNote = ({ timelineItemUUID, date, author, note, title }) => {
 CaseNote.propTypes = {
     date: PropTypes.string,
     author: PropTypes.string,
+    modifiedBy: PropTypes.string,
+    modifiedDate: PropTypes.string,
     note: PropTypes.string,
     timelineItemUUID: PropTypes.string,
     title: PropTypes.string,
