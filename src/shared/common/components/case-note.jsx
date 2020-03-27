@@ -56,7 +56,7 @@ const CaseNote = ({ author, date, modifiedBy, modifiedDate, note, timelineItemUU
             });
     }, [caseNote]);
 
-    return isEditing ? <>
+    return isEditing ? <Fragment>
         <form id={`#edit-case-note${timelineItemUUID}`} action={`/case/${page.params.caseId}/note/${timelineItemUUID}`}
             onSubmit={onSubmit}>
             <div className={`govuk-form-group${submissionError ? ' govuk-form-group--error' : ''}`}>
@@ -80,11 +80,11 @@ const CaseNote = ({ author, date, modifiedBy, modifiedDate, note, timelineItemUU
                 <a className="govuk-link" href="#" onClick={onCancelClick}>Cancel</a>
             </div>
         </form>
-    </> :
+    </Fragment> :
         <Fragment>
-            {note && <p>
+            {caseNote && <p>
                 <span className="case-note-number govuk-!-font-weight-bold">Case note {title}.</span>
-                {note.split(/\n/).map((line, i) => (<Fragment key={i}>{line}<br /></Fragment>))}
+                {caseNote.split(/\n/).map((line, i) => (<Fragment key={i}>{line}<br /></Fragment>))}
             </p>}
             {modifiedBy && <p>
                 <span>{`Edited on ${modifiedDate} - ${modifiedBy}`}</span>

@@ -59,7 +59,8 @@ async function updateCaseNote({ body: { caseNote }, params: { caseId, noteId }, 
             return next();
         }
         await caseworkService.put(`/case/${caseId}/note/${noteId}`, {
-            text: caseNote
+            text: caseNote,
+            type: 'MANUAL'
         }, { headers: User.createHeaders(user) });
     } catch (error) {
         return next(new Error(`Failed to update case note ${noteId} on case ${caseId} `));
