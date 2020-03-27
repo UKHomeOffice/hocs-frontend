@@ -76,7 +76,7 @@ const reducer = (state, action) => {
 export class ApplicationProvider extends Component {
     constructor(props) {
         super(props);
-        const { csrf, ...config } = props.config;
+        const { csrf, roles, ...config } = props.config;
 
         if (config && config.analytics &&
             ReactGA.initialize(config.analytics.tracker, { titleCase: true, gaOptions: { userId: config.analytics.userId } })) {
@@ -99,7 +99,10 @@ export class ApplicationProvider extends Component {
                     return Promise.reject(error);
                 }
             },
-            track: this.track.bind(this)
+            track: this.track.bind(this),
+            hasRole: (role) => {
+                return roles.includes(role);
+            }
         };
     }
 

@@ -132,6 +132,7 @@ exports[`Session timer component should render with default props 1`] = `
     Object {
       "apiStatus": null,
       "dispatch": [Function],
+      "hasRole": [Function],
       "layout": Object {
         "countDownForSeconds": 5,
         "defaultTimeoutSeconds": 10,

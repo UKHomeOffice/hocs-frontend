@@ -2,6 +2,7 @@ const router = require('express').Router();
 const { fileMiddleware } = require('../../middleware/file');
 const { processMiddleware } = require('../../middleware/process');
 const { validationMiddleware } = require('../../middleware/validation');
+const { protect } = require('../../middleware/auth');
 const { stageApiResponseMiddleware, allocateCase, allocateCaseToTeamMember } = require('../../middleware/stage');
 const { caseSummaryMiddleware, caseSummaryApiResponseMiddleware, caseApiResponseMiddleware, createCaseNote, updateCaseNote } = require('../../middleware/case');
 const { getFormForCase, getFormForStage } = require('../../services/form');
@@ -38,6 +39,7 @@ router.post('/:caseId/note',
 );
 
 router.put('/:caseId/note/:noteId',
+    protect('EDIT_CASE_NOTE'),
     fileMiddleware.any(),
     updateCaseNote,
     (req, res) => {

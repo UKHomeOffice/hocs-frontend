@@ -62,7 +62,7 @@ async function updateCaseNote({ body: { caseNote }, params: { caseId, noteId }, 
             text: caseNote
         }, { headers: User.createHeaders(user) });
     } catch (error) {
-        next(new Error(`Failed to update case note ${noteId} on case ${caseId} `));
+        return next(new Error(`Failed to update case note ${noteId} on case ${caseId} `));
     }
     next();
 }

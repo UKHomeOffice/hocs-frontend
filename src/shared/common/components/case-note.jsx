@@ -11,11 +11,12 @@ import { Context } from '../../contexts/application.jsx';
 import Submit from '../forms/submit.jsx';
 
 const CaseNote = ({ author, date, modifiedBy, modifiedDate, note, timelineItemUUID, title }) => {
-    const { dispatch, page, track } = React.useContext(Context);
+    const { dispatch, hasRole, page, track } = React.useContext(Context);
     const [isEditing, setIsEditing] = React.useState(false);
     const [submissionError, setSubmissionError] = React.useState();
     const [caseNote, setCaseNote] = React.useState(note);
 
+    const canEdit = hasRole('EDIT_CASE_NOTE');
     const onCancelClick = React.useCallback(e => {
         e.preventDefault();
         setIsEditing(false);
@@ -91,7 +92,7 @@ const CaseNote = ({ author, date, modifiedBy, modifiedDate, note, timelineItemUU
             <p>
                 {date && <span>{date}</span>}
                 {author && <span>{author}</span>}
-                {<span className="edit-link" onClick={onEditClick}><a href={`#edit-case-note${timelineItemUUID}`}>Edit</a></span>}
+                {canEdit && <span className="edit-link" onClick={onEditClick}><a href={`#edit-case-note${timelineItemUUID}`}>Edit</a></span>}
             </p>
         </Fragment>;
 };
