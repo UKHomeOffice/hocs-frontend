@@ -1,8 +1,10 @@
-const convertNote = fromStaticList => async ({ eventTime, type, userName: authorId, body = {}, noteCount, timelineItemUUID }) => {
+const convertNote = fromStaticList => async ({ editorName, editedTime, eventTime, type, userName: authorId, body = {}, noteCount, timelineItemUUID }) => {
     const { caseNote, allocatedToUUID: allocationId, stage: stageId, documentTitle: document, topicName: topic, fullname: correspondent } = body;
 
     const date = formatDate(eventTime);
+    const modifiedDate = formatDate(editedTime);
     const author = await fromStaticList('S_USERS', authorId);
+    const modifiedBy = await fromStaticList('S_USERS', editorName);
     const auditData = {
         allocationId,
         note: caseNote,
@@ -15,7 +17,7 @@ const convertNote = fromStaticList => async ({ eventTime, type, userName: author
     if (typeAdaptors[type]) {
         const { title, ...content } = await typeAdaptors[type](auditData, fromStaticList);
         // todo: take correct modified fields once available
-        return { title, body: { author, ...content, date, modifiedBy: author, modifiedDate: date }, timelineItemUUID, type };
+        return { title, body: { author, ...content, date, modifiedBy, modifiedDate }, timelineItemUUID, type };
     }
     return { title: 'System event', body: { author, ...auditData, date }, timelineItemUUID, type };
 };

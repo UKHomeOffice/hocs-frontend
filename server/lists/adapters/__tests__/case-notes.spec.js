@@ -26,7 +26,7 @@ describe('Case Notes Adapter', () => {
 
     it('should transform case-note data and sort by event time', async () => {
         const mockData = [
-            { eventTime: '2019-01-01 12:00:00', type: 'MANUAL', userName: 'User A', body: { caseNote: 'A test case note', userUUID: 1, teamUUID: 1, stage: 1 }, timelineItemUUID: '__timelineItemUUID__' },
+            { editedTime: '2019-01-03 14:00:00.571 +000', editedName: 'User A', eventTime: '2019-01-01 12:00:00', type: 'MANUAL', userName: 'User A', body: { caseNote: 'A test case note', userUUID: 1, teamUUID: 1, stage: 1 }, timelineItemUUID: '__timelineItemUUID__' },
             { eventTime: '2019-01-03 12:00:00', type: 'STAGE_ALLOCATED_TO_USER', userName: 'User A', body: { caseNote: 'A test case note', userUUID: 1, teamUUID: 1, stage: 1 }, timelineItemUUID: '__timelineItemUUID__' },
             { eventTime: '2019-01-05 12:00:01', type: 'STAGE_ALLOCATED_TO_TEAM', userName: 'User A', body: { caseNote: 'A test case note', userUUID: 1, teamUUID: 1, stage: 1 }, timelineItemUUID: '__timelineItemUUID__' },
             { eventTime: '2019-01-05 12:00:02', type: 'STAGE_CREATED', userName: 'User A', body: { caseNote: 'A test case note', userUUID: 1, teamUUID: 1, stage: 1 }, timelineItemUUID: '__timelineItemUUID__' },
