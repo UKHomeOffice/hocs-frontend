@@ -451,6 +451,23 @@ a.card__body {
         .case-note-number {
             margin-right: 0.5rem;
         }
+
+        .edit-link {
+            float: right;
+
+            &:before {
+                display: none;
+            }
+        }
+
+        .form-buttons {
+            align-items: baseline;
+            display: flex;
+
+            a {
+                margin-left: 1rem;
+            }
+        }
       }
 
       .timeline-reference {
