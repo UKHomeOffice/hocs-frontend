@@ -44,6 +44,7 @@ router.put('/:caseId/note/:noteId',
     updateCaseNote,
     (req, res) => {
         res.json({
+            caseNote: res.locals.caseNote,
             error: res.locals.error
         });
     }

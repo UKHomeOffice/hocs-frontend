@@ -58,10 +58,11 @@ async function updateCaseNote({ body: { caseNote }, params: { caseId, noteId }, 
             res.locals.error = 'Case note must not be blank';
             return next();
         }
-        await caseworkService.put(`/case/${caseId}/note/${noteId}`, {
+        const updated = await caseworkService.put(`/case/${caseId}/note/${noteId}`, {
             text: caseNote,
             type: 'MANUAL'
         }, { headers: User.createHeaders(user) });
+        res.locals.caseNote = updated.data;
     } catch (error) {
         return next(new Error(`Failed to update case note ${noteId} on case ${caseId} `));
     }
