@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { components } from 'react-select';
-import Select from 'react-select/lib/Async';
+import Select from 'react-select/async';
 import PropTypes from 'prop-types';
 
 class TypeAhead extends Component {
