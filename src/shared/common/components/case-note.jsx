@@ -10,43 +10,47 @@ import status from '../../helpers/api-status.js';
 import { Context } from '../../contexts/application.jsx';
 import Submit from '../forms/submit.jsx';
 
-const CaseNote = ({ author, date, modifiedBy, modifiedDate, note, timelineItemUUID, title }) => {
+const CaseNote = originalNote => {
     const { dispatch, hasRole, page, track } = React.useContext(Context);
     const [isEditing, setIsEditing] = React.useState(false);
     const [submissionError, setSubmissionError] = React.useState();
-    const [caseNote, setCaseNote] = React.useState(note);
+    const [caseNote, setCaseNote] = React.useState(originalNote);
+    const [preEditCaseNote, setPreEditCaseNote] = React.useState(originalNote);
 
     const canEdit = hasRole('EDIT_CASE_NOTE');
     const onCancelClick = React.useCallback(e => {
         e.preventDefault();
         setIsEditing(false);
-    }, []);
+        setCaseNote(preEditCaseNote);
+    }, [preEditCaseNote]);
 
     const onCaseNoteChange = React.useCallback(e => {
-        setCaseNote(e.target.value);
-    }, []);
+        setCaseNote({ ...caseNote, note: e.target.value });
+    }, [caseNote]);
 
     const onEditClick = React.useCallback(e => {
         e.preventDefault();
         setIsEditing(true);
-    }, []);
+        setPreEditCaseNote(caseNote);
+    }, [caseNote]);
 
     const onSubmit = React.useCallback(e => {
         e.preventDefault();
 
         /* eslint-disable-next-line no-undef */
         const formData = new FormData();
-        formData.append('caseNote', caseNote);
+        formData.append('caseNote', caseNote.note);
         dispatch(updateApiStatus(status.REQUEST_CASE_NOTES))
             .then(() => {
-                axios.put(`/api/case/${page.params.caseId}/note/${timelineItemUUID}`, formData, { headers: { 'Content-Type': 'multipart/form-data' } })
-                    .then(({ data: { error } = {} }) => {
+                axios.put(`/api/case/${page.params.caseId}/note/${caseNote.timelineItemUUID}`, formData, { headers: { 'Content-Type': 'multipart/form-data' } })
+                    .then(({ data: { caseNote: updatedCaseNote, error } = {} }) => {
                         dispatch(updateApiStatus(status.UPDATE_CASE_NOTES_SUCCESS))
                             .then(() => dispatch(clearApiStatus()))
                             .then(() => {
                                 if (error) {
                                     setSubmissionError(error);
                                 } else {
+                                    setCaseNote({ ...caseNote, ...updatedCaseNote });
                                     setIsEditing(false);
                                 }
                             });
@@ -57,11 +61,11 @@ const CaseNote = ({ author, date, modifiedBy, modifiedDate, note, timelineItemUU
     }, [caseNote]);
 
     return isEditing ? <Fragment>
-        <form id={`#edit-case-note${timelineItemUUID}`} action={`/case/${page.params.caseId}/note/${timelineItemUUID}`}
+        <form id={`#edit-case-note${caseNote.timelineItemUUID}`} action={`/case/${page.params.caseId}/note/${caseNote.timelineItemUUID}`}
             onSubmit={onSubmit}>
             <div className={`govuk-form-group${submissionError ? ' govuk-form-group--error' : ''}`}>
 
-                <label htmlFor={'case-note'} id={'case-note-label'} className='govuk-label govuk-label--s'>Case note {title}.</label>
+                <label htmlFor={'case-note'} id={'case-note-label'} className='govuk-label govuk-label--s'>Case note {caseNote.title}.</label>
 
                 {submissionError && <span id={'case-note-error'} className='govuk-error-message'>{submissionError}</span>}
 
@@ -72,7 +76,7 @@ const CaseNote = ({ author, date, modifiedBy, modifiedDate, note, timelineItemUU
                     rows={5}
                     onBlur={onCaseNoteChange}
                     onChange={onCaseNoteChange}
-                    value={caseNote}
+                    value={caseNote.note}
                 />
             </div>
             <div className="form-buttons">
@@ -83,16 +87,16 @@ const CaseNote = ({ author, date, modifiedBy, modifiedDate, note, timelineItemUU
     </Fragment> :
         <Fragment>
             {caseNote && <p>
-                <span className="case-note-number govuk-!-font-weight-bold">Case note {title}.</span>
-                {caseNote.split(/\n/).map((line, i) => (<Fragment key={i}>{line}<br /></Fragment>))}
+                <span className="case-note-number govuk-!-font-weight-bold">Case note {caseNote.title}.</span>
+                {caseNote.note.split(/\n/).map((line, i) => (<Fragment key={i}>{line}<br /></Fragment>))}
             </p>}
-            {modifiedBy && <p>
-                <span>{`Edited on ${modifiedDate} - ${modifiedBy}`}</span>
+            {caseNote.modifiedBy && <p>
+                <span>{`Edited on ${caseNote.modifiedDate} - ${caseNote.modifiedBy}`}</span>
             </p>}
             <p>
-                {date && <span>{date}</span>}
-                {author && <span>{author}</span>}
-                {canEdit && <span className="edit-link" onClick={onEditClick}><a href={`#edit-case-note${timelineItemUUID}`}>Edit</a></span>}
+                {caseNote.date && <span>{caseNote.date}</span>}
+                {caseNote.author && <span>{caseNote.author}</span>}
+                {canEdit && <span className="edit-link" onClick={onEditClick}><a href={`#edit-case-note${caseNote.timelineItemUUID}`}>Edit</a></span>}
             </p>
         </Fragment>;
 };
