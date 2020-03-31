@@ -40,11 +40,11 @@ AuditEvent.propTypes = {
     title: PropTypes.string,
 };
 
-const TimelineItem = ({ type, body, title, timelineItemUUID }) => {
+const TimelineItem = (refreshNotes) => ({ type, body, title, timelineItemUUID }) => {
     const isCaseNote = ['MANUAL', 'ALLOCATE', 'REJECT'].includes(type);
     return (
         body && <li key={timelineItemUUID} className={classnames({ 'case-note': isCaseNote })}>
-            {isCaseNote ? <CaseNote {...body} title={title} timelineItemUUID={timelineItemUUID} /> : <AuditEvent {...body} title={title} />}
+            {isCaseNote ? <CaseNote {...body} title={title} timelineItemUUID={timelineItemUUID} refreshNotes={refreshNotes} /> : <AuditEvent {...body} title={title} />}
         </li>
     );
 };
@@ -147,7 +147,7 @@ class Timeline extends Component {
                         </details>
                         <div className='timeline'>
                             <ul>
-                                {Array.isArray(caseNotes) && caseNotes.map(TimelineItem)}
+                                {Array.isArray(caseNotes) && caseNotes.map(TimelineItem(this.getCaseNotes.bind(this)))}
                             </ul>
                         </div>
                     </div>

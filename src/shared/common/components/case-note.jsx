@@ -10,7 +10,7 @@ import status from '../../helpers/api-status.js';
 import { Context } from '../../contexts/application.jsx';
 import Submit from '../forms/submit.jsx';
 
-const CaseNote = ({ author, date, modifiedBy, modifiedDate, note, timelineItemUUID, title }) => {
+const CaseNote = ({ author, date, modifiedBy, modifiedDate, note, refreshNotes, timelineItemUUID, title }) => {
     const { dispatch, hasRole, page, track } = React.useContext(Context);
     const [isEditing, setIsEditing] = React.useState(false);
     const [submissionError, setSubmissionError] = React.useState();
@@ -20,7 +20,8 @@ const CaseNote = ({ author, date, modifiedBy, modifiedDate, note, timelineItemUU
     const onCancelClick = React.useCallback(e => {
         e.preventDefault();
         setIsEditing(false);
-    }, []);
+        setCaseNote(note);
+    }, [note]);
 
     const onCaseNoteChange = React.useCallback(e => {
         setCaseNote(e.target.value);
@@ -48,6 +49,7 @@ const CaseNote = ({ author, date, modifiedBy, modifiedDate, note, timelineItemUU
                                     setSubmissionError(error);
                                 } else {
                                     setIsEditing(false);
+                                    refreshNotes();
                                 }
                             });
                     })
@@ -103,6 +105,7 @@ CaseNote.propTypes = {
     modifiedBy: PropTypes.string,
     modifiedDate: PropTypes.string,
     note: PropTypes.string,
+    refreshNotes: PropTypes.func,
     timelineItemUUID: PropTypes.string,
     title: PropTypes.string,
 };
