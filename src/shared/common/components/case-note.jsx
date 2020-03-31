@@ -10,19 +10,18 @@ import status from '../../helpers/api-status.js';
 import { Context } from '../../contexts/application.jsx';
 import Submit from '../forms/submit.jsx';
 
-const CaseNote = originalNote => {
+const CaseNote = ({ author, date, modifiedBy, modifiedDate, note, refreshNotes, timelineItemUUID, title }) => {
     const { dispatch, hasRole, page, track } = React.useContext(Context);
     const [isEditing, setIsEditing] = React.useState(false);
     const [submissionError, setSubmissionError] = React.useState();
-    const [caseNote, setCaseNote] = React.useState(originalNote);
-    const [preEditCaseNote, setPreEditCaseNote] = React.useState(originalNote);
+    const [caseNote, setCaseNote] = React.useState(note);
 
     const canEdit = hasRole('EDIT_CASE_NOTE');
     const onCancelClick = React.useCallback(e => {
         e.preventDefault();
         setIsEditing(false);
-        setCaseNote(preEditCaseNote);
-    }, [preEditCaseNote]);
+        setCaseNote(note);
+    }, [note]);
 
     const onCaseNoteChange = React.useCallback(e => {
         setCaseNote({ ...caseNote, note: e.target.value });
@@ -31,7 +30,6 @@ const CaseNote = originalNote => {
     const onEditClick = React.useCallback(e => {
         e.preventDefault();
         setIsEditing(true);
-        setPreEditCaseNote(caseNote);
     }, [caseNote]);
 
     const onSubmit = React.useCallback(e => {
@@ -39,10 +37,10 @@ const CaseNote = originalNote => {
 
         /* eslint-disable-next-line no-undef */
         const formData = new FormData();
-        formData.append('caseNote', caseNote.note);
+        formData.append('caseNote', caseNote);
         dispatch(updateApiStatus(status.REQUEST_CASE_NOTES))
             .then(() => {
-                axios.put(`/api/case/${page.params.caseId}/note/${caseNote.timelineItemUUID}`, formData, { headers: { 'Content-Type': 'multipart/form-data' } })
+                axios.put(`/api/case/${page.params.caseId}/note/${timelineItemUUID}`, formData, { headers: { 'Content-Type': 'multipart/form-data' } })
                     .then(({ data: { caseNote: updatedCaseNote, error } = {} }) => {
                         dispatch(updateApiStatus(status.UPDATE_CASE_NOTES_SUCCESS))
                             .then(() => dispatch(clearApiStatus()))
@@ -52,6 +50,7 @@ const CaseNote = originalNote => {
                                 } else {
                                     setCaseNote({ ...caseNote, ...updatedCaseNote });
                                     setIsEditing(false);
+                                    refreshNotes();
                                 }
                             });
                     })
@@ -61,11 +60,11 @@ const CaseNote = originalNote => {
     }, [caseNote]);
 
     return isEditing ? <Fragment>
-        <form id={`#edit-case-note${caseNote.timelineItemUUID}`} action={`/case/${page.params.caseId}/note/${caseNote.timelineItemUUID}`}
+        <form id={`#edit-case-note${timelineItemUUID}`} action={`/case/${page.params.caseId}/note/${timelineItemUUID}`}
             onSubmit={onSubmit}>
             <div className={`govuk-form-group${submissionError ? ' govuk-form-group--error' : ''}`}>
 
-                <label htmlFor={'case-note'} id={'case-note-label'} className='govuk-label govuk-label--s'>Case note {caseNote.title}.</label>
+                <label htmlFor={'case-note'} id={'case-note-label'} className='govuk-label govuk-label--s'>Case note {title}.</label>
 
                 {submissionError && <span id={'case-note-error'} className='govuk-error-message'>{submissionError}</span>}
 
@@ -76,7 +75,7 @@ const CaseNote = originalNote => {
                     rows={5}
                     onBlur={onCaseNoteChange}
                     onChange={onCaseNoteChange}
-                    value={caseNote.note}
+                    value={note}
                 />
             </div>
             <div className="form-buttons">
@@ -87,16 +86,16 @@ const CaseNote = originalNote => {
     </Fragment> :
         <Fragment>
             {caseNote && <p>
-                <span className="case-note-number govuk-!-font-weight-bold">Case note {caseNote.title}.</span>
-                {caseNote.note.split(/\n/).map((line, i) => (<Fragment key={i}>{line}<br /></Fragment>))}
+                <span className="case-note-number govuk-!-font-weight-bold">Case note {title}.</span>
+                {note.split(/\n/).map((line, i) => (<Fragment key={i}>{line}<br /></Fragment>))}
             </p>}
-            {caseNote.modifiedBy && <p>
-                <span>{`Edited on ${caseNote.modifiedDate} - ${caseNote.modifiedBy}`}</span>
+            {modifiedBy && <p>
+                <span>{`Edited on ${modifiedDate} - ${modifiedBy}`}</span>
             </p>}
             <p>
-                {caseNote.date && <span>{caseNote.date}</span>}
-                {caseNote.author && <span>{caseNote.author}</span>}
-                {canEdit && <span className="edit-link" onClick={onEditClick}><a href={`#edit-case-note${caseNote.timelineItemUUID}`}>Edit</a></span>}
+                {date && <span>{date}</span>}
+                {author && <span>{author}</span>}
+                {canEdit && <span className="edit-link" onClick={onEditClick}><a href={`#edit-case-note${timelineItemUUID}`}>Edit</a></span>}
             </p>
         </Fragment>;
 };
@@ -107,6 +106,7 @@ CaseNote.propTypes = {
     modifiedBy: PropTypes.string,
     modifiedDate: PropTypes.string,
     note: PropTypes.string,
+    refreshNotes: PropTypes.func,
     timelineItemUUID: PropTypes.string,
     title: PropTypes.string,
 };

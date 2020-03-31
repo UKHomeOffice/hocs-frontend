@@ -66,7 +66,7 @@ async function updateCaseNote({ body: { caseNote }, params: { caseId, noteId }, 
     } catch (error) {
         return next(new Error(`Failed to update case note ${noteId} on case ${caseId} `));
     }
-    next();
+    return next();
 }
 
 function returnToCase(req, res) {
