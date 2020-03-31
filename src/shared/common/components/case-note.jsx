@@ -24,13 +24,13 @@ const CaseNote = ({ author, date, modifiedBy, modifiedDate, note, refreshNotes, 
     }, [note]);
 
     const onCaseNoteChange = React.useCallback(e => {
-        setCaseNote(e.target.value);
-    }, []);
+        setCaseNote({ ...caseNote, note: e.target.value });
+    }, [caseNote]);
 
     const onEditClick = React.useCallback(e => {
         e.preventDefault();
         setIsEditing(true);
-    }, []);
+    }, [caseNote]);
 
     const onSubmit = React.useCallback(e => {
         e.preventDefault();
@@ -41,13 +41,14 @@ const CaseNote = ({ author, date, modifiedBy, modifiedDate, note, refreshNotes, 
         dispatch(updateApiStatus(status.REQUEST_CASE_NOTES))
             .then(() => {
                 axios.put(`/api/case/${page.params.caseId}/note/${timelineItemUUID}`, formData, { headers: { 'Content-Type': 'multipart/form-data' } })
-                    .then(({ data: { error } = {} }) => {
+                    .then(({ data: { caseNote: updatedCaseNote, error } = {} }) => {
                         dispatch(updateApiStatus(status.UPDATE_CASE_NOTES_SUCCESS))
                             .then(() => dispatch(clearApiStatus()))
                             .then(() => {
                                 if (error) {
                                     setSubmissionError(error);
                                 } else {
+                                    setCaseNote({ ...caseNote, ...updatedCaseNote });
                                     setIsEditing(false);
                                     refreshNotes();
                                 }
@@ -74,7 +75,7 @@ const CaseNote = ({ author, date, modifiedBy, modifiedDate, note, refreshNotes, 
                     rows={5}
                     onBlur={onCaseNoteChange}
                     onChange={onCaseNoteChange}
-                    value={caseNote}
+                    value={note}
                 />
             </div>
             <div className="form-buttons">
@@ -86,7 +87,7 @@ const CaseNote = ({ author, date, modifiedBy, modifiedDate, note, refreshNotes, 
         <Fragment>
             {caseNote && <p>
                 <span className="case-note-number govuk-!-font-weight-bold">Case note {title}.</span>
-                {caseNote.split(/\n/).map((line, i) => (<Fragment key={i}>{line}<br /></Fragment>))}
+                {note.split(/\n/).map((line, i) => (<Fragment key={i}>{line}<br /></Fragment>))}
             </p>}
             {modifiedBy && <p>
                 <span>{`Edited on ${modifiedDate} - ${modifiedBy}`}</span>
