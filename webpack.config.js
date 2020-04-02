@@ -153,6 +153,9 @@ const serverConfig = {
             parallel: true
         })
     ],
+    resolve: {
+        aliasFields: []
+    },
 };
 
 
