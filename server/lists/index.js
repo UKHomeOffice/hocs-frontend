@@ -149,8 +149,8 @@ module.exports = {
             adapter: caseCorrespondentAdapter
         },
         CORRESPONDENT_TYPES: {
-            client: 'INFO',
-            endpoint: '/correspondentType',
+            client: 'CASEWORK',
+            endpoint: '/case/${caseId}/correspondentType',
             adapter: correspondentTypeAdapter
         },
         TOPICS_USER: {
