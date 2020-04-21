@@ -10,26 +10,7 @@ import {
 } from '../../contexts/actions/index.jsx';
 import status from '../../helpers/api-status.js';
 import Submit from '../forms/submit.jsx';
-
-const CaseNote = ({ date, author, note, title }) => (
-    <Fragment>
-        {note && <p>
-            <span className="case-note-number govuk-!-font-weight-bold">Case note {title}.</span>
-            {note.split(/\n/).map((line, i) => (<Fragment key={i}>{line}<br /></Fragment>))}
-        </p>}
-        <p>
-            {date && <span>{date}</span>}
-            {author && <span>{author}</span>}
-        </p>
-    </Fragment>
-);
-
-CaseNote.propTypes = {
-    date: PropTypes.string,
-    author: PropTypes.string,
-    note: PropTypes.string,
-    title: PropTypes.title,
-};
+import CaseNote from './case-note.jsx';
 
 const AuditEvent = ({ date, author, user, team, stage, document, topic, correspondent, title }) => (
     <Fragment>
@@ -59,11 +40,11 @@ AuditEvent.propTypes = {
     title: PropTypes.string,
 };
 
-const TimelineItem = ({ type, body, title }, i) => {
+const TimelineItem = (refreshNotes) => ({ type, body, title, timelineItemUUID }) => {
     const isCaseNote = ['MANUAL', 'ALLOCATE', 'REJECT'].includes(type);
     return (
-        body && <li key={i} className={classnames({ 'case-note': isCaseNote })}>
-            {isCaseNote ? <CaseNote {...body} title={title} /> : <AuditEvent {...body} title={title} />}
+        body && <li key={timelineItemUUID} className={classnames({ 'case-note': isCaseNote })}>
+            {isCaseNote ? <CaseNote {...body} title={title} timelineItemUUID={timelineItemUUID} refreshNotes={refreshNotes} /> : <AuditEvent {...body} title={title} />}
         </li>
     );
 };
@@ -166,7 +147,7 @@ class Timeline extends Component {
                         </details>
                         <div className='timeline'>
                             <ul>
-                                {Array.isArray(caseNotes) && caseNotes.map(TimelineItem)}
+                                {Array.isArray(caseNotes) && caseNotes.map(TimelineItem(this.getCaseNotes.bind(this)))}
                             </ul>
                         </div>
                     </div>

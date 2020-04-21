@@ -17,7 +17,7 @@ async function renderMiddleware(req, res, next) {
         return next(new Error('Failed to retrieve configuration from server'));
     }
 
-    const { form, data } = req;
+    const { form, data, user: { roles } } = req;
     const config = {
         ...res.locals,
         ...req.query,
@@ -25,7 +25,8 @@ async function renderMiddleware(req, res, next) {
         form,
         layout: layoutConfig,
         page: { url: req.baseUrl, params: req.params },
-        csrf: req.csrfToken()
+        csrf: req.csrfToken(),
+        roles
     };
 
     const status = res.locals.error ? res.locals.error.status : 200;

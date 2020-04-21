@@ -28,6 +28,8 @@ const status = {
     REQUEST_DASHBOARD_DATA: { display: 'Requesting dashboard', level: 1, type: 'OK', timeoutPeriod: timeout.STANDARD },
     REQUEST_DASHBOARD_DATA_SUCCESS: { display: 'Dashboard data received', level: 3, type: 'OK', timeoutPeriod: timeout.STANDARD },
     REQUEST_DASHBOARD_DATA_FAILURE: { display: 'Unable to fetch dashboard', level: 0, type: 'ERROR', timeoutPeriod: timeout.ERROR },
+    UPDATE_CASE_NOTES_SUCCESS: { display: 'Case note updated', level: 3, type: 'OK', timeoutPeriod: timeout.STANDARD },
+    UPDATE_CASE_NOTE_FAILURE: { display: 'Unable to update case note', level: 0, type: 'ERROR', timeoutPeriod: timeout.ERROR },
     UPDATE_DASHBOARD_DATA_SUCCESS: { display: 'Updating dashboard', level: 3, type: 'OK', timeoutPeriod: timeout.STANDARD },
     UPDATE_DASHBOARD_DATA_FAILURE: { display: 'Failed to update dashboard', level: 0, type: 'ERROR', timeoutPeriod: timeout.ERROR },
     REQUEST_WORKSTACK_DATA: { display: 'Requesting workstack', level: 1, type: 'OK', timeoutPeriod: timeout.STANDARD },

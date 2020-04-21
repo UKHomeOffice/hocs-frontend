@@ -52,6 +52,23 @@ async function createCaseNote(req, res, next) {
     next();
 }
 
+async function updateCaseNote({ body: { caseNote }, params: { caseId, noteId }, user }, res, next) {
+    try {
+        if (!caseNote) {
+            res.locals.error = 'Case note must not be blank';
+            return next();
+        }
+        const updated = await caseworkService.put(`/case/${caseId}/note/${noteId}`, {
+            text: caseNote,
+            type: 'MANUAL'
+        }, { headers: User.createHeaders(user) });
+        res.locals.caseNote = updated.data;
+    } catch (error) {
+        return next(new Error(`Failed to update case note ${noteId} on case ${caseId} `));
+    }
+    return next();
+}
+
 function returnToCase(req, res) {
     res.redirect(`/case/${req.params.caseId}/stage/${req.params.stageId}`);
 }
@@ -62,5 +79,6 @@ module.exports = {
     caseSummaryMiddleware,
     caseSummaryApiResponseMiddleware,
     createCaseNote,
-    returnToCase
+    returnToCase,
+    updateCaseNote
 };
