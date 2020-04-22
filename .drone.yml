@@ -54,7 +54,7 @@ pipeline:
         event: [push, deployment, tag]
   
     deploy-to-cs-dev-from-build-number:
-      image: quay.io/ukhomeofficedigital/kd:v1.12.2
+      image: quay.io/ukhomeofficedigital/kd:v1.16.0
       environment:
         - DOMAIN=cs
         - KUBE_NAMESPACE=cs-dev
@@ -71,7 +71,7 @@ pipeline:
         event: [push, tag]
 
     deploy-to-wcs-dev-from-build-number:
-      image: quay.io/ukhomeofficedigital/kd:v1.12.2
+      image: quay.io/ukhomeofficedigital/kd:v1.16.0
       environment:
         - DOMAIN=wcs
         - KUBE_NAMESPACE=wcs-dev
@@ -88,7 +88,7 @@ pipeline:
         event: [push, tag]
   
     deployment:
-      image: quay.io/ukhomeofficedigital/kd:v1.12.2
+      image: quay.io/ukhomeofficedigital/kd:v1.16.0
       environment:
         - ENVIRONMENT=${DRONE_DEPLOY_TO}
         - KUBE_SERVER=https://kube-api-notprod.notprod.acp.homeoffice.gov.uk
@@ -104,7 +104,7 @@ pipeline:
         environment: [dev, demo]
   
     deploy-to-qa:
-      image: quay.io/ukhomeofficedigital/kd:v1.12.1
+      image: quay.io/ukhomeofficedigital/kd:v1.16.0
       environment:
         - ENVIRONMENT=qa
         - KUBE_SERVER=https://kube-api-notprod.notprod.acp.homeoffice.gov.uk
@@ -121,7 +121,7 @@ pipeline:
         environment: qa
   
     deploy-to-prod:
-      image: quay.io/ukhomeofficedigital/kd:v1.12.2
+      image: quay.io/ukhomeofficedigital/kd:v1.16.0
       environment:
         - ENVIRONMENT=prod
         - KUBE_SERVER=https://kube-api-prod.prod.acp.homeoffice.gov.uk
@@ -134,6 +134,5 @@ pipeline:
       when:
         event: deployment
         environment: prod
-  
   
   
