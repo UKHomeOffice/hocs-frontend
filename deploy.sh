@@ -69,4 +69,5 @@ kd --insecure-skip-tls-verify \
     -f converter-configmap.yaml \
     -f configmap.yaml \
     -f deployment.yaml \
-    -f service.yaml
+    -f service.yaml \
+    -f autoscale.yaml

@@ -47,6 +47,14 @@ spec:
           - name: bundle
             mountPath: /etc/ssl/certs
             readOnly: true
+        resources:
+          limits:
+            memory: 50Mi
+            cpu: 500m
+          requests:
+            memory: 15Mi
+            cpu: 300m
+
       - name: proxy
         image: quay.io/ukhomeofficedigital/nginx-proxy-govuk:v3.4.12
         imagePullPolicy: Always
@@ -56,13 +64,6 @@ spec:
             drop:
              - SETUID
              - SETGID
-        resources:
-          limits:
-            memory: 512Mi
-            cpu: 250m
-          requests:
-            memory: 256Mi
-            cpu: 150m
         env:
           - name: PROXY_SERVICE_HOST_1
             value: '127.0.0.1'
@@ -97,18 +98,26 @@ spec:
         ports:
           - name: https
             containerPort: 10443
+        resources:
+          limits:
+            memory: 16Mi
+            cpu: 200m
+          requests:
+            memory: 4Mi
+            cpu: 100m
+
       - name: keycloak-proxy-web
         image: quay.io/keycloak/keycloak-gatekeeper:8.0.2
         imagePullPolicy: Always
         securityContext:
           runAsNonRoot: true
         resources:
-         limits:
-          memory: "128Mi"
-          cpu: 100m
-         requests:
-          memory: "64Mi"
-          cpu: 50m
+          limits:
+            memory: 16Mi
+            cpu: 200m
+          requests:
+            memory: 8Mi
+            cpu: 100m
         env:
           - name: ENCRYPTION_KEY
             valueFrom:
@@ -147,18 +156,19 @@ spec:
           - mountPath: /etc/secrets
             name: frontend-keycloak-secret
             readOnly: true
+
       - name: keycloak-proxy-api
         image: quay.io/keycloak/keycloak-gatekeeper:8.0.2
         imagePullPolicy: Always
         securityContext:
           runAsNonRoot: true
         resources:
-         limits:
-          memory: "128Mi"
-          cpu: 100m
-         requests:
-          memory: "64Mi"
-          cpu: 50m
+          limits:
+            memory: 16Mi
+            cpu: 200m
+          requests:
+            memory: 8Mi
+            cpu: 100m
         env:
           - name: ENCRYPTION_KEY
             valueFrom:
@@ -195,6 +205,7 @@ spec:
           - mountPath: /etc/secrets
             name: frontend-keycloak-secret
             readOnly: true
+
       - name: hocs-frontend
         image: quay.io/ukhomeofficedigital/hocs-frontend:{{.VERSION}}
         imagePullPolicy: Always
@@ -297,10 +308,10 @@ spec:
         resources:
           limits:
             cpu: 450m
-            memory: 512Mi
-          requests:
-            cpu: 100m
             memory: 128Mi
+          requests:
+            cpu: 200m
+            memory: 80Mi
         ports:
           - name: http
             containerPort: 8080
