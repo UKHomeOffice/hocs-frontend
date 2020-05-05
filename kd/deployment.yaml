@@ -49,10 +49,10 @@ spec:
             readOnly: true
         resources:
           limits:
-            memory: 50Mi
-            cpu: 500m
+            memory: 64Mi
+            cpu: 900m
           requests:
-            memory: 15Mi
+            memory: 16Mi
             cpu: 300m
 
       - name: proxy
@@ -100,8 +100,8 @@ spec:
             containerPort: 10443
         resources:
           limits:
-            memory: 16Mi
-            cpu: 200m
+            memory: 32Mi
+            cpu: 400m
           requests:
             memory: 4Mi
             cpu: 100m
@@ -113,8 +113,8 @@ spec:
           runAsNonRoot: true
         resources:
           limits:
-            memory: 16Mi
-            cpu: 200m
+            memory: 32Mi
+            cpu: 400m
           requests:
             memory: 8Mi
             cpu: 100m
@@ -164,8 +164,8 @@ spec:
           runAsNonRoot: true
         resources:
           limits:
-            memory: 16Mi
-            cpu: 200m
+            memory: 32Mi
+            cpu: 400m
           requests:
             memory: 8Mi
             cpu: 100m
@@ -307,8 +307,8 @@ spec:
             value: '60'
         resources:
           limits:
-            cpu: 450m
-            memory: 128Mi
+            cpu: 900m
+            memory: 256Mi
           requests:
             cpu: 200m
             memory: 80Mi
