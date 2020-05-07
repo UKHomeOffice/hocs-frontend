@@ -18,15 +18,22 @@ const mockFromStaticList = jest.fn((list) => {
 });
 
 const mockConfiguration = {
-    workstackColumns: [],
+    workstackTypeColumns: [
+        { workstackType: 'DEFAULT', workstackColumns: [] },
+        { workstackType: 'WCS', workstackColumns: [] }
+    ],
     deadlinesEnabled: true
 };
 
 const mockLogger = {
-    debug: () => { },
-    info: () => { },
-    warn: () => { },
-    error: () => { }
+    debug: () => {
+    },
+    info: () => {
+    },
+    warn: () => {
+    },
+    error: () => {
+    }
 };
 
 describe('Dashboard Adapter', () => {
@@ -35,28 +42,28 @@ describe('Dashboard Adapter', () => {
             stages: [
                 {
                     teamUUID: 1,
-                    caseType: 'A',
+                    caseType: 'DEFAULT',
                     stageType: 'A',
                     userUUID: 1,
                     deadline: '1900-01-01'
                 },
                 {
                     teamUUID: 1,
-                    caseType: 'A',
+                    caseType: 'DEFAULT',
                     stageType: 'A',
                     userUUID: null,
                     deadline: '1900-01-02'
                 },
                 {
                     teamUUID: 1,
-                    caseType: 'A',
+                    caseType: 'DEFAULT',
                     stageType: 'A',
                     userUUID: 2,
                     deadline: '2200-01-03'
                 },
                 {
                     teamUUID: 2,
-                    caseType: 'B',
+                    caseType: 'DEFAULT',
                     stageType: 'A',
                     userUUID: null,
                     deadline: '2200-04-01'
@@ -64,7 +71,12 @@ describe('Dashboard Adapter', () => {
             ]
         };
 
-        const result = await dashboardAdapter(mockData, { user: mockUser, fromStaticList: mockFromStaticList, logger: mockLogger, configuration: mockConfiguration });
+        const result = await dashboardAdapter(mockData, {
+            user: mockUser,
+            fromStaticList: mockFromStaticList,
+            logger: mockLogger,
+            configuration: mockConfiguration
+        });
         expect(result).toMatchSnapshot();
     });
 
@@ -73,28 +85,28 @@ describe('Dashboard Adapter', () => {
             stages: [
                 {
                     teamUUID: 1,
-                    caseType: 'A',
+                    caseType: 'DEFAULT',
                     stageType: 'A',
                     userUUID: 1,
                     deadline: '1900-01-01'
                 },
                 {
                     teamUUID: 1,
-                    caseType: 'A',
+                    caseType: 'DEFAULT',
                     stageType: 'A',
                     userUUID: null,
                     deadline: '1900-01-02'
                 },
                 {
                     teamUUID: 1,
-                    caseType: 'A',
+                    caseType: 'DEFAULT',
                     stageType: 'A',
                     userUUID: 2,
                     deadline: '2200-01-03'
                 },
                 {
                     teamUUID: 2,
-                    caseType: 'B',
+                    caseType: 'DEFAULT',
                     stageType: 'A',
                     userUUID: null,
                     deadline: '2200-04-01'
@@ -102,10 +114,19 @@ describe('Dashboard Adapter', () => {
             ]
         };
         const testConfiguration = {
-            workstackColumns: [],
+            workstackTypeColumns: [
+                { workstackType: 'DEFAULT', workstackColumns: [] },
+                { workstackType: 'WCS', workstackColumns: [] }
+            ],
             deadlinesEnabled: false
-        };
-        const result = await dashboardAdapter(mockData, { user: mockUser, fromStaticList: mockFromStaticList, logger: mockLogger, configuration: testConfiguration });
+        }
+        ;
+        const result = await dashboardAdapter(mockData, {
+            user: mockUser,
+            fromStaticList: mockFromStaticList,
+            logger: mockLogger,
+            configuration: testConfiguration
+        });
         expect(result).toMatchSnapshot();
     });
 });
@@ -116,7 +137,7 @@ describe('User Workstack Adapter', () => {
             stages: [
                 {
                     teamUUID: 1,
-                    caseType: 'A',
+                    caseType: 'DEFAULT',
                     stageType: 'A',
                     userUUID: 1,
                     deadline: '2200-01-01',
@@ -124,7 +145,7 @@ describe('User Workstack Adapter', () => {
                 },
                 {
                     teamUUID: 2,
-                    caseType: 'B',
+                    caseType: 'WCS',
                     stageType: 'A',
                     userUUID: 2,
                     deadline: '2200-01-02',
@@ -132,7 +153,7 @@ describe('User Workstack Adapter', () => {
                 },
                 {
                     teamUUID: 2,
-                    caseType: 'B',
+                    caseType: 'WCS',
                     stageType: 'A',
                     userUUID: null,
                     deadline: '2200-01-03',
@@ -141,7 +162,17 @@ describe('User Workstack Adapter', () => {
             ]
         };
 
-        const result = await userAdapter(mockData, { user: mockUser, fromStaticList: mockFromStaticList, logger: mockLogger, configuration: { workstackColumns: [] } });
+        const result = await userAdapter(mockData, {
+            user: mockUser,
+            fromStaticList: mockFromStaticList,
+            logger: mockLogger,
+            configuration: {
+                workstackTypeColumns: [
+                    { workstackType: 'DEFAULT', workstackColumns: [] },
+                    { workstackType: 'WCS', workstackColumns: [] }
+                ],
+            }
+        });
         expect(result).toMatchSnapshot();
     });
 });
@@ -152,7 +183,7 @@ describe('Team Workstack Adapter', () => {
             stages: [
                 {
                     teamUUID: 1,
-                    caseType: 'A',
+                    caseType: 'DEFAULT',
                     stageType: 'A',
                     userUUID: 1,
                     deadline: '2200-01-01',
@@ -161,7 +192,7 @@ describe('Team Workstack Adapter', () => {
                 },
                 {
                     teamUUID: 2,
-                    caseType: 'C',
+                    caseType: 'DEFAULT',
                     stageType: 'A',
                     userUUID: null,
                     deadline: '1900-01-02',
@@ -170,7 +201,7 @@ describe('Team Workstack Adapter', () => {
                 },
                 {
                     teamUUID: 2,
-                    caseType: 'B',
+                    caseType: 'WCS',
                     stageType: 'A',
                     userUUID: 2,
                     deadline: '2200-01-03',
@@ -179,7 +210,7 @@ describe('Team Workstack Adapter', () => {
                 },
                 {
                     teamUUID: 2,
-                    caseType: 'B',
+                    caseType: 'WCS',
                     stageType: 'A',
                     userUUID: null,
                     deadline: '1900-01-04',
@@ -188,7 +219,7 @@ describe('Team Workstack Adapter', () => {
                 },
                 {
                     teamUUID: 2,
-                    caseType: 'B',
+                    caseType: 'WCS',
                     stageType: 'A',
                     userUUID: null,
                     deadline: '1900-01-05',
@@ -197,7 +228,7 @@ describe('Team Workstack Adapter', () => {
                 },
                 {
                     teamUUID: 2,
-                    caseType: 'B',
+                    caseType: 'WCS',
                     stageType: 'A',
                     userUUID: 1,
                     deadline: '06-01-2200',
@@ -207,7 +238,19 @@ describe('Team Workstack Adapter', () => {
             ]
         };
 
-        const result = await teamAdapter(mockData, { user: mockUser, fromStaticList: mockFromStaticList, logger: mockLogger, teamId: 2, configuration: { workstackColumns: [], deadlinesEnabled: true } });
+        const result = await teamAdapter(mockData, {
+            user: mockUser,
+            fromStaticList: mockFromStaticList,
+            logger: mockLogger,
+            teamId: 2,
+            configuration: {
+                workstackTypeColumns: [
+                    { workstackType: 'DEFAULT', workstackColumns: [] },
+                    { workstackType: 'WCS', workstackColumns: [] }
+                ], deadlinesEnabled: true
+            }
+        })
+        ;
         expect(result).toMatchSnapshot();
     });
 });
@@ -218,7 +261,7 @@ describe('Workflow Workstack Adapter', () => {
             stages: [
                 {
                     teamUUID: 1,
-                    caseType: 'A',
+                    caseType: 'DEFAULT',
                     stageType: 'A',
                     userUUID: 1,
                     deadline: '2200-01-01',
@@ -227,7 +270,7 @@ describe('Workflow Workstack Adapter', () => {
                 },
                 {
                     teamUUID: 2,
-                    caseType: 'C',
+                    caseType: 'DEFAULT',
                     stageType: 'A',
                     userUUID: null,
                     deadline: '1900-01-02',
@@ -235,7 +278,7 @@ describe('Workflow Workstack Adapter', () => {
                 },
                 {
                     teamUUID: 2,
-                    caseType: 'B',
+                    caseType: 'WCS',
                     stageType: 'A',
                     userUUID: 2,
                     deadline: '2200-01-03',
@@ -244,7 +287,7 @@ describe('Workflow Workstack Adapter', () => {
                 },
                 {
                     teamUUID: 2,
-                    caseType: 'B',
+                    caseType: 'WCS',
                     stageType: 'A',
                     userUUID: null,
                     deadline: '1900-01-04',
@@ -253,7 +296,7 @@ describe('Workflow Workstack Adapter', () => {
                 },
                 {
                     teamUUID: 2,
-                    caseType: 'B',
+                    caseType: 'WCS',
                     stageType: 'A',
                     userUUID: null,
                     deadline: '1900-01-05',
@@ -262,7 +305,7 @@ describe('Workflow Workstack Adapter', () => {
                 },
                 {
                     teamUUID: 2,
-                    caseType: 'B',
+                    caseType: 'WCS',
                     stageType: 'A',
                     userUUID: 1,
                     deadline: '2200-01-06',
@@ -271,7 +314,7 @@ describe('Workflow Workstack Adapter', () => {
                 },
                 {
                     teamUUID: 2,
-                    caseType: 'B',
+                    caseType: 'WCS',
                     stageType: 'B',
                     userUUID: null,
                     deadline: '1900-01-07',
@@ -280,7 +323,7 @@ describe('Workflow Workstack Adapter', () => {
                 },
                 {
                     teamUUID: 2,
-                    caseType: 'C',
+                    caseType: 'DEFAULT',
                     stageType: 'A',
                     userUUID: 1,
                     deadline: '2200-01-08',
@@ -290,7 +333,14 @@ describe('Workflow Workstack Adapter', () => {
             ]
         };
 
-        const result = await workflowAdapter(mockData, { user: mockUser, fromStaticList: mockFromStaticList, logger: mockLogger, teamId: 2, workflowId: 'B', configuration: mockConfiguration });
+        const result = await workflowAdapter(mockData, {
+            user: mockUser,
+            fromStaticList: mockFromStaticList,
+            logger: mockLogger,
+            teamId: 2,
+            workflowId: 'WCS',
+            configuration: mockConfiguration
+        });
         expect(result).toMatchSnapshot();
     });
 });
@@ -301,7 +351,7 @@ describe('Workflow Workstack Adapter', () => {
             stages: [
                 {
                     teamUUID: 1,
-                    caseType: 'A',
+                    caseType: 'DEFAULT',
                     stageType: 'A',
                     userUUID: 1,
                     deadline: '2200-01-01',
@@ -310,7 +360,7 @@ describe('Workflow Workstack Adapter', () => {
                 },
                 {
                     teamUUID: 2,
-                    caseType: 'C',
+                    caseType: 'DEFAULT',
                     stageType: 'A',
                     userUUID: null,
                     deadline: '1900-01-02',
@@ -319,7 +369,7 @@ describe('Workflow Workstack Adapter', () => {
                 },
                 {
                     teamUUID: 2,
-                    caseType: 'B',
+                    caseType: 'WCS',
                     stageType: 'A',
                     userUUID: 2,
                     deadline: '2200-01-03',
@@ -328,7 +378,7 @@ describe('Workflow Workstack Adapter', () => {
                 },
                 {
                     teamUUID: 2,
-                    caseType: 'B',
+                    caseType: 'WCS',
                     stageType: 'A',
                     userUUID: null,
                     deadline: '1900-01-04',
@@ -337,7 +387,7 @@ describe('Workflow Workstack Adapter', () => {
                 },
                 {
                     teamUUID: 2,
-                    caseType: 'B',
+                    caseType: 'WCS',
                     stageType: 'A',
                     userUUID: null,
                     deadline: '1900-01-05',
@@ -346,7 +396,7 @@ describe('Workflow Workstack Adapter', () => {
                 },
                 {
                     teamUUID: 2,
-                    caseType: 'B',
+                    caseType: 'WCS',
                     stageType: 'A',
                     userUUID: 1,
                     deadline: '2200-01-06',
@@ -355,7 +405,7 @@ describe('Workflow Workstack Adapter', () => {
                 },
                 {
                     teamUUID: 2,
-                    caseType: 'B',
+                    caseType: 'WCS',
                     stageType: 'B',
                     userUUID: null,
                     deadline: '1900-01-07',
@@ -364,7 +414,7 @@ describe('Workflow Workstack Adapter', () => {
                 },
                 {
                     teamUUID: 2,
-                    caseType: 'C',
+                    caseType: 'DEFAULT',
                     stageType: 'A',
                     userUUID: 1,
                     deadline: '2200-01-08',
@@ -374,7 +424,15 @@ describe('Workflow Workstack Adapter', () => {
             ]
         };
 
-        const result = await stageAdapter(mockData, { user: mockUser, fromStaticList: mockFromStaticList, logger: mockLogger, teamId: 2, workflowId: 'B', stageId: 'A', configuration: mockConfiguration });
+        const result = await stageAdapter(mockData, {
+            user: mockUser,
+            fromStaticList: mockFromStaticList,
+            logger: mockLogger,
+            teamId: 2,
+            workflowId: 'WCS',
+            stageId: 'A',
+            configuration: mockConfiguration
+        });
         expect(result).toMatchSnapshot();
     });
 });

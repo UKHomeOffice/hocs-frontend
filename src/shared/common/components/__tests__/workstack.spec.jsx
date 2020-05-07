@@ -34,13 +34,13 @@ describe('Workstack component', () => {
             },
         ],
         columns: [
-            { displayName: 'Reference', dataAdapter: null, renderer: 'caseLink', dataValueKey: 'caseReference', isFilterable: true },
-            { displayName: 'Full Name', dataAdapter: null, renderer: null, dataValueKey: 'fullName', isFilterable: true },
-            { displayName: 'Current Stage', dataAdapter: null, renderer: null, dataValueKey: 'stageTypeDisplay', isFilterable: true },
-            { displayName: 'Owner', dataAdapter: null, renderer: null, dataValueKey: 'assignedUserDisplay', isFilterable: true },
-            { displayName: 'Team', dataAdapter: null, renderer: null, dataValueKey: 'assignedTeamDisplay', isFilterable: true },
-            { displayName: 'Case Date', dataAdapter: 'localDate', renderer: null, dataValueKey: 'created', isFilterable: true },
-            { displayName: 'Active', dataAdapter: 'indicator', renderer: null, dataValueKey: 'isActive', isFilterable: true }
+            { displayName: 'Reference', dataAdapter: null, renderer: 'caseLink', dataValueKey: 'caseReference', filterable: true },
+            { displayName: 'Full Name', dataAdapter: null, renderer: null, dataValueKey: 'fullName', filterable: true },
+            { displayName: 'Current Stage', dataAdapter: null, renderer: null, dataValueKey: 'stageTypeDisplay', filterable: true },
+            { displayName: 'Owner', dataAdapter: null, renderer: null, dataValueKey: 'assignedUserDisplay', filterable: true },
+            { displayName: 'Team', dataAdapter: null, renderer: null, dataValueKey: 'assignedTeamDisplay', filterable: true },
+            { displayName: 'Case Date', dataAdapter: 'localDate', renderer: null, dataValueKey: 'created', filterable: true },
+            { displayName: 'Active', dataAdapter: 'indicator', renderer: null, dataValueKey: 'isActive', filterable: true }
         ],
         selectable: true,
         baseUrl: 'base.url',

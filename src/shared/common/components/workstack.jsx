@@ -92,7 +92,7 @@ class WorkstackAllocate extends Component {
         const { selectedCases } = this.state;
         if (filter !== '') {
             const filterableColumns = columns.filter(column => {
-                return column.isFilterable === true;
+                return column.filterable === true;
             });
             const filteredRows = items.filter(row => {
                 return filterableColumns.map(column => this.doesFilterMatchData(filter, row, column)).some(matches => matches === true);

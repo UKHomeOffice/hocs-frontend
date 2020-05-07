@@ -11,6 +11,17 @@ const getOverdue = (configuration, data) => {
     return overdueCases.length;
 };
 
+const returnWorkstackColumns = (configuration, workstackData) => {
+    const defaultColumnConfig = 'DEFAULT';
+    const caseTypeForColumnConfig = workstackData.length > 0 ? workstackData[0].caseType : defaultColumnConfig;
+
+    const getColumnsForWorkstack = configuration.workstackTypeColumns.find(
+        item => item.workstackType === caseTypeForColumnConfig
+    );
+
+    return getColumnsForWorkstack.workstackColumns;
+};
+
 const parseDate = (rawDate) => {
     const [date] = rawDate.match(/[0-9]{4}-[0-1][0-9]-[0-3][0-9]/g) || [];
     if (!date) {
@@ -100,7 +111,7 @@ const userAdapter = async (data, { fromStaticList, logger, user, configuration }
     return {
         label: 'My Cases',
         items: workstackData,
-        columns: configuration.workstackColumns,
+        columns: returnWorkstackColumns(configuration, workstackData),
         allocateToWorkstackEndpoint: '/unallocate/'
     };
 };
@@ -141,7 +152,7 @@ const teamAdapter = async (data, { fromStaticList, logger, teamId, configuration
     return {
         label: teamDisplayName,
         items: workstackData,
-        columns: configuration.workstackColumns,
+        columns: returnWorkstackColumns(configuration, workstackData),
         dashboard: workflowCards,
         teamMembers: [],
         allocateToUserEndpoint: '/allocate/user',
@@ -185,7 +196,7 @@ const workflowAdapter = async (data, { fromStaticList, logger, teamId, workflowI
     return {
         label: workflowDisplayName,
         items: workstackData,
-        columns: configuration.workstackColumns,
+        columns: returnWorkstackColumns(configuration, workstackData),
         dashboard: stageCards,
         teamMembers: [],
         allocateToUserEndpoint: '/allocate/user',
@@ -203,7 +214,7 @@ const stageAdapter = async (data, { fromStaticList, logger, teamId, workflowId, 
     return {
         label: await fromStaticList('S_STAGETYPES', stageId),
         items: workstackData,
-        columns: configuration.workstackColumns,
+        columns: returnWorkstackColumns(configuration, workstackData),
         teamMembers: [],
         allocateToUserEndpoint: '/allocate/user',
         allocateToTeamEndpoint: '/allocate/team',
