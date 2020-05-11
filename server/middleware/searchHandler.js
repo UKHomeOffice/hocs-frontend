@@ -37,11 +37,14 @@ async function handleSearch(req, res, next) {
         const workstackData = await Promise.all(response.data.stages
             .sort(sortObjectByProp(workstackCase => workstackCase.caseReference))
             .map(bindDisplayElements(fromStaticList)));
-        const { workstackColumns } = await req.listService.fetch('S_SYSTEM_CONFIGURATION');
+        const { workstackTypeColumns } = await req.listService.fetch('S_SYSTEM_CONFIGURATION');
+        // using DEFAULT columns for search
+        const workstackColumnsForSearch = workstackTypeColumns[0].workstackColumns;
+
         res.locals.workstack = {
             label: 'Search Results',
             items: workstackData,
-            columns: workstackColumns
+            columns: workstackColumnsForSearch
         };
 
         next();

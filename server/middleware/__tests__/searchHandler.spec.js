@@ -49,7 +49,13 @@ describe('handleSearch', () => {
                 }),
                 fetch: jest.fn(async (listId) => {
                     if (listId === 'S_SYSTEM_CONFIGURATION') {
-                        return Promise.resolve({ workstackColumns: [] });
+                        return Promise.resolve({
+                            workstackTypeColumns: [
+                                { workstackColumns: {} },
+                                { workstackColumns: {} }
+                            ]
+                        }
+                        );
                     }
                     return Promise.reject();
                 })
@@ -69,7 +75,7 @@ describe('handleSearch', () => {
         }));
     });
 
-    it('should create an ordered workstack object on res.locals', async () => {
+    it('should create an ordered workstackTypeColumns object on res.locals', async () => {
         await handleSearch(req, res, next);
 
         const expectedRequest = {
