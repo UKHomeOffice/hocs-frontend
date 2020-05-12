@@ -37,6 +37,10 @@ const ColumnRenderer = {
     WRAP_TEXT: 'wrapText'
 };
 
+const ColumnSortStrategy = {
+    FLOAT_TYPE: 'floatTypeStrategy'
+};
+
 const dataAdapters = {
     localDate: (value) => {
         var date = new Date(value);
@@ -259,8 +263,37 @@ class WorkstackAllocate extends Component {
 
     compareRows(a, b) {
         const { column: sortColumn } = this.state.sort;
+        if (sortColumn == undefined) {
+            return this.defaultSortStrategy(a, b, sortColumn);
+        } else {
+            switch (sortColumn.sortStrategy) {
+                case ColumnSortStrategy.FLOAT_TYPE:
+                    return this.floatSortStrategy(a, b, sortColumn);
+                default:
+                    return this.defaultSortStrategy(a, b, sortColumn);
+            }
+        }
+
+    }
+
+    floatSortStrategy(a, b, sortColumn) {
         const aValue = sortColumn ? (this.getDataValue(a, sortColumn) || '').toUpperCase() : a.index;
         const bValue = sortColumn ? (this.getDataValue(b, sortColumn) || '').toUpperCase() : b.index;
+
+        const aFloat = parseFloat(aValue);
+        const bFloat = parseFloat(bValue);
+        if (aFloat > bFloat) {
+            return 1 * this.state.sort.direction;
+        } else if (aFloat < bFloat) {
+            return -1 * this.state.sort.direction;
+        }
+        return 0;
+    }
+
+    defaultSortStrategy(a, b, sortColumn) {
+        const aValue = sortColumn ? (this.getDataValue(a, sortColumn) || '').toUpperCase() : a.index;
+        const bValue = sortColumn ? (this.getDataValue(b, sortColumn) || '').toUpperCase() : b.index;
+
         if (aValue > bValue) {
             return 1 * this.state.sort.direction;
         } else if (aValue < bValue) {
