@@ -1,5 +1,30 @@
 const byUser = (userId) => ({ userUUID }) => userUUID === userId;
 const byCaseReference = (a, b) => a.caseReference.localeCompare(b.caseReference);
+
+const byPriority = (a, b) => {
+    if (a.data.systemCalculatedPriority == undefined || b.data.systemCalculatedPriority == undefined) {
+        return 0;
+    } else {
+        var aFloat = parseFloat(a.data.systemCalculatedPriority);
+        var bFloat = parseFloat(b.data.systemCalculatedPriority);
+
+        if (aFloat == bFloat) {
+            return 0;
+        }
+        if (aFloat > bFloat) {
+            return -1;
+        }
+        return 1;
+    }
+};
+
+const defaultCaseSort = (a, b) => {
+    var sortResult = byPriority(a, b);
+    if (sortResult == 0) {
+        sortResult = byCaseReference(a, b);
+    }
+    return sortResult;
+};
 const byLabel = (a, b) => a.label.localeCompare(b.label);
 const isUnallocated = user => user === null;
 const isOverdue = (configuration, deadline) => configuration.deadlinesEnabled && deadline && new Date(deadline) < Date.now();
@@ -105,7 +130,7 @@ const dashboardAdapter = async (data, { fromStaticList, logger, user, configurat
 const userAdapter = async (data, { fromStaticList, logger, user, configuration }) => {
     const workstackData = await Promise.all(data.stages
         .filter(stage => stage.userUUID === user.uuid)
-        .sort(byCaseReference)
+        .sort(defaultCaseSort)
         .map(bindDisplayElements(fromStaticList)));
     logger.debug('REQUEST_USER_WORKSTACK', { user_cases: workstackData.length });
     return {
@@ -119,7 +144,7 @@ const userAdapter = async (data, { fromStaticList, logger, user, configuration }
 const teamAdapter = async (data, { fromStaticList, logger, teamId, configuration }) => {
     const workstackData = await Promise.all(data.stages
         .filter(stage => stage.teamUUID === teamId)
-        .sort(byCaseReference)
+        .sort(defaultCaseSort)
         .map(bindDisplayElements(fromStaticList)));
     const workflowCards = workstackData
         .reduce((cards, stage) => {
@@ -164,7 +189,7 @@ const teamAdapter = async (data, { fromStaticList, logger, teamId, configuration
 const workflowAdapter = async (data, { fromStaticList, logger, teamId, workflowId, configuration }) => {
     const workstackData = await Promise.all(data.stages
         .filter(stage => stage.teamUUID === teamId && stage.caseType === workflowId)
-        .sort(byCaseReference)
+        .sort(defaultCaseSort)
         .map(bindDisplayElements(fromStaticList)));
     const stageCards = workstackData
         .reduce((cards, stage) => {
@@ -207,7 +232,7 @@ const workflowAdapter = async (data, { fromStaticList, logger, teamId, workflowI
 const stageAdapter = async (data, { fromStaticList, logger, teamId, workflowId, stageId, configuration }) => {
     const workstackData = await Promise.all(data.stages
         .filter(stage => stage.teamUUID === teamId && stage.caseType === workflowId && stage.stageType === stageId)
-        .sort(byCaseReference)
+        .sort(defaultCaseSort)
         .map(bindDisplayElements(fromStaticList)));
     const stageDisplayName = await fromStaticList('S_STAGETYPES', stageId);
     logger.debug('REQUEST_STAGE_WORKSTACK', { stage: stageDisplayName, rows: workstackData.length });

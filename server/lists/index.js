@@ -105,7 +105,7 @@ module.exports = {
         },
         TEAM_WORKSTACK: {
             client: 'CASEWORK',
-            endpoint: '/stage',
+            endpoint: '/stage/team/${teamId}',
             adapter: workstack.teamAdapter
         },
         WCS_CASEWORK_TEAMS: {
