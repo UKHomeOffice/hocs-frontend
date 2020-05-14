@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { allocateCase, moveToPreviousStage } = require('../../middleware/stage');
+const { allocateCase, moveByDirection } = require('../../middleware/stage');
 const { getFormForAction, getFormForCase, getFormForStage, hydrateFields } = require('../../services/form');
 const { skipCaseTypePageApi } = require('../../middleware/skipCaseTypePage');
 const { autoCreateAllocateApi } = require('../../middleware/autoCreateAllocate');
@@ -16,7 +16,7 @@ router.all(['/action/:workflow/:context/:action', '/action/:workflow/:action'],
 
 router.all('/case/:caseId/stage/:stageId/allocate', allocateCase);
 
-router.all('/case/:caseId/stage/:stageId/back', moveToPreviousStage, (req, res) => {
+router.all('/case/:caseId/stage/:stageId/direction/:flowDirection', moveByDirection, (req, res) => {
     res.json({ redirect: `/case/${req.params.caseId}/stage/${req.params.stageId}` });
 });
 router.all(['/case/:caseId/stage/:stageId', '/case/:caseId/stage/:stageId/allocate'], getFormForStage);
