@@ -18,15 +18,9 @@ const stageTypesAdapter = async (data, { logger }) => {
     return data.map(({ label, value }) => ({ key: value, value: label }));
 };
 
-const documentTagsAdapter = async (data, { logger }) => {
-    logger.debug('REQUEST_DOCUMENT_TAGS', { types: data.documentLabels.length });
-    return data.documentLabels.map(item => ({ label: item, value: item }));
-};
-
 module.exports = {
     teamsAdapter,
     usersAdapter,
     caseTypesAdapter,
-    stageTypesAdapter,
-    documentTagsAdapter
+    stageTypesAdapter
 };
