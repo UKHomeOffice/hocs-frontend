@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Document Tags Adapter should transform document tags data 1`] = `
+Array [
+  Object {
+    "label": "Tag 1",
+    "value": "Tag 1",
+  },
+  Object {
+    "label": "Tag 2",
+    "value": "Tag 2",
+  },
+]
+`;
