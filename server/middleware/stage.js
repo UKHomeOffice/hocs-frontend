@@ -58,12 +58,12 @@ async function allocateCaseToTeamMember(req, res, next) {
     }
 }
 
-async function moveToPreviousStage(req, res, next) {
+async function moveByDirection(req, res, next) {
     const logger = getLogger(req.request);
-    const { caseId, stageId } = req.params;
+    const { caseId, stageId, flowDirection } = req.params;
     const { user } = req;
     try {
-        await workflowService.post(`/case/${caseId}/stage/${stageId}/back`, {
+        await workflowService.post(`/case/${caseId}/stage/${stageId}/direction/${flowDirection}`, {
             userUUID: user.uuid,
         }, { headers: User.createHeaders(user) });
     } catch (error) {
@@ -79,5 +79,5 @@ module.exports = {
     stageResponseMiddleware,
     allocateCase,
     allocateCaseToTeamMember,
-    moveToPreviousStage
+    moveByDirection
 };

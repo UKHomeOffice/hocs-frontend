@@ -61,21 +61,31 @@ module.exports = {
         S_WCS_COHORTS: {
             client: 'INFO',
             endpoint: '/entity/list/WCS_COHORTS',
+            type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_WCS_I_STATUS: {
             client: 'INFO',
             endpoint: '/entity/list/WCS_I_STATUS',
+            type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_WCS_I_STATUS_OUTCOME: {
             client: 'INFO',
             endpoint: '/entity/list/WCS_I_STATUS_OUTCOME',
+            type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_WCS_ELIG_REJ_REASON: {
             client: 'INFO',
             endpoint: '/entity/list/WCS_ELIG_REJ_REASON',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_UKVI_ENQUIRY_SUBJECTS: {
+            client: 'INFO',
+            endpoint: '/entity/list/UKVI_ENQUIRY_SUBJECTS',
+            type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         CASE_TYPES: {
