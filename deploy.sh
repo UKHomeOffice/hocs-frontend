@@ -61,7 +61,7 @@ elif [[ "${KUBE_NAMESPACE}" == "cs-prod" ]] ; then
     export DNS_PREFIX=www.cs
     export KC_REALM=https://sso.digital.homeoffice.gov.uk/auth/realms/hocs-prod
 elif [[ "${KUBE_NAMESPACE}" == "cs-dev" ]] ; then
-    export DNS_PREFIX=dev.cs-notprod
+    export DNS_PREFIX=dev.internal.cs-notprod
     export KC_REALM=https://sso-dev.notprod.homeoffice.gov.uk/auth/realms/hocs-notprod
 elif [[ "${KUBE_NAMESPACE}" == "wcs-dev" ]] ; then
     export DNS_PREFIX=dev.wcs-notprod
@@ -79,24 +79,31 @@ elif [[ "${KUBE_NAMESPACE}" == "wcs-demo" ]] ; then
     export DNS_PREFIX=demo.wcs-notprod
     export KC_REALM=https://sso-dev.notprod.homeoffice.gov.uk/auth/realms/hocs-notprod
 else
-    export DNS_PREFIX=${DOMAIN}.${DOMAIN}-notprod
+    export DNS_PREFIX=${ENVIRONMENT}.${DOMAIN}-notprod
     export KC_REALM=https://sso-dev.notprod.homeoffice.gov.uk/auth/realms/hocs-notprod
 fi
 
-export DOMAIN_NAME=${DNS_PREFIX}.homeoffice.gov.uk
+export DOMAIN_SUFFIX=.homeoffice.gov.uk
+export DOMAIN_NAME=${DNS_PREFIX}${DNS_SUFFIX}
+
+if [[ $DOMAIN_PREFIX == *"internal"* ]]; then
+  export INGRESS_TYPE="internal"
+else
+  export INGRESS_TYPE="external"
+fi
 
 echo
 echo "Deploying hocs-frontend to ${ENVIRONMENT}"
 echo "Keycloak realm: ${KC_REALM}"
 echo "Keycloak domain: ${KC_DOMAIN}"
-echo "domain name: ${DOMAIN_NAME}"
+echo "${INGRESS_TYPE} domain: ${DOMAIN_NAME}"
 echo
 
 cd kd
 
 kd --insecure-skip-tls-verify \
    --timeout 10m \
-    -f ingress.yaml \
+    -f ingress-${INGRESS_TYPE}.yaml \
     -f converter-configmap.yaml \
     -f configmap.yaml \
     -f deployment.yaml \

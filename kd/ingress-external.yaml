@@ -2,6 +2,7 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
+  # remember to make any changes to the internal ingress as well if appropriate
   annotations:
     cert-manager.io/enabled: "true"
     ingress.kubernetes.io/secure-backends: "true"
