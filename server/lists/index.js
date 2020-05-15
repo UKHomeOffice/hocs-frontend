@@ -11,6 +11,7 @@ const templatesAdapter = require('./adapters/templates');
 const membersAdapter = require('./adapters/members');
 const documentsAdapter = require('./adapters/documents');
 const documentListAdapter = require('./adapters/documentList');
+const documentTagsAdapter = require('./adapters/documentTags');
 const countrySortAdapter = require('./adapters/countrySort');
 const caseNoteAdapter = require('./adapters/case-notes');
 const caseSummaryAdapter = require('./adapters/case-summary');
@@ -46,12 +47,6 @@ module.exports = {
             endpoint: '/stageType',
             type: listService.types.STATIC,
             adapter: statics.stageTypesAdapter
-        },
-        S_DOCUMENT_TAGS: {
-            client: 'INFO',
-            endpoint: '/configuration',
-            type: listService.types.STATIC,
-            adapter: statics.documentTagsAdapter
         },
         S_SYSTEM_CONFIGURATION: {
             client: 'INFO',
@@ -209,6 +204,11 @@ module.exports = {
             client: 'CASEWORK',
             endpoint: '/case/document/reference/${caseId}/?type=DRAFT',
             adapter: documentListAdapter
+        },
+        CASE_DOCUMENT_TAGS: {
+            client: 'CASEWORK',
+            endpoint: '/case/${caseId}/documentTags',
+            adapter: documentTagsAdapter
         },
         CASE_NOTES: {
             client: 'CASEWORK',
