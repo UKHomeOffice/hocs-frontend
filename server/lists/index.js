@@ -83,6 +83,54 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
+        S_UKVI_ENQUIRY_REASONS_ALL: {
+            client: 'INFO',
+            endpoint: '/entity/list/UKVI_ENQUIRY_REASONS_ALL',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_UKVI_ENQUIRY_REASONS_PER: {
+            client: 'INFO',
+            endpoint: '/entity/list/UKVI_ENQUIRY_REASONS_PER',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_UKVI_ENQUIRY_REASONS_GUI: {
+            client: 'INFO',
+            endpoint: '/entity/list/UKVI_ENQUIRY_REASONS_GUI',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_UKVI_ENQUIRY_REASONS_DOC: {
+            client: 'INFO',
+            endpoint: '/entity/list/UKVI_ENQUIRY_REASONS_DOC',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_UKVI_ENQUIRY_REASONS_TECH: {
+            client: 'INFO',
+            endpoint: '/entity/list/UKVI_ENQUIRY_REASONS_TECH',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_UKVI_ENQUIRY_REASONS_DET: {
+            client: 'INFO',
+            endpoint: '/entity/list/UKVI_ENQUIRY_REASONS_DET',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_UKVI_ENQUIRY_REASONS_HMPO: {
+            client: 'INFO',
+            endpoint: '/entity/list/UKVI_ENQUIRY_REASONS_HMPO',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_UKVI_ENQUIRY_REASONS_OTHER: {
+            client: 'INFO',
+            endpoint: '/entity/list/UKVI_ENQUIRY_REASONS_OTHER',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
         CASE_TYPES: {
             client: 'INFO',
             endpoint: '/caseType?bulkOnly=false',
