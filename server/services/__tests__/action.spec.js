@@ -54,21 +54,10 @@ jest.mock('../../clients', () => {
             delete: (url, body) => {
                 mockRequestClient(body);
             }
+        },
+        infoService: {
+            get: jest.fn(() => Promise.resolve({ data: ['ORIGINAL', 'DRAFT'] }))
         }
-    };
-});
-
-
-jest.mock('../../services/list', () => {
-    return {
-        getInstance: () => {
-            return {
-                fetch: () => {
-                    return { documentLabels: ['ORIGINAL', 'DRAFT'] };
-                }
-            };
-        }
-
     };
 });
 
