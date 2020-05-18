@@ -1,4 +1,4 @@
-module.exports = async (data, { configuration, logger }) => {
+module.exports = async (data, { logger }) => {
     logger.debug('REQUEST_CASE_DOCUMENTS', { documents: data.documents.length });
 
     const reduceDocumentsByType = (groups, document) => {
@@ -26,6 +26,6 @@ module.exports = async (data, { configuration, logger }) => {
             type,
             value: uuid,
         }))
-        .reduce(reduceDocumentsByType, new Map(configuration.documentLabels.map(label => [label, []])))]
+        .reduce(reduceDocumentsByType, new Map(data.documentTags.map(label => [label, []])))]
         .map(([name, documents]) => [name, documents.sort(sortByTimeStamp)]);
 };
