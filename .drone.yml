@@ -54,6 +54,7 @@ pipeline:
         event: [push, deployment, tag]
   
     deploy-to-cs-dev-from-build-number:
+      group: deploy-to-dev
       image: quay.io/ukhomeofficedigital/kd:v1.16.0
       environment:
         - DOMAIN=cs
@@ -71,6 +72,7 @@ pipeline:
         event: [push, tag]
 
     deploy-to-wcs-dev-from-build-number:
+      group: deploy-to-dev
       image: quay.io/ukhomeofficedigital/kd:v1.16.0
       environment:
         - DOMAIN=wcs
