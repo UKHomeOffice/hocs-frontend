@@ -22,7 +22,7 @@ module.exports = () => Form()
             .withProp('whitelist', 'DOCUMENT_EXTENSION_WHITELIST')
             .build()
     )
-    .withPrimaryActionLabel('Finish')
+    .withPrimaryActionLabel('Create case')
     .withSecondaryAction(
         Component('backlink')
             .withProp('label', 'Cancel')
