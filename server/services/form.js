@@ -88,8 +88,20 @@ async function getFormSchema(options) {
 
 async function hydrateField(field, req) {
     if (field.props) {
-        const { choices, items, sections } = field.props;
-        if (choices && typeof choices === 'string') {
+        const { choices, items, sections, conditionChoices } = field.props;
+
+        if (conditionChoices) {
+            for (var i = 0; i < conditionChoices.length; i++) {
+                const conditionPropertyValue = req.form.data[conditionChoices[i].conditionPropertyName];
+                if (conditionChoices[i].conditionPropertyValue === conditionPropertyValue) {
+                    field.props.choices = await req.listService.fetch(
+                        conditionChoices[i].choices,
+                        req.params
+                    );
+                    break;
+                }
+            }
+        } else if (choices && typeof choices === 'string') {
             field.props.choices = await req.listService.fetch(
                 choices,
                 req.params
