@@ -57,11 +57,11 @@ describe('Form dropdown component', () => {
         mockCallback.mockReset();
 
         wrapper.find('#dropdown').simulate('change', { target: { value: firstValue } });
-        expect(mockCallback).toHaveBeenCalledTimes(2);
+        expect(mockCallback).toHaveBeenCalledTimes(1);
         expect(mockCallback).toHaveBeenCalledWith({ 'dropdown': firstValue });
 
         wrapper.find('#dropdown').simulate('change', { target: { value: secondValue } });
-        expect(mockCallback).toHaveBeenCalledTimes(4);
+        expect(mockCallback).toHaveBeenCalledTimes(2);
         expect(mockCallback).toHaveBeenCalledWith({ 'dropdown': secondValue });
     });
 });
