@@ -66,6 +66,7 @@ class Radio extends Component {
 
 Radio.propTypes = {
     choices: PropTypes.arrayOf(PropTypes.object),
+    conditionChoices: PropTypes.arrayOf(PropTypes.object),
     className: PropTypes.string,
     disabled: PropTypes.bool,
     error: PropTypes.string,
@@ -79,6 +80,7 @@ Radio.propTypes = {
 
 Radio.defaultProps = {
     choices: [],
+    conditionChoices: [],
     disabled: false,
     type: 'radio'
 };

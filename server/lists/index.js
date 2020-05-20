@@ -131,6 +131,54 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
+        S_UKVI_BUS_UNITS_ALL: {
+            client: 'INFO',
+            endpoint: '/entity/list/UKVI_BUS_UNITS_ALL',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_UKVI_BUS_UNITS_1: {
+            client: 'INFO',
+            endpoint: '/entity/list/UKVI_BUS_UNITS_1',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_UKVI_BUS_UNITS_2: {
+            client: 'INFO',
+            endpoint: '/entity/list/UKVI_BUS_UNITS_2',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_UKVI_BUS_UNITS_3: {
+            client: 'INFO',
+            endpoint: '/entity/list/UKVI_BUS_UNITS_3',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_UKVI_BUS_UNITS_4: {
+            client: 'INFO',
+            endpoint: '/entity/list/UKVI_BUS_UNITS_4',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_UKVI_BUS_UNITS_5: {
+            client: 'INFO',
+            endpoint: '/entity/list/UKVI_BUS_UNITS_5',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_UKVI_BUS_UNITS_6: {
+            client: 'INFO',
+            endpoint: '/entity/list/UKVI_BUS_UNITS_6',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_UKVI_BUS_UNITS_7: {
+            client: 'INFO',
+            endpoint: '/entity/list/UKVI_BUS_UNITS_7',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
         CASE_TYPES: {
             client: 'INFO',
             endpoint: '/caseType?bulkOnly=false',

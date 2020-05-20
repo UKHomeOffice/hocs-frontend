@@ -7,16 +7,54 @@ class Dropdown extends Component {
         super(props);
         const choices = Array.from(props.choices);
         choices.unshift({ label: '', value: '' });
-        this.state = { value: this.props.value, choices };
+        const conditionChoices = Array.from(JSON.parse(JSON.stringify(props.conditionChoices)));
+        for (var i = 0; i < conditionChoices.length; i++) {
+            const conditionChoice = Array.from(conditionChoices[i].choices);
+            conditionChoice.unshift({ label: '', value: '' });
+            conditionChoices[i].choices = conditionChoice;
+        }
+
+        const choicesToUse = Dropdown.getChoicesToUse(choices, conditionChoices, this.props);
+        this.state = { value: this.props.value, choices, conditionChoices, choicesToUse };
     }
 
     componentDidMount() {
         this.props.updateState({ [this.props.name]: this.state.value });
     }
 
+    componentDidUpdate() {
+        this.props.updateState({ [this.props.name]: this.state.value });
+    }
+
     handleChange(e) {
         this.setState({ value: e.target.value });
         this.props.updateState({ [this.props.name]: e.target.value });
+    }
+
+    static getChoicesToUse(defaultChoices, conditionChoices, props) {
+        var choicesToUse = defaultChoices;
+        if (conditionChoices) {
+            for (var i = 0; i < conditionChoices.length; i++) {
+                const conditionPropertyValue = props.data[conditionChoices[i].conditionPropertyName];
+                if (conditionChoices[i].conditionPropertyValue === conditionPropertyValue) {
+                    choicesToUse = conditionChoices[i].choices;
+                    break;
+                }
+            }
+        }
+        return choicesToUse;
+    }
+
+    static getDerivedStateFromProps(props, state) {
+        const { choicesToUse, choices, conditionChoices } = state;
+        const newChoicesToUse = Dropdown.getChoicesToUse(choices, conditionChoices, props);
+        if (choicesToUse !== newChoicesToUse) {
+            return {
+                choicesToUse: newChoicesToUse,
+                value: ''
+            };
+        }
+        return null;
     }
 
     render() {
@@ -27,7 +65,7 @@ class Dropdown extends Component {
             label,
             name
         } = this.props;
-        const { choices } = this.state;
+        const { choicesToUse } = this.state;
         return (
             <div className={`govuk-form-group${error ? ' govuk-form-group--error' : ''}`}>
 
@@ -42,7 +80,7 @@ class Dropdown extends Component {
                     onChange={e => this.handleChange(e)}
                     value={this.state.value}
                 >
-                    {choices && choices.map((choice, i) => {
+                    {choicesToUse && choicesToUse.map((choice, i) => {
                         return (
                             <option key={i} value={choice.value} >{choice.label}</option>
                         );
@@ -55,6 +93,8 @@ class Dropdown extends Component {
 
 Dropdown.propTypes = {
     choices: PropTypes.arrayOf(PropTypes.object),
+    conditionChoices: PropTypes.arrayOf(PropTypes.object),
+    data: PropTypes.arrayOf(PropTypes.object),
     disabled: PropTypes.bool,
     error: PropTypes.string,
     hint: PropTypes.string,
@@ -66,7 +106,9 @@ Dropdown.propTypes = {
 
 Dropdown.defaultProps = {
     disabled: false,
-    choices: []
+    choices: [],
+    conditionChoices: [],
+    data: []
 };
 
 export default Dropdown;
