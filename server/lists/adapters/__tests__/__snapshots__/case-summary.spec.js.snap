@@ -1,13 +1,133 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Case Summary Adapter should map additionalFields data values when choices are provided 1`] = `
+Object {
+  "additionalFields": Array [
+    Object {
+      "choices": Array [
+        Object {
+          "label": "TestA text",
+          "value": "TESTA",
+        },
+        Object {
+          "label": "TestB text",
+          "value": "TESTB",
+        },
+      ],
+      "label": "Test field",
+      "value": "TestB text",
+    },
+  ],
+  "case": Object {
+    "created": "03/02/2019",
+    "deadline": "01/01/2020",
+    "received": "01/01/2019",
+  },
+  "deadlines": Array [
+    Object {
+      "label": "MOCK_STAGETYPE",
+      "value": "01/01/2019",
+    },
+    Object {
+      "label": "MOCK_STAGETYPE",
+      "value": "06/01/2019",
+    },
+    Object {
+      "label": "MOCK_STAGETYPE",
+      "value": "01/01/2020",
+    },
+  ],
+  "deadlinesEnabled": true,
+  "primaryCorrespondent": Object {
+    "address": Object {
+      "address1": "__address1__",
+      "address2": "__address2__",
+      "address3": "__address3__",
+      "country": "__country__",
+      "postcode": "__postcode__",
+    },
+    "fullname": "Test Correspondent",
+  },
+  "primaryTopic": "Topic A",
+  "stages": Array [
+    Object {
+      "assignedTeam": "MOCK_TEAM",
+      "assignedUser": "MOCK_USER",
+      "stage": "MOCK_STAGETYPE",
+    },
+  ],
+}
+`;
+
+exports[`Case Summary Adapter should map additionalFields data values when choices are provided as list name 1`] = `
+Object {
+  "additionalFields": Array [
+    Object {
+      "choices": Array [
+        Object {
+          "label": "TestA text",
+          "value": "TESTA",
+        },
+        Object {
+          "label": "TestB text",
+          "value": "TESTB",
+        },
+      ],
+      "label": "Test field",
+      "value": "TestB text",
+    },
+  ],
+  "case": Object {
+    "created": "03/02/2019",
+    "deadline": "01/01/2020",
+    "received": "01/01/2019",
+  },
+  "deadlines": Array [
+    Object {
+      "label": "MOCK_STAGETYPE",
+      "value": "01/01/2019",
+    },
+    Object {
+      "label": "MOCK_STAGETYPE",
+      "value": "06/01/2019",
+    },
+    Object {
+      "label": "MOCK_STAGETYPE",
+      "value": "01/01/2020",
+    },
+  ],
+  "deadlinesEnabled": true,
+  "primaryCorrespondent": Object {
+    "address": Object {
+      "address1": "__address1__",
+      "address2": "__address2__",
+      "address3": "__address3__",
+      "country": "__country__",
+      "postcode": "__postcode__",
+    },
+    "fullname": "Test Correspondent",
+  },
+  "primaryTopic": "Topic A",
+  "stages": Array [
+    Object {
+      "assignedTeam": "MOCK_TEAM",
+      "assignedUser": "MOCK_USER",
+      "stage": "MOCK_STAGETYPE",
+    },
+  ],
+}
+`;
+
 exports[`Case Summary Adapter should not show deadlines when deadlines are disabled 1`] = `
 Object {
   "additionalFields": Array [
     Object {
+      "choices": undefined,
       "label": "Test field",
       "value": "TEST",
     },
     Object {
+      "choices": undefined,
       "label": "Test additional field date",
       "value": "01/01/2020",
     },
@@ -44,10 +164,12 @@ exports[`Case Summary Adapter should transform fully populated case summary data
 Object {
   "additionalFields": Array [
     Object {
+      "choices": undefined,
       "label": "Test field",
       "value": "TEST",
     },
     Object {
+      "choices": undefined,
       "label": "Test additional field date",
       "value": "01/01/2020",
     },
