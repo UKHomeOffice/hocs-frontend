@@ -92,10 +92,14 @@ async function hydrateField(field, req) {
 
         if (conditionChoices) {
             for (var i = 0; i < conditionChoices.length; i++) {
-                field.props.conditionChoices[i].choices = await req.listService.fetch(
-                    conditionChoices[i].choices,
-                    req.params
-                );
+                if (typeof conditionChoices[i].choices === 'string') {
+                    field.props.conditionChoices[i].choices = await req.listService.fetch(
+                        conditionChoices[i].choices,
+                        req.params
+                    );
+                } else {
+                    field.props.conditionChoices[i].choices = conditionChoices[i].choices;
+                }
                 const conditionPropertyValue = req.form.data[conditionChoices[i].conditionPropertyName];
                 if (conditionChoices[i].conditionPropertyValue === conditionPropertyValue) {
                     field.props.choices = field.props.conditionChoices[i].choices;
