@@ -22,9 +22,11 @@ class Dropdown extends Component {
         this.props.updateState({ [this.props.name]: this.state.value });
     }
 
-    componentDidUpdate() {
-        // temporary fix - will break the update for blank value 
-        //this.props.updateState({ [this.props.name]: this.state.value });
+    componentDidUpdate(prevProps) {
+        if (prevProps.value !== this.state.value) {
+            this.props.updateState({ [this.props.name]: this.state.value });
+        }
+
     }
 
     handleChange(e) {
