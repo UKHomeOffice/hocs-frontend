@@ -5,19 +5,69 @@ class Radio extends Component {
 
     constructor(props) {
         super(props);
+        const choices = Array.from(props.choices);
+        const conditionChoices = Array.from(JSON.parse(JSON.stringify(props.conditionChoices)));
+        for (var i = 0; i < conditionChoices.length; i++) {
+            const conditionChoice = Array.from(conditionChoices[i].choices);
+            conditionChoices[i].choices = conditionChoice;
+        }
+
+        const choicesToUse = Radio.getChoicesToUse(choices, conditionChoices, this.props);
+        this.state = { value: this.props.value, choices, conditionChoices, choicesToUse };
     }
 
     componentDidMount() {
         this.props.updateState({ [this.props.name]: this.props.value });
     }
 
+    componentDidUpdate(prevProps) {
+        if (prevProps.value !== this.state.value) {
+            this.props.updateState({ [this.props.name]: this.state.value });
+        }
+    }
+
     handleChange(e) {
         this.props.updateState({ [this.props.name]: e.target.value });
     }
 
+    static getChoicesToUse(defaultChoices, conditionChoices, props) {
+        var choicesToUse = defaultChoices;
+        if (conditionChoices) {
+            for (var i = 0; i < conditionChoices.length; i++) {
+                const conditionPropertyValue = props.data[conditionChoices[i].conditionPropertyName];
+                if (conditionChoices[i].conditionPropertyValue === conditionPropertyValue) {
+                    choicesToUse = conditionChoices[i].choices;
+                    break;
+                }
+            }
+        }
+        return choicesToUse;
+    }
+
+    static getDerivedStateFromProps(props, state) {
+        const { choicesToUse, choices, conditionChoices } = state;
+        const newChoicesToUse = Radio.getChoicesToUse(choices, conditionChoices, props);
+        if (choicesToUse !== newChoicesToUse) {
+            for (var i = 0; i < newChoicesToUse.length; i++) {
+                if (newChoicesToUse[i].value === props.value) {
+                    return {
+                        choicesToUse: newChoicesToUse,
+                        value: props.value
+                    };
+                }
+            }
+            return {
+                choicesToUse: newChoicesToUse,
+                value: ''
+            };
+        }
+        return {
+            value: props.value
+        };
+    }
+
     render() {
         const {
-            choices,
             className,
             disabled,
             error,
@@ -27,6 +77,7 @@ class Radio extends Component {
             type,
             value
         } = this.props;
+        const { choicesToUse } = this.state;
         return (
             <div className={`govuk-form-group${error ? ' govuk-form-group--error' : ''}`}>
 
@@ -40,7 +91,7 @@ class Radio extends Component {
                     {error && <span id={`${name}-error`} className="govuk-error-message">{error}</span>}
 
                     <div className={'govuk-radios'}>
-                        {choices && choices.map((choice, i) => {
+                        {choicesToUse && choicesToUse.map((choice, i) => {
                             return (
                                 <div key={i} className="govuk-radios__item">
                                     <input id={`${name}-${choice.value}`}
@@ -56,7 +107,7 @@ class Radio extends Component {
                             );
                         })}
 
-                        {choices.length === 0 && <p className="govuk-body">No options available</p>}
+                        {choicesToUse.length === 0 && <p className="govuk-body">No options available</p>}
                     </div>
                 </fieldset>
             </div>
@@ -68,6 +119,7 @@ Radio.propTypes = {
     choices: PropTypes.arrayOf(PropTypes.object),
     conditionChoices: PropTypes.arrayOf(PropTypes.object),
     className: PropTypes.string,
+    data: PropTypes.object,
     disabled: PropTypes.bool,
     error: PropTypes.string,
     hint: PropTypes.string,
@@ -81,6 +133,7 @@ Radio.propTypes = {
 Radio.defaultProps = {
     choices: [],
     conditionChoices: [],
+    data: null,
     disabled: false,
     type: 'radio'
 };
