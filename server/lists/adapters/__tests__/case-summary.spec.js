@@ -15,6 +15,15 @@ const mockFromStaticList = jest.fn((list) => {
     }
 });
 
+const mockFetchList = jest.fn((list) => {
+    switch (list) {
+        case 'S_LIST_TEST_VALUES':
+            return [{ value: 'TESTA', label: 'TestA text' }, { value: 'TESTB', label: 'TestB text' }];
+        default:
+            return null;
+    }
+});
+
 describe('Case Summary Adapter', () => {
 
     it('should transform minimal case summary data', async () => {
@@ -75,6 +84,86 @@ describe('Case Summary Adapter', () => {
         };
 
         const results = await caseSummaryAdapter(mockData, { fromStaticList: mockFromStaticList, configuration: mockConfiguration });
+
+        expect(results).toBeDefined();
+        expect(results).toMatchSnapshot();
+    });
+
+    it('should map additionalFields data values when choices are provided', async () => {
+
+        const mockConfiguration = {
+            deadlinesEnabled: true
+        };
+
+        const mockData = {
+            dateReceived: '2019-01-01',
+            caseCreated: '2019-02-03',
+            caseDeadline: '2020-01-01',
+            additionalFields: [
+                { label: 'Test field', value: 'TESTB', choices: [{ value: 'TESTA', label: 'TestA text' }, { value: 'TESTB', label: 'TestB text' }] }
+            ],
+            primaryTopic: { label: 'Topic A' },
+            primaryCorrespondent: {
+                address: {
+                    address1: '__address1__',
+                    address2: '__address2__',
+                    address3: '__address3__',
+                    country: '__country__',
+                    postcode: '__postcode__',
+                },
+                fullname: 'Test Correspondent'
+            },
+            stageDeadlines: {
+                1: '2020-01-01',
+                2: '2019-01-01',
+                3: '2019-01-06'
+            },
+            activeStages: [
+                { stage: 1, assignedToUserUUID: 1, assignedToTeamUUID: 1 }
+            ]
+        };
+
+        const results = await caseSummaryAdapter(mockData, { fromStaticList: mockFromStaticList, configuration: mockConfiguration });
+
+        expect(results).toBeDefined();
+        expect(results).toMatchSnapshot();
+    });
+
+    it('should map additionalFields data values when choices are provided as list name', async () => {
+
+        const mockConfiguration = {
+            deadlinesEnabled: true
+        };
+
+        const mockData = {
+            dateReceived: '2019-01-01',
+            caseCreated: '2019-02-03',
+            caseDeadline: '2020-01-01',
+            additionalFields: [
+                { label: 'Test field', value: 'TESTB', choices: 'S_LIST_TEST_VALUES' }
+            ],
+            primaryTopic: { label: 'Topic A' },
+            primaryCorrespondent: {
+                address: {
+                    address1: '__address1__',
+                    address2: '__address2__',
+                    address3: '__address3__',
+                    country: '__country__',
+                    postcode: '__postcode__',
+                },
+                fullname: 'Test Correspondent'
+            },
+            stageDeadlines: {
+                1: '2020-01-01',
+                2: '2019-01-01',
+                3: '2019-01-06'
+            },
+            activeStages: [
+                { stage: 1, assignedToUserUUID: 1, assignedToTeamUUID: 1 }
+            ]
+        };
+
+        const results = await caseSummaryAdapter(mockData, { fromStaticList: mockFromStaticList, fetchList: mockFetchList, configuration: mockConfiguration });
 
         expect(results).toBeDefined();
         expect(results).toMatchSnapshot();

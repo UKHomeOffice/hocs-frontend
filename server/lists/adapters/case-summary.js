@@ -1,4 +1,24 @@
-const createAdditionalFields = (additionalFields = []) => additionalFields.map(({ label, value, type }) => type === 'date' ? ({ label, value: formatDate(value) }) : ({ label, value }));
+
+const createAdditionalFields = async (additionalFields = [], fetchList) => {
+    var results = additionalFields.map(({ label, value, type, choices }) => type === 'date' ? ({ label, value: formatDate(value), choices }) : ({ label, value, choices }));
+
+    for (var i = 0; i < results.length; i++) {
+        var field = results[i];
+        if (field.choices && typeof field.choices === 'string') {
+            field.choices = await fetchList(field.choices);
+        }
+        if (field.choices) {
+            for (var j = 0; j < field.choices.length; j++) {
+                const choice = field.choices[j];
+                if (choice.value && choice.value === field.value) {
+                    field.value = choice.label;
+                    break;
+                }
+            }
+        }
+    }
+    return results;
+};
 
 const createDeadlines = async (deadlines, fromStaticList) => await Promise.all(Object.entries(deadlines)
     .sort((a, b) => Date.parse(a[1]) - Date.parse(b[1]))
@@ -29,13 +49,13 @@ const parseDate = (rawDate) => {
 
 const formatDate = (date) => date ? parseDate(date) : null;
 
-module.exports = async (summary, { fromStaticList, configuration }) => ({
+module.exports = async (summary, { fromStaticList, fetchList, configuration }) => ({
     case: {
         created: formatDate(summary.caseCreated),
         received: formatDate(summary.dateReceived),
         deadline: formatDate(summary.caseDeadline)
     },
-    additionalFields: createAdditionalFields(summary.additionalFields),
+    additionalFields: await createAdditionalFields(summary.additionalFields, fetchList),
     primaryTopic: getPrimaryTopic(summary.primaryTopic),
     primaryCorrespondent: getPrimaryCorrespondent(summary.primaryCorrespondent),
     deadlinesEnabled: configuration.deadlinesEnabled,

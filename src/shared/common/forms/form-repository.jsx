@@ -20,6 +20,7 @@ import Panel from './panel.jsx';
 import Accordion from './accordion.jsx';
 import Hidden from './hidden.jsx';
 import ExpandableCheckbox from './expandable-checkbox.jsx';
+import FlowDirectionLink from './flow-direction-link.jsx';
 
 function defaultDataAdapter(name, data) {
     return data[name] || '';
@@ -41,7 +42,7 @@ function renderFormComponent(Component, options) {
 }
 
 export function formComponentFactory(field, options) {
-    const { key, config, data, errors, callback } = options;
+    const { key, config, data, errors, callback, page } = options;
     switch (field) {
         case 'radio':
             return renderFormComponent(Radio, { key, config, data, errors, callback });
@@ -97,6 +98,13 @@ export function formComponentFactory(field, options) {
             return renderFormComponent(Accordion, { data, key, config, errors, callback });
         case 'expandable-checkbox':
             return renderFormComponent(ExpandableCheckbox, { data, key, config, errors, callback });
+        case 'flow-direction-link':
+            return renderFormComponent(FlowDirectionLink, {
+                key, config: {
+                    ...config, caseId: page.caseId, stageId: page.stageId,
+                    action: `/case/${page.caseId}/stage/${page.stageId}/direction/${config.flowDirection}`
+                }
+            });
         default:
             return null;
     }
@@ -113,7 +121,7 @@ export function secondaryActionFactory(field, options) {
             return renderFormComponent(BackButton, {
                 key, config: {
                     ...config, caseId: page.caseId, stageId: page.stageId,
-                    action: `/case/${page.caseId}/stage/${page.stageId}/back`
+                    action: `/case/${page.caseId}/stage/${page.stageId}/direction/BACKWARD`
                 }
             });
         default:

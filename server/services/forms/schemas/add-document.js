@@ -7,7 +7,7 @@ module.exports = options => Form()
         Component('dropdown', 'document_type')
             .withValidator('required', 'Document type is required')
             .withProp('label', 'Document type')
-            .withProp('choices', 'S_DOCUMENT_TAGS')
+            .withProp('choices', 'CASE_DOCUMENT_TAGS')
             .build()
     )
     .withField(

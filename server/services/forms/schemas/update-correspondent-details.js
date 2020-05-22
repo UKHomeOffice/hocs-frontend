@@ -53,8 +53,8 @@ module.exports = async ({ caseId, stageId, context, user, requestId }) => {
                 .build()
         )
         .withField(
-            Component('text', 'reference')
-                .withProp('label', 'Does this correspondent give a reference?')
+            Component('text-area', 'reference')
+                .withProp('label', 'Enter any references given')
                 .build()
         )
         .withField(

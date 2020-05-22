@@ -11,6 +11,7 @@ const templatesAdapter = require('./adapters/templates');
 const membersAdapter = require('./adapters/members');
 const documentsAdapter = require('./adapters/documents');
 const documentListAdapter = require('./adapters/documentList');
+const documentTagsAdapter = require('./adapters/documentTags');
 const countrySortAdapter = require('./adapters/countrySort');
 const caseNoteAdapter = require('./adapters/case-notes');
 const caseSummaryAdapter = require('./adapters/case-summary');
@@ -47,12 +48,6 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: statics.stageTypesAdapter
         },
-        S_DOCUMENT_TAGS: {
-            client: 'INFO',
-            endpoint: '/configuration',
-            type: listService.types.STATIC,
-            adapter: statics.documentTagsAdapter
-        },
         S_SYSTEM_CONFIGURATION: {
             client: 'INFO',
             endpoint: '/configuration',
@@ -61,21 +56,127 @@ module.exports = {
         S_WCS_COHORTS: {
             client: 'INFO',
             endpoint: '/entity/list/WCS_COHORTS',
+            type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_WCS_I_STATUS: {
             client: 'INFO',
             endpoint: '/entity/list/WCS_I_STATUS',
+            type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_WCS_I_STATUS_OUTCOME: {
             client: 'INFO',
             endpoint: '/entity/list/WCS_I_STATUS_OUTCOME',
+            type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_WCS_ELIG_REJ_REASON: {
             client: 'INFO',
             endpoint: '/entity/list/WCS_ELIG_REJ_REASON',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_UKVI_ENQUIRY_SUBJECTS: {
+            client: 'INFO',
+            endpoint: '/entity/list/UKVI_ENQUIRY_SUBJECTS',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_UKVI_ENQUIRY_REASONS_ALL: {
+            client: 'INFO',
+            endpoint: '/entity/list/UKVI_ENQUIRY_REASONS_ALL',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_UKVI_ENQUIRY_REASONS_PER: {
+            client: 'INFO',
+            endpoint: '/entity/list/UKVI_ENQUIRY_REASONS_PER',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_UKVI_ENQUIRY_REASONS_GUI: {
+            client: 'INFO',
+            endpoint: '/entity/list/UKVI_ENQUIRY_REASONS_GUI',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_UKVI_ENQUIRY_REASONS_DOC: {
+            client: 'INFO',
+            endpoint: '/entity/list/UKVI_ENQUIRY_REASONS_DOC',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_UKVI_ENQUIRY_REASONS_TECH: {
+            client: 'INFO',
+            endpoint: '/entity/list/UKVI_ENQUIRY_REASONS_TECH',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_UKVI_ENQUIRY_REASONS_DET: {
+            client: 'INFO',
+            endpoint: '/entity/list/UKVI_ENQUIRY_REASONS_DET',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_UKVI_ENQUIRY_REASONS_HMPO: {
+            client: 'INFO',
+            endpoint: '/entity/list/UKVI_ENQUIRY_REASONS_HMPO',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_UKVI_ENQUIRY_REASONS_OTHER: {
+            client: 'INFO',
+            endpoint: '/entity/list/UKVI_ENQUIRY_REASONS_OTHER',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_UKVI_BUS_UNITS_ALL: {
+            client: 'INFO',
+            endpoint: '/entity/list/UKVI_BUS_UNITS_ALL',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_UKVI_BUS_UNITS_1: {
+            client: 'INFO',
+            endpoint: '/entity/list/UKVI_BUS_UNITS_1',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_UKVI_BUS_UNITS_2: {
+            client: 'INFO',
+            endpoint: '/entity/list/UKVI_BUS_UNITS_2',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_UKVI_BUS_UNITS_3: {
+            client: 'INFO',
+            endpoint: '/entity/list/UKVI_BUS_UNITS_3',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_UKVI_BUS_UNITS_4: {
+            client: 'INFO',
+            endpoint: '/entity/list/UKVI_BUS_UNITS_4',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_UKVI_BUS_UNITS_5: {
+            client: 'INFO',
+            endpoint: '/entity/list/UKVI_BUS_UNITS_5',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_UKVI_BUS_UNITS_6: {
+            client: 'INFO',
+            endpoint: '/entity/list/UKVI_BUS_UNITS_6',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_UKVI_BUS_UNITS_7: {
+            client: 'INFO',
+            endpoint: '/entity/list/UKVI_BUS_UNITS_7',
+            type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         CASE_TYPES: {
@@ -199,6 +300,11 @@ module.exports = {
             client: 'CASEWORK',
             endpoint: '/case/document/reference/${caseId}/?type=DRAFT',
             adapter: documentListAdapter
+        },
+        CASE_DOCUMENT_TAGS: {
+            client: 'CASEWORK',
+            endpoint: '/case/${caseId}/documentTags',
+            adapter: documentTagsAdapter
         },
         CASE_NOTES: {
             client: 'CASEWORK',

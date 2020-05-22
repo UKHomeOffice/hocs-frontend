@@ -46,7 +46,8 @@ class Form extends Component {
                                 data,
                                 errors,
                                 callback: this.props.updateFormState,
-                                baseUrl: `/case/${page.caseId}/stage/${page.stageId}`
+                                baseUrl: `/case/${page.caseId}/stage/${page.stageId}`,
+                                page
                             });
                         })
                     }
