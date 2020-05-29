@@ -1,17 +1,31 @@
 const Form = require('../form-builder');
 const { Component } = require('../component-builder');
-const uuid = require('uuid/v4');
-const listService = require('../../list');
+const { infoService } = require('../../../clients');
+const User = require('../../../models/user');
+
 
 const search = async (options = {}) => {
-    const { submissionUrl } = options;
+    const { submissionUrl, user, listService } = options;
 
+    let headers = {
+        headers: User.createHeaders(user)
+    };
+    const userProfileNames = (await infoService.get('/profileNames', headers)).data;
     const form = Form();
 
-    const listServiceInstance = listService.getInstance(uuid(), null);
-    const fieldsFromServer = (await listServiceInstance.fetch('S_SYSTEM_CONFIGURATION')).searchFields;
+    let fields = [];
+    const systemConfiguration = await listService.fetch('S_SYSTEM_CONFIGURATION');
+    systemConfiguration.profiles.map(profile => {
+        if (userProfileNames.includes(profile.profileName)) {
+            profile.searchFields.map(searchField => {
+                if (!fields.some(field => field.name === searchField.name && field.component === searchField.component)) {
+                    fields.push(searchField);
+                }
+            });
+        }
+    });
 
-    fieldsFromServer.map(field => form.withField(Component(field.component, field.name, field).build()));
+    fields.map(field => form.withField(Component(field.component, field.name, field).build()));
 
     return form.withTitle('Search')
         .withPrimaryActionLabel('Search')

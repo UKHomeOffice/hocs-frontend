@@ -3,6 +3,7 @@ const getLogger = require('../libs/logger');
 const User = require('../models/user');
 const { bindDisplayElements } = require('../lists/adapters/workstacks');
 const { sortObjectByProp } = require('../libs/sortHelpers');
+const { infoService } = require('../clients');
 
 async function handleSearch(req, res, next) {
     const logger = getLogger(req.requestId);
@@ -10,19 +11,22 @@ async function handleSearch(req, res, next) {
         const formData = req.form.data;
         const request = {
             reference: formData['reference'] ? formData['reference'].toUpperCase() : '',
-            caseType: formData['caseTypes'],
+            caseType: formData['caseTypes'] ? formData['caseTypes'] : await req.listService.fetch('CASE_TYPES_COMMA_SEPARATED'),
             dateReceived: {
                 to: formData['dateReceivedTo'],
                 from: formData['dateReceivedFrom']
             },
             correspondentName: formData['correspondent'],
+            correspondentReference: formData['correspondentReference'],
+            correspondentExternalKey: formData['correspondentExternalKey'] ? await getMemberExternalKey(formData['correspondentExternalKey']) : undefined,
             topic: formData['topic'],
             data: {
                 POTeamUUID: formData['signOffMinister'],
                 FullName: formData['claimantName'],
                 DateOfBirth: formData['claimantDOB'],
                 NI: formData['niNumber'],
-                PrevHocsRef: formData['PrevHocsRef']
+                PrevHocsRef: formData['PrevHocsRef'],
+                RefType: formData['RefType'],
             },
             activeOnly: formData['caseStatus'] === 'active'
         };
@@ -52,6 +56,11 @@ async function handleSearch(req, res, next) {
         logger.error('SEARCH_FAILED', { message: error.message, stack: error.stack });
         next(error);
     }
+}
+
+async function getMemberExternalKey(memberUuid) {
+    const response = await infoService.get(`/member/${memberUuid}`);
+    return response.data.externalKey;
 }
 
 module.exports = {
