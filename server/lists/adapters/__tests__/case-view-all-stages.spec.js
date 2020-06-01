@@ -6,32 +6,6 @@ const mockData = {
     schema: {
         title: 'View Case',
         fields: {
-            STAGE_NAME2: [
-                {
-                    component: 'text',
-                    validation: ['required'],
-                    props: {
-                        name: 'my_field',
-                        label: 'My Field'
-                    },
-                },
-                {
-                    component: 'date',
-                    validation: ['required'],
-                    props: {
-                        name: 'my_date_field',
-                        label: 'My Date Field'
-                    },
-                },
-                {
-                    component: 'text',
-                    validation: ['required'],
-                    props: {
-                        name: 'my_empty_field',
-                        label: 'My Empty Field'
-                    },
-                },
-            ],
             STAGE_NAME: [
                 {
                     component: 'text',
@@ -83,6 +57,32 @@ const mockData = {
                         label: 'My Empty Field'
                     },
                 },
+            ],
+            STAGE_NAME2: [
+                {
+                    component: 'text',
+                    validation: ['required'],
+                    props: {
+                        name: 'my_field',
+                        label: 'My Field'
+                    },
+                },
+                {
+                    component: 'date',
+                    validation: ['required'],
+                    props: {
+                        name: 'my_date_field',
+                        label: 'My Date Field'
+                    },
+                },
+                {
+                    component: 'text',
+                    validation: ['required'],
+                    props: {
+                        name: 'my_empty_field',
+                        label: 'My Empty Field'
+                    },
+                },
             ]
 
         }
@@ -94,7 +94,7 @@ const mockData = {
 };
 
 describe('Case-view-all-stages Adapter', () => {
-    it('should build a schema from the provided template and have sections in alphabetical order', async () => {
+    it('should build a schema from the provided template and have sections maintain same order as schema object', async () => {
 
         const result = await caseViewAllStagesAdapter(mockData, { fromStaticList: mockFromStaticList });
 

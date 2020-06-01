@@ -61,9 +61,12 @@ class Radio extends Component {
                 value: ''
             };
         }
-        return {
-            value: props.value
-        };
+        if (props.value !== state.value) {
+            return {
+                value: props.value
+            };
+        }
+        return null;
     }
 
     render() {
