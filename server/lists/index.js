@@ -2,6 +2,7 @@ const { caseworkService, infoService, workflowService } = require('../clients/in
 const listService = require('../services/list');
 const statics = require('./adapters/statics');
 const caseTypeAdapter = require('./adapters/case-types');
+const caseTypeCommaSeparatedAdapter = require('./adapters/case-types-comma-separated');
 const workstack = require('./adapters/workstacks');
 const topicAdapter = require('./adapters/topics');
 const usersAdapter = require('./adapters/users');
@@ -188,6 +189,11 @@ module.exports = {
             client: 'INFO',
             endpoint: '/caseType?bulkOnly=true',
             adapter: caseTypeAdapter
+        },
+        CASE_TYPES_COMMA_SEPARATED: {
+            client: 'INFO',
+            endpoint: '/caseType?bulkOnly=false',
+            adapter: caseTypeCommaSeparatedAdapter
         },
         COUNTRIES_CURRENT: {
             client: 'INFO',
