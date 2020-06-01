@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export KUBE_NAMESPACE=${KUBE_NAMESPACE}
+export KUBE_NAMESPACE=${ENVIRONMENT}
 export KUBE_SERVER=${KUBE_SERVER}
 
 if [[ -z ${VERSION} ]] ; then
@@ -57,11 +57,11 @@ fi
 if [[ "${KUBE_NAMESPACE}" == "wcs-prod" ]] ; then
     export DNS_PREFIX=www.${DOMAIN}
     export KC_REALM=https://sso.digital.homeoffice.gov.uk/auth/realms/HOCS
-elif [[ "${ENVIRONMENT}" == "prod" ]] ; then
+elif [[ "${KUBE_NAMESPACE}" == "cs-prod" ]] ; then
     export DNS_PREFIX=www.${DOMAIN}
     export KC_REALM=https://sso.digital.homeoffice.gov.uk/auth/realms/hocs-prod
 else
-    export DNS_PREFIX=${ENVIRONMENT}.${DOMAIN}-notprod
+    export DNS_PREFIX=${DOMAIN}.${DOMAIN}-notprod
     export KC_REALM=https://sso-dev.notprod.homeoffice.gov.uk/auth/realms/hocs-notprod
 fi
 
