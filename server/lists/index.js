@@ -78,105 +78,105 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
-        S_UKVI_ENQUIRY_SUBJECTS: {
+        S_MPAM_ENQUIRY_SUBJECTS: {
             client: 'INFO',
-            endpoint: '/entity/list/UKVI_ENQUIRY_SUBJECTS',
+            endpoint: '/entity/list/MPAM_ENQUIRY_SUBJECTS',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
-        S_UKVI_ENQUIRY_REASONS_ALL: {
+        S_MPAM_ENQUIRY_REASONS_ALL: {
             client: 'INFO',
-            endpoint: '/entity/list/UKVI_ENQUIRY_REASONS_ALL',
+            endpoint: '/entity/list/MPAM_ENQUIRY_REASONS_ALL',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
-        S_UKVI_ENQUIRY_REASONS_PER: {
+        S_MPAM_ENQUIRY_REASONS_PER: {
             client: 'INFO',
-            endpoint: '/entity/list/UKVI_ENQUIRY_REASONS_PER',
+            endpoint: '/entity/list/MPAM_ENQUIRY_REASONS_PER',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
-        S_UKVI_ENQUIRY_REASONS_GUI: {
+        S_MPAM_ENQUIRY_REASONS_GUI: {
             client: 'INFO',
-            endpoint: '/entity/list/UKVI_ENQUIRY_REASONS_GUI',
+            endpoint: '/entity/list/MPAM_ENQUIRY_REASONS_GUI',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
-        S_UKVI_ENQUIRY_REASONS_DOC: {
+        S_MPAM_ENQUIRY_REASONS_DOC: {
             client: 'INFO',
-            endpoint: '/entity/list/UKVI_ENQUIRY_REASONS_DOC',
+            endpoint: '/entity/list/MPAM_ENQUIRY_REASONS_DOC',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
-        S_UKVI_ENQUIRY_REASONS_TECH: {
+        S_MPAM_ENQUIRY_REASONS_TECH: {
             client: 'INFO',
-            endpoint: '/entity/list/UKVI_ENQUIRY_REASONS_TECH',
+            endpoint: '/entity/list/MPAM_ENQUIRY_REASONS_TECH',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
-        S_UKVI_ENQUIRY_REASONS_DET: {
+        S_MPAM_ENQUIRY_REASONS_DET: {
             client: 'INFO',
-            endpoint: '/entity/list/UKVI_ENQUIRY_REASONS_DET',
+            endpoint: '/entity/list/MPAM_ENQUIRY_REASONS_DET',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
-        S_UKVI_ENQUIRY_REASONS_HMPO: {
+        S_MPAM_ENQUIRY_REASONS_HMPO: {
             client: 'INFO',
-            endpoint: '/entity/list/UKVI_ENQUIRY_REASONS_HMPO',
+            endpoint: '/entity/list/MPAM_ENQUIRY_REASONS_HMPO',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
-        S_UKVI_ENQUIRY_REASONS_OTHER: {
+        S_MPAM_ENQUIRY_REASONS_OTHER: {
             client: 'INFO',
-            endpoint: '/entity/list/UKVI_ENQUIRY_REASONS_OTHER',
+            endpoint: '/entity/list/MPAM_ENQUIRY_REASONS_OTHER',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
-        S_UKVI_BUS_UNITS_ALL: {
+        S_MPAM_BUS_UNITS_ALL: {
             client: 'INFO',
-            endpoint: '/entity/list/UKVI_BUS_UNITS_ALL',
+            endpoint: '/entity/list/MPAM_BUS_UNITS_ALL',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
-        S_UKVI_BUS_UNITS_1: {
+        S_MPAM_BUS_UNITS_1: {
             client: 'INFO',
-            endpoint: '/entity/list/UKVI_BUS_UNITS_1',
+            endpoint: '/entity/list/MPAM_BUS_UNITS_1',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
-        S_UKVI_BUS_UNITS_2: {
+        S_MPAM_BUS_UNITS_2: {
             client: 'INFO',
-            endpoint: '/entity/list/UKVI_BUS_UNITS_2',
+            endpoint: '/entity/list/MPAM_BUS_UNITS_2',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
-        S_UKVI_BUS_UNITS_3: {
+        S_MPAM_BUS_UNITS_3: {
             client: 'INFO',
-            endpoint: '/entity/list/UKVI_BUS_UNITS_3',
+            endpoint: '/entity/list/MPAM_BUS_UNITS_3',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
-        S_UKVI_BUS_UNITS_4: {
+        S_MPAM_BUS_UNITS_4: {
             client: 'INFO',
-            endpoint: '/entity/list/UKVI_BUS_UNITS_4',
+            endpoint: '/entity/list/MPAM_BUS_UNITS_4',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
-        S_UKVI_BUS_UNITS_5: {
+        S_MPAM_BUS_UNITS_5: {
             client: 'INFO',
-            endpoint: '/entity/list/UKVI_BUS_UNITS_5',
+            endpoint: '/entity/list/MPAM_BUS_UNITS_5',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
-        S_UKVI_BUS_UNITS_6: {
+        S_MPAM_BUS_UNITS_6: {
             client: 'INFO',
-            endpoint: '/entity/list/UKVI_BUS_UNITS_6',
+            endpoint: '/entity/list/MPAM_BUS_UNITS_6',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
-        S_UKVI_BUS_UNITS_7: {
+        S_MPAM_BUS_UNITS_7: {
             client: 'INFO',
-            endpoint: '/entity/list/UKVI_BUS_UNITS_7',
+            endpoint: '/entity/list/MPAM_BUS_UNITS_7',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },

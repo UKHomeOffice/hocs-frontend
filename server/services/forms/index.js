@@ -35,7 +35,7 @@ const formDefinitions = {
                         action: 'CONFIRMATION_SUMMARY'
                     }
                 },
-                UKVI: {
+                MPAM: {
                     builder: formRepository.addDocument,
                     action: CREATE_CASE,
                     next: {
@@ -85,7 +85,7 @@ const formDefinitions = {
                         action: 'CONFIRMATION_SUMMARY'
                     }
                 },
-                UKVI: {
+                MPAM: {
                     builder: formRepository.bulkAddDocument,
                     action: BULK_CREATE_CASE,
                     next: {
