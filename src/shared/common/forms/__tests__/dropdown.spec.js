@@ -44,7 +44,7 @@ describe('Form dropdown component', () => {
             <Dropdown name="dropdown" choices={choices} updateState={mockCallback} />
         );
         expect(mockCallback).toHaveBeenCalledTimes(1);
-        expect(mockCallback).toHaveBeenCalledWith({ 'dropdown': '' });
+        expect(mockCallback).toHaveBeenCalledWith({ 'dropdown': undefined });
     });
     it('should execute callback on change', () => {
         const mockCallback = jest.fn();
