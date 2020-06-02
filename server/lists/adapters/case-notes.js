@@ -74,7 +74,7 @@ const typeAdaptors = {
     }),
     MANUAL: ({ noteCount, note }) => ({
         note,
-        title: `${noteCount}`
+        title: `Case note ${noteCount}`
     }),
     ALLOCATE: ({ note }) => ({
         note,
@@ -83,6 +83,10 @@ const typeAdaptors = {
     REJECT: ({ note }) => ({
         note,
         title: 'Rejection Note'
+    }),
+    PHONECALL: ({ note }) => ({
+        note,
+        title: 'Phone call summary'
     })
 };
 
