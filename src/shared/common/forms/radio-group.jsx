@@ -7,10 +7,6 @@ class Radio extends Component {
         super(props);
         const choices = Array.from(props.choices);
         const conditionChoices = Array.from(JSON.parse(JSON.stringify(props.conditionChoices)));
-        for (var i = 0; i < conditionChoices.length; i++) {
-            const conditionChoice = Array.from(conditionChoices[i].choices);
-            conditionChoices[i].choices = conditionChoice;
-        }
 
         const choicesToUse = Radio.getChoicesToUse(choices, conditionChoices, this.props);
         this.state = { value: this.props.value, choices, conditionChoices, choicesToUse };
@@ -30,22 +26,9 @@ class Radio extends Component {
         this.props.updateState({ [this.props.name]: e.target.value });
     }
 
-    static getChoicesToUse(defaultChoices, conditionChoices, props) {
-        var choicesToUse = defaultChoices;
-        if (conditionChoices) {
-            for (var i = 0; i < conditionChoices.length; i++) {
-                const conditionPropertyValue = props.data[conditionChoices[i].conditionPropertyName];
-                if (conditionChoices[i].conditionPropertyValue === conditionPropertyValue) {
-                    choicesToUse = conditionChoices[i].choices;
-                    break;
-                }
-            }
-        }
-        return choicesToUse;
-    }
-
     static getDerivedStateFromProps(props, state) {
-        const { choicesToUse, choices, conditionChoices } = state;
+        const { choicesToUse } = state;
+        const { choices, conditionChoices } = props;
         const newChoicesToUse = Radio.getChoicesToUse(choices, conditionChoices, props);
         if (choicesToUse !== newChoicesToUse) {
             for (var i = 0; i < newChoicesToUse.length; i++) {
@@ -67,6 +50,20 @@ class Radio extends Component {
             };
         }
         return null;
+    }
+
+    static getChoicesToUse(defaultChoices, conditionChoices, props) {
+        var choicesToUse = defaultChoices;
+        if (conditionChoices) {
+            for (var i = 0; i < conditionChoices.length; i++) {
+                const conditionPropertyValue = props.data[conditionChoices[i].conditionPropertyName];
+                if (conditionChoices[i].conditionPropertyValue === conditionPropertyValue) {
+                    choicesToUse = conditionChoices[i].choices;
+                    break;
+                }
+            }
+        }
+        return choicesToUse;
     }
 
     render() {
@@ -93,7 +90,7 @@ class Radio extends Component {
                     {hint && <span className="govuk-hint">{hint}</span>}
                     {error && <span id={`${name}-error`} className="govuk-error-message">{error}</span>}
 
-                    <div className={'govuk-radios'}>
+                    <div id={`${name}-radios`} className={'govuk-radios'}>
                         {choicesToUse && choicesToUse.map((choice, i) => {
                             return (
                                 <div key={i} className="govuk-radios__item">
