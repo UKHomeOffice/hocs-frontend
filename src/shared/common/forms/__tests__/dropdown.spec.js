@@ -44,7 +44,7 @@ describe('Form dropdown component', () => {
             <Dropdown name="dropdown" choices={choices} updateState={mockCallback} />
         );
         expect(mockCallback).toHaveBeenCalledTimes(1);
-        expect(mockCallback).toHaveBeenCalledWith({ 'dropdown': undefined });
+        expect(mockCallback).toHaveBeenCalledWith({ 'dropdown': '' });
     });
     it('should execute callback on change', () => {
         const mockCallback = jest.fn();
@@ -57,11 +57,11 @@ describe('Form dropdown component', () => {
         mockCallback.mockReset();
 
         wrapper.find('#dropdown').simulate('change', { target: { value: firstValue } });
-        expect(mockCallback).toHaveBeenCalledTimes(2);
+        expect(mockCallback).toHaveBeenCalledTimes(1);
         expect(mockCallback).toHaveBeenCalledWith({ 'dropdown': firstValue });
 
         wrapper.find('#dropdown').simulate('change', { target: { value: secondValue } });
-        expect(mockCallback).toHaveBeenCalledTimes(4);
+        expect(mockCallback).toHaveBeenCalledTimes(2);
         expect(mockCallback).toHaveBeenCalledWith({ 'dropdown': secondValue });
     });
 });

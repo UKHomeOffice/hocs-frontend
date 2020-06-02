@@ -49,12 +49,32 @@ class Dropdown extends Component {
     }
 
     static getDerivedStateFromProps(props, state) {
-        const { choicesToUse, choices, conditionChoices } = state;
+        const { choicesToUse } = state;
+        const { choices } = props;
+        const conditionChoices = Array.from(JSON.parse(JSON.stringify(props.conditionChoices)));
+        for (var i = 0; i < conditionChoices.length; i++) {
+            const conditionChoice = Array.from(conditionChoices[i].choices);
+            conditionChoice.unshift({ label: '', value: '' });
+            conditionChoices[i].choices = conditionChoice;
+        }
         const newChoicesToUse = Dropdown.getChoicesToUse(choices, conditionChoices, props);
         if (choicesToUse !== newChoicesToUse) {
+            for (var j = 0; j < newChoicesToUse.length; j++) {
+                if (newChoicesToUse[j].value === props.value) {
+                    return {
+                        choicesToUse: newChoicesToUse,
+                        value: props.value
+                    };
+                }
+            }
             return {
                 choicesToUse: newChoicesToUse,
                 value: ''
+            };
+        }
+        if (props.value !== state.value) {
+            return {
+                value: props.value
             };
         }
         return null;
