@@ -63,7 +63,7 @@ const CaseNote = ({ author, date, modifiedBy, modifiedDate, note, refreshNotes, 
             onSubmit={onSubmit}>
             <div className={`govuk-form-group${submissionError ? ' govuk-form-group--error' : ''}`}>
 
-                <label htmlFor={'case-note'} id={'case-note-label'} className='govuk-label govuk-label--s'>Case note {title}.</label>
+                <label htmlFor={'case-note'} id={'case-note-label'} className='govuk-label govuk-label--s'>{title}.</label>
 
                 {submissionError && <span id={'case-note-error'} className='govuk-error-message'>{submissionError}</span>}
 
@@ -85,7 +85,7 @@ const CaseNote = ({ author, date, modifiedBy, modifiedDate, note, refreshNotes, 
     </Fragment> :
         <Fragment>
             {caseNote && <p>
-                <span className="case-note-number govuk-!-font-weight-bold">Case note {title}.</span>
+                <span className="case-note-number govuk-!-font-weight-bold">{title}.</span>
                 {caseNote.split(/\n/).map((line, i) => (<Fragment key={i}>{line}<br /></Fragment>))}
             </p>}
             {modifiedBy && <p>
