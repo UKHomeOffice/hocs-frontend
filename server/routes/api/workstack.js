@@ -58,6 +58,7 @@ router.post('/team/:teamId/allocate/user',
     fileMiddleware.any(),
     allocateToUser,
     teamWorkstackMiddleware,
+    getTeamMembers,
     sendWorkstackAllocateApiResponse
 );
 
@@ -65,6 +66,7 @@ router.post('/team/:teamId/workflow/:workflowId/allocate/user',
     fileMiddleware.any(),
     allocateToUser,
     workflowWorkstackMiddleware,
+    getTeamMembers,
     sendWorkstackAllocateApiResponse
 );
 
@@ -72,6 +74,7 @@ router.post('/team/:teamId/workflow/:workflowId/stage/:stageId/allocate/user',
     fileMiddleware.any(),
     allocateToUser,
     stageWorkstackMiddleware,
+    getTeamMembers,
     sendWorkstackAllocateApiResponse
 );
 
@@ -79,6 +82,7 @@ router.post('/team/:teamId/allocate/team',
     fileMiddleware.any(),
     allocateToTeam,
     teamWorkstackMiddleware,
+    getTeamMembers,
     sendWorkstackAllocateApiResponse
 );
 
@@ -86,6 +90,7 @@ router.post('/team/:teamId/workflow/:workflowId/allocate/team',
     fileMiddleware.any(),
     allocateToTeam,
     workflowWorkstackMiddleware,
+    getTeamMembers,
     sendWorkstackAllocateApiResponse
 );
 
@@ -93,6 +98,7 @@ router.post('/team/:teamId/workflow/:workflowId/stage/:stageId/allocate/team',
     fileMiddleware.any(),
     allocateToTeam,
     stageWorkstackMiddleware,
+    getTeamMembers,
     sendWorkstackAllocateApiResponse
 );
 
@@ -107,6 +113,7 @@ router.post('/team/:teamId/unallocate',
     fileMiddleware.any(),
     unallocate,
     teamWorkstackMiddleware,
+    getTeamMembers,
     sendWorkstackAllocateApiResponse
 );
 
@@ -114,6 +121,7 @@ router.post('/team/:teamId/workflow/:workflowId/unallocate',
     fileMiddleware.any(),
     unallocate,
     workflowWorkstackMiddleware,
+    getTeamMembers,
     sendWorkstackAllocateApiResponse
 );
 
@@ -121,6 +129,7 @@ router.post('/team/:teamId/workflow/:workflowId/stage/:stageId/unallocate',
     fileMiddleware.any(),
     unallocate,
     stageWorkstackMiddleware,
+    getTeamMembers,
     sendWorkstackAllocateApiResponse
 );
 

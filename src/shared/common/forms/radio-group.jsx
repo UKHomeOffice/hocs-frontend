@@ -30,7 +30,7 @@ class Radio extends Component {
         const { choicesToUse } = state;
         const { choices, conditionChoices } = props;
         const newChoicesToUse = Radio.getChoicesToUse(choices, conditionChoices, props);
-        if (choicesToUse !== newChoicesToUse) {
+        if (!Radio.choicesEqual(choicesToUse, newChoicesToUse)) {
             for (var i = 0; i < newChoicesToUse.length; i++) {
                 if (newChoicesToUse[i].value === props.value) {
                     return {
@@ -50,6 +50,19 @@ class Radio extends Component {
             };
         }
         return null;
+    }
+
+    static choicesEqual(a, b) {
+        if (a === b) return true;
+        if (a == null || b == null) return false;
+        if (a.length != b.length) return false;
+
+        for (var i = 0; i < a.length; ++i) {
+            if (a[i].label !== b[i].label || a[i].value !== b[i].value) {
+                return false;
+            }
+        }
+        return true;
     }
 
     static getChoicesToUse(defaultChoices, conditionChoices, props) {

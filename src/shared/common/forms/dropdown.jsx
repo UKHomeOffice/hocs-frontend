@@ -5,7 +5,7 @@ class Dropdown extends Component {
 
     constructor(props) {
         super(props);
-        const choices = Array.from(props.choices);
+        const choices = Array.from(JSON.parse(JSON.stringify(props.choices)));
         choices.unshift({ label: '', value: '' });
         const conditionChoices = Array.from(JSON.parse(JSON.stringify(props.conditionChoices)));
         for (var i = 0; i < conditionChoices.length; i++) {
@@ -50,7 +50,8 @@ class Dropdown extends Component {
 
     static getDerivedStateFromProps(props, state) {
         const { choicesToUse } = state;
-        const { choices } = props;
+        const choices = Array.from(JSON.parse(JSON.stringify(props.choices)));
+        choices.unshift({ label: '', value: '' });
         const conditionChoices = Array.from(JSON.parse(JSON.stringify(props.conditionChoices)));
         for (var i = 0; i < conditionChoices.length; i++) {
             const conditionChoice = Array.from(conditionChoices[i].choices);
@@ -58,7 +59,7 @@ class Dropdown extends Component {
             conditionChoices[i].choices = conditionChoice;
         }
         const newChoicesToUse = Dropdown.getChoicesToUse(choices, conditionChoices, props);
-        if (choicesToUse !== newChoicesToUse) {
+        if (!Dropdown.choicesEqual(choicesToUse, newChoicesToUse)) {
             for (var j = 0; j < newChoicesToUse.length; j++) {
                 if (newChoicesToUse[j].value === props.value) {
                     return {
@@ -78,6 +79,19 @@ class Dropdown extends Component {
             };
         }
         return null;
+    }
+
+    static choicesEqual(a, b) {
+        if (a === b) return true;
+        if (a == null || b == null) return false;
+        if (a.length != b.length) return false;
+
+        for (var i = 0; i < a.length; ++i) {
+            if (a[i].label !== b[i].label || a[i].value !== b[i].value) {
+                return false;
+            }
+        }
+        return true;
     }
 
     render() {

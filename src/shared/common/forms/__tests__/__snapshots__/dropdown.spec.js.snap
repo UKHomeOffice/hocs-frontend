@@ -16,6 +16,9 @@ exports[`Form dropdown component should render disabled when passed 1`] = `
     name="radio-group"
   >
     <option
+      value=""
+    />
+    <option
       value="A"
     >
       isA
@@ -47,7 +50,11 @@ exports[`Form dropdown component should render with default props 1`] = `
     class="govuk-select "
     id="radio-group"
     name="radio-group"
-  />
+  >
+    <option
+      value=""
+    />
+  </select>
 </div>
 `;
 
@@ -71,6 +78,9 @@ exports[`Form dropdown component should render with error when passed 1`] = `
     id="radio-group"
     name="radio-group"
   >
+    <option
+      value=""
+    />
     <option
       value="A"
     >
@@ -110,6 +120,9 @@ exports[`Form dropdown component should render with hint when passed 1`] = `
     name="radio-group"
   >
     <option
+      value=""
+    />
+    <option
       value="A"
     >
       isA
@@ -145,6 +158,9 @@ exports[`Form dropdown component should render with label when passed 1`] = `
     name="radio-group"
   >
     <option
+      value=""
+    />
+    <option
       value="A"
     >
       isA
@@ -177,6 +193,9 @@ exports[`Form dropdown component should render with value when passed 1`] = `
     id="radio-group"
     name="radio-group"
   >
+    <option
+      value=""
+    />
     <option
       selected=""
       value="A"
