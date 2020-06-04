@@ -78,11 +78,11 @@ const typeAdaptors = {
     }),
     ALLOCATE: ({ note }) => ({
         note,
-        title: 'Allocation Note'
+        title: 'Allocation note'
     }),
     REJECT: ({ note }) => ({
         note,
-        title: 'Rejection Note'
+        title: 'Rejection note'
     }),
     PHONECALL: ({ note }) => ({
         note,
