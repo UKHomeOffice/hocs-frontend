@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import DocumentPane from './document-pane.jsx';
 import CaseNotes from './case-notes.jsx';
 import StageSummary from './stage-summary.jsx';
+import People from './people.jsx';
 
 class SideBar extends Component {
 
@@ -40,16 +41,18 @@ class SideBar extends Component {
 
     render() {
         return (
-            <Fragment>
+            <Fragment >
                 <div className='tabs'>
                     <ul>
                         {this.renderTabButton('Documents', 'DOCUMENTS')}
                         {this.renderTabButton('Summary', 'SUMMARY')}
                         {this.renderTabButton('Timeline', 'TIMELINE')}
+                        {this.renderTabButton('People', 'PEOPLE')}
                     </ul>
                     {this.isActive('DOCUMENTS') && <DocumentPane />}
                     {this.isActive('SUMMARY') && <StageSummary />}
                     {this.isActive('TIMELINE') && <CaseNotes />}
+                    {this.isActive('PEOPLE') && <People />}
                 </div>
             </Fragment>
         );
