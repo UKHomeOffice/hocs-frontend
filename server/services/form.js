@@ -157,7 +157,7 @@ const getForm = (form, options) => {
 
         logger.info('GET_FORM');
         try {
-            const formBuilder = await form({ ...options });
+            const formBuilder = await form({ ...options, user: req.user, listService: req.listService });
             const { schema, data, meta } = formBuilder.build();
             req.form = { schema, data, meta };
             next();

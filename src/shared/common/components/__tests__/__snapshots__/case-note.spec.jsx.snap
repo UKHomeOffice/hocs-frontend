@@ -6,7 +6,6 @@ exports[`When the component is rendered should match the snapshot 1`] = `
     <span
       className="case-note-number govuk-!-font-weight-bold"
     >
-      Case note 
       __title__
       .
     </span>

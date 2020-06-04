@@ -40,9 +40,15 @@ const returnWorkstackColumns = (configuration, workstackData) => {
     const defaultColumnConfig = 'DEFAULT';
     const caseTypeForColumnConfig = workstackData.length > 0 ? workstackData[0].caseType : defaultColumnConfig;
 
-    const getColumnsForWorkstack = configuration.workstackTypeColumns.find(
+    var getColumnsForWorkstack = configuration.workstackTypeColumns.find(
         item => item.workstackType === caseTypeForColumnConfig
     );
+
+    if (getColumnsForWorkstack === undefined) {
+        getColumnsForWorkstack = configuration.workstackTypeColumns.find(
+            item => item.workstackType === defaultColumnConfig
+        );
+    }
 
     return getColumnsForWorkstack.workstackColumns;
 };

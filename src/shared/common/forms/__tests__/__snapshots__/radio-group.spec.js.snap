@@ -19,6 +19,7 @@ exports[`Form radio group component should render disabled when passed 1`] = `
     </legend>
     <div
       class="govuk-radios"
+      id="radio-group-radios"
     >
       <div
         class="govuk-radios__item"
@@ -94,6 +95,7 @@ exports[`Form radio group component should render with default props 1`] = `
     </legend>
     <div
       class="govuk-radios"
+      id="radio-group-radios"
     >
       <div
         class="govuk-radios__item"
@@ -175,6 +177,7 @@ exports[`Form radio group component should render with error when passed 1`] = `
     </span>
     <div
       class="govuk-radios"
+      id="radio-group-radios"
     >
       <div
         class="govuk-radios__item"
@@ -255,6 +258,7 @@ exports[`Form radio group component should render with hint when passed 1`] = `
     </span>
     <div
       class="govuk-radios"
+      id="radio-group-radios"
     >
       <div
         class="govuk-radios__item"
@@ -332,6 +336,7 @@ exports[`Form radio group component should render with label when passed 1`] = `
     </legend>
     <div
       class="govuk-radios"
+      id="radio-group-radios"
     >
       <div
         class="govuk-radios__item"
@@ -407,6 +412,7 @@ exports[`Form radio group component should render with value when passed 1`] = `
     </legend>
     <div
       class="govuk-radios"
+      id="radio-group-radios"
     >
       <div
         class="govuk-radios__item"
