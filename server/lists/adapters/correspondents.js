@@ -10,7 +10,17 @@ const correspondentTypeAdapter = async (data, { logger }) => {
     return data.correspondentTypes.map(({ type, displayName }) => ({ label: displayName, value: type })).sort(byLabel);
 };
 
+const caseCorrespondentsAllAdapter = async (data, { logger }) => {
+    logger.debug('REQUEST_CASE_CORRESPONDENTS_ALL', { correspondents: data.length });
+    data.correspondents.unshift(
+        data.correspondents.splice(data.correspondents.findIndex(item => item.isPrimary === true), 1)[0]
+    );
+
+    return data.correspondents;
+};
+
 module.exports = {
     caseCorrespondentAdapter,
-    correspondentTypeAdapter
+    correspondentTypeAdapter,
+    caseCorrespondentsAllAdapter
 };
