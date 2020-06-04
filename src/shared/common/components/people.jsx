@@ -3,28 +3,28 @@ import axios from 'axios';
 import { ApplicationConsumer } from '../../contexts/application.jsx';
 import {
     updateApiStatus,
-    unsetCaseSummary,
+    unsetCorrespondents,
     clearApiStatus
 } from '../../contexts/actions/index.jsx';
 import status from '../../helpers/api-status.js';
 import PropTypes from 'prop-types';
 
-class PeopleSummary extends Component {
+class People extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { summary: props.people };
+        this.state = { correspondents: props.correspondents };
     }
 
     componentDidMount() {
-        const { people, dispatch } = this.props;
-        if (!people) {
-            this.getSummary();
+        const { correspondents, dispatch } = this.props;
+        if (!correspondents) {
+            this.getCorrespondents();
         }
-        dispatch(unsetCaseSummary());
+        dispatch(unsetCorrespondents());
     }
 
-    getSummary() {
+    getCorrespondents() {
         const { page, dispatch } = this.props;
         if (page && page.params && page.params.caseId) {
             return dispatch(updateApiStatus(status.REQUEST_CASE_CORRESPONDENTS_ALL))
@@ -35,7 +35,7 @@ class PeopleSummary extends Component {
                                 .then(() => dispatch(clearApiStatus()))
                                 .then(() => {
                                     this.setState({
-                                        people: response.data
+                                        correspondents: response.data
                                     });
                                 });
                         });
@@ -47,25 +47,90 @@ class PeopleSummary extends Component {
         }
     }
 
-
+    renderPerson(person) {
+        return (
+            <Fragment key={person.uuid}>
+                <h2 className='govuk-heading-m'>
+                    {this.toTitleCase(person.type) + (person.isPrimary ? ' (primary)' : '')}
+                </h2>
+                <table className='govuk-table margin-left--small'>
+                    <tbody className='govuk-table__body'>
+                        {person.fullname &&
+                        <tr className='govuk-table__row'>
+                            <th className='govuk-table__header padding-left--small govuk-!-width-one-third'>Name</th>
+                            <td className='govuk-table__cell'>{person.fullname}</td>
+                        </tr>
+                        }
+                        {person.address.address1 &&
+                        <tr className='govuk-table__cell'>
+                            <th className='govuk-table__header padding-left--small govuk-!-width-one-third'>Address</th>
+                            <td className='govuk-table__cell'>
+                                {person.address.address1 && <> <span>{person.address.address1}</span> </>}
+                                {person.address.address2 && <> <br/> <span>{person.address.address2}</span> </>}
+                                {person.address.address3 && <> <br/> <span>{person.address.address3}</span> </>}
+                                {person.address.postcode && <> <br/> <span>{person.address.postcode}</span> </>}
+                                {person.address.country && <> <br/> <span>{person.address.country}</span> </>}
+                            </td>
+                        </tr>
+                        }
+                        {person.telephone &&
+                        <tr className='govuk-table__row'>
+                            <th className='govuk-table__header padding-left--small govuk-!-width-one-third'>Telephone</th>
+                            <td className='govuk-table__cell'>{person.telephone}</td>
+                        </tr>
+                        }
+                        {person.email &&
+                        <tr className='govuk-table__row'>
+                            <th className='govuk-table__header padding-left--small govuk-!-width-one-third'>Email
+                                address
+                            </th>
+                            <td className='govuk-table__cell'>{person.email}</td>
+                        </tr>
+                        }
+                        {person.reference &&
+                        <tr className='govuk-table__row'>
+                            <th className='govuk-table__header padding-left--small govuk-!-width-one-third'>Reference</th>
+                            <td className='govuk-table__cell'>{person.reference}</td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </Fragment>
+        );
+    }
 
     render() {
-        const { people } = this.state;
-        console.log(people);
-        return ("jd");
+        const { correspondents } = this.state;
+        return (
+            <Fragment>
+                {correspondents &&  correspondents[0] !== null &&
+                correspondents.map(person => this.renderPerson(person))
+                }
+            </Fragment>
+        );
+    }
+
+    toTitleCase(str) {
+        return str.replace(
+            /\w\S*/g,
+            function (txt) {
+                return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+            }
+        );
     }
 }
 
-PeopleSummary.propTypes = {
+People.propTypes = {
     dispatch: PropTypes.func.isRequired,
-    people: PropTypes.object,
+    correspondents: PropTypes.array,
     page: PropTypes.object
 };
 
-const WrappedPeopleSummary = props => (
+const WrappedPeople = props => (
     <ApplicationConsumer>
-        {({ dispatch, people, page }) => <PeopleSummary {...props} dispatch={dispatch} people={people} page={page}/>}
+        {({ dispatch, correspondents, page }) => <People {...props} dispatch={dispatch} correspondents={correspondents}
+            page={page}/>}
     </ApplicationConsumer>
 );
 
-export default WrappedPeopleSummary;
+export default WrappedPeople;
