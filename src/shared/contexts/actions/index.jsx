@@ -124,6 +124,13 @@ export function unsetCaseSummary() {
     };
 }
 
+export function unsetCorrespondents() {
+    return {
+        type: types.UNSET_CORRESPONDENTS,
+        payload: null
+    };
+}
+
 export function unsetCaseNotes() {
     return {
         type: types.UNSET_CASE_NOTES,

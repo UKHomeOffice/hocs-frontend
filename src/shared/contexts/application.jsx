@@ -61,6 +61,8 @@ const reducer = (state, action) => {
             return { ...state, caseNotes: null };
         case types.UNSET_CASE_SUMMARY:
             return { ...state, summary: null };
+        case types.UNSET_CORRESPONDENTS:
+            return { ...state, summary: null };
         case types.PASS_FORWARD_PROPS: {
             return { ...state, ...action.payload };
         }

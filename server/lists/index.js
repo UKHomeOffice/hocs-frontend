@@ -19,7 +19,8 @@ const caseViewAllStagesAdapter = require('./adapters/case-view-all-stages');
 const caseViewReadOnlyAdapter = require('./adapters/case-view-read-only');
 const {
     caseCorrespondentAdapter,
-    correspondentTypeAdapter
+    correspondentTypeAdapter,
+    caseCorrespondentsAllAdapter
 } = require('./adapters/correspondents');
 
 module.exports = {
@@ -243,6 +244,11 @@ module.exports = {
             client: 'INFO',
             endpoint: '/teams/${teamId}/members',
             adapter: usersAdapter
+        },
+        CASE_CORRESPONDENTS_ALL: {
+            client: 'CASEWORK',
+            endpoint: '/case/${caseId}/correspondent',
+            adapter: caseCorrespondentsAllAdapter
         },
         CASE_CORRESPONDENTS: {
             client: 'CASEWORK',

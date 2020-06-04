@@ -4,7 +4,15 @@ const { processMiddleware } = require('../../middleware/process');
 const { validationMiddleware } = require('../../middleware/validation');
 const { protect } = require('../../middleware/auth');
 const { stageApiResponseMiddleware, allocateCase, allocateCaseToTeamMember } = require('../../middleware/stage');
-const { caseSummaryMiddleware, caseSummaryApiResponseMiddleware, caseApiResponseMiddleware, createCaseNote, updateCaseNote } = require('../../middleware/case');
+const {
+    caseSummaryMiddleware,
+    caseSummaryApiResponseMiddleware,
+    caseApiResponseMiddleware,
+    createCaseNote,
+    updateCaseNote,
+    caseCorrespondentsMiddleware,
+    caseCorrespondentsApiResponseMiddleware
+} = require('../../middleware/case');
 const { getFormForCase, getFormForStage } = require('../../services/form');
 
 router.get('/:caseId/stage/:stageId/allocate', allocateCase);
@@ -51,5 +59,7 @@ router.put('/:caseId/note/:noteId',
 );
 
 router.get('/:caseId/summary', caseSummaryMiddleware, caseSummaryApiResponseMiddleware);
+
+router.get('/:caseId/correspondents', caseCorrespondentsMiddleware, caseCorrespondentsApiResponseMiddleware);
 
 module.exports = router;
