@@ -2,7 +2,9 @@ const {
     caseResponseMiddleware,
     caseApiResponseMiddleware,
     caseSummaryMiddleware,
-    caseSummaryApiResponseMiddleware
+    caseSummaryApiResponseMiddleware,
+    caseCorrespondentsApiResponseMiddleware,
+    caseCorrespondentsMiddleware
 } = require('../case.js');
 
 jest.mock('../../services/action.js', () => ({
@@ -199,6 +201,85 @@ describe('Case middleware', () => {
             expect(res.status).toHaveBeenCalledWith(200);
             expect(json).toHaveBeenCalled();
             expect(json).toHaveBeenCalledWith('MOCK_SUMMARY');
+        });
+    });
+
+    describe('Case correspondents API response middleware', () => {
+
+        let req = {};
+        let res = {};
+        const next = jest.fn();
+        const json = jest.fn();
+
+        beforeEach(() => {
+            res = {
+                status: null,
+                locals: { correspondents: 'MOCK_CORRESPONDENTS' }
+            };
+            next.mockReset();
+            json.mockReset();
+            res.status = jest.fn(() => ({ json }));
+        });
+
+        it('should add correspondents to res.locals if returned from call to API', async () => {
+            caseworkService.get.mockImplementation(() => Promise.resolve({ data: 'MOCK_CORRESPONDENTS' }));
+            await caseCorrespondentsApiResponseMiddleware(req, res, next);
+            expect(res.locals.correspondents).toBeDefined();
+            expect(res.locals.correspondents).toEqual('MOCK_CORRESPONDENTS');
+            expect(res.status).toHaveBeenCalled();
+            expect(res.status).toHaveBeenCalledWith(200);
+            expect(json).toHaveBeenCalled();
+            expect(json).toHaveBeenCalledWith('MOCK_CORRESPONDENTS');
+        });
+    });
+
+    describe('Case correspondents middleware', () => {
+
+        let req = {};
+        let res = {};
+        const next = jest.fn();
+
+        beforeEach(() => {
+            req = {
+                params: {
+                    caseId: 'CASE_ID'
+                },
+                user: {
+                    id: 'test',
+                    roles: [],
+                    groups: []
+                },
+                listService: {
+                    fetch: jest.fn(async (list) => {
+                        if (list === 'CASE_CORRESPONDENTS_ALL') {
+                            return Promise.resolve('MOCK_CORRESPONDENTS');
+                        }
+                        return Promise.reject();
+                    })
+                }
+            };
+
+            res = {
+                status: null,
+                locals: {}
+            };
+            next.mockReset();
+        });
+
+        it('should add correspondents to res.locals if returned from call to API', async () => {
+            await caseCorrespondentsMiddleware(req, res, next);
+            expect(res.locals.correspondents).toBeDefined();
+            expect(res.locals.correspondents).toEqual('MOCK_CORRESPONDENTS');
+            expect(next).toHaveBeenCalled();
+        });
+
+        it('should call next with error if call to API fails', async () => {
+            const mockError = new Error('Something went wrong');
+            req.listService.fetch.mockImplementation(() => Promise.reject(mockError));
+            await caseSummaryMiddleware(req, res, next);
+            expect(res.locals.correspondents).not.toBeDefined();
+            expect(next).toHaveBeenCalled();
+            expect(next).toHaveBeenCalledWith(mockError);
         });
     });
 

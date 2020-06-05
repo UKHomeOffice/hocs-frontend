@@ -73,6 +73,19 @@ function returnToCase(req, res) {
     res.redirect(`/case/${req.params.caseId}/stage/${req.params.stageId}`);
 }
 
+async function caseCorrespondentsMiddleware(req, res, next) {
+    try {
+        res.locals.correspondents = await req.listService.fetch('CASE_CORRESPONDENTS_ALL', req.params);
+        next();
+    } catch (error) {
+        next(error);
+    }
+}
+
+function caseCorrespondentsApiResponseMiddleware(req, res) {
+    return res.status(200).json(res.locals.correspondents);
+}
+
 module.exports = {
     caseResponseMiddleware,
     caseApiResponseMiddleware,
@@ -80,5 +93,7 @@ module.exports = {
     caseSummaryApiResponseMiddleware,
     createCaseNote,
     returnToCase,
-    updateCaseNote
+    updateCaseNote,
+    caseCorrespondentsMiddleware,
+    caseCorrespondentsApiResponseMiddleware
 };
