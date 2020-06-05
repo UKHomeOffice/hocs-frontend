@@ -374,7 +374,13 @@ a.card__body {
       &.wrap-text {
           word-break: break-all;
       }
-
+      &.date-warning {
+          span {
+            background-color: govuk-colour("red");
+            color: white;
+            padding: 0.25em 0.5em 0.25em 0.5em;
+          }
+      }
       &.indicator {          
           span {
             background-color: black;

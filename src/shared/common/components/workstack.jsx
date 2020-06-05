@@ -32,6 +32,7 @@ const SortDirection = {
 const ColumnRenderer = {
     CASE_LINK: 'caseLink',
     DATE: 'date',
+    DATE_WARNING: 'dateWarning',
     INDICATOR_BLUE: 'indicatorBlue',
     INDICATOR_RED: 'indicatorRed',
     WRAP_TEXT: 'wrapText'
@@ -231,6 +232,15 @@ class WorkstackAllocate extends Component {
                     <Link to={`/case/${row.caseUUID}/stage/${row.uuid}`} className='govuk-link govuk-!-margin-right-3'>{value}</Link>
                 </td>;
             case ColumnRenderer.DATE:
+                return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>{value}</td>;
+            case ColumnRenderer.DATE_WARNING:
+                if (row.deadlineWarning) {
+                    if (new Date(row.deadlineWarning) < new Date()) {
+                        return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell date-warning'>
+                            <span>{value}</span>
+                        </td>;
+                    }
+                }
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>{value}</td>;
             case ColumnRenderer.INDICATOR_BLUE:
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell indicator'>
