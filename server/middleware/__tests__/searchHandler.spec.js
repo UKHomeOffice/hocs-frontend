@@ -85,7 +85,9 @@ describe('handleSearch', () => {
                 to: '20-10-2019',
                 from: '10-10-2019'
             },
+            correspondentExternalKey: undefined,
             correspondentName: 'Bob',
+            correspondentReference: '',
             topic: 'Test Topic',
             data: {
                 POTeamUUID: 'Min123',
