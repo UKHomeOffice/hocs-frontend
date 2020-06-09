@@ -27,15 +27,17 @@ module.exports = async (template, { fromStaticList }) => {
         const stageFields = [];
 
         fields.forEach(fieldTemplate => {
-            const { name, label } = fieldTemplate.props;
+            const { name, label, choices, conditionChoices } = fieldTemplate.props;
             const value = template.data[name];
 
             if (value) {
                 data[name] = fieldTemplate.component === 'date' ? formatDate(value) : value;
 
                 stageFields.push(
-                    Component('display', name)
+                    Component('mapped-display', name)
                         .withProp('label', label)
+                        .withProp('choices', choices)
+                        .withProp('conditionChoices', conditionChoices)
                         .build()
                 );
             }
