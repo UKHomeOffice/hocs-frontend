@@ -26,7 +26,7 @@ Object {
             Object {
               "items": Array [
                 Object {
-                  "component": "display",
+                  "component": "mapped-display",
                   "props": Object {
                     "label": "My Field",
                     "name": "my_field",
@@ -34,7 +34,7 @@ Object {
                   "validation": Array [],
                 },
                 Object {
-                  "component": "display",
+                  "component": "mapped-display",
                   "props": Object {
                     "label": "My Date Field",
                     "name": "my_date_field",
@@ -47,7 +47,7 @@ Object {
             Object {
               "items": Array [
                 Object {
-                  "component": "display",
+                  "component": "mapped-display",
                   "props": Object {
                     "label": "My Field",
                     "name": "my_field",
@@ -55,7 +55,7 @@ Object {
                   "validation": Array [],
                 },
                 Object {
-                  "component": "display",
+                  "component": "mapped-display",
                   "props": Object {
                     "label": "My Date Field",
                     "name": "my_date_field",
@@ -68,7 +68,7 @@ Object {
             Object {
               "items": Array [
                 Object {
-                  "component": "display",
+                  "component": "mapped-display",
                   "props": Object {
                     "label": "My Field",
                     "name": "my_field",
@@ -76,7 +76,7 @@ Object {
                   "validation": Array [],
                 },
                 Object {
-                  "component": "display",
+                  "component": "mapped-display",
                   "props": Object {
                     "label": "My Date Field",
                     "name": "my_date_field",

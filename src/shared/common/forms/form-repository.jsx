@@ -1,6 +1,7 @@
 import React from 'react';
 import TextInput from './text.jsx';
 import MappedText from './mapped-text.jsx';
+import MappedDisplay from './mapped-display.jsx';
 import Radio from './radio-group.jsx';
 import DateInput from './date.jsx';
 import Checkbox from './checkbox-group.jsx';
@@ -94,6 +95,8 @@ export function formComponentFactory(field, options) {
             return (
                 <span className='govuk-body full-width'><strong>{config.label}: </strong>{data[config.name]}</span>
             );
+        case 'mapped-display':
+            return renderFormComponent(MappedDisplay, { key, config, data, errors, callback });
         case 'accordion':
             return renderFormComponent(Accordion, { data, key, config, errors, callback });
         case 'expandable-checkbox':
