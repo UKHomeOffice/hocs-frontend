@@ -162,6 +162,7 @@ const getForm = (form, options) => {
             req.form = { schema, data, meta };
             next();
         } catch (error) {
+            logger.error(error);
             next('Something went wrong');
         }
     };
