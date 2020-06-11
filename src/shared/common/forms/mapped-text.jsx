@@ -14,14 +14,17 @@ class MappedText extends Component {
             label,
             name,
             type,
-            value
+            value,
+            error
         } = this.props;
         const mappings = new Map(choices.map(choice => [choice.value, choice.label]));
         return (
-            <div className={'govuk-form-group'}>
+            <div className={`govuk-form-group${error ? ' govuk-form-group--error' : ''}`}>
 
                 <label htmlFor={name} id={`${name}-label`} className="govuk-label govuk-label--s">{label}</label>
                 {hint && <span className="govuk-hint">{hint}</span>}
+
+                {error && <span id={`${name}-error`} className="govuk-error-message">{error}</span>}
 
                 <label className="govuk-label govuk-label--s govuk-mapped-text"
                     id={name}
@@ -41,7 +44,8 @@ MappedText.propTypes = {
     label: PropTypes.string,
     name: PropTypes.string.isRequired,
     type: PropTypes.string,
-    value: PropTypes.string
+    value: PropTypes.string,
+    error: PropTypes.string,
 };
 
 MappedText.defaultProps = {
