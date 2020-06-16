@@ -160,6 +160,48 @@ Object {
 }
 `;
 
+exports[`Case Summary Adapter should not show deadlines when summary deadlines are disabled 1`] = `
+Object {
+  "additionalFields": Array [
+    Object {
+      "choices": undefined,
+      "label": "Test field",
+      "value": "TEST",
+    },
+    Object {
+      "choices": undefined,
+      "label": "Test additional field date",
+      "value": "01/01/2020",
+    },
+  ],
+  "case": Object {
+    "created": "03/02/2019",
+    "deadline": "01/01/2020",
+    "received": "01/01/2019",
+  },
+  "deadlines": null,
+  "deadlinesEnabled": false,
+  "primaryCorrespondent": Object {
+    "address": Object {
+      "address1": "__address1__",
+      "address2": "__address2__",
+      "address3": "__address3__",
+      "country": "__country__",
+      "postcode": "__postcode__",
+    },
+    "fullname": "Test Correspondent",
+  },
+  "primaryTopic": "Topic A",
+  "stages": Array [
+    Object {
+      "assignedTeam": "MOCK_TEAM",
+      "assignedUser": "MOCK_USER",
+      "stage": "MOCK_STAGETYPE",
+    },
+  ],
+}
+`;
+
 exports[`Case Summary Adapter should transform fully populated case summary data 1`] = `
 Object {
   "additionalFields": Array [
