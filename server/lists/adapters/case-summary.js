@@ -1,3 +1,5 @@
+const { caseworkService } = require('../../clients');
+const User = require('../../models/user');
 
 const createAdditionalFields = async (additionalFields = [], fetchList) => {
     var results = additionalFields.map(({ label, value, type, choices }) => type === 'date' ? ({ label, value: formatDate(value), choices }) : ({ label, value, choices }));
@@ -49,16 +51,22 @@ const parseDate = (rawDate) => {
 
 const formatDate = (date) => date ? parseDate(date) : null;
 
-module.exports = async (summary, { fromStaticList, fetchList, configuration }) => ({
-    case: {
-        created: formatDate(summary.caseCreated),
-        received: formatDate(summary.dateReceived),
-        deadline: formatDate(summary.caseDeadline)
-    },
-    additionalFields: await createAdditionalFields(summary.additionalFields, fetchList),
-    primaryTopic: getPrimaryTopic(summary.primaryTopic),
-    primaryCorrespondent: getPrimaryCorrespondent(summary.primaryCorrespondent),
-    deadlinesEnabled: configuration.deadlinesEnabled,
-    deadlines: configuration.deadlinesEnabled && summary.stageDeadlines ? await createDeadlines(summary.stageDeadlines, fromStaticList) : null,
-    stages: await getActiveStages(summary.activeStages, fromStaticList)
-});
+module.exports = async (summary, options) => {
+    const { fromStaticList, fetchList, configuration, user } = options;
+    const { data: caseProfile } = await caseworkService.get(`/case/profile/${options.caseId}`, { headers: User.createHeaders(user) });
+    const summaryDeadlineEnabled = caseProfile && caseProfile.summaryDeadlineEnabled;
+    const deadlinesEnabled = summaryDeadlineEnabled && configuration.deadlinesEnabled;
+    return {
+        case: {
+            created: formatDate(summary.caseCreated),
+            received: formatDate(summary.dateReceived),
+            deadline: formatDate(summary.caseDeadline)
+        },
+        additionalFields: await createAdditionalFields(summary.additionalFields, fetchList),
+        primaryTopic: getPrimaryTopic(summary.primaryTopic),
+        primaryCorrespondent: getPrimaryCorrespondent(summary.primaryCorrespondent),
+        deadlinesEnabled: deadlinesEnabled,
+        deadlines: deadlinesEnabled && summary.stageDeadlines ? await createDeadlines(summary.stageDeadlines, fromStaticList) : null,
+        stages: await getActiveStages(summary.activeStages, fromStaticList)
+    };
+};
