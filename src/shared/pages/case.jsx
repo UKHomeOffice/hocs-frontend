@@ -5,28 +5,44 @@ import SideBar from '../common/components/side-bar.jsx';
 
 class Case extends Component {
 
+    componentDidMount() {
+        const urlParams = new URLSearchParams(window.location.search);
+        this.hideSidebar = urlParams.get('hideSidebar');
+    }
+
     render() {
         const {
             children,
-            hasSidebar,
             form,
             title
         } = this.props;
         return (
             <div className="govuk-grid-row">
-                <div className={`govuk-grid-column-one-${hasSidebar ? 'third' : 'half'}`}>
+                <div className={`govuk-grid-column-one-${this.shouldDisplaySidebar() ? 'third' : 'half'}`}>
                     {title && <h1 className="govuk-heading-l">
                         {title}
                         {form && <span className="govuk-caption-l">{form && form.caseReference}</span>}
                     </h1>}
                     {children}
                 </div>
-                {hasSidebar && <div className="govuk-grid-column-two-thirds">
+                {this.shouldDisplaySidebar() && <div className="govuk-grid-column-two-thirds">
                     <SideBar />
                 </div>}
             </div>
         );
     }
+
+    shouldDisplaySidebar() {
+        if (this.hideSidebar === 'true') {
+            return false;
+        }
+
+        if (this.hideSidebar === 'false') {
+            return true;
+        }
+        return this.props.hasSidebar;
+    }
+
 }
 
 Case.defaultProps = {
@@ -37,7 +53,8 @@ Case.propTypes = {
     children: PropTypes.node,
     form: PropTypes.object,
     title: PropTypes.string,
-    hasSidebar: PropTypes.bool
+    hasSidebar: PropTypes.bool,
+    hideSidebar: PropTypes.string
 };
 
 export default formEnabled(Case);

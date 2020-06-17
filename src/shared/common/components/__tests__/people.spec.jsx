@@ -63,20 +63,27 @@ const correspondents = [
 
 const emptyCorrespondents = [null];
 
+const page = {
+    params: {
+        caseId: 'some_case_id',
+        stageId: 'some_stage_id',
+    }
+};
+
 describe('The people component', () => {
 
     it('should render with all 3 correspondent\'s', () => {
         const outer = shallow(<WrappedPeople dispatch={jest.fn()} />);
         const People = outer.props().children;
-        const wrapper = render(<People dispatch={jest.fn()} correspondents={correspondents} />);
+        const wrapper = render(<People dispatch={jest.fn()} correspondents={correspondents} page={page}  />);
         expect(wrapper).toBeDefined();
         expect(wrapper).toMatchSnapshot();
     });
 
     it('should render successfully when there are no correspondents', () => {
-        const outer = shallow(<WrappedPeople dispatch={jest.fn()} />);
+        const outer = shallow(<WrappedPeople dispatch={jest.fn()} page={page} />);
         const People = outer.props().children;
-        const wrapper = render(<People dispatch={jest.fn()} correspondents={emptyCorrespondents} />);
+        const wrapper = render(<People dispatch={jest.fn()} correspondents={emptyCorrespondents} page={page} />);
         expect(wrapper).toBeDefined();
         expect(wrapper).toMatchSnapshot();
     });

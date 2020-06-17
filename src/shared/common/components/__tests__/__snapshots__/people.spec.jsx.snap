@@ -4,6 +4,7 @@ exports[`The people component should render successfully when there are no corre
 
 exports[`The people component should render with all 3 correspondent's 1`] = `
 Array [
+  "Manage People",
   <h2
     class="govuk-heading-m"
   >

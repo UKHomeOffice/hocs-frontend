@@ -169,4 +169,32 @@ describe('Entity list component', () => {
         expect(MOCK_CALLBACK).toHaveBeenCalledWith({ [DEFAULT_PROPS.name]: choice('B').value });
     });
 
+    it('Add, Edit & Remove links should include hasSidebar query param', () => {
+        const choice = value => ({ label: `Choice ${value}`, value: `CHOICE_${value}` });
+        const props = {
+            page: PAGE,
+            name: NAME,
+            entity: ENTITY,
+            baseUrl: BASE_URL,
+            choices: [
+                choice('A'),
+                choice('B')
+            ],
+            updateState: MOCK_CALLBACK,
+            hideSidebar: true,
+            hasAddLink: true,
+            hasEditLink: true,
+            hasRemoveLink: true,
+        };
+
+        const OUTER = shallow(<WrappedEntityList { ...props} />);
+        const EntityList = OUTER.props().children;
+        const WRAPPER = render(
+            <MemoryRouter>
+                <EntityList page={PAGE} />
+            </MemoryRouter>);
+        expect(WRAPPER).toBeDefined();
+        expect(WRAPPER).toMatchSnapshot();
+    });
+
 });
