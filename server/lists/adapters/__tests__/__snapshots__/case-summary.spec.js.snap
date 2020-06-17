@@ -180,7 +180,7 @@ Object {
     "received": "01/01/2019",
   },
   "deadlines": null,
-  "deadlinesEnabled": false,
+  "deadlinesEnabled": true,
   "primaryCorrespondent": Object {
     "address": Object {
       "address1": "__address1__",

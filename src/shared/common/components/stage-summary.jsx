@@ -119,7 +119,7 @@ class StageSummary extends Component {
                                 {summary.additionalFields && summary.additionalFields.map(({ label, value }) => this.renderRow({ label, value }))}
                             </tbody>
                         </table>
-                        {summary.deadlinesEnabled && <table className='govuk-table margin-left--small'>
+                        {summary.deadlinesEnabled && summary.deadlines && <table className='govuk-table margin-left--small'>
                             <caption className='govuk-table__caption margin-bottom--small' >Stage deadlines</caption>
                             <tbody className='govuk-table__body'>
                                 {summary.deadlines && Array.isArray(summary.deadlines) && summary.deadlines.map(stage => this.renderRow(stage))}
