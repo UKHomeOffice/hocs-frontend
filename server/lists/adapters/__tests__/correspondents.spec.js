@@ -15,9 +15,9 @@ describe('Case Correspondent Adapter', () => {
     it('should transform and sort case correspondent data', async () => {
         const mockData = {
             correspondents: [
-                { fullname: 'Correspondent A', uuid: 1 },
-                { fullname: 'Correspondent B', uuid: 2 },
-                { fullname: 'Correspondent C', uuid: 3 }
+                { fullname: 'Correspondent A', uuid: 1, isPrimary: true, },
+                { fullname: 'Correspondent B', uuid: 2, isPrimary: false, },
+                { fullname: 'Correspondent C', uuid: 3, isPrimary: false, }
             ]
         };
 
