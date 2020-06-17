@@ -16,5 +16,6 @@ module.exports = {
     bulkCaseCreate: require('./bulk-case-create.js'),
     bulkAddDocument: require('./bulk-document-add.js'),
     addStandardLine: require('./add-standard-line.js'),
-    addTemplate: require('./add-template')
+    addTemplate: require('./add-template'),
+    managePeople: require('./manage-people')
 };
