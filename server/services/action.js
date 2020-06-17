@@ -189,6 +189,13 @@ const actions = {
                         }
                         await caseworkService.put(`/case/${caseId}/stage/${stageId}/correspondent/${context}`, { ...form.data }, headers);
                         break;
+                    case actionTypes.MANAGE_PEOPLE:
+                        await caseworkService.put(
+                            `/case/${caseId}/stage/${stageId}/updatePrimaryCorrespondent`,
+                            { primaryCorrespondentUUID: form.data.Correspondents },
+                            headers
+                        );
+                        break;
                     case actionTypes.ADD_CASE_NOTE:
                         await caseworkService.post(`/case/${caseId}/note`, { type: 'MANUAL', text: form.data['case-note'] }, headers);
                         break;

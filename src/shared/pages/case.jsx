@@ -6,6 +6,7 @@ import SideBar from '../common/components/side-bar.jsx';
 class Case extends Component {
 
     componentDidMount() {
+        // eslint-disable-next-line no-undef
         const urlParams = new URLSearchParams(window.location.search);
         this.hideSidebar = urlParams.get('hideSidebar');
     }
@@ -54,7 +55,7 @@ Case.propTypes = {
     form: PropTypes.object,
     title: PropTypes.string,
     hasSidebar: PropTypes.bool,
-    hideSidebar: PropTypes.string
+    hideSidebar: PropTypes.string,
 };
 
 export default formEnabled(Case);
