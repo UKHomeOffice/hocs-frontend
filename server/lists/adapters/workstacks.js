@@ -53,6 +53,29 @@ const returnWorkstackColumns = (configuration, workstackData) => {
     return getColumnsForWorkstack.workstackColumns;
 };
 
+const returnMyCasesWorkstackColumns = (configuration, workstackData) => {
+    const defaultColumnConfig = 'DEFAULT';
+    const caseTypeForColumnConfig = workstackData.length > 0 ? workstackData[0].caseType : defaultColumnConfig;
+
+    var getColumnsForMyCases = configuration.workstackTypeColumns.find(
+        item => item.workstackType === (caseTypeForColumnConfig + '_MY_CASES')
+    );
+
+    if (getColumnsForMyCases === undefined) {
+        getColumnsForMyCases = configuration.workstackTypeColumns.find(
+            item => item.workstackType === caseTypeForColumnConfig
+        );
+    }
+
+    if (getColumnsForMyCases === undefined) {
+        getColumnsForMyCases = configuration.workstackTypeColumns.find(
+            item => item.workstackType === defaultColumnConfig
+        );
+    }
+
+    return getColumnsForMyCases.workstackColumns;
+};
+
 const parseDate = (rawDate) => {
     const [date] = rawDate.match(/[0-9]{4}-[0-1][0-9]-[0-3][0-9]/g) || [];
     if (!date) {
@@ -142,7 +165,7 @@ const userAdapter = async (data, { fromStaticList, logger, user, configuration }
     return {
         label: 'My Cases',
         items: workstackData,
-        columns: returnWorkstackColumns(configuration, workstackData),
+        columns: returnMyCasesWorkstackColumns(configuration, workstackData),
         allocateToWorkstackEndpoint: '/unallocate/'
     };
 };
