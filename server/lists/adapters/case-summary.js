@@ -54,7 +54,7 @@ const formatDate = (date) => date ? parseDate(date) : null;
 module.exports = async (summary, options) => {
     const { fromStaticList, fetchList, configuration, user } = options;
     const { data: caseProfile } = await caseworkService.get(`/case/profile/${options.caseId}`, { headers: User.createHeaders(user) });
-    const summaryDeadlineEnabled = caseProfile && caseProfile.summaryDeadlineEnabled;
+    const stageDeadlineEnabled = caseProfile && caseProfile.summaryDeadlineEnabled;
     const deadlinesEnabled = configuration.deadlinesEnabled;
     return {
         case: {
@@ -66,7 +66,7 @@ module.exports = async (summary, options) => {
         primaryTopic: getPrimaryTopic(summary.primaryTopic),
         primaryCorrespondent: getPrimaryCorrespondent(summary.primaryCorrespondent),
         deadlinesEnabled: deadlinesEnabled,
-        deadlines: deadlinesEnabled && summaryDeadlineEnabled && summary.stageDeadlines ? await createDeadlines(summary.stageDeadlines, fromStaticList) : null,
+        deadlines: deadlinesEnabled && stageDeadlineEnabled && summary.stageDeadlines ? await createDeadlines(summary.stageDeadlines, fromStaticList) : null,
         stages: await getActiveStages(summary.activeStages, fromStaticList)
     };
 };
