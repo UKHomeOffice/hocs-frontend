@@ -169,7 +169,7 @@ describe('Entity list component', () => {
         expect(MOCK_CALLBACK).toHaveBeenCalledWith({ [DEFAULT_PROPS.name]: choice('B').value });
     });
 
-    it('Add, Edit & Remove links should include hasSidebar query param', () => {
+    it('Add, Edit & Remove URL\'s should include hideSidebar query param', () => {
         const choice = value => ({ label: `Choice ${value}`, value: `CHOICE_${value}` });
         const props = {
             page: PAGE,

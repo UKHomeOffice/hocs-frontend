@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Entity list component Add, Edit & Remove links should include hasSidebar query param 1`] = `
+exports[`Entity list component Add, Edit & Remove URL's should include hideSidebar query param 1`] = `
 <div
   class="govuk-form-group"
 >
