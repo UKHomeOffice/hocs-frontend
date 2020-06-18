@@ -1,5 +1,6 @@
 import React from 'react';
 import WrappedPeople from '../people.jsx';
+import { MemoryRouter } from 'react-router-dom';
 
 const correspondents = [
     {
@@ -72,19 +73,31 @@ const page = {
 
 describe('The people component', () => {
 
-    it('should render with all 3 correspondent\'s', () => {
-        const outer = shallow(<WrappedPeople dispatch={jest.fn()} />);
+    it('should render successfully with 3 correspondent\'s', () => {
+        const outer = shallow(<WrappedPeople />);
         const People = outer.props().children;
-        const wrapper = render(<People dispatch={jest.fn()} correspondents={correspondents} page={page}  />);
+        const wrapper = mount(
+            <MemoryRouter>
+                <People dispatch={jest.fn(() => Promise.resolve())} correspondents={correspondents} page={page} />
+            </MemoryRouter>
+        );
         expect(wrapper).toBeDefined();
-        expect(wrapper).toMatchSnapshot();
+        expect(wrapper.find('People').props().correspondents).toBeDefined();
+        expect(wrapper.find('People').props().page).toBeDefined();
+        expect(wrapper.find('People').props().dispatch).toBeDefined();
     });
 
     it('should render successfully when there are no correspondents', () => {
-        const outer = shallow(<WrappedPeople dispatch={jest.fn()} page={page} />);
+        const outer = shallow(<WrappedPeople />);
         const People = outer.props().children;
-        const wrapper = render(<People dispatch={jest.fn()} correspondents={emptyCorrespondents} page={page} />);
+        const wrapper = mount(
+            <MemoryRouter>
+                <People dispatch={jest.fn(() => Promise.resolve())} correspondents={emptyCorrespondents} page={page} />
+            </MemoryRouter>
+        );
         expect(wrapper).toBeDefined();
-        expect(wrapper).toMatchSnapshot();
+        expect(wrapper.find('People').props().correspondents).toBeDefined();
+        expect(wrapper.find('People').props().page).toBeDefined();
+        expect(wrapper.find('People').props().dispatch).toBeDefined();
     });
 });

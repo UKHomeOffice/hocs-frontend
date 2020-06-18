@@ -8,7 +8,7 @@ import {
 } from '../../contexts/actions/index.jsx';
 import status from '../../helpers/api-status.js';
 import PropTypes from 'prop-types';
-import { BrowserRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 class People extends Component {
 
@@ -105,7 +105,7 @@ class People extends Component {
         const { page } = this.props;
         return (
             <Fragment>
-                <BrowserRouter className='govuk-body govuk-link' to={`/case/${page.params.caseId}/stage/${page.params.stageId}/entity/people/manage`} >Manage People</BrowserRouter>
+                <Link className='govuk-body govuk-link' to={`/case/${page.params.caseId}/stage/${page.params.stageId}/entity/people/manage`} >Manage People</Link>
                 {correspondents &&  correspondents[0] !== null &&
                 correspondents.map(person => this.renderPerson(person))
                 }
