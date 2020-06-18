@@ -12,6 +12,19 @@ jest.mock('../../../../clients', () => ({
     }
 }));
 
+jest.mock('../../../../services/list/service', () => ({
+    getInstance: function () {
+        return {
+            fetch: function () {
+                return [
+                    { isPrimary: false },
+                    { isPrimary: true }
+                ];
+            }
+        };
+    }
+}));
+
 describe('Form schema definitions', async () => {
     await Object.entries(formRepository).map(async ([label, form]) => {
         it(`${label} should be a valid schema definition `, async () => {

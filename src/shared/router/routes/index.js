@@ -65,13 +65,13 @@ const routes = [
         hasSidebar: true
     },
     {
-        path: '/case/:caseId/stage/:stageId/entity/correspondent/:action/',
+        path: '/case/:caseId/stage/:stageId/entity/correspondent/:action?hideSidebar=:hideSidebar',
         exact: true,
         component: CasePage,
         hasSidebar: true
     },
     {
-        path: '/case/:caseId/stage/:stageId/entity/correspondent/:context/:action/',
+        path: '/case/:caseId/stage/:stageId/entity/correspondent/:context/:action?hideSidebar=:hideSidebar',
         exact: true,
         component: CasePage,
         hasSidebar: true

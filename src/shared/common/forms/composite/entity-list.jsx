@@ -37,6 +37,9 @@ class EntityList extends Component {
             name,
             type
         } = this.props;
+
+        const { hideSidebar } = this.props || false;
+
         return (
             <div className={`govuk-form-group${error ? ' govuk-form-group--error' : ''}`}>
 
@@ -52,6 +55,7 @@ class EntityList extends Component {
                     <table className='govuk-table'>
                         <tbody className='govuk-table__body'>
                             {choices && choices.map((choice, i) => {
+                                const checkedValue = this.props.checkedValue || this.state.value;
                                 return (
                                     <tr className='govuk-radios govuk-table__row' key={i}>
                                         <td className='govuk-table__cell'>
@@ -60,7 +64,7 @@ class EntityList extends Component {
                                                     type={type}
                                                     name={name}
                                                     value={choice.value}
-                                                    checked={(this.state.value === choice.value)}
+                                                    defaultChecked={(choice.value === checkedValue)}
                                                     onChange={e => this.handleChange(e)}
                                                     className={'govuk-radios__input'}
                                                 />
@@ -70,16 +74,16 @@ class EntityList extends Component {
                                             </div>
                                         </td>
                                         {hasEditLink && <td className='govuk-table__cell'>
-                                            <Link to={`/case/${page.params.caseId}/stage/${page.params.stageId}/entity/${entity}/${choice.value}/update`} className="govuk-link">Edit</Link>
+                                            <Link to={`/case/${page.params.caseId}/stage/${page.params.stageId}/entity/${entity}/${choice.value}/update?hideSidebar=${hideSidebar}`} className="govuk-link">Edit</Link>
                                         </td>}
                                         <td className='govuk-table__cell'>
-                                            {hasRemoveLink && <Link to={`/case/${page.params.caseId}/stage/${page.params.stageId}/entity/${entity}/${choice.value}/remove`} className="govuk-link">Remove</Link>}
+                                            {hasRemoveLink && <Link to={`/case/${page.params.caseId}/stage/${page.params.stageId}/entity/${entity}/${choice.value}/remove?hideSidebar=${hideSidebar}`} className="govuk-link">Remove</Link>}
                                         </td>
                                     </tr>
                                 );
                             })}
                             <br />
-                            {hasAddLink && <Link to={`/case/${page.params.caseId}/stage/${page.params.stageId}/entity/${entity}/add`} className="govuk-body govuk-link">Add a {entity}</Link>}
+                            {hasAddLink && <Link to={`/case/${page.params.caseId}/stage/${page.params.stageId}/entity/${entity}/add?hideSidebar=${hideSidebar}`} className="govuk-body govuk-link">Add a {entity}</Link>}
                         </tbody>
                     </table>
                 </fieldset>
@@ -105,14 +109,18 @@ EntityList.propTypes = {
     type: PropTypes.string,
     updateState: PropTypes.func.isRequired,
     value: PropTypes.string,
-    page: PropTypes.object.isRequired
+    checkedValue: PropTypes.string,
+    page: PropTypes.object.isRequired,
+    data: PropTypes.object,
+    hideSidebar: PropTypes.bool.isRequired
 };
 
 EntityList.defaultProps = {
     choices: [],
     disabled: false,
     type: 'radio',
-    page: {}
+    page: {},
+    hideSidebar: false
 };
 
 const WrappedEntityList = props => (

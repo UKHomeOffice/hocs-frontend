@@ -2,7 +2,8 @@ const byLabel = (a, b) => a.label.localeCompare(b.label);
 
 const caseCorrespondentAdapter = async (data, { logger }) => {
     logger.debug('REQUEST_CASE_CORRESPONDENTS', { correspondents: data.length });
-    return data.correspondents.map(({ fullname, uuid }) => ({ label: fullname, value: uuid })).sort(byLabel);
+    return data.correspondents.map(
+        ({ fullname, uuid, isPrimary }) => ({ label: fullname, value: uuid, isPrimary: isPrimary })).sort(byLabel);
 };
 
 const correspondentTypeAdapter = async (data, { logger }) => {

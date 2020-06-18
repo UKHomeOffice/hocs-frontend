@@ -3,14 +3,17 @@
 exports[`Case Correspondent Adapter should transform and sort case correspondent data 1`] = `
 Array [
   Object {
+    "isPrimary": true,
     "label": "Correspondent A",
     "value": 1,
   },
   Object {
+    "isPrimary": false,
     "label": "Correspondent B",
     "value": 2,
   },
   Object {
+    "isPrimary": false,
     "label": "Correspondent C",
     "value": 3,
   },
