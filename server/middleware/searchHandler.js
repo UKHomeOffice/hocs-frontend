@@ -43,12 +43,14 @@ async function handleSearch(req, res, next) {
             .map(bindDisplayElements(fromStaticList)));
         const { workstackTypeColumns } = await req.listService.fetch('S_SYSTEM_CONFIGURATION');
         // using DEFAULT columns for search
-        const workstackColumnsForSearch = workstackTypeColumns[0].workstackColumns;
+        const workstackTypeForSearch = workstackTypeColumns.find(
+            item => item.workstackType === 'DEFAULT'
+        );
 
         res.locals.workstack = {
             label: 'Search Results',
             items: workstackData,
-            columns: workstackColumnsForSearch
+            columns: workstackTypeForSearch.workstackColumns
         };
 
         next();

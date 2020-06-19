@@ -51,8 +51,8 @@ describe('handleSearch', () => {
                     if (listId === 'S_SYSTEM_CONFIGURATION') {
                         return Promise.resolve({
                             workstackTypeColumns: [
-                                { workstackColumns: {} },
-                                { workstackColumns: {} }
+                                { workstackType: 'DEFAULT', workstackColumns: {} },
+                                { workstackType: 'TypeB', workstackColumns: {} }
                             ]
                         }
                         );
