@@ -91,6 +91,10 @@ const typeAdaptors = {
     PHONECALL: ({ note }) => ({
         note,
         title: 'Phone call summary'
+    }),
+    REQUEST_CONTRIBUTION: ({ note }) => ({
+        note,
+        title: 'Contribution request note'
     })
 };
 

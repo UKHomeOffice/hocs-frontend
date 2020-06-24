@@ -41,7 +41,7 @@ AuditEvent.propTypes = {
 };
 
 const TimelineItem = (refreshNotes) => ({ type, body, title, timelineItemUUID }) => {
-    const isCaseNote = ['MANUAL', 'ALLOCATE', 'CLOSE', 'REJECT', 'PHONECALL'].includes(type);
+    const isCaseNote = ['MANUAL', 'ALLOCATE', 'CLOSE', 'REJECT', 'PHONECALL', 'REQUEST_CONTRIBUTION'].includes(type);
     return (
         body && <li key={timelineItemUUID} className={classnames({ 'case-note': isCaseNote })}>
             {isCaseNote ? <CaseNote {...body} title={title} timelineItemUUID={timelineItemUUID} refreshNotes={refreshNotes} /> : <AuditEvent {...body} title={title} />}
