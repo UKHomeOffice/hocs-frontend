@@ -2,6 +2,7 @@ import React from 'react';
 import TextInput from './text.jsx';
 import MappedText from './mapped-text.jsx';
 import MappedDisplay from './mapped-display.jsx';
+import ChangeLink from './composite/change-link.jsx';
 import Radio from './radio-group.jsx';
 import DateInput from './date.jsx';
 import Checkbox from './checkbox-group.jsx';
@@ -108,6 +109,8 @@ export function formComponentFactory(field, options) {
                     action: `/case/${page.caseId}/stage/${page.stageId}/direction/${config.flowDirection}`
                 }
             });
+        case 'change-link':
+            return renderFormComponent(ChangeLink, { data, key, config, errors, callback });
         default:
             return null;
     }
