@@ -98,6 +98,11 @@ const bindDisplayElements = fromStaticList => async (stage) => {
         stage.assignedUserDisplay = await fromStaticList('S_USERS', stage.userUUID) || 'Allocated';
     }
     stage.deadlineDisplay = formatDate(stage.deadline);
+    if (stage.data && stage.data.RequestContributionDeadline) {
+        stage.stageTypeContributionDeadlineDisplay = stage.stageTypeDisplay + ' due: ' + formatDate(stage.data.RequestContributionDeadline);
+    } else {
+        stage.stageTypeContributionDeadlineDisplay = stage.stageTypeDisplay;
+    }
     return stage;
 };
 

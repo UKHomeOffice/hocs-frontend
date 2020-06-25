@@ -33,6 +33,7 @@ const ColumnRenderer = {
     CASE_LINK: 'caseLink',
     DATE: 'date',
     DATE_WARNING: 'dateWarning',
+    CONTRIBUTION_DEADLINE_WARNING: 'contributionDeadlineWarning',
     INDICATOR_BLUE: 'indicatorBlue',
     INDICATOR_RED: 'indicatorRed',
     WRAP_TEXT: 'wrapText'
@@ -236,6 +237,15 @@ class WorkstackAllocate extends Component {
             case ColumnRenderer.DATE_WARNING:
                 if (row.deadlineWarning) {
                     if (new Date(row.deadlineWarning) < new Date()) {
+                        return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell date-warning'>
+                            <span>{value}</span>
+                        </td>;
+                    }
+                }
+                return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>{value}</td>;
+            case ColumnRenderer.CONTRIBUTION_DEADLINE_WARNING:
+                if (row.data.RequestContributionDeadline) {
+                    if (new Date(row.data.RequestContributionDeadline) <= new Date()) {
                         return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell date-warning'>
                             <span>{value}</span>
                         </td>;
