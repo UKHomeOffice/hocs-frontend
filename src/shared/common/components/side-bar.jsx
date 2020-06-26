@@ -40,6 +40,13 @@ class SideBar extends Component {
     }
 
     render() {
+        let peopleTabEnabled = true;
+        const { page } = this.props;
+        // last chars in caseId always correspond to case_type short code
+        // this check disabled People tab for WCS cases
+        if (page && page.params && page.params.caseId) {
+            peopleTabEnabled = !page.params.caseId.endsWith('c1');
+        }
         return (
             <Fragment >
                 <div className='tabs'>
@@ -47,7 +54,7 @@ class SideBar extends Component {
                         {this.renderTabButton('Documents', 'DOCUMENTS')}
                         {this.renderTabButton('Summary', 'SUMMARY')}
                         {this.renderTabButton('Timeline', 'TIMELINE')}
-                        {this.renderTabButton('People', 'PEOPLE')}
+                        {peopleTabEnabled && this.renderTabButton('People', 'PEOPLE')}
                     </ul>
                     {this.isActive('DOCUMENTS') && <DocumentPane />}
                     {this.isActive('SUMMARY') && <StageSummary />}
@@ -63,7 +70,7 @@ class SideBar extends Component {
 SideBar.propTypes = {
     activeTab: PropTypes.string,
     page: PropTypes.object.isRequired,
-    track: PropTypes.func.isRequired
+    track: PropTypes.func.isRequired,
 
 };
 
