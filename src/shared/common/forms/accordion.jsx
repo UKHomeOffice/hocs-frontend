@@ -7,8 +7,8 @@ const getComponentFactoryInstance = (factory, options) => ({ component, props },
 const itemHasValidationError = errors => item => errors[item.props.name] || childControlHasValidationError(errors, item);
 const childControlHasValidationError = (errors, { props: { items } = {} } = {}) => Array.isArray(items) && items.some(itemHasValidationError(errors));
 
-function Section({ data, errors, index, items, title, updateState }) {
-    const createComponent = getComponentFactoryInstance(formComponentFactory, { data, errors: errors, meta: {}, callback: updateState, baseUrl: '/' });
+function Section({ data, errors, index, items, title, updateState, page }) {
+    const createComponent = getComponentFactoryInstance(formComponentFactory, { data, errors: errors, meta: {}, callback: updateState, baseUrl: '/', page });
     const sectionHasValidationError = errors && Array.isArray(items) && items.some(itemHasValidationError(errors));
     const [isVisible, setVisible] = useState(sectionHasValidationError);
     const [isFocussed, setFocussed] = useState(false);
@@ -49,13 +49,14 @@ Section.propTypes = {
     items: PropTypes.array.isRequired,
     index: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
-    updateState: PropTypes.func.isRequired
+    updateState: PropTypes.func.isRequired,
+    page: PropTypes.object.isRequired
 };
 
-function Accordion({ name, sections, data, updateState, errors }) {
+function Accordion({ name, sections, data, updateState, errors, page }) {
     return (
         <div id={name} className='govuk-accordion' data-module='accordion'>
-            {Array.isArray(sections) && sections.map(({ items, title }, index) => <Section data={data} errors={errors} items={items} index={index} key={index} title={title} updateState={updateState} />)}
+            {Array.isArray(sections) && sections.map(({ items, title }, index) => <Section data={data} errors={errors} items={items} index={index} key={index} title={title} updateState={updateState} page={page} />)}
         </div>
     );
 }
@@ -65,7 +66,8 @@ Accordion.propTypes = {
     errors: PropTypes.object,
     name: PropTypes.string.isRequired,
     sections: PropTypes.array.isRequired,
-    updateState: PropTypes.func
+    updateState: PropTypes.func,
+    page: PropTypes.object.isRequired
 };
 
 export default Accordion;
