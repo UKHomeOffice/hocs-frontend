@@ -168,7 +168,7 @@ function withForm(Page) {
         renderConfirmation() {
             return (
                 <Fragment>
-                    <Panel title='Success'>
+                    <Panel >
                         {this.state.confirmation}
                     </Panel >
                     <BackLink />

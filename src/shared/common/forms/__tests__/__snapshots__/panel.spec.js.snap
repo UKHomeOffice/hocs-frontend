@@ -1,33 +1,31 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Panel component should render with content when passed 1`] = `
-<div
-  class="govuk-panel govuk-panel--confirmation"
->
-  <h1
-    class="govuk-panel__title"
-  />
+<div>
   <div
-    class="govuk-panel__body"
+    class="govuk-panel govuk-panel--confirmation"
   >
-    <form
-      action="/search/reference?_csrf=__token__"
-      enctype="multipart/form-data"
-      method="POST"
-    >
-      <input
-        class="govuk-input"
-        id="case-reference"
-        name="case-reference"
-        type="hidden"
-      />
-      <input
-        class="govuk-button-panel--link"
-        id="submit"
-        type="submit"
-      />
-    </form>
+    <div
+      class="govuk-panel__body"
+    />
   </div>
+  <form
+    action="/search/reference?_csrf=__token__"
+    enctype="multipart/form-data"
+    method="POST"
+  >
+    <input
+      class="govuk-input"
+      id="case-reference"
+      name="case-reference"
+      type="hidden"
+    />
+    <input
+      class="govuk-button-panel--link"
+      id="submit"
+      type="submit"
+    />
+  </form>
 </div>
 `;
 
@@ -45,34 +43,35 @@ exports[`Panel component should render with default props 1`] = `
 `;
 
 exports[`Panel component should render with title when passed 1`] = `
-<div
-  class="govuk-panel govuk-panel--confirmation"
->
-  <h1
-    class="govuk-panel__title"
-  >
-    Testing
-  </h1>
+<div>
   <div
-    class="govuk-panel__body"
+    class="govuk-panel govuk-panel--confirmation"
   >
-    <form
-      action="/search/reference?_csrf=__token__"
-      enctype="multipart/form-data"
-      method="POST"
+    <h1
+      class="govuk-panel__title"
     >
-      <input
-        class="govuk-input"
-        id="case-reference"
-        name="case-reference"
-        type="hidden"
-      />
-      <input
-        class="govuk-button-panel--link"
-        id="submit"
-        type="submit"
-      />
-    </form>
+      Testing
+    </h1>
+    <div
+      class="govuk-panel__body"
+    />
   </div>
+  <form
+    action="/search/reference?_csrf=__token__"
+    enctype="multipart/form-data"
+    method="POST"
+  >
+    <input
+      class="govuk-input"
+      id="case-reference"
+      name="case-reference"
+      type="hidden"
+    />
+    <input
+      class="govuk-button-panel--link"
+      id="submit"
+      type="submit"
+    />
+  </form>
 </div>
 `;

@@ -646,13 +646,27 @@ $border-colour: govuk-colour("grey-2");
 }
 
 .govuk-button-panel--link {
-  color: govuk-colour("white");
-  text-decoration: none;
+  color: $link-colour;
+  text-decoration: underline;
   font-size: 2.25rem;
   cursor: pointer;
   background: none;
   border: none;
-  margin: 0; 
+  margin: 20, 0, 20, 0; 
+
+  &:hover {
+    color: $link-hover-colour;
+  }
+}
+
+.govuk-panel--confirmation {
+  max-width: 600px;
+}
+
+.govuk-panel--confirmation2 {
+  color: #ffffff;
+  background: #28a197;
+  max-width: 600px;
 }
 
 .govuk-fieldset{
