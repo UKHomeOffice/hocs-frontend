@@ -28,7 +28,7 @@ function defaultDataAdapter(name, data) {
 }
 
 function renderFormComponent(Component, options) {
-    const { key, config, data, errors, callback, dataAdapter } = options;
+    const { key, config, data, errors, callback, dataAdapter, page } = options;
     let value = '';
     if (data) {
         value = dataAdapter ? dataAdapter(config.name, data) : defaultDataAdapter(config.name, data);
@@ -39,7 +39,8 @@ function renderFormComponent(Component, options) {
         error={errors && errors[config.name]}
         errors={errors}
         value={value}
-        updateState={callback ? data => callback(data) : null} />;
+        updateState={callback ? data => callback(data) : null}
+        page={page} />;
 }
 
 export function formComponentFactory(field, options) {
@@ -98,7 +99,7 @@ export function formComponentFactory(field, options) {
         case 'mapped-display':
             return renderFormComponent(MappedDisplay, { key, config, data, errors, callback });
         case 'accordion':
-            return renderFormComponent(Accordion, { data, key, config, errors, callback });
+            return renderFormComponent(Accordion, { data, key, config, errors, callback, page });
         case 'expandable-checkbox':
             return renderFormComponent(ExpandableCheckbox, { data, key, config, errors, callback });
         case 'flow-direction-link':
