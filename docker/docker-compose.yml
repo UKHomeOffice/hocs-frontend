@@ -50,7 +50,7 @@ services:
     - ${PWD}/keycloak:/tmp
 
   localstack:
-    image: localstack/localstack:latest
+    image: localstack/localstack:0.9.5
     ports:
       - 9000:8080
       - 4572:4572
