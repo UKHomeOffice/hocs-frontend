@@ -95,6 +95,14 @@ const typeAdaptors = {
     REQUEST_CONTRIBUTION: ({ note }) => ({
         note,
         title: 'Contribution request note'
+    }),
+    FOLLOW_UP: ({ note }) => ({
+        note,
+        title: 'Details of follow up'
+    }),
+    FOLLOW_UP_NOT_COMPLETED: ({ note }) => ({
+        note,
+        title: 'Follow up not completed'
     })
 };
 
