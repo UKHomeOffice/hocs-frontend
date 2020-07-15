@@ -86,7 +86,7 @@ fi
 export DNS_SUFFIX=.homeoffice.gov.uk
 export DOMAIN_NAME=${DNS_PREFIX}${DNS_SUFFIX}
 
-if [[ $DOMAIN_PREFIX == *"internal"* ]]; then
+if [[ $DNS_PREFIX == *"internal"* ]]; then
   export INGRESS_TYPE="internal"
 else
   export INGRESS_TYPE="external"
