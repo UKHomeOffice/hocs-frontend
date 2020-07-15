@@ -83,7 +83,7 @@ else
     export KC_REALM=https://sso-dev.notprod.homeoffice.gov.uk/auth/realms/hocs-notprod
 fi
 
-export DOMAIN_SUFFIX=.homeoffice.gov.uk
+export DNS_SUFFIX=.homeoffice.gov.uk
 export DOMAIN_NAME=${DNS_PREFIX}${DNS_SUFFIX}
 
 if [[ $DOMAIN_PREFIX == *"internal"* ]]; then
