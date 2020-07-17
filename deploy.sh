@@ -67,7 +67,7 @@ elif [[ "${KUBE_NAMESPACE}" == "wcs-dev" ]] ; then
     export DNS_PREFIX=dev.wcs-notprod
     export KC_REALM=https://sso-dev.notprod.homeoffice.gov.uk/auth/realms/hocs-notprod
 elif [[ "${KUBE_NAMESPACE}" == "cs-qa" ]] ; then
-    export DNS_PREFIX=qa.cs-notprod
+    export DNS_PREFIX=qa.internal.cs-notprod
     export KC_REALM=https://sso-dev.notprod.homeoffice.gov.uk/auth/realms/hocs-notprod
 elif [[ "${KUBE_NAMESPACE}" == "wcs-qa" ]] ; then
     export DNS_PREFIX=qa.wcs-notprod
