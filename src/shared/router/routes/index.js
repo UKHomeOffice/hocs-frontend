@@ -80,8 +80,7 @@ const routes = [
         path: '/case/:caseId/stage/:stageId/entity/:entity/:action/',
         exact: true,
         component: CasePage,
-        hasSidebar: false
-
+        hasSidebar: true
     },
     {
         path: '/case/:caseId/stage/:stageId/entity/:entity/:context/:action/',
