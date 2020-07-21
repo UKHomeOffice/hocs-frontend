@@ -760,3 +760,20 @@ $border-colour: govuk-colour("grey-2");
         top: unset;
     }
 }
+
+.govuk-form-group {
+  .govuk-fieldset {
+    .govuk-table {
+      table-layout: fixed;
+    }
+  }
+}
+
+.govuk-table__cell {
+  .govuk-radios__item {
+    .govuk-label {
+      display: inherit;
+      overflow-wrap: break-word;
+    }
+  }
+}
