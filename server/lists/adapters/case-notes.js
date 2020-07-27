@@ -103,6 +103,10 @@ const typeAdaptors = {
     FOLLOW_UP_NOT_COMPLETED: ({ note }) => ({
         note,
         title: 'Follow up not completed'
+    }),
+    WITHDRAW: ({ note }) => ({
+        note,
+        title: 'Case withdrawn'
     })
 };
 
