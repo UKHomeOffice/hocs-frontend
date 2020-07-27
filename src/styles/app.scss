@@ -381,7 +381,7 @@ a.card__body {
             padding: 0.25em 0.5em 0.25em 0.5em;
           }
       }
-      &.indicator {          
+      &.indicator {
           span {
             background-color: black;
             border-radius: 5px;
@@ -400,7 +400,7 @@ a.card__body {
 
   td,th {
     padding-left: 0.2em;
-    
+
     &.govuk-link {
         cursor: pointer;
     }
@@ -449,7 +449,7 @@ a.card__body {
         &:before {
             top:28px;
         }
-        
+
         &:first-child::after {
             top:28px;
         }
@@ -652,7 +652,7 @@ $border-colour: govuk-colour("grey-2");
   cursor: pointer;
   background: none;
   border: none;
-  margin: 20, 0, 20, 0; 
+  margin: 20, 0, 20, 0;
 
   &:hover {
     color: $link-hover-colour;
@@ -707,7 +707,7 @@ $border-colour: govuk-colour("grey-2");
         &.govuk-header__container {
             margin-bottom: -10px;
         }
-    }        
+    }
 }
 
 .selectable-details {
@@ -761,19 +761,22 @@ $border-colour: govuk-colour("grey-2");
     }
 }
 
-.govuk-form-group {
-  .govuk-fieldset {
-    .govuk-table {
-      table-layout: fixed;
-    }
-  }
-}
+#Correspondents, #DraftDocuments, #Topics {
+  table {
+    table-layout: fixed;
+    overflow-wrap: break-word;
 
-.govuk-table__cell {
-  .govuk-radios__item {
-    .govuk-label {
-      display: inherit;
-      overflow-wrap: break-word;
+    > tbody > tr > td {
+
+      &:first-child {
+        width: 50%;
+      }
+
+      > div > label {
+        display: inherit;
+        overflow-wrap: break-word;
+      }
+
     }
   }
 }
