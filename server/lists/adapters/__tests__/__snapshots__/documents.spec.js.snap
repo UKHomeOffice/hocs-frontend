@@ -7,6 +7,7 @@ Array [
     Array [
       Object {
         "label": "Document A",
+        "labels": undefined,
         "status": undefined,
         "tags": Array [
           undefined,
@@ -17,6 +18,7 @@ Array [
       },
       Object {
         "label": "Document B",
+        "labels": undefined,
         "status": undefined,
         "tags": Array [
           undefined,
@@ -32,6 +34,7 @@ Array [
     Array [
       Object {
         "label": "Document C",
+        "labels": undefined,
         "status": undefined,
         "tags": Array [
           undefined,
