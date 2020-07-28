@@ -29,7 +29,7 @@ module.exports = async (options) => {
                 .withProp('action', 'MANAGE_PEOPLE')
                 .withProp('type', 'radio')
                 .withProp('checkedValue', person.value)
-                .withProp('hideSidebar', true)
+                .withProp('hideSidebar', false)
                 .build()
         )
         .withPrimaryAction('Finish')
