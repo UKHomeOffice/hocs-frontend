@@ -89,6 +89,7 @@ class DocumentPanel extends Component {
             <Fragment>
                 <div className='govuk-grid-row'>
                     <div className='govuk-grid-column-full'>
+                        <Link className='govuk-body govuk-link' to={`/case/${page.params.caseId}/stage/${page.params.stageId}/entity/document/manage`} >Manage Documents</Link>
                         {activeDocument && page.params.caseId && <Document caseId={page.params.caseId} activeDocument={activeDocument} />}
                         {documents && documents.length > 0 && <DocumentList
                             caseId={page.params.caseId}
@@ -97,7 +98,6 @@ class DocumentPanel extends Component {
                             activeDocument={activeDocument}
                             clickHandler={this.setActiveDocument.bind(this)}
                         />}
-                        <Link className='govuk-body govuk-link' to={`/case/${page.params.caseId}/stage/${page.params.stageId}/entity/document/manage`} >Manage Documents</Link>
                     </div>
                 </div>
             </Fragment>

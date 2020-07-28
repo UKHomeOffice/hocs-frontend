@@ -24,6 +24,9 @@ class DocumentList extends Component {
                                 {
                                     caseId && Array.isArray(groupedDocuments) && groupedDocuments.map(({ label, status, tags, value }, i) => (
                                         <tr key={i} className='govuk-table__row'>
+                                            <td className='govuk-table__cell govuk-!-width-full'>
+                                                {label}
+                                            </td>
                                             {Array.isArray(tags) && <td className='govuk-table__cell govuk-!-width-one-quarter'>
                                                 {tags.map(tag =>
                                                     <strong key={tag} className='govuk-tag margin-right--small'>
@@ -32,9 +35,6 @@ class DocumentList extends Component {
                                                 )}
                                             </td>
                                             }
-                                            <td className='govuk-table__cell govuk-!-width-full'>
-                                                {label}
-                                            </td>
                                             <td className='govuk-table__cell'>
                                                 {value && status === 'UPLOADED' && caseId && activeDocument !== value &&
                                                     <a

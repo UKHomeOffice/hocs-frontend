@@ -25,14 +25,14 @@ class EntityManager extends Component {
                         {Array.isArray(choices) && choices.map((choice, i) => {
                             return (
                                 <tr className='govuk-radios govuk-table__row' key={i}>
-                                    {choice.tags && <td className='govuk-table__cell' >
-                                        {choice.tags.map((tag, i) => <strong key={i} className='govuk-tag margin-right--small'>{tag}</strong>)}
-                                    </td>}
                                     <td className='govuk-table__cell govuk-!-width-full'>
                                         {choice.label}
                                     </td>
                                     {choice.created && <td className='govuk-table__cell'>
                                         {new Date(choice.created).toLocaleDateString()}
+                                    </td>}
+                                    {choice.tags && <td className='govuk-table__cell ' >
+                                        {choice.tags.map((tag, i) => <strong key={i} className='govuk-tag margin-right--small'>{tag}</strong>)}
                                     </td>}
                                     {hasDownloadLink && <td className='govuk-table__cell'>
                                         <a href={`${baseUrl}/download/${entity}/${choice.value}`} className="govuk-link" download={choice.label}>Download</a>
