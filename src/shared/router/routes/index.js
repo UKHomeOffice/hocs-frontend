@@ -77,6 +77,12 @@ const routes = [
         hasSidebar: true
     },
     {
+        path: '/case/:caseId/stage/:stageId/entity/document/:action/',
+        exact: true,
+        component: CasePage,
+        hasSidebar: false
+    },
+    {
         path: '/case/:caseId/stage/:stageId/entity/:entity/:action/',
         exact: true,
         component: CasePage,
