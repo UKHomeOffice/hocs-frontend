@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { components } from 'react-select';
 import Select from 'react-select/async';
 import PropTypes from 'prop-types';
 
@@ -75,14 +74,6 @@ class TypeAhead extends Component {
                         valueContainer: () => ({}),
                         placeholder: () => ({})
                     }}
-                    components={{
-                        Control: (props) => (
-                            <components.Control
-                                className={error ? ' govuk-typeahead__control--error' : null}
-                                {...props}
-                            />
-                        )
-                    }}
                     id={name}
                     placeholder='Search'
                     classNamePrefix='govuk-typeahead'
@@ -92,6 +83,7 @@ class TypeAhead extends Component {
                     error={error}
                     onChange={this.handleChange.bind(this)}
                     loadOptions={this.getOptions.bind(this)}
+                    className={error ? ' govuk-typeahead__control--error' : null}
                 />
             </div >
         );
