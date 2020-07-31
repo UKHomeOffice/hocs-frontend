@@ -27,6 +27,7 @@ async function handleSearch(req, res, next) {
                 NI: formData['niNumber'],
                 PrevHocsRef: formData['PrevHocsRef'],
                 RefType: formData['RefType'],
+                HomeSecInterest: formData['HomeSecInterest'] === 'true' ? true : undefined
             },
             activeOnly: formData['caseStatus'] === 'active'
         };
