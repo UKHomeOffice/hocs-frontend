@@ -133,8 +133,8 @@ $govuk-font-family-tabular: 'helvetica neue',Arial, Helvetica, sans-serif !defau
 }
 
 
-.govuk-typeahead__control--error {
-  border: 4px solid $govuk-error-colour;
+.govuk-typeahead__control--error > div:first-child {
+    border: 4px solid $govuk-error-colour;
 }
 
 .govuk-typeahead__control--is-focused {
