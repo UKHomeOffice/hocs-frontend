@@ -100,15 +100,31 @@ function validationMiddleware(req, res, next) {
     if (req.form) {
         try {
             const { data, schema } = req.form;
+            let shouldSkipValidation = false;
+            if (schema.props && schema.props.validationSuppressors) {
+                for (var i = 0; i < schema.props.validationSuppressors.length; i++) {
+                    const suppressor = schema.props.validationSuppressors[i];
+                    if (suppressor.fieldName === 'ALL' || data[suppressor.fieldName] === suppressor.value) {
+                        shouldSkipValidation = true;
+                        break;
+                    }
+                }
+
+            }
+
             const validationErrors = schema.fields
                 .filter(field => field.type !== 'display')
                 .reduce((result, field) => {
-                    validateField(field, data, result);
+                    if (!shouldSkipValidation || field.component === 'date') {
+                        validateField(field, data, result);
+                    }
                     return result;
                 }, {});
             if (Object.keys(validationErrors).length > 0) {
                 return next(new ValidationError('Form validation failed', validationErrors));
             }
+
+
         } catch (e) {
             return next(new FormSubmissionError('Unable to validate form data'));
         }
