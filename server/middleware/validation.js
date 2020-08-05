@@ -115,9 +115,7 @@ function validationMiddleware(req, res, next) {
             const validationErrors = schema.fields
                 .filter(field => field.type !== 'display')
                 .reduce((result, field) => {
-                    if (!shouldSkipValidation || field.component === 'date') {
-                        validateField(field, data, result);
-                    }
+                    validateField(field, data, result, shouldSkipValidation);
                     return result;
                 }, {});
             if (Object.keys(validationErrors).length > 0) {
@@ -131,18 +129,18 @@ function validationMiddleware(req, res, next) {
     }
     next();
 
-    function validateField(field, data, result) {
+    function validateField(field, data, result, shouldSkipValidation) {
         const { component, validation, props: { name, label, sections, items } } = field;
 
         if (component === 'expandable-checkbox') {
-            Array.isArray(items) && items.map(item => validateField(item, data, result));
+            Array.isArray(items) && items.map(item => validateField(item, data, result, shouldSkipValidation));
         }
 
         if (component === 'accordion') {
-            Array.isArray(sections) && sections.map(({ items }) => Array.isArray(items) && items.map(item => validateField(item, data, result)));
+            Array.isArray(sections) && sections.map(({ items }) => Array.isArray(items) && items.map(item => validateField(item, data, result, shouldSkipValidation)));
         } else {
             const value = data[name];
-            if (validation) {
+            if ((!shouldSkipValidation || component === 'date') && validation) {
                 validation.map(validator => {
                     if (typeof validator === 'string') {
                         if (validators.hasOwnProperty(validator)) {
