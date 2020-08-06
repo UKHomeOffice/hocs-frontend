@@ -100,12 +100,12 @@ function validationMiddleware(req, res, next) {
     if (req.form) {
         try {
             const { data, schema } = req.form;
-            let shouldSkipValidation = false;
+            let validationSuppressor;
             if (schema.props && schema.props.validationSuppressors) {
                 for (var i = 0; i < schema.props.validationSuppressors.length; i++) {
                     const suppressor = schema.props.validationSuppressors[i];
                     if (suppressor.fieldName === 'ALL' || data[suppressor.fieldName] === suppressor.value) {
-                        shouldSkipValidation = true;
+                        validationSuppressor = suppressor;
                         break;
                     }
                 }
@@ -115,7 +115,7 @@ function validationMiddleware(req, res, next) {
             const validationErrors = schema.fields
                 .filter(field => field.type !== 'display')
                 .reduce((result, field) => {
-                    validateField(field, data, result, shouldSkipValidation);
+                    validateField(field, data, result, validationSuppressor);
                     return result;
                 }, {});
             if (Object.keys(validationErrors).length > 0) {
@@ -129,18 +129,27 @@ function validationMiddleware(req, res, next) {
     }
     next();
 
-    function validateField(field, data, result, shouldSkipValidation) {
+    function validateField(field, data, result, validationSuppressor) {
         const { component, validation, props: { name, label, sections, items } } = field;
 
         if (component === 'expandable-checkbox') {
-            Array.isArray(items) && items.map(item => validateField(item, data, result, shouldSkipValidation));
+            Array.isArray(items) && items.map(item => validateField(item, data, result, validationSuppressor));
         }
 
         if (component === 'accordion') {
-            Array.isArray(sections) && sections.map(({ items }) => Array.isArray(items) && items.map(item => validateField(item, data, result, shouldSkipValidation)));
+            Array.isArray(sections) && sections.map(({ items }) => Array.isArray(items) && items.map(item => validateField(item, data, result, validationSuppressor)));
         } else {
             const value = data[name];
-            if ((!shouldSkipValidation || component === 'date') && validation) {
+            // suppressing validation when supressors are:
+            // 1. defined
+            // 2.a Fields to exclude on supressor are not defined
+            // 2.b Fields to exclude on supressor do not include current field we're about to validate
+            let suppressValidation = false;
+            if (validationSuppressor !== undefined) {
+                suppressValidation = !Array.isArray(validationSuppressor.excludeFields) || !validationSuppressor.excludeFields.includes(name);
+            }
+
+            if (validation && !suppressValidation) {
                 validation.map(validator => {
                     if (typeof validator === 'string') {
                         if (validators.hasOwnProperty(validator)) {
