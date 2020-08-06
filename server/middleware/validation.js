@@ -140,7 +140,7 @@ function validationMiddleware(req, res, next) {
             Array.isArray(sections) && sections.map(({ items }) => Array.isArray(items) && items.map(item => validateField(item, data, result, validationSuppressor)));
         } else {
             const value = data[name];
-            // suppressing validation when supressors is:
+            // suppressing validation when supressors are:
             // 1. defined
             // 2.a Fields to exclude on supressor are not defined
             // 2.b Fields to exclude on supressor do not include current field we're about to validate
