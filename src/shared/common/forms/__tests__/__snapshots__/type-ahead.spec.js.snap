@@ -152,6 +152,7 @@ exports[`Form type ahead component (select) should render disabled when passed 1
 <TypeAhead
   choices={Array []}
   clearable={true}
+  defaultOptions={false}
   disabled={true}
   name="type-ahead"
   updateState={[Function]}
@@ -1458,6 +1459,7 @@ exports[`Form type ahead component (select) should render with default props 1`]
 <TypeAhead
   choices={Array []}
   clearable={true}
+  defaultOptions={false}
   disabled={false}
   name="type-ahead"
   updateState={[Function]}
@@ -2764,6 +2766,7 @@ exports[`Form type ahead component (select) should render with error when passed
 <TypeAhead
   choices={Array []}
   clearable={true}
+  defaultOptions={false}
   disabled={false}
   error="Some error message"
   name="type-ahead"
@@ -4080,6 +4083,7 @@ exports[`Form type ahead component (select) should render with hint when passed 
 <TypeAhead
   choices={Array []}
   clearable={true}
+  defaultOptions={false}
   disabled={false}
   hint="Select an option"
   name="type-ahead"
@@ -5392,6 +5396,7 @@ exports[`Form type ahead component (select) should render with label when passed
 <TypeAhead
   choices={Array []}
   clearable={true}
+  defaultOptions={false}
   disabled={false}
   label="Type-ahead"
   name="type-ahead"

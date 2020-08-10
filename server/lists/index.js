@@ -181,6 +181,11 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
+        MPAM_CAMPAIGNS: {
+            client: 'INFO',
+            endpoint: '/entity/list/MPAM_CAMPAIGNS',
+            adapter: entityListItemsAdapter
+        },
         CASE_TYPES: {
             client: 'INFO',
             endpoint: '/caseType?bulkOnly=false',
