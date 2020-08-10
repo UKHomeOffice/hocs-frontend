@@ -168,7 +168,7 @@ TypeAhead.defaultProps = {
     clearable: true,
     disabled: false,
     choices: [],
-    defaultOptions: false,
+    defaultOptions: false
 };
 
 export default TypeAhead;
