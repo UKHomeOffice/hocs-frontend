@@ -79,13 +79,22 @@ const getInstance = (requestId, user) => {
 
     const logger = getLogger(requestId);
 
-    const fromStaticList = async (listId, key) => {
+    const fromStaticList = async (listId, key, flushIfNull = false) => {
         const defaultValue = null;
         if (listCache.hasResource(listId)) {
             const item = await fetchList(listId);
             if (item) {
-                const result = item.find(item => item.key === key);
-                return result ? result.value : defaultValue;
+                // list items come back as:
+                // a) object with 'key' and 'value' where key is the id. We return 'value' in this instance.
+                // b) object with 'value' and 'label' where value is the id. We return 'label' in this instance.
+                const result = item.find(item => item.key ? item.key === key : item.value === key);
+                if (result) {
+                    return result.key ? result.value : result.label;
+                } else if (flushIfNull) {
+                    await flush(listId);
+                    return await fromStaticList(listId, key, false);
+                }
+                return defaultValue;
             } else return defaultValue;
         } else {
             return defaultValue;
@@ -148,9 +157,25 @@ const getInstance = (requestId, user) => {
 
 };
 
-const flush = (key) => {
+const flush = async (key) => {
     listCache.flush(key);
     getLogger().info('Flushing Cache ' + key);
+    await cacheStaticList(key);
+};
+
+const cacheStaticList = async (listId) => {
+    const { endpoint, client, adapter } = listRepository.fetch(listId);
+    const clientInstance = clientRepository.fetch(client);
+    const logger = getLogger();
+    let response;
+    try {
+        response = await clientInstance.get(endpoint);
+    } catch (error) {
+        logger.error('CACHE_STATIC_LIST_REQUEST_FAILURE', { list: listId, status: error.response ? error.response.status : error.code });
+    }
+    const listData = await applyAdapter(response.data, adapter, { logger });
+    listCache.store(listId, listData);
+    logger.info('CACHE_STATIC_LIST_SUCCESS', { list: listId, client: client, endpoint: endpoint });
 };
 
 module.exports = {
