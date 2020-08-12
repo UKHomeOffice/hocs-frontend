@@ -53,6 +53,32 @@ const returnWorkstackColumns = (configuration, workstackData) => {
     return getColumnsForWorkstack.workstackColumns;
 };
 
+const returnTeamWorkstackColumns = (configuration, workstackData, teamId) => {
+    const defaultColumnConfig = 'DEFAULT';
+    const caseTypeForColumnConfig = workstackData.length > 0 ? workstackData[0].caseType : defaultColumnConfig;
+
+    // check if we have exact match for team id (workstack specific for team)
+    var getColumnsForWorkstack = configuration.workstackTypeColumns.find(
+        item => item.workstackType === teamId
+    );
+
+    // otherwise use workstack for case type
+    if (getColumnsForWorkstack === undefined) {
+        getColumnsForWorkstack = configuration.workstackTypeColumns.find(
+            item => item.workstackType === caseTypeForColumnConfig
+        );
+    }
+
+    // if above is not configured, use DEFAULT workstack columns
+    if (getColumnsForWorkstack === undefined) {
+        getColumnsForWorkstack = configuration.workstackTypeColumns.find(
+            item => item.workstackType === defaultColumnConfig
+        );
+    }
+
+    return getColumnsForWorkstack.workstackColumns;
+};
+
 const returnMyCasesWorkstackColumns = (configuration, workstackData) => {
     const defaultColumnConfig = 'DEFAULT';
     const caseTypeForColumnConfig = workstackData.length > 0 ? workstackData[0].caseType : defaultColumnConfig;
@@ -96,6 +122,10 @@ const bindDisplayElements = fromStaticList => async (stage) => {
     }
     if (stage.userUUID) {
         stage.assignedUserDisplay = await fromStaticList('S_USERS', stage.userUUID) || 'Allocated';
+    }
+    if (stage.data && stage.data.CampaignType) {
+        //stage.campaignDisplay = await fromStaticList('S_MPAM_CAMPAIGNS', stage.data.CampaignType, true) || stage.data.CampaignType;
+        stage.campaignDisplay = await fromStaticList('S_MPAM_CAMPAIGNS', 'campaignUnos', true) || 'not found';
     }
     stage.deadlineDisplay = formatDate(stage.deadline);
     if (stage.data && stage.data.DueDate) {
@@ -211,7 +241,7 @@ const teamAdapter = async (data, { fromStaticList, logger, teamId, configuration
     return {
         label: teamDisplayName,
         items: workstackData,
-        columns: returnWorkstackColumns(configuration, workstackData),
+        columns: returnTeamWorkstackColumns(configuration, workstackData, teamId),
         dashboard: workflowCards,
         teamMembers: [],
         allocateToUserEndpoint: '/allocate/user',
