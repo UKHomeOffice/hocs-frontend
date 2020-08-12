@@ -6,7 +6,19 @@ class TypeAhead extends Component {
 
     constructor(props) {
         super(props);
-        const choices = Array.from(props.choices);
+        let choices = Array.from(props.choices);
+
+        // formatting input if it comes as key-value pairs (group is defined as blank string)
+        if (choices.length > 0 && choices[0].options === undefined) {
+            choices = choices
+                .map(d => ({
+                    label: '', options: [{
+                        label: d.label,
+                        value: d.value
+                    }]
+                }));
+        }
+
         choices.unshift({ label: '', options: [{ label: '', value: '' }] });
         this.state = {
             value: this.props.value,
@@ -40,7 +52,7 @@ class TypeAhead extends Component {
                 return reducer;
             }, []);
         } else {
-            options = [];
+            options = this.props.defaultOptions ? this.state.choices : [];
         }
         return callback(options);
     }
@@ -52,7 +64,8 @@ class TypeAhead extends Component {
             error,
             hint,
             label,
-            name
+            name,
+            defaultOptions
         } = this.props;
         const { choices } = this.state;
         return (
@@ -83,6 +96,7 @@ class TypeAhead extends Component {
                     error={error}
                     onChange={this.handleChange.bind(this)}
                     loadOptions={this.getOptions.bind(this)}
+                    defaultOptions={defaultOptions}
                     className={error ? ' govuk-typeahead__control--error' : null}
                 />
             </div >
@@ -146,13 +160,15 @@ TypeAhead.propTypes = {
     label: PropTypes.string,
     name: PropTypes.string.isRequired,
     updateState: PropTypes.func.isRequired,
-    value: PropTypes.string
+    value: PropTypes.string,
+    defaultOptions: PropTypes.bool,
 };
 
 TypeAhead.defaultProps = {
     clearable: true,
     disabled: false,
-    choices: []
+    choices: [],
+    defaultOptions: false
 };
 
 export default TypeAhead;
