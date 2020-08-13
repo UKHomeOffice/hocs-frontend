@@ -29,7 +29,8 @@ describe('handleSearch', () => {
                     'claimantDOB': '12-11-1967',
                     'niNumber': 'SJ0000000',
                     'PrevHocsRef': 'PREV_HOCS_REF',
-                    'caseStatus': 'active'
+                    'caseStatus': 'active',
+                    'CampaignType': 'Test Campaign 123'
                 }
             },
             requestId: 'reqid',
@@ -94,7 +95,8 @@ describe('handleSearch', () => {
                 FullName: 'test Name',
                 DateOfBirth: '12-11-1967',
                 NI: 'SJ0000000',
-                PrevHocsRef: 'PREV_HOCS_REF'
+                PrevHocsRef: 'PREV_HOCS_REF',
+                CampaignType: 'Test Campaign 123'
             },
             activeOnly: true
         };
