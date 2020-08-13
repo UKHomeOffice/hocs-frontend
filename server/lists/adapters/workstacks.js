@@ -124,8 +124,7 @@ const bindDisplayElements = fromStaticList => async (stage) => {
         stage.assignedUserDisplay = await fromStaticList('S_USERS', stage.userUUID) || 'Allocated';
     }
     if (stage.data && stage.data.CampaignType) {
-        //stage.campaignDisplay = await fromStaticList('S_MPAM_CAMPAIGNS', stage.data.CampaignType, true) || stage.data.CampaignType;
-        stage.campaignDisplay = await fromStaticList('S_MPAM_CAMPAIGNS', 'campaignUnos', true) || 'not found';
+        stage.campaignDisplay = await fromStaticList('S_MPAM_CAMPAIGNS', stage.data.CampaignType, true) || stage.data.CampaignType;
     }
     stage.deadlineDisplay = formatDate(stage.deadline);
     if (stage.data && stage.data.DueDate) {
