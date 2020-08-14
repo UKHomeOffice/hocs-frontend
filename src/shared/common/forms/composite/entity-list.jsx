@@ -8,7 +8,7 @@ class EntityList extends Component {
     constructor(props) {
         super(props);
         const fallbackValue = this.props.choices[0] ? this.props.choices[0].value : null;
-        const value = this.props.value || fallbackValue;
+        const value = this.loadValue(this.props.value, this.props.choices) || fallbackValue;
         this.state = { ...props, value };
     }
 
@@ -19,6 +19,15 @@ class EntityList extends Component {
     handleChange(e) {
         this.setState({ value: e.target.value });
         this.props.updateState({ [this.props.name]: e.target.value });
+    }
+
+    loadValue(value, choices) {
+        for (let i = 0; i < choices.length; ++i) {
+            if (choices.value === value) {
+                return value;
+            }
+        }
+        return '';
     }
 
     render() {
