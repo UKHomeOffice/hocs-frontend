@@ -253,7 +253,7 @@ module.exports = {
             adapter: teamsAdapter
         },
         USERS_FOR_CASE: {
-            client: 'INFO',
+            client: 'CASEWORK',
             endpoint: '/case/${caseId}/stage/${stageId}/team/members',
             adapter: usersAdapter
         },
