@@ -30,7 +30,8 @@ describe('handleSearch', () => {
                     'niNumber': 'SJ0000000',
                     'PrevHocsRef': 'PREV_HOCS_REF',
                     'caseStatus': 'active',
-                    'CampaignType': 'Test Campaign 123'
+                    'CampaignType': 'Test Campaign 123',
+                    'MinSignOffTeam': 'Test Min Sign Off Team'
                 }
             },
             requestId: 'reqid',
@@ -96,7 +97,8 @@ describe('handleSearch', () => {
                 DateOfBirth: '12-11-1967',
                 NI: 'SJ0000000',
                 PrevHocsRef: 'PREV_HOCS_REF',
-                CampaignType: 'Test Campaign 123'
+                CampaignType: 'Test Campaign 123',
+                MinSignOffTeam: 'Test Min Sign Off Team'
             },
             activeOnly: true
         };
