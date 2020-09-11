@@ -187,6 +187,12 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
+        S_MPAM_MIN_SIGN_OFF_TEAMS: {
+            client: 'INFO',
+            endpoint: '/entity/list/MPAM_MIN_SIGN_OFF_TEAMS',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
         MPAM_CAMPAIGNS: {
             client: 'INFO',
             endpoint: '/entity/list/MPAM_CAMPAIGNS',

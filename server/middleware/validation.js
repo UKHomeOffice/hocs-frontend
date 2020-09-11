@@ -129,8 +129,26 @@ function validationMiddleware(req, res, next) {
     }
     next();
 
+    function isFieldVisible(visibilityConditions, data) {
+        let isVisible = true;
+        if (visibilityConditions) {
+            isVisible = false;
+            for (var i = 0; i < visibilityConditions.length; i++) {
+                const condition = visibilityConditions[i];
+                if (data[condition.conditionPropertyName] && data[condition.conditionPropertyName] === condition.conditionPropertyValue) {
+                    isVisible = true;
+                }
+            }
+        }
+        return isVisible;
+    }
+
     function validateField(field, data, result, validationSuppressor) {
-        const { component, validation, props: { name, label, sections, items } } = field;
+        const { component, validation, props: { name, label, sections, items, visibilityConditions } } = field;
+
+        if (!isFieldVisible(visibilityConditions, data)) {
+            return;
+        }
 
         if (component === 'expandable-checkbox') {
             Array.isArray(items) && items.map(item => validateField(item, data, result, validationSuppressor));

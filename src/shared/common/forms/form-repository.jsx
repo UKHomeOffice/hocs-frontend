@@ -30,22 +30,40 @@ function defaultDataAdapter(name, data) {
 
 function renderFormComponent(Component, options) {
     const { key, config, data, errors, callback, dataAdapter, page } = options;
-    let value = '';
-    if (data) {
-        value = dataAdapter ? dataAdapter(config.name, data) : defaultDataAdapter(config.name, data);
+    if (isComponentVisible(config, data)) {
+        let value = '';
+        if (data) {
+            value = dataAdapter ? dataAdapter(config.name, data) : defaultDataAdapter(config.name, data);
+        }
+        return <Component key={key}
+            {...config}
+            data={data}
+            error={errors && errors[config.name]}
+            errors={errors}
+            value={value}
+            updateState={callback ? data => callback(data) : null}
+            page={page} />;
     }
-    return <Component key={key}
-        {...config}
-        data={data}
-        error={errors && errors[config.name]}
-        errors={errors}
-        value={value}
-        updateState={callback ? data => callback(data) : null}
-        page={page} />;
+    return null;
+}
+
+function isComponentVisible(config, data) {
+    let isVisible = true;
+    if (config.visibilityConditions) {
+        isVisible = false;
+        for (var i = 0; i < config.visibilityConditions.length; i++) {
+            const condition = config.visibilityConditions[i];
+            if (data[condition.conditionPropertyName] && data[condition.conditionPropertyName] === condition.conditionPropertyValue) {
+                isVisible = true;
+            }
+        }
+    }
+    return isVisible;
 }
 
 export function formComponentFactory(field, options) {
     const { key, config, data, errors, callback, page } = options;
+
     switch (field) {
         case 'radio':
             return renderFormComponent(Radio, { key, config, data, errors, callback });

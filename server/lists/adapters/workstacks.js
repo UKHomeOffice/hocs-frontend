@@ -126,6 +126,9 @@ const bindDisplayElements = fromStaticList => async (stage) => {
     if (stage.data && stage.data.CampaignType) {
         stage.campaignDisplay = await fromStaticList('S_MPAM_CAMPAIGNS', stage.data.CampaignType, true) || stage.data.CampaignType;
     }
+    if (stage.data && stage.data.MinSignOffTeam) {
+        stage.MinSignOffTeamDisplay = await fromStaticList('S_MPAM_MIN_SIGN_OFF_TEAMS', stage.data.MinSignOffTeam, true) || stage.data.MinSignOffTeam;
+    }
     stage.deadlineDisplay = formatDate(stage.deadline);
     if (stage.data && stage.data.DueDate) {
         stage.stageTypeWithDueDateDisplay = stage.stageTypeDisplay + ' due: ' + formatDate(stage.data.DueDate);
