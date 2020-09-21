@@ -4,3 +4,4 @@ metadata:
   name: hocs-frontend
 data:
   clientside: 'true'
+  a11y-url: 'https://horizon.homeoffice.gov.uk/page/accessibility-statement-internal-home-office-systems-0'

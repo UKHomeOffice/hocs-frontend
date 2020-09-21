@@ -230,6 +230,11 @@ spec:
               configMapKeyRef:
                 name: hocs-frontend
                 key: clientside
+          - name: ACCESSIBILITY_STATEMENT_URL
+            valueFrom:
+              configMapKeyRef:
+                name: hocs-frontend
+                key: a11y-url
           - name: MAX_UPLOAD_SIZE
             valueFrom:
               configMapKeyRef:
