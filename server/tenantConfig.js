@@ -33,7 +33,9 @@ async function layoutConfig() {
             }
         },
         footer: {
-            isVisible: false
+            isVisible: true,
+            showOGL: false,
+            links: getFooterLinks()
         },
         maxSearchResults: 500,
         maxUploadSize: process.env.MAX_UPLOAD_SIZE || 10485760,
@@ -41,6 +43,17 @@ async function layoutConfig() {
         defaultTimeoutSeconds: isNaN(defaultTimeoutSeconds) ? 1200 : defaultTimeoutSeconds,
         countDownForSeconds: isNaN(countDownForSeconds) ? 60 : countDownForSeconds
     };
+}
+
+function getFooterLinks() {
+    const links = [];
+    if (process.env.ACCESSIBILITY_STATEMENT_URL) {
+        links.push({
+            target: process.env.ACCESSIBILITY_STATEMENT_URL,
+            label: 'Accessibility'
+        });
+    }
+    return links;
 }
 
 async function fetchConfiguration() {
