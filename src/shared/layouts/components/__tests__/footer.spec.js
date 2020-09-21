@@ -18,4 +18,12 @@ describe('Layout footer component', () => {
             render(<Footer {...props} />)
         ).toMatchSnapshot();
     });
+    it('should show OGL when asked', () => {
+        const props = {
+            showOGL: true
+        };
+        expect(
+            render(<Footer {...props} />)
+        ).toMatchSnapshot();
+    });
 });
