@@ -7,6 +7,7 @@ class Header extends Component {
     createLogotype(service, serviceLink, bulkCreateEnabled) {
         return (
             <div className='govuk-header__container govuk-width-container'>
+                <a href='#main-content' className='govuk-skip-link'>Skip to main content</a>
                 <div className='govuk-header__logo'>
                     <span className='govuk-header__logotype'>
                         <Link to={serviceLink} className='govuk-header__link govuk-header__link--homepage govuk-header__logotype-text'>{service}</Link>
