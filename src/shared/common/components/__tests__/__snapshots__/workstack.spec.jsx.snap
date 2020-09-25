@@ -108,7 +108,13 @@ Array [
                             <label
                               class="govuk-label govuk-checkboxes__label"
                               for="selected_cases_case_uuid-123"
-                            />
+                            >
+                              <span
+                                class="govuk-visually-hidden"
+                              >
+                                case1
+                              </span>
+                            </label>
                           </div>
                         </div>
                       </td>
@@ -175,7 +181,13 @@ Array [
                             <label
                               class="govuk-label govuk-checkboxes__label"
                               for="selected_cases_case_uuid-789"
-                            />
+                            >
+                              <span
+                                class="govuk-visually-hidden"
+                              >
+                                case2
+                              </span>
+                            </label>
                           </div>
                         </div>
                       </td>
@@ -238,7 +250,13 @@ Array [
                             <label
                               class="govuk-label govuk-checkboxes__label"
                               for="selected_cases_case_uuid-abc"
-                            />
+                            >
+                              <span
+                                class="govuk-visually-hidden"
+                              >
+                                case3
+                              </span>
+                            </label>
                           </div>
                         </div>
                       </td>
@@ -618,7 +636,13 @@ exports[`Workstack component should render with filtering 1`] = `
                                   <label
                                     className="govuk-label govuk-checkboxes__label"
                                     htmlFor="selected_cases_case_uuid-123"
-                                  />
+                                  >
+                                    <span
+                                      className="govuk-visually-hidden"
+                                    >
+                                      case1
+                                    </span>
+                                  </label>
                                 </div>
                               </div>
                             </td>
@@ -1026,7 +1050,13 @@ exports[`Workstack component should sort descending when the column heading is c
                                   <label
                                     className="govuk-label govuk-checkboxes__label"
                                     htmlFor="selected_cases_case_uuid-abc"
-                                  />
+                                  >
+                                    <span
+                                      className="govuk-visually-hidden"
+                                    >
+                                      case3
+                                    </span>
+                                  </label>
                                 </div>
                               </div>
                             </td>
@@ -1112,7 +1142,13 @@ exports[`Workstack component should sort descending when the column heading is c
                                   <label
                                     className="govuk-label govuk-checkboxes__label"
                                     htmlFor="selected_cases_case_uuid-789"
-                                  />
+                                  >
+                                    <span
+                                      className="govuk-visually-hidden"
+                                    >
+                                      case2
+                                    </span>
+                                  </label>
                                 </div>
                               </div>
                             </td>
@@ -1198,7 +1234,13 @@ exports[`Workstack component should sort descending when the column heading is c
                                   <label
                                     className="govuk-label govuk-checkboxes__label"
                                     htmlFor="selected_cases_case_uuid-123"
-                                  />
+                                  >
+                                    <span
+                                      className="govuk-visually-hidden"
+                                    >
+                                      case1
+                                    </span>
+                                  </label>
                                 </div>
                               </div>
                             </td>
@@ -1606,7 +1648,13 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                                   <label
                                     className="govuk-label govuk-checkboxes__label"
                                     htmlFor="selected_cases_case_uuid-123"
-                                  />
+                                  >
+                                    <span
+                                      className="govuk-visually-hidden"
+                                    >
+                                      case1
+                                    </span>
+                                  </label>
                                 </div>
                               </div>
                             </td>
@@ -1696,7 +1744,13 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                                   <label
                                     className="govuk-label govuk-checkboxes__label"
                                     htmlFor="selected_cases_case_uuid-789"
-                                  />
+                                  >
+                                    <span
+                                      className="govuk-visually-hidden"
+                                    >
+                                      case2
+                                    </span>
+                                  </label>
                                 </div>
                               </div>
                             </td>
@@ -1782,7 +1836,13 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                                   <label
                                     className="govuk-label govuk-checkboxes__label"
                                     htmlFor="selected_cases_case_uuid-abc"
-                                  />
+                                  >
+                                    <span
+                                      className="govuk-visually-hidden"
+                                    >
+                                      case3
+                                    </span>
+                                  </label>
                                 </div>
                               </div>
                             </td>
