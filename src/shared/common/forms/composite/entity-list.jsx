@@ -7,7 +7,8 @@ class EntityList extends Component {
 
     constructor(props) {
         super(props);
-        const fallbackValue = this.props.choices[0] ? this.props.choices[0].value : null;
+        const primaryChoice = this.props.choices ? this.props.choices.find(choice => choice.isPrimary === true) : null;
+        const fallbackValue = primaryChoice ? primaryChoice.value : this.props.choices[0] ? this.props.choices[0].value : null;
         const value = this.loadValue(this.props.value, this.props.choices) || fallbackValue;
         this.state = { ...props, value };
     }
