@@ -10,6 +10,7 @@ class EntityList extends Component {
         const fallbackValue = this.props.choices[0] ? this.props.choices[0].value : null;
         const value = this.loadValue(this.props.value, this.props.choices) || fallbackValue;
         this.state = { ...props, value };
+        this.initialCheckedValue = this.props.checkedValue || this.state.value;
     }
 
     componentDidMount() {
@@ -41,6 +42,7 @@ class EntityList extends Component {
             hasAddLink,
             hasEditLink,
             hasRemoveLink,
+            hideRemovePrimary,
             hint,
             label,
             name,
@@ -86,7 +88,7 @@ class EntityList extends Component {
                                             <Link to={`/case/${page.params.caseId}/stage/${page.params.stageId}/entity/${entity}/${choice.value}/update?hideSidebar=${hideSidebar}`} className="govuk-link">Edit</Link>
                                         </td>}
                                         <td className='govuk-table__cell'>
-                                            {hasRemoveLink && <Link to={`/case/${page.params.caseId}/stage/${page.params.stageId}/entity/${entity}/${choice.value}/remove?hideSidebar=${hideSidebar}`} className="govuk-link">Remove</Link>}
+                                            {hasRemoveLink && (!hideRemovePrimary || choice.value !== this.initialCheckedValue) && <Link to={`/case/${page.params.caseId}/stage/${page.params.stageId}/entity/${entity}/${choice.value}/remove?hideSidebar=${hideSidebar}`} className="govuk-link">Remove</Link>}
                                         </td>
                                     </tr>
                                 );
@@ -112,6 +114,7 @@ EntityList.propTypes = {
     hasAddLink: PropTypes.bool,
     hasEditLink: PropTypes.bool,
     hasRemoveLink: PropTypes.bool,
+    hideRemovePrimary: PropTypes.bool,
     hint: PropTypes.string,
     label: PropTypes.string,
     name: PropTypes.string.isRequired,
@@ -127,6 +130,7 @@ EntityList.propTypes = {
 EntityList.defaultProps = {
     choices: [],
     disabled: false,
+    hideRemovePrimary: false,
     type: 'radio',
     page: {},
     hideSidebar: false

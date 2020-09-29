@@ -26,6 +26,7 @@ module.exports = async (options) => {
                 .withProp('hasEditLink', true)
                 .withProp('hasAddLink', true)
                 .withProp('hasRemoveLink', true)
+                .withProp('hideRemovePrimary', true)
                 .withProp('action', 'MANAGE_PEOPLE')
                 .withProp('type', 'radio')
                 .withProp('checkedValue', person.value)
