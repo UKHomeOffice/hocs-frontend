@@ -11,7 +11,7 @@ class EntityList extends Component {
         const fallbackValue = primaryChoice ? primaryChoice.value : this.props.choices[0] ? this.props.choices[0].value : null;
         const value = this.loadValue(this.props.value, this.props.choices) || fallbackValue;
         this.state = { ...props, value };
-        this.initialCheckedValue = this.props.checkedValue || this.state.value;
+        this.initialCheckedValue = this.props.checkedValue;
     }
 
     componentDidMount() {
