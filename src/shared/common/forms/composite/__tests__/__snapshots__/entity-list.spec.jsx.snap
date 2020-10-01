@@ -569,7 +569,14 @@ exports[`Entity list component should suppress remove link when passed in props 
           </td>
           <td
             class="govuk-table__cell"
-          />
+          >
+            <a
+              class="govuk-link"
+              href="/case/1234/stage/5678/entity/entity/CHOICE_A/remove?hideSidebar=false"
+            >
+              Remove
+            </a>
+          </td>
         </tr>
         <tr
           class="govuk-radios govuk-table__row"
