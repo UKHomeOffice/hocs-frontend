@@ -96,6 +96,10 @@ const typeAdaptors = {
         note,
         title: 'Contribution request note'
     }),
+    SEND_TO_WORKFLOW_MANAGER: ({ note }) => ({
+        note,
+        title: 'Escalation note'
+    }),
     FOLLOW_UP: ({ note }) => ({
         note,
         title: 'Details of follow up'
