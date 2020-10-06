@@ -23,7 +23,7 @@ describe('handleSearch', () => {
                     'dateReceivedTo': '20-10-2019',
                     'dateReceivedFrom': '10-10-2019',
                     'correspondent': 'Bob',
-                    'correspondentNameNotMP': 'Bobby',
+                    'correspondentNameNotMember': 'Bobby',
                     'topic': 'Test Topic',
                     'signOffMinister': 'Min123',
                     'claimantName': 'test Name',
@@ -90,7 +90,7 @@ describe('handleSearch', () => {
             },
             correspondentExternalKey: undefined,
             correspondentName: 'Bob',
-            correspondentNameNotMP: 'Bobby',
+            correspondentNameNotMember: 'Bobby',
             correspondentReference: '',
             topic: 'Test Topic',
             data: {
