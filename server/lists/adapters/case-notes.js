@@ -126,7 +126,8 @@ const formatDate = (rawDate) => {
         day: 'numeric',
         hour: 'numeric',
         minute: 'numeric',
-        timeZone: 'Europe/London'
+        timeZone: 'Europe/London',
+        hour12: false
     }).formatToParts(date)
         .reduce((parts, { type, value }) => {
             parts[type] = value;
