@@ -27,7 +27,7 @@ const expandableCheckbox = ({ choice, data, error, errors, hint, initiallyOpen, 
         setOpen(!isChecked);
 
         if (isChecked) {
-            updateState({ [name]: undefined });
+            updateState({ [name]: '' });
         } else {
             updateState({ [name]: targetValue });
         }

@@ -105,10 +105,10 @@ describe('When the checkbox clicked', () => {
     });
 
     describe('And it is currently selected', () => {
-        it('should call the callback with undefined', () => {
+        it('should call the callback with empty', () => {
             const wrapper = mount(<ExpandableCheckbox choice={choice} data={{}} items={items} label="__label__" name="__name__" updateState={updateStateMock} value="__value__" />);
             wrapper.find('.govuk-checkboxes__input').at(0).simulate('change', { target: { value: '__value__' } });
-            expect(updateStateMock).toHaveBeenCalledWith({ '__name__': undefined });
+            expect(updateStateMock).toHaveBeenCalledWith({ '__name__': '' });
         });
     });
 });
