@@ -96,6 +96,14 @@ const typeAdaptors = {
         note,
         title: 'Contribution request note'
     }),
+    CONVERTED_CASE_TO_MINISTERIAL: ({ note }) => ({
+        note,
+        title: 'Case Converted to Ministerial'
+    }),
+    CONVERTED_CASE_TO_OFFICIAL: ({ note }) => ({
+        note,
+        title: 'Case Converted to Official'
+    }),
     FOLLOW_UP: ({ note }) => ({
         note,
         title: 'Details of follow up'
