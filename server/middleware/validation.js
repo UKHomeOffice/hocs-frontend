@@ -1,5 +1,5 @@
 const { FormSubmissionError, ValidationError } = require('../models/error');
-const { DOCUMENT_WHITELIST, DOCUMENT_BULK_LIMIT } = require('../config').forContext('server');
+const { DOCUMENT_WHITELIST, DOCUMENT_BULK_LIMIT, VALID_DAYS_RANGE } = require('../config').forContext('server');
 
 const validationErrors = {
     required: label => `${label} is required`,
@@ -13,6 +13,7 @@ const validationErrors = {
     isValidDate: label => `${label} must be a date`,
     isBeforeToday: label => `${label} must be a date in the past`,
     isAfterToday: label => `${label} must be a date in the future`,
+    isValidWithinDate: label => `${label} must be within the last ${VALID_DAYS_RANGE} days`,
     validCaseReference: () => 'Case reference is not valid'
 };
 
@@ -35,6 +36,15 @@ const validators = {
     isAfterToday({ label, value, message }) {
         if (new Date(value).valueOf() <= new Date(Date.now()).valueOf()) {
             return message || validationErrors.isAfterToday(label);
+        }
+        return null;
+    },
+    isValidWithinDate({ label, value, message }) {
+        const numberOfDaysInPast= VALID_DAYS_RANGE;
+        let limitDate = new Date();
+        limitDate.setDate(limitDate.getDate() - numberOfDaysInPast);
+        if (new Date(value).valueOf() <= limitDate.valueOf()) {
+            return message || validationErrors.isValidWithinDate(label);
         }
         return null;
     },

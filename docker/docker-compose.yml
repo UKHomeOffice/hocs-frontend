@@ -113,6 +113,7 @@ services:
       DOCUMENT_SERVICE: http://documents:8080
       ALLOWED_FILE_EXTENSIONS: 'txt,doc,docx'
       DOCUMENT_BULK_LIMIT: 40
+      VALID_DAYS_RANGE: 180
       S3_BUCKET: 'untrusted-bucket'
       S3_ENDPOINT: http://localstack:4572
     depends_on:

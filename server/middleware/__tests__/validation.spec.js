@@ -111,6 +111,15 @@ describe('Validators', () => {
         });
     });
 
+    describe('Valid Date within range', () => {
+        it('should reject a date outside day limit', () => {
+            expect(validators.isValidWithinDate({ value: '1970-01-01' })).not.toEqual(null);
+        });
+        it('should accept a date within day limit', () => {
+            expect(validators.isValidWithinDate({ value: new Date() })).toEqual(null);
+        });
+    });
+
     describe('File extension validator', () => {
         it('should reject an invalid file extension', () => {
             const testFiles = [
