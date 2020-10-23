@@ -6,7 +6,8 @@ jest.mock('../../config.js', () => {
             switch (context) {
                 case 'server':
                     return {
-                        DOCUMENT_WHITELIST: ['validExtension']
+                        DOCUMENT_WHITELIST: ['validExtension'],
+                        VALID_DAYS_RANGE: '180'
                     };
             }
         }
@@ -113,7 +114,7 @@ describe('Validators', () => {
 
     describe('Valid Date within range', () => {
         it('should reject a date outside day limit', () => {
-            expect(validators.isValidWithinDate({ value: '1970-01-01' })).not.toEqual(null);
+            expect(validators.isValidWithinDate({ value: '2020-01-01' })).not.toEqual(null);
         });
         it('should accept a date within day limit', () => {
             expect(validators.isValidWithinDate({ value: new Date() })).toEqual(null);
