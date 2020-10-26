@@ -11,7 +11,8 @@ const config = {
             INFO_SERVICE: process.env.INFO_SERVICE || 'http://localhost:8085',
             TEMPLATES_SERVICE: process.env.TEMPLATES_SERVICE || 'http://localhost:8090',
             DOCUMENT_WHITELIST: (process.env.ALLOWED_FILE_EXTENSIONS || 'txt,doc,docx,tiff,tif,xlsx,pdf').split(',').map(extension => extension.trim()),
-            DOCUMENT_BULK_LIMIT: process.env.DOCUMENT_BULK_LIMIT || 40
+            DOCUMENT_BULK_LIMIT: process.env.DOCUMENT_BULK_LIMIT || 40,
+            VALID_DAYS_RANGE: process.env.VALID_DAYS_RANGE || 180
         },
         AWS: {
             S3: {
