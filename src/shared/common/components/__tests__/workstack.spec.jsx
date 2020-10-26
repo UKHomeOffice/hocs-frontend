@@ -39,8 +39,8 @@ describe('Workstack component', () => {
             { displayName: 'Current Stage', dataAdapter: null, renderer: null, dataValueKey: 'stageTypeDisplay', isFilterable: true },
             { displayName: 'Owner', dataAdapter: null, renderer: null, dataValueKey: 'assignedUserDisplay', isFilterable: true },
             { displayName: 'Team', dataAdapter: null, renderer: null, dataValueKey: 'assignedTeamDisplay', isFilterable: true },
-            { displayName: 'Case Date', dataAdapter: 'localDate', renderer: null, dataValueKey: 'created', isFilterable: true },
-            { displayName: 'Active', dataAdapter: 'indicator', renderer: null, dataValueKey: 'isActive', isFilterable: true }
+            { displayName: 'Case Date', dataAdapter: 'localDate', renderer: null, dataValueKey: 'TEST,created', isFilterable: true },
+            { displayName: 'Active', dataAdapter: 'indicator', renderer: null, dataValueKey: 'isActive,TEST', isFilterable: true }
         ],
         selectable: true,
         baseUrl: 'base.url',

@@ -408,14 +408,14 @@ exports[`Workstack component should render with filtering 1`] = `
             },
             Object {
               "dataAdapter": "localDate",
-              "dataValueKey": "created",
+              "dataValueKey": "TEST,created",
               "displayName": "Case Date",
               "isFilterable": true,
               "renderer": null,
             },
             Object {
               "dataAdapter": "indicator",
-              "dataValueKey": "isActive",
+              "dataValueKey": "isActive,TEST",
               "displayName": "Active",
               "isFilterable": true,
               "renderer": null,
@@ -695,13 +695,13 @@ exports[`Workstack component should render with filtering 1`] = `
                             </td>
                             <td
                               className="govuk-table__cell"
-                              key="stage_uuid-456created"
+                              key="stage_uuid-456TEST,created"
                             >
                               29/10/2019
                             </td>
                             <td
                               className="govuk-table__cell"
-                              key="stage_uuid-456isActive"
+                              key="stage_uuid-456isActive,TEST"
                             >
                               is Active
                             </td>
@@ -822,14 +822,14 @@ exports[`Workstack component should sort descending when the column heading is c
             },
             Object {
               "dataAdapter": "localDate",
-              "dataValueKey": "created",
+              "dataValueKey": "TEST,created",
               "displayName": "Case Date",
               "isFilterable": true,
               "renderer": null,
             },
             Object {
               "dataAdapter": "indicator",
-              "dataValueKey": "isActive",
+              "dataValueKey": "isActive,TEST",
               "displayName": "Active",
               "isFilterable": true,
               "renderer": null,
@@ -1109,11 +1109,11 @@ exports[`Workstack component should sort descending when the column heading is c
                             </td>
                             <td
                               className="govuk-table__cell"
-                              key="stage_uuid-444created"
+                              key="stage_uuid-444TEST,created"
                             />
                             <td
                               className="govuk-table__cell"
-                              key="stage_uuid-444isActive"
+                              key="stage_uuid-444isActive,TEST"
                             />
                           </tr>
                           <tr
@@ -1201,11 +1201,11 @@ exports[`Workstack component should sort descending when the column heading is c
                             </td>
                             <td
                               className="govuk-table__cell"
-                              key="stage_uuid-432created"
+                              key="stage_uuid-432TEST,created"
                             />
                             <td
                               className="govuk-table__cell"
-                              key="stage_uuid-432isActive"
+                              key="stage_uuid-432isActive,TEST"
                             />
                           </tr>
                           <tr
@@ -1293,13 +1293,13 @@ exports[`Workstack component should sort descending when the column heading is c
                             </td>
                             <td
                               className="govuk-table__cell"
-                              key="stage_uuid-456created"
+                              key="stage_uuid-456TEST,created"
                             >
                               29/10/2019
                             </td>
                             <td
                               className="govuk-table__cell"
-                              key="stage_uuid-456isActive"
+                              key="stage_uuid-456isActive,TEST"
                             >
                               is Active
                             </td>
@@ -1420,14 +1420,14 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
             },
             Object {
               "dataAdapter": "localDate",
-              "dataValueKey": "created",
+              "dataValueKey": "TEST,created",
               "displayName": "Case Date",
               "isFilterable": true,
               "renderer": null,
             },
             Object {
               "dataAdapter": "indicator",
-              "dataValueKey": "isActive",
+              "dataValueKey": "isActive,TEST",
               "displayName": "Active",
               "isFilterable": true,
               "renderer": null,
@@ -1707,13 +1707,13 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                             </td>
                             <td
                               className="govuk-table__cell"
-                              key="stage_uuid-456created"
+                              key="stage_uuid-456TEST,created"
                             >
                               29/10/2019
                             </td>
                             <td
                               className="govuk-table__cell"
-                              key="stage_uuid-456isActive"
+                              key="stage_uuid-456isActive,TEST"
                             >
                               is Active
                             </td>
@@ -1803,11 +1803,11 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                             </td>
                             <td
                               className="govuk-table__cell"
-                              key="stage_uuid-432created"
+                              key="stage_uuid-432TEST,created"
                             />
                             <td
                               className="govuk-table__cell"
-                              key="stage_uuid-432isActive"
+                              key="stage_uuid-432isActive,TEST"
                             />
                           </tr>
                           <tr
@@ -1895,11 +1895,11 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                             </td>
                             <td
                               className="govuk-table__cell"
-                              key="stage_uuid-444created"
+                              key="stage_uuid-444TEST,created"
                             />
                             <td
                               className="govuk-table__cell"
-                              key="stage_uuid-444isActive"
+                              key="stage_uuid-444isActive,TEST"
                             />
                           </tr>
                         </tbody>
