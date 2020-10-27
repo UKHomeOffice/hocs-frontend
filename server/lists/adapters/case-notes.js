@@ -98,11 +98,11 @@ const typeAdaptors = {
     }),
     CONVERTED_CASE_TO_MINISTERIAL: ({ note }) => ({
         note,
-        title: 'Case Converted to Ministerial'
+        title: 'Conversion note: Case Converted to Ministerial'
     }),
     CONVERTED_CASE_TO_OFFICIAL: ({ note }) => ({
         note,
-        title: 'Case Converted to Official'
+        title: 'Conversion note: Case Converted to Official'
     }),
     SEND_TO_WORKFLOW_MANAGER: ({ note }) => ({
         note,
