@@ -71,23 +71,64 @@ class WorkstackAllocate extends Component {
     }
 
     getCellValue(row, column) {
-        const value = row[column.dataValueKey] !== undefined ? row[column.dataValueKey] : row.data[column.dataValueKey];
-        return this.applyDataAdapter(value, column);
-    }
+        const dataValueKeys = column.dataValueKey;
 
-    getDataValue(row, column) {
-        return row[column.dataValueKey] !== undefined ? row[column.dataValueKey] : row.data[column.dataValueKey];
-    }
+        if (dataValueKeys === undefined) {
+            throw new Error('No data value key was specified');
+        }
 
-    applyDataAdapter(value, column) {
-        if (column.dataAdapter) {
-            const dataAdapter = dataAdapters[column.dataAdapter];
+        const splitDataValueKeys = dataValueKeys.split(',');
 
-            if (dataAdapter) {
-                return dataAdapter(value, column.dataValueKey);
+        for (const dataValue of splitDataValueKeys) {
+            let value = undefined;
+
+            if (row[dataValue] !== undefined) {
+                value = row[dataValue];
+            } else if (row.data !== undefined) {
+                value = row.data[dataValue];
             }
 
-            throw new Error('Data Adapter not implemented: ' + column.dataAdapter);
+            if (value !== undefined) {
+                return this.applyDataAdapter(value, column.dataAdapter, dataValue);
+            }
+        }
+
+        return this.applyDataAdapter(undefined, column.dataAdapter, dataValueKeys);
+    }
+
+    getDataValue(row, dataValueKey) {
+        if (dataValueKey === undefined) {
+            throw new Error('No data value key was specified');
+        }
+
+        const splitDataValueKeys = dataValueKey.split(',');
+
+        let value = undefined;
+
+        for (const dataValue of splitDataValueKeys) {
+            if (row[dataValue] !== undefined) {
+                value = row[dataValue];
+            } else if (row.data !== undefined) {
+                value = row.data[dataValue];
+            }
+
+            if (value !== undefined) {
+                break;
+            }
+        }
+
+        return value;
+    }
+
+    applyDataAdapter(value, colDataAdapter, dataValueKey) {
+        if (colDataAdapter) {
+            const dataAdapter = dataAdapters[colDataAdapter];
+
+            if (dataAdapter) {
+                return dataAdapter(value, dataValueKey);
+            }
+
+            throw new Error('Data Adapter not implemented: ' + colDataAdapter);
         }
 
         return value;
@@ -299,8 +340,8 @@ class WorkstackAllocate extends Component {
     }
 
     floatSortStrategy(a, b, sortColumn) {
-        const aValue = sortColumn ? (this.getDataValue(a, sortColumn) || '').toUpperCase() : a.index;
-        const bValue = sortColumn ? (this.getDataValue(b, sortColumn) || '').toUpperCase() : b.index;
+        const aValue = sortColumn ? (this.getDataValue(a, sortColumn.dataValueKey) || '').toUpperCase() : a.index;
+        const bValue = sortColumn ? (this.getDataValue(b, sortColumn.dataValueKey) || '').toUpperCase() : b.index;
 
         const aFloat = parseFloat(aValue);
         const bFloat = parseFloat(bValue);
@@ -313,8 +354,8 @@ class WorkstackAllocate extends Component {
     }
 
     defaultSortStrategy(a, b, sortColumn) {
-        const aValue = sortColumn ? (this.getDataValue(a, sortColumn) || '').toUpperCase() : a.index;
-        const bValue = sortColumn ? (this.getDataValue(b, sortColumn) || '').toUpperCase() : b.index;
+        const aValue = sortColumn ? (this.getDataValue(a, sortColumn.dataValueKey) || '').toUpperCase() : a.index;
+        const bValue = sortColumn ? (this.getDataValue(b, sortColumn.dataValueKey) || '').toUpperCase() : b.index;
 
         if (aValue > bValue) {
             return 1 * this.state.sort.direction;
