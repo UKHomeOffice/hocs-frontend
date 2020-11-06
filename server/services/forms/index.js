@@ -46,6 +46,13 @@ const formDefinitions = {
                         action: 'CONFIRMATION_SUMMARY'
                     }
                 },
+                MTS: {
+                    builder: formRepository.addDocument,
+                    action: CREATE_CASE,
+                    next: {
+                        action: 'CONFIRMATION_SUMMARY'
+                    }
+                },
                 WCS: {
                     builder: formRepository.confirmCreateWcs,
                     action: CREATE_AND_ALLOCATE_CASE
@@ -90,6 +97,13 @@ const formDefinitions = {
                     }
                 },
                 MPAM: {
+                    builder: formRepository.bulkAddDocument,
+                    action: BULK_CREATE_CASE,
+                    next: {
+                        action: 'CONFIRMATION_SUMMARY'
+                    }
+                },
+                MTS: {
                     builder: formRepository.bulkAddDocument,
                     action: BULK_CREATE_CASE,
                     next: {
