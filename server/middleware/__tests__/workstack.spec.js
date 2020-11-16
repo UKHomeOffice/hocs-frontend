@@ -3,7 +3,8 @@ const {
     teamWorkstackMiddleware,
     workflowWorkstackMiddleware,
     stageWorkstackMiddleware,
-    workstackApiResponseMiddleware
+    workstackApiResponseMiddleware,
+    allocateNextCaseToUser
 } = require('../workstack');
 
 let req = {};
@@ -43,6 +44,42 @@ describe('Workstack middleware', () => {
             expect(res.locals.workstack).not.toBeDefined();
             expect(next).toHaveBeenCalled();
             expect(next).toHaveBeenCalledWith('MOCK_ERROR');
+        });
+    });
+
+    describe('Allocate next case middleware', () => {
+        beforeEach(() => {
+            next.mockReset();
+            req = {
+                params: {
+                    teamId: '1234'
+                },
+                user: {}
+            };
+        });
+
+        it('should create a stage object on res.locals', async () => {
+            res = {
+                locals: {
+                    stage: {
+                        data: {
+                            caseUUID: '12345',
+                            uuid: '89765'
+                        }
+                    }
+                }
+            };
+            await allocateNextCaseToUser(req, res, next);
+            expect(res.locals.stage).toBeDefined();
+            expect(res.locals.stage).toEqual(
+                {
+                    data: {
+                        caseUUID: '12345',
+                        uuid: '89765'
+                    }
+                }
+            );
+            expect(next).toHaveBeenCalled();
         });
     });
 

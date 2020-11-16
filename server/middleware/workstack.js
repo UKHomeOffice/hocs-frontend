@@ -102,6 +102,30 @@ async function allocateToUser(req, res, next) {
     next();
 }
 
+async function allocateNextCaseToUser(req, res, next) {
+    const logger = getLogger(req.requestId);
+    try {
+        res.locals.stage = await caseworkService.put(
+            `/case/team/${req.params.teamId}/allocate/user/next`,
+            {},
+            { headers: User.createHeaders(req.user) }
+        );
+    } catch (error) {
+        logger.error('ALLOCATE_NEXT_CASE_FAILED');
+        return next(error);
+    }
+    next();
+}
+
+function sendCaseRedirectResponse(req, res) {
+    if (typeof res.locals.stage.data.caseUUID === 'string') {
+        const caseUrl = `/case/${res.locals.stage.data.caseUUID}/stage/${res.locals.stage.data.uuid}`;
+        res.json({
+            redirect: caseUrl
+        });
+    }
+}
+
 async function unallocate(req, res, next) {
     let { selected_cases = [] } = req.body;
     if (typeof selected_cases === 'string') {
@@ -128,5 +152,7 @@ module.exports = {
     workstackApiResponseMiddleware,
     allocateToTeam,
     allocateToUser,
+    allocateNextCaseToUser,
+    sendCaseRedirectResponse,
     unallocate
 };
