@@ -6,13 +6,16 @@ describe('Workstack component', () => {
 
     const arraySortSpy = jest.spyOn(Array.prototype, 'sort');
 
-    beforeEach(() => {
-        arraySortSpy.mockClear();
-    });
-
     const MOCK_TRACK = jest.fn();
     const MOCK_SUBMIT_HANDLER = jest.fn();
     const MOCK_UPDATE_FORM_DATA = jest.fn();
+
+    beforeEach(() => {
+        arraySortSpy.mockClear();
+        MOCK_UPDATE_FORM_DATA.mockClear();
+        MOCK_TRACK.mockClear();
+        MOCK_SUBMIT_HANDLER.mockClear();
+    });
 
     const DEFAULT_PROPS = {
         track: MOCK_TRACK,
@@ -20,17 +23,17 @@ describe('Workstack component', () => {
             {
                 caseReference: 'case1', caseUUID: 'case_uuid-123', uuid: 'stage_uuid-456', fullName: 'Sam Smith',
                 stageTypeDisplay: 'Stage A', assignedUserDisplay: 'User1', assignedTeamDisplay: 'team1',
-                created: '2019-10-29T11:01:32.656563', isActive: 'YES'
+                created: '2019-10-29T11:01:32.656563', isActive: 'YES', stageType: 'MPAM_DRAFT'
             },
             {
                 caseReference: 'case2', caseUUID: 'case_uuid-789', uuid: 'stage_uuid-432', fullName: 'John Alex',
                 stageTypeDisplay: 'Stage B', assignedUserDisplay: 'User2', assignedTeamDisplay: 'team2',
-                created: '', isActive: 'NO'
+                created: '', isActive: 'NO', stageType: 'MPAM_DRAFT'
             },
             {
                 caseReference: 'case3', caseUUID: 'case_uuid-abc', uuid: 'stage_uuid-444', fullName: 'Pat Brown',
                 stageTypeDisplay: 'Stage C', assignedUserDisplay: 'User3', assignedTeamDisplay: 'team3',
-                created: null, isActive: 'NO'
+                created: null, isActive: 'NO', stageType: 'MPAM_DRAFT'
             },
         ],
         columns: [
