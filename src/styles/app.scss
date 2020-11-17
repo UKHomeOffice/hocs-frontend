@@ -370,20 +370,28 @@ a.card__body {
   background-color: tint(#B10E1E, 20%);
 }
 
+td {
+  padding-right: 5px;
+  &.date-standard {
+    span {
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+  }
+  &.date-warning {
+      span {
+        background-color: govuk-colour("red");
+        color: white;
+        padding: 0.25em 0.5em 0.25em 0.5em;
+      }
+  }
+}
+
 .workstack {
   overflow: scroll;
 
   td {
-      padding-right: 5px;
       &.wrap-text {
           word-break: break-all;
-      }
-      &.date-warning {
-          span {
-            background-color: govuk-colour("red");
-            color: white;
-            padding: 0.25em 0.5em 0.25em 0.5em;
-          }
       }
       &.indicator {
           span {
@@ -783,4 +791,24 @@ $border-colour: govuk-colour("grey-2");
 
     }
   }
+}
+
+.padding-top--small {
+  padding-top: govuk-spacing(2);
+}
+
+.bigger {
+  zoom: 1.5;
+  transform: scale(1.5);
+  -ms-transform: scale(1.5);
+  -webkit-transform: scale(1.5);
+  -o-transform: scale(1.5);
+  -moz-transform: scale(1.5);
+  transform-origin: 0 0;
+  -ms-transform-origin: 0 0;
+  -webkit-transform-origin: 0 0;
+  -o-transform-origin: 0 0;
+  -moz-transform-origin: 0 0;
+  padding: 0px;
+  margin: 0px;
 }
