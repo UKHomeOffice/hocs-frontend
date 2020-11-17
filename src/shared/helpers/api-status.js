@@ -43,6 +43,9 @@ const status = {
     REQUEST_WORKSTACK_DATA_FAILURE: { display: 'Unable to fetch workstack', level: 0, type: 'ERROR', timeoutPeriod: timeout.ERROR },
     UPDATE_WORKSTACK_DATA_SUCCESS: { display: 'Updating workstack', level: 3, type: 'OK', timeoutPeriod: timeout.STANDARD },
     UPDATE_WORKSTACK_DATA_FAILURE: { display: 'Failed to update workstack', level: 0, type: 'ERROR', timeoutPeriod: timeout.ERROR },
+    REQUEST_STANDARD_LINES_DATA: { display: 'Requesting standard lines', level: 1, type: 'OK', timeoutPeriod: timeout.STANDARD },
+    REQUEST_STANDARD_LINES_DATA_SUCCESS: { display: 'Standard lines received', level: 3, type: 'OK', timeoutPeriod: timeout.ERROR },
+    REQUEST_STANDARD_LINES_DATA_FAILURE: { display: 'Unable to fetch standard lines', level: 0, type: 'ERROR', timeoutPeriod: timeout.ERROR },
 };
 
 export default status;

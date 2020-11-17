@@ -5,6 +5,7 @@ import Error from '../../layouts/error.jsx';
 import MainPage from '../../pages/dashboard.jsx';
 import WorkstackPage from '../../pages/workstack.jsx';
 import Search from '../../pages/search.jsx';
+import StandardLinesView from '../../pages/standardLines/standardLinesView.jsx';
 
 const routes = [
     {
@@ -116,6 +117,12 @@ const routes = [
         exact: true,
         component: WorkstackPage,
         title: 'Stage Workstack'
+    },
+    {
+        path: '/view-standard-lines',
+        exact: true,
+        component: StandardLinesView,
+        title: 'View Standard Lines'
     },
     {
         component: Error,
