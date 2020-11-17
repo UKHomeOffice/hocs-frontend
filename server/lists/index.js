@@ -283,6 +283,11 @@ module.exports = {
             endpoint: '/case/${caseId}/correspondentType',
             adapter: correspondentTypeAdapter
         },
+        TOPICS: {
+            client: 'INFO',
+            endpoint: '/topics',
+            type: listService.types.DYNAMIC,
+        },
         TOPICS_USER: {
             client: 'INFO',
             endpoint: '/topics/MIN',
@@ -354,7 +359,12 @@ module.exports = {
             client: 'WORKFLOW',
             endpoint: '/case/details/${caseId}',
             adapter: caseViewReadOnlyAdapter
-        }
+        },
+        DCU_POLICY_TEAM_FOR_TOPIC: {
+            client: 'INFO',
+            endpoint: '/team/topic/stage/DCU_DTEN_INITIAL_DRAFT',
+            type: listService.types.DYNAMIC,
+        },
     },
     clients: {
         CASEWORK: caseworkService,
