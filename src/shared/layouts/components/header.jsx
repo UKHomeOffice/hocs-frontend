@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 class Header extends Component {
 
-    createLogotype(service, serviceLink, bulkCreateEnabled) {
+    createLogotype(service, serviceLink, bulkCreateEnabled, viewStandardLinesEnabled) {
         return (
             <div className='govuk-header__container govuk-width-container'>
                 <a href='#main-content' className='govuk-skip-link'>Skip to main content</a>
@@ -23,6 +23,9 @@ class Header extends Component {
                                 <Link to='/action/bulk/workflow' className='govuk-header__link'>Create Bulk Cases</Link>
                             </li>
                             }
+                            {viewStandardLinesEnabled && <li className='govuk-header__navigation-item'>
+                                <Link to='/view-standard-lines' className='govuk-header__link'>View Standard Lines</Link>
+                            </li>}
                             <li className='govuk-header__navigation-item'>
                                 <Link to='/search' className='govuk-header__link'>Search</Link>
                             </li>
@@ -37,10 +40,10 @@ class Header extends Component {
     }
 
     render() {
-        const { service, serviceLink, bulkCreateEnabled } = this.props;
+        const { service, serviceLink, bulkCreateEnabled, viewStandardLinesEnabled } = this.props;
         return (
             <header className='govuk-header ' role='banner' data-module='header'>
-                {this.createLogotype(service, serviceLink, bulkCreateEnabled)}
+                {this.createLogotype(service, serviceLink, bulkCreateEnabled, viewStandardLinesEnabled)}
             </header>
         );
     }
@@ -50,7 +53,8 @@ class Header extends Component {
 Header.propTypes = {
     service: PropTypes.string.isRequired,
     serviceLink: PropTypes.string.isRequired,
-    bulkCreateEnabled: PropTypes.bool.isRequired
+    bulkCreateEnabled: PropTypes.bool.isRequired,
+    viewStandardLinesEnabled: PropTypes.bool.isRequired
 };
 
 Header.defaultProps = {

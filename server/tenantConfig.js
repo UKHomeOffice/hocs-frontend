@@ -23,7 +23,8 @@ async function layoutConfig() {
             logoLinkTitle: '',
             propositionHeader: '',
             propositionHeaderLink: '/',
-            bulkCreateEnabled: configuration.bulkCreateEnabled
+            bulkCreateEnabled: configuration.bulkCreateEnabled,
+            viewStandardLinesEnabled: configuration.viewStandardLinesEnabled
         },
         body: {
             phaseBanner: {
@@ -60,7 +61,6 @@ async function fetchConfiguration() {
     const listServiceInstance = listService.getInstance(uuid(), null);
     return listServiceInstance.fetch('S_SYSTEM_CONFIGURATION');
 }
-
 
 module.exports = {
     renderConfig, layoutConfig
