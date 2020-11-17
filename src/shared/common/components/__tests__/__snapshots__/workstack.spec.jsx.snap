@@ -329,6 +329,17 @@ Array [
                     Unallocate selected
                   </button>
                 </li>
+                <li>
+                  <button
+                    class="govuk-button--link govuk-link"
+                    formaction="base.url/allocate/user/next"
+                    formenctype="multipart/form-data"
+                    formmethod="POST"
+                    type="submit"
+                  >
+                    Take next case
+                  </button>
+                </li>
               </ul>
             </div>
           </div>
@@ -432,6 +443,7 @@ exports[`Workstack component should render with filtering 1`] = `
               "created": "2019-10-29T11:01:32.656563",
               "fullName": "Sam Smith",
               "isActive": "YES",
+              "stageType": "MPAM_DRAFT",
               "stageTypeDisplay": "Stage A",
               "uuid": "stage_uuid-456",
             },
@@ -443,6 +455,7 @@ exports[`Workstack component should render with filtering 1`] = `
               "created": "",
               "fullName": "John Alex",
               "isActive": "NO",
+              "stageType": "MPAM_DRAFT",
               "stageTypeDisplay": "Stage B",
               "uuid": "stage_uuid-432",
             },
@@ -454,6 +467,7 @@ exports[`Workstack component should render with filtering 1`] = `
               "created": null,
               "fullName": "Pat Brown",
               "isActive": "NO",
+              "stageType": "MPAM_DRAFT",
               "stageTypeDisplay": "Stage C",
               "uuid": "stage_uuid-444",
             },
@@ -740,6 +754,18 @@ exports[`Workstack component should render with filtering 1`] = `
                           Unallocate selected
                         </button>
                       </li>
+                      <li>
+                        <button
+                          className="govuk-button--link govuk-link"
+                          formAction="base.url/allocate/user/next"
+                          formEncType="multipart/form-data"
+                          formMethod="POST"
+                          onClick={[Function]}
+                          type="submit"
+                        >
+                          Take next case
+                        </button>
+                      </li>
                     </ul>
                   </div>
                 </div>
@@ -846,6 +872,7 @@ exports[`Workstack component should sort descending when the column heading is c
               "created": "2019-10-29T11:01:32.656563",
               "fullName": "Sam Smith",
               "isActive": "YES",
+              "stageType": "MPAM_DRAFT",
               "stageTypeDisplay": "Stage A",
               "uuid": "stage_uuid-456",
             },
@@ -857,6 +884,7 @@ exports[`Workstack component should sort descending when the column heading is c
               "created": "",
               "fullName": "John Alex",
               "isActive": "NO",
+              "stageType": "MPAM_DRAFT",
               "stageTypeDisplay": "Stage B",
               "uuid": "stage_uuid-432",
             },
@@ -868,6 +896,7 @@ exports[`Workstack component should sort descending when the column heading is c
               "created": null,
               "fullName": "Pat Brown",
               "isActive": "NO",
+              "stageType": "MPAM_DRAFT",
               "stageTypeDisplay": "Stage C",
               "uuid": "stage_uuid-444",
             },
@@ -876,23 +905,7 @@ exports[`Workstack component should sort descending when the column heading is c
         selectable={true}
         submitHandler={[MockFunction]}
         track={[MockFunction]}
-        updateFormData={
-          [MockFunction] {
-            "calls": Array [
-              Array [
-                Object {
-                  "selected_cases": Array [],
-                },
-              ],
-            ],
-            "results": Array [
-              Object {
-                "type": "return",
-                "value": undefined,
-              },
-            ],
-          }
-        }
+        updateFormData={[MockFunction]}
       >
         <div
           className="govuk-grid-row"
@@ -1338,6 +1351,18 @@ exports[`Workstack component should sort descending when the column heading is c
                           Unallocate selected
                         </button>
                       </li>
+                      <li>
+                        <button
+                          className="govuk-button--link govuk-link"
+                          formAction="base.url/allocate/user/next"
+                          formEncType="multipart/form-data"
+                          formMethod="POST"
+                          onClick={[Function]}
+                          type="submit"
+                        >
+                          Take next case
+                        </button>
+                      </li>
                     </ul>
                   </div>
                 </div>
@@ -1444,6 +1469,7 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
               "created": "2019-10-29T11:01:32.656563",
               "fullName": "Sam Smith",
               "isActive": "YES",
+              "stageType": "MPAM_DRAFT",
               "stageTypeDisplay": "Stage A",
               "uuid": "stage_uuid-456",
             },
@@ -1455,6 +1481,7 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
               "created": "",
               "fullName": "John Alex",
               "isActive": "NO",
+              "stageType": "MPAM_DRAFT",
               "stageTypeDisplay": "Stage B",
               "uuid": "stage_uuid-432",
             },
@@ -1466,6 +1493,7 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
               "created": null,
               "fullName": "Pat Brown",
               "isActive": "NO",
+              "stageType": "MPAM_DRAFT",
               "stageTypeDisplay": "Stage C",
               "uuid": "stage_uuid-444",
             },
@@ -1474,23 +1502,7 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
         selectable={true}
         submitHandler={[MockFunction]}
         track={[MockFunction]}
-        updateFormData={
-          [MockFunction] {
-            "calls": Array [
-              Array [
-                Object {
-                  "selected_cases": Array [],
-                },
-              ],
-            ],
-            "results": Array [
-              Object {
-                "type": "return",
-                "value": undefined,
-              },
-            ],
-          }
-        }
+        updateFormData={[MockFunction]}
       >
         <div
           className="govuk-grid-row"
@@ -1934,6 +1946,18 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                           type="submit"
                         >
                           Unallocate selected
+                        </button>
+                      </li>
+                      <li>
+                        <button
+                          className="govuk-button--link govuk-link"
+                          formAction="base.url/allocate/user/next"
+                          formEncType="multipart/form-data"
+                          formMethod="POST"
+                          onClick={[Function]}
+                          type="submit"
+                        >
+                          Take next case
                         </button>
                       </li>
                     </ul>

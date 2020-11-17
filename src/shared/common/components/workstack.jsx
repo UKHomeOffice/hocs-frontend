@@ -324,6 +324,22 @@ class WorkstackAllocate extends Component {
         );
     }
 
+    renderTakeNextCaseButton() {
+        const { baseUrl, submitHandler } = this.props;
+        const stageTypes = [
+            'MPAM_DRAFT',
+            'MPAM_TRIAGE'
+        ];
+
+        if (this.props.items[0] !== undefined && stageTypes.includes(this.props.items[0].stageType)) {
+            return (
+                <li>
+                    {LinkButton({ label: 'Take next case', endpoint: (baseUrl + '/allocate/user/next'), submitHandler })}
+                </li>
+            );
+        }
+    }
+
     compareRows(a, b) {
         const { column: sortColumn } = this.state.sort;
         if (sortColumn == undefined) {
@@ -412,6 +428,7 @@ class WorkstackAllocate extends Component {
                                             <li>
                                                 {allocateToWorkstackEndpoint && LinkButton({ label: 'Unallocate selected', endpoint: (baseUrl + allocateToWorkstackEndpoint), submitHandler })}
                                             </li>
+                                            {this.renderTakeNextCaseButton()}
                                         </ul>
                                         {teamMembers && this.renderTeamsDropdown()}
                                     </div>

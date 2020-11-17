@@ -8,7 +8,9 @@ const {
     workstackApiResponseMiddleware,
     allocateToUser,
     allocateToTeam,
-    unallocate
+    unallocate,
+    allocateNextCaseToUser,
+    sendCaseRedirectResponse
 } = require('../../middleware/workstack');
 
 const { fileMiddleware } = require('../../middleware/file');
@@ -131,6 +133,12 @@ router.post('/team/:teamId/workflow/:workflowId/stage/:stageId/unallocate',
     stageWorkstackMiddleware,
     getTeamMembers,
     sendWorkstackAllocateApiResponse
+);
+
+router.post('/team/:teamId/allocate/user/next',
+    fileMiddleware.any(),
+    allocateNextCaseToUser,
+    sendCaseRedirectResponse
 );
 
 module.exports = router;

@@ -80,7 +80,7 @@ class WorkstackPage extends Component {
     submitHandler(e, endpoint) {
         e.preventDefault();
         const { formData, workstack } = this.state;
-        const { track, title, match } = this.props;
+        const { track, title, match, history } = this.props;
         // TODO: Remove
         /* eslint-disable-next-line no-undef */
         const payload = new FormData();
@@ -94,7 +94,12 @@ class WorkstackPage extends Component {
             }
         });
         axios.post('/api' + endpoint, payload, { headers: { 'Content-Type': 'multipart/form-data' } })
-            .then(({ data: { workstack } }) => this.setState({ workstack }))
+            .then(({ data: { workstack, redirect } }) => {
+                if (typeof redirect === 'string') {
+                    history.push(redirect);
+                }
+                this.setState({ workstack });
+            })
             .then(() => endpoint === match.url + workstack.allocateToUserEndpoint ? 'Allocate to self' : endpoint === match.url + workstack.allocateToTeamEndpoint ? 'Allocate to team member' : 'Unallocate')
             .then(label => track('EVENT', { category: title, action: 'Submit', label }));
     }
@@ -171,7 +176,8 @@ WorkstackPage.propTypes = {
     workstack: PropTypes.object,
     track: PropTypes.func.isRequired,
     title: PropTypes.string.isRequired,
-    selectable: PropTypes.bool
+    selectable: PropTypes.bool,
+    history: PropTypes.object,
 };
 
 const WrappedWorkstack = (props) => (
