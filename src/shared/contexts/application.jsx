@@ -7,9 +7,6 @@ import types from './actions/types.jsx';
 export const Context = React.createContext();
 
 const reducer = (state, action) => {
-    // TODO: REMOVE
-    /* eslint-disable-next-line  no-console*/
-    console.log(`ACTION: ${action.type} PAYLOAD: ${JSON.stringify(action.payload)}`);
     // ------------
     switch (action.type) {
         case types.UPDATE_FORM:
