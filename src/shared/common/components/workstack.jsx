@@ -328,7 +328,14 @@ class WorkstackAllocate extends Component {
         const { baseUrl, submitHandler } = this.props;
         const stageTypes = [
             'MPAM_DRAFT',
-            'MPAM_TRIAGE'
+            'MPAM_DRAFT_ONHOLD',
+            'MPAM_DRAFT_ESCALATE',
+            'MPAM_DRAFT_REQUESTED_CONTRIBUTION',
+            'MPAM_TRIAGE',
+            'MPAM_TRIAGE_ON_HOLD',
+            'MPAM_TRIAGE_ESCALATE',
+            'MPAM_TRIAGE_REQUESTED_CONTRIBUTION',
+            'MPAM_DISPATCH'
         ];
 
         if (this.props.items[0] !== undefined && stageTypes.includes(this.props.items[0].stageType)) {
