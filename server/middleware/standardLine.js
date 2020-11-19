@@ -3,7 +3,6 @@ const { DocumentError } = require('../models/error');
 const User = require('../models/user');
 const getLogger = require('../libs/logger');
 
-
 const getUsersStandardLines = async (req, res, next) => {
     const logger = getLogger(req.requestId);
     const userUUID = req.user.uuid;
@@ -15,19 +14,41 @@ const getUsersStandardLines = async (req, res, next) => {
         const policyTeamForTopicList = await req.listService.fetch('DCU_POLICY_TEAM_FOR_TOPIC', req.params);
 
         const response = await infoService.get(`/user/${userUUID}/standardLine`, {}, { headers: User.createHeaders(req.user) });
-        res.locals.standardLines = response.data.map(({ uuid, displayName, topicUUID, expires, documentUUID }) => {
-            const expiry = formatDate(expires);
-            return ({
-                uuid: uuid, documentUUID: documentUUID, displayName: displayName, topic: getLabelForValue(topicList, topicUUID),
-                expiryDate: expiry, isExpired: deriveIsExpired(expiry), team: getLabelForValue(policyTeamForTopicList, topicUUID)
-            });
-        });
+        res.locals.standardLines = mapStandardLines(response.data, topicList, policyTeamForTopicList);
         next();
     } catch (error) {
         logger.error('REQUEST_USER_STANDARD_LINES_FAILURE', { message: error.message, stack: error.stack });
         next(error);
     }
-}
+};
+
+const getAllStandardLines = async (req, res, next) => {
+    const logger = getLogger(req.request);
+
+    try {
+        logger.info('REQUEST_ALL_STANDARD_LINES', { ...req.params });
+
+        const topicList = await req.listService.fetch('TOPICS', req.params);
+        const policyTeamForTopicList = await req.listService.fetch('DCU_POLICY_TEAM_FOR_TOPIC', req.params);
+
+        const response = await infoService.get('/standardLine/all', {}, { headers: User.createHeaders(req.user) });
+        res.locals.standardLines = mapStandardLines(response.data, topicList, policyTeamForTopicList);
+        next();
+    } catch (error) {
+        logger.error('REQUEST_STANDARD_LINES_FAILURE', { message: error.message, stack: error.stack });
+        next(error);
+    }
+};
+
+const mapStandardLines = (standardLines, topics, policyTeams) => {
+    return standardLines.map(({ uuid, displayName, topicUUID, expires, documentUUID }) => {
+        const expiry = formatDate(expires);
+        return ({
+            uuid: uuid, documentUUID: documentUUID, displayName: displayName, topic: getLabelForValue(topics, topicUUID),
+            expiryDate: expiry, isExpired: deriveIsExpired(expiry), team: getLabelForValue(policyTeams, topicUUID)
+        });
+    });
+};
 
 const getOriginalDocument = async (req, res, next) => {
     const logger = getLogger(req.requestId);
@@ -88,6 +109,7 @@ const formatDate = (date) => date ? parseDate(date) : null;
 
 module.exports = {
     getUsersStandardLines,
+    getAllStandardLines,
     getOriginalDocument,
     standardLinesApiResponseMiddleware
 };
