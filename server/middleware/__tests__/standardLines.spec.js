@@ -1,5 +1,6 @@
 const {
     getUsersStandardLines,
+    getAllStandardLines,
     getOriginalDocument,
 } = require('./../standardLine');
 
@@ -87,6 +88,82 @@ describe('standard lines middlware', () => {
             infoService.get.mockImplementation(() => Promise.resolve(MOCK_STANDARD_LINE));
             await getUsersStandardLines(req, res, next);
             expect(infoService.get).toHaveBeenCalledWith(`/user/${req.user.uuid}/standardLine`, { }, { headers: headers });
+            expect(res.locals.standardLines).toEqual(
+                [{ 'displayName': 'test', 'documentUUID': 'test', 'expiryDate': '31/12/9999','isExpired': false,'team': 'test','topic': 'test','uuid': 'test' }]
+            );
+            expect(next).toHaveBeenCalled();
+        });
+    });
+
+    describe('getAllStandardLines is called', () => {
+
+        const MOCK_STANDARD_LINE = {
+            data: [{
+                uuid: 'test',
+                displayName: 'test',
+                topicUUID: 'test',
+                expires: '9999-12-31',
+                documentUUID: 'test'
+            }]
+        };
+
+        beforeEach(() => {
+            next.mockReset();
+            req = {
+                listService: {
+                    fetch: jest.fn(async (list) => {
+                        if (list === 'TOPICS') {
+                            return Promise.resolve(['MOCK_TOPICS']);
+                        } else if (list === 'DCU_POLICY_TEAM_FOR_TOPIC') {
+                            return Promise.resolve(['MOCK_TEAMS']);
+                        }
+                        return Promise.reject();
+                    })
+                },
+                requestId: 'reqid',
+            };
+            res = {
+                locals: {}
+            };
+        });
+
+        it('should call next with an error if unable to retrieve topics data', async () => {
+            req.listService.fetch.mockImplementation(() => Promise.reject('MOCK_ERROR'));
+            await getAllStandardLines(req, res, next);
+            expect(res.locals.standardLines).not.toBeDefined();
+            expect(next).toHaveBeenCalled();
+            expect(next).toHaveBeenCalledWith('MOCK_ERROR');
+        });
+
+        it('should call next with an error if unable to retrieve topics data', async () => {
+            req.listService.fetch.mockImplementation((list ) => {
+                if (list === 'TOPICS') {
+                    return Promise.resolve(['MOCK_TOPICS']);
+                }
+                return Promise.reject('MOCK_ERROR');
+            });
+            await getAllStandardLines(req, res, next);
+            expect(res.locals.standardLines).not.toBeDefined();
+            expect(next).toHaveBeenCalled();
+            expect(next).toHaveBeenCalledWith('MOCK_ERROR');
+        });
+
+        it('should call the user create headers method', async () => {
+            await getAllStandardLines(req, res, next);
+            expect(User.createHeaders).toHaveBeenCalled();
+        });
+
+        it('should call the get method on the info service', async () => {
+            User.createHeaders.mockImplementation(() => headers);
+            await getAllStandardLines(req, res, next);
+            expect(infoService.get).toHaveBeenCalledWith('/standardLine/all', { }, { headers: headers });
+        });
+
+        it('should call the get method on the info service', async () => {
+            User.createHeaders.mockImplementation(() => headers);
+            infoService.get.mockImplementation(() => Promise.resolve(MOCK_STANDARD_LINE));
+            await getAllStandardLines(req, res, next);
+            expect(infoService.get).toHaveBeenCalledWith('/standardLine/all', { }, { headers: headers });
             expect(res.locals.standardLines).toEqual(
                 [{ 'displayName': 'test', 'documentUUID': 'test', 'expiryDate': '31/12/9999','isExpired': false,'team': 'test','topic': 'test','uuid': 'test' }]
             );

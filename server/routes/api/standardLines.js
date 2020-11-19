@@ -1,7 +1,7 @@
 const router = require('express').Router();
-const { getUsersStandardLines, getOriginalDocument, standardLinesApiResponseMiddleware } = require('../../middleware/standardLine.js');
+const { getAllStandardLines, getOriginalDocument, standardLinesApiResponseMiddleware } = require('../../middleware/standardLine.js');
 
-router.get('/', getUsersStandardLines, standardLinesApiResponseMiddleware);
+router.get('/', getAllStandardLines, standardLinesApiResponseMiddleware);
 
 router.get('/download/:documentId', getOriginalDocument);
 
