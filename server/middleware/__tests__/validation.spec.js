@@ -148,6 +148,29 @@ describe('Validators', () => {
         });
     });
 
+    describe('Case reference validation', () => {
+        it('should accept regardless of case', () => {
+            expect(validators.isValidCaseReference({ value: 'MiN/0000000/22' })).toEqual(null);
+        });
+        it('should accept spaces at the end', () => {
+            expect(validators.isValidCaseReference({ value: 'MIN/0000000/22 ' })).toEqual(null); // one space at the end
+            expect(validators.isValidCaseReference({ value: ' MIN/0000000/22' })).toEqual(null); // one space at the beginning
+            expect(validators.isValidCaseReference({ value: 'MIN/0000000/22     ' })).toEqual(null); // multiple spaces at the end
+            expect(validators.isValidCaseReference({ value: '     MIN/0000000/22' })).toEqual(null); // multiple spaces at the beginning
+        });
+        it('should reject if does not fit pattern', () => {
+            expect(validators.isValidCaseReference({ value: 'M/0000000/22' })).not.toEqual(null); // To little letters at start
+            expect(validators.isValidCaseReference({ value: 'MINTED/0000000/22' })).not.toEqual(null); // To many letters at start
+            expect(validators.isValidCaseReference({ value: 'MiN/000000/22' })).not.toEqual(null); // To little numbers in middle
+            expect(validators.isValidCaseReference({ value: 'MiN/00000000/22' })).not.toEqual(null); // To many numbers in middle
+            expect(validators.isValidCaseReference({ value: 'MiN/000000/2' })).not.toEqual(null); // To little numbers in final section
+            expect(validators.isValidCaseReference({ value: 'MiN/000000/222' })).not.toEqual(null); // To many numbers in final section
+        });
+        it('should reject if contains more than pattern', () => {
+            expect(validators.isValidCaseReference({ value: 'MIN/0000000/22-' })).not.toEqual(null); // invalid char at the end
+            expect(validators.isValidCaseReference({ value: '-MIN/0000000/22' })).not.toEqual(null); // invalid char at the beginning
+        });
+    });
 });
 
 describe('Validation middleware', () => {

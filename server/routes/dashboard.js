@@ -23,8 +23,9 @@ router.post(['/search/reference', '/api/search/reference'],
     validateForm,
     async (req, res, next) => {
         const logger = getLogger(req.requestId);
+
         try {
-            const caseRef = req.form.data['case-reference'].toUpperCase();
+            const caseRef = req.form.data['case-reference'].toUpperCase().trim();
 
             logger.info('SEARCH_REFERENCE', { reference: caseRef });
 
