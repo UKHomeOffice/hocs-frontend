@@ -16,7 +16,14 @@ async function getFormSchemaFromWorkflowService(requestId, options, user) {
     } catch (error) {
         switch (error.response.status) {
             case 401:
-                return { error: new PermissionError('You are not authorised to work on this case') };
+                // handle no permission to allocate
+                try {
+                    const { readOnlyCaseViewAdapter } = await listService.getInstance(requestId, user).fetch('S_SYSTEM_CONFIGURATION');
+                    const response = await listService.getInstance(requestId, user).fetch(readOnlyCaseViewAdapter, { caseId });
+                    return { form: response };
+                } catch (error) {
+                    return { error: new PermissionError('You are not authorised to work on this case') };
+                }
             case 403:
                 // handle not allocated
                 /* eslint-disable-next-line no-case-declarations */
