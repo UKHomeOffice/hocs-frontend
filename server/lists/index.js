@@ -296,6 +296,7 @@ module.exports = {
         TOPICS_CASETYPE: {
             client: 'INFO',
             endpoint: '/case/${caseId}/topiclist',
+            type: listService.types.DYNAMIC,
             adapter: topicAdapter
         },
         CASE_TOPICS: {
