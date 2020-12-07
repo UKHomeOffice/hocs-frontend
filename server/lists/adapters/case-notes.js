@@ -96,6 +96,10 @@ const typeAdaptors = {
         note,
         title: 'Contribution request note'
     }),
+    CLOSE_CASE_TELEPHONE: ({ note }) => ({
+        note,
+        title: 'Close Case (Telephone) note'
+    }),
     CONVERTED_CASE_TO_MINISTERIAL: ({ note }) => ({
         note,
         title: 'Conversion note: Case Converted to Ministerial'
