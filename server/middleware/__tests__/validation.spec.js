@@ -1,3 +1,5 @@
+import { ValidationError } from '../../models/error';
+
 const { validators, validationMiddleware } = require('../validation.js');
 
 jest.mock('../../config.js', () => {
@@ -265,5 +267,292 @@ describe('Validation middleware', () => {
         expect(req.form).toBeUndefined();
         expect(next).toHaveBeenCalled();
         expect(next).toHaveBeenCalledTimes(1);
+    });
+    it('should not validate hidden/removed fieldset', () => {
+        const req = {
+            form: {
+                data: {
+                    BusArea: 'TransferToOgd',
+                    RefType: '',
+                    Priority: '',
+                    ChannelIn: 'Email'
+                },
+                schema: {
+                    title: 'Some Title',
+                    defaultActionLabel: 'Continue',
+                    fields: [
+                        // this field will be hidden (see hideConditions) and therefore should not be validated,
+                        // even though it has no value and validation: ['required'].
+                        {
+                            validation: ['required'],
+                            props: {
+                                hideConditions: [
+                                    {
+                                        conditionPropertyName: 'BusArea',
+                                        conditionPropertyValue: 'TransferToOgd'
+                                    },
+                                ],
+                                name: 'RefType',
+                                label: 'RefType_label',
+                                sections: {},
+                                items: {},
+                            },
+                            validationSuppressor: {}
+                        },
+                        {
+                            validation: ['required'],
+                            props: {
+                                name: 'BusArea',
+                                label: 'BusArea label',
+                                sections: {},
+                                items: {},
+                            },
+                            validationSuppressor: {}
+                        }
+                    ],
+                    secondaryActions: [],
+                }
+            },
+        };
+        validationMiddleware(req, res, next);
+
+        expect(req.form).toBeDefined();
+        expect(next).toHaveBeenCalled();
+        expect(next.mock.calls[0][0]).not.toBeInstanceOf(Error);
+        expect(next.mock.calls[0][0]).not.toBeInstanceOf(ValidationError);
+    });
+    it('should validate shown/visible fieldset', () => {
+        const req = {
+            form: {
+                data: {
+                    BusArea: 'TransferToOther',
+                    RefType: '',
+                    Priority: '',
+                    ChannelIn: 'Email'
+                },
+                schema: {
+                    title: 'Some Title',
+                    defaultActionLabel: 'Continue',
+                    fields: [
+                        // This field will be hidden (see hideConditions) and therefore should not be validated,
+                        // even though it has no value and validation: ['required'].
+                        {
+                            validation: ['required'],
+                            props: {
+                                hideConditions: [
+                                    {
+                                        conditionPropertyName: 'BusArea',
+                                        conditionPropertyValue: 'TransferToOther'
+                                    },
+                                ],
+                                name: 'RefType',
+                                label: 'RefType_label',
+                                sections: {},
+                                items: {},
+                            },
+                            validationSuppressor: {}
+                        },
+                        {
+                            validation: ['required'],
+                            props: {
+                                name: 'BusArea',
+                                label: 'BusArea label',
+                                sections: {},
+                                items: {},
+                            },
+                            validationSuppressor: {}
+                        },
+                        // The below field does not have a hideCondition, therefore normal validation rules apply.
+                        {
+                            validation: ['required'],
+                            props: {
+                                name: 'Priority',
+                                label: 'Priority label',
+                                sections: {},
+                                items: {},
+                            },
+                            validationSuppressor: {}
+                        }
+                    ],
+                    secondaryActions: [],
+                }
+            },
+        };
+        validationMiddleware(req, res, next);
+
+        expect(req.form).toBeDefined();
+        expect(next).toHaveBeenCalled();
+        expect(next.mock.calls[0][0]).toBeInstanceOf(ValidationError);
+        expect(next.mock.calls[0][0].status).toEqual(200);
+        expect(next.mock.calls[0][0].fields.Priority).toEqual('Priority label is required');
+    });
+    it('should validate when both hideConditions & visibilityConditions have been defined', () => {
+        const req = {
+            form: {
+                data: {
+                    BusArea: 'TransferToOther',
+                    RefType: '',
+                    Priority: '',
+                    ChannelIn: ''
+                },
+                schema: {
+                    title: 'Some title',
+                    defaultActionLabel: 'Continue',
+                    fields: [
+                        // This field will be hidden (see hideConditions) and therefore should not be validated,
+                        // even though it has no value and validation: ['required'].
+                        {
+                            validation: ['required'],
+                            props: {
+                                hideConditions: [
+                                    {
+                                        conditionPropertyName: 'BusArea',
+                                        conditionPropertyValue: 'TransferToOther'
+                                    },
+                                ],
+                                name: 'RefType',
+                                label: 'RefType_label',
+                                sections: {},
+                                items: {},
+                            },
+                            validationSuppressor: {}
+                        },
+                        {
+                            validation: ['required'],
+                            props: {
+                                name: 'BusArea',
+                                label: 'BusArea label',
+                                sections: {},
+                                items: {},
+                            },
+                            validationSuppressor: {}
+                        },
+                        // The below field will not be validated even though it's empty; this is because the visibility
+                        // condition has not been met.
+                        {
+                            validation: ['required'],
+                            props: {
+                                name: 'Priority',
+                                label: 'Priority label',
+                                visibilityConditions: [
+                                    {
+                                        conditionPropertyName: 'ChannelIn',
+                                        conditionPropertyValue: 'fax'
+                                    },
+                                ],
+                                sections: {},
+                                items: {},
+                            },
+                            validationSuppressor: {}
+                        }
+                    ],
+                    secondaryActions: [],
+                }
+            },
+        };
+        validationMiddleware(req, res, next);
+
+        expect(req.form).toBeDefined();
+        expect(next).toHaveBeenCalled();
+        expect(next.mock.calls[0][0]).not.toBeInstanceOf(Error);
+        expect(next.mock.calls[0][0]).not.toBeInstanceOf(ValidationError);
+    });
+    it('should validate if radio button has conditionalContent', () => {
+        const req = {
+            form: {
+                data: {
+                    TestRadioField: 'TestRadioFieldValue',
+                    RefType: '',
+                    Priority: '',
+                    ChannelIn: '',
+                    TestRadioFieldValueText: ''
+                },
+                schema: {
+                    title: 'Some title',
+                    defaultActionLabel: 'Continue',
+                    fields: [
+                        {
+                            validation: ['required'],
+                            component: 'radio',
+                            props: {
+                                hideConditions: [
+                                    {
+                                        conditionPropertyName: 'BusArea',
+                                        conditionPropertyValue: 'TransferToOther'
+                                    },
+                                ],
+                                name: 'TestRadioField',
+                                label: 'TestRadioField_label',
+                                choices: [
+                                    { label: 'radio_1', value: 'radio1' },
+                                    { label: 'radio_2', value: 'radio2' },
+                                    {
+                                        label: 'Test Field Label',
+                                        value: 'TestRadioFieldValue',
+                                        conditionalContent: { label: 'Further Details' }
+                                    },
+                                ],
+                            },
+                            validationSuppressor: {}
+                        },
+                    ],
+                    secondaryActions: [],
+                }
+            },
+        };
+        validationMiddleware(req, res, next);
+        expect(req.form).toBeDefined();
+        expect(next).toHaveBeenCalled();
+        expect(next.mock.calls[0][0]).toBeInstanceOf(ValidationError);
+        expect(next.mock.calls[0][0].fields).toEqual({ TestRadioFieldValueText: 'Further Details is required' });
+    });
+    it('should validate radio button first if radio button has conditionalContent', () => {
+        const req = {
+            form: {
+                data: {
+                    TestEmptyRadioField: '',
+                    RefType: '',
+                    Priority: '',
+                    ChannelIn: '',
+                    TestEmptyRadioFieldValueText: ''
+                },
+                schema: {
+                    title: 'Some title',
+                    defaultActionLabel: 'Continue',
+                    fields: [
+                        {
+                            validation: ['required'],
+                            component: 'radio',
+                            props: {
+                                hideConditions: [
+                                    {
+                                        conditionPropertyName: 'BusArea',
+                                        conditionPropertyValue: 'TransferToOther'
+                                    },
+                                ],
+                                name: 'TestRadioField',
+                                label: 'TestRadioField_label',
+                                choices: [
+                                    { label: 'radio_1', value: 'radio1' },
+                                    { label: 'radio_2', value: 'radio2' },
+                                    {
+                                        label: 'Test Field Label',
+                                        value: 'TestEmptyRadioFieldValue',
+                                        conditionalContent: { label: 'Further Details' }
+                                    },
+                                ],
+                            },
+                            validationSuppressor: {}
+                        },
+                    ],
+                    secondaryActions: [],
+                }
+            },
+        };
+        validationMiddleware(req, res, next);
+        expect(req.form).toBeDefined();
+        expect(next).toHaveBeenCalled();
+        expect(next.mock.calls[0][0]).toBeInstanceOf(ValidationError);
+        expect(next.mock.calls[0][0].fields).toEqual({ TestRadioField: 'TestRadioField_label is required' });
     });
 });

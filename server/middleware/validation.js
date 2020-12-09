@@ -106,6 +106,26 @@ const validators = {
     }
 };
 
+function validateConditionalRadioContentIfExists(data, name, choices, validator, result) {
+    const conditionalRadioButtonTextFieldId = `${data[name]}Text`;
+
+    if (conditionalRadioButtonTextFieldId in data) {
+        const radioChoice = choices.find(choice => {
+            return choice.value === data[name];
+        });
+        let label = radioChoice.conditionalContent.label;
+        const value = data[conditionalRadioButtonTextFieldId];
+
+        const validationError = validators[validator].call(
+            this,
+            { label, value }
+        );
+        if (validationError) {
+            result[conditionalRadioButtonTextFieldId] = validationError;
+        }
+    }
+}
+
 function validationMiddleware(req, res, next) {
     if (req.form) {
         try {
@@ -139,14 +159,22 @@ function validationMiddleware(req, res, next) {
     }
     next();
 
-    function isFieldVisible(visibilityConditions, data) {
+    function isFieldVisible(visibilityConditions, hideConditions, data) {
         let isVisible = true;
         if (visibilityConditions) {
             isVisible = false;
-            for (var i = 0; i < visibilityConditions.length; i++) {
-                const condition = visibilityConditions[i];
+            for (let condition of visibilityConditions) {
                 if (data[condition.conditionPropertyName] && data[condition.conditionPropertyName] === condition.conditionPropertyValue) {
                     isVisible = true;
+                }
+            }
+        }
+
+        if (hideConditions) {
+            isVisible = true;
+            for (let condition of hideConditions) {
+                if (data[condition.conditionPropertyName] && data[condition.conditionPropertyName] === condition.conditionPropertyValue) {
+                    isVisible = false;
                 }
             }
         }
@@ -154,9 +182,13 @@ function validationMiddleware(req, res, next) {
     }
 
     function validateField(field, data, result, validationSuppressor) {
-        const { component, validation, props: { name, label, sections, items, visibilityConditions } } = field;
+        const {
+            component,
+            validation,
+            props: { name, label, sections, items, visibilityConditions, hideConditions, choices }
+        } = field;
 
-        if (!isFieldVisible(visibilityConditions, data)) {
+        if (!isFieldVisible(visibilityConditions, hideConditions, data)) {
             return;
         }
 
@@ -181,6 +213,18 @@ function validationMiddleware(req, res, next) {
                 validation.map(validator => {
                     if (typeof validator === 'string') {
                         if (validators.hasOwnProperty(validator)) {
+
+                            if (component === 'radio') {
+                                validateConditionalRadioContentIfExists.call(
+                                    this,
+                                    data,
+                                    name,
+                                    choices,
+                                    validator,
+                                    result
+                                );
+                            }
+
                             const validationError = validators[validator].call(this, { label, value });
                             if (validationError) {
                                 result[field.props.name] = validationError;
