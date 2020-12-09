@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 class Radio extends Component {
@@ -14,6 +14,8 @@ class Radio extends Component {
 
     componentDidMount() {
         this.props.updateState({ [this.props.name]: this.props.value });
+        // eslint-disable-next-line no-undef
+        window.GOVUKFrontend.initAll();
     }
 
     componentDidUpdate(prevProps) {
@@ -22,8 +24,22 @@ class Radio extends Component {
         }
     }
 
-    handleChange(e) {
+    handleChange(e, choice) {
         this.props.updateState({ [this.props.name]: e.target.value });
+        if ('conditionalContent' in choice) {
+            this.props.updateState({ [`${choice.value}Text`]: '' });
+        }
+    }
+
+    handleChangeForTextArea(e) {
+        this.props.updateState({ [e.target.id]: e.target.value });
+    }
+
+    isConditionalContentError(errors, contentLabelKey) {
+        if(errors && contentLabelKey in errors) {
+            return true;
+        }
+        return false;
     }
 
     static getDerivedStateFromProps(props, state) {
@@ -84,6 +100,7 @@ class Radio extends Component {
             className,
             disabled,
             error,
+            errors,
             hint,
             label,
             name,
@@ -103,20 +120,50 @@ class Radio extends Component {
                     {hint && <span className="govuk-hint">{hint}</span>}
                     {error && <span id={`${name}-error`} className="govuk-error-message">{error}</span>}
 
-                    <div id={`${name}-radios`} className={'govuk-radios'}>
+                    <div id={`${name}-radios`} className={'govuk-radios govuk-radios--conditional'} data-module="govuk-radios">
                         {choicesToUse && choicesToUse.map((choice, i) => {
                             return (
-                                <div key={i} className="govuk-radios__item">
-                                    <input id={`${name}-${choice.value}`}
-                                        type={type}
-                                        name={name}
-                                        value={choice.value}
-                                        checked={(value === choice.value)}
-                                        onChange={e => this.handleChange(e)}
-                                        className={'govuk-radios__input'}
-                                    />
-                                    <label className="govuk-label govuk-radios__label" htmlFor={`${name}-${choice.value}`}>{choice.label}</label>
-                                </div>
+                                <Fragment key={i}>
+                                    <div className="govuk-radios__item">
+                                        <input id={`${name}-${choice.value}`}
+                                            type={type}
+                                            name={name}
+                                            value={choice.value}
+                                            checked={(value === choice.value)}
+                                            onChange={e => this.handleChange(e, choice)}
+                                            data-aria-controls={`conditional-${name}-${choice.value}`}
+                                            className={'govuk-radios__input'}
+                                        />
+                                        <label className="govuk-label govuk-radios__label" htmlFor={`${name}-${choice.value}`}>{choice.label}</label>
+                                    </div>
+
+                                    {choice.conditionalContent &&
+                                        <div className="govuk-radios__conditional govuk-radios__conditional--hidden"
+                                            id={`conditional-${name}-${choice.value}`}>
+                                            <div className={`govuk-form-group ${this.isConditionalContentError(errors, `${choice.value}Text`) ? ' govuk-form-group--error' : ''}`}>
+                                                <label className="govuk-label" htmlFor={`${choice.value}Text`}>
+                                                    {choice.conditionalContent.label}
+                                                </label>
+                                                {this.isConditionalContentError(errors, `${choice.value}Text`) &&
+                                                    <span id={`${choice.value}Text-error`} className="govuk-error-message">
+                                                        <span className="govuk-visually-hidden">Error:</span>{errors[`${choice.value}Text`]}
+                                                    </span>
+                                                }
+                                                <textarea
+                                                    className={`govuk-textarea ${this.isConditionalContentError(errors, `${choice.value}Text`) ? ' govuk-textarea--error' : ''}`}
+                                                    id={`${choice.value}Text`}
+                                                    name={`${choice.value}Text`}
+                                                    disabled={disabled}
+                                                    rows="4"
+                                                    aria-describedby={`${choice.value}Text ${this.isConditionalContentError(errors, `${choice.value}Text`) ? ` ${choice.value}Text-error` : ''}`}
+                                                    onChange={e => this.handleChangeForTextArea(e)}
+                                                />
+                                            </div>
+
+                                        </div>
+                                    }
+
+                                </Fragment>
                             );
                         })}
 
@@ -135,6 +182,7 @@ Radio.propTypes = {
     data: PropTypes.object,
     disabled: PropTypes.bool,
     error: PropTypes.string,
+    errors: PropTypes.object,
     hint: PropTypes.string,
     label: PropTypes.string,
     name: PropTypes.string.isRequired,
