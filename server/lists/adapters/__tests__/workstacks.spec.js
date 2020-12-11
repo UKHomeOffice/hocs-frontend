@@ -1,4 +1,5 @@
 const { dashboardAdapter, userAdapter, teamAdapter, workflowAdapter, stageAdapter } = require('../workstacks');
+const { getUtcDateString } = require('../../../libs/dateHelpers');
 
 const mockUser = { uuid: 1 };
 
@@ -17,7 +18,9 @@ const mockFromStaticList = jest.fn((list) => {
     }
 });
 
-const todaysDate = new Date().toISOString().slice(0,10); // Returns todays date in format (yyyy-MM-dd)
+Date.now = jest.fn(() => 1609372800000); // 2020-12-31 00:00:00
+
+const todaysDate = getUtcDateString(new Date(Date.now()));
 
 const mockConfiguration = {
     workstackTypeColumns: [
@@ -302,8 +305,8 @@ describe('Team Workstack Adapter', () => {
                     { workstackType: 'WCS', workstackColumns: [] }
                 ], deadlinesEnabled: true
             }
-        })
-            ;
+        });
+
         expect(result).toMatchSnapshot();
     });
 
