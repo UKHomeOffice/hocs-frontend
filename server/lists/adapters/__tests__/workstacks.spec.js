@@ -17,6 +17,8 @@ const mockFromStaticList = jest.fn((list) => {
     }
 });
 
+const todaysDate = new Date().toISOString().slice(0,10); // Returns todays date in format (yyyy-MM-dd)
+
 const mockConfiguration = {
     workstackTypeColumns: [
         { workstackType: 'DEFAULT', workstackColumns: [] },
@@ -67,6 +69,20 @@ describe('Dashboard Adapter', () => {
                     stageType: 'A',
                     userUUID: null,
                     deadline: '2200-04-01'
+                },
+                {
+                    teamUUID: 2,
+                    caseType: 'DEFAULT',
+                    stageType: 'A',
+                    userUUID: null,
+                    deadline: todaysDate
+                },
+                {
+                    teamUUID: 2,
+                    caseType: 'DEFAULT',
+                    stageType: 'A',
+                    userUUID: null,
+                    deadline: '1900-01-01'
                 }
             ]
         };
@@ -242,6 +258,36 @@ describe('Team Workstack Adapter', () => {
                     active: false,
                     data: {}
                 },
+                {
+                    teamUUID: 2,
+                    caseType: 'DEFAULT',
+                    stageType: 'A',
+                    userUUID: 1,
+                    deadline: '1900-01-01',
+                    caseReference: 'A/1234567/19',
+                    active: true,
+                    data: {}
+                },
+                {
+                    teamUUID: 2,
+                    caseType: 'DEFAULT',
+                    stageType: 'A',
+                    userUUID: 1,
+                    deadline: todaysDate,
+                    caseReference: 'A/1234567/19',
+                    active: true,
+                    data: {}
+                },
+                {
+                    teamUUID: 2,
+                    caseType: 'DEFAULT',
+                    stageType: 'A',
+                    userUUID: 1,
+                    deadline: todaysDate,
+                    caseReference: 'A/1234567/19',
+                    active: false,
+                    data: {}
+                },
             ]
         };
 
@@ -357,6 +403,36 @@ describe('Workflow Workstack Adapter', () => {
                     deadline: '2200-01-01',
                     caseReference: 'A/1234567/19',
                     active: true,
+                    data: {}
+                },
+                {
+                    teamUUID: 1,
+                    caseType: 'DEFAULT',
+                    stageType: 'A',
+                    userUUID: 1,
+                    deadline: todaysDate,
+                    caseReference: 'A/1234567/19',
+                    active: true,
+                    data: {}
+                },
+                {
+                    teamUUID: 1,
+                    caseType: 'DEFAULT',
+                    stageType: 'A',
+                    userUUID: 1,
+                    deadline: '1900-01-01',
+                    caseReference: 'A/1234567/19',
+                    active: true,
+                    data: {}
+                },
+                {
+                    teamUUID: 1,
+                    caseType: 'DEFAULT',
+                    stageType: 'A',
+                    userUUID: 1,
+                    deadline: '1900-01-01',
+                    caseReference: 'A/1234567/19',
+                    active: false,
                     data: {}
                 },
                 {

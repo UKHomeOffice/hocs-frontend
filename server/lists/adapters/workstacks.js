@@ -27,7 +27,7 @@ const defaultCaseSort = (a, b) => {
 };
 const byLabel = (a, b) => a.label.localeCompare(b.label);
 const isUnallocated = user => user === null;
-const isOverdue = (configuration, deadline) => configuration.deadlinesEnabled && deadline && new Date(deadline) < Date.now();
+const isOverdue = (configuration, deadline) => configuration.deadlinesEnabled && deadline && new Date(deadline).setHours(23, 59, 59, 999) < Date.now();
 const getOverdue = (configuration, data) => {
     if (!configuration.deadlinesEnabled) {
         return false;
