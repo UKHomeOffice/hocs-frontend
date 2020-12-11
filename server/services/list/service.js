@@ -87,7 +87,7 @@ const getInstance = (requestId, user) => {
                 // list items come back as:
                 // a) object with 'key' and 'value' where key is the id. We return 'value' in this instance.
                 // b) object with 'value' and 'label' where value is the id. We return 'label' in this instance.
-                const result = item.find(item => item.key ? item.key === key : item.value === key);
+                const result = item.find(item => listContains(item, key));
                 if (result) {
                     return result.key ? result.value : result.label;
                 } else if (flushIfNull) {
@@ -98,6 +98,18 @@ const getInstance = (requestId, user) => {
             } else return defaultValue;
         } else {
             return defaultValue;
+        }
+    };
+
+    const listContains = (item, key) => {
+        if (item.key) {
+            if (Array.isArray(item.key) && Array.isArray(key)) {
+                return (item.key.every(keyValue => key.includes(keyValue)));
+            } else {
+                return (item.key === key);
+            }
+        } else {
+            return (item.value === key);
         }
     };
 
