@@ -115,9 +115,7 @@ function withForm(Page) {
                 const formData = new FormData();
                 Object.keys(form_data).filter(field => form_data[field] !== null).forEach(field => {
                     if (Array.isArray(form_data[field])) {
-                        form_data[field].map(value => {
-                            formData.append(`${field}[]`, value);
-                        });
+                        formData.append(field, JSON.stringify(form_data[field]));
                     } else {
                         formData.append(field, form_data[field]);
                     }
@@ -149,8 +147,6 @@ function withForm(Page) {
                             })
                             .catch(error => {
                                 this.setState({ submittingForm: false });
-                                // TODO: Remove
-                                /* eslint-disable-next-line no-console */
                                 return dispatch(updateApiStatus(status.SUBMIT_FORM_FAILURE))
                                     .then(() => dispatch(setError(error.response)));
                             });
