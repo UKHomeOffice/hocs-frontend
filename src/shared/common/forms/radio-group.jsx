@@ -42,6 +42,13 @@ class Radio extends Component {
         return false;
     }
 
+    returnConditionalContentValue(choiceValueText) {
+        if (choiceValueText in this.props.data) {
+            return this.props.data[choiceValueText];
+        }
+        return '';
+    }
+
     static getDerivedStateFromProps(props, state) {
         const { choicesToUse } = state;
         const { choices, conditionChoices } = props;
@@ -157,6 +164,7 @@ class Radio extends Component {
                                                     rows="4"
                                                     aria-describedby={`${choice.value}Text ${this.isConditionalContentError(errors, `${choice.value}Text`) ? ` ${choice.value}Text-error` : ''}`}
                                                     onChange={e => this.handleChangeForTextArea(e)}
+                                                    defaultValue={this.returnConditionalContentValue(`${value}Text`)}
                                                 />
                                             </div>
 
@@ -194,7 +202,7 @@ Radio.propTypes = {
 Radio.defaultProps = {
     choices: [],
     conditionChoices: [],
-    data: null,
+    data: {},
     disabled: false,
     type: 'radio'
 };
