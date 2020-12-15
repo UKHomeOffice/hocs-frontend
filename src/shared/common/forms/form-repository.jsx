@@ -49,12 +49,25 @@ function renderFormComponent(Component, options) {
 
 function isComponentVisible(config, data) {
     let isVisible = true;
-    if (config.visibilityConditions) {
+    let { visibilityConditions, hideConditions } = config;
+
+    // show component based on visibilityConditions
+    if (visibilityConditions) {
         isVisible = false;
-        for (var i = 0; i < config.visibilityConditions.length; i++) {
-            const condition = config.visibilityConditions[i];
+        for (let i = 0; i < visibilityConditions.length; i++) {
+            const condition = visibilityConditions[i];
             if (data[condition.conditionPropertyName] && data[condition.conditionPropertyName] === condition.conditionPropertyValue) {
                 isVisible = true;
+            }
+        }
+    }
+
+    // hide component based on hideConditions
+    if (hideConditions) {
+        for (let i = 0; i < hideConditions.length; i++) {
+            const condition = hideConditions[i];
+            if (data[condition.conditionPropertyName] && data[condition.conditionPropertyName] === condition.conditionPropertyValue) {
+                isVisible = false;
             }
         }
     }
