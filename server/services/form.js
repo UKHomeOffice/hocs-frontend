@@ -88,7 +88,7 @@ async function getFormSchema(options) {
 
 async function hydrateField(field, req) {
     if (field.props) {
-        const { choices, items, sections, conditionChoices } = field.props;
+        const { choices, items, sections, conditionChoices, somuType } = field.props;
 
         if (conditionChoices) {
             for (var i = 0; i < conditionChoices.length; i++) {
@@ -121,13 +121,27 @@ async function hydrateField(field, req) {
                 await Promise.all(fieldRequests);
             });
             await Promise.all(sectionRequests);
+        } else if (somuType) {
+            const { choices, caseType, type } = somuType;
+
+            if (choices) {
+                field.props.choices = await req.listService.fetch(choices, req.params);
+            }
+
+            const somuTypeItem = await req.listService.getFromStaticList(
+                'SOMU_TYPES',
+                [caseType, type]
+            );
+            field.props.somuType = somuTypeItem;
+
+            const somuItem = await req.listService.fetch('CASE_SOMU_ITEM', { ...req.params, somuTypeId: somuTypeItem.uuid });
+            field.props.somuItems = somuItem;
         }
     }
     return field;
 }
 
 const hydrateFields = async (req, res, next) => {
-
     const logger = getLogger(req.requestId);
 
     if (req.form) {
@@ -188,7 +202,6 @@ const getFormForAction = async (req, res, next) => {
 };
 
 const getFormForCase = async (req, res, next) => {
-
     const logger = getLogger(req.requestId);
     logger.info('GET_FORM', { ...req.params });
 
@@ -202,7 +215,28 @@ const getFormForCase = async (req, res, next) => {
             return next(new PermissionError('You are not authorised to work on this case'));
         }
         return next(new FormServiceError('Failed to fetch form'));
+    }
+};
 
+const getSomuFormForCase = async (req, res, next) => {
+    const logger = getLogger(req.requestId);
+    logger.info('GET_FORM_FOR _SOMU', { ...req.params });
+
+    try {
+        const schema = await listService.getInstance(req.requestId, req.user).getFromStaticList('SOMU_TYPES', [req.params.caseType, req.params.type]);
+        const formSchema = schema.forms[req.params.action.toUpperCase()];
+
+        if (formSchema) {
+            //req.form = parseSomuForm(formSchema);
+        } else {
+            return next(new FormServiceError('Form schema for somu action does not exist'));
+        }
+    } catch (error) {
+        logger.error('CASE_FORM_FAILURE', { message: error.message, stack: error.stack });
+        if (error.response !== undefined && error.response.status === 401) {
+            return next(new PermissionError('You are not authorised to work on this case'));
+        }
+        return next(new FormServiceError('Failed to fetch form'));
     }
 };
 
