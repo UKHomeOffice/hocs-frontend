@@ -21,6 +21,10 @@ module.exports = {
             "error",
             "unix"
         ],
+        "no-unused-vars": [
+            "error", 
+            { "argsIgnorePattern": "^_$"  }
+        ],
         "quotes": [
             "error",
             "single"
