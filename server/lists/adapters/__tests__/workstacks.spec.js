@@ -1,4 +1,5 @@
 const { dashboardAdapter, userAdapter, teamAdapter, workflowAdapter, stageAdapter } = require('../workstacks');
+const { getUtcDateString } = require('../../../libs/dateHelpers');
 
 const mockUser = { uuid: 1 };
 
@@ -16,6 +17,10 @@ const mockFromStaticList = jest.fn((list) => {
             return null;
     }
 });
+
+Date.now = jest.fn(() => 1609372800000); // 2020-12-31 00:00:00
+
+const todaysDate = getUtcDateString(new Date(Date.now()));
 
 const mockConfiguration = {
     workstackTypeColumns: [
@@ -67,6 +72,20 @@ describe('Dashboard Adapter', () => {
                     stageType: 'A',
                     userUUID: null,
                     deadline: '2200-04-01'
+                },
+                {
+                    teamUUID: 2,
+                    caseType: 'DEFAULT',
+                    stageType: 'A',
+                    userUUID: null,
+                    deadline: todaysDate
+                },
+                {
+                    teamUUID: 2,
+                    caseType: 'DEFAULT',
+                    stageType: 'A',
+                    userUUID: null,
+                    deadline: '1900-01-01'
                 }
             ]
         };
@@ -242,6 +261,36 @@ describe('Team Workstack Adapter', () => {
                     active: false,
                     data: {}
                 },
+                {
+                    teamUUID: 2,
+                    caseType: 'DEFAULT',
+                    stageType: 'A',
+                    userUUID: 1,
+                    deadline: '1900-01-01',
+                    caseReference: 'A/1234567/19',
+                    active: true,
+                    data: {}
+                },
+                {
+                    teamUUID: 2,
+                    caseType: 'DEFAULT',
+                    stageType: 'A',
+                    userUUID: 1,
+                    deadline: todaysDate,
+                    caseReference: 'A/1234567/19',
+                    active: true,
+                    data: {}
+                },
+                {
+                    teamUUID: 2,
+                    caseType: 'DEFAULT',
+                    stageType: 'A',
+                    userUUID: 1,
+                    deadline: todaysDate,
+                    caseReference: 'A/1234567/19',
+                    active: false,
+                    data: {}
+                },
             ]
         };
 
@@ -256,8 +305,8 @@ describe('Team Workstack Adapter', () => {
                     { workstackType: 'WCS', workstackColumns: [] }
                 ], deadlinesEnabled: true
             }
-        })
-            ;
+        });
+
         expect(result).toMatchSnapshot();
     });
 
@@ -357,6 +406,36 @@ describe('Workflow Workstack Adapter', () => {
                     deadline: '2200-01-01',
                     caseReference: 'A/1234567/19',
                     active: true,
+                    data: {}
+                },
+                {
+                    teamUUID: 1,
+                    caseType: 'DEFAULT',
+                    stageType: 'A',
+                    userUUID: 1,
+                    deadline: todaysDate,
+                    caseReference: 'A/1234567/19',
+                    active: true,
+                    data: {}
+                },
+                {
+                    teamUUID: 1,
+                    caseType: 'DEFAULT',
+                    stageType: 'A',
+                    userUUID: 1,
+                    deadline: '1900-01-01',
+                    caseReference: 'A/1234567/19',
+                    active: true,
+                    data: {}
+                },
+                {
+                    teamUUID: 1,
+                    caseType: 'DEFAULT',
+                    stageType: 'A',
+                    userUUID: 1,
+                    deadline: '1900-01-01',
+                    caseReference: 'A/1234567/19',
+                    active: false,
                     data: {}
                 },
                 {

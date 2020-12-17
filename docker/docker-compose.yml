@@ -12,6 +12,8 @@ services:
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: dev
+    volumes:
+      - ./db_setup:/docker-entrypoint-initdb.d
     tmpfs:
     - /var/lib/postgresql
 
