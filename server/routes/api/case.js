@@ -13,6 +13,7 @@ const {
     caseCorrespondentsMiddleware,
     caseCorrespondentsApiResponseMiddleware
 } = require('../../middleware/case');
+const { somuApiResponseMiddleware } = require('../../middleware/somu');
 const { getFormForCase, getFormForStage } = require('../../services/form');
 
 router.get('/:caseId/stage/:stageId/allocate', allocateCase);
@@ -27,6 +28,13 @@ router.post(['/:caseId/stage/:stageId/entity/:entity/:context/:action', '/:caseI
     processMiddleware,
     validationMiddleware,
     caseApiResponseMiddleware
+);
+router.post(['/:caseId/stage/:stageId/somu/:somuTypeUuid/:somuType/:somuCaseType/:action',  '/:caseId/stage/:stageId/somu/:somuTypeUuid/:somuType/:somuCaseType/item/:somuItemUuid/:action'],
+    getFormForCase,
+    fileMiddleware.any(),
+    processMiddleware,
+    validationMiddleware,
+    somuApiResponseMiddleware
 );
 router.post(['/:caseId/stage/:stageId', '/:caseId/stage/:stageId/allocate'],
     getFormForStage,
