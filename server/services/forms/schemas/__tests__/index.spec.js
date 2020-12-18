@@ -1,5 +1,9 @@
 const formRepository = require('../index');
 
+jest.mock('../../../../middleware/somu', () => ({
+    getSomuItem: jest.fn(() => 42)
+}));
+
 jest.mock('../../../../clients', () => ({
     caseworkService: {
         get: jest.fn(() => Promise.resolve({ data: {} }))
@@ -25,6 +29,7 @@ jest.mock('../../../../services/list/service', () => ({
     }
 }));
 
+
 describe('Form schema definitions', async () => {
     await Object.entries(formRepository).map(async ([label, form]) => {
         it(`${label} should be a valid schema definition `, async () => {
@@ -35,5 +40,30 @@ describe('Form schema definitions', async () => {
             expect(result.schema.fields).toBeDefined();
             expect(result.schema.defaultActionLabel).toBeDefined();
         });
+    });
+
+});
+
+describe('Contribution Request', async () => {
+    it('should generate form with action as add', async () => {
+        const result = await formRepository.contributionRequest({ user: { id: 1234, roles: [], groups: [] }, action: 'addRequest' });
+        expect(result).toBeDefined();
+        expect(result.schema).toBeDefined();
+        expect(result.schema.title).toBeDefined();
+        expect(result.schema.title).toEqual('Add Contribution Request');
+        expect(result.schema.fields).toBeDefined();
+        expect(result.schema.defaultActionLabel).toBeDefined();
+        expect(result.schema.defaultActionLabel).toEqual('Add');
+    });
+
+    it('should generate form with action as edit', async () => {
+        const result = await formRepository.contributionRequest({ user: { id: 1234, roles: [], groups: [] }, action: 'editRequest' });
+        expect(result).toBeDefined();
+        expect(result.schema).toBeDefined();
+        expect(result.schema.title).toBeDefined();
+        expect(result.schema.title).toEqual('Edit Contribution Request');
+        expect(result.schema.fields).toBeDefined();
+        expect(result.schema.defaultActionLabel).toBeDefined();
+        expect(result.schema.defaultActionLabel).toEqual('Edit');
     });
 });
