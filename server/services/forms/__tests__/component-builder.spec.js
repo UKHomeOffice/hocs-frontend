@@ -1,4 +1,4 @@
-const { Component, Choice } = require('../component-builder');
+const { Component, Choice, ConditionChoice } = require('../component-builder');
 
 describe('Component builder', () => {
     it('should create a form component object with the build method', () => {
@@ -87,5 +87,15 @@ describe('Choice function', () => {
         expect(result).toBeDefined();
         expect(result.label).toEqual('Option 1');
         expect(result.value).toEqual('OPTION_1');
+    });
+});
+
+describe('Condition choice function', () => {
+    it('should return a choice element for choice fields', () => {
+        const result = ConditionChoice('Name', 'Value', 'Choices');
+        expect(result).toBeDefined();
+        expect(result.conditionPropertyName).toEqual('Name');
+        expect(result.conditionPropertyValue).toEqual('Value');
+        expect(result.choices).toEqual('Choices');
     });
 });

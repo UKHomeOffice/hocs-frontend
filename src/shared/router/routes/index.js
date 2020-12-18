@@ -60,6 +60,18 @@ const routes = [
         hasSidebar: true
     },
     {
+        path: '/case/:caseId/stage/:stageId/somu/:somuTypeUuid/:somuType/:somuCaseType/:action/',
+        exact: true,
+        component: CasePage,
+        hasSidebar: true
+    },
+    {
+        path: '/case/:caseId/stage/:stageId/somu/:somuTypeUuid/:somuType/:somuCaseType/item/:somuItemUuid/:action/',
+        exact: true,
+        component: CasePage,
+        hasSidebar: true
+    },
+    {
         path: '/case/:caseId/stage/:stageId/entity/member/:context/:action/',
         exact: true,
         component: CasePage,

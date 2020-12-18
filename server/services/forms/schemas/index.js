@@ -17,5 +17,6 @@ module.exports = {
     bulkAddDocument: require('./bulk-document-add.js'),
     addStandardLine: require('./add-standard-line.js'),
     addTemplate: require('./add-template'),
-    managePeople: require('./manage-people')
+    managePeople: require('./manage-people'),
+    contributionRequest: require('./contribution-request')
 };

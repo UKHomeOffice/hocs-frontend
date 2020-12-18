@@ -20,5 +20,6 @@ module.exports = {
             }
         };
     },
-    Choice: (label, value, options) => ({ label, value, ...options })
+    Choice: (label, value, options) => ({ label, value, ...options }),
+    ConditionChoice: (conditionPropertyName, conditionPropertyValue, choices, ...options) => ({ conditionPropertyName, conditionPropertyValue, choices, ...options })
 };
