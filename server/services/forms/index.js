@@ -2,7 +2,7 @@ const formRepository = require('./schemas/index');
 const {
     ADD_TEMPLATE, ADD_STANDARD_LINE, IS_MEMBER, ADD_MEMBER, SELECT_MEMBER, ADD_CORRESPONDENT, UPDATE_CORRESPONDENT,
     REMOVE_CORRESPONDENT, ADD_TOPIC, REMOVE_TOPIC, CREATE_CASE, CREATE_AND_ALLOCATE_CASE, BULK_CREATE_CASE,
-    ADD_DOCUMENT, REMOVE_DOCUMENT, MANAGE_DOCUMENTS, MANAGE_PEOPLE
+    ADD_DOCUMENT, REMOVE_DOCUMENT, MANAGE_DOCUMENTS, MANAGE_PEOPLE, ADD_CONTRIBUTION_REQUEST
 } = require('../actions/types');
 
 const formDefinitions = {
@@ -190,6 +190,21 @@ const formDefinitions = {
                 builder: formRepository.addMemberDetails,
                 action: ADD_MEMBER
             }
+        },
+        CONTRIBUTIONS: {
+            MPAM: {
+                ADDREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    action: ADD_CONTRIBUTION_REQUEST
+                },
+                EDITREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    action: ADD_CONTRIBUTION_REQUEST
+                },
+                VIEWREQUEST: {
+                    builder: formRepository.contributionRequest,
+                },
+            }
         }
     }
 };
@@ -219,12 +234,23 @@ module.exports = {
         }
     },
     getFormForCase: async (options) => {
-        let { entity, action } = options;
-        if (entity && action) {
-            let formDefinition;
-            formDefinition = formDefinitions['CASE'][entity.toUpperCase()][action.toUpperCase()];
-            const form = await formDefinition.builder.call(this, options);
-            return { schema: form.schema, action: formDefinition.action, data: form.data };
+        const { action } = options;
+
+        if (action) {
+            const { entity, somuCaseType, somuType } = options;
+            let formDefinition = undefined;
+            if (entity) {
+                formDefinition = formDefinitions['CASE'][entity.toUpperCase()][action.toUpperCase()];
+            } else if (somuType && somuCaseType) {
+                formDefinition = formDefinitions['CASE'][somuType.toUpperCase()][somuCaseType.toUpperCase()][action.toUpperCase()];
+            }
+
+            if (formDefinition) {
+                const form = await formDefinition.builder.call(this, options);
+                return { schema: form.schema, action: formDefinition.action, data: form.data };
+            }
+        } else {
+            return undefined;
         }
     }
 };
