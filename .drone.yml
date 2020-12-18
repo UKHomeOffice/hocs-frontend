@@ -7,9 +7,8 @@ pipeline:
       commands:
         - docker build -t hocs-frontend .
       when:
-        branch: master
         event: push
-  
+
     install-docker-image:
       image: docker:17.09.1
       environment:
