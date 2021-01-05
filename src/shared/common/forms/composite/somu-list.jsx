@@ -3,43 +3,139 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { ApplicationConsumer } from '../../../contexts/application.jsx';
 
-class SomuList extends Component {
+const CONTRIBUTION_STATUS = {
+    COMPLETE: 'COMPLETE',
+    CANCELLED: 'CANCELLED',
+    OVERDUE: 'OVERDUE',
+    DUE: 'DUE'
+};
 
-    constructor(props) {
-        super(props);
+class SomuTableRenderer {
 
-        this.state = { ...props };
+    constructor(renderer, choices) {
+        this.state = { renderer, choices };
     }
 
-    componentDidMount() {
-        const { name, somuItems } = this.props;
+    parseDate(rawDate){
+        const [date] = rawDate.match(/\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])/g) || [];
+        if (!date) {
+            return null;
+        }
+        const [year, month, day] = date.split('-');
+        return `${day}/${month}/${year}`;
+    }
 
-        this.props.updateState({ [name]: somuItems.data });
+    formatDate(date) {
+        return date ? this.parseDate(date) : null;
     }
 
     loadValue(value, choices) {
         const choice = choices.find(x => x.value === value);
-
         return choice ? choice.label : value;
     }
 
-    renderIdRow(schema, somuItem) {
-        const renderers = schema.renderers;
-        const choices = this.props.choices;
+    addDays(dateString, days) {
+        const date = new Date(dateString);
+        date.setDate(date.getDate() + days);
+        return date;
+    }
 
-        if (renderers) {
-            const tableRenderer = renderers.table || '';
-            switch (tableRenderer) {
-                case 'MpamTable': {
-                    return (<td className='govuk-table__cell'>
-                        <label className="govuk-label">{somuItem.businessArea} - {this.loadValue(somuItem.businessUnit, choices)}</label>
-                    </td>);
-                }
+    getContributionStatus({ contributionDueDate, contributionStatus }) {
+        if (contributionStatus === 'contributionCancelled') {
+            return CONTRIBUTION_STATUS.CANCELLED;
+        } else if (contributionStatus === 'contributionReceived') {
+            return CONTRIBUTION_STATUS.COMPLETE;
+        } else if (this.addDays(contributionDueDate, 1) < Date.now()) {
+            return CONTRIBUTION_STATUS.OVERDUE;
+        } else {
+            return CONTRIBUTION_STATUS.DUE;
+        }
+    }
+
+    renderMpamContribution(somuItem) {
+        const { choices } = this.state;
+        const title = `${somuItem.businessArea} - ${this.loadValue(somuItem.businessUnit, choices)}`;
+        const contributionStatus = this.getContributionStatus(somuItem);
+
+        return (<>
+            <td className='govuk-table__cell'>
+                <label className={'govuk-label'}
+                    aria-label={contributionStatus === CONTRIBUTION_STATUS.CANCELLED ? `Cancelled Contribution: ${title}`: title}
+                    title={contributionStatus === CONTRIBUTION_STATUS.CANCELLED ? `Cancelled Contribution: ${title}`: title}>
+                    {title}
+                </label>
+            </td>
+            {this.renderStatusColumn(contributionStatus, somuItem)}
+        </>);
+    }
+
+    renderStatusColumn(status, { contributionDueDate }) {
+        let className = '';
+        let title = '';
+
+        switch (status) {
+            case CONTRIBUTION_STATUS.COMPLETE:
+                title = 'Complete';
+                break;
+            case CONTRIBUTION_STATUS.OVERDUE:
+                className = 'date-warning';
+                title = `Overdue ${this.formatDate(contributionDueDate)}`;
+                break;
+            case CONTRIBUTION_STATUS.DUE: {
+                title = `Due ${this.formatDate(contributionDueDate)}`;
+                break;
+            }
+            case CONTRIBUTION_STATUS.CANCELLED: {
+                title = 'Cancelled';
+                break;
             }
         }
+
+        return (<td className={`govuk-table__cell ${className}`}>
+            <label className='govuk-label'
+                aria-label={title}
+                title={title}>
+                {title}
+            </label>
+        </td>);
+    }
+
+    render(somuItem) {
+        const { renderer } = this.state;
+
+        switch (renderer) {
+            case 'MpamTable': {
+                return this.renderMpamContribution(somuItem.data);
+            }
+        }
+
         return (<td className='govuk-table__cell'>
             <label className="govuk-label">{somuItem.uuid}</label>
         </td>);
+    }
+
+}
+
+class SomuList extends Component {
+    constructor(props) {
+        super(props);
+
+        let tableRender = '';
+
+        if (props.somuType &&
+            props.somuType.schema &&
+            props.somuType.schema.renderers &&
+            props.somuType.schema.renderers.table) {
+            tableRender = props.somuType.schema.renderers.table;
+        }
+
+        this.state = { ...props, renderer: new SomuTableRenderer(tableRender, props.choices) };
+    }
+
+    componentDidMount() {
+        const { name, somuItems } = this.props;
+        
+        this.props.updateState({ [name]: somuItems });
     }
 
     renderItemLinks(somuItem) {
@@ -70,6 +166,8 @@ class SomuList extends Component {
             className
         } = this.props;
 
+        const { renderer } = this.state;
+
         const { hideSidebar } = this.props;
 
         return (
@@ -85,10 +183,12 @@ class SomuList extends Component {
 
                     <table className='govuk-table'>
                         <tbody className='govuk-table__body'>
-                            {somuItems && somuItems.data != null && somuItems.data.length > 0 && somuItems.data.map((somuItem, i) => {
+                            {somuItems && Array.isArray(somuItems) &&somuItems.map((somuItem, i) => {
                                 return (
                                     <tr className='govuk-table__row' key={i}>
-                                        { this.renderIdRow(somuType.schema, somuItem) }
+                                        {
+                                            renderer.render(somuItem)
+                                        }
                                         { this.renderItemLinks(somuItem) }
                                     </tr>
                                 );
@@ -111,7 +211,7 @@ SomuList.propTypes = {
     baseUrl: PropTypes.string.isRequired,
     className: PropTypes.string,
     somuType: PropTypes.object.isRequired,
-    somuItems: PropTypes.object.isRequired,
+    somuItems: PropTypes.array,
     disabled: PropTypes.bool,
     error: PropTypes.string,
     itemLinks: PropTypes.arrayOf(PropTypes.object),

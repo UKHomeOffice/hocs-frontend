@@ -383,6 +383,11 @@ td {
         color: white;
         padding: 0.25em 0.5em 0.25em 0.5em;
       }
+      label {
+        background-color: govuk-colour("red");
+        color: white;
+        padding: 0.25em 0.5em 0.25em 0.5em;
+      }
   }
 }
 
@@ -560,6 +565,10 @@ td {
     padding-left: 10px;
     border-left: 4px solid govuk-colour("blue");
   }
+}
+
+.strikethrough {
+  text-decoration: line-through;
 }
 
 .time {

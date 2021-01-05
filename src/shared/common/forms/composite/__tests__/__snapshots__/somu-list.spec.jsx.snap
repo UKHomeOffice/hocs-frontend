@@ -150,9 +150,22 @@ exports[`Somu list component should render with choices when table renderer exis
             class="govuk-table__cell"
           >
             <label
+              aria-label="TestBusinessArea - Test Team"
               class="govuk-label"
+              title="TestBusinessArea - Test Team"
             >
               TestBusinessArea - Test Team
+            </label>
+          </td>
+          <td
+            class="govuk-table__cell "
+          >
+            <label
+              aria-label="Due null"
+              class="govuk-label"
+              title="Due null"
+            >
+              Due null
             </label>
           </td>
         </tr>
@@ -300,9 +313,22 @@ exports[`Somu list component should render with default render when table render
             class="govuk-table__cell"
           >
             <label
+              aria-label="TestBusinessArea - TestTeam"
               class="govuk-label"
+              title="TestBusinessArea - TestTeam"
             >
               TestBusinessArea - TestTeam
+            </label>
+          </td>
+          <td
+            class="govuk-table__cell "
+          >
+            <label
+              aria-label="Due null"
+              class="govuk-label"
+              title="Due null"
+            >
+              Due null
             </label>
           </td>
         </tr>
