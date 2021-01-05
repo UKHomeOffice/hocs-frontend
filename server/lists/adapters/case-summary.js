@@ -1,5 +1,6 @@
 const { caseworkService } = require('../../clients');
 const User = require('../../models/user');
+const { formatDate } = require('../../libs/dateHelpers');
 
 const createAdditionalFields = async (additionalFields = [], fetchList) => {
     var results = additionalFields.map(({ label, value, type, choices }) => type === 'date' ? ({ label, value: formatDate(value), choices }) : ({ label, value, choices }));
@@ -39,17 +40,6 @@ const getActiveStages = async (deadlines, fromStaticList) => await Promise.all(d
 const getPrimaryTopic = (topic) => topic ? topic.label : null;
 
 const getPrimaryCorrespondent = correspondent => correspondent && { address: correspondent.address, fullname: correspondent.fullname };
-
-const parseDate = (rawDate) => {
-    const [date] = rawDate.match(/[0-9]{4}-[0-1][0-9]-[0-3][0-9]/g) || [];
-    if (!date) {
-        return null;
-    }
-    const [year, month, day] = date.split('-');
-    return `${day}/${month}/${year}`;
-};
-
-const formatDate = (date) => date ? parseDate(date) : null;
 
 module.exports = async (summary, options) => {
     const { fromStaticList, fetchList, configuration, user } = options;
