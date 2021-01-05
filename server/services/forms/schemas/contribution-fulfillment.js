@@ -2,26 +2,16 @@ const Form = require('../form-builder');
 const { Component, Choice, ConditionChoice } = require('../component-builder');
 const { getSomuItem } = require('../../../middleware/somu');
 
-const ACTIONS = {
-    ADD_ADDITIONAL_REQUEST: 'ADDADDITIONALREQUEST',
-    ADD_REQUEST: 'ADDREQUEST',
-    EDIT_REQUEST: 'EDITREQUEST',
-    VIEW_REQUEST: 'VIEWREQUEST',
-};
-
 module.exports = async options => {
-    const action = options.action;
-    const isAdd = action ? action.toUpperCase() === ACTIONS.ADD_REQUEST || action.toUpperCase() === ACTIONS.ADD_ADDITIONAL_REQUEST : false;
-    const isReadOnly = action ? action.toUpperCase() === ACTIONS.VIEW_REQUEST : true;
-    const { data } = !isAdd ? await getSomuItem(options) : {};
+    const { data } = await getSomuItem(options);
 
-    const form = Form()
-        .withTitle(`${isAdd ? 'Add' : isReadOnly ? 'View' : 'Edit'} Contribution Request`)
+    return Form()
+        .withTitle('Contribution Request Fulfillment')
         .withField(
             Component('dropdown', 'businessArea')
                 .withValidator('required', 'Business area is required')
                 .withProp('label', 'Business Area')
-                .withProp('disabled', isReadOnly)
+                .withProp('disabled', true)
                 .withProp('choices', [
                     Choice('UKVI', 'UKVI'),
                     Choice('BF', 'BF'),
@@ -37,7 +27,7 @@ module.exports = async options => {
             Component('dropdown', 'businessUnit')
                 .withValidator('required', 'Business unit is required')
                 .withProp('label', 'Business Unit')
-                .withProp('disabled', isReadOnly)
+                .withProp('disabled', true)
                 .withProp('conditionChoices', [
                     ConditionChoice('businessArea', 'UKVI', 'S_MPAM_BUS_UNITS_1'),
                     ConditionChoice('businessArea', 'BF', 'S_MPAM_BUS_UNITS_2'),
@@ -55,23 +45,68 @@ module.exports = async options => {
                 .withValidator('isValidDate', 'Contribution request date must be a valid date')
                 .withValidator('isBeforeToday', 'Contribution request date must be in the past')
                 .withProp('label', 'Contribution request date')
-                .withProp('disabled', isReadOnly)
+                .withProp('disabled', true)
                 .build()
         )
         .withField(
             Component('date', 'contributionDueDate')
                 .withValidator('required', 'Contribution due date is required')
                 .withValidator('isValidDate', 'Contribution due date must be a valid date')
-                .withValidator('isAfterToday', 'Contribution due date must not be in the past')
+                .withValidator('isAfterToday', 'Contribution due date must in the future')
                 .withProp('label', 'Contribution due date')
-                .withProp('disabled', isReadOnly)
                 .build()
         )
         .withField(
             Component('text-area', 'contributionRequestNote')
-                .withValidator('required', 'What you are requesting is required')
                 .withProp('label', 'What you are requesting')
-                .withProp('disabled', isReadOnly)
+                .withProp('disabled', true)
+                .build()
+        )
+        .withField(
+            Component('radio', 'contributionStatus')
+                .withProp('label', 'Contribution Status')
+                .withProp('choices', [
+                    Choice('Complete', 'contributionReceived'),
+                    Choice('Cancelled', 'contributionCancelled')
+                ])
+                .build()
+        )
+        .withField(
+            Component('date', 'contributionReceivedDate')
+                .withValidator('required', 'Contribution received date is required')
+                .withValidator('isValidDate', 'Contribution received date must be a valid date')
+                .withValidator('isBeforeToday', 'Contribution received date must be in the past')
+                .withProp('label', 'Contribution received date')
+                .withProp('visibilityConditions', [
+                    {
+                        'conditionPropertyName': 'contributionStatus',
+                        'conditionPropertyValue': 'contributionReceived'
+                    }
+                ])
+                .build()
+        )
+        .withField(
+            Component('text-area', 'contributionReceivedNote')
+                .withValidator('required', 'Contribution completion notes reason required')
+                .withProp('label', 'Details')
+                .withProp('visibilityConditions', [
+                    {
+                        'conditionPropertyName': 'contributionStatus',
+                        'conditionPropertyValue': 'contributionReceived'
+                    }
+                ])
+                .build()
+        )
+        .withField(
+            Component('text-area', 'contributionCancellationNote')
+                .withValidator('required', 'Contribution cancellation reason required')
+                .withProp('label', 'Reason for cancelling')
+                .withProp('visibilityConditions', [
+                    {
+                        'conditionPropertyName': 'contributionStatus',
+                        'conditionPropertyValue': 'contributionCancelled'
+                    }
+                ])
                 .build()
         )
         .withSecondaryAction(
@@ -79,17 +114,8 @@ module.exports = async options => {
                 .withProp('label', 'Back')
                 .withProp('action', `/case/${options.caseId}/stage/${options.stageId}`)
                 .build()
-        );
-
-    if (isReadOnly) {
-        form.withNoPrimaryAction();
-    } else {
-        form.withPrimaryActionLabel(isAdd ? 'Add' : 'Edit');
-    }
-
-    if (data) {
-        form.withData(data);
-    }
-
-    return form.build();
+        )
+        .withPrimaryActionLabel('Update')
+        .withData(data)
+        .build();
 };

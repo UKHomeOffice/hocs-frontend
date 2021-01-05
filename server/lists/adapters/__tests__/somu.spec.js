@@ -27,7 +27,7 @@ describe('Somu Adapter', () => {
     describe('Somu Item Adapter', () => {
 
         it('should transform somu type with data', async () => {
-            const mockData = { uuid: '00000000-0000-0000-0000-000000000000', data: '[{"test":1}]', deleted: false };
+            const mockData = [{ uuid: '00000000-0000-0000-0000-000000000000', data: '[{"test":1}]', deleted: false }];
 
             const results = await somuItemsAdapter(mockData, { logger: mockLogger });
 
@@ -36,7 +36,7 @@ describe('Somu Adapter', () => {
         });
 
         it('should transform somu type with deleted set as true', async () => {
-            const mockData = { uuid: '00000000-0000-0000-0000-000000000000', data: null, deleted: true };
+            const mockData = [{ uuid: '00000000-0000-0000-0000-000000000000', data: null, deleted: true }];
 
             const results = await somuItemsAdapter(mockData, { logger: mockLogger });
 

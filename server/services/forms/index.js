@@ -2,7 +2,7 @@ const formRepository = require('./schemas/index');
 const {
     ADD_TEMPLATE, ADD_STANDARD_LINE, IS_MEMBER, ADD_MEMBER, SELECT_MEMBER, ADD_CORRESPONDENT, UPDATE_CORRESPONDENT,
     REMOVE_CORRESPONDENT, ADD_TOPIC, REMOVE_TOPIC, CREATE_CASE, CREATE_AND_ALLOCATE_CASE, BULK_CREATE_CASE,
-    ADD_DOCUMENT, REMOVE_DOCUMENT, MANAGE_DOCUMENTS, MANAGE_PEOPLE, ADD_CONTRIBUTION_REQUEST
+    ADD_DOCUMENT, REMOVE_DOCUMENT, MANAGE_DOCUMENTS, MANAGE_PEOPLE, ADD_CONTRIBUTION, ADD_ADDITIONAL_CONTRIBUTION, EDIT_CONTRIBUTION
 } = require('../actions/types');
 
 const formDefinitions = {
@@ -195,15 +195,23 @@ const formDefinitions = {
             MPAM: {
                 ADDREQUEST: {
                     builder: formRepository.contributionRequest,
-                    action: ADD_CONTRIBUTION_REQUEST
+                    action: ADD_CONTRIBUTION
+                },
+                ADDADDITIONALREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    action: ADD_ADDITIONAL_CONTRIBUTION
                 },
                 EDITREQUEST: {
                     builder: formRepository.contributionRequest,
-                    action: ADD_CONTRIBUTION_REQUEST
+                    action: EDIT_CONTRIBUTION
                 },
                 VIEWREQUEST: {
                     builder: formRepository.contributionRequest,
                 },
+                EDIT: {
+                    builder: formRepository.contributionFulfillment,
+                    action: EDIT_CONTRIBUTION
+                }
             }
         }
     }

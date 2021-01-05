@@ -106,7 +106,7 @@ describe('Somu middleware', () => {
                 return { callbackUrl: '/' };
             });
             clients.caseworkService.get.mockImplementation(() => {
-                return Promise.resolve({ data: { data: '[{"test":1}]' } });
+                return Promise.resolve({ data: [{ data: '[{"test":1}]' }] });
             });
             await somuApiResponseMiddleware(req, res, next);
             expect(actionService.performAction).toHaveBeenCalled();
@@ -114,7 +114,7 @@ describe('Somu middleware', () => {
                 'CASE',
                 expect.objectContaining({
                     'caseId': 'CASE_ID',
-                    'somuItemData':  expect.stringMatching(/.*?test.*?/)
+                    'somuTypeItems': expect.stringMatching(/.*?test.*?/)
                 })
             );
             expect(res.status).toHaveBeenCalled();
@@ -124,12 +124,12 @@ describe('Somu middleware', () => {
         });
 
         it('should send the same item back if the somuItem.data contains the SOMU_ITEM_ID', async () => {
-            req = { ...req, body: { uuid: 'SOMU_ITEM_ID' } };
+            req = { ...req, body: { somuItemUuid: 'SOMU_ITEM_ID' } };
             actionService.performAction.mockImplementation(() => {
                 return { callbackUrl: '/' };
             });
             clients.caseworkService.get.mockImplementation(() => {
-                return Promise.resolve({ data: { data: '[{"uuid":"SOMU_ITEM_ID"}]' } });
+                return Promise.resolve({ data: [{ uuid: 'SOMU_ITEM_ID', data: '{"blah":"test"}' }] });
             });
             await somuApiResponseMiddleware(req, res, next);
             expect(actionService.performAction).toHaveBeenCalled();
@@ -137,7 +137,7 @@ describe('Somu middleware', () => {
                 'CASE',
                 expect.objectContaining({
                     'caseId': 'CASE_ID',
-                    'somuItemData':  expect.stringMatching('[{"uuid":"SOMU_ITEM_ID"}]')
+                    'somuTypeItems':  expect.stringMatching('[{"uuid":"SOMU_ITEM_ID"}]')
                 })
             );
             expect(res.status).toHaveBeenCalled();
@@ -160,7 +160,7 @@ describe('Somu middleware', () => {
                 'CASE',
                 expect.objectContaining({
                     'caseId': 'CASE_ID',
-                    'somuItemData':  expect.stringMatching('[{"uuid":"SOMU_ITEM_ID"}]')
+                    'somuTypeItems':  expect.stringMatching('[{"uuid":"SOMU_ITEM_ID"}]')
                 })
             );
             expect(res.status).toHaveBeenCalled();
@@ -192,7 +192,7 @@ describe('Somu middleware', () => {
 
         it('should return undefined if there is no match in the data object with passed in somuItemUuid', async () => {
             clients.caseworkService.get.mockImplementation(() => {
-                return Promise.resolve({ data: { data: '[{"uuid":"SOMU_ITEM_ID2"}]' } });
+                return Promise.resolve({ data: [{ uuid: 'SOMU_ITEM_ID2', data: null }] });
             });
             const result = await getSomuItem({ somuTypeUuid, caseId, user, somuItemUuid });
             expect(result).toBeUndefined();
@@ -200,11 +200,11 @@ describe('Somu middleware', () => {
 
         it('should return the item if the uuid is the same as one passed in', async () => {
             clients.caseworkService.get.mockImplementation(() => {
-                return Promise.resolve({ data: { data: '[{"uuid":"SOMU_ITEM_ID"}]' } });
+                return Promise.resolve({ data: [{ uuid: 'SOMU_ITEM_ID', data: null }] });
             });
             const result = await getSomuItem({ somuTypeUuid, caseId, user, somuItemUuid });
             expect(result).toBeDefined();
-            expect(result).toEqual({ uuid: 'SOMU_ITEM_ID' });
+            expect(result).toEqual({ uuid: 'SOMU_ITEM_ID', data: null, deleted: undefined });
         });
     });
 });

@@ -1,8 +1,8 @@
 const actionService = require('../services/action');
 const { caseworkService } = require('../clients');
-const uuid = require('uuid/v4');
 const User = require('../models/user');
 const getLogger = require('../libs/logger');
+const { somuItemsAdapter } = require('../lists/adapters/somu');
 
 async function getSomuItems({ caseId, somuTypeUuid, user, requestId }) {
     const logger = getLogger(requestId);
@@ -11,17 +11,13 @@ async function getSomuItems({ caseId, somuTypeUuid, user, requestId }) {
         { headers: { ...User.createHeaders(user), 'X-Correlation-Id': requestId } });
 
     if (response) {
-        const mainSomuItem = response.data;
+        const somuItems = response.data;
 
-        if (mainSomuItem && mainSomuItem.data) {
-            try {
-                const parsedData = JSON.parse(mainSomuItem.data);
+        if (somuItems) {
+            const parsedData = await somuItemsAdapter(somuItems, { logger });
 
-                if (Array.isArray(parsedData)) {
-                    return parsedData;
-                }
-            } catch (error) {
-                logger.error('GETSOMUITEMS_FAILED', { message: `Could not parse data: ${mainSomuItem.data}, returning empty array.` });
+            if (Array.isArray(parsedData)) {
+                return parsedData;
             }
         }
     }
@@ -34,25 +30,27 @@ async function getSomuItem({ caseId, somuTypeUuid, somuItemUuid, user, requestId
 }
 
 async function somuApiResponseMiddleware(req, res, next) {
-    const { form, user, params, requestId, body } = req;
+    const { form, user, params, requestId } = req;
 
     const dataItems = await getSomuItems({ ...params, user, requestId });
 
-    if (body.uuid) {
-        let itemIndex = dataItems.findIndex(x => x.uuid === body.uuid);
+    if (params.somuItemUuid) {
+        let itemIndex = dataItems.findIndex(x => x.uuid === params.somuItemUuid);
+
         if (itemIndex !== -1) {
-            dataItems[itemIndex] = { uuid: dataItems[itemIndex].uuid, ...form.data };
+            dataItems[itemIndex] = { ...dataItems[itemIndex], data: { ...form.data } };
         } else {
-            const item = { uuid: uuid(), ...form.data };
+            const item = { data: form.data };
             dataItems.push(item);
         }
     } else {
-        const item = { uuid: uuid(), ...form.data };
+        const item = { data: form.data };
         dataItems.push(item);
     }
 
     try {
-        const { callbackUrl } = await actionService.performAction('CASE', { ...req.params, form, somuItemData: JSON.stringify(dataItems), user });
+        const { callbackUrl } =
+            await actionService.performAction('CASE', { ...req.params, form, somuItemData: JSON.stringify(form.data), somuTypeItems: JSON.stringify(dataItems), user });
         return res.status(200).json({ redirect: callbackUrl });
     } catch (error) {
         next(error);

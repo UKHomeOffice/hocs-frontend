@@ -127,8 +127,26 @@ const bindDisplayElements = fromStaticList => async (stage) => {
         stage.MinSignOffTeamDisplay = await fromStaticList('S_MPAM_MIN_SIGN_OFF_TEAMS', stage.data.MinSignOffTeam, true) || stage.data.MinSignOffTeam;
     }
     stage.deadlineDisplay = formatDate(stage.deadline);
-    if (stage.data && stage.data.DueDate) {
-        stage.stageTypeWithDueDateDisplay = stage.stageTypeDisplay + ' due: ' + formatDate(stage.data.DueDate);
+
+    if (stage.data && stage.data.CaseContributions) {
+        const dueContribution = JSON.parse(stage.data.CaseContributions)
+            .filter(contribution => !contribution.contributionStatus)
+            .map(contribution => contribution.contributionDueDate)
+            .sort()
+            .shift();
+
+        const contributionReceivedStages = [
+            'MPAM_TRIAGE',
+            'MPAM_DRAFT'
+        ];
+
+        if (dueContribution) {
+            stage.stageTypeWithDueDateDisplay = `${stage.stageTypeDisplay} due: ${formatDate(dueContribution)}`;
+        } else if (contributionReceivedStages.includes(stage.stageType)) {
+            stage.stageTypeWithDueDateDisplay = `${stage.stageTypeDisplay} (Contributions Received)`;
+        } else {
+            stage.stageTypeWithDueDateDisplay = stage.stageTypeDisplay;
+        }
     } else {
         stage.stageTypeWithDueDateDisplay = stage.stageTypeDisplay;
     }

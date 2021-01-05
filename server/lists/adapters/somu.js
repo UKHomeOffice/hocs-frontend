@@ -10,12 +10,15 @@ const somuTypesAdapter = async (data, { logger }) => {
 const somuItemsAdapter = async (data, { logger }) => {
     logger.debug('REQUEST_CASE_SOMU_ITEM', { somuItems: data });
 
-    let parsedData = null;
-    if (data.data && !data.deleted) {
-        parsedData = JSON.parse(data.data);
+    if (data && Array.isArray(data)) {
+        const somuItems = data.map(({ uuid, data, deleted }) => {
+            return ({ uuid, data: JSON.parse(data), deleted });
+        });
+
+        return somuItems;
     }
 
-    return ({ uuid: data.uuid, data: parsedData, deleted: data.deleted });
+    return [];
 };
 
 module.exports = {
