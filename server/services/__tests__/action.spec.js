@@ -354,7 +354,7 @@ describe('Action service', () => {
         const testForm = {
             schema: {},
             data: {},
-            action: actionTypes.ADD_CONTRIBUTION_REQUEST
+            action: actionTypes.ADD_CONTRIBUTION
         };
         const response = await actionService.performAction('CASE', {
             caseId: 1234,

@@ -72,7 +72,7 @@ describe('Somu list component', () => {
             type: 'testType',
             schema: { },
             active: true };
-        const somuItems = { uuid: 'test', data: [{ uuid: 'test', businessArea: 'TestBusinessArea', businessUnit: 'TestTeam' }], deleted: false };
+        const somuItems = [{ uuid: 'test', data: { businessArea: 'TestBusinessArea', businessUnit: 'TestTeam' }, deleted: false }];
         const PROPS = {
             ...DEFAULT_PROPS,
             somuType,
@@ -100,7 +100,7 @@ describe('Somu list component', () => {
             type: 'testType',
             schema: { renderers: { table: 'MpamTable' } },
             active: true };
-        const somuItems = { uuid: 'test', data: [{ uuid: 'test', businessArea: 'TestBusinessArea', businessUnit: 'TestTeam' }], deleted: false };
+        const somuItems = [{ uuid: 'test', data: { businessArea: 'TestBusinessArea', businessUnit: 'TestTeam' }, deleted: false }];
         const PROPS = {
             ...DEFAULT_PROPS,
             somuType,
@@ -122,7 +122,7 @@ describe('Somu list component', () => {
             type: 'testType',
             schema: { renderers: { } },
             active: true };
-        const somuItems = { uuid: 'test', data: [{ uuid: 'test', businessArea: 'TestBusinessArea', businessUnit: 'TestTeam' }], deleted: false };
+        const somuItems = [{ uuid: 'test', data: { uuid: 'test', businessArea: 'TestBusinessArea', businessUnit: 'TestTeam' }, deleted: false }];
         const PROPS = {
             ...DEFAULT_PROPS,
             somuType,
@@ -144,7 +144,7 @@ describe('Somu list component', () => {
             type: 'testType',
             schema: { },
             active: true };
-        const somuItems = { uuid: 'test', data: [{ uuid: 'test', businessArea: 'TestBusinessArea', businessUnit: 'TestUnit' }], deleted: false };
+        const somuItems = [{ uuid: 'test', data: { businessArea: 'TestBusinessArea', businessUnit: 'TestUnit' }, deleted: false }];
         const PROPS = {
             ...DEFAULT_PROPS,
             somuType,
@@ -166,7 +166,7 @@ describe('Somu list component', () => {
             type: 'testType',
             schema: { renderers: { table: 'MpamTable' } },
             active: true };
-        const somuItems = { uuid: 'test', data: [{ uuid: 'test', businessArea: 'TestBusinessArea', businessUnit: 'TestTeam' }], deleted: false };
+        const somuItems = [{ uuid: 'test', data: { businessArea: 'TestBusinessArea', businessUnit: 'TestTeam' }, deleted: false }];
         const PROPS = {
             ...DEFAULT_PROPS,
             somuType,
@@ -218,7 +218,7 @@ describe('Somu list component', () => {
         const SomuList = OUTER.props().children;
         mount(<SomuList />);
         expect(MOCK_CALLBACK).toHaveBeenCalledTimes(1);
-        expect(MOCK_CALLBACK).toHaveBeenCalledWith({ [DEFAULT_PROPS.name]: undefined });
+        expect(MOCK_CALLBACK).toHaveBeenCalledWith({ [DEFAULT_PROPS.name]: {} });
     });
 
     it('should include hideSidebar query param on primary and item links', () => {
@@ -227,7 +227,7 @@ describe('Somu list component', () => {
             type: 'testType',
             schema: { renderers: { } },
             active: true };
-        const somuItems = { uuid: 'test', data: [{ uuid: 'test', businessArea: 'TestBusinessArea', businessUnit: 'TestTeam' }], deleted: false };
+        const somuItems = [{ uuid: 'test', data: { businessArea: 'TestBusinessArea', businessUnit: 'TestTeam' }, deleted: false }];
         const PROPS = {
             ...DEFAULT_PROPS,
             somuType,
