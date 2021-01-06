@@ -567,10 +567,6 @@ td {
   }
 }
 
-.strikethrough {
-  text-decoration: line-through;
-}
-
 .time {
   color: #555;
   font-size: 16px;
@@ -757,7 +753,7 @@ $border-colour: govuk-colour("mid-grey");
         .govuk-checkboxes__label {
           opacity: 1;
         }
-        
+
     }
 
     .selectable-details-content {

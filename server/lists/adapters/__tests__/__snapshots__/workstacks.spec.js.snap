@@ -570,3 +570,96 @@ Object {
   "teamMembers": Array [],
 }
 `;
+
+exports[`Workflow Workstack Adapter should transform a stage array to a workflow workstack with a contributionDueDate 1`] = `
+Object {
+  "allocateToTeamEndpoint": "/allocate/team",
+  "allocateToUserEndpoint": "/allocate/user",
+  "allocateToWorkstackEndpoint": "/unallocate/",
+  "columns": Array [],
+  "items": Array [
+    Object {
+      "active": true,
+      "assignedTeamDisplay": "MOCK_TEAM",
+      "assignedUserDisplay": "MOCK_USER",
+      "caseReference": "A/1234568/19",
+      "caseType": "WCS",
+      "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "data": Object {
+        "CaseContributions": "[{\\"contributionDueDate\\":\\"2020-12-12\\"}]",
+      },
+      "deadline": "2200-01-03",
+      "deadlineDisplay": "03/01/2200",
+      "stageType": "A",
+      "stageTypeDisplay": "MOCK_STAGETYPE",
+      "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE due: 12/12/2020",
+      "teamUUID": 2,
+      "userUUID": 2,
+    },
+  ],
+  "label": "MOCK_STAGETYPE",
+  "teamMembers": Array [],
+}
+`;
+
+exports[`Workflow Workstack Adapter should transform a stage array to a workflow workstack with no contributeDueDate and stage type not matching contributionReceivedStages 1`] = `
+Object {
+  "allocateToTeamEndpoint": "/allocate/team",
+  "allocateToUserEndpoint": "/allocate/user",
+  "allocateToWorkstackEndpoint": "/unallocate/",
+  "columns": Array [],
+  "items": Array [
+    Object {
+      "active": true,
+      "assignedTeamDisplay": "MOCK_TEAM",
+      "assignedUserDisplay": "MOCK_USER",
+      "caseReference": "A/1234568/19",
+      "caseType": "WCS",
+      "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "data": Object {
+        "CaseContributions": "[{}]",
+      },
+      "deadline": "2200-01-03",
+      "deadlineDisplay": "03/01/2200",
+      "stageType": "A",
+      "stageTypeDisplay": "MOCK_STAGETYPE",
+      "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE",
+      "teamUUID": 2,
+      "userUUID": 2,
+    },
+  ],
+  "label": "MOCK_STAGETYPE",
+  "teamMembers": Array [],
+}
+`;
+
+exports[`Workflow Workstack Adapter should transform a stage array to a workflow workstack with no contributeDueDate but stage type matching contributionReceivedStages 1`] = `
+Object {
+  "allocateToTeamEndpoint": "/allocate/team",
+  "allocateToUserEndpoint": "/allocate/user",
+  "allocateToWorkstackEndpoint": "/unallocate/",
+  "columns": Array [],
+  "items": Array [
+    Object {
+      "active": true,
+      "assignedTeamDisplay": "MOCK_TEAM",
+      "assignedUserDisplay": "MOCK_USER",
+      "caseReference": "A/1234568/19",
+      "caseType": "WCS",
+      "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "data": Object {
+        "CaseContributions": "[{}]",
+      },
+      "deadline": "2200-01-03",
+      "deadlineDisplay": "03/01/2200",
+      "stageType": "MPAM_TRIAGE",
+      "stageTypeDisplay": "MOCK_STAGETYPE",
+      "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE (Contributions Received)",
+      "teamUUID": 2,
+      "userUUID": 2,
+    },
+  ],
+  "label": "MOCK_STAGETYPE",
+  "teamMembers": Array [],
+}
+`;

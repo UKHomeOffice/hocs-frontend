@@ -1,7 +1,7 @@
 const formRepository = require('../index');
 
 jest.mock('../../../../middleware/somu', () => ({
-    getSomuItem: jest.fn(() => 42)
+    getSomuItem: jest.fn(() => Promise.resolve({ data: {} }))
 }));
 
 jest.mock('../../../../clients', () => ({
