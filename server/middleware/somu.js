@@ -12,13 +12,8 @@ async function getSomuItems({ caseId, somuTypeUuid, user, requestId }) {
 
     if (response) {
         const somuItems = response.data;
-
         if (somuItems) {
-            const parsedData = await somuItemsAdapter(somuItems, { logger });
-
-            if (Array.isArray(parsedData)) {
-                return parsedData;
-            }
+            return await somuItemsAdapter(somuItems, { logger });
         }
     }
     return [];

@@ -1,3 +1,5 @@
+
+
 import React from 'react';
 import WrappedSomuList from '../somu-list.jsx';
 import { MemoryRouter } from 'react-router-dom';
@@ -228,6 +230,76 @@ describe('Somu list component', () => {
             schema: { renderers: { } },
             active: true };
         const somuItems = [{ uuid: 'test', data: { businessArea: 'TestBusinessArea', businessUnit: 'TestTeam' }, deleted: false }];
+        const PROPS = {
+            ...DEFAULT_PROPS,
+            somuType,
+            somuItems,
+            hideSidebar: true,
+            itemLinks: [
+                {
+                    'action': 'remove',
+                    'label': 'Remove'
+                }
+            ],
+            primaryLink: {
+                'action': 'add',
+                'label': 'Add'
+            }
+        };
+
+        const OUTER = shallow(<WrappedSomuList { ...PROPS} />);
+        const SomuList = OUTER.props().children;
+        const WRAPPER = render(
+            <MemoryRouter>
+                <SomuList page={PAGE} />
+            </MemoryRouter>);
+        expect(WRAPPER).toBeDefined();
+        expect(WRAPPER).toMatchSnapshot();
+    });
+
+    it('should render status column correctly', () => {
+        const somuType = { uuid: 'test',
+            caseType: 'tesCaseType',
+            type: 'testType',
+            schema: { renderers: { table: 'MpamTable' } },
+            active: true };
+        const somuItems = [
+            { uuid: 'test',
+                data: {
+                    businessArea: 'TestBusinessArea',
+                    businessUnit: 'TestTeam',
+                    contributionStatus: 'contributionCancelled'
+                },
+                deleted: false },
+            { uuid: 'test',
+                data: {
+                    businessArea: 'TestBusinessArea',
+                    businessUnit: 'TestTeam',
+                    contributionStatus: 'contributionReceived'
+                },
+                deleted: false },
+            { uuid: 'test',
+                data: {
+                    businessArea: 'TestBusinessArea',
+                    businessUnit: 'TestTeam',
+                    contributionDueDate: '2020-01-01'
+                },
+                deleted: false },
+            { uuid: 'test',
+                data: {
+                    businessArea: 'TestBusinessArea',
+                    businessUnit: 'TestTeam',
+                    contributionDueDate:  '2050-01-01'
+                },
+                deleted: false },
+            { uuid: 'test',
+                data: {
+                    businessArea: 'TestBusinessArea',
+                    businessUnit: 'TestTeam',
+                    contributionDueDate: 'xx'
+                },
+                deleted: false }
+        ];
         const PROPS = {
             ...DEFAULT_PROPS,
             somuType,
