@@ -220,7 +220,7 @@ describe('Somu list component', () => {
         const SomuList = OUTER.props().children;
         mount(<SomuList />);
         expect(MOCK_CALLBACK).toHaveBeenCalledTimes(1);
-        expect(MOCK_CALLBACK).toHaveBeenCalledWith({ [DEFAULT_PROPS.name]: {} });
+        expect(MOCK_CALLBACK).toHaveBeenCalledWith({ [DEFAULT_PROPS.name]: [] });
     });
 
     it('should include hideSidebar query param on primary and item links', () => {

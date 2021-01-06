@@ -134,7 +134,7 @@ class SomuList extends Component {
 
     componentDidMount() {
         const { name, somuItems } = this.props;
-        
+
         this.props.updateState({ [name]: somuItems });
     }
 
@@ -227,7 +227,7 @@ SomuList.propTypes = {
 SomuList.defaultProps = {
     choices: [],
     somuType: {},
-    somuItems: {},
+    somuItems: [],
     disabled: false,
     page: {},
     hideSidebar: false,
