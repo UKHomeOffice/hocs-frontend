@@ -130,8 +130,8 @@ const bindDisplayElements = fromStaticList => async (stage) => {
 
     if (stage.data && stage.data.CaseContributions) {
         const dueContribution = JSON.parse(stage.data.CaseContributions)
-            .filter(contribution => !contribution.contributionStatus)
-            .map(contribution => contribution.contributionDueDate)
+            .filter(contribution => !contribution.data.contributionStatus)
+            .map(contribution => contribution.data.contributionDueDate)
             .sort()
             .shift();
 
@@ -140,9 +140,14 @@ const bindDisplayElements = fromStaticList => async (stage) => {
             'MPAM_DRAFT'
         ];
 
-        if (dueContribution) {
+        const contributionRequestedStages = [
+            'MPAM_TRIAGE_REQUESTED_CONTRIBUTION',
+            'MPAM_DRAFT_REQUESTED_CONTRIBUTION'
+        ];
+
+        if (contributionRequestedStages.includes(stage.stageType) && dueContribution) {
             stage.stageTypeWithDueDateDisplay = `${stage.stageTypeDisplay} due: ${formatDate(dueContribution)}`;
-        } else if (contributionReceivedStages.includes(stage.stageType)) {
+        } else if (contributionReceivedStages.includes(stage.stageType) && !dueContribution) {
             stage.stageTypeWithDueDateDisplay = `${stage.stageTypeDisplay} (Contributions Received)`;
         } else {
             stage.stageTypeWithDueDateDisplay = stage.stageTypeDisplay;
