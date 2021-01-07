@@ -25,6 +25,24 @@ describe('Validators', () => {
         });
     });
 
+    describe('Required array validator', () => {
+        it('should reject an empty field', () => {
+            expect(validators.requiredArray({})).not.toEqual(null);
+        });
+        it('should reject with value of undefined', () => {
+            expect(validators.requiredArray({ value: undefined })).not.toEqual(null);
+        });
+        it('should reject with value that is not an array', () => {
+            expect(validators.requiredArray({ value: 'test' })).not.toEqual(null);
+        });
+        it('should reject with value that is an empty array', () => {
+            expect(validators.requiredArray({ value: '[]' })).not.toEqual(null);
+        });
+        it('should accept with value that is an array with atleast 1 item', () => {
+            expect(validators.requiredArray({ value: '[1]' })).toEqual(null);
+        });
+    });
+
     describe('Alphanumeric validator', () => {
         it('should reject symbols', () => {
             expect(validators.alphanumeric({  label: 'test',value: '!@£$' })).toEqual('test must be alphanumeric');

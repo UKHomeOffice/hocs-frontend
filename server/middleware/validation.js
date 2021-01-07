@@ -49,9 +49,23 @@ const validators = {
         }
         return null;
     },
+    requiredArray: ({ label, value, message }) => {
+        let valid = true;
+
+        try {
+            if (!value || JSON.parse(value).length === 0) {
+                valid = false;
+            }
+        } catch (error) {
+            // If the parsing of the value is false, then we know that the value is not an array
+            valid = false;
+        }
+
+        return valid ? null : (message || validationErrors.required(label));
+    },
     required: ({ label, value, message }) => {
         if (!value || value === '') {
-            return message || validationErrors.required(label);
+            return (message || validationErrors.required(label));
         }
         return null;
     },
