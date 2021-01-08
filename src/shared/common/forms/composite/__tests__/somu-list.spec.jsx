@@ -74,7 +74,7 @@ describe('Somu list component', () => {
             type: 'testType',
             schema: { },
             active: true };
-        const somuItems = [{ uuid: 'test', data: { businessArea: 'TestBusinessArea', businessUnit: 'TestTeam' }, deleted: false }];
+        const somuItems = [{ uuid: 'test', data: { contributionBusinessArea: 'TestBusinessArea', contributionBusinessUnit: 'TestTeam' }, deleted: false }];
         const PROPS = {
             ...DEFAULT_PROPS,
             somuType,
@@ -102,7 +102,7 @@ describe('Somu list component', () => {
             type: 'testType',
             schema: { renderers: { table: 'MpamTable' } },
             active: true };
-        const somuItems = [{ uuid: 'test', data: { businessArea: 'TestBusinessArea', businessUnit: 'TestTeam' }, deleted: false }];
+        const somuItems = [{ uuid: 'test', data: { contributionBusinessArea: 'TestBusinessArea', contributionBusinessUnit: 'TestTeam' }, deleted: false }];
         const PROPS = {
             ...DEFAULT_PROPS,
             somuType,
@@ -124,7 +124,7 @@ describe('Somu list component', () => {
             type: 'testType',
             schema: { renderers: { } },
             active: true };
-        const somuItems = [{ uuid: 'test', data: { uuid: 'test', businessArea: 'TestBusinessArea', businessUnit: 'TestTeam' }, deleted: false }];
+        const somuItems = [{ uuid: 'test', data: { uuid: 'test', contributionBusinessArea: 'TestBusinessArea', contributionBusinessUnit: 'TestTeam' }, deleted: false }];
         const PROPS = {
             ...DEFAULT_PROPS,
             somuType,
@@ -146,7 +146,7 @@ describe('Somu list component', () => {
             type: 'testType',
             schema: { },
             active: true };
-        const somuItems = [{ uuid: 'test', data: { businessArea: 'TestBusinessArea', businessUnit: 'TestUnit' }, deleted: false }];
+        const somuItems = [{ uuid: 'test', data: { contributionBusinessArea: 'TestBusinessArea', contributionBusinessUnit: 'TestUnit' }, deleted: false }];
         const PROPS = {
             ...DEFAULT_PROPS,
             somuType,
@@ -168,7 +168,7 @@ describe('Somu list component', () => {
             type: 'testType',
             schema: { renderers: { table: 'MpamTable' } },
             active: true };
-        const somuItems = [{ uuid: 'test', data: { businessArea: 'TestBusinessArea', businessUnit: 'TestTeam' }, deleted: false }];
+        const somuItems = [{ uuid: 'test', data: { contributionBusinessArea: 'TestBusinessArea', contributionBusinessUnit: 'TestTeam' }, deleted: false }];
         const PROPS = {
             ...DEFAULT_PROPS,
             somuType,
@@ -229,7 +229,7 @@ describe('Somu list component', () => {
             type: 'testType',
             schema: { renderers: { } },
             active: true };
-        const somuItems = [{ uuid: 'test', data: { businessArea: 'TestBusinessArea', businessUnit: 'TestTeam' }, deleted: false }];
+        const somuItems = [{ uuid: 'test', data: { contributionBusinessArea: 'TestBusinessArea', contributionBusinessUnit: 'TestTeam' }, deleted: false }];
         const PROPS = {
             ...DEFAULT_PROPS,
             somuType,
@@ -266,36 +266,36 @@ describe('Somu list component', () => {
         const somuItems = [
             { uuid: 'test',
                 data: {
-                    businessArea: 'TestBusinessArea',
-                    businessUnit: 'TestTeam',
+                    contributionBusinessArea: 'TestBusinessArea',
+                    contributionBusinessUnit: 'TestTeam',
                     contributionStatus: 'contributionCancelled'
                 },
                 deleted: false },
             { uuid: 'test',
                 data: {
-                    businessArea: 'TestBusinessArea',
-                    businessUnit: 'TestTeam',
+                    contributionBusinessArea: 'TestBusinessArea',
+                    contributionBusinessUnit: 'TestTeam',
                     contributionStatus: 'contributionReceived'
                 },
                 deleted: false },
             { uuid: 'test',
                 data: {
-                    businessArea: 'TestBusinessArea',
-                    businessUnit: 'TestTeam',
+                    contributionBusinessArea: 'TestBusinessArea',
+                    contributionBusinessUnit: 'TestTeam',
                     contributionDueDate: '2020-01-01'
                 },
                 deleted: false },
             { uuid: 'test',
                 data: {
-                    businessArea: 'TestBusinessArea',
-                    businessUnit: 'TestTeam',
+                    contributionBusinessArea: 'TestBusinessArea',
+                    contributionBusinessUnit: 'TestTeam',
                     contributionDueDate:  '2050-01-01'
                 },
                 deleted: false },
             { uuid: 'test',
                 data: {
-                    businessArea: 'TestBusinessArea',
-                    businessUnit: 'TestTeam',
+                    contributionBusinessArea: 'TestBusinessArea',
+                    contributionBusinessUnit: 'TestTeam',
                     contributionDueDate: 'xx'
                 },
                 deleted: false }

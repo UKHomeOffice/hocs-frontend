@@ -130,7 +130,7 @@ const bindDisplayElements = fromStaticList => async (stage) => {
 
     if (stage.data && stage.data.CaseContributions) {
         const dueContribution = JSON.parse(stage.data.CaseContributions)
-            .filter(contribution => !contribution.data.contributionStatus)
+            .filter(contribution => contribution.data && !contribution.data.contributionStatus)
             .map(contribution => contribution.data.contributionDueDate)
             .sort()
             .shift();

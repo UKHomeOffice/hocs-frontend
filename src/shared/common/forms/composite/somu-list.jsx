@@ -54,7 +54,7 @@ class SomuTableRenderer {
 
     renderMpamContribution(somuItem) {
         const { choices } = this.state;
-        const title = `${somuItem.businessArea} - ${this.loadValue(somuItem.businessUnit, choices)}`;
+        const title = `${somuItem.contributionBusinessArea} - ${this.loadValue(somuItem.contributionBusinessUnit, choices)}`;
         const contributionStatus = this.getContributionStatus(somuItem);
 
         return (<>
