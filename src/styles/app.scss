@@ -413,6 +413,13 @@ td {
             }
           }
       }
+
+      &.govuk-table__cell--truncated {
+        max-width: 500px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
   }
 
   td,th {

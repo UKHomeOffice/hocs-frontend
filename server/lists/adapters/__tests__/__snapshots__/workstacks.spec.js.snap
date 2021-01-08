@@ -110,6 +110,8 @@ Object {
     Object {
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
+      "assignedTopic": "MOCK_TOPIC",
+      "assignedTopicDisplay": "MOCK_TOPIC",
       "assignedUserDisplay": "MOCK_USER",
       "caseReference": "A/1234567/19",
       "caseType": "DEFAULT",
@@ -126,6 +128,8 @@ Object {
     Object {
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
+      "assignedTopic": "MOCK_TOPIC",
+      "assignedTopicDisplay": "MOCK_TOPIC",
       "assignedUserDisplay": "MOCK_USER",
       "caseReference": "A/1234567/19",
       "caseType": "DEFAULT",
@@ -142,6 +146,8 @@ Object {
     Object {
       "active": false,
       "assignedTeamDisplay": "MOCK_TEAM",
+      "assignedTopic": "MOCK_TOPIC",
+      "assignedTopicDisplay": "MOCK_TOPIC",
       "assignedUserDisplay": "MOCK_USER",
       "caseReference": "A/1234567/19",
       "caseType": "DEFAULT",
@@ -158,6 +164,8 @@ Object {
     Object {
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
+      "assignedTopic": "MOCK_TOPIC",
+      "assignedTopicDisplay": "MOCK_TOPIC",
       "caseReference": "A/1234568/19",
       "caseType": "DEFAULT",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
@@ -322,6 +330,8 @@ Object {
     Object {
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
+      "assignedTopic": "MOCK_TOPIC",
+      "assignedTopicDisplay": "MOCK_TOPIC",
       "caseReference": "A/1234568/19",
       "caseType": "DEFAULT",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
@@ -368,6 +378,8 @@ Object {
     Object {
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
+      "assignedTopic": "MOCK_TOPIC",
+      "assignedTopicDisplay": "MOCK_TOPIC",
       "assignedUserDisplay": "MOCK_USER",
       "caseType": "DEFAULT",
       "caseTypeDisplayFull": "MOCK_CASETYPE",

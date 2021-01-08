@@ -69,7 +69,7 @@ Array [
                       <th
                         class="govuk-link"
                       >
-                        Team
+                        Topic
                       </th>
                       <th
                         class="govuk-link"
@@ -149,9 +149,10 @@ Array [
                         User1
                       </td>
                       <td
-                        class="govuk-table__cell"
+                        class="govuk-table__cell govuk-table__cell--truncated"
+                        title="topic1"
                       >
-                        team1
+                        topic1
                       </td>
                       <td
                         class="govuk-table__cell"
@@ -225,9 +226,10 @@ Array [
                         User2
                       </td>
                       <td
-                        class="govuk-table__cell"
+                        class="govuk-table__cell govuk-table__cell--truncated"
+                        title="topic2"
                       >
-                        team2
+                        topic2
                       </td>
                       <td
                         class="govuk-table__cell"
@@ -297,9 +299,10 @@ Array [
                         User3
                       </td>
                       <td
-                        class="govuk-table__cell"
+                        class="govuk-table__cell govuk-table__cell--truncated"
+                        title="topic3"
                       >
-                        team3
+                        topic3
                       </td>
                       <td
                         class="govuk-table__cell"
@@ -369,10 +372,8 @@ Array [
                         User4
                       </td>
                       <td
-                        class="govuk-table__cell"
-                      >
-                        team4
-                      </td>
+                        class="govuk-table__cell govuk-table__cell--truncated"
+                      />
                       <td
                         class="govuk-table__cell"
                       />
@@ -445,10 +446,8 @@ Array [
                         User5
                       </td>
                       <td
-                        class="govuk-table__cell"
-                      >
-                        team5
-                      </td>
+                        class="govuk-table__cell govuk-table__cell--truncated"
+                      />
                       <td
                         class="govuk-table__cell"
                       />
@@ -576,10 +575,10 @@ exports[`Workstack component should render with filtering 1`] = `
             },
             Object {
               "dataAdapter": null,
-              "dataValueKey": "assignedTeamDisplay",
-              "displayName": "Team",
+              "dataValueKey": "assignedTopicDisplay",
+              "displayName": "Topic",
               "isFilterable": true,
-              "renderer": null,
+              "renderer": "truncateText",
             },
             Object {
               "dataAdapter": "localDate",
@@ -607,7 +606,7 @@ exports[`Workstack component should render with filtering 1`] = `
         items={
           Array [
             Object {
-              "assignedTeamDisplay": "team1",
+              "assignedTopicDisplay": "topic1",
               "assignedUserDisplay": "User1",
               "caseReference": "case1",
               "caseUUID": "case_uuid-123",
@@ -620,7 +619,7 @@ exports[`Workstack component should render with filtering 1`] = `
               "uuid": "stage_uuid-456",
             },
             Object {
-              "assignedTeamDisplay": "team2",
+              "assignedTopicDisplay": "topic2",
               "assignedUserDisplay": "User2",
               "caseReference": "case2",
               "caseUUID": "case_uuid-789",
@@ -633,7 +632,7 @@ exports[`Workstack component should render with filtering 1`] = `
               "uuid": "stage_uuid-432",
             },
             Object {
-              "assignedTeamDisplay": "team3",
+              "assignedTopicDisplay": "topic3",
               "assignedUserDisplay": "User3",
               "caseReference": "case3",
               "caseUUID": "case_uuid-abc",
@@ -804,10 +803,10 @@ exports[`Workstack component should render with filtering 1`] = `
                             </th>
                             <th
                               className="govuk-link"
-                              key="Team"
+                              key="Topic"
                               onClick={[Function]}
                             >
-                              Team
+                              Topic
                             </th>
                             <th
                               className="govuk-link"
@@ -913,10 +912,11 @@ exports[`Workstack component should render with filtering 1`] = `
                               User1
                             </td>
                             <td
-                              className="govuk-table__cell"
-                              key="stage_uuid-456assignedTeamDisplay"
+                              className="govuk-table__cell govuk-table__cell--truncated"
+                              key="stage_uuid-456assignedTopicDisplay"
+                              title="topic1"
                             >
-                              team1
+                              topic1
                             </td>
                             <td
                               className="govuk-table__cell"
@@ -1056,10 +1056,10 @@ exports[`Workstack component should sort descending when the column heading is c
             },
             Object {
               "dataAdapter": null,
-              "dataValueKey": "assignedTeamDisplay",
-              "displayName": "Team",
+              "dataValueKey": "assignedTopicDisplay",
+              "displayName": "Topic",
               "isFilterable": true,
-              "renderer": null,
+              "renderer": "truncateText",
             },
             Object {
               "dataAdapter": "localDate",
@@ -1087,7 +1087,7 @@ exports[`Workstack component should sort descending when the column heading is c
         items={
           Array [
             Object {
-              "assignedTeamDisplay": "team1",
+              "assignedTopicDisplay": "topic1",
               "assignedUserDisplay": "User1",
               "caseReference": "case1",
               "caseUUID": "case_uuid-123",
@@ -1100,7 +1100,7 @@ exports[`Workstack component should sort descending when the column heading is c
               "uuid": "stage_uuid-456",
             },
             Object {
-              "assignedTeamDisplay": "team2",
+              "assignedTopicDisplay": "topic2",
               "assignedUserDisplay": "User2",
               "caseReference": "case2",
               "caseUUID": "case_uuid-789",
@@ -1113,7 +1113,7 @@ exports[`Workstack component should sort descending when the column heading is c
               "uuid": "stage_uuid-432",
             },
             Object {
-              "assignedTeamDisplay": "team3",
+              "assignedTopicDisplay": "topic3",
               "assignedUserDisplay": "User3",
               "caseReference": "case3",
               "caseUUID": "case_uuid-abc",
@@ -1268,10 +1268,10 @@ exports[`Workstack component should sort descending when the column heading is c
                             </th>
                             <th
                               className="govuk-link"
-                              key="Team"
+                              key="Topic"
                               onClick={[Function]}
                             >
-                              Team
+                              Topic
                             </th>
                             <th
                               className="govuk-link"
@@ -1377,11 +1377,9 @@ exports[`Workstack component should sort descending when the column heading is c
                               User5
                             </td>
                             <td
-                              className="govuk-table__cell"
-                              key="stage_uuid-446assignedTeamDisplay"
-                            >
-                              team5
-                            </td>
+                              className="govuk-table__cell govuk-table__cell--truncated"
+                              key="stage_uuid-446assignedTopicDisplay"
+                            />
                             <td
                               className="govuk-table__cell"
                               key="stage_uuid-446TEST,created"
@@ -1475,11 +1473,9 @@ exports[`Workstack component should sort descending when the column heading is c
                               User4
                             </td>
                             <td
-                              className="govuk-table__cell"
-                              key="stage_uuid-445assignedTeamDisplay"
-                            >
-                              team4
-                            </td>
+                              className="govuk-table__cell govuk-table__cell--truncated"
+                              key="stage_uuid-445assignedTopicDisplay"
+                            />
                             <td
                               className="govuk-table__cell"
                               key="stage_uuid-445TEST,created"
@@ -1575,10 +1571,11 @@ exports[`Workstack component should sort descending when the column heading is c
                               User3
                             </td>
                             <td
-                              className="govuk-table__cell"
-                              key="stage_uuid-444assignedTeamDisplay"
+                              className="govuk-table__cell govuk-table__cell--truncated"
+                              key="stage_uuid-444assignedTopicDisplay"
+                              title="topic3"
                             >
-                              team3
+                              topic3
                             </td>
                             <td
                               className="govuk-table__cell"
@@ -1671,10 +1668,11 @@ exports[`Workstack component should sort descending when the column heading is c
                               User2
                             </td>
                             <td
-                              className="govuk-table__cell"
-                              key="stage_uuid-432assignedTeamDisplay"
+                              className="govuk-table__cell govuk-table__cell--truncated"
+                              key="stage_uuid-432assignedTopicDisplay"
+                              title="topic2"
                             >
-                              team2
+                              topic2
                             </td>
                             <td
                               className="govuk-table__cell"
@@ -1767,10 +1765,11 @@ exports[`Workstack component should sort descending when the column heading is c
                               User1
                             </td>
                             <td
-                              className="govuk-table__cell"
-                              key="stage_uuid-456assignedTeamDisplay"
+                              className="govuk-table__cell govuk-table__cell--truncated"
+                              key="stage_uuid-456assignedTopicDisplay"
+                              title="topic1"
                             >
-                              team1
+                              topic1
                             </td>
                             <td
                               className="govuk-table__cell"
@@ -1910,10 +1909,10 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
             },
             Object {
               "dataAdapter": null,
-              "dataValueKey": "assignedTeamDisplay",
-              "displayName": "Team",
+              "dataValueKey": "assignedTopicDisplay",
+              "displayName": "Topic",
               "isFilterable": true,
-              "renderer": null,
+              "renderer": "truncateText",
             },
             Object {
               "dataAdapter": "localDate",
@@ -1941,7 +1940,7 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
         items={
           Array [
             Object {
-              "assignedTeamDisplay": "team1",
+              "assignedTopicDisplay": "topic1",
               "assignedUserDisplay": "User1",
               "caseReference": "case1",
               "caseUUID": "case_uuid-123",
@@ -1954,7 +1953,7 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
               "uuid": "stage_uuid-456",
             },
             Object {
-              "assignedTeamDisplay": "team2",
+              "assignedTopicDisplay": "topic2",
               "assignedUserDisplay": "User2",
               "caseReference": "case2",
               "caseUUID": "case_uuid-789",
@@ -1967,7 +1966,7 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
               "uuid": "stage_uuid-432",
             },
             Object {
-              "assignedTeamDisplay": "team3",
+              "assignedTopicDisplay": "topic3",
               "assignedUserDisplay": "User3",
               "caseReference": "case3",
               "caseUUID": "case_uuid-abc",
@@ -2122,10 +2121,10 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                             </th>
                             <th
                               className="govuk-link"
-                              key="Team"
+                              key="Topic"
                               onClick={[Function]}
                             >
-                              Team
+                              Topic
                             </th>
                             <th
                               className="govuk-link"
@@ -2231,10 +2230,11 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                               User1
                             </td>
                             <td
-                              className="govuk-table__cell"
-                              key="stage_uuid-456assignedTeamDisplay"
+                              className="govuk-table__cell govuk-table__cell--truncated"
+                              key="stage_uuid-456assignedTopicDisplay"
+                              title="topic1"
                             >
-                              team1
+                              topic1
                             </td>
                             <td
                               className="govuk-table__cell"
@@ -2331,10 +2331,11 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                               User2
                             </td>
                             <td
-                              className="govuk-table__cell"
-                              key="stage_uuid-432assignedTeamDisplay"
+                              className="govuk-table__cell govuk-table__cell--truncated"
+                              key="stage_uuid-432assignedTopicDisplay"
+                              title="topic2"
                             >
-                              team2
+                              topic2
                             </td>
                             <td
                               className="govuk-table__cell"
@@ -2427,10 +2428,11 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                               User3
                             </td>
                             <td
-                              className="govuk-table__cell"
-                              key="stage_uuid-444assignedTeamDisplay"
+                              className="govuk-table__cell govuk-table__cell--truncated"
+                              key="stage_uuid-444assignedTopicDisplay"
+                              title="topic3"
                             >
-                              team3
+                              topic3
                             </td>
                             <td
                               className="govuk-table__cell"
@@ -2523,11 +2525,9 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                               User4
                             </td>
                             <td
-                              className="govuk-table__cell"
-                              key="stage_uuid-445assignedTeamDisplay"
-                            >
-                              team4
-                            </td>
+                              className="govuk-table__cell govuk-table__cell--truncated"
+                              key="stage_uuid-445assignedTopicDisplay"
+                            />
                             <td
                               className="govuk-table__cell"
                               key="stage_uuid-445TEST,created"
@@ -2623,11 +2623,9 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                               User5
                             </td>
                             <td
-                              className="govuk-table__cell"
-                              key="stage_uuid-446assignedTeamDisplay"
-                            >
-                              team5
-                            </td>
+                              className="govuk-table__cell govuk-table__cell--truncated"
+                              key="stage_uuid-446assignedTopicDisplay"
+                            />
                             <td
                               className="govuk-table__cell"
                               key="stage_uuid-446TEST,created"
