@@ -592,7 +592,7 @@ Object {
       "deadlineDisplay": "03/01/2200",
       "stageType": "A",
       "stageTypeDisplay": "MOCK_STAGETYPE",
-      "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE due: 12/12/2020",
+      "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE",
       "teamUUID": 2,
       "userUUID": 2,
     },
