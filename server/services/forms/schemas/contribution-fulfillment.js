@@ -8,7 +8,7 @@ module.exports = async options => {
     return Form()
         .withTitle('Contribution Request Fulfillment')
         .withField(
-            Component('dropdown', 'businessArea')
+            Component('dropdown', 'contributionBusinessArea')
                 .withValidator('required', 'Business area is required')
                 .withProp('label', 'Business Area')
                 .withProp('disabled', true)
@@ -24,18 +24,18 @@ module.exports = async options => {
                 .build()
         )
         .withField(
-            Component('dropdown', 'businessUnit')
+            Component('dropdown', 'contributionBusinessUnit')
                 .withValidator('required', 'Business unit is required')
                 .withProp('label', 'Business Unit')
                 .withProp('disabled', true)
                 .withProp('conditionChoices', [
-                    ConditionChoice('businessArea', 'UKVI', 'S_MPAM_BUS_UNITS_1'),
-                    ConditionChoice('businessArea', 'BF', 'S_MPAM_BUS_UNITS_2'),
-                    ConditionChoice('businessArea', 'IE', 'S_MPAM_BUS_UNITS_3'),
-                    ConditionChoice('businessArea', 'EUSS', 'S_MPAM_BUS_UNITS_4'),
-                    ConditionChoice('businessArea', 'HMPO', 'S_MPAM_BUS_UNITS_5'),
-                    ConditionChoice('businessArea', 'Windrush', 'S_MPAM_BUS_UNITS_6'),
-                    ConditionChoice('businessArea', 'Coronavirus', 'S_MPAM_BUS_UNITS_7')
+                    ConditionChoice('contributionBusinessArea', 'UKVI', 'S_MPAM_BUS_UNITS_1'),
+                    ConditionChoice('contributionBusinessArea', 'BF', 'S_MPAM_BUS_UNITS_2'),
+                    ConditionChoice('contributionBusinessArea', 'IE', 'S_MPAM_BUS_UNITS_3'),
+                    ConditionChoice('contributionBusinessArea', 'EUSS', 'S_MPAM_BUS_UNITS_4'),
+                    ConditionChoice('contributionBusinessArea', 'HMPO', 'S_MPAM_BUS_UNITS_5'),
+                    ConditionChoice('contributionBusinessArea', 'Windrush', 'S_MPAM_BUS_UNITS_6'),
+                    ConditionChoice('contributionBusinessArea', 'Coronavirus', 'S_MPAM_BUS_UNITS_7')
                 ])
                 .build()
         )

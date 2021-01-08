@@ -41,11 +41,10 @@ const renderSomuListItems = async ( { caseType, type, choices }, value, fromStat
 const parseMultipleContributions = async (value, choices, fromStaticList) => {
     const contributions = JSON.parse(value);
     const contributionStrings = await Promise.all(contributions.map(async (contribution) => {
-        console.log(contribution);
-        const { contributionStatus, contributionDueDate, businessUnit, businessArea } = contribution.data;
-        const status = getContributionStatusString({contributionDueDate, contributionStatus });
-        const values = await loadValue(businessUnit, choices, fromStaticList);
-        const title = `${businessArea} - ${values} (${status})`;
+        const { contributionStatus, contributionDueDate, contributionBusinessUnit, contributionBusinessArea } = contribution.data;
+        const status = getContributionStatusString({ contributionDueDate, contributionStatus });
+        const values = await loadValue(contributionBusinessUnit, choices, fromStaticList);
+        const title = `${contributionBusinessArea} - ${values} (${status})`;
         return title;
     }));
 
