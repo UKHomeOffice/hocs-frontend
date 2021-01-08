@@ -620,4 +620,95 @@ describe('Workflow Workstack Adapter', () => {
         });
         expect(result).toMatchSnapshot();
     });
+
+    it('should transform a stage array to a workflow workstack with a contributionDueDate',
+        async () => {
+            const mockData = {
+                stages: [
+                    {
+                        teamUUID: 2,
+                        caseType: 'WCS',
+                        stageType: 'A',
+                        userUUID: 2,
+                        deadline: '2200-01-03',
+                        caseReference: 'A/1234568/19',
+                        active: true,
+                        data: {
+                            CaseContributions: '[{"contributionDueDate":"2020-12-12"}]'
+                        }
+                    }
+                ]
+            };
+
+            const result = await stageAdapter(mockData, {
+                user: mockUser,
+                fromStaticList: mockFromStaticList,
+                logger: mockLogger,
+                teamId: 2,
+                workflowId: 'WCS',
+                stageId: 'A',
+                configuration: mockConfiguration
+            });
+            expect(result).toMatchSnapshot();
+        });
+
+    it('should transform a stage array to a workflow workstack with no contributeDueDate but stage type matching contributionReceivedStages', async () => {
+        const mockData = {
+            stages: [
+                {
+                    teamUUID: 2,
+                    caseType: 'WCS',
+                    stageType: 'MPAM_TRIAGE',
+                    userUUID: 2,
+                    deadline: '2200-01-03',
+                    caseReference: 'A/1234568/19',
+                    active: true,
+                    data: {
+                        CaseContributions: '[{}]'
+                    }
+                }
+            ]
+        };
+
+        const result = await stageAdapter(mockData, {
+            user: mockUser,
+            fromStaticList: mockFromStaticList,
+            logger: mockLogger,
+            teamId: 2,
+            workflowId: 'WCS',
+            stageId: 'MPAM_TRIAGE',
+            configuration: mockConfiguration
+        });
+        expect(result).toMatchSnapshot();
+    });
+
+    it('should transform a stage array to a workflow workstack with no contributeDueDate and stage type not matching contributionReceivedStages', async () => {
+        const mockData = {
+            stages: [
+                {
+                    teamUUID: 2,
+                    caseType: 'WCS',
+                    stageType: 'A',
+                    userUUID: 2,
+                    deadline: '2200-01-03',
+                    caseReference: 'A/1234568/19',
+                    active: true,
+                    data: {
+                        CaseContributions: '[{}]'
+                    }
+                }
+            ]
+        };
+
+        const result = await stageAdapter(mockData, {
+            user: mockUser,
+            fromStaticList: mockFromStaticList,
+            logger: mockLogger,
+            teamId: 2,
+            workflowId: 'WCS',
+            stageId: 'A',
+            configuration: mockConfiguration
+        });
+        expect(result).toMatchSnapshot();
+    });
 });

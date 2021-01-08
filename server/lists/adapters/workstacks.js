@@ -1,4 +1,4 @@
-const { addDays } = require('../../libs/dateHelpers');
+const { addDays, formatDate } = require('../../libs/dateHelpers');
 
 const byUser = (userId) => ({ userUUID }) => userUUID === userId;
 const byCaseReference = (a, b) => a.caseReference.localeCompare(b.caseReference);
@@ -109,16 +109,6 @@ const returnMyCasesWorkstackColumns = (configuration, workstackData) => {
     return getColumnsForMyCases.workstackColumns;
 };
 
-const parseDate = (rawDate) => {
-    const [date] = rawDate.match(/[0-9]{4}-[0-1][0-9]-[0-3][0-9]/g) || [];
-    if (!date) {
-        return null;
-    }
-    const [year, month, day] = date.split('-');
-    return `${day}/${month}/${year}`;
-};
-const formatDate = (date) => date ? parseDate(date) : null;
-
 const bindDisplayElements = fromStaticList => async (stage) => {
     stage.assignedTeamDisplay = await fromStaticList('S_TEAMS', stage.teamUUID);
     stage.caseTypeDisplayFull = await fromStaticList('S_CASETYPES', stage.caseType);
@@ -137,8 +127,31 @@ const bindDisplayElements = fromStaticList => async (stage) => {
         stage.MinSignOffTeamDisplay = await fromStaticList('S_MPAM_MIN_SIGN_OFF_TEAMS', stage.data.MinSignOffTeam, true) || stage.data.MinSignOffTeam;
     }
     stage.deadlineDisplay = formatDate(stage.deadline);
-    if (stage.data && stage.data.DueDate) {
-        stage.stageTypeWithDueDateDisplay = stage.stageTypeDisplay + ' due: ' + formatDate(stage.data.DueDate);
+
+    if (stage.data && stage.data.CaseContributions) {
+        const dueContribution = JSON.parse(stage.data.CaseContributions)
+            .filter(contribution => contribution.data && !contribution.data.contributionStatus)
+            .map(contribution => contribution.data.contributionDueDate)
+            .sort()
+            .shift();
+
+        const contributionReceivedStages = [
+            'MPAM_TRIAGE',
+            'MPAM_DRAFT'
+        ];
+
+        const contributionRequestedStages = [
+            'MPAM_TRIAGE_REQUESTED_CONTRIBUTION',
+            'MPAM_DRAFT_REQUESTED_CONTRIBUTION'
+        ];
+
+        if (contributionRequestedStages.includes(stage.stageType) && dueContribution) {
+            stage.stageTypeWithDueDateDisplay = `${stage.stageTypeDisplay} due: ${formatDate(dueContribution)}`;
+        } else if (contributionReceivedStages.includes(stage.stageType) && !dueContribution) {
+            stage.stageTypeWithDueDateDisplay = `${stage.stageTypeDisplay} (Contributions Received)`;
+        } else {
+            stage.stageTypeWithDueDateDisplay = stage.stageTypeDisplay;
+        }
     } else {
         stage.stageTypeWithDueDateDisplay = stage.stageTypeDisplay;
     }

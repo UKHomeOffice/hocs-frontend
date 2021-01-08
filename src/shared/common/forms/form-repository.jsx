@@ -3,6 +3,7 @@ import TextInput from './text.jsx';
 import MappedText from './mapped-text.jsx';
 import MappedDisplay from './mapped-display.jsx';
 import ChangeLink from './composite/change-link.jsx';
+import SomuList from './composite/somu-list.jsx';
 import Radio from './radio-group.jsx';
 import DateInput from './date.jsx';
 import Checkbox from './checkbox-group.jsx';
@@ -91,6 +92,14 @@ export function formComponentFactory(field, options) {
             return renderFormComponent(AddDocument, { key, config, errors, callback });
         case 'entity-list':
             return renderFormComponent(EntityList, {
+                key,
+                config: { ...config, baseUrl: options.baseUrl },
+                data,
+                errors,
+                callback
+            });
+        case 'somu-list':
+            return renderFormComponent(SomuList, {
                 key,
                 config: { ...config, baseUrl: options.baseUrl },
                 data,

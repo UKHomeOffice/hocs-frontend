@@ -364,4 +364,119 @@ describe('when the hydrate method is called', () => {
             expect(req.form.schema.fields[0].props.sections[0].items[1].props.items).toEqual(items);
         });
     });
+
+    describe('and the schema has populated somu type and somu item containing items', () => {
+        const somuType = {
+            uuid: '00000000-0000-0000-0000-000000000000', 
+            caseType: 'TESTCASETYPE',
+            type: 'TEST',
+            active: true
+        };
+
+        const somuItems = {
+            uuid: '00000000-0000-0000-0000-000000000000', 
+            data: '{}',
+            deleted: true
+        };
+
+        const choices = [{
+            "value":"Value",
+            "label":"Label"
+        }];
+
+        const formSchema = {
+            form: {
+                schema: {
+                    fields: [{
+                        props: {
+                            somuType: {
+                                caseType: 'TESTCASETYPE',
+                                type: 'TEST',
+                                choices: 'TESTCHOICES'
+                            }
+                        }
+                    }],
+                }
+            }
+        };
+        const next = jest.fn();
+
+        it('should hydrate the items', async () => {
+            const req = { ...formSchema, listService: {
+                getFromStaticList: () => Promise.resolve(somuType),
+                fetch: jest.fn(async (list, _) => {
+                    if (list === 'TESTCHOICES') {
+                        return Promise.resolve(choices);
+                    } else {
+                        return Promise.resolve(somuItems);
+                    }
+                })
+            } };
+
+            await hydrateFields(req, null, next);
+
+            expect(next).toHaveBeenCalled();
+            expect(req.form.schema.fields[0].props.choices).toEqual(choices);
+            expect(req.form.schema.fields[0].props.somuType).toEqual(somuType);
+            expect(req.form.schema.fields[0].props.somuItems).toEqual(somuItems);
+        });
+
+        it('should call next with error if somu type cannot be retrieved', async () => {
+            const req = { ...formSchema, listService: {
+                getFromStaticList: () => Promise.reject({
+                    response: {
+                        status: 404
+                    }
+                }),
+                fetch: jest.fn(async (list, _) => {
+                    if (list === 'TESTCHOICES') {
+                        return Promise.resolve(choices);
+                    } else {
+                        return Promise.resolve(somuItems);
+                    }
+                })
+            } };
+
+            await hydrateFields(req, null, next);
+
+            expect(next).toHaveBeenCalled();
+            expect(next).toHaveBeenCalledWith(new FormServiceError('Failed to fetch form'));
+        });
+
+        it('should call next with error if choices cannot be retrieved', async () => {
+            const req = { ...formSchema, listService: {
+                getFromStaticList: () => Promise.resolve(somuType),
+                fetch: jest.fn(async (list, _) => {
+                    if (list === 'TESTCHOICES') {
+                        return Promise.reject({ response: { status: 404 } });
+                    } else {
+                        return Promise.resolve(somuItems);
+                    }
+                })
+            } };
+
+            await hydrateFields(req, null, next);
+
+            expect(next).toHaveBeenCalled();
+            expect(next).toHaveBeenCalledWith(new FormServiceError('Failed to fetch form'));
+        });
+
+        it('should call next with error if somu items cannot be retrieved', async () => {
+            const req = { ...formSchema, listService: {
+                getFromStaticList: () => Promise.resolve(somuType),
+                fetch: jest.fn(async (list, _) => {
+                    if (list === 'TESTCHOICES') {
+                        return Promise.resolve(choices);
+                    } else {
+                        return Promise.reject({ response: { status: 404 } });
+                    }
+                })
+            } };
+
+            await hydrateFields(req, null, next);
+
+            expect(next).toHaveBeenCalled();
+            expect(next).toHaveBeenCalledWith(new FormServiceError('Failed to fetch form'));
+        });
+    });
 });

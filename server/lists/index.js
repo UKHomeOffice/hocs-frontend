@@ -23,6 +23,7 @@ const {
     correspondentTypeAdapter,
     caseCorrespondentsAllAdapter
 } = require('./adapters/correspondents');
+const { somuTypesAdapter, somuItemsAdapter } = require('./adapters/somu');
 
 module.exports = {
     lists: {
@@ -365,6 +366,18 @@ module.exports = {
             client: 'INFO',
             endpoint: '/team/topic/stage/DCU_DTEN_INITIAL_DRAFT',
             type: listService.types.DYNAMIC,
+        },
+        SOMU_TYPES: {
+            client: 'INFO',
+            endpoint: '/somuType',
+            type: listService.types.STATIC,
+            adapter: somuTypesAdapter
+        },
+        CASE_SOMU_ITEM: {
+            client: 'CASEWORK',
+            endpoint: '/case/${caseId}/item/${somuTypeId}',
+            type: listService.types.DYNAMIC,
+            adapter: somuItemsAdapter
         },
     },
     clients: {
