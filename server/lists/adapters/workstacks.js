@@ -109,6 +109,11 @@ const returnMyCasesWorkstackColumns = (configuration, workstackData) => {
     return getColumnsForMyCases.workstackColumns;
 };
 
+const getCorrespondentsNameByType = (correspondents, types) =>
+    correspondents.correspondents.filter(correspondent => types.includes(correspondent.type))
+        .map(correspondent => correspondent.fullname)
+        .join(', ');
+
 const bindDisplayElements = fromStaticList => async (stage) => {
     stage.assignedTeamDisplay = await fromStaticList('S_TEAMS', stage.teamUUID);
     stage.caseTypeDisplayFull = await fromStaticList('S_CASETYPES', stage.caseType);
@@ -155,6 +160,12 @@ const bindDisplayElements = fromStaticList => async (stage) => {
     } else {
         stage.stageTypeWithDueDateDisplay = stage.stageTypeDisplay;
     }
+
+    if (stage.correspondents && stage.correspondents.correspondents) {
+        stage.memberCorrespondentDisplay = getCorrespondentsNameByType(stage.correspondents, ['MEMBER']);
+        stage.applicantOrConstituentCorrespondentDisplay = getCorrespondentsNameByType(stage.correspondents, ['APPLICANT', 'CONSTITUENT']);
+    }
+
     return stage;
 };
 
