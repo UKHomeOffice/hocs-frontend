@@ -1,4 +1,4 @@
-const querystring = require('querystring');
+const querystring = require('querystring'); // node core module
 const { s3 } = require('../libs/aws');
 const isProduction = require('../config').isProduction;
 const { S3: { BUCKET_NAME, SSE_KEY } } = require('../config').forContext('AWS');
