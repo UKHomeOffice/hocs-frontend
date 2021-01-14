@@ -11,7 +11,6 @@ module.exports = async options => {
             Component('dropdown', 'contributionBusinessArea')
                 .withValidator('required', 'Business area is required')
                 .withProp('label', 'Business Area')
-                .withProp('disabled', true)
                 .withProp('choices', [
                     Choice('UKVI', 'UKVI'),
                     Choice('BF', 'BF'),
@@ -27,7 +26,6 @@ module.exports = async options => {
             Component('dropdown', 'contributionBusinessUnit')
                 .withValidator('required', 'Business unit is required')
                 .withProp('label', 'Business Unit')
-                .withProp('disabled', true)
                 .withProp('conditionChoices', [
                     ConditionChoice('contributionBusinessArea', 'UKVI', 'S_MPAM_BUS_UNITS_1'),
                     ConditionChoice('contributionBusinessArea', 'BF', 'S_MPAM_BUS_UNITS_2'),
@@ -45,7 +43,6 @@ module.exports = async options => {
                 .withValidator('isValidDate', 'Contribution request date must be a valid date')
                 .withValidator('isBeforeToday', 'Contribution request date must be in the past')
                 .withProp('label', 'Contribution request date')
-                .withProp('disabled', true)
                 .build()
         )
         .withField(
@@ -58,8 +55,8 @@ module.exports = async options => {
         )
         .withField(
             Component('text-area', 'contributionRequestNote')
+                .withValidator('required', 'What you are requesting is required')
                 .withProp('label', 'What you are requesting')
-                .withProp('disabled', true)
                 .build()
         )
         .withField(
