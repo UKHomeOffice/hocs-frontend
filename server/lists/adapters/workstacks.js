@@ -117,6 +117,10 @@ const getCorrespondentsNameByType = (correspondents, types) =>
 const bindDisplayElements = fromStaticList => async (stage) => {
     stage.assignedTeamDisplay = await fromStaticList('S_TEAMS', stage.teamUUID);
     stage.caseTypeDisplayFull = await fromStaticList('S_CASETYPES', stage.caseType);
+
+    if (stage.assignedTopic) {
+        stage.assignedTopicDisplay = stage.assignedTopic;
+    }
     if (stage.active) {
         stage.stageTypeDisplay = await fromStaticList('S_STAGETYPES', stage.stageType);
     } else {
