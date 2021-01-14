@@ -119,6 +119,9 @@ Object {
       "data": Object {},
       "deadline": "1900-01-01",
       "deadlineDisplay": "01/01/1900",
+      "primaryCorrespondentAndRefDisplay": Object {
+        "caseReference": "A/1234567/19",
+      },
       "stageType": "A",
       "stageTypeDisplay": "MOCK_STAGETYPE",
       "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE",
@@ -137,6 +140,9 @@ Object {
       "data": Object {},
       "deadline": "2020-12-31",
       "deadlineDisplay": "31/12/2020",
+      "primaryCorrespondentAndRefDisplay": Object {
+        "caseReference": "A/1234567/19",
+      },
       "stageType": "A",
       "stageTypeDisplay": "MOCK_STAGETYPE",
       "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE",
@@ -155,6 +161,9 @@ Object {
       "data": Object {},
       "deadline": "2020-12-31",
       "deadlineDisplay": "31/12/2020",
+      "primaryCorrespondentAndRefDisplay": Object {
+        "caseReference": "A/1234567/19",
+      },
       "stageType": "A",
       "stageTypeDisplay": "Closed",
       "stageTypeWithDueDateDisplay": "Closed",
@@ -172,6 +181,9 @@ Object {
       "data": Object {},
       "deadline": "1900-01-02",
       "deadlineDisplay": "02/01/1900",
+      "primaryCorrespondentAndRefDisplay": Object {
+        "caseReference": "A/1234568/19",
+      },
       "stageType": "A",
       "stageTypeDisplay": "MOCK_STAGETYPE",
       "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE",
@@ -188,6 +200,9 @@ Object {
       "data": Object {},
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
+      "primaryCorrespondentAndRefDisplay": Object {
+        "caseReference": "A/1234568/19",
+      },
       "stageType": "A",
       "stageTypeDisplay": "MOCK_STAGETYPE",
       "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE",
@@ -203,6 +218,9 @@ Object {
       "data": Object {},
       "deadline": "1900-01-04",
       "deadlineDisplay": "04/01/1900",
+      "primaryCorrespondentAndRefDisplay": Object {
+        "caseReference": "A/1234569/19",
+      },
       "stageType": "A",
       "stageTypeDisplay": "MOCK_STAGETYPE",
       "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE",
@@ -219,6 +237,9 @@ Object {
       "data": Object {},
       "deadline": "06-01-2200",
       "deadlineDisplay": null,
+      "primaryCorrespondentAndRefDisplay": Object {
+        "caseReference": "A/1234569/19",
+      },
       "stageType": "A",
       "stageTypeDisplay": "Closed",
       "stageTypeWithDueDateDisplay": "Closed",
@@ -234,6 +255,9 @@ Object {
       "data": Object {},
       "deadline": "1900-01-05",
       "deadlineDisplay": "05/01/1900",
+      "primaryCorrespondentAndRefDisplay": Object {
+        "caseReference": "A/1234570/19",
+      },
       "stageType": "A",
       "stageTypeDisplay": "MOCK_STAGETYPE",
       "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE",
@@ -286,6 +310,9 @@ Object {
       },
       "deadline": "1900-01-04",
       "deadlineDisplay": "04/01/1900",
+      "primaryCorrespondentAndRefDisplay": Object {
+        "caseReference": "A/1234569/19",
+      },
       "stageType": "A",
       "stageTypeDisplay": "MOCK_STAGETYPE",
       "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE",
@@ -304,6 +331,9 @@ Object {
       },
       "deadline": "06-01-2200",
       "deadlineDisplay": null,
+      "primaryCorrespondentAndRefDisplay": Object {
+        "caseReference": "A/1234569/19",
+      },
       "stageType": "A",
       "stageTypeDisplay": "Closed",
       "stageTypeWithDueDateDisplay": "Closed",
@@ -321,6 +351,9 @@ Object {
       },
       "deadline": "1900-01-05",
       "deadlineDisplay": "05/01/1900",
+      "primaryCorrespondentAndRefDisplay": Object {
+        "caseReference": "A/1234570/19",
+      },
       "stageType": "A",
       "stageTypeDisplay": "MOCK_STAGETYPE",
       "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE",
@@ -340,6 +373,9 @@ Object {
       },
       "deadline": "1900-01-02",
       "deadlineDisplay": "02/01/1900",
+      "primaryCorrespondentAndRefDisplay": Object {
+        "caseReference": "A/1234568/19",
+      },
       "stageType": "A",
       "stageTypeDisplay": "MOCK_STAGETYPE",
       "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE",
@@ -358,6 +394,9 @@ Object {
       },
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
+      "primaryCorrespondentAndRefDisplay": Object {
+        "caseReference": "A/1234568/19",
+      },
       "stageType": "A",
       "stageTypeDisplay": "MOCK_STAGETYPE",
       "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE",
@@ -385,6 +424,9 @@ Object {
       "caseTypeDisplayFull": "MOCK_CASETYPE",
       "deadline": "2200-01-01",
       "deadlineDisplay": "01/01/2200",
+      "primaryCorrespondentAndRefDisplay": Object {
+        "caseReference": undefined,
+      },
       "stageType": "A",
       "stageTypeDisplay": "MOCK_STAGETYPE",
       "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE",
@@ -393,6 +435,52 @@ Object {
     },
   ],
   "label": "My Cases",
+}
+`;
+
+exports[`Workflow Workstack Adapter should add the case ref and primary correspondent to primaryCorrespondentAndRefDisplay 1`] = `
+Object {
+  "allocateToTeamEndpoint": "/allocate/team",
+  "allocateToUserEndpoint": "/allocate/user",
+  "allocateToWorkstackEndpoint": "/unallocate/",
+  "columns": Array [],
+  "items": Array [
+    Object {
+      "active": true,
+      "applicantOrConstituentCorrespondentDisplay": "",
+      "assignedTeamDisplay": "MOCK_TEAM",
+      "assignedUserDisplay": "MOCK_USER",
+      "caseReference": "A/1234568/19",
+      "caseType": "WCS",
+      "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "correspondents": Object {
+        "correspondents": Array [
+          Object {
+            "fullname": "testName",
+            "is_primary": "true",
+            "uuid": "uuid123",
+          },
+        ],
+      },
+      "data": Object {
+        "CaseContributions": "[{}]",
+      },
+      "deadline": "2200-01-03",
+      "deadlineDisplay": "03/01/2200",
+      "memberCorrespondentDisplay": "",
+      "primaryCorrespondentAndRefDisplay": Object {
+        "caseReference": "A/1234568/19",
+        "primaryCorrespondentFullName": "testName",
+      },
+      "stageType": "A",
+      "stageTypeDisplay": "MOCK_STAGETYPE",
+      "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE",
+      "teamUUID": 2,
+      "userUUID": 2,
+    },
+  ],
+  "label": "MOCK_STAGETYPE",
+  "teamMembers": Array [],
 }
 `;
 
@@ -435,6 +523,9 @@ Object {
       "data": Object {},
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
+      "primaryCorrespondentAndRefDisplay": Object {
+        "caseReference": "A/1234568/19",
+      },
       "stageType": "A",
       "stageTypeDisplay": "MOCK_STAGETYPE",
       "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE",
@@ -450,6 +541,9 @@ Object {
       "data": Object {},
       "deadline": "1900-01-04",
       "deadlineDisplay": "04/01/1900",
+      "primaryCorrespondentAndRefDisplay": Object {
+        "caseReference": "A/1234569/19",
+      },
       "stageType": "A",
       "stageTypeDisplay": "MOCK_STAGETYPE",
       "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE",
@@ -466,6 +560,9 @@ Object {
       "data": Object {},
       "deadline": "2200-01-06",
       "deadlineDisplay": "06/01/2200",
+      "primaryCorrespondentAndRefDisplay": Object {
+        "caseReference": "A/1234569/19",
+      },
       "stageType": "A",
       "stageTypeDisplay": "MOCK_STAGETYPE",
       "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE",
@@ -481,6 +578,9 @@ Object {
       "data": Object {},
       "deadline": "1900-01-07",
       "deadlineDisplay": "07/01/1900",
+      "primaryCorrespondentAndRefDisplay": Object {
+        "caseReference": "A/1234569/19",
+      },
       "stageType": "B",
       "stageTypeDisplay": "MOCK_STAGETYPE",
       "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE",
@@ -496,6 +596,9 @@ Object {
       "data": Object {},
       "deadline": "1900-01-05",
       "deadlineDisplay": "05/01/1900",
+      "primaryCorrespondentAndRefDisplay": Object {
+        "caseReference": "A/1234570/19",
+      },
       "stageType": "A",
       "stageTypeDisplay": "MOCK_STAGETYPE",
       "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE",
@@ -525,6 +628,9 @@ Object {
       "data": Object {},
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
+      "primaryCorrespondentAndRefDisplay": Object {
+        "caseReference": "A/1234568/19",
+      },
       "stageType": "A",
       "stageTypeDisplay": "MOCK_STAGETYPE",
       "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE",
@@ -540,6 +646,9 @@ Object {
       "data": Object {},
       "deadline": "1900-01-04",
       "deadlineDisplay": "04/01/1900",
+      "primaryCorrespondentAndRefDisplay": Object {
+        "caseReference": "A/1234569/19",
+      },
       "stageType": "A",
       "stageTypeDisplay": "MOCK_STAGETYPE",
       "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE",
@@ -556,6 +665,9 @@ Object {
       "data": Object {},
       "deadline": "2200-01-06",
       "deadlineDisplay": "06/01/2200",
+      "primaryCorrespondentAndRefDisplay": Object {
+        "caseReference": "A/1234569/19",
+      },
       "stageType": "A",
       "stageTypeDisplay": "MOCK_STAGETYPE",
       "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE",
@@ -571,6 +683,9 @@ Object {
       "data": Object {},
       "deadline": "1900-01-05",
       "deadlineDisplay": "05/01/1900",
+      "primaryCorrespondentAndRefDisplay": Object {
+        "caseReference": "A/1234570/19",
+      },
       "stageType": "A",
       "stageTypeDisplay": "MOCK_STAGETYPE",
       "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE",
@@ -603,6 +718,9 @@ Object {
       },
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
+      "primaryCorrespondentAndRefDisplay": Object {
+        "caseReference": "A/1234568/19",
+      },
       "stageType": "A",
       "stageTypeDisplay": "MOCK_STAGETYPE",
       "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE due 10/12/2020",
@@ -634,6 +752,9 @@ Object {
       },
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
+      "primaryCorrespondentAndRefDisplay": Object {
+        "caseReference": "A/1234568/19",
+      },
       "stageType": "A",
       "stageTypeDisplay": "MOCK_STAGETYPE",
       "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE",
@@ -665,6 +786,9 @@ Object {
       },
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
+      "primaryCorrespondentAndRefDisplay": Object {
+        "caseReference": "A/1234568/19",
+      },
       "stageType": "MPAM_DRAFT_REQUESTED_CONTRIBUTION",
       "stageTypeDisplay": "MOCK_STAGETYPE",
       "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE due: 12/12/2020",
@@ -696,6 +820,9 @@ Object {
       },
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
+      "primaryCorrespondentAndRefDisplay": Object {
+        "caseReference": "A/1234568/19",
+      },
       "stageType": "MPAM_DRAFT_REQUESTED_CONTRIBUTION",
       "stageTypeDisplay": "MOCK_STAGETYPE",
       "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE",
@@ -727,6 +854,9 @@ Object {
       },
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
+      "primaryCorrespondentAndRefDisplay": Object {
+        "caseReference": "A/1234568/19",
+      },
       "stageType": "MPAM_TRIAGE",
       "stageTypeDisplay": "MOCK_STAGETYPE",
       "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE (Contributions Received)",
@@ -758,6 +888,9 @@ Object {
       },
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
+      "primaryCorrespondentAndRefDisplay": Object {
+        "caseReference": "A/1234568/19",
+      },
       "stageType": "MPAM_TRIAGE_REQUESTED_CONTRIBUTION",
       "stageTypeDisplay": "MOCK_STAGETYPE",
       "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE due: 12/12/2020",
@@ -789,6 +922,9 @@ Object {
       },
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
+      "primaryCorrespondentAndRefDisplay": Object {
+        "caseReference": "A/1234568/19",
+      },
       "stageType": "MPAM_TRIAGE_REQUESTED_CONTRIBUTION",
       "stageTypeDisplay": "MOCK_STAGETYPE",
       "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE",
@@ -820,6 +956,9 @@ Object {
       },
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
+      "primaryCorrespondentAndRefDisplay": Object {
+        "caseReference": "A/1234568/19",
+      },
       "stageType": "A",
       "stageTypeDisplay": "MOCK_STAGETYPE",
       "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE",
@@ -851,6 +990,9 @@ Object {
       },
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
+      "primaryCorrespondentAndRefDisplay": Object {
+        "caseReference": "A/1234568/19",
+      },
       "stageType": "MPAM_TRIAGE",
       "stageTypeDisplay": "MOCK_STAGETYPE",
       "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE (Contributions Received)",

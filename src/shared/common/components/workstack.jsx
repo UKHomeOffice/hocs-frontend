@@ -31,6 +31,7 @@ const SortDirection = {
 
 const ColumnRenderer = {
     CASE_LINK: 'caseLink',
+    CORRESPONDENT_WITH_CASE_LINK: 'correspondentWithCaseLink',
     DATE: 'date',
     DATE_WARNING: 'dateWarning',
     DUE_DATE_WARNING: 'dueDateWarning',
@@ -275,6 +276,14 @@ class WorkstackAllocate extends Component {
             case ColumnRenderer.CASE_LINK:
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>
                     <Link to={`/case/${row.caseUUID}/stage/${row.uuid}`} className='govuk-link govuk-!-margin-right-3'>{value}</Link>
+                </td>;
+            case ColumnRenderer.CORRESPONDENT_WITH_CASE_LINK:
+                return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>
+                    {
+                        value.primaryCorrespondentFullName &&
+                        <span className='govuk-!-font-weight-bold'>{value.primaryCorrespondentFullName}<br/></span>
+                    }
+                    <Link to={`/case/${row.caseUUID}/stage/${row.uuid}`} className='govuk-link govuk-!-margin-right-3'>{value.caseReference}</Link>
                 </td>;
             case ColumnRenderer.DATE:
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>{value}</td>;

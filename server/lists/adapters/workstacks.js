@@ -169,10 +169,22 @@ const bindDisplayElements = fromStaticList => async (stage) => {
         }
     }
 
+    stage.primaryCorrespondentAndRefDisplay = {};
+
     if (stage.correspondents && stage.correspondents.correspondents) {
         stage.memberCorrespondentDisplay = getCorrespondentsNameByType(stage.correspondents, ['MEMBER']);
         stage.applicantOrConstituentCorrespondentDisplay = getCorrespondentsNameByType(stage.correspondents, ['APPLICANT', 'CONSTITUENT']);
+
+        const primaryCorrespondent =
+          stage.correspondents.correspondents.find(correspondent => correspondent.is_primary === 'true');
+
+        if (primaryCorrespondent) {
+            stage.primaryCorrespondentAndRefDisplay.primaryCorrespondentFullName = primaryCorrespondent.fullname;
+        }
+
     }
+
+    stage.primaryCorrespondentAndRefDisplay.caseReference = stage.caseReference;
 
     return stage;
 };
