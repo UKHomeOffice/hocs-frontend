@@ -115,7 +115,9 @@ function withForm(Page) {
                 const formData = new FormData();
                 Object.keys(form_data).filter(field => form_data[field] !== null).forEach(field => {
                     if (Array.isArray(form_data[field])) {
-                        formData.append(field, JSON.stringify(form_data[field]));
+                        form_data[field].map(value => {
+                            formData.append(`${field}[]`, value);
+                        });
                     } else {
                         formData.append(field, form_data[field]);
                     }
