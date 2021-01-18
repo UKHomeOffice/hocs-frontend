@@ -73,6 +73,7 @@ module.exports = async options => {
                 .withValidator('required')
                 .withValidator('isValidDate',)
                 .withValidator('isBeforeToday')
+                .withValidator('isValidWithinDate')
                 .withProp('label', 'Contribution received date')
                 .withProp('visibilityConditions', [
                     {
