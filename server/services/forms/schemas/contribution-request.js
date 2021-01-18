@@ -19,7 +19,7 @@ module.exports = async options => {
         .withTitle(`${isAdd ? 'Add' : isReadOnly ? 'View' : 'Edit'} Contribution Request`)
         .withField(
             Component('dropdown', 'contributionBusinessArea')
-                .withValidator('required', 'Business area is required')
+                .withValidator('required')
                 .withProp('label', 'Business Area')
                 .withProp('disabled', isReadOnly)
                 .withProp('choices', [
@@ -35,7 +35,7 @@ module.exports = async options => {
         )
         .withField(
             Component('dropdown', 'contributionBusinessUnit')
-                .withValidator('required', 'Business unit is required')
+                .withValidator('required')
                 .withProp('label', 'Business Unit')
                 .withProp('disabled', isReadOnly)
                 .withProp('conditionChoices', [
@@ -51,25 +51,25 @@ module.exports = async options => {
         )
         .withField(
             Component('date', 'contributionRequestDate')
-                .withValidator('required', 'Contribution request date is required')
-                .withValidator('isValidDate', 'Contribution request date must be a valid date')
-                .withValidator('isBeforeToday', 'Contribution request date must be in the past')
+                .withValidator('required')
+                .withValidator('isValidDate')
+                .withValidator('isBeforeToday')
                 .withProp('label', 'Contribution request date')
                 .withProp('disabled', isReadOnly)
                 .build()
         )
         .withField(
             Component('date', 'contributionDueDate')
-                .withValidator('required', 'Contribution due date is required')
-                .withValidator('isValidDate', 'Contribution due date must be a valid date')
-                .withValidator('isAfterToday', 'Contribution due date must not be in the past')
+                .withValidator('required')
+                .withValidator('isValidDate')
+                .withValidator('isAfterToday')
                 .withProp('label', 'Contribution due date')
                 .withProp('disabled', isReadOnly)
                 .build()
         )
         .withField(
             Component('text-area', 'contributionRequestNote')
-                .withValidator('required', 'What you are requesting is required')
+                .withValidator('required')
                 .withProp('label', 'What you are requesting')
                 .withProp('disabled', isReadOnly)
                 .build()

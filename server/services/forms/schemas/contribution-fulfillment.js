@@ -9,7 +9,7 @@ module.exports = async options => {
         .withTitle('Contribution Request Fulfillment')
         .withField(
             Component('dropdown', 'contributionBusinessArea')
-                .withValidator('required', 'Business area is required')
+                .withValidator('required')
                 .withProp('label', 'Business Area')
                 .withProp('choices', [
                     Choice('UKVI', 'UKVI'),
@@ -24,7 +24,7 @@ module.exports = async options => {
         )
         .withField(
             Component('dropdown', 'contributionBusinessUnit')
-                .withValidator('required', 'Business unit is required')
+                .withValidator('required')
                 .withProp('label', 'Business Unit')
                 .withProp('conditionChoices', [
                     ConditionChoice('contributionBusinessArea', 'UKVI', 'S_MPAM_BUS_UNITS_1'),
@@ -39,23 +39,23 @@ module.exports = async options => {
         )
         .withField(
             Component('date', 'contributionRequestDate')
-                .withValidator('required', 'Contribution request date is required')
-                .withValidator('isValidDate', 'Contribution request date must be a valid date')
-                .withValidator('isBeforeToday', 'Contribution request date must be in the past')
+                .withValidator('required')
+                .withValidator('isValidDate')
+                .withValidator('isBeforeToday')
                 .withProp('label', 'Contribution request date')
                 .build()
         )
         .withField(
             Component('date', 'contributionDueDate')
-                .withValidator('required', 'Contribution due date is required')
-                .withValidator('isValidDate', 'Contribution due date must be a valid date')
-                .withValidator('isAfterToday', 'Contribution due date must in the future')
+                .withValidator('required')
+                .withValidator('isValidDate')
+                .withValidator('isAfterToday')
                 .withProp('label', 'Contribution due date')
                 .build()
         )
         .withField(
             Component('text-area', 'contributionRequestNote')
-                .withValidator('required', 'What you are requesting is required')
+                .withValidator('required')
                 .withProp('label', 'What you are requesting')
                 .build()
         )
@@ -70,9 +70,9 @@ module.exports = async options => {
         )
         .withField(
             Component('date', 'contributionReceivedDate')
-                .withValidator('required', 'Contribution received date is required')
-                .withValidator('isValidDate', 'Contribution received date must be a valid date')
-                .withValidator('isBeforeToday', 'Contribution received date must be in the past')
+                .withValidator('required')
+                .withValidator('isValidDate',)
+                .withValidator('isBeforeToday')
                 .withProp('label', 'Contribution received date')
                 .withProp('visibilityConditions', [
                     {
@@ -84,7 +84,7 @@ module.exports = async options => {
         )
         .withField(
             Component('text-area', 'contributionReceivedNote')
-                .withValidator('required', 'Contribution completion notes reason required')
+                .withValidator('required', 'Contribution completion notes is required')
                 .withProp('label', 'Details')
                 .withProp('visibilityConditions', [
                     {
@@ -96,7 +96,7 @@ module.exports = async options => {
         )
         .withField(
             Component('text-area', 'contributionCancellationNote')
-                .withValidator('required', 'Contribution cancellation reason required')
+                .withValidator('required', 'Contribution cancellation reason is required')
                 .withProp('label', 'Reason for cancelling')
                 .withProp('visibilityConditions', [
                     {
