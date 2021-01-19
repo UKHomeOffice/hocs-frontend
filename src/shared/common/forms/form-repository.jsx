@@ -31,8 +31,10 @@ function defaultDataAdapter(name, data) {
 
 function renderFormComponent(Component, options) {
     const { key, config, data, errors, callback, dataAdapter, page } = options;
+    
     if (isComponentVisible(config, data)) {
-        let value = '';
+        let value = config.defaultValue ? config.defaultValue : '';
+
         if (data) {
             value = dataAdapter ? dataAdapter(config.name, data) : defaultDataAdapter(config.name, data);
         }
@@ -73,6 +75,12 @@ export function formComponentFactory(field, options) {
         case 'mapped-text':
             return renderFormComponent(MappedText, { key, config, data, errors, callback });
         case 'hidden':
+            console.log(1)
+            console.log(data)
+            console.log(2)
+            console.log(config)
+            console.log(3)
+            console.log(key)
             return renderFormComponent(Hidden, { key, config, data, errors, callback });
         case 'date':
             return renderFormComponent(DateInput, { key, config, data, errors, callback });
