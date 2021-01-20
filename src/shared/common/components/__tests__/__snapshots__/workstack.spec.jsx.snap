@@ -651,7 +651,7 @@ exports[`Workstack component should render with filtering 1`] = `
               "caseUUID": "case_uuid-efg",
               "created": null,
               "data": Object {
-                "CaseContributions": "[{\\"contributionDueDate\\":\\"2020-12-12\\"}]",
+                "CaseContributions": "[{\\"data\\":{\\"contributionDueDate\\":\\"2020-12-12\\"}}]",
               },
               "fullName": "Dave Jones",
               "isActive": "YES",
@@ -1132,7 +1132,7 @@ exports[`Workstack component should sort descending when the column heading is c
               "caseUUID": "case_uuid-efg",
               "created": null,
               "data": Object {
-                "CaseContributions": "[{\\"contributionDueDate\\":\\"2020-12-12\\"}]",
+                "CaseContributions": "[{\\"data\\":{\\"contributionDueDate\\":\\"2020-12-12\\"}}]",
               },
               "fullName": "Dave Jones",
               "isActive": "YES",
@@ -1985,7 +1985,7 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
               "caseUUID": "case_uuid-efg",
               "created": null,
               "data": Object {
-                "CaseContributions": "[{\\"contributionDueDate\\":\\"2020-12-12\\"}]",
+                "CaseContributions": "[{\\"data\\":{\\"contributionDueDate\\":\\"2020-12-12\\"}}]",
               },
               "fullName": "Dave Jones",
               "isActive": "YES",

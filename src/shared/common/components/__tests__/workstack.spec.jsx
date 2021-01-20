@@ -42,7 +42,7 @@ describe('Workstack component', () => {
                 caseReference: 'case4', caseUUID: 'case_uuid-efg', uuid: 'stage_uuid-445', fullName: 'Dave Jones',
                 stageTypeDisplay: 'Stage D', assignedUserDisplay: 'User4', assignedTeamDisplay: 'team4',
                 created: null, isActive: 'YES', stageType: 'MPAM_DRAFT',
-                data: { CaseContributions: '[{"contributionDueDate":"2020-12-12"}]' }
+                data: { CaseContributions: '[{"data":{"contributionDueDate":"2020-12-12"}}]' }
             },
             {
                 caseReference: 'case5', caseUUID: 'case_uuid-hij', uuid: 'stage_uuid-446', fullName: 'Mick Smith',
