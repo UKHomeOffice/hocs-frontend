@@ -25,18 +25,18 @@ import Hidden from './hidden.jsx';
 import ExpandableCheckbox from './expandable-checkbox.jsx';
 import FlowDirectionLink from './flow-direction-link.jsx';
 
-function defaultDataAdapter(name, data) {
-    return data[name] || '';
+function defaultDataAdapter(name, data, currentValue) {
+    return data[name] || currentValue;
 }
 
 function renderFormComponent(Component, options) {
     const { key, config, data, errors, callback, dataAdapter, page } = options;
-    
+
     if (isComponentVisible(config, data)) {
-        let value = config.defaultValue ? config.defaultValue : '';
+        let value = config.defaultValue || '';
 
         if (data) {
-            value = dataAdapter ? dataAdapter(config.name, data) : defaultDataAdapter(config.name, data);
+            value = dataAdapter ? dataAdapter(config.name, data) : defaultDataAdapter(config.name, data, value);
         }
         return <Component key={key}
             {...config}
@@ -75,12 +75,6 @@ export function formComponentFactory(field, options) {
         case 'mapped-text':
             return renderFormComponent(MappedText, { key, config, data, errors, callback });
         case 'hidden':
-            console.log(1)
-            console.log(data)
-            console.log(2)
-            console.log(config)
-            console.log(3)
-            console.log(key)
             return renderFormComponent(Hidden, { key, config, data, errors, callback });
         case 'date':
             return renderFormComponent(DateInput, { key, config, data, errors, callback });
