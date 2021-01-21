@@ -137,13 +137,8 @@ const bindDisplayElements = fromStaticList => async (stage) => {
     }
     stage.deadlineDisplay = formatDate(stage.deadline);
 
-    if (stage.data && stage.data.CaseContributions) {
-        const dueContribution = JSON.parse(stage.data.CaseContributions)
-            .filter(contribution => contribution.data && !contribution.data.contributionStatus)
-            .map(contribution => contribution.data.contributionDueDate)
-            .sort()
-            .shift();
-
+    stage.stageTypeWithDueDateDisplay = stage.stageTypeDisplay;
+    if (stage.data) {
         const contributionReceivedStages = [
             'MPAM_TRIAGE',
             'MPAM_DRAFT'
@@ -154,15 +149,24 @@ const bindDisplayElements = fromStaticList => async (stage) => {
             'MPAM_DRAFT_REQUESTED_CONTRIBUTION'
         ];
 
-        if (contributionRequestedStages.includes(stage.stageType) && dueContribution) {
-            stage.stageTypeWithDueDateDisplay = `${stage.stageTypeDisplay} due: ${formatDate(dueContribution)}`;
-        } else if (contributionReceivedStages.includes(stage.stageType) && !dueContribution) {
-            stage.stageTypeWithDueDateDisplay = `${stage.stageTypeDisplay} (Contributions Received)`;
-        } else {
-            stage.stageTypeWithDueDateDisplay = stage.stageTypeDisplay;
+        if (stage.data.CaseContributions &&
+                (contributionReceivedStages.includes(stage.stageType) || contributionRequestedStages.includes(stage.stageType))) {
+            const dueContribution = JSON.parse(stage.data.CaseContributions)
+                .filter(contribution => contribution.data && !contribution.data.contributionStatus)
+                .map(contribution => contribution.data.contributionDueDate)
+                .sort()
+                .shift();
+
+            if (contributionRequestedStages.includes(stage.stageType) && dueContribution) {
+                stage.stageTypeWithDueDateDisplay = `${stage.stageTypeDisplay} due: ${formatDate(dueContribution)}`;
+            } else if (contributionReceivedStages.includes(stage.stageType) && !dueContribution) {
+                stage.stageTypeWithDueDateDisplay = `${stage.stageTypeDisplay} (Contributions Received)`;
+            } else {
+                stage.stageTypeWithDueDateDisplay = stage.stageTypeDisplay;
+            }
+        } else if (stage.data.DueDate) {
+            stage.stageTypeWithDueDateDisplay = `${stage.stageTypeDisplay} due ${formatDate(stage.data.DueDate)}`;
         }
-    } else {
-        stage.stageTypeWithDueDateDisplay = stage.stageTypeDisplay;
     }
 
     if (stage.correspondents && stage.correspondents.correspondents) {
