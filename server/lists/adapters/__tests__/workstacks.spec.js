@@ -729,4 +729,202 @@ describe('Workflow Workstack Adapter', () => {
         });
         expect(result).toMatchSnapshot();
     });
+
+    it('should transform a stage array to a workflow workstack with at MPAM_TRIAGE with contributionStatus',
+        async () => {
+            const mockData = {
+                stages: [
+                    {
+                        teamUUID: 2,
+                        caseType: 'WCS',
+                        stageType: 'MPAM_TRIAGE',
+                        userUUID: 2,
+                        deadline: '2200-01-03',
+                        caseReference: 'A/1234568/19',
+                        active: true,
+                        data: {
+                            CaseContributions: '[{"data": {"contributionDueDate":"2020-12-12", "contributionStatus":"blah"}}]'
+                        }
+                    }
+                ]
+            };
+
+            console.log('TEST');
+
+            const result = await stageAdapter(mockData, {
+                user: mockUser,
+                fromStaticList: mockFromStaticList,
+                logger: mockLogger,
+                teamId: 2,
+                workflowId: 'WCS',
+                stageId: 'MPAM_TRIAGE',
+                configuration: mockConfiguration
+            });
+
+            console.log(result);
+
+            expect(result).toMatchSnapshot();
+        });
+
+    it('should transform a stage array to a workflow workstack with at MPAM_TRIAGE_REQUESTED_CONTRIBUTION with contributionDueDate',
+        async () => {
+            const mockData = {
+                stages: [
+                    {
+                        teamUUID: 2,
+                        caseType: 'WCS',
+                        stageType: 'MPAM_TRIAGE_REQUESTED_CONTRIBUTION',
+                        userUUID: 2,
+                        deadline: '2200-01-03',
+                        caseReference: 'A/1234568/19',
+                        active: true,
+                        data: {
+                            CaseContributions: '[{"data": {"contributionDueDate":"2020-12-12"}}]'
+                        }
+                    }
+                ]
+            };
+
+            const result = await stageAdapter(mockData, {
+                user: mockUser,
+                fromStaticList: mockFromStaticList,
+                logger: mockLogger,
+                teamId: 2,
+                workflowId: 'WCS',
+                stageId: 'MPAM_TRIAGE_REQUESTED_CONTRIBUTION',
+                configuration: mockConfiguration
+            });
+
+            expect(result).toMatchSnapshot();
+        });
+
+    it('should transform a stage array to a workflow workstack with at MPAM_TRIAGE_REQUESTED_CONTRIBUTION with contributionStatus and contributionStatus',
+        async () => {
+            const mockData = {
+                stages: [
+                    {
+                        teamUUID: 2,
+                        caseType: 'WCS',
+                        stageType: 'MPAM_TRIAGE_REQUESTED_CONTRIBUTION',
+                        userUUID: 2,
+                        deadline: '2200-01-03',
+                        caseReference: 'A/1234568/19',
+                        active: true,
+                        data: {
+                            CaseContributions: '[{"data": {"contributionDueDate":"2020-12-12", "contributionStatus": "TEST"}}]'
+                        }
+                    }
+                ]
+            };
+
+            const result = await stageAdapter(mockData, {
+                user: mockUser,
+                fromStaticList: mockFromStaticList,
+                logger: mockLogger,
+                teamId: 2,
+                workflowId: 'WCS',
+                stageId: 'MPAM_TRIAGE_REQUESTED_CONTRIBUTION',
+                configuration: mockConfiguration
+            });
+
+            expect(result).toMatchSnapshot();
+        });
+
+    it('should transform a stage array to a workflow workstack with at MPAM_DRAFT_REQUESTED_CONTRIBUTION with contributionStatus',
+        async () => {
+            const mockData = {
+                stages: [
+                    {
+                        teamUUID: 2,
+                        caseType: 'WCS',
+                        stageType: 'MPAM_DRAFT_REQUESTED_CONTRIBUTION',
+                        userUUID: 2,
+                        deadline: '2200-01-03',
+                        caseReference: 'A/1234568/19',
+                        active: true,
+                        data: {
+                            CaseContributions: '[{"data": {"contributionDueDate":"2020-12-12"}}]'
+                        }
+                    }
+                ]
+            };
+
+            const result = await stageAdapter(mockData, {
+                user: mockUser,
+                fromStaticList: mockFromStaticList,
+                logger: mockLogger,
+                teamId: 2,
+                workflowId: 'WCS',
+                stageId: 'MPAM_DRAFT_REQUESTED_CONTRIBUTION',
+                configuration: mockConfiguration
+            });
+
+            expect(result).toMatchSnapshot();
+        });
+
+    it('should transform a stage array to a workflow workstack with at MPAM_DRAFT_REQUESTED_CONTRIBUTION with contributionStatus and contributionStatus',
+        async () => {
+            const mockData = {
+                stages: [
+                    {
+                        teamUUID: 2,
+                        caseType: 'WCS',
+                        stageType: 'MPAM_DRAFT_REQUESTED_CONTRIBUTION',
+                        userUUID: 2,
+                        deadline: '2200-01-03',
+                        caseReference: 'A/1234568/19',
+                        active: true,
+                        data: {
+                            CaseContributions: '[{"data": {"contributionDueDate":"2020-12-12", "contributionStatus": "TEST"}}]'
+                        }
+                    }
+                ]
+            };
+
+            const result = await stageAdapter(mockData, {
+                user: mockUser,
+                fromStaticList: mockFromStaticList,
+                logger: mockLogger,
+                teamId: 2,
+                workflowId: 'WCS',
+                stageId: 'MPAM_DRAFT_REQUESTED_CONTRIBUTION',
+                configuration: mockConfiguration
+            });
+
+            expect(result).toMatchSnapshot();
+        });
+
+    it('should transform a stage array to a workflow workstack with DueDate with contributionDueDate',
+        async () => {
+            const mockData = {
+                stages: [
+                    {
+                        teamUUID: 2,
+                        caseType: 'WCS',
+                        stageType: 'A',
+                        userUUID: 2,
+                        deadline: '2200-01-03',
+                        caseReference: 'A/1234568/19',
+                        active: true,
+                        data: {
+                            CaseContributions: '[{"data": {"contributionDueDate":"2020-12-12"}}]',
+                            DueDate: '2020-12-10'
+                        }
+                    }
+                ]
+            };
+
+            const result = await stageAdapter(mockData, {
+                user: mockUser,
+                fromStaticList: mockFromStaticList,
+                logger: mockLogger,
+                teamId: 2,
+                workflowId: 'WCS',
+                stageId: 'A',
+                configuration: mockConfiguration
+            });
+
+            expect(result).toMatchSnapshot();
+        });
+
 });
