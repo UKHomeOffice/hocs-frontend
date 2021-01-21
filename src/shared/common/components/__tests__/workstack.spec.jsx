@@ -50,6 +50,15 @@ describe('Workstack component', () => {
                 created: null, isActive: 'YES', stageType: 'MPAM_DRAFT',
                 data: { CaseContributions: '[{}]' }
             },
+            {
+                caseReference: 'case6', caseUUID: 'case_uuid-klm', uuid: 'stage_uuid-447', fullName: 'Bet Linch',
+                stageTypeDisplay: 'Stage F', assignedUserDisplay: 'User5', assignedTeamDisplay: 'team6',
+                created: null, isActive: 'YES', stageType: 'MPAM_DRAFT',
+                data: {
+                    CaseContributions: '[{"data":{"contributionDueDate":"2020-12-12", "contributionStatus": "TEST"}}]',
+                    DueDate: '2021-01-01'
+                }
+            }
         ],
         columns: [
             { displayName: 'Reference', dataAdapter: null, renderer: 'caseLink', dataValueKey: 'caseReference', isFilterable: true },
@@ -59,8 +68,8 @@ describe('Workstack component', () => {
             { displayName: 'Topic', dataAdapter: null, renderer: 'truncateText', dataValueKey: 'assignedTopicDisplay', isFilterable: true },
             { displayName: 'Case Date', dataAdapter: 'localDate', renderer: null, dataValueKey: 'TEST,created', isFilterable: true },
             { displayName: 'Active', dataAdapter: 'indicator', renderer: null, dataValueKey: 'isActive,TEST', isFilterable: true },
-            { displayName: 'Due Date', dataAdapter: 'indicator', renderer: 'dueDateWarning', dataValueKey: 'data.CaseContributions', isFilterable: true }
-
+            { displayName: 'Contribution Due Date', dataAdapter: 'indicator', renderer: 'dueDateWarning', dataValueKey: 'data.CaseContributions', isFilterable: true },
+            { displayName: 'Due Date', dataAdapter: 'indicator', renderer: 'dueDateWarning', dataValueKey: 'DueDate', isFilterable: true }
         ],
         selectable: true,
         baseUrl: 'base.url',
@@ -92,29 +101,27 @@ describe('Workstack component', () => {
     });
 
     it('should sort when the column heading is clicked', () => {
-
         const OUTER = shallow(<WrappedWorkstackAllocate {...DEFAULT_PROPS} />);
         const WorkstackAllocate = OUTER.props().children;
         const WRAPPER = mount(<Router><WorkstackAllocate track={MOCK_TRACK} /></Router>);
 
         const links = WRAPPER.find('th.govuk-link');
-        expect(links).toHaveLength(8);
+        expect(links).toHaveLength(9);
         links.first().simulate('click');
-        expect(arraySortSpy).toHaveBeenCalledTimes(9);
+        expect(arraySortSpy).toHaveBeenCalledTimes(21);
         expect(WRAPPER).toMatchSnapshot();
     });
 
     it('should sort descending when the column heading is clicked twice', () => {
-
         const OUTER = shallow(<WrappedWorkstackAllocate {...DEFAULT_PROPS} />);
         const WorkstackAllocate = OUTER.props().children;
         const WRAPPER = mount(<Router><WorkstackAllocate track={MOCK_TRACK} /></Router>);
 
         const links = WRAPPER.find('th.govuk-link');
-        expect(links).toHaveLength(8);
+        expect(links).toHaveLength(9);
         links.first().simulate('click');
         links.first().simulate('click');
-        expect(arraySortSpy).toHaveBeenCalledTimes(12);
+        expect(arraySortSpy).toHaveBeenCalledTimes(28);
         expect(WRAPPER).toMatchSnapshot();
     });
 });
