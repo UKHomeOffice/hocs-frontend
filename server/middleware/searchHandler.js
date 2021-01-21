@@ -1,3 +1,5 @@
+const { extractWorkstackTypeColumns } = require('../libs/workstackColumnHelpers');
+
 const { caseworkService } = require('../clients');
 const getLogger = require('../libs/logger');
 const User = require('../models/user');
@@ -7,6 +9,7 @@ const { infoService } = require('../clients');
 
 async function handleSearch(req, res, next) {
     const logger = getLogger(req.requestId);
+
     try {
         const formData = req.form.data;
         const request = {
@@ -47,10 +50,9 @@ async function handleSearch(req, res, next) {
             .sort(sortObjectByProp(workstackCase => workstackCase.caseReference))
             .map(bindDisplayElements(fromStaticList)));
         const { workstackTypeColumns } = await req.listService.fetch('S_SYSTEM_CONFIGURATION');
-        // using DEFAULT columns for search
-        const workstackTypeForSearch = workstackTypeColumns.find(
-            item => item.workstackType === 'DEFAULT'
-        );
+
+        const workstackTypeForSearch =
+            extractWorkstackTypeColumns('SEARCH_RESULTS')(workstackTypeColumns, request);
 
         res.locals.workstack = {
             label: 'Search Results',
