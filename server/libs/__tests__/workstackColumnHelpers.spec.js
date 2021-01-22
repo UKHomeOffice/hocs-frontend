@@ -1,4 +1,7 @@
-const { extractWorkstackTypeColumns } = require('../workstackColumnHelpers');
+const {
+    extractWorkstackTypeColumns,
+    sortCaseTypesAlphabetically
+} = require('../workstackColumnHelpers');
 
 describe('Workstack Type Columns helper', () => {
     it('should return the specific workstack for the case type if it exists', () => {
@@ -21,5 +24,16 @@ describe('Workstack Type Columns helper', () => {
         const result = extractWorkstackTypeColumns('SEARCH_RESULTS')(workstackTypeColumns,  { caseType: 'testType2' } );
 
         expect(result).toEqual({ workstackType: 'DEFAULT', workstackColumns: {} } );
+    });
+});
+
+describe('Sort casetypes' , () => {
+    it('Should order casetypes alphabetically', () => {
+        const submittedCaseTypes = 'GHI,DEF,ABC';
+
+        const result = sortCaseTypesAlphabetically(submittedCaseTypes);
+        const expected = 'ABC,DEF,GHI';
+
+        expect(result).toEqual(expected);
     });
 });
