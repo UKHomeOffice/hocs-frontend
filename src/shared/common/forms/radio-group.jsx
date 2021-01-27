@@ -36,7 +36,7 @@ class Radio extends Component {
     }
 
     isConditionalContentError(errors, contentLabelKey) {
-        return errors && contentLabelKey in errors
+        return errors && contentLabelKey in errors;
     }
 
     returnConditionalContentValue(choiceValueText) {
