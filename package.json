@@ -11,10 +11,8 @@
         "start-prod": "webpack -w --mode=production --env.NODE_ENV=production & nodemon index.js --env.NODE_ENV=production",
         "test": "jest --coverage",
         "jest": "node_modules/jest/bin/jest.js  .",
-        "lint:js": "eslint ./ --ignore-path .gitignore",
-        "lint:jsx": "eslint ./ --ignore-path .gitignore",
-        "lint-staged": "node_modules/lint-staged/index.js",
-        "lint": "npm run lint:js & npm run lint:jsx"
+        "lint": "eslint ./ --ext js,jsx --ignore-path .gitignore",
+        "lint-staged": "node_modules/lint-staged/index.js"
     },
     "jest": {
         "setupFiles": [
@@ -105,7 +103,7 @@
         "jest"
     ],
     "lint-staged": {
-        "*.js": "node_modules/eslint/bin/eslint.js --ignore-path .gitignore",
-        "*.jsx": "node_modules/eslint/bin/eslint.js --ignore-path .gitignore"
+        "*.js": "node_modules/eslint/bin/eslint.js ./ --ignore-path .gitignore",
+        "*.jsx": "node_modules/eslint/bin/eslint.js ./ --ext .jsx --ignore-path .gitignore"
     }
 }

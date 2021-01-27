@@ -1,6 +1,7 @@
 pipeline:
 
     build-docker-image:
+      group: lint-build-steps
       image: docker:17.09.1
       environment:
         - DOCKER_HOST=tcp://172.17.0.1:2375
@@ -8,6 +9,15 @@ pipeline:
         - docker build -t hocs-frontend .
       when:
         event: push
+
+    lint:
+      group: lint-build-steps
+      image: quay.io/ukhomeofficedigital/nodejs-base:v8
+      commands: 
+        - npm i eslint@5.7.0
+        - npm run lint    
+      when:
+        event: [push, pull_request]
 
     install-docker-image-latest:
       image: docker:17.09.1
@@ -44,6 +54,8 @@ pipeline:
       image: quay.io/ukhomeofficedigital/sonar-scanner:v3.0.2
       when:
         event: [push, pull_request, tag]
+    
+    
   
     docker-semver-tag:
       image: quay.io/ukhomeofficedigital/hocs-version-bot:build-25
@@ -186,5 +198,3 @@ pipeline:
       when:
         event: deployment
         environment: wcs-prod
-
-

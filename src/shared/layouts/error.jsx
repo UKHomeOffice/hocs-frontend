@@ -30,32 +30,32 @@ class Error extends Component {
 
     getDefaultContent(status) {
         switch (status) {
-        case 401:
-            return {
-                defaultTitle: 'Unauthorised'
-            };
-        case 403:
-            return {
-                defaultTitle: 'You do not have permission',
-                defaultBody: [
-                    'If you expect permission to perform this action, raise a ticket.'
-                ]
-            };
-        case 404:
-            return {
-                defaultTitle: 'Page does not exist',
-                defaultBody: [
-                    'If you typed the web address, check it is correct.',
-                    'If you pasted the web address, check you copied the entire address.'
-                ]
-            };
-        default:
-            return {
-                defaultTitle: 'Something has gone wrong',
-                defaultBody: [
-                    'Please try again'
-                ]
-            };
+            case 401:
+                return {
+                    defaultTitle: 'Unauthorised'
+                };
+            case 403:
+                return {
+                    defaultTitle: 'You do not have permission',
+                    defaultBody: [
+                        'If you expect permission to perform this action, raise a ticket.'
+                    ]
+                };
+            case 404:
+                return {
+                    defaultTitle: 'Page does not exist',
+                    defaultBody: [
+                        'If you typed the web address, check it is correct.',
+                        'If you pasted the web address, check you copied the entire address.'
+                    ]
+                };
+            default:
+                return {
+                    defaultTitle: 'Something has gone wrong',
+                    defaultBody: [
+                        'Please try again'
+                    ]
+                };
         }
     }
 
