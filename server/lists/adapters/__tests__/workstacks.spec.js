@@ -749,8 +749,6 @@ describe('Workflow Workstack Adapter', () => {
                 ]
             };
 
-            console.log('TEST');
-
             const result = await stageAdapter(mockData, {
                 user: mockUser,
                 fromStaticList: mockFromStaticList,
@@ -760,8 +758,6 @@ describe('Workflow Workstack Adapter', () => {
                 stageId: 'MPAM_TRIAGE',
                 configuration: mockConfiguration
             });
-
-            console.log(result);
 
             expect(result).toMatchSnapshot();
         });

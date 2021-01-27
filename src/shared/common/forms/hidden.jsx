@@ -22,7 +22,6 @@ class Hidden extends Component {
 
     render() {
         const {
-            label,
             name,
             type
         } = this.props;
@@ -40,7 +39,6 @@ class Hidden extends Component {
 }
 
 Hidden.propTypes = {
-    label: PropTypes.string,
     name: PropTypes.string.isRequired,
     type: PropTypes.string,
     updateState: PropTypes.func.isRequired,
@@ -48,7 +46,6 @@ Hidden.propTypes = {
 };
 
 Hidden.defaultProps = {
-    label: 'TextArea field',
     type: 'text',
     value: ''
 };
