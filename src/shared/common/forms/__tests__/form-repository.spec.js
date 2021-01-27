@@ -3,9 +3,9 @@ import { formComponentFactory, secondaryActionFactory } from '../form-repository
 const mockCallback = jest.fn();
 
 const mockChoices = [
-    { label: 'labelA', value: 'valueA' },
-    { label: 'labelB', value: 'valueB' },
-    { label: 'labelC', value: 'valueC' },
+    { label: 'A', value: 'A' },
+    { label: 'B', value: 'B' },
+    { label: 'C', value: 'C' },
 ];
 
 const supportedFormComponents = [
@@ -47,8 +47,6 @@ describe('Form repository', () => {
 
     beforeEach(() => {
         mockCallback.mockReset();
-        // eslint-disable-next-line no-undef
-        window.GOVUKFrontend = { initAll: jest.fn() };
     });
 
     it('should export factory methods for creating components', () => {
@@ -128,58 +126,4 @@ describe('Form repository', () => {
         expect(Component).toBeNull();
     });
 
-    it('should return null when hideConditions are met', () => {
-
-        const componentConfiguration = supportedFormComponents
-            .filter(field => field.component === 'radio')
-            .reduce((reducer, field) => reducer = field, null);
-        const Component = formComponentFactory(componentConfiguration.component, {
-            key: 1,
-            config: {
-                name: 'radio-component',
-                type: 'radio',
-                choices: mockChoices ,
-                hideConditions: [
-                    {
-                        conditionPropertyName: 'labelC',
-                        conditionPropertyValue: 'valueC'
-                    },
-                ]
-            },
-            data: {
-                labelC: 'valueC',
-            },
-            callback: mockCallback
-        });
-
-        expect(Component).toBeNull();
-    });
-
-    it('should return Component when hideConditions are not met', () => {
-
-        const componentConfiguration = supportedFormComponents
-            .filter(field => field.component === 'radio')
-            .reduce((reducer, field) => reducer = field, null);
-        const Component = formComponentFactory(componentConfiguration.component, {
-            key: 1,
-            config: {
-                name: 'radio-component',
-                type: 'radio',
-                choices: mockChoices ,
-                hideConditions: [
-                    {
-                        conditionPropertyName: 'labelC',
-                        conditionPropertyValue: 'valueC'
-                    },
-                ]
-            },
-            data: {
-                labelA: 'valueA',
-            },
-            callback: mockCallback
-        });
-        const wrapper = mount(Component);
-        expect(wrapper).toBeDefined();
-        expect(wrapper.find('Radio')).toBeDefined();
-    });
 });

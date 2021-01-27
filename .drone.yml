@@ -7,9 +7,22 @@ pipeline:
       commands:
         - docker build -t hocs-frontend .
       when:
+        event: push
+
+    install-docker-image-latest:
+      image: docker:17.09.1
+      environment:
+        - DOCKER_HOST=tcp://172.17.0.1:2375
+      secrets:
+        - docker_password
+      commands:
+        - docker login -u="ukhomeofficedigital+hocs" -p=$${DOCKER_PASSWORD} quay.io
+        - docker tag hocs-frontend quay.io/ukhomeofficedigital/hocs-frontend:latest
+        - docker push quay.io/ukhomeofficedigital/hocs-frontend:latest
+      when:
         branch: master
         event: push
-  
+
     install-docker-image:
       image: docker:17.09.1
       environment:
@@ -19,13 +32,14 @@ pipeline:
       commands:
         - docker login -u="ukhomeofficedigital+hocs" -p=$${DOCKER_PASSWORD} quay.io
         - docker tag hocs-frontend quay.io/ukhomeofficedigital/hocs-frontend:build-$${DRONE_BUILD_NUMBER}
-        - docker tag hocs-frontend quay.io/ukhomeofficedigital/hocs-frontend:latest
+        - export BRANCH_NAME_TAGFRIENDLY=`echo "$${DRONE_COMMIT_BRANCH}" | sed 's$/$_$g'` # sed can use any character as delimiter
+        - docker tag hocs-frontend quay.io/ukhomeofficedigital/hocs-frontend:branch-$${BRANCH_NAME_TAGFRIENDLY}
         - docker push quay.io/ukhomeofficedigital/hocs-frontend:build-$${DRONE_BUILD_NUMBER}
-        - docker push quay.io/ukhomeofficedigital/hocs-frontend:latest
+        - docker push quay.io/ukhomeofficedigital/hocs-frontend:branch-$${BRANCH_NAME_TAGFRIENDLY}
       when:
-        branch: master
+        branch: [master, epic/*]
         event: push
-  
+
     sonar-scanner:
       image: quay.io/ukhomeofficedigital/sonar-scanner:v3.0.2
       when:

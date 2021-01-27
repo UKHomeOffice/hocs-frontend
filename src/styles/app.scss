@@ -383,6 +383,11 @@ td {
         color: white;
         padding: 0.25em 0.5em 0.25em 0.5em;
       }
+      label {
+        background-color: govuk-colour("red");
+        color: white;
+        padding: 0.25em 0.5em 0.25em 0.5em;
+      }
   }
 }
 
@@ -407,6 +412,13 @@ td {
                 background-color: govuk-colour("red");
             }
           }
+      }
+
+      &.govuk-table__cell--truncated {
+        max-width: 500px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
       }
   }
 
@@ -748,7 +760,7 @@ $border-colour: govuk-colour("mid-grey");
         .govuk-checkboxes__label {
           opacity: 1;
         }
-        
+
     }
 
     .selectable-details-content {

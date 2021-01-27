@@ -3,6 +3,7 @@ import TextInput from './text.jsx';
 import MappedText from './mapped-text.jsx';
 import MappedDisplay from './mapped-display.jsx';
 import ChangeLink from './composite/change-link.jsx';
+import SomuList from './composite/somu-list.jsx';
 import Radio from './radio-group.jsx';
 import DateInput from './date.jsx';
 import Checkbox from './checkbox-group.jsx';
@@ -24,16 +25,18 @@ import Hidden from './hidden.jsx';
 import ExpandableCheckbox from './expandable-checkbox.jsx';
 import FlowDirectionLink from './flow-direction-link.jsx';
 
-function defaultDataAdapter(name, data) {
-    return data[name] || '';
+function defaultDataAdapter(name, data, currentValue) {
+    return data[name] || currentValue;
 }
 
 function renderFormComponent(Component, options) {
     const { key, config, data, errors, callback, dataAdapter, page } = options;
+
     if (isComponentVisible(config, data)) {
-        let value = '';
+        let value = config.defaultValue || '';
+
         if (data) {
-            value = dataAdapter ? dataAdapter(config.name, data) : defaultDataAdapter(config.name, data);
+            value = dataAdapter ? dataAdapter(config.name, data) : defaultDataAdapter(config.name, data, value);
         }
         return <Component key={key}
             {...config}
@@ -104,6 +107,14 @@ export function formComponentFactory(field, options) {
             return renderFormComponent(AddDocument, { key, config, errors, callback });
         case 'entity-list':
             return renderFormComponent(EntityList, {
+                key,
+                config: { ...config, baseUrl: options.baseUrl },
+                data,
+                errors,
+                callback
+            });
+        case 'somu-list':
+            return renderFormComponent(SomuList, {
                 key,
                 config: { ...config, baseUrl: options.baseUrl },
                 data,

@@ -14,7 +14,8 @@ const validationErrors = {
     isBeforeToday: label => `${label} must be a date in the past`,
     isAfterToday: label => `${label} must be a date in the future`,
     isValidWithinDate: label => `${label} must be within the last ${VALID_DAYS_RANGE} days`,
-    validCaseReference: () => 'Case reference is not valid'
+    validCaseReference: () => 'Case reference is not valid',
+    contributionsFulfilled: () => 'Case contributions have to be completed or cancelled',
 };
 
 const validators = {
@@ -48,13 +49,26 @@ const validators = {
         }
         return null;
     },
+    requiredArray: ({ label, value, message }) => {
+        let valid = true;
+
+        try {
+            if (!value || JSON.parse(value).length === 0) {
+                valid = false;
+            }
+        } catch (error) {
+            // If the parsing of the value is false, then we know that the value is not an array
+            valid = false;
+        }
+
+        return valid ? null : (message || validationErrors.required(label));
+    },
     required: ({ label, value, message }) => {
         if (!value || value === '') {
-            return message || validationErrors.required(label);
+            return (message || validationErrors.required(label));
         }
         return null;
     },
-
     alphanumeric: ({ label, value, message }) => {
         const format = /^[a-z0-9]+$/i;
         if (value && !format.test(value)) {
@@ -76,7 +90,6 @@ const validators = {
         }
         return null;
     },
-
     hasWhitelistedExtension: ({ value, message }) => {
         if (value && value.length > 0) {
             const allowableExtensions = DOCUMENT_WHITELIST.map(extension => extension.toUpperCase());
@@ -103,6 +116,29 @@ const validators = {
             return message || validationErrors.validCaseReference();
         }
         return null;
+    },
+    contributionsFulfilled: ({ value, message }) => {
+        let valid = true;
+        try {
+            const contributions = JSON.parse(value);
+
+            if (Array.isArray(contributions)) {
+                const result = contributions.filter(contribution => {
+                    const contributionStatus = contribution.data.contributionStatus;
+                    return (!(contributionStatus === 'contributionCancelled' || contributionStatus === 'contributionReceived'));
+                });
+
+                if (result.length !== 0) {
+                    valid = false;
+                }
+            } else {
+                valid = false;
+            }
+        } catch (error) {
+            valid = false;
+        }
+
+        return valid ? null : (message || validationErrors.contributionsFulfilled());
     }
 };
 

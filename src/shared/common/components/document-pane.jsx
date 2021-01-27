@@ -10,7 +10,12 @@ import {
 } from '../../contexts/actions/index.jsx';
 import status from '../../helpers/api-status.js';
 import { Link } from 'react-router-dom';
-import sortByTimeStamp from '../../helpers/sortByTimeStamp.js';
+import {
+    flattenDocuments,
+    getFirstDocument,
+    hasPendingDocuments
+} from '../../helpers/document-helpers';
+
 
 class DocumentPanel extends Component {
 
@@ -18,7 +23,7 @@ class DocumentPanel extends Component {
         super(props);
         let activeDocument;
         if (props.documents && props.documents.length > 0) {
-            activeDocument = this.getFirstDocument(this.flattenDocuments(props.documents));
+            activeDocument = getFirstDocument(flattenDocuments(props.documents));
         }
         this.state = { ...props, activeDocument };
     }
@@ -32,20 +37,8 @@ class DocumentPanel extends Component {
         clearInterval(this.interval);
     }
 
-    hasPendingDocuments(documents) {
-        return documents.some(d => d.status === 'PENDING');
-    }
-
-    flattenDocuments(documents) {
-        return Array.isArray(documents) && documents
-            .map(([, groupDocs]) => groupDocs)
-            .reduce((reducer, value) => [...reducer, ...value])
-            .sort(sortByTimeStamp);
-    }
-
-    getFirstDocument(flatDocumentList) {
-        const { value: firstDocument } = flatDocumentList.filter(({ status }) => status !== 'PENDING')[0] || { value: undefined };
-        return firstDocument;
+    setActiveDocument(document) {
+        this.setState({ activeDocument: document });
     }
 
     updateDocuments() {
@@ -59,14 +52,18 @@ class DocumentPanel extends Component {
                             dispatch(updateApiStatus(status.REQUEST_DOCUMENT_LIST_SUCCESS))
                                 .then(() => dispatch(clearApiStatus()))
                                 .then(() => {
-                                    const allDocuments = this.flattenDocuments(response.data);
-                                    this.setState((currentState) => ({
-                                        ...currentState,
-                                        documents: response.data,
-                                        activeDocument: currentState.activeDocument || this.getFirstDocument(allDocuments)
-                                    }));
-                                    if (!this.hasPendingDocuments(allDocuments)) {
-                                        if (this.interval) { clearInterval(this.interval); }
+                                    if (Array.isArray(response.data)) {
+                                        const allDocuments = flattenDocuments(response.data);
+                                        this.setState((currentState) => ({
+                                            ...currentState,
+                                            documents: response.data,
+                                            activeDocument: currentState.activeDocument || getFirstDocument(allDocuments)
+                                        }));
+                                        if (!hasPendingDocuments(allDocuments)) {
+                                            if (this.interval) {
+                                                clearInterval(this.interval);
+                                            }
+                                        }
                                     }
                                 });
                         })
@@ -76,10 +73,6 @@ class DocumentPanel extends Component {
                         });
                 });
         }
-    }
-
-    setActiveDocument(document) {
-        this.setState({ activeDocument: document });
     }
 
     render() {
@@ -107,7 +100,8 @@ class DocumentPanel extends Component {
 }
 
 DocumentPanel.defaultProps = {
-    page: {}
+    page: {},
+    documents: []
 };
 
 DocumentPanel.propTypes = {

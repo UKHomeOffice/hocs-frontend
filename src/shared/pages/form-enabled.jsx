@@ -149,8 +149,6 @@ function withForm(Page) {
                             })
                             .catch(error => {
                                 this.setState({ submittingForm: false });
-                                // TODO: Remove
-                                /* eslint-disable-next-line no-console */
                                 return dispatch(updateApiStatus(status.SUBMIT_FORM_FAILURE))
                                     .then(() => dispatch(setError(error.response)));
                             });

@@ -350,4 +350,24 @@ describe('Action service', () => {
         expect(response).toHaveProperty('callbackUrl');
     });
 
+    it('should return a callback url when "ADD_CONTRIBUTION_REQUEST" action succeeds', async () => {
+        const testForm = {
+            schema: {},
+            data: {},
+            action: actionTypes.ADD_CONTRIBUTION
+        };
+        const response = await actionService.performAction('CASE', {
+            caseId: 1234,
+            stageId: 5678,
+            somuTypeUuid: '00000000-0000-0000-0000-000000000000',
+            entity: null,
+            context: null,
+            form: testForm,
+            user: mockUser
+        });
+        expect(mockRequestClient).toHaveBeenCalledTimes(1);
+        expect(response).toBeDefined();
+        expect(response).toHaveProperty('callbackUrl');
+    });
+
 });

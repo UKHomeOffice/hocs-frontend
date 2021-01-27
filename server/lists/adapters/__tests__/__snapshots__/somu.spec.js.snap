@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Somu Adapter Somu Item Adapter should transform somu type with data 1`] = `
+Array [
+  Object {
+    "data": Array [
+      Object {
+        "test": 1,
+      },
+    ],
+    "deleted": false,
+    "uuid": "00000000-0000-0000-0000-000000000000",
+  },
+]
+`;
+
+exports[`Somu Adapter Somu Item Adapter should transform somu type with deleted set as true 1`] = `
+Array [
+  Object {
+    "data": null,
+    "deleted": true,
+    "uuid": "00000000-0000-0000-0000-000000000000",
+  },
+]
+`;
+
+exports[`Somu Adapter Somu Type Adapter should transform somu type 1`] = `
+Array [
+  Object {
+    "key": Array [
+      "TestCaseType",
+      "TestType",
+    ],
+    "value": Object {
+      "active": true,
+      "caseType": "TestCaseType",
+      "schema": Object {
+        "test": 1,
+      },
+      "type": "TestType",
+      "uuid": "00000000-0000-0000-0000-000000000000",
+    },
+  },
+]
+`;

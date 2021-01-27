@@ -1,3 +1,5 @@
+const { addDays, formatDate } = require('../../libs/dateHelpers');
+
 const byUser = (userId) => ({ userUUID }) => userUUID === userId;
 const byCaseReference = (a, b) => a.caseReference.localeCompare(b.caseReference);
 
@@ -27,7 +29,12 @@ const defaultCaseSort = (a, b) => {
 };
 const byLabel = (a, b) => a.label.localeCompare(b.label);
 const isUnallocated = user => user === null;
-const isOverdue = (configuration, deadline) => configuration.deadlinesEnabled && deadline && new Date(deadline) < Date.now();
+
+const isOverdue = (configuration, deadline) =>
+    configuration.deadlinesEnabled &&
+    deadline &&
+    addDays(deadline, 1) < Date.now();
+
 const getOverdue = (configuration, data) => {
     if (!configuration.deadlinesEnabled) {
         return false;
@@ -102,19 +109,18 @@ const returnMyCasesWorkstackColumns = (configuration, workstackData) => {
     return getColumnsForMyCases.workstackColumns;
 };
 
-const parseDate = (rawDate) => {
-    const [date] = rawDate.match(/[0-9]{4}-[0-1][0-9]-[0-3][0-9]/g) || [];
-    if (!date) {
-        return null;
-    }
-    const [year, month, day] = date.split('-');
-    return `${day}/${month}/${year}`;
-};
-const formatDate = (date) => date ? parseDate(date) : null;
+const getCorrespondentsNameByType = (correspondents, types) =>
+    correspondents.correspondents.filter(correspondent => types.includes(correspondent.type))
+        .map(correspondent => correspondent.fullname)
+        .join(', ');
 
 const bindDisplayElements = fromStaticList => async (stage) => {
     stage.assignedTeamDisplay = await fromStaticList('S_TEAMS', stage.teamUUID);
     stage.caseTypeDisplayFull = await fromStaticList('S_CASETYPES', stage.caseType);
+
+    if (stage.assignedTopic) {
+        stage.assignedTopicDisplay = stage.assignedTopic;
+    }
     if (stage.active) {
         stage.stageTypeDisplay = await fromStaticList('S_STAGETYPES', stage.stageType);
     } else {
@@ -130,11 +136,44 @@ const bindDisplayElements = fromStaticList => async (stage) => {
         stage.MinSignOffTeamDisplay = await fromStaticList('S_MPAM_MIN_SIGN_OFF_TEAMS', stage.data.MinSignOffTeam, true) || stage.data.MinSignOffTeam;
     }
     stage.deadlineDisplay = formatDate(stage.deadline);
-    if (stage.data && stage.data.DueDate) {
-        stage.stageTypeWithDueDateDisplay = stage.stageTypeDisplay + ' due: ' + formatDate(stage.data.DueDate);
-    } else {
-        stage.stageTypeWithDueDateDisplay = stage.stageTypeDisplay;
+
+    stage.stageTypeWithDueDateDisplay = stage.stageTypeDisplay;
+    if (stage.data) {
+        const contributionReceivedStages = [
+            'MPAM_TRIAGE',
+            'MPAM_DRAFT'
+        ];
+
+        const contributionRequestedStages = [
+            'MPAM_TRIAGE_REQUESTED_CONTRIBUTION',
+            'MPAM_DRAFT_REQUESTED_CONTRIBUTION'
+        ];
+
+        if (stage.data.CaseContributions &&
+                (contributionReceivedStages.includes(stage.stageType) || contributionRequestedStages.includes(stage.stageType))) {
+            const dueContribution = JSON.parse(stage.data.CaseContributions)
+                .filter(contribution => contribution.data && !contribution.data.contributionStatus)
+                .map(contribution => contribution.data.contributionDueDate)
+                .sort()
+                .shift();
+
+            if (contributionRequestedStages.includes(stage.stageType) && dueContribution) {
+                stage.stageTypeWithDueDateDisplay = `${stage.stageTypeDisplay} due: ${formatDate(dueContribution)}`;
+            } else if (contributionReceivedStages.includes(stage.stageType) && !dueContribution) {
+                stage.stageTypeWithDueDateDisplay = `${stage.stageTypeDisplay} (Contributions Received)`;
+            } else {
+                stage.stageTypeWithDueDateDisplay = stage.stageTypeDisplay;
+            }
+        } else if (stage.data.DueDate) {
+            stage.stageTypeWithDueDateDisplay = `${stage.stageTypeDisplay} due ${formatDate(stage.data.DueDate)}`;
+        }
     }
+
+    if (stage.correspondents && stage.correspondents.correspondents) {
+        stage.memberCorrespondentDisplay = getCorrespondentsNameByType(stage.correspondents, ['MEMBER']);
+        stage.applicantOrConstituentCorrespondentDisplay = getCorrespondentsNameByType(stage.correspondents, ['APPLICANT', 'CONSTITUENT']);
+    }
+
     return stage;
 };
 

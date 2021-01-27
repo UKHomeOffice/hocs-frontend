@@ -26,6 +26,96 @@ describe('List Service', () => {
         });
     });
 
+    describe('fetchStaticList', () => {
+        it ('should return value with key', async () => {
+            const lists = {
+                test_static: {
+                    client: 'test',
+                    endpoint: '/test/api',
+                    type: listService.types.STATIC,
+                    data: [{ key: 'test', value: 'TEST_VALUE' }]
+                }
+            };
+
+            listService.initialise(lists);
+            const instance = await listService.getInstance(mockUUID, mockUser);
+            const result = await instance.getFromStaticList('test_static', 'test');
+
+            expect(result).toBeDefined();
+            expect(result).toEqual('TEST_VALUE');
+        });
+
+        it ('should return null if pair array against non array key', async () => {
+            const lists = {
+                test_static: {
+                    client: 'test',
+                    endpoint: '/test/api',
+                    type: listService.types.STATIC,
+                    data: [{ key: ['test_1', 'test_2'], value: 'TEST_VALUE' }]
+                }
+            };
+
+            listService.initialise(lists);
+            const instance = await listService.getInstance(mockUUID, mockUser);
+            const result = await instance.getFromStaticList('test_static', 'test');
+
+            expect(result).toBeNull();
+        });
+
+        it ('should return value when both arrays are present with correct keys', async () => {
+            const lists = {
+                test_static: {
+                    client: 'test',
+                    endpoint: '/test/api',
+                    type: listService.types.STATIC,
+                    data: [{ key: ['test_1', 'test_2'], value: 'TEST_VALUE' }]
+                }
+            };
+
+            listService.initialise(lists);
+            const instance = await listService.getInstance(mockUUID, mockUser);
+            const result = await instance.getFromStaticList('test_static', ['test_1', 'test_2']);
+
+            expect(result).toBeDefined();
+            expect(result).toEqual('TEST_VALUE');
+        });
+
+        it ('should return null when only partial array key match ', async () => {
+            const lists = {
+                test_static: {
+                    client: 'test',
+                    endpoint: '/test/api',
+                    type: listService.types.STATIC,
+                    data: [{ key: ['test_1', 'test_2'], value: 'TEST_VALUE' }]
+                }
+            };
+
+            listService.initialise(lists);
+            const instance = await listService.getInstance(mockUUID, mockUser);
+            const result = await instance.getFromStaticList('test_static', ['test_1', 'test_this_is_not_present']);
+
+            expect(result).toBeNull();
+        });
+
+        it ('should return value if value matches inputted key and key not in data', async () => {
+            const lists = {
+                test_static: {
+                    client: 'test',
+                    endpoint: '/test/api',
+                    type: listService.types.STATIC,
+                    data: [{ value: 'TEST_VALUE', label: 'TEST' }]
+                }
+            };
+
+            listService.initialise(lists);
+            const instance = await listService.getInstance(mockUUID, mockUser);
+            const result = await instance.getFromStaticList('test_static', 'TEST_VALUE');
+
+            expect(result).toBeDefined();
+            expect(result).toEqual('TEST');
+        });
+    });
+
     describe('fetchList', () => {
         it('should support configured lists', async () => {
             const lists = {

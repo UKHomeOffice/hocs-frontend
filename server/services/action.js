@@ -138,67 +138,93 @@ const actions = {
             throw new ActionError(error);
         }
     },
-    CASE: async ({ caseId, stageId, entity, context, form, user }) => {
+    CASE: async (options) => {
+        const { caseId, stageId, context, form, user } = options;
+
         let headers = {
             headers: User.createHeaders(user)
         };
         const logger = getLogger();
         try {
-            if (form && form.action && entity) {
-                logger.info('CASE_ACTION', { action: form.action, case: caseId });
-                switch (form.action) {
-                    case actionTypes.ADD_DOCUMENT:
-                        await addDocument(`/case/${caseId}/document`, form, headers);
-                        break;
-                    case actionTypes.REMOVE_DOCUMENT:
-                        if (!context) {
-                            throw new ActionError('Unable to remove, no context provided');
-                        }
-                        await caseworkService.delete(`/case/${caseId}/document/${context}`, headers);
-                        break;
-                    case actionTypes.ADD_TOPIC:
-                        await caseworkService.post(`/case/${caseId}/stage/${stageId}/topic`, { topicUUID: form.data['topic'] }, headers);
-                        break;
-                    case actionTypes.REMOVE_TOPIC:
-                        if (!context) {
-                            throw new ActionError('Unable to remove, no context provided');
-                        }
-                        await caseworkService.delete(`/case/${caseId}/stage/${stageId}/topic/${context}`, headers);
-                        break;
-                    case actionTypes.IS_MEMBER:
-                        if (form.data['isMember'] === 'true') {
-                            return ({ callbackUrl: `/case/${caseId}/stage/${stageId}/entity/member/add` });
-                        } else {
-                            return ({ callbackUrl: `/case/${caseId}/stage/${stageId}/entity/correspondent/details` });
-                        }
-                    case actionTypes.SELECT_MEMBER:
-                        return ({ callbackUrl: `/case/${caseId}/stage/${stageId}/entity/member/${form.data['member']}/details` });
-                    case actionTypes.ADD_CORRESPONDENT:
-                    case actionTypes.ADD_MEMBER:
-                        await caseworkService.post(`/case/${caseId}/stage/${stageId}/correspondent`, { ...form.data }, headers);
-                        return ({ callbackUrl: `/case/${caseId}/stage/${stageId}` });
-                    case actionTypes.REMOVE_CORRESPONDENT:
-                        if (!context) {
-                            throw new ActionError('Unable to remove, no context provided');
-                        }
-                        await caseworkService.delete(`/case/${caseId}/stage/${stageId}/correspondent/${context}`, headers);
-                        break;
-                    case actionTypes.UPDATE_CORRESPONDENT:
-                        if (!context) {
-                            throw new ActionError('Unable to update, no context provided');
-                        }
-                        await caseworkService.put(`/case/${caseId}/stage/${stageId}/correspondent/${context}`, { ...form.data }, headers);
-                        break;
-                    case actionTypes.MANAGE_PEOPLE:
-                        await caseworkService.put(
-                            `/case/${caseId}/stage/${stageId}/updatePrimaryCorrespondent`,
-                            { primaryCorrespondentUUID: form.data.Correspondents },
-                            headers
-                        );
-                        break;
-                    case actionTypes.ADD_CASE_NOTE:
-                        await caseworkService.post(`/case/${caseId}/note`, { type: 'MANUAL', text: form.data['case-note'] }, headers);
-                        break;
+            if (form && form.action) {
+                const { entity, somuTypeUuid } = options;
+
+                if (entity) {
+                    logger.info('CASE_ACTION', { action: form.action, case: caseId });
+                    switch (form.action) {
+                        case actionTypes.ADD_DOCUMENT:
+                            await addDocument(`/case/${caseId}/document`, form, headers);
+                            break;
+                        case actionTypes.REMOVE_DOCUMENT:
+                            if (!context) {
+                                throw new ActionError('Unable to remove, no context provided');
+                            }
+                            await caseworkService.delete(`/case/${caseId}/document/${context}`, headers);
+                            break;
+                        case actionTypes.ADD_TOPIC:
+                            await caseworkService.post(`/case/${caseId}/stage/${stageId}/topic`, { topicUUID: form.data['topic'] }, headers);
+                            break;
+                        case actionTypes.REMOVE_TOPIC:
+                            if (!context) {
+                                throw new ActionError('Unable to remove, no context provided');
+                            }
+                            await caseworkService.delete(`/case/${caseId}/stage/${stageId}/topic/${context}`, headers);
+                            break;
+                        case actionTypes.IS_MEMBER:
+                            if (form.data['isMember'] === 'true') {
+                                return ({ callbackUrl: `/case/${caseId}/stage/${stageId}/entity/member/add` });
+                            }    else {
+                                return ({ callbackUrl: `/case/${caseId}/stage/${stageId}/entity/correspondent/details` });
+                            }
+                        case actionTypes.SELECT_MEMBER:
+                            return ({ callbackUrl: `/case/${caseId}/stage/${stageId}/entity/member/${form.data['member']}/details` });
+                        case actionTypes.ADD_CORRESPONDENT:
+                        case actionTypes.ADD_MEMBER:
+                            await caseworkService.post(`/case/${caseId}/stage/${stageId}/correspondent`, { ...form.data }, headers);
+                            return ({ callbackUrl: `/case/${caseId}/stage/${stageId}` });
+                        case actionTypes.REMOVE_CORRESPONDENT:
+                            if (!context) {
+                                throw new ActionError('Unable to remove, no context provided');
+                            }
+                            await caseworkService.delete(`/case/${caseId}/stage/${stageId}/correspondent/${context}`, headers);
+                            break;
+                        case actionTypes.UPDATE_CORRESPONDENT:
+                            if (!context) {
+                                throw new ActionError('Unable to update, no context provided');
+                            }
+                            await caseworkService.put(`/case/${caseId}/stage/${stageId}/correspondent/${context}`, { ...form.data }, headers);
+                            break;
+                        case actionTypes.MANAGE_PEOPLE:
+                            await caseworkService.put(
+                                `/case/${caseId}/stage/${stageId}/updatePrimaryCorrespondent`,
+                                { primaryCorrespondentUUID: form.data.Correspondents },
+                                headers
+                            );
+                            break;
+                        case actionTypes.ADD_CASE_NOTE:
+                            await caseworkService.post(`/case/${caseId}/note`, { type: 'MANUAL', text: form.data['case-note'] }, headers);
+                            break;
+                    }
+                } else if (somuTypeUuid) {
+                    const { somuItemData, somuItemUuid, somuTypeItems } = options;
+
+                    switch (form.action) {
+                        case actionTypes.ADD_CONTRIBUTION:
+                            await caseworkService.post(`/case/${caseId}/item/${somuTypeUuid}`, { data: somuItemData }, headers);
+                            break;
+                        case actionTypes.ADD_ADDITIONAL_CONTRIBUTION:
+                            await caseworkService.put(`/case/${caseId}/data/CaseContributions`,
+                                somuTypeItems,
+                                { headers: { ...headers.headers, 'Content-Type': 'text/plain' } });
+                            await caseworkService.post(`/case/${caseId}/item/${somuTypeUuid}`, { data: somuItemData }, headers);
+                            break;
+                        case actionTypes.EDIT_CONTRIBUTION:
+                            await caseworkService.put(`/case/${caseId}/data/CaseContributions`,
+                                somuTypeItems,
+                                { headers: { ...headers.headers, 'Content-Type': 'text/plain' } });
+                            await caseworkService.post(`/case/${caseId}/item/${somuTypeUuid}`, { uuid: somuItemUuid, data: somuItemData }, headers);
+                            break;
+                    }
                 }
 
                 return ({ callbackUrl: `/case/${caseId}/stage/${stageId}` });
