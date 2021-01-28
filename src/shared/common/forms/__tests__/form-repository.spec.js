@@ -126,19 +126,4 @@ describe('Form repository', () => {
         expect(Component).toBeNull();
     });
 
-    it('should set the value to the default value if set in props', () => {
-        let defaultHiddenComponent = { component: 'hidden', props: { name: 'hidden-component', defaultValue: 'Test' } };
-
-        const component = formComponentFactory(defaultHiddenComponent.component, {
-            key: 1,
-            config: defaultHiddenComponent.props,
-            callback: mockCallback
-        });
-
-        expect(component).toBeDefined();
-        expect(component.props).toBeDefined();
-        expect(component.props.defaultValue).toEqual('Test');
-        expect(component.props.value).toEqual('Test');
-    });
-
 });

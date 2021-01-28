@@ -477,4 +477,76 @@ describe('Process middleware', () => {
             expect(next).toHaveBeenCalledTimes(1);
         });
     });
+    it('should process conditional radio data when conditional radio data exists', () => {
+        const req = {
+            body: {
+                CurrentStage: 'MPAM_CREATION',
+                DateReceived: '2020-12-04',
+                testField: 'SomeRadioValue',
+                SomeRadioValueText: 'some_text_related_to_radio'
+            },
+            query: {},
+            form: {
+                schema: {
+                    fields: [
+                        {
+                            component: 'radio',
+                            validation: ['required'],
+                            props: {
+                                name: 'testField',
+                                label: 'test-field-label',
+                                choices: [
+                                    { label: 'radio_1', value: 'radio1' },
+                                    { label: 'radio_2', value: 'radio2' },
+                                    {
+                                        label: 'Test Field Label',
+                                        value: 'SomeRadioValue',
+                                        conditionalContent: { label: 'Further Details' }
+                                    },
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        };
+        const res = {};
+        processMiddleware(req, res, next);
+        expect(req.form.data).toEqual({ testField: 'SomeRadioValue', SomeRadioValueText: 'some_text_related_to_radio' });
+    });
+    it('should not process conditional radio data when conditional radio data does not exist', () => {
+        const req = {
+            body: {
+                CurrentStage: 'MPAM_CREATION',
+                DateReceived: '2020-12-04',
+                testField: 'SomeRadioValue',
+            },
+            query: {},
+            form: {
+                schema: {
+                    fields: [
+                        {
+                            component: 'radio',
+                            validation: ['required'],
+                            props: {
+                                name: 'testField',
+                                label: 'test-field-label',
+                                choices: [
+                                    { label: 'radio_1', value: 'radio1' },
+                                    { label: 'radio_2', value: 'radio2' },
+                                    {
+                                        label: 'Test Field Label',
+                                        value: 'SomeRadioValue',
+                                    },
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        };
+        const res = {};
+        processMiddleware(req, res, next);
+        expect(req.form.data).toEqual({ testField: 'SomeRadioValue' });
+    });
 });

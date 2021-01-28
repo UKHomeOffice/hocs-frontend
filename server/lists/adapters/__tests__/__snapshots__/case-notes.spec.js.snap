@@ -129,6 +129,18 @@ Array [
       "date": "5 January 2019 at 12:00",
       "modifiedBy": "MOCK_USER",
       "modifiedDate": null,
+      "note": "A test transfer reason case note",
+    },
+    "timelineItemUUID": "__timelineItemUUID__",
+    "title": "Case transfer reason",
+    "type": "CASE_TRANSFER_REASON",
+  },
+  Object {
+    "body": Object {
+      "author": "MOCK_USER",
+      "date": "5 January 2019 at 12:00",
+      "modifiedBy": "MOCK_USER",
+      "modifiedDate": null,
       "note": "A test case note",
     },
     "timelineItemUUID": "__timelineItemUUID__",
@@ -170,6 +182,22 @@ Array [
     "timelineItemUUID": "__timelineItemUUID__",
     "title": "Document: test document Deleted",
     "type": "DOCUMENT_DELETED",
+  },
+  Object {
+    "body": Object {
+      "allocationId": undefined,
+      "author": "MOCK_USER",
+      "correspondent": undefined,
+      "date": "1 January 2019 at 12:00",
+      "document": undefined,
+      "note": undefined,
+      "noteCount": undefined,
+      "stage": "MOCK_STAGETYPE",
+      "topic": undefined,
+    },
+    "timelineItemUUID": "__timelineItemUUID__",
+    "title": "System event",
+    "type": "TEST_UNKNOWN_TYPE",
   },
   Object {
     "body": Object {

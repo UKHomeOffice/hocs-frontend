@@ -43,7 +43,7 @@ const render = ({
 <body class="govuk-template__body ">
 
     <div id="app">${markup}</div>
-
+    <script src="${assetPath}/all.js"></script>
 </body>
 
 </html>`);

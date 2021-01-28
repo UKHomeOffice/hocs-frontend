@@ -64,5 +64,25 @@ describe('Form radio group component', () => {
         expect(mockCallback).toHaveBeenCalledTimes(2);
         expect(mockCallback).toHaveBeenCalledWith({ 'radio-group': secondValue });
     });
+    it('should textarea if conditional content exists', () => {
+        const choices = [
+            { label: 'labelA', value: 'ValueA', conditionalContent: { label: 'someLabel' } },
+            { label: 'labelB', value: 'ValueB' },
+            { label: 'labelC', value: 'ValueC' }
+        ];
+        expect(
+            render(<RadioGroup name="radio-group" choices={choices} updateState={() => null} />)
+        ).toMatchSnapshot();
+    });
+    it('should render error message for textarea if correct error exists in errors object', () => {
+        const choices = [
+            { label: 'labelA', value: 'ValueA', conditionalContent: { label: 'someLabel' } },
+            { label: 'labelB', value: 'ValueB' },
+            { label: 'labelC', value: 'ValueC' }
+        ];
+        expect(
+            render(<RadioGroup name="radio-group" choices={choices} errors={ { ValueAText: 'Some error message' } } updateState={() => null} />)
+        ).toMatchSnapshot();
+    });
 });
 

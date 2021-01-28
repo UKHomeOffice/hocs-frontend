@@ -123,6 +123,10 @@ const typeAdaptors = {
     WITHDRAW: ({ note }) => ({
         note,
         title: 'Case withdrawn'
+    }),
+    CASE_TRANSFER_REASON: ({ note }) => ({
+        note,
+        title: 'Case transfer reason'
     })
 };
 
