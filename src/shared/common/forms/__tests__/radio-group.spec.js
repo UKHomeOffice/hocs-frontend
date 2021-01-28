@@ -8,11 +8,6 @@ const choices = [
 ];
 
 describe('Form radio group component', () => {
-    beforeAll(() => {
-        // eslint-disable-next-line no-undef
-        window.GOVUKFrontend = { initAll: jest.fn() };
-    });
-
     it('should render with default props', () => {
         expect(
             render(<RadioGroup name="radio-group" choices={choices} updateState={() => null} />)

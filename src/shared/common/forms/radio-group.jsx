@@ -15,7 +15,10 @@ class Radio extends Component {
     componentDidMount() {
         this.props.updateState({ [this.props.name]: this.props.value });
         // eslint-disable-next-line no-undef
-        window.GOVUKFrontend.initAll();
+        if (window.GOVUKFrontend) {
+            // eslint-disable-next-line no-undef
+            window.GOVUKFrontend.initAll();
+        }
     }
 
     componentDidUpdate(prevProps) {
