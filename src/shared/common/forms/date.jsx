@@ -33,7 +33,7 @@ class DateInput extends Component {
             hint,
             label,
             minYear,
-            maxYear,
+            maxYear = new Date().getFullYear() + 100,
             value
         } = this.props;
         const yearKey = this.datePart('year');
@@ -117,8 +117,7 @@ DateInput.propTypes = {
 DateInput.defaultProps = {
     disabled: false,
     value: '',
-    minYear: 1900,
-    maxYear: (new Date().getFullYear() + 100),
+    minYear: 1900
 };
 
 export default DateInput;
