@@ -28,9 +28,10 @@ class Radio extends Component {
     }
 
     handleChange(e, choice) {
+        const index = `${choice.value}Text`;
         this.props.updateState({ [this.props.name]: e.target.value });
         if ('conditionalContent' in choice) {
-            this.props.updateState({ [`${choice.value}Text`]: '' });
+            this.props.updateState({ [index]: this.props.data[index] || '' });
         }
     }
 
@@ -164,7 +165,7 @@ class Radio extends Component {
                                                     rows="4"
                                                     aria-describedby={`${choice.value}Text ${this.isConditionalContentError(errors, `${choice.value}Text`) ? ` ${choice.value}Text-error` : ''}`}
                                                     onChange={e => this.handleChangeForTextArea(e)}
-                                                    defaultValue={this.returnConditionalContentValue(`${value}Text`)}
+                                                    value={this.returnConditionalContentValue(`${value}Text`)}
                                                 />
                                             </div>
 
