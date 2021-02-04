@@ -257,7 +257,7 @@ services:
     - hocs-network
     environment:
       SPRING_PROFILES_ACTIVE: 'development, local, postgres'
-      SPRING_FLYWAY_SCHEMAS: 'docs'
+      SPRING_FLYWAY_SCHEMAS: 'document'
       SERVER_PORT: 8080
       DOCS_QUEUE_NAME: 'document-queue'
       DOCS_QUEUE_DLQ_NAME: 'document-queue-dlq'
