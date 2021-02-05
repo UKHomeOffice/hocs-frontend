@@ -135,7 +135,7 @@ class SomuList extends Component {
     componentDidMount() {
         const { name, somuItems } = this.props;
 
-        this.props.updateState({ [name]: somuItems });
+        this.props.updateState({ [name]: JSON.stringify(somuItems) });
     }
 
     renderItemLinks(somuItem) {

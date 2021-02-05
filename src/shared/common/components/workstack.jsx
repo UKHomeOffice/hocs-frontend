@@ -36,7 +36,8 @@ const ColumnRenderer = {
     DUE_DATE_WARNING: 'dueDateWarning',
     INDICATOR_BLUE: 'indicatorBlue',
     INDICATOR_RED: 'indicatorRed',
-    WRAP_TEXT: 'wrapText'
+    WRAP_TEXT: 'wrapText',
+    TRUNCATE_TEXT: 'truncateText'
 };
 
 const ColumnSortStrategy = {
@@ -289,12 +290,19 @@ class WorkstackAllocate extends Component {
             case ColumnRenderer.DUE_DATE_WARNING:
                 if (row.data.CaseContributions) {
                     const dueContribution = JSON.parse(row.data.CaseContributions)
-                        .filter(contribution => !contribution.contributionStatus)
-                        .map(contribution => contribution.contributionDueDate)
+                        .filter(contribution => contribution.data && !contribution.data.contributionStatus)
+                        .map(contribution => contribution.data.contributionDueDate)
                         .sort()
                         .shift();
 
                     if (dueContribution && new Date(dueContribution) <= new Date()) {
+                        return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell date-warning'>
+                            <span>{value}</span>
+                        </td>;
+                    }
+                }
+                if (row.data.DueDate) {
+                    if (new Date(row.data.DueDate) <= new Date()) {
                         return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell date-warning'>
                             <span>{value}</span>
                         </td>;
@@ -315,6 +323,8 @@ class WorkstackAllocate extends Component {
                 </td>;
             case ColumnRenderer.WRAP_TEXT:
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell wrap-text'>{value}</td>;
+            case ColumnRenderer.TRUNCATE_TEXT:
+                return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell govuk-table__cell--truncated' title={value}>{value}</td>;
             default:
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>{value}</td>;
         }
@@ -397,6 +407,7 @@ class WorkstackAllocate extends Component {
     render() {
         const { isMounted, items, selectable, columns } = this.state;
         const { baseUrl, teamMembers, submitHandler, allocateToTeamEndpoint, allocateToWorkstackEndpoint, allocateToUserEndpoint } = this.props;
+
 
         return (
             <Fragment>

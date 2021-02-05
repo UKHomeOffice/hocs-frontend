@@ -367,21 +367,21 @@ describe('when the hydrate method is called', () => {
 
     describe('and the schema has populated somu type and somu item containing items', () => {
         const somuType = {
-            uuid: '00000000-0000-0000-0000-000000000000', 
+            uuid: '00000000-0000-0000-0000-000000000000',
             caseType: 'TESTCASETYPE',
             type: 'TEST',
             active: true
         };
 
         const somuItems = {
-            uuid: '00000000-0000-0000-0000-000000000000', 
+            uuid: '00000000-0000-0000-0000-000000000000',
             data: '{}',
             deleted: true
         };
 
         const choices = [{
-            "value":"Value",
-            "label":"Label"
+            'value':'Value',
+            'label':'Label'
         }];
 
         const formSchema = {

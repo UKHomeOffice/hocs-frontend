@@ -25,16 +25,18 @@ import Hidden from './hidden.jsx';
 import ExpandableCheckbox from './expandable-checkbox.jsx';
 import FlowDirectionLink from './flow-direction-link.jsx';
 
-function defaultDataAdapter(name, data) {
-    return data[name] || '';
+function defaultDataAdapter(name, data, currentValue) {
+    return data[name] || currentValue;
 }
 
 function renderFormComponent(Component, options) {
     const { key, config, data, errors, callback, dataAdapter, page } = options;
+
     if (isComponentVisible(config, data)) {
-        let value = '';
+        let value = config.defaultValue || '';
+
         if (data) {
-            value = dataAdapter ? dataAdapter(config.name, data) : defaultDataAdapter(config.name, data);
+            value = dataAdapter ? dataAdapter(config.name, data) : defaultDataAdapter(config.name, data, value);
         }
         return <Component key={key}
             {...config}
@@ -50,12 +52,25 @@ function renderFormComponent(Component, options) {
 
 function isComponentVisible(config, data) {
     let isVisible = true;
-    if (config.visibilityConditions) {
+    let { visibilityConditions, hideConditions } = config;
+
+    // show component based on visibilityConditions
+    if (visibilityConditions) {
         isVisible = false;
-        for (var i = 0; i < config.visibilityConditions.length; i++) {
-            const condition = config.visibilityConditions[i];
+        for (let i = 0; i < visibilityConditions.length; i++) {
+            const condition = visibilityConditions[i];
             if (data[condition.conditionPropertyName] && data[condition.conditionPropertyName] === condition.conditionPropertyValue) {
                 isVisible = true;
+            }
+        }
+    }
+
+    // hide component based on hideConditions
+    if (hideConditions) {
+        for (let i = 0; i < hideConditions.length; i++) {
+            const condition = hideConditions[i];
+            if (data[condition.conditionPropertyName] && data[condition.conditionPropertyName] === condition.conditionPropertyValue) {
+                isVisible = false;
             }
         }
     }

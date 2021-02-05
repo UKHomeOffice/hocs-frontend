@@ -1,6 +1,17 @@
 const { FormSubmissionError } = require('../models/error');
 
 const customAdapters = {
+    'radio': (reducer, field, data) => {
+        const { name } = field.props;
+        const conditionalRadioButtonTextFieldId = `${data[name]}Text`;
+
+        if (Object.prototype.hasOwnProperty.call(data, name)) {
+            reducer[name] = data[name];
+            if(conditionalRadioButtonTextFieldId in data) {
+                reducer[conditionalRadioButtonTextFieldId] = data[conditionalRadioButtonTextFieldId];
+            }
+        }
+    },
     'date': (reducer, field, data) => {
         const { name } = field.props;
         const value = data[name];

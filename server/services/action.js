@@ -213,11 +213,15 @@ const actions = {
                             await caseworkService.post(`/case/${caseId}/item/${somuTypeUuid}`, { data: somuItemData }, headers);
                             break;
                         case actionTypes.ADD_ADDITIONAL_CONTRIBUTION:
-                            await caseworkService.put(`/case/${caseId}/data/CaseContributions`, { data: somuTypeItems }, headers);
+                            await caseworkService.put(`/case/${caseId}/data/CaseContributions`,
+                                somuTypeItems,
+                                { headers: { ...headers.headers, 'Content-Type': 'text/plain' } });
                             await caseworkService.post(`/case/${caseId}/item/${somuTypeUuid}`, { data: somuItemData }, headers);
                             break;
                         case actionTypes.EDIT_CONTRIBUTION:
-                            await caseworkService.put(`/case/${caseId}/data/CaseContributions`, { data: somuTypeItems }, headers);
+                            await caseworkService.put(`/case/${caseId}/data/CaseContributions`,
+                                somuTypeItems,
+                                { headers: { ...headers.headers, 'Content-Type': 'text/plain' } });
                             await caseworkService.post(`/case/${caseId}/item/${somuTypeUuid}`, { uuid: somuItemUuid, data: somuItemData }, headers);
                             break;
                     }

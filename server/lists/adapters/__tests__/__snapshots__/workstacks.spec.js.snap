@@ -110,6 +110,8 @@ Object {
     Object {
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
+      "assignedTopic": "MOCK_TOPIC",
+      "assignedTopicDisplay": "MOCK_TOPIC",
       "assignedUserDisplay": "MOCK_USER",
       "caseReference": "A/1234567/19",
       "caseType": "DEFAULT",
@@ -126,6 +128,8 @@ Object {
     Object {
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
+      "assignedTopic": "MOCK_TOPIC",
+      "assignedTopicDisplay": "MOCK_TOPIC",
       "assignedUserDisplay": "MOCK_USER",
       "caseReference": "A/1234567/19",
       "caseType": "DEFAULT",
@@ -142,6 +146,8 @@ Object {
     Object {
       "active": false,
       "assignedTeamDisplay": "MOCK_TEAM",
+      "assignedTopic": "MOCK_TOPIC",
+      "assignedTopicDisplay": "MOCK_TOPIC",
       "assignedUserDisplay": "MOCK_USER",
       "caseReference": "A/1234567/19",
       "caseType": "DEFAULT",
@@ -158,6 +164,8 @@ Object {
     Object {
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
+      "assignedTopic": "MOCK_TOPIC",
+      "assignedTopicDisplay": "MOCK_TOPIC",
       "caseReference": "A/1234568/19",
       "caseType": "DEFAULT",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
@@ -322,6 +330,8 @@ Object {
     Object {
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
+      "assignedTopic": "MOCK_TOPIC",
+      "assignedTopicDisplay": "MOCK_TOPIC",
       "caseReference": "A/1234568/19",
       "caseType": "DEFAULT",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
@@ -368,6 +378,8 @@ Object {
     Object {
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
+      "assignedTopic": "MOCK_TOPIC",
+      "assignedTopicDisplay": "MOCK_TOPIC",
       "assignedUserDisplay": "MOCK_USER",
       "caseType": "DEFAULT",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
@@ -571,6 +583,38 @@ Object {
 }
 `;
 
+exports[`Workflow Workstack Adapter should transform a stage array to a workflow workstack with DueDate with contributionDueDate 1`] = `
+Object {
+  "allocateToTeamEndpoint": "/allocate/team",
+  "allocateToUserEndpoint": "/allocate/user",
+  "allocateToWorkstackEndpoint": "/unallocate/",
+  "columns": Array [],
+  "items": Array [
+    Object {
+      "active": true,
+      "assignedTeamDisplay": "MOCK_TEAM",
+      "assignedUserDisplay": "MOCK_USER",
+      "caseReference": "A/1234568/19",
+      "caseType": "WCS",
+      "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "data": Object {
+        "CaseContributions": "[{\\"data\\": {\\"contributionDueDate\\":\\"2020-12-12\\"}}]",
+        "DueDate": "2020-12-10",
+      },
+      "deadline": "2200-01-03",
+      "deadlineDisplay": "03/01/2200",
+      "stageType": "A",
+      "stageTypeDisplay": "MOCK_STAGETYPE",
+      "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE due 10/12/2020",
+      "teamUUID": 2,
+      "userUUID": 2,
+    },
+  ],
+  "label": "MOCK_STAGETYPE",
+  "teamMembers": Array [],
+}
+`;
+
 exports[`Workflow Workstack Adapter should transform a stage array to a workflow workstack with a contributionDueDate 1`] = `
 Object {
   "allocateToTeamEndpoint": "/allocate/team",
@@ -591,6 +635,161 @@ Object {
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
       "stageType": "A",
+      "stageTypeDisplay": "MOCK_STAGETYPE",
+      "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE",
+      "teamUUID": 2,
+      "userUUID": 2,
+    },
+  ],
+  "label": "MOCK_STAGETYPE",
+  "teamMembers": Array [],
+}
+`;
+
+exports[`Workflow Workstack Adapter should transform a stage array to a workflow workstack with at MPAM_DRAFT_REQUESTED_CONTRIBUTION with contributionStatus 1`] = `
+Object {
+  "allocateToTeamEndpoint": "/allocate/team",
+  "allocateToUserEndpoint": "/allocate/user",
+  "allocateToWorkstackEndpoint": "/unallocate/",
+  "columns": Array [],
+  "items": Array [
+    Object {
+      "active": true,
+      "assignedTeamDisplay": "MOCK_TEAM",
+      "assignedUserDisplay": "MOCK_USER",
+      "caseReference": "A/1234568/19",
+      "caseType": "WCS",
+      "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "data": Object {
+        "CaseContributions": "[{\\"data\\": {\\"contributionDueDate\\":\\"2020-12-12\\"}}]",
+      },
+      "deadline": "2200-01-03",
+      "deadlineDisplay": "03/01/2200",
+      "stageType": "MPAM_DRAFT_REQUESTED_CONTRIBUTION",
+      "stageTypeDisplay": "MOCK_STAGETYPE",
+      "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE due: 12/12/2020",
+      "teamUUID": 2,
+      "userUUID": 2,
+    },
+  ],
+  "label": "MOCK_STAGETYPE",
+  "teamMembers": Array [],
+}
+`;
+
+exports[`Workflow Workstack Adapter should transform a stage array to a workflow workstack with at MPAM_DRAFT_REQUESTED_CONTRIBUTION with contributionStatus and contributionStatus 1`] = `
+Object {
+  "allocateToTeamEndpoint": "/allocate/team",
+  "allocateToUserEndpoint": "/allocate/user",
+  "allocateToWorkstackEndpoint": "/unallocate/",
+  "columns": Array [],
+  "items": Array [
+    Object {
+      "active": true,
+      "assignedTeamDisplay": "MOCK_TEAM",
+      "assignedUserDisplay": "MOCK_USER",
+      "caseReference": "A/1234568/19",
+      "caseType": "WCS",
+      "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "data": Object {
+        "CaseContributions": "[{\\"data\\": {\\"contributionDueDate\\":\\"2020-12-12\\", \\"contributionStatus\\": \\"TEST\\"}}]",
+      },
+      "deadline": "2200-01-03",
+      "deadlineDisplay": "03/01/2200",
+      "stageType": "MPAM_DRAFT_REQUESTED_CONTRIBUTION",
+      "stageTypeDisplay": "MOCK_STAGETYPE",
+      "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE",
+      "teamUUID": 2,
+      "userUUID": 2,
+    },
+  ],
+  "label": "MOCK_STAGETYPE",
+  "teamMembers": Array [],
+}
+`;
+
+exports[`Workflow Workstack Adapter should transform a stage array to a workflow workstack with at MPAM_TRIAGE with contributionStatus 1`] = `
+Object {
+  "allocateToTeamEndpoint": "/allocate/team",
+  "allocateToUserEndpoint": "/allocate/user",
+  "allocateToWorkstackEndpoint": "/unallocate/",
+  "columns": Array [],
+  "items": Array [
+    Object {
+      "active": true,
+      "assignedTeamDisplay": "MOCK_TEAM",
+      "assignedUserDisplay": "MOCK_USER",
+      "caseReference": "A/1234568/19",
+      "caseType": "WCS",
+      "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "data": Object {
+        "CaseContributions": "[{\\"data\\": {\\"contributionDueDate\\":\\"2020-12-12\\", \\"contributionStatus\\":\\"blah\\"}}]",
+      },
+      "deadline": "2200-01-03",
+      "deadlineDisplay": "03/01/2200",
+      "stageType": "MPAM_TRIAGE",
+      "stageTypeDisplay": "MOCK_STAGETYPE",
+      "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE (Contributions Received)",
+      "teamUUID": 2,
+      "userUUID": 2,
+    },
+  ],
+  "label": "MOCK_STAGETYPE",
+  "teamMembers": Array [],
+}
+`;
+
+exports[`Workflow Workstack Adapter should transform a stage array to a workflow workstack with at MPAM_TRIAGE_REQUESTED_CONTRIBUTION with contributionDueDate 1`] = `
+Object {
+  "allocateToTeamEndpoint": "/allocate/team",
+  "allocateToUserEndpoint": "/allocate/user",
+  "allocateToWorkstackEndpoint": "/unallocate/",
+  "columns": Array [],
+  "items": Array [
+    Object {
+      "active": true,
+      "assignedTeamDisplay": "MOCK_TEAM",
+      "assignedUserDisplay": "MOCK_USER",
+      "caseReference": "A/1234568/19",
+      "caseType": "WCS",
+      "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "data": Object {
+        "CaseContributions": "[{\\"data\\": {\\"contributionDueDate\\":\\"2020-12-12\\"}}]",
+      },
+      "deadline": "2200-01-03",
+      "deadlineDisplay": "03/01/2200",
+      "stageType": "MPAM_TRIAGE_REQUESTED_CONTRIBUTION",
+      "stageTypeDisplay": "MOCK_STAGETYPE",
+      "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE due: 12/12/2020",
+      "teamUUID": 2,
+      "userUUID": 2,
+    },
+  ],
+  "label": "MOCK_STAGETYPE",
+  "teamMembers": Array [],
+}
+`;
+
+exports[`Workflow Workstack Adapter should transform a stage array to a workflow workstack with at MPAM_TRIAGE_REQUESTED_CONTRIBUTION with contributionStatus and contributionStatus 1`] = `
+Object {
+  "allocateToTeamEndpoint": "/allocate/team",
+  "allocateToUserEndpoint": "/allocate/user",
+  "allocateToWorkstackEndpoint": "/unallocate/",
+  "columns": Array [],
+  "items": Array [
+    Object {
+      "active": true,
+      "assignedTeamDisplay": "MOCK_TEAM",
+      "assignedUserDisplay": "MOCK_USER",
+      "caseReference": "A/1234568/19",
+      "caseType": "WCS",
+      "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "data": Object {
+        "CaseContributions": "[{\\"data\\": {\\"contributionDueDate\\":\\"2020-12-12\\", \\"contributionStatus\\": \\"TEST\\"}}]",
+      },
+      "deadline": "2200-01-03",
+      "deadlineDisplay": "03/01/2200",
+      "stageType": "MPAM_TRIAGE_REQUESTED_CONTRIBUTION",
       "stageTypeDisplay": "MOCK_STAGETYPE",
       "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE",
       "teamUUID": 2,

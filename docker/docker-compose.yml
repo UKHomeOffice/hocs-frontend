@@ -18,7 +18,7 @@ services:
     - /var/lib/postgresql
 
   clamd:
-    image: quay.io/ukhomeofficedigital/clamav:v1.4.0
+    image: mkodockx/docker-clamav:buster-slim
     ports:
     - "3310:3310/tcp"
     networks:
