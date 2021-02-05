@@ -80,6 +80,10 @@ const typeAdaptors = {
         note,
         title: 'Allocation note'
     }),
+    CHANGE: ({ note }) => ({
+        note,
+        title: 'Change note'
+    }),
     CLOSE: ({ note }) => ({
         note,
         title: 'Case closure note'

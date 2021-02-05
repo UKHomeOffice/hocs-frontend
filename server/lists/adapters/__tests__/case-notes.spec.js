@@ -41,8 +41,8 @@ describe('Case Notes Adapter', () => {
             { eventTime: '2019-01-04 12:00:00', type: 'DOCUMENT_CREATED', userName: 'User A', body: { caseNote: 'A test case note', userUUID: 1, teamUUID: 1, stage: 1, documentTitle: 'test document', topic: 'test topic', fullname: 'test correspondent' }, timelineItemUUID: '__timelineItemUUID__' },
             { eventTime: '2019-01-02 12:00:00', type: 'DOCUMENT_DELETED', userName: 'User A', body: { caseNote: 'A test case note', userUUID: 1, teamUUID: 1, stage: 1, documentTitle: 'test document', topic: 'test topic', fullname: 'test correspondent' }, timelineItemUUID: '__timelineItemUUID__' },
             { eventTime: '2019-01-05 12:00:00', type: 'CLOSE', userName: 'User A', body: { caseNote: 'A test case note', userUUID: 1, teamUUID: 1, stage: 1 }, timelineItemUUID: '__timelineItemUUID__' },
+            { eventTime: '2019-01-05 12:00:00', type: 'CHANGE', userName: 'User A', body: { caseNote: 'A test case note', userUUID: 1, teamUUID: 1, stage: 1 }, timelineItemUUID: '__timelineItemUUID__' },
             { eventTime: '2019-01-05 12:00:00', type: 'CASE_TRANSFER_REASON', userName: 'User A', body: { caseNote: 'A test transfer reason case note', userUUID: 1, teamUUID: 1, stage: 1 }, timelineItemUUID: '__timelineItemUUID__' },
-            { eventTime: '2019-01-01 12:00:00', type: 'TEST_UNKNOWN_TYPE', userName: 'User A', timelineItemUUID: '__timelineItemUUID__' },
             { eventTime: '2019-01-01 12:00:00', type: 'TEST_UNKNOWN_TYPE', userName: 'User A', timelineItemUUID: '__timelineItemUUID__' }
         ];
 
