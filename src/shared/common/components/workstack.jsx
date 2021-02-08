@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import Submit from '../forms/submit.jsx';
 import Dropdown from '../forms/dropdown.jsx';
 import { ApplicationConsumer } from '../../contexts/application.jsx';
+import deepEqual from 'deep-equal';
 
 const LinkButton = ({ label, endpoint, submitHandler }) => (
     <button
@@ -153,9 +154,9 @@ class WorkstackAllocate extends Component {
         }
     }
 
-    UNSAFE_componentWillReceiveProps(nextProps) {
-        if (this.props.items != nextProps.items) {
-            this.applyFilter(this.state.filter, nextProps.items, nextProps.columns);
+    componentDidUpdate(prevProps) {
+        if (!deepEqual(prevProps.items, this.props.items)) {
+            this.applyFilter(this.state.filter, this.props.items, this.props.columns);
         }
     }
 
