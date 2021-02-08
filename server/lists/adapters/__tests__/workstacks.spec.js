@@ -730,6 +730,39 @@ describe('Workflow Workstack Adapter', () => {
         expect(result).toMatchSnapshot();
     });
 
+    it('should add the case ref and primary correspondent to primaryCorrespondentAndRefDisplay', async () => {
+        const mockData = {
+            stages: [
+                {
+                    correspondents: {
+                        correspondents: [ { fullname: 'testName', uuid: 'uuid123', is_primary: 'true' } ]
+                    },
+                    teamUUID: 2,
+                    caseType: 'WCS',
+                    stageType: 'A',
+                    userUUID: 2,
+                    deadline: '2200-01-03',
+                    caseReference: 'A/1234568/19',
+                    active: true,
+                    data: {
+                        CaseContributions: '[{}]',
+                    }
+                }
+            ]
+        };
+
+        const result = await stageAdapter(mockData, {
+            user: mockUser,
+            fromStaticList: mockFromStaticList,
+            logger: mockLogger,
+            teamId: 2,
+            workflowId: 'WCS',
+            stageId: 'A',
+            configuration: mockConfiguration
+        });
+        expect(result).toMatchSnapshot();
+    });
+
     it('should transform a stage array to a workflow workstack with at MPAM_TRIAGE with contributionStatus',
         async () => {
             const mockData = {
