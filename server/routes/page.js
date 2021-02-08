@@ -5,8 +5,9 @@ const {
     workflowWorkstackMiddleware,
     stageWorkstackMiddleware,
     getTeamMembers,
+    getMoveTeamOptions,
     allocateToUser,
-    allocateToTeam,
+    handleWorkstackSubmit,
     unallocate
 } = require('../middleware/workstack');
 const { fileMiddleware } = require('../middleware/file');
@@ -19,7 +20,7 @@ router.get('/workstack/user', userWorkstackMiddleware, (req, res, next) => {
     next();
 });
 
-router.get('/workstack/team/:teamId', teamWorkstackMiddleware, getTeamMembers, (req, res, next) => {
+router.get('/workstack/team/:teamId`', teamWorkstackMiddleware, getTeamMembers, getMoveTeamOptions, (req, res, next) => {
     res.locals.workstack.breadcrumbs = [
         { to: '/', label: 'Dashboard' },
         { to: `/workstack/team/${req.params.teamId}`, label: 'Team' }
@@ -27,7 +28,7 @@ router.get('/workstack/team/:teamId', teamWorkstackMiddleware, getTeamMembers, (
     next();
 });
 
-router.get('/workstack/team/:teamId/workflow/:workflowId', workflowWorkstackMiddleware, getTeamMembers, (req, res, next) => {
+router.get('/workstack/team/:teamId/workflow/:workflowId', workflowWorkstackMiddleware, getTeamMembers, getMoveTeamOptions, (req, res, next) => {
     res.locals.workstack.breadcrumbs = [
         { to: '/', label: 'Dashboard' },
         { to: `/workstack/team/${req.params.teamId}`, label: 'Team' },
@@ -36,7 +37,7 @@ router.get('/workstack/team/:teamId/workflow/:workflowId', workflowWorkstackMidd
     next();
 });
 
-router.get('/workstack/team/:teamId/workflow/:workflowId/stage/:stageId', stageWorkstackMiddleware, getTeamMembers, (req, res, next) => {
+router.get('/workstack/team/:teamId/workflow/:workflowId/stage/:stageId', stageWorkstackMiddleware, getTeamMembers, getMoveTeamOptions, (req, res, next) => {
     res.locals.workstack.breadcrumbs = [
         { to: '/', label: 'Dashboard' },
         { to: `/workstack/team/${req.params.teamId}`, label: 'Team' },
@@ -72,7 +73,7 @@ router.post('/workstack/team/:teamId/workflow/:workflowId/stage/:stageId/allocat
 
 router.post('/workstack/team/:teamId/allocate/team',
     fileMiddleware.any(),
-    allocateToTeam,
+    handleWorkstackSubmit,
     (req, res) => {
         res.redirect(`/workstack/team/${req.params.teamId}`);
     }
@@ -80,7 +81,7 @@ router.post('/workstack/team/:teamId/allocate/team',
 
 router.post('/workstack/team/:teamId/workflow/:workflowId/allocate/team',
     fileMiddleware.any(),
-    allocateToTeam,
+    handleWorkstackSubmit,
     (req, res) => {
         res.redirect(`/workstack/team/${req.params.teamId}/workflow/${req.params.workflowId}`);
     }
@@ -88,7 +89,7 @@ router.post('/workstack/team/:teamId/workflow/:workflowId/allocate/team',
 
 router.post('/workstack/team/:teamId/workflow/:workflowId/stage/:stageId/allocate/team',
     fileMiddleware.any(),
-    allocateToTeam,
+    handleWorkstackSubmit,
     (req, res) => {
         res.redirect(`/workstack/team/${req.params.teamId}/workflow/${req.params.workflowId}/stage/${req.params.stageId}`);
     }

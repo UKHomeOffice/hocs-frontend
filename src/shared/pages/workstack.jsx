@@ -93,6 +93,7 @@ class WorkstackPage extends Component {
                 payload.append(field, formData[field]);
             }
         });
+
         axios.post('/api' + endpoint, payload, { headers: { 'Content-Type': 'multipart/form-data' } })
             .then(({ data: { workstack, redirect } }) => {
                 if (typeof redirect === 'string') {
@@ -103,6 +104,8 @@ class WorkstackPage extends Component {
             .then(() => endpoint === match.url + workstack.allocateToUserEndpoint ? 'Allocate to self' : endpoint === match.url + workstack.allocateToTeamEndpoint ? 'Allocate to team member' : 'Unallocate')
             .then(label => track('EVENT', { category: title, action: 'Submit', label }));
     }
+
+
 
     updateFormData(update) {
         this.setState(state => ({ ...state, formData: { ...state.formData, ...update } }));
@@ -125,7 +128,7 @@ class WorkstackPage extends Component {
     renderWorkstack() {
         const { match: { url }, selectable = true } = this.props;
         const { workstack, formData } = this.state;
-        const { allocateToUserEndpoint, allocateToTeamEndpoint, allocateToWorkstackEndpoint, items, teamMembers, errors, errorHeading, columns } = workstack;
+        const { allocateToUserEndpoint, allocateToTeamEndpoint, allocateToWorkstackEndpoint, items, teamMembers, moveTeamOptions, errors, errorHeading, columns } = workstack;
         return (
             <Fragment>
                 {errors && <ErrorSummary errors={errors} heading={errorHeading} />}
@@ -136,6 +139,7 @@ class WorkstackPage extends Component {
                     selectable={selectable}
                     selectedCases={formData['selected_cases']}
                     teamMembers={teamMembers}
+                    moveTeamOptions={moveTeamOptions}
                     allocateToUserEndpoint={allocateToUserEndpoint}
                     allocateToTeamEndpoint={allocateToTeamEndpoint}
                     allocateToWorkstackEndpoint={allocateToWorkstackEndpoint}
@@ -189,3 +193,4 @@ const WrappedWorkstack = (props) => (
 );
 
 export default WrappedWorkstack;
+

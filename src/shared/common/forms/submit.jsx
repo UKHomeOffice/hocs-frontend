@@ -6,7 +6,9 @@ class Submit extends Component {
         const {
             className,
             disabled,
-            label
+            label,
+            name,
+            callback = (arg) => arg
         } = this.props;
         return (
             <Fragment>
@@ -15,6 +17,8 @@ class Submit extends Component {
                     disabled={disabled}
                     type="submit"
                     value={label}
+                    name={name}
+                    onClick={() => callback( { submitAction: name } )}
                 />
             </Fragment>
         );
@@ -24,7 +28,9 @@ class Submit extends Component {
 Submit.propTypes = {
     className: PropTypes.string,
     disabled: PropTypes.bool,
-    label: PropTypes.string
+    label: PropTypes.string,
+    name: PropTypes.string,
+    callback: PropTypes.func
 };
 
 Submit.defaultProps = {

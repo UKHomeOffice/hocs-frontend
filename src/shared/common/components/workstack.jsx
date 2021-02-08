@@ -344,7 +344,18 @@ class WorkstackAllocate extends Component {
         return (
             <Fragment>
                 <Dropdown label='Allocate to a team member' name='selected_user' updateState={this.props.updateFormData} choices={teamMembers} />
-                <Submit label='Allocate' />
+                <Submit label='Allocate' name='allocate_to_team_member' callback={this.props.updateFormData}/>
+            </Fragment>
+        );
+    }
+
+    renderMoveToAnotherTeamDropdown() {
+        const { moveTeamOptions } = this.props;
+
+        return (
+            <Fragment>
+                <Dropdown label='Move to another team' name='selected_team' updateState={this.props.updateFormData} choices={moveTeamOptions} />
+                <Submit label='Move to team' name='move_team' callback={this.props.updateFormData}/>
             </Fragment>
         );
     }
@@ -415,9 +426,7 @@ class WorkstackAllocate extends Component {
 
     render() {
         const { isMounted, items, selectable, columns } = this.state;
-        const { baseUrl, teamMembers, submitHandler, allocateToTeamEndpoint, allocateToWorkstackEndpoint, allocateToUserEndpoint } = this.props;
-
-
+        const { baseUrl, teamMembers, moveTeamOptions, submitHandler, allocateToTeamEndpoint, allocateToWorkstackEndpoint, allocateToUserEndpoint } = this.props;
         return (
             <Fragment>
                 {isMounted && this.renderFilter()}
@@ -464,6 +473,7 @@ class WorkstackAllocate extends Component {
                                             {this.renderTakeNextCaseButton()}
                                         </ul>
                                         {teamMembers && this.renderTeamsDropdown()}
+                                        {moveTeamOptions && moveTeamOptions.length > 0 && this.renderMoveToAnotherTeamDropdown()}
                                     </div>
                                 </div>
                             </fieldset>
@@ -481,6 +491,7 @@ WorkstackAllocate.propTypes = {
     selectable: PropTypes.bool.isRequired,
     selectedCases: PropTypes.array,
     teamMembers: PropTypes.array,
+    moveTeamOptions: PropTypes.array,
     allocateToUserEndpoint: PropTypes.string,
     allocateToTeamEndpoint: PropTypes.string,
     allocateToWorkstackEndpoint: PropTypes.string.isRequired,

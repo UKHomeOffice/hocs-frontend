@@ -4,12 +4,24 @@ const {
     workflowWorkstackMiddleware,
     stageWorkstackMiddleware,
     workstackApiResponseMiddleware,
-    allocateNextCaseToUser
+    allocateNextCaseToUser,
+    getMoveTeamOptions,
+    handleWorkstackSubmit
 } = require('../workstack');
 
 let req = {};
 let res = {};
 const next = jest.fn();
+
+
+const { caseworkService } = require('../../clients');
+
+jest.mock('../../clients', () => ({
+    caseworkService: {
+        put: jest.fn()
+    }
+}));
+
 
 describe('Workstack middleware', () => {
 
@@ -83,6 +95,69 @@ describe('Workstack middleware', () => {
         });
     });
 
+    describe('workstack submit case update (allocate/move team)', () => {
+        const expectedHeaders = {
+            'headers': {
+                'X-Auth-Groups': 'some_groups',
+                'X-Auth-Roles': 'some_roles',
+                'X-Auth-UserId': 'userUuid',
+            }
+        };
+
+        beforeEach(() => {
+            next.mockReset();
+            res = {};
+
+            req = {
+                user: { uuid: 'userUuid', roles: { join: () => 'some_roles' }, groups: { join: () => 'some_groups' } }
+            };
+
+            caseworkService.put.mockClear();
+        });
+
+        it('should invoke the caseservice to allocate cases to a team member', async () => {
+            req.body = {
+                'selected_user': 'test_user',
+                'submitAction': 'allocate_to_team_member',
+                'selected_cases': [
+                    'uuid1:uuid2',
+                    'uuid3:uuid4'
+                ]
+            };
+
+            await handleWorkstackSubmit(req, res, next);
+
+            expect(caseworkService.put.mock.calls[0])
+                .toEqual(['/case/uuid1/stage/uuid2/user',{ 'userUUID':'test_user' }, expectedHeaders]);
+
+            expect(caseworkService.put.mock.calls[1])
+                .toEqual(['/case/uuid3/stage/uuid4/user',{ 'userUUID':'test_user' }, expectedHeaders]);
+
+            expect(next).toBeCalled();
+        });
+
+        it('should invoke the caseservice to move cases to the correct team', async () => {
+            req.body = {
+                'selected_team': 'test_team',
+                'submitAction': 'move_team',
+                'selected_cases': [
+                    'uuid1:uuid2',
+                    'uuid3:uuid4'
+                ]
+            };
+
+            await handleWorkstackSubmit(req, res, next);
+
+            expect(caseworkService.put.mock.calls[0])
+                .toEqual(['/case/uuid1/stage/uuid2/team',{ 'teamUUID':'test_team' }, expectedHeaders]);
+
+            expect(caseworkService.put.mock.calls[1])
+                .toEqual(['/case/uuid3/stage/uuid4/team',{ 'teamUUID':'test_team' }, expectedHeaders]);
+
+            expect(next).toBeCalled();
+        });
+    });
+
     describe('Team workstack middleware', () => {
         beforeEach(() => {
             next.mockReset();
@@ -114,6 +189,34 @@ describe('Workstack middleware', () => {
             expect(res.locals.workstack).not.toBeDefined();
             expect(next).toHaveBeenCalled();
             expect(next).toHaveBeenCalledWith('MOCK_ERROR');
+        });
+    });
+
+    describe('Get Move Team Options', () => {
+        const mockTeamsResponse = [ { 'team_object': 'team' } ];
+
+        beforeEach(() => {
+            next.mockReset();
+            req = {
+                listService: {
+                    fetch: jest.fn(async (list) => {
+                        if (list === 'MOVE_TEAM_OPTIONS') {
+                            return Promise.resolve(mockTeamsResponse);
+                        }
+                        return Promise.reject();
+                    })
+                }
+            };
+            res = {
+                locals: {
+                    workstack: {}
+                }
+            };
+        });
+
+        it('should get the move team options from the info service', async () => {
+            await getMoveTeamOptions(req, res, next);
+            expect(res.locals.workstack.moveTeamOptions).toEqual(mockTeamsResponse);
         });
     });
 
