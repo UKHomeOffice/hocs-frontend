@@ -163,7 +163,6 @@ class Radio extends Component {
                                                     name={`${choice.value}Text`}
                                                     disabled={disabled}
                                                     rows="4"
-                                                    aria-describedby={`${choice.value}Text ${this.isConditionalContentError(errors, `${choice.value}Text`) ? ` ${choice.value}Text-error` : ''}`}
                                                     onChange={e => this.handleChangeForTextArea(e)}
                                                     value={this.returnConditionalContentValue(`${value}Text`)}
                                                 />

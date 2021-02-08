@@ -145,7 +145,6 @@ exports[`Form radio group component should render error message for textarea if 
             Some error message
           </span>
           <textarea
-            aria-describedby="ValueAText  ValueAText-error"
             class="govuk-textarea  govuk-textarea--error"
             id="ValueAText"
             name="ValueAText"
@@ -661,7 +660,6 @@ exports[`Form radio group component should textarea if conditional content exist
             someLabel
           </label>
           <textarea
-            aria-describedby="ValueAText "
             class="govuk-textarea "
             id="ValueAText"
             name="ValueAText"
