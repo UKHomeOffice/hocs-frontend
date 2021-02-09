@@ -606,4 +606,94 @@ describe('Validation middleware', () => {
         expect(next.mock.calls[0][0]).toBeInstanceOf(ValidationError);
         expect(next.mock.calls[0][0].fields).toEqual({ TestRadioField: 'TestRadioField_label is required' });
     });
+    it('should not validate if visibilityConditions & hideConditions have not been met', () => {
+        const req = setUpFormData('p1');
+        validationMiddleware(req, res, next);
+        expect(req.form).toBeDefined();
+        expect(next).toHaveBeenCalled();
+        expect(next.mock.calls[0][0]).not.toBeInstanceOf(Error);
+    });
+    it('should validate if visibilityConditions have been met but hideConditions have not', () => {
+        const req = setUpFormData('p10');
+        validationMiddleware(req, res, next);
+        expect(req.form).toBeDefined();
+        expect(next).toHaveBeenCalled();
+        expect(next.mock.calls[0][0]).toBeInstanceOf(ValidationError);
+        expect(next.mock.calls[0][0].fields).toEqual({ 'RefTypeField': 'RefTypeField_label is required' });
+    });
+    it('should not validate if visibilityConditions have not been met but hideConditions have', () => {
+        const req = setUpFormData('p5');
+        validationMiddleware(req, res, next);
+        expect(req.form).toBeDefined();
+        expect(next).toHaveBeenCalled();
+        expect(next.mock.calls[0][0]).not.toBeInstanceOf(Error);
+    });
 });
+
+const setUpFormData = (priorityFieldValue) => {
+    return {
+        form: {
+            data: {
+                RefTypeField: '',
+                PriorityField: priorityFieldValue,
+                ChannelIn: '',
+                SomeField: ''
+            },
+            schema: {
+                title: 'Some title',
+                defaultActionLabel: 'Continue',
+                fields: [
+                    {
+                        validation: ['required'],
+                        component: 'radio',
+                        props: {
+                            hideConditions: [
+                                {
+                                    conditionPropertyName: 'PriorityField',
+                                    conditionPropertyValue: 'p5'
+                                },
+                            ],
+                            visibilityConditions: [
+                                {
+                                    conditionPropertyName: 'PriorityField',
+                                    conditionPropertyValue: 'p10'
+                                },
+                            ],
+                            name: 'RefTypeField',
+                            label: 'RefTypeField_label',
+                            choices: [
+                                { label: 'ref_1', value: 'r1' },
+                                { label: 'ref_2', value: 'r2' },
+                                {
+                                    label: 'Test Field Label',
+                                    value: 'TestEmptyRadioFieldValue',
+                                    conditionalContent: { label: 'Further Details' }
+                                },
+                            ],
+                        },
+                        validationSuppressor: {}
+                    },
+                    {
+                        validation: ['required'],
+                        component: 'radio',
+                        props: {
+                            name: 'PriorityField',
+                            label: 'PriorityField_label',
+                            choices: [
+                                { label: 'priority_1', value: 'p1' },
+                                { label: 'priority_2', value: 'p2' },
+                                {
+                                    label: 'priority_3',
+                                    value: 'p3',
+                                    conditionalContent: { label: 'Further Details' }
+                                },
+                            ],
+                        },
+                        validationSuppressor: {}
+                    }
+                ],
+                secondaryActions: [],
+            }
+        },
+    };
+};
