@@ -93,6 +93,98 @@ exports[`Form date component should render disabled when passed 1`] = `
 </div>
 `;
 
+exports[`Form date component should render when maxYear is passed 1`] = `
+<div
+  class="govuk-form-group"
+>
+  <fieldset
+    class="govuk-fieldset"
+    id="date-field"
+    role="group"
+  >
+    <legend
+      class="govuk-fieldset__legend govuk-label--s"
+    />
+    <div
+      class="govuk-date-input"
+    >
+      <div
+        class="govuk-date-input__item"
+      >
+        <div
+          class="govuk-form-group"
+        >
+          <label
+            class="govuk-label govuk-date-input__label"
+            for="date-field-day"
+          >
+            Day
+          </label>
+          <input
+            class="govuk-input govuk-date-input__input govuk-input--width-2 "
+            id="date-field-day"
+            max="31"
+            min="1"
+            name="date-field-day"
+            pattern="[0-9]*"
+            type="number"
+            value=""
+          />
+        </div>
+      </div>
+      <div
+        class="govuk-date-input__item"
+      >
+        <div
+          class="govuk-form-group"
+        >
+          <label
+            class="govuk-label govuk-date-input__label"
+            for="date-field-month"
+          >
+            Month
+          </label>
+          <input
+            class="govuk-input govuk-date-input__input govuk-input--width-2 "
+            id="date-field-month"
+            max="12"
+            min="1"
+            name="date-field-month"
+            pattern="[0-9]*"
+            type="number"
+            value=""
+          />
+        </div>
+      </div>
+      <div
+        class="govuk-date-input__item"
+      >
+        <div
+          class="govuk-form-group"
+        >
+          <label
+            class="govuk-label govuk-date-input__label"
+            for="date-field-year"
+          >
+            Year
+          </label>
+          <input
+            class="govuk-input govuk-date-input__input govuk-input--width-4  "
+            id="date-field-year"
+            max="2119"
+            min="1900"
+            name="date-field-year"
+            pattern="[0-9]*"
+            type="number"
+            value=""
+          />
+        </div>
+      </div>
+    </div>
+  </fieldset>
+</div>
+`;
+
 exports[`Form date component should render with default props 1`] = `
 <div
   class="govuk-form-group"
