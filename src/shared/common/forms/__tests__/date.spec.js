@@ -1,12 +1,21 @@
 import React from 'react';
 import DateInput from '../date.jsx';
+import { advanceTo, clear } from 'jest-date-mock';
 
 const maxYear = 2119;
 
 describe('Form date component', () => {
+    beforeAll(() => {
+        advanceTo(new Date(2019, 2, 4, 0, 0, 0));
+    });
+
+    afterAll(() => {
+        clear();
+    });
+
     it('should render with default props', () => {
         expect(
-            render(<DateInput name="date-field" maxYear={maxYear} updateState={() => null} />)
+            render(<DateInput name="date-field" updateState={() => null} />)
         ).toMatchSnapshot();
     });
     it('should render with value when passed', () => {
@@ -14,6 +23,13 @@ describe('Form date component', () => {
             render(<DateInput name="date-field" maxYear={maxYear} value="2018-01-19" updateState={() => null} />)
         ).toMatchSnapshot();
     });
+
+    it('should render when maxYear is passed', () => {
+        expect(
+            render(<DateInput name="date-field" maxYear={maxYear} updateState={() => null} />)
+        ).toMatchSnapshot();
+    });
+
     it('should render with label when passed', () => {
         expect(
             render(<DateInput name="date-field" maxYear={maxYear} label="My text field" updateState={() => null} />)
