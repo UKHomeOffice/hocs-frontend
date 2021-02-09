@@ -207,7 +207,6 @@ function validationMiddleware(req, res, next) {
         }
 
         if (hideConditions) {
-            isVisible = true;
             for (let condition of hideConditions) {
                 if (data[condition.conditionPropertyName] && data[condition.conditionPropertyName] === condition.conditionPropertyValue) {
                     isVisible = false;
