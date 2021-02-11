@@ -259,6 +259,11 @@ module.exports = {
             endpoint: '/teams?unit=PRIVATE_OFFICE',
             adapter: teamsAdapter
         },
+        MOVE_TEAM_OPTIONS: {
+            client: 'INFO',
+            endpoint: '/team/${teamId}/move_options',
+            adapter: teamsAdapter
+        },
         USERS_FOR_CASE: {
             client: 'CASEWORK',
             endpoint: '/case/${caseId}/stage/${stageId}/team/members',

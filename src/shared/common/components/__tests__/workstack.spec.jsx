@@ -78,6 +78,15 @@ describe('Workstack component', () => {
         updateFormData: MOCK_UPDATE_FORM_DATA
     };
 
+    const MOVE_TEAM_OPTIONS = {
+        moveTeamOptions: [
+            { 'label':'TEST TEAM 1','value':'VALUE 1' },
+            { 'label':'TEST TEAM 2','value':'VALUE 2' },
+            { 'label':'TEST TEAM 3','value':'VALUE 3' },
+            { 'label':'TEST TEAM 4','value':'VALUE 4' }
+        ]
+    };
+
     it('should render with default props', () => {
 
         const OUTER = shallow(<WrappedWorkstackAllocate {...DEFAULT_PROPS} />);
@@ -123,5 +132,36 @@ describe('Workstack component', () => {
         links.first().simulate('click');
         expect(arraySortSpy).toHaveBeenCalledTimes(28);
         expect(WRAPPER).toMatchSnapshot();
+    });
+
+    it('should render the move team options', () => {
+        const props =  Object.assign({}, DEFAULT_PROPS, MOVE_TEAM_OPTIONS);
+        const OUTER = shallow(<WrappedWorkstackAllocate {...props} />);
+        const WorkstackAllocate = OUTER.props().children;
+        const WRAPPER = render(<Router><WorkstackAllocate track={MOCK_TRACK} /></Router>);
+
+        expect(WRAPPER).toBeDefined();
+        expect(WRAPPER).toMatchSnapshot();
+    });
+
+    it('should call updateFormData with correct values for move team', () => {
+        const mockUpdateFormData = jest.fn();
+        const props =  Object.assign({}, DEFAULT_PROPS, MOVE_TEAM_OPTIONS, { updateFormData: mockUpdateFormData } );
+
+        const OUTER = shallow(<WrappedWorkstackAllocate {...props} />);
+        const WorkstackAllocate = OUTER.props().children;
+        const WRAPPER = mount(<Router><WorkstackAllocate track={MOCK_TRACK} /></Router>);
+
+        WRAPPER.find('option').at(0).simulate('change', {
+            target: MOVE_TEAM_OPTIONS.moveTeamOptions[1]
+        }); // select TEAM 2
+
+        const moveTeamButton = WRAPPER.find('[name="move_team"]');
+
+        moveTeamButton.first().simulate('click'); // click move team button
+
+        expect(mockUpdateFormData.mock.calls[1][0]).toEqual({ 'selected_team': 'VALUE 2' });
+        expect(mockUpdateFormData.mock.calls[2][0]).toEqual({ 'submitAction': 'move_team' });
+
     });
 });

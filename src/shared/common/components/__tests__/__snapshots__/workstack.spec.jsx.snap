@@ -1,5 +1,665 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Workstack component should render the move team options 1`] = `
+Array [
+  <br />,
+  <div
+    class="govuk-grid-row"
+  >
+    <div
+      class="govuk-grid-column-full"
+    >
+      <form
+        action="base.urlundefined"
+        enctype="multipart/form-data"
+        method="POST"
+      >
+        <fieldset
+          class="govuk-fieldset"
+        >
+          <div
+            class="govuk-grid-row"
+          >
+            <div
+              class="govuk-grid-column-full"
+            >
+              <div
+                class="workstack"
+              >
+                <span
+                  aria-live="polite"
+                  class="govuk-hint"
+                >
+                  6 Items
+                </span>
+                <table
+                  class="govuk-table"
+                >
+                  <thead
+                    class="govuk-table__head"
+                  >
+                    <tr
+                      class="govuk-radios govuk-table__row"
+                    >
+                      <th
+                        class="govuk-table__header"
+                      >
+                        Select
+                      </th>
+                      <th
+                        class="govuk-link"
+                      >
+                        Reference
+                      </th>
+                      <th
+                        class="govuk-link"
+                      >
+                        Full Name
+                      </th>
+                      <th
+                        class="govuk-link"
+                      >
+                        Current Stage
+                      </th>
+                      <th
+                        class="govuk-link"
+                      >
+                        Owner
+                      </th>
+                      <th
+                        class="govuk-link"
+                      >
+                        Topic
+                      </th>
+                      <th
+                        class="govuk-link"
+                      >
+                        Case Date
+                      </th>
+                      <th
+                        class="govuk-link"
+                      >
+                        Active
+                      </th>
+                      <th
+                        class="govuk-link"
+                      >
+                        Contribution Due Date
+                      </th>
+                      <th
+                        class="govuk-link"
+                      >
+                        Due Date
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody
+                    class="govuk-table__body"
+                  >
+                    <tr
+                      class="govuk-radios govuk-table__row"
+                    >
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        <div
+                          class="govuk-checkboxes"
+                        >
+                          <div
+                            class="govuk-checkboxes__item"
+                          >
+                            <input
+                              class="govuk-checkboxes__input"
+                              id="selected_cases_case_uuid-123"
+                              name="selected_cases[]"
+                              type="checkbox"
+                              value="case_uuid-123:stage_uuid-456"
+                            />
+                            <label
+                              class="govuk-label govuk-checkboxes__label"
+                              for="selected_cases_case_uuid-123"
+                            >
+                              <span
+                                class="govuk-visually-hidden"
+                              >
+                                case1
+                              </span>
+                            </label>
+                          </div>
+                        </div>
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        <a
+                          class="govuk-link govuk-!-margin-right-3"
+                          href="/case/case_uuid-123/stage/stage_uuid-456"
+                        >
+                          case1
+                        </a>
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        Sam Smith
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        Stage A
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        User1
+                      </td>
+                      <td
+                        class="govuk-table__cell govuk-table__cell--truncated"
+                        title="topic1"
+                      >
+                        topic1
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        29/10/2019
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        is Active
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      />
+                      <td
+                        class="govuk-table__cell"
+                      />
+                    </tr>
+                    <tr
+                      class="govuk-radios govuk-table__row"
+                    >
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        <div
+                          class="govuk-checkboxes"
+                        >
+                          <div
+                            class="govuk-checkboxes__item"
+                          >
+                            <input
+                              class="govuk-checkboxes__input"
+                              id="selected_cases_case_uuid-789"
+                              name="selected_cases[]"
+                              type="checkbox"
+                              value="case_uuid-789:stage_uuid-432"
+                            />
+                            <label
+                              class="govuk-label govuk-checkboxes__label"
+                              for="selected_cases_case_uuid-789"
+                            >
+                              <span
+                                class="govuk-visually-hidden"
+                              >
+                                case2
+                              </span>
+                            </label>
+                          </div>
+                        </div>
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        <a
+                          class="govuk-link govuk-!-margin-right-3"
+                          href="/case/case_uuid-789/stage/stage_uuid-432"
+                        >
+                          case2
+                        </a>
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        John Alex
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        Stage B
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        User2
+                      </td>
+                      <td
+                        class="govuk-table__cell govuk-table__cell--truncated"
+                        title="topic2"
+                      >
+                        topic2
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      />
+                      <td
+                        class="govuk-table__cell"
+                      />
+                      <td
+                        class="govuk-table__cell"
+                      />
+                      <td
+                        class="govuk-table__cell"
+                      />
+                    </tr>
+                    <tr
+                      class="govuk-radios govuk-table__row"
+                    >
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        <div
+                          class="govuk-checkboxes"
+                        >
+                          <div
+                            class="govuk-checkboxes__item"
+                          >
+                            <input
+                              class="govuk-checkboxes__input"
+                              id="selected_cases_case_uuid-abc"
+                              name="selected_cases[]"
+                              type="checkbox"
+                              value="case_uuid-abc:stage_uuid-444"
+                            />
+                            <label
+                              class="govuk-label govuk-checkboxes__label"
+                              for="selected_cases_case_uuid-abc"
+                            >
+                              <span
+                                class="govuk-visually-hidden"
+                              >
+                                case3
+                              </span>
+                            </label>
+                          </div>
+                        </div>
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        <a
+                          class="govuk-link govuk-!-margin-right-3"
+                          href="/case/case_uuid-abc/stage/stage_uuid-444"
+                        >
+                          case3
+                        </a>
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        Pat Brown
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        Stage C
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        User3
+                      </td>
+                      <td
+                        class="govuk-table__cell govuk-table__cell--truncated"
+                        title="topic3"
+                      >
+                        topic3
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      />
+                      <td
+                        class="govuk-table__cell"
+                      />
+                      <td
+                        class="govuk-table__cell"
+                      />
+                      <td
+                        class="govuk-table__cell"
+                      />
+                    </tr>
+                    <tr
+                      class="govuk-radios govuk-table__row"
+                    >
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        <div
+                          class="govuk-checkboxes"
+                        >
+                          <div
+                            class="govuk-checkboxes__item"
+                          >
+                            <input
+                              class="govuk-checkboxes__input"
+                              id="selected_cases_case_uuid-efg"
+                              name="selected_cases[]"
+                              type="checkbox"
+                              value="case_uuid-efg:stage_uuid-445"
+                            />
+                            <label
+                              class="govuk-label govuk-checkboxes__label"
+                              for="selected_cases_case_uuid-efg"
+                            >
+                              <span
+                                class="govuk-visually-hidden"
+                              >
+                                case4
+                              </span>
+                            </label>
+                          </div>
+                        </div>
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        <a
+                          class="govuk-link govuk-!-margin-right-3"
+                          href="/case/case_uuid-efg/stage/stage_uuid-445"
+                        >
+                          case4
+                        </a>
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        Dave Jones
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        Stage D
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        User4
+                      </td>
+                      <td
+                        class="govuk-table__cell govuk-table__cell--truncated"
+                      />
+                      <td
+                        class="govuk-table__cell"
+                      />
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        is Active
+                      </td>
+                      <td
+                        class="govuk-table__cell date-warning"
+                      >
+                        <span />
+                      </td>
+                      <td
+                        class="govuk-table__cell date-warning"
+                      >
+                        <span />
+                      </td>
+                    </tr>
+                    <tr
+                      class="govuk-radios govuk-table__row"
+                    >
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        <div
+                          class="govuk-checkboxes"
+                        >
+                          <div
+                            class="govuk-checkboxes__item"
+                          >
+                            <input
+                              class="govuk-checkboxes__input"
+                              id="selected_cases_case_uuid-hij"
+                              name="selected_cases[]"
+                              type="checkbox"
+                              value="case_uuid-hij:stage_uuid-446"
+                            />
+                            <label
+                              class="govuk-label govuk-checkboxes__label"
+                              for="selected_cases_case_uuid-hij"
+                            >
+                              <span
+                                class="govuk-visually-hidden"
+                              >
+                                case5
+                              </span>
+                            </label>
+                          </div>
+                        </div>
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        <a
+                          class="govuk-link govuk-!-margin-right-3"
+                          href="/case/case_uuid-hij/stage/stage_uuid-446"
+                        >
+                          case5
+                        </a>
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        Mick Smith
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        Stage E
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        User5
+                      </td>
+                      <td
+                        class="govuk-table__cell govuk-table__cell--truncated"
+                      />
+                      <td
+                        class="govuk-table__cell"
+                      />
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        is Active
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      />
+                      <td
+                        class="govuk-table__cell"
+                      />
+                    </tr>
+                    <tr
+                      class="govuk-radios govuk-table__row"
+                    >
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        <div
+                          class="govuk-checkboxes"
+                        >
+                          <div
+                            class="govuk-checkboxes__item"
+                          >
+                            <input
+                              class="govuk-checkboxes__input"
+                              id="selected_cases_case_uuid-klm"
+                              name="selected_cases[]"
+                              type="checkbox"
+                              value="case_uuid-klm:stage_uuid-447"
+                            />
+                            <label
+                              class="govuk-label govuk-checkboxes__label"
+                              for="selected_cases_case_uuid-klm"
+                            >
+                              <span
+                                class="govuk-visually-hidden"
+                              >
+                                case6
+                              </span>
+                            </label>
+                          </div>
+                        </div>
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        <a
+                          class="govuk-link govuk-!-margin-right-3"
+                          href="/case/case_uuid-klm/stage/stage_uuid-447"
+                        >
+                          case6
+                        </a>
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        Bet Linch
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        Stage F
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        User5
+                      </td>
+                      <td
+                        class="govuk-table__cell govuk-table__cell--truncated"
+                      />
+                      <td
+                        class="govuk-table__cell"
+                      />
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        is Active
+                      </td>
+                      <td
+                        class="govuk-table__cell date-warning"
+                      >
+                        <span />
+                      </td>
+                      <td
+                        class="govuk-table__cell date-warning"
+                      >
+                        <span />
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <span
+                  aria-live="polite"
+                  class="govuk-hint"
+                >
+                  6 Items
+                </span>
+              </div>
+            </div>
+          </div>
+          <div
+            class="govuk-grid-row"
+          >
+            <div
+              class="govuk-grid-column-one-third"
+            >
+              <ul
+                class="govuk-list"
+              >
+                <li />
+                <li>
+                  <button
+                    class="govuk-button--link govuk-link"
+                    formaction="base.urlapi/allocate"
+                    formenctype="multipart/form-data"
+                    formmethod="POST"
+                    type="submit"
+                  >
+                    Unallocate selected
+                  </button>
+                </li>
+                <li>
+                  <button
+                    class="govuk-button--link govuk-link"
+                    formaction="base.url/allocate/user/next"
+                    formenctype="multipart/form-data"
+                    formmethod="POST"
+                    type="submit"
+                  >
+                    Take next case
+                  </button>
+                </li>
+              </ul>
+              <div
+                class="govuk-form-group"
+              >
+                <label
+                  class="govuk-label govuk-label--s"
+                  for="selected_team"
+                  id="selected_team-label"
+                >
+                  Move to another team
+                </label>
+                <select
+                  class="govuk-select "
+                  id="selected_team"
+                  name="selected_team"
+                >
+                  <option
+                    value=""
+                  />
+                  <option
+                    value="VALUE 1"
+                  >
+                    TEST TEAM 1
+                  </option>
+                  <option
+                    value="VALUE 2"
+                  >
+                    TEST TEAM 2
+                  </option>
+                  <option
+                    value="VALUE 3"
+                  >
+                    TEST TEAM 3
+                  </option>
+                  <option
+                    value="VALUE 4"
+                  >
+                    TEST TEAM 4
+                  </option>
+                </select>
+              </div>
+              <input
+                class="govuk-button"
+                name="move_team"
+                type="submit"
+                value="Move to team"
+              />
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>,
+]
+`;
+
 exports[`Workstack component should render with default props 1`] = `
 Array [
   <br />,
