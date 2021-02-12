@@ -69,7 +69,12 @@ class WorkstackAllocate extends Component {
     }
 
     doesFilterMatchData(filter, row, column) {
-        const value = this.getCellValue(row, column);
+        let value = this.getCellValue(row, column);
+
+        if (value && Object.keys(value).length !== 0 && value.constructor === Object) {
+            value = Object.values(value).join('');
+        }
+
         return value && value.toUpperCase && value.toUpperCase().indexOf(filter) !== -1;
     }
 
