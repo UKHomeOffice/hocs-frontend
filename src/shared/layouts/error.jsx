@@ -14,13 +14,6 @@ class Error extends Component {
         }
     }
 
-    UNSAFE_componentWillMount() {
-        const { staticContext } = this.props;
-        if (staticContext) {
-            staticContext.status = this.props.error.status;
-        }
-    }
-
     buildParagraphs(body) {
         if (!body) return null;
         return body.map((paragraph, index) => {
@@ -69,6 +62,11 @@ class Error extends Component {
             body,
             message,
         } = this.props.error;
+
+        const { staticContext } = this.props;
+        if (staticContext) {
+            staticContext.status = this.props.error.status;
+        }
 
         const { defaultTitle, defaultBody } = this.getDefaultContent(status);
 
