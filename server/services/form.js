@@ -70,6 +70,11 @@ async function getFormSchemaFromWorkflowService(requestId, options, user) {
                 return { error: new Error(`Failed to retrieve form: ${error.response.status}`) };
         }
     }
+    if (response.data.form.schema === null) {
+        const { readOnlyCaseViewAdapter } = await  listService.getInstance(requestId, user).fetch('S_SYSTEM_CONFIGURATION');
+        const response = await listService.getInstance(requestId, user).fetch(readOnlyCaseViewAdapter, { caseId });
+        return { form: response };
+    }
     const { stageUUID, caseReference, allocationNote } = response.data;
     const mockAllocationNote = allocationNote || null;
     const { schema, data } = response.data.form;
