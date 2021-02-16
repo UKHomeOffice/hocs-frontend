@@ -193,7 +193,7 @@ describe('getFormForStage', () => {
         expect(next).toHaveBeenCalled();
     });
 
-    it('should return form with defined schema if repository returns form with null schema', async () => {
+    it('should return form correct form object if repository returns null form', async () => {
         req = {
             params: {
                 action: 'ACTION'
@@ -206,7 +206,7 @@ describe('getFormForStage', () => {
         };
 
         const { workflowService } = require('../../clients');
-        workflowService.get.mockImplementation(() => Promise.resolve({ data: { form: { schema: null } } }));
+        workflowService.get.mockImplementation(() => Promise.resolve({ data: { form: null } }));
         const { getFormForStage } = require('../form');
         await getFormForStage(req, res, next);
 
