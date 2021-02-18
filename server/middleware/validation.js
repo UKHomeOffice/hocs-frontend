@@ -247,7 +247,7 @@ function validationMiddleware(req, res, next) {
             if (validation && !suppressValidation) {
                 validation.map(validator => {
                     if (typeof validator === 'string') {
-                        if (validators.hasOwnProperty(validator)) {
+                        if(Object.prototype.hasOwnProperty.call(validators, validator)) {
 
                             if (component === 'radio') {
                                 validateConditionalRadioContentIfExists.call(
@@ -271,7 +271,7 @@ function validationMiddleware(req, res, next) {
                     }
                     else {
                         const { type, message } = validator;
-                        if (validators.hasOwnProperty(type)) {
+                        if(Object.prototype.hasOwnProperty.call(validators, type)) {
                             const validationError = validators[type].call(this, { label, value, message });
                             if (validationError) {
                                 result[field.props.name] = validationError;

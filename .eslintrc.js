@@ -1,66 +1,66 @@
 module.exports = {
-    "env": {
-        "es6": true,
-        "node": true
+    'env': {
+        'es6': true,
+        'node': true
     },
-    "extends": [
-        "eslint:recommended",
-        "plugin:react/recommended"
+    'extends': [
+        'eslint:recommended',
+        'plugin:react/recommended'
     ],
-    "parserOptions": {
-        "ecmaVersion": 2018,
-        "sourceType": "module"
+    'parserOptions': {
+        'ecmaVersion': 2018,
+        'sourceType': 'module'
     },
-    "rules": {
-        "indent": [
-            "error",
+    'rules': {
+        'indent': [
+            'error',
             4
-            , { "SwitchCase": 1 }
+            , { 'SwitchCase': 1 }
         ],
-        "linebreak-style": [
-            "error",
-            "unix"
+        'linebreak-style': [
+            'error',
+            'unix'
         ],
-        "no-unused-vars": [
-            "error", 
-            { "argsIgnorePattern": "^_$"  }
+        'no-unused-vars': [
+            'error',
+            { 'argsIgnorePattern': '^_$'  }
         ],
-        "quotes": [
-            "error",
-            "single"
+        'quotes': [
+            'error',
+            'single'
         ],
-        "semi": [
-            "error",
-            "always"
+        'semi': [
+            'error',
+            'always'
         ],
-        "object-curly-spacing": [
-            "error", "always"
+        'object-curly-spacing': [
+            'error', 'always'
         ],
-        "no-trailing-spaces": [
-            "error"
+        'no-trailing-spaces': [
+            'error'
         ]
     },
-    "overrides": [
+    'overrides': [
         {
-            "files": [ "**/__tests__/**" ],
-            "env": {
-                "jest": true
+            'files': [ '**/__tests__/**' ],
+            'env': {
+                'jest': true
             },
-            "globals": {
-                "render": false,
-                "shallow": false,
-                "wrapper": false,
-                "mount": false
+            'globals': {
+                'render': false,
+                'shallow': false,
+                'wrapper': false,
+                'mount': false
             }
         },
         {
-            "files": [ "**/__snapshots__/**" ],
-            "excludedFiles": "*.js.snap"
+            'files': [ '**/__snapshots__/**' ],
+            'excludedFiles': '*.js.snap'
         },
         {
-            "files": [ "src/**" ],
-            "env": {
-                "commonjs": true
+            'files': [ 'src/**' ],
+            'env': {
+                'commonjs': true
             }
         }
     ]

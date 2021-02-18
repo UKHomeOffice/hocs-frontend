@@ -12,10 +12,10 @@ pipeline:
 
     lint:
       group: lint-build-steps
-      image: quay.io/ukhomeofficedigital/nodejs-base:v8
-      commands: 
-        - npm i eslint@5.7.0
-        - npm run lint    
+      image: node:14.15.4-alpine
+      commands:
+        - npm i eslint@7.20.0
+        - npm run lint
       when:
         event: [push, pull_request]
 
@@ -54,9 +54,9 @@ pipeline:
       image: quay.io/ukhomeofficedigital/sonar-scanner:v3.0.2
       when:
         event: [push, pull_request, tag]
-    
-    
-  
+
+
+
     docker-semver-tag:
       image: quay.io/ukhomeofficedigital/hocs-version-bot:build-25
       environment:
@@ -71,14 +71,14 @@ pipeline:
       when:
         event: deployment
         environment: [cs-qa, wcs-qa]
-  
+
     clone-kube-project:
       image: plugins/git
       commands:
         - git clone https://github.com/UKHomeOffice/kube-hocs-frontend.git
       when:
         event: [push, deployment, tag]
-  
+
     deploy-to-cs-dev-from-build-number:
       group: deploy-to-dev
       image: quay.io/ukhomeofficedigital/kd:v1.16.0
@@ -112,7 +112,7 @@ pipeline:
       when:
         branch: master
         event: [push, tag]
-  
+
     deployment:
       image: quay.io/ukhomeofficedigital/kd:v1.16.0
       environment:
@@ -130,7 +130,7 @@ pipeline:
       when:
         event: deployment
         environment: [cs-dev, cs-demo, wcs-dev, wcs-demo]
-  
+
     deploy-to-qa-cs:
       image: quay.io/ukhomeofficedigital/kd:v1.16.0
       environment:

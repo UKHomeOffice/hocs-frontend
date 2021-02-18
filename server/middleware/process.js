@@ -65,7 +65,8 @@ function defaultAdapter(reducer, field, data) {
 
 const createReducer = (data, req) => (reducer, field) => {
     const component = field.component;
-    if (customAdapters.hasOwnProperty(component)) {
+
+    if(Object.prototype.hasOwnProperty.call(customAdapters, component)) {
         customAdapters[component].call(this, reducer, field, data, req);
     } else {
         defaultAdapter(reducer, field, data);
