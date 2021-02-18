@@ -9,6 +9,16 @@ jest.mock('../../clients', () => ({
     }
 }));
 
+jest.mock('../list/service', () => ({
+    getInstance: function () {
+        return {
+            fetch: function () {
+                return mockActionForm;
+            }
+        };
+    }
+}));
+
 const mockActionForm = {
     schema: {
         fields: []
@@ -180,6 +190,28 @@ describe('getFormForStage', () => {
         const { getFormForStage } = require('../form');
         await getFormForStage(req, res, next);
         expect(req.form).toBeDefined();
+        expect(next).toHaveBeenCalled();
+    });
+
+    it('should return form correct form object if repository returns null form', async () => {
+        req = {
+            params: {
+                action: 'ACTION'
+            },
+            user: {
+                id: 'test',
+                roles: [],
+                groups: []
+            }
+        };
+
+        const { workflowService } = require('../../clients');
+        workflowService.get.mockImplementation(() => Promise.resolve({ data: { form: null } }));
+        const { getFormForStage } = require('../form');
+        await getFormForStage(req, res, next);
+
+        expect(req.form.schema).toEqual({ fields: [] });
+        expect(req.form).toEqual(mockActionForm);
         expect(next).toHaveBeenCalled();
     });
 

@@ -7,6 +7,13 @@ const User = require('../models/user');
 const FormBuilder = require('./forms/form-builder');
 const { Component } = require('./forms/component-builder');
 
+async function returnReadOnlyCaseViewForm(requestId, user, caseId) {
+    const { readOnlyCaseViewAdapter } = await listService
+        .getInstance(requestId, user)
+        .fetch('S_SYSTEM_CONFIGURATION');
+    return await listService.getInstance(requestId, user).fetch(readOnlyCaseViewAdapter, { caseId });
+}
+
 async function getFormSchemaFromWorkflowService(requestId, options, user) {
     const { caseId, stageId } = options;
     const headers = User.createHeaders(user);
@@ -18,9 +25,7 @@ async function getFormSchemaFromWorkflowService(requestId, options, user) {
             case 401:
                 // handle no permission to allocate
                 try {
-                    const { readOnlyCaseViewAdapter } = await listService.getInstance(requestId, user).fetch('S_SYSTEM_CONFIGURATION');
-                    const response = await listService.getInstance(requestId, user).fetch(readOnlyCaseViewAdapter, { caseId });
-                    return { form: response };
+                    return { form: await returnReadOnlyCaseViewForm(requestId, user, caseId) };
                 } catch (error) {
                     return { error: new PermissionError('You are not authorised to work on this case') };
                 }
@@ -37,8 +42,7 @@ async function getFormSchemaFromWorkflowService(requestId, options, user) {
                     usersInTeam = [];
                 }
                 try {
-                    const { readOnlyCaseViewAdapter } = await listService.getInstance(requestId, user).fetch('S_SYSTEM_CONFIGURATION');
-                    caseView = await listService.getInstance(requestId, user).fetch(readOnlyCaseViewAdapter, { caseId });
+                    caseView = await returnReadOnlyCaseViewForm(requestId, user, caseId);
                 } catch (error) {
                     caseView = null;
                 }
@@ -69,6 +73,10 @@ async function getFormSchemaFromWorkflowService(requestId, options, user) {
             default:
                 return { error: new Error(`Failed to retrieve form: ${error.response.status}`) };
         }
+    }
+    if (response.data.form === null) {
+        const response = await returnReadOnlyCaseViewForm(requestId, user, caseId);
+        return { form: response };
     }
     const { stageUUID, caseReference, allocationNote } = response.data;
     const mockAllocationNote = allocationNote || null;
