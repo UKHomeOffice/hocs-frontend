@@ -9,18 +9,18 @@ function createRepository(defaultStore = {}) {
             }
         },
         fetch: function (key) {
-            if (store.hasOwnProperty(key)) {
+            if(Object.prototype.hasOwnProperty.call(store, key)) {
                 return store[key];
             } else {
                 return null;
             }
         },
         hasResource: function (key) {
-            return store.hasOwnProperty(key);
+            return Object.prototype.hasOwnProperty.call(store, key);
         },
         flushAll: function () { store = {}; },
         flush: function (key) {
-            if (store.hasOwnProperty(key)) {
+            if (Object.prototype.hasOwnProperty.call(store, key)) {
                 delete store[key];
             }
         }

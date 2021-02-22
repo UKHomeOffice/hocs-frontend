@@ -1,24 +1,21 @@
-FROM quay.io/ukhomeofficedigital/nodejs-base:v8
+FROM node:14.15.4-alpine
 
-ENV USER user_hocs_frontend
+ENV USER node
 ENV USER_ID 1000
-ENV GROUP group_hocs_frontend
+ENV GROUP node
 ENV NAME hocs-frontend
 
-RUN yum update -y glibc && \
-    yum update -y nss && \
-    yum update -y bind-license
-
-RUN groupadd -r ${GROUP} && \
-    useradd -r -u ${USER_ID} -g ${GROUP} ${USER} -d /app && \
-    mkdir -p /app && \
-    chown -R ${USER}:${GROUP} /app
+RUN mkdir -p /tmp && \
+    chown -R ${USER}:${GROUP} /tmp
 
 WORKDIR /tmp
 COPY . /tmp
 RUN npm --loglevel warn install --development --no-optional
 RUN npm test
 RUN npm run build-prod
+
+RUN mkdir -p /app && \
+    chown -R ${USER}:${GROUP} /app
 
 WORKDIR /app
 COPY . /app
