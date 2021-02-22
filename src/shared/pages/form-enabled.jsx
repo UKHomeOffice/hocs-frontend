@@ -142,6 +142,7 @@ function withForm(Page) {
                                                 return dispatch(clearApiStatus())
                                                     .then(() => this.getForm());
                                             }
+
                                             return dispatch(clearApiStatus())
                                                 .then((() => history.push(res.data.redirect)));
                                         }
@@ -225,13 +226,14 @@ const FormEnabledWrapper = Page => {
         const WrappedPage = withForm(Page);
         return (
             <ApplicationConsumer>
-                {({ confirmation, dispatch, track, form }) => (
+                {({ confirmation, dispatch, track, form, page }) => (
                     <WrappedPage
                         {...props}
                         confirmation={confirmation}
                         dispatch={dispatch}
                         track={track}
                         form={form}
+                        page={page}
                     />
                 )}
             </ApplicationConsumer>
