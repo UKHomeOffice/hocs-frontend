@@ -300,7 +300,7 @@ spec:
             valueFrom:
               configMapKeyRef:
                   name: hocs-converter
-                  key: supported_types   
+                  key: supported_types
           - name: ENCRYPTION_KEY
             valueFrom:
               secretKeyRef:
@@ -343,6 +343,9 @@ spec:
         volumeMounts:
           - mountPath: /certs
             name: certs
+            readOnly: true
+          - mountPath: /etc/ssl/certs
+            name: bundle
             readOnly: true
       volumes:
         - name: certs
