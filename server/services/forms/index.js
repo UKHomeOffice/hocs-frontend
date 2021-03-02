@@ -24,6 +24,13 @@ const formDefinitions = {
                 }
             },
             DOCUMENT: {
+                CMS: {
+                    builder: formRepository.addDocument,
+                    action: CREATE_CASE,
+                    next: {
+                        action: 'CONFIRMATION_SUMMARY'
+                    }
+                },
                 MIN: {
                     builder: formRepository.addDocument,
                     action: CREATE_CASE,
@@ -81,6 +88,13 @@ const formDefinitions = {
                 }
             },
             DOCUMENT: {
+                CMS: {
+                    builder: formRepository.bulkAddDocument,
+                    action: BULK_CREATE_CASE,
+                    next: {
+                        action: 'CONFIRMATION_SUMMARY'
+                    }
+                },
                 MIN: {
                     builder: formRepository.bulkAddDocument,
                     action: BULK_CREATE_CASE,
