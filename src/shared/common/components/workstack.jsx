@@ -227,7 +227,8 @@ class WorkstackAllocate extends Component {
             return (
                 <th className='govuk-table__header' key={column.displayName}>
                     {column.renderer !== ColumnRenderer.INDICATOR_BLUE && column.renderer !== ColumnRenderer.INDICATOR_RED && column.displayName}
-                </th>);
+                </th>
+            );
         } else {
             const { column: sortColumn, direction } = this.state.sort;
             const sorted = sortColumn === column;
