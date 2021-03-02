@@ -270,9 +270,7 @@ Array [
 ]
 `;
 
-exports[`Stage summary component should render with default props 1`] = `null`;
-
-exports[`Stage summary component should render with summary data 1`] = `
+exports[`Stage summary component should render when summary provided in context 1`] = `
 Array [
   <h2
     class="govuk-heading-m"

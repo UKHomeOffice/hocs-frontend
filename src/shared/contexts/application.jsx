@@ -26,6 +26,10 @@ const reducer = (state, action) => {
                     ...state.form, errors: action.payload
                 }
             };
+
+        case types.UPDATE_CASE_SUMMARY:
+            return { ...state, summary: action.payload };
+
         case types.UPDATE_LOCATION:
             return { ...state, location: action.payload };
         case types.CANCEL:
@@ -59,7 +63,7 @@ const reducer = (state, action) => {
         case types.UNSET_CASE_SUMMARY:
             return { ...state, summary: null };
         case types.UNSET_CORRESPONDENTS:
-            return { ...state, summary: null };
+            return { ...state, correspondents: null };
         case types.PASS_FORWARD_PROPS: {
             return { ...state, ...action.payload };
         }
