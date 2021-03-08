@@ -113,6 +113,8 @@ services:
       aws --endpoint-url=http://localstack:4575 sns set-subscription-attributes --subscription-arn $$(aws --endpoint-url=http://localstack:4575 sns list-subscriptions-by-topic --topic-arn arn:aws:sns:eu-west-2:123456789012:hocs-audit-topic --output json | jq --raw-output '.Subscriptions[0].SubscriptionArn') --attribute-name RawMessageDelivery --attribute-value true
       aws --endpoint-url=http://localstack:4575 sns set-subscription-attributes --subscription-arn $$(aws --endpoint-url=http://localstack:4575 sns list-subscriptions-by-topic --topic-arn arn:aws:sns:eu-west-2:123456789012:hocs-audit-topic --output json | jq --raw-output '.Subscriptions[1].SubscriptionArn') --attribute-name RawMessageDelivery --attribute-value true
       aws --endpoint-url=http://localstack:4575 sns list-subscriptions
+      aws --endpoint-url=http://localstack:4576 sqs create-queue --queue-name ukvi-complaint-queue
+      aws --endpoint-url=http://localstack:4576 sqs create-queue --queue-name ukvi-complaint-queue-dlq
     environment:
       AWS_ACCESS_KEY_ID: UNSET
       AWS_SECRET_ACCESS_KEY: UNSET
@@ -364,6 +366,27 @@ services:
       audit:
         condition: service_healthy
       documents:
+        condition: service_healthy
+
+  caseCreator:
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8080/actuator/health" ]
+      start_period: 90s
+    image: quay.io/ukhomeofficedigital/hocs-case-creator
+    ports:
+      - 8092:8080
+    networks:
+      - hocs-network
+    environment:
+      SPRING_PROFILES_ACTIVE: 'development, local'
+      SERVER_PORT: 8080
+      AWS_LOCAL_HOST: 'localstack'
+      HOCS_AUDITSERVICE: 'http://audit:8080'
+      AUDIT_TOPIC_NAME: "hocs-audit-topic"
+    depends_on:
+      localstack:
+        condition: service_healthy
+      aws_cli:
         condition: service_healthy
 networks:
   hocs-network:
