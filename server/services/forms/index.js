@@ -24,7 +24,7 @@ const formDefinitions = {
                 }
             },
             DOCUMENT: {
-                CMS: {
+                COMP: {
                     builder: formRepository.addDocument,
                     action: CREATE_CASE,
                     next: {
@@ -88,7 +88,7 @@ const formDefinitions = {
                 }
             },
             DOCUMENT: {
-                CMS: {
+                COMP: {
                     builder: formRepository.bulkAddDocument,
                     action: BULK_CREATE_CASE,
                     next: {
