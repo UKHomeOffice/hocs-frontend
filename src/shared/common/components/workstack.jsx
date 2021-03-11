@@ -223,18 +223,27 @@ class WorkstackAllocate extends Component {
     }
 
     renderHeader(column) {
-        const { column: sortColumn, direction } = this.state.sort;
-        const sorted = sortColumn === column;
-        return (
-            <th onClick={() => this.setSort(column)}
-                key={column.displayName}
-                className={classNames(column.headerClassName, 'govuk-link', {
-                    'sorted-ascending': sorted && direction === SortDirection.ASCENDING,
-                    'sorted-descending': sorted && direction === SortDirection.DESCENDING
-                })}>
-                {column.renderer !== ColumnRenderer.INDICATOR_BLUE && column.renderer !== ColumnRenderer.INDICATOR_RED && column.displayName}
-            </th>
-        );
+        if(column.sortStrategy === 'noSort') {
+            return (
+                <th className='govuk-table__header' key={column.displayName}>
+                    {column.renderer !== ColumnRenderer.INDICATOR_BLUE && column.renderer !== ColumnRenderer.INDICATOR_RED && column.displayName}
+                </th>
+            );
+        } else {
+            const { column: sortColumn, direction } = this.state.sort;
+            const sorted = sortColumn === column;
+
+            return (
+                <th onClick={() => this.setSort(column)}
+                    key={column.displayName}
+                    className={classNames(column.headerClassName, 'govuk-link', {
+                        'sorted-ascending': sorted && direction === SortDirection.ASCENDING,
+                        'sorted-descending': sorted && direction === SortDirection.DESCENDING
+                    })}>
+                    {column.renderer !== ColumnRenderer.INDICATOR_BLUE && column.renderer !== ColumnRenderer.INDICATOR_RED && column.displayName}
+                </th>
+            );
+        }
     }
 
     renderRow(item, columns) {

@@ -164,4 +164,20 @@ describe('Workstack component', () => {
         expect(mockUpdateFormData.mock.calls[2][0]).toEqual({ 'submitAction': 'move_team' });
 
     });
+
+    it('should not add link to headers with sortStrategy noSort', () => {
+        const propsWithNoSortOnReference = { ...DEFAULT_PROPS, columns: [...DEFAULT_PROPS.columns] };
+        propsWithNoSortOnReference.columns[0] =
+          { displayName: 'Reference', dataAdapter: null, renderer: 'caseLink', dataValueKey: 'caseReference', isFilterable: true, sortStrategy: 'noSort' };
+
+        const OUTER = shallow(<WrappedWorkstackAllocate { ...propsWithNoSortOnReference } />);
+        const WorkstackAllocate = OUTER.props().children;
+        const WRAPPER = mount(<Router><WorkstackAllocate track={MOCK_TRACK} /></Router>);
+
+        const links = WRAPPER.find('th.govuk-link');
+        expect(links).toHaveLength(8);
+
+        expect(WRAPPER).toBeDefined();
+        expect(WRAPPER).toMatchSnapshot();
+    });
 });
