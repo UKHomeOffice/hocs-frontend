@@ -58,7 +58,6 @@ fi
 echo
 echo "Deploying hocs-frontend to ${ENVIRONMENT}"
 echo "Keycloak realm: ${KC_REALM}"
-echo "Keycloak domain: ${KC_DOMAIN}"
 echo "${INGRESS_TYPE} domain: ${DOMAIN_NAME}"
 echo
 
