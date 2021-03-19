@@ -3,6 +3,10 @@ kind: pipeline
 type: kubernetes
 name: build
 
+trigger:
+  event:
+    - push
+
 steps:
   - name: install dependencies
     image: node:14.15.4-alpine
@@ -49,10 +53,15 @@ steps:
       DOCKER_PASSWORD:
         from_secret: QUAY_ROBOT_TOKEN
       DOCKER_USERNAME: ukhomeofficedigital+hocs_quay_robot
+    when:
+      branch:
+        exclude:
+          - main
     depends_on:
       - build project
       - test project
       - lint project
+
 
   - name: build & push latest
     image: plugins/docker
@@ -60,6 +69,9 @@ steps:
       registry: quay.io
       repo: quay.io/ukhomeofficedigital/hocs-frontend
       tags:
+        - build_${DRONE_BUILD_NUMBER}
+        - ${DRONE_COMMIT_SHA}
+        - branch-${DRONE_COMMIT_BRANCH/\//_}
         - latest
     environment:
       DOCKER_PASSWORD:
@@ -73,9 +85,6 @@ steps:
       - test project
       - lint project
 
-trigger:
-  event:
-    - push
 
 ---
 kind: pipeline
