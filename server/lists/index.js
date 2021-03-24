@@ -80,9 +80,9 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
-        S_COMP_CASE_CATEGORY: {
+        S_COMP_NRO_LIST: {
             client: 'INFO',
-            endpoint: '/entity/list/COMP_CASE_CATEGORY',
+            endpoint: '/entity/list/COMP_NRO_LIST',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
