@@ -80,6 +80,12 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
+        S_COMP_NRO_LIST: {
+            client: 'INFO',
+            endpoint: '/entity/list/COMP_NRO_LIST',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
         S_MPAM_ENQUIRY_SUBJECTS: {
             client: 'INFO',
             endpoint: '/entity/list/MPAM_ENQUIRY_SUBJECTS',
