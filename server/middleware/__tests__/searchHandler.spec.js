@@ -94,8 +94,8 @@ describe('handleSearch', () => {
             correspondentNameNotMember: 'Bobby',
             correspondentReference: '',
             topic: 'Test Topic',
+            poTeamUuid: 'Min123',
             data: {
-                POTeamUUID: 'Min123',
                 FullName: 'test Name',
                 DateOfBirth: '12-11-1967',
                 NI: 'SJ0000000',
