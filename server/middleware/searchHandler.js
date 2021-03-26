@@ -24,8 +24,8 @@ async function handleSearch(req, res, next) {
             correspondentReference: formData['correspondentReference'] ? formData['correspondentReference'].trim().toLowerCase() : '',
             correspondentExternalKey: formData['correspondentExternalKey'] ? await getMemberExternalKey(formData['correspondentExternalKey']) : undefined,
             topic: formData['topic'],
+            poTeamUuid: formData['signOffMinister'],
             data: {
-                POTeamUUID: formData['signOffMinister'],
                 FullName: formData['claimantName'],
                 DateOfBirth: formData['claimantDOB'],
                 NI: formData['niNumber'],

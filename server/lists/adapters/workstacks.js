@@ -141,12 +141,16 @@ const bindDisplayElements = fromStaticList => async (stage) => {
     if (stage.data) {
         const contributionReceivedStages = [
             'MPAM_TRIAGE',
-            'MPAM_DRAFT'
+            'MPAM_TRIAGE_ESCALATE',
+            'MPAM_DRAFT',
+            'MPAM_DRAFT_ESCALATE'
         ];
 
         const contributionRequestedStages = [
             'MPAM_TRIAGE_REQUESTED_CONTRIBUTION',
-            'MPAM_DRAFT_REQUESTED_CONTRIBUTION'
+            'MPAM_TRIAGE_ESCALATED_REQUESTED_CONTRIBUTION',
+            'MPAM_DRAFT_REQUESTED_CONTRIBUTION',
+            'MPAM_DRAFT_ESCALATED_REQUESTED_CONTRIBUTION'
         ];
 
         if (stage.data.CaseContributions &&
