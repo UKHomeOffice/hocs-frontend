@@ -49,7 +49,7 @@ module.exports = async options => {
             Component('date', 'contributionDueDate')
                 .withValidator('required')
                 .withValidator('isValidDate')
-                .withValidator('isAfterToday')
+                .withValidator('isValidWithinDate')
                 .withProp('label', 'Contribution due date')
                 .build()
         )
