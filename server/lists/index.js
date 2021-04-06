@@ -140,95 +140,89 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
-        S_FOI_DIRECTORATES: {
-            client: 'INFO',
-            endpoint: '/entity/list/FOI_DIRECTORATES',
-            type: listService.types.STATIC,
-            adapter: entityListItemsAdapter
-        },
         S_FOI_DIRECTORATE_1_HUB_TEAMS: {
             client: 'INFO',
-            endpoint: '/entity/list/FOI_DIRECTORATE_1_HUB_TEAMS',
+            endpoint: '/teams?unit=FOI_DIRECTORATE_1_HUB_TEAMS',
             type: listService.types.STATIC,
-            adapter: entityListItemsAdapter
+            adapter: teamsAdapter
         },
         S_FOI_DIRECTORATE_2_HUB_TEAMS: {
             client: 'INFO',
-            endpoint: '/entity/list/FOI_DIRECTORATE_2_HUB_TEAMS',
+            endpoint: '/teams?unit=FOI_DIRECTORATE_2_HUB_TEAMS',
             type: listService.types.STATIC,
-            adapter: entityListItemsAdapter
+            adapter: teamsAdapter
         },
         S_FOI_DIRECTORATE_3_HUB_TEAMS: {
             client: 'INFO',
-            endpoint: '/entity/list/FOI_DIRECTORATE_3_HUB_TEAMS',
+            endpoint: '/teams?unit=FOI_DIRECTORATE_3_HUB_TEAMS',
             type: listService.types.STATIC,
-            adapter: entityListItemsAdapter
+            adapter: teamsAdapter
         },
         S_FOI_DIRECTORATE_4_HUB_TEAMS: {
             client: 'INFO',
-            endpoint: '/entity/list/FOI_DIRECTORATE_4_HUB_TEAMS',
+            endpoint: '/teams?unit=FOI_DIRECTORATE_4_HUB_TEAMS',
             type: listService.types.STATIC,
-            adapter: entityListItemsAdapter
+            adapter: teamsAdapter
         },
         S_FOI_DIRECTORATE_5_HUB_TEAMS: {
             client: 'INFO',
-            endpoint: '/entity/list/FOI_DIRECTORATE_5_HUB_TEAMS',
+            endpoint: '/teams?unit=FOI_DIRECTORATE_5_HUB_TEAMS',
             type: listService.types.STATIC,
-            adapter: entityListItemsAdapter
+            adapter: teamsAdapter
         },
         S_FOI_DIRECTORATE_6_HUB_TEAMS: {
             client: 'INFO',
-            endpoint: '/entity/list/FOI_DIRECTORATE_6_HUB_TEAMS',
+            endpoint: '/teams?unit=FOI_DIRECTORATE_6_HUB_TEAMS',
             type: listService.types.STATIC,
-            adapter: entityListItemsAdapter
+            adapter: teamsAdapter
         },
         S_FOI_DIRECTORATE_7_HUB_TEAMS: {
             client: 'INFO',
-            endpoint: '/entity/list/FOI_DIRECTORATE_7_HUB_TEAMS',
+            endpoint: '/teams?unit=FOI_DIRECTORATE_7_HUB_TEAMS',
             type: listService.types.STATIC,
-            adapter: entityListItemsAdapter
+            adapter: teamsAdapter
         },
         S_FOI_DIRECTORATE_8_HUB_TEAMS: {
             client: 'INFO',
-            endpoint: '/entity/list/FOI_DIRECTORATE_8_HUB_TEAMS',
+            endpoint: '/teams?unit=FOI_DIRECTORATE_8_HUB_TEAMS',
             type: listService.types.STATIC,
-            adapter: entityListItemsAdapter
+            adapter: teamsAdapter
         },
         S_FOI_DIRECTORATE_9_HUB_TEAMS: {
             client: 'INFO',
-            endpoint: '/entity/list/FOI_DIRECTORATE_9_HUB_TEAMS',
+            endpoint: '/teams?unit=FOI_DIRECTORATE_9_HUB_TEAMS',
             type: listService.types.STATIC,
-            adapter: entityListItemsAdapter
+            adapter: teamsAdapter
         },
         S_FOI_DIRECTORATE_10_HUB_TEAMS: {
             client: 'INFO',
-            endpoint: '/entity/list/FOI_DIRECTORATE_10_HUB_TEAMS',
+            endpoint: '/teams?unit=FOI_DIRECTORATE_10_HUB_TEAMS',
             type: listService.types.STATIC,
-            adapter: entityListItemsAdapter
+            adapter: teamsAdapter
         },
         S_FOI_DIRECTORATE_11_HUB_TEAMS: {
             client: 'INFO',
-            endpoint: '/entity/list/FOI_DIRECTORATE_11_HUB_TEAMS',
+            endpoint: '/teams?unit=FOI_DIRECTORATE_11_HUB_TEAMS',
             type: listService.types.STATIC,
-            adapter: entityListItemsAdapter
+            adapter: teamsAdapter
         },
         S_FOI_DIRECTORATE_12_HUB_TEAMS: {
             client: 'INFO',
-            endpoint: '/entity/list/FOI_DIRECTORATE_12_HUB_TEAMS',
+            endpoint: '/teams?unit=FOI_DIRECTORATE_12_HUB_TEAMS',
             type: listService.types.STATIC,
-            adapter: entityListItemsAdapter
+            adapter: teamsAdapter
         },
         S_FOI_DIRECTORATE_13_HUB_TEAMS: {
             client: 'INFO',
-            endpoint: '/entity/list/FOI_DIRECTORATE_13_HUB_TEAMS',
+            endpoint: '/teams?unit=FOI_DIRECTORATE_13_HUB_TEAMS',
             type: listService.types.STATIC,
-            adapter: entityListItemsAdapter
+            adapter: teamsAdapter
         },
         S_FOI_DIRECTORATE_14_HUB_TEAMS: {
             client: 'INFO',
-            endpoint: '/entity/list/FOI_DIRECTORATE_14_HUB_TEAMS',
+            endpoint: '/teams?unit=FOI_DIRECTORATE_14_HUB_TEAMS',
             type: listService.types.STATIC,
-            adapter: entityListItemsAdapter
+            adapter: teamsAdapter
         },
         S_MPAM_BUS_UNITS_1: {
             client: 'INFO',
