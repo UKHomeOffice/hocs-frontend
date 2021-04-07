@@ -47,10 +47,12 @@ class EntityList extends Component {
             hint,
             label,
             name,
-            type
+            type,
+            removeMemberFromCorrespondents
         } = this.props;
 
         const { hideSidebar } = this.props || false;
+        const correspondentsAction = removeMemberFromCorrespondents ? 'details' : 'add';
 
         return (
             <div className={`govuk-form-group${error ? ' govuk-form-group--error' : ''}`}>
@@ -95,7 +97,7 @@ class EntityList extends Component {
                                 );
                             })}
                             <br />
-                            {hasAddLink && <Link to={`/case/${page.params.caseId}/stage/${page.params.stageId}/entity/${entity}/add?hideSidebar=${hideSidebar}`} className="govuk-body govuk-link">Add a {entity}</Link>}
+                            {hasAddLink && <Link to={`/case/${page.params.caseId}/stage/${page.params.stageId}/entity/${entity}/${correspondentsAction}?hideSidebar=${hideSidebar}`} className="govuk-body govuk-link">Add a {entity}</Link>}
                         </tbody>
                     </table>
                 </fieldset>
@@ -125,7 +127,8 @@ EntityList.propTypes = {
     checkedValue: PropTypes.string,
     page: PropTypes.object.isRequired,
     data: PropTypes.object,
-    hideSidebar: PropTypes.bool.isRequired
+    hideSidebar: PropTypes.bool.isRequired,
+    removeMemberFromCorrespondents: PropTypes.bool
 };
 
 EntityList.defaultProps = {
@@ -134,7 +137,8 @@ EntityList.defaultProps = {
     hideRemovePrimary: false,
     type: 'radio',
     page: {},
-    hideSidebar: false
+    hideSidebar: false,
+    removeMemberFromCorrespondents: false
 };
 
 const WrappedEntityList = props => (

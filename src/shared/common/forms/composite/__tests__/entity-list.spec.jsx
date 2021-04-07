@@ -206,6 +206,7 @@ describe('Entity list component', () => {
             hasAddLink: true,
             hasEditLink: true,
             hasRemoveLink: true,
+            removeMemberFromCorrespondents: true
         };
 
         const OUTER = shallow(<WrappedEntityList { ...props} />);

@@ -19,7 +19,7 @@ exports[`Entity list component Add, Edit & Remove URL's should include hideSideb
     <br />
     <a
       class="govuk-body govuk-link"
-      href="/case/1234/stage/5678/entity/entity/add?hideSidebar=true"
+      href="/case/1234/stage/5678/entity/entity/details?hideSidebar=true"
     >
       Add a entity
     </a>
