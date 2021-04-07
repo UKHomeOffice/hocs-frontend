@@ -289,6 +289,11 @@ module.exports = {
             endpoint: '/case/${caseId}/correspondentType',
             adapter: correspondentTypeAdapter
         },
+        SELECTABLE_CORRESPONDENT_TYPES: {
+            client: 'CASEWORK',
+            endpoint: '/case/${caseId}/correspondentType/selectable',
+            adapter: correspondentTypeAdapter
+        },
         TOPICS: {
             client: 'INFO',
             endpoint: '/topics',
