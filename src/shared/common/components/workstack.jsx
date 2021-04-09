@@ -37,6 +37,7 @@ const ColumnRenderer = {
     DATE_WARNING: 'dateWarning',
     DUE_DATE_WARNING: 'dueDateWarning',
     INDICATOR_BLUE: 'indicatorBlue',
+    INDICATOR_GREEN: 'indicatorGreen',
     INDICATOR_RED: 'indicatorRed',
     WRAP_TEXT: 'wrapText',
     TRUNCATE_TEXT: 'truncateText'
@@ -226,7 +227,7 @@ class WorkstackAllocate extends Component {
         if(column.sortStrategy === 'noSort') {
             return (
                 <th className='govuk-table__header' key={column.displayName}>
-                    {column.renderer !== ColumnRenderer.INDICATOR_BLUE && column.renderer !== ColumnRenderer.INDICATOR_RED && column.displayName}
+                    {column.renderer !== ColumnRenderer.INDICATOR_BLUE && column.renderer !== ColumnRenderer.INDICATOR_GREEN && column.renderer !== ColumnRenderer.INDICATOR_RED && column.displayName}
                 </th>
             );
         } else {
@@ -240,7 +241,7 @@ class WorkstackAllocate extends Component {
                         'sorted-ascending': sorted && direction === SortDirection.ASCENDING,
                         'sorted-descending': sorted && direction === SortDirection.DESCENDING
                     })}>
-                    {column.renderer !== ColumnRenderer.INDICATOR_BLUE && column.renderer !== ColumnRenderer.INDICATOR_RED && column.displayName}
+                    {column.renderer !== ColumnRenderer.INDICATOR_BLUE && column.renderer !== ColumnRenderer.INDICATOR_GREEN && column.renderer !== ColumnRenderer.INDICATOR_RED && column.displayName}
                 </th>
             );
         }
@@ -336,6 +337,12 @@ class WorkstackAllocate extends Component {
             case ColumnRenderer.INDICATOR_BLUE:
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell indicator'>
                     {value && <span title={value} className='indicator-blue'>
+                        {column.displayName.substring(0, 1)}
+                    </span>}
+                </td>;
+            case ColumnRenderer.INDICATOR_GREEN:
+                return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell indicator'>
+                    {value && <span title={value} className='indicator-green'>
                         {column.displayName.substring(0, 1)}
                     </span>}
                 </td>;
