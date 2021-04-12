@@ -162,7 +162,7 @@ services:
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
       start_period: 240s
-    image: quay.io/ukhomeofficedigital/hocs-casework:${CASEWORK_TAG-branch-main}
+    image: quay.io/ukhomeofficedigital/hocs-casework:${CASEWORK_TAG:-branch-main}
     ports:
     - 8082:8080
     networks:
@@ -187,7 +187,7 @@ services:
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
       start_period: 240s
-    image: quay.io/ukhomeofficedigital/hocs-workflow:${WORKFLOW_TAG-branch-main}
+    image: quay.io/ukhomeofficedigital/hocs-workflow:${WORKFLOW_TAG:-branch-main}
     ports:
     - 8091:8080
     networks:
@@ -224,7 +224,7 @@ services:
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
       start_period: 60s
-    image: quay.io/ukhomeofficedigital/hocs-audit:${AUDIT_TAG-branch-main}
+    image: quay.io/ukhomeofficedigital/hocs-audit:${AUDIT_TAG:-branch-main}
     ports:
     - 8087:8080
     networks:
@@ -247,7 +247,7 @@ services:
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
       start_period: 180s
-    image: quay.io/ukhomeofficedigital/hocs-search:${SEARCH_TAG-branch-main}
+    image: quay.io/ukhomeofficedigital/hocs-search:${SEARCH_TAG:-branch-main}
     ports:
     - 8088:8080
     networks:
@@ -277,7 +277,7 @@ services:
   info:
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
-    image: quay.io/ukhomeofficedigital/hocs-info-service:${INFO_TAG-branch-main}
+    image: quay.io/ukhomeofficedigital/hocs-info-service:${INFO_TAG:-branch-main}
     ports:
     - 8085:8080
     networks:
@@ -306,7 +306,7 @@ services:
   converter:
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
-    image: quay.io/ukhomeofficedigital/hocs-docs-converter:${DOCS_CONVERTER_TAG-branch-main}
+    image: quay.io/ukhomeofficedigital/hocs-docs-converter:${DOCS_CONVERTER_TAG:-branch-main}
     ports:
     - 8084:8080
     networks:
@@ -318,7 +318,7 @@ services:
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
       start_period: 90s
-    image: quay.io/ukhomeofficedigital/hocs-docs:${DOCS_TAG-branch-main}
+    image: quay.io/ukhomeofficedigital/hocs-docs:${DOCS_TAG:-branch-main}
     ports:
     - 8083:8080
     networks:
@@ -352,7 +352,7 @@ services:
   templates:
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
-    image: quay.io/ukhomeofficedigital/hocs-templates:${TEMPLATES_TAG-branch-main}
+    image: quay.io/ukhomeofficedigital/hocs-templates:${TEMPLATES_TAG:-branch-main}
     ports:
       - 8090:8080
     networks:
@@ -374,7 +374,7 @@ services:
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:8080/actuator/health" ]
       start_period: 90s
-    image: quay.io/ukhomeofficedigital/hocs-case-creator:${CASE_CREATOR_TAG-branch-main}
+    image: quay.io/ukhomeofficedigital/hocs-case-creator:${CASE_CREATOR_TAG:-branch-main}
     ports:
       - 8092:8080
     networks:
