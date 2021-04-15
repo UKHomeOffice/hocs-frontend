@@ -173,7 +173,7 @@ const actions = {
                         case actionTypes.IS_MEMBER:
                             if (form.data['isMember'] === 'true') {
                                 return ({ callbackUrl: `/case/${caseId}/stage/${stageId}/entity/member/add` });
-                            }    else {
+                            } else {
                                 return ({ callbackUrl: `/case/${caseId}/stage/${stageId}/entity/correspondent/details` });
                             }
                         case actionTypes.SELECT_MEMBER:
@@ -210,8 +210,6 @@ const actions = {
 
                     switch (form.action) {
                         case actionTypes.ADD_CONTRIBUTION:
-                            await caseworkService.post(`/case/${caseId}/item/${somuTypeUuid}`, { data: somuItemData }, headers);
-                            break;
                         case actionTypes.ADD_ADDITIONAL_CONTRIBUTION:
                             await caseworkService.put(`/case/${caseId}/data/CaseContributions`,
                                 somuTypeItems,
