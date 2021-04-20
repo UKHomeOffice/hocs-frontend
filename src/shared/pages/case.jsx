@@ -15,8 +15,10 @@ class Case extends Component {
         const {
             children,
             form,
-            title
+            title,
         } = this.props;
+
+
         return (
             <div className="govuk-grid-row">
                 <div className={`govuk-grid-column-one-${this.shouldDisplaySidebar() ? 'third' : 'half'}`}>
@@ -27,7 +29,7 @@ class Case extends Component {
                     {children}
                 </div>
                 {this.shouldDisplaySidebar() && <div className="govuk-grid-column-two-thirds">
-                    <SideBar />
+                    <SideBar/>
                 </div>}
             </div>
         );

@@ -18,6 +18,7 @@ const caseNoteAdapter = require('./adapters/case-notes');
 const caseSummaryAdapter = require('./adapters/case-summary');
 const caseViewAllStagesAdapter = require('./adapters/case-view-all-stages');
 const caseViewReadOnlyAdapter = require('./adapters/case-view-read-only');
+const { caseExemptionsAllAdapter } = require('./adapters/exemptions');
 const {
     caseCorrespondentAdapter,
     correspondentTypeAdapter,
@@ -362,6 +363,11 @@ module.exports = {
             client: 'CASEWORK',
             endpoint: '/case/${caseId}/correspondent',
             adapter: caseCorrespondentsAllAdapter
+        },
+        CASE_EXEMPTIONS_ALL: {
+            client: 'CASEWORK',
+            endpoint: '/case/${caseId}/exemptions',
+            adapter: caseExemptionsAllAdapter
         },
         CASE_CORRESPONDENTS: {
             client: 'CASEWORK',

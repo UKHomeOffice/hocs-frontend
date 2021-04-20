@@ -82,6 +82,19 @@ async function caseCorrespondentsMiddleware(req, res, next) {
     }
 }
 
+async function caseExemptionsMiddleware(req, res, next) {
+    try {
+        res.locals.exemptions = await req.listService.fetch('CASE_EXEMPTIONS_ALL', req.params);
+        next();
+    } catch (error) {
+        next(error);
+    }
+}
+
+function caseExemptionsApiResponseMiddleware(req, res) {
+    return res.status(200).json(res.locals.exemptions);
+}
+
 function caseCorrespondentsApiResponseMiddleware(req, res) {
     return res.status(200).json(res.locals.correspondents);
 }
@@ -95,5 +108,7 @@ module.exports = {
     returnToCase,
     updateCaseNote,
     caseCorrespondentsMiddleware,
-    caseCorrespondentsApiResponseMiddleware
+    caseCorrespondentsApiResponseMiddleware,
+    caseExemptionsMiddleware,
+    caseExemptionsApiResponseMiddleware
 };

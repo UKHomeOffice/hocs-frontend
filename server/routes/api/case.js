@@ -11,7 +11,9 @@ const {
     createCaseNote,
     updateCaseNote,
     caseCorrespondentsMiddleware,
-    caseCorrespondentsApiResponseMiddleware
+    caseCorrespondentsApiResponseMiddleware,
+    caseExemptionsMiddleware,
+    caseExemptionsApiResponseMiddleware
 } = require('../../middleware/case');
 const { somuApiResponseMiddleware } = require('../../middleware/somu');
 const { getFormForCase, getFormForStage } = require('../../services/form');
@@ -69,5 +71,7 @@ router.put('/:caseId/note/:noteId',
 router.get('/:caseId/summary', caseSummaryMiddleware, caseSummaryApiResponseMiddleware);
 
 router.get('/:caseId/correspondents', caseCorrespondentsMiddleware, caseCorrespondentsApiResponseMiddleware);
+
+router.get('/:caseId/exemptions', caseExemptionsMiddleware, caseExemptionsApiResponseMiddleware);
 
 module.exports = router;

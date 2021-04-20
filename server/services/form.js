@@ -69,6 +69,8 @@ async function getFormSchemaFromWorkflowService(requestId, options, user) {
                             .build()
                     )
                     .build();
+
+                response.meta = { caseType: caseView.caseType };
                 return { form: response };
             default:
                 return { error: new Error(`Failed to retrieve form: ${error.response.status}`) };
@@ -78,10 +80,10 @@ async function getFormSchemaFromWorkflowService(requestId, options, user) {
         const response = await returnReadOnlyCaseViewForm(requestId, user, caseId);
         return { form: response };
     }
-    const { stageUUID, caseReference, allocationNote } = response.data;
+    const { stageUUID, caseReference, allocationNote, caseType } = response.data;
     const mockAllocationNote = allocationNote || null;
     const { schema, data } = response.data.form;
-    return { form: { schema, data, meta: { caseReference, stageUUID, allocationNote: mockAllocationNote } } };
+    return { form: { schema, data, meta: { caseReference, stageUUID, allocationNote: mockAllocationNote, caseType } } };
 }
 
 async function getFormSchemaForCase(options) {

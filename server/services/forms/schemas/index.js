@@ -11,6 +11,7 @@ module.exports = {
     removeTopic: require('./remove-topic.js'),
     addDocument: require('./document-add.js'),
     addDocumentNew: require('./add-document.js'),
+    addExemption: require('./add-exemption.js'),
     removeDocument: require('./remove-document.js'),
     manageDocuments: require('./manage-documents.js'),
     bulkCaseCreate: require('./bulk-case-create.js'),

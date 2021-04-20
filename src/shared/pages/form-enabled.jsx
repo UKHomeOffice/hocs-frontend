@@ -13,7 +13,8 @@ import {
     unsetDocuments,
     unsetForm,
     updateFormErrors,
-    updatePageMeta
+    updatePageMeta,
+    updateCaseType
 } from '../contexts/actions/index.jsx';
 import status from '../helpers/api-status.js';
 import BackLink from '../common/forms/backlink.jsx';
@@ -26,6 +27,7 @@ function withForm(Page) {
             super(props);
             const { confirmation, form } = props;
             const { data, schema, meta } = form ? form : {};
+
             this.state = {
                 confirmation,
                 form_data: data,
@@ -48,6 +50,10 @@ function withForm(Page) {
                     }
                     dispatch(unsetForm());
                 });
+
+            if (form && form.meta && form.meta.caseType) {
+                dispatch(updateCaseType(form.meta.caseType));
+            }
         }
 
         componentDidUpdate(prevProps, prevState) {
@@ -87,7 +93,9 @@ function withForm(Page) {
                                             form_schema: response.data.schema,
                                             form_meta: response.data.meta
                                         });
-                                        dispatch(updateFormErrors(response.data.errors));
+                                        if (response.data.meta && response.data.meta.caseType) {
+                                            dispatch(updateCaseType(response.data.meta.caseType));
+                                        }
                                     }
                                 })
                                 .then(() => dispatch(clearApiStatus()))
@@ -101,6 +109,7 @@ function withForm(Page) {
                                 .then(() => dispatch(setError(error.response)));
                         });
                 });
+
         }
 
         submitHandler(e) {

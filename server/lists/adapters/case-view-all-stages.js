@@ -108,5 +108,5 @@ module.exports = async (template, { fromStaticList }) => {
             .build()
     );
 
-    return builder.withData(data).build();
+    return Object.assign({}, builder.withData(data).build(), { caseType: template.caseType });
 };

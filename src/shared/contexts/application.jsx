@@ -30,6 +30,10 @@ const reducer = (state, action) => {
         case types.UPDATE_CASE_SUMMARY:
             return { ...state, summary: action.payload };
 
+        case types.UPDATE_CASE_TYPE:
+            console.log("UPDATE_CASE_TYPE!" + action.payload);
+            return { ...state, caseType: action.payload };
+
         case types.UPDATE_LOCATION:
             return { ...state, location: action.payload };
         case types.CANCEL:

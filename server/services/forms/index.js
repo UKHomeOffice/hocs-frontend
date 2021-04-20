@@ -2,7 +2,8 @@ const formRepository = require('./schemas/index');
 const {
     ADD_TEMPLATE, ADD_STANDARD_LINE, IS_MEMBER, ADD_MEMBER, SELECT_MEMBER, ADD_CORRESPONDENT, UPDATE_CORRESPONDENT,
     REMOVE_CORRESPONDENT, ADD_TOPIC, REMOVE_TOPIC, CREATE_CASE, CREATE_AND_ALLOCATE_CASE, BULK_CREATE_CASE,
-    ADD_DOCUMENT, REMOVE_DOCUMENT, MANAGE_DOCUMENTS, MANAGE_PEOPLE, ADD_CONTRIBUTION, ADD_ADDITIONAL_CONTRIBUTION, EDIT_CONTRIBUTION
+    ADD_DOCUMENT, REMOVE_DOCUMENT, MANAGE_DOCUMENTS, MANAGE_PEOPLE, ADD_CONTRIBUTION, ADD_ADDITIONAL_CONTRIBUTION,
+    EDIT_CONTRIBUTION, ADD_EXEMPTION
 } = require('../actions/types');
 
 const formDefinitions = {
@@ -152,6 +153,12 @@ const formDefinitions = {
             MANAGE: {
                 builder: formRepository.manageDocuments,
                 action: MANAGE_DOCUMENTS
+            }
+        },
+        EXEMPTION: {
+            ADD: {
+                builder: formRepository.addExemption,
+                action: ADD_EXEMPTION
             }
         },
         PEOPLE: {

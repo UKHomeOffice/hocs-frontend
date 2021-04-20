@@ -161,6 +161,10 @@ const actions = {
                             }
                             await caseworkService.delete(`/case/${caseId}/document/${context}`, headers);
                             break;
+                        case actionTypes.ADD_EXEMPTION:
+                            console.log(`Add exemption2: ${JSON.stringify(form.data.exemption_type)}`);
+                            await workflowService.post(`case/${caseId}/stage/${stageId}/exemption`, { exemption_type: form.data.exemption_type }, headers);
+                            break;
                         case actionTypes.ADD_TOPIC:
                             await caseworkService.post(`/case/${caseId}/stage/${stageId}/topic`, { topicUUID: form.data['topic'] }, headers);
                             break;

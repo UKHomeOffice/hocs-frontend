@@ -21,6 +21,13 @@ export function updateCaseSummary(data) {
     };
 }
 
+export function updateCaseType(data) {
+    return {
+        type: types.UPDATE_CASE_TYPE,
+        payload: data
+    };
+}
+
 
 export function updateFormErrors(data) {
     return {
