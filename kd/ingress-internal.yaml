@@ -1,7 +1,5 @@
-# Kubernetes lets you have both an internal and external ingress.
-# However, keycloak-gatekeeper does not support multiple URLs, so
-#   neither do we.
-# Check ../deploy.sh to see which gets deployed for a particular environment.
+---
+{{ if .INTERNAL_DOMAIN_NAME }}
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
@@ -21,7 +19,7 @@ metadata:
     cert-manager.io/solver: route53
 spec:
   rules:
-  - host: {{.DOMAIN_NAME}}
+  - host: {{.INTERNAL_DOMAIN_NAME}}
     http:
       paths:
       - backend:
@@ -35,5 +33,6 @@ spec:
 
   tls:
   - hosts:
-    - {{.DOMAIN_NAME}}
+    - {{.INTERNAL_DOMAIN_NAME}}
     secretName: hocs-frontend-internal-tls-cert
+{{ end }}

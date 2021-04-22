@@ -138,7 +138,6 @@ spec:
           - --server-read-timeout=60s
           - --server-write-timeout=60s
           - --no-redirects=false
-          - --redirection-url=https://{{.DOMAIN_NAME}}
           - --resources=uri=/health|white-listed=true
           - --resources=uri=/public/*|white-listed=true
           - --resources=uri=/*
@@ -148,7 +147,12 @@ spec:
           - --enable-logout-redirect=true
           - --enable-refresh-tokens=true
           - --encryption-key=$(ENCRYPTION_KEY)
+            {{ if not .INTERNAL_DOMAIN_NAME }}
+            # in production there's only one ingress
+            # which means we can hardcode things for security:
+          - --redirection-url=https://{{.DOMAIN_NAME}}
           - --cookie-domain={{.DOMAIN_NAME}}
+            {{ end }}
         ports:
           - name: keycloak-http
             containerPort: 8081
@@ -189,7 +193,6 @@ spec:
           - --server-read-timeout=60s
           - --server-write-timeout=60s
           - --no-redirects=true
-          - --redirection-url=https://{{.DOMAIN_NAME}}
           - --resources=uri=/health|white-listed=true
           - --resources=uri=/public/*|white-listed=true
           - --resources=uri=/*
@@ -197,7 +200,12 @@ spec:
           - --http-only-cookie=true
           - --enable-refresh-tokens=true
           - --encryption-key=$(ENCRYPTION_KEY)
+            {{ if not .INTERNAL_DOMAIN_NAME }}
+            # in production there's only one ingress
+            # which means we can hardcode things for security:
+          - --redirection-url=https://{{.DOMAIN_NAME}}
           - --cookie-domain={{.DOMAIN_NAME}}
+            {{ end }}
         ports:
           - name: keycloak-http
             containerPort: 8082
