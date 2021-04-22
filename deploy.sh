@@ -7,7 +7,7 @@ export KUBE_TOKEN=${KUBE_TOKEN}
 export VERSION=${VERSION}
   
 export DOMAIN="cs"
-if [ ${KUBE_NAMESPACE%-*} == "wcs" ]; then
+if [ "${KUBE_NAMESPACE%-*}" == "wcs" ]; then
     export DOMAIN="wcs"
 fi
 
