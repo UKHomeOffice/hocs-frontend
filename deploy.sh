@@ -5,7 +5,7 @@ export IP_WHITELIST=${POISE_WHITELIST}
 export KUBE_NAMESPACE=${ENVIRONMENT}
 export KUBE_TOKEN=${KUBE_TOKEN}
 export VERSION=${VERSION}
-  
+
 export DOMAIN="cs"
 if [ "${KUBE_NAMESPACE%-*}" == "wcs" ]; then
     export DOMAIN="wcs"
@@ -13,8 +13,7 @@ fi
 
 export SUBNAMESPACE="${KUBE_NAMESPACE#*-}" # e.g. dev, qa
 
-if [[ ${KUBE_NAMESPACE} == *prod ]]
-then
+if [[ ${KUBE_NAMESPACE} == *prod ]]; then
     export MIN_REPLICAS="2"
     export MAX_REPLICAS="6"
     export KUBE_SERVER=https://kube-api-prod.prod.acp.homeoffice.gov.uk
@@ -31,7 +30,7 @@ else
     # non-production defaults:
     export MIN_REPLICAS="1"
     export MAX_REPLICAS="2"
-    export KC_REALM=https://sso-dev.notprod.homeoffice.gov.uk/auth/realms/hocs-notprod  
+    export KC_REALM=https://sso-dev.notprod.homeoffice.gov.uk/auth/realms/hocs-notprod
     export KUBE_SERVER=https://kube-api-notprod.notprod.acp.homeoffice.gov.uk
 
     export DOMAIN_NAME="${SUBNAMESPACE}.${DOMAIN}-notprod.homeoffice.gov.uk"
