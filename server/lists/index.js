@@ -188,88 +188,94 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
-        S_FOI_DIRECTORATE_BICSPI_HUB_TEAMS: {
+        S_FOI_DIRECTORATE_BICSPI_ACCEPTANCE_TEAMS: {
             client: 'INFO',
-            endpoint: '/teams?unit=FOI_DIRECTORATE_BICSPI_HUB_TEAMS',
+            endpoint: '/teams?unit=FOI_DIRECTORATE_BICSPI_ACCEPTANCE_TEAMS',
             type: listService.types.STATIC,
             adapter: teamsAdapter
         },
-        S_FOI_DIRECTORATE_BORDER_FORCE_HUB_TEAMS: {
+        S_FOI_DIRECTORATE_BORDER_FORCE_ACCEPTANCE_TEAMS: {
             client: 'INFO',
-            endpoint: '/teams?unit=FOI_DIRECTORATE_BORDER_FORCE_HUB_TEAMS',
+            endpoint: '/teams?unit=FOI_DIRECTORATE_BORDER_FORCE_ACCEPTANCE_TEAMS',
             type: listService.types.STATIC,
             adapter: teamsAdapter
         },
-        S_FOI_DIRECTORATE_C_AND_R_HUB_TEAMS: {
+        S_FOI_DIRECTORATE_C_AND_R_ACCEPTANCE_TEAMS: {
             client: 'INFO',
-            endpoint: '/teams?unit=FOI_DIRECTORATE_C_AND_R_HUB_TEAMS',
+            endpoint: '/teams?unit=FOI_DIRECTORATE_C_AND_R_ACCEPTANCE_TEAMS',
             type: listService.types.STATIC,
             adapter: teamsAdapter
         },
-        S_FOI_DIRECTORATE_COMMS_HUB_TEAMS: {
+        S_FOI_DIRECTORATE_COMMS_ACCEPTANCE_TEAMS: {
             client: 'INFO',
-            endpoint: '/teams?unit=FOI_DIRECTORATE_COMMS_HUB_TEAMS',
+            endpoint: '/teams?unit=FOI_DIRECTORATE_COMMS_ACCEPTANCE_TEAMS',
             type: listService.types.STATIC,
             adapter: teamsAdapter
         },
-        S_FOI_DIRECTORATE_CPFG_HUB_TEAMS: {
+        S_FOI_DIRECTORATE_CPFG_ACCEPTANCE_TEAMS: {
             client: 'INFO',
-            endpoint: '/teams?unit=FOI_DIRECTORATE_CPFG_HUB_TEAMS',
+            endpoint: '/teams?unit=FOI_DIRECTORATE_CPFG_ACCEPTANCE_TEAMS',
             type: listService.types.STATIC,
             adapter: teamsAdapter
         },
-        S_FOI_DIRECTORATE_DDAT_HUB_TEAMS: {
+        S_FOI_DIRECTORATE_DDAT_ACCEPTANCE_TEAMS: {
             client: 'INFO',
-            endpoint: '/teams?unit=FOI_DIRECTORATE_DDAT_HUB_TEAMS',
+            endpoint: '/teams?unit=FOI_DIRECTORATE_DDAT_ACCEPTANCE_TEAMS',
             type: listService.types.STATIC,
             adapter: teamsAdapter
         },
-        S_FOI_DIRECTORATE_HMPO_HUB_TEAMS: {
+        S_FOI_DIRECTORATE_HMPO_ACCEPTANCE_TEAMS: {
             client: 'INFO',
-            endpoint: '/teams?unit=FOI_DIRECTORATE_HMPO_HUB_TEAMS',
+            endpoint: '/teams?unit=FOI_DIRECTORATE_HMPO_ACCEPTANCE_TEAMS',
             type: listService.types.STATIC,
             adapter: teamsAdapter
         },
-        S_FOI_DIRECTORATE_HO_SCIENCE_HUB_TEAMS: {
+        S_FOI_DIRECTORATE_HO_SCIENCE_ACCEPTANCE_TEAMS: {
             client: 'INFO',
-            endpoint: '/teams?unit=FOI_DIRECTORATE_HO_SCIENCE_HUB_TEAMS',
+            endpoint: '/teams?unit=FOI_DIRECTORATE_HO_SCIENCE_ACCEPTANCE_TEAMS',
             type: listService.types.STATIC,
             adapter: teamsAdapter
         },
-        S_FOI_DIRECTORATE_HOLA_HUB_TEAMS: {
+        S_FOI_DIRECTORATE_HOLA_ACCEPTANCE_TEAMS: {
             client: 'INFO',
-            endpoint: '/teams?unit=FOI_DIRECTORATE_HOLA_HUB_TEAMS',
+            endpoint: '/teams?unit=FOI_DIRECTORATE_HOLA_ACCEPTANCE_TEAMS',
             type: listService.types.STATIC,
             adapter: teamsAdapter
         },
-        S_FOI_DIRECTORATE_IMMIGRATION_ENFORCEMENT_HUB_TEAMS: {
+        S_FOI_DIRECTORATE_IMMIGRATION_ENFORCEMENT_ACCEPTANCE_TEAMS: {
             client: 'INFO',
-            endpoint: '/teams?unit=FOI_DIRECTORATE_IMMIGRATION_ENFORCEMENT_HUB_TEAMS',
+            endpoint: '/teams?unit=FOI_DIRECTORATE_IMMIGRATION_ENFORCEMENT_ACCEPTANCE_TEAMS',
             type: listService.types.STATIC,
             adapter: teamsAdapter
         },
-        S_FOI_DIRECTORATE_OSCT_HUB_TEAMS: {
+        S_FOI_DIRECTORATE_OSCT_ACCEPTANCE_TEAMS: {
             client: 'INFO',
-            endpoint: '/teams?unit=FOI_DIRECTORATE_OSCT_HUB_TEAMS',
+            endpoint: '/teams?unit=FOI_DIRECTORATE_OSCT_ACCEPTANCE_TEAMS',
             type: listService.types.STATIC,
             adapter: teamsAdapter
         },
-        S_FOI_DIRECTORATE_PRIVATE_OFFICE_HUB_TEAMS: {
+        S_FOI_DIRECTORATE_PRIVATE_OFFICE_ACCEPTANCE_TEAMS: {
             client: 'INFO',
-            endpoint: '/teams?unit=FOI_DIRECTORATE_PRIVATE_OFFICE_HUB_TEAMS',
+            endpoint: '/teams?unit=FOI_DIRECTORATE_PRIVATE_OFFICE_ACCEPTANCE_TEAMS',
             type: listService.types.STATIC,
             adapter: teamsAdapter
         },
-        S_FOI_DIRECTORATE_SOCG_HUB_TEAMS: {
+        S_FOI_DIRECTORATE_SOCG_ACCEPTANCE_TEAMS: {
             client: 'INFO',
-            endpoint: '/teams?unit=FOI_DIRECTORATE_SOCG_HUB_TEAMS',
+            endpoint: '/teams?unit=FOI_DIRECTORATE_SOCG_ACCEPTANCE_TEAMS',
             type: listService.types.STATIC,
             adapter: teamsAdapter
         },
-        S_FOI_DIRECTORATE_UKVI_HUB_TEAMS: {
+        S_FOI_DIRECTORATE_UKVI_ACCEPTANCE_TEAMS: {
             client: 'INFO',
-            endpoint: '/teams?unit=FOI_DIRECTORATE_UKVI_HUB_TEAMS',
+            endpoint: '/teams?unit=FOI_DIRECTORATE_UKVI_ACCEPTANCE_TEAMS',
             type: listService.types.STATIC,
+            adapter: teamsAdapter
+        },
+        FOI_DRAFT_TEAMS_SELECTION: {
+            client: 'INFO',
+            endpoint: '/teams/descendants/stage/${stageId}/case/${caseId}',
+            type: listService.types.DYNAMIC,
             adapter: teamsAdapter
         },
         S_MPAM_BUS_UNITS_1: {
