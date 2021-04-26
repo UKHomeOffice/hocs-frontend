@@ -154,6 +154,21 @@ describe('Entity list component', () => {
         expect(WRAPPER).toMatchSnapshot();
     });
 
+    it('should render with addNoMp link when passed in props', () => {
+        const PROPS = {
+            ...DEFAULT_PROPS,
+            hasAddLinkNoMp: true
+        };
+        const OUTER = shallow(<WrappedEntityList {...PROPS} />);
+        const EntityList = OUTER.props().children;
+        const WRAPPER = render(
+            <MemoryRouter>
+                <EntityList page={PAGE} />
+            </MemoryRouter>);
+        expect(WRAPPER).toBeDefined();
+        expect(WRAPPER).toMatchSnapshot();
+    });
+
     it('should execute callback on initialization', () => {
         const PROPS = {
             ...DEFAULT_PROPS,
