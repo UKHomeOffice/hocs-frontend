@@ -154,10 +154,11 @@ describe('Entity list component', () => {
         expect(WRAPPER).toMatchSnapshot();
     });
 
-    it('should render with addNoMp link when passed in props', () => {
+    it('should render with addUrl link when passed in props', () => {
         const PROPS = {
             ...DEFAULT_PROPS,
-            hasAddLinkNoMp: true
+            hasAddLink: true,
+            addUrl: 'addNoMp'
         };
         const OUTER = shallow(<WrappedEntityList {...PROPS} />);
         const EntityList = OUTER.props().children;

@@ -160,7 +160,7 @@ exports[`Entity list component should render with add link when passed in props 
 </div>
 `;
 
-exports[`Entity list component should render with addNoMp link when passed in props 1`] = `
+exports[`Entity list component should render with addUrl link when passed in props 1`] = `
 <div
   class="govuk-form-group"
 >

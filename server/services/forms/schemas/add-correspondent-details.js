@@ -2,11 +2,11 @@ const Form = require('../form-builder');
 const { Component, Choice } = require('../component-builder');
 
 function buildUrl(options) {
+    const url = `/case/${options.caseId}/stage/${options.stageId}`;
     if (options.action === 'addNoMp') {
-        return `/case/${options.caseId}/stage/${options.stageId}`;
-    } else {
-        return `/case/${options.caseId}/stage/${options.stageId}/entity/correspondent/add`;
+        return url;
     }
+    return url + '/entity/correspondent/add';
 }
 
 module.exports = options => Form()
