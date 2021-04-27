@@ -160,40 +160,6 @@ exports[`Entity list component should render with add link when passed in props 
 </div>
 `;
 
-exports[`Entity list component should render with addUrl link when passed in props 1`] = `
-<div
-  class="govuk-form-group"
->
-  <fieldset
-    class="govuk-fieldset "
-    id="entity_list"
-  >
-    <legend
-      class="govuk-fieldset__legend"
-      id="entity_list-legend"
-    >
-      <span
-        class="govuk-fieldset__heading govuk-label--s"
-      />
-    </legend>
-    <br />
-    <a
-      class="govuk-body govuk-link"
-      href="/case/1234/stage/5678/entity/entity/addNoMp?hideSidebar=false"
-    >
-      Add a entity
-    </a>
-    <table
-      class="govuk-table"
-    >
-      <tbody
-        class="govuk-table__body"
-      />
-    </table>
-  </fieldset>
-</div>
-`;
-
 exports[`Entity list component should render with addUrlPath link when passed in props 1`] = `
 <div
   class="govuk-form-group"
