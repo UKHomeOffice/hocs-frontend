@@ -1,6 +1,14 @@
 const Form = require('../form-builder');
 const { Component, Choice } = require('../component-builder');
 
+function buildUrl(options) {
+    const url = `/case/${options.caseId}/stage/${options.stageId}`;
+    if (options.action === 'addNoMp') {
+        return url;
+    }
+    return url + '/entity/correspondent/add';
+}
+
 module.exports = options => Form()
     .withTitle('Record Correspondent Details')
     .withField(
@@ -64,7 +72,7 @@ module.exports = options => Form()
     .withSecondaryAction(
         Component('backlink')
             .withProp('label', 'Back')
-            .withProp('action', `/case/${options.caseId}/stage/${options.stageId}/entity/correspondent/add`)
+            .withProp('action', buildUrl(options))
             .build()
     )
     .build();

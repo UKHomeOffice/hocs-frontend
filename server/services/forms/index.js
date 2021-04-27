@@ -182,6 +182,10 @@ const formDefinitions = {
                 builder: formRepository.addCorrespondent,
                 action: IS_MEMBER
             },
+            ADDNOMP: {
+                builder: formRepository.addCorrespondentDetails,
+                action: ADD_CORRESPONDENT
+            },
             DETAILS: {
                 builder: formRepository.addCorrespondentDetails,
                 action: ADD_CORRESPONDENT
