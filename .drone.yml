@@ -151,6 +151,26 @@ steps:
     depends_on:
       - clone kube repo
 
+  - name: deploy to gamma
+    image: quay.io/ukhomeofficedigital/kd:v1.16.0
+    environment:
+      ENVIRONMENT: hocs-gamma
+      VERSION: build_${DRONE_BUILD_NUMBER}
+      KUBE_TOKEN:
+        from_secret: hocs_frontend_hocs_gamma
+      POISE_WHITELIST:
+        from_secret: POISE_WHITELIST
+    commands:
+      - cd kube-hocs-frontend
+      - ./deploy.sh
+    when:
+      branch:
+        - epic/foi-mvp
+      event:
+        - push
+    depends_on:
+      - clone kube repo
+
   - name: wait for docker
     image: docker
     commands:
