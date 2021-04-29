@@ -50,6 +50,11 @@ $govuk-font-family-tabular: 'helvetica neue',Arial, Helvetica, sans-serif !defau
   padding: inherit;
 }
 
+.govuk-textarea {
+  /* Override to make remaining count text closer to text-area */
+  margin-bottom: 0;
+}
+
 // Code block styling:
 .code {
   font-family: monospace;
