@@ -30,7 +30,7 @@ module.exports = {
         S_TEAMS: {
             client: 'INFO',
             endpoint: '/team',
-            type: listService.types.STATIC,
+            type: listService.types.DYNAMIC,
             adapter: statics.teamsAdapter
         },
         S_USERS: {
@@ -237,6 +237,7 @@ module.exports = {
         WCS_CASEWORK_TEAMS: {
             client: 'INFO',
             endpoint: '/teams?unit=WCS_CASEWORK_TEAMS',
+            type: listService.types.DYNAMIC,
             adapter: teamsAdapter
         },
         WORKFLOW_WORKSTACK: {
@@ -252,16 +253,19 @@ module.exports = {
         DRAFT_TEAMS: {
             client: 'INFO',
             endpoint: '/teams/drafters',
+            type: listService.types.DYNAMIC,
             adapter: teamsAdapter
         },
         PRIVATE_OFFICE_TEAMS: {
             client: 'INFO',
             endpoint: '/teams?unit=PRIVATE_OFFICE',
+            type: listService.types.DYNAMIC,
             adapter: teamsAdapter
         },
         MOVE_TEAM_OPTIONS: {
             client: 'INFO',
             endpoint: '/team/${teamId}/move_options',
+            type: listService.types.DYNAMIC,
             adapter: teamsAdapter
         },
         USERS_FOR_CASE: {
