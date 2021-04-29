@@ -154,7 +154,7 @@ const bindDisplayElements = fromStaticList => async (stage) => {
         ];
 
         if (stage.data.CaseContributions &&
-                (contributionReceivedStages.includes(stage.stageType) || contributionRequestedStages.includes(stage.stageType))) {
+            (contributionReceivedStages.includes(stage.stageType) || contributionRequestedStages.includes(stage.stageType))) {
             const dueContribution = JSON.parse(stage.data.CaseContributions)
                 .filter(contribution => contribution.data && !contribution.data.contributionStatus)
                 .map(contribution => contribution.data.contributionDueDate)
@@ -180,7 +180,7 @@ const bindDisplayElements = fromStaticList => async (stage) => {
         stage.applicantOrConstituentCorrespondentDisplay = getCorrespondentsNameByType(stage.correspondents, ['APPLICANT', 'CONSTITUENT']);
 
         const primaryCorrespondent =
-          stage.correspondents.correspondents.find(correspondent => correspondent.is_primary === 'true');
+            stage.correspondents.correspondents.find(correspondent => correspondent.is_primary === 'true');
 
         if (primaryCorrespondent) {
             stage.primaryCorrespondentAndRefDisplay.primaryCorrespondentFullName = primaryCorrespondent.fullname;
