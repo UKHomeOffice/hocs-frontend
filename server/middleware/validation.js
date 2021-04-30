@@ -16,6 +16,7 @@ const validationErrors = {
     isValidWithinDate: label => `${label} must be within the last ${VALID_DAYS_RANGE} days`,
     validCaseReference: () => 'Case reference is not valid',
     contributionsFulfilled: () => 'Case contributions have to be completed or cancelled',
+    oneOf: () => 'Options are not valid'
 };
 
 const validators = {
@@ -139,6 +140,18 @@ const validators = {
         }
 
         return valid ? null : (message || validationErrors.contributionsFulfilled());
+    },
+    /**
+     * oneOf used for form validation. Validator subschema should have array of strings of options to pick one of.
+     */
+    oneOf: ({ submittedFormData, validatorSchema, message }) => {
+        for (let element in validatorSchema.options) {
+            const validatorOption = validatorSchema.options[element];
+            if (submittedFormData[validatorOption]) {
+                return null;
+            }
+        }
+        return message || validationErrors.oneOf();
     }
 };
 
@@ -175,15 +188,26 @@ function validationMiddleware(req, res, next) {
                         break;
                     }
                 }
-
             }
 
-            const validationErrors = schema.fields
+            const fieldValidationErrors = schema.fields
                 .filter(field => field.type !== 'display')
                 .reduce((result, field) => {
                     validateField(field, data, result, validationSuppressor);
                     return result;
                 }, {});
+
+
+            let formValidationErrors = {};
+
+            // Add form validation here
+            if (schema.formValidation) {
+                formValidationErrors = validateForm(data, schema.formValidation);
+            }
+
+            const validationErrors = { ...fieldValidationErrors, ...formValidationErrors };
+
+
             if (Object.keys(validationErrors).length > 0) {
                 return next(new ValidationError('Form validation failed', validationErrors));
             }
@@ -214,6 +238,58 @@ function validationMiddleware(req, res, next) {
             }
         }
         return isVisible;
+    }
+
+    function runFormValidator(validation, data) {
+        let message = '';
+        if (validation.subSchema.message) {
+            message = validation.subSchema.message;
+        }
+
+        const validationResult = formValidator(validation.subSchema.validator).call(this,
+            {
+                submittedFormData: data,
+                validatorSchema: validation.subSchema,
+                message: message
+            }
+        );
+
+        if (validationResult !== null) {
+            if (validation.subSchema.linkTo) {
+                return {
+                    [validation.subSchema.linkTo]: validationResult
+                };
+            } else {
+                // Ensure the error summary message links to a form element for usability
+                throw new Error('Validator has no key to link to');
+            }
+        }
+
+        return null;
+    }
+
+    function validateForm(data, validations) {
+        let validationErrors = {};
+
+        for (let validation of validations) {
+
+            const result = runFormValidator(validation, data);
+
+            if (result !== null) {
+                Object.assign(validationErrors, result);
+            }
+        }
+
+        return validationErrors;
+    }
+
+    function formValidator(validatorName) {
+        switch (validatorName) {
+            case 'oneOf':
+                return validators.oneOf;
+            default:
+                throw new Error(`Validator ${validatorName} does not exist`);
+        }
     }
 
     function validateField(field, data, result, validationSuppressor) {

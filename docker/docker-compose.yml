@@ -363,8 +363,8 @@ services:
       HOCS_AUDITSERVICE: 'http://casework:8080'
       HOCS_SEARCH_SERVICE: 'http://documents:8080'
     depends_on:
-      info:
-        condition: service_healthy
+#      info:
+#        condition: service_healthy
       audit:
         condition: service_healthy
       documents:
