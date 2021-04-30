@@ -24,6 +24,7 @@ import Accordion from './accordion.jsx';
 import Hidden from './hidden.jsx';
 import ExpandableCheckbox from './expandable-checkbox.jsx';
 import FlowDirectionLink from './flow-direction-link.jsx';
+import HideConditionFunctions from './../../helpers/hide-condition-functions';
 
 function defaultDataAdapter(name, data, currentValue) {
     return data[name] || currentValue;
@@ -69,7 +70,10 @@ function isComponentVisible(config, data) {
     if (hideConditions) {
         for (let i = 0; i < hideConditions.length; i++) {
             const condition = hideConditions[i];
-            if (data[condition.conditionPropertyName] && data[condition.conditionPropertyName] === condition.conditionPropertyValue) {
+
+            if (condition.function && Object.prototype.hasOwnProperty.call(HideConditionFunctions, condition.function)) {
+                isVisible = HideConditionFunctions[condition.function](data);
+            } else if (data[condition.conditionPropertyName] && data[condition.conditionPropertyName] === condition.conditionPropertyValue) {
                 isVisible = false;
             }
         }
@@ -160,15 +164,17 @@ export function formComponentFactory(field, options) {
 }
 
 export function secondaryActionFactory(field, options) {
-    const { key, config, page } = options;
+    const { key, data, config, page } = options;
     switch (field) {
         case 'backlink':
-            return renderFormComponent(BackLink, { key, config });
+            return renderFormComponent(BackLink, { data, key, config });
         case 'button':
-            return renderFormComponent(Button, { key, config });
+            return renderFormComponent(Button, { data, key, config });
         case 'backButton':
             return renderFormComponent(BackButton, {
-                key, config: {
+                data,
+                key,
+                config: {
                     ...config, caseId: page.caseId, stageId: page.stageId,
                     action: `/case/${page.caseId}/stage/${page.stageId}/direction/BACKWARD`
                 }
