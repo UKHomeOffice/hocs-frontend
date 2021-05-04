@@ -46,7 +46,7 @@ class TextArea extends Component {
                     value={this.state.value}
                     defaultValue={this.state.value}
                 />
-                { ! disabled &&
+                {!disabled &&
                 <div id="with-hint-info" className="govuk-hint govuk-character-count__message" aria-live="polite">
                     You have {this.calculateRemaining()} characters remaining
                 </div>
