@@ -21,7 +21,8 @@ class Text extends Component {
             hint,
             label,
             name,
-            type
+            type,
+            limit
         } = this.props;
         return (
             <div className={`govuk-form-group${error ? ' govuk-form-group--error' : ''} ${className ? className : ''}`}>
@@ -35,6 +36,7 @@ class Text extends Component {
                         type={type}
                         name={name}
                         disabled={disabled}
+                        maxLength={limit}
                         value={this.props.value}
                         onChange={e => this._onChange(e)}
                     />
@@ -53,14 +55,15 @@ Text.propTypes = {
     label: PropTypes.string,
     name: PropTypes.string.isRequired,
     type: PropTypes.string,
+    limit: PropTypes.number,
     updateState: PropTypes.func.isRequired,
     value: PropTypes.string
 };
 
 Text.defaultProps = {
     disabled: false,
-    label: 'TextArea field',
     type: 'text',
+    limit: 4000,
     value: ''
 };
 
