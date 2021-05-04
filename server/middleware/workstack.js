@@ -70,11 +70,9 @@ const updateCaseDataMoveTeamRequest = async (req, res, [endpoint, body, headers]
     const logger = getLogger(req.requestId);
     try {
         await workflowService.put(endpoint, body, headers);
-        return;
     } catch (error) {
         logger.error('MOVE_TEAM_FAILED', { endpoint, body, status: error.response.status });
         res.locals.notification = 'Failed to update all cases data with new team.';
-        return;
     }
 };
 
@@ -82,11 +80,9 @@ const sendMoveTeamRequest = async (req, res, [endpoint, body, headers]) => {
     const logger = getLogger(req.requestId);
     try {
         await caseworkService.put(endpoint, body, headers);
-        return;
     } catch (error) {
         logger.error('MOVE_TEAM_FAILED', { endpoint, body, status: error.response.status });
         res.locals.notification = 'Failed to transfer all cases to new team.';
-        return;
     }
 };
 
@@ -149,16 +145,20 @@ async function moveTeam(req, res, next) {
 
         const updateCaseDataRequests =
             requests
-                .map(([caseId, stageId]) => [`/case/${caseId}/stage/${stageId}/CaseworkTeamUUID`, { value: selected_team }, {
-                    headers: User.createHeaders(req.user)
-                }])
+                .map(([caseId, stageId]) => [
+                    `/case/${caseId}/stage/${stageId}/CaseworkTeamUUID`,
+                    { value: selected_team },
+                    { headers: User.createHeaders(req.user) }
+                ])
                 .map(async options => await updateCaseDataMoveTeamRequest(req, res, options));
 
         const sendMoveTeamRequests =
             requests
-                .map(([caseId, stageId]) => [`/case/${caseId}/stage/${stageId}/team`, { teamUUID: selected_team }, {
-                    headers: User.createHeaders(req.user)
-                }])
+                .map(([caseId, stageId]) => [
+                    `/case/${caseId}/stage/${stageId}/team`,
+                    { teamUUID: selected_team },
+                    { headers: User.createHeaders(req.user) }
+                ])
                 .map(async options => await sendMoveTeamRequest(req, res, options));
 
         await Promise.all([...updateCaseDataRequests, ...sendMoveTeamRequests]);
