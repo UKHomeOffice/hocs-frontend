@@ -41,6 +41,7 @@ class EntityList extends Component {
             entity,
             error,
             hasAddLink,
+            addUrlPath,
             hasEditLink,
             hasRemoveLink,
             hideRemovePrimary,
@@ -95,7 +96,7 @@ class EntityList extends Component {
                                 );
                             })}
                             <br />
-                            {hasAddLink && <Link to={`/case/${page.params.caseId}/stage/${page.params.stageId}/entity/${entity}/add?hideSidebar=${hideSidebar}`} className="govuk-body govuk-link">Add a {entity}</Link>}
+                            {hasAddLink && <Link to={`/case/${page.params.caseId}/stage/${page.params.stageId}/entity/${entity}/${addUrlPath}?hideSidebar=${hideSidebar}`} className="govuk-body govuk-link">Add a {entity}</Link>}
                         </tbody>
                     </table>
                 </fieldset>
@@ -112,6 +113,7 @@ EntityList.propTypes = {
     disabled: PropTypes.bool,
     error: PropTypes.string,
     entity: PropTypes.string.isRequired,
+    addUrlPath: PropTypes.string,
     hasAddLink: PropTypes.bool,
     hasEditLink: PropTypes.bool,
     hasRemoveLink: PropTypes.bool,
@@ -132,6 +134,7 @@ EntityList.defaultProps = {
     choices: [],
     disabled: false,
     hideRemovePrimary: false,
+    addUrlPath: 'add',
     type: 'radio',
     page: {},
     hideSidebar: false
