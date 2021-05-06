@@ -312,7 +312,7 @@ class WorkstackAllocate extends Component {
                 }
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>{value}</td>;
             case ColumnRenderer.DUE_DATE_WARNING:
-                if (row.data.CaseContributions) {
+                if (row.data.CaseContributions  && row.data.ContributionsRequired !== 'N') {
                     const dueContribution = JSON.parse(row.data.CaseContributions)
                         .filter(contribution => contribution.data && !contribution.data.contributionStatus)
                         .map(contribution => contribution.data.contributionDueDate)

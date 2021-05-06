@@ -150,8 +150,12 @@ const bindDisplayElements = fromStaticList => async (stage) => {
             'MPAM_TRIAGE_REQUESTED_CONTRIBUTION',
             'MPAM_TRIAGE_ESCALATED_REQUESTED_CONTRIBUTION',
             'MPAM_DRAFT_REQUESTED_CONTRIBUTION',
-            'MPAM_DRAFT_ESCALATED_REQUESTED_CONTRIBUTION'
+            'MPAM_DRAFT_ESCALATED_REQUESTED_CONTRIBUTION',
         ];
+
+        if(stage.stageType === 'FOI_DRAFT', stage.data.ContributionsRequired === 'Y') {
+            contributionRequestedStages.push('FOI_DRAFT');
+        }
 
         if (stage.data.CaseContributions &&
                 (contributionReceivedStages.includes(stage.stageType) || contributionRequestedStages.includes(stage.stageType))) {
