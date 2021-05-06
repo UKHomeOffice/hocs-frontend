@@ -13,7 +13,8 @@ const config = {
             DOCUMENT_SERVICE: process.env.DOCUMENT_SERVICE || 'http://localhost:8083',
             DOCUMENT_WHITELIST: (process.env.ALLOWED_FILE_EXTENSIONS || 'txt,doc,docx,tiff,tif,xlsx,pdf').split(',').map(extension => extension.trim()),
             DOCUMENT_BULK_LIMIT: process.env.DOCUMENT_BULK_LIMIT || 40,
-            VALID_DAYS_RANGE: process.env.VALID_DAYS_RANGE || 180
+            VALID_DAYS_RANGE: process.env.VALID_DAYS_RANGE || 180,
+            STATIC_DATA_REFRESH_SCHEDULE: process.env.STATIC_DATA_REFRESH_SCHEDULE || '*/15 * * * *'
         },
         AWS: {
             S3: {
