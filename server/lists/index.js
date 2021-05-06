@@ -80,6 +80,18 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
+        S_COMP_CCT_BUS_AREA: {
+            client: 'INFO',
+            endpoint: '/entity/list/COMP_CCT_BUS_AREA',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_COMP_CCT_ENQ_REASON: {
+            client: 'INFO',
+            endpoint: '/entity/list/COMP_CCT_ENQ_REASON',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
         S_COMP_NRO_LIST: {
             client: 'INFO',
             endpoint: '/entity/list/COMP_NRO_LIST',
