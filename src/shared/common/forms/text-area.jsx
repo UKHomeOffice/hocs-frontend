@@ -13,8 +13,9 @@ class TextArea extends Component {
     }
 
     _onChange(e) {
-        this.setState({ value: e.target.value });
-        this.props.updateState({ [this.props.name]: e.target.value });
+        let value = e.target.value.slice(0, this.props.limit);
+        this.setState({ value: value });
+        this.props.updateState({ [this.props.name]: value });
     }
 
     render() {
@@ -42,10 +43,20 @@ class TextArea extends Component {
                     disabled={disabled}
                     rows={rows}
                     onChange={e => this._onChange(e)}
+                    value={this.state.value}
                     defaultValue={this.state.value}
                 />
+                {!disabled &&
+                <div id="with-hint-info" className="govuk-hint govuk-character-count__message" aria-live="polite">
+                    You have {this.calculateRemaining()} characters remaining
+                </div>
+                }
             </div>
         );
+    }
+
+    calculateRemaining() {
+        return this.props.limit - this.state.value.length;
     }
 }
 
@@ -56,6 +67,7 @@ TextArea.propTypes = {
     label: PropTypes.string,
     name: PropTypes.string.isRequired,
     rows: PropTypes.number,
+    limit: PropTypes.number,
     updateState: PropTypes.func.isRequired,
     value: PropTypes.string
 };
@@ -64,6 +76,7 @@ TextArea.defaultProps = {
     disabled: false,
     rows: 5,
     type: 'text',
+    limit: 4000,
     value: ''
 };
 
