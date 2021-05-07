@@ -242,6 +242,44 @@ const formDefinitions = {
                     customConfig: mpamContributionsRequest
                 }
             }
+        },
+        CCT_COMP_CONTRIB: {
+            COMP: {
+                ADDREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    action: ADD_CONTRIBUTION
+                },
+                EDITREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    action: EDIT_CONTRIBUTION
+                },
+                VIEWREQUEST: {
+                    builder: formRepository.contributionRequest,
+                },
+                EDIT: {
+                    builder: formRepository.contributionFulfillment,
+                    action: EDIT_CONTRIBUTION
+                }
+            }
+        },
+        CCT_CASE_CONTRIB: {
+            COMP: {
+                ADDREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    action: ADD_CONTRIBUTION
+                },
+                EDITREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    action: EDIT_CONTRIBUTION
+                },
+                VIEWREQUEST: {
+                    builder: formRepository.contributionRequest,
+                },
+                EDIT: {
+                    builder: formRepository.contributionFulfillment,
+                    action: EDIT_CONTRIBUTION
+                }
+            }
         }
     }
 };
