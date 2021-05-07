@@ -210,6 +210,29 @@ const formDefinitions = {
             }
         },
         CONTRIBUTIONS: {
+            MPAM: {
+                ADDREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    action: ADD_CONTRIBUTION
+                },
+                ADDADDITIONALREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    action: ADD_ADDITIONAL_CONTRIBUTION
+                },
+                EDITREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    action: EDIT_CONTRIBUTION
+                },
+                VIEWREQUEST: {
+                    builder: formRepository.contributionRequest,
+                },
+                EDIT: {
+                    builder: formRepository.contributionFulfillment,
+                    action: EDIT_CONTRIBUTION
+                }
+            }
+        },
+        CCT_COMP_CONTRIB: {
             COMP: {
                 ADDREQUEST: {
                     builder: formRepository.contributionRequest,
@@ -226,15 +249,13 @@ const formDefinitions = {
                     builder: formRepository.contributionFulfillment,
                     action: EDIT_CONTRIBUTION
                 }
-            },
-            MPAM: {
+            }
+        },
+        CCT_CASE_CONTRIB: {
+            COMP: {
                 ADDREQUEST: {
                     builder: formRepository.contributionRequest,
                     action: ADD_CONTRIBUTION
-                },
-                ADDADDITIONALREQUEST: {
-                    builder: formRepository.contributionRequest,
-                    action: ADD_ADDITIONAL_CONTRIBUTION
                 },
                 EDITREQUEST: {
                     builder: formRepository.contributionRequest,
