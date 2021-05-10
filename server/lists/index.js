@@ -550,6 +550,12 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
+        S_FOI_DIRECTORATES: {
+            client: 'INFO',
+            endpoint: '/entity/list/FOI_DIRECTORATES',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
     },
     clients: {
         CASEWORK: caseworkService,
