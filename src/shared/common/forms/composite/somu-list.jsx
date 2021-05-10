@@ -69,6 +69,23 @@ class SomuTableRenderer {
         </>);
     }
 
+    renderFoiContribution(somuItem) {
+        const { choices } = this.state;
+        const title = `${this.loadValue(somuItem.contributionBusinessUnit, choices)}`;
+        const contributionStatus = this.getContributionStatus(somuItem);
+
+        return (<>
+            <td className='govuk-table__cell'>
+                <label className={'govuk-label'}
+                    aria-label={contributionStatus === CONTRIBUTION_STATUS.CANCELLED ? `Cancelled Contribution: ${title}`: title}
+                    title={contributionStatus === CONTRIBUTION_STATUS.CANCELLED ? `Cancelled Contribution: ${title}`: title}>
+                    {title}
+                </label>
+            </td>
+            {this.renderStatusColumn(contributionStatus, somuItem)}
+        </>);
+    }
+
     renderStatusColumn(status, { contributionDueDate }) {
         let className = '';
         let title = '';
@@ -106,6 +123,9 @@ class SomuTableRenderer {
         switch (renderer) {
             case 'MpamTable': {
                 return this.renderMpamContribution(somuItem.data);
+            }
+            case 'FoiTable': {
+                return this.renderFoiContribution(somuItem.data);
             }
         }
 
