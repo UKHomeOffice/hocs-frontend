@@ -343,6 +343,23 @@ const formDefinitions = {
                     action: EDIT_CONTRIBUTION,
                     customConfig: exgratiaBusinessContributionsRequest
                 }
+            },
+            FOI: {
+                ADDREQUEST: {
+                    builder: formRepository.contributionRequestFoi,
+                    action: ADD_CONTRIBUTION
+                },
+                EDITREQUEST: {
+                    builder: formRepository.contributionRequestFoi,
+                    action: EDIT_CONTRIBUTION
+                },
+                VIEWREQUEST: {
+                    builder: formRepository.contributionRequestFoi,
+                },
+                EDIT: {
+                    builder: formRepository.contributionFulfillmentFoi,
+                    action: EDIT_CONTRIBUTION
+                }
             }
         }
     }
