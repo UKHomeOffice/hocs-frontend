@@ -19,6 +19,31 @@ exports[`Form text area component should render disabled when passed 1`] = `
 </div>
 `;
 
+exports[`Form text area component should render limit when passed 1`] = `
+<div
+  class="govuk-form-group"
+>
+  <label
+    class="govuk-label govuk-label--s"
+    for="text-field"
+    id="text-field-label"
+  />
+  <textarea
+    class="govuk-textarea form-control-3-4 "
+    id="text-field"
+    name="text-field"
+    rows="5"
+  />
+  <div
+    aria-live="polite"
+    class="govuk-hint govuk-character-count__message"
+    id="with-hint-info"
+  >
+    You have 2000 characters remaining
+  </div>
+</div>
+`;
+
 exports[`Form text area component should render of type when passed 1`] = `
 <div
   class="govuk-form-group"
@@ -34,6 +59,13 @@ exports[`Form text area component should render of type when passed 1`] = `
     name="text-field"
     rows="5"
   />
+  <div
+    aria-live="polite"
+    class="govuk-hint govuk-character-count__message"
+    id="with-hint-info"
+  >
+    You have 4000 characters remaining
+  </div>
 </div>
 `;
 
@@ -52,6 +84,13 @@ exports[`Form text area component should render with default props 1`] = `
     name="text-field"
     rows="5"
   />
+  <div
+    aria-live="polite"
+    class="govuk-hint govuk-character-count__message"
+    id="with-hint-info"
+  >
+    You have 4000 characters remaining
+  </div>
 </div>
 `;
 
@@ -76,6 +115,13 @@ exports[`Form text area component should render with error when passed 1`] = `
     name="text-field"
     rows="5"
   />
+  <div
+    aria-live="polite"
+    class="govuk-hint govuk-character-count__message"
+    id="with-hint-info"
+  >
+    You have 4000 characters remaining
+  </div>
 </div>
 `;
 
@@ -99,6 +145,13 @@ exports[`Form text area component should render with hint when passed 1`] = `
     name="text-field"
     rows="5"
   />
+  <div
+    aria-live="polite"
+    class="govuk-hint govuk-character-count__message"
+    id="with-hint-info"
+  >
+    You have 4000 characters remaining
+  </div>
 </div>
 `;
 
@@ -119,6 +172,13 @@ exports[`Form text area component should render with label when passed 1`] = `
     name="text-field"
     rows="5"
   />
+  <div
+    aria-live="polite"
+    class="govuk-hint govuk-character-count__message"
+    id="with-hint-info"
+  >
+    You have 4000 characters remaining
+  </div>
 </div>
 `;
 
@@ -139,5 +199,12 @@ exports[`Form text area component should render with value when passed 1`] = `
   >
     field value
   </textarea>
+  <div
+    aria-live="polite"
+    class="govuk-hint govuk-character-count__message"
+    id="with-hint-info"
+  >
+    You have 3989 characters remaining
+  </div>
 </div>
 `;

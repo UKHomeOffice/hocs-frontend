@@ -37,6 +37,11 @@ describe('Form text area component', () => {
             render(<TextArea name="text-field" type="password" updateState={() => null} />)
         ).toMatchSnapshot();
     });
+    it('should render limit when passed', () => {
+        expect(
+            render(<TextArea name="text-field" limit={2000} updateState={() => null} />)
+        ).toMatchSnapshot();
+    });
     it('should execute callback on initialization', () => {
         const mockCallback = jest.fn();
         const fieldName = 'text-field';

@@ -365,7 +365,7 @@ describe('Action service', () => {
             form: testForm,
             user: mockUser
         });
-        expect(mockRequestClient).toHaveBeenCalledTimes(1);
+        expect(mockRequestClient).toHaveBeenCalledTimes(2);
         expect(response).toBeDefined();
         expect(response).toHaveProperty('callbackUrl');
     });
