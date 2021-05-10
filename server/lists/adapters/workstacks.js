@@ -188,17 +188,23 @@ const bindDisplayElements = fromStaticList => async (stage) => {
         'MPAM_TRIAGE_REQUESTED_CONTRIBUTION',
         'MPAM_TRIAGE_ESCALATED_REQUESTED_CONTRIBUTION',
         'MPAM_DRAFT_REQUESTED_CONTRIBUTION',
-        'MPAM_DRAFT_ESCALATED_REQUESTED_CONTRIBUTION'
+        'MPAM_DRAFT_ESCALATED_REQUESTED_CONTRIBUTION',
     ];
 
-    if (contributionRequestedStages.includes(stage.stageType) && stage.dueContribution) {
-        stage.stageTypeWithDueDateDisplay = `${stage.stageTypeDisplay} due: ${formatDate(stage.dueContribution)}`;
-    } else if (contributionReceivedStages.includes(stage.stageType) && stage.contributions === 'Received') {
-        stage.stageTypeWithDueDateDisplay = `${stage.stageTypeDisplay} (Contributions Received)`;
+    if(stage.stageType === 'FOI_DRAFT', stage.data.ContributionsRequired === 'Y') {
+        contributionRequestedStages.push('FOI_DRAFT');
+    }
+
+    if ((contributionReceivedStages.includes(stage.stageType) || contributionRequestedStages.includes(stage.stageType))) {
+        if (contributionRequestedStages.includes(stage.stageType) && stage.dueContribution) {
+            stage.stageTypeWithDueDateDisplay = `${stage.stageTypeDisplay} due: ${formatDate(stage.dueContribution)}`;
+        } else if (contributionReceivedStages.includes(stage.stageType) && stage.contributions === 'Received') {
+            stage.stageTypeWithDueDateDisplay = `${stage.stageTypeDisplay} (Contributions Received)`;
+        } else {
+            stage.stageTypeWithDueDateDisplay = stage.stageTypeDisplay;
+        }
     } else if (stage.data && stage.data.DueDate) {
         stage.stageTypeWithDueDateDisplay = `${stage.stageTypeDisplay} due ${formatDate(stage.data.DueDate)}`;
-    } else {
-        stage.stageTypeWithDueDateDisplay = stage.stageTypeDisplay;
     }
 
     stage.primaryCorrespondentAndRefDisplay = {};
