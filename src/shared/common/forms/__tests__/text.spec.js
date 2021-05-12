@@ -42,6 +42,11 @@ describe('Form text component', () => {
             render(<Text name="text-field" type="password" updateState={() => null} />)
         ).toMatchSnapshot();
     });
+    it('should render limit when passed', () => {
+        expect(
+            render(<Text name="text-field" limit={2000} updateState={() => null} />)
+        ).toMatchSnapshot();
+    });
     it('should render with the element class name when passed', () => {
         expect(
             render(<Text name="text-field" elementClassName="__classname__" updateState={() => null} />)
