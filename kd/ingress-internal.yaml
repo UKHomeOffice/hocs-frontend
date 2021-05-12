@@ -1,5 +1,4 @@
 ---
-{{ if .INTERNAL_DOMAIN_NAME }}
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
@@ -35,4 +34,3 @@ spec:
   - hosts:
     - {{.INTERNAL_DOMAIN_NAME}}
     secretName: hocs-frontend-internal-tls-cert
-{{ end }}

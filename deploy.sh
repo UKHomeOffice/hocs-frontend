@@ -54,7 +54,7 @@ cd kd
 
 kd --insecure-skip-tls-verify \
    --timeout 10m \
-    -f ingress-internal.yaml \
+    ${INTERNAL_DOMAIN_NAME:+ -f ingress-internal.yaml} \
     -f ingress-external.yaml \
     -f converter-configmap.yaml \
     -f configmap.yaml \
