@@ -39,7 +39,7 @@ else
     # but remove the ingress for demo (preprod)
     # so at least one non-prod namespace has prod-like keycloak-proxy settings
     if [[ ${KUBE_NAMESPACE} == *demo ]]; then
-      export INTERNAL_DOMAIN_NAME=false
+      export INTERNAL_DOMAIN_NAME=''
     fi
 fi
 
