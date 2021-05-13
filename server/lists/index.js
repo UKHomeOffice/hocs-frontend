@@ -92,9 +92,9 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
-        S_COMP_NRO_LIST: {
+        S_COMP_CSU_LIST: {
             client: 'INFO',
-            endpoint: '/entity/list/COMP_NRO_LIST',
+            endpoint: '/entity/list/COMP_CSU_LIST',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
