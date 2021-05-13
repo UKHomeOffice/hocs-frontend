@@ -18,11 +18,11 @@ if [[ ${KUBE_NAMESPACE} == *prod ]]; then
     export MAX_REPLICAS="6"
     export KUBE_SERVER=https://kube-api-prod.prod.acp.homeoffice.gov.uk
   if [[ "${KUBE_NAMESPACE}" == "wcs-prod" ]] ; then
-      export DOMAIN_NAME="www.cs.homeoffice.gov.uk"
+      export DOMAIN_NAME="www.wcs.homeoffice.gov.uk"
       export INTERNAL_DOMAIN_NAME=''
       export KC_REALM=https://sso.digital.homeoffice.gov.uk/auth/realms/HOCS
   elif [[ "${KUBE_NAMESPACE}" == "cs-prod" ]] ; then
-      export DOMAIN_NAME="www.wcs.homeoffice.gov.uk"
+      export DOMAIN_NAME="www.cs.homeoffice.gov.uk"
       export INTERNAL_DOMAIN_NAME=''
       export KC_REALM=https://sso.digital.homeoffice.gov.uk/auth/realms/hocs-prod
   fi
