@@ -83,6 +83,7 @@ module.exports = async (template, { fromStaticList }) => {
 
                 stageFields.push(
                     Component('mapped-display', name)
+                        .withProp('component', fieldTemplate.component)
                         .withProp('label', label)
                         .withProp('choices', choices)
                         .withProp('conditionChoices', conditionChoices)
