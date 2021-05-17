@@ -7,12 +7,7 @@ exports[`Form MappedDisplay component should render checkbox 1`] = `
   <strong>
     isA: 
   </strong>
-  <input
-    checked=""
-    class="bigger"
-    disabled=""
-    type="checkbox"
-  />
+  Yes
 </span>
 `;
 
