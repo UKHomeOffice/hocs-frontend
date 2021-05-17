@@ -17,7 +17,7 @@ class MappedDisplay extends Component {
         const mappings = new Map(choices.map(choice => [choice.value, choice.label]));
         if (component === 'checkbox') {
             return (
-                <span className='govuk-body full-width'><strong>{choices[0].label}: </strong><input className="bigger" type="checkbox" disabled="disabled" checked="checked"/></span>
+                <span className='govuk-body full-width'><strong>{choices[0].label}: </strong>Yes</span>
             );
         } else {
             return (
