@@ -67,27 +67,29 @@ module.exports = async (template, { fromStaticList }) => {
             const { name, label, choices, conditionChoices, somuType } = fieldTemplate.props;
             const value = template.data[name];
 
-            if (value) {
-                switch (fieldTemplate.component) {
-                    case 'date':
-                        data[name] = formatDate(value);
-                        break;
-                    case 'somu-list': {
-                        const somuString = await renderSomuListItems(somuType, value, fromStaticList);
-                        data[name] = somuString;
-                        break;
+            if (fieldTemplate.component !== 'hidden') {
+                if (value) {
+                    switch (fieldTemplate.component) {
+                        case 'date':
+                            data[name] = formatDate(value);
+                            break;
+                        case 'somu-list': {
+                            const somuString = await renderSomuListItems(somuType, value, fromStaticList);
+                            data[name] = somuString;
+                            break;
+                        }
+                        default:
+                            data[name] = value;
                     }
-                    default:
-                        data[name] = value;
-                }
 
-                stageFields.push(
-                    Component('mapped-display', name)
-                        .withProp('label', label)
-                        .withProp('choices', choices)
-                        .withProp('conditionChoices', conditionChoices)
-                        .build()
-                );
+                    stageFields.push(
+                        Component('mapped-display', name)
+                            .withProp('label', label)
+                            .withProp('choices', choices)
+                            .withProp('conditionChoices', conditionChoices)
+                            .build()
+                    );
+                }
             }
 
         }));
