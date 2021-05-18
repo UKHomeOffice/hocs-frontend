@@ -54,8 +54,26 @@ Section.propTypes = {
 };
 
 function Accordion({ name, sections, data, updateState, errors, page }) {
+    const [showError, setShowError] = useState(false);
+    const [errorId, setErrorId] = useState('');
+
+    if (!name && sections[0].name) {
+        name = sections[0].name;
+    }
+
+    useEffect(() => {
+        if (errors && errors[name]) {
+            setErrorId(name + '-error');
+            setShowError(true);
+        } else {
+            setErrorId('');
+            setShowError(false);
+        }
+    }, [errors]);
+
     return (
-        <div id={name} className='govuk-accordion' data-module='accordion'>
+        <div id={name} className={`govuk-accordion${showError ? ' govuk-form-group--error' : ''}`} data-module='accordion'>
+            { showError && errors && <span id={errorId} className="govuk-error-message">{ errors[name] }</span> }
             {Array.isArray(sections) && sections.map(({ items, title }, index) => <Section data={data} errors={errors} items={items} index={index} key={index} title={title} updateState={updateState} page={page} />)}
         </div>
     );
