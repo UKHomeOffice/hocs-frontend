@@ -29,7 +29,7 @@ const typeAdaptors = {
     }),
     STAGE_ALLOCATED_TO_TEAM: async ({ allocationId, stage }, fromStaticList) => ({
         stage,
-        title: `Allocated to the ${await fromStaticList('S_TEAMS', allocationId, true)}`
+        title: `Allocated to the ${await fromStaticList('S_TEAMS', allocationId)}`
     }),
     STAGE_CREATED: async ({ stage }) => ({
         title: `Stage: ${stage} Started`
