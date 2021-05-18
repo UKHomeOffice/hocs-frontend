@@ -19,8 +19,11 @@ async function handleSearch(req, res, next) {
                 to: formData['dateReceivedTo'],
                 from: formData['dateReceivedFrom']
             },
+            correspondentAddress1: formData['correspondentAddress1'],
+            correspondentEmail: formData['correspondentEmail'],
             correspondentName: formData['correspondent'],
             correspondentNameNotMember: formData['correspondentNameNotMember'],
+            correspondentPostcode: formData['correspondentPostcode'],
             correspondentReference: formData['correspondentReference'] ? formData['correspondentReference'].trim().toLowerCase() : '',
             correspondentExternalKey: formData['correspondentExternalKey'] ? await getMemberExternalKey(formData['correspondentExternalKey']) : undefined,
             topic: formData['topic'],
@@ -28,12 +31,15 @@ async function handleSearch(req, res, next) {
             data: {
                 FullName: formData['claimantName'],
                 DateOfBirth: formData['claimantDOB'],
+                ComplainantDOB: formData['ComplainantDOB'],
                 NI: formData['niNumber'],
                 PrevHocsRef: formData['PrevHocsRef'],
                 RefType: formData['RefType'],
                 HomeSecInterest: formData['HomeSecInterest'] === 'true' ? true : undefined,
                 CampaignType: formData['CampaignType'],
-                MinSignOffTeam: formData['MinSignOffTeam']
+                MinSignOffTeam: formData['MinSignOffTeam'],
+                OfficialEngagement: formData['OfficialEngagement'],
+                ComplainantHORef: formData['ComplainantHORef']
             },
             activeOnly: formData['caseStatus'] === 'active'
         };
