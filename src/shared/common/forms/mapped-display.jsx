@@ -10,24 +10,33 @@ class MappedDisplay extends Component {
     render() {
         const {
             choices,
+            component,
             label,
             value
         } = this.props;
         const mappings = new Map(choices.map(choice => [choice.value, choice.label]));
-        return (
-            <span className='govuk-body full-width'><strong>{label}: </strong>{mappings.get(value) ? mappings.get(value) : value}</span>
-        );
+        if (component === 'checkbox') {
+            return (
+                <span className='govuk-body full-width'><strong>{choices[0].label}: </strong>Yes</span>
+            );
+        } else {
+            return (
+                <span className='govuk-body full-width'><strong>{label}: </strong>{mappings.get(value) ? mappings.get(value) : value}</span>
+            );
+        }
     }
 }
 
 MappedDisplay.propTypes = {
     choices: PropTypes.arrayOf(PropTypes.object),
+    component: PropTypes.string,
     label: PropTypes.string,
     value: PropTypes.string
 };
 
 MappedDisplay.defaultProps = {
     choices: [],
+    component: 'text',
     label: 'MappedDisplay field',
     value: ''
 };
