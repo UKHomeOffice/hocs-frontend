@@ -224,6 +224,26 @@ describe('Validators', () => {
             expect(validators.contributionsFulfilled({ value: '[{ "data": { "contributionStatus": "contributionReceived" } }, { "data": {"contributionStatus": "contributionCancelled" } }]' })).toEqual(null);
         });
     });
+
+    describe('One of validation', () => {
+        it('should reject if one of options are not fulfilled', () => {
+            const options = [
+                'delay',
+                'comms'
+            ];
+
+            expect(validators.oneOf({ submittedFormData: { 'admin': 'admin', 'other': 'other' }, options: options, message: 'test error message' })).toEqual('test error message');
+        });
+
+        it('should accept if one of options are fulfilled', () => {
+            const options = [
+                'delay',
+                'comms'
+            ];
+
+            expect(validators.oneOf({ submittedFormData: { 'delay': 'delay' }, options: options, message: 'test error message' })).toEqual(null);
+        });
+    });
 });
 
 describe('Validation middleware', () => {
