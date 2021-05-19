@@ -1,6 +1,6 @@
 const getLogger = require('../libs/logger');
 const User = require('../models/user');
-const { caseworkService } = require('../clients');
+const { caseworkService, workflowService } = require('../clients');
 
 async function userWorkstackMiddleware(req, res, next) {
     try {
@@ -66,15 +66,23 @@ function workstackApiResponseMiddleware(req, res) {
     res.json(res.locals.workstack);
 }
 
+const updateCaseDataMoveTeamRequest = async (req, res, [endpoint, body, headers]) => {
+    const logger = getLogger(req.requestId);
+    try {
+        await workflowService.put(endpoint, body, headers);
+    } catch (error) {
+        logger.error('MOVE_TEAM_FAILED', { endpoint, body, status: error.response.status });
+        res.locals.notification = 'Failed to update all cases data with new team.';
+    }
+};
+
 const sendMoveTeamRequest = async (req, res, [endpoint, body, headers]) => {
     const logger = getLogger(req.requestId);
     try {
         await caseworkService.put(endpoint, body, headers);
-        return;
     } catch (error) {
         logger.error('MOVE_TEAM_FAILED', { endpoint, body, status: error.response.status });
-        res.locals.notification = 'Failed to transfer all cases to team';
-        return;
+        res.locals.notification = 'Failed to transfer all cases to new team.';
     }
 };
 
@@ -92,7 +100,7 @@ const sendAllocateUserRequest = async (req, res, [endpoint, body, headers]) => {
 };
 
 async function handleWorkstackSubmit(req, res, next) {
-    switch(req.body.submitAction) {
+    switch (req.body.submitAction) {
         case 'allocate_to_team_member':
             await allocateToTeamMember(req, res, next);
             break;
@@ -133,12 +141,27 @@ async function moveTeam(req, res, next) {
 
     if (selected_cases.length > 0 && selected_team) {
         const requests = selected_cases
-            .map(selected => selected.split(':'))
-            .map(([caseId, stageId]) => [`/case/${caseId}/stage/${stageId}/team`, { teamUUID: selected_team }, {
-                headers: User.createHeaders(req.user)
-            }])
-            .map(async options => await sendMoveTeamRequest(req, res, options));
-        await Promise.all(requests);
+            .map(selected => selected.split(':'));
+
+        const updateCaseDataRequests =
+            requests
+                .map(([caseId, stageId]) => [
+                    `/case/${caseId}/stage/${stageId}/CaseworkTeamUUID`,
+                    { value: selected_team },
+                    { headers: User.createHeaders(req.user) }
+                ])
+                .map(async options => await updateCaseDataMoveTeamRequest(req, res, options));
+
+        const sendMoveTeamRequests =
+            requests
+                .map(([caseId, stageId]) => [
+                    `/case/${caseId}/stage/${stageId}/team`,
+                    { teamUUID: selected_team },
+                    { headers: User.createHeaders(req.user) }
+                ])
+                .map(async options => await sendMoveTeamRequest(req, res, options));
+
+        await Promise.all([...updateCaseDataRequests, ...sendMoveTeamRequests]);
     }
     logger.debug('MOVING_CASE_TEAMS', { selected_cases, selected_team });
 
