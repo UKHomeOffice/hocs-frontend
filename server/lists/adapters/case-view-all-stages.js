@@ -82,14 +82,14 @@ module.exports = async (template, { fromStaticList }) => {
                             data[name] = value;
                     }
 
-                  stageFields.push(
-                      Component('mapped-display', name)
-                          .withProp('component', fieldTemplate.component)
-                          .withProp('label', label)
-                          .withProp('choices', choices)
-                          .withProp('conditionChoices', conditionChoices)
-                          .build()
-                  );
+                    stageFields.push(
+                        Component('mapped-display', name)
+                            .withProp('component', fieldTemplate.component)
+                            .withProp('label', label)
+                            .withProp('choices', choices)
+                            .withProp('conditionChoices', conditionChoices)
+                            .build()
+                    );
                 }
             }
 
