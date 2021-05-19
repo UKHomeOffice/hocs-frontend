@@ -31,6 +31,14 @@ const mockData = {
                         label: 'My Empty Field'
                     },
                 },
+                {
+                    component: 'hidden',
+                    validation: [],
+                    props: {
+                        name: 'test_hidden_field',
+                        defaultValue: 'TEST'
+                    },
+                },
             ],
             STAGE_NAME1: [
                 {
@@ -89,7 +97,8 @@ const mockData = {
     },
     data: {
         my_field: 'Some Value',
-        my_date_field: '2020-01-19'
+        my_date_field: '2020-01-19',
+        test_hidden_field: 'TEST'
     }
 };
 
