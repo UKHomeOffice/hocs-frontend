@@ -236,7 +236,7 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: teamsAdapter
         },
-        S_FOI_BORDER_FORCE_G6_G7_APPROVAL_TEAMS: {
+        S_FOI_BORDER_FORCE_DIRECTORATE_G6_G7_APPROVAL_TEAMS: {
             client: 'INFO',
             endpoint: '/teams?unit=FOI_BORDER_FORCE_DIRECTORATE_G6_G7_APPROVAL_TEAMS',
             type: listService.types.STATIC,
