@@ -33,7 +33,7 @@ module.exports = async options => {
                 ])
                 .build()
         )
-        .withField(
+        .withOptionalField(
             Component('dropdown', 'contributionBusinessUnit')
                 .withValidator('required')
                 .withProp('label', 'Business Unit')

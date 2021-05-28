@@ -22,6 +22,12 @@ module.exports = (options) => {
             }
             return this;
         },
+        withOptionalField: function (field, show = true) {
+            if (field && show) {
+                schema.fields.push(field);
+            }
+            return this;
+        },
         // TODO: Remove
         withPrimaryActionLabel: function (label) {
             if (label) {
