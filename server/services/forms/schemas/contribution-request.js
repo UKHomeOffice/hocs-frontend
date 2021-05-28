@@ -1,5 +1,5 @@
 const Form = require('../form-builder');
-const { Component, Choice, ConditionChoice } = require('../component-builder');
+const { Component, ConditionChoice } = require('../component-builder');
 const { getSomuItem } = require('../../../middleware/somu');
 
 const ACTIONS = {
@@ -14,23 +14,18 @@ module.exports = async options => {
     const isAdd = action ? action.toUpperCase() === ACTIONS.ADD_REQUEST || action.toUpperCase() === ACTIONS.ADD_ADDITIONAL_REQUEST : false;
     const isReadOnly = action ? action.toUpperCase() === ACTIONS.VIEW_REQUEST : true;
     const { data } = !isAdd ? await getSomuItem(options) : {};
+    const primaryChoiceLabel = options.customConfig ? options.customConfig.primaryChoiceLabel : 'Business Area';
+    const primaryChoiceList = options.customConfig ? options.customConfig.primaryChoiceList : 'MPAM_CONTRIBUTION_BUSINESS_AREAS';
+    const showBusinessUnits = options.customConfig ? options.customConfig.showBusinessUnits : true;
 
     const form = Form()
         .withTitle(`${isAdd ? 'Add' : isReadOnly ? 'View' : 'Edit'} Contribution Request`)
         .withField(
             Component('dropdown', 'contributionBusinessArea')
                 .withValidator('required')
-                .withProp('label', 'Business Area')
+                .withProp('label', primaryChoiceLabel)
                 .withProp('disabled', isReadOnly)
-                .withProp('choices', [
-                    Choice('UKVI', 'UKVI'),
-                    Choice('BF', 'BF'),
-                    Choice('IE', 'IE'),
-                    Choice('EUSS', 'EUSS'),
-                    Choice('HMPO', 'HMPO'),
-                    Choice('Windrush', 'Windrush'),
-                    Choice('Coronavirus (COVID-19)', 'Coronavirus')
-                ])
+                .withProp('choices', primaryChoiceList)
                 .build()
         )
         .withOptionalField(
@@ -47,7 +42,7 @@ module.exports = async options => {
                     ConditionChoice('contributionBusinessArea', 'Windrush', 'S_MPAM_BUS_UNITS_6'),
                     ConditionChoice('contributionBusinessArea', 'Coronavirus', 'S_MPAM_BUS_UNITS_7')
                 ])
-                .build()
+                .build(), showBusinessUnits
         )
         .withField(
             Component('date', 'contributionRequestDate')

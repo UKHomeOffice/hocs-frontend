@@ -4,25 +4,20 @@ const { getSomuItem } = require('../../../middleware/somu');
 
 module.exports = async options => {
     const { data } = await getSomuItem(options);
+    const primaryChoiceLabel = options.customConfig ? options.customConfig.primaryChoiceLabel : 'Business Area';
+    const primaryChoiceList = options.customConfig ? options.customConfig.primaryChoiceList : 'MPAM_CONTRIBUTION_BUSINESS_AREAS';
+    const showBusinessUnits = options.customConfig ? options.customConfig.showBusinessUnits : true;
 
     return Form()
         .withTitle('Contribution Request Fulfillment')
         .withField(
             Component('dropdown', 'contributionBusinessArea')
                 .withValidator('required')
-                .withProp('label', 'Business Area')
-                .withProp('choices', [
-                    Choice('UKVI', 'UKVI'),
-                    Choice('BF', 'BF'),
-                    Choice('IE', 'IE'),
-                    Choice('EUSS', 'EUSS'),
-                    Choice('HMPO', 'HMPO'),
-                    Choice('Windrush', 'Windrush'),
-                    Choice('Coronavirus (COVID-19)', 'Coronavirus')
-                ])
+                .withProp('label', primaryChoiceLabel)
+                .withProp('choices', primaryChoiceList)
                 .build()
         )
-        .withField(
+        .withOptionalField(
             Component('dropdown', 'contributionBusinessUnit')
                 .withValidator('required')
                 .withProp('label', 'Business Unit')
@@ -35,7 +30,7 @@ module.exports = async options => {
                     ConditionChoice('contributionBusinessArea', 'Windrush', 'S_MPAM_BUS_UNITS_6'),
                     ConditionChoice('contributionBusinessArea', 'Coronavirus', 'S_MPAM_BUS_UNITS_7')
                 ])
-                .build()
+                .build(), showBusinessUnits
         )
         .withField(
             Component('date', 'contributionRequestDate')
