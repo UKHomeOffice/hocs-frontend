@@ -35,6 +35,7 @@ const ColumnRenderer = {
     CORRESPONDENT_WITH_CASE_LINK: 'correspondentWithCaseLink',
     DATE: 'date',
     DATE_WARNING: 'dateWarning',
+    DATE_RAW: 'dateRAW',
     DUE_DATE_WARNING: 'dueDateWarning',
     INDICATOR_BLUE: 'indicatorBlue',
     INDICATOR_GREEN: 'indicatorGreen',
@@ -312,6 +313,22 @@ class WorkstackAllocate extends Component {
                     }
                 }
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>{value}</td>;
+            case ColumnRenderer.DATE_RAW: // date, with Red-Amber-White highlighting
+                if (row.deadlineWarning) {
+                    var date = new Date();
+                    if (new Date(row.deadline) < new Date(date.getFullYear(), date.getMonth(), date.getDate())) {
+                        return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell date-warning'>
+                            <span>{value}</span>
+                        </td>;
+                    } else if (new Date(row.deadlineWarning) < date) {
+                        return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell date-advisory'>
+                            <span>{value}</span>
+                        </td>;
+                    }
+                }
+                return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell date-nowarning'>
+                    <span>{value}</span>
+                </td>;
             case ColumnRenderer.DUE_DATE_WARNING:
                 if (row.data.CaseContributions) {
                     const dueContribution = JSON.parse(row.data.CaseContributions)

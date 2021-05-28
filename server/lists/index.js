@@ -86,6 +86,12 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
+        S_COMP_CCT_CASE_OUTCOME: {
+            client: 'INFO',
+            endpoint: '/entity/list/COMP_CCT_CASE_OUTCOME',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
         S_COMP_CCT_ENQ_REASON: {
             client: 'INFO',
             endpoint: '/entity/list/COMP_CCT_ENQ_REASON',
@@ -361,6 +367,11 @@ module.exports = {
             adapter: documentListAdapter
         },
         CASE_DOCUMENT_LIST_DRAFT: {
+            client: 'CASEWORK',
+            endpoint: '/case/document/reference/${caseId}/?type=DRAFT',
+            adapter: documentListAdapter
+        },
+        CASE_DOCUMENT_LIST_REPLY: {
             client: 'CASEWORK',
             endpoint: '/case/document/reference/${caseId}/?type=DRAFT',
             adapter: documentListAdapter
