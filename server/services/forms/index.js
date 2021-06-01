@@ -5,6 +5,12 @@ const {
     ADD_DOCUMENT, REMOVE_DOCUMENT, MANAGE_DOCUMENTS, MANAGE_PEOPLE, ADD_CONTRIBUTION, ADD_ADDITIONAL_CONTRIBUTION, EDIT_CONTRIBUTION
 } = require('../actions/types');
 
+const mpamContributionsRequest = {
+    showBusinessUnits: true,
+    primaryChoiceLabel: 'Business Area',
+    primaryChoiceList: 'MPAM_CONTRIBUTION_BUSINESS_AREAS'
+};
+
 const formDefinitions = {
     ACTION: {
         CREATE: {
@@ -213,22 +219,27 @@ const formDefinitions = {
             MPAM: {
                 ADDREQUEST: {
                     builder: formRepository.contributionRequest,
-                    action: ADD_CONTRIBUTION
+                    action: ADD_CONTRIBUTION,
+                    customConfig: mpamContributionsRequest
                 },
                 ADDADDITIONALREQUEST: {
                     builder: formRepository.contributionRequest,
-                    action: ADD_ADDITIONAL_CONTRIBUTION
+                    action: ADD_ADDITIONAL_CONTRIBUTION,
+                    customConfig: mpamContributionsRequest
                 },
                 EDITREQUEST: {
                     builder: formRepository.contributionRequest,
-                    action: EDIT_CONTRIBUTION
+                    action: EDIT_CONTRIBUTION,
+                    customConfig: mpamContributionsRequest
                 },
                 VIEWREQUEST: {
                     builder: formRepository.contributionRequest,
+                    customConfig: mpamContributionsRequest
                 },
                 EDIT: {
                     builder: formRepository.contributionFulfillment,
-                    action: EDIT_CONTRIBUTION
+                    action: EDIT_CONTRIBUTION,
+                    customConfig: mpamContributionsRequest
                 }
             }
         },
@@ -307,6 +318,7 @@ module.exports = {
                 formDefinition = formDefinitions['CASE'][entity.toUpperCase()][action.toUpperCase()];
             } else if (somuType && somuCaseType) {
                 formDefinition = formDefinitions['CASE'][somuType.toUpperCase()][somuCaseType.toUpperCase()][action.toUpperCase()];
+                options.customConfig = formDefinition.customConfig;
             }
 
             if (formDefinition) {
