@@ -262,7 +262,7 @@ const formDefinitions = {
                 }
             }
         },
-        CCT_CASE_CONTRIB: {
+        CCT_BUS_CONTRIB: {
             COMP: {
                 ADDREQUEST: {
                     builder: formRepository.contributionRequest,
