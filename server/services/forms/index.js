@@ -11,10 +11,16 @@ const mpamContributionsRequest = {
     primaryChoiceList: 'MPAM_CONTRIBUTION_BUSINESS_AREAS'
 };
 
-const compContributionsRequest = {
+const compBusinessContributionsRequest = {
     showBusinessUnits: false,
     primaryChoiceLabel: 'Business Area',
-    primaryChoiceList: 'S_COMP_CCT_BUS_AREA'
+    primaryChoiceList: 'S_COMP_CONTRIB_BUS_AREA'
+};
+
+const compComplainantContributionsRequest = {
+    showBusinessUnits: false,
+    primaryChoiceLabel: 'Label TBD',
+    primaryChoiceList: 'S_COMP_CONTRIB_BUS_AREA'
 };
 
 const formDefinitions = {
@@ -254,43 +260,43 @@ const formDefinitions = {
                 ADDREQUEST: {
                     builder: formRepository.contributionRequest,
                     action: ADD_CONTRIBUTION,
-                    customConfig: compContributionsRequest
+                    customConfig: compComplainantContributionsRequest
                 },
                 EDITREQUEST: {
                     builder: formRepository.contributionRequest,
                     action: EDIT_CONTRIBUTION,
-                    customConfig: compContributionsRequest
+                    customConfig: compComplainantContributionsRequest
                 },
                 VIEWREQUEST: {
                     builder: formRepository.contributionRequest,
-                    customConfig: compContributionsRequest
+                    customConfig: compComplainantContributionsRequest
                 },
                 EDIT: {
                     builder: formRepository.contributionFulfillment,
                     action: EDIT_CONTRIBUTION,
-                    customConfig: compContributionsRequest
+                    customConfig: compComplainantContributionsRequest
                 }
             }
         },
-        CCT_CASE_CONTRIB: {
+        CCT_BUS_CONTRIB: {
             COMP: {
                 ADDREQUEST: {
                     builder: formRepository.contributionRequest,
                     action: ADD_CONTRIBUTION,
-                    customConfig: compContributionsRequest
+                    customConfig: compBusinessContributionsRequest
                 },
                 EDITREQUEST: {
                     builder: formRepository.contributionRequest,
                     action: EDIT_CONTRIBUTION,
-                    customConfig: compContributionsRequest
+                    customConfig: compBusinessContributionsRequest
                 },
                 VIEWREQUEST: {
                     builder: formRepository.contributionRequest,
-                    customConfig: compContributionsRequest                },
+                    customConfig: compBusinessContributionsRequest                },
                 EDIT: {
                     builder: formRepository.contributionFulfillment,
                     action: EDIT_CONTRIBUTION,
-                    customConfig: compContributionsRequest
+                    customConfig: compBusinessContributionsRequest
                 }
             }
         }
