@@ -86,9 +86,9 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
-        S_COMP_CONTRIB_BUS_AREA: {
+        S_COMP_CCT_CASE_OUTCOME: {
             client: 'INFO',
-            endpoint: '/entity/list/COMP_CONTRIB_BUS_AREA',
+            endpoint: '/entity/list/COMP_CCT_CASE_OUTCOME',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
