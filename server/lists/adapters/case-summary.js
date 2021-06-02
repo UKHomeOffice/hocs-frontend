@@ -47,10 +47,12 @@ module.exports = async (summary, options) => {
     const stageDeadlineEnabled = caseProfile && caseProfile.summaryDeadlineEnabled;
     const deadlinesEnabled = configuration.deadlinesEnabled;
     return {
+        type: summary.type,
         case: {
             created: formatDate(summary.caseCreated),
             received: formatDate(summary.dateReceived),
-            deadline: formatDate(summary.caseDeadline)
+            deadline: formatDate(summary.caseDeadline),
+            deadLineExtensions: summary.deadLineExtensions
         },
         additionalFields: await createAdditionalFields(summary.additionalFields, fetchList),
         primaryTopic: getPrimaryTopic(summary.primaryTopic),

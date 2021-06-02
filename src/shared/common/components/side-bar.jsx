@@ -6,6 +6,7 @@ import DocumentPane from './document-pane.jsx';
 import CaseNotes from './case-notes.jsx';
 import StageSummary from './stage-summary.jsx';
 import People from './people.jsx';
+import FoiActions from './foi-actions.jsx';
 
 class SideBar extends Component {
 
@@ -41,12 +42,20 @@ class SideBar extends Component {
 
     render() {
         let peopleTabEnabled = true;
-        const { page } = this.props;
-        // last chars in caseId always correspond to case_type short code
-        // this check disabled People tab for WCS cases
-        if (page && page.params && page.params.caseId) {
-            peopleTabEnabled = !page.params.caseId.endsWith('c1');
+        let foiActionstabEnabled = false;
+        const { summary: { type } = {} } = this.props;
+
+        if (type) {
+            // this check disables the people tab for WCS cases
+            if(type === 'WCS' || type === 'FOI') {
+                peopleTabEnabled = false;
+            }
+
+            if (type === 'FOI') {
+                foiActionstabEnabled = true;
+            }
         }
+
         return (
             <Fragment >
                 <div className='tabs'>
@@ -55,11 +64,13 @@ class SideBar extends Component {
                         {this.renderTabButton('Summary', 'SUMMARY')}
                         {this.renderTabButton('Timeline', 'TIMELINE')}
                         {peopleTabEnabled && this.renderTabButton('People', 'PEOPLE')}
+                        {foiActionstabEnabled && this.renderTabButton('Actions', 'FOI_ACTIONS')}
                     </ul>
                     {this.isActive('DOCUMENTS') && <DocumentPane />}
                     {this.isActive('SUMMARY') && <StageSummary />}
                     {this.isActive('TIMELINE') && <CaseNotes />}
                     {this.isActive('PEOPLE') && <People />}
+                    {this.isActive('FOI_ACTIONS') && <FoiActions />}
                 </div>
             </Fragment>
         );
@@ -71,12 +82,14 @@ SideBar.propTypes = {
     activeTab: PropTypes.string,
     page: PropTypes.object.isRequired,
     track: PropTypes.func.isRequired,
-
+    summary: PropTypes.object.isRequired,
+    test: PropTypes.string.isRequired
 };
 
 const WrappedSideBar = props => (
     <ApplicationConsumer>
-        {({ track, page, activeTab }) => <SideBar {...props} track={track} page={page} activeTab={activeTab} />}
+        {({ track, page, activeTab, summary }) =>
+            <SideBar {...props} track={track} page={page} activeTab={activeTab} summary={summary} test={'test'}/>}
     </ApplicationConsumer>
 );
 

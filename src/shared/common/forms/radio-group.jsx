@@ -142,7 +142,10 @@ class Radio extends Component {
                                             data-aria-controls={`conditional-${name}-${choice.value}`}
                                             className={'govuk-radios__input'}
                                         />
-                                        <label className="govuk-label govuk-radios__label" htmlFor={`${name}-${choice.value}`}>{choice.label}</label>
+                                        <label className="govuk-label govuk-radios__label" htmlFor={`${name}-${choice.value}`}>
+                                            {choice.label}
+                                            {choice.description && <span className="govuk-body-s full-width">{choice.description}</span>}
+                                        </label>
                                     </div>
 
                                     {choice.conditionalContent &&
@@ -151,6 +154,7 @@ class Radio extends Component {
                                             <div className={`govuk-form-group ${this.isConditionalContentError(errors, `${choice.value}Text`) ? ' govuk-form-group--error' : ''}`}>
                                                 <label className="govuk-label" htmlFor={`${choice.value}Text`}>
                                                     {choice.conditionalContent.label}
+                                                    {choice.conditionalContent.description && <span className="govuk-body-s full-width">{choice.conditionalContent.description}</span>}
                                                 </label>
                                                 {this.isConditionalContentError(errors, `${choice.value}Text`) &&
                                                     <span id={`${choice.value}Text-error`} className="govuk-error-message">
