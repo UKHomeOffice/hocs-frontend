@@ -183,6 +183,7 @@ const bindDisplayElements = fromStaticList => async (stage) => {
             stage.correspondents.correspondents.find(correspondent => correspondent.is_primary === 'true');
 
         if (primaryCorrespondent) {
+            stage.primaryCorrespondent = primaryCorrespondent;
             stage.primaryCorrespondentAndRefDisplay.primaryCorrespondentFullName = primaryCorrespondent.fullname;
         }
 
