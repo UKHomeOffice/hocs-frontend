@@ -31,7 +31,6 @@ const SortDirection = {
 };
 
 const ColumnRenderer = {
-    ARRAY_BREAK: 'arrayBreak',
     CASE_LINK: 'caseLink',
     CORRESPONDENT_WITH_CASE_LINK: 'correspondentWithCaseLink',
     DATE: 'date',
@@ -295,11 +294,6 @@ class WorkstackAllocate extends Component {
         const value = this.getCellValue(row, column);
 
         switch (column.renderer) {
-            case ColumnRenderer.ARRAY_BREAK: {
-                return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>
-                    {value[0]}
-                </td>;
-            }
             case ColumnRenderer.CASE_LINK:
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>
                     <Link to={`/case/${row.caseUUID}/stage/${row.uuid}`} className='govuk-link govuk-!-margin-right-3'>{value}</Link>
