@@ -5,6 +5,24 @@ const {
     ADD_DOCUMENT, REMOVE_DOCUMENT, MANAGE_DOCUMENTS, MANAGE_PEOPLE, ADD_CONTRIBUTION, ADD_ADDITIONAL_CONTRIBUTION, EDIT_CONTRIBUTION
 } = require('../actions/types');
 
+const mpamContributionsRequest = {
+    showBusinessUnits: true,
+    primaryChoiceLabel: 'Business Area',
+    primaryChoiceList: 'MPAM_CONTRIBUTION_BUSINESS_AREAS'
+};
+
+const compBusinessContributionsRequest = {
+    showBusinessUnits: false,
+    primaryChoiceLabel: 'Business Area',
+    primaryChoiceList: 'S_COMP_CONTRIB_BUS_AREA'
+};
+
+const compComplainantContributionsRequest = {
+    showBusinessUnits: false,
+    primaryChoiceLabel: 'Contributions Type',
+    primaryChoiceList: 'S_COMP_CONTRIB_TYPE'
+};
+
 const formDefinitions = {
     ACTION: {
         CREATE: {
@@ -213,22 +231,27 @@ const formDefinitions = {
             MPAM: {
                 ADDREQUEST: {
                     builder: formRepository.contributionRequest,
-                    action: ADD_CONTRIBUTION
+                    action: ADD_CONTRIBUTION,
+                    customConfig: mpamContributionsRequest
                 },
                 ADDADDITIONALREQUEST: {
                     builder: formRepository.contributionRequest,
-                    action: ADD_ADDITIONAL_CONTRIBUTION
+                    action: ADD_ADDITIONAL_CONTRIBUTION,
+                    customConfig: mpamContributionsRequest
                 },
                 EDITREQUEST: {
                     builder: formRepository.contributionRequest,
-                    action: EDIT_CONTRIBUTION
+                    action: EDIT_CONTRIBUTION,
+                    customConfig: mpamContributionsRequest
                 },
                 VIEWREQUEST: {
                     builder: formRepository.contributionRequest,
+                    customConfig: mpamContributionsRequest
                 },
                 EDIT: {
                     builder: formRepository.contributionFulfillment,
-                    action: EDIT_CONTRIBUTION
+                    action: EDIT_CONTRIBUTION,
+                    customConfig: mpamContributionsRequest
                 }
             }
         },
@@ -236,18 +259,22 @@ const formDefinitions = {
             COMP: {
                 ADDREQUEST: {
                     builder: formRepository.contributionRequest,
-                    action: ADD_CONTRIBUTION
+                    action: ADD_CONTRIBUTION,
+                    customConfig: compComplainantContributionsRequest
                 },
                 EDITREQUEST: {
                     builder: formRepository.contributionRequest,
-                    action: EDIT_CONTRIBUTION
+                    action: EDIT_CONTRIBUTION,
+                    customConfig: compComplainantContributionsRequest
                 },
                 VIEWREQUEST: {
                     builder: formRepository.contributionRequest,
+                    customConfig: compComplainantContributionsRequest
                 },
                 EDIT: {
                     builder: formRepository.contributionFulfillment,
-                    action: EDIT_CONTRIBUTION
+                    action: EDIT_CONTRIBUTION,
+                    customConfig: compComplainantContributionsRequest
                 }
             }
         },
@@ -255,18 +282,22 @@ const formDefinitions = {
             COMP: {
                 ADDREQUEST: {
                     builder: formRepository.contributionRequest,
-                    action: ADD_CONTRIBUTION
+                    action: ADD_CONTRIBUTION,
+                    customConfig: compBusinessContributionsRequest
                 },
                 EDITREQUEST: {
                     builder: formRepository.contributionRequest,
-                    action: EDIT_CONTRIBUTION
+                    action: EDIT_CONTRIBUTION,
+                    customConfig: compBusinessContributionsRequest
                 },
                 VIEWREQUEST: {
                     builder: formRepository.contributionRequest,
+                    customConfig: compBusinessContributionsRequest
                 },
                 EDIT: {
                     builder: formRepository.contributionFulfillment,
-                    action: EDIT_CONTRIBUTION
+                    action: EDIT_CONTRIBUTION,
+                    customConfig: compBusinessContributionsRequest
                 }
             }
         }
@@ -307,6 +338,7 @@ module.exports = {
                 formDefinition = formDefinitions['CASE'][entity.toUpperCase()][action.toUpperCase()];
             } else if (somuType && somuCaseType) {
                 formDefinition = formDefinitions['CASE'][somuType.toUpperCase()][somuCaseType.toUpperCase()][action.toUpperCase()];
+                options.customConfig = formDefinition.customConfig;
             }
 
             if (formDefinition) {
