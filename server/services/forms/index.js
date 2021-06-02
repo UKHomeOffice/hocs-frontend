@@ -292,7 +292,8 @@ const formDefinitions = {
                 },
                 VIEWREQUEST: {
                     builder: formRepository.contributionRequest,
-                    customConfig: compBusinessContributionsRequest                },
+                    customConfig: compBusinessContributionsRequest
+                },
                 EDIT: {
                     builder: formRepository.contributionFulfillment,
                     action: EDIT_CONTRIBUTION,
