@@ -140,6 +140,12 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
+        MPAM_CONTRIBUTION_BUSINESS_AREAS: {
+            client: 'INFO',
+            endpoint: '/entity/list/MPAM_CONTRIBUTION_BUSINESS_AREAS',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
         S_MPAM_BUS_UNITS_1: {
             client: 'INFO',
             endpoint: '/entity/list/MPAM_BUS_UNITS_1',
