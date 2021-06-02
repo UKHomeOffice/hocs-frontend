@@ -19,8 +19,8 @@ const compBusinessContributionsRequest = {
 
 const compComplainantContributionsRequest = {
     showBusinessUnits: false,
-    primaryChoiceLabel: 'Label TBD',
-    primaryChoiceList: 'S_COMP_CONTRIB_BUS_AREA'
+    primaryChoiceLabel: 'Contributions Type',
+    primaryChoiceList: 'S_COMP_CONTRIB_TYPE'
 };
 
 const formDefinitions = {
