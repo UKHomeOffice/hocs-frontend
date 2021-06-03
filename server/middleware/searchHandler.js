@@ -31,7 +31,7 @@ async function handleSearch(req, res, next) {
             data: {
                 FullName: formData['claimantName'],
                 DateOfBirth: formData['claimantDOB'],
-                ComplainantDOB: formData['ComplainantDOB'],
+                ComplainantDOB: replaceEmptyStringWithUndefined(formData['ComplainantDOB']),
                 NI: formData['niNumber'],
                 PrevHocsRef: formData['PrevHocsRef'],
                 RefType: formData['RefType'],
@@ -39,7 +39,7 @@ async function handleSearch(req, res, next) {
                 CampaignType: formData['CampaignType'],
                 MinSignOffTeam: formData['MinSignOffTeam'],
                 OfficialEngagement: formData['OfficialEngagement'],
-                ComplainantHORef: formData['ComplainantHORef']
+                ComplainantHORef: replaceEmptyStringWithUndefined(formData['ComplainantHORef'])
             },
             activeOnly: formData['caseStatus'] === 'active'
         };
@@ -75,6 +75,10 @@ async function handleSearch(req, res, next) {
 async function getMemberExternalKey(memberUuid) {
     const response = await infoService.get(`/member/${memberUuid}`);
     return response.data.externalKey;
+}
+
+function replaceEmptyStringWithUndefined(formDataItem) {
+    return formDataItem !== '' ? formDataItem : undefined;
 }
 
 module.exports = {

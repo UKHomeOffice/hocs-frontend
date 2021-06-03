@@ -36,7 +36,9 @@ describe('handleSearch', () => {
                     'caseStatus': 'active',
                     'CampaignType': 'Test Campaign 123',
                     'MinSignOffTeam': 'Test Min Sign Off Team',
-                    'OfficialEngagement': 'Yes'
+                    'OfficialEngagement': 'Yes',
+                    'ComplainantDOB': '',
+                    'ComplainantHORef': 'C2'
                 }
             },
             requestId: 'reqid',
@@ -104,11 +106,13 @@ describe('handleSearch', () => {
             data: {
                 FullName: 'test Name',
                 DateOfBirth: '12-11-1967',
+                ComplainantDOB: undefined,
                 NI: 'SJ0000000',
                 PrevHocsRef: 'PREV_HOCS_REF',
                 CampaignType: 'Test Campaign 123',
                 MinSignOffTeam: 'Test Min Sign Off Team',
-                OfficialEngagement: 'Yes'
+                OfficialEngagement: 'Yes',
+                ComplainantHORef: 'C2'
             },
             activeOnly: true
         };
