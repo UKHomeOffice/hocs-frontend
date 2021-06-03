@@ -763,6 +763,42 @@ describe('Workflow Workstack Adapter', () => {
         expect(result).toMatchSnapshot();
     });
 
+    it('should add the fullname and postcode of primaryCorrespondent to primaryCorrespondent', async () => {
+        const mockData = {
+            stages: [
+                {
+                    correspondents: {
+                        correspondents: [
+                            { fullname: 'testName', postcode: 'postcode1', uuid: 'uuid123', is_primary: 'false' },
+                            { fullname: 'primaryC', postcode: 'postcode2', uuid: 'uuid456', is_primary: 'true' }
+                        ]
+                    },
+                    teamUUID: 2,
+                    caseType: 'COMP',
+                    stageType: 'A',
+                    userUUID: 2,
+                    deadline: '2200-01-03',
+                    caseReference: 'COMP/1234568/19',
+                    active: true,
+                    data: {
+                        CaseContributions: '[{}]',
+                    }
+                }
+            ]
+        };
+
+        const result = await stageAdapter(mockData, {
+            user: mockUser,
+            fromStaticList: mockFromStaticList,
+            logger: mockLogger,
+            teamId: 2,
+            workflowId: 'COMP',
+            stageId: 'A',
+            configuration: mockConfiguration
+        });
+        expect(result).toMatchSnapshot();
+    });
+
     it('should transform a stage array to a workflow workstack with at MPAM_TRIAGE with contributionStatus',
         async () => {
             const mockData = {
