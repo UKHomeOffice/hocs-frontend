@@ -49,6 +49,10 @@ const ColumnSortStrategy = {
 };
 
 const dataAdapters = {
+    primaryCorrespondent: (value, key, row) => {
+        var primaryCorr = row.primaryCorrespondent;
+        return primaryCorr[key];
+    },
     localDate: (value) => {
         var date = new Date(value);
         if (isNaN(date) || value == null)
@@ -99,11 +103,11 @@ class WorkstackAllocate extends Component {
             }
 
             if (value !== undefined) {
-                return this.applyDataAdapter(value, column.dataAdapter, dataValue);
+                return this.applyDataAdapter(value, column.dataAdapter, dataValue, row);
             }
         }
 
-        return this.applyDataAdapter(undefined, column.dataAdapter, dataValueKeys);
+        return this.applyDataAdapter(undefined, column.dataAdapter, dataValueKeys, row);
     }
 
     getDataValue(row, dataValueKey) {
@@ -130,12 +134,12 @@ class WorkstackAllocate extends Component {
         return value;
     }
 
-    applyDataAdapter(value, colDataAdapter, dataValueKey) {
+    applyDataAdapter(value, colDataAdapter, dataValueKey, row) {
         if (colDataAdapter) {
             const dataAdapter = dataAdapters[colDataAdapter];
 
             if (dataAdapter) {
-                return dataAdapter(value, dataValueKey);
+                return dataAdapter(value, dataValueKey, row);
             }
 
             throw new Error('Data Adapter not implemented: ' + colDataAdapter);
