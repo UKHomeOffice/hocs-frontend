@@ -16,7 +16,6 @@ const search = async (options = {}) => {
     let fields = [];
     const systemConfiguration = await listService.fetch('S_SYSTEM_CONFIGURATION');
     systemConfiguration.profiles.map(profile => {
-        console.log(profile);
         if (userProfileNames.includes(profile.profileName)) {
             profile.searchFields.map(searchField => {
                 if (!fields.some(field => field.name === searchField.name && field.component === searchField.component)) {
