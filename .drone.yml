@@ -36,7 +36,8 @@ steps:
     VERSION: test
     ENVIRONMENT: wcs-dev
     KUBE_TOKEN: test
-    POISE_WHITELIST: "127.0.0.1/32"
+    POISE_IPS: "127.0.0.1/32"
+    ACPTUNNEL_IPS: "127.0.0.1/32"
   commands:
     - bash -x deploy.sh
   depends_on:
@@ -49,7 +50,8 @@ steps:
     VERSION: test
     ENVIRONMENT: cs-prod
     KUBE_TOKEN: test
-    POISE_WHITELIST: "127.0.0.1/32"
+    POISE_IPS: "127.0.0.1/32"
+    ACPTUNNEL_IPS: "127.0.0.1/32"
   commands:
     - bash -x deploy.sh
   depends_on:

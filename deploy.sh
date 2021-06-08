@@ -1,10 +1,14 @@
 #!/bin/bash
 set -euo pipefail
 
-export IP_WHITELIST=${POISE_WHITELIST}
+
 export KUBE_NAMESPACE=${ENVIRONMENT}
 export KUBE_TOKEN=${KUBE_TOKEN}
 export VERSION=${VERSION}
+
+export POISE_IPS=${POISE_IPS} # corporate network
+export ACPTUNNEL_IPS=${ACPTUNNEL_IPS} # digital VPN
+# https://docs.acp.homeoffice.gov.uk/support/ip-ranges
 
 export DOMAIN="cs"
 if [ "${KUBE_NAMESPACE%-*}" == "wcs" ]; then
@@ -16,6 +20,7 @@ export SUBNAMESPACE="${KUBE_NAMESPACE#*-}" # e.g. dev, qa
 if [[ ${KUBE_NAMESPACE} == *prod ]]; then
     export MIN_REPLICAS="2"
     export MAX_REPLICAS="6"
+    export ALLOWED_IPS=${POISE_IPS}
     export KUBE_SERVER=https://kube-api-prod.prod.acp.homeoffice.gov.uk
     export UPTIME_PERIOD="Mon-Sun 05:00-23:00 Europe/London"
   if [[ "${KUBE_NAMESPACE}" == "wcs-prod" ]] ; then
@@ -34,6 +39,7 @@ else
     export UPTIME_PERIOD="Mon-Fri 08:00-18:00 Europe/London"
     export KC_REALM=https://sso-dev.notprod.homeoffice.gov.uk/auth/realms/hocs-notprod
     export KUBE_SERVER=https://kube-api-notprod.notprod.acp.homeoffice.gov.uk
+    export ALLOWED_IPS=${POISE_IPS}
 
     export DOMAIN_NAME="${SUBNAMESPACE}.${DOMAIN}-notprod.homeoffice.gov.uk"
     export INTERNAL_DOMAIN_NAME="${SUBNAMESPACE}.internal.${DOMAIN}-notprod.homeoffice.gov.uk"
@@ -42,6 +48,9 @@ else
     # so at least one non-prod namespace has prod-like keycloak-proxy settings
     if [[ ${KUBE_NAMESPACE} == *demo ]]; then
       export INTERNAL_DOMAIN_NAME=''
+      # as kube-platform VPN doesn't get you into demo,
+      # additionally allow acp-tunnel VPN IPs
+      export ALLOWED_IPS="${POISE_IPS},${ACPTUNNEL_IPS}"
     fi
 fi
 
