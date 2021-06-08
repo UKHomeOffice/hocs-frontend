@@ -140,6 +140,28 @@ describe('Somu list component', () => {
         expect(WRAPPER).toMatchSnapshot();
     });
 
+    it('should render when CompTable renderer added', () => {
+        const somuType = { uuid: 'test',
+            caseType: 'tesCaseType',
+            type: 'testType',
+            schema: { renderers: { table: 'CompTable' } },
+            active: true };
+        const somuItems = [{ uuid: 'test', data: { contributionBusinessArea: 'TestBusinessArea' }, deleted: false }];
+        const PROPS = {
+            ...DEFAULT_PROPS,
+            somuType,
+            somuItems,
+        };
+        const OUTER = shallow(<WrappedSomuList {...PROPS} />);
+        const SomuList = OUTER.props().children;
+        const WRAPPER = render(
+            <MemoryRouter>
+                <SomuList page={PAGE} />
+            </MemoryRouter>);
+        expect(WRAPPER).toBeDefined();
+        expect(WRAPPER).toMatchSnapshot();
+    });
+
     it('should render with default render when renderers object doesn\'t exist', () => {
         const somuType = { uuid: 'test',
             caseType: 'tesCaseType',
