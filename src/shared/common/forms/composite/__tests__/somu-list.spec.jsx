@@ -96,7 +96,7 @@ describe('Somu list component', () => {
         expect(WRAPPER).toMatchSnapshot();
     });
 
-    it('should render with default render when table renderer exists', () => {
+    it('should render with MpamTable renderer', () => {
         const somuType = { uuid: 'test',
             caseType: 'tesCaseType',
             type: 'testType',

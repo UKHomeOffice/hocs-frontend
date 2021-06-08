@@ -329,6 +329,60 @@ exports[`Somu list component should render when CompTable renderer added 1`] = `
 </div>
 `;
 
+exports[`Somu list component should render with MpamTable renderer 1`] = `
+<div
+  class="govuk-form-group"
+>
+  <fieldset
+    class="govuk-fieldset "
+    id="somu_list"
+  >
+    <legend
+      class="govuk-fieldset__legend"
+      id="somu_list-legend"
+    >
+      <span
+        class="govuk-fieldset__heading govuk-label--s"
+      />
+    </legend>
+    <table
+      class="govuk-table"
+    >
+      <tbody
+        class="govuk-table__body"
+      >
+        <tr
+          class="govuk-table__row"
+        >
+          <td
+            class="govuk-table__cell"
+          >
+            <label
+              aria-label="TestBusinessArea - TestTeam"
+              class="govuk-label"
+              title="TestBusinessArea - TestTeam"
+            >
+              TestBusinessArea - TestTeam
+            </label>
+          </td>
+          <td
+            class="govuk-table__cell "
+          >
+            <label
+              aria-label="Due null"
+              class="govuk-label"
+              title="Due null"
+            >
+              Due null
+            </label>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </fieldset>
+</div>
+`;
+
 exports[`Somu list component should render with add link when passed in props 1`] = `
 <div
   class="govuk-form-group"
@@ -545,60 +599,6 @@ exports[`Somu list component should render with default render when renderers ob
               class="govuk-label"
             >
               test
-            </label>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </fieldset>
-</div>
-`;
-
-exports[`Somu list component should render with default render when table renderer exists 1`] = `
-<div
-  class="govuk-form-group"
->
-  <fieldset
-    class="govuk-fieldset "
-    id="somu_list"
-  >
-    <legend
-      class="govuk-fieldset__legend"
-      id="somu_list-legend"
-    >
-      <span
-        class="govuk-fieldset__heading govuk-label--s"
-      />
-    </legend>
-    <table
-      class="govuk-table"
-    >
-      <tbody
-        class="govuk-table__body"
-      >
-        <tr
-          class="govuk-table__row"
-        >
-          <td
-            class="govuk-table__cell"
-          >
-            <label
-              aria-label="TestBusinessArea - TestTeam"
-              class="govuk-label"
-              title="TestBusinessArea - TestTeam"
-            >
-              TestBusinessArea - TestTeam
-            </label>
-          </td>
-          <td
-            class="govuk-table__cell "
-          >
-            <label
-              aria-label="Due null"
-              class="govuk-label"
-              title="Due null"
-            >
-              Due null
             </label>
           </td>
         </tr>
