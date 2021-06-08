@@ -50,8 +50,11 @@ const ColumnSortStrategy = {
 
 const dataAdapters = {
     primaryCorrespondent: (value, key, row) => {
-        var primaryCorr = row.primaryCorrespondent;
-        return primaryCorr[key];
+        if (row.primaryCorrespondent) {
+            var primaryCorr = row.primaryCorrespondent;
+            return primaryCorr[key];
+        }
+        return '';
     },
     localDate: (value) => {
         var date = new Date(value);
