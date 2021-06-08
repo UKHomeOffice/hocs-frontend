@@ -51,8 +51,7 @@ const ColumnSortStrategy = {
 const dataAdapters = {
     primaryCorrespondent: (value, key, row) => {
         if (row.primaryCorrespondent) {
-            var primaryCorr = row.primaryCorrespondent;
-            return primaryCorr[key];
+            return row.primaryCorrespondent[key];
         }
         return '';
     },
