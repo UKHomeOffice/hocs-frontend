@@ -53,6 +53,7 @@ exports[`Workstack component should not add link to headers with sortStrategy no
               "displayName": "Fullname",
               "isFilterable": true,
               "renderer": null,
+              "sortStrategy": "correspondentTypeStrategy",
             },
             Object {
               "dataAdapter": "primaryCorrespondent",
@@ -60,6 +61,7 @@ exports[`Workstack component should not add link to headers with sortStrategy no
               "displayName": "Postcode",
               "isFilterable": true,
               "renderer": null,
+              "sortStrategy": "correspondentTypeStrategy",
             },
             Object {
               "dataAdapter": null,
@@ -2587,6 +2589,7 @@ exports[`Workstack component should render with filtering 1`] = `
               "displayName": "Fullname",
               "isFilterable": true,
               "renderer": null,
+              "sortStrategy": "correspondentTypeStrategy",
             },
             Object {
               "dataAdapter": "primaryCorrespondent",
@@ -2594,6 +2597,7 @@ exports[`Workstack component should render with filtering 1`] = `
               "displayName": "Postcode",
               "isFilterable": true,
               "renderer": null,
+              "sortStrategy": "correspondentTypeStrategy",
             },
             Object {
               "dataAdapter": null,
@@ -3166,6 +3170,7 @@ exports[`Workstack component should sort descending when the column heading is c
               "displayName": "Fullname",
               "isFilterable": true,
               "renderer": null,
+              "sortStrategy": "correspondentTypeStrategy",
             },
             Object {
               "dataAdapter": "primaryCorrespondent",
@@ -3173,6 +3178,7 @@ exports[`Workstack component should sort descending when the column heading is c
               "displayName": "Postcode",
               "isFilterable": true,
               "renderer": null,
+              "sortStrategy": "correspondentTypeStrategy",
             },
             Object {
               "dataAdapter": null,
@@ -4295,6 +4301,7 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
               "displayName": "Fullname",
               "isFilterable": true,
               "renderer": null,
+              "sortStrategy": "correspondentTypeStrategy",
             },
             Object {
               "dataAdapter": "primaryCorrespondent",
@@ -4302,6 +4309,7 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
               "displayName": "Postcode",
               "isFilterable": true,
               "renderer": null,
+              "sortStrategy": "correspondentTypeStrategy",
             },
             Object {
               "dataAdapter": null,
