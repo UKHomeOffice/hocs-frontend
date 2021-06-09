@@ -153,6 +153,18 @@ Array [
       "date": "5 January 2019 at 12:00",
       "modifiedBy": "MOCK_USER",
       "modifiedDate": null,
+      "note": "An extension reason case note",
+    },
+    "timelineItemUUID": "__timelineItemUUID__",
+    "title": "Case Extension",
+    "type": "EXTENSION",
+  },
+  Object {
+    "body": Object {
+      "author": "MOCK_USER",
+      "date": "5 January 2019 at 12:00",
+      "modifiedBy": "MOCK_USER",
+      "modifiedDate": null,
       "note": "A test transfer reason case note",
     },
     "timelineItemUUID": "__timelineItemUUID__",

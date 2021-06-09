@@ -2,7 +2,8 @@ const formRepository = require('./schemas/index');
 const {
     ADD_TEMPLATE, ADD_STANDARD_LINE, IS_MEMBER, ADD_MEMBER, SELECT_MEMBER, ADD_CORRESPONDENT, UPDATE_CORRESPONDENT,
     REMOVE_CORRESPONDENT, ADD_TOPIC, REMOVE_TOPIC, CREATE_CASE, CREATE_AND_ALLOCATE_CASE, BULK_CREATE_CASE,
-    ADD_DOCUMENT, REMOVE_DOCUMENT, MANAGE_DOCUMENTS, MANAGE_PEOPLE, ADD_CONTRIBUTION, ADD_ADDITIONAL_CONTRIBUTION, EDIT_CONTRIBUTION
+    ADD_DOCUMENT, REMOVE_DOCUMENT, MANAGE_DOCUMENTS, MANAGE_PEOPLE, ADD_CONTRIBUTION, ADD_ADDITIONAL_CONTRIBUTION,
+    EDIT_CONTRIBUTION, APPLY_CASE_DEADLINE_EXTENSION, CONFIRMATION_SUMMARY
 } = require('../actions/types');
 
 const mpamContributionsRequest = {
@@ -186,6 +187,15 @@ const formDefinitions = {
         },
     },
     CASE: {
+        ACTIONS_TAB: {
+            EXTEND_FOI_DEADLINE: {
+                builder: formRepository.confirmExtendDeadlineFoi,
+                action: APPLY_CASE_DEADLINE_EXTENSION,
+                next: {
+                    action: CONFIRMATION_SUMMARY
+                }
+            }
+        },
         DOCUMENT: {
             ADD: {
                 builder: formRepository.addDocumentNew,
@@ -404,7 +414,7 @@ module.exports = {
 
             if (formDefinition) {
                 const form = await formDefinition.builder.call(this, options);
-                return { schema: form.schema, action: formDefinition.action, data: form.data };
+                return { schema: form.schema, action: formDefinition.action, data: form.data, next: formDefinition.next, };
             }
         } else {
             return undefined;
