@@ -43,6 +43,7 @@ describe('Case Notes Adapter', () => {
             { eventTime: '2019-01-05 12:00:01', type: 'CLOSE', userName: 'User A', body: { caseNote: 'A test case note', userUUID: 1, teamUUID: 1, stage: 1 }, timelineItemUUID: '__timelineItemUUID__' },
             { eventTime: '2019-01-05 12:00:03', type: 'CHANGE', userName: 'User A', body: { caseNote: 'A test case note', userUUID: 1, teamUUID: 1, stage: 1 }, timelineItemUUID: '__timelineItemUUID__' },
             { eventTime: '2019-01-05 12:00:02', type: 'CASE_TRANSFER_REASON', userName: 'User A', body: { caseNote: 'A test transfer reason case note', userUUID: 1, teamUUID: 1, stage: 1 }, timelineItemUUID: '__timelineItemUUID__' },
+            { eventTime: '2019-01-05 12:00:02', type: 'EXTENSION', userName: 'User A', body: { caseNote: 'An extension reason case note', userUUID: 1, teamUUID: 1, stage: 1 }, timelineItemUUID: '__timelineItemUUID__' },
             { eventTime: '2019-01-05 12:00:05', type: 'ENQUIRY_REASON_EUNATIONAL_OTHERDETAILS', userName: 'User A', body: { caseNote: 'A test case note', userUUID: 1, teamUUID: 1, stage: 1 }, timelineItemUUID: '__timelineItemUUID__' },
             { eventTime: '2019-01-01 12:00:00', type: 'TEST_UNKNOWN_TYPE', userName: 'User A', timelineItemUUID: '__timelineItemUUID__' }
         ];

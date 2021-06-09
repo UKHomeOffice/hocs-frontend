@@ -44,7 +44,8 @@ const TimelineItem = (refreshNotes) => ({ type, body, title, timelineItemUUID })
     const isCaseNote = [
         'MANUAL', 'CLOSE_CASE_TELEPHONE', 'CONVERTED_CASE_TO_MINISTERIAL', 'CONVERTED_CASE_TO_OFFICIAL', 'ALLOCATE',
         'CHANGE', 'CLOSE', 'REJECT', 'PHONECALL', 'REQUEST_CONTRIBUTION', 'SEND_TO_WORKFLOW_MANAGER', 'FOLLOW_UP',
-        'FOLLOW_UP_NOT_COMPLETED', 'WITHDRAW', 'CASE_TRANSFER_REASON', 'ENQUIRY_REASON_EUNATIONAL_OTHERDETAILS'
+        'FOLLOW_UP_NOT_COMPLETED', 'WITHDRAW', 'CASE_TRANSFER_REASON', 'EXTENSION',
+        'ENQUIRY_REASON_EUNATIONAL_OTHERDETAILS'
     ].includes(type);
     return (
         body && <li key={timelineItemUUID} className={classnames({ 'case-note': isCaseNote })}>

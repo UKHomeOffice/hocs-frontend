@@ -421,6 +421,18 @@ function validationMiddleware(req, res, next) {
                         const { type, message } = validator;
                         if (Object.prototype.hasOwnProperty.call(validators, type)) {
                             const validationError = validators[type].call(this, { label, value, message });
+
+                            if (component === 'radio') {
+                                validateConditionalRadioContentIfExists.call(
+                                    this,
+                                    data,
+                                    name,
+                                    choices,
+                                    'required',
+                                    result
+                                );
+                            }
+
                             if (validationError) {
                                 result[field.props.name] = validationError;
                             }

@@ -20,6 +20,7 @@ Object {
   ],
   "case": Object {
     "created": "03/02/2019",
+    "deadLineExtensions": Array [],
     "deadline": "01/01/2020",
     "received": "01/01/2019",
   },
@@ -61,6 +62,7 @@ Object {
       "stage": "MOCK_STAGETYPE",
     },
   ],
+  "type": "case",
 }
 `;
 
@@ -84,6 +86,7 @@ Object {
   ],
   "case": Object {
     "created": "03/02/2019",
+    "deadLineExtensions": Array [],
     "deadline": "01/01/2020",
     "received": "01/01/2019",
   },
@@ -125,6 +128,7 @@ Object {
       "stage": "MOCK_STAGETYPE",
     },
   ],
+  "type": "case",
 }
 `;
 
@@ -144,6 +148,7 @@ Object {
   ],
   "case": Object {
     "created": "03/02/2019",
+    "deadLineExtensions": Array [],
     "deadline": "01/01/2020",
     "received": "01/01/2019",
   },
@@ -172,6 +177,7 @@ Object {
       "stage": "MOCK_STAGETYPE",
     },
   ],
+  "type": "case",
 }
 `;
 
@@ -191,6 +197,7 @@ Object {
   ],
   "case": Object {
     "created": "03/02/2019",
+    "deadLineExtensions": Array [],
     "deadline": "01/01/2020",
     "received": "01/01/2019",
   },
@@ -219,6 +226,7 @@ Object {
       "stage": "MOCK_STAGETYPE",
     },
   ],
+  "type": "case",
 }
 `;
 
@@ -243,6 +251,7 @@ Object {
   ],
   "case": Object {
     "created": "03/02/2019",
+    "deadLineExtensions": Array [],
     "deadline": "01/01/2020",
     "received": "01/01/2019",
   },
@@ -284,6 +293,7 @@ Object {
       "stage": "MOCK_STAGETYPE",
     },
   ],
+  "type": "case",
 }
 `;
 
@@ -292,6 +302,7 @@ Object {
   "additionalFields": Array [],
   "case": Object {
     "created": "03/02/2019",
+    "deadLineExtensions": Array [],
     "deadline": null,
     "received": "01/01/2019",
   },
@@ -301,5 +312,6 @@ Object {
   "primaryCorrespondent": null,
   "primaryTopic": null,
   "stages": Array [],
+  "type": "case",
 }
 `;
