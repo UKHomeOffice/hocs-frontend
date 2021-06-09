@@ -290,8 +290,25 @@
           "realmRoles": [],
           "clientRoles": {},
           "subGroups": []
-        }
-
+        },
+        {
+          "id": "f32d4c94-92cd-4652-a336-d9e3ba2990b7",
+          "name": "8y1MlJLNRlKjNtnjuimQtw",
+          "path": "/8y1MlJLNRlKjNtnjuimQtw",
+          "attributes": {},
+          "realmRoles": [],
+          "clientRoles": {},
+          "subGroups": []
+        },
+        {
+          "id": "45192592-4228-4a70-b848-533e1589cf8c",
+          "name": "RRklkkIoSnC4SFM-FYnPjA",
+          "path": "/RRklkkIoSnC4SFM-FYnPjA",
+          "attributes": {},
+          "realmRoles": [],
+          "clientRoles": {},
+          "subGroups": []
+    }
   ],
   "defaultRoles" : [ "uma_authorization", "offline_access" ],
   "requiredCredentials" : [ "password" ],
@@ -349,7 +366,9 @@
       "groups" : [
                   "/EREREREREREREREREREREQ",
                   "/MzMzMzMzMzMzMzMzMzMzMw",
-                  "/RERERCIiIiIiIiIiIiIiIg"]
+                  "/RERERCIiIiIiIiIiIiIiIg",
+                  "/8y1MlJLNRlKjNtnjuimQtw",
+                  "/RRklkkIoSnC4SFM-FYnPjA"]
     },
     {
       "id" : "39c44429-f3c2-4961-8124-ba09edb5fba0",
@@ -372,7 +391,9 @@
       "groups" : [
         "/EREREREREREREREREREREQ",
         "/MzMzMzMzMzMzMzMzMzMzMw",
-        "/RERERCIiIiIiIiIiIiIiIg"]
+        "/RERERCIiIiIiIiIiIiIiIg",
+        "/8y1MlJLNRlKjNtnjuimQtw",
+        "/RRklkkIoSnC4SFM-FYnPjA"]
     },
     {
       "id" : "638b31bc-6004-4f51-8394-45c3141e1f8a",
@@ -395,7 +416,9 @@
       "groups" : [
         "/EREREREREREREREREREREQ",
         "/MzMzMzMzMzMzMzMzMzMzMw",
-        "/RERERCIiIiIiIiIiIiIiIg"]
+        "/RERERCIiIiIiIiIiIiIiIg",
+        "/8y1MlJLNRlKjNtnjuimQtw",
+        "/RRklkkIoSnC4SFM-FYnPjA"]
     },
     {
       "id" : "968672ca-9fc1-491c-b2b9-d13c58b12d7a",
