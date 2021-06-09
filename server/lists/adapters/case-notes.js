@@ -131,6 +131,10 @@ const typeAdaptors = {
     CASE_TRANSFER_REASON: ({ note }) => ({
         note,
         title: 'Case transfer reason'
+    }),
+    EXTENSION: ({ note }) => ({
+        note,
+        title: 'Case Extension'
     })
 };
 

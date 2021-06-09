@@ -139,17 +139,21 @@ const actions = {
         }
     },
     CASE: async (options) => {
+
         const { caseId, stageId, context, form, user } = options;
 
         let headers = {
             headers: User.createHeaders(user)
         };
         const logger = getLogger();
+
         try {
+
             if (form && form.action) {
                 const { entity, somuTypeUuid } = options;
 
                 if (entity) {
+
                     logger.info('CASE_ACTION', { action: form.action, case: caseId });
                     switch (form.action) {
                         case actionTypes.ADD_DOCUMENT:
@@ -204,6 +208,24 @@ const actions = {
                         case actionTypes.ADD_CASE_NOTE:
                             await caseworkService.post(`/case/${caseId}/note`, { type: 'MANUAL', text: form.data['case-note'] }, headers);
                             break;
+                        case actionTypes.APPLY_CASE_DEADLINE_EXTENSION: {
+                            if (form.data.shouldApplyExtension === 'true') {
+                                const caseNote = `PIT Extension applied. Reason: ${form.data.trueText}`;
+
+                                const response =
+                                    await caseworkService.post(`/case/${caseId}/stage/${stageId}/extension`,
+                                        { type: form.data.extensionType, caseNote }, headers);
+
+                                const clientResponse = {
+                                    'summary': `Case: ${response.data.reference} extended`,
+                                    'link': `${response.data.reference}`
+                                };
+
+                                return handleActionSuccess(clientResponse, {}, form);
+                            } else {
+                                return ({ callbackUrl: `/case/${caseId}/stage/${stageId}` });
+                            }
+                        }
                     }
                 } else if (somuTypeUuid) {
                     const { somuItemData, somuItemUuid, somuTypeItems } = options;

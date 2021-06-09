@@ -44,7 +44,7 @@ const TimelineItem = (refreshNotes) => ({ type, body, title, timelineItemUUID })
     const isCaseNote = [
         'MANUAL', 'CLOSE_CASE_TELEPHONE', 'CONVERTED_CASE_TO_MINISTERIAL', 'CONVERTED_CASE_TO_OFFICIAL', 'ALLOCATE',
         'CHANGE', 'CLOSE', 'REJECT', 'PHONECALL', 'REQUEST_CONTRIBUTION', 'SEND_TO_WORKFLOW_MANAGER', 'FOLLOW_UP',
-        'FOLLOW_UP_NOT_COMPLETED', 'WITHDRAW', 'CASE_TRANSFER_REASON'
+        'FOLLOW_UP_NOT_COMPLETED', 'WITHDRAW', 'CASE_TRANSFER_REASON', 'EXTENSION'
     ].includes(type);
     return (
         body && <li key={timelineItemUUID} className={classnames({ 'case-note': isCaseNote })}>
@@ -74,7 +74,6 @@ class Timeline extends Component {
         if (page && page.params && page.params.caseId) {
             // TODO: Remove
             /* eslint-disable-next-line  no-console*/
-            console.log(`Updating case notes for case: ${page.params.caseId}`);
             return dispatch(updateApiStatus(status.REQUEST_CASE_NOTES))
                 .then(() => {
                     axios.get(`/api/case/${page.params.caseId}/caseNotes`)

@@ -34,6 +34,13 @@ jest.mock('../../clients', () => {
         },
         caseworkService: {
             post: (url, body) => {
+                if (url.match(/case\/.*\/stage\/.*\/extension/)) {
+                    console.log('match ' + url);
+
+                    mockRequestClient(body);
+                    return { data: { reference: '__test_ref__' } };
+                }
+
                 if (url === '/case') {
                     mockRequestClient(body);
                     return handleMockWorkflowCreateRequest(body);
@@ -45,7 +52,10 @@ jest.mock('../../clients', () => {
                 mockRequestClient(body);
             },
             put: (url, body) => {
+
                 if (url === '/case') {
+                    body.reference = '__test_ref__';
+
                     mockRequestClient(body);
                     return handleMockWorkflowCreateRequest(body);
                 }
@@ -109,8 +119,7 @@ describe('Action service', () => {
         const response = await actionService.performAction('ACTION', {
             workflow: 'CREATE',
             action: 'WORKFLOW',
-            form: {
-            },
+            form: {},
             user: mockUser
         });
 
@@ -145,8 +154,11 @@ describe('Action service', () => {
             form: testForm,
             user: mockUser
         })
-            .then(() => { })
-            .catch(e => { expect(e).toBeInstanceOf(Error); });
+            .then(() => {
+            })
+            .catch(e => {
+                expect(e).toBeInstanceOf(Error);
+            });
     });
 
     it('should return a callback url when "BULK_CREATE_CASE" action succeeds', async () => {
@@ -175,8 +187,11 @@ describe('Action service', () => {
             form: testForm,
             user: mockUser
         })
-            .then(() => { })
-            .catch(e => { expect(e).toBeInstanceOf(Error); });
+            .then(() => {
+            })
+            .catch(e => {
+                expect(e).toBeInstanceOf(Error);
+            });
     });
 
     it('should return error object when passed unsupported form action', () => {
@@ -189,8 +204,11 @@ describe('Action service', () => {
             },
             user: mockUser
         })
-            .then(() => { })
-            .catch(e => { expect(e).toBeInstanceOf(Error); });
+            .then(() => {
+            })
+            .catch(e => {
+                expect(e).toBeInstanceOf(Error);
+            });
     });
 
     it('should return a callback url when "ADD_DOCUMENT" action succeeds', async () => {
@@ -366,6 +384,29 @@ describe('Action service', () => {
             user: mockUser
         });
         expect(mockRequestClient).toHaveBeenCalledTimes(2);
+        expect(response).toBeDefined();
+        expect(response).toHaveProperty('callbackUrl');
+    });
+
+    it('should return a callback url when "EXTEND_FOI_DEADLINE" action succeeds', async () => {
+        const testForm = {
+            schema: {},
+            data: { shouldApplyExtension: 'true', extensionType: 'test_extension', trueText: 'a reason' },
+            action: actionTypes.APPLY_CASE_DEADLINE_EXTENSION
+        };
+
+        const response = await actionService.performAction('CASE', {
+            caseId: 1234,
+            stageId: 5678,
+            entity: {},
+            context: null,
+            form: testForm,
+            user: mockUser,
+        });
+        expect(mockRequestClient).toHaveBeenCalledWith({
+            'caseNote': 'PIT Extension applied. Reason: a reason',
+            'type': 'test_extension'
+        });
         expect(response).toBeDefined();
         expect(response).toHaveProperty('callbackUrl');
     });

@@ -55,10 +55,6 @@ const StageSummary = () => {
         }
     }, [apiStatus]);
 
-    // load summary on mount
-    useEffect(() => {
-        updateSummary(page.params.caseId, dispatch);
-    }, []);
 
     return (
         <Fragment>
