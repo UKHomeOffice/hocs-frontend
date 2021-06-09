@@ -35,8 +35,7 @@ describe('handleSearch', () => {
                     'PrevHocsRef': 'PREV_HOCS_REF',
                     'caseStatus': 'active',
                     'CampaignType': 'Test Campaign 123',
-                    'MinSignOffTeam': 'Test Min Sign Off Team',
-                    'OfficialEngagement': 'Yes'
+                    'MinSignOffTeam': 'Test Min Sign Off Team'
                 }
             },
             requestId: 'reqid',
@@ -107,8 +106,7 @@ describe('handleSearch', () => {
                 NI: 'SJ0000000',
                 PrevHocsRef: 'PREV_HOCS_REF',
                 CampaignType: 'Test Campaign 123',
-                MinSignOffTeam: 'Test Min Sign Off Team',
-                OfficialEngagement: 'Yes'
+                MinSignOffTeam: 'Test Min Sign Off Team'
             },
             activeOnly: true
         };
