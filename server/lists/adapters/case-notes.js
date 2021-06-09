@@ -132,6 +132,10 @@ const typeAdaptors = {
         note,
         title: 'Case transfer reason'
     }),
+    EXTENSION: ({ note }) => ({
+        note,
+        title: 'Case Extension',
+    }),
     ENQUIRY_REASON_EUNATIONAL_OTHERDETAILS: ({ note }) => ({
         note,
         title: 'Compliance measures - Other'

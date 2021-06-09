@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The FoiActions component should hide the extend option when FOI_PIT extension applied 1`] = `
+<span
+  class="govuk-body full-width"
+>
+  <strong>
+    Current due date: 
+  </strong>
+  05/07/2021 
+  <span
+    class="govuk-body"
+  >
+    (PIT Extension Applied)
+  </span>
+</span>
+`;
+
+exports[`The FoiActions component should show the extend option when no extension applied 1`] = `
+Array [
+  <span
+    class="govuk-body full-width"
+  >
+    <strong>
+      Current due date: 
+    </strong>
+    05/07/2021 
+  </span>,
+  <a
+    class="govuk-body govuk-link"
+    href="/case/some_case_id/stage/some_stage_id/entity/actions_tab/extend_foi_deadline"
+  >
+    Extend this case
+  </a>,
+]
+`;

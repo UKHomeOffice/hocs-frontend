@@ -46,7 +46,9 @@ describe('Case Summary Adapter', () => {
             primaryTopic: null,
             primaryCorrespondent: null,
             stageDeadlines: [],
-            activeStages: []
+            activeStages: [],
+            deadLineExtensions: [],
+            type: 'case'
         };
 
         const results = await caseSummaryAdapter(mockData, { fromStaticList: mockFromStaticList, configuration: mockConfiguration, user: mockUser });
@@ -94,6 +96,9 @@ describe('Case Summary Adapter', () => {
                 caseReference: '__previousCaseReference__',
                 stageUUID: '__previousCaseStageUUID__'
             }
+            ],
+            deadLineExtensions: [],
+            type: 'case'
         };
 
         const results = await caseSummaryAdapter(mockData, { fromStaticList: mockFromStaticList, configuration: mockConfiguration, user: mockUser });
@@ -138,7 +143,9 @@ describe('Case Summary Adapter', () => {
                 caseUUID: '__previousCaseUuid__',
                 caseReference: '__previousCaseReference__',
                 stageUUID: '__previousCaseStageUUID__'
-            }
+            },
+            deadLineExtensions: [],
+            type: 'case'
         };
 
         const results = await caseSummaryAdapter(mockData, { fromStaticList: mockFromStaticList, configuration: mockConfiguration, user: mockUser });
@@ -183,7 +190,9 @@ describe('Case Summary Adapter', () => {
                 caseUUID: '__previousCaseUuid__',
                 caseReference: '__previousCaseReference__',
                 stageUUID: '__previousCaseStageUUID__'
-            }
+            },
+            deadLineExtensions: [],
+            type: 'case'
         };
 
         const results = await caseSummaryAdapter(mockData, { fromStaticList: mockFromStaticList, fetchList: mockFetchList, configuration: mockConfiguration, user: mockUser });
@@ -225,6 +234,8 @@ describe('Case Summary Adapter', () => {
             activeStages: [
                 { stage: 1, assignedToUserUUID: 1, assignedToTeamUUID: 1 }
             ],
+            deadLineExtensions: [],
+            type: 'case',
             previousCase:{
                 caseUUID: '__previousCaseUuid__',
                 caseReference: '__previousCaseReference__',
@@ -271,6 +282,8 @@ describe('Case Summary Adapter', () => {
             activeStages: [
                 { stage: 1, assignedToUserUUID: 1, assignedToTeamUUID: 1 }
             ],
+            deadLineExtensions: [],
+            type: 'case',
             previousCase:{
                 caseUUID: '__previousCaseUuid__',
                 caseReference: '__previousCaseReference__',
