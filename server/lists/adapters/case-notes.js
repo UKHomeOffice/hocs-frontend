@@ -92,6 +92,10 @@ const typeAdaptors = {
         note,
         title: 'Rejection note'
     }),
+    PO_APPROVAL: ({ note }) => ({
+        note,
+        title: 'Press Office Approval note'
+    }),
     PHONECALL: ({ note }) => ({
         note,
         title: 'Phone call summary'
