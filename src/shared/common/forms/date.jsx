@@ -59,7 +59,7 @@ class DateInput extends Component {
                                 min="1"
                                 max="31"
                                 value={parts.day}
-                                onChange={e => {e.target.value=e.target.value.slice(0, 2); this._onChange('day', e.target.value)}}
+                                onChange={e => {e.target.value=e.target.value.slice(0, 2); this._onChange('day', e.target.value);}}
                             />
                         </div>
                     </div>
@@ -75,7 +75,7 @@ class DateInput extends Component {
                                 min="1"
                                 max="12"
                                 value={parts.month}
-                                onChange={e => {e.target.value=e.target.value.slice(0, 2); this._onChange('month', e.target.value)}}
+                                onChange={e => {e.target.value=e.target.value.slice(0, 2); this._onChange('month', e.target.value);}}
                             />
                         </div>
                     </div>
@@ -91,7 +91,7 @@ class DateInput extends Component {
                                 min={minYear}
                                 max={maxYear}
                                 value={parts.year}
-                                onChange={e => {e.target.value=e.target.value.slice(0, 4); this._onChange('year', e.target.value)}}
+                                onChange={e => {e.target.value=e.target.value.slice(0, 4); this._onChange('year', e.target.value);}}
                             />
                         </div>
                     </div>
