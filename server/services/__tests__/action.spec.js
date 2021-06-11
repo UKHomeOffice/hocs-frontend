@@ -35,7 +35,6 @@ jest.mock('../../clients', () => {
         caseworkService: {
             post: (url, body) => {
                 if (url.match(/case\/.*\/stage\/.*\/extension/)) {
-                    console.log('match ' + url);
 
                     mockRequestClient(body);
                     return { data: { reference: '__test_ref__' } };

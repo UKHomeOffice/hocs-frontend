@@ -25,13 +25,14 @@ import Hidden from './hidden.jsx';
 import ExpandableCheckbox from './expandable-checkbox.jsx';
 import FlowDirectionLink from './flow-direction-link.jsx';
 import HideConditionFunctions from './../../helpers/hide-condition-functions';
+import ConfirmationWithCaseRef from './confirmation-with-case-ref.jsx';
 
 function defaultDataAdapter(name, data, currentValue) {
     return data[name] || currentValue;
 }
 
 function renderFormComponent(Component, options) {
-    const { key, config, data, errors, callback, dataAdapter, page } = options;
+    const { key, config, data, errors, callback, dataAdapter, page, caseRef } = options;
 
     if (isComponentVisible(config, data)) {
         let value = config.defaultValue || '';
@@ -45,6 +46,7 @@ function renderFormComponent(Component, options) {
             error={errors && errors[config.name]}
             errors={errors}
             value={value}
+            caseRef={caseRef}
             updateState={callback ? data => callback(data) : null}
             page={page} />;
     }
@@ -82,7 +84,7 @@ function isComponentVisible(config, data) {
 }
 
 export function formComponentFactory(field, options) {
-    const { key, config, data, errors, callback, page } = options;
+    const { key, config, data, errors, callback, page, caseRef } = options;
 
     switch (field) {
         case 'radio':
@@ -135,6 +137,8 @@ export function formComponentFactory(field, options) {
             return renderFormComponent(Panel, { key, config });
         case 'inset':
             return renderFormComponent(Inset, { key, data, config });
+        case 'confirmation-with-case-ref':
+            return renderFormComponent(ConfirmationWithCaseRef, { key, data, config, caseRef });
         case 'paragraph':
             return renderFormComponent(Paragraph, { key, config });
         case 'entity-manager':
