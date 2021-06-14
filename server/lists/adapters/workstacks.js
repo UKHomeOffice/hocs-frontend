@@ -173,6 +173,23 @@ const bindDisplayElements = fromStaticList => async (stage) => {
         }
     }
 
+    if (stage.data && stage.data.CaseContributions){
+        JSON.parse(stage.data.CaseContributions).forEach(contribution => {
+            if(contribution.data.contributionDueDate && new Date(contribution.data.contributionDueDate) <= new Date() && !contribution.data.contributionStatus){
+               stage.contributions = 'Overdue';
+            }
+            else if(contribution.data.contributionDueDate && !contribution.data.contributionStatus && stage.contributions != 'Overdue'){
+                stage.contributions = 'Due';
+            }
+            else if(contribution.data.contributionStatus == "contributionCancelled" && stage.contributions != 'Due' && stage.contributions != 'Overdue'){
+                stage.contributions = 'Cancelled';
+            }
+            else if(contribution.data.contributionStatus == "contributionReceived" && stage.contributions != 'Due' && stage.contributions != 'Cancelled'  && stage.contributions != 'Overdue'){
+                stage.contributions = 'Complete';
+            }
+        })
+    }
+
     stage.primaryCorrespondentAndRefDisplay = {};
 
     if (stage.correspondents && stage.correspondents.correspondents) {

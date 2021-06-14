@@ -41,7 +41,8 @@ const ColumnRenderer = {
     INDICATOR_GREEN: 'indicatorGreen',
     INDICATOR_RED: 'indicatorRed',
     WRAP_TEXT: 'wrapText',
-    TRUNCATE_TEXT: 'truncateText'
+    TRUNCATE_TEXT: 'truncateText',
+    CONTRIBUTIONS_WARNING: 'contributionsWarning'
 };
 
 const ColumnSortStrategy = {
@@ -377,6 +378,23 @@ class WorkstackAllocate extends Component {
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell wrap-text'>{value}</td>;
             case ColumnRenderer.TRUNCATE_TEXT:
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell govuk-table__cell--truncated' title={value}>{value}</td>;
+            case ColumnRenderer.CONTRIBUTIONS_WARNING:
+                 if (row.data.CaseContributions) {
+                    const dueContribution = JSON.parse(row.data.CaseContributions)
+                        .filter(contribution => contribution.data && !contribution.data.contributionStatus)
+                        .map(contribution => contribution.data.contributionDueDate)
+                        .sort()
+                        .shift();
+                    
+                    if (dueContribution && new Date(dueContribution) <= new Date()) {
+                        return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell indicator'>
+                            {value && <span title={value} className='indicator-red'>
+                                    {value}
+                                </span>}
+                            </td>;
+                        }
+                    }
+                    return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>{value}</td>;
             default:
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>{value}</td>;
         }
