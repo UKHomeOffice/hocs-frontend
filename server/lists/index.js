@@ -80,6 +80,42 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
+        S_COMP_CCT_BUS_AREA: {
+            client: 'INFO',
+            endpoint: '/entity/list/COMP_CCT_BUS_AREA',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_COMP_CCT_CASE_OUTCOME: {
+            client: 'INFO',
+            endpoint: '/entity/list/COMP_CCT_CASE_OUTCOME',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_COMP_CCT_ENQ_REASON: {
+            client: 'INFO',
+            endpoint: '/entity/list/COMP_CCT_ENQ_REASON',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_COMP_CSU_LIST: {
+            client: 'INFO',
+            endpoint: '/entity/list/COMP_CSU_LIST',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_COMP_CONTRIB_BUS_AREA: {
+            client: 'INFO',
+            endpoint: '/entity/list/COMP_CONTRIB_BUS_AREA',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_COMP_CONTRIB_TYPE: {
+            client: 'INFO',
+            endpoint: '/entity/list/COMP_CONTRIB_TYPE',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
         S_MPAM_ENQUIRY_SUBJECTS: {
             client: 'INFO',
             endpoint: '/entity/list/MPAM_ENQUIRY_SUBJECTS',

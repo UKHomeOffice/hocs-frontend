@@ -382,6 +382,30 @@ td {
       padding: 0.25em 0.5em 0.25em 0.5em;
     }
   }
+  &.date-advisory {
+      span {
+        background-color: govuk-colour("yellow");
+        color: black;
+        padding: 0.25em 0.5em 0.25em 0.5em;
+      }
+      label {
+        background-color: govuk-colour("yellow");
+        color: black;
+        padding: 0.25em 0.5em 0.25em 0.5em;
+      }
+  }
+  &.date-nowarning {
+      span {
+        background-color: govuk-colour("white");
+        color: black;
+        padding: 0.25em 0.5em 0.25em 0.5em;
+      }
+      label {
+        background-color: govuk-colour("white");
+        color: black;
+        padding: 0.25em 0.5em 0.25em 0.5em;
+      }
+  }
   &.date-warning {
       span {
         background-color: govuk-colour("red");
@@ -412,6 +436,9 @@ td {
 
             &.indicator-blue {
                 background-color: govuk-colour("blue");
+            }
+            &.indicator-green {
+                background-color: govuk-colour("green");
             }
             &.indicator-red {
                 background-color: govuk-colour("red");

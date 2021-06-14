@@ -35,8 +35,10 @@ const ColumnRenderer = {
     CORRESPONDENT_WITH_CASE_LINK: 'correspondentWithCaseLink',
     DATE: 'date',
     DATE_WARNING: 'dateWarning',
+    DATE_RAW: 'dateRAW',
     DUE_DATE_WARNING: 'dueDateWarning',
     INDICATOR_BLUE: 'indicatorBlue',
+    INDICATOR_GREEN: 'indicatorGreen',
     INDICATOR_RED: 'indicatorRed',
     WRAP_TEXT: 'wrapText',
     TRUNCATE_TEXT: 'truncateText'
@@ -47,6 +49,12 @@ const ColumnSortStrategy = {
 };
 
 const dataAdapters = {
+    primaryCorrespondent: (value, key, row) => {
+        if (row.primaryCorrespondent) {
+            return row.primaryCorrespondent[key];
+        }
+        return '';
+    },
     localDate: (value) => {
         var date = new Date(value);
         if (isNaN(date) || value == null)
@@ -97,11 +105,11 @@ class WorkstackAllocate extends Component {
             }
 
             if (value !== undefined) {
-                return this.applyDataAdapter(value, column.dataAdapter, dataValue);
+                return this.applyDataAdapter(value, column.dataAdapter, dataValue, row);
             }
         }
 
-        return this.applyDataAdapter(undefined, column.dataAdapter, dataValueKeys);
+        return this.applyDataAdapter(undefined, column.dataAdapter, dataValueKeys, row);
     }
 
     getDataValue(row, dataValueKey) {
@@ -128,12 +136,12 @@ class WorkstackAllocate extends Component {
         return value;
     }
 
-    applyDataAdapter(value, colDataAdapter, dataValueKey) {
+    applyDataAdapter(value, colDataAdapter, dataValueKey, row) {
         if (colDataAdapter) {
             const dataAdapter = dataAdapters[colDataAdapter];
 
             if (dataAdapter) {
-                return dataAdapter(value, dataValueKey);
+                return dataAdapter(value, dataValueKey, row);
             }
 
             throw new Error('Data Adapter not implemented: ' + colDataAdapter);
@@ -226,7 +234,7 @@ class WorkstackAllocate extends Component {
         if(column.sortStrategy === 'noSort') {
             return (
                 <th className='govuk-table__header' key={column.displayName}>
-                    {column.renderer !== ColumnRenderer.INDICATOR_BLUE && column.renderer !== ColumnRenderer.INDICATOR_RED && column.displayName}
+                    {column.renderer !== ColumnRenderer.INDICATOR_BLUE && column.renderer !== ColumnRenderer.INDICATOR_GREEN && column.renderer !== ColumnRenderer.INDICATOR_RED && column.displayName}
                 </th>
             );
         } else {
@@ -240,7 +248,7 @@ class WorkstackAllocate extends Component {
                         'sorted-ascending': sorted && direction === SortDirection.ASCENDING,
                         'sorted-descending': sorted && direction === SortDirection.DESCENDING
                     })}>
-                    {column.renderer !== ColumnRenderer.INDICATOR_BLUE && column.renderer !== ColumnRenderer.INDICATOR_RED && column.displayName}
+                    {column.renderer !== ColumnRenderer.INDICATOR_BLUE && column.renderer !== ColumnRenderer.INDICATOR_GREEN && column.renderer !== ColumnRenderer.INDICATOR_RED && column.displayName}
                 </th>
             );
         }
@@ -311,6 +319,20 @@ class WorkstackAllocate extends Component {
                     }
                 }
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>{value}</td>;
+            case ColumnRenderer.DATE_RAW: { // date, with Red-Amber-White highlighting
+                let rowClasses = 'govuk-table__cell date-nowarning';
+                if (row.deadlineWarning) {
+                    const date = new Date();
+                    if (new Date(row.deadline) < new Date(date.getFullYear(), date.getMonth(), date.getDate())) {
+                        rowClasses = 'govuk-table__cell date-warning';
+                    } else if (new Date(row.deadlineWarning) < date) {
+                        rowClasses = 'govuk-table__cell date-advisory';
+                    }
+                }
+                return <td key={row.uuid + column.dataValueKey} className={rowClasses}>
+                    <span>{value}</span>
+                </td>;
+            }
             case ColumnRenderer.DUE_DATE_WARNING:
                 if (row.data.CaseContributions) {
                     const dueContribution = JSON.parse(row.data.CaseContributions)
@@ -336,6 +358,12 @@ class WorkstackAllocate extends Component {
             case ColumnRenderer.INDICATOR_BLUE:
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell indicator'>
                     {value && <span title={value} className='indicator-blue'>
+                        {column.displayName.substring(0, 1)}
+                    </span>}
+                </td>;
+            case ColumnRenderer.INDICATOR_GREEN:
+                return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell indicator'>
+                    {value && <span title={value} className='indicator-green'>
                         {column.displayName.substring(0, 1)}
                     </span>}
                 </td>;
