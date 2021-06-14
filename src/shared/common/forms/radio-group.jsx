@@ -103,6 +103,10 @@ class Radio extends Component {
         return choicesToUse;
     }
 
+    getIdName(nameOfField, key) {
+        return `${nameOfField}-${key}`;
+    }
+
     render() {
         const {
             className,
@@ -130,24 +134,26 @@ class Radio extends Component {
 
                     <div id={`${name}-radios`} className={'govuk-radios govuk-radios--conditional'} data-module="govuk-radios">
                         {choicesToUse && choicesToUse.map((choice, i) => {
+                            const idName = this.getIdName(name, i);
+
                             return (
                                 <Fragment key={i}>
                                     <div className="govuk-radios__item">
-                                        <input id={`${name}-${choice.value}`}
+                                        <input id={idName}
                                             type={type}
                                             name={name}
                                             value={choice.value}
                                             checked={(value === choice.value)}
                                             onChange={e => this.handleChange(e, choice)}
-                                            data-aria-controls={`conditional-${name}-${choice.value}`}
+                                            data-aria-controls={`conditional-${idName}`}
                                             className={'govuk-radios__input'}
                                         />
-                                        <label className="govuk-label govuk-radios__label" htmlFor={`${name}-${choice.value}`}>{choice.label}</label>
+                                        <label className="govuk-label govuk-radios__label" htmlFor={`${idName}`}>{choice.label}</label>
                                     </div>
 
                                     {choice.conditionalContent &&
                                         <div className="govuk-radios__conditional govuk-radios__conditional--hidden"
-                                            id={`conditional-${name}-${choice.value}`}>
+                                            id={`conditional-${idName}`}>
                                             <div className={`govuk-form-group ${this.isConditionalContentError(errors, `${choice.value}Text`) ? ' govuk-form-group--error' : ''}`}>
                                                 <label className="govuk-label" htmlFor={`${choice.value}Text`}>
                                                     {choice.conditionalContent.label}

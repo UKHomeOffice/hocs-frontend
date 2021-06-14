@@ -56,11 +56,11 @@ describe('Form radio group component', () => {
 
         mockCallback.mockReset();
 
-        wrapper.find(`#radio-group-${firstValue}`).simulate('change', { target: { value: firstValue } });
+        wrapper.find('#radio-group-0').simulate('change', { target: { value: firstValue } });
         expect(mockCallback).toHaveBeenCalledTimes(1);
         expect(mockCallback).toHaveBeenCalledWith({ 'radio-group': firstValue });
 
-        wrapper.find(`#radio-group-${secondValue}`).simulate('change', { target: { value: secondValue } });
+        wrapper.find('#radio-group-1').simulate('change', { target: { value: secondValue } });
         expect(mockCallback).toHaveBeenCalledTimes(2);
         expect(mockCallback).toHaveBeenCalledWith({ 'radio-group': secondValue });
     });
@@ -81,7 +81,7 @@ describe('Form radio group component', () => {
             { label: 'labelC', value: 'ValueC' }
         ];
         expect(
-            render(<RadioGroup name="radio-group" choices={choices} errors={ { ValueAText: 'Some error message' } } updateState={() => null} />)
+            render(<RadioGroup name="radio-group" choices={choices} errors={{ ValueAText: 'Some error message' }} updateState={() => null} />)
         ).toMatchSnapshot();
     });
 });
