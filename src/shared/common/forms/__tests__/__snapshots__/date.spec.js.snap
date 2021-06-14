@@ -31,8 +31,6 @@ exports[`Form date component should render disabled when passed 1`] = `
           <input
             class="govuk-input govuk-date-input__input govuk-input--width-2 "
             id="date-field-day"
-            max="31"
-            min="1"
             name="date-field-day"
             pattern="[0-9]*"
             type="number"
@@ -55,8 +53,6 @@ exports[`Form date component should render disabled when passed 1`] = `
           <input
             class="govuk-input govuk-date-input__input govuk-input--width-2 "
             id="date-field-month"
-            max="12"
-            min="1"
             name="date-field-month"
             pattern="[0-9]*"
             type="number"
@@ -79,8 +75,6 @@ exports[`Form date component should render disabled when passed 1`] = `
           <input
             class="govuk-input govuk-date-input__input govuk-input--width-4  "
             id="date-field-year"
-            max="2119"
-            min="1900"
             name="date-field-year"
             pattern="[0-9]*"
             type="number"
@@ -123,8 +117,6 @@ exports[`Form date component should render when maxYear is passed 1`] = `
           <input
             class="govuk-input govuk-date-input__input govuk-input--width-2 "
             id="date-field-day"
-            max="31"
-            min="1"
             name="date-field-day"
             pattern="[0-9]*"
             type="number"
@@ -147,8 +139,6 @@ exports[`Form date component should render when maxYear is passed 1`] = `
           <input
             class="govuk-input govuk-date-input__input govuk-input--width-2 "
             id="date-field-month"
-            max="12"
-            min="1"
             name="date-field-month"
             pattern="[0-9]*"
             type="number"
@@ -171,8 +161,6 @@ exports[`Form date component should render when maxYear is passed 1`] = `
           <input
             class="govuk-input govuk-date-input__input govuk-input--width-4  "
             id="date-field-year"
-            max="2119"
-            min="1900"
             name="date-field-year"
             pattern="[0-9]*"
             type="number"
@@ -215,8 +203,6 @@ exports[`Form date component should render with default props 1`] = `
           <input
             class="govuk-input govuk-date-input__input govuk-input--width-2 "
             id="date-field-day"
-            max="31"
-            min="1"
             name="date-field-day"
             pattern="[0-9]*"
             type="number"
@@ -239,8 +225,6 @@ exports[`Form date component should render with default props 1`] = `
           <input
             class="govuk-input govuk-date-input__input govuk-input--width-2 "
             id="date-field-month"
-            max="12"
-            min="1"
             name="date-field-month"
             pattern="[0-9]*"
             type="number"
@@ -263,8 +247,6 @@ exports[`Form date component should render with default props 1`] = `
           <input
             class="govuk-input govuk-date-input__input govuk-input--width-4  "
             id="date-field-year"
-            max="2119"
-            min="1900"
             name="date-field-year"
             pattern="[0-9]*"
             type="number"
@@ -313,8 +295,6 @@ exports[`Form date component should render with error when passed 1`] = `
           <input
             class="govuk-input govuk-date-input__input govuk-input--width-2 govuk-input--error"
             id="date-field-day"
-            max="31"
-            min="1"
             name="date-field-day"
             pattern="[0-9]*"
             type="number"
@@ -337,8 +317,6 @@ exports[`Form date component should render with error when passed 1`] = `
           <input
             class="govuk-input govuk-date-input__input govuk-input--width-2 govuk-input--error"
             id="date-field-month"
-            max="12"
-            min="1"
             name="date-field-month"
             pattern="[0-9]*"
             type="number"
@@ -361,8 +339,6 @@ exports[`Form date component should render with error when passed 1`] = `
           <input
             class="govuk-input govuk-date-input__input govuk-input--width-4  govuk-input--error"
             id="date-field-year"
-            max="2119"
-            min="1900"
             name="date-field-year"
             pattern="[0-9]*"
             type="number"
@@ -410,8 +386,6 @@ exports[`Form date component should render with hint when passed 1`] = `
           <input
             class="govuk-input govuk-date-input__input govuk-input--width-2 "
             id="date-field-day"
-            max="31"
-            min="1"
             name="date-field-day"
             pattern="[0-9]*"
             type="number"
@@ -434,8 +408,6 @@ exports[`Form date component should render with hint when passed 1`] = `
           <input
             class="govuk-input govuk-date-input__input govuk-input--width-2 "
             id="date-field-month"
-            max="12"
-            min="1"
             name="date-field-month"
             pattern="[0-9]*"
             type="number"
@@ -458,8 +430,6 @@ exports[`Form date component should render with hint when passed 1`] = `
           <input
             class="govuk-input govuk-date-input__input govuk-input--width-4  "
             id="date-field-year"
-            max="2119"
-            min="1900"
             name="date-field-year"
             pattern="[0-9]*"
             type="number"
@@ -504,8 +474,6 @@ exports[`Form date component should render with label when passed 1`] = `
           <input
             class="govuk-input govuk-date-input__input govuk-input--width-2 "
             id="date-field-day"
-            max="31"
-            min="1"
             name="date-field-day"
             pattern="[0-9]*"
             type="number"
@@ -528,8 +496,6 @@ exports[`Form date component should render with label when passed 1`] = `
           <input
             class="govuk-input govuk-date-input__input govuk-input--width-2 "
             id="date-field-month"
-            max="12"
-            min="1"
             name="date-field-month"
             pattern="[0-9]*"
             type="number"
@@ -552,8 +518,6 @@ exports[`Form date component should render with label when passed 1`] = `
           <input
             class="govuk-input govuk-date-input__input govuk-input--width-4  "
             id="date-field-year"
-            max="2119"
-            min="1900"
             name="date-field-year"
             pattern="[0-9]*"
             type="number"
@@ -596,8 +560,6 @@ exports[`Form date component should render with value when passed 1`] = `
           <input
             class="govuk-input govuk-date-input__input govuk-input--width-2 "
             id="date-field-day"
-            max="31"
-            min="1"
             name="date-field-day"
             pattern="[0-9]*"
             type="number"
@@ -620,8 +582,6 @@ exports[`Form date component should render with value when passed 1`] = `
           <input
             class="govuk-input govuk-date-input__input govuk-input--width-2 "
             id="date-field-month"
-            max="12"
-            min="1"
             name="date-field-month"
             pattern="[0-9]*"
             type="number"
@@ -644,8 +604,6 @@ exports[`Form date component should render with value when passed 1`] = `
           <input
             class="govuk-input govuk-date-input__input govuk-input--width-4  "
             id="date-field-year"
-            max="2119"
-            min="1900"
             name="date-field-year"
             pattern="[0-9]*"
             type="number"
