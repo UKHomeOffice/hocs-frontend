@@ -7,7 +7,6 @@ class DateInput extends Component {
         super(props);
     }
 
-
     _onChange(field, value) {
         const updatedPart = { [field]: value };
         const parts = { ...this.parseValue(this.props.value), ...updatedPart };
@@ -32,8 +31,6 @@ class DateInput extends Component {
             error,
             hint,
             label,
-            minYear,
-            maxYear = new Date().getFullYear() + 100,
             value
         } = this.props;
         const yearKey = this.datePart('year');
@@ -56,10 +53,8 @@ class DateInput extends Component {
                                 name={dayKey}
                                 type="number"
                                 pattern="[0-9]*"
-                                min="1"
-                                max="31"
                                 value={parts.day}
-                                onChange={e => {e.target.value=e.target.value.slice(0, 2); this._onChange('day', e.target.value);}}
+                                onChange={e => {this._onChange('day', e.target.value);}}
                             />
                         </div>
                     </div>
@@ -72,10 +67,8 @@ class DateInput extends Component {
                                 name={monthKey}
                                 type="number"
                                 pattern="[0-9]*"
-                                min="1"
-                                max="12"
                                 value={parts.month}
-                                onChange={e => {e.target.value=e.target.value.slice(0, 2); this._onChange('month', e.target.value);}}
+                                onChange={e => {this._onChange('month', e.target.value);}}
                             />
                         </div>
                     </div>
@@ -83,15 +76,13 @@ class DateInput extends Component {
                         <div className="govuk-form-group">
                             <label className="govuk-label govuk-date-input__label" htmlFor={yearKey}>Year</label>
                             <input
-                                className={`govuk-input govuk-date-input__input govuk-input--width-4  ${error ? 'govuk-input--error' : ''}`}
+                                className={`govuk-input govuk-date-input__input govuk-input--width-4 ${error ? 'govuk-input--error' : ''}`}
                                 id={yearKey}
                                 name={yearKey}
                                 type="number"
                                 pattern="[0-9]*"
-                                min={minYear}
-                                max={maxYear}
                                 value={parts.year}
-                                onChange={e => {e.target.value=e.target.value.slice(0, 4); this._onChange('year', e.target.value);}}
+                                onChange={e => {this._onChange('year', e.target.value);}}
                             />
                         </div>
                     </div>

@@ -16,7 +16,10 @@ const validationErrors = {
     isValidWithinDate: label => `${label} must be within the last ${VALID_DAYS_RANGE} days`,
     validCaseReference: () => 'Case reference is not valid',
     contributionsFulfilled: () => 'Case contributions have to be completed or cancelled',
-    oneOf: () => 'Options are not valid'
+    oneOf: () => 'Options are not valid',
+    isValidMonth: () => `Invalid month entered`,
+    isValidYear: () => `Invalid year entered`,
+    isValidDay: () => `Invalid day entered`
 };
 
 const validators = {
@@ -26,6 +29,24 @@ const validators = {
             if (isNaN(date) || date != value.split('-')[2]) {
                 return message || validationErrors.isValidDate(label);
             }
+        }
+        return null;
+    },
+    isValidDay({ label, value, message }) {
+        if (getDay(value) > new Date(getYear(value), getMonth(value), 0).getDate() || getDay(value) < 1) {
+            return message || validationErrors.isValidDay(label);
+        }
+        return null;
+    },
+    isValidMonth({ label, value, message }) {
+        if (getMonth(value) < 1 || getMonth(value) > 12) {
+            return message || validationErrors.isValidMonth(label);
+        }
+        return null;
+    },
+    isValidYear({ label, value, message }) {
+        if (getYear(value) > (new Date().getFullYear() + 100) || getYear(value) < (new Date().getFullYear() - 100)) {
+            return message || validationErrors.isValidYear(label);
         }
         return null;
     },
@@ -154,6 +175,18 @@ const validators = {
         return message || validationErrors.oneOf();
     }
 };
+
+function getDay(date){
+    return date.split("-")[2];
+}
+
+function getMonth(date){
+    return date.split("-")[1];
+}
+
+function getYear(date){
+    return date.split("-")[0];
+}
 
 function validateConditionalRadioContentIfExists(data, name, choices, validator, result) {
     const conditionalRadioButtonTextFieldId = `${data[name]}Text`;
