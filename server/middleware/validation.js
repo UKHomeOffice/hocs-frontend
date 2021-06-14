@@ -17,9 +17,9 @@ const validationErrors = {
     validCaseReference: () => 'Case reference is not valid',
     contributionsFulfilled: () => 'Case contributions have to be completed or cancelled',
     oneOf: () => 'Options are not valid',
-    isValidMonth: () => `Invalid month entered`,
-    isValidYear: () => `Invalid year entered`,
-    isValidDay: () => `Invalid day entered`
+    isValidMonth: () => 'Invalid month entered',
+    isValidYear: () => 'Invalid year entered',
+    isValidDay: () => 'Invalid day entered'
 };
 
 const validators = {
@@ -177,15 +177,15 @@ const validators = {
 };
 
 function getDay(date){
-    return date.split("-")[2];
+    return date.split('-')[2];
 }
 
 function getMonth(date){
-    return date.split("-")[1];
+    return date.split('-')[1];
 }
 
 function getYear(date){
-    return date.split("-")[0];
+    return date.split('-')[0];
 }
 
 function validateConditionalRadioContentIfExists(data, name, choices, validator, result) {
