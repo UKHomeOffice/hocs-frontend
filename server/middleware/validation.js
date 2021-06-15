@@ -1,5 +1,6 @@
 const { FormSubmissionError, ValidationError } = require('../models/error');
 const { DOCUMENT_WHITELIST, DOCUMENT_BULK_LIMIT, VALID_DAYS_RANGE } = require('../config').forContext('server');
+const YEAR_RANGE = 120;
 
 const validationErrors = {
     required: label => `${label} is required`,
@@ -17,9 +18,9 @@ const validationErrors = {
     validCaseReference: () => 'Case reference is not valid',
     contributionsFulfilled: () => 'Case contributions have to be completed or cancelled',
     oneOf: () => 'Options are not valid',
-    isValidMonth: () => 'Invalid month entered',
-    isValidYear: () => 'Invalid year entered',
-    isValidDay: () => 'Invalid day entered'
+    isValidMonth: label =>  `${label} must contain a valid month`,
+    isYearWithinRange: label =>   `${label} must contain a valid year`,
+    isValidDay: label => `${label} must contain a valid day`,
 };
 
 const validators = {
@@ -33,20 +34,27 @@ const validators = {
         return null;
     },
     isValidDay({ label, value, message }) {
-        if (getDay(value) > new Date(getYear(value), getMonth(value), 0).getDate() || getDay(value) < 1) {
-            return message || validationErrors.isValidDay(label);
+        if (value) {
+            if (getDay(value) > new Date(getYear(value), getMonth(value), 0).getDate() || getDay(value) < 1) {
+                return message || validationErrors.isValidDay(label);
+            }
         }
         return null;
     },
     isValidMonth({ label, value, message }) {
-        if (getMonth(value) < 1 || getMonth(value) > 12) {
-            return message || validationErrors.isValidMonth(label);
+        if (value) {
+            if (getMonth(value) < 1 || getMonth(value) > 12) {
+                return message || validationErrors.isValidMonth(label);
+            }
         }
         return null;
     },
-    isValidYear({ label, value, message }) {
-        if (getYear(value) > (new Date().getFullYear() + 100) || getYear(value) < (new Date().getFullYear() - 100)) {
-            return message || validationErrors.isValidYear(label);
+    isYearWithinRange({ label, value, message }) {
+        if (value) {
+            if (getYear(value) > (new Date().getFullYear() + YEAR_RANGE) 
+                || getYear(value) < (new Date().getFullYear() - YEAR_RANGE)) {
+                return message || validationErrors.isYearWithinRange(label);
+            }
         }
         return null;
     },
@@ -176,17 +184,9 @@ const validators = {
     }
 };
 
-function getDay(date){
-    return date.split('-')[2];
-}
-
-function getMonth(date){
-    return date.split('-')[1];
-}
-
-function getYear(date){
-    return date.split('-')[0];
-}
+const getDay = (date) => date.split('-')[2];
+const getMonth = (date) => date.split('-')[1];
+const getYear = (date) => date.split('-')[0];
 
 function validateConditionalRadioContentIfExists(data, name, choices, validator, result) {
     const conditionalRadioButtonTextFieldId = `${data[name]}Text`;
