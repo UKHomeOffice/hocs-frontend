@@ -776,6 +776,7 @@ Object {
       "caseReference": "A/1234568/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "contributions": "Overdue",
       "data": Object {
         "CaseContributions": "[{\\"data\\": {\\"contributionDueDate\\":\\"2020-12-12\\"}}]",
         "DueDate": "2020-12-10",
@@ -845,6 +846,7 @@ Object {
       "caseReference": "A/1234568/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "contributions": "Overdue",
       "data": Object {
         "CaseContributions": "[{\\"data\\": {\\"contributionDueDate\\":\\"2020-12-12\\"}}]",
       },
@@ -947,6 +949,7 @@ Object {
       "caseReference": "A/1234568/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "contributions": "Overdue",
       "data": Object {
         "CaseContributions": "[{\\"data\\": {\\"contributionDueDate\\":\\"2020-12-12\\"}}]",
       },
