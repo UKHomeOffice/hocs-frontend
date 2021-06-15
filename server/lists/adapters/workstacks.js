@@ -177,7 +177,7 @@ const bindDisplayElements = fromStaticList => async (stage) => {
         JSON.parse(stage.data.CaseContributions).forEach(contribution => {
             if(contribution.data){
                 if(contribution.data.contributionDueDate && new Date(contribution.data.contributionDueDate) <= new Date() && !contribution.data.contributionStatus){
-                   stage.contributions = 'Overdue';
+                    stage.contributions = 'Overdue';
                 }
                 else if(contribution.data.contributionDueDate && !contribution.data.contributionStatus && stage.contributions != 'Overdue'){
                     stage.contributions = 'Due';
