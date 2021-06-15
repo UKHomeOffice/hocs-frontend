@@ -118,8 +118,8 @@ steps:
       VERSION: build_${DRONE_BUILD_NUMBER}
       KUBE_TOKEN:
         from_secret: hocs_frontend_cs_dev
-      POISE_WHITELIST:
-        from_secret: POISE_WHITELIST
+      POISE_IPS:
+        from_secret: POISE_IPS
     commands:
       - cd kube-hocs-frontend
       - ./deploy.sh
@@ -138,8 +138,8 @@ steps:
       VERSION: build_${DRONE_BUILD_NUMBER}
       KUBE_TOKEN:
         from_secret: hocs_frontend_wcs_dev
-      POISE_WHITELIST:
-        from_secret: POISE_WHITELIST
+      POISE_IPS:
+        from_secret: POISE_IPS
     commands:
       - cd kube-hocs-frontend
       - ./deploy.sh
@@ -224,8 +224,8 @@ steps:
       ENVIRONMENT: cs-qa
       KUBE_TOKEN:
         from_secret: hocs_frontend_cs_qa
-      POISE_WHITELIST:
-        from_secret: POISE_WHITELIST
+      POISE_IPS:
+        from_secret: POISE_IPS
     when:
       event:
         - promote
@@ -246,8 +246,8 @@ steps:
       ENVIRONMENT: wcs-qa
       KUBE_TOKEN:
         from_secret: hocs_frontend_wcs_qa
-      POISE_WHITELIST:
-        from_secret: POISE_WHITELIST
+      POISE_IPS:
+        from_secret: POISE_IPS
     when:
       event:
         - promote
@@ -266,8 +266,10 @@ steps:
       ENVIRONMENT: ${DRONE_DEPLOY_TO}
       KUBE_TOKEN:
         from_secret: hocs_frontend_${DRONE_DEPLOY_TO/-/_}
-      POISE_WHITELIST:
-        from_secret: POISE_WHITELIST
+      POISE_IPS:
+        from_secret: POISE_IPS
+      ACPTUNNEL_IPS:
+        from_secret: ACPTUNNEL_IPS
     when:
       event:
         - promote
@@ -287,8 +289,8 @@ steps:
       ENVIRONMENT: ${DRONE_DEPLOY_TO}
       KUBE_TOKEN:
         from_secret: hocs_frontend_${DRONE_DEPLOY_TO/-/_}
-      POISE_WHITELIST:
-        from_secret: POISE_WHITELIST
+      POISE_IPS:
+        from_secret: POISE_IPS
     when:
       event:
         - promote
