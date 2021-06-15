@@ -51,7 +51,7 @@ const validators = {
     },
     isYearWithinRange({ label, value, message }) {
         if (value) {
-            if (getYear(value) > (new Date().getFullYear() + YEAR_RANGE) 
+            if (getYear(value) > (new Date().getFullYear() + YEAR_RANGE)
                 || getYear(value) < (new Date().getFullYear() - YEAR_RANGE)) {
                 return message || validationErrors.isYearWithinRange(label);
             }
