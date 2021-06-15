@@ -69,8 +69,8 @@ describe('Workstack component', () => {
         columns: [
             { displayName: 'Reference', dataAdapter: null, renderer: 'caseLink', dataValueKey: 'caseReference', isFilterable: true },
             { displayName: 'Full Name', dataAdapter: null, renderer: null, dataValueKey: 'fullName', isFilterable: true },
-            { displayName: 'Fullname', dataAdapter: 'primaryCorrespondent', renderer: null, dataValueKey: 'fullname', isFilterable: true },
-            { displayName: 'Postcode', dataAdapter: 'primaryCorrespondent', renderer: null, dataValueKey: 'postcode', isFilterable: true },
+            { displayName: 'Fullname', dataAdapter: 'primaryCorrespondent', renderer: null, dataValueKey: 'fullname', isFilterable: true,sortStrategy: 'correspondentTypeStrategy' },
+            { displayName: 'Postcode', dataAdapter: 'primaryCorrespondent', renderer: null, dataValueKey: 'postcode', isFilterable: true,sortStrategy: 'correspondentTypeStrategy' },
             { displayName: 'Current Stage', dataAdapter: null, renderer: null, dataValueKey: 'stageTypeDisplay', isFilterable: true },
             { displayName: 'Owner', dataAdapter: null, renderer: null, dataValueKey: 'assignedUserDisplay', isFilterable: true },
             { displayName: 'Topic', dataAdapter: null, renderer: 'truncateText', dataValueKey: 'assignedTopicDisplay', isFilterable: true },
