@@ -18,9 +18,9 @@ const validationErrors = {
     validCaseReference: () => 'Case reference is not valid',
     contributionsFulfilled: () => 'Case contributions have to be completed or cancelled',
     oneOf: () => 'Options are not valid',
-    isValidMonth: label =>  `${label} must contain a valid month`,
+    isValidMonth: label =>  `${label} must contain a real month`,
     isYearWithinRange: label =>   `${label} must contain a valid year`,
-    isValidDay: label => `${label} must contain a valid day`,
+    isValidDay: label => `${label} must contain a real day`,
 };
 
 const validators = {

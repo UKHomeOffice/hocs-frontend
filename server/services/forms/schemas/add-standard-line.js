@@ -1,5 +1,6 @@
 const Form = require('../form-builder');
 const { Component } = require('../component-builder');
+const YEAR_RANGE = 120;
 
 module.exports = options => Form()
     .withTitle('Create standard line')
@@ -14,9 +15,9 @@ module.exports = options => Form()
         Component('date', 'expiry_date')
             .withValidator('required', 'Expiration date is required')
             .withValidator('isValidDate', 'Expiration date must be a valid date')
-            .withValidator('isValidDay', 'Date must contain a valid day')
-            .withValidator('isValidMonth', 'Date must contain a valid month')
-            .withValidator('isYearWithinRange', 'Date must be before ' + (new Date().getFullYear() + 120))
+            .withValidator('isValidDay', 'Date must contain a real day')
+            .withValidator('isValidMonth', 'Date must contain a real month')
+            .withValidator('isYearWithinRange', 'Date must be before ' + (new Date().getFullYear() + YEAR_RANGE))
             .withValidator('isAfterToday', 'Expiration date must not be in the past')
             .withProp('label', 'Expiration date')
             .build()
