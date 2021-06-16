@@ -22,4 +22,6 @@ const parseDate = (rawDate) => {
 };
 const formatDate = (date) => date ? parseDate(date) : null;
 
-module.exports = { addDays, getUtcDateString, formatDate };
+const YEAR_RANGE = 120;
+
+module.exports = { addDays, getUtcDateString, formatDate, YEAR_RANGE };

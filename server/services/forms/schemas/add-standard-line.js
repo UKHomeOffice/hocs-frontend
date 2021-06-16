@@ -1,6 +1,6 @@
 const Form = require('../form-builder');
 const { Component } = require('../component-builder');
-const YEAR_RANGE = 120;
+const { YEAR_RANGE } = require('../../../libs/dateHelpers');
 
 module.exports = options => Form()
     .withTitle('Create standard line')
