@@ -1,6 +1,8 @@
 const { FormSubmissionError, ValidationError } = require('../models/error');
 const { DOCUMENT_WHITELIST, DOCUMENT_BULK_LIMIT, VALID_DAYS_RANGE } = require('../config').forContext('server');
 const YEAR_RANGE = 120;
+const MIN_ALLOWABLE_YEAR = (new Date().getFullYear() - YEAR_RANGE);
+const MAX_ALLOWABLE_YEAR = (new Date().getFullYear() + YEAR_RANGE);
 
 const validationErrors = {
     required: label => `${label} is required`,
@@ -51,8 +53,7 @@ const validators = {
     },
     isYearWithinRange({ label, value, message }) {
         if (value) {
-            if (getYear(value) > (new Date().getFullYear() + YEAR_RANGE)
-                || getYear(value) < (new Date().getFullYear() - YEAR_RANGE)) {
+            if (getYear(value) > MAX_ALLOWABLE_YEAR || getYear(value) < MIN_ALLOWABLE_YEAR) {
                 return message || validationErrors.isYearWithinRange(label);
             }
         }

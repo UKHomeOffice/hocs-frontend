@@ -2,6 +2,7 @@ const { DOCUMENT_BULK_LIMIT } = require('../../../config').forContext('server');
 const Form = require('../form-builder');
 const { Component } = require('../component-builder');
 const YEAR_RANGE = 120;
+const MIN_ALLOWABLE_YEAR = (new Date().getFullYear() - YEAR_RANGE);
 
 module.exports = () => Form()
     .withTitle('Create Single Case')
@@ -11,7 +12,7 @@ module.exports = () => Form()
             .withValidator('isValidDate', 'Date received must be a valid date')
             .withValidator('isValidDay', 'Date received must contain a real day')
             .withValidator('isValidMonth', 'Date received must contain a real month')
-            .withValidator('isYearWithinRange', 'Date received must be after ' + (new Date().getFullYear() - YEAR_RANGE))
+            .withValidator('isYearWithinRange', 'Date received must be after ' + MIN_ALLOWABLE_YEAR)
             .withValidator('isBeforeToday', 'Date received cannot be in the future')
             .withProp('label', 'When was the correspondence received?')
             .build()
