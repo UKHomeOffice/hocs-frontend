@@ -1,8 +1,7 @@
 const { DOCUMENT_BULK_LIMIT } = require('../../../config').forContext('server');
 const Form = require('../form-builder');
 const { Component } = require('../component-builder');
-const { YEAR_RANGE } = require('../../../libs/dateHelpers');
-const MIN_ALLOWABLE_YEAR = (new Date().getFullYear() - YEAR_RANGE);
+const { MIN_ALLOWABLE_YEAR } = require('../../../libs/dateHelpers');
 
 module.exports = () => Form()
     .withTitle('Create Bulk Cases')

@@ -1,8 +1,6 @@
 const { FormSubmissionError, ValidationError } = require('../models/error');
 const { DOCUMENT_WHITELIST, DOCUMENT_BULK_LIMIT, VALID_DAYS_RANGE } = require('../config').forContext('server');
-const { YEAR_RANGE } = require('../libs/dateHelpers');
-const MIN_ALLOWABLE_YEAR = (new Date().getFullYear() - YEAR_RANGE);
-const MAX_ALLOWABLE_YEAR = (new Date().getFullYear() + YEAR_RANGE);
+const { MIN_ALLOWABLE_YEAR, MAX_ALLOWABLE_YEAR } = require('../libs/dateHelpers');
 
 const validationErrors = {
     required: label => `${label} is required`,

@@ -1,9 +1,7 @@
 const Form = require('../form-builder');
 const { Component, Choice, ConditionChoice } = require('../component-builder');
 const { getSomuItem } = require('../../../middleware/somu');
-const { YEAR_RANGE } = require('../../../libs/dateHelpers');
-const MIN_ALLOWABLE_YEAR = (new Date().getFullYear() - YEAR_RANGE);
-const MAX_ALLOWABLE_YEAR = (new Date().getFullYear() + YEAR_RANGE);
+const { MIN_ALLOWABLE_YEAR, MAX_ALLOWABLE_YEAR } = require('../../../libs/dateHelpers');
 
 module.exports = async options => {
     const { data } = await getSomuItem(options);

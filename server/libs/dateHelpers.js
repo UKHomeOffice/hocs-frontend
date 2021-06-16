@@ -24,4 +24,8 @@ const formatDate = (date) => date ? parseDate(date) : null;
 
 const YEAR_RANGE = 120;
 
-module.exports = { addDays, getUtcDateString, formatDate, YEAR_RANGE };
+const MIN_ALLOWABLE_YEAR = (new Date().getFullYear() - YEAR_RANGE);
+
+const MAX_ALLOWABLE_YEAR = (new Date().getFullYear() + YEAR_RANGE);
+
+module.exports = { addDays, getUtcDateString, formatDate, MIN_ALLOWABLE_YEAR, MAX_ALLOWABLE_YEAR };
