@@ -6,10 +6,6 @@ export KUBE_NAMESPACE=${ENVIRONMENT}
 export KUBE_TOKEN=${KUBE_TOKEN}
 export VERSION=${VERSION}
 
-export POISE_IPS=${POISE_IPS} # corporate network
-export ACPTUNNEL_IPS=${ACPTUNNEL_IPS} # digital VPN
-# https://docs.acp.homeoffice.gov.uk/support/ip-ranges
-
 export DOMAIN="cs"
 if [ "${KUBE_NAMESPACE%-*}" == "wcs" ]; then
     export DOMAIN="wcs"
