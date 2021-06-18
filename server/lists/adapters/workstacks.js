@@ -178,6 +178,7 @@ const bindDisplayElements = fromStaticList => async (stage) => {
     }
 
     stage.primaryCorrespondentAndRefDisplay = {};
+    stage.FOIRequesterDisplay = {};
 
     if (stage.correspondents && stage.correspondents.correspondents) {
         stage.memberCorrespondentDisplay = getCorrespondentsNameByType(stage.correspondents, ['MEMBER']);
@@ -188,6 +189,9 @@ const bindDisplayElements = fromStaticList => async (stage) => {
 
         if (primaryCorrespondent) {
             stage.primaryCorrespondentAndRefDisplay.primaryCorrespondentFullName = primaryCorrespondent.fullname;
+            if (stage.caseType === 'FOI') {
+                stage.FOIRequesterDisplay.primaryCorrespondentFullName = primaryCorrespondent.fullname;
+            }
         }
 
     }

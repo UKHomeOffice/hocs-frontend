@@ -300,6 +300,13 @@ class WorkstackAllocate extends Component {
                     }
                     <Link to={`/case/${row.caseUUID}/stage/${row.uuid}`} className='govuk-link govuk-!-margin-right-3'>{value.caseReference}</Link>
                 </td>;
+            case ColumnRenderer.REQUESTER:
+                return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>
+                    {
+                        value.primaryCorrespondentFullName &&
+                        <span className='govuk-!-font-weight-bold'>{value.primaryCorrespondentFullName}<br/></span>
+                    }
+                </td>;
             case ColumnRenderer.DATE:
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>{value}</td>;
             case ColumnRenderer.DATE_WARNING:
