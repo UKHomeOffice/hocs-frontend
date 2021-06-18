@@ -190,7 +190,7 @@ const bindDisplayElements = fromStaticList => async (stage) => {
         if (primaryCorrespondent) {
             stage.primaryCorrespondentAndRefDisplay.primaryCorrespondentFullName = primaryCorrespondent.fullname;
             if (stage.caseType === 'FOI') {
-                stage.FOIRequesterDisplay.primaryCorrespondentFullName = primaryCorrespondent.fullname;
+                stage.FOIRequesterDisplay = primaryCorrespondent.fullname;
             }
         }
 
