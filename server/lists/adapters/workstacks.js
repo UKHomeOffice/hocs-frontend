@@ -115,11 +115,11 @@ const getCorrespondentsNameByType = (correspondents, types) =>
         .join(', ');
 
 const getHighestPriorityContribution = (CaseContributions) => {
-    var contributionStatusEnum = { "Complete": 0, "Cancelled": 1, "Due": 2, "Overdue": 3 };
+    var contributionStatusEnum = { 'Complete': 0, 'Cancelled': 1, 'Due': 2, 'Overdue': 3 };
     return CaseContributions.reduce(function(c, n) {
         return contributionStatusEnum[c] > contributionStatusEnum[n] ? c : n;
     });
-}
+};
 
 const getContributionStrings = (CaseContributions, currentDate) => {
     const contributionsArray = JSON.parse(CaseContributions);
@@ -139,7 +139,7 @@ const getContributionStrings = (CaseContributions, currentDate) => {
                 contributionStrings.push('Complete');
             }
         }
-    };
+    }
     return contributionStrings;
 };
 
