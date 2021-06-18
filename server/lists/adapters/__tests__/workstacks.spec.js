@@ -997,10 +997,10 @@ describe('Workflow Workstack Adapter', () => {
 describe('getContributionString', () => {
     it('should convert contribution objects into a list of single word summaries', () => {
         const currentDate = new Date('2021-06-18 12:30');
-        const contributions = '[{\"data\":{\"contributionRequestDate\":\"2021-06-18\",\"contributionDueDate\":\"2021-06-02\",\"contributionStatus\":\"contributionReceived\"}},' +
-            '{\"data\":{\"contributionDueDate\":\"2021-06-20\",\"contributionRequestDate\":\"2021-06-18\"}},' +
-            '{\"data\":{\"contributionDueDate\":\"2021-06-02\",\"contributionRequestDate\":\"2021-06-18\"}},' +
-            '{\"data\":{\"contributionDueDate\":\"2021-06-02\",\"contributionRequestDate\":\"2021-06-18\",\"contributionStatus\":\"contributionCancelled\"}}]';
+        const contributions = '[{"data":{"contributionRequestDate":"2021-06-18","contributionDueDate":"2021-06-02","contributionStatus":"contributionReceived"}},' +
+            '{"data":{"contributionDueDate":"2021-06-20","contributionRequestDate":"2021-06-18"}},' +
+            '{"data":{"contributionDueDate":"2021-06-02","contributionRequestDate":"2021-06-18"}},' +
+            '{"data":{"contributionDueDate":"2021-06-02","contributionRequestDate":"2021-06-18","contributionStatus":"contributionCancelled"}}]';
 
         const returnedStrings = getContributionStrings(contributions, currentDate);
 
