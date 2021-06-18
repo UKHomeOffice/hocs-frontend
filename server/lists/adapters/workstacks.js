@@ -114,6 +114,35 @@ const getCorrespondentsNameByType = (correspondents, types) =>
         .map(correspondent => correspondent.fullname)
         .join(', ');
 
+const getHighestPriorityContribution = (CaseContributions) => {
+    var contributionStatusEnum = { "Complete": 0, "Cancelled": 1, "Due": 2, "Overdue": 3 };
+    return CaseContributions.reduce(function(c, n) {
+        return contributionStatusEnum[c] > contributionStatusEnum[n] ? c : n;
+    });
+}
+
+const getContributionStrings = (CaseContributions, currentDate) => {
+    const contributionsArray = JSON.parse(CaseContributions);
+    const contributionStrings = [];
+    for(const contribution of contributionsArray){
+        if(contribution.data){
+            if(contribution.data.contributionDueDate && addDays(new Date(contribution.data.contributionDueDate), 1)  < currentDate && !contribution.data.contributionStatus){
+                contributionStrings.push('Overdue');
+            }
+            else if(contribution.data.contributionDueDate && !contribution.data.contributionStatus){
+                contributionStrings.push('Due');
+            }
+            else if(contribution.data.contributionStatus === 'contributionCancelled'){
+                contributionStrings.push('Cancelled');
+            }
+            else if(contribution.data.contributionStatus === 'contributionReceived'){
+                contributionStrings.push('Complete');
+            }
+        }
+    };
+    return contributionStrings;
+};
+
 const bindDisplayElements = fromStaticList => async (stage) => {
     stage.assignedTeamDisplay = await fromStaticList('S_TEAMS', stage.teamUUID, true);
     stage.caseTypeDisplayFull = await fromStaticList('S_CASETYPES', stage.caseType);
@@ -174,22 +203,10 @@ const bindDisplayElements = fromStaticList => async (stage) => {
     }
 
     if (stage.data && stage.data.CaseContributions){
-        JSON.parse(stage.data.CaseContributions).forEach(contribution => {
-            if(contribution.data){
-                if(contribution.data.contributionDueDate && new Date(contribution.data.contributionDueDate) <= new Date() && !contribution.data.contributionStatus){
-                    stage.contributions = 'Overdue';
-                }
-                else if(contribution.data.contributionDueDate && !contribution.data.contributionStatus && stage.contributions != 'Overdue'){
-                    stage.contributions = 'Due';
-                }
-                else if(contribution.data.contributionStatus == 'contributionCancelled' && stage.contributions != 'Due' && stage.contributions != 'Overdue'){
-                    stage.contributions = 'Cancelled';
-                }
-                else if(contribution.data.contributionStatus == 'contributionReceived' && stage.contributions != 'Due' && stage.contributions != 'Cancelled'  && stage.contributions != 'Overdue'){
-                    stage.contributions = 'Complete';
-                }
-            }
-        });
+        const contributionStrings = getContributionStrings(stage.data.CaseContributions, new Date());
+        if(contributionStrings.length > 0){
+            stage.contributions = getHighestPriorityContribution(contributionStrings);
+        }
     }
 
     stage.primaryCorrespondentAndRefDisplay = {};
@@ -394,5 +411,7 @@ module.exports = {
     teamAdapter,
     workflowAdapter,
     stageAdapter,
-    bindDisplayElements
+    bindDisplayElements,
+    getContributionStrings,
+    getHighestPriorityContribution
 };

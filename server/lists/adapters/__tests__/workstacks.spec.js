@@ -1,4 +1,4 @@
-const { dashboardAdapter, userAdapter, teamAdapter, workflowAdapter, stageAdapter } = require('../workstacks');
+const { dashboardAdapter, userAdapter, teamAdapter, workflowAdapter, stageAdapter, getContributionStrings, getHighestPriorityContribution } = require('../workstacks');
 const { getUtcDateString } = require('../../../libs/dateHelpers');
 
 const mockUser = { uuid: 1 };
@@ -992,4 +992,37 @@ describe('Workflow Workstack Adapter', () => {
             expect(result).toMatchSnapshot();
         });
 
+});
+
+describe('getContributionString', () => {
+    it('should convert contribution objects into a list of single word summaries', () => {
+        const currentDate = new Date('2021-06-18 12:30');
+        const contributions = "[{\"data\":{\"contributionRequestDate\":\"2021-06-18\",\"contributionDueDate\":\"2021-06-02\",\"contributionStatus\":\"contributionReceived\"}}," +
+            "{\"data\":{\"contributionDueDate\":\"2021-06-20\",\"contributionRequestDate\":\"2021-06-18\"}}," +
+            "{\"data\":{\"contributionDueDate\":\"2021-06-02\",\"contributionRequestDate\":\"2021-06-18\"}}," +
+            "{\"data\":{\"contributionDueDate\":\"2021-06-02\",\"contributionRequestDate\":\"2021-06-18\",\"contributionStatus\":\"contributionCancelled\"}}]";
+
+        const returnedStrings = getContributionStrings(contributions, currentDate);
+
+        expect(returnedStrings[0]).toEqual("Complete");
+        expect(returnedStrings[1]).toEqual("Due");
+        expect(returnedStrings[2]).toEqual("Overdue");
+        expect(returnedStrings[3]).toEqual("Cancelled");
+    });
+});
+
+describe('orderContributionPriority', () => {
+    it('should convert take a list of contribution status and return the most important', () => {
+        var list = ["Complete", "Cancelled", "Overdue", "Due"];
+        expect(getHighestPriorityContribution(list)).toEqual("Overdue");
+
+        list = ["Complete", "Cancelled", "Due"];
+        expect(getHighestPriorityContribution(list)).toEqual("Due");
+
+        list = ["Complete", "Cancelled"];
+        expect(getHighestPriorityContribution(list)).toEqual("Cancelled");
+
+        list = ["Complete"];
+        expect(getHighestPriorityContribution(list)).toEqual("Complete");
+    });
 });
