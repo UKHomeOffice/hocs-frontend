@@ -46,7 +46,8 @@ const ColumnRenderer = {
 };
 
 const ColumnSortStrategy = {
-    FLOAT_TYPE: 'floatTypeStrategy'
+    FLOAT_TYPE: 'floatTypeStrategy',
+    CORRESPONDENT_TYPE: 'correspondentTypeStrategy'
 };
 
 const dataAdapters = {
@@ -135,6 +136,13 @@ class WorkstackAllocate extends Component {
         }
 
         return value;
+    }
+
+    getPrimaryCorrespondentDataValue(row, dataValueKey) {
+        if (dataValueKey === undefined) {
+            throw new Error('No data value key was specified');
+        }
+        return row.primaryCorrespondent[dataValueKey];
     }
 
     applyDataAdapter(value, colDataAdapter, dataValueKey, row) {
@@ -451,6 +459,8 @@ class WorkstackAllocate extends Component {
             switch (sortColumn.sortStrategy) {
                 case ColumnSortStrategy.FLOAT_TYPE:
                     return this.floatSortStrategy(a, b, sortColumn);
+                case ColumnSortStrategy.CORRESPONDENT_TYPE:
+                    return this.primaryCorrespondentSortStrategy(a, b, sortColumn);
                 default:
                     return this.defaultSortStrategy(a, b, sortColumn);
             }
@@ -472,10 +482,19 @@ class WorkstackAllocate extends Component {
         return 0;
     }
 
+    primaryCorrespondentSortStrategy(a, b, sortColumn) {
+        const aValue = sortColumn ? (this.getPrimaryCorrespondentDataValue(a, sortColumn.dataValueKey) || '').toUpperCase() : a.index;
+        const bValue = sortColumn ? (this.getPrimaryCorrespondentDataValue(b, sortColumn.dataValueKey) || '').toUpperCase() : b.index;
+        return this.sortStringValues(aValue, bValue);
+    }
+
     defaultSortStrategy(a, b, sortColumn) {
         const aValue = sortColumn ? (this.getDataValue(a, sortColumn.dataValueKey) || '').toUpperCase() : a.index;
         const bValue = sortColumn ? (this.getDataValue(b, sortColumn.dataValueKey) || '').toUpperCase() : b.index;
+        return this.sortStringValues(aValue, bValue);
+    }
 
+    sortStringValues(aValue, bValue) {
         if (aValue > bValue) {
             return 1 * this.state.sort.direction;
         } else if (aValue < bValue) {
@@ -543,6 +562,7 @@ class WorkstackAllocate extends Component {
             </Fragment>
         );
     }
+
 }
 
 WorkstackAllocate.propTypes = {

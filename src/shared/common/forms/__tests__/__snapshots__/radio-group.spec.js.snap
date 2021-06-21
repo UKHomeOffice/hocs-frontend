@@ -27,15 +27,15 @@ exports[`Form radio group component should render disabled when passed 1`] = `
       >
         <input
           class="govuk-radios__input"
-          data-aria-controls="conditional-radio-group-A"
-          id="radio-group-A"
+          data-aria-controls="conditional-radio-group-0"
+          id="radio-group-0"
           name="radio-group"
           type="radio"
           value="A"
         />
         <label
           class="govuk-label govuk-radios__label"
-          for="radio-group-A"
+          for="radio-group-0"
         >
           isA
         </label>
@@ -45,15 +45,15 @@ exports[`Form radio group component should render disabled when passed 1`] = `
       >
         <input
           class="govuk-radios__input"
-          data-aria-controls="conditional-radio-group-B"
-          id="radio-group-B"
+          data-aria-controls="conditional-radio-group-1"
+          id="radio-group-1"
           name="radio-group"
           type="radio"
           value="B"
         />
         <label
           class="govuk-label govuk-radios__label"
-          for="radio-group-B"
+          for="radio-group-1"
         >
           isB
         </label>
@@ -63,15 +63,15 @@ exports[`Form radio group component should render disabled when passed 1`] = `
       >
         <input
           class="govuk-radios__input"
-          data-aria-controls="conditional-radio-group-C"
-          id="radio-group-C"
+          data-aria-controls="conditional-radio-group-2"
+          id="radio-group-2"
           name="radio-group"
           type="radio"
           value="C"
         />
         <label
           class="govuk-label govuk-radios__label"
-          for="radio-group-C"
+          for="radio-group-2"
         >
           isC
         </label>
@@ -107,22 +107,22 @@ exports[`Form radio group component should render error message for textarea if 
       >
         <input
           class="govuk-radios__input"
-          data-aria-controls="conditional-radio-group-ValueA"
-          id="radio-group-ValueA"
+          data-aria-controls="conditional-radio-group-0"
+          id="radio-group-0"
           name="radio-group"
           type="radio"
           value="ValueA"
         />
         <label
           class="govuk-label govuk-radios__label"
-          for="radio-group-ValueA"
+          for="radio-group-0"
         >
           labelA
         </label>
       </div>
       <div
         class="govuk-radios__conditional govuk-radios__conditional--hidden"
-        id="conditional-radio-group-ValueA"
+        id="conditional-radio-group-0"
       >
         <div
           class="govuk-form-group  govuk-form-group--error"
@@ -157,15 +157,15 @@ exports[`Form radio group component should render error message for textarea if 
       >
         <input
           class="govuk-radios__input"
-          data-aria-controls="conditional-radio-group-ValueB"
-          id="radio-group-ValueB"
+          data-aria-controls="conditional-radio-group-1"
+          id="radio-group-1"
           name="radio-group"
           type="radio"
           value="ValueB"
         />
         <label
           class="govuk-label govuk-radios__label"
-          for="radio-group-ValueB"
+          for="radio-group-1"
         >
           labelB
         </label>
@@ -175,15 +175,15 @@ exports[`Form radio group component should render error message for textarea if 
       >
         <input
           class="govuk-radios__input"
-          data-aria-controls="conditional-radio-group-ValueC"
-          id="radio-group-ValueC"
+          data-aria-controls="conditional-radio-group-2"
+          id="radio-group-2"
           name="radio-group"
           type="radio"
           value="ValueC"
         />
         <label
           class="govuk-label govuk-radios__label"
-          for="radio-group-ValueC"
+          for="radio-group-2"
         >
           labelC
         </label>
@@ -219,15 +219,15 @@ exports[`Form radio group component should render with default props 1`] = `
       >
         <input
           class="govuk-radios__input"
-          data-aria-controls="conditional-radio-group-A"
-          id="radio-group-A"
+          data-aria-controls="conditional-radio-group-0"
+          id="radio-group-0"
           name="radio-group"
           type="radio"
           value="A"
         />
         <label
           class="govuk-label govuk-radios__label"
-          for="radio-group-A"
+          for="radio-group-0"
         >
           isA
         </label>
@@ -237,15 +237,15 @@ exports[`Form radio group component should render with default props 1`] = `
       >
         <input
           class="govuk-radios__input"
-          data-aria-controls="conditional-radio-group-B"
-          id="radio-group-B"
+          data-aria-controls="conditional-radio-group-1"
+          id="radio-group-1"
           name="radio-group"
           type="radio"
           value="B"
         />
         <label
           class="govuk-label govuk-radios__label"
-          for="radio-group-B"
+          for="radio-group-1"
         >
           isB
         </label>
@@ -255,15 +255,15 @@ exports[`Form radio group component should render with default props 1`] = `
       >
         <input
           class="govuk-radios__input"
-          data-aria-controls="conditional-radio-group-C"
-          id="radio-group-C"
+          data-aria-controls="conditional-radio-group-2"
+          id="radio-group-2"
           name="radio-group"
           type="radio"
           value="C"
         />
         <label
           class="govuk-label govuk-radios__label"
-          for="radio-group-C"
+          for="radio-group-2"
         >
           isC
         </label>
@@ -305,15 +305,15 @@ exports[`Form radio group component should render with error when passed 1`] = `
       >
         <input
           class="govuk-radios__input"
-          data-aria-controls="conditional-radio-group-A"
-          id="radio-group-A"
+          data-aria-controls="conditional-radio-group-0"
+          id="radio-group-0"
           name="radio-group"
           type="radio"
           value="A"
         />
         <label
           class="govuk-label govuk-radios__label"
-          for="radio-group-A"
+          for="radio-group-0"
         >
           isA
         </label>
@@ -323,15 +323,15 @@ exports[`Form radio group component should render with error when passed 1`] = `
       >
         <input
           class="govuk-radios__input"
-          data-aria-controls="conditional-radio-group-B"
-          id="radio-group-B"
+          data-aria-controls="conditional-radio-group-1"
+          id="radio-group-1"
           name="radio-group"
           type="radio"
           value="B"
         />
         <label
           class="govuk-label govuk-radios__label"
-          for="radio-group-B"
+          for="radio-group-1"
         >
           isB
         </label>
@@ -341,15 +341,15 @@ exports[`Form radio group component should render with error when passed 1`] = `
       >
         <input
           class="govuk-radios__input"
-          data-aria-controls="conditional-radio-group-C"
-          id="radio-group-C"
+          data-aria-controls="conditional-radio-group-2"
+          id="radio-group-2"
           name="radio-group"
           type="radio"
           value="C"
         />
         <label
           class="govuk-label govuk-radios__label"
-          for="radio-group-C"
+          for="radio-group-2"
         >
           isC
         </label>
@@ -390,15 +390,15 @@ exports[`Form radio group component should render with hint when passed 1`] = `
       >
         <input
           class="govuk-radios__input"
-          data-aria-controls="conditional-radio-group-A"
-          id="radio-group-A"
+          data-aria-controls="conditional-radio-group-0"
+          id="radio-group-0"
           name="radio-group"
           type="radio"
           value="A"
         />
         <label
           class="govuk-label govuk-radios__label"
-          for="radio-group-A"
+          for="radio-group-0"
         >
           isA
         </label>
@@ -408,15 +408,15 @@ exports[`Form radio group component should render with hint when passed 1`] = `
       >
         <input
           class="govuk-radios__input"
-          data-aria-controls="conditional-radio-group-B"
-          id="radio-group-B"
+          data-aria-controls="conditional-radio-group-1"
+          id="radio-group-1"
           name="radio-group"
           type="radio"
           value="B"
         />
         <label
           class="govuk-label govuk-radios__label"
-          for="radio-group-B"
+          for="radio-group-1"
         >
           isB
         </label>
@@ -426,15 +426,15 @@ exports[`Form radio group component should render with hint when passed 1`] = `
       >
         <input
           class="govuk-radios__input"
-          data-aria-controls="conditional-radio-group-C"
-          id="radio-group-C"
+          data-aria-controls="conditional-radio-group-2"
+          id="radio-group-2"
           name="radio-group"
           type="radio"
           value="C"
         />
         <label
           class="govuk-label govuk-radios__label"
-          for="radio-group-C"
+          for="radio-group-2"
         >
           isC
         </label>
@@ -472,15 +472,15 @@ exports[`Form radio group component should render with label when passed 1`] = `
       >
         <input
           class="govuk-radios__input"
-          data-aria-controls="conditional-radio-group-A"
-          id="radio-group-A"
+          data-aria-controls="conditional-radio-group-0"
+          id="radio-group-0"
           name="radio-group"
           type="radio"
           value="A"
         />
         <label
           class="govuk-label govuk-radios__label"
-          for="radio-group-A"
+          for="radio-group-0"
         >
           isA
         </label>
@@ -490,15 +490,15 @@ exports[`Form radio group component should render with label when passed 1`] = `
       >
         <input
           class="govuk-radios__input"
-          data-aria-controls="conditional-radio-group-B"
-          id="radio-group-B"
+          data-aria-controls="conditional-radio-group-1"
+          id="radio-group-1"
           name="radio-group"
           type="radio"
           value="B"
         />
         <label
           class="govuk-label govuk-radios__label"
-          for="radio-group-B"
+          for="radio-group-1"
         >
           isB
         </label>
@@ -508,15 +508,15 @@ exports[`Form radio group component should render with label when passed 1`] = `
       >
         <input
           class="govuk-radios__input"
-          data-aria-controls="conditional-radio-group-C"
-          id="radio-group-C"
+          data-aria-controls="conditional-radio-group-2"
+          id="radio-group-2"
           name="radio-group"
           type="radio"
           value="C"
         />
         <label
           class="govuk-label govuk-radios__label"
-          for="radio-group-C"
+          for="radio-group-2"
         >
           isC
         </label>
@@ -553,15 +553,15 @@ exports[`Form radio group component should render with value when passed 1`] = `
         <input
           checked=""
           class="govuk-radios__input"
-          data-aria-controls="conditional-radio-group-A"
-          id="radio-group-A"
+          data-aria-controls="conditional-radio-group-0"
+          id="radio-group-0"
           name="radio-group"
           type="radio"
           value="A"
         />
         <label
           class="govuk-label govuk-radios__label"
-          for="radio-group-A"
+          for="radio-group-0"
         >
           isA
         </label>
@@ -571,15 +571,15 @@ exports[`Form radio group component should render with value when passed 1`] = `
       >
         <input
           class="govuk-radios__input"
-          data-aria-controls="conditional-radio-group-B"
-          id="radio-group-B"
+          data-aria-controls="conditional-radio-group-1"
+          id="radio-group-1"
           name="radio-group"
           type="radio"
           value="B"
         />
         <label
           class="govuk-label govuk-radios__label"
-          for="radio-group-B"
+          for="radio-group-1"
         >
           isB
         </label>
@@ -589,15 +589,15 @@ exports[`Form radio group component should render with value when passed 1`] = `
       >
         <input
           class="govuk-radios__input"
-          data-aria-controls="conditional-radio-group-C"
-          id="radio-group-C"
+          data-aria-controls="conditional-radio-group-2"
+          id="radio-group-2"
           name="radio-group"
           type="radio"
           value="C"
         />
         <label
           class="govuk-label govuk-radios__label"
-          for="radio-group-C"
+          for="radio-group-2"
         >
           isC
         </label>
@@ -633,22 +633,22 @@ exports[`Form radio group component should textarea if conditional content exist
       >
         <input
           class="govuk-radios__input"
-          data-aria-controls="conditional-radio-group-ValueA"
-          id="radio-group-ValueA"
+          data-aria-controls="conditional-radio-group-0"
+          id="radio-group-0"
           name="radio-group"
           type="radio"
           value="ValueA"
         />
         <label
           class="govuk-label govuk-radios__label"
-          for="radio-group-ValueA"
+          for="radio-group-0"
         >
           labelA
         </label>
       </div>
       <div
         class="govuk-radios__conditional govuk-radios__conditional--hidden"
-        id="conditional-radio-group-ValueA"
+        id="conditional-radio-group-0"
       >
         <div
           class="govuk-form-group "
@@ -672,15 +672,15 @@ exports[`Form radio group component should textarea if conditional content exist
       >
         <input
           class="govuk-radios__input"
-          data-aria-controls="conditional-radio-group-ValueB"
-          id="radio-group-ValueB"
+          data-aria-controls="conditional-radio-group-1"
+          id="radio-group-1"
           name="radio-group"
           type="radio"
           value="ValueB"
         />
         <label
           class="govuk-label govuk-radios__label"
-          for="radio-group-ValueB"
+          for="radio-group-1"
         >
           labelB
         </label>
@@ -690,15 +690,15 @@ exports[`Form radio group component should textarea if conditional content exist
       >
         <input
           class="govuk-radios__input"
-          data-aria-controls="conditional-radio-group-ValueC"
-          id="radio-group-ValueC"
+          data-aria-controls="conditional-radio-group-2"
+          id="radio-group-2"
           name="radio-group"
           type="radio"
           value="ValueC"
         />
         <label
           class="govuk-label govuk-radios__label"
-          for="radio-group-ValueC"
+          for="radio-group-2"
         >
           labelC
         </label>
