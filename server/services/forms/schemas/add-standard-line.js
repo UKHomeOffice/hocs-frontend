@@ -14,7 +14,6 @@ module.exports = options => Form()
     .withField(
         Component('date', 'expiry_date')
             .withValidator('required', 'Expiration date is required')
-            .withValidator('isValidDate', 'Expiration date must be a valid date')
             .withValidator('isValidDay', 'Expiration date must contain a real day')
             .withValidator('isValidMonth', 'Expiration date must contain a real month')
             .withValidator('isYearWithinRange', `Expiration date must be before ${MAX_ALLOWABLE_YEAR}`)

@@ -48,10 +48,9 @@ module.exports = async options => {
         .withField(
             Component('date', 'contributionRequestDate')
                 .withValidator('required')
-                .withValidator('isValidDate')
                 .withValidator('isValidDay', 'Contribution request date must contain a real day')
                 .withValidator('isValidMonth', 'Contribution request date  must contain a real month')
-                .withValidator('isYearWithinRange', 'Contribution request date must be after ' + MIN_ALLOWABLE_YEAR)
+                .withValidator('isYearWithinRange', `Contribution request date must be after ${MIN_ALLOWABLE_YEAR}`)
                 .withValidator('isBeforeToday')
                 .withProp('label', 'Contribution request date')
                 .withProp('disabled', isReadOnly)
@@ -60,10 +59,9 @@ module.exports = async options => {
         .withField(
             Component('date', 'contributionDueDate')
                 .withValidator('required')
-                .withValidator('isValidDate')
                 .withValidator('isValidDay', 'Contribution due date must contain a real day')
                 .withValidator('isValidMonth', 'Contribution due date must contain a real month')
-                .withValidator('isYearWithinRange', 'Contribution due date must be before ' + MAX_ALLOWABLE_YEAR)
+                .withValidator('isYearWithinRange', `Contribution due date must be before ${MAX_ALLOWABLE_YEAR}`)
                 .withValidator('isValidWithinDate')
                 .withProp('label', 'Contribution due date')
                 .withProp('disabled', isReadOnly)

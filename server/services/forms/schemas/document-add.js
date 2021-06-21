@@ -8,7 +8,6 @@ module.exports = () => Form()
     .withField(
         Component('date', 'DateReceived')
             .withValidator('required', 'Date received is required')
-            .withValidator('isValidDate', 'Date received must be a valid date')
             .withValidator('isValidDay', 'Date received must contain a real day')
             .withValidator('isValidMonth', 'Date received must contain a real month')
             .withValidator('isYearWithinRange', `Date received must be after ${MIN_ALLOWABLE_YEAR}`)
