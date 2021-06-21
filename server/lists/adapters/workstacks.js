@@ -114,33 +114,35 @@ const getCorrespondentsNameByType = (correspondents, types) =>
         .map(correspondent => correspondent.fullname)
         .join(', ');
 
-const getHighestPriorityContribution = (CaseContributions) => {
-    var contributionStatusEnum = { 'Complete': 0, 'Cancelled': 1, 'Due': 2, 'Overdue': 3 };
-    return CaseContributions.reduce(function(c, n) {
-        return contributionStatusEnum[c] > contributionStatusEnum[n] ? c : n;
+const highestPriorityContributionStatus = (decoratedContributions) => {
+    const contributionStatusEnum = {
+        '': 0,
+        'contributionReceived': 1,
+        'contributionCancelled': 2,
+        'contributionDue': 3,
+        'contributionOverdue': 4
+    };
+    let highestPriority = 0;
+
+    decoratedContributions.map(decoratedContribution => {
+        if(decoratedContribution.data && contributionStatusEnum[decoratedContribution.data.contributionStatus] > highestPriority) {
+            highestPriority = contributionStatusEnum[decoratedContribution.data.contributionStatus];
+        }
     });
+    return Object.keys(contributionStatusEnum).find(key => contributionStatusEnum[key] === highestPriority);
 };
 
-const getContributionStrings = (CaseContributions, currentDate) => {
-    const contributionsArray = JSON.parse(CaseContributions);
-    const contributionStrings = [];
-    for(const contribution of contributionsArray){
-        if(contribution.data){
-            if(contribution.data.contributionDueDate && addDays(new Date(contribution.data.contributionDueDate), 1)  < currentDate && !contribution.data.contributionStatus){
-                contributionStrings.push('Overdue');
-            }
-            else if(contribution.data.contributionDueDate && !contribution.data.contributionStatus){
-                contributionStrings.push('Due');
-            }
-            else if(contribution.data.contributionStatus === 'contributionCancelled'){
-                contributionStrings.push('Cancelled');
-            }
-            else if(contribution.data.contributionStatus === 'contributionReceived'){
-                contributionStrings.push('Complete');
+const decorateContributionsWithStatus = (contributions, currentDate) => {
+    return contributions.map(contribution => {
+        if (contribution.data && contribution.data.contributionStatus === undefined) {
+            if (addDays(new Date(contribution.data.contributionDueDate), 1)  < currentDate) {
+                contribution.data['contributionStatus'] = 'contributionOverdue';
+            } else {
+                contribution.data['contributionStatus'] = 'contributionDue';
             }
         }
-    }
-    return contributionStrings;
+        return contribution;
+    });
 };
 
 const bindDisplayElements = fromStaticList => async (stage) => {
@@ -203,10 +205,8 @@ const bindDisplayElements = fromStaticList => async (stage) => {
     }
 
     if (stage.data && stage.data.CaseContributions){
-        const contributionStrings = getContributionStrings(stage.data.CaseContributions, new Date());
-        if(contributionStrings.length > 0){
-            stage.contributions = getHighestPriorityContribution(contributionStrings);
-        }
+        stage.contributions = highestPriorityContributionStatus(
+            decorateContributionsWithStatus(JSON.parse(stage.data.CaseContributions), new Date())).replace('contribution', '');
     }
 
     stage.primaryCorrespondentAndRefDisplay = {};
@@ -412,6 +412,6 @@ module.exports = {
     workflowAdapter,
     stageAdapter,
     bindDisplayElements,
-    getContributionStrings,
-    getHighestPriorityContribution
+    decorateContributionsWithStatus,
+    highestPriorityContributionStatus
 };
