@@ -23,6 +23,7 @@ const supportedFormComponents = [
     { component: 'panel', props: { name: 'panel' } },
     { component: 'inset', props: { name: 'inset' } },
     { component: 'paragraph', props: { name: 'paragraph' } },
+    { component: 'confirmation-with-case-ref', props: { name: 'confirmation-with-case-ref' } },
     { component: 'hidden', props: { name: 'hidden' } },
     { component: 'expandable-checkbox', props: { choice: { label: '__label__', value: '__value__' }, name: 'expandable' } },
 ];
