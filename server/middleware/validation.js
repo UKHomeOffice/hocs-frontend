@@ -17,9 +17,10 @@ const validationErrors = {
     isValidWithinDate: label => `${label} must be within the last ${VALID_DAYS_RANGE} days`,
     validCaseReference: () => 'Case reference is not valid',
     contributionsFulfilled: () => 'Case contributions have to be completed or cancelled',
-    oneOf: () => 'Options are not valid',
-    isValidMonth: label =>  `${label} must contain a real month`,
-    isYearWithinRange: label =>   `${label} must contain a valid year`,
+    oneOf: () => 'Select at least one option',
+    isValidMonth: label => `${label} must contain a real month`,
+    isBeforeMaxYear: label => `${label} must be before ${MAX_ALLOWABLE_YEAR}`,
+    isAfterMinYear: label => `${label} must be after ${MIN_ALLOWABLE_YEAR}`,
     isValidDay: label => `${label} must contain a real day`,
 };
 
@@ -51,8 +52,11 @@ const validators = {
     },
     isYearWithinRange({ label, value, message }) {
         if (value) {
-            if (getYear(value) > MAX_ALLOWABLE_YEAR || getYear(value) < MIN_ALLOWABLE_YEAR) {
-                return message || validationErrors.isYearWithinRange(label);
+            if (getYear(value) > MAX_ALLOWABLE_YEAR) {
+                return message || validationErrors.isBeforeMaxYear(label);
+            }
+            else if( getYear(value) < MIN_ALLOWABLE_YEAR){
+                return message || validationErrors.isAfterMinYear(label);
             }
         }
         return null;
