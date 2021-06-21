@@ -31,6 +31,8 @@ class DateInput extends Component {
             error,
             hint,
             label,
+            minYear,
+            maxYear = new Date().getFullYear() + 100,
             value
         } = this.props;
         const yearKey = this.datePart('year');
@@ -53,6 +55,8 @@ class DateInput extends Component {
                                 name={dayKey}
                                 type="number"
                                 pattern="[0-9]*"
+                                min="1"
+                                max="31"
                                 value={parts.day}
                                 onChange={e => {this._onChange('day', e.target.value);}}
                             />
@@ -67,6 +71,8 @@ class DateInput extends Component {
                                 name={monthKey}
                                 type="number"
                                 pattern="[0-9]*"
+                                min="1"
+                                max="12"
                                 value={parts.month}
                                 onChange={e => {this._onChange('month', e.target.value);}}
                             />
@@ -81,6 +87,8 @@ class DateInput extends Component {
                                 name={yearKey}
                                 type="number"
                                 pattern="[0-9]*"
+                                min={minYear}
+                                max={maxYear}
                                 value={parts.year}
                                 onChange={e => {this._onChange('year', e.target.value);}}
                             />
