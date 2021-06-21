@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Panel component should render with title when passed 1`] = `
+<div
+  class="govuk-panel govuk-panel--confirmation"
+>
+  <div
+    class="govuk-panel__body"
+  >
+    Case number: test-case-ref completed
+  </div>
+</div>
+`;
