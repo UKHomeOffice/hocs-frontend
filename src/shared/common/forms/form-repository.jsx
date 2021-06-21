@@ -24,6 +24,8 @@ import Accordion from './accordion.jsx';
 import Hidden from './hidden.jsx';
 import ExpandableCheckbox from './expandable-checkbox.jsx';
 import FlowDirectionLink from './flow-direction-link.jsx';
+import HideConditionFunctions from './../../helpers/hide-condition-functions';
+import ConfirmationWithCaseRef from './confirmation-with-case-ref.jsx';
 import hideConditionFunctions from '../../helpers/hide-condition-functions.js';
 import showConditionFunctions from '../../helpers/show-condition-functions.js';
 
@@ -42,7 +44,7 @@ const retrieveValue = ({ defaultValue, populateFromCaseData = true, name }, data
 };
 
 function renderFormComponent(Component, options) {
-    const { key, config, data, errors, callback, dataAdapter, page } = options;
+    const { key, config, data, errors, callback, dataAdapter, page, caseRef } = options;
 
     if (isComponentVisible(config, data)) {
         return <Component key={key}
@@ -51,6 +53,8 @@ function renderFormComponent(Component, options) {
             error={errors && errors[config.name]}
             errors={errors}
             value={retrieveValue(config, dataAdapter, data)}
+            value={value}
+            caseRef={caseRef}
             updateState={callback ? data => callback(data) : null}
             page={page} />;
     }
@@ -89,7 +93,7 @@ function isComponentVisible({ visibilityConditions, hideConditions }, data) {
 }
 
 export function formComponentFactory(field, options) {
-    const { key, config, data, errors, callback, page } = options;
+    const { key, config, data, errors, callback, page, caseRef } = options;
 
     switch (field) {
         case 'radio':
