@@ -23,6 +23,7 @@ class Form extends Component {
             schema,
             submittingForm
         } = this.props;
+
         return (
             <>
                 {meta && meta.allocationNote &&
@@ -47,7 +48,8 @@ class Form extends Component {
                                 errors,
                                 callback: this.props.updateFormState,
                                 baseUrl: `/case/${page.caseId}/stage/${page.stageId}`,
-                                page
+                                page,
+                                caseRef: this.props.meta ? this.props.meta.caseReference : undefined,
                             });
                         })
                     }
