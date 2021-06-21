@@ -1,4 +1,4 @@
-const { dashboardAdapter, userAdapter, teamAdapter, workflowAdapter, stageAdapter, getContributionStrings, getHighestPriorityContribution } = require('../workstacks');
+const { highestPriorityContributionStatus, decorateContributionsWithStatus, dashboardAdapter, userAdapter, teamAdapter, workflowAdapter, stageAdapter, getContributionStrings, getHighestPriorityContribution } = require('../workstacks');
 const { getUtcDateString } = require('../../../libs/dateHelpers');
 
 const mockUser = { uuid: 1 };
@@ -1008,6 +1008,57 @@ describe('getContributionString', () => {
         expect(returnedStrings[1]).toEqual('Due');
         expect(returnedStrings[2]).toEqual('Overdue');
         expect(returnedStrings[3]).toEqual('Cancelled');
+    });
+});
+
+describe('decorateContributionsWithStatus', () => {
+    it('returns the decorated contributions with statuses', () => {
+        const contributions = '[{"data":{"contributionRequestDate":"2021-06-18","contributionDueDate":"2021-06-02","contributionStatus":"contributionReceived"}},' +
+           '{"data":{"contributionDueDate":"2021-06-20","contributionRequestDate":"2021-06-18"}},' +
+           '{"data":{"contributionDueDate":"2021-06-02","contributionRequestDate":"2021-06-18"}},' +
+           '{"data":{"contributionDueDate":"2021-06-02","contributionRequestDate":"2021-06-18","contributionStatus":"contributionCancelled"}}]';
+        const currentDate = new Date('2021-06-18 12:30');
+
+        const result = decorateContributionsWithStatus(JSON.parse(contributions), currentDate);
+
+        expect(result[0].data['contributionStatus']).toEqual('contributionReceived');
+        expect(result[1].data['contributionStatus']).toEqual('contributionDue');
+        expect(result[2].data['contributionStatus']).toEqual('contributionOverdue');
+        expect(result[3].data['contributionStatus']).toEqual('contributionCancelled');
+    });
+});
+
+describe('highestPriorityContribution', () => {
+    it('returns the highest priority contribution', () => {
+        let contributions = '[{"data":{"contributionRequestDate":"2021-06-18","contributionDueDate":"2021-06-02","contributionStatus":"contributionReceived"}},' +
+            '{"data":{"contributionDueDate":"2021-06-20","contributionRequestDate":"2021-06-18","contributionStatus":"contributionDue"}},' +
+            '{"data":{"contributionDueDate":"2021-06-02","contributionRequestDate":"2021-06-18","contributionStatus":"contributionOverdue"}},' +
+            '{"data":{"contributionDueDate":"2021-06-02","contributionRequestDate":"2021-06-18","contributionStatus":"contributionCancelled"}}]';
+
+        let result = highestPriorityContributionStatus(JSON.parse(contributions));
+
+        expect(result).toEqual('contributionOverdue');
+
+        contributions = '[{"data":{"contributionRequestDate":"2021-06-18","contributionDueDate":"2021-06-02","contributionStatus":"contributionReceived"}},' +
+            '{"data":{"contributionDueDate":"2021-06-20","contributionRequestDate":"2021-06-18","contributionStatus":"contributionDue"}},' +
+            '{"data":{"contributionDueDate":"2021-06-02","contributionRequestDate":"2021-06-18","contributionStatus":"contributionCancelled"}}]';
+
+        result = highestPriorityContributionStatus(JSON.parse(contributions));
+
+        expect(result).toEqual('contributionDue');
+
+        contributions = '[{"data":{"contributionRequestDate":"2021-06-18","contributionDueDate":"2021-06-02","contributionStatus":"contributionReceived"}},' +
+            '{"data":{"contributionDueDate":"2021-06-02","contributionRequestDate":"2021-06-18","contributionStatus":"contributionCancelled"}}]';
+
+        result = highestPriorityContributionStatus(JSON.parse(contributions));
+
+        expect(result).toEqual('contributionCancelled');
+
+        contributions = '[{"data":{"contributionRequestDate":"2021-06-18","contributionDueDate":"2021-06-02","contributionStatus":"contributionReceived"}}]';
+
+        result = highestPriorityContributionStatus(JSON.parse(contributions));
+
+        expect(result).toEqual('contributionReceived');
     });
 });
 

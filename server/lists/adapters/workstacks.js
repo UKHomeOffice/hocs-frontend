@@ -115,9 +115,41 @@ const getCorrespondentsNameByType = (correspondents, types) =>
         .join(', ');
 
 const getHighestPriorityContribution = (CaseContributions) => {
-    var contributionStatusEnum = { 'Complete': 0, 'Cancelled': 1, 'Due': 2, 'Overdue': 3 };
+    const contributionStatusEnum = { 'Complete': 0, 'Cancelled': 1, 'Due': 2, 'Overdue': 3 };
     return CaseContributions.reduce(function(c, n) {
         return contributionStatusEnum[c] > contributionStatusEnum[n] ? c : n;
+    });
+};
+
+const highestPriorityContributionStatus = (decoratedContributions) => {
+    const contributionStatusEnum = {
+        'Complete': 0,
+        'Cancelled': 1,
+        'Due': 2,
+        'Overdue': 3
+    };
+    let highestPriority = 0;
+
+    decoratedContributions.map(el => {
+        if(contributionStatusEnum[el.data.contributionStatus] > highestPriority) {
+            highestPriority = contributionStatusEnum[el.data.contributionStatus];
+        }
+    });
+
+    return Object.keys(contributionStatusEnum).find(key => contributionStatusEnum[key] === highestPriority);
+};
+
+const decorateContributionsWithStatus = (contributions, currentDate) => {
+    return contributions.map(el => {
+        if (el.data.contributionStatus === undefined) {
+            if (addDays(new Date(el.data.contributionDueDate), 1)  < currentDate) {
+                el.data['contributionStatus'] = 'contributionOverdue';
+            } else {
+                el.data['contributionStatus'] = 'contributionDue';
+            }
+        }
+
+        return el;
     });
 };
 
@@ -203,10 +235,14 @@ const bindDisplayElements = fromStaticList => async (stage) => {
     }
 
     if (stage.data && stage.data.CaseContributions){
-        const contributionStrings = getContributionStrings(stage.data.CaseContributions, new Date());
-        if(contributionStrings.length > 0){
-            stage.contributions = getHighestPriorityContribution(contributionStrings);
-        }
+        // const contributionStrings = getContributionStrings(stage.data.CaseContributions, new Date());
+        // if(contributionStrings.length > 0){
+        //     stage.contributions = getHighestPriorityContribution(contributionStrings);
+        // }
+
+        stage.contributions = highestPriorityContributionStatus(
+            decorateContributionsWithStatus(JSON.parse(stage.data.CaseContributions), new Date())
+        );
     }
 
     stage.primaryCorrespondentAndRefDisplay = {};
@@ -413,5 +449,7 @@ module.exports = {
     stageAdapter,
     bindDisplayElements,
     getContributionStrings,
-    getHighestPriorityContribution
+    getHighestPriorityContribution,
+    decorateContributionsWithStatus,
+    highestPriorityContributionStatus
 };
