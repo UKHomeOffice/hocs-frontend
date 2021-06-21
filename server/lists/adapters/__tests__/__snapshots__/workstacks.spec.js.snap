@@ -453,6 +453,7 @@ Object {
       "caseReference": "A/1234568/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "contributions": "",
       "correspondents": Object {
         "correspondents": Array [
           Object {
@@ -504,6 +505,7 @@ Object {
       "caseReference": "COMP/1234568/19",
       "caseType": "COMP",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "contributions": "",
       "correspondents": Object {
         "correspondents": Array [
           Object {
@@ -776,6 +778,7 @@ Object {
       "caseReference": "A/1234568/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "contributions": "Overdue",
       "data": Object {
         "CaseContributions": "[{\\"data\\": {\\"contributionDueDate\\":\\"2020-12-12\\"}}]",
         "DueDate": "2020-12-10",
@@ -811,8 +814,9 @@ Object {
       "caseReference": "A/1234568/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "contributions": "Overdue",
       "data": Object {
-        "CaseContributions": "[{\\"contributionDueDate\\":\\"2020-12-12\\"}]",
+        "CaseContributions": "[{\\"data\\": {\\"contributionDueDate\\":\\"2020-12-12\\"}}]",
       },
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
@@ -845,6 +849,7 @@ Object {
       "caseReference": "A/1234568/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "contributions": "Overdue",
       "data": Object {
         "CaseContributions": "[{\\"data\\": {\\"contributionDueDate\\":\\"2020-12-12\\"}}]",
       },
@@ -879,6 +884,7 @@ Object {
       "caseReference": "A/1234568/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "contributions": "",
       "data": Object {
         "CaseContributions": "[{\\"data\\": {\\"contributionDueDate\\":\\"2020-12-12\\", \\"contributionStatus\\": \\"TEST\\"}}]",
       },
@@ -913,6 +919,7 @@ Object {
       "caseReference": "A/1234568/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "contributions": "",
       "data": Object {
         "CaseContributions": "[{\\"data\\": {\\"contributionDueDate\\":\\"2020-12-12\\", \\"contributionStatus\\":\\"blah\\"}}]",
       },
@@ -947,6 +954,7 @@ Object {
       "caseReference": "A/1234568/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "contributions": "Overdue",
       "data": Object {
         "CaseContributions": "[{\\"data\\": {\\"contributionDueDate\\":\\"2020-12-12\\"}}]",
       },
@@ -981,6 +989,7 @@ Object {
       "caseReference": "A/1234568/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "contributions": "",
       "data": Object {
         "CaseContributions": "[{\\"data\\": {\\"contributionDueDate\\":\\"2020-12-12\\", \\"contributionStatus\\": \\"TEST\\"}}]",
       },
@@ -1015,6 +1024,7 @@ Object {
       "caseReference": "A/1234568/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "contributions": "",
       "data": Object {
         "CaseContributions": "[{}]",
       },
@@ -1049,6 +1059,7 @@ Object {
       "caseReference": "A/1234568/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "contributions": "",
       "data": Object {
         "CaseContributions": "[{}]",
       },

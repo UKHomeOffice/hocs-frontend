@@ -114,6 +114,37 @@ const getCorrespondentsNameByType = (correspondents, types) =>
         .map(correspondent => correspondent.fullname)
         .join(', ');
 
+const highestPriorityContributionStatus = (decoratedContributions) => {
+    const contributionStatusEnum = {
+        '': 0,
+        'contributionReceived': 1,
+        'contributionCancelled': 2,
+        'contributionDue': 3,
+        'contributionOverdue': 4
+    };
+    let highestPriority = 0;
+
+    decoratedContributions.map(decoratedContribution => {
+        if(decoratedContribution.data && contributionStatusEnum[decoratedContribution.data.contributionStatus] > highestPriority) {
+            highestPriority = contributionStatusEnum[decoratedContribution.data.contributionStatus];
+        }
+    });
+    return Object.keys(contributionStatusEnum).find(key => contributionStatusEnum[key] === highestPriority);
+};
+
+const decorateContributionsWithStatus = (contributions, currentDate) => {
+    return contributions.map(contribution => {
+        if (contribution.data && contribution.data.contributionStatus === undefined) {
+            if (addDays(new Date(contribution.data.contributionDueDate), 1)  < currentDate) {
+                contribution.data['contributionStatus'] = 'contributionOverdue';
+            } else {
+                contribution.data['contributionStatus'] = 'contributionDue';
+            }
+        }
+        return contribution;
+    });
+};
+
 const bindDisplayElements = fromStaticList => async (stage) => {
     stage.assignedTeamDisplay = await fromStaticList('S_TEAMS', stage.teamUUID, true);
     stage.caseTypeDisplayFull = await fromStaticList('S_CASETYPES', stage.caseType);
@@ -171,6 +202,11 @@ const bindDisplayElements = fromStaticList => async (stage) => {
         } else if (stage.data.DueDate) {
             stage.stageTypeWithDueDateDisplay = `${stage.stageTypeDisplay} due ${formatDate(stage.data.DueDate)}`;
         }
+    }
+
+    if (stage.data && stage.data.CaseContributions){
+        stage.contributions = highestPriorityContributionStatus(
+            decorateContributionsWithStatus(JSON.parse(stage.data.CaseContributions), new Date())).replace('contribution', '');
     }
 
     stage.primaryCorrespondentAndRefDisplay = {};
@@ -375,5 +411,7 @@ module.exports = {
     teamAdapter,
     workflowAdapter,
     stageAdapter,
-    bindDisplayElements
+    bindDisplayElements,
+    decorateContributionsWithStatus,
+    highestPriorityContributionStatus
 };
