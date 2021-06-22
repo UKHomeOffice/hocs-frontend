@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 
 export default class PhaseBannerComponent extends Component {
     render() {
-        const { feedback, phase, environment } = this.props;
+        const { feedback, phase, isNotProd } = this.props;
 
-        var envDisplay;
+        let envDisplay;
 
-        if (environment === 'NOTPROD') {
+        if (isNotProd) {
             envDisplay = <>This is a test system - do not upload real documents or information</>;
         } else {
             envDisplay = <>This is a new service – your <a href={feedback}>feedback</a> will help us to improve it.</>;
@@ -27,11 +27,11 @@ export default class PhaseBannerComponent extends Component {
 PhaseBannerComponent.propTypes = {
     feedback: PropTypes.string,
     phase: PropTypes.string,
-    environment: PropTypes.string
+    isNotProd: PropTypes.bool
 };
 
 PhaseBannerComponent.defaultProps = {
     feedback: '/',
     phase: 'PROTOTYPE',
-    environment: ''
+    isNotProd: false
 };

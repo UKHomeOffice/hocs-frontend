@@ -1,5 +1,5 @@
 const listService = require('./services/list');
-const { runtimeEnvironment } = require('./config');
+const { isNotProd } = require('./config');
 const uuid = require('uuid/v4');
 
 async function renderConfig() {
@@ -32,7 +32,7 @@ async function layoutConfig() {
                 isVisible: true,
                 phase: 'BETA',
                 feedback: 'mailto:HOCS@homeoffice.gov.uk',
-                environment: runtimeEnvironment
+                isNotProd: isNotProd
             },
         },
         footer: {
