@@ -1,5 +1,6 @@
 const isProduction = process.env.NODE_ENV === 'production';
 const workflowAuth = (process.env.WORKFLOW_BASIC_AUTH || 'UNSET:UNSET').split(':');
+const runtimeEnvironment = process.env.RUNTIME_DISPLAY_ENV;
 
 const config = {
     applications: {
@@ -40,5 +41,6 @@ module.exports = {
             throw new Error('Specified application configuration does not exist');
         }
     },
-    isProduction
+    isProduction,
+    runtimeEnvironment
 };
