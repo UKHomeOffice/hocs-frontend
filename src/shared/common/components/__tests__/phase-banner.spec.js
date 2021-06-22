@@ -19,12 +19,12 @@ describe('Phase Banner component', () => {
     });
     it('should display the correct test notice when isNotProd === 1', () => {
         expect(
-            render(<PhaseBanner isNotProd={1} />)
+            render(<PhaseBanner isNotProd={true} />)
         ).toMatchSnapshot();
     });
     it('should display the correct test notice when isNotProd === 0', () => {
         expect(
-            render(<PhaseBanner isNotProd={0} />)
+            render(<PhaseBanner isNotProd={false} />)
         ).toMatchSnapshot();
     });
 });
