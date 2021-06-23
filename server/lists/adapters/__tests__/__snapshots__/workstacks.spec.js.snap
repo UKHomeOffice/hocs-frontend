@@ -302,6 +302,16 @@ Object {
       "type": "workflow",
       "value": "WCS",
     },
+    Card {
+      "count": 1,
+      "label": "MOCK_CASETYPE",
+      "tags": Object {
+        "allocated": 0,
+        "overdue": 0,
+      },
+      "type": "workflow",
+      "value": "FOI",
+    },
   ],
   "items": Array [
     Object {
@@ -424,6 +434,40 @@ Object {
       },
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234568/19",
+      },
+      "stageType": "A",
+      "stageTypeDisplay": "MOCK_STAGETYPE",
+      "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE",
+      "teamUUID": 2,
+      "userUUID": 2,
+    },
+    Object {
+      "FOIRequesterDisplay": "testNameFOIRequester",
+      "active": true,
+      "applicantOrConstituentCorrespondentDisplay": "",
+      "assignedTeamDisplay": "MOCK_TEAM",
+      "assignedUserDisplay": "MOCK_USER",
+      "caseReference": "A/1234568/19",
+      "caseType": "FOI",
+      "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "correspondents": Object {
+        "correspondents": Array [
+          Object {
+            "fullname": "testNameFOIRequester",
+            "is_primary": "true",
+            "uuid": "uuid123",
+          },
+        ],
+      },
+      "data": Object {
+        "CaseContributions": "[{}]",
+      },
+      "deadline": "2200-02-03",
+      "deadlineDisplay": "03/02/2200",
+      "memberCorrespondentDisplay": "",
+      "primaryCorrespondentAndRefDisplay": Object {
+        "caseReference": "A/1234568/19",
+        "primaryCorrespondentFullName": "testNameFOIRequester",
       },
       "stageType": "A",
       "stageTypeDisplay": "MOCK_STAGETYPE",
@@ -797,6 +841,18 @@ Object {
       "userUUID": 2,
     },
   ],
+  "label": "MOCK_STAGETYPE",
+  "teamMembers": Array [],
+}
+`;
+
+exports[`Workflow Workstack Adapter should add the primary correspondent to FOIRequester field for FOI case type 1`] = `
+Object {
+  "allocateToTeamEndpoint": "/allocate/team",
+  "allocateToUserEndpoint": "/allocate/user",
+  "allocateToWorkstackEndpoint": "/unallocate/",
+  "columns": Array [],
+  "items": Array [],
   "label": "MOCK_STAGETYPE",
   "teamMembers": Array [],
 }

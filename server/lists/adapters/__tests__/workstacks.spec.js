@@ -296,6 +296,21 @@ describe('Team Workstack Adapter', () => {
                     data: {},
                     assignedTopic: mockTopic
                 },
+                {
+                    correspondents: {
+                        correspondents: [ { fullname: 'testNameFOIRequester', uuid: 'uuid123', is_primary: 'true' } ]
+                    },
+                    teamUUID: 2,
+                    caseType: 'FOI',
+                    stageType: 'A',
+                    userUUID: 2,
+                    deadline: '2200-02-03',
+                    caseReference: 'A/1234568/19',
+                    active: true,
+                    data: {
+                        CaseContributions: '[{}]',
+                    }
+                }
             ]
         };
 
@@ -1020,6 +1035,39 @@ describe('Workflow Workstack Adapter', () => {
                     deadline: '2200-01-03',
                     caseReference: 'COMP/1234568/19',
                     active: true,
+                }
+            ]
+        };
+
+        const result = await stageAdapter(mockData, {
+            user: mockUser,
+            fromStaticList: mockFromStaticList,
+            logger: mockLogger,
+            teamId: 2,
+            workflowId: 'WCS',
+            stageId: 'A',
+            configuration: mockConfiguration
+        });
+        expect(result).toMatchSnapshot();
+    });
+
+    it('should add the primary correspondent to FOIRequester field for FOI case type', async () => {
+        const mockData = {
+            stages: [
+                {
+                    correspondents: {
+                        correspondents: [ { fullname: 'testNameFOIRequester', uuid: 'uuid123', is_primary: 'true' } ]
+                    },
+                    teamUUID: 2,
+                    caseType: 'FOI',
+                    stageType: 'A',
+                    userUUID: 2,
+                    deadline: '2200-01-03',
+                    caseReference: 'A/1234568/19',
+                    active: true,
+                    data: {
+                        CaseContributions: '[{}]',
+                    }
                 }
             ]
         };
