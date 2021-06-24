@@ -824,3 +824,12 @@ $border-colour: govuk-colour("mid-grey");
   padding: 0px;
   margin: 0px;
 }
+
+table.overview td a {
+  color: black;
+  text-decoration: none;
+}
+
+table.overview tbody tr:hover {
+  background-color: #f7f7f7;
+}

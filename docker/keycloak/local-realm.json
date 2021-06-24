@@ -319,12 +319,14 @@
   "otpPolicyLookAheadWindow" : 1,
   "otpPolicyPeriod" : 30,
   "otpSupportedApplications" : [ "FreeOTP", "Google Authenticator" ],
-  "users" : [ {
+  "users" : [
+    {
     "id" : "ed00bf4a-1a74-4d0b-a3d0-379c12c5e3ff",
     "createdTimestamp" : 1541622074757,
     "username" : "admin",
     "enabled" : true,
     "totp" : false,
+    "email" : "admin@test.com",
     "emailVerified" : true,
     "credentials" : [ {
       "type" : "password",
@@ -354,6 +356,7 @@
       "username" : "caseworker1",
       "enabled" : true,
       "totp" : false,
+      "email" : "caseworker1@test.com",
       "emailVerified" : false,
       "credentials" : [ ],
       "disableableCredentialTypes" : [ ],
@@ -420,12 +423,88 @@
         "/8y1MlJLNRlKjNtnjuimQtw",
         "/RRklkkIoSnC4SFM-FYnPjA"]
     },
+
+
+
+    {
+      "id" : "2741f4fc-b6f7-11eb-8529-0242ac130003",
+      "createdTimestamp" : 1544174581362,
+      "username" : "caseworker2",
+      "enabled" : true,
+      "totp" : false,
+      "email" : "caseworker2@test.com",
+      "emailVerified" : false,
+      "credentials" : [ ],
+      "disableableCredentialTypes" : [ ],
+      "requiredActions" : [ ],
+      "realmRoles" : [ "offline_access", "uma_authorization" ],
+      "clientRoles" : {
+        "account" : [ "view-profile", "manage-account" ]
+      },
+      "notBefore" : 0,
+      "groups" : [
+        "/EREREREREREREREREREREQ",
+        "/MzMzMzMzMzMzMzMzMzMzMw",
+        "/RERERCIiIiIiIiIiIiIiIg"]
+    },{
+      "id" : "2741f790-b6f7-11eb-8529-0242ac130003",
+      "createdTimestamp" : 1544174581362,
+      "username" : "caseworker3",
+      "enabled" : true,
+      "totp" : false,
+      "email" : "caseworker3@test.com",
+      "emailVerified" : false,
+      "credentials" : [ ],
+      "disableableCredentialTypes" : [ ],
+      "requiredActions" : [ ],
+      "realmRoles" : [ "offline_access", "uma_authorization" ],
+      "clientRoles" : {
+        "account" : [ "view-profile", "manage-account" ]
+      },
+      "notBefore" : 0,
+      "groups" : [
+        "/EREREREREREREREREREREQ",
+        "/MzMzMzMzMzMzMzMzMzMzMw",
+        "/RERERCIiIiIiIiIiIiIiIg"]
+    },{
+      "id" : "2741f95c-b6f7-11eb-8529-0242ac130003",
+      "createdTimestamp" : 1544174581362,
+      "username" : "caseworker4",
+      "enabled" : true,
+      "totp" : false,
+      "email" : "caseworker4@test.com",
+      "emailVerified" : false,
+      "credentials" : [ ],
+      "disableableCredentialTypes" : [ ],
+      "requiredActions" : [ ],
+      "realmRoles" : [ "offline_access", "uma_authorization" ],
+      "clientRoles" : {
+        "account" : [ "view-profile", "manage-account" ]
+      },
+      "notBefore" : 0,
+      "groups" : [
+        "/EREREREREREREREREREREQ",
+        "/MzMzMzMzMzMzMzMzMzMzMw",
+        "/RERERCIiIiIiIiIiIiIiIg"]
+    },
+
+
+
+
+
+
+
+
+
+
+
     {
       "id" : "968672ca-9fc1-491c-b2b9-d13c58b12d7a",
       "createdTimestamp" : 1544174663425,
       "username" : "minowner",
       "enabled" : true,
       "totp" : false,
+      "email" : "minowner@test.com",
       "emailVerified" : false,
       "credentials" : [ {
         "type" : "password",
@@ -447,12 +526,14 @@
       },
       "notBefore" : 0,
       "groups" : [ "/EREREREREREREREREREREQ", "/MzMzMzMzMzMzMzMzMzMzMw" ]
-    }, {
+    },
+    {
       "id" : "fc72ee08-7972-40df-a801-501d3a271fa3",
       "createdTimestamp" : 1544174692718,
       "username" : "minreader",
       "enabled" : true,
       "totp" : false,
+      "email" : "minreader@test.com",
       "emailVerified" : false,
       "credentials" : [ {
         "type" : "password",

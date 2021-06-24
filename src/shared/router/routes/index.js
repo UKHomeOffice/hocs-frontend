@@ -6,6 +6,7 @@ import MainPage from '../../pages/dashboard.jsx';
 import WorkstackPage from '../../pages/workstack.jsx';
 import Search from '../../pages/search.jsx';
 import StandardLinesView from '../../pages/standardLines/standardLinesView.jsx';
+import OverviewView from '../../pages/overview/overviewView.jsx';
 
 const routes = [
     {
@@ -141,6 +142,12 @@ const routes = [
         exact: true,
         component: StandardLinesView,
         title: 'View Standard Lines'
+    },
+    {
+        path: '/overview',
+        exact: true,
+        component: OverviewView,
+        title: 'Overview'
     },
     {
         component: Error,
