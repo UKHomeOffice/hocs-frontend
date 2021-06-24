@@ -1002,7 +1002,7 @@ describe('decorateContributionsWithStatus', () => {
         var contributionTwo = '{"contributionDueDate":"2021-06-20","contributionRequestDate":"2021-06-18"}';
         var contributionThree = '{"contributionDueDate":"2021-06-02","contributionRequestDate":"2021-06-18"}';
         var contributionFour = '{"contributionDueDate":"2021-06-02","contributionRequestDate":"2021-06-18","contributionStatus":"contributionCancelled"}';
-        var array = '{"caseContributions":[]}'
+        var array = '{"caseContributions":[]}';
 
         var obj = JSON.parse(array);
         obj['caseContributions'].push(contributionOne);
@@ -1011,7 +1011,6 @@ describe('decorateContributionsWithStatus', () => {
         obj['caseContributions'].push(contributionFour);
 
         const result = decorateContributionsWithStatus(obj.caseContributions, currentDate);
- 
         expect(result[0].contributionStatus).toEqual('contributionReceived');
         expect(result[1].contributionStatus).toEqual('contributionDue');
         expect(result[2].contributionStatus).toEqual('contributionOverdue');

@@ -393,7 +393,6 @@ class WorkstackAllocate extends Component {
                         .map(contribution => JSON.parse(contribution).contributionDueDate)
                         .sort()
                         .shift();
-                    
                     if (dueContribution && new Date(dueContribution) < new Date()) {
                         return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell indicator'>
                             {value && <span title={value} className='indicator-red'>
