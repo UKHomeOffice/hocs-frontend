@@ -293,7 +293,7 @@ module.exports = {
         },
         DRAFT_TEAMS: {
             client: 'INFO',
-            endpoint: '/teams/drafters',
+            endpoint: '/team/stage/DCU_MIN_INITIAL_DRAFT',
             adapter: teamsAdapter
         },
         PRIVATE_OFFICE_TEAMS: {
