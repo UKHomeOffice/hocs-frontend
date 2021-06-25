@@ -66,9 +66,9 @@ async function handleActionSuccess(response, workflow, form) {
     }
 }
 
-function handleWorkflowSuccess(response, { caseId, stageId }) {
+function handleWorkflowSuccess(response, { caseId }) {
     if (response.data && response.data.form) {
-        return { callbackUrl: `/case/${caseId}/stage/${stageId}` };
+        return { callbackUrl: `/case/${caseId}/stage/${response.data.stageUUID}` };
     } else {
         return { callbackUrl: '/' };
     }
