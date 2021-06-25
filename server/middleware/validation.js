@@ -35,7 +35,7 @@ const validators = {
         return null;
     },
     isValidDay({ label, value, message }) {
-        if (value) {
+        if (value && getDay(value)) {
             if (getDay(value) > new Date(getYear(value), getMonth(value), 0).getDate() || getDay(value) < 1) {
                 return message || validationErrors.isValidDay(label);
             }
@@ -43,7 +43,7 @@ const validators = {
         return null;
     },
     isValidMonth({ label, value, message }) {
-        if (value) {
+        if (value && getMonth(value)) {
             if (getMonth(value) < 1 || getMonth(value) > 12) {
                 return message || validationErrors.isValidMonth(label);
             }
@@ -51,11 +51,11 @@ const validators = {
         return null;
     },
     isYearWithinRange({ label, value, message }) {
-        if (value) {
+        if (value && getYear(value)) {
             if (getYear(value) > MAX_ALLOWABLE_YEAR) {
                 return message || validationErrors.isBeforeMaxYear(label);
             }
-            else if( getYear(value) < MIN_ALLOWABLE_YEAR){
+            else if(getYear(value) < MIN_ALLOWABLE_YEAR){
                 return message || validationErrors.isAfterMinYear(label);
             }
         }
@@ -187,9 +187,25 @@ const validators = {
     }
 };
 
-const getDay = (date) => date.split('-')[2];
-const getMonth = (date) => date.split('-')[1];
-const getYear = (date) => date.split('-')[0];
+const getDay = (date) => {
+    return getDateSection(date, 2);
+};
+
+const getMonth = (date) => {
+    return getDateSection(date, 1);
+};
+
+const getYear = (date) => {
+    return getDateSection(date, 0);
+};
+
+const getDateSection = (date, section) => {
+    const split = date.split('-');
+    if(split.length >= section){
+        return split[section];
+    }
+    return undefined;
+}
 
 function validateConditionalRadioContentIfExists(data, name, choices, validator, result) {
     const conditionalRadioButtonTextFieldId = `${data[name]}Text`;
