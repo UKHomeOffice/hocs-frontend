@@ -389,8 +389,9 @@ class WorkstackAllocate extends Component {
             case ColumnRenderer.CONTRIBUTIONS_WARNING:
                 if (row.somu && row.somu.caseContributions) {
                     const dueContribution = row.somu.caseContributions
-                        .filter(contribution => !JSON.parse(contribution).contributionStatus)
-                        .map(contribution => JSON.parse(contribution).contributionDueDate)
+                        .map(contribution => JSON.parse(contribution))
+                        .filter(contribution => !contribution.contributionStatus)
+                        .map(contribution => contribution.contributionDueDate)
                         .sort()
                         .shift();
                     if (dueContribution && new Date(dueContribution) < new Date()) {

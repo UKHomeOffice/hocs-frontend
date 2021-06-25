@@ -124,9 +124,9 @@ const highestPriorityContributionStatus = (decoratedContributions) => {
     };
     let highestPriority = 0;
 
-    decoratedContributions.map(decoratedContribution => {
-        if(contributionStatusEnum[decoratedContribution.contributionStatus] > highestPriority) {
-            highestPriority = contributionStatusEnum[decoratedContribution.contributionStatus];
+    decoratedContributions.forEach(contribution => {
+        if(contributionStatusEnum[contribution.contributionStatus] > highestPriority) {
+            highestPriority = contributionStatusEnum[contribution.contributionStatus];
         }
     });
     return Object.keys(contributionStatusEnum).find(key => contributionStatusEnum[key] === highestPriority);

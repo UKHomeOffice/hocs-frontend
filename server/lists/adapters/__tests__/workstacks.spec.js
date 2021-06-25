@@ -998,13 +998,13 @@ describe('decorateContributionsWithStatus', () => {
     it('returns the decorated contributions with statuses', () => {
         const currentDate = new Date('2021-06-18 12:30');
 
-        var contributionOne = '{"contributionRequestDate":"2021-06-18","contributionDueDate":"2021-06-02","contributionStatus":"contributionReceived"}';
-        var contributionTwo = '{"contributionDueDate":"2021-06-20","contributionRequestDate":"2021-06-18"}';
-        var contributionThree = '{"contributionDueDate":"2021-06-02","contributionRequestDate":"2021-06-18"}';
-        var contributionFour = '{"contributionDueDate":"2021-06-02","contributionRequestDate":"2021-06-18","contributionStatus":"contributionCancelled"}';
-        var array = '{"caseContributions":[]}';
+        const contributionOne = '{"contributionRequestDate":"2021-06-18","contributionDueDate":"2021-06-02","contributionStatus":"contributionReceived"}';
+        const contributionTwo = '{"contributionDueDate":"2021-06-20","contributionRequestDate":"2021-06-18"}';
+        const contributionThree = '{"contributionDueDate":"2021-06-02","contributionRequestDate":"2021-06-18"}';
+        const contributionFour = '{"contributionDueDate":"2021-06-02","contributionRequestDate":"2021-06-18","contributionStatus":"contributionCancelled"}';
+        const array = '{"caseContributions":[]}';
 
-        var obj = JSON.parse(array);
+        const obj = JSON.parse(array);
         obj['caseContributions'].push(contributionOne);
         obj['caseContributions'].push(contributionTwo);
         obj['caseContributions'].push(contributionThree);
