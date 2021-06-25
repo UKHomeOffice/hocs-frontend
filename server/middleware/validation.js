@@ -205,7 +205,7 @@ const getDateSection = (date, section) => {
         return split[section];
     }
     return undefined;
-}
+};
 
 function validateConditionalRadioContentIfExists(data, name, choices, validator, result) {
     const conditionalRadioButtonTextFieldId = `${data[name]}Text`;
