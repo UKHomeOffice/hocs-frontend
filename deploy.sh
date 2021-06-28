@@ -19,6 +19,7 @@ if [[ ${KUBE_NAMESPACE} == *prod ]]; then
     export ALLOWED_IPS=${POISE_IPS}
     export KUBE_SERVER=https://kube-api-prod.prod.acp.homeoffice.gov.uk
     export UPTIME_PERIOD="Mon-Sun 05:00-23:00 Europe/London"
+    export KUBE_IS_NOTPROD=0
   if [[ "${KUBE_NAMESPACE}" == "wcs-prod" ]] ; then
       export DOMAIN_NAME="www.wcs.homeoffice.gov.uk"
       export INTERNAL_DOMAIN_NAME=''
@@ -39,6 +40,7 @@ else
 
     export DOMAIN_NAME="${SUBNAMESPACE}.${DOMAIN}-notprod.homeoffice.gov.uk"
     export INTERNAL_DOMAIN_NAME="${SUBNAMESPACE}.internal.${DOMAIN}-notprod.homeoffice.gov.uk"
+    export KUBE_IS_NOTPROD=1
 
     # but remove the ingress for demo (preprod)
     # so at least one non-prod namespace has prod-like keycloak-proxy settings
