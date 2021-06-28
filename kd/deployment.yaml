@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   name: hocs-frontend
   labels:
-    version: {{.VERSION}}
+    version: "{{.VERSION}}"
   annotations:
     downscaler/uptime: {{.UPTIME_PERIOD}}
 spec:
@@ -22,7 +22,7 @@ spec:
       labels:
         name: hocs-frontend
         role: hocs-frontend
-        version: {{.VERSION}}
+        version: "{{.VERSION}}"
     spec:
       containers:
       - name: certs
