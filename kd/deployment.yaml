@@ -321,7 +321,7 @@ spec:
           - name: COUNTDOWN_FOR_SECONDS
             value: '60'
           - name: IS_NOTPROD
-            value: {{.KUBE_IS_NOTPROD}}
+            value: '{{.KUBE_IS_NOTPROD}}'
         resources:
           limits:
             cpu: 900m
