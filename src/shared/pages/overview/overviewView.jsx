@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
-import { ApplicationConsumer } from '../../contexts/application.jsx';
+import { ApplicationConsumer, Context } from '../../contexts/application.jsx';
 import axios from 'axios';
 import { useTable, usePagination, useSortBy, useFilters, useAsyncDebounce } from 'react-table';
 import { Link, useHistory } from 'react-router-dom';
 import 'regenerator-runtime/runtime'; //https://github.com/tannerlinsley/react-table/issues/2071#issuecomment-679999096
+import { updateApiStatus } from '../../contexts/actions/index.jsx';
+import status from '../../helpers/api-status.js';
 
 function DefaultColumnFilter({
     column: { filterValue, setFilter },
@@ -215,6 +217,7 @@ function Table({
 
 const OverviewView = () => {
 
+    const { dispatch } = useContext(Context);
     const [data, setData] = useState([]);
     const [pageCount, setPageCount] = React.useState(0);
     const [permittedCaseTypes, setPermittedCaseTypes] = React.useState([]);
@@ -225,6 +228,9 @@ const OverviewView = () => {
         axios.get('/api/overview/caseTypes')
             .then(response => {
                 setPermittedCaseTypes(response.data);
+            })
+            .catch(() => {
+                dispatch(updateApiStatus(status.REQUEST_OVERVIEW_PERMITTED_CASES_DATA_FAILURE));
             });
     }, []);
 
@@ -242,6 +248,9 @@ const OverviewView = () => {
                 .then(response => {
                     setData(response.data.content);
                     setPageCount(response.data.totalPages);
+                })
+                .catch(() => {
+                    dispatch(updateApiStatus(status.REQUEST_OVERVIEW_DATA_FAILURE));
                 });
         }
     }, []);
