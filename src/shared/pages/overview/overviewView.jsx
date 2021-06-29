@@ -21,15 +21,10 @@ function DefaultColumnFilter({
     );
 }
 
-// This is a custom filter UI for selecting
-// a unique option from a list
 function CaseTypeFilter({
     column: { filterValue, setFilter },
     permittedCaseTypes
 }) {
-
-    // Calculate the options for filtering
-    // using the preFilteredRows
     const options = React.useMemo(() => {
         const options = new Set();
         permittedCaseTypes.forEach(pc => {
@@ -110,10 +105,8 @@ function Table({
     usePagination
     );
 
-    // Debounce our onFetchData call for 100ms
     const fetchDataDebounced = useAsyncDebounce(fetchData, 500);
 
-    // Listen for changes in pagination and use the state to fetch our new data
     React.useEffect(() => {
         fetchDataDebounced({ pageIndex, pageSize, sortBy, filters });
     }, [fetchDataDebounced, pageIndex, pageSize, sortBy, filters]);
