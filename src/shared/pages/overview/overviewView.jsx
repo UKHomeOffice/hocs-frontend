@@ -23,7 +23,7 @@ function DefaultColumnFilter({
 
 // This is a custom filter UI for selecting
 // a unique option from a list
-function SelectColumnFilter({
+function CaseTypeFilter({
     column: { filterValue, setFilter },
     permittedCaseTypes
 }) {
@@ -144,11 +144,11 @@ function Table({
                 </div>
             </details>
             <table {...getTableProps()} className="govuk-table overview">
-                <thead>
+                <thead className="govuk-table__head">
                     {headerGroups.map((headerGroup, i) => (
-                        <tr key={i} {...headerGroup.getHeaderGroupProps()}>
+                        <tr key={i} {...headerGroup.getHeaderGroupProps()} className="govuk-table__row">
                             {headerGroup.headers.map((column, j) => (
-                                <th key={j} {...column.getHeaderProps()}>
+                                <th key={j} {...column.getHeaderProps()} className="govuk-table__header">
                                     <div>
                                         {column.canGroupBy ? (
                                         // If the column can be grouped, let's add a toggle
@@ -274,7 +274,7 @@ const OverviewView = () => {
             {
                 Header: 'Case Type',
                 accessor: 'caseType',
-                Filter: SelectColumnFilter,
+                Filter: CaseTypeFilter,
                 filter: 'includes',
             },
             {
@@ -341,7 +341,7 @@ DefaultColumnFilter.propTypes = {
     column: PropTypes.object.isRequired
 };
 
-SelectColumnFilter.propTypes = {
+CaseTypeFilter.propTypes = {
     column: PropTypes.object.isRequired,
     permittedCaseTypes: PropTypes.array.isRequired
 };
