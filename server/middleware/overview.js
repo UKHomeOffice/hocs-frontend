@@ -19,11 +19,32 @@ const getOverview = async (req, res, next) => {
     }
 };
 
+const getCaseTypes = async (req, res, next) => {
+    const logger = getLogger(req.request);
+
+    try {
+        logger.info('REQUEST_CASE_TYPES', { ...req.params });
+        const response = await req.listService.fetch('CASE_TYPES');
+        res.locals.caseTypes = response;
+        next();
+    } catch (error) {
+        console.log(error);
+        logger.error('REQUEST_CASE_TYPES_FAILURE', { message: error.message, stack: error.stack });
+        next(error);
+    }
+};
+
 const overviewApiResponseMiddleware = (_, res) => {
     res.json(res.locals.overview);
 };
 
+const caseTypeApiResponseMiddleware = (_, res) => {
+    res.json(res.locals.caseTypes);
+};
+
 module.exports = {
     getOverview,
-    overviewApiResponseMiddleware
+    getCaseTypes,
+    overviewApiResponseMiddleware,
+    caseTypeApiResponseMiddleware
 };

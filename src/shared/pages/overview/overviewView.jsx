@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { ApplicationConsumer } from '../../contexts/application.jsx';
 import axios from 'axios';
-import { useTable, usePagination, useSortBy, useFilters } from 'react-table';
+import { useTable, usePagination, useSortBy, useFilters, useAsyncDebounce } from 'react-table';
 import { Link, useHistory } from 'react-router-dom';
+import 'regenerator-runtime/runtime'; //https://github.com/tannerlinsley/react-table/issues/2071#issuecomment-679999096
 
 function DefaultColumnFilter({
     column: { filterValue, setFilter },
@@ -20,24 +21,37 @@ function DefaultColumnFilter({
     );
 }
 
-function CaseTypeFilter({
+// This is a custom filter UI for selecting
+// a unique option from a list
+function SelectColumnFilter({
     column: { filterValue, setFilter },
+    permittedCaseTypes
 }) {
+
+    // Calculate the options for filtering
+    // using the preFilteredRows
+    const options = React.useMemo(() => {
+        const options = new Set();
+        permittedCaseTypes.forEach(pc => {
+            options.add(pc);
+        });
+        return [...options.values()];
+    }, [permittedCaseTypes]);
+
     return (
         <select
+            className="govuk-select"
             value={filterValue}
             onChange={e => {
                 setFilter(e.target.value || undefined);
             }}
-            className="govuk-select"
         >
             <option value="">All</option>
-            <option value="MIN">DCU Ministerial</option>
-            <option value="TRO">DCU Treat Official</option>
-            <option value="DTEN">DCU Number 10</option>
-            <option value="MPAM">MPAM</option>
-            <option value="MTS">MTS Case</option>
-            <option value="FOI">FOI</option>
+            {options.map((option, i) => (
+                <option key={i} value={option.value}>
+                    {option.label}
+                </option>
+            ))}
         </select>
     );
 }
@@ -47,6 +61,7 @@ function Table({
     data,
     fetchData,
     pageCount: controlledPageCount,
+    permittedCaseTypes
 }) {
 
     const history = useHistory();
@@ -87,17 +102,21 @@ function Table({
         manualPagination: true,
         manualSortBy: true,
         manualFilters: true,
-        pageCount: controlledPageCount
+        pageCount: controlledPageCount,
+        permittedCaseTypes
     },
     useFilters,
     useSortBy,
     usePagination
     );
 
+    // Debounce our onFetchData call for 100ms
+    const fetchDataDebounced = useAsyncDebounce(fetchData, 500);
+
     // Listen for changes in pagination and use the state to fetch our new data
     React.useEffect(() => {
-        fetchData({ pageIndex, pageSize, sortBy, filters });
-    }, [fetchData, pageIndex, pageSize, sortBy, filters]);
+        fetchDataDebounced({ pageIndex, pageSize, sortBy, filters });
+    }, [fetchDataDebounced, pageIndex, pageSize, sortBy, filters]);
 
     return (
         <>
@@ -125,17 +144,29 @@ function Table({
                 </div>
             </details>
             <table {...getTableProps()} className="govuk-table overview">
-                <thead className="govuk-table__head">
+                <thead>
                     {headerGroups.map((headerGroup, i) => (
-                        <tr key={i} {...headerGroup.getHeaderGroupProps()} className="govuk-table__row">
+                        <tr key={i} {...headerGroup.getHeaderGroupProps()}>
                             {headerGroup.headers.map((column, j) => (
-                                <th key={j} {...column.getHeaderProps()} className="govuk-table__header">
-                                    <div {...column.getSortByToggleProps()} style={{ cursor:'pointer', height: 30, display: 'flex', flexDirection: 'row' }} >
-                                        {column.render('Header')}
-                                        <div style={{ width: 20 }} >
-                                            {column.isSorted ? column.isSortedDesc ? ' 🔽' : ' 🔼' : ''}
-                                        </div>
+                                <th key={j} {...column.getHeaderProps()}>
+                                    <div>
+                                        {column.canGroupBy ? (
+                                        // If the column can be grouped, let's add a toggle
+                                            <span {...column.getGroupByToggleProps()}>
+                                                {column.isGrouped ? '🛑 ' : '👊 '}
+                                            </span>
+                                        ) : null}
+                                        <span {...column.getSortByToggleProps()}>
+                                            {column.render('Header')}
+                                            {/* Add a sort direction indicator */}
+                                            {column.isSorted
+                                                ? column.isSortedDesc
+                                                    ? ' 🔽'
+                                                    : ' 🔼'
+                                                : ''}
+                                        </span>
                                     </div>
+                                    {/* Render the columns filter UI */}
                                     <div>{column.canFilter ? column.render('Filter') : null}</div>
                                 </th>
                             ))}
@@ -197,8 +228,16 @@ const OverviewView = () => {
 
     const [data, setData] = useState([]);
     const [pageCount, setPageCount] = React.useState(0);
+    const [permittedCaseTypes, setPermittedCaseTypes] = React.useState([]);
 
     const fetchIdRef = React.useRef(0);
+
+    useEffect(() => {
+        axios.get('/api/overview/caseTypes')
+            .then(response => {
+                setPermittedCaseTypes(response.data);
+            });
+    }, []);
 
     const fetchData = React.useCallback(({ pageSize, pageIndex, sortBy, filters }) => {
         // This will get called when the table needs new data
@@ -235,9 +274,10 @@ const OverviewView = () => {
             {
                 Header: 'Case Type',
                 accessor: 'caseType',
-                Filter: CaseTypeFilter,
+                Filter: SelectColumnFilter,
                 filter: 'includes',
-            },            {
+            },
+            {
                 Header: 'Stage',
                 accessor: 'stageType',
                 show: false
@@ -266,6 +306,12 @@ const OverviewView = () => {
                 disableFilters: true
             },
             {
+                Header: 'Age',
+                accessor: 'age',
+                show: false,
+                disableFilters: true
+            },
+            {
                 Header: 'Days Until Deadline',
                 accessor: 'daysUntilDeadline',
                 show: false,
@@ -279,7 +325,9 @@ const OverviewView = () => {
     return <Table columns={columns}
         data={data}
         fetchData={fetchData}
-        pageCount={pageCount}/>;
+        pageCount={pageCount}
+        permittedCaseTypes={permittedCaseTypes}
+    />;
 };
 
 OverviewView.propTypes = {
@@ -293,8 +341,9 @@ DefaultColumnFilter.propTypes = {
     column: PropTypes.object.isRequired
 };
 
-CaseTypeFilter.propTypes = {
-    column: PropTypes.object.isRequired
+SelectColumnFilter.propTypes = {
+    column: PropTypes.object.isRequired,
+    permittedCaseTypes: PropTypes.array.isRequired
 };
 
 const WrappedOverview = (props) => (
