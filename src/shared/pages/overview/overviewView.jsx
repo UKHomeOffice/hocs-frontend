@@ -63,7 +63,6 @@ function Table({
 
     const defaultColumn = React.useMemo(
         () => ({
-            // Let's set up our default Filter UI
             Filter: DefaultColumnFilter,
         }),
         []
@@ -144,14 +143,12 @@ function Table({
                                 <th key={j} {...column.getHeaderProps()} className="govuk-table__header">
                                     <div>
                                         {column.canGroupBy ? (
-                                        // If the column can be grouped, let's add a toggle
                                             <span {...column.getGroupByToggleProps()}>
                                                 {column.isGrouped ? '🛑 ' : '👊 '}
                                             </span>
                                         ) : null}
                                         <span {...column.getSortByToggleProps()}>
                                             {column.render('Header')}
-                                            {/* Add a sort direction indicator */}
                                             {column.isSorted
                                                 ? column.isSortedDesc
                                                     ? ' 🔽'
@@ -159,7 +156,6 @@ function Table({
                                                 : ''}
                                         </span>
                                     </div>
-                                    {/* Render the columns filter UI */}
                                     <div>{column.canFilter ? column.render('Filter') : null}</div>
                                 </th>
                             ))}
@@ -233,11 +229,7 @@ const OverviewView = () => {
     }, []);
 
     const fetchData = React.useCallback(({ pageSize, pageIndex, sortBy, filters }) => {
-        // This will get called when the table needs new data
-
-        // Give this fetch an ID
         const fetchId = ++fetchIdRef.current;
-
         const filter = filters && filters.length ? filters.map((item) => `${item.id}:${item.value}`).join(',') : null;
         const sort = sortBy && sortBy.length ? sortBy.map((item) => `${item.id}:${item.desc ? 'desc' : 'asc'}`).join(',') : null;
         const queryParams = { pageIndex, pageSize, filter, sort };
@@ -245,8 +237,6 @@ const OverviewView = () => {
             .filter((x) => queryParams[x] !== undefined && queryParams[x] !== null)
             .map((x) => `${encodeURIComponent(x)}=${encodeURIComponent(queryParams[x])}`)
             .join('&');
-
-        // Only update the data if this is the latest fetch
         if (fetchId === fetchIdRef.current) {
             axios.get('/api/overview?' + queryString)
                 .then(response => {
