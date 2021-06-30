@@ -280,7 +280,7 @@ const OverviewView = () => {
             },
             {
                 Header: 'Allocated To',
-                accessor: 'allocatedUserEmail'
+                accessor: 'allocatedUsername'
             },
             {
                 Header: 'Owner',

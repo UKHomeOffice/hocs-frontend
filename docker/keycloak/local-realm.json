@@ -246,68 +246,68 @@
     }
   },
   "groups": [
-        {
-          "id": "59d92ab1-82f4-44b4-9c44-3f4e904bef8b",
-          "name": "RERERCIiIiIiIiIiIiIiIg",
-          "path": "/RERERCIiIiIiIiIiIiIiIg",
-          "attributes": {},
-          "realmRoles": [],
-          "clientRoles": {},
-          "subGroups": []
-        },
-        {
-          "id": "3a195c4d-6be8-420b-9f60-06003e3b575a",
-          "name": "MzMzMzMzMzMzMzMzMzMzMw",
-          "path": "/MzMzMzMzMzMzMzMzMzMzMw",
-          "attributes": {},
-          "realmRoles": [],
-          "clientRoles": {},
-          "subGroups": []
-        },
-        {
-          "id": "abf7617c-058c-4287-9f41-b95384fdbc7d",
-          "name": "Q0pOM0N_Tm2PBBTqQP2_og",
-          "path": "/Q0pOM0N_Tm2PBBTqQP2_og",
-          "attributes": {},
-          "realmRoles": [],
-          "clientRoles": {},
-          "subGroups": []
-        },
-        {
-          "id": "abf7617c-058c-4287-9f41-b95384fdbc7e",
-          "name": "iztDZqN8SLaydExQ-Ag4Qw",
-          "path": "/iztDZqN8SLaydExQ-Ag4Qw",
-          "attributes": {},
-          "realmRoles": [],
-          "clientRoles": {},
-          "subGroups": []
-        },
-        {
-          "id": "abf7617c-058c-4287-9f41-b95384fdbc7f",
-          "name": "EREREREREREREREREREREQ",
-          "path": "/EREREREREREREREREREREQ",
-          "attributes": {},
-          "realmRoles": [],
-          "clientRoles": {},
-          "subGroups": []
-        },
-        {
-          "id": "f32d4c94-92cd-4652-a336-d9e3ba2990b7",
-          "name": "8y1MlJLNRlKjNtnjuimQtw",
-          "path": "/8y1MlJLNRlKjNtnjuimQtw",
-          "attributes": {},
-          "realmRoles": [],
-          "clientRoles": {},
-          "subGroups": []
-        },
-        {
-          "id": "45192592-4228-4a70-b848-533e1589cf8c",
-          "name": "RRklkkIoSnC4SFM-FYnPjA",
-          "path": "/RRklkkIoSnC4SFM-FYnPjA",
-          "attributes": {},
-          "realmRoles": [],
-          "clientRoles": {},
-          "subGroups": []
+    {
+      "id": "59d92ab1-82f4-44b4-9c44-3f4e904bef8b",
+      "name": "RERERCIiIiIiIiIiIiIiIg",
+      "path": "/RERERCIiIiIiIiIiIiIiIg",
+      "attributes": {},
+      "realmRoles": [],
+      "clientRoles": {},
+      "subGroups": []
+    },
+    {
+      "id": "3a195c4d-6be8-420b-9f60-06003e3b575a",
+      "name": "MzMzMzMzMzMzMzMzMzMzMw",
+      "path": "/MzMzMzMzMzMzMzMzMzMzMw",
+      "attributes": {},
+      "realmRoles": [],
+      "clientRoles": {},
+      "subGroups": []
+    },
+    {
+      "id": "abf7617c-058c-4287-9f41-b95384fdbc7d",
+      "name": "Q0pOM0N_Tm2PBBTqQP2_og",
+      "path": "/Q0pOM0N_Tm2PBBTqQP2_og",
+      "attributes": {},
+      "realmRoles": [],
+      "clientRoles": {},
+      "subGroups": []
+    },
+    {
+      "id": "abf7617c-058c-4287-9f41-b95384fdbc7e",
+      "name": "iztDZqN8SLaydExQ-Ag4Qw",
+      "path": "/iztDZqN8SLaydExQ-Ag4Qw",
+      "attributes": {},
+      "realmRoles": [],
+      "clientRoles": {},
+      "subGroups": []
+    },
+    {
+      "id": "abf7617c-058c-4287-9f41-b95384fdbc7f",
+      "name": "EREREREREREREREREREREQ",
+      "path": "/EREREREREREREREREREREQ",
+      "attributes": {},
+      "realmRoles": [],
+      "clientRoles": {},
+      "subGroups": []
+    },
+    {
+      "id": "f32d4c94-92cd-4652-a336-d9e3ba2990b7",
+      "name": "8y1MlJLNRlKjNtnjuimQtw",
+      "path": "/8y1MlJLNRlKjNtnjuimQtw",
+      "attributes": {},
+      "realmRoles": [],
+      "clientRoles": {},
+      "subGroups": []
+    },
+    {
+      "id": "45192592-4228-4a70-b848-533e1589cf8c",
+      "name": "RRklkkIoSnC4SFM-FYnPjA",
+      "path": "/RRklkkIoSnC4SFM-FYnPjA",
+      "attributes": {},
+      "realmRoles": [],
+      "clientRoles": {},
+      "subGroups": []
     }
   ],
   "defaultRoles" : [ "uma_authorization", "offline_access" ],
@@ -319,14 +319,12 @@
   "otpPolicyLookAheadWindow" : 1,
   "otpPolicyPeriod" : 30,
   "otpSupportedApplications" : [ "FreeOTP", "Google Authenticator" ],
-  "users" : [
-    {
+  "users" : [ {
     "id" : "ed00bf4a-1a74-4d0b-a3d0-379c12c5e3ff",
     "createdTimestamp" : 1541622074757,
     "username" : "admin",
     "enabled" : true,
     "totp" : false,
-    "email" : "admin@test.com",
     "emailVerified" : true,
     "credentials" : [ {
       "type" : "password",
@@ -356,7 +354,6 @@
       "username" : "caseworker1",
       "enabled" : true,
       "totp" : false,
-      "email" : "caseworker1@test.com",
       "emailVerified" : false,
       "credentials" : [ ],
       "disableableCredentialTypes" : [ ],
@@ -367,11 +364,11 @@
       },
       "notBefore" : 0,
       "groups" : [
-                  "/EREREREREREREREREREREQ",
-                  "/MzMzMzMzMzMzMzMzMzMzMw",
-                  "/RERERCIiIiIiIiIiIiIiIg",
-                  "/8y1MlJLNRlKjNtnjuimQtw",
-                  "/RRklkkIoSnC4SFM-FYnPjA"]
+        "/EREREREREREREREREREREQ",
+        "/MzMzMzMzMzMzMzMzMzMzMw",
+        "/RERERCIiIiIiIiIiIiIiIg",
+        "/8y1MlJLNRlKjNtnjuimQtw",
+        "/RRklkkIoSnC4SFM-FYnPjA"]
     },
     {
       "id" : "39c44429-f3c2-4961-8124-ba09edb5fba0",
@@ -423,88 +420,12 @@
         "/8y1MlJLNRlKjNtnjuimQtw",
         "/RRklkkIoSnC4SFM-FYnPjA"]
     },
-
-
-
-    {
-      "id" : "2741f4fc-b6f7-11eb-8529-0242ac130003",
-      "createdTimestamp" : 1544174581362,
-      "username" : "caseworker2",
-      "enabled" : true,
-      "totp" : false,
-      "email" : "caseworker2@test.com",
-      "emailVerified" : false,
-      "credentials" : [ ],
-      "disableableCredentialTypes" : [ ],
-      "requiredActions" : [ ],
-      "realmRoles" : [ "offline_access", "uma_authorization" ],
-      "clientRoles" : {
-        "account" : [ "view-profile", "manage-account" ]
-      },
-      "notBefore" : 0,
-      "groups" : [
-        "/EREREREREREREREREREREQ",
-        "/MzMzMzMzMzMzMzMzMzMzMw",
-        "/RERERCIiIiIiIiIiIiIiIg"]
-    },{
-      "id" : "2741f790-b6f7-11eb-8529-0242ac130003",
-      "createdTimestamp" : 1544174581362,
-      "username" : "caseworker3",
-      "enabled" : true,
-      "totp" : false,
-      "email" : "caseworker3@test.com",
-      "emailVerified" : false,
-      "credentials" : [ ],
-      "disableableCredentialTypes" : [ ],
-      "requiredActions" : [ ],
-      "realmRoles" : [ "offline_access", "uma_authorization" ],
-      "clientRoles" : {
-        "account" : [ "view-profile", "manage-account" ]
-      },
-      "notBefore" : 0,
-      "groups" : [
-        "/EREREREREREREREREREREQ",
-        "/MzMzMzMzMzMzMzMzMzMzMw",
-        "/RERERCIiIiIiIiIiIiIiIg"]
-    },{
-      "id" : "2741f95c-b6f7-11eb-8529-0242ac130003",
-      "createdTimestamp" : 1544174581362,
-      "username" : "caseworker4",
-      "enabled" : true,
-      "totp" : false,
-      "email" : "caseworker4@test.com",
-      "emailVerified" : false,
-      "credentials" : [ ],
-      "disableableCredentialTypes" : [ ],
-      "requiredActions" : [ ],
-      "realmRoles" : [ "offline_access", "uma_authorization" ],
-      "clientRoles" : {
-        "account" : [ "view-profile", "manage-account" ]
-      },
-      "notBefore" : 0,
-      "groups" : [
-        "/EREREREREREREREREREREQ",
-        "/MzMzMzMzMzMzMzMzMzMzMw",
-        "/RERERCIiIiIiIiIiIiIiIg"]
-    },
-
-
-
-
-
-
-
-
-
-
-
     {
       "id" : "968672ca-9fc1-491c-b2b9-d13c58b12d7a",
       "createdTimestamp" : 1544174663425,
       "username" : "minowner",
       "enabled" : true,
       "totp" : false,
-      "email" : "minowner@test.com",
       "emailVerified" : false,
       "credentials" : [ {
         "type" : "password",
@@ -526,14 +447,12 @@
       },
       "notBefore" : 0,
       "groups" : [ "/EREREREREREREREREREREQ", "/MzMzMzMzMzMzMzMzMzMzMw" ]
-    },
-    {
+    }, {
       "id" : "fc72ee08-7972-40df-a801-501d3a271fa3",
       "createdTimestamp" : 1544174692718,
       "username" : "minreader",
       "enabled" : true,
       "totp" : false,
-      "email" : "minreader@test.com",
       "emailVerified" : false,
       "credentials" : [ {
         "type" : "password",
