@@ -322,6 +322,8 @@ spec:
             value: '60'
           - name: IS_NOTPROD
             value: '{{.KUBE_IS_NOTPROD}}'
+          - name: SHOW_STACKTRACE_ON_ERROR_PAGE
+            value: '{{.SHOW_ERROR_STACKTRACE}}'
         resources:
           limits:
             cpu: 900m
