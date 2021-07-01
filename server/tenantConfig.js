@@ -1,4 +1,5 @@
 const listService = require('./services/list');
+const { isNotProd } = require('./config');
 const uuid = require('uuid/v4');
 
 async function renderConfig() {
@@ -30,8 +31,9 @@ async function layoutConfig() {
             phaseBanner: {
                 isVisible: true,
                 phase: 'BETA',
-                feedback: 'mailto:HOCS@homeoffice.gov.uk'
-            }
+                feedback: 'mailto:HOCS@homeoffice.gov.uk',
+                isNotProd: isNotProd
+            },
         },
         footer: {
             isVisible: true,

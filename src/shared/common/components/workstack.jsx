@@ -41,11 +41,13 @@ const ColumnRenderer = {
     INDICATOR_GREEN: 'indicatorGreen',
     INDICATOR_RED: 'indicatorRed',
     WRAP_TEXT: 'wrapText',
-    TRUNCATE_TEXT: 'truncateText'
+    TRUNCATE_TEXT: 'truncateText',
+    CONTRIBUTIONS_WARNING: 'contributionsWarning'
 };
 
 const ColumnSortStrategy = {
-    FLOAT_TYPE: 'floatTypeStrategy'
+    FLOAT_TYPE: 'floatTypeStrategy',
+    CORRESPONDENT_TYPE: 'correspondentTypeStrategy'
 };
 
 const dataAdapters = {
@@ -134,6 +136,13 @@ class WorkstackAllocate extends Component {
         }
 
         return value;
+    }
+
+    getPrimaryCorrespondentDataValue(row, dataValueKey) {
+        if (dataValueKey === undefined) {
+            throw new Error('No data value key was specified');
+        }
+        return row.primaryCorrespondent[dataValueKey];
     }
 
     applyDataAdapter(value, colDataAdapter, dataValueKey, row) {
@@ -377,6 +386,23 @@ class WorkstackAllocate extends Component {
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell wrap-text'>{value}</td>;
             case ColumnRenderer.TRUNCATE_TEXT:
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell govuk-table__cell--truncated' title={value}>{value}</td>;
+            case ColumnRenderer.CONTRIBUTIONS_WARNING:
+                if (row.somu && row.somu.caseContributions) {
+                    const dueContribution = row.somu.caseContributions
+                        .map(contribution => JSON.parse(contribution))
+                        .filter(contribution => !contribution.contributionStatus)
+                        .map(contribution => contribution.contributionDueDate)
+                        .sort()
+                        .shift();
+                    if (dueContribution && new Date(dueContribution) < new Date()) {
+                        return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell indicator'>
+                            {value && <span title={value} className='indicator-red'>
+                                {value}
+                            </span>}
+                        </td>;
+                    }
+                }
+                return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>{value}</td>;
             default:
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>{value}</td>;
         }
@@ -434,6 +460,8 @@ class WorkstackAllocate extends Component {
             switch (sortColumn.sortStrategy) {
                 case ColumnSortStrategy.FLOAT_TYPE:
                     return this.floatSortStrategy(a, b, sortColumn);
+                case ColumnSortStrategy.CORRESPONDENT_TYPE:
+                    return this.primaryCorrespondentSortStrategy(a, b, sortColumn);
                 default:
                     return this.defaultSortStrategy(a, b, sortColumn);
             }
@@ -455,10 +483,19 @@ class WorkstackAllocate extends Component {
         return 0;
     }
 
+    primaryCorrespondentSortStrategy(a, b, sortColumn) {
+        const aValue = sortColumn ? (this.getPrimaryCorrespondentDataValue(a, sortColumn.dataValueKey) || '').toUpperCase() : a.index;
+        const bValue = sortColumn ? (this.getPrimaryCorrespondentDataValue(b, sortColumn.dataValueKey) || '').toUpperCase() : b.index;
+        return this.sortStringValues(aValue, bValue);
+    }
+
     defaultSortStrategy(a, b, sortColumn) {
         const aValue = sortColumn ? (this.getDataValue(a, sortColumn.dataValueKey) || '').toUpperCase() : a.index;
         const bValue = sortColumn ? (this.getDataValue(b, sortColumn.dataValueKey) || '').toUpperCase() : b.index;
+        return this.sortStringValues(aValue, bValue);
+    }
 
+    sortStringValues(aValue, bValue) {
         if (aValue > bValue) {
             return 1 * this.state.sort.direction;
         } else if (aValue < bValue) {
@@ -526,6 +563,7 @@ class WorkstackAllocate extends Component {
             </Fragment>
         );
     }
+
 }
 
 WorkstackAllocate.propTypes = {
