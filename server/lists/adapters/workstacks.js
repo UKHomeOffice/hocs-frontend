@@ -124,9 +124,9 @@ const highestPriorityContributionStatus = (decoratedContributions) => {
     };
     let highestPriority = 0;
 
-    decoratedContributions.map(decoratedContribution => {
-        if(decoratedContribution.data && contributionStatusEnum[decoratedContribution.data.contributionStatus] > highestPriority) {
-            highestPriority = contributionStatusEnum[decoratedContribution.data.contributionStatus];
+    decoratedContributions.forEach(contribution => {
+        if(contributionStatusEnum[contribution.contributionStatus] > highestPriority) {
+            highestPriority = contributionStatusEnum[contribution.contributionStatus];
         }
     });
     return Object.keys(contributionStatusEnum).find(key => contributionStatusEnum[key] === highestPriority);
@@ -134,14 +134,15 @@ const highestPriorityContributionStatus = (decoratedContributions) => {
 
 const decorateContributionsWithStatus = (contributions, currentDate) => {
     return contributions.map(contribution => {
-        if (contribution.data && contribution.data.contributionStatus === undefined) {
-            if (addDays(new Date(contribution.data.contributionDueDate), 1)  < currentDate) {
-                contribution.data['contributionStatus'] = 'contributionOverdue';
+        const contributionObject = JSON.parse(contribution);
+        if (contributionObject.contributionStatus !== 'contributionReceived' && contributionObject.contributionStatus !== 'contributionCancelled') {
+            if (addDays(new Date(contributionObject.contributionDueDate), 1)  < currentDate) {
+                contributionObject['contributionStatus'] = 'contributionOverdue';
             } else {
-                contribution.data['contributionStatus'] = 'contributionDue';
+                contributionObject['contributionStatus'] = 'contributionDue';
             }
         }
-        return contribution;
+        return contributionObject;
     });
 };
 
@@ -204,9 +205,9 @@ const bindDisplayElements = fromStaticList => async (stage) => {
         }
     }
 
-    if (stage.data && stage.data.CaseContributions){
+    if (stage.somu && stage.somu.caseContributions){
         stage.contributions = highestPriorityContributionStatus(
-            decorateContributionsWithStatus(JSON.parse(stage.data.CaseContributions), new Date())).replace('contribution', '');
+            decorateContributionsWithStatus(stage.somu.caseContributions, new Date())).replace('contribution', '');
     }
 
     stage.primaryCorrespondentAndRefDisplay = {};
