@@ -86,13 +86,13 @@ function handleWorkflowSuccess(response, { caseId, stageId }) {
 }
 
 async function appendAutoNavigateFirstStageUrl(clientResponse, context, headers) {
-    const encodedReference = encodeURIComponent(clientResponse.link);
-    const stageIdArray = await getStageIdByCaseId(encodedReference, headers);
-    const stageUUID = stageIdArray.data.stages[0].uuid;
-    const caseUUID = stageIdArray.data.stages[0].caseUUID;
-    console.log(JSON.stringify(stageIdArray.data.stages[0]));
 
     if (Object.keys(firstStageCallbackList).includes(context)) {
+        const encodedReference = encodeURIComponent(clientResponse.link);
+        const stageIdArray = await getStageIdByCaseId(encodedReference, headers);
+        console.log(stageIdArray);
+        const stageUUID = stageIdArray.data.stages[0].uuid;
+        const caseUUID = stageIdArray.data.stages[0].caseUUID;
         clientResponse.callbackUrl = firstStageCallbackList[context].callbackUrl(caseUUID, stageUUID);
     }
 }
