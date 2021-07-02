@@ -1,6 +1,7 @@
 const Form = require('../form-builder');
 const { Component, Choice, ConditionChoice } = require('../component-builder');
 const { getSomuItem } = require('../../../middleware/somu');
+const { MIN_ALLOWABLE_YEAR, MAX_ALLOWABLE_YEAR } = require('../../../libs/dateHelpers');
 
 module.exports = async options => {
     const { data } = await getSomuItem(options);
@@ -35,7 +36,9 @@ module.exports = async options => {
         .withField(
             Component('date', 'contributionRequestDate')
                 .withValidator('required')
-                .withValidator('isValidDate')
+                .withValidator('isValidDay', 'Contribution request date must contain a real day')
+                .withValidator('isValidMonth', 'Contribution request date  must contain a real month')
+                .withValidator('isYearWithinRange', `Contribution request date must be after ${MIN_ALLOWABLE_YEAR}`)
                 .withValidator('isBeforeToday')
                 .withProp('label', 'Contribution request date')
                 .build()
@@ -43,7 +46,9 @@ module.exports = async options => {
         .withField(
             Component('date', 'contributionDueDate')
                 .withValidator('required')
-                .withValidator('isValidDate')
+                .withValidator('isValidDay', 'Contribution due date must contain a real day')
+                .withValidator('isValidMonth', 'Contribution due date  must contain a real month')
+                .withValidator('isYearWithinRange', `Contribution due date must be before ${MAX_ALLOWABLE_YEAR}`)
                 .withValidator('isValidWithinDate')
                 .withProp('label', 'Contribution due date')
                 .build()
@@ -66,8 +71,10 @@ module.exports = async options => {
         .withField(
             Component('date', 'contributionReceivedDate')
                 .withValidator('required')
-                .withValidator('isValidDate',)
                 .withValidator('isBeforeToday')
+                .withValidator('isValidDay', 'Contribution received date must contain a real day')
+                .withValidator('isValidMonth', 'Contribution received date  must contain a real month')
+                .withValidator('isYearWithinRange', `Contribution received date must be before ${MAX_ALLOWABLE_YEAR}`)
                 .withValidator('isValidWithinDate')
                 .withProp('label', 'Contribution received date')
                 .withProp('visibilityConditions', [

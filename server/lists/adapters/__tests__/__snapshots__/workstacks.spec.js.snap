@@ -812,7 +812,7 @@ Object {
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
       "data": Object {
-        "CaseContributions": "[{\\"contributionDueDate\\":\\"2020-12-12\\"}]",
+        "CaseContributions": "[{\\"data\\": {\\"contributionDueDate\\":\\"2020-12-12\\"}}]",
       },
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",

@@ -1,5 +1,6 @@
 const { FormSubmissionError, ValidationError } = require('../models/error');
 const { DOCUMENT_WHITELIST, DOCUMENT_BULK_LIMIT, VALID_DAYS_RANGE } = require('../config').forContext('server');
+const { MIN_ALLOWABLE_YEAR, MAX_ALLOWABLE_YEAR } = require('../libs/dateHelpers');
 
 const validationErrors = {
     required: label => `${label} is required`,
@@ -16,7 +17,11 @@ const validationErrors = {
     isValidWithinDate: label => `${label} must be within the last ${VALID_DAYS_RANGE} days`,
     validCaseReference: () => 'Case reference is not valid',
     contributionsFulfilled: () => 'Case contributions have to be completed or cancelled',
-    oneOf: () => 'Options are not valid'
+    oneOf: () => 'Select at least one option',
+    isValidMonth: label => `${label} must contain a real month`,
+    isBeforeMaxYear: label => `${label} must be before ${MAX_ALLOWABLE_YEAR}`,
+    isAfterMinYear: label => `${label} must be after ${MIN_ALLOWABLE_YEAR}`,
+    isValidDay: label => `${label} must contain a real day`,
 };
 
 const validators = {
@@ -25,6 +30,33 @@ const validators = {
             const date = new Date(value).getDate();
             if (isNaN(date) || date != value.split('-')[2]) {
                 return message || validationErrors.isValidDate(label);
+            }
+        }
+        return null;
+    },
+    isValidDay({ label, value, message }) {
+        if (value && getDay(value)) {
+            if (getDay(value) > new Date(getYear(value), getMonth(value), 0).getDate() || getDay(value) < 1) {
+                return message || validationErrors.isValidDay(label);
+            }
+        }
+        return null;
+    },
+    isValidMonth({ label, value, message }) {
+        if (value && getMonth(value)) {
+            if (getMonth(value) < 1 || getMonth(value) > 12) {
+                return message || validationErrors.isValidMonth(label);
+            }
+        }
+        return null;
+    },
+    isYearWithinRange({ label, value, message }) {
+        if (value && getYear(value)) {
+            if (getYear(value) > MAX_ALLOWABLE_YEAR) {
+                return message || validationErrors.isBeforeMaxYear(label);
+            }
+            else if(getYear(value) < MIN_ALLOWABLE_YEAR){
+                return message || validationErrors.isAfterMinYear(label);
             }
         }
         return null;
@@ -153,6 +185,26 @@ const validators = {
         }
         return message || validationErrors.oneOf();
     }
+};
+
+const getDay = (date) => {
+    return getDateSection(date, 2);
+};
+
+const getMonth = (date) => {
+    return getDateSection(date, 1);
+};
+
+const getYear = (date) => {
+    return getDateSection(date, 0);
+};
+
+const getDateSection = (date, section) => {
+    const split = date.split('-');
+    if(split.length >= section){
+        return split[section];
+    }
+    return undefined;
 };
 
 function validateConditionalRadioContentIfExists(data, name, choices, validator, result) {
