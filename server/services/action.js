@@ -4,6 +4,13 @@ const { ActionError } = require('../models/error');
 const getLogger = require('../libs/logger');
 const User = require('../models/user');
 
+const firstStageCallbackList = {
+    FOI: {
+        callbackUrl: (caseId, stageId) => `/case/${caseId}/stage/${stageId}`
+    }
+};
+
+
 function createDocumentSummaryObjects(form, type) {
     return form.schema.fields.reduce((reducer, field) => {
         if (field.component === 'add-document' && form.data[field.props.name]) {
@@ -47,6 +54,10 @@ function getDocumentTags(caseType) {
     return infoService.get(`/caseType/${caseType}/documentTags`);
 }
 
+function getStageIdByCaseId(caseRef, headers) {
+    return caseworkService.get(`/case/${caseRef}/stage`, headers);
+}
+
 async function handleActionSuccess(response, workflow, form) {
     const { next, data } = form;
     if (response && response.callbackUrl) {
@@ -74,6 +85,18 @@ function handleWorkflowSuccess(response, { caseId, stageId }) {
     }
 }
 
+async function appendAutoNavigateFirstStageUrl(clientResponse, context, headers) {
+    const encodedReference = encodeURIComponent(clientResponse.link);
+    const stageIdArray = await getStageIdByCaseId(encodedReference, headers);
+    const stageUUID = stageIdArray.data.stages[0].uuid;
+    const caseUUID = stageIdArray.data.stages[0].caseUUID;
+    console.log(JSON.stringify(stageIdArray.data.stages[0]));
+
+    if (Object.keys(firstStageCallbackList).includes(context)) {
+        clientResponse.callbackUrl = firstStageCallbackList[context].callbackUrl(caseUUID, stageUUID);
+    }
+}
+
 const actions = {
     ACTION: async ({ workflow, context, form, user }) => {
         let headers = {
@@ -90,6 +113,7 @@ const actions = {
                         const { data: documentTags } = await getDocumentTags(context);
                         response = await createCase('/case', { caseType: context, form }, documentTags[0], headers);
                         clientResponse = { summary: 'Case Created ', link: `${response.data.reference}` };
+                        await appendAutoNavigateFirstStageUrl(clientResponse, context, headers);
                         return handleActionSuccess(clientResponse, workflow, form);
                     }
                     case actionTypes.CREATE_AND_ALLOCATE_CASE: {
