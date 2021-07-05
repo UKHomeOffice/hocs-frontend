@@ -20,9 +20,13 @@ function createDocumentSummaryObjects(form, type) {
 }
 
 function createCaseRequest(type, form, documentTag) {
+    let data = { ...form.data };
+    delete data.add_document;
+    delete data.DateReceived;
     return {
         type,
         dateReceived: form.data['DateReceived'],
+        data: data,
         documents: createDocumentSummaryObjects(form, documentTag)
     };
 }
