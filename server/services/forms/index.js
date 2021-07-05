@@ -189,12 +189,28 @@ const formDefinitions = {
                 builder: formRepository.addCorrespondentDetails,
                 action: ADD_CORRESPONDENT
             },
+            ADDNOMPEMAIL: {
+                builder: formRepository.addCorrespondentDetailsEmail,
+                action: ADD_CORRESPONDENT
+            },
+            ADDNOMPPOST: {
+                builder: formRepository.addCorrespondentDetailsPost,
+                action: ADD_CORRESPONDENT
+            },
             DETAILS: {
                 builder: formRepository.addCorrespondentDetails,
                 action: ADD_CORRESPONDENT
             },
             UPDATE: {
                 builder: formRepository.updateCorrespondentDetails,
+                action: UPDATE_CORRESPONDENT
+            },
+            UPDATEEMAIL: {
+                builder: formRepository.updateCorrespondentDetailsEmail,
+                action: UPDATE_CORRESPONDENT
+            },
+            UPDATEPOST: {
+                builder: formRepository.updateCorrespondentDetailsPost,
                 action: UPDATE_CORRESPONDENT
             },
             REMOVE: {
