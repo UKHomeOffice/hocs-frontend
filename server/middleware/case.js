@@ -30,6 +30,7 @@ async function caseApiResponseMiddleware(req, res, next) {
 async function caseSummaryMiddleware(req, res, next) {
     try {
         const summary = await req.listService.fetch('CASE_SUMMARY', req.params);
+        // console.log(summary)
         res.locals.summary = summary;
         next();
     } catch (error) {
@@ -38,6 +39,7 @@ async function caseSummaryMiddleware(req, res, next) {
 }
 
 function caseSummaryApiResponseMiddleware(req, res) {
+    // console.log(res.locals.summary);
     return res.status(200).json(res.locals.summary);
 }
 
