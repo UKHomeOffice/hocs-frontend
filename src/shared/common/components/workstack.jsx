@@ -160,6 +160,12 @@ class WorkstackAllocate extends Component {
             throw new Error('Data Adapter not implemented: ' + colDataAdapter);
         }
 
+        // if the result is an empty object and it hasn't been handled by an adapter
+        // turn it into an empty string to avoid an error
+        if (typeof value === 'object' && Object.keys(value).length === 0) {
+            return '';
+        }
+
         return value;
     }
 
