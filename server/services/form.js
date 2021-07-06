@@ -22,7 +22,7 @@ async function getFormSchemaFromWorkflowService(requestId, options, user) {
         response = await workflowService.get(`/case/${caseId}/stage/${stageId}`, { headers });
         console.log('WORKFLOW RESPONSE')
 
-        console.log(response)
+        console.log(JSON.stringify(response.data.form.schema, null, 4))
     } catch (error) {
         switch (error.response.status) {
             case 401:
