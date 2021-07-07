@@ -95,7 +95,7 @@ const actions = {
                     case actionTypes.CREATE_AND_ALLOCATE_CASE: {
                         const { data: documentTags } = await getDocumentTags(context);
                         const { data: { reference } } = await createCase('/case', { caseType: context, form }, documentTags[0], headers);
-                        const { data: { stages } } = await caseworkService.get(`/case/${encodeURIComponent(reference)}/stage`, headers);
+                        const { data: { stages } } = await caseworkService.get(`/case/${encodeURIComponent(reference).split('%2F').join('%252F')}/stage`, headers);
                         const { caseUUID, uuid: stageUUID } = stages[0];
                         return handleActionSuccess({ callbackUrl: `/case/${caseUUID}/stage/${stageUUID}/allocate` }, workflow, form);
                     }

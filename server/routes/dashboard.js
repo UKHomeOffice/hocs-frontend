@@ -29,7 +29,7 @@ router.post(['/search/reference', '/api/search/reference'],
 
             logger.info('SEARCH_REFERENCE', { reference: caseRef });
 
-            const reference = encodeURIComponent(caseRef);
+            const reference = encodeURIComponent(caseRef).split('%2F').join('%252F');
 
             const response = await caseworkService.get(`/case/${reference}/stage`, {
                 headers: User.createHeaders(req.user)
