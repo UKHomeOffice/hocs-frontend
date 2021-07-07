@@ -725,6 +725,11 @@ module.exports = {
             endpoint: '/topics',
             type: listService.types.DYNAMIC,
         },
+        TOPICS_FOI: {
+            client: 'INFO',
+            endpoint: '/case/foitopiclist',
+            type: listService.types.DYNAMIC,
+        },
         TOPICS_USER: {
             client: 'INFO',
             endpoint: '/topics/MIN',
