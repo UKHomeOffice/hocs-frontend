@@ -1,5 +1,5 @@
 const Form = require('../form-builder');
-const { Component } = require('../component-builder');
+const { Component, Choice } = require('../component-builder');
 const getLogger = require('../../../libs/logger');
 
 const receivedByMethodOptions = [{
@@ -10,6 +10,9 @@ const receivedByMethodOptions = [{
     value: 'POST'
 }];
 
+/**
+ * Create the fields for the case creation stage.
+ */
 const enrichmentDataFormFields = {
     ACTION: {
         CREATE: {
@@ -29,7 +32,11 @@ const enrichmentDataFormFields = {
                             Component('radio', 'OriginalChannel', receivedByMethodOptions)
                                 .withValidator('required')
                                 .withProp('label', 'How was the request received?')
-                                .withProp('choices', receivedByMethodOptions)
+                                .withProp('choices', [
+                                    Choice('Email', 'EMAIL', {
+                                        conditionalContent: { label: 'Reason', description: 'Please enter the reason for this extension' } }),
+                                    Choice('Post', 'POST')
+                                ])
                                 .build()
                         )
                         .withField(
@@ -41,6 +48,56 @@ const enrichmentDataFormFields = {
                         .withData({
                             'KimuDateReceived': new Date().toISOString().substr(0, 10)
                         })
+                        .withField(
+                            Component('text', 'fullname')
+                                .withValidator('required', 'The correspondent\'s full name is required')
+                                .withProp('label', 'Full Name')
+                                .build()
+                        )
+                        .withField(
+                            Component('text', 'address1')
+                                .withProp('label', 'Building')
+                                .build()
+                        )
+                        .withField(
+                            Component('text', 'address2')
+                                .withProp('label', 'Street')
+                                .build()
+                        )
+                        .withField(
+                            Component('text', 'address3')
+                                .withProp('label', 'Town or City')
+                                .build()
+                        )
+                        .withField(
+                            Component('text', 'postcode')
+                                .withProp('label', 'Postcode')
+                                .build()
+                        )
+                        .withField(
+                            Component('dropdown', 'country')
+                                .withProp('label', 'Country')
+                                .withProp('choices', [
+                                    Choice('United Kingdom', 'United Kingdom'),
+                                    Choice('Other', 'Other')
+                                ])
+                                .build()
+                        )
+                        .withField(
+                            Component('text', 'telephone')
+                                .withProp('label', 'Telephone')
+                                .build()
+                        )
+                        .withField(
+                            Component('text', 'email')
+                                .withProp('label', 'Email Address')
+                                .build()
+                        )
+                        .withField(
+                            Component('text-area', 'reference')
+                                .withProp('label', 'Enter any references given')
+                                .build()
+                        )
                         .build()
                 }
                 ,
@@ -61,7 +118,8 @@ const enrichmentDataFormFields = {
 
 module.exports.enrich = (context, workflow, action, entity) => {
     const logger = getLogger();
-    const fieldsToAdd = enrichmentDataFormFields[context.toUpperCase()][workflow.toUpperCase()][action.toUpperCase()][entity.toUpperCase()];
+    const dataFields = enrichmentDataFormFields;
+    const fieldsToAdd = dataFields[context.toUpperCase()][workflow.toUpperCase()][action.toUpperCase()][entity.toUpperCase()];
     logger.info('GET_FORM_ENRICHMENTS',{ context, workflow, action, entity });
     if (fieldsToAdd && fieldsToAdd.add) {
         return [ ...fieldsToAdd.add().schema.fields ];
