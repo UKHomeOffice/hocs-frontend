@@ -21,7 +21,8 @@ class Form extends Component {
             method,
             page,
             schema,
-            submittingForm
+            submittingForm,
+            switchDirection
         } = this.props;
 
         return (
@@ -50,6 +51,7 @@ class Form extends Component {
                                 baseUrl: `/case/${page.caseId}/stage/${page.stageId}`,
                                 page,
                                 caseRef: this.props.meta ? this.props.meta.caseReference : undefined,
+                                switchDirection
                             });
                         })
                     }
@@ -62,7 +64,8 @@ class Form extends Component {
                                 data,
                                 errors,
                                 callback: this.props.updateFormState,
-                                page
+                                page,
+                                switchDirection
                             });
                         })
                     }
@@ -84,6 +87,7 @@ Form.propTypes = {
     schema: PropTypes.object.isRequired,
     submitHandler: PropTypes.func,
     updateFormState: PropTypes.func,
+    switchDirection: PropTypes.func,
     submittingForm: PropTypes.bool.isRequired
 };
 

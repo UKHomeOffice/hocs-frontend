@@ -26,19 +26,24 @@ import ExpandableCheckbox from './expandable-checkbox.jsx';
 import FlowDirectionLink from './flow-direction-link.jsx';
 import HideConditionFunctions from './../../helpers/hide-condition-functions';
 import ConfirmationWithCaseRef from './confirmation-with-case-ref.jsx';
+import ReviewField from './review-field.jsx';
 
 function defaultDataAdapter(name, data, currentValue) {
     return data[name] || currentValue;
 }
 
+function reviewBoxDataAdapter(config, data) {
+    return data[config.child.props.name];
+}
+
 function renderFormComponent(Component, options) {
-    const { key, config, data, errors, callback, dataAdapter, page, caseRef } = options;
+    const { key, config, data, errors, callback, dataAdapter, page, caseRef, switchDirection } = options;
 
     if (isComponentVisible(config, data)) {
         let value = config.defaultValue || '';
 
         if (data) {
-            value = dataAdapter ? dataAdapter(config.name, data) : defaultDataAdapter(config.name, data, value);
+            value = dataAdapter ? dataAdapter(config, data) : defaultDataAdapter(config.name, data, value);
         }
         return <Component key={key}
             {...config}
@@ -48,7 +53,8 @@ function renderFormComponent(Component, options) {
             value={value}
             caseRef={caseRef}
             updateState={callback ? data => callback(data) : null}
-            page={page} />;
+            page={page}
+            switchDirection={switchDirection}/>;
     }
     return null;
 }
@@ -84,7 +90,7 @@ function isComponentVisible(config, data) {
 }
 
 export function formComponentFactory(field, options) {
-    const { key, config, data, errors, callback, page, caseRef } = options;
+    const { key, config, data, errors, callback, page, caseRef, switchDirection } = options;
 
     switch (field) {
         case 'radio':
@@ -162,13 +168,15 @@ export function formComponentFactory(field, options) {
             });
         case 'change-link':
             return renderFormComponent(ChangeLink, { data, key, config, errors, callback });
+        case 'review-field':
+            return renderFormComponent(ReviewField, { data, key, config, errors, dataAdapter: reviewBoxDataAdapter, callback, switchDirection });
         default:
             return null;
     }
 }
 
 export function secondaryActionFactory(field, options) {
-    const { key, data, config, page } = options;
+    const { key, data, config, page, switchDirection } = options;
     switch (field) {
         case 'backlink':
             return renderFormComponent(BackLink, { data, key, config });
@@ -181,7 +189,8 @@ export function secondaryActionFactory(field, options) {
                 config: {
                     ...config, caseId: page.caseId, stageId: page.stageId,
                     action: `/case/${page.caseId}/stage/${page.stageId}/direction/BACKWARD`
-                }
+                },
+                switchDirection
             });
         default:
             return null;
