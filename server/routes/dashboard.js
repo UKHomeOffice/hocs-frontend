@@ -10,7 +10,7 @@ const { bindDisplayElements } = require('../lists/adapters/workstacks');
 const getLogger = require('../libs/logger');
 const { caseworkService } = require('../clients');
 const User = require('../models/user');
-const doubleEncodeSlashes = require('../libs/encodingHelpers')
+const doubleEncodeSlashes = require('../libs/encodingHelpers');
 
 router.all(['/', '/api/form'],
     getForm(form, { submissionUrl: '/search/reference' }),

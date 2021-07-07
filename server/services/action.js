@@ -3,7 +3,7 @@ const actionTypes = require('./actions/types');
 const { ActionError } = require('../models/error');
 const getLogger = require('../libs/logger');
 const User = require('../models/user');
-const doubleEncodeSlashes = require('../libs/encodingHelpers')
+const doubleEncodeSlashes = require('../libs/encodingHelpers');
 
 function createDocumentSummaryObjects(form, type) {
     return form.schema.fields.reduce((reducer, field) => {
