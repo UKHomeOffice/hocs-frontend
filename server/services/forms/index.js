@@ -1,5 +1,5 @@
 const formRepository = require('./schemas/index');
-const enrichmentRepository = require('./schemas/enrich-form');
+const formDecorator = require('./schemas/decorators/form-decorator');
 const {
     ADD_TEMPLATE, ADD_STANDARD_LINE, IS_MEMBER, ADD_MEMBER, SELECT_MEMBER, ADD_CORRESPONDENT, UPDATE_CORRESPONDENT,
     REMOVE_CORRESPONDENT, ADD_TOPIC, REMOVE_TOPIC, CREATE_CASE, CREATE_AND_ALLOCATE_CASE, BULK_CREATE_CASE,
@@ -344,24 +344,21 @@ module.exports = {
         if (context && workflow && action) {
             try {
                 let formDefinition;
-                let enhancedFormFields = {};
+                let formEnrichmentKeys = { context, workflow, action, entity };
                 if (action === 'DOCUMENT' || action == 'BULK_CREATE_CASE') {
                     formDefinition = formDefinitions[context.toUpperCase()][workflow.toUpperCase()][action.toUpperCase()][entity.toUpperCase()];
-                    enhancedFormFields = enrichmentRepository.enrich(context.toUpperCase(), workflow.toUpperCase(), action.toUpperCase(), entity.toUpperCase());
                 } else {
                     formDefinition = formDefinitions[context.toUpperCase()][workflow.toUpperCase()][action.toUpperCase()];
                 }
-                const form = await formDefinition.builder.call(this, {});
-                if (form.schema.fields && enhancedFormFields.length > 0) {
-                    form.schema.fields = [...form.schema.fields, ...enhancedFormFields];
-                }
-                let res = {
+
+                let form = await formDefinition.builder.call(this, {});
+                form = formDecorator.call(this, formEnrichmentKeys, form);
+                return {
                     schema: form.schema,
                     next: formDefinition.next,
                     action: formDefinition.action,
                     data: form.data
                 };
-                return res;
             } catch (e) {
                 throw new ReferenceError(`Unable to retrieve schema: ${e.message}`);
             }

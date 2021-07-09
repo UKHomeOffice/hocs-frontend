@@ -1,6 +1,6 @@
-const Form = require('../form-builder');
-const { Component } = require('../component-builder');
-const getLogger = require('../../../libs/logger');
+const Form = require('../../../form-builder');
+const { Component } = require('../../../component-builder');
+
 
 const receivedByMethodOptions = [{
     label: 'Email',
@@ -10,12 +10,12 @@ const receivedByMethodOptions = [{
     value: 'POST'
 }];
 
-const enrichmentDataFormFields = {
+module.exports = {
     ACTION: {
         CREATE: {
             DOCUMENT: {
                 FOI: {
-                    add: () => Form()
+                    add: (initialForm) => Form(initialForm)
                         .withField(
                             Component('date', 'KimuDateReceived')
                                 .withValidator('required', 'Date correspondence received in KIMU is required')
@@ -43,29 +43,7 @@ const enrichmentDataFormFields = {
                         })
                         .build()
                 }
-                ,
-                MIN: {
-                    add: () => Form()
-                        .withField(
-                            Component('text-area', 'RequestQuestion')
-                                .withValidator('required')
-                                .withProp('label', 'Request Question')
-                                .build()
-                        )
-                        .build()
-                }
             }
         }
     }
-};
-
-module.exports.enrich = (context, workflow, action, entity) => {
-    const logger = getLogger();
-    const fieldsToAdd = enrichmentDataFormFields[context.toUpperCase()][workflow.toUpperCase()][action.toUpperCase()][entity.toUpperCase()];
-    logger.info('GET_FORM_ENRICHMENTS',{ context, workflow, action, entity });
-    if (fieldsToAdd && fieldsToAdd.add) {
-        return [ ...fieldsToAdd.add().schema.fields ];
-    }
-    logger.debug('NO_FORM_ENRICHMENTS_FOUND',{ context, workflow, action, entity });
-    return {};
 };
