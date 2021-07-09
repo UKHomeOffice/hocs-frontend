@@ -34,8 +34,23 @@ const enrichmentDataFormFields = {
                                 .withProp('label', 'How was the request received?')
                                 .withProp('choices', [
                                     Choice('Email', 'EMAIL', {
-                                        conditionalContent: { label: 'Reason', description: 'Please enter the reason for this extension' } }),
-                                    Choice('Post', 'POST')
+                                        // conditionalContent: { label: 'Reason', description: 'Please enter the reason for this extension' } 
+                                        conditionalContentAfter: [
+                                            { name:'yesNo', type: 'radio', label: 'Yes or No', afterContent: [
+                                                { name:'yes', label: 'yes', value: 'YES'},
+                                                { name:'no', label: 'no', value: 'NO'}
+                                            ]},
+                                            { name:'textYes', type: 'textarea', label: 'Text Area for words', defualtValue:'defualtValue', rows:'4'}
+                                        ]
+                                    }),
+                                    Choice('Post', 'POST', {
+                                        conditionalContentAfter: [
+                                            { name:'yesNo', type: 'radio', label: 'Yes or No', afterContent: [
+                                                { name:'no', label: 'no', value: 'NO'},
+                                                { name:'yes', label: 'yes', value: 'YES'}
+                                            ]
+                                        }]
+                                    })
                                 ])
                                 .build()
                         )
@@ -48,56 +63,56 @@ const enrichmentDataFormFields = {
                         .withData({
                             'KimuDateReceived': new Date().toISOString().substr(0, 10)
                         })
-                        .withField(
-                            Component('text', 'fullname')
-                                .withValidator('required', 'The correspondent\'s full name is required')
-                                .withProp('label', 'Full Name')
-                                .build()
-                        )
-                        .withField(
-                            Component('text', 'address1')
-                                .withProp('label', 'Building')
-                                .build()
-                        )
-                        .withField(
-                            Component('text', 'address2')
-                                .withProp('label', 'Street')
-                                .build()
-                        )
-                        .withField(
-                            Component('text', 'address3')
-                                .withProp('label', 'Town or City')
-                                .build()
-                        )
-                        .withField(
-                            Component('text', 'postcode')
-                                .withProp('label', 'Postcode')
-                                .build()
-                        )
-                        .withField(
-                            Component('dropdown', 'country')
-                                .withProp('label', 'Country')
-                                .withProp('choices', [
-                                    Choice('United Kingdom', 'United Kingdom'),
-                                    Choice('Other', 'Other')
-                                ])
-                                .build()
-                        )
-                        .withField(
-                            Component('text', 'telephone')
-                                .withProp('label', 'Telephone')
-                                .build()
-                        )
-                        .withField(
-                            Component('text', 'email')
-                                .withProp('label', 'Email Address')
-                                .build()
-                        )
-                        .withField(
-                            Component('text-area', 'reference')
-                                .withProp('label', 'Enter any references given')
-                                .build()
-                        )
+                        // .withField(
+                        //     Component('text', 'fullname')
+                        //         .withValidator('required', 'The correspondent\'s full name is required')
+                        //         .withProp('label', 'Full Name')
+                        //         .build()
+                        // )
+                        // .withField(
+                        //     Component('text', 'address1')
+                        //         .withProp('label', 'Building')
+                        //         .build()
+                        // )
+                        // .withField(
+                        //     Component('text', 'address2')
+                        //         .withProp('label', 'Street')
+                        //         .build()
+                        // )
+                        // .withField(
+                        //     Component('text', 'address3')
+                        //         .withProp('label', 'Town or City')
+                        //         .build()
+                        // )
+                        // .withField(
+                        //     Component('text', 'postcode')
+                        //         .withProp('label', 'Postcode')
+                        //         .build()
+                        // )
+                        // .withField(
+                        //     Component('dropdown', 'country')
+                        //         .withProp('label', 'Country')
+                        //         .withProp('choices', [
+                        //             Choice('United Kingdom', 'United Kingdom'),
+                        //             Choice('Other', 'Other')
+                        //         ])
+                        //         .build()
+                        // )
+                        // .withField(
+                        //     Component('text', 'telephone')
+                        //         .withProp('label', 'Telephone')
+                        //         .build()
+                        // )
+                        // .withField(
+                        //     Component('text', 'email')
+                        //         .withProp('label', 'Email Address')
+                        //         .build()
+                        // )
+                        // .withField(
+                        //     Component('text-area', 'reference')
+                        //         .withProp('label', 'Enter any references given')
+                        //         .build()
+                        // )
                         .build()
                 }
                 ,

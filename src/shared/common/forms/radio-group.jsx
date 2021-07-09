@@ -9,7 +9,7 @@ class Radio extends Component {
         const conditionChoices = Array.from(JSON.parse(JSON.stringify(props.conditionChoices)));
 
         const choicesToUse = Radio.getChoicesToUse(choices, conditionChoices, this.props);
-        this.state = { value: this.props.value, choices, conditionChoices, choicesToUse };
+        this.state = { value: this.props.value, choices, conditionChoices, choicesToUse, selectedChoice: "blank" };
     }
 
     componentDidMount() {
@@ -31,6 +31,11 @@ class Radio extends Component {
         const index = `${choice.value}Text`;
         this.props.updateState({ [this.props.name]: e.target.value });
         if ('conditionalContent' in choice) {
+            this.props.updateState({ [index]: this.props.data[index] || '' });
+        }
+        if ('conditionalContentAfter' in choice){
+            console.log("before", this.state.selectedChoice);
+            this.state.selectedChoice = choice;
             this.props.updateState({ [index]: this.props.data[index] || '' });
         }
     }
@@ -115,7 +120,11 @@ class Radio extends Component {
             type,
             value
         } = this.props;
-        const { choicesToUse } = this.state;
+        console.log("type:", type);
+        console.log("name: ", name);
+        console.log("value: ", value);
+        console.log("label: ", label);
+        const { choicesToUse, selectedChoice } = this.state;
         return (
             <div className={`govuk-form-group${error ? ' govuk-form-group--error' : ''}`}>
 
@@ -178,9 +187,117 @@ class Radio extends Component {
                                 </Fragment>
                             );
                         })}
-
                         {choicesToUse.length === 0 && <p className="govuk-body">No options available</p>}
                     </div>
+                    {this.state.selectedChoice.conditionalContentAfter && this.state.selectedChoice.conditionalContentAfter.map((content, i) => {
+                        return (
+                            <Fragment key={i}>
+                            <div className={`govuk-form-group${error ? ' govuk-form-group--error' : ''}`}>
+
+                                <fieldset id={content.name} className={`govuk-fieldset ${className ? className : ''}`} disabled={disabled}>
+                                    {console.log("this.state.selectedChoice.conditionalContentAfter.label", content.label)}
+
+                                    <legend id={`${content.name}-legend`} className="govuk-fieldset__legend">
+                                        <span className="govuk-fieldset__heading govuk-label--s">{content.label}</span>
+                                    </legend>
+
+                                    {hint && <span className="govuk-hint">{hint}</span>}
+                                    {error && <span id={`${name}-error`} className="govuk-error-message">{error}</span>}
+                                    {content.type === 'radio' && content.afterContent.map((choice, i)=>{
+                                        return(
+                                        <Fragment key={i}>
+                                            <div className="govuk-radios__item">
+                                                <input id={`${choice.label}-${choice.value}`}
+                                                    type="radio"
+                                                    name={choice.name}
+                                                    value={choice.value}
+                                                    checked={(value === choice.value)}
+                                                    onChange={e => this.handleChange(e, choice)}
+                                                    data-aria-controls={`conditional-${choice.name}-${choice.value}`}
+                                                    className={'govuk-radios__input'}
+                                                />
+                                                <label className="govuk-label govuk-radios__label" htmlFor={`${choice.label}-${choice.value}`}>
+                                                    {choice.label}
+                                                    {/* {content.description && <span className="govuk-body-s full-width">{content.description}</span>} */}
+                                                </label>
+                                            </div>
+
+                                            {choice.conditionalContent &&
+                                                <div className="govuk-radios__conditional govuk-radios__conditional--hidden"
+                                                    id={`conditional-${name}-${choice.value}`}>
+                                                    <div className={`govuk-form-group ${this.isConditionalContentError(errors, `${choice.value}Text`) ? ' govuk-form-group--error' : ''}`}>
+                                                        <label className="govuk-label" htmlFor={`${choice.value}Text`}>
+                                                            {choice.conditionalContent.label}
+                                                            {choice.conditionalContent.description && <span className="govuk-body-s full-width">{choice.conditionalContent.description}</span>}
+                                                        </label>
+                                                        {this.isConditionalContentError(errors, `${choice.value}Text`) &&
+                                                            <span id={`${choice.value}Text-error`} className="govuk-error-message">
+                                                                <span className="govuk-visually-hidden">Error:</span>{errors[`${choice.value}Text`]}
+                                                            </span>
+                                                        }
+                                                        <textarea
+                                                            className={`govuk-textarea ${this.isConditionalContentError(errors, `${choice.value}Text`) ? ' govuk-textarea--error' : ''}`}
+                                                            id={`${choice.value}Text`}
+                                                            name={`${choice.value}Text`}
+                                                            disabled={disabled}
+                                                            rows="4"
+                                                            onChange={e => this.handleChangeForTextArea(e)}
+                                                            value={this.returnConditionalContentValue(`${choice.value}Text`)}
+                                                        />
+                                                    </div>
+
+                                                </div>
+                                            }
+                                        </Fragment>
+                                        )
+                                    })}
+                                    {content.type === 'dropdown' &&
+                                            <div className={`govuk-form-group${error ? ' govuk-form-group--error' : ''}`}>
+
+                                            <label htmlFor={content.name} id={`${content.name}-label`} className="govuk-label govuk-label--s">{content.label}</label>
+                                            {hint && <span className="govuk-hint">{hint}</span>}
+                                            {error && <span id={`${content.name}-error`} className="govuk-error-message">{error}</span>}
+
+                                            <select className={`govuk-select ${error ? 'govuk-select--error' : ''}`}
+                                                id={content.name}
+                                                name={content.name}
+                                                disabled={disabled}
+                                                onChange={e => this.handleChange(e)}
+                                                value={this.state.value}
+                                            >
+                                                {choicesToUse && choicesToUse.map((choice, i) => {
+                                                    return (
+                                                        <option key={i} value={choice.value} >{choice.label}</option>
+                                                    );
+                                                })}
+                                            </select>
+                                            </div>
+                                    }
+                                    {content.type === 'textarea' &&
+                                            <div className={`govuk-form-group${error ? ' govuk-form-group--error' : ''}`}>
+
+                                            <label htmlFor={content.name} id={`${content.name}-label`} className="govuk-label govuk-label--s">{content.label}</label>
+
+
+                                            {hint && <span className="govuk-hint">{hint}</span>}
+                                            {error && <span id={`${content.name}-error`} className="govuk-error-message">{error}</span>}
+
+
+                                            <textarea className={`govuk-textarea form-control-3-4 ${error ? 'govuk-textarea--error' : ''}`}
+                                                id={content.name}
+                                                name={content.name}
+                                                disabled={disabled}
+                                                rows={content.rows}
+                                                onChange={e => this._onChange(e)}
+                                                defaultValue={content.defaultValue}
+                                            />
+                                            </div>
+                                    }
+                                    </fieldset>
+                                </div>
+                            </Fragment>
+                        )
+                    })}
                 </fieldset>
             </div>
         );
