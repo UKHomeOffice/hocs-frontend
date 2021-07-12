@@ -315,6 +315,10 @@ class WorkstackAllocate extends Component {
                         value.primaryCorrespondentFullName &&
                         <span className='govuk-!-font-weight-bold'>{value.primaryCorrespondentFullName}<br/></span>
                     }
+                    {
+                        row.data.HomeSecReply === 'TRUE' &&
+                        <span className="govuk-tag govuk-!-margin-right-1">HS</span>
+                    }
                     <Link to={`/case/${row.caseUUID}/stage/${row.uuid}`} className='govuk-link govuk-!-margin-right-3'>{value.caseReference}</Link>
                 </td>;
             case ColumnRenderer.DATE:
