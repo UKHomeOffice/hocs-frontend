@@ -27,13 +27,6 @@ steps:
     depends_on:
       - install dependencies
 
-  - name: lint project
-    image: node:14.15.4-alpine
-    commands:
-      - npm run lint
-    depends_on:
-      - install dependencies
-
   - name: sonar scanner
     image: quay.io/ukhomeofficedigital/sonar-scanner:v3.0.2
     depends_on:
@@ -60,8 +53,6 @@ steps:
     depends_on:
       - build project
       - test project
-      - lint project
-
 
   - name: build & push latest
     image: plugins/docker
@@ -83,8 +74,6 @@ steps:
     depends_on:
       - build project
       - test project
-      - lint project
-
 
 ---
 kind: pipeline
