@@ -42,7 +42,7 @@ const validators = {
         return null;
     },
     isValidWithinDate({ label, value, message }) {
-        const numberOfDaysInPast= VALID_DAYS_RANGE;
+        const numberOfDaysInPast = VALID_DAYS_RANGE;
         let limitDate = new Date();
         limitDate.setDate(limitDate.getDate() - numberOfDaysInPast);
         if (new Date(value).valueOf() <= limitDate.valueOf()) {
@@ -218,7 +218,8 @@ function validationMiddleware(req, res, next) {
 
 
         } catch (e) {
-            return next(new FormSubmissionError('Unable to validate form data'));
+            console.log(e);
+            return next(e);
         }
     }
     next();
@@ -324,7 +325,7 @@ function validationMiddleware(req, res, next) {
             if (validation && !suppressValidation) {
                 validation.map(validator => {
                     if (typeof validator === 'string') {
-                        if(Object.prototype.hasOwnProperty.call(validators, validator)) {
+                        if (Object.prototype.hasOwnProperty.call(validators, validator)) {
 
                             if (component === 'radio') {
                                 validateConditionalRadioContentIfExists.call(
@@ -348,7 +349,7 @@ function validationMiddleware(req, res, next) {
                     }
                     else {
                         const { type, message } = validator;
-                        if(Object.prototype.hasOwnProperty.call(validators, type)) {
+                        if (Object.prototype.hasOwnProperty.call(validators, type)) {
                             const validationError = validators[type].call(this, { label, value, message });
                             if (validationError) {
                                 result[field.props.name] = validationError;
