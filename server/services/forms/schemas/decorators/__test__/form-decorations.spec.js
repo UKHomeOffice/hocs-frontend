@@ -68,6 +68,7 @@ describe('Form schema decorations', function () {
     });
 
     it('should return decorated form when decorations exist.', () => {
+        const date = new Date().toISOString().substr(0, 10);
         const inputForm = {
             schema: {
                 title: 'Testing form',
@@ -89,7 +90,7 @@ describe('Form schema decorations', function () {
         };
         const expectedOutputForm = {
             'data': {
-                'KimuDateReceived': '2021-07-09'
+                'KimuDateReceived': date
             },
             'meta': {},
             'schema': {
