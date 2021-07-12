@@ -42,7 +42,9 @@ const ColumnRenderer = {
     INDICATOR_RED: 'indicatorRed',
     WRAP_TEXT: 'wrapText',
     TRUNCATE_TEXT: 'truncateText',
-    CONTRIBUTIONS_WARNING: 'contributionsWarning'
+    CONTRIBUTIONS_WARNING: 'contributionsWarning',
+    MP_WITH_OWNER: 'mpWithOwner'
+
 };
 
 const ColumnSortStrategy = {
@@ -316,6 +318,16 @@ class WorkstackAllocate extends Component {
                         <span className='govuk-!-font-weight-bold'>{value.primaryCorrespondentFullName}<br/></span>
                     }
                     <Link to={`/case/${row.caseUUID}/stage/${row.uuid}`} className='govuk-link govuk-!-margin-right-3'>{value.caseReference}</Link>
+                </td>;
+            case ColumnRenderer.MP_WITH_OWNER:
+                console.log(JSON.stringify(value));
+                return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>
+                    {
+                        <span className='govuk-!-font-weight-bold'>{value.mp}<br/></span>
+                    }
+                    {
+                        <span>{value.owner}</span>
+                    }
                 </td>;
             case ColumnRenderer.DATE:
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>{value}</td>;
