@@ -320,7 +320,6 @@ class WorkstackAllocate extends Component {
                     <Link to={`/case/${row.caseUUID}/stage/${row.uuid}`} className='govuk-link govuk-!-margin-right-3'>{value.caseReference}</Link>
                 </td>;
             case ColumnRenderer.MP_WITH_OWNER:
-                console.log(JSON.stringify(value));
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>
                     {
                         <span className='govuk-!-font-weight-bold'>{value.mp}<br/></span>
