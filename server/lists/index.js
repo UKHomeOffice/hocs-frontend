@@ -614,6 +614,12 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: usersAdapter
         },
+        MPAM_CONTRIBUTION_BUSINESS_AREAS: {
+            client: 'INFO',
+            endpoint: '/entity/list/MPAM_CONTRIBUTION_BUSINESS_AREAS',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
         S_MPAM_BUS_UNITS_1: {
             client: 'INFO',
             endpoint: '/entity/list/MPAM_BUS_UNITS_1',
@@ -776,6 +782,11 @@ module.exports = {
         TOPICS: {
             client: 'INFO',
             endpoint: '/topics',
+            type: listService.types.DYNAMIC,
+        },
+        TOPICS_FOI: {
+            client: 'INFO',
+            endpoint: '/case/foitopiclist',
             type: listService.types.DYNAMIC,
         },
         TOPICS_USER: {

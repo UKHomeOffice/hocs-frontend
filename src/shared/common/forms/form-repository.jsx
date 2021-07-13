@@ -53,7 +53,6 @@ function renderFormComponent(Component, options) {
             error={errors && errors[config.name]}
             errors={errors}
             value={retrieveValue(config, dataAdapter, data)}
-            value={value}
             caseRef={caseRef}
             updateState={callback ? data => callback(data) : null}
             page={page} />;

@@ -465,6 +465,15 @@ Object {
       "deadline": "2200-02-03",
       "deadlineDisplay": "03/02/2200",
       "memberCorrespondentDisplay": "",
+      "mpWithOwnerDisplay": Object {
+        "mp": "",
+        "owner": "MOCK_USER",
+      },
+      "primaryCorrespondent": Object {
+        "fullname": "testNameFOIRequester",
+        "is_primary": "true",
+        "uuid": "uuid123",
+      },
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234568/19",
         "primaryCorrespondentFullName": "testNameFOIRequester",
@@ -833,6 +842,70 @@ Object {
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234568/19",
         "primaryCorrespondentFullName": "testName",
+      },
+      "stageType": "A",
+      "stageTypeDisplay": "MOCK_STAGETYPE",
+      "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE",
+      "teamUUID": 2,
+      "userUUID": 2,
+    },
+  ],
+  "label": "MOCK_STAGETYPE",
+  "teamMembers": Array [],
+}
+`;
+
+exports[`Workflow Workstack Adapter should add the fullname and postcode of primaryCorrespondent to primaryCorrespondent 1`] = `
+Object {
+  "allocateToTeamEndpoint": "/allocate/team",
+  "allocateToUserEndpoint": "/allocate/user",
+  "allocateToWorkstackEndpoint": "/unallocate/",
+  "columns": Array [],
+  "items": Array [
+    Object {
+      "FOIRequesterDisplay": Object {},
+      "active": true,
+      "applicantOrConstituentCorrespondentDisplay": "",
+      "assignedTeamDisplay": "MOCK_TEAM",
+      "assignedUserDisplay": "MOCK_USER",
+      "caseReference": "COMP/1234568/19",
+      "caseType": "COMP",
+      "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "correspondents": Object {
+        "correspondents": Array [
+          Object {
+            "fullname": "testName",
+            "is_primary": "false",
+            "postcode": "postcode1",
+            "uuid": "uuid123",
+          },
+          Object {
+            "fullname": "primaryC",
+            "is_primary": "true",
+            "postcode": "postcode2",
+            "uuid": "uuid456",
+          },
+        ],
+      },
+      "data": Object {
+        "CaseContributions": "[{}]",
+      },
+      "deadline": "2200-01-03",
+      "deadlineDisplay": "03/01/2200",
+      "memberCorrespondentDisplay": "",
+      "mpWithOwnerDisplay": Object {
+        "mp": "",
+        "owner": "MOCK_USER",
+      },
+      "primaryCorrespondent": Object {
+        "fullname": "primaryC",
+        "is_primary": "true",
+        "postcode": "postcode2",
+        "uuid": "uuid456",
+      },
+      "primaryCorrespondentAndRefDisplay": Object {
+        "caseReference": "COMP/1234568/19",
+        "primaryCorrespondentFullName": "primaryC",
       },
       "stageType": "A",
       "stageTypeDisplay": "MOCK_STAGETYPE",
