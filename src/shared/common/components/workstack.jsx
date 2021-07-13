@@ -44,7 +44,6 @@ const ColumnRenderer = {
     TRUNCATE_TEXT: 'truncateText',
     CONTRIBUTIONS_WARNING: 'contributionsWarning',
     MP_WITH_OWNER: 'mpWithOwner'
-
 };
 
 const ColumnSortStrategy = {
