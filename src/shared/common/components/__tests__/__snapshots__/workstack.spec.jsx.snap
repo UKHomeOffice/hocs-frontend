@@ -156,6 +156,10 @@ exports[`Workstack component should not add link to headers with sortStrategy no
               "created": "",
               "fullName": "John Alex",
               "isActive": "NO",
+              "primaryCorrespondent": Object {
+                "fullname": "Mr Alex",
+                "postcode": "postcode2",
+              },
               "nextCaseReference": null,
               "nextCaseType": null,
               "primaryCorrespondent": Object {
@@ -174,6 +178,10 @@ exports[`Workstack component should not add link to headers with sortStrategy no
               "created": null,
               "fullName": "Pat Brown",
               "isActive": "NO",
+              "primaryCorrespondent": Object {
+                "fullname": "Ms Brown",
+                "postcode": "postcode3",
+              },
               "nextCaseReference": null,
               "nextCaseType": null,
               "primaryCorrespondent": Object {
@@ -232,6 +240,10 @@ exports[`Workstack component should not add link to headers with sortStrategy no
               },
               "fullName": "Bet Linch",
               "isActive": "YES",
+              "primaryCorrespondent": Object {
+                "fullname": "Mrs Linch",
+                "postcode": null,
+              },
               "nextCaseReference": null,
               "nextCaseType": null,
               "primaryCorrespondent": Object {
@@ -1944,6 +1956,16 @@ Array [
                       <td
                         class="govuk-table__cell"
                       >
+                        Mr Jones
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        postcode4
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
                         Stage D
                       </td>
                       <td
@@ -2109,6 +2131,14 @@ Array [
                       >
                         Bet Linch
                       </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        Mrs Linch
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      />
                       <td
                         class="govuk-table__cell"
                       >
@@ -2616,6 +2646,16 @@ Array [
                       <td
                         class="govuk-table__cell"
                       >
+                        Mr Smith
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        postcode1
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
                         Stage A
                       </td>
                       <td
@@ -2695,6 +2735,16 @@ Array [
                         class="govuk-table__cell"
                       >
                         John Alex
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        Mr Alex
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        postcode2
                       </td>
                       <td
                         class="govuk-table__cell"
@@ -2966,6 +3016,14 @@ Array [
                       >
                         Mick Smith
                       </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        Mr Smith
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      />
                       <td
                         class="govuk-table__cell"
                       >
@@ -3405,6 +3463,22 @@ exports[`Workstack component should render with filtering 1`] = `
               "sortStrategy": "correspondentTypeStrategy",
             },
             Object {
+              "dataAdapter": "primaryCorrespondent",
+              "dataValueKey": "fullname",
+              "displayName": "Fullname",
+              "isFilterable": true,
+              "renderer": null,
+              "sortStrategy": "correspondentTypeStrategy",
+            },
+            Object {
+              "dataAdapter": "primaryCorrespondent",
+              "dataValueKey": "postcode",
+              "displayName": "Postcode",
+              "isFilterable": true,
+              "renderer": null,
+              "sortStrategy": "correspondentTypeStrategy",
+            },
+            Object {
               "dataAdapter": null,
               "dataValueKey": "stageTypeDisplay",
               "displayName": "Current Stage",
@@ -3754,6 +3828,20 @@ exports[`Workstack component should render with filtering 1`] = `
                             </th>
                             <th
                               className="govuk-link"
+                              key="Fullname"
+                              onClick={[Function]}
+                            >
+                              Fullname
+                            </th>
+                            <th
+                              className="govuk-link"
+                              key="Postcode"
+                              onClick={[Function]}
+                            >
+                              Postcode
+                            </th>
+                            <th
+                              className="govuk-link"
                               key="Current Stage"
                               onClick={[Function]}
                             >
@@ -3877,6 +3965,18 @@ exports[`Workstack component should render with filtering 1`] = `
                               key="stage_uuid-456fullName"
                             >
                               Sam Smith
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-456fullname"
+                            >
+                              Mr Smith
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-456postcode"
+                            >
+                              postcode1
                             </td>
                             <td
                               className="govuk-table__cell"
@@ -4056,6 +4156,22 @@ exports[`Workstack component should sort descending when the column heading is c
               "sortStrategy": "correspondentTypeStrategy",
             },
             Object {
+              "dataAdapter": "primaryCorrespondent",
+              "dataValueKey": "fullname",
+              "displayName": "Fullname",
+              "isFilterable": true,
+              "renderer": null,
+              "sortStrategy": "correspondentTypeStrategy",
+            },
+            Object {
+              "dataAdapter": "primaryCorrespondent",
+              "dataValueKey": "postcode",
+              "displayName": "Postcode",
+              "isFilterable": true,
+              "renderer": null,
+              "sortStrategy": "correspondentTypeStrategy",
+            },
+            Object {
               "dataAdapter": null,
               "dataValueKey": "stageTypeDisplay",
               "displayName": "Current Stage",
@@ -4130,6 +4246,10 @@ exports[`Workstack component should sort descending when the column heading is c
               "created": "2019-10-29T11:01:32.656563",
               "fullName": "Sam Smith",
               "isActive": "YES",
+              "primaryCorrespondent": Object {
+                "fullname": "Mr Smith",
+                "postcode": "postcode1",
+              },
               "nextCaseReference": null,
               "nextCaseType": null,
               "primaryCorrespondent": Object {
@@ -4148,6 +4268,10 @@ exports[`Workstack component should sort descending when the column heading is c
               "created": "",
               "fullName": "John Alex",
               "isActive": "NO",
+              "primaryCorrespondent": Object {
+                "fullname": "Mr Alex",
+                "postcode": "postcode2",
+              },
               "nextCaseReference": null,
               "nextCaseType": null,
               "primaryCorrespondent": Object {
@@ -4168,6 +4292,10 @@ exports[`Workstack component should sort descending when the column heading is c
               "isActive": "NO",
               "nextCaseReference": null,
               "nextCaseType": null,
+              "primaryCorrespondent": Object {
+                "fullname": "Ms Brown",
+                "postcode": "postcode3",
+              },
               "primaryCorrespondent": Object {
                 "fullname": "Ms Brown",
                 "postcode": "postcode3",
@@ -5040,6 +5168,18 @@ exports[`Workstack component should sort descending when the column heading is c
                             </td>
                             <td
                               className="govuk-table__cell"
+                              key="stage_uuid-445fullname"
+                            >
+                              Mr Jones
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-445postcode"
+                            >
+                              postcode4
+                            </td>
+                            <td
+                              className="govuk-table__cell"
                               key="stage_uuid-445stageTypeDisplay"
                             >
                               Stage D
@@ -5160,6 +5300,18 @@ exports[`Workstack component should sort descending when the column heading is c
                             </td>
                             <td
                               className="govuk-table__cell"
+                              key="stage_uuid-444fullname"
+                            >
+                              Ms Brown
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-444postcode"
+                            >
+                              postcode3
+                            </td>
+                            <td
+                              className="govuk-table__cell"
                               key="stage_uuid-444stageTypeDisplay"
                             >
                               Stage C
@@ -5262,6 +5414,18 @@ exports[`Workstack component should sort descending when the column heading is c
                               key="stage_uuid-432fullName"
                             >
                               John Alex
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-432fullname"
+                            >
+                              Mr Alex
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-432postcode"
+                            >
+                              postcode2
                             </td>
                             <td
                               className="govuk-table__cell"
@@ -5632,8 +5796,6 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
               "created": "2019-10-29T11:01:32.656563",
               "fullName": "Sam Smith",
               "isActive": "YES",
-              "nextCaseReference": null,
-              "nextCaseType": null,
               "primaryCorrespondent": Object {
                 "fullname": "Mr Smith",
                 "postcode": "postcode1",
@@ -5650,8 +5812,6 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
               "created": "",
               "fullName": "John Alex",
               "isActive": "NO",
-              "nextCaseReference": null,
-              "nextCaseType": null,
               "primaryCorrespondent": Object {
                 "fullname": "Mr Alex",
                 "postcode": "postcode2",
@@ -5668,8 +5828,6 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
               "created": null,
               "fullName": "Pat Brown",
               "isActive": "NO",
-              "nextCaseReference": null,
-              "nextCaseType": null,
               "primaryCorrespondent": Object {
                 "fullname": "Ms Brown",
                 "postcode": "postcode3",
@@ -5687,8 +5845,6 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
               "dueContribution": "2020-12-12",
               "fullName": "Dave Jones",
               "isActive": "YES",
-              "nextCaseReference": null,
-              "nextCaseType": null,
               "primaryCorrespondent": Object {
                 "fullname": "Mr Jones",
                 "postcode": "postcode4",
@@ -5891,6 +6047,20 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                             </th>
                             <th
                               className="govuk-link"
+                              key="Fullname"
+                              onClick={[Function]}
+                            >
+                              Fullname
+                            </th>
+                            <th
+                              className="govuk-link"
+                              key="Postcode"
+                              onClick={[Function]}
+                            >
+                              Postcode
+                            </th>
+                            <th
+                              className="govuk-link"
                               key="Current Stage"
                               onClick={[Function]}
                             >
@@ -6029,6 +6199,18 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                             </td>
                             <td
                               className="govuk-table__cell"
+                              key="stage_uuid-456fullname"
+                            >
+                              Mr Smith
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-456postcode"
+                            >
+                              postcode1
+                            </td>
+                            <td
+                              className="govuk-table__cell"
                               key="stage_uuid-456stageTypeDisplay"
                             >
                               Stage A
@@ -6150,6 +6332,18 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                             </td>
                             <td
                               className="govuk-table__cell"
+                              key="stage_uuid-432fullname"
+                            >
+                              Mr Alex
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-432postcode"
+                            >
+                              postcode2
+                            </td>
+                            <td
+                              className="govuk-table__cell"
                               key="stage_uuid-432stageTypeDisplay"
                             >
                               Stage B
@@ -6252,6 +6446,18 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                               key="stage_uuid-444fullName"
                             >
                               Pat Brown
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-444fullname"
+                            >
+                              Ms Brown
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-444postcode"
+                            >
+                              postcode3
                             </td>
                             <td
                               className="govuk-table__cell"

@@ -109,7 +109,6 @@ class DateInput extends Component {
 }
 
 DateInput.propTypes = {
-    data: PropTypes.object.isRequired,
     disabled: PropTypes.bool,
     error: PropTypes.string,
     hint: PropTypes.string,
