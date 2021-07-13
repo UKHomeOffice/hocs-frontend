@@ -322,10 +322,10 @@ class WorkstackAllocate extends Component {
             case ColumnRenderer.MP_WITH_OWNER:
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>
                     {
-                        <span className='govuk-!-font-weight-bold'>{value.mp}<br/></span>
+                        <strong>{value.mp}</strong>
                     }
                     {
-                        <span>{value.owner}</span>
+                        <div>{value.owner}</div>
                     }
                 </td>;
             case ColumnRenderer.DATE:
