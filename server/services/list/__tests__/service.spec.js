@@ -517,7 +517,11 @@ describe('List Service', () => {
                 throw new Error('400');
             });
 
-            await listService.initialise({}, {}, { listRepository: { flush: mockRepositoryFlush, fetch: mockRepositoryFetch, store: mockRepositoryStore } });
+            await listService.initialise({}, {}, { listRepository: { 
+                flush: mockRepositoryFlush, 
+                fetch: mockRepositoryFetch, 
+                store: mockRepositoryStore 
+            }});
 
             await listService.flush(listKey);
 
@@ -541,7 +545,11 @@ describe('List Service', () => {
             mockClientInstance.get = mockGet;
             mockRepositoryFetch.mockReturnValue(mockClientInstance);
 
-            await listService.initialise({}, {}, { listRepository: { flush: mockRepositoryFlush, fetch: mockRepositoryFetch, store: mockRepositoryStore } });
+            await listService.initialise({}, {}, { listRepository: { 
+                flush: mockRepositoryFlush, 
+                fetch: mockRepositoryFetch, 
+                store: mockRepositoryStore 
+            } });
             const mockAdapter = jest.fn();
             listService.applyAdapter = mockAdapter;
 

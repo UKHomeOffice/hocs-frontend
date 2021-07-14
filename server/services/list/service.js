@@ -183,8 +183,8 @@ const cacheStaticList = async (listId) => {
     const logger = getLogger();
     try {
         const response = await clientInstance.get(endpoint);
-        listCache.flush(listId);
         const listData = await applyAdapter(response.data, adapter, { logger });
+        listCache.flush(listId);
         listCache.store(listId, listData);
         logger.info('CACHE_STATIC_LIST_SUCCESS', { list: listId, client: client, endpoint: endpoint });
     } catch (error) {
