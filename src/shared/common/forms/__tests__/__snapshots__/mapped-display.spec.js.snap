@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Form MappedDisplay component should render checkbox 1`] = `
+<span
+  class="govuk-body full-width"
+>
+  <strong>
+    isA: 
+  </strong>
+  Yes
+</span>
+`;
+
+exports[`Form MappedDisplay component should render date 1`] = `
+<span
+  class="govuk-body full-width"
+>
+  <strong>
+    When: 
+  </strong>
+  2021-05-17
+</span>
+`;
+
+exports[`Form MappedDisplay component should render radio 1`] = `
+<span
+  class="govuk-body full-width"
+>
+  <strong>
+    Gender: 
+  </strong>
+  Male
+</span>
+`;
+
+exports[`Form MappedDisplay component should render text 1`] = `
+<span
+  class="govuk-body full-width"
+>
+  <strong>
+    Company Name: 
+  </strong>
+  Waller Porter Traders
+</span>
+`;

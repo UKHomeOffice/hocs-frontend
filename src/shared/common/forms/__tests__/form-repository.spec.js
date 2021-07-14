@@ -24,7 +24,7 @@ const supportedFormComponents = [
     { component: 'inset', props: { name: 'inset' } },
     { component: 'paragraph', props: { name: 'paragraph' } },
     { component: 'confirmation-with-case-ref', props: { name: 'confirmation-with-case-ref' } },
-    { component: 'hidden', props: { name: 'hidden' } },
+    { component: 'hidden', props: { name: 'hidden', defaultValue: 'TEST_VALUE', populateFromCaseData: false } },
     { component: 'expandable-checkbox', props: { choice: { label: '__label__', value: '__value__' }, name: 'expandable' } },
 ];
 
@@ -37,7 +37,8 @@ const supportedSecondaryActions = [
 const testData = {
     'text-component': 'TEST',
     'checkbox-component-A': true,
-    'checkbox-component-B': false
+    'checkbox-component-B': false,
+    'hidden': 'TEST'
 };
 
 const testValidationErrors = {
@@ -104,6 +105,22 @@ describe('Form repository', () => {
         expect(wrapper).toBeDefined();
         expect(wrapper.find('Text').length).toEqual(1);
         expect(wrapper.props().value).toEqual(testData[componentConfiguration.props.name]);
+    });
+
+    it('should pass defaultValue when populateFromCaseData is false', () => {
+        const componentConfiguration = supportedFormComponents
+            .filter(field => field.component === 'hidden')
+            .reduce((reducer, field) => reducer = field, null);
+        const Component = formComponentFactory(componentConfiguration.component, {
+            key: 1,
+            config: componentConfiguration.props,
+            data: testData,
+            callback: mockCallback
+        });
+        const wrapper = mount(Component);
+        expect(wrapper).toBeDefined();
+        expect(wrapper.find('hidden').length).toEqual(1);
+        expect(wrapper.props().value).toEqual('TEST_VALUE');
     });
 
     it('should support components in the supportedSecondaryActions list', () => {

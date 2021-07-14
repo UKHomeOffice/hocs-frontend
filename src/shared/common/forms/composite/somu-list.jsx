@@ -56,12 +56,21 @@ class SomuTableRenderer {
         const { choices } = this.state;
         const title = `${somuItem.contributionBusinessArea} - ${this.loadValue(somuItem.contributionBusinessUnit, choices)}`;
         const contributionStatus = this.getContributionStatus(somuItem);
+        return this.renderContribution(contributionStatus, title, somuItem);
+    }
 
+    renderCompContribution(somuItem) {
+        const title = `${somuItem.contributionBusinessArea}`;
+        const contributionStatus = this.getContributionStatus(somuItem);
+        return this.renderContribution(contributionStatus, title, somuItem);
+    }
+
+    renderContribution(contributionStatus, title, somuItem) {
         return (<>
             <td className='govuk-table__cell'>
                 <label className={'govuk-label'}
-                    aria-label={contributionStatus === CONTRIBUTION_STATUS.CANCELLED ? `Cancelled Contribution: ${title}`: title}
-                    title={contributionStatus === CONTRIBUTION_STATUS.CANCELLED ? `Cancelled Contribution: ${title}`: title}>
+                    aria-label={contributionStatus === CONTRIBUTION_STATUS.CANCELLED ? `Cancelled Contribution: ${title}` : title}
+                    title={contributionStatus === CONTRIBUTION_STATUS.CANCELLED ? `Cancelled Contribution: ${title}` : title}>
                     {title}
                 </label>
             </td>
@@ -123,6 +132,9 @@ class SomuTableRenderer {
         switch (renderer) {
             case 'MpamTable': {
                 return this.renderMpamContribution(somuItem.data);
+            }
+            case 'CompTable': {
+                return this.renderCompContribution(somuItem.data);
             }
             case 'FoiTable': {
                 return this.renderFoiContribution(somuItem.data);

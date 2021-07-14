@@ -22,8 +22,11 @@ describe('handleSearch', () => {
                     'caseTypes': 'CT1',
                     'dateReceivedTo': '20-10-2019',
                     'dateReceivedFrom': '10-10-2019',
+                    'correspondentAddress1': 'Address1',
+                    'correspondentEmail': 'email@example.com',
                     'correspondent': 'Bob',
                     'correspondentNameNotMember': 'Bobby',
+                    'correspondentPostcode': 'Postcode',
                     'topic': 'Test Topic',
                     'signOffMinister': 'Min123',
                     'claimantName': 'test Name',
@@ -32,8 +35,7 @@ describe('handleSearch', () => {
                     'PrevHocsRef': 'PREV_HOCS_REF',
                     'caseStatus': 'active',
                     'CampaignType': 'Test Campaign 123',
-                    'MinSignOffTeam': 'Test Min Sign Off Team',
-                    'OfficialEngagement': 'Yes'
+                    'MinSignOffTeam': 'Test Min Sign Off Team'
                 }
             },
             requestId: 'reqid',
@@ -90,8 +92,11 @@ describe('handleSearch', () => {
                 from: '10-10-2019'
             },
             correspondentExternalKey: undefined,
+            correspondentAddress1: 'Address1',
+            correspondentEmail: 'email@example.com',
             correspondentName: 'Bob',
             correspondentNameNotMember: 'Bobby',
+            correspondentPostcode: 'Postcode',
             correspondentReference: '',
             topic: 'Test Topic',
             poTeamUuid: 'Min123',
@@ -101,8 +106,7 @@ describe('handleSearch', () => {
                 NI: 'SJ0000000',
                 PrevHocsRef: 'PREV_HOCS_REF',
                 CampaignType: 'Test Campaign 123',
-                MinSignOffTeam: 'Test Min Sign Off Team',
-                OfficialEngagement: 'Yes'
+                MinSignOffTeam: 'Test Min Sign Off Team'
             },
             activeOnly: true
         };

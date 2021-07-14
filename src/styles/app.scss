@@ -50,6 +50,11 @@ $govuk-font-family-tabular: 'helvetica neue',Arial, Helvetica, sans-serif !defau
   padding: inherit;
 }
 
+.govuk-textarea {
+  /* Override to make remaining count text closer to text-area */
+  margin-bottom: 0;
+}
+
 // Code block styling:
 .code {
   font-family: monospace;
@@ -377,6 +382,30 @@ td {
       padding: 0.25em 0.5em 0.25em 0.5em;
     }
   }
+  &.date-advisory {
+      span {
+        background-color: govuk-colour("yellow");
+        color: black;
+        padding: 0.25em 0.5em 0.25em 0.5em;
+      }
+      label {
+        background-color: govuk-colour("yellow");
+        color: black;
+        padding: 0.25em 0.5em 0.25em 0.5em;
+      }
+  }
+  &.date-nowarning {
+      span {
+        background-color: govuk-colour("white");
+        color: black;
+        padding: 0.25em 0.5em 0.25em 0.5em;
+      }
+      label {
+        background-color: govuk-colour("white");
+        color: black;
+        padding: 0.25em 0.5em 0.25em 0.5em;
+      }
+  }
   &.date-warning {
       span {
         background-color: govuk-colour("red");
@@ -407,6 +436,9 @@ td {
 
             &.indicator-blue {
                 background-color: govuk-colour("blue");
+            }
+            &.indicator-green {
+                background-color: govuk-colour("green");
             }
             &.indicator-red {
                 background-color: govuk-colour("red");

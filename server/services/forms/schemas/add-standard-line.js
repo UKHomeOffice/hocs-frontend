@@ -1,5 +1,6 @@
 const Form = require('../form-builder');
 const { Component } = require('../component-builder');
+const { MAX_ALLOWABLE_YEAR } = require('../../../libs/dateHelpers');
 
 module.exports = options => Form()
     .withTitle('Create standard line')
@@ -13,7 +14,9 @@ module.exports = options => Form()
     .withField(
         Component('date', 'expiry_date')
             .withValidator('required', 'Expiration date is required')
-            .withValidator('isValidDate', 'Expiration date must be a valid date')
+            .withValidator('isValidDay', 'Expiration date must contain a real day')
+            .withValidator('isValidMonth', 'Expiration date must contain a real month')
+            .withValidator('isYearWithinRange', `Expiration date must be before ${MAX_ALLOWABLE_YEAR}`)
             .withValidator('isAfterToday', 'Expiration date must not be in the past')
             .withProp('label', 'Expiration date')
             .build()
