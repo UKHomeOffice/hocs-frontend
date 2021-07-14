@@ -211,6 +211,7 @@ const bindDisplayElements = fromStaticList => async (stage) => {
     }
 
     stage.primaryCorrespondentAndRefDisplay = {};
+    stage.mpWithOwnerDisplay = JSON.parse('{"mp":"","owner":""}');
 
     if (stage.correspondents && stage.correspondents.correspondents) {
         stage.memberCorrespondentDisplay = getCorrespondentsNameByType(stage.correspondents, ['MEMBER']);
@@ -224,7 +225,10 @@ const bindDisplayElements = fromStaticList => async (stage) => {
             stage.primaryCorrespondentAndRefDisplay.primaryCorrespondentFullName = primaryCorrespondent.fullname;
         }
 
+        stage.mpWithOwnerDisplay.mp = stage.memberCorrespondentDisplay;
     }
+
+    stage.mpWithOwnerDisplay.owner = stage.assignedUserDisplay;
 
     stage.primaryCorrespondentAndRefDisplay.caseReference = stage.caseReference;
 
