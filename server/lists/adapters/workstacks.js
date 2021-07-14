@@ -114,8 +114,40 @@ const getCorrespondentsNameByType = (correspondents, types) =>
         .map(correspondent => correspondent.fullname)
         .join(', ');
 
+const highestPriorityContributionStatus = (decoratedContributions) => {
+    const contributionStatusEnum = {
+        '': 0,
+        'contributionReceived': 1,
+        'contributionCancelled': 2,
+        'contributionDue': 3,
+        'contributionOverdue': 4
+    };
+    let highestPriority = 0;
+
+    decoratedContributions.forEach(contribution => {
+        if(contributionStatusEnum[contribution.contributionStatus] > highestPriority) {
+            highestPriority = contributionStatusEnum[contribution.contributionStatus];
+        }
+    });
+    return Object.keys(contributionStatusEnum).find(key => contributionStatusEnum[key] === highestPriority);
+};
+
+const decorateContributionsWithStatus = (contributions, currentDate) => {
+    return contributions.map(contribution => {
+        const contributionObject = JSON.parse(contribution);
+        if (contributionObject.contributionStatus !== 'contributionReceived' && contributionObject.contributionStatus !== 'contributionCancelled') {
+            if (addDays(new Date(contributionObject.contributionDueDate), 1)  < currentDate) {
+                contributionObject['contributionStatus'] = 'contributionOverdue';
+            } else {
+                contributionObject['contributionStatus'] = 'contributionDue';
+            }
+        }
+        return contributionObject;
+    });
+};
+
 const bindDisplayElements = fromStaticList => async (stage) => {
-    stage.assignedTeamDisplay = await fromStaticList('S_TEAMS', stage.teamUUID);
+    stage.assignedTeamDisplay = await fromStaticList('S_TEAMS', stage.teamUUID, true);
     stage.caseTypeDisplayFull = await fromStaticList('S_CASETYPES', stage.caseType);
 
     if (stage.assignedTopic) {
@@ -158,7 +190,7 @@ const bindDisplayElements = fromStaticList => async (stage) => {
         }
 
         if (stage.data.CaseContributions &&
-                (contributionReceivedStages.includes(stage.stageType) || contributionRequestedStages.includes(stage.stageType))) {
+            (contributionReceivedStages.includes(stage.stageType) || contributionRequestedStages.includes(stage.stageType))) {
             const dueContribution = JSON.parse(stage.data.CaseContributions)
                 .filter(contribution => contribution.data && !contribution.data.contributionStatus)
                 .map(contribution => contribution.data.contributionDueDate)
@@ -177,7 +209,13 @@ const bindDisplayElements = fromStaticList => async (stage) => {
         }
     }
 
+    if (stage.somu && stage.somu.caseContributions){
+        stage.contributions = highestPriorityContributionStatus(
+            decorateContributionsWithStatus(stage.somu.caseContributions, new Date())).replace('contribution', '');
+    }
+
     stage.primaryCorrespondentAndRefDisplay = {};
+    stage.mpWithOwnerDisplay = JSON.parse('{"mp":"","owner":""}');
     stage.FOIRequesterDisplay = {};
 
     if (stage.correspondents && stage.correspondents.correspondents) {
@@ -185,16 +223,20 @@ const bindDisplayElements = fromStaticList => async (stage) => {
         stage.applicantOrConstituentCorrespondentDisplay = getCorrespondentsNameByType(stage.correspondents, ['APPLICANT', 'CONSTITUENT']);
 
         const primaryCorrespondent =
-          stage.correspondents.correspondents.find(correspondent => correspondent.is_primary === 'true');
+            stage.correspondents.correspondents.find(correspondent => correspondent.is_primary === 'true');
 
         if (primaryCorrespondent) {
+            stage.primaryCorrespondent = primaryCorrespondent;
             stage.primaryCorrespondentAndRefDisplay.primaryCorrespondentFullName = primaryCorrespondent.fullname;
             if (stage.caseType === 'FOI') {
                 stage.FOIRequesterDisplay = primaryCorrespondent.fullname;
             }
         }
 
+        stage.mpWithOwnerDisplay.mp = stage.memberCorrespondentDisplay;
     }
+
+    stage.mpWithOwnerDisplay.owner = stage.assignedUserDisplay;
 
     stage.primaryCorrespondentAndRefDisplay.caseReference = stage.caseReference;
 
@@ -300,7 +342,7 @@ const teamAdapter = async (data, { fromStaticList, logger, teamId, configuration
             return cards;
         }, [])
         .sort(byLabel);
-    const teamDisplayName = await fromStaticList('S_TEAMS', teamId);
+    const teamDisplayName = await fromStaticList('S_TEAMS', teamId, true);
 
     logger.debug('REQUEST_TEAM_WORKSTACK', { team: teamDisplayName, workflows: workflowCards.length, rows: workstackData.length });
     return {
@@ -382,5 +424,7 @@ module.exports = {
     teamAdapter,
     workflowAdapter,
     stageAdapter,
-    bindDisplayElements
+    bindDisplayElements,
+    decorateContributionsWithStatus,
+    highestPriorityContributionStatus
 };

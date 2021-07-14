@@ -45,8 +45,15 @@ describe('Form schema definitions', async () => {
 });
 
 describe('Contribution Request', async () => {
+
+    const mpamContributionsRequest = {
+        showBusinessUnits: true,
+        primaryChoiceLabel: 'Business Area',
+        primaryChoiceList: 'MPAM_CONTRIBUTION_BUSINESS_AREAS'
+    };
+
     it('should generate form with action as add', async () => {
-        const result = await formRepository.contributionRequest({ user: { id: 1234, roles: [], groups: [] }, action: 'addRequest' });
+        const result = await formRepository.contributionRequest({ user: { id: 1234, roles: [], groups: [] }, action: 'addRequest', customConfig: mpamContributionsRequest });
         expect(result).toBeDefined();
         expect(result.schema).toBeDefined();
         expect(result.schema.title).toBeDefined();
@@ -57,7 +64,7 @@ describe('Contribution Request', async () => {
     });
 
     it('should generate form with action as edit', async () => {
-        const result = await formRepository.contributionRequest({ user: { id: 1234, roles: [], groups: [] }, action: 'editRequest' });
+        const result = await formRepository.contributionRequest({ user: { id: 1234, roles: [], groups: [] }, action: 'editRequest', customConfig: mpamContributionsRequest });
         expect(result).toBeDefined();
         expect(result.schema).toBeDefined();
         expect(result.schema.title).toBeDefined();

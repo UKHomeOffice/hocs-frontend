@@ -5,7 +5,7 @@ services:
   postgres:
     image: postgres:9.6
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      test: ["CMD-SHELL", "pg_isready -U root"]
     restart: always
     ports:
     - 5432:5432
@@ -91,6 +91,7 @@ services:
 
   aws_cli:
     image: xueshanf/awscli
+    # The sleep 8h at the end of this command is to keep aws_cli running. Without it, this step can get run multiple times.
     command:
     - /bin/sh
     - -c
@@ -113,6 +114,9 @@ services:
       aws --endpoint-url=http://localstack:4575 sns set-subscription-attributes --subscription-arn $$(aws --endpoint-url=http://localstack:4575 sns list-subscriptions-by-topic --topic-arn arn:aws:sns:eu-west-2:123456789012:hocs-audit-topic --output json | jq --raw-output '.Subscriptions[0].SubscriptionArn') --attribute-name RawMessageDelivery --attribute-value true
       aws --endpoint-url=http://localstack:4575 sns set-subscription-attributes --subscription-arn $$(aws --endpoint-url=http://localstack:4575 sns list-subscriptions-by-topic --topic-arn arn:aws:sns:eu-west-2:123456789012:hocs-audit-topic --output json | jq --raw-output '.Subscriptions[1].SubscriptionArn') --attribute-name RawMessageDelivery --attribute-value true
       aws --endpoint-url=http://localstack:4575 sns list-subscriptions
+      aws --endpoint-url=http://localstack:4576 sqs create-queue --queue-name ukvi-complaint-queue
+      aws --endpoint-url=http://localstack:4576 sqs create-queue --queue-name ukvi-complaint-queue-dlq
+      sleep 8h
     environment:
       AWS_ACCESS_KEY_ID: UNSET
       AWS_SECRET_ACCESS_KEY: UNSET
@@ -126,8 +130,7 @@ services:
   frontend:
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
-    image: quay.io/ukhomeofficedigital/hocs-frontend
-    # image: hocs-frontend-test
+    image: quay.io/ukhomeofficedigital/hocs-frontend:${FRONTEND_TAG:-branch-main}
     ports:
     - 8080:8080
     networks:
@@ -159,8 +162,7 @@ services:
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
       start_period: 240s
-    image: quay.io/ukhomeofficedigital/hocs-casework
-    #image: hocs-casework-test
+    image: quay.io/ukhomeofficedigital/hocs-casework:${CASEWORK_TAG:-branch-main}
     ports:
     - 8082:8080
     networks:
@@ -185,8 +187,7 @@ services:
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
       start_period: 240s
-    image: quay.io/ukhomeofficedigital/hocs-workflow
-    # image: hocs-workflow-test
+    image: quay.io/ukhomeofficedigital/hocs-workflow:${WORKFLOW_TAG:-branch-main}
     ports:
     - 8091:8080
     networks:
@@ -212,13 +213,18 @@ services:
         condition: service_healthy # this waits until healthcheck passes
       aws_cli:
         condition: service_started # this doesn't
+      casework:
+        condition: service_healthy
+      documents:
+        condition: service_healthy
+      info:
+        condition: service_healthy
 
   audit:
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
       start_period: 60s
-    image: quay.io/ukhomeofficedigital/hocs-audit
-    #image: hocs-audit-test
+    image: quay.io/ukhomeofficedigital/hocs-audit:${AUDIT_TAG:-branch-main}
     ports:
     - 8087:8080
     networks:
@@ -241,8 +247,7 @@ services:
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
       start_period: 180s
-    image: quay.io/ukhomeofficedigital/hocs-search
-    #image: hocs-search-test
+    image: quay.io/ukhomeofficedigital/hocs-search:${SEARCH_TAG:-branch-main}
     ports:
     - 8088:8080
     networks:
@@ -272,8 +277,7 @@ services:
   info:
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
-    image: quay.io/ukhomeofficedigital/hocs-info-service
-    #image: hocs-info-service-test
+    image: quay.io/ukhomeofficedigital/hocs-info-service:${INFO_TAG:-branch-main}
     ports:
     - 8085:8080
     networks:
@@ -302,7 +306,7 @@ services:
   converter:
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
-    image: quay.io/ukhomeofficedigital/hocs-docs-converter
+    image: quay.io/ukhomeofficedigital/hocs-docs-converter:${DOCS_CONVERTER_TAG:-branch-main}
     ports:
     - 8084:8080
     networks:
@@ -314,7 +318,7 @@ services:
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
       start_period: 90s
-    image: quay.io/ukhomeofficedigital/hocs-docs
+    image: quay.io/ukhomeofficedigital/hocs-docs:${DOCS_TAG:-branch-main}
     ports:
     - 8083:8080
     networks:
@@ -348,7 +352,7 @@ services:
   templates:
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
-    image: quay.io/ukhomeofficedigital/hocs-templates
+    image: quay.io/ukhomeofficedigital/hocs-templates:${TEMPLATES_TAG:-branch-main}
     ports:
       - 8090:8080
     networks:
@@ -365,5 +369,42 @@ services:
         condition: service_healthy
       documents:
         condition: service_healthy
+
+  case_creator:
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8080/actuator/health" ]
+      start_period: 90s
+    image: quay.io/ukhomeofficedigital/hocs-case-creator:${CASE_CREATOR_TAG:-branch-main}
+    ports:
+      - 8092:8080
+    networks:
+      - hocs-network
+    environment:
+      SPRING_PROFILES_ACTIVE: 'development, local'
+      SERVER_PORT: 8080
+      AWS_LOCAL_HOST: 'localstack'
+      AWS_SQS_REGION: 'eu-west-2'
+      AWS_ACCOUNT_ID: '1234'
+      CASE_CREATOR_WORKFLOW_SERVICE: http://workflow:8080
+      CASE_CREATOR_CASE_SERVICE: http://casework:8080
+      CASE_CREATOR_BASICAUTH: 'UNSET'
+      CASE_CREATOR_UKVI_COMPLAINT_USER: '04167856-f772-4bca-87b9-f8b6739853b7'
+      CASE_CREATOR_UKVI_COMPLAINT_GROUP: '/CMS_CCH_zqxmzQ6iGEkTRw'
+      CASE_CREATOR_SQS_ACCESS_KEY: '1234'
+      CASE_CREATOR_SQS_SECRET_KEY: '1234'
+      CASE_CREATOR_UKVI_COMPLAINT_QUEUE_NAME: 'ukvi-complaint-queue'
+      CASE_CREATOR_UKVI_COMPLAINT_DL_QUEUE_NAME: 'ukvi-complaint-queue-dlq'
+      AUDIT_SNS_ACCESS_KEY: '1234'
+      AUDIT_SNS_SECRET_KEY: '1234'
+      AUDIT_SNS_TOPIC_NAME: "hocs-audit-topic"
+      DOCUMENT_S3_ACCESS_KEY: '1234'
+      DOCUMENT_S3_SECRET_KEY: '1234'
+      DOCUMENT_S3_UNTRUSTED_BUCKET_NAME: 'untrusted-bucket'
+    depends_on:
+      localstack:
+        condition: service_healthy
+      aws_cli:
+        condition: service_started
+
 networks:
   hocs-network:

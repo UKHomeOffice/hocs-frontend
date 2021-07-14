@@ -65,6 +65,23 @@ $ docker-compose pull
 $ docker-compose up
 ```
 
+## .env file for using non-latest images
+By default, all images use the `latest` tag, however if you want to run the services
+locally with a specific image, create a `.env` file in this /docker directory with required 
+envvars, for example:
+```
+FRONTEND_TAG=my-tag-here
+CASEWORK_TAG=my-tag-here
+WORKFLOW_TAG=my-tag-here
+AUDIT_TAG=my-tag-here
+SEARCH_TAG=my-tag-here
+INFO_TAG=my-tag-here
+DOCS_CONVERTER_TAG=my-tag-here
+DOCS_TAG=my-tag-here
+TEMPLATES_TAG=my-tag-here
+CASE_CREATOR_TAG=my-tag-here
+```
+
 ## Troubleshooting
 ### Unhealthy containers
 

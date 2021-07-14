@@ -17,4 +17,14 @@ describe('Phase Banner component', () => {
             render(<PhaseBanner feedback="http://some.domain" />)
         ).toMatchSnapshot();
     });
+    it('should display the correct test notice when isNotProd === 1', () => {
+        expect(
+            render(<PhaseBanner isNotProd={true} />)
+        ).toMatchSnapshot();
+    });
+    it('should display the correct test notice when isNotProd === 0', () => {
+        expect(
+            render(<PhaseBanner isNotProd={false} />)
+        ).toMatchSnapshot();
+    });
 });

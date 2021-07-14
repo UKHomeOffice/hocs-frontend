@@ -31,22 +31,27 @@ function defaultDataAdapter(name, data, currentValue) {
     return data[name] || currentValue;
 }
 
+const retrieveValue = ({ defaultValue, populateFromCaseData = true, name }, dataAdapter, data) => {
+    let value = defaultValue || '';
+
+    if (populateFromCaseData && data) {
+        value = dataAdapter ? dataAdapter(name, data) : defaultDataAdapter(name, data, value);
+    }
+
+    return value;
+};
+
 function renderFormComponent(Component, options) {
     const { key, config, data, errors, callback, dataAdapter, page, caseRef } = options;
 
     if (isComponentVisible(config, data)) {
-        let value = config.defaultValue || '';
-
-        if (data) {
-            value = dataAdapter ? dataAdapter(config.name, data) : defaultDataAdapter(config.name, data, value);
-        }
         return <Component key={key}
             {...config}
             data={data}
             error={errors && errors[config.name]}
             errors={errors}
-            value={value}
             caseRef={caseRef}
+            value={retrieveValue(config, dataAdapter, data)}
             updateState={callback ? data => callback(data) : null}
             page={page} />;
     }

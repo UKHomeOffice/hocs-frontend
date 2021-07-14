@@ -1,4 +1,4 @@
-const { isProduction } = require('../config');
+const { showStackTraceInErrorPage: showStackTrace } = require('../config');
 
 class ErrorModel extends Error {
 
@@ -14,7 +14,7 @@ class ErrorModel extends Error {
             status: this.status,
             title: this.title,
             message: this.message,
-            stack: isProduction ? null : this.stack
+            stack: showStackTrace ? null : this.stack
         };
     }
 
