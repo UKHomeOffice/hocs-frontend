@@ -148,7 +148,6 @@ class Radio extends Component {
                                             data-aria-controls={`conditional-${idName}`}
                                             className={'govuk-radios__input'}
                                         />
-                                        <label className="govuk-label govuk-radios__label" htmlFor={`${idName}`}>{choice.label}</label>
                                         <label className="govuk-label govuk-radios__label" htmlFor={`${name}-${choice.value}`}>
                                             {choice.label}
                                             {choice.description && <span className="govuk-body-s full-width">{choice.description}</span>}

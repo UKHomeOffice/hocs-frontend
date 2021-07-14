@@ -268,6 +268,15 @@ Object {
       "deadline": "2200-02-03",
       "deadlineDisplay": "03/02/2200",
       "memberCorrespondentDisplay": "",
+      "mpWithOwnerDisplay": Object {
+        "mp": "",
+        "owner": "MOCK_USER",
+      },
+      "primaryCorrespondent": Object {
+        "fullname": "testNameFOIRequester",
+        "is_primary": "true",
+        "uuid": "uuid123",
+      },
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234568/19",
         "primaryCorrespondentFullName": "testNameFOIRequester",
@@ -608,18 +617,6 @@ Object {
 }
 `;
 
-exports[`Workflow Workstack Adapter should add the primary correspondent to FOIRequester field for FOI case type 1`] = `
-Object {
-  "allocateToTeamEndpoint": "/allocate/team",
-  "allocateToUserEndpoint": "/allocate/user",
-  "allocateToWorkstackEndpoint": "/unallocate/",
-  "columns": Array [],
-  "items": Array [],
-  "label": "MOCK_STAGETYPE",
-  "teamMembers": Array [],
-}
-`;
-
 exports[`Workflow Workstack Adapter should add the fullname and postcode of primaryCorrespondent to primaryCorrespondent 1`] = `
 Object {
   "allocateToTeamEndpoint": "/allocate/team",
@@ -628,6 +625,7 @@ Object {
   "columns": Array [],
   "items": Array [
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "applicantOrConstituentCorrespondentDisplay": "",
       "assignedTeamDisplay": "MOCK_TEAM",
@@ -678,6 +676,18 @@ Object {
       "userUUID": 2,
     },
   ],
+  "label": "MOCK_STAGETYPE",
+  "teamMembers": Array [],
+}
+`;
+
+exports[`Workflow Workstack Adapter should add the primary correspondent to FOIRequester field for FOI case type 1`] = `
+Object {
+  "allocateToTeamEndpoint": "/allocate/team",
+  "allocateToUserEndpoint": "/allocate/user",
+  "allocateToWorkstackEndpoint": "/unallocate/",
+  "columns": Array [],
+  "items": Array [],
   "label": "MOCK_STAGETYPE",
   "teamMembers": Array [],
 }
