@@ -7,6 +7,8 @@ const mockTopic = 'MOCK_TOPIC';
 
 const mockFromStaticList = jest.fn((list) => {
     switch (list) {
+        case 'S_ALL_TEAMS':
+            return 'MOCK_TEAM';
         case 'S_TEAMS':
             return 'MOCK_TEAM';
         case 'S_CASETYPES':

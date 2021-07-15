@@ -42,7 +42,7 @@ describe('handleSearch', () => {
             user: mockUser,
             listService: {
                 getFromStaticList: jest.fn(async (listId, key) => {
-                    if (listId === 'S_TEAMS' && key === 'T1') {
+                    if (listId === 'S_ALL_TEAMS' && key === 'T1') {
                         return Promise.resolve('TEAM1');
                     }
                     if (listId === 'S_CASETYPES' && key === 'CT1') {
