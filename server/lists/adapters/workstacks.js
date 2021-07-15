@@ -147,7 +147,7 @@ const decorateContributionsWithStatus = (contributions, currentDate) => {
 };
 
 const bindDisplayElements = fromStaticList => async (stage) => {
-    stage.assignedTeamDisplay = await fromStaticList('S_TEAMS', stage.teamUUID, true);
+    stage.assignedTeamDisplay = await fromStaticList('S_ALL_TEAMS', stage.teamUUID, true);
     stage.caseTypeDisplayFull = await fromStaticList('S_CASETYPES', stage.caseType);
 
     if (stage.assignedTopic) {

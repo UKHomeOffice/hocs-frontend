@@ -33,6 +33,12 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: statics.teamsAdapter
         },
+        S_ALL_TEAMS: {
+            client: 'INFO',
+            endpoint: '/team/all',
+            type: listService.types.STATIC,
+            adapter: statics.teamsAdapter
+        },
         S_USERS: {
             client: 'INFO',
             endpoint: '/users',
