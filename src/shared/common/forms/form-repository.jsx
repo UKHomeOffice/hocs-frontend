@@ -57,6 +57,7 @@ function renderFormComponent(Component, options) {
     const { key, config, data, errors, callback, dataAdapter, page, caseRef, switchDirection } = options;
 
     if (isComponentVisible(config, data)) {
+
         return <Component key={key}
             {...config}
             data={data}
