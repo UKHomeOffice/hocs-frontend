@@ -119,6 +119,10 @@ Object {
       "data": Object {},
       "deadline": "1900-01-01",
       "deadlineDisplay": "01/01/1900",
+      "mpWithOwnerDisplay": Object {
+        "mp": "",
+        "owner": "MOCK_USER",
+      },
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234567/19",
       },
@@ -140,6 +144,10 @@ Object {
       "data": Object {},
       "deadline": "2020-12-31",
       "deadlineDisplay": "31/12/2020",
+      "mpWithOwnerDisplay": Object {
+        "mp": "",
+        "owner": "MOCK_USER",
+      },
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234567/19",
       },
@@ -161,6 +169,10 @@ Object {
       "data": Object {},
       "deadline": "2020-12-31",
       "deadlineDisplay": "31/12/2020",
+      "mpWithOwnerDisplay": Object {
+        "mp": "",
+        "owner": "MOCK_USER",
+      },
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234567/19",
       },
@@ -181,6 +193,10 @@ Object {
       "data": Object {},
       "deadline": "1900-01-02",
       "deadlineDisplay": "02/01/1900",
+      "mpWithOwnerDisplay": Object {
+        "mp": "",
+        "owner": undefined,
+      },
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234568/19",
       },
@@ -200,6 +216,10 @@ Object {
       "data": Object {},
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
+      "mpWithOwnerDisplay": Object {
+        "mp": "",
+        "owner": "MOCK_USER",
+      },
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234568/19",
       },
@@ -218,6 +238,10 @@ Object {
       "data": Object {},
       "deadline": "1900-01-04",
       "deadlineDisplay": "04/01/1900",
+      "mpWithOwnerDisplay": Object {
+        "mp": "",
+        "owner": undefined,
+      },
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234569/19",
       },
@@ -237,6 +261,10 @@ Object {
       "data": Object {},
       "deadline": "06-01-2200",
       "deadlineDisplay": null,
+      "mpWithOwnerDisplay": Object {
+        "mp": "",
+        "owner": "MOCK_USER",
+      },
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234569/19",
       },
@@ -255,6 +283,10 @@ Object {
       "data": Object {},
       "deadline": "1900-01-05",
       "deadlineDisplay": "05/01/1900",
+      "mpWithOwnerDisplay": Object {
+        "mp": "",
+        "owner": undefined,
+      },
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234570/19",
       },
@@ -310,6 +342,10 @@ Object {
       },
       "deadline": "1900-01-04",
       "deadlineDisplay": "04/01/1900",
+      "mpWithOwnerDisplay": Object {
+        "mp": "",
+        "owner": undefined,
+      },
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234569/19",
       },
@@ -331,6 +367,10 @@ Object {
       },
       "deadline": "06-01-2200",
       "deadlineDisplay": null,
+      "mpWithOwnerDisplay": Object {
+        "mp": "",
+        "owner": "MOCK_USER",
+      },
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234569/19",
       },
@@ -351,6 +391,10 @@ Object {
       },
       "deadline": "1900-01-05",
       "deadlineDisplay": "05/01/1900",
+      "mpWithOwnerDisplay": Object {
+        "mp": "",
+        "owner": undefined,
+      },
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234570/19",
       },
@@ -373,6 +417,10 @@ Object {
       },
       "deadline": "1900-01-02",
       "deadlineDisplay": "02/01/1900",
+      "mpWithOwnerDisplay": Object {
+        "mp": "",
+        "owner": undefined,
+      },
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234568/19",
       },
@@ -394,6 +442,10 @@ Object {
       },
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
+      "mpWithOwnerDisplay": Object {
+        "mp": "",
+        "owner": "MOCK_USER",
+      },
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234568/19",
       },
@@ -424,6 +476,10 @@ Object {
       "caseTypeDisplayFull": "MOCK_CASETYPE",
       "deadline": "2200-01-01",
       "deadlineDisplay": "01/01/2200",
+      "mpWithOwnerDisplay": Object {
+        "mp": "",
+        "owner": "MOCK_USER",
+      },
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": undefined,
       },
@@ -468,6 +524,10 @@ Object {
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
       "memberCorrespondentDisplay": "",
+      "mpWithOwnerDisplay": Object {
+        "mp": "",
+        "owner": "MOCK_USER",
+      },
       "primaryCorrespondent": Object {
         "fullname": "testName",
         "is_primary": "true",
@@ -526,6 +586,10 @@ Object {
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
       "memberCorrespondentDisplay": "",
+      "mpWithOwnerDisplay": Object {
+        "mp": "",
+        "owner": "MOCK_USER",
+      },
       "primaryCorrespondent": Object {
         "fullname": "primaryC",
         "is_primary": "true",
@@ -587,6 +651,10 @@ Object {
       "data": Object {},
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
+      "mpWithOwnerDisplay": Object {
+        "mp": "",
+        "owner": "MOCK_USER",
+      },
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234568/19",
       },
@@ -605,6 +673,10 @@ Object {
       "data": Object {},
       "deadline": "1900-01-04",
       "deadlineDisplay": "04/01/1900",
+      "mpWithOwnerDisplay": Object {
+        "mp": "",
+        "owner": undefined,
+      },
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234569/19",
       },
@@ -624,6 +696,10 @@ Object {
       "data": Object {},
       "deadline": "2200-01-06",
       "deadlineDisplay": "06/01/2200",
+      "mpWithOwnerDisplay": Object {
+        "mp": "",
+        "owner": "MOCK_USER",
+      },
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234569/19",
       },
@@ -642,6 +718,10 @@ Object {
       "data": Object {},
       "deadline": "1900-01-07",
       "deadlineDisplay": "07/01/1900",
+      "mpWithOwnerDisplay": Object {
+        "mp": "",
+        "owner": undefined,
+      },
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234569/19",
       },
@@ -660,6 +740,10 @@ Object {
       "data": Object {},
       "deadline": "1900-01-05",
       "deadlineDisplay": "05/01/1900",
+      "mpWithOwnerDisplay": Object {
+        "mp": "",
+        "owner": undefined,
+      },
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234570/19",
       },
@@ -692,6 +776,10 @@ Object {
       "data": Object {},
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
+      "mpWithOwnerDisplay": Object {
+        "mp": "",
+        "owner": "MOCK_USER",
+      },
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234568/19",
       },
@@ -710,6 +798,10 @@ Object {
       "data": Object {},
       "deadline": "1900-01-04",
       "deadlineDisplay": "04/01/1900",
+      "mpWithOwnerDisplay": Object {
+        "mp": "",
+        "owner": undefined,
+      },
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234569/19",
       },
@@ -729,6 +821,10 @@ Object {
       "data": Object {},
       "deadline": "2200-01-06",
       "deadlineDisplay": "06/01/2200",
+      "mpWithOwnerDisplay": Object {
+        "mp": "",
+        "owner": "MOCK_USER",
+      },
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234569/19",
       },
@@ -747,6 +843,10 @@ Object {
       "data": Object {},
       "deadline": "1900-01-05",
       "deadlineDisplay": "05/01/1900",
+      "mpWithOwnerDisplay": Object {
+        "mp": "",
+        "owner": undefined,
+      },
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234570/19",
       },
@@ -782,6 +882,10 @@ Object {
       },
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
+      "mpWithOwnerDisplay": Object {
+        "mp": "",
+        "owner": "MOCK_USER",
+      },
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234568/19",
       },
@@ -812,10 +916,14 @@ Object {
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
       "data": Object {
-        "CaseContributions": "[{\\"contributionDueDate\\":\\"2020-12-12\\"}]",
+        "CaseContributions": "[{\\"data\\": {\\"contributionDueDate\\":\\"2020-12-12\\"}}]",
       },
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
+      "mpWithOwnerDisplay": Object {
+        "mp": "",
+        "owner": "MOCK_USER",
+      },
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234568/19",
       },
@@ -850,6 +958,10 @@ Object {
       },
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
+      "mpWithOwnerDisplay": Object {
+        "mp": "",
+        "owner": "MOCK_USER",
+      },
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234568/19",
       },
@@ -884,6 +996,10 @@ Object {
       },
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
+      "mpWithOwnerDisplay": Object {
+        "mp": "",
+        "owner": "MOCK_USER",
+      },
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234568/19",
       },
@@ -918,6 +1034,10 @@ Object {
       },
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
+      "mpWithOwnerDisplay": Object {
+        "mp": "",
+        "owner": "MOCK_USER",
+      },
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234568/19",
       },
@@ -952,6 +1072,10 @@ Object {
       },
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
+      "mpWithOwnerDisplay": Object {
+        "mp": "",
+        "owner": "MOCK_USER",
+      },
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234568/19",
       },
@@ -986,6 +1110,10 @@ Object {
       },
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
+      "mpWithOwnerDisplay": Object {
+        "mp": "",
+        "owner": "MOCK_USER",
+      },
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234568/19",
       },
@@ -1020,6 +1148,10 @@ Object {
       },
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
+      "mpWithOwnerDisplay": Object {
+        "mp": "",
+        "owner": "MOCK_USER",
+      },
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234568/19",
       },
@@ -1054,6 +1186,10 @@ Object {
       },
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
+      "mpWithOwnerDisplay": Object {
+        "mp": "",
+        "owner": "MOCK_USER",
+      },
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234568/19",
       },

@@ -151,27 +151,6 @@ steps:
     depends_on:
       - clone kube repo
 
-  # deploy epic branches to specific namespaces
-  - name: deploy to delta
-    image: quay.io/ukhomeofficedigital/kd:v1.16.0
-    environment:
-      ENVIRONMENT: hocs-delta
-      VERSION: build_${DRONE_BUILD_NUMBER}
-      KUBE_TOKEN:
-        from_secret: hocs_frontend_hocs_delta
-      POISE_WHITELIST:
-        from_secret: POISE_WHITELIST
-    commands:
-      - cd kube-hocs-frontend
-      - ./deploy.sh
-    when:
-      branch:
-        - epic/HOCS-COMP
-      event:
-        - push
-    depends_on:
-      - clone kube repo
-
   - name: wait for docker
     image: docker
     commands:
