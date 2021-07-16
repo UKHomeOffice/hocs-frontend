@@ -26,6 +26,15 @@ jest.mock('../../clients', () => {
                     mockRequestClient(body);
                     return handleMockWorkflowCreateRequest(body);
                 }
+                if (url == '/case/1234/stage/5678') {
+                    mockRequestClient(body);
+                    return  Promise.resolve({
+                        data: {
+                            form: {},
+                            stageUUID: '123abc'
+                        }
+                    });
+                }
                 mockRequestClient(body);
             },
             delete: (url, body) => {
@@ -124,6 +133,25 @@ describe('Action service', () => {
     beforeEach(() => {
         mockRequestClient.mockReset();
     });
+
+    it('handleWorkflowSuccess - with form data returned from back end', async () => {
+
+        const FORM_DATA = { data: { 'a': 's' } };
+
+        const response = await actionService.performAction('WORKFLOW', {
+            workflow: 'CREATE',
+            action: 'WORKFLOW',
+            form: FORM_DATA,
+            user: mockUser,
+            caseId: '1234',
+            stageId: '5678'
+        });
+
+        expect(response).toBeDefined();
+        expect(mockRequestClient).toHaveBeenCalledWith(FORM_DATA);
+        expect(response).toHaveProperty('callbackUrl', '/case/1234/stage/123abc');
+    });
+
     it('should return a callback url when passed supported workflow and action', async () => {
         const response = await actionService.performAction('ACTION', {
             workflow: 'CREATE',

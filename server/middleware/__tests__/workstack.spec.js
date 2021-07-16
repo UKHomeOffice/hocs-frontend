@@ -14,10 +14,13 @@ let res = {};
 const next = jest.fn();
 
 
-const { caseworkService } = require('../../clients');
+const { caseworkService, workflowService } = require('../../clients');
 
 jest.mock('../../clients', () => ({
     caseworkService: {
+        put: jest.fn()
+    },
+    workflowService: {
         put: jest.fn()
     }
 }));
@@ -113,6 +116,7 @@ describe('Workstack middleware', () => {
             };
 
             caseworkService.put.mockClear();
+            workflowService.put.mockClear();
         });
 
         it('should invoke the caseservice to allocate cases to a team member', async () => {
@@ -128,10 +132,10 @@ describe('Workstack middleware', () => {
             await handleWorkstackSubmit(req, res, next);
 
             expect(caseworkService.put.mock.calls[0])
-                .toEqual(['/case/uuid1/stage/uuid2/user',{ 'userUUID':'test_user' }, expectedHeaders]);
+                .toEqual(['/case/uuid1/stage/uuid2/user', { 'userUUID': 'test_user' }, expectedHeaders]);
 
             expect(caseworkService.put.mock.calls[1])
-                .toEqual(['/case/uuid3/stage/uuid4/user',{ 'userUUID':'test_user' }, expectedHeaders]);
+                .toEqual(['/case/uuid3/stage/uuid4/user', { 'userUUID': 'test_user' }, expectedHeaders]);
 
             expect(next).toBeCalled();
         });
@@ -148,11 +152,17 @@ describe('Workstack middleware', () => {
 
             await handleWorkstackSubmit(req, res, next);
 
+            expect(workflowService.put.mock.calls[0])
+                .toEqual(['/case/uuid1/stage/uuid2/CaseworkTeamUUID', { 'value': 'test_team' }, expectedHeaders]);
+
+            expect(workflowService.put.mock.calls[1])
+                .toEqual(['/case/uuid3/stage/uuid4/CaseworkTeamUUID', { 'value': 'test_team' }, expectedHeaders]);
+
             expect(caseworkService.put.mock.calls[0])
-                .toEqual(['/case/uuid1/stage/uuid2/team',{ 'teamUUID':'test_team' }, expectedHeaders]);
+                .toEqual(['/case/uuid1/stage/uuid2/team', { 'teamUUID': 'test_team' }, expectedHeaders]);
 
             expect(caseworkService.put.mock.calls[1])
-                .toEqual(['/case/uuid3/stage/uuid4/team',{ 'teamUUID':'test_team' }, expectedHeaders]);
+                .toEqual(['/case/uuid3/stage/uuid4/team', { 'teamUUID': 'test_team' }, expectedHeaders]);
 
             expect(next).toBeCalled();
         });
@@ -193,7 +203,7 @@ describe('Workstack middleware', () => {
     });
 
     describe('Get Move Team Options', () => {
-        const mockTeamsResponse = [ { 'team_object': 'team' } ];
+        const mockTeamsResponse = [{ 'team_object': 'team' }];
 
         beforeEach(() => {
             next.mockReset();

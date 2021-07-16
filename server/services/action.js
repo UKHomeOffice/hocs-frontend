@@ -3,6 +3,7 @@ const actionTypes = require('./actions/types');
 const { ActionError } = require('../models/error');
 const getLogger = require('../libs/logger');
 const User = require('../models/user');
+const doubleEncodeSlashes = require('../libs/encodingHelpers');
 
 function createDocumentSummaryObjects(form, type) {
     return form.schema.fields.reduce((reducer, field) => {
@@ -70,9 +71,9 @@ async function handleActionSuccess(response, workflow, form) {
     }
 }
 
-function handleWorkflowSuccess(response, { caseId, stageId }) {
+function handleWorkflowSuccess(response, { caseId }) {
     if (response.data && response.data.form) {
-        return { callbackUrl: `/case/${caseId}/stage/${stageId}` };
+        return { callbackUrl: `/case/${caseId}/stage/${response.data.stageUUID}` };
     } else {
         return { callbackUrl: '/' };
     }
@@ -99,7 +100,7 @@ const actions = {
                     case actionTypes.CREATE_AND_ALLOCATE_CASE: {
                         const { data: documentTags } = await getDocumentTags(context);
                         const { data: { reference } } = await createCase('/case', { caseType: context, form }, documentTags[0], headers);
-                        const { data: { stages } } = await caseworkService.get(`/case/${encodeURIComponent(reference)}/stage`, headers);
+                        const { data: { stages } } = await caseworkService.get(`/case/${doubleEncodeSlashes(encodeURIComponent(reference))}/stage`, headers);
                         const { caseUUID, uuid: stageUUID } = stages[0];
                         return handleActionSuccess({ callbackUrl: `/case/${caseUUID}/stage/${stageUUID}/allocate` }, workflow, form);
                     }

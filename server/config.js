@@ -1,5 +1,7 @@
 const isProduction = process.env.NODE_ENV === 'production';
 const workflowAuth = (process.env.WORKFLOW_BASIC_AUTH || 'UNSET:UNSET').split(':');
+const isNotProd = process.env.IS_NOTPROD === '1';
+const showStackTraceInErrorPage = process.env.SHOW_STACKTRACE_ON_ERROR_PAGE === '1';
 
 const config = {
     applications: {
@@ -13,7 +15,8 @@ const config = {
             DOCUMENT_SERVICE: process.env.DOCUMENT_SERVICE || 'http://localhost:8083',
             DOCUMENT_WHITELIST: (process.env.ALLOWED_FILE_EXTENSIONS || 'txt,doc,docx,tiff,tif,xlsx,pdf').split(',').map(extension => extension.trim()),
             DOCUMENT_BULK_LIMIT: process.env.DOCUMENT_BULK_LIMIT || 40,
-            VALID_DAYS_RANGE: process.env.VALID_DAYS_RANGE || 180
+            VALID_DAYS_RANGE: process.env.VALID_DAYS_RANGE || 180,
+            STATIC_DATA_REFRESH_SCHEDULE: process.env.STATIC_DATA_REFRESH_SCHEDULE || '*/15 * * * *'
         },
         AWS: {
             S3: {
@@ -39,5 +42,7 @@ module.exports = {
             throw new Error('Specified application configuration does not exist');
         }
     },
-    isProduction
+    isProduction,
+    isNotProd,
+    showStackTraceInErrorPage
 };

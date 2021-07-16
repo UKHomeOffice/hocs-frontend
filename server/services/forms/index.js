@@ -7,6 +7,24 @@ const {
     EDIT_CONTRIBUTION, APPLY_CASE_DEADLINE_EXTENSION, CONFIRMATION_SUMMARY
 } = require('../actions/types');
 
+const mpamContributionsRequest = {
+    showBusinessUnits: true,
+    primaryChoiceLabel: 'Business Area',
+    primaryChoiceList: 'MPAM_CONTRIBUTION_BUSINESS_AREAS'
+};
+
+const compBusinessContributionsRequest = {
+    showBusinessUnits: false,
+    primaryChoiceLabel: 'Business Area',
+    primaryChoiceList: 'S_COMP_CONTRIB_BUS_AREA'
+};
+
+const compComplainantContributionsRequest = {
+    showBusinessUnits: false,
+    primaryChoiceLabel: 'Contributions Type',
+    primaryChoiceList: 'S_COMP_CONTRIB_TYPE'
+};
+
 const formDefinitions = {
     ACTION: {
         CREATE: {
@@ -20,6 +38,13 @@ const formDefinitions = {
                 }
             },
             DOCUMENT: {
+                COMP: {
+                    builder: formRepository.addDocument,
+                    action: CREATE_CASE,
+                    next: {
+                        action: 'CONFIRMATION_SUMMARY'
+                    }
+                },
                 MIN: {
                     builder: formRepository.addDocument,
                     action: CREATE_CASE,
@@ -84,6 +109,13 @@ const formDefinitions = {
                 }
             },
             DOCUMENT: {
+                COMP: {
+                    builder: formRepository.bulkAddDocument,
+                    action: BULK_CREATE_CASE,
+                    next: {
+                        action: 'CONFIRMATION_SUMMARY'
+                    }
+                },
                 MIN: {
                     builder: formRepository.bulkAddDocument,
                     action: BULK_CREATE_CASE,
@@ -217,22 +249,73 @@ const formDefinitions = {
             MPAM: {
                 ADDREQUEST: {
                     builder: formRepository.contributionRequest,
-                    action: ADD_CONTRIBUTION
+                    action: ADD_CONTRIBUTION,
+                    customConfig: mpamContributionsRequest
                 },
                 ADDADDITIONALREQUEST: {
                     builder: formRepository.contributionRequest,
-                    action: ADD_ADDITIONAL_CONTRIBUTION
+                    action: ADD_ADDITIONAL_CONTRIBUTION,
+                    customConfig: mpamContributionsRequest
                 },
                 EDITREQUEST: {
                     builder: formRepository.contributionRequest,
-                    action: EDIT_CONTRIBUTION
+                    action: EDIT_CONTRIBUTION,
+                    customConfig: mpamContributionsRequest
                 },
                 VIEWREQUEST: {
                     builder: formRepository.contributionRequest,
+                    customConfig: mpamContributionsRequest
                 },
                 EDIT: {
                     builder: formRepository.contributionFulfillment,
-                    action: EDIT_CONTRIBUTION
+                    action: EDIT_CONTRIBUTION,
+                    customConfig: mpamContributionsRequest
+                }
+            }
+        },
+        CCT_COMP_CONTRIB: {
+            COMP: {
+                ADDREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    action: ADD_CONTRIBUTION,
+                    customConfig: compComplainantContributionsRequest
+                },
+                EDITREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    action: EDIT_CONTRIBUTION,
+                    customConfig: compComplainantContributionsRequest
+                },
+                VIEWREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    customConfig: compComplainantContributionsRequest
+                },
+                EDIT: {
+                    builder: formRepository.contributionFulfillment,
+                    action: EDIT_CONTRIBUTION,
+                    customConfig: compComplainantContributionsRequest
+                }
+            }
+        },
+        CCT_BUS_CONTRIB: {
+            COMP: {
+                ADDREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    action: ADD_CONTRIBUTION,
+                    customConfig: compBusinessContributionsRequest
+                },
+                EDITREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    action: EDIT_CONTRIBUTION,
+                    customConfig: compBusinessContributionsRequest
+                },
+                VIEWREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    customConfig: compBusinessContributionsRequest
+                },
+                EDIT: {
+                    builder: formRepository.contributionFulfillment,
+                    action: EDIT_CONTRIBUTION,
+                    customConfig: compBusinessContributionsRequest
                 }
             },
             FOI: {
@@ -293,6 +376,7 @@ module.exports = {
                 formDefinition = formDefinitions['CASE'][entity.toUpperCase()][action.toUpperCase()];
             } else if (somuType && somuCaseType) {
                 formDefinition = formDefinitions['CASE'][somuType.toUpperCase()][somuCaseType.toUpperCase()][action.toUpperCase()];
+                options.customConfig = formDefinition.customConfig;
             }
 
             if (formDefinition) {
