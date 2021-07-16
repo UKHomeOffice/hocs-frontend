@@ -147,7 +147,7 @@ const decorateContributionsWithStatus = (contributions, currentDate) => {
 };
 
 const bindDisplayElements = fromStaticList => async (stage) => {
-    stage.assignedTeamDisplay = await fromStaticList('S_TEAMS', stage.teamUUID, true);
+    stage.assignedTeamDisplay = await fromStaticList('S_TEAMS', stage.teamUUID);
     stage.caseTypeDisplayFull = await fromStaticList('S_CASETYPES', stage.caseType);
 
     if (stage.assignedTopic) {
@@ -334,7 +334,7 @@ const teamAdapter = async (data, { fromStaticList, logger, teamId, configuration
             return cards;
         }, [])
         .sort(byLabel);
-    const teamDisplayName = await fromStaticList('S_TEAMS', teamId, true);
+    const teamDisplayName = await fromStaticList('S_TEAMS', teamId);
 
     logger.debug('REQUEST_TEAM_WORKSTACK', { team: teamDisplayName, workflows: workflowCards.length, rows: workstackData.length });
     return {
