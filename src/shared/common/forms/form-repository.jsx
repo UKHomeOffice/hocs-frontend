@@ -42,8 +42,15 @@ const retrieveValue = ({ defaultValue, populateFromCaseData = true, name }, data
     return value;
 };
 
-function reviewBoxDataAdapter(config, data) {
-    return data[config.child.props.name];
+function reviewBoxDataAdapter(name, data) {
+    return data[name];
+}
+
+function hasFieldData(obj) {
+    if (typeof obj.name !== 'object' && obj.child && obj.child.props) {
+        return obj.child.props;
+    }
+    return obj;
 }
 
 function renderFormComponent(Component, options) {
@@ -56,7 +63,7 @@ function renderFormComponent(Component, options) {
             error={errors && errors[config.name]}
             errors={errors}
             caseRef={caseRef}
-            value={retrieveValue(config, dataAdapter, data)}
+            value={retrieveValue(hasFieldData(config), dataAdapter, data)}
             updateState={callback ? data => callback(data) : null}
             page={page}
             switchDirection={switchDirection}/>;
