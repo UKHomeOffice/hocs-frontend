@@ -88,7 +88,6 @@ const browserConfig = env => {
                 writeToDisk: true,
                 customize: (entry) => {
                     /* eslint-disable-next-line no-console */
-                    console.log(entry);
                     entry.type = entry.key.slice(entry.key.lastIndexOf('.') + 1);
                     entry.key = entry.key.slice(0, entry.key.lastIndexOf('.'));
                     entry.value = entry.value.slice(entry.value.lastIndexOf('/') + 1);

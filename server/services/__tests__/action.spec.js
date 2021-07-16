@@ -82,6 +82,15 @@ jest.mock('../../clients', () => {
 
 const createCaseRequest = {
     type: 'SUPPORTED_CASETYPE',
+    dateReceived: '2021-07-09',
+    data: {
+        document_field: [
+            {
+                originalname: 'test_document.txt',
+                key: '/location/to/the/file'
+            }
+        ]
+    },
     documents: [
         {
             displayName: 'test_document.txt',
@@ -104,6 +113,7 @@ const testCreateCaseForm = {
         ]
     },
     data: {
+        DateReceived: '2021-07-09',
         document_field: [
             {
                 originalname: 'test_document.txt',

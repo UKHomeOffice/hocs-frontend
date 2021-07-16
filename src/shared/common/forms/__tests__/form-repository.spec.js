@@ -26,6 +26,7 @@ const supportedFormComponents = [
     { component: 'confirmation-with-case-ref', props: { name: 'confirmation-with-case-ref' } },
     { component: 'hidden', props: { name: 'hidden', defaultValue: 'TEST_VALUE', populateFromCaseData: false } },
     { component: 'expandable-checkbox', props: { choice: { label: '__label__', value: '__value__' }, name: 'expandable' } },
+    { component: 'review-field', props: { child: { props: { name: 'Test', label: 'Test Label' } }, name: 'TEST' } }
 ];
 
 const supportedSecondaryActions = [
@@ -39,6 +40,10 @@ const testData = {
     'checkbox-component-A': true,
     'checkbox-component-B': false,
     'hidden': 'TEST'
+};
+
+const testDataReviewField = {
+    'Test': 'Test Value'
 };
 
 const testValidationErrors = {
@@ -144,4 +149,20 @@ describe('Form repository', () => {
         expect(Component).toBeNull();
     });
 
+    it('should pass "review-field" case whereby config object HAS child.props', () => {
+        const componentConfiguration = supportedFormComponents
+            .filter(field => field.component === 'review-field')
+            .reduce((reducer, field) => reducer = field, null);
+        const Component = formComponentFactory(componentConfiguration.component, {
+            key: 1,
+            config: componentConfiguration.props,
+            data: testDataReviewField,
+            name: 'TEST'
+        });
+
+        const wrapper = mount(Component);
+        expect(wrapper).toBeDefined();
+        expect(wrapper.find('Test Label'));
+        expect(wrapper.find('Test Value'));
+    });
 });
