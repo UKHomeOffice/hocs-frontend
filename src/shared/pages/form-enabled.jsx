@@ -68,6 +68,7 @@ function withForm(Page) {
         getForm() {
             const { dispatch, match: { url }, history, page } = this.props;
             const endpoint = '/api/form' + url;
+            console.log('api URL', 'api/form/' + url);
 
             return dispatch(updateApiStatus(status.REQUEST_FORM))
                 .then(() => {
@@ -113,20 +114,26 @@ function withForm(Page) {
             if (this.state.submittingForm !== true) {
                 this.setState({ submittingForm: true });
                 const { dispatch, track, history, match: { url } } = this.props;
+                console.log('state', this.state);
                 const { form_schema, form_data } = this.state;
+                console.log('schema', form_schema);
                 dispatch(updateFormErrors(undefined));
                 // TODO: Remove
                 /* eslint-disable-next-line no-undef */
                 const formData = new FormData();
                 Object.keys(form_data).filter(field => form_data[field] !== null).forEach(field => {
+                    console.log('field: ', field);
                     if (Array.isArray(form_data[field])) {
                         form_data[field].map(value => {
+                            console.log('array', value)
                             formData.append(`${field}[]`, value);
                         });
                     } else {
+                        console.log('not array', form_data[field])
                         formData.append(field, form_data[field]);
                     }
                 });
+                console.log('formData: ', url);
                 return dispatch(updateApiStatus(status.SUBMIT_FORM))
                     .then(() => {
                         axios.post('/api' + (form_schema.action || url), formData, { headers: { 'Content-Type': 'multipart/form-data' } })

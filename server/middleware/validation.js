@@ -149,13 +149,22 @@ function validateConditionalRadioContentIfExists(data, name, choices, validator,
         const radioChoice = choices.find(choice => {
             return choice.value === data[name];
         });
-        let label = radioChoice.conditionalContent.label;
-        const value = data[conditionalRadioButtonTextFieldId];
+        if(radioChoice.conditionalContent){
+            let label = radioChoice.conditionalContent.label;
+            const value = data[conditionalRadioButtonTextFieldId];
 
-        const validationError = validators[validator].call(
-            this,
-            { label, value }
-        );
+            const validationError = validators[validator].call(
+                this,
+                { label, value }
+            );
+        }
+        if(radioChoice.conditionalContentAfter){
+            const thisContent = radioChoice.conditionalContentAfter.find(choice => {
+                const value = choice.value;
+                return value === data.conditionalContentAfter[name];
+            })
+            const validationError = false;
+        }
         if (validationError) {
             result[conditionalRadioButtonTextFieldId] = validationError;
         }

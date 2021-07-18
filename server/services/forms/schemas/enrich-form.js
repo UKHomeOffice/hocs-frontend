@@ -5,10 +5,213 @@ const getLogger = require('../../../libs/logger');
 const receivedByMethodOptions = [{
     label: 'Email',
     value: 'EMAIL'
-},{
+}, {
     label: 'Post',
     value: 'POST'
 }];
+
+const countryList = [
+    'Afghanistan',
+    'Albania',
+    'Algeria',
+    'Andorra',
+    'Angola',
+    'Antigua and Barbuda',
+    'Argentina',
+    'Armenia',
+    'Australia',
+    'Austria',
+    'Azerbaijan',
+    'The Bahamas',
+    'Bahrain',
+    'Bangladesh',
+    'Barbados',
+    'Belarus',
+    'Belgium',
+    'Belize',
+    'Benin',
+    'Bhutan',
+    'Bolivia',
+    'Bosnia and Herzegovina',
+    'Botswana',
+    'Brazil',
+    'Brunei',
+    'Bulgaria',
+    'Burkina Faso',
+    'Burundi',
+    'Cabo Verde',
+    'Cambodia',
+    'Cameroon',
+    'Canada',
+    'Central African Republic',
+    'Chad',
+    'Chile',
+    'China',
+    'Colombia',
+    'Comoros',
+    'Congo, Democratic Republic of the',
+    'Congo, Republic of the',
+    'Costa Rica',
+    'Côte d’Ivoire',
+    'Croatia',
+    'Cuba',
+    'Cyprus',
+    'Czech Republic',
+    'Denmark',
+    'Djibouti',
+    'Dominica',
+    'Dominican Republic',
+    'East Timor (Timor-Leste)',
+    'Ecuador',
+    'Egypt',
+    'El Salvador',
+    'Equatorial Guinea',
+    'Eritrea',
+    'Estonia',
+    'Eswatini',
+    'Ethiopia',
+    'Fiji',
+    'Finland',
+    'France',
+    'Gabon',
+    'The Gambia',
+    'Georgia',
+    'Germany',
+    'Ghana',
+    'Greece',
+    'Grenada',
+    'Guatemala',
+    'Guinea',
+    'Guinea-Bissau',
+    'Guyana',
+    'Haiti',
+    'Honduras',
+    'Hungary',
+    'Iceland',
+    'India',
+    'Indonesia',
+    'Iran',
+    'Iraq',
+    'Ireland',
+    'Israel',
+    'Italy',
+    'Jamaica',
+    'Japan',
+    'Jordan',
+    'Kazakhstan',
+    'Kenya',
+    'Kiribati',
+    'Korea, North',
+    'Korea, South',
+    'Kosovo',
+    'Kuwait',
+    'Kyrgyzstan',
+    'Laos',
+    'Latvia',
+    'Lebanon',
+    'Lesotho',
+    'Liberia',
+    'Libya',
+    'Liechtenstein',
+    'Lithuania',
+    'Luxembourg',
+    'Madagascar',
+    'Malawi',
+    'Malaysia',
+    'Maldives',
+    'Mali',
+    'Malta',
+    'Marshall Islands',
+    'Mauritania',
+    'Mauritius',
+    'Mexico',
+    'Micronesia, Federated States of',
+    'Moldova',
+    'Monaco',
+    'Mongolia',
+    'Montenegro',
+    'Morocco',
+    'Mozambique',
+    'Myanmar (Burma)',
+    'Namibia',
+    'Nauru',
+    'Nepal',
+    'Netherlands',
+    'New Zealand',
+    'Nicaragua',
+    'Niger',
+    'Nigeria',
+    'North Macedonia',
+    'Norway',
+    'Oman',
+    'Pakistan',
+    'Palau',
+    'Panama',
+    'Papua New Guinea',
+    'Paraguay',
+    'Peru',
+    'Philippines',
+    'Poland',
+    'Portugal',
+    'Qatar',
+    'Romania',
+    'Russia',
+    'Rwanda',
+    'Saint Kitts and Nevis',
+    'Saint Lucia',
+    'Saint Vincent and the Grenadines',
+    'Samoa',
+    'San Marino',
+    'Sao Tome and Principe',
+    'Saudi Arabia',
+    'Senegal',
+    'Serbia',
+    'Seychelles',
+    'Sierra Leone',
+    'Singapore',
+    'Slovakia',
+    'Slovenia',
+    'Solomon Islands',
+    'Somalia',
+    'South Africa',
+    'Spain',
+    'Sri Lanka',
+    'Sudan',
+    'Sudan, South',
+    'Suriname',
+    'Sweden',
+    'Switzerland',
+    'Syria',
+    'Taiwan',
+    'Tajikistan',
+    'Tanzania',
+    'Thailand',
+    'Togo',
+    'Tonga',
+    'Trinidad and Tobago',
+    'Tunisia',
+    'Turkey',
+    'Turkmenistan',
+    'Tuvalu',
+    'Uganda',
+    'Ukraine',
+    'United Arab Emirates',
+    'United Kingdom',
+    'United States',
+    'Uruguay',
+    'Uzbekistan',
+    'Vanuatu',
+    'Vatican City',
+    'Venezuela',
+    'Vietnam',
+    'Yemen',
+    'Zambia',
+    'Zimbabwe'
+]
+
+function createCountryList(){
+    
+}
 
 /**
  * Create the fields for the case creation stage.
@@ -35,21 +238,32 @@ const enrichmentDataFormFields = {
                                 .withProp('choices', [
                                     Choice('Email', 'EMAIL', {
                                         // conditionalContent: { label: 'Reason', description: 'Please enter the reason for this extension' } 
-                                        conditionalContentAfter: [
-                                            { name:'yesNo', type: 'radio', label: 'Yes or No', afterContent: [
-                                                { name:'yes', label: 'yes', value: 'YES'},
-                                                { name:'no', label: 'no', value: 'NO'}
-                                            ]},
-                                            { name:'textYes', type: 'textarea', label: 'Text Area for words', defualtValue:'defualtValue', rows:'4'}
+                                        conditionalContentAfterTitle: 'Correspondent Details', conditionalContentAfter: [
+                                            { type: 'textarea', name: 'Fullname', label: 'Full Name', rows: '1' },
+                                            {
+                                                type: 'dropdown', name: 'Country', label: 'Country', choices: [
+                                                    { label: 'United Kingdom', value: 'United Kingdom', },
+                                                    { label: 'Other', value: 'Other' }
+                                                ]
+                                            },
+                                            { type: 'textarea', name: 'Email', label: 'Email Address', rows: '1' },
+                                            { type: 'textarea', name: 'Reference', label: 'Requester\'s Reference (Optional)', rows: '1' }
                                         ]
                                     }),
                                     Choice('Post', 'POST', {
-                                        conditionalContentAfter: [
-                                            { name:'yesNo', type: 'radio', label: 'Yes or No', afterContent: [
-                                                { name:'no', label: 'no', value: 'NO'},
-                                                { name:'yes', label: 'yes', value: 'YES'}
-                                            ]
-                                        }]
+                                        conditionalContentAfterTitle: 'Correspondent Details', title: 'Correspondent Details', conditionalContentAfter: [
+                                            {type: 'textarea', name: 'Fullname', label: 'Full Name', rows: '1'},
+                                            {type: 'textarea', name: 'Address1', label: 'Building', rows: '1'},
+                                            {type: 'textarea', name: 'Address2', label: 'Street', rows: '1'},
+                                            {type: 'textarea', name: 'Address3', label: 'Town or City', rows: '1'},
+                                            {type: 'textarea', name: 'Fullname', label: 'Postcode', rows: '1'},
+                                            {type: 'dropdown', name: 'Postcode', label: 'Country', choices: [
+                                                {label: 'United Kingdom', value: 'United Kingdom', },
+                                                {label: 'Other', value: 'Other'}
+                                            ]},
+                                            {type: 'textarea', name: 'Email', label:'Email Address (Optional)', rows: '1'},
+                                            {type: 'textarea', name: 'Reference', label:'Requester\'s Reference (Optional)', rows: '1'}
+                                        ]
                                     })
                                 ])
                                 .build()
@@ -63,56 +277,6 @@ const enrichmentDataFormFields = {
                         .withData({
                             'KimuDateReceived': new Date().toISOString().substr(0, 10)
                         })
-                        // .withField(
-                        //     Component('text', 'fullname')
-                        //         .withValidator('required', 'The correspondent\'s full name is required')
-                        //         .withProp('label', 'Full Name')
-                        //         .build()
-                        // )
-                        // .withField(
-                        //     Component('text', 'address1')
-                        //         .withProp('label', 'Building')
-                        //         .build()
-                        // )
-                        // .withField(
-                        //     Component('text', 'address2')
-                        //         .withProp('label', 'Street')
-                        //         .build()
-                        // )
-                        // .withField(
-                        //     Component('text', 'address3')
-                        //         .withProp('label', 'Town or City')
-                        //         .build()
-                        // )
-                        // .withField(
-                        //     Component('text', 'postcode')
-                        //         .withProp('label', 'Postcode')
-                        //         .build()
-                        // )
-                        // .withField(
-                        //     Component('dropdown', 'country')
-                        //         .withProp('label', 'Country')
-                        //         .withProp('choices', [
-                        //             Choice('United Kingdom', 'United Kingdom'),
-                        //             Choice('Other', 'Other')
-                        //         ])
-                        //         .build()
-                        // )
-                        // .withField(
-                        //     Component('text', 'telephone')
-                        //         .withProp('label', 'Telephone')
-                        //         .build()
-                        // )
-                        // .withField(
-                        //     Component('text', 'email')
-                        //         .withProp('label', 'Email Address')
-                        //         .build()
-                        // )
-                        // .withField(
-                        //     Component('text-area', 'reference')
-                        //         .withProp('label', 'Enter any references given')
-                        //         .build()
-                        // )
                         .build()
                 }
                 ,
@@ -135,10 +299,10 @@ module.exports.enrich = (context, workflow, action, entity) => {
     const logger = getLogger();
     const dataFields = enrichmentDataFormFields;
     const fieldsToAdd = dataFields[context.toUpperCase()][workflow.toUpperCase()][action.toUpperCase()][entity.toUpperCase()];
-    logger.info('GET_FORM_ENRICHMENTS',{ context, workflow, action, entity });
+    logger.info('GET_FORM_ENRICHMENTS', { context, workflow, action, entity });
     if (fieldsToAdd && fieldsToAdd.add) {
-        return [ ...fieldsToAdd.add().schema.fields ];
+        return [...fieldsToAdd.add().schema.fields];
     }
-    logger.debug('NO_FORM_ENRICHMENTS_FOUND',{ context, workflow, action, entity });
+    logger.debug('NO_FORM_ENRICHMENTS_FOUND', { context, workflow, action, entity });
     return {};
 };
