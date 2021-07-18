@@ -1,4 +1,3 @@
-const logger = require('../libs/logger');
 const { FormSubmissionError } = require('../models/error');
 
 const customAdapters = {
@@ -82,7 +81,7 @@ function processMiddleware(req, res, next) {
         req.form.data = schema.fields
             .filter(field => field.type !== 'display')
             .reduce(createReducer(data, req), {});
-            processAdditionalContentAfter(req, data);
+        processAdditionalContentAfter(req, data);
     } catch (error) {
         return next(new FormSubmissionError('Unable to process form data'));
     }
@@ -111,9 +110,9 @@ function getAdditionalContentAfter(req, data) {
 
 function processAdditionalContentAfter(req, data) {
     try {
-        let content = getAdditionalContentAfter(req, data);
+        getAdditionalContentAfter(req, data);
     } catch (error) {
-        return next(new FormSubmissionError('Unable to process form data'));
+        return new FormSubmissionError('Unable to process form data');
     }
 }
 

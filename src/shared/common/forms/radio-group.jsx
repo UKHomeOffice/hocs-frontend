@@ -9,7 +9,7 @@ class Radio extends Component {
         const conditionChoices = Array.from(JSON.parse(JSON.stringify(props.conditionChoices)));
 
         const choicesToUse = Radio.getChoicesToUse(choices, conditionChoices, this.props);
-        this.state = { value: this.props.value, choices, conditionChoices, choicesToUse, selectedChoice: "blank" };
+        this.state = { value: this.props.value, choices, conditionChoices, choicesToUse, selectedChoice: 'none' };
     }
 
     componentDidMount() {
@@ -34,11 +34,13 @@ class Radio extends Component {
             this.props.updateState({ [index]: this.props.data[index] || '' });
         }
         if ('conditionalContentAfter' in choice) {
-            this.state.selectedChoice = choice;
+            this.setState({
+                selectedChoice: choice
+            });
         }
     }
 
-    handleChangeForConditionalContent(e, content) {
+    handleChangeForConditionalContent(e) {
         this.props.updateState({ [e.target.id]: e.target.value });
     }
 
@@ -122,7 +124,7 @@ class Radio extends Component {
             type,
             value
         } = this.props;
-        const { choicesToUse, selectedChoice } = this.state;
+        const { choicesToUse } = this.state;
         return (
             <div className={`govuk-form-group${error ? ' govuk-form-group--error' : ''}`}>
 
@@ -187,14 +189,14 @@ class Radio extends Component {
                         })}
                         {choicesToUse.length === 0 && <p className="govuk-body">No options available</p>}
                     </div>
-                    {this.state.selectedChoice.conditionalContentAfter && 
+                    {this.state.selectedChoice.conditionalContentAfter &&
                     <div className='conditional-content-container'>
                         <br/>
                         <h1 className='govuk-heading-l'>{this.state.selectedChoice.conditionalContentAfterTitle}</h1>
-                    {this.state.selectedChoice.conditionalContentAfter.map((content, i) => {
-                        return (
-                            <Fragment key={i}>
-                                <div className={`govuk-form-group${error ? ' govuk-form-group--error' : ''}`}>
+                        {this.state.selectedChoice.conditionalContentAfter.map((content, i) => {
+                            return (
+                                <Fragment key={i}>
+                                    <div className={`govuk-form-group${error ? ' govuk-form-group--error' : ''}`}>
 
                                         <legend id={`${content.name}-legend`} className="govuk-fieldset__legend">
                                             <span className="govuk-fieldset__heading govuk-label--s">{content.label}</span>
@@ -211,7 +213,7 @@ class Radio extends Component {
                                                             name={choice.name}
                                                             value={choice.value}
                                                             checked={(value === choice.value)}
-                                                            onChange={e => this.handleChangeForConditionalContent(e, content)}
+                                                            onChange={e => this.handleChangeForConditionalContent(e)}
                                                             data-aria-controls={`conditional-${choice.name}-${choice.value}`}
                                                             className={'govuk-radios__input'}
                                                         />
@@ -248,14 +250,14 @@ class Radio extends Component {
                                                         </div>
                                                     }
                                                 </Fragment>
-                                            )
+                                            );
                                         })}
                                         {content.type === 'dropdown' &&
                                             <select className={`govuk-select ${error ? 'govuk-select--error' : ''}`}
                                                 id={content.name}
                                                 name={content.name}
                                                 disabled={disabled}
-                                                onChange={e => this.handleChangeForConditionalContent(e, content)}
+                                                onChange={e => this.handleChangeForConditionalContent(e)}
                                                 value={content.value}
                                             >
                                                 {content.choices && content.choices.map((choice, i) => {
@@ -271,14 +273,14 @@ class Radio extends Component {
                                                 name={content.name}
                                                 disabled={disabled}
                                                 rows={content.rows}
-                                                onChange={e => this.handleChangeForConditionalContent(e, content)}
+                                                onChange={e => this.handleChangeForConditionalContent(e)}
                                                 defaultValue={content.defaultValue}
                                             />
                                         }
-                                </div>
-                            </Fragment>
-                        )
-                    })}
+                                    </div>
+                                </Fragment>
+                            );
+                        })}
                     </div>}
                 </fieldset>
             </div>

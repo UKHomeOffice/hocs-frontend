@@ -125,11 +125,11 @@ function withForm(Page) {
                     console.log('field: ', field);
                     if (Array.isArray(form_data[field])) {
                         form_data[field].map(value => {
-                            console.log('array', value)
+                            console.log('array', value);
                             formData.append(`${field}[]`, value);
                         });
                     } else {
-                        console.log('not array', form_data[field])
+                        console.log('not array', form_data[field]);
                         formData.append(field, form_data[field]);
                     }
                 });

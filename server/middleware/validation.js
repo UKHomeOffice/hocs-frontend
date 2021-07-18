@@ -144,6 +144,7 @@ const validators = {
 
 function validateConditionalRadioContentIfExists(data, name, choices, validator, result) {
     const conditionalRadioButtonTextFieldId = `${data[name]}Text`;
+    let validationError = true;
 
     if (conditionalRadioButtonTextFieldId in data) {
         const radioChoice = choices.find(choice => {
@@ -153,17 +154,17 @@ function validateConditionalRadioContentIfExists(data, name, choices, validator,
             let label = radioChoice.conditionalContent.label;
             const value = data[conditionalRadioButtonTextFieldId];
 
-            const validationError = validators[validator].call(
+            validationError = validators[validator].call(
                 this,
                 { label, value }
             );
         }
         if(radioChoice.conditionalContentAfter){
-            const thisContent = radioChoice.conditionalContentAfter.find(choice => {
+            radioChoice.conditionalContentAfter.find(choice => {
                 const value = choice.value;
                 return value === data.conditionalContentAfter[name];
-            })
-            const validationError = false;
+            });
+            validationError = false;
         }
         if (validationError) {
             result[conditionalRadioButtonTextFieldId] = validationError;
