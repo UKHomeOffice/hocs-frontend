@@ -8,13 +8,12 @@ exports[`Form text component should render className when passed 1`] = `
     class="govuk-label govuk-label--s"
     for="text-field"
     id="text-field-label"
-  >
-    TextArea field
-  </label>
+  />
   <div>
     <input
       class="govuk-input"
       id="text-field"
+      maxlength="4000"
       name="text-field"
       type="text"
       value=""
@@ -31,14 +30,35 @@ exports[`Form text component should render disabled when passed 1`] = `
     class="govuk-label govuk-label--s"
     for="text-field"
     id="text-field-label"
-  >
-    TextArea field
-  </label>
+  />
   <div>
     <input
       class="govuk-input"
       disabled=""
       id="text-field"
+      maxlength="4000"
+      name="text-field"
+      type="text"
+      value=""
+    />
+  </div>
+</div>
+`;
+
+exports[`Form text component should render limit when passed 1`] = `
+<div
+  class="govuk-form-group "
+>
+  <label
+    class="govuk-label govuk-label--s"
+    for="text-field"
+    id="text-field-label"
+  />
+  <div>
+    <input
+      class="govuk-input"
+      id="text-field"
+      maxlength="2000"
       name="text-field"
       type="text"
       value=""
@@ -55,13 +75,12 @@ exports[`Form text component should render of type when passed 1`] = `
     class="govuk-label govuk-label--s"
     for="text-field"
     id="text-field-label"
-  >
-    TextArea field
-  </label>
+  />
   <div>
     <input
       class="govuk-input"
       id="text-field"
+      maxlength="4000"
       name="text-field"
       type="password"
       value=""
@@ -78,13 +97,12 @@ exports[`Form text component should render with default props 1`] = `
     class="govuk-label govuk-label--s"
     for="text-field"
     id="text-field-label"
-  >
-    TextArea field
-  </label>
+  />
   <div>
     <input
       class="govuk-input"
       id="text-field"
+      maxlength="4000"
       name="text-field"
       type="text"
       value=""
@@ -101,9 +119,7 @@ exports[`Form text component should render with error when passed 1`] = `
     class="govuk-label govuk-label--s"
     for="text-field"
     id="text-field-label"
-  >
-    TextArea field
-  </label>
+  />
   <span
     class="govuk-error-message"
     id="text-field-error"
@@ -114,6 +130,7 @@ exports[`Form text component should render with error when passed 1`] = `
     <input
       class="govuk-input govuk-input--error"
       id="text-field"
+      maxlength="4000"
       name="text-field"
       type="text"
       value=""
@@ -130,9 +147,7 @@ exports[`Form text component should render with hint when passed 1`] = `
     class="govuk-label govuk-label--s"
     for="text-field"
     id="text-field-label"
-  >
-    TextArea field
-  </label>
+  />
   <span
     class="govuk-hint"
   >
@@ -142,6 +157,7 @@ exports[`Form text component should render with hint when passed 1`] = `
     <input
       class="govuk-input"
       id="text-field"
+      maxlength="4000"
       name="text-field"
       type="text"
       value=""
@@ -165,6 +181,7 @@ exports[`Form text component should render with label when passed 1`] = `
     <input
       class="govuk-input"
       id="text-field"
+      maxlength="4000"
       name="text-field"
       type="text"
       value=""
@@ -181,13 +198,12 @@ exports[`Form text component should render with the element class name when pass
     class="govuk-label govuk-label--s"
     for="text-field"
     id="text-field-label"
-  >
-    TextArea field
-  </label>
+  />
   <div>
     <input
       class="govuk-input __classname__"
       id="text-field"
+      maxlength="4000"
       name="text-field"
       type="text"
       value=""
@@ -204,13 +220,12 @@ exports[`Form text component should render with value when passed 1`] = `
     class="govuk-label govuk-label--s"
     for="text-field"
     id="text-field-label"
-  >
-    TextArea field
-  </label>
+  />
   <div>
     <input
       class="govuk-input"
       id="text-field"
+      maxlength="4000"
       name="text-field"
       type="text"
       value="field value"

@@ -7,7 +7,6 @@ class DateInput extends Component {
         super(props);
     }
 
-
     _onChange(field, value) {
         const updatedPart = { [field]: value };
         const parts = { ...this.parseValue(this.props.value), ...updatedPart };
@@ -59,7 +58,7 @@ class DateInput extends Component {
                                 min="1"
                                 max="31"
                                 value={parts.day}
-                                onChange={e => this._onChange('day', e.target.value)}
+                                onChange={e => {this._onChange('day', e.target.value);}}
                             />
                         </div>
                     </div>
@@ -75,7 +74,7 @@ class DateInput extends Component {
                                 min="1"
                                 max="12"
                                 value={parts.month}
-                                onChange={e => this._onChange('month', e.target.value)}
+                                onChange={e => {this._onChange('month', e.target.value);}}
                             />
                         </div>
                     </div>
@@ -91,7 +90,7 @@ class DateInput extends Component {
                                 min={minYear}
                                 max={maxYear}
                                 value={parts.year}
-                                onChange={e => this._onChange('year', e.target.value)}
+                                onChange={e => {this._onChange('year', e.target.value);}}
                             />
                         </div>
                     </div>
@@ -102,7 +101,6 @@ class DateInput extends Component {
 }
 
 DateInput.propTypes = {
-    data: PropTypes.object.isRequired,
     disabled: PropTypes.bool,
     error: PropTypes.string,
     hint: PropTypes.string,

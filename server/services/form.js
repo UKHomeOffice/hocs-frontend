@@ -20,9 +20,6 @@ async function getFormSchemaFromWorkflowService(requestId, options, user) {
     let response;
     try {
         response = await workflowService.get(`/case/${caseId}/stage/${stageId}`, { headers });
-        console.log('WORKFLOW RESPONSE');
-
-        console.log(response);
     } catch (error) {
         switch (error.response.status) {
             case 401:
