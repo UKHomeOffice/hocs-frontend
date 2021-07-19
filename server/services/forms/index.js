@@ -270,6 +270,23 @@ const formDefinitions = {
                     action: EDIT_CONTRIBUTION,
                     customConfig: mpamContributionsRequest
                 }
+            },
+            FOI: {
+                ADDREQUEST: {
+                    builder: formRepository.contributionRequestFoi,
+                    action: ADD_CONTRIBUTION
+                },
+                EDITREQUEST: {
+                    builder: formRepository.contributionRequestFoi,
+                    action: EDIT_CONTRIBUTION
+                },
+                VIEWREQUEST: {
+                    builder: formRepository.contributionRequestFoi,
+                },
+                EDIT: {
+                    builder: formRepository.contributionFulfillmentFoi,
+                    action: EDIT_CONTRIBUTION
+                }
             }
         },
         CCT_COMP_CONTRIB: {
@@ -315,23 +332,6 @@ const formDefinitions = {
                     builder: formRepository.contributionFulfillment,
                     action: EDIT_CONTRIBUTION,
                     customConfig: compBusinessContributionsRequest
-                }
-            },
-            FOI: {
-                ADDREQUEST: {
-                    builder: formRepository.contributionRequestFoi,
-                    action: ADD_CONTRIBUTION
-                },
-                EDITREQUEST: {
-                    builder: formRepository.contributionRequestFoi,
-                    action: EDIT_CONTRIBUTION
-                },
-                VIEWREQUEST: {
-                    builder: formRepository.contributionRequestFoi,
-                },
-                EDIT: {
-                    builder: formRepository.contributionFulfillmentFoi,
-                    action: EDIT_CONTRIBUTION
                 }
             }
         }
