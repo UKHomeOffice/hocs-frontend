@@ -9,7 +9,7 @@ const findLabelByValue = (choices, value) => {
 const ReviewField = ({ name, type, value, child, switchDirection, direction }) => {
     let textValue = value;
 
-    if (child.component === 'radio') {
+    if (child.component === 'radio' || child.component === 'dropdown') {
         textValue = findLabelByValue(child.props.choices, value);
     } else if (child.component === 'date') { // todo: extract this logic from workstack adapter
         const date = new Date(value);

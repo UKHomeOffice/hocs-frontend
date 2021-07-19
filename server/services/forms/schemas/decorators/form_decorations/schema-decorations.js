@@ -33,6 +33,13 @@ module.exports = {
                                 .build()
                         )
                         .withField(
+                            Component('dropdown', 'FoiType')
+                                .withValidator('required')
+                                .withProp('label', 'FOI Type')
+                                .withProp('choices', 'S_FOI_TYPES')
+                                .build()
+                        )
+                        .withField(
                             Component('text-area', 'RequestQuestion')
                                 .withValidator('required')
                                 .withProp('label', 'Request Question')
