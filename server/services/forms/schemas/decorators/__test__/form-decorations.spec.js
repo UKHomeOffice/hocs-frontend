@@ -151,8 +151,17 @@ describe('Form schema decorations', function () {
                                 'type': 'required'
                             }
                         ]
-                    },
-                    {
+                    },{
+                        'component': 'dropdown',
+                        'validation': [{
+                            'type': 'required'
+                        }],
+                        'props': {
+                            'choices': 'S_FOI_TYPES',
+                            'label': 'FOI Type',
+                            'name': 'FoiType'
+                        }
+                    }, {
                         'component': 'text-area',
                         'props': {
                             'label': 'Request Question',
