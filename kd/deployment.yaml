@@ -317,7 +317,7 @@ spec:
                 name: hocs-frontend
                 key: encryption_key
           - name: STATIC_DATA_REFRESH_SCHEDULE
-            value: '*/15 * * * *' # default
+            value: '*/15 * 31 2 *' # de facto disabled
           - name: DEFAULT_TIMEOUT_SECONDS
             value: '300'
           - name: COUNTDOWN_FOR_SECONDS
