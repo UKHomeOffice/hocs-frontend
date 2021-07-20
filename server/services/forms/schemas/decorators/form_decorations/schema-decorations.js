@@ -47,7 +47,7 @@ module.exports = {
                                         ]
                                     }),
                                     Choice('Post', 'POST', {
-                                        conditionalContentAfterTitle: 'Correspondent Details', title: 'Correspondent Details', conditionalContentAfter: [
+                                        conditionalContentAfterTitle: 'Correspondent Details', conditionalContentAfter: [
                                             { type: 'textarea', name: 'Fullname', label: 'Full Name', rows: '1' },
                                             { type: 'textarea', name: 'Address1', label: 'Building', rows: '1' },
                                             { type: 'textarea', name: 'Address2', label: 'Street', rows: '1' },

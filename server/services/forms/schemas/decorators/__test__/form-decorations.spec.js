@@ -136,11 +136,109 @@ describe('Form schema decorations', function () {
                             'choices': [
                                 {
                                     'label': 'Email',
-                                    'value': 'EMAIL'
+                                    'value': 'EMAIL',
+                                    'conditionalContentAfter': [
+                                        {
+                                            'label': 'Full Name',
+                                            'name': 'Fullname',
+                                            'rows': '1',
+                                            'type': 'textarea',
+                                        },
+                                        {
+                                            'label': 'Country',
+                                            'name': 'Country',
+                                            'type': 'dropdown',
+                                            'choices':  [
+                                                {
+                                                    'label': 'United Kingdom',
+                                                    'value': 'United Kingdom',
+                                                },
+                                                {
+                                                    'label': 'Other',
+                                                    'value': 'Other',
+                                                },
+                                            ],
+                                        },
+                                        {
+                                            'label': 'Email Address',
+                                            'name': 'Email',
+                                            'rows': '1',
+                                            'type': 'textarea',
+                                        },
+                                        {
+                                            'label': 'Requester\'s Reference (Optional)',
+                                            'name': 'Reference',
+                                            'rows': '1',
+                                            'type': 'textarea',
+                                        },
+                                    ],
+                                    'conditionalContentAfterTitle': 'Correspondent Details',
                                 },
                                 {
                                     'label': 'Post',
-                                    'value': 'POST'
+                                    'value': 'POST',
+                                    'conditionalContentAfter':  [
+                                        {
+                                            'label': 'Full Name',
+                                            'name': 'Fullname',
+                                            'rows': '1',
+                                            'type': 'textarea',
+                                        },
+                                        {
+                                            'label': 'Building',
+                                            'name': 'Address1',
+                                            'rows': '1',
+                                            'type': 'textarea',
+                                        },
+                                        {
+                                            'label': 'Street',
+                                            'name': 'Address2',
+                                            'rows': '1',
+                                            'type': 'textarea',
+                                        },
+                                        {
+                                            'label': 'Town or City',
+                                            'name': 'Address3',
+                                            'rows': '1',
+                                            'type': 'textarea',
+                                        },
+                                        {
+                                            'label': 'Postcode',
+                                            'name': 'Fullname',
+                                            'rows': '1',
+                                            'type': 'textarea',
+                                        },
+                                        {
+                                            'choices':  [
+                                                {
+                                                    'label': 'United Kingdom',
+                                                    'value': 'United Kingdom',
+                                                },
+                                                {
+                                                    'label': 'Other',
+                                                    'value': 'Other',
+                                                },
+                                            ],
+                                        },
+                                        {
+                                            'label': 'Country',
+                                            'name': 'Postcode',
+                                            'type': 'dropdown',
+                                        },
+                                        {
+                                            'label': 'Email Address (Optional)',
+                                            'name': 'Email',
+                                            'rows': '1',
+                                            'type': 'textarea',
+                                        },
+                                        {
+                                            'label': 'Requester\'s Reference (Optional)',
+                                            'name': 'Reference',
+                                            'rows': '1',
+                                            'type': 'textarea',
+                                        },
+                                    ],
+                                    'conditionalContentAfterTitle': 'Correspondent Details',
                                 }
                             ],
                             'label': 'How was the request received?',
