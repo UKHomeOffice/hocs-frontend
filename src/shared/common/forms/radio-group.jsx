@@ -224,7 +224,6 @@ class Radio extends Component {
                                                         />
                                                         <label className="govuk-label govuk-radios__label" htmlFor={`${choice.label}-${choice.value}`}>
                                                             {choice.label}
-                                                            {/* {content.description && <span className="govuk-body-s full-width">{content.description}</span>} */}
                                                         </label>
                                                     </div>
 
@@ -264,6 +263,7 @@ class Radio extends Component {
                                                 disabled={disabled}
                                                 onChange={e => this.handleChangeForConditionalContent(e)}
                                                 value={content.value}
+                                                selected={content.selected}
                                             >
                                                 {content.choices && content.choices.map((choice, i) => {
                                                     return (

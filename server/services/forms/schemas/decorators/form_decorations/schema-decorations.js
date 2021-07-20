@@ -1,5 +1,5 @@
-const Form = require('../form-builder');
-const { Component, Choice } = require('../component-builder');
+const Form = require('../../../form-builder');
+const { Component, Choice } = require('../../../component-builder');
 
 const receivedByMethodOptions = [{
     label: 'Email',
@@ -8,6 +8,7 @@ const receivedByMethodOptions = [{
     label: 'Post',
     value: 'POST'
 }];
+
 
 /**
  * Create the fields for the case creation stage.
