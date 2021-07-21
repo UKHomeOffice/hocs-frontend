@@ -143,11 +143,17 @@ describe('Form schema decorations', function () {
                                             'name': 'Fullname',
                                             'rows': '1',
                                             'type': 'textarea',
+                                            'validation': {
+                                                'type': 'required',
+                                            },
                                         },
                                         {
                                             'label': 'Country',
                                             'name': 'Country',
                                             'type': 'dropdown',
+                                            'validation': {
+                                                'type': 'required',
+                                            },
                                             'choices':  [
                                                 {
                                                     'label': '',
@@ -168,6 +174,9 @@ describe('Form schema decorations', function () {
                                             'name': 'Email',
                                             'rows': '1',
                                             'type': 'textarea',
+                                            'validation': {
+                                                'type': 'required',
+                                            },
                                         },
                                         {
                                             'label': 'Requester\'s Reference (Optional)',
@@ -187,35 +196,53 @@ describe('Form schema decorations', function () {
                                             'name': 'Fullname',
                                             'rows': '1',
                                             'type': 'textarea',
+                                            'validation': {
+                                                'type': 'required',
+                                            },
                                         },
                                         {
                                             'label': 'Building',
                                             'name': 'Address1',
                                             'rows': '1',
                                             'type': 'textarea',
+                                            'validation': {
+                                                'type': 'required',
+                                            },
                                         },
                                         {
                                             'label': 'Street',
                                             'name': 'Address2',
                                             'rows': '1',
                                             'type': 'textarea',
+                                            'validation': {
+                                                'type': 'required',
+                                            },
                                         },
                                         {
                                             'label': 'Town or City',
                                             'name': 'Address3',
                                             'rows': '1',
                                             'type': 'textarea',
+                                            'validation': {
+                                                'type': 'required',
+                                            },
                                         },
                                         {
                                             'label': 'Postcode',
                                             'name': 'Postcode',
                                             'rows': '1',
                                             'type': 'textarea',
+                                            'validation': {
+                                                'type': 'required',
+                                            },
                                         },
                                         {
                                             'label': 'Country',
                                             'name': 'Country',
                                             'type': 'dropdown',
+                                            'validation': {
+                                                'type': 'required',
+                                            },
                                             'choices':  [
                                                 {
                                                     'label': '',

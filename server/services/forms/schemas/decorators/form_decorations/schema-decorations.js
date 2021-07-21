@@ -35,26 +35,26 @@ module.exports = {
                                 .withProp('choices', [
                                     Choice('Email', 'EMAIL', {
                                         conditionalContentAfterTitle: 'Correspondent Details', conditionalContentAfter: [
-                                            { type: 'textarea', name: 'Fullname', label: 'Full Name', rows: '1' },
+                                            { type: 'textarea', name: 'Fullname', label: 'Full Name', rows: '1', validation: { type: 'required' } },
                                             {
-                                                type: 'dropdown', name: 'Country', label: 'Country', choices: [
+                                                type: 'dropdown', name: 'Country', label: 'Country', validation: { type: 'required' }, choices: [
                                                     { label: '', value: '' },
                                                     { label: 'United Kingdom', value: 'United Kingdom', },
                                                     { label: 'Other', value: 'Other' }
                                                 ]
                                             },
-                                            { type: 'textarea', name: 'Email', label: 'Email Address', rows: '1' },
+                                            { type: 'textarea', name: 'Email', label: 'Email Address', rows: '1', validation: { type: 'required' } },
                                             { type: 'textarea', name: 'Reference', label: 'Requester\'s Reference (Optional)', rows: '1' }
                                         ]
                                     }),
                                     Choice('Post', 'POST', {
                                         conditionalContentAfterTitle: 'Correspondent Details', conditionalContentAfter: [
-                                            { type: 'textarea', name: 'Fullname', label: 'Full Name', rows: '1' },
-                                            { type: 'textarea', name: 'Address1', label: 'Building', rows: '1' },
-                                            { type: 'textarea', name: 'Address2', label: 'Street', rows: '1' },
-                                            { type: 'textarea', name: 'Address3', label: 'Town or City', rows: '1' },
-                                            { type: 'textarea', name: 'Postcode', label: 'Postcode', rows: '1' },
-                                            { type: 'dropdown', name: 'Country', label: 'Country', choices: [
+                                            { type: 'textarea', name: 'Fullname', label: 'Full Name', rows: '1', validation: { type: 'required' } },
+                                            { type: 'textarea', name: 'Address1', label: 'Building', rows: '1', validation: { type: 'required' } },
+                                            { type: 'textarea', name: 'Address2', label: 'Street', rows: '1', validation: { type: 'required' } },
+                                            { type: 'textarea', name: 'Address3', label: 'Town or City', rows: '1', validation: { type: 'required' } },
+                                            { type: 'textarea', name: 'Postcode', label: 'Postcode', rows: '1', validation: { type: 'required' } },
+                                            { type: 'dropdown', name: 'Country', label: 'Country', validation: { type: 'required' }, choices: [
                                                 { label: '', value: '' },
                                                 { label: 'United Kingdom', value: 'United Kingdom' },
                                                 { label: 'Other', value: 'Other' }
