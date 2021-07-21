@@ -150,6 +150,10 @@ describe('Form schema decorations', function () {
                                             'type': 'dropdown',
                                             'choices':  [
                                                 {
+                                                    'label': '',
+                                                    'value': '',
+                                                },
+                                                {
                                                     'label': 'United Kingdom',
                                                     'value': 'United Kingdom',
                                                 },
@@ -204,12 +208,19 @@ describe('Form schema decorations', function () {
                                         },
                                         {
                                             'label': 'Postcode',
-                                            'name': 'Fullname',
+                                            'name': 'Postcode',
                                             'rows': '1',
                                             'type': 'textarea',
                                         },
                                         {
+                                            'label': 'Country',
+                                            'name': 'Country',
+                                            'type': 'dropdown',
                                             'choices':  [
+                                                {
+                                                    'label': '',
+                                                    'value': '',
+                                                },
                                                 {
                                                     'label': 'United Kingdom',
                                                     'value': 'United Kingdom',
@@ -219,11 +230,6 @@ describe('Form schema decorations', function () {
                                                     'value': 'Other',
                                                 },
                                             ],
-                                        },
-                                        {
-                                            'label': 'Country',
-                                            'name': 'Postcode',
-                                            'type': 'dropdown',
                                         },
                                         {
                                             'label': 'Email Address (Optional)',

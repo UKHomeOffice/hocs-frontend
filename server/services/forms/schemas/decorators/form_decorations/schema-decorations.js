@@ -38,6 +38,7 @@ module.exports = {
                                             { type: 'textarea', name: 'Fullname', label: 'Full Name', rows: '1' },
                                             {
                                                 type: 'dropdown', name: 'Country', label: 'Country', choices: [
+                                                    { label: '', value: '' },
                                                     { label: 'United Kingdom', value: 'United Kingdom', },
                                                     { label: 'Other', value: 'Other' }
                                                 ]
@@ -52,8 +53,9 @@ module.exports = {
                                             { type: 'textarea', name: 'Address1', label: 'Building', rows: '1' },
                                             { type: 'textarea', name: 'Address2', label: 'Street', rows: '1' },
                                             { type: 'textarea', name: 'Address3', label: 'Town or City', rows: '1' },
-                                            { type: 'textarea', name: 'Fullname', label: 'Postcode', rows: '1' },
-                                            { type: 'dropdown', name: 'Postcode', label: 'Country', choices: [
+                                            { type: 'textarea', name: 'Postcode', label: 'Postcode', rows: '1' },
+                                            { type: 'dropdown', name: 'Country', label: 'Country', choices: [
+                                                { label: '', value: '' },
                                                 { label: 'United Kingdom', value: 'United Kingdom' },
                                                 { label: 'Other', value: 'Other' }
                                             ] },
