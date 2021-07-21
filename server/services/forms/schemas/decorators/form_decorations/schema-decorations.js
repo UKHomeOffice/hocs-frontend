@@ -40,6 +40,14 @@ module.exports = {
                                 .build()
                         )
                         .withField(
+                            Component('dropdown', 'Topics')
+                                .withValidator('required')
+                                .withProp('label', 'Case Topic')
+                                .withProp('choices', 'TOPICS_FOI')
+                                .withProp('defaultOptions', true)
+                                .build()
+                        )
+                        .withField(
                             Component('text-area', 'RequestQuestion')
                                 .withValidator('required')
                                 .withProp('label', 'Request Question')
