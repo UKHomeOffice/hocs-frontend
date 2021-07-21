@@ -10,6 +10,7 @@ const { bindDisplayElements } = require('../lists/adapters/workstacks');
 const getLogger = require('../libs/logger');
 const { caseworkService } = require('../clients');
 const User = require('../models/user');
+const doubleEncodeSlashes = require('../libs/encodingHelpers');
 
 router.all(['/', '/api/form'],
     getForm(form, { submissionUrl: '/search/reference' }),
@@ -29,7 +30,7 @@ router.post(['/search/reference', '/api/search/reference'],
 
             logger.info('SEARCH_REFERENCE', { reference: caseRef });
 
-            const reference = encodeURIComponent(caseRef);
+            const reference = doubleEncodeSlashes(encodeURIComponent(caseRef));
 
             const response = await caseworkService.get(`/case/${reference}/stage`, {
                 headers: User.createHeaders(req.user)

@@ -114,8 +114,40 @@ const getCorrespondentsNameByType = (correspondents, types) =>
         .map(correspondent => correspondent.fullname)
         .join(', ');
 
+const highestPriorityContributionStatus = (decoratedContributions) => {
+    const contributionStatusEnum = {
+        '': 0,
+        'contributionReceived': 1,
+        'contributionCancelled': 2,
+        'contributionDue': 3,
+        'contributionOverdue': 4
+    };
+    let highestPriority = 0;
+
+    decoratedContributions.forEach(contribution => {
+        if(contributionStatusEnum[contribution.contributionStatus] > highestPriority) {
+            highestPriority = contributionStatusEnum[contribution.contributionStatus];
+        }
+    });
+    return Object.keys(contributionStatusEnum).find(key => contributionStatusEnum[key] === highestPriority);
+};
+
+const decorateContributionsWithStatus = (contributions, currentDate) => {
+    return contributions.map(contribution => {
+        const contributionObject = JSON.parse(contribution);
+        if (contributionObject.contributionStatus !== 'contributionReceived' && contributionObject.contributionStatus !== 'contributionCancelled') {
+            if (addDays(new Date(contributionObject.contributionDueDate), 1)  < currentDate) {
+                contributionObject['contributionStatus'] = 'contributionOverdue';
+            } else {
+                contributionObject['contributionStatus'] = 'contributionDue';
+            }
+        }
+        return contributionObject;
+    });
+};
+
 const bindDisplayElements = fromStaticList => async (stage) => {
-    stage.assignedTeamDisplay = await fromStaticList('S_TEAMS', stage.teamUUID);
+    stage.assignedTeamDisplay = await fromStaticList('S_ALL_TEAMS', stage.teamUUID);
     stage.caseTypeDisplayFull = await fromStaticList('S_CASETYPES', stage.caseType);
 
     if (stage.assignedTopic) {
@@ -173,7 +205,13 @@ const bindDisplayElements = fromStaticList => async (stage) => {
         }
     }
 
+    if (stage.somu && stage.somu.caseContributions){
+        stage.contributions = highestPriorityContributionStatus(
+            decorateContributionsWithStatus(stage.somu.caseContributions, new Date())).replace('contribution', '');
+    }
+
     stage.primaryCorrespondentAndRefDisplay = {};
+    stage.mpWithOwnerDisplay = JSON.parse('{"mp":"","owner":""}');
 
     if (stage.correspondents && stage.correspondents.correspondents) {
         stage.memberCorrespondentDisplay = getCorrespondentsNameByType(stage.correspondents, ['MEMBER']);
@@ -187,7 +225,10 @@ const bindDisplayElements = fromStaticList => async (stage) => {
             stage.primaryCorrespondentAndRefDisplay.primaryCorrespondentFullName = primaryCorrespondent.fullname;
         }
 
+        stage.mpWithOwnerDisplay.mp = stage.memberCorrespondentDisplay;
     }
+
+    stage.mpWithOwnerDisplay.owner = stage.assignedUserDisplay;
 
     stage.primaryCorrespondentAndRefDisplay.caseReference = stage.caseReference;
 
@@ -293,7 +334,7 @@ const teamAdapter = async (data, { fromStaticList, logger, teamId, configuration
             return cards;
         }, [])
         .sort(byLabel);
-    const teamDisplayName = await fromStaticList('S_TEAMS', teamId);
+    const teamDisplayName = await fromStaticList('S_ALL_TEAMS', teamId);
 
     logger.debug('REQUEST_TEAM_WORKSTACK', { team: teamDisplayName, workflows: workflowCards.length, rows: workstackData.length });
     return {
@@ -375,5 +416,7 @@ module.exports = {
     teamAdapter,
     workflowAdapter,
     stageAdapter,
-    bindDisplayElements
+    bindDisplayElements,
+    decorateContributionsWithStatus,
+    highestPriorityContributionStatus
 };

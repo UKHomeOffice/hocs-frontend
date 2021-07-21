@@ -41,7 +41,9 @@ const ColumnRenderer = {
     INDICATOR_GREEN: 'indicatorGreen',
     INDICATOR_RED: 'indicatorRed',
     WRAP_TEXT: 'wrapText',
-    TRUNCATE_TEXT: 'truncateText'
+    TRUNCATE_TEXT: 'truncateText',
+    CONTRIBUTIONS_WARNING: 'contributionsWarning',
+    MP_WITH_OWNER: 'mpWithOwner'
 };
 
 const ColumnSortStrategy = {
@@ -316,6 +318,15 @@ class WorkstackAllocate extends Component {
                     }
                     <Link to={`/case/${row.caseUUID}/stage/${row.uuid}`} className='govuk-link govuk-!-margin-right-3'>{value.caseReference}</Link>
                 </td>;
+            case ColumnRenderer.MP_WITH_OWNER:
+                return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>
+                    {
+                        <strong>{value.mp}</strong>
+                    }
+                    {
+                        <div>{value.owner}</div>
+                    }
+                </td>;
             case ColumnRenderer.DATE:
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>{value}</td>;
             case ColumnRenderer.DATE_WARNING:
@@ -385,6 +396,23 @@ class WorkstackAllocate extends Component {
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell wrap-text'>{value}</td>;
             case ColumnRenderer.TRUNCATE_TEXT:
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell govuk-table__cell--truncated' title={value}>{value}</td>;
+            case ColumnRenderer.CONTRIBUTIONS_WARNING:
+                if (row.somu && row.somu.caseContributions) {
+                    const dueContribution = row.somu.caseContributions
+                        .map(contribution => JSON.parse(contribution))
+                        .filter(contribution => !contribution.contributionStatus)
+                        .map(contribution => contribution.contributionDueDate)
+                        .sort()
+                        .shift();
+                    if (dueContribution && new Date(dueContribution) < new Date()) {
+                        return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell indicator'>
+                            {value && <span title={value} className='indicator-red'>
+                                {value}
+                            </span>}
+                        </td>;
+                    }
+                }
+                return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>{value}</td>;
             default:
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>{value}</td>;
         }

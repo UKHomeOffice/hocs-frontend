@@ -502,16 +502,61 @@ describe('List Service', () => {
         });
     });
 
-    describe('when the flush method is called', () => {
-        it('should call the flush on the instance', async () => {
+    describe('when the flush method is called but retreival of new data fails', () => {
+        it('should call not call flush or store on the respository', async () => {
             const listKey = '__listKey__';
+
             const mockRepositoryFlush = jest.fn();
+            const mockRepositoryStore = jest.fn();
+            const mockRepositoryFetch = jest.fn();
+            const mockClientInstance = jest.fn();
+            mockClientInstance.get = mockGet;
+            mockRepositoryFetch.mockReturnValue(mockClientInstance);
+            const mockGet = jest.fn();
+            mockGet.mockImplementation(() => {
+                throw new Error('400');
+            });
 
-            await listService.initialise({}, {}, { listRepository: { flush: mockRepositoryFlush } });
+            await listService.initialise({}, {}, { listRepository: {
+                flush: mockRepositoryFlush,
+                fetch: mockRepositoryFetch,
+                store: mockRepositoryStore
+            } });
 
-            listService.flush(listKey);
+            await listService.flush(listKey);
 
             expect(getLogger).toHaveBeenCalled();
+            expect(mockRepositoryFlush).not.toHaveBeenCalled();
+            expect(mockRepositoryStore).not.toHaveBeenCalled();
+        });
+    });
+
+    describe('when the flush method is called and retreival of new data is successful', () => {
+        it('should call call flush and store on the repository', async () => {
+            const listKey = '__listKey__';
+
+            const mockRepositoryFlush = jest.fn();
+            const mockRepositoryStore = jest.fn();
+            const mockRepositoryFetch = jest.fn();
+            const mockGet = jest.fn();
+            mockGet.mockReturnValue(JSON.parse('{"client": "newclient"}'));
+
+            const mockClientInstance = jest.fn();
+            mockClientInstance.get = mockGet;
+            mockRepositoryFetch.mockReturnValue(mockClientInstance);
+
+            await listService.initialise({}, {}, { listRepository: {
+                flush: mockRepositoryFlush,
+                fetch: mockRepositoryFetch,
+                store: mockRepositoryStore
+            } });
+            const mockAdapter = jest.fn();
+            listService.applyAdapter = mockAdapter;
+
+            await listService.flush(listKey);
+
+            expect(getLogger).toHaveBeenCalled();
+            expect(mockRepositoryStore).toHaveBeenCalled();
             expect(mockRepositoryFlush).toHaveBeenCalledWith(listKey);
         });
     });
