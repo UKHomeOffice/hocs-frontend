@@ -1,4 +1,13 @@
-const { dashboardAdapter, userAdapter, teamAdapter, workflowAdapter, stageAdapter, decorateContributionsWithStatus, highestPriorityContributionStatus } = require('../workstacks');
+const {
+    dashboardAdapter,
+    userAdapter,
+    teamAdapter,
+    workflowAdapter,
+    stageAdapter,
+    decorateContributionsWithStatus,
+    highestPriorityContributionStatus,
+    byTag
+} = require('../workstacks');
 const { getUtcDateString } = require('../../../libs/dateHelpers');
 
 const mockUser = { uuid: 1 };
@@ -1344,5 +1353,46 @@ describe('highestPriorityContribution', () => {
         result = highestPriorityContributionStatus(JSON.parse(contributions));
 
         expect(result).toEqual('');
+    });
+
+    describe('Sort cases by tags', () => {
+        it('Should return -1 if case a has tags and case b has no tags', () => {
+            const a = {
+                tag: ['HS']
+            };
+
+            const b = {
+                tag:[]
+            };
+
+            const result = byTag(a, b);
+            expect(result).toEqual(-1);
+        });
+
+        it('Should return 1 if case a has no tags and case b has tags', () => {
+            const a = {
+                tag: []
+            };
+
+            const b = {
+                tag:['HS']
+            };
+
+            const result = byTag(a, b);
+            expect(result).toEqual(1);
+        });
+
+        it('Should return 1 if case a has tags and case b has tags', () => {
+            const a = {
+                tag: ['HS']
+            };
+
+            const b = {
+                tag:['HS']
+            };
+
+            const result = byTag(a, b);
+            expect(result).toEqual(0);
+        });
     });
 });

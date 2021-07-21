@@ -42,6 +42,36 @@ const defaultCaseSort = (a, b) => {
     }
     return sortResult;
 };
+
+/**
+ * Used in tagSort compare function.
+ * a.tag and b.tag are arrays, we compare lengths to determine if a case has tags.
+ * If a case has tags, it has a higher precedence in a workstack so is moved higher in the rendered list in the UI.
+ * If both cases being compared have tags, or do not have tags, they have the same precedence so we don't alter the
+ * ordering.
+ */
+const byTag = (a, b) => {
+    if (a.tag.length > 0 && b.tag.length < 1) {
+        return -1;
+    }
+
+    if (a.tag.length < 1 && b.tag.length > 0) {
+        return 1;
+    }
+
+    return 0;
+};
+
+const tagSort = (a, b) => {
+    let sortResult = 0;
+
+    if (a.tag || b.tag) {
+        sortResult = byTag(a, b);
+    }
+
+    return sortResult;
+};
+
 const byLabel = (a, b) => a.label.localeCompare(b.label);
 const isUnallocated = user => user === null;
 
@@ -298,6 +328,7 @@ const userAdapter = async (data, { fromStaticList, logger, user, configuration }
         .filter(byWorkable)
         .filter(stage => stage.userUUID === user.uuid)
         .sort(defaultCaseSort)
+        .sort(tagSort)
         .map(bindDisplayElements(fromStaticList)));
     logger.debug('REQUEST_USER_WORKSTACK', { user_cases: workstackData.length });
     return {
@@ -313,6 +344,7 @@ const teamAdapter = async (data, { fromStaticList, logger, teamId, configuration
         .filter(byWorkable)
         .filter(stage => stage.teamUUID === teamId)
         .sort(defaultCaseSort)
+        .sort(tagSort)
         .map(bindDisplayElements(fromStaticList)));
     const workflowCards = workstackData
         .reduce((cards, stage) => {
@@ -359,6 +391,7 @@ const workflowAdapter = async (data, { fromStaticList, logger, teamId, workflowI
         .filter(byWorkable)
         .filter(stage => stage.teamUUID === teamId && stage.caseType === workflowId)
         .sort(defaultCaseSort)
+        .sort(tagSort)
         .map(bindDisplayElements(fromStaticList)));
     const stageCards = workstackData
         .reduce((cards, stage) => {
@@ -425,5 +458,6 @@ module.exports = {
     stageAdapter,
     bindDisplayElements,
     decorateContributionsWithStatus,
-    highestPriorityContributionStatus
+    highestPriorityContributionStatus,
+    byTag
 };
