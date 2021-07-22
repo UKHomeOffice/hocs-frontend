@@ -20,6 +20,22 @@ const byPriority = (a, b) => {
     }
 };
 
+const byWorkable = (stage) => {
+    if (stage.data) {
+        if (stage.data.Unworkable) {
+            if (stage.data.Unworkable === 'true') {
+                return 0;
+            } else {
+                return 1;
+            }
+        } else {
+            return 1;
+        }
+    } else {
+        return 1;
+    }
+};
+
 const defaultCaseSort = (a, b) => {
     var sortResult = byPriority(a, b);
     if (sortResult == 0) {
@@ -254,6 +270,7 @@ class Card {
 
 const dashboardAdapter = async (data, { fromStaticList, logger, user, configuration }) => {
     const dashboardData = await Promise.all(data.stages
+        .filter(byWorkable)
         .map(bindDisplayElements(fromStaticList)));
     const userCases = dashboardData.filter(byUser(user.uuid));
     const userCard = [new Card({
@@ -292,6 +309,7 @@ const dashboardAdapter = async (data, { fromStaticList, logger, user, configurat
 
 const userAdapter = async (data, { fromStaticList, logger, user, configuration }) => {
     const workstackData = await Promise.all(data.stages
+        .filter(byWorkable)
         .filter(stage => stage.userUUID === user.uuid)
         .sort(defaultCaseSort)
         .map(bindDisplayElements(fromStaticList)));
@@ -306,6 +324,7 @@ const userAdapter = async (data, { fromStaticList, logger, user, configuration }
 
 const teamAdapter = async (data, { fromStaticList, logger, teamId, configuration }) => {
     const workstackData = await Promise.all(data.stages
+        .filter(byWorkable)
         .filter(stage => stage.teamUUID === teamId)
         .sort(defaultCaseSort)
         .map(bindDisplayElements(fromStaticList)));
@@ -351,6 +370,7 @@ const teamAdapter = async (data, { fromStaticList, logger, teamId, configuration
 
 const workflowAdapter = async (data, { fromStaticList, logger, teamId, workflowId, configuration }) => {
     const workstackData = await Promise.all(data.stages
+        .filter(byWorkable)
         .filter(stage => stage.teamUUID === teamId && stage.caseType === workflowId)
         .sort(defaultCaseSort)
         .map(bindDisplayElements(fromStaticList)));
@@ -394,6 +414,7 @@ const workflowAdapter = async (data, { fromStaticList, logger, teamId, workflowI
 };
 const stageAdapter = async (data, { fromStaticList, logger, teamId, workflowId, stageId, configuration }) => {
     const workstackData = await Promise.all(data.stages
+        .filter(byWorkable)
         .filter(stage => stage.teamUUID === teamId && stage.caseType === workflowId && stage.stageType === stageId)
         .sort(defaultCaseSort)
         .map(bindDisplayElements(fromStaticList)));
