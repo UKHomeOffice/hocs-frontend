@@ -68,7 +68,6 @@ function withForm(Page) {
         getForm() {
             const { dispatch, match: { url }, history, page } = this.props;
             const endpoint = '/api/form' + url;
-            console.log('api URL', 'api/form/' + url);
 
             return dispatch(updateApiStatus(status.REQUEST_FORM))
                 .then(() => {
@@ -145,14 +144,11 @@ function withForm(Page) {
                 /* eslint-disable-next-line no-undef */
                 const formData = new FormData();
                 Object.keys(form_data).filter(field => form_data[field] !== null).forEach(field => {
-                    console.log('field: ', field);
                     if (Array.isArray(form_data[field])) {
                         form_data[field].map(value => {
-                            console.log('array', value);
                             formData.append(`${field}[]`, value);
                         });
                     } else {
-                        console.log('not array', form_data[field]);
                         formData.append(field, form_data[field]);
                     }
                 });
