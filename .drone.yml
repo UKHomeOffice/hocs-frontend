@@ -158,8 +158,8 @@ steps:
       VERSION: build_${DRONE_BUILD_NUMBER}
       KUBE_TOKEN:
         from_secret: hocs_frontend_hocs_gamma
-      POISE_WHITELIST:
-        from_secret: POISE_WHITELIST
+      POISE_IPS:
+        from_secret: POISE_IPS
     commands:
       - cd kube-hocs-frontend
       - ./deploy.sh
