@@ -38,11 +38,14 @@ class DateInput extends Component {
      * @returns the sanitised date part.
      */
     sanitiseDayMonthPart(value, paddingZeros = 2) {
-        const regexMatch = '^0+[1-9]$';
+        if (value === '') {
+            return value;
+        }
 
-        let dayMatch = value.match(regexMatch);
-        if (dayMatch) {
-            return dayMatch.substring(value.length - 2);
+        const regexMatch = new RegExp('^0+[1-9]$');
+
+        if (regexMatch.test(value)) {
+            return value.substring(value.length - 2);
         }
         return value.padStart(paddingZeros, '0');
     }

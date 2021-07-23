@@ -40,7 +40,7 @@ const validators = {
             if (day) {
                 if (day > new Date(getYear(value), getMonth(value), 0).getDate()
                     || day < 1
-                    || day.match('^0+[1-3]\\d$')) {
+                    || day.match('^(?:0+[1-3]|0{2,})\\d$')) {
                     return message || validationErrors.isValidDay(label);
                 }
             }
@@ -53,7 +53,7 @@ const validators = {
             if (month) {
                 if (month < 1
                     || month > 12
-                    || month.match('^0+1\\d$')) {
+                    || month.match('^(?:0+1|0{2,})\\d$')) {
                     return message || validationErrors.isValidMonth(label);
                 }
             }
