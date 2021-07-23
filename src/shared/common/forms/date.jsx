@@ -27,7 +27,7 @@ class DateInput extends Component {
     /**
      * Dates that have leading zeros in a part are typically invalid and fail on a `new Date` or
      * Javas `LocalDate.parse`. Those dates that are obvious i.e. single digit 1-9 in the right
-     * most character with any number of 0's before are clear so we can sanitise these and leave 
+     * most character with any number of 0's before are clear so we can sanitise these and leave
      * only one zero pre-pended.
      *
      * We pad the resultant with the correct amount of 0's for the part of the date, as this allows
