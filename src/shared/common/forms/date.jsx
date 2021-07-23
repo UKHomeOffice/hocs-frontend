@@ -10,7 +10,7 @@ class DateInput extends Component {
     _onChange(field, value) {
         const updatedPart = { [field]: value };
         const parts = { ...this.parseValue(this.props.value), ...updatedPart };
-        this.props.updateState({ [this.props.name]: `${parts.year}-${parts.month}-${parts.day}` });
+        this.props.updateState({ [this.props.name]: `${parts.year}-${this.sanitiseDayMonthPart(parts.month)}-${this.sanitiseDayMonthPart(parts.day)}` });
     }
 
     datePart(field) { return `${this.props.name}-${field}`; }
@@ -22,6 +22,29 @@ class DateInput extends Component {
             month,
             year
         };
+    }
+
+    /**
+     * Dates that have leading zeros in a part are typically invalid and fail on a `new Date` or
+     * Javas `LocalDate.parse`. Those dates that are obvious i.e. single digit 1-9 in the right
+     * most character with any number of 0's before are clear so we can sanitise these and leave 
+     * only one zero pre-pended.
+     *
+     * We pad the resultant with the correct amount of 0's for the part of the date, as this allows
+     * Java's `LocalDate.parse` to correctly parse the result.
+     *
+     * @param {String} value the date part to sanitise
+     * @param {Number} paddingZeros the amount of zero's that should be leading, defaults to 2
+     * @returns the sanitised date part.
+     */
+    sanitiseDayMonthPart(value, paddingZeros = 2) {
+        const regexMatch = '^0+[1-9]$';
+
+        let dayMatch = value.match(regexMatch);
+        if (dayMatch) {
+            return dayMatch.substring(value.length - 2);
+        }
+        return value.padStart(paddingZeros, '0');
     }
 
     render() {
