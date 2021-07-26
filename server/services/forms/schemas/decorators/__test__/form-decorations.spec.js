@@ -162,6 +162,17 @@ describe('Form schema decorations', function () {
                             'name': 'FoiType'
                         }
                     }, {
+                        'component': 'dropdown',
+                        'validation': [{
+                            'type': 'required'
+                        }],
+                        'props': {
+                            'choices': 'TOPICS_FOI',
+                            'defaultOptions': true,
+                            'label': 'Case Topic',
+                            'name': 'Topics'
+                        }
+                    },{
                         'component': 'text-area',
                         'props': {
                             'label': 'Request Question',
