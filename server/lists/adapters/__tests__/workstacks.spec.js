@@ -1057,6 +1057,39 @@ describe('Workflow Workstack Adapter', () => {
         expect(result).toMatchSnapshot();
     });
 
+    it('should add the case ref and requester to primaryCorrespondentAndRefDisplay', async () => {
+        const mockData = {
+            stages: [
+                {
+                    correspondents: {
+                        correspondents: [ { fullname: 'testRequesterName', uuid: 'uuid123', is_primary: 'true' } ]
+                    },
+                    teamUUID: 2,
+                    caseType: 'FOI',
+                    stageType: 'A',
+                    userUUID: 2,
+                    deadline: '2200-01-03',
+                    caseReference: 'A/1234568/21',
+                    active: true,
+                    data: {
+                        CaseContributions: '[{}]',
+                    }
+                }
+            ]
+        };
+
+        const result = await stageAdapter(mockData, {
+            user: mockUser,
+            fromStaticList: mockFromStaticList,
+            logger: mockLogger,
+            teamId: 2,
+            workflowId: 'FOI',
+            stageId: 'A',
+            configuration: mockConfiguration
+        });
+        expect(result).toMatchSnapshot();
+    });
+
     it('should add the primary correspondent to FOIRequester field for FOI case type', async () => {
         const mockData = {
             stages: [
