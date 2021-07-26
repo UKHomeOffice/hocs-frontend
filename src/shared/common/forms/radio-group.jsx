@@ -9,7 +9,7 @@ class Radio extends Component {
         const conditionChoices = Array.from(JSON.parse(JSON.stringify(props.conditionChoices)));
 
         const choicesToUse = Radio.getChoicesToUse(choices, conditionChoices, this.props);
-        this.state = { value: this.props.value, choices, conditionChoices, choicesToUse };
+        this.state = { value: this.props.value, choices, conditionChoices, choicesToUse, selectedChoice: 'none' };
     }
 
     componentDidMount() {
@@ -33,6 +33,15 @@ class Radio extends Component {
         if ('conditionalContent' in choice) {
             this.props.updateState({ [index]: this.props.data[index] || '' });
         }
+        if ('conditionalContentAfter' in choice) {
+            this.setState({
+                selectedChoice: choice
+            });
+        }
+    }
+
+    handleChangeForConditionalContent(e) {
+        this.props.updateState({ [e.target.id]: e.target.value });
     }
 
     handleChangeForTextArea(e) {
@@ -183,9 +192,101 @@ class Radio extends Component {
                                 </Fragment>
                             );
                         })}
-
                         {choicesToUse.length === 0 && <p className="govuk-body">No options available</p>}
                     </div>
+                    {this.state.selectedChoice.conditionalContentAfter &&
+                    <div className='conditional-content-container'>
+                        <br/>
+                        <h1 className='govuk-heading-l'>{this.state.selectedChoice.conditionalContentAfterTitle}</h1>
+                        {this.state.selectedChoice.conditionalContentAfter.map((content, i) => {
+                            return (
+                                <Fragment key={i}>
+                                    <div className={`govuk-form-group${error ? ' govuk-form-group--error' : ''}`}>
+
+                                        <legend id={`${content.name}-legend`} className="govuk-fieldset__legend">
+                                            <span className="govuk-fieldset__heading govuk-label--s">{content.label}</span>
+                                        </legend>
+
+                                        {hint && <span className="govuk-hint">{hint}</span>}
+                                        {error && <span id={`${name}-error`} className="govuk-error-message">{error}</span>}
+                                        {content.type === 'radio' && content.choices.map((choice, i) => {
+                                            return (
+                                                <Fragment key={i}>
+                                                    <div className="govuk-radios__item">
+                                                        <input id={`${choice.label}-${choice.value}`}
+                                                            type="radio"
+                                                            name={choice.name}
+                                                            value={choice.value}
+                                                            checked={(value === choice.value)}
+                                                            onChange={e => this.handleChangeForConditionalContent(e)}
+                                                            data-aria-controls={`conditional-${choice.name}-${choice.value}`}
+                                                            className={'govuk-radios__input'}
+                                                        />
+                                                        <label className="govuk-label govuk-radios__label" htmlFor={`${choice.label}-${choice.value}`}>
+                                                            {choice.label}
+                                                        </label>
+                                                    </div>
+
+                                                    {choice.conditionalContent &&
+                                                        <div className="govuk-radios__conditional govuk-radios__conditional--hidden"
+                                                            id={`conditional-${name}-${choice.value}`}>
+                                                            <div className={`govuk-form-group ${this.isConditionalContentError(errors, `${choice.value}Text`) ? ' govuk-form-group--error' : ''}`}>
+                                                                <label className="govuk-label" htmlFor={`${choice.value}Text`}>
+                                                                    {choice.conditionalContent.label}
+                                                                    {choice.conditionalContent.description && <span className="govuk-body-s full-width">{choice.conditionalContent.description}</span>}
+                                                                </label>
+                                                                {this.isConditionalContentError(errors, `${choice.value}Text`) &&
+                                                                    <span id={`${choice.value}Text-error`} className="govuk-error-message">
+                                                                        <span className="govuk-visually-hidden">Error:</span>{errors[`${choice.value}Text`]}
+                                                                    </span>
+                                                                }
+                                                                <textarea
+                                                                    className={`govuk-textarea ${this.isConditionalContentError(errors, `${choice.value}Text`) ? ' govuk-textarea--error' : ''}`}
+                                                                    id={`${choice.value}Text`}
+                                                                    name={`${choice.value}Text`}
+                                                                    disabled={disabled}
+                                                                    rows="4"
+                                                                    onChange={e => this.handleChangeForTextArea(e)}
+                                                                    value={this.returnConditionalContentValue(`${choice.value}Text`)}
+                                                                />
+                                                            </div>
+
+                                                        </div>
+                                                    }
+                                                </Fragment>
+                                            );
+                                        })}
+                                        {content.type === 'dropdown' &&
+                                            <select className={`govuk-select ${error ? 'govuk-select--error' : ''}`}
+                                                id={content.name}
+                                                name={content.name}
+                                                disabled={disabled}
+                                                onChange={e => this.handleChangeForConditionalContent(e)}
+                                                value={content.value}
+                                                selected={content.selected}
+                                            >
+                                                {content.choices && content.choices.map((choice, i) => {
+                                                    return (
+                                                        <option key={i} value={choice.value} >{choice.label}</option>
+                                                    );
+                                                })}
+                                            </select>
+                                        }
+                                        {content.type === 'textarea' &&
+                                            <textarea className={`govuk-textarea form-control-3-4 ${error ? 'govuk-textarea--error' : ''}`}
+                                                id={content.name}
+                                                name={content.name}
+                                                disabled={disabled}
+                                                rows={content.rows}
+                                                onChange={e => this.handleChangeForConditionalContent(e)}
+                                                defaultValue={content.defaultValue}
+                                            />
+                                        }
+                                    </div>
+                                </Fragment>
+                            );
+                        })}
+                    </div>}
                 </fieldset>
             </div>
         );

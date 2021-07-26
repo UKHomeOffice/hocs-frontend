@@ -81,10 +81,39 @@ function processMiddleware(req, res, next) {
         req.form.data = schema.fields
             .filter(field => field.type !== 'display')
             .reduce(createReducer(data, req), {});
+        processAdditionalContentAfter(req, data);
     } catch (error) {
         return next(new FormSubmissionError('Unable to process form data'));
     }
     next();
+}
+
+function getAdditionalContentAfter(req, data) {
+    let fields = {};
+    if (req.form.schema.fields){
+        req.form.schema.fields.forEach(field => {
+            if (Array.isArray(field.props.choices) && field.component === 'radio'){
+                field.props.choices.forEach(choice => {
+                    if (data[field.props.name] === choice.value){
+                        if (choice.conditionalContentAfter){
+                            choice.conditionalContentAfter.forEach(content => {
+                                req.form.data[content.name] = data[content.name];
+                            });
+                        }
+                    }
+                });
+            }
+        });
+    }
+    return fields;
+}
+
+function processAdditionalContentAfter(req, data) {
+    try {
+        getAdditionalContentAfter(req, data);
+    } catch (error) {
+        return new FormSubmissionError('Unable to process form data');
+    }
 }
 
 module.exports = {

@@ -208,21 +208,47 @@ const getDateSection = (date, section) => {
 };
 
 function validateConditionalRadioContentIfExists(data, name, choices, validator, result) {
+    let validationError;
     const conditionalRadioButtonTextFieldId = `${data[name]}Text`;
-
     if (conditionalRadioButtonTextFieldId in data) {
         const radioChoice = choices.find(choice => {
             return choice.value === data[name];
         });
-        let label = radioChoice.conditionalContent.label;
-        const value = data[conditionalRadioButtonTextFieldId];
+        if(radioChoice.conditionalContent){
+            let label = radioChoice.conditionalContent.label;
+            const value = data[conditionalRadioButtonTextFieldId];
 
-        const validationError = validators[validator].call(
-            this,
-            { label, value }
-        );
+            validationError = validators[validator].call(
+                this,
+                { label, value }
+            );
+        }
         if (validationError) {
             result[conditionalRadioButtonTextFieldId] = validationError;
+        }
+    }
+}
+
+function validateConditionalAfterRadioContentIfExists(data, name, choices, validator, result) {
+    let validationError = true;
+    if (Array.isArray(choices)){
+        const radioChoice = choices.find(choice => {
+            return choice.value === data[name];
+        });
+        if (radioChoice && radioChoice.conditionalContentAfter){
+            radioChoice.conditionalContentAfter.forEach(element => {
+                if (element.validation){
+                    const value = data[element.name];
+                    const label = element.label;
+                    validationError = validators[element.validation.type].call(
+                        this,
+                        { label, value }
+                    );
+                    if (validationError) {
+                        result[label] = validationError;
+                    }
+                }
+            });
         }
     }
 }
@@ -387,6 +413,14 @@ function validationMiddleware(req, res, next) {
                                     validator,
                                     result
                                 );
+                                validateConditionalAfterRadioContentIfExists.call(
+                                    this,
+                                    data,
+                                    name,
+                                    choices,
+                                    validator,
+                                    result
+                                );
                             }
 
                             const validationError = validators[validator].call(this, { label, value });
@@ -410,6 +444,14 @@ function validationMiddleware(req, res, next) {
                                     name,
                                     choices,
                                     'required',
+                                    result
+                                );
+                                validateConditionalAfterRadioContentIfExists.call(
+                                    this,
+                                    data,
+                                    name,
+                                    choices,
+                                    validator,
                                     result
                                 );
                             }
