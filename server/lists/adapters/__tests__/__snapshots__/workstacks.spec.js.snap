@@ -617,6 +617,62 @@ Object {
 }
 `;
 
+exports[`Workflow Workstack Adapter should add the case ref and requester to primaryCorrespondentAndRefDisplay 1`] = `
+Object {
+  "allocateToTeamEndpoint": "/allocate/team",
+  "allocateToUserEndpoint": "/allocate/user",
+  "allocateToWorkstackEndpoint": "/unallocate/",
+  "columns": Array [],
+  "items": Array [
+    Object {
+      "FOIRequesterDisplay": "testRequesterName",
+      "active": true,
+      "applicantOrConstituentCorrespondentDisplay": "",
+      "assignedTeamDisplay": "MOCK_TEAM",
+      "assignedUserDisplay": "MOCK_USER",
+      "caseReference": "A/1234568/21",
+      "caseType": "FOI",
+      "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "correspondents": Object {
+        "correspondents": Array [
+          Object {
+            "fullname": "testRequesterName",
+            "is_primary": "true",
+            "uuid": "uuid123",
+          },
+        ],
+      },
+      "data": Object {
+        "CaseContributions": "[{}]",
+      },
+      "deadline": "2200-01-03",
+      "deadlineDisplay": "03/01/2200",
+      "memberCorrespondentDisplay": "",
+      "mpWithOwnerDisplay": Object {
+        "mp": "",
+        "owner": "MOCK_USER",
+      },
+      "primaryCorrespondent": Object {
+        "fullname": "testRequesterName",
+        "is_primary": "true",
+        "uuid": "uuid123",
+      },
+      "primaryCorrespondentAndRefDisplay": Object {
+        "caseReference": "A/1234568/21",
+        "primaryCorrespondentFullName": "testRequesterName",
+      },
+      "stageType": "A",
+      "stageTypeDisplay": "MOCK_STAGETYPE",
+      "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE",
+      "teamUUID": 2,
+      "userUUID": 2,
+    },
+  ],
+  "label": "MOCK_STAGETYPE",
+  "teamMembers": Array [],
+}
+`;
+
 exports[`Workflow Workstack Adapter should add the fullname and postcode of primaryCorrespondent to primaryCorrespondent 1`] = `
 Object {
   "allocateToTeamEndpoint": "/allocate/team",
