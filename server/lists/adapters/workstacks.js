@@ -23,7 +23,7 @@ const byPriority = (a, b) => {
 const byWorkable = (stage) => {
     if (stage.data) {
         if (stage.data.Unworkable) {
-            if (stage.data.Unworkable === 'true') {
+            if (stage.data.Unworkable === 'True') {
                 return 0;
             } else {
                 return 1;
