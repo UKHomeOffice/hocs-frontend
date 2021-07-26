@@ -74,41 +74,5 @@ describe('Form date component', () => {
         expect(mockCallback).toHaveBeenCalledTimes(1);
         expect(mockCallback).toHaveBeenCalledWith({ 'date': '2018--' });
     });
-    it('should sanitise day and month on change', () => {
-        const mockCallback = jest.fn();
-        const wrapper = shallow(
-            <DateInput name="date" updateState={mockCallback} />
-        );
-
-        let event = { target: { value: '003' } };
-        mockCallback.mockReset();
-        wrapper.find('#date-day').simulate('change', event);
-        expect(mockCallback).toHaveBeenCalledTimes(1);
-        expect(mockCallback).toHaveBeenCalledWith({ 'date': '--03' });
-
-        mockCallback.mockReset();
-        event = { target: { value: '002' } };
-        wrapper.find('#date-month').simulate('change', event);
-        expect(mockCallback).toHaveBeenCalledTimes(1);
-        expect(mockCallback).toHaveBeenCalledWith({ 'date': '-02-' });
-    });
-    it('should not sanitise day and month with multiple connotations', () => {
-        const mockCallback = jest.fn();
-        const wrapper = shallow(
-            <DateInput name="date" updateState={mockCallback} />
-        );
-
-        let event = { target: { value: '012' } };
-        mockCallback.mockReset();
-        wrapper.find('#date-day').simulate('change', event);
-        expect(mockCallback).toHaveBeenCalledTimes(1);
-        expect(mockCallback).toHaveBeenCalledWith({ 'date': '--012' });
-
-        mockCallback.mockReset();
-        event = { target: { value: '012' } };
-        wrapper.find('#date-month').simulate('change', event);
-        expect(mockCallback).toHaveBeenCalledTimes(1);
-        expect(mockCallback).toHaveBeenCalledWith({ 'date': '-012-' });
-    });
 });
 
