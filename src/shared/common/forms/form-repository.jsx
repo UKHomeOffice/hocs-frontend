@@ -26,6 +26,7 @@ import ExpandableCheckbox from './expandable-checkbox.jsx';
 import FlowDirectionLink from './flow-direction-link.jsx';
 import HideConditionFunctions from './../../helpers/hide-condition-functions';
 import ConfirmationWithCaseRef from './confirmation-with-case-ref.jsx';
+import ReviewField from './review-field.jsx';
 import hideConditionFunctions from '../../helpers/hide-condition-functions.js';
 import showConditionFunctions from '../../helpers/show-condition-functions.js';
 
@@ -43,10 +44,22 @@ const retrieveValue = ({ defaultValue, populateFromCaseData = true, name }, data
     return value;
 };
 
+function reviewBoxDataAdapter(name, data) {
+    return data[name];
+}
+
+function hasFieldData(obj) {
+    if (typeof obj.name !== 'object' && obj.child && obj.child.props) {
+        return obj.child.props;
+    }
+    return obj;
+}
+
 function renderFormComponent(Component, options) {
-    const { key, config, data, errors, callback, dataAdapter, page, caseRef } = options;
+    const { key, config, data, errors, callback, dataAdapter, page, caseRef, switchDirection } = options;
 
     if (isComponentVisible(config, data)) {
+
         return <Component key={key}
             {...config}
             data={data}
@@ -54,8 +67,11 @@ function renderFormComponent(Component, options) {
             errors={errors}
             value={retrieveValue(config, dataAdapter, data)}
             caseRef={caseRef}
+            caseRef={caseRef}
+            value={retrieveValue(hasFieldData(config), dataAdapter, data)}
             updateState={callback ? data => callback(data) : null}
-            page={page} />;
+            page={page}
+            switchDirection={switchDirection}/>;
     }
     return null;
 }
@@ -92,7 +108,7 @@ function isComponentVisible({ visibilityConditions, hideConditions }, data) {
 }
 
 export function formComponentFactory(field, options) {
-    const { key, config, data, errors, callback, page, caseRef } = options;
+    const { key, config, data, errors, callback, page, caseRef, switchDirection } = options;
 
     switch (field) {
         case 'radio':
@@ -145,6 +161,8 @@ export function formComponentFactory(field, options) {
             return renderFormComponent(Panel, { key, config });
         case 'inset':
             return renderFormComponent(Inset, { key, data, config });
+        case 'confirmation-with-case-ref':
+            return renderFormComponent(ConfirmationWithCaseRef, { key, data, config, caseRef });
         case 'paragraph':
             return renderFormComponent(Paragraph, { key, config });
         case 'entity-manager':
@@ -168,13 +186,15 @@ export function formComponentFactory(field, options) {
             });
         case 'change-link':
             return renderFormComponent(ChangeLink, { data, key, config, errors, callback });
+        case 'review-field':
+            return renderFormComponent(ReviewField, { data, key, config, errors, dataAdapter: reviewBoxDataAdapter, callback, switchDirection });
         default:
             return null;
     }
 }
 
 export function secondaryActionFactory(field, options) {
-    const { key, data, config, page } = options;
+    const { key, data, config, page, switchDirection } = options;
     switch (field) {
         case 'backlink':
             return renderFormComponent(BackLink, { data, key, config });
@@ -187,7 +207,8 @@ export function secondaryActionFactory(field, options) {
                 config: {
                     ...config, caseId: page.caseId, stageId: page.stageId,
                     action: `/case/${page.caseId}/stage/${page.stageId}/direction/BACKWARD`
-                }
+                },
+                switchDirection
             });
         default:
             return null;
