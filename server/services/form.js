@@ -96,7 +96,7 @@ async function getFormSchema(options) {
 
 async function hydrateField(field, req) {
     if (field.props) {
-        const { choices, items, sections, conditionChoices, somuType } = field.props;
+        const { choices, items, sections, conditionChoices, somuType, child } = field.props;
 
         if (conditionChoices) {
             for (var i = 0; i < conditionChoices.length; i++) {
@@ -144,7 +144,10 @@ async function hydrateField(field, req) {
 
             const somuItem = await req.listService.fetch('CASE_SOMU_ITEM', { ...req.params, somuTypeId: somuTypeItem.uuid });
             field.props.somuItems = somuItem;
+        } else if (child && child.props && child.props.choices && typeof child.props.choices === 'string') {
+            field.props.child.props.choices = await req.listService.fetch(child.props.choices, req.params);
         }
+
     }
     return field;
 }
