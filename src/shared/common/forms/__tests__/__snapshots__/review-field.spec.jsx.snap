@@ -1,0 +1,118 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Review component should display a text summary of a child radio button component 1`] = `
+<tr
+  class="govuk-table__row"
+>
+  <td
+    class="govuk-table__cell"
+  >
+    <span
+      class="govuk-label govuk-label--s"
+    >
+      Which button has been clicked?
+    </span>
+  </td>
+  <td
+    class="govuk-table__cell govuk-body"
+    id="RADIO_SUMMARY_TEST"
+    name="RADIO_SUMMARY_TEST"
+    type="review-field"
+  >
+    Button Two
+  </td>
+  <td
+    class="govuk-table__cell govuk-body"
+  >
+    <a
+      class="govuk-body govuk-link change-link"
+      href=""
+    >
+      Change 
+      <span
+        class="govuk-visually-hidden"
+      >
+        Which button has been clicked?
+      </span>
+    </a>
+  </td>
+</tr>
+`;
+
+exports[`Review component should display a text summary of a date component 1`] = `
+<tr
+  class="govuk-table__row"
+>
+  <td
+    class="govuk-table__cell"
+  >
+    <span
+      class="govuk-label govuk-label--s"
+    >
+      Date
+    </span>
+  </td>
+  <td
+    class="govuk-table__cell govuk-body"
+    id="DATE_SUMMARY_TEST"
+    name="DATE_SUMMARY_TEST"
+    type="review-field"
+  >
+    01/11/2021
+  </td>
+  <td
+    class="govuk-table__cell govuk-body"
+  >
+    <a
+      class="govuk-body govuk-link change-link"
+      href=""
+    >
+      Change 
+      <span
+        class="govuk-visually-hidden"
+      >
+        Date
+      </span>
+    </a>
+  </td>
+</tr>
+`;
+
+exports[`Review component should display a text summary of a text component 1`] = `
+<tr
+  class="govuk-table__row"
+>
+  <td
+    class="govuk-table__cell"
+  >
+    <span
+      class="govuk-label govuk-label--s"
+    >
+      Text area
+    </span>
+  </td>
+  <td
+    class="govuk-table__cell govuk-body"
+    id="TEXT_SUMMARY_TEST"
+    name="TEXT_SUMMARY_TEST"
+    type="review-field"
+  >
+    Here is some text.
+  </td>
+  <td
+    class="govuk-table__cell govuk-body"
+  >
+    <a
+      class="govuk-body govuk-link change-link"
+      href=""
+    >
+      Change 
+      <span
+        class="govuk-visually-hidden"
+      >
+        Text area
+      </span>
+    </a>
+  </td>
+</tr>
+`;
