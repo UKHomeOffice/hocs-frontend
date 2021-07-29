@@ -183,6 +183,7 @@ const bindDisplayElements = fromStaticList => async (stage) => {
             'MPAM_TRIAGE_ESCALATED_REQUESTED_CONTRIBUTION',
             'MPAM_DRAFT_REQUESTED_CONTRIBUTION',
             'MPAM_DRAFT_ESCALATED_REQUESTED_CONTRIBUTION',
+            'FOI_APPROVAL'
         ];
 
         if(stage.stageType === 'FOI_DRAFT', stage.data.ContributionsRequired === 'Y') {

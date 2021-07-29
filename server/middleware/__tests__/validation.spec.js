@@ -225,6 +225,39 @@ describe('Validators', () => {
         });
     });
 
+    describe('Approvals fulfilled validation', () => {
+        it('should reject with message if fails with message', () => {
+            expect(validators.approvalsFulfilled({ value: '{ "test": 1 }', message: 'test' })).toEqual('test');
+        });
+        it('should reject if value passed in is null', () => {
+            expect(validators.approvalsFulfilled({ value: null })).not.toEqual(null);
+        });
+        it('should reject if value passed in is undefined', () => {
+            expect(validators.approvalsFulfilled({ value: undefined })).not.toEqual(null);
+        });
+        it('should reject if value passed in is not an array', () => {
+            expect(validators.approvalsFulfilled({ value: '{ "test": 1 }' })).not.toEqual(null);
+        });
+        it('should reject if value does not have contributionStatus not present', () => {
+            expect(validators.approvalsFulfilled({ value: '[{ "data": { "test": 1 } }]' })).not.toEqual(null);
+        });
+        it('should reject if value has approvalStatus not cancelled or received', () => {
+            expect(validators.approvalsFulfilled({ value: '[{ "data": { "approvalStatus": "test" } }]' })).not.toEqual(null);
+        });
+        it('should reject if one value has contributionStatus that is not cancelled or received', () => {
+            expect(validators.approvalsFulfilled({ value: '[{ "data": { "contributionStatus": "contributionReceived" }, { "contributionStatus": "test" } }]' })).not.toEqual(null);
+        });
+        it('should accept if value has contributionStatus as cancelled', () => {
+            expect(validators.approvalsFulfilled({ value: '[{ "data": { "approvalStatus": "approvalCancelled" } }]' })).toEqual(null);
+        });
+        it('should accept if value has contributionStatus as received', () => {
+            expect(validators.approvalsFulfilled({ value: '[{ "data": { "approvalStatus": "approvalComplete" } }]' })).toEqual(null);
+        });
+        it('should accept if all value has contributionStatus as received or cancelled', () => {
+            expect(validators.approvalsFulfilled({ value: '[{ "data": { "approvalStatus": "approvalComplete" } }, { "data": {"approvalStatus": "approvalCancelled" } }]' })).toEqual(null);
+        });
+    });
+
     describe('One of validation', () => {
         it('should reject if one of options are not fulfilled', () => {
             const options = [
