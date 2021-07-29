@@ -269,7 +269,7 @@ module.exports = {
         },
         DASHBOARD: {
             client: 'CASEWORK',
-            endpoint: '/stage',
+            endpoint: '/dashboard',
             adapter: workstack.dashboardAdapter
         },
         USER_WORKSTACK: {
