@@ -50,46 +50,34 @@ describe('Dashboard Adapter', () => {
         const mockData = {
             stages: [
                 {
-                    teamUUID: 1,
-                    caseType: 'DEFAULT',
-                    stageType: 'A',
-                    userUUID: 1,
-                    deadline: '1900-01-01'
+                    teamUuid: 1,
+                    statistics: {
+                        usersCases: 0,
+                        usersOverdueCases: 0,
+                        cases: 0,
+                        overdueCases: 0,
+                        unallocatedCases: 0
+                    }
                 },
                 {
-                    teamUUID: 1,
-                    caseType: 'DEFAULT',
-                    stageType: 'A',
-                    userUUID: null,
-                    deadline: '1900-01-02'
+                    teamUuid: 2,
+                    statistics: {
+                        usersCases: 1,
+                        usersOverdueCases: 1,
+                        cases: 2,
+                        overdueCases: 1,
+                        unallocatedCases: 1
+                    }
                 },
                 {
-                    teamUUID: 1,
-                    caseType: 'DEFAULT',
-                    stageType: 'A',
-                    userUUID: 2,
-                    deadline: '2200-01-03'
-                },
-                {
-                    teamUUID: 2,
-                    caseType: 'DEFAULT',
-                    stageType: 'A',
-                    userUUID: null,
-                    deadline: '2200-04-01'
-                },
-                {
-                    teamUUID: 2,
-                    caseType: 'DEFAULT',
-                    stageType: 'A',
-                    userUUID: null,
-                    deadline: todaysDate
-                },
-                {
-                    teamUUID: 2,
-                    caseType: 'DEFAULT',
-                    stageType: 'A',
-                    userUUID: null,
-                    deadline: '1900-01-01'
+                    teamUuid: 3,
+                    statistics: {
+                        usersCases: 0,
+                        usersOverdueCases: 0,
+                        cases: 0,
+                        overdueCases: 0,
+                        unallocatedCases: 0
+                    }
                 }
             ]
         };
@@ -166,43 +154,42 @@ describe('Dashboard Adapter', () => {
         const mockData = {
             stages: [
                 {
-                    teamUUID: 1,
-                    caseType: 'DEFAULT',
-                    stageType: 'A',
-                    userUUID: 1,
-                    deadline: '1900-01-01'
+                    teamUuid: 1,
+                    statistics: {
+                        usersCases: 0,
+                        usersOverdueCases: 0,
+                        cases: 0,
+                        overdueCases: 0,
+                        unallocatedCases: 0
+                    }
                 },
                 {
-                    teamUUID: 1,
-                    caseType: 'DEFAULT',
-                    stageType: 'A',
-                    userUUID: null,
-                    deadline: '1900-01-02'
+                    teamUuid: 2,
+                    statistics: {
+                        usersCases: 1,
+                        usersOverdueCases: 1,
+                        cases: 2,
+                        overdueCases: 1,
+                        unallocatedCases: 1
+                    }
                 },
                 {
-                    teamUUID: 1,
-                    caseType: 'DEFAULT',
-                    stageType: 'A',
-                    userUUID: 2,
-                    deadline: '2200-01-03'
-                },
-                {
-                    teamUUID: 2,
-                    caseType: 'DEFAULT',
-                    stageType: 'A',
-                    userUUID: null,
-                    deadline: '2200-04-01'
+                    teamUuid: 3,
+                    statistics: {
+                        usersCases: 0,
+                        usersOverdueCases: 0,
+                        cases: 0,
+                        overdueCases: 0,
+                        unallocatedCases: 0
+                    }
                 }
             ]
         };
         const testConfiguration = {
-            workstackTypeColumns: [
-                { workstackType: 'DEFAULT', workstackColumns: [] },
-                { workstackType: 'WCS', workstackColumns: [] }
-            ],
+            ...mockConfiguration,
             deadlinesEnabled: false
-        }
-            ;
+        };
+
         const result = await dashboardAdapter(mockData, {
             user: mockUser,
             fromStaticList: mockFromStaticList,
@@ -1096,7 +1083,7 @@ describe('Workflow Workstack Adapter', () => {
             stages: [
                 {
                     correspondents: {
-                        correspondents: [ { fullname: 'testName', uuid: 'uuid123', is_primary: 'true' } ]
+                        correspondents: [{ fullname: 'testName', uuid: 'uuid123', is_primary: 'true' }]
                     },
                     teamUUID: 2,
                     caseType: 'WCS',
