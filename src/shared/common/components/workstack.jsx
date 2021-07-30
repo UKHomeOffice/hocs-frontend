@@ -139,11 +139,8 @@ class WorkstackAllocate extends Component {
         return value;
     }
 
-    getPrimaryCorrespondentDataValue(row, dataValueKey) {
-        if (dataValueKey === undefined) {
-            throw new Error('No data value key was specified');
-        }
-        return row.primaryCorrespondent[dataValueKey];
+    getPrimaryCorrespondentDataValue(row) {
+        return row.primaryCorrespondent.fullname;
     }
 
     applyDataAdapter(value, colDataAdapter, dataValueKey, row) {
@@ -500,8 +497,8 @@ class WorkstackAllocate extends Component {
     }
 
     primaryCorrespondentSortStrategy(a, b, sortColumn) {
-        const aValue = sortColumn ? (this.getPrimaryCorrespondentDataValue(a, sortColumn.dataValueKey) || '').toUpperCase() : a.index;
-        const bValue = sortColumn ? (this.getPrimaryCorrespondentDataValue(b, sortColumn.dataValueKey) || '').toUpperCase() : b.index;
+        const aValue = sortColumn ? (this.getPrimaryCorrespondentDataValue(a) || '').toUpperCase() : a.index;
+        const bValue = sortColumn ? (this.getPrimaryCorrespondentDataValue(b) || '').toUpperCase() : b.index;
         return this.sortStringValues(aValue, bValue);
     }
 
