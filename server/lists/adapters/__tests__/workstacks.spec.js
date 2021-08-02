@@ -102,6 +102,65 @@ describe('Dashboard Adapter', () => {
         });
         expect(result).toMatchSnapshot();
     });
+    it('should hide unworkable\n', async () => {
+        const mockData = {
+            stages: [
+                {
+                    teamUUID: 1,
+                    caseType: 'DEFAULT',
+                    stageType: 'A',
+                    userUUID: 1,
+                    deadline: '1900-01-01'
+                },
+                {
+                    teamUUID: 1,
+                    caseType: 'DEFAULT',
+                    stageType: 'A',
+                    userUUID: null,
+                    deadline: '1900-01-02',
+                    data: {
+                        Unworkable: 'True'
+                    }
+                },
+                {
+                    teamUUID: 1,
+                    caseType: 'DEFAULT',
+                    stageType: 'A',
+                    userUUID: 2,
+                    deadline: '2200-01-03'
+                },
+                {
+                    teamUUID: 2,
+                    caseType: 'DEFAULT',
+                    stageType: 'A',
+                    userUUID: null,
+                    deadline: '2200-04-01'
+                },
+                {
+                    teamUUID: 2,
+                    caseType: 'DEFAULT',
+                    stageType: 'A',
+                    userUUID: null,
+                    deadline: todaysDate
+                },
+                {
+                    teamUUID: 2,
+                    caseType: 'DEFAULT',
+                    stageType: 'A',
+                    userUUID: null,
+                    deadline: '1900-01-01'
+                }
+            ]
+        };
+
+        const result = await dashboardAdapter(mockData, {
+            user: mockUser,
+            fromStaticList: mockFromStaticList,
+            logger: mockLogger,
+            configuration: mockConfiguration
+        });
+        expect(result).toMatchSnapshot();
+    });
 
     it('should transform a stage array to a dashboard schema when deadlines are disabled', async () => {
         const mockData = {
@@ -166,6 +225,53 @@ describe('User Workstack Adapter', () => {
                     deadline: '2200-01-01',
                     active: true,
                     assignedTopic: mockTopic
+                },
+                {
+                    teamUUID: 2,
+                    caseType: 'WCS',
+                    stageType: 'A',
+                    userUUID: 2,
+                    deadline: '2200-01-02',
+                    active: true
+                },
+                {
+                    teamUUID: 2,
+                    caseType: 'WCS',
+                    stageType: 'A',
+                    userUUID: null,
+                    deadline: '2200-01-03',
+                    active: false
+                }
+            ]
+        };
+
+        const result = await userAdapter(mockData, {
+            user: mockUser,
+            fromStaticList: mockFromStaticList,
+            logger: mockLogger,
+            configuration: {
+                workstackTypeColumns: [
+                    { workstackType: 'DEFAULT', workstackColumns: [] },
+                    { workstackType: 'WCS', workstackColumns: [] }
+                ],
+            }
+        });
+        expect(result).toMatchSnapshot();
+    });
+    it('should hide unworkable', async () => {
+        const mockData = {
+            stages: [
+                {
+                    teamUUID: 1,
+                    caseType: 'DEFAULT',
+                    stageType: 'A',
+                    userUUID: 1,
+                    deadline: '2200-01-01',
+                    active: true,
+                    assignedTopic: mockTopic,
+                    data: {
+                        Unworkable: 'True'
+                    }
                 },
                 {
                     teamUUID: 2,
@@ -276,6 +382,126 @@ describe('Team Workstack Adapter', () => {
                     caseReference: 'A/1234567/19',
                     active: true,
                     data: {},
+                    assignedTopic: mockTopic
+                },
+                {
+                    teamUUID: 2,
+                    caseType: 'DEFAULT',
+                    stageType: 'A',
+                    userUUID: 1,
+                    deadline: todaysDate,
+                    caseReference: 'A/1234567/19',
+                    active: true,
+                    data: {},
+                    assignedTopic: mockTopic
+                },
+                {
+                    teamUUID: 2,
+                    caseType: 'DEFAULT',
+                    stageType: 'A',
+                    userUUID: 1,
+                    deadline: todaysDate,
+                    caseReference: 'A/1234567/19',
+                    active: false,
+                    data: {},
+                    assignedTopic: mockTopic
+                },
+            ]
+        };
+
+        const result = await teamAdapter(mockData, {
+            user: mockUser,
+            fromStaticList: mockFromStaticList,
+            logger: mockLogger,
+            teamId: 2,
+            configuration: {
+                workstackTypeColumns: [
+                    { workstackType: 'DEFAULT', workstackColumns: [] },
+                    { workstackType: 'WCS', workstackColumns: [] }
+                ], deadlinesEnabled: true
+            }
+        });
+
+        expect(result).toMatchSnapshot();
+    });
+    it('should hide unworkable', async () => {
+        const mockData = {
+            stages: [
+                {
+                    teamUUID: 1,
+                    caseType: 'DEFAULT',
+                    stageType: 'A',
+                    userUUID: 1,
+                    deadline: '2200-01-01',
+                    caseReference: 'A/1234567/19',
+                    active: true,
+                    data: {},
+                    assignedTopic: mockTopic
+                },
+                {
+                    teamUUID: 2,
+                    caseType: 'DEFAULT',
+                    stageType: 'A',
+                    userUUID: null,
+                    deadline: '1900-01-02',
+                    caseReference: 'A/1234568/19',
+                    active: true,
+                    data: {},
+                    assignedTopic: mockTopic
+                },
+                {
+                    teamUUID: 2,
+                    caseType: 'WCS',
+                    stageType: 'A',
+                    userUUID: 2,
+                    deadline: '2200-01-03',
+                    caseReference: 'A/1234568/19',
+                    active: true,
+                    data: {}
+                },
+                {
+                    teamUUID: 2,
+                    caseType: 'WCS',
+                    stageType: 'A',
+                    userUUID: null,
+                    deadline: '1900-01-04',
+                    caseReference: 'A/1234569/19',
+                    active: true,
+                    data: {}
+                },
+                {
+                    teamUUID: 2,
+                    caseType: 'WCS',
+                    stageType: 'A',
+                    userUUID: null,
+                    deadline: '1900-01-05',
+                    caseReference: 'A/1234570/19',
+                    active: true,
+                    data: {
+                        Unworkable: 'True'
+                    }
+                },
+                {
+                    teamUUID: 2,
+                    caseType: 'WCS',
+                    stageType: 'A',
+                    userUUID: 1,
+                    deadline: '06-01-2200',
+                    caseReference: 'A/1234569/19',
+                    active: false,
+                    data: {}
+                },
+                {
+                    teamUUID: 2,
+                    caseType: 'DEFAULT',
+                    stageType: 'A',
+                    userUUID: 1,
+                    deadline: '1900-01-01',
+                    caseReference: 'A/1234567/19',
+                    active: true,
+                    data: {
+                        Unworkable: 'True'
+                    },
                     assignedTopic: mockTopic
                 },
                 {
@@ -472,6 +698,139 @@ describe('Workflow Workstack Adapter', () => {
                     caseReference: 'A/1234568/19',
                     active: true,
                     data: {}
+                },
+                {
+                    teamUUID: 2,
+                    caseType: 'WCS',
+                    stageType: 'A',
+                    userUUID: null,
+                    deadline: '1900-01-04',
+                    caseReference: 'A/1234569/19',
+                    active: true,
+                    data: {}
+                },
+                {
+                    teamUUID: 2,
+                    caseType: 'WCS',
+                    stageType: 'A',
+                    userUUID: null,
+                    deadline: '1900-01-05',
+                    caseReference: 'A/1234570/19',
+                    active: true,
+                    data: {}
+                },
+                {
+                    teamUUID: 2,
+                    caseType: 'WCS',
+                    stageType: 'A',
+                    userUUID: 1,
+                    deadline: '2200-01-06',
+                    caseReference: 'A/1234569/19',
+                    active: true,
+                    data: {}
+                },
+                {
+                    teamUUID: 2,
+                    caseType: 'WCS',
+                    stageType: 'B',
+                    userUUID: null,
+                    deadline: '1900-01-07',
+                    caseReference: 'A/1234569/19',
+                    active: true,
+                    data: {}
+                },
+                {
+                    teamUUID: 2,
+                    caseType: 'DEFAULT',
+                    stageType: 'A',
+                    userUUID: 1,
+                    deadline: '2200-01-08',
+                    caseReference: 'A/1234569/19',
+                    active: false,
+                    data: {},
+                    assignedTopic: mockTopic
+                }
+            ]
+        };
+
+        const result = await workflowAdapter(mockData, {
+            user: mockUser,
+            fromStaticList: mockFromStaticList,
+            logger: mockLogger,
+            teamId: 2,
+            workflowId: 'WCS',
+            configuration: mockConfiguration
+        });
+        expect(result).toMatchSnapshot();
+    });
+    it('should hide unworkable', async () => {
+        const mockData = {
+            stages: [
+                {
+                    teamUUID: 1,
+                    caseType: 'DEFAULT',
+                    stageType: 'A',
+                    userUUID: 1,
+                    deadline: '2200-01-01',
+                    caseReference: 'A/1234567/19',
+                    active: true,
+                    data: {},
+                    assignedTopic: mockTopic
+                },
+                {
+                    teamUUID: 1,
+                    caseType: 'DEFAULT',
+                    stageType: 'A',
+                    userUUID: 1,
+                    deadline: todaysDate,
+                    caseReference: 'A/1234567/19',
+                    active: true,
+                    data: {},
+                    assignedTopic: mockTopic
+                },
+                {
+                    teamUUID: 1,
+                    caseType: 'DEFAULT',
+                    stageType: 'A',
+                    userUUID: 1,
+                    deadline: '1900-01-01',
+                    caseReference: 'A/1234567/19',
+                    active: true,
+                    data: {},
+                    assignedTopic: mockTopic
+                },
+                {
+                    teamUUID: 1,
+                    caseType: 'DEFAULT',
+                    stageType: 'A',
+                    userUUID: 1,
+                    deadline: '1900-01-01',
+                    caseReference: 'A/1234567/19',
+                    active: false,
+                    data: {},
+                    assignedTopic: mockTopic
+                },
+                {
+                    teamUUID: 2,
+                    caseType: 'DEFAULT',
+                    stageType: 'A',
+                    userUUID: null,
+                    deadline: '1900-01-02',
+                    caseReference: 'A/1234568/19',
+                    data: {},
+                    assignedTopic: mockTopic
+                },
+                {
+                    teamUUID: 2,
+                    caseType: 'WCS',
+                    stageType: 'A',
+                    userUUID: 2,
+                    deadline: '2200-01-03',
+                    caseReference: 'A/1234568/19',
+                    active: true,
+                    data: {
+                        Unworkable: 'True'
+                    }
                 },
                 {
                     teamUUID: 2,
