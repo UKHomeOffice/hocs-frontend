@@ -302,7 +302,26 @@ const formDefinitions = {
                     builder: formRepository.contributionFulfillmentFoi,
                     action: EDIT_CONTRIBUTION
                 }
-            }
+            },
+        },
+        APPROVAL_REQS: {
+            FOI: {
+                ADDREQUEST: {
+                    builder: formRepository.approvalRequestFoi,
+                    action: ADD_CONTRIBUTION
+                },
+                EDITREQUEST: {
+                    builder: formRepository.approvalRequestFoi,
+                    action: EDIT_CONTRIBUTION
+                },
+                VIEWREQUEST: {
+                    builder: formRepository.approvalRequestFoi,
+                },
+                EDIT: {
+                    builder: formRepository.approvalFulfillmentFoi,
+                    action: EDIT_CONTRIBUTION
+                }
+            },
         },
         CCT_COMP_CONTRIB: {
             COMP: {
