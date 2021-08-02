@@ -23,5 +23,8 @@ module.exports = {
     contributionRequestFoi: require('./contribution-request-foi'),
     contributionFulfillment: require('./contribution-fulfillment'),
     contributionFulfillmentFoi: require('./contribution-fulfillment-foi'),
-    confirmExtendDeadlineFoi: require('./confirm-extend-deadline-foi')
+    confirmExtendDeadlineFoi: require('./confirm-extend-deadline-foi'),
+
+    approvalRequestFoi: require('./approval-request-foi'),
+    approvalFulfillmentFoi: require('./approval-fulfillment-foi'),
 };
