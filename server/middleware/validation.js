@@ -1,6 +1,7 @@
 const { FormSubmissionError, ValidationError } = require('../models/error');
 const { DOCUMENT_WHITELIST, DOCUMENT_BULK_LIMIT, VALID_DAYS_RANGE } = require('../config').forContext('server');
 const { MIN_ALLOWABLE_YEAR, MAX_ALLOWABLE_YEAR } = require('../libs/dateHelpers');
+const getLogger = require('../libs/logger');
 
 const validationErrors = {
     required: label => `${label} is required`,
@@ -17,11 +18,39 @@ const validationErrors = {
     isValidWithinDate: label => `${label} must be within the last ${VALID_DAYS_RANGE} days`,
     validCaseReference: () => 'Case reference is not valid',
     contributionsFulfilled: () => 'Case contributions have to be completed or cancelled',
+    approvalsFulfilled: () => 'Case approvals have to be completed or cancelled',
     oneOf: () => 'Select at least one option',
     isValidMonth: label => `${label} must contain a real month`,
     isBeforeMaxYear: label => `${label} must be before ${MAX_ALLOWABLE_YEAR}`,
     isAfterMinYear: label => `${label} must be after ${MIN_ALLOWABLE_YEAR}`,
     isValidDay: label => `${label} must contain a real day`,
+};
+
+const requestsFulfilled = ( value, message, statusField, cancelledValue, completeValue, defaultError ) => {
+    const logger = getLogger();
+
+    let valid = true;
+    try {
+        const contributions = JSON.parse(value);
+
+        if (Array.isArray(contributions)) {
+            const result = contributions.filter(contribution => {
+                const contributionStatus = contribution.data[statusField];
+                return (!(contributionStatus === cancelledValue || contributionStatus === completeValue));
+            });
+
+            if (result.length !== 0) {
+                valid = false;
+            }
+        } else {
+            valid = false;
+        }
+    } catch (error) {
+        valid = false;
+        logger.error('REQUEST_FULFILLED_VALIDATION_ERROR', { message: error.message, stack: error.stack  });
+    }
+
+    return valid ? null : (message || defaultError);
 };
 
 const validators = {
@@ -54,8 +83,7 @@ const validators = {
         if (value && getYear(value)) {
             if (getYear(value) > MAX_ALLOWABLE_YEAR) {
                 return message || validationErrors.isBeforeMaxYear(label);
-            }
-            else if(getYear(value) < MIN_ALLOWABLE_YEAR){
+            } else if (getYear(value) < MIN_ALLOWABLE_YEAR) {
                 return message || validationErrors.isAfterMinYear(label);
             }
         }
@@ -74,7 +102,7 @@ const validators = {
         return null;
     },
     isValidWithinDate({ label, value, message }) {
-        const numberOfDaysInPast= VALID_DAYS_RANGE;
+        const numberOfDaysInPast = VALID_DAYS_RANGE;
         let limitDate = new Date();
         limitDate.setDate(limitDate.getDate() - numberOfDaysInPast);
         if (new Date(value).valueOf() <= limitDate.valueOf()) {
@@ -151,27 +179,20 @@ const validators = {
         return null;
     },
     contributionsFulfilled: ({ value, message }) => {
-        let valid = true;
-        try {
-            const contributions = JSON.parse(value);
-
-            if (Array.isArray(contributions)) {
-                const result = contributions.filter(contribution => {
-                    const contributionStatus = contribution.data.contributionStatus;
-                    return (!(contributionStatus === 'contributionCancelled' || contributionStatus === 'contributionReceived'));
-                });
-
-                if (result.length !== 0) {
-                    valid = false;
-                }
-            } else {
-                valid = false;
-            }
-        } catch (error) {
-            valid = false;
-        }
-
-        return valid ? null : (message || validationErrors.contributionsFulfilled());
+        return requestsFulfilled( value,
+            message,
+            'contributionStatus',
+            'contributionCancelled',
+            'contributionReceived',
+            validationErrors.contributionsFulfilled());
+    },
+    approvalsFulfilled: ({ value, message }) => {
+        return requestsFulfilled( value,
+            message,
+            'approvalStatus',
+            'approvalCancelled',
+            'approvalComplete',
+            validationErrors.approvalsFulfilled());
     },
     /**
      * oneOf used for form validation. Validator subschema should have array of strings of options to pick one of.
