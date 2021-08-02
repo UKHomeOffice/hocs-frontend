@@ -157,8 +157,8 @@ describe('Validators', () => {
         it('should accept a day value of 31 for December month', () => {
             expect(validators.isValidDay({ value: '2020-12-31' })).toEqual(null);
         });
-        it('should accept a day value of 31 for December month', () => {
-            expect(validators.isValidDay({ value: '2020-12-31' })).toEqual(null);
+        it('should accept a day value of 30 month other than February', () => {
+            expect(validators.isValidDay({ value: '2020-09-30' })).toEqual(null);
         });
 
         it('should reject a day value over 31', () => {
@@ -167,16 +167,19 @@ describe('Validators', () => {
         it('should reject a day value below 1', () => {
             expect(validators.isValidDay({ value: '2000-01-0' })).not.toEqual(null);
         });
-        it('should reject a day value below 31 for month without 31 days', () => {
+        it('should reject a day value above maximum day value for month', () => {
             expect(validators.isValidDay({ value: '2000-02-31' })).not.toEqual(null);
         });
         it('should reject a day value with 3 or more length', () => {
             expect(validators.isValidDay({ value: '2000-02-001' })).not.toEqual(null);
         });
         it('should reject a day value with multiple potential connotations', () => {
+            /* A day value can hold multiple connotations whereby we cannot infer the
+             * correct value. One example of this is '012', whereby the user could
+             * mean 01 or 12 for the day. As such we reject these */
             expect(validators.isValidDay({ value: '2000-02-012' })).not.toEqual(null);
         });
-        it('should reject a day value of 29 on non leap year', () => {
+        it('should reject a day value of 29 for February on non leap year', () => {
             expect(validators.isValidDay({ value: '2001-02-29' })).not.toEqual(null);
         });
     });
