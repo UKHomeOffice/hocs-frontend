@@ -29,7 +29,8 @@ const REVIEW_FOR_RADIO_BUTTON = {
     },
     value: 'BTN_2',
     switchDirection: switchDirectionMock,
-    name: 'RADIO_SUMMARY_TEST'
+    name: 'RADIO_SUMMARY_TEST',
+    page: {}
 };
 
 const REVIEW_FOR_DATE = {
@@ -48,7 +49,8 @@ const REVIEW_FOR_DATE = {
     },
     value: '2021-11-01',
     switchDirection: switchDirectionMock,
-    name: 'DATE_SUMMARY_TEST'
+    name: 'DATE_SUMMARY_TEST',
+    page: {}
 };
 
 const REVIEW_FOR_TEXT_AREA = {
@@ -65,7 +67,36 @@ const REVIEW_FOR_TEXT_AREA = {
     },
     value: 'Here is some text.',
     switchDirection: switchDirectionMock,
-    name: 'TEXT_SUMMARY_TEST'
+    name: 'TEXT_SUMMARY_TEST',
+    page: {}
+};
+
+const REVIEW_FOR_CORRESPONDENTS = {
+    child: {
+        component: 'entity-list',
+        validation: [
+            'required'
+        ],
+        props: {
+            action: 'CORRESPONDENT',
+            entity: 'correspondent',
+            label: 'Primary correspondent',
+            name: 'Correspondents',
+            choices: [
+                {
+                    label: 'Test',
+                    value: 'TEST-KEY',
+                    isPrimary: true
+                }
+            ]
+        }
+    },
+    value: 'TEST-KEY',
+    name: 'CORRESPONDENT',
+    page: {
+        caseId: 'ea258af3-cdd6-479c-92a7-06b3e33125f1',
+        stageId: 'f36298c2-f400-4e7b-af17-a3eefb72e4a0'
+    }
 };
 
 describe('Review component', () => {
@@ -103,7 +134,17 @@ describe('Review component', () => {
         ).toMatchSnapshot();
     });
 
-    it('should call switchDirection when Change is clicked', () => {
+    it('should display the primary correspondent given the correspondents entity-list', () => {
+        expect(
+            render(
+                <MemoryRouter>
+                    <ReviewField {...REVIEW_FOR_CORRESPONDENTS} />
+                </MemoryRouter>
+            )
+        ).toMatchSnapshot();
+    });
+
+    it('should call switchDirection when Change is clicked for non-entity-list fields', () => {
         const component = mount(
             <MemoryRouter>
                 <ReviewField {...REVIEW_FOR_TEXT_AREA} />
