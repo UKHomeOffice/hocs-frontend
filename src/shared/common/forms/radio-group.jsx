@@ -221,7 +221,7 @@ class Radio extends Component {
 
                                     {this.isConditionalContentError(errors, content.label) &&
                                     <span
-                                        id={`${name}-error`}
+                                        id={`${content.name}-error`}
                                         className="govuk-error-message"
                                     >{this.getConditionalContentErrorMsg(errors, content.label)}
                                     </span>

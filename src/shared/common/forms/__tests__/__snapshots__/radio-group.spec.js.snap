@@ -191,6 +191,16 @@ exports[`Form radio group component should render error message for textarea if 
 </div>
 `;
 
+exports[`Form radio group component should render textarea if conditionalContentAfter exists 1`] = `
+<textarea
+  className="govuk-textarea form-control-3-4 "
+  disabled={false}
+  id="NameA"
+  name="NameA"
+  onChange={[Function]}
+/>
+`;
+
 exports[`Form radio group component should render with default props 1`] = `
 <div
   class="govuk-form-group"
@@ -603,6 +613,25 @@ exports[`Form radio group component should render with value when passed 1`] = `
     </div>
   </fieldset>
 </div>
+`;
+
+exports[`Form radio group component should show error msg on conditionalContentAfter if exists and has errors 1`] = `
+<textarea
+  className="govuk-textarea form-control-3-4 govuk-textarea--error"
+  disabled={false}
+  id="NameA"
+  name="NameA"
+  onChange={[Function]}
+/>
+`;
+
+exports[`Form radio group component should show error msg on conditionalContentAfter if exists and has errors 2`] = `
+<span
+  className="govuk-error-message"
+  id="NameA-error"
+>
+  someLabelA is required
+</span>
 `;
 
 exports[`Form radio group component should textarea if conditional content exists 1`] = `
