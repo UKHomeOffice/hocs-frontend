@@ -36,6 +36,7 @@ async function handleSearch(req, res, next) {
                 PrevHocsRef: formData['PrevHocsRef'],
                 RefType: formData['RefType'],
                 HomeSecInterest: formData['HomeSecInterest'] === 'true' ? true : undefined,
+                Unworkable: formData['Unworkable'] === 'true' ? true : undefined,
                 CampaignType: formData['CampaignType'],
                 MinSignOffTeam: formData['MinSignOffTeam'],
                 OfficialEngagement: formData['OfficialEngagement'],

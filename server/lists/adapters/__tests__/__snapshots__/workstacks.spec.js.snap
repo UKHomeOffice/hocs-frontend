@@ -1,5 +1,45 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Dashboard Adapter should hide unworkable
+ 1`] = `
+Object {
+  "teams": Array [
+    Card {
+      "count": 2,
+      "label": "MOCK_TEAM",
+      "tags": Object {
+        "allocated": 0,
+        "overdue": 1,
+      },
+      "type": "team",
+      "value": 1,
+    },
+    Card {
+      "count": 3,
+      "label": "MOCK_TEAM",
+      "tags": Object {
+        "allocated": 3,
+        "overdue": 1,
+      },
+      "type": "team",
+      "value": 2,
+    },
+  ],
+  "user": Array [
+    Card {
+      "count": 1,
+      "label": "Cases",
+      "tags": Object {
+        "allocated": undefined,
+        "overdue": 1,
+      },
+      "type": undefined,
+      "value": undefined,
+    },
+  ],
+}
+`;
+
 exports[`Dashboard Adapter should transform a stage array to a dashboard schema 1`] = `
 Object {
   "teams": Array [
@@ -75,6 +115,183 @@ Object {
       "value": undefined,
     },
   ],
+}
+`;
+
+exports[`Team Workstack Adapter should hide unworkable 1`] = `
+Object {
+  "allocateToTeamEndpoint": "/allocate/team",
+  "allocateToUserEndpoint": "/allocate/user",
+  "allocateToWorkstackEndpoint": "/unallocate/",
+  "columns": Array [],
+  "dashboard": Array [
+    Card {
+      "count": 3,
+      "label": "MOCK_CASETYPE",
+      "tags": Object {
+        "allocated": 1,
+        "overdue": 1,
+      },
+      "type": "workflow",
+      "value": "DEFAULT",
+    },
+    Card {
+      "count": 3,
+      "label": "MOCK_CASETYPE",
+      "tags": Object {
+        "allocated": 1,
+        "overdue": 1,
+      },
+      "type": "workflow",
+      "value": "WCS",
+    },
+  ],
+  "items": Array [
+    Object {
+      "active": true,
+      "assignedTeamDisplay": "MOCK_TEAM",
+      "assignedTopic": "MOCK_TOPIC",
+      "assignedTopicDisplay": "MOCK_TOPIC",
+      "assignedUserDisplay": "MOCK_USER",
+      "caseReference": "A/1234567/19",
+      "caseType": "DEFAULT",
+      "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "data": Object {},
+      "deadline": "2020-12-31",
+      "deadlineDisplay": "31/12/2020",
+      "mpWithOwnerDisplay": Object {
+        "mp": "",
+        "owner": "MOCK_USER",
+      },
+      "primaryCorrespondentAndRefDisplay": Object {
+        "caseReference": "A/1234567/19",
+      },
+      "stageType": "A",
+      "stageTypeDisplay": "MOCK_STAGETYPE",
+      "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE",
+      "teamUUID": 2,
+      "userUUID": 1,
+    },
+    Object {
+      "active": false,
+      "assignedTeamDisplay": "MOCK_TEAM",
+      "assignedTopic": "MOCK_TOPIC",
+      "assignedTopicDisplay": "MOCK_TOPIC",
+      "assignedUserDisplay": "MOCK_USER",
+      "caseReference": "A/1234567/19",
+      "caseType": "DEFAULT",
+      "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "data": Object {},
+      "deadline": "2020-12-31",
+      "deadlineDisplay": "31/12/2020",
+      "mpWithOwnerDisplay": Object {
+        "mp": "",
+        "owner": "MOCK_USER",
+      },
+      "primaryCorrespondentAndRefDisplay": Object {
+        "caseReference": "A/1234567/19",
+      },
+      "stageType": "A",
+      "stageTypeDisplay": "Closed",
+      "stageTypeWithDueDateDisplay": "Closed",
+      "teamUUID": 2,
+      "userUUID": 1,
+    },
+    Object {
+      "active": true,
+      "assignedTeamDisplay": "MOCK_TEAM",
+      "assignedTopic": "MOCK_TOPIC",
+      "assignedTopicDisplay": "MOCK_TOPIC",
+      "caseReference": "A/1234568/19",
+      "caseType": "DEFAULT",
+      "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "data": Object {},
+      "deadline": "1900-01-02",
+      "deadlineDisplay": "02/01/1900",
+      "mpWithOwnerDisplay": Object {
+        "mp": "",
+        "owner": undefined,
+      },
+      "primaryCorrespondentAndRefDisplay": Object {
+        "caseReference": "A/1234568/19",
+      },
+      "stageType": "A",
+      "stageTypeDisplay": "MOCK_STAGETYPE",
+      "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE",
+      "teamUUID": 2,
+      "userUUID": null,
+    },
+    Object {
+      "active": true,
+      "assignedTeamDisplay": "MOCK_TEAM",
+      "assignedUserDisplay": "MOCK_USER",
+      "caseReference": "A/1234568/19",
+      "caseType": "WCS",
+      "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "data": Object {},
+      "deadline": "2200-01-03",
+      "deadlineDisplay": "03/01/2200",
+      "mpWithOwnerDisplay": Object {
+        "mp": "",
+        "owner": "MOCK_USER",
+      },
+      "primaryCorrespondentAndRefDisplay": Object {
+        "caseReference": "A/1234568/19",
+      },
+      "stageType": "A",
+      "stageTypeDisplay": "MOCK_STAGETYPE",
+      "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE",
+      "teamUUID": 2,
+      "userUUID": 2,
+    },
+    Object {
+      "active": true,
+      "assignedTeamDisplay": "MOCK_TEAM",
+      "caseReference": "A/1234569/19",
+      "caseType": "WCS",
+      "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "data": Object {},
+      "deadline": "1900-01-04",
+      "deadlineDisplay": "04/01/1900",
+      "mpWithOwnerDisplay": Object {
+        "mp": "",
+        "owner": undefined,
+      },
+      "primaryCorrespondentAndRefDisplay": Object {
+        "caseReference": "A/1234569/19",
+      },
+      "stageType": "A",
+      "stageTypeDisplay": "MOCK_STAGETYPE",
+      "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE",
+      "teamUUID": 2,
+      "userUUID": null,
+    },
+    Object {
+      "active": false,
+      "assignedTeamDisplay": "MOCK_TEAM",
+      "assignedUserDisplay": "MOCK_USER",
+      "caseReference": "A/1234569/19",
+      "caseType": "WCS",
+      "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "data": Object {},
+      "deadline": "06-01-2200",
+      "deadlineDisplay": null,
+      "mpWithOwnerDisplay": Object {
+        "mp": "",
+        "owner": "MOCK_USER",
+      },
+      "primaryCorrespondentAndRefDisplay": Object {
+        "caseReference": "A/1234569/19",
+      },
+      "stageType": "A",
+      "stageTypeDisplay": "Closed",
+      "stageTypeWithDueDateDisplay": "Closed",
+      "teamUUID": 2,
+      "userUUID": 1,
+    },
+  ],
+  "label": "MOCK_TEAM",
+  "teamMembers": Array [],
 }
 `;
 
@@ -461,6 +678,15 @@ Object {
 }
 `;
 
+exports[`User Workstack Adapter should hide unworkable 1`] = `
+Object {
+  "allocateToWorkstackEndpoint": "/unallocate/",
+  "columns": Array [],
+  "items": Array [],
+  "label": "My Cases",
+}
+`;
+
 exports[`User Workstack Adapter should transform a stage array to a user workstack schema 1`] = `
 Object {
   "allocateToWorkstackEndpoint": "/unallocate/",
@@ -608,6 +834,130 @@ Object {
     },
   ],
   "label": "MOCK_STAGETYPE",
+  "teamMembers": Array [],
+}
+`;
+
+exports[`Workflow Workstack Adapter should hide unworkable 1`] = `
+Object {
+  "allocateToTeamEndpoint": "/allocate/team",
+  "allocateToUserEndpoint": "/allocate/user",
+  "allocateToWorkstackEndpoint": "/unallocate/",
+  "columns": Array [],
+  "dashboard": Array [
+    Card {
+      "count": 3,
+      "label": "MOCK_STAGETYPE",
+      "tags": Object {
+        "allocated": 2,
+        "overdue": 2,
+      },
+      "type": "stage",
+      "value": "A",
+    },
+    Card {
+      "count": 1,
+      "label": "MOCK_STAGETYPE",
+      "tags": Object {
+        "allocated": 1,
+        "overdue": 1,
+      },
+      "type": "stage",
+      "value": "B",
+    },
+  ],
+  "items": Array [
+    Object {
+      "active": true,
+      "assignedTeamDisplay": "MOCK_TEAM",
+      "caseReference": "A/1234569/19",
+      "caseType": "WCS",
+      "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "data": Object {},
+      "deadline": "1900-01-04",
+      "deadlineDisplay": "04/01/1900",
+      "mpWithOwnerDisplay": Object {
+        "mp": "",
+        "owner": undefined,
+      },
+      "primaryCorrespondentAndRefDisplay": Object {
+        "caseReference": "A/1234569/19",
+      },
+      "stageType": "A",
+      "stageTypeDisplay": "MOCK_STAGETYPE",
+      "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE",
+      "teamUUID": 2,
+      "userUUID": null,
+    },
+    Object {
+      "active": true,
+      "assignedTeamDisplay": "MOCK_TEAM",
+      "assignedUserDisplay": "MOCK_USER",
+      "caseReference": "A/1234569/19",
+      "caseType": "WCS",
+      "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "data": Object {},
+      "deadline": "2200-01-06",
+      "deadlineDisplay": "06/01/2200",
+      "mpWithOwnerDisplay": Object {
+        "mp": "",
+        "owner": "MOCK_USER",
+      },
+      "primaryCorrespondentAndRefDisplay": Object {
+        "caseReference": "A/1234569/19",
+      },
+      "stageType": "A",
+      "stageTypeDisplay": "MOCK_STAGETYPE",
+      "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE",
+      "teamUUID": 2,
+      "userUUID": 1,
+    },
+    Object {
+      "active": true,
+      "assignedTeamDisplay": "MOCK_TEAM",
+      "caseReference": "A/1234569/19",
+      "caseType": "WCS",
+      "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "data": Object {},
+      "deadline": "1900-01-07",
+      "deadlineDisplay": "07/01/1900",
+      "mpWithOwnerDisplay": Object {
+        "mp": "",
+        "owner": undefined,
+      },
+      "primaryCorrespondentAndRefDisplay": Object {
+        "caseReference": "A/1234569/19",
+      },
+      "stageType": "B",
+      "stageTypeDisplay": "MOCK_STAGETYPE",
+      "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE",
+      "teamUUID": 2,
+      "userUUID": null,
+    },
+    Object {
+      "active": true,
+      "assignedTeamDisplay": "MOCK_TEAM",
+      "caseReference": "A/1234570/19",
+      "caseType": "WCS",
+      "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "data": Object {},
+      "deadline": "1900-01-05",
+      "deadlineDisplay": "05/01/1900",
+      "mpWithOwnerDisplay": Object {
+        "mp": "",
+        "owner": undefined,
+      },
+      "primaryCorrespondentAndRefDisplay": Object {
+        "caseReference": "A/1234570/19",
+      },
+      "stageType": "A",
+      "stageTypeDisplay": "MOCK_STAGETYPE",
+      "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE",
+      "teamUUID": 2,
+      "userUUID": null,
+    },
+  ],
+  "label": "MOCK_CASETYPE",
   "teamMembers": Array [],
 }
 `;
