@@ -32,18 +32,22 @@ function defaultDataAdapter(name, data, currentValue) {
     return data[name] || currentValue;
 }
 
-const retrieveValue = ({ defaultValue, populateFromCaseData = true, name }, dataAdapter, data) => {
+const retrieveValue = ({ defaultValue, populateFromCaseData = true, name }, dataAdapter, data, child) => {
     let value = defaultValue || '';
 
     if (populateFromCaseData && data) {
-        value = dataAdapter ? dataAdapter(name, data) : defaultDataAdapter(name, data, value);
+        value = dataAdapter ? dataAdapter(name, data, child) : defaultDataAdapter(name, data, value);
     }
 
     return value;
 };
 
-function reviewBoxDataAdapter(name, data) {
+function keyFromDataAdapter(name, data) {
     return data[name];
+}
+
+function primaryEntityDataAdapter(name, data, child) {
+    return child.props.choices.find(choice => choice.isPrimary === true).value;
 }
 
 function hasFieldData(obj) {
@@ -64,7 +68,7 @@ function renderFormComponent(Component, options) {
             error={errors && errors[config.name]}
             errors={errors}
             caseRef={caseRef}
-            value={retrieveValue(hasFieldData(config), dataAdapter, data)}
+            value={retrieveValue(hasFieldData(config), dataAdapter, data, config.child)}
             updateState={callback ? data => callback(data) : null}
             page={page}
             switchDirection={switchDirection}/>;
@@ -182,7 +186,19 @@ export function formComponentFactory(field, options) {
         case 'change-link':
             return renderFormComponent(ChangeLink, { data, key, config, errors, callback });
         case 'review-field':
-            return renderFormComponent(ReviewField, { data, key, config, errors, dataAdapter: reviewBoxDataAdapter, callback, switchDirection });
+            // eslint-disable-next-line no-case-declarations
+            const childType = config.child.component;
+
+            return renderFormComponent(ReviewField, {
+                data,
+                key,
+                config,
+                errors,
+                dataAdapter: childType === 'entity-list' ? primaryEntityDataAdapter : keyFromDataAdapter,
+                callback,
+                switchDirection,
+                page
+            });
         default:
             return null;
     }
