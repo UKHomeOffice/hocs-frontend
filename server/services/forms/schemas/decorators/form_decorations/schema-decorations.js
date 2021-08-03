@@ -67,13 +67,6 @@ module.exports = {
                                 .build()
                         )
                         .withField(
-                            Component('dropdown', 'FoiType')
-                                .withValidator('required')
-                                .withProp('label', 'FOI Type')
-                                .withProp('choices', 'S_FOI_TYPES')
-                                .build()
-                        )
-                        .withField(
                             Component('dropdown', 'Topics')
                                 .withValidator('required')
                                 .withProp('label', 'Case Topic')
