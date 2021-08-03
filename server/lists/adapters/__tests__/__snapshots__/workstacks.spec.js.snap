@@ -1,67 +1,37 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Dashboard Adapter should hide unworkable
- 1`] = `
-Object {
-  "teams": Array [
-    Card {
-      "count": 2,
-      "label": "MOCK_TEAM",
-      "tags": Object {
-        "allocated": 0,
-        "overdue": 1,
-      },
-      "type": "team",
-      "value": 1,
-    },
-    Card {
-      "count": 3,
-      "label": "MOCK_TEAM",
-      "tags": Object {
-        "allocated": 3,
-        "overdue": 1,
-      },
-      "type": "team",
-      "value": 2,
-    },
-  ],
-  "user": Array [
-    Card {
-      "count": 1,
-      "label": "Cases",
-      "tags": Object {
-        "allocated": undefined,
-        "overdue": 1,
-      },
-      "type": undefined,
-      "value": undefined,
-    },
-  ],
-}
-`;
-
 exports[`Dashboard Adapter should transform a stage array to a dashboard schema 1`] = `
 Object {
   "teams": Array [
     Card {
-      "count": 3,
+      "count": 0,
       "label": "MOCK_TEAM",
       "tags": Object {
-        "allocated": 1,
-        "overdue": 2,
+        "allocated": 0,
+        "overdue": 0,
       },
       "type": "team",
       "value": 1,
     },
     Card {
-      "count": 3,
+      "count": 2,
       "label": "MOCK_TEAM",
       "tags": Object {
-        "allocated": 3,
+        "allocated": 1,
         "overdue": 1,
       },
       "type": "team",
       "value": 2,
+    },
+    Card {
+      "count": 0,
+      "label": "MOCK_TEAM",
+      "tags": Object {
+        "allocated": 0,
+        "overdue": 0,
+      },
+      "type": "team",
+      "value": 3,
     },
   ],
   "user": Array [
@@ -69,7 +39,7 @@ Object {
       "count": 1,
       "label": "Cases",
       "tags": Object {
-        "allocated": undefined,
+        "allocated": 0,
         "overdue": 1,
       },
       "type": undefined,
@@ -83,17 +53,17 @@ exports[`Dashboard Adapter should transform a stage array to a dashboard schema 
 Object {
   "teams": Array [
     Card {
-      "count": 3,
+      "count": 0,
       "label": "MOCK_TEAM",
       "tags": Object {
-        "allocated": 1,
+        "allocated": 0,
         "overdue": 0,
       },
       "type": "team",
       "value": 1,
     },
     Card {
-      "count": 1,
+      "count": 2,
       "label": "MOCK_TEAM",
       "tags": Object {
         "allocated": 1,
@@ -102,14 +72,24 @@ Object {
       "type": "team",
       "value": 2,
     },
+    Card {
+      "count": 0,
+      "label": "MOCK_TEAM",
+      "tags": Object {
+        "allocated": 0,
+        "overdue": 0,
+      },
+      "type": "team",
+      "value": 3,
+    },
   ],
   "user": Array [
     Card {
       "count": 1,
       "label": "Cases",
       "tags": Object {
-        "allocated": undefined,
-        "overdue": false,
+        "allocated": 0,
+        "overdue": 0,
       },
       "type": undefined,
       "value": undefined,

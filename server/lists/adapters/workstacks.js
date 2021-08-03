@@ -1,6 +1,5 @@
 const { addDays, formatDate } = require('../../libs/dateHelpers');
 
-const byUser = (userId) => ({ userUUID }) => userUUID === userId;
 const byCaseReference = (a, b) => a.caseReference.localeCompare(b.caseReference);
 
 const byPriority = (a, b) => {
@@ -50,14 +49,6 @@ const isOverdue = (configuration, deadline) =>
     configuration.deadlinesEnabled &&
     deadline &&
     addDays(deadline, 1) < Date.now();
-
-const getOverdue = (configuration, data) => {
-    if (!configuration.deadlinesEnabled) {
-        return false;
-    }
-    const overdueCases = data.filter(({ deadline }) => isOverdue(configuration, deadline));
-    return overdueCases.length;
-};
 
 const returnWorkstackColumns = (configuration, workstackData) => {
     const defaultColumnConfig = 'DEFAULT';
@@ -141,7 +132,7 @@ const highestPriorityContributionStatus = (decoratedContributions) => {
     let highestPriority = 0;
 
     decoratedContributions.forEach(contribution => {
-        if(contributionStatusEnum[contribution.contributionStatus] > highestPriority) {
+        if (contributionStatusEnum[contribution.contributionStatus] > highestPriority) {
             highestPriority = contributionStatusEnum[contribution.contributionStatus];
         }
     });
@@ -152,7 +143,7 @@ const decorateContributionsWithStatus = (contributions, currentDate) => {
     return contributions.map(contribution => {
         const contributionObject = JSON.parse(contribution);
         if (contributionObject.contributionStatus !== 'contributionReceived' && contributionObject.contributionStatus !== 'contributionCancelled') {
-            if (addDays(new Date(contributionObject.contributionDueDate), 1)  < currentDate) {
+            if (addDays(new Date(contributionObject.contributionDueDate), 1) < currentDate) {
                 contributionObject['contributionStatus'] = 'contributionOverdue';
             } else {
                 contributionObject['contributionStatus'] = 'contributionDue';
@@ -221,7 +212,7 @@ const bindDisplayElements = fromStaticList => async (stage) => {
         }
     }
 
-    if (stage.somu && stage.somu.caseContributions){
+    if (stage.somu && stage.somu.caseContributions) {
         stage.contributions = highestPriorityContributionStatus(
             decorateContributionsWithStatus(stage.somu.caseContributions, new Date())).replace('contribution', '');
     }
@@ -258,8 +249,8 @@ class Card {
         this.count = count || 0;
         this.type = type;
         this.tags = {
-            overdue: overdue,
-            allocated: unallocated
+            overdue: overdue || 0,
+            allocated: unallocated || 0
         };
     }
     incrementOverdue() { this.tags.overdue++; }
@@ -268,43 +259,38 @@ class Card {
     getCount() { return this.count; }
 }
 
-const dashboardAdapter = async (data, { fromStaticList, logger, user, configuration }) => {
+const dashboardAdapter = async (data, { fromStaticList, logger, configuration }) => {
     const dashboardData = await Promise.all(data.stages
-        .filter(byWorkable)
-        .map(bindDisplayElements(fromStaticList)));
-    const userCases = dashboardData.filter(byUser(user.uuid));
-    const userCard = [new Card({
-        label: 'Cases',
-        count: userCases.length,
-        overdue: getOverdue(configuration, userCases)
-    })];
+        .map(bindDashboardElements(fromStaticList)));
+
+    const userCard = dashboardData
+        .reduce((card, stage) => {
+            card.count += stage.statistics.usersCases;
+            card.tags.overdue += configuration.deadlinesEnabled ? stage.statistics.usersOverdueCases : 0;
+            return card;
+        }, new Card({ label: 'Cases' }));
+
     const teamCards = dashboardData
         .reduce((cards, stage) => {
-            const index = cards.findIndex(({ value }) => value === stage.teamUUID);
-            if (index >= 0) {
-                const card = cards[index];
-                card.incrementCount();
-                if (isOverdue(configuration, stage.deadline)) {
-                    card.incrementOverdue();
-                }
-                if (isUnallocated(stage.userUUID)) {
-                    card.incrementUnallocated();
-                }
-            } else {
-                cards.push(new Card({
-                    label: stage.assignedTeamDisplay,
-                    value: stage.teamUUID,
-                    type: 'team',
-                    count: 1,
-                    overdue: isOverdue(configuration, stage.deadline) ? 1 : 0,
-                    unallocated: isUnallocated(stage.userUUID) ? 1 : 0
-                }));
-            }
+            cards.push(new Card({
+                label: stage.teamName,
+                value: stage.teamUuid,
+                type: 'team',
+                count: stage.statistics.cases,
+                overdue: configuration.deadlinesEnabled ? stage.statistics.overdueCases : 0,
+                unallocated: stage.statistics.unallocatedCases
+            }));
             return cards;
         }, [])
         .sort((a, b) => (a.label && b.label) ? a.label.localeCompare(b.label) : 0);
-    logger.debug('REQUEST_DASHBOARD', { user_cases: userCard[0].getCount(), teams: teamCards.length });
-    return { user: userCard, teams: teamCards };
+    logger.debug('REQUEST_DASHBOARD', { users: userCard, teams: teamCards.length });
+    return { user: [userCard], teams: teamCards };
+};
+
+const bindDashboardElements = fromStaticList => async (stage) => {
+    stage.teamName = await fromStaticList('S_TEAMS', stage.teamUuid);
+
+    return stage;
 };
 
 const userAdapter = async (data, { fromStaticList, logger, user, configuration }) => {
