@@ -47,16 +47,16 @@ describe('Validators', () => {
 
     describe('Alphanumeric validator', () => {
         it('should reject symbols', () => {
-            expect(validators.alphanumeric({  label: 'test',value: '!@£$' })).toEqual('test must be alphanumeric');
+            expect(validators.alphanumeric({ label: 'test', value: '!@£$' })).toEqual('test must be alphanumeric');
         });
         it('should accept alpha only', () => {
-            expect(validators.alphanumeric({  label: 'test',value: 'Data' })).toEqual(null);
+            expect(validators.alphanumeric({ label: 'test', value: 'Data' })).toEqual(null);
         });
         it('should accept numeric only', () => {
-            expect(validators.alphanumeric({  label: 'test',value: '1234' })).toEqual(null);
+            expect(validators.alphanumeric({ label: 'test', value: '1234' })).toEqual(null);
         });
         it('should accept alphanumeric', () => {
-            expect(validators.alphanumeric({  label: 'test',value: 'l33T' })).toEqual(null);
+            expect(validators.alphanumeric({ label: 'test', value: 'l33T' })).toEqual(null);
         });
     });
 
@@ -138,6 +138,74 @@ describe('Validators', () => {
         });
         it('should accept a date within day limit', () => {
             expect(validators.isValidWithinDate({ value: new Date() })).toEqual(null);
+        });
+    });
+
+    describe('Is valid day validator', () => {
+        it('should accept a day value with single digit day', () => {
+            expect(validators.isValidDay({ value: '2000-01-1' })).toEqual(null);
+        });
+        it('should accept a day value with single digit day and leading 0', () => {
+            expect(validators.isValidDay({ value: '2000-01-01' })).toEqual(null);
+        });
+        it('should accept a day value with double digit day within 1-28', () => {
+            expect(validators.isValidDay({ value: '2000-01-13' })).toEqual(null);
+        });
+        it('should accept a day value of 29 for february month on leap year', () => {
+            expect(validators.isValidDay({ value: '2020-02-29' })).toEqual(null);
+        });
+        it('should accept a day value of 31 for December month', () => {
+            expect(validators.isValidDay({ value: '2020-12-31' })).toEqual(null);
+        });
+        it('should accept a day value of 30 month other than February', () => {
+            expect(validators.isValidDay({ value: '2020-09-30' })).toEqual(null);
+        });
+
+        it('should reject a day value over 31', () => {
+            expect(validators.isValidDay({ value: '2000-01-32' })).not.toEqual(null);
+        });
+        it('should reject a day value below 1', () => {
+            expect(validators.isValidDay({ value: '2000-01-0' })).not.toEqual(null);
+        });
+        it('should reject a day value above maximum day value for month', () => {
+            expect(validators.isValidDay({ value: '2000-02-31' })).not.toEqual(null);
+        });
+        it('should reject a day value with 3 or more length', () => {
+            expect(validators.isValidDay({ value: '2000-02-001' })).not.toEqual(null);
+        });
+        it('should reject a day value with multiple potential connotations', () => {
+            /* A day value can hold multiple connotations whereby we cannot infer the
+             * correct value. One example of this is '012', whereby the user could
+             * mean 01 or 12 for the day. As such we reject these */
+            expect(validators.isValidDay({ value: '2000-02-012' })).not.toEqual(null);
+        });
+        it('should reject a day value of 29 for February on non leap year', () => {
+            expect(validators.isValidDay({ value: '2001-02-29' })).not.toEqual(null);
+        });
+    });
+
+    describe('Is valid month day validator', () => {
+        it('should accept a month value with single digit day', () => {
+            expect(validators.isValidMonth({ value: '2000-1-01' })).toEqual(null);
+        });
+        it('should accept a month value with single digit month and leading 0', () => {
+            expect(validators.isValidMonth({ value: '2000-01-01' })).toEqual(null);
+        });
+        it('should accept a month value with double digit month within 1-12', () => {
+            expect(validators.isValidMonth({ value: '2000-07-01' })).toEqual(null);
+        });
+
+        it('should reject a month value over 12', () => {
+            expect(validators.isValidMonth({ value: '2000-13-01' })).not.toEqual(null);
+        });
+        it('should reject a month value below 1', () => {
+            expect(validators.isValidMonth({ value: '2000-00-01' })).not.toEqual(null);
+        });
+        it('should reject a month value with 3 or more length', () => {
+            expect(validators.isValidMonth({ value: '2000-002-01' })).not.toEqual(null);
+        });
+        it('should reject a month value with multiple potential connotations', () => {
+            expect(validators.isValidMonth({ value: '2000-012-01' })).not.toEqual(null);
         });
     });
 
@@ -285,9 +353,12 @@ describe('Validation middleware', () => {
                 },
                 schema: {
                     fields: [
-                        { component: 'expandable-checkbox', validation:[], props: { name: 'checkbox', label: '', items: [
-                            { validation: ['required'], props: { name: 'test-pass', label: 'Test Pass' } },
-                            { validation: ['required'], props: { name: 'test-fail', label: 'Test Fail' } }] }
+                        {
+                            component: 'expandable-checkbox', validation: [], props: {
+                                name: 'checkbox', label: '', items: [
+                                    { validation: ['required'], props: { name: 'test-pass', label: 'Test Pass' } },
+                                    { validation: ['required'], props: { name: 'test-fail', label: 'Test Fail' } }]
+                            }
                         }
                     ]
                 }

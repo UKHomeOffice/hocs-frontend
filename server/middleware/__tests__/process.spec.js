@@ -200,6 +200,70 @@ describe('Process middleware', () => {
         expect(next).toHaveBeenCalledTimes(1);
     });
 
+    it('should return sanitised day and month on change', () => {
+        const req = {
+            body: {
+                ['test-field']: '1989-004-003'
+            },
+            query: {},
+            form: {
+                schema: {
+                    fields: [
+                        {
+                            component: 'date',
+                            validation: [
+                                'required'
+                            ],
+                            props: {
+                                name: 'test-field',
+                            }
+                        }
+                    ]
+                }
+            }
+        };
+        const res = {};
+
+        processMiddleware(req, res, next);
+        expect(req.form).toBeDefined();
+        expect(req.form.data).toBeDefined();
+        expect(req.form.data['test-field']).toEqual('1989-04-03');
+        expect(next).toHaveBeenCalled();
+        expect(next).toHaveBeenCalledTimes(1);
+    });
+
+    it('should not sanitise day and month with multiple connotations', () => {
+        const req = {
+            body: {
+                ['test-field']: '1989-012-023'
+            },
+            query: {},
+            form: {
+                schema: {
+                    fields: [
+                        {
+                            component: 'date',
+                            validation: [
+                                'required'
+                            ],
+                            props: {
+                                name: 'test-field',
+                            }
+                        }
+                    ]
+                }
+            }
+        };
+        const res = {};
+
+        processMiddleware(req, res, next);
+        expect(req.form).toBeDefined();
+        expect(req.form.data).toBeDefined();
+        expect(req.form.data['test-field']).toEqual('1989-012-023');
+        expect(next).toHaveBeenCalled();
+        expect(next).toHaveBeenCalledTimes(1);
+    });
+
     it('should process checkbox data passed as an array', () => {
         const req = {
             body: {

@@ -35,28 +35,41 @@ const validators = {
         return null;
     },
     isValidDay({ label, value, message }) {
-        if (value && getDay(value)) {
-            if (getDay(value) > new Date(getYear(value), getMonth(value), 0).getDate() || getDay(value) < 1) {
-                return message || validationErrors.isValidDay(label);
+        if (value) {
+            const day = getDay(value);
+            if (day) {
+                if (day > new Date(getYear(value), getMonth(value), 0).getDate()
+                    || day < 1
+                    || day.match('^(?:0+[1-3]|0{2,})\\d$')) {
+                    return message || validationErrors.isValidDay(label);
+                }
             }
         }
         return null;
     },
     isValidMonth({ label, value, message }) {
-        if (value && getMonth(value)) {
-            if (getMonth(value) < 1 || getMonth(value) > 12) {
-                return message || validationErrors.isValidMonth(label);
+        if (value) {
+            const month = getMonth(value);
+            if (month) {
+                if (month < 1
+                    || month > 12
+                    || month.match('^(?:0+1|0{2,})\\d$')) {
+                    return message || validationErrors.isValidMonth(label);
+                }
             }
         }
         return null;
     },
     isYearWithinRange({ label, value, message }) {
-        if (value && getYear(value)) {
-            if (getYear(value) > MAX_ALLOWABLE_YEAR) {
-                return message || validationErrors.isBeforeMaxYear(label);
-            }
-            else if(getYear(value) < MIN_ALLOWABLE_YEAR){
-                return message || validationErrors.isAfterMinYear(label);
+        if (value) {
+            const year = getYear(value);
+            if (year) {
+                if (year > MAX_ALLOWABLE_YEAR) {
+                    return message || validationErrors.isBeforeMaxYear(label);
+                }
+                else if (year < MIN_ALLOWABLE_YEAR) {
+                    return message || validationErrors.isAfterMinYear(label);
+                }
             }
         }
         return null;
@@ -74,7 +87,7 @@ const validators = {
         return null;
     },
     isValidWithinDate({ label, value, message }) {
-        const numberOfDaysInPast= VALID_DAYS_RANGE;
+        const numberOfDaysInPast = VALID_DAYS_RANGE;
         let limitDate = new Date();
         limitDate.setDate(limitDate.getDate() - numberOfDaysInPast);
         if (new Date(value).valueOf() <= limitDate.valueOf()) {
@@ -201,7 +214,7 @@ const getYear = (date) => {
 
 const getDateSection = (date, section) => {
     const split = date.split('-');
-    if(split.length >= section){
+    if (split.length >= section) {
         return split[section];
     }
     return undefined;
@@ -376,7 +389,7 @@ function validationMiddleware(req, res, next) {
             if (validation && !suppressValidation) {
                 validation.map(validator => {
                     if (typeof validator === 'string') {
-                        if(Object.prototype.hasOwnProperty.call(validators, validator)) {
+                        if (Object.prototype.hasOwnProperty.call(validators, validator)) {
 
                             if (component === 'radio') {
                                 validateConditionalRadioContentIfExists.call(
@@ -400,7 +413,7 @@ function validationMiddleware(req, res, next) {
                     }
                     else {
                         const { type, message } = validator;
-                        if(Object.prototype.hasOwnProperty.call(validators, type)) {
+                        if (Object.prototype.hasOwnProperty.call(validators, type)) {
                             const validationError = validators[type].call(this, { label, value, message });
                             if (validationError) {
                                 result[field.props.name] = validationError;
