@@ -536,12 +536,6 @@ module.exports = {
             type: listService.types.DYNAMIC,
             adapter: somuItemsAdapter
         },
-        S_FOI_TYPES: {
-            client: 'INFO',
-            endpoint: '/entity/list/FOI_TYPES',
-            type: listService.types.STATIC,
-            adapter: entityListItemsAdapter
-        },
         S_FOI_DIRECTORATES: {
             client: 'INFO',
             endpoint: '/entity/list/FOI_DIRECTORATES',
