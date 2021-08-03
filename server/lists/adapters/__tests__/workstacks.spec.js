@@ -90,65 +90,6 @@ describe('Dashboard Adapter', () => {
         });
         expect(result).toMatchSnapshot();
     });
-    it('should hide unworkable\n', async () => {
-        const mockData = {
-            stages: [
-                {
-                    teamUUID: 1,
-                    caseType: 'DEFAULT',
-                    stageType: 'A',
-                    userUUID: 1,
-                    deadline: '1900-01-01'
-                },
-                {
-                    teamUUID: 1,
-                    caseType: 'DEFAULT',
-                    stageType: 'A',
-                    userUUID: null,
-                    deadline: '1900-01-02',
-                    data: {
-                        Unworkable: 'True'
-                    }
-                },
-                {
-                    teamUUID: 1,
-                    caseType: 'DEFAULT',
-                    stageType: 'A',
-                    userUUID: 2,
-                    deadline: '2200-01-03'
-                },
-                {
-                    teamUUID: 2,
-                    caseType: 'DEFAULT',
-                    stageType: 'A',
-                    userUUID: null,
-                    deadline: '2200-04-01'
-                },
-                {
-                    teamUUID: 2,
-                    caseType: 'DEFAULT',
-                    stageType: 'A',
-                    userUUID: null,
-                    deadline: todaysDate
-                },
-                {
-                    teamUUID: 2,
-                    caseType: 'DEFAULT',
-                    stageType: 'A',
-                    userUUID: null,
-                    deadline: '1900-01-01'
-                }
-            ]
-        };
-
-        const result = await dashboardAdapter(mockData, {
-            user: mockUser,
-            fromStaticList: mockFromStaticList,
-            logger: mockLogger,
-            configuration: mockConfiguration
-        });
-        expect(result).toMatchSnapshot();
-    });
 
     it('should transform a stage array to a dashboard schema when deadlines are disabled', async () => {
         const mockData = {
