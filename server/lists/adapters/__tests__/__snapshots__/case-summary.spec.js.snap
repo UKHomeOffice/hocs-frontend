@@ -253,6 +253,7 @@ Object {
       "country": "__country__",
       "postcode": "__postcode__",
     },
+    "email": "test@test.com",
     "fullname": "Test Correspondent",
   },
   "primaryTopic": "Topic A",
