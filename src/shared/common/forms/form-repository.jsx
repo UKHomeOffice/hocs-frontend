@@ -26,7 +26,8 @@ import ExpandableCheckbox from './expandable-checkbox.jsx';
 import FlowDirectionLink from './flow-direction-link.jsx';
 import HideConditionFunctions from './../../helpers/hide-condition-functions';
 import ConfirmationWithCaseRef from './confirmation-with-case-ref.jsx';
-import ReviewField from './review-field.jsx';
+import ReviewField from './composite/review-field.jsx';
+import Heading from './heading.jsx';
 
 function defaultDataAdapter(name, data, currentValue) {
     return data[name] || currentValue;
@@ -85,7 +86,7 @@ function isComponentVisible(config, data) {
         isVisible = false;
         for (let i = 0; i < visibilityConditions.length; i++) {
             const condition = visibilityConditions[i];
-            if (data[condition.conditionPropertyName] && data[condition.conditionPropertyName] === condition.conditionPropertyValue) {
+            if (data && data[condition.conditionPropertyName] && data[condition.conditionPropertyName] === condition.conditionPropertyValue) {
                 isVisible = true;
             }
         }
@@ -151,11 +152,7 @@ export function formComponentFactory(field, options) {
                 callback
             });
         case 'heading':
-            return (
-                <h2 key={key} className='govuk-heading-m'>
-                    {config.label}
-                </h2>
-            );
+            return renderFormComponent(Heading, { key, config });
         case 'panel':
             return renderFormComponent(Panel, { key, config });
         case 'inset':

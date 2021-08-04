@@ -113,6 +113,11 @@ const routes = [
         component: CasePage
     },
     {
+        path: '/case/:caseId/stage/:stageId/entity/:entity/:context/:caseType/:action/',
+        exact: true,
+        component: CasePage
+    },
+    {
         path: '/workstack/user',
         exact: true,
         component: WorkstackPage,

@@ -5,6 +5,7 @@ module.exports = {
     addMember: require('./add-member.js'),
     addCorrespondentDetails: require('./add-correspondent-details.js'),
     updateCorrespondentDetails: require('./update-correspondent-details.js'),
+    updateCorrespondentDetailsFoi: require('./update-correspondent-details-foi.js'),
     addMemberDetails: require('./add-member-details.js'),
     removeCorrespondent: require('./remove-correspondent.js'),
     addTopic: require('./add-topic.js'),

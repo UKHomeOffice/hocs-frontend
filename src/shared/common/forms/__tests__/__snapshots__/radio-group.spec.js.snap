@@ -35,7 +35,7 @@ exports[`Form radio group component should render disabled when passed 1`] = `
         />
         <label
           class="govuk-label govuk-radios__label"
-          for="radio-group-A"
+          for="radio-group-0"
         >
           isA
         </label>
@@ -53,7 +53,7 @@ exports[`Form radio group component should render disabled when passed 1`] = `
         />
         <label
           class="govuk-label govuk-radios__label"
-          for="radio-group-B"
+          for="radio-group-1"
         >
           isB
         </label>
@@ -71,7 +71,7 @@ exports[`Form radio group component should render disabled when passed 1`] = `
         />
         <label
           class="govuk-label govuk-radios__label"
-          for="radio-group-C"
+          for="radio-group-2"
         >
           isC
         </label>
@@ -115,7 +115,7 @@ exports[`Form radio group component should render error message for textarea if 
         />
         <label
           class="govuk-label govuk-radios__label"
-          for="radio-group-ValueA"
+          for="radio-group-0"
         >
           labelA
         </label>
@@ -130,7 +130,9 @@ exports[`Form radio group component should render error message for textarea if 
           <label
             class="govuk-label"
             for="ValueAText"
-          />
+          >
+            someLabel
+          </label>
           <span
             class="govuk-error-message"
             id="ValueAText-error"
@@ -163,7 +165,7 @@ exports[`Form radio group component should render error message for textarea if 
         />
         <label
           class="govuk-label govuk-radios__label"
-          for="radio-group-ValueB"
+          for="radio-group-1"
         >
           labelB
         </label>
@@ -181,7 +183,7 @@ exports[`Form radio group component should render error message for textarea if 
         />
         <label
           class="govuk-label govuk-radios__label"
-          for="radio-group-ValueC"
+          for="radio-group-2"
         >
           labelC
         </label>
@@ -189,16 +191,6 @@ exports[`Form radio group component should render error message for textarea if 
     </div>
   </fieldset>
 </div>
-`;
-
-exports[`Form radio group component should render textarea if conditionalContentAfter exists 1`] = `
-<textarea
-  className="govuk-textarea form-control-3-4 "
-  disabled={false}
-  id="NameA"
-  name="NameA"
-  onChange={[Function]}
-/>
 `;
 
 exports[`Form radio group component should render with default props 1`] = `
@@ -235,7 +227,7 @@ exports[`Form radio group component should render with default props 1`] = `
         />
         <label
           class="govuk-label govuk-radios__label"
-          for="radio-group-A"
+          for="radio-group-0"
         >
           isA
         </label>
@@ -253,7 +245,7 @@ exports[`Form radio group component should render with default props 1`] = `
         />
         <label
           class="govuk-label govuk-radios__label"
-          for="radio-group-B"
+          for="radio-group-1"
         >
           isB
         </label>
@@ -271,7 +263,7 @@ exports[`Form radio group component should render with default props 1`] = `
         />
         <label
           class="govuk-label govuk-radios__label"
-          for="radio-group-C"
+          for="radio-group-2"
         >
           isC
         </label>
@@ -321,7 +313,7 @@ exports[`Form radio group component should render with error when passed 1`] = `
         />
         <label
           class="govuk-label govuk-radios__label"
-          for="radio-group-A"
+          for="radio-group-0"
         >
           isA
         </label>
@@ -339,7 +331,7 @@ exports[`Form radio group component should render with error when passed 1`] = `
         />
         <label
           class="govuk-label govuk-radios__label"
-          for="radio-group-B"
+          for="radio-group-1"
         >
           isB
         </label>
@@ -357,7 +349,7 @@ exports[`Form radio group component should render with error when passed 1`] = `
         />
         <label
           class="govuk-label govuk-radios__label"
-          for="radio-group-C"
+          for="radio-group-2"
         >
           isC
         </label>
@@ -406,7 +398,7 @@ exports[`Form radio group component should render with hint when passed 1`] = `
         />
         <label
           class="govuk-label govuk-radios__label"
-          for="radio-group-A"
+          for="radio-group-0"
         >
           isA
         </label>
@@ -424,7 +416,7 @@ exports[`Form radio group component should render with hint when passed 1`] = `
         />
         <label
           class="govuk-label govuk-radios__label"
-          for="radio-group-B"
+          for="radio-group-1"
         >
           isB
         </label>
@@ -442,7 +434,7 @@ exports[`Form radio group component should render with hint when passed 1`] = `
         />
         <label
           class="govuk-label govuk-radios__label"
-          for="radio-group-C"
+          for="radio-group-2"
         >
           isC
         </label>
@@ -488,7 +480,7 @@ exports[`Form radio group component should render with label when passed 1`] = `
         />
         <label
           class="govuk-label govuk-radios__label"
-          for="radio-group-A"
+          for="radio-group-0"
         >
           isA
         </label>
@@ -506,7 +498,7 @@ exports[`Form radio group component should render with label when passed 1`] = `
         />
         <label
           class="govuk-label govuk-radios__label"
-          for="radio-group-B"
+          for="radio-group-1"
         >
           isB
         </label>
@@ -524,7 +516,7 @@ exports[`Form radio group component should render with label when passed 1`] = `
         />
         <label
           class="govuk-label govuk-radios__label"
-          for="radio-group-C"
+          for="radio-group-2"
         >
           isC
         </label>
@@ -569,7 +561,7 @@ exports[`Form radio group component should render with value when passed 1`] = `
         />
         <label
           class="govuk-label govuk-radios__label"
-          for="radio-group-A"
+          for="radio-group-0"
         >
           isA
         </label>
@@ -587,7 +579,7 @@ exports[`Form radio group component should render with value when passed 1`] = `
         />
         <label
           class="govuk-label govuk-radios__label"
-          for="radio-group-B"
+          for="radio-group-1"
         >
           isB
         </label>
@@ -605,7 +597,7 @@ exports[`Form radio group component should render with value when passed 1`] = `
         />
         <label
           class="govuk-label govuk-radios__label"
-          for="radio-group-C"
+          for="radio-group-2"
         >
           isC
         </label>
@@ -613,25 +605,6 @@ exports[`Form radio group component should render with value when passed 1`] = `
     </div>
   </fieldset>
 </div>
-`;
-
-exports[`Form radio group component should show error msg on conditionalContentAfter if exists and has errors 1`] = `
-<textarea
-  className="govuk-textarea form-control-3-4 govuk-textarea--error"
-  disabled={false}
-  id="NameA"
-  name="NameA"
-  onChange={[Function]}
-/>
-`;
-
-exports[`Form radio group component should show error msg on conditionalContentAfter if exists and has errors 2`] = `
-<span
-  className="govuk-error-message"
-  id="NameA-error"
->
-  someLabelA is required
-</span>
 `;
 
 exports[`Form radio group component should textarea if conditional content exists 1`] = `
@@ -668,7 +641,7 @@ exports[`Form radio group component should textarea if conditional content exist
         />
         <label
           class="govuk-label govuk-radios__label"
-          for="radio-group-ValueA"
+          for="radio-group-0"
         >
           labelA
         </label>
@@ -683,7 +656,9 @@ exports[`Form radio group component should textarea if conditional content exist
           <label
             class="govuk-label"
             for="ValueAText"
-          />
+          >
+            someLabel
+          </label>
           <textarea
             class="govuk-textarea "
             id="ValueAText"
@@ -705,7 +680,7 @@ exports[`Form radio group component should textarea if conditional content exist
         />
         <label
           class="govuk-label govuk-radios__label"
-          for="radio-group-ValueB"
+          for="radio-group-1"
         >
           labelB
         </label>
@@ -723,7 +698,7 @@ exports[`Form radio group component should textarea if conditional content exist
         />
         <label
           class="govuk-label govuk-radios__label"
-          for="radio-group-ValueC"
+          for="radio-group-2"
         >
           labelC
         </label>

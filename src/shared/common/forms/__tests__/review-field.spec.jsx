@@ -1,6 +1,6 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import ReviewField from '../review-field';
+import ReviewField from '../composite/review-field';
 
 const switchDirectionMock = jest.fn();
 

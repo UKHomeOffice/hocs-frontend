@@ -233,6 +233,13 @@ const formDefinitions = {
             REMOVE: {
                 builder: formRepository.removeCorrespondent,
                 action: REMOVE_CORRESPONDENT
+            },
+            // overrides for specific case types
+            FOI: {
+                UPDATE: {
+                    builder: formRepository.updateCorrespondentDetailsFoi,
+                    action: UPDATE_CORRESPONDENT
+                }
             }
         },
         MEMBER: {
@@ -389,9 +396,11 @@ module.exports = {
         const { action } = options;
 
         if (action) {
-            const { entity, somuCaseType, somuType } = options;
+            const { entity, somuCaseType, somuType, caseType } = options;
             let formDefinition = undefined;
-            if (entity) {
+            if (entity && caseType) {
+                formDefinition = formDefinitions['CASE'][entity.toUpperCase()][caseType][action.toUpperCase()];
+            } else if (entity) {
                 formDefinition = formDefinitions['CASE'][entity.toUpperCase()][action.toUpperCase()];
             } else if (somuType && somuCaseType) {
                 formDefinition = formDefinitions['CASE'][somuType.toUpperCase()][somuCaseType.toUpperCase()][action.toUpperCase()];
