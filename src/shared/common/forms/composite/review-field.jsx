@@ -17,16 +17,18 @@ const renderChangeDirectionLink = (child, switchDirection, direction) => {
     </>;
 };
 
-const renderChangeEntityLink = (child, page, value) => {
+const renderChangeEntityLink = (child, page, value, caseType) => {
+    const caseTypeParam = caseType ? caseType + '/' : '';
+
     return <>
-        <Link to={`/case/${page.caseId}/stage/${page.stageId}/entity/${child.props.entity}/${value}/update?hideSidebar=false`}
+        <Link to={`/case/${page.caseId}/stage/${page.stageId}/entity/${child.props.entity}/${value}/${caseTypeParam}update?hideSidebar=false`}
             className="govuk-link">
             Change <span className={'govuk-visually-hidden'}>{child.props.label}</span>
         </Link>
     </>;
 };
 
-const ReviewField = ({ name, type, value, child, switchDirection, direction, page }) => {
+const ReviewField = ({ name, type, value, child, switchDirection, direction, page, caseType }) => {
     let textValue = value;
 
     if (child.component === 'radio' || child.component === 'dropdown' || child.component === 'entity-list') {
@@ -50,7 +52,7 @@ const ReviewField = ({ name, type, value, child, switchDirection, direction, pag
                 {textValue}
             </div>
             <div className={'grid-column-one-sixth-right-align govuk-body review-field-column'}>
-                {child.component === 'entity-list' && renderChangeEntityLink(child, page, value)}
+                {child.component === 'entity-list' && renderChangeEntityLink(child, page, value, caseType)}
                 {child.component !== 'entity-list' && renderChangeDirectionLink(child, switchDirection, direction)}
             </div>
         </div>
@@ -68,7 +70,8 @@ ReviewField.propTypes = {
     submitWithAction: PropTypes.func,
     updateState: PropTypes.func,
     switchDirection: PropTypes.func,
-    direction: PropTypes.string
+    direction: PropTypes.string,
+    caseType: PropTypes.string
 };
 
 ReviewField.defaultProps = {
