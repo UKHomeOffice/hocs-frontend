@@ -55,7 +55,12 @@ const getActiveStages = async (deadlines, fromStaticList) => await Promise.all(d
 
 const getPrimaryTopic = (topic) => topic ? topic.label : null;
 
-const getPrimaryCorrespondent = correspondent => correspondent && { address: correspondent.address, fullname: correspondent.fullname };
+const getPrimaryCorrespondent = correspondent => correspondent && getCorrespondentDetails(correspondent);
+
+const getCorrespondentDetails = correspondent => {
+    const { fullname, address, email } = correspondent;
+    return Object.fromEntries(Object.entries({ fullname, address, email }).filter(([_, v]) => v != null));
+};
 
 const getPreviousCase = previousCase => {
     if (previousCase && previousCase.caseUUID && previousCase.caseReference && previousCase.stageUUID){
