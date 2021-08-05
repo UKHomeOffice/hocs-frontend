@@ -120,7 +120,6 @@ module.exports = {
                                 .withValidator('required')
                                 .withProp('label', 'Country')
                                 .withProp('choices', 'COUNTRIES_CURRENT')
-                                // .withProp('defaultOptions', true)
                                 .withProp('visibilityConditions', [
                                     {
                                         'conditionPropertyName': 'OriginalChannel',
@@ -168,7 +167,6 @@ module.exports = {
                                 ])
                                 .build()
                         )
-                        // end-new
                         .withField(
                             Component('dropdown', 'Topics')
                                 .withValidator('required')
