@@ -29,6 +29,8 @@ import ConfirmationWithCaseRef from './confirmation-with-case-ref.jsx';
 import ReviewField from './review-field.jsx';
 import hideConditionFunctions from '../../helpers/hide-condition-functions.js';
 import showConditionFunctions from '../../helpers/show-condition-functions.js';
+import ReviewField from './composite/review-field.jsx';
+import Heading from './heading.jsx';
 
 function defaultDataAdapter(name, data, currentValue) {
     return data[name] || currentValue;
@@ -69,8 +71,6 @@ function renderFormComponent(Component, options) {
             data={data}
             error={errors && errors[config.name]}
             errors={errors}
-            value={retrieveValue(config, dataAdapter, data)}
-            caseRef={caseRef}
             caseRef={caseRef}
             value={retrieveValue(hasFieldData(config), dataAdapter, data, config.child)}
             updateState={callback ? data => callback(data) : null}
@@ -80,8 +80,9 @@ function renderFormComponent(Component, options) {
     return null;
 }
 
-function isComponentVisible({ visibilityConditions, hideConditions }, data) {
+function isComponentVisible(config, data) {
     let isVisible = true;
+    let { visibilityConditions, hideConditions } = config;
 
     // show component based on visibilityConditions
     if (visibilityConditions) {
@@ -92,7 +93,7 @@ function isComponentVisible({ visibilityConditions, hideConditions }, data) {
                 if (condition.conditionPropertyName && condition.conditionPropertyValue) {
                     isVisible = showConditionFunctions[condition.function](data, condition.conditionPropertyName, condition.conditionPropertyValue);
                 }
-            } else if (data[condition.conditionPropertyName] && data[condition.conditionPropertyName] === condition.conditionPropertyValue) {
+            } else if (data && data[condition.conditionPropertyName] && data[condition.conditionPropertyName] === condition.conditionPropertyValue) {
                 isVisible = true;
             }
         }
@@ -103,7 +104,7 @@ function isComponentVisible({ visibilityConditions, hideConditions }, data) {
         for (const condition of hideConditions) {
             if (condition.function && Object.prototype.hasOwnProperty.call(hideConditions, condition.function)) {
                 isVisible = hideConditionFunctions[condition.function](data);
-            } else if (data[condition.conditionPropertyName] && data[condition.conditionPropertyName] === condition.conditionPropertyValue) {
+            } else if (data && data[condition.conditionPropertyName] && data[condition.conditionPropertyName] === condition.conditionPropertyValue) {
                 isVisible = false;
             }
         }
@@ -156,11 +157,7 @@ export function formComponentFactory(field, options) {
                 callback
             });
         case 'heading':
-            return (
-                <h2 key={key} className='govuk-heading-m'>
-                    {config.label}
-                </h2>
-            );
+            return renderFormComponent(Heading, { key, config });
         case 'panel':
             return renderFormComponent(Panel, { key, config });
         case 'inset':

@@ -22,6 +22,7 @@ router.all('/case/:caseId/stage/:stageId/direction/:flowDirection', moveByDirect
 router.all(['/case/:caseId/stage/:stageId', '/case/:caseId/stage/:stageId/allocate'], getFormForStage);
 router.all([
     '/case/:caseId/stage/:stageId/entity/:entity/:context/:action',
+    '/case/:caseId/stage/:stageId/entity/:entity/:context/:caseType/:action',
     '/case/:caseId/stage/:stageId/entity/:entity/:action',
     '/case/:caseId/stage/:stageId/somu/:somuTypeUuid/:somuType/:somuCaseType/:action',
     '/case/:caseId/stage/:stageId/somu/:somuTypeUuid/:somuType/:somuCaseType/item/:somuItemUuid/:action'
@@ -30,6 +31,7 @@ router.all([
     '/action/:workflow/:context/:action/',
     '/action/:workflow/:action/',
     '/case/:caseId/stage/:stageId',
+    '/case/:caseId/stage/:stageId/entity/:entity/:context/:caseType/:action',
     '/case/:caseId/stage/:stageId/allocate',
     '/case/:caseId/stage/:stageId/entity/:entity/:context/:action',
     '/case/:caseId/stage/:stageId/entity/:entity/:action',
@@ -41,6 +43,7 @@ router.get([
     '/action/:workflow/:action/',
     '/case/:caseId/stage/:stageId',
     '/case/:caseId/stage/:stageId/allocate',
+    '/case/:caseId/stage/:stageId/entity/:entity/:context/:caseType/:action',
     '/case/:caseId/stage/:stageId/entity/:entity/:context/:action',
     '/case/:caseId/stage/:stageId/entity/:entity/:action',
     '/case/:caseId/stage/:stageId/somu/:somuTypeUuid/:somuType/:somuCaseType/:action',

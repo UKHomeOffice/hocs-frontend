@@ -88,12 +88,19 @@ describe('Form schema decorations', function () {
                 ]
             }
         };
+
+        const inputKeys = {
+            context: 'ACTION',
+            workflow: 'CREATE',
+            action: 'DOCUMENT',
+            entity: 'FOI'
+        };
+
+        const outputForm = formDecorator(inputKeys, inputForm);
+
         const expectedOutputForm = {
-            'data': {
-                'KimuDateReceived': date
-            },
-            'meta': {},
             'schema': {
+                'title': 'Testing form',
                 'defaultActionLabel': 'Submit',
                 'fields': [
                     {
@@ -110,214 +117,267 @@ describe('Form schema decorations', function () {
                     },
                     {
                         'component': 'date',
-                        'props': {
-                            'hint': 'For example, 30 01 2021',
-                            'label': 'Date correspondence received in KIMU',
-                            'name': 'KimuDateReceived'
-                        },
                         'validation': [
                             {
-                                'message': 'Date correspondence received in KIMU is required',
-                                'type': 'required'
+                                'type': 'required',
+                                'message': 'Date correspondence received in KIMU is required'
                             },
                             {
-                                'message': 'Date correspondence received in KIMU must be a valid date',
-                                'type': 'isValidDate'
+                                'type': 'isValidDate',
+                                'message': 'Date correspondence received in KIMU must be a valid date'
                             },
                             {
-                                'message': 'Date correspondence received in KIMU cannot be in the future',
-                                'type': 'isBeforeToday'
+                                'type': 'isBeforeToday',
+                                'message': 'Date correspondence received in KIMU cannot be in the future'
                             }
-                        ]
+                        ],
+                        'props': {
+                            'name': 'KimuDateReceived',
+                            'label': 'Date correspondence received in KIMU',
+                            'hint': 'For example, 30 01 2021'
+                        }
                     },
                     {
                         'component': 'radio',
+                        'validation': [
+                            {
+                                'type': 'required'
+                            }
+                        ],
                         'props': {
+                            'name': 'OriginalChannel',
+                            'label': 'How was the request received?',
                             'choices': [
                                 {
                                     'label': 'Email',
-                                    'value': 'EMAIL',
-                                    'conditionalContentAfter': [
-                                        {
-                                            'label': 'Full Name',
-                                            'name': 'Fullname',
-                                            'rows': '1',
-                                            'type': 'textarea',
-                                            'validation': {
-                                                'type': 'required',
-                                            },
-                                        },
-                                        {
-                                            'label': 'Country',
-                                            'name': 'Country',
-                                            'type': 'dropdown',
-                                            'validation': {
-                                                'type': 'required',
-                                            },
-                                            'choices':  [
-                                                {
-                                                    'label': '',
-                                                    'value': '',
-                                                },
-                                                {
-                                                    'label': 'United Kingdom',
-                                                    'value': 'United Kingdom',
-                                                },
-                                                {
-                                                    'label': 'Other',
-                                                    'value': 'Other',
-                                                },
-                                            ],
-                                        },
-                                        {
-                                            'label': 'Email Address',
-                                            'name': 'Email',
-                                            'rows': '1',
-                                            'type': 'textarea',
-                                            'validation': {
-                                                'type': 'required',
-                                            },
-                                        },
-                                        {
-                                            'label': 'Requester\'s Reference (Optional)',
-                                            'name': 'Reference',
-                                            'rows': '1',
-                                            'type': 'textarea',
-                                        },
-                                    ],
-                                    'conditionalContentAfterTitle': 'Correspondent Details',
+                                    'value': 'EMAIL'
                                 },
                                 {
                                     'label': 'Post',
-                                    'value': 'POST',
-                                    'conditionalContentAfter':  [
-                                        {
-                                            'label': 'Full Name',
-                                            'name': 'Fullname',
-                                            'rows': '1',
-                                            'type': 'textarea',
-                                            'validation': {
-                                                'type': 'required',
-                                            },
-                                        },
-                                        {
-                                            'label': 'Building',
-                                            'name': 'Address1',
-                                            'rows': '1',
-                                            'type': 'textarea',
-                                            'validation': {
-                                                'type': 'required',
-                                            },
-                                        },
-                                        {
-                                            'label': 'Street',
-                                            'name': 'Address2',
-                                            'rows': '1',
-                                            'type': 'textarea',
-                                            'validation': {
-                                                'type': 'required',
-                                            },
-                                        },
-                                        {
-                                            'label': 'Town or City',
-                                            'name': 'Address3',
-                                            'rows': '1',
-                                            'type': 'textarea',
-                                            'validation': {
-                                                'type': 'required',
-                                            },
-                                        },
-                                        {
-                                            'label': 'Postcode',
-                                            'name': 'Postcode',
-                                            'rows': '1',
-                                            'type': 'textarea',
-                                            'validation': {
-                                                'type': 'required',
-                                            },
-                                        },
-                                        {
-                                            'label': 'Country',
-                                            'name': 'Country',
-                                            'type': 'dropdown',
-                                            'validation': {
-                                                'type': 'required',
-                                            },
-                                            'choices':  [
-                                                {
-                                                    'label': '',
-                                                    'value': '',
-                                                },
-                                                {
-                                                    'label': 'United Kingdom',
-                                                    'value': 'United Kingdom',
-                                                },
-                                                {
-                                                    'label': 'Other',
-                                                    'value': 'Other',
-                                                },
-                                            ],
-                                        },
-                                        {
-                                            'label': 'Email Address (Optional)',
-                                            'name': 'Email',
-                                            'rows': '1',
-                                            'type': 'textarea',
-                                        },
-                                        {
-                                            'label': 'Requester\'s Reference (Optional)',
-                                            'name': 'Reference',
-                                            'rows': '1',
-                                            'type': 'textarea',
-                                        },
-                                    ],
-                                    'conditionalContentAfterTitle': 'Correspondent Details',
+                                    'value': 'POST'
                                 }
-                            ],
-                            'label': 'How was the request received?',
-                            'name': 'OriginalChannel'
-                        },
-                        'validation': [
-                            {
-                                'type': 'required'
-                            }
-                        ]
-                    }, {
-                        'component': 'dropdown',
-                        'validation': [{
-                            'type': 'required'
-                        }],
-                        'props': {
-                            'choices': 'TOPICS_FOI',
-                            'defaultOptions': true,
-                            'label': 'Case Topic',
-                            'name': 'Topics'
+                            ]
                         }
-                    },{
-                        'component': 'text-area',
+                    },
+                    {
+                        'component': 'heading',
+                        'validation': [],
                         'props': {
-                            'label': 'Request Question',
-                            'name': 'RequestQuestion'
-                        },
+                            'name': 'case-view-heading',
+                            'label': 'Correspondent Details',
+                            'visibilityConditions': [
+                                {
+                                    'conditionPropertyName': 'OriginalChannel',
+                                    'conditionPropertyValue': 'EMAIL'
+                                },
+                                {
+                                    'conditionPropertyName': 'OriginalChannel',
+                                    'conditionPropertyValue': 'POST'
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        'component': 'text',
                         'validation': [
                             {
                                 'type': 'required'
                             }
-                        ]
+                        ],
+                        'props': {
+                            'name': 'Fullname',
+                            'label': 'Full Name',
+                            'visibilityConditions': [
+                                {
+                                    'conditionPropertyName': 'OriginalChannel',
+                                    'conditionPropertyValue': 'EMAIL'
+                                },
+                                {
+                                    'conditionPropertyName': 'OriginalChannel',
+                                    'conditionPropertyValue': 'POST'
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        'component': 'text',
+                        'validation': [
+                            {
+                                'type': 'required'
+                            }
+                        ],
+                        'props': {
+                            'name': 'Address1',
+                            'label': 'Building',
+                            'visibilityConditions': [
+                                {
+                                    'conditionPropertyName': 'OriginalChannel',
+                                    'conditionPropertyValue': 'POST'
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        'component': 'text',
+                        'validation': [
+                            {
+                                'type': 'required'
+                            }
+                        ],
+                        'props': {
+                            'name': 'Address2',
+                            'label': 'Street',
+                            'visibilityConditions': [
+                                {
+                                    'conditionPropertyName': 'OriginalChannel',
+                                    'conditionPropertyValue': 'POST'
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        'component': 'text',
+                        'validation': [
+                            {
+                                'type': 'required'
+                            }
+                        ],
+                        'props': {
+                            'name': 'Address3',
+                            'label': 'Town or City',
+                            'visibilityConditions': [
+                                {
+                                    'conditionPropertyName': 'OriginalChannel',
+                                    'conditionPropertyValue': 'POST'
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        'component': 'text',
+                        'validation': [
+                            {
+                                'type': 'required'
+                            }
+                        ],
+                        'props': {
+                            'name': 'Postcode',
+                            'label': 'Postcode',
+                            'visibilityConditions': [
+                                {
+                                    'conditionPropertyName': 'OriginalChannel',
+                                    'conditionPropertyValue': 'POST'
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        'component': 'dropdown',
+                        'validation': [
+                            {
+                                'type': 'required'
+                            }
+                        ],
+                        'props': {
+                            'name': 'Country',
+                            'label': 'Country',
+                            'choices': 'COUNTRIES_CURRENT',
+                            'visibilityConditions': [
+                                {
+                                    'conditionPropertyName': 'OriginalChannel',
+                                    'conditionPropertyValue': 'EMAIL'
+                                },
+                                {
+                                    'conditionPropertyName': 'OriginalChannel',
+                                    'conditionPropertyValue': 'POST'
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        'component': 'text',
+                        'validation': [
+                            {
+                                'type': 'required'
+                            }
+                        ],
+                        'props': {
+                            'name': 'Email',
+                            'label': 'Email Address',
+                            'visibilityConditions': [
+                                {
+                                    'conditionPropertyName': 'OriginalChannel',
+                                    'conditionPropertyValue': 'EMAIL'
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        'component': 'text',
+                        'validation': [],
+                        'props': {
+                            'name': 'Email',
+                            'label': 'Email Address (Optional)',
+                            'visibilityConditions': [
+                                {
+                                    'conditionPropertyName': 'OriginalChannel',
+                                    'conditionPropertyValue': 'POST'
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        'component': 'text',
+                        'validation': [],
+                        'props': {
+                            'name': 'Reference',
+                            'label': 'Requester\'s Reference (Optional)',
+                            'visibilityConditions': [
+                                {
+                                    'conditionPropertyName': 'OriginalChannel',
+                                    'conditionPropertyValue': 'EMAIL'
+                                },
+                                {
+                                    'conditionPropertyName': 'OriginalChannel',
+                                    'conditionPropertyValue': 'POST'
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        'component': 'dropdown',
+                        'validation': [
+                            {
+                                'type': 'required'
+                            }
+                        ],
+                        'props': {
+                            'name': 'Topics',
+                            'label': 'Case Topic',
+                            'choices': 'TOPICS_FOI',
+                            'defaultOptions': true
+                        }
+                    },
+                    {
+                        'component': 'text-area',
+                        'validation': [
+                            {
+                                'type': 'required'
+                            }
+                        ],
+                        'props': {
+                            'name': 'RequestQuestion',
+                            'label': 'Request Question'
+                        }
                     }
                 ],
-                'showPrimaryAction': true,
-                'title': 'Testing form'
-            }
+                'showPrimaryAction': true
+            },
+            'data': {
+                'KimuDateReceived': date
+            },
+            'meta': {}
         };
-        const inputKeys = {
-            context: 'ACTION',
-            workflow: 'CREATE',
-            action: 'DOCUMENT',
-            entity: 'FOI'
-        };
-
-        const outputForm = formDecorator(inputKeys, inputForm);
 
         expect(outputForm).toEqual(expectedOutputForm);
         expect(outputForm.schema.title).toBe(inputForm.schema.title);
