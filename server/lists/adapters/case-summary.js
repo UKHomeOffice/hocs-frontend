@@ -39,7 +39,12 @@ const getActiveStages = async (deadlines, fromStaticList) => await Promise.all(d
 
 const getPrimaryTopic = (topic) => topic ? topic.label : null;
 
-const getPrimaryCorrespondent = correspondent => correspondent && { address: correspondent.address, fullname: correspondent.fullname };
+const getPrimaryCorrespondent = correspondent => correspondent && getCorrespondentDetails(correspondent);
+
+const getCorrespondentDetails = correspondent => {
+    const { fullname, address, email } = correspondent;
+    return Object.fromEntries(Object.entries({ fullname, address, email }).filter(([_, v]) => v != null));
+};
 
 module.exports = async (summary, options) => {
     const { fromStaticList, fetchList, configuration, user } = options;
