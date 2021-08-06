@@ -57,11 +57,11 @@ describe('Workstack component', () => {
                 nextCaseReference: null
             },
             {
-                caseReference: 'case6', caseUUID: 'case_uuid-klm', uuid: 'stage_uuid-447', fullName: 'Bet Linch',
+                caseReference: 'case6', caseUUID: 'case_uuid-klm', uuid: 'stage_uuid-448', fullName: 'My Name',
                 stageTypeDisplay: 'Stage F', assignedUserDisplay: 'User5', assignedTeamDisplay: 'team6',
                 created: null, isActive: 'YES', stageType: 'MPAM_DRAFT',
-                primaryCorrespondent: { fullname: 'Mrs Linch', postcode: null },
                 data: {
+                    CaseContributions: '[{"data":{"contributionDueDate":"2020-12-12", "contributionStatus": "TEST"}}]',
                     DueDate: '2021-01-01'
                 },
                 nextCaseType: null,
@@ -88,7 +88,6 @@ describe('Workstack component', () => {
                 },
                 nextCaseType: 'nextCase',
                 nextCaseReference: 'nextCaseReference'
-            }
         ],
         columns: [
             { displayName: 'Reference', dataAdapter: null, renderer: 'caseLink', dataValueKey: 'caseReference', isFilterable: true },
@@ -152,7 +151,7 @@ describe('Workstack component', () => {
         // Column 13 is hidden so isn't counted
         expect(links).toHaveLength(12);
         links.first().simulate('click');
-        expect(arraySortSpy).toHaveBeenCalledTimes(3);
+        expect(arraySortSpy).toHaveBeenCalledTimes(27);
         expect(WRAPPER).toMatchSnapshot();
     });
 
@@ -165,7 +164,7 @@ describe('Workstack component', () => {
         expect(links).toHaveLength(12);
         links.first().simulate('click');
         links.first().simulate('click');
-        expect(arraySortSpy).toHaveBeenCalledTimes(4);
+        expect(arraySortSpy).toHaveBeenCalledTimes(36);
         expect(WRAPPER).toMatchSnapshot();
     });
 

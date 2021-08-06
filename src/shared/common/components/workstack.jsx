@@ -143,7 +143,7 @@ class WorkstackAllocate extends Component {
     }
 
     getPrimaryCorrespondentDataValue(row) {
-        return row.primaryCorrespondent.fullname;
+        return row.primaryCorrespondent ? row.primaryCorrespondent.fullname : '';
     }
 
     applyDataAdapter(value, colDataAdapter, dataValueKey, row) {
