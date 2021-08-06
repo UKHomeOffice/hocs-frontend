@@ -64,6 +64,15 @@ describe('Workstack component', () => {
                     CaseContributions: '[{"data":{"contributionDueDate":"2020-12-12", "contributionStatus": "TEST"}}]',
                     DueDate: '2021-01-01'
                 }
+            },
+            {
+                caseReference: 'case6', caseUUID: 'case_uuid-klm', uuid: 'stage_uuid-448', fullName: 'My Name',
+                stageTypeDisplay: 'Stage F', assignedUserDisplay: 'User5', assignedTeamDisplay: 'team6',
+                created: null, isActive: 'YES', stageType: 'MPAM_DRAFT',
+                data: {
+                    CaseContributions: '[{"data":{"contributionDueDate":"2020-12-12", "contributionStatus": "TEST"}}]',
+                    DueDate: '2021-01-01'
+                }
             }
         ],
         columns: [
@@ -125,7 +134,7 @@ describe('Workstack component', () => {
         const links = WRAPPER.find('th.govuk-link');
         expect(links).toHaveLength(11);
         links.first().simulate('click');
-        expect(arraySortSpy).toHaveBeenCalledTimes(21);
+        expect(arraySortSpy).toHaveBeenCalledTimes(27);
         expect(WRAPPER).toMatchSnapshot();
     });
 
@@ -138,7 +147,7 @@ describe('Workstack component', () => {
         expect(links).toHaveLength(11);
         links.first().simulate('click');
         links.first().simulate('click');
-        expect(arraySortSpy).toHaveBeenCalledTimes(28);
+        expect(arraySortSpy).toHaveBeenCalledTimes(36);
         expect(WRAPPER).toMatchSnapshot();
     });
 
