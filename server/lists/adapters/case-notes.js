@@ -44,6 +44,10 @@ const typeAdaptors = {
         stage,
         title: `Correspondent: ${correspondent} Added`
     }),
+    CORRESPONDENT_UPDATED: ({ correspondent, stage }) => ({
+        stage,
+        title: `Correspondent: ${correspondent} Updated`
+    }),
     CORRESPONDENT_DELETED: ({ correspondent, stage }) => ({
         stage,
         title: `Correspondent: ${correspondent} Removed`
