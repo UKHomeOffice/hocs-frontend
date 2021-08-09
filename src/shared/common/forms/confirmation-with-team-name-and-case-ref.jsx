@@ -9,9 +9,7 @@ export default class ConfirmationWithCaseRef extends Component {
             label,
             caseRef,
             nextActions,
-            teamName,
-            name,
-            callback
+            teamName
         } = this.props;
 
         return (
@@ -29,7 +27,7 @@ export default class ConfirmationWithCaseRef extends Component {
                             return (
                                 <Fragment key={i}>
                                     <div className='govuk-table__cell'>
-                                        <a href={`${action.url}`} onClick={() => callback( { submitAction: name } )} className="govuk-link govuk-heading-m">{action.label} </a>
+                                        <a href={`${action.url}`} className="govuk-link govuk-heading-m">{action.label} </a>
                                     </div>
                                 </Fragment>
                             );
@@ -45,7 +43,5 @@ ConfirmationWithCaseRef.propTypes = {
     label: PropTypes.string,
     caseRef: PropTypes.string,
     nextActions: PropTypes.array,
-    name: PropTypes.string,
-    teamName: PropTypes.string,
-    callback: PropTypes.func
+    teamName: PropTypes.string
 };
