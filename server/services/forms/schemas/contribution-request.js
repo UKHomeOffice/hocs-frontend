@@ -18,6 +18,7 @@ module.exports = async options => {
     const primaryChoiceLabel = options.customConfig ? options.customConfig.primaryChoiceLabel : 'Business Area';
     const primaryChoiceList = options.customConfig ? options.customConfig.primaryChoiceList : 'MPAM_CONTRIBUTION_BUSINESS_AREAS';
     const showBusinessUnits = options.customConfig ? options.customConfig.showBusinessUnits : true;
+    const showContributionAmount = (options.customConfig && options.customConfig.showContributionAmount) ? options.customConfig.showContributionAmount : false;
 
     const form = Form()
         .withTitle(`${isAdd ? 'Add' : isReadOnly ? 'View' : 'Edit'} Contribution Request`)
@@ -66,6 +67,14 @@ module.exports = async options => {
                 .withProp('label', 'Contribution due date')
                 .withProp('disabled', isReadOnly)
                 .build()
+        )
+        .withOptionalField(
+            Component('text', 'contributionAmount')
+                .withValidator('required')
+                .withValidator('numeric')
+                .withProp('label', 'Contribution Amount (£)')
+                .withProp('disabled', isReadOnly)
+                .build(), showContributionAmount
         )
         .withField(
             Component('text-area', 'contributionRequestNote')

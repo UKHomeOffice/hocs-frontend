@@ -8,6 +8,7 @@ module.exports = async options => {
     const primaryChoiceLabel = options.customConfig ? options.customConfig.primaryChoiceLabel : 'Business Area';
     const primaryChoiceList = options.customConfig ? options.customConfig.primaryChoiceList : 'MPAM_CONTRIBUTION_BUSINESS_AREAS';
     const showBusinessUnits = options.customConfig ? options.customConfig.showBusinessUnits : true;
+    const showContributionAmount = (options.customConfig && options.customConfig.showContributionAmount) ? options.customConfig.showContributionAmount : false;
 
     return Form()
         .withTitle('Contribution Request Fulfillment')
@@ -52,6 +53,13 @@ module.exports = async options => {
                 .withValidator('isValidWithinDate')
                 .withProp('label', 'Contribution due date')
                 .build()
+        )
+        .withOptionalField(
+            Component('text', 'contributionAmount')
+                .withValidator('required')
+                .withValidator('numeric')
+                .withProp('label', 'Contribution Amount (£)')
+                .build(), showContributionAmount
         )
         .withField(
             Component('text-area', 'contributionRequestNote')
