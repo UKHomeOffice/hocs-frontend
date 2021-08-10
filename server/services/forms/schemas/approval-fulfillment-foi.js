@@ -31,11 +31,11 @@ module.exports = async options => {
                 .build()
         )
         .withField(
-            Component('radio', 'approvalStatus')
+            Component('radio', 'contributionStatus')
                 .withProp('label', 'Approval Status')
                 .withProp('choices', [
-                    Choice('Complete', 'approvalComplete'),
-                    Choice('Cancelled', 'approvalCancelled')
+                    Choice('Complete', 'contributionReceived'),
+                    Choice('Cancelled', 'contributionCancelled')
                 ])
                 .build()
         )
@@ -49,8 +49,8 @@ module.exports = async options => {
                 ])
                 .withProp('visibilityConditions', [
                     {
-                        'conditionPropertyName': 'approvalStatus',
-                        'conditionPropertyValue': 'approvalComplete'
+                        'conditionPropertyName': 'contributionStatus',
+                        'conditionPropertyValue': 'contributionReceived'
                     }
                 ])
                 .build()
@@ -64,8 +64,8 @@ module.exports = async options => {
                 .withProp('label', 'Approval received date')
                 .withProp('visibilityConditions', [
                     {
-                        'conditionPropertyName': 'approvalStatus',
-                        'conditionPropertyValue': 'approvalComplete'
+                        'conditionPropertyName': 'contributionStatus',
+                        'conditionPropertyValue': 'contributionReceived'
                     }
                 ])
                 .build()
@@ -74,8 +74,8 @@ module.exports = async options => {
                 .withProp('label', 'Approver Name')
                 .withProp('visibilityConditions', [
                     {
-                        'conditionPropertyName': 'approvalStatus',
-                        'conditionPropertyValue': 'approvalComplete'
+                        'conditionPropertyName': 'contributionStatus',
+                        'conditionPropertyValue': 'contributionReceived'
                     }
                 ])
                 .build()
@@ -86,8 +86,8 @@ module.exports = async options => {
                 .withProp('label', 'Details')
                 .withProp('visibilityConditions', [
                     {
-                        'conditionPropertyName': 'approvalStatus',
-                        'conditionPropertyValue': 'approvalComplete'
+                        'conditionPropertyName': 'contributionStatus',
+                        'conditionPropertyValue': 'contributionReceived'
                     }
                 ])
                 .build()
@@ -98,8 +98,8 @@ module.exports = async options => {
                 .withProp('label', 'Reason for cancelling')
                 .withProp('visibilityConditions', [
                     {
-                        'conditionPropertyName': 'approvalStatus',
-                        'conditionPropertyValue': 'approvalCancelled'
+                        'conditionPropertyName': 'contributionStatus',
+                        'conditionPropertyValue': 'contributionCancelled'
                     }
                 ])
                 .build()
