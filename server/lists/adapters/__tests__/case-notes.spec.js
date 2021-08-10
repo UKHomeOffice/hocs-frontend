@@ -33,6 +33,12 @@ describe('Case Notes Adapter', () => {
             { eventTime: '2019-01-05 12:00:07', type: 'STAGE_COMPLETED', userName: 'User A', body: { caseNote: 'A test case note', userUUID: 1, teamUUID: 1, stage: 1 }, timelineItemUUID: '__timelineItemUUID__' },
             { eventTime: '2019-01-05 12:00:08', type: 'STAGE_RECREATED', userName: 'User A', body: { caseNote: 'A test case note', userUUID: 1, teamUUID: 1, stage: 1 }, timelineItemUUID: '__timelineItemUUID__' },
             { eventTime: '2019-01-07 12:00:00', type: 'CORRESPONDENT_CREATED', userName: 'User A', body: { caseNote: 'A test case note', userUUID: 1, teamUUID: 1, stage: 1 }, timelineItemUUID: '__timelineItemUUID__' },
+            { eventTime: '2019-01-07 12:00:00', type: 'CORRESPONDENT_UPDATED', userName: 'User A', body: {
+                'type': 'FOI Requester',
+                'uuid': 'f59dc3af-0438-439f-a20f-806980164377',
+                'email': 'Tester@example.org',
+                'fullname': 'Mr. Tester 3',
+            }, timelineItemUUID: '__timelineItemUUID__' },
             { eventTime: '2019-01-09 12:00:00', type: 'CORRESPONDENT_DELETED', userName: 'User A', body: { caseNote: 'A test case note', userUUID: 1, teamUUID: 1, stage: 1 }, timelineItemUUID: '__timelineItemUUID__' },
             { eventTime: '2019-01-10 12:00:00', type: 'CASE_TOPIC_CREATED', userName: 'User A', body: { caseNote: 'A test case note', userUUID: 1, teamUUID: 1, stage: 1, topicName: '__topic__' }, timelineItemUUID: '__timelineItemUUID__' },
             { eventTime: '2019-01-11 12:00:00', type: 'CASE_TOPIC_DELETED', userName: 'User A', body: { caseNote: 'A test case note', userUUID: 1, teamUUID: 1, stage: 1, topicName: '__topic__' }, timelineItemUUID: '__timelineItemUUID__' },

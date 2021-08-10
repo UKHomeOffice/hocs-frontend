@@ -59,6 +59,18 @@ Array [
       "stage": "MOCK_STAGETYPE",
     },
     "timelineItemUUID": "__timelineItemUUID__",
+    "title": "Correspondent: Mr. Tester 3 Updated",
+    "type": "CORRESPONDENT_UPDATED",
+  },
+  Object {
+    "body": Object {
+      "author": "MOCK_USER",
+      "date": "7 January 2019 at 12:00",
+      "modifiedBy": "MOCK_USER",
+      "modifiedDate": null,
+      "stage": "MOCK_STAGETYPE",
+    },
+    "timelineItemUUID": "__timelineItemUUID__",
     "title": "Correspondent: undefined Added",
     "type": "CORRESPONDENT_CREATED",
   },
