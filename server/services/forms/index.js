@@ -23,6 +23,13 @@ const compComplainantContributionsRequest = {
     primaryChoiceList: 'S_COMP_CONTRIB_TYPE'
 };
 
+const exgratiaBusinessContributionsRequest = {
+    showBusinessUnits: false,
+    primaryChoiceLabel: 'Business Area Representative',
+    primaryChoiceList: 'EX_GRATIA_BUS_REPS',
+    showContributionAmount: true
+};
+
 const formDefinitions = {
     ACTION: {
         CREATE: {
@@ -298,6 +305,29 @@ const formDefinitions = {
                     builder: formRepository.contributionFulfillment,
                     action: EDIT_CONTRIBUTION,
                     customConfig: compBusinessContributionsRequest
+                }
+            }
+        },
+        EXGRATIA_BUS_CONTRIB: {
+            COMP: {
+                ADDREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    action: ADD_CONTRIBUTION,
+                    customConfig: exgratiaBusinessContributionsRequest
+                },
+                EDITREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    action: EDIT_CONTRIBUTION,
+                    customConfig: exgratiaBusinessContributionsRequest
+                },
+                VIEWREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    customConfig: exgratiaBusinessContributionsRequest
+                },
+                EDIT: {
+                    builder: formRepository.contributionFulfillment,
+                    action: EDIT_CONTRIBUTION,
+                    customConfig: exgratiaBusinessContributionsRequest
                 }
             }
         }

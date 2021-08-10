@@ -437,6 +437,12 @@ module.exports = {
             type: listService.types.DYNAMIC,
             adapter: somuItemsAdapter
         },
+        EX_GRATIA_BUS_REPS: {
+            client: 'INFO',
+            endpoint: '/entity/list/EXGRATIA_BUS_REPS',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
     },
     clients: {
         CASEWORK: caseworkService,
