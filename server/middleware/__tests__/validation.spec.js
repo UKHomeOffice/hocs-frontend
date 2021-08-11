@@ -248,13 +248,13 @@ describe('Validators', () => {
             expect(validators.approvalsFulfilled({ value: '[{ "data": { "contributionStatus": "contributionReceived" }, { "contributionStatus": "test" } }]' })).not.toEqual(null);
         });
         it('should accept if value has contributionStatus as cancelled', () => {
-            expect(validators.approvalsFulfilled({ value: '[{ "data": { "approvalStatus": "approvalCancelled" } }]' })).toEqual(null);
+            expect(validators.approvalsFulfilled({ value: '[{ "data": { "contributionStatus": "contributionCancelled" } }]' })).toEqual(null);
         });
         it('should accept if value has contributionStatus as received', () => {
-            expect(validators.approvalsFulfilled({ value: '[{ "data": { "approvalStatus": "approvalComplete" } }]' })).toEqual(null);
+            expect(validators.approvalsFulfilled({ value: '[{ "data": { "contributionStatus": "contributionReceived" } }]' })).toEqual(null);
         });
         it('should accept if all value has contributionStatus as received or cancelled', () => {
-            expect(validators.approvalsFulfilled({ value: '[{ "data": { "approvalStatus": "approvalComplete" } }, { "data": {"approvalStatus": "approvalCancelled" } }]' })).toEqual(null);
+            expect(validators.approvalsFulfilled({ value: '[{ "data": { "contributionStatus": "contributionReceived" } }, { "data": {"contributionStatus": "contributionCancelled" } }]' })).toEqual(null);
         });
     });
 
