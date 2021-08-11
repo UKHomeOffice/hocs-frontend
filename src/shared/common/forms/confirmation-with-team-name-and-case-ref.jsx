@@ -3,11 +3,9 @@ import PropTypes from 'prop-types';
 
 export default class ConfirmationWithTeamNameAndCaseRef extends Component {
 
-    getTeamName(teams, data){
-        if (data.AcceptanceTeam){
-            return teams.find(team => team.key === data.AcceptanceTeam).value;
-        }
-        return '';
+    extractRequiredTeam(data, CurrentStage, choices) {
+        const requiredTeamType = StageTeamTypes[CurrentStage];
+        return requiredTeamType ? choices.find(choice => choice.key === data[requiredTeamType]).value : '';
     }
 
     render() {
@@ -19,7 +17,7 @@ export default class ConfirmationWithTeamNameAndCaseRef extends Component {
             data
         } = this.props;
 
-        const teamName = this.getTeamName(choices, data);
+        const teamName = this.extractRequiredTeam(data, data.CurrentStage, choices);
 
         return (
             <div>
@@ -36,8 +34,12 @@ export default class ConfirmationWithTeamNameAndCaseRef extends Component {
 }
 
 ConfirmationWithTeamNameAndCaseRef.propTypes = {
-    data: PropTypes.object,
     label: PropTypes.string,
     caseRef: PropTypes.string,
-    choices: PropTypes.array
+    choices: PropTypes.array,
+    data: PropTypes.object
+};
+
+const StageTeamTypes = {
+    FOI_ALLOCATION: 'AcceptanceTeam'
 };

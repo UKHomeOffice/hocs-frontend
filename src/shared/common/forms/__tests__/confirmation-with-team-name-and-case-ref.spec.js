@@ -14,14 +14,19 @@ describe('Panel component', () => {
         }
     ];
 
+    const defaultData = {
+
+    };
+
     const data = {
+        CurrentStage: 'FOI_ALLOCATION',
         AcceptanceTeam: '4ef92480-922f-11eb-a8b3-0242ac130003'
     };
 
-    xit('should render with default props', () => {
+    it('should render with default props', () => {
         expect(
-            render(<ApplicationProvider>
-                <ConfirmationWithTeamNameAndCaseRef />
+            render(<ApplicationProvider config={config}>
+                <ConfirmationWithTeamNameAndCaseRef data={defaultData}/>
             </ApplicationProvider>)
         ).toMatchSnapshot();
     });
@@ -29,7 +34,7 @@ describe('Panel component', () => {
 
     it('should render with title and team name when passed', () => {
         expect(
-            render(<ApplicationProvider config={config} data={data}>
+            render(<ApplicationProvider config={config} >
                 <ConfirmationWithTeamNameAndCaseRef data={data} choices={choices} label="completed" caseRef={'test-case-ref'} />
             </ApplicationProvider>)
         ).toMatchSnapshot();
