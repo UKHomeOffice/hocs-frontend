@@ -94,7 +94,6 @@ const actions = {
                     case actionTypes.CREATE_CASE: {
                         const { data: documentTags } = await getDocumentTags(context);
                         response = await createCase('/case', { caseType: context, form }, documentTags[0], headers);
-                        console.log('responseData', response.data);
                         clientResponse = { summary: 'Case Created ', link: `${response.data.reference}` };
                         return handleActionSuccess(clientResponse, workflow, form);
                     }

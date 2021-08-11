@@ -161,11 +161,7 @@ export function formComponentFactory(field, options) {
         case 'confirmation-with-case-ref':
             return renderFormComponent(ConfirmationWithCaseRef, { key, data, config, caseRef });
         case 'confirmation-with-team-name-and-case-ref':
-            var teamName;
-            if (data.AcceptanceTeam){
-                teamName = config.choices.find(choice => choice.key === data.AcceptanceTeam).value;
-            }
-            return renderFormComponent(ConfirmationWithTeamNameAndCaseRef, { key, data, config: { ...config, baseUrl: options.baseUrl, teamName: teamName }, caseRef, callback });
+            return renderFormComponent(ConfirmationWithTeamNameAndCaseRef, { key, data, config, caseRef });
         case 'paragraph':
             return renderFormComponent(Paragraph, { key, config });
         case 'entity-manager':

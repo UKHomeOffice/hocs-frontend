@@ -1,16 +1,25 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-export default class ConfirmationWithCaseRef extends Component {
+export default class ConfirmationWithTeamNameAndCaseRef extends Component {
+
+    getTeamName(teams, data){
+        if (data.AcceptanceTeam){
+            return teams.find(team => team.key === data.AcceptanceTeam).value;
+        }
+        return '';
+    }
 
     render() {
 
         const {
             label,
             caseRef,
-            nextActions,
-            teamName
+            choices,
+            data
         } = this.props;
+
+        const teamName = this.getTeamName(choices, data);
 
         return (
             <div>
@@ -21,27 +30,14 @@ export default class ConfirmationWithCaseRef extends Component {
                 <h2 className="govuk-heading-m">
                     Case {caseRef} {label} {teamName}
                 </h2>
-                <div>
-                    {nextActions &&
-                        nextActions.map((action, i) => {
-                            return (
-                                <Fragment key={i}>
-                                    <div className='govuk-table__cell'>
-                                        <a href={`${action.url}`} className="govuk-link govuk-heading-m">{action.label} </a>
-                                    </div>
-                                </Fragment>
-                            );
-                        })
-                    }
-                </div>
             </div>
         );
     }
 }
 
-ConfirmationWithCaseRef.propTypes = {
+ConfirmationWithTeamNameAndCaseRef.propTypes = {
+    data: PropTypes.object,
     label: PropTypes.string,
     caseRef: PropTypes.string,
-    nextActions: PropTypes.array,
-    teamName: PropTypes.string
+    choices: PropTypes.array
 };
