@@ -6,6 +6,7 @@ import Submit from '../forms/submit.jsx';
 import Dropdown from '../forms/dropdown.jsx';
 import { ApplicationConsumer } from '../../contexts/application.jsx';
 import deepEqual from 'deep-equal';
+import Tags from './workstack-tag.jsx';
 
 const LinkButton = ({ label, endpoint, submitHandler }) => (
     <button
@@ -316,6 +317,7 @@ class WorkstackAllocate extends Component {
                         value.primaryCorrespondentFullName &&
                         <span className='govuk-!-font-weight-bold'>{value.primaryCorrespondentFullName}<br/></span>
                     }
+                    <Tags row={row} />
                     <Link to={`/case/${row.caseUUID}/stage/${row.uuid}`} className='govuk-link govuk-!-margin-right-3'>{value.caseReference}</Link>
                 </td>;
             case ColumnRenderer.MP_WITH_OWNER:
