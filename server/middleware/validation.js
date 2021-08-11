@@ -204,9 +204,9 @@ const validators = {
     approvalsFulfilled: ({ value, message }) => {
         return requestsFulfilled( value,
             message,
-            'approvalStatus',
-            'approvalCancelled',
-            'approvalComplete',
+            'contributionStatus',
+            'contributionCancelled',
+            'contributionReceived',
             validationErrors.approvalsFulfilled());
     },
     /**
