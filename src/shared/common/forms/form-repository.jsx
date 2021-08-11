@@ -28,6 +28,7 @@ import HideConditionFunctions from './../../helpers/hide-condition-functions';
 import ConfirmationWithCaseRef from './confirmation-with-case-ref.jsx';
 import ReviewField from './composite/review-field.jsx';
 import Heading from './heading.jsx';
+import ConfirmationWithTeamNameAndCaseRef from './confirmation-with-team-name-and-case-ref.jsx';
 
 function defaultDataAdapter(name, data, currentValue) {
     return data[name] || currentValue;
@@ -159,6 +160,8 @@ export function formComponentFactory(field, options) {
             return renderFormComponent(Inset, { key, data, config });
         case 'confirmation-with-case-ref':
             return renderFormComponent(ConfirmationWithCaseRef, { key, data, config, caseRef });
+        case 'confirmation-with-team-name-and-case-ref':
+            return renderFormComponent(ConfirmationWithTeamNameAndCaseRef, { key, data, config, caseRef });
         case 'paragraph':
             return renderFormComponent(Paragraph, { key, config });
         case 'entity-manager':
