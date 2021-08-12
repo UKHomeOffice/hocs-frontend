@@ -3,7 +3,8 @@ const User = require('../../models/user');
 const { formatDate } = require('../../libs/dateHelpers');
 
 const createAdditionalFields = async (additionalFields = [], fetchList) => {
-    var results = additionalFields.map(({ label, value, type, choices }) => type === 'date' ? ({ label, value: formatDate(value), choices }) : ({ label, value, choices }));
+    var results = additionalFields
+        .map(field => formatValueOnType(field));
 
     for (var i = 0; i < results.length; i++) {
         var field = results[i];
@@ -21,6 +22,21 @@ const createAdditionalFields = async (additionalFields = [], fetchList) => {
         }
     }
     return results;
+};
+
+const formatValueOnType = ({ label, value, type, choices }) => {
+    switch (type) {
+        case 'date':
+            return { label, value: formatDate(value), choices };
+        case 'checkbox':
+            return { label, value: formatCheckboxValue(value), choices };
+        default:
+            return { label, value, choices };
+    }
+};
+
+const formatCheckboxValue = (value) => {
+    return value.replace(/,/g, ', ');
 };
 
 const createDeadlines = async (deadlines, fromStaticList) => await Promise.all(Object.entries(deadlines)
