@@ -1,6 +1,7 @@
 const { FormSubmissionError, ValidationError } = require('../models/error');
 const { DOCUMENT_WHITELIST, DOCUMENT_BULK_LIMIT, VALID_DAYS_RANGE } = require('../config').forContext('server');
 const { MIN_ALLOWABLE_YEAR, MAX_ALLOWABLE_YEAR } = require('../libs/dateHelpers');
+const showConditionFunctions = require('../../src/shared/helpers/show-condition-functions');
 
 const validationErrors = {
     required: label => `${label} is required`,
@@ -292,8 +293,13 @@ function validationMiddleware(req, res, next) {
         let isVisible = true;
         if (visibilityConditions) {
             isVisible = false;
+
             for (let condition of visibilityConditions) {
-                if (data[condition.conditionPropertyName] && data[condition.conditionPropertyName] === condition.conditionPropertyValue) {
+                if (condition.function && Object.prototype.hasOwnProperty.call(showConditionFunctions, condition.function)) {
+                    if (condition.conditionPropertyName && condition.conditionPropertyValue) {
+                        isVisible = showConditionFunctions[condition.function](data, condition.conditionPropertyName, condition.conditionPropertyValue);
+                    }
+                } else if (data[condition.conditionPropertyName] && data[condition.conditionPropertyName] === condition.conditionPropertyValue) {
                     isVisible = true;
                 }
             }
