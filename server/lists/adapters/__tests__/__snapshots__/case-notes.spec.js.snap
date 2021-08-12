@@ -117,6 +117,18 @@ Array [
       "date": "5 January 2019 at 12:00",
       "modifiedBy": "MOCK_USER",
       "modifiedDate": null,
+      "note": "A test case note",
+    },
+    "timelineItemUUID": "__timelineItemUUID__",
+    "title": "Compliance measures - Other",
+    "type": "ENQUIRY_REASON_EUNATIONAL_OTHERDETAILS",
+  },
+  Object {
+    "body": Object {
+      "author": "MOCK_USER",
+      "date": "5 January 2019 at 12:00",
+      "modifiedBy": "MOCK_USER",
+      "modifiedDate": null,
       "stage": "MOCK_STAGETYPE",
     },
     "timelineItemUUID": "__timelineItemUUID__",
