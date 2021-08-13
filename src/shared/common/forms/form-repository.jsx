@@ -24,7 +24,8 @@ import Accordion from './accordion.jsx';
 import Hidden from './hidden.jsx';
 import ExpandableCheckbox from './expandable-checkbox.jsx';
 import FlowDirectionLink from './flow-direction-link.jsx';
-import HideConditionFunctions from './../../helpers/hide-condition-functions';
+import hideConditionFunctions from '../../helpers/hide-condition-functions.js';
+import showConditionFunctions from '../../helpers/show-condition-functions.js';
 
 function defaultDataAdapter(name, data, currentValue) {
     return data[name] || currentValue;
@@ -56,16 +57,19 @@ function renderFormComponent(Component, options) {
     return null;
 }
 
-function isComponentVisible(config, data) {
+function isComponentVisible({ visibilityConditions, hideConditions }, data) {
     let isVisible = true;
-    let { visibilityConditions, hideConditions } = config;
 
     // show component based on visibilityConditions
     if (visibilityConditions) {
         isVisible = false;
-        for (let i = 0; i < visibilityConditions.length; i++) {
-            const condition = visibilityConditions[i];
-            if (data[condition.conditionPropertyName] && data[condition.conditionPropertyName] === condition.conditionPropertyValue) {
+
+        for (const condition of visibilityConditions) {
+            if (condition.function && Object.prototype.hasOwnProperty.call(showConditionFunctions, condition.function)) {
+                if (condition.conditionPropertyName && condition.conditionPropertyValue) {
+                    isVisible = showConditionFunctions[condition.function](data, condition.conditionPropertyName, condition.conditionPropertyValue);
+                }
+            } else if (data[condition.conditionPropertyName] && data[condition.conditionPropertyName] === condition.conditionPropertyValue) {
                 isVisible = true;
             }
         }
@@ -73,11 +77,9 @@ function isComponentVisible(config, data) {
 
     // hide component based on hideConditions
     if (hideConditions) {
-        for (let i = 0; i < hideConditions.length; i++) {
-            const condition = hideConditions[i];
-
-            if (condition.function && Object.prototype.hasOwnProperty.call(HideConditionFunctions, condition.function)) {
-                isVisible = HideConditionFunctions[condition.function](data);
+        for (const condition of hideConditions) {
+            if (condition.function && Object.prototype.hasOwnProperty.call(hideConditions, condition.function)) {
+                isVisible = hideConditionFunctions[condition.function](data);
             } else if (data[condition.conditionPropertyName] && data[condition.conditionPropertyName] === condition.conditionPropertyValue) {
                 isVisible = false;
             }
