@@ -14,6 +14,8 @@ describe('Panel component', () => {
         }
     ];
 
+    const hasHeader = true;
+
     const defaultData = {
 
     };
@@ -36,6 +38,14 @@ describe('Panel component', () => {
         expect(
             render(<ApplicationProvider config={config} >
                 <ConfirmationWithTeamNameAndCaseRef data={data} choices={choices} label="completed" caseRef={'test-case-ref'} />
+            </ApplicationProvider>)
+        ).toMatchSnapshot();
+    });
+
+    it('should render with title, team name and header box when passed', () => {
+        expect(
+            render(<ApplicationProvider config={config} >
+                <ConfirmationWithTeamNameAndCaseRef data={data} choices={choices} label="completed" caseRef={'test-case-ref'} hasHeader={hasHeader} />
             </ApplicationProvider>)
         ).toMatchSnapshot();
     });
