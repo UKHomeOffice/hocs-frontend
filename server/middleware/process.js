@@ -1,4 +1,6 @@
 const { FormSubmissionError } = require('../models/error');
+const showConditionFunctions = require('../../src/shared/helpers/show-condition-functions');
+const hideConditionFunctions = require('../../src/shared/helpers/hide-condition-functions');
 
 const customAdapters = {
     'radio': (reducer, field, data) => {
@@ -80,11 +82,50 @@ function processMiddleware(req, res, next) {
         const { schema } = req.form;
         req.form.data = schema.fields
             .filter(field => field.type !== 'display')
+            .filter(field => isFieldVisible(field.props, data))
             .reduce(createReducer(data, req), {});
     } catch (error) {
         return next(new FormSubmissionError('Unable to process form data'));
     }
     next();
+}
+
+function isFieldVisible({ visibilityConditions, hideConditions }, data) {
+    let isVisible = true;
+
+    // show component based on visibilityConditions
+    if (visibilityConditions) {
+        isVisible = false;
+
+        for (const condition of visibilityConditions) {
+            if (condition.function && Object.prototype.hasOwnProperty.call(showConditionFunctions, condition.function)) {
+                if (condition.conditionPropertyName && condition.conditionPropertyValue) {
+                    isVisible = showConditionFunctions[condition.function](data, condition.conditionPropertyName, condition.conditionPropertyValue);
+                } else {
+                    isVisible = hideConditionFunctions[condition.function](data);
+                }
+            } else if (data[condition.conditionPropertyName] && data[condition.conditionPropertyName] === condition.conditionPropertyValue) {
+                isVisible = true;
+            }
+        }
+    }
+
+    // hide component based on hideConditions
+    if (hideConditions) {
+        for (const condition of hideConditions) {
+            if (condition.function && Object.prototype.hasOwnProperty.call(hideConditions, condition.function)) {
+                if (condition.conditionPropertyName && condition.conditionPropertyValue) {
+                    isVisible = hideConditionFunctions[condition.function](data, condition.conditionPropertyName, condition.conditionPropertyValue);
+                } else {
+                    isVisible = hideConditionFunctions[condition.function](data);
+                }
+            } else if (data[condition.conditionPropertyName] && data[condition.conditionPropertyName] === condition.conditionPropertyValue) {
+                isVisible = false;
+            }
+        }
+    }
+
+    return isVisible;
 }
 
 /**
