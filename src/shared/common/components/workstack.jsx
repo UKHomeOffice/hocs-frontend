@@ -355,20 +355,20 @@ class WorkstackAllocate extends Component {
                 </td>;
             }
             case ColumnRenderer.DUE_DATE_WARNING:
-                if (row.data.CaseContributions) {
-                    const dueContribution = JSON.parse(row.data.CaseContributions)
-                        .filter(contribution => contribution.data && !contribution.data.contributionStatus)
-                        .map(contribution => contribution.data.contributionDueDate)
+                if (row.somu && row.somu.caseContributions) {
+                    const dueContribution = row.somu.caseContributions
+                        .map(contribution => JSON.parse(contribution))
+                        .filter(contribution => !contribution.contributionStatus)
+                        .map(contribution => contribution.contributionDueDate)
                         .sort()
                         .shift();
-
                     if (dueContribution && new Date(dueContribution) <= new Date()) {
                         return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell date-warning'>
                             <span>{value}</span>
                         </td>;
                     }
                 }
-                if (row.data.DueDate) {
+                if (row.data && row.data.DueDate) {
                     if (new Date(row.data.DueDate) <= new Date()) {
                         return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell date-warning'>
                             <span>{value}</span>

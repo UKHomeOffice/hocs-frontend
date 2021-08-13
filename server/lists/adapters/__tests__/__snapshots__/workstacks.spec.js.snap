@@ -724,9 +724,6 @@ Object {
           },
         ],
       },
-      "data": Object {
-        "CaseContributions": "[{}]",
-      },
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
       "memberCorrespondentDisplay": "",
@@ -742,6 +739,11 @@ Object {
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234568/19",
         "primaryCorrespondentFullName": "testName",
+      },
+      "somu": Object {
+        "caseContributions": Array [
+          "{  }",
+        ],
       },
       "stageType": "A",
       "stageTypeDisplay": "MOCK_STAGETYPE",
@@ -770,6 +772,7 @@ Object {
       "caseReference": "COMP/1234568/19",
       "caseType": "COMP",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "contributions": "Due",
       "correspondents": Object {
         "correspondents": Array [
           Object {
@@ -785,9 +788,6 @@ Object {
             "uuid": "uuid456",
           },
         ],
-      },
-      "data": Object {
-        "CaseContributions": "[{}]",
       },
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
@@ -805,6 +805,11 @@ Object {
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "COMP/1234568/19",
         "primaryCorrespondentFullName": "primaryC",
+      },
+      "somu": Object {
+        "caseContributions": Array [
+          "{  }",
+        ],
       },
       "stageType": "A",
       "stageTypeDisplay": "MOCK_STAGETYPE",
@@ -1207,7 +1212,6 @@ Object {
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
       "data": Object {
-        "CaseContributions": "[{\\"data\\": {\\"contributionDueDate\\":\\"2020-12-12\\"}}]",
         "DueDate": "2020-12-10",
       },
       "deadline": "2200-01-03",
@@ -1218,6 +1222,11 @@ Object {
       },
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234568/19",
+      },
+      "somu": Object {
+        "caseContributions": Array [
+          "{ \\"contributionDueDate\\":\\"2020-12-12\\" }",
+        ],
       },
       "stageType": "A",
       "stageTypeDisplay": "MOCK_STAGETYPE",
@@ -1245,9 +1254,6 @@ Object {
       "caseReference": "A/1234568/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "data": Object {
-        "CaseContributions": "[{\\"data\\": {\\"contributionDueDate\\":\\"2020-12-12\\"}}]",
-      },
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
       "mpWithOwnerDisplay": Object {
@@ -1256,6 +1262,11 @@ Object {
       },
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234568/19",
+      },
+      "somu": Object {
+        "caseContributions": Array [
+          "{ \\"contributionDueDate\\":\\"2020-12-12\\" }",
+        ],
       },
       "stageType": "A",
       "stageTypeDisplay": "MOCK_STAGETYPE",
@@ -1283,17 +1294,20 @@ Object {
       "caseReference": "A/1234568/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "data": Object {
-        "CaseContributions": "[{\\"data\\": {\\"contributionDueDate\\":\\"2020-12-12\\"}}]",
-      },
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
+      "dueContribution": "2020-12-12",
       "mpWithOwnerDisplay": Object {
         "mp": "",
         "owner": "MOCK_USER",
       },
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234568/19",
+      },
+      "somu": Object {
+        "caseContributions": Array [
+          "{ \\"contributionDueDate\\":\\"2020-12-12\\" }",
+        ],
       },
       "stageType": "MPAM_DRAFT_REQUESTED_CONTRIBUTION",
       "stageTypeDisplay": "MOCK_STAGETYPE",
@@ -1321,9 +1335,6 @@ Object {
       "caseReference": "A/1234568/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "data": Object {
-        "CaseContributions": "[{\\"data\\": {\\"contributionDueDate\\":\\"2020-12-12\\", \\"contributionStatus\\": \\"TEST\\"}}]",
-      },
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
       "mpWithOwnerDisplay": Object {
@@ -1332,6 +1343,11 @@ Object {
       },
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234568/19",
+      },
+      "somu": Object {
+        "caseContributions": Array [
+          "{ \\"contributionDueDate\\":\\"2020-12-12\\", \\"contributionStatus\\":\\"TEST\\" }",
+        ],
       },
       "stageType": "MPAM_DRAFT_REQUESTED_CONTRIBUTION",
       "stageTypeDisplay": "MOCK_STAGETYPE",
@@ -1359,9 +1375,6 @@ Object {
       "caseReference": "A/1234568/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "data": Object {
-        "CaseContributions": "[{\\"data\\": {\\"contributionDueDate\\":\\"2020-12-12\\", \\"contributionStatus\\":\\"blah\\"}}]",
-      },
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
       "mpWithOwnerDisplay": Object {
@@ -1370,6 +1383,11 @@ Object {
       },
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234568/19",
+      },
+      "somu": Object {
+        "caseContributions": Array [
+          "{ \\"contributionDueDate\\":\\"2020-12-12\\", \\"contributionStatus\\":\\"blah\\" }",
+        ],
       },
       "stageType": "MPAM_TRIAGE",
       "stageTypeDisplay": "MOCK_STAGETYPE",
@@ -1397,17 +1415,20 @@ Object {
       "caseReference": "A/1234568/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "data": Object {
-        "CaseContributions": "[{\\"data\\": {\\"contributionDueDate\\":\\"2020-12-12\\"}}]",
-      },
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
+      "dueContribution": "2020-12-12",
       "mpWithOwnerDisplay": Object {
         "mp": "",
         "owner": "MOCK_USER",
       },
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234568/19",
+      },
+      "somu": Object {
+        "caseContributions": Array [
+          "{ \\"contributionDueDate\\":\\"2020-12-12\\" }",
+        ],
       },
       "stageType": "MPAM_TRIAGE_REQUESTED_CONTRIBUTION",
       "stageTypeDisplay": "MOCK_STAGETYPE",
@@ -1435,9 +1456,6 @@ Object {
       "caseReference": "A/1234568/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "data": Object {
-        "CaseContributions": "[{\\"data\\": {\\"contributionDueDate\\":\\"2020-12-12\\", \\"contributionStatus\\": \\"TEST\\"}}]",
-      },
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
       "mpWithOwnerDisplay": Object {
@@ -1446,6 +1464,11 @@ Object {
       },
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234568/19",
+      },
+      "somu": Object {
+        "caseContributions": Array [
+          "{ \\"contributionDueDate\\":\\"2020-12-12\\", \\"contributionStatus\\":\\"TEST\\" }",
+        ],
       },
       "stageType": "MPAM_TRIAGE_REQUESTED_CONTRIBUTION",
       "stageTypeDisplay": "MOCK_STAGETYPE",
@@ -1473,9 +1496,6 @@ Object {
       "caseReference": "A/1234568/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "data": Object {
-        "CaseContributions": "[{}]",
-      },
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
       "mpWithOwnerDisplay": Object {
@@ -1484,6 +1504,11 @@ Object {
       },
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234568/19",
+      },
+      "somu": Object {
+        "caseContributions": Array [
+          "{  }",
+        ],
       },
       "stageType": "A",
       "stageTypeDisplay": "MOCK_STAGETYPE",
@@ -1511,9 +1536,6 @@ Object {
       "caseReference": "A/1234568/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "data": Object {
-        "CaseContributions": "[{}]",
-      },
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
       "mpWithOwnerDisplay": Object {
@@ -1522,6 +1544,11 @@ Object {
       },
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234568/19",
+      },
+      "somu": Object {
+        "caseContributions": Array [
+          "{  }",
+        ],
       },
       "stageType": "MPAM_TRIAGE",
       "stageTypeDisplay": "MOCK_STAGETYPE",

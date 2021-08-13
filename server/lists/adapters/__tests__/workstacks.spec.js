@@ -949,8 +949,8 @@ describe('Workflow Workstack Adapter', () => {
                         deadline: '2200-01-03',
                         caseReference: 'A/1234568/19',
                         active: true,
-                        data: {
-                            CaseContributions: '[{"data": {"contributionDueDate":"2020-12-12"}}]'
+                        somu: {
+                            caseContributions: ['{ "contributionDueDate":"2020-12-12" }']
                         }
                     }
                 ]
@@ -979,8 +979,8 @@ describe('Workflow Workstack Adapter', () => {
                     deadline: '2200-01-03',
                     caseReference: 'A/1234568/19',
                     active: true,
-                    data: {
-                        CaseContributions: '[{}]'
+                    somu: {
+                        caseContributions: ['{  }']
                     }
                 }
             ]
@@ -1009,8 +1009,8 @@ describe('Workflow Workstack Adapter', () => {
                     deadline: '2200-01-03',
                     caseReference: 'A/1234568/19',
                     active: true,
-                    data: {
-                        CaseContributions: '[{}]'
+                    somu: {
+                        caseContributions: ['{  }']
                     }
                 }
             ]
@@ -1042,8 +1042,8 @@ describe('Workflow Workstack Adapter', () => {
                     deadline: '2200-01-03',
                     caseReference: 'A/1234568/19',
                     active: true,
-                    data: {
-                        CaseContributions: '[{}]',
+                    somu: {
+                        caseContributions: ['{  }']
                     }
                 }
             ]
@@ -1078,8 +1078,8 @@ describe('Workflow Workstack Adapter', () => {
                     deadline: '2200-01-03',
                     caseReference: 'COMP/1234568/19',
                     active: true,
-                    data: {
-                        CaseContributions: '[{}]',
+                    somu: {
+                        caseContributions: ['{  }']
                     }
                 }
             ]
@@ -1109,8 +1109,8 @@ describe('Workflow Workstack Adapter', () => {
                         deadline: '2200-01-03',
                         caseReference: 'A/1234568/19',
                         active: true,
-                        data: {
-                            CaseContributions: '[{"data": {"contributionDueDate":"2020-12-12", "contributionStatus":"blah"}}]'
+                        somu: {
+                            caseContributions: ['{ "contributionDueDate":"2020-12-12", "contributionStatus":"blah" }']
                         }
                     }
                 ]
@@ -1141,8 +1141,8 @@ describe('Workflow Workstack Adapter', () => {
                         deadline: '2200-01-03',
                         caseReference: 'A/1234568/19',
                         active: true,
-                        data: {
-                            CaseContributions: '[{"data": {"contributionDueDate":"2020-12-12"}}]'
+                        somu: {
+                            caseContributions: ['{ "contributionDueDate":"2020-12-12" }']
                         }
                     }
                 ]
@@ -1173,8 +1173,8 @@ describe('Workflow Workstack Adapter', () => {
                         deadline: '2200-01-03',
                         caseReference: 'A/1234568/19',
                         active: true,
-                        data: {
-                            CaseContributions: '[{"data": {"contributionDueDate":"2020-12-12", "contributionStatus": "TEST"}}]'
+                        somu: {
+                            caseContributions: ['{ "contributionDueDate":"2020-12-12", "contributionStatus":"TEST" }']
                         }
                     }
                 ]
@@ -1205,8 +1205,8 @@ describe('Workflow Workstack Adapter', () => {
                         deadline: '2200-01-03',
                         caseReference: 'A/1234568/19',
                         active: true,
-                        data: {
-                            CaseContributions: '[{"data": {"contributionDueDate":"2020-12-12"}}]'
+                        somu: {
+                            caseContributions: ['{ "contributionDueDate":"2020-12-12" }']
                         }
                     }
                 ]
@@ -1237,8 +1237,8 @@ describe('Workflow Workstack Adapter', () => {
                         deadline: '2200-01-03',
                         caseReference: 'A/1234568/19',
                         active: true,
-                        data: {
-                            CaseContributions: '[{"data": {"contributionDueDate":"2020-12-12", "contributionStatus": "TEST"}}]'
+                        somu: {
+                            caseContributions: ['{ "contributionDueDate":"2020-12-12", "contributionStatus":"TEST" }']
                         }
                     }
                 ]
@@ -1269,8 +1269,10 @@ describe('Workflow Workstack Adapter', () => {
                         deadline: '2200-01-03',
                         caseReference: 'A/1234568/19',
                         active: true,
+                        somu: {
+                            caseContributions: ['{ "contributionDueDate":"2020-12-12" }']
+                        },
                         data: {
-                            CaseContributions: '[{"data": {"contributionDueDate":"2020-12-12"}}]',
                             DueDate: '2020-12-10'
                         }
                     }

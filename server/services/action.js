@@ -207,20 +207,14 @@ const actions = {
                             break;
                     }
                 } else if (somuTypeUuid) {
-                    const { somuItemData, somuItemUuid, somuTypeItems } = options;
+                    const { somuItemData, somuItemUuid } = options;
 
                     switch (form.action) {
                         case actionTypes.ADD_CONTRIBUTION:
                         case actionTypes.ADD_ADDITIONAL_CONTRIBUTION:
-                            await caseworkService.put(`/case/${caseId}/data/CaseContributions`,
-                                somuTypeItems,
-                                { headers: { ...headers.headers, 'Content-Type': 'text/plain' } });
                             await caseworkService.post(`/case/${caseId}/item/${somuTypeUuid}`, { data: somuItemData }, headers);
                             break;
                         case actionTypes.EDIT_CONTRIBUTION:
-                            await caseworkService.put(`/case/${caseId}/data/CaseContributions`,
-                                somuTypeItems,
-                                { headers: { ...headers.headers, 'Content-Type': 'text/plain' } });
                             await caseworkService.post(`/case/${caseId}/item/${somuTypeUuid}`, { uuid: somuItemUuid, data: somuItemData }, headers);
                             break;
                     }

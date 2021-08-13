@@ -122,7 +122,6 @@ exports[`Workstack component should not add link to headers with sortStrategy no
               "caseReference": "case1",
               "caseUUID": "case_uuid-123",
               "created": "2019-10-29T11:01:32.656563",
-              "data": Object {},
               "fullName": "Sam Smith",
               "isActive": "YES",
               "primaryCorrespondent": Object {
@@ -139,7 +138,6 @@ exports[`Workstack component should not add link to headers with sortStrategy no
               "caseReference": "case2",
               "caseUUID": "case_uuid-789",
               "created": "",
-              "data": Object {},
               "fullName": "John Alex",
               "isActive": "NO",
               "primaryCorrespondent": Object {
@@ -156,7 +154,6 @@ exports[`Workstack component should not add link to headers with sortStrategy no
               "caseReference": "case3",
               "caseUUID": "case_uuid-abc",
               "created": null,
-              "data": Object {},
               "fullName": "Pat Brown",
               "isActive": "NO",
               "primaryCorrespondent": Object {
@@ -173,14 +170,16 @@ exports[`Workstack component should not add link to headers with sortStrategy no
               "caseReference": "case4",
               "caseUUID": "case_uuid-efg",
               "created": null,
-              "data": Object {
-                "CaseContributions": "[{\\"data\\":{\\"contributionDueDate\\":\\"2020-12-12\\"}}]",
-              },
               "fullName": "Dave Jones",
               "isActive": "YES",
               "primaryCorrespondent": Object {
                 "fullname": "Mr Jones",
                 "postcode": "postcode4",
+              },
+              "somu": Object {
+                "caseContributions": Array [
+                  "{ \\"contributionDueDate\\":\\"2020-12-12\\" }",
+                ],
               },
               "stageType": "MPAM_DRAFT",
               "stageTypeDisplay": "Stage D",
@@ -192,14 +191,14 @@ exports[`Workstack component should not add link to headers with sortStrategy no
               "caseReference": "case5",
               "caseUUID": "case_uuid-hij",
               "created": null,
-              "data": Object {
-                "CaseContributions": "[{}]",
-              },
               "fullName": "Mick Smith",
               "isActive": "YES",
               "primaryCorrespondent": Object {
                 "fullname": "Mr Smith",
                 "postcode": "",
+              },
+              "somu": Object {
+                "caseContributions": Array [],
               },
               "stageType": "MPAM_DRAFT",
               "stageTypeDisplay": "Stage E",
@@ -212,7 +211,6 @@ exports[`Workstack component should not add link to headers with sortStrategy no
               "caseUUID": "case_uuid-klm",
               "created": null,
               "data": Object {
-                "CaseContributions": "[{\\"data\\":{\\"contributionDueDate\\":\\"2020-12-12\\", \\"contributionStatus\\": \\"TEST\\"}}]",
                 "DueDate": "2021-01-01",
               },
               "fullName": "Bet Linch",
@@ -220,6 +218,11 @@ exports[`Workstack component should not add link to headers with sortStrategy no
               "primaryCorrespondent": Object {
                 "fullname": "Mrs Linch",
                 "postcode": null,
+              },
+              "somu": Object {
+                "caseContributions": Array [
+                  "{ \\"contributionDueDate\\":\\"2020-12-12\\", \\"contributionStatus\\": \\"TEST\\" }",
+                ],
               },
               "stageType": "MPAM_DRAFT",
               "stageTypeDisplay": "Stage F",
@@ -2658,7 +2661,6 @@ exports[`Workstack component should render with filtering 1`] = `
               "caseReference": "case1",
               "caseUUID": "case_uuid-123",
               "created": "2019-10-29T11:01:32.656563",
-              "data": Object {},
               "fullName": "Sam Smith",
               "isActive": "YES",
               "primaryCorrespondent": Object {
@@ -2675,7 +2677,6 @@ exports[`Workstack component should render with filtering 1`] = `
               "caseReference": "case2",
               "caseUUID": "case_uuid-789",
               "created": "",
-              "data": Object {},
               "fullName": "John Alex",
               "isActive": "NO",
               "primaryCorrespondent": Object {
@@ -2692,7 +2693,6 @@ exports[`Workstack component should render with filtering 1`] = `
               "caseReference": "case3",
               "caseUUID": "case_uuid-abc",
               "created": null,
-              "data": Object {},
               "fullName": "Pat Brown",
               "isActive": "NO",
               "primaryCorrespondent": Object {
@@ -2709,14 +2709,16 @@ exports[`Workstack component should render with filtering 1`] = `
               "caseReference": "case4",
               "caseUUID": "case_uuid-efg",
               "created": null,
-              "data": Object {
-                "CaseContributions": "[{\\"data\\":{\\"contributionDueDate\\":\\"2020-12-12\\"}}]",
-              },
               "fullName": "Dave Jones",
               "isActive": "YES",
               "primaryCorrespondent": Object {
                 "fullname": "Mr Jones",
                 "postcode": "postcode4",
+              },
+              "somu": Object {
+                "caseContributions": Array [
+                  "{ \\"contributionDueDate\\":\\"2020-12-12\\" }",
+                ],
               },
               "stageType": "MPAM_DRAFT",
               "stageTypeDisplay": "Stage D",
@@ -2728,14 +2730,14 @@ exports[`Workstack component should render with filtering 1`] = `
               "caseReference": "case5",
               "caseUUID": "case_uuid-hij",
               "created": null,
-              "data": Object {
-                "CaseContributions": "[{}]",
-              },
               "fullName": "Mick Smith",
               "isActive": "YES",
               "primaryCorrespondent": Object {
                 "fullname": "Mr Smith",
                 "postcode": "",
+              },
+              "somu": Object {
+                "caseContributions": Array [],
               },
               "stageType": "MPAM_DRAFT",
               "stageTypeDisplay": "Stage E",
@@ -2748,7 +2750,6 @@ exports[`Workstack component should render with filtering 1`] = `
               "caseUUID": "case_uuid-klm",
               "created": null,
               "data": Object {
-                "CaseContributions": "[{\\"data\\":{\\"contributionDueDate\\":\\"2020-12-12\\", \\"contributionStatus\\": \\"TEST\\"}}]",
                 "DueDate": "2021-01-01",
               },
               "fullName": "Bet Linch",
@@ -2756,6 +2757,11 @@ exports[`Workstack component should render with filtering 1`] = `
               "primaryCorrespondent": Object {
                 "fullname": "Mrs Linch",
                 "postcode": null,
+              },
+              "somu": Object {
+                "caseContributions": Array [
+                  "{ \\"contributionDueDate\\":\\"2020-12-12\\", \\"contributionStatus\\": \\"TEST\\" }",
+                ],
               },
               "stageType": "MPAM_DRAFT",
               "stageTypeDisplay": "Stage F",
@@ -3239,7 +3245,6 @@ exports[`Workstack component should sort descending when the column heading is c
               "caseReference": "case1",
               "caseUUID": "case_uuid-123",
               "created": "2019-10-29T11:01:32.656563",
-              "data": Object {},
               "fullName": "Sam Smith",
               "isActive": "YES",
               "primaryCorrespondent": Object {
@@ -3256,7 +3261,6 @@ exports[`Workstack component should sort descending when the column heading is c
               "caseReference": "case2",
               "caseUUID": "case_uuid-789",
               "created": "",
-              "data": Object {},
               "fullName": "John Alex",
               "isActive": "NO",
               "primaryCorrespondent": Object {
@@ -3273,7 +3277,6 @@ exports[`Workstack component should sort descending when the column heading is c
               "caseReference": "case3",
               "caseUUID": "case_uuid-abc",
               "created": null,
-              "data": Object {},
               "fullName": "Pat Brown",
               "isActive": "NO",
               "primaryCorrespondent": Object {
@@ -3290,14 +3293,16 @@ exports[`Workstack component should sort descending when the column heading is c
               "caseReference": "case4",
               "caseUUID": "case_uuid-efg",
               "created": null,
-              "data": Object {
-                "CaseContributions": "[{\\"data\\":{\\"contributionDueDate\\":\\"2020-12-12\\"}}]",
-              },
               "fullName": "Dave Jones",
               "isActive": "YES",
               "primaryCorrespondent": Object {
                 "fullname": "Mr Jones",
                 "postcode": "postcode4",
+              },
+              "somu": Object {
+                "caseContributions": Array [
+                  "{ \\"contributionDueDate\\":\\"2020-12-12\\" }",
+                ],
               },
               "stageType": "MPAM_DRAFT",
               "stageTypeDisplay": "Stage D",
@@ -3309,14 +3314,14 @@ exports[`Workstack component should sort descending when the column heading is c
               "caseReference": "case5",
               "caseUUID": "case_uuid-hij",
               "created": null,
-              "data": Object {
-                "CaseContributions": "[{}]",
-              },
               "fullName": "Mick Smith",
               "isActive": "YES",
               "primaryCorrespondent": Object {
                 "fullname": "Mr Smith",
                 "postcode": "",
+              },
+              "somu": Object {
+                "caseContributions": Array [],
               },
               "stageType": "MPAM_DRAFT",
               "stageTypeDisplay": "Stage E",
@@ -3329,7 +3334,6 @@ exports[`Workstack component should sort descending when the column heading is c
               "caseUUID": "case_uuid-klm",
               "created": null,
               "data": Object {
-                "CaseContributions": "[{\\"data\\":{\\"contributionDueDate\\":\\"2020-12-12\\", \\"contributionStatus\\": \\"TEST\\"}}]",
                 "DueDate": "2021-01-01",
               },
               "fullName": "Bet Linch",
@@ -3337,6 +3341,11 @@ exports[`Workstack component should sort descending when the column heading is c
               "primaryCorrespondent": Object {
                 "fullname": "Mrs Linch",
                 "postcode": null,
+              },
+              "somu": Object {
+                "caseContributions": Array [
+                  "{ \\"contributionDueDate\\":\\"2020-12-12\\", \\"contributionStatus\\": \\"TEST\\" }",
+                ],
               },
               "stageType": "MPAM_DRAFT",
               "stageTypeDisplay": "Stage F",
@@ -4370,7 +4379,6 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
               "caseReference": "case1",
               "caseUUID": "case_uuid-123",
               "created": "2019-10-29T11:01:32.656563",
-              "data": Object {},
               "fullName": "Sam Smith",
               "isActive": "YES",
               "primaryCorrespondent": Object {
@@ -4387,7 +4395,6 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
               "caseReference": "case2",
               "caseUUID": "case_uuid-789",
               "created": "",
-              "data": Object {},
               "fullName": "John Alex",
               "isActive": "NO",
               "primaryCorrespondent": Object {
@@ -4404,7 +4411,6 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
               "caseReference": "case3",
               "caseUUID": "case_uuid-abc",
               "created": null,
-              "data": Object {},
               "fullName": "Pat Brown",
               "isActive": "NO",
               "primaryCorrespondent": Object {
@@ -4421,14 +4427,16 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
               "caseReference": "case4",
               "caseUUID": "case_uuid-efg",
               "created": null,
-              "data": Object {
-                "CaseContributions": "[{\\"data\\":{\\"contributionDueDate\\":\\"2020-12-12\\"}}]",
-              },
               "fullName": "Dave Jones",
               "isActive": "YES",
               "primaryCorrespondent": Object {
                 "fullname": "Mr Jones",
                 "postcode": "postcode4",
+              },
+              "somu": Object {
+                "caseContributions": Array [
+                  "{ \\"contributionDueDate\\":\\"2020-12-12\\" }",
+                ],
               },
               "stageType": "MPAM_DRAFT",
               "stageTypeDisplay": "Stage D",
@@ -4440,14 +4448,14 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
               "caseReference": "case5",
               "caseUUID": "case_uuid-hij",
               "created": null,
-              "data": Object {
-                "CaseContributions": "[{}]",
-              },
               "fullName": "Mick Smith",
               "isActive": "YES",
               "primaryCorrespondent": Object {
                 "fullname": "Mr Smith",
                 "postcode": "",
+              },
+              "somu": Object {
+                "caseContributions": Array [],
               },
               "stageType": "MPAM_DRAFT",
               "stageTypeDisplay": "Stage E",
@@ -4460,7 +4468,6 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
               "caseUUID": "case_uuid-klm",
               "created": null,
               "data": Object {
-                "CaseContributions": "[{\\"data\\":{\\"contributionDueDate\\":\\"2020-12-12\\", \\"contributionStatus\\": \\"TEST\\"}}]",
                 "DueDate": "2021-01-01",
               },
               "fullName": "Bet Linch",
@@ -4468,6 +4475,11 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
               "primaryCorrespondent": Object {
                 "fullname": "Mrs Linch",
                 "postcode": null,
+              },
+              "somu": Object {
+                "caseContributions": Array [
+                  "{ \\"contributionDueDate\\":\\"2020-12-12\\", \\"contributionStatus\\": \\"TEST\\" }",
+                ],
               },
               "stageType": "MPAM_DRAFT",
               "stageTypeDisplay": "Stage F",

@@ -207,7 +207,7 @@ const bindDisplayElements = fromStaticList => async (stage) => {
     stage.deadlineDisplay = formatDate(stage.deadline);
 
     stage.stageTypeWithDueDateDisplay = stage.stageTypeDisplay;
-    if (stage.data) {
+    if (stage.somu) {
         const contributionReceivedStages = [
             'MPAM_TRIAGE',
             'MPAM_TRIAGE_ESCALATE',
@@ -222,14 +222,17 @@ const bindDisplayElements = fromStaticList => async (stage) => {
             'MPAM_DRAFT_ESCALATED_REQUESTED_CONTRIBUTION'
         ];
 
-        if (stage.data.CaseContributions &&
+        if ((stage.somu.caseContributions && stage.somu.caseContributions.length > 0 ) &&
             (contributionReceivedStages.includes(stage.stageType) || contributionRequestedStages.includes(stage.stageType))) {
-            const dueContribution = JSON.parse(stage.data.CaseContributions)
-                .filter(contribution => contribution.data && !contribution.data.contributionStatus)
-                .map(contribution => contribution.data.contributionDueDate)
+            const dueContribution = stage.somu.caseContributions
+                .map(contribution => JSON.parse(contribution))
+                .filter(contribution => !contribution.contributionStatus)
+                .map(contribution => contribution.contributionDueDate)
                 .sort()
                 .shift();
-
+            if (dueContribution) {
+                stage.dueContribution = dueContribution;
+            }
             if (contributionRequestedStages.includes(stage.stageType) && dueContribution) {
                 stage.stageTypeWithDueDateDisplay = `${stage.stageTypeDisplay} due: ${formatDate(dueContribution)}`;
             } else if (contributionReceivedStages.includes(stage.stageType) && !dueContribution) {
@@ -237,12 +240,21 @@ const bindDisplayElements = fromStaticList => async (stage) => {
             } else {
                 stage.stageTypeWithDueDateDisplay = stage.stageTypeDisplay;
             }
-        } else if (stage.data.DueDate) {
+        } else if (stage.data && stage.data.DueDate) {
             stage.stageTypeWithDueDateDisplay = `${stage.stageTypeDisplay} due ${formatDate(stage.data.DueDate)}`;
         }
     }
 
-    if (stage.somu && stage.somu.caseContributions) {
+    if (stage.somu && stage.somu.caseContributions && stage.caseType === 'COMP') {
+        const dueContribution = stage.somu.caseContributions
+            .map(contribution => JSON.parse(contribution))
+            .filter(contribution => !contribution.contributionStatus)
+            .map(contribution => contribution.contributionDueDate)
+            .sort()
+            .shift();
+        if (dueContribution) {
+            stage.dueContribution = dueContribution;
+        }
         stage.contributions = highestPriorityContributionStatus(
             decorateContributionsWithStatus(stage.somu.caseContributions, new Date())).replace('contribution', '');
     }
