@@ -43,27 +43,19 @@ describe('Workstack component', () => {
                 stageTypeDisplay: 'Stage D', assignedUserDisplay: 'User4', assignedTeamDisplay: 'team4',
                 created: null, isActive: 'YES', stageType: 'MPAM_DRAFT',
                 primaryCorrespondent: { fullname: 'Mr Jones', postcode: 'postcode4' },
-                somu: {
-                    caseContributions: ['{ "contributionDueDate":"2020-12-12" }']
-                }
+                dueContribution: '2020-12-12'
             },
             {
                 caseReference: 'case5', caseUUID: 'case_uuid-hij', uuid: 'stage_uuid-446', fullName: 'Mick Smith',
                 stageTypeDisplay: 'Stage E', assignedUserDisplay: 'User5', assignedTeamDisplay: 'team5',
                 created: null, isActive: 'YES', stageType: 'MPAM_DRAFT',
-                primaryCorrespondent: { fullname: 'Mr Smith', postcode: '' },
-                somu: {
-                    caseContributions: []
-                }
+                primaryCorrespondent: { fullname: 'Mr Smith', postcode: '' }
             },
             {
                 caseReference: 'case6', caseUUID: 'case_uuid-klm', uuid: 'stage_uuid-447', fullName: 'Bet Linch',
                 stageTypeDisplay: 'Stage F', assignedUserDisplay: 'User5', assignedTeamDisplay: 'team6',
                 created: null, isActive: 'YES', stageType: 'MPAM_DRAFT',
                 primaryCorrespondent: { fullname: 'Mrs Linch', postcode: null },
-                somu: {
-                    caseContributions: ['{ "contributionDueDate":"2020-12-12", "contributionStatus": "TEST" }']
-                },
                 data: {
                     DueDate: '2021-01-01'
                 }
@@ -79,7 +71,7 @@ describe('Workstack component', () => {
             { displayName: 'Topic', dataAdapter: null, renderer: 'truncateText', dataValueKey: 'assignedTopicDisplay', isFilterable: true },
             { displayName: 'Case Date', dataAdapter: 'localDate', renderer: null, dataValueKey: 'TEST,created', isFilterable: true },
             { displayName: 'Active', dataAdapter: 'indicator', renderer: null, dataValueKey: 'isActive,TEST', isFilterable: true },
-            { displayName: 'Contribution Due Date', dataAdapter: 'indicator', renderer: 'dueDateWarning', dataValueKey: 'data.CaseContributions', isFilterable: true },
+            { displayName: 'Contribution Due Date', dataAdapter: 'indicator', renderer: 'dueDateWarning', dataValueKey: 'dueContribution', isFilterable: true },
             { displayName: 'Due Date', dataAdapter: 'indicator', renderer: 'dueDateWarning', dataValueKey: 'DueDate', isFilterable: true }
         ],
         selectable: true,
@@ -128,7 +120,7 @@ describe('Workstack component', () => {
         const links = WRAPPER.find('th.govuk-link');
         expect(links).toHaveLength(11);
         links.first().simulate('click');
-        expect(arraySortSpy).toHaveBeenCalledTimes(21);
+        expect(arraySortSpy).toHaveBeenCalledTimes(3);
         expect(WRAPPER).toMatchSnapshot();
     });
 
@@ -141,7 +133,7 @@ describe('Workstack component', () => {
         expect(links).toHaveLength(11);
         links.first().simulate('click');
         links.first().simulate('click');
-        expect(arraySortSpy).toHaveBeenCalledTimes(28);
+        expect(arraySortSpy).toHaveBeenCalledTimes(4);
         expect(WRAPPER).toMatchSnapshot();
     });
 
