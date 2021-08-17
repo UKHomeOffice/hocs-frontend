@@ -740,11 +740,6 @@ Object {
         "caseReference": "A/1234568/19",
         "primaryCorrespondentFullName": "testName",
       },
-      "somu": Object {
-        "caseContributions": Array [
-          "{  }",
-        ],
-      },
       "stageType": "A",
       "stageTypeDisplay": "MOCK_STAGETYPE",
       "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE",
@@ -772,7 +767,6 @@ Object {
       "caseReference": "COMP/1234568/19",
       "caseType": "COMP",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "contributions": "Due",
       "correspondents": Object {
         "correspondents": Array [
           Object {
@@ -805,11 +799,6 @@ Object {
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "COMP/1234568/19",
         "primaryCorrespondentFullName": "primaryC",
-      },
-      "somu": Object {
-        "caseContributions": Array [
-          "{  }",
-        ],
       },
       "stageType": "A",
       "stageTypeDisplay": "MOCK_STAGETYPE",
@@ -1216,17 +1205,13 @@ Object {
       },
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
+      "dueContribution": "2020-12-12",
       "mpWithOwnerDisplay": Object {
         "mp": "",
         "owner": "MOCK_USER",
       },
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234568/19",
-      },
-      "somu": Object {
-        "caseContributions": Array [
-          "{ \\"contributionDueDate\\":\\"2020-12-12\\" }",
-        ],
       },
       "stageType": "A",
       "stageTypeDisplay": "MOCK_STAGETYPE",
@@ -1256,17 +1241,13 @@ Object {
       "caseTypeDisplayFull": "MOCK_CASETYPE",
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
+      "dueContribution": "2020-12-12",
       "mpWithOwnerDisplay": Object {
         "mp": "",
         "owner": "MOCK_USER",
       },
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234568/19",
-      },
-      "somu": Object {
-        "caseContributions": Array [
-          "{ \\"contributionDueDate\\":\\"2020-12-12\\" }",
-        ],
       },
       "stageType": "A",
       "stageTypeDisplay": "MOCK_STAGETYPE",
@@ -1304,11 +1285,6 @@ Object {
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234568/19",
       },
-      "somu": Object {
-        "caseContributions": Array [
-          "{ \\"contributionDueDate\\":\\"2020-12-12\\" }",
-        ],
-      },
       "stageType": "MPAM_DRAFT_REQUESTED_CONTRIBUTION",
       "stageTypeDisplay": "MOCK_STAGETYPE",
       "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE due: 12/12/2020",
@@ -1344,11 +1320,6 @@ Object {
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234568/19",
       },
-      "somu": Object {
-        "caseContributions": Array [
-          "{ \\"contributionDueDate\\":\\"2020-12-12\\", \\"contributionStatus\\":\\"TEST\\" }",
-        ],
-      },
       "stageType": "MPAM_DRAFT_REQUESTED_CONTRIBUTION",
       "stageTypeDisplay": "MOCK_STAGETYPE",
       "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE",
@@ -1383,11 +1354,6 @@ Object {
       },
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234568/19",
-      },
-      "somu": Object {
-        "caseContributions": Array [
-          "{ \\"contributionDueDate\\":\\"2020-12-12\\", \\"contributionStatus\\":\\"blah\\" }",
-        ],
       },
       "stageType": "MPAM_TRIAGE",
       "stageTypeDisplay": "MOCK_STAGETYPE",
@@ -1425,11 +1391,6 @@ Object {
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234568/19",
       },
-      "somu": Object {
-        "caseContributions": Array [
-          "{ \\"contributionDueDate\\":\\"2020-12-12\\" }",
-        ],
-      },
       "stageType": "MPAM_TRIAGE_REQUESTED_CONTRIBUTION",
       "stageTypeDisplay": "MOCK_STAGETYPE",
       "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE due: 12/12/2020",
@@ -1464,11 +1425,6 @@ Object {
       },
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234568/19",
-      },
-      "somu": Object {
-        "caseContributions": Array [
-          "{ \\"contributionDueDate\\":\\"2020-12-12\\", \\"contributionStatus\\":\\"TEST\\" }",
-        ],
       },
       "stageType": "MPAM_TRIAGE_REQUESTED_CONTRIBUTION",
       "stageTypeDisplay": "MOCK_STAGETYPE",
@@ -1505,11 +1461,6 @@ Object {
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234568/19",
       },
-      "somu": Object {
-        "caseContributions": Array [
-          "{  }",
-        ],
-      },
       "stageType": "A",
       "stageTypeDisplay": "MOCK_STAGETYPE",
       "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE",
@@ -1544,11 +1495,6 @@ Object {
       },
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234568/19",
-      },
-      "somu": Object {
-        "caseContributions": Array [
-          "{  }",
-        ],
       },
       "stageType": "MPAM_TRIAGE",
       "stageTypeDisplay": "MOCK_STAGETYPE",
