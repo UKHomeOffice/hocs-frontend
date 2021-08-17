@@ -176,39 +176,9 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
-        S_FOI_DIRECTORATE_BICSPI_ACCEPTANCE_TEAMS: {
-            client: 'INFO',
-            endpoint: '/teams?unit=FOI_DIRECTORATE_BICSPI_ACCEPTANCE_TEAMS',
-            type: listService.types.STATIC,
-            adapter: teamsAdapter
-        },
         S_FOI_DIRECTORATE_BORDER_FORCE_ACCEPTANCE_TEAMS: {
             client: 'INFO',
             endpoint: '/teams?unit=FOI_DIRECTORATE_BORDER_FORCE_ACCEPTANCE_TEAMS',
-            type: listService.types.STATIC,
-            adapter: teamsAdapter
-        },
-        S_FOI_DIRECTORATE_C_AND_R_ACCEPTANCE_TEAMS: {
-            client: 'INFO',
-            endpoint: '/teams?unit=FOI_DIRECTORATE_C_AND_R_ACCEPTANCE_TEAMS',
-            type: listService.types.STATIC,
-            adapter: teamsAdapter
-        },
-        S_FOI_DIRECTORATE_COMMS_ACCEPTANCE_TEAMS: {
-            client: 'INFO',
-            endpoint: '/teams?unit=FOI_DIRECTORATE_COMMS_ACCEPTANCE_TEAMS',
-            type: listService.types.STATIC,
-            adapter: teamsAdapter
-        },
-        S_FOI_DIRECTORATE_CPFG_ACCEPTANCE_TEAMS: {
-            client: 'INFO',
-            endpoint: '/teams?unit=FOI_DIRECTORATE_CPFG_ACCEPTANCE_TEAMS',
-            type: listService.types.STATIC,
-            adapter: teamsAdapter
-        },
-        S_FOI_DIRECTORATE_DDAT_ACCEPTANCE_TEAMS: {
-            client: 'INFO',
-            endpoint: '/teams?unit=FOI_DIRECTORATE_DDAT_ACCEPTANCE_TEAMS',
             type: listService.types.STATIC,
             adapter: teamsAdapter
         },
@@ -218,9 +188,15 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: teamsAdapter
         },
-        S_FOI_DIRECTORATE_HO_SCIENCE_ACCEPTANCE_TEAMS: {
+        S_FOI_DIRECTORATE_MIGRATION_AND_BORDERS_ACCEPTANCE_TEAMS: {
             client: 'INFO',
-            endpoint: '/teams?unit=FOI_DIRECTORATE_HO_SCIENCE_ACCEPTANCE_TEAMS',
+            endpoint: '/teams?unit=FOI_DIRECTORATE_MIGRATION_AND_BORDERS_ACCEPTANCE_TEAMS',
+            type: listService.types.STATIC,
+            adapter: teamsAdapter
+        },
+        S_FOI_DIRECTORATE_HOMELAND_SECURITY_ACCEPTANCE_TEAMS: {
+            client: 'INFO',
+            endpoint: '/teams?unit=FOI_DIRECTORATE_HOMELAND_SECURITY_ACCEPTANCE_TEAMS',
             type: listService.types.STATIC,
             adapter: teamsAdapter
         },
@@ -230,33 +206,33 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: teamsAdapter
         },
-        S_FOI_DIRECTORATE_IMMIGRATION_ENFORCEMENT_ACCEPTANCE_TEAMS: {
+        S_FOI_DIRECTORATE_OTHER_ACCEPTANCE_TEAMS: {
             client: 'INFO',
-            endpoint: '/teams?unit=FOI_DIRECTORATE_IMMIGRATION_ENFORCEMENT_ACCEPTANCE_TEAMS',
+            endpoint: '/teams?unit=FOI_DIRECTORATE_OTHER_ACCEPTANCE_TEAMS',
             type: listService.types.STATIC,
             adapter: teamsAdapter
         },
-        S_FOI_DIRECTORATE_OSCT_ACCEPTANCE_TEAMS: {
+        S_FOI_DIRECTORATE_CUSTOMER_SERVICES_ACCEPTANCE_TEAMS: {
             client: 'INFO',
-            endpoint: '/teams?unit=FOI_DIRECTORATE_OSCT_ACCEPTANCE_TEAMS',
+            endpoint: '/teams?unit=FOI_DIRECTORATE_CUSTOMER_SERVICES_ACCEPTANCE_TEAMS',
             type: listService.types.STATIC,
             adapter: teamsAdapter
         },
-        S_FOI_DIRECTORATE_PRIVATE_OFFICE_ACCEPTANCE_TEAMS: {
+        S_FOI_DIRECTORATE_STARS_HO_CSA_ACCEPTANCE_TEAMS: {
             client: 'INFO',
-            endpoint: '/teams?unit=FOI_DIRECTORATE_PRIVATE_OFFICE_ACCEPTANCE_TEAMS',
+            endpoint: '/teams?unit=FOI_DIRECTORATE_STARS_HO_CSA_ACCEPTANCE_TEAMS',
             type: listService.types.STATIC,
             adapter: teamsAdapter
         },
-        S_FOI_DIRECTORATE_SOCG_ACCEPTANCE_TEAMS: {
+        S_FOI_DIRECTORATE_PUBLIC_SAFETY_ACCEPTANCE_TEAMS: {
             client: 'INFO',
-            endpoint: '/teams?unit=FOI_DIRECTORATE_SOCG_ACCEPTANCE_TEAMS',
+            endpoint: '/teams?unit=FOI_DIRECTORATE_PUBLIC_SAFETY_ACCEPTANCE_TEAMS',
             type: listService.types.STATIC,
             adapter: teamsAdapter
         },
-        S_FOI_DIRECTORATE_UKVI_ACCEPTANCE_TEAMS: {
+        S_FOI_DIRECTORATE_CORPORATE_ENABLERS_ACCEPTANCE_TEAMS: {
             client: 'INFO',
-            endpoint: '/teams?unit=FOI_DIRECTORATE_UKVI_ACCEPTANCE_TEAMS',
+            endpoint: '/teams?unit=FOI_DIRECTORATE_CORPORATE_ENABLERS_ACCEPTANCE_TEAMS',
             type: listService.types.STATIC,
             adapter: teamsAdapter
         },
