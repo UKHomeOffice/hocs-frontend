@@ -73,14 +73,7 @@ class WorkstackAllocate extends Component {
     constructor(props) {
         super(props);
         const { items, selectedCases = [], selectable, columns } = props;
-        this.state = {
-            selectable,
-            items,
-            selectedCases,
-            filter: '',
-            columns,
-            sort: { column: undefined, order: SortDirection.ASCENDING }
-        };
+        this.state = { selectable, items, selectedCases, filter: '', columns, sort: { column: undefined, order: SortDirection.ASCENDING } };
     }
 
     componentDidMount() {
@@ -299,8 +292,7 @@ class WorkstackAllocate extends Component {
                                 onChange={handleChange.bind(this)}
                                 className={'govuk-checkboxes__input'}
                             />
-                            <label className='govuk-label govuk-checkboxes__label'
-                                htmlFor={`selected_cases_${item.caseUUID}`}>
+                            <label className='govuk-label govuk-checkboxes__label' htmlFor={`selected_cases_${item.caseUUID}`}>
                                 <span className='govuk-visually-hidden'>{item.caseReference}</span>
                             </label>
                         </div>
@@ -317,8 +309,7 @@ class WorkstackAllocate extends Component {
         switch (column.renderer) {
             case ColumnRenderer.CASE_LINK:
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>
-                    <Link to={`/case/${row.caseUUID}/stage/${row.uuid}`}
-                        className='govuk-link govuk-!-margin-right-3'>{value}</Link>
+                    <Link to={`/case/${row.caseUUID}/stage/${row.uuid}`} className='govuk-link govuk-!-margin-right-3'>{value}</Link>
                 </td>;
             case ColumnRenderer.CORRESPONDENT_WITH_CASE_LINK:
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>
@@ -326,9 +317,8 @@ class WorkstackAllocate extends Component {
                         value.primaryCorrespondentFullName &&
                         <span className='govuk-!-font-weight-bold'>{value.primaryCorrespondentFullName}<br/></span>
                     }
-                    <Tags row={row}/>
-                    <Link to={`/case/${row.caseUUID}/stage/${row.uuid}`}
-                        className='govuk-link govuk-!-margin-right-3'>{value.caseReference}</Link>
+                    <Tags row={row} />
+                    <Link to={`/case/${row.caseUUID}/stage/${row.uuid}`} className='govuk-link govuk-!-margin-right-3'>{value.caseReference}</Link>
                 </td>;
             case ColumnRenderer.MP_WITH_OWNER:
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>
@@ -399,8 +389,7 @@ class WorkstackAllocate extends Component {
             case ColumnRenderer.WRAP_TEXT:
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell wrap-text'>{value}</td>;
             case ColumnRenderer.TRUNCATE_TEXT:
-                return <td key={row.uuid + column.dataValueKey}
-                    className='govuk-table__cell govuk-table__cell--truncated' title={value}>{value}</td>;
+                return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell govuk-table__cell--truncated' title={value}>{value}</td>;
             case ColumnRenderer.CONTRIBUTIONS_WARNING:
                 if (row.dueContribution && new Date(row.dueContribution) < new Date()) {
                     return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell indicator'>
@@ -419,8 +408,7 @@ class WorkstackAllocate extends Component {
         const { teamMembers } = this.props;
         return (
             <Fragment>
-                <Dropdown label='Allocate to a team member' name='selected_user' updateState={this.props.updateFormData}
-                    choices={teamMembers}/>
+                <Dropdown label='Allocate to a team member' name='selected_user' updateState={this.props.updateFormData} choices={teamMembers} />
                 <Submit label='Allocate' name='allocate_to_team_member' callback={this.props.updateFormData}/>
             </Fragment>
         );
@@ -431,8 +419,7 @@ class WorkstackAllocate extends Component {
 
         return (
             <Fragment>
-                <Dropdown label='Move to another team' name='selected_team' updateState={this.props.updateFormData}
-                    choices={moveTeamOptions}/>
+                <Dropdown label='Move to another team' name='selected_team' updateState={this.props.updateFormData} choices={moveTeamOptions} />
                 <Submit label='Move to team' name='move_team' callback={this.props.updateFormData}/>
             </Fragment>
         );
@@ -515,24 +502,14 @@ class WorkstackAllocate extends Component {
 
     render() {
         const { isMounted, items, selectable, columns } = this.state;
-        const {
-            baseUrl,
-            teamMembers,
-            moveTeamOptions,
-            submitHandler,
-            allocateToTeamEndpoint,
-            allocateToWorkstackEndpoint,
-            allocateToUserEndpoint
-        } = this.props;
+        const { baseUrl, teamMembers, moveTeamOptions, submitHandler, allocateToTeamEndpoint, allocateToWorkstackEndpoint, allocateToUserEndpoint } = this.props;
         return (
             <Fragment>
                 {isMounted && this.renderFilter()}
-                <br/>
+                <br />
                 <div className='govuk-grid-row'>
                     <div className='govuk-grid-column-full'>
-                        <form action={baseUrl + allocateToTeamEndpoint} method='POST'
-                            onSubmit={e => submitHandler(e, baseUrl + allocateToTeamEndpoint)}
-                            encType='multipart/form-data'>
+                        <form action={baseUrl + allocateToTeamEndpoint} method='POST' onSubmit={e => submitHandler(e, baseUrl + allocateToTeamEndpoint)} encType='multipart/form-data'>
                             <fieldset className='govuk-fieldset'>
                                 <div className='govuk-grid-row'>
                                     <div className='govuk-grid-column-full'>
@@ -564,18 +541,10 @@ class WorkstackAllocate extends Component {
                                     <div className='govuk-grid-column-one-third'>
                                         <ul className='govuk-list'>
                                             <li>
-                                                {allocateToUserEndpoint && LinkButton({
-                                                    label: 'Allocate selected to me',
-                                                    endpoint: (baseUrl + allocateToUserEndpoint),
-                                                    submitHandler
-                                                })}
+                                                {allocateToUserEndpoint && LinkButton({ label: 'Allocate selected to me', endpoint: (baseUrl + allocateToUserEndpoint), submitHandler })}
                                             </li>
                                             <li>
-                                                {allocateToWorkstackEndpoint && LinkButton({
-                                                    label: 'Unallocate selected',
-                                                    endpoint: (baseUrl + allocateToWorkstackEndpoint),
-                                                    submitHandler
-                                                })}
+                                                {allocateToWorkstackEndpoint && LinkButton({ label: 'Unallocate selected', endpoint: (baseUrl + allocateToWorkstackEndpoint), submitHandler })}
                                             </li>
                                             {this.renderTakeNextCaseButton()}
                                         </ul>
@@ -611,7 +580,7 @@ WorkstackAllocate.propTypes = {
 
 const WrappedWorkstackAllocate = props => (
     <ApplicationConsumer>
-        {({ track }) => <WorkstackAllocate {...props} track={track}/>}
+        {({ track }) => <WorkstackAllocate {...props} track={track} />}
     </ApplicationConsumer>
 );
 
