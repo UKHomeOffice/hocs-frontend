@@ -3,7 +3,7 @@ const User = require('../../models/user');
 const { formatDate } = require('../../libs/dateHelpers');
 
 const createAdditionalFields = async (additionalFields = [], fetchList) => {
-    var results = additionalFields
+    const results = additionalFields
         .map(field => formatValueOnType(field));
 
     for (var i = 0; i < results.length; i++) {
