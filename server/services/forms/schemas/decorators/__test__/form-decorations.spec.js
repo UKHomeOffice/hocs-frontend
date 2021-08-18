@@ -345,7 +345,7 @@ describe('Form schema decorations', function () {
                         }
                     },
                     {
-                        'component': 'dropdown',
+                        'component': 'type-ahead',
                         'validation': [
                             {
                                 'type': 'required'
