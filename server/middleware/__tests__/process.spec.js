@@ -613,4 +613,242 @@ describe('Process middleware', () => {
         processMiddleware(req, res, next);
         expect(req.form.data).toEqual({ testField: 'SomeRadioValue' });
     });
+    describe('when show/hide visibility props are passed through', () => {
+        it('should not process fields that are not visible with visibility function', () => {
+            const req = {
+                body: {
+                    'TestField1': 'Test',
+                    'TestField2': 'Blah',
+                },
+                query: {},
+                form: {
+                    schema: {
+                        fields: [
+                            {
+                                component: 'checkbox',
+                                validation: ['required'],
+                                props: {
+                                    name: 'TestField1',
+                                    label: 'Test Field 1',
+                                    choices: [
+                                        { label: 'A', value: 'Test' }
+                                    ]
+                                }
+                            },
+                            {
+                                component: 'text-area',
+                                validation: ['required'],
+                                props: {
+                                    name: 'TestField2',
+                                    label: 'Test Field 2',
+                                    visibilityConditions: [{
+                                        function: 'hasCommaSeparatedValue',
+                                        conditionPropertyName: 'TestField1',
+                                        conditionPropertyValue: 'Other'
+                                    }]
+                                }
+                            }
+                        ]
+                    }
+                }
+            };
+            const res = {};
+            processMiddleware(req, res, next);
+            expect(req.form.data).toEqual({ TestField1: 'Test' });
+        });
+        it('should process fields that are visible with visibility function', () => {
+            const req = {
+                body: {
+                    'TestField1': 'Test,Other',
+                    'TestField2': 'Blah',
+                },
+                query: {},
+                form: {
+                    schema: {
+                        fields: [
+                            {
+                                component: 'checkbox',
+                                validation: ['required'],
+                                props: {
+                                    name: 'TestField1',
+                                    label: 'Test Field 1',
+                                    choices: [
+                                        { label: 'A', value: 'Test' }
+                                    ]
+                                }
+                            },
+                            {
+                                component: 'text-area',
+                                validation: ['required'],
+                                props: {
+                                    name: 'TestField2',
+                                    label: 'Test Field 2',
+                                    visibilityConditions: [{
+                                        function: 'hasCommaSeparatedValue',
+                                        conditionPropertyName: 'TestField1',
+                                        conditionPropertyValue: 'Other'
+                                    }]
+                                }
+                            }
+                        ]
+                    }
+                }
+            };
+            const res = {};
+            processMiddleware(req, res, next);
+            expect(req.form.data).toEqual({ TestField1: 'Test,Other', TestField2: 'Blah' });
+        });
+        it('should process fields that are visible with visibility property condition', () => {
+            const req = {
+                body: {
+                    'TestField1': 'Other',
+                    'TestField2': 'Blah',
+                },
+                query: {},
+                form: {
+                    schema: {
+                        fields: [
+                            {
+                                component: 'text-area',
+                                validation: ['required'],
+                                props: {
+                                    name: 'TestField1',
+                                    label: 'Test Field 1'
+                                }
+                            },
+                            {
+                                component: 'text-area',
+                                validation: ['required'],
+                                props: {
+                                    name: 'TestField2',
+                                    label: 'Test Field 2',
+                                    visibilityConditions: [{
+                                        conditionPropertyName: 'TestField1',
+                                        conditionPropertyValue: 'Other'
+                                    }]
+                                }
+                            }
+                        ]
+                    }
+                }
+            };
+            const res = {};
+            processMiddleware(req, res, next);
+            expect(req.form.data).toEqual({ TestField1: 'Other', TestField2: 'Blah' });
+        });
+        it('should not process fields that are not visible with visibility property condition', () => {
+            const req = {
+                body: {
+                    'TestField1': 'OtherTEST',
+                    'TestField2': 'Blah',
+                },
+                query: {},
+                form: {
+                    schema: {
+                        fields: [
+                            {
+                                component: 'text-area',
+                                validation: ['required'],
+                                props: {
+                                    name: 'TestField1',
+                                    label: 'Test Field 1'
+                                }
+                            },
+                            {
+                                component: 'text-area',
+                                validation: ['required'],
+                                props: {
+                                    name: 'TestField2',
+                                    label: 'Test Field 2',
+                                    visibilityConditions: [{
+                                        conditionPropertyName: 'TestField1',
+                                        conditionPropertyValue: 'Other'
+                                    }]
+                                }
+                            }
+                        ]
+                    }
+                }
+            };
+            const res = {};
+            processMiddleware(req, res, next);
+            expect(req.form.data).toEqual({ TestField1: 'OtherTEST' });
+        });
+        it('should not process fields that are not visible with hide property condition', () => {
+            const req = {
+                body: {
+                    'TestField1': 'Other',
+                    'TestField2': 'Blah',
+                },
+                query: {},
+                form: {
+                    schema: {
+                        fields: [
+                            {
+                                component: 'text-area',
+                                validation: ['required'],
+                                props: {
+                                    name: 'TestField1',
+                                    label: 'Test Field 1'
+                                }
+                            },
+                            {
+                                component: 'text-area',
+                                validation: ['required'],
+                                props: {
+                                    name: 'TestField2',
+                                    label: 'Test Field 2',
+                                    hideConditions: [{
+                                        conditionPropertyName: 'TestField1',
+                                        conditionPropertyValue: 'Other'
+                                    }]
+                                }
+                            }
+                        ]
+                    }
+                }
+            };
+            const res = {};
+            processMiddleware(req, res, next);
+            expect(req.form.data).toEqual({ TestField1: 'Other' });
+        });
+        it('should not process fields that are visible with hide property condition', () => {
+            const req = {
+                body: {
+                    'TestField1': 'Other',
+                    'TestField2': 'Blah',
+                },
+                query: {},
+                form: {
+                    schema: {
+                        fields: [
+                            {
+                                component: 'text-area',
+                                validation: ['required'],
+                                props: {
+                                    name: 'TestField1',
+                                    label: 'Test Field 1'
+                                }
+                            },
+                            {
+                                component: 'text-area',
+                                validation: ['required'],
+                                props: {
+                                    name: 'TestField2',
+                                    label: 'Test Field 2',
+                                    hideConditions: [{
+                                        conditionPropertyName: 'TestField1',
+                                        conditionPropertyValue: 'OtherTest'
+                                    }]
+                                }
+                            }
+                        ]
+                    }
+                }
+            };
+            const res = {};
+            processMiddleware(req, res, next);
+            expect(req.form.data).toEqual({ TestField1: 'Other', TestField2: 'Blah' });
+        });
+    });
 });
