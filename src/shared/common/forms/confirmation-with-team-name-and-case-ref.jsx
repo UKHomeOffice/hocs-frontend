@@ -14,17 +14,20 @@ export default class ConfirmationWithTeamNameAndCaseRef extends Component {
             label,
             caseRef,
             choices,
-            data
+            data,
+            hasHeader
         } = this.props;
 
         const teamName = this.extractRequiredTeam(data, data.CurrentStage, choices);
 
         return (
             <div>
-                <div className="govuk-panel govuk-panel--confirmation">
-                    <div className="govuk-panel__body">Case {label}: {teamName}
+                {hasHeader &&
+                    <div className="govuk-panel govuk-panel--confirmation">
+                        <div className="govuk-panel__body">Case {label}: {teamName}
+                        </div>
                     </div>
-                </div>
+                }
                 <h2 className="govuk-heading-m">
                     Case {caseRef} {label} {teamName}
                 </h2>
@@ -37,7 +40,8 @@ ConfirmationWithTeamNameAndCaseRef.propTypes = {
     label: PropTypes.string,
     caseRef: PropTypes.string,
     choices: PropTypes.array,
-    data: PropTypes.object
+    data: PropTypes.object,
+    hasHeader: PropTypes.bool
 };
 
 const StageTeamTypes = {
