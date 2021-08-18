@@ -2,15 +2,6 @@
 
 exports[`Panel component should render with default props 1`] = `
 <div>
-  <div
-    class="govuk-panel govuk-panel--confirmation"
-  >
-    <div
-      class="govuk-panel__body"
-    >
-      Case : 
-    </div>
-  </div>
   <h2
     class="govuk-heading-m"
   >
@@ -20,6 +11,16 @@ exports[`Panel component should render with default props 1`] = `
 `;
 
 exports[`Panel component should render with title and team name when passed 1`] = `
+<div>
+  <h2
+    class="govuk-heading-m"
+  >
+    Case test-case-ref completed FOI BICSPI Acceptance Team
+  </h2>
+</div>
+`;
+
+exports[`Panel component should render with title, team name and header box when passed 1`] = `
 <div>
   <div
     class="govuk-panel govuk-panel--confirmation"
