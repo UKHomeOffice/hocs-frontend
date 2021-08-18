@@ -30,8 +30,7 @@ const renderChangeEntityLink = (child, page, value, caseType) => {
 
 const ReviewField = ({ name, type, value, child, switchDirection, direction, page, caseType }) => {
     let textValue = value;
-
-    if (child.component === 'radio' || child.component === 'dropdown' || child.component === 'entity-list') {
+    if (child.component === 'radio' || child.component === 'dropdown' || child.component === 'entity-list' || child.component === 'type-ahead') {
         textValue = findLabelByValue(child.props.choices, value);
     } else if (child.component === 'date') {
         const date = new Date(value);

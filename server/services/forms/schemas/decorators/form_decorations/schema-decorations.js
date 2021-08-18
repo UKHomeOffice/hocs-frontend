@@ -168,7 +168,7 @@ module.exports = {
                                 .build()
                         )
                         .withField(
-                            Component('dropdown', 'Topics')
+                            Component('type-ahead', 'Topics')
                                 .withValidator('required')
                                 .withProp('label', 'Case Topic')
                                 .withProp('choices', 'TOPICS_FOI')
