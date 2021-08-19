@@ -3,6 +3,7 @@ const axiosRetry = require('axios-retry');
 const https = require('https');
 const fs = require('fs');
 const getLogger = require('../libs/logger');
+const { backendRequestRetries } = require('../config');
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -28,7 +29,7 @@ function createClient({ baseURL, auth }) {
     });
 
     //Retry 3 times with 5 second gaps
-    axiosRetry(client, { retries: 3, retryDelay: () => { return 5000; } });
+    axiosRetry(client, { retries: backendRequestRetries, retryDelay: () => { return 5000; } });
 
     //Warn about retries
     client.interceptors.request.use(request => {
