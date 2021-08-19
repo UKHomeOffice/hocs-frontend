@@ -74,7 +74,7 @@ const createReducer = (data, req) => (reducer, field) => {
     return reducer;
 };
 
-const unwantedFormData = (field) => {
+const byAcceptedFormData = (field) => {
     return field.type !== 'display' &&
         field.type !== 'somu-list';
 };
@@ -84,7 +84,7 @@ function processMiddleware(req, res, next) {
         const data = req.body;
         const { schema } = req.form;
         req.form.data = schema.fields
-            .filter(field => unwantedFormData(field))
+            .filter(byAcceptedFormData)
             .reduce(createReducer(data, req), {});
     } catch (error) {
         return next(new FormSubmissionError('Unable to process form data'));
