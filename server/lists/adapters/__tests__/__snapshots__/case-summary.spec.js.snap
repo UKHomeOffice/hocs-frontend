@@ -215,6 +215,11 @@ Object {
       "label": "Test additional field date",
       "value": "01/01/2020",
     },
+    Object {
+      "choices": undefined,
+      "label": "Test additional field checkbox",
+      "value": "this, is, a, test",
+    },
   ],
   "case": Object {
     "created": "03/02/2019",

@@ -67,7 +67,8 @@ describe('Case Summary Adapter', () => {
             caseDeadline: '2020-01-01',
             additionalFields: [
                 { label: 'Test field', value: 'TEST' },
-                { label: 'Test additional field date', value: '2020-01-01', type: 'date' }
+                { label: 'Test additional field date', value: '2020-01-01', type: 'date' },
+                { label: 'Test additional field checkbox', value: 'this,is,a,test', type: 'checkbox' },
             ],
             primaryTopic: { label: 'Topic A' },
             primaryCorrespondent: {

@@ -599,6 +599,123 @@ describe('Validation middleware', () => {
         expect(next.mock.calls[0][0]).not.toBeInstanceOf(Error);
         expect(next.mock.calls[0][0]).not.toBeInstanceOf(ValidationError);
     });
+    it('should validate when visibilityConditions function has been specified', () => {
+        const req = {
+            form: {
+                data: {
+                    TestCheckbox: 'Test,Other'
+                },
+                schema: {
+                    title: 'Some title',
+                    defaultActionLabel: 'Continue',
+                    fields: [
+                        {
+                            validation: ['required'],
+                            props: {
+                                visibilityConditions: [
+                                    {
+                                        function: 'hasCommaSeparatedValue',
+                                        conditionPropertyName: 'TestCheckbox',
+                                        conditionPropertyValue: 'Other'
+                                    },
+                                ],
+                                name: 'OtherFieldText',
+                                label: 'Value',
+                                sections: {},
+                                items: {},
+                            },
+                            validationSuppressor: {}
+                        },
+                    ]
+                }
+            },
+        };
+
+        validationMiddleware(req, res, next);
+
+        expect(req.form).toBeDefined();
+        expect(next).toHaveBeenCalled();
+        expect(next.mock.calls[0][0]).toBeInstanceOf(ValidationError);
+        expect(next.mock.calls[0][0].fields).toEqual({ OtherFieldText: 'Value is required' });
+    });
+    it('should not validate when visibilityConditions function has been specified but not satisfied', () => {
+        const req = {
+            form: {
+                data: {
+                    TestCheckbox: 'Test,Anything'
+                },
+                schema: {
+                    title: 'Some title',
+                    defaultActionLabel: 'Continue',
+                    fields: [
+                        {
+                            validation: ['required'],
+                            props: {
+                                visibilityConditions: [
+                                    {
+                                        function: 'hasCommaSeparatedValue',
+                                        conditionPropertyName: 'TestCheckbox',
+                                        conditionPropertyValue: 'Other'
+                                    },
+                                ],
+                                name: 'OtherFieldText',
+                                label: 'Value',
+                                sections: {},
+                                items: {},
+                            },
+                            validationSuppressor: {}
+                        },
+                    ]
+                }
+            },
+        };
+
+        validationMiddleware(req, res, next);
+
+        expect(req.form).toBeDefined();
+        expect(next).toHaveBeenCalled();
+        expect(next.mock.calls[0][0]).not.toBeInstanceOf(Error);
+        expect(next.mock.calls[0][0]).not.toBeInstanceOf(ValidationError);
+    });
+    it('should not validate when visibilityConditions function has been specified does not exist', () => {
+        const req = {
+            form: {
+                data: {
+                    TestCheckbox: 'Test,Other'
+                },
+                schema: {
+                    title: 'Some title',
+                    defaultActionLabel: 'Continue',
+                    fields: [
+                        {
+                            validation: ['required'],
+                            props: {
+                                visibilityConditions: [
+                                    {
+                                        function: 'testFunctionNotExist',
+                                        conditionPropertyName: 'TestCheckbox',
+                                        conditionPropertyValue: 'Other'
+                                    },
+                                ],
+                                name: 'OtherFieldText',
+                                label: 'Value',
+                                sections: {},
+                                items: {},
+                            },
+                            validationSuppressor: {}
+                        },
+                    ]
+                }
+            },
+        };
+
+        validationMiddleware(req, res, next);
+
+        expect(req.form).toBeDefined();
+        expect(next).toHaveBeenCalled();
+        expect(next.mock.calls[0][0]).not.toBeInstanceOf(Error);
+        expect(next.mock.calls[0][0]).not.toBeInstanceOf(ValidationError);
+    });
     it('should validate if radio button has conditionalContent', () => {
         const req = {
             form: {
