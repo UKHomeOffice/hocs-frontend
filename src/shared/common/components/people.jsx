@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import axios from 'axios';
 import { ApplicationConsumer } from '../../contexts/application.jsx';
-import { clearApiStatus, unsetCorrespondents, updateApiStatus } from '../../contexts/actions/index';
+import { clearApiStatus, unsetCorrespondents, updateApiStatus } from '../../contexts/actions/index.jsx';
 import status from '../../helpers/api-status.js';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
