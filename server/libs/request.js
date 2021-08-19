@@ -1,6 +1,8 @@
 const axios = require('axios');
+const axiosRetry = require('axios-retry');
 const https = require('https');
 const fs = require('fs');
+const getLogger = require('../libs/logger');
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -17,10 +19,23 @@ const getHttpsClient = () => {
 
 function createClient({ baseURL, auth }) {
 
+    const logger = getLogger();
+
     const client = axios.create({
         baseURL,
         auth,
         httpsAgent: isProduction ? getHttpsClient() : null
+    });
+
+    //Retry 3 times with 5 second gaps
+    axiosRetry(client, { retries: 3, retryDelay: () => { return 5000; } });
+
+    //Warn about retries
+    client.interceptors.request.use(request => {
+        if('axios-retry' in request){
+            logger.warn('REQUESTRETRY', { url: request.url, retryCount: request['axios-retry'].retryCount });
+        }
+        return request;
     });
 
     return {
