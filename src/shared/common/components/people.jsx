@@ -1,11 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import axios from 'axios';
 import { ApplicationConsumer } from '../../contexts/application.jsx';
-import {
-    updateApiStatus,
-    unsetCorrespondents,
-    clearApiStatus
-} from '../../contexts/actions/index.jsx';
+import { clearApiStatus, unsetCorrespondents, updateApiStatus } from '../../contexts/actions/index';
 import status from '../../helpers/api-status.js';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
@@ -52,7 +48,7 @@ class People extends Component {
         return (
             <Fragment key={person.uuid}>
                 <h2 className='govuk-heading-m'>
-                    {this.toTitleCase(person.type) + (person.isPrimary ? ' (primary)' : '')}
+                    {this.getTitle(person)}
                 </h2>
                 <table className='govuk-table margin-left--small'>
                     <tbody className='govuk-table__body'>
@@ -105,21 +101,29 @@ class People extends Component {
         const { page } = this.props;
         return (
             <Fragment>
-                <Link className='govuk-body govuk-link' to={`/case/${page.params.caseId}/stage/${page.params.stageId}/entity/people/manage`} >Manage People</Link>
-                {correspondents &&  correspondents[0] !== null &&
+                <Link className='govuk-body govuk-link'
+                    to={`/case/${page.params.caseId}/stage/${page.params.stageId}/entity/people/manage`}>Manage
+                    People</Link>
+                {correspondents && correspondents[0] !== null &&
                 correspondents.map(person => this.renderPerson(person))
                 }
             </Fragment>
         );
     }
 
-    toTitleCase(str) {
-        return str.replace(
-            /\w\S*/g,
-            function (txt) {
-                return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-            }
-        );
+    getTitle({ type, typeDisplayName, isPrimary }) {
+        let title;
+
+        if (typeDisplayName) {
+            title = typeDisplayName;
+        } else {
+            title = type.replace(/\w\S*/g,
+                (txt) => {
+                    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                });
+        }
+
+        return title + (isPrimary ? ' (primary)' : '');
     }
 }
 
