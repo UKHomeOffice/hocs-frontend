@@ -76,6 +76,11 @@ const createReducer = (data, req) => (reducer, field) => {
     return reducer;
 };
 
+const byAcceptedFormData = (field) => {
+    return field.type !== 'display' &&
+        field.type !== 'somu-list';
+};
+
 function processMiddleware(req, res, next) {
     try {
         const data = req.body;
@@ -83,7 +88,7 @@ function processMiddleware(req, res, next) {
         const { schema } = req.form;
 
         req.form.data = schema.fields
-            .filter(field => field.type !== 'display')
+            .filter(byAcceptedFormData)
             .filter(field => isFieldVisible(field.props, data))
             .reduce(createReducer(data, req), {});
     } catch (error) {
