@@ -19,7 +19,7 @@ module.exports = async options => {
                 .withValidator('required')
                 .withValidator('isValidDate')
                 .withValidator('isBeforeToday')
-                .withProp('label', 'Contribution request date')
+                .withProp('label', 'Approval request date')
                 .build()
         )
         .withField(
