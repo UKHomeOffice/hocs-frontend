@@ -34,7 +34,7 @@ function createClient({ baseURL, auth }) {
     //Warn about retries
     client.interceptors.request.use(request => {
         if('axios-retry' in request){
-            logger.warn('REQUESTRETRY', { url: request.url, retryCount: request['axios-retry'].retryCount });
+            logger.warn('REQUESTRETRY', { url: request.url, retryCount: request['axios-retry'].retryCount,  xCorrelationId: request.headers['X-Correlation-Id'] });
         }
         return request;
     });

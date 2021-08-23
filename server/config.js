@@ -2,7 +2,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 const workflowAuth = (process.env.WORKFLOW_BASIC_AUTH || 'UNSET:UNSET').split(':');
 const isNotProd = process.env.IS_NOTPROD === '1';
 const showStackTraceInErrorPage = process.env.SHOW_STACKTRACE_ON_ERROR_PAGE === '1';
-const backendRequestRetries = process.env.BACKEND_REQUEST_RETRIES || 0;
+const backendRequestRetries = process.env.BACKEND_REQUEST_RETRIES || 3;
 
 const config = {
     applications: {
