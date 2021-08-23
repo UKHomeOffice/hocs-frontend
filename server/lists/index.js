@@ -443,12 +443,6 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
-        SECRETARIAT_LIST: {
-            client: 'INFO',
-            endpoint: '/entity/list/SECRETARIAT_LIST',
-            type: listService.types.STATIC,
-            adapter: entityListItemsAdapter
-        },
     },
     clients: {
         CASEWORK: caseworkService,
