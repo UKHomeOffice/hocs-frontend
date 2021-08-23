@@ -1,6 +1,12 @@
 const { addDays, formatDate } = require('../../libs/dateHelpers');
 
-const byCaseReference = (a, b) => a.caseReference.localeCompare(b.caseReference);
+const byCaseReference = (a, b) => {
+    if (a.caseReference == null || b.caseReference == null) {
+        return 0;
+    }
+
+    return a.caseReference.localeCompare(b.caseReference);
+};
 
 const byPriority = (a, b) => {
     if (a.data.systemCalculatedPriority == undefined || b.data.systemCalculatedPriority == undefined) {
@@ -278,14 +284,14 @@ const bindDashboardElements = fromStaticList => async (stage) => {
     return stage;
 };
 
-const userAdapter = async (data, { fromStaticList, logger, user, configuration }) => {
+const userAdapter = async (data, { fromStaticList, logger, configuration }) => {
     const workstackData = await Promise.all(data.stages
-        .filter(byWorkable)
-        .filter(stage => stage.userUUID === user.uuid)
         .sort(defaultCaseSort)
         .sort(tagSort)
         .map(bindDisplayElements(fromStaticList)));
+
     logger.debug('REQUEST_USER_WORKSTACK', { user_cases: workstackData.length });
+
     return {
         label: 'My Cases',
         items: workstackData,

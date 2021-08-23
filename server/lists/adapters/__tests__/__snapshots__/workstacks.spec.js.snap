@@ -658,15 +658,6 @@ Object {
 }
 `;
 
-exports[`User Workstack Adapter should hide unworkable 1`] = `
-Object {
-  "allocateToWorkstackEndpoint": "/unallocate/",
-  "columns": Array [],
-  "items": Array [],
-  "label": "My Cases",
-}
-`;
-
 exports[`User Workstack Adapter should transform a stage array to a user workstack schema 1`] = `
 Object {
   "allocateToWorkstackEndpoint": "/unallocate/",
@@ -680,6 +671,7 @@ Object {
       "assignedUserDisplay": "MOCK_USER",
       "caseType": "DEFAULT",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "data": Object {},
       "deadline": "2200-01-01",
       "deadlineDisplay": "01/01/2200",
       "mpWithOwnerDisplay": Object {
@@ -694,6 +686,49 @@ Object {
       "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE",
       "teamUUID": 1,
       "userUUID": 1,
+    },
+    Object {
+      "active": true,
+      "assignedTeamDisplay": "MOCK_TEAM",
+      "assignedUserDisplay": "MOCK_USER",
+      "caseType": "WCS",
+      "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "data": Object {},
+      "deadline": "2200-01-02",
+      "deadlineDisplay": "02/01/2200",
+      "mpWithOwnerDisplay": Object {
+        "mp": "",
+        "owner": "MOCK_USER",
+      },
+      "primaryCorrespondentAndRefDisplay": Object {
+        "caseReference": undefined,
+      },
+      "stageType": "A",
+      "stageTypeDisplay": "MOCK_STAGETYPE",
+      "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE",
+      "teamUUID": 2,
+      "userUUID": 2,
+    },
+    Object {
+      "active": false,
+      "assignedTeamDisplay": "MOCK_TEAM",
+      "caseType": "WCS",
+      "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "data": Object {},
+      "deadline": "2200-01-03",
+      "deadlineDisplay": "03/01/2200",
+      "mpWithOwnerDisplay": Object {
+        "mp": "",
+        "owner": undefined,
+      },
+      "primaryCorrespondentAndRefDisplay": Object {
+        "caseReference": undefined,
+      },
+      "stageType": "A",
+      "stageTypeDisplay": "Closed",
+      "stageTypeWithDueDateDisplay": "Closed",
+      "teamUUID": 2,
+      "userUUID": null,
     },
   ],
   "label": "My Cases",
