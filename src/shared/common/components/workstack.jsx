@@ -159,7 +159,7 @@ class WorkstackAllocate extends Component {
 
         // if the result is an empty object and it hasn't been handled by an adapter
         // turn it into an empty string to avoid an error
-        if (typeof value === 'object' && Object.keys(value).length === 0) {
+        if (value && typeof value === 'object' && Object.keys(value).length === 0) {
             return '';
         }
 
