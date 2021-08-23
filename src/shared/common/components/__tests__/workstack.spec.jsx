@@ -57,7 +57,7 @@ describe('Workstack component', () => {
             },
             {
                 caseReference: 'case6', caseUUID: 'case_uuid-klm', uuid: 'stage_uuid-447', fullName: 'Bet Linch',
-                stageTypeDisplay: 'Stage F', assignedUserDisplay: 'User5', assignedTeamDisplay: 'team6',
+                stageTypeDisplay: 'Stage F', assignedUserDisplay: 'User6', assignedTeamDisplay: 'team6',
                 created: null, isActive: 'YES', stageType: 'MPAM_DRAFT',
                 primaryCorrespondent: { fullname: 'Mrs Linch', postcode: null },
                 data: {
@@ -66,9 +66,18 @@ describe('Workstack component', () => {
                 }
             },
             {
-                caseReference: 'case6', caseUUID: 'case_uuid-klm', uuid: 'stage_uuid-448', fullName: 'My Name',
-                stageTypeDisplay: 'Stage F', assignedUserDisplay: 'User5', assignedTeamDisplay: 'team6',
+                caseReference: 'case7', caseUUID: 'case_uuid-opq', uuid: 'stage_uuid-448', fullName: 'My Name',
+                stageTypeDisplay: 'Stage F', assignedUserDisplay: 'User7', assignedTeamDisplay: 'team7',
                 created: null, isActive: 'YES', stageType: 'MPAM_DRAFT',
+                data: {
+                    CaseContributions: '[{"data":{"contributionDueDate":"2020-12-12", "contributionStatus": "TEST"}}]',
+                    DueDate: '2021-01-01'
+                }
+            },
+            {
+                caseReference: 'case8', caseUUID: 'case_uuid-klm', uuid: 'stage_uuid-432', fullName: 'Correspondent 8',
+                stageTypeDisplay: 'Stage B', assignedUserDisplay: 'User8', assignedTeamDisplay: null,
+                created: null, isActive: 'YES', stageType: 'FOI_DRAFT',
                 data: {
                     CaseContributions: '[{"data":{"contributionDueDate":"2020-12-12", "contributionStatus": "TEST"}}]',
                     DueDate: '2021-01-01'
@@ -134,7 +143,7 @@ describe('Workstack component', () => {
         const links = WRAPPER.find('th.govuk-link');
         expect(links).toHaveLength(11);
         links.first().simulate('click');
-        expect(arraySortSpy).toHaveBeenCalledTimes(27);
+        expect(arraySortSpy).toHaveBeenCalledTimes(33);
         expect(WRAPPER).toMatchSnapshot();
     });
 
@@ -147,7 +156,7 @@ describe('Workstack component', () => {
         expect(links).toHaveLength(11);
         links.first().simulate('click');
         links.first().simulate('click');
-        expect(arraySortSpy).toHaveBeenCalledTimes(36);
+        expect(arraySortSpy).toHaveBeenCalledTimes(44);
         expect(WRAPPER).toMatchSnapshot();
     });
 
