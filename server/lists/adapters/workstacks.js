@@ -30,20 +30,15 @@ const byWorkable = (stage) => {
         if (stage.data.Unworkable) {
             if (stage.data.Unworkable === 'True') {
                 return 0;
-            } else {
-                return 1;
             }
-        } else {
-            return 1;
         }
-    } else {
-        return 1;
     }
+    return 1;
 };
 
 const defaultCaseSort = (a, b) => {
-    var sortResult = byPriority(a, b);
-    if (sortResult == 0) {
+    let sortResult = byPriority(a, b);
+    if (sortResult === 0) {
         sortResult = byCaseReference(a, b);
     }
     return sortResult;
