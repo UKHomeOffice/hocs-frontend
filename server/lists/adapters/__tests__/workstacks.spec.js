@@ -4,8 +4,6 @@ const {
     teamAdapter,
     workflowAdapter,
     stageAdapter,
-    decorateContributionsWithStatus,
-    highestPriorityContributionStatus,
     byTag
 } = require('../workstacks');
 const { getUtcDateString } = require('../../../libs/dateHelpers');
@@ -949,9 +947,7 @@ describe('Workflow Workstack Adapter', () => {
                         deadline: '2200-01-03',
                         caseReference: 'A/1234568/19',
                         active: true,
-                        data: {
-                            CaseContributions: '[{"data": {"contributionDueDate":"2020-12-12"}}]'
-                        }
+                        dueContribution: '2020-12-12'
                     }
                 ]
             };
@@ -978,10 +974,7 @@ describe('Workflow Workstack Adapter', () => {
                     userUUID: 2,
                     deadline: '2200-01-03',
                     caseReference: 'A/1234568/19',
-                    active: true,
-                    data: {
-                        CaseContributions: '[{}]'
-                    }
+                    active: true
                 }
             ]
         };
@@ -1008,10 +1001,7 @@ describe('Workflow Workstack Adapter', () => {
                     userUUID: 2,
                     deadline: '2200-01-03',
                     caseReference: 'A/1234568/19',
-                    active: true,
-                    data: {
-                        CaseContributions: '[{}]'
-                    }
+                    active: true
                 }
             ]
         };
@@ -1041,10 +1031,7 @@ describe('Workflow Workstack Adapter', () => {
                     userUUID: 2,
                     deadline: '2200-01-03',
                     caseReference: 'A/1234568/19',
-                    active: true,
-                    data: {
-                        CaseContributions: '[{}]',
-                    }
+                    active: true
                 }
             ]
         };
@@ -1078,9 +1065,6 @@ describe('Workflow Workstack Adapter', () => {
                     deadline: '2200-01-03',
                     caseReference: 'COMP/1234568/19',
                     active: true,
-                    data: {
-                        CaseContributions: '[{}]',
-                    }
                 }
             ]
         };
@@ -1108,10 +1092,7 @@ describe('Workflow Workstack Adapter', () => {
                         userUUID: 2,
                         deadline: '2200-01-03',
                         caseReference: 'A/1234568/19',
-                        active: true,
-                        data: {
-                            CaseContributions: '[{"data": {"contributionDueDate":"2020-12-12", "contributionStatus":"blah"}}]'
-                        }
+                        active: true
                     }
                 ]
             };
@@ -1141,9 +1122,7 @@ describe('Workflow Workstack Adapter', () => {
                         deadline: '2200-01-03',
                         caseReference: 'A/1234568/19',
                         active: true,
-                        data: {
-                            CaseContributions: '[{"data": {"contributionDueDate":"2020-12-12"}}]'
-                        }
+                        dueContribution: '2020-12-12'
                     }
                 ]
             };
@@ -1172,10 +1151,7 @@ describe('Workflow Workstack Adapter', () => {
                         userUUID: 2,
                         deadline: '2200-01-03',
                         caseReference: 'A/1234568/19',
-                        active: true,
-                        data: {
-                            CaseContributions: '[{"data": {"contributionDueDate":"2020-12-12", "contributionStatus": "TEST"}}]'
-                        }
+                        active: true
                     }
                 ]
             };
@@ -1205,9 +1181,7 @@ describe('Workflow Workstack Adapter', () => {
                         deadline: '2200-01-03',
                         caseReference: 'A/1234568/19',
                         active: true,
-                        data: {
-                            CaseContributions: '[{"data": {"contributionDueDate":"2020-12-12"}}]'
-                        }
+                        dueContribution: '2020-12-12'
                     }
                 ]
             };
@@ -1236,10 +1210,7 @@ describe('Workflow Workstack Adapter', () => {
                         userUUID: 2,
                         deadline: '2200-01-03',
                         caseReference: 'A/1234568/19',
-                        active: true,
-                        data: {
-                            CaseContributions: '[{"data": {"contributionDueDate":"2020-12-12", "contributionStatus": "TEST"}}]'
-                        }
+                        active: true
                     }
                 ]
             };
@@ -1269,8 +1240,8 @@ describe('Workflow Workstack Adapter', () => {
                         deadline: '2200-01-03',
                         caseReference: 'A/1234568/19',
                         active: true,
+                        dueContribution: '2020-12-12',
                         data: {
-                            CaseContributions: '[{"data": {"contributionDueDate":"2020-12-12"}}]',
                             DueDate: '2020-12-10'
                         }
                     }
@@ -1289,71 +1260,6 @@ describe('Workflow Workstack Adapter', () => {
 
             expect(result).toMatchSnapshot();
         });
-
-});
-
-describe('decorateContributionsWithStatus', () => {
-    it('returns the decorated contributions with statuses', () => {
-        const currentDate = new Date('2021-06-18 12:30');
-
-        const contributionOne = '{"contributionRequestDate":"2021-06-18","contributionDueDate":"2021-06-02","contributionStatus":"contributionReceived"}';
-        const contributionTwo = '{"contributionDueDate":"2021-06-20","contributionRequestDate":"2021-06-18"}';
-        const contributionThree = '{"contributionDueDate":"2021-06-02","contributionRequestDate":"2021-06-18"}';
-        const contributionFour = '{"contributionDueDate":"2021-06-02","contributionRequestDate":"2021-06-18","contributionStatus":"contributionCancelled"}';
-        const array = '{"caseContributions":[]}';
-
-        const obj = JSON.parse(array);
-        obj['caseContributions'].push(contributionOne);
-        obj['caseContributions'].push(contributionTwo);
-        obj['caseContributions'].push(contributionThree);
-        obj['caseContributions'].push(contributionFour);
-
-        const result = decorateContributionsWithStatus(obj.caseContributions, currentDate);
-        expect(result[0].contributionStatus).toEqual('contributionReceived');
-        expect(result[1].contributionStatus).toEqual('contributionDue');
-        expect(result[2].contributionStatus).toEqual('contributionOverdue');
-        expect(result[3].contributionStatus).toEqual('contributionCancelled');
-    });
-});
-
-describe('highestPriorityContribution', () => {
-    it('returns the highest priority contribution', () => {
-        let contributions = '[{"contributionRequestDate":"2021-06-18","contributionDueDate":"2021-06-02","contributionStatus":"contributionReceived"},' +
-            '{"contributionDueDate":"2021-06-20","contributionRequestDate":"2021-06-18","contributionStatus":"contributionDue"},' +
-            '{"contributionDueDate":"2021-06-02","contributionRequestDate":"2021-06-18","contributionStatus":"contributionOverdue"},' +
-            '{"contributionDueDate":"2021-06-02","contributionRequestDate":"2021-06-18","contributionStatus":"contributionCancelled"}]';
-
-        let result = highestPriorityContributionStatus(JSON.parse(contributions));
-
-        expect(result).toEqual('contributionOverdue');
-
-        contributions = '[{"contributionRequestDate":"2021-06-18","contributionDueDate":"2021-06-02","contributionStatus":"contributionReceived"},' +
-            '{"contributionDueDate":"2021-06-20","contributionRequestDate":"2021-06-18","contributionStatus":"contributionDue"},' +
-            '{"contributionDueDate":"2021-06-02","contributionRequestDate":"2021-06-18","contributionStatus":"contributionCancelled"}]';
-
-        result = highestPriorityContributionStatus(JSON.parse(contributions));
-
-        expect(result).toEqual('contributionDue');
-
-        contributions = '[{"contributionRequestDate":"2021-06-18","contributionDueDate":"2021-06-02","contributionStatus":"contributionReceived"},' +
-            '{"contributionDueDate":"2021-06-02","contributionRequestDate":"2021-06-18","contributionStatus":"contributionCancelled"}]';
-
-        result = highestPriorityContributionStatus(JSON.parse(contributions));
-
-        expect(result).toEqual('contributionCancelled');
-
-        contributions = '[{"contributionRequestDate":"2021-06-18","contributionDueDate":"2021-06-02","contributionStatus":"contributionReceived"}]';
-
-        result = highestPriorityContributionStatus(JSON.parse(contributions));
-
-        expect(result).toEqual('contributionReceived');
-
-        contributions = '[{"contributionRequestDate":"2021-06-18","contributionDueDate":"2021-06-02","contributionStatus":"thisIsWrong"}]';
-
-        result = highestPriorityContributionStatus(JSON.parse(contributions));
-
-        expect(result).toEqual('');
-    });
 
     describe('Sort cases by tags', () => {
         it('Should return -1 if case a has tags and case b has no tags', () => {
@@ -1395,4 +1301,5 @@ describe('highestPriorityContribution', () => {
             expect(result).toEqual(0);
         });
     });
+
 });

@@ -242,7 +242,7 @@ class WorkstackAllocate extends Component {
     }
 
     renderHeader(column) {
-        if(column.sortStrategy === 'noSort') {
+        if (column.sortStrategy === 'noSort') {
             return (
                 <th className='govuk-table__header' key={column.displayName}>
                     {column.renderer !== ColumnRenderer.INDICATOR_BLUE && column.renderer !== ColumnRenderer.INDICATOR_GREEN && column.renderer !== ColumnRenderer.INDICATOR_RED && column.displayName}
@@ -355,20 +355,12 @@ class WorkstackAllocate extends Component {
                 </td>;
             }
             case ColumnRenderer.DUE_DATE_WARNING:
-                if (row.data.CaseContributions) {
-                    const dueContribution = JSON.parse(row.data.CaseContributions)
-                        .filter(contribution => contribution.data && !contribution.data.contributionStatus)
-                        .map(contribution => contribution.data.contributionDueDate)
-                        .sort()
-                        .shift();
-
-                    if (dueContribution && new Date(dueContribution) <= new Date()) {
-                        return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell date-warning'>
-                            <span>{value}</span>
-                        </td>;
-                    }
+                if (row.dueContribution && new Date(row.dueContribution) <= new Date()) {
+                    return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell date-warning'>
+                        <span>{value}</span>
+                    </td>;
                 }
-                if (row.data.DueDate) {
+                if (row.data && row.data.DueDate) {
                     if (new Date(row.data.DueDate) <= new Date()) {
                         return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell date-warning'>
                             <span>{value}</span>
@@ -399,20 +391,12 @@ class WorkstackAllocate extends Component {
             case ColumnRenderer.TRUNCATE_TEXT:
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell govuk-table__cell--truncated' title={value}>{value}</td>;
             case ColumnRenderer.CONTRIBUTIONS_WARNING:
-                if (row.somu && row.somu.caseContributions) {
-                    const dueContribution = row.somu.caseContributions
-                        .map(contribution => JSON.parse(contribution))
-                        .filter(contribution => !contribution.contributionStatus)
-                        .map(contribution => contribution.contributionDueDate)
-                        .sort()
-                        .shift();
-                    if (dueContribution && new Date(dueContribution) < new Date()) {
-                        return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell indicator'>
-                            {value && <span title={value} className='indicator-red'>
-                                {value}
-                            </span>}
-                        </td>;
-                    }
+                if (row.dueContribution && new Date(row.dueContribution) < new Date()) {
+                    return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell indicator'>
+                        {value && <span title={value} className='indicator-red'>
+                            {value}
+                        </span>}
+                    </td>;
                 }
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>{value}</td>;
             default:

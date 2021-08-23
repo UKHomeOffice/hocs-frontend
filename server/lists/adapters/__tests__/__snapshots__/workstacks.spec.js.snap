@@ -724,9 +724,6 @@ Object {
           },
         ],
       },
-      "data": Object {
-        "CaseContributions": "[{}]",
-      },
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
       "memberCorrespondentDisplay": "",
@@ -785,9 +782,6 @@ Object {
             "uuid": "uuid456",
           },
         ],
-      },
-      "data": Object {
-        "CaseContributions": "[{}]",
       },
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
@@ -1207,11 +1201,11 @@ Object {
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
       "data": Object {
-        "CaseContributions": "[{\\"data\\": {\\"contributionDueDate\\":\\"2020-12-12\\"}}]",
         "DueDate": "2020-12-10",
       },
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
+      "dueContribution": "2020-12-12",
       "mpWithOwnerDisplay": Object {
         "mp": "",
         "owner": "MOCK_USER",
@@ -1245,11 +1239,9 @@ Object {
       "caseReference": "A/1234568/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "data": Object {
-        "CaseContributions": "[{\\"data\\": {\\"contributionDueDate\\":\\"2020-12-12\\"}}]",
-      },
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
+      "dueContribution": "2020-12-12",
       "mpWithOwnerDisplay": Object {
         "mp": "",
         "owner": "MOCK_USER",
@@ -1283,11 +1275,9 @@ Object {
       "caseReference": "A/1234568/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "data": Object {
-        "CaseContributions": "[{\\"data\\": {\\"contributionDueDate\\":\\"2020-12-12\\"}}]",
-      },
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
+      "dueContribution": "2020-12-12",
       "mpWithOwnerDisplay": Object {
         "mp": "",
         "owner": "MOCK_USER",
@@ -1321,9 +1311,6 @@ Object {
       "caseReference": "A/1234568/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "data": Object {
-        "CaseContributions": "[{\\"data\\": {\\"contributionDueDate\\":\\"2020-12-12\\", \\"contributionStatus\\": \\"TEST\\"}}]",
-      },
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
       "mpWithOwnerDisplay": Object {
@@ -1359,9 +1346,6 @@ Object {
       "caseReference": "A/1234568/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "data": Object {
-        "CaseContributions": "[{\\"data\\": {\\"contributionDueDate\\":\\"2020-12-12\\", \\"contributionStatus\\":\\"blah\\"}}]",
-      },
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
       "mpWithOwnerDisplay": Object {
@@ -1397,11 +1381,9 @@ Object {
       "caseReference": "A/1234568/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "data": Object {
-        "CaseContributions": "[{\\"data\\": {\\"contributionDueDate\\":\\"2020-12-12\\"}}]",
-      },
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
+      "dueContribution": "2020-12-12",
       "mpWithOwnerDisplay": Object {
         "mp": "",
         "owner": "MOCK_USER",
@@ -1435,9 +1417,6 @@ Object {
       "caseReference": "A/1234568/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "data": Object {
-        "CaseContributions": "[{\\"data\\": {\\"contributionDueDate\\":\\"2020-12-12\\", \\"contributionStatus\\": \\"TEST\\"}}]",
-      },
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
       "mpWithOwnerDisplay": Object {
@@ -1473,9 +1452,6 @@ Object {
       "caseReference": "A/1234568/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "data": Object {
-        "CaseContributions": "[{}]",
-      },
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
       "mpWithOwnerDisplay": Object {
@@ -1511,9 +1487,6 @@ Object {
       "caseReference": "A/1234568/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "data": Object {
-        "CaseContributions": "[{}]",
-      },
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
       "mpWithOwnerDisplay": Object {
