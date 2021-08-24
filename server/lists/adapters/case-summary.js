@@ -73,6 +73,7 @@ module.exports = async (summary, options) => {
         primaryCorrespondent: getPrimaryCorrespondent(summary.primaryCorrespondent),
         deadlinesEnabled: deadlinesEnabled,
         deadlines: deadlinesEnabled && stageDeadlineEnabled && summary.stageDeadlines ? await createDeadlines(summary.stageDeadlines, fromStaticList) : null,
-        stages: await getActiveStages(summary.activeStages, fromStaticList)
+        stages: await getActiveStages(summary.activeStages, fromStaticList),
+        previousCaseReference: summary.previousCaseReference
     };
 };

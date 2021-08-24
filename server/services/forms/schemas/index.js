@@ -10,6 +10,7 @@ module.exports = {
     addTopic: require('./add-topic.js'),
     removeTopic: require('./remove-topic.js'),
     addDocument: require('./document-add.js'),
+    escalateCase: require('./document-add-next-case.js'),
     addDocumentNew: require('./add-document.js'),
     removeDocument: require('./remove-document.js'),
     manageDocuments: require('./manage-documents.js'),
