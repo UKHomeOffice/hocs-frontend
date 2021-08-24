@@ -88,7 +88,11 @@ describe('Case Summary Adapter', () => {
             },
             activeStages: [
                 { stage: 1, assignedToUserUUID: 1, assignedToTeamUUID: 1 }
-            ]
+            ],
+            previousCase:{
+                caseUuid: '__previousCaseUuid__',
+                caseReference: '__previousCaseReference__'
+            }
         };
 
         const results = await caseSummaryAdapter(mockData, { fromStaticList: mockFromStaticList, configuration: mockConfiguration, user: mockUser });
@@ -128,7 +132,11 @@ describe('Case Summary Adapter', () => {
             },
             activeStages: [
                 { stage: 1, assignedToUserUUID: 1, assignedToTeamUUID: 1 }
-            ]
+            ],
+            previousCase:{
+                caseUuid: '__previousCaseUuid__',
+                caseReference: '__previousCaseReference__'
+            }
         };
 
         const results = await caseSummaryAdapter(mockData, { fromStaticList: mockFromStaticList, configuration: mockConfiguration, user: mockUser });
@@ -168,7 +176,11 @@ describe('Case Summary Adapter', () => {
             },
             activeStages: [
                 { stage: 1, assignedToUserUUID: 1, assignedToTeamUUID: 1 }
-            ]
+            ],
+            previousCase:{
+                caseUuid: '__previousCaseUuid__',
+                caseReference: '__previousCaseReference__'
+            }
         };
 
         const results = await caseSummaryAdapter(mockData, { fromStaticList: mockFromStaticList, fetchList: mockFetchList, configuration: mockConfiguration, user: mockUser });
@@ -209,7 +221,11 @@ describe('Case Summary Adapter', () => {
             },
             activeStages: [
                 { stage: 1, assignedToUserUUID: 1, assignedToTeamUUID: 1 }
-            ]
+            ],
+            previousCase:{
+                caseUuid: '__previousCaseUuid__',
+                caseReference: '__previousCaseReference__'
+            }
         };
 
         const results = await caseSummaryAdapter(mockData, { fromStaticList: mockFromStaticList, configuration: mockConfiguration, user: mockUser });
@@ -250,7 +266,11 @@ describe('Case Summary Adapter', () => {
             },
             activeStages: [
                 { stage: 1, assignedToUserUUID: 1, assignedToTeamUUID: 1 }
-            ]
+            ],
+            previousCase:{
+                caseUuid: '__previousCaseUuid__',
+                caseReference: '__previousCaseReference__'
+            }
         };
 
         const results = await caseSummaryAdapter(mockData, { fromStaticList: mockFromStaticList, configuration: mockConfiguration, user: mockUser });

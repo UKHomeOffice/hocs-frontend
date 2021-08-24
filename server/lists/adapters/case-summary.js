@@ -57,6 +57,8 @@ const getPrimaryTopic = (topic) => topic ? topic.label : null;
 
 const getPrimaryCorrespondent = correspondent => correspondent && { address: correspondent.address, fullname: correspondent.fullname };
 
+const getPreviousCase = previousCase => previousCase && { uuid: previousCase.caseUuid, reference: previousCase.caseReference };
+
 module.exports = async (summary, options) => {
     const { fromStaticList, fetchList, configuration, user } = options;
     const { data: caseProfile } = await caseworkService.get(`/case/profile/${options.caseId}`, { headers: User.createHeaders(user) });
@@ -73,6 +75,7 @@ module.exports = async (summary, options) => {
         primaryCorrespondent: getPrimaryCorrespondent(summary.primaryCorrespondent),
         deadlinesEnabled: deadlinesEnabled,
         deadlines: deadlinesEnabled && stageDeadlineEnabled && summary.stageDeadlines ? await createDeadlines(summary.stageDeadlines, fromStaticList) : null,
-        stages: await getActiveStages(summary.activeStages, fromStaticList)
+        stages: await getActiveStages(summary.activeStages, fromStaticList),
+        previousCase: getPreviousCase(summary.previousCase)
     };
 };
