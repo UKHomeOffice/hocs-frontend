@@ -24,6 +24,8 @@ function createCaseRequest(type, form, documentTag) {
     return {
         type,
         dateReceived: form.data['DateReceived'],
+        fromCaseUUID: form.data['fromCaseUUID'],
+        fred:"fred",
         documents: createDocumentSummaryObjects(form, documentTag)
     };
 }
@@ -33,6 +35,7 @@ function addDocumentRequest(form) {
 }
 
 function createCase(url, { caseType, form }, documentTag, headers) {
+    console.log(createCaseRequest(caseType, form, documentTag));
     return workflowService.post(url, createCaseRequest(caseType, form, documentTag), headers);
 }
 

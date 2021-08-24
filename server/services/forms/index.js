@@ -50,6 +50,13 @@ const formDefinitions = {
                         action: 'CONFIRMATION_SUMMARY'
                     }
                 },
+                COMP2: {
+                    builder: formRepository.escalateCase,
+                    action: CREATE_CASE,
+                    next: {
+                        action: 'CONFIRMATION_SUMMARY'
+                    }
+                },
                 MIN: {
                     builder: formRepository.addDocument,
                     action: CREATE_CASE,
@@ -335,7 +342,7 @@ const formDefinitions = {
 };
 
 module.exports = {
-    getForm: async ({ context, workflow, action, entity }) => {
+    getForm: async ({ context, workflow, action, entity, data }) => {
         if (context && workflow && action) {
             try {
                 let formDefinition;
@@ -344,7 +351,7 @@ module.exports = {
                 } else {
                     formDefinition = formDefinitions[context.toUpperCase()][workflow.toUpperCase()][action.toUpperCase()];
                 }
-                const form = await formDefinition.builder.call(this, {});
+                const form = await formDefinition.builder.call(this, { data });
                 return {
                     schema: form.schema,
                     next: formDefinition.next,

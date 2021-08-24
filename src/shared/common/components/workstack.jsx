@@ -44,7 +44,9 @@ const ColumnRenderer = {
     WRAP_TEXT: 'wrapText',
     TRUNCATE_TEXT: 'truncateText',
     CONTRIBUTIONS_WARNING: 'contributionsWarning',
-    MP_WITH_OWNER: 'mpWithOwner'
+    MP_WITH_OWNER: 'mpWithOwner',
+    NEXT_CASE_LINK: 'nextCaseType',
+    HIDDEN: 'hidden'
 };
 
 const ColumnSortStrategy = {
@@ -242,7 +244,16 @@ class WorkstackAllocate extends Component {
     }
 
     renderHeader(column) {
+<<<<<<< HEAD
         if (column.sortStrategy === 'noSort') {
+=======
+
+        if (column.renderer === 'hidden') {
+            return;
+        }
+
+        if(column.sortStrategy === 'noSort') {
+>>>>>>> HOCS-3556 - Add hidden workstack column. Update case no regex. Add COMP2 case type
             return (
                 <th className='govuk-table__header' key={column.displayName}>
                     {column.renderer !== ColumnRenderer.INDICATOR_BLUE && column.renderer !== ColumnRenderer.INDICATOR_GREEN && column.renderer !== ColumnRenderer.INDICATOR_RED && column.displayName}
@@ -266,6 +277,7 @@ class WorkstackAllocate extends Component {
     }
 
     renderRow(item, columns) {
+        console.log(item);
         const value = `${item.caseUUID}:${item.uuid}`;
         const checkboxKey = item.caseUUID + item.uuid;
         const handleChange = (e) => {
@@ -310,6 +322,18 @@ class WorkstackAllocate extends Component {
             case ColumnRenderer.CASE_LINK:
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>
                     <Link to={`/case/${row.caseUUID}/stage/${row.uuid}`} className='govuk-link govuk-!-margin-right-3'>{value}</Link>
+                </td>;
+            case ColumnRenderer.NEXT_CASE_LINK:
+                // build a suitable FE link
+                if (row.nextCaseReference) {
+                    return (
+                        <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>
+                            <Link to='some_link_in_here' className='govuk-link govuk-!-margin-right-3'>{row.nextCaseReference}</Link>
+                        </td>
+                    );
+                }
+                return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>
+                    <Link to={{pathname :`/action/create/${value}/DOCUMENT?from=${row.caseUUID}`, query:{from: row.caseUUID}}} className='govuk-link govuk-!-margin-right-3'>Escalate case..</Link>
                 </td>;
             case ColumnRenderer.CORRESPONDENT_WITH_CASE_LINK:
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>
@@ -399,6 +423,8 @@ class WorkstackAllocate extends Component {
                     </td>;
                 }
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>{value}</td>;
+            case ColumnRenderer.HIDDEN:
+                return;
             default:
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>{value}</td>;
         }

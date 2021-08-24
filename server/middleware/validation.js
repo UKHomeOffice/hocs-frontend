@@ -158,7 +158,7 @@ const validators = {
         return null;
     },
     isValidCaseReference: ({ value, message }) => {
-        const format = /^[a-z]{2,4}\/[0-9]{7}\/[0-9]{2}$/i;
+        const format = /^[a-z0-9]{2,5}\/[0-9]{7}\/[0-9]{2}$/i;
         if (value && !format.test(value.trim())) {
             return message || validationErrors.validCaseReference();
         }
