@@ -1,6 +1,7 @@
 import React from 'react';
 import Summary from '../stage-summary.jsx';
 import { ApplicationProvider } from '../../../contexts/application';
+import { BrowserRouter } from 'react-router-dom';
 
 const config = {
     summary: {
@@ -37,21 +38,45 @@ const config = {
             assignedTeam: '__assignedTeam__',
             assignedUser: '__assignedUser__',
             stage: '__stage2__'
-        }]
+        }],
+        previousCase: {
+            uuid: '__previousCaseUuid__',
+            reference: '__previousCaseReference__'
+        }
     }
 };
 
 describe('Stage summary component', () => {
 
     it('should render when summary provided in context', () => {
-
         const wrapper = render(
             <ApplicationProvider config={config}>
-                <Summary/>
+                <BrowserRouter>
+                    <Summary/>
+                </BrowserRouter>
             </ApplicationProvider>
         );
         expect(wrapper).toBeDefined();
         expect(wrapper).toMatchSnapshot();
+    });
+
+    it('should not show the previous case table when not provided', () => {
+        config.summary.previousCase = undefined;
+
+        const wrapper = render(
+            <ApplicationProvider config={config}>
+                <BrowserRouter>
+                    <Summary/>
+                </BrowserRouter>
+            </ApplicationProvider>
+        );
+        expect(wrapper).toBeDefined();
+        expect(wrapper).toMatchSnapshot();
+
+        config.summary.previousCase = {
+            uuid: '__previousCaseUuid__',
+            reference: '__previousCaseReference__'
+        };
     });
 
     it('should not show the empty address lines', () => {
@@ -60,7 +85,9 @@ describe('Stage summary component', () => {
 
         const wrapper = render(
             <ApplicationProvider config={config}>
-                <Summary/>
+                <BrowserRouter>
+                    <Summary/>
+                </BrowserRouter>
             </ApplicationProvider>
         );
         expect(wrapper).toBeDefined();
