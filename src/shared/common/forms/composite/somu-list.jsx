@@ -105,6 +105,31 @@ class SomuTableRenderer {
         </>);
     }
 
+    renderFoiAppeal(somuItem) {
+        const { choices } = this.state;
+        const title = `${this.loadValue(somuItem.appealType, choices)}`;
+
+        return (<>
+            <td className='govuk-table__cell'>
+                <label className={'govuk-label'}
+                    aria-label={title}
+                    title={title}>
+                    {title}
+                </label>
+            </td>
+            <td className='govuk-table__cell'>
+                <label className={'govuk-label'}
+                    aria-label={somuItem.appealStatus === 'appealComplete' ? 'Complete': 'Pending'}
+                    title={somuItem.appealStatus === 'appealComplete' ? 'Complete': 'Pending'}>
+                    {somuItem.appealStatus === 'appealComplete' ? 'Complete': 'Pending'}
+                </label>
+            </td>
+        </>
+        );
+    }
+
+
+    renderStatusColumn(status, { contributionDueDate }) {
     renderStatusColumn(status, requestDueDate, decision = undefined) {
         let className = '';
         let title = '';
@@ -151,6 +176,9 @@ class SomuTableRenderer {
             }
             case 'ApprovalRequestTable':
                 return this.renderApprovalTable(somuItem.data);
+            case 'FoiAppealsTable': {
+                return this.renderFoiAppeal(somuItem.data);
+            }
         }
 
         return (<td className='govuk-table__cell'>

@@ -28,6 +28,7 @@ router.post(['/:caseId/stage/:stageId', '/:caseId/stage/:stageId/allocate'],
     processMiddleware,
     validationMiddleware
 );
+
 router.post('/:caseId/stage/:stageId/note',
     fileMiddleware.any(),
     createCaseNote,
