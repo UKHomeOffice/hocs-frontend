@@ -44,7 +44,12 @@ const parseMultipleContributions = async (value, choices, fromStaticList) => {
         const { contributionStatus, contributionDueDate, contributionBusinessUnit, contributionBusinessArea } = contribution.data;
         const status = getContributionStatusString({ contributionDueDate, contributionStatus });
         const values = await loadValue(contributionBusinessUnit, choices, fromStaticList);
-        const title = `${contributionBusinessArea} - ${values} (${status})`;
+        let title;
+        if (contributionBusinessArea){
+            title = `${contributionBusinessArea} - ${values} (${status})`;
+        } else {
+            title = `${values} (${status})`;
+        }
         return title;
     }));
 
