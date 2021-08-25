@@ -9,7 +9,8 @@ class Stage extends Component {
         const {
             children,
             form,
-            title
+            title,
+            hasSidebar
         } = this.props;
         return (
             <div className="govuk-grid-row">
@@ -20,12 +21,20 @@ class Stage extends Component {
                     </h1>
                     {children}
                 </div>
-                <div className="govuk-grid-column-two-thirds">
+                {this.shouldDisplaySidebar(hasSidebar) && <div className="govuk-grid-column-two-thirds">
                     <SideBar />
-                </div>
+                </div>}
             </div>
         );
     }
+
+    shouldDisplaySidebar(hasSidebar) {
+        if (hasSidebar === 'false') {
+            return false;
+        }
+        return true;
+    }
+
 }
 
 Stage.propTypes = {
