@@ -159,54 +159,8 @@ describe('User Workstack Adapter', () => {
                     userUUID: 1,
                     deadline: '2200-01-01',
                     active: true,
-                    assignedTopic: mockTopic
-                },
-                {
-                    teamUUID: 2,
-                    caseType: 'WCS',
-                    stageType: 'A',
-                    userUUID: 2,
-                    deadline: '2200-01-02',
-                    active: true
-                },
-                {
-                    teamUUID: 2,
-                    caseType: 'WCS',
-                    stageType: 'A',
-                    userUUID: null,
-                    deadline: '2200-01-03',
-                    active: false
-                }
-            ]
-        };
-
-        const result = await userAdapter(mockData, {
-            user: mockUser,
-            fromStaticList: mockFromStaticList,
-            logger: mockLogger,
-            configuration: {
-                workstackTypeColumns: [
-                    { workstackType: 'DEFAULT', workstackColumns: [] },
-                    { workstackType: 'WCS', workstackColumns: [] }
-                ],
-            }
-        });
-        expect(result).toMatchSnapshot();
-    });
-    it('should hide unworkable', async () => {
-        const mockData = {
-            stages: [
-                {
-                    teamUUID: 1,
-                    caseType: 'DEFAULT',
-                    stageType: 'A',
-                    userUUID: 1,
-                    deadline: '2200-01-01',
-                    active: true,
                     assignedTopic: mockTopic,
-                    data: {
-                        Unworkable: 'True'
-                    }
+                    data: {}
                 },
                 {
                     teamUUID: 2,
@@ -214,7 +168,8 @@ describe('User Workstack Adapter', () => {
                     stageType: 'A',
                     userUUID: 2,
                     deadline: '2200-01-02',
-                    active: true
+                    active: true,
+                    data: {}
                 },
                 {
                     teamUUID: 2,
@@ -222,13 +177,13 @@ describe('User Workstack Adapter', () => {
                     stageType: 'A',
                     userUUID: null,
                     deadline: '2200-01-03',
-                    active: false
+                    active: false,
+                    data: {}
                 }
             ]
         };
 
         const result = await userAdapter(mockData, {
-            user: mockUser,
             fromStaticList: mockFromStaticList,
             logger: mockLogger,
             configuration: {

@@ -4,7 +4,7 @@ const { caseworkService, workflowService } = require('../clients');
 
 async function userWorkstackMiddleware(req, res, next) {
     try {
-        const response = await req.listService.fetch('USER_WORKSTACK', req.params);
+        const response = await req.listService.fetch('USER_WORKSTACK', { userUuid: req.user.uuid });
         res.locals.workstack = response;
         next();
     } catch (error) {
