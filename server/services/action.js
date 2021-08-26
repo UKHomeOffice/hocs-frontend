@@ -244,6 +244,18 @@ const actions = {
                         case actionTypes.EDIT_CONTRIBUTION:
                             await caseworkService.post(`/case/${caseId}/item/${somuTypeUuid}`, { uuid: somuItemUuid, data: somuItemData }, headers);
                             break;
+                        case actionTypes.ADD_APPROVAL_REQUEST:
+                            await caseworkService.put(`/case/${caseId}/data/ApprovalRequests`,
+                                somuTypeItems,
+                                { headers: { ...headers.headers, 'Content-Type': 'text/plain' } });
+                            await caseworkService.post(`/case/${caseId}/item/${somuTypeUuid}`, { data: somuItemData }, headers);
+                            break;
+                        case actionTypes.EDIT_APPROVAL_REQUEST:
+                            await caseworkService.put(`/case/${caseId}/data/ApprovalRequests`,
+                                somuTypeItems,
+                                { headers: { ...headers.headers, 'Content-Type': 'text/plain' } });
+                            await caseworkService.post(`/case/${caseId}/item/${somuTypeUuid}`, { uuid: somuItemUuid, data: somuItemData }, headers);
+                            break;
                     }
                 }
 
