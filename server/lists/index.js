@@ -274,7 +274,7 @@ module.exports = {
         },
         USER_WORKSTACK: {
             client: 'CASEWORK',
-            endpoint: '/stage',
+            endpoint: '/stage/user/${userUuid}',
             adapter: workstack.userAdapter
         },
         TEAM_WORKSTACK: {
