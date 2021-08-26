@@ -448,4 +448,46 @@ describe('Action service', () => {
         expect(response).toHaveProperty('callbackUrl');
     });
 
+    it('should return a callback when ADD_APPROVAL_REQUEST action succeeds', async () => {
+
+        const testForm = {
+            schema: {},
+            data: {},
+            action: actionTypes.ADD_APPROVAL_REQUEST
+        };
+        const response = await actionService.performAction('CASE', {
+            caseId: 1234,
+            stageId: 5678,
+            somuTypeUuid: '00000000-0000-0000-0000-000000000000',
+            entity: null,
+            context: null,
+            form: testForm,
+            user: mockUser
+        });
+        expect(mockRequestClient).toHaveBeenCalledTimes(2);
+        expect(response).toBeDefined();
+        expect(response).toHaveProperty('callbackUrl');
+    });
+
+    it('should return a callback when EDIT_APPROVAL_REQUEST action succeeds', async () => {
+
+        const testForm = {
+            schema: {},
+            data: {},
+            action: actionTypes.EDIT_APPROVAL_REQUEST
+        };
+        const response = await actionService.performAction('CASE', {
+            caseId: 1234,
+            stageId: 5678,
+            somuTypeUuid: '00000000-0000-0000-0000-000000000000',
+            entity: null,
+            context: null,
+            form: testForm,
+            user: mockUser
+        });
+        expect(mockRequestClient).toHaveBeenCalledTimes(2);
+        expect(response).toBeDefined();
+        expect(response).toHaveProperty('callbackUrl');
+    });
+
 });
