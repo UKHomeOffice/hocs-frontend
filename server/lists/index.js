@@ -525,6 +525,18 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
+        FOI_EXEMPTIONS: {
+            client: 'INFO',
+            endpoint: '/entity/list/FOI_EXEMPTIONS',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        FOI_EIR_EXCEPTIONS: {
+            client: 'INFO',
+            endpoint: '/entity/list/FOI_EIR_EXCEPTIONS',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
     },
     clients: {
         CASEWORK: caseworkService,

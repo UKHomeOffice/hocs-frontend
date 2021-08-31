@@ -49,12 +49,15 @@ class CheckboxGrid extends Component {
         const checkboxContainerStyle = {
             display: 'flex',
             height: `${gridHeight*50}px`,
-            flexDirection: 'column',
+            flexDirection: 'row',
             flexWrap: 'wrap',
         };
 
         return (
             <div className={`govuk-form-group${error ? ' govuk-form-group--error' : ''}`}>
+                <h2 className='govuk-heading-m'>
+                    {label}
+                </h2>
 
                 <fieldset id={name} className={`govuk-fieldset ${className ? className : ''}`} disabled={disabled}>
 

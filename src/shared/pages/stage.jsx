@@ -12,6 +12,10 @@ class Stage extends Component {
             title,
             hasSidebar
         } = this.props;
+
+        console.log(`Stage props hasSidebar: ${JSON.stringify(this.props.hasSidebar)}`);
+
+
         return (
             <div className="govuk-grid-row">
                 <div className="govuk-grid-column-one-third">
