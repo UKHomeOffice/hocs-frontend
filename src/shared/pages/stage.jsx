@@ -40,7 +40,8 @@ class Stage extends Component {
 Stage.propTypes = {
     children: PropTypes.node,
     form: PropTypes.object,
-    title: PropTypes.string
+    title: PropTypes.string,
+    hasSidebar: PropTypes.string
 };
 
 export default formEnabled(Stage);

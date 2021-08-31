@@ -48,7 +48,7 @@ class CheckboxGrid extends Component {
 
         const checkboxContainerStyle = {
             display: 'flex',
-            height: (gridHeight*50),
+            height: `${gridHeight*50}px`,
             flexDirection: 'column',
             flexWrap: 'wrap',
         };
