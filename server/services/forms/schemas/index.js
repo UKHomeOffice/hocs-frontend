@@ -26,6 +26,10 @@ module.exports = {
     contributionFulfillmentFoi: require('./contribution-fulfillment-foi'),
     confirmExtendDeadlineFoi: require('./confirm-extend-deadline-foi'),
 
+    recordAppealFoi: require('./record-appeal-foi'),
+    updateAppealFoi: require('./update-appeal-foi'),
+    manageAppealsFoi: require('./manage-appeals-foi'),
+
     approvalRequestFoi: require('./approval-request-foi'),
     approvalFulfillmentFoi: require('./approval-fulfillment-foi'),
 };
