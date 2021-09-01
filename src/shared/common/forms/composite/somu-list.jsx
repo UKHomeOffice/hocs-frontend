@@ -65,8 +65,6 @@ class SomuTableRenderer {
     composeTitle(choices, titleBusinessLabelData) {
         const { businessArea, businessUnit } = titleBusinessLabelData;
 
-        console.log(JSON.stringify(titleBusinessLabelData));
-
         if (businessArea && businessUnit) {
             return `${businessArea} - ${this.loadValue(businessUnit, choices)}`;
         }
