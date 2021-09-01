@@ -59,6 +59,166 @@ exports[`Somu list component should include hideSidebar query param on primary a
 </div>
 `;
 
+exports[`Somu list component should render ApprovalTypeTable with 1 Complete - approved, 1 Cancelled, 1 Complete - rejected 1`] = `
+<div
+  class="govuk-form-group"
+>
+  <fieldset
+    class="govuk-fieldset "
+    id="somu_list"
+  >
+    <legend
+      class="govuk-fieldset__legend"
+      id="somu_list-legend"
+    >
+      <span
+        class="govuk-fieldset__heading govuk-label--s"
+      />
+    </legend>
+    <table
+      class="govuk-table"
+    >
+      <tbody
+        class="govuk-table__body"
+      >
+        <tr
+          class="govuk-table__row"
+        >
+          <td
+            class="govuk-table__cell"
+          >
+            <label
+              aria-label="Cancelled approval request: Test Team 2"
+              class="govuk-label"
+              title="Cancelled approval request: Test Team 2"
+            >
+              Test Team 2
+            </label>
+          </td>
+          <td
+            class="govuk-table__cell "
+          >
+            <label
+              aria-label="Cancelled"
+              class="govuk-label"
+              title="Cancelled"
+            >
+              Cancelled
+            </label>
+          </td>
+        </tr>
+        <tr
+          class="govuk-table__row"
+        >
+          <td
+            class="govuk-table__cell"
+          >
+            <label
+              aria-label="Test Team 3"
+              class="govuk-label"
+              title="Test Team 3"
+            >
+              Test Team 3
+            </label>
+          </td>
+          <td
+            class="govuk-table__cell "
+          >
+            <label
+              aria-label="Complete - approved"
+              class="govuk-label"
+              title="Complete - approved"
+            >
+              Complete - approved
+            </label>
+          </td>
+        </tr>
+        <tr
+          class="govuk-table__row"
+        >
+          <td
+            class="govuk-table__cell"
+          >
+            <label
+              aria-label="Test Team 4"
+              class="govuk-label"
+              title="Test Team 4"
+            >
+              Test Team 4
+            </label>
+          </td>
+          <td
+            class="govuk-table__cell "
+          >
+            <label
+              aria-label="Complete - rejected"
+              class="govuk-label"
+              title="Complete - rejected"
+            >
+              Complete - rejected
+            </label>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </fieldset>
+</div>
+`;
+
+exports[`Somu list component should render ApprovalTypeTable with Due 1`] = `
+<div
+  class="govuk-form-group"
+>
+  <fieldset
+    class="govuk-fieldset "
+    id="somu_list"
+  >
+    <legend
+      class="govuk-fieldset__legend"
+      id="somu_list-legend"
+    >
+      <span
+        class="govuk-fieldset__heading govuk-label--s"
+      />
+    </legend>
+    <table
+      class="govuk-table"
+    >
+      <tbody
+        class="govuk-table__body"
+      >
+        <tr
+          class="govuk-table__row"
+        >
+          <td
+            class="govuk-table__cell"
+          >
+            <label
+              aria-label="Test Team"
+              class="govuk-label"
+              title="Test Team"
+            >
+              Test Team
+            </label>
+          </td>
+          <td
+            class="govuk-table__cell "
+          >
+            <label
+              aria-label="Due 01/09/2021"
+              class="govuk-label"
+              title="Due 01/09/2021"
+            >
+              Due 01/09/2021
+            </label>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </fieldset>
+</div>
+`;
+
 exports[`Somu list component should render status column correctly 1`] = `
 <div
   class="govuk-form-group"
@@ -88,9 +248,9 @@ exports[`Somu list component should render status column correctly 1`] = `
             class="govuk-table__cell"
           >
             <label
-              aria-label="Cancelled Contribution: TestBusinessArea - TestTeam"
+              aria-label="Cancelled contribution request: TestBusinessArea - TestTeam"
               class="govuk-label"
-              title="Cancelled Contribution: TestBusinessArea - TestTeam"
+              title="Cancelled contribution request: TestBusinessArea - TestTeam"
             >
               TestBusinessArea - TestTeam
             </label>

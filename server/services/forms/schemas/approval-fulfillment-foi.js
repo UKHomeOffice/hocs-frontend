@@ -8,14 +8,14 @@ module.exports = async options => {
     return Form()
         .withTitle('Approval Request Fulfillment')
         .withField(
-            Component('dropdown', 'contributionBusinessUnit')
+            Component('dropdown', 'approvalRequestForBusinessUnit')
                 .withValidator('required')
                 .withProp('label', 'Approver Role')
                 .withProp('choices', 'FOI_APPROVER_ROLES')
                 .build()
         )
         .withField(
-            Component('date', 'contributionRequestDate')
+            Component('date', 'approvalRequestCreatedDate')
                 .withValidator('required')
                 .withValidator('isValidDate')
                 .withValidator('isBeforeToday')
@@ -23,7 +23,7 @@ module.exports = async options => {
                 .build()
         )
         .withField(
-            Component('date', 'contributionDueDate')
+            Component('date', 'approvalRequestDueDate')
                 .withValidator('required')
                 .withValidator('isValidDate')
                 .withValidator('isValidWithinDate')
@@ -31,16 +31,16 @@ module.exports = async options => {
                 .build()
         )
         .withField(
-            Component('radio', 'contributionStatus')
+            Component('radio', 'approvalRequestStatus')
                 .withProp('label', 'Approval Status')
                 .withProp('choices', [
-                    Choice('Complete', 'contributionReceived'),
-                    Choice('Cancelled', 'contributionCancelled')
+                    Choice('Complete', 'approvalRequestResponseReceived'),
+                    Choice('Cancelled', 'approvalRequestCancelled')
                 ])
                 .build()
         )
         .withField(
-            Component('radio', 'decision')
+            Component('radio', 'approvalRequestDecision')
                 .withValidator('required')
                 .withProp('label', 'Decision')
                 .withProp('choices', [
@@ -49,57 +49,57 @@ module.exports = async options => {
                 ])
                 .withProp('visibilityConditions', [
                     {
-                        'conditionPropertyName': 'contributionStatus',
-                        'conditionPropertyValue': 'contributionReceived'
+                        'conditionPropertyName': 'approvalRequestStatus',
+                        'conditionPropertyValue': 'approvalRequestResponseReceived'
                     }
                 ])
                 .build()
         )
         .withField(
-            Component('date', 'approvalReceivedDate')
+            Component('date', 'approvalRequestResponseReceivedDate')
                 .withValidator('required')
                 .withValidator('isValidDate',)
                 .withValidator('isBeforeToday')
                 .withValidator('isValidWithinDate')
-                .withProp('label', 'Approval received date')
+                .withProp('label', 'Date response received')
                 .withProp('visibilityConditions', [
                     {
-                        'conditionPropertyName': 'contributionStatus',
-                        'conditionPropertyValue': 'contributionReceived'
+                        'conditionPropertyName': 'approvalRequestStatus',
+                        'conditionPropertyValue': 'approvalRequestResponseReceived'
                     }
                 ])
                 .build()
         ).withField(
-            Component('text', 'case-reference')
-                .withProp('label', 'Approver Name')
+            Component('text', 'approvalRequestResponseBy')
+                .withProp('label', 'Respondents name')
                 .withProp('visibilityConditions', [
                     {
-                        'conditionPropertyName': 'contributionStatus',
-                        'conditionPropertyValue': 'contributionReceived'
+                        'conditionPropertyName': 'approvalRequestStatus',
+                        'conditionPropertyValue': 'approvalRequestResponseReceived'
                     }
                 ])
                 .build()
         )
         .withField(
-            Component('text-area', 'contributionReceivedNote')
+            Component('text-area', 'approvalRequestResponseNote')
                 .withValidator('required', 'Approval completion notes is required')
                 .withProp('label', 'Details')
                 .withProp('visibilityConditions', [
                     {
-                        'conditionPropertyName': 'contributionStatus',
-                        'conditionPropertyValue': 'contributionReceived'
+                        'conditionPropertyName': 'approvalRequestStatus',
+                        'conditionPropertyValue': 'approvalRequestResponseReceived'
                     }
                 ])
                 .build()
         )
         .withField(
-            Component('text-area', 'contributionCancellationNote')
+            Component('text-area', 'approvalRequestCancellationNote')
                 .withValidator('required', 'Approval cancellation reason is required')
                 .withProp('label', 'Reason for cancelling')
                 .withProp('visibilityConditions', [
                     {
-                        'conditionPropertyName': 'contributionStatus',
-                        'conditionPropertyValue': 'contributionCancelled'
+                        'conditionPropertyName': 'approvalRequestStatus',
+                        'conditionPropertyValue': 'approvalRequestCancelled'
                     }
                 ])
                 .build()

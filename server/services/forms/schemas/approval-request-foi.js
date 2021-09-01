@@ -17,7 +17,7 @@ module.exports = async options => {
     const form = Form()
         .withTitle(`${isAdd ? 'Add' : isReadOnly ? 'View' : 'Edit'} Approval Request`)
         .withField(
-            Component('dropdown', 'contributionBusinessUnit')
+            Component('dropdown', 'approvalRequestForBusinessUnit')
                 .withValidator('required')
                 .withProp('label', 'Approver Role')
                 .withProp('disabled', isReadOnly)
@@ -25,7 +25,7 @@ module.exports = async options => {
                 .build()
         )
         .withField(
-            Component('date', 'contributionRequestDate')
+            Component('date', 'approvalRequestCreatedDate')
                 .withValidator('required')
                 .withValidator('isValidDate')
                 .withValidator('isBeforeToday')
@@ -34,7 +34,7 @@ module.exports = async options => {
                 .build()
         )
         .withField(
-            Component('date', 'contributionDueDate')
+            Component('date', 'approvalRequestDueDate')
                 .withValidator('required')
                 .withValidator('isValidDate')
                 .withValidator('isValidWithinDate')
