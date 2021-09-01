@@ -105,7 +105,7 @@ class SomuTableRenderer {
         </>);
     }
 
-    renderFoiAppeal(somuItem) {
+    renderAppealTable(somuItem) {
         const { choices } = this.state;
         const title = `${this.loadValue(somuItem.appealType, choices)}`;
 
@@ -175,7 +175,7 @@ class SomuTableRenderer {
             case 'ApprovalRequestTable':
                 return this.renderApprovalTable(somuItem.data);
             case 'FoiAppealsTable': {
-                return this.renderFoiAppeal(somuItem.data);
+                return this.renderAppealTable(somuItem.data);
             }
         }
 

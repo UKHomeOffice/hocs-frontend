@@ -16,8 +16,6 @@ module.exports = async options => {
         'FOI_APPEAL_TYPES',
     );
 
-    console.log('CHOICES: ' + JSON.stringify(choices));
-
     const appeals = listServiceInstance.fetch('CASE_SOMU_ITEM', { caseId: options.caseId, somuTypeId: somuType.uuid });
 
     return Form()
