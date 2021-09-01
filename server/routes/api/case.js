@@ -22,6 +22,7 @@ router.post('/:caseId/stage/:stageId/allocate/team',
     allocateCaseToTeamMember,
     (req, res) => res.json({ redirect: '/' })
 );
+
 router.post([
     '/:caseId/stage/:stageId/entity/:entity/:context/:action',
     '/:caseId/stage/:stageId/entity/:entity/:context/:caseType/:action',
@@ -32,6 +33,7 @@ processMiddleware,
 validationMiddleware,
 caseApiResponseMiddleware
 );
+
 router.post(['/:caseId/stage/:stageId/somu/:somuTypeUuid/:somuType/:somuCaseType/:action',  '/:caseId/stage/:stageId/somu/:somuTypeUuid/:somuType/:somuCaseType/item/:somuItemUuid/:action'],
     getFormForCase,
     fileMiddleware.any(),
@@ -39,6 +41,7 @@ router.post(['/:caseId/stage/:stageId/somu/:somuTypeUuid/:somuType/:somuCaseType
     validationMiddleware,
     somuApiResponseMiddleware
 );
+
 router.post(['/:caseId/stage/:stageId', '/:caseId/stage/:stageId/allocate'],
     getFormForStage,
     fileMiddleware.any(),

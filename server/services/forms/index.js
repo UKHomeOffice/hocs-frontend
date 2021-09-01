@@ -1,10 +1,12 @@
 const formRepository = require('./schemas/index');
 const formDecorator = require('./schemas/decorators/form-decorator');
+
 const {
     ADD_TEMPLATE, ADD_STANDARD_LINE, IS_MEMBER, ADD_MEMBER, SELECT_MEMBER, ADD_CORRESPONDENT, UPDATE_CORRESPONDENT,
     REMOVE_CORRESPONDENT, ADD_TOPIC, REMOVE_TOPIC, CREATE_CASE, CREATE_AND_ALLOCATE_CASE, BULK_CREATE_CASE,
     ADD_DOCUMENT, REMOVE_DOCUMENT, MANAGE_DOCUMENTS, MANAGE_PEOPLE, ADD_CONTRIBUTION, ADD_ADDITIONAL_CONTRIBUTION,
-    EDIT_CONTRIBUTION, APPLY_CASE_DEADLINE_EXTENSION, CONFIRMATION_SUMMARY, ADD_APPROVAL_REQUEST, EDIT_APPROVAL_REQUEST
+    EDIT_CONTRIBUTION, APPLY_CASE_DEADLINE_EXTENSION, CONFIRMATION_SUMMARY, ADD_CASE_APPEAL, EDIT_CASE_APPEAL, MANAGE_CASE_APPEALS,
+    ADD_APPROVAL_REQUEST, EDIT_APPROVAL_REQUEST
 } = require('../actions/types');
 
 const mpamContributionsRequest = {
@@ -250,6 +252,28 @@ const formDefinitions = {
             DETAILS: {
                 builder: formRepository.addMemberDetails,
                 action: ADD_MEMBER
+            }
+        },
+        APPEAL: {
+            FOI: {
+                ADD_APPEAL: {
+                    builder: formRepository.recordAppealFoi,
+                    action: ADD_CASE_APPEAL,
+                    next: {
+                        action: MANAGE_CASE_APPEALS
+                    }
+                },
+                EDIT_APPEAL: {
+                    builder: formRepository.updateAppealFoi,
+                    action: EDIT_CASE_APPEAL,
+                    next: {
+                        action: MANAGE_CASE_APPEALS
+                    }
+                },
+                MANAGE_APPEALS: {
+                    builder: formRepository.manageAppealsFoi,
+                    action: MANAGE_CASE_APPEALS
+                }
             }
         },
         CONTRIBUTIONS: {

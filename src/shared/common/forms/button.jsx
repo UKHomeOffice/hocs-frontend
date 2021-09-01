@@ -6,8 +6,11 @@ import { cancel } from '../../contexts/actions/index.jsx';
 
 class Button extends Component {
 
-    handleClick(e) {
-        e.preventDefault();
+    handleClick(e, preventDefault) {
+        if(preventDefault === 'true') {
+            e.preventDefault();
+        }
+
         this.props.dispatch(cancel());
     }
 
@@ -16,7 +19,8 @@ class Button extends Component {
             action,
             className,
             disabled,
-            label
+            label,
+            preventDefault
         } = this.props;
         return (
             <Fragment>
@@ -24,7 +28,7 @@ class Button extends Component {
                     className={`govuk-button${className ? ' ' + className : ''}`}
                     disabled={disabled}
                     to={action}
-                    onClick={e => this.handleClick(e)}
+                    onClick={e => this.handleClick(e, preventDefault)}
                 >{label}</Link>
             </Fragment>
         );
@@ -36,11 +40,13 @@ Button.propTypes = {
     className: PropTypes.string,
     disabled: PropTypes.bool,
     dispatch: PropTypes.func.isRequired,
-    label: PropTypes.string
+    label: PropTypes.string,
+    preventDefault: PropTypes.string
 };
 
 Button.defaultProps = {
     disabled: false,
+    preventDefault: 'true',
     label: 'Submit'
 };
 

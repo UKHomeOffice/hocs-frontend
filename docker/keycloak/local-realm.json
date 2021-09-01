@@ -301,6 +301,15 @@
           "subGroups": []
         },
         {
+          "id": "6978176d-15e7-4a76-b833-3b0be12c0828",
+          "name": "aXgXbRXnSna4MzsL4SwIKA",
+          "path": "/aXgXbRXnSna4MzsL4SwIKA",
+          "attributes": {},
+          "realmRoles": [],
+          "clientRoles": {},
+          "subGroups": []
+        },
+        {
           "id": "45192592-4228-4a70-b848-533e1589cf8c",
           "name": "RRklkkIoSnC4SFM-FYnPjA",
           "path": "/RRklkkIoSnC4SFM-FYnPjA",
@@ -393,6 +402,7 @@
         "/MzMzMzMzMzMzMzMzMzMzMw",
         "/RERERCIiIiIiIiIiIiIiIg",
         "/8y1MlJLNRlKjNtnjuimQtw",
+        "/aXgXbRXnSna4MzsL4SwIKA",
         "/RRklkkIoSnC4SFM-FYnPjA"]
     },
     {
@@ -418,6 +428,7 @@
         "/MzMzMzMzMzMzMzMzMzMzMw",
         "/RERERCIiIiIiIiIiIiIiIg",
         "/8y1MlJLNRlKjNtnjuimQtw",
+        "/aXgXbRXnSna4MzsL4SwIKA",
         "/RRklkkIoSnC4SFM-FYnPjA"]
     },
     {
