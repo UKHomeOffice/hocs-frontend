@@ -128,8 +128,6 @@ class SomuTableRenderer {
         );
     }
 
-
-    renderStatusColumn(status, { contributionDueDate }) {
     renderStatusColumn(status, requestDueDate, decision = undefined) {
         let className = '';
         let title = '';

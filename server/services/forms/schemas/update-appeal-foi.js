@@ -84,7 +84,7 @@ module.exports = async options => {
                 ])
                 .build()
         ).withField(
-            Component('radio', 'complex')
+            Component('radio', 'appealIsComplexCase')
                 .withValidator('required')
                 .withProp('label', 'Was the case complex?')
                 .withProp('choices', [
@@ -99,7 +99,7 @@ module.exports = async options => {
                 ])
                 .build()
         ).withField(
-            Component('text-area', 'notes')
+            Component('text-area', 'appealNotes')
                 .withValidator('required', 'Appeal completion notes are required')
                 .withProp('label', 'Details')
                 .withProp('visibilityConditions', [
