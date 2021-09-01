@@ -193,6 +193,36 @@ const getForm = (form, options) => {
     };
 };
 
+async function getSomuType(req, res, next) {
+    const { somuCaseType, somuType } = req.params;
+
+    const somuTypeData = await req.listService.getFromStaticList(
+        'SOMU_TYPES',
+        [somuCaseType, somuType]
+    );
+
+    req.somuType = somuTypeData;
+    next();
+}
+
+async function getList(req, res, next) {
+    const { listName } = req.params;
+
+    const listContent = await req.listService.fetch(listName);
+
+    req.listContent = listContent;
+    next();
+}
+
+async function getSomuItemsByType(req, res, next) {
+    const { somuTypeUuid } = req.params;
+
+    const somuItems = await req.listService.fetch('CASE_SOMU_ITEM', { ...req.params, somuTypeId: somuTypeUuid });
+    req.somuItems = somuItems;
+
+    next();
+}
+
 const getFormForAction = async (req, res, next) => {
 
     const logger = getLogger(req.requestId);
@@ -258,5 +288,8 @@ module.exports = {
     getFormForAction,
     getFormForCase,
     getFormForStage,
-    hydrateFields
+    hydrateFields,
+    getSomuType,
+    getSomuItemsByType,
+    getList
 };

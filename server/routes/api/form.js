@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { allocateCase, moveByDirection } = require('../../middleware/stage');
-const { getFormForAction, getFormForCase, getFormForStage, hydrateFields } = require('../../services/form');
+const { getFormForAction, getFormForCase, getFormForStage, hydrateFields, getSomuType } = require('../../services/form');
 const { skipCaseTypePageApi } = require('../../middleware/skipCaseTypePage');
 const { autoCreateAllocateApi } = require('../../middleware/autoCreateAllocate');
 
@@ -51,5 +51,11 @@ router.get([
 ], (req, res) => {
     res.status(200).send(req.form);
 });
+
+router.get('/somu/somuCaseType/:somuCaseType/somuType/:somuType/',
+    getSomuType,
+    (req, res) =>
+        res.status(200).send(req.somuType)
+);
 
 module.exports = router;

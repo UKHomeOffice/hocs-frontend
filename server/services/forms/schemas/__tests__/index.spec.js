@@ -24,6 +24,9 @@ jest.mock('../../../../services/list/service', () => ({
                     { isPrimary: false },
                     { isPrimary: true }
                 ];
+            },
+            getFromStaticList: function () {
+                return [];
             }
         };
     }
