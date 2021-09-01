@@ -19,12 +19,75 @@ const validationErrors = {
     isValidWithinDate: label => `${label} must be within the last ${VALID_DAYS_RANGE} days`,
     validCaseReference: () => 'Case reference is not valid',
     contributionsFulfilled: () => 'Case contributions have to be completed or cancelled',
-    approvalsFulfilled: () => 'Case approvals have to be completed or cancelled',
+    approvalsFulfilled: () => 'The required approvals to progress the case have not been received.',
     oneOf: () => 'Select at least one option',
     isValidMonth: label => `${label} must contain a real month`,
     isBeforeMaxYear: label => `${label} must be before ${MAX_ALLOWABLE_YEAR}`,
     isAfterMinYear: label => `${label} must be after ${MIN_ALLOWABLE_YEAR}`,
     isValidDay: label => `${label} must contain a real day`,
+};
+
+const approvalsReducer = ({ approved, rejected, cancelled, outstanding }, value) => {
+
+    if (!value.data || !value.data.approvalRequestCreatedDate) {
+        throw new Error('Value passed for validation is not a valid Approval Request object.');
+    }
+
+    if (value.data && !value.data.approvalRequestStatus) {
+        outstanding++;
+    }
+
+    if (value.data &&
+        value.data.approvalRequestStatus &&
+        value.data.approvalRequestStatus === 'approvalRequestCancelled'
+    ) {
+
+        cancelled++;
+    }
+
+    if (value.data &&
+        value.data.approvalRequestStatus &&
+        value.data.approvalRequestStatus === 'approvalRequestResponseReceived' &&
+        value.data.approvalRequestDecision &&
+        value.data.approvalRequestDecision === 'approved'
+    ) {
+        approved++;
+    }
+
+    if (value.data &&
+        value.data.approvalRequestStatus &&
+        value.data.approvalRequestStatus === 'approvalRequestResponseReceived' &&
+        value.data.approvalRequestDecision &&
+        value.data.approvalRequestDecision === 'rejected'
+    ) {
+        rejected++;
+    }
+
+    return { approved, rejected, cancelled, outstanding };
+};
+
+const approvalRequestsFulfilled = (value, message, defaultError) => {
+    const logger = getLogger();
+    const validationErrorMsg = (message || defaultError);
+
+    let approvals = null;
+    try {
+        approvals = JSON.parse(value);
+    } catch (error) {
+        logger.error('APPROVAL_REQUEST_FULFILLMENT_VALIDATION_ERROR', { message: error.message, stack: error.stack  });
+        throw new Error('Value passed for validation is not a valid Approval Request object.');
+    }
+
+    if (!Array.isArray(approvals)) {
+        throw new Error('Value passed for validation is not a valid Approval Request object.');
+    }
+
+    const reducedApprovalStats = approvals.reduce(approvalsReducer, { approved: 0, rejected: 0, cancelled: 0, outstanding: 0 });
+    if (reducedApprovalStats.rejected > 0 || reducedApprovalStats.outstanding > 0 || reducedApprovalStats.approved < 1) {
+        return validationErrorMsg;
+    }
+
+    return null;
 };
 
 const requestsFulfilled = ( value, message, statusField, cancelledValue, completeValue, defaultError ) => {
@@ -202,11 +265,8 @@ const validators = {
             validationErrors.contributionsFulfilled());
     },
     approvalsFulfilled: ({ value, message }) => {
-        return requestsFulfilled( value,
+        return approvalRequestsFulfilled( value,
             message,
-            'contributionStatus',
-            'contributionCancelled',
-            'contributionReceived',
             validationErrors.approvalsFulfilled());
     },
     /**

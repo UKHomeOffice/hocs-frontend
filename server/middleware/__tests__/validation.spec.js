@@ -294,35 +294,140 @@ describe('Validators', () => {
     });
 
     describe('Approvals fulfilled validation', () => {
-        it('should reject with message if fails with message', () => {
-            expect(validators.approvalsFulfilled({ value: '{ "test": 1 }', message: 'test' })).toEqual('test');
+
+
+        const demoData = [{
+            data: {
+                approvalRequestStatus: 'approvalRequestCancelled',
+                approvalRequestDueDate: '2021-09-01',
+                approvalRequestCreatedDate: '2021-08-31',
+                approvalRequestForBusinessUnit: 'FOI_APPROVER_SCS',
+                approvalRequestCancellationNote: 'Test note'
+            }
+        }, {
+            data: {
+                approvalRequestStatus: 'approvalRequestResponseReceived',
+                approvalRequestDueDate: '2021-09-01',
+                approvalRequestDecision: 'approved',
+                approvalRequestResponseBy: 'Something',
+                approvalRequestCreatedDate: '2021-08-31',
+                approvalRequestResponseNote: 'dcadcadf',
+                approvalRequestForBusinessUnit: 'FOI_APPROVER_SCS',
+                approvalRequestResponseReceivedDate: '2021-08-31'
+            }
+        },{
+            data: {
+                approvalRequestStatus: 'approvalRequestResponseReceived',
+                approvalRequestDueDate: '2021-09-01',
+                approvalRequestDecision: 'rejected',
+                approvalRequestResponseBy: 'Something',
+                approvalRequestCreatedDate: '2021-08-31',
+                approvalRequestResponseNote: 'dcadcadf',
+                approvalRequestForBusinessUnit: 'FOI_APPROVER_SCS',
+                approvalRequestResponseReceivedDate: '2021-08-31'
+            }
+        }, {
+            data: {
+                approvalRequestDueDate: '2021-09-01',
+                approvalRequestCreatedDate: '2021-08-31',
+                approvalRequestForBusinessUnit: 'FOI_APPROVER_SCS'
+            }
+        }, {
+            data: {
+                approvalRequestForBusinessUnit: 'FOI_APPROVER_SCS'
+            }
+        }];
+
+        it('should throw error if object passed in NOT valid JSON', () => {
+            // GIVEN
+            const unexpectedObject = '"test": 1';
+            const expectedError = new Error('Value passed for validation is not a valid Approval Request object.');
+
+            // THEN
+            expect(() => validators.approvalsFulfilled({ value: unexpectedObject })).toThrowError(expectedError);
         });
-        it('should reject if value passed in is null', () => {
-            expect(validators.approvalsFulfilled({ value: null })).not.toEqual(null);
+
+
+        it('should throw error if object passed is not an array.', () => {
+            // GIVEN
+            const unexpectedObject = '{ "test": 1 }';
+            const expectedError = new Error('Value passed for validation is not a valid Approval Request object.');
+
+            // THEN
+            expect(() => validators.approvalsFulfilled({ value: unexpectedObject })).toThrowError(expectedError);
         });
-        it('should reject if value passed in is undefined', () => {
-            expect(validators.approvalsFulfilled({ value: undefined })).not.toEqual(null);
+
+        it('should throw error if object passed has NO approvalRequestCreatedDate field.', () => {
+            // GIVEN
+            const inValidObject = JSON.stringify([demoData[4]]);
+            const expectedError = new Error('Value passed for validation is not a valid Approval Request object.');
+
+            // THEN
+            expect(() => validators.approvalsFulfilled({ value: inValidObject })).toThrowError(expectedError);
         });
-        it('should reject if value passed in is not an array', () => {
-            expect(validators.approvalsFulfilled({ value: '{ "test": 1 }' })).not.toEqual(null);
+
+        it('should provide validation error if any Rejected Approval Requests are present',  () => {
+
+            // GIVEN
+            const expectedResponse = 'The required approvals to progress the case have not been received.';
+            const valuesAsJSON = JSON.stringify(demoData.slice(1, 3));
+
+            // THEN
+            expect(validators.approvalsFulfilled({ value: valuesAsJSON })).toEqual(expectedResponse);
         });
-        it('should reject if value does not have contributionStatus not present', () => {
-            expect(validators.approvalsFulfilled({ value: '[{ "data": { "test": 1 } }]' })).not.toEqual(null);
+
+        it('should provide validation error if any Approval Requests are outstanding',  () => {
+
+            // GIVEN
+            const expectedResponse = 'The required approvals to progress the case have not been received.';
+            const valuesAsJSON = JSON.stringify([demoData[2], demoData[3]]);
+
+            // THEN
+            expect(validators.approvalsFulfilled({ value: valuesAsJSON })).toEqual(expectedResponse);
         });
-        it('should reject if value has approvalStatus not cancelled or received', () => {
-            expect(validators.approvalsFulfilled({ value: '[{ "data": { "approvalStatus": "test" } }]' })).not.toEqual(null);
+
+        it('should provide validation error if no requests exist',  () => {
+
+            // GIVEN
+            const expectedResponse = 'The required approvals to progress the case have not been received.';
+            const valuesAsJSON = JSON.stringify([]);
+
+            // THEN
+            expect(validators.approvalsFulfilled({ value: valuesAsJSON })).toEqual(expectedResponse);
         });
-        it('should reject if one value has contributionStatus that is not cancelled or received', () => {
-            expect(validators.approvalsFulfilled({ value: '[{ "data": { "contributionStatus": "contributionReceived" }, { "contributionStatus": "test" } }]' })).not.toEqual(null);
+
+        it('should provide validation error if only cancelled requests exist',  () => {
+
+            // GIVEN
+            const expectedResponse = 'The required approvals to progress the case have not been received.';
+            const valuesAsJSON = JSON.stringify([demoData[0], demoData[0]]);
+
+            // THEN
+            expect(validators.approvalsFulfilled({ value: valuesAsJSON })).toEqual(expectedResponse);
         });
-        it('should accept if value has contributionStatus as cancelled', () => {
-            expect(validators.approvalsFulfilled({ value: '[{ "data": { "contributionStatus": "contributionCancelled" } }]' })).toEqual(null);
+
+        it('should return "null" when at least 1 "Complete - approved" and others are "Cancelled".', () => {
+
+            // GIVEN
+            const expectedMessage = null;
+            const testValue = JSON.stringify(demoData.slice(0,2));
+
+            // WHEN-THEN
+            expect(validators.approvalsFulfilled({
+                value: testValue
+            })).toEqual(expectedMessage);
         });
-        it('should accept if value has contributionStatus as received', () => {
-            expect(validators.approvalsFulfilled({ value: '[{ "data": { "contributionStatus": "contributionReceived" } }]' })).toEqual(null);
-        });
-        it('should accept if all value has contributionStatus as received or cancelled', () => {
-            expect(validators.approvalsFulfilled({ value: '[{ "data": { "contributionStatus": "contributionReceived" } }, { "data": {"contributionStatus": "contributionCancelled" } }]' })).toEqual(null);
+
+        it('should return default message if value has approvalRequestResponseStatus as cancelled', () => {
+
+            // GIVEN
+            const defaultMessage = 'The required approvals to progress the case have not been received.';
+            const testValue = JSON.stringify([demoData[0]]);
+
+            // WHEN-THEN
+            expect(validators.approvalsFulfilled({
+                value: testValue
+            })).toEqual(defaultMessage);
         });
     });
 
