@@ -106,7 +106,7 @@ Object {
 exports[`Case-view-all-stages Adapter should render SOMU Approval case view sections 1`] = `
 Object {
   "data": Object {
-    "ApprovalRequests": "Dummy Approval Role COMPLETE - approved",
+    "ApprovalRequests": "Dummy Approval Role Complete - approved",
     "my_field": "Some Value",
     "stage_2_field_1": "Some Label",
   },
@@ -178,7 +178,7 @@ Object {
 exports[`Case-view-all-stages Adapter should render SOMU MPAM Contributions case view sections 1`] = `
 Object {
   "data": Object {
-    "CaseContributions": "Random list value DUE 01/09/2021",
+    "CaseContributions": "Random list value Due 01/09/2021",
     "my_field": "Some Value",
     "stage_2_field_1": "Some Label",
   },

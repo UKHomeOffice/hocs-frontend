@@ -3,10 +3,10 @@ const { Component } = require('../../services/forms/component-builder');
 const { formatDate, addDays } = require('../../libs/dateHelpers');
 
 const REQUEST_STATUS = {
-    COMPLETE: 'COMPLETE',
-    CANCELLED: 'CANCELLED',
-    OVERDUE: 'OVERDUE',
-    DUE: 'DUE'
+    COMPLETE: 'Complete',
+    CANCELLED: 'Cancelled',
+    OVERDUE: 'Overdue',
+    DUE: 'Due'
 };
 
 const STATUS_OPTION = {
