@@ -244,16 +244,12 @@ class WorkstackAllocate extends Component {
     }
 
     renderHeader(column) {
-<<<<<<< HEAD
-        if (column.sortStrategy === 'noSort') {
-=======
 
         if (column.renderer === 'hidden') {
             return;
         }
 
-        if(column.sortStrategy === 'noSort') {
->>>>>>> HOCS-3556 - Add hidden workstack column. Update case no regex. Add COMP2 case type
+        if (column.sortStrategy === 'noSort') {
             return (
                 <th className='govuk-table__header' key={column.displayName}>
                     {column.renderer !== ColumnRenderer.INDICATOR_BLUE && column.renderer !== ColumnRenderer.INDICATOR_GREEN && column.renderer !== ColumnRenderer.INDICATOR_RED && column.displayName}
@@ -323,7 +319,7 @@ class WorkstackAllocate extends Component {
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>
                     <Link to={`/case/${row.caseUUID}/stage/${row.uuid}`} className='govuk-link govuk-!-margin-right-3'>{value}</Link>
                 </td>;
-            case ColumnRenderer.NEXT_CASE_LINK:
+            case ColumnRenderer.NEXT_CASE_LINK: {
                 // build a suitable FE link
                 if (row.nextCaseReference) {
                     return (
@@ -331,10 +327,13 @@ class WorkstackAllocate extends Component {
                             <Link to='some_link_in_here' className='govuk-link govuk-!-margin-right-3'>{row.nextCaseReference}</Link>
                         </td>
                     );
+                } else if (value) {
+                    return (<td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>
+                        <Link to={{pathname :`/action/create/${value}/DOCUMENT?from=${row.caseUUID}`, query:{from: row.caseUUID}}} className='govuk-link govuk-!-margin-right-3'>Escalate case..</Link>
+                    </td>);
                 }
-                return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>
-                    <Link to={{pathname :`/action/create/${value}/DOCUMENT?from=${row.caseUUID}`, query:{from: row.caseUUID}}} className='govuk-link govuk-!-margin-right-3'>Escalate case..</Link>
-                </td>;
+                return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'></td>
+            }
             case ColumnRenderer.CORRESPONDENT_WITH_CASE_LINK:
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>
                     {
