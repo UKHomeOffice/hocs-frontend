@@ -28,7 +28,7 @@ describe('The FoiActions component', () => {
         expect(
             render(<ApplicationProvider config={config}>
                 <MemoryRouter>
-                    <FoiActions />
+                    <FoiActions/>
                 </MemoryRouter>
             </ApplicationProvider>)
         ).toMatchSnapshot();

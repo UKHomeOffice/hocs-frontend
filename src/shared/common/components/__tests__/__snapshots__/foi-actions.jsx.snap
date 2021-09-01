@@ -1,36 +1,88 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`The FoiActions component should hide the extend option when FOI_PIT extension applied 1`] = `
-<span
-  class="govuk-body full-width"
->
-  <strong>
-    Current due date: 
-  </strong>
-  05/07/2021 
+Array [
+  <h2
+    class="govuk-heading-m"
+  >
+    Case actions
+  </h2>,
+  <h3
+    class="govuk-heading-s"
+  >
+    Extensions
+  </h3>,
   <span
+    class="govuk-body full-width"
+  >
+    Current due date: 05/07/2021 
+    <span
+      class="govuk-body"
+    >
+      (PIT Extension Applied)
+    </span>
+  </span>,
+  <p
     class="govuk-body"
   >
-    (PIT Extension Applied)
-  </span>
-</span>
+    Apply an extension to this case.
+  </p>,
+  <hr
+    class="govuk-section-break govuk-section-break--m govuk-section-break--visible"
+  />,
+  <h3
+    class="govuk-heading-s"
+  >
+    Appeals
+  </h3>,
+  <p
+    class="govuk-body"
+  >
+    Record an appeal against this request.
+  </p>,
+]
 `;
 
 exports[`The FoiActions component should show the extend option when no extension applied 1`] = `
 Array [
+  <h2
+    class="govuk-heading-m"
+  >
+    Case actions
+  </h2>,
+  <h3
+    class="govuk-heading-s"
+  >
+    Extensions
+  </h3>,
   <span
     class="govuk-body full-width"
   >
-    <strong>
-      Current due date: 
-    </strong>
-    05/07/2021 
+    Current due date: 05/07/2021 
   </span>,
+  <p
+    class="govuk-body"
+  >
+    Apply an extension to this case.
+  </p>,
   <a
     class="govuk-body govuk-link"
     href="/case/some_case_id/stage/some_stage_id/entity/actions_tab/extend_foi_deadline"
   >
     Extend this case
   </a>,
+  <hr
+    class="govuk-section-break govuk-section-break--m govuk-section-break--visible"
+  />,
+  <h3
+    class="govuk-heading-s"
+  >
+    Appeals
+  </h3>,
+  <p
+    class="govuk-body"
+  >
+    Record an appeal against this request.
+  </p>,
 ]
 `;
