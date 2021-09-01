@@ -25,7 +25,7 @@ function createClient({ baseURL, auth }) {
 
     return {
         get: (endpoint, headers) => client.get(endpoint, headers),
-        post: (endpoint, body, headers) => {console.log(body); return client.post(endpoint, body, headers)},
+        post: (endpoint, body, headers) => {console.log(body); return client.post(endpoint, body, headers);},
         delete: (endpoint, headers) => client.delete(endpoint, headers),
         put: (endpoint, body, headers) => client.put(endpoint, body, headers)
     };

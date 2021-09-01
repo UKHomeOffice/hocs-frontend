@@ -25,7 +25,6 @@ function createCaseRequest(type, form, documentTag) {
         type,
         dateReceived: form.data['DateReceived'],
         fromCaseUUID: form.data['fromCaseUUID'],
-        fred:"fred",
         documents: createDocumentSummaryObjects(form, documentTag)
     };
 }
