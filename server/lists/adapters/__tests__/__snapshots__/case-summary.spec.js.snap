@@ -38,6 +38,10 @@ Object {
     },
   ],
   "deadlinesEnabled": true,
+  "previousCase": Object {
+    "reference": "__previousCaseReference__",
+    "uuid": "__previousCaseUuid__",
+  },
   "primaryCorrespondent": Object {
     "address": Object {
       "address1": "__address1__",
@@ -97,6 +101,10 @@ Object {
     },
   ],
   "deadlinesEnabled": true,
+  "previousCase": Object {
+    "reference": "__previousCaseReference__",
+    "uuid": "__previousCaseUuid__",
+  },
   "primaryCorrespondent": Object {
     "address": Object {
       "address1": "__address1__",
@@ -139,6 +147,10 @@ Object {
   },
   "deadlines": null,
   "deadlinesEnabled": false,
+  "previousCase": Object {
+    "reference": "__previousCaseReference__",
+    "uuid": "__previousCaseUuid__",
+  },
   "primaryCorrespondent": Object {
     "address": Object {
       "address1": "__address1__",
@@ -181,6 +193,10 @@ Object {
   },
   "deadlines": null,
   "deadlinesEnabled": true,
+  "previousCase": Object {
+    "reference": "__previousCaseReference__",
+    "uuid": "__previousCaseUuid__",
+  },
   "primaryCorrespondent": Object {
     "address": Object {
       "address1": "__address1__",
@@ -241,6 +257,10 @@ Object {
     },
   ],
   "deadlinesEnabled": true,
+  "previousCase": Object {
+    "reference": "__previousCaseReference__",
+    "uuid": "__previousCaseUuid__",
+  },
   "primaryCorrespondent": Object {
     "address": Object {
       "address1": "__address1__",
@@ -272,6 +292,7 @@ Object {
   },
   "deadlines": Array [],
   "deadlinesEnabled": true,
+  "previousCase": undefined,
   "primaryCorrespondent": null,
   "primaryTopic": null,
   "stages": Array [],

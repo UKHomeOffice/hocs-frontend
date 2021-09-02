@@ -274,7 +274,7 @@ module.exports = {
         },
         USER_WORKSTACK: {
             client: 'CASEWORK',
-            endpoint: '/stage',
+            endpoint: '/stage/user/${userUuid}',
             adapter: workstack.userAdapter
         },
         TEAM_WORKSTACK: {
@@ -440,6 +440,12 @@ module.exports = {
         EX_GRATIA_BUS_REPS: {
             client: 'INFO',
             endpoint: '/entity/list/EXGRATIA_BUS_REPS',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        SECRETARIAT_LIST: {
+            client: 'INFO',
+            endpoint: '/entity/list/SECRETARIAT_LIST',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },

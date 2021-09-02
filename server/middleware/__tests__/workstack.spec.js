@@ -39,7 +39,8 @@ describe('Workstack middleware', () => {
                         }
                         return Promise.reject();
                     })
-                }
+                },
+                user: { uuid: 'TEST' }
             };
             res = {
                 locals: {}
@@ -51,6 +52,16 @@ describe('Workstack middleware', () => {
             expect(res.locals.workstack).toBeDefined();
             expect(res.locals.workstack).toEqual('MOCK_WORKSTACK');
             expect(next).toHaveBeenCalled();
+        });
+
+        it('should call next with an error if user not present', async () => {
+            const reqWithoutUser = req;
+            delete reqWithoutUser.user;
+
+            await userWorkstackMiddleware(reqWithoutUser, res, next);
+            expect(res.locals.workstack).not.toBeDefined();
+            expect(next).toHaveBeenCalled();
+            expect(next).toHaveBeenCalledWith(TypeError('Cannot read property \'uuid\' of undefined'));
         });
 
         it('should call next with an error if unable to retrieve workstack data', async () => {

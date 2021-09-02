@@ -87,6 +87,7 @@ class TypeAhead extends Component {
                         valueContainer: () => ({}),
                         placeholder: () => ({})
                     }}
+                    inputId={name}
                     id={name}
                     placeholder='Search'
                     classNamePrefix='govuk-typeahead'

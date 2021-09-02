@@ -173,6 +173,7 @@ exports[`Form type ahead component (select) should render disabled when passed 1
         defaultOptions={false}
         filterOption={null}
         id="type-ahead"
+        inputId="type-ahead"
         isClearable={true}
         isDisabled={true}
         isLoading={false}
@@ -218,6 +219,7 @@ exports[`Form type ahead component (select) should render disabled when passed 1
           defaultValue={null}
           filterOption={null}
           id="type-ahead"
+          inputId="type-ahead"
           isClearable={true}
           isDisabled={true}
           isLoading={false}
@@ -259,6 +261,7 @@ exports[`Form type ahead component (select) should render disabled when passed 1
             getOptionLabel={[Function]}
             getOptionValue={[Function]}
             id="type-ahead"
+            inputId="type-ahead"
             inputValue=""
             isClearable={true}
             isDisabled={true}
@@ -344,6 +347,7 @@ exports[`Form type ahead component (select) should render disabled when passed 1
                   "getOptionLabel": [Function],
                   "getOptionValue": [Function],
                   "id": "type-ahead",
+                  "inputId": "type-ahead",
                   "inputValue": "",
                   "isClearable": true,
                   "isDisabled": true,
@@ -481,6 +485,7 @@ exports[`Form type ahead component (select) should render disabled when passed 1
                         "getOptionLabel": [Function],
                         "getOptionValue": [Function],
                         "id": "type-ahead",
+                        "inputId": "type-ahead",
                         "inputValue": "",
                         "isClearable": true,
                         "isDisabled": true,
@@ -601,6 +606,7 @@ exports[`Form type ahead component (select) should render disabled when passed 1
                               "getOptionLabel": [Function],
                               "getOptionValue": [Function],
                               "id": "type-ahead",
+                              "inputId": "type-ahead",
                               "inputValue": "",
                               "isClearable": true,
                               "isDisabled": true,
@@ -719,6 +725,7 @@ exports[`Form type ahead component (select) should render disabled when passed 1
                                     "getOptionLabel": [Function],
                                     "getOptionValue": [Function],
                                     "id": "type-ahead",
+                                    "inputId": "type-ahead",
                                     "inputValue": "",
                                     "isClearable": true,
                                     "isDisabled": true,
@@ -815,7 +822,7 @@ exports[`Form type ahead component (select) should render disabled when passed 1
                                 autoCorrect="off"
                                 cx={[Function]}
                                 getStyles={[Function]}
-                                id="react-select-7-input"
+                                id="type-ahead"
                                 innerRef={[Function]}
                                 isDisabled={true}
                                 isHidden={false}
@@ -842,6 +849,7 @@ exports[`Form type ahead component (select) should render disabled when passed 1
                                     "getOptionLabel": [Function],
                                     "getOptionValue": [Function],
                                     "id": "type-ahead",
+                                    "inputId": "type-ahead",
                                     "inputValue": "",
                                     "isClearable": true,
                                     "isDisabled": true,
@@ -945,7 +953,7 @@ exports[`Form type ahead component (select) should render disabled when passed 1
                                       autoCorrect="off"
                                       className="govuk-typeahead__input"
                                       disabled={true}
-                                      id="react-select-7-input"
+                                      id="type-ahead"
                                       injectStyles={true}
                                       inputRef={[Function]}
                                       inputStyle={
@@ -983,7 +991,7 @@ exports[`Form type ahead component (select) should render disabled when passed 1
                                           autoComplete="off"
                                           autoCorrect="off"
                                           disabled={true}
-                                          id="react-select-7-input"
+                                          id="type-ahead"
                                           onBlur={[Function]}
                                           onChange={[Function]}
                                           onFocus={[Function]}
@@ -1058,6 +1066,7 @@ exports[`Form type ahead component (select) should render disabled when passed 1
                               "getOptionLabel": [Function],
                               "getOptionValue": [Function],
                               "id": "type-ahead",
+                              "inputId": "type-ahead",
                               "inputValue": "",
                               "isClearable": true,
                               "isDisabled": true,
@@ -1183,6 +1192,7 @@ exports[`Form type ahead component (select) should render disabled when passed 1
                                     "getOptionLabel": [Function],
                                     "getOptionValue": [Function],
                                     "id": "type-ahead",
+                                    "inputId": "type-ahead",
                                     "inputValue": "",
                                     "isClearable": true,
                                     "isDisabled": true,
@@ -1309,6 +1319,7 @@ exports[`Form type ahead component (select) should render disabled when passed 1
                                     "getOptionLabel": [Function],
                                     "getOptionValue": [Function],
                                     "id": "type-ahead",
+                                    "inputId": "type-ahead",
                                     "inputValue": "",
                                     "isClearable": true,
                                     "isDisabled": true,
@@ -1481,6 +1492,7 @@ exports[`Form type ahead component (select) should render with default props 1`]
         defaultOptions={false}
         filterOption={null}
         id="type-ahead"
+        inputId="type-ahead"
         isClearable={true}
         isDisabled={false}
         isLoading={false}
@@ -1526,6 +1538,7 @@ exports[`Form type ahead component (select) should render with default props 1`]
           defaultValue={null}
           filterOption={null}
           id="type-ahead"
+          inputId="type-ahead"
           isClearable={true}
           isDisabled={false}
           isLoading={false}
@@ -1567,6 +1580,7 @@ exports[`Form type ahead component (select) should render with default props 1`]
             getOptionLabel={[Function]}
             getOptionValue={[Function]}
             id="type-ahead"
+            inputId="type-ahead"
             inputValue=""
             isClearable={true}
             isDisabled={false}
@@ -1652,6 +1666,7 @@ exports[`Form type ahead component (select) should render with default props 1`]
                   "getOptionLabel": [Function],
                   "getOptionValue": [Function],
                   "id": "type-ahead",
+                  "inputId": "type-ahead",
                   "inputValue": "",
                   "isClearable": true,
                   "isDisabled": false,
@@ -1789,6 +1804,7 @@ exports[`Form type ahead component (select) should render with default props 1`]
                         "getOptionLabel": [Function],
                         "getOptionValue": [Function],
                         "id": "type-ahead",
+                        "inputId": "type-ahead",
                         "inputValue": "",
                         "isClearable": true,
                         "isDisabled": false,
@@ -1909,6 +1925,7 @@ exports[`Form type ahead component (select) should render with default props 1`]
                               "getOptionLabel": [Function],
                               "getOptionValue": [Function],
                               "id": "type-ahead",
+                              "inputId": "type-ahead",
                               "inputValue": "",
                               "isClearable": true,
                               "isDisabled": false,
@@ -2027,6 +2044,7 @@ exports[`Form type ahead component (select) should render with default props 1`]
                                     "getOptionLabel": [Function],
                                     "getOptionValue": [Function],
                                     "id": "type-ahead",
+                                    "inputId": "type-ahead",
                                     "inputValue": "",
                                     "isClearable": true,
                                     "isDisabled": false,
@@ -2123,7 +2141,7 @@ exports[`Form type ahead component (select) should render with default props 1`]
                                 autoCorrect="off"
                                 cx={[Function]}
                                 getStyles={[Function]}
-                                id="react-select-2-input"
+                                id="type-ahead"
                                 innerRef={[Function]}
                                 isDisabled={false}
                                 isHidden={false}
@@ -2150,6 +2168,7 @@ exports[`Form type ahead component (select) should render with default props 1`]
                                     "getOptionLabel": [Function],
                                     "getOptionValue": [Function],
                                     "id": "type-ahead",
+                                    "inputId": "type-ahead",
                                     "inputValue": "",
                                     "isClearable": true,
                                     "isDisabled": false,
@@ -2253,7 +2272,7 @@ exports[`Form type ahead component (select) should render with default props 1`]
                                       autoCorrect="off"
                                       className="govuk-typeahead__input"
                                       disabled={false}
-                                      id="react-select-2-input"
+                                      id="type-ahead"
                                       injectStyles={true}
                                       inputRef={[Function]}
                                       inputStyle={
@@ -2291,7 +2310,7 @@ exports[`Form type ahead component (select) should render with default props 1`]
                                           autoComplete="off"
                                           autoCorrect="off"
                                           disabled={false}
-                                          id="react-select-2-input"
+                                          id="type-ahead"
                                           onBlur={[Function]}
                                           onChange={[Function]}
                                           onFocus={[Function]}
@@ -2366,6 +2385,7 @@ exports[`Form type ahead component (select) should render with default props 1`]
                               "getOptionLabel": [Function],
                               "getOptionValue": [Function],
                               "id": "type-ahead",
+                              "inputId": "type-ahead",
                               "inputValue": "",
                               "isClearable": true,
                               "isDisabled": false,
@@ -2491,6 +2511,7 @@ exports[`Form type ahead component (select) should render with default props 1`]
                                     "getOptionLabel": [Function],
                                     "getOptionValue": [Function],
                                     "id": "type-ahead",
+                                    "inputId": "type-ahead",
                                     "inputValue": "",
                                     "isClearable": true,
                                     "isDisabled": false,
@@ -2617,6 +2638,7 @@ exports[`Form type ahead component (select) should render with default props 1`]
                                     "getOptionLabel": [Function],
                                     "getOptionValue": [Function],
                                     "id": "type-ahead",
+                                    "inputId": "type-ahead",
                                     "inputValue": "",
                                     "isClearable": true,
                                     "isDisabled": false,
@@ -2797,6 +2819,7 @@ exports[`Form type ahead component (select) should render with error when passed
         error="Some error message"
         filterOption={null}
         id="type-ahead"
+        inputId="type-ahead"
         isClearable={true}
         isDisabled={false}
         isLoading={false}
@@ -2843,6 +2866,7 @@ exports[`Form type ahead component (select) should render with error when passed
           error="Some error message"
           filterOption={null}
           id="type-ahead"
+          inputId="type-ahead"
           isClearable={true}
           isDisabled={false}
           isLoading={false}
@@ -2885,6 +2909,7 @@ exports[`Form type ahead component (select) should render with error when passed
             getOptionLabel={[Function]}
             getOptionValue={[Function]}
             id="type-ahead"
+            inputId="type-ahead"
             inputValue=""
             isClearable={true}
             isDisabled={false}
@@ -2970,6 +2995,7 @@ exports[`Form type ahead component (select) should render with error when passed
                   "getOptionLabel": [Function],
                   "getOptionValue": [Function],
                   "id": "type-ahead",
+                  "inputId": "type-ahead",
                   "inputValue": "",
                   "isClearable": true,
                   "isDisabled": false,
@@ -3107,6 +3133,7 @@ exports[`Form type ahead component (select) should render with error when passed
                         "getOptionLabel": [Function],
                         "getOptionValue": [Function],
                         "id": "type-ahead",
+                        "inputId": "type-ahead",
                         "inputValue": "",
                         "isClearable": true,
                         "isDisabled": false,
@@ -3227,6 +3254,7 @@ exports[`Form type ahead component (select) should render with error when passed
                               "getOptionLabel": [Function],
                               "getOptionValue": [Function],
                               "id": "type-ahead",
+                              "inputId": "type-ahead",
                               "inputValue": "",
                               "isClearable": true,
                               "isDisabled": false,
@@ -3345,6 +3373,7 @@ exports[`Form type ahead component (select) should render with error when passed
                                     "getOptionLabel": [Function],
                                     "getOptionValue": [Function],
                                     "id": "type-ahead",
+                                    "inputId": "type-ahead",
                                     "inputValue": "",
                                     "isClearable": true,
                                     "isDisabled": false,
@@ -3441,7 +3470,7 @@ exports[`Form type ahead component (select) should render with error when passed
                                 autoCorrect="off"
                                 cx={[Function]}
                                 getStyles={[Function]}
-                                id="react-select-6-input"
+                                id="type-ahead"
                                 innerRef={[Function]}
                                 isDisabled={false}
                                 isHidden={false}
@@ -3468,6 +3497,7 @@ exports[`Form type ahead component (select) should render with error when passed
                                     "getOptionLabel": [Function],
                                     "getOptionValue": [Function],
                                     "id": "type-ahead",
+                                    "inputId": "type-ahead",
                                     "inputValue": "",
                                     "isClearable": true,
                                     "isDisabled": false,
@@ -3571,7 +3601,7 @@ exports[`Form type ahead component (select) should render with error when passed
                                       autoCorrect="off"
                                       className="govuk-typeahead__input"
                                       disabled={false}
-                                      id="react-select-6-input"
+                                      id="type-ahead"
                                       injectStyles={true}
                                       inputRef={[Function]}
                                       inputStyle={
@@ -3609,7 +3639,7 @@ exports[`Form type ahead component (select) should render with error when passed
                                           autoComplete="off"
                                           autoCorrect="off"
                                           disabled={false}
-                                          id="react-select-6-input"
+                                          id="type-ahead"
                                           onBlur={[Function]}
                                           onChange={[Function]}
                                           onFocus={[Function]}
@@ -3684,6 +3714,7 @@ exports[`Form type ahead component (select) should render with error when passed
                               "getOptionLabel": [Function],
                               "getOptionValue": [Function],
                               "id": "type-ahead",
+                              "inputId": "type-ahead",
                               "inputValue": "",
                               "isClearable": true,
                               "isDisabled": false,
@@ -3809,6 +3840,7 @@ exports[`Form type ahead component (select) should render with error when passed
                                     "getOptionLabel": [Function],
                                     "getOptionValue": [Function],
                                     "id": "type-ahead",
+                                    "inputId": "type-ahead",
                                     "inputValue": "",
                                     "isClearable": true,
                                     "isDisabled": false,
@@ -3935,6 +3967,7 @@ exports[`Form type ahead component (select) should render with error when passed
                                     "getOptionLabel": [Function],
                                     "getOptionValue": [Function],
                                     "id": "type-ahead",
+                                    "inputId": "type-ahead",
                                     "inputValue": "",
                                     "isClearable": true,
                                     "isDisabled": false,
@@ -4113,6 +4146,7 @@ exports[`Form type ahead component (select) should render with hint when passed 
         defaultOptions={false}
         filterOption={null}
         id="type-ahead"
+        inputId="type-ahead"
         isClearable={true}
         isDisabled={false}
         isLoading={false}
@@ -4158,6 +4192,7 @@ exports[`Form type ahead component (select) should render with hint when passed 
           defaultValue={null}
           filterOption={null}
           id="type-ahead"
+          inputId="type-ahead"
           isClearable={true}
           isDisabled={false}
           isLoading={false}
@@ -4199,6 +4234,7 @@ exports[`Form type ahead component (select) should render with hint when passed 
             getOptionLabel={[Function]}
             getOptionValue={[Function]}
             id="type-ahead"
+            inputId="type-ahead"
             inputValue=""
             isClearable={true}
             isDisabled={false}
@@ -4284,6 +4320,7 @@ exports[`Form type ahead component (select) should render with hint when passed 
                   "getOptionLabel": [Function],
                   "getOptionValue": [Function],
                   "id": "type-ahead",
+                  "inputId": "type-ahead",
                   "inputValue": "",
                   "isClearable": true,
                   "isDisabled": false,
@@ -4421,6 +4458,7 @@ exports[`Form type ahead component (select) should render with hint when passed 
                         "getOptionLabel": [Function],
                         "getOptionValue": [Function],
                         "id": "type-ahead",
+                        "inputId": "type-ahead",
                         "inputValue": "",
                         "isClearable": true,
                         "isDisabled": false,
@@ -4541,6 +4579,7 @@ exports[`Form type ahead component (select) should render with hint when passed 
                               "getOptionLabel": [Function],
                               "getOptionValue": [Function],
                               "id": "type-ahead",
+                              "inputId": "type-ahead",
                               "inputValue": "",
                               "isClearable": true,
                               "isDisabled": false,
@@ -4659,6 +4698,7 @@ exports[`Form type ahead component (select) should render with hint when passed 
                                     "getOptionLabel": [Function],
                                     "getOptionValue": [Function],
                                     "id": "type-ahead",
+                                    "inputId": "type-ahead",
                                     "inputValue": "",
                                     "isClearable": true,
                                     "isDisabled": false,
@@ -4755,7 +4795,7 @@ exports[`Form type ahead component (select) should render with hint when passed 
                                 autoCorrect="off"
                                 cx={[Function]}
                                 getStyles={[Function]}
-                                id="react-select-5-input"
+                                id="type-ahead"
                                 innerRef={[Function]}
                                 isDisabled={false}
                                 isHidden={false}
@@ -4782,6 +4822,7 @@ exports[`Form type ahead component (select) should render with hint when passed 
                                     "getOptionLabel": [Function],
                                     "getOptionValue": [Function],
                                     "id": "type-ahead",
+                                    "inputId": "type-ahead",
                                     "inputValue": "",
                                     "isClearable": true,
                                     "isDisabled": false,
@@ -4885,7 +4926,7 @@ exports[`Form type ahead component (select) should render with hint when passed 
                                       autoCorrect="off"
                                       className="govuk-typeahead__input"
                                       disabled={false}
-                                      id="react-select-5-input"
+                                      id="type-ahead"
                                       injectStyles={true}
                                       inputRef={[Function]}
                                       inputStyle={
@@ -4923,7 +4964,7 @@ exports[`Form type ahead component (select) should render with hint when passed 
                                           autoComplete="off"
                                           autoCorrect="off"
                                           disabled={false}
-                                          id="react-select-5-input"
+                                          id="type-ahead"
                                           onBlur={[Function]}
                                           onChange={[Function]}
                                           onFocus={[Function]}
@@ -4998,6 +5039,7 @@ exports[`Form type ahead component (select) should render with hint when passed 
                               "getOptionLabel": [Function],
                               "getOptionValue": [Function],
                               "id": "type-ahead",
+                              "inputId": "type-ahead",
                               "inputValue": "",
                               "isClearable": true,
                               "isDisabled": false,
@@ -5123,6 +5165,7 @@ exports[`Form type ahead component (select) should render with hint when passed 
                                     "getOptionLabel": [Function],
                                     "getOptionValue": [Function],
                                     "id": "type-ahead",
+                                    "inputId": "type-ahead",
                                     "inputValue": "",
                                     "isClearable": true,
                                     "isDisabled": false,
@@ -5249,6 +5292,7 @@ exports[`Form type ahead component (select) should render with hint when passed 
                                     "getOptionLabel": [Function],
                                     "getOptionValue": [Function],
                                     "id": "type-ahead",
+                                    "inputId": "type-ahead",
                                     "inputValue": "",
                                     "isClearable": true,
                                     "isDisabled": false,
@@ -5424,6 +5468,7 @@ exports[`Form type ahead component (select) should render with label when passed
         defaultOptions={false}
         filterOption={null}
         id="type-ahead"
+        inputId="type-ahead"
         isClearable={true}
         isDisabled={false}
         isLoading={false}
@@ -5469,6 +5514,7 @@ exports[`Form type ahead component (select) should render with label when passed
           defaultValue={null}
           filterOption={null}
           id="type-ahead"
+          inputId="type-ahead"
           isClearable={true}
           isDisabled={false}
           isLoading={false}
@@ -5510,6 +5556,7 @@ exports[`Form type ahead component (select) should render with label when passed
             getOptionLabel={[Function]}
             getOptionValue={[Function]}
             id="type-ahead"
+            inputId="type-ahead"
             inputValue=""
             isClearable={true}
             isDisabled={false}
@@ -5595,6 +5642,7 @@ exports[`Form type ahead component (select) should render with label when passed
                   "getOptionLabel": [Function],
                   "getOptionValue": [Function],
                   "id": "type-ahead",
+                  "inputId": "type-ahead",
                   "inputValue": "",
                   "isClearable": true,
                   "isDisabled": false,
@@ -5732,6 +5780,7 @@ exports[`Form type ahead component (select) should render with label when passed
                         "getOptionLabel": [Function],
                         "getOptionValue": [Function],
                         "id": "type-ahead",
+                        "inputId": "type-ahead",
                         "inputValue": "",
                         "isClearable": true,
                         "isDisabled": false,
@@ -5852,6 +5901,7 @@ exports[`Form type ahead component (select) should render with label when passed
                               "getOptionLabel": [Function],
                               "getOptionValue": [Function],
                               "id": "type-ahead",
+                              "inputId": "type-ahead",
                               "inputValue": "",
                               "isClearable": true,
                               "isDisabled": false,
@@ -5970,6 +6020,7 @@ exports[`Form type ahead component (select) should render with label when passed
                                     "getOptionLabel": [Function],
                                     "getOptionValue": [Function],
                                     "id": "type-ahead",
+                                    "inputId": "type-ahead",
                                     "inputValue": "",
                                     "isClearable": true,
                                     "isDisabled": false,
@@ -6066,7 +6117,7 @@ exports[`Form type ahead component (select) should render with label when passed
                                 autoCorrect="off"
                                 cx={[Function]}
                                 getStyles={[Function]}
-                                id="react-select-4-input"
+                                id="type-ahead"
                                 innerRef={[Function]}
                                 isDisabled={false}
                                 isHidden={false}
@@ -6093,6 +6144,7 @@ exports[`Form type ahead component (select) should render with label when passed
                                     "getOptionLabel": [Function],
                                     "getOptionValue": [Function],
                                     "id": "type-ahead",
+                                    "inputId": "type-ahead",
                                     "inputValue": "",
                                     "isClearable": true,
                                     "isDisabled": false,
@@ -6196,7 +6248,7 @@ exports[`Form type ahead component (select) should render with label when passed
                                       autoCorrect="off"
                                       className="govuk-typeahead__input"
                                       disabled={false}
-                                      id="react-select-4-input"
+                                      id="type-ahead"
                                       injectStyles={true}
                                       inputRef={[Function]}
                                       inputStyle={
@@ -6234,7 +6286,7 @@ exports[`Form type ahead component (select) should render with label when passed
                                           autoComplete="off"
                                           autoCorrect="off"
                                           disabled={false}
-                                          id="react-select-4-input"
+                                          id="type-ahead"
                                           onBlur={[Function]}
                                           onChange={[Function]}
                                           onFocus={[Function]}
@@ -6309,6 +6361,7 @@ exports[`Form type ahead component (select) should render with label when passed
                               "getOptionLabel": [Function],
                               "getOptionValue": [Function],
                               "id": "type-ahead",
+                              "inputId": "type-ahead",
                               "inputValue": "",
                               "isClearable": true,
                               "isDisabled": false,
@@ -6434,6 +6487,7 @@ exports[`Form type ahead component (select) should render with label when passed
                                     "getOptionLabel": [Function],
                                     "getOptionValue": [Function],
                                     "id": "type-ahead",
+                                    "inputId": "type-ahead",
                                     "inputValue": "",
                                     "isClearable": true,
                                     "isDisabled": false,
@@ -6560,6 +6614,7 @@ exports[`Form type ahead component (select) should render with label when passed
                                     "getOptionLabel": [Function],
                                     "getOptionValue": [Function],
                                     "id": "type-ahead",
+                                    "inputId": "type-ahead",
                                     "inputValue": "",
                                     "isClearable": true,
                                     "isDisabled": false,
