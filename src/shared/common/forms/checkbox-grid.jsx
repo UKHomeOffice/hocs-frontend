@@ -13,10 +13,18 @@ class CheckboxGrid extends Component {
         return value;
     }
 
+    /**
+     * Called when the component mounts, sets the output variable to the current state
+     */
     componentDidMount() {
         this.props.updateState({ [this.props.name]: this.stateString() });
     }
 
+    /**
+     * Handles a change in the component (a checkbox being ticked) and sets the output variable to the selected value
+     *
+     * @param {} e The event that caused this function to fire
+     */
     handleChange(e) {
         const targetValue = e.target.value;
         this.setState((currentState) => {
