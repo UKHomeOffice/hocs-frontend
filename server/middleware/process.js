@@ -20,7 +20,7 @@ const customAdapters = {
         const [year = '', month = '', day = ''] = (value || '').split('-');
 
         if (year && month && day) {
-            reducer[name] = `${year}-${sanitiseDayMonthPart(month)}-${sanitiseDayMonthPart(day)}`;
+            reducer[name] = `${sanitiseYearPart(year)}-${sanitiseDayMonthPart(month)}-${sanitiseDayMonthPart(day)}`;
         }
         else if (year + month + day === '') {
             reducer[name] = '';
@@ -29,8 +29,7 @@ const customAdapters = {
     'checkbox': (reducer, field, data) => {
         const { name } = field.props;
         if (Object.prototype.hasOwnProperty.call(data, name)) {
-            const value = data[name];
-            reducer[name] = value;
+            reducer[name] = data[name];
         }
     },
     'add-document': (reducer, field, data, req) => {
@@ -159,6 +158,22 @@ function sanitiseDayMonthPart(value, paddingZeros = 2) {
         return value.substring(value.length - 2);
     }
     return value.padStart(paddingZeros, '0');
+}
+
+/**
+ * Dates that have a year part that contains leading zeroes are currentyly saved to the system
+ * with these leading zeroes. These zeroes add nothing to a year and can be safely stripped
+ * without the year losing it's meaning.
+ *
+ * @param {String} value the date year to sanitise
+ * @returns the sanitised date year part.
+ */
+function sanitiseYearPart(value) {
+    if (value === '') {
+        return value;
+    }
+
+    return value.replace(/^0+/, '');
 }
 
 module.exports = {
