@@ -6,6 +6,7 @@ exports[`Form button component should render disabled when isDisabled is passed 
   disabled={true}
   dispatch={[MockFunction]}
   label="Submit"
+  preventDefault="true"
 >
   <Link
     className="govuk-button"
@@ -40,6 +41,7 @@ exports[`Form button component should render with additional styles when classNa
   disabled={false}
   dispatch={[MockFunction]}
   label="Submit"
+  preventDefault="true"
 >
   <Link
     className="govuk-button test-class"
@@ -73,6 +75,7 @@ exports[`Form button component should render with correct label when passed 1`] 
   disabled={false}
   dispatch={[MockFunction]}
   label="My Button"
+  preventDefault="true"
 >
   <Link
     className="govuk-button"
@@ -106,6 +109,7 @@ exports[`Form button component should render with default props 1`] = `
   disabled={false}
   dispatch={[MockFunction]}
   label="Submit"
+  preventDefault="true"
 >
   <Link
     className="govuk-button"
