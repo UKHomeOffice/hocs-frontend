@@ -324,7 +324,7 @@ class WorkstackAllocate extends Component {
                 if (row.nextCaseReference) {
                     return (
                         <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>
-                            <Link to='some_link_in_here' className='govuk-link govuk-!-margin-right-3'>{row.nextCaseReference}</Link>
+                            <Link to={`/case/${row.nextCaseUUID}/stage/${row.nextCaseStageUUID}`} className='govuk-link govuk-!-margin-right-3'>{row.nextCaseReference}</Link>
                         </td>
                     );
                 } else if (value) {
