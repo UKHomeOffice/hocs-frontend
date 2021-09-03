@@ -57,13 +57,20 @@ const getPrimaryTopic = (topic) => topic ? topic.label : null;
 
 const getPrimaryCorrespondent = correspondent => correspondent && { address: correspondent.address, fullname: correspondent.fullname };
 
-const getPreviousCase = previousCase => previousCase && { uuid: previousCase.caseUuid, reference: previousCase.caseReference };
+const getPreviousCase = previousCase => {
+    if (previousCase && previousCase.caseUUID && previousCase.caseReference && previousCase.stageUUID){
+        return { uuid: previousCase.caseUUID, reference: previousCase.caseReference, stageUuid: previousCase.stageUUID };
+    } else {
+        return undefined;
+    }
+}
 
 module.exports = async (summary, options) => {
     const { fromStaticList, fetchList, configuration, user } = options;
     const { data: caseProfile } = await caseworkService.get(`/case/profile/${options.caseId}`, { headers: User.createHeaders(user) });
     const stageDeadlineEnabled = caseProfile && caseProfile.summaryDeadlineEnabled;
     const deadlinesEnabled = configuration.deadlinesEnabled;
+    console.log(summary.previousCase);
     return {
         case: {
             created: formatDate(summary.caseCreated),

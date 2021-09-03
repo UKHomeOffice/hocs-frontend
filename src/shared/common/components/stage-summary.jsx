@@ -118,7 +118,7 @@ const StageSummary = () => {
                                     <th className='govuk-table__header padding-left--small govuk-!-width-one-third'>Reference</th>
                                     <td className='govuk-table__cell'>
                                         <Link
-                                            to={'/case/' + summary.previousCase.uuid + '/stage/fa5588e1-05f6-4f45-9b4e-1426062b8ff5'}
+                                            to={'/case/' + summary.previousCase.uuid + '/stage/' + summary.previousCase.stageUuid}
                                             className='govuk-link govuk-!-margin-right-3'
                                             target='_blank'
                                             rel="noreferrer noopener">

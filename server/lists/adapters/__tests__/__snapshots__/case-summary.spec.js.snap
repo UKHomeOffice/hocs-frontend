@@ -40,6 +40,7 @@ Object {
   "deadlinesEnabled": true,
   "previousCase": Object {
     "reference": "__previousCaseReference__",
+    "stageUuid": "__previousCaseStageUUID__",
     "uuid": "__previousCaseUuid__",
   },
   "primaryCorrespondent": Object {
@@ -103,6 +104,7 @@ Object {
   "deadlinesEnabled": true,
   "previousCase": Object {
     "reference": "__previousCaseReference__",
+    "stageUuid": "__previousCaseStageUUID__",
     "uuid": "__previousCaseUuid__",
   },
   "primaryCorrespondent": Object {
@@ -149,6 +151,7 @@ Object {
   "deadlinesEnabled": false,
   "previousCase": Object {
     "reference": "__previousCaseReference__",
+    "stageUuid": "__previousCaseStageUUID__",
     "uuid": "__previousCaseUuid__",
   },
   "primaryCorrespondent": Object {
@@ -195,6 +198,7 @@ Object {
   "deadlinesEnabled": true,
   "previousCase": Object {
     "reference": "__previousCaseReference__",
+    "stageUuid": "__previousCaseStageUUID__",
     "uuid": "__previousCaseUuid__",
   },
   "primaryCorrespondent": Object {
@@ -259,6 +263,7 @@ Object {
   "deadlinesEnabled": true,
   "previousCase": Object {
     "reference": "__previousCaseReference__",
+    "stageUuid": "__previousCaseStageUUID__",
     "uuid": "__previousCaseUuid__",
   },
   "primaryCorrespondent": Object {

@@ -90,8 +90,9 @@ describe('Case Summary Adapter', () => {
                 { stage: 1, assignedToUserUUID: 1, assignedToTeamUUID: 1 }
             ],
             previousCase:{
-                caseUuid: '__previousCaseUuid__',
-                caseReference: '__previousCaseReference__'
+                caseUUID: '__previousCaseUuid__',
+                caseReference: '__previousCaseReference__',
+                stageUUID: '__previousCaseStageUUID__'
             }
         };
 
@@ -134,8 +135,9 @@ describe('Case Summary Adapter', () => {
                 { stage: 1, assignedToUserUUID: 1, assignedToTeamUUID: 1 }
             ],
             previousCase:{
-                caseUuid: '__previousCaseUuid__',
-                caseReference: '__previousCaseReference__'
+                caseUUID: '__previousCaseUuid__',
+                caseReference: '__previousCaseReference__',
+                stageUUID: '__previousCaseStageUUID__'
             }
         };
 
@@ -178,8 +180,9 @@ describe('Case Summary Adapter', () => {
                 { stage: 1, assignedToUserUUID: 1, assignedToTeamUUID: 1 }
             ],
             previousCase:{
-                caseUuid: '__previousCaseUuid__',
-                caseReference: '__previousCaseReference__'
+                caseUUID: '__previousCaseUuid__',
+                caseReference: '__previousCaseReference__',
+                stageUUID: '__previousCaseStageUUID__'
             }
         };
 
@@ -223,8 +226,9 @@ describe('Case Summary Adapter', () => {
                 { stage: 1, assignedToUserUUID: 1, assignedToTeamUUID: 1 }
             ],
             previousCase:{
-                caseUuid: '__previousCaseUuid__',
-                caseReference: '__previousCaseReference__'
+                caseUUID: '__previousCaseUuid__',
+                caseReference: '__previousCaseReference__',
+                stageUUID: '__previousCaseStageUUID__'
             }
         };
 
@@ -268,8 +272,9 @@ describe('Case Summary Adapter', () => {
                 { stage: 1, assignedToUserUUID: 1, assignedToTeamUUID: 1 }
             ],
             previousCase:{
-                caseUuid: '__previousCaseUuid__',
-                caseReference: '__previousCaseReference__'
+                caseUUID: '__previousCaseUuid__',
+                caseReference: '__previousCaseReference__',
+                stageUUID: '__previousCaseStageUUID__'
             }
         };
 
