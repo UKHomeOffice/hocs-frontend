@@ -221,7 +221,8 @@ function withForm(Page) {
             const { form_data, form_meta, form_schema, submittingForm } = this.state;
             const { errors } = form || {};
             return (
-                <Page title={form_schema.title} form={form_meta} hasSidebar={hasSidebar} >
+                <Page title={form_schema.title} form={form_meta}
+                    hasSidebar={hasSidebar || (form_schema.props && form_schema.props.hasSidebar)} >
                     {form_schema && <Form
                         {...{
                             schema: form_schema,
