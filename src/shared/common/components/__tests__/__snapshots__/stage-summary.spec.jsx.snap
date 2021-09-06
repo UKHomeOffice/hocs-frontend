@@ -291,7 +291,7 @@ Array [
         >
           <a
             class="govuk-link govuk-!-margin-right-3"
-            href="/case/__previousCaseUuid__/stage/fa5588e1-05f6-4f45-9b4e-1426062b8ff5"
+            href="/case/__previousCaseUuid__/stage/__previousCaseStage__"
             rel="noreferrer noopener"
             target="_blank"
           >
@@ -889,7 +889,7 @@ Array [
         >
           <a
             class="govuk-link govuk-!-margin-right-3"
-            href="/case/__previousCaseUuid__/stage/fa5588e1-05f6-4f45-9b4e-1426062b8ff5"
+            href="/case/__previousCaseUuid__/stage/__previousCaseStage__"
             rel="noreferrer noopener"
             target="_blank"
           >

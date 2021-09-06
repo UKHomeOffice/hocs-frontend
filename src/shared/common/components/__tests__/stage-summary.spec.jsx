@@ -41,7 +41,8 @@ const config = {
         }],
         previousCase: {
             uuid: '__previousCaseUuid__',
-            reference: '__previousCaseReference__'
+            reference: '__previousCaseReference__',
+            stageUuid: '__previousCaseStage__'
         }
     }
 };
@@ -75,7 +76,8 @@ describe('Stage summary component', () => {
 
         config.summary.previousCase = {
             uuid: '__previousCaseUuid__',
-            reference: '__previousCaseReference__'
+            reference: '__previousCaseReference__',
+            stageUuid: '__previousCaseStage__'
         };
     });
 
