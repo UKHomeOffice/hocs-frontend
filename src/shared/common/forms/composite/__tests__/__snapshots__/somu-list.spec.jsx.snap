@@ -202,14 +202,14 @@ exports[`Somu list component should render ApprovalTypeTable with Due 1`] = `
             </label>
           </td>
           <td
-            class="govuk-table__cell "
+            class="govuk-table__cell date-warning"
           >
             <label
-              aria-label="Due 01/09/2021"
+              aria-label="Overdue 01/09/2021"
               class="govuk-label"
-              title="Due 01/09/2021"
+              title="Overdue 01/09/2021"
             >
-              Due 01/09/2021
+              Overdue 01/09/2021
             </label>
           </td>
         </tr>

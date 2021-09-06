@@ -17,6 +17,7 @@ class Case extends Component {
             form,
             title
         } = this.props;
+
         return (
             <div className="govuk-grid-row">
                 <div className={`govuk-grid-column-one-${this.shouldDisplaySidebar() ? 'third' : 'half'}`}>

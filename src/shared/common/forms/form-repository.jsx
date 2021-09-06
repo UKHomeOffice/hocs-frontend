@@ -32,6 +32,7 @@ import showConditionFunctions from '../../helpers/show-condition-functions.js';
 import ReviewField from './composite/review-field.jsx';
 import Heading from './heading.jsx';
 import ConfirmationWithTeamNameAndCaseRef from './confirmation-with-team-name-and-case-ref.jsx';
+import CheckboxGrid from './checkbox-grid.jsx';
 
 function defaultDataAdapter(name, data, currentValue) {
     return data[name] || currentValue;
@@ -190,6 +191,8 @@ export function formComponentFactory(field, options) {
             });
         case 'change-link':
             return renderFormComponent(ChangeLink, { data, key, config, errors, callback });
+        case 'checkbox-grid':
+            return renderFormComponent(CheckboxGrid, { data, key, config, errors, callback });
         case 'review-field':
             // eslint-disable-next-line no-case-declarations
             const childType = config.child.component;
