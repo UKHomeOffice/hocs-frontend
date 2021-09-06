@@ -273,7 +273,6 @@ class WorkstackAllocate extends Component {
     }
 
     renderRow(item, columns) {
-        console.log(item);
         const value = `${item.caseUUID}:${item.uuid}`;
         const checkboxKey = item.caseUUID + item.uuid;
         const handleChange = (e) => {
@@ -329,10 +328,10 @@ class WorkstackAllocate extends Component {
                     );
                 } else if (value) {
                     return (<td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>
-                        <Link to={{pathname :`/action/create/${value}/DOCUMENT?from=${row.caseUUID}`, query:{from: row.caseUUID}}} className='govuk-link govuk-!-margin-right-3'>Escalate case..</Link>
+                        <Link to={ { pathname :`/action/create/${value}/DOCUMENT?from=${row.caseUUID}`, query: { from: row.caseUUID } } } className='govuk-link govuk-!-margin-right-3'>Escalate case..</Link>
                     </td>);
                 }
-                return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'></td>
+                return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'></td>;
             }
             case ColumnRenderer.CORRESPONDENT_WITH_CASE_LINK:
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>
