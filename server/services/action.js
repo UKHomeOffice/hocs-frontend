@@ -4,6 +4,8 @@ const { ActionError } = require('../models/error');
 const getLogger = require('../libs/logger');
 const User = require('../models/user');
 const doubleEncodeSlashes = require('../libs/encodingHelpers');
+const listService = require('./list/service');
+const uuid = require('uuid/v4');
 
 function createDocumentSummaryObjects(form, type) {
     return form.schema.fields.reduce((reducer, field) => {
@@ -152,6 +154,8 @@ const actions = {
         };
         const logger = getLogger();
 
+        const listServiceInstance = listService.getInstance(uuid(), options.user);
+
         try {
 
             if (form && form.action) {
@@ -234,6 +238,7 @@ const actions = {
                     }
                 } else if (somuTypeUuid) {
                     const { somuItemData, somuItemUuid, somuTypeItems, somuCaseType, somuType } = options;
+                    let type, choices;
 
                     switch (form.action) {
                         case actionTypes.ADD_CONTRIBUTION:
@@ -250,12 +255,28 @@ const actions = {
                             await caseworkService.post(`/case/${caseId}/item/${somuTypeUuid}`, { uuid: somuItemUuid, data: somuItemData }, headers);
                             break;
                         case actionTypes.ADD_CASE_APPEAL:
+                            choices = await listServiceInstance.fetch(
+                                'FOI_APPEAL_TYPES',
+                            );
+
+                            type = choices.find(choice => choice.value === form.data.appealType).label;
+
                             await caseworkService.post(`/case/${caseId}/item/${somuTypeUuid}`, { uuid: somuItemUuid, data: somuItemData }, headers);
-                            return ({ callbackUrl: `/case/${caseId}/stage/${stageId}/somu/${somuTypeUuid}/${somuType}/${somuCaseType}/MANAGE_APPEALS?hideSidebar=false` });  //replace FOI
+                            await caseworkService.post(`/case/${caseId}/note`, { type: 'APPEAL_CREATED', text: `${type}` }, headers);
+
+                            return ({ callbackUrl: `/case/${caseId}/stage/${stageId}/somu/${somuTypeUuid}/${somuType}/${somuCaseType}/MANAGE_APPEALS?hideSidebar=false` });
 
                         case actionTypes.EDIT_CASE_APPEAL:
+                            choices = await listServiceInstance.fetch(
+                                'FOI_APPEAL_TYPES',
+                            );
+
+                            type = choices.find(choice => choice.value === form.data.appealType).label;
+
                             await caseworkService.post(`/case/${caseId}/item/${somuTypeUuid}`, { uuid: somuItemUuid, data: somuItemData }, headers);
-                            return ({ callbackUrl: `/case/${caseId}/stage/${stageId}/somu/${somuTypeUuid}/${somuType}/${somuCaseType}/MANAGE_APPEALS?hideSidebar=false` });  //replace FOI
+                            await caseworkService.post(`/case/${caseId}/note`, { type: 'APPEAL_UPDATED', text: `${type} - ${form.data.appealStatus === 'appealPending' ? 'Pending' : 'Complete' }` }, headers);
+
+                            return ({ callbackUrl: `/case/${caseId}/stage/${stageId}/somu/${somuTypeUuid}/${somuType}/${somuCaseType}/MANAGE_APPEALS?hideSidebar=false` });
                         case actionTypes.ADD_APPROVAL_REQUEST:
                             await caseworkService.put(`/case/${caseId}/data/ApprovalRequests`,
                                 somuTypeItems,

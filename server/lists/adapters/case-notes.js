@@ -143,7 +143,15 @@ const typeAdaptors = {
     EXTENSION: ({ note }) => ({
         note,
         title: 'Case Extension'
-    })
+    }),
+    APPEAL_CREATED: ({ note }) => ({
+        note,
+        title: 'Appeal Created'
+    }),
+    APPEAL_UPDATED: ({ note }) => ({
+        note,
+        title: 'Appeal Updated'
+    }),
 };
 
 const formatDate = (rawDate) => {
