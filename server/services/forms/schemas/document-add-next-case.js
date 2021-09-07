@@ -44,4 +44,4 @@ module.exports = (options) => {
             'fromCaseUUID' : fromCaseUUID
         })
         .build();
-}
+};
