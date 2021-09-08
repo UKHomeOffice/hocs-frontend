@@ -3,6 +3,35 @@ const actionTypes = require('../actions/types');
 
 const mockRequestClient = jest.fn();
 
+jest.mock('../list/service', () => {
+    return {
+        getInstance: () => {
+            return {
+                fetch: (listId) => {
+                    if (listId === 'FOI_APPEAL_TYPES') {
+                        return [
+                            {
+                                label: 'Appeal type A',
+                                value: 'APPEAL_TYPE_A'
+                            },
+                            {
+                                label: 'Appeal type B',
+                                value: 'APPEAL_TYPE_B'
+                            },
+                            {
+                                label: 'Appeal type C',
+                                value: 'APPEAL_TYPE_C'
+                            }
+                        ];
+                    } else {
+                        return {};
+                    }
+                }
+            };
+        }
+    };
+});
+
 jest.mock('../../clients', () => {
     function handleMockWorkflowCreateRequest(body) {
         if (body.type === 'SUPPORTED_CASETYPE')
@@ -490,4 +519,65 @@ describe('Action service', () => {
         expect(response).toHaveProperty('callbackUrl');
     });
 
+    it('should return a callback when ADD_CASE_APPEAL action succeeds', async () => {
+
+        const testForm = {
+            data: {
+                appealType: 'APPEAL_TYPE_B',
+                appealStatus: 'appealPending'
+            },
+            action: actionTypes.ADD_CASE_APPEAL
+            ,
+            next: {
+                action: 'MANAGE_CASE_APPEALS'
+            }
+        };
+
+        const response = await actionService.performAction('CASE', {
+            caseId: 1234,
+            stageId: 5678,
+            somuTypeUuid: '00000000-0000-0000-0000-000000000000',
+            entity: null,
+            context: null,
+            form: testForm,
+            user: mockUser
+        });
+
+        expect(mockRequestClient).toHaveBeenCalledTimes(2);
+        expect(mockRequestClient)
+            .toHaveBeenCalledWith({ text: 'Appeal type B', type: 'APPEAL_CREATED' });
+        expect(response).toBeDefined();
+        expect(response).toHaveProperty('callbackUrl');
+    });
+
+    it('should return a callback when EDIT_CASE_APPEAL action succeeds', async () => {
+
+        const testForm = {
+            data: {
+                appealType: 'APPEAL_TYPE_B',
+                appealStatus: 'appealPending'
+            },
+            action: actionTypes.EDIT_CASE_APPEAL
+            ,
+            next: {
+                action: 'MANAGE_CASE_APPEALS'
+            }
+        };
+
+        const response = await actionService.performAction('CASE', {
+            caseId: 1234,
+            stageId: 5678,
+            somuTypeUuid: '00000000-0000-0000-0000-000000000000',
+            entity: null,
+            context: null,
+            form: testForm,
+            user: mockUser
+        });
+
+        expect(mockRequestClient).toHaveBeenCalledTimes(2);
+        expect(mockRequestClient)
+            .toHaveBeenCalledWith({ text: 'Appeal type B - Pending', type: 'APPEAL_UPDATED' });
+        expect(response).toBeDefined();
+        expect(response).toHaveProperty('callbackUrl');
+    });
 });
