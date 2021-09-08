@@ -116,7 +116,7 @@ async function hydrateField(field, req) {
         } else if (choices && typeof choices === 'string') {
             field.props.choices = await req.listService.fetch(
                 choices,
-                req.params
+                { ...req.params, ...req.form.data }
             );
         } else if (items && typeof items === 'string') {
             field.props.items = await req.listService.fetch(

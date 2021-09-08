@@ -239,7 +239,7 @@ module.exports = {
         },
         FOI_DRAFT_TEAMS_SELECTION: {
             client: 'INFO',
-            endpoint: '/teams/descendants/stage/${stageId}/case/${caseId}',
+            endpoint: '/teams/descendants/${AcceptanceTeam}',
             type: listService.types.DYNAMIC,
             adapter: teamsAdapter
         },
