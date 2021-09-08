@@ -197,7 +197,8 @@ const getFormForAction = async (req, res, next) => {
 
     try {
         const { workflow, context, action } = req.params;
-        const form = await getFormSchema({ context: 'ACTION', workflow, entity: context, action, user: req.user });
+        const { from } = req.query ? req.query : { from: null };
+        const form = await getFormSchema({ context: 'ACTION', workflow, entity: context, action, user: req.user, data : { from } });
         req.form = form;
         return next();
     } catch (error) {

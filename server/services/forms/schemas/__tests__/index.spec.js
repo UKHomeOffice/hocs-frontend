@@ -41,7 +41,6 @@ describe('Form schema definitions', () => {
             expect(result.schema.defaultActionLabel).toBeDefined();
         });
     });
-
 });
 
 describe('Contribution Request', () => {
