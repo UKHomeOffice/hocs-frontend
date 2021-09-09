@@ -5,7 +5,7 @@ const caseTypeAdapter = require('./adapters/case-types');
 const caseTypeCommaSeparatedAdapter = require('./adapters/case-types-comma-separated');
 const workstack = require('./adapters/workstacks');
 const topicAdapter = require('./adapters/topics');
-const topicAdapterFOI = require('./adapters/topicsfoi');
+const activeTopicAdapter = require('./adapters/activeTopics');
 const usersAdapter = require('./adapters/users');
 const teamsAdapter = require('./adapters/teams');
 const entityListItemsAdapter = require('./adapters/entityListItems');
@@ -410,8 +410,8 @@ module.exports = {
         },
         TOPICS_FOI: {
             client: 'INFO',
-            endpoint: '/topics',
-            adapter: topicAdapterFOI
+            endpoint: '/topics/FOI',
+            adapter: activeTopicAdapter
         },
         TOPICS_USER: {
             client: 'INFO',
