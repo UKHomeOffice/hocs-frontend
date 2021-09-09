@@ -30,6 +30,7 @@ import ReviewField from './composite/review-field.jsx';
 import Heading from './heading.jsx';
 import ConfirmationWithTeamNameAndCaseRef from './confirmation-with-team-name-and-case-ref.jsx';
 import CheckboxGrid from './checkbox-grid.jsx';
+import ParentTopicReviewField from './composite/review-field-parent-topic.jsx';
 
 function defaultDataAdapter(name, data, currentValue) {
     return data[name] || currentValue;
@@ -198,6 +199,17 @@ export function formComponentFactory(field, options) {
                 config,
                 errors,
                 dataAdapter: childType === 'entity-list' ? primaryEntityDataAdapter : keyFromDataAdapter,
+                callback,
+                switchDirection,
+                page
+            });
+        case 'review-field-parent-topic':
+            return renderFormComponent(ParentTopicReviewField, {
+                data,
+                key,
+                config,
+                errors,
+                dataAdapter: config.child.component === 'entity-list' ? primaryEntityDataAdapter : keyFromDataAdapter,
                 callback,
                 switchDirection,
                 page
