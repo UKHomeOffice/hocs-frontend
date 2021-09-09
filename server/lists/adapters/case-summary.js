@@ -14,6 +14,13 @@ const createAdditionalFields = async (additionalFields = [], fetchList) => {
         if (field.choices) {
             for (var j = 0; j < field.choices.length; j++) {
                 const choice = field.choices[j];
+                if (choice.options) {
+                    const foundOption = choice.options.filter(option => option.value === field.value);
+                    if (foundOption && foundOption.length === 1) {
+                        field.value = foundOption[0].label;
+                        break;
+                    }
+                }
                 if (choice.value && choice.value === field.value) {
                     field.value = choice.label;
                     break;
