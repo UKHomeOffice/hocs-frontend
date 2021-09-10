@@ -120,14 +120,17 @@ describe('Form schema decorations', function () {
                         'validation': [
                             {
                                 'type': 'required',
+                                'summary': undefined,
                                 'message': 'Date correspondence received in KIMU is required'
                             },
                             {
                                 'type': 'isValidDate',
+                                'summary': undefined,
                                 'message': 'Date correspondence received in KIMU must be a valid date'
                             },
                             {
                                 'type': 'isBeforeToday',
+                                'summary': undefined,
                                 'message': 'Date correspondence received in KIMU cannot be in the future'
                             }
                         ],
@@ -141,7 +144,9 @@ describe('Form schema decorations', function () {
                         'component': 'radio',
                         'validation': [
                             {
-                                'type': 'required'
+                                'type': 'required',
+                                'summary': undefined,
+                                'message': undefined
                             }
                         ],
                         'props': {
@@ -181,12 +186,32 @@ describe('Form schema decorations', function () {
                         'component': 'text',
                         'validation': [
                             {
-                                'type': 'required'
+                                'type': 'required',
+                                'summary': undefined,
+                                'message': undefined
                             }
                         ],
                         'props': {
                             'name': 'Fullname',
                             'label': 'Full Name',
+                            'visibilityConditions': [
+                                {
+                                    'conditionPropertyName': 'OriginalChannel',
+                                    'conditionPropertyValue': 'EMAIL'
+                                },
+                                {
+                                    'conditionPropertyName': 'OriginalChannel',
+                                    'conditionPropertyValue': 'POST'
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        'component': 'text',
+                        'validation': [],
+                        'props': {
+                            'name': 'Organisation',
+                            'label': 'Organisation (Optional)',
                             'visibilityConditions': [
                                 {
                                     'conditionPropertyName': 'OriginalChannel',
