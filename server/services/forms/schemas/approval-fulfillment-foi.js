@@ -71,6 +71,7 @@ module.exports = async options => {
                 .build()
         ).withField(
             Component('text', 'approvalRequestResponseBy')
+                .withValidator(['required'], 'Respondents name is required')
                 .withProp('label', 'Respondents name')
                 .withProp('visibilityConditions', [
                     {
