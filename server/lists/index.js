@@ -123,6 +123,30 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
+        S_IEDET_CSU_LIST: {
+            client: 'INFO',
+            endpoint: '/entity/list/IEDET_CSU_LIST',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_IEDET_CASE_OUTCOME: {
+            client: 'INFO',
+            endpoint: '/entity/list/IEDET_CASE_OUTCOME',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_IEDET_BUS_AREA: {
+            client: 'INFO',
+            endpoint: '/entity/list/IEDET_BUS_AREA',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_IEDET_COMP_ORIGIN: {
+            client: 'INFO',
+            endpoint: '/entity/list/IEDET_COMP_ORIGIN',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
         S_MPAM_ENQUIRY_SUBJECTS: {
             client: 'INFO',
             endpoint: '/entity/list/MPAM_ENQUIRY_SUBJECTS',
@@ -337,7 +361,7 @@ module.exports = {
         },
         CASE_TYPES_FOR_SEARCH: {
             client: 'INFO',
-            endpoint: '/caseType?bulkOnly=false&addCasesWithPreviousType=true',
+            endpoint: '/caseType?bulkOnly=false&initialCaseType=false',
             adapter: caseTypeAdapter
         },
         COUNTRIES_CURRENT: {
@@ -486,6 +510,11 @@ module.exports = {
         CASE_DOCUMENT_LIST_FOI_INITIAL_RESPONSE: {
             client: 'CASEWORK',
             endpoint: '/case/document/reference/${caseId}/?type=Initial%20response',
+            adapter: documentListAdapter
+        },
+        CASE_DOCUMENT_LIST_ALL: {
+            client: 'CASEWORK',
+            endpoint: '/case/document/reference/${caseId}/',
             adapter: documentListAdapter
         },
         CASE_DOCUMENT_TAGS: {
