@@ -4,7 +4,7 @@ import RadioGroup from '../radio-group.jsx';
 const choices = [
     { label: 'isA', value: 'A' },
     { label: 'isB', value: 'B' },
-    { label: 'isC', value: 'C' }
+    { label: 'isC', value: 'C' },
 ];
 
 describe('Form radio group component', () => {
@@ -82,6 +82,26 @@ describe('Form radio group component', () => {
         ];
         expect(
             render(<RadioGroup name="radio-group" choices={choices} errors={{ ValueAText: 'Some error message' }} updateState={() => null} />)
+        ).toMatchSnapshot();
+    });
+    it('should render if visible is set to true', () => {
+        const choices = [
+            { label: 'labelA', value: 'ValueA' },
+            { label: 'labelB', value: 'ValueB', visible: true },
+            { label: 'labelC', value: 'ValueC', visible: 'true' },
+        ];
+        expect(
+            render(<RadioGroup name="radio-group" choices={choices} updateState={() => null} />)
+        ).toMatchSnapshot();
+    });
+    it('should not render choices if visible is set to false', () => {
+        const choices = [
+            { label: 'labelA', value: 'ValueA' },
+            { label: 'labelB', value: 'ValueB', visible: false },
+            { label: 'labelC', value: 'ValueC', visible: 'false' },
+        ];
+        expect(
+            render(<RadioGroup name="radio-group" choices={choices} updateState={() => null} />)
         ).toMatchSnapshot();
     });
 });
