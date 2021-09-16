@@ -128,6 +128,7 @@ Object {
   ],
   "items": Array [
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedTopic": "MOCK_TOPIC",
@@ -153,6 +154,7 @@ Object {
       "userUUID": 1,
     },
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": false,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedTopic": "MOCK_TOPIC",
@@ -178,6 +180,7 @@ Object {
       "userUUID": 1,
     },
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedTopic": "MOCK_TOPIC",
@@ -202,6 +205,7 @@ Object {
       "userUUID": null,
     },
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
@@ -225,6 +229,7 @@ Object {
       "userUUID": 2,
     },
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "caseReference": "A/1234569/19",
@@ -247,6 +252,7 @@ Object {
       "userUUID": null,
     },
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": false,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
@@ -755,6 +761,7 @@ Object {
       "userUUID": 1,
     },
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
@@ -777,6 +784,7 @@ Object {
       "userUUID": 2,
     },
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": false,
       "assignedTeamDisplay": "MOCK_TEAM",
       "caseType": "WCS",
@@ -987,66 +995,6 @@ Object {
 }
 `;
 
-exports[`Workflow Workstack Adapter should add the fullname and postcode of primaryCorrespondent to primaryCorrespondent 1`] = `
-Object {
-  "allocateToTeamEndpoint": "/allocate/team",
-  "allocateToUserEndpoint": "/allocate/user",
-  "allocateToWorkstackEndpoint": "/unallocate/",
-  "columns": Array [],
-  "items": Array [
-    Object {
-      "active": true,
-      "applicantOrConstituentCorrespondentDisplay": "",
-      "assignedTeamDisplay": "MOCK_TEAM",
-      "assignedUserDisplay": "MOCK_USER",
-      "caseReference": "COMP/1234568/19",
-      "caseType": "COMP",
-      "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "correspondents": Object {
-        "correspondents": Array [
-          Object {
-            "fullname": "testName",
-            "is_primary": "false",
-            "postcode": "postcode1",
-            "uuid": "uuid123",
-          },
-          Object {
-            "fullname": "primaryC",
-            "is_primary": "true",
-            "postcode": "postcode2",
-            "uuid": "uuid456",
-          },
-        ],
-      },
-      "deadline": "2200-01-03",
-      "deadlineDisplay": "03/01/2200",
-      "memberCorrespondentDisplay": "",
-      "mpWithOwnerDisplay": Object {
-        "mp": "",
-        "owner": "MOCK_USER",
-      },
-      "primaryCorrespondent": Object {
-        "fullname": "primaryC",
-        "is_primary": "true",
-        "postcode": "postcode2",
-        "uuid": "uuid456",
-      },
-      "primaryCorrespondentAndRefDisplay": Object {
-        "caseReference": "COMP/1234568/19",
-        "primaryCorrespondentFullName": "primaryC",
-      },
-      "stageType": "A",
-      "stageTypeDisplay": "MOCK_STAGETYPE",
-      "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE",
-      "teamUUID": 2,
-      "userUUID": 2,
-    },
-  ],
-  "label": "MOCK_STAGETYPE",
-  "teamMembers": Array [],
-}
-`;
-
 exports[`Workflow Workstack Adapter should hide unworkable 1`] = `
 Object {
   "allocateToTeamEndpoint": "/allocate/team",
@@ -1077,6 +1025,7 @@ Object {
   ],
   "items": Array [
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "caseReference": "A/1234569/19",
@@ -1099,6 +1048,7 @@ Object {
       "userUUID": null,
     },
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
@@ -1122,6 +1072,7 @@ Object {
       "userUUID": 1,
     },
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "caseReference": "A/1234569/19",
@@ -1144,6 +1095,7 @@ Object {
       "userUUID": null,
     },
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "caseReference": "A/1234570/19",
@@ -1485,6 +1437,9 @@ Object {
       "caseReference": "A/1234568/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "data": Object {
+        "CaseContributions": "[{\\"data\\": {\\"contributionDueDate\\":\\"2020-12-12\\"}}]",
+      },
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
       "dueContribution": "2020-12-12",
