@@ -380,7 +380,7 @@ class WorkstackAllocate extends Component {
                 </td>;
             }
             case ColumnRenderer.DUE_DATE_WARNING:
-                if (row.data.CaseContributions  && row.data.ContributionsRequired !== 'N') {
+                if (row.data.CaseContributions && row.data.ContributionsRequired !== 'N') {
                     const dueContribution = JSON.parse(row.data.CaseContributions)
                         .filter(contribution => contribution.data && !contribution.data.contributionStatus)
                         .map(contribution => contribution.data.contributionDueDate)

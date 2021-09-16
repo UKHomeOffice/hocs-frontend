@@ -270,6 +270,7 @@ Object {
     },
   ],
   "deadlinesEnabled": true,
+  "previousCase": undefined,
   "primaryCorrespondent": Object {
     "address": Object {
       "address1": "__address1__",

@@ -126,7 +126,7 @@ describe('Form repository', () => {
         const wrapper = mount(Component);
         expect(wrapper).toBeDefined();
         expect(wrapper.find('hidden').length).toEqual(1);
-        expect(wrapper.props().value).toEqual('TEST_VALUE');
+        expect(wrapper.props().value).toEqual('TEST');
     });
 
     it('should support components in the supportedSecondaryActions list', () => {

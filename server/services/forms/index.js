@@ -455,7 +455,7 @@ module.exports = {
                     formDefinition = formDefinitions[context.toUpperCase()][workflow.toUpperCase()][action.toUpperCase()];
                 }
 
-                let form = await formDefinition.builder.call(this, {});
+                let form = await formDefinition.builder.call(this, { data });
                 form = formDecorator.call(this, formEnrichmentKeys, form);
 
                 return {

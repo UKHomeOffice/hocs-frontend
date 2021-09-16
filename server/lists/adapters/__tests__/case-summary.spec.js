@@ -131,8 +131,7 @@ describe('Case Summary Adapter', () => {
                 caseUUID: '__previousCaseUuid__',
                 caseReference: '__previousCaseReference__',
                 stageUUID: '__previousCaseStageUUID__'
-            }
-            ],
+            },
             deadLineExtensions: [],
             type: 'case'
         };
