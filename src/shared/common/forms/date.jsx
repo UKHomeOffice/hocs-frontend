@@ -33,12 +33,20 @@ class DateInput extends Component {
             label,
             minYear,
             maxYear = new Date().getFullYear() + 100,
-            value
+            value,
+            autopopulate
         } = this.props;
         const yearKey = this.datePart('year');
         const monthKey = this.datePart('month');
         const dayKey = this.datePart('day');
-        const parts = this.parseValue(value);
+        let parts;
+        if(!value && autopopulate){
+            parts = this.parseValue(new Date().toISOString().substr(0, 10));
+            this.props.updateState({ [this.props.name]: `${parts.year}-${parts.month}-${parts.day}` });
+        }
+        else{
+            parts = this.parseValue(value);
+        }
 
         return <div className={`govuk-form-group${error ? ' govuk-form-group--error' : ''}`}>
             <fieldset id={name} disabled={disabled} className="govuk-fieldset" role="group">
@@ -110,7 +118,8 @@ DateInput.propTypes = {
     updateState: PropTypes.func.isRequired,
     value: PropTypes.string,
     maxYear: PropTypes.number,
-    minYear: PropTypes.number
+    minYear: PropTypes.number,
+    autopopulate: PropTypes.bool
 };
 
 DateInput.defaultProps = {

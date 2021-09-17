@@ -74,5 +74,17 @@ describe('Form date component', () => {
         expect(mockCallback).toHaveBeenCalledTimes(1);
         expect(mockCallback).toHaveBeenCalledWith({ 'date': '2018--' });
     });
+
+    it('should populate date field with todays date when asked to', () => {
+        expect(
+            render(<DateInput name="date-field" maxYear={maxYear} autopopulate={true} updateState={() => null} />)
+        ).toMatchSnapshot();
+    });
+
+    it('should not populate date field with todays date when not asked to', () => {
+        expect(
+            render(<DateInput name="date-field" maxYear={maxYear} autopopulate={false} updateState={() => null} />)
+        ).toMatchSnapshot();
+    });
 });
 
