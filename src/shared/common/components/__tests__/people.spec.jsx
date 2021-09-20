@@ -59,6 +59,46 @@ const correspondents = [
         'reference': 'a reference',
         'externalKey': null,
         'isPrimary': false
+    },
+    {
+        'uuid': 'UUID_4',
+        'created': '2020-05-28T11:28:36.342184',
+        'type': 'APPLICANT',
+        'typeDisplayName': 'Applicant Test Case',
+        'caseUUID': 'CASE_UUID_4',
+        'fullname': 'my name',
+        'address': {
+            'postcode': 'ZR1 3PL',
+            'address1': 'some house',
+            'address2': 'some street',
+            'address3': 'some_city',
+            'country': 'United Kingdom'
+        },
+        'telephone': '01987876882342',
+        'email': 'test@test.com',
+        'reference': 'a reference',
+        'externalKey': null,
+        'isPrimary': false
+    },
+    {
+        'uuid': 'UUID_5',
+        'created': '2020-05-28T11:28:36.342184',
+        'type': 'APPLICANT',
+        'typeDisplayName': 'Applicant Test Case',
+        'caseUUID': 'CASE_UUID_5',
+        'fullname': 'my name',
+        'address': {
+            'postcode': 'ZR1 3PL',
+            'address1': 'some house',
+            'address2': 'some street',
+            'address3': 'some_city',
+            'country': 'United Kingdom'
+        },
+        'telephone': '01987876882342',
+        'email': 'test@test.com',
+        'reference': 'a reference',
+        'externalKey': null,
+        'isPrimary': true
     }
 ];
 
@@ -73,12 +113,12 @@ const page = {
 
 describe('The people component', () => {
 
-    it('should render successfully with 3 correspondent\'s', () => {
-        const outer = shallow(<WrappedPeople />);
+    it('should render successfully with 5 correspondent\'s', () => {
+        const outer = shallow(<WrappedPeople/>);
         const People = outer.props().children;
         const wrapper = mount(
             <MemoryRouter>
-                <People dispatch={jest.fn(() => Promise.resolve())} correspondents={correspondents} page={page} />
+                <People dispatch={jest.fn(() => Promise.resolve())} correspondents={correspondents} page={page}/>
             </MemoryRouter>
         );
         expect(wrapper).toBeDefined();

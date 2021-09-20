@@ -112,6 +112,20 @@ exports[`Workstack component should not add link to headers with sortStrategy no
               "isFilterable": true,
               "renderer": "dueDateWarning",
             },
+            Object {
+              "dataAdapter": null,
+              "dataValueKey": "nextCaseType",
+              "displayName": "Escalate Case",
+              "isFilterable": false,
+              "renderer": "nextCaseType",
+            },
+            Object {
+              "dataAdapter": null,
+              "dataValueKey": "nextCaseReference",
+              "displayName": "Hidden Column",
+              "isFilterable": false,
+              "renderer": "hidden",
+            },
           ]
         }
         items={
@@ -124,6 +138,8 @@ exports[`Workstack component should not add link to headers with sortStrategy no
               "created": "2019-10-29T11:01:32.656563",
               "fullName": "Sam Smith",
               "isActive": "YES",
+              "nextCaseReference": null,
+              "nextCaseType": null,
               "primaryCorrespondent": Object {
                 "fullname": "Mr Smith",
                 "postcode": "postcode1",
@@ -140,6 +156,8 @@ exports[`Workstack component should not add link to headers with sortStrategy no
               "created": "",
               "fullName": "John Alex",
               "isActive": "NO",
+              "nextCaseReference": null,
+              "nextCaseType": null,
               "primaryCorrespondent": Object {
                 "fullname": "Mr Alex",
                 "postcode": "postcode2",
@@ -156,6 +174,8 @@ exports[`Workstack component should not add link to headers with sortStrategy no
               "created": null,
               "fullName": "Pat Brown",
               "isActive": "NO",
+              "nextCaseReference": null,
+              "nextCaseType": null,
               "primaryCorrespondent": Object {
                 "fullname": "Ms Brown",
                 "postcode": "postcode3",
@@ -173,6 +193,8 @@ exports[`Workstack component should not add link to headers with sortStrategy no
               "dueContribution": "2020-12-12",
               "fullName": "Dave Jones",
               "isActive": "YES",
+              "nextCaseReference": null,
+              "nextCaseType": null,
               "primaryCorrespondent": Object {
                 "fullname": "Mr Jones",
                 "postcode": "postcode4",
@@ -189,6 +211,8 @@ exports[`Workstack component should not add link to headers with sortStrategy no
               "created": null,
               "fullName": "Mick Smith",
               "isActive": "YES",
+              "nextCaseReference": null,
+              "nextCaseType": null,
               "primaryCorrespondent": Object {
                 "fullname": "Mr Smith",
                 "postcode": "",
@@ -208,6 +232,8 @@ exports[`Workstack component should not add link to headers with sortStrategy no
               },
               "fullName": "Bet Linch",
               "isActive": "YES",
+              "nextCaseReference": null,
+              "nextCaseType": null,
               "primaryCorrespondent": Object {
                 "fullname": "Mrs Linch",
                 "postcode": null,
@@ -215,6 +241,48 @@ exports[`Workstack component should not add link to headers with sortStrategy no
               "stageType": "MPAM_DRAFT",
               "stageTypeDisplay": "Stage F",
               "uuid": "stage_uuid-447",
+            },
+            Object {
+              "assignedTeamDisplay": "team6",
+              "assignedUserDisplay": "User5",
+              "caseReference": "case7",
+              "caseUUID": "case_uuid-klz",
+              "created": null,
+              "data": Object {
+                "DueDate": "2021-01-01",
+              },
+              "fullName": "Bet Linch",
+              "isActive": "YES",
+              "nextCaseReference": null,
+              "nextCaseType": "nextCase",
+              "primaryCorrespondent": Object {
+                "fullname": "Mrs Linch",
+                "postcode": null,
+              },
+              "stageType": "MPAM_DRAFT",
+              "stageTypeDisplay": "Stage F",
+              "uuid": "stage_uuid-448",
+            },
+            Object {
+              "assignedTeamDisplay": "team6",
+              "assignedUserDisplay": "User5",
+              "caseReference": "case8",
+              "caseUUID": "case_uuid-klx",
+              "created": null,
+              "data": Object {
+                "DueDate": "2021-01-01",
+              },
+              "fullName": "Bet Linch",
+              "isActive": "YES",
+              "nextCaseReference": "nextCaseReference",
+              "nextCaseType": "nextCase",
+              "primaryCorrespondent": Object {
+                "fullname": "Mrs Linch",
+                "postcode": null,
+              },
+              "stageType": "MPAM_DRAFT",
+              "stageTypeDisplay": "Stage F",
+              "uuid": "stage_uuid-449",
             },
           ]
         }
@@ -282,7 +350,7 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                         aria-live="polite"
                         className="govuk-hint"
                       >
-                        6
+                        8
                          Items
                       </span>
                       <table
@@ -374,6 +442,13 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                               onClick={[Function]}
                             >
                               Due Date
+                            </th>
+                            <th
+                              className="govuk-link"
+                              key="Escalate Case"
+                              onClick={[Function]}
+                            >
+                              Escalate Case
                             </th>
                           </tr>
                         </thead>
@@ -496,6 +571,10 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                               className="govuk-table__cell"
                               key="stage_uuid-456DueDate"
                             />
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-456nextCaseType"
+                            />
                           </tr>
                           <tr
                             className="govuk-radios govuk-table__row"
@@ -609,6 +688,10 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                               className="govuk-table__cell"
                               key="stage_uuid-432DueDate"
                             />
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-432nextCaseType"
+                            />
                           </tr>
                           <tr
                             className="govuk-radios govuk-table__row"
@@ -721,6 +804,10 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                             <td
                               className="govuk-table__cell"
                               key="stage_uuid-444DueDate"
+                            />
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-444nextCaseType"
                             />
                           </tr>
                           <tr
@@ -838,6 +925,10 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                             >
                               <span />
                             </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-445nextCaseType"
+                            />
                           </tr>
                           <tr
                             className="govuk-radios govuk-table__row"
@@ -947,6 +1038,10 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                             <td
                               className="govuk-table__cell"
                               key="stage_uuid-446DueDate"
+                            />
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-446nextCaseType"
                             />
                           </tr>
                           <tr
@@ -1062,6 +1157,291 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                             >
                               <span />
                             </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-447nextCaseType"
+                            />
+                          </tr>
+                          <tr
+                            className="govuk-radios govuk-table__row"
+                            key="stage_uuid-448"
+                          >
+                            <td
+                              className="govuk-table__cell"
+                            >
+                              <div
+                                className="govuk-checkboxes"
+                              >
+                                <div
+                                  className="govuk-checkboxes__item"
+                                  key="case_uuid-klzstage_uuid-448"
+                                >
+                                  <input
+                                    checked={false}
+                                    className="govuk-checkboxes__input"
+                                    id="selected_cases_case_uuid-klz"
+                                    name="selected_cases[]"
+                                    onChange={[Function]}
+                                    type="checkbox"
+                                    value="case_uuid-klz:stage_uuid-448"
+                                  />
+                                  <label
+                                    className="govuk-label govuk-checkboxes__label"
+                                    htmlFor="selected_cases_case_uuid-klz"
+                                  >
+                                    <span
+                                      className="govuk-visually-hidden"
+                                    >
+                                      case7
+                                    </span>
+                                  </label>
+                                </div>
+                              </div>
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-448caseReference"
+                            >
+                              <Link
+                                className="govuk-link govuk-!-margin-right-3"
+                                to="/case/case_uuid-klz/stage/stage_uuid-448"
+                              >
+                                <LinkAnchor
+                                  className="govuk-link govuk-!-margin-right-3"
+                                  href="/case/case_uuid-klz/stage/stage_uuid-448"
+                                  navigate={[Function]}
+                                >
+                                  <a
+                                    className="govuk-link govuk-!-margin-right-3"
+                                    href="/case/case_uuid-klz/stage/stage_uuid-448"
+                                    onClick={[Function]}
+                                  >
+                                    case7
+                                  </a>
+                                </LinkAnchor>
+                              </Link>
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-448fullName"
+                            >
+                              Bet Linch
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-448fullname"
+                            >
+                              Mrs Linch
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-448postcode"
+                            />
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-448stageTypeDisplay"
+                            >
+                              Stage F
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-448assignedUserDisplay"
+                            >
+                              User5
+                            </td>
+                            <td
+                              className="govuk-table__cell govuk-table__cell--truncated"
+                              key="stage_uuid-448assignedTopicDisplay"
+                            />
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-448TEST,created"
+                            />
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-448isActive,TEST"
+                            >
+                              is Active
+                            </td>
+                            <td
+                              className="govuk-table__cell date-warning"
+                              key="stage_uuid-448dueContribution"
+                            >
+                              <span />
+                            </td>
+                            <td
+                              className="govuk-table__cell date-warning"
+                              key="stage_uuid-448DueDate"
+                            >
+                              <span />
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-448nextCaseType"
+                            >
+                              <Link
+                                className="govuk-link govuk-!-margin-right-3"
+                                to={
+                                  Object {
+                                    "pathname": "/action/create/nextCase/DOCUMENT?from=case_uuid-klz",
+                                    "query": Object {
+                                      "from": "case_uuid-klz",
+                                    },
+                                  }
+                                }
+                              >
+                                <LinkAnchor
+                                  className="govuk-link govuk-!-margin-right-3"
+                                  href="/action/create/nextCase/DOCUMENT?from=case_uuid-klz"
+                                  navigate={[Function]}
+                                >
+                                  <a
+                                    className="govuk-link govuk-!-margin-right-3"
+                                    href="/action/create/nextCase/DOCUMENT?from=case_uuid-klz"
+                                    onClick={[Function]}
+                                  >
+                                    Escalate case..
+                                  </a>
+                                </LinkAnchor>
+                              </Link>
+                            </td>
+                          </tr>
+                          <tr
+                            className="govuk-radios govuk-table__row"
+                            key="stage_uuid-449"
+                          >
+                            <td
+                              className="govuk-table__cell"
+                            >
+                              <div
+                                className="govuk-checkboxes"
+                              >
+                                <div
+                                  className="govuk-checkboxes__item"
+                                  key="case_uuid-klxstage_uuid-449"
+                                >
+                                  <input
+                                    checked={false}
+                                    className="govuk-checkboxes__input"
+                                    id="selected_cases_case_uuid-klx"
+                                    name="selected_cases[]"
+                                    onChange={[Function]}
+                                    type="checkbox"
+                                    value="case_uuid-klx:stage_uuid-449"
+                                  />
+                                  <label
+                                    className="govuk-label govuk-checkboxes__label"
+                                    htmlFor="selected_cases_case_uuid-klx"
+                                  >
+                                    <span
+                                      className="govuk-visually-hidden"
+                                    >
+                                      case8
+                                    </span>
+                                  </label>
+                                </div>
+                              </div>
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-449caseReference"
+                            >
+                              <Link
+                                className="govuk-link govuk-!-margin-right-3"
+                                to="/case/case_uuid-klx/stage/stage_uuid-449"
+                              >
+                                <LinkAnchor
+                                  className="govuk-link govuk-!-margin-right-3"
+                                  href="/case/case_uuid-klx/stage/stage_uuid-449"
+                                  navigate={[Function]}
+                                >
+                                  <a
+                                    className="govuk-link govuk-!-margin-right-3"
+                                    href="/case/case_uuid-klx/stage/stage_uuid-449"
+                                    onClick={[Function]}
+                                  >
+                                    case8
+                                  </a>
+                                </LinkAnchor>
+                              </Link>
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-449fullName"
+                            >
+                              Bet Linch
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-449fullname"
+                            >
+                              Mrs Linch
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-449postcode"
+                            />
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-449stageTypeDisplay"
+                            >
+                              Stage F
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-449assignedUserDisplay"
+                            >
+                              User5
+                            </td>
+                            <td
+                              className="govuk-table__cell govuk-table__cell--truncated"
+                              key="stage_uuid-449assignedTopicDisplay"
+                            />
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-449TEST,created"
+                            />
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-449isActive,TEST"
+                            >
+                              is Active
+                            </td>
+                            <td
+                              className="govuk-table__cell date-warning"
+                              key="stage_uuid-449dueContribution"
+                            >
+                              <span />
+                            </td>
+                            <td
+                              className="govuk-table__cell date-warning"
+                              key="stage_uuid-449DueDate"
+                            >
+                              <span />
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-449nextCaseType"
+                            >
+                              <Link
+                                className="govuk-link govuk-!-margin-right-3"
+                                to="/case/undefined/stage/undefined"
+                              >
+                                <LinkAnchor
+                                  className="govuk-link govuk-!-margin-right-3"
+                                  href="/case/undefined/stage/undefined"
+                                  navigate={[Function]}
+                                >
+                                  <a
+                                    className="govuk-link govuk-!-margin-right-3"
+                                    href="/case/undefined/stage/undefined"
+                                    onClick={[Function]}
+                                  >
+                                    nextCaseReference
+                                  </a>
+                                </LinkAnchor>
+                              </Link>
+                            </td>
                           </tr>
                         </tbody>
                       </table>
@@ -1069,7 +1449,7 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                         aria-live="polite"
                         className="govuk-hint"
                       >
-                        6
+                        8
                          Items
                       </span>
                     </div>
@@ -1152,7 +1532,7 @@ Array [
                   aria-live="polite"
                   class="govuk-hint"
                 >
-                  6 Items
+                  8 Items
                 </span>
                 <table
                   class="govuk-table"
@@ -1222,6 +1602,11 @@ Array [
                         class="govuk-link"
                       >
                         Due Date
+                      </th>
+                      <th
+                        class="govuk-link"
+                      >
+                        Escalate Case
                       </th>
                     </tr>
                   </thead>
@@ -1317,6 +1702,9 @@ Array [
                       <td
                         class="govuk-table__cell"
                       />
+                      <td
+                        class="govuk-table__cell"
+                      />
                     </tr>
                     <tr
                       class="govuk-radios govuk-table__row"
@@ -1403,6 +1791,9 @@ Array [
                       <td
                         class="govuk-table__cell"
                       />
+                      <td
+                        class="govuk-table__cell"
+                      />
                     </tr>
                     <tr
                       class="govuk-radios govuk-table__row"
@@ -1477,6 +1868,9 @@ Array [
                       >
                         topic3
                       </td>
+                      <td
+                        class="govuk-table__cell"
+                      />
                       <td
                         class="govuk-table__cell"
                       />
@@ -1578,6 +1972,9 @@ Array [
                       >
                         <span />
                       </td>
+                      <td
+                        class="govuk-table__cell"
+                      />
                     </tr>
                     <tr
                       class="govuk-radios govuk-table__row"
@@ -1655,6 +2052,9 @@ Array [
                       >
                         is Active
                       </td>
+                      <td
+                        class="govuk-table__cell"
+                      />
                       <td
                         class="govuk-table__cell"
                       />
@@ -1748,6 +2148,203 @@ Array [
                       >
                         <span />
                       </td>
+                      <td
+                        class="govuk-table__cell"
+                      />
+                    </tr>
+                    <tr
+                      class="govuk-radios govuk-table__row"
+                    >
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        <div
+                          class="govuk-checkboxes"
+                        >
+                          <div
+                            class="govuk-checkboxes__item"
+                          >
+                            <input
+                              class="govuk-checkboxes__input"
+                              id="selected_cases_case_uuid-klz"
+                              name="selected_cases[]"
+                              type="checkbox"
+                              value="case_uuid-klz:stage_uuid-448"
+                            />
+                            <label
+                              class="govuk-label govuk-checkboxes__label"
+                              for="selected_cases_case_uuid-klz"
+                            >
+                              <span
+                                class="govuk-visually-hidden"
+                              >
+                                case7
+                              </span>
+                            </label>
+                          </div>
+                        </div>
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        <a
+                          class="govuk-link govuk-!-margin-right-3"
+                          href="/case/case_uuid-klz/stage/stage_uuid-448"
+                        >
+                          case7
+                        </a>
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        Bet Linch
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        Mrs Linch
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      />
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        Stage F
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        User5
+                      </td>
+                      <td
+                        class="govuk-table__cell govuk-table__cell--truncated"
+                      />
+                      <td
+                        class="govuk-table__cell"
+                      />
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        is Active
+                      </td>
+                      <td
+                        class="govuk-table__cell date-warning"
+                      >
+                        <span />
+                      </td>
+                      <td
+                        class="govuk-table__cell date-warning"
+                      >
+                        <span />
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        <a
+                          class="govuk-link govuk-!-margin-right-3"
+                          href="/action/create/nextCase/DOCUMENT?from=case_uuid-klz"
+                        >
+                          Escalate case..
+                        </a>
+                      </td>
+                    </tr>
+                    <tr
+                      class="govuk-radios govuk-table__row"
+                    >
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        <div
+                          class="govuk-checkboxes"
+                        >
+                          <div
+                            class="govuk-checkboxes__item"
+                          >
+                            <input
+                              class="govuk-checkboxes__input"
+                              id="selected_cases_case_uuid-klx"
+                              name="selected_cases[]"
+                              type="checkbox"
+                              value="case_uuid-klx:stage_uuid-449"
+                            />
+                            <label
+                              class="govuk-label govuk-checkboxes__label"
+                              for="selected_cases_case_uuid-klx"
+                            >
+                              <span
+                                class="govuk-visually-hidden"
+                              >
+                                case8
+                              </span>
+                            </label>
+                          </div>
+                        </div>
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        <a
+                          class="govuk-link govuk-!-margin-right-3"
+                          href="/case/case_uuid-klx/stage/stage_uuid-449"
+                        >
+                          case8
+                        </a>
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        Bet Linch
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        Mrs Linch
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      />
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        Stage F
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        User5
+                      </td>
+                      <td
+                        class="govuk-table__cell govuk-table__cell--truncated"
+                      />
+                      <td
+                        class="govuk-table__cell"
+                      />
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        is Active
+                      </td>
+                      <td
+                        class="govuk-table__cell date-warning"
+                      >
+                        <span />
+                      </td>
+                      <td
+                        class="govuk-table__cell date-warning"
+                      >
+                        <span />
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        <a
+                          class="govuk-link govuk-!-margin-right-3"
+                          href="/case/undefined/stage/undefined"
+                        >
+                          nextCaseReference
+                        </a>
+                      </td>
                     </tr>
                   </tbody>
                 </table>
@@ -1755,7 +2352,7 @@ Array [
                   aria-live="polite"
                   class="govuk-hint"
                 >
-                  6 Items
+                  8 Items
                 </span>
               </div>
             </div>
@@ -1878,7 +2475,7 @@ Array [
                   aria-live="polite"
                   class="govuk-hint"
                 >
-                  6 Items
+                  8 Items
                 </span>
                 <table
                   class="govuk-table"
@@ -1948,6 +2545,11 @@ Array [
                         class="govuk-link"
                       >
                         Due Date
+                      </th>
+                      <th
+                        class="govuk-link"
+                      >
+                        Escalate Case
                       </th>
                     </tr>
                   </thead>
@@ -2043,6 +2645,9 @@ Array [
                       <td
                         class="govuk-table__cell"
                       />
+                      <td
+                        class="govuk-table__cell"
+                      />
                     </tr>
                     <tr
                       class="govuk-radios govuk-table__row"
@@ -2129,6 +2734,9 @@ Array [
                       <td
                         class="govuk-table__cell"
                       />
+                      <td
+                        class="govuk-table__cell"
+                      />
                     </tr>
                     <tr
                       class="govuk-radios govuk-table__row"
@@ -2203,6 +2811,9 @@ Array [
                       >
                         topic3
                       </td>
+                      <td
+                        class="govuk-table__cell"
+                      />
                       <td
                         class="govuk-table__cell"
                       />
@@ -2304,6 +2915,9 @@ Array [
                       >
                         <span />
                       </td>
+                      <td
+                        class="govuk-table__cell"
+                      />
                     </tr>
                     <tr
                       class="govuk-radios govuk-table__row"
@@ -2381,6 +2995,9 @@ Array [
                       >
                         is Active
                       </td>
+                      <td
+                        class="govuk-table__cell"
+                      />
                       <td
                         class="govuk-table__cell"
                       />
@@ -2474,6 +3091,203 @@ Array [
                       >
                         <span />
                       </td>
+                      <td
+                        class="govuk-table__cell"
+                      />
+                    </tr>
+                    <tr
+                      class="govuk-radios govuk-table__row"
+                    >
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        <div
+                          class="govuk-checkboxes"
+                        >
+                          <div
+                            class="govuk-checkboxes__item"
+                          >
+                            <input
+                              class="govuk-checkboxes__input"
+                              id="selected_cases_case_uuid-klz"
+                              name="selected_cases[]"
+                              type="checkbox"
+                              value="case_uuid-klz:stage_uuid-448"
+                            />
+                            <label
+                              class="govuk-label govuk-checkboxes__label"
+                              for="selected_cases_case_uuid-klz"
+                            >
+                              <span
+                                class="govuk-visually-hidden"
+                              >
+                                case7
+                              </span>
+                            </label>
+                          </div>
+                        </div>
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        <a
+                          class="govuk-link govuk-!-margin-right-3"
+                          href="/case/case_uuid-klz/stage/stage_uuid-448"
+                        >
+                          case7
+                        </a>
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        Bet Linch
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        Mrs Linch
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      />
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        Stage F
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        User5
+                      </td>
+                      <td
+                        class="govuk-table__cell govuk-table__cell--truncated"
+                      />
+                      <td
+                        class="govuk-table__cell"
+                      />
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        is Active
+                      </td>
+                      <td
+                        class="govuk-table__cell date-warning"
+                      >
+                        <span />
+                      </td>
+                      <td
+                        class="govuk-table__cell date-warning"
+                      >
+                        <span />
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        <a
+                          class="govuk-link govuk-!-margin-right-3"
+                          href="/action/create/nextCase/DOCUMENT?from=case_uuid-klz"
+                        >
+                          Escalate case..
+                        </a>
+                      </td>
+                    </tr>
+                    <tr
+                      class="govuk-radios govuk-table__row"
+                    >
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        <div
+                          class="govuk-checkboxes"
+                        >
+                          <div
+                            class="govuk-checkboxes__item"
+                          >
+                            <input
+                              class="govuk-checkboxes__input"
+                              id="selected_cases_case_uuid-klx"
+                              name="selected_cases[]"
+                              type="checkbox"
+                              value="case_uuid-klx:stage_uuid-449"
+                            />
+                            <label
+                              class="govuk-label govuk-checkboxes__label"
+                              for="selected_cases_case_uuid-klx"
+                            >
+                              <span
+                                class="govuk-visually-hidden"
+                              >
+                                case8
+                              </span>
+                            </label>
+                          </div>
+                        </div>
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        <a
+                          class="govuk-link govuk-!-margin-right-3"
+                          href="/case/case_uuid-klx/stage/stage_uuid-449"
+                        >
+                          case8
+                        </a>
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        Bet Linch
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        Mrs Linch
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      />
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        Stage F
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        User5
+                      </td>
+                      <td
+                        class="govuk-table__cell govuk-table__cell--truncated"
+                      />
+                      <td
+                        class="govuk-table__cell"
+                      />
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        is Active
+                      </td>
+                      <td
+                        class="govuk-table__cell date-warning"
+                      >
+                        <span />
+                      </td>
+                      <td
+                        class="govuk-table__cell date-warning"
+                      >
+                        <span />
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        <a
+                          class="govuk-link govuk-!-margin-right-3"
+                          href="/case/undefined/stage/undefined"
+                        >
+                          nextCaseReference
+                        </a>
+                      </td>
                     </tr>
                   </tbody>
                 </table>
@@ -2481,7 +3295,7 @@ Array [
                   aria-live="polite"
                   class="govuk-hint"
                 >
-                  6 Items
+                  8 Items
                 </span>
               </div>
             </div>
@@ -2639,6 +3453,20 @@ exports[`Workstack component should render with filtering 1`] = `
               "isFilterable": true,
               "renderer": "dueDateWarning",
             },
+            Object {
+              "dataAdapter": null,
+              "dataValueKey": "nextCaseType",
+              "displayName": "Escalate Case",
+              "isFilterable": false,
+              "renderer": "nextCaseType",
+            },
+            Object {
+              "dataAdapter": null,
+              "dataValueKey": "nextCaseReference",
+              "displayName": "Hidden Column",
+              "isFilterable": false,
+              "renderer": "hidden",
+            },
           ]
         }
         items={
@@ -2651,6 +3479,8 @@ exports[`Workstack component should render with filtering 1`] = `
               "created": "2019-10-29T11:01:32.656563",
               "fullName": "Sam Smith",
               "isActive": "YES",
+              "nextCaseReference": null,
+              "nextCaseType": null,
               "primaryCorrespondent": Object {
                 "fullname": "Mr Smith",
                 "postcode": "postcode1",
@@ -2667,6 +3497,8 @@ exports[`Workstack component should render with filtering 1`] = `
               "created": "",
               "fullName": "John Alex",
               "isActive": "NO",
+              "nextCaseReference": null,
+              "nextCaseType": null,
               "primaryCorrespondent": Object {
                 "fullname": "Mr Alex",
                 "postcode": "postcode2",
@@ -2683,6 +3515,8 @@ exports[`Workstack component should render with filtering 1`] = `
               "created": null,
               "fullName": "Pat Brown",
               "isActive": "NO",
+              "nextCaseReference": null,
+              "nextCaseType": null,
               "primaryCorrespondent": Object {
                 "fullname": "Ms Brown",
                 "postcode": "postcode3",
@@ -2700,6 +3534,8 @@ exports[`Workstack component should render with filtering 1`] = `
               "dueContribution": "2020-12-12",
               "fullName": "Dave Jones",
               "isActive": "YES",
+              "nextCaseReference": null,
+              "nextCaseType": null,
               "primaryCorrespondent": Object {
                 "fullname": "Mr Jones",
                 "postcode": "postcode4",
@@ -2716,6 +3552,8 @@ exports[`Workstack component should render with filtering 1`] = `
               "created": null,
               "fullName": "Mick Smith",
               "isActive": "YES",
+              "nextCaseReference": null,
+              "nextCaseType": null,
               "primaryCorrespondent": Object {
                 "fullname": "Mr Smith",
                 "postcode": "",
@@ -2735,6 +3573,8 @@ exports[`Workstack component should render with filtering 1`] = `
               },
               "fullName": "Bet Linch",
               "isActive": "YES",
+              "nextCaseReference": null,
+              "nextCaseType": null,
               "primaryCorrespondent": Object {
                 "fullname": "Mrs Linch",
                 "postcode": null,
@@ -2742,6 +3582,48 @@ exports[`Workstack component should render with filtering 1`] = `
               "stageType": "MPAM_DRAFT",
               "stageTypeDisplay": "Stage F",
               "uuid": "stage_uuid-447",
+            },
+            Object {
+              "assignedTeamDisplay": "team6",
+              "assignedUserDisplay": "User5",
+              "caseReference": "case7",
+              "caseUUID": "case_uuid-klz",
+              "created": null,
+              "data": Object {
+                "DueDate": "2021-01-01",
+              },
+              "fullName": "Bet Linch",
+              "isActive": "YES",
+              "nextCaseReference": null,
+              "nextCaseType": "nextCase",
+              "primaryCorrespondent": Object {
+                "fullname": "Mrs Linch",
+                "postcode": null,
+              },
+              "stageType": "MPAM_DRAFT",
+              "stageTypeDisplay": "Stage F",
+              "uuid": "stage_uuid-448",
+            },
+            Object {
+              "assignedTeamDisplay": "team6",
+              "assignedUserDisplay": "User5",
+              "caseReference": "case8",
+              "caseUUID": "case_uuid-klx",
+              "created": null,
+              "data": Object {
+                "DueDate": "2021-01-01",
+              },
+              "fullName": "Bet Linch",
+              "isActive": "YES",
+              "nextCaseReference": "nextCaseReference",
+              "nextCaseType": "nextCase",
+              "primaryCorrespondent": Object {
+                "fullname": "Mrs Linch",
+                "postcode": null,
+              },
+              "stageType": "MPAM_DRAFT",
+              "stageTypeDisplay": "Stage F",
+              "uuid": "stage_uuid-449",
             },
           ]
         }
@@ -2919,6 +3801,13 @@ exports[`Workstack component should render with filtering 1`] = `
                             >
                               Due Date
                             </th>
+                            <th
+                              className="govuk-link"
+                              key="Escalate Case"
+                              onClick={[Function]}
+                            >
+                              Escalate Case
+                            </th>
                           </tr>
                         </thead>
                         <tbody
@@ -3039,6 +3928,10 @@ exports[`Workstack component should render with filtering 1`] = `
                             <td
                               className="govuk-table__cell"
                               key="stage_uuid-456DueDate"
+                            />
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-456nextCaseType"
                             />
                           </tr>
                         </tbody>
@@ -3211,6 +4104,20 @@ exports[`Workstack component should sort descending when the column heading is c
               "isFilterable": true,
               "renderer": "dueDateWarning",
             },
+            Object {
+              "dataAdapter": null,
+              "dataValueKey": "nextCaseType",
+              "displayName": "Escalate Case",
+              "isFilterable": false,
+              "renderer": "nextCaseType",
+            },
+            Object {
+              "dataAdapter": null,
+              "dataValueKey": "nextCaseReference",
+              "displayName": "Hidden Column",
+              "isFilterable": false,
+              "renderer": "hidden",
+            },
           ]
         }
         items={
@@ -3223,6 +4130,8 @@ exports[`Workstack component should sort descending when the column heading is c
               "created": "2019-10-29T11:01:32.656563",
               "fullName": "Sam Smith",
               "isActive": "YES",
+              "nextCaseReference": null,
+              "nextCaseType": null,
               "primaryCorrespondent": Object {
                 "fullname": "Mr Smith",
                 "postcode": "postcode1",
@@ -3239,6 +4148,8 @@ exports[`Workstack component should sort descending when the column heading is c
               "created": "",
               "fullName": "John Alex",
               "isActive": "NO",
+              "nextCaseReference": null,
+              "nextCaseType": null,
               "primaryCorrespondent": Object {
                 "fullname": "Mr Alex",
                 "postcode": "postcode2",
@@ -3255,6 +4166,8 @@ exports[`Workstack component should sort descending when the column heading is c
               "created": null,
               "fullName": "Pat Brown",
               "isActive": "NO",
+              "nextCaseReference": null,
+              "nextCaseType": null,
               "primaryCorrespondent": Object {
                 "fullname": "Ms Brown",
                 "postcode": "postcode3",
@@ -3272,6 +4185,8 @@ exports[`Workstack component should sort descending when the column heading is c
               "dueContribution": "2020-12-12",
               "fullName": "Dave Jones",
               "isActive": "YES",
+              "nextCaseReference": null,
+              "nextCaseType": null,
               "primaryCorrespondent": Object {
                 "fullname": "Mr Jones",
                 "postcode": "postcode4",
@@ -3288,6 +4203,8 @@ exports[`Workstack component should sort descending when the column heading is c
               "created": null,
               "fullName": "Mick Smith",
               "isActive": "YES",
+              "nextCaseReference": null,
+              "nextCaseType": null,
               "primaryCorrespondent": Object {
                 "fullname": "Mr Smith",
                 "postcode": "",
@@ -3307,6 +4224,8 @@ exports[`Workstack component should sort descending when the column heading is c
               },
               "fullName": "Bet Linch",
               "isActive": "YES",
+              "nextCaseReference": null,
+              "nextCaseType": null,
               "primaryCorrespondent": Object {
                 "fullname": "Mrs Linch",
                 "postcode": null,
@@ -3314,6 +4233,48 @@ exports[`Workstack component should sort descending when the column heading is c
               "stageType": "MPAM_DRAFT",
               "stageTypeDisplay": "Stage F",
               "uuid": "stage_uuid-447",
+            },
+            Object {
+              "assignedTeamDisplay": "team6",
+              "assignedUserDisplay": "User5",
+              "caseReference": "case7",
+              "caseUUID": "case_uuid-klz",
+              "created": null,
+              "data": Object {
+                "DueDate": "2021-01-01",
+              },
+              "fullName": "Bet Linch",
+              "isActive": "YES",
+              "nextCaseReference": null,
+              "nextCaseType": "nextCase",
+              "primaryCorrespondent": Object {
+                "fullname": "Mrs Linch",
+                "postcode": null,
+              },
+              "stageType": "MPAM_DRAFT",
+              "stageTypeDisplay": "Stage F",
+              "uuid": "stage_uuid-448",
+            },
+            Object {
+              "assignedTeamDisplay": "team6",
+              "assignedUserDisplay": "User5",
+              "caseReference": "case8",
+              "caseUUID": "case_uuid-klx",
+              "created": null,
+              "data": Object {
+                "DueDate": "2021-01-01",
+              },
+              "fullName": "Bet Linch",
+              "isActive": "YES",
+              "nextCaseReference": "nextCaseReference",
+              "nextCaseType": "nextCase",
+              "primaryCorrespondent": Object {
+                "fullname": "Mrs Linch",
+                "postcode": null,
+              },
+              "stageType": "MPAM_DRAFT",
+              "stageTypeDisplay": "Stage F",
+              "uuid": "stage_uuid-449",
             },
           ]
         }
@@ -3381,7 +4342,7 @@ exports[`Workstack component should sort descending when the column heading is c
                         aria-live="polite"
                         className="govuk-hint"
                       >
-                        6
+                        8
                          Items
                       </span>
                       <table
@@ -3475,11 +4436,299 @@ exports[`Workstack component should sort descending when the column heading is c
                             >
                               Due Date
                             </th>
+                            <th
+                              className="govuk-link"
+                              key="Escalate Case"
+                              onClick={[Function]}
+                            >
+                              Escalate Case
+                            </th>
                           </tr>
                         </thead>
                         <tbody
                           className="govuk-table__body"
                         >
+                          <tr
+                            className="govuk-radios govuk-table__row"
+                            key="stage_uuid-449"
+                          >
+                            <td
+                              className="govuk-table__cell"
+                            >
+                              <div
+                                className="govuk-checkboxes"
+                              >
+                                <div
+                                  className="govuk-checkboxes__item"
+                                  key="case_uuid-klxstage_uuid-449"
+                                >
+                                  <input
+                                    checked={false}
+                                    className="govuk-checkboxes__input"
+                                    id="selected_cases_case_uuid-klx"
+                                    name="selected_cases[]"
+                                    onChange={[Function]}
+                                    type="checkbox"
+                                    value="case_uuid-klx:stage_uuid-449"
+                                  />
+                                  <label
+                                    className="govuk-label govuk-checkboxes__label"
+                                    htmlFor="selected_cases_case_uuid-klx"
+                                  >
+                                    <span
+                                      className="govuk-visually-hidden"
+                                    >
+                                      case8
+                                    </span>
+                                  </label>
+                                </div>
+                              </div>
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-449caseReference"
+                            >
+                              <Link
+                                className="govuk-link govuk-!-margin-right-3"
+                                to="/case/case_uuid-klx/stage/stage_uuid-449"
+                              >
+                                <LinkAnchor
+                                  className="govuk-link govuk-!-margin-right-3"
+                                  href="/case/case_uuid-klx/stage/stage_uuid-449"
+                                  navigate={[Function]}
+                                >
+                                  <a
+                                    className="govuk-link govuk-!-margin-right-3"
+                                    href="/case/case_uuid-klx/stage/stage_uuid-449"
+                                    onClick={[Function]}
+                                  >
+                                    case8
+                                  </a>
+                                </LinkAnchor>
+                              </Link>
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-449fullName"
+                            >
+                              Bet Linch
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-449fullname"
+                            >
+                              Mrs Linch
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-449postcode"
+                            />
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-449stageTypeDisplay"
+                            >
+                              Stage F
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-449assignedUserDisplay"
+                            >
+                              User5
+                            </td>
+                            <td
+                              className="govuk-table__cell govuk-table__cell--truncated"
+                              key="stage_uuid-449assignedTopicDisplay"
+                            />
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-449TEST,created"
+                            />
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-449isActive,TEST"
+                            >
+                              is Active
+                            </td>
+                            <td
+                              className="govuk-table__cell date-warning"
+                              key="stage_uuid-449dueContribution"
+                            >
+                              <span />
+                            </td>
+                            <td
+                              className="govuk-table__cell date-warning"
+                              key="stage_uuid-449DueDate"
+                            >
+                              <span />
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-449nextCaseType"
+                            >
+                              <Link
+                                className="govuk-link govuk-!-margin-right-3"
+                                to="/case/undefined/stage/undefined"
+                              >
+                                <LinkAnchor
+                                  className="govuk-link govuk-!-margin-right-3"
+                                  href="/case/undefined/stage/undefined"
+                                  navigate={[Function]}
+                                >
+                                  <a
+                                    className="govuk-link govuk-!-margin-right-3"
+                                    href="/case/undefined/stage/undefined"
+                                    onClick={[Function]}
+                                  >
+                                    nextCaseReference
+                                  </a>
+                                </LinkAnchor>
+                              </Link>
+                            </td>
+                          </tr>
+                          <tr
+                            className="govuk-radios govuk-table__row"
+                            key="stage_uuid-448"
+                          >
+                            <td
+                              className="govuk-table__cell"
+                            >
+                              <div
+                                className="govuk-checkboxes"
+                              >
+                                <div
+                                  className="govuk-checkboxes__item"
+                                  key="case_uuid-klzstage_uuid-448"
+                                >
+                                  <input
+                                    checked={false}
+                                    className="govuk-checkboxes__input"
+                                    id="selected_cases_case_uuid-klz"
+                                    name="selected_cases[]"
+                                    onChange={[Function]}
+                                    type="checkbox"
+                                    value="case_uuid-klz:stage_uuid-448"
+                                  />
+                                  <label
+                                    className="govuk-label govuk-checkboxes__label"
+                                    htmlFor="selected_cases_case_uuid-klz"
+                                  >
+                                    <span
+                                      className="govuk-visually-hidden"
+                                    >
+                                      case7
+                                    </span>
+                                  </label>
+                                </div>
+                              </div>
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-448caseReference"
+                            >
+                              <Link
+                                className="govuk-link govuk-!-margin-right-3"
+                                to="/case/case_uuid-klz/stage/stage_uuid-448"
+                              >
+                                <LinkAnchor
+                                  className="govuk-link govuk-!-margin-right-3"
+                                  href="/case/case_uuid-klz/stage/stage_uuid-448"
+                                  navigate={[Function]}
+                                >
+                                  <a
+                                    className="govuk-link govuk-!-margin-right-3"
+                                    href="/case/case_uuid-klz/stage/stage_uuid-448"
+                                    onClick={[Function]}
+                                  >
+                                    case7
+                                  </a>
+                                </LinkAnchor>
+                              </Link>
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-448fullName"
+                            >
+                              Bet Linch
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-448fullname"
+                            >
+                              Mrs Linch
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-448postcode"
+                            />
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-448stageTypeDisplay"
+                            >
+                              Stage F
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-448assignedUserDisplay"
+                            >
+                              User5
+                            </td>
+                            <td
+                              className="govuk-table__cell govuk-table__cell--truncated"
+                              key="stage_uuid-448assignedTopicDisplay"
+                            />
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-448TEST,created"
+                            />
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-448isActive,TEST"
+                            >
+                              is Active
+                            </td>
+                            <td
+                              className="govuk-table__cell date-warning"
+                              key="stage_uuid-448dueContribution"
+                            >
+                              <span />
+                            </td>
+                            <td
+                              className="govuk-table__cell date-warning"
+                              key="stage_uuid-448DueDate"
+                            >
+                              <span />
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-448nextCaseType"
+                            >
+                              <Link
+                                className="govuk-link govuk-!-margin-right-3"
+                                to={
+                                  Object {
+                                    "pathname": "/action/create/nextCase/DOCUMENT?from=case_uuid-klz",
+                                    "query": Object {
+                                      "from": "case_uuid-klz",
+                                    },
+                                  }
+                                }
+                              >
+                                <LinkAnchor
+                                  className="govuk-link govuk-!-margin-right-3"
+                                  href="/action/create/nextCase/DOCUMENT?from=case_uuid-klz"
+                                  navigate={[Function]}
+                                >
+                                  <a
+                                    className="govuk-link govuk-!-margin-right-3"
+                                    href="/action/create/nextCase/DOCUMENT?from=case_uuid-klz"
+                                    onClick={[Function]}
+                                  >
+                                    Escalate case..
+                                  </a>
+                                </LinkAnchor>
+                              </Link>
+                            </td>
+                          </tr>
                           <tr
                             className="govuk-radios govuk-table__row"
                             key="stage_uuid-447"
@@ -3593,6 +4842,10 @@ exports[`Workstack component should sort descending when the column heading is c
                             >
                               <span />
                             </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-447nextCaseType"
+                            />
                           </tr>
                           <tr
                             className="govuk-radios govuk-table__row"
@@ -3702,6 +4955,10 @@ exports[`Workstack component should sort descending when the column heading is c
                             <td
                               className="govuk-table__cell"
                               key="stage_uuid-446DueDate"
+                            />
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-446nextCaseType"
                             />
                           </tr>
                           <tr
@@ -3819,6 +5076,10 @@ exports[`Workstack component should sort descending when the column heading is c
                             >
                               <span />
                             </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-445nextCaseType"
+                            />
                           </tr>
                           <tr
                             className="govuk-radios govuk-table__row"
@@ -3932,6 +5193,10 @@ exports[`Workstack component should sort descending when the column heading is c
                               className="govuk-table__cell"
                               key="stage_uuid-444DueDate"
                             />
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-444nextCaseType"
+                            />
                           </tr>
                           <tr
                             className="govuk-radios govuk-table__row"
@@ -4044,6 +5309,10 @@ exports[`Workstack component should sort descending when the column heading is c
                             <td
                               className="govuk-table__cell"
                               key="stage_uuid-432DueDate"
+                            />
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-432nextCaseType"
                             />
                           </tr>
                           <tr
@@ -4162,6 +5431,10 @@ exports[`Workstack component should sort descending when the column heading is c
                               className="govuk-table__cell"
                               key="stage_uuid-456DueDate"
                             />
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-456nextCaseType"
+                            />
                           </tr>
                         </tbody>
                       </table>
@@ -4169,7 +5442,7 @@ exports[`Workstack component should sort descending when the column heading is c
                         aria-live="polite"
                         className="govuk-hint"
                       >
-                        6
+                        8
                          Items
                       </span>
                     </div>
@@ -4333,6 +5606,20 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
               "isFilterable": true,
               "renderer": "dueDateWarning",
             },
+            Object {
+              "dataAdapter": null,
+              "dataValueKey": "nextCaseType",
+              "displayName": "Escalate Case",
+              "isFilterable": false,
+              "renderer": "nextCaseType",
+            },
+            Object {
+              "dataAdapter": null,
+              "dataValueKey": "nextCaseReference",
+              "displayName": "Hidden Column",
+              "isFilterable": false,
+              "renderer": "hidden",
+            },
           ]
         }
         items={
@@ -4345,6 +5632,8 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
               "created": "2019-10-29T11:01:32.656563",
               "fullName": "Sam Smith",
               "isActive": "YES",
+              "nextCaseReference": null,
+              "nextCaseType": null,
               "primaryCorrespondent": Object {
                 "fullname": "Mr Smith",
                 "postcode": "postcode1",
@@ -4361,6 +5650,8 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
               "created": "",
               "fullName": "John Alex",
               "isActive": "NO",
+              "nextCaseReference": null,
+              "nextCaseType": null,
               "primaryCorrespondent": Object {
                 "fullname": "Mr Alex",
                 "postcode": "postcode2",
@@ -4377,6 +5668,8 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
               "created": null,
               "fullName": "Pat Brown",
               "isActive": "NO",
+              "nextCaseReference": null,
+              "nextCaseType": null,
               "primaryCorrespondent": Object {
                 "fullname": "Ms Brown",
                 "postcode": "postcode3",
@@ -4394,6 +5687,8 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
               "dueContribution": "2020-12-12",
               "fullName": "Dave Jones",
               "isActive": "YES",
+              "nextCaseReference": null,
+              "nextCaseType": null,
               "primaryCorrespondent": Object {
                 "fullname": "Mr Jones",
                 "postcode": "postcode4",
@@ -4410,6 +5705,8 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
               "created": null,
               "fullName": "Mick Smith",
               "isActive": "YES",
+              "nextCaseReference": null,
+              "nextCaseType": null,
               "primaryCorrespondent": Object {
                 "fullname": "Mr Smith",
                 "postcode": "",
@@ -4429,6 +5726,8 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
               },
               "fullName": "Bet Linch",
               "isActive": "YES",
+              "nextCaseReference": null,
+              "nextCaseType": null,
               "primaryCorrespondent": Object {
                 "fullname": "Mrs Linch",
                 "postcode": null,
@@ -4436,6 +5735,48 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
               "stageType": "MPAM_DRAFT",
               "stageTypeDisplay": "Stage F",
               "uuid": "stage_uuid-447",
+            },
+            Object {
+              "assignedTeamDisplay": "team6",
+              "assignedUserDisplay": "User5",
+              "caseReference": "case7",
+              "caseUUID": "case_uuid-klz",
+              "created": null,
+              "data": Object {
+                "DueDate": "2021-01-01",
+              },
+              "fullName": "Bet Linch",
+              "isActive": "YES",
+              "nextCaseReference": null,
+              "nextCaseType": "nextCase",
+              "primaryCorrespondent": Object {
+                "fullname": "Mrs Linch",
+                "postcode": null,
+              },
+              "stageType": "MPAM_DRAFT",
+              "stageTypeDisplay": "Stage F",
+              "uuid": "stage_uuid-448",
+            },
+            Object {
+              "assignedTeamDisplay": "team6",
+              "assignedUserDisplay": "User5",
+              "caseReference": "case8",
+              "caseUUID": "case_uuid-klx",
+              "created": null,
+              "data": Object {
+                "DueDate": "2021-01-01",
+              },
+              "fullName": "Bet Linch",
+              "isActive": "YES",
+              "nextCaseReference": "nextCaseReference",
+              "nextCaseType": "nextCase",
+              "primaryCorrespondent": Object {
+                "fullname": "Mrs Linch",
+                "postcode": null,
+              },
+              "stageType": "MPAM_DRAFT",
+              "stageTypeDisplay": "Stage F",
+              "uuid": "stage_uuid-449",
             },
           ]
         }
@@ -4503,7 +5844,7 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                         aria-live="polite"
                         className="govuk-hint"
                       >
-                        6
+                        8
                          Items
                       </span>
                       <table
@@ -4596,6 +5937,13 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                               onClick={[Function]}
                             >
                               Due Date
+                            </th>
+                            <th
+                              className="govuk-link"
+                              key="Escalate Case"
+                              onClick={[Function]}
+                            >
+                              Escalate Case
                             </th>
                           </tr>
                         </thead>
@@ -4718,6 +6066,10 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                               className="govuk-table__cell"
                               key="stage_uuid-456DueDate"
                             />
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-456nextCaseType"
+                            />
                           </tr>
                           <tr
                             className="govuk-radios govuk-table__row"
@@ -4831,6 +6183,10 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                               className="govuk-table__cell"
                               key="stage_uuid-432DueDate"
                             />
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-432nextCaseType"
+                            />
                           </tr>
                           <tr
                             className="govuk-radios govuk-table__row"
@@ -4943,6 +6299,10 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                             <td
                               className="govuk-table__cell"
                               key="stage_uuid-444DueDate"
+                            />
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-444nextCaseType"
                             />
                           </tr>
                           <tr
@@ -5060,6 +6420,10 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                             >
                               <span />
                             </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-445nextCaseType"
+                            />
                           </tr>
                           <tr
                             className="govuk-radios govuk-table__row"
@@ -5169,6 +6533,10 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                             <td
                               className="govuk-table__cell"
                               key="stage_uuid-446DueDate"
+                            />
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-446nextCaseType"
                             />
                           </tr>
                           <tr
@@ -5284,6 +6652,291 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                             >
                               <span />
                             </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-447nextCaseType"
+                            />
+                          </tr>
+                          <tr
+                            className="govuk-radios govuk-table__row"
+                            key="stage_uuid-448"
+                          >
+                            <td
+                              className="govuk-table__cell"
+                            >
+                              <div
+                                className="govuk-checkboxes"
+                              >
+                                <div
+                                  className="govuk-checkboxes__item"
+                                  key="case_uuid-klzstage_uuid-448"
+                                >
+                                  <input
+                                    checked={false}
+                                    className="govuk-checkboxes__input"
+                                    id="selected_cases_case_uuid-klz"
+                                    name="selected_cases[]"
+                                    onChange={[Function]}
+                                    type="checkbox"
+                                    value="case_uuid-klz:stage_uuid-448"
+                                  />
+                                  <label
+                                    className="govuk-label govuk-checkboxes__label"
+                                    htmlFor="selected_cases_case_uuid-klz"
+                                  >
+                                    <span
+                                      className="govuk-visually-hidden"
+                                    >
+                                      case7
+                                    </span>
+                                  </label>
+                                </div>
+                              </div>
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-448caseReference"
+                            >
+                              <Link
+                                className="govuk-link govuk-!-margin-right-3"
+                                to="/case/case_uuid-klz/stage/stage_uuid-448"
+                              >
+                                <LinkAnchor
+                                  className="govuk-link govuk-!-margin-right-3"
+                                  href="/case/case_uuid-klz/stage/stage_uuid-448"
+                                  navigate={[Function]}
+                                >
+                                  <a
+                                    className="govuk-link govuk-!-margin-right-3"
+                                    href="/case/case_uuid-klz/stage/stage_uuid-448"
+                                    onClick={[Function]}
+                                  >
+                                    case7
+                                  </a>
+                                </LinkAnchor>
+                              </Link>
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-448fullName"
+                            >
+                              Bet Linch
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-448fullname"
+                            >
+                              Mrs Linch
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-448postcode"
+                            />
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-448stageTypeDisplay"
+                            >
+                              Stage F
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-448assignedUserDisplay"
+                            >
+                              User5
+                            </td>
+                            <td
+                              className="govuk-table__cell govuk-table__cell--truncated"
+                              key="stage_uuid-448assignedTopicDisplay"
+                            />
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-448TEST,created"
+                            />
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-448isActive,TEST"
+                            >
+                              is Active
+                            </td>
+                            <td
+                              className="govuk-table__cell date-warning"
+                              key="stage_uuid-448dueContribution"
+                            >
+                              <span />
+                            </td>
+                            <td
+                              className="govuk-table__cell date-warning"
+                              key="stage_uuid-448DueDate"
+                            >
+                              <span />
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-448nextCaseType"
+                            >
+                              <Link
+                                className="govuk-link govuk-!-margin-right-3"
+                                to={
+                                  Object {
+                                    "pathname": "/action/create/nextCase/DOCUMENT?from=case_uuid-klz",
+                                    "query": Object {
+                                      "from": "case_uuid-klz",
+                                    },
+                                  }
+                                }
+                              >
+                                <LinkAnchor
+                                  className="govuk-link govuk-!-margin-right-3"
+                                  href="/action/create/nextCase/DOCUMENT?from=case_uuid-klz"
+                                  navigate={[Function]}
+                                >
+                                  <a
+                                    className="govuk-link govuk-!-margin-right-3"
+                                    href="/action/create/nextCase/DOCUMENT?from=case_uuid-klz"
+                                    onClick={[Function]}
+                                  >
+                                    Escalate case..
+                                  </a>
+                                </LinkAnchor>
+                              </Link>
+                            </td>
+                          </tr>
+                          <tr
+                            className="govuk-radios govuk-table__row"
+                            key="stage_uuid-449"
+                          >
+                            <td
+                              className="govuk-table__cell"
+                            >
+                              <div
+                                className="govuk-checkboxes"
+                              >
+                                <div
+                                  className="govuk-checkboxes__item"
+                                  key="case_uuid-klxstage_uuid-449"
+                                >
+                                  <input
+                                    checked={false}
+                                    className="govuk-checkboxes__input"
+                                    id="selected_cases_case_uuid-klx"
+                                    name="selected_cases[]"
+                                    onChange={[Function]}
+                                    type="checkbox"
+                                    value="case_uuid-klx:stage_uuid-449"
+                                  />
+                                  <label
+                                    className="govuk-label govuk-checkboxes__label"
+                                    htmlFor="selected_cases_case_uuid-klx"
+                                  >
+                                    <span
+                                      className="govuk-visually-hidden"
+                                    >
+                                      case8
+                                    </span>
+                                  </label>
+                                </div>
+                              </div>
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-449caseReference"
+                            >
+                              <Link
+                                className="govuk-link govuk-!-margin-right-3"
+                                to="/case/case_uuid-klx/stage/stage_uuid-449"
+                              >
+                                <LinkAnchor
+                                  className="govuk-link govuk-!-margin-right-3"
+                                  href="/case/case_uuid-klx/stage/stage_uuid-449"
+                                  navigate={[Function]}
+                                >
+                                  <a
+                                    className="govuk-link govuk-!-margin-right-3"
+                                    href="/case/case_uuid-klx/stage/stage_uuid-449"
+                                    onClick={[Function]}
+                                  >
+                                    case8
+                                  </a>
+                                </LinkAnchor>
+                              </Link>
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-449fullName"
+                            >
+                              Bet Linch
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-449fullname"
+                            >
+                              Mrs Linch
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-449postcode"
+                            />
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-449stageTypeDisplay"
+                            >
+                              Stage F
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-449assignedUserDisplay"
+                            >
+                              User5
+                            </td>
+                            <td
+                              className="govuk-table__cell govuk-table__cell--truncated"
+                              key="stage_uuid-449assignedTopicDisplay"
+                            />
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-449TEST,created"
+                            />
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-449isActive,TEST"
+                            >
+                              is Active
+                            </td>
+                            <td
+                              className="govuk-table__cell date-warning"
+                              key="stage_uuid-449dueContribution"
+                            >
+                              <span />
+                            </td>
+                            <td
+                              className="govuk-table__cell date-warning"
+                              key="stage_uuid-449DueDate"
+                            >
+                              <span />
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-449nextCaseType"
+                            >
+                              <Link
+                                className="govuk-link govuk-!-margin-right-3"
+                                to="/case/undefined/stage/undefined"
+                              >
+                                <LinkAnchor
+                                  className="govuk-link govuk-!-margin-right-3"
+                                  href="/case/undefined/stage/undefined"
+                                  navigate={[Function]}
+                                >
+                                  <a
+                                    className="govuk-link govuk-!-margin-right-3"
+                                    href="/case/undefined/stage/undefined"
+                                    onClick={[Function]}
+                                  >
+                                    nextCaseReference
+                                  </a>
+                                </LinkAnchor>
+                              </Link>
+                            </td>
                           </tr>
                         </tbody>
                       </table>
@@ -5291,7 +6944,7 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                         aria-live="polite"
                         className="govuk-hint"
                       >
-                        6
+                        8
                          Items
                       </span>
                     </div>

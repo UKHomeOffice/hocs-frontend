@@ -44,7 +44,9 @@ const ColumnRenderer = {
     WRAP_TEXT: 'wrapText',
     TRUNCATE_TEXT: 'truncateText',
     CONTRIBUTIONS_WARNING: 'contributionsWarning',
-    MP_WITH_OWNER: 'mpWithOwner'
+    MP_WITH_OWNER: 'mpWithOwner',
+    NEXT_CASE_LINK: 'nextCaseType',
+    HIDDEN: 'hidden'
 };
 
 const ColumnSortStrategy = {
@@ -242,6 +244,11 @@ class WorkstackAllocate extends Component {
     }
 
     renderHeader(column) {
+
+        if (column.renderer === 'hidden') {
+            return;
+        }
+
         if (column.sortStrategy === 'noSort') {
             return (
                 <th className='govuk-table__header' key={column.displayName}>
@@ -311,6 +318,21 @@ class WorkstackAllocate extends Component {
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>
                     <Link to={`/case/${row.caseUUID}/stage/${row.uuid}`} className='govuk-link govuk-!-margin-right-3'>{value}</Link>
                 </td>;
+            case ColumnRenderer.NEXT_CASE_LINK: {
+                // build a suitable FE link
+                if (row.nextCaseReference) {
+                    return (
+                        <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>
+                            <Link to={`/case/${row.nextCaseUUID}/stage/${row.nextCaseStageUUID}`} className='govuk-link govuk-!-margin-right-3'>{row.nextCaseReference}</Link>
+                        </td>
+                    );
+                } else if (value) {
+                    return (<td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>
+                        <Link to={ { pathname :`/action/create/${value}/DOCUMENT?from=${row.caseUUID}`, query: { from: row.caseUUID } } } className='govuk-link govuk-!-margin-right-3'>Escalate case..</Link>
+                    </td>);
+                }
+                return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'></td>;
+            }
             case ColumnRenderer.CORRESPONDENT_WITH_CASE_LINK:
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>
                     {
@@ -399,6 +421,8 @@ class WorkstackAllocate extends Component {
                     </td>;
                 }
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>{value}</td>;
+            case ColumnRenderer.HIDDEN:
+                return;
             default:
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>{value}</td>;
         }

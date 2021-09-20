@@ -72,9 +72,6 @@ class Timeline extends Component {
     getCaseNotes() {
         const { dispatch, page } = this.props;
         if (page && page.params && page.params.caseId) {
-            // TODO: Remove
-            /* eslint-disable-next-line  no-console*/
-            console.log(`Updating case notes for case: ${page.params.caseId}`);
             return dispatch(updateApiStatus(status.REQUEST_CASE_NOTES))
                 .then(() => {
                     axios.get(`/api/case/${page.params.caseId}/caseNotes`)

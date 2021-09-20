@@ -3,7 +3,7 @@ React application and NodeJs Server for server rendered dynamic forms.
 ## How to run
 ### Prerequisites
 ```
-  NodeJs: >= v14.15.4
+  NodeJs: >= v14.15.4 & < 16
   Docker: >= v18.09.2
   Docker-Compose: >= v1.23.2
 ```
