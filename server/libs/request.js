@@ -18,6 +18,15 @@ const getHttpsClient = () => {
     });
 };
 
+const retryDelays = [500, 1000, 2000];
+
+const getRetryDelay = (retryCount) => {
+    if(retryCount <= retryDelays.length){
+        return retryDelays[retryCount - 1];
+    }
+    return retryDelays[retryDelays.length - 1];
+};
+
 function createClient({ baseURL, auth }) {
 
     const logger = getLogger();
@@ -28,8 +37,7 @@ function createClient({ baseURL, auth }) {
         httpsAgent: isProduction ? getHttpsClient() : null
     });
 
-    //Retry 3 times with 5 second gaps
-    axiosRetry(client, { retries: backendRequestRetries, retryDelay: () => { return 5000; } });
+    axiosRetry(client, { retries: backendRequestRetries, retryDelay: getRetryDelay });
 
     //Warn about retries
     client.interceptors.request.use(request => {
