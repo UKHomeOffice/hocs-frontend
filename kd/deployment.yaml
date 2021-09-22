@@ -326,6 +326,8 @@ spec:
             value: '{{.KUBE_IS_NOTPROD}}'
           - name: SHOW_STACKTRACE_ON_ERROR_PAGE
             value: '{{.SHOW_ERROR_STACKTRACE}}'
+          - name: BACKEND_REQUEST_RETRIES
+            value: '3'
         resources:
           limits:
             cpu: 900m
