@@ -262,6 +262,11 @@ module.exports = {
             endpoint: '/caseType?bulkOnly=false',
             adapter: caseTypeCommaSeparatedAdapter
         },
+        CASE_TYPES_FOR_SEARCH: {
+            client: 'INFO',
+            endpoint: '/caseType?bulkOnly=false&addCasesWithPreviousType=true',
+            adapter: caseTypeAdapter
+        },
         COUNTRIES_CURRENT: {
             client: 'INFO',
             endpoint: '/country',
