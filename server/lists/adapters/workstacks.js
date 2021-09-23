@@ -191,16 +191,14 @@ const bindDisplayElements = fromStaticList => async (stage) => {
         'MPAM_DRAFT_ESCALATED_REQUESTED_CONTRIBUTION'
     ];
 
-    if ((contributionReceivedStages.includes(stage.stageType) || contributionRequestedStages.includes(stage.stageType))) {
-        if (contributionRequestedStages.includes(stage.stageType) && stage.dueContribution) {
-            stage.stageTypeWithDueDateDisplay = `${stage.stageTypeDisplay} due: ${formatDate(stage.dueContribution)}`;
-        } else if (contributionReceivedStages.includes(stage.stageType) && !stage.dueContribution) {
-            stage.stageTypeWithDueDateDisplay = `${stage.stageTypeDisplay} (Contributions Received)`;
-        } else {
-            stage.stageTypeWithDueDateDisplay = stage.stageTypeDisplay;
-        }
+    if (contributionRequestedStages.includes(stage.stageType) && stage.dueContribution) {
+        stage.stageTypeWithDueDateDisplay = `${stage.stageTypeDisplay} due: ${formatDate(stage.dueContribution)}`;
+    } else if (contributionReceivedStages.includes(stage.stageType) && stage.contributions === 'Received') {
+        stage.stageTypeWithDueDateDisplay = `${stage.stageTypeDisplay} (Contributions Received)`;
     } else if (stage.data && stage.data.DueDate) {
         stage.stageTypeWithDueDateDisplay = `${stage.stageTypeDisplay} due ${formatDate(stage.data.DueDate)}`;
+    } else {
+        stage.stageTypeWithDueDateDisplay = stage.stageTypeDisplay;
     }
 
     stage.primaryCorrespondentAndRefDisplay = {};
