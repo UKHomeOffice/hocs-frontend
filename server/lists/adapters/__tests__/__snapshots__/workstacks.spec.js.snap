@@ -1297,6 +1297,42 @@ Object {
 }
 `;
 
+exports[`Workflow Workstack Adapter should transform a stage array to a workflow workstack with at MPAM_DRAFT with contributions as Cancelled 1`] = `
+Object {
+  "allocateToTeamEndpoint": "/allocate/team",
+  "allocateToUserEndpoint": "/allocate/user",
+  "allocateToWorkstackEndpoint": "/unallocate/",
+  "columns": Array [],
+  "items": Array [
+    Object {
+      "active": true,
+      "assignedTeamDisplay": "MOCK_TEAM",
+      "assignedUserDisplay": "MOCK_USER",
+      "caseReference": "A/1234568/19",
+      "caseType": "WCS",
+      "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "contributions": "Cancelled",
+      "deadline": "2200-01-03",
+      "deadlineDisplay": "03/01/2200",
+      "mpWithOwnerDisplay": Object {
+        "mp": "",
+        "owner": "MOCK_USER",
+      },
+      "primaryCorrespondentAndRefDisplay": Object {
+        "caseReference": "A/1234568/19",
+      },
+      "stageType": "MPAM_DRAFT",
+      "stageTypeDisplay": "MOCK_STAGETYPE",
+      "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE (Contributions Received)",
+      "teamUUID": 2,
+      "userUUID": 2,
+    },
+  ],
+  "label": "MOCK_STAGETYPE",
+  "teamMembers": Array [],
+}
+`;
+
 exports[`Workflow Workstack Adapter should transform a stage array to a workflow workstack with at MPAM_DRAFT with contributions as Received 1`] = `
 Object {
   "allocateToTeamEndpoint": "/allocate/team",
@@ -1433,6 +1469,42 @@ Object {
       "stageType": "MPAM_DRAFT_REQUESTED_CONTRIBUTION",
       "stageTypeDisplay": "MOCK_STAGETYPE",
       "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE",
+      "teamUUID": 2,
+      "userUUID": 2,
+    },
+  ],
+  "label": "MOCK_STAGETYPE",
+  "teamMembers": Array [],
+}
+`;
+
+exports[`Workflow Workstack Adapter should transform a stage array to a workflow workstack with at MPAM_TRIAGE with contributions as Cancelled 1`] = `
+Object {
+  "allocateToTeamEndpoint": "/allocate/team",
+  "allocateToUserEndpoint": "/allocate/user",
+  "allocateToWorkstackEndpoint": "/unallocate/",
+  "columns": Array [],
+  "items": Array [
+    Object {
+      "active": true,
+      "assignedTeamDisplay": "MOCK_TEAM",
+      "assignedUserDisplay": "MOCK_USER",
+      "caseReference": "A/1234568/19",
+      "caseType": "WCS",
+      "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "contributions": "Cancelled",
+      "deadline": "2200-01-03",
+      "deadlineDisplay": "03/01/2200",
+      "mpWithOwnerDisplay": Object {
+        "mp": "",
+        "owner": "MOCK_USER",
+      },
+      "primaryCorrespondentAndRefDisplay": Object {
+        "caseReference": "A/1234568/19",
+      },
+      "stageType": "MPAM_TRIAGE",
+      "stageTypeDisplay": "MOCK_STAGETYPE",
+      "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE (Contributions Received)",
       "teamUUID": 2,
       "userUUID": 2,
     },

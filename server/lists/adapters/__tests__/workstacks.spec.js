@@ -1097,6 +1097,36 @@ describe('Workflow Workstack Adapter', () => {
             expect(result).toMatchSnapshot();
         });
 
+    it('should transform a stage array to a workflow workstack with at MPAM_TRIAGE with contributions as Cancelled',
+        async () => {
+            const mockData = {
+                stages: [
+                    {
+                        teamUUID: 2,
+                        caseType: 'WCS',
+                        stageType: 'MPAM_TRIAGE',
+                        userUUID: 2,
+                        deadline: '2200-01-03',
+                        caseReference: 'A/1234568/19',
+                        active: true,
+                        contributions: 'Cancelled'
+                    }
+                ]
+            };
+
+            const result = await stageAdapter(mockData, {
+                user: mockUser,
+                fromStaticList: mockFromStaticList,
+                logger: mockLogger,
+                teamId: 2,
+                workflowId: 'WCS',
+                stageId: 'MPAM_TRIAGE',
+                configuration: mockConfiguration
+            });
+
+            expect(result).toMatchSnapshot();
+        });
+
     it('should transform a stage array to a workflow workstack with at MPAM_TRIAGE_REQUESTED_CONTRIBUTION with dueContribution',
         async () => {
             const mockData = {
@@ -1171,6 +1201,36 @@ describe('Workflow Workstack Adapter', () => {
                         caseReference: 'A/1234568/19',
                         active: true,
                         contributions: null
+                    }
+                ]
+            };
+
+            const result = await stageAdapter(mockData, {
+                user: mockUser,
+                fromStaticList: mockFromStaticList,
+                logger: mockLogger,
+                teamId: 2,
+                workflowId: 'WCS',
+                stageId: 'MPAM_DRAFT',
+                configuration: mockConfiguration
+            });
+
+            expect(result).toMatchSnapshot();
+        });
+
+    it('should transform a stage array to a workflow workstack with at MPAM_DRAFT with contributions as Cancelled',
+        async () => {
+            const mockData = {
+                stages: [
+                    {
+                        teamUUID: 2,
+                        caseType: 'WCS',
+                        stageType: 'MPAM_DRAFT',
+                        userUUID: 2,
+                        deadline: '2200-01-03',
+                        caseReference: 'A/1234568/19',
+                        active: true,
+                        contributions: 'Cancelled'
                     }
                 ]
             };

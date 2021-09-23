@@ -175,30 +175,13 @@ const bindDisplayElements = fromStaticList => async (stage) => {
     }
     stage.deadlineDisplay = formatDate(stage.deadline);
 
-    stage.stageTypeWithDueDateDisplay = stage.stageTypeDisplay;
-
-    const contributionReceivedStages = [
-        'MPAM_TRIAGE',
-        'MPAM_TRIAGE_ESCALATE',
-        'MPAM_DRAFT',
-        'MPAM_DRAFT_ESCALATE'
-    ];
-
-    const contributionRequestedStages = [
-        'MPAM_TRIAGE_REQUESTED_CONTRIBUTION',
-        'MPAM_TRIAGE_ESCALATED_REQUESTED_CONTRIBUTION',
-        'MPAM_DRAFT_REQUESTED_CONTRIBUTION',
-        'MPAM_DRAFT_ESCALATED_REQUESTED_CONTRIBUTION'
-    ];
-
-    if (contributionRequestedStages.includes(stage.stageType) && stage.dueContribution) {
-        stage.stageTypeWithDueDateDisplay = `${stage.stageTypeDisplay} due: ${formatDate(stage.dueContribution)}`;
-    } else if (contributionReceivedStages.includes(stage.stageType) && stage.contributions === 'Received') {
-        stage.stageTypeWithDueDateDisplay = `${stage.stageTypeDisplay} (Contributions Received)`;
-    } else if (stage.data && stage.data.DueDate) {
-        stage.stageTypeWithDueDateDisplay = `${stage.stageTypeDisplay} due ${formatDate(stage.data.DueDate)}`;
-    } else {
-        stage.stageTypeWithDueDateDisplay = stage.stageTypeDisplay;
+    stage.stageTypeWithDueDateDisplay = contributionDueDateDisplay(stage);
+    if (stage.stageTypeWithDueDateDisplay === undefined) {
+        if (stage.data && stage.data.DueDate) {
+            stage.stageTypeWithDueDateDisplay = `${stage.stageTypeDisplay} due ${formatDate(stage.data.DueDate)}`;
+        } else {
+            stage.stageTypeWithDueDateDisplay = stage.stageTypeDisplay;
+        }
     }
 
     stage.primaryCorrespondentAndRefDisplay = {};
@@ -224,6 +207,32 @@ const bindDisplayElements = fromStaticList => async (stage) => {
     stage.primaryCorrespondentAndRefDisplay.caseReference = stage.caseReference;
 
     return stage;
+};
+
+const contributionDueDateDisplay = ({ stageType, stageTypeDisplay, dueContribution, contributions }) => {
+    const contributionReceivedStages = [
+        'MPAM_TRIAGE',
+        'MPAM_TRIAGE_ESCALATE',
+        'MPAM_DRAFT',
+        'MPAM_DRAFT_ESCALATE'
+    ];
+
+    const contributionRequestedStages = [
+        'MPAM_TRIAGE_REQUESTED_CONTRIBUTION',
+        'MPAM_TRIAGE_ESCALATED_REQUESTED_CONTRIBUTION',
+        'MPAM_DRAFT_REQUESTED_CONTRIBUTION',
+        'MPAM_DRAFT_ESCALATED_REQUESTED_CONTRIBUTION'
+    ];
+
+    const receivedStatus = ['Received', 'Cancelled'];
+
+    if (contributionRequestedStages.includes(stageType) && dueContribution) {
+        return `${stageTypeDisplay} due: ${formatDate(dueContribution)}`;
+    } else if (contributionReceivedStages.includes(stageType) && receivedStatus.includes(contributions)) {
+        return `${stageTypeDisplay} (Contributions Received)`;
+    }
+
+    return undefined;
 };
 
 class Card {
