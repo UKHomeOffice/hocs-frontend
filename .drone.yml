@@ -111,33 +111,53 @@ steps:
     commands:
       - git clone https://github.com/UKHomeOffice/kube-hocs-frontend.git
 
-  - name: deploy to cs-dev
-    image: quay.io/ukhomeofficedigital/kd:v1.16.0
-    environment:
-      ENVIRONMENT: cs-dev
-      VERSION: build_${DRONE_BUILD_NUMBER}
-      KUBE_TOKEN:
-        from_secret: hocs_frontend_cs_dev
-      POISE_IPS:
-        from_secret: POISE_IPS
-    commands:
-      - cd kube-hocs-frontend
-      - ./deploy.sh
-    when:
-      branch:
-        - main
-      event:
-        - push
-    depends_on:
-      - clone kube repo
+#  - name: deploy to cs-dev
+#    image: quay.io/ukhomeofficedigital/kd:v1.16.0
+#    environment:
+#      ENVIRONMENT: cs-dev
+#      VERSION: build_${DRONE_BUILD_NUMBER}
+#      KUBE_TOKEN:
+#        from_secret: hocs_frontend_cs_dev
+#      POISE_IPS:
+#        from_secret: POISE_IPS
+#    commands:
+#      - cd kube-hocs-frontend
+#      - ./deploy.sh
+#    when:
+#      branch:
+#        - main
+#      event:
+#        - push
+#    depends_on:
+#      - clone kube repo
 
-  - name: deploy to wcs-dev
+#  - name: deploy to wcs-dev
+#    image: quay.io/ukhomeofficedigital/kd:v1.16.0
+#    environment:
+#      ENVIRONMENT: wcs-dev
+#      VERSION: build_${DRONE_BUILD_NUMBER}
+#      KUBE_TOKEN:
+#        from_secret: hocs_frontend_wcs_dev
+#      POISE_IPS:
+#        from_secret: POISE_IPS
+#    commands:
+#      - cd kube-hocs-frontend
+#      - ./deploy.sh
+#    when:
+#      branch:
+#        - main
+#      event:
+#        - push
+#    depends_on:
+#      - clone kube repo
+
+  - name: deploy to gamma
     image: quay.io/ukhomeofficedigital/kd:v1.16.0
     environment:
-      ENVIRONMENT: wcs-dev
+      ENVIRONMENT: hocs-gamma
       VERSION: build_${DRONE_BUILD_NUMBER}
       KUBE_TOKEN:
-        from_secret: hocs_frontend_wcs_dev
+        from_secret: hocs_frontend_hocs_gamma
       POISE_IPS:
         from_secret: POISE_IPS
     commands:
@@ -145,7 +165,7 @@ steps:
       - ./deploy.sh
     when:
       branch:
-        - main
+        - foi-mvp-rebase-main
       event:
         - push
     depends_on:
@@ -192,49 +212,49 @@ steps:
       target:
         - release
 
-  - name: deploy to cs-qa
-    image: quay.io/ukhomeofficedigital/kd:v1.16.0
-    commands:
-      - source version.txt
-      - echo $VERSION
-      - cd kube-hocs-frontend
-      - ./deploy.sh
-    environment:
-      ENVIRONMENT: cs-qa
-      KUBE_TOKEN:
-        from_secret: hocs_frontend_cs_qa
-      POISE_IPS:
-        from_secret: POISE_IPS
-    when:
-      event:
-        - promote
-      target:
-        - release
-    depends_on:
-      - clone kube repo
-      - generate & tag build
+#  - name: deploy to cs-qa
+#    image: quay.io/ukhomeofficedigital/kd:v1.16.0
+#    commands:
+#      - source version.txt
+#      - echo $VERSION
+#      - cd kube-hocs-frontend
+#      - ./deploy.sh
+#    environment:
+#      ENVIRONMENT: cs-qa
+#      KUBE_TOKEN:
+#        from_secret: hocs_frontend_cs_qa
+#      POISE_IPS:
+#        from_secret: POISE_IPS
+#    when:
+#      event:
+#        - promote
+#      target:
+#        - release
+#    depends_on:
+#      - clone kube repo
+#      - generate & tag build
 
-  - name: deploy to wcs-qa
-    image: quay.io/ukhomeofficedigital/kd:v1.16.0
-    commands:
-      - source version.txt
-      - echo $VERSION
-      - cd kube-hocs-frontend
-      - ./deploy.sh
-    environment:
-      ENVIRONMENT: wcs-qa
-      KUBE_TOKEN:
-        from_secret: hocs_frontend_wcs_qa
-      POISE_IPS:
-        from_secret: POISE_IPS
-    when:
-      event:
-        - promote
-      target:
-        - release
-    depends_on:
-      - clone kube repo
-      - generate & tag build
+#  - name: deploy to wcs-qa
+#    image: quay.io/ukhomeofficedigital/kd:v1.16.0
+#    commands:
+#      - source version.txt
+#      - echo $VERSION
+#      - cd kube-hocs-frontend
+#      - ./deploy.sh
+#    environment:
+#      ENVIRONMENT: wcs-qa
+#      KUBE_TOKEN:
+#        from_secret: hocs_frontend_wcs_qa
+#      POISE_IPS:
+#        from_secret: POISE_IPS
+#    when:
+#      event:
+#        - promote
+#      target:
+#        - release
+#    depends_on:
+#      - clone kube repo
+#      - generate & tag build
 
   - name: deploy to not prod
     image: quay.io/ukhomeofficedigital/kd:v1.16.0
@@ -259,22 +279,22 @@ steps:
     depends_on:
       - clone kube repo
 
-  - name: deploy to prod
-    image: quay.io/ukhomeofficedigital/kd:v1.16.0
-    commands:
-      - cd kube-hocs-frontend
-      - ./deploy.sh
-    environment:
-      ENVIRONMENT: ${DRONE_DEPLOY_TO}
-      KUBE_TOKEN:
-        from_secret: hocs_frontend_${DRONE_DEPLOY_TO/-/_}
-      POISE_IPS:
-        from_secret: POISE_IPS
-    when:
-      event:
-        - promote
-      target:
-        include:
-          - "*-prod"
-    depends_on:
-      - clone kube repo
+#  - name: deploy to prod
+#    image: quay.io/ukhomeofficedigital/kd:v1.16.0
+#    commands:
+#      - cd kube-hocs-frontend
+#      - ./deploy.sh
+#    environment:
+#      ENVIRONMENT: ${DRONE_DEPLOY_TO}
+#      KUBE_TOKEN:
+#        from_secret: hocs_frontend_${DRONE_DEPLOY_TO/-/_}
+#      POISE_IPS:
+#        from_secret: POISE_IPS
+#    when:
+#      event:
+#        - promote
+#      target:
+#        include:
+#          - "*-prod"
+#    depends_on:
+#      - clone kube repo
