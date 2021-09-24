@@ -187,6 +187,9 @@ module.exports = {
                         .build()
                 }
             }
+        },
+        BULK: {
+            DOCUMENT: {}
         }
     }
 };
