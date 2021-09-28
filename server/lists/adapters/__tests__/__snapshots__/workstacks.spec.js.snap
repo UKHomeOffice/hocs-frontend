@@ -1437,10 +1437,10 @@ Object {
       "caseReference": "A/1234568/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "contributions": "Due",
       "data": Object {
         "CaseContributions": "[{\\"data\\": {\\"contributionDueDate\\":\\"2020-12-12\\"}}]",
       },
-      "contributions": "Due",
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
       "dueContribution": "2020-12-12",
@@ -1508,6 +1508,7 @@ Object {
   "columns": Array [],
   "items": Array [
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
@@ -1544,6 +1545,7 @@ Object {
   "columns": Array [],
   "items": Array [
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
@@ -1692,6 +1694,7 @@ Object {
   "columns": Array [],
   "items": Array [
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
