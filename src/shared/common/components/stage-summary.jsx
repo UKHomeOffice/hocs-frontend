@@ -127,6 +127,34 @@ const StageSummary = () => {
                         </table>
                     }
 
+                    {summary.case && summary.somuItems.map( type =>
+                        (
+                            <>
+                                <h2 className='govuk-heading-m'>{type.schema.summaryLabel}</h2>
+
+                                {type.items.map(item =>
+                                    (<table className='govuk-table margin-left--small'>
+                                        <caption className='govuk-table__caption margin-bottom--small'>{item[type.schema.categoriseBy]}</caption>
+                                        <tbody className='govuk-table__body'>
+                                            {
+                                                Object.keys(item)
+                                                    .filter(key => key !== type.schema.categoriseBy)
+                                                    .map(key => <>
+                                                        <tr className='govuk-table__row'>
+                                                            <th className='govuk-table__header padding-left--small govuk-!-width-one-third'>Date
+                                                                {(type.schema.fields.find(field => field.name === key)).label}
+                                                            </th>
+                                                            <td className='govuk-table__cell'>{item[key]}</td>
+                                                        </tr>
+                                                    </>)
+                                            }
+                                        </tbody>
+                                    </table>)
+                                )}
+
+                            </>
+                        )
+                    )}
                 </Fragment>
             }
         </Fragment>
