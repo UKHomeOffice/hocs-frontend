@@ -77,6 +77,43 @@ const getPreviousCase = previousCase => {
     }
 };
 
+function hydrateFOI(somuItems) {
+    return somuItems.map(type => {
+        const mappedItems = type.items.map(item => {
+            const hydratedSomuItem = {};
+            Object.keys(item).forEach(
+                key => {
+                    switch (key) {
+                        case 'appealStatus':
+                            item[key] = item[key] === 'appealComplete' ? 'Complete': 'Pending';
+                            break;
+                    }
+
+                    if (type.schema.categoriseBy === key) {
+                        hydratedSomuItem['heading'] = item[key];
+                    } else {
+                        const newKey = (type.schema.fields.find(field => field.name === key)).extractColumnLabel;
+                        hydratedSomuItem[newKey] = item[key];
+                    }
+                }
+            );
+
+            return hydratedSomuItem;
+        });
+
+        return { ...type, items: mappedItems };
+    });
+}
+
+function getSummaryHydrator(caseType) {
+    switch(caseType) {
+        case 'FOI':
+            return hydrateFOI;
+        default:
+            return (somuItems => somuItems);
+    }
+};
+
 module.exports = async (summary, options) => {
     const { fromStaticList, fetchList, configuration, user } = options;
     const { data: caseProfile } = await caseworkService.get(`/case/profile/${options.caseId}`, { headers: User.createHeaders(user) });
@@ -97,6 +134,6 @@ module.exports = async (summary, options) => {
         deadlines: deadlinesEnabled && stageDeadlineEnabled && summary.stageDeadlines ? await createDeadlines(summary.stageDeadlines, fromStaticList) : null,
         stages: await getActiveStages(summary.activeStages, fromStaticList),
         previousCase: getPreviousCase(summary.previousCase),
-        somuItems: summary.somuItems
+        somuItems: getSummaryHydrator('FOI')(summary.somuItems)
     };
 };

@@ -134,15 +134,15 @@ const StageSummary = () => {
 
                                 {type.items.map(item =>
                                     (<table className='govuk-table margin-left--small'>
-                                        <caption className='govuk-table__caption margin-bottom--small'>{item[type.schema.categoriseBy]}</caption>
+                                        <caption className='govuk-table__caption margin-bottom--small'>{item['heading']}</caption>
                                         <tbody className='govuk-table__body'>
                                             {
                                                 Object.keys(item)
-                                                    .filter(key => key !== type.schema.categoriseBy)
+                                                    .filter(key => key !== 'heading')
                                                     .map(key => <>
                                                         <tr className='govuk-table__row'>
-                                                            <th className='govuk-table__header padding-left--small govuk-!-width-one-third'>Date
-                                                                {(type.schema.fields.find(field => field.name === key)).label}
+                                                            <th className='govuk-table__header padding-left--small govuk-!-width-one-third'>
+                                                                {key}
                                                             </th>
                                                             <td className='govuk-table__cell'>{item[key]}</td>
                                                         </tr>
