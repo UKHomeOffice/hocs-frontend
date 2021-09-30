@@ -77,16 +77,23 @@ const getPreviousCase = previousCase => {
     }
 };
 
-function hydrateFOI(somuItems) {
+function hydrateSomu(somuItems, fetchList) {
     return somuItems.map(type => {
         const mappedItems = type.items.map(item => {
             const hydratedSomuItem = {};
             Object.keys(item).forEach(
-                key => {
-                    switch (key) {
-                        case 'appealStatus':
-                            item[key] = item[key] === 'appealComplete' ? 'Complete': 'Pending';
-                            break;
+                async key => {
+                    const choices = type.schema.fields.find(field => field.name === key).choices;
+                    if(choices) {
+                        if(typeof choices === 'string') {
+                            const resolvedChoices = await fetchList(choices);
+                            const foundOption = resolvedChoices.filter(option => option.value === item[key]);
+                            if (foundOption && foundOption.length === 1) {
+                                item[key] = foundOption[0].label;
+                            }
+                        } else {
+                            item[key] = choices[item[key]];
+                        }
                     }
 
                     if (type.schema.categoriseBy === key) {
@@ -104,15 +111,6 @@ function hydrateFOI(somuItems) {
         return { ...type, items: mappedItems };
     });
 }
-
-function getSummaryHydrator(caseType) {
-    switch(caseType) {
-        case 'FOI':
-            return hydrateFOI;
-        default:
-            return (somuItems => somuItems);
-    }
-};
 
 module.exports = async (summary, options) => {
     const { fromStaticList, fetchList, configuration, user } = options;
@@ -134,6 +132,6 @@ module.exports = async (summary, options) => {
         deadlines: deadlinesEnabled && stageDeadlineEnabled && summary.stageDeadlines ? await createDeadlines(summary.stageDeadlines, fromStaticList) : null,
         stages: await getActiveStages(summary.activeStages, fromStaticList),
         previousCase: getPreviousCase(summary.previousCase),
-        somuItems: getSummaryHydrator('FOI')(summary.somuItems)
+        somuItems: hydrateSomu(summary.somuItems, fetchList)
     };
 };
