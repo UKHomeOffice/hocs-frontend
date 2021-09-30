@@ -85,14 +85,16 @@ function hydrateSomu(somuItems, fetchList) {
                 async key => {
                     const choices = type.schema.fields.find(field => field.name === key).choices;
                     if(choices) {
+                        let foundOption;
                         if(typeof choices === 'string') {
                             const resolvedChoices = await fetchList(choices);
-                            const foundOption = resolvedChoices.filter(option => option.value === item[key]);
-                            if (foundOption && foundOption.length === 1) {
-                                item[key] = foundOption[0].label;
-                            }
+                            foundOption = resolvedChoices.filter(option => option.value === item[key]);
                         } else {
-                            item[key] = choices[item[key]];
+                            foundOption = choices.filter(option => option.value === item[key]);
+                        }
+
+                        if (foundOption && foundOption.length === 1) {
+                            item[key] = foundOption[0].label;
                         }
                     }
 
