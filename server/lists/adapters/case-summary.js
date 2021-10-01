@@ -83,25 +83,27 @@ function hydrateSomu(somuItems, fetchList) {
             const hydratedSomuItem = {};
             Object.keys(item).forEach(
                 async key => {
-                    const choices = type.schema.fields.find(field => field.name === key).choices;
-                    if(choices) {
+                    const schema = type.schema.fields.find(field => field.name === key);
+                    if (schema.choices) {
                         let foundOption;
-                        if(typeof choices === 'string') {
-                            const resolvedChoices = await fetchList(choices);
+                        if(typeof schema.choices === 'string') {
+                            const resolvedChoices = await fetchList(schema.choices);
                             foundOption = resolvedChoices.filter(option => option.value === item[key]);
                         } else {
-                            foundOption = choices.filter(option => option.value === item[key]);
+                            foundOption = schema.choices.filter(option => option.value === item[key]);
                         }
 
                         if (foundOption && foundOption.length === 1) {
                             item[key] = foundOption[0].label;
                         }
+                    } else if (schema.type === 'date') {
+                        item[key] = formatDate(item[key]);
                     }
 
                     if (type.schema.categoriseBy === key) {
                         hydratedSomuItem['heading'] = item[key];
                     } else {
-                        const newKey = (type.schema.fields.find(field => field.name === key)).extractColumnLabel;
+                        const newKey = (type.schema.fields.find(field => field.name === key)).summaryLabel;
                         hydratedSomuItem[newKey] = item[key];
                     }
                 }
