@@ -130,7 +130,7 @@ const StageSummary = () => {
                     {summary.case && summary.somuItems.map( type =>
                         (
                             <>
-                                <h2 className='govuk-heading-m'>{type.schema.summaryLabel}</h2>
+                                <h2 className='govuk-heading-m'>{type.summaryLabel}</h2>
 
                                 {type.items.map(item =>
                                     (<table className='govuk-table margin-left--small'>

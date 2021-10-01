@@ -112,7 +112,7 @@ function hydrateSomu(somuItems, fetchList) {
             return hydratedSomuItem;
         });
 
-        return { ...type, items: mappedItems };
+        return { items: mappedItems, summaryLabel: type.schema.summaryLabel };
     });
 }
 
