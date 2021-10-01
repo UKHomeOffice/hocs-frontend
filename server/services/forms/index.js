@@ -291,7 +291,7 @@ const formDefinitions = {
                 }
             }
         },
-        CCT_COMP_CONTRIB: {
+        COMPLAINANT_CONTRIB: {
             COMP: {
                 ADDREQUEST: {
                     builder: formRepository.contributionRequest,
