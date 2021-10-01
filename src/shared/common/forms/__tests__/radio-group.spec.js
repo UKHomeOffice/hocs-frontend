@@ -105,4 +105,3 @@ describe('Form radio group component', () => {
         ).toMatchSnapshot();
     });
 });
-

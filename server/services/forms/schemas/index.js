@@ -5,6 +5,7 @@ module.exports = {
     addMember: require('./add-member.js'),
     addCorrespondentDetails: require('./add-correspondent-details.js'),
     updateCorrespondentDetails: require('./update-correspondent-details.js'),
+    updateCorrespondentDetailsFoi: require('./update-correspondent-details-foi.js'),
     addMemberDetails: require('./add-member-details.js'),
     removeCorrespondent: require('./remove-correspondent.js'),
     addTopic: require('./add-topic.js'),
@@ -20,5 +21,15 @@ module.exports = {
     addTemplate: require('./add-template'),
     managePeople: require('./manage-people'),
     contributionRequest: require('./contribution-request'),
-    contributionFulfillment: require('./contribution-fulfillment')
+    contributionRequestFoi: require('./contribution-request-foi'),
+    contributionFulfillment: require('./contribution-fulfillment'),
+    contributionFulfillmentFoi: require('./contribution-fulfillment-foi'),
+    confirmExtendDeadlineFoi: require('./confirm-extend-deadline-foi'),
+
+    recordAppealFoi: require('./record-appeal-foi'),
+    updateAppealFoi: require('./update-appeal-foi'),
+    manageAppealsFoi: require('./manage-appeals-foi'),
+
+    approvalRequestFoi: require('./approval-request-foi'),
+    approvalFulfillmentFoi: require('./approval-fulfillment-foi'),
 };

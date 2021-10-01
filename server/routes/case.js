@@ -16,12 +16,19 @@ router.all(['/:caseId/stage/:stageId', '/:caseId/stage/:stageId/allocate'],
     caseSummaryMiddleware,
     getDocumentList,
     getCaseNotes);
-router.all(['/:caseId/stage/:stageId/entity/:entity/:context/:action', '/:caseId/stage/:stageId/entity/:entity/:action'], getFormForCase, hydrateFields);
+
+router.all(['/:caseId/stage/:stageId/entity/:entity/:context/:action',
+    '/:caseId/stage/:stageId/entity/:entity/:context/:caseType/:action',
+    '/:caseId/stage/:stageId/entity/:entity/:action'
+], getFormForCase, hydrateFields
+);
+
 router.post(['/:caseId/stage/:stageId', '/:caseId/stage/:stageId/allocate'],
     fileMiddleware.any(),
     processMiddleware,
     validationMiddleware
 );
+
 router.post('/:caseId/stage/:stageId/note',
     fileMiddleware.any(),
     createCaseNote,

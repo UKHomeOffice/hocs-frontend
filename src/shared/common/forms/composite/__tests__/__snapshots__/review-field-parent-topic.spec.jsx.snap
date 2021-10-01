@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Review Field Parent Topic Should Render Topic in review field 1`] = `
+<div
+  class="govuk-grid-row grey-border-bottom"
+>
+  <div
+    class="govuk-grid-column-one-half"
+  >
+    <span
+      class="govuk-label govuk-label--s"
+    />
+  </div>
+  <div
+    class="govuk-grid-column-one-third govuk-body review-field-column"
+    id="TEST NAME"
+    name="TEST NAME"
+    type="TEST TYPE"
+  >
+    Topic 21
+  </div>
+  <div
+    class="grid-column-one-sixth-right-align govuk-body review-field-column"
+  >
+    <a
+      class="govuk-body govuk-link change-link"
+      href=""
+    >
+      Change 
+      <span
+        class="govuk-visually-hidden"
+      />
+    </a>
+  </div>
+</div>
+`;

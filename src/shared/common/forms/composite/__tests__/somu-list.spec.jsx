@@ -349,4 +349,121 @@ describe('Somu list component', () => {
         expect(WRAPPER).toMatchSnapshot();
     });
 
+    it('should render ApprovalTypeTable with Due', () => {
+        const somuType = { uuid: 'test',
+            caseType: 'tesCaseType',
+            type: 'testType',
+            schema: {
+                renderers: {
+                    table: 'ApprovalRequestTable'
+                }
+            },
+            active: true };
+
+        const somuItems = [{
+            uuid: 'test',
+            data: {
+                approvalRequestDueDate: '2021-09-01',
+                approvalRequestCreatedDate: '2021-08-31',
+                approvalRequestForBusinessUnit: 'TestTeam'
+            },
+            deleted: false
+        }];
+
+        const PROPS = {
+            ...DEFAULT_PROPS,
+            somuType,
+            somuItems,
+            choices: [ {
+                'value': 'TestTeam',
+                'label': 'Test Team'
+            }]
+        };
+        const OUTER = shallow(<WrappedSomuList {...PROPS} />);
+        const SomuList = OUTER.props().children;
+        const WRAPPER = render(
+            <MemoryRouter>
+                <SomuList page={PAGE} />
+            </MemoryRouter>);
+        expect(WRAPPER).toBeDefined();
+        expect(WRAPPER).toMatchSnapshot();
+    });
+
+    it('should render ApprovalTypeTable with 1 Complete - approved, 1 Cancelled, 1 Complete - rejected', () => {
+        const somuType = { uuid: 'test',
+            caseType: 'tesCaseType',
+            type: 'testType',
+            schema: {
+                renderers: {
+                    table: 'ApprovalRequestTable'
+                }
+            },
+            active: true };
+
+        const somuItems = [{
+            uuid: 'test - 2',
+            data: {
+                approvalRequestStatus: 'approvalRequestCancelled',
+                approvalRequestDueDate: '2021-09-01',
+                approvalRequestCreatedDate: '2021-08-31',
+                approvalRequestForBusinessUnit: 'TestTeam2',
+                approvalRequestCancellationNote: 'Test note'
+            },
+            deleted: false
+        }, {
+            uuid: 'test - 3',
+            data: {
+                approvalRequestStatus: 'approvalRequestResponseReceived',
+                approvalRequestDueDate: '2021-09-01',
+                approvalRequestDecision: 'approved',
+                approvalRequestResponseBy: 'Something',
+                approvalRequestCreatedDate: '2021-08-31',
+                approvalRequestResponseNote: 'dcadcadf',
+                approvalRequestForBusinessUnit: 'TestTeam3',
+                approvalRequestResponseReceivedDate: '2021-08-31'
+            },
+            deleted: false
+        },{
+            uuid: 'test - 4',
+            data: {
+                approvalRequestStatus: 'approvalRequestResponseReceived',
+                approvalRequestDueDate: '2021-09-01',
+                approvalRequestDecision: 'rejected',
+                approvalRequestResponseBy: 'Something',
+                approvalRequestCreatedDate: '2021-08-31',
+                approvalRequestResponseNote: 'dcadcadf',
+                approvalRequestForBusinessUnit: 'TestTeam4',
+                approvalRequestResponseReceivedDate: '2021-08-31'
+            },
+            deleted: false
+        }];
+
+        const PROPS = {
+            ...DEFAULT_PROPS,
+            somuType,
+            somuItems,
+            choices: [ {
+                'value': 'TestTeam',
+                'label': 'Test Team'
+            }, {
+                'value': 'TestTeam2',
+                'label': 'Test Team 2'
+            }, {
+                'value': 'TestTeam3',
+                'label': 'Test Team 3'
+            }, {
+                'value': 'TestTeam4',
+                'label': 'Test Team 4'
+            }]
+        };
+        const OUTER = shallow(<WrappedSomuList {...PROPS} />);
+        const SomuList = OUTER.props().children;
+        const WRAPPER = render(
+            <MemoryRouter>
+                <SomuList page={PAGE} />
+            </MemoryRouter>);
+        expect(WRAPPER).toBeDefined();
+        expect(WRAPPER).toMatchSnapshot();
+    });
+
 });

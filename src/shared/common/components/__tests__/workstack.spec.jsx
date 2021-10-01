@@ -25,21 +25,24 @@ describe('Workstack component', () => {
                 stageTypeDisplay: 'Stage A', assignedUserDisplay: 'User1', assignedTopicDisplay: 'topic1',
                 created: '2019-10-29T11:01:32.656563', isActive: 'YES', stageType: 'MPAM_DRAFT',
                 primaryCorrespondent: { fullname: 'Mr Smith', postcode: 'postcode1' }, nextCaseType: null,
-                nextCaseReference: null
+                nextCaseReference: null,
+                data: {}
             },
             {
                 caseReference: 'case2', caseUUID: 'case_uuid-789', uuid: 'stage_uuid-432', fullName: 'John Alex',
                 stageTypeDisplay: 'Stage B', assignedUserDisplay: 'User2', assignedTopicDisplay: 'topic2',
                 created: '', isActive: 'NO', stageType: 'MPAM_DRAFT',
                 primaryCorrespondent: { fullname: 'Mr Alex', postcode: 'postcode2' }, nextCaseType: null,
-                nextCaseReference: null
+                nextCaseReference: null,
+                data: {}
             },
             {
                 caseReference: 'case3', caseUUID: 'case_uuid-abc', uuid: 'stage_uuid-444', fullName: 'Pat Brown',
                 stageTypeDisplay: 'Stage C', assignedUserDisplay: 'User3', assignedTopicDisplay: 'topic3',
                 created: null, isActive: 'NO', stageType: 'MPAM_DRAFT',
                 primaryCorrespondent: { fullname: 'Ms Brown', postcode: 'postcode3' }, nextCaseType: null,
-                nextCaseReference: null
+                nextCaseReference: null,
+                data: {}
             },
             {
                 caseReference: 'case4', caseUUID: 'case_uuid-efg', uuid: 'stage_uuid-445', fullName: 'Dave Jones',
@@ -47,29 +50,20 @@ describe('Workstack component', () => {
                 created: null, isActive: 'YES', stageType: 'MPAM_DRAFT',
                 primaryCorrespondent: { fullname: 'Mr Jones', postcode: 'postcode4' },
                 dueContribution: '2020-12-12', nextCaseType: null,
-                nextCaseReference: null
+                nextCaseReference: null,
+                data: {}
             },
             {
                 caseReference: 'case5', caseUUID: 'case_uuid-hij', uuid: 'stage_uuid-446', fullName: 'Mick Smith',
                 stageTypeDisplay: 'Stage E', assignedUserDisplay: 'User5', assignedTeamDisplay: 'team5',
                 created: null, isActive: 'YES', stageType: 'MPAM_DRAFT',
                 primaryCorrespondent: { fullname: 'Mr Smith', postcode: '' }, nextCaseType: null,
-                nextCaseReference: null
+                nextCaseReference: null,
+                data: {}
             },
             {
                 caseReference: 'case6', caseUUID: 'case_uuid-klm', uuid: 'stage_uuid-447', fullName: 'Bet Linch',
-                stageTypeDisplay: 'Stage F', assignedUserDisplay: 'User5', assignedTeamDisplay: 'team6',
-                created: null, isActive: 'YES', stageType: 'MPAM_DRAFT',
-                primaryCorrespondent: { fullname: 'Mrs Linch', postcode: null },
-                data: {
-                    DueDate: '2021-01-01'
-                },
-                nextCaseType: null,
-                nextCaseReference: null
-            },
-            {
-                caseReference: 'case7', caseUUID: 'case_uuid-klz', uuid: 'stage_uuid-448', fullName: 'Bet Linch',
-                stageTypeDisplay: 'Stage F', assignedUserDisplay: 'User5', assignedTeamDisplay: 'team6',
+                stageTypeDisplay: 'Stage F', assignedUserDisplay: 'User6', assignedTeamDisplay: 'team6',
                 created: null, isActive: 'YES', stageType: 'MPAM_DRAFT',
                 primaryCorrespondent: { fullname: 'Mrs Linch', postcode: null },
                 data: {
@@ -79,11 +73,20 @@ describe('Workstack component', () => {
                 nextCaseReference: null
             },
             {
-                caseReference: 'case8', caseUUID: 'case_uuid-klx', uuid: 'stage_uuid-449', fullName: 'Bet Linch',
-                stageTypeDisplay: 'Stage F', assignedUserDisplay: 'User5', assignedTeamDisplay: 'team6',
+                caseReference: 'case7', caseUUID: 'case_uuid-opq', uuid: 'stage_uuid-448', fullName: 'My Name',
+                stageTypeDisplay: 'Stage F', assignedUserDisplay: 'User7', assignedTeamDisplay: 'team7',
                 created: null, isActive: 'YES', stageType: 'MPAM_DRAFT',
                 primaryCorrespondent: { fullname: 'Mrs Linch', postcode: null },
                 data: {
+                    DueDate: '2021-01-01'
+                }
+            },
+            {
+                caseReference: 'case8', caseUUID: 'case_uuid-klm', uuid: 'stage_uuid-449', fullName: 'Correspondent 8',
+                stageTypeDisplay: 'Stage B', assignedUserDisplay: 'User8', assignedTeamDisplay: null,
+                created: null, isActive: 'YES', stageType: 'FOI_DRAFT',
+                data: {
+                    CaseContributions: '[{"data":{"contributionDueDate":"2020-12-12", "contributionStatus": "TEST"}}]',
                     DueDate: '2021-01-01'
                 },
                 nextCaseType: 'nextCase',
@@ -152,7 +155,7 @@ describe('Workstack component', () => {
         // Column 13 is hidden so isn't counted
         expect(links).toHaveLength(12);
         links.first().simulate('click');
-        expect(arraySortSpy).toHaveBeenCalledTimes(3);
+        expect(arraySortSpy).toHaveBeenCalledTimes(9);
         expect(WRAPPER).toMatchSnapshot();
     });
 
@@ -165,7 +168,7 @@ describe('Workstack component', () => {
         expect(links).toHaveLength(12);
         links.first().simulate('click');
         links.first().simulate('click');
-        expect(arraySortSpy).toHaveBeenCalledTimes(4);
+        expect(arraySortSpy).toHaveBeenCalledTimes(12);
         expect(WRAPPER).toMatchSnapshot();
     });
 

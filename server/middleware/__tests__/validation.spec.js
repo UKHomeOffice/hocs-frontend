@@ -293,6 +293,144 @@ describe('Validators', () => {
         });
     });
 
+    describe('Approvals fulfilled validation', () => {
+
+
+        const demoData = [{
+            data: {
+                approvalRequestStatus: 'approvalRequestCancelled',
+                approvalRequestDueDate: '2021-09-01',
+                approvalRequestCreatedDate: '2021-08-31',
+                approvalRequestForBusinessUnit: 'FOI_APPROVER_SCS',
+                approvalRequestCancellationNote: 'Test note'
+            }
+        }, {
+            data: {
+                approvalRequestStatus: 'approvalRequestResponseReceived',
+                approvalRequestDueDate: '2021-09-01',
+                approvalRequestDecision: 'approved',
+                approvalRequestResponseBy: 'Something',
+                approvalRequestCreatedDate: '2021-08-31',
+                approvalRequestResponseNote: 'dcadcadf',
+                approvalRequestForBusinessUnit: 'FOI_APPROVER_SCS',
+                approvalRequestResponseReceivedDate: '2021-08-31'
+            }
+        },{
+            data: {
+                approvalRequestStatus: 'approvalRequestResponseReceived',
+                approvalRequestDueDate: '2021-09-01',
+                approvalRequestDecision: 'rejected',
+                approvalRequestResponseBy: 'Something',
+                approvalRequestCreatedDate: '2021-08-31',
+                approvalRequestResponseNote: 'dcadcadf',
+                approvalRequestForBusinessUnit: 'FOI_APPROVER_SCS',
+                approvalRequestResponseReceivedDate: '2021-08-31'
+            }
+        }, {
+            data: {
+                approvalRequestDueDate: '2021-09-01',
+                approvalRequestCreatedDate: '2021-08-31',
+                approvalRequestForBusinessUnit: 'FOI_APPROVER_SCS'
+            }
+        }, {
+            data: {
+                approvalRequestForBusinessUnit: 'FOI_APPROVER_SCS'
+            }
+        }];
+
+        it('should throw error if object passed in NOT valid JSON', () => {
+            // GIVEN
+            const unexpectedObject = '"test": 1';
+            const expectedError = new Error('Value passed for validation is not a valid Approval Request object.');
+
+            // THEN
+            expect(() => validators.approvalsFulfilled({ value: unexpectedObject })).toThrowError(expectedError);
+        });
+
+
+        it('should throw error if object passed is not an array.', () => {
+            // GIVEN
+            const unexpectedObject = '{ "test": 1 }';
+            const expectedError = new Error('Value passed for validation is not a valid Approval Request object.');
+
+            // THEN
+            expect(() => validators.approvalsFulfilled({ value: unexpectedObject })).toThrowError(expectedError);
+        });
+
+        it('should throw error if object passed has NO approvalRequestCreatedDate field.', () => {
+            // GIVEN
+            const inValidObject = JSON.stringify([demoData[4]]);
+            const expectedError = new Error('Value passed for validation is not a valid Approval Request object.');
+
+            // THEN
+            expect(() => validators.approvalsFulfilled({ value: inValidObject })).toThrowError(expectedError);
+        });
+
+        it('should provide validation error if any Rejected Approval Requests are present',  () => {
+
+            // GIVEN
+            const expectedResponse = 'The required approvals to progress the case have not been received.';
+            const valuesAsJSON = JSON.stringify(demoData.slice(1, 3));
+
+            // THEN
+            expect(validators.approvalsFulfilled({ value: valuesAsJSON })).toEqual(expectedResponse);
+        });
+
+        it('should provide validation error if any Approval Requests are outstanding',  () => {
+
+            // GIVEN
+            const expectedResponse = 'The required approvals to progress the case have not been received.';
+            const valuesAsJSON = JSON.stringify([demoData[2], demoData[3]]);
+
+            // THEN
+            expect(validators.approvalsFulfilled({ value: valuesAsJSON })).toEqual(expectedResponse);
+        });
+
+        it('should provide validation error if no requests exist',  () => {
+
+            // GIVEN
+            const expectedResponse = 'The required approvals to progress the case have not been received.';
+            const valuesAsJSON = JSON.stringify([]);
+
+            // THEN
+            expect(validators.approvalsFulfilled({ value: valuesAsJSON })).toEqual(expectedResponse);
+        });
+
+        it('should provide validation error if only cancelled requests exist',  () => {
+
+            // GIVEN
+            const expectedResponse = 'The required approvals to progress the case have not been received.';
+            const valuesAsJSON = JSON.stringify([demoData[0], demoData[0]]);
+
+            // THEN
+            expect(validators.approvalsFulfilled({ value: valuesAsJSON })).toEqual(expectedResponse);
+        });
+
+        it('should return "null" when at least 1 "Complete - approved" and others are "Cancelled".', () => {
+
+            // GIVEN
+            const expectedMessage = null;
+            const testValue = JSON.stringify(demoData.slice(0,2));
+
+            // WHEN-THEN
+            expect(validators.approvalsFulfilled({
+                value: testValue
+            })).toEqual(expectedMessage);
+        });
+
+        it('should return default message if value has approvalRequestResponseStatus as cancelled', () => {
+
+            // GIVEN
+            const defaultMessage = 'The required approvals to progress the case have not been received.';
+            const testValue = JSON.stringify([demoData[0]]);
+
+            // WHEN-THEN
+            expect(validators.approvalsFulfilled({
+                value: testValue
+            })).toEqual(defaultMessage);
+        });
+    });
+
     describe('One of validation', () => {
         it('should reject if one of options are not fulfilled', () => {
             const options = [

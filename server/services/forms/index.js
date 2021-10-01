@@ -1,8 +1,12 @@
 const formRepository = require('./schemas/index');
+const formDecorator = require('./schemas/decorators/form-decorator');
+
 const {
     ADD_TEMPLATE, ADD_STANDARD_LINE, IS_MEMBER, ADD_MEMBER, SELECT_MEMBER, ADD_CORRESPONDENT, UPDATE_CORRESPONDENT,
     REMOVE_CORRESPONDENT, ADD_TOPIC, REMOVE_TOPIC, CREATE_CASE, CREATE_AND_ALLOCATE_CASE, BULK_CREATE_CASE,
-    ADD_DOCUMENT, REMOVE_DOCUMENT, MANAGE_DOCUMENTS, MANAGE_PEOPLE, ADD_CONTRIBUTION, ADD_ADDITIONAL_CONTRIBUTION, EDIT_CONTRIBUTION
+    ADD_DOCUMENT, REMOVE_DOCUMENT, MANAGE_DOCUMENTS, MANAGE_PEOPLE, ADD_CONTRIBUTION, ADD_ADDITIONAL_CONTRIBUTION,
+    EDIT_CONTRIBUTION, APPLY_CASE_DEADLINE_EXTENSION, CONFIRMATION_SUMMARY, ADD_CASE_APPEAL, EDIT_CASE_APPEAL, MANAGE_CASE_APPEALS,
+    ADD_APPROVAL_REQUEST, EDIT_APPROVAL_REQUEST
 } = require('../actions/types');
 
 const mpamContributionsRequest = {
@@ -117,6 +121,13 @@ const formDefinitions = {
                 WCS: {
                     builder: formRepository.confirmCreateWcs,
                     action: CREATE_AND_ALLOCATE_CASE
+                },
+                FOI: {
+                    builder: formRepository.addDocument,
+                    action: CREATE_CASE,
+                    next: {
+                        action: 'CONFIRMATION_SUMMARY'
+                    }
                 }
             }
         },
@@ -201,6 +212,15 @@ const formDefinitions = {
         },
     },
     CASE: {
+        ACTIONS_TAB: {
+            EXTEND_FOI_DEADLINE: {
+                builder: formRepository.confirmExtendDeadlineFoi,
+                action: APPLY_CASE_DEADLINE_EXTENSION,
+                next: {
+                    action: CONFIRMATION_SUMMARY
+                }
+            }
+        },
         DOCUMENT: {
             ADD: {
                 builder: formRepository.addDocumentNew,
@@ -251,6 +271,13 @@ const formDefinitions = {
             REMOVE: {
                 builder: formRepository.removeCorrespondent,
                 action: REMOVE_CORRESPONDENT
+            },
+            // overrides for specific case types
+            FOI: {
+                UPDATE: {
+                    builder: formRepository.updateCorrespondentDetailsFoi,
+                    action: UPDATE_CORRESPONDENT
+                }
             }
         },
         MEMBER: {
@@ -261,6 +288,28 @@ const formDefinitions = {
             DETAILS: {
                 builder: formRepository.addMemberDetails,
                 action: ADD_MEMBER
+            }
+        },
+        APPEAL: {
+            FOI: {
+                ADD_APPEAL: {
+                    builder: formRepository.recordAppealFoi,
+                    action: ADD_CASE_APPEAL,
+                    next: {
+                        action: MANAGE_CASE_APPEALS
+                    }
+                },
+                EDIT_APPEAL: {
+                    builder: formRepository.updateAppealFoi,
+                    action: EDIT_CASE_APPEAL,
+                    next: {
+                        action: MANAGE_CASE_APPEALS
+                    }
+                },
+                MANAGE_APPEALS: {
+                    builder: formRepository.manageAppealsFoi,
+                    action: MANAGE_CASE_APPEALS
+                }
             }
         },
         CONTRIBUTIONS: {
@@ -289,7 +338,43 @@ const formDefinitions = {
                     action: EDIT_CONTRIBUTION,
                     customConfig: mpamContributionsRequest
                 }
-            }
+            },
+            FOI: {
+                ADDREQUEST: {
+                    builder: formRepository.contributionRequestFoi,
+                    action: ADD_CONTRIBUTION
+                },
+                EDITREQUEST: {
+                    builder: formRepository.contributionRequestFoi,
+                    action: EDIT_CONTRIBUTION
+                },
+                VIEWREQUEST: {
+                    builder: formRepository.contributionRequestFoi,
+                },
+                EDIT: {
+                    builder: formRepository.contributionFulfillmentFoi,
+                    action: EDIT_CONTRIBUTION
+                }
+            },
+        },
+        APPROVAL_REQS: {
+            FOI: {
+                ADDREQUEST: {
+                    builder: formRepository.approvalRequestFoi,
+                    action: ADD_APPROVAL_REQUEST
+                },
+                EDITREQUEST: {
+                    builder: formRepository.approvalRequestFoi,
+                    action: EDIT_APPROVAL_REQUEST
+                },
+                VIEWREQUEST: {
+                    builder: formRepository.approvalRequestFoi,
+                },
+                EDIT: {
+                    builder: formRepository.approvalFulfillmentFoi,
+                    action: EDIT_APPROVAL_REQUEST
+                }
+            },
         },
         COMPLAINANT_CONTRIB: {
             COMP: {
@@ -358,6 +443,23 @@ const formDefinitions = {
                     action: EDIT_CONTRIBUTION,
                     customConfig: exgratiaBusinessContributionsRequest
                 }
+            },
+            FOI: {
+                ADDREQUEST: {
+                    builder: formRepository.contributionRequestFoi,
+                    action: ADD_CONTRIBUTION
+                },
+                EDITREQUEST: {
+                    builder: formRepository.contributionRequestFoi,
+                    action: EDIT_CONTRIBUTION
+                },
+                VIEWREQUEST: {
+                    builder: formRepository.contributionRequestFoi,
+                },
+                EDIT: {
+                    builder: formRepository.contributionFulfillmentFoi,
+                    action: EDIT_CONTRIBUTION
+                }
             }
         },
         SMC_COMP_CONTRIB: {
@@ -414,12 +516,16 @@ module.exports = {
         if (context && workflow && action) {
             try {
                 let formDefinition;
+                let formEnrichmentKeys = { context, workflow, action, entity };
                 if (action === 'DOCUMENT' || action == 'BULK_CREATE_CASE') {
                     formDefinition = formDefinitions[context.toUpperCase()][workflow.toUpperCase()][action.toUpperCase()][entity.toUpperCase()];
                 } else {
                     formDefinition = formDefinitions[context.toUpperCase()][workflow.toUpperCase()][action.toUpperCase()];
                 }
-                const form = await formDefinition.builder.call(this, { data });
+
+                let form = await formDefinition.builder.call(this, { data });
+                form = formDecorator.call(this, formEnrichmentKeys, form);
+
                 return {
                     schema: form.schema,
                     next: formDefinition.next,
@@ -437,9 +543,11 @@ module.exports = {
         const { action } = options;
 
         if (action) {
-            const { entity, somuCaseType, somuType } = options;
+            const { entity, somuCaseType, somuType, caseType } = options;
             let formDefinition = undefined;
-            if (entity) {
+            if (entity && caseType) {
+                formDefinition = formDefinitions['CASE'][entity.toUpperCase()][caseType][action.toUpperCase()];
+            } else if (entity) {
                 formDefinition = formDefinitions['CASE'][entity.toUpperCase()][action.toUpperCase()];
             } else if (somuType && somuCaseType) {
                 formDefinition = formDefinitions['CASE'][somuType.toUpperCase()][somuCaseType.toUpperCase()][action.toUpperCase()];
@@ -448,7 +556,7 @@ module.exports = {
 
             if (formDefinition) {
                 const form = await formDefinition.builder.call(this, options);
-                return { schema: form.schema, action: formDefinition.action, data: form.data };
+                return { schema: form.schema, action: formDefinition.action, data: form.data, next: formDefinition.next, };
             }
         } else {
             return undefined;

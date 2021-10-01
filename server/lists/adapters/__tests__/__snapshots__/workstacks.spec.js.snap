@@ -128,6 +128,7 @@ Object {
   ],
   "items": Array [
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedTopic": "MOCK_TOPIC",
@@ -153,6 +154,7 @@ Object {
       "userUUID": 1,
     },
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": false,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedTopic": "MOCK_TOPIC",
@@ -178,6 +180,7 @@ Object {
       "userUUID": 1,
     },
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedTopic": "MOCK_TOPIC",
@@ -202,6 +205,7 @@ Object {
       "userUUID": null,
     },
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
@@ -225,6 +229,7 @@ Object {
       "userUUID": 2,
     },
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "caseReference": "A/1234569/19",
@@ -247,6 +252,7 @@ Object {
       "userUUID": null,
     },
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": false,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
@@ -302,9 +308,20 @@ Object {
       "type": "workflow",
       "value": "WCS",
     },
+    Card {
+      "count": 1,
+      "label": "MOCK_CASETYPE",
+      "tags": Object {
+        "allocated": 0,
+        "overdue": 0,
+      },
+      "type": "workflow",
+      "value": "FOI",
+    },
   ],
   "items": Array [
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedTopic": "MOCK_TOPIC",
@@ -330,6 +347,7 @@ Object {
       "userUUID": 1,
     },
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedTopic": "MOCK_TOPIC",
@@ -355,6 +373,7 @@ Object {
       "userUUID": 1,
     },
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": false,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedTopic": "MOCK_TOPIC",
@@ -380,6 +399,7 @@ Object {
       "userUUID": 1,
     },
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedTopic": "MOCK_TOPIC",
@@ -404,6 +424,7 @@ Object {
       "userUUID": null,
     },
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
@@ -427,6 +448,50 @@ Object {
       "userUUID": 2,
     },
     Object {
+      "FOIRequesterDisplay": "testNameFOIRequester",
+      "active": true,
+      "applicantOrConstituentCorrespondentDisplay": "",
+      "assignedTeamDisplay": "MOCK_TEAM",
+      "assignedUserDisplay": "MOCK_USER",
+      "caseReference": "A/1234568/19",
+      "caseType": "FOI",
+      "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "correspondents": Object {
+        "correspondents": Array [
+          Object {
+            "fullname": "testNameFOIRequester",
+            "is_primary": "true",
+            "uuid": "uuid123",
+          },
+        ],
+      },
+      "data": Object {
+        "CaseContributions": "[{}]",
+      },
+      "deadline": "2200-02-03",
+      "deadlineDisplay": "03/02/2200",
+      "memberCorrespondentDisplay": "",
+      "mpWithOwnerDisplay": Object {
+        "mp": "",
+        "owner": "MOCK_USER",
+      },
+      "primaryCorrespondent": Object {
+        "fullname": "testNameFOIRequester",
+        "is_primary": "true",
+        "uuid": "uuid123",
+      },
+      "primaryCorrespondentAndRefDisplay": Object {
+        "caseReference": "A/1234568/19",
+        "primaryCorrespondentFullName": "testNameFOIRequester",
+      },
+      "stageType": "A",
+      "stageTypeDisplay": "MOCK_STAGETYPE",
+      "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE",
+      "teamUUID": 2,
+      "userUUID": 2,
+    },
+    Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "caseReference": "A/1234569/19",
@@ -449,6 +514,7 @@ Object {
       "userUUID": null,
     },
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": false,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
@@ -472,6 +538,7 @@ Object {
       "userUUID": 1,
     },
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "caseReference": "A/1234570/19",
@@ -529,6 +596,7 @@ Object {
   ],
   "items": Array [
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "caseReference": "A/1234569/19",
@@ -553,6 +621,7 @@ Object {
       "userUUID": null,
     },
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": false,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
@@ -578,6 +647,7 @@ Object {
       "userUUID": 1,
     },
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "caseReference": "A/1234570/19",
@@ -602,6 +672,7 @@ Object {
       "userUUID": null,
     },
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedTopic": "MOCK_TOPIC",
@@ -628,6 +699,7 @@ Object {
       "userUUID": null,
     },
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
@@ -664,6 +736,7 @@ Object {
   "columns": Array [],
   "items": Array [
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedTopic": "MOCK_TOPIC",
@@ -688,6 +761,7 @@ Object {
       "userUUID": 1,
     },
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
@@ -710,6 +784,7 @@ Object {
       "userUUID": 2,
     },
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": false,
       "assignedTeamDisplay": "MOCK_TEAM",
       "caseType": "WCS",
@@ -743,6 +818,7 @@ Object {
   "columns": Array [],
   "items": Array [
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "applicantOrConstituentCorrespondentDisplay": "",
       "assignedTeamDisplay": "MOCK_TEAM",
@@ -787,6 +863,62 @@ Object {
 }
 `;
 
+exports[`Workflow Workstack Adapter should add the case ref and requester to primaryCorrespondentAndRefDisplay 1`] = `
+Object {
+  "allocateToTeamEndpoint": "/allocate/team",
+  "allocateToUserEndpoint": "/allocate/user",
+  "allocateToWorkstackEndpoint": "/unallocate/",
+  "columns": Array [],
+  "items": Array [
+    Object {
+      "FOIRequesterDisplay": "testRequesterName",
+      "active": true,
+      "applicantOrConstituentCorrespondentDisplay": "",
+      "assignedTeamDisplay": "MOCK_TEAM",
+      "assignedUserDisplay": "MOCK_USER",
+      "caseReference": "A/1234568/21",
+      "caseType": "FOI",
+      "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "correspondents": Object {
+        "correspondents": Array [
+          Object {
+            "fullname": "testRequesterName",
+            "is_primary": "true",
+            "uuid": "uuid123",
+          },
+        ],
+      },
+      "data": Object {
+        "CaseContributions": "[{}]",
+      },
+      "deadline": "2200-01-03",
+      "deadlineDisplay": "03/01/2200",
+      "memberCorrespondentDisplay": "",
+      "mpWithOwnerDisplay": Object {
+        "mp": "",
+        "owner": "MOCK_USER",
+      },
+      "primaryCorrespondent": Object {
+        "fullname": "testRequesterName",
+        "is_primary": "true",
+        "uuid": "uuid123",
+      },
+      "primaryCorrespondentAndRefDisplay": Object {
+        "caseReference": "A/1234568/21",
+        "primaryCorrespondentFullName": "testRequesterName",
+      },
+      "stageType": "A",
+      "stageTypeDisplay": "MOCK_STAGETYPE",
+      "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE",
+      "teamUUID": 2,
+      "userUUID": 2,
+    },
+  ],
+  "label": "MOCK_STAGETYPE",
+  "teamMembers": Array [],
+}
+`;
+
 exports[`Workflow Workstack Adapter should add the fullname and postcode of primaryCorrespondent to primaryCorrespondent 1`] = `
 Object {
   "allocateToTeamEndpoint": "/allocate/team",
@@ -795,6 +927,7 @@ Object {
   "columns": Array [],
   "items": Array [
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "applicantOrConstituentCorrespondentDisplay": "",
       "assignedTeamDisplay": "MOCK_TEAM",
@@ -817,6 +950,9 @@ Object {
             "uuid": "uuid456",
           },
         ],
+      },
+      "data": Object {
+        "CaseContributions": "[{}]",
       },
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
@@ -842,6 +978,18 @@ Object {
       "userUUID": 2,
     },
   ],
+  "label": "MOCK_STAGETYPE",
+  "teamMembers": Array [],
+}
+`;
+
+exports[`Workflow Workstack Adapter should add the primary correspondent to FOIRequester field for FOI case type 1`] = `
+Object {
+  "allocateToTeamEndpoint": "/allocate/team",
+  "allocateToUserEndpoint": "/allocate/user",
+  "allocateToWorkstackEndpoint": "/unallocate/",
+  "columns": Array [],
+  "items": Array [],
   "label": "MOCK_STAGETYPE",
   "teamMembers": Array [],
 }
@@ -877,6 +1025,7 @@ Object {
   ],
   "items": Array [
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "caseReference": "A/1234569/19",
@@ -899,6 +1048,7 @@ Object {
       "userUUID": null,
     },
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
@@ -922,6 +1072,7 @@ Object {
       "userUUID": 1,
     },
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "caseReference": "A/1234569/19",
@@ -944,6 +1095,7 @@ Object {
       "userUUID": null,
     },
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "caseReference": "A/1234570/19",
@@ -1001,6 +1153,7 @@ Object {
   ],
   "items": Array [
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
@@ -1024,6 +1177,7 @@ Object {
       "userUUID": 2,
     },
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "caseReference": "A/1234569/19",
@@ -1046,6 +1200,7 @@ Object {
       "userUUID": null,
     },
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
@@ -1069,6 +1224,7 @@ Object {
       "userUUID": 1,
     },
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "caseReference": "A/1234569/19",
@@ -1091,6 +1247,7 @@ Object {
       "userUUID": null,
     },
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "caseReference": "A/1234570/19",
@@ -1126,6 +1283,7 @@ Object {
   "columns": Array [],
   "items": Array [
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
@@ -1149,6 +1307,7 @@ Object {
       "userUUID": 2,
     },
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "caseReference": "A/1234569/19",
@@ -1171,6 +1330,7 @@ Object {
       "userUUID": null,
     },
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
@@ -1194,6 +1354,7 @@ Object {
       "userUUID": 1,
     },
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "caseReference": "A/1234570/19",
@@ -1229,6 +1390,7 @@ Object {
   "columns": Array [],
   "items": Array [
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
@@ -1268,6 +1430,7 @@ Object {
   "columns": Array [],
   "items": Array [
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
@@ -1275,6 +1438,9 @@ Object {
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
       "contributions": "Due",
+      "data": Object {
+        "CaseContributions": "[{\\"data\\": {\\"contributionDueDate\\":\\"2020-12-12\\"}}]",
+      },
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
       "dueContribution": "2020-12-12",
@@ -1305,6 +1471,7 @@ Object {
   "columns": Array [],
   "items": Array [
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
@@ -1341,6 +1508,7 @@ Object {
   "columns": Array [],
   "items": Array [
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
@@ -1377,6 +1545,7 @@ Object {
   "columns": Array [],
   "items": Array [
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
@@ -1414,6 +1583,7 @@ Object {
   "columns": Array [],
   "items": Array [
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
@@ -1450,6 +1620,7 @@ Object {
   "columns": Array [],
   "items": Array [
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
@@ -1486,6 +1657,7 @@ Object {
   "columns": Array [],
   "items": Array [
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
@@ -1522,6 +1694,7 @@ Object {
   "columns": Array [],
   "items": Array [
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
@@ -1559,6 +1732,7 @@ Object {
   "columns": Array [],
   "items": Array [
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
@@ -1595,6 +1769,7 @@ Object {
   "columns": Array [],
   "items": Array [
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
@@ -1630,6 +1805,7 @@ Object {
   "columns": Array [],
   "items": Array [
     Object {
+      "FOIRequesterDisplay": Object {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",

@@ -14,6 +14,13 @@ const createAdditionalFields = async (additionalFields = [], fetchList) => {
         if (field.choices) {
             for (var j = 0; j < field.choices.length; j++) {
                 const choice = field.choices[j];
+                if (choice.options) {
+                    const foundOption = choice.options.filter(option => option.value === field.value);
+                    if (foundOption && foundOption.length === 1) {
+                        field.value = foundOption[0].label;
+                        break;
+                    }
+                }
                 if (choice.value && choice.value === field.value) {
                     field.value = choice.label;
                     break;
@@ -50,12 +57,17 @@ const getActiveStages = async (deadlines, fromStaticList) => await Promise.all(d
     .map(async ({ stage: stageId, assignedToUserUUID: userId, assignedToTeamUUID: teamId }) => ({
         stage: await fromStaticList('S_STAGETYPES', stageId),
         assignedUser: await fromStaticList('S_USERS', userId),
-        assignedTeam: await fromStaticList('S_TEAMS', teamId)
+        assignedTeam: await fromStaticList('S_TEAMS', teamId, true)
     })));
 
 const getPrimaryTopic = (topic) => topic ? topic.label : null;
 
-const getPrimaryCorrespondent = correspondent => correspondent && { address: correspondent.address, fullname: correspondent.fullname };
+const getPrimaryCorrespondent = correspondent => correspondent && getCorrespondentDetails(correspondent);
+
+const getCorrespondentDetails = correspondent => {
+    const { fullname, address, email } = correspondent;
+    return Object.fromEntries(Object.entries({ fullname, address, email }).filter(([_, v]) => v != null));
+};
 
 const getPreviousCase = previousCase => {
     if (previousCase && previousCase.caseUUID && previousCase.caseReference && previousCase.stageUUID){
@@ -71,10 +83,12 @@ module.exports = async (summary, options) => {
     const stageDeadlineEnabled = caseProfile && caseProfile.summaryDeadlineEnabled;
     const deadlinesEnabled = configuration.deadlinesEnabled;
     return {
+        type: summary.type,
         case: {
             created: formatDate(summary.caseCreated),
             received: formatDate(summary.dateReceived),
-            deadline: formatDate(summary.caseDeadline)
+            deadline: formatDate(summary.caseDeadline),
+            deadLineExtensions: summary.deadLineExtensions
         },
         additionalFields: await createAdditionalFields(summary.additionalFields, fetchList),
         primaryTopic: getPrimaryTopic(summary.primaryTopic),

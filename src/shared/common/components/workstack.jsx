@@ -142,11 +142,8 @@ class WorkstackAllocate extends Component {
         return value;
     }
 
-    getPrimaryCorrespondentDataValue(row, dataValueKey) {
-        if (dataValueKey === undefined) {
-            throw new Error('No data value key was specified');
-        }
-        return row.primaryCorrespondent[dataValueKey];
+    getPrimaryCorrespondentDataValue(row) {
+        return row.primaryCorrespondent ? row.primaryCorrespondent.fullname : '';
     }
 
     applyDataAdapter(value, colDataAdapter, dataValueKey, row) {
@@ -158,6 +155,12 @@ class WorkstackAllocate extends Component {
             }
 
             throw new Error('Data Adapter not implemented: ' + colDataAdapter);
+        }
+
+        // if the result is an empty object and it hasn't been handled by an adapter
+        // turn it into an empty string to avoid an error
+        if (value && typeof value === 'object' && Object.keys(value).length === 0) {
+            return '';
         }
 
         return value;
@@ -377,6 +380,19 @@ class WorkstackAllocate extends Component {
                 </td>;
             }
             case ColumnRenderer.DUE_DATE_WARNING:
+                if (row.data.CaseContributions && row.data.ContributionsRequired !== 'N') {
+                    const dueContribution = JSON.parse(row.data.CaseContributions)
+                        .filter(contribution => contribution.data && !contribution.data.contributionStatus)
+                        .map(contribution => contribution.data.contributionDueDate)
+                        .sort()
+                        .shift();
+
+                    if (dueContribution && new Date(dueContribution) <= new Date()) {
+                        return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell date-warning'>
+                            <span>{value}</span>
+                        </td>;
+                    }
+                }
                 if (row.dueContribution && new Date(row.dueContribution) <= new Date()) {
                     return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell date-warning'>
                         <span>{value}</span>
@@ -504,8 +520,8 @@ class WorkstackAllocate extends Component {
     }
 
     primaryCorrespondentSortStrategy(a, b, sortColumn) {
-        const aValue = sortColumn ? (this.getPrimaryCorrespondentDataValue(a, sortColumn.dataValueKey) || '').toUpperCase() : a.index;
-        const bValue = sortColumn ? (this.getPrimaryCorrespondentDataValue(b, sortColumn.dataValueKey) || '').toUpperCase() : b.index;
+        const aValue = sortColumn ? (this.getPrimaryCorrespondentDataValue(a) || '').toUpperCase() : a.index;
+        const bValue = sortColumn ? (this.getPrimaryCorrespondentDataValue(b) || '').toUpperCase() : b.index;
         return this.sortStringValues(aValue, bValue);
     }
 
