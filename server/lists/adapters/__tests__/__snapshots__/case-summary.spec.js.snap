@@ -55,6 +55,7 @@ Object {
     "fullname": "Test Correspondent",
   },
   "primaryTopic": "Topic A",
+  "somuItems": Array [],
   "stages": Array [
     Object {
       "assignedTeam": "MOCK_TEAM",
@@ -121,6 +122,7 @@ Object {
     "fullname": "Test Correspondent",
   },
   "primaryTopic": "Topic A",
+  "somuItems": Array [],
   "stages": Array [
     Object {
       "assignedTeam": "MOCK_TEAM",
@@ -170,6 +172,7 @@ Object {
     "fullname": "Test Correspondent",
   },
   "primaryTopic": "Topic A",
+  "somuItems": Array [],
   "stages": Array [
     Object {
       "assignedTeam": "MOCK_TEAM",
@@ -219,6 +222,7 @@ Object {
     "fullname": "Test Correspondent",
   },
   "primaryTopic": "Topic A",
+  "somuItems": Array [],
   "stages": Array [
     Object {
       "assignedTeam": "MOCK_TEAM",
@@ -282,6 +286,7 @@ Object {
     "fullname": "Test Correspondent",
   },
   "primaryTopic": "Topic A",
+  "somuItems": Array [],
   "stages": Array [
     Object {
       "assignedTeam": "MOCK_TEAM",
@@ -350,6 +355,7 @@ Object {
     "fullname": "Test Correspondent",
   },
   "primaryTopic": "Topic A",
+  "somuItems": Array [],
   "stages": Array [
     Object {
       "assignedTeam": "MOCK_TEAM",
@@ -375,6 +381,39 @@ Object {
   "previousCase": undefined,
   "primaryCorrespondent": null,
   "primaryTopic": null,
+  "somuItems": Array [],
+  "stages": Array [],
+  "type": "case",
+}
+`;
+
+exports[`Case Summary Adapter should transform somuItems in case summary data 1`] = `
+Object {
+  "additionalFields": Array [],
+  "case": Object {
+    "created": "03/02/2019",
+    "deadLineExtensions": Array [],
+    "deadline": null,
+    "received": "01/01/2019",
+  },
+  "deadlines": Array [],
+  "deadlinesEnabled": true,
+  "previousCase": undefined,
+  "primaryCorrespondent": null,
+  "primaryTopic": null,
+  "somuItems": Array [
+    Object {
+      "items": Array [
+        Object {
+          "Complete": "Yes",
+          "Date Field": "31/12/1999",
+          "Free text field": "free text field",
+          "heading": "TestB text",
+        },
+      ],
+      "summaryLabel": "Test label",
+    },
+  ],
   "stages": Array [],
   "type": "case",
 }

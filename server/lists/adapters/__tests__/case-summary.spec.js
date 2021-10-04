@@ -83,10 +83,84 @@ describe('Case Summary Adapter', () => {
             stageDeadlines: [],
             activeStages: [],
             deadLineExtensions: [],
+            somuItems: [],
             type: 'case'
         };
 
         const results = await caseSummaryAdapter(mockData, { fromStaticList: mockFromStaticList, configuration: mockConfiguration, user: mockUser });
+
+        expect(results).toBeDefined();
+        expect(results).toMatchSnapshot();
+    });
+
+    it('should transform somuItems in case summary data', async () => {
+        caseworkService.get.mockImplementation(() => Promise.resolve({ data: { summaryDeadlineEnabled: true } }));
+        const mockConfiguration = {
+            deadlinesEnabled: true
+        };
+
+        const mockData = {
+            dateReceived: '2019-01-01',
+            caseCreated: '2019-02-03',
+            caseDeadline: null,
+            primaryTopic: null,
+            primaryCorrespondent: null,
+            stageDeadlines: [],
+            activeStages: [],
+            deadLineExtensions: [],
+            somuItems: [
+                {
+                    schema: {
+                        fields: [
+                            {
+                                name: 'listServiceField',
+                                choices: 'S_LIST_TEST_VALUES',
+                            },
+                            {
+                                name: 'choiceMapField',
+                                choices: [
+                                    {
+                                        label: 'Yes',
+                                        value: 'y'
+                                    },
+                                    {
+                                        label: 'No',
+                                        value: 'n'
+                                    }
+                                ],
+                                summaryLabel: 'Complete',
+                            },
+                            {
+                                name: 'dateField',
+                                type: 'date',
+                                summaryLabel: 'Date Field',
+                            },
+                            {
+                                name: 'freeTextField',
+                                summaryLabel: 'Free text field',
+                            }
+                        ],
+                        renderers: {
+                            table: 'FoiAppealsTable'
+                        },
+                        categoriseBy: 'listServiceField',
+                        summaryLabel: 'Test label',
+                        showInSummary: true
+                    },
+                    items: [
+                        {
+                            listServiceField: 'TESTB',
+                            freeTextField: 'free text field',
+                            dateField: '1999-12-31',
+                            choiceMapField: 'y'
+                        }
+                    ]
+                }
+            ],
+            type: 'case'
+        };
+
+        const results = await caseSummaryAdapter(mockData, { fetchList: mockFetchList, configuration: mockConfiguration, user: mockUser });
 
         expect(results).toBeDefined();
         expect(results).toMatchSnapshot();
@@ -132,6 +206,7 @@ describe('Case Summary Adapter', () => {
                 caseReference: '__previousCaseReference__',
                 stageUUID: '__previousCaseStageUUID__'
             },
+            somuItems: [],
             deadLineExtensions: [],
             type: 'case'
         };
@@ -179,6 +254,7 @@ describe('Case Summary Adapter', () => {
                 caseReference: '__previousCaseReference__',
                 stageUUID: '__previousCaseStageUUID__'
             },
+            somuItems: [],
             deadLineExtensions: [],
             type: 'case'
         };
@@ -227,6 +303,7 @@ describe('Case Summary Adapter', () => {
                 stageUUID: '__previousCaseStageUUID__'
             },
             deadLineExtensions: [],
+            somuItems: [],
             type: 'case'
         };
 
@@ -271,6 +348,7 @@ describe('Case Summary Adapter', () => {
             ],
             deadLineExtensions: [],
             type: 'case',
+            somuItems: [],
             previousCase:{
                 caseUUID: '__previousCaseUuid__',
                 caseReference: '__previousCaseReference__',
@@ -319,6 +397,7 @@ describe('Case Summary Adapter', () => {
             ],
             deadLineExtensions: [],
             type: 'case',
+            somuItems: [],
             previousCase:{
                 caseUUID: '__previousCaseUuid__',
                 caseReference: '__previousCaseReference__',
@@ -358,6 +437,7 @@ describe('Case Summary Adapter', () => {
                 },
                 fullname: 'Test Correspondent'
             },
+            somuItems: [],
             stageDeadlines: {
                 1: '2020-01-01',
                 2: '2019-01-01',
