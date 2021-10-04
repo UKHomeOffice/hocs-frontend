@@ -38,6 +38,11 @@ describe('Form checkbox group component', () => {
             render(<CheckboxGrid name="checkbox-group" choices={choices} disabled={true} updateState={() => null} />)
         ).toMatchSnapshot();
     });
+    it('should render checkboxWidth when passed', () => {
+        expect(
+            render(<CheckboxGrid name="checkbox-group" choices={choices} checkboxWidth="100" updateState={() => null} />)
+        ).toMatchSnapshot();
+    });
     it('should execute callback on initialization', () => {
         const mockCallback = jest.fn();
         shallow(
