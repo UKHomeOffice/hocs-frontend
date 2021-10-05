@@ -132,8 +132,8 @@ const StageSummary = () => {
                             <>
                                 <h2 className='govuk-heading-m'>{type.summaryLabel}</h2>
 
-                                {type.items.map(item =>
-                                    (<table className='govuk-table margin-left--small'>
+                                {type.items.map((item, index) =>
+                                    (<table className='govuk-table margin-left--small' key={index}>
                                         <caption className='govuk-table__caption margin-bottom--small'>{item['heading']}</caption>
                                         <tbody className='govuk-table__body'>
                                             {
