@@ -7,6 +7,7 @@ import CaseNotes from './case-notes.jsx';
 import StageSummary from './stage-summary.jsx';
 import People from './people.jsx';
 import FoiActions from './foi-actions.jsx';
+import getTabsByShortCode from '../../helpers/case-type-sidebar-tabs-flags';
 
 class SideBar extends Component {
 
@@ -29,6 +30,10 @@ class SideBar extends Component {
         return this.state.active === tab;
     }
 
+    resolveTabsForCaseTypeByShortCode(type) {
+        return getTabsByShortCode(type);
+    }
+
     renderTabButton(label, value) {
         const { page } = this.props;
         return (
@@ -41,21 +46,8 @@ class SideBar extends Component {
     }
 
     render() {
-        let peopleTabEnabled = true;
-        let foiActionstabEnabled = false;
-        const { summary: { type } = {} } = this.props;
-
-        if (type) {
-            // this check disables the people tab for WCS cases
-            if(type === 'WCS' || type === 'FOI') {
-                peopleTabEnabled = false;
-            }
-
-            if (type === 'FOI') {
-                foiActionstabEnabled = true;
-            }
-        }
-
+        const { type } = this.props.summary;
+        const caseTabs = this.resolveTabsForCaseTypeByShortCode(type);
         return (
             <Fragment >
                 <div className='tabs'>
@@ -63,8 +55,8 @@ class SideBar extends Component {
                         {this.renderTabButton('Documents', 'DOCUMENTS')}
                         {this.renderTabButton('Summary', 'SUMMARY')}
                         {this.renderTabButton('Timeline', 'TIMELINE')}
-                        {peopleTabEnabled && this.renderTabButton('People', 'PEOPLE')}
-                        {foiActionstabEnabled && this.renderTabButton('Actions', 'FOI_ACTIONS')}
+                        {caseTabs.people && this.renderTabButton('People', 'PEOPLE')}
+                        {caseTabs.foi_actions && this.renderTabButton('Actions', 'FOI_ACTIONS')}
                     </ul>
                     {this.isActive('DOCUMENTS') && <DocumentPane />}
                     {this.isActive('SUMMARY') && <StageSummary />}

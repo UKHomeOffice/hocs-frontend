@@ -1,4 +1,4 @@
-import { updateSummary } from '../summary-helpers';
+import updateSummary from '../summary-helpers';
 import axios from 'axios';
 
 jest.mock('axios', () => ({
@@ -7,7 +7,7 @@ jest.mock('axios', () => ({
             case '/api/case/case1234/summary':
                 return Promise.resolve({ data: { case: 'testCase' } });
             case '/api/case/case1235/summary':
-                return Promise.reject('Error');
+                return Promise.reject({ response: 'Error' });
         }
     })
 }));
@@ -35,13 +35,26 @@ describe('FormEnabled page component', () => {
             'payload': { 'case': 'testCase' },
             'type': 'UPDATE_CASE_SUMMARY'
         });
+        expect(mockDispatch).toHaveBeenCalledWith({
+            'type': 'UPDATE_API_STATUS',
+            'payload': {
+                'status': { display: 'Case summary received', level: 3, type: 'OK', timeoutPeriod: expect.any(Number) },
+                'timeStamp': expect.any(Number)
+            }
+        });
     });
 
     it('should dispatch a failure action on request failure', async() => {
         await updateSummary(badPage, mockDispatch);
-        expect(axios.get).toHaveBeenCalledWith('/api/case/case1235/summary');
 
-        expect(mockDispatch).toHaveBeenCalledWith(expect.objectContaining({ 'payload': { 'status': { 'display': 'Unable to submit form', 'level': 0, 'timeoutPeriod': expect.any(Number), 'type': 'ERROR' }, 'timeStamp': expect.any(Number) }, 'type': 'UPDATE_API_STATUS' }));
-        expect(mockDispatch).toHaveBeenCalledWith({ 'payload': undefined, 'type': 'SET_ERROR' });
+        expect(axios.get).toHaveBeenCalledWith('/api/case/case1235/summary');
+        expect(mockDispatch).toHaveBeenCalledWith({
+            'type': 'UPDATE_API_STATUS',
+            'payload': {
+                'status': { 'display': 'Unable to fetch case summary', 'level': 0, 'type': 'ERROR', 'timeoutPeriod': expect.any(Number) },
+                'timeStamp': expect.any(Number)
+            }
+        });
+        expect(mockDispatch).toHaveBeenCalledWith({ 'payload': 'Error', 'type': 'SET_ERROR' });
     });
 });
