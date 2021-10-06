@@ -201,6 +201,24 @@ describe('Form schema decorations', function () {
                     },
                     {
                         'component': 'text',
+                        'validation': [],
+                        'props': {
+                            'name': 'Organisation',
+                            'label': 'Organisation (Optional)',
+                            'visibilityConditions': [
+                                {
+                                    'conditionPropertyName': 'OriginalChannel',
+                                    'conditionPropertyValue': 'EMAIL'
+                                },
+                                {
+                                    'conditionPropertyName': 'OriginalChannel',
+                                    'conditionPropertyValue': 'POST'
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        'component': 'text',
                         'validation': [
                             {
                                 'type': 'required'
