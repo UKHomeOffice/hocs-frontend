@@ -77,6 +77,45 @@ const getPreviousCase = previousCase => {
     }
 };
 
+function hydrateSomu(somuItems, fetchList) {
+    return somuItems.map(type => {
+        const mappedItems = type.items.map(item => {
+            const hydratedSomuItem = {};
+            Object.keys(item).forEach(
+                async key => {
+                    const schema = type.schema.fields.find(field => field.name === key);
+                    if (schema.choices) {
+                        let foundOption;
+                        if(typeof schema.choices === 'string') {
+                            const resolvedChoices = await fetchList(schema.choices);
+                            foundOption = resolvedChoices.filter(option => option.value === item[key]);
+                        } else {
+                            foundOption = schema.choices.filter(option => option.value === item[key]);
+                        }
+
+                        if (foundOption && foundOption.length === 1) {
+                            item[key] = foundOption[0].label;
+                        }
+                    } else if (schema.type === 'date') {
+                        item[key] = formatDate(item[key]);
+                    }
+
+                    if (type.schema.categoriseBy === key) {
+                        hydratedSomuItem['heading'] = item[key];
+                    } else {
+                        const newKey = (type.schema.fields.find(field => field.name === key)).summaryLabel;
+                        hydratedSomuItem[newKey] = item[key];
+                    }
+                }
+            );
+
+            return hydratedSomuItem;
+        });
+
+        return { items: mappedItems, summaryLabel: type.schema.summaryLabel };
+    });
+}
+
 module.exports = async (summary, options) => {
     const { fromStaticList, fetchList, configuration, user } = options;
     const { data: caseProfile } = await caseworkService.get(`/case/profile/${options.caseId}`, { headers: User.createHeaders(user) });
@@ -96,6 +135,7 @@ module.exports = async (summary, options) => {
         deadlinesEnabled: deadlinesEnabled,
         deadlines: deadlinesEnabled && stageDeadlineEnabled && summary.stageDeadlines ? await createDeadlines(summary.stageDeadlines, fromStaticList) : null,
         stages: await getActiveStages(summary.activeStages, fromStaticList),
-        previousCase: getPreviousCase(summary.previousCase)
+        previousCase: getPreviousCase(summary.previousCase),
+        somuItems: hydrateSomu(summary.somuItems, fetchList)
     };
 };

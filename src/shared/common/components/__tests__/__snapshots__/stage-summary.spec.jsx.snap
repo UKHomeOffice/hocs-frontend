@@ -301,6 +301,93 @@ Array [
       </tr>
     </tbody>
   </table>,
+  <h2
+    class="govuk-heading-m"
+  >
+    Test somu type
+  </h2>,
+  <table
+    class="govuk-table margin-left--small"
+  >
+    <caption
+      class="govuk-table__caption margin-bottom--small"
+    >
+      Test Item 1
+    </caption>
+    <tbody
+      class="govuk-table__body"
+    >
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Label 1
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          Label 1
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Label 2
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          Value 2
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+  <table
+    class="govuk-table margin-left--small"
+  >
+    <caption
+      class="govuk-table__caption margin-bottom--small"
+    >
+      Test Item 2
+    </caption>
+    <tbody
+      class="govuk-table__body"
+    >
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Label 1
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          Label 1
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Label 2
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          Value 2
+        </td>
+      </tr>
+    </tbody>
+  </table>,
 ]
 `;
 
@@ -579,6 +666,93 @@ Array [
           class="govuk-table__cell"
         >
           __value__
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+  <h2
+    class="govuk-heading-m"
+  >
+    Test somu type
+  </h2>,
+  <table
+    class="govuk-table margin-left--small"
+  >
+    <caption
+      class="govuk-table__caption margin-bottom--small"
+    >
+      Test Item 1
+    </caption>
+    <tbody
+      class="govuk-table__body"
+    >
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Label 1
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          Label 1
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Label 2
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          Value 2
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+  <table
+    class="govuk-table margin-left--small"
+  >
+    <caption
+      class="govuk-table__caption margin-bottom--small"
+    >
+      Test Item 2
+    </caption>
+    <tbody
+      class="govuk-table__body"
+    >
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Label 1
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          Label 1
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Label 2
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          Value 2
         </td>
       </tr>
     </tbody>
@@ -895,6 +1069,93 @@ Array [
           >
             __previousCaseReference__
           </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+  <h2
+    class="govuk-heading-m"
+  >
+    Test somu type
+  </h2>,
+  <table
+    class="govuk-table margin-left--small"
+  >
+    <caption
+      class="govuk-table__caption margin-bottom--small"
+    >
+      Test Item 1
+    </caption>
+    <tbody
+      class="govuk-table__body"
+    >
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Label 1
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          Label 1
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Label 2
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          Value 2
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+  <table
+    class="govuk-table margin-left--small"
+  >
+    <caption
+      class="govuk-table__caption margin-bottom--small"
+    >
+      Test Item 2
+    </caption>
+    <tbody
+      class="govuk-table__body"
+    >
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Label 1
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          Label 1
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Label 2
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          Value 2
         </td>
       </tr>
     </tbody>
