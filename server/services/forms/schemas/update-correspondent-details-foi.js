@@ -14,6 +14,11 @@ module.exports = async ({ caseId, stageId, context, user, requestId }) => {
                 .build()
         )
         .withField(
+            Component('text', 'organisation')
+                .withProp('label', 'Organisation')
+                .build()
+        )
+        .withField(
             Component('text', 'address1')
                 .withProp('label', 'Building')
                 .build()

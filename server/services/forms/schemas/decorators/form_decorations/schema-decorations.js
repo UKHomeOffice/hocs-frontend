@@ -65,8 +65,20 @@ module.exports = {
                                         'conditionPropertyValue': 'POST'
                                     }
                                 ])
-                                .build()
-                        )
+                                .build())
+                        .withField(
+                            Component('text', 'Organisation')
+                                .withProp('label', 'Organisation (Optional)')
+                                .withProp('visibilityConditions', [
+                                    {
+                                        'conditionPropertyName': 'OriginalChannel',
+                                        'conditionPropertyValue': 'EMAIL'
+                                    },{
+                                        'conditionPropertyName': 'OriginalChannel',
+                                        'conditionPropertyValue': 'POST'
+                                    }
+                                ])
+                                .build())
                         .withField(
                             Component('text', 'Address1')
                                 .withValidator('required')

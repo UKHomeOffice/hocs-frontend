@@ -18,7 +18,7 @@ module.exports = (options) => {
         ).withField(
             Component('dropdown', 'IROfficerDirectorate')
                 .withValidator('required')
-                .withProp('label', 'Internal review officer direct')
+                .withProp('label', 'Internal review officer directorate')
                 .withProp('choices', 'S_FOI_DIRECTORATES')
                 .withProp('visibilityConditions', [
                     {

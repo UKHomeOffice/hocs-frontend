@@ -92,6 +92,10 @@ const typeAdaptors = {
         note,
         title: 'Case closure note'
     }),
+    REFER: ({ note }) => ({
+        note,
+        title: 'Case referred note'
+    }),
     REJECT: ({ note }) => ({
         note,
         title: 'Rejection note'

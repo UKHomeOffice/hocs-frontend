@@ -1,8 +1,10 @@
-import React, { useContext, useEffect, Fragment } from 'react';
+import React, { useContext, useEffect, Fragment, useCallback } from 'react';
 import { Context } from '../../contexts/application.jsx';
 import PropTypes from 'prop-types';
-import { updateSummary } from '../../helpers/summary-helpers.jsx';
 import { Link } from 'react-router-dom';
+import status from '../../helpers/api-status';
+import { updateApiStatus } from '../../contexts/actions/index.jsx';
+import updateSummary from '../../helpers/summary-helpers';
 
 
 const renderActiveStage = ({ stage, assignedTeam, assignedUser }) => {
@@ -45,21 +47,22 @@ renderRow.propTypes = {
 
 
 const StageSummary = () => {
-    const { summary, dispatch, page, apiStatus } = useContext(Context);
+    const { summary, dispatch, page } = useContext(Context);
     const { primaryCorrespondent } = { ...summary };
 
-
     // update when updates are sent to the api
-    useEffect(() => {
-        if (apiStatus && apiStatus.status.display === 'Form received') {
-            updateSummary(page.params.caseId, dispatch);
-        }
-    }, [apiStatus]);
+    const fetchCaseSummaryData = useCallback(() => {
+        dispatch(updateApiStatus(status.REQUEST_CASE_SUMMARY));
+        updateSummary(page.params.caseId, dispatch);
+    }, [updateSummary]);
 
+    useEffect(() => {
+        fetchCaseSummaryData();
+    }, [fetchCaseSummaryData]);
 
     return (
         <Fragment>
-            {summary &&
+            {(summary && Object.keys(summary).length !== 0) &&
                 <Fragment>
                     <h2 className='govuk-heading-m'>Active stage{summary.stages.length > 1 && 's'}</h2>
                     {summary.stages.map(stage => renderActiveStage(stage))}
@@ -127,6 +130,34 @@ const StageSummary = () => {
                         </table>
                     }
 
+                    {summary.case && summary.somuItems.map( type =>
+                        (
+                            <>
+                                <h2 className='govuk-heading-m'>{type.summaryLabel}</h2>
+
+                                {type.items.map((item, index) =>
+                                    (<table className='govuk-table margin-left--small' key={index}>
+                                        <caption className='govuk-table__caption margin-bottom--small'>{item['heading']}</caption>
+                                        <tbody className='govuk-table__body'>
+                                            {
+                                                Object.keys(item)
+                                                    .filter(key => key !== 'heading')
+                                                    .map(key => <>
+                                                        <tr className='govuk-table__row'>
+                                                            <th className='govuk-table__header padding-left--small govuk-!-width-one-third'>
+                                                                {key}
+                                                            </th>
+                                                            <td className='govuk-table__cell'>{item[key]}</td>
+                                                        </tr>
+                                                    </>)
+                                            }
+                                        </tbody>
+                                    </table>)
+                                )}
+
+                            </>
+                        )
+                    )}
                 </Fragment>
             }
         </Fragment>

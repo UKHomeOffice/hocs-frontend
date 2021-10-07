@@ -857,16 +857,14 @@ $border-colour: govuk-colour("mid-grey");
   margin: 0px;
 }
 
-.grey-border-bottom {
-  border-bottom: 1px solid #b1b4b6;
+.review-field-row {
+  border-bottom: 1px solid #ffffff;
   display: flex;
   align-items: center;
 }
 
-.review-field-column {
-  margin-top: 15px;
-  margin-bottom: 15px;
-  word-break: break-word;
+.review-field-row:last-of-type {
+  border-bottom: 1px solid #b1b4b6;
 }
 
 .grid-column-one-sixth-right-align {
