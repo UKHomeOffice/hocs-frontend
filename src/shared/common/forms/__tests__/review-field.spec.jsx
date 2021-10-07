@@ -99,6 +99,38 @@ const REVIEW_FOR_CORRESPONDENTS = {
     }
 };
 
+const REVIEW_FOR_CHECKBOX_GRID = {
+    direction: 'CHANGE_TEXT',
+    child: {
+        component: 'checkbox-grid',
+        validation: [
+            'required'
+        ],
+        props: {
+            'choices': [
+                {
+                    'label': 'label-1',
+                    'value': 'value-1'
+                },
+                {
+                    'label': 'label-2',
+                    'value': 'value-2'
+                },
+                {
+                    'label': 'label-3',
+                    'value': 'value-3'
+                }
+            ],
+            'label': 'Select checkboxes',
+            'name': 'Checkboxes'
+        }
+    },
+    value: 'value-1,value-3',
+    switchDirection: switchDirectionMock,
+    name: 'TEXT_SUMMARY_TEST',
+    page: {}
+};
+
 describe('Review component', () => {
     beforeEach(() => {
         switchDirectionMock.mockReset();
@@ -154,6 +186,16 @@ describe('Review component', () => {
         const changeLink = component.find('a');
         changeLink.simulate('click');
         expect(switchDirectionMock).toHaveBeenCalledTimes(1);
+    });
+
+    it('should display multiple lines for a checkbox-grid component', () => {
+        expect(
+            render(
+                <MemoryRouter>
+                    <ReviewField {...REVIEW_FOR_CHECKBOX_GRID} />
+                </MemoryRouter>
+            )
+        ).toMatchSnapshot();
     });
 });
 
