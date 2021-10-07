@@ -40,7 +40,7 @@ describe('Form checkbox group component', () => {
     });
     it('should render checkboxWidth when passed', () => {
         expect(
-            render(<CheckboxGrid name="checkbox-group" choices={choices} checkboxWidth="100" updateState={() => null} />)
+            render(<CheckboxGrid name="checkbox-group" choices={choices} choicesPerRow="4ß" updateState={() => null} />)
         ).toMatchSnapshot();
     });
     it('should execute callback on initialization', () => {
