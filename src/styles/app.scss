@@ -863,6 +863,10 @@ $border-colour: govuk-colour("mid-grey");
   align-items: center;
 }
 
+.review-field:last-of-type {
+  margin-bottom: 30px;
+}
+
 .review-field-row:last-of-type {
   border-bottom: 1px solid #b1b4b6;
 }
