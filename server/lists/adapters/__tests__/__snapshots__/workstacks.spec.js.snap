@@ -1407,6 +1407,7 @@ Object {
         "mp": "",
         "owner": "MOCK_USER",
       },
+      "nextDueDate": "Overdue",
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234568/19",
       },
@@ -1448,6 +1449,7 @@ Object {
         "mp": "",
         "owner": "MOCK_USER",
       },
+      "nextDueDate": "Overdue",
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234568/19",
       },
@@ -1560,6 +1562,7 @@ Object {
         "mp": "",
         "owner": "MOCK_USER",
       },
+      "nextDueDate": "Overdue",
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234568/19",
       },
@@ -1709,6 +1712,7 @@ Object {
         "mp": "",
         "owner": "MOCK_USER",
       },
+      "nextDueDate": "Overdue",
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234568/19",
       },
