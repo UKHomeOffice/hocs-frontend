@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Review component should display a text summary of a child radio button component 1`] = `
-<div>
+<div
+  class="review-field"
+>
   <div
     class="govuk-grid-row review-field-row"
   >
@@ -42,7 +44,9 @@ exports[`Review component should display a text summary of a child radio button 
 `;
 
 exports[`Review component should display a text summary of a date component 1`] = `
-<div>
+<div
+  class="review-field"
+>
   <div
     class="govuk-grid-row review-field-row"
   >
@@ -83,7 +87,9 @@ exports[`Review component should display a text summary of a date component 1`] 
 `;
 
 exports[`Review component should display a text summary of a text component 1`] = `
-<div>
+<div
+  class="review-field"
+>
   <div
     class="govuk-grid-row review-field-row"
   >
@@ -124,7 +130,9 @@ exports[`Review component should display a text summary of a text component 1`] 
 `;
 
 exports[`Review component should display multiple lines for a checkbox-grid component 1`] = `
-<div>
+<div
+  class="review-field"
+>
   <div
     class="govuk-grid-row review-field-row"
   >
@@ -199,7 +207,9 @@ exports[`Review component should display multiple lines for a checkbox-grid comp
 `;
 
 exports[`Review component should display the primary correspondent given the correspondents entity-list 1`] = `
-<div>
+<div
+  class="review-field"
+>
   <div
     class="govuk-grid-row review-field-row"
   >
