@@ -51,14 +51,23 @@ class CheckboxGrid extends Component {
             name,
             showLabel,
             type,
-            gridHeight
+            choicesPerRow
         } = this.props;
 
+        // This defines the overall style of the checkbox grid.
         const checkboxContainerStyle = {
             display: 'flex',
-            height: `${gridHeight*50}px`,
             flexDirection: 'row',
             flexWrap: 'wrap',
+            justifyContent: 'flex-start'
+        };
+
+        // This defines the style of the individual checkboxes in the grid. The if statement here is to allow
+        // for checbox grids without a specified checkbox width.
+        const checkboxStyle = choicesPerRow ? {
+            width: `${80/choicesPerRow}%`
+        } : {
+            width: `${80/3}%`
         };
 
         return (
@@ -79,7 +88,7 @@ class CheckboxGrid extends Component {
                     <div className={'govuk-checkboxes'} style={checkboxContainerStyle}>
                         {choices && choices.map((choice, i) => {
                             return (
-                                <div key={i} className="govuk-checkboxes__item">
+                                <div key={i} className="govuk-checkboxes__item" style={checkboxStyle}>
                                     <input id={`${name}_${choice.value}`}
                                         type={type}
                                         name={name}
@@ -115,7 +124,7 @@ CheckboxGrid.propTypes = {
     type: PropTypes.string,
     updateState: PropTypes.func.isRequired,
     value: PropTypes.string,
-    gridHeight: PropTypes.number
+    choicesPerRow: PropTypes.string
 };
 
 CheckboxGrid.defaultProps = {

@@ -15,7 +15,7 @@ class Stage extends Component {
 
         return (
             <div className="govuk-grid-row">
-                <div className="govuk-grid-column-one-third">
+                <div className={`govuk-grid-column-one-${this.shouldDisplaySidebar(hasSidebar) ? 'third': 'half' }`}>
                     <h1 className="govuk-heading-l">
                         {title}
                         {form && <span className="govuk-caption-l">{form.caseReference}</span>}

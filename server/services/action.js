@@ -238,21 +238,15 @@ const actions = {
                         }
                     }
                 } else if (somuTypeUuid) {
-                    const { somuItemData, somuItemUuid, somuTypeItems, somuCaseType, somuType } = options;
+                    const { somuItemData, somuItemUuid, somuCaseType, somuType } = options;
                     let type, choices;
 
                     switch (form.action) {
                         case actionTypes.ADD_CONTRIBUTION:
                         case actionTypes.ADD_ADDITIONAL_CONTRIBUTION:
-                            await caseworkService.put(`/case/${caseId}/data/CaseContributions`,
-                                somuTypeItems,
-                                { headers: { ...headers.headers, 'Content-Type': 'text/plain' } });
                             await caseworkService.post(`/case/${caseId}/item/${somuTypeUuid}`, { data: somuItemData }, headers);
                             break;
                         case actionTypes.EDIT_CONTRIBUTION:
-                            await caseworkService.put(`/case/${caseId}/data/CaseContributions`,
-                                somuTypeItems,
-                                { headers: { ...headers.headers, 'Content-Type': 'text/plain' } });
                             await caseworkService.post(`/case/${caseId}/item/${somuTypeUuid}`, { uuid: somuItemUuid, data: somuItemData }, headers);
                             break;
                         case actionTypes.ADD_CASE_APPEAL:
@@ -279,15 +273,9 @@ const actions = {
 
                             return ({ callbackUrl: `/case/${caseId}/stage/${stageId}/somu/${somuTypeUuid}/${somuType}/${somuCaseType}/MANAGE_APPEALS?hideSidebar=false` });
                         case actionTypes.ADD_APPROVAL_REQUEST:
-                            await caseworkService.put(`/case/${caseId}/data/ApprovalRequests`,
-                                somuTypeItems,
-                                { headers: { ...headers.headers, 'Content-Type': 'text/plain' } });
                             await caseworkService.post(`/case/${caseId}/item/${somuTypeUuid}`, { data: somuItemData }, headers);
                             break;
                         case actionTypes.EDIT_APPROVAL_REQUEST:
-                            await caseworkService.put(`/case/${caseId}/data/ApprovalRequests`,
-                                somuTypeItems,
-                                { headers: { ...headers.headers, 'Content-Type': 'text/plain' } });
                             await caseworkService.post(`/case/${caseId}/item/${somuTypeUuid}`, { uuid: somuItemUuid, data: somuItemData }, headers);
                             break;
                     }

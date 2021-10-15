@@ -108,7 +108,7 @@ function ChangeAttributeBuilder() {
             return this;
         },
         build: function build() {
-            return <div>
+            return <div className='review-field'>
                 {this.values.map((value, index) => {
                     return <div key={`${index}`} className='govuk-grid-row review-field-row'>
                         <div className='govuk-grid-column-one-half'>
