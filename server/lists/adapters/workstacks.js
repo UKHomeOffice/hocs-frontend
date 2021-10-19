@@ -152,38 +152,6 @@ const getCorrespondentsNameByType = (correspondents, types) =>
         .map(correspondent => correspondent.fullname)
         .join(', ');
 
-const highestPriorityContributionStatus = (decoratedContributions) => {
-    const contributionStatusEnum = {
-        '': 0,
-        'contributionReceived': 1,
-        'contributionCancelled': 2,
-        'contributionDue': 3,
-        'contributionOverdue': 4
-    };
-    let highestPriority = 0;
-
-    decoratedContributions.forEach(contribution => {
-        if(contributionStatusEnum[contribution.contributionStatus] > highestPriority) {
-            highestPriority = contributionStatusEnum[contribution.contributionStatus];
-        }
-    });
-    return Object.keys(contributionStatusEnum).find(key => contributionStatusEnum[key] === highestPriority);
-};
-
-const decorateContributionsWithStatus = (contributions, currentDate) => {
-    return contributions.map(contribution => {
-        const contributionObject = JSON.parse(contribution);
-        if (contributionObject.contributionStatus !== 'contributionReceived' && contributionObject.contributionStatus !== 'contributionCancelled') {
-            if (addDays(new Date(contributionObject.contributionDueDate), 1)  < currentDate) {
-                contributionObject['contributionStatus'] = 'contributionOverdue';
-            } else {
-                contributionObject['contributionStatus'] = 'contributionDue';
-            }
-        }
-        return contributionObject;
-    });
-};
-
 const bindDisplayElements = fromStaticList => async (stage) => {
     stage.assignedTeamDisplay = await fromStaticList('S_TEAMS', stage.teamUUID, true);
     stage.caseTypeDisplayFull = await fromStaticList('S_CASETYPES', stage.caseType);
@@ -209,58 +177,13 @@ const bindDisplayElements = fromStaticList => async (stage) => {
 
     stage.stageTypeWithDueDateDisplay = stage.stageTypeDisplay;
 
-    const contributionReceivedStages = [
-        'MPAM_TRIAGE',
-        'MPAM_TRIAGE_ESCALATE',
-        'MPAM_DRAFT',
-        'MPAM_DRAFT_ESCALATE'
-    ];
-
-    const contributionRequestedStages = [
-        'MPAM_TRIAGE_REQUESTED_CONTRIBUTION',
-        'MPAM_TRIAGE_ESCALATED_REQUESTED_CONTRIBUTION',
-        'MPAM_DRAFT_REQUESTED_CONTRIBUTION',
-        'MPAM_DRAFT_ESCALATED_REQUESTED_CONTRIBUTION',
-        'FOI_APPROVAL'
-    ];
-
-    if(stage.stageType === 'FOI_DRAFT' && stage.data.ContributionsRequired === 'Y') {
-        contributionRequestedStages.push('FOI_DRAFT');
-    }
-
-    if ((contributionReceivedStages.includes(stage.stageType) || contributionRequestedStages.includes(stage.stageType))) {
-        if (contributionRequestedStages.includes(stage.stageType) && stage.dueContribution) {
-            stage.stageTypeWithDueDateDisplay = `${stage.stageTypeDisplay} due: ${formatDate(stage.dueContribution)}`;
-        } else if (contributionReceivedStages.includes(stage.stageType) && stage.contributions === 'Received') {
-            stage.stageTypeWithDueDateDisplay = `${stage.stageTypeDisplay} (Contributions Received)`;
+    stage.stageTypeWithDueDateDisplay = contributionDueDateDisplay(stage);
+    if (stage.stageTypeWithDueDateDisplay === undefined) {
+        if (stage.data && stage.data.DueDate) {
+            stage.stageTypeWithDueDateDisplay = `${stage.stageTypeDisplay} due ${formatDate(stage.data.DueDate)}`;
         } else {
             stage.stageTypeWithDueDateDisplay = stage.stageTypeDisplay;
         }
-    } else if (stage.data && stage.data.DueDate) {
-        stage.stageTypeWithDueDateDisplay = `${stage.stageTypeDisplay} due ${formatDate(stage.data.DueDate)}`;
-        if (stage.data.CaseContributions &&
-            (contributionReceivedStages.includes(stage.stageType) || contributionRequestedStages.includes(stage.stageType))) {
-            const dueContribution = JSON.parse(stage.data.CaseContributions)
-                .filter(contribution => contribution.data && !contribution.data.contributionStatus)
-                .map(contribution => contribution.data.contributionDueDate)
-                .sort()
-                .shift();
-
-            if (contributionRequestedStages.includes(stage.stageType) && dueContribution) {
-                stage.stageTypeWithDueDateDisplay = `${stage.stageTypeDisplay} due: ${formatDate(dueContribution)}`;
-            } else if (contributionReceivedStages.includes(stage.stageType) && !dueContribution) {
-                stage.stageTypeWithDueDateDisplay = `${stage.stageTypeDisplay} (Contributions Received)`;
-            } else {
-                stage.stageTypeWithDueDateDisplay = stage.stageTypeDisplay;
-            }
-        } else if (stage.data.DueDate) {
-            stage.stageTypeWithDueDateDisplay = `${stage.stageTypeDisplay} due ${formatDate(stage.data.DueDate)}`;
-        }
-    }
-
-    if (stage.somu && stage.somu.caseContributions){
-        stage.contributions = highestPriorityContributionStatus(
-            decorateContributionsWithStatus(stage.somu.caseContributions, new Date())).replace('contribution', '');
     }
 
     stage.primaryCorrespondentAndRefDisplay = {};
@@ -294,6 +217,34 @@ const bindDisplayElements = fromStaticList => async (stage) => {
     }
 
     return stage;
+};
+
+const contributionDueDateDisplay = ({ stageType, stageTypeDisplay, dueContribution, contributions }) => {
+    const contributionReceivedStages = [
+        'MPAM_TRIAGE',
+        'MPAM_TRIAGE_ESCALATE',
+        'MPAM_DRAFT',
+        'MPAM_DRAFT_ESCALATE'
+    ];
+
+    const contributionRequestedStages = [
+        'MPAM_TRIAGE_REQUESTED_CONTRIBUTION',
+        'MPAM_TRIAGE_ESCALATED_REQUESTED_CONTRIBUTION',
+        'MPAM_DRAFT_REQUESTED_CONTRIBUTION',
+        'MPAM_DRAFT_ESCALATED_REQUESTED_CONTRIBUTION',
+        'FOI_APPEAL',
+        'FOI_DRAFT'
+    ];
+
+    const receivedStatus = ['Received', 'Cancelled'];
+
+    if (contributionRequestedStages.includes(stageType) && dueContribution) {
+        return `${stageTypeDisplay} due: ${formatDate(dueContribution)}`;
+    } else if (contributionReceivedStages.includes(stageType) && receivedStatus.includes(contributions)) {
+        return `${stageTypeDisplay} (Contributions Received)`;
+    }
+
+    return undefined;
 };
 
 class Card {
@@ -481,7 +432,5 @@ module.exports = {
     workflowAdapter,
     stageAdapter,
     byTag,
-    bindDisplayElements,
-    decorateContributionsWithStatus,
-    highestPriorityContributionStatus
+    bindDisplayElements
 };
