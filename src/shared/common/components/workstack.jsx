@@ -380,30 +380,12 @@ class WorkstackAllocate extends Component {
                 </td>;
             }
             case ColumnRenderer.DUE_DATE_WARNING:
-                if (row.data.CaseContributions && row.data.ContributionsRequired !== 'N') {
-                    const dueContribution = JSON.parse(row.data.CaseContributions)
-                        .filter(contribution => contribution.data && !contribution.data.contributionStatus)
-                        .map(contribution => contribution.data.contributionDueDate)
-                        .sort()
-                        .shift();
-
-                    if (dueContribution && new Date(dueContribution) <= new Date()) {
-                        return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell date-warning'>
-                            <span>{value}</span>
-                        </td>;
-                    }
-                }
-                if (row.dueContribution && new Date(row.dueContribution) <= new Date()) {
+                if ((row.contributions && row.contributions === 'Overdue') ||
+                    (row.data && row.data.DueDate))
+                {
                     return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell date-warning'>
                         <span>{value}</span>
                     </td>;
-                }
-                if (row.data && row.data.DueDate) {
-                    if (new Date(row.data.DueDate) <= new Date()) {
-                        return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell date-warning'>
-                            <span>{value}</span>
-                        </td>;
-                    }
                 }
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>{value}</td>;
             case ColumnRenderer.INDICATOR_BLUE:
@@ -429,7 +411,7 @@ class WorkstackAllocate extends Component {
             case ColumnRenderer.TRUNCATE_TEXT:
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell govuk-table__cell--truncated' title={value}>{value}</td>;
             case ColumnRenderer.CONTRIBUTIONS_WARNING:
-                if (row.dueContribution && new Date(row.dueContribution) < new Date()) {
+                if (row.contributions && row.contributions === 'Overdue') {
                     return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell indicator'>
                         {value && <span title={value} className='indicator-red'>
                             {value}
