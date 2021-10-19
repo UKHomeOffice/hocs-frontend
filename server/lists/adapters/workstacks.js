@@ -228,7 +228,7 @@ const contributionDueDateDisplay = ({ stageType, stageTypeDisplay, dueContributi
         'MPAM_TRIAGE_ESCALATED_REQUESTED_CONTRIBUTION',
         'MPAM_DRAFT_REQUESTED_CONTRIBUTION',
         'MPAM_DRAFT_ESCALATED_REQUESTED_CONTRIBUTION',
-        'FOI_APPEAL',
+        'FOI_APPROVAL',
         'FOI_DRAFT'
     ];
 
