@@ -213,7 +213,7 @@ const bindDisplayElements = fromStaticList => async (stage) => {
     stage.primaryCorrespondentAndRefDisplay.caseReference = stage.caseReference;
 
     if(stage.dueContribution){
-        stage.nextDueDate = (new Date(stage.dueContribution) < new Date()) ? 'Overdue' : formatDate(stage.dueContribution);
+        stage.nextContributionDueDate = (new Date(stage.dueContribution) < new Date()) ? 'Overdue' : formatDate(stage.dueContribution);
     }
 
     return stage;
