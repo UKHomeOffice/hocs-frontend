@@ -517,6 +517,11 @@ module.exports = {
             endpoint: '/case/document/reference/${caseId}/',
             adapter: documentListAdapter
         },
+        CASE_DOCUMENT_LIST_FOI_FINAL_RESPONSE: {
+            client: 'CASEWORK',
+            endpoint: '/case/document/reference/${caseId}/?type=Final%20responses',
+            adapter: documentListAdapter
+        },
         CASE_DOCUMENT_TAGS: {
             client: 'CASEWORK',
             endpoint: '/case/${caseId}/documentTags',
