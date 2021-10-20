@@ -1407,7 +1407,7 @@ Object {
         "mp": "",
         "owner": "MOCK_USER",
       },
-      "nextContributionDueDate": "Overdue",
+      "nextContributionDueDate": "12/12/2020",
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234568/19",
       },
@@ -1449,7 +1449,7 @@ Object {
         "mp": "",
         "owner": "MOCK_USER",
       },
-      "nextContributionDueDate": "Overdue",
+      "nextContributionDueDate": "12/12/2020",
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234568/19",
       },
@@ -1599,7 +1599,7 @@ Object {
         "mp": "",
         "owner": "MOCK_USER",
       },
-      "nextContributionDueDate": "Overdue",
+      "nextContributionDueDate": "12/12/2020",
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234568/19",
       },
@@ -1786,7 +1786,7 @@ Object {
         "mp": "",
         "owner": "MOCK_USER",
       },
-      "nextContributionDueDate": "Overdue",
+      "nextContributionDueDate": "12/12/2020",
       "primaryCorrespondentAndRefDisplay": Object {
         "caseReference": "A/1234568/19",
       },
