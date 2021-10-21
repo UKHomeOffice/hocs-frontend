@@ -359,6 +359,11 @@ module.exports = {
             endpoint: '/caseType?bulkOnly=false',
             adapter: caseTypeCommaSeparatedAdapter
         },
+        CASE_TYPES_COMMA_SEPARATED_FOR_SEARCH: {
+            client: 'INFO',
+            endpoint: '/caseType?bulkOnly=false&initialCaseType=false',
+            adapter: caseTypeCommaSeparatedAdapter
+        },
         CASE_TYPES_FOR_SEARCH: {
             client: 'INFO',
             endpoint: '/caseType?bulkOnly=false&initialCaseType=false',
