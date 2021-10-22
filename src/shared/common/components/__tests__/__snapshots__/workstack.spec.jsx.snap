@@ -99,7 +99,7 @@ exports[`Workstack component should not add link to headers with sortStrategy no
               "renderer": null,
             },
             Object {
-              "dataAdapter": "indicator",
+              "dataAdapter": null,
               "dataValueKey": "dueContribution",
               "displayName": "Contribution Due Date",
               "isFilterable": true,
@@ -135,8 +135,10 @@ exports[`Workstack component should not add link to headers with sortStrategy no
               "assignedUserDisplay": "User1",
               "caseReference": "case1",
               "caseUUID": "case_uuid-123",
+              "contributions": "Cancelled",
               "created": "2019-10-29T11:01:32.656563",
               "data": Object {},
+              "dueContribution": null,
               "fullName": "Sam Smith",
               "isActive": "YES",
               "nextCaseReference": null,
@@ -154,8 +156,10 @@ exports[`Workstack component should not add link to headers with sortStrategy no
               "assignedUserDisplay": "User2",
               "caseReference": "case2",
               "caseUUID": "case_uuid-789",
+              "contributions": "Received",
               "created": "",
               "data": Object {},
+              "dueContribution": null,
               "fullName": "John Alex",
               "isActive": "NO",
               "nextCaseReference": null,
@@ -192,6 +196,7 @@ exports[`Workstack component should not add link to headers with sortStrategy no
               "assignedUserDisplay": "User4",
               "caseReference": "case4",
               "caseUUID": "case_uuid-efg",
+              "contributions": "Overdue",
               "created": null,
               "data": Object {},
               "dueContribution": "2020-12-12",
@@ -231,10 +236,9 @@ exports[`Workstack component should not add link to headers with sortStrategy no
               "assignedUserDisplay": "User6",
               "caseReference": "case6",
               "caseUUID": "case_uuid-klm",
+              "contributions": "Due",
               "created": null,
-              "data": Object {
-                "DueDate": "2021-01-01",
-              },
+              "dueContribution": "9999-01-01",
               "fullName": "Bet Linch",
               "isActive": "YES",
               "nextCaseReference": null,
@@ -253,9 +257,6 @@ exports[`Workstack component should not add link to headers with sortStrategy no
               "caseReference": "case7",
               "caseUUID": "case_uuid-opq",
               "created": null,
-              "data": Object {
-                "DueDate": "2021-01-01",
-              },
               "fullName": "My Name",
               "isActive": "YES",
               "primaryCorrespondent": Object {
@@ -273,7 +274,6 @@ exports[`Workstack component should not add link to headers with sortStrategy no
               "caseUUID": "case_uuid-klm",
               "created": null,
               "data": Object {
-                "CaseContributions": "[{\\"data\\":{\\"contributionDueDate\\":\\"2020-12-12\\", \\"contributionStatus\\": \\"TEST\\"}}]",
                 "DueDate": "2021-01-01",
               },
               "fullName": "Correspondent 8",
@@ -917,7 +917,9 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                               className="govuk-table__cell date-warning"
                               key="stage_uuid-445dueContribution"
                             >
-                              <span />
+                              <span>
+                                2020-12-12
+                              </span>
                             </td>
                             <td
                               className="govuk-table__cell date-warning"
@@ -1146,17 +1148,15 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                               is Active
                             </td>
                             <td
-                              className="govuk-table__cell date-warning"
+                              className="govuk-table__cell"
                               key="stage_uuid-447dueContribution"
                             >
-                              <span />
+                              9999-01-01
                             </td>
                             <td
-                              className="govuk-table__cell date-warning"
+                              className="govuk-table__cell"
                               key="stage_uuid-447DueDate"
-                            >
-                              <span />
-                            </td>
+                            />
                             <td
                               className="govuk-table__cell"
                               key="stage_uuid-447nextCaseType"
@@ -1290,17 +1290,13 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                               is Active
                             </td>
                             <td
-                              className="govuk-table__cell date-warning"
+                              className="govuk-table__cell"
                               key="stage_uuid-448dueContribution"
-                            >
-                              <span />
-                            </td>
+                            />
                             <td
-                              className="govuk-table__cell date-warning"
+                              className="govuk-table__cell"
                               key="stage_uuid-448DueDate"
-                            >
-                              <span />
-                            </td>
+                            />
                             <td
                               className="govuk-table__cell"
                               key="stage_uuid-448nextCaseType"
@@ -1963,7 +1959,9 @@ Array [
                       <td
                         class="govuk-table__cell date-warning"
                       >
-                        <span />
+                        <span>
+                          2020-12-12
+                        </span>
                       </td>
                       <td
                         class="govuk-table__cell date-warning"
@@ -2137,15 +2135,13 @@ Array [
                         is Active
                       </td>
                       <td
-                        class="govuk-table__cell date-warning"
+                        class="govuk-table__cell"
                       >
-                        <span />
+                        9999-01-01
                       </td>
                       <td
-                        class="govuk-table__cell date-warning"
-                      >
-                        <span />
-                      </td>
+                        class="govuk-table__cell"
+                      />
                       <td
                         class="govuk-table__cell"
                       >
@@ -2234,15 +2230,11 @@ Array [
                         is Active
                       </td>
                       <td
-                        class="govuk-table__cell date-warning"
-                      >
-                        <span />
-                      </td>
+                        class="govuk-table__cell"
+                      />
                       <td
-                        class="govuk-table__cell date-warning"
-                      >
-                        <span />
-                      </td>
+                        class="govuk-table__cell"
+                      />
                       <td
                         class="govuk-table__cell"
                       />
@@ -2904,7 +2896,9 @@ Array [
                       <td
                         class="govuk-table__cell date-warning"
                       >
-                        <span />
+                        <span>
+                          2020-12-12
+                        </span>
                       </td>
                       <td
                         class="govuk-table__cell date-warning"
@@ -3078,15 +3072,13 @@ Array [
                         is Active
                       </td>
                       <td
-                        class="govuk-table__cell date-warning"
+                        class="govuk-table__cell"
                       >
-                        <span />
+                        9999-01-01
                       </td>
                       <td
-                        class="govuk-table__cell date-warning"
-                      >
-                        <span />
-                      </td>
+                        class="govuk-table__cell"
+                      />
                       <td
                         class="govuk-table__cell"
                       >
@@ -3175,15 +3167,11 @@ Array [
                         is Active
                       </td>
                       <td
-                        class="govuk-table__cell date-warning"
-                      >
-                        <span />
-                      </td>
+                        class="govuk-table__cell"
+                      />
                       <td
-                        class="govuk-table__cell date-warning"
-                      >
-                        <span />
-                      </td>
+                        class="govuk-table__cell"
+                      />
                       <td
                         class="govuk-table__cell"
                       />
@@ -3434,7 +3422,7 @@ exports[`Workstack component should render with filtering 1`] = `
               "renderer": null,
             },
             Object {
-              "dataAdapter": "indicator",
+              "dataAdapter": null,
               "dataValueKey": "dueContribution",
               "displayName": "Contribution Due Date",
               "isFilterable": true,
@@ -3470,8 +3458,10 @@ exports[`Workstack component should render with filtering 1`] = `
               "assignedUserDisplay": "User1",
               "caseReference": "case1",
               "caseUUID": "case_uuid-123",
+              "contributions": "Cancelled",
               "created": "2019-10-29T11:01:32.656563",
               "data": Object {},
+              "dueContribution": null,
               "fullName": "Sam Smith",
               "isActive": "YES",
               "nextCaseReference": null,
@@ -3489,8 +3479,10 @@ exports[`Workstack component should render with filtering 1`] = `
               "assignedUserDisplay": "User2",
               "caseReference": "case2",
               "caseUUID": "case_uuid-789",
+              "contributions": "Received",
               "created": "",
               "data": Object {},
+              "dueContribution": null,
               "fullName": "John Alex",
               "isActive": "NO",
               "nextCaseReference": null,
@@ -3527,6 +3519,7 @@ exports[`Workstack component should render with filtering 1`] = `
               "assignedUserDisplay": "User4",
               "caseReference": "case4",
               "caseUUID": "case_uuid-efg",
+              "contributions": "Overdue",
               "created": null,
               "data": Object {},
               "dueContribution": "2020-12-12",
@@ -3566,10 +3559,9 @@ exports[`Workstack component should render with filtering 1`] = `
               "assignedUserDisplay": "User6",
               "caseReference": "case6",
               "caseUUID": "case_uuid-klm",
+              "contributions": "Due",
               "created": null,
-              "data": Object {
-                "DueDate": "2021-01-01",
-              },
+              "dueContribution": "9999-01-01",
               "fullName": "Bet Linch",
               "isActive": "YES",
               "nextCaseReference": null,
@@ -3588,9 +3580,6 @@ exports[`Workstack component should render with filtering 1`] = `
               "caseReference": "case7",
               "caseUUID": "case_uuid-opq",
               "created": null,
-              "data": Object {
-                "DueDate": "2021-01-01",
-              },
               "fullName": "My Name",
               "isActive": "YES",
               "primaryCorrespondent": Object {
@@ -3608,7 +3597,6 @@ exports[`Workstack component should render with filtering 1`] = `
               "caseUUID": "case_uuid-klm",
               "created": null,
               "data": Object {
-                "CaseContributions": "[{\\"data\\":{\\"contributionDueDate\\":\\"2020-12-12\\", \\"contributionStatus\\": \\"TEST\\"}}]",
                 "DueDate": "2021-01-01",
               },
               "fullName": "Correspondent 8",
@@ -4085,7 +4073,7 @@ exports[`Workstack component should sort descending when the column heading is c
               "renderer": null,
             },
             Object {
-              "dataAdapter": "indicator",
+              "dataAdapter": null,
               "dataValueKey": "dueContribution",
               "displayName": "Contribution Due Date",
               "isFilterable": true,
@@ -4121,8 +4109,10 @@ exports[`Workstack component should sort descending when the column heading is c
               "assignedUserDisplay": "User1",
               "caseReference": "case1",
               "caseUUID": "case_uuid-123",
+              "contributions": "Cancelled",
               "created": "2019-10-29T11:01:32.656563",
               "data": Object {},
+              "dueContribution": null,
               "fullName": "Sam Smith",
               "isActive": "YES",
               "nextCaseReference": null,
@@ -4140,8 +4130,10 @@ exports[`Workstack component should sort descending when the column heading is c
               "assignedUserDisplay": "User2",
               "caseReference": "case2",
               "caseUUID": "case_uuid-789",
+              "contributions": "Received",
               "created": "",
               "data": Object {},
+              "dueContribution": null,
               "fullName": "John Alex",
               "isActive": "NO",
               "nextCaseReference": null,
@@ -4178,6 +4170,7 @@ exports[`Workstack component should sort descending when the column heading is c
               "assignedUserDisplay": "User4",
               "caseReference": "case4",
               "caseUUID": "case_uuid-efg",
+              "contributions": "Overdue",
               "created": null,
               "data": Object {},
               "dueContribution": "2020-12-12",
@@ -4217,10 +4210,9 @@ exports[`Workstack component should sort descending when the column heading is c
               "assignedUserDisplay": "User6",
               "caseReference": "case6",
               "caseUUID": "case_uuid-klm",
+              "contributions": "Due",
               "created": null,
-              "data": Object {
-                "DueDate": "2021-01-01",
-              },
+              "dueContribution": "9999-01-01",
               "fullName": "Bet Linch",
               "isActive": "YES",
               "nextCaseReference": null,
@@ -4239,9 +4231,6 @@ exports[`Workstack component should sort descending when the column heading is c
               "caseReference": "case7",
               "caseUUID": "case_uuid-opq",
               "created": null,
-              "data": Object {
-                "DueDate": "2021-01-01",
-              },
               "fullName": "My Name",
               "isActive": "YES",
               "primaryCorrespondent": Object {
@@ -4259,7 +4248,6 @@ exports[`Workstack component should sort descending when the column heading is c
               "caseUUID": "case_uuid-klm",
               "created": null,
               "data": Object {
-                "CaseContributions": "[{\\"data\\":{\\"contributionDueDate\\":\\"2020-12-12\\", \\"contributionStatus\\": \\"TEST\\"}}]",
                 "DueDate": "2021-01-01",
               },
               "fullName": "Correspondent 8",
@@ -4679,17 +4667,13 @@ exports[`Workstack component should sort descending when the column heading is c
                               is Active
                             </td>
                             <td
-                              className="govuk-table__cell date-warning"
+                              className="govuk-table__cell"
                               key="stage_uuid-448dueContribution"
-                            >
-                              <span />
-                            </td>
+                            />
                             <td
-                              className="govuk-table__cell date-warning"
+                              className="govuk-table__cell"
                               key="stage_uuid-448DueDate"
-                            >
-                              <span />
-                            </td>
+                            />
                             <td
                               className="govuk-table__cell"
                               key="stage_uuid-448nextCaseType"
@@ -4797,17 +4781,15 @@ exports[`Workstack component should sort descending when the column heading is c
                               is Active
                             </td>
                             <td
-                              className="govuk-table__cell date-warning"
+                              className="govuk-table__cell"
                               key="stage_uuid-447dueContribution"
                             >
-                              <span />
+                              9999-01-01
                             </td>
                             <td
-                              className="govuk-table__cell date-warning"
+                              className="govuk-table__cell"
                               key="stage_uuid-447DueDate"
-                            >
-                              <span />
-                            </td>
+                            />
                             <td
                               className="govuk-table__cell"
                               key="stage_uuid-447nextCaseType"
@@ -5060,7 +5042,9 @@ exports[`Workstack component should sort descending when the column heading is c
                               className="govuk-table__cell date-warning"
                               key="stage_uuid-445dueContribution"
                             >
-                              <span />
+                              <span>
+                                2020-12-12
+                              </span>
                             </td>
                             <td
                               className="govuk-table__cell date-warning"
@@ -5585,7 +5569,7 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
               "renderer": null,
             },
             Object {
-              "dataAdapter": "indicator",
+              "dataAdapter": null,
               "dataValueKey": "dueContribution",
               "displayName": "Contribution Due Date",
               "isFilterable": true,
@@ -5621,8 +5605,10 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
               "assignedUserDisplay": "User1",
               "caseReference": "case1",
               "caseUUID": "case_uuid-123",
+              "contributions": "Cancelled",
               "created": "2019-10-29T11:01:32.656563",
               "data": Object {},
+              "dueContribution": null,
               "fullName": "Sam Smith",
               "isActive": "YES",
               "nextCaseReference": null,
@@ -5640,8 +5626,10 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
               "assignedUserDisplay": "User2",
               "caseReference": "case2",
               "caseUUID": "case_uuid-789",
+              "contributions": "Received",
               "created": "",
               "data": Object {},
+              "dueContribution": null,
               "fullName": "John Alex",
               "isActive": "NO",
               "nextCaseReference": null,
@@ -5678,6 +5666,7 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
               "assignedUserDisplay": "User4",
               "caseReference": "case4",
               "caseUUID": "case_uuid-efg",
+              "contributions": "Overdue",
               "created": null,
               "data": Object {},
               "dueContribution": "2020-12-12",
@@ -5717,10 +5706,9 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
               "assignedUserDisplay": "User6",
               "caseReference": "case6",
               "caseUUID": "case_uuid-klm",
+              "contributions": "Due",
               "created": null,
-              "data": Object {
-                "DueDate": "2021-01-01",
-              },
+              "dueContribution": "9999-01-01",
               "fullName": "Bet Linch",
               "isActive": "YES",
               "nextCaseReference": null,
@@ -5739,9 +5727,6 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
               "caseReference": "case7",
               "caseUUID": "case_uuid-opq",
               "created": null,
-              "data": Object {
-                "DueDate": "2021-01-01",
-              },
               "fullName": "My Name",
               "isActive": "YES",
               "primaryCorrespondent": Object {
@@ -5759,7 +5744,6 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
               "caseUUID": "case_uuid-klm",
               "created": null,
               "data": Object {
-                "CaseContributions": "[{\\"data\\":{\\"contributionDueDate\\":\\"2020-12-12\\", \\"contributionStatus\\": \\"TEST\\"}}]",
                 "DueDate": "2021-01-01",
               },
               "fullName": "Correspondent 8",
@@ -6404,7 +6388,9 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                               className="govuk-table__cell date-warning"
                               key="stage_uuid-445dueContribution"
                             >
-                              <span />
+                              <span>
+                                2020-12-12
+                              </span>
                             </td>
                             <td
                               className="govuk-table__cell date-warning"
@@ -6633,17 +6619,15 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                               is Active
                             </td>
                             <td
-                              className="govuk-table__cell date-warning"
+                              className="govuk-table__cell"
                               key="stage_uuid-447dueContribution"
                             >
-                              <span />
+                              9999-01-01
                             </td>
                             <td
-                              className="govuk-table__cell date-warning"
+                              className="govuk-table__cell"
                               key="stage_uuid-447DueDate"
-                            >
-                              <span />
-                            </td>
+                            />
                             <td
                               className="govuk-table__cell"
                               key="stage_uuid-447nextCaseType"
@@ -6777,17 +6761,13 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                               is Active
                             </td>
                             <td
-                              className="govuk-table__cell date-warning"
+                              className="govuk-table__cell"
                               key="stage_uuid-448dueContribution"
-                            >
-                              <span />
-                            </td>
+                            />
                             <td
-                              className="govuk-table__cell date-warning"
+                              className="govuk-table__cell"
                               key="stage_uuid-448DueDate"
-                            >
-                              <span />
-                            </td>
+                            />
                             <td
                               className="govuk-table__cell"
                               key="stage_uuid-448nextCaseType"
