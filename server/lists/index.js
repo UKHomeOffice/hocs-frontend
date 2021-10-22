@@ -576,6 +576,12 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
+        FOI_ACCOUNT_MANAGERS: {
+            client: 'INFO',
+            endpoint: '/entity/list/FOI_ACCOUNT_MANAGERS',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
         S_FOI_TYPES: {
             client: 'INFO',
             endpoint: '/entity/list/FOI_TYPES',
