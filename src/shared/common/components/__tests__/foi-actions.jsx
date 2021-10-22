@@ -1,7 +1,7 @@
 import React from 'react';
 import { ApplicationProvider } from '../../../contexts/application';
 import { MemoryRouter } from 'react-router-dom';
-import FoiActions from '../foi-actions';
+import CaseActions from '../case-actions';
 
 
 const page = {
@@ -28,7 +28,7 @@ describe('The FoiActions component', () => {
         expect(
             render(<ApplicationProvider config={config}>
                 <MemoryRouter>
-                    <FoiActions/>
+                    <CaseActions/>
                 </MemoryRouter>
             </ApplicationProvider>)
         ).toMatchSnapshot();
@@ -49,7 +49,7 @@ describe('The FoiActions component', () => {
         expect(
             render(<ApplicationProvider config={config}>
                 <MemoryRouter>
-                    <FoiActions />
+                    <CaseActions />
                 </MemoryRouter>
             </ApplicationProvider>)
         ).toMatchSnapshot();

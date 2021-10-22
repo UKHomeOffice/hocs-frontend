@@ -136,6 +136,6 @@ module.exports = async (summary, options) => {
         deadlines: deadlinesEnabled && stageDeadlineEnabled && summary.stageDeadlines ? await createDeadlines(summary.stageDeadlines, fromStaticList) : null,
         stages: await getActiveStages(summary.activeStages, fromStaticList),
         previousCase: getPreviousCase(summary.previousCase),
-        somuItems: hydrateSomu(summary.somuItems, fetchList)
+        actions: summary.actions
     };
 };

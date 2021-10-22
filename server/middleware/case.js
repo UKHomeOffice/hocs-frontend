@@ -91,6 +91,60 @@ function caseCorrespondentsApiResponseMiddleware(req, res) {
     return res.status(200).json(res.locals.correspondents);
 }
 
+async function caseActionDataMiddleware(req, res, next) {
+    try {
+        const preppedData = {};
+        const actionData = await req.listService.fetch('CASE_ACTIONS', req.params);
+        let uniqueActionTypeIds;
+        let uniqueActionTypes;
+
+        if (actionData && actionData.caseTypeActionData) {
+            const actionTypeUUIDs = actionData.caseTypeActionData.map(type => type.uuid);
+            uniqueActionTypeIds = [ ...new Set(actionTypeUUIDs) ];
+        }
+
+
+        if (actionData && actionData.caseTypeActionData) {
+            const actionTypes = actionData.caseTypeActionData.map(type => type.actionType);
+            uniqueActionTypes = [ ...new Set(actionTypes) ];
+        }
+
+        let actionDataArray = [];
+        for (let actionType of Object.keys(actionData.caseActionData)) {
+            actionDataArray = [ ...actionDataArray, ...actionData.caseActionData[actionType] ];
+        }
+
+        const collectedDataArray = [];
+        for (let actionTypeId of uniqueActionTypeIds) {
+
+            const temp = {
+                id: actionTypeId,
+                typeInfo: actionData.caseTypeActionData.find(type => type.uuid === actionTypeId),
+                typeData: actionDataArray.filter(data => data.caseTypeActionUuid)
+            };
+
+            collectedDataArray.push(temp);
+        }
+
+        for (let type of uniqueActionTypes) {
+            preppedData[type] = collectedDataArray.filter(colDataEl => colDataEl.typeInfo.actionType === type);
+        }
+
+        res.locals.caseActionData = preppedData;
+        next();
+    } catch (error) {
+        next(error);
+    }
+}
+
+// async function caseTypeActionMiddleware(req, res, next) {
+//     // fixme: don't think we'll need this one, data can be passed back with call for action data from casework service.
+// }
+
+function caseActionApiResponseMiddleware(req, res) {
+    return res.status(200).json(res.locals.caseActionData);
+}
+
 module.exports = {
     caseResponseMiddleware,
     caseApiResponseMiddleware,
@@ -100,5 +154,7 @@ module.exports = {
     returnToCase,
     updateCaseNote,
     caseCorrespondentsMiddleware,
-    caseCorrespondentsApiResponseMiddleware
+    caseCorrespondentsApiResponseMiddleware,
+    caseActionDataMiddleware,
+    caseActionApiResponseMiddleware
 };
