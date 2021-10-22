@@ -404,8 +404,8 @@ function validationMiddleware(req, res, next) {
 
             for (let condition of visibilityConditions) {
                 if (condition.function && Object.prototype.hasOwnProperty.call(showConditionFunctions, condition.function)) {
-                    if (condition.conditionPropertyName && condition.conditionPropertyValue) {
-                        isVisible = showConditionFunctions[condition.function](data, condition.conditionPropertyName, condition.conditionPropertyValue);
+                    if (condition.conditionArgs) {
+                        isVisible = showConditionFunctions[condition.function](data, condition.conditionArgs);
                     }
                 } else if (data[condition.conditionPropertyName] && data[condition.conditionPropertyName] === condition.conditionPropertyValue) {
                     isVisible = true;

@@ -1,17 +1,40 @@
-function hasCommaSeparatedValue(data, propertyName, propertyValue) {
-    if (!data || !data[propertyName]) {
-        return false;
+function hasCommaSeparatedValue(data, conditionArgs) {
+    function checkPair(conditionArgPair) {
+        if (!data || !data[conditionArgPair.conditionPropertyName]) {
+            return false;
+        }
+
+        const dataPropertyValue = data[conditionArgPair.conditionPropertyName];
+
+        if (Array.isArray(dataPropertyValue)) {
+            return dataPropertyValue.includes(conditionArgPair.conditionPropertyValue);
+        }
+
+        return dataPropertyValue.split(',').includes(conditionArgPair.conditionPropertyValue);
     }
 
-    const dataPropertyValue = data[propertyName];
-
-    if (Array.isArray(dataPropertyValue)) {
-        return dataPropertyValue.includes(propertyValue);
+    for(const conditionArgPair in conditionArgs) {
+        if(!checkPair(conditionArgs[conditionArgPair])) return false;
     }
 
-    return dataPropertyValue.split(',').includes(propertyValue);
+    return true;
 }
 
+function hasAllValues(data, conditionArgs) {
+    console.log('test');
+    for(const conditionArgPair in conditionArgs) {
+        if (!(data && data[conditionArgs[conditionArgPair].conditionPropertyName]
+                && data[conditionArgs[conditionArgPair].conditionPropertyName]
+                    === conditionArgs[conditionArgPair].conditionPropertyValue)) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+
 module.exports = {
-    hasCommaSeparatedValue
+    hasCommaSeparatedValue,
+    hasAllValues
 };

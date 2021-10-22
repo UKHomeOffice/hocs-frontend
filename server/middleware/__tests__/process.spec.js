@@ -697,8 +697,11 @@ describe('Process middleware', () => {
                                     label: 'Test Field 2',
                                     visibilityConditions: [{
                                         function: 'hasCommaSeparatedValue',
-                                        conditionPropertyName: 'TestField1',
-                                        conditionPropertyValue: 'Other'
+                                        conditionArgs: [
+                                            {
+                                                conditionPropertyName: 'TestField1',
+                                                conditionPropertyValue: 'Other'
+                                            }]
                                     }]
                                 }
                             }
@@ -739,8 +742,12 @@ describe('Process middleware', () => {
                                     label: 'Test Field 2',
                                     visibilityConditions: [{
                                         function: 'hasCommaSeparatedValue',
-                                        conditionPropertyName: 'TestField1',
-                                        conditionPropertyValue: 'Other'
+                                        conditionArgs: [
+                                            {
+                                                conditionPropertyName: 'TestField1',
+                                                conditionPropertyValue: 'Other'
+                                            }
+                                        ]
                                     }]
                                 }
                             }
