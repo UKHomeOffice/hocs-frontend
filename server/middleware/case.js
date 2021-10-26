@@ -1,6 +1,7 @@
 const actionService = require('../services/action');
 const { caseworkService } = require('../clients');
 const User = require('../models/user');
+const { formatDate } = require('../libs/dateHelpers');
 
 async function caseResponseMiddleware(req, res, next) {
     const { form, user } = req;
@@ -120,7 +121,7 @@ async function caseActionDataMiddleware(req, res, next) {
             const temp = {
                 id: actionTypeId,
                 typeInfo: actionData.caseTypeActionData.find(type => type.uuid === actionTypeId),
-                typeData: actionDataArray.filter(data => data.caseTypeActionUuid)
+                typeData: actionDataArray.filter(data => data.caseTypeActionUuid === actionTypeId)
             };
 
             collectedDataArray.push(temp);
@@ -130,16 +131,14 @@ async function caseActionDataMiddleware(req, res, next) {
             preppedData[type] = collectedDataArray.filter(colDataEl => colDataEl.typeInfo.actionType === type);
         }
 
+        preppedData.currentDeadline = formatDate(actionData.currentCaseDeadline);
+
         res.locals.caseActionData = preppedData;
         next();
     } catch (error) {
         next(error);
     }
 }
-
-// async function caseTypeActionMiddleware(req, res, next) {
-//     // fixme: don't think we'll need this one, data can be passed back with call for action data from casework service.
-// }
 
 function caseActionApiResponseMiddleware(req, res) {
     return res.status(200).json(res.locals.caseActionData);

@@ -250,9 +250,10 @@ const getFormForAction = async (req, res, next) => {
 const getFormForCase = async (req, res, next) => {
     const logger = getLogger(req.requestId);
     logger.info('GET_FORM', { ...req.params });
+    const { caseActionData } = res.locals;
 
     try {
-        const form = await getFormSchemaForCase({ ...req.params, user: req.user, requestId: req.requestId });
+        const form = await getFormSchemaForCase({ ...req.params, user: req.user, requestId: req.requestId, caseActionData });
         req.form = form;
         next();
     } catch (error) {

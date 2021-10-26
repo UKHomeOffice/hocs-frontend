@@ -3,6 +3,7 @@ const { allocateCase, moveByDirection } = require('../../middleware/stage');
 const { getFormForAction, getFormForCase, getFormForStage, hydrateFields, getSomuType } = require('../../services/form');
 const { skipCaseTypePageApi } = require('../../middleware/skipCaseTypePage');
 const { autoCreateAllocateApi } = require('../../middleware/autoCreateAllocate');
+const { caseActionDataMiddleware } = require('../../middleware/case');
 
 router.get(['/action/:workflow/:action'],
     skipCaseTypePageApi
@@ -20,6 +21,12 @@ router.all('/case/:caseId/stage/:stageId/direction/:flowDirection', moveByDirect
     res.json({ redirect: `/case/${req.params.caseId}/stage/${req.params.stageId}` });
 });
 router.all(['/case/:caseId/stage/:stageId', '/case/:caseId/stage/:stageId/allocate'], getFormForStage);
+
+router.get([
+    '/case/:caseId/stage/:stageId/caseAction/:caseActionType/:caseAction'],
+caseActionDataMiddleware, getFormForCase, hydrateFields,
+(req, res) => res.status(200).send({ ...res.locals.caseActionData, ...req.form }));
+
 router.all([
     '/case/:caseId/stage/:stageId/entity/:entity/:context/:action',
     '/case/:caseId/stage/:stageId/entity/:entity/:context/:caseType/:action',

@@ -160,9 +160,9 @@ const actions = {
         try {
 
             if (form && form.action) {
-                const { entity, somuTypeUuid } = options;
+                const { entity, somuTypeUuid, caseActionType } = options;
 
-                if (entity) {
+                if (entity || caseActionType) {
 
                     logger.info('CASE_ACTION', { action: form.action, case: caseId });
                     switch (form.action) {
@@ -219,22 +219,23 @@ const actions = {
                             await caseworkService.post(`/case/${caseId}/note`, { type: 'MANUAL', text: form.data['case-note'] }, headers);
                             break;
                         case actionTypes.APPLY_CASE_DEADLINE_EXTENSION: {
-                            if (form.data.shouldApplyExtension === 'true') {
-                                const caseNote = `PIT Extension applied. Reason: ${form.data.trueText}`;
+                            const requestBody = {
+                                actionType: 'EXTENSION',
+                                caseTypeActionUuid: form.data.caseTypeActionUuid,
+                                extendBy: form.data.extendBy,
+                                extendFrom: form.data.extendFrom,
+                                note: form.data.note
+                            };
+                            const response =
+                                await caseworkService.post(`/case/${caseId}/stage/${stageId}/action`,
+                                    requestBody, headers);
 
-                                const response =
-                                    await caseworkService.post(`/case/${caseId}/stage/${stageId}/extension`,
-                                        { type: form.data.extensionType, caseNote }, headers);
+                            const clientResponse = {
+                                'summary': `Case: ${response.data.reference} extended`,
+                                'link': `${response.data.reference}`
+                            };
 
-                                const clientResponse = {
-                                    'summary': `Case: ${response.data.reference} extended`,
-                                    'link': `${response.data.reference}`
-                                };
-
-                                return handleActionSuccess(clientResponse, {}, form);
-                            } else {
-                                return ({ callbackUrl: `/case/${caseId}/stage/${stageId}` });
-                            }
+                            return handleActionSuccess(clientResponse, {}, form);
                         }
                     }
                 } else if (somuTypeUuid) {

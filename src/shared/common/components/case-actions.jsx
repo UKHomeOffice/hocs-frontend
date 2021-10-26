@@ -1,7 +1,6 @@
 import React, { Fragment, useContext, useEffect, useCallback } from 'react';
 import { Context } from '../../contexts/application.jsx';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { setError, updateApiStatus, updateCaseActionData } from '../../contexts/actions/index.jsx';
 import status from '../../helpers/api-status';
@@ -30,7 +29,14 @@ const CaseActions = () => {
     return (
         <Fragment>
             <h2 className="govuk-heading-m">Case actions</h2>
-            { caseActionData && Object.keys(caseActionData).map(key => actionComponentFactory(key, caseActionData[key]))}
+            { caseActionData && Object.keys(caseActionData).map(key => {
+                return (
+                    <>
+                        { actionComponentFactory(key, caseActionData) }
+
+                    </>
+                );
+            })}
 
 
             {/*<h3 className="govuk-heading-s">Extensions</h3>*/}

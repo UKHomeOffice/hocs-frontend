@@ -219,14 +219,36 @@ const formDefinitions = {
         },
     },
     CASE: {
-        ACTIONS_TAB: {
-            EXTEND_FOI_DEADLINE: {
-                builder: formRepository.confirmExtendDeadlineFoi,
-                action: APPLY_CASE_DEADLINE_EXTENSION,
-                next: {
-                    action: CONFIRMATION_SUMMARY
+        CASE_ACTION: {
+            EXTENSION: {
+                ADD: {
+                    builder: formRepository.confirmExtendDeadlineFoi,
+                    action: APPLY_CASE_DEADLINE_EXTENSION,
+                    next: {
+                        action: CONFIRMATION_SUMMARY
+                    }
                 }
-            }
+            },
+            APPEAL: {
+                ADD: {
+                    builder: formRepository.recordAppealFoi,
+                    action: ADD_CASE_APPEAL,
+                    next: {
+                        action: MANAGE_CASE_APPEALS
+                    }
+                },
+                EDIT: {
+                    builder: formRepository.updateAppealFoi,
+                    action: EDIT_CASE_APPEAL,
+                    next: {
+                        action: MANAGE_CASE_APPEALS
+                    }
+                },
+                MANAGE: {
+                    builder: formRepository.manageAppealsFoi,
+                    action: MANAGE_CASE_APPEALS
+                }
+            },
         },
         DOCUMENT: {
             ADD: {
@@ -295,28 +317,6 @@ const formDefinitions = {
             DETAILS: {
                 builder: formRepository.addMemberDetails,
                 action: ADD_MEMBER
-            }
-        },
-        APPEAL: {
-            FOI: {
-                ADD_APPEAL: {
-                    builder: formRepository.recordAppealFoi,
-                    action: ADD_CASE_APPEAL,
-                    next: {
-                        action: MANAGE_CASE_APPEALS
-                    }
-                },
-                EDIT_APPEAL: {
-                    builder: formRepository.updateAppealFoi,
-                    action: EDIT_CASE_APPEAL,
-                    next: {
-                        action: MANAGE_CASE_APPEALS
-                    }
-                },
-                MANAGE_APPEALS: {
-                    builder: formRepository.manageAppealsFoi,
-                    action: MANAGE_CASE_APPEALS
-                }
             }
         },
         CONTRIBUTIONS: {
@@ -547,10 +547,10 @@ module.exports = {
         }
     },
     getFormForCase: async (options) => {
-        const { action } = options;
+        const { action, caseActionType } = options;
 
-        if (action) {
-            const { entity, somuCaseType, somuType, caseType } = options;
+        if (action || caseActionType) {
+            const { entity, somuCaseType, somuType, caseType, caseAction } = options;
             let formDefinition = undefined;
             if (entity && caseType) {
                 formDefinition = formDefinitions['CASE'][entity.toUpperCase()][caseType][action.toUpperCase()];
@@ -559,6 +559,8 @@ module.exports = {
             } else if (somuType && somuCaseType) {
                 formDefinition = formDefinitions['CASE'][somuType.toUpperCase()][somuCaseType.toUpperCase()][action.toUpperCase()];
                 options.customConfig = formDefinition.customConfig;
+            } else if (caseAction) {
+                formDefinition = formDefinitions['CASE']['CASE_ACTION'][caseActionType.toUpperCase()][caseAction.toUpperCase()];
             }
 
             if (formDefinition) {
