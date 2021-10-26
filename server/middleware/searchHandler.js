@@ -14,7 +14,7 @@ async function handleSearch(req, res, next) {
         const formData = req.form.data;
         const request = {
             reference: formData['reference'] ? formData['reference'].toUpperCase() : '',
-            caseType: formData['caseTypes'] ? formData['caseTypes'] : await req.listService.fetch('CASE_TYPES_COMMA_SEPARATED'),
+            caseType: formData['caseTypes'] ? formData['caseTypes'] : await req.listService.fetch('CASE_TYPES_COMMA_SEPARATED_FOR_SEARCH'),
             dateReceived: {
                 to: formData['dateReceivedTo'],
                 from: formData['dateReceivedFrom']
