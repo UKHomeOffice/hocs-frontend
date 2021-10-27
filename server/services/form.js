@@ -145,7 +145,11 @@ async function hydrateField(field, req) {
             const somuItem = await req.listService.fetch('CASE_SOMU_ITEM', { ...req.params, somuTypeId: somuTypeItem.uuid });
             field.props.somuItems = somuItem;
         } else if (child && child.props && child.props.choices && typeof child.props.choices === 'string') {
-            field.props.child.props.choices = await req.listService.fetch(child.props.choices, req.params);
+            if (field.component === 'review-field-parent-topic' && field.props.child.props.choices === 'TOPICS_FOI'){
+                field.props.child.props.choices = await req.listService.fetch('CASE_TOPICS', req.params);
+            } else {
+                field.props.child.props.choices = await req.listService.fetch(child.props.choices, req.params);
+            }
         }
 
     }

@@ -354,9 +354,9 @@ module.exports = {
             endpoint: '/caseType?bulkOnly=true',
             adapter: caseTypeAdapter
         },
-        CASE_TYPES_COMMA_SEPARATED: {
+        CASE_TYPES_COMMA_SEPARATED_FOR_SEARCH: {
             client: 'INFO',
-            endpoint: '/caseType?bulkOnly=false',
+            endpoint: '/caseType?bulkOnly=false&initialCaseType=false',
             adapter: caseTypeCommaSeparatedAdapter
         },
         CASE_TYPES_FOR_SEARCH: {
@@ -517,6 +517,11 @@ module.exports = {
             endpoint: '/case/document/reference/${caseId}/',
             adapter: documentListAdapter
         },
+        CASE_DOCUMENT_LIST_FOI_FINAL_RESPONSE: {
+            client: 'CASEWORK',
+            endpoint: '/case/document/reference/${caseId}/?type=Final%20responses',
+            adapter: documentListAdapter
+        },
         CASE_DOCUMENT_TAGS: {
             client: 'CASEWORK',
             endpoint: '/case/${caseId}/documentTags',
@@ -568,6 +573,12 @@ module.exports = {
         SECRETARIAT_LIST: {
             client: 'INFO',
             endpoint: '/entity/list/SECRETARIAT_LIST',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        FOI_ACCOUNT_MANAGERS: {
+            client: 'INFO',
+            endpoint: '/entity/list/FOI_ACCOUNT_MANAGERS',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },

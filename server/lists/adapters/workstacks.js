@@ -212,6 +212,10 @@ const bindDisplayElements = fromStaticList => async (stage) => {
 
     stage.primaryCorrespondentAndRefDisplay.caseReference = stage.caseReference;
 
+    if(stage.dueContribution){
+        stage.nextContributionDueDate = (stage.contributions === 'Overdue') ? 'Overdue' : formatDate(stage.dueContribution);
+    }
+
     return stage;
 };
 
@@ -228,7 +232,7 @@ const contributionDueDateDisplay = ({ stageType, stageTypeDisplay, dueContributi
         'MPAM_TRIAGE_ESCALATED_REQUESTED_CONTRIBUTION',
         'MPAM_DRAFT_REQUESTED_CONTRIBUTION',
         'MPAM_DRAFT_ESCALATED_REQUESTED_CONTRIBUTION',
-        'FOI_APPEAL',
+        'FOI_APPROVAL',
         'FOI_DRAFT'
     ];
 
