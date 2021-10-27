@@ -15,8 +15,9 @@ async function caseResponseMiddleware(req, res, next) {
 
 async function caseApiResponseMiddleware(req, res, next) {
     const { form, user } = req;
+    const { caseActionData } = res.locals;
     try {
-        const { callbackUrl, confirmation } = await actionService.performAction('CASE', { ...req.params, form, user });
+        const { callbackUrl, confirmation } = await actionService.performAction('CASE', { ...req.params, form, user, caseActionData });
 
         if (confirmation) {
             return res.status(200).json({ confirmation });

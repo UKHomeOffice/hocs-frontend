@@ -68,7 +68,7 @@ module.exports = (options) => {
         .withField(
             Component('dropdown', 'extendBy')
                 .withValidator('required', 'You must select an number of days to extend the case by')
-                .withProp('label', 'How many do you want to extend the case by?')
+                .withProp('label', 'How many days do you want to extend the case deadline by?')
                 .withProp('conditionChoices', [
                     ...extendByChoicesArray
                 ])

@@ -10,6 +10,7 @@ import {
     clearApiStatus,
     unsetCaseNotes,
     unsetCaseSummary,
+    unSetCaseActionData,
     unsetDocuments,
     unsetForm,
     updateFormErrors,
@@ -77,6 +78,7 @@ function withForm(Page) {
                                 .then(() => {
                                     dispatch(unsetCaseNotes());
                                     dispatch(unsetCaseSummary());
+                                    dispatch(unSetCaseActionData());
                                     dispatch(unsetDocuments());
 
                                     if (page.params.caseId) { // if a caseId is supplied, pull its summary

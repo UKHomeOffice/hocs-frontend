@@ -30,7 +30,8 @@ export function updateCaseActionData(data) {
 
 export function unSetCaseActionData() {
     return {
-        type: types.CLEAR_CASE_ACTION_DATA
+        type: types.UNSET_CASE_ACTION_DATA,
+        payload: null
     };
 }
 

@@ -23,7 +23,9 @@ router.all('/case/:caseId/stage/:stageId/direction/:flowDirection', moveByDirect
 router.all(['/case/:caseId/stage/:stageId', '/case/:caseId/stage/:stageId/allocate'], getFormForStage);
 
 router.get([
-    '/case/:caseId/stage/:stageId/caseAction/:caseActionType/:caseAction'],
+    '/case/:caseId/stage/:stageId/caseAction/:caseActionType/:caseAction',
+    '/case/:caseId/stage/:stageId/caseAction/:caseActionType/:caseAction/:caseActionId'
+    ],
 caseActionDataMiddleware, getFormForCase, hydrateFields,
 (req, res) => res.status(200).send({ ...res.locals.caseActionData, ...req.form }));
 

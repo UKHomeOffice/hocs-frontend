@@ -72,7 +72,7 @@ jest.mock('../../clients', () => {
         },
         caseworkService: {
             post: (url, body) => {
-                if (url.match(/case\/.*\/stage\/.*\/extension/)) {
+                if (url.match(/case\/.*\/stage\/.*\/action/)) {
 
                     mockRequestClient(body);
                     return { data: { reference: '__test_ref__' } };
@@ -89,6 +89,12 @@ jest.mock('../../clients', () => {
                 mockRequestClient(body);
             },
             put: (url, body) => {
+
+                if (url.match(/case\/.*\/stage\/.*\/action\/.*/)) {
+
+                    mockRequestClient(body);
+                    return { data: { reference: '__test_ref__' } };
+                }
 
                 if (url === '/case') {
                     body.reference = '__test_ref__';
@@ -454,27 +460,41 @@ describe('Action service', () => {
         expect(response).toHaveProperty('callbackUrl');
     });
 
-    it('should return a callback url when "EXTEND_FOI_DEADLINE" action succeeds', async () => {
+    it('should return a callback url when "APPLY_CASE_DEADLINE_EXTENSION" action succeeds', async () => {
         const testForm = {
             schema: {},
-            data: { shouldApplyExtension: 'true', extensionType: 'test_extension', trueText: 'a reason' },
-            action: actionTypes.APPLY_CASE_DEADLINE_EXTENSION
+            data: {
+                caseTypeActionUuid: '__uuid__',
+                extendBy: 20,
+                extendFrom: 'ANY',
+                note: 'SOME NOTE'
+            },
+            action: actionTypes.APPLY_CASE_DEADLINE_EXTENSION,
+            next: {
+                action: 'CONFIRMATION_SUMMARY'
+            }
+        };
+
+        const expectedBody = {
+            actionType: 'EXTENSION',
+            caseTypeActionUuid: '__uuid__',
+            extendBy: 20,
+            extendFrom: 'ANY',
+            note: 'SOME NOTE'
         };
 
         const response = await actionService.performAction('CASE', {
             caseId: 1234,
             stageId: 5678,
-            entity: {},
+            caseActionType: 'extension',
             context: null,
             form: testForm,
             user: mockUser,
         });
-        expect(mockRequestClient).toHaveBeenCalledWith({
-            'caseNote': 'PIT Extension applied. Reason: a reason',
-            'type': 'test_extension'
-        });
+
+        expect(mockRequestClient).toHaveBeenCalledWith(expectedBody);
         expect(response).toBeDefined();
-        expect(response).toHaveProperty('callbackUrl');
+        expect(response).toHaveProperty('confirmation');
     });
 
     it('should return a callback when ADD_APPROVAL_REQUEST action succeeds', async () => {
@@ -482,7 +502,10 @@ describe('Action service', () => {
         const testForm = {
             schema: {},
             data: {},
-            action: actionTypes.ADD_APPROVAL_REQUEST
+            action: actionTypes.ADD_APPROVAL_REQUEST,
+            next: {
+                action: 'CONFIRMATION_SUMMARY'
+            }
         };
         const response = await actionService.performAction('CASE', {
             caseId: 1234,
@@ -519,66 +542,162 @@ describe('Action service', () => {
         expect(response).toHaveProperty('callbackUrl');
     });
 
-    it('should return a callback when ADD_CASE_APPEAL action succeeds', async () => {
+    it('should return a CONFIRMATION when ADD_CASE_APPEAL action succeeds', async () => {
+
+        const mockCaseTypeActionUuid = '00000000-0000-0000-0000-000000000000';
 
         const testForm = {
             data: {
-                appealType: 'APPEAL_TYPE_B',
-                appealStatus: 'appealPending'
+                caseTypeActionUuid: mockCaseTypeActionUuid,
+                status: 'Pending',
             },
-            action: actionTypes.ADD_CASE_APPEAL
-            ,
+            action: actionTypes.ADD_CASE_APPEAL,
             next: {
-                action: 'MANAGE_CASE_APPEALS'
+                action: 'CONFIRMATION_SUMMARY'
             }
+        };
+
+        const expectedBody = {
+            actionType: 'APPEAL',
+            caseTypeActionUuid: mockCaseTypeActionUuid,
+            status: 'Pending',
         };
 
         const response = await actionService.performAction('CASE', {
             caseId: 1234,
             stageId: 5678,
-            somuTypeUuid: '00000000-0000-0000-0000-000000000000',
+            caseActionType: 'extension',
+            caseActionData: {
+                APPEAL: [{
+                    id: mockCaseTypeActionUuid,
+                    typeData: [],
+                    typeInfo: {
+                        uuid: mockCaseTypeActionUuid,
+                        props: '{}'
+                    }
+                }]
+            },
             entity: null,
             context: null,
             form: testForm,
             user: mockUser
         });
 
-        expect(mockRequestClient).toHaveBeenCalledTimes(2);
-        expect(mockRequestClient)
-            .toHaveBeenCalledWith({ text: 'Appeal type B', type: 'APPEAL_CREATED' });
+        expect(mockRequestClient).toHaveBeenCalledTimes(1);
+        expect(mockRequestClient).toHaveBeenCalledWith(expectedBody);
         expect(response).toBeDefined();
-        expect(response).toHaveProperty('callbackUrl');
+        expect(response).toHaveProperty('confirmation');
     });
 
-    it('should return a callback when EDIT_CASE_APPEAL action succeeds', async () => {
+    it('should return a CONFIRMATION when ADD_CASE_APPEAL with officer detail action succeeds', async () => {
+
+        const mockCaseTypeActionUuid = '00000000-0000-0000-0000-000000000000';
 
         const testForm = {
             data: {
-                appealType: 'APPEAL_TYPE_B',
-                appealStatus: 'appealPending'
+                caseTypeActionUuid: mockCaseTypeActionUuid,
+                status: 'Pending',
+                officer: '__officer_uuid__',
+                directorate: 'SOME_DIRECTORATE'
             },
-            action: actionTypes.EDIT_CASE_APPEAL
-            ,
+            action: actionTypes.ADD_CASE_APPEAL,
             next: {
-                action: 'MANAGE_CASE_APPEALS'
+                action: 'CONFIRMATION_SUMMARY'
             }
+        };
+
+        const expectedBody = {
+            actionType: 'APPEAL',
+            caseTypeActionUuid: mockCaseTypeActionUuid,
+            status: 'Pending',
+            appealOfficerData: JSON.stringify({
+                IROfficerName: '__officer_uuid__',
+                IROfficerDirectorate: 'SOME_DIRECTORATE'
+            })
         };
 
         const response = await actionService.performAction('CASE', {
             caseId: 1234,
             stageId: 5678,
-            somuTypeUuid: '00000000-0000-0000-0000-000000000000',
+            caseActionType: 'appeal',
+            caseActionData: {
+                APPEAL: [{
+                    id: mockCaseTypeActionUuid,
+                    typeData: [],
+                    typeInfo: {
+                        uuid: mockCaseTypeActionUuid,
+                        props: '{"appealOfficerData": {"officer": {"label": "Internal review officer name", "value": "IROfficerName", "choices": "S_FOI_KIMU_TEAM_MEMBERS"}, "directorate": {"label": "Internal review officer directorate", "value": "IROfficerDirectorate", "choices": "S_FOI_DIRECTORATES"}} }'
+                    }
+                }]
+            },
             entity: null,
             context: null,
             form: testForm,
             user: mockUser
         });
 
-        expect(mockRequestClient).toHaveBeenCalledTimes(2);
-        expect(mockRequestClient)
-            .toHaveBeenCalledWith({ text: 'Appeal type B - Pending', type: 'APPEAL_UPDATED' });
+        expect(mockRequestClient).toHaveBeenCalledTimes(1);
+        expect(mockRequestClient).toHaveBeenCalledWith(expectedBody);
         expect(response).toBeDefined();
-        expect(response).toHaveProperty('callbackUrl');
+        expect(response).toHaveProperty('confirmation');
+    });
+
+    it('should return a CONFIRMATION when EDIT_CASE_APPEAL action succeeds', async () => {
+
+        const mockCaseActionId = '__uuid__';
+        const mockCaseTypeActionUuid = '00000000-0000-0000-0000-000000000000';
+
+        const testForm = {
+            data: {
+                caseTypeActionUuid: mockCaseTypeActionUuid,
+                status: 'Complete',
+                dateSentRMS: '2021-10-26',
+                outcome: 'TEST_OUTCOME',
+                complexCase: 'Yes',
+                note: 'TEST NOTE'
+            },
+            action: actionTypes.EDIT_CASE_APPEAL,
+            next: {
+                action: 'CONFIRMATION_SUMMARY'
+            }
+        };
+
+        const expectedBody = {
+            actionType: 'APPEAL',
+            uuid: mockCaseActionId,
+            caseTypeActionUuid: mockCaseTypeActionUuid,
+            status: 'Complete',
+            dateSentRMS: '2021-10-26',
+            outcome: 'TEST_OUTCOME',
+            complexCase: 'Yes',
+            note: 'TEST NOTE'
+        };
+
+        const response = await actionService.performAction('CASE', {
+            caseId: 1234,
+            stageId: 5678,
+            caseActionId: mockCaseActionId,
+            caseActionType: 'extension',
+            caseActionData: {
+                APPEAL: [{
+                    id: mockCaseTypeActionUuid,
+                    typeData: [],
+                    typeInfo: {
+                        uuid: mockCaseTypeActionUuid,
+                        props: '{}'
+                    }
+                }]
+            },
+            entity: null,
+            context: null,
+            form: testForm,
+            user: mockUser
+        });
+
+        expect(mockRequestClient).toHaveBeenCalledTimes(1);
+        expect(mockRequestClient).toHaveBeenCalledWith(expectedBody);
+        expect(response).toBeDefined();
+        expect(response).toHaveProperty('confirmation');
     });
 
     it('should return a callback when ADD_APPROVAL_REQUEST action succeeds', async () => {

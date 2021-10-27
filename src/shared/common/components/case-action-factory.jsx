@@ -18,14 +18,14 @@ export function actionComponentFactory(actionType, options) {
             return (
                 <>
                     { renderComponent(Appeals, options) }
-                    <hr className="govuk-section-break govuk-section-break--m govuk-section-break--visible"/>
+                    <hr className="govuk-section-break govuk-section-break--xl govuk-section-break--visible"/>
                 </>
             );
         case 'EXTENSION':
             return (
                 <>
                     { renderComponent(Extensions, options) }
-                    <hr className="govuk-section-break govuk-section-break--m govuk-section-break--visible"/>
+                    <hr className="govuk-section-break govuk-section-break--xl govuk-section-break--visible"/>
                 </>);
         default:
             return null;

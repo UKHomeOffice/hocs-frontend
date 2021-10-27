@@ -234,19 +234,15 @@ const formDefinitions = {
                     builder: formRepository.recordAppealFoi,
                     action: ADD_CASE_APPEAL,
                     next: {
-                        action: MANAGE_CASE_APPEALS
+                        action: CONFIRMATION_SUMMARY
                     }
                 },
-                EDIT: {
+                UPDATE: {
                     builder: formRepository.updateAppealFoi,
                     action: EDIT_CASE_APPEAL,
                     next: {
-                        action: MANAGE_CASE_APPEALS
+                        action: CONFIRMATION_SUMMARY
                     }
-                },
-                MANAGE: {
-                    builder: formRepository.manageAppealsFoi,
-                    action: MANAGE_CASE_APPEALS
                 }
             },
         },

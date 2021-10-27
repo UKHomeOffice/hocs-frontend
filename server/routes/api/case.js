@@ -36,14 +36,18 @@ validationMiddleware,
 caseApiResponseMiddleware
 );
 
-router.post('/:caseId/stage/:stageId/caseAction/:caseActionType/:caseAction',
-    caseActionDataMiddleware,
-    getFormForCase,
-    fileMiddleware.any(),
-    processMiddleware,
-    validationMiddleware,
-    caseApiResponseMiddleware
+router.post([
+    '/:caseId/stage/:stageId/caseAction/:caseActionType/:caseAction',
+    '/:caseId/stage/:stageId/caseAction/:caseActionType/:caseAction/:caseActionId'
+],
+caseActionDataMiddleware,
+getFormForCase,
+fileMiddleware.any(),
+processMiddleware,
+validationMiddleware,
+caseApiResponseMiddleware
 );
+
 router.post(['/:caseId/stage/:stageId/somu/:somuTypeUuid/:somuType/:somuCaseType/:action',  '/:caseId/stage/:stageId/somu/:somuTypeUuid/:somuType/:somuCaseType/item/:somuItemUuid/:action'],
     getFormForCase,
     fileMiddleware.any(),

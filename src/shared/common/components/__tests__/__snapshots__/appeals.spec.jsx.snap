@@ -1,0 +1,222 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Appeals Component should Render with NO table of existing appeals 1`] = `
+Array [
+  <h3
+    class="govuk-heading-s"
+  >
+    Appeals
+  </h3>,
+  <p
+    class="govuk-body"
+  >
+    Record an appeal against this request:
+  </p>,
+  <a
+    class="govuk-body govuk-link"
+    href="/case/some_case_id/stage/some_stage_id/caseAction/appeal/add"
+  >
+    Add an appeal
+  </a>,
+]
+`;
+
+exports[`Appeals Component should Render with table of existing appeals 1`] = `
+Array [
+  <h3
+    class="govuk-heading-s"
+  >
+    Appeals
+  </h3>,
+  <p
+    class="govuk-body"
+  >
+    Registered appeals:
+  </p>,
+  <table
+    class="govuk-table"
+  >
+    <tbody>
+      <tr
+        class="govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell"
+        >
+          Court of Appeal
+        </td>
+        <td
+          class="govuk-table__cell"
+        >
+          Complete
+        </td>
+        <td
+          class="govuk-table__cell"
+        >
+          <a
+            class="govuk-link"
+            href="/case/some_case_id/stage/some_stage_id/caseAction/appeal/update/e2e033ef-a819-4ea8-b793-aa1b9eadf3e2?hideSidebar=false"
+          >
+            Update
+          </a>
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell"
+        >
+          Court of Appeal
+        </td>
+        <td
+          class="govuk-table__cell"
+        >
+          Complete
+        </td>
+        <td
+          class="govuk-table__cell"
+        >
+          <a
+            class="govuk-link"
+            href="/case/some_case_id/stage/some_stage_id/caseAction/appeal/update/50792f80-3f74-4eab-be86-a96e0e0749da?hideSidebar=false"
+          >
+            Update
+          </a>
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell"
+        >
+          Court of Appeal
+        </td>
+        <td
+          class="govuk-table__cell"
+        >
+          Complete
+        </td>
+        <td
+          class="govuk-table__cell"
+        >
+          <a
+            class="govuk-link"
+            href="/case/some_case_id/stage/some_stage_id/caseAction/appeal/update/5fcad74b-3577-49eb-893d-5923c771c2f4?hideSidebar=false"
+          >
+            Update
+          </a>
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell"
+        >
+          Court of Appeal
+        </td>
+        <td
+          class="govuk-table__cell"
+        >
+          Complete
+        </td>
+        <td
+          class="govuk-table__cell"
+        >
+          <a
+            class="govuk-link"
+            href="/case/some_case_id/stage/some_stage_id/caseAction/appeal/update/08d3bdb9-44bc-4b76-b4b6-52e10876a81d?hideSidebar=false"
+          >
+            Update
+          </a>
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell"
+        >
+          First Tier Tribunal
+        </td>
+        <td
+          class="govuk-table__cell"
+        >
+          Complete
+        </td>
+        <td
+          class="govuk-table__cell"
+        >
+          <a
+            class="govuk-link"
+            href="/case/some_case_id/stage/some_stage_id/caseAction/appeal/update/f5868426-fdaa-4148-89ba-aa93c6989919?hideSidebar=false"
+          >
+            Update
+          </a>
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell"
+        >
+          Internal Review
+        </td>
+        <td
+          class="govuk-table__cell"
+        >
+          Complete
+        </td>
+        <td
+          class="govuk-table__cell"
+        >
+          <a
+            class="govuk-link"
+            href="/case/some_case_id/stage/some_stage_id/caseAction/appeal/update/72fd3cf4-f15a-4c20-90d4-90d1a663e2f5?hideSidebar=false"
+          >
+            Update
+          </a>
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell"
+        >
+          Upper Tribunal
+        </td>
+        <td
+          class="govuk-table__cell"
+        >
+          Pending
+        </td>
+        <td
+          class="govuk-table__cell"
+        >
+          <a
+            class="govuk-link"
+            href="/case/some_case_id/stage/some_stage_id/caseAction/appeal/update/c328ca43-1bc8-40d8-a52e-e15684ad83f3?hideSidebar=false"
+          >
+            Update
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+  <p
+    class="govuk-body"
+  >
+    Record an appeal against this request:
+  </p>,
+  <a
+    class="govuk-body govuk-link"
+    href="/case/some_case_id/stage/some_stage_id/caseAction/appeal/add"
+  >
+    Add an appeal
+  </a>,
+]
+`;

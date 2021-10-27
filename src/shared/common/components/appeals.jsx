@@ -8,7 +8,7 @@ const Appeals = (props) => {
 
     const getCurrentAppeals = (APPEAL) => {
 
-        const currentAppealTypeList = APPEAL.filter(appeal => appeal.typeData.length < 1).map(appeal => {
+        const currentAppealTypeList = APPEAL.filter(appeal => appeal.typeData.length > 0).map(appeal => {
             return {
                 label: appeal.typeInfo.actionLabel,
                 appealsOfType: [ ...appeal.typeData ]
@@ -18,22 +18,26 @@ const Appeals = (props) => {
         const appealArray = [];
 
         for (let typeData of currentAppealTypeList) {
-            appealArray.push(
-                typeData.appealsOfType.map(appealData => {
-                    return {
-                        id: appealData.uuid,
-                        label: typeData.label,
-                        status: appealData.status
-                    };
-                })
+
+            typeData.appealsOfType.map(appealData => {
+                return appealArray.push({
+                    id: appealData.uuid,
+                    label: typeData.label,
+                    status: appealData.status
+                });
+            });
+        }
+
+        if (appealArray.length < 1) {
+            return (
+                <>
+                </>
             );
         }
 
-
-
         return (
             <>
-                <h4 className='govuk-heading-s'>Current Appeals</h4>
+                <p className='govuk-body'>Registered appeals:</p>
                 <table className='govuk-table'>
                     { appealArray.length > 0 &&
                         appealArray.map((appeal, i)=> {
@@ -46,7 +50,7 @@ const Appeals = (props) => {
                                         { appeal.status }
                                     </td>
                                     <td key={i} className='govuk-table__cell'>
-                                        <Link to={`/case/${page.params.caseId}/stage/${page.params.stageId}/caseAction/extension/update?hideSidebar=false`}
+                                        <Link to={`/case/${page.params.caseId}/stage/${page.params.stageId}/caseAction/appeal/update/${appeal.id}?hideSidebar=false`}
                                             className="govuk-link">Update</Link>
                                     </td>
                                 </tr>
@@ -61,8 +65,8 @@ const Appeals = (props) => {
     return (
         <>
             <h3 className="govuk-heading-s">Appeals</h3>
-            { getCurrentAppeals(APPEAL).length > 0 && getCurrentAppeals(APPEAL) }
-            <p className='govuk-body'>Record an appeal against this request.</p>
+            { getCurrentAppeals(APPEAL) }
+            <p className='govuk-body'>Record an appeal against this request:</p>
 
             <Link className='govuk-body govuk-link' to={`/case/${page.params.caseId}/stage/${page.params.stageId}/caseAction/appeal/add`}>
                         Add an appeal

@@ -93,13 +93,88 @@ describe('Case Summary Adapter', () => {
         expect(results).toMatchSnapshot();
     });
 
-    it('should transform somuItems in case summary data', async () => {
+    it('should transform actions data in case summary data', async () => {
         caseworkService.get.mockImplementation(() => Promise.resolve({ data: { summaryDeadlineEnabled: true } }));
         const mockConfiguration = {
             deadlinesEnabled: true
         };
 
         const mockData = {
+            actions: {
+                'appeals': [
+                    {
+                        'actionType': 'APPEAL',
+                        'status': 'Complete',
+                        'dateSentRMS': '2021-10-26',
+                        'outcome': 'ComplaintUpheld',
+                        'complexCase': 'Yes',
+                        'note': 'asdcasdc',
+                        'appealOfficerData': '{"IROfficerName": "638b31bc-6004-4f51-8394-45c3141e1f8a", "IROfficerDirectorate": "FOI_DIRECTORATE_HMPO_ACCEPTANCE_TEAMS"}',
+                        'uuid': '72fd3cf4-f15a-4c20-90d4-90d1a663e2f5',
+                        'caseTypeActionUuid': 'f2b625c9-7250-4293-9e68-c8f515e3043d',
+                        'caseTypeActionLabel': 'Internal Review'
+                    },
+                    {
+                        'actionType': 'APPEAL',
+                        'status': 'Complete',
+                        'dateSentRMS': '2021-10-12',
+                        'outcome': 'ComplaintUpheld',
+                        'complexCase': 'Yes',
+                        'note': 'sdcasdc',
+                        'appealOfficerData': null,
+                        'uuid': 'e2e033ef-a819-4ea8-b793-aa1b9eadf3e2',
+                        'caseTypeActionUuid': 'f84262c4-3b9e-4d1c-83c4-2ceacce5851d',
+                        'caseTypeActionLabel': 'Court of Appeal'
+                    },
+                    {
+                        'actionType': 'APPEAL',
+                        'status': 'Complete',
+                        'dateSentRMS': '2021-10-26',
+                        'outcome': 'DecisionUpheld',
+                        'complexCase': 'Yes',
+                        'note': 'asdfasdf',
+                        'appealOfficerData': null,
+                        'uuid': 'f5868426-fdaa-4148-89ba-aa93c6989919',
+                        'caseTypeActionUuid': 'e8313044-d0b1-4510-96e4-17af7fdaf754',
+                        'caseTypeActionLabel': 'First Tier Tribunal'
+                    },
+                    {
+                        'actionType': 'APPEAL',
+                        'status': 'Complete',
+                        'dateSentRMS': '2021-10-12',
+                        'outcome': 'DecisionUpheld',
+                        'complexCase': 'Yes',
+                        'note': 'asdcasd',
+                        'appealOfficerData': null,
+                        'uuid': '50792f80-3f74-4eab-be86-a96e0e0749da',
+                        'caseTypeActionUuid': 'f84262c4-3b9e-4d1c-83c4-2ceacce5851d',
+                        'caseTypeActionLabel': 'Court of Appeal'
+                    },
+                    {
+                        'actionType': 'APPEAL',
+                        'status': 'Complete',
+                        'dateSentRMS': '2021-10-12',
+                        'outcome': 'DecisionUpheld',
+                        'complexCase': 'Yes',
+                        'note': 'sdcasdc',
+                        'appealOfficerData': null,
+                        'uuid': '5fcad74b-3577-49eb-893d-5923c771c2f4',
+                        'caseTypeActionUuid': 'f84262c4-3b9e-4d1c-83c4-2ceacce5851d',
+                        'caseTypeActionLabel': 'Court of Appeal'
+                    }
+                ],
+                'extensions': [
+                    {
+                        'actionType': 'EXTENSION_OUT',
+                        'originalDeadline': '2021-11-24',
+                        'updatedDeadline': '2021-11-24',
+                        'note': 'Whatever you want to write here',
+                        'uuid': '8ffa52b9-1e31-4412-ac50-ce086cec1b51',
+                        'caseTypeActionUuid': 'dd84d047-853b-428a-9ed7-94601623f344',
+                        'caseTypeActionLabel': 'PIT Extension'
+                    }
+                ]
+            },
             dateReceived: '2019-01-01',
             caseCreated: '2019-02-03',
             caseDeadline: null,
@@ -108,55 +183,6 @@ describe('Case Summary Adapter', () => {
             stageDeadlines: [],
             activeStages: [],
             deadLineExtensions: [],
-            somuItems: [
-                {
-                    schema: {
-                        fields: [
-                            {
-                                name: 'listServiceField',
-                                choices: 'S_LIST_TEST_VALUES',
-                            },
-                            {
-                                name: 'choiceMapField',
-                                choices: [
-                                    {
-                                        label: 'Yes',
-                                        value: 'y'
-                                    },
-                                    {
-                                        label: 'No',
-                                        value: 'n'
-                                    }
-                                ],
-                                summaryLabel: 'Complete',
-                            },
-                            {
-                                name: 'dateField',
-                                type: 'date',
-                                summaryLabel: 'Date Field',
-                            },
-                            {
-                                name: 'freeTextField',
-                                summaryLabel: 'Free text field',
-                            }
-                        ],
-                        renderers: {
-                            table: 'FoiAppealsTable'
-                        },
-                        categoriseBy: 'listServiceField',
-                        summaryLabel: 'Test label',
-                        showInSummary: true
-                    },
-                    items: [
-                        {
-                            listServiceField: 'TESTB',
-                            freeTextField: 'free text field',
-                            dateField: '1999-12-31',
-                            choiceMapField: 'y'
-                        }
-                    ]
-                }
-            ],
             type: 'case'
         };
 

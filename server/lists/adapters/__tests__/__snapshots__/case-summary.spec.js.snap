@@ -2,6 +2,7 @@
 
 exports[`Case Summary Adapter should map additionalFields data values when choices are provided 1`] = `
 Object {
+  "actions": undefined,
   "additionalFields": Array [
     Object {
       "choices": Array [
@@ -55,7 +56,6 @@ Object {
     "fullname": "Test Correspondent",
   },
   "primaryTopic": "Topic A",
-  "somuItems": Array [],
   "stages": Array [
     Object {
       "assignedTeam": "MOCK_TEAM",
@@ -69,6 +69,7 @@ Object {
 
 exports[`Case Summary Adapter should map additionalFields data values when choices are provided as list name 1`] = `
 Object {
+  "actions": undefined,
   "additionalFields": Array [
     Object {
       "choices": Array [
@@ -122,7 +123,6 @@ Object {
     "fullname": "Test Correspondent",
   },
   "primaryTopic": "Topic A",
-  "somuItems": Array [],
   "stages": Array [
     Object {
       "assignedTeam": "MOCK_TEAM",
@@ -136,6 +136,7 @@ Object {
 
 exports[`Case Summary Adapter should not show deadlines when deadlines are disabled 1`] = `
 Object {
+  "actions": undefined,
   "additionalFields": Array [
     Object {
       "choices": undefined,
@@ -172,7 +173,6 @@ Object {
     "fullname": "Test Correspondent",
   },
   "primaryTopic": "Topic A",
-  "somuItems": Array [],
   "stages": Array [
     Object {
       "assignedTeam": "MOCK_TEAM",
@@ -186,6 +186,7 @@ Object {
 
 exports[`Case Summary Adapter should not show deadlines when summary deadlines are disabled 1`] = `
 Object {
+  "actions": undefined,
   "additionalFields": Array [
     Object {
       "choices": undefined,
@@ -222,7 +223,6 @@ Object {
     "fullname": "Test Correspondent",
   },
   "primaryTopic": "Topic A",
-  "somuItems": Array [],
   "stages": Array [
     Object {
       "assignedTeam": "MOCK_TEAM",
@@ -236,6 +236,7 @@ Object {
 
 exports[`Case Summary Adapter should populate fields when choices have nested options 1`] = `
 Object {
+  "actions": undefined,
   "additionalFields": Array [
     Object {
       "choices": undefined,
@@ -286,7 +287,6 @@ Object {
     "fullname": "Test Correspondent",
   },
   "primaryTopic": "Topic A",
-  "somuItems": Array [],
   "stages": Array [
     Object {
       "assignedTeam": "MOCK_TEAM",
@@ -298,8 +298,103 @@ Object {
 }
 `;
 
+exports[`Case Summary Adapter should transform actions data in case summary data 1`] = `
+Object {
+  "actions": Object {
+    "appeals": Array [
+      Object {
+        "actionType": "APPEAL",
+        "appealOfficerData": "{\\"IROfficerName\\": \\"638b31bc-6004-4f51-8394-45c3141e1f8a\\", \\"IROfficerDirectorate\\": \\"FOI_DIRECTORATE_HMPO_ACCEPTANCE_TEAMS\\"}",
+        "caseTypeActionLabel": "Internal Review",
+        "caseTypeActionUuid": "f2b625c9-7250-4293-9e68-c8f515e3043d",
+        "complexCase": "Yes",
+        "dateSentRMS": "2021-10-26",
+        "note": "asdcasdc",
+        "outcome": "ComplaintUpheld",
+        "status": "Complete",
+        "uuid": "72fd3cf4-f15a-4c20-90d4-90d1a663e2f5",
+      },
+      Object {
+        "actionType": "APPEAL",
+        "appealOfficerData": null,
+        "caseTypeActionLabel": "Court of Appeal",
+        "caseTypeActionUuid": "f84262c4-3b9e-4d1c-83c4-2ceacce5851d",
+        "complexCase": "Yes",
+        "dateSentRMS": "2021-10-12",
+        "note": "sdcasdc",
+        "outcome": "ComplaintUpheld",
+        "status": "Complete",
+        "uuid": "e2e033ef-a819-4ea8-b793-aa1b9eadf3e2",
+      },
+      Object {
+        "actionType": "APPEAL",
+        "appealOfficerData": null,
+        "caseTypeActionLabel": "First Tier Tribunal",
+        "caseTypeActionUuid": "e8313044-d0b1-4510-96e4-17af7fdaf754",
+        "complexCase": "Yes",
+        "dateSentRMS": "2021-10-26",
+        "note": "asdfasdf",
+        "outcome": "DecisionUpheld",
+        "status": "Complete",
+        "uuid": "f5868426-fdaa-4148-89ba-aa93c6989919",
+      },
+      Object {
+        "actionType": "APPEAL",
+        "appealOfficerData": null,
+        "caseTypeActionLabel": "Court of Appeal",
+        "caseTypeActionUuid": "f84262c4-3b9e-4d1c-83c4-2ceacce5851d",
+        "complexCase": "Yes",
+        "dateSentRMS": "2021-10-12",
+        "note": "asdcasd",
+        "outcome": "DecisionUpheld",
+        "status": "Complete",
+        "uuid": "50792f80-3f74-4eab-be86-a96e0e0749da",
+      },
+      Object {
+        "actionType": "APPEAL",
+        "appealOfficerData": null,
+        "caseTypeActionLabel": "Court of Appeal",
+        "caseTypeActionUuid": "f84262c4-3b9e-4d1c-83c4-2ceacce5851d",
+        "complexCase": "Yes",
+        "dateSentRMS": "2021-10-12",
+        "note": "sdcasdc",
+        "outcome": "DecisionUpheld",
+        "status": "Complete",
+        "uuid": "5fcad74b-3577-49eb-893d-5923c771c2f4",
+      },
+    ],
+    "extensions": Array [
+      Object {
+        "actionType": "EXTENSION_OUT",
+        "caseTypeActionLabel": "PIT Extension",
+        "caseTypeActionUuid": "dd84d047-853b-428a-9ed7-94601623f344",
+        "note": "Whatever you want to write here",
+        "originalDeadline": "2021-11-24",
+        "updatedDeadline": "2021-11-24",
+        "uuid": "8ffa52b9-1e31-4412-ac50-ce086cec1b51",
+      },
+    ],
+  },
+  "additionalFields": Array [],
+  "case": Object {
+    "created": "03/02/2019",
+    "deadLineExtensions": Array [],
+    "deadline": null,
+    "received": "01/01/2019",
+  },
+  "deadlines": Array [],
+  "deadlinesEnabled": true,
+  "previousCase": undefined,
+  "primaryCorrespondent": null,
+  "primaryTopic": null,
+  "stages": Array [],
+  "type": "case",
+}
+`;
+
 exports[`Case Summary Adapter should transform fully populated case summary data 1`] = `
 Object {
+  "actions": undefined,
   "additionalFields": Array [
     Object {
       "choices": undefined,
@@ -355,7 +450,6 @@ Object {
     "fullname": "Test Correspondent",
   },
   "primaryTopic": "Topic A",
-  "somuItems": Array [],
   "stages": Array [
     Object {
       "assignedTeam": "MOCK_TEAM",
@@ -369,6 +463,7 @@ Object {
 
 exports[`Case Summary Adapter should transform minimal case summary data 1`] = `
 Object {
+  "actions": undefined,
   "additionalFields": Array [],
   "case": Object {
     "created": "03/02/2019",
@@ -381,39 +476,6 @@ Object {
   "previousCase": undefined,
   "primaryCorrespondent": null,
   "primaryTopic": null,
-  "somuItems": Array [],
-  "stages": Array [],
-  "type": "case",
-}
-`;
-
-exports[`Case Summary Adapter should transform somuItems in case summary data 1`] = `
-Object {
-  "additionalFields": Array [],
-  "case": Object {
-    "created": "03/02/2019",
-    "deadLineExtensions": Array [],
-    "deadline": null,
-    "received": "01/01/2019",
-  },
-  "deadlines": Array [],
-  "deadlinesEnabled": true,
-  "previousCase": undefined,
-  "primaryCorrespondent": null,
-  "primaryTopic": null,
-  "somuItems": Array [
-    Object {
-      "items": Array [
-        Object {
-          "Complete": "Yes",
-          "Date Field": "31/12/1999",
-          "Free text field": "free text field",
-          "heading": "TestB text",
-        },
-      ],
-      "summaryLabel": "Test label",
-    },
-  ],
   "stages": Array [],
   "type": "case",
 }
