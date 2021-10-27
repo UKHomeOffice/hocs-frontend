@@ -1,5 +1,5 @@
 
 module.exports = (actions, { logger })=> {
-    logger.debug('Just passing through');
+    logger.debug('Retrieved Case Actions');
     return actions;
 };

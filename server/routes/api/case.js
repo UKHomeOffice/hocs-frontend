@@ -63,9 +63,6 @@ router.post(['/:caseId/stage/:stageId', '/:caseId/stage/:stageId/allocate'],
     validationMiddleware,
     stageApiResponseMiddleware
 );
-
-// router.post(['/:caseId/caseAction/:caseActionType/:caseAction'], getFormForCase, processMiddleware, validationMiddleware);
-
 router.post('/:caseId/note',
     fileMiddleware.any(),
     createCaseNote,
