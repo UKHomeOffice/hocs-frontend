@@ -4,8 +4,6 @@ const { ActionError } = require('../models/error');
 const getLogger = require('../libs/logger');
 const User = require('../models/user');
 const doubleEncodeSlashes = require('../libs/encodingHelpers');
-const listService = require('./list/service');
-const uuid = require('uuid/v4');
 
 function createDocumentSummaryObjects(form, type) {
     return form.schema.fields.reduce((reducer, field) => {
@@ -155,8 +153,6 @@ const actions = {
         };
         const logger = getLogger();
 
-        const listServiceInstance = listService.getInstance(uuid(), options.user);
-
         try {
 
             if (form && form.action) {
@@ -176,7 +172,7 @@ const actions = {
                             await caseworkService.delete(`/case/${caseId}/document/${context}`, headers);
                             break;
                         case actionTypes.ADD_TOPIC:
-                            await caseworkService.post(`/case/${caseId}/stage/${stageId}/topic`, {topicUUID: form.data['topic']}, headers);
+                            await caseworkService.post(`/case/${caseId}/stage/${stageId}/topic`, { topicUUID: form.data['topic'] }, headers);
                             break;
                         case actionTypes.REMOVE_TOPIC:
                             if (!context) {
@@ -186,16 +182,16 @@ const actions = {
                             break;
                         case actionTypes.IS_MEMBER:
                             if (form.data['isMember'] === 'true') {
-                                return ({callbackUrl: `/case/${caseId}/stage/${stageId}/entity/member/add`});
+                                return ({ callbackUrl: `/case/${caseId}/stage/${stageId}/entity/member/add` });
                             } else {
-                                return ({callbackUrl: `/case/${caseId}/stage/${stageId}/entity/correspondent/details`});
+                                return ({ callbackUrl: `/case/${caseId}/stage/${stageId}/entity/correspondent/details` });
                             }
                         case actionTypes.SELECT_MEMBER:
-                            return ({callbackUrl: `/case/${caseId}/stage/${stageId}/entity/member/${form.data['member']}/details`});
+                            return ({ callbackUrl: `/case/${caseId}/stage/${stageId}/entity/member/${form.data['member']}/details` });
                         case actionTypes.ADD_CORRESPONDENT:
                         case actionTypes.ADD_MEMBER:
-                            await caseworkService.post(`/case/${caseId}/stage/${stageId}/correspondent`, {...form.data}, headers);
-                            return ({callbackUrl: `/case/${caseId}/stage/${stageId}`});
+                            await caseworkService.post(`/case/${caseId}/stage/${stageId}/correspondent`, { ...form.data }, headers);
+                            return ({ callbackUrl: `/case/${caseId}/stage/${stageId}` });
                         case actionTypes.REMOVE_CORRESPONDENT:
                             if (!context) {
                                 throw new ActionError('Unable to remove, no context provided');
@@ -206,20 +202,17 @@ const actions = {
                             if (!context) {
                                 throw new ActionError('Unable to update, no context provided');
                             }
-                            await caseworkService.put(`/case/${caseId}/stage/${stageId}/correspondent/${context}`, {...form.data}, headers);
+                            await caseworkService.put(`/case/${caseId}/stage/${stageId}/correspondent/${context}`, { ...form.data }, headers);
                             break;
                         case actionTypes.MANAGE_PEOPLE:
                             await caseworkService.put(
                                 `/case/${caseId}/stage/${stageId}/updatePrimaryCorrespondent`,
-                                {primaryCorrespondentUUID: form.data.Correspondents},
+                                { primaryCorrespondentUUID: form.data.Correspondents },
                                 headers
                             );
                             break;
                         case actionTypes.ADD_CASE_NOTE:
-                            await caseworkService.post(`/case/${caseId}/note`, {
-                                type: 'MANUAL',
-                                text: form.data['case-note']
-                            }, headers);
+                            await caseworkService.post(`/case/${caseId}/note`, { type: 'MANUAL', text: form.data['case-note'] }, headers);
                             break;
                         case actionTypes.APPLY_CASE_DEADLINE_EXTENSION: {
                             const requestBody = {
@@ -332,6 +325,7 @@ const actions = {
                             break;
                     }
                 }
+
                 return ({ callbackUrl: `/case/${caseId}/stage/${stageId}` });
             }
         } catch (error) {

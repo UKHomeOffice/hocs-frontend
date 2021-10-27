@@ -25,7 +25,7 @@ router.all(['/case/:caseId/stage/:stageId', '/case/:caseId/stage/:stageId/alloca
 router.get([
     '/case/:caseId/stage/:stageId/caseAction/:caseActionType/:caseAction',
     '/case/:caseId/stage/:stageId/caseAction/:caseActionType/:caseAction/:caseActionId'
-    ],
+],
 caseActionDataMiddleware, getFormForCase, hydrateFields,
 (req, res) => res.status(200).send({ ...res.locals.caseActionData, ...req.form }));
 
