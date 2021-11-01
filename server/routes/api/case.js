@@ -11,7 +11,9 @@ const {
     createCaseNote,
     updateCaseNote,
     caseCorrespondentsMiddleware,
-    caseCorrespondentsApiResponseMiddleware
+    caseCorrespondentsApiResponseMiddleware,
+    caseActionDataMiddleware,
+    caseActionApiResponseMiddleware
 } = require('../../middleware/case');
 const { somuApiResponseMiddleware } = require('../../middleware/somu');
 const { getFormForCase, getFormForStage } = require('../../services/form');
@@ -34,6 +36,18 @@ validationMiddleware,
 caseApiResponseMiddleware
 );
 
+router.post([
+    '/:caseId/stage/:stageId/caseAction/:caseActionType/:caseAction',
+    '/:caseId/stage/:stageId/caseAction/:caseActionType/:caseAction/:caseActionId'
+],
+caseActionDataMiddleware,
+getFormForCase,
+fileMiddleware.any(),
+processMiddleware,
+validationMiddleware,
+caseApiResponseMiddleware
+);
+
 router.post(['/:caseId/stage/:stageId/somu/:somuTypeUuid/:somuType/:somuCaseType/:action',  '/:caseId/stage/:stageId/somu/:somuTypeUuid/:somuType/:somuCaseType/item/:somuItemUuid/:action'],
     getFormForCase,
     fileMiddleware.any(),
@@ -49,7 +63,6 @@ router.post(['/:caseId/stage/:stageId', '/:caseId/stage/:stageId/allocate'],
     validationMiddleware,
     stageApiResponseMiddleware
 );
-
 router.post('/:caseId/note',
     fileMiddleware.any(),
     createCaseNote,
@@ -73,6 +86,8 @@ router.put('/:caseId/note/:noteId',
 );
 
 router.get('/:caseId/summary', caseSummaryMiddleware, caseSummaryApiResponseMiddleware);
+
+router.get('/:caseId/actions', caseActionDataMiddleware, caseActionApiResponseMiddleware);
 
 router.get('/:caseId/correspondents', caseCorrespondentsMiddleware, caseCorrespondentsApiResponseMiddleware);
 

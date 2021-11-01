@@ -129,35 +129,6 @@ const StageSummary = () => {
                             </tbody>
                         </table>
                     }
-
-                    {summary.case && summary.somuItems.map( type =>
-                        (
-                            <>
-                                <h2 className='govuk-heading-m'>{type.summaryLabel}</h2>
-
-                                {type.items.map((item, index) =>
-                                    (<table className='govuk-table margin-left--small' key={index}>
-                                        <caption className='govuk-table__caption margin-bottom--small'>{item['heading']}</caption>
-                                        <tbody className='govuk-table__body'>
-                                            {
-                                                Object.keys(item)
-                                                    .filter(key => key !== 'heading')
-                                                    .map(key => <>
-                                                        <tr className='govuk-table__row'>
-                                                            <th className='govuk-table__header padding-left--small govuk-!-width-one-third'>
-                                                                {key}
-                                                            </th>
-                                                            <td className='govuk-table__cell'>{item[key]}</td>
-                                                        </tr>
-                                                    </>)
-                                            }
-                                        </tbody>
-                                    </table>)
-                                )}
-
-                            </>
-                        )
-                    )}
                 </Fragment>
             }
         </Fragment>

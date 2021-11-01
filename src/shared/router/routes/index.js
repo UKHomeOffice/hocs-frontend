@@ -96,10 +96,22 @@ const routes = [
         hasSidebar: false
     },
     {
-        path: '/case/:caseId/stage/:stageId/entity/actions_tab/:action/',
+        path: '/case/:caseId/stage/:stageId/caseAction/:caseActionType/:caseAction',
         exact: true,
         component: CasePage,
         hasSidebar: false
+    },
+    {
+        path: '/case/:caseId/caseAction/:caseActionType/:caseAction',
+        exact: true,
+        component: CasePage,
+        hasSidebar: false
+    },
+    {
+        path: '/case/:caseId/stage/:stageId/caseAction/:caseActionType/:caseAction/:caseActionId',
+        exact: true,
+        component: CasePage,
+        hasSidebar: true
     },
     {
         path: '/case/:caseId/stage/:stageId/entity/:entity/:action/',

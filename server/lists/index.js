@@ -17,6 +17,7 @@ const documentTagsAdapter = require('./adapters/documentTags');
 const countrySortAdapter = require('./adapters/countrySort');
 const caseNoteAdapter = require('./adapters/case-notes');
 const caseSummaryAdapter = require('./adapters/case-summary');
+const caseActionDataAdapter = require('./adapters/case-action-data');
 const caseViewAllStagesAdapter = require('./adapters/case-view-all-stages');
 const caseViewReadOnlyAdapter = require('./adapters/case-view-read-only');
 const {
@@ -537,6 +538,11 @@ module.exports = {
             endpoint: '/case/${caseId}/summary',
             adapter: caseSummaryAdapter
         },
+        CASE_ACTIONS: {
+            client: 'CASEWORK',
+            endpoint: '/case/${caseId}/actions',
+            adapter: caseActionDataAdapter
+        },
         CASE_VIEW_ALL_STAGES: {
             client: 'WORKFLOW',
             endpoint: '/case/${caseId}',
@@ -624,6 +630,7 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: usersAdapter
         },
+
     },
     clients: {
         CASEWORK: caseworkService,

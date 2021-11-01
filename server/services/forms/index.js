@@ -5,7 +5,7 @@ const {
     ADD_TEMPLATE, ADD_STANDARD_LINE, IS_MEMBER, ADD_MEMBER, SELECT_MEMBER, ADD_CORRESPONDENT, UPDATE_CORRESPONDENT,
     REMOVE_CORRESPONDENT, ADD_TOPIC, REMOVE_TOPIC, CREATE_CASE, CREATE_AND_ALLOCATE_CASE, BULK_CREATE_CASE,
     ADD_DOCUMENT, REMOVE_DOCUMENT, MANAGE_DOCUMENTS, MANAGE_PEOPLE, ADD_CONTRIBUTION, ADD_ADDITIONAL_CONTRIBUTION,
-    EDIT_CONTRIBUTION, APPLY_CASE_DEADLINE_EXTENSION, CONFIRMATION_SUMMARY, ADD_CASE_APPEAL, EDIT_CASE_APPEAL, MANAGE_CASE_APPEALS,
+    EDIT_CONTRIBUTION, APPLY_CASE_DEADLINE_EXTENSION, CONFIRMATION_SUMMARY, ADD_CASE_APPEAL, EDIT_CASE_APPEAL,
     ADD_APPROVAL_REQUEST, EDIT_APPROVAL_REQUEST
 } = require('../actions/types');
 
@@ -219,14 +219,32 @@ const formDefinitions = {
         },
     },
     CASE: {
-        ACTIONS_TAB: {
-            EXTEND_FOI_DEADLINE: {
-                builder: formRepository.confirmExtendDeadlineFoi,
-                action: APPLY_CASE_DEADLINE_EXTENSION,
-                next: {
-                    action: CONFIRMATION_SUMMARY
+        CASE_ACTION: {
+            EXTENSION: {
+                ADD: {
+                    builder: formRepository.confirmExtendDeadlineFoi,
+                    action: APPLY_CASE_DEADLINE_EXTENSION,
+                    next: {
+                        action: CONFIRMATION_SUMMARY
+                    }
                 }
-            }
+            },
+            APPEAL: {
+                ADD: {
+                    builder: formRepository.recordAppealFoi,
+                    action: ADD_CASE_APPEAL,
+                    next: {
+                        action: CONFIRMATION_SUMMARY
+                    }
+                },
+                UPDATE: {
+                    builder: formRepository.updateAppealFoi,
+                    action: EDIT_CASE_APPEAL,
+                    next: {
+                        action: CONFIRMATION_SUMMARY
+                    }
+                }
+            },
         },
         DOCUMENT: {
             ADD: {
@@ -295,28 +313,6 @@ const formDefinitions = {
             DETAILS: {
                 builder: formRepository.addMemberDetails,
                 action: ADD_MEMBER
-            }
-        },
-        APPEAL: {
-            FOI: {
-                ADD_APPEAL: {
-                    builder: formRepository.recordAppealFoi,
-                    action: ADD_CASE_APPEAL,
-                    next: {
-                        action: MANAGE_CASE_APPEALS
-                    }
-                },
-                EDIT_APPEAL: {
-                    builder: formRepository.updateAppealFoi,
-                    action: EDIT_CASE_APPEAL,
-                    next: {
-                        action: MANAGE_CASE_APPEALS
-                    }
-                },
-                MANAGE_APPEALS: {
-                    builder: formRepository.manageAppealsFoi,
-                    action: MANAGE_CASE_APPEALS
-                }
             }
         },
         CONTRIBUTIONS: {
@@ -547,10 +543,10 @@ module.exports = {
         }
     },
     getFormForCase: async (options) => {
-        const { action } = options;
+        const { action, caseActionType } = options;
 
-        if (action) {
-            const { entity, somuCaseType, somuType, caseType } = options;
+        if (action || caseActionType) {
+            const { entity, somuCaseType, somuType, caseType, caseAction } = options;
             let formDefinition = undefined;
             if (entity && caseType) {
                 formDefinition = formDefinitions['CASE'][entity.toUpperCase()][caseType][action.toUpperCase()];
@@ -559,6 +555,8 @@ module.exports = {
             } else if (somuType && somuCaseType) {
                 formDefinition = formDefinitions['CASE'][somuType.toUpperCase()][somuCaseType.toUpperCase()][action.toUpperCase()];
                 options.customConfig = formDefinition.customConfig;
+            } else if (caseAction) {
+                formDefinition = formDefinitions['CASE']['CASE_ACTION'][caseActionType.toUpperCase()][caseAction.toUpperCase()];
             }
 
             if (formDefinition) {

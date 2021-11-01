@@ -21,6 +21,19 @@ export function updateCaseSummary(data) {
     };
 }
 
+export function updateCaseActionData(data) {
+    return {
+        type: types.UPDATE_CASE_ACTION_DATA,
+        payload: data
+    };
+}
+
+export function unSetCaseActionData() {
+    return {
+        type: types.UNSET_CASE_ACTION_DATA,
+        payload: null
+    };
+}
 
 export function updateFormErrors(data) {
     return {

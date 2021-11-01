@@ -43,24 +43,7 @@ const config = {
             uuid: '__previousCaseUuid__',
             reference: '__previousCaseReference__',
             stageUuid: '__previousCaseStage__'
-        },
-        somuItems: [
-            {
-                summaryLabel: 'Test somu type',
-                items: [
-                    {
-                        'Label 1': 'Label 1',
-                        'heading': 'Test Item 1',
-                        'Label 2': 'Value 2'
-                    },
-                    {
-                        'heading': 'Test Item 2',
-                        'Label 1': 'Label 1',
-                        'Label 2': 'Value 2'
-                    }
-                ]
-            }
-        ]
+        }
     }
 };
 

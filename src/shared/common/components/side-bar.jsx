@@ -6,7 +6,7 @@ import DocumentPane from './document-pane.jsx';
 import CaseNotes from './case-notes.jsx';
 import StageSummary from './stage-summary.jsx';
 import People from './people.jsx';
-import FoiActions from './foi-actions.jsx';
+import CaseActions from './case-actions.jsx';
 import getTabsByShortCode from '../../helpers/case-type-sidebar-tabs-flags';
 
 class SideBar extends Component {
@@ -62,7 +62,7 @@ class SideBar extends Component {
                     {this.isActive('SUMMARY') && <StageSummary />}
                     {this.isActive('TIMELINE') && <CaseNotes />}
                     {this.isActive('PEOPLE') && <People />}
-                    {this.isActive('FOI_ACTIONS') && <FoiActions />}
+                    {this.isActive('FOI_ACTIONS') && <CaseActions />}
                 </div>
             </Fragment>
         );
