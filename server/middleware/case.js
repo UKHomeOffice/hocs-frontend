@@ -2,6 +2,7 @@ const actionService = require('../services/action');
 const { caseworkService } = require('../clients');
 const User = require('../models/user');
 const { formatDate } = require('../libs/dateHelpers');
+const { logger } = require('../libs/logger');
 
 async function caseResponseMiddleware(req, res, next) {
     const { form, user } = req;
@@ -103,12 +104,10 @@ async function caseActionDataMiddleware(req, res, next) {
         if (actionData && actionData.caseTypeActionData) {
             const actionTypeUUIDs = actionData.caseTypeActionData.map(type => type.uuid);
             uniqueActionTypeIds = [ ...new Set(actionTypeUUIDs) ];
-        }
-
-
-        if (actionData && actionData.caseTypeActionData) {
             const actionTypes = actionData.caseTypeActionData.map(type => type.actionType);
             uniqueActionTypes = [ ...new Set(actionTypes) ];
+        } else {
+            logger.warn(`No case action data for caseId: ${req.params.caseId}`);
         }
 
         let actionDataArray = [];
