@@ -21,7 +21,6 @@ function hasCommaSeparatedValue(data, conditionArgs) {
 }
 
 function hasAllValues(data, conditionArgs) {
-    console.log('test');
     for(const conditionArgPair in conditionArgs) {
         if (!(data && data[conditionArgs[conditionArgPair].conditionPropertyName]
                 && data[conditionArgs[conditionArgPair].conditionPropertyName]

@@ -90,9 +90,6 @@ function isComponentVisible(config, data) {
         isVisible = false;
 
         for (const condition of visibilityConditions) {
-            console.log('condition.function: ' + condition.function);
-            console.log('Object.prototype.hasOwnProperty.call(showConditionFunctions, condition.function)' +
-                Object.prototype.hasOwnProperty.call(showConditionFunctions, condition.function));
 
             if (condition.function && Object.prototype.hasOwnProperty.call(showConditionFunctions, condition.function)) {
                 if (condition.conditionArgs) {
