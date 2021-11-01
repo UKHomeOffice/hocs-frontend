@@ -57,7 +57,7 @@ const getActiveStages = async (deadlines, fromStaticList) => await Promise.all(d
     .map(async ({ stage: stageId, assignedToUserUUID: userId, assignedToTeamUUID: teamId }) => ({
         stage: await fromStaticList('S_STAGETYPES', stageId),
         assignedUser: await fromStaticList('S_USERS', userId),
-        assignedTeam: await fromStaticList('S_TEAMS', teamId, true)
+        assignedTeam: await fromStaticList('S_TEAMS', teamId)
     })));
 
 const getPrimaryTopic = (topic) => topic ? topic.label : null;
