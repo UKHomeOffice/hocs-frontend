@@ -71,8 +71,10 @@ module.exports = async options => {
                 .withProp('visibilityConditions', [
                     {
                         'function': 'hasCommaSeparatedValue',
-                        'conditionPropertyName': 'caseTypeActionUuid',
-                        'conditionPropertyValue': visibilityConditionsValueString
+                        'conditionArgs': [{
+                            'conditionPropertyName': 'caseTypeActionUuid',
+                            'conditionPropertyValue': visibilityConditionsValueString
+                        }]
                     }
                 ])
                 .build()
@@ -85,8 +87,10 @@ module.exports = async options => {
                 .withProp('visibilityConditions', [
                     {
                         'function': 'hasCommaSeparatedValue',
-                        'conditionPropertyName': 'caseTypeActionUuid',
-                        'conditionPropertyValue': visibilityConditionsValueString
+                        'conditionArgs': [{
+                            'conditionPropertyName': 'caseTypeActionUuid',
+                            'conditionPropertyValue': visibilityConditionsValueString
+                        }]
                     }
                 ])
                 .build()
