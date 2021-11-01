@@ -3,11 +3,21 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { ApplicationConsumer } from '../../../contexts/application.jsx';
 
-const CONTRIBUTION_STATUS = {
+const REQUEST_STATUS = {
     COMPLETE: 'COMPLETE',
     CANCELLED: 'CANCELLED',
     OVERDUE: 'OVERDUE',
     DUE: 'DUE'
+};
+
+const TABLE_TYPE = {
+    CONTRIBUTION: 'contribution',
+    APPROVAL: 'approval'
+};
+
+const STATUS_OPTION = {
+    CANCELLED: ['contributionCancelled', 'approvalRequestCancelled'],
+    COMPLETE: ['contributionReceived', 'approvalRequestResponseReceived'],
 };
 
 class SomuTableRenderer {
@@ -40,61 +50,101 @@ class SomuTableRenderer {
         return date;
     }
 
-    getContributionStatus({ contributionDueDate, contributionStatus }) {
-        if (contributionStatus === 'contributionCancelled') {
-            return CONTRIBUTION_STATUS.CANCELLED;
-        } else if (contributionStatus === 'contributionReceived') {
-            return CONTRIBUTION_STATUS.COMPLETE;
-        } else if (this.addDays(contributionDueDate, 1) < Date.now()) {
-            return CONTRIBUTION_STATUS.OVERDUE;
+    getRequestStatus(dueDate, status) {
+        if (STATUS_OPTION.CANCELLED.includes(status)) {
+            return REQUEST_STATUS.CANCELLED;
+        } else if (STATUS_OPTION.COMPLETE.includes(status)) {
+            return REQUEST_STATUS.COMPLETE;
+        } else if (this.addDays(dueDate, 1) < Date.now()) {
+            return REQUEST_STATUS.OVERDUE;
         } else {
-            return CONTRIBUTION_STATUS.DUE;
+            return REQUEST_STATUS.DUE;
         }
     }
 
-    renderMpamContribution(somuItem) {
+    composeTitle(choices, titleBusinessLabelData) {
+        const { businessArea, businessUnit } = titleBusinessLabelData;
+
+        if (businessArea && businessUnit) {
+            return `${businessArea} - ${this.loadValue(businessUnit, choices)}`;
+        }
+
+        if (businessArea && !businessUnit) {
+            return `${businessArea}`;
+        }
+        return `${this.loadValue(businessUnit, choices)}`;
+    }
+
+    renderContributionTable(somuItem) {
         const { choices } = this.state;
-        const title = `${somuItem.contributionBusinessArea} - ${this.loadValue(somuItem.contributionBusinessUnit, choices)}`;
-        const contributionStatus = this.getContributionStatus(somuItem);
-        return this.renderContribution(contributionStatus, title, somuItem);
+        const { contributionStatus, contributionBusinessArea, contributionBusinessUnit, contributionDueDate } = somuItem;
+
+        const title = this.composeTitle(choices, { businessArea: contributionBusinessArea, businessUnit: contributionBusinessUnit } );
+        const contributionStatusEnum = this.getRequestStatus(contributionDueDate, contributionStatus);
+        return this.renderTable(contributionStatusEnum, title, contributionDueDate, TABLE_TYPE.CONTRIBUTION);
     }
 
-    renderCompContribution(somuItem) {
-        const title = `${somuItem.contributionBusinessArea}`;
-        const contributionStatus = this.getContributionStatus(somuItem);
-        return this.renderContribution(contributionStatus, title, somuItem);
+    renderApprovalTable(somuItem) {
+        const { choices } = this.state;
+        const { approvalRequestStatus, approvalRequestForBusinessUnit, approvalRequestDueDate, approvalRequestDecision } = somuItem;
+        const title = this.composeTitle(choices, { businessUnit: approvalRequestForBusinessUnit });
+        const approvalRequestResponseStatusEnum = this.getRequestStatus(approvalRequestDueDate, approvalRequestStatus);
+        return this.renderTable(approvalRequestResponseStatusEnum, title, approvalRequestDueDate, TABLE_TYPE.APPROVAL, approvalRequestDecision);
     }
 
-    renderContribution(contributionStatus, title, somuItem) {
+    renderTable(status, title, dueDate, tableType, decision = undefined) {
         return (<>
             <td className='govuk-table__cell'>
                 <label className={'govuk-label'}
-                    aria-label={contributionStatus === CONTRIBUTION_STATUS.CANCELLED ? `Cancelled Contribution: ${title}` : title}
-                    title={contributionStatus === CONTRIBUTION_STATUS.CANCELLED ? `Cancelled Contribution: ${title}` : title}>
+                    aria-label={status === REQUEST_STATUS.CANCELLED ? `Cancelled ${tableType} request: ${title}` : title}
+                    title={status === REQUEST_STATUS.CANCELLED ? `Cancelled ${tableType} request: ${title}` : title}>
                     {title}
                 </label>
             </td>
-            {this.renderStatusColumn(contributionStatus, somuItem)}
+            {this.renderStatusColumn(status, dueDate, decision)}
         </>);
     }
 
-    renderStatusColumn(status, { contributionDueDate }) {
+    renderAppealTable(somuItem) {
+        const { choices } = this.state;
+        const title = `${this.loadValue(somuItem.appealType, choices)}`;
+
+        return (<>
+            <td className='govuk-table__cell'>
+                <label className={'govuk-label'}
+                    aria-label={title}
+                    title={title}>
+                    {title}
+                </label>
+            </td>
+            <td className='govuk-table__cell'>
+                <label className={'govuk-label'}
+                    aria-label={somuItem.appealStatus === 'appealComplete' ? 'Complete': 'Pending'}
+                    title={somuItem.appealStatus === 'appealComplete' ? 'Complete': 'Pending'}>
+                    {somuItem.appealStatus === 'appealComplete' ? 'Complete': 'Pending'}
+                </label>
+            </td>
+        </>
+        );
+    }
+
+    renderStatusColumn(status, requestDueDate, decision = undefined) {
         let className = '';
         let title = '';
 
         switch (status) {
-            case CONTRIBUTION_STATUS.COMPLETE:
-                title = 'Complete';
+            case REQUEST_STATUS.COMPLETE:
+                title = !decision ? 'Complete' : 'Complete - ' + decision;
                 break;
-            case CONTRIBUTION_STATUS.OVERDUE:
+            case REQUEST_STATUS.OVERDUE:
                 className = 'date-warning';
-                title = `Overdue ${this.formatDate(contributionDueDate)}`;
+                title = `Overdue ${this.formatDate(requestDueDate)}`;
                 break;
-            case CONTRIBUTION_STATUS.DUE: {
-                title = `Due ${this.formatDate(contributionDueDate)}`;
+            case REQUEST_STATUS.DUE: {
+                title = `Due ${this.formatDate(requestDueDate)}`;
                 break;
             }
-            case CONTRIBUTION_STATUS.CANCELLED: {
+            case REQUEST_STATUS.CANCELLED: {
                 title = 'Cancelled';
                 break;
             }
@@ -114,10 +164,18 @@ class SomuTableRenderer {
 
         switch (renderer) {
             case 'MpamTable': {
-                return this.renderMpamContribution(somuItem.data);
+                return this.renderContributionTable(somuItem.data);
             }
             case 'CompTable': {
-                return this.renderCompContribution(somuItem.data);
+                return this.renderContributionTable(somuItem.data);
+            }
+            case 'FoiTable': {
+                return this.renderContributionTable(somuItem.data);
+            }
+            case 'ApprovalRequestTable':
+                return this.renderApprovalTable(somuItem.data);
+            case 'FoiAppealsTable': {
+                return this.renderAppealTable(somuItem.data);
             }
         }
 
@@ -195,7 +253,7 @@ class SomuList extends Component {
 
                     <table className='govuk-table'>
                         <tbody className='govuk-table__body'>
-                            {somuItems && Array.isArray(somuItems) &&somuItems.map((somuItem, i) => {
+                            {somuItems && Array.isArray(somuItems) && somuItems.map((somuItem, i) => {
                                 return (
                                     <tr className='govuk-table__row' key={i}>
                                         {

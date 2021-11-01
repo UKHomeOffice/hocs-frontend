@@ -1,8 +1,12 @@
 const formRepository = require('./schemas/index');
+const formDecorator = require('./schemas/decorators/form-decorator');
+
 const {
     ADD_TEMPLATE, ADD_STANDARD_LINE, IS_MEMBER, ADD_MEMBER, SELECT_MEMBER, ADD_CORRESPONDENT, UPDATE_CORRESPONDENT,
     REMOVE_CORRESPONDENT, ADD_TOPIC, REMOVE_TOPIC, CREATE_CASE, CREATE_AND_ALLOCATE_CASE, BULK_CREATE_CASE,
-    ADD_DOCUMENT, REMOVE_DOCUMENT, MANAGE_DOCUMENTS, MANAGE_PEOPLE, ADD_CONTRIBUTION, ADD_ADDITIONAL_CONTRIBUTION, EDIT_CONTRIBUTION
+    ADD_DOCUMENT, REMOVE_DOCUMENT, MANAGE_DOCUMENTS, MANAGE_PEOPLE, ADD_CONTRIBUTION, ADD_ADDITIONAL_CONTRIBUTION,
+    EDIT_CONTRIBUTION, APPLY_CASE_DEADLINE_EXTENSION, CONFIRMATION_SUMMARY, ADD_CASE_APPEAL, EDIT_CASE_APPEAL,
+    ADD_APPROVAL_REQUEST, EDIT_APPROVAL_REQUEST
 } = require('../actions/types');
 
 const mpamContributionsRequest = {
@@ -30,6 +34,21 @@ const exgratiaBusinessContributionsRequest = {
     showContributionAmount: true
 };
 
+const smcComplainantContributionsRequest = {
+    showBusinessUnits: false,
+    primaryChoiceLabel: 'Contributions Type',
+    primaryChoiceList: 'S_COMP_CONTRIB_TYPE',
+    showContributionAmount: false
+};
+
+const smcBusinessContributionsRequest = {
+    showBusinessUnits: false,
+    primaryChoiceLabel: 'Business Area',
+    primaryChoiceList: 'S_COMP_CONTRIB_BUS_AREA',
+    showContributionAmount: false
+};
+
+
 const formDefinitions = {
     ACTION: {
         CREATE: {
@@ -52,6 +71,20 @@ const formDefinitions = {
                 },
                 COMP2: {
                     builder: formRepository.escalateCase,
+                    action: CREATE_CASE,
+                    next: {
+                        action: 'CONFIRMATION_SUMMARY'
+                    }
+                },
+                SMC: {
+                    builder: formRepository.addDocument,
+                    action: CREATE_CASE,
+                    next: {
+                        action: 'CONFIRMATION_SUMMARY'
+                    }
+                },
+                IEDET: {
+                    builder: formRepository.addDocument,
                     action: CREATE_CASE,
                     next: {
                         action: 'CONFIRMATION_SUMMARY'
@@ -95,6 +128,13 @@ const formDefinitions = {
                 WCS: {
                     builder: formRepository.confirmCreateWcs,
                     action: CREATE_AND_ALLOCATE_CASE
+                },
+                FOI: {
+                    builder: formRepository.addDocument,
+                    action: CREATE_CASE,
+                    next: {
+                        action: 'CONFIRMATION_SUMMARY'
+                    }
                 }
             }
         },
@@ -179,6 +219,33 @@ const formDefinitions = {
         },
     },
     CASE: {
+        CASE_ACTION: {
+            EXTENSION: {
+                ADD: {
+                    builder: formRepository.confirmExtendDeadlineFoi,
+                    action: APPLY_CASE_DEADLINE_EXTENSION,
+                    next: {
+                        action: CONFIRMATION_SUMMARY
+                    }
+                }
+            },
+            APPEAL: {
+                ADD: {
+                    builder: formRepository.recordAppealFoi,
+                    action: ADD_CASE_APPEAL,
+                    next: {
+                        action: CONFIRMATION_SUMMARY
+                    }
+                },
+                UPDATE: {
+                    builder: formRepository.updateAppealFoi,
+                    action: EDIT_CASE_APPEAL,
+                    next: {
+                        action: CONFIRMATION_SUMMARY
+                    }
+                }
+            },
+        },
         DOCUMENT: {
             ADD: {
                 builder: formRepository.addDocumentNew,
@@ -229,6 +296,13 @@ const formDefinitions = {
             REMOVE: {
                 builder: formRepository.removeCorrespondent,
                 action: REMOVE_CORRESPONDENT
+            },
+            // overrides for specific case types
+            FOI: {
+                UPDATE: {
+                    builder: formRepository.updateCorrespondentDetailsFoi,
+                    action: UPDATE_CORRESPONDENT
+                }
             }
         },
         MEMBER: {
@@ -267,7 +341,43 @@ const formDefinitions = {
                     action: EDIT_CONTRIBUTION,
                     customConfig: mpamContributionsRequest
                 }
-            }
+            },
+            FOI: {
+                ADDREQUEST: {
+                    builder: formRepository.contributionRequestFoi,
+                    action: ADD_CONTRIBUTION
+                },
+                EDITREQUEST: {
+                    builder: formRepository.contributionRequestFoi,
+                    action: EDIT_CONTRIBUTION
+                },
+                VIEWREQUEST: {
+                    builder: formRepository.contributionRequestFoi,
+                },
+                EDIT: {
+                    builder: formRepository.contributionFulfillmentFoi,
+                    action: EDIT_CONTRIBUTION
+                }
+            },
+        },
+        APPROVAL_REQS: {
+            FOI: {
+                ADDREQUEST: {
+                    builder: formRepository.approvalRequestFoi,
+                    action: ADD_APPROVAL_REQUEST
+                },
+                EDITREQUEST: {
+                    builder: formRepository.approvalRequestFoi,
+                    action: EDIT_APPROVAL_REQUEST
+                },
+                VIEWREQUEST: {
+                    builder: formRepository.approvalRequestFoi,
+                },
+                EDIT: {
+                    builder: formRepository.approvalFulfillmentFoi,
+                    action: EDIT_APPROVAL_REQUEST
+                }
+            },
         },
         COMPLAINANT_CONTRIB: {
             COMP: {
@@ -336,6 +446,69 @@ const formDefinitions = {
                     action: EDIT_CONTRIBUTION,
                     customConfig: exgratiaBusinessContributionsRequest
                 }
+            },
+            FOI: {
+                ADDREQUEST: {
+                    builder: formRepository.contributionRequestFoi,
+                    action: ADD_CONTRIBUTION
+                },
+                EDITREQUEST: {
+                    builder: formRepository.contributionRequestFoi,
+                    action: EDIT_CONTRIBUTION
+                },
+                VIEWREQUEST: {
+                    builder: formRepository.contributionRequestFoi,
+                },
+                EDIT: {
+                    builder: formRepository.contributionFulfillmentFoi,
+                    action: EDIT_CONTRIBUTION
+                }
+            }
+        },
+        SMC_COMP_CONTRIB: {
+            SMC: {
+                ADDREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    action: ADD_CONTRIBUTION,
+                    customConfig: smcComplainantContributionsRequest
+                },
+                EDITREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    action: EDIT_CONTRIBUTION,
+                    customConfig: smcComplainantContributionsRequest
+                },
+                VIEWREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    customConfig: smcComplainantContributionsRequest
+                },
+                EDIT: {
+                    builder: formRepository.contributionFulfillment,
+                    action: EDIT_CONTRIBUTION,
+                    customConfig: smcComplainantContributionsRequest
+                }
+            }
+        },
+        SMC_BUS_CONTRIB: {
+            SMC: {
+                ADDREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    action: ADD_CONTRIBUTION,
+                    customConfig: smcBusinessContributionsRequest
+                },
+                EDITREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    action: EDIT_CONTRIBUTION,
+                    customConfig: smcBusinessContributionsRequest
+                },
+                VIEWREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    customConfig: smcBusinessContributionsRequest
+                },
+                EDIT: {
+                    builder: formRepository.contributionFulfillment,
+                    action: EDIT_CONTRIBUTION,
+                    customConfig: smcBusinessContributionsRequest
+                }
             }
         }
     }
@@ -346,12 +519,16 @@ module.exports = {
         if (context && workflow && action) {
             try {
                 let formDefinition;
+                let formEnrichmentKeys = { context, workflow, action, entity };
                 if (action === 'DOCUMENT' || action == 'BULK_CREATE_CASE') {
                     formDefinition = formDefinitions[context.toUpperCase()][workflow.toUpperCase()][action.toUpperCase()][entity.toUpperCase()];
                 } else {
                     formDefinition = formDefinitions[context.toUpperCase()][workflow.toUpperCase()][action.toUpperCase()];
                 }
-                const form = await formDefinition.builder.call(this, { data });
+
+                let form = await formDefinition.builder.call(this, { data });
+                form = formDecorator.call(this, formEnrichmentKeys, form);
+
                 return {
                     schema: form.schema,
                     next: formDefinition.next,
@@ -366,21 +543,25 @@ module.exports = {
         }
     },
     getFormForCase: async (options) => {
-        const { action } = options;
+        const { action, caseActionType } = options;
 
-        if (action) {
-            const { entity, somuCaseType, somuType } = options;
+        if (action || caseActionType) {
+            const { entity, somuCaseType, somuType, caseType, caseAction } = options;
             let formDefinition = undefined;
-            if (entity) {
+            if (entity && caseType) {
+                formDefinition = formDefinitions['CASE'][entity.toUpperCase()][caseType][action.toUpperCase()];
+            } else if (entity) {
                 formDefinition = formDefinitions['CASE'][entity.toUpperCase()][action.toUpperCase()];
             } else if (somuType && somuCaseType) {
                 formDefinition = formDefinitions['CASE'][somuType.toUpperCase()][somuCaseType.toUpperCase()][action.toUpperCase()];
                 options.customConfig = formDefinition.customConfig;
+            } else if (caseAction) {
+                formDefinition = formDefinitions['CASE']['CASE_ACTION'][caseActionType.toUpperCase()][caseAction.toUpperCase()];
             }
 
             if (formDefinition) {
                 const form = await formDefinition.builder.call(this, options);
-                return { schema: form.schema, action: formDefinition.action, data: form.data };
+                return { schema: form.schema, action: formDefinition.action, data: form.data, next: formDefinition.next, };
             }
         } else {
             return undefined;

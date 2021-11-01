@@ -153,7 +153,7 @@ const getCorrespondentsNameByType = (correspondents, types) =>
         .join(', ');
 
 const bindDisplayElements = fromStaticList => async (stage) => {
-    stage.assignedTeamDisplay = await fromStaticList('S_ALL_TEAMS', stage.teamUUID);
+    stage.assignedTeamDisplay = await fromStaticList('S_TEAMS', stage.teamUUID);
     stage.caseTypeDisplayFull = await fromStaticList('S_CASETYPES', stage.caseType);
 
     if (stage.assignedTopic) {
@@ -168,41 +168,27 @@ const bindDisplayElements = fromStaticList => async (stage) => {
         stage.assignedUserDisplay = await fromStaticList('S_USERS', stage.userUUID) || 'Allocated';
     }
     if (stage.data && stage.data.CampaignType) {
-        stage.campaignDisplay = await fromStaticList('S_MPAM_CAMPAIGNS', stage.data.CampaignType, true) || stage.data.CampaignType;
+        stage.campaignDisplay = await fromStaticList('S_MPAM_CAMPAIGNS', stage.data.CampaignType) || stage.data.CampaignType;
     }
     if (stage.data && stage.data.MinSignOffTeam) {
-        stage.MinSignOffTeamDisplay = await fromStaticList('S_MPAM_MIN_SIGN_OFF_TEAMS', stage.data.MinSignOffTeam, true) || stage.data.MinSignOffTeam;
+        stage.MinSignOffTeamDisplay = await fromStaticList('S_MPAM_MIN_SIGN_OFF_TEAMS', stage.data.MinSignOffTeam) || stage.data.MinSignOffTeam;
     }
     stage.deadlineDisplay = formatDate(stage.deadline);
 
     stage.stageTypeWithDueDateDisplay = stage.stageTypeDisplay;
 
-    const contributionReceivedStages = [
-        'MPAM_TRIAGE',
-        'MPAM_TRIAGE_ESCALATE',
-        'MPAM_DRAFT',
-        'MPAM_DRAFT_ESCALATE'
-    ];
-
-    const contributionRequestedStages = [
-        'MPAM_TRIAGE_REQUESTED_CONTRIBUTION',
-        'MPAM_TRIAGE_ESCALATED_REQUESTED_CONTRIBUTION',
-        'MPAM_DRAFT_REQUESTED_CONTRIBUTION',
-        'MPAM_DRAFT_ESCALATED_REQUESTED_CONTRIBUTION'
-    ];
-
-    if (contributionRequestedStages.includes(stage.stageType) && stage.dueContribution) {
-        stage.stageTypeWithDueDateDisplay = `${stage.stageTypeDisplay} due: ${formatDate(stage.dueContribution)}`;
-    } else if (contributionReceivedStages.includes(stage.stageType) && stage.contributions === 'Received') {
-        stage.stageTypeWithDueDateDisplay = `${stage.stageTypeDisplay} (Contributions Received)`;
-    } else if (stage.data && stage.data.DueDate) {
-        stage.stageTypeWithDueDateDisplay = `${stage.stageTypeDisplay} due ${formatDate(stage.data.DueDate)}`;
-    } else {
-        stage.stageTypeWithDueDateDisplay = stage.stageTypeDisplay;
+    stage.stageTypeWithDueDateDisplay = contributionDueDateDisplay(stage);
+    if (stage.stageTypeWithDueDateDisplay === undefined) {
+        if (stage.data && stage.data.DueDate) {
+            stage.stageTypeWithDueDateDisplay = `${stage.stageTypeDisplay} due ${formatDate(stage.data.DueDate)}`;
+        } else {
+            stage.stageTypeWithDueDateDisplay = stage.stageTypeDisplay;
+        }
     }
 
     stage.primaryCorrespondentAndRefDisplay = {};
     stage.mpWithOwnerDisplay = JSON.parse('{"mp":"","owner":""}');
+    stage.FOIRequesterDisplay = {};
 
     if (stage.correspondents && stage.correspondents.correspondents) {
         stage.memberCorrespondentDisplay = getCorrespondentsNameByType(stage.correspondents, ['MEMBER']);
@@ -214,6 +200,9 @@ const bindDisplayElements = fromStaticList => async (stage) => {
         if (primaryCorrespondent) {
             stage.primaryCorrespondent = primaryCorrespondent;
             stage.primaryCorrespondentAndRefDisplay.primaryCorrespondentFullName = primaryCorrespondent.fullname;
+            if (stage.caseType === 'FOI') {
+                stage.FOIRequesterDisplay = primaryCorrespondent.fullname;
+            }
         }
 
         stage.mpWithOwnerDisplay.mp = stage.memberCorrespondentDisplay;
@@ -223,7 +212,39 @@ const bindDisplayElements = fromStaticList => async (stage) => {
 
     stage.primaryCorrespondentAndRefDisplay.caseReference = stage.caseReference;
 
+    if(stage.dueContribution){
+        stage.nextContributionDueDate = (stage.contributions === 'Overdue') ? 'Overdue' : formatDate(stage.dueContribution);
+    }
+
     return stage;
+};
+
+const contributionDueDateDisplay = ({ stageType, stageTypeDisplay, dueContribution, contributions }) => {
+    const contributionReceivedStages = [
+        'MPAM_TRIAGE',
+        'MPAM_TRIAGE_ESCALATE',
+        'MPAM_DRAFT',
+        'MPAM_DRAFT_ESCALATE'
+    ];
+
+    const contributionRequestedStages = [
+        'MPAM_TRIAGE_REQUESTED_CONTRIBUTION',
+        'MPAM_TRIAGE_ESCALATED_REQUESTED_CONTRIBUTION',
+        'MPAM_DRAFT_REQUESTED_CONTRIBUTION',
+        'MPAM_DRAFT_ESCALATED_REQUESTED_CONTRIBUTION',
+        'FOI_APPROVAL',
+        'FOI_DRAFT'
+    ];
+
+    const receivedStatus = ['Received', 'Cancelled'];
+
+    if (contributionRequestedStages.includes(stageType) && dueContribution) {
+        return `${stageTypeDisplay} due: ${formatDate(dueContribution)}`;
+    } else if (contributionReceivedStages.includes(stageType) && receivedStatus.includes(contributions)) {
+        return `${stageTypeDisplay} (Contributions Received)`;
+    }
+
+    return undefined;
 };
 
 class Card {
@@ -325,7 +346,7 @@ const teamAdapter = async (data, { fromStaticList, logger, teamId, configuration
             return cards;
         }, [])
         .sort(byLabel);
-    const teamDisplayName = await fromStaticList('S_ALL_TEAMS', teamId);
+    const teamDisplayName = await fromStaticList('S_TEAMS', teamId);
 
     logger.debug('REQUEST_TEAM_WORKSTACK', { team: teamDisplayName, workflows: workflowCards.length, rows: workstackData.length });
     return {
@@ -410,6 +431,6 @@ module.exports = {
     teamAdapter,
     workflowAdapter,
     stageAdapter,
-    bindDisplayElements,
-    byTag
+    byTag,
+    bindDisplayElements
 };

@@ -2,22 +2,86 @@ const Form = require('../../services/forms/form-builder');
 const { Component } = require('../../services/forms/component-builder');
 const { formatDate, addDays } = require('../../libs/dateHelpers');
 
+const REQUEST_STATUS = {
+    COMPLETE: 'Complete',
+    CANCELLED: 'Cancelled',
+    OVERDUE: 'Overdue',
+    DUE: 'Due'
+};
+
+const STATUS_OPTION = {
+    CANCELLED: ['contributionCancelled', 'approvalRequestCancelled'],
+    COMPLETE: ['contributionReceived', 'approvalRequestResponseReceived'],
+};
+
 const loadValue = async (value, choices, fromStaticList) => {
     const choice = await fromStaticList(choices, value);
     return choice ? Promise.resolve(choice) : Promise.resolve(value);
 };
 
-const getContributionStatusString = ({ contributionDueDate, contributionStatus }) => {
-    if (contributionStatus === 'contributionCancelled') {
-        return 'Cancelled';
-    } else if (contributionStatus === 'contributionReceived') {
-        return 'Complete';
-    } else if (addDays(contributionDueDate, 1) < Date.now()) {
-        return `Overdue ${formatDate(contributionDueDate)}`;
+const getRequestStatus = (dueDate, { status, decision }) => {
+
+    if (STATUS_OPTION.CANCELLED.includes(status)) {
+        return REQUEST_STATUS.CANCELLED;
+
+    } else if (STATUS_OPTION.COMPLETE.includes(status) && decision) {
+        return `${REQUEST_STATUS.COMPLETE} - ${decision}`;
+
+    } else if (STATUS_OPTION.COMPLETE.includes(status)) {
+        return REQUEST_STATUS.COMPLETE;
+
+    } else if (addDays(dueDate, 1) < Date.now()) {
+        return `${REQUEST_STATUS.OVERDUE} ${formatDate(dueDate)}`;
+
     } else {
-        return `Due ${formatDate(contributionDueDate)}`;
+        return `${REQUEST_STATUS.DUE} ${formatDate(dueDate)}`;
     }
 };
+
+async function composeBusinessLabel(choices, { businessArea, businessUnit }, fromStaticList) {
+    const businessUnitLabel = await loadValue(businessUnit, choices, fromStaticList);
+    return businessArea ? `${businessArea} - ${businessUnitLabel}` : businessUnitLabel;
+}
+
+async function getApprovalsStrings(approvalsArray, choices, fromStaticList) {
+    return await Promise.all(approvalsArray.map(async (approval) => {
+        const { approvalRequestStatus, approvalRequestForBusinessUnit, approvalRequestDueDate, approvalRequestDecision } = approval.data;
+        const approvalStatus = getRequestStatus(approvalRequestDueDate, { status: approvalRequestStatus, decision: approvalRequestDecision });
+        const businessLabel = await composeBusinessLabel(
+            choices,
+            { businessUnit: approvalRequestForBusinessUnit },
+            fromStaticList
+        );
+
+        return `${businessLabel} ${approvalStatus}`;
+    }));
+}
+
+async function getContributionStrings(contributions, choices, fromStaticList) {
+    return await Promise.all(contributions.map(async (contribution) => {
+        const { contributionStatus, contributionDueDate, contributionBusinessUnit, contributionBusinessArea } = contribution.data;
+        const status = getRequestStatus(contributionDueDate, { status: contributionStatus });
+        const businessLabel = await composeBusinessLabel(
+            choices,
+            { businessArea: contributionBusinessArea, businessUnit: contributionBusinessUnit },
+            fromStaticList
+        );
+
+        return `${businessLabel} ${status}`;
+    }));
+}
+
+async function parseApprovalRequests(approvalsJSONString, choices, fromStaticList) {
+    const approvalsArray = JSON.parse(approvalsJSONString);
+    const arrayOfApprovalStrings = await getApprovalsStrings(approvalsArray, choices, fromStaticList);
+    return arrayOfApprovalStrings.join(', ');
+}
+
+async function parseMultipleContributions (value, choices, fromStaticList) {
+    const contributions = JSON.parse(value);
+    const contributionStrings = await getContributionStrings(contributions, choices, fromStaticList);
+    return contributionStrings.join(', ');
+}
 
 const renderSomuListItems = async ( { caseType, type, choices }, value, fromStaticList) => {
     const somuType = await fromStaticList('SOMU_TYPES', [caseType, type]);
@@ -31,24 +95,15 @@ const renderSomuListItems = async ( { caseType, type, choices }, value, fromStat
                     const values = await parseMultipleContributions(value, choices, fromStaticList);
                     return values;
                 }
+                case 'ApprovalRequests': {
+                    const values = await parseApprovalRequests(value, choices, fromStaticList);
+                    return values;
+                }
             }
         }
     }
 
     return value;
-};
-
-const parseMultipleContributions = async (value, choices, fromStaticList) => {
-    const contributions = JSON.parse(value);
-    const contributionStrings = await Promise.all(contributions.map(async (contribution) => {
-        const { contributionStatus, contributionDueDate, contributionBusinessUnit, contributionBusinessArea } = contribution.data;
-        const status = getContributionStatusString({ contributionDueDate, contributionStatus });
-        const values = await loadValue(contributionBusinessUnit, choices, fromStaticList);
-        const title = `${contributionBusinessArea} - ${values} (${status})`;
-        return title;
-    }));
-
-    return contributionStrings.join(', ');
 };
 
 module.exports = async (template, { fromStaticList }) => {

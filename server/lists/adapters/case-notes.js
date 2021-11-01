@@ -44,6 +44,10 @@ const typeAdaptors = {
         stage,
         title: `Correspondent: ${correspondent} Added`
     }),
+    CORRESPONDENT_UPDATED: ({ correspondent, stage }) => ({
+        stage,
+        title: `Correspondent: ${correspondent} Updated`
+    }),
     CORRESPONDENT_DELETED: ({ correspondent, stage }) => ({
         stage,
         title: `Correspondent: ${correspondent} Removed`
@@ -88,9 +92,17 @@ const typeAdaptors = {
         note,
         title: 'Case closure note'
     }),
+    REFER: ({ note }) => ({
+        note,
+        title: 'Case referred note'
+    }),
     REJECT: ({ note }) => ({
         note,
         title: 'Rejection note'
+    }),
+    PO_APPROVAL: ({ note }) => ({
+        note,
+        title: 'Press Office Approval note'
     }),
     PHONECALL: ({ note }) => ({
         note,
@@ -132,10 +144,22 @@ const typeAdaptors = {
         note,
         title: 'Case transfer reason'
     }),
+    EXTENSION: ({ note }) => ({
+        note,
+        title: 'Case Extension',
+    }),
     ENQUIRY_REASON_EUNATIONAL_OTHERDETAILS: ({ note }) => ({
         note,
         title: 'Compliance measures - Other'
-    })
+    }),
+    APPEAL_CREATED: ({ note }) => ({
+        note,
+        title: 'Appeal Created'
+    }),
+    APPEAL_UPDATED: ({ note }) => ({
+        note,
+        title: 'Appeal Updated'
+    }),
 };
 
 const formatDate = (rawDate) => {

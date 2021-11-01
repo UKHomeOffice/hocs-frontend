@@ -2,6 +2,7 @@ const { FormSubmissionError, ValidationError } = require('../models/error');
 const { DOCUMENT_WHITELIST, DOCUMENT_BULK_LIMIT, VALID_DAYS_RANGE } = require('../config').forContext('server');
 const { MIN_ALLOWABLE_YEAR, MAX_ALLOWABLE_YEAR } = require('../libs/dateHelpers');
 const showConditionFunctions = require('../../src/shared/helpers/show-condition-functions');
+const getLogger = require('../libs/logger');
 
 const validationErrors = {
     required: label => `${label} is required`,
@@ -18,11 +19,102 @@ const validationErrors = {
     isValidWithinDate: label => `${label} must be within the last ${VALID_DAYS_RANGE} days`,
     validCaseReference: () => 'Case reference is not valid',
     contributionsFulfilled: () => 'Case contributions have to be completed or cancelled',
+    approvalsFulfilled: () => 'The required approvals to progress the case have not been received.',
     oneOf: () => 'Select at least one option',
     isValidMonth: label => `${label} must contain a real month`,
     isBeforeMaxYear: label => `${label} must be before ${MAX_ALLOWABLE_YEAR}`,
     isAfterMinYear: label => `${label} must be after ${MIN_ALLOWABLE_YEAR}`,
     isValidDay: label => `${label} must contain a real day`,
+};
+
+const approvalsReducer = ({ approved, rejected, cancelled, outstanding }, value) => {
+
+    if (!value.data || !value.data.approvalRequestCreatedDate) {
+        throw new Error('Value passed for validation is not a valid Approval Request object.');
+    }
+
+    if (value.data && !value.data.approvalRequestStatus) {
+        outstanding++;
+    }
+
+    if (value.data &&
+        value.data.approvalRequestStatus &&
+        value.data.approvalRequestStatus === 'approvalRequestCancelled'
+    ) {
+
+        cancelled++;
+    }
+
+    if (value.data &&
+        value.data.approvalRequestStatus &&
+        value.data.approvalRequestStatus === 'approvalRequestResponseReceived' &&
+        value.data.approvalRequestDecision &&
+        value.data.approvalRequestDecision === 'approved'
+    ) {
+        approved++;
+    }
+
+    if (value.data &&
+        value.data.approvalRequestStatus &&
+        value.data.approvalRequestStatus === 'approvalRequestResponseReceived' &&
+        value.data.approvalRequestDecision &&
+        value.data.approvalRequestDecision === 'rejected'
+    ) {
+        rejected++;
+    }
+
+    return { approved, rejected, cancelled, outstanding };
+};
+
+const approvalRequestsFulfilled = (value, message, defaultError) => {
+    const logger = getLogger();
+    const validationErrorMsg = (message || defaultError);
+
+    let approvals = null;
+    try {
+        approvals = JSON.parse(value);
+    } catch (error) {
+        logger.error('APPROVAL_REQUEST_FULFILLMENT_VALIDATION_ERROR', { message: error.message, stack: error.stack  });
+        throw new Error('Value passed for validation is not a valid Approval Request object.');
+    }
+
+    if (!Array.isArray(approvals)) {
+        throw new Error('Value passed for validation is not a valid Approval Request object.');
+    }
+
+    const reducedApprovalStats = approvals.reduce(approvalsReducer, { approved: 0, rejected: 0, cancelled: 0, outstanding: 0 });
+    if (reducedApprovalStats.rejected > 0 || reducedApprovalStats.outstanding > 0 || reducedApprovalStats.approved < 1) {
+        return validationErrorMsg;
+    }
+
+    return null;
+};
+
+const requestsFulfilled = ( value, message, statusField, cancelledValue, completeValue, defaultError ) => {
+    const logger = getLogger();
+
+    let valid = true;
+    try {
+        const contributions = JSON.parse(value);
+
+        if (Array.isArray(contributions)) {
+            const result = contributions.filter(contribution => {
+                const contributionStatus = contribution.data[statusField];
+                return (!(contributionStatus === cancelledValue || contributionStatus === completeValue));
+            });
+
+            if (result.length !== 0) {
+                valid = false;
+            }
+        } else {
+            valid = false;
+        }
+    } catch (error) {
+        valid = false;
+        logger.error('REQUEST_FULFILLED_VALIDATION_ERROR', { message: error.message, stack: error.stack  });
+    }
+
+    return valid ? null : (message || defaultError);
 };
 
 const validators = {
@@ -165,27 +257,17 @@ const validators = {
         return null;
     },
     contributionsFulfilled: ({ value, message }) => {
-        let valid = true;
-        try {
-            const contributions = JSON.parse(value);
-
-            if (Array.isArray(contributions)) {
-                const result = contributions.filter(contribution => {
-                    const contributionStatus = contribution.data.contributionStatus;
-                    return (!(contributionStatus === 'contributionCancelled' || contributionStatus === 'contributionReceived'));
-                });
-
-                if (result.length !== 0) {
-                    valid = false;
-                }
-            } else {
-                valid = false;
-            }
-        } catch (error) {
-            valid = false;
-        }
-
-        return valid ? null : (message || validationErrors.contributionsFulfilled());
+        return requestsFulfilled( value,
+            message,
+            'contributionStatus',
+            'contributionCancelled',
+            'contributionReceived',
+            validationErrors.contributionsFulfilled());
+    },
+    approvalsFulfilled: ({ value, message }) => {
+        return approvalRequestsFulfilled( value,
+            message,
+            validationErrors.approvalsFulfilled());
     },
     /**
      * oneOf used for form validation. Validator subschema should have array of strings of options to pick one of.
@@ -222,21 +304,47 @@ const getDateSection = (date, section) => {
 };
 
 function validateConditionalRadioContentIfExists(data, name, choices, validator, result) {
+    let validationError;
     const conditionalRadioButtonTextFieldId = `${data[name]}Text`;
-
     if (conditionalRadioButtonTextFieldId in data) {
         const radioChoice = choices.find(choice => {
             return choice.value === data[name];
         });
-        let label = radioChoice.conditionalContent.label;
-        const value = data[conditionalRadioButtonTextFieldId];
+        if(radioChoice.conditionalContent){
+            let label = radioChoice.conditionalContent.label;
+            const value = data[conditionalRadioButtonTextFieldId];
 
-        const validationError = validators[validator].call(
-            this,
-            { label, value }
-        );
+            validationError = validators[validator].call(
+                this,
+                { label, value }
+            );
+        }
         if (validationError) {
             result[conditionalRadioButtonTextFieldId] = validationError;
+        }
+    }
+}
+
+function validateConditionalAfterRadioContentIfExists(data, name, choices, validator, result) {
+    let validationError = true;
+    if (Array.isArray(choices)){
+        const radioChoice = choices.find(choice => {
+            return choice.value === data[name];
+        });
+        if (radioChoice && radioChoice.conditionalContentAfter){
+            radioChoice.conditionalContentAfter.forEach(element => {
+                if (element.validation){
+                    const value = data[element.name];
+                    const label = element.label;
+                    validationError = validators[element.validation.type].call(
+                        this,
+                        { label, value }
+                    );
+                    if (validationError) {
+                        result[label] = validationError;
+                    }
+                }
+            });
         }
     }
 }
@@ -296,8 +404,8 @@ function validationMiddleware(req, res, next) {
 
             for (let condition of visibilityConditions) {
                 if (condition.function && Object.prototype.hasOwnProperty.call(showConditionFunctions, condition.function)) {
-                    if (condition.conditionPropertyName && condition.conditionPropertyValue) {
-                        isVisible = showConditionFunctions[condition.function](data, condition.conditionPropertyName, condition.conditionPropertyValue);
+                    if (condition.conditionArgs) {
+                        isVisible = showConditionFunctions[condition.function](data, condition.conditionArgs);
                     }
                 } else if (data[condition.conditionPropertyName] && data[condition.conditionPropertyName] === condition.conditionPropertyValue) {
                     isVisible = true;
@@ -406,6 +514,14 @@ function validationMiddleware(req, res, next) {
                                     validator,
                                     result
                                 );
+                                validateConditionalAfterRadioContentIfExists.call(
+                                    this,
+                                    data,
+                                    name,
+                                    choices,
+                                    validator,
+                                    result
+                                );
                             }
 
                             const validationError = validators[validator].call(this, { label, value });
@@ -421,6 +537,26 @@ function validationMiddleware(req, res, next) {
                         const { type, message } = validator;
                         if (Object.prototype.hasOwnProperty.call(validators, type)) {
                             const validationError = validators[type].call(this, { label, value, message });
+
+                            if (component === 'radio') {
+                                validateConditionalRadioContentIfExists.call(
+                                    this,
+                                    data,
+                                    name,
+                                    choices,
+                                    'required',
+                                    result
+                                );
+                                validateConditionalAfterRadioContentIfExists.call(
+                                    this,
+                                    data,
+                                    name,
+                                    choices,
+                                    validator,
+                                    result
+                                );
+                            }
+
                             if (validationError) {
                                 result[field.props.name] = validationError;
                             }

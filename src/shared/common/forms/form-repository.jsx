@@ -24,52 +24,78 @@ import Accordion from './accordion.jsx';
 import Hidden from './hidden.jsx';
 import ExpandableCheckbox from './expandable-checkbox.jsx';
 import FlowDirectionLink from './flow-direction-link.jsx';
+import ConfirmationWithCaseRef from './confirmation-with-case-ref.jsx';
 import hideConditionFunctions from '../../helpers/hide-condition-functions.js';
 import showConditionFunctions from '../../helpers/show-condition-functions.js';
+import ReviewField from './composite/review-field.jsx';
+import Heading from './heading.jsx';
+import ConfirmationWithTeamNameAndCaseRef from './confirmation-with-team-name-and-case-ref.jsx';
+import CheckboxGrid from './checkbox-grid.jsx';
+import ParentTopicReviewField from './composite/review-field-parent-topic.jsx';
 
 function defaultDataAdapter(name, data, currentValue) {
     return data[name] || currentValue;
 }
 
-const retrieveValue = ({ defaultValue, populateFromCaseData = true, name }, dataAdapter, data) => {
+const retrieveValue = ({ defaultValue, populateFromCaseData = true, name }, dataAdapter, data, child) => {
     let value = defaultValue || '';
 
     if (populateFromCaseData && data) {
-        value = dataAdapter ? dataAdapter(name, data) : defaultDataAdapter(name, data, value);
+        value = dataAdapter ? dataAdapter(name, data, child) : defaultDataAdapter(name, data, value);
     }
 
     return value;
 };
 
+function keyFromDataAdapter(name, data) {
+    return data[name];
+}
+
+function primaryEntityDataAdapter(name, data, child) {
+    return child.props.choices.find(choice => choice.isPrimary === true).value;
+}
+
+function hasFieldData(obj) {
+    if (typeof obj.name !== 'object' && obj.child && obj.child.props) {
+        return obj.child.props;
+    }
+    return obj;
+}
+
 function renderFormComponent(Component, options) {
-    const { key, config, data, errors, callback, dataAdapter, page } = options;
+    const { key, config, data, errors, callback, dataAdapter, page, caseRef, switchDirection } = options;
 
     if (isComponentVisible(config, data)) {
+
         return <Component key={key}
             {...config}
             data={data}
             error={errors && errors[config.name]}
             errors={errors}
-            value={retrieveValue(config, dataAdapter, data)}
+            caseRef={caseRef}
+            value={retrieveValue(hasFieldData(config), dataAdapter, data, config.child)}
             updateState={callback ? data => callback(data) : null}
-            page={page} />;
+            page={page}
+            switchDirection={switchDirection}/>;
     }
     return null;
 }
 
-function isComponentVisible({ visibilityConditions, hideConditions }, data) {
+function isComponentVisible(config, data) {
     let isVisible = true;
+    let { visibilityConditions, hideConditions } = config;
 
     // show component based on visibilityConditions
     if (visibilityConditions) {
         isVisible = false;
 
         for (const condition of visibilityConditions) {
+
             if (condition.function && Object.prototype.hasOwnProperty.call(showConditionFunctions, condition.function)) {
-                if (condition.conditionPropertyName && condition.conditionPropertyValue) {
-                    isVisible = showConditionFunctions[condition.function](data, condition.conditionPropertyName, condition.conditionPropertyValue);
+                if (condition.conditionArgs) {
+                    isVisible = showConditionFunctions[condition.function](data, condition.conditionArgs);
                 }
-            } else if (data[condition.conditionPropertyName] && data[condition.conditionPropertyName] === condition.conditionPropertyValue) {
+            } else if (data && data[condition.conditionPropertyName] && data[condition.conditionPropertyName] === condition.conditionPropertyValue) {
                 isVisible = true;
             }
         }
@@ -80,7 +106,7 @@ function isComponentVisible({ visibilityConditions, hideConditions }, data) {
         for (const condition of hideConditions) {
             if (condition.function && Object.prototype.hasOwnProperty.call(hideConditions, condition.function)) {
                 isVisible = hideConditionFunctions[condition.function](data);
-            } else if (data[condition.conditionPropertyName] && data[condition.conditionPropertyName] === condition.conditionPropertyValue) {
+            } else if (data && data[condition.conditionPropertyName] && data[condition.conditionPropertyName] === condition.conditionPropertyValue) {
                 isVisible = false;
             }
         }
@@ -89,7 +115,7 @@ function isComponentVisible({ visibilityConditions, hideConditions }, data) {
 }
 
 export function formComponentFactory(field, options) {
-    const { key, config, data, errors, callback, page } = options;
+    const { key, config, data, errors, callback, page, caseRef, switchDirection } = options;
 
     switch (field) {
         case 'radio':
@@ -133,15 +159,15 @@ export function formComponentFactory(field, options) {
                 callback
             });
         case 'heading':
-            return (
-                <h2 key={key} className='govuk-heading-m'>
-                    {config.label}
-                </h2>
-            );
+            return renderFormComponent(Heading, { key, config });
         case 'panel':
             return renderFormComponent(Panel, { key, config });
         case 'inset':
             return renderFormComponent(Inset, { key, data, config });
+        case 'confirmation-with-case-ref':
+            return renderFormComponent(ConfirmationWithCaseRef, { key, data, config, caseRef });
+        case 'confirmation-with-team-name-and-case-ref':
+            return renderFormComponent(ConfirmationWithTeamNameAndCaseRef, { key, data, config, caseRef });
         case 'paragraph':
             return renderFormComponent(Paragraph, { key, config });
         case 'entity-manager':
@@ -165,13 +191,40 @@ export function formComponentFactory(field, options) {
             });
         case 'change-link':
             return renderFormComponent(ChangeLink, { data, key, config, errors, callback });
+        case 'checkbox-grid':
+            return renderFormComponent(CheckboxGrid, { data, key, config, errors, callback });
+        case 'review-field':
+            // eslint-disable-next-line no-case-declarations
+            const childType = config.child.component;
+
+            return renderFormComponent(ReviewField, {
+                data,
+                key,
+                config,
+                errors,
+                dataAdapter: childType === 'entity-list' ? primaryEntityDataAdapter : keyFromDataAdapter,
+                callback,
+                switchDirection,
+                page
+            });
+        case 'review-field-parent-topic':
+            return renderFormComponent(ParentTopicReviewField, {
+                data,
+                key,
+                config,
+                errors,
+                dataAdapter: config.child.component === 'entity-list' ? primaryEntityDataAdapter : keyFromDataAdapter,
+                callback,
+                switchDirection,
+                page
+            });
         default:
             return null;
     }
 }
 
 export function secondaryActionFactory(field, options) {
-    const { key, data, config, page } = options;
+    const { key, data, config, page, switchDirection } = options;
     switch (field) {
         case 'backlink':
             return renderFormComponent(BackLink, { data, key, config });
@@ -184,7 +237,8 @@ export function secondaryActionFactory(field, options) {
                 config: {
                     ...config, caseId: page.caseId, stageId: page.stageId,
                     action: `/case/${page.caseId}/stage/${page.stageId}/direction/BACKWARD`
-                }
+                },
+                switchDirection
             });
         default:
             return null;

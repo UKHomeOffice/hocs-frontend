@@ -82,7 +82,7 @@ const getInstance = (requestId, user) => {
 
     const logger = getLogger(requestId);
 
-    const fromStaticList = async (listId, key, flushIfNull = false) => {
+    const fromStaticList = async (listId, key) => {
         const defaultValue = null;
         if (listCache.hasResource(listId)) {
             const item = await fetchList(listId);
@@ -93,9 +93,6 @@ const getInstance = (requestId, user) => {
                 const result = item.find(item => listContains(item, key));
                 if (result) {
                     return result.key ? result.value : result.label;
-                } else if (flushIfNull) {
-                    await flush(listId);
-                    return await fromStaticList(listId, key, false);
                 }
                 return defaultValue;
             } else return defaultValue;

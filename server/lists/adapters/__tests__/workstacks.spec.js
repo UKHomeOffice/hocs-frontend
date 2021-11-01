@@ -296,6 +296,21 @@ describe('Team Workstack Adapter', () => {
                     data: {},
                     assignedTopic: mockTopic
                 },
+                {
+                    correspondents: {
+                        correspondents: [ { fullname: 'testNameFOIRequester', uuid: 'uuid123', is_primary: 'true' } ]
+                    },
+                    teamUUID: 2,
+                    caseType: 'FOI',
+                    stageType: 'A',
+                    userUUID: 2,
+                    deadline: '2200-02-03',
+                    caseReference: 'A/1234568/19',
+                    active: true,
+                    data: {
+                        CaseContributions: '[{}]',
+                    }
+                }
             ]
         };
 
@@ -902,6 +917,9 @@ describe('Workflow Workstack Adapter', () => {
                         deadline: '2200-01-03',
                         caseReference: 'A/1234568/19',
                         active: true,
+                        data: {
+                            CaseContributions: '[{"data": {"contributionDueDate":"2020-12-12"}}]'
+                        },
                         dueContribution: '2020-12-12',
                         contributions: 'Due'
                     }
@@ -1004,6 +1022,72 @@ describe('Workflow Workstack Adapter', () => {
         expect(result).toMatchSnapshot();
     });
 
+    it('should add the case ref and requester to primaryCorrespondentAndRefDisplay', async () => {
+        const mockData = {
+            stages: [
+                {
+                    correspondents: {
+                        correspondents: [ { fullname: 'testRequesterName', uuid: 'uuid123', is_primary: 'true' } ]
+                    },
+                    teamUUID: 2,
+                    caseType: 'FOI',
+                    stageType: 'A',
+                    userUUID: 2,
+                    deadline: '2200-01-03',
+                    caseReference: 'A/1234568/21',
+                    active: true,
+                    data: {
+                        CaseContributions: '[{}]',
+                    }
+                }
+            ]
+        };
+
+        const result = await stageAdapter(mockData, {
+            user: mockUser,
+            fromStaticList: mockFromStaticList,
+            logger: mockLogger,
+            teamId: 2,
+            workflowId: 'FOI',
+            stageId: 'A',
+            configuration: mockConfiguration
+        });
+        expect(result).toMatchSnapshot();
+    });
+
+    it('should add the primary correspondent to FOIRequester field for FOI case type', async () => {
+        const mockData = {
+            stages: [
+                {
+                    correspondents: {
+                        correspondents: [ { fullname: 'testNameFOIRequester', uuid: 'uuid123', is_primary: 'true' } ]
+                    },
+                    teamUUID: 2,
+                    caseType: 'FOI',
+                    stageType: 'A',
+                    userUUID: 2,
+                    deadline: '2200-01-03',
+                    caseReference: 'A/1234568/19',
+                    active: true,
+                    data: {
+                        CaseContributions: '[{}]',
+                    }
+                }
+            ]
+        };
+
+        const result = await stageAdapter(mockData, {
+            user: mockUser,
+            fromStaticList: mockFromStaticList,
+            logger: mockLogger,
+            teamId: 2,
+            workflowId: 'COMP',
+            stageId: 'A',
+            configuration: mockConfiguration
+        });
+        expect(result).toMatchSnapshot();
+    });
+
     it('should add the fullname and postcode of primaryCorrespondent to primaryCorrespondent', async () => {
         const mockData = {
             stages: [
@@ -1021,6 +1105,9 @@ describe('Workflow Workstack Adapter', () => {
                     deadline: '2200-01-03',
                     caseReference: 'COMP/1234568/19',
                     active: true,
+                    data: {
+                        CaseContributions: '[{}]',
+                    }
                 }
             ]
         };
@@ -1312,6 +1399,66 @@ describe('Workflow Workstack Adapter', () => {
             expect(result).toMatchSnapshot();
         });
 
+    it('should transform a stage array to a workflow workstack with at MPAM_TRIAGE with contributions as Cancelled',
+        async () => {
+            const mockData = {
+                stages: [
+                    {
+                        teamUUID: 2,
+                        caseType: 'WCS',
+                        stageType: 'MPAM_TRIAGE',
+                        userUUID: 2,
+                        deadline: '2200-01-03',
+                        caseReference: 'A/1234568/19',
+                        active: true,
+                        contributions: 'Cancelled'
+                    }
+                ]
+            };
+
+            const result = await stageAdapter(mockData, {
+                user: mockUser,
+                fromStaticList: mockFromStaticList,
+                logger: mockLogger,
+                teamId: 2,
+                workflowId: 'WCS',
+                stageId: 'MPAM_TRIAGE',
+                configuration: mockConfiguration
+            });
+
+            expect(result).toMatchSnapshot();
+        });
+
+    it('should transform a stage array to a workflow workstack with at MPAM_DRAFT with contributions as Cancelled',
+        async () => {
+            const mockData = {
+                stages: [
+                    {
+                        teamUUID: 2,
+                        caseType: 'WCS',
+                        stageType: 'MPAM_DRAFT',
+                        userUUID: 2,
+                        deadline: '2200-01-03',
+                        caseReference: 'A/1234568/19',
+                        active: true,
+                        contributions: 'Cancelled'
+                    }
+                ]
+            };
+
+            const result = await stageAdapter(mockData, {
+                user: mockUser,
+                fromStaticList: mockFromStaticList,
+                logger: mockLogger,
+                teamId: 2,
+                workflowId: 'WCS',
+                stageId: 'MPAM_DRAFT',
+                configuration: mockConfiguration
+            });
+
+            expect(result).toMatchSnapshot();
+        });
+
     describe('Sort cases by tags', () => {
         it('Should return -1 if case a has tags and case b has no tags', () => {
             const a = {
@@ -1354,3 +1501,5 @@ describe('Workflow Workstack Adapter', () => {
     });
 
 });
+
+

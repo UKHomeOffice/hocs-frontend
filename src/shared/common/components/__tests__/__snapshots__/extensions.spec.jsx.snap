@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Extensions Component Should show case deadline WITH extend link 1`] = `
+Array [
+  <h2
+    class="govuk-heading-s"
+  >
+    Extensions
+  </h2>,
+  <span
+    class="govuk-body full-width"
+  >
+     Current due date: 24/11/2021 
+  </span>,
+  <span
+    class="govuk-body full-width"
+  >
+    Apply and extension to this case.
+  </span>,
+  <a
+    class="govuk-body govuk-link"
+    href="/case/some_case_id/stage/some_stage_id/caseAction/extension/add"
+  >
+    Extend this case
+  </a>,
+]
+`;
+
+exports[`Extensions Component Should show case deadline WITHOUT extend link 1`] = `
+Array [
+  <h2
+    class="govuk-heading-s"
+  >
+    Extensions
+  </h2>,
+  <span
+    class="govuk-body full-width"
+  >
+     Current due date: 24/11/2021 (PIT Extension applied)
+  </span>,
+  <span
+    class="govuk-body full-width"
+  >
+    No further extensions can be applied to this case.
+  </span>,
+]
+`;

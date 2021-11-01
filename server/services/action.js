@@ -21,10 +21,14 @@ function createDocumentSummaryObjects(form, type) {
 }
 
 function createCaseRequest(type, form, documentTag) {
+    let data = { ...form.data };
+    delete data.add_document;
+    delete data.DateReceived;
     return {
         type,
         dateReceived: form.data['DateReceived'],
         fromCaseUUID: form.data['fromCaseUUID'],
+        data: data,
         documents: createDocumentSummaryObjects(form, documentTag)
     };
 }
@@ -141,17 +145,21 @@ const actions = {
         }
     },
     CASE: async (options) => {
+
         const { caseId, stageId, context, form, user } = options;
 
         let headers = {
             headers: User.createHeaders(user)
         };
         const logger = getLogger();
-        try {
-            if (form && form.action) {
-                const { entity, somuTypeUuid } = options;
 
-                if (entity) {
+        try {
+
+            if (form && form.action) {
+                const { entity, somuTypeUuid, caseActionType } = options;
+
+                if (entity || caseActionType) {
+
                     logger.info('CASE_ACTION', { action: form.action, case: caseId });
                     switch (form.action) {
                         case actionTypes.ADD_DOCUMENT:
@@ -206,6 +214,97 @@ const actions = {
                         case actionTypes.ADD_CASE_NOTE:
                             await caseworkService.post(`/case/${caseId}/note`, { type: 'MANUAL', text: form.data['case-note'] }, headers);
                             break;
+                        case actionTypes.APPLY_CASE_DEADLINE_EXTENSION: {
+                            const requestBody = {
+                                actionType: 'EXTENSION',
+                                caseTypeActionUuid: form.data.caseTypeActionUuid,
+                                extendBy: form.data.extendBy,
+                                extendFrom: form.data.extendFrom,
+                                note: form.data.note
+                            };
+                            const response =
+                                await caseworkService.post(`/case/${caseId}/stage/${stageId}/action`,
+                                    requestBody, headers);
+
+                            const clientResponse = {
+                                'summary': `Case: ${response.data.reference} extended`,
+                                'link': `${response.data.reference}`
+                            };
+
+                            return handleActionSuccess(clientResponse, {}, form);
+                        }
+                        case actionTypes.EDIT_CASE_APPEAL: {
+                            const { caseActionData, caseActionId } = options;
+
+                            let requestBody = {
+                                actionType: 'APPEAL',
+                                uuid: caseActionId,
+                                caseTypeActionUuid: form.data.caseTypeActionUuid,
+                                status: form.data.status,
+                                dateSentRMS: form.data.dateSentRMS,
+                                outcome: form.data.outcome,
+                                complexCase: form.data.complexCase,
+                                note: form.data.note,
+                            };
+
+                            if( caseActionData ) {
+                                const activeAppeal = caseActionData.APPEAL
+                                    .filter(appealType => appealType.id === form.data.caseTypeActionUuid);
+
+                                const appealOfficerData  = JSON.parse(activeAppeal[0].typeInfo.props).appealOfficerData;
+                                if (appealOfficerData) {
+                                    const extraData = {};
+                                    extraData[appealOfficerData.officer.value] = form.data[appealOfficerData.officer.value];
+                                    extraData[appealOfficerData.directorate.value] = form.data[appealOfficerData.officer.value];
+
+                                    requestBody.appealOfficerData = JSON.stringify(extraData);
+                                }
+                            }
+
+                            const response =
+                                await caseworkService.put(`/case/${caseId}/stage/${stageId}/action/${caseActionId}`,
+                                    requestBody, headers);
+
+                            const clientResponse = {
+                                'summary': `Appeal for ${response.data.reference} updated`,
+                                'link': `${response.data.reference}`
+                            };
+
+                            return handleActionSuccess(clientResponse, {}, form);
+                        }
+                        case actionTypes.ADD_CASE_APPEAL: {
+                            const { caseActionData } = options;
+
+                            let requestBody = {
+                                actionType: 'APPEAL',
+                                caseTypeActionUuid: form.data.caseTypeActionUuid,
+                                status: form.data.status,
+                            };
+                            if( caseActionData ) {
+                                const activeAppeal = caseActionData.APPEAL
+                                    .filter(appealType => appealType.id === form.data.caseTypeActionUuid);
+
+                                const appealOfficerData  = JSON.parse(activeAppeal[0].typeInfo.props).appealOfficerData;
+                                if (appealOfficerData) {
+                                    const extraData = {};
+                                    extraData[appealOfficerData.officer.value] = form.data.officer;
+                                    extraData[appealOfficerData.directorate.value] = form.data.directorate;
+
+                                    requestBody.appealOfficerData = JSON.stringify(extraData);
+                                }
+                            }
+
+                            const response =
+                                await caseworkService.post(`/case/${caseId}/stage/${stageId}/action`,
+                                    requestBody, headers);
+
+                            const clientResponse = {
+                                'summary': `Appeal for ${response.data.reference} registered`,
+                                'link': `${response.data.reference}`
+                            };
+
+                            return handleActionSuccess(clientResponse, {}, form);
+                        }
                     }
                 } else if (somuTypeUuid) {
                     const { somuItemData, somuItemUuid } = options;
@@ -216,6 +315,12 @@ const actions = {
                             await caseworkService.post(`/case/${caseId}/item/${somuTypeUuid}`, { data: somuItemData }, headers);
                             break;
                         case actionTypes.EDIT_CONTRIBUTION:
+                            await caseworkService.post(`/case/${caseId}/item/${somuTypeUuid}`, { uuid: somuItemUuid, data: somuItemData }, headers);
+                            break;
+                        case actionTypes.ADD_APPROVAL_REQUEST:
+                            await caseworkService.post(`/case/${caseId}/item/${somuTypeUuid}`, { data: somuItemData }, headers);
+                            break;
+                        case actionTypes.EDIT_APPROVAL_REQUEST:
                             await caseworkService.post(`/case/${caseId}/item/${somuTypeUuid}`, { uuid: somuItemUuid, data: somuItemData }, headers);
                             break;
                     }

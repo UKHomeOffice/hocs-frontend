@@ -96,7 +96,7 @@ async function getFormSchema(options) {
 
 async function hydrateField(field, req) {
     if (field.props) {
-        const { choices, items, sections, conditionChoices, somuType } = field.props;
+        const { choices, items, sections, conditionChoices, somuType, child } = field.props;
 
         if (conditionChoices) {
             for (var i = 0; i < conditionChoices.length; i++) {
@@ -116,7 +116,7 @@ async function hydrateField(field, req) {
         } else if (choices && typeof choices === 'string') {
             field.props.choices = await req.listService.fetch(
                 choices,
-                req.params
+                { ...req.params, ...req.form.data }
             );
         } else if (items && typeof items === 'string') {
             field.props.items = await req.listService.fetch(
@@ -144,7 +144,14 @@ async function hydrateField(field, req) {
 
             const somuItem = await req.listService.fetch('CASE_SOMU_ITEM', { ...req.params, somuTypeId: somuTypeItem.uuid });
             field.props.somuItems = somuItem;
+        } else if (child && child.props && child.props.choices && typeof child.props.choices === 'string') {
+            if (field.component === 'review-field-parent-topic' && field.props.child.props.choices === 'TOPICS_FOI'){
+                field.props.child.props.choices = await req.listService.fetch('CASE_TOPICS', req.params);
+            } else {
+                field.props.child.props.choices = await req.listService.fetch(child.props.choices, req.params);
+            }
         }
+
     }
     return field;
 }
@@ -190,6 +197,36 @@ const getForm = (form, options) => {
     };
 };
 
+async function getSomuType(req, res, next) {
+    const { somuCaseType, somuType } = req.params;
+
+    const somuTypeData = await req.listService.getFromStaticList(
+        'SOMU_TYPES',
+        [somuCaseType, somuType]
+    );
+
+    req.somuType = somuTypeData;
+    next();
+}
+
+async function getList(req, res, next) {
+    const { listName } = req.params;
+
+    const listContent = await req.listService.fetch(listName);
+
+    req.listContent = listContent;
+    next();
+}
+
+async function getSomuItemsByType(req, res, next) {
+    const { somuTypeUuid } = req.params;
+
+    const somuItems = await req.listService.fetch('CASE_SOMU_ITEM', { ...req.params, somuTypeId: somuTypeUuid });
+    req.somuItems = somuItems;
+
+    next();
+}
+
 const getFormForAction = async (req, res, next) => {
 
     const logger = getLogger(req.requestId);
@@ -213,9 +250,13 @@ const getFormForAction = async (req, res, next) => {
 const getFormForCase = async (req, res, next) => {
     const logger = getLogger(req.requestId);
     logger.info('GET_FORM', { ...req.params });
+    let caseActionData;
+    if (res.locals && res.locals.caseActionData) {
+        caseActionData = res.locals.caseActionData;
+    }
 
     try {
-        const form = await getFormSchemaForCase({ ...req.params, user: req.user, requestId: req.requestId });
+        const form = await getFormSchemaForCase({ ...req.params, user: req.user, requestId: req.requestId, caseActionData });
         req.form = form;
         next();
     } catch (error) {
@@ -255,5 +296,8 @@ module.exports = {
     getFormForAction,
     getFormForCase,
     getFormForStage,
-    hydrateFields
+    hydrateFields,
+    getSomuType,
+    getSomuItemsByType,
+    getList
 };

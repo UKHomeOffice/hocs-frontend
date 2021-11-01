@@ -61,7 +61,7 @@ const reducer = (state, action) => {
         case types.UNSET_CASE_NOTES:
             return { ...state, caseNotes: null };
         case types.UNSET_CASE_SUMMARY:
-            return { ...state, summary: null };
+            return { ...state, summary: {} };
         case types.UNSET_CORRESPONDENTS:
             return { ...state, correspondents: null };
         case types.PASS_FORWARD_PROPS: {
@@ -69,6 +69,10 @@ const reducer = (state, action) => {
         }
         case types.UNSET_DOCUMENTS:
             return { ...state, documents: undefined };
+        case types.UPDATE_CASE_ACTION_DATA:
+            return { ...state, caseActionData: action.payload };
+        case types.UNSET_CASE_ACTION_DATA:
+            return { ...state, caseActionsData: null };
         default:
             // TODO: Remove
             /* eslint-disable-next-line  no-console*/

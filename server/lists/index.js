@@ -5,6 +5,7 @@ const caseTypeAdapter = require('./adapters/case-types');
 const caseTypeCommaSeparatedAdapter = require('./adapters/case-types-comma-separated');
 const workstack = require('./adapters/workstacks');
 const topicAdapter = require('./adapters/topics');
+const activeTopicAdapter = require('./adapters/activeTopics');
 const usersAdapter = require('./adapters/users');
 const teamsAdapter = require('./adapters/teams');
 const entityListItemsAdapter = require('./adapters/entityListItems');
@@ -16,6 +17,7 @@ const documentTagsAdapter = require('./adapters/documentTags');
 const countrySortAdapter = require('./adapters/countrySort');
 const caseNoteAdapter = require('./adapters/case-notes');
 const caseSummaryAdapter = require('./adapters/case-summary');
+const caseActionDataAdapter = require('./adapters/case-action-data');
 const caseViewAllStagesAdapter = require('./adapters/case-view-all-stages');
 const caseViewReadOnlyAdapter = require('./adapters/case-view-read-only');
 const {
@@ -122,6 +124,30 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
+        S_IEDET_CSU_LIST: {
+            client: 'INFO',
+            endpoint: '/entity/list/IEDET_CSU_LIST',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_IEDET_CASE_OUTCOME: {
+            client: 'INFO',
+            endpoint: '/entity/list/IEDET_CASE_OUTCOME',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_IEDET_BUS_AREA: {
+            client: 'INFO',
+            endpoint: '/entity/list/IEDET_BUS_AREA',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_IEDET_COMP_ORIGIN: {
+            client: 'INFO',
+            endpoint: '/entity/list/IEDET_COMP_ORIGIN',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
         S_MPAM_ENQUIRY_SUBJECTS: {
             client: 'INFO',
             endpoint: '/entity/list/MPAM_ENQUIRY_SUBJECTS',
@@ -187,6 +213,78 @@ module.exports = {
             endpoint: '/entity/list/MPAM_CONTRIBUTION_BUSINESS_AREAS',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
+        },
+        S_FOI_DIRECTORATE_BICSPI_ACCEPTANCE_TEAMS: {
+            client: 'INFO',
+            endpoint: '/teams?unit=FOI_DIRECTORATE_BICSPI_ACCEPTANCE_TEAMS',
+            type: listService.types.STATIC,
+            adapter: teamsAdapter
+        },
+        S_FOI_DIRECTORATE_BORDER_FORCE_ACCEPTANCE_TEAMS: {
+            client: 'INFO',
+            endpoint: '/teams?unit=FOI_DIRECTORATE_BORDER_FORCE_ACCEPTANCE_TEAMS',
+            type: listService.types.STATIC,
+            adapter: teamsAdapter
+        },
+        S_FOI_DIRECTORATE_HMPO_ACCEPTANCE_TEAMS: {
+            client: 'INFO',
+            endpoint: '/teams?unit=FOI_DIRECTORATE_HMPO_ACCEPTANCE_TEAMS',
+            type: listService.types.STATIC,
+            adapter: teamsAdapter
+        },
+        S_FOI_DIRECTORATE_MIGRATION_AND_BORDERS_ACCEPTANCE_TEAMS: {
+            client: 'INFO',
+            endpoint: '/teams?unit=FOI_DIRECTORATE_MIGRATION_AND_BORDERS_ACCEPTANCE_TEAMS',
+            type: listService.types.STATIC,
+            adapter: teamsAdapter
+        },
+        S_FOI_DIRECTORATE_HOMELAND_SECURITY_ACCEPTANCE_TEAMS: {
+            client: 'INFO',
+            endpoint: '/teams?unit=FOI_DIRECTORATE_HOMELAND_SECURITY_ACCEPTANCE_TEAMS',
+            type: listService.types.STATIC,
+            adapter: teamsAdapter
+        },
+        S_FOI_DIRECTORATE_HOLA_ACCEPTANCE_TEAMS: {
+            client: 'INFO',
+            endpoint: '/teams?unit=FOI_DIRECTORATE_HOLA_ACCEPTANCE_TEAMS',
+            type: listService.types.STATIC,
+            adapter: teamsAdapter
+        },
+        S_FOI_DIRECTORATE_OTHER_ACCEPTANCE_TEAMS: {
+            client: 'INFO',
+            endpoint: '/teams?unit=FOI_DIRECTORATE_OTHER_ACCEPTANCE_TEAMS',
+            type: listService.types.STATIC,
+            adapter: teamsAdapter
+        },
+        S_FOI_DIRECTORATE_CUSTOMER_SERVICES_ACCEPTANCE_TEAMS: {
+            client: 'INFO',
+            endpoint: '/teams?unit=FOI_DIRECTORATE_CUSTOMER_SERVICES_ACCEPTANCE_TEAMS',
+            type: listService.types.STATIC,
+            adapter: teamsAdapter
+        },
+        S_FOI_DIRECTORATE_STARS_HO_CSA_ACCEPTANCE_TEAMS: {
+            client: 'INFO',
+            endpoint: '/teams?unit=FOI_DIRECTORATE_STARS_HO_CSA_ACCEPTANCE_TEAMS',
+            type: listService.types.STATIC,
+            adapter: teamsAdapter
+        },
+        S_FOI_DIRECTORATE_PUBLIC_SAFETY_ACCEPTANCE_TEAMS: {
+            client: 'INFO',
+            endpoint: '/teams?unit=FOI_DIRECTORATE_PUBLIC_SAFETY_ACCEPTANCE_TEAMS',
+            type: listService.types.STATIC,
+            adapter: teamsAdapter
+        },
+        S_FOI_DIRECTORATE_CORPORATE_ENABLERS_ACCEPTANCE_TEAMS: {
+            client: 'INFO',
+            endpoint: '/teams?unit=FOI_DIRECTORATE_CORPORATE_ENABLERS_ACCEPTANCE_TEAMS',
+            type: listService.types.STATIC,
+            adapter: teamsAdapter
+        },
+        FOI_DRAFT_TEAMS_SELECTION: {
+            client: 'INFO',
+            endpoint: '/teams/descendants/${AcceptanceTeam}',
+            type: listService.types.DYNAMIC,
+            adapter: teamsAdapter
         },
         S_MPAM_BUS_UNITS_1: {
             client: 'INFO',
@@ -257,14 +355,14 @@ module.exports = {
             endpoint: '/caseType?bulkOnly=true',
             adapter: caseTypeAdapter
         },
-        CASE_TYPES_COMMA_SEPARATED: {
+        CASE_TYPES_COMMA_SEPARATED_FOR_SEARCH: {
             client: 'INFO',
-            endpoint: '/caseType?bulkOnly=false',
+            endpoint: '/caseType?bulkOnly=false&initialCaseType=false',
             adapter: caseTypeCommaSeparatedAdapter
         },
         CASE_TYPES_FOR_SEARCH: {
             client: 'INFO',
-            endpoint: '/caseType?bulkOnly=false&addCasesWithPreviousType=true',
+            endpoint: '/caseType?bulkOnly=false&initialCaseType=false',
             adapter: caseTypeAdapter
         },
         COUNTRIES_CURRENT: {
@@ -352,6 +450,11 @@ module.exports = {
             endpoint: '/topics',
             type: listService.types.DYNAMIC,
         },
+        TOPICS_FOI: {
+            client: 'INFO',
+            endpoint: '/topics/FOI',
+            adapter: activeTopicAdapter
+        },
         TOPICS_USER: {
             client: 'INFO',
             endpoint: '/topics/MIN',
@@ -400,6 +503,26 @@ module.exports = {
             endpoint: '/case/document/reference/${caseId}/?type=DRAFT',
             adapter: documentListAdapter
         },
+        CASE_DOCUMENT_LIST_FOI_DRAFT: {
+            client: 'CASEWORK',
+            endpoint: '/case/document/reference/${caseId}/?type=Draft%20response',
+            adapter: documentListAdapter
+        },
+        CASE_DOCUMENT_LIST_FOI_INITIAL_RESPONSE: {
+            client: 'CASEWORK',
+            endpoint: '/case/document/reference/${caseId}/?type=Initial%20response',
+            adapter: documentListAdapter
+        },
+        CASE_DOCUMENT_LIST_ALL: {
+            client: 'CASEWORK',
+            endpoint: '/case/document/reference/${caseId}/',
+            adapter: documentListAdapter
+        },
+        CASE_DOCUMENT_LIST_FOI_FINAL_RESPONSE: {
+            client: 'CASEWORK',
+            endpoint: '/case/document/reference/${caseId}/?type=Final%20responses',
+            adapter: documentListAdapter
+        },
         CASE_DOCUMENT_TAGS: {
             client: 'CASEWORK',
             endpoint: '/case/${caseId}/documentTags',
@@ -414,6 +537,11 @@ module.exports = {
             client: 'CASEWORK',
             endpoint: '/case/${caseId}/summary',
             adapter: caseSummaryAdapter
+        },
+        CASE_ACTIONS: {
+            client: 'CASEWORK',
+            endpoint: '/case/${caseId}/actions',
+            adapter: caseActionDataAdapter
         },
         CASE_VIEW_ALL_STAGES: {
             client: 'WORKFLOW',
@@ -454,6 +582,55 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
+        FOI_ACCOUNT_MANAGERS: {
+            client: 'INFO',
+            endpoint: '/entity/list/FOI_ACCOUNT_MANAGERS',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_FOI_TYPES: {
+            client: 'INFO',
+            endpoint: '/entity/list/FOI_TYPES',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_FOI_DIRECTORATES: {
+            client: 'INFO',
+            endpoint: '/entity/list/FOI_DIRECTORATES',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        FOI_APPROVER_ROLES: {
+            client: 'INFO',
+            endpoint: '/entity/list/FOI_APPROVER_ROLES',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        FOI_EXEMPTIONS: {
+            client: 'INFO',
+            endpoint: '/entity/list/FOI_EXEMPTIONS',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        FOI_EIR_EXCEPTIONS: {
+            client: 'INFO',
+            endpoint: '/entity/list/FOI_EIR_EXCEPTIONS',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        FOI_APPEAL_TYPES: {
+            client: 'INFO',
+            endpoint: '/entity/list/FOI_APPEAL_TYPES',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_FOI_KIMU_TEAM_MEMBERS: {
+            client: 'INFO',
+            endpoint: '/teams/6978176d-15e7-4a76-b833-3b0be12c0828/members',
+            type: listService.types.STATIC,
+            adapter: usersAdapter
+        },
+
     },
     clients: {
         CASEWORK: caseworkService,

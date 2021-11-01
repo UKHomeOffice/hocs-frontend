@@ -99,7 +99,7 @@ exports[`Workstack component should not add link to headers with sortStrategy no
               "renderer": null,
             },
             Object {
-              "dataAdapter": "indicator",
+              "dataAdapter": null,
               "dataValueKey": "dueContribution",
               "displayName": "Contribution Due Date",
               "isFilterable": true,
@@ -135,7 +135,10 @@ exports[`Workstack component should not add link to headers with sortStrategy no
               "assignedUserDisplay": "User1",
               "caseReference": "case1",
               "caseUUID": "case_uuid-123",
+              "contributions": "Cancelled",
               "created": "2019-10-29T11:01:32.656563",
+              "data": Object {},
+              "dueContribution": null,
               "fullName": "Sam Smith",
               "isActive": "YES",
               "nextCaseReference": null,
@@ -153,7 +156,10 @@ exports[`Workstack component should not add link to headers with sortStrategy no
               "assignedUserDisplay": "User2",
               "caseReference": "case2",
               "caseUUID": "case_uuid-789",
+              "contributions": "Received",
               "created": "",
+              "data": Object {},
+              "dueContribution": null,
               "fullName": "John Alex",
               "isActive": "NO",
               "nextCaseReference": null,
@@ -172,6 +178,7 @@ exports[`Workstack component should not add link to headers with sortStrategy no
               "caseReference": "case3",
               "caseUUID": "case_uuid-abc",
               "created": null,
+              "data": Object {},
               "fullName": "Pat Brown",
               "isActive": "NO",
               "nextCaseReference": null,
@@ -189,7 +196,9 @@ exports[`Workstack component should not add link to headers with sortStrategy no
               "assignedUserDisplay": "User4",
               "caseReference": "case4",
               "caseUUID": "case_uuid-efg",
+              "contributions": "Overdue",
               "created": null,
+              "data": Object {},
               "dueContribution": "2020-12-12",
               "fullName": "Dave Jones",
               "isActive": "YES",
@@ -209,6 +218,7 @@ exports[`Workstack component should not add link to headers with sortStrategy no
               "caseReference": "case5",
               "caseUUID": "case_uuid-hij",
               "created": null,
+              "data": Object {},
               "fullName": "Mick Smith",
               "isActive": "YES",
               "nextCaseReference": null,
@@ -223,17 +233,16 @@ exports[`Workstack component should not add link to headers with sortStrategy no
             },
             Object {
               "assignedTeamDisplay": "team6",
-              "assignedUserDisplay": "User5",
+              "assignedUserDisplay": "User6",
               "caseReference": "case6",
               "caseUUID": "case_uuid-klm",
+              "contributions": "Due",
               "created": null,
-              "data": Object {
-                "DueDate": "2021-01-01",
-              },
+              "dueContribution": "9999-01-01",
               "fullName": "Bet Linch",
               "isActive": "YES",
               "nextCaseReference": null,
-              "nextCaseType": null,
+              "nextCaseType": "nextCase",
               "primaryCorrespondent": Object {
                 "fullname": "Mrs Linch",
                 "postcode": null,
@@ -243,18 +252,13 @@ exports[`Workstack component should not add link to headers with sortStrategy no
               "uuid": "stage_uuid-447",
             },
             Object {
-              "assignedTeamDisplay": "team6",
-              "assignedUserDisplay": "User5",
+              "assignedTeamDisplay": "team7",
+              "assignedUserDisplay": "User7",
               "caseReference": "case7",
-              "caseUUID": "case_uuid-klz",
+              "caseUUID": "case_uuid-opq",
               "created": null,
-              "data": Object {
-                "DueDate": "2021-01-01",
-              },
-              "fullName": "Bet Linch",
+              "fullName": "My Name",
               "isActive": "YES",
-              "nextCaseReference": null,
-              "nextCaseType": "nextCase",
               "primaryCorrespondent": Object {
                 "fullname": "Mrs Linch",
                 "postcode": null,
@@ -264,24 +268,20 @@ exports[`Workstack component should not add link to headers with sortStrategy no
               "uuid": "stage_uuid-448",
             },
             Object {
-              "assignedTeamDisplay": "team6",
-              "assignedUserDisplay": "User5",
+              "assignedTeamDisplay": null,
+              "assignedUserDisplay": "User8",
               "caseReference": "case8",
-              "caseUUID": "case_uuid-klx",
+              "caseUUID": "case_uuid-klm",
               "created": null,
               "data": Object {
                 "DueDate": "2021-01-01",
               },
-              "fullName": "Bet Linch",
+              "fullName": "Correspondent 8",
               "isActive": "YES",
               "nextCaseReference": "nextCaseReference",
               "nextCaseType": "nextCase",
-              "primaryCorrespondent": Object {
-                "fullname": "Mrs Linch",
-                "postcode": null,
-              },
-              "stageType": "MPAM_DRAFT",
-              "stageTypeDisplay": "Stage F",
+              "stageType": "FOI_DRAFT",
+              "stageTypeDisplay": "Stage B",
               "uuid": "stage_uuid-449",
             },
           ]
@@ -917,7 +917,9 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                               className="govuk-table__cell date-warning"
                               key="stage_uuid-445dueContribution"
                             >
-                              <span />
+                              <span>
+                                2020-12-12
+                              </span>
                             </td>
                             <td
                               className="govuk-table__cell date-warning"
@@ -1129,7 +1131,7 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                               className="govuk-table__cell"
                               key="stage_uuid-447assignedUserDisplay"
                             >
-                              User5
+                              User6
                             </td>
                             <td
                               className="govuk-table__cell govuk-table__cell--truncated"
@@ -1146,21 +1148,45 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                               is Active
                             </td>
                             <td
-                              className="govuk-table__cell date-warning"
+                              className="govuk-table__cell"
                               key="stage_uuid-447dueContribution"
                             >
-                              <span />
-                            </td>
-                            <td
-                              className="govuk-table__cell date-warning"
-                              key="stage_uuid-447DueDate"
-                            >
-                              <span />
+                              9999-01-01
                             </td>
                             <td
                               className="govuk-table__cell"
-                              key="stage_uuid-447nextCaseType"
+                              key="stage_uuid-447DueDate"
                             />
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-447nextCaseType"
+                            >
+                              <Link
+                                className="govuk-link govuk-!-margin-right-3"
+                                to={
+                                  Object {
+                                    "pathname": "/action/create/nextCase/DOCUMENT?from=case_uuid-klm",
+                                    "query": Object {
+                                      "from": "case_uuid-klm",
+                                    },
+                                  }
+                                }
+                              >
+                                <LinkAnchor
+                                  className="govuk-link govuk-!-margin-right-3"
+                                  href="/action/create/nextCase/DOCUMENT?from=case_uuid-klm"
+                                  navigate={[Function]}
+                                >
+                                  <a
+                                    className="govuk-link govuk-!-margin-right-3"
+                                    href="/action/create/nextCase/DOCUMENT?from=case_uuid-klm"
+                                    onClick={[Function]}
+                                  >
+                                    Escalate case..
+                                  </a>
+                                </LinkAnchor>
+                              </Link>
+                            </td>
                           </tr>
                           <tr
                             className="govuk-radios govuk-table__row"
@@ -1174,20 +1200,20 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                               >
                                 <div
                                   className="govuk-checkboxes__item"
-                                  key="case_uuid-klzstage_uuid-448"
+                                  key="case_uuid-opqstage_uuid-448"
                                 >
                                   <input
                                     checked={false}
                                     className="govuk-checkboxes__input"
-                                    id="selected_cases_case_uuid-klz"
+                                    id="selected_cases_case_uuid-opq"
                                     name="selected_cases[]"
                                     onChange={[Function]}
                                     type="checkbox"
-                                    value="case_uuid-klz:stage_uuid-448"
+                                    value="case_uuid-opq:stage_uuid-448"
                                   />
                                   <label
                                     className="govuk-label govuk-checkboxes__label"
-                                    htmlFor="selected_cases_case_uuid-klz"
+                                    htmlFor="selected_cases_case_uuid-opq"
                                   >
                                     <span
                                       className="govuk-visually-hidden"
@@ -1204,16 +1230,16 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                             >
                               <Link
                                 className="govuk-link govuk-!-margin-right-3"
-                                to="/case/case_uuid-klz/stage/stage_uuid-448"
+                                to="/case/case_uuid-opq/stage/stage_uuid-448"
                               >
                                 <LinkAnchor
                                   className="govuk-link govuk-!-margin-right-3"
-                                  href="/case/case_uuid-klz/stage/stage_uuid-448"
+                                  href="/case/case_uuid-opq/stage/stage_uuid-448"
                                   navigate={[Function]}
                                 >
                                   <a
                                     className="govuk-link govuk-!-margin-right-3"
-                                    href="/case/case_uuid-klz/stage/stage_uuid-448"
+                                    href="/case/case_uuid-opq/stage/stage_uuid-448"
                                     onClick={[Function]}
                                   >
                                     case7
@@ -1225,7 +1251,7 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                               className="govuk-table__cell"
                               key="stage_uuid-448fullName"
                             >
-                              Bet Linch
+                              My Name
                             </td>
                             <td
                               className="govuk-table__cell"
@@ -1247,7 +1273,7 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                               className="govuk-table__cell"
                               key="stage_uuid-448assignedUserDisplay"
                             >
-                              User5
+                              User7
                             </td>
                             <td
                               className="govuk-table__cell govuk-table__cell--truncated"
@@ -1264,47 +1290,17 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                               is Active
                             </td>
                             <td
-                              className="govuk-table__cell date-warning"
+                              className="govuk-table__cell"
                               key="stage_uuid-448dueContribution"
-                            >
-                              <span />
-                            </td>
+                            />
                             <td
-                              className="govuk-table__cell date-warning"
+                              className="govuk-table__cell"
                               key="stage_uuid-448DueDate"
-                            >
-                              <span />
-                            </td>
+                            />
                             <td
                               className="govuk-table__cell"
                               key="stage_uuid-448nextCaseType"
-                            >
-                              <Link
-                                className="govuk-link govuk-!-margin-right-3"
-                                to={
-                                  Object {
-                                    "pathname": "/action/create/nextCase/DOCUMENT?from=case_uuid-klz",
-                                    "query": Object {
-                                      "from": "case_uuid-klz",
-                                    },
-                                  }
-                                }
-                              >
-                                <LinkAnchor
-                                  className="govuk-link govuk-!-margin-right-3"
-                                  href="/action/create/nextCase/DOCUMENT?from=case_uuid-klz"
-                                  navigate={[Function]}
-                                >
-                                  <a
-                                    className="govuk-link govuk-!-margin-right-3"
-                                    href="/action/create/nextCase/DOCUMENT?from=case_uuid-klz"
-                                    onClick={[Function]}
-                                  >
-                                    Escalate case..
-                                  </a>
-                                </LinkAnchor>
-                              </Link>
-                            </td>
+                            />
                           </tr>
                           <tr
                             className="govuk-radios govuk-table__row"
@@ -1318,20 +1314,20 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                               >
                                 <div
                                   className="govuk-checkboxes__item"
-                                  key="case_uuid-klxstage_uuid-449"
+                                  key="case_uuid-klmstage_uuid-449"
                                 >
                                   <input
                                     checked={false}
                                     className="govuk-checkboxes__input"
-                                    id="selected_cases_case_uuid-klx"
+                                    id="selected_cases_case_uuid-klm"
                                     name="selected_cases[]"
                                     onChange={[Function]}
                                     type="checkbox"
-                                    value="case_uuid-klx:stage_uuid-449"
+                                    value="case_uuid-klm:stage_uuid-449"
                                   />
                                   <label
                                     className="govuk-label govuk-checkboxes__label"
-                                    htmlFor="selected_cases_case_uuid-klx"
+                                    htmlFor="selected_cases_case_uuid-klm"
                                   >
                                     <span
                                       className="govuk-visually-hidden"
@@ -1348,16 +1344,16 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                             >
                               <Link
                                 className="govuk-link govuk-!-margin-right-3"
-                                to="/case/case_uuid-klx/stage/stage_uuid-449"
+                                to="/case/case_uuid-klm/stage/stage_uuid-449"
                               >
                                 <LinkAnchor
                                   className="govuk-link govuk-!-margin-right-3"
-                                  href="/case/case_uuid-klx/stage/stage_uuid-449"
+                                  href="/case/case_uuid-klm/stage/stage_uuid-449"
                                   navigate={[Function]}
                                 >
                                   <a
                                     className="govuk-link govuk-!-margin-right-3"
-                                    href="/case/case_uuid-klx/stage/stage_uuid-449"
+                                    href="/case/case_uuid-klm/stage/stage_uuid-449"
                                     onClick={[Function]}
                                   >
                                     case8
@@ -1369,14 +1365,12 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                               className="govuk-table__cell"
                               key="stage_uuid-449fullName"
                             >
-                              Bet Linch
+                              Correspondent 8
                             </td>
                             <td
                               className="govuk-table__cell"
                               key="stage_uuid-449fullname"
-                            >
-                              Mrs Linch
-                            </td>
+                            />
                             <td
                               className="govuk-table__cell"
                               key="stage_uuid-449postcode"
@@ -1385,13 +1379,13 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                               className="govuk-table__cell"
                               key="stage_uuid-449stageTypeDisplay"
                             >
-                              Stage F
+                              Stage B
                             </td>
                             <td
                               className="govuk-table__cell"
                               key="stage_uuid-449assignedUserDisplay"
                             >
-                              User5
+                              User8
                             </td>
                             <td
                               className="govuk-table__cell govuk-table__cell--truncated"
@@ -1965,7 +1959,9 @@ Array [
                       <td
                         class="govuk-table__cell date-warning"
                       >
-                        <span />
+                        <span>
+                          2020-12-12
+                        </span>
                       </td>
                       <td
                         class="govuk-table__cell date-warning"
@@ -2125,7 +2121,7 @@ Array [
                       <td
                         class="govuk-table__cell"
                       >
-                        User5
+                        User6
                       </td>
                       <td
                         class="govuk-table__cell govuk-table__cell--truncated"
@@ -2139,111 +2135,19 @@ Array [
                         is Active
                       </td>
                       <td
-                        class="govuk-table__cell date-warning"
+                        class="govuk-table__cell"
                       >
-                        <span />
-                      </td>
-                      <td
-                        class="govuk-table__cell date-warning"
-                      >
-                        <span />
+                        9999-01-01
                       </td>
                       <td
                         class="govuk-table__cell"
                       />
-                    </tr>
-                    <tr
-                      class="govuk-radios govuk-table__row"
-                    >
-                      <td
-                        class="govuk-table__cell"
-                      >
-                        <div
-                          class="govuk-checkboxes"
-                        >
-                          <div
-                            class="govuk-checkboxes__item"
-                          >
-                            <input
-                              class="govuk-checkboxes__input"
-                              id="selected_cases_case_uuid-klz"
-                              name="selected_cases[]"
-                              type="checkbox"
-                              value="case_uuid-klz:stage_uuid-448"
-                            />
-                            <label
-                              class="govuk-label govuk-checkboxes__label"
-                              for="selected_cases_case_uuid-klz"
-                            >
-                              <span
-                                class="govuk-visually-hidden"
-                              >
-                                case7
-                              </span>
-                            </label>
-                          </div>
-                        </div>
-                      </td>
                       <td
                         class="govuk-table__cell"
                       >
                         <a
                           class="govuk-link govuk-!-margin-right-3"
-                          href="/case/case_uuid-klz/stage/stage_uuid-448"
-                        >
-                          case7
-                        </a>
-                      </td>
-                      <td
-                        class="govuk-table__cell"
-                      >
-                        Bet Linch
-                      </td>
-                      <td
-                        class="govuk-table__cell"
-                      >
-                        Mrs Linch
-                      </td>
-                      <td
-                        class="govuk-table__cell"
-                      />
-                      <td
-                        class="govuk-table__cell"
-                      >
-                        Stage F
-                      </td>
-                      <td
-                        class="govuk-table__cell"
-                      >
-                        User5
-                      </td>
-                      <td
-                        class="govuk-table__cell govuk-table__cell--truncated"
-                      />
-                      <td
-                        class="govuk-table__cell"
-                      />
-                      <td
-                        class="govuk-table__cell"
-                      >
-                        is Active
-                      </td>
-                      <td
-                        class="govuk-table__cell date-warning"
-                      >
-                        <span />
-                      </td>
-                      <td
-                        class="govuk-table__cell date-warning"
-                      >
-                        <span />
-                      </td>
-                      <td
-                        class="govuk-table__cell"
-                      >
-                        <a
-                          class="govuk-link govuk-!-margin-right-3"
-                          href="/action/create/nextCase/DOCUMENT?from=case_uuid-klz"
+                          href="/action/create/nextCase/DOCUMENT?from=case_uuid-klm"
                         >
                           Escalate case..
                         </a>
@@ -2263,19 +2167,19 @@ Array [
                           >
                             <input
                               class="govuk-checkboxes__input"
-                              id="selected_cases_case_uuid-klx"
+                              id="selected_cases_case_uuid-opq"
                               name="selected_cases[]"
                               type="checkbox"
-                              value="case_uuid-klx:stage_uuid-449"
+                              value="case_uuid-opq:stage_uuid-448"
                             />
                             <label
                               class="govuk-label govuk-checkboxes__label"
-                              for="selected_cases_case_uuid-klx"
+                              for="selected_cases_case_uuid-opq"
                             >
                               <span
                                 class="govuk-visually-hidden"
                               >
-                                case8
+                                case7
                               </span>
                             </label>
                           </div>
@@ -2286,15 +2190,15 @@ Array [
                       >
                         <a
                           class="govuk-link govuk-!-margin-right-3"
-                          href="/case/case_uuid-klx/stage/stage_uuid-449"
+                          href="/case/case_uuid-opq/stage/stage_uuid-448"
                         >
-                          case8
+                          case7
                         </a>
                       </td>
                       <td
                         class="govuk-table__cell"
                       >
-                        Bet Linch
+                        My Name
                       </td>
                       <td
                         class="govuk-table__cell"
@@ -2312,7 +2216,91 @@ Array [
                       <td
                         class="govuk-table__cell"
                       >
-                        User5
+                        User7
+                      </td>
+                      <td
+                        class="govuk-table__cell govuk-table__cell--truncated"
+                      />
+                      <td
+                        class="govuk-table__cell"
+                      />
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        is Active
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      />
+                      <td
+                        class="govuk-table__cell"
+                      />
+                      <td
+                        class="govuk-table__cell"
+                      />
+                    </tr>
+                    <tr
+                      class="govuk-radios govuk-table__row"
+                    >
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        <div
+                          class="govuk-checkboxes"
+                        >
+                          <div
+                            class="govuk-checkboxes__item"
+                          >
+                            <input
+                              class="govuk-checkboxes__input"
+                              id="selected_cases_case_uuid-klm"
+                              name="selected_cases[]"
+                              type="checkbox"
+                              value="case_uuid-klm:stage_uuid-449"
+                            />
+                            <label
+                              class="govuk-label govuk-checkboxes__label"
+                              for="selected_cases_case_uuid-klm"
+                            >
+                              <span
+                                class="govuk-visually-hidden"
+                              >
+                                case8
+                              </span>
+                            </label>
+                          </div>
+                        </div>
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        <a
+                          class="govuk-link govuk-!-margin-right-3"
+                          href="/case/case_uuid-klm/stage/stage_uuid-449"
+                        >
+                          case8
+                        </a>
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        Correspondent 8
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      />
+                      <td
+                        class="govuk-table__cell"
+                      />
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        Stage B
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        User8
                       </td>
                       <td
                         class="govuk-table__cell govuk-table__cell--truncated"
@@ -2908,7 +2896,9 @@ Array [
                       <td
                         class="govuk-table__cell date-warning"
                       >
-                        <span />
+                        <span>
+                          2020-12-12
+                        </span>
                       </td>
                       <td
                         class="govuk-table__cell date-warning"
@@ -3068,7 +3058,7 @@ Array [
                       <td
                         class="govuk-table__cell"
                       >
-                        User5
+                        User6
                       </td>
                       <td
                         class="govuk-table__cell govuk-table__cell--truncated"
@@ -3082,111 +3072,19 @@ Array [
                         is Active
                       </td>
                       <td
-                        class="govuk-table__cell date-warning"
+                        class="govuk-table__cell"
                       >
-                        <span />
-                      </td>
-                      <td
-                        class="govuk-table__cell date-warning"
-                      >
-                        <span />
+                        9999-01-01
                       </td>
                       <td
                         class="govuk-table__cell"
                       />
-                    </tr>
-                    <tr
-                      class="govuk-radios govuk-table__row"
-                    >
-                      <td
-                        class="govuk-table__cell"
-                      >
-                        <div
-                          class="govuk-checkboxes"
-                        >
-                          <div
-                            class="govuk-checkboxes__item"
-                          >
-                            <input
-                              class="govuk-checkboxes__input"
-                              id="selected_cases_case_uuid-klz"
-                              name="selected_cases[]"
-                              type="checkbox"
-                              value="case_uuid-klz:stage_uuid-448"
-                            />
-                            <label
-                              class="govuk-label govuk-checkboxes__label"
-                              for="selected_cases_case_uuid-klz"
-                            >
-                              <span
-                                class="govuk-visually-hidden"
-                              >
-                                case7
-                              </span>
-                            </label>
-                          </div>
-                        </div>
-                      </td>
                       <td
                         class="govuk-table__cell"
                       >
                         <a
                           class="govuk-link govuk-!-margin-right-3"
-                          href="/case/case_uuid-klz/stage/stage_uuid-448"
-                        >
-                          case7
-                        </a>
-                      </td>
-                      <td
-                        class="govuk-table__cell"
-                      >
-                        Bet Linch
-                      </td>
-                      <td
-                        class="govuk-table__cell"
-                      >
-                        Mrs Linch
-                      </td>
-                      <td
-                        class="govuk-table__cell"
-                      />
-                      <td
-                        class="govuk-table__cell"
-                      >
-                        Stage F
-                      </td>
-                      <td
-                        class="govuk-table__cell"
-                      >
-                        User5
-                      </td>
-                      <td
-                        class="govuk-table__cell govuk-table__cell--truncated"
-                      />
-                      <td
-                        class="govuk-table__cell"
-                      />
-                      <td
-                        class="govuk-table__cell"
-                      >
-                        is Active
-                      </td>
-                      <td
-                        class="govuk-table__cell date-warning"
-                      >
-                        <span />
-                      </td>
-                      <td
-                        class="govuk-table__cell date-warning"
-                      >
-                        <span />
-                      </td>
-                      <td
-                        class="govuk-table__cell"
-                      >
-                        <a
-                          class="govuk-link govuk-!-margin-right-3"
-                          href="/action/create/nextCase/DOCUMENT?from=case_uuid-klz"
+                          href="/action/create/nextCase/DOCUMENT?from=case_uuid-klm"
                         >
                           Escalate case..
                         </a>
@@ -3206,19 +3104,19 @@ Array [
                           >
                             <input
                               class="govuk-checkboxes__input"
-                              id="selected_cases_case_uuid-klx"
+                              id="selected_cases_case_uuid-opq"
                               name="selected_cases[]"
                               type="checkbox"
-                              value="case_uuid-klx:stage_uuid-449"
+                              value="case_uuid-opq:stage_uuid-448"
                             />
                             <label
                               class="govuk-label govuk-checkboxes__label"
-                              for="selected_cases_case_uuid-klx"
+                              for="selected_cases_case_uuid-opq"
                             >
                               <span
                                 class="govuk-visually-hidden"
                               >
-                                case8
+                                case7
                               </span>
                             </label>
                           </div>
@@ -3229,15 +3127,15 @@ Array [
                       >
                         <a
                           class="govuk-link govuk-!-margin-right-3"
-                          href="/case/case_uuid-klx/stage/stage_uuid-449"
+                          href="/case/case_uuid-opq/stage/stage_uuid-448"
                         >
-                          case8
+                          case7
                         </a>
                       </td>
                       <td
                         class="govuk-table__cell"
                       >
-                        Bet Linch
+                        My Name
                       </td>
                       <td
                         class="govuk-table__cell"
@@ -3255,7 +3153,91 @@ Array [
                       <td
                         class="govuk-table__cell"
                       >
-                        User5
+                        User7
+                      </td>
+                      <td
+                        class="govuk-table__cell govuk-table__cell--truncated"
+                      />
+                      <td
+                        class="govuk-table__cell"
+                      />
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        is Active
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      />
+                      <td
+                        class="govuk-table__cell"
+                      />
+                      <td
+                        class="govuk-table__cell"
+                      />
+                    </tr>
+                    <tr
+                      class="govuk-radios govuk-table__row"
+                    >
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        <div
+                          class="govuk-checkboxes"
+                        >
+                          <div
+                            class="govuk-checkboxes__item"
+                          >
+                            <input
+                              class="govuk-checkboxes__input"
+                              id="selected_cases_case_uuid-klm"
+                              name="selected_cases[]"
+                              type="checkbox"
+                              value="case_uuid-klm:stage_uuid-449"
+                            />
+                            <label
+                              class="govuk-label govuk-checkboxes__label"
+                              for="selected_cases_case_uuid-klm"
+                            >
+                              <span
+                                class="govuk-visually-hidden"
+                              >
+                                case8
+                              </span>
+                            </label>
+                          </div>
+                        </div>
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        <a
+                          class="govuk-link govuk-!-margin-right-3"
+                          href="/case/case_uuid-klm/stage/stage_uuid-449"
+                        >
+                          case8
+                        </a>
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        Correspondent 8
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      />
+                      <td
+                        class="govuk-table__cell"
+                      />
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        Stage B
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        User8
                       </td>
                       <td
                         class="govuk-table__cell govuk-table__cell--truncated"
@@ -3440,7 +3422,7 @@ exports[`Workstack component should render with filtering 1`] = `
               "renderer": null,
             },
             Object {
-              "dataAdapter": "indicator",
+              "dataAdapter": null,
               "dataValueKey": "dueContribution",
               "displayName": "Contribution Due Date",
               "isFilterable": true,
@@ -3476,7 +3458,10 @@ exports[`Workstack component should render with filtering 1`] = `
               "assignedUserDisplay": "User1",
               "caseReference": "case1",
               "caseUUID": "case_uuid-123",
+              "contributions": "Cancelled",
               "created": "2019-10-29T11:01:32.656563",
+              "data": Object {},
+              "dueContribution": null,
               "fullName": "Sam Smith",
               "isActive": "YES",
               "nextCaseReference": null,
@@ -3494,7 +3479,10 @@ exports[`Workstack component should render with filtering 1`] = `
               "assignedUserDisplay": "User2",
               "caseReference": "case2",
               "caseUUID": "case_uuid-789",
+              "contributions": "Received",
               "created": "",
+              "data": Object {},
+              "dueContribution": null,
               "fullName": "John Alex",
               "isActive": "NO",
               "nextCaseReference": null,
@@ -3513,6 +3501,7 @@ exports[`Workstack component should render with filtering 1`] = `
               "caseReference": "case3",
               "caseUUID": "case_uuid-abc",
               "created": null,
+              "data": Object {},
               "fullName": "Pat Brown",
               "isActive": "NO",
               "nextCaseReference": null,
@@ -3530,7 +3519,9 @@ exports[`Workstack component should render with filtering 1`] = `
               "assignedUserDisplay": "User4",
               "caseReference": "case4",
               "caseUUID": "case_uuid-efg",
+              "contributions": "Overdue",
               "created": null,
+              "data": Object {},
               "dueContribution": "2020-12-12",
               "fullName": "Dave Jones",
               "isActive": "YES",
@@ -3550,6 +3541,7 @@ exports[`Workstack component should render with filtering 1`] = `
               "caseReference": "case5",
               "caseUUID": "case_uuid-hij",
               "created": null,
+              "data": Object {},
               "fullName": "Mick Smith",
               "isActive": "YES",
               "nextCaseReference": null,
@@ -3564,17 +3556,16 @@ exports[`Workstack component should render with filtering 1`] = `
             },
             Object {
               "assignedTeamDisplay": "team6",
-              "assignedUserDisplay": "User5",
+              "assignedUserDisplay": "User6",
               "caseReference": "case6",
               "caseUUID": "case_uuid-klm",
+              "contributions": "Due",
               "created": null,
-              "data": Object {
-                "DueDate": "2021-01-01",
-              },
+              "dueContribution": "9999-01-01",
               "fullName": "Bet Linch",
               "isActive": "YES",
               "nextCaseReference": null,
-              "nextCaseType": null,
+              "nextCaseType": "nextCase",
               "primaryCorrespondent": Object {
                 "fullname": "Mrs Linch",
                 "postcode": null,
@@ -3584,18 +3575,13 @@ exports[`Workstack component should render with filtering 1`] = `
               "uuid": "stage_uuid-447",
             },
             Object {
-              "assignedTeamDisplay": "team6",
-              "assignedUserDisplay": "User5",
+              "assignedTeamDisplay": "team7",
+              "assignedUserDisplay": "User7",
               "caseReference": "case7",
-              "caseUUID": "case_uuid-klz",
+              "caseUUID": "case_uuid-opq",
               "created": null,
-              "data": Object {
-                "DueDate": "2021-01-01",
-              },
-              "fullName": "Bet Linch",
+              "fullName": "My Name",
               "isActive": "YES",
-              "nextCaseReference": null,
-              "nextCaseType": "nextCase",
               "primaryCorrespondent": Object {
                 "fullname": "Mrs Linch",
                 "postcode": null,
@@ -3605,24 +3591,20 @@ exports[`Workstack component should render with filtering 1`] = `
               "uuid": "stage_uuid-448",
             },
             Object {
-              "assignedTeamDisplay": "team6",
-              "assignedUserDisplay": "User5",
+              "assignedTeamDisplay": null,
+              "assignedUserDisplay": "User8",
               "caseReference": "case8",
-              "caseUUID": "case_uuid-klx",
+              "caseUUID": "case_uuid-klm",
               "created": null,
               "data": Object {
                 "DueDate": "2021-01-01",
               },
-              "fullName": "Bet Linch",
+              "fullName": "Correspondent 8",
               "isActive": "YES",
               "nextCaseReference": "nextCaseReference",
               "nextCaseType": "nextCase",
-              "primaryCorrespondent": Object {
-                "fullname": "Mrs Linch",
-                "postcode": null,
-              },
-              "stageType": "MPAM_DRAFT",
-              "stageTypeDisplay": "Stage F",
+              "stageType": "FOI_DRAFT",
+              "stageTypeDisplay": "Stage B",
               "uuid": "stage_uuid-449",
             },
           ]
@@ -4091,7 +4073,7 @@ exports[`Workstack component should sort descending when the column heading is c
               "renderer": null,
             },
             Object {
-              "dataAdapter": "indicator",
+              "dataAdapter": null,
               "dataValueKey": "dueContribution",
               "displayName": "Contribution Due Date",
               "isFilterable": true,
@@ -4127,7 +4109,10 @@ exports[`Workstack component should sort descending when the column heading is c
               "assignedUserDisplay": "User1",
               "caseReference": "case1",
               "caseUUID": "case_uuid-123",
+              "contributions": "Cancelled",
               "created": "2019-10-29T11:01:32.656563",
+              "data": Object {},
+              "dueContribution": null,
               "fullName": "Sam Smith",
               "isActive": "YES",
               "nextCaseReference": null,
@@ -4145,7 +4130,10 @@ exports[`Workstack component should sort descending when the column heading is c
               "assignedUserDisplay": "User2",
               "caseReference": "case2",
               "caseUUID": "case_uuid-789",
+              "contributions": "Received",
               "created": "",
+              "data": Object {},
+              "dueContribution": null,
               "fullName": "John Alex",
               "isActive": "NO",
               "nextCaseReference": null,
@@ -4164,6 +4152,7 @@ exports[`Workstack component should sort descending when the column heading is c
               "caseReference": "case3",
               "caseUUID": "case_uuid-abc",
               "created": null,
+              "data": Object {},
               "fullName": "Pat Brown",
               "isActive": "NO",
               "nextCaseReference": null,
@@ -4181,7 +4170,9 @@ exports[`Workstack component should sort descending when the column heading is c
               "assignedUserDisplay": "User4",
               "caseReference": "case4",
               "caseUUID": "case_uuid-efg",
+              "contributions": "Overdue",
               "created": null,
+              "data": Object {},
               "dueContribution": "2020-12-12",
               "fullName": "Dave Jones",
               "isActive": "YES",
@@ -4201,6 +4192,7 @@ exports[`Workstack component should sort descending when the column heading is c
               "caseReference": "case5",
               "caseUUID": "case_uuid-hij",
               "created": null,
+              "data": Object {},
               "fullName": "Mick Smith",
               "isActive": "YES",
               "nextCaseReference": null,
@@ -4215,17 +4207,16 @@ exports[`Workstack component should sort descending when the column heading is c
             },
             Object {
               "assignedTeamDisplay": "team6",
-              "assignedUserDisplay": "User5",
+              "assignedUserDisplay": "User6",
               "caseReference": "case6",
               "caseUUID": "case_uuid-klm",
+              "contributions": "Due",
               "created": null,
-              "data": Object {
-                "DueDate": "2021-01-01",
-              },
+              "dueContribution": "9999-01-01",
               "fullName": "Bet Linch",
               "isActive": "YES",
               "nextCaseReference": null,
-              "nextCaseType": null,
+              "nextCaseType": "nextCase",
               "primaryCorrespondent": Object {
                 "fullname": "Mrs Linch",
                 "postcode": null,
@@ -4235,18 +4226,13 @@ exports[`Workstack component should sort descending when the column heading is c
               "uuid": "stage_uuid-447",
             },
             Object {
-              "assignedTeamDisplay": "team6",
-              "assignedUserDisplay": "User5",
+              "assignedTeamDisplay": "team7",
+              "assignedUserDisplay": "User7",
               "caseReference": "case7",
-              "caseUUID": "case_uuid-klz",
+              "caseUUID": "case_uuid-opq",
               "created": null,
-              "data": Object {
-                "DueDate": "2021-01-01",
-              },
-              "fullName": "Bet Linch",
+              "fullName": "My Name",
               "isActive": "YES",
-              "nextCaseReference": null,
-              "nextCaseType": "nextCase",
               "primaryCorrespondent": Object {
                 "fullname": "Mrs Linch",
                 "postcode": null,
@@ -4256,24 +4242,20 @@ exports[`Workstack component should sort descending when the column heading is c
               "uuid": "stage_uuid-448",
             },
             Object {
-              "assignedTeamDisplay": "team6",
-              "assignedUserDisplay": "User5",
+              "assignedTeamDisplay": null,
+              "assignedUserDisplay": "User8",
               "caseReference": "case8",
-              "caseUUID": "case_uuid-klx",
+              "caseUUID": "case_uuid-klm",
               "created": null,
               "data": Object {
                 "DueDate": "2021-01-01",
               },
-              "fullName": "Bet Linch",
+              "fullName": "Correspondent 8",
               "isActive": "YES",
               "nextCaseReference": "nextCaseReference",
               "nextCaseType": "nextCase",
-              "primaryCorrespondent": Object {
-                "fullname": "Mrs Linch",
-                "postcode": null,
-              },
-              "stageType": "MPAM_DRAFT",
-              "stageTypeDisplay": "Stage F",
+              "stageType": "FOI_DRAFT",
+              "stageTypeDisplay": "Stage B",
               "uuid": "stage_uuid-449",
             },
           ]
@@ -4460,20 +4442,20 @@ exports[`Workstack component should sort descending when the column heading is c
                               >
                                 <div
                                   className="govuk-checkboxes__item"
-                                  key="case_uuid-klxstage_uuid-449"
+                                  key="case_uuid-klmstage_uuid-449"
                                 >
                                   <input
                                     checked={false}
                                     className="govuk-checkboxes__input"
-                                    id="selected_cases_case_uuid-klx"
+                                    id="selected_cases_case_uuid-klm"
                                     name="selected_cases[]"
                                     onChange={[Function]}
                                     type="checkbox"
-                                    value="case_uuid-klx:stage_uuid-449"
+                                    value="case_uuid-klm:stage_uuid-449"
                                   />
                                   <label
                                     className="govuk-label govuk-checkboxes__label"
-                                    htmlFor="selected_cases_case_uuid-klx"
+                                    htmlFor="selected_cases_case_uuid-klm"
                                   >
                                     <span
                                       className="govuk-visually-hidden"
@@ -4490,16 +4472,16 @@ exports[`Workstack component should sort descending when the column heading is c
                             >
                               <Link
                                 className="govuk-link govuk-!-margin-right-3"
-                                to="/case/case_uuid-klx/stage/stage_uuid-449"
+                                to="/case/case_uuid-klm/stage/stage_uuid-449"
                               >
                                 <LinkAnchor
                                   className="govuk-link govuk-!-margin-right-3"
-                                  href="/case/case_uuid-klx/stage/stage_uuid-449"
+                                  href="/case/case_uuid-klm/stage/stage_uuid-449"
                                   navigate={[Function]}
                                 >
                                   <a
                                     className="govuk-link govuk-!-margin-right-3"
-                                    href="/case/case_uuid-klx/stage/stage_uuid-449"
+                                    href="/case/case_uuid-klm/stage/stage_uuid-449"
                                     onClick={[Function]}
                                   >
                                     case8
@@ -4511,14 +4493,12 @@ exports[`Workstack component should sort descending when the column heading is c
                               className="govuk-table__cell"
                               key="stage_uuid-449fullName"
                             >
-                              Bet Linch
+                              Correspondent 8
                             </td>
                             <td
                               className="govuk-table__cell"
                               key="stage_uuid-449fullname"
-                            >
-                              Mrs Linch
-                            </td>
+                            />
                             <td
                               className="govuk-table__cell"
                               key="stage_uuid-449postcode"
@@ -4527,13 +4507,13 @@ exports[`Workstack component should sort descending when the column heading is c
                               className="govuk-table__cell"
                               key="stage_uuid-449stageTypeDisplay"
                             >
-                              Stage F
+                              Stage B
                             </td>
                             <td
                               className="govuk-table__cell"
                               key="stage_uuid-449assignedUserDisplay"
                             >
-                              User5
+                              User8
                             </td>
                             <td
                               className="govuk-table__cell govuk-table__cell--truncated"
@@ -4597,20 +4577,20 @@ exports[`Workstack component should sort descending when the column heading is c
                               >
                                 <div
                                   className="govuk-checkboxes__item"
-                                  key="case_uuid-klzstage_uuid-448"
+                                  key="case_uuid-opqstage_uuid-448"
                                 >
                                   <input
                                     checked={false}
                                     className="govuk-checkboxes__input"
-                                    id="selected_cases_case_uuid-klz"
+                                    id="selected_cases_case_uuid-opq"
                                     name="selected_cases[]"
                                     onChange={[Function]}
                                     type="checkbox"
-                                    value="case_uuid-klz:stage_uuid-448"
+                                    value="case_uuid-opq:stage_uuid-448"
                                   />
                                   <label
                                     className="govuk-label govuk-checkboxes__label"
-                                    htmlFor="selected_cases_case_uuid-klz"
+                                    htmlFor="selected_cases_case_uuid-opq"
                                   >
                                     <span
                                       className="govuk-visually-hidden"
@@ -4627,16 +4607,16 @@ exports[`Workstack component should sort descending when the column heading is c
                             >
                               <Link
                                 className="govuk-link govuk-!-margin-right-3"
-                                to="/case/case_uuid-klz/stage/stage_uuid-448"
+                                to="/case/case_uuid-opq/stage/stage_uuid-448"
                               >
                                 <LinkAnchor
                                   className="govuk-link govuk-!-margin-right-3"
-                                  href="/case/case_uuid-klz/stage/stage_uuid-448"
+                                  href="/case/case_uuid-opq/stage/stage_uuid-448"
                                   navigate={[Function]}
                                 >
                                   <a
                                     className="govuk-link govuk-!-margin-right-3"
-                                    href="/case/case_uuid-klz/stage/stage_uuid-448"
+                                    href="/case/case_uuid-opq/stage/stage_uuid-448"
                                     onClick={[Function]}
                                   >
                                     case7
@@ -4648,7 +4628,7 @@ exports[`Workstack component should sort descending when the column heading is c
                               className="govuk-table__cell"
                               key="stage_uuid-448fullName"
                             >
-                              Bet Linch
+                              My Name
                             </td>
                             <td
                               className="govuk-table__cell"
@@ -4670,7 +4650,7 @@ exports[`Workstack component should sort descending when the column heading is c
                               className="govuk-table__cell"
                               key="stage_uuid-448assignedUserDisplay"
                             >
-                              User5
+                              User7
                             </td>
                             <td
                               className="govuk-table__cell govuk-table__cell--truncated"
@@ -4687,47 +4667,17 @@ exports[`Workstack component should sort descending when the column heading is c
                               is Active
                             </td>
                             <td
-                              className="govuk-table__cell date-warning"
+                              className="govuk-table__cell"
                               key="stage_uuid-448dueContribution"
-                            >
-                              <span />
-                            </td>
+                            />
                             <td
-                              className="govuk-table__cell date-warning"
+                              className="govuk-table__cell"
                               key="stage_uuid-448DueDate"
-                            >
-                              <span />
-                            </td>
+                            />
                             <td
                               className="govuk-table__cell"
                               key="stage_uuid-448nextCaseType"
-                            >
-                              <Link
-                                className="govuk-link govuk-!-margin-right-3"
-                                to={
-                                  Object {
-                                    "pathname": "/action/create/nextCase/DOCUMENT?from=case_uuid-klz",
-                                    "query": Object {
-                                      "from": "case_uuid-klz",
-                                    },
-                                  }
-                                }
-                              >
-                                <LinkAnchor
-                                  className="govuk-link govuk-!-margin-right-3"
-                                  href="/action/create/nextCase/DOCUMENT?from=case_uuid-klz"
-                                  navigate={[Function]}
-                                >
-                                  <a
-                                    className="govuk-link govuk-!-margin-right-3"
-                                    href="/action/create/nextCase/DOCUMENT?from=case_uuid-klz"
-                                    onClick={[Function]}
-                                  >
-                                    Escalate case..
-                                  </a>
-                                </LinkAnchor>
-                              </Link>
-                            </td>
+                            />
                           </tr>
                           <tr
                             className="govuk-radios govuk-table__row"
@@ -4814,7 +4764,7 @@ exports[`Workstack component should sort descending when the column heading is c
                               className="govuk-table__cell"
                               key="stage_uuid-447assignedUserDisplay"
                             >
-                              User5
+                              User6
                             </td>
                             <td
                               className="govuk-table__cell govuk-table__cell--truncated"
@@ -4831,21 +4781,45 @@ exports[`Workstack component should sort descending when the column heading is c
                               is Active
                             </td>
                             <td
-                              className="govuk-table__cell date-warning"
+                              className="govuk-table__cell"
                               key="stage_uuid-447dueContribution"
                             >
-                              <span />
-                            </td>
-                            <td
-                              className="govuk-table__cell date-warning"
-                              key="stage_uuid-447DueDate"
-                            >
-                              <span />
+                              9999-01-01
                             </td>
                             <td
                               className="govuk-table__cell"
-                              key="stage_uuid-447nextCaseType"
+                              key="stage_uuid-447DueDate"
                             />
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-447nextCaseType"
+                            >
+                              <Link
+                                className="govuk-link govuk-!-margin-right-3"
+                                to={
+                                  Object {
+                                    "pathname": "/action/create/nextCase/DOCUMENT?from=case_uuid-klm",
+                                    "query": Object {
+                                      "from": "case_uuid-klm",
+                                    },
+                                  }
+                                }
+                              >
+                                <LinkAnchor
+                                  className="govuk-link govuk-!-margin-right-3"
+                                  href="/action/create/nextCase/DOCUMENT?from=case_uuid-klm"
+                                  navigate={[Function]}
+                                >
+                                  <a
+                                    className="govuk-link govuk-!-margin-right-3"
+                                    href="/action/create/nextCase/DOCUMENT?from=case_uuid-klm"
+                                    onClick={[Function]}
+                                  >
+                                    Escalate case..
+                                  </a>
+                                </LinkAnchor>
+                              </Link>
+                            </td>
                           </tr>
                           <tr
                             className="govuk-radios govuk-table__row"
@@ -5068,7 +5042,9 @@ exports[`Workstack component should sort descending when the column heading is c
                               className="govuk-table__cell date-warning"
                               key="stage_uuid-445dueContribution"
                             >
-                              <span />
+                              <span>
+                                2020-12-12
+                              </span>
                             </td>
                             <td
                               className="govuk-table__cell date-warning"
@@ -5593,7 +5569,7 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
               "renderer": null,
             },
             Object {
-              "dataAdapter": "indicator",
+              "dataAdapter": null,
               "dataValueKey": "dueContribution",
               "displayName": "Contribution Due Date",
               "isFilterable": true,
@@ -5629,7 +5605,10 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
               "assignedUserDisplay": "User1",
               "caseReference": "case1",
               "caseUUID": "case_uuid-123",
+              "contributions": "Cancelled",
               "created": "2019-10-29T11:01:32.656563",
+              "data": Object {},
+              "dueContribution": null,
               "fullName": "Sam Smith",
               "isActive": "YES",
               "nextCaseReference": null,
@@ -5647,7 +5626,10 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
               "assignedUserDisplay": "User2",
               "caseReference": "case2",
               "caseUUID": "case_uuid-789",
+              "contributions": "Received",
               "created": "",
+              "data": Object {},
+              "dueContribution": null,
               "fullName": "John Alex",
               "isActive": "NO",
               "nextCaseReference": null,
@@ -5666,6 +5648,7 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
               "caseReference": "case3",
               "caseUUID": "case_uuid-abc",
               "created": null,
+              "data": Object {},
               "fullName": "Pat Brown",
               "isActive": "NO",
               "nextCaseReference": null,
@@ -5683,7 +5666,9 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
               "assignedUserDisplay": "User4",
               "caseReference": "case4",
               "caseUUID": "case_uuid-efg",
+              "contributions": "Overdue",
               "created": null,
+              "data": Object {},
               "dueContribution": "2020-12-12",
               "fullName": "Dave Jones",
               "isActive": "YES",
@@ -5703,6 +5688,7 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
               "caseReference": "case5",
               "caseUUID": "case_uuid-hij",
               "created": null,
+              "data": Object {},
               "fullName": "Mick Smith",
               "isActive": "YES",
               "nextCaseReference": null,
@@ -5717,17 +5703,16 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
             },
             Object {
               "assignedTeamDisplay": "team6",
-              "assignedUserDisplay": "User5",
+              "assignedUserDisplay": "User6",
               "caseReference": "case6",
               "caseUUID": "case_uuid-klm",
+              "contributions": "Due",
               "created": null,
-              "data": Object {
-                "DueDate": "2021-01-01",
-              },
+              "dueContribution": "9999-01-01",
               "fullName": "Bet Linch",
               "isActive": "YES",
               "nextCaseReference": null,
-              "nextCaseType": null,
+              "nextCaseType": "nextCase",
               "primaryCorrespondent": Object {
                 "fullname": "Mrs Linch",
                 "postcode": null,
@@ -5737,18 +5722,13 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
               "uuid": "stage_uuid-447",
             },
             Object {
-              "assignedTeamDisplay": "team6",
-              "assignedUserDisplay": "User5",
+              "assignedTeamDisplay": "team7",
+              "assignedUserDisplay": "User7",
               "caseReference": "case7",
-              "caseUUID": "case_uuid-klz",
+              "caseUUID": "case_uuid-opq",
               "created": null,
-              "data": Object {
-                "DueDate": "2021-01-01",
-              },
-              "fullName": "Bet Linch",
+              "fullName": "My Name",
               "isActive": "YES",
-              "nextCaseReference": null,
-              "nextCaseType": "nextCase",
               "primaryCorrespondent": Object {
                 "fullname": "Mrs Linch",
                 "postcode": null,
@@ -5758,24 +5738,20 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
               "uuid": "stage_uuid-448",
             },
             Object {
-              "assignedTeamDisplay": "team6",
-              "assignedUserDisplay": "User5",
+              "assignedTeamDisplay": null,
+              "assignedUserDisplay": "User8",
               "caseReference": "case8",
-              "caseUUID": "case_uuid-klx",
+              "caseUUID": "case_uuid-klm",
               "created": null,
               "data": Object {
                 "DueDate": "2021-01-01",
               },
-              "fullName": "Bet Linch",
+              "fullName": "Correspondent 8",
               "isActive": "YES",
               "nextCaseReference": "nextCaseReference",
               "nextCaseType": "nextCase",
-              "primaryCorrespondent": Object {
-                "fullname": "Mrs Linch",
-                "postcode": null,
-              },
-              "stageType": "MPAM_DRAFT",
-              "stageTypeDisplay": "Stage F",
+              "stageType": "FOI_DRAFT",
+              "stageTypeDisplay": "Stage B",
               "uuid": "stage_uuid-449",
             },
           ]
@@ -6412,7 +6388,9 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                               className="govuk-table__cell date-warning"
                               key="stage_uuid-445dueContribution"
                             >
-                              <span />
+                              <span>
+                                2020-12-12
+                              </span>
                             </td>
                             <td
                               className="govuk-table__cell date-warning"
@@ -6624,7 +6602,7 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                               className="govuk-table__cell"
                               key="stage_uuid-447assignedUserDisplay"
                             >
-                              User5
+                              User6
                             </td>
                             <td
                               className="govuk-table__cell govuk-table__cell--truncated"
@@ -6641,21 +6619,45 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                               is Active
                             </td>
                             <td
-                              className="govuk-table__cell date-warning"
+                              className="govuk-table__cell"
                               key="stage_uuid-447dueContribution"
                             >
-                              <span />
-                            </td>
-                            <td
-                              className="govuk-table__cell date-warning"
-                              key="stage_uuid-447DueDate"
-                            >
-                              <span />
+                              9999-01-01
                             </td>
                             <td
                               className="govuk-table__cell"
-                              key="stage_uuid-447nextCaseType"
+                              key="stage_uuid-447DueDate"
                             />
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-447nextCaseType"
+                            >
+                              <Link
+                                className="govuk-link govuk-!-margin-right-3"
+                                to={
+                                  Object {
+                                    "pathname": "/action/create/nextCase/DOCUMENT?from=case_uuid-klm",
+                                    "query": Object {
+                                      "from": "case_uuid-klm",
+                                    },
+                                  }
+                                }
+                              >
+                                <LinkAnchor
+                                  className="govuk-link govuk-!-margin-right-3"
+                                  href="/action/create/nextCase/DOCUMENT?from=case_uuid-klm"
+                                  navigate={[Function]}
+                                >
+                                  <a
+                                    className="govuk-link govuk-!-margin-right-3"
+                                    href="/action/create/nextCase/DOCUMENT?from=case_uuid-klm"
+                                    onClick={[Function]}
+                                  >
+                                    Escalate case..
+                                  </a>
+                                </LinkAnchor>
+                              </Link>
+                            </td>
                           </tr>
                           <tr
                             className="govuk-radios govuk-table__row"
@@ -6669,20 +6671,20 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                               >
                                 <div
                                   className="govuk-checkboxes__item"
-                                  key="case_uuid-klzstage_uuid-448"
+                                  key="case_uuid-opqstage_uuid-448"
                                 >
                                   <input
                                     checked={false}
                                     className="govuk-checkboxes__input"
-                                    id="selected_cases_case_uuid-klz"
+                                    id="selected_cases_case_uuid-opq"
                                     name="selected_cases[]"
                                     onChange={[Function]}
                                     type="checkbox"
-                                    value="case_uuid-klz:stage_uuid-448"
+                                    value="case_uuid-opq:stage_uuid-448"
                                   />
                                   <label
                                     className="govuk-label govuk-checkboxes__label"
-                                    htmlFor="selected_cases_case_uuid-klz"
+                                    htmlFor="selected_cases_case_uuid-opq"
                                   >
                                     <span
                                       className="govuk-visually-hidden"
@@ -6699,16 +6701,16 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                             >
                               <Link
                                 className="govuk-link govuk-!-margin-right-3"
-                                to="/case/case_uuid-klz/stage/stage_uuid-448"
+                                to="/case/case_uuid-opq/stage/stage_uuid-448"
                               >
                                 <LinkAnchor
                                   className="govuk-link govuk-!-margin-right-3"
-                                  href="/case/case_uuid-klz/stage/stage_uuid-448"
+                                  href="/case/case_uuid-opq/stage/stage_uuid-448"
                                   navigate={[Function]}
                                 >
                                   <a
                                     className="govuk-link govuk-!-margin-right-3"
-                                    href="/case/case_uuid-klz/stage/stage_uuid-448"
+                                    href="/case/case_uuid-opq/stage/stage_uuid-448"
                                     onClick={[Function]}
                                   >
                                     case7
@@ -6720,7 +6722,7 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                               className="govuk-table__cell"
                               key="stage_uuid-448fullName"
                             >
-                              Bet Linch
+                              My Name
                             </td>
                             <td
                               className="govuk-table__cell"
@@ -6742,7 +6744,7 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                               className="govuk-table__cell"
                               key="stage_uuid-448assignedUserDisplay"
                             >
-                              User5
+                              User7
                             </td>
                             <td
                               className="govuk-table__cell govuk-table__cell--truncated"
@@ -6759,47 +6761,17 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                               is Active
                             </td>
                             <td
-                              className="govuk-table__cell date-warning"
+                              className="govuk-table__cell"
                               key="stage_uuid-448dueContribution"
-                            >
-                              <span />
-                            </td>
+                            />
                             <td
-                              className="govuk-table__cell date-warning"
+                              className="govuk-table__cell"
                               key="stage_uuid-448DueDate"
-                            >
-                              <span />
-                            </td>
+                            />
                             <td
                               className="govuk-table__cell"
                               key="stage_uuid-448nextCaseType"
-                            >
-                              <Link
-                                className="govuk-link govuk-!-margin-right-3"
-                                to={
-                                  Object {
-                                    "pathname": "/action/create/nextCase/DOCUMENT?from=case_uuid-klz",
-                                    "query": Object {
-                                      "from": "case_uuid-klz",
-                                    },
-                                  }
-                                }
-                              >
-                                <LinkAnchor
-                                  className="govuk-link govuk-!-margin-right-3"
-                                  href="/action/create/nextCase/DOCUMENT?from=case_uuid-klz"
-                                  navigate={[Function]}
-                                >
-                                  <a
-                                    className="govuk-link govuk-!-margin-right-3"
-                                    href="/action/create/nextCase/DOCUMENT?from=case_uuid-klz"
-                                    onClick={[Function]}
-                                  >
-                                    Escalate case..
-                                  </a>
-                                </LinkAnchor>
-                              </Link>
-                            </td>
+                            />
                           </tr>
                           <tr
                             className="govuk-radios govuk-table__row"
@@ -6813,20 +6785,20 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                               >
                                 <div
                                   className="govuk-checkboxes__item"
-                                  key="case_uuid-klxstage_uuid-449"
+                                  key="case_uuid-klmstage_uuid-449"
                                 >
                                   <input
                                     checked={false}
                                     className="govuk-checkboxes__input"
-                                    id="selected_cases_case_uuid-klx"
+                                    id="selected_cases_case_uuid-klm"
                                     name="selected_cases[]"
                                     onChange={[Function]}
                                     type="checkbox"
-                                    value="case_uuid-klx:stage_uuid-449"
+                                    value="case_uuid-klm:stage_uuid-449"
                                   />
                                   <label
                                     className="govuk-label govuk-checkboxes__label"
-                                    htmlFor="selected_cases_case_uuid-klx"
+                                    htmlFor="selected_cases_case_uuid-klm"
                                   >
                                     <span
                                       className="govuk-visually-hidden"
@@ -6843,16 +6815,16 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                             >
                               <Link
                                 className="govuk-link govuk-!-margin-right-3"
-                                to="/case/case_uuid-klx/stage/stage_uuid-449"
+                                to="/case/case_uuid-klm/stage/stage_uuid-449"
                               >
                                 <LinkAnchor
                                   className="govuk-link govuk-!-margin-right-3"
-                                  href="/case/case_uuid-klx/stage/stage_uuid-449"
+                                  href="/case/case_uuid-klm/stage/stage_uuid-449"
                                   navigate={[Function]}
                                 >
                                   <a
                                     className="govuk-link govuk-!-margin-right-3"
-                                    href="/case/case_uuid-klx/stage/stage_uuid-449"
+                                    href="/case/case_uuid-klm/stage/stage_uuid-449"
                                     onClick={[Function]}
                                   >
                                     case8
@@ -6864,14 +6836,12 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                               className="govuk-table__cell"
                               key="stage_uuid-449fullName"
                             >
-                              Bet Linch
+                              Correspondent 8
                             </td>
                             <td
                               className="govuk-table__cell"
                               key="stage_uuid-449fullname"
-                            >
-                              Mrs Linch
-                            </td>
+                            />
                             <td
                               className="govuk-table__cell"
                               key="stage_uuid-449postcode"
@@ -6880,13 +6850,13 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                               className="govuk-table__cell"
                               key="stage_uuid-449stageTypeDisplay"
                             >
-                              Stage F
+                              Stage B
                             </td>
                             <td
                               className="govuk-table__cell"
                               key="stage_uuid-449assignedUserDisplay"
                             >
-                              User5
+                              User8
                             </td>
                             <td
                               className="govuk-table__cell govuk-table__cell--truncated"

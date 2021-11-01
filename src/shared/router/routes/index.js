@@ -96,6 +96,24 @@ const routes = [
         hasSidebar: false
     },
     {
+        path: '/case/:caseId/stage/:stageId/caseAction/:caseActionType/:caseAction',
+        exact: true,
+        component: CasePage,
+        hasSidebar: false
+    },
+    {
+        path: '/case/:caseId/caseAction/:caseActionType/:caseAction',
+        exact: true,
+        component: CasePage,
+        hasSidebar: false
+    },
+    {
+        path: '/case/:caseId/stage/:stageId/caseAction/:caseActionType/:caseAction/:caseActionId',
+        exact: true,
+        component: CasePage,
+        hasSidebar: true
+    },
+    {
         path: '/case/:caseId/stage/:stageId/entity/:entity/:action/',
         exact: true,
         component: CasePage,
@@ -103,6 +121,11 @@ const routes = [
     },
     {
         path: '/case/:caseId/stage/:stageId/entity/:entity/:context/:action/',
+        exact: true,
+        component: CasePage
+    },
+    {
+        path: '/case/:caseId/stage/:stageId/entity/:entity/:context/:caseType/:action/',
         exact: true,
         component: CasePage
     },

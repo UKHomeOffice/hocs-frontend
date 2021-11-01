@@ -157,28 +157,28 @@ class Radio extends Component {
                                             <label className="govuk-label govuk-radios__label" htmlFor={`${idName}`}>{choice.label}</label>
                                         </div>
                                         {choice.conditionalContent &&
-                                            <div className="govuk-radios__conditional govuk-radios__conditional--hidden"
-                                                id={`conditional-${idName}`}>
-                                                <div className={`govuk-form-group ${this.isConditionalContentError(errors, `${choice.value}Text`) ? ' govuk-form-group--error' : ''}`}>
-                                                    <label className="govuk-label" htmlFor={`${choice.value}Text`}>
-                                                        {choice.conditionalContent.label}
-                                                    </label>
-                                                    {this.isConditionalContentError(errors, `${choice.value}Text`) &&
-                                                        <span id={`${choice.value}Text-error`} className="govuk-error-message">
-                                                            <span className="govuk-visually-hidden">Error:</span>{errors[`${choice.value}Text`]}
-                                                        </span>
-                                                    }
-                                                    <textarea
-                                                        className={`govuk-textarea ${this.isConditionalContentError(errors, `${choice.value}Text`) ? ' govuk-textarea--error' : ''}`}
-                                                        id={`${choice.value}Text`}
-                                                        name={`${choice.value}Text`}
-                                                        disabled={disabled}
-                                                        rows="4"
-                                                        onChange={e => this.handleChangeForTextArea(e)}
-                                                        value={this.returnConditionalContentValue(`${value}Text`)}
-                                                    />
-                                                </div>
+                                        <div className="govuk-radios__conditional govuk-radios__conditional--hidden"
+                                            id={`conditional-${idName}`}>
+                                            <div className={`govuk-form-group ${this.isConditionalContentError(errors, `${choice.value}Text`) ? ' govuk-form-group--error' : ''}`}>
+                                                <label className="govuk-label" htmlFor={`${choice.value}Text`}>
+                                                    {choice.conditionalContent.label}
+                                                </label>
+                                                {this.isConditionalContentError(errors, `${choice.value}Text`) &&
+                                                <span id={`${choice.value}Text-error`} className="govuk-error-message">
+                                                    <span className="govuk-visually-hidden">Error:</span>{errors[`${choice.value}Text`]}
+                                                </span>
+                                                }
+                                                <textarea
+                                                    className={`govuk-textarea ${this.isConditionalContentError(errors, `${choice.value}Text`) ? ' govuk-textarea--error' : ''}`}
+                                                    id={`${choice.value}Text`}
+                                                    name={`${choice.value}Text`}
+                                                    disabled={disabled}
+                                                    rows="4"
+                                                    onChange={e => this.handleChangeForTextArea(e)}
+                                                    value={this.returnConditionalContentValue(`${value}Text`)}
+                                                />
                                             </div>
+                                        </div>
                                         }
                                     </Fragment>
                                 );

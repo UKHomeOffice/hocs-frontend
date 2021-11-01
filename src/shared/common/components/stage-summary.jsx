@@ -1,8 +1,10 @@
-import React, { useContext, useEffect, Fragment } from 'react';
+import React, { useContext, useEffect, Fragment, useCallback } from 'react';
 import { Context } from '../../contexts/application.jsx';
 import PropTypes from 'prop-types';
-import { updateSummary } from '../../helpers/summary-helpers.jsx';
 import { Link } from 'react-router-dom';
+import status from '../../helpers/api-status';
+import { updateApiStatus } from '../../contexts/actions/index.jsx';
+import updateSummary from '../../helpers/summary-helpers';
 
 
 const renderActiveStage = ({ stage, assignedTeam, assignedUser }) => {
@@ -45,25 +47,22 @@ renderRow.propTypes = {
 
 
 const StageSummary = () => {
-    const { summary, dispatch, page, apiStatus } = useContext(Context);
+    const { summary, dispatch, page } = useContext(Context);
     const { primaryCorrespondent } = { ...summary };
 
-
     // update when updates are sent to the api
-    useEffect(() => {
-        if (apiStatus && apiStatus.status.display === 'Form received') {
-            updateSummary(page.params.caseId, dispatch);
-        }
-    }, [apiStatus]);
-
-    // load summary on mount
-    useEffect(() => {
+    const fetchCaseSummaryData = useCallback(() => {
+        dispatch(updateApiStatus(status.REQUEST_CASE_SUMMARY));
         updateSummary(page.params.caseId, dispatch);
-    }, []);
+    }, [updateSummary]);
+
+    useEffect(() => {
+        fetchCaseSummaryData();
+    }, [fetchCaseSummaryData]);
 
     return (
         <Fragment>
-            {summary &&
+            {(summary && Object.keys(summary).length !== 0) &&
                 <Fragment>
                     <h2 className='govuk-heading-m'>Active stage{summary.stages.length > 1 && 's'}</h2>
                     {summary.stages.map(stage => renderActiveStage(stage))}
@@ -91,6 +90,7 @@ const StageSummary = () => {
                                 <th className='govuk-table__header padding-left--small govuk-!-width-one-third'>Primary correspondent</th>
                                 <td className='govuk-table__cell'>
                                     <span>{primaryCorrespondent.fullname}</span>
+                                    {primaryCorrespondent.email && <> <br /> <span>{primaryCorrespondent.email}</span> </>}
                                     {primaryCorrespondent.address && <>
                                         {primaryCorrespondent.address.address1 && <> <br /> <span>{primaryCorrespondent.address.address1}</span> </>}
                                         {primaryCorrespondent.address.address2 && <> <br /> <span>{primaryCorrespondent.address.address2}</span> </>}
@@ -129,7 +129,6 @@ const StageSummary = () => {
                             </tbody>
                         </table>
                     }
-
                 </Fragment>
             }
         </Fragment>
