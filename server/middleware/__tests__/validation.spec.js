@@ -753,8 +753,12 @@ describe('Validation middleware', () => {
                                 visibilityConditions: [
                                     {
                                         function: 'hasCommaSeparatedValue',
-                                        conditionPropertyName: 'TestCheckbox',
-                                        conditionPropertyValue: 'Other'
+                                        conditionArgs: [
+                                            {
+                                                conditionPropertyName: 'TestCheckbox',
+                                                conditionPropertyValue: 'Other'
+                                            }
+                                        ]
                                     },
                                 ],
                                 name: 'OtherFieldText',

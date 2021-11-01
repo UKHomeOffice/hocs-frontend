@@ -90,9 +90,10 @@ function isComponentVisible(config, data) {
         isVisible = false;
 
         for (const condition of visibilityConditions) {
+
             if (condition.function && Object.prototype.hasOwnProperty.call(showConditionFunctions, condition.function)) {
-                if (condition.conditionPropertyName && condition.conditionPropertyValue) {
-                    isVisible = showConditionFunctions[condition.function](data, condition.conditionPropertyName, condition.conditionPropertyValue);
+                if (condition.conditionArgs) {
+                    isVisible = showConditionFunctions[condition.function](data, condition.conditionArgs);
                 }
             } else if (data && data[condition.conditionPropertyName] && data[condition.conditionPropertyName] === condition.conditionPropertyValue) {
                 isVisible = true;

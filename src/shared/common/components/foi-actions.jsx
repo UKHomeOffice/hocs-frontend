@@ -15,7 +15,6 @@ const FoiActions = () => {
         if (!somuType) {
             axios.get('/api/form/somu/somuCaseType/FOI/somuType/APPEAL/')
                 .then(somuTypeResponse => {
-                    // console.log(`GET: /api/form/case/${page.params.caseId}/somu/somuTypeUuid/${somuTypeResponse.data.uuid}/`);
                     setSomuType(somuTypeResponse.data);
                 });
         }
