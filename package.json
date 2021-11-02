@@ -42,7 +42,7 @@
         "body-parser": "^1.18.2",
         "classnames": "^2.2.6",
         "cookie-parser": "^1.4.4",
-        "core-js": "^3.15.0",
+        "core-js": "^3.18.2",
         "csurf": "^1.10.0",
         "deep-equal": "^2.0.5",
         "express": "^4.16.4",
