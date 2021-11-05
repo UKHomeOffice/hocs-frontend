@@ -1,6 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+const getMapOfChoicesAndChoiceOptions = (choices) => {
+
+    const optionChoices = choices
+        .filter(choice => choice.options)
+        .flatMap(choice => choice.options);
+    const allChoices = [ ...choices, ...optionChoices ];
+
+    return new Map(allChoices.map(choice => [choice.value, choice.label]));
+};
+
 class MappedDisplay extends Component {
 
     constructor(props) {
@@ -14,7 +24,7 @@ class MappedDisplay extends Component {
             label,
             value
         } = this.props;
-        const mappings = new Map(choices.map(choice => [choice.value, choice.label]));
+        const mappings = getMapOfChoicesAndChoiceOptions(choices);
         if (component === 'checkbox') {
             return (
                 <span className='govuk-body full-width'><strong>{choices[0].label}: </strong>Yes</span>
