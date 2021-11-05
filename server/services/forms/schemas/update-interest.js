@@ -26,10 +26,8 @@ module.exports = async options => {
                 .build()
         )
         .withSecondaryAction(
-            Component('button')
-                .withProp('label', 'Cancel')
-                .withProp('className', 'govuk-!-margin-left-1 govuk-button--secondary')
-                .withProp('preventDefault', 'false')
+            Component('backlink')
+                .withProp('label', 'Back')
                 .withProp('action',
                     `/case/${caseId}/stage/${stageId}`)
                 .build()
