@@ -30,7 +30,7 @@ const Extensions = (props) => {
 
             { shouldAllAddExtension(EXTENSION) &&
                 <>
-                    <span className="govuk-body full-width">Apply and extension to this case.</span>
+                    <span className="govuk-body full-width">Apply an extension to this case.</span>
                     <Link className='govuk-body govuk-link' to={ `/case/${page.params.caseId}/stage/${page.params.stageId}/caseAction/extension/add` }>Extend this case</Link>
                 </>
             }
