@@ -11,7 +11,7 @@ const ExternalInterest = (props) => {
         const currentAppealTypeList = EXTERNAL_INTEREST.filter(interest => interest.typeData.length > 0).map(appeal => {
             return {
                 label: appeal.typeInfo.actionLabel,
-                appealsOfType: [ ...appeal.typeData ]
+                interestsOfType: [ ...appeal.typeData ]
             };
         });
 
@@ -19,10 +19,10 @@ const ExternalInterest = (props) => {
 
         for (let typeData of currentAppealTypeList) {
 
-            typeData.appealsOfType.map(interestData => {
+            typeData.interestsOfType.map(interestData => {
                 return externalInterestArray.push({
                     id: interestData.uuid,
-                    interestedPartyType: interestData.interestedPartyType,
+                    interestedPartyLabel: interestData.interestedPartyEntity.title,
                     detailsOfInterest: interestData.detailsOfInterest
                 });
             });
@@ -37,16 +37,16 @@ const ExternalInterest = (props) => {
 
         return (
             <>
-                <p className='govuk-body'>Registered appeals:</p>
+                <p className='govuk-body'>Recorded Interests:</p>
                 <table className='govuk-table'>
                     { externalInterestArray.length > 0 &&
                         externalInterestArray.map((externalInterest, i)=> {
                             return (
                                 <tr className='govuk-table__row' key={i}>
-                                    <td key={i} className='govuk-table__cell'>
-                                        { externalInterest.interestedPartyType }
+                                    <td key={i} className='govuk-table__cell width-one-sixth'>
+                                        { externalInterest.interestedPartyLabel }
                                     </td>
-                                    <td key={i} className='govuk-table__cell'>
+                                    <td key={i} className='govuk-table__cell govuk-!-width-one-half'>
                                         { externalInterest.detailsOfInterest }
                                     </td>
                                     <td key={i} className='govuk-table__cell'>
