@@ -116,12 +116,9 @@ module.exports = async options => {
                     .build()
             )
             .withSecondaryAction(
-                Component('button')
-                    .withProp('label', 'Cancel')
-                    .withProp('className', 'govuk-!-margin-left-1 govuk-button--secondary')
-                    .withProp('preventDefault', 'false')
-                    .withProp('action',
-                        `/case/${caseId}/stage/${stageId}`)
+                Component('backlink')
+                    .withProp('label', 'Back')
+                    .withProp('action', `/case/${options.caseId}/stage/${options.stageId}`)
                     .build()
             )
             .withPrimaryActionLabel('Update')
@@ -209,12 +206,9 @@ module.exports = async options => {
                 .build()
         )
         .withSecondaryAction(
-            Component('button')
-                .withProp('label', 'Cancel')
-                .withProp('className', 'govuk-!-margin-left-1 govuk-button--secondary')
-                .withProp('preventDefault', 'false')
-                .withProp('action',
-                    `/case/${caseId}/stage/${stageId}`)
+            Component('backlink')
+                .withProp('label', 'Back')
+                .withProp('action', `/case/${caseId}/stage/${stageId}`)
                 .build()
         )
         .withPrimaryActionLabel('Update')
