@@ -6,7 +6,7 @@ const {
     REMOVE_CORRESPONDENT, ADD_TOPIC, REMOVE_TOPIC, CREATE_CASE, CREATE_AND_ALLOCATE_CASE, BULK_CREATE_CASE,
     ADD_DOCUMENT, REMOVE_DOCUMENT, MANAGE_DOCUMENTS, MANAGE_PEOPLE, ADD_CONTRIBUTION, ADD_ADDITIONAL_CONTRIBUTION,
     EDIT_CONTRIBUTION, APPLY_CASE_DEADLINE_EXTENSION, CONFIRMATION_SUMMARY, ADD_CASE_APPEAL, EDIT_CASE_APPEAL,
-    ADD_APPROVAL_REQUEST, EDIT_APPROVAL_REQUEST
+    ADD_APPROVAL_REQUEST, EDIT_APPROVAL_REQUEST, MANAGE_APPEAL_DOCUMENTS
 } = require('../actions/types');
 
 const mpamContributionsRequest = {
@@ -237,12 +237,16 @@ const formDefinitions = {
                         action: CONFIRMATION_SUMMARY
                     }
                 },
-                UPDATE: {
-                    builder: formRepository.updateAppealFoi,
-                    action: EDIT_CASE_APPEAL,
+                MANAGE_DOCUMENTS: {
+                    builder: formRepository.manageAppealDocuments,
+                    action: MANAGE_APPEAL_DOCUMENTS,
                     next: {
                         action: CONFIRMATION_SUMMARY
                     }
+                },
+                UPDATE: {
+                    builder: formRepository.updateAppealFoi,
+                    action: EDIT_CASE_APPEAL
                 }
             },
         },

@@ -493,6 +493,11 @@ module.exports = {
             endpoint: '/case/document/reference/${caseId}',
             adapter: documentsAdapter
         },
+        CASE_ACTION_DOCUMENT_LIST: {
+            client: 'CASEWORK',
+            endpoint: '/case/document/reference/${caseId}/action/${caseActionId}',
+            adapter: documentsAdapter
+        },
         CASE_DOCUMENT_LIST_FINAL: {
             client: 'CASEWORK',
             endpoint: '/case/document/reference/${caseId}/?type=FINAL',
