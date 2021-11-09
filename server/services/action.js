@@ -255,7 +255,7 @@ const actions = {
                                 if (appealOfficerData) {
                                     const extraData = {};
                                     extraData[appealOfficerData.officer.value] = form.data[appealOfficerData.officer.value];
-                                    extraData[appealOfficerData.directorate.value] = form.data[appealOfficerData.officer.value];
+                                    extraData[appealOfficerData.directorate.value] = form.data[appealOfficerData.directorate.value];
 
                                     requestBody.appealOfficerData = JSON.stringify(extraData);
                                 }
