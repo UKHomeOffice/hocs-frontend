@@ -10,7 +10,7 @@ const search = async (options = {}) => {
     let headers = {
         headers: User.createHeaders(user)
     };
-    const userProfileNames = (await infoService.get('/profileNames', headers)).data;
+    const userProfileNames = (await infoService.get('/profileNames?initialCaseType=false', headers)).data;
     const form = Form();
 
     let fields = [];

@@ -104,12 +104,9 @@ module.exports = async options => {
             status: 'Pending'
         })
         .withSecondaryAction(
-            Component('button')
-                .withProp('label', 'Cancel')
-                .withProp('className', 'govuk-!-margin-left-1 govuk-button--secondary')
-                .withProp('preventDefault', 'false')
-                .withProp('action',
-                    `/case/${caseId}/stage/${stageId}`)
+            Component('backlink')
+                .withProp('label', 'Back')
+                .withProp('action', `/case/${caseId}/stage/${stageId}`)
                 .build()
         )
         .withPrimaryActionLabel('Add Appeal')
