@@ -550,10 +550,27 @@ describe('Action service', () => {
             data: {
                 caseTypeActionUuid: mockCaseTypeActionUuid,
                 status: 'Pending',
+                add_document: [
+                    {
+                        originalname: 'TEST_ORIGINAL_NAME',
+                        key: 'TEST_KEY',
+                    }
+                ]
             },
             action: actionTypes.ADD_CASE_APPEAL,
             next: {
                 action: 'CONFIRMATION_SUMMARY'
+            },
+            schema: {
+                fields: [
+                    {
+                        'component': 'add-document',
+                        'props': {
+                            'name': 'add_document',
+                            'label': 'Are there any documents to include?'
+                        }
+                    }
+                ]
             }
         };
 
@@ -583,7 +600,7 @@ describe('Action service', () => {
             user: mockUser
         });
 
-        expect(mockRequestClient).toHaveBeenCalledTimes(1);
+        expect(mockRequestClient).toHaveBeenCalledTimes(2);
         expect(mockRequestClient).toHaveBeenCalledWith(expectedBody);
         expect(response).toBeDefined();
         expect(response).toHaveProperty('confirmation');
@@ -598,11 +615,28 @@ describe('Action service', () => {
                 caseTypeActionUuid: mockCaseTypeActionUuid,
                 status: 'Pending',
                 officer: '__officer_uuid__',
-                directorate: 'SOME_DIRECTORATE'
+                directorate: 'SOME_DIRECTORATE',
+                add_document: [
+                    {
+                        originalname: 'TEST_ORIGINAL_NAME',
+                        key: 'TEST_KEY',
+                    }
+                ]
             },
             action: actionTypes.ADD_CASE_APPEAL,
             next: {
                 action: 'CONFIRMATION_SUMMARY'
+            },
+            schema: {
+                fields: [
+                    {
+                        'component': 'add-document',
+                        'props': {
+                            'name': 'add_document',
+                            'label': 'Are there any documents to include?'
+                        }
+                    }
+                ]
             }
         };
 
@@ -636,7 +670,7 @@ describe('Action service', () => {
             user: mockUser
         });
 
-        expect(mockRequestClient).toHaveBeenCalledTimes(1);
+        expect(mockRequestClient).toHaveBeenCalledTimes(2);
         expect(mockRequestClient).toHaveBeenCalledWith(expectedBody);
         expect(response).toBeDefined();
         expect(response).toHaveProperty('confirmation');
