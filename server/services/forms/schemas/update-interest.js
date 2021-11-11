@@ -7,15 +7,14 @@ module.exports = async options => {
 
     const { EXTERNAL_INTEREST } = options.caseActionData;
     let externalInterestData = EXTERNAL_INTEREST.filter(appealType => appealType.typeData.length > 0)
-        .flatMap(appealType => appealType.typeData)
-        .filter(appealData => appealData.uuid === caseActionId)[0];
+        .flatMap(interestType => interestType.typeData)
+        .find(interestData => interestData.uuid === caseActionId);
 
     return Form()
         .withTitle('Add Interest')
         .withPrimaryActionLabel('Add Interest')
         .withField(
-            Component('dropdown', 'interestedPartyType')
-                .withValidator('required')
+            Component('mapped-display', 'interestedPartyType')
                 .withProp('label', 'Interested party')
                 .withProp('choices', 'FOI_INTERESTED_PARTIES')
                 .build()
@@ -23,6 +22,10 @@ module.exports = async options => {
         .withField(
             Component('text-area', 'detailsOfInterest')
                 .withProp('label', 'Details of Interest')
+                .build()
+        )
+        .withField(
+            Component('hidden', 'caseTypeActionUuid')
                 .build()
         )
         .withSecondaryAction(
@@ -33,6 +36,6 @@ module.exports = async options => {
                 .build()
         )
         .withPrimaryActionLabel('Update')
-        .withData(externalInterestData)
+        .withData({ ...externalInterestData, caseTypeActionUuid: externalInterestData.caseTypeActionUuid })
         .build();
 };

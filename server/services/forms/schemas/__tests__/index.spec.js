@@ -167,7 +167,12 @@ const caseActionData = {
                 'active': true,
                 'props': ''
             },
-            'typeData': []
+            'typeData': [
+                {
+                    'uuid': 'e2e033ef-a819-4ea8-b793-aa1b9eadf3e2',
+                    'caseTypeActionUuid': '406a142c-c519-4fd3-9723-e61b6e3e395d'
+                }
+            ]
         }
     ],
     'currentDeadline': '24/11/2021'

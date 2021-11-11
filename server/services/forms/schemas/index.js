@@ -32,6 +32,6 @@ module.exports = {
     approvalRequestFoi: require('./approval-request-foi'),
     approvalFulfillmentFoi: require('./approval-fulfillment-foi'),
 
-    recordInterestFoi: require('./record-interest'),
-    updateInterestFOI: require('./update-interest')
+    recordInterestFoi: require('./record-interest')('FOI'),
+    updateInterest: require('./update-interest')
 };

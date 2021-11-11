@@ -306,11 +306,10 @@ const actions = {
                             return handleActionSuccess(clientResponse, {}, form);
                         }
                         case actionTypes.RECORD_INTEREST: {
-                            const { caseActionData } = options;
 
                             let requestBody = {
                                 actionType: 'RECORD_INTEREST',
-                                caseTypeActionUuid: caseActionData.EXTERNAL_INTEREST[0].typeInfo.uuid,
+                                caseTypeActionUuid: form.data.caseTypeActionUuid,
                                 caseTypeActionLabel: 'RECORD_INTEREST',
                                 interestedPartyType: form.data.interestedPartyType,
                                 detailsOfInterest: form.data.detailsOfInterest
@@ -328,12 +327,12 @@ const actions = {
                             return handleActionSuccess(clientResponse, {}, form);
                         }
                         case actionTypes.UPDATE_INTEREST: {
-                            const { caseActionData, caseActionId  } = options;
+                            const { caseActionId  } = options;
 
                             let requestBody = {
                                 actionType: 'RECORD_INTEREST',
                                 uuid: caseActionId,
-                                caseTypeActionUuid: caseActionData.EXTERNAL_INTEREST[0].typeInfo.uuid,
+                                caseTypeActionUuid: form.data.caseTypeActionUuid,
                                 caseTypeActionLabel: 'RECORD_INTEREST',
                                 interestedPartyType: form.data.interestedPartyType,
                                 detailsOfInterest: form.data.detailsOfInterest

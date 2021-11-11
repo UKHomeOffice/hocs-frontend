@@ -254,7 +254,7 @@ const formDefinitions = {
                     }
                 },
                 UPDATE: {
-                    builder: formRepository.updateInterestFOI,
+                    builder: formRepository.updateInterest,
                     action: UPDATE_INTEREST,
                     next: {
                         action: CONFIRMATION_SUMMARY
