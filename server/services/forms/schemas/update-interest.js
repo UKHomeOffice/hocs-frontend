@@ -6,11 +6,11 @@ module.exports = async options => {
     const { caseId, stageId, caseActionId } = options;
 
     const { EXTERNAL_INTEREST } = options.caseActionData;
-    let externalInterestData = EXTERNAL_INTEREST.filter(appealType => appealType.typeData.length > 0)
+    let externalInterestData = EXTERNAL_INTEREST.filter(interestType => interestType.typeData.length > 0)
         .flatMap(interestType => interestType.typeData)
         .find(interestData => interestData.uuid === caseActionId);
 
-    let externalInterestProps = EXTERNAL_INTEREST.filter(appealType => appealType.typeData.length > 0)
+    let externalInterestProps = EXTERNAL_INTEREST.filter(interestType => interestType.typeData.length > 0)
         .flatMap(interestType => interestType.typeInfo)
         .find(interestType => interestType.uuid === externalInterestData.caseTypeActionUuid).props;
 

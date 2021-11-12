@@ -30,12 +30,12 @@ module.exports = async options => {
     const { caseId, stageId } = options;
 
     const { EXTERNAL_INTEREST } = options.caseActionData;
-    let extensionTypeChoiceArray;
+    let interestTypeChoiceArray;
     let visibilityConditionsValueString;
     let interestChoices;
 
     if (EXTERNAL_INTEREST) {
-        extensionTypeChoiceArray = buildActionTypeChoiceArray(EXTERNAL_INTEREST);
+        interestTypeChoiceArray = buildActionTypeChoiceArray(EXTERNAL_INTEREST);
         visibilityConditionsValueString = buildVisibilityConditionsValuesString(EXTERNAL_INTEREST);
         interestChoices = buildInterestChoices(EXTERNAL_INTEREST);
     }
@@ -47,7 +47,7 @@ module.exports = async options => {
         .withField(
             Component('dropdown', 'caseTypeActionUuid')
                 .withValidator('required', 'You must select an interest type.')
-                .withProp('choices', [ ...extensionTypeChoiceArray ])
+                .withProp('choices', [ ...interestTypeChoiceArray ])
                 .withProp('label', 'What type of interest do you want to record?')
                 .build()
         )
