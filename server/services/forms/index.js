@@ -247,7 +247,7 @@ const formDefinitions = {
             },
             RECORD_INTEREST: {
                 ADD: {
-                    builder: formRepository.recordInterestFoi,
+                    builder: formRepository.recordInterest,
                     action: RECORD_INTEREST,
                     next: {
                         action: CONFIRMATION_SUMMARY

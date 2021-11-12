@@ -10,13 +10,19 @@ module.exports = async options => {
         .flatMap(interestType => interestType.typeData)
         .find(interestData => interestData.uuid === caseActionId);
 
+    let externalInterestProps = EXTERNAL_INTEREST.filter(appealType => appealType.typeData.length > 0)
+        .flatMap(interestType => interestType.typeInfo)
+        .find(interestType => interestType.uuid === externalInterestData.caseTypeActionUuid).props;
+
+    let externalInterestChoices = JSON.parse(externalInterestProps).interestChoices;
+
     return Form()
         .withTitle('Add Interest')
         .withPrimaryActionLabel('Add Interest')
         .withField(
             Component('mapped-display', 'interestedPartyType')
                 .withProp('label', 'Interested party')
-                .withProp('choices', 'FOI_INTERESTED_PARTIES')
+                .withProp('choices', externalInterestChoices)
                 .build()
         )
         .withField(

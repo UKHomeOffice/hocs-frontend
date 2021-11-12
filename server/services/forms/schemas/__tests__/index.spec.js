@@ -165,12 +165,12 @@ const caseActionData = {
                 'maxConcurrentEvents': 99999,
                 'sortOrder': 10,
                 'active': true,
-                'props': ''
+                'props': '{}'
             },
             'typeData': [
                 {
                     'uuid': 'e2e033ef-a819-4ea8-b793-aa1b9eadf3e2',
-                    'caseTypeActionUuid': '406a142c-c519-4fd3-9723-e61b6e3e395d'
+                    'caseTypeActionUuid': '81ed796d-819c-46ce-bf50-beca3abe0845'
                 }
             ]
         }
