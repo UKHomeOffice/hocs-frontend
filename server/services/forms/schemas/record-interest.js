@@ -10,7 +10,7 @@ function buildActionTypeChoiceArray(rawDataArray) {
 
 function buildVisibilityConditionsValuesString(interestTypeArray) {
     return interestTypeArray
-        .map(appealType => appealType.typeInfo.uuid).join();
+        .map(interestType => interestType.typeInfo.uuid).join();
 }
 
 function buildInterestChoices(interestTypeArray) {
