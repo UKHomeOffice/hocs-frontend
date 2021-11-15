@@ -630,6 +630,12 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
+        FOI_INTERESTED_PARTIES: {
+            client: 'INFO',
+            endpoint: '/entity/list/FOI_INTERESTED_PARTIES',
+            type: listService.types.DYNAMIC,
+            adapter: entityListItemsAdapter
+        },
         S_FOI_KIMU_TEAM_MEMBERS: {
             client: 'INFO',
             endpoint: '/teams/6978176d-15e7-4a76-b833-3b0be12c0828/members',
