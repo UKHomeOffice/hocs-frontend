@@ -214,6 +214,12 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
+        S_SMC_BUS_AREA: {
+            client: 'INFO',
+            endpoint: '/entity/list/SMC_BUS_AREA',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
         S_FOI_DIRECTORATE_BICSPI_ACCEPTANCE_TEAMS: {
             client: 'INFO',
             endpoint: '/teams?unit=FOI_DIRECTORATE_BICSPI_ACCEPTANCE_TEAMS',
@@ -622,6 +628,12 @@ module.exports = {
             client: 'INFO',
             endpoint: '/entity/list/FOI_APPEAL_TYPES',
             type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        FOI_INTERESTED_PARTIES: {
+            client: 'INFO',
+            endpoint: '/entity/list/FOI_INTERESTED_PARTIES',
+            type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
         },
         S_FOI_KIMU_TEAM_MEMBERS: {
