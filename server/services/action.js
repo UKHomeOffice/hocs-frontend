@@ -255,7 +255,7 @@ const actions = {
                                 if (appealOfficerData) {
                                     const extraData = {};
                                     extraData[appealOfficerData.officer.value] = form.data[appealOfficerData.officer.value];
-                                    extraData[appealOfficerData.directorate.value] = form.data[appealOfficerData.officer.value];
+                                    extraData[appealOfficerData.directorate.value] = form.data[appealOfficerData.directorate.value];
 
                                     requestBody.appealOfficerData = JSON.stringify(extraData);
                                 }
@@ -302,6 +302,50 @@ const actions = {
 
                             const clientResponse = {
                                 'summary': `Appeal for ${response.data.reference} registered`,
+                                'link': `${response.data.reference}`
+                            };
+
+                            return handleActionSuccess(clientResponse, {}, form);
+                        }
+                        case actionTypes.RECORD_INTEREST: {
+
+                            let requestBody = {
+                                actionType: 'RECORD_INTEREST',
+                                caseTypeActionUuid: form.data.caseTypeActionUuid,
+                                caseTypeActionLabel: 'RECORD_INTEREST',
+                                interestedPartyType: form.data.interestedPartyType,
+                                detailsOfInterest: form.data.detailsOfInterest
+                            };
+
+                            const response =
+                                await caseworkService.post(`/case/${caseId}/stage/${stageId}/action`,
+                                    requestBody, headers);
+
+                            const clientResponse = {
+                                'summary': `External Interest for ${response.data.reference} registered`,
+                                'link': `${response.data.reference}`
+                            };
+
+                            return handleActionSuccess(clientResponse, {}, form);
+                        }
+                        case actionTypes.UPDATE_INTEREST: {
+                            const { caseActionId  } = options;
+
+                            let requestBody = {
+                                actionType: 'RECORD_INTEREST',
+                                uuid: caseActionId,
+                                caseTypeActionUuid: form.data.caseTypeActionUuid,
+                                caseTypeActionLabel: 'RECORD_INTEREST',
+                                interestedPartyType: form.data.interestedPartyType,
+                                detailsOfInterest: form.data.detailsOfInterest
+                            };
+
+                            const response =
+                                await caseworkService.put(`/case/${caseId}/stage/${stageId}/action/${caseActionId}`,
+                                    requestBody, headers);
+
+                            const clientResponse = {
+                                'summary': `External Interest for ${response.data.reference} updated`,
                                 'link': `${response.data.reference}`
                             };
 

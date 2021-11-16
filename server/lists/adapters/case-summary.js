@@ -1,6 +1,8 @@
 const { caseworkService } = require('../../clients');
 const User = require('../../models/user');
 const { formatDate } = require('../../libs/dateHelpers');
+const toTitleCase = require('../../libs/titleCaseHelper');
+const { actionSummaryAdapterFactory } = require('./actions/actionsSummaryAdapterFactory');
 
 const createAdditionalFields = async (additionalFields = [], fetchList) => {
     const results = additionalFields
@@ -30,6 +32,16 @@ const createAdditionalFields = async (additionalFields = [], fetchList) => {
     }
     return results;
 };
+
+const formatCaseActions = async (caseActions, fetchList) => await Promise.all(
+    Object.keys(caseActions.caseActionData).map(
+        async key => {
+            return {
+                title: toTitleCase(key),
+                items: await actionSummaryAdapterFactory[key].call(this, caseActions, fetchList)
+            };
+        }
+    ));
 
 const formatValueOnType = ({ label, value, type, choices }) => {
     switch (type) {
@@ -97,6 +109,6 @@ module.exports = async (summary, options) => {
         deadlines: deadlinesEnabled && stageDeadlineEnabled && summary.stageDeadlines ? await createDeadlines(summary.stageDeadlines, fromStaticList) : null,
         stages: await getActiveStages(summary.activeStages, fromStaticList),
         previousCase: getPreviousCase(summary.previousCase),
-        actions: summary.actions
+        actions: summary.actions ? await formatCaseActions(summary.actions, fetchList) : undefined
     };
 };

@@ -39,7 +39,7 @@ module.exports = {
             client: 'INFO',
             endpoint: '/team/all',
             type: listService.types.STATIC,
-            adapter: statics.teamsAdapter
+            adapter: statics.teamsAdapterAllTeams
         },
         S_USERS: {
             client: 'INFO',
@@ -211,6 +211,12 @@ module.exports = {
         MPAM_CONTRIBUTION_BUSINESS_AREAS: {
             client: 'INFO',
             endpoint: '/entity/list/MPAM_CONTRIBUTION_BUSINESS_AREAS',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_SMC_BUS_AREA: {
+            client: 'INFO',
+            endpoint: '/entity/list/SMC_BUS_AREA',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
@@ -627,6 +633,12 @@ module.exports = {
             client: 'INFO',
             endpoint: '/entity/list/FOI_APPEAL_TYPES',
             type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        FOI_INTERESTED_PARTIES: {
+            client: 'INFO',
+            endpoint: '/entity/list/FOI_INTERESTED_PARTIES',
+            type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
         },
         S_FOI_KIMU_TEAM_MEMBERS: {

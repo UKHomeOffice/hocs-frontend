@@ -32,4 +32,7 @@ module.exports = {
 
     approvalRequestFoi: require('./approval-request-foi'),
     approvalFulfillmentFoi: require('./approval-fulfillment-foi'),
+
+    recordInterest: require('./record-interest'),
+    updateInterest: require('./update-interest')
 };
