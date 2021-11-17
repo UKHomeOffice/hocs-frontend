@@ -223,7 +223,7 @@ const actions = {
                                 note: form.data.note
                             };
                             const response =
-                                await caseworkService.post(`/case/${caseId}/stage/${stageId}/actions/extensions`,
+                                await caseworkService.post(`/case/${caseId}/stage/${stageId}/actions/extension`,
                                     requestBody, headers);
 
                             const clientResponse = {
