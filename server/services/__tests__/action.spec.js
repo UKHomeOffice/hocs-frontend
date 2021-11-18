@@ -72,7 +72,7 @@ jest.mock('../../clients', () => {
         },
         caseworkService: {
             post: (url, body) => {
-                if (url.match(/case\/.*\/stage\/.*\/action/)) {
+                if (url.match(/case\/.*\/stage\/.*\/actions\/.*/)) {
 
                     mockRequestClient(body);
                     return { data: { reference: '__test_ref__' } };
@@ -90,7 +90,7 @@ jest.mock('../../clients', () => {
             },
             put: (url, body) => {
 
-                if (url.match(/case\/.*\/stage\/.*\/action\/.*/)) {
+                if (url.match(/case\/.*\/stage\/.*\/actions\/.*/)) {
 
                     mockRequestClient(body);
                     return { data: { reference: '__test_ref__' } };
@@ -711,7 +711,7 @@ describe('Action service', () => {
             caseId: 1234,
             stageId: 5678,
             caseActionId: mockCaseActionId,
-            caseActionType: 'extension',
+            caseActionType: 'APPEAL',
             caseActionData: {
                 APPEAL: [{
                     id: mockCaseTypeActionUuid,

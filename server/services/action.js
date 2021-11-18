@@ -223,7 +223,7 @@ const actions = {
                                 note: form.data.note
                             };
                             const response =
-                                await caseworkService.post(`/case/${caseId}/stage/${stageId}/action`,
+                                await caseworkService.post(`/case/${caseId}/stage/${stageId}/actions/extension`,
                                     requestBody, headers);
 
                             const clientResponse = {
@@ -262,7 +262,7 @@ const actions = {
                             }
 
                             const response =
-                                await caseworkService.put(`/case/${caseId}/stage/${stageId}/action/${caseActionId}`,
+                                await caseworkService.put(`/case/${caseId}/stage/${stageId}/actions/appeal/${caseActionId}`,
                                     requestBody, headers);
 
                             const clientResponse = {
@@ -295,7 +295,7 @@ const actions = {
                             }
 
                             const response =
-                                await caseworkService.post(`/case/${caseId}/stage/${stageId}/action`,
+                                await caseworkService.post(`/case/${caseId}/stage/${stageId}/actions/appeal`,
                                     requestBody, headers);
 
                             await addDocument(`/case/${caseId}/action/${response.data.uuid}/document`, form, headers);
@@ -318,7 +318,7 @@ const actions = {
                             };
 
                             const response =
-                                await caseworkService.post(`/case/${caseId}/stage/${stageId}/action`,
+                                await caseworkService.post(`/case/${caseId}/stage/${stageId}/actions/interest`,
                                     requestBody, headers);
 
                             const clientResponse = {
@@ -341,7 +341,7 @@ const actions = {
                             };
 
                             const response =
-                                await caseworkService.put(`/case/${caseId}/stage/${stageId}/action/${caseActionId}`,
+                                await caseworkService.put(`/case/${caseId}/stage/${stageId}/actions/interest/${caseActionId}`,
                                     requestBody, headers);
 
                             const clientResponse = {
