@@ -115,41 +115,14 @@ module.exports = async (template, { fromStaticList }) => {
     const sections = [];
 
     await Promise.all(Object.entries(template.schema.fields).map(async ([stageId, fields]) => {
+
+        const stageFields = (await Promise.all(fields.map(
+            fieldTemplate => getComponentsFromFieldsAndData(fieldTemplate, template, data, fromStaticList))))
+            .filter(component => component !== undefined); // remove empty elements caused by hidden fields .etc
+
         const stageName = await fromStaticList('S_STAGETYPES', stageId);
-        const stageFields = [];
 
-        await Promise.all(fields.map(async fieldTemplate => {
-            const { name, label, choices, conditionChoices, somuType } = fieldTemplate.props;
-            const value = template.data[name];
-
-            if (fieldTemplate.component !== 'hidden') {
-                if (value) {
-                    switch (fieldTemplate.component) {
-                        case 'date':
-                            data[name] = formatDate(value);
-                            break;
-                        case 'somu-list': {
-                            const somuString = await renderSomuListItems(somuType, value, fromStaticList);
-                            data[name] = somuString;
-                            break;
-                        }
-                        default:
-                            data[name] = value;
-                    }
-
-                    stageFields.push(
-                        Component('mapped-display', name)
-                            .withProp('component', fieldTemplate.component)
-                            .withProp('label', label)
-                            .withProp('choices', choices)
-                            .withProp('conditionChoices', conditionChoices)
-                            .build()
-                    );
-                }
-            }
-
-        }));
-        if (stageFields.length > 0) {
+        if (stageFields && stageFields.length > 0) {
             sections.push({ title: stageName, items: stageFields });
         }
 
@@ -167,4 +140,35 @@ module.exports = async (template, { fromStaticList }) => {
     );
 
     return builder.withData(data).build();
+};
+
+const getComponentsFromFieldsAndData = async (fieldTemplate, template, data, fromStaticList) => {
+    const { name, label, choices, conditionChoices, somuType } = fieldTemplate.props;
+    const value = template.data[name];
+
+    if (fieldTemplate.component !== 'hidden') {
+        if (value) {
+            switch (fieldTemplate.component) {
+                case 'date':
+                    data[name] = formatDate(value);
+                    break;
+                case 'somu-list': {
+                    const somuString = await renderSomuListItems(somuType, value, fromStaticList);
+                    data[name] = somuString;
+                    break;
+                }
+                default:
+                    data[name] = value;
+            }
+
+            return (
+                Component('mapped-display', name)
+                    .withProp('component', fieldTemplate.component)
+                    .withProp('label', label)
+                    .withProp('choices', choices)
+                    .withProp('conditionChoices', conditionChoices)
+                    .build()
+            );
+        }
+    }
 };
