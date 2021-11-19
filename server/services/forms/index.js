@@ -135,7 +135,14 @@ const formDefinitions = {
                     next: {
                         action: 'CONFIRMATION_SUMMARY'
                     }
-                }
+                },
+                BF: {
+                    builder: formRepository.addDocument,
+                    action: CREATE_CASE,
+                    next: {
+                        action: 'CONFIRMATION_SUMMARY'
+                    }
+                },
             }
         },
         TEST: {
