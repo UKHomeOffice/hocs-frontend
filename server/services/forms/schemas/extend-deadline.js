@@ -34,8 +34,8 @@ function buildExtendByFields(rawExtensionArray, remainingDays, finalForm) {
                                 { length: extendByMaximumDays - ( option === 'TODAY' ? remainingDays : 0) },
                                 (_, i) =>
                                     Choice(
-                                        String(option === 'TODAY' ? remainingDays + i + 1 : extendByMaximumDays),
-                                        String(option === 'TODAY' ? remainingDays + i : extendByMaximumDays))
+                                        String(option === 'TODAY' ? remainingDays + i + 1 : i + 1),
+                                        String(option === 'TODAY' ? remainingDays + i : 1 + i))
                             ));
                     })
                 )
