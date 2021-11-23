@@ -21,9 +21,9 @@ function buildExtendByFields(rawExtensionArray, remainingDays, finalForm) {
         .withField(
             Component('dropdown', 'extendBy')
                 .withValidator('required')
-                .withValidator('required', 'You must select an number of days to extend the case by')
-                .withProp('label', 'How many days do you want to extend the case deadline by?')
-                .withProp('hint', 'If there are no options to choose, then the case cannot be extended.')
+                .withValidator('required', 'You must select an number of working days to extend the case by')
+                .withProp('label', 'How many working days do you want to extend the case by?')
+                .withProp('hint', 'Options that would bring the deadline date forward are not shown. If there are no options to choose, then the case cannot be extended at this time.')
                 .withProp('conditionChoices', JSON.parse(type.typeInfo.props).extendFrom.map(
                     option => {
                         const extendByMaximumDays = JSON.parse(type.typeInfo.props).extendByMaximumDays;
@@ -34,7 +34,7 @@ function buildExtendByFields(rawExtensionArray, remainingDays, finalForm) {
                                 { length: extendByMaximumDays - ( option === 'TODAY' ? remainingDays : 0) },
                                 (_, i) =>
                                     Choice(
-                                        String(i + 1),
+                                        String(option === 'TODAY' ? remainingDays + i + 1 : extendByMaximumDays),
                                         String(option === 'TODAY' ? remainingDays + i : extendByMaximumDays))
                             ));
                     })
