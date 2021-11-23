@@ -253,7 +253,10 @@ const formDefinitions = {
                 },
                 UPDATE: {
                     builder: formRepository.updateAppealFoi,
-                    action: EDIT_CASE_APPEAL
+                    action: EDIT_CASE_APPEAL,
+                    next: {
+                        action: CONFIRMATION_SUMMARY
+                    }
                 }
             },
             RECORD_INTEREST: {
