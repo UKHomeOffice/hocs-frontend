@@ -321,7 +321,7 @@ Object {
           "officerDirectorate": null,
           "outcome": "Complaint upheld",
           "status": "Yes",
-          "title": "Court Of Appeal",
+          "title": "Court of Appeal",
         },
         Object {
           "complexCase": "Yes",
@@ -341,7 +341,7 @@ Object {
           "officerDirectorate": null,
           "outcome": "Decision upheld",
           "status": "Yes",
-          "title": "Court Of Appeal",
+          "title": "Court of Appeal",
         },
         Object {
           "complexCase": "Yes",
@@ -351,7 +351,7 @@ Object {
           "officerDirectorate": null,
           "outcome": "Decision upheld",
           "status": "Yes",
-          "title": "Court Of Appeal",
+          "title": "Court of Appeal",
         },
       ],
       "title": "Appeals",
