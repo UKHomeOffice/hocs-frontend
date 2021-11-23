@@ -132,6 +132,7 @@ async function caseActionDataMiddleware(req, res, next) {
         }
 
         preppedData.currentDeadline = formatDate(actionData.currentCaseDeadline);
+        preppedData.remainingDays = actionData.remainingDaysUntilDeadline;
 
         res.locals.caseActionData = preppedData;
         next();
