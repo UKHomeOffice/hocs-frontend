@@ -23,7 +23,7 @@ function buildExtendByFields(rawExtensionArray, remainingDays, finalForm) {
                 .withValidator('required')
                 .withValidator('required', 'You must select an number of working days to extend the case by')
                 .withProp('label', 'How many working days do you want to extend the case by?')
-                .withProp('hint', 'Options that would bring the deadline date forward are not shown. If there are no options to choose, then the case cannot be extended at this time.')
+                .withProp('hint', 'Options that would bring the deadline date forward are not shown. If there are no options to choose, then the case cannot be extended at this time. Please press \'Back\' in this instance.')
                 .withProp('conditionChoices', JSON.parse(type.typeInfo.props).extendFrom.map(
                     option => {
                         const extendByMaximumDays = JSON.parse(type.typeInfo.props).extendByMaximumDays;
