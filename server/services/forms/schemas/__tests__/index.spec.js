@@ -148,7 +148,7 @@ const caseActionData = {
                 'maxConcurrentEvents': 1,
                 'sortOrder': 10,
                 'active': true,
-                'props': '{"extendFrom": "TODAY", "extendByMaximumDays": 20}'
+                'props': '{"extendFrom": ["TODAY"], "extendByMaximumDays": 20}'
             },
             'typeData': []
         }
