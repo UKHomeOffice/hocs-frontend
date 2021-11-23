@@ -1,0 +1,141 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Error component should render with a stack trace when passed 1`] = `
+<div
+  class="govuk-grid-row"
+>
+  <div
+    class="govuk-grid-column-full"
+  >
+    <h1
+      class="govuk-heading-xl"
+    >
+      Something has gone wrong
+    </h1>
+    <p
+      class="govuk-body"
+    >
+      Please try again
+    </p>
+    <details
+      class="govuk-details"
+      open=""
+    >
+      <summary
+        class="govuk-details__summary"
+      >
+        <span
+          class="govuk-details__summary-text"
+        >
+          Stack trace
+        </span>
+      </summary>
+      <div
+        class="govuk-details__text"
+      >
+        <pre
+          class="code overflow-scroll"
+        >
+          Stack trace...
+        </pre>
+      </div>
+    </details>
+  </div>
+</div>
+`;
+
+exports[`Error component should render with default props 1`] = `
+<div
+  class="govuk-grid-row"
+>
+  <div
+    class="govuk-grid-column-full"
+  >
+    <h1
+      class="govuk-heading-xl"
+    >
+      Something has gone wrong
+    </h1>
+    <p
+      class="govuk-body"
+    >
+      Please try again
+    </p>
+  </div>
+</div>
+`;
+
+exports[`Error component should render with location when 403 passed 1`] = `
+<div
+  class="govuk-grid-row"
+>
+  <div
+    class="govuk-grid-column-full"
+  >
+    <h1
+      class="govuk-heading-xl"
+    >
+      You do not have permission
+    </h1>
+    <p
+      class="govuk-body"
+    >
+      If you expect permission to perform this action, raise a ticket.
+    </p>
+  </div>
+</div>
+`;
+
+exports[`Error component should render with location when 404 passed 1`] = `
+<div
+  class="govuk-grid-row"
+>
+  <div
+    class="govuk-grid-column-full"
+  >
+    <h1
+      class="govuk-heading-xl"
+    >
+      Page does not exist
+    </h1>
+    <p
+      class="govuk-body"
+    >
+      If you typed the web address, check it is correct.
+    </p>
+    <p
+      class="govuk-body"
+    >
+      If you pasted the web address, check you copied the entire address.
+    </p>
+    <p>
+      <code
+        class="code"
+      >
+        /SOME/UNSUPPORTED/ENDPOINT
+      </code>
+    </p>
+  </div>
+</div>
+`;
+
+exports[`Error component should render with location when passed 1`] = `
+<div
+  class="govuk-grid-row"
+>
+  <div
+    class="govuk-grid-column-full"
+  >
+    <h1
+      class="govuk-heading-xl"
+    >
+      Something has gone wrong
+    </h1>
+    <p
+      class="govuk-body"
+    >
+      Please try again
+    </p>
+  </div>
+</div>
+`;

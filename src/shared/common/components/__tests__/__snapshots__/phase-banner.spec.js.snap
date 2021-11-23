@@ -1,0 +1,120 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Phase Banner component should display the correct feedback url when passed 1`] = `
+<div
+  class="govuk-phase-banner"
+>
+  <p
+    class="govuk-phase-banner__content"
+  >
+    <strong
+      class="govuk-tag govuk-phase-banner__content__tag"
+    >
+      PROTOTYPE
+    </strong>
+    <span>
+      This is a new service – your 
+      <a
+        href="http://some.domain"
+      >
+        feedback
+      </a>
+       will help us to improve it.
+    </span>
+  </p>
+</div>
+`;
+
+exports[`Phase Banner component should display the correct phase when passed 1`] = `
+<div
+  class="govuk-phase-banner"
+>
+  <p
+    class="govuk-phase-banner__content"
+  >
+    <strong
+      class="govuk-tag govuk-phase-banner__content__tag"
+    >
+      BETA
+    </strong>
+    <span>
+      This is a new service – your 
+      <a
+        href="/"
+      >
+        feedback
+      </a>
+       will help us to improve it.
+    </span>
+  </p>
+</div>
+`;
+
+exports[`Phase Banner component should display the correct test notice when isNotProd === 0 1`] = `
+<div
+  class="govuk-phase-banner"
+>
+  <p
+    class="govuk-phase-banner__content"
+  >
+    <strong
+      class="govuk-tag govuk-phase-banner__content__tag"
+    >
+      PROTOTYPE
+    </strong>
+    <span>
+      This is a new service – your 
+      <a
+        href="/"
+      >
+        feedback
+      </a>
+       will help us to improve it.
+    </span>
+  </p>
+</div>
+`;
+
+exports[`Phase Banner component should display the correct test notice when isNotProd === 1 1`] = `
+<div
+  class="govuk-phase-banner"
+>
+  <p
+    class="govuk-phase-banner__content"
+  >
+    <strong
+      class="govuk-tag govuk-phase-banner__content__tag"
+    >
+      PROTOTYPE
+    </strong>
+    <span>
+      This is a test system - do not upload real documents or information
+    </span>
+  </p>
+</div>
+`;
+
+exports[`Phase Banner component should render with default props 1`] = `
+<div
+  class="govuk-phase-banner"
+>
+  <p
+    class="govuk-phase-banner__content"
+  >
+    <strong
+      class="govuk-tag govuk-phase-banner__content__tag"
+    >
+      PROTOTYPE
+    </strong>
+    <span>
+      This is a new service – your 
+      <a
+        href="/"
+      >
+        feedback
+      </a>
+       will help us to improve it.
+    </span>
+  </p>
+</div>
+`;

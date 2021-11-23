@@ -1,0 +1,468 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Case Summary Adapter should map additionalFields data values when choices are provided 1`] = `
+Object {
+  "actions": undefined,
+  "additionalFields": Array [
+    Object {
+      "choices": Array [
+        Object {
+          "label": "TestA text",
+          "value": "TESTA",
+        },
+        Object {
+          "label": "TestB text",
+          "value": "TESTB",
+        },
+      ],
+      "label": "Test field",
+      "value": "TestB text",
+    },
+  ],
+  "case": Object {
+    "created": "03/02/2019",
+    "deadLineExtensions": Array [],
+    "deadline": "01/01/2020",
+    "received": "01/01/2019",
+  },
+  "deadlines": Array [
+    Object {
+      "label": "MOCK_STAGETYPE",
+      "value": "01/01/2019",
+    },
+    Object {
+      "label": "MOCK_STAGETYPE",
+      "value": "06/01/2019",
+    },
+    Object {
+      "label": "MOCK_STAGETYPE",
+      "value": "01/01/2020",
+    },
+  ],
+  "deadlinesEnabled": true,
+  "previousCase": Object {
+    "reference": "__previousCaseReference__",
+    "stageUuid": "__previousCaseStageUUID__",
+    "uuid": "__previousCaseUuid__",
+  },
+  "primaryCorrespondent": Object {
+    "address": Object {
+      "address1": "__address1__",
+      "address2": "__address2__",
+      "address3": "__address3__",
+      "country": "__country__",
+      "postcode": "__postcode__",
+    },
+    "fullname": "Test Correspondent",
+  },
+  "primaryTopic": "Topic A",
+  "stages": Array [
+    Object {
+      "assignedTeam": "MOCK_TEAM",
+      "assignedUser": "MOCK_USER",
+      "stage": "MOCK_STAGETYPE",
+    },
+  ],
+  "type": "case",
+}
+`;
+
+exports[`Case Summary Adapter should map additionalFields data values when choices are provided as list name 1`] = `
+Object {
+  "actions": undefined,
+  "additionalFields": Array [
+    Object {
+      "choices": Array [
+        Object {
+          "label": "TestA text",
+          "value": "TESTA",
+        },
+        Object {
+          "label": "TestB text",
+          "value": "TESTB",
+        },
+      ],
+      "label": "Test field",
+      "value": "TestB text",
+    },
+  ],
+  "case": Object {
+    "created": "03/02/2019",
+    "deadLineExtensions": Array [],
+    "deadline": "01/01/2020",
+    "received": "01/01/2019",
+  },
+  "deadlines": Array [
+    Object {
+      "label": "MOCK_STAGETYPE",
+      "value": "01/01/2019",
+    },
+    Object {
+      "label": "MOCK_STAGETYPE",
+      "value": "06/01/2019",
+    },
+    Object {
+      "label": "MOCK_STAGETYPE",
+      "value": "01/01/2020",
+    },
+  ],
+  "deadlinesEnabled": true,
+  "previousCase": Object {
+    "reference": "__previousCaseReference__",
+    "stageUuid": "__previousCaseStageUUID__",
+    "uuid": "__previousCaseUuid__",
+  },
+  "primaryCorrespondent": Object {
+    "address": Object {
+      "address1": "__address1__",
+      "address2": "__address2__",
+      "address3": "__address3__",
+      "country": "__country__",
+      "postcode": "__postcode__",
+    },
+    "fullname": "Test Correspondent",
+  },
+  "primaryTopic": "Topic A",
+  "stages": Array [
+    Object {
+      "assignedTeam": "MOCK_TEAM",
+      "assignedUser": "MOCK_USER",
+      "stage": "MOCK_STAGETYPE",
+    },
+  ],
+  "type": "case",
+}
+`;
+
+exports[`Case Summary Adapter should not show deadlines when deadlines are disabled 1`] = `
+Object {
+  "actions": undefined,
+  "additionalFields": Array [
+    Object {
+      "choices": undefined,
+      "label": "Test field",
+      "value": "TEST",
+    },
+    Object {
+      "choices": undefined,
+      "label": "Test additional field date",
+      "value": "01/01/2020",
+    },
+  ],
+  "case": Object {
+    "created": "03/02/2019",
+    "deadLineExtensions": Array [],
+    "deadline": "01/01/2020",
+    "received": "01/01/2019",
+  },
+  "deadlines": null,
+  "deadlinesEnabled": false,
+  "previousCase": Object {
+    "reference": "__previousCaseReference__",
+    "stageUuid": "__previousCaseStageUUID__",
+    "uuid": "__previousCaseUuid__",
+  },
+  "primaryCorrespondent": Object {
+    "address": Object {
+      "address1": "__address1__",
+      "address2": "__address2__",
+      "address3": "__address3__",
+      "country": "__country__",
+      "postcode": "__postcode__",
+    },
+    "fullname": "Test Correspondent",
+  },
+  "primaryTopic": "Topic A",
+  "stages": Array [
+    Object {
+      "assignedTeam": "MOCK_TEAM",
+      "assignedUser": "MOCK_USER",
+      "stage": "MOCK_STAGETYPE",
+    },
+  ],
+  "type": "case",
+}
+`;
+
+exports[`Case Summary Adapter should not show deadlines when summary deadlines are disabled 1`] = `
+Object {
+  "actions": undefined,
+  "additionalFields": Array [
+    Object {
+      "choices": undefined,
+      "label": "Test field",
+      "value": "TEST",
+    },
+    Object {
+      "choices": undefined,
+      "label": "Test additional field date",
+      "value": "01/01/2020",
+    },
+  ],
+  "case": Object {
+    "created": "03/02/2019",
+    "deadLineExtensions": Array [],
+    "deadline": "01/01/2020",
+    "received": "01/01/2019",
+  },
+  "deadlines": null,
+  "deadlinesEnabled": true,
+  "previousCase": Object {
+    "reference": "__previousCaseReference__",
+    "stageUuid": "__previousCaseStageUUID__",
+    "uuid": "__previousCaseUuid__",
+  },
+  "primaryCorrespondent": Object {
+    "address": Object {
+      "address1": "__address1__",
+      "address2": "__address2__",
+      "address3": "__address3__",
+      "country": "__country__",
+      "postcode": "__postcode__",
+    },
+    "fullname": "Test Correspondent",
+  },
+  "primaryTopic": "Topic A",
+  "stages": Array [
+    Object {
+      "assignedTeam": "MOCK_TEAM",
+      "assignedUser": "MOCK_USER",
+      "stage": "MOCK_STAGETYPE",
+    },
+  ],
+  "type": "case",
+}
+`;
+
+exports[`Case Summary Adapter should populate fields when choices have nested options 1`] = `
+Object {
+  "actions": undefined,
+  "additionalFields": Array [
+    Object {
+      "choices": undefined,
+      "label": "Test field",
+      "value": "TEST",
+    },
+    Object {
+      "choices": undefined,
+      "label": "Test additional field date",
+      "value": "01/01/2020",
+    },
+    Object {
+      "choices": null,
+      "label": "Topic 22",
+      "value": "mock-value-2",
+    },
+  ],
+  "case": Object {
+    "created": "03/02/2019",
+    "deadLineExtensions": Array [],
+    "deadline": "01/01/2020",
+    "received": "01/01/2019",
+  },
+  "deadlines": Array [
+    Object {
+      "label": "MOCK_STAGETYPE",
+      "value": "01/01/2019",
+    },
+    Object {
+      "label": "MOCK_STAGETYPE",
+      "value": "06/01/2019",
+    },
+    Object {
+      "label": "MOCK_STAGETYPE",
+      "value": "01/01/2020",
+    },
+  ],
+  "deadlinesEnabled": true,
+  "previousCase": undefined,
+  "primaryCorrespondent": Object {
+    "address": Object {
+      "address1": "__address1__",
+      "address2": "__address2__",
+      "address3": "__address3__",
+      "country": "__country__",
+      "postcode": "__postcode__",
+    },
+    "fullname": "Test Correspondent",
+  },
+  "primaryTopic": "Topic A",
+  "stages": Array [
+    Object {
+      "assignedTeam": "MOCK_TEAM",
+      "assignedUser": "MOCK_USER",
+      "stage": "MOCK_STAGETYPE",
+    },
+  ],
+  "type": "case",
+}
+`;
+
+exports[`Case Summary Adapter should transform actions data in case summary data 1`] = `
+Object {
+  "actions": Array [
+    Object {
+      "items": Array [
+        Object {
+          "complexCase": "Yes",
+          "dateSentRMS": "26/10/2021",
+          "note": "asdcasdc",
+          "officer": "User Name",
+          "officerDirectorate": "HMPO Acceptance Team",
+          "outcome": "Complaint upheld",
+          "status": "Yes",
+          "title": "Internal Review",
+        },
+        Object {
+          "complexCase": "Yes",
+          "dateSentRMS": "12/10/2021",
+          "note": "sdcasdc",
+          "officer": null,
+          "officerDirectorate": null,
+          "outcome": "Complaint upheld",
+          "status": "Yes",
+          "title": "Court of Appeal",
+        },
+        Object {
+          "complexCase": "Yes",
+          "dateSentRMS": "26/10/2021",
+          "note": "asdfasdf",
+          "officer": null,
+          "officerDirectorate": null,
+          "outcome": "Decision upheld",
+          "status": "Yes",
+          "title": "First Tier Tribunal",
+        },
+        Object {
+          "complexCase": "Yes",
+          "dateSentRMS": "12/10/2021",
+          "note": "asdcasd",
+          "officer": null,
+          "officerDirectorate": null,
+          "outcome": "Decision upheld",
+          "status": "Yes",
+          "title": "Court of Appeal",
+        },
+        Object {
+          "complexCase": "Yes",
+          "dateSentRMS": "12/10/2021",
+          "note": "sdcasdc",
+          "officer": null,
+          "officerDirectorate": null,
+          "outcome": "Decision upheld",
+          "status": "Yes",
+          "title": "Court of Appeal",
+        },
+      ],
+      "title": "Appeals",
+    },
+    Object {
+      "items": null,
+      "title": "Extensions",
+    },
+  ],
+  "additionalFields": Array [],
+  "case": Object {
+    "created": "03/02/2019",
+    "deadLineExtensions": Array [],
+    "deadline": null,
+    "received": "01/01/2019",
+  },
+  "deadlines": Array [],
+  "deadlinesEnabled": true,
+  "previousCase": undefined,
+  "primaryCorrespondent": null,
+  "primaryTopic": null,
+  "stages": Array [],
+  "type": "case",
+}
+`;
+
+exports[`Case Summary Adapter should transform fully populated case summary data 1`] = `
+Object {
+  "actions": undefined,
+  "additionalFields": Array [
+    Object {
+      "choices": undefined,
+      "label": "Test field",
+      "value": "TEST",
+    },
+    Object {
+      "choices": undefined,
+      "label": "Test additional field date",
+      "value": "01/01/2020",
+    },
+    Object {
+      "choices": undefined,
+      "label": "Test additional field checkbox",
+      "value": "this, is, a, test",
+    },
+  ],
+  "case": Object {
+    "created": "03/02/2019",
+    "deadLineExtensions": Array [],
+    "deadline": "01/01/2020",
+    "received": "01/01/2019",
+  },
+  "deadlines": Array [
+    Object {
+      "label": "MOCK_STAGETYPE",
+      "value": "01/01/2019",
+    },
+    Object {
+      "label": "MOCK_STAGETYPE",
+      "value": "06/01/2019",
+    },
+    Object {
+      "label": "MOCK_STAGETYPE",
+      "value": "01/01/2020",
+    },
+  ],
+  "deadlinesEnabled": true,
+  "previousCase": Object {
+    "reference": "__previousCaseReference__",
+    "stageUuid": "__previousCaseStageUUID__",
+    "uuid": "__previousCaseUuid__",
+  },
+  "primaryCorrespondent": Object {
+    "address": Object {
+      "address1": "__address1__",
+      "address2": "__address2__",
+      "address3": "__address3__",
+      "country": "__country__",
+      "postcode": "__postcode__",
+    },
+    "email": "test@test.com",
+    "fullname": "Test Correspondent",
+  },
+  "primaryTopic": "Topic A",
+  "stages": Array [
+    Object {
+      "assignedTeam": "MOCK_TEAM",
+      "assignedUser": "MOCK_USER",
+      "stage": "MOCK_STAGETYPE",
+    },
+  ],
+  "type": "case",
+}
+`;
+
+exports[`Case Summary Adapter should transform minimal case summary data 1`] = `
+Object {
+  "actions": undefined,
+  "additionalFields": Array [],
+  "case": Object {
+    "created": "03/02/2019",
+    "deadLineExtensions": Array [],
+    "deadline": null,
+    "received": "01/01/2019",
+  },
+  "deadlines": Array [],
+  "deadlinesEnabled": true,
+  "previousCase": undefined,
+  "primaryCorrespondent": null,
+  "primaryTopic": null,
+  "stages": Array [],
+  "type": "case",
+}
+`;

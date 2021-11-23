@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Layout body component should render with default props 1`] = `
+<div
+  class="govuk-width-container"
+>
+  <main
+    class="govuk-main-wrapper "
+    id="main-content"
+    role="main"
+  />
+</div>
+`;
+
+exports[`Layout body component should render with phase banner when passed 1`] = `
+<div
+  class="govuk-width-container"
+>
+  <div
+    class="govuk-phase-banner"
+  >
+    <p
+      class="govuk-phase-banner__content"
+    >
+      <strong
+        class="govuk-tag govuk-phase-banner__content__tag"
+      >
+        PROTOTYPE
+      </strong>
+      <span>
+        This is a new service – your 
+        <a
+          href="/"
+        >
+          feedback
+        </a>
+         will help us to improve it.
+      </span>
+    </p>
+  </div>
+  <main
+    class="govuk-main-wrapper "
+    id="main-content"
+    role="main"
+  />
+</div>
+`;

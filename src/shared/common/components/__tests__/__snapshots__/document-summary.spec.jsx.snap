@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Document summary component should render with default props 1`] = `
+Array [
+  <h2
+    class="govuk-heading-m"
+  >
+    Documents
+  </h2>,
+  <table
+    class="govuk-table"
+  >
+    <caption
+      class="govuk-table__caption"
+    >
+      DOCUMENT_NAME
+    </caption>
+    <tbody
+      class="govuk-table__body"
+    >
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header"
+          scope="row"
+        >
+          UUID
+        </th>
+        <td
+          class="govuk-table__cell "
+        >
+          UUID
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header"
+          scope="row"
+        >
+          Type
+        </th>
+        <td
+          class="govuk-table__cell "
+        >
+          DOCUMENT_TYPE
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header"
+          scope="row"
+        >
+          Status
+        </th>
+        <td
+          class="govuk-table__cell "
+        >
+          DOCUMENT_STATUS
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header"
+          scope="row"
+        >
+          Date added
+        </th>
+        <td
+          class="govuk-table__cell "
+        />
+      </tr>
+    </tbody>
+  </table>,
+]
+`;

@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Entity List Items Adapter should transform data 1`] = `
+Array [
+  Object {
+    "label": "Title First",
+    "value": "First",
+  },
+  Object {
+    "label": "Title Second",
+    "value": "Second",
+  },
+  Object {
+    "label": "Title Third",
+    "value": "Third",
+  },
+]
+`;

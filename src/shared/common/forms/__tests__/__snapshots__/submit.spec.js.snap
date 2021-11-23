@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Form button component should render disabled when isDisabled is passed 1`] = `
+<input
+  class="govuk-button"
+  type="submit"
+  value="Submit"
+/>
+`;
+
+exports[`Form button component should render with additional styles when className is passed 1`] = `
+<input
+  class="govuk-button start"
+  type="submit"
+  value="Submit"
+/>
+`;
+
+exports[`Form button component should render with correct when label is passed 1`] = `
+<input
+  class="govuk-button"
+  type="submit"
+  value="Submit my form"
+/>
+`;
+
+exports[`Form button component should render with default props 1`] = `
+<input
+  class="govuk-button"
+  type="submit"
+  value="Submit"
+/>
+`;

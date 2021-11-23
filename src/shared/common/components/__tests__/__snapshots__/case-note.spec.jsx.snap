@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`When the component is rendered should match the snapshot 1`] = `
+<Fragment>
+  <p>
+    <span
+      className="case-note-number govuk-!-font-weight-bold"
+    >
+      __title__
+      .
+    </span>
+    __note__
+    <br />
+  </p>
+  <p>
+    <span>
+      Edited on __modifiedDate__ - __modifiedBy__
+    </span>
+  </p>
+  <p>
+    <span>
+      __date__
+    </span>
+    <span>
+      __author__
+    </span>
+    <span
+      className="edit-link"
+      onClick={[Function]}
+    >
+      <a
+        href="#edit-case-note__timelineItemUUID__"
+      >
+        Edit
+      </a>
+    </span>
+  </p>
+</Fragment>
+`;

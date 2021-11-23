@@ -1,0 +1,29 @@
+{
+    "presets": [
+        [
+            "@babel/preset-env",
+            {
+                "targets": {
+                    "edge": 13,
+                    "chrome": 43,
+                    "ie": 11
+                },
+                "modules": false,
+                "useBuiltIns": "usage",
+                "corejs": { "version": "3.15", "proposals": true },
+                "debug": false,
+                "forceAllTransforms": true
+            }
+        ],
+        "@babel/preset-react"
+    ],
+    "plugins": [
+        [
+            "@babel/plugin-proposal-object-rest-spread",
+            {
+                "useBuiltIns": true
+            }
+        ],
+        "@babel/plugin-transform-modules-commonjs"
+    ]
+}

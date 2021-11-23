@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Template Adapter should transform template data 1`] = `
+Array [
+  Object {
+    "label": "MOCK_TEMPLATE",
+    "value": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+  },
+]
+`;

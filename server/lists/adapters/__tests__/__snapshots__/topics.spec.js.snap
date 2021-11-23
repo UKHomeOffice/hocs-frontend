@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Topic Adapter should transform and sort topic data 1`] = `
+Array [
+  Object {
+    "options": Array [
+      Object {
+        "label": "a",
+        "value": 1,
+      },
+      Object {
+        "label": "b",
+        "value": 2,
+      },
+      Object {
+        "label": "c",
+        "value": 3,
+      },
+    ],
+  },
+]
+`;

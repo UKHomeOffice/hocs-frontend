@@ -1,60 +1,280 @@
 ---
-
 kind: pipeline
 type: kubernetes
-name: lint
+name: build
+
+trigger:
+  event:
+    - push
 
 steps:
-- name: lint bash
-  image: koalaman/shellcheck-alpine
-  commands:
-    - shellcheck *.sh
-  depends_on:
-    - clone
+  - name: install dependencies
+    image: node:14.15.4-alpine
+    commands:
+      - npm --loglevel warn install --production=false --no-optional
+
+  - name: build project
+    image: node:14.15.4-alpine
+    commands:
+      - npm run build-prod
+    depends_on:
+      - install dependencies
+
+  - name: test project
+    image: node:14.15.4-alpine
+    commands:
+      - npm test
+    depends_on:
+      - install dependencies
+
+  - name: lint project
+    image: node:14.15.4-alpine
+    commands:
+      - npm run lint
+    depends_on:
+      - install dependencies
+
+  - name: sonar scanner
+    image: quay.io/ukhomeofficedigital/sonar-scanner:v3.0.2
+    depends_on:
+      - build project
+      - test project
+
+  - name: build & push
+    image: plugins/docker
+    settings:
+      registry: quay.io
+      repo: quay.io/ukhomeofficedigital/hocs-frontend
+      tags:
+        - build_${DRONE_BUILD_NUMBER}
+        - ${DRONE_COMMIT_SHA}
+        - branch-${DRONE_COMMIT_BRANCH/\//_}
+    environment:
+      DOCKER_PASSWORD:
+        from_secret: QUAY_ROBOT_TOKEN
+      DOCKER_USERNAME: ukhomeofficedigital+hocs_quay_robot
+    when:
+      branch:
+        exclude:
+          - main
+    depends_on:
+      - build project
+      - test project
+      - lint project
+
+
+  - name: build & push latest
+    image: plugins/docker
+    settings:
+      registry: quay.io
+      repo: quay.io/ukhomeofficedigital/hocs-frontend
+      tags:
+        - build_${DRONE_BUILD_NUMBER}
+        - ${DRONE_COMMIT_SHA}
+        - branch-${DRONE_COMMIT_BRANCH/\//_}
+        - latest
+    environment:
+      DOCKER_PASSWORD:
+        from_secret: QUAY_ROBOT_TOKEN
+      DOCKER_USERNAME: ukhomeofficedigital+hocs_quay_robot
+    when:
+      branch:
+        - main
+    depends_on:
+      - build project
+      - test project
+      - lint project
+
 
 ---
-
 kind: pipeline
 type: kubernetes
-name: dry-run
+name: deploy
+depends_on:
+  - build
+trigger:
+  event:
+    exclude:
+      - pull_request
+      - tag
 
-# This pipeline runs deploy.sh with a few different ENVIRONMENTs set
-# we run them with DRY_RUN=true so they don't do anything
-#
-# We're essentially checking that deploy.sh finishes with an exit code
-# of zero, which will only happen if all accessed environment variables
-# are defined correctly
-#
-# This Drone pipeline doesn't have access to actual kube tokens so there's
-# no danger of actually deploying anywhere
+services:
+  - name: docker
+    image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/dind
+
+environment:
+  DOCKER_HOST: tcp://docker:2375
 
 steps:
-- name: dry-run kd dev
-  image: quay.io/ukhomeofficedigital/kd:v1.16.0
-  environment:
-    DRY_RUN: true
-    VERSION: test
-    ENVIRONMENT: wcs-dev
-    KUBE_TOKEN: test
-    POISE_IPS: "127.0.0.1/32"
-    ACPTUNNEL_IPS: "127.0.0.1/32"
-  commands:
-    - bash -x deploy.sh
-  depends_on:
-    - clone
+  - name: clone kube repo
+    image: plugins/git
+    commands:
+      - git clone https://github.com/UKHomeOffice/kube-hocs-frontend.git
 
-- name: dry-run kd prod
-  image: quay.io/ukhomeofficedigital/kd:v1.16.0
-  environment:
-    DRY_RUN: true
-    VERSION: test
-    ENVIRONMENT: cs-prod
-    KUBE_TOKEN: test
-    POISE_IPS: "127.0.0.1/32"
-    ACPTUNNEL_IPS: "127.0.0.1/32"
-  commands:
-    - bash -x deploy.sh
-  depends_on:
-    - clone
+  - name: deploy to cs-dev
+    image: quay.io/ukhomeofficedigital/kd:v1.16.0
+    environment:
+      ENVIRONMENT: cs-dev
+      VERSION: build_${DRONE_BUILD_NUMBER}
+      KUBE_TOKEN:
+        from_secret: hocs_frontend_cs_dev
+      POISE_IPS:
+        from_secret: POISE_IPS
+    commands:
+      - cd kube-hocs-frontend
+      - ./deploy.sh
+    when:
+      branch:
+        - main
+      event:
+        - push
+    depends_on:
+      - clone kube repo
 
-...
+  - name: deploy to wcs-dev
+    image: quay.io/ukhomeofficedigital/kd:v1.16.0
+    environment:
+      ENVIRONMENT: wcs-dev
+      VERSION: build_${DRONE_BUILD_NUMBER}
+      KUBE_TOKEN:
+        from_secret: hocs_frontend_wcs_dev
+      POISE_IPS:
+        from_secret: POISE_IPS
+    commands:
+      - cd kube-hocs-frontend
+      - ./deploy.sh
+    when:
+      branch:
+        - main
+      event:
+        - push
+    depends_on:
+      - clone kube repo
+
+  - name: wait for docker
+    image: docker
+    commands:
+      - n=0; until docker stats --no-stream; do echo "Waiting for Docker $n"; n=$((n +1)); sleep 1; done
+    when:
+      event:
+        - promote
+      target:
+        - release
+
+  - name: generate & tag build
+    image: quay.io/ukhomeofficedigital/hocs-version-bot:latest
+    commands:
+      - >
+        /app/hocs-deploy
+        --dockerRepository=quay.io/ukhomeofficedigital
+        --environment=qa
+        --registryPassword=$${DOCKER_PASSWORD}
+        --registryUser=ukhomeofficedigital+hocs_quay_robot
+        --service=hocs-frontend
+        --serviceGitToken=$${GITHUB_TOKEN}
+        --sourceBuild=$${VERSION}
+        --version=$${SEMVER}
+        --versionRepo="https://gitlab.digital.homeoffice.gov.uk/hocs/hocs-versions.git"
+        --versionRepoServiceToken=$${GITLAB_TOKEN}
+    environment:
+      DOCKER_API_VERSION: 1.40
+      DOCKER_PASSWORD:
+        from_secret: QUAY_ROBOT_TOKEN
+      GITLAB_TOKEN:
+        from_secret: GITLAB_TOKEN
+      GITHUB_TOKEN:
+        from_secret: GITHUB_TOKEN
+    depends_on:
+      - wait for docker
+    when:
+      event:
+        - promote
+      target:
+        - release
+
+  - name: deploy to cs-qa
+    image: quay.io/ukhomeofficedigital/kd:v1.16.0
+    commands:
+      - source version.txt
+      - echo $VERSION
+      - cd kube-hocs-frontend
+      - ./deploy.sh
+    environment:
+      ENVIRONMENT: cs-qa
+      KUBE_TOKEN:
+        from_secret: hocs_frontend_cs_qa
+      POISE_IPS:
+        from_secret: POISE_IPS
+    when:
+      event:
+        - promote
+      target:
+        - release
+    depends_on:
+      - clone kube repo
+      - generate & tag build
+
+  - name: deploy to wcs-qa
+    image: quay.io/ukhomeofficedigital/kd:v1.16.0
+    commands:
+      - source version.txt
+      - echo $VERSION
+      - cd kube-hocs-frontend
+      - ./deploy.sh
+    environment:
+      ENVIRONMENT: wcs-qa
+      KUBE_TOKEN:
+        from_secret: hocs_frontend_wcs_qa
+      POISE_IPS:
+        from_secret: POISE_IPS
+    when:
+      event:
+        - promote
+      target:
+        - release
+    depends_on:
+      - clone kube repo
+      - generate & tag build
+
+  - name: deploy to not prod
+    image: quay.io/ukhomeofficedigital/kd:v1.16.0
+    commands:
+      - cd kube-hocs-frontend
+      - ./deploy.sh
+    environment:
+      ENVIRONMENT: ${DRONE_DEPLOY_TO}
+      KUBE_TOKEN:
+        from_secret: hocs_frontend_${DRONE_DEPLOY_TO/-/_}
+      POISE_IPS:
+        from_secret: POISE_IPS
+      ACPTUNNEL_IPS:
+        from_secret: ACPTUNNEL_IPS
+    when:
+      event:
+        - promote
+      target:
+        exclude:
+          - release
+          - "*-prod"
+    depends_on:
+      - clone kube repo
+
+  - name: deploy to prod
+    image: quay.io/ukhomeofficedigital/kd:v1.16.0
+    commands:
+      - cd kube-hocs-frontend
+      - ./deploy.sh
+    environment:
+      ENVIRONMENT: ${DRONE_DEPLOY_TO}
+      KUBE_TOKEN:
+        from_secret: hocs_frontend_${DRONE_DEPLOY_TO/-/_}
+      POISE_IPS:
+        from_secret: POISE_IPS
+    when:
+      event:
+        - promote
+      target:
+        include:
+          - "*-prod"
+    depends_on:
+      - clone kube repo

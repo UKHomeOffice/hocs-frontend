@@ -1,0 +1,417 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`When the Details link is clicked should show the child items 1`] = `"<div class=\\"govuk-grid-row selectable-details\\"><div class=\\"govuk-grid-column-full\\"><div class=\\"selectable-details-header\\"><div class=\\"govuk-checkboxes\\" style=\\"display: inline-flex;\\"><div class=\\"govuk-checkboxes__item\\"><input id=\\"details-checkbox-__name__\\" type=\\"checkbox\\" name=\\"details-checkbox-__name__\\" class=\\"govuk-checkboxes__input\\" value=\\"__value__\\" checked=\\"\\"><label class=\\"govuk-label govuk-checkboxes__label\\" for=\\"details-checkbox-__name__\\">__label__</label></div></div><div class=\\"selectable-details-link\\"><a href=\\"#details-checkbox-__name__\\">Hide Details </a></div></div><div class=\\"selectable-details-content\\"><p class=\\"govuk-inset-text\\"> </p><p class=\\"govuk-inset-text\\"> </p><p class=\\"govuk-inset-text\\"> </p></div></div></div>"`;
+
+exports[`When the Details link is clicked twice should not show the child items 1`] = `"<div class=\\"govuk-grid-row selectable-details\\"><div class=\\"govuk-grid-column-full\\"><div class=\\"selectable-details-header\\"><div class=\\"govuk-checkboxes\\" style=\\"display: inline-flex;\\"><div class=\\"govuk-checkboxes__item\\"><input id=\\"details-checkbox-__name__\\" type=\\"checkbox\\" name=\\"details-checkbox-__name__\\" class=\\"govuk-checkboxes__input\\" value=\\"__value__\\" checked=\\"\\"><label class=\\"govuk-label govuk-checkboxes__label\\" for=\\"details-checkbox-__name__\\">__label__</label></div></div><div class=\\"selectable-details-link\\"><a href=\\"#details-checkbox-__name__\\">Show Details </a></div></div></div></div>"`;
+
+exports[`When the component is rendered a child component has errors should render expanded 1`] = `
+<div
+  class="govuk-grid-row selectable-details"
+>
+  <div
+    class="govuk-grid-column-full"
+  >
+    <div
+      class="selectable-details-header"
+    >
+      <div
+        class="govuk-checkboxes"
+        style="display:inline-flex"
+      >
+        <div
+          class="govuk-checkboxes__item"
+        >
+          <input
+            class="govuk-checkboxes__input"
+            id="details-checkbox-__name__"
+            name="details-checkbox-__name__"
+            type="checkbox"
+            value="__value__"
+          />
+          <label
+            class="govuk-label govuk-checkboxes__label"
+            for="details-checkbox-__name__"
+          >
+            __label__
+          </label>
+        </div>
+      </div>
+      <div
+        class="selectable-details-link"
+      >
+        <a
+          href="#details-checkbox-__name__"
+        >
+          Hide Details 
+        </a>
+      </div>
+    </div>
+    <div
+      class="selectable-details-content"
+    >
+      <p
+        class="govuk-inset-text"
+      >
+         
+      </p>
+      <p
+        class="govuk-inset-text"
+      >
+         
+      </p>
+      <p
+        class="govuk-inset-text"
+      >
+         
+      </p>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`When the component is rendered and it is checked and it has child components should match the snapshot - the child components should not be initially displayed by default 1`] = `
+<div
+  class="govuk-grid-row selectable-details"
+>
+  <div
+    class="govuk-grid-column-full"
+  >
+    <div
+      class="selectable-details-header"
+    >
+      <div
+        class="govuk-checkboxes"
+        style="display:inline-flex"
+      >
+        <div
+          class="govuk-checkboxes__item"
+        >
+          <input
+            checked=""
+            class="govuk-checkboxes__input"
+            id="details-checkbox-__name__"
+            name="details-checkbox-__name__"
+            type="checkbox"
+            value="__value__"
+          />
+          <label
+            class="govuk-label govuk-checkboxes__label"
+            for="details-checkbox-__name__"
+          >
+            __label__
+          </label>
+        </div>
+      </div>
+      <div
+        class="selectable-details-link"
+      >
+        <a
+          href="#details-checkbox-__name__"
+        >
+          Show Details 
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`When the component is rendered and it is not checked and it has child components should match the snapshot - the child components should not be displayed 1`] = `
+<div
+  class="govuk-grid-row selectable-details"
+>
+  <div
+    class="govuk-grid-column-full"
+  >
+    <div
+      class="selectable-details-header"
+    >
+      <div
+        class="govuk-checkboxes"
+        style="display:inline-flex"
+      >
+        <div
+          class="govuk-checkboxes__item"
+        >
+          <input
+            class="govuk-checkboxes__input"
+            id="details-checkbox-__name__"
+            name="details-checkbox-__name__"
+            type="checkbox"
+            value="__value__"
+          />
+          <label
+            class="govuk-label govuk-checkboxes__label"
+            for="details-checkbox-__name__"
+          >
+            __label__
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`When the component is rendered and it is selected and it has child components and the initiallyOpen prop should match the snapshot - the child components should be initially displayed 1`] = `
+<div
+  class="govuk-grid-row selectable-details"
+>
+  <div
+    class="govuk-grid-column-full"
+  >
+    <div
+      class="selectable-details-header"
+    >
+      <div
+        class="govuk-checkboxes"
+        style="display:inline-flex"
+      >
+        <div
+          class="govuk-checkboxes__item"
+        >
+          <input
+            checked=""
+            class="govuk-checkboxes__input"
+            id="details-checkbox-__name__"
+            name="details-checkbox-__name__"
+            type="checkbox"
+            value="__value__"
+          />
+          <label
+            class="govuk-label govuk-checkboxes__label"
+            for="details-checkbox-__name__"
+          >
+            __label__
+          </label>
+        </div>
+      </div>
+      <div
+        class="selectable-details-link"
+      >
+        <a
+          href="#details-checkbox-__name__"
+        >
+          Hide Details 
+        </a>
+      </div>
+    </div>
+    <div
+      class="selectable-details-content"
+    >
+      <p
+        class="govuk-inset-text"
+      >
+         
+      </p>
+      <p
+        class="govuk-inset-text"
+      >
+         
+      </p>
+      <p
+        class="govuk-inset-text"
+      >
+         
+      </p>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`When the component is rendered should match the snapshot 1`] = `
+<div
+  class="govuk-grid-row selectable-details"
+>
+  <div
+    class="govuk-grid-column-full"
+  >
+    <div
+      class="selectable-details-header"
+    >
+      <div
+        class="govuk-checkboxes"
+        style="display:inline-flex"
+      >
+        <div
+          class="govuk-checkboxes__item"
+        >
+          <input
+            class="govuk-checkboxes__input"
+            id="details-checkbox-__name__"
+            name="details-checkbox-__name__"
+            type="checkbox"
+            value="__value__"
+          />
+          <label
+            class="govuk-label govuk-checkboxes__label"
+            for="details-checkbox-__name__"
+          >
+            __label__
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`When the component is rendered should render checked if the value matches 1`] = `
+<div
+  class="govuk-grid-row selectable-details"
+>
+  <div
+    class="govuk-grid-column-full"
+  >
+    <div
+      class="selectable-details-header"
+    >
+      <div
+        class="govuk-checkboxes"
+        style="display:inline-flex"
+      >
+        <div
+          class="govuk-checkboxes__item"
+        >
+          <input
+            checked=""
+            class="govuk-checkboxes__input"
+            id="details-checkbox-__name__"
+            name="details-checkbox-__name__"
+            type="checkbox"
+            value="__value__"
+          />
+          <label
+            class="govuk-label govuk-checkboxes__label"
+            for="details-checkbox-__name__"
+          >
+            __label__
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`When the component is rendered should render unchecked if the value doesnt match 1`] = `
+<div
+  class="govuk-grid-row selectable-details"
+>
+  <div
+    class="govuk-grid-column-full"
+  >
+    <div
+      class="selectable-details-header"
+    >
+      <div
+        class="govuk-checkboxes"
+        style="display:inline-flex"
+      >
+        <div
+          class="govuk-checkboxes__item"
+        >
+          <input
+            class="govuk-checkboxes__input"
+            id="details-checkbox-__name__"
+            name="details-checkbox-__name__"
+            type="checkbox"
+            value="__value__"
+          />
+          <label
+            class="govuk-label govuk-checkboxes__label"
+            for="details-checkbox-__name__"
+          >
+            __label__
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`When the component is rendered with a hint should match the snapshot 1`] = `
+<div
+  class="govuk-grid-row selectable-details"
+>
+  <div
+    class="govuk-grid-column-full"
+  >
+    <div
+      class="selectable-details-header"
+    >
+      <div
+        class="govuk-checkboxes"
+        style="display:inline-flex"
+      >
+        <div
+          class="govuk-checkboxes__item"
+        >
+          <input
+            class="govuk-checkboxes__input"
+            id="details-checkbox-__name__"
+            name="details-checkbox-__name__"
+            type="checkbox"
+            value="__value__"
+          />
+          <label
+            class="govuk-label govuk-checkboxes__label"
+            for="details-checkbox-__name__"
+          >
+            __label__
+          </label>
+        </div>
+      </div>
+    </div>
+    <span
+      class="govuk-hint"
+    >
+      __hint__
+    </span>
+  </div>
+</div>
+`;
+
+exports[`When the component is rendered with a hint should match the snapshot 2`] = `
+<div
+  class="govuk-grid-row selectable-details"
+>
+  <div
+    class="govuk-grid-column-full"
+  >
+    <span
+      class="govuk-error-message"
+      id="__name__-error"
+    >
+      __error__
+    </span>
+    <div
+      class="selectable-details-header"
+    >
+      <div
+        class="govuk-checkboxes"
+        style="display:inline-flex"
+      >
+        <div
+          class="govuk-checkboxes__item"
+        >
+          <input
+            class="govuk-checkboxes__input"
+            id="details-checkbox-__name__"
+            name="details-checkbox-__name__"
+            type="checkbox"
+            value="__value__"
+          />
+          <label
+            class="govuk-label govuk-checkboxes__label"
+            for="details-checkbox-__name__"
+          >
+            __label__
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

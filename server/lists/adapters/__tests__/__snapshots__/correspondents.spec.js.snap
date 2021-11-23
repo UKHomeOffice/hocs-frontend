@@ -1,0 +1,100 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Case Correspondent Adapter should transform and sort case correspondent data 1`] = `
+Array [
+  Object {
+    "isPrimary": true,
+    "label": "Correspondent A",
+    "value": 1,
+  },
+  Object {
+    "isPrimary": false,
+    "label": "Correspondent B",
+    "value": 2,
+  },
+  Object {
+    "isPrimary": false,
+    "label": "Correspondent C",
+    "value": 3,
+  },
+]
+`;
+
+exports[`Case Correspondents All adapter should transform & reorder the data so the primary correspondent is the first object in the array 1`] = `
+Array [
+  Object {
+    "address": Object {
+      "address1": "",
+      "address2": "",
+      "address3": "",
+      "country": "",
+      "postcode": "",
+    },
+    "caseUUID": "CASE_UUID_2",
+    "created": "2020-06-04T13:38:32.52298",
+    "email": "",
+    "externalKey": null,
+    "fullname": "fname2 lname2",
+    "isPrimary": true,
+    "reference": "",
+    "telephone": "",
+    "type": "MEMBER",
+    "uuid": "UUID_2",
+  },
+  Object {
+    "address": Object {
+      "address1": "",
+      "address2": "",
+      "address3": "",
+      "country": "",
+      "postcode": "",
+    },
+    "caseUUID": "CASE_UUID_1",
+    "created": "2020-06-04T13:38:32.52298",
+    "email": "",
+    "externalKey": null,
+    "fullname": "fname1 lname1",
+    "isPrimary": false,
+    "reference": "",
+    "telephone": "",
+    "type": "MEMBER",
+    "uuid": "UUID_1",
+  },
+  Object {
+    "address": Object {
+      "address1": "",
+      "address2": "",
+      "address3": "",
+      "country": "",
+      "postcode": "",
+    },
+    "caseUUID": "CASE_UUID_3",
+    "created": "2020-06-04T13:38:32.52298",
+    "email": "",
+    "externalKey": null,
+    "fullname": "fname3 lname3",
+    "isPrimary": false,
+    "reference": "",
+    "telephone": "",
+    "type": "MEMBER",
+    "uuid": "UUID_3",
+  },
+]
+`;
+
+exports[`Correspondent Type Adapter should transform and sort correspondent type data 1`] = `
+Array [
+  Object {
+    "label": "Type A",
+    "value": "TYPE_A",
+  },
+  Object {
+    "label": "Type B",
+    "value": "TYPE_B",
+  },
+  Object {
+    "label": "Type C",
+    "value": "TYPE_C",
+  },
+]
+`;

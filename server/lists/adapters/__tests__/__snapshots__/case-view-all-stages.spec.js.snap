@@ -1,0 +1,248 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Case-view-all-stages Adapter should build a schema from the provided template and have sections maintain same order as schema object 1`] = `
+Object {
+  "data": Object {
+    "my_date_field": "19/01/2020",
+    "my_field": "Some Value",
+  },
+  "meta": Object {},
+  "schema": Object {
+    "defaultActionLabel": "Submit",
+    "fields": Array [
+      Object {
+        "component": "heading",
+        "props": Object {
+          "label": "Case Details",
+          "name": "case-view-heading",
+        },
+        "validation": Array [],
+      },
+      Object {
+        "component": "accordion",
+        "props": Object {
+          "name": "case-view",
+          "sections": Array [
+            Object {
+              "items": Array [
+                Object {
+                  "component": "mapped-display",
+                  "props": Object {
+                    "component": "text",
+                    "label": "My Field",
+                    "name": "my_field",
+                  },
+                  "validation": Array [],
+                },
+                Object {
+                  "component": "mapped-display",
+                  "props": Object {
+                    "component": "date",
+                    "label": "My Date Field",
+                    "name": "my_date_field",
+                  },
+                  "validation": Array [],
+                },
+              ],
+              "title": "STAGE_NAME",
+            },
+            Object {
+              "items": Array [
+                Object {
+                  "component": "mapped-display",
+                  "props": Object {
+                    "component": "text",
+                    "label": "My Field",
+                    "name": "my_field",
+                  },
+                  "validation": Array [],
+                },
+                Object {
+                  "component": "mapped-display",
+                  "props": Object {
+                    "component": "date",
+                    "label": "My Date Field",
+                    "name": "my_date_field",
+                  },
+                  "validation": Array [],
+                },
+              ],
+              "title": "STAGE_NAME1",
+            },
+            Object {
+              "items": Array [
+                Object {
+                  "component": "mapped-display",
+                  "props": Object {
+                    "component": "text",
+                    "label": "My Field",
+                    "name": "my_field",
+                  },
+                  "validation": Array [],
+                },
+                Object {
+                  "component": "mapped-display",
+                  "props": Object {
+                    "component": "date",
+                    "label": "My Date Field",
+                    "name": "my_date_field",
+                  },
+                  "validation": Array [],
+                },
+              ],
+              "title": "STAGE_NAME2",
+            },
+          ],
+        },
+        "validation": Array [],
+      },
+    ],
+    "showPrimaryAction": false,
+    "title": "MIN/1234567/18",
+  },
+}
+`;
+
+exports[`Case-view-all-stages Adapter should render SOMU Approval case view sections 1`] = `
+Object {
+  "data": Object {
+    "ApprovalRequests": "Dummy Approval Role Complete - approved",
+    "my_field": "Some Value",
+    "stage_2_field_1": "Some Label",
+  },
+  "meta": Object {},
+  "schema": Object {
+    "defaultActionLabel": "Submit",
+    "fields": Array [
+      Object {
+        "component": "heading",
+        "props": Object {
+          "label": "Case Details",
+          "name": "case-view-heading",
+        },
+        "validation": Array [],
+      },
+      Object {
+        "component": "accordion",
+        "props": Object {
+          "name": "case-view",
+          "sections": Array [
+            Object {
+              "items": Array [
+                Object {
+                  "component": "mapped-display",
+                  "props": Object {
+                    "component": "text",
+                    "label": "My Field",
+                    "name": "my_field",
+                  },
+                  "validation": Array [],
+                },
+              ],
+              "title": "STAGE_NAME",
+            },
+            Object {
+              "items": Array [
+                Object {
+                  "component": "mapped-display",
+                  "props": Object {
+                    "component": "text",
+                    "label": "Stage 2 Field 1",
+                    "name": "stage_2_field_1",
+                  },
+                  "validation": Array [],
+                },
+                Object {
+                  "component": "mapped-display",
+                  "props": Object {
+                    "component": "somu-list",
+                    "label": "Approval Requests",
+                    "name": "ApprovalRequests",
+                  },
+                  "validation": Array [],
+                },
+              ],
+              "title": "STAGE_NAME_2",
+            },
+          ],
+        },
+        "validation": Array [],
+      },
+    ],
+    "showPrimaryAction": false,
+    "title": "FOI/0123456/21",
+  },
+}
+`;
+
+exports[`Case-view-all-stages Adapter should render SOMU MPAM Contributions case view sections 1`] = `
+Object {
+  "data": Object {
+    "CaseContributions": "Random list value Overdue 01/09/2021",
+    "my_field": "Some Value",
+    "stage_2_field_1": "Some Label",
+  },
+  "meta": Object {},
+  "schema": Object {
+    "defaultActionLabel": "Submit",
+    "fields": Array [
+      Object {
+        "component": "heading",
+        "props": Object {
+          "label": "Case Details",
+          "name": "case-view-heading",
+        },
+        "validation": Array [],
+      },
+      Object {
+        "component": "accordion",
+        "props": Object {
+          "name": "case-view",
+          "sections": Array [
+            Object {
+              "items": Array [
+                Object {
+                  "component": "mapped-display",
+                  "props": Object {
+                    "component": "text",
+                    "label": "My Field",
+                    "name": "my_field",
+                  },
+                  "validation": Array [],
+                },
+              ],
+              "title": "STAGE_NAME",
+            },
+            Object {
+              "items": Array [
+                Object {
+                  "component": "mapped-display",
+                  "props": Object {
+                    "component": "text",
+                    "label": "Stage 2 Field 1",
+                    "name": "stage_2_field_1",
+                  },
+                  "validation": Array [],
+                },
+                Object {
+                  "component": "mapped-display",
+                  "props": Object {
+                    "component": "somu-list",
+                    "label": "Case contributions",
+                    "name": "CaseContributions",
+                  },
+                  "validation": Array [],
+                },
+              ],
+              "title": "STAGE_NAME_2",
+            },
+          ],
+        },
+        "validation": Array [],
+      },
+    ],
+    "showPrimaryAction": false,
+    "title": "MPAM/0123456/21",
+  },
+}
+`;
