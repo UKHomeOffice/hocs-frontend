@@ -26,6 +26,7 @@ const validationErrors = {
     isBeforeMaxYear: label => `${label} must be before ${MAX_ALLOWABLE_YEAR}`,
     isAfterMinYear: label => `${label} must be after ${MIN_ALLOWABLE_YEAR}`,
     isValidDay: label => `${label} must contain a real day`,
+    isValidWithinGivenDays: (label, props) => `${label} must not be more than ${props} days in the future`,
 };
 
 const approvalsReducer = ({ approved, rejected, cancelled, outstanding }, value) => {
@@ -282,12 +283,11 @@ const validators = {
         }
         return message || validationErrors.oneOf();
     },
-    isValidWithinNextThirtyDays({ label, value, message }) {
-        const numberOfDaysInFuture = 30;
+    isValidWithinGivenDays({ label, value, message, props }) {
         let limitDate = new Date();
-        limitDate.setDate(limitDate.getDate() + numberOfDaysInFuture);
+        limitDate.setDate(limitDate.getDate() + parseInt(props));
         if (new Date(value).valueOf() >= limitDate.valueOf()) {
-            return message || validationErrors.isValidWithinNextThirtyDays(label);
+            return message || validationErrors.isValidWithinGivenDays(label, props);
         }
         return null;
     }
@@ -544,9 +544,9 @@ function validationMiddleware(req, res, next) {
                         }
                     }
                     else {
-                        const { type, message } = validator;
+                        const { type, message, props } = validator;
                         if (Object.prototype.hasOwnProperty.call(validators, type)) {
-                            const validationError = validators[type].call(this, { label, value, message });
+                            const validationError = validators[type].call(this, { label, value, message, props });
 
                             if (component === 'radio') {
                                 validateConditionalRadioContentIfExists.call(
