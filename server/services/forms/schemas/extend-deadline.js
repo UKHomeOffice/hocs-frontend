@@ -3,7 +3,7 @@ const { Choice, Component, ConditionChoice } = require('../component-builder');
 
 const extendFromOptions = {
     TODAY: 'Today',
-    DATE_RECEIVED: 'Date of receipt'
+    CURRENT_DEADLINE: 'Current deadline'
 };
 
 function buildActionTypeChoiceArray(rawDataArray) {
@@ -13,88 +13,107 @@ function buildActionTypeChoiceArray(rawDataArray) {
     return [];
 }
 
-function buildExtendByConditionalChoiceArray(rawExtensionArray) {
+function buildExtendByFields(rawExtensionArray, remainingDays, finalForm) {
 
-    if (rawExtensionArray.length > 0) {
-        return rawExtensionArray.map(el =>
-            ConditionChoice(
-                'caseTypeActionUuid',
-                el.typeInfo.uuid,
-                Array.from(
-                    { length: JSON.parse(el.typeInfo.props).extendByMaximumDays },
-                    (_, i) => Choice(String(i + 1), String(i + 1)))
-            )
-        );
-    }
-    return [];
+    rawExtensionArray.filter(type => Object.keys(extendFromOptions)
+        .filter(option => JSON.parse(type.typeInfo.props).extendFrom.includes(option))
+    ).forEach(type => finalForm
+        .withField(
+            Component('dropdown', 'extendBy')
+                .withValidator('required')
+                .withValidator('required', 'You must select an number of days to extend the case by')
+                .withProp('label', 'How many days do you want to extend the case deadline by?')
+                .withProp('hint', 'If there are no options to choose, then the case cannot be extended.')
+                .withProp('conditionChoices', JSON.parse(type.typeInfo.props).extendFrom.map(
+                    option => {
+                        const extendByMaximumDays = JSON.parse(type.typeInfo.props).extendByMaximumDays;
+                        return ConditionChoice(
+                            'extendFrom',
+                            option,
+                            Array.from(
+                                { length: extendByMaximumDays - ( option === 'TODAY' ? remainingDays : 0) },
+                                (_, i) =>
+                                    Choice(
+                                        String(i + 1),
+                                        String(option === 'TODAY' ? remainingDays + i : extendByMaximumDays))
+                            ));
+                    })
+                )
+                .withProp('visibilityConditions', [
+                    {
+                        'conditionPropertyName': 'caseTypeActionUuid',
+                        'conditionPropertyValue': type.typeInfo.uuid
+                    }
+                ])
+                .build()
+        )
+    );
 }
 
 function buildExtendFromConditionalChoiceArray(rawExtensionArray){
     if (rawExtensionArray.length > 0) {
-        return rawExtensionArray.filter(el => Object.keys(extendFromOptions).includes(JSON.parse(el.typeInfo.props).extendFrom)).map(el =>
-            ConditionChoice(
-                'caseTypeActionUuid',
-                el.typeInfo.uuid,
-                [
-                    Choice(extendFromOptions[JSON.parse(el.typeInfo.props).extendFrom], JSON.parse(el.typeInfo.props).extendFrom)
-                ]
-            ));
+        return rawExtensionArray
+            .filter(type => Object.keys(extendFromOptions)
+                .filter(option => JSON.parse(type.typeInfo.props).extendFrom.includes(option)))
+            .map(el =>
+                ConditionChoice(
+                    'caseTypeActionUuid',
+                    el.typeInfo.uuid,
+                    JSON.parse(el.typeInfo.props).extendFrom.map(option =>
+                        Choice(extendFromOptions[option], option)
+                    )
+                ));
     }
     return [];
 }
 
 module.exports = (options) => {
 
+    const extensionForm = Form();
     const { caseActionData } = options;
     let extensionTypeChoiceArray;
-    let extendByChoicesArray;
     let extendFromChoicesArray;
 
     if (caseActionData.EXTENSION) {
         extensionTypeChoiceArray = buildActionTypeChoiceArray(caseActionData.EXTENSION);
-        extendByChoicesArray = buildExtendByConditionalChoiceArray(caseActionData.EXTENSION);
         extendFromChoicesArray = buildExtendFromConditionalChoiceArray(caseActionData.EXTENSION);
-    }
 
-    return Form()
-        .withTitle('Apply an extension to this case')
-        .withField(
-            Component('dropdown', 'caseTypeActionUuid')
-                .withValidator('required', 'You must select an extension type.')
-                .withProp('choices', [ ...extensionTypeChoiceArray ])
-                .withProp('label', 'What type of extension do you want to apply?')
-                .build()
-        )
-        .withField(
-            Component('dropdown', 'extendBy')
-                .withValidator('required', 'You must select an number of days to extend the case by')
-                .withProp('label', 'How many days do you want to extend the case deadline by?')
-                .withProp('conditionChoices', [
-                    ...extendByChoicesArray
-                ])
-                .build()
-        )
-        .withField(
-            Component('dropdown', 'extendFrom')
-                .withValidator('required', 'You must select when the extension will start from.')
-                .withProp('label', 'Case will be extended from:')
-                .withProp('conditionChoices', [
-                    ...extendFromChoicesArray
-                ])
-                .build()
-        )
-        .withField(
+
+        extensionForm
+            .withTitle('Apply an extension to this case')
+            .withField(
+                Component('dropdown', 'caseTypeActionUuid')
+                    .withValidator('required', 'You must select an extension type.')
+                    .withProp('choices', [...extensionTypeChoiceArray])
+                    .withProp('label', 'What type of extension do you want to apply?')
+                    .build()
+            )
+            .withField(
+                Component('dropdown', 'extendFrom')
+                    .withValidator('required', 'You must select when the extension will start from.')
+                    .withProp('label', 'Case will be extended from:')
+                    .withProp('conditionChoices', [
+                        ...extendFromChoicesArray
+                    ])
+                    .build()
+            );
+
+        buildExtendByFields(caseActionData.EXTENSION, caseActionData.remainingDays, extensionForm);
+
+        extensionForm.withField(
             Component('text-area', 'note')
                 .withValidator('required', 'You must enter a reason for the extension.')
                 .withProp('label', 'Please enter a reason for the extension.')
                 .build()
         )
-        .withPrimaryActionLabel('Extend Case')
-        .withSecondaryAction(
-            Component('backlink')
-                .withProp('label', 'Back')
-                .withProp('action', `/case/${options.caseId}/stage/${options.stageId}`)
-                .build()
-        )
-        .build();
+            .withPrimaryActionLabel('Extend Case')
+            .withSecondaryAction(
+                Component('backlink')
+                    .withProp('label', 'Back')
+                    .withProp('action', `/case/${options.caseId}/stage/${options.stageId}`)
+                    .build()
+            );
+
+    }
+    return extensionForm.build();
 };
