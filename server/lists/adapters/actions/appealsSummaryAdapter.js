@@ -1,4 +1,3 @@
-const toTitleCase = require('../../../libs/titleCaseHelper');
 const { formatDate } = require('../../../libs/dateHelpers');
 
 const outcomeMap = {
@@ -30,7 +29,7 @@ module.exports = async (actions, fetchList) => {
         }
 
         return {
-            title: toTitleCase(appealEntry.caseTypeActionLabel),
+            title: appealEntry.caseTypeActionLabel,
             outcome: outcomeMap[appealEntry.outcome] || null,
             officerDirectorate: directorate || null,
             officer: officer || null,
