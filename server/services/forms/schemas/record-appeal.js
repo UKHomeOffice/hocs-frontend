@@ -100,8 +100,22 @@ module.exports = async options => {
                 .withProp('label', 'Has this been completed?')
                 .build()
         )
+        .withField(
+            Component('hidden', 'document_type')
+                .withProp('label', 'doc type')
+                .build()
+        ).withField(
+            Component('add-document', 'add_document')
+                .withValidator('hasWhitelistedExtension')
+                .withValidator('fileLimit')
+                .withProp('label', 'Are there any documents to include?')
+                .withProp('allowMultiple', true)
+                .withProp('whitelist', 'DOCUMENT_EXTENSION_WHITELIST')
+                .build()
+        )
         .withData({
-            status: 'Pending'
+            status: 'Pending',
+            document_type: 'Appeal Information'
         })
         .withSecondaryAction(
             Component('backlink')
