@@ -13,9 +13,22 @@ class SideBar extends Component {
 
     constructor(props) {
         super(props);
+
         this.state = {
             active: props.activeTab || 'DOCUMENTS'
         };
+    }
+
+    componentDidMount() {
+        // eslint-disable-next-line no-undef
+        const urlParams = new URLSearchParams(window.location.search);
+        const tabParam = urlParams.get('tab');
+
+        if(tabParam) {
+            this.setState(  {
+                active: tabParam
+            });
+        }
     }
 
     setActive(e, tab) {
@@ -74,14 +87,13 @@ SideBar.propTypes = {
     activeTab: PropTypes.string,
     page: PropTypes.object.isRequired,
     track: PropTypes.func.isRequired,
-    summary: PropTypes.object.isRequired,
-    test: PropTypes.string.isRequired
+    summary: PropTypes.object.isRequired
 };
 
 const WrappedSideBar = props => (
     <ApplicationConsumer>
         {({ track, page, activeTab, summary }) =>
-            <SideBar {...props} track={track} page={page} activeTab={activeTab} summary={summary} test={'test'}/>}
+            <SideBar {...props} track={track} page={page} activeTab={activeTab} summary={summary}/>}
     </ApplicationConsumer>
 );
 

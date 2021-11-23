@@ -53,6 +53,10 @@ const Appeals = (props) => {
                                         <Link to={`/case/${page.params.caseId}/stage/${page.params.stageId}/caseAction/appeal/update/${appeal.id}?hideSidebar=false`}
                                             className="govuk-link">Update</Link>
                                     </td>
+                                    <td key={i} className='govuk-table__cell'>
+                                        <Link to={`/case/${page.params.caseId}/stage/${page.params.stageId}/caseAction/appeal/manage_documents/${appeal.id}?hideSidebar=false`}
+                                            className="govuk-link">Manage Documents</Link>
+                                    </td>
                                 </tr>
                             );
                         })

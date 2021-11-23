@@ -298,6 +298,8 @@ const actions = {
                                 await caseworkService.post(`/case/${caseId}/stage/${stageId}/actions/appeal`,
                                     requestBody, headers);
 
+                            await addDocument(`/case/${caseId}/action/${response.data.uuid}/document`, form, headers);
+
                             const clientResponse = {
                                 'summary': `Appeal for ${response.data.reference} registered`,
                                 'link': `${response.data.reference}`
@@ -347,6 +349,16 @@ const actions = {
                                 'link': `${response.data.reference}`
                             };
 
+                            return handleActionSuccess(clientResponse, {}, form);
+                        }
+                        case actionTypes.MANAGE_APPEAL_DOCUMENTS: {
+                            const { caseActionId } = options;
+
+                            await addDocument(`/case/${caseId}/action/${caseActionId}/document`, form, headers);
+                            const clientResponse =
+                                {
+                                    callbackUrl: `/case/${caseId}/stage/${stageId}/caseAction/appeal/manage_documents/${caseActionId}?hideSidebar=false`
+                                };
                             return handleActionSuccess(clientResponse, {}, form);
                         }
                     }
