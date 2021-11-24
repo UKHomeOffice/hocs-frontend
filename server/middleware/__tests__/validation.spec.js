@@ -452,12 +452,12 @@ describe('Validators', () => {
     });
 
     describe('Valid within given days validator', () => {
-        it('should reject if more than 30 days after current date', () => {
+        it('should reject if more than given days after current date', () => {
             let inputDate = new Date();
             inputDate.setDate(inputDate.getDate() + 20);
             expect(validators.isValidWithinGivenDays({ label: 'label', value: inputDate, message: null, props: '10' })).toEqual('label must not be more than 10 days in the future');
         });
-        it('should accept if any time less than 30 days after current date', () => {
+        it('should accept if any time less than given days after current date', () => {
             expect(validators.isValidWithinGivenDays('label', new Date(), 'message', '30')).toEqual(null);
         });
     });

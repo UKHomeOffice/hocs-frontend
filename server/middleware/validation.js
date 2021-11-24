@@ -17,7 +17,6 @@ const validationErrors = {
     isBeforeToday: label => `${label} must be a date in the past`,
     isAfterToday: label => `${label} must be a date in the future`,
     isValidWithinDate: label => `${label} must be within the last ${VALID_DAYS_RANGE} days`,
-    isValidWithinNextThirtyDays: label => `${label} must be within the next 30 days`,
     validCaseReference: () => 'Case reference is not valid',
     contributionsFulfilled: () => 'Case contributions have to be completed or cancelled',
     approvalsFulfilled: () => 'The required approvals to progress the case have not been received.',
