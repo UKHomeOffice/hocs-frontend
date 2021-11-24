@@ -1,0 +1,7 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: hocs-frontend
+data:
+  clientside: 'true'
+  a11y-url: 'https://lssiprod.service-now.com/ess?id=kb_article&sys_id=98678fd71b9f901845e741d7bd4bcba1'
