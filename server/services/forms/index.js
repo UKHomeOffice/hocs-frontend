@@ -168,6 +168,13 @@ const formDefinitions = {
                         action: 'CONFIRMATION_SUMMARY'
                     }
                 },
+                COMP2: {
+                    builder: formRepository.bulkAddDocument,
+                    action: BULK_CREATE_CASE,
+                    next: {
+                        action: 'CONFIRMATION_SUMMARY'
+                    }
+                },
                 MIN: {
                     builder: formRepository.bulkAddDocument,
                     action: BULK_CREATE_CASE,
@@ -427,6 +434,27 @@ const formDefinitions = {
                     action: EDIT_CONTRIBUTION,
                     customConfig: compComplainantContributionsRequest
                 }
+            },
+            COMP2: {
+                ADDREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    action: ADD_CONTRIBUTION,
+                    customConfig: compComplainantContributionsRequest
+                },
+                EDITREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    action: EDIT_CONTRIBUTION,
+                    customConfig: compComplainantContributionsRequest
+                },
+                VIEWREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    customConfig: compComplainantContributionsRequest
+                },
+                EDIT: {
+                    builder: formRepository.contributionFulfillment,
+                    action: EDIT_CONTRIBUTION,
+                    customConfig: compComplainantContributionsRequest
+                }
             }
         },
         CCT_BUS_CONTRIB: {
@@ -450,10 +478,52 @@ const formDefinitions = {
                     action: EDIT_CONTRIBUTION,
                     customConfig: compBusinessContributionsRequest
                 }
+            },
+            COMP2: {
+                ADDREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    action: ADD_CONTRIBUTION,
+                    customConfig: compBusinessContributionsRequest
+                },
+                EDITREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    action: EDIT_CONTRIBUTION,
+                    customConfig: compBusinessContributionsRequest
+                },
+                VIEWREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    customConfig: compBusinessContributionsRequest
+                },
+                EDIT: {
+                    builder: formRepository.contributionFulfillment,
+                    action: EDIT_CONTRIBUTION,
+                    customConfig: compBusinessContributionsRequest
+                }
             }
         },
         EXGRATIA_BUS_CONTRIB: {
             COMP: {
+                ADDREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    action: ADD_CONTRIBUTION,
+                    customConfig: exgratiaBusinessContributionsRequest
+                },
+                EDITREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    action: EDIT_CONTRIBUTION,
+                    customConfig: exgratiaBusinessContributionsRequest
+                },
+                VIEWREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    customConfig: exgratiaBusinessContributionsRequest
+                },
+                EDIT: {
+                    builder: formRepository.contributionFulfillment,
+                    action: EDIT_CONTRIBUTION,
+                    customConfig: exgratiaBusinessContributionsRequest
+                }
+            },
+            COMP2: {
                 ADDREQUEST: {
                     builder: formRepository.contributionRequest,
                     action: ADD_CONTRIBUTION,
