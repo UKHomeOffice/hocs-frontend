@@ -154,52 +154,52 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
-        S_MPAM_ENQUIRY_REASONS_ALL: {
+        MPAM_ENQUIRY_REASONS_ALL: {
             client: 'INFO',
             endpoint: '/entity/list/MPAM_ENQUIRY_REASONS_ALL',
-            type: listService.types.STATIC,
+            type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
         },
-        S_MPAM_ENQUIRY_REASONS_PER: {
+        MPAM_ENQUIRY_REASONS_PER: {
             client: 'INFO',
             endpoint: '/entity/list/MPAM_ENQUIRY_REASONS_PER',
-            type: listService.types.STATIC,
+            type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
         },
-        S_MPAM_ENQUIRY_REASONS_GUI: {
+        MPAM_ENQUIRY_REASONS_GUI: {
             client: 'INFO',
             endpoint: '/entity/list/MPAM_ENQUIRY_REASONS_GUI',
-            type: listService.types.STATIC,
+            type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
         },
-        S_MPAM_ENQUIRY_REASONS_DOC: {
+        MPAM_ENQUIRY_REASONS_DOC: {
             client: 'INFO',
             endpoint: '/entity/list/MPAM_ENQUIRY_REASONS_DOC',
-            type: listService.types.STATIC,
+            type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
         },
-        S_MPAM_ENQUIRY_REASONS_TECH: {
+        MPAM_ENQUIRY_REASONS_TECH: {
             client: 'INFO',
             endpoint: '/entity/list/MPAM_ENQUIRY_REASONS_TECH',
-            type: listService.types.STATIC,
+            type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
         },
-        S_MPAM_ENQUIRY_REASONS_DET: {
+        MPAM_ENQUIRY_REASONS_DET: {
             client: 'INFO',
             endpoint: '/entity/list/MPAM_ENQUIRY_REASONS_DET',
-            type: listService.types.STATIC,
+            type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
         },
-        S_MPAM_ENQUIRY_REASONS_HMPO: {
+        MPAM_ENQUIRY_REASONS_HMPO: {
             client: 'INFO',
             endpoint: '/entity/list/MPAM_ENQUIRY_REASONS_HMPO',
-            type: listService.types.STATIC,
+            type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
         },
-        S_MPAM_ENQUIRY_REASONS_OTHER: {
+        MPAM_ENQUIRY_REASONS_OTHER: {
             client: 'INFO',
             endpoint: '/entity/list/MPAM_ENQUIRY_REASONS_OTHER',
-            type: listService.types.STATIC,
+            type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
         },
         S_MPAM_BUS_UNITS_ALL: {
