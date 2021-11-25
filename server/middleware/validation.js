@@ -26,6 +26,7 @@ const validationErrors = {
     isAfterMinYear: label => `${label} must be after ${MIN_ALLOWABLE_YEAR}`,
     isValidDay: label => `${label} must contain a real day`,
     isValidWithinGivenDays: (label, props) => `${label} must not be more than ${props} days in the future`,
+    isValidWithinPastGivenDays: (label, props) => `${label} must not be more than ${props} days in the past`,
 };
 
 const approvalsReducer = ({ approved, rejected, cancelled, outstanding }, value) => {
@@ -287,6 +288,14 @@ const validators = {
         limitDate.setDate(limitDate.getDate() + parseInt(props));
         if (new Date(value).valueOf() >= limitDate.valueOf()) {
             return message || validationErrors.isValidWithinGivenDays(label, props);
+        }
+        return null;
+    },
+    isValidWithinPastGivenDays({ label, value, message, props }) {
+        let limitDate = new Date();
+        limitDate.setDate(limitDate.getDate() - parseInt(props));
+        if (new Date(value).valueOf() <= limitDate.valueOf()) {
+            return message || validationErrors.isValidWithinPastGivenDays(label, props);
         }
         return null;
     }

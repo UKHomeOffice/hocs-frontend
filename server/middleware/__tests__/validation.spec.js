@@ -462,6 +462,17 @@ describe('Validators', () => {
         });
     });
 
+    describe('Valid within past given days validator', () => {
+        it('should reject if more than given days before current date', () => {
+            let inputDate = new Date();
+            inputDate.setDate(inputDate.getDate() - 20);
+            expect(validators.isValidWithinPastGivenDays({ label: 'label', value: inputDate, message: null, props: '10' })).toEqual('label must not be more than 10 days in the past');
+        });
+        it('should accept if any time less than given days before current date', () => {
+            expect(validators.isValidWithinPastGivenDays('label', new Date(), 'message', '30')).toEqual(null);
+        });
+    });
+
 });
 
 describe('Validation middleware', () => {
