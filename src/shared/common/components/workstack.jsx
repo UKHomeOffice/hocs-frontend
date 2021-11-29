@@ -46,7 +46,8 @@ const ColumnRenderer = {
     CONTRIBUTIONS_WARNING: 'contributionsWarning',
     MP_WITH_OWNER: 'mpWithOwner',
     NEXT_CASE_LINK: 'nextCaseType',
-    HIDDEN: 'hidden'
+    HIDDEN: 'hidden',
+    COMP_TYPE: 'compType'
 };
 
 const ColumnSortStrategy = {
@@ -421,6 +422,8 @@ class WorkstackAllocate extends Component {
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>{value}</td>;
             case ColumnRenderer.HIDDEN:
                 return;
+            case ColumnRenderer.COMP_TYPE:
+                return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell indicator'>{this.prettyCompTypeValue(value)}</td>;
             default:
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>{value}</td>;
         }
@@ -520,6 +523,17 @@ class WorkstackAllocate extends Component {
             return -1 * this.state.sort.direction;
         }
         return 0;
+    }
+
+    prettyCompTypeValue(value) {
+        switch (value) {
+            case 'Service':
+                return 'Service';
+            case 'MinorMisconduct':
+                return 'Minor Misconduct';
+            default:
+                return '';
+        }
     }
 
     render() {
