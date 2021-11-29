@@ -143,6 +143,13 @@ const formDefinitions = {
                         action: 'CONFIRMATION_SUMMARY'
                     }
                 },
+                TO: {
+                    builder: formRepository.addDocument,
+                    action: CREATE_CASE,
+                    next: {
+                        action: 'CONFIRMATION_SUMMARY'
+                    }
+                },
             }
         },
         TEST: {
@@ -260,7 +267,10 @@ const formDefinitions = {
                 },
                 UPDATE: {
                     builder: formRepository.updateAppealFoi,
-                    action: EDIT_CASE_APPEAL
+                    action: EDIT_CASE_APPEAL,
+                    next: {
+                        action: CONFIRMATION_SUMMARY
+                    }
                 }
             },
             RECORD_INTEREST: {

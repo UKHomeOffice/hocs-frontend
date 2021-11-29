@@ -160,6 +160,14 @@ const typeAdaptors = {
         note,
         title: 'Appeal Updated'
     }),
+    RECORD_INTEREST: ({ note }) => ({
+        note,
+        title: 'Interest Recorded'
+    }),
+    UPDATE_INTEREST: ({ note }) => ({
+        note,
+        title: 'Interest Updated'
+    })
 };
 
 const formatDate = (rawDate) => {

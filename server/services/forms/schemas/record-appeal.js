@@ -108,6 +108,7 @@ module.exports = async options => {
             Component('add-document', 'add_document')
                 .withValidator('hasWhitelistedExtension')
                 .withValidator('fileLimit')
+                .withValidator('required')
                 .withProp('label', 'Are there any documents to include?')
                 .withProp('allowMultiple', true)
                 .withProp('whitelist', 'DOCUMENT_EXTENSION_WHITELIST')
