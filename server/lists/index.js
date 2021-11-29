@@ -647,6 +647,12 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: usersAdapter
         },
+        S_BF_CSU_LIST: {
+            client: 'INFO',
+            endpoint: '/entity/list/BF_CSU_LIST',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
 
     },
     clients: {
