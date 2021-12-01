@@ -455,10 +455,21 @@ describe('Validators', () => {
         it('should reject if more than given days after current date', () => {
             let inputDate = new Date();
             inputDate.setDate(inputDate.getDate() + 20);
-            expect(validators.isValidWithinGivenDays({ label: 'label', value: inputDate, message: null, props: '10' })).toEqual('label must not be more than 10 days in the future');
+            expect(validators.isValidWithinGivenDays({ label: 'label', value: inputDate, message: null, props: { days: '10' } })).toEqual('label must be within the next 10 days.');
         });
         it('should accept if any time less than given days after current date', () => {
-            expect(validators.isValidWithinGivenDays('label', new Date(), 'message', '30')).toEqual(null);
+            expect(validators.isValidWithinGivenDays({ label: 'label', value: new Date(), message: 'message', props: { days: '30' } })).toEqual(null);
+        });
+    });
+
+    describe('Valid within past given days validator', () => {
+        it('should reject if more than given days before current date', () => {
+            const inputDate = new Date();
+            inputDate.setDate(inputDate.getDate() - 20);
+            expect(validators.isValidWithinPastGivenDays({ label: 'label', value: inputDate, message: null, props: { days: '10' } })).toEqual('label must be within the last 10 days.');
+        });
+        it('should accept if any time less than given days before current date', () => {
+            expect(validators.isValidWithinPastGivenDays({ label: 'label', value: new Date(), message: 'message', props: { days: '30' } })).toEqual(null);
         });
     });
 
