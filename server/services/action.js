@@ -100,7 +100,10 @@ const actions = {
                     }
                     case actionTypes.CREATE_AND_ALLOCATE_CASE: {
                         const { data: documentTags } = await getDocumentTags(context);
-                        const { data: { reference } } = await createCase('/case', { caseType: context, form }, documentTags[0], headers);
+                        const { data: { reference } } = await createCase('/case', {
+                            caseType: context,
+                            form
+                        }, documentTags[0], headers);
                         const { data: { stages } } = await caseworkService.get(`/case/${doubleEncodeSlashes(encodeURIComponent(reference))}/stage`, headers);
                         const { caseUUID, uuid: stageUUID } = stages[0];
                         return handleActionSuccess({ callbackUrl: `/case/${caseUUID}/stage/${stageUUID}/allocate` }, workflow, form);
@@ -212,7 +215,10 @@ const actions = {
                             );
                             break;
                         case actionTypes.ADD_CASE_NOTE:
-                            await caseworkService.post(`/case/${caseId}/note`, { type: 'MANUAL', text: form.data['case-note'] }, headers);
+                            await caseworkService.post(`/case/${caseId}/note`, {
+                                type: 'MANUAL',
+                                text: form.data['case-note']
+                            }, headers);
                             break;
                         case actionTypes.APPLY_CASE_DEADLINE_EXTENSION: {
                             const requestBody = {
@@ -228,7 +234,10 @@ const actions = {
 
                             const clientResponse = {
                                 'summary': `Case: ${response.data.reference} extended`,
-                                'link': `${response.data.reference}`
+                                'link': {
+                                    label: `${response.data.reference}`,
+                                    href: `/case/${options.caseId}/stage/${options.stageId}/?tab=FOI_ACTIONS`
+                                }
                             };
 
                             return handleActionSuccess(clientResponse, {}, form);
@@ -245,13 +254,14 @@ const actions = {
                                 outcome: form.data.outcome,
                                 complexCase: form.data.complexCase,
                                 note: form.data.note,
+                                document: form.data.document
                             };
 
-                            if( caseActionData ) {
+                            if (caseActionData) {
                                 const activeAppeal = caseActionData.APPEAL
                                     .filter(appealType => appealType.id === form.data.caseTypeActionUuid);
 
-                                const appealOfficerData  = JSON.parse(activeAppeal[0].typeInfo.props).appealOfficerData;
+                                const appealOfficerData = JSON.parse(activeAppeal[0].typeInfo.props).appealOfficerData;
                                 if (appealOfficerData) {
                                     const extraData = {};
                                     extraData[appealOfficerData.officer.value] = form.data[appealOfficerData.officer.value];
@@ -267,7 +277,10 @@ const actions = {
 
                             const clientResponse = {
                                 'summary': `Appeal for ${response.data.reference} updated`,
-                                'link': `${response.data.reference}`
+                                'link': {
+                                    label: `${response.data.reference}`,
+                                    href: `/case/${options.caseId}/stage/${options.stageId}/?tab=FOI_ACTIONS`
+                                }
                             };
 
                             return handleActionSuccess(clientResponse, {}, form);
@@ -280,11 +293,11 @@ const actions = {
                                 caseTypeActionUuid: form.data.caseTypeActionUuid,
                                 status: form.data.status,
                             };
-                            if( caseActionData ) {
+                            if (caseActionData) {
                                 const activeAppeal = caseActionData.APPEAL
                                     .filter(appealType => appealType.id === form.data.caseTypeActionUuid);
 
-                                const appealOfficerData  = JSON.parse(activeAppeal[0].typeInfo.props).appealOfficerData;
+                                const appealOfficerData = JSON.parse(activeAppeal[0].typeInfo.props).appealOfficerData;
                                 if (appealOfficerData) {
                                     const extraData = {};
                                     extraData[appealOfficerData.officer.value] = form.data.officer;
@@ -298,11 +311,12 @@ const actions = {
                                 await caseworkService.post(`/case/${caseId}/stage/${stageId}/actions/appeal`,
                                     requestBody, headers);
 
-                            await addDocument(`/case/${caseId}/action/${response.data.uuid}/document`, form, headers);
-
                             const clientResponse = {
                                 'summary': `Appeal for ${response.data.reference} registered`,
-                                'link': `${response.data.reference}`
+                                'link': {
+                                    label: `${response.data.reference}`,
+                                    href: `/case/${options.caseId}/stage/${options.stageId}/?tab=FOI_ACTIONS`
+                                }
                             };
 
                             return handleActionSuccess(clientResponse, {}, form);
@@ -329,7 +343,7 @@ const actions = {
                             return handleActionSuccess(clientResponse, {}, form);
                         }
                         case actionTypes.UPDATE_INTEREST: {
-                            const { caseActionId  } = options;
+                            const { caseActionId } = options;
 
                             let requestBody = {
                                 actionType: 'RECORD_INTEREST',
@@ -351,13 +365,13 @@ const actions = {
 
                             return handleActionSuccess(clientResponse, {}, form);
                         }
-                        case actionTypes.MANAGE_APPEAL_DOCUMENTS: {
+                        case actionTypes.ADD_APPEAL_DOCUMENT: {
                             const { caseActionId } = options;
 
-                            await addDocument(`/case/${caseId}/action/${caseActionId}/document`, form, headers);
+                            await addDocument(`/case/${caseId}/document`, form, headers);
                             const clientResponse =
                                 {
-                                    callbackUrl: `/case/${caseId}/stage/${stageId}/caseAction/appeal/manage_documents/${caseActionId}?hideSidebar=false`
+                                    callbackUrl: `/case/${caseId}/stage/${stageId}/caseAction/appeal/update/${caseActionId}?hideSidebar=false`
                                 };
                             return handleActionSuccess(clientResponse, {}, form);
                         }
@@ -371,13 +385,19 @@ const actions = {
                             await caseworkService.post(`/case/${caseId}/item/${somuTypeUuid}`, { data: somuItemData }, headers);
                             break;
                         case actionTypes.EDIT_CONTRIBUTION:
-                            await caseworkService.post(`/case/${caseId}/item/${somuTypeUuid}`, { uuid: somuItemUuid, data: somuItemData }, headers);
+                            await caseworkService.post(`/case/${caseId}/item/${somuTypeUuid}`, {
+                                uuid: somuItemUuid,
+                                data: somuItemData
+                            }, headers);
                             break;
                         case actionTypes.ADD_APPROVAL_REQUEST:
                             await caseworkService.post(`/case/${caseId}/item/${somuTypeUuid}`, { data: somuItemData }, headers);
                             break;
                         case actionTypes.EDIT_APPROVAL_REQUEST:
-                            await caseworkService.post(`/case/${caseId}/item/${somuTypeUuid}`, { uuid: somuItemUuid, data: somuItemData }, headers);
+                            await caseworkService.post(`/case/${caseId}/item/${somuTypeUuid}`, {
+                                uuid: somuItemUuid,
+                                data: somuItemData
+                            }, headers);
                             break;
                     }
                 }

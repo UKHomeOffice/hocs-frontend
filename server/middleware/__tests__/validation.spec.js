@@ -27,6 +27,61 @@ describe('Validators', () => {
         });
     });
 
+    describe('requiredIfValueSet validator', () => {
+        it('should reject an empty field if the conditionPropertyValue is matched ', () => {
+            expect(validators.requiredIfValueSet({
+                value: undefined,
+                props: {
+                    conditionPropertyName: 'testProp',
+                    conditionPropertyValue: 'testVal'
+                },
+                data: {
+                    testProp: 'testVal'
+                }
+            }
+            )
+            ).not.toEqual(null);
+        });
+        it('should accept a filled field if the conditionPropertyValue is matched', () => {
+            expect(validators.requiredIfValueSet({
+                value: 'a value',
+                props: {
+                    conditionPropertyName: 'testProp',
+                    conditionPropertyValue: 'testVal'
+                },
+                data: {
+                    testProp: 'testVal'
+                }
+            })).toEqual(null);
+        });
+        it('should accept an empty field if the conditionPropertyValue is not matched ', () => {
+            expect(validators.requiredIfValueSet({
+                value: undefined,
+                props: {
+                    conditionPropertyName: 'testProp',
+                    conditionPropertyValue: 'testVal'
+                },
+                data: {
+                    testProp: 'non matching value'
+                }
+            }
+            )
+            ).toEqual(null);
+        });
+        it('should accept a filled field if the conditionPropertyValue is not matched', () => {
+            expect(validators.requiredIfValueSet({
+                value: 'a value',
+                props: {
+                    conditionPropertyName: 'testProp',
+                    conditionPropertyValue: 'testVal'
+                },
+                data: {
+                    testProp: 'non matching value'
+                }
+            })).toEqual(null);
+        });
+    });
+
     describe('Required array validator', () => {
         it('should reject an empty field', () => {
             expect(validators.requiredArray({})).not.toEqual(null);
