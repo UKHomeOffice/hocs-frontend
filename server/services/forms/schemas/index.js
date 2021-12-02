@@ -21,7 +21,7 @@ module.exports = {
     addTemplate: require('./add-template'),
     managePeople: require('./manage-people'),
     contributionRequest: require('./contribution-request'),
-    manageAppealDocuments: require('./add-appeal-document'),
+    addAppealDocument: require('./add-appeal-document'),
     contributionRequestFoi: require('./contribution-request-foi'),
     contributionFulfillment: require('./contribution-fulfillment'),
     contributionFulfillmentFoi: require('./contribution-fulfillment-foi'),

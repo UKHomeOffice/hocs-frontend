@@ -259,7 +259,7 @@ const formDefinitions = {
                     }
                 },
                 ADD_DOCUMENT: {
-                    builder: formRepository.manageAppealDocuments,
+                    builder: formRepository.addAppealDocument,
                     action: ADD_APPEAL_DOCUMENT,
                     next: {
                         action: CONFIRMATION_SUMMARY
