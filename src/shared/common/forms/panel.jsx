@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { ApplicationConsumer } from '../../contexts/application.jsx';
+import { Link } from 'react-router-dom';
 
 class Panel extends Component {
     /*
@@ -17,7 +18,7 @@ class Panel extends Component {
                     </div>
                 </div>
                 {/* todo: why is the body not passed to the csrf parsing? */}
-                {children.link &&
+                {children.link && typeof children.link === 'string' &&
                     <form action={`/search/reference?_csrf=${csrf}`} method='POST'
                         encType='multipart/form-data'>
                         <input className="govuk-input" id="case-reference" type="hidden" name="case-reference"
@@ -25,6 +26,11 @@ class Panel extends Component {
                         <input className="govuk-button-panel--link" id="submit" type="submit"
                             value={children.link} />
                     </form>
+                }
+                {children.link && typeof children.link === 'object' &&
+                    <Link to={children.link.href} className="govuk-input govuk-button-panel--link">
+                        {children.link.label}
+                    </Link>
                 }
             </div>
         );

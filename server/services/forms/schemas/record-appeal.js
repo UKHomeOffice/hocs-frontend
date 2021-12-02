@@ -40,7 +40,6 @@ function buildOfficerChoices(appealTypeArray) {
 
 module.exports = async options => {
 
-    const { caseId, stageId } = options;
     const { APPEAL } = options.caseActionData;
 
     const appealTypeChoices = buildAppealTypeChoices(APPEAL);
@@ -104,24 +103,15 @@ module.exports = async options => {
             Component('hidden', 'document_type')
                 .withProp('label', 'doc type')
                 .build()
-        ).withField(
-            Component('add-document', 'add_document')
-                .withValidator('hasWhitelistedExtension')
-                .withValidator('fileLimit')
-                .withValidator('required')
-                .withProp('label', 'Are there any documents to include?')
-                .withProp('allowMultiple', true)
-                .withProp('whitelist', 'DOCUMENT_EXTENSION_WHITELIST')
-                .build()
         )
         .withData({
             status: 'Pending',
-            document_type: 'Appeal Information'
+            document_type: 'Appeal Response'
         })
         .withSecondaryAction(
             Component('backlink')
                 .withProp('label', 'Back')
-                .withProp('action', `/case/${caseId}/stage/${stageId}`)
+                .withProp('action', `/case/${options.caseId}/stage/${options.stageId}/?tab=FOI_ACTIONS`)
                 .build()
         )
         .withPrimaryActionLabel('Add Appeal')

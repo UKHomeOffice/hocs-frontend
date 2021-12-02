@@ -210,6 +210,16 @@ const validators = {
         }
         return null;
     },
+    requiredIfValueSet: ({ label, value, message, props, data }) => {
+        if(data[props.conditionPropertyName] !== props.conditionPropertyValue) {
+            return null;
+        }
+
+        if (!value || value === '') {
+            return (message || validationErrors.required(label));
+        }
+        return null;
+    },
     alphanumeric: ({ label, value, message }) => {
         const format = /^[a-z0-9]+$/i;
         if (value && !format.test(value)) {
@@ -554,7 +564,7 @@ function validationMiddleware(req, res, next) {
                     else {
                         const { type, message, props } = validator;
                         if (Object.prototype.hasOwnProperty.call(validators, type)) {
-                            const validationError = validators[type].call(this, { label, value, message, props });
+                            const validationError = validators[type].call(this, { label, value, message, props, data });
 
                             if (component === 'radio') {
                                 validateConditionalRadioContentIfExists.call(

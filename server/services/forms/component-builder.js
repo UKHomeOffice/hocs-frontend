@@ -6,9 +6,9 @@ module.exports = {
 
         return {
             build: () => ({ component, validation, props }),
-            withValidator: function (type, message, summary) {
+            withValidator: function (type, message, summary, props) {
                 if (type) {
-                    validation.push({ type, message, summary });
+                    validation.push({ type, message, summary, props });
                 }
                 return this;
             },

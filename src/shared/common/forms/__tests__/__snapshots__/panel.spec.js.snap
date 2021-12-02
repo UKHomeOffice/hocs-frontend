@@ -9,23 +9,6 @@ exports[`Panel component should render with content when passed 1`] = `
       class="govuk-panel__body"
     />
   </div>
-  <form
-    action="/search/reference?_csrf=__token__"
-    enctype="multipart/form-data"
-    method="POST"
-  >
-    <input
-      class="govuk-input"
-      id="case-reference"
-      name="case-reference"
-      type="hidden"
-    />
-    <input
-      class="govuk-button-panel--link"
-      id="submit"
-      type="submit"
-    />
-  </form>
 </div>
 `;
 
@@ -56,22 +39,5 @@ exports[`Panel component should render with title when passed 1`] = `
       class="govuk-panel__body"
     />
   </div>
-  <form
-    action="/search/reference?_csrf=__token__"
-    enctype="multipart/form-data"
-    method="POST"
-  >
-    <input
-      class="govuk-input"
-      id="case-reference"
-      name="case-reference"
-      type="hidden"
-    />
-    <input
-      class="govuk-button-panel--link"
-      id="submit"
-      type="submit"
-    />
-  </form>
 </div>
 `;
