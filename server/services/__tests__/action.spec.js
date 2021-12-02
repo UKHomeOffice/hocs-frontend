@@ -1,6 +1,5 @@
 const actionService = require('../action');
 const actionTypes = require('../actions/types');
-const { ActionError } = require('../../models/error');
 
 const mockRequestClient = jest.fn();
 
