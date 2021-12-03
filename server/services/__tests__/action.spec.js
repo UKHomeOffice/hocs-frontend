@@ -600,7 +600,7 @@ describe('Action service', () => {
             user: mockUser
         });
 
-        expect(mockRequestClient).toHaveBeenCalledTimes(2);
+        expect(mockRequestClient).toHaveBeenCalledTimes(1);
         expect(mockRequestClient).toHaveBeenCalledWith(expectedBody);
         expect(response).toBeDefined();
         expect(response).toHaveProperty('confirmation');
@@ -670,7 +670,7 @@ describe('Action service', () => {
             user: mockUser
         });
 
-        expect(mockRequestClient).toHaveBeenCalledTimes(2);
+        expect(mockRequestClient).toHaveBeenCalledTimes(1);
         expect(mockRequestClient).toHaveBeenCalledWith(expectedBody);
         expect(response).toBeDefined();
         expect(response).toHaveProperty('confirmation');

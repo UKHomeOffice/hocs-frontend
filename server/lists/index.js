@@ -499,11 +499,6 @@ module.exports = {
             endpoint: '/case/document/reference/${caseId}',
             adapter: documentsAdapter
         },
-        CASE_ACTION_DOCUMENT_LIST: {
-            client: 'CASEWORK',
-            endpoint: '/case/document/reference/${caseId}/action/${caseActionId}/document_type/${document_type}',
-            adapter: documentsAdapter
-        },
         CASE_DOCUMENT_LIST_FINAL: {
             client: 'CASEWORK',
             endpoint: '/case/document/reference/${caseId}/?type=FINAL',
@@ -522,6 +517,11 @@ module.exports = {
         CASE_DOCUMENT_LIST_FOI_INITIAL_RESPONSE: {
             client: 'CASEWORK',
             endpoint: '/case/document/reference/${caseId}/?type=Initial%20response',
+            adapter: documentListAdapter
+        },
+        CASE_DOCUMENT_LIST_APPEAL_RESPONSE: {
+            client: 'CASEWORK',
+            endpoint: '/case/document/reference/${caseId}/?type=Appeal%20Response',
             adapter: documentListAdapter
         },
         CASE_DOCUMENT_LIST_ALL: {
@@ -659,6 +659,24 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
+        S_BF_BUS_AREA: {
+            client: 'INFO',
+            endpoint: '/entity/list/BF_BUS_AREA',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_BF_REGION: {
+            client: 'INFO',
+            endpoint: '/entity/list/BF_REGION',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_BF_ENQUIRY_REASON: {
+            client: 'INFO',
+            endpoint: '/entity/list/BF_ENQUIRY_REASON',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        }
     },
     clients: {
         CASEWORK: caseworkService,

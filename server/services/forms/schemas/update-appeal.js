@@ -19,6 +19,8 @@ module.exports = async options => {
     const { appealOfficerData: appealOfficerInfo } = JSON.parse(appealType.typeInfo.props);
     const appealTypeChoices = buildAppealTypeChoices(APPEAL);
 
+    const docTag = JSON.parse(appealType.typeInfo.props).docTag;
+
     if (appealOfficerInfo) {
         const appealOfficerData = JSON.parse(appealData.appealOfficerData);
         appealData = { ...appealData, ...appealOfficerData };
@@ -34,6 +36,24 @@ module.exports = async options => {
                     .withValidator('required')
                     .withProp('label', 'Which type of appeal needs to be applied?')
                     .withProp('choices', [ ...appealTypeChoices ])
+                    .build()
+            ).withField(
+                Component('entity-list', 'document')
+                    .withValidator('requiredIfValueSet', 'A document is required', null,
+                        {
+                            'conditionPropertyName': 'status',
+                            'conditionPropertyValue': 'Complete'
+                        })
+                    .withProp('label', 'Documents')
+                    .withProp('hasRemoveLink', false)
+                    .withProp('hasAddLink', false)
+                    .withProp('choices', 'CASE_DOCUMENT_LIST_APPEAL_RESPONSE')
+                    .withProp('entity', 'document')
+                    .build()
+            ).withField(
+                Component('link', 'add_doc_link')
+                    .withProp('label', 'Add a document')
+                    .withProp('target', `/case/${options.caseId}/stage/${options.stageId}/caseAction/appeal/add_document/${appealData.uuid}?hideSidebar=false`)
                     .build()
             )
             .withField(
@@ -114,8 +134,11 @@ module.exports = async options => {
                         }
                     ])
                     .build()
-            )
-            .withSecondaryAction(
+            ).withField(
+                Component('hidden', 'document_type')
+                    .withProp('label', 'doc type')
+                    .build()
+            ).withSecondaryAction(
                 Component('backlink')
                     .withProp('label', 'Back')
                     .withProp('action', `/case/${options.caseId}/stage/${options.stageId}`)
@@ -123,6 +146,9 @@ module.exports = async options => {
             )
             .withPrimaryActionLabel('Update')
             .withData(appealData)
+            .withData({
+                document_type: docTag
+            })
             .build();
     }
 
@@ -140,8 +166,25 @@ module.exports = async options => {
                 .withProp('label', 'Which type of appeal needs to be applied?')
                 .withProp('choices', [ ...appealTypeChoices ])
                 .build()
-        )
-        .withField(
+        ).withField(
+            Component('entity-list', 'document')
+                .withValidator('requiredIfValueSet', 'A document is required', null,
+                    {
+                        'conditionPropertyName': 'status',
+                        'conditionPropertyValue': 'Complete'
+                    })
+                .withProp('label', 'Documents')
+                .withProp('hasRemoveLink', false)
+                .withProp('hasAddLink', false)
+                .withProp('choices', 'CASE_DOCUMENT_LIST_APPEAL_RESPONSE')
+                .withProp('entity', 'document')
+                .build()
+        ).withField(
+            Component('link', 'add_doc_link')
+                .withProp('label', 'Add a document')
+                .withProp('target', `/case/${options.caseId}/stage/${options.stageId}/caseAction/appeal/add_document/${appealData.uuid}?hideSidebar=false`)
+                .build()
+        ).withField(
             Component('radio', 'status')
                 .withProp('label', 'Has this been completed?')
                 .withProp('choices', [
@@ -204,14 +247,20 @@ module.exports = async options => {
                     }
                 ])
                 .build()
-        )
-        .withSecondaryAction(
+        ).withField(
+            Component('hidden', 'document_type')
+                .withProp('label', 'doc type')
+                .build()
+        ).withSecondaryAction(
             Component('backlink')
                 .withProp('label', 'Back')
-                .withProp('action', `/case/${caseId}/stage/${stageId}`)
+                .withProp('action', `/case/${caseId}/stage/${stageId}/?tab=FOI_ACTIONS`)
                 .build()
         )
         .withPrimaryActionLabel('Update')
         .withData(appealData)
+        .withData({
+            document_type: docTag
+        })
         .build();
 };
