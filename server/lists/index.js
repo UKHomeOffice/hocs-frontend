@@ -653,6 +653,12 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
+        S_TO_RECIPIENTS: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_RECIPIENTS',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
         S_BF_BUS_AREA: {
             client: 'INFO',
             endpoint: '/entity/list/BF_BUS_AREA',
