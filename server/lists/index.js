@@ -676,6 +676,78 @@ module.exports = {
             endpoint: '/entity/list/BF_ENQUIRY_REASON',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
+        },
+        TO_BUSINESS_UNITS: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_BUSINESS_UNITS',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        TO_ENQUIRY_SUBJECTS: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_ENQUIRY_SUBJECTS',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        TO_ENQUIRY_REASONS_ALL: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_ENQUIRY_REASONS_ALL',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        TO_ENQUIRY_REASON_COMP_HAND: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_ENQUIRY_REASON_COMP_HAND',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        TO_ENQUIRY_REASON_COMP_REJ: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_ENQUIRY_REASON_COMP_REJ',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        TO_ENQUIRY_REASON_DOC: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_ENQUIRY_REASON_DOC',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        TO_ENQUIRY_REASON_GUID: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_ENQUIRY_REASON_GUID',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        TO_ENQUIRY_REASON_IM_HEALTH_SUR: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_ENQUIRY_REASON_IM_HEALTH_SUR',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        TO_ENQUIRY_REASON_PERS: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_ENQUIRY_REASON_PERS',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        TO_ENQUIRY_REASON_TECH: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_ENQUIRY_REASON_TECH',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        TO_ENQUIRY_REASON_SRU: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_ENQUIRY_REASON_SRU',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        TO_ENQUIRY_REASON_OTHER: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_ENQUIRY_REASON_OTHER',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
         }
     },
     clients: {
