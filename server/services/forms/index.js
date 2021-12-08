@@ -48,6 +48,14 @@ const smcBusinessContributionsRequest = {
     showContributionAmount: false
 };
 
+const bfBusinessContributionsRequest = {
+    showBusinessUnits: false,
+    primaryChoiceLabel: 'Business Area',
+    primaryChoiceList: 'S_BF_CONTRIB_BUS_AREA',
+    showContributionAmount: false
+};
+
+
 
 const formDefinitions = {
     ACTION: {
@@ -508,6 +516,27 @@ const formDefinitions = {
                     builder: formRepository.contributionFulfillment,
                     action: EDIT_CONTRIBUTION,
                     customConfig: compBusinessContributionsRequest
+                }
+            },
+            BF: {
+                ADDREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    action: ADD_CONTRIBUTION,
+                    customConfig: bfBusinessContributionsRequest
+                },
+                EDITREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    action: EDIT_CONTRIBUTION,
+                    customConfig: bfBusinessContributionsRequest
+                },
+                VIEWREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    customConfig: bfBusinessContributionsRequest
+                },
+                EDIT: {
+                    builder: formRepository.contributionFulfillment,
+                    action: EDIT_CONTRIBUTION,
+                    customConfig: bfBusinessContributionsRequest
                 }
             }
         },
