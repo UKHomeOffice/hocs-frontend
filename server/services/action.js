@@ -250,6 +250,8 @@ const actions = {
                                 }
                             };
 
+                            await addDocument(`/case/${caseId}/document`, form, headers);
+
                             return handleActionSuccess(clientResponse, {}, form);
                         }
                         case actionTypes.EDIT_CASE_APPEAL: {

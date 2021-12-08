@@ -475,12 +475,15 @@ describe('Action service', () => {
             new Date(Date.UTC(2021, 0, 10, 12)).valueOf());
 
         const testForm = {
-            schema: {},
+            schema: {
+                fields: []
+            },
             data: {
                 caseTypeActionUuid: '__uuid__',
                 extendBy: 20,
                 extendFrom: 'ANY',
-                note: 'SOME NOTE'
+                note: 'SOME NOTE',
+                document_type: 'PIT Extension'
             },
             action: actionTypes.APPLY_CASE_DEADLINE_EXTENSION,
             next: {
