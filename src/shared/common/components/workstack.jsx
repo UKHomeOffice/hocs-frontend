@@ -35,6 +35,7 @@ const ColumnRenderer = {
     CASE_LINK: 'caseLink',
     CORRESPONDENT_WITH_CASE_LINK: 'correspondentWithCaseLink',
     DATE: 'date',
+    DUE_DATE_WITH_EXTENSION_NOTE: 'dueDateWithExtensionNote',
     DATE_WARNING: 'dateWarning',
     DATE_RAW: 'dateRAW',
     DUE_DATE_WARNING: 'dueDateWarning',
@@ -276,7 +277,7 @@ class WorkstackAllocate extends Component {
         }
     }
 
-    renderRow(item, columns) {
+    renderRow(item, columns, caseActions) {
         const value = `${item.caseUUID}:${item.uuid}`;
         const checkboxKey = item.caseUUID + item.uuid;
         const handleChange = (e) => {
@@ -309,12 +310,12 @@ class WorkstackAllocate extends Component {
                         </div>
                     </div>
                 </td>}
-                {columns && columns.map(column => this.renderDataCell(column, item))}
+                {columns && columns.map(column => this.renderDataCell(column, item, caseActions))}
             </tr>
         );
     }
 
-    renderDataCell(column, row) {
+    renderDataCell(column, row, caseActions) {
         const value = this.getCellValue(row, column);
 
         switch (column.renderer) {
@@ -357,6 +358,9 @@ class WorkstackAllocate extends Component {
                 </td>;
             case ColumnRenderer.DATE:
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>{value}</td>;
+            case ColumnRenderer.DUE_DATE_WITH_EXTENSION_NOTE:
+                return <dueDateWithExtensionNote
+                    key={row.uuid + column.dataValueKey} date={'value'} actions={caseActions}/>;
             case ColumnRenderer.DATE_WARNING:
                 if (row.deadlineWarning) {
                     if (new Date(row.deadlineWarning) < new Date()) {
