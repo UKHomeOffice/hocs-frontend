@@ -677,9 +677,15 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
-        TO_BUSINESS_UNITS: {
+        TO_BUS_UNIT_ALL: {
             client: 'INFO',
-            endpoint: '/entity/list/TO_BUSINESS_UNITS',
+            endpoint: '/entity/list/TO_BUS_UNIT_ALL',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        TO_BUSINESS_UNIT_TYPES: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_BUSINESS_UNIT_TYPES',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
@@ -746,12 +752,6 @@ module.exports = {
         TO_ENQUIRY_REASON_OTHER: {
             client: 'INFO',
             endpoint: '/entity/list/TO_ENQUIRY_REASON_OTHER',
-            type: listService.types.STATIC,
-            adapter: entityListItemsAdapter
-        },
-        TO_BUSINESS_UNIT_TYPES: {
-            client: 'INFO',
-            endpoint: '/entity/list/TO_BUSINESS_UNIT_TYPES',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
