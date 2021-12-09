@@ -22,10 +22,22 @@ const parseDate = (rawDate) => {
 };
 const formatDate = (date) => date ? parseDate(date) : null;
 
+/**
+ * @param caseDeadline A date string in the form yyyy-MM-dd
+ * @returns {boolean} true if the given date is today or later, else false
+ */
+function isDateTodayOrAfter(caseDeadline) {
+    const startOfToday = new Date(Date.now()).setHours(0,0,0,0);
+    const startOfCaseDeadlineDate = new Date(caseDeadline).setHours(0,0,0,0);
+
+    return startOfCaseDeadlineDate.valueOf() >= startOfToday.valueOf();
+}
+
+
 const YEAR_RANGE = 120;
 
 const MIN_ALLOWABLE_YEAR = (new Date().getFullYear() - YEAR_RANGE);
 
 const MAX_ALLOWABLE_YEAR = (new Date().getFullYear() + YEAR_RANGE);
 
-module.exports = { addDays, getUtcDateString, formatDate, MIN_ALLOWABLE_YEAR, MAX_ALLOWABLE_YEAR };
+module.exports = { addDays, getUtcDateString, formatDate, isDateTodayOrAfter, MIN_ALLOWABLE_YEAR, MAX_ALLOWABLE_YEAR };

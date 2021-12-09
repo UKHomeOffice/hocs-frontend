@@ -4,6 +4,7 @@ const { ActionError } = require('../models/error');
 const getLogger = require('../libs/logger');
 const User = require('../models/user');
 const doubleEncodeSlashes = require('../libs/encodingHelpers');
+const { isDateTodayOrAfter } = require('../libs/dateHelpers');
 
 function createDocumentSummaryObjects(form, type) {
     return form.schema.fields.reduce((reducer, field) => {
@@ -228,6 +229,15 @@ const actions = {
                                 extendFrom: form.data.extendFrom,
                                 note: form.data.note
                             };
+
+                            const caseData = await caseworkService.get(`/case/${caseId}`, headers);
+                            const caseDeadline = caseData.data.caseDeadline;
+                            const deadlineIsTodayOrAfter = isDateTodayOrAfter(caseDeadline);
+
+                            if (!deadlineIsTodayOrAfter) {
+                                throw new ActionError('Extension must be applied on or before the case deadline', 500);
+                            }
+
                             const response =
                                 await caseworkService.post(`/case/${caseId}/stage/${stageId}/actions/extension`,
                                     requestBody, headers);
@@ -239,6 +249,8 @@ const actions = {
                                     href: `/case/${options.caseId}/stage/${options.stageId}/?tab=FOI_ACTIONS`
                                 }
                             };
+
+                            await addDocument(`/case/${caseId}/document`, form, headers);
 
                             return handleActionSuccess(clientResponse, {}, form);
                         }
@@ -406,7 +418,8 @@ const actions = {
             }
         } catch (error) {
             logger.error('CASE_ACTION_FAILURE', { action: form.action, case: caseId });
-            throw new ActionError('Failed to perform action', error.response.status);
+            const status = error.response ? error.response.status : 500;
+            throw new ActionError('Failed to perform action', status);
         }
     },
     WORKFLOW: async ({ caseId, stageId, form, user }) => {
