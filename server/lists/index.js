@@ -509,6 +509,11 @@ module.exports = {
             endpoint: '/case/document/reference/${caseId}/?type=DRAFT',
             adapter: documentListAdapter
         },
+        CASE_DOCUMENT_LIST_TO_DRAFT: {
+            client: 'CASEWORK',
+            endpoint: '/case/document/reference/${caseId}/?type=Initial%20Draft',
+            adapter: documentListAdapter
+        },
         CASE_DOCUMENT_LIST_FOI_DRAFT: {
             client: 'CASEWORK',
             endpoint: '/case/document/reference/${caseId}/?type=Draft%20response',
