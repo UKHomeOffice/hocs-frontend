@@ -31,7 +31,7 @@ function buildExtendByFields(rawExtensionArray, remainingDays, finalForm) {
                             'extendFrom',
                             option,
                             Array.from(
-                                { length: extendByMaximumDays - ( option === 'TODAY' ? remainingDays : 0) },
+                                { length: extendByMaximumDays - (option === 'TODAY' ? remainingDays : 0) },
                                 (_, i) =>
                                     Choice(
                                         String(option === 'TODAY' ? remainingDays + i + 1 : i + 1),
@@ -50,7 +50,7 @@ function buildExtendByFields(rawExtensionArray, remainingDays, finalForm) {
     );
 }
 
-function buildExtendFromConditionalChoiceArray(rawExtensionArray){
+function buildExtendFromConditionalChoiceArray(rawExtensionArray) {
     if (rawExtensionArray.length > 0) {
         return rawExtensionArray
             .filter(type => Object.keys(extendFromOptions)
@@ -71,6 +71,7 @@ module.exports = (options) => {
 
     const extensionForm = Form();
     const { caseActionData } = options;
+
     let extensionTypeChoiceArray;
     let extendFromChoicesArray;
 
@@ -81,6 +82,11 @@ module.exports = (options) => {
 
         extensionForm
             .withTitle('Apply an extension to this case')
+            .withField(
+                Component('hidden', 'document_type')
+                    .withProp('label', 'doc type')
+                    .build()
+            )
             .withField(
                 Component('dropdown', 'caseTypeActionUuid')
                     .withValidator('required', 'You must select an extension type.')
@@ -105,8 +111,15 @@ module.exports = (options) => {
                 .withValidator('required', 'You must enter a reason for the extension.')
                 .withProp('label', 'Please enter a reason for the extension.')
                 .build()
-        )
-            .withPrimaryActionLabel('Extend Case')
+        ).withField(
+            Component('add-document', 'add_document')
+                .withValidator('hasWhitelistedExtension')
+                .withValidator('fileLimit')
+                .withProp('label', 'Are there any documents to include?')
+                .withProp('allowMultiple', true)
+                .withProp('whitelist', 'DOCUMENT_EXTENSION_WHITELIST')
+                .build()
+        ).withPrimaryActionLabel('Extend Case')
             .withSecondaryAction(
                 Component('backlink')
                     .withProp('label', 'Back')
@@ -115,5 +128,7 @@ module.exports = (options) => {
             );
 
     }
-    return extensionForm.build();
+    return extensionForm.withData({
+        document_type: 'PIT Extension'
+    }).build();
 };

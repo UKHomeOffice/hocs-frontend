@@ -55,7 +55,11 @@ const bfBusinessContributionsRequest = {
     showContributionAmount: false
 };
 
-
+const toContributionsRequest = {
+    showBusinessUnits: true,
+    primaryChoiceLabel: 'Business Area',
+    primaryChoiceList: 'MPAM_CONTRIBUTION_BUSINESS_AREAS'
+};
 
 const formDefinitions = {
     ACTION: {
@@ -409,6 +413,32 @@ const formDefinitions = {
                 EDIT: {
                     builder: formRepository.contributionFulfillmentFoi,
                     action: EDIT_CONTRIBUTION
+                }
+            },
+            TO: {
+                ADDREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    action: ADD_CONTRIBUTION,
+                    customConfig: toContributionsRequest
+                },
+                ADDADDITIONALREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    action: ADD_ADDITIONAL_CONTRIBUTION,
+                    customConfig: toContributionsRequest
+                },
+                EDITREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    action: EDIT_CONTRIBUTION,
+                    customConfig: toContributionsRequest
+                },
+                VIEWREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    customConfig: toContributionsRequest
+                },
+                EDIT: {
+                    builder: formRepository.contributionFulfillment,
+                    action: EDIT_CONTRIBUTION,
+                    customConfig: toContributionsRequest
                 }
             },
         },
