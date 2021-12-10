@@ -220,6 +220,12 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
+        S_BF_CONTRIB_BUS_AREA: {
+            client: 'INFO',
+            endpoint: '/entity/list/BF_CONTRIB_BUS_AREA',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
         S_FOI_DIRECTORATE_BICSPI_ACCEPTANCE_TEAMS: {
             client: 'INFO',
             endpoint: '/teams?unit=FOI_DIRECTORATE_BICSPI_ACCEPTANCE_TEAMS',
