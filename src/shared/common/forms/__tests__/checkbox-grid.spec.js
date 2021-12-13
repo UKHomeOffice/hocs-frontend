@@ -7,6 +7,36 @@ const choices = [
     { label: 'isC', value: 'C' }
 ];
 
+const conditionChoices = [
+    {
+        'conditionPropertyName': 'conditionValue',
+        'conditionPropertyValue': 'a',
+        'choices': [
+            {
+                'label': 'one-a',
+                'value': 'one-a'
+            },
+            {
+                'label': 'two-a',
+                'value': 'two-a'
+            },
+        ]
+    },{
+        'conditionPropertyName': 'conditionValue',
+        'conditionPropertyValue': 'b',
+        'choices': [
+            {
+                'label': 'one-b',
+                'value': 'one-b'
+            },
+            {
+                'label': 'two-b',
+                'value': 'two-b'
+            },
+        ]
+    },
+];
+
 describe('Form checkbox group component', () => {
     it('should render with default props', () => {
         expect(
@@ -71,6 +101,13 @@ describe('Form checkbox group component', () => {
         wrapper.find(`#checkbox-group_${firstValue}`).simulate('change', { target: { value: firstValue } });
         expect(mockCallback).toHaveBeenCalledTimes(3);
         expect(mockCallback).toHaveBeenCalledWith({ 'checkbox-group': 'B' });
+    });
+    it('should render the correct condition choices pair ', () => {
+        expect(
+            render(<CheckboxGrid name="checkbox-group" conditionChoices={conditionChoices}
+                data={{ 'conditionValue': 'b' }} updateState={() => null}
+            />)
+        ).toMatchSnapshot();
     });
 });
 

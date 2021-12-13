@@ -1,5 +1,5 @@
 const convertNote = fromStaticList => async ({ editorName, editedTime, eventTime, type, userName: authorId, body = {}, noteCount, timelineItemUUID }) => {
-    const { caseNote, allocatedToUUID: allocationId, stage: stageId, documentTitle: document, topicName: topic, fullname: correspondent } = body;
+    const { caseNote, note, allocatedToUUID: allocationId, stage: stageId, documentTitle: document, topicName: topic, fullname: correspondent } = body;
 
     const date = formatDate(eventTime);
     const modifiedDate = formatDate(editedTime);
@@ -7,7 +7,7 @@ const convertNote = fromStaticList => async ({ editorName, editedTime, eventTime
     const modifiedBy = await fromStaticList('S_USERS', editorName);
     const auditData = {
         allocationId,
-        note: caseNote,
+        note: caseNote || note,
         stage: await fromStaticList('S_STAGETYPES', stageId),
         document,
         topic,
@@ -144,7 +144,7 @@ const typeAdaptors = {
         note,
         title: 'Case transfer reason'
     }),
-    EXTENSION: ({ note }) => ({
+    EXTENSION_APPLIED: ({ note }) => ({
         note,
         title: 'Case Extension',
     }),
