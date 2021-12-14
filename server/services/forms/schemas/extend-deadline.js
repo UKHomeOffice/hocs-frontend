@@ -1,7 +1,7 @@
 const Form = require('../form-builder');
 const { Choice, Component, ConditionChoice } = require('../component-builder');
-const listService = require("../../list/service");
-const uuid = require("uuid/v4");
+const listService = require('../../list/service');
+const uuid = require('uuid/v4');
 
 const extendFromOptions = {
     TODAY: 'Today',
@@ -128,12 +128,6 @@ module.exports = async (options) => {
                         ...extendFromChoicesArray
                     ])
                     .build()
-            ).withField(
-                Component('checkbox-grid', 'reasons')
-                    .withValidator('required', 'You must select the reasons for the extension.')
-                    .withProp('label', 'Please select the reasons for the extension.')
-                    .withProp('conditionChoices', [...reasonChoicesArray])
-                    .build()
             );
 
         buildExtendByFields(caseActionData.EXTENSION, caseActionData.remainingDays, extensionForm);
@@ -141,6 +135,12 @@ module.exports = async (options) => {
 
 
         extensionForm.withField(
+            Component('checkbox-grid', 'reasons')
+                .withValidator('required', 'You must select the reasons for the extension.')
+                .withProp('label', 'Please select the reasons for the extension.')
+                .withProp('conditionChoices', [...reasonChoicesArray])
+                .build()
+        ).withField(
             Component('text-area', 'note')
                 .withValidator('required', 'You must enter a note for the extension.')
                 .withProp('label', 'Please enter a note for the extension.')

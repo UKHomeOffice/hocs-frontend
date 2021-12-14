@@ -21,7 +21,8 @@ const AuditEvent = ({ date, author, user, team, stage, document, topic, correspo
         {document && <p>Document: {document}</p>}
         {correspondent && <p>Name: {correspondent}</p>}
         {topic && <p>Name: {topic}</p>}
-        {note && <p>Note: {note.split('\n').map((line => <>{line}<br/></>))}</p>}
+        {note && <p>{note.split('\n')
+            .map(((line, idx) => <p key={idx}>{ idx===0 ? 'Note: ' : ''}{line}</p>))}</p>}
         <p>
             {date && <span>{date}</span>}
             {author && <span>{author}</span>}
