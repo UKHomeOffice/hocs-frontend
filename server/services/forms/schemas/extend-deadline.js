@@ -1,5 +1,7 @@
 const Form = require('../form-builder');
 const { Choice, Component, ConditionChoice } = require('../component-builder');
+const listService = require('../../list/service');
+const uuid = require('uuid/v4');
 
 const extendFromOptions = {
     TODAY: 'Today',
@@ -67,18 +69,42 @@ function buildExtendFromConditionalChoiceArray(rawExtensionArray) {
     return [];
 }
 
-module.exports = (options) => {
+async function buildReasonChoicesConditionalChoiceArray(rawExtensionArray, options) {
+    if (rawExtensionArray.length > 0) {
+        const listServiceInstance = listService.getInstance(uuid(), options.user);
+
+        const results = await Promise.all(rawExtensionArray
+            .map(async el => {
+                const reasonChoices = JSON.parse(el.typeInfo.props).reasonChoices;
+                const hydratedChoices = await listServiceInstance.fetch(reasonChoices, options);
+
+                return ConditionChoice(
+                    'caseTypeActionUuid',
+                    el.typeInfo.uuid,
+                    hydratedChoices.map(option =>
+                        Choice(option.label, option.value)
+                    )
+                );
+            }));
+
+        return results;
+    }
+    return [];
+}
+
+module.exports = async (options) => {
 
     const extensionForm = Form();
     const { caseActionData } = options;
 
     let extensionTypeChoiceArray;
     let extendFromChoicesArray;
+    let reasonChoicesArray;
 
     if (caseActionData.EXTENSION) {
         extensionTypeChoiceArray = buildActionTypeChoiceArray(caseActionData.EXTENSION);
         extendFromChoicesArray = buildExtendFromConditionalChoiceArray(caseActionData.EXTENSION);
-
+        reasonChoicesArray = await buildReasonChoicesConditionalChoiceArray(caseActionData.EXTENSION, options);
 
         extensionForm
             .withTitle('Apply an extension to this case')
@@ -106,10 +132,18 @@ module.exports = (options) => {
 
         buildExtendByFields(caseActionData.EXTENSION, caseActionData.remainingDays, extensionForm);
 
+
+
         extensionForm.withField(
+            Component('checkbox-grid', 'reasons')
+                .withValidator('required', 'You must select the reasons for the extension.')
+                .withProp('label', 'Please select the reasons for the extension.')
+                .withProp('conditionChoices', [...reasonChoicesArray])
+                .build()
+        ).withField(
             Component('text-area', 'note')
-                .withValidator('required', 'You must enter a reason for the extension.')
-                .withProp('label', 'Please enter a reason for the extension.')
+                .withValidator('required', 'You must enter a note for the extension.')
+                .withProp('label', 'Please enter a note for the extension.')
                 .build()
         ).withField(
             Component('add-document', 'add_document')

@@ -227,7 +227,8 @@ const actions = {
                                 caseTypeActionUuid: form.data.caseTypeActionUuid,
                                 extendBy: form.data.extendBy,
                                 extendFrom: form.data.extendFrom,
-                                note: form.data.note
+                                note: form.data.note,
+                                reasons: form.data.reasons
                             };
 
                             const caseData = await caseworkService.get(`/case/${caseId}`, headers);

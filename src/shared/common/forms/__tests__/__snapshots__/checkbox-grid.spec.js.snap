@@ -165,6 +165,70 @@ exports[`Form checkbox group component should render disabled when passed 1`] = 
 </div>
 `;
 
+exports[`Form checkbox group component should render the correct condition choices pair  1`] = `
+<div
+  class="govuk-form-group"
+>
+  <h2
+    class="govuk-heading-m"
+  />
+  <fieldset
+    class="govuk-fieldset "
+    id="checkbox-group"
+  >
+    <legend
+      class="govuk-fieldset__legend"
+      id="checkbox-group-legend"
+    >
+      <span
+        class="govuk-fieldset__heading govuk-label--s"
+      />
+    </legend>
+    <div
+      class="govuk-checkboxes"
+      style="display:flex;flex-direction:row;flex-wrap:wrap;justify-content:flex-start"
+    >
+      <div
+        class="govuk-checkboxes__item"
+        style="width:26.666666666666668%"
+      >
+        <input
+          class="govuk-checkboxes__input"
+          id="checkbox-group_one-b"
+          name="checkbox-group"
+          type="checkbox"
+          value="one-b"
+        />
+        <label
+          class="govuk-label govuk-checkboxes__label"
+          for="checkbox-group_one-b"
+        >
+          one-b
+        </label>
+      </div>
+      <div
+        class="govuk-checkboxes__item"
+        style="width:26.666666666666668%"
+      >
+        <input
+          class="govuk-checkboxes__input"
+          id="checkbox-group_two-b"
+          name="checkbox-group"
+          type="checkbox"
+          value="two-b"
+        />
+        <label
+          class="govuk-label govuk-checkboxes__label"
+          for="checkbox-group_two-b"
+        >
+          two-b
+        </label>
+      </div>
+    </div>
+  </fieldset>
+</div>
+`;
+
 exports[`Form checkbox group component should render with default props 1`] = `
 <div
   class="govuk-form-group"

@@ -12,7 +12,7 @@ import status from '../../helpers/api-status.js';
 import Submit from '../forms/submit.jsx';
 import CaseNote from './case-note.jsx';
 
-const AuditEvent = ({ date, author, user, team, stage, document, topic, correspondent, title }) => (
+const AuditEvent = ({ date, author, user, team, stage, document, topic, correspondent, title, note }) => (
     <Fragment>
         {<p><strong>{title}</strong></p>}
         {stage && <p>Stage: {stage}</p>}
@@ -21,6 +21,8 @@ const AuditEvent = ({ date, author, user, team, stage, document, topic, correspo
         {document && <p>Document: {document}</p>}
         {correspondent && <p>Name: {correspondent}</p>}
         {topic && <p>Name: {topic}</p>}
+        {note && <p>{note.split('\n')
+            .map(((line, idx) => <p key={idx}>{ idx===0 ? 'Note: ' : ''}{line}</p>))}</p>}
         <p>
             {date && <span>{date}</span>}
             {author && <span>{author}</span>}
@@ -38,13 +40,14 @@ AuditEvent.propTypes = {
     topic: PropTypes.string,
     correspondent: PropTypes.string,
     title: PropTypes.string,
+    note: PropTypes.string,
 };
 
 const TimelineItem = (refreshNotes) => ({ type, body, title, timelineItemUUID }) => {
     const isCaseNote = [
         'MANUAL', 'CLOSE_CASE_TELEPHONE', 'CONVERTED_CASE_TO_MINISTERIAL', 'CONVERTED_CASE_TO_OFFICIAL', 'ALLOCATE',
         'CHANGE', 'CLOSE', 'REJECT', 'PHONECALL', 'REQUEST_CONTRIBUTION', 'SEND_TO_WORKFLOW_MANAGER', 'FOLLOW_UP',
-        'FOLLOW_UP_NOT_COMPLETED', 'WITHDRAW', 'CASE_TRANSFER_REASON', 'EXTENSION',
+        'FOLLOW_UP_NOT_COMPLETED', 'WITHDRAW', 'CASE_TRANSFER_REASON',
         'ENQUIRY_REASON_EUNATIONAL_OTHERDETAILS', 'APPEAL_CREATED', 'APPEAL_UPDATED','RECORD_INTEREST', 'UPDATE_INTEREST',
         'REFER'
     ].includes(type);
