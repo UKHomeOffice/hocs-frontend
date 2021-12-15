@@ -1,4 +1,4 @@
-const convertNote = fromStaticList => async ({ editorName, editedTime, eventTime, type, userName: authorId, body = {}, noteCount, timelineItemUUID }) => {
+const convertNote = (fromStaticList, fetchList) => async ({ editorName, editedTime, eventTime, type, userName: authorId, body = {}, noteCount, timelineItemUUID }) => {
     const { caseNote, note, allocatedToUUID: allocationId, stage: stageId, documentTitle: document, topicName: topic, fullname: correspondent } = body;
 
     const date = formatDate(eventTime);
@@ -11,11 +11,14 @@ const convertNote = fromStaticList => async ({ editorName, editedTime, eventTime
         stage: await fromStaticList('S_STAGETYPES', stageId),
         document,
         topic,
+        body,
         correspondent,
-        noteCount
+        noteCount,
+        actionLabel: body.caseTypeActionUuid ? await fetchList('CASE_ACTION_LABEL',
+            { actionId: body.caseTypeActionUuid }) : ''
     };
     if (typeAdaptors[type]) {
-        const { title, ...content } = await typeAdaptors[type](auditData, fromStaticList);
+        const { title, ...content } = await typeAdaptors[type](auditData, fromStaticList, fetchList);
         // todo: take correct modified fields once available
         return { title, body: { author, ...content, date, modifiedBy, modifiedDate }, timelineItemUUID, type };
     }
@@ -152,14 +155,30 @@ const typeAdaptors = {
         note,
         title: 'Compliance measures - Other'
     }),
-    APPEAL_CREATED: ({ note }) => ({
-        note,
-        title: 'Appeal Created'
+    APPEAL_CREATED: ({ actionLabel }) => ({
+        title: `Appeal Created: ${actionLabel}`
     }),
-    APPEAL_UPDATED: ({ note }) => ({
-        note,
-        title: 'Appeal Updated'
+    APPEAL_UPDATED: ({ actionLabel }) => ({
+        title: `Appeal Updated: ${actionLabel}`
     }),
+    EXTERNAL_INTEREST_CREATED: async ({ body: { partyType, interestDetails } }, _, fetchList) => {
+        const parties = await fetchList('FOI_INTERESTED_PARTIES');
+        const partyLabel = parties.find(party => party.value === partyType).label;
+
+        return {
+            title: `External Interest Created: ${partyLabel}`,
+            note: interestDetails
+        };
+    },
+    EXTERNAL_INTEREST_UPDATED: async ({ body: { partyType, interestDetails } }, _, fetchList) => {
+        const parties = await fetchList('FOI_INTERESTED_PARTIES');
+        const partyLabel = parties.find(party => party.value === partyType).label;
+
+        return {
+            title: `External Interest Created: ${partyLabel}`,
+            note: interestDetails
+        };
+    },
     RECORD_INTEREST: ({ note }) => ({
         note,
         title: 'Interest Recorded'
@@ -192,7 +211,7 @@ const formatDate = (rawDate) => {
     return `${day} ${month} ${year} at ${hour}:${minute}`;
 };
 
-module.exports = async (data, { fromStaticList, logger }) => {
+module.exports = async (data, { fromStaticList, fetchList, logger }) => {
     logger.debug('REQUEST_CASE_NOTES', { notes: data.length });
     let noteCount = 0;
     return await Promise.all(data
@@ -205,6 +224,6 @@ module.exports = async (data, { fromStaticList, logger }) => {
             return { ...rest, type };
         })
         .reverse()
-        .map(convertNote(fromStaticList))
+        .map(convertNote(fromStaticList, fetchList))
     );
 };
