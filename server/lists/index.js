@@ -18,6 +18,7 @@ const countrySortAdapter = require('./adapters/countrySort');
 const caseNoteAdapter = require('./adapters/case-notes');
 const caseSummaryAdapter = require('./adapters/case-summary');
 const caseActionDataAdapter = require('./adapters/case-action-data');
+const caseActionLabelAdapter = require('./adapters/case-action-label');
 const caseViewAllStagesAdapter = require('./adapters/case-view-all-stages');
 const caseViewReadOnlyAdapter = require('./adapters/case-view-read-only');
 const {
@@ -564,6 +565,11 @@ module.exports = {
             client: 'CASEWORK',
             endpoint: '/case/${caseId}/actions',
             adapter: caseActionDataAdapter
+        },
+        CASE_ACTION_LABEL: {
+            client: 'INFO',
+            endpoint: '/actions/${actionId}/label',
+            adapter: caseActionLabelAdapter
         },
         CASE_VIEW_ALL_STAGES: {
             client: 'WORKFLOW',
