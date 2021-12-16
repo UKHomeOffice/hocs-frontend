@@ -175,7 +175,7 @@ const typeAdaptors = {
         const partyLabel = parties.find(party => party.value === partyType).label;
 
         return {
-            title: `External Interest Created: ${partyLabel}`,
+            title: `External Interest Updated: ${partyLabel}`,
             note: interestDetails
         };
     },
