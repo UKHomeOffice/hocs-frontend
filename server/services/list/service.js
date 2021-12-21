@@ -133,6 +133,8 @@ const getInstance = (requestId, user) => {
                             return defaultValue;
                         } else if (error.response.status === 401) {
                             throw new AuthenticationError('You do not have permission to view this page.');
+                        } else if (error.response.status === 403) {
+                            throw new ForbiddenError('You are not authorised to view this page.');
                         }
                     }
                     throw new Error('Failed to request list');
@@ -154,7 +156,7 @@ const getInstance = (requestId, user) => {
                 throw new Error('List not implemented');
             }
         } catch (error) {
-            if (error instanceof AuthenticationError) {
+            if (error instanceof AuthenticationError || error instanceof ForbiddenError) {
                 throw error;
             }
             logger.error('FETCH_LIST_FAILURE', { list: listId, message: error.message, stack: error.stack });
