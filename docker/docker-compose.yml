@@ -3,7 +3,7 @@ version: '2.4' # v3 doesn't support depends_on condition
 services:
 
   postgres:
-    image: postgres:9.6
+    image: postgres:12-alpine
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U root"]
     restart: always
