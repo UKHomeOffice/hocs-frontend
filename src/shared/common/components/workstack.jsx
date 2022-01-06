@@ -386,7 +386,8 @@ class WorkstackAllocate extends Component {
             }
             case ColumnRenderer.DUE_DATE_WARNING:
                 if ((row.contributions && row.contributions === 'Overdue') ||
-                    (row.data && row.data.DueDate))
+                    (row.data && row.data.DueDate) ||
+                    (row.data && row.data['ClearanceDueDate']))
                 {
                     return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell date-warning'>
                         <span>{value}</span>

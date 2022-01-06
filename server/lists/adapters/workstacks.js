@@ -181,6 +181,8 @@ const bindDisplayElements = fromStaticList => async (stage) => {
     if (stage.stageTypeWithDueDateDisplay === undefined) {
         if (stage.data && stage.data.DueDate) {
             stage.stageTypeWithDueDateDisplay = `${stage.stageTypeDisplay} due ${formatDate(stage.data.DueDate)}`;
+        } else if (stage.data && stage.data['ClearanceDueDate']) {
+            stage.stageTypeWithDueDateDisplay = `${stage.stageTypeDisplay} due ${formatDate(stage.data['ClearanceDueDate'])}`;
         } else {
             stage.stageTypeWithDueDateDisplay = stage.stageTypeDisplay;
         }
