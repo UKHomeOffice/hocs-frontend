@@ -430,7 +430,7 @@ class WorkstackAllocate extends Component {
             case ColumnRenderer.COMP_TYPE:
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell indicator'>{this.prettyCompTypeValue(value)}</td>;
             case ColumnRenderer.EXTENSION_INDICATOR:
-                if (row.data.isCaseExtended && row.data.isCaseExtended === 'True') {
+                if (row.data && row.data.isCaseExtended && row.data.isCaseExtended === 'True') {
                     return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>Yes</td>;
                 } else {
                     return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>No</td>;

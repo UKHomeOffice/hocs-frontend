@@ -126,6 +126,13 @@ exports[`Workstack component should not add link to headers with sortStrategy no
               "isFilterable": false,
               "renderer": "hidden",
             },
+            Object {
+              "dataAdapter": null,
+              "dataValueKey": "isCaseExtended",
+              "displayName": "Extended",
+              "isFilterable": false,
+              "renderer": "extensionIndicator",
+            },
           ]
         }
         items={
@@ -275,6 +282,7 @@ exports[`Workstack component should not add link to headers with sortStrategy no
               "created": null,
               "data": Object {
                 "DueDate": "2021-01-01",
+                "isCaseExtended": "True",
               },
               "fullName": "Correspondent 8",
               "isActive": "YES",
@@ -450,6 +458,13 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                             >
                               Escalate Case
                             </th>
+                            <th
+                              className="govuk-link"
+                              key="Extended"
+                              onClick={[Function]}
+                            >
+                              Extended
+                            </th>
                           </tr>
                         </thead>
                         <tbody
@@ -575,6 +590,12 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                               className="govuk-table__cell"
                               key="stage_uuid-456nextCaseType"
                             />
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-456isCaseExtended"
+                            >
+                              No
+                            </td>
                           </tr>
                           <tr
                             className="govuk-radios govuk-table__row"
@@ -692,6 +713,12 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                               className="govuk-table__cell"
                               key="stage_uuid-432nextCaseType"
                             />
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-432isCaseExtended"
+                            >
+                              No
+                            </td>
                           </tr>
                           <tr
                             className="govuk-radios govuk-table__row"
@@ -809,6 +836,12 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                               className="govuk-table__cell"
                               key="stage_uuid-444nextCaseType"
                             />
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-444isCaseExtended"
+                            >
+                              No
+                            </td>
                           </tr>
                           <tr
                             className="govuk-radios govuk-table__row"
@@ -931,6 +964,12 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                               className="govuk-table__cell"
                               key="stage_uuid-445nextCaseType"
                             />
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-445isCaseExtended"
+                            >
+                              No
+                            </td>
                           </tr>
                           <tr
                             className="govuk-radios govuk-table__row"
@@ -1045,6 +1084,12 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                               className="govuk-table__cell"
                               key="stage_uuid-446nextCaseType"
                             />
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-446isCaseExtended"
+                            >
+                              No
+                            </td>
                           </tr>
                           <tr
                             className="govuk-radios govuk-table__row"
@@ -1187,6 +1232,12 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                                 </LinkAnchor>
                               </Link>
                             </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-447isCaseExtended"
+                            >
+                              No
+                            </td>
                           </tr>
                           <tr
                             className="govuk-radios govuk-table__row"
@@ -1301,6 +1352,12 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                               className="govuk-table__cell"
                               key="stage_uuid-448nextCaseType"
                             />
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-448isCaseExtended"
+                            >
+                              No
+                            </td>
                           </tr>
                           <tr
                             className="govuk-radios govuk-table__row"
@@ -1435,6 +1492,12 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                                   </a>
                                 </LinkAnchor>
                               </Link>
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-449isCaseExtended"
+                            >
+                              Yes
                             </td>
                           </tr>
                         </tbody>
@@ -1602,6 +1665,11 @@ Array [
                       >
                         Escalate Case
                       </th>
+                      <th
+                        class="govuk-link"
+                      >
+                        Extended
+                      </th>
                     </tr>
                   </thead>
                   <tbody
@@ -1699,6 +1767,11 @@ Array [
                       <td
                         class="govuk-table__cell"
                       />
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        No
+                      </td>
                     </tr>
                     <tr
                       class="govuk-radios govuk-table__row"
@@ -1788,6 +1861,11 @@ Array [
                       <td
                         class="govuk-table__cell"
                       />
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        No
+                      </td>
                     </tr>
                     <tr
                       class="govuk-radios govuk-table__row"
@@ -1877,6 +1955,11 @@ Array [
                       <td
                         class="govuk-table__cell"
                       />
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        No
+                      </td>
                     </tr>
                     <tr
                       class="govuk-radios govuk-table__row"
@@ -1971,6 +2054,11 @@ Array [
                       <td
                         class="govuk-table__cell"
                       />
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        No
+                      </td>
                     </tr>
                     <tr
                       class="govuk-radios govuk-table__row"
@@ -2057,6 +2145,11 @@ Array [
                       <td
                         class="govuk-table__cell"
                       />
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        No
+                      </td>
                     </tr>
                     <tr
                       class="govuk-radios govuk-table__row"
@@ -2152,6 +2245,11 @@ Array [
                           Escalate case..
                         </a>
                       </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        No
+                      </td>
                     </tr>
                     <tr
                       class="govuk-radios govuk-table__row"
@@ -2238,6 +2336,11 @@ Array [
                       <td
                         class="govuk-table__cell"
                       />
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        No
+                      </td>
                     </tr>
                     <tr
                       class="govuk-radios govuk-table__row"
@@ -2332,6 +2435,11 @@ Array [
                         >
                           nextCaseReference
                         </a>
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        Yes
                       </td>
                     </tr>
                   </tbody>
@@ -2539,6 +2647,11 @@ Array [
                       >
                         Escalate Case
                       </th>
+                      <th
+                        class="govuk-link"
+                      >
+                        Extended
+                      </th>
                     </tr>
                   </thead>
                   <tbody
@@ -2636,6 +2749,11 @@ Array [
                       <td
                         class="govuk-table__cell"
                       />
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        No
+                      </td>
                     </tr>
                     <tr
                       class="govuk-radios govuk-table__row"
@@ -2725,6 +2843,11 @@ Array [
                       <td
                         class="govuk-table__cell"
                       />
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        No
+                      </td>
                     </tr>
                     <tr
                       class="govuk-radios govuk-table__row"
@@ -2814,6 +2937,11 @@ Array [
                       <td
                         class="govuk-table__cell"
                       />
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        No
+                      </td>
                     </tr>
                     <tr
                       class="govuk-radios govuk-table__row"
@@ -2908,6 +3036,11 @@ Array [
                       <td
                         class="govuk-table__cell"
                       />
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        No
+                      </td>
                     </tr>
                     <tr
                       class="govuk-radios govuk-table__row"
@@ -2994,6 +3127,11 @@ Array [
                       <td
                         class="govuk-table__cell"
                       />
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        No
+                      </td>
                     </tr>
                     <tr
                       class="govuk-radios govuk-table__row"
@@ -3089,6 +3227,11 @@ Array [
                           Escalate case..
                         </a>
                       </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        No
+                      </td>
                     </tr>
                     <tr
                       class="govuk-radios govuk-table__row"
@@ -3175,6 +3318,11 @@ Array [
                       <td
                         class="govuk-table__cell"
                       />
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        No
+                      </td>
                     </tr>
                     <tr
                       class="govuk-radios govuk-table__row"
@@ -3269,6 +3417,11 @@ Array [
                         >
                           nextCaseReference
                         </a>
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                      >
+                        Yes
                       </td>
                     </tr>
                   </tbody>
@@ -3449,6 +3602,13 @@ exports[`Workstack component should render with filtering 1`] = `
               "isFilterable": false,
               "renderer": "hidden",
             },
+            Object {
+              "dataAdapter": null,
+              "dataValueKey": "isCaseExtended",
+              "displayName": "Extended",
+              "isFilterable": false,
+              "renderer": "extensionIndicator",
+            },
           ]
         }
         items={
@@ -3598,6 +3758,7 @@ exports[`Workstack component should render with filtering 1`] = `
               "created": null,
               "data": Object {
                 "DueDate": "2021-01-01",
+                "isCaseExtended": "True",
               },
               "fullName": "Correspondent 8",
               "isActive": "YES",
@@ -3790,6 +3951,13 @@ exports[`Workstack component should render with filtering 1`] = `
                             >
                               Escalate Case
                             </th>
+                            <th
+                              className="govuk-link"
+                              key="Extended"
+                              onClick={[Function]}
+                            >
+                              Extended
+                            </th>
                           </tr>
                         </thead>
                         <tbody
@@ -3915,6 +4083,12 @@ exports[`Workstack component should render with filtering 1`] = `
                               className="govuk-table__cell"
                               key="stage_uuid-456nextCaseType"
                             />
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-456isCaseExtended"
+                            >
+                              No
+                            </td>
                           </tr>
                         </tbody>
                       </table>
@@ -4100,6 +4274,13 @@ exports[`Workstack component should sort descending when the column heading is c
               "isFilterable": false,
               "renderer": "hidden",
             },
+            Object {
+              "dataAdapter": null,
+              "dataValueKey": "isCaseExtended",
+              "displayName": "Extended",
+              "isFilterable": false,
+              "renderer": "extensionIndicator",
+            },
           ]
         }
         items={
@@ -4249,6 +4430,7 @@ exports[`Workstack component should sort descending when the column heading is c
               "created": null,
               "data": Object {
                 "DueDate": "2021-01-01",
+                "isCaseExtended": "True",
               },
               "fullName": "Correspondent 8",
               "isActive": "YES",
@@ -4425,6 +4607,13 @@ exports[`Workstack component should sort descending when the column heading is c
                             >
                               Escalate Case
                             </th>
+                            <th
+                              className="govuk-link"
+                              key="Extended"
+                              onClick={[Function]}
+                            >
+                              Extended
+                            </th>
                           </tr>
                         </thead>
                         <tbody
@@ -4564,6 +4753,12 @@ exports[`Workstack component should sort descending when the column heading is c
                                 </LinkAnchor>
                               </Link>
                             </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-449isCaseExtended"
+                            >
+                              Yes
+                            </td>
                           </tr>
                           <tr
                             className="govuk-radios govuk-table__row"
@@ -4678,6 +4873,12 @@ exports[`Workstack component should sort descending when the column heading is c
                               className="govuk-table__cell"
                               key="stage_uuid-448nextCaseType"
                             />
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-448isCaseExtended"
+                            >
+                              No
+                            </td>
                           </tr>
                           <tr
                             className="govuk-radios govuk-table__row"
@@ -4820,6 +5021,12 @@ exports[`Workstack component should sort descending when the column heading is c
                                 </LinkAnchor>
                               </Link>
                             </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-447isCaseExtended"
+                            >
+                              No
+                            </td>
                           </tr>
                           <tr
                             className="govuk-radios govuk-table__row"
@@ -4934,6 +5141,12 @@ exports[`Workstack component should sort descending when the column heading is c
                               className="govuk-table__cell"
                               key="stage_uuid-446nextCaseType"
                             />
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-446isCaseExtended"
+                            >
+                              No
+                            </td>
                           </tr>
                           <tr
                             className="govuk-radios govuk-table__row"
@@ -5056,6 +5269,12 @@ exports[`Workstack component should sort descending when the column heading is c
                               className="govuk-table__cell"
                               key="stage_uuid-445nextCaseType"
                             />
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-445isCaseExtended"
+                            >
+                              No
+                            </td>
                           </tr>
                           <tr
                             className="govuk-radios govuk-table__row"
@@ -5173,6 +5392,12 @@ exports[`Workstack component should sort descending when the column heading is c
                               className="govuk-table__cell"
                               key="stage_uuid-444nextCaseType"
                             />
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-444isCaseExtended"
+                            >
+                              No
+                            </td>
                           </tr>
                           <tr
                             className="govuk-radios govuk-table__row"
@@ -5290,6 +5515,12 @@ exports[`Workstack component should sort descending when the column heading is c
                               className="govuk-table__cell"
                               key="stage_uuid-432nextCaseType"
                             />
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-432isCaseExtended"
+                            >
+                              No
+                            </td>
                           </tr>
                           <tr
                             className="govuk-radios govuk-table__row"
@@ -5411,6 +5642,12 @@ exports[`Workstack component should sort descending when the column heading is c
                               className="govuk-table__cell"
                               key="stage_uuid-456nextCaseType"
                             />
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-456isCaseExtended"
+                            >
+                              No
+                            </td>
                           </tr>
                         </tbody>
                       </table>
@@ -5596,6 +5833,13 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
               "isFilterable": false,
               "renderer": "hidden",
             },
+            Object {
+              "dataAdapter": null,
+              "dataValueKey": "isCaseExtended",
+              "displayName": "Extended",
+              "isFilterable": false,
+              "renderer": "extensionIndicator",
+            },
           ]
         }
         items={
@@ -5745,6 +5989,7 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
               "created": null,
               "data": Object {
                 "DueDate": "2021-01-01",
+                "isCaseExtended": "True",
               },
               "fullName": "Correspondent 8",
               "isActive": "YES",
@@ -5921,6 +6166,13 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                             >
                               Escalate Case
                             </th>
+                            <th
+                              className="govuk-link"
+                              key="Extended"
+                              onClick={[Function]}
+                            >
+                              Extended
+                            </th>
                           </tr>
                         </thead>
                         <tbody
@@ -6046,6 +6298,12 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                               className="govuk-table__cell"
                               key="stage_uuid-456nextCaseType"
                             />
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-456isCaseExtended"
+                            >
+                              No
+                            </td>
                           </tr>
                           <tr
                             className="govuk-radios govuk-table__row"
@@ -6163,6 +6421,12 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                               className="govuk-table__cell"
                               key="stage_uuid-432nextCaseType"
                             />
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-432isCaseExtended"
+                            >
+                              No
+                            </td>
                           </tr>
                           <tr
                             className="govuk-radios govuk-table__row"
@@ -6280,6 +6544,12 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                               className="govuk-table__cell"
                               key="stage_uuid-444nextCaseType"
                             />
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-444isCaseExtended"
+                            >
+                              No
+                            </td>
                           </tr>
                           <tr
                             className="govuk-radios govuk-table__row"
@@ -6402,6 +6672,12 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                               className="govuk-table__cell"
                               key="stage_uuid-445nextCaseType"
                             />
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-445isCaseExtended"
+                            >
+                              No
+                            </td>
                           </tr>
                           <tr
                             className="govuk-radios govuk-table__row"
@@ -6516,6 +6792,12 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                               className="govuk-table__cell"
                               key="stage_uuid-446nextCaseType"
                             />
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-446isCaseExtended"
+                            >
+                              No
+                            </td>
                           </tr>
                           <tr
                             className="govuk-radios govuk-table__row"
@@ -6658,6 +6940,12 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                                 </LinkAnchor>
                               </Link>
                             </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-447isCaseExtended"
+                            >
+                              No
+                            </td>
                           </tr>
                           <tr
                             className="govuk-radios govuk-table__row"
@@ -6772,6 +7060,12 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                               className="govuk-table__cell"
                               key="stage_uuid-448nextCaseType"
                             />
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-448isCaseExtended"
+                            >
+                              No
+                            </td>
                           </tr>
                           <tr
                             className="govuk-radios govuk-table__row"
@@ -6906,6 +7200,12 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                                   </a>
                                 </LinkAnchor>
                               </Link>
+                            </td>
+                            <td
+                              className="govuk-table__cell"
+                              key="stage_uuid-449isCaseExtended"
+                            >
+                              Yes
                             </td>
                           </tr>
                         </tbody>
