@@ -125,6 +125,12 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
+        S_BF_CONTRIB_TYPE: {
+            client: 'INFO',
+            endpoint: '/entity/list/BF_CONTRIB_TYPE',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
         S_IEDET_CSU_LIST: {
             client: 'INFO',
             endpoint: '/entity/list/IEDET_CSU_LIST',
