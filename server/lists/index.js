@@ -838,6 +838,12 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
+        TROF_CAMPAIGNS: {
+            client: 'INFO',
+            endpoint: '/entity/list/TROF_CAMPAIGNS',
+            type: listService.types.DYNAMIC,
+            adapter: entityListItemsAdapter
+        }
     },
     clients: {
         CASEWORK: caseworkService,
