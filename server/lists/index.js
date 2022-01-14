@@ -841,7 +841,7 @@ module.exports = {
         TROF_CAMPAIGNS: {
             client: 'INFO',
             endpoint: '/entity/list/TROF_CAMPAIGNS',
-            type: listService.types.STATIC,
+            type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
         }
     },
