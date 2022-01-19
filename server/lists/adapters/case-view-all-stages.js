@@ -40,7 +40,12 @@ const getRequestStatus = (dueDate, { status, decision }) => {
 
 async function composeBusinessLabel(choices, { businessArea, businessUnit }, fromStaticList) {
     const businessUnitLabel = await loadValue(businessUnit, choices, fromStaticList);
-    return businessArea ? `${businessArea} - ${businessUnitLabel}` : businessUnitLabel;
+    if (businessArea && businessUnitLabel) {
+        return `${businessArea} - ${businessUnitLabel}`;
+    }
+    else {
+        return businessArea ? businessArea : businessUnitLabel;
+    }
 }
 
 async function getApprovalsStrings(approvalsArray, choices, fromStaticList) {
