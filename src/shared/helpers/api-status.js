@@ -46,6 +46,9 @@ const status = {
     REQUEST_STANDARD_LINES_DATA: { display: 'Requesting standard lines', level: 1, type: 'OK', timeoutPeriod: timeout.STANDARD },
     REQUEST_STANDARD_LINES_DATA_SUCCESS: { display: 'Standard lines received', level: 3, type: 'OK', timeoutPeriod: timeout.ERROR },
     REQUEST_STANDARD_LINES_DATA_FAILURE: { display: 'Unable to fetch standard lines', level: 0, type: 'ERROR', timeoutPeriod: timeout.ERROR },
+    REQUEST_CASE_DATA: { display: 'Requesting case data', level: 1, type: 'OK', timeoutPeriod: timeout.STANDARD },
+    REQUEST_CASE_DATA_SUCCESS: { display: 'Case data received', level: 3, type: 'OK', timeoutPeriod: timeout.STANDARD },
+    REQUEST_CASE_DATA_FAILURE: { display: 'Unable to fetch case data', level: 0, type: 'ERROR', timeoutPeriod: timeout.ERROR },
 };
 
 export default status;

@@ -44,6 +44,20 @@ function caseSummaryApiResponseMiddleware(req, res) {
     return res.status(200).json(res.locals.summary);
 }
 
+async function caseDataMiddleware(req, res, next) {
+    try {
+        const caseData = await req.listService.fetch('CASE_DATA', req.params);
+        res.locals.caseData = caseData;
+        next();
+    } catch (error) {
+        next(error);
+    }
+}
+
+function caseDataApiResponseMiddleware(req, res) {
+    return res.status(200).json(res.locals.caseData);
+}
+
 async function createCaseNote(req, res, next) {
     try {
         if (!req.body.caseNote) {
@@ -156,5 +170,7 @@ module.exports = {
     caseCorrespondentsMiddleware,
     caseCorrespondentsApiResponseMiddleware,
     caseActionDataMiddleware,
-    caseActionApiResponseMiddleware
+    caseActionApiResponseMiddleware,
+    caseDataApiResponseMiddleware,
+    caseDataMiddleware
 };
