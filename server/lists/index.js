@@ -855,7 +855,13 @@ module.exports = {
             endpoint: '/entity/list/TROF_CAMPAIGNS',
             type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
-        }
+        },
+        BF_INTERESTED_PARTIES: {
+            client: 'INFO',
+            endpoint: '/entity/list/BF_INTERESTED_PARTIES',
+            type: listService.types.DYNAMIC,
+            adapter: entityListItemsAdapter
+        },
     },
     clients: {
         CASEWORK: caseworkService,
