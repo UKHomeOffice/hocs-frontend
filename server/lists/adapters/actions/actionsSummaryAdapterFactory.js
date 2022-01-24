@@ -1,11 +1,11 @@
 const appealAdaptor = require('./appealsSummaryAdapter');
 const extensionAdaptor = require('./extensionsSummaryAdapter');
-const externalInterestAdaptor = require('./externalInterestSummaryAdapter');
+const externalInterestsAdaptor = require('./externalInterestsSummaryAdapter');
 
 const actionSummaryAdapterFactory = {
     appeals: appealAdaptor,
     extensions: extensionAdaptor,
-    recordInterest: externalInterestAdaptor
+    recordInterest: externalInterestsAdaptor
 };
 
 module.exports = {

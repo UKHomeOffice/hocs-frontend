@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`action-summary-interests.jsx should render one with details and one without 1`] = `
+Array [
+  <h2
+    class="govuk-heading-m"
+  >
+    Interest
+  </h2>,
+  <table
+    class="govuk-table margin-left--small"
+  >
+    <caption
+      class="govuk-table__caption margin-bottom--small"
+    >
+      Interest 1
+    </caption>
+    <tbody
+      class="govuk_table__body"
+    >
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Party
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          Interested party 1
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Details
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          Details of interest
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+  <table
+    class="govuk-table margin-left--small"
+  >
+    <caption
+      class="govuk-table__caption margin-bottom--small"
+    >
+      Interest 2
+    </caption>
+    <tbody
+      class="govuk_table__body"
+    >
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Party
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          Interested party 1
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+]
+`;

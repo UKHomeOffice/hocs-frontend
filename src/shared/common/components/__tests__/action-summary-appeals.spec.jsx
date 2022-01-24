@@ -1,5 +1,5 @@
 import React from 'react';
-import ActionSummaryAppeals from '../action-summary-appeals';
+import ActionSummaryAppeals from '../summary/actions/action-summary-appeals';
 
 describe('action-summary-appeals.jsx', () => {
 
