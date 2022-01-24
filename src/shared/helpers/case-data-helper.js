@@ -5,7 +5,6 @@ import { setError, updateApiStatus, updateCaseData } from '../contexts/actions/i
 module.exports = (caseId, dispatch) => {
     axios.get(`/api/case/${caseId}/`)
         .then(result => {
-            console.log(result);
             dispatch(updateApiStatus(status.REQUEST_CASE_DATA_SUCCESS));
             dispatch(updateCaseData(result.data));
         }, error => {
