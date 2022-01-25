@@ -125,6 +125,12 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
+        S_BF_CONTRIB_TYPE: {
+            client: 'INFO',
+            endpoint: '/entity/list/BF_CONTRIB_TYPE',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
         S_IEDET_CSU_LIST: {
             client: 'INFO',
             endpoint: '/entity/list/IEDET_CSU_LIST',
@@ -541,6 +547,12 @@ module.exports = {
             endpoint: '/case/document/reference/${caseId}/',
             adapter: documentListAdapter
         },
+        CASE_DOCUMENT_LIST_FINAL_RESPONSE: {
+            client: 'CASEWORK',
+            endpoint: '/case/document/reference/${caseId}/?type=Final%20response',
+            adapter: documentListAdapter
+        },
+        // todo: this should be removed and updated to use the non tenant specific option above.
         CASE_DOCUMENT_LIST_FOI_FINAL_RESPONSE: {
             client: 'CASEWORK',
             endpoint: '/case/document/reference/${caseId}/?type=Final%20responses',

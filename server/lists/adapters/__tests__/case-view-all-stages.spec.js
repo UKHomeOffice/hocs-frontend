@@ -292,7 +292,67 @@ const mockDataWithSumoMPAMContributions = {
     data: {
         my_field: 'Some Value',
         stage_2_field_1: 'Some Label',
-        CaseContributions: '[{"data":{"contributionBusinessUnit":"FOI_DIRECTORATE_HOLA_ACCEPTANCE_TEAMS","contributionRequestDate":"2021-08-31","contributionDueDate":"2021-09-01","contributionRequestNote":"Eggs please"}}]'
+        CaseContributions: '[{"data":{"contributionBusinessUnit":"FOI_DIRECTORATE_HOLA_ACCEPTANCE_TEAMS", "contributionBusinessArea": "Business area", "contributionRequestDate":"2021-08-31","contributionDueDate":"2021-09-01","contributionRequestNote":"Eggs please"}}]'
+    }
+};
+
+const mockDataWithSumoCOMPContributions = {
+    caseReference: 'COMP/0123456/21',
+    schema: {
+        title: 'View Case',
+        fields: {
+            STAGE_NAME: [
+                {
+                    component: 'text',
+                    validation: ['required'],
+                    props: {
+                        name: 'my_field',
+                        label: 'My Field'
+                    }
+                }
+            ],
+            STAGE_NAME_2: [
+                {
+                    component: 'text',
+                    validation: [],
+                    props: {
+                        name: 'stage_2_field_1',
+                        label: 'Stage 2 Field 1'
+                    }
+                },
+                {
+                    component: 'somu-list',
+                    validation: [
+                        'requiredArray',
+                        'contributionsFulfilled'
+                    ],
+                    props: {
+                        somuType: {
+                            type: 'CONTRIBUTIONS',
+                            choices: 'RANDOM_LIST',
+                            caseType: 'MPAM'
+                        },
+                        itemLinks: [
+                            {
+                                'label': 'Edit',
+                                'action': 'edit'
+                            }
+                        ],
+                        primaryLink: {
+                            label: 'Add a Contribution',
+                            action: 'addRequest'
+                        },
+                        label: 'Case contributions',
+                        name: 'CaseContributions'
+                    }
+                }
+            ]
+        }
+    },
+    data: {
+        my_field: 'Some Value',
+        stage_2_field_1: 'Some Label',
+        CaseContributions: '[{"data":{"contributionBusinessArea": "Business area", "contributionRequestDate":"2021-08-31","contributionDueDate":"2021-09-01","contributionRequestNote":"Test"}}]'
     }
 };
 
@@ -418,6 +478,14 @@ describe('Case-view-all-stages Adapter', () => {
     it('should render SOMU MPAM Contributions case view sections', async () => {
 
         const result = await caseViewAllStagesAdapter(mockDataWithSumoMPAMContributions, { fromStaticList: mockFromStaticList });
+
+        expect(result).toBeDefined();
+        expect(result).toMatchSnapshot();
+    });
+
+    it('should render SOMU COMP Contributions case view sections', async () => {
+
+        const result = await caseViewAllStagesAdapter(mockDataWithSumoCOMPContributions, { fromStaticList: mockFromStaticList });
 
         expect(result).toBeDefined();
         expect(result).toMatchSnapshot();
