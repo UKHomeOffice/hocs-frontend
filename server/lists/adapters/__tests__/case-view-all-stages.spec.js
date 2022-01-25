@@ -446,6 +446,14 @@ const mockData = {
                         label: 'My Empty Field'
                     },
                 },
+                {
+                    component: 'checkbox',
+                    validation: ['required'],
+                    props: {
+                        name: 'my_empty_field',
+                        label: 'My Empty Field'
+                    },
+                },
             ]
 
         }
@@ -486,6 +494,52 @@ describe('Case-view-all-stages Adapter', () => {
     it('should render SOMU COMP Contributions case view sections', async () => {
 
         const result = await caseViewAllStagesAdapter(mockDataWithSumoCOMPContributions, { fromStaticList: mockFromStaticList });
+
+        expect(result).toBeDefined();
+        expect(result).toMatchSnapshot();
+    });
+
+    it('should render checkboxes with custom label', async () => {
+        const mockData = {
+            caseReference: 'TEST/1234567/18',
+            schema: {
+                title: 'View Case',
+                fields: {
+                    STAGE_NAME: [
+                        {
+                            component: 'checkbox',
+                            validation: ['required'],
+                            props: {
+                                name: 'checkbox_field_1',
+                                label: 'Checkbox Field 1',
+                                choices: [
+                                    { 'label': 'Test', 'value': 'Test' }
+                                ],
+                            },
+                        },
+                        {
+                            component: 'checkbox',
+                            validation: ['required'],
+                            props: {
+                                name: 'checkbox_field_2',
+                                label: 'Checkbox Field 1',
+                                choices: [
+                                    { 'label': 'Test', 'value': 'Test' }
+                                ],
+                                showLabel: true
+                            },
+                        }
+                    ]
+                }
+            },
+            data: {
+                checkbox_field_1: 'Test',
+                checkbox_field_2: 'Test',
+            }
+        };
+
+
+        const result = await caseViewAllStagesAdapter(mockData, { fromStaticList: mockFromStaticList });
 
         expect(result).toBeDefined();
         expect(result).toMatchSnapshot();
