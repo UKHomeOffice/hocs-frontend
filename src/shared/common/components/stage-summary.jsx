@@ -62,7 +62,7 @@ const StageSummary = () => {
     }, [fetchCaseSummaryData]);
 
     function renderActionSummary(actions) {
-        return actions.map(actionType => getActionSummary(actionType.title, actions));
+        return actions.map(actionType => getActionSummary(actionType.type, actions));
     }
 
     return (

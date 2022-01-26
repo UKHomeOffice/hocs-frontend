@@ -12,10 +12,10 @@ function renderComponent(Component, action) {
 
 const getActionSummary = (actionType, actions) => {
     switch (actionType) {
-        case 'Appeals':
-            return renderComponent(AppealSummary, actions.find(actions => actions.title === actionType));
-        case 'Recordinterest':
-            return renderComponent(InterestSummary, actions.find(actions => actions.title === actionType));
+        case 'appeals':
+            return renderComponent(AppealSummary, actions.find(actions => actions.type === actionType));
+        case 'recordInterest':
+            return renderComponent(InterestSummary, actions.find(actions => actions.type === actionType));
         default:
             return false;
     }
