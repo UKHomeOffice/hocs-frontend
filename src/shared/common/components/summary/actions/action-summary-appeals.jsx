@@ -12,12 +12,13 @@ const renderRow = ({ label, value }) => {
 
 renderRow.propTypes = {
     label: PropTypes.string.isRequired,
-    value: PropTypes.string.isRequired
+    value: PropTypes.string.isRequired,
+    items: PropTypes.array.isRequired
 };
 
 const ActionSummaryAppeals = (props) => {
 
-    const appeals = [ ...props.props.items ];
+    const { items: appeals } = props;
 
     if (appeals.length < 1) {
         return false;

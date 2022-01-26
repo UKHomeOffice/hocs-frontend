@@ -2,10 +2,10 @@ import React from 'react';
 import AppealSummary from './action-summary-appeals.jsx';
 import InterestSummary from './action-summary-interests.jsx';
 
-function renderComponent(Component, items) {
+function renderComponent(Component, action) {
     return (
         <>
-            <Component props={items} />
+            <Component items={action.items} />
         </>
     );
 }

@@ -31,7 +31,7 @@ describe('action-summary-appeals.jsx', () => {
 
         expect(render(
             <>
-                <ActionSummaryAppeals props={props} />
+                <ActionSummaryAppeals items={props.items} />
             </>
         )).toMatchSnapshot();
     });

@@ -18,7 +18,7 @@ describe('action-summary-interests.jsx', () => {
 
         expect(render(
             <>
-                <ActionSummaryInterests props={props} />
+                <ActionSummaryInterests items={props.items} />
             </>
         )).toMatchSnapshot();
     });
