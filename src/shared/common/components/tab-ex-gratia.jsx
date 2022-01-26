@@ -6,6 +6,7 @@ import { updateApiStatus } from '../../contexts/actions/index.jsx';
 import updateCaseData from '../../helpers/case-data-helper';
 import Submit from '../forms/submit.jsx';
 import axios from 'axios';
+import Form from '../forms/form.jsx';
 
 const TabExGratia = () => {
     const { caseData, dispatch, page } = useContext(Context);
@@ -43,27 +44,10 @@ const TabExGratia = () => {
                             Update Ex-Gratia details
                         </span>
                     </summary>
-                    <div className='govuk-details__text'>
-                        <form action={`/case/${page.params.caseId}/stage/${page.params.stageId}/note`}>
-                            <div className={'govuk-form-group'}>
 
-                                <label htmlFor={'case-note'} id={'case-note-label'} className='govuk-label govuk-label--s'>Case note</label>
-
-                                {/*{submissionError && <span id={'case-note-error'} className='govuk-error-message'>{submissionError}</span>}*/}
-
-                                <textarea className={'govuk-textarea form-control-3-4'}
-                                    id='case-note'
-                                    name='case-note'
-                                    disabled={false}
-                                    rows={5}
-                                    onBlur={e => this.setState({ caseNote: e.target.value })}
-                                    onChange={e => this.setState({ caseNote: e.target.value })}
-                                    // value={caseNote}
-                                />
-                            </div>
-                            <Submit label='Add' />
-                        </form>
-                    </div>
+                    {form && form.data != null &&
+                        <Form page={page} schema={{ fields: form.data }} updateFormState={()=>{}} />
+                    }
                 </details>
                 <table className='govuk-table margin-left--small'>
                     <caption className='govuk-table__caption margin-bottom--small' >Summary</caption>
