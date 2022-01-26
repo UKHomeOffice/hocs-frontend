@@ -182,21 +182,22 @@ const hydrateFields = async (fieldTemplate, template, fromStaticList, name) => {
     }
 };
 
-const getComponentFromField = (fieldTemplate, template) => {
-    const { name, label, choices, conditionChoices } = fieldTemplate.props;
+const getComponentFromField = ( { props, component }, template) => {
+    const { name, label, choices } = props;
     const value = template.data[name];
 
-    if (fieldTemplate.component !== 'hidden') {
-        if (value) {
-            return (
-                Component('mapped-display', name)
-                    .withProp('component', fieldTemplate.component)
-                    .withProp('label', label)
-                    .withProp('choices', choices)
-                    .withProp('conditionChoices', conditionChoices)
-                    .build()
-            );
-        }
+    if (!value || component === 'hidden') {
+        return;
     }
-};
 
+    let mappedDisplayComponent = Component('mapped-display', name)
+        .withProp('component', component)
+        .withProp('label', label)
+        .withProp('choices', choices);
+
+    if (component === 'checkbox') {
+        mappedDisplayComponent.withProp('showLabel', props.showLabel);
+    }
+
+    return mappedDisplayComponent.build();
+};
