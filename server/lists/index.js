@@ -859,7 +859,7 @@ module.exports = {
         BF_INTERESTED_PARTIES: {
             client: 'INFO',
             endpoint: '/entity/list/BF_INTERESTED_PARTIES',
-            type: listService.types.DYNAMIC,
+            type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
     },

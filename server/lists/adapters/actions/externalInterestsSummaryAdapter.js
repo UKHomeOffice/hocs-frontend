@@ -2,11 +2,11 @@ module.exports = async (actions) => {
 
     const { recordInterest: interests } = actions.caseActionData;
 
-    return await Promise.all(interests.map( async interestEntry => {
+    return interests.map( interestEntry => {
         return {
             title: interestEntry.caseTypeActionLabel,
             interestedPartyTitle: interestEntry.interestedPartyEntity.title,
             detailsOfInterest: interestEntry.detailsOfInterest,
         };
-    }));
+    });
 };
