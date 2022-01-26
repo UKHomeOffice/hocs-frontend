@@ -16,9 +16,7 @@ renderRow.propTypes = {
     items: PropTypes.array.isRequired
 };
 
-const ActionSummaryInterests = (props) => {
-
-    const { items: interests } = props;
+const ActionSummaryInterests = ({ items: interests }) => {
 
     if (interests.length < 1) {
         return false;

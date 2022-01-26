@@ -16,9 +16,7 @@ renderRow.propTypes = {
     items: PropTypes.array.isRequired
 };
 
-const ActionSummaryAppeals = (props) => {
-
-    const { items: appeals } = props;
+const ActionSummaryAppeals = ({ items: appeals }) => {
 
     if (appeals.length < 1) {
         return false;
