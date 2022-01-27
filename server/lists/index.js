@@ -855,6 +855,12 @@ module.exports = {
             endpoint: '/entity/list/TROF_CAMPAIGNS',
             type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
+        },
+        TO_STOP_LIST: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_STOP_LIST',
+            type: listService.types.DYNAMIC,
+            adapter: entityListItemsAdapter
         }
     },
     clients: {
