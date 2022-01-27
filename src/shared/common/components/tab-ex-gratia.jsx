@@ -7,6 +7,7 @@ import updateCaseData from '../../helpers/case-data-helper';
 import Submit from '../forms/submit.jsx';
 import axios from 'axios';
 import Form from '../forms/form.jsx';
+import FormEmbeddedWrapped from '../forms/form-embedded-wrapped.jsx';
 
 const TabExGratia = () => {
     const { caseData, dispatch, page } = useContext(Context);
@@ -46,7 +47,7 @@ const TabExGratia = () => {
                     </summary>
 
                     {form && form.data != null &&
-                        <Form page={page} schema={{ fields: form.data }} updateFormState={()=>{}} />
+                        <FormEmbeddedWrapped page={page} schema={{ fields: form.data }} />
                     }
                 </details>
                 <table className='govuk-table margin-left--small'>
