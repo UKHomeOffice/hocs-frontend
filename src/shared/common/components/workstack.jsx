@@ -385,16 +385,22 @@ class WorkstackAllocate extends Component {
                     <span>{value}</span>
                 </td>;
             }
-            case ColumnRenderer.DUE_DATE_WARNING:
-                if ((row.contributions && row.contributions === 'Overdue') ||
-                    (row.data && row.data.DueDate) ||
-                    (row.data && row.data.ClearanceDueDate))
-                {
-                    return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell date-warning'>
-                        <span>{value}</span>
-                    </td>;
+            case ColumnRenderer.DUE_DATE_WARNING: {
+                let overdue = false;
+                if (row.contributions && row.contributions === 'Overdue') {
+                    overdue = true;
+                } else if ((row.data && row.data.DueDate) ||
+                    (row.data && row.data.ClearanceDueDate)) {
+                    const dueDate = row.data.DueDate ? new Date(row.data.DueDate) : new Date(row.data.ClearanceDueDate);
+                    if (dueDate < new Date()) {
+                        overdue = true;
+                    }
                 }
-                return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>{value}</td>;
+                const rowClasses = overdue ? 'govuk-table__cell date-warning' : 'govuk-table__cell';
+                return <td key={row.uuid + column.dataValueKey} className={rowClasses}>
+                    <span>{value}</span>
+                </td>;
+            }
             case ColumnRenderer.INDICATOR_BLUE:
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell indicator'>
                     {value && <span title={value} className='indicator-blue'>
