@@ -46,8 +46,7 @@ function caseSummaryApiResponseMiddleware(req, res) {
 
 async function caseDataMiddleware(req, res, next) {
     try {
-        const caseData = await req.listService.fetch('CASE_DATA', req.params);
-        res.locals.caseData = caseData;
+        res.locals.caseData = await req.listService.fetch('CASE_DATA', req.params);
         next();
     } catch (error) {
         next(error);
