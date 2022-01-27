@@ -102,6 +102,69 @@ exports[`Side bar component should render with default props 1`] = `
 </div>
 `;
 
+exports[`Side bar component should render with the Ex-Gratia tab for BF 1`] = `
+<div
+  class="tabs"
+>
+  <ul>
+    <li>
+      <a
+        class="tab tab__active"
+        href="/undefined/?activeTab=DOCUMENTS"
+      >
+        Documents
+      </a>
+    </li>
+    <li>
+      <a
+        class="tab"
+        href="/undefined/?activeTab=SUMMARY"
+      >
+        Summary
+      </a>
+    </li>
+    <li>
+      <a
+        class="tab"
+        href="/undefined/?activeTab=TIMELINE"
+      >
+        Timeline
+      </a>
+    </li>
+    <li>
+      <a
+        class="tab"
+        href="/undefined/?activeTab=PEOPLE"
+      >
+        People
+      </a>
+    </li>
+    <li>
+      <a
+        class="tab"
+        href="/undefined/?activeTab=EX_GRATIA"
+      >
+        Ex-Gratia
+      </a>
+    </li>
+  </ul>
+  <div
+    class="govuk-grid-row"
+  >
+    <div
+      class="govuk-grid-column-full"
+    >
+      <a
+        class="govuk-body govuk-link"
+        href="/case/some_case_id/stage/some_stage_id/entity/document/manage"
+      >
+        Manage Documents
+      </a>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`Side bar component should render with the actions tab for FOI 1`] = `
 <div
   class="tabs"

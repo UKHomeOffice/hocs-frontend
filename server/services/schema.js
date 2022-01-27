@@ -1,3 +1,8 @@
+/**
+ * RDRDRDRDRDRDD requires tests!!
+ *
+ */
+
 const getLogger = require('../libs/logger');
 const { infoService } = require('../clients');
 const User = require('../models/user');
