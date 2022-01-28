@@ -11,7 +11,6 @@ import FormEmbeddedWrapped from '../forms/form-embedded-wrapped.jsx';
 const TabExGratia = () => {
     const { caseData, dispatch, page } = useContext(Context);
     const [form, setForm] = useState(null);
-    const [displayData, setDisplayData] = useState({});
 
     // update when updates are sent to the api
     const fetchCaseData = useCallback(() => {
@@ -26,10 +25,6 @@ const TabExGratia = () => {
     useEffect(() => {
         getForm();
     }, []);
-
-    useEffect(() => {
-        setDisplayData(caseData);
-    }, [caseData]);
 
     const getForm = () => {
         dispatch(updateApiStatus(status.REQUEST_FORM))
@@ -55,7 +50,6 @@ const TabExGratia = () => {
                             schema={{ fields: form.data }}
                             fieldData={caseData}
                             action={types.UPDATE_CASE_ACTION_DATA}
-                            setLinkedDisplayData={setDisplayData}
                         />
                     }
                 </details>

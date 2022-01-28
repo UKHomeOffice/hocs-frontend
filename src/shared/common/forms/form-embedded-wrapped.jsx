@@ -57,8 +57,7 @@ FormEmbeddedWrapped.propTypes = {
     page: PropTypes.object,
     schema: PropTypes.object,
     dispatch: PropTypes.func,
-    fieldData: PropTypes.object,
-    setLinkedDisplayData: PropTypes.func
+    fieldData: PropTypes.object
 };
 
 const FormEmbeddedWrappedWrapper = props => (
