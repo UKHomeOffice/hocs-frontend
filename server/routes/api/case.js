@@ -15,7 +15,8 @@ const {
     caseActionDataMiddleware,
     caseActionApiResponseMiddleware,
     caseDataApiResponseMiddleware,
-    caseDataMiddleware
+    caseDataMiddleware,
+    caseDataUpdateMiddleware
 } = require('../../middleware/case');
 const { somuApiResponseMiddleware } = require('../../middleware/somu');
 const { getFormForCase, getFormForStage } = require('../../services/form');
@@ -68,6 +69,16 @@ router.post(['/:caseId/stage/:stageId', '/:caseId/stage/:stageId/allocate'],
 router.post('/:caseId/note',
     fileMiddleware.any(),
     createCaseNote,
+    (req, res) => {
+        res.json({
+            error: res.locals.error
+        });
+    }
+);
+
+router.post('/:caseId/stage/:stageId/data',
+    fileMiddleware.any(),
+    caseDataUpdateMiddleware,
     (req, res) => {
         res.json({
             error: res.locals.error

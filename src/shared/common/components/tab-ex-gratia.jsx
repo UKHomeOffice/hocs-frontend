@@ -34,6 +34,8 @@ const TabExGratia = () => {
             .then(() => dispatch(updateApiStatus(status.REQUEST_FORM_SUCCESS)));
     };
 
+    console.log(caseData);
+
     return (
         <Fragment>
             {(caseData && Object.keys(caseData).length !== 0) &&
@@ -47,15 +49,19 @@ const TabExGratia = () => {
                     </summary>
 
                     {form && form.data != null &&
-                        <FormEmbeddedWrapped page={page} schema={{ fields: form.data }} />
+                        <FormEmbeddedWrapped schema={{ fields: form.data }} fieldData={caseData} />
                     }
                 </details>
                 <table className='govuk-table margin-left--small'>
                     <caption className='govuk-table__caption margin-bottom--small' >Summary</caption>
                     <tbody className='govuk-table__body'>
-                        {caseData.PaymentType && <tr className='govuk-table__cell'>
-                            <th className='govuk-table__header padding-left--small govuk-!-width-one-third'>Payment type</th>
-                            <td className='govuk-table__cell'>{caseData.PaymentType}</td>
+                        {caseData.PaymentTypeConsolatory !== undefined && <tr className='govuk-table__cell'>
+                            <th className='govuk-table__header padding-left--small govuk-!-width-one-third'>Consolatory</th>
+                            <td className='govuk-table__cell'>{caseData.PaymentTypeConsolatory ? 'Yes' : 'No'}</td>
+                        </tr>}
+                        {caseData.PaymentTypeExGratia !== undefined && <tr className='govuk-table__cell'>
+                            <th className='govuk-table__header padding-left--small govuk-!-width-one-third'>Ex-Gratia</th>
+                            <td className='govuk-table__cell'>{caseData.PaymentTypeExGratia ? 'Yes' : 'No'}</td>
                         </tr>}
                         {caseData.AmountComplainantRequested && <tr className='govuk-table__cell'>
                             <th className='govuk-table__header padding-left--small govuk-!-width-one-third'>Amount complainant has requested:</th>
@@ -65,17 +71,17 @@ const TabExGratia = () => {
                             <th className='govuk-table__header padding-left--small govuk-!-width-one-third'>Amount requested from the business/port:</th>
                             <td className='govuk-table__cell'>{caseData.AmountBusinessRequested}</td>
                         </tr>}
-                        {caseData.AmountOfferSent && <tr className='govuk-table__cell'>
+                        {caseData.OfferSentToComplainant && <tr className='govuk-table__cell'>
                             <th className='govuk-table__header padding-left--small govuk-!-width-one-third'>Offer sent to the complainant:</th>
-                            <td className='govuk-table__cell'>{caseData.AmountOfferSent}</td>
+                            <td className='govuk-table__cell'>{caseData.OfferSentToComplainant}</td>
                         </tr>}
-                        {caseData.BusinessApproved && <tr className='govuk-table__cell'>
+                        {caseData.BusinessApprovedPayment !== undefined && <tr className='govuk-table__cell'>
                             <th className='govuk-table__header padding-left--small govuk-!-width-one-third'>Business area/port has approved payment:</th>
-                            <td className='govuk-table__cell'>{caseData.BusinessApproved}</td>
+                            <td className='govuk-table__cell'>{caseData.BusinessApprovedPayment ? 'Yes' : 'No'}</td>
                         </tr>}
-                        {caseData.ComplaintAccepted && <tr className='govuk-table__cell'>
+                        {caseData.ComplainantAccepted !== undefined && <tr className='govuk-table__cell'>
                             <th className='govuk-table__header padding-left--small govuk-!-width-one-third'>Complainant has accepted:</th>
-                            <td className='govuk-table__cell'>{caseData.ComplaintAccepted}</td>
+                            <td className='govuk-table__cell'>{caseData.ComplainantAccepted ? 'Yes' : 'No'}</td>
                         </tr>}
                     </tbody>
                 </table>

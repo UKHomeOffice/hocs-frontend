@@ -1,5 +1,5 @@
 const actionService = require('../services/action');
-const { caseworkService } = require('../clients');
+const { caseworkService, workflowService} = require('../clients');
 const User = require('../models/user');
 const { formatDate } = require('../libs/dateHelpers');
 const { logger } = require('../libs/logger');
@@ -158,6 +158,17 @@ function caseActionApiResponseMiddleware(req, res) {
     return res.status(200).json(res.locals.caseActionData);
 }
 
+async function caseDataUpdateMiddleware(req, res, next) {
+    try {
+        const updated = await workflowService.put(`/case/${req.params.caseId}/stage/${req.params.stageId}/data`, req.body,
+            { headers: User.createHeaders(req.user) });
+        res.locals.formData = updated.data;
+    } catch (error) {
+        return next(new Error(`Failed to update case data on case ${req.params.caseId} `));
+    }
+    return next();
+}
+
 module.exports = {
     caseResponseMiddleware,
     caseApiResponseMiddleware,
@@ -171,5 +182,6 @@ module.exports = {
     caseActionDataMiddleware,
     caseActionApiResponseMiddleware,
     caseDataApiResponseMiddleware,
-    caseDataMiddleware
+    caseDataMiddleware,
+    caseDataUpdateMiddleware
 };
