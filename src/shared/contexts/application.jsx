@@ -33,6 +33,9 @@ const reducer = (state, action) => {
         case types.UPDATE_CASE_DATA:
             return { ...state, caseData: action.payload };
 
+        case types.UNSET_CASE_DATA:
+            return { ...state, caseData: null };
+
         case types.UPDATE_LOCATION:
             return { ...state, location: action.payload };
         case types.CANCEL:

@@ -2,7 +2,7 @@ import React, { useContext, useEffect, Fragment, useCallback, useState } from 'r
 import { Context } from '../../contexts/application.jsx';
 import PropTypes from 'prop-types';
 import status from '../../helpers/api-status';
-import { updateApiStatus } from '../../contexts/actions/index.jsx';
+import { updateApiStatus, unsetCaseData } from '../../contexts/actions/index.jsx';
 import types from '../../contexts/actions/types.jsx';
 import getCaseData from '../../helpers/case-data-helper';
 import axios from 'axios';
@@ -24,7 +24,17 @@ const TabExGratia = () => {
 
     useEffect(() => {
         getForm();
+        return function cleanup() {
+            dispatch(unsetCaseData());
+        };
     }, []);
+
+    /**
+     *
+     * RDRDRDRDR
+     *
+     * prevent form double submitting
+     */
 
     const getForm = () => {
         dispatch(updateApiStatus(status.REQUEST_FORM))
