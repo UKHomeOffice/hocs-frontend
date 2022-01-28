@@ -1,9 +1,3 @@
-/**
- *
- *
- * RDRDRDRD requires tests!
- */
-
 import axios from 'axios';
 import status from './api-status';
 import { setError, updateApiStatus, updateCaseData } from '../contexts/actions/index.jsx';
