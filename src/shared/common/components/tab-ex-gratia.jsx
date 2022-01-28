@@ -3,21 +3,21 @@ import { Context } from '../../contexts/application.jsx';
 import PropTypes from 'prop-types';
 import status from '../../helpers/api-status';
 import { updateApiStatus } from '../../contexts/actions/index.jsx';
-import updateCaseData from '../../helpers/case-data-helper';
-import Submit from '../forms/submit.jsx';
+import types from '../../contexts/actions/types.jsx';
+import getCaseData from '../../helpers/case-data-helper';
 import axios from 'axios';
-import Form from '../forms/form.jsx';
 import FormEmbeddedWrapped from '../forms/form-embedded-wrapped.jsx';
 
 const TabExGratia = () => {
     const { caseData, dispatch, page } = useContext(Context);
     const [form, setForm] = useState(null);
+    const [displayData, setDisplayData] = useState({});
 
     // update when updates are sent to the api
     const fetchCaseData = useCallback(() => {
         dispatch(updateApiStatus(status.REQUEST_CASE_DATA));
-        updateCaseData(page.params.caseId, dispatch);
-    }, [updateCaseData]);
+        getCaseData(page.params.caseId, dispatch);
+    }, [getCaseData]);
 
     useEffect(() => {
         fetchCaseData();
@@ -27,14 +27,16 @@ const TabExGratia = () => {
         getForm();
     }, []);
 
+    useEffect(() => {
+        setDisplayData(caseData);
+    }, [caseData]);
+
     const getForm = () => {
         dispatch(updateApiStatus(status.REQUEST_FORM))
             .then(() => axios.get('/api/schema/EX_GRATIA/fields'))
             .then(response => setForm(response))
             .then(() => dispatch(updateApiStatus(status.REQUEST_FORM_SUCCESS)));
     };
-
-    console.log(caseData);
 
     return (
         <Fragment>
@@ -49,7 +51,12 @@ const TabExGratia = () => {
                     </summary>
 
                     {form && form.data != null &&
-                        <FormEmbeddedWrapped schema={{ fields: form.data }} fieldData={caseData} />
+                        <FormEmbeddedWrapped
+                            schema={{ fields: form.data }}
+                            fieldData={caseData}
+                            action={types.UPDATE_CASE_ACTION_DATA}
+                            setLinkedDisplayData={setDisplayData}
+                        />
                     }
                 </details>
                 <table className='govuk-table margin-left--small'>
