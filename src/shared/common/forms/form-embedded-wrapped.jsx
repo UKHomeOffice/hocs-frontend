@@ -4,7 +4,7 @@ import Form from '../forms/form.jsx';
 import { ApplicationConsumer, Context } from '../../contexts/application.jsx';
 import status from '../../helpers/api-status';
 import axios from 'axios';
-import {clearApiStatus, updateApiStatus, updateCaseData} from '../../contexts/actions/index.jsx';
+import { clearApiStatus, updateApiStatus, updateCaseData } from '../../contexts/actions/index.jsx';
 
 /**
  * Embedded form with a wrapped state, designed to be embedded outside of workflows or pages.
@@ -24,6 +24,7 @@ const FormEmbeddedWrapped = (props) => {
 
     const submitHandler = React.useCallback(e => {
         e.preventDefault();
+        setWrappedState({ submittingForm: true });
 
         // eslint-disable-next-line no-undef
         const formData = new FormData();
@@ -36,7 +37,8 @@ const FormEmbeddedWrapped = (props) => {
                     .then(() => {
                         dispatch(updateApiStatus(status.REQUEST_CASE_DATA_SUCCESS))
                             .then(() => dispatch(clearApiStatus()))
-                            .then(() => dispatch(updateCaseData(formState)));
+                            .then(() => dispatch(updateCaseData(formState)))
+                            .then(() => setWrappedState({ submittingForm: false }));
                     })
                     .catch(() => console.error('Failed to submit case data'));
             });
@@ -50,6 +52,7 @@ const FormEmbeddedWrapped = (props) => {
         action={`/case/${props.page.params.caseId}/stage/${props.page.params.stageId}/data`}
         baseUrl={`/case/${props.page.params.caseId}/stage/${props.page.params.stageId}`}
         submitHandler={submitHandler}
+        submittingForm={formState.submittingForm}
     />;
 };
 

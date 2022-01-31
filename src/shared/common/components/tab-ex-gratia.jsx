@@ -29,13 +29,6 @@ const TabExGratia = () => {
         };
     }, []);
 
-    /**
-     *
-     * RDRDRDRDR
-     *
-     * prevent form double submitting
-     */
-
     const getForm = () => {
         dispatch(updateApiStatus(status.REQUEST_FORM))
             .then(() => axios.get('/api/schema/EX_GRATIA/fields'))
