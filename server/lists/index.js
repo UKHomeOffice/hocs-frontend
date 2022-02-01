@@ -549,7 +549,7 @@ module.exports = {
         },
         CASE_DOCUMENT_LIST_FINAL_RESPONSE: {
             client: 'CASEWORK',
-            endpoint: '/case/document/reference/${caseId}/?type=Final%20response',
+            endpoint: '/case/document/reference/${caseId}/?type=Final%20Response',
             adapter: documentListAdapter
         },
         // todo: this should be removed and updated to use the non tenant specific option above.
