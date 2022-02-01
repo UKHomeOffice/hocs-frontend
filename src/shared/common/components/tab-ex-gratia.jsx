@@ -2,8 +2,7 @@ import React, { useContext, useEffect, Fragment, useCallback, useState } from 'r
 import { Context } from '../../contexts/application.jsx';
 import PropTypes from 'prop-types';
 import status from '../../helpers/api-status';
-import { updateApiStatus, unsetCaseData } from '../../contexts/actions/index.jsx';
-import types from '../../contexts/actions/types.jsx';
+import { updateApiStatus, unsetCaseData, clearApiStatus, updateCaseData } from '../../contexts/actions/index.jsx';
 import getCaseData from '../../helpers/case-data-helper';
 import axios from 'axios';
 import FormEmbeddedWrapped from '../forms/form-embedded-wrapped.jsx';
@@ -36,6 +35,32 @@ const TabExGratia = () => {
             .then(() => dispatch(updateApiStatus(status.REQUEST_FORM_SUCCESS)));
     };
 
+    const submitHandler = (wrappedState, setWrappedState, actionDispatch) => {
+        return React.useCallback(e => {
+            e.preventDefault();
+            setWrappedState({ submittingForm: true });
+
+            // eslint-disable-next-line no-undef
+            const formData = new FormData();
+            for (const [key, value] of Object.entries(wrappedState)) {
+                formData.append(key, value);
+            }
+            actionDispatch(updateApiStatus(status.REQUEST_CASE_DATA))
+                .then(() => {
+                    axios.post(`/api/case/${page.params.caseId}/stage/${page.params.stageId}/data`,
+                        formData,
+                        { headers: { 'Content-Type': 'multipart/form-data' } })
+                        .then(() => {
+                            actionDispatch(updateApiStatus(status.REQUEST_CASE_DATA_SUCCESS))
+                                .then(() => actionDispatch(clearApiStatus()))
+                                .then(() => actionDispatch(updateCaseData(wrappedState)))
+                                .then(() => setWrappedState({ submittingForm: false }));
+                        })
+                        .catch(() => console.error('Failed to submit case data'));
+                });
+        }, [wrappedState]);
+    };
+
     return (
         <Fragment>
             {(caseData && Object.keys(caseData).length !== 0) &&
@@ -52,12 +77,14 @@ const TabExGratia = () => {
                         <FormEmbeddedWrapped
                             schema={{ fields: form.data }}
                             fieldData={caseData}
-                            action={types.UPDATE_CASE_ACTION_DATA}
+                            action={`/case/${page.params.caseId}/stage/${page.params.stageId}/data`}
+                            baseUrl={`/case/${page.params.caseId}/stage/${page.params.stageId}`}
+                            submitHandler={submitHandler}
                         />
                     }
                 </details>
                 <table className='govuk-table margin-left--small'>
-                    <caption className='govuk-table__caption margin-bottom--small' >Summary</caption>
+                    <caption className='govuk-table__caption margin-bottom--small'>Summary</caption>
                     <tbody className='govuk-table__body'>
                         {caseData.PaymentTypeConsolatory !== undefined && <tr className='govuk-table__cell'>
                             <th className='govuk-table__header padding-left--small govuk-!-width-one-third'>Consolatory</th>

@@ -2,9 +2,6 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Form from '../forms/form.jsx';
 import { ApplicationConsumer, Context } from '../../contexts/application.jsx';
-import status from '../../helpers/api-status';
-import axios from 'axios';
-import { clearApiStatus, updateApiStatus, updateCaseData } from '../../contexts/actions/index.jsx';
 
 /**
  * Embedded form with a wrapped state, designed to be embedded outside of workflows or pages.
@@ -22,36 +19,14 @@ const FormEmbeddedWrapped = (props) => {
         ));
     };
 
-    const submitHandler = React.useCallback(e => {
-        e.preventDefault();
-        setWrappedState({ submittingForm: true });
-
-        // eslint-disable-next-line no-undef
-        const formData = new FormData();
-        for (const [key, value] of Object.entries(formState)) {
-            formData.append(key, value);
-        }
-        dispatch(updateApiStatus(status.REQUEST_CASE_DATA))
-            .then(() => {
-                axios.post(`/api/case/${props.page.params.caseId}/stage/${props.page.params.stageId}/data`, formData, { headers: { 'Content-Type': 'multipart/form-data' } })
-                    .then(() => {
-                        dispatch(updateApiStatus(status.REQUEST_CASE_DATA_SUCCESS))
-                            .then(() => dispatch(clearApiStatus()))
-                            .then(() => dispatch(updateCaseData(formState)))
-                            .then(() => setWrappedState({ submittingForm: false }));
-                    })
-                    .catch(() => console.error('Failed to submit case data'));
-            });
-    }, [formState]);
-
     return <Form
         page={props.page}
         schema={props.schema}
         updateFormState={setWrappedState}
         data={formState}
-        action={`/case/${props.page.params.caseId}/stage/${props.page.params.stageId}/data`}
-        baseUrl={`/case/${props.page.params.caseId}/stage/${props.page.params.stageId}`}
-        submitHandler={submitHandler}
+        action={props.action}
+        baseUrl={props.baseUrl}
+        submitHandler={props.submitHandler(formState, setWrappedState, dispatch)}
         submittingForm={formState.submittingForm}
     />;
 };
@@ -60,7 +35,10 @@ FormEmbeddedWrapped.propTypes = {
     page: PropTypes.object,
     schema: PropTypes.object,
     dispatch: PropTypes.func,
-    fieldData: PropTypes.object
+    fieldData: PropTypes.object,
+    submitHandler: PropTypes.func,
+    action: PropTypes.string,
+    baseUrl: PropTypes.string
 };
 
 const FormEmbeddedWrappedWrapper = props => (
