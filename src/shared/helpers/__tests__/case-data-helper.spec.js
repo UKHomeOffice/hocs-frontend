@@ -33,10 +33,10 @@ describe('Case data helper', () => {
         expect(axios.get).toHaveBeenCalledWith('/api/case/case1234/');
         expect(mockDispatch).toHaveBeenCalledWith({
             'payload': { 'case': 'testCase' },
-            'type': 'REQUEST_CASE_DATA'
+            'type': 'UPDATE_CASE_DATA'
         });
         expect(mockDispatch).toHaveBeenCalledWith({
-            'type': 'REQUEST_CASE_DATA',
+            'type': 'UPDATE_API_STATUS',
             'payload': {
                 'status': { display: 'Case data received', level: 3, type: 'OK', timeoutPeriod: expect.any(Number) },
                 'timeStamp': expect.any(Number)
@@ -47,11 +47,11 @@ describe('Case data helper', () => {
     it('should dispatch a failure action on request failure', async() => {
         await getCaseData(badPage, mockDispatch);
 
-        expect(axios.get).toHaveBeenCalledWith('/api/case/case1235/summary');
+        expect(axios.get).toHaveBeenCalledWith('/api/case/case1235/');
         expect(mockDispatch).toHaveBeenCalledWith({
             'type': 'UPDATE_API_STATUS',
             'payload': {
-                'status': { 'display': 'Unable to fetch case summary', 'level': 0, 'type': 'ERROR', 'timeoutPeriod': expect.any(Number) },
+                'status': { 'display': 'Unable to fetch case data', 'level': 0, 'type': 'ERROR', 'timeoutPeriod': expect.any(Number) },
                 'timeStamp': expect.any(Number)
             }
         });

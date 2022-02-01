@@ -7,18 +7,6 @@ const getLogger = require('../libs/logger');
 const { infoService } = require('../clients');
 const User = require('../models/user');
 
-async function getFieldsFromInfoService(options, user) {
-    const { schemaType } = options;
-    const headers = User.createHeaders(user);
-
-    try {
-        return await infoService.get(`/schema/${schemaType}/fields`, { headers });
-    } catch (error) {
-        return { error: new Error('Error getting fields for schema')};
-    }
-
-}
-
 const getFieldsForSchema = async (req, res, next) => {
 
     const logger = getLogger(req.requestId);
@@ -26,7 +14,8 @@ const getFieldsForSchema = async (req, res, next) => {
     const { user } = req;
 
     try {
-        const response = await getFieldsFromInfoService(req.params, user);
+        const headers = User.createHeaders(user);
+        const response = await infoService.get(`/schema/${req.params.schemaType}/fields`, { headers });
         res.form = response.data;
         next();
     } catch (error) {

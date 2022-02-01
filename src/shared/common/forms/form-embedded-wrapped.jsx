@@ -13,7 +13,7 @@ import { clearApiStatus, updateApiStatus, updateCaseData } from '../../contexts/
  * @constructor
  */
 const FormEmbeddedWrapped = (props) => {
-    const [formState, setFormState] = useState(props.fieldData);
+    const [formState, setFormState] = useState( { ...props.fieldData, submittingForm: false });
     const { dispatch } = React.useContext(Context);
 
     const setWrappedState = (data) => {

@@ -1,5 +1,5 @@
 const actionService = require('../services/action');
-const { caseworkService, workflowService} = require('../clients');
+const { caseworkService, workflowService } = require('../clients');
 const User = require('../models/user');
 const { formatDate } = require('../libs/dateHelpers');
 const { logger } = require('../libs/logger');
