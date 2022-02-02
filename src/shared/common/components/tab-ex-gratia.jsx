@@ -30,7 +30,7 @@ const TabExGratia = () => {
 
     const getForm = () => {
         dispatch(updateApiStatus(status.REQUEST_FORM))
-            .then(() => axios.get('/api/schema/EX_GRATIA/fields'))
+            .then(() => axios.get('/api/schema/EX_GRATIA_TAB/fields'))
             .then(response => setForm(response))
             .then(() => dispatch(updateApiStatus(status.REQUEST_FORM_SUCCESS)));
     };
