@@ -1,20 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Interest from './interest.jsx';
 
-const renderRow = ({ label, value }) => {
-    return (
-        <tr key={label} className='govuk-table__row'>
-            <th className='govuk-table__header padding-left--small govuk-!-width-one-third'>{label}</th>
-            <td className='govuk-table__cell'>{value}</td>
-        </tr>
-    );
-};
-
-renderRow.propTypes = {
-    label: PropTypes.string.isRequired,
-    value: PropTypes.string.isRequired,
-    items: PropTypes.array.isRequired
-};
 
 const ActionSummaryInterests = ({ items: interests }) => {
 
@@ -25,20 +12,15 @@ const ActionSummaryInterests = ({ items: interests }) => {
     return (
         <>
             <h2 className='govuk-heading-m'>Interest</h2>
-            { interests.map((item, index) => (
-                <>
-                    <table className='govuk-table margin-left--small'>
-                        <caption className='govuk-table__caption margin-bottom--small'>Interest { index + 1 }</caption>
-                        <tbody className='govuk_table__body'>
-                            { item.interestedPartyTitle && renderRow({ label: 'Party', value: item.interestedPartyTitle })}
-                            { item.detailsOfInterest && renderRow({ label: 'Details', value: item.detailsOfInterest })}
-                        </tbody>
-                    </table>
-
-                </>
+            { interests.map((interest, index) => (
+                <Interest key = {index} interest = {interest}/>
             ))}
         </>
     );
+};
+
+ActionSummaryInterests.propTypes = {
+    items: PropTypes.array.isRequired
 };
 
 export default ActionSummaryInterests;

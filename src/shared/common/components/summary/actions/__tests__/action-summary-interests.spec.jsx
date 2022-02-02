@@ -1,5 +1,5 @@
 import React from 'react';
-import ActionSummaryInterests from '../summary/actions/action-summary-interests';
+import ActionSummaryInterests from '../action-summary-interests';
 
 describe('action-summary-interests.jsx', () => {
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Appeal from './appeal.jsx';
 
 const renderRow = ({ label, value }) => {
     return (
@@ -25,22 +26,8 @@ const ActionSummaryAppeals = ({ items: appeals }) => {
     return (
         <>
             <h2 className='govuk-heading-m'>Appeals</h2>
-            { appeals.map(item => (
-                <>
-                    <table className='govuk-table margin-left--small'>
-                        <caption className='govuk-table__caption margin-bottom--small'>{item.title}</caption>
-                        <tbody className='govuk_table__body'>
-                            { item.officerDirectorate && renderRow({ label: 'Directorate', value: item.officerDirectorate })}
-                            { item.officer && renderRow({ label: 'Officer Name', value: item.officer })}
-                            { item.status && renderRow({ label: 'Completed', value: item.status })}
-                            { item.dateSentRMS && renderRow({ label: 'Completion date', value: item.dateSentRMS })}
-                            { item.outcome && renderRow({ label: 'Outcome', value: item.outcome })}
-                            { item.complexCase && renderRow({ label: 'Complex case', value: item.complexCase })}
-                            { item.note && renderRow({ label: 'Details', value: item.note })}
-                        </tbody>
-                    </table>
-
-                </>
+            { appeals.map((item, index) => (
+                <Appeal key = {index} appeal = {item}/>
             ))}
         </>
     );
