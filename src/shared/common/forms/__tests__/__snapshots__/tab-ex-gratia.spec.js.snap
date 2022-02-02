@@ -92,6 +92,140 @@ Array [
 ]
 `;
 
+exports[`Form component should render form when passed 1`] = `
+Array [
+  <h2
+    class="govuk-heading-m"
+  >
+    Ex-Gratia
+  </h2>,
+  <details
+    class="govuk-details"
+  >
+    <summary
+      class="govuk-details__summary"
+    >
+      <span
+        class="govuk-details__summary-text"
+      >
+        Update Ex-Gratia details
+      </span>
+    </summary>
+  </details>,
+  <table
+    class="govuk-table margin-left--small"
+  >
+    <caption
+      class="govuk-table__caption margin-bottom--small"
+    >
+      Summary
+    </caption>
+    <tbody
+      class="govuk-table__body"
+    >
+      <tr
+        class="govuk-table__cell"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Consolatory
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          Yes
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__cell"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Ex-Gratia
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          Yes
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__cell"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Amount complainant has requested:
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          100
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__cell"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Amount requested from the business/port:
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          50
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__cell"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Offer sent to the complainant:
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          50
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__cell"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Business area/port has approved payment:
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          No
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__cell"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Complainant has accepted:
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          No
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+]
+`;
+
 exports[`Form component should render with content when passed 1`] = `
 Array [
   <h2

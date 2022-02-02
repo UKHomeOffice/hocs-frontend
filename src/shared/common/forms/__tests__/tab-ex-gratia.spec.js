@@ -16,9 +16,9 @@ jest.mock('../form-repository.jsx', () => {
 
 describe('Form component', () => {
 
-    const correspondents = [];
-    const page = {};
-    const summary = {};
+    const correspondents = [],
+        page = {},
+        summary = {};
 
     const config = {
         caseData: {
