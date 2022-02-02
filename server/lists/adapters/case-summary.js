@@ -38,6 +38,7 @@ const formatCaseActions = async (caseActions, fetchList) => await Promise.all(
         async key => {
             return {
                 title: toTitleCase(key),
+                type: key,
                 items: await actionSummaryAdapterFactory[key].call(this, caseActions, fetchList)
             };
         }

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import status from '../../helpers/api-status';
 import { updateApiStatus } from '../../contexts/actions/index.jsx';
 import updateSummary from '../../helpers/summary-helpers';
-import getActionSummary from './action-summary-factory.jsx';
+import getActionSummary from './summary/actions/action-summary-factory.jsx';
 
 
 const renderActiveStage = ({ stage, assignedTeam, assignedUser }) => {
@@ -62,7 +62,7 @@ const StageSummary = () => {
     }, [fetchCaseSummaryData]);
 
     function renderActionSummary(actions) {
-        return actions.map(actionType => getActionSummary(actionType.title, actions));
+        return actions.map(actionType => getActionSummary(actionType.type, actions));
     }
 
     return (

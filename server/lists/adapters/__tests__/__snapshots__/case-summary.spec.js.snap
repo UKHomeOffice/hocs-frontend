@@ -355,10 +355,12 @@ Object {
         },
       ],
       "title": "Appeals",
+      "type": "appeals",
     },
     Object {
       "items": null,
       "title": "Extensions",
+      "type": "extensions",
     },
   ],
   "additionalFields": Array [],

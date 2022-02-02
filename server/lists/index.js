@@ -861,6 +861,12 @@ module.exports = {
             endpoint: '/entity/list/TO_STOP_LIST',
             type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
+        },
+        BF_INTERESTED_PARTIES: {
+            client: 'INFO',
+            endpoint: '/entity/list/BF_INTERESTED_PARTIES',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
         }
     },
     clients: {
