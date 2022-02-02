@@ -318,3 +318,73 @@ Object {
   },
 }
 `;
+
+exports[`Case-view-all-stages Adapter should render checkboxes with custom label 1`] = `
+Object {
+  "data": Object {
+    "checkbox_field_1": "Test",
+    "checkbox_field_2": "Test",
+  },
+  "meta": Object {},
+  "schema": Object {
+    "defaultActionLabel": "Submit",
+    "fields": Array [
+      Object {
+        "component": "heading",
+        "props": Object {
+          "label": "Case Details",
+          "name": "case-view-heading",
+        },
+        "validation": Array [],
+      },
+      Object {
+        "component": "accordion",
+        "props": Object {
+          "name": "case-view",
+          "sections": Array [
+            Object {
+              "items": Array [
+                Object {
+                  "component": "mapped-display",
+                  "props": Object {
+                    "choices": Array [
+                      Object {
+                        "label": "Test",
+                        "value": "Test",
+                      },
+                    ],
+                    "component": "checkbox",
+                    "label": "Checkbox Field 1",
+                    "name": "checkbox_field_1",
+                  },
+                  "validation": Array [],
+                },
+                Object {
+                  "component": "mapped-display",
+                  "props": Object {
+                    "choices": Array [
+                      Object {
+                        "label": "Test",
+                        "value": "Test",
+                      },
+                    ],
+                    "component": "checkbox",
+                    "label": "Checkbox Field 1",
+                    "name": "checkbox_field_2",
+                    "showLabel": true,
+                  },
+                  "validation": Array [],
+                },
+              ],
+              "title": "STAGE_NAME",
+            },
+          ],
+        },
+        "validation": Array [],
+      },
+    ],
+    "showPrimaryAction": false,
+    "title": "TEST/1234567/18",
+  },
+}
+`;

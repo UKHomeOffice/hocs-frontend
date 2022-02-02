@@ -12,6 +12,15 @@ describe('Form MappedDisplay component', () => {
         ).toMatchSnapshot();
     });
 
+    it('should render checkbox with label if showLabel', () => {
+        const choices = [
+            { label: 'isA', value: 'true' }
+        ];
+        expect(
+            render(<MappedDisplay label="Test" component="checkbox" choices={choices} showLabel={true}/>)
+        ).toMatchSnapshot();
+    });
+
     it('should render date', () => {
         expect(
             render(<MappedDisplay label="When" component="date" value="2021-05-17"/>)

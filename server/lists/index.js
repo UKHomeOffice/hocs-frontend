@@ -549,7 +549,7 @@ module.exports = {
         },
         CASE_DOCUMENT_LIST_FINAL_RESPONSE: {
             client: 'CASEWORK',
-            endpoint: '/case/document/reference/${caseId}/?type=Final%20response',
+            endpoint: '/case/document/reference/${caseId}/?type=Final%20Response',
             adapter: documentListAdapter
         },
         // todo: this should be removed and updated to use the non tenant specific option above.
@@ -856,12 +856,18 @@ module.exports = {
             type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
         },
+        TO_STOP_LIST: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_STOP_LIST',
+            type: listService.types.DYNAMIC,
+            adapter: entityListItemsAdapter
+        },
         BF_INTERESTED_PARTIES: {
             client: 'INFO',
             endpoint: '/entity/list/BF_INTERESTED_PARTIES',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
-        },
+        }
     },
     clients: {
         CASEWORK: caseworkService,
