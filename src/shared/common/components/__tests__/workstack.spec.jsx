@@ -90,6 +90,16 @@ describe('Workstack component', () => {
                 },
                 nextCaseType: 'nextCase',
                 nextCaseReference: 'nextCaseReference'
+            },
+            {
+                caseReference: 'case9', caseUUID: 'case_uuid-nop', uuid: 'stage_uuid-450', fullName: 'Correspondent 9',
+                stageTypeDisplay: 'Stage B', assignedUserDisplay: 'User9', assignedTeamDisplay: null,
+                created: null, isActive: 'YES', stageType: 'MPAM_DRAFT',
+                data: {
+                    DueDate: '2099-01-01',
+                },
+                nextCaseType: 'nextCase',
+                nextCaseReference: 'nextCaseReference'
             }
         ],
         columns: [
