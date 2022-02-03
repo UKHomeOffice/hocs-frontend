@@ -96,6 +96,7 @@ const StageSummary = () => {
                                 <td className='govuk-table__cell'>
                                     <span>{primaryCorrespondent.fullname}</span>
                                     {primaryCorrespondent.organisation && <> <br /> <span>{primaryCorrespondent.organisation}</span> </>}
+                                    {primaryCorrespondent.telephone && <> <br /> <span>{primaryCorrespondent.telephone}</span> </>}
                                     {primaryCorrespondent.email && <> <br /> <span>{primaryCorrespondent.email}</span> </>}
                                     {primaryCorrespondent.address && <>
                                         {primaryCorrespondent.address.address1 && <> <br /> <span>{primaryCorrespondent.address.address1}</span> </>}

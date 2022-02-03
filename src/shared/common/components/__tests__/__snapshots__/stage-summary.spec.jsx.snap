@@ -185,6 +185,12 @@ Array [
           <br />
            
           <span>
+            __telephone__
+          </span>
+            
+          <br />
+           
+          <span>
             __address1__
           </span>
             
@@ -486,6 +492,12 @@ Array [
             __fullname__
           </span>
            
+          <br />
+           
+          <span>
+            __telephone__
+          </span>
+            
           <br />
            
           <span>
@@ -799,6 +811,12 @@ Array [
           <br />
            
           <span>
+            __telephone__
+          </span>
+            
+          <br />
+           
+          <span>
             __address1__
           </span>
             
@@ -1082,6 +1100,12 @@ Array [
            
           <span>
             __organisation__
+          </span>
+            
+          <br />
+           
+          <span>
+            __telephone__
           </span>
             
           <br />

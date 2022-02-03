@@ -19,7 +19,8 @@ const config = {
                 postcode: '__postcode__',
             },
             fullname: '__fullname__',
-            organisation: '__organisation__'
+            organisation: '__organisation__',
+            telephone: '__telephone__'
         },
         primaryTopic: '__primaryTopic__',
         additionalFields: [
