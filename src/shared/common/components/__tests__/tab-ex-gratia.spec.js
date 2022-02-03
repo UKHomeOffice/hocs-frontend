@@ -1,9 +1,9 @@
 import React from 'react';
-import TabExGratia from '../../components/tab-ex-gratia';
+import TabExGratia from '../tab-ex-gratia';
 import { ApplicationProvider } from '../../../contexts/application.jsx';
 
 /* eslint-disable react/display-name*/
-jest.mock('../form-repository.jsx', () => {
+jest.mock('../../forms/form-repository.jsx', () => {
     return {
         formComponentFactory: (field, { key }) => {
             return(
@@ -26,8 +26,9 @@ describe('Form component', () => {
             PaymentTypeExGratia: true,
             AmountComplainantRequested: 100,
             AmountBusinessRequested: 50,
-            OfferSentToComplainant: 50,
-            BusinessApprovedPayment: false,
+            ConsolatoryOfferSentToComplainant: 50,
+            ExGratiaOfferSentToComplainant: 50,
+            TotalOfferSentToComplainant: 100,
             ComplainantAccepted: false
         }
     };
