@@ -46,7 +46,6 @@ steps:
       registry: quay.io
       repo: quay.io/ukhomeofficedigital/hocs-frontend
       tags:
-        - build_${DRONE_BUILD_NUMBER}
         - ${DRONE_COMMIT_SHA}
         - branch-${DRONE_COMMIT_BRANCH/\//_}
     environment:
@@ -69,7 +68,6 @@ steps:
       registry: quay.io
       repo: quay.io/ukhomeofficedigital/hocs-frontend
       tags:
-        - build_${DRONE_BUILD_NUMBER}
         - ${DRONE_COMMIT_SHA}
         - latest
     environment:
@@ -106,12 +104,17 @@ environment:
   DOCKER_HOST: tcp://docker:2375
 
 steps:
+  - name: fetch and checkout
+    image: alpine/git
+    commands:
+      - git fetch --tags
+      - git checkout $${VERSION}
 
   - name: deploy to cs-dev
     image: quay.io/ukhomeofficedigital/kd:v1.16.0
     environment:
       ENVIRONMENT: cs-dev
-      VERSION: build_${DRONE_BUILD_NUMBER}
+      VERSION: "${DRONE_COMMIT_SHA}"
       KUBE_TOKEN:
         from_secret: hocs_frontend_cs_dev
       POISE_IPS:
@@ -119,6 +122,8 @@ steps:
     commands:
       - cd kube
       - ./deploy.sh
+    depends_on:
+      - fetch and checkout
     when:
       branch:
         - main
@@ -129,7 +134,7 @@ steps:
     image: quay.io/ukhomeofficedigital/kd:v1.16.0
     environment:
       ENVIRONMENT: wcs-dev
-      VERSION: build_${DRONE_BUILD_NUMBER}
+      VERSION: "${DRONE_COMMIT_SHA}"
       KUBE_TOKEN:
         from_secret: hocs_frontend_wcs_dev
       POISE_IPS:
@@ -137,6 +142,8 @@ steps:
     commands:
       - cd kube
       - ./deploy.sh
+    depends_on:
+      - fetch and checkout
     when:
       branch:
         - main
@@ -178,6 +185,7 @@ steps:
         from_secret: GITHUB_TOKEN
     depends_on:
       - wait for docker
+      - fetch and checkout
     when:
       event:
         - promote
@@ -239,6 +247,8 @@ steps:
         from_secret: POISE_IPS
       ACPTUNNEL_IPS:
         from_secret: ACPTUNNEL_IPS
+    depends_on:
+      - fetch and checkout
     when:
       event:
         - promote
@@ -258,6 +268,8 @@ steps:
         from_secret: hocs_frontend_${DRONE_DEPLOY_TO/-/_}
       POISE_IPS:
         from_secret: POISE_IPS
+    depends_on:
+      - fetch and checkout
     when:
       event:
         - promote
