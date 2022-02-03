@@ -16,9 +16,8 @@ jest.mock('../../forms/form-repository.jsx', () => {
 
 describe('Form component', () => {
 
-    const correspondents = [],
-        page = {},
-        summary = {};
+    const page = {},
+        stages = [{ type: 'test' }];
 
     const config = {
         caseData: {
@@ -37,9 +36,8 @@ describe('Form component', () => {
         const wrapper = render(
             <ApplicationProvider config={config}>
                 <TabExGratia
-                    correspondents={correspondents}
                     page={page}
-                    summary={summary}
+                    stages={stages}
                 />
             </ApplicationProvider>
         );
@@ -50,9 +48,8 @@ describe('Form component', () => {
         expect(
             render(<ApplicationProvider config={config}>
                 <TabExGratia
-                    correspondents={correspondents}
                     page={page}
-                    summary={summary}
+                    stages={stages}
                 />
             </ApplicationProvider>)
         ).toMatchSnapshot();
@@ -62,9 +59,21 @@ describe('Form component', () => {
         expect(
             render(<ApplicationProvider config={config}>
                 <TabExGratia
-                    correspondents={correspondents}
                     page={page}
-                    summary={summary}
+                    stages={stages}
+                />
+            </ApplicationProvider>)
+        ).toMatchSnapshot();
+    });
+
+    it('should not render form when passed no stages (case is therefore closed)', () => {
+        const emptyStages = [];
+
+        expect(
+            render(<ApplicationProvider config={config}>
+                <TabExGratia
+                    page={page}
+                    stages={emptyStages}
                 />
             </ApplicationProvider>)
         ).toMatchSnapshot();
@@ -83,9 +92,8 @@ describe('Form component', () => {
         expect(
             render(<ApplicationProvider config={config}>
                 <TabExGratia
-                    correspondents={correspondents}
                     page={page}
-                    summary={summary}
+                    stages={stages}
                 />
             </ApplicationProvider>)
         ).toMatchSnapshot();

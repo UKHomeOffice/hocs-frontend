@@ -7,7 +7,7 @@ import getCaseData from '../../helpers/case-data-helper';
 import axios from 'axios';
 import FormEmbeddedWrapped from '../forms/form-embedded-wrapped.jsx';
 
-const TabExGratia = () => {
+const TabExGratia = (props) => {
     const { caseData, dispatch, page } = useContext(Context);
     const [form, setForm] = useState(null);
 
@@ -66,14 +66,15 @@ const TabExGratia = () => {
             {(caseData && Object.keys(caseData).length !== 0) &&
             <Fragment>
                 <h2 className='govuk-heading-m'>Ex-Gratia</h2>
-                <details className='govuk-details'>
-                    <summary className='govuk-details__summary'>
-                        <span className='govuk-details__summary-text'>
-                            Update Ex-Gratia details
-                        </span>
-                    </summary>
+                {props.stages.length > 0 &&
+                    <details className='govuk-details'>
+                        <summary className='govuk-details__summary'>
+                            <span className='govuk-details__summary-text'>
+                                Update Ex-Gratia details
+                            </span>
+                        </summary>
 
-                    {form && form.data != null &&
+                        {form && form.data != null &&
                         <FormEmbeddedWrapped
                             schema={{ fields: form.data }}
                             fieldData={caseData}
@@ -81,8 +82,9 @@ const TabExGratia = () => {
                             baseUrl={`/case/${page.params.caseId}/stage/${page.params.stageId}`}
                             submitHandler={submitHandler}
                         />
-                    }
-                </details>
+                        }
+                    </details>
+                }
                 <table className='govuk-table margin-left--small'>
                     <caption className='govuk-table__caption margin-bottom--small'>Summary</caption>
                     <tbody className='govuk-table__body'>
@@ -127,9 +129,8 @@ const TabExGratia = () => {
 };
 
 TabExGratia.propTypes = {
-    correspondents: PropTypes.array,
     page: PropTypes.object,
-    summary: PropTypes.object
+    stages: PropTypes.array.isRequired
 };
 
 export default TabExGratia;
