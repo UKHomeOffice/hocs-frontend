@@ -250,7 +250,8 @@ describe('Case Summary Adapter', () => {
                     postcode: '__postcode__',
                 },
                 fullname: 'Test Correspondent',
-                email: 'test@test.com'
+                email: 'test@test.com',
+                telephone: '11111111111'
             },
             stageDeadlines: {
                 1: '2020-01-01',

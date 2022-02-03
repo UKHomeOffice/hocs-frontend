@@ -436,6 +436,7 @@ Object {
     },
     "email": "test@test.com",
     "fullname": "Test Correspondent",
+    "telephone": "11111111111",
   },
   "primaryTopic": "Topic A",
   "stages": Array [

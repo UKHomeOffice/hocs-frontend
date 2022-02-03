@@ -78,8 +78,8 @@ const getPrimaryTopic = (topic) => topic ? topic.label : null;
 const getPrimaryCorrespondent = correspondent => correspondent && getCorrespondentDetails(correspondent);
 
 const getCorrespondentDetails = correspondent => {
-    const { fullname, organisation, address, email } = correspondent;
-    return Object.fromEntries(Object.entries({ fullname, organisation, address, email }).filter(([_, v]) => v != null));
+    const { fullname, organisation, address, email, telephone } = correspondent;
+    return Object.fromEntries(Object.entries({ fullname, organisation, address, email, telephone }).filter(([_, v]) => v != null));
 };
 
 const getPreviousCase = previousCase => {
