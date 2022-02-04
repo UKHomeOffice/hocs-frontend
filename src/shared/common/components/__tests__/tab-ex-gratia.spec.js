@@ -66,19 +66,6 @@ describe('Form component', () => {
         ).toMatchSnapshot();
     });
 
-    it('should not render form when passed no stages (case is therefore closed)', () => {
-        const emptyStages = [];
-
-        expect(
-            render(<ApplicationProvider config={config}>
-                <TabExGratia
-                    page={page}
-                    stages={emptyStages}
-                />
-            </ApplicationProvider>)
-        ).toMatchSnapshot();
-    });
-
     it('should not render empty fields when passed', () => {
         const config = {
             caseData: {
