@@ -58,7 +58,7 @@ describe('Side bar component', () => {
         expect(WRAPPER).toMatchSnapshot();
     });
 
-    it('should render with the Ex-Gratia tab for BF', () => {
+    it('should render with the defined BF tabs', () => {
         const props = {
             summary: {
                 type: 'BF'
