@@ -28,7 +28,6 @@ const {
     caseCorrespondentsAllAdapter
 } = require('./adapters/correspondents');
 const { somuTypesAdapter, somuItemsAdapter } = require('./adapters/somu');
-// const { fieldsAdapter } = require('./adapters/fields');
 
 module.exports = {
     lists: {
