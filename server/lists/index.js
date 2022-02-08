@@ -411,12 +411,12 @@ module.exports = {
         },
         WORKFLOW_WORKSTACK: {
             client: 'CASEWORK',
-            endpoint: '/stage',
+            endpoint: '/stage/team/${teamId}',
             adapter: workstack.workflowAdapter
         },
         STAGE_WORKSTACK: {
             client: 'CASEWORK',
-            endpoint: '/stage',
+            endpoint: '/stage/team/${teamId}',
             adapter: workstack.stageAdapter
         },
         DRAFT_TEAMS: {
