@@ -307,7 +307,7 @@ const userAdapter = async (data, { fromStaticList, logger, configuration }) => {
     };
 };
 
-const teamAdapter = async (data, { fromStaticList, logger, teamId, configuration }) => {
+const teamAdapter = async (data, { fromStaticList, logger, configuration }) => {
     const workstackData = await Promise.all(data.stages
         .sort(defaultCaseSort)
         .map(bindDisplayElements(fromStaticList)));
@@ -351,7 +351,7 @@ const teamAdapter = async (data, { fromStaticList, logger, teamId, configuration
     };
 };
 
-const workflowAdapter = async (data, { fromStaticList, logger, teamId, workflowId, configuration }) => {
+const workflowAdapter = async (data, { fromStaticList, logger, workflowId, configuration }) => {
     const workstackData = await Promise.all(data.stages
         .filter(stage => stage.caseType === workflowId)
         .sort(defaultCaseSort)
@@ -394,7 +394,7 @@ const workflowAdapter = async (data, { fromStaticList, logger, teamId, workflowI
         allocateToWorkstackEndpoint: '/unallocate/'
     };
 };
-const stageAdapter = async (data, { fromStaticList, logger, teamId, workflowId, stageId, configuration }) => {
+const stageAdapter = async (data, { fromStaticList, logger, workflowId, stageId, configuration }) => {
     const workstackData = await Promise.all(data.stages
         .filter(stage => stage.caseType === workflowId && stage.stageType === stageId)
         .sort(defaultCaseSort)
