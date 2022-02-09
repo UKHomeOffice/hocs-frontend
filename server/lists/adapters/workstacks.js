@@ -69,7 +69,7 @@ const isUnallocated = user => user === null;
 const isOverdue = (configuration, deadline, lastDueDay) =>
     configuration.deadlinesEnabled &&
     deadline &&
-    deadline > lastDueDay;
+    new Date(deadline) <= lastDueDay;
 
 const returnWorkstackColumns = (configuration, workstackData) => {
     const defaultColumnConfig = 'DEFAULT';
