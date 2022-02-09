@@ -202,17 +202,6 @@ describe('Team Workstack Adapter', () => {
         const mockData = {
             stages: [
                 {
-                    teamUUID: 1,
-                    caseType: 'DEFAULT',
-                    stageType: 'A',
-                    userUUID: 1,
-                    deadline: '2200-01-01',
-                    caseReference: 'A/1234567/19',
-                    active: true,
-                    data: {},
-                    assignedTopic: mockTopic
-                },
-                {
                     teamUUID: 2,
                     caseType: 'DEFAULT',
                     stageType: 'A',
