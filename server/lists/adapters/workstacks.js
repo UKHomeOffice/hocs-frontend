@@ -66,7 +66,8 @@ const tagSort = (a, b) => {
     return sortResult;
 };
 
-const byLabel = (a, b) => a.label.localeCompare(b.label);
+const byLabel = (a, b) => (a.label < b.label ? -1 : (a.label > b.label ? 1 : 0));
+
 const isUnallocated = user => user === null;
 
 const isOverdue = (configuration, deadline) =>
