@@ -49,6 +49,9 @@ const status = {
     REQUEST_CASE_DATA: { display: 'Requesting case data', level: 1, type: 'OK', timeoutPeriod: timeout.STANDARD },
     REQUEST_CASE_DATA_SUCCESS: { display: 'Case data received', level: 3, type: 'OK', timeoutPeriod: timeout.STANDARD },
     REQUEST_CASE_DATA_FAILURE: { display: 'Unable to fetch case data', level: 0, type: 'ERROR', timeoutPeriod: timeout.ERROR },
+    UPDATE_CASE_DATA: { display: 'Updating case data', level: 1, type: 'OK', timeoutPeriod: timeout.STANDARD },
+    UPDATE_CASE_DATA_SUCCESS: { display: 'Case data updated', level: 3, type: 'OK', timeoutPeriod: timeout.STANDARD },
+    UPDATE_CASE_DATA_FAILURE: { display: 'Unable to update case data', level: 0, type: 'ERROR', timeoutPeriod: timeout.ERROR },
 };
 
 export default status;

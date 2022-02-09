@@ -45,18 +45,27 @@ const TabExGratia = (props) => {
             for (const [key, value] of Object.entries(wrappedState)) {
                 formData.append(key, value);
             }
-            actionDispatch(updateApiStatus(status.REQUEST_CASE_DATA))
+            actionDispatch(updateApiStatus(status.UPDATE_CASE_DATA))
                 .then(() => {
                     axios.post(`/api/case/${page.params.caseId}/stage/${page.params.stageId}/data`,
                         formData,
                         { headers: { 'Content-Type': 'multipart/form-data' } })
                         .then(() => {
-                            actionDispatch(updateApiStatus(status.REQUEST_CASE_DATA_SUCCESS))
-                                .then(() => actionDispatch(clearApiStatus()))
+                            actionDispatch(updateApiStatus(status.UPDATE_CASE_DATA_SUCCESS))
                                 .then(() => actionDispatch(updateCaseData(wrappedState)))
                                 .then(() => setWrappedState({ submittingForm: false }));
                         })
-                        .catch(() => console.error('Failed to submit case data'));
+                        .then(() => {
+                            actionDispatch(clearApiStatus());
+                        })
+                        .catch(() => {
+                            actionDispatch(updateApiStatus(status.UPDATE_CASE_DATA_FAILURE))
+                                .then(() => setWrappedState({ submittingForm: false }));
+                        });
+                })
+                .catch(() => {
+                    actionDispatch(updateApiStatus(status.REQUEST_CASE_DATA_FAILURE))
+                        .then(() => setWrappedState({ submittingForm: false }));
                 });
         }, [wrappedState]);
     };
