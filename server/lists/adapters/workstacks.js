@@ -307,7 +307,7 @@ const userAdapter = async (data, { fromStaticList, logger, configuration }) => {
     };
 };
 
-const teamAdapter = async (data, { fromStaticList, logger, configuration }) => {
+const teamAdapter = async (data, { fromStaticList, logger, teamId, configuration }) => {
     const workstackData = await Promise.all(data.stages
         .sort(defaultCaseSort)
         .map(bindDisplayElements(fromStaticList)));
