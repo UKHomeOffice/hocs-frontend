@@ -1,40 +1,22 @@
-const { addDays, formatDate } = require('../../libs/dateHelpers');
+const { subDays, formatDate } = require('../../libs/dateHelpers');
 
 const byCaseReference = (a, b) => {
     if (a.caseReference == null || b.caseReference == null) {
         return 0;
     }
+
     return (a.caseReference < b.caseReference ? -1 : (a.caseReference > b.caseReference ? 1 : 0));
 };
 
 const byPriority = (a, b) => {
-    if (a.data.systemCalculatedPriority == undefined || b.data.systemCalculatedPriority == undefined) {
+    if (a.data.systemCalculatedPriority === undefined || b.data.systemCalculatedPriority === undefined) {
         return 0;
-    } else {
-        var aFloat = parseFloat(a.data.systemCalculatedPriority);
-        var bFloat = parseFloat(b.data.systemCalculatedPriority);
-
-        if (aFloat == bFloat) {
-            return 0;
-        }
-        if (aFloat > bFloat) {
-            return -1;
-        }
-        return 1;
-    }
-};
-
-const defaultCaseSort = (a, b) => {
-    let sortResult = tagSort(a,b);
-
-    if (sortResult === 0) {
-        sortResult = byPriority(a, b);
     }
 
-    if (sortResult === 0) {
-        sortResult = byCaseReference(a, b);
-    }
-    return sortResult;
+    let aFloat = parseFloat(a.data.systemCalculatedPriority);
+    let bFloat = parseFloat(b.data.systemCalculatedPriority);
+
+    return (aFloat < bFloat ? 1 : (aFloat > bFloat ? -1 : 0));
 };
 
 /**
@@ -45,6 +27,7 @@ const defaultCaseSort = (a, b) => {
  * ordering.
  */
 const byTag = (a, b) => {
+
     if (a.tag.length > 0 && b.tag.length < 1) {
         return -1;
     }
@@ -66,20 +49,33 @@ const tagSort = (a, b) => {
     return sortResult;
 };
 
+const defaultCaseSort = (a, b) => {
+    let sortResult = tagSort(a,b);
+
+    if (sortResult === 0) {
+        sortResult = byPriority(a, b);
+        if (sortResult === 0) {
+            sortResult = byCaseReference(a, b);
+        }
+    }
+
+    return sortResult;
+};
+
 const byLabel = (a, b) => (a.label < b.label ? -1 : (a.label > b.label ? 1 : 0));
 
 const isUnallocated = user => user === null;
 
-const isOverdue = (configuration, deadline) =>
+const isOverdue = (configuration, deadline, lastDueDay) =>
     configuration.deadlinesEnabled &&
     deadline &&
-    addDays(deadline, 1) < Date.now();
+    deadline > lastDueDay;
 
 const returnWorkstackColumns = (configuration, workstackData) => {
     const defaultColumnConfig = 'DEFAULT';
     const caseTypeForColumnConfig = workstackData.length > 0 ? workstackData[0].caseType : defaultColumnConfig;
 
-    var getColumnsForWorkstack = configuration.workstackTypeColumns.find(
+    let getColumnsForWorkstack = configuration.workstackTypeColumns.find(
         item => item.workstackType === caseTypeForColumnConfig
     );
 
@@ -97,7 +93,7 @@ const returnTeamWorkstackColumns = (configuration, workstackData, teamId) => {
     const caseTypeForColumnConfig = workstackData.length > 0 ? workstackData[0].caseType : defaultColumnConfig;
 
     // check if we have exact match for team id (workstack specific for team)
-    var getColumnsForWorkstack = configuration.workstackTypeColumns.find(
+    let getColumnsForWorkstack = configuration.workstackTypeColumns.find(
         item => item.workstackType === teamId
     );
 
@@ -122,7 +118,7 @@ const returnMyCasesWorkstackColumns = (configuration, workstackData) => {
     const defaultColumnConfig = 'DEFAULT';
     const caseTypeForColumnConfig = workstackData.length > 0 ? workstackData[0].caseType : defaultColumnConfig;
 
-    var getColumnsForMyCases = configuration.workstackTypeColumns.find(
+    let getColumnsForMyCases = configuration.workstackTypeColumns.find(
         item => item.workstackType === (caseTypeForColumnConfig + '_MY_CASES')
     );
 
@@ -257,7 +253,6 @@ class Card {
     incrementOverdue() { this.tags.overdue++; }
     incrementUnallocated() { this.tags.allocated++; }
     incrementCount() { this.count++; }
-    getCount() { return this.count; }
 }
 
 const dashboardAdapter = async (data, { fromStaticList, logger, configuration }) => {
@@ -283,7 +278,7 @@ const dashboardAdapter = async (data, { fromStaticList, logger, configuration })
             }));
             return cards;
         }, [])
-        .sort((a, b) => (a.label && b.label) ? a.label.localeCompare(b.label) : 0);
+        .sort(byLabel);
     logger.debug('REQUEST_DASHBOARD', { users: userCard, teams: teamCards.length });
     return { user: [userCard], teams: teamCards };
 };
@@ -313,13 +308,14 @@ const teamAdapter = async (data, { fromStaticList, logger, teamId, configuration
     const workstackData = await Promise.all(data.stages
         .sort(defaultCaseSort)
         .map(bindDisplayElements(fromStaticList)));
+    const lastDay = subDays(Date.now(), 1);
     const workflowCards = workstackData
         .reduce((cards, stage) => {
             const index = cards.findIndex(({ value }) => value === stage.caseType);
             if (index >= 0) {
                 const card = cards[index];
                 card.incrementCount();
-                if (isOverdue(configuration, stage.deadline)) {
+                if (isOverdue(configuration, stage.deadline, lastDay)) {
                     card.incrementOverdue();
                 }
                 if (isUnallocated(stage.userUUID)) {
@@ -331,7 +327,7 @@ const teamAdapter = async (data, { fromStaticList, logger, teamId, configuration
                     value: stage.caseType,
                     type: 'workflow',
                     count: 1,
-                    overdue: isOverdue(configuration, stage.deadline) ? 1 : 0,
+                    overdue: isOverdue(configuration, stage.deadline, lastDay) ? 1 : 0,
                     unallocated: isUnallocated(stage.userUUID) ? 1 : 0
                 }));
             }
@@ -358,13 +354,14 @@ const workflowAdapter = async (data, { fromStaticList, logger, workflowId, confi
         .filter(stage => stage.caseType === workflowId)
         .sort(defaultCaseSort)
         .map(bindDisplayElements(fromStaticList)));
+    const lastDay = subDays(Date.now(), 1);
     const stageCards = workstackData
         .reduce((cards, stage) => {
             const index = cards.findIndex(({ value }) => value === stage.stageType);
             if (index >= 0) {
                 const card = cards[index];
                 card.incrementCount();
-                if (isOverdue(configuration, stage.deadline)) {
+                if (isOverdue(configuration, stage.deadline, lastDay)) {
                     card.incrementOverdue();
                 }
                 if (isUnallocated(stage.userUUID)) {
@@ -376,7 +373,7 @@ const workflowAdapter = async (data, { fromStaticList, logger, workflowId, confi
                     value: stage.stageType,
                     type: 'stage',
                     count: 1,
-                    overdue: isOverdue(configuration, stage.deadline) ? 1 : 0,
+                    overdue: isOverdue(configuration, stage.deadline, lastDay) ? 1 : 0,
                     unallocated: isUnallocated(stage.userUUID) ? 1 : 0
                 }));
             }

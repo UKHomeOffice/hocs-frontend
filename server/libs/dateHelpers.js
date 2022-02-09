@@ -4,6 +4,12 @@ const addDays = (dateString, days) => {
     return date;
 };
 
+const subDays = (dateString, days) => {
+    const date = new Date(dateString);
+    date.setDate(date.getDate() - days);
+    return date;
+};
+
 // Returns today's date in format (yyyy-MM-dd)
 const getUtcDateString = (date) => {
     if (date && date instanceof Date) {
@@ -40,4 +46,4 @@ const MIN_ALLOWABLE_YEAR = (new Date().getFullYear() - YEAR_RANGE);
 
 const MAX_ALLOWABLE_YEAR = (new Date().getFullYear() + YEAR_RANGE);
 
-module.exports = { addDays, getUtcDateString, formatDate, isDateTodayOrAfter, MIN_ALLOWABLE_YEAR, MAX_ALLOWABLE_YEAR };
+module.exports = { addDays, subDays, getUtcDateString, formatDate, isDateTodayOrAfter, MIN_ALLOWABLE_YEAR, MAX_ALLOWABLE_YEAR };
