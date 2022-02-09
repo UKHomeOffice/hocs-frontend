@@ -18,6 +18,7 @@ const countrySortAdapter = require('./adapters/countrySort');
 const caseNoteAdapter = require('./adapters/case-notes');
 const caseSummaryAdapter = require('./adapters/case-summary');
 const caseActionDataAdapter = require('./adapters/case-action-data');
+const caseActionLabelAdapter = require('./adapters/case-action-label');
 const caseViewAllStagesAdapter = require('./adapters/case-view-all-stages');
 const caseViewReadOnlyAdapter = require('./adapters/case-view-read-only');
 const {
@@ -39,7 +40,7 @@ module.exports = {
             client: 'INFO',
             endpoint: '/team/all',
             type: listService.types.STATIC,
-            adapter: statics.teamsAdapter
+            adapter: statics.teamsAdapterAllTeams
         },
         S_USERS: {
             client: 'INFO',
@@ -124,6 +125,12 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
+        S_BF_CONTRIB_TYPE: {
+            client: 'INFO',
+            endpoint: '/entity/list/BF_CONTRIB_TYPE',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
         S_IEDET_CSU_LIST: {
             client: 'INFO',
             endpoint: '/entity/list/IEDET_CSU_LIST',
@@ -154,52 +161,52 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
-        S_MPAM_ENQUIRY_REASONS_ALL: {
+        MPAM_ENQUIRY_REASONS_ALL: {
             client: 'INFO',
             endpoint: '/entity/list/MPAM_ENQUIRY_REASONS_ALL',
-            type: listService.types.STATIC,
+            type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
         },
-        S_MPAM_ENQUIRY_REASONS_PER: {
+        MPAM_ENQUIRY_REASONS_PER: {
             client: 'INFO',
             endpoint: '/entity/list/MPAM_ENQUIRY_REASONS_PER',
-            type: listService.types.STATIC,
+            type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
         },
-        S_MPAM_ENQUIRY_REASONS_GUI: {
+        MPAM_ENQUIRY_REASONS_GUI: {
             client: 'INFO',
             endpoint: '/entity/list/MPAM_ENQUIRY_REASONS_GUI',
-            type: listService.types.STATIC,
+            type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
         },
-        S_MPAM_ENQUIRY_REASONS_DOC: {
+        MPAM_ENQUIRY_REASONS_DOC: {
             client: 'INFO',
             endpoint: '/entity/list/MPAM_ENQUIRY_REASONS_DOC',
-            type: listService.types.STATIC,
+            type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
         },
-        S_MPAM_ENQUIRY_REASONS_TECH: {
+        MPAM_ENQUIRY_REASONS_TECH: {
             client: 'INFO',
             endpoint: '/entity/list/MPAM_ENQUIRY_REASONS_TECH',
-            type: listService.types.STATIC,
+            type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
         },
-        S_MPAM_ENQUIRY_REASONS_DET: {
+        MPAM_ENQUIRY_REASONS_DET: {
             client: 'INFO',
             endpoint: '/entity/list/MPAM_ENQUIRY_REASONS_DET',
-            type: listService.types.STATIC,
+            type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
         },
-        S_MPAM_ENQUIRY_REASONS_HMPO: {
+        MPAM_ENQUIRY_REASONS_HMPO: {
             client: 'INFO',
             endpoint: '/entity/list/MPAM_ENQUIRY_REASONS_HMPO',
-            type: listService.types.STATIC,
+            type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
         },
-        S_MPAM_ENQUIRY_REASONS_OTHER: {
+        MPAM_ENQUIRY_REASONS_OTHER: {
             client: 'INFO',
             endpoint: '/entity/list/MPAM_ENQUIRY_REASONS_OTHER',
-            type: listService.types.STATIC,
+            type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
         },
         S_MPAM_BUS_UNITS_ALL: {
@@ -211,6 +218,18 @@ module.exports = {
         MPAM_CONTRIBUTION_BUSINESS_AREAS: {
             client: 'INFO',
             endpoint: '/entity/list/MPAM_CONTRIBUTION_BUSINESS_AREAS',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_SMC_BUS_AREA: {
+            client: 'INFO',
+            endpoint: '/entity/list/SMC_BUS_AREA',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_BF_CONTRIB_BUS_AREA: {
+            client: 'INFO',
+            endpoint: '/entity/list/BF_CONTRIB_BUS_AREA',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
@@ -392,12 +411,12 @@ module.exports = {
         },
         WORKFLOW_WORKSTACK: {
             client: 'CASEWORK',
-            endpoint: '/stage',
+            endpoint: '/stage/team/${teamId}',
             adapter: workstack.workflowAdapter
         },
         STAGE_WORKSTACK: {
             client: 'CASEWORK',
-            endpoint: '/stage',
+            endpoint: '/stage/team/${teamId}',
             adapter: workstack.stageAdapter
         },
         DRAFT_TEAMS: {
@@ -503,6 +522,11 @@ module.exports = {
             endpoint: '/case/document/reference/${caseId}/?type=DRAFT',
             adapter: documentListAdapter
         },
+        CASE_DOCUMENT_LIST_TO_DRAFT: {
+            client: 'CASEWORK',
+            endpoint: '/case/document/reference/${caseId}/?type=Initial%20Draft',
+            adapter: documentListAdapter
+        },
         CASE_DOCUMENT_LIST_FOI_DRAFT: {
             client: 'CASEWORK',
             endpoint: '/case/document/reference/${caseId}/?type=Draft%20response',
@@ -513,11 +537,22 @@ module.exports = {
             endpoint: '/case/document/reference/${caseId}/?type=Initial%20response',
             adapter: documentListAdapter
         },
+        CASE_DOCUMENT_LIST_APPEAL_RESPONSE: {
+            client: 'CASEWORK',
+            endpoint: '/case/document/reference/${caseId}/?type=Appeal%20Response',
+            adapter: documentListAdapter
+        },
         CASE_DOCUMENT_LIST_ALL: {
             client: 'CASEWORK',
             endpoint: '/case/document/reference/${caseId}/',
             adapter: documentListAdapter
         },
+        CASE_DOCUMENT_LIST_FINAL_RESPONSE: {
+            client: 'CASEWORK',
+            endpoint: '/case/document/reference/${caseId}/?type=Final%20Response',
+            adapter: documentListAdapter
+        },
+        // todo: this should be removed and updated to use the non tenant specific option above.
         CASE_DOCUMENT_LIST_FOI_FINAL_RESPONSE: {
             client: 'CASEWORK',
             endpoint: '/case/document/reference/${caseId}/?type=Final%20responses',
@@ -542,6 +577,11 @@ module.exports = {
             client: 'CASEWORK',
             endpoint: '/case/${caseId}/actions',
             adapter: caseActionDataAdapter
+        },
+        CASE_ACTION_LABEL: {
+            client: 'INFO',
+            endpoint: '/actions/${actionId}/label',
+            adapter: caseActionLabelAdapter
         },
         CASE_VIEW_ALL_STAGES: {
             client: 'WORKFLOW',
@@ -588,6 +628,12 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
+        FOI_EXTENSION_REASONS: {
+            client: 'INFO',
+            endpoint: '/entity/list/FOI_EXTENSION_REASONS',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
         S_FOI_TYPES: {
             client: 'INFO',
             endpoint: '/entity/list/FOI_TYPES',
@@ -624,13 +670,204 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
+        FOI_INTERESTED_PARTIES: {
+            client: 'INFO',
+            endpoint: '/entity/list/FOI_INTERESTED_PARTIES',
+            type: listService.types.DYNAMIC,
+            adapter: entityListItemsAdapter
+        },
         S_FOI_KIMU_TEAM_MEMBERS: {
             client: 'INFO',
             endpoint: '/teams/6978176d-15e7-4a76-b833-3b0be12c0828/members',
             type: listService.types.STATIC,
             adapter: usersAdapter
         },
-
+        S_BF_CSU_LIST: {
+            client: 'INFO',
+            endpoint: '/entity/list/BF_CSU_LIST',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_TO_RECIPIENTS: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_RECIPIENTS',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_BF_BUS_AREA: {
+            client: 'INFO',
+            endpoint: '/entity/list/BF_BUS_AREA',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_BF_REGION: {
+            client: 'INFO',
+            endpoint: '/entity/list/BF_REGION',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_BF_ENQUIRY_REASON: {
+            client: 'INFO',
+            endpoint: '/entity/list/BF_ENQUIRY_REASON',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        TO_BUS_UNIT_ALL: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_BUS_UNIT_ALL',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        TO_BUSINESS_UNIT_TYPES: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_BUSINESS_UNIT_TYPES',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        TO_ENQUIRY_SUBJECTS: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_ENQUIRY_SUBJECTS',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        TO_ENQUIRY_REASONS_ALL: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_ENQUIRY_REASONS_ALL',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        TO_ENQUIRY_REASON_COMP_HAND: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_ENQUIRY_REASON_COMP_HAND',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        TO_ENQUIRY_REASON_COMP_REJ: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_ENQUIRY_REASON_COMP_REJ',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        TO_ENQUIRY_REASON_DOC: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_ENQUIRY_REASON_DOC',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        TO_ENQUIRY_REASON_GUID: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_ENQUIRY_REASON_GUID',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        TO_ENQUIRY_REASON_IM_HEALTH_SUR: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_ENQUIRY_REASON_IM_HEALTH_SUR',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        TO_ENQUIRY_REASON_PERS: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_ENQUIRY_REASON_PERS',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        TO_ENQUIRY_REASON_TECH: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_ENQUIRY_REASON_TECH',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        TO_ENQUIRY_REASON_SRU: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_ENQUIRY_REASON_SRU',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        TO_ENQUIRY_REASON_OTHER: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_ENQUIRY_REASON_OTHER',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        TO_BUS_UNIT_V_AND_C_OVERSEAS_EUROPE: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_BUS_UNIT_V_AND_C_OVERSEAS_EUROPE',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        TO_BUS_UNIT_V_AND_C_ROTW: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_BUS_UNIT_V_AND_C_ROTW',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        TO_BUS_UNIT_V_AND_C_IN_COUNTRY: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_BUS_UNIT_V_AND_C_IN_COUNTRY',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        TO_BUS_UNIT_I_AND_P: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_BUS_UNIT_I_AND_P',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        TO_BUS_UNIT_IE: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_BUS_UNIT_IE',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        TO_BUS_UNIT_E_SUPPORT: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_BUS_UNIT_E_SUPPORT',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        TO_BUS_UNIT_GRO: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_BUS_UNIT_GRO',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        TO_BUS_UNIT_SRU: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_BUS_UNIT_SRU',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        TO_BUS_UNIT_OTHER: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_BUS_UNIT_OTHER',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        TO_BUS_UNIT_RASI: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_BUS_UNIT_RASI',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        TROF_CAMPAIGNS: {
+            client: 'INFO',
+            endpoint: '/entity/list/TROF_CAMPAIGNS',
+            type: listService.types.DYNAMIC,
+            adapter: entityListItemsAdapter
+        },
+        TO_STOP_LIST: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_STOP_LIST',
+            type: listService.types.DYNAMIC,
+            adapter: entityListItemsAdapter
+        },
+        BF_INTERESTED_PARTIES: {
+            client: 'INFO',
+            endpoint: '/entity/list/BF_INTERESTED_PARTIES',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        }
     },
     clients: {
         CASEWORK: caseworkService,

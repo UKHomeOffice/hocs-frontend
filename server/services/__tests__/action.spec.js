@@ -72,7 +72,7 @@ jest.mock('../../clients', () => {
         },
         caseworkService: {
             post: (url, body) => {
-                if (url.match(/case\/.*\/stage\/.*\/action/)) {
+                if (url.match(/case\/.*\/stage\/.*\/actions\/.*/)) {
 
                     mockRequestClient(body);
                     return { data: { reference: '__test_ref__' } };
@@ -90,7 +90,7 @@ jest.mock('../../clients', () => {
             },
             put: (url, body) => {
 
-                if (url.match(/case\/.*\/stage\/.*\/action\/.*/)) {
+                if (url.match(/case\/.*\/stage\/.*\/actions\/.*/)) {
 
                     mockRequestClient(body);
                     return { data: { reference: '__test_ref__' } };
@@ -106,6 +106,15 @@ jest.mock('../../clients', () => {
             },
             delete: (url, body) => {
                 mockRequestClient(body);
+            },
+            get: (url) => {
+                mockRequestClient(url);
+
+                return {
+                    data: {
+                        caseDeadline: '2021-01-10'
+                    }
+                };
             }
         },
         infoService: {
@@ -461,13 +470,20 @@ describe('Action service', () => {
     });
 
     it('should return a callback url when "APPLY_CASE_DEADLINE_EXTENSION" action succeeds', async () => {
+        const originalNowFunc = Date.now;
+        Date.now = jest.fn(() =>
+            new Date(Date.UTC(2021, 0, 10, 12)).valueOf());
+
         const testForm = {
-            schema: {},
+            schema: {
+                fields: []
+            },
             data: {
                 caseTypeActionUuid: '__uuid__',
                 extendBy: 20,
                 extendFrom: 'ANY',
-                note: 'SOME NOTE'
+                note: 'SOME NOTE',
+                document_type: 'PIT Extension'
             },
             action: actionTypes.APPLY_CASE_DEADLINE_EXTENSION,
             next: {
@@ -495,6 +511,39 @@ describe('Action service', () => {
         expect(mockRequestClient).toHaveBeenCalledWith(expectedBody);
         expect(response).toBeDefined();
         expect(response).toHaveProperty('confirmation');
+
+        Date.now = originalNowFunc();
+    });
+
+    it('should throw an error when "APPLY_CASE_DEADLINE_EXTENSION" applied with lapsed deadline', async () => {
+        const originalNowFunc = Date.now;
+        Date.now = jest.fn(() =>
+            new Date(Date.UTC(2021, 0, 11, 12)).valueOf());
+
+        const testForm = {
+            schema: {},
+            data: {
+                caseTypeActionUuid: '__uuid__',
+                extendBy: 20,
+                extendFrom: 'ANY',
+                note: 'SOME NOTE'
+            },
+            action: actionTypes.APPLY_CASE_DEADLINE_EXTENSION,
+            next: {
+                action: 'CONFIRMATION_SUMMARY'
+            }
+        };
+
+        await expect(actionService.performAction('CASE', {
+            caseId: 1234,
+            stageId: 5678,
+            caseActionType: 'extension',
+            context: null,
+            form: testForm,
+            user: mockUser,
+        })).rejects.toThrow('Failed to perform action');
+
+        Date.now = originalNowFunc;
     });
 
     it('should return a callback when ADD_APPROVAL_REQUEST action succeeds', async () => {
@@ -550,10 +599,27 @@ describe('Action service', () => {
             data: {
                 caseTypeActionUuid: mockCaseTypeActionUuid,
                 status: 'Pending',
+                add_document: [
+                    {
+                        originalname: 'TEST_ORIGINAL_NAME',
+                        key: 'TEST_KEY',
+                    }
+                ]
             },
             action: actionTypes.ADD_CASE_APPEAL,
             next: {
                 action: 'CONFIRMATION_SUMMARY'
+            },
+            schema: {
+                fields: [
+                    {
+                        'component': 'add-document',
+                        'props': {
+                            'name': 'add_document',
+                            'label': 'Are there any documents to include?'
+                        }
+                    }
+                ]
             }
         };
 
@@ -598,11 +664,28 @@ describe('Action service', () => {
                 caseTypeActionUuid: mockCaseTypeActionUuid,
                 status: 'Pending',
                 officer: '__officer_uuid__',
-                directorate: 'SOME_DIRECTORATE'
+                directorate: 'SOME_DIRECTORATE',
+                add_document: [
+                    {
+                        originalname: 'TEST_ORIGINAL_NAME',
+                        key: 'TEST_KEY',
+                    }
+                ]
             },
             action: actionTypes.ADD_CASE_APPEAL,
             next: {
                 action: 'CONFIRMATION_SUMMARY'
+            },
+            schema: {
+                fields: [
+                    {
+                        'component': 'add-document',
+                        'props': {
+                            'name': 'add_document',
+                            'label': 'Are there any documents to include?'
+                        }
+                    }
+                ]
             }
         };
 
@@ -677,7 +760,7 @@ describe('Action service', () => {
             caseId: 1234,
             stageId: 5678,
             caseActionId: mockCaseActionId,
-            caseActionType: 'extension',
+            caseActionType: 'APPEAL',
             caseActionData: {
                 APPEAL: [{
                     id: mockCaseTypeActionUuid,

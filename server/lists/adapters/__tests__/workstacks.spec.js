@@ -1184,6 +1184,38 @@ describe('Workflow Workstack Adapter', () => {
             expect(result).toMatchSnapshot();
         });
 
+    it('should transform a stage array to a workflow workstack at MPAM_QA_CLEARANCE_REQ with ClearanceDueDate',
+        async () => {
+            const mockData = {
+                stages: [
+                    {
+                        teamUUID: 2,
+                        caseType: 'MPAM',
+                        stageType: 'MPAM_QA_CLEARANCE_REQ',
+                        userUUID: 2,
+                        deadline: '2200-01-03',
+                        caseReference: 'A/1234568/19',
+                        active: true,
+                        data: {
+                            ClearanceDueDate: '2020-12-10'
+                        }
+                    }
+                ]
+            };
+
+            const result = await stageAdapter(mockData, {
+                user: mockUser,
+                fromStaticList: mockFromStaticList,
+                logger: mockLogger,
+                teamId: 2,
+                workflowId: 'MPAM',
+                stageId: 'MPAM_QA_CLEARANCE_REQ',
+                configuration: mockConfiguration
+            });
+
+            expect(result).toMatchSnapshot();
+        });
+
     describe('Sort cases by tags', () => {
         it('Should return -1 if case a has tags and case b has no tags', () => {
             const a = {

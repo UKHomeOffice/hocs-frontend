@@ -1,0 +1,177 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`action-summary-appeals.jsx should render one completed and one pending appeal 1`] = `
+Array [
+  <h2
+    class="govuk-heading-m"
+  >
+    Appeals
+  </h2>,
+  <table
+    class="govuk-table margin-left--small"
+  >
+    <caption
+      class="govuk-table__caption margin-bottom--small"
+    >
+      Appeal Type A
+    </caption>
+    <tbody
+      class="govuk_table__body"
+    >
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Directorate
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          Directorate 2
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Officer Name
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          Officer's Name
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Completed
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          No
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+  <table
+    class="govuk-table margin-left--small"
+  >
+    <caption
+      class="govuk-table__caption margin-bottom--small"
+    >
+      Appeal Type B
+    </caption>
+    <tbody
+      class="govuk_table__body"
+    >
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Directorate
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          Directorate 2
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Officer Name
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          Officer's Name
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Completed
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          Yes
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Completion date
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          09/11/2021
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Outcome
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          Decision upheld in part
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Complex case
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          Yes
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Details
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          Some note detailing things
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+]
+`;

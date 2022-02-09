@@ -24,7 +24,7 @@ async function teamWorkstackMiddleware(req, res, next) {
 
 async function workflowWorkstackMiddleware(req, res, next) {
     try {
-        const response = await await req.listService.fetch('WORKFLOW_WORKSTACK', req.params);
+        const response = await req.listService.fetch('WORKFLOW_WORKSTACK', req.params);
         res.locals.workstack = response;
         next();
     } catch (error) {
@@ -124,7 +124,7 @@ async function allocateToTeamMember(req, res, next) {
             .map(([caseId, stageId]) => [`/case/${caseId}/stage/${stageId}/user`, { userUUID: selected_user }, {
                 headers: User.createHeaders(req.user)
             }])
-            .map(async options => await sendAllocateUserRequest(req, res, options));
+            .map(async options => sendAllocateUserRequest(req, res, options));
         await Promise.all(requests);
     }
     next();
@@ -150,7 +150,7 @@ async function moveTeam(req, res, next) {
                     { value: selected_team },
                     { headers: User.createHeaders(req.user) }
                 ])
-                .map(async options => await updateCaseDataMoveTeamRequest(req, res, options));
+                .map(async options => updateCaseDataMoveTeamRequest(req, res, options));
 
         const sendMoveTeamRequests =
             requests
@@ -159,7 +159,7 @@ async function moveTeam(req, res, next) {
                     { teamUUID: selected_team },
                     { headers: User.createHeaders(req.user) }
                 ])
-                .map(async options => await sendMoveTeamRequest(req, res, options));
+                .map(async options => sendMoveTeamRequest(req, res, options));
 
         await Promise.all([...updateCaseDataRequests, ...sendMoveTeamRequests]);
     }
@@ -179,7 +179,7 @@ async function allocateToUser(req, res, next) {
             .map(([caseId, stageId]) => [`/case/${caseId}/stage/${stageId}/user`, { userUUID: req.user.uuid }, {
                 headers: User.createHeaders(req.user)
             }])
-            .map(async options => await sendAllocateUserRequest(req, res, options));
+            .map(async options => sendAllocateUserRequest(req, res, options));
         await Promise.all(requests);
     }
     next();
@@ -220,7 +220,7 @@ async function unallocate(req, res, next) {
             .map(([caseId, stageId]) => [`/case/${caseId}/stage/${stageId}/user`, { userUUID: null }, {
                 headers: User.createHeaders(req.user)
             }])
-            .map(async options => await sendAllocateUserRequest(req, res, options));
+            .map(async options => sendAllocateUserRequest(req, res, options));
         await Promise.all(requests);
     }
     next();
