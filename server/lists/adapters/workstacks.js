@@ -37,11 +37,13 @@ const byWorkable = (stage) => {
 };
 
 const defaultCaseSort = (a, b) => {
-    let sortResult = byTag(a,b);
+    let sortResult = tagSort(a,b);
 
     if (sortResult === 0) {
         sortResult = byPriority(a, b);
-    } else if (sortResult === 0) {
+    }
+
+    if (sortResult === 0) {
         sortResult = byCaseReference(a, b);
     }
     return sortResult;
