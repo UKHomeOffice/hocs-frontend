@@ -11,7 +11,6 @@ const TabExGratia = (props) => {
     const { caseData, dispatch, page } = useContext(Context);
     const [form, setForm] = useState(null);
 
-    // update when updates are sent to the api
     const fetchCaseData = useCallback(() => {
         dispatch(updateApiStatus(status.REQUEST_CASE_DATA));
         getCaseData(page.params.caseId, dispatch);
