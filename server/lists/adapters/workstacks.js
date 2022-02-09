@@ -4,8 +4,7 @@ const byCaseReference = (a, b) => {
     if (a.caseReference == null || b.caseReference == null) {
         return 0;
     }
-
-    return a.caseReference.localeCompare(b.caseReference);
+    return (a.caseReference < b.caseReference ? -1 : (a.caseReference > b.caseReference ? 1 : 0));
 };
 
 const byPriority = (a, b) => {
