@@ -44,7 +44,7 @@ async function stageWorkstackMiddleware(req, res, next) {
 
 async function getTeamMembers(req, res, next) {
     try {
-        const response = await req.listService.fetch('USERS_IN_TEAM', req.params);
+        const response = [];//await req.listService.fetch('USERS_IN_TEAM', req.params);
         res.locals.workstack.teamMembers = response;
         next();
     } catch (error) {
