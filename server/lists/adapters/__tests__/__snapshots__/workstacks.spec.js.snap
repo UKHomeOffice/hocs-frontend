@@ -812,6 +812,45 @@ Object {
 }
 `;
 
+exports[`Workflow Workstack Adapter should transform a stage array to a workflow workstack at MPAM_QA_CLEARANCE_REQ with ClearanceDueDate 1`] = `
+Object {
+  "allocateToTeamEndpoint": "/allocate/team",
+  "allocateToUserEndpoint": "/allocate/user",
+  "allocateToWorkstackEndpoint": "/unallocate/",
+  "columns": Array [],
+  "items": Array [
+    Object {
+      "FOIRequesterDisplay": Object {},
+      "active": true,
+      "assignedTeamDisplay": "MOCK_TEAM",
+      "assignedUserDisplay": "MOCK_USER",
+      "caseReference": "A/1234568/19",
+      "caseType": "MPAM",
+      "caseTypeDisplayFull": "MOCK_CASETYPE",
+      "data": Object {
+        "ClearanceDueDate": "2020-12-10",
+      },
+      "deadline": "2200-01-03",
+      "deadlineDisplay": "03/01/2200",
+      "mpWithOwnerDisplay": Object {
+        "mp": "",
+        "owner": "MOCK_USER",
+      },
+      "primaryCorrespondentAndRefDisplay": Object {
+        "caseReference": "A/1234568/19",
+      },
+      "stageType": "MPAM_QA_CLEARANCE_REQ",
+      "stageTypeDisplay": "MOCK_STAGETYPE",
+      "stageTypeWithDueDateDisplay": "MOCK_STAGETYPE due 10/12/2020",
+      "teamUUID": 2,
+      "userUUID": 2,
+    },
+  ],
+  "label": "MOCK_STAGETYPE",
+  "teamMembers": Array [],
+}
+`;
+
 exports[`Workflow Workstack Adapter should transform a stage array to a workflow workstack schema 1`] = `
 Object {
   "allocateToTeamEndpoint": "/allocate/team",
