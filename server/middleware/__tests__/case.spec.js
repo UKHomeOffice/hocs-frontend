@@ -18,6 +18,7 @@ jest.mock('../../clients', () => ({
 }));
 
 const { caseworkService } = require('../../clients');
+const { caseDataMiddleware } = require('../case');
 
 describe('Case middleware', () => {
 
@@ -170,6 +171,56 @@ describe('Case middleware', () => {
             req.listService.fetch.mockImplementation(() => Promise.reject(mockError));
             await caseSummaryMiddleware(req, res, next);
             expect(res.locals.summary).not.toBeDefined();
+            expect(next).toHaveBeenCalled();
+            expect(next).toHaveBeenCalledWith(mockError);
+        });
+    });
+
+    describe('Case data middleware', () => {
+
+        let req = {};
+        let res = {};
+        const next = jest.fn();
+
+        beforeEach(() => {
+            req = {
+                params: {
+                    caseId: 'CASE_ID'
+                },
+                user: {
+                    id: 'test',
+                    roles: [],
+                    groups: []
+                },
+                listService: {
+                    fetch: jest.fn(async (list) => {
+                        if (list === 'CASE_DATA') {
+                            return Promise.resolve('MOCK_DATA');
+                        }
+                        return Promise.reject();
+                    })
+                }
+            };
+
+            res = {
+                status: null,
+                locals: {}
+            };
+            next.mockReset();
+        });
+
+        it('should add data to res.locals if returned from call to API', async () => {
+            await caseDataMiddleware(req, res, next);
+            expect(res.locals.caseData).toBeDefined();
+            expect(res.locals.caseData).toEqual('MOCK_DATA');
+            expect(next).toHaveBeenCalled();
+        });
+
+        it('should call next with error if call to API fails', async () => {
+            const mockError = new Error('Something went wrong');
+            req.listService.fetch.mockImplementation(() => Promise.reject(mockError));
+            await caseDataMiddleware(req, res, next);
+            expect(res.locals.caseData).not.toBeDefined();
             expect(next).toHaveBeenCalled();
             expect(next).toHaveBeenCalledWith(mockError);
         });

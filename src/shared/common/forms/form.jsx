@@ -48,7 +48,7 @@ class Form extends Component {
                                 data,
                                 errors,
                                 callback: this.props.updateFormState,
-                                baseUrl: `/case/${page.caseId}/stage/${page.stageId}`,
+                                baseUrl: this.props.baseUrl,
                                 page,
                                 caseRef: this.props.meta ? this.props.meta.caseReference : undefined,
                                 switchDirection
@@ -88,7 +88,8 @@ Form.propTypes = {
     submitHandler: PropTypes.func,
     updateFormState: PropTypes.func,
     switchDirection: PropTypes.func,
-    submittingForm: PropTypes.bool.isRequired
+    submittingForm: PropTypes.bool.isRequired,
+    baseUrl: PropTypes.string.isRequired
 };
 
 Form.defaultProps = {

@@ -116,7 +116,6 @@ function isComponentVisible(config, data) {
 
 export function formComponentFactory(field, options) {
     const { key, config, data, errors, callback, page, caseRef, switchDirection } = options;
-
     switch (field) {
         case 'radio':
             return renderFormComponent(Radio, { key, config, data, errors, callback });

@@ -21,6 +21,7 @@ const caseActionDataAdapter = require('./adapters/case-action-data');
 const caseActionLabelAdapter = require('./adapters/case-action-label');
 const caseViewAllStagesAdapter = require('./adapters/case-view-all-stages');
 const caseViewReadOnlyAdapter = require('./adapters/case-view-read-only');
+const caseDataAdapter = require('./adapters/case-data');
 const {
     caseCorrespondentAdapter,
     correspondentTypeAdapter,
@@ -572,6 +573,11 @@ module.exports = {
             client: 'CASEWORK',
             endpoint: '/case/${caseId}/summary',
             adapter: caseSummaryAdapter
+        },
+        CASE_DATA: {
+            client: 'CASEWORK',
+            endpoint: '/case/${caseId}/',
+            adapter: caseDataAdapter
         },
         CASE_ACTIONS: {
             client: 'CASEWORK',
