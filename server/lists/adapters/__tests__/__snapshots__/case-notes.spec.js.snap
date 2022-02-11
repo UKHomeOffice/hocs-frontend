@@ -186,6 +186,7 @@ Array [
       "allocationId": undefined,
       "author": "MOCK_USER",
       "body": Object {
+        "caseType": "FOI",
         "note": "Updated details of interest",
         "partyType": "__partyType_2__",
         "stage": 1,
