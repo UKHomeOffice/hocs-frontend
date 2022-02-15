@@ -161,8 +161,8 @@ const typeAdaptors = {
     APPEAL_UPDATED: ({ actionLabel }) => ({
         title: `Appeal Updated: ${actionLabel}`
     }),
-    EXTERNAL_INTEREST_CREATED: async ({ body: { partyType, interestDetails } }, _, fetchList) => {
-        const parties = await fetchList('FOI_INTERESTED_PARTIES');
+    EXTERNAL_INTEREST_CREATED: async ({ body: { caseType, partyType, interestDetails } }, _, fetchList) => {
+        const parties = await fetchList(`${caseType}_INTERESTED_PARTIES`);
         const partyLabel = parties.find(party => party.value === partyType).label;
 
         return {
@@ -170,8 +170,8 @@ const typeAdaptors = {
             note: interestDetails
         };
     },
-    EXTERNAL_INTEREST_UPDATED: async ({ body: { partyType, interestDetails } }, _, fetchList) => {
-        const parties = await fetchList('FOI_INTERESTED_PARTIES');
+    EXTERNAL_INTEREST_UPDATED: async ({ body: { caseType, partyType, interestDetails } }, _, fetchList) => {
+        const parties = await fetchList(`${caseType}_INTERESTED_PARTIES`);
         const partyLabel = parties.find(party => party.value === partyType).label;
 
         return {
