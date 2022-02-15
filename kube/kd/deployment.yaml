@@ -24,9 +24,41 @@ spec:
         role: hocs-frontend
         version: "{{.VERSION}}"
     spec:
+      initContainers:
+      - name: certs
+        image: quay.digital.homeoffice.gov.uk/ukhomeofficedigital/cfssl-sidekick:v0.0.9
+        securityContext:
+          runAsNonRoot: true
+          capabilities:
+            drop:
+              - SETUID
+              - SETGID
+        args:
+          - --certs=/certs
+          - --domain=hocs-frontend.${KUBE_NAMESPACE}.svc.cluster.local
+          - --expiry=8760h
+          - --command=/usr/local/scripts/trigger_nginx_reload.sh
+        env:
+          - name: KUBE_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+        volumeMounts:
+          - name: certs
+            mountPath: /certs
+          - name: bundle
+            mountPath: /etc/ssl/certs
+            readOnly: true
+        resources:
+          limits:
+            memory: 96Mi
+            cpu: 900m
+          requests:
+            memory: 96Mi
+            cpu: 300m
       containers:
       - name: certs
-        image: quay.digital.homeoffice.gov.uk/ukhomeofficedigital/cfssl-sidekick-jks:v0.0.9
+        image: quay.digital.homeoffice.gov.uk/ukhomeofficedigital/cfssl-sidekick:v0.0.9
         securityContext:
           runAsNonRoot: true
           capabilities:
