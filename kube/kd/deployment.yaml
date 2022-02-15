@@ -25,7 +25,7 @@ spec:
         version: "{{.VERSION}}"
     spec:
       initContainers:
-      - name: certs
+      - name: initcerts
         image: quay.digital.homeoffice.gov.uk/ukhomeofficedigital/cfssl-sidekick:v0.0.9
         securityContext:
           runAsNonRoot: true
@@ -37,7 +37,7 @@ spec:
           - --certs=/certs
           - --domain=hocs-frontend.${KUBE_NAMESPACE}.svc.cluster.local
           - --expiry=8760h
-          - --command=/usr/local/scripts/trigger_nginx_reload.sh
+          - --onetime=true
         env:
           - name: KUBE_NAMESPACE
             valueFrom:
