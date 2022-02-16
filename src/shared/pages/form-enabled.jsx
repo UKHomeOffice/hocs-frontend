@@ -232,7 +232,8 @@ function withForm(Page) {
                             errors: errors,
                             meta: form_meta,
                             page: params,
-                            submittingForm: submittingForm
+                            submittingForm: submittingForm,
+                            baseUrl: `/case/${params.caseId}/stage/${params.stageId}`
                         }}
                         action={form_schema.action || url}
                         submitHandler={this.submitHandler.bind(this)}
