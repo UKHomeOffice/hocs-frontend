@@ -320,8 +320,10 @@ spec:
             value: '300'
           - name: COUNTDOWN_FOR_SECONDS
             value: '60'
+          {{if ne .CLUSTER_NAME "acp-prod" }}
           - name: IS_NOTPROD
-            value: '{{.KUBE_IS_NOTPROD}}'
+            value: '1'
+          {{ end }}
           - name: SHOW_STACKTRACE_ON_ERROR_PAGE
             value: '{{.SHOW_ERROR_STACKTRACE}}'
         resources:
