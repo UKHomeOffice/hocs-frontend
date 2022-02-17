@@ -35,6 +35,7 @@ const ColumnRenderer = {
     CASE_LINK: 'caseLink',
     CORRESPONDENT_WITH_CASE_LINK: 'correspondentWithCaseLink',
     DATE: 'date',
+    DUE_DATE_WITH_EXTENSION_NOTE: 'dueDateWithExtensionNote',
     DATE_WARNING: 'dateWarning',
     DATE_RAW: 'dateRAW',
     DUE_DATE_WARNING: 'dueDateWarning',
@@ -47,7 +48,8 @@ const ColumnRenderer = {
     MP_WITH_OWNER: 'mpWithOwner',
     NEXT_CASE_LINK: 'nextCaseType',
     HIDDEN: 'hidden',
-    COMP_TYPE: 'compType'
+    COMP_TYPE: 'compType',
+    EXTENSION_INDICATOR : 'extensionIndicator'
 };
 
 const ColumnSortStrategy = {
@@ -276,7 +278,7 @@ class WorkstackAllocate extends Component {
         }
     }
 
-    renderRow(item, columns) {
+    renderRow(item, columns, caseActions) {
         const value = `${item.caseUUID}:${item.uuid}`;
         const checkboxKey = item.caseUUID + item.uuid;
         const handleChange = (e) => {
@@ -309,12 +311,12 @@ class WorkstackAllocate extends Component {
                         </div>
                     </div>
                 </td>}
-                {columns && columns.map(column => this.renderDataCell(column, item))}
+                {columns && columns.map(column => this.renderDataCell(column, item, caseActions))}
             </tr>
         );
     }
 
-    renderDataCell(column, row) {
+    renderDataCell(column, row, caseActions) {
         const value = this.getCellValue(row, column);
 
         switch (column.renderer) {
@@ -357,6 +359,9 @@ class WorkstackAllocate extends Component {
                 </td>;
             case ColumnRenderer.DATE:
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>{value}</td>;
+            case ColumnRenderer.DUE_DATE_WITH_EXTENSION_NOTE:
+                return <dueDateWithExtensionNote
+                    key={row.uuid + column.dataValueKey} date={'value'} actions={caseActions}/>;
             case ColumnRenderer.DATE_WARNING:
                 if (row.deadlineWarning) {
                     if (new Date(row.deadlineWarning) < new Date()) {
@@ -380,15 +385,22 @@ class WorkstackAllocate extends Component {
                     <span>{value}</span>
                 </td>;
             }
-            case ColumnRenderer.DUE_DATE_WARNING:
-                if ((row.contributions && row.contributions === 'Overdue') ||
-                    (row.data && row.data.DueDate))
-                {
-                    return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell date-warning'>
-                        <span>{value}</span>
-                    </td>;
+            case ColumnRenderer.DUE_DATE_WARNING: {
+                let overdue = false;
+                if (row.contributions && row.contributions === 'Overdue') {
+                    overdue = true;
+                } else if ((row.data && row.data.DueDate) ||
+                    (row.data && row.data.ClearanceDueDate)) {
+                    const dueDate = row.data.DueDate ? new Date(row.data.DueDate) : new Date(row.data.ClearanceDueDate);
+                    if (dueDate < new Date()) {
+                        overdue = true;
+                    }
                 }
-                return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>{value}</td>;
+                const rowClasses = overdue ? 'govuk-table__cell date-warning' : 'govuk-table__cell';
+                return <td key={row.uuid + column.dataValueKey} className={rowClasses}>
+                    <span>{value}</span>
+                </td>;
+            }
             case ColumnRenderer.INDICATOR_BLUE:
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell indicator'>
                     {value && <span title={value} className='indicator-blue'>
@@ -424,6 +436,12 @@ class WorkstackAllocate extends Component {
                 return;
             case ColumnRenderer.COMP_TYPE:
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell indicator'>{this.prettyCompTypeValue(value)}</td>;
+            case ColumnRenderer.EXTENSION_INDICATOR:
+                if (row.data && row.data.isCaseExtended && row.data.isCaseExtended === 'True') {
+                    return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>Yes</td>;
+                } else {
+                    return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>No</td>;
+                }
             default:
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>{value}</td>;
         }

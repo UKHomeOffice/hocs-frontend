@@ -1,6 +1,6 @@
 const { caseworkService } = require('../clients');
 const getLogger = require('../libs/logger');
-const { DocumentError, PermissionError } = require('../models/error');
+const { DocumentError, AuthenticationError } = require('../models/error');
 const User = require('../models/user');
 
 async function getOriginalDocument(req, res, next) {
@@ -20,7 +20,7 @@ async function getOriginalDocument(req, res, next) {
     } catch (error) {
         logger.error('REQUEST_DOCUMENT_ORIGINAL_FAILURE', { ...req.params });
         if (error.response !== undefined && error.response.status === 401) {
-            return next(new PermissionError('You are not authorised to work on this case'));
+            return next(new AuthenticationError('You are not authorised to work on this case'));
         }
         return next(new DocumentError('Unable to retrieve original document'));
     }
@@ -45,7 +45,7 @@ async function getPdfDocument(req, res, next) {
     } catch (error) {
         logger.error('REQUEST_DOCUMENT_PDF_FAILURE', { ...req.params });
         if (error.response !== undefined && error.response.status === 401) {
-            return next(new PermissionError('You are not authorised to work on this case'));
+            return next(new AuthenticationError('You are not authorised to work on this case'));
         }
         return next(new DocumentError('Unable to retrieve PDF document'));
     }
@@ -69,7 +69,7 @@ async function getPdfDocumentPreview(req, res, next) {
     } catch (error) {
         logger.error('REQUEST_DOCUMENT_PREVIEW_FAILURE', { ...req.params });
         if (error.response !== undefined && error.response.status === 401) {
-            return next(new PermissionError('You are not authorised to work on this case'));
+            return next(new AuthenticationError('You are not authorised to work on this case'));
         }
         return next(new DocumentError('Unable to retrieve document for PDF preview'));
     }
@@ -83,7 +83,7 @@ async function getDocumentList(req, res, next) {
     } catch (error) {
         res.locals.documents = [];
         if (error.response !== undefined && error.response.status === 401) {
-            return { error: new PermissionError('You are not authorised to work on this case') };
+            return { error: new AuthenticationError('You are not authorised to work on this case') };
         }
         logger.info('CASE_DOCUMENT_LIST_RETURN_EMPTY');
     } finally {

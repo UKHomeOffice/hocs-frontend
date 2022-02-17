@@ -64,7 +64,7 @@ describe('getFormForAction', () => {
         expect(next).toHaveBeenCalled();
     });
 
-    it('should add an intance of the ErrorModel on the response object when the call to the form repository fails', async () => {
+    it('should add an instance of the ErrorModel on the response object when the call to the form repository fails', async () => {
         req = {
             params: {
                 workflow: 'WORKFLOW',
@@ -215,7 +215,7 @@ describe('getFormForStage', () => {
         expect(next).toHaveBeenCalled();
     });
 
-    it('should add an intance of the ErrorModel on the response object when the call to the form repository fails', async () => {
+    it('should add an instance of the ErrorModel on the response object when the call to the form repository fails', async () => {
         req = {
             params: {
                 action: 'ACTION'
@@ -239,7 +239,7 @@ describe('getFormForStage', () => {
 
 describe('when the hydrate method is called', () => {
     const { hydrateFields } = require('../form');
-    const { FormServiceError, PermissionError } = require('../../models/error');
+    const { FormServiceError, AuthenticationError } = require('../../models/error');
     const items = ['item1', 'item2', 'item3'];
 
     describe('and the schema has a flat array of fields ', () => {
@@ -300,7 +300,7 @@ describe('when the hydrate method is called', () => {
         it('should call next with a permission error', async () => {
             await hydrateFields(req, null, next);
 
-            expect(next).toHaveBeenCalledWith(new PermissionError('You are not authorised to work on this case'));
+            expect(next).toHaveBeenCalledWith(new AuthenticationError('You are not authorised to work on this case'));
         });
     });
     describe('and the list fetch request fails with a PermissionError', () => {
@@ -319,7 +319,7 @@ describe('when the hydrate method is called', () => {
                 }
             },
             listService: {
-                fetch: () => Promise.reject(new PermissionError('PermissionError'))
+                fetch: () => Promise.reject(new AuthenticationError('PermissionError'))
             }
         };
         const next = jest.fn();
@@ -327,7 +327,7 @@ describe('when the hydrate method is called', () => {
         it('should call next with a permission error', async () => {
             await hydrateFields(req, null, next);
 
-            expect(next).toHaveBeenCalledWith(new PermissionError('PermissionError'));
+            expect(next).toHaveBeenCalledWith(new AuthenticationError('PermissionError'));
         });
     });
     describe('and the list fetch request fails with some other error', () => {
