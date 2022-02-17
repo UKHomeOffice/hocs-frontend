@@ -13,6 +13,10 @@ const caseTypeSidebarTabsFlags = {
     FOI: {
         people: false,
         foi_actions: true
+    },
+    BF: {
+        foi_actions: true,
+        ex_gratia: true
     }
 };
 

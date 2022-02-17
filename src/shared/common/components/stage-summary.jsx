@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import status from '../../helpers/api-status';
 import { updateApiStatus } from '../../contexts/actions/index.jsx';
 import updateSummary from '../../helpers/summary-helpers';
-import getActionSummary from './action-summary-factory.jsx';
+import getActionSummary from './summary/actions/action-summary-factory.jsx';
 
 
 const renderActiveStage = ({ stage, assignedTeam, assignedUser }) => {
@@ -62,7 +62,7 @@ const StageSummary = () => {
     }, [fetchCaseSummaryData]);
 
     function renderActionSummary(actions) {
-        return actions.map(actionType => getActionSummary(actionType.title, actions));
+        return actions.map(actionType => getActionSummary(actionType.type, actions));
     }
 
     return (
@@ -96,6 +96,7 @@ const StageSummary = () => {
                                 <td className='govuk-table__cell'>
                                     <span>{primaryCorrespondent.fullname}</span>
                                     {primaryCorrespondent.organisation && <> <br /> <span>{primaryCorrespondent.organisation}</span> </>}
+                                    {primaryCorrespondent.telephone && <> <br /> <span>{primaryCorrespondent.telephone}</span> </>}
                                     {primaryCorrespondent.email && <> <br /> <span>{primaryCorrespondent.email}</span> </>}
                                     {primaryCorrespondent.address && <>
                                         {primaryCorrespondent.address.address1 && <> <br /> <span>{primaryCorrespondent.address.address1}</span> </>}

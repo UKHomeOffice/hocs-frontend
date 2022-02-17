@@ -21,6 +21,7 @@ const caseActionDataAdapter = require('./adapters/case-action-data');
 const caseActionLabelAdapter = require('./adapters/case-action-label');
 const caseViewAllStagesAdapter = require('./adapters/case-view-all-stages');
 const caseViewReadOnlyAdapter = require('./adapters/case-view-read-only');
+const caseDataAdapter = require('./adapters/case-data');
 const {
     caseCorrespondentAdapter,
     correspondentTypeAdapter,
@@ -411,12 +412,12 @@ module.exports = {
         },
         WORKFLOW_WORKSTACK: {
             client: 'CASEWORK',
-            endpoint: '/stage',
+            endpoint: '/stage/team/${teamId}',
             adapter: workstack.workflowAdapter
         },
         STAGE_WORKSTACK: {
             client: 'CASEWORK',
-            endpoint: '/stage',
+            endpoint: '/stage/team/${teamId}',
             adapter: workstack.stageAdapter
         },
         DRAFT_TEAMS: {
@@ -549,7 +550,7 @@ module.exports = {
         },
         CASE_DOCUMENT_LIST_FINAL_RESPONSE: {
             client: 'CASEWORK',
-            endpoint: '/case/document/reference/${caseId}/?type=Final%20response',
+            endpoint: '/case/document/reference/${caseId}/?type=Final%20Response',
             adapter: documentListAdapter
         },
         // todo: this should be removed and updated to use the non tenant specific option above.
@@ -572,6 +573,11 @@ module.exports = {
             client: 'CASEWORK',
             endpoint: '/case/${caseId}/summary',
             adapter: caseSummaryAdapter
+        },
+        CASE_DATA: {
+            client: 'CASEWORK',
+            endpoint: '/case/${caseId}/',
+            adapter: caseDataAdapter
         },
         CASE_ACTIONS: {
             client: 'CASEWORK',
@@ -688,10 +694,10 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
-        S_TO_RECIPIENTS: {
+        TO_RECIPIENTS: {
             client: 'INFO',
             endpoint: '/entity/list/TO_RECIPIENTS',
-            type: listService.types.STATIC,
+            type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
         },
         S_BF_BUS_AREA: {
@@ -854,6 +860,18 @@ module.exports = {
             client: 'INFO',
             endpoint: '/entity/list/TROF_CAMPAIGNS',
             type: listService.types.DYNAMIC,
+            adapter: entityListItemsAdapter
+        },
+        TO_STOP_LIST: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_STOP_LIST',
+            type: listService.types.DYNAMIC,
+            adapter: entityListItemsAdapter
+        },
+        BF_INTERESTED_PARTIES: {
+            client: 'INFO',
+            endpoint: '/entity/list/BF_INTERESTED_PARTIES',
+            type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         }
     },

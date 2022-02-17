@@ -12,7 +12,7 @@ jest.mock('axios', () => ({
     })
 }));
 
-describe('FormEnabled page component', () => {
+describe('Summary helper', () => {
 
     const goodPage = 'case1234';
     const badPage = 'case1235';

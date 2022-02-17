@@ -71,8 +71,8 @@ describe('Case Notes Adapter', () => {
             { eventTime: '2019-01-05 12:00:05', type: 'ENQUIRY_REASON_EUNATIONAL_OTHERDETAILS', userName: 'User A', body: { caseNote: 'A test case note', userUUID: 1, teamUUID: 1, stage: 1 }, timelineItemUUID: '__timelineItemUUID__' },
             { eventTime: '2019-01-05 12:00:02', type: 'APPEAL_CREATED', userName: 'User A', body: { userUUID: 1, teamUUID: 1, stage: 1, caseTypeActionUuid: '__caseTypeActionUuid__'  }, timelineItemUUID: '__timelineItemUUID__' },
             { eventTime: '2019-01-05 12:00:02', type: 'APPEAL_UPDATED', userName: 'User A', body: { userUUID: 1, teamUUID: 1, stage: 1, caseTypeActionUuid: '__caseTypeActionUuid__' }, timelineItemUUID: '__timelineItemUUID__' },
-            { eventTime: '2019-01-05 12:00:02', type: 'EXTERNAL_INTEREST_CREATED', userName: 'User A', body: { userUUID: 1, teamUUID: 1, stage: 1, note: 'Details of interest', partyType: '__partyType__' }, timelineItemUUID: '__timelineItemUUID__' },
-            { eventTime: '2019-01-05 12:00:02', type: 'EXTERNAL_INTEREST_UPDATE', userName: 'User A', body: { userUUID: 1, teamUUID: 1, stage: 1, note: 'Updated details of interest', partyType: '__partyType_2__' }, timelineItemUUID: '__timelineItemUUID__' },
+            { eventTime: '2019-01-05 12:00:02', type: 'EXTERNAL_INTEREST_CREATED', userName: 'User A', body: { caseType: 'FOI', userUUID: 1, teamUUID: 1, stage: 1, note: 'Details of interest', partyType: '__partyType__' }, timelineItemUUID: '__timelineItemUUID__' },
+            { eventTime: '2019-01-05 12:00:02', type: 'EXTERNAL_INTEREST_UPDATE', userName: 'User A', body: { caseType: 'FOI', userUUID: 1, teamUUID: 1, stage: 1, note: 'Updated details of interest', partyType: '__partyType_2__' }, timelineItemUUID: '__timelineItemUUID__' },
             { eventTime: '2019-01-01 12:00:00', type: 'TEST_UNKNOWN_TYPE', userName: 'User A', timelineItemUUID: '__timelineItemUUID__' }
         ];
 
