@@ -40,7 +40,12 @@ const getRequestStatus = (dueDate, { status, decision }) => {
 
 async function composeBusinessLabel(choices, { businessArea, businessUnit }, fromStaticList) {
     const businessUnitLabel = await loadValue(businessUnit, choices, fromStaticList);
-    return businessArea ? `${businessArea} - ${businessUnitLabel}` : businessUnitLabel;
+    if (businessArea && businessUnitLabel) {
+        return `${businessArea} - ${businessUnitLabel}`;
+    }
+    else {
+        return businessArea ? businessArea : businessUnitLabel;
+    }
 }
 
 async function getApprovalsStrings(approvalsArray, choices, fromStaticList) {
@@ -177,21 +182,23 @@ const hydrateFields = async (fieldTemplate, template, fromStaticList, name) => {
     }
 };
 
-const getComponentFromField = (fieldTemplate, template) => {
-    const { name, label, choices, conditionChoices } = fieldTemplate.props;
+const getComponentFromField = ( { props, component }, template) => {
+    const { name, label, choices, conditionChoices } = props;
     const value = template.data[name];
 
-    if (fieldTemplate.component !== 'hidden') {
-        if (value) {
-            return (
-                Component('mapped-display', name)
-                    .withProp('component', fieldTemplate.component)
-                    .withProp('label', label)
-                    .withProp('choices', choices)
-                    .withProp('conditionChoices', conditionChoices)
-                    .build()
-            );
-        }
+    if (!value || component === 'hidden') {
+        return;
     }
-};
 
+    let mappedDisplayComponent = Component('mapped-display', name)
+        .withProp('component', component)
+        .withProp('label', label)
+        .withProp('choices', choices)
+        .withProp('conditionChoices', conditionChoices);
+
+    if (component === 'checkbox') {
+        mappedDisplayComponent.withProp('showLabel', props.showLabel);
+    }
+
+    return mappedDisplayComponent.build();
+};

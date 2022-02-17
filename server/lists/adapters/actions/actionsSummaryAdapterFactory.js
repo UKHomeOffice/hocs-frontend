@@ -1,6 +1,6 @@
 const appealAdaptor = require('./appealsSummaryAdapter');
 const extensionAdaptor = require('./extensionsSummaryAdapter');
-const externalInterestAdaptor = require('./externalInterestSummaryAdapter');
+const externalInterestAdaptor = require('./externalInterestsSummaryAdapter');
 
 const actionSummaryAdapterFactory = {
     appeals: appealAdaptor,

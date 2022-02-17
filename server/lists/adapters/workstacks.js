@@ -181,6 +181,8 @@ const bindDisplayElements = fromStaticList => async (stage) => {
     if (stage.stageTypeWithDueDateDisplay === undefined) {
         if (stage.data && stage.data.DueDate) {
             stage.stageTypeWithDueDateDisplay = `${stage.stageTypeDisplay} due ${formatDate(stage.data.DueDate)}`;
+        } else if (stage.data && stage.data.ClearanceDueDate) {
+            stage.stageTypeWithDueDateDisplay = `${stage.stageTypeDisplay} due ${formatDate(stage.data.ClearanceDueDate)}`;
         } else {
             stage.stageTypeWithDueDateDisplay = stage.stageTypeDisplay;
         }
@@ -361,10 +363,10 @@ const teamAdapter = async (data, { fromStaticList, logger, teamId, configuration
     };
 };
 
-const workflowAdapter = async (data, { fromStaticList, logger, teamId, workflowId, configuration }) => {
+const workflowAdapter = async (data, { fromStaticList, logger, workflowId, configuration }) => {
     const workstackData = await Promise.all(data.stages
         .filter(byWorkable)
-        .filter(stage => stage.teamUUID === teamId && stage.caseType === workflowId)
+        .filter(stage => stage.caseType === workflowId)
         .sort(defaultCaseSort)
         .sort(tagSort)
         .map(bindDisplayElements(fromStaticList)));
@@ -406,10 +408,10 @@ const workflowAdapter = async (data, { fromStaticList, logger, teamId, workflowI
         allocateToWorkstackEndpoint: '/unallocate/'
     };
 };
-const stageAdapter = async (data, { fromStaticList, logger, teamId, workflowId, stageId, configuration }) => {
+const stageAdapter = async (data, { fromStaticList, logger, workflowId, stageId, configuration }) => {
     const workstackData = await Promise.all(data.stages
         .filter(byWorkable)
-        .filter(stage => stage.teamUUID === teamId && stage.caseType === workflowId && stage.stageType === stageId)
+        .filter(stage => stage.caseType === workflowId && stage.stageType === stageId)
         .sort(defaultCaseSort)
         .map(bindDisplayElements(fromStaticList)));
     const stageDisplayName = await fromStaticList('S_STAGETYPES', stageId);

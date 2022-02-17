@@ -355,10 +355,12 @@ Object {
         },
       ],
       "title": "Appeals",
+      "type": "appeals",
     },
     Object {
       "items": null,
       "title": "Extensions",
+      "type": "extensions",
     },
   ],
   "additionalFields": Array [],
@@ -434,6 +436,7 @@ Object {
     },
     "email": "test@test.com",
     "fullname": "Test Correspondent",
+    "telephone": "11111111111",
   },
   "primaryTopic": "Topic A",
   "stages": Array [

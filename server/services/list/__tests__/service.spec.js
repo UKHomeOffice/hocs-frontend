@@ -1,6 +1,7 @@
 const listService = require('../service');
 const User = require('../../../models/user');
 const getLogger = require('../../../libs/logger');
+const { ForbiddenError, AuthenticationError } = require('../../../models/error');
 
 jest.mock('../../../libs/logger', () => jest.fn().mockReturnValue({
     debug: jest.fn(),
@@ -499,6 +500,68 @@ describe('List Service', () => {
 
             expect(result).toBeDefined();
             expect(result).toEqual(mockResponse);
+        });
+
+        it('should throw ForbiddenError on 403', async () => {
+            const lists = {
+                test: {
+                    client: 'test',
+                    endpoint: '/test/api'
+                }
+            };
+
+            const mockedFunction = jest.fn()
+                .mockImplementation(() => {
+                    const error = new Error();
+                    error.response = { status: 403 };
+                    throw error;
+                });
+
+            const clients = {
+                test: {
+                    get: mockedFunction
+                }
+            };
+
+            await listService.initialise(lists, clients);
+            const instance = listService.getInstance(mockUUID, mockUser);
+
+            try {
+                await instance.fetch('test');
+            } catch (error) {
+                expect(error).toBeInstanceOf(ForbiddenError);
+            }
+        });
+
+        it('should throw AuthenticationError on 401', async () => {
+            const lists = {
+                test: {
+                    client: 'test',
+                    endpoint: '/test/api'
+                }
+            };
+
+            const mockedFunction = jest.fn()
+                .mockImplementation(() => {
+                    const error = new Error();
+                    error.response = { status: 401 };
+                    throw error;
+                });
+
+            const clients = {
+                test: {
+                    get: mockedFunction
+                }
+            };
+
+            await listService.initialise(lists, clients);
+            const instance = listService.getInstance(mockUUID, mockUser);
+
+            try {
+                await instance.fetch('test');
+            } catch (error) {
+                expect(error).toBeInstanceOf(AuthenticationError);
+            }
         });
     });
 

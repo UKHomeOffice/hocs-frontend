@@ -1,7 +1,7 @@
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
-const { AuthenticationError } = require('../models/error');
+const { ForbiddenError } = require('../models/error');
 const getLogger = require('../libs/logger');
 
 
@@ -21,7 +21,7 @@ function authMiddleware(req, res, next) {
         return next();
     }
     logger.error('AUTH_FAILURE');
-    next(new AuthenticationError('Unauthorised', 401));
+    next(new ForbiddenError('Unauthorised', 401));
 
 }
 
@@ -99,7 +99,7 @@ function protect(permission) {
             return next();
         }
         logger.error('AUTH_FAILURE', { expected: permission, user: req.user.username, roles: req.user.roles });
-        next(new AuthenticationError('Unauthorised'));
+        next(new ForbiddenError('Unauthorised'));
     };
 }
 

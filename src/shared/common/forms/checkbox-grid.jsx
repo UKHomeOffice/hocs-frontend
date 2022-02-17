@@ -8,6 +8,25 @@ class CheckboxGrid extends Component {
         this.state = { value: this.props.value.split(',').filter(cb => cb !== '') };
     }
 
+    getChoices(props) {
+        let choices = [];
+
+        if (props.choices) {
+            choices = props.choices;
+        } else if(props.conditionChoices) {
+            const conditionChoices = props.conditionChoices;
+            for (var i = 0; i < conditionChoices.length; i++) {
+                const conditionPropertyValue = props.data[conditionChoices[i].conditionPropertyName];
+                if (conditionChoices[i].conditionPropertyValue === conditionPropertyValue) {
+                    choices = conditionChoices[i].choices;
+                    break;
+                }
+            }
+        }
+
+        return choices;
+    }
+
     stateString() {
         var value = this.state.value.join();
         return value;
@@ -42,7 +61,6 @@ class CheckboxGrid extends Component {
 
     render() {
         const {
-            choices,
             className,
             disabled,
             error,
@@ -53,6 +71,8 @@ class CheckboxGrid extends Component {
             type,
             choicesPerRow
         } = this.props;
+
+        const choices = this.getChoices(this.props);
 
         // This defines the overall style of the checkbox grid.
         const checkboxContainerStyle = {
@@ -114,6 +134,7 @@ class CheckboxGrid extends Component {
 
 CheckboxGrid.propTypes = {
     choices: PropTypes.array,
+    conditionChoices: PropTypes.array,
     className: PropTypes.string,
     disabled: PropTypes.bool,
     error: PropTypes.string,
@@ -124,11 +145,11 @@ CheckboxGrid.propTypes = {
     type: PropTypes.string,
     updateState: PropTypes.func.isRequired,
     value: PropTypes.string,
-    choicesPerRow: PropTypes.string
+    choicesPerRow: PropTypes.string,
+    data: PropTypes.object
 };
 
 CheckboxGrid.defaultProps = {
-    choices: [],
     disabled: false,
     type: 'checkbox',
     value: ''

@@ -8,6 +8,7 @@ import StageSummary from './stage-summary.jsx';
 import People from './people.jsx';
 import CaseActions from './case-actions.jsx';
 import getTabsByShortCode from '../../helpers/case-type-sidebar-tabs-flags';
+import TabExGratia from './tab-ex-gratia.jsx';
 
 class SideBar extends Component {
 
@@ -62,7 +63,7 @@ class SideBar extends Component {
         const { type } = this.props.summary;
         const caseTabs = this.resolveTabsForCaseTypeByShortCode(type);
         return (
-            <Fragment >
+            <Fragment>
                 <div className='tabs'>
                     <ul>
                         {this.renderTabButton('Documents', 'DOCUMENTS')}
@@ -70,12 +71,14 @@ class SideBar extends Component {
                         {this.renderTabButton('Timeline', 'TIMELINE')}
                         {caseTabs.people && this.renderTabButton('People', 'PEOPLE')}
                         {caseTabs.foi_actions && this.renderTabButton('Actions', 'FOI_ACTIONS')}
+                        {caseTabs.ex_gratia && this.renderTabButton('Ex-Gratia', 'EX_GRATIA')}
                     </ul>
                     {this.isActive('DOCUMENTS') && <DocumentPane />}
                     {this.isActive('SUMMARY') && <StageSummary />}
                     {this.isActive('TIMELINE') && <CaseNotes />}
                     {this.isActive('PEOPLE') && <People />}
                     {this.isActive('FOI_ACTIONS') && <CaseActions />}
+                    {this.isActive('EX_GRATIA') && <TabExGratia stages={this.props.summary.stages} />}
                 </div>
             </Fragment>
         );

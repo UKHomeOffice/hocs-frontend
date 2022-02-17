@@ -11,6 +11,17 @@ exports[`Form MappedDisplay component should render checkbox 1`] = `
 </span>
 `;
 
+exports[`Form MappedDisplay component should render checkbox with label if showLabel 1`] = `
+<span
+  class="govuk-body full-width"
+>
+  <strong>
+    Test: 
+  </strong>
+  Yes
+</span>
+`;
+
 exports[`Form MappedDisplay component should render choice option B1 value 1`] = `
 <span
   class="govuk-body full-width"

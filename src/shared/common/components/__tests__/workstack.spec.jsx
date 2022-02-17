@@ -85,7 +85,18 @@ describe('Workstack component', () => {
                 stageTypeDisplay: 'Stage B', assignedUserDisplay: 'User8', assignedTeamDisplay: null,
                 created: null, isActive: 'YES', stageType: 'FOI_DRAFT',
                 data: {
-                    DueDate: '2021-01-01'
+                    DueDate: '2021-01-01',
+                    isCaseExtended: 'True'
+                },
+                nextCaseType: 'nextCase',
+                nextCaseReference: 'nextCaseReference'
+            },
+            {
+                caseReference: 'case9', caseUUID: 'case_uuid-nop', uuid: 'stage_uuid-450', fullName: 'Correspondent 9',
+                stageTypeDisplay: 'Stage B', assignedUserDisplay: 'User9', assignedTeamDisplay: null,
+                created: null, isActive: 'YES', stageType: 'MPAM_DRAFT',
+                data: {
+                    DueDate: '2099-01-01',
                 },
                 nextCaseType: 'nextCase',
                 nextCaseReference: 'nextCaseReference'
@@ -104,7 +115,8 @@ describe('Workstack component', () => {
             { displayName: 'Contribution Due Date', dataAdapter: null, renderer: 'dueDateWarning', dataValueKey: 'dueContribution', isFilterable: true },
             { displayName: 'Due Date', dataAdapter: 'indicator', renderer: 'dueDateWarning', dataValueKey: 'DueDate', isFilterable: true },
             { displayName: 'Escalate Case', dataAdapter: null, renderer: 'nextCaseType', dataValueKey: 'nextCaseType', isFilterable: false },
-            { displayName: 'Hidden Column', dataAdapter: null, renderer: 'hidden', dataValueKey: 'nextCaseReference', isFilterable: false }
+            { displayName: 'Hidden Column', dataAdapter: null, renderer: 'hidden', dataValueKey: 'nextCaseReference', isFilterable: false },
+            { displayName: 'Extended', dataAdapter: null, renderer: 'extensionIndicator', dataValueKey: 'isCaseExtended', isFilterable: false }
         ],
         selectable: true,
         baseUrl: 'base.url',
@@ -152,7 +164,7 @@ describe('Workstack component', () => {
 
         const links = WRAPPER.find('th.govuk-link');
         // Column 13 is hidden so isn't counted
-        expect(links).toHaveLength(12);
+        expect(links).toHaveLength(13);
         links.first().simulate('click');
         expect(arraySortSpy).toHaveBeenCalledTimes(1);
         expect(WRAPPER).toMatchSnapshot();
@@ -165,7 +177,7 @@ describe('Workstack component', () => {
         arraySortSpy.mockClear();
 
         const links = WRAPPER.find('th.govuk-link');
-        expect(links).toHaveLength(12);
+        expect(links).toHaveLength(13);
         links.first().simulate('click');
         links.first().simulate('click');
         expect(arraySortSpy).toHaveBeenCalledTimes(2);
@@ -213,7 +225,7 @@ describe('Workstack component', () => {
         const WRAPPER = mount(<Router><WorkstackAllocate track={MOCK_TRACK} /></Router>);
 
         const links = WRAPPER.find('th.govuk-link');
-        expect(links).toHaveLength(11);
+        expect(links).toHaveLength(12);
 
         expect(WRAPPER).toBeDefined();
         expect(WRAPPER).toMatchSnapshot();
