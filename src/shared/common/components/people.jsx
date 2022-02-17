@@ -58,6 +58,12 @@ class People extends Component {
                             <td className='govuk-table__cell'>{person.fullname}</td>
                         </tr>
                         }
+                        {person.organisation &&
+                        <tr className='govuk-table__row'>
+                            <th className='govuk-table__header padding-left--small govuk-!-width-one-third'>Organisation</th>
+                            <td className='govuk-table__cell'>{person.organisation}</td>
+                        </tr>
+                        }
                         {person.address.address1 &&
                         <tr className='govuk-table__cell'>
                             <th className='govuk-table__header padding-left--small govuk-!-width-one-third'>Address</th>

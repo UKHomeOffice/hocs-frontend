@@ -25,6 +25,8 @@ const validationErrors = {
     isBeforeMaxYear: label => `${label} must be before ${MAX_ALLOWABLE_YEAR}`,
     isAfterMinYear: label => `${label} must be after ${MIN_ALLOWABLE_YEAR}`,
     isValidDay: label => `${label} must contain a real day`,
+    isValidWithinGivenDays: (label, days) => `${label} must be within the next ${days} days.`,
+    isValidWithinPastGivenDays: (label, days) => `${label} must be within the last ${days} days.`,
 };
 
 const approvalsReducer = ({ approved, rejected, cancelled, outstanding }, value) => {
@@ -208,6 +210,16 @@ const validators = {
         }
         return null;
     },
+    requiredIfValueSet: ({ label, value, message, props, data }) => {
+        if(data[props.conditionPropertyName] !== props.conditionPropertyValue) {
+            return null;
+        }
+
+        if (!value || value === '') {
+            return (message || validationErrors.required(label));
+        }
+        return null;
+    },
     alphanumeric: ({ label, value, message }) => {
         const format = /^[a-z0-9]+$/i;
         if (value && !format.test(value)) {
@@ -280,6 +292,22 @@ const validators = {
             }
         }
         return message || validationErrors.oneOf();
+    },
+    isValidWithinGivenDays({ label, value, message, props: { days } }) {
+        let limitDate = new Date();
+        limitDate.setDate(limitDate.getDate() + parseInt(days));
+        if (new Date(value).valueOf() >= limitDate.valueOf()) {
+            return message || validationErrors.isValidWithinGivenDays(label, days);
+        }
+        return null;
+    },
+    isValidWithinPastGivenDays({ label, value, message, props: { days } }) {
+        const limitDate = new Date();
+        limitDate.setDate(limitDate.getDate() - parseInt(days));
+        if (new Date(value).valueOf() <= limitDate.valueOf()) {
+            return message || validationErrors.isValidWithinPastGivenDays(label, days);
+        }
+        return null;
     }
 };
 
@@ -534,9 +562,9 @@ function validationMiddleware(req, res, next) {
                         }
                     }
                     else {
-                        const { type, message } = validator;
+                        const { type, message, props } = validator;
                         if (Object.prototype.hasOwnProperty.call(validators, type)) {
-                            const validationError = validators[type].call(this, { label, value, message });
+                            const validationError = validators[type].call(this, { label, value, message, props, data });
 
                             if (component === 'radio') {
                                 validateConditionalRadioContentIfExists.call(

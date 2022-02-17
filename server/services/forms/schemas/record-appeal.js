@@ -40,7 +40,6 @@ function buildOfficerChoices(appealTypeArray) {
 
 module.exports = async options => {
 
-    const { caseId, stageId } = options;
     const { APPEAL } = options.caseActionData;
 
     const appealTypeChoices = buildAppealTypeChoices(APPEAL);
@@ -100,16 +99,19 @@ module.exports = async options => {
                 .withProp('label', 'Has this been completed?')
                 .build()
         )
+        .withField(
+            Component('hidden', 'document_type')
+                .withProp('label', 'doc type')
+                .build()
+        )
         .withData({
-            status: 'Pending'
+            status: 'Pending',
+            document_type: 'Appeal Response'
         })
         .withSecondaryAction(
-            Component('button')
-                .withProp('label', 'Cancel')
-                .withProp('className', 'govuk-!-margin-left-1 govuk-button--secondary')
-                .withProp('preventDefault', 'false')
-                .withProp('action',
-                    `/case/${caseId}/stage/${stageId}`)
+            Component('backlink')
+                .withProp('label', 'Back')
+                .withProp('action', `/case/${options.caseId}/stage/${options.stageId}/?tab=FOI_ACTIONS`)
                 .build()
         )
         .withPrimaryActionLabel('Add Appeal')

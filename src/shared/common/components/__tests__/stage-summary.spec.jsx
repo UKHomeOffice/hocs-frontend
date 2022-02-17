@@ -18,7 +18,9 @@ const config = {
                 country: '__country__',
                 postcode: '__postcode__',
             },
-            fullname: '__fullname__'
+            fullname: '__fullname__',
+            organisation: '__organisation__',
+            telephone: '__telephone__'
         },
         primaryTopic: '__primaryTopic__',
         additionalFields: [
@@ -84,6 +86,20 @@ describe('Stage summary component', () => {
     it('should not show the empty address lines', () => {
         config.summary.primaryCorrespondent.address.address2 = undefined;
         config.summary.primaryCorrespondent.address.address3 = undefined;
+
+        const wrapper = render(
+            <ApplicationProvider config={config}>
+                <BrowserRouter>
+                    <Summary/>
+                </BrowserRouter>
+            </ApplicationProvider>
+        );
+        expect(wrapper).toBeDefined();
+        expect(wrapper).toMatchSnapshot();
+    });
+
+    it('should not show the empty organisation', () => {
+        config.summary.primaryCorrespondent.organisation = undefined;
 
         const wrapper = render(
             <ApplicationProvider config={config}>

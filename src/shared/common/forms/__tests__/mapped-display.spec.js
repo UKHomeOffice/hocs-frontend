@@ -12,6 +12,15 @@ describe('Form MappedDisplay component', () => {
         ).toMatchSnapshot();
     });
 
+    it('should render checkbox with label if showLabel', () => {
+        const choices = [
+            { label: 'isA', value: 'true' }
+        ];
+        expect(
+            render(<MappedDisplay label="Test" component="checkbox" choices={choices} showLabel={true}/>)
+        ).toMatchSnapshot();
+    });
+
     it('should render date', () => {
         expect(
             render(<MappedDisplay label="When" component="date" value="2021-05-17"/>)
@@ -31,6 +40,18 @@ describe('Form MappedDisplay component', () => {
     it('should render text', () => {
         expect(
             render(<MappedDisplay label="Company Name" component="text" value="Waller Porter Traders"/>)
+        ).toMatchSnapshot();
+    });
+
+    it('should render choice option B1 value', () => {
+
+        const choices = [
+            { label: 'A Value', value: 'A', options: [{ label: 'A Option 1', value: 'A1' } ,{ label: 'A Option 2', value: 'A2' }] },
+            { label: 'B Value', value: 'B', options: [{ label: 'B Option 1', value: 'B1' } ,{ label: 'B Option 2', value: 'B2' }] }
+
+        ];
+        expect(
+            render(<MappedDisplay label="Field Label" component="mapped-display" value="B1" choices={choices} />)
         ).toMatchSnapshot();
     });
 });

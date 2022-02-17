@@ -116,7 +116,6 @@ function isComponentVisible(config, data) {
 
 export function formComponentFactory(field, options) {
     const { key, config, data, errors, callback, page, caseRef, switchDirection } = options;
-
     switch (field) {
         case 'radio':
             return renderFormComponent(Radio, { key, config, data, errors, callback });
@@ -139,7 +138,7 @@ export function formComponentFactory(field, options) {
         case 'button':
             return renderFormComponent(Button, { key, config });
         case 'link':
-            return renderFormComponent(Link, { key, config });
+            return renderFormComponent(Link, { key, data, config });
         case 'add-document':
             return renderFormComponent(AddDocument, { key, config, errors, callback });
         case 'entity-list':

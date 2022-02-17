@@ -6,7 +6,7 @@ const {
     REMOVE_CORRESPONDENT, ADD_TOPIC, REMOVE_TOPIC, CREATE_CASE, CREATE_AND_ALLOCATE_CASE, BULK_CREATE_CASE,
     ADD_DOCUMENT, REMOVE_DOCUMENT, MANAGE_DOCUMENTS, MANAGE_PEOPLE, ADD_CONTRIBUTION, ADD_ADDITIONAL_CONTRIBUTION,
     EDIT_CONTRIBUTION, APPLY_CASE_DEADLINE_EXTENSION, CONFIRMATION_SUMMARY, ADD_CASE_APPEAL, EDIT_CASE_APPEAL,
-    ADD_APPROVAL_REQUEST, EDIT_APPROVAL_REQUEST
+    ADD_APPROVAL_REQUEST, EDIT_APPROVAL_REQUEST, RECORD_INTEREST, UPDATE_INTEREST, ADD_APPEAL_DOCUMENT
 } = require('../actions/types');
 
 const mpamContributionsRequest = {
@@ -48,6 +48,24 @@ const smcBusinessContributionsRequest = {
     showContributionAmount: false
 };
 
+const bfBusinessContributionsRequest = {
+    showBusinessUnits: false,
+    primaryChoiceLabel: 'Business Area',
+    primaryChoiceList: 'S_BF_CONTRIB_BUS_AREA',
+    showContributionAmount: false
+};
+
+const toContributionsRequest = {
+    showBusinessUnits: true,
+    primaryChoiceLabel: 'Business Area',
+    primaryChoiceList: 'MPAM_CONTRIBUTION_BUSINESS_AREAS'
+};
+
+const bfComplainantContributionsRequest = {
+    showBusinessUnits: false,
+    primaryChoiceLabel: 'Contributions Type',
+    primaryChoiceList: 'S_BF_CONTRIB_TYPE'
+};
 
 const formDefinitions = {
     ACTION: {
@@ -135,7 +153,21 @@ const formDefinitions = {
                     next: {
                         action: 'CONFIRMATION_SUMMARY'
                     }
-                }
+                },
+                BF: {
+                    builder: formRepository.addDocument,
+                    action: CREATE_CASE,
+                    next: {
+                        action: 'CONFIRMATION_SUMMARY'
+                    }
+                },
+                TO: {
+                    builder: formRepository.addDocument,
+                    action: CREATE_CASE,
+                    next: {
+                        action: 'CONFIRMATION_SUMMARY'
+                    }
+                },
             }
         },
         TEST: {
@@ -155,6 +187,13 @@ const formDefinitions = {
             },
             DOCUMENT: {
                 COMP: {
+                    builder: formRepository.bulkAddDocument,
+                    action: BULK_CREATE_CASE,
+                    next: {
+                        action: 'CONFIRMATION_SUMMARY'
+                    }
+                },
+                COMP2: {
                     builder: formRepository.bulkAddDocument,
                     action: BULK_CREATE_CASE,
                     next: {
@@ -237,6 +276,13 @@ const formDefinitions = {
                         action: CONFIRMATION_SUMMARY
                     }
                 },
+                ADD_DOCUMENT: {
+                    builder: formRepository.addAppealDocument,
+                    action: ADD_APPEAL_DOCUMENT,
+                    next: {
+                        action: CONFIRMATION_SUMMARY
+                    }
+                },
                 UPDATE: {
                     builder: formRepository.updateAppealFoi,
                     action: EDIT_CASE_APPEAL,
@@ -245,6 +291,22 @@ const formDefinitions = {
                     }
                 }
             },
+            RECORD_INTEREST: {
+                ADD: {
+                    builder: formRepository.recordInterest,
+                    action: RECORD_INTEREST,
+                    next: {
+                        action: CONFIRMATION_SUMMARY
+                    }
+                },
+                UPDATE: {
+                    builder: formRepository.updateInterest,
+                    action: UPDATE_INTEREST,
+                    next: {
+                        action: CONFIRMATION_SUMMARY
+                    }
+                }
+            }
         },
         DOCUMENT: {
             ADD: {
@@ -359,6 +421,32 @@ const formDefinitions = {
                     action: EDIT_CONTRIBUTION
                 }
             },
+            TO: {
+                ADDREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    action: ADD_CONTRIBUTION,
+                    customConfig: toContributionsRequest
+                },
+                ADDADDITIONALREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    action: ADD_ADDITIONAL_CONTRIBUTION,
+                    customConfig: toContributionsRequest
+                },
+                EDITREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    action: EDIT_CONTRIBUTION,
+                    customConfig: toContributionsRequest
+                },
+                VIEWREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    customConfig: toContributionsRequest
+                },
+                EDIT: {
+                    builder: formRepository.contributionFulfillment,
+                    action: EDIT_CONTRIBUTION,
+                    customConfig: toContributionsRequest
+                }
+            },
         },
         APPROVAL_REQS: {
             FOI: {
@@ -381,6 +469,27 @@ const formDefinitions = {
         },
         COMPLAINANT_CONTRIB: {
             COMP: {
+                ADDREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    action: ADD_CONTRIBUTION,
+                    customConfig: compComplainantContributionsRequest
+                },
+                EDITREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    action: EDIT_CONTRIBUTION,
+                    customConfig: compComplainantContributionsRequest
+                },
+                VIEWREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    customConfig: compComplainantContributionsRequest
+                },
+                EDIT: {
+                    builder: formRepository.contributionFulfillment,
+                    action: EDIT_CONTRIBUTION,
+                    customConfig: compComplainantContributionsRequest
+                }
+            },
+            COMP2: {
                 ADDREQUEST: {
                     builder: formRepository.contributionRequest,
                     action: ADD_CONTRIBUTION,
@@ -423,10 +532,73 @@ const formDefinitions = {
                     action: EDIT_CONTRIBUTION,
                     customConfig: compBusinessContributionsRequest
                 }
+            },
+            COMP2: {
+                ADDREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    action: ADD_CONTRIBUTION,
+                    customConfig: compBusinessContributionsRequest
+                },
+                EDITREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    action: EDIT_CONTRIBUTION,
+                    customConfig: compBusinessContributionsRequest
+                },
+                VIEWREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    customConfig: compBusinessContributionsRequest
+                },
+                EDIT: {
+                    builder: formRepository.contributionFulfillment,
+                    action: EDIT_CONTRIBUTION,
+                    customConfig: compBusinessContributionsRequest
+                }
+            },
+            BF: {
+                ADDREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    action: ADD_CONTRIBUTION,
+                    customConfig: bfBusinessContributionsRequest
+                },
+                EDITREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    action: EDIT_CONTRIBUTION,
+                    customConfig: bfBusinessContributionsRequest
+                },
+                VIEWREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    customConfig: bfBusinessContributionsRequest
+                },
+                EDIT: {
+                    builder: formRepository.contributionFulfillment,
+                    action: EDIT_CONTRIBUTION,
+                    customConfig: bfBusinessContributionsRequest
+                }
             }
         },
         EXGRATIA_BUS_CONTRIB: {
             COMP: {
+                ADDREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    action: ADD_CONTRIBUTION,
+                    customConfig: exgratiaBusinessContributionsRequest
+                },
+                EDITREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    action: EDIT_CONTRIBUTION,
+                    customConfig: exgratiaBusinessContributionsRequest
+                },
+                VIEWREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    customConfig: exgratiaBusinessContributionsRequest
+                },
+                EDIT: {
+                    builder: formRepository.contributionFulfillment,
+                    action: EDIT_CONTRIBUTION,
+                    customConfig: exgratiaBusinessContributionsRequest
+                }
+            },
+            COMP2: {
                 ADDREQUEST: {
                     builder: formRepository.contributionRequest,
                     action: ADD_CONTRIBUTION,
@@ -508,6 +680,29 @@ const formDefinitions = {
                     builder: formRepository.contributionFulfillment,
                     action: EDIT_CONTRIBUTION,
                     customConfig: smcBusinessContributionsRequest
+                }
+            }
+        },
+        BF_CONTRIB: {
+            BF: {
+                ADDREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    action: ADD_CONTRIBUTION,
+                    customConfig: bfComplainantContributionsRequest
+                },
+                EDITREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    action: EDIT_CONTRIBUTION,
+                    customConfig: bfComplainantContributionsRequest
+                },
+                VIEWREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    customConfig: bfComplainantContributionsRequest
+                },
+                EDIT: {
+                    builder: formRepository.contributionFulfillment,
+                    action: EDIT_CONTRIBUTION,
+                    customConfig: bfComplainantContributionsRequest
                 }
             }
         }

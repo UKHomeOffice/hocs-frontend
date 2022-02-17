@@ -25,7 +25,7 @@ class EntityList extends Component {
 
     loadValue(value, choices) {
         for (let i = 0; i < choices.length; ++i) {
-            if (choices.value === value) {
+            if (choices[i].value === value) {
                 return value;
             }
         }

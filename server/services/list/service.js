@@ -2,7 +2,7 @@ const listType = require('./types');
 const { createRepository } = require('./repository');
 const getLogger = require('../../libs/logger');
 const User = require('../../models/user');
-const { PermissionError } = require('../../models/error');
+const { AuthenticationError, ForbiddenError } = require('../../models/error');
 const scheduleListRefresh = require('./scheduler');
 
 const configureEndpoint = (endpoint, data, baseUrl = '') => {
@@ -132,7 +132,9 @@ const getInstance = (requestId, user) => {
                         if (error.response.status === 404 && defaultValue) {
                             return defaultValue;
                         } else if (error.response.status === 401) {
-                            throw new PermissionError('You are not authorised to work on this case');
+                            throw new AuthenticationError('You do not have permission to view this page.');
+                        } else if (error.response.status === 403) {
+                            throw new ForbiddenError('You are not authorised to view this page.');
                         }
                     }
                     throw new Error('Failed to request list');
@@ -154,7 +156,7 @@ const getInstance = (requestId, user) => {
                 throw new Error('List not implemented');
             }
         } catch (error) {
-            if (error instanceof PermissionError) {
+            if (error instanceof AuthenticationError || error instanceof ForbiddenError) {
                 throw error;
             }
             logger.error('FETCH_LIST_FAILURE', { list: listId, message: error.message, stack: error.stack });

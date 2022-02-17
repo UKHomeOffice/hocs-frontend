@@ -9,6 +9,7 @@ const correspondents = [
         'type': 'CONSTITUENT',
         'caseUUID': 'CASE_UUID_1',
         'fullname': 'some_name',
+        'organisation': 'Organisation 1',
         'address': {
             'postcode': 'WQ1 1PQ',
             'address1': 'a building',
@@ -28,6 +29,7 @@ const correspondents = [
         'type': 'MEMBER',
         'caseUUID': 'CASE_UUID_2',
         'fullname': 'fname lname',
+        'organisation': 'Organisation 2',
         'address': {
             'postcode': '',
             'address1': '',
@@ -47,6 +49,7 @@ const correspondents = [
         'type': 'APPLICANT',
         'caseUUID': 'CASE_UUID_3',
         'fullname': 'my name',
+        'organisation': 'Organisation 3',
         'address': {
             'postcode': 'ZR1 3PL',
             'address1': 'some house',
@@ -67,6 +70,7 @@ const correspondents = [
         'typeDisplayName': 'Applicant Test Case',
         'caseUUID': 'CASE_UUID_4',
         'fullname': 'my name',
+        'organisation': 'Organisation 4',
         'address': {
             'postcode': 'ZR1 3PL',
             'address1': 'some house',
@@ -87,6 +91,7 @@ const correspondents = [
         'typeDisplayName': 'Applicant Test Case',
         'caseUUID': 'CASE_UUID_5',
         'fullname': 'my name',
+        'organisation': 'Organisation 5',
         'address': {
             'postcode': 'ZR1 3PL',
             'address1': 'some house',

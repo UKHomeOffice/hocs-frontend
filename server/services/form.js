@@ -2,7 +2,7 @@ const formRepository = require('./forms/index');
 const listService = require('./list/service');
 const { workflowService, caseworkService } = require('../clients');
 const getLogger = require('../libs/logger');
-const { FormServiceError, PermissionError } = require('../models/error');
+const { FormServiceError, AuthenticationError } = require('../models/error');
 const User = require('../models/user');
 const FormBuilder = require('./forms/form-builder');
 const { Component } = require('./forms/component-builder');
@@ -27,7 +27,7 @@ async function getFormSchemaFromWorkflowService(requestId, options, user) {
                 try {
                     return { form: await returnReadOnlyCaseViewForm(requestId, user, caseId) };
                 } catch (error) {
-                    return { error: new PermissionError('You are not authorised to work on this case') };
+                    return { error: new AuthenticationError('You are not authorised to work on this case') };
                 }
             case 403:
                 // handle not allocated
@@ -145,11 +145,7 @@ async function hydrateField(field, req) {
             const somuItem = await req.listService.fetch('CASE_SOMU_ITEM', { ...req.params, somuTypeId: somuTypeItem.uuid });
             field.props.somuItems = somuItem;
         } else if (child && child.props && child.props.choices && typeof child.props.choices === 'string') {
-            if (field.component === 'review-field-parent-topic' && field.props.child.props.choices === 'TOPICS_FOI'){
-                field.props.child.props.choices = await req.listService.fetch('CASE_TOPICS', req.params);
-            } else {
-                field.props.child.props.choices = await req.listService.fetch(child.props.choices, req.params);
-            }
+            field.props.child.props.choices = await req.listService.fetch(child.props.choices, req.params);
         }
 
     }
@@ -167,11 +163,11 @@ const hydrateFields = async (req, res, next) => {
         try {
             await Promise.all(requests);
         } catch (error) {
-            if (error instanceof PermissionError) {
+            if (error instanceof AuthenticationError) {
                 return next(error);
             }
             if (error.response !== undefined && error.response.status === 401) {
-                return next(new PermissionError('You are not authorised to work on this case'));
+                return next(new AuthenticationError('You are not authorised to work on this case'));
             }
             return next(new FormServiceError('Failed to fetch form'));
         }
@@ -241,7 +237,7 @@ const getFormForAction = async (req, res, next) => {
     } catch (error) {
         logger.error('ACTION_FORM_FAILURE', { message: error.message, stack: error.stack });
         if (error.response !== undefined && error.response.status === 401) {
-            return next(new PermissionError('You are not authorised to work on this case'));
+            return next(new AuthenticationError('You are not authorised to work on this case'));
         }
         return next(new FormServiceError('Failed to fetch form'));
     }
@@ -262,7 +258,7 @@ const getFormForCase = async (req, res, next) => {
     } catch (error) {
         logger.error('CASE_FORM_FAILURE', { message: error.message, stack: error.stack });
         if (error.response !== undefined && error.response.status === 401) {
-            return next(new PermissionError('You are not authorised to work on this case'));
+            return next(new AuthenticationError('You are not authorised to work on this case'));
         }
         return next(new FormServiceError('Failed to fetch form'));
     }
@@ -285,7 +281,7 @@ const getFormForStage = async (req, res, next) => {
     } catch (error) {
         logger.error('WORKFLOW_FORM_FAILURE', { message: error.message, stack: error.stack });
         if (error.response !== undefined && error.response.status === 401) {
-            return next(new PermissionError('You are not authorised to work on this case'));
+            return next(new AuthenticationError('You are not authorised to work on this case'));
         }
         return next(new FormServiceError('Failed to fetch form'));
     }

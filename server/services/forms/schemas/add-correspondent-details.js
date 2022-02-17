@@ -25,6 +25,11 @@ module.exports = options => Form()
             .build()
     )
     .withField(
+        Component('text', 'organisation')
+            .withProp('label', 'Organisation')
+            .build()
+    )
+    .withField(
         Component('text', 'address1')
             .withProp('label', 'Building')
             .build()

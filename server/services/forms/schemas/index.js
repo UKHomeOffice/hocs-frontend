@@ -21,6 +21,7 @@ module.exports = {
     addTemplate: require('./add-template'),
     managePeople: require('./manage-people'),
     contributionRequest: require('./contribution-request'),
+    addAppealDocument: require('./add-appeal-document'),
     contributionRequestFoi: require('./contribution-request-foi'),
     contributionFulfillment: require('./contribution-fulfillment'),
     contributionFulfillmentFoi: require('./contribution-fulfillment-foi'),
@@ -31,4 +32,7 @@ module.exports = {
 
     approvalRequestFoi: require('./approval-request-foi'),
     approvalFulfillmentFoi: require('./approval-fulfillment-foi'),
+
+    recordInterest: require('./record-interest'),
+    updateInterest: require('./update-interest')
 };

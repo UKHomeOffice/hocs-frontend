@@ -13,7 +13,10 @@ const {
     caseCorrespondentsMiddleware,
     caseCorrespondentsApiResponseMiddleware,
     caseActionDataMiddleware,
-    caseActionApiResponseMiddleware
+    caseActionApiResponseMiddleware,
+    caseDataApiResponseMiddleware,
+    caseDataMiddleware,
+    caseDataUpdateMiddleware
 } = require('../../middleware/case');
 const { somuApiResponseMiddleware } = require('../../middleware/somu');
 const { getFormForCase, getFormForStage } = require('../../services/form');
@@ -73,6 +76,16 @@ router.post('/:caseId/note',
     }
 );
 
+router.post('/:caseId/stage/:stageId/data',
+    fileMiddleware.any(),
+    caseDataUpdateMiddleware,
+    (req, res) => {
+        res.json({
+            error: res.locals.error
+        });
+    }
+);
+
 router.put('/:caseId/note/:noteId',
     protect('EDIT_CASE_NOTE'),
     fileMiddleware.any(),
@@ -84,6 +97,8 @@ router.put('/:caseId/note/:noteId',
         });
     }
 );
+
+router.get('/:caseId/', caseDataMiddleware, caseDataApiResponseMiddleware);
 
 router.get('/:caseId/summary', caseSummaryMiddleware, caseSummaryApiResponseMiddleware);
 

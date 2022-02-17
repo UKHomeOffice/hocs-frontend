@@ -148,9 +148,31 @@ const caseActionData = {
                 'maxConcurrentEvents': 1,
                 'sortOrder': 10,
                 'active': true,
-                'props': '{"extendFrom": "TODAY", "extendByMaximumDays": 20}'
+                'props': '{"extendFrom": ["TODAY"], "extendByMaximumDays": 20}'
             },
             'typeData': []
+        }
+    ],
+    'EXTERNAL_INTEREST': [
+        {
+            'id': '81ed796d-819c-46ce-bf50-beca3abe0845',
+            'typeInfo': {
+                'uuid': '81ed796d-819c-46ce-bf50-beca3abe0845',
+                'caseTypeUuid': '406a142c-c519-4fd3-9723-e61b6e3e395d',
+                'caseType': 'FOI',
+                'actionType': 'EXTERNAL_INTEREST',
+                'actionLabel': 'External Interest',
+                'maxConcurrentEvents': 99999,
+                'sortOrder': 10,
+                'active': true,
+                'props': '{}'
+            },
+            'typeData': [
+                {
+                    'uuid': 'e2e033ef-a819-4ea8-b793-aa1b9eadf3e2',
+                    'caseTypeActionUuid': '81ed796d-819c-46ce-bf50-beca3abe0845'
+                }
+            ]
         }
     ],
     'currentDeadline': '24/11/2021'

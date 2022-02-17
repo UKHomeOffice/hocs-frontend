@@ -1,5 +1,5 @@
 const actionService = require('../services/action');
-const { caseworkService } = require('../clients');
+const { caseworkService, workflowService } = require('../clients');
 const User = require('../models/user');
 const { formatDate } = require('../libs/dateHelpers');
 const { logger } = require('../libs/logger');
@@ -42,6 +42,19 @@ async function caseSummaryMiddleware(req, res, next) {
 
 function caseSummaryApiResponseMiddleware(req, res) {
     return res.status(200).json(res.locals.summary);
+}
+
+async function caseDataMiddleware(req, res, next) {
+    try {
+        res.locals.caseData = await req.listService.fetch('CASE_DATA', req.params);
+        next();
+    } catch (error) {
+        next(error);
+    }
+}
+
+function caseDataApiResponseMiddleware(req, res) {
+    return res.status(200).json(res.locals.caseData);
 }
 
 async function createCaseNote(req, res, next) {
@@ -132,6 +145,7 @@ async function caseActionDataMiddleware(req, res, next) {
         }
 
         preppedData.currentDeadline = formatDate(actionData.currentCaseDeadline);
+        preppedData.remainingDays = actionData.remainingDaysUntilDeadline;
 
         res.locals.caseActionData = preppedData;
         next();
@@ -142,6 +156,17 @@ async function caseActionDataMiddleware(req, res, next) {
 
 function caseActionApiResponseMiddleware(req, res) {
     return res.status(200).json(res.locals.caseActionData);
+}
+
+async function caseDataUpdateMiddleware(req, res, next) {
+    try {
+        const updated = await workflowService.put(`/case/${req.params.caseId}/stage/${req.params.stageId}/data`, req.body,
+            { headers: User.createHeaders(req.user) });
+        res.locals.formData = updated.data;
+    } catch (error) {
+        return next(new Error(`Failed to update case data on case ${req.params.caseId} `));
+    }
+    return next();
 }
 
 module.exports = {
@@ -155,5 +180,8 @@ module.exports = {
     caseCorrespondentsMiddleware,
     caseCorrespondentsApiResponseMiddleware,
     caseActionDataMiddleware,
-    caseActionApiResponseMiddleware
+    caseActionApiResponseMiddleware,
+    caseDataApiResponseMiddleware,
+    caseDataMiddleware,
+    caseDataUpdateMiddleware
 };

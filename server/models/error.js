@@ -20,9 +20,9 @@ class ErrorModel extends Error {
 
 }
 
-class AuthenticationError extends ErrorModel {
+class ForbiddenError extends ErrorModel {
     constructor(message, status = 403) {
-        super(message, status, 'Authentication error');
+        super(message, status, 'Forbidden');
     }
 }
 
@@ -69,7 +69,7 @@ class DocumentNotFoundError extends ErrorModel {
     }
 }
 
-class PermissionError extends ErrorModel {
+class AuthenticationError extends ErrorModel {
     constructor(message, status = 401) {
         super(message, status, 'Unauthorised');
     }
@@ -78,11 +78,11 @@ class PermissionError extends ErrorModel {
 module.exports = {
     ActionError,
     AllocationError,
-    AuthenticationError,
+    ForbiddenError,
     DocumentError,
     DocumentNotFoundError,
     FormSubmissionError,
     FormServiceError,
     ValidationError,
-    PermissionError
+    AuthenticationError
 };
