@@ -46,7 +46,7 @@ const TabExGratia = (props) => {
             }
             actionDispatch(updateApiStatus(status.UPDATE_CASE_DATA))
                 .then(() => {
-                    axios.post(`/api/case/${page.params.caseId}/stage/${page.params.stageId}/data`,
+                    axios.post(`/api/case/${page.params.caseId}/stage/${page.params.stageId}/data?type=EX_GRATIA_UPDATE`,
                         formData,
                         { headers: { 'Content-Type': 'multipart/form-data' } })
                         .then(() => {

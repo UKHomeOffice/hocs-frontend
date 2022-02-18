@@ -186,6 +186,10 @@ const typeAdaptors = {
     UPDATE_INTEREST: ({ note }) => ({
         note,
         title: 'Interest Updated'
+    }),
+    EX_GRATIA_UPDATE: ({ note }) => ({
+        note,
+        title: 'Ex-Gratia Updated'
     })
 };
 
