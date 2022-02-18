@@ -1,18 +1,18 @@
-import updateSummary from '../summary-helpers';
+import getCaseData from '../case-data-helper';
 import axios from 'axios';
 
 jest.mock('axios', () => ({
     get: jest.fn((url) => {
         switch (url) {
-            case '/api/case/case1234/summary':
+            case '/api/case/case1234/':
                 return Promise.resolve({ data: { case: 'testCase' } });
-            case '/api/case/case1235/summary':
+            case '/api/case/case1235/':
                 return Promise.reject({ response: 'Error' });
         }
     })
 }));
 
-describe('Summary helper', () => {
+describe('Case data helper', () => {
 
     const goodPage = 'case1234';
     const badPage = 'case1235';
@@ -29,29 +29,29 @@ describe('Summary helper', () => {
     });
 
     it('should update the summary if a caseId is provided', async() => {
-        await updateSummary(goodPage, mockDispatch);
-        expect(axios.get).toHaveBeenCalledWith('/api/case/case1234/summary');
+        await getCaseData(goodPage, mockDispatch);
+        expect(axios.get).toHaveBeenCalledWith('/api/case/case1234/');
         expect(mockDispatch).toHaveBeenCalledWith({
             'payload': { 'case': 'testCase' },
-            'type': 'UPDATE_CASE_SUMMARY'
+            'type': 'UPDATE_CASE_DATA'
         });
         expect(mockDispatch).toHaveBeenCalledWith({
             'type': 'UPDATE_API_STATUS',
             'payload': {
-                'status': { display: 'Case summary received', level: 3, type: 'OK', timeoutPeriod: expect.any(Number) },
+                'status': { display: 'Case data received', level: 3, type: 'OK', timeoutPeriod: expect.any(Number) },
                 'timeStamp': expect.any(Number)
             }
         });
     });
 
     it('should dispatch a failure action on request failure', async() => {
-        await updateSummary(badPage, mockDispatch);
+        await getCaseData(badPage, mockDispatch);
 
-        expect(axios.get).toHaveBeenCalledWith('/api/case/case1235/summary');
+        expect(axios.get).toHaveBeenCalledWith('/api/case/case1235/');
         expect(mockDispatch).toHaveBeenCalledWith({
             'type': 'UPDATE_API_STATUS',
             'payload': {
-                'status': { 'display': 'Unable to fetch case summary', 'level': 0, 'type': 'ERROR', 'timeoutPeriod': expect.any(Number) },
+                'status': { 'display': 'Unable to fetch case data', 'level': 0, 'type': 'ERROR', 'timeoutPeriod': expect.any(Number) },
                 'timeStamp': expect.any(Number)
             }
         });

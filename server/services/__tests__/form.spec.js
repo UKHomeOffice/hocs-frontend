@@ -64,7 +64,7 @@ describe('getFormForAction', () => {
         expect(next).toHaveBeenCalled();
     });
 
-    it('should add an intance of the ErrorModel on the response object when the call to the form repository fails', async () => {
+    it('should add an instance of the ErrorModel on the response object when the call to the form repository fails', async () => {
         req = {
             params: {
                 workflow: 'WORKFLOW',
@@ -215,7 +215,7 @@ describe('getFormForStage', () => {
         expect(next).toHaveBeenCalled();
     });
 
-    it('should add an intance of the ErrorModel on the response object when the call to the form repository fails', async () => {
+    it('should add an instance of the ErrorModel on the response object when the call to the form repository fails', async () => {
         req = {
             params: {
                 action: 'ACTION'

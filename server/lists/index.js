@@ -21,6 +21,7 @@ const caseActionDataAdapter = require('./adapters/case-action-data');
 const caseActionLabelAdapter = require('./adapters/case-action-label');
 const caseViewAllStagesAdapter = require('./adapters/case-view-all-stages');
 const caseViewReadOnlyAdapter = require('./adapters/case-view-read-only');
+const caseDataAdapter = require('./adapters/case-data');
 const {
     caseCorrespondentAdapter,
     correspondentTypeAdapter,
@@ -573,6 +574,11 @@ module.exports = {
             endpoint: '/case/${caseId}/summary',
             adapter: caseSummaryAdapter
         },
+        CASE_DATA: {
+            client: 'CASEWORK',
+            endpoint: '/case/${caseId}/',
+            adapter: caseDataAdapter
+        },
         CASE_ACTIONS: {
             client: 'CASEWORK',
             endpoint: '/case/${caseId}/actions',
@@ -688,10 +694,10 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
-        S_TO_RECIPIENTS: {
+        TO_RECIPIENTS: {
             client: 'INFO',
             endpoint: '/entity/list/TO_RECIPIENTS',
-            type: listService.types.STATIC,
+            type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
         },
         S_BF_BUS_AREA: {

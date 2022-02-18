@@ -24,9 +24,41 @@ spec:
         role: hocs-frontend
         version: "{{.VERSION}}"
     spec:
+      initContainers:
+      - name: initcerts
+        image: quay.digital.homeoffice.gov.uk/ukhomeofficedigital/cfssl-sidekick:v0.0.9
+        securityContext:
+          runAsNonRoot: true
+          capabilities:
+            drop:
+              - SETUID
+              - SETGID
+        args:
+          - --certs=/certs
+          - --domain=hocs-frontend.${KUBE_NAMESPACE}.svc.cluster.local
+          - --expiry=8760h
+          - --onetime=true
+        env:
+          - name: KUBE_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+        volumeMounts:
+          - name: certs
+            mountPath: /certs
+          - name: bundle
+            mountPath: /etc/ssl/certs
+            readOnly: true
+        resources:
+          limits:
+            memory: 96Mi
+            cpu: 900m
+          requests:
+            memory: 96Mi
+            cpu: 300m
       containers:
       - name: certs
-        image: quay.digital.homeoffice.gov.uk/ukhomeofficedigital/cfssl-sidekick-jks:v0.0.9
+        image: quay.digital.homeoffice.gov.uk/ukhomeofficedigital/cfssl-sidekick:v0.0.9
         securityContext:
           runAsNonRoot: true
           capabilities:
@@ -320,12 +352,12 @@ spec:
             value: '300'
           - name: COUNTDOWN_FOR_SECONDS
             value: '60'
+          {{if ne .CLUSTER_NAME "acp-prod" }}
           - name: IS_NOTPROD
-            value: '{{.KUBE_IS_NOTPROD}}'
+            value: '1'
+          {{ end }}
           - name: SHOW_STACKTRACE_ON_ERROR_PAGE
             value: '{{.SHOW_ERROR_STACKTRACE}}'
-          - name: BACKEND_REQUEST_RETRIES
-            value: '2'
         resources:
           limits:
             cpu: 1600m
