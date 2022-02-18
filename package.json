@@ -36,7 +36,7 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "aws-sdk": "^2.1029.0",
+        "aws-sdk": "^2.1065.0",
         "axios": "^0.22.0",
         "body-parser": "^1.18.2",
         "classnames": "^2.2.6",
