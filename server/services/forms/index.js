@@ -161,6 +161,13 @@ const formDefinitions = {
                         action: 'CONFIRMATION_SUMMARY'
                     }
                 },
+                BF2: {
+                    builder: formRepository.escalateCase,
+                    action: CREATE_CASE,
+                    next: {
+                        action: 'CONFIRMATION_SUMMARY'
+                    }
+                },
                 TO: {
                     builder: formRepository.addDocument,
                     action: CREATE_CASE,
@@ -236,6 +243,20 @@ const formDefinitions = {
                     }
                 },
                 WCS: {
+                    builder: formRepository.bulkAddDocument,
+                    action: CREATE_CASE,
+                    next: {
+                        action: 'CONFIRMATION_SUMMARY'
+                    }
+                },
+                BF: {
+                    builder: formRepository.bulkAddDocument,
+                    action: CREATE_CASE,
+                    next: {
+                        action: 'CONFIRMATION_SUMMARY'
+                    }
+                },
+                BF2: {
                     builder: formRepository.bulkAddDocument,
                     action: CREATE_CASE,
                     next: {
@@ -574,6 +595,27 @@ const formDefinitions = {
                     action: EDIT_CONTRIBUTION,
                     customConfig: bfBusinessContributionsRequest
                 }
+            },
+            BF2: {
+                ADDREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    action: ADD_CONTRIBUTION,
+                    customConfig: bfBusinessContributionsRequest
+                },
+                EDITREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    action: EDIT_CONTRIBUTION,
+                    customConfig: bfBusinessContributionsRequest
+                },
+                VIEWREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    customConfig: bfBusinessContributionsRequest
+                },
+                EDIT: {
+                    builder: formRepository.contributionFulfillment,
+                    action: EDIT_CONTRIBUTION,
+                    customConfig: bfBusinessContributionsRequest
+                }
             }
         },
         EXGRATIA_BUS_CONTRIB: {
@@ -685,6 +727,27 @@ const formDefinitions = {
         },
         BF_CONTRIB: {
             BF: {
+                ADDREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    action: ADD_CONTRIBUTION,
+                    customConfig: bfComplainantContributionsRequest
+                },
+                EDITREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    action: EDIT_CONTRIBUTION,
+                    customConfig: bfComplainantContributionsRequest
+                },
+                VIEWREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    customConfig: bfComplainantContributionsRequest
+                },
+                EDIT: {
+                    builder: formRepository.contributionFulfillment,
+                    action: EDIT_CONTRIBUTION,
+                    customConfig: bfComplainantContributionsRequest
+                }
+            },
+            BF2: {
                 ADDREQUEST: {
                     builder: formRepository.contributionRequest,
                     action: ADD_CONTRIBUTION,
