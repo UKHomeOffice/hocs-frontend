@@ -18,7 +18,6 @@ import {
 } from '../contexts/actions/index.jsx';
 import status from '../helpers/api-status.js';
 import BackLink from '../common/forms/backlink.jsx';
-import  updateSummary from '../helpers/summary-helpers';
 
 function withForm(Page) {
 
@@ -67,7 +66,7 @@ function withForm(Page) {
         }
 
         getForm() {
-            const { dispatch, match: { url }, history, page } = this.props;
+            const { dispatch, match: { url }, history } = this.props;
             const endpoint = '/api/form' + url;
 
             return dispatch(updateApiStatus(status.REQUEST_FORM))
@@ -80,10 +79,6 @@ function withForm(Page) {
                                     dispatch(unsetCaseSummary());
                                     dispatch(unSetCaseActionData());
                                     dispatch(unsetDocuments());
-
-                                    if (page.params.caseId) { // if a caseId is supplied, pull its summary
-                                        updateSummary(page.params.caseId, dispatch);
-                                    }
                                 })
                                 .then(() => {
                                     if (response.data.redirect) {
