@@ -160,8 +160,14 @@ function caseActionApiResponseMiddleware(req, res) {
 
 async function caseDataUpdateMiddleware(req, res, next) {
     try {
-        const updated = await workflowService.put(`/case/${req.params.caseId}/stage/${req.params.stageId}/data`, req.body,
-            { headers: User.createHeaders(req.user) });
+        let updated;
+        if (req.query.type) {
+            updated = await workflowService.put(`/case/${req.params.caseId}/stage/${req.params.stageId}/data?type=${req.query.type}`, req.body,
+                { headers: User.createHeaders(req.user) });
+        } else {
+            updated = await workflowService.put(`/case/${req.params.caseId}/stage/${req.params.stageId}/data`, req.body,
+                { headers: User.createHeaders(req.user) });
+        }
         res.locals.formData = updated.data;
     } catch (error) {
         return next(new Error(`Failed to update case data on case ${req.params.caseId} `));
