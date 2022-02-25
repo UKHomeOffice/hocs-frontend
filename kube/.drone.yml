@@ -30,7 +30,7 @@ name: dry-run
 
 steps:
 - name: dry-run kd dev
-  image: quay.io/ukhomeofficedigital/kd:v1.16.0
+  image: quay.io/ukhomeofficedigital/kd
   environment:
     DRY_RUN: true
     VERSION: test
@@ -44,7 +44,7 @@ steps:
     - clone
 
 - name: dry-run kd prod
-  image: quay.io/ukhomeofficedigital/kd:v1.16.0
+  image: quay.io/ukhomeofficedigital/kd
   environment:
     DRY_RUN: true
     VERSION: test
