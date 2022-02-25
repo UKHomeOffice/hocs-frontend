@@ -35,7 +35,7 @@ steps:
       - install dependencies
 
   - name: sonar scanner
-    image: quay.io/ukhomeofficedigital/sonar-scanner:v3.0.2
+    image: quay.io/ukhomeofficedigital/sonar-scanner
     depends_on:
       - build project
       - test project
