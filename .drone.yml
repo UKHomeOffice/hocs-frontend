@@ -111,7 +111,7 @@ steps:
       - git checkout $${VERSION}
 
   - name: deploy to cs-dev
-    image: quay.io/ukhomeofficedigital/kd:v1.16.0
+    image: quay.io/ukhomeofficedigital/kd
     environment:
       ENVIRONMENT: cs-dev
       VERSION: "${DRONE_COMMIT_SHA}"
@@ -131,7 +131,7 @@ steps:
         - push
 
   - name: deploy to wcs-dev
-    image: quay.io/ukhomeofficedigital/kd:v1.16.0
+    image: quay.io/ukhomeofficedigital/kd
     environment:
       ENVIRONMENT: wcs-dev
       VERSION: "${DRONE_COMMIT_SHA}"
@@ -193,7 +193,7 @@ steps:
         - release
 
   - name: deploy to cs-qa
-    image: quay.io/ukhomeofficedigital/kd:v1.16.0
+    image: quay.io/ukhomeofficedigital/kd
     commands:
       - source version.txt
       - echo $VERSION
@@ -214,7 +214,7 @@ steps:
       - generate & tag build
 
   - name: deploy to wcs-qa
-    image: quay.io/ukhomeofficedigital/kd:v1.16.0
+    image: quay.io/ukhomeofficedigital/kd
     commands:
       - source version.txt
       - echo $VERSION
@@ -235,7 +235,7 @@ steps:
       - generate & tag build
 
   - name: deploy to not prod
-    image: quay.io/ukhomeofficedigital/kd:v1.16.0
+    image: quay.io/ukhomeofficedigital/kd
     commands:
       - cd kube
       - ./deploy.sh
@@ -258,7 +258,7 @@ steps:
           - "*-prod"
 
   - name: deploy to prod
-    image: quay.io/ukhomeofficedigital/kd:v1.16.0
+    image: quay.io/ukhomeofficedigital/kd
     commands:
       - cd kube
       - ./deploy.sh
@@ -308,7 +308,7 @@ name: dry-run-k8s
 
 steps:
 - name: dry-run kd dev
-  image: quay.io/ukhomeofficedigital/kd:v1.16.0
+  image: quay.io/ukhomeofficedigital/kd
   environment:
     DRY_RUN: true
     VERSION: test
@@ -323,7 +323,7 @@ steps:
     - clone
 
 - name: dry-run kd prod
-  image: quay.io/ukhomeofficedigital/kd:v1.16.0
+  image: quay.io/ukhomeofficedigital/kd
   environment:
     DRY_RUN: true
     VERSION: test
