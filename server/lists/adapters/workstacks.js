@@ -5,23 +5,16 @@ const byCaseReference = (a, b) => {
         return 0;
     }
 
-    return a.caseReference.localeCompare(b.caseReference);
+    return a.caseReference < b.caseReference ? -1 : (a > b ? 1 : 0);
 };
 
 const byPriority = (a, b) => {
     if (a.data.systemCalculatedPriority == undefined || b.data.systemCalculatedPriority == undefined) {
         return 0;
     } else {
-        var aFloat = parseFloat(a.data.systemCalculatedPriority);
-        var bFloat = parseFloat(b.data.systemCalculatedPriority);
-
-        if (aFloat == bFloat) {
-            return 0;
-        }
-        if (aFloat > bFloat) {
-            return -1;
-        }
-        return 1;
+        const aFloat = parseFloat(a.data.systemCalculatedPriority);
+        const bFloat = parseFloat(b.data.systemCalculatedPriority);
+        return (aFloat < bFloat ? 1 : (aFloat > bFloat ? -1 : 0));
     }
 };
 
@@ -76,7 +69,13 @@ const tagSort = (a, b) => {
     return sortResult;
 };
 
-const byLabel = (a, b) => a.label.localeCompare(b.label);
+const byLabel = (a, b) => {
+    if (!(a.label && b.label)) {
+        return 0;
+    }
+    return  a.label < b.label ? -1 : (a > b ? 1 : 0);
+};
+
 const isUnallocated = user => user === null;
 
 const isOverdue = (configuration, deadline) =>
@@ -292,7 +291,8 @@ const dashboardAdapter = async (data, { fromStaticList, logger, configuration })
             }));
             return cards;
         }, [])
-        .sort((a, b) => (a.label && b.label) ? a.label.localeCompare(b.label) : 0);
+        .sort(byLabel);
+
     logger.debug('REQUEST_DASHBOARD', { users: userCard, teams: teamCards.length });
     return { user: [userCard], teams: teamCards };
 };
