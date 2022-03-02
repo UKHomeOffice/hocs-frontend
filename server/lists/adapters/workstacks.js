@@ -37,9 +37,12 @@ const byWorkable = (stage) => {
 };
 
 const defaultCaseSort = (a, b) => {
-    let sortResult = byPriority(a, b);
+    let sortResult = tagSort(a, b);
     if (sortResult === 0) {
-        sortResult = byCaseReference(a, b);
+        sortResult = byPriority(a, b);
+        if (sortResult === 0) {
+            sortResult = byCaseReference(a, b);
+        }
     }
     return sortResult;
 };
@@ -303,7 +306,6 @@ const bindDashboardElements = fromStaticList => async (stage) => {
 const userAdapter = async (data, { fromStaticList, logger, configuration }) => {
     const workstackData = await Promise.all(data.stages
         .sort(defaultCaseSort)
-        .sort(tagSort)
         .map(bindDisplayElements(fromStaticList)));
 
     logger.debug('REQUEST_USER_WORKSTACK', { user_cases: workstackData.length });
@@ -321,7 +323,6 @@ const teamAdapter = async (data, { fromStaticList, logger, teamId, configuration
         .filter(byWorkable)
         .filter(stage => stage.teamUUID === teamId)
         .sort(defaultCaseSort)
-        .sort(tagSort)
         .map(bindDisplayElements(fromStaticList)));
     const workflowCards = workstackData
         .reduce((cards, stage) => {
@@ -368,7 +369,6 @@ const workflowAdapter = async (data, { fromStaticList, logger, workflowId, confi
         .filter(byWorkable)
         .filter(stage => stage.caseType === workflowId)
         .sort(defaultCaseSort)
-        .sort(tagSort)
         .map(bindDisplayElements(fromStaticList)));
     const stageCards = workstackData
         .reduce((cards, stage) => {
