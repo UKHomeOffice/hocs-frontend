@@ -69,7 +69,7 @@ const StageSummary = () => {
         <Fragment>
             {(summary && Object.keys(summary).length !== 0) &&
                 <Fragment>
-                    <h2 className='govuk-heading-m'>Active stage{summary.stages.length > 1 && 's'}</h2>
+                    {summary.stages.length > 0 && <h2 className='govuk-heading-m'>Active stage{summary.stages.length > 1 && 's'}</h2>}
                     {summary.stages.map(stage => renderActiveStage(stage))}
                     <h2 className='govuk-heading-m'>Case</h2>
                     <table className='govuk-table margin-left--small'>
