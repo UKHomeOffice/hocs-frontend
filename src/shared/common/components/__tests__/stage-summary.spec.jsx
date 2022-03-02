@@ -64,10 +64,11 @@ describe('Stage summary component', () => {
     });
 
     it('should not show the previous case table when not provided', () => {
-        config.summary.previousCase = undefined;
+        const myConfig = deepCopy(config);
+        myConfig.summary.previousCase = undefined;
 
         const wrapper = render(
-            <ApplicationProvider config={config}>
+            <ApplicationProvider config={myConfig}>
                 <BrowserRouter>
                     <Summary/>
                 </BrowserRouter>
@@ -84,11 +85,12 @@ describe('Stage summary component', () => {
     });
 
     it('should not show the empty address lines', () => {
-        config.summary.primaryCorrespondent.address.address2 = undefined;
-        config.summary.primaryCorrespondent.address.address3 = undefined;
+        const myConfig = deepCopy(config);
+        myConfig.summary.primaryCorrespondent.address.address2 = undefined;
+        myConfig.summary.primaryCorrespondent.address.address3 = undefined;
 
         const wrapper = render(
-            <ApplicationProvider config={config}>
+            <ApplicationProvider config={myConfig}>
                 <BrowserRouter>
                     <Summary/>
                 </BrowserRouter>
@@ -99,10 +101,25 @@ describe('Stage summary component', () => {
     });
 
     it('should not show the empty organisation', () => {
-        config.summary.primaryCorrespondent.organisation = undefined;
+        const myConfig = deepCopy(config);
+        myConfig.summary.primaryCorrespondent.organisation = undefined;
 
         const wrapper = render(
-            <ApplicationProvider config={config}>
+            <ApplicationProvider config={myConfig}>
+                <BrowserRouter>
+                    <Summary/>
+                </BrowserRouter>
+            </ApplicationProvider>
+        );
+        expect(wrapper).toBeDefined();
+        expect(wrapper).toMatchSnapshot();
+    });
+
+    it('should not render the "Active Stage" title, when there are no active stages', () => {
+        const myConfig = deepCopy(config);
+        myConfig.summary.stages = [];
+        const wrapper = render(
+            <ApplicationProvider config={myConfig}>
                 <BrowserRouter>
                     <Summary/>
                 </BrowserRouter>
@@ -112,3 +129,7 @@ describe('Stage summary component', () => {
         expect(wrapper).toMatchSnapshot();
     });
 });
+
+function deepCopy(obj) {
+    return JSON.parse(JSON.stringify(obj));
+}
