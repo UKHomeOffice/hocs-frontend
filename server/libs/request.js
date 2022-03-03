@@ -4,8 +4,6 @@ const fs = require('fs');
 
 const isProduction = process.env.NODE_ENV === 'production';
 
-axios.defaults.headers.common['Accept-encoding'] = 'gzip';
-
 const getHttpsClient = () => {
     return new https.Agent({
         cert: fs.readFileSync('/certs/tls.pem'),

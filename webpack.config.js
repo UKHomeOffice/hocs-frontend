@@ -60,10 +60,9 @@ const browserConfig = env => {
             ]
         },
         optimization: {
-            runtimeChunk: 'single',
+            runtimeChunk: 'multiple',
             splitChunks: {
                 cacheGroups: {
-                    default: false,
                     vendor: {
                         chunks: 'all',
                         name: 'vendor',
