@@ -18,7 +18,7 @@ import {
 } from '../contexts/actions/index.jsx';
 import status from '../helpers/api-status.js';
 import BackLink from '../common/forms/backlink.jsx';
-import  updateSummary from '../helpers/summary-helpers';
+import updateSummary from '../helpers/summary-helpers';
 
 function withForm(Page) {
 
