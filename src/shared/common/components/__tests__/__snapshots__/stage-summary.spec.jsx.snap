@@ -130,6 +130,12 @@ Array [
           <span>
             __country__
           </span>
+            
+          <br />
+           
+          <span>
+            __reference__
+          </span>
            
         </td>
       </tr>
@@ -445,6 +451,12 @@ Array [
            
           <span>
             __country__
+          </span>
+            
+          <br />
+           
+          <span>
+            __reference__
           </span>
            
         </td>
@@ -767,6 +779,12 @@ Array [
            
           <span>
             __country__
+          </span>
+            
+          <br />
+           
+          <span>
+            __reference__
           </span>
            
         </td>
@@ -1096,6 +1114,12 @@ Array [
           <span>
             __country__
           </span>
+            
+          <br />
+           
+          <span>
+            __reference__
+          </span>
            
         </td>
       </tr>
@@ -1389,6 +1413,12 @@ Array [
            
           <span>
             __country__
+          </span>
+            
+          <br />
+           
+          <span>
+            __reference__
           </span>
            
         </td>
