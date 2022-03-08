@@ -712,9 +712,15 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
-        S_BF_ENQUIRY_REASON: {
+        S_BF_COMPLAINT_REASON_FULL: {
             client: 'INFO',
-            endpoint: '/entity/list/BF_ENQUIRY_REASON',
+            endpoint: '/entity/list/BF_COMPLAINT_REASON_FULL',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_BF_COMPLAINT_REASON_MINOR: {
+            client: 'INFO',
+            endpoint: '/entity/list/BF_COMPLAINT_REASON_MINOR',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
