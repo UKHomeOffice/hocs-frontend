@@ -32,8 +32,16 @@ function hasAllValues(data, conditionArgs) {
     return true;
 }
 
+function hasAnyValue(data, conditionArgs) {
+    if(!data || !data[conditionArgs.conditionPropertyName]) {
+        return false;
+    }
+    return true;
+}
+
 
 module.exports = {
     hasCommaSeparatedValue,
-    hasAllValues
+    hasAllValues,
+    hasAnyValue
 };
