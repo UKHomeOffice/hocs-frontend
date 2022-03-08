@@ -20,7 +20,8 @@ const config = {
             },
             fullname: '__fullname__',
             organisation: '__organisation__',
-            telephone: '__telephone__'
+            telephone: '__telephone__',
+            reference: '__reference__'
         },
         primaryTopic: '__primaryTopic__',
         additionalFields: [

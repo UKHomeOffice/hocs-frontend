@@ -105,6 +105,7 @@ const StageSummary = () => {
                                         {primaryCorrespondent.address.postcode && <> <br /> <span>{primaryCorrespondent.address.postcode}</span> </>}
                                         {primaryCorrespondent.address.country && <> <br /> <span>{primaryCorrespondent.address.country}</span> </>}
                                     </>}
+                                    {primaryCorrespondent.reference && <> <br /> <span>{primaryCorrespondent.reference}</span> </>}
                                 </td>
                             </tr>}
                             {summary.additionalFields && summary.additionalFields.map(({ label, value }) => renderRow({ label, value }))}
