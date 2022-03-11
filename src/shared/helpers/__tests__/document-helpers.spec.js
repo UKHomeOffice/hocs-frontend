@@ -1,22 +1,22 @@
 import {
     flattenDocuments,
-    getFirstDocument,
+    getFirstDocumentWithPdfLink,
     hasPendingDocuments
 } from '../document-helpers';
 
 const documentList = [
     ['group 1', [
-        { label: 'TEST_DOCUMENT_1', value: 'MOCK_DOC_ID_1', status: 'UPLOADED' },
-        { label: 'TEST_DOCUMENT_2', value: 'MOCK_DOC_ID_2', status: 'UPLOADED' },
-        { label: 'TEST_DOCUMENT_3', value: 'MOCK_DOC_ID_3', status: 'PENDING' },
+        { label: 'TEST_DOCUMENT_1', value: 'MOCK_DOC_ID_1', status: 'UPLOADED', hasPdf: true, hasOriginalFile: true },
+        { label: 'TEST_DOCUMENT_2', value: 'MOCK_DOC_ID_2', status: 'UPLOADED', hasPdf: true, hasOriginalFile: true },
+        { label: 'TEST_DOCUMENT_3', value: 'MOCK_DOC_ID_3', status: 'PENDING', hasPdf: false, hasOriginalFile: true },
     ]], ['group 2', [
-        { label: 'TEST_DOCUMENT_4', value: 'MOCK_DOC_ID_4', status: 'UPLOADED' },
-        { label: 'TEST_DOCUMENT_5', value: 'MOCK_DOC_ID_5', status: 'UPLOADED' },
-        { label: 'TEST_DOCUMENT_6', value: 'MOCK_DOC_ID_6', status: 'UPLOADED' },
+        { label: 'TEST_DOCUMENT_4', value: 'MOCK_DOC_ID_4', status: 'UPLOADED', hasPdf: true, hasOriginalFile: true },
+        { label: 'TEST_DOCUMENT_5', value: 'MOCK_DOC_ID_5', status: 'UPLOADED', hasPdf: true, hasOriginalFile: true },
+        { label: 'TEST_DOCUMENT_6', value: 'MOCK_DOC_ID_6', status: 'UPLOADED', hasPdf: true, hasOriginalFile: true },
     ]], ['group 3', [
-        { label: 'TEST_DOCUMENT_7', value: 'MOCK_DOC_ID_7', status: 'UPLOADED' },
-        { label: 'TEST_DOCUMENT_8', value: 'MOCK_DOC_ID_8', status: 'PENDING' },
-        { label: 'TEST_DOCUMENT_9', value: 'MOCK_DOC_ID_9', status: 'PENDING' },
+        { label: 'TEST_DOCUMENT_7', value: 'MOCK_DOC_ID_7', status: 'UPLOADED', hasPdf: true, hasOriginalFile: true },
+        { label: 'TEST_DOCUMENT_8', value: 'MOCK_DOC_ID_8', status: 'PENDING', hasPdf: false, hasOriginalFile: false },
+        { label: 'TEST_DOCUMENT_9', value: 'MOCK_DOC_ID_9', status: 'PENDING', hasPdf: false, hasOriginalFile: true },
     ]]
 ];
 
@@ -24,47 +24,65 @@ const flattenedDocuments = [
     {
         'label': 'TEST_DOCUMENT_1',
         'status': 'UPLOADED',
-        'value': 'MOCK_DOC_ID_1'
+        'value': 'MOCK_DOC_ID_1',
+        'hasPdf': true,
+        'hasOriginalFile': true,
     },
     {
         'label': 'TEST_DOCUMENT_2',
         'status': 'UPLOADED',
-        'value': 'MOCK_DOC_ID_2'
+        'value': 'MOCK_DOC_ID_2',
+        'hasPdf': true,
+        'hasOriginalFile': true
     },
     {
         'label': 'TEST_DOCUMENT_3',
         'status': 'PENDING',
-        'value': 'MOCK_DOC_ID_3'
+        'value': 'MOCK_DOC_ID_3',
+        'hasPdf': false,
+        'hasOriginalFile': true
     },
     {
         'label': 'TEST_DOCUMENT_4',
         'status': 'UPLOADED',
-        'value': 'MOCK_DOC_ID_4'
+        'value': 'MOCK_DOC_ID_4',
+        'hasPdf': true,
+        'hasOriginalFile': true
     },
     {
         'label': 'TEST_DOCUMENT_5',
         'status': 'UPLOADED',
-        'value': 'MOCK_DOC_ID_5'
+        'value': 'MOCK_DOC_ID_5',
+        'hasPdf': true,
+        'hasOriginalFile': true
     },
     {
         'label': 'TEST_DOCUMENT_6',
         'status': 'UPLOADED',
-        'value': 'MOCK_DOC_ID_6'
+        'value': 'MOCK_DOC_ID_6',
+        'hasPdf': true,
+        'hasOriginalFile': true
     },
     {
         'label': 'TEST_DOCUMENT_7',
         'status': 'UPLOADED',
-        'value': 'MOCK_DOC_ID_7'
+        'value': 'MOCK_DOC_ID_7',
+        'hasPdf': true,
+        'hasOriginalFile': true
     },
     {
         'label': 'TEST_DOCUMENT_8',
         'status': 'PENDING',
-        'value': 'MOCK_DOC_ID_8'
+        'value': 'MOCK_DOC_ID_8',
+        'hasPdf': false,
+        'hasOriginalFile': false
     },
     {
         'label': 'TEST_DOCUMENT_9',
         'status': 'PENDING',
-        'value': 'MOCK_DOC_ID_9'
+        'value': 'MOCK_DOC_ID_9',
+        'hasPdf': false,
+        'hasOriginalFile': true
     }
 ];
 
@@ -86,16 +104,16 @@ describe('DocumentPanelHelpers', () => {
 
     describe('getFirstDocument', () => {
         it('returns undefined when called with invalid value', () => {
-            expect(getFirstDocument([])).toStrictEqual(undefined);
-            expect(getFirstDocument('test')).toStrictEqual(undefined);
-            expect(getFirstDocument(null)).toStrictEqual(undefined);
-            expect(getFirstDocument(123)).toStrictEqual(undefined);
-            expect(getFirstDocument(undefined)).toStrictEqual(undefined);
-            expect(getFirstDocument()).toStrictEqual(undefined);
+            expect(getFirstDocumentWithPdfLink([])).toStrictEqual(undefined);
+            expect(getFirstDocumentWithPdfLink('test')).toStrictEqual(undefined);
+            expect(getFirstDocumentWithPdfLink(null)).toStrictEqual(undefined);
+            expect(getFirstDocumentWithPdfLink(123)).toStrictEqual(undefined);
+            expect(getFirstDocumentWithPdfLink(undefined)).toStrictEqual(undefined);
+            expect(getFirstDocumentWithPdfLink()).toStrictEqual(undefined);
         });
 
         it('returns a flat array of documents when called with a valid value', () => {
-            expect(getFirstDocument(flattenedDocuments)).toStrictEqual('MOCK_DOC_ID_1');
+            expect(getFirstDocumentWithPdfLink(flattenedDocuments)).toStrictEqual('MOCK_DOC_ID_1');
         });
     });
 
