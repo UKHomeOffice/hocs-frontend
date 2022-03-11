@@ -12,7 +12,7 @@ import status from '../../helpers/api-status.js';
 import { Link } from 'react-router-dom';
 import {
     flattenDocuments,
-    getFirstDocument,
+    getFirstDocumentWithPdfLink,
     hasPendingDocuments
 } from '../../helpers/document-helpers';
 
@@ -23,7 +23,7 @@ class DocumentPanel extends Component {
         super(props);
         let activeDocument;
         if (props.documents && props.documents.length > 0) {
-            activeDocument = getFirstDocument(flattenDocuments(props.documents));
+            activeDocument = getFirstDocumentWithPdfLink(flattenDocuments(props.documents));
         }
         this.state = { ...props, activeDocument };
     }
@@ -57,7 +57,7 @@ class DocumentPanel extends Component {
                                         this.setState((currentState) => ({
                                             ...currentState,
                                             documents: response.data,
-                                            activeDocument: currentState.activeDocument || getFirstDocument(allDocuments)
+                                            activeDocument: currentState.activeDocument || getFirstDocumentWithPdfLink(allDocuments)
                                         }));
                                         if (!hasPendingDocuments(allDocuments)) {
                                             if (this.interval) {
