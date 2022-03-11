@@ -444,6 +444,30 @@ Array [
           </a>
         </td>
       </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell govuk-!-width-full"
+        >
+          TEST_DOCUMENT_13
+        </td>
+        <td
+          class="govuk-table__cell govuk-!-width-one-quarter"
+        >
+          <strong
+            class="govuk-tag margin-right--small"
+          >
+            INVALID
+          </strong>
+        </td>
+        <td
+          class="govuk-table__cell"
+        />
+        <td
+          class="govuk-table__cell"
+        />
+      </tr>
     </tbody>
   </table>,
 ]
