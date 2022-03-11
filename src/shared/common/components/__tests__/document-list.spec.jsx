@@ -20,6 +20,7 @@ describe('Document list component', () => {
             { label: 'TEST_DOCUMENT_10', value: 'MOCK_DOC_ID_10', status: 'FAILED_CONVERSION', tags: ['Failed Conversion'], hasPdf: false, hasOriginalFile: true },
             { label: 'TEST_DOCUMENT_11', value: 'MOCK_DOC_ID_11', status: 'FAILED_VIRUS',  tags: ['Failed Virus'], hasPdf: false, hasOriginalFile: false },
             { label: 'TEST_DOCUMENT_12', value: 'MOCK_DOC_ID_12', status: 'PENDING', tags: ['UNKNOWN', 'Pending'], hasPdf: false, hasOriginalFile: true },
+            { label: 'TEST_DOCUMENT_13', value: 'MOCK_DOC_ID_13', status: 'INVALID', tags: ['INVALID'], hasPdf: false, hasOriginalFile: false },
         ]]
     ];
 
