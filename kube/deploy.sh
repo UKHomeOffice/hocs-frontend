@@ -1,7 +1,6 @@
 #!/bin/bash
 set -euo pipefail
 
-
 export KUBE_NAMESPACE=${ENVIRONMENT}
 export KUBE_TOKEN=${KUBE_TOKEN}
 export VERSION=${VERSION}
