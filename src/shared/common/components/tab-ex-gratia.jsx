@@ -28,8 +28,13 @@ const TabExGratia = (props) => {
     }, []);
 
     const getForm = () => {
+        let schemaType = 'EX_GRATIA_TAB';
+        if (props.stages.length < 1) {
+            schemaType = 'EX_GRATIA_TAB_CLOSED';
+        }
+
         dispatch(updateApiStatus(status.REQUEST_FORM))
-            .then(() => axios.get('/api/schema/EX_GRATIA_TAB/fields'))
+            .then(() => axios.get(`/api/schema/${schemaType}/fields`))
             .then(response => setForm(response))
             .then(() => dispatch(updateApiStatus(status.REQUEST_FORM_SUCCESS)));
     };
@@ -74,15 +79,14 @@ const TabExGratia = (props) => {
             {(caseData && Object.keys(caseData).length !== 0) &&
             <Fragment>
                 <h2 className='govuk-heading-m'>Ex-Gratia</h2>
-                {props.stages.length > 0 &&
-                    <details className='govuk-details'>
-                        <summary className='govuk-details__summary'>
-                            <span className='govuk-details__summary-text'>
+                <details className='govuk-details'>
+                    <summary className='govuk-details__summary'>
+                        <span className='govuk-details__summary-text'>
                                 Update Ex-Gratia details
-                            </span>
-                        </summary>
+                        </span>
+                    </summary>
 
-                        {form && form.data != null &&
+                    {form && form.data != null &&
                         <FormEmbeddedWrapped
                             schema={{ fields: form.data }}
                             fieldData={caseData}
@@ -90,9 +94,9 @@ const TabExGratia = (props) => {
                             baseUrl={`/case/${page.params.caseId}/stage/${page.params.stageId}`}
                             submitHandler={submitHandler}
                         />
-                        }
-                    </details>
-                }
+                    }
+                </details>
+
                 <table className='govuk-table margin-left--small'>
                     <caption className='govuk-table__caption margin-bottom--small'>Summary</caption>
                     <tbody className='govuk-table__body'>
