@@ -145,3 +145,107 @@ steps:
       target:
         include:
           - "*-prod"
+
+---
+kind: pipeline
+type: kubernetes
+name: build tag
+trigger:
+  event:
+    - tag
+  branch:
+    - main
+
+steps:
+  - name: install dependencies
+    image: node:14.15.4-alpine
+    commands:
+      - npm --loglevel warn install --production=false --no-optional
+
+  - name: build project
+    image: node:14.15.4-alpine
+    commands:
+      - npm run build-prod
+    depends_on:
+      - install dependencies
+
+  - name: test project
+    image: node:14.15.4-alpine
+    commands:
+      - npm test
+    depends_on:
+      - install dependencies
+
+  - name: lint project
+    image: node:14.15.4-alpine
+    commands:
+      - npm run lint
+    depends_on:
+      - install dependencies
+
+  - name: sonar scanner
+    image: quay.io/ukhomeofficedigital/sonar-scanner
+    commands:
+      - sonar-scanner -Dsonar.projectVersion="$(git rev-parse --abbrev-ref HEAD)"
+    depends_on:
+      - test project
+
+  - name: build & push
+    image: plugins/docker
+    settings:
+      registry: quay.io
+      repo: quay.io/ukhomeofficedigital/hocs-frontend
+      tags:
+        - ${DRONE_TAG}
+        - ${DRONE_COMMIT_SHA}
+        - latest
+    environment:
+      DOCKER_PASSWORD:
+        from_secret: QUAY_ROBOT_TOKEN
+      DOCKER_USERNAME: ukhomeofficedigital+hocs_quay_robot
+    depends_on:
+      - build project
+      - test project
+
+---
+kind: pipeline
+type: kubernetes
+name: deploy tag
+trigger:
+  event:
+    - tag
+  branch:
+    - main
+depends_on:
+  - build tag
+
+steps:
+  - name: deploy to cs-dev
+    image: quay.io/ukhomeofficedigital/kd:v1.16.0
+    environment:
+      ENVIRONMENT: cs-dev
+      VERSION: "${DRONE_TAG}"
+      KUBE_TOKEN:
+        from_secret: hocs_frontend_cs_dev
+      POISE_IPS:
+        from_secret: POISE_IPS
+    commands:
+      - cd kube
+      - ./deploy.sh
+    depends_on:
+      - clone
+
+  - name: deploy to wcs-dev
+    image: quay.io/ukhomeofficedigital/kd:v1.16.0
+    environment:
+      ENVIRONMENT: wcs-dev
+      VERSION: "${DRONE_TAG}"
+      KUBE_TOKEN:
+        from_secret: hocs_frontend_wcs_dev
+      POISE_IPS:
+        from_secret: POISE_IPS
+    commands:
+      - cd kube
+      - ./deploy.sh
+    depends_on:
+      - clone
