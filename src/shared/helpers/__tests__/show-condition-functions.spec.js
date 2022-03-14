@@ -55,4 +55,78 @@ describe('ShowConditionFunctions', () => {
                 [ { conditionPropertyName: 'TestField', conditionPropertyValue: 'Test1' } ])).toBe(true);
         });
     });
+
+    describe('hasAnyValue', () => {
+
+        it('should return false when conditionPropertyName is absent in data',  () => {
+
+            const data =  {};
+            const conditionArgs = {
+                'conditionPropertyName': 'var1'
+            };
+
+            const result = showConditionFunctions.hasAnyValue(data, conditionArgs);
+
+            expect(result).toBeFalsy();
+        });
+
+        it('should return false when conditionPropertyName has empty string val in data',  () => {
+
+            const data =  {
+                'var1': ''
+            };
+            const conditionArgs = {
+                'conditionPropertyName': 'var1'
+            };
+
+            const result = showConditionFunctions.hasAnyValue(data, conditionArgs);
+
+            expect(result).toBeFalsy();
+        });
+
+        it('should return false when conditionPropertyName has "null" value in data',  () => {
+
+            const data =  {
+                'var1': null
+            };
+
+            const conditionArgs = {
+                'conditionPropertyName': 'var1'
+            };
+
+            const result = showConditionFunctions.hasAnyValue(data, conditionArgs);
+
+            expect(result).toBeFalsy();
+        });
+
+        it('should return true when conditionPropertyName has string val in data',  () => {
+
+            const data =  {
+                'var1': 'val1'
+            };
+
+            const conditionArgs = {
+                'conditionPropertyName': 'var1'
+            };
+
+            const result = showConditionFunctions.hasAnyValue(data, conditionArgs);
+
+            expect(result).toBeTruthy();
+        });
+
+        it('should return true when conditionPropertyName has number val in data',  () => {
+
+            const data =  {
+                'var1': 100
+            };
+
+            const conditionArgs = {
+                'conditionPropertyName': 'var1'
+            };
+
+            const result = showConditionFunctions.hasAnyValue(data, conditionArgs);
+
+            expect(result).toBeTruthy();
+        });
+    });
 });
