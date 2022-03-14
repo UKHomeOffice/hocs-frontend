@@ -69,7 +69,7 @@ const StageSummary = () => {
         <Fragment>
             {(summary && Object.keys(summary).length !== 0) &&
                 <Fragment>
-                    <h2 className='govuk-heading-m'>Active stage{summary.stages.length > 1 && 's'}</h2>
+                    {summary.stages.length > 0 && <h2 className='govuk-heading-m'>Active stage{summary.stages.length > 1 && 's'}</h2>}
                     {summary.stages.map(stage => renderActiveStage(stage))}
                     <h2 className='govuk-heading-m'>Case</h2>
                     <table className='govuk-table margin-left--small'>
@@ -105,6 +105,7 @@ const StageSummary = () => {
                                         {primaryCorrespondent.address.postcode && <> <br /> <span>{primaryCorrespondent.address.postcode}</span> </>}
                                         {primaryCorrespondent.address.country && <> <br /> <span>{primaryCorrespondent.address.country}</span> </>}
                                     </>}
+                                    {primaryCorrespondent.reference && <> <br /> <span>{primaryCorrespondent.reference}</span> </>}
                                 </td>
                             </tr>}
                             {summary.additionalFields && summary.additionalFields.map(({ label, value }) => renderRow({ label, value }))}

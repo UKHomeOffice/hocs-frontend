@@ -1,5 +1,252 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Stage summary component should not render the "Active Stage" title, when there are no active stages 1`] = `
+Array [
+  <h2
+    class="govuk-heading-m"
+  >
+    Case
+  </h2>,
+  <table
+    class="govuk-table margin-left--small"
+  >
+    <caption
+      class="govuk-table__caption margin-bottom--small"
+    >
+      Summary
+    </caption>
+    <tbody
+      class="govuk-table__body"
+    >
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Date received
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          __received__
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__cell"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Created
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          __created__
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__cell"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Deadline
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          __deadline__
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__cell"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Primary topic
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          __primaryTopic__
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__cell"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Primary correspondent
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          <span>
+            __fullname__
+          </span>
+           
+          <br />
+           
+          <span>
+            __organisation__
+          </span>
+            
+          <br />
+           
+          <span>
+            __telephone__
+          </span>
+            
+          <br />
+           
+          <span>
+            __address1__
+          </span>
+            
+          <br />
+           
+          <span>
+            __address2__
+          </span>
+            
+          <br />
+           
+          <span>
+            __address3__
+          </span>
+            
+          <br />
+           
+          <span>
+            __postcode__
+          </span>
+            
+          <br />
+           
+          <span>
+            __country__
+          </span>
+            
+          <br />
+           
+          <span>
+            __reference__
+          </span>
+           
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          __label__
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          __value__
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          __label__
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          __value__
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+  <table
+    class="govuk-table margin-left--small"
+  >
+    <caption
+      class="govuk-table__caption margin-bottom--small"
+    >
+      Stage deadlines
+    </caption>
+    <tbody
+      class="govuk-table__body"
+    >
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          __label__
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          __value__
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          __label__
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          __value__
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+  <table
+    class="govuk-table margin-left--small"
+  >
+    <caption
+      class="govuk-table__caption margin-bottom--small"
+    >
+      Previous Case
+    </caption>
+    <tbody
+      class="govuk-table__body"
+    >
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Reference
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          <a
+            class="govuk-link govuk-!-margin-right-3"
+            href="/case/__previousCaseUuid__/stage/__previousCaseStage__"
+            rel="noreferrer noopener"
+            target="_blank"
+          >
+            __previousCaseReference__
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+]
+`;
+
 exports[`Stage summary component should not show the empty address lines 1`] = `
 Array [
   <h2
@@ -204,6 +451,12 @@ Array [
            
           <span>
             __country__
+          </span>
+            
+          <br />
+           
+          <span>
+            __reference__
           </span>
            
         </td>
@@ -507,6 +760,18 @@ Array [
           <br />
            
           <span>
+            __address2__
+          </span>
+            
+          <br />
+           
+          <span>
+            __address3__
+          </span>
+            
+          <br />
+           
+          <span>
             __postcode__
           </span>
             
@@ -514,6 +779,12 @@ Array [
            
           <span>
             __country__
+          </span>
+            
+          <br />
+           
+          <span>
+            __reference__
           </span>
            
         </td>
@@ -843,6 +1114,12 @@ Array [
           <span>
             __country__
           </span>
+            
+          <br />
+           
+          <span>
+            __reference__
+          </span>
            
         </td>
       </tr>
@@ -1136,6 +1413,12 @@ Array [
            
           <span>
             __country__
+          </span>
+            
+          <br />
+           
+          <span>
+            __reference__
           </span>
            
         </td>
