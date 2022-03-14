@@ -297,7 +297,7 @@ steps:
     image: quay.io/ukhomeofficedigital/kd:v1.16.0
     environment:
       ENVIRONMENT: cs-dev
-      VERSION: "${DRONE_COMMIT_SHA}"
+      VERSION: "${DRONE_TAG}"
       KUBE_TOKEN:
         from_secret: hocs_frontend_cs_dev
       POISE_IPS:
@@ -312,7 +312,7 @@ steps:
     image: quay.io/ukhomeofficedigital/kd:v1.16.0
     environment:
       ENVIRONMENT: wcs-dev
-      VERSION: "${DRONE_COMMIT_SHA}"
+      VERSION: "${DRONE_TAG}"
       KUBE_TOKEN:
         from_secret: hocs_frontend_wcs_dev
       POISE_IPS:
