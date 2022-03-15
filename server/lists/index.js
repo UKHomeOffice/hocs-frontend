@@ -718,9 +718,9 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
-        S_BF_COMPLAINT_REASON_MINOR: {
+        S_BF_COMPLAINT_REASON_SERVICE: {
             client: 'INFO',
-            endpoint: '/entity/list/BF_COMPLAINT_REASON_MINOR',
+            endpoint: '/entity/list/BF_COMPLAINT_REASON_SERVICE',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
