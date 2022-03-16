@@ -22,7 +22,7 @@ class DocumentList extends Component {
                         <table className='govuk-table'>
                             <tbody className='govuk-table__body'>
                                 {
-                                    caseId && Array.isArray(groupedDocuments) && groupedDocuments.map(({ label, status, tags, value }, i) => (
+                                    caseId && Array.isArray(groupedDocuments) && groupedDocuments.map(({ label, tags, value, hasPdf, hasOriginalFile }, i) => (
                                         <tr key={i} className='govuk-table__row'>
                                             <td className='govuk-table__cell govuk-!-width-full'>
                                                 {label}
@@ -36,7 +36,7 @@ class DocumentList extends Component {
                                             </td>
                                             }
                                             <td className='govuk-table__cell'>
-                                                {value && status === 'UPLOADED' && caseId && activeDocument !== value &&
+                                                {value && hasPdf && caseId && activeDocument !== value &&
                                                     <a
                                                         id={`${value}-pdf`}
                                                         href={`/case/${caseId}/stage/${stageId}/download/document/${value}/pdf`}
@@ -48,7 +48,7 @@ class DocumentList extends Component {
                                                 }
                                             </td>
                                             <td className='govuk-table__cell'>
-                                                {value && status === 'UPLOADED' && caseId &&
+                                                {value && hasOriginalFile && caseId &&
                                                     <a
                                                         href={`/case/${caseId}/stage/${stageId}/download/document/${value}/original`}
                                                         className='govuk-link'
