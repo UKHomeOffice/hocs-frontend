@@ -890,7 +890,7 @@ module.exports = {
             endpoint: '/teams?unit=POGR_GRO_DRAFTING_TEAMS',
             type: listService.types.STATIC,
             adapter: teamsAdapter
-        },
+        }
     },
     clients: {
         CASEWORK: caseworkService,
