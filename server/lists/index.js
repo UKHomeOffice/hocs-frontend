@@ -234,6 +234,12 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
+        S_FOI_ALL_RESP_TEAMS: {
+            client: 'INFO',
+            endpoint: '/entity/list/FOI_ALL_RESP_TEAMS',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
         S_FOI_CASEWORK_TEAMS: {
             client: 'INFO',
             endpoint: '/teams?unit=FOI_CASEWORK_TEAMS',
