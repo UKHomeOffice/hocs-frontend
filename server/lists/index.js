@@ -884,7 +884,13 @@ module.exports = {
             endpoint: '/entity/list/BF_INTERESTED_PARTIES',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
-        }
+        },
+        S_POGR_GRO_DRAFTING_TEAMS: {
+            client: 'INFO',
+            endpoint: '/teams?unit=POGR_GRO_DRAFTING_TEAMS',
+            type: listService.types.STATIC,
+            adapter: teamsAdapter
+        },
     },
     clients: {
         CASEWORK: caseworkService,
