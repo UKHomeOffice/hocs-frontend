@@ -559,6 +559,11 @@ module.exports = {
             endpoint: '/case/document/reference/${caseId}/?type=Final%20responses',
             adapter: documentListAdapter
         },
+        CASE_DOCUMENT_LIST_INTERIM_LETTERS: {
+            client: 'CASEWORK',
+            endpoint: '/case/document/reference/${caseId}/?type=Interim%20Letters',
+            adapter: documentListAdapter
+        },
         CASE_DOCUMENT_TAGS: {
             client: 'CASEWORK',
             endpoint: '/case/${caseId}/documentTags',
