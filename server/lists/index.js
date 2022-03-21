@@ -885,6 +885,12 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
+        BF2_INTERESTED_PARTIES: {
+            client: 'INFO',
+            endpoint: '/entity/list/BF_INTERESTED_PARTIES',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
         S_POGR_GRO_DRAFTING_TEAMS: {
             client: 'INFO',
             endpoint: '/teams?unit=POGR_GRO_DRAFTING_TEAMS',
