@@ -17,6 +17,9 @@ const caseTypeSidebarTabsFlags = {
     BF: {
         foi_actions: true,
         ex_gratia: true
+    },
+    BF2: {
+        ex_gratia: true
     }
 };
 
