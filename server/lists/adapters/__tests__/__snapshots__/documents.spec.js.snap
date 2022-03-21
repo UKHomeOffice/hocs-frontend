@@ -29,6 +29,19 @@ Array [
         "type": "type1",
         "value": 2,
       },
+      Object {
+        "hasOriginalFile": false,
+        "hasPdf": false,
+        "label": "Document E",
+        "status": "PENDING",
+        "tags": Array [
+          "Pending",
+          "Test Label",
+        ],
+        "timeStamp": "01-01-2019",
+        "type": "type1",
+        "value": 5,
+      },
     ],
   ],
   Array [

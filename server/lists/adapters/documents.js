@@ -44,8 +44,7 @@ module.exports = async (data, { logger }) => {
             tags.push(translatedStatus);
         }
 
-        tags.concat(labels ?? []);
-        return tags;
+        return tags.concat(labels ?? []);
     };
 
     return [...data.documents
