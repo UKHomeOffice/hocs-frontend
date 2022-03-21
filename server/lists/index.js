@@ -561,7 +561,7 @@ module.exports = {
         },
         CASE_DOCUMENT_LIST_INTERIM_LETTERS: {
             client: 'CASEWORK',
-            endpoint: '/case/document/reference/${caseId}/?type=Interim%20Letters',
+            endpoint: '/case/document/reference/${caseId}/?type=Interim%20Letter',
             adapter: documentListAdapter
         },
         CASE_DOCUMENT_TAGS: {
