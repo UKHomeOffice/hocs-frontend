@@ -579,7 +579,7 @@ module.exports = {
         },
         CASE_DOCUMENT_LIST_INTERIM_LETTERS: {
             client: 'CASEWORK',
-            endpoint: '/case/document/reference/${caseId}/?type=Interim%20Letters',
+            endpoint: '/case/document/reference/${caseId}/?type=Interim%20Letter',
             adapter: documentListAdapter
         },
         CASE_DOCUMENT_TAGS: {
@@ -902,6 +902,18 @@ module.exports = {
             endpoint: '/entity/list/BF_INTERESTED_PARTIES',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
+        },
+        BF2_INTERESTED_PARTIES: {
+            client: 'INFO',
+            endpoint: '/entity/list/BF_INTERESTED_PARTIES',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_POGR_GRO_DRAFTING_TEAMS: {
+            client: 'INFO',
+            endpoint: '/teams?unit=POGR_GRO_DRAFTING_TEAMS',
+            type: listService.types.STATIC,
+            adapter: teamsAdapter
         }
     },
     clients: {
