@@ -48,7 +48,8 @@ Dashboard.propTypes = {
     absoluteUrl: PropTypes.string,
     baseUrl: PropTypes.string,
     dashboard: PropTypes.array.isRequired,
-    alwaysLink: PropTypes.bool
+    alwaysLink: PropTypes.bool,
+    alwaysShow: PropTypes.bool
 };
 
 Dashboard.defaultProps = {

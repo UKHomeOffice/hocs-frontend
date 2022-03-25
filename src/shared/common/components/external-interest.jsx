@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Context } from '../../contexts/application.jsx';
+import PropTypes from 'prop-types';
 
 const ExternalInterest = (props) => {
     const { page } = useContext(Context);
@@ -73,6 +74,10 @@ const ExternalInterest = (props) => {
             </Link>
         </>
     );
+};
+
+ExternalInterest.propTypes = {
+    props: PropTypes.object
 };
 
 export default ExternalInterest;

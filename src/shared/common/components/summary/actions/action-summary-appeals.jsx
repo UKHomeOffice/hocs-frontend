@@ -13,8 +13,7 @@ const renderRow = ({ label, value }) => {
 
 renderRow.propTypes = {
     label: PropTypes.string.isRequired,
-    value: PropTypes.string.isRequired,
-    items: PropTypes.array.isRequired
+    value: PropTypes.string.isRequired
 };
 
 const ActionSummaryAppeals = ({ items: appeals }) => {
@@ -31,6 +30,10 @@ const ActionSummaryAppeals = ({ items: appeals }) => {
             ))}
         </>
     );
+};
+
+ActionSummaryAppeals.propTypes = {
+    items:PropTypes.array
 };
 
 export default ActionSummaryAppeals;

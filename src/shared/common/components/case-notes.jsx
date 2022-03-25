@@ -43,19 +43,31 @@ AuditEvent.propTypes = {
     note: PropTypes.string,
 };
 
-const TimelineItem = (refreshNotes) => ({ type, body, title, timelineItemUUID }) => {
-    const isCaseNote = [
-        'MANUAL', 'CLOSE_CASE_TELEPHONE', 'CONVERTED_CASE_TO_MINISTERIAL', 'CONVERTED_CASE_TO_OFFICIAL', 'ALLOCATE',
-        'CHANGE', 'CLOSE', 'REJECT', 'PHONECALL', 'REQUEST_CONTRIBUTION', 'SEND_TO_WORKFLOW_MANAGER', 'FOLLOW_UP',
-        'FOLLOW_UP_NOT_COMPLETED', 'WITHDRAW', 'CASE_TRANSFER_REASON',
-        'ENQUIRY_REASON_EUNATIONAL_OTHERDETAILS','RECORD_INTEREST', 'UPDATE_INTEREST',
-        'REFER'
-    ].includes(type);
-    return (
-        body && <li key={timelineItemUUID} className={classnames({ 'case-note': isCaseNote })}>
-            {isCaseNote ? <CaseNote {...body} title={title} timelineItemUUID={timelineItemUUID} refreshNotes={refreshNotes} /> : <AuditEvent {...body} title={title} />}
-        </li>
-    );
+const TimelineItem = (refreshNotes) => {
+    const Item = ({ type, body, title, timelineItemUUID }) => {
+        const isCaseNote = [
+            'MANUAL', 'CLOSE_CASE_TELEPHONE', 'CONVERTED_CASE_TO_MINISTERIAL', 'CONVERTED_CASE_TO_OFFICIAL', 'ALLOCATE',
+            'CHANGE', 'CLOSE', 'REJECT', 'PHONECALL', 'REQUEST_CONTRIBUTION', 'SEND_TO_WORKFLOW_MANAGER', 'FOLLOW_UP',
+            'FOLLOW_UP_NOT_COMPLETED', 'WITHDRAW', 'CASE_TRANSFER_REASON',
+            'ENQUIRY_REASON_EUNATIONAL_OTHERDETAILS', 'RECORD_INTEREST', 'UPDATE_INTEREST',
+            'REFER'
+        ].includes(type);
+        return (
+            body && <li key={timelineItemUUID} className={classnames({ 'case-note': isCaseNote })}>
+                {isCaseNote ? <CaseNote {...body} title={title} timelineItemUUID={timelineItemUUID}
+                    refreshNotes={refreshNotes}/> : <AuditEvent {...body} title={title}/>}
+            </li>
+        );
+    };
+
+    Item.propTypes = {
+        type: PropTypes.string,
+        body: PropTypes.object,
+        title: PropTypes.string,
+        timelineItemUUID: PropTypes.string
+    };
+
+    return Item;
 };
 
 class Timeline extends Component {
