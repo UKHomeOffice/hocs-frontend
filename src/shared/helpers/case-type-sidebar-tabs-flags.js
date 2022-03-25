@@ -17,7 +17,11 @@ const caseTypeSidebarTabsFlags = {
     BF: {
         foi_actions: true,
         ex_gratia: true
-    }
+    },
+    BF2: {
+        foi_actions: true,
+        ex_gratia: true
+    },
 };
 
 module.exports = (caseType) => {

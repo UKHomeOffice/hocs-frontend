@@ -20,6 +20,11 @@ describe('Form component', () => {
         stages = [{ type: 'test' }];
 
     const config = {
+        page: {
+            params: {
+                caseId: 'some_uuid'
+            }
+        },
         caseData: {
             PaymentTypeConsolatory: true,
             PaymentTypeExGratia: true,
@@ -66,7 +71,8 @@ describe('Form component', () => {
         ).toMatchSnapshot();
     });
 
-    it('should not render form when passed no stages (case is therefore closed)', () => {
+    it('should render EX_GRATIA_TAB_CLOSED, when has empty stages', () => {
+
         const emptyStages = [];
 
         expect(

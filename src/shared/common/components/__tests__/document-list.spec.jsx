@@ -5,17 +5,22 @@ describe('Document list component', () => {
 
     const documentList = [
         ['group 1', [
-            { label: 'TEST_DOCUMENT_1', value: 'MOCK_DOC_ID_1', status: 'UPLOADED', tags: ['UPLOADED'] },
-            { label: 'TEST_DOCUMENT_2', value: 'MOCK_DOC_ID_2', status: 'UPLOADED', tags: ['UPLOADED'] },
-            { label: 'TEST_DOCUMENT_3', value: 'MOCK_DOC_ID_3', status: 'PENDING', tags: ['PENDING'] },
+            { label: 'TEST_DOCUMENT_1', value: 'MOCK_DOC_ID_1', status: 'UPLOADED', hasPdf: true, hasOriginalFile: true },
+            { label: 'TEST_DOCUMENT_2', value: 'MOCK_DOC_ID_2', status: 'FAILED_CONVERSION', tags: ['Failed Conversion'], hasPdf: false, hasOriginalFile: true },
+            { label: 'TEST_DOCUMENT_3', value: 'MOCK_DOC_ID_3', status: 'FAILED_VIRUS', tags: ['Failed Virus'], hasPdf: false, hasOriginalFile: false },
+            { label: 'TEST_DOCUMENT_4', value: 'MOCK_DOC_ID_4', status: 'PENDING', tags: [], hasPdf: false, hasOriginalFile: true },
+
         ]], ['group 2', [
-            { label: 'TEST_DOCUMENT_4', value: 'MOCK_DOC_ID_4', status: 'UPLOADED', tags: ['UPLOADED'] },
-            { label: 'TEST_DOCUMENT_5', value: 'MOCK_DOC_ID_5', status: 'UPLOADED', tags: ['UPLOADED'] },
-            { label: 'TEST_DOCUMENT_6', value: 'MOCK_DOC_ID_6', status: 'UPLOADED', tags: ['UPLOADED'] },
+            { label: 'TEST_DOCUMENT_5', value: 'MOCK_DOC_ID_5', status: 'UPLOADED', hasPdf: true, hasOriginalFile: true },
+            { label: 'TEST_DOCUMENT_6', value: 'MOCK_DOC_ID_6', status: 'FAILED_CONVERSION', tags: ['Failed Conversion'], hasPdf: false, hasOriginalFile: true },
+            { label: 'TEST_DOCUMENT_7', value: 'MOCK_DOC_ID_7', status: 'FAILED_VIRUS', tags: ['Failed Virus'], hasPdf: false, hasOriginalFile: false },
+            { label: 'TEST_DOCUMENT_8', value: 'MOCK_DOC_ID_8', status: 'PENDING', tags: ['Pending'], hasPdf: false, hasOriginalFile: true },
         ]], ['group 3', [
-            { label: 'TEST_DOCUMENT_7', value: 'MOCK_DOC_ID_7', status: 'UPLOADED', tags: ['UPLOADED'] },
-            { label: 'TEST_DOCUMENT_8', value: 'MOCK_DOC_ID_8', status: 'PENDING', tags: ['PENDING'] },
-            { label: 'TEST_DOCUMENT_9', value: 'MOCK_DOC_ID_9', status: 'PENDING', tags: ['PENDING'] },
+            { label: 'TEST_DOCUMENT_9', value: 'MOCK_DOC_ID_9', status: 'UPLOADED', hasPdf: true, hasOriginalFile: true },
+            { label: 'TEST_DOCUMENT_10', value: 'MOCK_DOC_ID_10', status: 'FAILED_CONVERSION', tags: ['Failed Conversion'], hasPdf: false, hasOriginalFile: true },
+            { label: 'TEST_DOCUMENT_11', value: 'MOCK_DOC_ID_11', status: 'FAILED_VIRUS',  tags: ['Failed Virus'], hasPdf: false, hasOriginalFile: false },
+            { label: 'TEST_DOCUMENT_12', value: 'MOCK_DOC_ID_12', status: 'PENDING', tags: ['UNKNOWN', 'Pending'], hasPdf: false, hasOriginalFile: true },
+            { label: 'TEST_DOCUMENT_13', value: 'MOCK_DOC_ID_13', status: 'INVALID', tags: ['INVALID'], hasPdf: false, hasOriginalFile: false },
         ]]
     ];
 

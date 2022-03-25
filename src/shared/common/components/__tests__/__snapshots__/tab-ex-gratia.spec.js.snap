@@ -78,13 +78,26 @@ Array [
 ]
 `;
 
-exports[`Form component should not render form when passed no stages (case is therefore closed) 1`] = `
+exports[`Form component should render EX_GRATIA_TAB_CLOSED, when has empty stages 1`] = `
 Array [
   <h2
     class="govuk-heading-m"
   >
     Ex-Gratia
   </h2>,
+  <details
+    class="govuk-details"
+  >
+    <summary
+      class="govuk-details__summary"
+    >
+      <span
+        class="govuk-details__summary-text"
+      >
+        Update Ex-Gratia details
+      </span>
+    </summary>
+  </details>,
   <table
     class="govuk-table margin-left--small"
   >

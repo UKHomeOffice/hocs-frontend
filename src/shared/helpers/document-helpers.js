@@ -10,10 +10,12 @@ const flattenDocuments = (documents) => {
     return [];
 };
 
-const getFirstDocument = (flatDocumentList) => {
+const getFirstDocumentWithPdfLink = (flatDocumentList) => {
     if (Array.isArray(flatDocumentList)) {
-        const { value: firstDocument } = flatDocumentList.filter(({ status }) => status !== 'PENDING')[0] || { value: undefined };
-        return firstDocument;
+        const firstDocument = flatDocumentList
+            .filter(({ hasPdf }) => hasPdf)
+            .shift();
+        return firstDocument?.value;
     }
     return undefined;
 };
@@ -27,7 +29,6 @@ const hasPendingDocuments = (documents) => {
 
 export {
     flattenDocuments,
-    getFirstDocument,
+    getFirstDocumentWithPdfLink,
     hasPendingDocuments
 };
-

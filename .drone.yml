@@ -145,78 +145,6 @@ steps:
       target:
         include:
           - "*-prod"
----
-
-kind: pipeline
-type: kubernetes
-name: lint-k8s
-trigger:
-  event:
-    - push
-  branch:
-    exclude:
-      - main
-
-steps:
-- name: lint bash
-  image: koalaman/shellcheck-alpine
-  commands:
-    - shellcheck kube/*.sh
-  depends_on:
-    - clone
-
----
-
-kind: pipeline
-type: kubernetes
-name: dry-run-k8s
-trigger:
-  event:
-    - push
-  branch:
-    exclude:
-      - main
-
-# This pipeline runs deploy.sh with a few different ENVIRONMENTs set
-# we run them with DRY_RUN=true so they don't do anything
-#
-# We're essentially checking that deploy.sh finishes with an exit code
-# of zero, which will only happen if all accessed environment variables
-# are defined correctly
-#
-# This Drone pipeline doesn't have access to actual kube tokens so there's
-# no danger of actually deploying anywhere
-
-steps:
-- name: dry-run kd dev
-  image: quay.io/ukhomeofficedigital/kd:v1.16.0
-  environment:
-    DRY_RUN: true
-    VERSION: test
-    ENVIRONMENT: wcs-dev
-    KUBE_TOKEN: test
-    POISE_IPS: "127.0.0.1/32"
-    ACPTUNNEL_IPS: "127.0.0.1/32"
-  commands:
-    - cd kube
-    - bash -x deploy.sh
-  depends_on:
-    - clone
-
-- name: dry-run kd prod
-  image: quay.io/ukhomeofficedigital/kd:v1.16.0
-  environment:
-    DRY_RUN: true
-    VERSION: test
-    ENVIRONMENT: cs-prod
-    KUBE_TOKEN: test
-    POISE_IPS: "127.0.0.1/32"
-    ACPTUNNEL_IPS: "127.0.0.1/32"
-  commands:
-    - cd kube
-    - bash -x deploy.sh
-  depends_on:
-    - clone
 
 ---
 kind: pipeline
@@ -227,6 +155,7 @@ trigger:
     - tag
   branch:
     - main
+    - support/*
 
 steps:
   - name: install dependencies
@@ -255,13 +184,6 @@ steps:
     depends_on:
       - install dependencies
 
-  - name: sonar scanner
-    image: quay.io/ukhomeofficedigital/sonar-scanner
-    commands:
-      - sonar-scanner -Dsonar.projectVersion="$(git rev-parse --abbrev-ref HEAD)"
-    depends_on:
-      - test project
-
   - name: build & push
     image: plugins/docker
     settings:
@@ -278,7 +200,28 @@ steps:
     depends_on:
       - build project
       - test project
-      - lint project
+    when:
+      branch:
+        - main
+
+  - name: build & push tag
+    image: plugins/docker
+    settings:
+      registry: quay.io
+      repo: quay.io/ukhomeofficedigital/hocs-frontend
+      tags:
+        - ${DRONE_TAG}
+        - ${DRONE_COMMIT_SHA}
+    environment:
+      DOCKER_PASSWORD:
+        from_secret: QUAY_ROBOT_TOKEN
+      DOCKER_USERNAME: ukhomeofficedigital+hocs_quay_robot
+    depends_on:
+      - build project
+      - test project
+    when:
+      branch:
+        - support/*
 
 ---
 kind: pipeline

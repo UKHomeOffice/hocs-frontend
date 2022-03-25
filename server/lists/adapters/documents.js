@@ -17,23 +17,47 @@ module.exports = async (data, { logger }) => {
         }
     };
 
+    const translateDocumentStatus = (status) => {
+        const statusMap = {
+            PENDING: 'Pending',
+            FAILED_VIRUS: 'Failed Virus Scan',
+            FAILED_CONVERSION: 'Failed Conversion'
+        };
+
+        if (status === 'UPLOADED') {
+            return;
+        }
+
+        const mappedStatus = statusMap[status];
+        if (!mappedStatus) {
+            logger.warn('REQUEST_CASE_DOCUMENTS', { message: `Unmapped status found: ${status}` });
+        }
+
+        return mappedStatus ?? status;
+    };
+
+    const generateTags = (labels, status) => {
+        const tags = [];
+
+        const translatedStatus = translateDocumentStatus(status);
+        if (translatedStatus) {
+            tags.push(translatedStatus);
+        }
+
+        return tags.concat(labels ?? []);
+    };
+
     return [...data.documents
-        .map(({ displayName, uuid, created, status, type, labels }) => {
-            var tags = [];
-            if (status !== 'UPLOADED') {
-                tags.push(status);
-            }
-            if (labels) {
-                tags = tags.concat(labels);
-            }
+        .map(({ displayName, uuid, created, status, type, labels, hasPdf, hasOriginalFile }) => {
             return {
                 label: displayName,
                 status,
-                tags,
                 timeStamp: created,
                 type,
                 value: uuid,
-                labels
+                tags: generateTags(labels, status),
+                hasPdf,
+                hasOriginalFile
             };
         })
         .reduce(reduceDocumentsByType, new Map(data.documentTags.map(label => [label, []])))]

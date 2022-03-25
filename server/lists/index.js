@@ -559,6 +559,11 @@ module.exports = {
             endpoint: '/case/document/reference/${caseId}/?type=Final%20responses',
             adapter: documentListAdapter
         },
+        CASE_DOCUMENT_LIST_INTERIM_LETTERS: {
+            client: 'CASEWORK',
+            endpoint: '/case/document/reference/${caseId}/?type=Interim%20Letter',
+            adapter: documentListAdapter
+        },
         CASE_DOCUMENT_TAGS: {
             client: 'CASEWORK',
             endpoint: '/case/${caseId}/documentTags',
@@ -718,9 +723,9 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
-        S_BF_COMPLAINT_REASON_MINOR: {
+        S_BF_COMPLAINT_REASON_SERVICE: {
             client: 'INFO',
-            endpoint: '/entity/list/BF_COMPLAINT_REASON_MINOR',
+            endpoint: '/entity/list/BF_COMPLAINT_REASON_SERVICE',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
@@ -879,6 +884,18 @@ module.exports = {
             endpoint: '/entity/list/BF_INTERESTED_PARTIES',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
+        },
+        BF2_INTERESTED_PARTIES: {
+            client: 'INFO',
+            endpoint: '/entity/list/BF_INTERESTED_PARTIES',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_POGR_GRO_DRAFTING_TEAMS: {
+            client: 'INFO',
+            endpoint: '/teams?unit=POGR_GRO_DRAFTING_TEAMS',
+            type: listService.types.STATIC,
+            adapter: teamsAdapter
         }
     },
     clients: {
