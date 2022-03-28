@@ -11,26 +11,27 @@ trigger:
 
 steps:
   - name: install dependencies
-    image: node:14.15.4-alpine
+    image: &node-version
+      node:14.15.4-alpine
     commands:
       - npm --loglevel warn install --production=false --no-optional
 
   - name: build project
-    image: node:14.15.4-alpine
+    image: *node-version
     commands:
       - npm run build-prod
     depends_on:
       - install dependencies
 
   - name: test project
-    image: node:14.15.4-alpine
+    image: *node-version
     commands:
       - npm test
     depends_on:
       - install dependencies
 
   - name: lint project
-    image: node:14.15.4-alpine
+    image: *node-version
     commands:
       - npm run lint
     depends_on:
@@ -159,26 +160,27 @@ trigger:
 
 steps:
   - name: install dependencies
-    image: node:14.15.4-alpine
+    image: &node-version
+      node:14.15.4-alpine
     commands:
       - npm --loglevel warn install --production=false --no-optional
 
   - name: build project
-    image: node:14.15.4-alpine
+    image: *node-version
     commands:
       - npm run build-prod
     depends_on:
       - install dependencies
 
   - name: test project
-    image: node:14.15.4-alpine
+    image: *node-version
     commands:
       - npm test
     depends_on:
       - install dependencies
 
   - name: lint project
-    image: node:14.15.4-alpine
+    image: *node-version
     commands:
       - npm run lint
     depends_on:
