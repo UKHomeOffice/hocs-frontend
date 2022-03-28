@@ -12,6 +12,7 @@ trigger:
 steps:
   - name: install dependencies
     image: &node-version
+      # The version we're targeting for production
       node:14.15.4-alpine
     commands:
       - npm --loglevel warn install --production=false --no-optional
@@ -58,6 +59,39 @@ steps:
       - build project
       - test project
       - lint project
+
+---
+kind: pipeline
+type: kubernetes
+name: build-lts
+trigger:
+  event:
+    - push
+  branch:
+    exclude:
+      - main
+
+steps:
+  - name: install dependencies
+    image: &node-version
+      # the latest version of the LTS (prospective production)
+      node:lts-alpine
+    commands:
+      - npm --loglevel warn install --production=false --no-optional
+
+  - name: build project
+    image: *node-version
+    commands:
+      - npm run build-prod
+    depends_on:
+      - install dependencies
+
+  - name: test project
+    image: *node-version
+    commands:
+      - npm test
+    depends_on:
+      - install dependencies
 
 ---
 kind: pipeline
