@@ -13,7 +13,7 @@ steps:
   - name: install dependencies
     image: &node-version
       # The version we're targeting for production
-      node:14.15.4-alpine
+      node:16.14.2-alpine
     commands:
       - npm --loglevel warn install --production=false --no-optional
 
@@ -195,7 +195,7 @@ trigger:
 steps:
   - name: install dependencies
     image: &node-version
-      node:14.15.4-alpine
+      node:16.14.2-alpine
     commands:
       - npm --loglevel warn install --production=false --no-optional
 

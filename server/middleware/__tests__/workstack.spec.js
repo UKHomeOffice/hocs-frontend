@@ -61,7 +61,7 @@ describe('Workstack middleware', () => {
             await userWorkstackMiddleware(reqWithoutUser, res, next);
             expect(res.locals.workstack).not.toBeDefined();
             expect(next).toHaveBeenCalled();
-            expect(next).toHaveBeenCalledWith(TypeError('Cannot read property \'uuid\' of undefined'));
+            expect(next).toHaveBeenCalledWith(TypeError('Cannot read properties of undefined (reading \'uuid\')'));
         });
 
         it('should call next with an error if unable to retrieve workstack data', async () => {
