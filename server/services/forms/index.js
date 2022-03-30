@@ -67,6 +67,18 @@ const bfComplainantContributionsRequest = {
     primaryChoiceList: 'S_BF_CONTRIB_TYPE'
 };
 
+const pogrContributionsRequest = {
+    showBusinessUnits: true,
+    primaryChoiceLabel: 'Business Area',
+    primaryChoiceList: 'MPAM_CONTRIBUTION_BUSINESS_AREAS'
+};
+
+const pogrComplainantContributionsRequest = {
+    showBusinessUnits: false,
+    primaryChoiceLabel: 'Contributions Type',
+    primaryChoiceList: 'S_BF_CONTRIB_TYPE'
+};
+
 const formDefinitions = {
     ACTION: {
         CREATE: {
@@ -473,6 +485,32 @@ const formDefinitions = {
                     builder: formRepository.contributionFulfillment,
                     action: EDIT_CONTRIBUTION,
                     customConfig: toContributionsRequest
+                }
+            },
+            POGR: {
+                ADDREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    action: ADD_CONTRIBUTION,
+                    customConfig: pogrComplainantContributionsRequest
+                },
+                EDIT: {
+                    builder: formRepository.contributionFulfillment,
+                    action: EDIT_CONTRIBUTION,
+                    customConfig: pogrComplainantContributionsRequest
+                }
+            },
+        },
+        BUS_CONTRIBUTIONS: {
+            POGR: {
+                ADDREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    action: ADD_CONTRIBUTION,
+                    customConfig: pogrContributionsRequest
+                },
+                EDIT: {
+                    builder: formRepository.contributionFulfillment,
+                    action: EDIT_CONTRIBUTION,
+                    customConfig: pogrContributionsRequest
                 }
             },
         },
