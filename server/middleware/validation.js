@@ -8,6 +8,7 @@ const validationErrors = {
     required: label => `${label} is required`,
     alphanumeric: label => `${label} must be alphanumeric`,
     currency: label => `${label} must be currency amount`,
+    pounds: label => `${label} must be in GBP amount`,
     numeric: label => `${label} must be numeric`,
     hasWhitelistedExtension: (value, extension) => {
         return `${value} is a ${extension.toUpperCase()} file which is not allowed`;
