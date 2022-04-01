@@ -582,6 +582,11 @@ module.exports = {
             endpoint: '/case/document/reference/${caseId}/?type=Interim%20Letter',
             adapter: documentListAdapter
         },
+        CASE_DOCUMENT_LIST_POGR_DRAFT: {
+            client: 'CASEWORK',
+            endpoint: '/case/document/reference/${caseId}/?type=Draft',
+            adapter: documentListAdapter
+        },
         CASE_DOCUMENT_TAGS: {
             client: 'CASEWORK',
             endpoint: '/case/${caseId}/documentTags',
