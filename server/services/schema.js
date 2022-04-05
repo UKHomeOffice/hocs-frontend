@@ -11,7 +11,7 @@ const getFieldsForSchema = async (req, res, next) => {
     try {
         const headers = User.createHeaders(user);
         const response = await infoService.get(`/schema/${req.params.schemaType}/fields`, { headers });
-        res.form = { schema: { fields: [ ...response.data] } };
+        res.form = response.data;
         req.form = { schema: { fields: [ ...response.data] } };
         next();
     } catch (error) {

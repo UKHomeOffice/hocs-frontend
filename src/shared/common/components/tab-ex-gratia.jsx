@@ -106,7 +106,7 @@ const TabExGratia = (props) => {
 
                     {form && form.data != null &&
                         <FormEmbeddedWrapped
-                            schema={{ fields: form.data.schema.fields }}
+                            schema={{ fields: form.data }}
                             fieldData={ caseData }
                             errors={ error }
                             action={`/case/${page.params.caseId}/stage/${page.params.stageId}/data`}

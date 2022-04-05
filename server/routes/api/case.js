@@ -22,7 +22,6 @@ const { somuApiResponseMiddleware } = require('../../middleware/somu');
 const { getFormForCase, getFormForStage } = require('../../services/form');
 const { getFieldsForSchema } = require('../../services/schema');
 
-
 router.get('/:caseId/stage/:stageId/allocate', allocateCase);
 router.post('/:caseId/stage/:stageId/allocate/team',
     fileMiddleware.any(),

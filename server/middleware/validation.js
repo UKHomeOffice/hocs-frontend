@@ -8,7 +8,6 @@ const validationErrors = {
     required: label => `${label} is required`,
     alphanumeric: label => `${label} must be alphanumeric`,
     currency: label => `${label} must be currency amount`,
-    pounds: label => `${label} must be in GBP amount`,
     numeric: label => `${label} must be numeric`,
     hasWhitelistedExtension: (value, extension) => {
         return `${value} is a ${extension.toUpperCase()} file which is not allowed`;
@@ -229,7 +228,7 @@ const validators = {
         return null;
     },
     currency: ({ label, value, message }) => {
-        const format = /^\d+(\.\d{2})?$/;
+        const format = /^\d+(\.\d{2})$/;
         if (value && !format.test(value)) {
             return message || validationErrors.currency(label);
         }
