@@ -131,8 +131,8 @@ describe('Validators', () => {
         it('should reject three decimal', () => {
             expect(validators.currency({ label: 'test', value: '1234.567' })).toEqual('test must be currency amount');
         });
-        it('should accept numeric only', () => {
-            expect(validators.currency({ label: 'test', value: '1234' })).toEqual(null);
+        it('should reject numeric only', () => {
+            expect(validators.currency({ label: 'test', value: '1234' })).toEqual('test must be currency amount');
         });
         it('should accept double place', () => {
             expect(validators.currency({ label: 'test', value: '1234.56' })).toEqual(null);

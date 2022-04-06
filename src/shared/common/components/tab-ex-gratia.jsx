@@ -2,7 +2,12 @@ import React, { useContext, useEffect, Fragment, useCallback, useState } from 'r
 import { Context } from '../../contexts/application.jsx';
 import PropTypes from 'prop-types';
 import status from '../../helpers/api-status';
-import { updateApiStatus, unsetCaseData, clearApiStatus, updateCaseData } from '../../contexts/actions/index.jsx';
+import {
+    updateApiStatus,
+    unsetCaseData,
+    clearApiStatus,
+    updateCaseData,
+} from '../../contexts/actions/index.jsx';
 import getCaseData from '../../helpers/case-data-helper';
 import axios from 'axios';
 import FormEmbeddedWrapped from '../forms/form-embedded-wrapped.jsx';
@@ -10,6 +15,7 @@ import FormEmbeddedWrapped from '../forms/form-embedded-wrapped.jsx';
 const TabExGratia = (props) => {
     const { caseData, dispatch, page } = useContext(Context);
     const [form, setForm] = useState(null);
+    const [error, setError] = useState(null);
 
     const fetchCaseData = useCallback(() => {
         dispatch(updateApiStatus(status.REQUEST_CASE_DATA));
@@ -44,6 +50,11 @@ const TabExGratia = (props) => {
             e.preventDefault();
             setWrappedState({ submittingForm: true });
 
+            let schemaType = 'EX_GRATIA_TAB';
+            if (props.stages.length < 1) {
+                schemaType = 'EX_GRATIA_TAB_CLOSED';
+            }
+
             // eslint-disable-next-line no-undef
             const formData = new FormData();
             for (const [key, value] of Object.entries(wrappedState)) {
@@ -51,13 +62,20 @@ const TabExGratia = (props) => {
             }
             actionDispatch(updateApiStatus(status.UPDATE_CASE_DATA))
                 .then(() => {
-                    axios.post(`/api/case/${page.params.caseId}/stage/${page.params.stageId}/data?type=EX_GRATIA_UPDATE`,
+                    axios.post(`/api/case/${page.params.caseId}/stage/${page.params.stageId}/schema/${schemaType}/data?type=EX_GRATIA_UPDATE`,
                         formData,
                         { headers: { 'Content-Type': 'multipart/form-data' } })
-                        .then(() => {
-                            actionDispatch(updateApiStatus(status.UPDATE_CASE_DATA_SUCCESS))
-                                .then(() => actionDispatch(updateCaseData(wrappedState)))
-                                .then(() => setWrappedState({ submittingForm: false }));
+                        .then((res) => {
+                            if (res.data.errors) {
+                                actionDispatch(updateApiStatus(status.SUBMIT_FORM_VALIDATION_ERROR))
+                                    .then(() => setError(res.data.errors))
+                                    .then(() => setWrappedState({ submittingForm: false }));
+                            } else {
+                                actionDispatch(updateApiStatus(status.UPDATE_CASE_DATA_SUCCESS))
+                                    .then(() => setError(null))
+                                    .then(() => actionDispatch(updateCaseData(wrappedState)))
+                                    .then(() => setWrappedState({ submittingForm: false }));
+                            }
                         })
                         .then(() => {
                             actionDispatch(clearApiStatus());
@@ -89,7 +107,8 @@ const TabExGratia = (props) => {
                     {form && form.data != null &&
                         <FormEmbeddedWrapped
                             schema={{ fields: form.data }}
-                            fieldData={caseData}
+                            fieldData={ caseData }
+                            errors={ error }
                             action={`/case/${page.params.caseId}/stage/${page.params.stageId}/data`}
                             baseUrl={`/case/${page.params.caseId}/stage/${page.params.stageId}`}
                             submitHandler={submitHandler}

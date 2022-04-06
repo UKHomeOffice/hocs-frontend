@@ -228,7 +228,7 @@ const validators = {
         return null;
     },
     currency: ({ label, value, message }) => {
-        const format = /^\d+(\.\d{2})?$/;
+        const format = /^\d+(\.\d{2})$/;
         if (value && !format.test(value)) {
             return message || validationErrors.currency(label);
         }

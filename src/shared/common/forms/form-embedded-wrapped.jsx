@@ -23,6 +23,7 @@ const FormEmbeddedWrapped = (props) => {
         page={props.page}
         schema={props.schema}
         updateFormState={setWrappedState}
+        errors={props.errors}
         data={formState}
         action={props.action}
         baseUrl={props.baseUrl}
@@ -38,7 +39,8 @@ FormEmbeddedWrapped.propTypes = {
     fieldData: PropTypes.object,
     submitHandler: PropTypes.func,
     action: PropTypes.string,
-    baseUrl: PropTypes.string
+    baseUrl: PropTypes.string,
+    errors: PropTypes.object
 };
 
 const FormEmbeddedWrappedWrapper = props => (
