@@ -59,33 +59,37 @@ function caseDataApiResponseMiddleware(req, res) {
 
 async function createCaseNote(req, res, next) {
     try {
-        if (!req.body.caseNote) {
+        const caseNote = req.body.caseNote?.trim();
+        if (!caseNote) {
             res.locals.error = 'Case note must not be blank';
             next();
         }
+
         await caseworkService.post(`/case/${req.params.caseId}/note`, {
-            text: req.body.caseNote,
+            text: caseNote,
             type: 'MANUAL'
         }, { headers: User.createHeaders(req.user) });
     } catch (error) {
-        next(new Error(`Failed to attach case note to case ${req.params.caseId} `));
+        next(new Error(`Failed to attach case note to case ${req.params.caseId}`));
     }
     next();
 }
 
 async function updateCaseNote({ body: { caseNote }, params: { caseId, noteId }, user }, res, next) {
     try {
+        caseNote = caseNote?.trim();
         if (!caseNote) {
             res.locals.error = 'Case note must not be blank';
-            return next();
+            next();
         }
+
         const updated = await caseworkService.put(`/case/${caseId}/note/${noteId}`, {
             text: caseNote,
             type: 'MANUAL'
         }, { headers: User.createHeaders(user) });
         res.locals.caseNote = updated.data;
     } catch (error) {
-        return next(new Error(`Failed to update case note ${noteId} on case ${caseId} `));
+        return next(new Error(`Failed to update case note ${noteId} on case ${caseId}`));
     }
     return next();
 }
