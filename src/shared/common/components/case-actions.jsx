@@ -21,8 +21,8 @@ const CaseActions = () => {
             });
     }, []);
 
-    useEffect(() => {
-        fetchCaseActionData(page.params.caseId, dispatch);
+    useEffect(async () => {
+        await fetchCaseActionData(page.params.caseId, dispatch);
     }, [fetchCaseActionData]);
 
     return (

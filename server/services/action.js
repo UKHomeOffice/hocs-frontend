@@ -334,9 +334,40 @@ const actions = {
 
                             return handleActionSuccess(clientResponse, {}, form);
                         }
+                        case actionTypes.SUSPEND_CASE: {
+                            const requestBody = {
+                                actionType: 'SUSPEND',
+                                caseTypeActionUuid: form.data.caseTypeActionUuid,
+                                caseTypeActionLabel: 'SUSPEND',
+                                dateSuspensionApplied: new Date()
+                            };
+
+                            const response =  await caseworkService.post(`/case/${caseId}/stage/${stageId}/actions/suspension`,
+                                requestBody, headers);
+
+                            const clientResponse = {
+                                'summary': `Case ${response.data.reference} has been suspended.`,
+                                'link': `${response.data.reference}`
+                            };
+
+                            return handleActionSuccess(clientResponse, {}, form);
+                        }
+                        case actionTypes.UNSUSPEND_CASE: {
+
+                            const { caseActionId } = options;
+
+                            const response =  await caseworkService.delete(`/case/${caseId}/stage/${stageId}/actions/suspension/${caseActionId}`, headers);
+
+                            const clientResponse = {
+                                'summary': `Case ${response.data.reference} has been suspended.`,
+                                'link': `${response.data.reference}`
+                            };
+
+                            return handleActionSuccess(clientResponse, {}, form);
+                        }
                         case actionTypes.RECORD_INTEREST: {
 
-                            let requestBody = {
+                            const requestBody = {
                                 actionType: 'RECORD_INTEREST',
                                 caseTypeActionUuid: form.data.caseTypeActionUuid,
                                 caseTypeActionLabel: 'RECORD_INTEREST',
@@ -358,7 +389,7 @@ const actions = {
                         case actionTypes.UPDATE_INTEREST: {
                             const { caseActionId } = options;
 
-                            let requestBody = {
+                            const requestBody = {
                                 actionType: 'RECORD_INTEREST',
                                 uuid: caseActionId,
                                 caseTypeActionUuid: form.data.caseTypeActionUuid,

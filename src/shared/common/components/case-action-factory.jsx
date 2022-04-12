@@ -2,6 +2,7 @@ import React from 'react';
 import Appeals from './appeals.jsx';
 import Extensions from './extensions.jsx';
 import ExternalInterest from './external-interest.jsx';
+import Suspensions from './suspensions.jsx';
 
 
 const renderComponent = (Component, data) => {
@@ -34,7 +35,15 @@ export function actionComponentFactory(actionType, options) {
                     { renderComponent(ExternalInterest, options) }
                     <hr className="govuk-section-break govuk-section-break--xl govuk-section-break--visible"/>
                 </>);
+        case 'SUSPENSION':
+            return (
+                <>
+                    { renderComponent(Suspensions, options)}
+                    <hr className="govuk-section-break govuk-section-break--xl govuk-section-break--visible"/>
+                </>
+            );
         default:
             return null;
     }
 }
+
