@@ -37,7 +37,7 @@
     "license": "ISC",
     "dependencies": {
         "aws-sdk": "^2.1029.0",
-        "axios": "^0.22.0",
+        "axios": "^0.26.1",
         "body-parser": "^1.18.2",
         "classnames": "^2.2.6",
         "cookie-parser": "^1.4.6",
