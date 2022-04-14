@@ -1,8 +1,7 @@
 const Form = require('../form-builder');
 const { Component } = require('../component-builder');
 const listService = require('../../list/service');
-const uuid = require('uuid/v4');
-
+const { v4: uuid } = require('uuid');
 
 module.exports = async (options) => {
 

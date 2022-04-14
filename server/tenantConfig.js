@@ -1,6 +1,6 @@
 const listService = require('./services/list');
 const { isNotProd } = require('./config');
-const uuid = require('uuid/v4');
+const { v4: uuid } = require('uuid');
 
 async function renderConfig() {
     const configuration = await fetchConfiguration();
