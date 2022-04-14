@@ -590,6 +590,13 @@ td {
   }
 }
 
+.suspension_ul {
+  border: none;
+  &:last-child::after {
+    border: none;
+  }
+}
+
 .timeline-details {
   margin: 10px 0;
 
@@ -666,6 +673,21 @@ $border-colour: govuk-colour("mid-grey");
 
   &:hover {
     background-color: $highlight-colour;
+  }
+
+  &__content {
+
+    & > ul {
+      @include govuk-clearfix;
+      list-style-type: disc;
+      margin: 0;
+      padding: 0;
+
+      @include govuk-media-query($from: tablet) {
+        border-top: 0;
+        margin-bottom: govuk-spacing(4);
+      }
+    }
   }
 
   @include govuk-media-query($from: tablet) {

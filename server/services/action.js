@@ -247,7 +247,7 @@ const actions = {
                                 'summary': `Case: ${response.data.reference} extended`,
                                 'link': {
                                     label: `${response.data.reference}`,
-                                    href: `/case/${options.caseId}/stage/${options.stageId}/?tab=FOI_ACTIONS`
+                                    href: `/case/${options.caseId}/stage/${options.stageId}/?tab=CASE_ACTIONS`
                                 }
                             };
 
@@ -292,7 +292,7 @@ const actions = {
                                 'summary': `Appeal for ${response.data.reference} updated`,
                                 'link': {
                                     label: `${response.data.reference}`,
-                                    href: `/case/${options.caseId}/stage/${options.stageId}/?tab=FOI_ACTIONS`
+                                    href: `/case/${options.caseId}/stage/${options.stageId}/?tab=CASE_ACTIONS`
                                 }
                             };
 
@@ -328,7 +328,7 @@ const actions = {
                                 'summary': `Appeal for ${response.data.reference} registered`,
                                 'link': {
                                     label: `${response.data.reference}`,
-                                    href: `/case/${options.caseId}/stage/${options.stageId}/?tab=FOI_ACTIONS`
+                                    href: `/case/${options.caseId}/stage/${options.stageId}/?tab=CASE_ACTIONS`
                                 }
                             };
 
@@ -347,7 +347,7 @@ const actions = {
 
                             const clientResponse = {
                                 'summary': `Case ${response.data.reference} has been suspended.`,
-                                'link': `${response.data.reference}`
+                                'link': `/case/${options.caseId}/stage/${options.stageId}/?tab=CASE_ACTIONS`
                             };
 
                             return handleActionSuccess(clientResponse, {}, form);
@@ -360,7 +360,7 @@ const actions = {
 
                             const clientResponse = {
                                 'summary': `Case ${response.data.reference} has been suspended.`,
-                                'link': `${response.data.reference}`
+                                'link': `/case/${options.caseId}/stage/${options.stageId}/?tab=CASE_ACTIONS`
                             };
 
                             return handleActionSuccess(clientResponse, {}, form);

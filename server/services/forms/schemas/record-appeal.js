@@ -111,7 +111,7 @@ module.exports = async options => {
         .withSecondaryAction(
             Component('backlink')
                 .withProp('label', 'Back')
-                .withProp('action', `/case/${options.caseId}/stage/${options.stageId}/?tab=FOI_ACTIONS`)
+                .withProp('action', `/case/${options.caseId}/stage/${options.stageId}/?tab=CASE_ACTIONS`)
                 .build()
         )
         .withPrimaryActionLabel('Add Appeal')
