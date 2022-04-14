@@ -1,7 +1,7 @@
 const logger = require('../libs/logger');
 const { ValidationError } = require('../models/error');
 const { isProduction } = require('../config');
-const uuid = require('uuid/v4');
+const { v4: uuid } = require('uuid');
 const listService = require('../services/list/');
 
 /* eslint-disable-next-line  no-unused-vars*/
