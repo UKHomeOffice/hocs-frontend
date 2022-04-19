@@ -347,7 +347,10 @@ const actions = {
 
                             const clientResponse = {
                                 'summary': `Case ${response.data.reference} has been suspended.`,
-                                'link': `/case/${options.caseId}/stage/${options.stageId}/?tab=CASE_ACTIONS`
+                                'link': {
+                                    label: `${response.data.reference}`,
+                                    href: `/case/${options.caseId}/stage/${options.stageId}/?tab=CASE_ACTIONS`
+                                }
                             };
 
                             return handleActionSuccess(clientResponse, {}, form);
@@ -359,8 +362,11 @@ const actions = {
                             const response =  await caseworkService.delete(`/case/${caseId}/stage/${stageId}/actions/suspension/${caseActionId}`, headers);
 
                             const clientResponse = {
-                                'summary': `Case ${response.data.reference} has been suspended.`,
-                                'link': `/case/${options.caseId}/stage/${options.stageId}/?tab=CASE_ACTIONS`
+                                'summary': `Suspension for case ${response.data.reference} has been removed.`,
+                                'link': {
+                                    label: `${response.data.reference}`,
+                                    href: `/case/${options.caseId}/stage/${options.stageId}/?tab=CASE_ACTIONS`
+                                }
                             };
 
                             return handleActionSuccess(clientResponse, {}, form);

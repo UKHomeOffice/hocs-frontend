@@ -134,7 +134,7 @@ exports[`Side bar component should render with the actions tab for FOI 1`] = `
     <li>
       <a
         class="tab"
-        href="/undefined/?activeTab=FOI_ACTIONS"
+        href="/undefined/?activeTab=CASE_ACTIONS"
       >
         Actions
       </a>
@@ -197,7 +197,7 @@ exports[`Side bar component should render with the defined BF tabs 1`] = `
     <li>
       <a
         class="tab"
-        href="/undefined/?activeTab=FOI_ACTIONS"
+        href="/undefined/?activeTab=CASE_ACTIONS"
       >
         Actions
       </a>

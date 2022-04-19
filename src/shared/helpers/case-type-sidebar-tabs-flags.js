@@ -38,7 +38,5 @@ module.exports = (caseType) => {
     }
 
     const caseSpecificTabs = caseTypeSidebarTabsFlags[caseType];
-    console.log({ ...allCaseTypes, ...caseSpecificTabs });
-
     return { ...allCaseTypes, ...caseSpecificTabs };
 };

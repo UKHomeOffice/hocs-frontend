@@ -1,0 +1,113 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Suspensions Component should render component with link to remove suspension but not add a new one. 1`] = `
+<div
+  class="tab__content"
+>
+  <h2
+    class="govuk-heading-s"
+  >
+    Case Currently Suspended
+  </h2>
+  <p
+    class="govuk-body"
+  >
+    Date current suspension applied: 02/04/2022.
+  </p>
+  <a
+    class="govuk-body govuk-link"
+    href="/case/some_case_id/stage/some_stage_id/caseAction/suspension/remove/b4f686e9-d052-4e0d-8c1b-ab024791e01f?hideSidebar=true&activeTab=CASE_ACTIONS"
+  >
+    Remove the current suspension
+  </a>
+</div>
+`;
+
+exports[`Suspensions Component should render component with link to remove suspension but not add a new one. And show historic 1`] = `
+<div
+  class="tab__content"
+>
+  <h2
+    class="govuk-heading-s"
+  >
+    Case Currently Suspended
+  </h2>
+  <p
+    class="govuk-body"
+  >
+    Date current suspension applied: 02/04/2022.
+  </p>
+  <a
+    class="govuk-body govuk-link"
+    href="/case/some_case_id/stage/some_stage_id/caseAction/suspension/remove/b4f686e9-d052-4e0d-8c1b-ab024791e01f?hideSidebar=true&activeTab=CASE_ACTIONS"
+  >
+    Remove the current suspension
+  </a>
+  <h3
+    class="govuk-heading-s"
+  >
+    Case Suspension History
+  </h3>
+  <p
+    class="govuk-body full-width"
+  >
+    This case has previously been suspended 1 time.
+  </p>
+  <p
+    class="govuk-body"
+  >
+    From: 19/04/2022, until: 19/04/2022
+  </p>
+</div>
+`;
+
+exports[`Suspensions Component should render component with link to submit suspension 1`] = `
+<div
+  class="tab__content"
+>
+  <h3
+    class="govuk-heading-s"
+  >
+    Suspend Case
+  </h3>
+  <a
+    class="govuk-body govuk-link"
+    href="/case/some_case_id/stage/some_stage_id/caseAction/suspension/add"
+  >
+    Suspend this case
+  </a>
+</div>
+`;
+
+exports[`Suspensions Component should render component with link to submit suspension and historic suspension 1`] = `
+<div
+  class="tab__content"
+>
+  <h3
+    class="govuk-heading-s"
+  >
+    Suspend Case
+  </h3>
+  <a
+    class="govuk-body govuk-link"
+    href="/case/some_case_id/stage/some_stage_id/caseAction/suspension/add"
+  >
+    Suspend this case
+  </a>
+  <h3
+    class="govuk-heading-s"
+  >
+    Case Suspension History
+  </h3>
+  <p
+    class="govuk-body full-width"
+  >
+    This case has previously been suspended 1 time.
+  </p>
+  <p
+    class="govuk-body"
+  >
+    From: 02/04/2022, until: 10/04/2022
+  </p>
+</div>
+`;

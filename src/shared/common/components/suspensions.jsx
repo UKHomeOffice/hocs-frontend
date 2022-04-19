@@ -1,75 +1,72 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import { formatDate } from '../../../../server/libs/dateHelpers';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { Context } from '../../contexts/application.jsx';
 
 const Suspensions = (props) => {
-    // const { SUSPENSIONS } = props;
     const { page } = useContext(Context);
+    const { SUSPENSION } = props.props;
 
-    const SUSPENSIONS = [
-        {
-            uuid: 'uuid2',
-            caseTypeActionUuid: 'another uuid',
-            caseSubtype: 'SUSPEND',
-            caseTypeActionLabel: 'Case Suspension',
-            dateSuspensionApplied: '2022-01-02',
-        },{
-            uuid: 'uuid',
-            caseTypeActionUuid: 'another uuid',
-            caseSubtype: 'SUSPEND',
-            caseTypeActionLabel: 'Case Suspension',
-            dateSuspensionApplied: '2022-01-01',
-        },
-        {
-            uuid: 'uuid',
-            caseTypeActionUuid: 'another uuid',
-            caseSubtype: 'SUSPEND',
-            caseTypeActionLabel: 'Case Suspension',
-            dateSuspensionApplied: '2021-12-01',
-            dateSuspensionRemoved: '2021-12-15'
-        },
-        {
-            uuid: 'uuid',
-            caseTypeActionUuid: 'another uuid',
-            caseSubtype: 'SUSPEND',
-            caseTypeActionLabel: 'Case Suspension',
-            dateSuspensionApplied: '2021-12-01',
-            dateSuspensionRemoved: '2021-12-15'
-        }
-    ];
+    const currentSuspensionTypeList = SUSPENSION.filter(suspension => suspension.typeData.length > 0).map(sus => {
+        return {
+            label: sus.typeInfo.actionLabel,
+            susOfType: [...sus.typeData]
+        };
+    });
+
+
     const getExistingSuspension = (suspensions) => {
-        const existing = suspensions.filter(sus => !sus.dateSuspensionRemoved);
+        let existing = [];
+        suspensions.forEach(sus => existing = [...existing, ...sus.susOfType]);
+        existing = existing.filter(sus => !sus.dateSuspensionRemoved);
         return existing.length > 0 ? existing[0] : null;
     };
 
     const filteredPastSuspensions = (suspensions) => {
-        return suspensions.filter(sus => sus.dateSuspensionRemoved);
+        let existing = [];
+        suspensions.forEach(sus => existing = [...existing, ...sus.susOfType]);
+        existing = existing.filter(sus => sus.dateSuspensionRemoved);
+        return existing;
     };
 
-    const existingSuspension = getExistingSuspension(SUSPENSIONS);
+    const existingSuspension = getExistingSuspension(currentSuspensionTypeList);
+    const historicSuspensions = filteredPastSuspensions(currentSuspensionTypeList);
 
     return (
         <div className="tab__content">
-            <h2 className="govuk-heading-s">Suspend Case</h2>
-            { existingSuspension && <Link className='govuk-body govuk-link' to={`/case/${page.params.caseId}/stage/${page.params.stageId}/caseAction/suspension/${existingSuspension.uuid}`}>Remove the current suspension</Link> }
-            { !existingSuspension && <Link className='govuk-body govuk-link' to={ `/case/${page.params.caseId}/stage/${page.params.stageId}/caseAction/suspension/add` }>Suspend this case</Link> }
 
-            { filteredPastSuspensions(SUSPENSIONS).length > 0 &&
+            { existingSuspension &&
+                <>
+                    <h2 className="govuk-heading-s">Case Currently Suspended</h2>
+                    <p className="govuk-body">Date current suspension applied: {formatDate(existingSuspension.dateSuspensionApplied)}.</p>
+                    <Link
+                        className='govuk-body govuk-link'
+                        to={`/case/${page.params.caseId}/stage/${page.params.stageId}/caseAction/suspension/remove/${existingSuspension.uuid}?hideSidebar=true&activeTab=CASE_ACTIONS`}
+                    >Remove the current suspension</Link>
+                </>
+            }
+            { !existingSuspension &&
+                <>
+                    <h3 className="govuk-heading-s">Suspend Case</h3>
+                    <Link
+                        className='govuk-body govuk-link'
+                        to={ `/case/${page.params.caseId}/stage/${page.params.stageId}/caseAction/suspension/add` }
+                    >Suspend this case</Link>
+                </>
+            }
+
+            { historicSuspensions.length > 0 &&
                 <>
                     <h3 className="govuk-heading-s">Case Suspension History</h3>
-                    <p className="govuk-body full-width">This case has previously been suspended {filteredPastSuspensions(SUSPENSIONS).length} times.</p>
-                    <ul>
+                    <p className="govuk-body full-width">This case has previously been suspended {historicSuspensions.length} time{historicSuspensions.length > 1 ? 's': null}.</p>
 
-                        { filteredPastSuspensions(SUSPENSIONS).map((sus,i) =>
-
-                            <li key={i} className="govuk-body"
-                            >
-                                From: {formatDate(sus.dateSuspensionApplied)}, until: {formatDate(sus.dateSuspensionRemoved) }
-                            </li>
-                        )}
-                    </ul>
+                    { historicSuspensions.map((sus,i) =>
+                        <p key={i} className="govuk-body"
+                        >
+                            From: {formatDate(sus.dateSuspensionApplied)}, until: {formatDate(sus.dateSuspensionRemoved) }
+                        </p>
+                    )}
                 </>
 
             }

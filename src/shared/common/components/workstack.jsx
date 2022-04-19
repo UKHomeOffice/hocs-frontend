@@ -65,6 +65,9 @@ const dataAdapters = {
         return '';
     },
     localDate: (value) => {
+        if(['Suspended', 'N/A'].includes(value)) {
+            return value;
+        }
         var date = new Date(value);
         if (isNaN(date) || value == null)
             return '';

@@ -1532,6 +1532,76 @@ describe('Workflow Workstack Adapter', () => {
         });
     });
 
+    describe('Deadline display alteration', () => {
+
+        it('should show deadline as \'Suspended\'', async () => {
+            const mockData = {
+                stages: [
+                    {
+                        teamUUID: 2,
+                        caseType: 'DEFAULT',
+                        stageType: 'A',
+                        userUUID: 1,
+                        deadline: '9999-12-31',
+                        caseReference: 'A/1234567/19',
+                        active: true,
+                        data: {
+                            suspended: 'true'
+                        },
+                        assignedTopic: mockTopic
+                    }
+                ]
+            };
+
+            const result = await stageAdapter(mockData, {
+                user: mockUser,
+                fromStaticList: mockFromStaticList,
+                logger: mockLogger,
+                teamId: 2,
+                workflowId: 'DEFAULT',
+                stageId: 'A',
+                configuration: mockConfiguration
+            });
+
+            expect(result.items[0].deadline).toBe('Suspended');
+
+        });
+
+
+        it('should show deadline as \'N/A\'', async () => {
+            const mockData = {
+                stages: [
+                    {
+                        teamUUID: 2,
+                        caseType: 'DEFAULT',
+                        stageType: 'A',
+                        userUUID: 1,
+                        deadline: '9999-12-31',
+                        caseReference: 'A/1234567/19',
+                        active: true,
+                        data: {
+                            suspended: 'false'
+                        },
+                        assignedTopic: mockTopic
+                    }
+                ]
+            };
+
+            const result = await stageAdapter(mockData, {
+                user: mockUser,
+                fromStaticList: mockFromStaticList,
+                logger: mockLogger,
+                teamId: 2,
+                workflowId: 'DEFAULT',
+                stageId: 'A',
+                configuration: mockConfiguration
+            });
+
+            expect(result.items[0].deadline).toBe('N/A');
+
+        });
+    });
+
 });
 
 

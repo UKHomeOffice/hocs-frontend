@@ -590,13 +590,6 @@ td {
   }
 }
 
-.suspension_ul {
-  border: none;
-  &:last-child::after {
-    border: none;
-  }
-}
-
 .timeline-details {
   margin: 10px 0;
 
@@ -679,7 +672,7 @@ $border-colour: govuk-colour("mid-grey");
 
     & > ul {
       @include govuk-clearfix;
-      list-style-type: disc;
+      list-style-type: none;
       margin: 0;
       padding: 0;
 
