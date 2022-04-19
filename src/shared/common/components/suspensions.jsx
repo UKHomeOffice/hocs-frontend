@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { formatDate } from '../../../../server/libs/dateHelpers';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import { Context } from '../../contexts/application.jsx';
 
@@ -74,5 +75,11 @@ const Suspensions = (props) => {
     );
 };
 
-export default Suspensions;
+Suspensions.propTypes = {
+    page: PropTypes.object,
+    props: {
+        SUSPENSION: PropTypes.array
+    }
+};
 
+export default Suspensions;
