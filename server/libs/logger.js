@@ -3,13 +3,6 @@ const loggingTransports = [];
 const exceptionTransports = [];
 const { isProduction } = require('../config');
 
-const colors = {
-    info: 'green',
-    email: 'magenta',
-    warn: 'yellow',
-    error: 'red'
-};
-
 const logstashFormat = statement => {
     const logstashStatement = Object.assign({}, statement);
 
@@ -42,12 +35,11 @@ exceptionTransports.push(
     })
 );
 
-const logger = new (winston.Logger)({
+const logger = winston.createLogger({
     level: isProduction ? 'info' : 'debug',
     transports: loggingTransports,
     exceptionHandlers: exceptionTransports,
-    exitOnError: true,
-    colors: colors
+    exitOnError: true
 });
 
 logger.info(`Logger mode: ${isProduction ? 'production' : 'development'}`);
