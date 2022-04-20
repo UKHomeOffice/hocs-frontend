@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Suspensions Component should render component with link to remove suspension but not add a new one. 1`] = `
-<div
-  class="tab__content"
->
+<div>
   <h2
     class="govuk-heading-s"
   >
@@ -24,9 +22,7 @@ exports[`Suspensions Component should render component with link to remove suspe
 `;
 
 exports[`Suspensions Component should render component with link to remove suspension but not add a new one. And show historic 1`] = `
-<div
-  class="tab__content"
->
+<div>
   <h2
     class="govuk-heading-s"
   >
@@ -62,9 +58,7 @@ exports[`Suspensions Component should render component with link to remove suspe
 `;
 
 exports[`Suspensions Component should render component with link to submit suspension 1`] = `
-<div
-  class="tab__content"
->
+<div>
   <h3
     class="govuk-heading-s"
   >
@@ -80,9 +74,7 @@ exports[`Suspensions Component should render component with link to submit suspe
 `;
 
 exports[`Suspensions Component should render component with link to submit suspension and historic suspension 1`] = `
-<div
-  class="tab__content"
->
+<div>
   <h3
     class="govuk-heading-s"
   >

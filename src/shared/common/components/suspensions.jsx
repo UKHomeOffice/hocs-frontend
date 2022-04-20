@@ -35,7 +35,7 @@ const Suspensions = (props) => {
     const historicSuspensions = filteredPastSuspensions(currentSuspensionTypeList);
 
     return (
-        <div className="tab__content">
+        <div>
 
             { existingSuspension &&
                 <>

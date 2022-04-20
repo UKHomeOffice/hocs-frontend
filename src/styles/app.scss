@@ -668,21 +668,6 @@ $border-colour: govuk-colour("mid-grey");
     background-color: $highlight-colour;
   }
 
-  &__content {
-
-    & > ul {
-      @include govuk-clearfix;
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
-
-      @include govuk-media-query($from: tablet) {
-        border-top: 0;
-        margin-bottom: govuk-spacing(4);
-      }
-    }
-  }
-
   @include govuk-media-query($from: tablet) {
     border-bottom: none;
     float: left;
