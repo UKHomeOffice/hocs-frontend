@@ -190,6 +190,14 @@ const typeAdaptors = {
     EX_GRATIA_UPDATE: ({ note }) => ({
         note,
         title: 'Ex-Gratia Updated'
+    }),
+    CASE_SUSPENSION_APPLIED: ({ note }) => ({
+        note,
+        title: 'Case Suspension Applied'
+    }),
+    CASE_SUSPENSION_REMOVED: ({ note }) => ({
+        note,
+        title: 'Case Suspension Removed'
     })
 };
 
