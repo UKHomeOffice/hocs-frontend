@@ -1,8 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
-const MinificationPlugin = require('terser-webpack-plugin');
 const AssetsPlugin = require('webpack-assets-manifest');
-const ExtractTextPlugin = require('mini-css-extract-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const AutoPrefixer = require('autoprefixer');
 
 const browserConfig = env => {
@@ -11,10 +10,10 @@ const browserConfig = env => {
         entry: {
             main: './src/browser/index.js'
         },
-        devtool: 'sourcemap',
+        devtool: 'source-map',
         output: {
             path: path.resolve(__dirname, 'build'),
-            filename: 'public/js/[name]-[hash].js',
+            filename: 'public/js/[name]-[fullhash].js',
             sourceMapFilename: '[file].map',
             chunkFilename: 'public/js/[name]-[chunkHash].js',
             publicPath: '/'
@@ -27,25 +26,31 @@ const browserConfig = env => {
                     exclude: /node_modules/
                 },
                 {
-                    test: /\.s?[ac]ss$/,
+                    test: /\.(s[ac]|c)ss$/i,
                     use: [
-                        {
-                            loader: ExtractTextPlugin.loader
-                        },
-                        {
-                            loader: 'css-loader'
+                        MiniCssExtractPlugin.loader,
+                        { loader: 'css-loader',
+                            options: {
+                                url: false
+                            }
                         },
                         {
                             loader: 'postcss-loader',
-                            options: { plugins: [AutoPrefixer()] }
+                            options: {
+                                postcssOptions: {
+                                    plugins: [AutoPrefixer()]
+                                }
+                            }
                         },
                         {
                             loader: 'sass-loader',
                             options: {
-                                includePaths: [
-                                    path.resolve(__dirname, 'node_modules'),
-                                    path.resolve(__dirname, './src/styles'),
-                                ]
+                                sassOptions: {
+                                    includePaths: [
+                                        path.resolve(__dirname, 'node_modules'),
+                                        path.resolve(__dirname, './src/styles'),
+                                    ]
+                                }
                             }
                         }
                     ]
@@ -75,13 +80,6 @@ const browserConfig = env => {
         plugins: [
             new webpack.DefinePlugin({
                 __isBrowser__: 'true'
-            }),
-            new MinificationPlugin({
-                sourceMap: true,
-                parallel: true
-            }),
-            new ExtractTextPlugin({
-                filename: mode === 'development' ? 'public/styles/[name].css' : 'public/styles/[name]-[hash].css'
             }),
             new AssetsPlugin({
                 output: 'assets.json',
@@ -119,6 +117,9 @@ const browserConfig = env => {
                         js, css
                     };
                 }
+            }),
+            new MiniCssExtractPlugin({
+                filename: mode === 'development' ? 'public/styles/[name].css' : 'public/styles/[name]-[fullhash].css'
             })
         ]
     };
@@ -126,6 +127,7 @@ const browserConfig = env => {
 
 
 const serverConfig = {
+    externalsPresets: { node: true },
     entry: {
         app: './src/shared/index.jsx'
     },
@@ -145,12 +147,6 @@ const serverConfig = {
         'react-dom': 'react-dom',
         'react-router-dom': 'react-router-dom'
     },
-    plugins: [
-        new MinificationPlugin({
-            sourceMap: true,
-            parallel: true
-        })
-    ],
     resolve: {
         aliasFields: []
     },

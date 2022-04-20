@@ -1,7 +1,7 @@
 const Form = require('../form-builder');
 const { Choice, Component, ConditionChoice } = require('../component-builder');
 const listService = require('../../list/service');
-const uuid = require('uuid/v4');
+const { v4: uuid } = require('uuid');
 
 const extendFromOptions = {
     TODAY: 'Today',
