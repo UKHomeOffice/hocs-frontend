@@ -155,7 +155,7 @@ const getCorrespondentsNameByType = (correspondents, types) =>
 /**
  * Transforms stage.deadline value if case is/has been suspended.
  *      Transform applied at this stage to allow Case Filter to be applied to filter on 'Suspended' and 'N/A'
- * @param stage
+ * @param {object} stage - data for the stage.
  */
 function resolveForSuspendedDeadlines(stage) {
     switch (stage?.data?.suspended) {

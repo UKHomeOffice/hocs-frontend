@@ -90,6 +90,15 @@ const getPreviousCase = previousCase => {
     }
 };
 
+const resolveDeadlineDisplay = summary => {
+    if (summary.suspended === 'true') {
+        return 'Suspended';
+    } else if (summary.caseDeadline === '9999-12-31') {
+        return 'N/A (case was previously suspended)';
+    }
+    return formatDate(summary.caseDeadline);
+};
+
 module.exports = async (summary, options) => {
     const { fromStaticList, fetchList, configuration, user } = options;
     const { data: caseProfile } = await caseworkService.get(`/case/profile/${options.caseId}`, { headers: User.createHeaders(user) });
@@ -100,7 +109,7 @@ module.exports = async (summary, options) => {
         case: {
             created: formatDate(summary.caseCreated),
             received: formatDate(summary.dateReceived),
-            deadline: formatDate(summary.caseDeadline),
+            deadline: resolveDeadlineDisplay(summary),
             deadLineExtensions: summary.deadLineExtensions
         },
         additionalFields: await createAdditionalFields(summary.additionalFields, fetchList),
