@@ -71,7 +71,7 @@
         "@babel/core": "^7.1.2",
         "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
         "@babel/plugin-syntax-object-rest-spread": "^7.0.0",
-        "@babel/preset-env": "^7.1.0",
+        "@babel/preset-env": "^7.16.11",
         "@babel/preset-react": "^7.16.7",
         "@sinonjs/fake-timers": "^9.1.2",
         "@wojtekmaj/enzyme-adapter-react-17": "^0.6.2",
