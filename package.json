@@ -67,7 +67,7 @@
         "winston": "^2.4.2"
     },
     "devDependencies": {
-        "@babel/cli": "^7.8.4",
+        "@babel/cli": "^7.17.6",
         "@babel/core": "^7.1.2",
         "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
         "@babel/plugin-syntax-object-rest-spread": "^7.0.0",
@@ -90,7 +90,7 @@
         "jest-enzyme": "^7.0.1",
         "lint-staged": "^7.3.0",
         "mini-css-extract-plugin": "^2.6.0",
-        "nodemon": "^2.0.4",
+        "nodemon": "^2.0.15",
         "postcss-loader": "^6.2.1",
         "pre-commit": "^1.2.2",
         "sass": "^1.50.1",
