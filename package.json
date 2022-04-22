@@ -90,7 +90,7 @@
         "jest-enzyme": "^7.0.1",
         "lint-staged": "^7.3.0",
         "mini-css-extract-plugin": "^2.6.0",
-        "nodemon": "^2.0.4",
+        "nodemon": "^2.0.15",
         "postcss-loader": "^6.2.1",
         "pre-commit": "^1.2.2",
         "sass": "^1.50.1",
