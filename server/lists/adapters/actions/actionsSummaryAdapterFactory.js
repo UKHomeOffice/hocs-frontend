@@ -1,15 +1,21 @@
 const appealAdaptor = require('./appealsSummaryAdapter');
-const extensionAdaptor = require('./extensionsSummaryAdapter');
 const externalInterestAdaptor = require('./externalInterestsSummaryAdapter');
-const suspensionsAdapter = require('./suspensionsAdaptor');
 
-const actionSummaryAdapterFactory = {
+const actionSummaryAdapterFactoryType = {
     appeals: appealAdaptor,
-    extensions: extensionAdaptor,
     recordInterest: externalInterestAdaptor,
-    suspensions: suspensionsAdapter
+};
+
+const actionSummaryAdapterFactory = async (type, caseActions, fetchList ) => {
+
+    const adapter = actionSummaryAdapterFactoryType[type];
+    if (adapter != null) {
+        return adapter.call(this, caseActions, fetchList);
+    }
+    return caseActions;
 };
 
 module.exports = {
     actionSummaryAdapterFactory
 };
+

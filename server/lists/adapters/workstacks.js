@@ -1,4 +1,5 @@
 const { addDays, formatDate } = require('../../libs/dateHelpers');
+const { resolveDeadlineDisplay } = require('../../libs/deadlineDisplayHelpers');
 
 const byCaseReference = (a, b) => {
     if (a.caseReference == null || b.caseReference == null) {
@@ -152,24 +153,6 @@ const getCorrespondentsNameByType = (correspondents, types) =>
         .map(correspondent => correspondent.fullname)
         .join(', ');
 
-/**
- * Transforms stage.deadline value if case is/has been suspended.
- *      Transform applied at this stage to allow Case Filter to be applied to filter on 'Suspended' and 'N/A'
- * @param {object} stage - data for the stage.
- */
-function resolveForSuspendedDeadlines(stage) {
-    switch (stage?.data?.suspended) {
-        case 'true':
-            stage.deadline = 'Suspended';
-            break;
-        case 'false':
-        default:
-            if(stage.deadline === '9999-12-31'){
-                stage.deadline = 'N/A';
-            }
-    }
-}
-
 const bindDisplayElements = fromStaticList => async (stage) => {
     stage.assignedTeamDisplay = await fromStaticList('S_ALL_TEAMS', stage.teamUUID);
     stage.caseTypeDisplayFull = await fromStaticList('S_CASETYPES', stage.caseType);
@@ -236,7 +219,7 @@ const bindDisplayElements = fromStaticList => async (stage) => {
         stage.nextContributionDueDate = (stage.contributions === 'Overdue') ? 'Overdue' : formatDate(stage.dueContribution);
     }
 
-    resolveForSuspendedDeadlines(stage);
+    stage.deadline = resolveDeadlineDisplay(stage.deadline, stage?.data?.suspended);
 
     return stage;
 };

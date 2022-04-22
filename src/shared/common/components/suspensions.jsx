@@ -76,10 +76,10 @@ const Suspensions = (props) => {
 };
 
 Suspensions.propTypes = {
-    page: PropTypes.object,
-    props: {
-        SUSPENSION: PropTypes.array
-    }
+    page: PropTypes.object.isRequired,
+    props: PropTypes.objectOf({
+        SUSPENSION: PropTypes.array.isRequired
+    })
 };
 
 export default Suspensions;

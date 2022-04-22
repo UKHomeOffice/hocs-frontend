@@ -359,7 +359,7 @@ const actions = {
 
                             const { caseActionId } = options;
 
-                            const response =  await caseworkService.delete(`/case/${caseId}/stage/${stageId}/actions/suspension/${caseActionId}`, headers);
+                            const response =  await caseworkService.put(`/case/${caseId}/stage/${stageId}/actions/suspension/${caseActionId}`, headers);
 
                             const clientResponse = {
                                 'summary': `Suspension for case ${response.data.reference} has been removed.`,

@@ -3,6 +3,7 @@ const User = require('../../models/user');
 const { formatDate } = require('../../libs/dateHelpers');
 const toTitleCase = require('../../libs/titleCaseHelper');
 const { actionSummaryAdapterFactory } = require('./actions/actionsSummaryAdapterFactory');
+const { resolveDeadlineDisplayWithDateFormatting } = require('../../libs/deadlineDisplayHelpers');
 
 const createAdditionalFields = async (additionalFields = [], fetchList) => {
     const results = additionalFields
@@ -33,13 +34,13 @@ const createAdditionalFields = async (additionalFields = [], fetchList) => {
     return results;
 };
 
-const formatCaseActions = async (caseActions, fetchList) => await Promise.all(
+const formatCaseActions = async (caseActions, fetchList) => Promise.all(
     Object.keys(caseActions.caseActionData).map(
         async key => {
             return {
                 title: toTitleCase(key),
                 type: key,
-                items: await actionSummaryAdapterFactory[key].call(this, caseActions, fetchList)
+                items: await actionSummaryAdapterFactory(key, caseActions, fetchList)
             };
         }
     ));
@@ -90,15 +91,6 @@ const getPreviousCase = previousCase => {
     }
 };
 
-const resolveDeadlineDisplay = summary => {
-    if (summary.suspended === 'true') {
-        return 'Suspended';
-    } else if (summary.caseDeadline === '9999-12-31') {
-        return 'N/A (case was previously suspended)';
-    }
-    return formatDate(summary.caseDeadline);
-};
-
 module.exports = async (summary, options) => {
     const { fromStaticList, fetchList, configuration, user } = options;
     const { data: caseProfile } = await caseworkService.get(`/case/profile/${options.caseId}`, { headers: User.createHeaders(user) });
@@ -109,7 +101,7 @@ module.exports = async (summary, options) => {
         case: {
             created: formatDate(summary.caseCreated),
             received: formatDate(summary.dateReceived),
-            deadline: resolveDeadlineDisplay(summary),
+            deadline: resolveDeadlineDisplayWithDateFormatting(summary.caseDeadline, summary.suspended),
             deadLineExtensions: summary.deadLineExtensions
         },
         additionalFields: await createAdditionalFields(summary.additionalFields, fetchList),
