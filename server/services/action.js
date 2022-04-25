@@ -247,7 +247,7 @@ const actions = {
                                 'summary': `Case: ${response.data.reference} extended`,
                                 'link': {
                                     label: `${response.data.reference}`,
-                                    href: `/case/${options.caseId}/stage/${options.stageId}/?tab=FOI_ACTIONS`
+                                    href: `/case/${options.caseId}/stage/${options.stageId}/?tab=CASE_ACTIONS`
                                 }
                             };
 
@@ -292,7 +292,7 @@ const actions = {
                                 'summary': `Appeal for ${response.data.reference} updated`,
                                 'link': {
                                     label: `${response.data.reference}`,
-                                    href: `/case/${options.caseId}/stage/${options.stageId}/?tab=FOI_ACTIONS`
+                                    href: `/case/${options.caseId}/stage/${options.stageId}/?tab=CASE_ACTIONS`
                                 }
                             };
 
@@ -328,7 +328,44 @@ const actions = {
                                 'summary': `Appeal for ${response.data.reference} registered`,
                                 'link': {
                                     label: `${response.data.reference}`,
-                                    href: `/case/${options.caseId}/stage/${options.stageId}/?tab=FOI_ACTIONS`
+                                    href: `/case/${options.caseId}/stage/${options.stageId}/?tab=CASE_ACTIONS`
+                                }
+                            };
+
+                            return handleActionSuccess(clientResponse, {}, form);
+                        }
+                        case actionTypes.SUSPEND_CASE: {
+                            const requestBody = {
+                                actionType: 'SUSPEND',
+                                caseTypeActionUuid: form.data.caseTypeActionUuid,
+                                caseTypeActionLabel: 'SUSPEND',
+                                dateSuspensionApplied: new Date()
+                            };
+
+                            const response =  await caseworkService.post(`/case/${caseId}/stage/${stageId}/actions/suspension`,
+                                requestBody, headers);
+
+                            const clientResponse = {
+                                'summary': `Case ${response.data.reference} has been suspended.`,
+                                'link': {
+                                    label: `${response.data.reference}`,
+                                    href: `/case/${options.caseId}/stage/${options.stageId}/?tab=CASE_ACTIONS`
+                                }
+                            };
+
+                            return handleActionSuccess(clientResponse, {}, form);
+                        }
+                        case actionTypes.UNSUSPEND_CASE: {
+
+                            const { caseActionId } = options;
+
+                            const response =  await caseworkService.put(`/case/${caseId}/stage/${stageId}/actions/suspension/${caseActionId}`, headers);
+
+                            const clientResponse = {
+                                'summary': `Suspension for case ${response.data.reference} has been removed.`,
+                                'link': {
+                                    label: `${response.data.reference}`,
+                                    href: `/case/${options.caseId}/stage/${options.stageId}/?tab=CASE_ACTIONS`
                                 }
                             };
 
@@ -336,7 +373,7 @@ const actions = {
                         }
                         case actionTypes.RECORD_INTEREST: {
 
-                            let requestBody = {
+                            const requestBody = {
                                 actionType: 'RECORD_INTEREST',
                                 caseTypeActionUuid: form.data.caseTypeActionUuid,
                                 caseTypeActionLabel: 'RECORD_INTEREST',
@@ -358,7 +395,7 @@ const actions = {
                         case actionTypes.UPDATE_INTEREST: {
                             const { caseActionId } = options;
 
-                            let requestBody = {
+                            const requestBody = {
                                 actionType: 'RECORD_INTEREST',
                                 uuid: caseActionId,
                                 caseTypeActionUuid: form.data.caseTypeActionUuid,

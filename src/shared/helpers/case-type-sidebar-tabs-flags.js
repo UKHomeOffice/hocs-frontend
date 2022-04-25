@@ -12,16 +12,19 @@ const caseTypeSidebarTabsFlags = {
     },
     FOI: {
         people: false,
-        foi_actions: true
+        case_actions: true
     },
     BF: {
-        foi_actions: true,
+        case_actions: true,
         ex_gratia: true
     },
     BF2: {
-        foi_actions: true,
+        case_actions: true,
         ex_gratia: true
     },
+    SMC: {
+        case_actions: true
+    }
 };
 
 module.exports = (caseType) => {

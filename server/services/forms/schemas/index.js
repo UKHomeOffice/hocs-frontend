@@ -34,5 +34,7 @@ module.exports = {
     approvalFulfillmentFoi: require('./approval-fulfillment-foi'),
 
     recordInterest: require('./record-interest'),
-    updateInterest: require('./update-interest')
+    updateInterest: require('./update-interest'),
+    suspendCase: require('./suspend-case'),
+    removeSuspension: require('./remove-suspension')
 };

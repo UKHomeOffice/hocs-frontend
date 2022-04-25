@@ -5,10 +5,20 @@ import SideBar from '../common/components/side-bar.jsx';
 
 class Case extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            hideSidebar: false
+        };
+    }
+
     componentDidMount() {
         // eslint-disable-next-line no-undef
         const urlParams = new URLSearchParams(window.location.search);
-        this.hideSidebar = urlParams.get('hideSidebar');
+        const hideSidebar = urlParams.get('hideSidebar');
+        this.setState({
+            hideSidebar: hideSidebar || true
+        });
     }
 
     render() {
@@ -35,11 +45,11 @@ class Case extends Component {
     }
 
     shouldDisplaySidebar() {
-        if (this.hideSidebar === 'true') {
+        if (this.state.hideSidebar === 'true') {
             return false;
         }
 
-        if (this.hideSidebar === 'false') {
+        if (this.state.hideSidebar === 'false') {
             return true;
         }
         return this.props.hasSidebar;

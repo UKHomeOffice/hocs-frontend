@@ -76,7 +76,7 @@ module.exports = async options => {
             Component('backlink')
                 .withProp('label', 'Back')
                 .withProp('action',
-                    `/case/${caseId}/stage/${stageId}`)
+                    `/case/${caseId}/stage/${stageId}/?tab=CASE_ACTIONS`)
                 .build()
         )
         .withPrimaryActionLabel('Add')

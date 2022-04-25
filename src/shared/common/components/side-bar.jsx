@@ -70,14 +70,14 @@ class SideBar extends Component {
                         {this.renderTabButton('Summary', 'SUMMARY')}
                         {this.renderTabButton('Timeline', 'TIMELINE')}
                         {caseTabs.people && this.renderTabButton('People', 'PEOPLE')}
-                        {caseTabs.foi_actions && this.renderTabButton('Actions', 'FOI_ACTIONS')}
+                        {caseTabs.case_actions && this.renderTabButton('Actions', 'CASE_ACTIONS')}
                         {caseTabs.ex_gratia && this.renderTabButton('Ex-Gratia', 'EX_GRATIA')}
                     </ul>
                     {this.isActive('DOCUMENTS') && <DocumentPane />}
                     {this.isActive('SUMMARY') && <StageSummary />}
                     {this.isActive('TIMELINE') && <CaseNotes />}
                     {this.isActive('PEOPLE') && <People />}
-                    {this.isActive('FOI_ACTIONS') && <CaseActions />}
+                    {this.isActive('CASE_ACTIONS') && <CaseActions />}
                     {this.isActive('EX_GRATIA') && <TabExGratia stages={this.props.summary.stages} />}
                 </div>
             </Fragment>

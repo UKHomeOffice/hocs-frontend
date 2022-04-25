@@ -6,7 +6,7 @@ const {
     REMOVE_CORRESPONDENT, ADD_TOPIC, REMOVE_TOPIC, CREATE_CASE, CREATE_AND_ALLOCATE_CASE, BULK_CREATE_CASE,
     ADD_DOCUMENT, REMOVE_DOCUMENT, MANAGE_DOCUMENTS, MANAGE_PEOPLE, ADD_CONTRIBUTION, ADD_ADDITIONAL_CONTRIBUTION,
     EDIT_CONTRIBUTION, APPLY_CASE_DEADLINE_EXTENSION, CONFIRMATION_SUMMARY, ADD_CASE_APPEAL, EDIT_CASE_APPEAL,
-    ADD_APPROVAL_REQUEST, EDIT_APPROVAL_REQUEST, RECORD_INTEREST, UPDATE_INTEREST, ADD_APPEAL_DOCUMENT
+    ADD_APPROVAL_REQUEST, EDIT_APPROVAL_REQUEST, RECORD_INTEREST, UPDATE_INTEREST, ADD_APPEAL_DOCUMENT,SUSPEND_CASE, UNSUSPEND_CASE
 } = require('../actions/types');
 
 const mpamContributionsRequest = {
@@ -342,6 +342,22 @@ const formDefinitions = {
                 UPDATE: {
                     builder: formRepository.updateInterest,
                     action: UPDATE_INTEREST,
+                    next: {
+                        action: CONFIRMATION_SUMMARY
+                    }
+                }
+            },
+            SUSPENSION: {
+                ADD: {
+                    builder: formRepository.suspendCase,
+                    action: SUSPEND_CASE,
+                    next: {
+                        action: CONFIRMATION_SUMMARY
+                    }
+                },
+                REMOVE: {
+                    builder: formRepository.removeSuspension,
+                    action: UNSUSPEND_CASE,
                     next: {
                         action: CONFIRMATION_SUMMARY
                     }

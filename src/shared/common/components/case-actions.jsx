@@ -9,7 +9,7 @@ import { actionComponentFactory } from './case-action-factory.jsx';
 const CaseActions = () => {
     const { page, caseActionData, dispatch }  = useContext(Context);
 
-    const fetchCaseActionData = useCallback(async (caseId, dispatch) => {
+    const fetchCaseActionData = useCallback(async (caseId) => {
         dispatch(updateApiStatus(status.REQUEST_CASE_ACTION_DATA));
         axios.get(`/api/case/${caseId}/actions`)
             .then( result => {
@@ -19,10 +19,10 @@ const CaseActions = () => {
                 dispatch(updateApiStatus(status.REQUEST_CASE_ACTION_DATA_FAILURE));
                 dispatch(setError(error.response));
             });
-    }, []);
+    }, [dispatch]);
 
-    useEffect(() => {
-        fetchCaseActionData(page.params.caseId, dispatch);
+    useEffect(async () => {
+        await fetchCaseActionData(page.params.caseId, dispatch);
     }, [fetchCaseActionData]);
 
     return (
