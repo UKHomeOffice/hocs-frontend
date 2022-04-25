@@ -74,6 +74,8 @@
         "@babel/preset-env": "^7.16.11",
         "@babel/preset-react": "^7.16.7",
         "@sinonjs/fake-timers": "^9.1.2",
+        "@testing-library/jest-dom": "^5.16.4",
+        "@testing-library/react": "^13.1.1",
         "@wojtekmaj/enzyme-adapter-react-17": "^0.6.2",
         "autoprefixer": "^10.4.4",
         "babel-core": "7.0.0-bridge.0",
