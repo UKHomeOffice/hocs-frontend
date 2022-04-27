@@ -40,6 +40,7 @@ describe('When the component is rendered', () => {
         expect(screen.getByText('__author__')).toBeInTheDocument();
         expect(screen.getByText('__date__')).toBeInTheDocument();
         expect(screen.getByText('__note__')).toBeInTheDocument();
+        expect(screen.getByText('Edited on __modifiedDate__ - __modifiedBy__')).toBeInTheDocument();
         expect(screen.getByText('__title__' +
             '.')).toBeInTheDocument();
     });
