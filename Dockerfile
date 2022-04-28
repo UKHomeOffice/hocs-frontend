@@ -11,7 +11,7 @@ RUN mkdir -p /app && \
 WORKDIR /app
 COPY . /app
 COPY /build /app/build
-RUN npm  --loglevel warn install --production --no-optional
+RUN npm --loglevel warn ci --production --no-optional
 
 USER ${USER_ID}
 
