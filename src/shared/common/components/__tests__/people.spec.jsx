@@ -1,6 +1,8 @@
 import React from 'react';
-import WrappedPeople from '../people.jsx';
+import { People } from '../people.jsx';
 import { MemoryRouter } from 'react-router-dom';
+import '@testing-library/jest-dom';
+import { render, screen } from '@testing-library/react';
 
 const correspondents = [
     {
@@ -69,7 +71,7 @@ const correspondents = [
         'type': 'APPLICANT',
         'typeDisplayName': 'Applicant Test Case',
         'caseUUID': 'CASE_UUID_4',
-        'fullname': 'my name',
+        'fullname': 'my name again',
         'organisation': 'Organisation 4',
         'address': {
             'postcode': 'ZR1 3PL',
@@ -90,7 +92,7 @@ const correspondents = [
         'type': 'APPLICANT',
         'typeDisplayName': 'Applicant Test Case',
         'caseUUID': 'CASE_UUID_5',
-        'fullname': 'my name',
+        'fullname': 'my name applicant',
         'organisation': 'Organisation 5',
         'address': {
             'postcode': 'ZR1 3PL',
@@ -118,31 +120,24 @@ const page = {
 
 describe('The people component', () => {
 
-    it('should render successfully with 5 correspondent\'s', () => {
-        const outer = shallow(<WrappedPeople/>);
-        const People = outer.props().children;
-        const wrapper = mount(
-            <MemoryRouter>
-                <People dispatch={jest.fn(() => Promise.resolve())} correspondents={correspondents} page={page}/>
-            </MemoryRouter>
+    test('should render successfully with 5 correspondent\'s', () => {
+        const wrapper = render(
+            <People dispatch={jest.fn(() => Promise.resolve())} correspondents={correspondents} page={page}/>,
+            { wrapper: MemoryRouter }
         );
         expect(wrapper).toBeDefined();
-        expect(wrapper.find('People').props().correspondents).toBeDefined();
-        expect(wrapper.find('People').props().page).toBeDefined();
-        expect(wrapper.find('People').props().dispatch).toBeDefined();
+        expect(screen.getByText('some_name')).toBeInTheDocument();
+        expect(screen.getByText('fname lname')).toBeInTheDocument();
+        expect(screen.getByText('my name')).toBeInTheDocument();
+        expect(screen.getByText('my name again')).toBeInTheDocument();
+        expect(screen.getByText('my name applicant')).toBeInTheDocument();
     });
 
-    it('should render successfully when there are no correspondents', () => {
-        const outer = shallow(<WrappedPeople />);
-        const People = outer.props().children;
-        const wrapper = mount(
-            <MemoryRouter>
-                <People dispatch={jest.fn(() => Promise.resolve())} correspondents={emptyCorrespondents} page={page} />
-            </MemoryRouter>
+    test('should render successfully when there are no correspondents', () => {
+        const wrapper = render(
+            <People dispatch={jest.fn(() => Promise.resolve())} correspondents={emptyCorrespondents} page={page}/>,
+            { wrapper: MemoryRouter }
         );
         expect(wrapper).toBeDefined();
-        expect(wrapper.find('People').props().correspondents).toBeDefined();
-        expect(wrapper.find('People').props().page).toBeDefined();
-        expect(wrapper.find('People').props().dispatch).toBeDefined();
     });
 });
