@@ -86,4 +86,4 @@ const WrappedDocumentAdd = props => (
     </ApplicationConsumer>
 );
 
-export default WrappedDocumentAdd;
+export { WrappedDocumentAdd, DocumentAdd };
