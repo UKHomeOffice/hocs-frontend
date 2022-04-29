@@ -1,34 +1,23 @@
 import React from 'react';
-import Layout from '../layout.jsx';
+import { Layout } from '../layout.jsx';
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
-
-jest.mock('react-router-dom', () => {
-    return {
-        Link: () => jest.fn()
-    };
-});
+import { MemoryRouter } from 'react-router-dom';
 
 describe('Page layout component', () => {
-
-    const mockDispatch = jest.fn();
     const mockLayout = {
         header: {},
         body: {},
         footer: {}
     };
 
-    beforeEach(() => {
-        mockDispatch.mockReset();
-    });
-
     it('should render the footer when provided', () => {
         const mockLayoutWithFooter = { ...mockLayout, footer: { isVisible: true } };
-        const outer = shallow(<Layout />);
-        const Children = outer.props().children;
-        const wrapper = mount(<Children dispatch={mockDispatch} layout={mockLayoutWithFooter} />);
+        const wrapper = render(
+            <Layout layout={mockLayoutWithFooter} />,
+            { wrapper: MemoryRouter }
+        );
         expect(wrapper).toBeDefined();
-        expect(wrapper.find('Footer')).toHaveLength(1);
+        expect(screen.getByText('© Crown copyright')).toBeInTheDocument();
     });
-
 });
