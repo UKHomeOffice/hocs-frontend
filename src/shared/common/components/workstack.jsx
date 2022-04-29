@@ -641,4 +641,4 @@ const WrappedWorkstackAllocate = props => (
     </ApplicationConsumer>
 );
 
-export default WrappedWorkstackAllocate;
+export { WrappedWorkstackAllocate, WorkstackAllocate };
