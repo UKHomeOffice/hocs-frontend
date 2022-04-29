@@ -9,7 +9,7 @@ import {
     clearApiStatus
 } from '../contexts/actions/index.jsx';
 import status from '../helpers/api-status.js';
-import Workstack from '../common/components/workstack.jsx';
+import { WrappedWorkstackAllocate } from '../common/components/workstack.jsx';
 import Dashboard from '../common/components/dashboard.jsx';
 import ErrorSummary from '../common/forms/error-summary.jsx';
 
@@ -132,7 +132,7 @@ class WorkstackPage extends Component {
         return (
             <Fragment>
                 {errors && <ErrorSummary errors={errors} heading={errorHeading} />}
-                <Workstack
+                <WrappedWorkstackAllocate
                     baseUrl={url}
                     items={items}
                     columns={columns}
@@ -192,5 +192,5 @@ const WrappedWorkstack = (props) => (
     </ApplicationConsumer>
 );
 
-export default WrappedWorkstack;
+export { WrappedWorkstack, WorkstackPage };
 

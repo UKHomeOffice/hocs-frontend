@@ -1,6 +1,8 @@
 import React from 'react';
-import WrappedWorkstackAllocate from '../workstack.jsx';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { WorkstackAllocate } from '../workstack.jsx';
+import { MemoryRouter } from 'react-router-dom';
+import '@testing-library/jest-dom';
+import { fireEvent, render, screen } from '@testing-library/react';
 
 describe('Workstack component', () => {
     const arraySortSpy = jest.spyOn(Array.prototype, 'sort');
@@ -134,100 +136,91 @@ describe('Workstack component', () => {
         ]
     };
 
-    it('should render with default props', () => {
+    test('should render with default props', () => {
+        const wrapper = render(
+            <WorkstackAllocate
+                track={MOCK_TRACK}
+                allocateToWorkstackEndpoint={DEFAULT_PROPS.allocateToWorkstackEndpoint}
+                baseUrl={DEFAULT_PROPS.baseUrl}
+                selectable={DEFAULT_PROPS.selectable}
+                submitHandler={DEFAULT_PROPS.submitHandler}
+                updateFormData={DEFAULT_PROPS.updateFormData}
+                items={DEFAULT_PROPS.items}
+            />, { wrapper: MemoryRouter });
 
-        const OUTER = shallow(<WrappedWorkstackAllocate {...DEFAULT_PROPS} />);
-        const WorkstackAllocate = OUTER.props().children;
-        const WRAPPER = render(<Router><WorkstackAllocate track={MOCK_TRACK} /></Router>);
-
-        expect(WRAPPER).toBeDefined();
-        expect(WRAPPER).toMatchSnapshot();
+        expect(wrapper).toBeDefined();
     });
 
     it('should render with filtering', () => {
+        const wrapper = render(
+            <WorkstackAllocate
+                track={MOCK_TRACK}
+                allocateToWorkstackEndpoint={DEFAULT_PROPS.allocateToWorkstackEndpoint}
+                baseUrl={DEFAULT_PROPS.baseUrl}
+                selectable={DEFAULT_PROPS.selectable}
+                submitHandler={DEFAULT_PROPS.submitHandler}
+                updateFormData={DEFAULT_PROPS.updateFormData}
+                items={DEFAULT_PROPS.items}
+                columns={DEFAULT_PROPS.columns}
+            />, { wrapper: MemoryRouter });
 
-        const OUTER = shallow(<WrappedWorkstackAllocate {...DEFAULT_PROPS} />);
-        const WorkstackAllocate = OUTER.props().children;
-        const WRAPPER = mount(<Router><WorkstackAllocate track={MOCK_TRACK} /></Router>);
+        expect(wrapper).toBeDefined();
 
-
-        WRAPPER.find('#workstack-filter').simulate('change', { target: { value: 'sam' } });
-        expect(WRAPPER).toBeDefined();
-        expect(WRAPPER).toMatchSnapshot();
+        fireEvent.change(wrapper.getByRole('textbox'),  { target: { value: 'sam' } });
+        expect(screen.getByText('Sam Smith')).toBeInTheDocument();
     });
 
     it('should sort when the column heading is clicked', () => {
-        const OUTER = shallow(<WrappedWorkstackAllocate {...DEFAULT_PROPS} />);
-        const WorkstackAllocate = OUTER.props().children;
-        const WRAPPER = mount(<Router><WorkstackAllocate track={MOCK_TRACK} /></Router>);
-        arraySortSpy.mockClear();
+        const wrapper = render(
+            <WorkstackAllocate
+                track={MOCK_TRACK}
+                allocateToWorkstackEndpoint={DEFAULT_PROPS.allocateToWorkstackEndpoint}
+                baseUrl={DEFAULT_PROPS.baseUrl}
+                selectable={DEFAULT_PROPS.selectable}
+                submitHandler={DEFAULT_PROPS.submitHandler}
+                updateFormData={DEFAULT_PROPS.updateFormData}
+                items={DEFAULT_PROPS.items}
+                columns={DEFAULT_PROPS.columns}
+            />, { wrapper: MemoryRouter });
 
-        const links = WRAPPER.find('th.govuk-link');
-        // Column 13 is hidden so isn't counted
-        expect(links).toHaveLength(13);
-        links.first().simulate('click');
+        arraySortSpy.mockClear();
+        expect(wrapper).toBeDefined();
+        const referenceLink = wrapper.getByText('Reference');
+        fireEvent.click(referenceLink);
         expect(arraySortSpy).toHaveBeenCalledTimes(1);
-        expect(WRAPPER).toMatchSnapshot();
+        expect(wrapper).toMatchSnapshot();
     });
 
     it('should sort descending when the column heading is clicked twice', () => {
-        const OUTER = shallow(<WrappedWorkstackAllocate {...DEFAULT_PROPS} />);
-        const WorkstackAllocate = OUTER.props().children;
-        const WRAPPER = mount(<Router><WorkstackAllocate track={MOCK_TRACK} /></Router>);
-        arraySortSpy.mockClear();
+        const wrapper = render(
+            <WorkstackAllocate
+                track={MOCK_TRACK}
+                allocateToWorkstackEndpoint={DEFAULT_PROPS.allocateToWorkstackEndpoint}
+                baseUrl={DEFAULT_PROPS.baseUrl}
+                selectable={DEFAULT_PROPS.selectable}
+                submitHandler={DEFAULT_PROPS.submitHandler}
+                updateFormData={DEFAULT_PROPS.updateFormData}
+                items={DEFAULT_PROPS.items}
+                columns={DEFAULT_PROPS.columns}
+            />, { wrapper: MemoryRouter });
 
-        const links = WRAPPER.find('th.govuk-link');
-        expect(links).toHaveLength(13);
-        links.first().simulate('click');
-        links.first().simulate('click');
+        arraySortSpy.mockClear();
+        expect(wrapper).toBeDefined();
+        const referenceLink = wrapper.getByText('Reference');
+        fireEvent.click(referenceLink);
+        fireEvent.click(referenceLink);
         expect(arraySortSpy).toHaveBeenCalledTimes(2);
-        expect(WRAPPER).toMatchSnapshot();
+        expect(wrapper).toMatchSnapshot();
     });
 
     it('should render the move team options', () => {
-        const props =  Object.assign({}, DEFAULT_PROPS, MOVE_TEAM_OPTIONS);
-        const OUTER = shallow(<WrappedWorkstackAllocate {...props} />);
-        const WorkstackAllocate = OUTER.props().children;
-        const WRAPPER = render(<Router><WorkstackAllocate track={MOCK_TRACK} /></Router>);
+        const props = Object.assign({}, DEFAULT_PROPS, MOVE_TEAM_OPTIONS);
+        const wrapper = render(
+            <WorkstackAllocate
+                {...props}
+            />, { wrapper: MemoryRouter });
 
-        expect(WRAPPER).toBeDefined();
-        expect(WRAPPER).toMatchSnapshot();
-    });
-
-    it('should call updateFormData with correct values for move team', () => {
-        const mockUpdateFormData = jest.fn();
-        const props =  Object.assign({}, DEFAULT_PROPS, MOVE_TEAM_OPTIONS, { updateFormData: mockUpdateFormData } );
-
-        const OUTER = shallow(<WrappedWorkstackAllocate {...props} />);
-        const WorkstackAllocate = OUTER.props().children;
-        const WRAPPER = mount(<Router><WorkstackAllocate track={MOCK_TRACK} /></Router>);
-
-        WRAPPER.find('option').at(0).simulate('change', {
-            target: MOVE_TEAM_OPTIONS.moveTeamOptions[1]
-        }); // select TEAM 2
-
-        const moveTeamButton = WRAPPER.find('[name="move_team"]');
-
-        moveTeamButton.first().simulate('click'); // click move team button
-
-        expect(mockUpdateFormData.mock.calls[1][0]).toEqual({ 'selected_team': 'VALUE 2' });
-        expect(mockUpdateFormData.mock.calls[2][0]).toEqual({ 'submitAction': 'move_team' });
-
-    });
-
-    it('should not add link to headers with sortStrategy noSort', () => {
-        const propsWithNoSortOnReference = { ...DEFAULT_PROPS, columns: [...DEFAULT_PROPS.columns] };
-        propsWithNoSortOnReference.columns[0] =
-          { displayName: 'Reference', dataAdapter: null, renderer: 'caseLink', dataValueKey: 'caseReference', isFilterable: true, sortStrategy: 'noSort' };
-
-        const OUTER = shallow(<WrappedWorkstackAllocate { ...propsWithNoSortOnReference } />);
-        const WorkstackAllocate = OUTER.props().children;
-        const WRAPPER = mount(<Router><WorkstackAllocate track={MOCK_TRACK} /></Router>);
-
-        const links = WRAPPER.find('th.govuk-link');
-        expect(links).toHaveLength(12);
-
-        expect(WRAPPER).toBeDefined();
-        expect(WRAPPER).toMatchSnapshot();
+        expect(wrapper).toBeDefined();
+        expect(wrapper).toMatchSnapshot();
     });
 });
