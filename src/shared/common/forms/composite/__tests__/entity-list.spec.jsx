@@ -1,6 +1,8 @@
 import React from 'react';
-import WrappedEntityList from '../entity-list.jsx';
+import { EntityList } from '../entity-list.jsx';
 import { MemoryRouter } from 'react-router-dom';
+import '@testing-library/jest-dom';
+import { fireEvent, render, screen } from '@testing-library/react';
 
 describe('Entity list component', () => {
 
@@ -22,63 +24,62 @@ describe('Entity list component', () => {
         MOCK_CALLBACK.mockReset();
     });
 
-    it('should render with default props', () => {
-        const OUTER = shallow(<WrappedEntityList {...DEFAULT_PROPS} />);
-        const EntityList = OUTER.props().children;
-        const WRAPPER = render(<EntityList />);
-        expect(WRAPPER).toBeDefined();
-        expect(WRAPPER).toMatchSnapshot();
+    test('should render with default props', () => {
+        const wrapper = render(
+            <EntityList
+                {...DEFAULT_PROPS}
+            />,
+            { wrapper: MemoryRouter }
+        );
+        expect(wrapper).toBeDefined();
     });
 
-    it('should render with label when passed in props', () => {
+    test('should render with label when passed in props', () => {
         const PROPS = {
             ...DEFAULT_PROPS,
             label: 'Test entity list'
         };
-        const OUTER = shallow(<WrappedEntityList {...PROPS} />);
-        const EntityList = OUTER.props().children;
-        const WRAPPER = render(<EntityList />);
-        expect(WRAPPER).toBeDefined();
-        expect(WRAPPER).toMatchSnapshot();
+        const wrapper = render(
+            <EntityList
+                {...PROPS}
+            />,
+            { wrapper: MemoryRouter }
+        );
+        expect(wrapper).toBeDefined();
+        expect(screen.getByText('Test entity list')).toBeInTheDocument();
     });
 
-    it('should render with hint when passed in props', () => {
+    test('should render with hint when passed in props', () => {
         const PROPS = {
             ...DEFAULT_PROPS,
             hint: 'Select one of the below entities'
         };
-        const OUTER = shallow(<WrappedEntityList {...PROPS} />);
-        const EntityList = OUTER.props().children;
-        const WRAPPER = render(<EntityList />);
-        expect(WRAPPER).toBeDefined();
-        expect(WRAPPER).toMatchSnapshot();
+        const wrapper = render(
+            <EntityList
+                {...PROPS}
+            />,
+            { wrapper: MemoryRouter }
+        );
+        expect(wrapper).toBeDefined();
+        expect(screen.getByText('Select one of the below entities')).toBeInTheDocument();
     });
 
-    it('should render with error when passed in props', () => {
+    test('should render with error when passed in props', () => {
         const PROPS = {
             ...DEFAULT_PROPS,
             error: 'Validation has failed'
         };
-        const OUTER = shallow(<WrappedEntityList {...PROPS} />);
-        const EntityList = OUTER.props().children;
-        const WRAPPER = render(<EntityList />);
-        expect(WRAPPER).toBeDefined();
-        expect(WRAPPER).toMatchSnapshot();
+        const wrapper = render(
+            <EntityList
+                {...PROPS}
+            />,
+            { wrapper: MemoryRouter }
+        );
+        expect(wrapper).toBeDefined();
+        expect(screen.getByText('Validation has failed')).toBeInTheDocument();
     });
 
-    it('should render with additional when passed in props', () => {
-        const PROPS = {
-            ...DEFAULT_PROPS,
-            className: 'my-css-class'
-        };
-        const OUTER = shallow(<WrappedEntityList {...PROPS} />);
-        const EntityList = OUTER.props().children;
-        const WRAPPER = render(<EntityList />);
-        expect(WRAPPER).toBeDefined();
-        expect(WRAPPER).toMatchSnapshot();
-    });
-
-    it('should render with remove link when passed in props', () => {
+    test('should render with remove link when passed in props', () => {
         const choice = value => ({ label: `Choice ${value}`, value: `CHOICE_${value}` });
         const PROPS = {
             ...DEFAULT_PROPS,
@@ -88,17 +89,17 @@ describe('Entity list component', () => {
             ],
             hasRemoveLink: true
         };
-        const OUTER = shallow(<WrappedEntityList {...PROPS} />);
-        const EntityList = OUTER.props().children;
-        const WRAPPER = render(
-            <MemoryRouter>
-                <EntityList page={PAGE} />
-            </MemoryRouter>);
-        expect(WRAPPER).toBeDefined();
-        expect(WRAPPER).toMatchSnapshot();
+        const wrapper = render(
+            <EntityList
+                {...PROPS}
+            />,
+            { wrapper: MemoryRouter }
+        );
+        expect(wrapper).toBeDefined();
+        expect(screen.getAllByText('Remove')).toHaveLength(2);
     });
 
-    it('should suppress remove link when passed in props', () => {
+    test('should suppress remove link when passed in props', () => {
         const choice = value => ({ label: `Choice ${value}`, value: `CHOICE_${value}` });
         const PROPS = {
             ...DEFAULT_PROPS,
@@ -109,17 +110,17 @@ describe('Entity list component', () => {
             hasRemoveLink: true,
             hideRemovePrimary: true
         };
-        const OUTER = shallow(<WrappedEntityList {...PROPS} />);
-        const EntityList = OUTER.props().children;
-        const WRAPPER = render(
-            <MemoryRouter>
-                <EntityList page={PAGE} />
-            </MemoryRouter>);
-        expect(WRAPPER).toBeDefined();
-        expect(WRAPPER).toMatchSnapshot();
+        const wrapper = render(
+            <EntityList
+                {...PROPS}
+            />,
+            { wrapper: MemoryRouter }
+        );
+        expect(wrapper).toBeDefined();
+        expect(screen.getAllByText('Remove')).toHaveLength(2);
     });
 
-    it('should render with edit link when passed in props', () => {
+    test('should render with edit link when passed in props', () => {
         const choice = value => ({ label: `Choice ${value}`, value: `CHOICE_${value}` });
         const PROPS = {
             ...DEFAULT_PROPS,
@@ -129,45 +130,29 @@ describe('Entity list component', () => {
             ],
             hasEditLink: true
         };
-        const OUTER = shallow(<WrappedEntityList {...PROPS} />);
-        const EntityList = OUTER.props().children;
-        const WRAPPER = render(
-            <MemoryRouter>
-                <EntityList page={PAGE} />
-            </MemoryRouter>);
-        expect(WRAPPER).toBeDefined();
-        expect(WRAPPER).toMatchSnapshot();
+        const wrapper = render(
+            <EntityList
+                {...PROPS}
+            />,
+            { wrapper: MemoryRouter }
+        );
+        expect(wrapper).toBeDefined();
+        expect(screen.getAllByText('Edit')).toHaveLength(2);
     });
 
-    it('should render with add link when passed in props', () => {
+    test('should render with add link when passed in props', () => {
         const PROPS = {
             ...DEFAULT_PROPS,
             hasAddLink: true
         };
-        const OUTER = shallow(<WrappedEntityList {...PROPS} />);
-        const EntityList = OUTER.props().children;
-        const WRAPPER = render(
-            <MemoryRouter>
-                <EntityList page={PAGE} />
-            </MemoryRouter>);
-        expect(WRAPPER).toBeDefined();
-        expect(WRAPPER).toMatchSnapshot();
-    });
-
-    it('should render with addUrlPath link when passed in props', () => {
-        const PROPS = {
-            ...DEFAULT_PROPS,
-            hasAddLink: true,
-            addUrlPath: 'addNoMp'
-        };
-        const OUTER = shallow(<WrappedEntityList {...PROPS} />);
-        const EntityList = OUTER.props().children;
-        const WRAPPER = render(
-            <MemoryRouter>
-                <EntityList page={PAGE} />
-            </MemoryRouter>);
-        expect(WRAPPER).toBeDefined();
-        expect(WRAPPER).toMatchSnapshot();
+        const wrapper = render(
+            <EntityList
+                {...PROPS}
+            />,
+            { wrapper: MemoryRouter }
+        );
+        expect(wrapper).toBeDefined();
+        expect(screen.getByText('Add a entity')).toBeInTheDocument();
     });
 
     it('should execute callback on initialization', () => {
@@ -175,9 +160,13 @@ describe('Entity list component', () => {
             ...DEFAULT_PROPS,
             choices: []
         };
-        const OUTER = shallow(<WrappedEntityList {...PROPS} />);
-        const EntityList = OUTER.props().children;
-        mount(<EntityList />);
+        const wrapper = render(
+            <EntityList
+                {...PROPS}
+            />,
+            { wrapper: MemoryRouter }
+        );
+        expect(wrapper).toBeDefined();
         expect(MOCK_CALLBACK).toHaveBeenCalledTimes(1);
         expect(MOCK_CALLBACK).toHaveBeenCalledWith({ [DEFAULT_PROPS.name]: null });
     });
@@ -191,47 +180,20 @@ describe('Entity list component', () => {
                 choice('B')
             ]
         };
-        const OUTER = shallow(<WrappedEntityList {...PROPS} />);
-        const EntityList = OUTER.props().children;
-        const INNER = mount(<EntityList />);
+        const wrapper = render(
+            <EntityList
+                {...PROPS}
+            />,
+            { wrapper: MemoryRouter }
+        );
+        expect(wrapper).toBeDefined();
 
         MOCK_CALLBACK.mockReset();
 
-        INNER.find(`#${DEFAULT_PROPS.name}-${choice('A').value}`).simulate('change', { target: { value: choice('A').value } });
-        expect(MOCK_CALLBACK).toHaveBeenCalledTimes(1);
-        expect(MOCK_CALLBACK).toHaveBeenCalledWith({ [DEFAULT_PROPS.name]: choice('A').value });
-
-        INNER.find(`#${DEFAULT_PROPS.name}-${choice('B').value}`).simulate('change', { target: { value: choice('B').value } });
-        expect(MOCK_CALLBACK).toHaveBeenCalledTimes(2);
+        fireEvent.click(wrapper.getAllByRole('radio')[1]);
         expect(MOCK_CALLBACK).toHaveBeenCalledWith({ [DEFAULT_PROPS.name]: choice('B').value });
+
+        fireEvent.click(wrapper.getAllByRole('radio')[0]);
+        expect(MOCK_CALLBACK).toHaveBeenCalledWith({ [DEFAULT_PROPS.name]: choice('A').value });
     });
-
-    it('Add, Edit & Remove URL\'s should include hideSidebar query param', () => {
-        const choice = value => ({ label: `Choice ${value}`, value: `CHOICE_${value}` });
-        const props = {
-            page: PAGE,
-            name: NAME,
-            entity: ENTITY,
-            baseUrl: BASE_URL,
-            choices: [
-                choice('A'),
-                choice('B')
-            ],
-            updateState: MOCK_CALLBACK,
-            hideSidebar: true,
-            hasAddLink: true,
-            hasEditLink: true,
-            hasRemoveLink: true,
-        };
-
-        const OUTER = shallow(<WrappedEntityList { ...props} />);
-        const EntityList = OUTER.props().children;
-        const WRAPPER = render(
-            <MemoryRouter>
-                <EntityList page={PAGE} />
-            </MemoryRouter>);
-        expect(WRAPPER).toBeDefined();
-        expect(WRAPPER).toMatchSnapshot();
-    });
-
 });
