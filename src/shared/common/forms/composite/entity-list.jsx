@@ -146,4 +146,4 @@ const WrappedEntityList = props => (
     </ApplicationConsumer>
 );
 
-export default WrappedEntityList;
+export { WrappedEntityList, EntityList };
