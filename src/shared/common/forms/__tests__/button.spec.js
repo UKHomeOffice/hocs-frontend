@@ -1,6 +1,8 @@
 import React from 'react';
-import Button from '../button.jsx';
+import { Button } from '../button.jsx';
 import { MemoryRouter } from 'react-router-dom';
+import '@testing-library/jest-dom';
+import { fireEvent, render, screen } from '@testing-library/react';
 
 describe('Form button component', () => {
 
@@ -11,67 +13,34 @@ describe('Form button component', () => {
     });
 
     it('should render with default props', () => {
-        const outer = shallow(<Button action="/SOME/URL" />);
-        const Children = outer.props().children;
-        const wrapper = mount(
-            <MemoryRouter>
-                <Children dispatch={mockDispatch} />
-            </MemoryRouter>
+        const wrapper = render(
+            <Button action={'/SOME/URL'} label={'press'} dispatch={() => {}} />,
+            { wrapper: MemoryRouter }
         );
         expect(wrapper).toBeDefined();
-        expect(wrapper.find('Button')).toMatchSnapshot();
+        expect(screen.getByText('press')).toBeInTheDocument();
     });
 
     it('should render disabled when isDisabled is passed', () => {
-        const outer = shallow(<Button disabled={true} action="/SOME/URL" />);
-        const Children = outer.props().children;
-        const wrapper = mount(
-            <MemoryRouter>
-                <Children dispatch={mockDispatch} />
-            </MemoryRouter>
+        const wrapper = render(
+            <Button action={'/SOME/URL'} label={'press'} dispatch={() => {}} disabled={true} />,
+            { wrapper: MemoryRouter }
         );
         expect(wrapper).toBeDefined();
-        expect(wrapper.find('Button')).toMatchSnapshot();
-        expect(wrapper.find('Link').props().disabled).toEqual(true);
-    });
-
-    it('should render with correct label when passed', () => {
-        const outer = shallow(<Button label={'My Button'} action="/SOME/URL" />);
-        const Children = outer.props().children;
-        const wrapper = mount(
-            <MemoryRouter>
-                <Children dispatch={mockDispatch} />
-            </MemoryRouter>
-        );
-        expect(wrapper).toBeDefined();
-        expect(wrapper.find('Button')).toMatchSnapshot();
-        expect(wrapper.find('Link').props().children).toEqual('My Button');
-    });
-
-    it('should render with additional styles when className is passed', () => {
-        const outer = shallow(<Button className={'test-class'} action="/SOME/URL" />);
-        const Children = outer.props().children;
-        const wrapper = mount(
-            <MemoryRouter>
-                <Children dispatch={mockDispatch} />
-            </MemoryRouter>
-        );
-        expect(wrapper).toBeDefined();
-        expect(wrapper.find('Button')).toMatchSnapshot();
-        expect(wrapper.find('Link').props().className).toEqual('govuk-button test-class');
+        expect(screen.getByText('press')).toHaveAttribute('disabled');
     });
 
     it('should dispatch action when clicked', () => {
-        const outer = shallow(<Button action="/SOME/URL" />);
-        const Children = outer.props().children;
-        const wrapper = mount(
-            <MemoryRouter>
-                <Children dispatch={mockDispatch} />
-            </MemoryRouter>
+        global.testFunc = () => {};
+        const testSpy = jest.spyOn(global, 'testFunc');
+        const wrapper = render(
+            <Button action={'/SOME/URL'} label={'press'} dispatch={testSpy} />,
+            { wrapper: MemoryRouter }
         );
+
         expect(wrapper).toBeDefined();
-        wrapper.find('Link').simulate('click');
-        expect(mockDispatch).toHaveBeenCalledTimes(1);
+        fireEvent.click(screen.getByText('press'));
+        expect(testSpy).toHaveBeenCalledTimes(1);
     });
 
 });
