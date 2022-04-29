@@ -306,4 +306,4 @@ const WrappedSomuList = props => (
     </ApplicationConsumer>
 );
 
-export default WrappedSomuList;
+export { WrappedSomuList, SomuList };
