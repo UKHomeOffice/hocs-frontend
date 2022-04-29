@@ -1,6 +1,8 @@
 import React from 'react';
 import { BackButton } from '../back-button.jsx';
 import { MemoryRouter } from 'react-router-dom';
+import '@testing-library/jest-dom';
+import { render, screen } from '@testing-library/react';
 
 describe('Form back button component', () => {
 
@@ -12,36 +14,30 @@ describe('Form back button component', () => {
     });
 
     it('should render with default props', () => {
-        const wrappedButton = mount(<MemoryRouter><BackButton action="/SOME/URL" dispatch={mockDispatch}
-            history={mockHistory} caseId='caseId123' stageId='stageId123' /></MemoryRouter>);
+        const wrappedButton = render(
+            <BackButton action="/SOME/URL" dispatch={mockDispatch}
+                history={mockHistory} caseId='caseId123' stageId='stageId123' />,
+            { wrapper: MemoryRouter }
+        );
         expect(wrappedButton).toBeDefined();
-        expect(wrappedButton.find('BackButton')).toMatchSnapshot();
     });
 
     it('should render disabled when isDisabled is passed', () => {
-        const wrappedButton = mount(<MemoryRouter><BackButton action="/SOME/URL" disabled={true} dispatch={mockDispatch}
-            history={mockHistory} caseId='caseId123' stageId='stageId123' /></MemoryRouter>);
-        expect(wrappedButton).toBeDefined();
-        expect(wrappedButton.find('BackButton')).toMatchSnapshot();
-        expect(wrappedButton.find('Link').props().disabled).toEqual(true);
+        render(
+            <BackButton action="/SOME/URL" disabled={true} dispatch={mockDispatch}
+                history={mockHistory} caseId='caseId123' stageId='stageId123' />,
+            { wrapper: MemoryRouter }
+        );
+
+        expect(screen.getByRole('link')).toHaveAttribute('disabled');
     });
 
     it('should render with correct label when passed', () => {
-        const wrappedButton = mount(<MemoryRouter><BackButton label={'My Button'} action="/SOME/URL" dispatch={mockDispatch}
-            history={mockHistory} caseId='caseId123' stageId='stageId123' /></MemoryRouter>);
-        expect(wrappedButton).toBeDefined();
-        expect(wrappedButton.find('BackButton')).toMatchSnapshot();
-        expect(wrappedButton.find('Link').props().disabled).toEqual(false);
-        expect(wrappedButton.find('Link').props().children).toEqual('My Button');
+        render(
+            <BackButton label={'My Button'} action="/SOME/URL" dispatch={mockDispatch}
+                history={mockHistory} caseId='caseId123' stageId='stageId123' />,
+            { wrapper: MemoryRouter }
+        );
+        expect(screen.getByText('My Button')).toBeInTheDocument();
     });
-
-    it('should render with additional styles when className is passed', () => {
-        const wrappedButton = mount(<MemoryRouter><BackButton className={'test-class'} action="/SOME/URL" dispatch={mockDispatch}
-            history={mockHistory} caseId='caseId123' stageId='stageId123' /></MemoryRouter>);
-        expect(wrappedButton).toBeDefined();
-        expect(wrappedButton.find('BackButton')).toMatchSnapshot();
-        expect(wrappedButton.find('Link').props().className).toEqual('govuk-back-link test-class');
-    });
-
-
 });
