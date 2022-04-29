@@ -5,7 +5,7 @@ jest.mock('../form-enabled.jsx', () => (
     (C) => C
 ));
 
-jest.mock('../../common/components/document-pane.jsx', () => (
+jest.mock('../../common/components/document-panel.jsx', () => (
     'div'
 ));
 

@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { ApplicationConsumer } from '../../contexts/application.jsx';
 import { Link } from 'react-router-dom';
-import DocumentPane from './document-pane.jsx';
+import { WrappedDocumentPanel as DocumentPanel } from './document-panel.jsx';
 import CaseNotes from './case-notes.jsx';
 import StageSummary from './stage-summary.jsx';
 import People from './people.jsx';
@@ -73,7 +73,7 @@ class SideBar extends Component {
                         {caseTabs.case_actions && this.renderTabButton('Actions', 'CASE_ACTIONS')}
                         {caseTabs.ex_gratia && this.renderTabButton('Ex-Gratia', 'EX_GRATIA')}
                     </ul>
-                    {this.isActive('DOCUMENTS') && <DocumentPane />}
+                    {this.isActive('DOCUMENTS') && <DocumentPanel />}
                     {this.isActive('SUMMARY') && <StageSummary />}
                     {this.isActive('TIMELINE') && <CaseNotes />}
                     {this.isActive('PEOPLE') && <People />}
