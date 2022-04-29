@@ -116,4 +116,4 @@ const WrappedDocumentPanel = props => (
     </ApplicationConsumer>
 );
 
-export default WrappedDocumentPanel;
+export { DocumentPanel, WrappedDocumentPanel };
