@@ -1,5 +1,7 @@
 import React from 'react';
 import RadioGroup from '../radio-group.jsx';
+import '@testing-library/jest-dom';
+import { fireEvent, render, screen } from '@testing-library/react';
 
 const choices = [
     { label: 'isA', value: 'A' },
@@ -9,90 +11,86 @@ const choices = [
 
 describe('Form radio group component', () => {
     it('should render with default props', () => {
-        expect(
-            render(<RadioGroup name="radio-group" choices={choices} updateState={() => null} />)
-        ).toMatchSnapshot();
+        const wrapper = render(<RadioGroup name="radio-group" choices={choices} updateState={() => null} />);
+        expect(wrapper).toBeDefined();
     });
+
     it('should render with value when passed', () => {
-        expect(
-            render(<RadioGroup name="radio-group" choices={choices} value="A" updateState={() => null} />)
-        ).toMatchSnapshot();
+        render(<RadioGroup name="radio-group" choices={choices} value="A" updateState={() => null} />);
+        expect(screen.getByText('isA')).toBeInTheDocument();
     });
+
     it('should render with label when passed', () => {
-        expect(
-            render(<RadioGroup name="radio-group" choices={choices} label="My text field" updateState={() => null} />)
-        ).toMatchSnapshot();
+        render(<RadioGroup name="radio-group" choices={choices} label="My text field" updateState={() => null} />);
+        expect(screen.getByText('My text field')).toBeInTheDocument();
     });
+
     it('should render with hint when passed', () => {
-        expect(
-            render(<RadioGroup name="radio-group" choices={choices} hint="Put some text in the box below" updateState={() => null} />)
-        ).toMatchSnapshot();
+        render(<RadioGroup name="radio-group" choices={choices} hint="Put some text in the box below" updateState={() => null} />);
+        expect(screen.getByText('Put some text in the box below')).toBeInTheDocument();
     });
+
     it('should render with error when passed', () => {
-        expect(
-            render(<RadioGroup name="radio-group" choices={choices} error="Some error message" updateState={() => null} />)
-        ).toMatchSnapshot();
+        render(<RadioGroup name="radio-group" choices={choices} error="Some error message" updateState={() => null} />);
+        expect(screen.getByText('Some error message')).toBeInTheDocument();
     });
+
     it('should render disabled when passed', () => {
-        expect(
-            render(<RadioGroup name="radio-group" choices={choices} disabled={true} updateState={() => null} />)
-        ).toMatchSnapshot();
+        render(<RadioGroup name="radio-group" choices={choices} disabled={true} updateState={() => null} />);
+        expect(screen.getByRole('group')).toBeDisabled();
     });
+
     it('should execute callback on initialization', () => {
         const mockCallback = jest.fn();
-        shallow(
-            <RadioGroup name="radio-group" choices={choices} updateState={mockCallback} />
-        );
+        render(<RadioGroup name="radio-group" choices={choices} updateState={mockCallback} />);
         expect(mockCallback).toHaveBeenCalledTimes(1);
         expect(mockCallback).toHaveBeenCalledWith({ 'radio-group': undefined });
     });
+
     it('should execute callback on change', () => {
         const mockCallback = jest.fn();
         let firstValue = 'A';
         let secondValue = 'B';
-        const wrapper = shallow(
-            <RadioGroup name="radio-group" choices={choices} updateState={mockCallback} />
-        );
-
+        const wrapper = render(<RadioGroup name="radio-group" choices={choices} updateState={mockCallback} />);
         mockCallback.mockReset();
 
-        wrapper.find('#radio-group-0').simulate('change', { target: { value: firstValue } });
+        fireEvent.click(wrapper.getAllByRole('radio')[0]);
         expect(mockCallback).toHaveBeenCalledTimes(1);
         expect(mockCallback).toHaveBeenCalledWith({ 'radio-group': firstValue });
 
-        wrapper.find('#radio-group-1').simulate('change', { target: { value: secondValue } });
+        fireEvent.click(wrapper.getAllByRole('radio')[1]);
         expect(mockCallback).toHaveBeenCalledTimes(2);
         expect(mockCallback).toHaveBeenCalledWith({ 'radio-group': secondValue });
     });
-    it('should textarea if conditional content exists', () => {
+
+    it('should show textarea if conditional content exists', () => {
         const choices = [
             { label: 'labelA', value: 'ValueA', conditionalContent: { label: 'someLabel' } },
             { label: 'labelB', value: 'ValueB' },
             { label: 'labelC', value: 'ValueC' }
         ];
-        expect(
-            render(<RadioGroup name="radio-group" choices={choices} updateState={() => null} />)
-        ).toMatchSnapshot();
+        render(<RadioGroup name="radio-group" choices={choices} updateState={() => null} />);
+        expect(screen.getByText('someLabel')).toBeInTheDocument();
     });
+
     it('should render error message for textarea if correct error exists in errors object', () => {
         const choices = [
             { label: 'labelA', value: 'ValueA', conditionalContent: { label: 'someLabel' } },
             { label: 'labelB', value: 'ValueB' },
             { label: 'labelC', value: 'ValueC' }
         ];
-        expect(
-            render(<RadioGroup name="radio-group" choices={choices} errors={{ ValueAText: 'Some error message' }} updateState={() => null} />)
-        ).toMatchSnapshot();
+        render(<RadioGroup name="radio-group" choices={choices} errors={{ ValueAText: 'Some error message' }} updateState={() => null} />);
+        expect(screen.getByText('Some error message')).toBeInTheDocument();
     });
+
     it('should render if visible is set to true', () => {
         const choices = [
             { label: 'labelA', value: 'ValueA' },
             { label: 'labelB', value: 'ValueB', visible: true },
             { label: 'labelC', value: 'ValueC', visible: 'true' },
         ];
-        expect(
-            render(<RadioGroup name="radio-group" choices={choices} updateState={() => null} />)
-        ).toMatchSnapshot();
+        render(<RadioGroup name="radio-group" choices={choices} updateState={() => null} />);
+        expect(screen.getAllByRole('radio')).toHaveLength(3);
     });
     it('should not render choices if visible is set to false', () => {
         const choices = [
@@ -100,8 +98,7 @@ describe('Form radio group component', () => {
             { label: 'labelB', value: 'ValueB', visible: false },
             { label: 'labelC', value: 'ValueC', visible: 'false' },
         ];
-        expect(
-            render(<RadioGroup name="radio-group" choices={choices} updateState={() => null} />)
-        ).toMatchSnapshot();
+        render(<RadioGroup name="radio-group" choices={choices} updateState={() => null} />);
+        expect(screen.getAllByRole('radio')).toHaveLength(1);
     });
 });
