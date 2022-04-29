@@ -1,5 +1,7 @@
 import React from 'react';
 import Case from '../case.jsx';
+import '@testing-library/jest-dom';
+import { render } from '@testing-library/react';
 
 jest.mock('../form-enabled.jsx', () => (
     (C) => C
