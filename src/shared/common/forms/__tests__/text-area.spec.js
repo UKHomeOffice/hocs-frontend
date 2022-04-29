@@ -49,9 +49,8 @@ describe('Form text area component', () => {
     test('should execute callback on initialization', () => {
         const mockCallback = jest.fn();
         const fieldName = 'text-field';
-        shallow(
-            <TextArea name={fieldName} updateState={mockCallback} />
-        );
+        const wrapper = render(<TextArea name={fieldName} updateState={mockCallback} />);
+        expect(wrapper).toBeDefined();
         expect(mockCallback).toHaveBeenCalledTimes(1);
         expect(mockCallback).toHaveBeenCalledWith({ [fieldName]: '' });
     });
