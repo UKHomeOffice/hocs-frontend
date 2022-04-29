@@ -46,4 +46,4 @@ const WrappedLayout = props => (
     </ApplicationConsumer>
 );
 
-export default WrappedLayout;
+export { WrappedLayout, Layout };
