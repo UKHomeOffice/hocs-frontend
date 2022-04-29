@@ -1,5 +1,7 @@
 import React from 'react';
 import Layout from '../layout.jsx';
+import '@testing-library/jest-dom';
+import { render, screen } from '@testing-library/react';
 
 jest.mock('react-router-dom', () => {
     return {

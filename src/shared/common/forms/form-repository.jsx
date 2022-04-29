@@ -3,7 +3,7 @@ import TextInput from './text.jsx';
 import MappedText from './mapped-text.jsx';
 import MappedDisplay from './mapped-display.jsx';
 import ChangeLink from './composite/change-link.jsx';
-import SomuList from './composite/somu-list.jsx';
+import { WrappedSomuList as SomuList } from './composite/somu-list.jsx';
 import Radio from './radio-group.jsx';
 import DateInput from './date.jsx';
 import Checkbox from './checkbox-group.jsx';
