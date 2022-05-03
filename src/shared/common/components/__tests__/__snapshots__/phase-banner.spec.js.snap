@@ -1,120 +1,524 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Phase Banner component should display the correct feedback url when passed 1`] = `
-<div
-  class="govuk-phase-banner"
->
-  <p
-    class="govuk-phase-banner__content"
-  >
-    <strong
-      class="govuk-tag govuk-phase-banner__content__tag"
-    >
-      PROTOTYPE
-    </strong>
-    <span>
-      This is a new service – your 
-      <a
-        href="http://some.domain"
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="govuk-phase-banner"
       >
-        feedback
-      </a>
-       will help us to improve it.
-    </span>
-  </p>
-</div>
+        <p
+          class="govuk-phase-banner__content"
+        >
+          <strong
+            class="govuk-tag govuk-phase-banner__content__tag"
+          >
+            PROTOTYPE
+          </strong>
+          <span>
+            This is a new service – your 
+            <a
+              href="http://some.domain"
+            >
+              feedback
+            </a>
+             will help us to improve it.
+          </span>
+        </p>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="govuk-phase-banner"
+    >
+      <p
+        class="govuk-phase-banner__content"
+      >
+        <strong
+          class="govuk-tag govuk-phase-banner__content__tag"
+        >
+          PROTOTYPE
+        </strong>
+        <span>
+          This is a new service – your 
+          <a
+            href="http://some.domain"
+          >
+            feedback
+          </a>
+           will help us to improve it.
+        </span>
+      </p>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;
 
 exports[`Phase Banner component should display the correct phase when passed 1`] = `
-<div
-  class="govuk-phase-banner"
->
-  <p
-    class="govuk-phase-banner__content"
-  >
-    <strong
-      class="govuk-tag govuk-phase-banner__content__tag"
-    >
-      BETA
-    </strong>
-    <span>
-      This is a new service – your 
-      <a
-        href="/"
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="govuk-phase-banner"
       >
-        feedback
-      </a>
-       will help us to improve it.
-    </span>
-  </p>
-</div>
+        <p
+          class="govuk-phase-banner__content"
+        >
+          <strong
+            class="govuk-tag govuk-phase-banner__content__tag"
+          >
+            BETA
+          </strong>
+          <span>
+            This is a new service – your 
+            <a
+              href="/"
+            >
+              feedback
+            </a>
+             will help us to improve it.
+          </span>
+        </p>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="govuk-phase-banner"
+    >
+      <p
+        class="govuk-phase-banner__content"
+      >
+        <strong
+          class="govuk-tag govuk-phase-banner__content__tag"
+        >
+          BETA
+        </strong>
+        <span>
+          This is a new service – your 
+          <a
+            href="/"
+          >
+            feedback
+          </a>
+           will help us to improve it.
+        </span>
+      </p>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;
 
 exports[`Phase Banner component should display the correct test notice when isNotProd === 0 1`] = `
-<div
-  class="govuk-phase-banner"
->
-  <p
-    class="govuk-phase-banner__content"
-  >
-    <strong
-      class="govuk-tag govuk-phase-banner__content__tag"
-    >
-      PROTOTYPE
-    </strong>
-    <span>
-      This is a new service – your 
-      <a
-        href="/"
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="govuk-phase-banner"
       >
-        feedback
-      </a>
-       will help us to improve it.
-    </span>
-  </p>
-</div>
+        <p
+          class="govuk-phase-banner__content"
+        >
+          <strong
+            class="govuk-tag govuk-phase-banner__content__tag"
+          >
+            PROTOTYPE
+          </strong>
+          <span>
+            This is a new service – your 
+            <a
+              href="/"
+            >
+              feedback
+            </a>
+             will help us to improve it.
+          </span>
+        </p>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="govuk-phase-banner"
+    >
+      <p
+        class="govuk-phase-banner__content"
+      >
+        <strong
+          class="govuk-tag govuk-phase-banner__content__tag"
+        >
+          PROTOTYPE
+        </strong>
+        <span>
+          This is a new service – your 
+          <a
+            href="/"
+          >
+            feedback
+          </a>
+           will help us to improve it.
+        </span>
+      </p>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;
 
 exports[`Phase Banner component should display the correct test notice when isNotProd === 1 1`] = `
-<div
-  class="govuk-phase-banner"
->
-  <p
-    class="govuk-phase-banner__content"
-  >
-    <strong
-      class="govuk-tag govuk-phase-banner__content__tag"
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="govuk-phase-banner"
+      >
+        <p
+          class="govuk-phase-banner__content"
+        >
+          <strong
+            class="govuk-tag govuk-phase-banner__content__tag"
+          >
+            PROTOTYPE
+          </strong>
+          <span>
+            This is a test system - do not upload real documents or information
+          </span>
+        </p>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="govuk-phase-banner"
     >
-      PROTOTYPE
-    </strong>
-    <span>
-      This is a test system - do not upload real documents or information
-    </span>
-  </p>
-</div>
+      <p
+        class="govuk-phase-banner__content"
+      >
+        <strong
+          class="govuk-tag govuk-phase-banner__content__tag"
+        >
+          PROTOTYPE
+        </strong>
+        <span>
+          This is a test system - do not upload real documents or information
+        </span>
+      </p>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;
 
 exports[`Phase Banner component should render with default props 1`] = `
-<div
-  class="govuk-phase-banner"
->
-  <p
-    class="govuk-phase-banner__content"
-  >
-    <strong
-      class="govuk-tag govuk-phase-banner__content__tag"
-    >
-      PROTOTYPE
-    </strong>
-    <span>
-      This is a new service – your 
-      <a
-        href="/"
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="govuk-phase-banner"
       >
-        feedback
-      </a>
-       will help us to improve it.
-    </span>
-  </p>
-</div>
+        <p
+          class="govuk-phase-banner__content"
+        >
+          <strong
+            class="govuk-tag govuk-phase-banner__content__tag"
+          >
+            PROTOTYPE
+          </strong>
+          <span>
+            This is a new service – your 
+            <a
+              href="/"
+            >
+              feedback
+            </a>
+             will help us to improve it.
+          </span>
+        </p>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="govuk-phase-banner"
+    >
+      <p
+        class="govuk-phase-banner__content"
+      >
+        <strong
+          class="govuk-tag govuk-phase-banner__content__tag"
+        >
+          PROTOTYPE
+        </strong>
+        <span>
+          This is a new service – your 
+          <a
+            href="/"
+          >
+            feedback
+          </a>
+           will help us to improve it.
+        </span>
+      </p>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;
