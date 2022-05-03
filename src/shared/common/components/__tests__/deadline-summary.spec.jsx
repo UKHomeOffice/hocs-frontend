@@ -1,5 +1,7 @@
 import React from 'react';
 import DeadlineSummary from '../deadline-summary.jsx';
+import '@testing-library/jest-dom';
+import { render } from '@testing-library/react';
 
 describe('Deadline summary component', () => {
 
