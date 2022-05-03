@@ -39,48 +39,16 @@ describe('Side bar component', () => {
         expect(WRAPPER).toMatchSnapshot();
     });
 
-    it('should render with the actions tab for FOI', () => {
+    it('should render with supplied tabs', () => {
         const props = {
-            summary: {
-                type: 'FOI'
-            }
-        };
-
-        const WRAPPER = render(
-            <ApplicationProvider config={{ ...MOCK_CONFIG, ...props }}>
-                <MemoryRouter>
-                    <SideBar/>
-                </MemoryRouter>
-            </ApplicationProvider>
-        );
-
-        expect(WRAPPER).toBeDefined();
-        expect(WRAPPER).toMatchSnapshot();
-    });
-
-    it('should render with the defined BF tabs', () => {
-        const props = {
-            summary: {
-                type: 'BF'
-            }
-        };
-
-        const WRAPPER = render(
-            <ApplicationProvider config={{ ...MOCK_CONFIG, ...props }}>
-                <MemoryRouter>
-                    <SideBar/>
-                </MemoryRouter>
-            </ApplicationProvider>
-        );
-
-        expect(WRAPPER).toBeDefined();
-        expect(WRAPPER).toMatchSnapshot();
-    });
-
-    it('should hide the people tab for WCS', () => {
-        const props = {
-            summary: {
-                type: 'WCS'
+            caseConfig : {
+                type: 'case type',
+                tabs: [
+                    'documents',
+                    'summary',
+                    'actions',
+                    'ex_gratia'
+                ]
             }
         };
 

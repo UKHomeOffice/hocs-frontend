@@ -7,8 +7,8 @@ import CaseNotes from './case-notes.jsx';
 import StageSummary from './stage-summary.jsx';
 import People from './people.jsx';
 import CaseActions from './case-actions.jsx';
-import getTabsByShortCode from '../../helpers/case-type-sidebar-tabs-flags';
 import TabExGratia from './tab-ex-gratia.jsx';
+import updateCaseConfig from "../../helpers/case-config-helpers";
 
 class SideBar extends Component {
 
@@ -32,6 +32,12 @@ class SideBar extends Component {
         }
     }
 
+    componentDidUpdate(prevProps) {
+        if (prevProps.page.params !== this.props.page.params) {
+            this.updateTabs();
+        }
+    }
+
     setActive(e, tab) {
         e.preventDefault();
         if (tab !== this.state.active) {
@@ -42,10 +48,6 @@ class SideBar extends Component {
 
     isActive(tab) {
         return this.state.active === tab;
-    }
-
-    resolveTabsForCaseTypeByShortCode(type) {
-        return getTabsByShortCode(type);
     }
 
     renderTabButton(label, value) {
@@ -59,19 +61,25 @@ class SideBar extends Component {
         );
     }
 
+    updateTabs() {
+        const { page, dispatch } = this.props;
+        if (page && page.params && page.params.caseId) {
+            updateCaseConfig(page.params.caseId, dispatch);
+        }
+    }
+
     render() {
-        const { type } = this.props.summary;
-        const caseTabs = this.resolveTabsForCaseTypeByShortCode(type);
+        const caseTabs = this.props.caseConfig ? this.props.caseConfig.tabs : ['documents'];
         return (
             <Fragment>
                 <div className='tabs'>
                     <ul>
-                        {this.renderTabButton('Documents', 'DOCUMENTS')}
-                        {this.renderTabButton('Summary', 'SUMMARY')}
-                        {this.renderTabButton('Timeline', 'TIMELINE')}
-                        {caseTabs.people && this.renderTabButton('People', 'PEOPLE')}
-                        {caseTabs.foi_actions && this.renderTabButton('Actions', 'FOI_ACTIONS')}
-                        {caseTabs.ex_gratia && this.renderTabButton('Ex-Gratia', 'EX_GRATIA')}
+                        {caseTabs.includes('documents') && this.renderTabButton('Documents', 'DOCUMENTS')}
+                        {caseTabs.includes('summary') && this.renderTabButton('Summary', 'SUMMARY')}
+                        {caseTabs.includes('timeline') && this.renderTabButton('Timeline', 'TIMELINE')}
+                        {caseTabs.includes('people') && this.renderTabButton('People', 'PEOPLE')}
+                        {caseTabs.includes('actions') && this.renderTabButton('Actions', 'FOI_ACTIONS')}
+                        {caseTabs.includes('ex_gratia') && this.renderTabButton('Ex-Gratia', 'EX_GRATIA')}
                     </ul>
                     {this.isActive('DOCUMENTS') && <DocumentPane />}
                     {this.isActive('SUMMARY') && <StageSummary />}
@@ -90,13 +98,14 @@ SideBar.propTypes = {
     activeTab: PropTypes.string,
     page: PropTypes.object.isRequired,
     track: PropTypes.func.isRequired,
-    summary: PropTypes.object.isRequired
+    dispatch: PropTypes.func.isRequired,
+    caseConfig: PropTypes.object
 };
 
 const WrappedSideBar = props => (
     <ApplicationConsumer>
-        {({ track, page, activeTab, summary }) =>
-            <SideBar {...props} track={track} page={page} activeTab={activeTab} summary={summary}/>}
+        {({ track, page, activeTab, caseConfig, dispatch }) =>
+            <SideBar {...props} track={track} page={page} activeTab={activeTab} caseConfig={caseConfig} dispatch={dispatch}/>}
     </ApplicationConsumer>
 );
 

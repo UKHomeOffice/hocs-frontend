@@ -30,6 +30,9 @@ const reducer = (state, action) => {
         case types.UPDATE_CASE_SUMMARY:
             return { ...state, summary: action.payload };
 
+        case types.UPDATE_CASE_CONFIG:
+            return { ...state, caseConfig: action.payload };
+
         case types.UPDATE_CASE_DATA:
             return { ...state, caseData: action.payload };
 
@@ -68,6 +71,8 @@ const reducer = (state, action) => {
             return { ...state, caseNotes: null };
         case types.UNSET_CASE_SUMMARY:
             return { ...state, summary: {} };
+        case types.UNSET_CASE_CONFIG:
+            return { ...state, caseConfig: null };
         case types.UNSET_CORRESPONDENTS:
             return { ...state, correspondents: null };
         case types.PASS_FORWARD_PROPS: {

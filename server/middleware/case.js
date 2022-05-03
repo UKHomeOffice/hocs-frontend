@@ -44,6 +44,19 @@ function caseSummaryApiResponseMiddleware(req, res) {
     return res.status(200).json(res.locals.summary);
 }
 
+async function caseConfigMiddleware(req, res, next) {
+    try {
+        res.locals.caseConfig = await req.listService.fetch('CASE_CONFIG', req.params);
+        next();
+    } catch (error) {
+        next(error);
+    }
+}
+
+function caseConfigApiResponseMiddleware(req, res) {
+    return res.status(200).json(res.locals.caseConfig);
+}
+
 async function caseDataMiddleware(req, res, next) {
     try {
         res.locals.caseData = await req.listService.fetch('CASE_DATA', req.params);
@@ -189,5 +202,7 @@ module.exports = {
     caseActionApiResponseMiddleware,
     caseDataApiResponseMiddleware,
     caseDataMiddleware,
-    caseDataUpdateMiddleware
+    caseDataUpdateMiddleware,
+    caseConfigMiddleware,
+    caseConfigApiResponseMiddleware,
 };
