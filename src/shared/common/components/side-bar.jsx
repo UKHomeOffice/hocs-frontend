@@ -8,7 +8,7 @@ import StageSummary from './stage-summary.jsx';
 import People from './people.jsx';
 import CaseActions from './case-actions.jsx';
 import TabExGratia from './tab-ex-gratia.jsx';
-import updateCaseConfig from "../../helpers/case-config-helpers";
+import updateCaseConfig from '../../helpers/case-config-helpers';
 
 class SideBar extends Component {
 
@@ -99,13 +99,14 @@ SideBar.propTypes = {
     page: PropTypes.object.isRequired,
     track: PropTypes.func.isRequired,
     dispatch: PropTypes.func.isRequired,
+    summary: PropTypes.object.isRequired,
     caseConfig: PropTypes.object
 };
 
 const WrappedSideBar = props => (
     <ApplicationConsumer>
-        {({ track, page, activeTab, caseConfig, dispatch }) =>
-            <SideBar {...props} track={track} page={page} activeTab={activeTab} caseConfig={caseConfig} dispatch={dispatch}/>}
+        {({ track, page, activeTab, caseConfig, dispatch, summary }) =>
+            <SideBar {...props} track={track} page={page} activeTab={activeTab} caseConfig={caseConfig} dispatch={dispatch} summary={summary}/>}
     </ApplicationConsumer>
 );
 

@@ -18,7 +18,7 @@ jest.mock('../../clients', () => ({
 }));
 
 const { caseworkService } = require('../../clients');
-const { caseDataMiddleware, caseConfigMiddleware} = require('../case');
+const { caseDataMiddleware, caseConfigMiddleware } = require('../case');
 
 describe('Case middleware', () => {
 
