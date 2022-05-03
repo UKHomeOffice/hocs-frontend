@@ -1,6 +1,8 @@
 import React from 'react';
 import Card from '../card.jsx';
 import { MemoryRouter } from 'react-router-dom';
+import '@testing-library/jest-dom';
+import { render } from '@testing-library/react';
 
 const DEFAULT_PROPS = {
     count: 5,
