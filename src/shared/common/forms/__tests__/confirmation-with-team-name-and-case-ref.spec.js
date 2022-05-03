@@ -11,18 +11,17 @@ describe('Panel component', () => {
         {
             key: '4ef92480-922f-11eb-a8b3-0242ac130003',
             value: 'FOI BICSPI Acceptance Team'
+        },
+        {
+            key: 'abc92480-922f-11eb-a8b3-0242ac130003',
+            value: 'Another Team'
         }
     ];
-
     const hasHeader = true;
-
-    const defaultData = {
-
-    };
-
+    const defaultData = {};
+    const name = 'variableName';
     const data = {
-        CurrentStage: 'FOI_ALLOCATION',
-        AcceptanceTeam: '4ef92480-922f-11eb-a8b3-0242ac130003'
+        variableName: '4ef92480-922f-11eb-a8b3-0242ac130003'
     };
 
     it('should render with default props', () => {
@@ -37,7 +36,7 @@ describe('Panel component', () => {
     it('should render with title and team name when passed', () => {
         expect(
             render(<ApplicationProvider config={config} >
-                <ConfirmationWithTeamNameAndCaseRef data={data} choices={choices} label="completed" caseRef={'test-case-ref'} />
+                <ConfirmationWithTeamNameAndCaseRef data={data} choices={choices} name={name} label="completed" caseRef={'test-case-ref'} />
             </ApplicationProvider>)
         ).toMatchSnapshot();
     });
@@ -45,7 +44,7 @@ describe('Panel component', () => {
     it('should render with title, team name and header box when passed', () => {
         expect(
             render(<ApplicationProvider config={config} >
-                <ConfirmationWithTeamNameAndCaseRef data={data} choices={choices} label="completed" caseRef={'test-case-ref'} hasHeader={hasHeader} />
+                <ConfirmationWithTeamNameAndCaseRef data={data} choices={choices} name={name} label="completed" caseRef={'test-case-ref'} hasHeader={hasHeader} />
             </ApplicationProvider>)
         ).toMatchSnapshot();
     });

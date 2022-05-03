@@ -4,7 +4,7 @@ const isProduction = require('../config').isProduction;
 const { S3: { BUCKET_NAME, SSE_KEY } } = require('../config').forContext('AWS');
 const multer = require('multer');
 const multerS3 = require('multer-s3');
-const uuid = require('uuid/v4');
+const { v4: uuid } = require('uuid');
 
 const sseConfiguration = {
     serverSideEncryption: 'aws:kms',

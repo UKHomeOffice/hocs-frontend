@@ -163,13 +163,10 @@ class SomuTableRenderer {
         const { renderer } = this.state;
 
         switch (renderer) {
-            case 'MpamTable': {
-                return this.renderContributionTable(somuItem.data);
-            }
-            case 'CompTable': {
-                return this.renderContributionTable(somuItem.data);
-            }
-            case 'FoiTable': {
+            case 'MpamTable':
+            case 'CompTable':
+            case 'FoiTable':
+            case 'PogrTable': {
                 return this.renderContributionTable(somuItem.data);
             }
             case 'ApprovalRequestTable':

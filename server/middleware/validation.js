@@ -7,6 +7,7 @@ const getLogger = require('../libs/logger');
 const validationErrors = {
     required: label => `${label} is required`,
     alphanumeric: label => `${label} must be alphanumeric`,
+    strictCurrency: label => `${label} must be a currency amount to 2 decimal places`,
     currency: label => `${label} must be currency amount`,
     numeric: label => `${label} must be numeric`,
     hasWhitelistedExtension: (value, extension) => {
@@ -224,6 +225,13 @@ const validators = {
         const format = /^[a-z0-9]+$/i;
         if (value && !format.test(value)) {
             return message || validationErrors.alphanumeric(label);
+        }
+        return null;
+    },
+    strictCurrency: ({ label, value, message }) => {
+        const format = /^\d+(\.\d{2})$/;
+        if (value && !format.test(value)) {
+            return message || validationErrors.strictCurrency(label);
         }
         return null;
     },

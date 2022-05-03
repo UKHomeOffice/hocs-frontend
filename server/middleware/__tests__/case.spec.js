@@ -13,12 +13,14 @@ jest.mock('../../services/action.js', () => ({
 
 jest.mock('../../clients', () => ({
     caseworkService: {
-        get: jest.fn()
+        get: jest.fn(),
+        post: jest.fn(),
+        put: jest.fn()
     }
 }));
 
 const { caseworkService } = require('../../clients');
-const { caseDataMiddleware, caseConfigMiddleware } = require('../case');
+const { caseDataMiddleware, createCaseNote, updateCaseNote, caseConfigMiddleware } = require('../case');
 
 describe('Case middleware', () => {
 
@@ -381,6 +383,141 @@ describe('Case middleware', () => {
             expect(res.locals.correspondents).not.toBeDefined();
             expect(next).toHaveBeenCalled();
             expect(next).toHaveBeenCalledWith(mockError);
+        });
+    });
+
+    describe('createCaseNote', () => {
+        let req = {};
+        let res = {};
+        const next = jest.fn();
+
+        const generateWhitespace = (number) => ''.padEnd(number, ' ');
+
+        beforeEach(() => {
+            req = {
+                params: {
+                    caseId: 'CASE_ID'
+                },
+                user: {
+                    id: 'test',
+                    roles: [],
+                    groups: []
+                },
+                body: {}
+            };
+
+            res = {
+                status: null,
+                locals: {}
+            };
+
+            next.mockReset();
+            caseworkService.post.mockReset();
+        });
+
+        it('should call next with error if caseNote is undefined', async () => {
+            await createCaseNote(req, res, next);
+            expect(next).toHaveBeenCalled();
+            expect(res.locals.error).toEqual('Case note must not be blank');
+        });
+
+
+        it('should call next with error if caseNote is all whitespace', async () => {
+            req.body = { caseNote: generateWhitespace(100000) };
+
+            await createCaseNote(req, res, next);
+            expect(next).toHaveBeenCalled();
+            expect(res.locals.error).toEqual('Case note must not be blank');
+        });
+
+        it('should call next after successful post', async () => {
+            req.body = { caseNote: 'Test' + generateWhitespace(10) };
+
+            caseworkService.post.mockImplementation(() => Promise.resolve({ data: 'MOCK_SUMMARY' }));
+            await createCaseNote(req, res, next);
+
+            expect(caseworkService.post.mock.calls.length).toEqual(1);
+            // The request param of the first call
+            expect(caseworkService.post.mock.calls[0][1]).toEqual({ 'text': 'Test', 'type': 'MANUAL' });
+            expect(next).toHaveBeenCalled();
+        });
+
+        it('should call next with error if failed to add note', async () => {
+            req.body = { caseNote: 'Test' };
+
+            caseworkService.post.mockImplementation(() => Promise.reject({ data: 'MOCK_SUMMARY' }));
+            await createCaseNote(req, res, next);
+
+            expect(next).toHaveBeenCalled();
+            expect(next).toHaveBeenCalledWith(new Error('Failed to attach case note to case CASE_ID'));
+        });
+    });
+
+    describe('updateCaseNote', () => {
+        let req = {};
+        let res = {};
+        const next = jest.fn();
+
+        const generateWhitespace = (number) => ''.padEnd(number, ' ');
+
+        beforeEach(() => {
+            req = {
+                params: {
+                    caseId: 'CASE_ID',
+                    noteId: 'NOTE_ID'
+                },
+                user: {
+                    id: 'test',
+                    roles: [],
+                    groups: []
+                },
+                body: {}
+            };
+
+            res = {
+                status: null,
+                locals: {}
+            };
+
+            next.mockReset();
+            caseworkService.put.mockReset();
+        });
+
+        it('should call next with error if caseNote is undefined', async () => {
+            await updateCaseNote(req, res, next);
+            expect(next).toHaveBeenCalled();
+            expect(res.locals.error).toEqual('Case note must not be blank');
+        });
+
+
+        it('should call next with error if caseNote is all whitespace', async () => {
+            req.body = { caseNote: generateWhitespace(100000) };
+
+            await updateCaseNote(req, res, next);
+            expect(next).toHaveBeenCalled();
+            expect(res.locals.error).toEqual('Case note must not be blank');
+        });
+
+        it('should call next after successful post', async () => {
+            req.body = { caseNote: 'Test' + generateWhitespace(10) };
+
+            caseworkService.put.mockImplementation(() => Promise.resolve({ data: 'MOCK_SUMMARY' }));
+            await updateCaseNote(req, res, next);
+
+            expect(caseworkService.put.mock.calls.length).toEqual(1);
+            // The request param of the first call
+            expect(caseworkService.put.mock.calls[0][1]).toEqual({ 'text': 'Test', 'type': 'MANUAL' });
+            expect(next).toHaveBeenCalled();
+        });
+
+        it('should call next with error if failed to add note', async () => {
+            req.body = { caseNote: 'Test' };
+
+            caseworkService.put.mockImplementation(() => Promise.reject({ data: 'MOCK_SUMMARY' }));
+            await updateCaseNote(req, res, next);
+
+            expect(next).toHaveBeenCalled();
+            expect(next).toHaveBeenCalledWith(new Error('Failed to update case note NOTE_ID on case CASE_ID'));
         });
     });
 

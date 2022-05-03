@@ -234,77 +234,95 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
-        S_FOI_DIRECTORATE_BICSPI_ACCEPTANCE_TEAMS: {
+        S_FOI_ALL_RESP_TEAMS: {
             client: 'INFO',
-            endpoint: '/teams?unit=FOI_DIRECTORATE_BICSPI_ACCEPTANCE_TEAMS',
+            endpoint: '/entity/list/FOI_ALL_RESP_TEAMS',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_FOI_CASEWORK_TEAMS: {
+            client: 'INFO',
+            endpoint: '/teams?unit=FOI_CASEWORK_TEAMS',
             type: listService.types.STATIC,
             adapter: teamsAdapter
         },
-        S_FOI_DIRECTORATE_BORDER_FORCE_ACCEPTANCE_TEAMS: {
+        S_FOI_BORDER_FORCE_RESP_TEAMS: {
             client: 'INFO',
-            endpoint: '/teams?unit=FOI_DIRECTORATE_BORDER_FORCE_ACCEPTANCE_TEAMS',
+            endpoint: '/entity/list/FOI_BORDER_FORCE_RESP_TEAMS',
             type: listService.types.STATIC,
-            adapter: teamsAdapter
+            adapter: entityListItemsAdapter
         },
-        S_FOI_DIRECTORATE_HMPO_ACCEPTANCE_TEAMS: {
+        S_FOI_COMMUNICATIONS_DIRECTORATE_RESP_TEAMS: {
             client: 'INFO',
-            endpoint: '/teams?unit=FOI_DIRECTORATE_HMPO_ACCEPTANCE_TEAMS',
+            endpoint: '/entity/list/FOI_COMMUNICATIONS_DIRECTORATE_RESP_TEAMS',
             type: listService.types.STATIC,
-            adapter: teamsAdapter
+            adapter: entityListItemsAdapter
         },
-        S_FOI_DIRECTORATE_MIGRATION_AND_BORDERS_ACCEPTANCE_TEAMS: {
+        S_FOI_CORPORATE_ENABLERS_RESP_TEAMS: {
             client: 'INFO',
-            endpoint: '/teams?unit=FOI_DIRECTORATE_MIGRATION_AND_BORDERS_ACCEPTANCE_TEAMS',
+            endpoint: '/entity/list/FOI_CORPORATE_ENABLERS_RESP_TEAMS',
             type: listService.types.STATIC,
-            adapter: teamsAdapter
+            adapter: entityListItemsAdapter
         },
-        S_FOI_DIRECTORATE_HOMELAND_SECURITY_ACCEPTANCE_TEAMS: {
+        S_FOI_DDAT_RESP_TEAMS: {
             client: 'INFO',
-            endpoint: '/teams?unit=FOI_DIRECTORATE_HOMELAND_SECURITY_ACCEPTANCE_TEAMS',
+            endpoint: '/entity/list/FOI_DDAT_RESP_TEAMS',
             type: listService.types.STATIC,
-            adapter: teamsAdapter
+            adapter: entityListItemsAdapter
         },
-        S_FOI_DIRECTORATE_HOLA_ACCEPTANCE_TEAMS: {
+        S_FOI_HMPO_RESP_TEAMS: {
             client: 'INFO',
-            endpoint: '/teams?unit=FOI_DIRECTORATE_HOLA_ACCEPTANCE_TEAMS',
+            endpoint: '/entity/list/FOI_HMPO_RESP_TEAMS',
             type: listService.types.STATIC,
-            adapter: teamsAdapter
+            adapter: entityListItemsAdapter
         },
-        S_FOI_DIRECTORATE_OTHER_ACCEPTANCE_TEAMS: {
+        S_FOI_HOME_OFFICE_LEGAL_ADVISORS_RESP_TEAMS: {
             client: 'INFO',
-            endpoint: '/teams?unit=FOI_DIRECTORATE_OTHER_ACCEPTANCE_TEAMS',
+            endpoint: '/entity/list/FOI_HOME_OFFICE_LEGAL_ADVISORS_RESP_TEAMS',
             type: listService.types.STATIC,
-            adapter: teamsAdapter
+            adapter: entityListItemsAdapter
         },
-        S_FOI_DIRECTORATE_CUSTOMER_SERVICES_ACCEPTANCE_TEAMS: {
+        S_FOI_HOMELAND_SECURITY_RESP_TEAMS: {
             client: 'INFO',
-            endpoint: '/teams?unit=FOI_DIRECTORATE_CUSTOMER_SERVICES_ACCEPTANCE_TEAMS',
+            endpoint: '/entity/list/FOI_HOMELAND_SECURITY_RESP_TEAMS',
             type: listService.types.STATIC,
-            adapter: teamsAdapter
+            adapter: entityListItemsAdapter
         },
-        S_FOI_DIRECTORATE_STARS_HO_CSA_ACCEPTANCE_TEAMS: {
+        S_FOI_IMMIGRATION_ENFORCEMENT_RESP_TEAMS: {
             client: 'INFO',
-            endpoint: '/teams?unit=FOI_DIRECTORATE_STARS_HO_CSA_ACCEPTANCE_TEAMS',
+            endpoint: '/entity/list/FOI_IMMIGRATION_ENFORCEMENT_RESP_TEAMS',
             type: listService.types.STATIC,
-            adapter: teamsAdapter
+            adapter: entityListItemsAdapter
         },
-        S_FOI_DIRECTORATE_PUBLIC_SAFETY_ACCEPTANCE_TEAMS: {
+        S_FOI_MIGRATION_AND_BORDERS_GROUP_RESP_TEAMS: {
             client: 'INFO',
-            endpoint: '/teams?unit=FOI_DIRECTORATE_PUBLIC_SAFETY_ACCEPTANCE_TEAMS',
+            endpoint: '/entity/list/FOI_MIGRATION_AND_BORDERS_GROUP_RESP_TEAMS',
             type: listService.types.STATIC,
-            adapter: teamsAdapter
+            adapter: entityListItemsAdapter
         },
-        S_FOI_DIRECTORATE_CORPORATE_ENABLERS_ACCEPTANCE_TEAMS: {
+        S_FOI_PRIVATE_OFFICE_RESP_TEAMS: {
             client: 'INFO',
-            endpoint: '/teams?unit=FOI_DIRECTORATE_CORPORATE_ENABLERS_ACCEPTANCE_TEAMS',
+            endpoint: '/entity/list/FOI_PRIVATE_OFFICE_RESP_TEAMS',
             type: listService.types.STATIC,
-            adapter: teamsAdapter
+            adapter: entityListItemsAdapter
         },
-        FOI_DRAFT_TEAMS_SELECTION: {
+        S_FOI_PUBLIC_SAFETY_GROUP_RESP_TEAMS: {
             client: 'INFO',
-            endpoint: '/teams/descendants/${AcceptanceTeam}',
-            type: listService.types.DYNAMIC,
-            adapter: teamsAdapter
+            endpoint: '/entity/list/FOI_PUBLIC_SAFETY_GROUP_RESP_TEAMS',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_FOI_STARS_RESP_TEAMS: {
+            client: 'INFO',
+            endpoint: '/entity/list/FOI_STARS_RESP_TEAMS',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_FOI_UKVI_RESP_TEAMS: {
+            client: 'INFO',
+            endpoint: '/entity/list/FOI_UKVI_RESP_TEAMS',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
         },
         S_MPAM_BUS_UNITS_1: {
             client: 'INFO',
@@ -562,6 +580,11 @@ module.exports = {
         CASE_DOCUMENT_LIST_INTERIM_LETTERS: {
             client: 'CASEWORK',
             endpoint: '/case/document/reference/${caseId}/?type=Interim%20Letter',
+            adapter: documentListAdapter
+        },
+        CASE_DOCUMENT_LIST_POGR_DRAFT: {
+            client: 'CASEWORK',
+            endpoint: '/case/document/reference/${caseId}/?type=Draft',
             adapter: documentListAdapter
         },
         CASE_DOCUMENT_TAGS: {
@@ -885,6 +908,12 @@ module.exports = {
             adapter: entityListItemsAdapter
         },
         BF_INTERESTED_PARTIES: {
+            client: 'INFO',
+            endpoint: '/entity/list/BF_INTERESTED_PARTIES',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        BF2_INTERESTED_PARTIES: {
             client: 'INFO',
             endpoint: '/entity/list/BF_INTERESTED_PARTIES',
             type: listService.types.STATIC,

@@ -22,6 +22,10 @@ describe('node-cron', () => {
         flushedValue = '';
     });
 
+    afterEach(() => {
+        clock.uninstall();
+    });
+
     it('should flush for data in right format', () => {
         scheduleListRefresh(data, mock);
 

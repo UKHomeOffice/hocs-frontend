@@ -1,4 +1,5 @@
 const { addDays, formatDate } = require('../../libs/dateHelpers');
+const { resolveDeadlineDisplay } = require('../../libs/deadlineDisplayHelpers');
 
 const byCaseReference = (a, b) => {
     if (a.caseReference == null || b.caseReference == null) {
@@ -217,6 +218,8 @@ const bindDisplayElements = fromStaticList => async (stage) => {
     if(stage.dueContribution){
         stage.nextContributionDueDate = (stage.contributions === 'Overdue') ? 'Overdue' : formatDate(stage.dueContribution);
     }
+
+    stage.deadline = resolveDeadlineDisplay(stage.deadline, stage?.data?.suspended);
 
     return stage;
 };

@@ -6,7 +6,7 @@ const {
     REMOVE_CORRESPONDENT, ADD_TOPIC, REMOVE_TOPIC, CREATE_CASE, CREATE_AND_ALLOCATE_CASE, BULK_CREATE_CASE,
     ADD_DOCUMENT, REMOVE_DOCUMENT, MANAGE_DOCUMENTS, MANAGE_PEOPLE, ADD_CONTRIBUTION, ADD_ADDITIONAL_CONTRIBUTION,
     EDIT_CONTRIBUTION, APPLY_CASE_DEADLINE_EXTENSION, CONFIRMATION_SUMMARY, ADD_CASE_APPEAL, EDIT_CASE_APPEAL,
-    ADD_APPROVAL_REQUEST, EDIT_APPROVAL_REQUEST, RECORD_INTEREST, UPDATE_INTEREST, ADD_APPEAL_DOCUMENT
+    ADD_APPROVAL_REQUEST, EDIT_APPROVAL_REQUEST, RECORD_INTEREST, UPDATE_INTEREST, ADD_APPEAL_DOCUMENT,SUSPEND_CASE, UNSUSPEND_CASE
 } = require('../actions/types');
 
 const mpamContributionsRequest = {
@@ -62,6 +62,18 @@ const toContributionsRequest = {
 };
 
 const bfComplainantContributionsRequest = {
+    showBusinessUnits: false,
+    primaryChoiceLabel: 'Contributions Type',
+    primaryChoiceList: 'S_BF_CONTRIB_TYPE'
+};
+
+const pogrContributionsRequest = {
+    showBusinessUnits: true,
+    primaryChoiceLabel: 'Business Area',
+    primaryChoiceList: 'MPAM_CONTRIBUTION_BUSINESS_AREAS'
+};
+
+const pogrComplainantContributionsRequest = {
     showBusinessUnits: false,
     primaryChoiceLabel: 'Contributions Type',
     primaryChoiceList: 'S_BF_CONTRIB_TYPE'
@@ -334,6 +346,22 @@ const formDefinitions = {
                         action: CONFIRMATION_SUMMARY
                     }
                 }
+            },
+            SUSPENSION: {
+                ADD: {
+                    builder: formRepository.suspendCase,
+                    action: SUSPEND_CASE,
+                    next: {
+                        action: CONFIRMATION_SUMMARY
+                    }
+                },
+                REMOVE: {
+                    builder: formRepository.removeSuspension,
+                    action: UNSUSPEND_CASE,
+                    next: {
+                        action: CONFIRMATION_SUMMARY
+                    }
+                }
             }
         },
         DOCUMENT: {
@@ -473,6 +501,32 @@ const formDefinitions = {
                     builder: formRepository.contributionFulfillment,
                     action: EDIT_CONTRIBUTION,
                     customConfig: toContributionsRequest
+                }
+            },
+            POGR: {
+                ADDREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    action: ADD_CONTRIBUTION,
+                    customConfig: pogrComplainantContributionsRequest
+                },
+                EDIT: {
+                    builder: formRepository.contributionFulfillment,
+                    action: EDIT_CONTRIBUTION,
+                    customConfig: pogrComplainantContributionsRequest
+                }
+            },
+        },
+        BUS_CONTRIBUTIONS: {
+            POGR: {
+                ADDREQUEST: {
+                    builder: formRepository.contributionRequest,
+                    action: ADD_CONTRIBUTION,
+                    customConfig: pogrContributionsRequest
+                },
+                EDIT: {
+                    builder: formRepository.contributionFulfillment,
+                    action: EDIT_CONTRIBUTION,
+                    customConfig: pogrContributionsRequest
                 }
             },
         },

@@ -115,6 +115,30 @@ describe('Validators', () => {
         });
     });
 
+    describe('Strict currency validator', () => {
+        it('should reject symbols', () => {
+            expect(validators.strictCurrency({ label: 'test', value: '!@£$' })).toEqual('test must be a currency amount to 2 decimal places');
+        });
+        it('should reject alphanumeric', () => {
+            expect(validators.strictCurrency({ label: 'test', value: 'a1b2' })).toEqual('test must be a currency amount to 2 decimal places');
+        });
+        it('should reject zero decimal', () => {
+            expect(validators.strictCurrency({ label: 'test', value: '1234.' })).toEqual('test must be a currency amount to 2 decimal places');
+        });
+        it('should reject one decimal', () => {
+            expect(validators.strictCurrency({ label: 'test', value: '1234.5' })).toEqual('test must be a currency amount to 2 decimal places');
+        });
+        it('should reject three decimal', () => {
+            expect(validators.strictCurrency({ label: 'test', value: '1234.567' })).toEqual('test must be a currency amount to 2 decimal places');
+        });
+        it('should reject numeric only', () => {
+            expect(validators.strictCurrency({ label: 'test', value: '1234' })).toEqual('test must be a currency amount to 2 decimal places');
+        });
+        it('should accept double place', () => {
+            expect(validators.strictCurrency({ label: 'test', value: '1234.56' })).toEqual(null);
+        });
+    });
+
     describe('Currency validator', () => {
         it('should reject symbols', () => {
             expect(validators.currency({ label: 'test', value: '!@£$' })).toEqual('test must be currency amount');

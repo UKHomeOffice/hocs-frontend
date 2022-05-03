@@ -85,7 +85,7 @@ class SideBar extends Component {
                     {this.isActive('SUMMARY') && <StageSummary />}
                     {this.isActive('TIMELINE') && <CaseNotes />}
                     {this.isActive('PEOPLE') && <People />}
-                    {this.isActive('FOI_ACTIONS') && <CaseActions />}
+                    {this.isActive('CASE_ACTIONS') && <CaseActions />}
                     {this.isActive('EX_GRATIA') && <TabExGratia stages={this.props.summary.stages} />}
                 </div>
             </Fragment>
