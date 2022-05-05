@@ -198,6 +198,10 @@ const typeAdaptors = {
     CASE_SUSPENSION_REMOVED: ({ note }) => ({
         note,
         title: 'Case Suspension Removed'
+    }),
+    OFFLINE_CASE_TRANSFER : ({ note }) => ({
+        note,
+        title: 'Offline Case Transfer'
     })
 };
 
