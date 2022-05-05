@@ -7,27 +7,13 @@ exports[`Side bar component should render with default props 1`] = `
   <ul>
     <li>
       <a
-        class="tab tab__active"
+        class="tab"
         href="/undefined/?activeTab=DOCUMENTS"
       >
         Documents
       </a>
     </li>
   </ul>
-  <div
-    class="govuk-grid-row"
-  >
-    <div
-      class="govuk-grid-column-full"
-    >
-      <a
-        class="govuk-body govuk-link"
-        href="/case/some_case_id/stage/some_stage_id/entity/document/manage"
-      >
-        Manage Documents
-      </a>
-    </div>
-  </div>
 </div>
 `;
 
@@ -55,7 +41,7 @@ exports[`Side bar component should render with supplied tabs 1`] = `
     <li>
       <a
         class="tab"
-        href="/undefined/?activeTab=FOI_ACTIONS"
+        href="/undefined/?activeTab=CASE_ACTIONS"
       >
         Actions
       </a>

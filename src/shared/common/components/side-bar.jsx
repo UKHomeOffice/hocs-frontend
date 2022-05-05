@@ -16,7 +16,7 @@ class SideBar extends Component {
         super(props);
 
         this.state = {
-            active: props.activeTab || 'DOCUMENTS'
+            active: props.activeTab
         };
     }
 
@@ -29,6 +29,8 @@ class SideBar extends Component {
             this.setState(  {
                 active: tabParam
             });
+        } else {
+            this.updateActiveTab();
         }
     }
 
@@ -36,6 +38,7 @@ class SideBar extends Component {
         if (prevProps.page.params !== this.props.page.params) {
             this.updateTabs();
         }
+        this.updateActiveTab();
     }
 
     setActive(e, tab) {
@@ -68,6 +71,35 @@ class SideBar extends Component {
         }
     }
 
+    updateActiveTab() {
+        const { caseConfig } = this.props;
+
+        if (caseConfig && !this.state.active) {
+            this.setState({ active: this.getLeftMostTab(caseConfig.tabs) });
+        }
+    }
+
+    getLeftMostTab(caseTabs) {
+        if (caseTabs.includes('documents')) {
+            return 'DOCUMENTS';
+        }
+        if (caseTabs.includes('summary')) {
+            return 'SUMMARY';
+        }
+        if (caseTabs.includes('timeline')) {
+            return 'TIMELINE';
+        }
+        if (caseTabs.includes('people')) {
+            return 'PEOPLE';
+        }
+        if (caseTabs.includes('actions')) {
+            return 'CASE_ACTIONS';
+        }
+        if (caseTabs.includes('ex_gratia')) {
+            return 'EX_GRATIA';
+        }
+    }
+
     render() {
         const caseTabs = this.props.caseConfig ? this.props.caseConfig.tabs : ['documents'];
         return (
@@ -78,7 +110,7 @@ class SideBar extends Component {
                         {caseTabs.includes('summary') && this.renderTabButton('Summary', 'SUMMARY')}
                         {caseTabs.includes('timeline') && this.renderTabButton('Timeline', 'TIMELINE')}
                         {caseTabs.includes('people') && this.renderTabButton('People', 'PEOPLE')}
-                        {caseTabs.includes('actions') && this.renderTabButton('Actions', 'FOI_ACTIONS')}
+                        {caseTabs.includes('actions') && this.renderTabButton('Actions', 'CASE_ACTIONS')}
                         {caseTabs.includes('ex_gratia') && this.renderTabButton('Ex-Gratia', 'EX_GRATIA')}
                     </ul>
                     {this.isActive('DOCUMENTS') && <DocumentPane />}
