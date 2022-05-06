@@ -105,7 +105,7 @@ module.exports = {
         S_COMP_CCT_ENQ_REASON: {
             client: 'INFO',
             endpoint: '/entity/list/COMP_CCT_ENQ_REASON',
-            type: listService.types.STATIC,
+            type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
         },
         S_COMP_CSU_LIST: {
