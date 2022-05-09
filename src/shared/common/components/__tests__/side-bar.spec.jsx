@@ -1,7 +1,7 @@
 import React from 'react';
 import { ApplicationProvider } from '../../../contexts/application';
 import { MemoryRouter } from 'react-router-dom';
-import { SideBar } from '../side-bar';
+import SideBar from '../side-bar';
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 

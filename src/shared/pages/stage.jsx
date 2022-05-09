@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import formEnabled from './form-enabled.jsx';
-import { WrappedSideBar as SideBar } from '../common/components/side-bar.jsx';
+import SideBar from '../common/components/side-bar.jsx';
 
 class Stage extends Component {
 

@@ -100,4 +100,4 @@ const WrappedSideBar = props => (
     </ApplicationConsumer>
 );
 
-export { WrappedSideBar, SideBar };
+export default WrappedSideBar;
