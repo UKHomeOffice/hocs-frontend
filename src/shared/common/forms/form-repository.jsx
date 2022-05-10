@@ -9,7 +9,7 @@ import DateInput from './date.jsx';
 import Checkbox from './checkbox-group.jsx';
 import TextArea from './text-area.jsx';
 import AddDocument from './composite/document-add.jsx';
-import { WrappedEntityList as EntityList } from './composite/entity-list.jsx';
+import EntityList from './composite/entity-list.jsx';
 import EntityManager from './composite/entity-manager.jsx';
 import { WrappedButton } from './button.jsx';
 import Link from './link.jsx';
