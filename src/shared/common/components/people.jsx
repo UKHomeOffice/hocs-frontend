@@ -146,4 +146,4 @@ const WrappedPeople = props => (
     </ApplicationConsumer>
 );
 
-export { WrappedPeople, People };
+export default WrappedPeople;

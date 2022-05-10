@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import DocumentPanel from './document-panel.jsx';
 import CaseNotes from './case-notes.jsx';
 import StageSummary from './stage-summary.jsx';
-import { WrappedPeople as People } from './people.jsx';
+import People from './people.jsx';
 import CaseActions from './case-actions.jsx';
 import getTabsByShortCode from '../../helpers/case-type-sidebar-tabs-flags';
 import TabExGratia from './tab-ex-gratia.jsx';
