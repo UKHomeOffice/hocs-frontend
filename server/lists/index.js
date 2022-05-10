@@ -734,6 +734,66 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
+        S_BF_BUS_AREA_NORTH_REGION: {
+            client: 'INFO',
+            endpoint: '/entity/list/BF_BUS_AREA_NORTH_REGION',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_BF_BUS_AREA_CENTRAL_REGION: {
+            client: 'INFO',
+            endpoint: '/entity/list/BF_BUS_AREA_CENTRAL_REGION',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_BF_BUS_AREA_HEATHROW_REGION: {
+            client: 'INFO',
+            endpoint: '/entity/list/BF_BUS_AREA_HEATHROW_REGION',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_BF_BUS_AREA_SOUTH_REGION: {
+            client: 'INFO',
+            endpoint: '/entity/list/BF_BUS_AREA_SOUTH_REGION',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_BF_BUS_AREA_SOUTH_EAST_REGION: {
+            client: 'INFO',
+            endpoint: '/entity/list/BF_BUS_AREA_SOUTH_EAST_REGION',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_BF_BUS_AREA_EUROPE_REGION: {
+            client: 'INFO',
+            endpoint: '/entity/list/BF_BUS_AREA_EUROPE_REGION',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_BF_BUS_AREA_BF_INTEL: {
+            client: 'INFO',
+            endpoint: '/entity/list/BF_BUS_AREA_BF_INTEL',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_BF_BUS_AREA_OPS_LOGISTICS: {
+            client: 'INFO',
+            endpoint: '/entity/list/BF_BUS_AREA_OPS_LOGISTICS',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_BF_BUS_AREA_WARNING_INDEX_COMPLAINTS: {
+            client: 'INFO',
+            endpoint: '/entity/list/BF_BUS_AREA_WARNING_INDEX_COMPLAINTS',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        S_BF_BUS_AREA_UNKNOWN: {
+            client: 'INFO',
+            endpoint: '/entity/list/BF_BUS_AREA_UNKNOWN',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
         S_BF_REGION: {
             client: 'INFO',
             endpoint: '/entity/list/BF_REGION',
