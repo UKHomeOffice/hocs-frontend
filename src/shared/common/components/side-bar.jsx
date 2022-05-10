@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { ApplicationConsumer } from '../../contexts/application.jsx';
 import { Link } from 'react-router-dom';
-import { WrappedDocumentPanel as DocumentPanel } from './document-panel.jsx';
+import DocumentPanel from './document-panel.jsx';
 import CaseNotes from './case-notes.jsx';
 import StageSummary from './stage-summary.jsx';
 import { WrappedPeople as People } from './people.jsx';

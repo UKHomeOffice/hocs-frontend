@@ -1,17 +1,27 @@
 import React from 'react';
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
-import { DocumentPanel } from '../document-panel.jsx';
+import DocumentPanel from '../document-panel.jsx';
 import { MemoryRouter } from 'react-router-dom';
+import { ApplicationProvider } from '../../../contexts/application';
 
-jest.mock('axios', () => ({
-    get: jest.fn(() => Promise.resolve())
-}));
+const MOCK_TRACK = jest.fn();
+
+const page = {
+    params: {
+        caseId: 'some_case_id',
+        stageId: 'some_stage_id',
+    }
+};
+
+const MOCK_CONFIG = {
+    track: MOCK_TRACK,
+    page
+};
 
 describe('Document panel component', () => {
 
     let mockDispatch;
-    const mockPage = { params: { caseId: 'MOCK_CASE_ID' } };
 
     const documentList = [
         ['group 1', [
@@ -38,7 +48,23 @@ describe('Document panel component', () => {
     });
 
     test('should render the document panel', () => {
-        const wrapper = render(<DocumentPanel dispatch={mockDispatch} page={mockPage} documents={documentList} />, { wrapper: MemoryRouter });
+        const defaultProps = {
+            summary: {
+                type: 'default'
+            },
+            page: page,
+            track: MOCK_TRACK,
+            config: MOCK_CONFIG,
+            dispatch: mockDispatch,
+            documents: documentList,
+        };
+
+        const wrapper = render(
+            <ApplicationProvider config={{ ...MOCK_CONFIG, ...defaultProps }}>
+                <MemoryRouter>
+                    <DocumentPanel />
+                </MemoryRouter>
+            </ApplicationProvider>, { wrapper: MemoryRouter });
         expect(wrapper).toBeDefined();
         expect(screen.getByText('Manage Documents')).toBeInTheDocument();
     });
