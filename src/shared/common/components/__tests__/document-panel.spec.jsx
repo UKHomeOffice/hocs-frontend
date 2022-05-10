@@ -64,7 +64,7 @@ describe('Document panel component', () => {
                 <MemoryRouter>
                     <DocumentPanel />
                 </MemoryRouter>
-            </ApplicationProvider>, { wrapper: MemoryRouter });
+            </ApplicationProvider>);
         expect(wrapper).toBeDefined();
         expect(screen.getByText('Manage Documents')).toBeInTheDocument();
     });
