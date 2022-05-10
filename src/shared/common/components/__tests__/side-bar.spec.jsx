@@ -44,10 +44,16 @@ describe('Side bar component', () => {
             caseConfig : {
                 type: 'case type',
                 tabs: [
-                    'documents',
-                    'summary',
-                    'actions',
-                    'ex_gratia'
+                    {
+                        name: 'documents',
+                        label: 'Documents',
+                        screen: 'DOCUMENTS'
+                    },
+                    {
+                        name: 'summary',
+                        label: 'Summary',
+                        screen: 'SUMMARY'
+                    },
                 ]
             },
             activeTab: 'DOCUMENTS'
@@ -70,10 +76,16 @@ describe('Side bar component', () => {
             caseConfig : {
                 type: 'case type',
                 tabs: [
-                    'documents',
-                    'summary',
-                    'timeline',
-                    'ex_gratia'
+                    {
+                        name: 'documents',
+                        label: 'Documents',
+                        screen: 'DOCUMENTS'
+                    },
+                    {
+                        name: 'timeline',
+                        label: 'Timeline',
+                        screen: 'TIMELINE'
+                    },
                 ]
             }
         };
@@ -101,9 +113,16 @@ describe('Side bar component', () => {
             caseConfig : {
                 type: 'case type',
                 tabs: [
-                    'timeline',
-                    'actions',
-                    'ex_gratia'
+                    {
+                        name: 'timeline',
+                        label: 'Timeline',
+                        screen: 'TIMELINE'
+                    },
+                    {
+                        name: 'summary',
+                        label: 'Summary',
+                        screen: 'SUMMARY'
+                    },
                 ]
             }
         };

@@ -1,21 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Side bar component should render with default props 1`] = `
-<div
-  class="tabs"
->
-  <ul>
-    <li>
-      <a
-        class="tab"
-        href="/undefined/?activeTab=DOCUMENTS"
-      >
-        Documents
-      </a>
-    </li>
-  </ul>
-</div>
-`;
+exports[`Side bar component should render with default props 1`] = `null`;
 
 exports[`Side bar component should render with supplied tabs 1`] = `
 <div
@@ -36,22 +21,6 @@ exports[`Side bar component should render with supplied tabs 1`] = `
         href="/undefined/?activeTab=SUMMARY"
       >
         Summary
-      </a>
-    </li>
-    <li>
-      <a
-        class="tab"
-        href="/undefined/?activeTab=CASE_ACTIONS"
-      >
-        Actions
-      </a>
-    </li>
-    <li>
-      <a
-        class="tab"
-        href="/undefined/?activeTab=EX_GRATIA"
-      >
-        Ex-Gratia
       </a>
     </li>
   </ul>

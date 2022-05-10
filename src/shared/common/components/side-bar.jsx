@@ -56,7 +56,7 @@ class SideBar extends Component {
     renderTabButton(label, value) {
         const { page } = this.props;
         return (
-            <li>
+            <li key={value}>
                 <Link onClick={(e) => this.setActive(e, value)} className={this.isActive(value) ? 'tab tab__active' : 'tab'} to={`${page.url}/?activeTab=${value}`}>
                     {label}
                 </Link>
@@ -75,43 +75,22 @@ class SideBar extends Component {
         const { caseConfig } = this.props;
 
         if (caseConfig && !this.state.active) {
-            this.setState({ active: this.getLeftMostTab(caseConfig.tabs) });
-        }
-    }
-
-    getLeftMostTab(caseTabs) {
-        if (caseTabs.includes('documents')) {
-            return 'DOCUMENTS';
-        }
-        if (caseTabs.includes('summary')) {
-            return 'SUMMARY';
-        }
-        if (caseTabs.includes('timeline')) {
-            return 'TIMELINE';
-        }
-        if (caseTabs.includes('people')) {
-            return 'PEOPLE';
-        }
-        if (caseTabs.includes('actions')) {
-            return 'CASE_ACTIONS';
-        }
-        if (caseTabs.includes('ex_gratia')) {
-            return 'EX_GRATIA';
+            this.setState({ active: caseConfig.tabs[0].screen });
         }
     }
 
     render() {
-        const caseTabs = this.props.caseConfig ? this.props.caseConfig.tabs : ['documents'];
         return (
             <Fragment>
-                <div className='tabs'>
+                { this.props.caseConfig && <div className='tabs'>
                     <ul>
-                        {caseTabs.includes('documents') && this.renderTabButton('Documents', 'DOCUMENTS')}
-                        {caseTabs.includes('summary') && this.renderTabButton('Summary', 'SUMMARY')}
-                        {caseTabs.includes('timeline') && this.renderTabButton('Timeline', 'TIMELINE')}
-                        {caseTabs.includes('people') && this.renderTabButton('People', 'PEOPLE')}
-                        {caseTabs.includes('actions') && this.renderTabButton('Actions', 'CASE_ACTIONS')}
-                        {caseTabs.includes('ex_gratia') && this.renderTabButton('Ex-Gratia', 'EX_GRATIA')}
+                        {
+                            this.props.caseConfig.tabs.map(tab => {
+                                return (
+                                    this.renderTabButton(tab.label, tab.screen)
+                                );
+                            })
+                        }
                     </ul>
                     {this.isActive('DOCUMENTS') && <DocumentPane />}
                     {this.isActive('SUMMARY') && <StageSummary />}
@@ -119,7 +98,7 @@ class SideBar extends Component {
                     {this.isActive('PEOPLE') && <People />}
                     {this.isActive('CASE_ACTIONS') && <CaseActions />}
                     {this.isActive('EX_GRATIA') && <TabExGratia stages={this.props.summary.stages} />}
-                </div>
+                </div>}
             </Fragment>
         );
     }
