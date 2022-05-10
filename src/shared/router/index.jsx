@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { WrappedLayout as Layout } from '../layouts/layout.jsx';
+import Layout from '../layouts/layout.jsx';
 import routes from './routes/index';
 import PageWrapper from '../layouts/page-enabled.jsx';
 
