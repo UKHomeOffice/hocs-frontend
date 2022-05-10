@@ -728,12 +728,6 @@ module.exports = {
             type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
         },
-        S_BF_BUS_AREA: {
-            client: 'INFO',
-            endpoint: '/entity/list/BF_BUS_AREA',
-            type: listService.types.STATIC,
-            adapter: entityListItemsAdapter
-        },
         S_BF_BUS_AREA_NORTH_REGION: {
             client: 'INFO',
             endpoint: '/entity/list/BF_BUS_AREA_NORTH_REGION',
