@@ -1,8 +1,9 @@
 import React from 'react';
-import { EntityList } from '../entity-list.jsx';
+import EntityList from '../entity-list.jsx';
 import { MemoryRouter } from 'react-router-dom';
 import '@testing-library/jest-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
+import { ApplicationProvider } from '../../../../contexts/application';
 
 describe('Entity list component', () => {
 
@@ -11,6 +12,12 @@ describe('Entity list component', () => {
     const ENTITY = 'entity';
     const BASE_URL = 'http://localhost:8080';
     const MOCK_CALLBACK = jest.fn();
+    const MOCK_TRACK = jest.fn();
+    const MOCK_CONFIG = {
+        track: MOCK_TRACK,
+        page: PAGE,
+        baseUrl: BASE_URL,
+    };
 
     const DEFAULT_PROPS = {
         page: PAGE,
@@ -26,10 +33,13 @@ describe('Entity list component', () => {
 
     test('should render with default props', () => {
         const wrapper = render(
-            <EntityList
-                {...DEFAULT_PROPS}
-            />,
-            { wrapper: MemoryRouter }
+            <ApplicationProvider config={{ ...MOCK_CONFIG, ...DEFAULT_PROPS }}>
+                <MemoryRouter>
+                    <EntityList
+                        {...DEFAULT_PROPS}
+                    />
+                </MemoryRouter>
+            </ApplicationProvider>
         );
         expect(wrapper).toBeDefined();
     });
@@ -40,10 +50,13 @@ describe('Entity list component', () => {
             label: 'Test entity list'
         };
         const wrapper = render(
-            <EntityList
-                {...PROPS}
-            />,
-            { wrapper: MemoryRouter }
+            <ApplicationProvider config={{ ...MOCK_CONFIG, ...PROPS }}>
+                <MemoryRouter>
+                    <EntityList
+                        {...PROPS}
+                    />
+                </MemoryRouter>
+            </ApplicationProvider>
         );
         expect(wrapper).toBeDefined();
         expect(screen.getByText('Test entity list')).toBeInTheDocument();
@@ -55,10 +68,13 @@ describe('Entity list component', () => {
             hint: 'Select one of the below entities'
         };
         const wrapper = render(
-            <EntityList
-                {...PROPS}
-            />,
-            { wrapper: MemoryRouter }
+            <ApplicationProvider config={{ ...MOCK_CONFIG, ...PROPS }}>
+                <MemoryRouter>
+                    <EntityList
+                        {...PROPS}
+                    />
+                </MemoryRouter>
+            </ApplicationProvider>
         );
         expect(wrapper).toBeDefined();
         expect(screen.getByText('Select one of the below entities')).toBeInTheDocument();
@@ -70,10 +86,13 @@ describe('Entity list component', () => {
             error: 'Validation has failed'
         };
         const wrapper = render(
-            <EntityList
-                {...PROPS}
-            />,
-            { wrapper: MemoryRouter }
+            <ApplicationProvider config={{ ...MOCK_CONFIG, ...PROPS }}>
+                <MemoryRouter>
+                    <EntityList
+                        {...PROPS}
+                    />
+                </MemoryRouter>
+            </ApplicationProvider>
         );
         expect(wrapper).toBeDefined();
         expect(screen.getByText('Validation has failed')).toBeInTheDocument();
@@ -90,10 +109,13 @@ describe('Entity list component', () => {
             hasRemoveLink: true
         };
         const wrapper = render(
-            <EntityList
-                {...PROPS}
-            />,
-            { wrapper: MemoryRouter }
+            <ApplicationProvider config={{ ...MOCK_CONFIG, ...PROPS }}>
+                <MemoryRouter>
+                    <EntityList
+                        {...PROPS}
+                    />
+                </MemoryRouter>
+            </ApplicationProvider>
         );
         expect(wrapper).toBeDefined();
         expect(screen.getAllByText('Remove')).toHaveLength(2);
@@ -111,10 +133,13 @@ describe('Entity list component', () => {
             hideRemovePrimary: true
         };
         const wrapper = render(
-            <EntityList
-                {...PROPS}
-            />,
-            { wrapper: MemoryRouter }
+            <ApplicationProvider config={{ ...MOCK_CONFIG, ...PROPS }}>
+                <MemoryRouter>
+                    <EntityList
+                        {...PROPS}
+                    />
+                </MemoryRouter>
+            </ApplicationProvider>
         );
         expect(wrapper).toBeDefined();
         expect(screen.getAllByText('Remove')).toHaveLength(2);
@@ -131,10 +156,13 @@ describe('Entity list component', () => {
             hasEditLink: true
         };
         const wrapper = render(
-            <EntityList
-                {...PROPS}
-            />,
-            { wrapper: MemoryRouter }
+            <ApplicationProvider config={{ ...MOCK_CONFIG, ...PROPS }}>
+                <MemoryRouter>
+                    <EntityList
+                        {...PROPS}
+                    />
+                </MemoryRouter>
+            </ApplicationProvider>
         );
         expect(wrapper).toBeDefined();
         expect(screen.getAllByText('Edit')).toHaveLength(2);
@@ -146,10 +174,13 @@ describe('Entity list component', () => {
             hasAddLink: true
         };
         const wrapper = render(
-            <EntityList
-                {...PROPS}
-            />,
-            { wrapper: MemoryRouter }
+            <ApplicationProvider config={{ ...MOCK_CONFIG, ...PROPS }}>
+                <MemoryRouter>
+                    <EntityList
+                        {...PROPS}
+                    />
+                </MemoryRouter>
+            </ApplicationProvider>
         );
         expect(wrapper).toBeDefined();
         expect(screen.getByText('Add a entity')).toBeInTheDocument();
@@ -161,10 +192,13 @@ describe('Entity list component', () => {
             choices: []
         };
         const wrapper = render(
-            <EntityList
-                {...PROPS}
-            />,
-            { wrapper: MemoryRouter }
+            <ApplicationProvider config={{ ...MOCK_CONFIG, ...PROPS }}>
+                <MemoryRouter>
+                    <EntityList
+                        {...PROPS}
+                    />
+                </MemoryRouter>
+            </ApplicationProvider>
         );
         expect(wrapper).toBeDefined();
         expect(MOCK_CALLBACK).toHaveBeenCalledTimes(1);
@@ -181,10 +215,13 @@ describe('Entity list component', () => {
             ]
         };
         const wrapper = render(
-            <EntityList
-                {...PROPS}
-            />,
-            { wrapper: MemoryRouter }
+            <ApplicationProvider config={{ ...MOCK_CONFIG, ...PROPS }}>
+                <MemoryRouter>
+                    <EntityList
+                        {...PROPS}
+                    />
+                </MemoryRouter>
+            </ApplicationProvider>
         );
         expect(wrapper).toBeDefined();
 

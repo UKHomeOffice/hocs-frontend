@@ -21,15 +21,13 @@ const MOCK_CONFIG = {
     track: MOCK_TRACK,
     page: page,
     baseUrl: BASE_URL,
-    dispatch: 'rdrd22222'
 };
 const DEFAULT_PROPS = {
     page: page,
     baseUrl: BASE_URL,
     updateState: MOCK_CALLBACK,
     track: MOCK_TRACK,
-    config: MOCK_CONFIG,
-    dispatch: 'rdrd1111'
+    config: MOCK_CONFIG
 };
 
 describe('Document add component', () => {
