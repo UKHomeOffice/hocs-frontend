@@ -1,8 +1,9 @@
 import React from 'react';
-import { People } from '../people.jsx';
+import People from '../people.jsx';
 import { MemoryRouter } from 'react-router-dom';
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
+import { ApplicationProvider } from '../../../contexts/application';
 
 const correspondents = [
     {
@@ -111,19 +112,43 @@ const correspondents = [
 
 const emptyCorrespondents = [null];
 
-const page = {
-    params: {
-        caseId: 'some_case_id',
-        stageId: 'some_stage_id',
-    }
-};
-
 describe('The people component', () => {
 
+    const MOCK_TRACK = jest.fn();
+
+    const page = {
+        params: {
+            caseId: 'some_case_id',
+            stageId: 'some_stage_id',
+        }
+    };
+
+    const MOCK_CONFIG = {
+        track: MOCK_TRACK,
+        page
+    };
+
+    const mockDispatch = jest.fn(() => Promise.resolve());
+
     test('should render successfully with 5 correspondent\'s', () => {
+
+        const defaultProps = {
+            summary: {
+                type: 'default'
+            },
+            page: page,
+            track: MOCK_TRACK,
+            config: MOCK_CONFIG,
+            dispatch: mockDispatch,
+            correspondents: correspondents
+        };
+
         const wrapper = render(
-            <People dispatch={jest.fn(() => Promise.resolve())} correspondents={correspondents} page={page}/>,
-            { wrapper: MemoryRouter }
+            <ApplicationProvider config={{ ...MOCK_CONFIG, ...defaultProps }}>
+                <MemoryRouter>
+                    <People />
+                </MemoryRouter>
+            </ApplicationProvider>
         );
         expect(wrapper).toBeDefined();
         expect(screen.getByText('some_name')).toBeInTheDocument();
@@ -134,9 +159,23 @@ describe('The people component', () => {
     });
 
     test('should render successfully when there are no correspondents', () => {
+        const defaultProps = {
+            summary: {
+                type: 'default'
+            },
+            page: page,
+            track: MOCK_TRACK,
+            config: MOCK_CONFIG,
+            dispatch: mockDispatch,
+            correspondents: emptyCorrespondents
+        };
+
         const wrapper = render(
-            <People dispatch={jest.fn(() => Promise.resolve())} correspondents={emptyCorrespondents} page={page}/>,
-            { wrapper: MemoryRouter }
+            <ApplicationProvider config={{ ...MOCK_CONFIG, ...defaultProps }}>
+                <MemoryRouter>
+                    <People />
+                </MemoryRouter>
+            </ApplicationProvider>
         );
         expect(wrapper).toBeDefined();
     });
