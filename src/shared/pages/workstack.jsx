@@ -192,5 +192,5 @@ const WrappedWorkstack = (props) => (
     </ApplicationConsumer>
 );
 
-export { WrappedWorkstack, WorkstackPage };
+export default WrappedWorkstack;
 

@@ -3,7 +3,7 @@ import CasePage from '../../pages/case.jsx';
 import StagePage from '../../pages/stage.jsx';
 import Error from '../../layouts/error.jsx';
 import MainPage from '../../pages/dashboard.jsx';
-import { WrappedWorkstack as WorkstackPage } from '../../pages/workstack.jsx';
+import WorkstackPage from '../../pages/workstack.jsx';
 import Search from '../../pages/search.jsx';
 import StandardLinesView from '../../pages/standardLines/standardLinesView.jsx';
 
