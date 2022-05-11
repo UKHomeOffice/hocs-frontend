@@ -36,11 +36,9 @@ const FLUSH_PROMISES = () => new Promise(resolve => setImmediate(resolve));
 describe('Workstack page component', () => {
 
     const MOCK_DISPATCH = jest.fn();
-    const MOCK_TRACK = jest.fn();
 
     beforeEach(() => {
         MOCK_DISPATCH.mockReset();
-        MOCK_TRACK.mockReset();
         MOCK_DISPATCH.mockReturnValue(Promise.resolve());
         axios.get.mockClear();
         actions.updateWorkstack.mockReset();
@@ -50,7 +48,7 @@ describe('Workstack page component', () => {
         const OUTER = shallow(<WrappedWorkstackPage match={MOCK_MATCH} />);
         const WorkstackPage = OUTER.props().children;
         const WRAPPER = mount(
-            <WorkstackPage dispatch={MOCK_DISPATCH} track={MOCK_TRACK} />
+            <WorkstackPage dispatch={MOCK_DISPATCH} />
         );
         await FLUSH_PROMISES();
         expect(WRAPPER).toBeDefined();
@@ -65,7 +63,7 @@ describe('Workstack page component', () => {
         const OUTER = shallow(<WrappedWorkstackPage match={MOCK_MATCH} />);
         const WorkstackPage = OUTER.props().children;
         const WRAPPER = mount(
-            <WorkstackPage dispatch={MOCK_DISPATCH} track={MOCK_TRACK} workstack={MOCK_WORKSTACK_DATA} />
+            <WorkstackPage dispatch={MOCK_DISPATCH} workstack={MOCK_WORKSTACK_DATA} />
         );
         await FLUSH_PROMISES();
         expect(WRAPPER).toBeDefined();
@@ -79,7 +77,7 @@ describe('Workstack page component', () => {
         const OUTER = shallow(<WrappedWorkstackPage match={MOCK_MATCH} workstack={MOCK_WORKSTACK_DATA} />);
         const WorkstackPage = OUTER.props().children;
         const WRAPPER = mount(
-            <WorkstackPage dispatch={MOCK_DISPATCH} track={MOCK_TRACK} workstack={MOCK_WORKSTACK_DATA} />
+            <WorkstackPage dispatch={MOCK_DISPATCH} workstack={MOCK_WORKSTACK_DATA} />
         );
         const errorComponent = WRAPPER.find(ErrorSummary);
         const errorHeading = WRAPPER.find('.govuk-error-summary__title').text();
@@ -93,7 +91,7 @@ describe('Workstack page component', () => {
         const OUTER = shallow(<WrappedWorkstackPage match={MOCK_MATCH} workstack={MOCK_WORKSTACK_DATA} />);
         const WorkstackPage = OUTER.props().children;
         const WRAPPER = mount(
-            <WorkstackPage dispatch={MOCK_DISPATCH} track={MOCK_TRACK} workstack={MOCK_WORKSTACK_DATA} />
+            <WorkstackPage dispatch={MOCK_DISPATCH} workstack={MOCK_WORKSTACK_DATA} />
         );
 
         expect(WRAPPER.find(ErrorSummary).exists()).toEqual(false);

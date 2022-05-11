@@ -5,18 +5,15 @@ import { BrowserRouter as Router } from 'react-router-dom';
 describe('Workstack component', () => {
     const arraySortSpy = jest.spyOn(Array.prototype, 'sort');
 
-    const MOCK_TRACK = jest.fn();
     const MOCK_SUBMIT_HANDLER = jest.fn();
     const MOCK_UPDATE_FORM_DATA = jest.fn();
 
     beforeEach(() => {
         MOCK_UPDATE_FORM_DATA.mockClear();
-        MOCK_TRACK.mockClear();
         MOCK_SUBMIT_HANDLER.mockClear();
     });
 
     const DEFAULT_PROPS = {
-        track: MOCK_TRACK,
         items: [
             {
                 caseReference: 'case1', caseUUID: 'case_uuid-123', uuid: 'stage_uuid-456', fullName: 'Sam Smith',
@@ -138,7 +135,7 @@ describe('Workstack component', () => {
 
         const OUTER = shallow(<WrappedWorkstackAllocate {...DEFAULT_PROPS} />);
         const WorkstackAllocate = OUTER.props().children;
-        const WRAPPER = render(<Router><WorkstackAllocate track={MOCK_TRACK} /></Router>);
+        const WRAPPER = render(<Router><WorkstackAllocate /></Router>);
 
         expect(WRAPPER).toBeDefined();
         expect(WRAPPER).toMatchSnapshot();
@@ -148,7 +145,7 @@ describe('Workstack component', () => {
 
         const OUTER = shallow(<WrappedWorkstackAllocate {...DEFAULT_PROPS} />);
         const WorkstackAllocate = OUTER.props().children;
-        const WRAPPER = mount(<Router><WorkstackAllocate track={MOCK_TRACK} /></Router>);
+        const WRAPPER = mount(<Router><WorkstackAllocate /></Router>);
 
 
         WRAPPER.find('#workstack-filter').simulate('change', { target: { value: 'sam' } });
@@ -159,7 +156,7 @@ describe('Workstack component', () => {
     it('should sort when the column heading is clicked', () => {
         const OUTER = shallow(<WrappedWorkstackAllocate {...DEFAULT_PROPS} />);
         const WorkstackAllocate = OUTER.props().children;
-        const WRAPPER = mount(<Router><WorkstackAllocate track={MOCK_TRACK} /></Router>);
+        const WRAPPER = mount(<Router><WorkstackAllocate /></Router>);
         arraySortSpy.mockClear();
 
         const links = WRAPPER.find('th.govuk-link');
@@ -173,7 +170,7 @@ describe('Workstack component', () => {
     it('should sort descending when the column heading is clicked twice', () => {
         const OUTER = shallow(<WrappedWorkstackAllocate {...DEFAULT_PROPS} />);
         const WorkstackAllocate = OUTER.props().children;
-        const WRAPPER = mount(<Router><WorkstackAllocate track={MOCK_TRACK} /></Router>);
+        const WRAPPER = mount(<Router><WorkstackAllocate /></Router>);
         arraySortSpy.mockClear();
 
         const links = WRAPPER.find('th.govuk-link');
@@ -188,7 +185,7 @@ describe('Workstack component', () => {
         const props =  Object.assign({}, DEFAULT_PROPS, MOVE_TEAM_OPTIONS);
         const OUTER = shallow(<WrappedWorkstackAllocate {...props} />);
         const WorkstackAllocate = OUTER.props().children;
-        const WRAPPER = render(<Router><WorkstackAllocate track={MOCK_TRACK} /></Router>);
+        const WRAPPER = render(<Router><WorkstackAllocate /></Router>);
 
         expect(WRAPPER).toBeDefined();
         expect(WRAPPER).toMatchSnapshot();
@@ -200,7 +197,7 @@ describe('Workstack component', () => {
 
         const OUTER = shallow(<WrappedWorkstackAllocate {...props} />);
         const WorkstackAllocate = OUTER.props().children;
-        const WRAPPER = mount(<Router><WorkstackAllocate track={MOCK_TRACK} /></Router>);
+        const WRAPPER = mount(<Router><WorkstackAllocate /></Router>);
 
         WRAPPER.find('option').at(0).simulate('change', {
             target: MOVE_TEAM_OPTIONS.moveTeamOptions[1]
@@ -222,7 +219,7 @@ describe('Workstack component', () => {
 
         const OUTER = shallow(<WrappedWorkstackAllocate { ...propsWithNoSortOnReference } />);
         const WorkstackAllocate = OUTER.props().children;
-        const WRAPPER = mount(<Router><WorkstackAllocate track={MOCK_TRACK} /></Router>);
+        const WRAPPER = mount(<Router><WorkstackAllocate /></Router>);
 
         const links = WRAPPER.find('th.govuk-link');
         expect(links).toHaveLength(12);

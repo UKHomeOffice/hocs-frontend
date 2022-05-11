@@ -10,8 +10,8 @@ import status from '../helpers/api-status.js';
 import DashboardCards from '../common/components/dashboard.jsx';
 import Form from '../common/forms/form.new.jsx';
 
-const Dashboard = ({ title, match, history }) => {
-    const { dispatch, track, form: contextForm } = useContext(Context);
+const Dashboard = ({  match, history }) => {
+    const { dispatch, form: contextForm } = useContext(Context);
 
     const [form, setForm] = useState(contextForm);
 
@@ -36,8 +36,7 @@ const Dashboard = ({ title, match, history }) => {
             .then(({ data }) => {
                 if (data.errors) {
                     dispatch(updateApiStatus(status.SUBMIT_FORM_VALIDATION_ERROR))
-                        .then(() => setForm({ ...form, errors: data.errors }))
-                        .then(() => track('EVENT', { category: form.schema.title, action: 'Submit', label: 'Validation Error' }));
+                        .then(() => setForm({ ...form, errors: data.errors }));
                 } else {
                     dispatch(updateApiStatus(status.SUBMIT_FORM_SUCCESS))
                         .then(() => {
@@ -60,7 +59,6 @@ const Dashboard = ({ title, match, history }) => {
         } else {
             getPage();
         }
-        track('PAGE_VIEW', { title, path: match.url });
     }, [contextForm]);
 
     return form && form.schema ? (

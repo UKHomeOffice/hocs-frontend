@@ -15,7 +15,6 @@ const dashboard = require('./dashboard');
 const { renderMiddleware, renderResponseMiddleware } = require('../middleware/render');
 const { errorMiddleware, initRequest } = require('../middleware/request');
 const { protect } = require('../middleware/auth');
-const { createAnalyticsObject } = require('../middleware/analytics');
 const { setCacheControl } = require('../middleware/cacheControl');
 const { csrfMiddleware } = require('../middleware/csrf');
 const { infoService } = require('../clients');
@@ -27,7 +26,7 @@ html.use(assets);
 router.use(cookieParser());
 router.use(csrfMiddleware);
 router.use('/health', healthRouter);
-router.use('*', authMiddleware, sessionExpiryMiddleware, initRequest, createAnalyticsObject, setCacheControl);
+router.use('*', authMiddleware, sessionExpiryMiddleware, initRequest, setCacheControl);
 
 router.use('/', pageRouter);
 router.use('/api', apiRouter);
