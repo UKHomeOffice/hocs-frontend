@@ -24,25 +24,6 @@ exports[`Workstack page component should render with default props 1`] = `
       ],
     }
   }
-  track={
-    [MockFunction] {
-      "calls": Array [
-        Array [
-          "PAGE_VIEW",
-          Object {
-            "path": "/standard-lines",
-            "title": undefined,
-          },
-        ],
-      ],
-      "results": Array [
-        Object {
-          "type": "return",
-          "value": undefined,
-        },
-      ],
-    }
-  }
 >
   <StandardLinesView
     dispatch={
@@ -70,25 +51,6 @@ exports[`Workstack page component should render with default props 1`] = `
     match={
       Object {
         "url": "/standard-lines",
-      }
-    }
-    track={
-      [MockFunction] {
-        "calls": Array [
-          Array [
-            "PAGE_VIEW",
-            Object {
-              "path": "/standard-lines",
-              "title": undefined,
-            },
-          ],
-        ],
-        "results": Array [
-          Object {
-            "type": "return",
-            "value": undefined,
-          },
-        ],
       }
     }
   >

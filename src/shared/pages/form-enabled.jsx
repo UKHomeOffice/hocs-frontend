@@ -38,11 +38,9 @@ function withForm(Page) {
         }
 
         componentDidMount() {
-            const { dispatch, track, form, match } = this.props;
+            const { dispatch, form, match } = this.props;
             const { schema } = form || {};
-            if (this.state.form_schema) {
-                track('PAGE_VIEW', { title: this.state.form_schema.title, path: match.url });
-            }
+
             dispatch(updatePageMeta(match))
                 .then(() => {
                     if (!schema) {
@@ -50,15 +48,6 @@ function withForm(Page) {
                     }
                     dispatch(unsetForm());
                 });
-        }
-
-        componentDidUpdate(prevProps, prevState) {
-            const { track, match: { url } } = this.props;
-            if (this.state.form_schema) {
-                if (!prevState.form_schema || this.state.form_schema.title !== prevState.form_schema.title) {
-                    track('PAGE_VIEW', { title: this.state.form_schema.title, path: url });
-                }
-            }
         }
 
         shouldComponentUpdate(nextProps, nextState) {
@@ -137,7 +126,7 @@ function withForm(Page) {
             e.preventDefault();
             if (this.state.submittingForm !== true) {
                 this.setState({ submittingForm: true });
-                const { dispatch, track, history, match: { url } } = this.props;
+                const { dispatch, history, match: { url } } = this.props;
                 const { form_schema, form_data, action } = this.state;
                 dispatch(updateFormErrors(undefined));
 
@@ -157,11 +146,11 @@ function withForm(Page) {
                 if(action) {
                     formData.append('action', action);
                 }
-                return this.postForm(dispatch, form_schema.action, form_schema.title, url, formData, track, history);
+                return this.postForm(dispatch, form_schema.action, form_schema.title, url, formData, history);
             }
         }
 
-        postForm(dispatch, action, formTitle, url, formData, track, history) {
+        postForm(dispatch, action, formTitle, url, formData, history) {
             return dispatch(updateApiStatus(status.SUBMIT_FORM))
                 .then(() => {
                     axios.post('/api' + (action || url), formData, { headers: { 'Content-Type': 'multipart/form-data' } })
@@ -171,12 +160,7 @@ function withForm(Page) {
                                 .then(() => {
                                     if (res.data.errors) {
                                         dispatch(updateApiStatus(status.SUBMIT_FORM_VALIDATION_ERROR))
-                                            .then(() => dispatch(updateFormErrors(res.data.errors)))
-                                            .then(() => track('EVENT', {
-                                                category: formTitle,
-                                                action: 'Submit',
-                                                label: 'Validation Error'
-                                            }));
+                                            .then(() => dispatch(updateFormErrors(res.data.errors)));
                                     } else {
                                         if (res.data.confirmation) {
                                             this.setState({ confirmation: res.data.confirmation });
@@ -271,12 +255,11 @@ const FormEnabledWrapper = Page => {
         const WrappedPage = withForm(Page);
         return (
             <ApplicationConsumer>
-                {({ confirmation, dispatch, track, form, page }) => (
+                {({ confirmation, dispatch, form, page }) => (
                     <WrappedPage
                         {...props}
                         confirmation={confirmation}
                         dispatch={dispatch}
-                        track={track}
                         form={form}
                         page={page}
                     />

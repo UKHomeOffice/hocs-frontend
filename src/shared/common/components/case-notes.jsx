@@ -99,7 +99,7 @@ class Timeline extends Component {
 
     onSubmit(e) {
         e.preventDefault();
-        const { page, track } = this.props;
+        const { page } = this.props;
         const { caseNote } = this.state;
         // TODO: Remove
         /* eslint-disable-next-line no-undef */
@@ -110,7 +110,6 @@ class Timeline extends Component {
                 this.setState({ caseNote: '', submissionError: response.data.error });
                 this.getCaseNotes();
             })
-            .then(() => track('EVENT', { category: 'Case notes', action: 'Add' }))
             // TODO: Remove
             /* eslint-disable-next-line  no-console*/
             .catch(() => console.error('Failed to submit case note'));
@@ -167,13 +166,12 @@ class Timeline extends Component {
 Timeline.propTypes = {
     caseNotes: PropTypes.array,
     dispatch: PropTypes.func.isRequired,
-    track: PropTypes.func.isRequired,
     page: PropTypes.object.isRequired
 };
 
 const WrappedTimeline = props => (
     <ApplicationConsumer>
-        {({ dispatch, track, caseNotes, page }) => <Timeline {...props} dispatch={dispatch} track={track} page={page} caseNotes={caseNotes} />}
+        {({ dispatch, caseNotes, page }) => <Timeline {...props} dispatch={dispatch} page={page} caseNotes={caseNotes} />}
     </ApplicationConsumer>
 );
 
