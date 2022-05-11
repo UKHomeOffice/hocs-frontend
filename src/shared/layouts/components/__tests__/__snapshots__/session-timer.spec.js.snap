@@ -148,7 +148,6 @@ exports[`Session timer component should render with default props 1`] = `
           "service": "service name",
         },
       },
-      "track": [Function],
     }
   }
 >

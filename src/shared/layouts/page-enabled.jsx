@@ -4,23 +4,10 @@ import { ApplicationConsumer } from '../contexts/application.jsx';
 import { unsetError, clearApiStatus } from '../contexts/actions/index.jsx';
 import Error from './error.jsx';
 
-
 class PageWrapper extends Component {
 
     constructor(props) {
         super(props);
-    }
-
-    componentDidUpdate() {
-        const { track,
-            error,
-            match
-        } = this.props;
-        const nextPage = match.url;
-
-        if (error && error.status) {
-            track('PAGE_VIEW', { title: `Error: ${error.status}`, path: nextPage });
-        }
     }
 
     componentWillUnmount() {
@@ -43,18 +30,16 @@ class PageWrapper extends Component {
 PageWrapper.propTypes = {
     children: PropTypes.node.isRequired,
     dispatch: PropTypes.func.isRequired,
-    track: PropTypes.func.isRequired,
     error: PropTypes.object,
     match: PropTypes.object
 };
 
 const PageEnabledWrapper = props => (
     <ApplicationConsumer>
-        {({ dispatch, error, track }) => (
+        {({ dispatch, error }) => (
             <PageWrapper
                 {...props}
                 dispatch={dispatch}
-                track={track}
                 error={error}
             />
         )}
