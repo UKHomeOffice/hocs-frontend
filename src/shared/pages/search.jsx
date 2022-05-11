@@ -8,7 +8,7 @@ import Confirmation from '../common/components/confirmation.jsx';
 import status from '../helpers/api-status.js';
 
 const FormWrapper = (C) => ({ match, history, ...props }) => {
-    const { dispatch, track, form: contextForm, layout } = useContext(Context);
+    const { dispatch, form: contextForm, layout } = useContext(Context);
 
     const [form, setForm] = useState(null);
     const [confirmation, setConfirmation] = useState(null);
@@ -35,8 +35,7 @@ const FormWrapper = (C) => ({ match, history, ...props }) => {
             .then(({ data }) => {
                 if (data.errors) {
                     dispatch(updateApiStatus(status.SUBMIT_FORM_VALIDATION_ERROR))
-                        .then(() => setForm({ ...form, errors: data.errors }))
-                        .then(() => track('EVENT', { category: form.schema.title, action: 'Submit', label: 'Validation Error' }));
+                        .then(() => setForm({ ...form, errors: data.errors }));
                 } else {
                     dispatch(updateApiStatus(status.SUBMIT_FORM_SUCCESS))
                         .then(() => {

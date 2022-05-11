@@ -11,7 +11,7 @@ import { Context } from '../../contexts/application.jsx';
 import Submit from '../forms/submit.jsx';
 
 const CaseNote = ({ author, date, modifiedBy, modifiedDate, note, refreshNotes, timelineItemUUID, title }) => {
-    const { dispatch, hasRole, page, track } = React.useContext(Context);
+    const { dispatch, hasRole, page } = React.useContext(Context);
     const [isEditing, setIsEditing] = React.useState(false);
     const [submissionError, setSubmissionError] = React.useState();
     const [caseNote, setCaseNote] = React.useState(note);
@@ -53,7 +53,6 @@ const CaseNote = ({ author, date, modifiedBy, modifiedDate, note, refreshNotes, 
                                 }
                             });
                     })
-                    .then(() => track('EVENT', { category: 'Case notes', action: 'Add' }))
                     .catch(() => dispatch(updateApiStatus(status.UPDATE_CASE_NOTE_FAILURE)));
             });
     }, [caseNote]);

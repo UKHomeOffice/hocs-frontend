@@ -4,11 +4,7 @@ exports[`Panel component should render with content when passed 1`] = `
 <div>
   <div
     class="govuk-panel govuk-panel--confirmation"
-  >
-    <div
-      class="govuk-panel__body"
-    />
-  </div>
+  />
 </div>
 `;
 
@@ -35,9 +31,6 @@ exports[`Panel component should render with title when passed 1`] = `
     >
       Testing
     </h1>
-    <div
-      class="govuk-panel__body"
-    />
   </div>
 </div>
 `;

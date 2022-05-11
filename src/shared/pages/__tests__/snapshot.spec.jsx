@@ -36,11 +36,9 @@ const FLUSH_PROMISES = () => new Promise(resolve => setImmediate(resolve));
 describe('Workstack page component', () => {
 
     const MOCK_DISPATCH = jest.fn();
-    const MOCK_TRACK = jest.fn();
 
     beforeEach(() => {
         MOCK_DISPATCH.mockReset();
-        MOCK_TRACK.mockReset();
         MOCK_DISPATCH.mockReturnValue(Promise.resolve());
         axios.get.mockClear();
     });
@@ -49,7 +47,7 @@ describe('Workstack page component', () => {
         const OUTER = shallow(<WrappedStandardLines match={MOCK_MATCH}/>);
         const StandardLinesPage = OUTER.props().children;
         const WRAPPER = mount(
-            <StandardLinesPage dispatch={MOCK_DISPATCH} track={MOCK_TRACK} />
+            <StandardLinesPage dispatch={MOCK_DISPATCH} />
         );
         await FLUSH_PROMISES();
         expect(WRAPPER).toBeDefined();

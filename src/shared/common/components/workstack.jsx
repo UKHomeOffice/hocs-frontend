@@ -221,7 +221,6 @@ class WorkstackAllocate extends Component {
                             type='text'
                             name='workstack-filter'
                             onChange={this.filter.bind(this)}
-                            onBlur={() => this.props.track('EVENT', { category: 'Workstack', action: 'Filter' })}
                         />
                     </div>
                 </div>
@@ -632,12 +631,11 @@ WorkstackAllocate.propTypes = {
     baseUrl: PropTypes.string.isRequired,
     submitHandler: PropTypes.func.isRequired,
     updateFormData: PropTypes.func.isRequired,
-    track: PropTypes.func.isRequired
 };
 
 const WrappedWorkstackAllocate = props => (
     <ApplicationConsumer>
-        {({ track }) => <WorkstackAllocate {...props} track={track} />}
+        {() => <WorkstackAllocate {...props} /> }
     </ApplicationConsumer>
 );
 
