@@ -209,8 +209,8 @@ function withForm(Page) {
         renderConfirmation() {
             return (
                 <Fragment>
-                    <Panel >
-                        {this.state.confirmation}
+                    <Panel title={this.state.confirmation.title}>
+                        {this.state.confirmation.child}
                     </Panel >
                     <BackLink />
                 </Fragment>
