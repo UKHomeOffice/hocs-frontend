@@ -11,7 +11,7 @@ import TextArea from './text-area.jsx';
 import AddDocument from './composite/document-add.jsx';
 import EntityList from './composite/entity-list.jsx';
 import EntityManager from './composite/entity-manager.jsx';
-import { WrappedButton } from './button.jsx';
+import Button from './button.jsx';
 import Link from './link.jsx';
 import BackLink from './backlink.jsx';
 import BackButton from './back-button.jsx';
@@ -136,7 +136,7 @@ export function formComponentFactory(field, options) {
         case 'type-ahead':
             return renderFormComponent(TypeAhead, { key, config, data, errors, callback });
         case 'button':
-            return renderFormComponent(WrappedButton, { key, config });
+            return renderFormComponent(Button, { key, config });
         case 'link':
             return renderFormComponent(Link, { key, data, config });
         case 'add-document':
@@ -228,7 +228,7 @@ export function secondaryActionFactory(field, options) {
         case 'backlink':
             return renderFormComponent(BackLink, { data, key, config });
         case 'button':
-            return renderFormComponent(WrappedButton, { data, key, config });
+            return renderFormComponent(Button, { data, key, config });
         case 'backButton':
             return renderFormComponent(BackButton, {
                 data,

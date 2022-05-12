@@ -56,4 +56,4 @@ const WrappedButton = props => (
     </ApplicationConsumer>
 );
 
-export { WrappedButton, Button };
+export default WrappedButton;

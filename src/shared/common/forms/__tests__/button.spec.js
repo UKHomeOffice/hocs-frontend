@@ -1,8 +1,29 @@
 import React from 'react';
-import { Button } from '../button.jsx';
+import Button from '../button.jsx';
 import { MemoryRouter } from 'react-router-dom';
 import '@testing-library/jest-dom';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import { ApplicationProvider } from '../../../contexts/application';
+
+const PAGE = { params: { caseId: '1234', stageId: '5678' } };
+const NAME = 'entity_list';
+const ENTITY = 'entity';
+const BASE_URL = 'http://localhost:8080';
+const MOCK_CALLBACK = jest.fn();
+const MOCK_TRACK = jest.fn();
+const MOCK_CONFIG = {
+    track: MOCK_TRACK,
+    page: PAGE,
+    baseUrl: BASE_URL,
+};
+
+const DEFAULT_PROPS = {
+    page: PAGE,
+    name: NAME,
+    entity: ENTITY,
+    baseUrl: BASE_URL,
+    updateState: MOCK_CALLBACK
+};
 
 describe('Form button component', () => {
 
@@ -14,8 +35,11 @@ describe('Form button component', () => {
 
     it('should render with default props', () => {
         const wrapper = render(
-            <Button action={'/SOME/URL'} label={'press'} dispatch={() => {}} />,
-            { wrapper: MemoryRouter }
+            <ApplicationProvider config={{ ...MOCK_CONFIG, ...DEFAULT_PROPS }}>
+                <MemoryRouter>
+                    <Button action={'/SOME/URL'} label={'press'} dispatch={() => {}} />
+                </MemoryRouter>
+            </ApplicationProvider>
         );
         expect(wrapper).toBeDefined();
         expect(screen.getByText('press')).toBeInTheDocument();
@@ -23,24 +47,13 @@ describe('Form button component', () => {
 
     it('should render disabled when isDisabled is passed', () => {
         const wrapper = render(
-            <Button action={'/SOME/URL'} label={'press'} dispatch={() => {}} disabled={true} />,
-            { wrapper: MemoryRouter }
+            <ApplicationProvider config={{ ...MOCK_CONFIG, ...DEFAULT_PROPS }}>
+                <MemoryRouter>
+                    <Button action={'/SOME/URL'} label={'press'} dispatch={() => {}} disabled={true} />
+                </MemoryRouter>
+            </ApplicationProvider>
         );
         expect(wrapper).toBeDefined();
         expect(screen.getByText('press')).toHaveAttribute('disabled');
     });
-
-    it('should dispatch action when clicked', () => {
-        global.testFunc = () => {};
-        const testSpy = jest.spyOn(global, 'testFunc');
-        const wrapper = render(
-            <Button action={'/SOME/URL'} label={'press'} dispatch={testSpy} />,
-            { wrapper: MemoryRouter }
-        );
-
-        expect(wrapper).toBeDefined();
-        fireEvent.click(screen.getByText('press'));
-        expect(testSpy).toHaveBeenCalledTimes(1);
-    });
-
 });
