@@ -1,8 +1,9 @@
 import React from 'react';
-import { WorkstackAllocate } from '../workstack.jsx';
+import WorkstackAllocate from '../workstack.jsx';
 import { MemoryRouter } from 'react-router-dom';
 import '@testing-library/jest-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
+import { ApplicationProvider } from '../../../contexts/application';
 
 describe('Workstack component', () => {
     const arraySortSpy = jest.spyOn(Array.prototype, 'sort');
@@ -16,6 +17,14 @@ describe('Workstack component', () => {
         MOCK_TRACK.mockClear();
         MOCK_SUBMIT_HANDLER.mockClear();
     });
+
+    const PAGE = { params: { caseId: '1234', stageId: '5678' } };
+    const BASE_URL = 'http://localhost:8080';
+    const MOCK_CONFIG = {
+        track: MOCK_TRACK,
+        page: PAGE,
+        baseUrl: BASE_URL,
+    };
 
     const DEFAULT_PROPS = {
         track: MOCK_TRACK,
@@ -138,31 +147,38 @@ describe('Workstack component', () => {
 
     test('should render with default props', () => {
         const wrapper = render(
-            <WorkstackAllocate
-                track={MOCK_TRACK}
-                allocateToWorkstackEndpoint={DEFAULT_PROPS.allocateToWorkstackEndpoint}
-                baseUrl={DEFAULT_PROPS.baseUrl}
-                selectable={DEFAULT_PROPS.selectable}
-                submitHandler={DEFAULT_PROPS.submitHandler}
-                updateFormData={DEFAULT_PROPS.updateFormData}
-                items={DEFAULT_PROPS.items}
-            />, { wrapper: MemoryRouter });
-
+            <ApplicationProvider config={{ ...MOCK_CONFIG, ...DEFAULT_PROPS }}>
+                <MemoryRouter>
+                    <WorkstackAllocate
+                        track={MOCK_TRACK}
+                        allocateToWorkstackEndpoint={DEFAULT_PROPS.allocateToWorkstackEndpoint}
+                        baseUrl={DEFAULT_PROPS.baseUrl}
+                        selectable={DEFAULT_PROPS.selectable}
+                        submitHandler={DEFAULT_PROPS.submitHandler}
+                        updateFormData={DEFAULT_PROPS.updateFormData}
+                        items={DEFAULT_PROPS.items}
+                    />
+                </MemoryRouter>
+            </ApplicationProvider>);
         expect(wrapper).toBeDefined();
     });
 
     it('should render with filtering', () => {
         const wrapper = render(
-            <WorkstackAllocate
-                track={MOCK_TRACK}
-                allocateToWorkstackEndpoint={DEFAULT_PROPS.allocateToWorkstackEndpoint}
-                baseUrl={DEFAULT_PROPS.baseUrl}
-                selectable={DEFAULT_PROPS.selectable}
-                submitHandler={DEFAULT_PROPS.submitHandler}
-                updateFormData={DEFAULT_PROPS.updateFormData}
-                items={DEFAULT_PROPS.items}
-                columns={DEFAULT_PROPS.columns}
-            />, { wrapper: MemoryRouter });
+            <ApplicationProvider config={{ ...MOCK_CONFIG, ...DEFAULT_PROPS }}>
+                <MemoryRouter>
+                    <WorkstackAllocate
+                        track={MOCK_TRACK}
+                        allocateToWorkstackEndpoint={DEFAULT_PROPS.allocateToWorkstackEndpoint}
+                        baseUrl={DEFAULT_PROPS.baseUrl}
+                        selectable={DEFAULT_PROPS.selectable}
+                        submitHandler={DEFAULT_PROPS.submitHandler}
+                        updateFormData={DEFAULT_PROPS.updateFormData}
+                        items={DEFAULT_PROPS.items}
+                        columns={DEFAULT_PROPS.columns}
+                    />
+                </MemoryRouter>
+            </ApplicationProvider>);
 
         expect(wrapper).toBeDefined();
 
@@ -172,16 +188,20 @@ describe('Workstack component', () => {
 
     it('should sort when the column heading is clicked', () => {
         const wrapper = render(
-            <WorkstackAllocate
-                track={MOCK_TRACK}
-                allocateToWorkstackEndpoint={DEFAULT_PROPS.allocateToWorkstackEndpoint}
-                baseUrl={DEFAULT_PROPS.baseUrl}
-                selectable={DEFAULT_PROPS.selectable}
-                submitHandler={DEFAULT_PROPS.submitHandler}
-                updateFormData={DEFAULT_PROPS.updateFormData}
-                items={DEFAULT_PROPS.items}
-                columns={DEFAULT_PROPS.columns}
-            />, { wrapper: MemoryRouter });
+            <ApplicationProvider config={{ ...MOCK_CONFIG, ...DEFAULT_PROPS }}>
+                <MemoryRouter>
+                    <WorkstackAllocate
+                        track={MOCK_TRACK}
+                        allocateToWorkstackEndpoint={DEFAULT_PROPS.allocateToWorkstackEndpoint}
+                        baseUrl={DEFAULT_PROPS.baseUrl}
+                        selectable={DEFAULT_PROPS.selectable}
+                        submitHandler={DEFAULT_PROPS.submitHandler}
+                        updateFormData={DEFAULT_PROPS.updateFormData}
+                        items={DEFAULT_PROPS.items}
+                        columns={DEFAULT_PROPS.columns}
+                    />
+                </MemoryRouter>
+            </ApplicationProvider>);
 
         arraySortSpy.mockClear();
         expect(wrapper).toBeDefined();
@@ -193,16 +213,20 @@ describe('Workstack component', () => {
 
     it('should sort descending when the column heading is clicked twice', () => {
         const wrapper = render(
-            <WorkstackAllocate
-                track={MOCK_TRACK}
-                allocateToWorkstackEndpoint={DEFAULT_PROPS.allocateToWorkstackEndpoint}
-                baseUrl={DEFAULT_PROPS.baseUrl}
-                selectable={DEFAULT_PROPS.selectable}
-                submitHandler={DEFAULT_PROPS.submitHandler}
-                updateFormData={DEFAULT_PROPS.updateFormData}
-                items={DEFAULT_PROPS.items}
-                columns={DEFAULT_PROPS.columns}
-            />, { wrapper: MemoryRouter });
+            <ApplicationProvider config={{ ...MOCK_CONFIG, ...DEFAULT_PROPS }}>
+                <MemoryRouter>
+                    <WorkstackAllocate
+                        track={MOCK_TRACK}
+                        allocateToWorkstackEndpoint={DEFAULT_PROPS.allocateToWorkstackEndpoint}
+                        baseUrl={DEFAULT_PROPS.baseUrl}
+                        selectable={DEFAULT_PROPS.selectable}
+                        submitHandler={DEFAULT_PROPS.submitHandler}
+                        updateFormData={DEFAULT_PROPS.updateFormData}
+                        items={DEFAULT_PROPS.items}
+                        columns={DEFAULT_PROPS.columns}
+                    />
+                </MemoryRouter>
+            </ApplicationProvider>);
 
         arraySortSpy.mockClear();
         expect(wrapper).toBeDefined();
@@ -216,9 +240,11 @@ describe('Workstack component', () => {
     it('should render the move team options', () => {
         const props = Object.assign({}, DEFAULT_PROPS, MOVE_TEAM_OPTIONS);
         const wrapper = render(
-            <WorkstackAllocate
-                {...props}
-            />, { wrapper: MemoryRouter });
+            <ApplicationProvider config={{ ...MOCK_CONFIG, ...DEFAULT_PROPS }}>
+                <MemoryRouter>
+                    <WorkstackAllocate {...props} />
+                </MemoryRouter>
+            </ApplicationProvider>);
 
         expect(wrapper).toBeDefined();
         expect(wrapper).toMatchSnapshot();

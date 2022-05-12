@@ -9,7 +9,7 @@ import {
     clearApiStatus
 } from '../contexts/actions/index.jsx';
 import status from '../helpers/api-status.js';
-import { WrappedWorkstackAllocate } from '../common/components/workstack.jsx';
+import WrappedWorkstackAllocate from '../common/components/workstack.jsx';
 import Dashboard from '../common/components/dashboard.jsx';
 import ErrorSummary from '../common/forms/error-summary.jsx';
 
