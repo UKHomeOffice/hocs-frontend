@@ -12,9 +12,7 @@ const StandardLinesView = (props) => {
     const [state, reducerDispatch] = useReducer(reducer, initialState);
 
     useEffect(() => {
-        const { track, title, match } = props;
         loadStandardLines();
-        track('PAGE_VIEW', { title, path: match.url });
     }, []);
 
     const loadStandardLines = () =>  {
@@ -145,14 +143,13 @@ const initialState = {
 StandardLinesView.propTypes = {
     dispatch: PropTypes.func.isRequired,
     match: PropTypes.object.isRequired,
-    track: PropTypes.func.isRequired,
     title: PropTypes.string.isRequired,
 };
 
 const WrappedStandardLines = (props) => (
     <ApplicationConsumer>
-        {({ dispatch, track }) => (
-            <StandardLinesView {...props} track={track} dispatch={dispatch} />
+        {({ dispatch }) => (
+            <StandardLinesView {...props} dispatch={dispatch} />
         )}
     </ApplicationConsumer>
 );

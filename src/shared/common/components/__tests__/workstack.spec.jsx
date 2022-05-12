@@ -8,26 +8,22 @@ import { ApplicationProvider } from '../../../contexts/application';
 describe('Workstack component', () => {
     const arraySortSpy = jest.spyOn(Array.prototype, 'sort');
 
-    const MOCK_TRACK = jest.fn();
     const MOCK_SUBMIT_HANDLER = jest.fn();
     const MOCK_UPDATE_FORM_DATA = jest.fn();
 
     beforeEach(() => {
         MOCK_UPDATE_FORM_DATA.mockClear();
-        MOCK_TRACK.mockClear();
         MOCK_SUBMIT_HANDLER.mockClear();
     });
 
     const PAGE = { params: { caseId: '1234', stageId: '5678' } };
     const BASE_URL = 'http://localhost:8080';
     const MOCK_CONFIG = {
-        track: MOCK_TRACK,
         page: PAGE,
         baseUrl: BASE_URL,
     };
 
     const DEFAULT_PROPS = {
-        track: MOCK_TRACK,
         items: [
             {
                 caseReference: 'case1', caseUUID: 'case_uuid-123', uuid: 'stage_uuid-456', fullName: 'Sam Smith',
@@ -150,7 +146,6 @@ describe('Workstack component', () => {
             <ApplicationProvider config={{ ...MOCK_CONFIG, ...DEFAULT_PROPS }}>
                 <MemoryRouter>
                     <WorkstackAllocate
-                        track={MOCK_TRACK}
                         allocateToWorkstackEndpoint={DEFAULT_PROPS.allocateToWorkstackEndpoint}
                         baseUrl={DEFAULT_PROPS.baseUrl}
                         selectable={DEFAULT_PROPS.selectable}
@@ -168,7 +163,6 @@ describe('Workstack component', () => {
             <ApplicationProvider config={{ ...MOCK_CONFIG, ...DEFAULT_PROPS }}>
                 <MemoryRouter>
                     <WorkstackAllocate
-                        track={MOCK_TRACK}
                         allocateToWorkstackEndpoint={DEFAULT_PROPS.allocateToWorkstackEndpoint}
                         baseUrl={DEFAULT_PROPS.baseUrl}
                         selectable={DEFAULT_PROPS.selectable}
@@ -191,7 +185,6 @@ describe('Workstack component', () => {
             <ApplicationProvider config={{ ...MOCK_CONFIG, ...DEFAULT_PROPS }}>
                 <MemoryRouter>
                     <WorkstackAllocate
-                        track={MOCK_TRACK}
                         allocateToWorkstackEndpoint={DEFAULT_PROPS.allocateToWorkstackEndpoint}
                         baseUrl={DEFAULT_PROPS.baseUrl}
                         selectable={DEFAULT_PROPS.selectable}
@@ -216,7 +209,6 @@ describe('Workstack component', () => {
             <ApplicationProvider config={{ ...MOCK_CONFIG, ...DEFAULT_PROPS }}>
                 <MemoryRouter>
                     <WorkstackAllocate
-                        track={MOCK_TRACK}
                         allocateToWorkstackEndpoint={DEFAULT_PROPS.allocateToWorkstackEndpoint}
                         baseUrl={DEFAULT_PROPS.baseUrl}
                         selectable={DEFAULT_PROPS.selectable}
@@ -227,7 +219,6 @@ describe('Workstack component', () => {
                     />
                 </MemoryRouter>
             </ApplicationProvider>);
-
         arraySortSpy.mockClear();
         expect(wrapper).toBeDefined();
         const referenceLink = wrapper.getByText('Reference');
@@ -248,5 +239,22 @@ describe('Workstack component', () => {
 
         expect(wrapper).toBeDefined();
         expect(wrapper).toMatchSnapshot();
+    });
+
+    it('should not add link to headers with sortStrategy noSort', () => {
+        const propsWithNoSortOnReference = { ...DEFAULT_PROPS, columns: [...DEFAULT_PROPS.columns] };
+        propsWithNoSortOnReference.columns[0] =
+          { displayName: 'Reference', dataAdapter: null, renderer: 'caseLink', dataValueKey: 'caseReference', isFilterable: true, sortStrategy: 'noSort' };
+
+        const WRAPPER = render(
+            <ApplicationProvider config={{ ...MOCK_CONFIG, ...DEFAULT_PROPS }}>
+                <MemoryRouter>
+                    <WorkstackAllocate { ...propsWithNoSortOnReference } />
+                </MemoryRouter>
+            </ApplicationProvider>
+        );
+
+        expect(WRAPPER).toBeDefined();
+        expect(WRAPPER).toMatchSnapshot();
     });
 });

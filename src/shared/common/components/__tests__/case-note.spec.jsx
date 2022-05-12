@@ -12,7 +12,6 @@ describe('When the component is rendered', () => {
                 caseId: '__caseId__'
             }
         },
-        track: jest.fn(),
         hasRole: jest.fn().mockReturnValue(true)
     }));
 

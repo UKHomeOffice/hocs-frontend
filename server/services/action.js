@@ -96,7 +96,7 @@ const actions = {
                     case actionTypes.CREATE_CASE: {
                         const { data: documentTags } = await getDocumentTags(context);
                         response = await createCase('/case', { caseType: context, form }, documentTags[0], headers);
-                        clientResponse = { summary: 'Case Created ', link: `${response.data.reference}` };
+                        clientResponse = { title: 'Case Created', child: { link: `${response.data.reference}` } };
                         return handleActionSuccess(clientResponse, workflow, form);
                     }
                     case actionTypes.CREATE_AND_ALLOCATE_CASE: {
@@ -112,7 +112,9 @@ const actions = {
                     case actionTypes.BULK_CREATE_CASE: {
                         const { data: documentTags } = await getDocumentTags(context);
                         response = await createCase('/case/bulk', { caseType: context, form }, documentTags[0], headers);
-                        clientResponse = { summary: `Created ${response.data.count} new case${response.data.count > 1 ? 's' : ''}` };
+                        clientResponse = {
+                            title: `Created ${response.data.count} new case${response.data.count > 1 ? 's' : ''}`
+                        };
                         return handleActionSuccess(clientResponse, workflow, form);
                     }
                     case actionTypes.ADD_STANDARD_LINE:
@@ -244,10 +246,12 @@ const actions = {
                                     requestBody, headers);
 
                             const clientResponse = {
-                                'summary': `Case: ${response.data.reference} extended`,
-                                'link': {
-                                    label: `${response.data.reference}`,
-                                    href: `/case/${options.caseId}/stage/${options.stageId}/?tab=CASE_ACTIONS`
+                                title: `Case: ${response.data.reference} extended`,
+                                child: {
+                                    link: {
+                                        label: `${response.data.reference}`,
+                                        href: `/case/${options.caseId}/stage/${options.stageId}/?tab=CASE_ACTIONS`
+                                    }
                                 }
                             };
 
@@ -289,10 +293,12 @@ const actions = {
                                     requestBody, headers);
 
                             const clientResponse = {
-                                'summary': `Appeal for ${response.data.reference} updated`,
-                                'link': {
-                                    label: `${response.data.reference}`,
-                                    href: `/case/${options.caseId}/stage/${options.stageId}/?tab=CASE_ACTIONS`
+                                title: `Appeal for ${response.data.reference} updated`,
+                                child: {
+                                    link: {
+                                        label: `${response.data.reference}`,
+                                        href: `/case/${options.caseId}/stage/${options.stageId}/?tab=CASE_ACTIONS`
+                                    }
                                 }
                             };
 
@@ -325,10 +331,12 @@ const actions = {
                                     requestBody, headers);
 
                             const clientResponse = {
-                                'summary': `Appeal for ${response.data.reference} registered`,
-                                'link': {
-                                    label: `${response.data.reference}`,
-                                    href: `/case/${options.caseId}/stage/${options.stageId}/?tab=CASE_ACTIONS`
+                                title: `Appeal for ${response.data.reference} registered`,
+                                child: {
+                                    link: {
+                                        label: `${response.data.reference}`,
+                                        href: `/case/${options.caseId}/stage/${options.stageId}/?tab=CASE_ACTIONS`
+                                    }
                                 }
                             };
 
@@ -346,10 +354,12 @@ const actions = {
                                 requestBody, headers);
 
                             const clientResponse = {
-                                'summary': `Case ${response.data.reference} has been suspended.`,
-                                'link': {
-                                    label: `${response.data.reference}`,
-                                    href: `/case/${options.caseId}/stage/${options.stageId}/?tab=CASE_ACTIONS`
+                                title: `Case ${response.data.reference} has been suspended.`,
+                                child: {
+                                    link: {
+                                        label: `${response.data.reference}`,
+                                        href: `/case/${options.caseId}/stage/${options.stageId}/?tab=CASE_ACTIONS`
+                                    }
                                 }
                             };
 
@@ -362,10 +372,12 @@ const actions = {
                             const response =  await caseworkService.put(`/case/${caseId}/stage/${stageId}/actions/suspension/${caseActionId}`, null, headers);
 
                             const clientResponse = {
-                                'summary': `Suspension for case ${response.data.reference} has been removed.`,
-                                'link': {
-                                    label: `${response.data.reference}`,
-                                    href: `/case/${options.caseId}/stage/${options.stageId}/?tab=CASE_ACTIONS`
+                                title: `Suspension for case ${response.data.reference} has been removed.`,
+                                child: {
+                                    link: {
+                                        label: `${response.data.reference}`,
+                                        href: `/case/${options.caseId}/stage/${options.stageId}/?tab=CASE_ACTIONS`
+                                    }
                                 }
                             };
 
@@ -386,8 +398,10 @@ const actions = {
                                     requestBody, headers);
 
                             const clientResponse = {
-                                'summary': `External Interest for ${response.data.reference} registered`,
-                                'link': `${response.data.reference}`
+                                title: `External Interest for ${response.data.reference} registered`,
+                                child: {
+                                    link: `${response.data.reference}`
+                                }
                             };
 
                             return handleActionSuccess(clientResponse, {}, form);
@@ -409,8 +423,10 @@ const actions = {
                                     requestBody, headers);
 
                             const clientResponse = {
-                                'summary': `External Interest for ${response.data.reference} updated`,
-                                'link': `${response.data.reference}`
+                                title: `External Interest for ${response.data.reference} updated`,
+                                child: {
+                                    link: `${response.data.reference}`
+                                }
                             };
 
                             return handleActionSuccess(clientResponse, {}, form);

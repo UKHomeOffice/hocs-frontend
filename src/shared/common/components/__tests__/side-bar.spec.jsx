@@ -5,7 +5,6 @@ import SideBar from '../side-bar';
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 
-const MOCK_TRACK = jest.fn();
 
 const page = {
     params: {
@@ -15,7 +14,6 @@ const page = {
 };
 
 const MOCK_CONFIG = {
-    track: MOCK_TRACK,
     page
 };
 
@@ -28,13 +26,12 @@ describe('Side bar component', () => {
                 type: 'default'
             },
             page: page,
-            track: MOCK_TRACK
         };
 
         const WRAPPER = render(
             <ApplicationProvider config={{ ...MOCK_CONFIG, ...defaultProps }}>
                 <MemoryRouter>
-                    <SideBar page={page} track={MOCK_TRACK} summary={defaultProps.summary} />
+                    <SideBar page={page} summary={defaultProps.summary} />
                 </MemoryRouter>
             </ApplicationProvider>
         );
@@ -53,7 +50,7 @@ describe('Side bar component', () => {
         const WRAPPER = render(
             <ApplicationProvider config={{ ...MOCK_CONFIG, ...props }}>
                 <MemoryRouter>
-                    <SideBar page={page} track={MOCK_TRACK} summary={props.summary} />
+                    <SideBar page={page} summary={props.summary} />
                 </MemoryRouter>
             </ApplicationProvider>
         );
@@ -72,7 +69,7 @@ describe('Side bar component', () => {
         const WRAPPER = render(
             <ApplicationProvider config={{ ...MOCK_CONFIG, ...props }}>
                 <MemoryRouter>
-                    <SideBar page={page} track={MOCK_TRACK} summary={props.summary} />
+                    <SideBar page={page} summary={props.summary} />
                 </MemoryRouter>
             </ApplicationProvider>
         );
@@ -91,7 +88,7 @@ describe('Side bar component', () => {
         const WRAPPER = render(
             <ApplicationProvider config={{ ...MOCK_CONFIG, ...props }}>
                 <MemoryRouter>
-                    <SideBar page={page} track={MOCK_TRACK} summary={props.summary} />
+                    <SideBar page={page} summary={props.summary} />
                 </MemoryRouter>
             </ApplicationProvider>
         );
@@ -113,7 +110,7 @@ describe('Side bar component', () => {
         const WRAPPER = render(
             <ApplicationProvider config={{ ...MOCK_CONFIG, ...props }}>
                 <MemoryRouter>
-                    <SideBar page={page} track={MOCK_TRACK} summary={props.summary} />
+                    <SideBar page={page} summary={props.summary} />
                 </MemoryRouter>
             </ApplicationProvider>
         );

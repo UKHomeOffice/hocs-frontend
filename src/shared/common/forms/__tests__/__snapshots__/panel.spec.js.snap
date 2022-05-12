@@ -8,11 +8,7 @@ Object {
       <div>
         <div
           class="govuk-panel govuk-panel--confirmation"
-        >
-          <div
-            class="govuk-panel__body"
-          />
-        </div>
+        />
       </div>
     </div>
   </body>,
@@ -20,11 +16,7 @@ Object {
     <div>
       <div
         class="govuk-panel govuk-panel--confirmation"
-      >
-        <div
-          class="govuk-panel__body"
-        />
-      </div>
+      />
     </div>
   </div>,
   "debug": [Function],
@@ -108,9 +100,6 @@ Object {
           >
             Testing
           </h1>
-          <div
-            class="govuk-panel__body"
-          />
         </div>
       </div>
     </div>
@@ -125,9 +114,6 @@ Object {
         >
           Testing
         </h1>
-        <div
-          class="govuk-panel__body"
-        />
       </div>
     </div>
   </div>,
