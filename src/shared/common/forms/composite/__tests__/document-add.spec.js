@@ -16,9 +16,7 @@ const page = {
 
 const BASE_URL = 'http://localhost:8080';
 const MOCK_CALLBACK = jest.fn();
-const MOCK_TRACK = jest.fn();
 const MOCK_CONFIG = {
-    track: MOCK_TRACK,
     page: page,
     baseUrl: BASE_URL,
 };
@@ -26,7 +24,6 @@ const DEFAULT_PROPS = {
     page: page,
     baseUrl: BASE_URL,
     updateState: MOCK_CALLBACK,
-    track: MOCK_TRACK,
     config: MOCK_CONFIG
 };
 

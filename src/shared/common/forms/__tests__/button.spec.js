@@ -10,9 +10,7 @@ const NAME = 'entity_list';
 const ENTITY = 'entity';
 const BASE_URL = 'http://localhost:8080';
 const MOCK_CALLBACK = jest.fn();
-const MOCK_TRACK = jest.fn();
 const MOCK_CONFIG = {
-    track: MOCK_TRACK,
     page: PAGE,
     baseUrl: BASE_URL,
 };

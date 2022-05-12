@@ -5,7 +5,6 @@ import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { ApplicationProvider } from '../../contexts/application';
 
-const MOCK_TRACK = jest.fn();
 
 const page = {
     params: {
@@ -15,7 +14,6 @@ const page = {
 };
 
 const MOCK_CONFIG = {
-    track: MOCK_TRACK,
     page
 };
 
@@ -33,7 +31,6 @@ describe('Page layout component', () => {
                 type: 'default'
             },
             page: page,
-            track: MOCK_TRACK,
             layout: mockLayoutWithFooter,
             config: MOCK_CONFIG
         };

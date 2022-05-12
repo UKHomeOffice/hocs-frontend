@@ -114,7 +114,6 @@ const emptyCorrespondents = [null];
 
 describe('The people component', () => {
 
-    const MOCK_TRACK = jest.fn();
 
     const page = {
         params: {
@@ -124,7 +123,6 @@ describe('The people component', () => {
     };
 
     const MOCK_CONFIG = {
-        track: MOCK_TRACK,
         page
     };
 
@@ -137,7 +135,6 @@ describe('The people component', () => {
                 type: 'default'
             },
             page: page,
-            track: MOCK_TRACK,
             config: MOCK_CONFIG,
             dispatch: mockDispatch,
             correspondents: correspondents
@@ -164,7 +161,6 @@ describe('The people component', () => {
                 type: 'default'
             },
             page: page,
-            track: MOCK_TRACK,
             config: MOCK_CONFIG,
             dispatch: mockDispatch,
             correspondents: emptyCorrespondents

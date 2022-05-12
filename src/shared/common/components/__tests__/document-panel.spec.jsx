@@ -5,7 +5,6 @@ import DocumentPanel from '../document-panel.jsx';
 import { MemoryRouter } from 'react-router-dom';
 import { ApplicationProvider } from '../../../contexts/application';
 
-const MOCK_TRACK = jest.fn();
 
 const page = {
     params: {
@@ -15,7 +14,6 @@ const page = {
 };
 
 const MOCK_CONFIG = {
-    track: MOCK_TRACK,
     page
 };
 
@@ -53,7 +51,6 @@ describe('Document panel component', () => {
                 type: 'default'
             },
             page: page,
-            track: MOCK_TRACK,
             config: MOCK_CONFIG,
             dispatch: mockDispatch,
             documents: documentList,
