@@ -1,6 +1,8 @@
 import React from 'react';
 import EntityManager from '../entity-manager.jsx';
 import { MemoryRouter } from 'react-router-dom';
+import '@testing-library/jest-dom';
+import { render, screen } from '@testing-library/react';
 
 describe('Entity list component', () => {
 
@@ -32,19 +34,8 @@ describe('Entity list component', () => {
             ...DEFAULT_PROPS,
             label: 'Test entity manager'
         };
-        const WRAPPER = render(<EntityManager {...PROPS} />);
-        expect(WRAPPER).toBeDefined();
-        expect(WRAPPER).toMatchSnapshot();
-    });
-
-    it('should render with additional css when passed in props', () => {
-        const PROPS = {
-            ...DEFAULT_PROPS,
-            className: 'my-css-class'
-        };
-        const WRAPPER = render(<EntityManager {...PROPS} />);
-        expect(WRAPPER).toBeDefined();
-        expect(WRAPPER).toMatchSnapshot();
+        render(<EntityManager {...PROPS} />);
+        expect(screen.getByText('Test entity manager')).toBeInTheDocument();
     });
 
     it('should render with remove link when passed in props', () => {
@@ -87,24 +78,6 @@ describe('Entity list component', () => {
                 choice('B')
             ],
             hasDownloadLink: true
-        };
-        const WRAPPER = render(
-            <MemoryRouter>
-                <EntityManager {...PROPS} />
-            </MemoryRouter>);
-        expect(WRAPPER).toBeDefined();
-        expect(WRAPPER).toMatchSnapshot();
-    });
-
-    it('should render with download link when passed in props', () => {
-        const choice = value => ({ label: `Choice ${value}`, value: `CHOICE_${value}` });
-        const PROPS = {
-            ...DEFAULT_PROPS,
-            choices: [
-                choice('A'),
-                choice('B')
-            ],
-            hasTemplateLink: true
         };
         const WRAPPER = render(
             <MemoryRouter>

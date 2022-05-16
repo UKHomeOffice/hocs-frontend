@@ -1,6 +1,9 @@
 import React from 'react';
-import WrappedWorkstackAllocate from '../workstack.jsx';
-import { BrowserRouter as Router } from 'react-router-dom';
+import WorkstackAllocate from '../workstack.jsx';
+import { MemoryRouter } from 'react-router-dom';
+import '@testing-library/jest-dom';
+import { fireEvent, render, screen } from '@testing-library/react';
+import { ApplicationProvider } from '../../../contexts/application';
 
 describe('Workstack component', () => {
     const arraySortSpy = jest.spyOn(Array.prototype, 'sort');
@@ -12,6 +15,13 @@ describe('Workstack component', () => {
         MOCK_UPDATE_FORM_DATA.mockClear();
         MOCK_SUBMIT_HANDLER.mockClear();
     });
+
+    const PAGE = { params: { caseId: '1234', stageId: '5678' } };
+    const BASE_URL = 'http://localhost:8080';
+    const MOCK_CONFIG = {
+        page: PAGE,
+        baseUrl: BASE_URL,
+    };
 
     const DEFAULT_PROPS = {
         items: [
@@ -131,85 +141,104 @@ describe('Workstack component', () => {
         ]
     };
 
-    it('should render with default props', () => {
-
-        const OUTER = shallow(<WrappedWorkstackAllocate {...DEFAULT_PROPS} />);
-        const WorkstackAllocate = OUTER.props().children;
-        const WRAPPER = render(<Router><WorkstackAllocate /></Router>);
-
-        expect(WRAPPER).toBeDefined();
-        expect(WRAPPER).toMatchSnapshot();
+    test('should render with default props', () => {
+        const wrapper = render(
+            <ApplicationProvider config={{ ...MOCK_CONFIG, ...DEFAULT_PROPS }}>
+                <MemoryRouter>
+                    <WorkstackAllocate
+                        allocateToWorkstackEndpoint={DEFAULT_PROPS.allocateToWorkstackEndpoint}
+                        baseUrl={DEFAULT_PROPS.baseUrl}
+                        selectable={DEFAULT_PROPS.selectable}
+                        submitHandler={DEFAULT_PROPS.submitHandler}
+                        updateFormData={DEFAULT_PROPS.updateFormData}
+                        items={DEFAULT_PROPS.items}
+                    />
+                </MemoryRouter>
+            </ApplicationProvider>);
+        expect(wrapper).toBeDefined();
     });
 
     it('should render with filtering', () => {
+        const wrapper = render(
+            <ApplicationProvider config={{ ...MOCK_CONFIG, ...DEFAULT_PROPS }}>
+                <MemoryRouter>
+                    <WorkstackAllocate
+                        allocateToWorkstackEndpoint={DEFAULT_PROPS.allocateToWorkstackEndpoint}
+                        baseUrl={DEFAULT_PROPS.baseUrl}
+                        selectable={DEFAULT_PROPS.selectable}
+                        submitHandler={DEFAULT_PROPS.submitHandler}
+                        updateFormData={DEFAULT_PROPS.updateFormData}
+                        items={DEFAULT_PROPS.items}
+                        columns={DEFAULT_PROPS.columns}
+                    />
+                </MemoryRouter>
+            </ApplicationProvider>);
 
-        const OUTER = shallow(<WrappedWorkstackAllocate {...DEFAULT_PROPS} />);
-        const WorkstackAllocate = OUTER.props().children;
-        const WRAPPER = mount(<Router><WorkstackAllocate /></Router>);
+        expect(wrapper).toBeDefined();
 
-
-        WRAPPER.find('#workstack-filter').simulate('change', { target: { value: 'sam' } });
-        expect(WRAPPER).toBeDefined();
-        expect(WRAPPER).toMatchSnapshot();
+        fireEvent.change(wrapper.getByRole('textbox'),  { target: { value: 'sam' } });
+        expect(screen.getByText('Sam Smith')).toBeInTheDocument();
     });
 
     it('should sort when the column heading is clicked', () => {
-        const OUTER = shallow(<WrappedWorkstackAllocate {...DEFAULT_PROPS} />);
-        const WorkstackAllocate = OUTER.props().children;
-        const WRAPPER = mount(<Router><WorkstackAllocate /></Router>);
-        arraySortSpy.mockClear();
+        const wrapper = render(
+            <ApplicationProvider config={{ ...MOCK_CONFIG, ...DEFAULT_PROPS }}>
+                <MemoryRouter>
+                    <WorkstackAllocate
+                        allocateToWorkstackEndpoint={DEFAULT_PROPS.allocateToWorkstackEndpoint}
+                        baseUrl={DEFAULT_PROPS.baseUrl}
+                        selectable={DEFAULT_PROPS.selectable}
+                        submitHandler={DEFAULT_PROPS.submitHandler}
+                        updateFormData={DEFAULT_PROPS.updateFormData}
+                        items={DEFAULT_PROPS.items}
+                        columns={DEFAULT_PROPS.columns}
+                    />
+                </MemoryRouter>
+            </ApplicationProvider>);
 
-        const links = WRAPPER.find('th.govuk-link');
-        // Column 13 is hidden so isn't counted
-        expect(links).toHaveLength(13);
-        links.first().simulate('click');
+        arraySortSpy.mockClear();
+        expect(wrapper).toBeDefined();
+        const referenceLink = wrapper.getByText('Reference');
+        fireEvent.click(referenceLink);
         expect(arraySortSpy).toHaveBeenCalledTimes(1);
-        expect(WRAPPER).toMatchSnapshot();
+        expect(wrapper).toMatchSnapshot();
     });
 
     it('should sort descending when the column heading is clicked twice', () => {
-        const OUTER = shallow(<WrappedWorkstackAllocate {...DEFAULT_PROPS} />);
-        const WorkstackAllocate = OUTER.props().children;
-        const WRAPPER = mount(<Router><WorkstackAllocate /></Router>);
+        const wrapper = render(
+            <ApplicationProvider config={{ ...MOCK_CONFIG, ...DEFAULT_PROPS }}>
+                <MemoryRouter>
+                    <WorkstackAllocate
+                        allocateToWorkstackEndpoint={DEFAULT_PROPS.allocateToWorkstackEndpoint}
+                        baseUrl={DEFAULT_PROPS.baseUrl}
+                        selectable={DEFAULT_PROPS.selectable}
+                        submitHandler={DEFAULT_PROPS.submitHandler}
+                        updateFormData={DEFAULT_PROPS.updateFormData}
+                        items={DEFAULT_PROPS.items}
+                        columns={DEFAULT_PROPS.columns}
+                    />
+                </MemoryRouter>
+            </ApplicationProvider>);
         arraySortSpy.mockClear();
-
-        const links = WRAPPER.find('th.govuk-link');
-        expect(links).toHaveLength(13);
-        links.first().simulate('click');
-        links.first().simulate('click');
+        expect(wrapper).toBeDefined();
+        const referenceLink = wrapper.getByText('Reference');
+        fireEvent.click(referenceLink);
+        fireEvent.click(referenceLink);
         expect(arraySortSpy).toHaveBeenCalledTimes(2);
-        expect(WRAPPER).toMatchSnapshot();
+        expect(wrapper).toMatchSnapshot();
     });
 
     it('should render the move team options', () => {
-        const props =  Object.assign({}, DEFAULT_PROPS, MOVE_TEAM_OPTIONS);
-        const OUTER = shallow(<WrappedWorkstackAllocate {...props} />);
-        const WorkstackAllocate = OUTER.props().children;
-        const WRAPPER = render(<Router><WorkstackAllocate /></Router>);
+        const props = Object.assign({}, DEFAULT_PROPS, MOVE_TEAM_OPTIONS);
+        const wrapper = render(
+            <ApplicationProvider config={{ ...MOCK_CONFIG, ...DEFAULT_PROPS }}>
+                <MemoryRouter>
+                    <WorkstackAllocate {...props} />
+                </MemoryRouter>
+            </ApplicationProvider>);
 
-        expect(WRAPPER).toBeDefined();
-        expect(WRAPPER).toMatchSnapshot();
-    });
-
-    it('should call updateFormData with correct values for move team', () => {
-        const mockUpdateFormData = jest.fn();
-        const props =  Object.assign({}, DEFAULT_PROPS, MOVE_TEAM_OPTIONS, { updateFormData: mockUpdateFormData } );
-
-        const OUTER = shallow(<WrappedWorkstackAllocate {...props} />);
-        const WorkstackAllocate = OUTER.props().children;
-        const WRAPPER = mount(<Router><WorkstackAllocate /></Router>);
-
-        WRAPPER.find('option').at(0).simulate('change', {
-            target: MOVE_TEAM_OPTIONS.moveTeamOptions[1]
-        }); // select TEAM 2
-
-        const moveTeamButton = WRAPPER.find('[name="move_team"]');
-
-        moveTeamButton.first().simulate('click'); // click move team button
-
-        expect(mockUpdateFormData.mock.calls[1][0]).toEqual({ 'selected_team': 'VALUE 2' });
-        expect(mockUpdateFormData.mock.calls[2][0]).toEqual({ 'submitAction': 'move_team' });
-
+        expect(wrapper).toBeDefined();
+        expect(wrapper).toMatchSnapshot();
     });
 
     it('should not add link to headers with sortStrategy noSort', () => {
@@ -217,12 +246,13 @@ describe('Workstack component', () => {
         propsWithNoSortOnReference.columns[0] =
           { displayName: 'Reference', dataAdapter: null, renderer: 'caseLink', dataValueKey: 'caseReference', isFilterable: true, sortStrategy: 'noSort' };
 
-        const OUTER = shallow(<WrappedWorkstackAllocate { ...propsWithNoSortOnReference } />);
-        const WorkstackAllocate = OUTER.props().children;
-        const WRAPPER = mount(<Router><WorkstackAllocate /></Router>);
-
-        const links = WRAPPER.find('th.govuk-link');
-        expect(links).toHaveLength(12);
+        const WRAPPER = render(
+            <ApplicationProvider config={{ ...MOCK_CONFIG, ...DEFAULT_PROPS }}>
+                <MemoryRouter>
+                    <WorkstackAllocate { ...propsWithNoSortOnReference } />
+                </MemoryRouter>
+            </ApplicationProvider>
+        );
 
         expect(WRAPPER).toBeDefined();
         expect(WRAPPER).toMatchSnapshot();

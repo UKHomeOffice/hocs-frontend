@@ -638,6 +638,11 @@ module.exports = {
             endpoint: '/case/${caseId}/summary',
             adapter: caseSummaryAdapter
         },
+        CASE_CONFIG: {
+            client: 'CASEWORK',
+            endpoint: '/case/${caseId}/config',
+            adapter: (data) => data
+        },
         CASE_DATA: {
             client: 'CASEWORK',
             endpoint: '/case/${caseId}/',

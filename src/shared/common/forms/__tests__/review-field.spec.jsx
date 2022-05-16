@@ -1,6 +1,8 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import ReviewField from '../composite/review-field';
+import '@testing-library/jest-dom';
+import { fireEvent, render, screen } from '@testing-library/react';
 
 const switchDirectionMock = jest.fn();
 
@@ -139,9 +141,8 @@ describe('Review component', () => {
     it('should display a text summary of a child radio button component', () => {
         expect(
             render(
-                <MemoryRouter>
-                    <ReviewField {...REVIEW_FOR_RADIO_BUTTON} />
-                </MemoryRouter>
+                <ReviewField {...REVIEW_FOR_RADIO_BUTTON} />,
+                { wrapper: MemoryRouter }
             )
         ).toMatchSnapshot();
     });
@@ -149,9 +150,8 @@ describe('Review component', () => {
     it('should display a text summary of a date component', () => {
         expect(
             render(
-                <MemoryRouter>
-                    <ReviewField {...REVIEW_FOR_DATE} />
-                </MemoryRouter>
+                <ReviewField {...REVIEW_FOR_DATE} />,
+                { wrapper: MemoryRouter }
             )
         ).toMatchSnapshot();
     });
@@ -159,9 +159,8 @@ describe('Review component', () => {
     it('should display a text summary of a text component', () => {
         expect(
             render(
-                <MemoryRouter>
-                    <ReviewField {...REVIEW_FOR_TEXT_AREA} />
-                </MemoryRouter>
+                <ReviewField {...REVIEW_FOR_TEXT_AREA} />,
+                { wrapper: MemoryRouter }
             )
         ).toMatchSnapshot();
     });
@@ -169,31 +168,27 @@ describe('Review component', () => {
     it('should display the primary correspondent given the correspondents entity-list', () => {
         expect(
             render(
-                <MemoryRouter>
-                    <ReviewField {...REVIEW_FOR_CORRESPONDENTS} />
-                </MemoryRouter>
+                <ReviewField {...REVIEW_FOR_CORRESPONDENTS} />,
+                { wrapper: MemoryRouter }
             )
         ).toMatchSnapshot();
     });
 
     it('should call switchDirection when Change is clicked for non-entity-list fields', () => {
-        const component = mount(
-            <MemoryRouter>
-                <ReviewField {...REVIEW_FOR_TEXT_AREA} />
-            </MemoryRouter>
+        render(
+            <ReviewField {...REVIEW_FOR_TEXT_AREA} />,
+            { wrapper: MemoryRouter }
         );
 
-        const changeLink = component.find('a');
-        changeLink.simulate('click');
+        fireEvent.click(screen.getByRole('link'));
         expect(switchDirectionMock).toHaveBeenCalledTimes(1);
     });
 
     it('should display multiple lines for a checkbox-grid component', () => {
         expect(
             render(
-                <MemoryRouter>
-                    <ReviewField {...REVIEW_FOR_CHECKBOX_GRID} />
-                </MemoryRouter>
+                <ReviewField {...REVIEW_FOR_CHECKBOX_GRID} />,
+                { wrapper: MemoryRouter }
             )
         ).toMatchSnapshot();
     });

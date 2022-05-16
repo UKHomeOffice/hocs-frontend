@@ -1,10 +1,7 @@
 import React from 'react';
 import ErrorSummary from '../error-summary.jsx';
-import { MemoryRouter } from 'react-router-dom';
-
-// eslint-disable-next-line no-console
-const mockScrollIntoView = jest.fn();
-const refSpy = jest.spyOn(React, 'createRef').mockImplementation(() => ( { current: { scrollIntoView: mockScrollIntoView } }));
+import '@testing-library/jest-dom';
+import { render, screen } from '@testing-library/react';
 
 const errors = {
     field1: 'Error 1',
@@ -12,41 +9,22 @@ const errors = {
     field3: 'Error 3'
 };
 
-describe('Form text component', () => {
-    it('should render with default props', () => {
-        expect(
-            render(<ErrorSummary />)
-        ).toMatchSnapshot();
+describe('Error summary component', () => {
+    test('should render with heading when passed', () => {
+        const wrapper = render(<ErrorSummary heading="Error summary" />);
+        expect(wrapper).toBeDefined();
+        expect(screen.getByText('Error summary')).toBeInTheDocument();
     });
-    it('should render with heading when passed', () => {
-        expect(
-            render(<ErrorSummary heading="Error summary" />)
-        ).toMatchSnapshot();
+    test('should render with description when passed', () => {
+        const wrapper = render(<ErrorSummary description="Displaying a list of the errors on the page" />);
+        expect(wrapper).toBeDefined();
+        expect(screen.getByText('Displaying a list of the errors on the page')).toBeInTheDocument();
     });
-    it('should render with description when passed', () => {
-        expect(
-            render(<ErrorSummary description="Displaying a list of the errors on the page" />)
-        ).toMatchSnapshot();
-    });
-    it('should render list of errors when passed', () => {
-
-        expect(
-            render(
-                < MemoryRouter >
-                    <ErrorSummary errors={errors} />
-                </MemoryRouter >
-            )
-        ).toMatchSnapshot();
-    });
-
-    it('expect scrollIntoView to be called', async () => {
-        expect.assertions(2);
-        const wrapper = shallow(<ErrorSummary description="Displaying a list of the errors on the page" />);
-        const instance = wrapper.instance();
-
-        await instance.componentDidMount();
-
-        expect(refSpy).toBeCalled();
-        expect(mockScrollIntoView).toBeCalled();
+    test('should render list of errors when passed', () => {
+        const wrapper = render(<ErrorSummary errors={errors} />);
+        expect(wrapper).toBeDefined();
+        expect(screen.getByText('Error 1')).toBeInTheDocument();
+        expect(screen.getByText('Error 2')).toBeInTheDocument();
+        expect(screen.getByText('Error 3')).toBeInTheDocument();
     });
 });
