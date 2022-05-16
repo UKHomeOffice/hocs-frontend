@@ -1,7 +1,5 @@
 import React from 'react';
 import ActionSummaryAppeals from '../action-summary-appeals';
-import '@testing-library/jest-dom';
-import { render } from '@testing-library/react';
 
 describe('action-summary-appeals.jsx', () => {
 

@@ -1,13 +1,11 @@
 import React from 'react';
 import Case from '../case.jsx';
-import '@testing-library/jest-dom';
-import { render } from '@testing-library/react';
 
 jest.mock('../form-enabled.jsx', () => (
     (C) => C
 ));
 
-jest.mock('../../common/components/document-panel.jsx', () => (
+jest.mock('../../common/components/document-pane.jsx', () => (
     'div'
 ));
 

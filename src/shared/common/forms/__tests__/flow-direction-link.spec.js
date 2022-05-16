@@ -1,8 +1,6 @@
 import React from 'react';
 import { FlowDirectionLink } from '../flow-direction-link.jsx';
 import { MemoryRouter } from 'react-router-dom';
-import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react';
 
 describe('Form Flow Direction Link component', () => {
 
@@ -14,29 +12,36 @@ describe('Form Flow Direction Link component', () => {
     });
 
     it('should render with default props', () => {
-        const wrappedButton = render(
-            <FlowDirectionLink action="/SOME/URL" dispatch={mockDispatch}
-                history={mockHistory} caseId='caseId123' stageId='stageId123' flowDirection='back' />,
-            { wrapper: MemoryRouter }
-        );
+        const wrappedButton = mount(<MemoryRouter><FlowDirectionLink action="/SOME/URL" dispatch={mockDispatch}
+            history={mockHistory} caseId='caseId123' stageId='stageId123' flowDirection='back' /></MemoryRouter>);
         expect(wrappedButton).toBeDefined();
+        expect(wrappedButton.find('FlowDirectionLink')).toMatchSnapshot();
     });
 
     it('should render disabled when isDisabled is passed', () => {
-        render(
-            <FlowDirectionLink action="/SOME/URL" dispatch={mockDispatch}
-                history={mockHistory} caseId='caseId123' stageId='stageId123' flowDirection='back' disabled={true} />,
-            { wrapper: MemoryRouter }
-        );
-        expect(screen.getByRole('link')).toHaveAttribute('disabled');
+        const wrappedButton = mount(<MemoryRouter><FlowDirectionLink action="/SOME/URL" disabled={true} dispatch={mockDispatch}
+            history={mockHistory} caseId='caseId123' stageId='stageId123' flowDirection='back' /></MemoryRouter>);
+        expect(wrappedButton).toBeDefined();
+        expect(wrappedButton.find('FlowDirectionLink')).toMatchSnapshot();
+        expect(wrappedButton.find('Link').props().disabled).toEqual(true);
     });
 
     it('should render with correct label when passed', () => {
-        render(
-            <FlowDirectionLink label={'My Button'} action="/SOME/URL" dispatch={mockDispatch}
-                history={mockHistory} caseId='caseId123' stageId='stageId123' flowDirection='back' />,
-            { wrapper: MemoryRouter }
-        );
-        expect(screen.getByText('My Button')).toBeInTheDocument();
+        const wrappedButton = mount(<MemoryRouter><FlowDirectionLink label={'My Button'} action="/SOME/URL" dispatch={mockDispatch}
+            history={mockHistory} caseId='caseId123' stageId='stageId123' flowDirection='back' /></MemoryRouter>);
+        expect(wrappedButton).toBeDefined();
+        expect(wrappedButton.find('BackBFlowDirectionLinkutton')).toMatchSnapshot();
+        expect(wrappedButton.find('Link').props().disabled).toEqual(false);
+        expect(wrappedButton.find('Link').props().children).toEqual('My Button');
     });
+
+    it('should render with additional styles when className is passed', () => {
+        const wrappedButton = mount(<MemoryRouter><FlowDirectionLink className={'test-class'} action="/SOME/URL" dispatch={mockDispatch}
+            history={mockHistory} caseId='caseId123' stageId='stageId123' flowDirection='back' /></MemoryRouter>);
+        expect(wrappedButton).toBeDefined();
+        expect(wrappedButton.find('FlowDirectionLink')).toMatchSnapshot();
+        expect(wrappedButton.find('Link').props().className).toEqual('govuk-body govuk-link test-class');
+    });
+
+
 });

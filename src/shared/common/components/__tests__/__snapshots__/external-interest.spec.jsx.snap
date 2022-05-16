@@ -1,190 +1,42 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Appeals Component should Render with NO table of external interests 1`] = `
-Object {
-  "asFragment": [Function],
-  "baseElement": <body>
-    <div>
-      <h3
-        class="govuk-heading-s"
-      >
-        Record Interest
-      </h3>
-      <p
-        class="govuk-body"
-      >
-        Record interest against the case
-      </p>
-      <a
-        class="govuk-body govuk-link"
-        href="/case/some_case_id/stage/some_stage_id/caseAction/record_interest/add"
-      >
-        Record Interest
-      </a>
-    </div>
-  </body>,
-  "container": <div>
-    <h3
-      class="govuk-heading-s"
-    >
-      Record Interest
-    </h3>
-    <p
-      class="govuk-body"
-    >
-      Record interest against the case
-    </p>
-    <a
-      class="govuk-body govuk-link"
-      href="/case/some_case_id/stage/some_stage_id/caseAction/record_interest/add"
-    >
-      Record Interest
-    </a>
-  </div>,
-  "debug": [Function],
-  "findAllByAltText": [Function],
-  "findAllByDisplayValue": [Function],
-  "findAllByLabelText": [Function],
-  "findAllByPlaceholderText": [Function],
-  "findAllByRole": [Function],
-  "findAllByTestId": [Function],
-  "findAllByText": [Function],
-  "findAllByTitle": [Function],
-  "findByAltText": [Function],
-  "findByDisplayValue": [Function],
-  "findByLabelText": [Function],
-  "findByPlaceholderText": [Function],
-  "findByRole": [Function],
-  "findByTestId": [Function],
-  "findByText": [Function],
-  "findByTitle": [Function],
-  "getAllByAltText": [Function],
-  "getAllByDisplayValue": [Function],
-  "getAllByLabelText": [Function],
-  "getAllByPlaceholderText": [Function],
-  "getAllByRole": [Function],
-  "getAllByTestId": [Function],
-  "getAllByText": [Function],
-  "getAllByTitle": [Function],
-  "getByAltText": [Function],
-  "getByDisplayValue": [Function],
-  "getByLabelText": [Function],
-  "getByPlaceholderText": [Function],
-  "getByRole": [Function],
-  "getByTestId": [Function],
-  "getByText": [Function],
-  "getByTitle": [Function],
-  "queryAllByAltText": [Function],
-  "queryAllByDisplayValue": [Function],
-  "queryAllByLabelText": [Function],
-  "queryAllByPlaceholderText": [Function],
-  "queryAllByRole": [Function],
-  "queryAllByTestId": [Function],
-  "queryAllByText": [Function],
-  "queryAllByTitle": [Function],
-  "queryByAltText": [Function],
-  "queryByDisplayValue": [Function],
-  "queryByLabelText": [Function],
-  "queryByPlaceholderText": [Function],
-  "queryByRole": [Function],
-  "queryByTestId": [Function],
-  "queryByText": [Function],
-  "queryByTitle": [Function],
-  "rerender": [Function],
-  "unmount": [Function],
-}
+Array [
+  <h3
+    class="govuk-heading-s"
+  >
+    Record Interest
+  </h3>,
+  <p
+    class="govuk-body"
+  >
+    Record interest against the case
+  </p>,
+  <a
+    class="govuk-body govuk-link"
+    href="/case/some_case_id/stage/some_stage_id/caseAction/record_interest/add"
+  >
+    Record Interest
+  </a>,
+]
 `;
 
 exports[`Appeals Component should Render with table of existing external interests 1`] = `
-Object {
-  "asFragment": [Function],
-  "baseElement": <body>
-    <div>
-      <h3
-        class="govuk-heading-s"
-      >
-        Record Interest
-      </h3>
-      <p
-        class="govuk-body"
-      >
-        Recorded Interests:
-      </p>
-      <table
-        class="govuk-table"
-      >
-        <tr
-          class="govuk-table__row"
-        >
-          <td
-            class="govuk-table__cell width-one-sixth"
-          >
-            TEST_PARTY_TYPE
-          </td>
-          <td
-            class="govuk-table__cell govuk-!-width-one-half"
-          />
-          <td
-            class="govuk-table__cell"
-          >
-            <a
-              class="govuk-link"
-              href="/case/some_case_id/stage/some_stage_id/caseAction/record_interest/update/undefined?hideSidebar=false"
-            >
-              Update
-            </a>
-          </td>
-        </tr>
-        <tr
-          class="govuk-table__row"
-        >
-          <td
-            class="govuk-table__cell width-one-sixth"
-          >
-            TEST_PARTY_TYPE_2
-          </td>
-          <td
-            class="govuk-table__cell govuk-!-width-one-half"
-          />
-          <td
-            class="govuk-table__cell"
-          >
-            <a
-              class="govuk-link"
-              href="/case/some_case_id/stage/some_stage_id/caseAction/record_interest/update/undefined?hideSidebar=false"
-            >
-              Update
-            </a>
-          </td>
-        </tr>
-      </table>
-      <p
-        class="govuk-body"
-      >
-        Record interest against the case
-      </p>
-      <a
-        class="govuk-body govuk-link"
-        href="/case/some_case_id/stage/some_stage_id/caseAction/record_interest/add"
-      >
-        Record Interest
-      </a>
-    </div>
-  </body>,
-  "container": <div>
-    <h3
-      class="govuk-heading-s"
-    >
-      Record Interest
-    </h3>
-    <p
-      class="govuk-body"
-    >
-      Recorded Interests:
-    </p>
-    <table
-      class="govuk-table"
-    >
+Array [
+  <h3
+    class="govuk-heading-s"
+  >
+    Record Interest
+  </h3>,
+  <p
+    class="govuk-body"
+  >
+    Recorded Interests:
+  </p>,
+  <table
+    class="govuk-table"
+  >
+    <tbody>
       <tr
         class="govuk-table__row"
       >
@@ -229,69 +81,18 @@ Object {
           </a>
         </td>
       </tr>
-    </table>
-    <p
-      class="govuk-body"
-    >
-      Record interest against the case
-    </p>
-    <a
-      class="govuk-body govuk-link"
-      href="/case/some_case_id/stage/some_stage_id/caseAction/record_interest/add"
-    >
-      Record Interest
-    </a>
-  </div>,
-  "debug": [Function],
-  "findAllByAltText": [Function],
-  "findAllByDisplayValue": [Function],
-  "findAllByLabelText": [Function],
-  "findAllByPlaceholderText": [Function],
-  "findAllByRole": [Function],
-  "findAllByTestId": [Function],
-  "findAllByText": [Function],
-  "findAllByTitle": [Function],
-  "findByAltText": [Function],
-  "findByDisplayValue": [Function],
-  "findByLabelText": [Function],
-  "findByPlaceholderText": [Function],
-  "findByRole": [Function],
-  "findByTestId": [Function],
-  "findByText": [Function],
-  "findByTitle": [Function],
-  "getAllByAltText": [Function],
-  "getAllByDisplayValue": [Function],
-  "getAllByLabelText": [Function],
-  "getAllByPlaceholderText": [Function],
-  "getAllByRole": [Function],
-  "getAllByTestId": [Function],
-  "getAllByText": [Function],
-  "getAllByTitle": [Function],
-  "getByAltText": [Function],
-  "getByDisplayValue": [Function],
-  "getByLabelText": [Function],
-  "getByPlaceholderText": [Function],
-  "getByRole": [Function],
-  "getByTestId": [Function],
-  "getByText": [Function],
-  "getByTitle": [Function],
-  "queryAllByAltText": [Function],
-  "queryAllByDisplayValue": [Function],
-  "queryAllByLabelText": [Function],
-  "queryAllByPlaceholderText": [Function],
-  "queryAllByRole": [Function],
-  "queryAllByTestId": [Function],
-  "queryAllByText": [Function],
-  "queryAllByTitle": [Function],
-  "queryByAltText": [Function],
-  "queryByDisplayValue": [Function],
-  "queryByLabelText": [Function],
-  "queryByPlaceholderText": [Function],
-  "queryByRole": [Function],
-  "queryByTestId": [Function],
-  "queryByText": [Function],
-  "queryByTitle": [Function],
-  "rerender": [Function],
-  "unmount": [Function],
-}
+    </tbody>
+  </table>,
+  <p
+    class="govuk-body"
+  >
+    Record interest against the case
+  </p>,
+  <a
+    class="govuk-body govuk-link"
+    href="/case/some_case_id/stage/some_stage_id/caseAction/record_interest/add"
+  >
+    Record Interest
+  </a>,
+]
 `;

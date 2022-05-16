@@ -1,7 +1,5 @@
 import React from 'react';
 import Paragraph from '../paragraph.jsx';
-import '@testing-library/jest-dom';
-import { render } from '@testing-library/react';
 
 describe('Paragraph component', () => {
 

@@ -302,11 +302,7 @@ SomuList.defaultProps = {
 
 const WrappedSomuList = props => (
     <ApplicationConsumer>
-        {({ page }) =>
-            <SomuList
-                {...props}
-                page={page}
-            />}
+        {({ page }) => <SomuList {...props} page={page} />}
     </ApplicationConsumer>
 );
 

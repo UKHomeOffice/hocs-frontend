@@ -2,8 +2,6 @@ import { ApplicationProvider } from '../../../contexts/application';
 import { MemoryRouter } from 'react-router-dom';
 import React from 'react';
 import Suspensions from '../suspensions';
-import '@testing-library/jest-dom';
-import { render } from '@testing-library/react';
 
 
 const page = {
@@ -48,7 +46,7 @@ describe('Suspensions Component', () => {
             render(
                 <ApplicationProvider config={config}>
                     <MemoryRouter>
-                        <Suspensions props={props} page={page} />
+                        <Suspensions props={props} />
                     </MemoryRouter>
                 </ApplicationProvider>
             )

@@ -1,0 +1,154 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Form back button component should render disabled when isDisabled is passed 1`] = `
+<BackButton
+  action="/SOME/URL"
+  caseId="caseId123"
+  disabled={true}
+  dispatch={[MockFunction]}
+  history={Object {}}
+  label="Submit"
+  stageId="stageId123"
+>
+  <p>
+    <Link
+      className="govuk-back-link"
+      disabled={true}
+      onClick={[Function]}
+      to="/SOME/URL"
+    >
+      <LinkAnchor
+        className="govuk-back-link"
+        disabled={true}
+        href="/SOME/URL"
+        navigate={[Function]}
+        onClick={[Function]}
+      >
+        <a
+          className="govuk-back-link"
+          disabled={true}
+          href="/SOME/URL"
+          onClick={[Function]}
+        >
+          Submit
+        </a>
+      </LinkAnchor>
+    </Link>
+  </p>
+</BackButton>
+`;
+
+exports[`Form back button component should render with additional styles when className is passed 1`] = `
+<BackButton
+  action="/SOME/URL"
+  caseId="caseId123"
+  className="test-class"
+  disabled={false}
+  dispatch={[MockFunction]}
+  history={Object {}}
+  label="Submit"
+  stageId="stageId123"
+>
+  <p>
+    <Link
+      className="govuk-back-link test-class"
+      disabled={false}
+      onClick={[Function]}
+      to="/SOME/URL"
+    >
+      <LinkAnchor
+        className="govuk-back-link test-class"
+        disabled={false}
+        href="/SOME/URL"
+        navigate={[Function]}
+        onClick={[Function]}
+      >
+        <a
+          className="govuk-back-link test-class"
+          disabled={false}
+          href="/SOME/URL"
+          onClick={[Function]}
+        >
+          Submit
+        </a>
+      </LinkAnchor>
+    </Link>
+  </p>
+</BackButton>
+`;
+
+exports[`Form back button component should render with correct label when passed 1`] = `
+<BackButton
+  action="/SOME/URL"
+  caseId="caseId123"
+  disabled={false}
+  dispatch={[MockFunction]}
+  history={Object {}}
+  label="My Button"
+  stageId="stageId123"
+>
+  <p>
+    <Link
+      className="govuk-back-link"
+      disabled={false}
+      onClick={[Function]}
+      to="/SOME/URL"
+    >
+      <LinkAnchor
+        className="govuk-back-link"
+        disabled={false}
+        href="/SOME/URL"
+        navigate={[Function]}
+        onClick={[Function]}
+      >
+        <a
+          className="govuk-back-link"
+          disabled={false}
+          href="/SOME/URL"
+          onClick={[Function]}
+        >
+          My Button
+        </a>
+      </LinkAnchor>
+    </Link>
+  </p>
+</BackButton>
+`;
+
+exports[`Form back button component should render with default props 1`] = `
+<BackButton
+  action="/SOME/URL"
+  caseId="caseId123"
+  disabled={false}
+  dispatch={[MockFunction]}
+  history={Object {}}
+  label="Submit"
+  stageId="stageId123"
+>
+  <p>
+    <Link
+      className="govuk-back-link"
+      disabled={false}
+      onClick={[Function]}
+      to="/SOME/URL"
+    >
+      <LinkAnchor
+        className="govuk-back-link"
+        disabled={false}
+        href="/SOME/URL"
+        navigate={[Function]}
+        onClick={[Function]}
+      >
+        <a
+          className="govuk-back-link"
+          disabled={false}
+          href="/SOME/URL"
+          onClick={[Function]}
+        >
+          Submit
+        </a>
+      </LinkAnchor>
+    </Link>
+  </p>
+</BackButton>
+`;

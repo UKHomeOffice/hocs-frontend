@@ -1,7 +1,5 @@
 import React from 'react';
 import MappedDisplay from '../mapped-display.jsx';
-import '@testing-library/jest-dom';
-import { render } from '@testing-library/react';
 
 
 describe('Form MappedDisplay component', () => {
