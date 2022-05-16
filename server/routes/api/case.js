@@ -16,7 +16,9 @@ const {
     caseActionApiResponseMiddleware,
     caseDataApiResponseMiddleware,
     caseDataMiddleware,
-    caseDataUpdateMiddleware
+    caseDataUpdateMiddleware,
+    caseConfigMiddleware,
+    caseConfigApiResponseMiddleware
 } = require('../../middleware/case');
 const { somuApiResponseMiddleware } = require('../../middleware/somu');
 const { getFormForCase, getFormForStage } = require('../../services/form');
@@ -105,6 +107,8 @@ router.put('/:caseId/note/:noteId',
 router.get('/:caseId/', caseDataMiddleware, caseDataApiResponseMiddleware);
 
 router.get('/:caseId/summary', caseSummaryMiddleware, caseSummaryApiResponseMiddleware);
+
+router.get('/:caseId/config', caseConfigMiddleware, caseConfigApiResponseMiddleware);
 
 router.get('/:caseId/actions', caseActionDataMiddleware, caseActionApiResponseMiddleware);
 

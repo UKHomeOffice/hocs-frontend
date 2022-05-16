@@ -21,6 +21,13 @@ export function updateCaseSummary(data) {
     };
 }
 
+export function updateCaseConfig(data) {
+    return {
+        type: types.UPDATE_CASE_CONFIG,
+        payload: data
+    };
+}
+
 export function updateCaseData(data) {
     return {
         type: types.UPDATE_CASE_DATA,
@@ -169,6 +176,13 @@ export function unsetCorrespondents() {
 export function unsetCaseNotes() {
     return {
         type: types.UNSET_CASE_NOTES,
+        payload: null
+    };
+}
+
+export function unsetCaseConfig() {
+    return {
+        type: types.UNSET_CASE_CONFIG,
         payload: null
     };
 }

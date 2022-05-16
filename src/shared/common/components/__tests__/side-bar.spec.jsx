@@ -40,11 +40,24 @@ describe('Side bar component', () => {
         expect(WRAPPER).toMatchSnapshot();
     });
 
-    it('should render with the actions tab for FOI', () => {
+    it('should render with supplied tabs', () => {
         const props = {
-            summary: {
-                type: 'FOI'
-            }
+            caseConfig : {
+                type: 'case type',
+                tabs: [
+                    {
+                        name: 'documents',
+                        label: 'Documents',
+                        screen: 'DOCUMENTS'
+                    },
+                    {
+                        name: 'summary',
+                        label: 'Summary',
+                        screen: 'SUMMARY'
+                    },
+                ]
+            },
+            activeTab: 'DOCUMENTS'
         };
 
         const WRAPPER = render(
@@ -59,10 +72,22 @@ describe('Side bar component', () => {
         expect(WRAPPER).toMatchSnapshot();
     });
 
-    it('should render with the defined BF tabs', () => {
+    it('should show the correct tab when param is passed', () => {
         const props = {
-            summary: {
-                type: 'BF'
+            caseConfig : {
+                type: 'case type',
+                tabs: [
+                    {
+                        name: 'documents',
+                        label: 'Documents',
+                        screen: 'DOCUMENTS'
+                    },
+                    {
+                        name: 'timeline',
+                        label: 'Timeline',
+                        screen: 'TIMELINE'
+                    },
+                ]
             }
         };
 
@@ -85,6 +110,9 @@ describe('Side bar component', () => {
             }
         };
 
+        // eslint-disable-next-line no-undef
+        window.history.pushState({}, 'Test Title', '/test?tab=TIMELINE');
+
         const WRAPPER = render(
             <ApplicationProvider config={{ ...MOCK_CONFIG, ...props }}>
                 <MemoryRouter>
@@ -97,10 +125,25 @@ describe('Side bar component', () => {
         expect(WRAPPER).toMatchSnapshot();
     });
 
-    it('should show the correct tab when param is passed', () => {
+    it('should show the leftmost tab when no param is passed', () => {
         const props = {
             summary: {
-                type: 'default'
+                type: 'case type'
+            },
+            caseConfig : {
+                type: 'case type',
+                tabs: [
+                    {
+                        name: 'timeline',
+                        label: 'Timeline',
+                        screen: 'TIMELINE'
+                    },
+                    {
+                        name: 'summary',
+                        label: 'Summary',
+                        screen: 'SUMMARY'
+                    },
+                ]
             }
         };
 
