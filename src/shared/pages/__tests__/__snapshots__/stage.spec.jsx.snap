@@ -1,0 +1,100 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Stage page component should render children when passed 1`] = `
+<div
+  className="govuk-grid-row"
+>
+  <div
+    className="govuk-grid-column-one-third"
+  >
+    <h1
+      className="govuk-heading-l"
+    />
+    FORM
+  </div>
+  <div
+    className="govuk-grid-column-two-thirds"
+  >
+    <WrappedSideBar />
+  </div>
+</div>
+`;
+
+exports[`Stage page component should render with default props 1`] = `
+<div
+  className="govuk-grid-row"
+>
+  <div
+    className="govuk-grid-column-one-third"
+  >
+    <h1
+      className="govuk-heading-l"
+    />
+  </div>
+  <div
+    className="govuk-grid-column-two-thirds"
+  >
+    <WrappedSideBar />
+  </div>
+</div>
+`;
+
+exports[`Stage page component should render with subTitle when passed in props 1`] = `
+<div
+  className="govuk-grid-row"
+>
+  <div
+    className="govuk-grid-column-one-third"
+  >
+    <h1
+      className="govuk-heading-l"
+    >
+      <span
+        className="govuk-caption-l"
+      >
+        ABC123
+      </span>
+    </h1>
+  </div>
+  <div
+    className="govuk-grid-column-two-thirds"
+  >
+    <WrappedSideBar />
+  </div>
+</div>
+`;
+
+exports[`Stage page component should render with title when passed in props 1`] = `
+<div
+  className="govuk-grid-row"
+>
+  <div
+    className="govuk-grid-column-one-third"
+  >
+    <h1
+      className="govuk-heading-l"
+    >
+      MY_TITLE
+    </h1>
+  </div>
+  <div
+    className="govuk-grid-column-two-thirds"
+  >
+    <WrappedSideBar />
+  </div>
+</div>
+`;
+
+exports[`Stage page component should render without sidebar when passed in props 1`] = `
+<div
+  className="govuk-grid-row"
+>
+  <div
+    className="govuk-grid-column-one-half"
+  >
+    <h1
+      className="govuk-heading-l"
+    />
+  </div>
+</div>
+`;

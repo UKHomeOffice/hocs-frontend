@@ -1,7 +1,5 @@
 import React from 'react';
 import DocumentList from '../document-list.jsx';
-import '@testing-library/jest-dom';
-import { fireEvent, render, screen } from '@testing-library/react';
 
 describe('Document list component', () => {
 
@@ -26,36 +24,37 @@ describe('Document list component', () => {
         ]]
     ];
 
-    test('should render with a document list when provided in props', () => {
+    it('should render with default props', () => {
+        const wrapper = render(<DocumentList caseId={'MOCK_CASE_ID'} clickHandler={() => { }} />);
+        expect(wrapper).toBeDefined();
+        expect(wrapper).toMatchSnapshot();
+    });
+
+    it('should render with a document list when provided in props', () => {
         const wrapper = render(<DocumentList caseId={'MOCK_CASE_ID'} clickHandler={() => { }} documents={documentList} />);
         expect(wrapper).toBeDefined();
-        expect(screen.getByText('TEST_DOCUMENT_1')).toBeInTheDocument();
-        expect(screen.getByText('TEST_DOCUMENT_6')).toBeInTheDocument();
-        expect(screen.getByText('TEST_DOCUMENT_11')).toBeInTheDocument();
-        expect(screen.getByText('TEST_DOCUMENT_12')).toBeInTheDocument();
-        expect(screen.getByText('TEST_DOCUMENT_13')).toBeInTheDocument();
+        expect(wrapper).toMatchSnapshot();
     });
 
-    test('should support a click handler when passed in props', () => {
-        global.testFunc = () => {};
-        const testSpy = jest.spyOn(global, 'testFunc');
-        const wrapper = render(<DocumentList caseId={'MOCK_CASE_ID'} clickHandler={testSpy} documents={documentList} />);
+    it('should support a click handler when passed in props', () => {
+        const mockClickHandler = jest.fn();
+        const wrapper = shallow(<DocumentList caseId={'MOCK_CASE_ID'} clickHandler={mockClickHandler} documents={documentList} />);
         expect(wrapper).toBeDefined();
-
-        const button = screen.getAllByText('Preview')[0];
-        fireEvent.click(button);
-        expect(testSpy).toHaveBeenCalledWith('MOCK_DOC_ID_1');
+        wrapper.find('#MOCK_DOC_ID_1-pdf').simulate('click', { preventDefault: jest.fn() });
+        expect(mockClickHandler).toHaveBeenCalled();
     });
 
-    test('should display None when there are no documents in a group', () => {
+    it('should display None when there are no documents in a group', () => {
         const emptyDocumentList = [
             ['group 1'], ['group 2', []]
         ];
 
         const wrapper = render(<DocumentList caseId={'MOCK_CASE_ID'} clickHandler={() => { }} documents={emptyDocumentList} />);
         expect(wrapper).toBeDefined();
-
-        const groupsOfNone = screen.getAllByText('None');
-        expect(groupsOfNone).toHaveLength(2);
+        expect(wrapper).toMatchSnapshot();
+        const cells = wrapper.find('td');
+        expect(cells).toHaveLength(2);
+        expect(cells.first().text()).toBe('None');
+        expect(cells.last().text()).toBe('None');
     });
 });

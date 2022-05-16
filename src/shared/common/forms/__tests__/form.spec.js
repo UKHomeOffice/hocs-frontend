@@ -1,7 +1,5 @@
 import React from 'react';
 import Form from '../form.jsx';
-import '@testing-library/jest-dom';
-import { fireEvent, render, screen } from '@testing-library/react';
 
 /* eslint-disable react/display-name*/
 jest.mock('../form-repository.jsx', () => {
@@ -11,9 +9,9 @@ jest.mock('../form-repository.jsx', () => {
                 <div id={field} key={key} />
             );
         },
-        secondaryActionFactory: (field, { key, config }) => {
+        secondaryActionFactory: (field, { key }) => {
             return (
-                <div id={field} key={key}>{config.value}</div>
+                <div id={field} key={key} />
             );
         }
     };
@@ -30,8 +28,7 @@ describe('Form component', () => {
         page: {
             caseId: 'CASE_ID',
             stageId: 'STAGE_ID'
-        },
-        baseUrl: 'gov.uk'
+        }
     };
 
     const mockSubmitHandler = jest.fn();
@@ -40,36 +37,47 @@ describe('Form component', () => {
         mockSubmitHandler.mockReset();
     });
 
-    test('should render with default props', () => {
-        const wrapper = render(<Form schema={mockFormSchema}/>);
+    it('should render with default props', () => {
+        const wrapper = mount(<Form schema={mockFormSchema}/>);
         expect(wrapper).toBeDefined();
     });
 
-    test('should render secondary actions when passed in props', () => {
-        const mockFormSchemaWithSecondaryAction = {
-            secondaryActions: [
-                { component: 'button', props: { value: 'Click Me' } }
+    it('should render form fields when passed in props', () => {
+        const mockFormSchemaWithFields = {
+            fields: [
+                { component: 'text', props: { name: 'Text Area' } }
             ]
         };
-        const wrapper = render(<Form {...mockProps} schema={mockFormSchemaWithSecondaryAction} />);
+        const wrapper = shallow(<Form {...mockProps} schema={mockFormSchemaWithFields} />);
         expect(wrapper).toBeDefined();
-        expect(screen.getByText('Click Me')).toBeInTheDocument();
+        expect(wrapper.find('#text').length).toEqual(1);
     });
 
-    test('should render with error summary when errors passed in props', () => {
+    it('should render secondary actions when passed in props', () => {
+        const mockFormSchemaWithSecondaryAction = {
+            secondaryActions: [
+                { component: 'button', props: { name: 'Click Me' } }
+            ]
+        };
+        const wrapper = shallow(<Form {...mockProps} schema={mockFormSchemaWithSecondaryAction} />);
+        expect(wrapper).toBeDefined();
+        expect(wrapper.find('#button').length).toEqual(1);
+    });
+
+    it('should render with error summary when errors passed in props', () => {
         const errors = {
             field: 'Failed validation'
         };
-        const wrapper = render(<Form {...mockProps} schema={mockFormSchema} errors={errors} />);
+        const wrapper = shallow(<Form {...mockProps} schema={mockFormSchema} errors={errors} />);
         expect(wrapper).toBeDefined();
-        expect(screen.getByText('Failed validation')).toBeInTheDocument();
+        expect(wrapper.find('ErrorSummary').length).toEqual(1);
     });
 
-    test('should handle submit using provided callback method', async () => {
-        const wrapper = render(<Form {...mockProps} schema={mockFormSchema} submitHandler={mockSubmitHandler}/>);
+    it('should handle submit using provided callback method', async () => {
+        const wrapper = mount(<Form {...mockProps} schema={mockFormSchema} submitHandler={mockSubmitHandler}/>);
         expect(wrapper).toBeDefined();
-        expect(screen.getByText('Submit')).toBeInTheDocument();
-        fireEvent.click(screen.getByText('Submit'));
+        expect(wrapper.find('Submit').length).toEqual(1);
+        wrapper.find('Submit').simulate('submit');
         expect(mockSubmitHandler).toHaveBeenCalled();
         expect(mockSubmitHandler).toHaveBeenCalledTimes(1);
     });

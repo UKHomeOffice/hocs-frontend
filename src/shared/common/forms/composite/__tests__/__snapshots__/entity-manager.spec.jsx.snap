@@ -1,1066 +1,436 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Entity list component should render with add link when passed in props 1`] = `
-Object {
-  "asFragment": [Function],
-  "baseElement": <body>
-    <div>
-      <table
-        class="govuk-table"
-      >
-        <tbody
-          class="govuk-table__body"
-        >
-          <tr
-            class="govuk-table__row"
-          >
-            <td
-              class="govuk-table__cell"
-            >
-              None
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <a
-        class="govuk-body govuk-link"
-        href="/http://localhost:8080/entity/entity/add"
-      >
-        Add entity
-      </a>
-    </div>
-  </body>,
-  "container": <div>
-    <table
-      class="govuk-table"
+Array [
+  <table
+    class="govuk-table"
+  >
+    <tbody
+      class="govuk-table__body"
     >
-      <tbody
-        class="govuk-table__body"
+      <tr
+        class="govuk-table__row"
       >
-        <tr
-          class="govuk-table__row"
+        <td
+          class="govuk-table__cell"
         >
-          <td
-            class="govuk-table__cell"
-          >
-            None
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <a
-      class="govuk-body govuk-link"
-      href="/http://localhost:8080/entity/entity/add"
+          None
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+  <a
+    class="govuk-body govuk-link"
+    href="/http://localhost:8080/entity/entity/add"
+  >
+    Add entity
+  </a>,
+]
+`;
+
+exports[`Entity list component should render with additional css when passed in props 1`] = `
+<table
+  class="govuk-table"
+>
+  <tbody
+    class="govuk-table__body"
+  >
+    <tr
+      class="govuk-table__row"
     >
-      Add entity
-    </a>
-  </div>,
-  "debug": [Function],
-  "findAllByAltText": [Function],
-  "findAllByDisplayValue": [Function],
-  "findAllByLabelText": [Function],
-  "findAllByPlaceholderText": [Function],
-  "findAllByRole": [Function],
-  "findAllByTestId": [Function],
-  "findAllByText": [Function],
-  "findAllByTitle": [Function],
-  "findByAltText": [Function],
-  "findByDisplayValue": [Function],
-  "findByLabelText": [Function],
-  "findByPlaceholderText": [Function],
-  "findByRole": [Function],
-  "findByTestId": [Function],
-  "findByText": [Function],
-  "findByTitle": [Function],
-  "getAllByAltText": [Function],
-  "getAllByDisplayValue": [Function],
-  "getAllByLabelText": [Function],
-  "getAllByPlaceholderText": [Function],
-  "getAllByRole": [Function],
-  "getAllByTestId": [Function],
-  "getAllByText": [Function],
-  "getAllByTitle": [Function],
-  "getByAltText": [Function],
-  "getByDisplayValue": [Function],
-  "getByLabelText": [Function],
-  "getByPlaceholderText": [Function],
-  "getByRole": [Function],
-  "getByTestId": [Function],
-  "getByText": [Function],
-  "getByTitle": [Function],
-  "queryAllByAltText": [Function],
-  "queryAllByDisplayValue": [Function],
-  "queryAllByLabelText": [Function],
-  "queryAllByPlaceholderText": [Function],
-  "queryAllByRole": [Function],
-  "queryAllByTestId": [Function],
-  "queryAllByText": [Function],
-  "queryAllByTitle": [Function],
-  "queryByAltText": [Function],
-  "queryByDisplayValue": [Function],
-  "queryByLabelText": [Function],
-  "queryByPlaceholderText": [Function],
-  "queryByRole": [Function],
-  "queryByTestId": [Function],
-  "queryByText": [Function],
-  "queryByTitle": [Function],
-  "rerender": [Function],
-  "unmount": [Function],
-}
+      <td
+        class="govuk-table__cell"
+      >
+        None
+      </td>
+    </tr>
+  </tbody>
+</table>
 `;
 
 exports[`Entity list component should render with created date when passed in props on choice entries 1`] = `
-Object {
-  "asFragment": [Function],
-  "baseElement": <body>
-    <div>
-      <table
-        class="govuk-table"
-      >
-        <tbody
-          class="govuk-table__body"
-        >
-          <tr
-            class="govuk-radios govuk-table__row"
-          >
-            <td
-              class="govuk-table__cell govuk-!-width-full"
-            >
-              Choice A
-            </td>
-            <td
-              class="govuk-table__cell"
-            >
-              2020-1-1
-            </td>
-          </tr>
-          <tr
-            class="govuk-radios govuk-table__row"
-          >
-            <td
-              class="govuk-table__cell govuk-!-width-full"
-            >
-              Choice B
-            </td>
-            <td
-              class="govuk-table__cell"
-            >
-              2020-1-1
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </body>,
-  "container": <div>
-    <table
-      class="govuk-table"
+<table
+  class="govuk-table"
+>
+  <tbody
+    class="govuk-table__body"
+  >
+    <tr
+      class="govuk-radios govuk-table__row"
     >
-      <tbody
-        class="govuk-table__body"
+      <td
+        class="govuk-table__cell govuk-!-width-full"
       >
-        <tr
-          class="govuk-radios govuk-table__row"
-        >
-          <td
-            class="govuk-table__cell govuk-!-width-full"
-          >
-            Choice A
-          </td>
-          <td
-            class="govuk-table__cell"
-          >
-            2020-1-1
-          </td>
-        </tr>
-        <tr
-          class="govuk-radios govuk-table__row"
-        >
-          <td
-            class="govuk-table__cell govuk-!-width-full"
-          >
-            Choice B
-          </td>
-          <td
-            class="govuk-table__cell"
-          >
-            2020-1-1
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>,
-  "debug": [Function],
-  "findAllByAltText": [Function],
-  "findAllByDisplayValue": [Function],
-  "findAllByLabelText": [Function],
-  "findAllByPlaceholderText": [Function],
-  "findAllByRole": [Function],
-  "findAllByTestId": [Function],
-  "findAllByText": [Function],
-  "findAllByTitle": [Function],
-  "findByAltText": [Function],
-  "findByDisplayValue": [Function],
-  "findByLabelText": [Function],
-  "findByPlaceholderText": [Function],
-  "findByRole": [Function],
-  "findByTestId": [Function],
-  "findByText": [Function],
-  "findByTitle": [Function],
-  "getAllByAltText": [Function],
-  "getAllByDisplayValue": [Function],
-  "getAllByLabelText": [Function],
-  "getAllByPlaceholderText": [Function],
-  "getAllByRole": [Function],
-  "getAllByTestId": [Function],
-  "getAllByText": [Function],
-  "getAllByTitle": [Function],
-  "getByAltText": [Function],
-  "getByDisplayValue": [Function],
-  "getByLabelText": [Function],
-  "getByPlaceholderText": [Function],
-  "getByRole": [Function],
-  "getByTestId": [Function],
-  "getByText": [Function],
-  "getByTitle": [Function],
-  "queryAllByAltText": [Function],
-  "queryAllByDisplayValue": [Function],
-  "queryAllByLabelText": [Function],
-  "queryAllByPlaceholderText": [Function],
-  "queryAllByRole": [Function],
-  "queryAllByTestId": [Function],
-  "queryAllByText": [Function],
-  "queryAllByTitle": [Function],
-  "queryByAltText": [Function],
-  "queryByDisplayValue": [Function],
-  "queryByLabelText": [Function],
-  "queryByPlaceholderText": [Function],
-  "queryByRole": [Function],
-  "queryByTestId": [Function],
-  "queryByText": [Function],
-  "queryByTitle": [Function],
-  "rerender": [Function],
-  "unmount": [Function],
-}
+        Choice A
+      </td>
+      <td
+        class="govuk-table__cell"
+      >
+        2020-1-1
+      </td>
+    </tr>
+    <tr
+      class="govuk-radios govuk-table__row"
+    >
+      <td
+        class="govuk-table__cell govuk-!-width-full"
+      >
+        Choice B
+      </td>
+      <td
+        class="govuk-table__cell"
+      >
+        2020-1-1
+      </td>
+    </tr>
+  </tbody>
+</table>
 `;
 
 exports[`Entity list component should render with default props 1`] = `
-Object {
-  "asFragment": [Function],
-  "baseElement": <body>
-    <div>
-      <table
-        class="govuk-table"
-      >
-        <tbody
-          class="govuk-table__body"
-        >
-          <tr
-            class="govuk-table__row"
-          >
-            <td
-              class="govuk-table__cell"
-            >
-              None
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </body>,
-  "container": <div>
-    <table
-      class="govuk-table"
+<table
+  class="govuk-table"
+>
+  <tbody
+    class="govuk-table__body"
+  >
+    <tr
+      class="govuk-table__row"
     >
-      <tbody
-        class="govuk-table__body"
+      <td
+        class="govuk-table__cell"
       >
-        <tr
-          class="govuk-table__row"
-        >
-          <td
-            class="govuk-table__cell"
-          >
-            None
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>,
-  "debug": [Function],
-  "findAllByAltText": [Function],
-  "findAllByDisplayValue": [Function],
-  "findAllByLabelText": [Function],
-  "findAllByPlaceholderText": [Function],
-  "findAllByRole": [Function],
-  "findAllByTestId": [Function],
-  "findAllByText": [Function],
-  "findAllByTitle": [Function],
-  "findByAltText": [Function],
-  "findByDisplayValue": [Function],
-  "findByLabelText": [Function],
-  "findByPlaceholderText": [Function],
-  "findByRole": [Function],
-  "findByTestId": [Function],
-  "findByText": [Function],
-  "findByTitle": [Function],
-  "getAllByAltText": [Function],
-  "getAllByDisplayValue": [Function],
-  "getAllByLabelText": [Function],
-  "getAllByPlaceholderText": [Function],
-  "getAllByRole": [Function],
-  "getAllByTestId": [Function],
-  "getAllByText": [Function],
-  "getAllByTitle": [Function],
-  "getByAltText": [Function],
-  "getByDisplayValue": [Function],
-  "getByLabelText": [Function],
-  "getByPlaceholderText": [Function],
-  "getByRole": [Function],
-  "getByTestId": [Function],
-  "getByText": [Function],
-  "getByTitle": [Function],
-  "queryAllByAltText": [Function],
-  "queryAllByDisplayValue": [Function],
-  "queryAllByLabelText": [Function],
-  "queryAllByPlaceholderText": [Function],
-  "queryAllByRole": [Function],
-  "queryAllByTestId": [Function],
-  "queryAllByText": [Function],
-  "queryAllByTitle": [Function],
-  "queryByAltText": [Function],
-  "queryByDisplayValue": [Function],
-  "queryByLabelText": [Function],
-  "queryByPlaceholderText": [Function],
-  "queryByRole": [Function],
-  "queryByTestId": [Function],
-  "queryByText": [Function],
-  "queryByTitle": [Function],
-  "rerender": [Function],
-  "unmount": [Function],
-}
+        None
+      </td>
+    </tr>
+  </tbody>
+</table>
 `;
 
 exports[`Entity list component should render with download link when passed in props 1`] = `
-Object {
-  "asFragment": [Function],
-  "baseElement": <body>
-    <div>
-      <table
-        class="govuk-table"
-      >
-        <tbody
-          class="govuk-table__body"
-        >
-          <tr
-            class="govuk-radios govuk-table__row"
-          >
-            <td
-              class="govuk-table__cell govuk-!-width-full"
-            >
-              Choice A
-            </td>
-            <td
-              class="govuk-table__cell"
-            >
-              <a
-                class="govuk-link"
-                download="Choice A"
-                href="http://localhost:8080/download/entity/CHOICE_A"
-              >
-                Download
-              </a>
-            </td>
-          </tr>
-          <tr
-            class="govuk-radios govuk-table__row"
-          >
-            <td
-              class="govuk-table__cell govuk-!-width-full"
-            >
-              Choice B
-            </td>
-            <td
-              class="govuk-table__cell"
-            >
-              <a
-                class="govuk-link"
-                download="Choice B"
-                href="http://localhost:8080/download/entity/CHOICE_B"
-              >
-                Download
-              </a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </body>,
-  "container": <div>
-    <table
-      class="govuk-table"
+<table
+  class="govuk-table"
+>
+  <tbody
+    class="govuk-table__body"
+  >
+    <tr
+      class="govuk-radios govuk-table__row"
     >
-      <tbody
-        class="govuk-table__body"
+      <td
+        class="govuk-table__cell govuk-!-width-full"
       >
-        <tr
-          class="govuk-radios govuk-table__row"
+        Choice A
+      </td>
+      <td
+        class="govuk-table__cell"
+      >
+        <a
+          class="govuk-link"
+          download="Choice A"
+          href="http://localhost:8080/download/entity/CHOICE_A"
         >
-          <td
-            class="govuk-table__cell govuk-!-width-full"
-          >
-            Choice A
-          </td>
-          <td
-            class="govuk-table__cell"
-          >
-            <a
-              class="govuk-link"
-              download="Choice A"
-              href="http://localhost:8080/download/entity/CHOICE_A"
-            >
-              Download
-            </a>
-          </td>
-        </tr>
-        <tr
-          class="govuk-radios govuk-table__row"
+          Download
+        </a>
+      </td>
+    </tr>
+    <tr
+      class="govuk-radios govuk-table__row"
+    >
+      <td
+        class="govuk-table__cell govuk-!-width-full"
+      >
+        Choice B
+      </td>
+      <td
+        class="govuk-table__cell"
+      >
+        <a
+          class="govuk-link"
+          download="Choice B"
+          href="http://localhost:8080/download/entity/CHOICE_B"
         >
-          <td
-            class="govuk-table__cell govuk-!-width-full"
-          >
-            Choice B
-          </td>
-          <td
-            class="govuk-table__cell"
-          >
-            <a
-              class="govuk-link"
-              download="Choice B"
-              href="http://localhost:8080/download/entity/CHOICE_B"
-            >
-              Download
-            </a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>,
-  "debug": [Function],
-  "findAllByAltText": [Function],
-  "findAllByDisplayValue": [Function],
-  "findAllByLabelText": [Function],
-  "findAllByPlaceholderText": [Function],
-  "findAllByRole": [Function],
-  "findAllByTestId": [Function],
-  "findAllByText": [Function],
-  "findAllByTitle": [Function],
-  "findByAltText": [Function],
-  "findByDisplayValue": [Function],
-  "findByLabelText": [Function],
-  "findByPlaceholderText": [Function],
-  "findByRole": [Function],
-  "findByTestId": [Function],
-  "findByText": [Function],
-  "findByTitle": [Function],
-  "getAllByAltText": [Function],
-  "getAllByDisplayValue": [Function],
-  "getAllByLabelText": [Function],
-  "getAllByPlaceholderText": [Function],
-  "getAllByRole": [Function],
-  "getAllByTestId": [Function],
-  "getAllByText": [Function],
-  "getAllByTitle": [Function],
-  "getByAltText": [Function],
-  "getByDisplayValue": [Function],
-  "getByLabelText": [Function],
-  "getByPlaceholderText": [Function],
-  "getByRole": [Function],
-  "getByTestId": [Function],
-  "getByText": [Function],
-  "getByTitle": [Function],
-  "queryAllByAltText": [Function],
-  "queryAllByDisplayValue": [Function],
-  "queryAllByLabelText": [Function],
-  "queryAllByPlaceholderText": [Function],
-  "queryAllByRole": [Function],
-  "queryAllByTestId": [Function],
-  "queryAllByText": [Function],
-  "queryAllByTitle": [Function],
-  "queryByAltText": [Function],
-  "queryByDisplayValue": [Function],
-  "queryByLabelText": [Function],
-  "queryByPlaceholderText": [Function],
-  "queryByRole": [Function],
-  "queryByTestId": [Function],
-  "queryByText": [Function],
-  "queryByTitle": [Function],
-  "rerender": [Function],
-  "unmount": [Function],
-}
+          Download
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+`;
+
+exports[`Entity list component should render with download link when passed in props 2`] = `
+<table
+  class="govuk-table"
+>
+  <tbody
+    class="govuk-table__body"
+  >
+    <tr
+      class="govuk-radios govuk-table__row"
+    >
+      <td
+        class="govuk-table__cell govuk-!-width-full"
+      >
+        Choice A
+      </td>
+      <td
+        class="govuk-table__cell"
+      >
+        <a
+          class="govuk-link"
+          download="Choice A"
+          href="http://localhost:8080/template/CHOICE_A"
+        >
+          Download
+        </a>
+      </td>
+    </tr>
+    <tr
+      class="govuk-radios govuk-table__row"
+    >
+      <td
+        class="govuk-table__cell govuk-!-width-full"
+      >
+        Choice B
+      </td>
+      <td
+        class="govuk-table__cell"
+      >
+        <a
+          class="govuk-link"
+          download="Choice B"
+          href="http://localhost:8080/template/CHOICE_B"
+        >
+          Download
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
 `;
 
 exports[`Entity list component should render with grouped documents\` 1`] = `
-Object {
-  "asFragment": [Function],
-  "baseElement": <body>
-    <div>
-      <h2
-        class="govuk-heading-m"
-      >
-        group1
-      </h2>
-      <table
-        class="govuk-table"
-      >
-        <tbody
-          class="govuk-table__body"
-        >
-          <tr
-            class="govuk-radios govuk-table__row"
-          >
-            <td
-              class="govuk-table__cell govuk-!-width-full"
-            >
-              Choice A
-            </td>
-            <td
-              class="govuk-table__cell "
-            >
-              <strong
-                class="govuk-tag margin-right--small"
-              >
-                A
-              </strong>
-            </td>
-          </tr>
-          <tr
-            class="govuk-radios govuk-table__row"
-          >
-            <td
-              class="govuk-table__cell govuk-!-width-full"
-            >
-              Choice B
-            </td>
-            <td
-              class="govuk-table__cell "
-            >
-              <strong
-                class="govuk-tag margin-right--small"
-              >
-                B
-              </strong>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <h2
-        class="govuk-heading-m"
-      >
-        group2
-      </h2>
-      <table
-        class="govuk-table"
-      >
-        <tbody
-          class="govuk-table__body"
-        >
-          <tr
-            class="govuk-radios govuk-table__row"
-          >
-            <td
-              class="govuk-table__cell govuk-!-width-full"
-            >
-              Choice C
-            </td>
-            <td
-              class="govuk-table__cell "
-            >
-              <strong
-                class="govuk-tag margin-right--small"
-              >
-                C
-              </strong>
-            </td>
-          </tr>
-          <tr
-            class="govuk-radios govuk-table__row"
-          >
-            <td
-              class="govuk-table__cell govuk-!-width-full"
-            >
-              Choice D
-            </td>
-            <td
-              class="govuk-table__cell "
-            >
-              <strong
-                class="govuk-tag margin-right--small"
-              >
-                D
-              </strong>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </body>,
-  "container": <div>
-    <h2
-      class="govuk-heading-m"
+Array [
+  <h2
+    class="govuk-heading-m"
+  >
+    group1
+  </h2>,
+  <table
+    class="govuk-table"
+  >
+    <tbody
+      class="govuk-table__body"
     >
-      group1
-    </h2>
-    <table
-      class="govuk-table"
-    >
-      <tbody
-        class="govuk-table__body"
+      <tr
+        class="govuk-radios govuk-table__row"
       >
-        <tr
-          class="govuk-radios govuk-table__row"
+        <td
+          class="govuk-table__cell govuk-!-width-full"
         >
-          <td
-            class="govuk-table__cell govuk-!-width-full"
-          >
-            Choice A
-          </td>
-          <td
-            class="govuk-table__cell "
-          >
-            <strong
-              class="govuk-tag margin-right--small"
-            >
-              A
-            </strong>
-          </td>
-        </tr>
-        <tr
-          class="govuk-radios govuk-table__row"
+          Choice A
+        </td>
+        <td
+          class="govuk-table__cell "
         >
-          <td
-            class="govuk-table__cell govuk-!-width-full"
+          <strong
+            class="govuk-tag margin-right--small"
           >
-            Choice B
-          </td>
-          <td
-            class="govuk-table__cell "
-          >
-            <strong
-              class="govuk-tag margin-right--small"
-            >
-              B
-            </strong>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <h2
-      class="govuk-heading-m"
-    >
-      group2
-    </h2>
-    <table
-      class="govuk-table"
-    >
-      <tbody
-        class="govuk-table__body"
+            A
+          </strong>
+        </td>
+      </tr>
+      <tr
+        class="govuk-radios govuk-table__row"
       >
-        <tr
-          class="govuk-radios govuk-table__row"
+        <td
+          class="govuk-table__cell govuk-!-width-full"
         >
-          <td
-            class="govuk-table__cell govuk-!-width-full"
-          >
-            Choice C
-          </td>
-          <td
-            class="govuk-table__cell "
-          >
-            <strong
-              class="govuk-tag margin-right--small"
-            >
-              C
-            </strong>
-          </td>
-        </tr>
-        <tr
-          class="govuk-radios govuk-table__row"
+          Choice B
+        </td>
+        <td
+          class="govuk-table__cell "
         >
-          <td
-            class="govuk-table__cell govuk-!-width-full"
+          <strong
+            class="govuk-tag margin-right--small"
           >
-            Choice D
-          </td>
-          <td
-            class="govuk-table__cell "
+            B
+          </strong>
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+  <h2
+    class="govuk-heading-m"
+  >
+    group2
+  </h2>,
+  <table
+    class="govuk-table"
+  >
+    <tbody
+      class="govuk-table__body"
+    >
+      <tr
+        class="govuk-radios govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell govuk-!-width-full"
+        >
+          Choice C
+        </td>
+        <td
+          class="govuk-table__cell "
+        >
+          <strong
+            class="govuk-tag margin-right--small"
           >
-            <strong
-              class="govuk-tag margin-right--small"
-            >
-              D
-            </strong>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>,
-  "debug": [Function],
-  "findAllByAltText": [Function],
-  "findAllByDisplayValue": [Function],
-  "findAllByLabelText": [Function],
-  "findAllByPlaceholderText": [Function],
-  "findAllByRole": [Function],
-  "findAllByTestId": [Function],
-  "findAllByText": [Function],
-  "findAllByTitle": [Function],
-  "findByAltText": [Function],
-  "findByDisplayValue": [Function],
-  "findByLabelText": [Function],
-  "findByPlaceholderText": [Function],
-  "findByRole": [Function],
-  "findByTestId": [Function],
-  "findByText": [Function],
-  "findByTitle": [Function],
-  "getAllByAltText": [Function],
-  "getAllByDisplayValue": [Function],
-  "getAllByLabelText": [Function],
-  "getAllByPlaceholderText": [Function],
-  "getAllByRole": [Function],
-  "getAllByTestId": [Function],
-  "getAllByText": [Function],
-  "getAllByTitle": [Function],
-  "getByAltText": [Function],
-  "getByDisplayValue": [Function],
-  "getByLabelText": [Function],
-  "getByPlaceholderText": [Function],
-  "getByRole": [Function],
-  "getByTestId": [Function],
-  "getByText": [Function],
-  "getByTitle": [Function],
-  "queryAllByAltText": [Function],
-  "queryAllByDisplayValue": [Function],
-  "queryAllByLabelText": [Function],
-  "queryAllByPlaceholderText": [Function],
-  "queryAllByRole": [Function],
-  "queryAllByTestId": [Function],
-  "queryAllByText": [Function],
-  "queryAllByTitle": [Function],
-  "queryByAltText": [Function],
-  "queryByDisplayValue": [Function],
-  "queryByLabelText": [Function],
-  "queryByPlaceholderText": [Function],
-  "queryByRole": [Function],
-  "queryByTestId": [Function],
-  "queryByText": [Function],
-  "queryByTitle": [Function],
-  "rerender": [Function],
-  "unmount": [Function],
-}
+            C
+          </strong>
+        </td>
+      </tr>
+      <tr
+        class="govuk-radios govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell govuk-!-width-full"
+        >
+          Choice D
+        </td>
+        <td
+          class="govuk-table__cell "
+        >
+          <strong
+            class="govuk-tag margin-right--small"
+          >
+            D
+          </strong>
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+]
+`;
+
+exports[`Entity list component should render with label when passed in props 1`] = `
+Array [
+  <h2
+    class="govuk-heading-m"
+  >
+    Test entity manager
+  </h2>,
+  <table
+    class="govuk-table"
+  >
+    <tbody
+      class="govuk-table__body"
+    >
+      <tr
+        class="govuk-table__row"
+      >
+        <td
+          class="govuk-table__cell"
+        >
+          None
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+]
 `;
 
 exports[`Entity list component should render with remove link when passed in props 1`] = `
-Object {
-  "asFragment": [Function],
-  "baseElement": <body>
-    <div>
-      <table
-        class="govuk-table"
-      >
-        <tbody
-          class="govuk-table__body"
-        >
-          <tr
-            class="govuk-radios govuk-table__row"
-          >
-            <td
-              class="govuk-table__cell govuk-!-width-full"
-            >
-              Choice A
-            </td>
-            <td
-              class="govuk-table__cell"
-            >
-              <a
-                class="govuk-link"
-                href="http://localhost:8080/entity/entity/CHOICE_A/remove"
-              >
-                Remove
-              </a>
-            </td>
-          </tr>
-          <tr
-            class="govuk-radios govuk-table__row"
-          >
-            <td
-              class="govuk-table__cell govuk-!-width-full"
-            >
-              Choice B
-            </td>
-            <td
-              class="govuk-table__cell"
-            >
-              <a
-                class="govuk-link"
-                href="http://localhost:8080/entity/entity/CHOICE_B/remove"
-              >
-                Remove
-              </a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </body>,
-  "container": <div>
-    <table
-      class="govuk-table"
+<table
+  class="govuk-table"
+>
+  <tbody
+    class="govuk-table__body"
+  >
+    <tr
+      class="govuk-radios govuk-table__row"
     >
-      <tbody
-        class="govuk-table__body"
+      <td
+        class="govuk-table__cell govuk-!-width-full"
       >
-        <tr
-          class="govuk-radios govuk-table__row"
+        Choice A
+      </td>
+      <td
+        class="govuk-table__cell"
+      >
+        <a
+          class="govuk-link"
+          href="http://localhost:8080/entity/entity/CHOICE_A/remove"
         >
-          <td
-            class="govuk-table__cell govuk-!-width-full"
-          >
-            Choice A
-          </td>
-          <td
-            class="govuk-table__cell"
-          >
-            <a
-              class="govuk-link"
-              href="http://localhost:8080/entity/entity/CHOICE_A/remove"
-            >
-              Remove
-            </a>
-          </td>
-        </tr>
-        <tr
-          class="govuk-radios govuk-table__row"
+          Remove
+        </a>
+      </td>
+    </tr>
+    <tr
+      class="govuk-radios govuk-table__row"
+    >
+      <td
+        class="govuk-table__cell govuk-!-width-full"
+      >
+        Choice B
+      </td>
+      <td
+        class="govuk-table__cell"
+      >
+        <a
+          class="govuk-link"
+          href="http://localhost:8080/entity/entity/CHOICE_B/remove"
         >
-          <td
-            class="govuk-table__cell govuk-!-width-full"
-          >
-            Choice B
-          </td>
-          <td
-            class="govuk-table__cell"
-          >
-            <a
-              class="govuk-link"
-              href="http://localhost:8080/entity/entity/CHOICE_B/remove"
-            >
-              Remove
-            </a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>,
-  "debug": [Function],
-  "findAllByAltText": [Function],
-  "findAllByDisplayValue": [Function],
-  "findAllByLabelText": [Function],
-  "findAllByPlaceholderText": [Function],
-  "findAllByRole": [Function],
-  "findAllByTestId": [Function],
-  "findAllByText": [Function],
-  "findAllByTitle": [Function],
-  "findByAltText": [Function],
-  "findByDisplayValue": [Function],
-  "findByLabelText": [Function],
-  "findByPlaceholderText": [Function],
-  "findByRole": [Function],
-  "findByTestId": [Function],
-  "findByText": [Function],
-  "findByTitle": [Function],
-  "getAllByAltText": [Function],
-  "getAllByDisplayValue": [Function],
-  "getAllByLabelText": [Function],
-  "getAllByPlaceholderText": [Function],
-  "getAllByRole": [Function],
-  "getAllByTestId": [Function],
-  "getAllByText": [Function],
-  "getAllByTitle": [Function],
-  "getByAltText": [Function],
-  "getByDisplayValue": [Function],
-  "getByLabelText": [Function],
-  "getByPlaceholderText": [Function],
-  "getByRole": [Function],
-  "getByTestId": [Function],
-  "getByText": [Function],
-  "getByTitle": [Function],
-  "queryAllByAltText": [Function],
-  "queryAllByDisplayValue": [Function],
-  "queryAllByLabelText": [Function],
-  "queryAllByPlaceholderText": [Function],
-  "queryAllByRole": [Function],
-  "queryAllByTestId": [Function],
-  "queryAllByText": [Function],
-  "queryAllByTitle": [Function],
-  "queryByAltText": [Function],
-  "queryByDisplayValue": [Function],
-  "queryByLabelText": [Function],
-  "queryByPlaceholderText": [Function],
-  "queryByRole": [Function],
-  "queryByTestId": [Function],
-  "queryByText": [Function],
-  "queryByTitle": [Function],
-  "rerender": [Function],
-  "unmount": [Function],
-}
+          Remove
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
 `;
 
 exports[`Entity list component should render with tags when passed in props on choice entries 1`] = `
-Object {
-  "asFragment": [Function],
-  "baseElement": <body>
-    <div>
-      <table
-        class="govuk-table"
-      >
-        <tbody
-          class="govuk-table__body"
-        >
-          <tr
-            class="govuk-radios govuk-table__row"
-          >
-            <td
-              class="govuk-table__cell govuk-!-width-full"
-            >
-              Choice A
-            </td>
-            <td
-              class="govuk-table__cell "
-            >
-              <strong
-                class="govuk-tag margin-right--small"
-              >
-                A
-              </strong>
-            </td>
-          </tr>
-          <tr
-            class="govuk-radios govuk-table__row"
-          >
-            <td
-              class="govuk-table__cell govuk-!-width-full"
-            >
-              Choice B
-            </td>
-            <td
-              class="govuk-table__cell "
-            >
-              <strong
-                class="govuk-tag margin-right--small"
-              >
-                B
-              </strong>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </body>,
-  "container": <div>
-    <table
-      class="govuk-table"
+<table
+  class="govuk-table"
+>
+  <tbody
+    class="govuk-table__body"
+  >
+    <tr
+      class="govuk-radios govuk-table__row"
     >
-      <tbody
-        class="govuk-table__body"
+      <td
+        class="govuk-table__cell govuk-!-width-full"
       >
-        <tr
-          class="govuk-radios govuk-table__row"
+        Choice A
+      </td>
+      <td
+        class="govuk-table__cell "
+      >
+        <strong
+          class="govuk-tag margin-right--small"
         >
-          <td
-            class="govuk-table__cell govuk-!-width-full"
-          >
-            Choice A
-          </td>
-          <td
-            class="govuk-table__cell "
-          >
-            <strong
-              class="govuk-tag margin-right--small"
-            >
-              A
-            </strong>
-          </td>
-        </tr>
-        <tr
-          class="govuk-radios govuk-table__row"
+          A
+        </strong>
+      </td>
+    </tr>
+    <tr
+      class="govuk-radios govuk-table__row"
+    >
+      <td
+        class="govuk-table__cell govuk-!-width-full"
+      >
+        Choice B
+      </td>
+      <td
+        class="govuk-table__cell "
+      >
+        <strong
+          class="govuk-tag margin-right--small"
         >
-          <td
-            class="govuk-table__cell govuk-!-width-full"
-          >
-            Choice B
-          </td>
-          <td
-            class="govuk-table__cell "
-          >
-            <strong
-              class="govuk-tag margin-right--small"
-            >
-              B
-            </strong>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>,
-  "debug": [Function],
-  "findAllByAltText": [Function],
-  "findAllByDisplayValue": [Function],
-  "findAllByLabelText": [Function],
-  "findAllByPlaceholderText": [Function],
-  "findAllByRole": [Function],
-  "findAllByTestId": [Function],
-  "findAllByText": [Function],
-  "findAllByTitle": [Function],
-  "findByAltText": [Function],
-  "findByDisplayValue": [Function],
-  "findByLabelText": [Function],
-  "findByPlaceholderText": [Function],
-  "findByRole": [Function],
-  "findByTestId": [Function],
-  "findByText": [Function],
-  "findByTitle": [Function],
-  "getAllByAltText": [Function],
-  "getAllByDisplayValue": [Function],
-  "getAllByLabelText": [Function],
-  "getAllByPlaceholderText": [Function],
-  "getAllByRole": [Function],
-  "getAllByTestId": [Function],
-  "getAllByText": [Function],
-  "getAllByTitle": [Function],
-  "getByAltText": [Function],
-  "getByDisplayValue": [Function],
-  "getByLabelText": [Function],
-  "getByPlaceholderText": [Function],
-  "getByRole": [Function],
-  "getByTestId": [Function],
-  "getByText": [Function],
-  "getByTitle": [Function],
-  "queryAllByAltText": [Function],
-  "queryAllByDisplayValue": [Function],
-  "queryAllByLabelText": [Function],
-  "queryAllByPlaceholderText": [Function],
-  "queryAllByRole": [Function],
-  "queryAllByTestId": [Function],
-  "queryAllByText": [Function],
-  "queryAllByTitle": [Function],
-  "queryByAltText": [Function],
-  "queryByDisplayValue": [Function],
-  "queryByLabelText": [Function],
-  "queryByPlaceholderText": [Function],
-  "queryByRole": [Function],
-  "queryByTestId": [Function],
-  "queryByText": [Function],
-  "queryByTitle": [Function],
-  "rerender": [Function],
-  "unmount": [Function],
-}
+          B
+        </strong>
+      </td>
+    </tr>
+  </tbody>
+</table>
 `;

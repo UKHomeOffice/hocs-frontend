@@ -2,8 +2,6 @@ import { ApplicationProvider } from '../../../contexts/application';
 import { MemoryRouter } from 'react-router-dom';
 import Extensions from '../extensions';
 import React from 'react';
-import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react';
 
 
 const page = {
@@ -109,7 +107,6 @@ describe('Extensions Component', function () {
                 </MemoryRouter>
             </ApplicationProvider>
         )).toMatchSnapshot();
-        expect(screen.getByText('Extend this case')).toBeInTheDocument();
 
         Date.now = originalNowFunc;
     });
@@ -154,7 +151,6 @@ describe('Extensions Component', function () {
                 </MemoryRouter>
             </ApplicationProvider>
         )).toMatchSnapshot();
-        expect(screen.getByText('No further extensions can be applied to this case.')).toBeInTheDocument();
 
         Date.now = originalNowFunc;
     });

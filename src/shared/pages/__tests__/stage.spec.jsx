@@ -1,36 +1,49 @@
 import React from 'react';
 import Stage from '../stage.jsx';
-import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react';
 
 jest.mock('../form-enabled.jsx', () => (
     (C) => C
 ));
 
-jest.mock('../../common/components/document-panel.jsx', () => (
+jest.mock('../../common/components/document-pane.jsx', () => (
     'div'
 ));
 
 describe('Stage page component', () => {
 
-    test('should render with titles when passed in props', () => {
-        const mockForm = { caseReference: 'ABC123' };
-        const wrapper = render(<Stage title='MY_TITLE' form={mockForm} hasSidebar='false' />);
+    it('should render with default props', () => {
+        const wrapper = shallow(<Stage/>);
         expect(wrapper).toBeDefined();
-        expect(screen.getByText('MY_TITLE')).toBeInTheDocument();
-        expect(screen.getByText('ABC123')).toBeInTheDocument();
+        expect(wrapper).toMatchSnapshot();
     });
 
-    test('should render children when passed', () => {
-        const child =
-            <Stage hasSidebar='false'>
-                FORM
-            </Stage>;
-        // eslint-disable-next-line react/no-children-prop
-        const wrapper = render(<Stage title='MY_TITLE' hasSidebar='false' children={child} />);
-
+    it('should render with title when passed in props', () => {
+        const wrapper = shallow(<Stage title='MY_TITLE'/>);
         expect(wrapper).toBeDefined();
-        expect(screen.getByText('FORM')).toBeInTheDocument();
+        expect(wrapper).toMatchSnapshot();
+    });
+
+    it('should render with subTitle when passed in props', () => {
+        const mockForm = { caseReference: 'ABC123' };
+        const wrapper = shallow(<Stage form={mockForm}/>);
+        expect(wrapper).toBeDefined();
+        expect(wrapper).toMatchSnapshot();
+    });
+
+    it('should render without sidebar when passed in props', () => {
+        const wrapper = shallow(<Stage hasSidebar='false'/>);
+        expect(wrapper).toBeDefined();
+        expect(wrapper).toMatchSnapshot();
+    });
+
+    it('should render children when passed', () => {
+        const wrapper = shallow(
+            <Stage>
+                FORM
+            </Stage>
+        );
+        expect(wrapper).toBeDefined();
+        expect(wrapper).toMatchSnapshot();
     });
 
 });

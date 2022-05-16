@@ -1,7 +1,5 @@
 import React from 'react';
 import Action from '../action.jsx';
-import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react';
 
 jest.mock('../form-enabled.jsx', () => (
     (C) => C
@@ -12,19 +10,19 @@ describe('Action page component', () => {
     it('should render with default props', () => {
         const wrapper = render(<Action />);
         expect(wrapper).toBeDefined();
+        expect(wrapper).toMatchSnapshot();
     });
 
     it('should render with title when passed in props', () => {
         const wrapper = render(<Action title='MY_TITLE' />);
         expect(wrapper).toBeDefined();
-        expect(screen.getByText('MY_TITLE')).toBeInTheDocument();
+        expect(wrapper).toMatchSnapshot();
     });
 
     it('should render with subTitle when passed in props', () => {
-        const wrapper = render(<Action title='MY_TITLE' subTitle='MY_SUBTITLE' />);
+        const wrapper = render(<Action subTitle='MY_SUBTITLE' />);
         expect(wrapper).toBeDefined();
-        expect(screen.getByText('MY_TITLE')).toBeInTheDocument();
-        expect(screen.getByText('MY_SUBTITLE')).toBeInTheDocument();
+        expect(wrapper).toMatchSnapshot();
     });
 
     it('should render children when passed', () => {
@@ -34,7 +32,7 @@ describe('Action page component', () => {
             </Action>
         );
         expect(wrapper).toBeDefined();
-        expect(screen.getByText('FORM')).toBeInTheDocument();
+        expect(wrapper).toMatchSnapshot();
     });
 
 });

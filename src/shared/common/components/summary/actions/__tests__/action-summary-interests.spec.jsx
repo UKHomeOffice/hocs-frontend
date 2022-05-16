@@ -1,7 +1,5 @@
 import React from 'react';
 import ActionSummaryInterests from '../action-summary-interests';
-import '@testing-library/jest-dom';
-import { render } from '@testing-library/react';
 
 describe('action-summary-interests.jsx', () => {
 

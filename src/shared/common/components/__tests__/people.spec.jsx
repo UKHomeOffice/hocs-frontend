@@ -1,9 +1,6 @@
 import React from 'react';
-import People from '../people.jsx';
+import WrappedPeople from '../people.jsx';
 import { MemoryRouter } from 'react-router-dom';
-import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react';
-import { ApplicationProvider } from '../../../contexts/application';
 
 const correspondents = [
     {
@@ -72,7 +69,7 @@ const correspondents = [
         'type': 'APPLICANT',
         'typeDisplayName': 'Applicant Test Case',
         'caseUUID': 'CASE_UUID_4',
-        'fullname': 'my name again',
+        'fullname': 'my name',
         'organisation': 'Organisation 4',
         'address': {
             'postcode': 'ZR1 3PL',
@@ -93,7 +90,7 @@ const correspondents = [
         'type': 'APPLICANT',
         'typeDisplayName': 'Applicant Test Case',
         'caseUUID': 'CASE_UUID_5',
-        'fullname': 'my name applicant',
+        'fullname': 'my name',
         'organisation': 'Organisation 5',
         'address': {
             'postcode': 'ZR1 3PL',
@@ -112,67 +109,40 @@ const correspondents = [
 
 const emptyCorrespondents = [null];
 
+const page = {
+    params: {
+        caseId: 'some_case_id',
+        stageId: 'some_stage_id',
+    }
+};
+
 describe('The people component', () => {
 
-
-    const page = {
-        params: {
-            caseId: 'some_case_id',
-            stageId: 'some_stage_id',
-        }
-    };
-
-    const MOCK_CONFIG = {
-        page
-    };
-
-    const mockDispatch = jest.fn(() => Promise.resolve());
-
-    test('should render successfully with 5 correspondent\'s', () => {
-
-        const defaultProps = {
-            summary: {
-                type: 'default'
-            },
-            page: page,
-            config: MOCK_CONFIG,
-            dispatch: mockDispatch,
-            correspondents: correspondents
-        };
-
-        const wrapper = render(
-            <ApplicationProvider config={{ ...MOCK_CONFIG, ...defaultProps }}>
-                <MemoryRouter>
-                    <People />
-                </MemoryRouter>
-            </ApplicationProvider>
+    it('should render successfully with 5 correspondent\'s', () => {
+        const outer = shallow(<WrappedPeople/>);
+        const People = outer.props().children;
+        const wrapper = mount(
+            <MemoryRouter>
+                <People dispatch={jest.fn(() => Promise.resolve())} correspondents={correspondents} page={page}/>
+            </MemoryRouter>
         );
         expect(wrapper).toBeDefined();
-        expect(screen.getByText('some_name')).toBeInTheDocument();
-        expect(screen.getByText('fname lname')).toBeInTheDocument();
-        expect(screen.getByText('my name')).toBeInTheDocument();
-        expect(screen.getByText('my name again')).toBeInTheDocument();
-        expect(screen.getByText('my name applicant')).toBeInTheDocument();
+        expect(wrapper.find('People').props().correspondents).toBeDefined();
+        expect(wrapper.find('People').props().page).toBeDefined();
+        expect(wrapper.find('People').props().dispatch).toBeDefined();
     });
 
-    test('should render successfully when there are no correspondents', () => {
-        const defaultProps = {
-            summary: {
-                type: 'default'
-            },
-            page: page,
-            config: MOCK_CONFIG,
-            dispatch: mockDispatch,
-            correspondents: emptyCorrespondents
-        };
-
-        const wrapper = render(
-            <ApplicationProvider config={{ ...MOCK_CONFIG, ...defaultProps }}>
-                <MemoryRouter>
-                    <People />
-                </MemoryRouter>
-            </ApplicationProvider>
+    it('should render successfully when there are no correspondents', () => {
+        const outer = shallow(<WrappedPeople />);
+        const People = outer.props().children;
+        const wrapper = mount(
+            <MemoryRouter>
+                <People dispatch={jest.fn(() => Promise.resolve())} correspondents={emptyCorrespondents} page={page} />
+            </MemoryRouter>
         );
         expect(wrapper).toBeDefined();
+        expect(wrapper.find('People').props().correspondents).toBeDefined();
+        expect(wrapper.find('People').props().page).toBeDefined();
+        expect(wrapper.find('People').props().dispatch).toBeDefined();
     });
 });

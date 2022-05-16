@@ -1,8 +1,6 @@
 import React from 'react';
 import Backlink from '../backlink';
 import { MemoryRouter } from 'react-router-dom';
-import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react';
 
 describe('Form backlink component', () => {
 
@@ -13,26 +11,46 @@ describe('Form backlink component', () => {
     });
 
     it('should render with default props', () => {
-        const wrapper = render(
-            <Backlink action="/SOME/URL" />,
-            { wrapper: MemoryRouter }
+        const wrapper = mount(
+            <MemoryRouter>
+                <Backlink action="/SOME/URL" />
+            </MemoryRouter>
         );
         expect(wrapper).toBeDefined();
+        expect(wrapper.find('BackLink')).toMatchSnapshot();
     });
 
     it('should render disabled when isDisabled is passed', () => {
-        render(
-            <Backlink action="/SOME/URL" disabled={true} />,
-            { wrapper: MemoryRouter }
+        const wrapper = mount(
+            <MemoryRouter>
+                <Backlink disabled={true} action="/SOME/URL" />
+            </MemoryRouter>
         );
-        expect(screen.getByRole('link')).toHaveAttribute('disabled');
+        expect(wrapper).toBeDefined();
+        expect(wrapper.find('BackLink')).toMatchSnapshot();
+        expect(wrapper.find('Link').props().disabled).toEqual(true);
     });
 
     it('should render with correct label when passed', () => {
-        render(
-            <Backlink label='MY_LABEL' action="/SOME/URL" />,
-            { wrapper: MemoryRouter }
+        const wrapper = mount(
+            <MemoryRouter>
+                <Backlink label='MY_LABEL' action="/SOME/URL" />
+            </MemoryRouter>
         );
-        expect(screen.getByText('MY_LABEL')).toBeInTheDocument();
+        expect(wrapper).toBeDefined();
+        expect(wrapper.find('BackLink')).toMatchSnapshot();
+        expect(wrapper.find('Link').props().children).toEqual('MY_LABEL');
     });
+
+    it('should render with additional styles when className is passed', () => {
+        const wrapper = mount(
+            <MemoryRouter>
+                <Backlink className='test-class' action="/SOME/URL" />
+            </MemoryRouter>
+        );
+        expect(wrapper).toBeDefined();
+        expect(wrapper.find('BackLink')).toMatchSnapshot();
+        expect(wrapper.find('Link').props().className).toEqual('govuk-back-link test-class');
+    });
+
 });

@@ -2,8 +2,6 @@ import { ApplicationProvider } from '../../../contexts/application';
 import { MemoryRouter } from 'react-router-dom';
 import React from 'react';
 import ExternalInterests from '../external-interest';
-import '@testing-library/jest-dom';
-import { render } from '@testing-library/react';
 
 const page = {
     params: {

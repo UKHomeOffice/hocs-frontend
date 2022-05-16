@@ -1,0 +1,235 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Form text component should render className when passed 1`] = `
+<div
+  class="govuk-form-group myClass"
+>
+  <label
+    class="govuk-label govuk-label--s"
+    for="text-field"
+    id="text-field-label"
+  />
+  <div>
+    <input
+      class="govuk-input"
+      id="text-field"
+      maxlength="4000"
+      name="text-field"
+      type="text"
+      value=""
+    />
+  </div>
+</div>
+`;
+
+exports[`Form text component should render disabled when passed 1`] = `
+<div
+  class="govuk-form-group "
+>
+  <label
+    class="govuk-label govuk-label--s"
+    for="text-field"
+    id="text-field-label"
+  />
+  <div>
+    <input
+      class="govuk-input"
+      disabled=""
+      id="text-field"
+      maxlength="4000"
+      name="text-field"
+      type="text"
+      value=""
+    />
+  </div>
+</div>
+`;
+
+exports[`Form text component should render limit when passed 1`] = `
+<div
+  class="govuk-form-group "
+>
+  <label
+    class="govuk-label govuk-label--s"
+    for="text-field"
+    id="text-field-label"
+  />
+  <div>
+    <input
+      class="govuk-input"
+      id="text-field"
+      maxlength="2000"
+      name="text-field"
+      type="text"
+      value=""
+    />
+  </div>
+</div>
+`;
+
+exports[`Form text component should render of type when passed 1`] = `
+<div
+  class="govuk-form-group "
+>
+  <label
+    class="govuk-label govuk-label--s"
+    for="text-field"
+    id="text-field-label"
+  />
+  <div>
+    <input
+      class="govuk-input"
+      id="text-field"
+      maxlength="4000"
+      name="text-field"
+      type="password"
+      value=""
+    />
+  </div>
+</div>
+`;
+
+exports[`Form text component should render with default props 1`] = `
+<div
+  class="govuk-form-group "
+>
+  <label
+    class="govuk-label govuk-label--s"
+    for="text-field"
+    id="text-field-label"
+  />
+  <div>
+    <input
+      class="govuk-input"
+      id="text-field"
+      maxlength="4000"
+      name="text-field"
+      type="text"
+      value=""
+    />
+  </div>
+</div>
+`;
+
+exports[`Form text component should render with error when passed 1`] = `
+<div
+  class="govuk-form-group govuk-form-group--error "
+>
+  <label
+    class="govuk-label govuk-label--s"
+    for="text-field"
+    id="text-field-label"
+  />
+  <span
+    class="govuk-error-message"
+    id="text-field-error"
+  >
+    Some error message
+  </span>
+  <div>
+    <input
+      class="govuk-input govuk-input--error"
+      id="text-field"
+      maxlength="4000"
+      name="text-field"
+      type="text"
+      value=""
+    />
+  </div>
+</div>
+`;
+
+exports[`Form text component should render with hint when passed 1`] = `
+<div
+  class="govuk-form-group "
+>
+  <label
+    class="govuk-label govuk-label--s"
+    for="text-field"
+    id="text-field-label"
+  />
+  <span
+    class="govuk-hint"
+  >
+    Put some text in the box below
+  </span>
+  <div>
+    <input
+      class="govuk-input"
+      id="text-field"
+      maxlength="4000"
+      name="text-field"
+      type="text"
+      value=""
+    />
+  </div>
+</div>
+`;
+
+exports[`Form text component should render with label when passed 1`] = `
+<div
+  class="govuk-form-group "
+>
+  <label
+    class="govuk-label govuk-label--s"
+    for="text-field"
+    id="text-field-label"
+  >
+    My text field
+  </label>
+  <div>
+    <input
+      class="govuk-input"
+      id="text-field"
+      maxlength="4000"
+      name="text-field"
+      type="text"
+      value=""
+    />
+  </div>
+</div>
+`;
+
+exports[`Form text component should render with the element class name when passed 1`] = `
+<div
+  class="govuk-form-group "
+>
+  <label
+    class="govuk-label govuk-label--s"
+    for="text-field"
+    id="text-field-label"
+  />
+  <div>
+    <input
+      class="govuk-input __classname__"
+      id="text-field"
+      maxlength="4000"
+      name="text-field"
+      type="text"
+      value=""
+    />
+  </div>
+</div>
+`;
+
+exports[`Form text component should render with value when passed 1`] = `
+<div
+  class="govuk-form-group "
+>
+  <label
+    class="govuk-label govuk-label--s"
+    for="text-field"
+    id="text-field-label"
+  />
+  <div>
+    <input
+      class="govuk-input"
+      id="text-field"
+      maxlength="4000"
+      name="text-field"
+      type="text"
+      value="field value"
+    />
+  </div>
+</div>
+`;
