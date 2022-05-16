@@ -1,32 +1,49 @@
 import React from 'react';
-import Layout from '../layout.jsx';
+import Layout from '../layout';
+import '@testing-library/jest-dom';
+import { render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
+import { ApplicationProvider } from '../../contexts/application';
 
-jest.mock('react-router-dom', () => {
-    return {
-        Link: () => jest.fn()
-    };
-});
+
+const page = {
+    params: {
+        caseId: 'some_case_id',
+        stageId: 'some_stage_id',
+    }
+};
+
+const MOCK_CONFIG = {
+    page
+};
 
 describe('Page layout component', () => {
-
-    const mockDispatch = jest.fn();
     const mockLayout = {
-        header: {},
-        body: {},
+        header: null,
+        body: null,
         footer: {}
     };
 
-    beforeEach(() => {
-        mockDispatch.mockReset();
-    });
-
     it('should render the footer when provided', () => {
         const mockLayoutWithFooter = { ...mockLayout, footer: { isVisible: true } };
-        const outer = shallow(<Layout />);
-        const Children = outer.props().children;
-        const wrapper = mount(<Children dispatch={mockDispatch} layout={mockLayoutWithFooter} />);
-        expect(wrapper).toBeDefined();
-        expect(wrapper.find('Footer')).toHaveLength(1);
-    });
+        const defaultProps = {
+            summary: {
+                type: 'default'
+            },
+            page: page,
+            layout: mockLayoutWithFooter,
+            config: MOCK_CONFIG
+        };
 
+        const wrapper = render(
+            <ApplicationProvider config={{ ...MOCK_CONFIG, ...defaultProps }}>
+                <MemoryRouter>
+                    <Layout />
+                </MemoryRouter>
+            </ApplicationProvider>
+        );
+
+        expect(wrapper).toBeDefined();
+        expect(screen.getByText('© Crown copyright')).toBeInTheDocument();
+    });
 });

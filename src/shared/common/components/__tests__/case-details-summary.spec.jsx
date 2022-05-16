@@ -1,5 +1,7 @@
 import React from 'react';
 import CaseDetailsSummary from '../case-details-summary';
+import '@testing-library/jest-dom';
+import { render } from '@testing-library/react';
 
 const mockStages = {
     uuid: 'CASE_UUID',

@@ -1,523 +1,1257 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Form component should not render empty fields when passed 1`] = `
-Array [
-  <h2
-    class="govuk-heading-m"
-  >
-    Ex-Gratia
-  </h2>,
-  <details
-    class="govuk-details"
-  >
-    <summary
-      class="govuk-details__summary"
-    >
-      <span
-        class="govuk-details__summary-text"
+exports[`Ex-Gratia tab component should not render empty fields when passed 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <h2
+        class="govuk-heading-m"
       >
-        Update Ex-Gratia details
-      </span>
-    </summary>
-  </details>,
-  <table
-    class="govuk-table margin-left--small"
-  >
-    <caption
-      class="govuk-table__caption margin-bottom--small"
-    >
-      Summary
-    </caption>
-    <tbody
-      class="govuk-table__body"
-    >
-      <tr
-        class="govuk-table__cell"
+        Ex-Gratia
+      </h2>
+      <details
+        class="govuk-details"
       >
-        <th
-          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        <summary
+          class="govuk-details__summary"
         >
-          Consolatory payment type
-        </th>
-        <td
+          <span
+            class="govuk-details__summary-text"
+          >
+            Update Ex-Gratia details
+          </span>
+        </summary>
+      </details>
+      <table
+        class="govuk-table margin-left--small"
+      >
+        <caption
+          class="govuk-table__caption margin-bottom--small"
+        >
+          Summary
+        </caption>
+        <tbody
+          class="govuk-table__body"
+        >
+          <tr
+            class="govuk-table__cell"
+          >
+            <th
+              class="govuk-table__header padding-left--small govuk-!-width-one-third"
+            >
+              Consolatory payment type
+            </th>
+            <td
+              class="govuk-table__cell"
+            >
+              Yes
+            </td>
+          </tr>
+          <tr
+            class="govuk-table__cell"
+          >
+            <th
+              class="govuk-table__header padding-left--small govuk-!-width-one-third"
+            >
+              Ex-Gratia payment type
+            </th>
+            <td
+              class="govuk-table__cell"
+            >
+              Yes
+            </td>
+          </tr>
+          <tr
+            class="govuk-table__cell"
+          >
+            <th
+              class="govuk-table__header padding-left--small govuk-!-width-one-third"
+            >
+              Complainant has accepted:
+            </th>
+            <td
+              class="govuk-table__cell"
+            >
+              No
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>,
+  "container": <div>
+    <h2
+      class="govuk-heading-m"
+    >
+      Ex-Gratia
+    </h2>
+    <details
+      class="govuk-details"
+    >
+      <summary
+        class="govuk-details__summary"
+      >
+        <span
+          class="govuk-details__summary-text"
+        >
+          Update Ex-Gratia details
+        </span>
+      </summary>
+    </details>
+    <table
+      class="govuk-table margin-left--small"
+    >
+      <caption
+        class="govuk-table__caption margin-bottom--small"
+      >
+        Summary
+      </caption>
+      <tbody
+        class="govuk-table__body"
+      >
+        <tr
           class="govuk-table__cell"
         >
-          Yes
-        </td>
-      </tr>
-      <tr
-        class="govuk-table__cell"
-      >
-        <th
-          class="govuk-table__header padding-left--small govuk-!-width-one-third"
-        >
-          Ex-Gratia payment type
-        </th>
-        <td
+          <th
+            class="govuk-table__header padding-left--small govuk-!-width-one-third"
+          >
+            Consolatory payment type
+          </th>
+          <td
+            class="govuk-table__cell"
+          >
+            Yes
+          </td>
+        </tr>
+        <tr
           class="govuk-table__cell"
         >
-          Yes
-        </td>
-      </tr>
-      <tr
-        class="govuk-table__cell"
-      >
-        <th
-          class="govuk-table__header padding-left--small govuk-!-width-one-third"
-        >
-          Complainant has accepted:
-        </th>
-        <td
+          <th
+            class="govuk-table__header padding-left--small govuk-!-width-one-third"
+          >
+            Ex-Gratia payment type
+          </th>
+          <td
+            class="govuk-table__cell"
+          >
+            Yes
+          </td>
+        </tr>
+        <tr
           class="govuk-table__cell"
         >
-          No
-        </td>
-      </tr>
-    </tbody>
-  </table>,
-]
+          <th
+            class="govuk-table__header padding-left--small govuk-!-width-one-third"
+          >
+            Complainant has accepted:
+          </th>
+          <td
+            class="govuk-table__cell"
+          >
+            No
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;
 
-exports[`Form component should render EX_GRATIA_TAB_CLOSED, when has empty stages 1`] = `
-Array [
-  <h2
-    class="govuk-heading-m"
-  >
-    Ex-Gratia
-  </h2>,
-  <details
-    class="govuk-details"
-  >
-    <summary
-      class="govuk-details__summary"
+exports[`Ex-Gratia tab component should render EX_GRATIA_TAB_CLOSED, when has empty stages 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <h2
+        class="govuk-heading-m"
+      >
+        Ex-Gratia
+      </h2>
+      <details
+        class="govuk-details"
+      >
+        <summary
+          class="govuk-details__summary"
+        >
+          <span
+            class="govuk-details__summary-text"
+          >
+            Update Ex-Gratia details
+          </span>
+        </summary>
+      </details>
+      <table
+        class="govuk-table margin-left--small"
+      >
+        <caption
+          class="govuk-table__caption margin-bottom--small"
+        >
+          Summary
+        </caption>
+        <tbody
+          class="govuk-table__body"
+        >
+          <tr
+            class="govuk-table__cell"
+          >
+            <th
+              class="govuk-table__header padding-left--small govuk-!-width-one-third"
+            >
+              Consolatory payment type
+            </th>
+            <td
+              class="govuk-table__cell"
+            >
+              Yes
+            </td>
+          </tr>
+          <tr
+            class="govuk-table__cell"
+          >
+            <th
+              class="govuk-table__header padding-left--small govuk-!-width-one-third"
+            >
+              Ex-Gratia payment type
+            </th>
+            <td
+              class="govuk-table__cell"
+            >
+              Yes
+            </td>
+          </tr>
+          <tr
+            class="govuk-table__cell"
+          >
+            <th
+              class="govuk-table__header padding-left--small govuk-!-width-one-third"
+            >
+              Amount requested by complainant:
+            </th>
+            <td
+              class="govuk-table__cell"
+            >
+              100
+            </td>
+          </tr>
+          <tr
+            class="govuk-table__cell"
+          >
+            <th
+              class="govuk-table__header padding-left--small govuk-!-width-one-third"
+            >
+              Amount requested from business/port:
+            </th>
+            <td
+              class="govuk-table__cell"
+            >
+              50
+            </td>
+          </tr>
+          <tr
+            class="govuk-table__cell"
+          >
+            <th
+              class="govuk-table__header padding-left--small govuk-!-width-one-third"
+            >
+              Consolatory payment offer sent to the complainant:
+            </th>
+            <td
+              class="govuk-table__cell"
+            >
+              50
+            </td>
+          </tr>
+          <tr
+            class="govuk-table__cell"
+          >
+            <th
+              class="govuk-table__header padding-left--small govuk-!-width-one-third"
+            >
+              Ex-Gratia payment offer sent to the complainant:
+            </th>
+            <td
+              class="govuk-table__cell"
+            >
+              50
+            </td>
+          </tr>
+          <tr
+            class="govuk-table__cell"
+          >
+            <th
+              class="govuk-table__header padding-left--small govuk-!-width-one-third"
+            >
+              Total payment offer sent to the complainant:
+            </th>
+            <td
+              class="govuk-table__cell"
+            >
+              100
+            </td>
+          </tr>
+          <tr
+            class="govuk-table__cell"
+          >
+            <th
+              class="govuk-table__header padding-left--small govuk-!-width-one-third"
+            >
+              Complainant has accepted:
+            </th>
+            <td
+              class="govuk-table__cell"
+            >
+              No
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>,
+  "container": <div>
+    <h2
+      class="govuk-heading-m"
     >
-      <span
-        class="govuk-details__summary-text"
-      >
-        Update Ex-Gratia details
-      </span>
-    </summary>
-  </details>,
-  <table
-    class="govuk-table margin-left--small"
-  >
-    <caption
-      class="govuk-table__caption margin-bottom--small"
+      Ex-Gratia
+    </h2>
+    <details
+      class="govuk-details"
     >
-      Summary
-    </caption>
-    <tbody
-      class="govuk-table__body"
+      <summary
+        class="govuk-details__summary"
+      >
+        <span
+          class="govuk-details__summary-text"
+        >
+          Update Ex-Gratia details
+        </span>
+      </summary>
+    </details>
+    <table
+      class="govuk-table margin-left--small"
     >
-      <tr
-        class="govuk-table__cell"
+      <caption
+        class="govuk-table__caption margin-bottom--small"
       >
-        <th
-          class="govuk-table__header padding-left--small govuk-!-width-one-third"
-        >
-          Consolatory payment type
-        </th>
-        <td
+        Summary
+      </caption>
+      <tbody
+        class="govuk-table__body"
+      >
+        <tr
           class="govuk-table__cell"
         >
-          Yes
-        </td>
-      </tr>
-      <tr
-        class="govuk-table__cell"
-      >
-        <th
-          class="govuk-table__header padding-left--small govuk-!-width-one-third"
-        >
-          Ex-Gratia payment type
-        </th>
-        <td
+          <th
+            class="govuk-table__header padding-left--small govuk-!-width-one-third"
+          >
+            Consolatory payment type
+          </th>
+          <td
+            class="govuk-table__cell"
+          >
+            Yes
+          </td>
+        </tr>
+        <tr
           class="govuk-table__cell"
         >
-          Yes
-        </td>
-      </tr>
-      <tr
-        class="govuk-table__cell"
-      >
-        <th
-          class="govuk-table__header padding-left--small govuk-!-width-one-third"
-        >
-          Amount requested by complainant:
-        </th>
-        <td
+          <th
+            class="govuk-table__header padding-left--small govuk-!-width-one-third"
+          >
+            Ex-Gratia payment type
+          </th>
+          <td
+            class="govuk-table__cell"
+          >
+            Yes
+          </td>
+        </tr>
+        <tr
           class="govuk-table__cell"
         >
-          100
-        </td>
-      </tr>
-      <tr
-        class="govuk-table__cell"
-      >
-        <th
-          class="govuk-table__header padding-left--small govuk-!-width-one-third"
-        >
-          Amount requested from business/port:
-        </th>
-        <td
+          <th
+            class="govuk-table__header padding-left--small govuk-!-width-one-third"
+          >
+            Amount requested by complainant:
+          </th>
+          <td
+            class="govuk-table__cell"
+          >
+            100
+          </td>
+        </tr>
+        <tr
           class="govuk-table__cell"
         >
-          50
-        </td>
-      </tr>
-      <tr
-        class="govuk-table__cell"
-      >
-        <th
-          class="govuk-table__header padding-left--small govuk-!-width-one-third"
-        >
-          Consolatory payment offer sent to the complainant:
-        </th>
-        <td
+          <th
+            class="govuk-table__header padding-left--small govuk-!-width-one-third"
+          >
+            Amount requested from business/port:
+          </th>
+          <td
+            class="govuk-table__cell"
+          >
+            50
+          </td>
+        </tr>
+        <tr
           class="govuk-table__cell"
         >
-          50
-        </td>
-      </tr>
-      <tr
-        class="govuk-table__cell"
-      >
-        <th
-          class="govuk-table__header padding-left--small govuk-!-width-one-third"
-        >
-          Ex-Gratia payment offer sent to the complainant:
-        </th>
-        <td
+          <th
+            class="govuk-table__header padding-left--small govuk-!-width-one-third"
+          >
+            Consolatory payment offer sent to the complainant:
+          </th>
+          <td
+            class="govuk-table__cell"
+          >
+            50
+          </td>
+        </tr>
+        <tr
           class="govuk-table__cell"
         >
-          50
-        </td>
-      </tr>
-      <tr
-        class="govuk-table__cell"
-      >
-        <th
-          class="govuk-table__header padding-left--small govuk-!-width-one-third"
-        >
-          Total payment offer sent to the complainant:
-        </th>
-        <td
+          <th
+            class="govuk-table__header padding-left--small govuk-!-width-one-third"
+          >
+            Ex-Gratia payment offer sent to the complainant:
+          </th>
+          <td
+            class="govuk-table__cell"
+          >
+            50
+          </td>
+        </tr>
+        <tr
           class="govuk-table__cell"
         >
-          100
-        </td>
-      </tr>
-      <tr
-        class="govuk-table__cell"
-      >
-        <th
-          class="govuk-table__header padding-left--small govuk-!-width-one-third"
-        >
-          Complainant has accepted:
-        </th>
-        <td
+          <th
+            class="govuk-table__header padding-left--small govuk-!-width-one-third"
+          >
+            Total payment offer sent to the complainant:
+          </th>
+          <td
+            class="govuk-table__cell"
+          >
+            100
+          </td>
+        </tr>
+        <tr
           class="govuk-table__cell"
         >
-          No
-        </td>
-      </tr>
-    </tbody>
-  </table>,
-]
+          <th
+            class="govuk-table__header padding-left--small govuk-!-width-one-third"
+          >
+            Complainant has accepted:
+          </th>
+          <td
+            class="govuk-table__cell"
+          >
+            No
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;
 
-exports[`Form component should render form when passed 1`] = `
-Array [
-  <h2
-    class="govuk-heading-m"
-  >
-    Ex-Gratia
-  </h2>,
-  <details
-    class="govuk-details"
-  >
-    <summary
-      class="govuk-details__summary"
+exports[`Ex-Gratia tab component should render form when passed 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <h2
+        class="govuk-heading-m"
+      >
+        Ex-Gratia
+      </h2>
+      <details
+        class="govuk-details"
+      >
+        <summary
+          class="govuk-details__summary"
+        >
+          <span
+            class="govuk-details__summary-text"
+          >
+            Update Ex-Gratia details
+          </span>
+        </summary>
+      </details>
+      <table
+        class="govuk-table margin-left--small"
+      >
+        <caption
+          class="govuk-table__caption margin-bottom--small"
+        >
+          Summary
+        </caption>
+        <tbody
+          class="govuk-table__body"
+        >
+          <tr
+            class="govuk-table__cell"
+          >
+            <th
+              class="govuk-table__header padding-left--small govuk-!-width-one-third"
+            >
+              Consolatory payment type
+            </th>
+            <td
+              class="govuk-table__cell"
+            >
+              Yes
+            </td>
+          </tr>
+          <tr
+            class="govuk-table__cell"
+          >
+            <th
+              class="govuk-table__header padding-left--small govuk-!-width-one-third"
+            >
+              Ex-Gratia payment type
+            </th>
+            <td
+              class="govuk-table__cell"
+            >
+              Yes
+            </td>
+          </tr>
+          <tr
+            class="govuk-table__cell"
+          >
+            <th
+              class="govuk-table__header padding-left--small govuk-!-width-one-third"
+            >
+              Amount requested by complainant:
+            </th>
+            <td
+              class="govuk-table__cell"
+            >
+              100
+            </td>
+          </tr>
+          <tr
+            class="govuk-table__cell"
+          >
+            <th
+              class="govuk-table__header padding-left--small govuk-!-width-one-third"
+            >
+              Amount requested from business/port:
+            </th>
+            <td
+              class="govuk-table__cell"
+            >
+              50
+            </td>
+          </tr>
+          <tr
+            class="govuk-table__cell"
+          >
+            <th
+              class="govuk-table__header padding-left--small govuk-!-width-one-third"
+            >
+              Consolatory payment offer sent to the complainant:
+            </th>
+            <td
+              class="govuk-table__cell"
+            >
+              50
+            </td>
+          </tr>
+          <tr
+            class="govuk-table__cell"
+          >
+            <th
+              class="govuk-table__header padding-left--small govuk-!-width-one-third"
+            >
+              Ex-Gratia payment offer sent to the complainant:
+            </th>
+            <td
+              class="govuk-table__cell"
+            >
+              50
+            </td>
+          </tr>
+          <tr
+            class="govuk-table__cell"
+          >
+            <th
+              class="govuk-table__header padding-left--small govuk-!-width-one-third"
+            >
+              Total payment offer sent to the complainant:
+            </th>
+            <td
+              class="govuk-table__cell"
+            >
+              100
+            </td>
+          </tr>
+          <tr
+            class="govuk-table__cell"
+          >
+            <th
+              class="govuk-table__header padding-left--small govuk-!-width-one-third"
+            >
+              Complainant has accepted:
+            </th>
+            <td
+              class="govuk-table__cell"
+            >
+              No
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>,
+  "container": <div>
+    <h2
+      class="govuk-heading-m"
     >
-      <span
-        class="govuk-details__summary-text"
-      >
-        Update Ex-Gratia details
-      </span>
-    </summary>
-  </details>,
-  <table
-    class="govuk-table margin-left--small"
-  >
-    <caption
-      class="govuk-table__caption margin-bottom--small"
+      Ex-Gratia
+    </h2>
+    <details
+      class="govuk-details"
     >
-      Summary
-    </caption>
-    <tbody
-      class="govuk-table__body"
+      <summary
+        class="govuk-details__summary"
+      >
+        <span
+          class="govuk-details__summary-text"
+        >
+          Update Ex-Gratia details
+        </span>
+      </summary>
+    </details>
+    <table
+      class="govuk-table margin-left--small"
     >
-      <tr
-        class="govuk-table__cell"
+      <caption
+        class="govuk-table__caption margin-bottom--small"
       >
-        <th
-          class="govuk-table__header padding-left--small govuk-!-width-one-third"
-        >
-          Consolatory payment type
-        </th>
-        <td
+        Summary
+      </caption>
+      <tbody
+        class="govuk-table__body"
+      >
+        <tr
           class="govuk-table__cell"
         >
-          Yes
-        </td>
-      </tr>
-      <tr
-        class="govuk-table__cell"
-      >
-        <th
-          class="govuk-table__header padding-left--small govuk-!-width-one-third"
-        >
-          Ex-Gratia payment type
-        </th>
-        <td
+          <th
+            class="govuk-table__header padding-left--small govuk-!-width-one-third"
+          >
+            Consolatory payment type
+          </th>
+          <td
+            class="govuk-table__cell"
+          >
+            Yes
+          </td>
+        </tr>
+        <tr
           class="govuk-table__cell"
         >
-          Yes
-        </td>
-      </tr>
-      <tr
-        class="govuk-table__cell"
-      >
-        <th
-          class="govuk-table__header padding-left--small govuk-!-width-one-third"
-        >
-          Amount requested by complainant:
-        </th>
-        <td
+          <th
+            class="govuk-table__header padding-left--small govuk-!-width-one-third"
+          >
+            Ex-Gratia payment type
+          </th>
+          <td
+            class="govuk-table__cell"
+          >
+            Yes
+          </td>
+        </tr>
+        <tr
           class="govuk-table__cell"
         >
-          100
-        </td>
-      </tr>
-      <tr
-        class="govuk-table__cell"
-      >
-        <th
-          class="govuk-table__header padding-left--small govuk-!-width-one-third"
-        >
-          Amount requested from business/port:
-        </th>
-        <td
+          <th
+            class="govuk-table__header padding-left--small govuk-!-width-one-third"
+          >
+            Amount requested by complainant:
+          </th>
+          <td
+            class="govuk-table__cell"
+          >
+            100
+          </td>
+        </tr>
+        <tr
           class="govuk-table__cell"
         >
-          50
-        </td>
-      </tr>
-      <tr
-        class="govuk-table__cell"
-      >
-        <th
-          class="govuk-table__header padding-left--small govuk-!-width-one-third"
-        >
-          Consolatory payment offer sent to the complainant:
-        </th>
-        <td
+          <th
+            class="govuk-table__header padding-left--small govuk-!-width-one-third"
+          >
+            Amount requested from business/port:
+          </th>
+          <td
+            class="govuk-table__cell"
+          >
+            50
+          </td>
+        </tr>
+        <tr
           class="govuk-table__cell"
         >
-          50
-        </td>
-      </tr>
-      <tr
-        class="govuk-table__cell"
-      >
-        <th
-          class="govuk-table__header padding-left--small govuk-!-width-one-third"
-        >
-          Ex-Gratia payment offer sent to the complainant:
-        </th>
-        <td
+          <th
+            class="govuk-table__header padding-left--small govuk-!-width-one-third"
+          >
+            Consolatory payment offer sent to the complainant:
+          </th>
+          <td
+            class="govuk-table__cell"
+          >
+            50
+          </td>
+        </tr>
+        <tr
           class="govuk-table__cell"
         >
-          50
-        </td>
-      </tr>
-      <tr
-        class="govuk-table__cell"
-      >
-        <th
-          class="govuk-table__header padding-left--small govuk-!-width-one-third"
-        >
-          Total payment offer sent to the complainant:
-        </th>
-        <td
+          <th
+            class="govuk-table__header padding-left--small govuk-!-width-one-third"
+          >
+            Ex-Gratia payment offer sent to the complainant:
+          </th>
+          <td
+            class="govuk-table__cell"
+          >
+            50
+          </td>
+        </tr>
+        <tr
           class="govuk-table__cell"
         >
-          100
-        </td>
-      </tr>
-      <tr
-        class="govuk-table__cell"
-      >
-        <th
-          class="govuk-table__header padding-left--small govuk-!-width-one-third"
-        >
-          Complainant has accepted:
-        </th>
-        <td
+          <th
+            class="govuk-table__header padding-left--small govuk-!-width-one-third"
+          >
+            Total payment offer sent to the complainant:
+          </th>
+          <td
+            class="govuk-table__cell"
+          >
+            100
+          </td>
+        </tr>
+        <tr
           class="govuk-table__cell"
         >
-          No
-        </td>
-      </tr>
-    </tbody>
-  </table>,
-]
+          <th
+            class="govuk-table__header padding-left--small govuk-!-width-one-third"
+          >
+            Complainant has accepted:
+          </th>
+          <td
+            class="govuk-table__cell"
+          >
+            No
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;
 
-exports[`Form component should render with content when passed 1`] = `
-Array [
-  <h2
-    class="govuk-heading-m"
-  >
-    Ex-Gratia
-  </h2>,
-  <details
-    class="govuk-details"
-  >
-    <summary
-      class="govuk-details__summary"
+exports[`Ex-Gratia tab component should render with content when passed 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <h2
+        class="govuk-heading-m"
+      >
+        Ex-Gratia
+      </h2>
+      <details
+        class="govuk-details"
+      >
+        <summary
+          class="govuk-details__summary"
+        >
+          <span
+            class="govuk-details__summary-text"
+          >
+            Update Ex-Gratia details
+          </span>
+        </summary>
+      </details>
+      <table
+        class="govuk-table margin-left--small"
+      >
+        <caption
+          class="govuk-table__caption margin-bottom--small"
+        >
+          Summary
+        </caption>
+        <tbody
+          class="govuk-table__body"
+        >
+          <tr
+            class="govuk-table__cell"
+          >
+            <th
+              class="govuk-table__header padding-left--small govuk-!-width-one-third"
+            >
+              Consolatory payment type
+            </th>
+            <td
+              class="govuk-table__cell"
+            >
+              Yes
+            </td>
+          </tr>
+          <tr
+            class="govuk-table__cell"
+          >
+            <th
+              class="govuk-table__header padding-left--small govuk-!-width-one-third"
+            >
+              Ex-Gratia payment type
+            </th>
+            <td
+              class="govuk-table__cell"
+            >
+              Yes
+            </td>
+          </tr>
+          <tr
+            class="govuk-table__cell"
+          >
+            <th
+              class="govuk-table__header padding-left--small govuk-!-width-one-third"
+            >
+              Amount requested by complainant:
+            </th>
+            <td
+              class="govuk-table__cell"
+            >
+              100
+            </td>
+          </tr>
+          <tr
+            class="govuk-table__cell"
+          >
+            <th
+              class="govuk-table__header padding-left--small govuk-!-width-one-third"
+            >
+              Amount requested from business/port:
+            </th>
+            <td
+              class="govuk-table__cell"
+            >
+              50
+            </td>
+          </tr>
+          <tr
+            class="govuk-table__cell"
+          >
+            <th
+              class="govuk-table__header padding-left--small govuk-!-width-one-third"
+            >
+              Consolatory payment offer sent to the complainant:
+            </th>
+            <td
+              class="govuk-table__cell"
+            >
+              50
+            </td>
+          </tr>
+          <tr
+            class="govuk-table__cell"
+          >
+            <th
+              class="govuk-table__header padding-left--small govuk-!-width-one-third"
+            >
+              Ex-Gratia payment offer sent to the complainant:
+            </th>
+            <td
+              class="govuk-table__cell"
+            >
+              50
+            </td>
+          </tr>
+          <tr
+            class="govuk-table__cell"
+          >
+            <th
+              class="govuk-table__header padding-left--small govuk-!-width-one-third"
+            >
+              Total payment offer sent to the complainant:
+            </th>
+            <td
+              class="govuk-table__cell"
+            >
+              100
+            </td>
+          </tr>
+          <tr
+            class="govuk-table__cell"
+          >
+            <th
+              class="govuk-table__header padding-left--small govuk-!-width-one-third"
+            >
+              Complainant has accepted:
+            </th>
+            <td
+              class="govuk-table__cell"
+            >
+              No
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>,
+  "container": <div>
+    <h2
+      class="govuk-heading-m"
     >
-      <span
-        class="govuk-details__summary-text"
-      >
-        Update Ex-Gratia details
-      </span>
-    </summary>
-  </details>,
-  <table
-    class="govuk-table margin-left--small"
-  >
-    <caption
-      class="govuk-table__caption margin-bottom--small"
+      Ex-Gratia
+    </h2>
+    <details
+      class="govuk-details"
     >
-      Summary
-    </caption>
-    <tbody
-      class="govuk-table__body"
+      <summary
+        class="govuk-details__summary"
+      >
+        <span
+          class="govuk-details__summary-text"
+        >
+          Update Ex-Gratia details
+        </span>
+      </summary>
+    </details>
+    <table
+      class="govuk-table margin-left--small"
     >
-      <tr
-        class="govuk-table__cell"
+      <caption
+        class="govuk-table__caption margin-bottom--small"
       >
-        <th
-          class="govuk-table__header padding-left--small govuk-!-width-one-third"
-        >
-          Consolatory payment type
-        </th>
-        <td
+        Summary
+      </caption>
+      <tbody
+        class="govuk-table__body"
+      >
+        <tr
           class="govuk-table__cell"
         >
-          Yes
-        </td>
-      </tr>
-      <tr
-        class="govuk-table__cell"
-      >
-        <th
-          class="govuk-table__header padding-left--small govuk-!-width-one-third"
-        >
-          Ex-Gratia payment type
-        </th>
-        <td
+          <th
+            class="govuk-table__header padding-left--small govuk-!-width-one-third"
+          >
+            Consolatory payment type
+          </th>
+          <td
+            class="govuk-table__cell"
+          >
+            Yes
+          </td>
+        </tr>
+        <tr
           class="govuk-table__cell"
         >
-          Yes
-        </td>
-      </tr>
-      <tr
-        class="govuk-table__cell"
-      >
-        <th
-          class="govuk-table__header padding-left--small govuk-!-width-one-third"
-        >
-          Amount requested by complainant:
-        </th>
-        <td
+          <th
+            class="govuk-table__header padding-left--small govuk-!-width-one-third"
+          >
+            Ex-Gratia payment type
+          </th>
+          <td
+            class="govuk-table__cell"
+          >
+            Yes
+          </td>
+        </tr>
+        <tr
           class="govuk-table__cell"
         >
-          100
-        </td>
-      </tr>
-      <tr
-        class="govuk-table__cell"
-      >
-        <th
-          class="govuk-table__header padding-left--small govuk-!-width-one-third"
-        >
-          Amount requested from business/port:
-        </th>
-        <td
+          <th
+            class="govuk-table__header padding-left--small govuk-!-width-one-third"
+          >
+            Amount requested by complainant:
+          </th>
+          <td
+            class="govuk-table__cell"
+          >
+            100
+          </td>
+        </tr>
+        <tr
           class="govuk-table__cell"
         >
-          50
-        </td>
-      </tr>
-      <tr
-        class="govuk-table__cell"
-      >
-        <th
-          class="govuk-table__header padding-left--small govuk-!-width-one-third"
-        >
-          Consolatory payment offer sent to the complainant:
-        </th>
-        <td
+          <th
+            class="govuk-table__header padding-left--small govuk-!-width-one-third"
+          >
+            Amount requested from business/port:
+          </th>
+          <td
+            class="govuk-table__cell"
+          >
+            50
+          </td>
+        </tr>
+        <tr
           class="govuk-table__cell"
         >
-          50
-        </td>
-      </tr>
-      <tr
-        class="govuk-table__cell"
-      >
-        <th
-          class="govuk-table__header padding-left--small govuk-!-width-one-third"
-        >
-          Ex-Gratia payment offer sent to the complainant:
-        </th>
-        <td
+          <th
+            class="govuk-table__header padding-left--small govuk-!-width-one-third"
+          >
+            Consolatory payment offer sent to the complainant:
+          </th>
+          <td
+            class="govuk-table__cell"
+          >
+            50
+          </td>
+        </tr>
+        <tr
           class="govuk-table__cell"
         >
-          50
-        </td>
-      </tr>
-      <tr
-        class="govuk-table__cell"
-      >
-        <th
-          class="govuk-table__header padding-left--small govuk-!-width-one-third"
-        >
-          Total payment offer sent to the complainant:
-        </th>
-        <td
+          <th
+            class="govuk-table__header padding-left--small govuk-!-width-one-third"
+          >
+            Ex-Gratia payment offer sent to the complainant:
+          </th>
+          <td
+            class="govuk-table__cell"
+          >
+            50
+          </td>
+        </tr>
+        <tr
           class="govuk-table__cell"
         >
-          100
-        </td>
-      </tr>
-      <tr
-        class="govuk-table__cell"
-      >
-        <th
-          class="govuk-table__header padding-left--small govuk-!-width-one-third"
-        >
-          Complainant has accepted:
-        </th>
-        <td
+          <th
+            class="govuk-table__header padding-left--small govuk-!-width-one-third"
+          >
+            Total payment offer sent to the complainant:
+          </th>
+          <td
+            class="govuk-table__cell"
+          >
+            100
+          </td>
+        </tr>
+        <tr
           class="govuk-table__cell"
         >
-          No
-        </td>
-      </tr>
-    </tbody>
-  </table>,
-]
+          <th
+            class="govuk-table__header padding-left--small govuk-!-width-one-third"
+          >
+            Complainant has accepted:
+          </th>
+          <td
+            class="govuk-table__cell"
+          >
+            No
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;
