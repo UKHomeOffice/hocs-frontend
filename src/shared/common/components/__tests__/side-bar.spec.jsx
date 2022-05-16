@@ -3,7 +3,6 @@ import { ApplicationProvider } from '../../../contexts/application';
 import { MemoryRouter } from 'react-router-dom';
 import SideBar from '../side-bar';
 
-const MOCK_TRACK = jest.fn();
 
 const page = {
     params: {
@@ -13,7 +12,6 @@ const page = {
 };
 
 const MOCK_CONFIG = {
-    track: MOCK_TRACK,
     page
 };
 

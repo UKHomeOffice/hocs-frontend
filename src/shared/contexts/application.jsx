@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactGA from 'react-ga';
 import PropTypes from 'prop-types';
 import * as axios from 'axios';
 import types from './actions/types.jsx';
@@ -94,13 +93,7 @@ const reducer = (state, action) => {
 export class ApplicationProvider extends Component {
     constructor(props) {
         super(props);
-        const { csrf, roles, ...config } = props.config;
-
-        if (config && config.analytics &&
-            ReactGA.initialize(config.analytics.tracker, { titleCase: true, gaOptions: { userId: config.analytics.userId } })) {
-            /* eslint-disable-next-line  no-console*/
-            this.useAnalytics = true;
-        }
+        const { csrf, roles } = props.config;
 
         axios.defaults.headers.common = {
             'CSRF-Token': csrf
@@ -117,36 +110,10 @@ export class ApplicationProvider extends Component {
                     return Promise.reject(error);
                 }
             },
-            track: this.track.bind(this),
             hasRole: (role) => {
                 return roles.includes(role);
             }
         };
-    }
-
-
-    track(event, payload) {
-        if (this.useAnalytics) {
-            switch (event) {
-                case 'EVENT':
-                    ReactGA.event({
-                        category: payload.category,
-                        action: payload.action,
-                        label: payload.label
-                    });
-                    break;
-                case 'PAGE_VIEW':
-                    ReactGA.pageview(
-                        payload.path,
-                        null,
-                        payload.title
-                    );
-                    break;
-                default:
-                    /* eslint-disable-next-line  no-console*/
-                    console.warn('Unsupported analytics event');
-            }
-        }
     }
 
     render() {

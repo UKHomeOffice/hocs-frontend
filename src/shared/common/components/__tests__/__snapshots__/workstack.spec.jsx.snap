@@ -24,9 +24,7 @@ exports[`Workstack component should not add link to headers with sortStrategy no
       }
     }
   >
-    <Component
-      track={[MockFunction]}
-    >
+    <Component>
       <WorkstackAllocate
         allocateToWorkstackEndpoint="api/allocate"
         baseUrl="base.url"
@@ -313,7 +311,6 @@ exports[`Workstack component should not add link to headers with sortStrategy no
         }
         selectable={true}
         submitHandler={[MockFunction]}
-        track={[MockFunction]}
         updateFormData={[MockFunction]}
       >
         <div
@@ -339,7 +336,6 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                 className="govuk-input"
                 id="workstack-filter"
                 name="workstack-filter"
-                onBlur={[Function]}
                 onChange={[Function]}
                 type="text"
               />
@@ -3931,9 +3927,7 @@ exports[`Workstack component should render with filtering 1`] = `
       }
     }
   >
-    <Component
-      track={[MockFunction]}
-    >
+    <Component>
       <WorkstackAllocate
         allocateToWorkstackEndpoint="api/allocate"
         baseUrl="base.url"
@@ -4219,7 +4213,6 @@ exports[`Workstack component should render with filtering 1`] = `
         }
         selectable={true}
         submitHandler={[MockFunction]}
-        track={[MockFunction]}
         updateFormData={
           [MockFunction] {
             "calls": Array [
@@ -4261,7 +4254,6 @@ exports[`Workstack component should render with filtering 1`] = `
                 className="govuk-input"
                 id="workstack-filter"
                 name="workstack-filter"
-                onBlur={[Function]}
                 onChange={[Function]}
                 type="text"
               />
@@ -4624,9 +4616,7 @@ exports[`Workstack component should sort descending when the column heading is c
       }
     }
   >
-    <Component
-      track={[MockFunction]}
-    >
+    <Component>
       <WorkstackAllocate
         allocateToWorkstackEndpoint="api/allocate"
         baseUrl="base.url"
@@ -4912,7 +4902,6 @@ exports[`Workstack component should sort descending when the column heading is c
         }
         selectable={true}
         submitHandler={[MockFunction]}
-        track={[MockFunction]}
         updateFormData={[MockFunction]}
       >
         <div
@@ -4938,7 +4927,6 @@ exports[`Workstack component should sort descending when the column heading is c
                 className="govuk-input"
                 id="workstack-filter"
                 name="workstack-filter"
-                onBlur={[Function]}
                 onChange={[Function]}
                 type="text"
               />
@@ -6365,9 +6353,7 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
       }
     }
   >
-    <Component
-      track={[MockFunction]}
-    >
+    <Component>
       <WorkstackAllocate
         allocateToWorkstackEndpoint="api/allocate"
         baseUrl="base.url"
@@ -6653,7 +6639,6 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
         }
         selectable={true}
         submitHandler={[MockFunction]}
-        track={[MockFunction]}
         updateFormData={[MockFunction]}
       >
         <div
@@ -6679,7 +6664,6 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                 className="govuk-input"
                 id="workstack-filter"
                 name="workstack-filter"
-                onBlur={[Function]}
                 onChange={[Function]}
                 type="text"
               />
