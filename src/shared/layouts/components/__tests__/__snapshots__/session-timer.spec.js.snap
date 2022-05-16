@@ -5,6 +5,7 @@ exports[`Session timer component should render the modal when timed out 1`] = `
   <Helmet
     defer={false}
     encodeSpecialCharacters={true}
+    prioritizeSeoTags={false}
     titleTemplate="%s"
   >
     <title>
@@ -68,6 +69,7 @@ exports[`Session timer component should render the modal when timing out 1`] = `
   <Helmet
     defer={false}
     encodeSpecialCharacters={true}
+    prioritizeSeoTags={false}
     titleTemplate="4s remaining | %s"
   >
     <title>
