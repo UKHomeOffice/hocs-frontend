@@ -129,37 +129,37 @@ module.exports = {
         COMP_IANDP_BUS_AREA: {
             client: 'INFO',
             endpoint: '/entity/list/COMP_IANDP_BUS_AREA',
-            type: listService.types.STATIC,
+            type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
         },
         COMP_RASI_BUS_AREA: {
             client: 'INFO',
             endpoint: '/entity/list/COMP_RASI_BUS_AREA',
-            type: listService.types.STATIC,
+            type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
         },
         COMP_VCIC_BUS_AREA: {
             client: 'INFO',
             endpoint: '/entity/list/COMP_VCIC_BUS_AREA',
-            type: listService.types.STATIC,
+            type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
         },
         COMP_VCOS_BUS_AREA: {
             client: 'INFO',
             endpoint: '/entity/list/COMP_VCOS_BUS_AREA',
-            type: listService.types.STATIC,
+            type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
         },
         COMP_OTHER_BUS_AREA: {
             client: 'INFO',
             endpoint: '/entity/list/COMP_OTHER_BUS_AREA',
-            type: listService.types.STATIC,
+            type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
         },
         COMP_EUSS_FP_BUS_AREA: {
             client: 'INFO',
             endpoint: '/entity/list/COMP_EUSS_FP_BUS_AREA',
-            type: listService.types.STATIC,
+            type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
         },
         S_BF_CONTRIB_TYPE: {
