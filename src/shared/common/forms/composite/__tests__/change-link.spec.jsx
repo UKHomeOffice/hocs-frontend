@@ -1,8 +1,6 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import ChangeLink from '../change-link';
-import '@testing-library/jest-dom';
-import { render } from '@testing-library/react';
 
 describe('The ChangeLink component', () => {
 

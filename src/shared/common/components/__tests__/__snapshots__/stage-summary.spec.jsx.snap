@@ -1,3400 +1,1532 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Stage summary component should not render the "Active Stage" title, when there are no active stages 1`] = `
-Object {
-  "asFragment": [Function],
-  "baseElement": <body>
-    <div>
-      <h2
-        class="govuk-heading-m"
-      >
-        Case
-      </h2>
-      <table
-        class="govuk-table margin-left--small"
-      >
-        <caption
-          class="govuk-table__caption margin-bottom--small"
-        >
-          Summary
-        </caption>
-        <tbody
-          class="govuk-table__body"
-        >
-          <tr
-            class="govuk-table__row"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              Date received
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __received__
-            </td>
-          </tr>
-          <tr
-            class="govuk-table__cell"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              Created
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __created__
-            </td>
-          </tr>
-          <tr
-            class="govuk-table__cell"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              Deadline
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __deadline__
-            </td>
-          </tr>
-          <tr
-            class="govuk-table__cell"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              Primary topic
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __primaryTopic__
-            </td>
-          </tr>
-          <tr
-            class="govuk-table__cell"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              Primary correspondent
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              <span>
-                __fullname__
-              </span>
-               
-              <br />
-               
-              <span>
-                __organisation__
-              </span>
-               
-               
-              <br />
-               
-              <span>
-                __telephone__
-              </span>
-               
-               
-              <br />
-               
-              <span>
-                __address1__
-              </span>
-               
-               
-              <br />
-               
-              <span>
-                __address2__
-              </span>
-               
-               
-              <br />
-               
-              <span>
-                __address3__
-              </span>
-               
-               
-              <br />
-               
-              <span>
-                __postcode__
-              </span>
-               
-               
-              <br />
-               
-              <span>
-                __country__
-              </span>
-               
-               
-              <br />
-               
-              <span>
-                __reference__
-              </span>
-               
-            </td>
-          </tr>
-          <tr
-            class="govuk-table__row"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              __label__
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __value__
-            </td>
-          </tr>
-          <tr
-            class="govuk-table__row"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              __label__
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __value__
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <table
-        class="govuk-table margin-left--small"
-      >
-        <caption
-          class="govuk-table__caption margin-bottom--small"
-        >
-          Stage deadlines
-        </caption>
-        <tbody
-          class="govuk-table__body"
-        >
-          <tr
-            class="govuk-table__row"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              __label__
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __value__
-            </td>
-          </tr>
-          <tr
-            class="govuk-table__row"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              __label__
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __value__
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <table
-        class="govuk-table margin-left--small"
-      >
-        <caption
-          class="govuk-table__caption margin-bottom--small"
-        >
-          Previous Case
-        </caption>
-        <tbody
-          class="govuk-table__body"
-        >
-          <tr
-            class="govuk-table__row"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              Reference
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              <a
-                class="govuk-link govuk-!-margin-right-3"
-                href="/case/__previousCaseUuid__/stage/__previousCaseStage__"
-                rel="noreferrer noopener"
-                target="_blank"
-              >
-                __previousCaseReference__
-              </a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </body>,
-  "container": <div>
-    <h2
-      class="govuk-heading-m"
+Array [
+  <h2
+    class="govuk-heading-m"
+  >
+    Case
+  </h2>,
+  <table
+    class="govuk-table margin-left--small"
+  >
+    <caption
+      class="govuk-table__caption margin-bottom--small"
     >
-      Case
-    </h2>
-    <table
-      class="govuk-table margin-left--small"
+      Summary
+    </caption>
+    <tbody
+      class="govuk-table__body"
     >
-      <caption
-        class="govuk-table__caption margin-bottom--small"
+      <tr
+        class="govuk-table__row"
       >
-        Summary
-      </caption>
-      <tbody
-        class="govuk-table__body"
-      >
-        <tr
-          class="govuk-table__row"
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
         >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            Date received
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __received__
-          </td>
-        </tr>
-        <tr
+          Date received
+        </th>
+        <td
           class="govuk-table__cell"
         >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            Created
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __created__
-          </td>
-        </tr>
-        <tr
+          __received__
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__cell"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Created
+        </th>
+        <td
           class="govuk-table__cell"
         >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            Deadline
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __deadline__
-          </td>
-        </tr>
-        <tr
+          __created__
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__cell"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Deadline
+        </th>
+        <td
           class="govuk-table__cell"
         >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            Primary topic
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __primaryTopic__
-          </td>
-        </tr>
-        <tr
+          __deadline__
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__cell"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Primary topic
+        </th>
+        <td
           class="govuk-table__cell"
         >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            Primary correspondent
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            <span>
-              __fullname__
-            </span>
-             
-            <br />
-             
-            <span>
-              __organisation__
-            </span>
-             
-             
-            <br />
-             
-            <span>
-              __telephone__
-            </span>
-             
-             
-            <br />
-             
-            <span>
-              __address1__
-            </span>
-             
-             
-            <br />
-             
-            <span>
-              __address2__
-            </span>
-             
-             
-            <br />
-             
-            <span>
-              __address3__
-            </span>
-             
-             
-            <br />
-             
-            <span>
-              __postcode__
-            </span>
-             
-             
-            <br />
-             
-            <span>
-              __country__
-            </span>
-             
-             
-            <br />
-             
-            <span>
-              __reference__
-            </span>
-             
-          </td>
-        </tr>
-        <tr
-          class="govuk-table__row"
+          __primaryTopic__
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__cell"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
         >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            __label__
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __value__
-          </td>
-        </tr>
-        <tr
-          class="govuk-table__row"
+          Primary correspondent
+        </th>
+        <td
+          class="govuk-table__cell"
         >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            __label__
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __value__
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <table
-      class="govuk-table margin-left--small"
+          <span>
+            __fullname__
+          </span>
+           
+          <br />
+           
+          <span>
+            __organisation__
+          </span>
+            
+          <br />
+           
+          <span>
+            __telephone__
+          </span>
+            
+          <br />
+           
+          <span>
+            __address1__
+          </span>
+            
+          <br />
+           
+          <span>
+            __address2__
+          </span>
+            
+          <br />
+           
+          <span>
+            __address3__
+          </span>
+            
+          <br />
+           
+          <span>
+            __postcode__
+          </span>
+            
+          <br />
+           
+          <span>
+            __country__
+          </span>
+            
+          <br />
+           
+          <span>
+            __reference__
+          </span>
+           
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          __label__
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          __value__
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          __label__
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          __value__
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+  <table
+    class="govuk-table margin-left--small"
+  >
+    <caption
+      class="govuk-table__caption margin-bottom--small"
     >
-      <caption
-        class="govuk-table__caption margin-bottom--small"
-      >
-        Stage deadlines
-      </caption>
-      <tbody
-        class="govuk-table__body"
-      >
-        <tr
-          class="govuk-table__row"
-        >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            __label__
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __value__
-          </td>
-        </tr>
-        <tr
-          class="govuk-table__row"
-        >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            __label__
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __value__
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <table
-      class="govuk-table margin-left--small"
+      Stage deadlines
+    </caption>
+    <tbody
+      class="govuk-table__body"
     >
-      <caption
-        class="govuk-table__caption margin-bottom--small"
+      <tr
+        class="govuk-table__row"
       >
-        Previous Case
-      </caption>
-      <tbody
-        class="govuk-table__body"
-      >
-        <tr
-          class="govuk-table__row"
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
         >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
+          __label__
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          __value__
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          __label__
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          __value__
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+  <table
+    class="govuk-table margin-left--small"
+  >
+    <caption
+      class="govuk-table__caption margin-bottom--small"
+    >
+      Previous Case
+    </caption>
+    <tbody
+      class="govuk-table__body"
+    >
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Reference
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          <a
+            class="govuk-link govuk-!-margin-right-3"
+            href="/case/__previousCaseUuid__/stage/__previousCaseStage__"
+            rel="noreferrer noopener"
+            target="_blank"
           >
-            Reference
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            <a
-              class="govuk-link govuk-!-margin-right-3"
-              href="/case/__previousCaseUuid__/stage/__previousCaseStage__"
-              rel="noreferrer noopener"
-              target="_blank"
-            >
-              __previousCaseReference__
-            </a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>,
-  "debug": [Function],
-  "findAllByAltText": [Function],
-  "findAllByDisplayValue": [Function],
-  "findAllByLabelText": [Function],
-  "findAllByPlaceholderText": [Function],
-  "findAllByRole": [Function],
-  "findAllByTestId": [Function],
-  "findAllByText": [Function],
-  "findAllByTitle": [Function],
-  "findByAltText": [Function],
-  "findByDisplayValue": [Function],
-  "findByLabelText": [Function],
-  "findByPlaceholderText": [Function],
-  "findByRole": [Function],
-  "findByTestId": [Function],
-  "findByText": [Function],
-  "findByTitle": [Function],
-  "getAllByAltText": [Function],
-  "getAllByDisplayValue": [Function],
-  "getAllByLabelText": [Function],
-  "getAllByPlaceholderText": [Function],
-  "getAllByRole": [Function],
-  "getAllByTestId": [Function],
-  "getAllByText": [Function],
-  "getAllByTitle": [Function],
-  "getByAltText": [Function],
-  "getByDisplayValue": [Function],
-  "getByLabelText": [Function],
-  "getByPlaceholderText": [Function],
-  "getByRole": [Function],
-  "getByTestId": [Function],
-  "getByText": [Function],
-  "getByTitle": [Function],
-  "queryAllByAltText": [Function],
-  "queryAllByDisplayValue": [Function],
-  "queryAllByLabelText": [Function],
-  "queryAllByPlaceholderText": [Function],
-  "queryAllByRole": [Function],
-  "queryAllByTestId": [Function],
-  "queryAllByText": [Function],
-  "queryAllByTitle": [Function],
-  "queryByAltText": [Function],
-  "queryByDisplayValue": [Function],
-  "queryByLabelText": [Function],
-  "queryByPlaceholderText": [Function],
-  "queryByRole": [Function],
-  "queryByTestId": [Function],
-  "queryByText": [Function],
-  "queryByTitle": [Function],
-  "rerender": [Function],
-  "unmount": [Function],
-}
+            __previousCaseReference__
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+]
 `;
 
 exports[`Stage summary component should not show the empty address lines 1`] = `
-Object {
-  "asFragment": [Function],
-  "baseElement": <body>
-    <div>
-      <h2
-        class="govuk-heading-m"
-      >
-        Active stage
-        s
-      </h2>
-      <table
-        class="govuk-table margin-left--small"
-      >
-        <caption
-          class="govuk-table__caption margin-bottom--small"
-        >
-          __stage1__
-        </caption>
-        <tbody
-          class="govuk-table__body"
-        >
-          <tr
-            class="govuk-table__row"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              Team
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __assignedTeam__
-            </td>
-          </tr>
-          <tr
-            class="govuk-table__cell"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              User
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __assignedUser__
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <table
-        class="govuk-table margin-left--small"
-      >
-        <caption
-          class="govuk-table__caption margin-bottom--small"
-        >
-          __stage2__
-        </caption>
-        <tbody
-          class="govuk-table__body"
-        >
-          <tr
-            class="govuk-table__row"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              Team
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __assignedTeam__
-            </td>
-          </tr>
-          <tr
-            class="govuk-table__cell"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              User
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __assignedUser__
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <h2
-        class="govuk-heading-m"
-      >
-        Case
-      </h2>
-      <table
-        class="govuk-table margin-left--small"
-      >
-        <caption
-          class="govuk-table__caption margin-bottom--small"
-        >
-          Summary
-        </caption>
-        <tbody
-          class="govuk-table__body"
-        >
-          <tr
-            class="govuk-table__row"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              Date received
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __received__
-            </td>
-          </tr>
-          <tr
-            class="govuk-table__cell"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              Created
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __created__
-            </td>
-          </tr>
-          <tr
-            class="govuk-table__cell"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              Deadline
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __deadline__
-            </td>
-          </tr>
-          <tr
-            class="govuk-table__cell"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              Primary topic
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __primaryTopic__
-            </td>
-          </tr>
-          <tr
-            class="govuk-table__cell"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              Primary correspondent
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              <span>
-                __fullname__
-              </span>
-               
-              <br />
-               
-              <span>
-                __organisation__
-              </span>
-               
-               
-              <br />
-               
-              <span>
-                __telephone__
-              </span>
-               
-               
-              <br />
-               
-              <span>
-                __address1__
-              </span>
-               
-               
-              <br />
-               
-              <span>
-                __postcode__
-              </span>
-               
-               
-              <br />
-               
-              <span>
-                __country__
-              </span>
-               
-               
-              <br />
-               
-              <span>
-                __reference__
-              </span>
-               
-            </td>
-          </tr>
-          <tr
-            class="govuk-table__row"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              __label__
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __value__
-            </td>
-          </tr>
-          <tr
-            class="govuk-table__row"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              __label__
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __value__
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <table
-        class="govuk-table margin-left--small"
-      >
-        <caption
-          class="govuk-table__caption margin-bottom--small"
-        >
-          Stage deadlines
-        </caption>
-        <tbody
-          class="govuk-table__body"
-        >
-          <tr
-            class="govuk-table__row"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              __label__
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __value__
-            </td>
-          </tr>
-          <tr
-            class="govuk-table__row"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              __label__
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __value__
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <table
-        class="govuk-table margin-left--small"
-      >
-        <caption
-          class="govuk-table__caption margin-bottom--small"
-        >
-          Previous Case
-        </caption>
-        <tbody
-          class="govuk-table__body"
-        >
-          <tr
-            class="govuk-table__row"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              Reference
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              <a
-                class="govuk-link govuk-!-margin-right-3"
-                href="/case/__previousCaseUuid__/stage/__previousCaseStage__"
-                rel="noreferrer noopener"
-                target="_blank"
-              >
-                __previousCaseReference__
-              </a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </body>,
-  "container": <div>
-    <h2
-      class="govuk-heading-m"
+Array [
+  <h2
+    class="govuk-heading-m"
+  >
+    Active stages
+  </h2>,
+  <table
+    class="govuk-table margin-left--small"
+  >
+    <caption
+      class="govuk-table__caption margin-bottom--small"
     >
-      Active stage
-      s
-    </h2>
-    <table
-      class="govuk-table margin-left--small"
+      __stage1__
+    </caption>
+    <tbody
+      class="govuk-table__body"
     >
-      <caption
-        class="govuk-table__caption margin-bottom--small"
+      <tr
+        class="govuk-table__row"
       >
-        __stage1__
-      </caption>
-      <tbody
-        class="govuk-table__body"
-      >
-        <tr
-          class="govuk-table__row"
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
         >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            Team
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __assignedTeam__
-          </td>
-        </tr>
-        <tr
+          Team
+        </th>
+        <td
           class="govuk-table__cell"
         >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            User
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __assignedUser__
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <table
-      class="govuk-table margin-left--small"
-    >
-      <caption
-        class="govuk-table__caption margin-bottom--small"
+          __assignedTeam__
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__cell"
       >
-        __stage2__
-      </caption>
-      <tbody
-        class="govuk-table__body"
-      >
-        <tr
-          class="govuk-table__row"
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
         >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            Team
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __assignedTeam__
-          </td>
-        </tr>
-        <tr
+          User
+        </th>
+        <td
           class="govuk-table__cell"
         >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            User
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __assignedUser__
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <h2
-      class="govuk-heading-m"
+          __assignedUser__
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+  <table
+    class="govuk-table margin-left--small"
+  >
+    <caption
+      class="govuk-table__caption margin-bottom--small"
     >
-      Case
-    </h2>
-    <table
-      class="govuk-table margin-left--small"
+      __stage2__
+    </caption>
+    <tbody
+      class="govuk-table__body"
     >
-      <caption
-        class="govuk-table__caption margin-bottom--small"
+      <tr
+        class="govuk-table__row"
       >
-        Summary
-      </caption>
-      <tbody
-        class="govuk-table__body"
-      >
-        <tr
-          class="govuk-table__row"
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
         >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            Date received
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __received__
-          </td>
-        </tr>
-        <tr
+          Team
+        </th>
+        <td
           class="govuk-table__cell"
         >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            Created
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __created__
-          </td>
-        </tr>
-        <tr
+          __assignedTeam__
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__cell"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          User
+        </th>
+        <td
           class="govuk-table__cell"
         >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            Deadline
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __deadline__
-          </td>
-        </tr>
-        <tr
-          class="govuk-table__cell"
-        >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            Primary topic
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __primaryTopic__
-          </td>
-        </tr>
-        <tr
-          class="govuk-table__cell"
-        >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            Primary correspondent
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            <span>
-              __fullname__
-            </span>
-             
-            <br />
-             
-            <span>
-              __organisation__
-            </span>
-             
-             
-            <br />
-             
-            <span>
-              __telephone__
-            </span>
-             
-             
-            <br />
-             
-            <span>
-              __address1__
-            </span>
-             
-             
-            <br />
-             
-            <span>
-              __postcode__
-            </span>
-             
-             
-            <br />
-             
-            <span>
-              __country__
-            </span>
-             
-             
-            <br />
-             
-            <span>
-              __reference__
-            </span>
-             
-          </td>
-        </tr>
-        <tr
-          class="govuk-table__row"
-        >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            __label__
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __value__
-          </td>
-        </tr>
-        <tr
-          class="govuk-table__row"
-        >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            __label__
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __value__
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <table
-      class="govuk-table margin-left--small"
+          __assignedUser__
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+  <h2
+    class="govuk-heading-m"
+  >
+    Case
+  </h2>,
+  <table
+    class="govuk-table margin-left--small"
+  >
+    <caption
+      class="govuk-table__caption margin-bottom--small"
     >
-      <caption
-        class="govuk-table__caption margin-bottom--small"
-      >
-        Stage deadlines
-      </caption>
-      <tbody
-        class="govuk-table__body"
-      >
-        <tr
-          class="govuk-table__row"
-        >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            __label__
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __value__
-          </td>
-        </tr>
-        <tr
-          class="govuk-table__row"
-        >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            __label__
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __value__
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <table
-      class="govuk-table margin-left--small"
+      Summary
+    </caption>
+    <tbody
+      class="govuk-table__body"
     >
-      <caption
-        class="govuk-table__caption margin-bottom--small"
+      <tr
+        class="govuk-table__row"
       >
-        Previous Case
-      </caption>
-      <tbody
-        class="govuk-table__body"
-      >
-        <tr
-          class="govuk-table__row"
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
         >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
+          Date received
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          __received__
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__cell"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Created
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          __created__
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__cell"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Deadline
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          __deadline__
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__cell"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Primary topic
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          __primaryTopic__
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__cell"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Primary correspondent
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          <span>
+            __fullname__
+          </span>
+           
+          <br />
+           
+          <span>
+            __organisation__
+          </span>
+            
+          <br />
+           
+          <span>
+            __telephone__
+          </span>
+            
+          <br />
+           
+          <span>
+            __address1__
+          </span>
+            
+          <br />
+           
+          <span>
+            __postcode__
+          </span>
+            
+          <br />
+           
+          <span>
+            __country__
+          </span>
+            
+          <br />
+           
+          <span>
+            __reference__
+          </span>
+           
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          __label__
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          __value__
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          __label__
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          __value__
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+  <table
+    class="govuk-table margin-left--small"
+  >
+    <caption
+      class="govuk-table__caption margin-bottom--small"
+    >
+      Stage deadlines
+    </caption>
+    <tbody
+      class="govuk-table__body"
+    >
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          __label__
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          __value__
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          __label__
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          __value__
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+  <table
+    class="govuk-table margin-left--small"
+  >
+    <caption
+      class="govuk-table__caption margin-bottom--small"
+    >
+      Previous Case
+    </caption>
+    <tbody
+      class="govuk-table__body"
+    >
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Reference
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          <a
+            class="govuk-link govuk-!-margin-right-3"
+            href="/case/__previousCaseUuid__/stage/__previousCaseStage__"
+            rel="noreferrer noopener"
+            target="_blank"
           >
-            Reference
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            <a
-              class="govuk-link govuk-!-margin-right-3"
-              href="/case/__previousCaseUuid__/stage/__previousCaseStage__"
-              rel="noreferrer noopener"
-              target="_blank"
-            >
-              __previousCaseReference__
-            </a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>,
-  "debug": [Function],
-  "findAllByAltText": [Function],
-  "findAllByDisplayValue": [Function],
-  "findAllByLabelText": [Function],
-  "findAllByPlaceholderText": [Function],
-  "findAllByRole": [Function],
-  "findAllByTestId": [Function],
-  "findAllByText": [Function],
-  "findAllByTitle": [Function],
-  "findByAltText": [Function],
-  "findByDisplayValue": [Function],
-  "findByLabelText": [Function],
-  "findByPlaceholderText": [Function],
-  "findByRole": [Function],
-  "findByTestId": [Function],
-  "findByText": [Function],
-  "findByTitle": [Function],
-  "getAllByAltText": [Function],
-  "getAllByDisplayValue": [Function],
-  "getAllByLabelText": [Function],
-  "getAllByPlaceholderText": [Function],
-  "getAllByRole": [Function],
-  "getAllByTestId": [Function],
-  "getAllByText": [Function],
-  "getAllByTitle": [Function],
-  "getByAltText": [Function],
-  "getByDisplayValue": [Function],
-  "getByLabelText": [Function],
-  "getByPlaceholderText": [Function],
-  "getByRole": [Function],
-  "getByTestId": [Function],
-  "getByText": [Function],
-  "getByTitle": [Function],
-  "queryAllByAltText": [Function],
-  "queryAllByDisplayValue": [Function],
-  "queryAllByLabelText": [Function],
-  "queryAllByPlaceholderText": [Function],
-  "queryAllByRole": [Function],
-  "queryAllByTestId": [Function],
-  "queryAllByText": [Function],
-  "queryAllByTitle": [Function],
-  "queryByAltText": [Function],
-  "queryByDisplayValue": [Function],
-  "queryByLabelText": [Function],
-  "queryByPlaceholderText": [Function],
-  "queryByRole": [Function],
-  "queryByTestId": [Function],
-  "queryByText": [Function],
-  "queryByTitle": [Function],
-  "rerender": [Function],
-  "unmount": [Function],
-}
+            __previousCaseReference__
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+]
 `;
 
 exports[`Stage summary component should not show the empty organisation 1`] = `
-Object {
-  "asFragment": [Function],
-  "baseElement": <body>
-    <div>
-      <h2
-        class="govuk-heading-m"
-      >
-        Active stage
-        s
-      </h2>
-      <table
-        class="govuk-table margin-left--small"
-      >
-        <caption
-          class="govuk-table__caption margin-bottom--small"
-        >
-          __stage1__
-        </caption>
-        <tbody
-          class="govuk-table__body"
-        >
-          <tr
-            class="govuk-table__row"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              Team
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __assignedTeam__
-            </td>
-          </tr>
-          <tr
-            class="govuk-table__cell"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              User
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __assignedUser__
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <table
-        class="govuk-table margin-left--small"
-      >
-        <caption
-          class="govuk-table__caption margin-bottom--small"
-        >
-          __stage2__
-        </caption>
-        <tbody
-          class="govuk-table__body"
-        >
-          <tr
-            class="govuk-table__row"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              Team
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __assignedTeam__
-            </td>
-          </tr>
-          <tr
-            class="govuk-table__cell"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              User
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __assignedUser__
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <h2
-        class="govuk-heading-m"
-      >
-        Case
-      </h2>
-      <table
-        class="govuk-table margin-left--small"
-      >
-        <caption
-          class="govuk-table__caption margin-bottom--small"
-        >
-          Summary
-        </caption>
-        <tbody
-          class="govuk-table__body"
-        >
-          <tr
-            class="govuk-table__row"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              Date received
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __received__
-            </td>
-          </tr>
-          <tr
-            class="govuk-table__cell"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              Created
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __created__
-            </td>
-          </tr>
-          <tr
-            class="govuk-table__cell"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              Deadline
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __deadline__
-            </td>
-          </tr>
-          <tr
-            class="govuk-table__cell"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              Primary topic
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __primaryTopic__
-            </td>
-          </tr>
-          <tr
-            class="govuk-table__cell"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              Primary correspondent
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              <span>
-                __fullname__
-              </span>
-               
-              <br />
-               
-              <span>
-                __telephone__
-              </span>
-               
-               
-              <br />
-               
-              <span>
-                __address1__
-              </span>
-               
-               
-              <br />
-               
-              <span>
-                __address2__
-              </span>
-               
-               
-              <br />
-               
-              <span>
-                __address3__
-              </span>
-               
-               
-              <br />
-               
-              <span>
-                __postcode__
-              </span>
-               
-               
-              <br />
-               
-              <span>
-                __country__
-              </span>
-               
-               
-              <br />
-               
-              <span>
-                __reference__
-              </span>
-               
-            </td>
-          </tr>
-          <tr
-            class="govuk-table__row"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              __label__
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __value__
-            </td>
-          </tr>
-          <tr
-            class="govuk-table__row"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              __label__
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __value__
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <table
-        class="govuk-table margin-left--small"
-      >
-        <caption
-          class="govuk-table__caption margin-bottom--small"
-        >
-          Stage deadlines
-        </caption>
-        <tbody
-          class="govuk-table__body"
-        >
-          <tr
-            class="govuk-table__row"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              __label__
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __value__
-            </td>
-          </tr>
-          <tr
-            class="govuk-table__row"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              __label__
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __value__
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <table
-        class="govuk-table margin-left--small"
-      >
-        <caption
-          class="govuk-table__caption margin-bottom--small"
-        >
-          Previous Case
-        </caption>
-        <tbody
-          class="govuk-table__body"
-        >
-          <tr
-            class="govuk-table__row"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              Reference
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              <a
-                class="govuk-link govuk-!-margin-right-3"
-                href="/case/__previousCaseUuid__/stage/__previousCaseStage__"
-                rel="noreferrer noopener"
-                target="_blank"
-              >
-                __previousCaseReference__
-              </a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </body>,
-  "container": <div>
-    <h2
-      class="govuk-heading-m"
+Array [
+  <h2
+    class="govuk-heading-m"
+  >
+    Active stages
+  </h2>,
+  <table
+    class="govuk-table margin-left--small"
+  >
+    <caption
+      class="govuk-table__caption margin-bottom--small"
     >
-      Active stage
-      s
-    </h2>
-    <table
-      class="govuk-table margin-left--small"
+      __stage1__
+    </caption>
+    <tbody
+      class="govuk-table__body"
     >
-      <caption
-        class="govuk-table__caption margin-bottom--small"
+      <tr
+        class="govuk-table__row"
       >
-        __stage1__
-      </caption>
-      <tbody
-        class="govuk-table__body"
-      >
-        <tr
-          class="govuk-table__row"
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
         >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            Team
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __assignedTeam__
-          </td>
-        </tr>
-        <tr
+          Team
+        </th>
+        <td
           class="govuk-table__cell"
         >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            User
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __assignedUser__
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <table
-      class="govuk-table margin-left--small"
-    >
-      <caption
-        class="govuk-table__caption margin-bottom--small"
+          __assignedTeam__
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__cell"
       >
-        __stage2__
-      </caption>
-      <tbody
-        class="govuk-table__body"
-      >
-        <tr
-          class="govuk-table__row"
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
         >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            Team
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __assignedTeam__
-          </td>
-        </tr>
-        <tr
+          User
+        </th>
+        <td
           class="govuk-table__cell"
         >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            User
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __assignedUser__
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <h2
-      class="govuk-heading-m"
+          __assignedUser__
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+  <table
+    class="govuk-table margin-left--small"
+  >
+    <caption
+      class="govuk-table__caption margin-bottom--small"
     >
-      Case
-    </h2>
-    <table
-      class="govuk-table margin-left--small"
+      __stage2__
+    </caption>
+    <tbody
+      class="govuk-table__body"
     >
-      <caption
-        class="govuk-table__caption margin-bottom--small"
+      <tr
+        class="govuk-table__row"
       >
-        Summary
-      </caption>
-      <tbody
-        class="govuk-table__body"
-      >
-        <tr
-          class="govuk-table__row"
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
         >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            Date received
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __received__
-          </td>
-        </tr>
-        <tr
+          Team
+        </th>
+        <td
           class="govuk-table__cell"
         >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            Created
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __created__
-          </td>
-        </tr>
-        <tr
+          __assignedTeam__
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__cell"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          User
+        </th>
+        <td
           class="govuk-table__cell"
         >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            Deadline
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __deadline__
-          </td>
-        </tr>
-        <tr
-          class="govuk-table__cell"
-        >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            Primary topic
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __primaryTopic__
-          </td>
-        </tr>
-        <tr
-          class="govuk-table__cell"
-        >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            Primary correspondent
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            <span>
-              __fullname__
-            </span>
-             
-            <br />
-             
-            <span>
-              __telephone__
-            </span>
-             
-             
-            <br />
-             
-            <span>
-              __address1__
-            </span>
-             
-             
-            <br />
-             
-            <span>
-              __address2__
-            </span>
-             
-             
-            <br />
-             
-            <span>
-              __address3__
-            </span>
-             
-             
-            <br />
-             
-            <span>
-              __postcode__
-            </span>
-             
-             
-            <br />
-             
-            <span>
-              __country__
-            </span>
-             
-             
-            <br />
-             
-            <span>
-              __reference__
-            </span>
-             
-          </td>
-        </tr>
-        <tr
-          class="govuk-table__row"
-        >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            __label__
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __value__
-          </td>
-        </tr>
-        <tr
-          class="govuk-table__row"
-        >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            __label__
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __value__
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <table
-      class="govuk-table margin-left--small"
+          __assignedUser__
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+  <h2
+    class="govuk-heading-m"
+  >
+    Case
+  </h2>,
+  <table
+    class="govuk-table margin-left--small"
+  >
+    <caption
+      class="govuk-table__caption margin-bottom--small"
     >
-      <caption
-        class="govuk-table__caption margin-bottom--small"
-      >
-        Stage deadlines
-      </caption>
-      <tbody
-        class="govuk-table__body"
-      >
-        <tr
-          class="govuk-table__row"
-        >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            __label__
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __value__
-          </td>
-        </tr>
-        <tr
-          class="govuk-table__row"
-        >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            __label__
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __value__
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <table
-      class="govuk-table margin-left--small"
+      Summary
+    </caption>
+    <tbody
+      class="govuk-table__body"
     >
-      <caption
-        class="govuk-table__caption margin-bottom--small"
+      <tr
+        class="govuk-table__row"
       >
-        Previous Case
-      </caption>
-      <tbody
-        class="govuk-table__body"
-      >
-        <tr
-          class="govuk-table__row"
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
         >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
+          Date received
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          __received__
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__cell"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Created
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          __created__
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__cell"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Deadline
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          __deadline__
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__cell"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Primary topic
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          __primaryTopic__
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__cell"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Primary correspondent
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          <span>
+            __fullname__
+          </span>
+           
+          <br />
+           
+          <span>
+            __telephone__
+          </span>
+            
+          <br />
+           
+          <span>
+            __address1__
+          </span>
+            
+          <br />
+           
+          <span>
+            __address2__
+          </span>
+            
+          <br />
+           
+          <span>
+            __address3__
+          </span>
+            
+          <br />
+           
+          <span>
+            __postcode__
+          </span>
+            
+          <br />
+           
+          <span>
+            __country__
+          </span>
+            
+          <br />
+           
+          <span>
+            __reference__
+          </span>
+           
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          __label__
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          __value__
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          __label__
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          __value__
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+  <table
+    class="govuk-table margin-left--small"
+  >
+    <caption
+      class="govuk-table__caption margin-bottom--small"
+    >
+      Stage deadlines
+    </caption>
+    <tbody
+      class="govuk-table__body"
+    >
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          __label__
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          __value__
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          __label__
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          __value__
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+  <table
+    class="govuk-table margin-left--small"
+  >
+    <caption
+      class="govuk-table__caption margin-bottom--small"
+    >
+      Previous Case
+    </caption>
+    <tbody
+      class="govuk-table__body"
+    >
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Reference
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          <a
+            class="govuk-link govuk-!-margin-right-3"
+            href="/case/__previousCaseUuid__/stage/__previousCaseStage__"
+            rel="noreferrer noopener"
+            target="_blank"
           >
-            Reference
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            <a
-              class="govuk-link govuk-!-margin-right-3"
-              href="/case/__previousCaseUuid__/stage/__previousCaseStage__"
-              rel="noreferrer noopener"
-              target="_blank"
-            >
-              __previousCaseReference__
-            </a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>,
-  "debug": [Function],
-  "findAllByAltText": [Function],
-  "findAllByDisplayValue": [Function],
-  "findAllByLabelText": [Function],
-  "findAllByPlaceholderText": [Function],
-  "findAllByRole": [Function],
-  "findAllByTestId": [Function],
-  "findAllByText": [Function],
-  "findAllByTitle": [Function],
-  "findByAltText": [Function],
-  "findByDisplayValue": [Function],
-  "findByLabelText": [Function],
-  "findByPlaceholderText": [Function],
-  "findByRole": [Function],
-  "findByTestId": [Function],
-  "findByText": [Function],
-  "findByTitle": [Function],
-  "getAllByAltText": [Function],
-  "getAllByDisplayValue": [Function],
-  "getAllByLabelText": [Function],
-  "getAllByPlaceholderText": [Function],
-  "getAllByRole": [Function],
-  "getAllByTestId": [Function],
-  "getAllByText": [Function],
-  "getAllByTitle": [Function],
-  "getByAltText": [Function],
-  "getByDisplayValue": [Function],
-  "getByLabelText": [Function],
-  "getByPlaceholderText": [Function],
-  "getByRole": [Function],
-  "getByTestId": [Function],
-  "getByText": [Function],
-  "getByTitle": [Function],
-  "queryAllByAltText": [Function],
-  "queryAllByDisplayValue": [Function],
-  "queryAllByLabelText": [Function],
-  "queryAllByPlaceholderText": [Function],
-  "queryAllByRole": [Function],
-  "queryAllByTestId": [Function],
-  "queryAllByText": [Function],
-  "queryAllByTitle": [Function],
-  "queryByAltText": [Function],
-  "queryByDisplayValue": [Function],
-  "queryByLabelText": [Function],
-  "queryByPlaceholderText": [Function],
-  "queryByRole": [Function],
-  "queryByTestId": [Function],
-  "queryByText": [Function],
-  "queryByTitle": [Function],
-  "rerender": [Function],
-  "unmount": [Function],
-}
+            __previousCaseReference__
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+]
 `;
 
 exports[`Stage summary component should not show the previous case table when not provided 1`] = `
-Object {
-  "asFragment": [Function],
-  "baseElement": <body>
-    <div>
-      <h2
-        class="govuk-heading-m"
-      >
-        Active stage
-        s
-      </h2>
-      <table
-        class="govuk-table margin-left--small"
-      >
-        <caption
-          class="govuk-table__caption margin-bottom--small"
-        >
-          __stage1__
-        </caption>
-        <tbody
-          class="govuk-table__body"
-        >
-          <tr
-            class="govuk-table__row"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              Team
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __assignedTeam__
-            </td>
-          </tr>
-          <tr
-            class="govuk-table__cell"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              User
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __assignedUser__
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <table
-        class="govuk-table margin-left--small"
-      >
-        <caption
-          class="govuk-table__caption margin-bottom--small"
-        >
-          __stage2__
-        </caption>
-        <tbody
-          class="govuk-table__body"
-        >
-          <tr
-            class="govuk-table__row"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              Team
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __assignedTeam__
-            </td>
-          </tr>
-          <tr
-            class="govuk-table__cell"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              User
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __assignedUser__
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <h2
-        class="govuk-heading-m"
-      >
-        Case
-      </h2>
-      <table
-        class="govuk-table margin-left--small"
-      >
-        <caption
-          class="govuk-table__caption margin-bottom--small"
-        >
-          Summary
-        </caption>
-        <tbody
-          class="govuk-table__body"
-        >
-          <tr
-            class="govuk-table__row"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              Date received
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __received__
-            </td>
-          </tr>
-          <tr
-            class="govuk-table__cell"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              Created
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __created__
-            </td>
-          </tr>
-          <tr
-            class="govuk-table__cell"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              Deadline
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __deadline__
-            </td>
-          </tr>
-          <tr
-            class="govuk-table__cell"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              Primary topic
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __primaryTopic__
-            </td>
-          </tr>
-          <tr
-            class="govuk-table__cell"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              Primary correspondent
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              <span>
-                __fullname__
-              </span>
-               
-              <br />
-               
-              <span>
-                __organisation__
-              </span>
-               
-               
-              <br />
-               
-              <span>
-                __telephone__
-              </span>
-               
-               
-              <br />
-               
-              <span>
-                __address1__
-              </span>
-               
-               
-              <br />
-               
-              <span>
-                __address2__
-              </span>
-               
-               
-              <br />
-               
-              <span>
-                __address3__
-              </span>
-               
-               
-              <br />
-               
-              <span>
-                __postcode__
-              </span>
-               
-               
-              <br />
-               
-              <span>
-                __country__
-              </span>
-               
-               
-              <br />
-               
-              <span>
-                __reference__
-              </span>
-               
-            </td>
-          </tr>
-          <tr
-            class="govuk-table__row"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              __label__
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __value__
-            </td>
-          </tr>
-          <tr
-            class="govuk-table__row"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              __label__
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __value__
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <table
-        class="govuk-table margin-left--small"
-      >
-        <caption
-          class="govuk-table__caption margin-bottom--small"
-        >
-          Stage deadlines
-        </caption>
-        <tbody
-          class="govuk-table__body"
-        >
-          <tr
-            class="govuk-table__row"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              __label__
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __value__
-            </td>
-          </tr>
-          <tr
-            class="govuk-table__row"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              __label__
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __value__
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </body>,
-  "container": <div>
-    <h2
-      class="govuk-heading-m"
+Array [
+  <h2
+    class="govuk-heading-m"
+  >
+    Active stages
+  </h2>,
+  <table
+    class="govuk-table margin-left--small"
+  >
+    <caption
+      class="govuk-table__caption margin-bottom--small"
     >
-      Active stage
-      s
-    </h2>
-    <table
-      class="govuk-table margin-left--small"
+      __stage1__
+    </caption>
+    <tbody
+      class="govuk-table__body"
     >
-      <caption
-        class="govuk-table__caption margin-bottom--small"
+      <tr
+        class="govuk-table__row"
       >
-        __stage1__
-      </caption>
-      <tbody
-        class="govuk-table__body"
-      >
-        <tr
-          class="govuk-table__row"
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
         >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            Team
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __assignedTeam__
-          </td>
-        </tr>
-        <tr
+          Team
+        </th>
+        <td
           class="govuk-table__cell"
         >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            User
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __assignedUser__
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <table
-      class="govuk-table margin-left--small"
+          __assignedTeam__
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__cell"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          User
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          __assignedUser__
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+  <table
+    class="govuk-table margin-left--small"
+  >
+    <caption
+      class="govuk-table__caption margin-bottom--small"
     >
-      <caption
-        class="govuk-table__caption margin-bottom--small"
-      >
-        __stage2__
-      </caption>
-      <tbody
-        class="govuk-table__body"
-      >
-        <tr
-          class="govuk-table__row"
-        >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            Team
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __assignedTeam__
-          </td>
-        </tr>
-        <tr
-          class="govuk-table__cell"
-        >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            User
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __assignedUser__
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <h2
-      class="govuk-heading-m"
+      __stage2__
+    </caption>
+    <tbody
+      class="govuk-table__body"
     >
-      Case
-    </h2>
-    <table
-      class="govuk-table margin-left--small"
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Team
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          __assignedTeam__
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__cell"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          User
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          __assignedUser__
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+  <h2
+    class="govuk-heading-m"
+  >
+    Case
+  </h2>,
+  <table
+    class="govuk-table margin-left--small"
+  >
+    <caption
+      class="govuk-table__caption margin-bottom--small"
     >
-      <caption
-        class="govuk-table__caption margin-bottom--small"
-      >
-        Summary
-      </caption>
-      <tbody
-        class="govuk-table__body"
-      >
-        <tr
-          class="govuk-table__row"
-        >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            Date received
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __received__
-          </td>
-        </tr>
-        <tr
-          class="govuk-table__cell"
-        >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            Created
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __created__
-          </td>
-        </tr>
-        <tr
-          class="govuk-table__cell"
-        >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            Deadline
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __deadline__
-          </td>
-        </tr>
-        <tr
-          class="govuk-table__cell"
-        >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            Primary topic
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __primaryTopic__
-          </td>
-        </tr>
-        <tr
-          class="govuk-table__cell"
-        >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            Primary correspondent
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            <span>
-              __fullname__
-            </span>
-             
-            <br />
-             
-            <span>
-              __organisation__
-            </span>
-             
-             
-            <br />
-             
-            <span>
-              __telephone__
-            </span>
-             
-             
-            <br />
-             
-            <span>
-              __address1__
-            </span>
-             
-             
-            <br />
-             
-            <span>
-              __address2__
-            </span>
-             
-             
-            <br />
-             
-            <span>
-              __address3__
-            </span>
-             
-             
-            <br />
-             
-            <span>
-              __postcode__
-            </span>
-             
-             
-            <br />
-             
-            <span>
-              __country__
-            </span>
-             
-             
-            <br />
-             
-            <span>
-              __reference__
-            </span>
-             
-          </td>
-        </tr>
-        <tr
-          class="govuk-table__row"
-        >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            __label__
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __value__
-          </td>
-        </tr>
-        <tr
-          class="govuk-table__row"
-        >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            __label__
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __value__
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <table
-      class="govuk-table margin-left--small"
+      Summary
+    </caption>
+    <tbody
+      class="govuk-table__body"
     >
-      <caption
-        class="govuk-table__caption margin-bottom--small"
+      <tr
+        class="govuk-table__row"
       >
-        Stage deadlines
-      </caption>
-      <tbody
-        class="govuk-table__body"
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Date received
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          __received__
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__cell"
       >
-        <tr
-          class="govuk-table__row"
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
         >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            __label__
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __value__
-          </td>
-        </tr>
-        <tr
-          class="govuk-table__row"
+          Created
+        </th>
+        <td
+          class="govuk-table__cell"
         >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            __label__
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __value__
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>,
-  "debug": [Function],
-  "findAllByAltText": [Function],
-  "findAllByDisplayValue": [Function],
-  "findAllByLabelText": [Function],
-  "findAllByPlaceholderText": [Function],
-  "findAllByRole": [Function],
-  "findAllByTestId": [Function],
-  "findAllByText": [Function],
-  "findAllByTitle": [Function],
-  "findByAltText": [Function],
-  "findByDisplayValue": [Function],
-  "findByLabelText": [Function],
-  "findByPlaceholderText": [Function],
-  "findByRole": [Function],
-  "findByTestId": [Function],
-  "findByText": [Function],
-  "findByTitle": [Function],
-  "getAllByAltText": [Function],
-  "getAllByDisplayValue": [Function],
-  "getAllByLabelText": [Function],
-  "getAllByPlaceholderText": [Function],
-  "getAllByRole": [Function],
-  "getAllByTestId": [Function],
-  "getAllByText": [Function],
-  "getAllByTitle": [Function],
-  "getByAltText": [Function],
-  "getByDisplayValue": [Function],
-  "getByLabelText": [Function],
-  "getByPlaceholderText": [Function],
-  "getByRole": [Function],
-  "getByTestId": [Function],
-  "getByText": [Function],
-  "getByTitle": [Function],
-  "queryAllByAltText": [Function],
-  "queryAllByDisplayValue": [Function],
-  "queryAllByLabelText": [Function],
-  "queryAllByPlaceholderText": [Function],
-  "queryAllByRole": [Function],
-  "queryAllByTestId": [Function],
-  "queryAllByText": [Function],
-  "queryAllByTitle": [Function],
-  "queryByAltText": [Function],
-  "queryByDisplayValue": [Function],
-  "queryByLabelText": [Function],
-  "queryByPlaceholderText": [Function],
-  "queryByRole": [Function],
-  "queryByTestId": [Function],
-  "queryByText": [Function],
-  "queryByTitle": [Function],
-  "rerender": [Function],
-  "unmount": [Function],
-}
+          __created__
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__cell"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Deadline
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          __deadline__
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__cell"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Primary topic
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          __primaryTopic__
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__cell"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Primary correspondent
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          <span>
+            __fullname__
+          </span>
+           
+          <br />
+           
+          <span>
+            __organisation__
+          </span>
+            
+          <br />
+           
+          <span>
+            __telephone__
+          </span>
+            
+          <br />
+           
+          <span>
+            __address1__
+          </span>
+            
+          <br />
+           
+          <span>
+            __address2__
+          </span>
+            
+          <br />
+           
+          <span>
+            __address3__
+          </span>
+            
+          <br />
+           
+          <span>
+            __postcode__
+          </span>
+            
+          <br />
+           
+          <span>
+            __country__
+          </span>
+            
+          <br />
+           
+          <span>
+            __reference__
+          </span>
+           
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          __label__
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          __value__
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          __label__
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          __value__
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+  <table
+    class="govuk-table margin-left--small"
+  >
+    <caption
+      class="govuk-table__caption margin-bottom--small"
+    >
+      Stage deadlines
+    </caption>
+    <tbody
+      class="govuk-table__body"
+    >
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          __label__
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          __value__
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          __label__
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          __value__
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+]
 `;
 
 exports[`Stage summary component should render when summary provided in context 1`] = `
-Object {
-  "asFragment": [Function],
-  "baseElement": <body>
-    <div>
-      <h2
-        class="govuk-heading-m"
-      >
-        Active stage
-        s
-      </h2>
-      <table
-        class="govuk-table margin-left--small"
-      >
-        <caption
-          class="govuk-table__caption margin-bottom--small"
-        >
-          __stage1__
-        </caption>
-        <tbody
-          class="govuk-table__body"
-        >
-          <tr
-            class="govuk-table__row"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              Team
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __assignedTeam__
-            </td>
-          </tr>
-          <tr
-            class="govuk-table__cell"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              User
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __assignedUser__
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <table
-        class="govuk-table margin-left--small"
-      >
-        <caption
-          class="govuk-table__caption margin-bottom--small"
-        >
-          __stage2__
-        </caption>
-        <tbody
-          class="govuk-table__body"
-        >
-          <tr
-            class="govuk-table__row"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              Team
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __assignedTeam__
-            </td>
-          </tr>
-          <tr
-            class="govuk-table__cell"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              User
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __assignedUser__
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <h2
-        class="govuk-heading-m"
-      >
-        Case
-      </h2>
-      <table
-        class="govuk-table margin-left--small"
-      >
-        <caption
-          class="govuk-table__caption margin-bottom--small"
-        >
-          Summary
-        </caption>
-        <tbody
-          class="govuk-table__body"
-        >
-          <tr
-            class="govuk-table__row"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              Date received
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __received__
-            </td>
-          </tr>
-          <tr
-            class="govuk-table__cell"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              Created
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __created__
-            </td>
-          </tr>
-          <tr
-            class="govuk-table__cell"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              Deadline
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __deadline__
-            </td>
-          </tr>
-          <tr
-            class="govuk-table__cell"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              Primary topic
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __primaryTopic__
-            </td>
-          </tr>
-          <tr
-            class="govuk-table__cell"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              Primary correspondent
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              <span>
-                __fullname__
-              </span>
-               
-              <br />
-               
-              <span>
-                __organisation__
-              </span>
-               
-               
-              <br />
-               
-              <span>
-                __telephone__
-              </span>
-               
-               
-              <br />
-               
-              <span>
-                __address1__
-              </span>
-               
-               
-              <br />
-               
-              <span>
-                __address2__
-              </span>
-               
-               
-              <br />
-               
-              <span>
-                __address3__
-              </span>
-               
-               
-              <br />
-               
-              <span>
-                __postcode__
-              </span>
-               
-               
-              <br />
-               
-              <span>
-                __country__
-              </span>
-               
-               
-              <br />
-               
-              <span>
-                __reference__
-              </span>
-               
-            </td>
-          </tr>
-          <tr
-            class="govuk-table__row"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              __label__
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __value__
-            </td>
-          </tr>
-          <tr
-            class="govuk-table__row"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              __label__
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __value__
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <table
-        class="govuk-table margin-left--small"
-      >
-        <caption
-          class="govuk-table__caption margin-bottom--small"
-        >
-          Stage deadlines
-        </caption>
-        <tbody
-          class="govuk-table__body"
-        >
-          <tr
-            class="govuk-table__row"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              __label__
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __value__
-            </td>
-          </tr>
-          <tr
-            class="govuk-table__row"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              __label__
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              __value__
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <table
-        class="govuk-table margin-left--small"
-      >
-        <caption
-          class="govuk-table__caption margin-bottom--small"
-        >
-          Previous Case
-        </caption>
-        <tbody
-          class="govuk-table__body"
-        >
-          <tr
-            class="govuk-table__row"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              Reference
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              <a
-                class="govuk-link govuk-!-margin-right-3"
-                href="/case/__previousCaseUuid__/stage/__previousCaseStage__"
-                rel="noreferrer noopener"
-                target="_blank"
-              >
-                __previousCaseReference__
-              </a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </body>,
-  "container": <div>
-    <h2
-      class="govuk-heading-m"
+Array [
+  <h2
+    class="govuk-heading-m"
+  >
+    Active stages
+  </h2>,
+  <table
+    class="govuk-table margin-left--small"
+  >
+    <caption
+      class="govuk-table__caption margin-bottom--small"
     >
-      Active stage
-      s
-    </h2>
-    <table
-      class="govuk-table margin-left--small"
+      __stage1__
+    </caption>
+    <tbody
+      class="govuk-table__body"
     >
-      <caption
-        class="govuk-table__caption margin-bottom--small"
+      <tr
+        class="govuk-table__row"
       >
-        __stage1__
-      </caption>
-      <tbody
-        class="govuk-table__body"
-      >
-        <tr
-          class="govuk-table__row"
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
         >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            Team
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __assignedTeam__
-          </td>
-        </tr>
-        <tr
+          Team
+        </th>
+        <td
           class="govuk-table__cell"
         >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            User
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __assignedUser__
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <table
-      class="govuk-table margin-left--small"
-    >
-      <caption
-        class="govuk-table__caption margin-bottom--small"
+          __assignedTeam__
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__cell"
       >
-        __stage2__
-      </caption>
-      <tbody
-        class="govuk-table__body"
-      >
-        <tr
-          class="govuk-table__row"
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
         >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            Team
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __assignedTeam__
-          </td>
-        </tr>
-        <tr
+          User
+        </th>
+        <td
           class="govuk-table__cell"
         >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            User
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __assignedUser__
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <h2
-      class="govuk-heading-m"
+          __assignedUser__
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+  <table
+    class="govuk-table margin-left--small"
+  >
+    <caption
+      class="govuk-table__caption margin-bottom--small"
     >
-      Case
-    </h2>
-    <table
-      class="govuk-table margin-left--small"
+      __stage2__
+    </caption>
+    <tbody
+      class="govuk-table__body"
     >
-      <caption
-        class="govuk-table__caption margin-bottom--small"
+      <tr
+        class="govuk-table__row"
       >
-        Summary
-      </caption>
-      <tbody
-        class="govuk-table__body"
-      >
-        <tr
-          class="govuk-table__row"
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
         >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            Date received
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __received__
-          </td>
-        </tr>
-        <tr
+          Team
+        </th>
+        <td
           class="govuk-table__cell"
         >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            Created
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __created__
-          </td>
-        </tr>
-        <tr
+          __assignedTeam__
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__cell"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          User
+        </th>
+        <td
           class="govuk-table__cell"
         >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            Deadline
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __deadline__
-          </td>
-        </tr>
-        <tr
-          class="govuk-table__cell"
-        >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            Primary topic
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __primaryTopic__
-          </td>
-        </tr>
-        <tr
-          class="govuk-table__cell"
-        >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            Primary correspondent
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            <span>
-              __fullname__
-            </span>
-             
-            <br />
-             
-            <span>
-              __organisation__
-            </span>
-             
-             
-            <br />
-             
-            <span>
-              __telephone__
-            </span>
-             
-             
-            <br />
-             
-            <span>
-              __address1__
-            </span>
-             
-             
-            <br />
-             
-            <span>
-              __address2__
-            </span>
-             
-             
-            <br />
-             
-            <span>
-              __address3__
-            </span>
-             
-             
-            <br />
-             
-            <span>
-              __postcode__
-            </span>
-             
-             
-            <br />
-             
-            <span>
-              __country__
-            </span>
-             
-             
-            <br />
-             
-            <span>
-              __reference__
-            </span>
-             
-          </td>
-        </tr>
-        <tr
-          class="govuk-table__row"
-        >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            __label__
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __value__
-          </td>
-        </tr>
-        <tr
-          class="govuk-table__row"
-        >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            __label__
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __value__
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <table
-      class="govuk-table margin-left--small"
+          __assignedUser__
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+  <h2
+    class="govuk-heading-m"
+  >
+    Case
+  </h2>,
+  <table
+    class="govuk-table margin-left--small"
+  >
+    <caption
+      class="govuk-table__caption margin-bottom--small"
     >
-      <caption
-        class="govuk-table__caption margin-bottom--small"
-      >
-        Stage deadlines
-      </caption>
-      <tbody
-        class="govuk-table__body"
-      >
-        <tr
-          class="govuk-table__row"
-        >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            __label__
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __value__
-          </td>
-        </tr>
-        <tr
-          class="govuk-table__row"
-        >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            __label__
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            __value__
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <table
-      class="govuk-table margin-left--small"
+      Summary
+    </caption>
+    <tbody
+      class="govuk-table__body"
     >
-      <caption
-        class="govuk-table__caption margin-bottom--small"
+      <tr
+        class="govuk-table__row"
       >
-        Previous Case
-      </caption>
-      <tbody
-        class="govuk-table__body"
-      >
-        <tr
-          class="govuk-table__row"
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
         >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
+          Date received
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          __received__
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__cell"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Created
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          __created__
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__cell"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Deadline
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          __deadline__
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__cell"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Primary topic
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          __primaryTopic__
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__cell"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Primary correspondent
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          <span>
+            __fullname__
+          </span>
+           
+          <br />
+           
+          <span>
+            __organisation__
+          </span>
+            
+          <br />
+           
+          <span>
+            __telephone__
+          </span>
+            
+          <br />
+           
+          <span>
+            __address1__
+          </span>
+            
+          <br />
+           
+          <span>
+            __address2__
+          </span>
+            
+          <br />
+           
+          <span>
+            __address3__
+          </span>
+            
+          <br />
+           
+          <span>
+            __postcode__
+          </span>
+            
+          <br />
+           
+          <span>
+            __country__
+          </span>
+            
+          <br />
+           
+          <span>
+            __reference__
+          </span>
+           
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          __label__
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          __value__
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          __label__
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          __value__
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+  <table
+    class="govuk-table margin-left--small"
+  >
+    <caption
+      class="govuk-table__caption margin-bottom--small"
+    >
+      Stage deadlines
+    </caption>
+    <tbody
+      class="govuk-table__body"
+    >
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          __label__
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          __value__
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          __label__
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          __value__
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+  <table
+    class="govuk-table margin-left--small"
+  >
+    <caption
+      class="govuk-table__caption margin-bottom--small"
+    >
+      Previous Case
+    </caption>
+    <tbody
+      class="govuk-table__body"
+    >
+      <tr
+        class="govuk-table__row"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Reference
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          <a
+            class="govuk-link govuk-!-margin-right-3"
+            href="/case/__previousCaseUuid__/stage/__previousCaseStage__"
+            rel="noreferrer noopener"
+            target="_blank"
           >
-            Reference
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            <a
-              class="govuk-link govuk-!-margin-right-3"
-              href="/case/__previousCaseUuid__/stage/__previousCaseStage__"
-              rel="noreferrer noopener"
-              target="_blank"
-            >
-              __previousCaseReference__
-            </a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>,
-  "debug": [Function],
-  "findAllByAltText": [Function],
-  "findAllByDisplayValue": [Function],
-  "findAllByLabelText": [Function],
-  "findAllByPlaceholderText": [Function],
-  "findAllByRole": [Function],
-  "findAllByTestId": [Function],
-  "findAllByText": [Function],
-  "findAllByTitle": [Function],
-  "findByAltText": [Function],
-  "findByDisplayValue": [Function],
-  "findByLabelText": [Function],
-  "findByPlaceholderText": [Function],
-  "findByRole": [Function],
-  "findByTestId": [Function],
-  "findByText": [Function],
-  "findByTitle": [Function],
-  "getAllByAltText": [Function],
-  "getAllByDisplayValue": [Function],
-  "getAllByLabelText": [Function],
-  "getAllByPlaceholderText": [Function],
-  "getAllByRole": [Function],
-  "getAllByTestId": [Function],
-  "getAllByText": [Function],
-  "getAllByTitle": [Function],
-  "getByAltText": [Function],
-  "getByDisplayValue": [Function],
-  "getByLabelText": [Function],
-  "getByPlaceholderText": [Function],
-  "getByRole": [Function],
-  "getByTestId": [Function],
-  "getByText": [Function],
-  "getByTitle": [Function],
-  "queryAllByAltText": [Function],
-  "queryAllByDisplayValue": [Function],
-  "queryAllByLabelText": [Function],
-  "queryAllByPlaceholderText": [Function],
-  "queryAllByRole": [Function],
-  "queryAllByTestId": [Function],
-  "queryAllByText": [Function],
-  "queryAllByTitle": [Function],
-  "queryByAltText": [Function],
-  "queryByDisplayValue": [Function],
-  "queryByLabelText": [Function],
-  "queryByPlaceholderText": [Function],
-  "queryByRole": [Function],
-  "queryByTestId": [Function],
-  "queryByText": [Function],
-  "queryByTitle": [Function],
-  "rerender": [Function],
-  "unmount": [Function],
-}
+            __previousCaseReference__
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+]
 `;

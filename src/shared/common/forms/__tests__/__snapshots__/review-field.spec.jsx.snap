@@ -1,784 +1,250 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Review component should display a text summary of a child radio button component 1`] = `
-Object {
-  "asFragment": [Function],
-  "baseElement": <body>
-    <div>
-      <div
-        class="review-field"
-      >
-        <div
-          class="govuk-grid-row review-field-row"
-        >
-          <div
-            class="govuk-grid-column-one-half"
-          >
-            <span
-              class="govuk-label govuk-label--s"
-            >
-              Which button has been clicked?
-            </span>
-          </div>
-          <div
-            class="govuk-grid-column-one-third govuk-body review-field-column"
-            id="RADIO_SUMMARY_TEST"
-            name="RADIO_SUMMARY_TEST"
-            type="review-field"
-          >
-            Button Two
-          </div>
-          <div
-            class="grid-column-one-sixth-right-align govuk-body review-field-column"
-          >
-            <a
-              class="govuk-body govuk-link change-link"
-              href=""
-            >
-              Change 
-              <span
-                class="govuk-visually-hidden"
-              >
-                Which button has been clicked?
-              </span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </body>,
-  "container": <div>
+<div
+  class="review-field"
+>
+  <div
+    class="govuk-grid-row review-field-row"
+  >
     <div
-      class="review-field"
+      class="govuk-grid-column-one-half"
     >
-      <div
-        class="govuk-grid-row review-field-row"
+      <span
+        class="govuk-label govuk-label--s"
       >
-        <div
-          class="govuk-grid-column-one-half"
-        >
-          <span
-            class="govuk-label govuk-label--s"
-          >
-            Which button has been clicked?
-          </span>
-        </div>
-        <div
-          class="govuk-grid-column-one-third govuk-body review-field-column"
-          id="RADIO_SUMMARY_TEST"
-          name="RADIO_SUMMARY_TEST"
-          type="review-field"
-        >
-          Button Two
-        </div>
-        <div
-          class="grid-column-one-sixth-right-align govuk-body review-field-column"
-        >
-          <a
-            class="govuk-body govuk-link change-link"
-            href=""
-          >
-            Change 
-            <span
-              class="govuk-visually-hidden"
-            >
-              Which button has been clicked?
-            </span>
-          </a>
-        </div>
-      </div>
+        Which button has been clicked?
+      </span>
     </div>
-  </div>,
-  "debug": [Function],
-  "findAllByAltText": [Function],
-  "findAllByDisplayValue": [Function],
-  "findAllByLabelText": [Function],
-  "findAllByPlaceholderText": [Function],
-  "findAllByRole": [Function],
-  "findAllByTestId": [Function],
-  "findAllByText": [Function],
-  "findAllByTitle": [Function],
-  "findByAltText": [Function],
-  "findByDisplayValue": [Function],
-  "findByLabelText": [Function],
-  "findByPlaceholderText": [Function],
-  "findByRole": [Function],
-  "findByTestId": [Function],
-  "findByText": [Function],
-  "findByTitle": [Function],
-  "getAllByAltText": [Function],
-  "getAllByDisplayValue": [Function],
-  "getAllByLabelText": [Function],
-  "getAllByPlaceholderText": [Function],
-  "getAllByRole": [Function],
-  "getAllByTestId": [Function],
-  "getAllByText": [Function],
-  "getAllByTitle": [Function],
-  "getByAltText": [Function],
-  "getByDisplayValue": [Function],
-  "getByLabelText": [Function],
-  "getByPlaceholderText": [Function],
-  "getByRole": [Function],
-  "getByTestId": [Function],
-  "getByText": [Function],
-  "getByTitle": [Function],
-  "queryAllByAltText": [Function],
-  "queryAllByDisplayValue": [Function],
-  "queryAllByLabelText": [Function],
-  "queryAllByPlaceholderText": [Function],
-  "queryAllByRole": [Function],
-  "queryAllByTestId": [Function],
-  "queryAllByText": [Function],
-  "queryAllByTitle": [Function],
-  "queryByAltText": [Function],
-  "queryByDisplayValue": [Function],
-  "queryByLabelText": [Function],
-  "queryByPlaceholderText": [Function],
-  "queryByRole": [Function],
-  "queryByTestId": [Function],
-  "queryByText": [Function],
-  "queryByTitle": [Function],
-  "rerender": [Function],
-  "unmount": [Function],
-}
+    <div
+      class="govuk-grid-column-one-third govuk-body review-field-column"
+      id="RADIO_SUMMARY_TEST"
+      name="RADIO_SUMMARY_TEST"
+      type="review-field"
+    >
+      Button Two
+    </div>
+    <div
+      class="grid-column-one-sixth-right-align govuk-body review-field-column"
+    >
+      <a
+        class="govuk-body govuk-link change-link"
+        href=""
+      >
+        Change 
+        <span
+          class="govuk-visually-hidden"
+        >
+          Which button has been clicked?
+        </span>
+      </a>
+    </div>
+  </div>
+</div>
 `;
 
 exports[`Review component should display a text summary of a date component 1`] = `
-Object {
-  "asFragment": [Function],
-  "baseElement": <body>
-    <div>
-      <div
-        class="review-field"
-      >
-        <div
-          class="govuk-grid-row review-field-row"
-        >
-          <div
-            class="govuk-grid-column-one-half"
-          >
-            <span
-              class="govuk-label govuk-label--s"
-            >
-              Date
-            </span>
-          </div>
-          <div
-            class="govuk-grid-column-one-third govuk-body review-field-column"
-            id="DATE_SUMMARY_TEST"
-            name="DATE_SUMMARY_TEST"
-            type="review-field"
-          >
-            01/11/2021
-          </div>
-          <div
-            class="grid-column-one-sixth-right-align govuk-body review-field-column"
-          >
-            <a
-              class="govuk-body govuk-link change-link"
-              href=""
-            >
-              Change 
-              <span
-                class="govuk-visually-hidden"
-              >
-                Date
-              </span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </body>,
-  "container": <div>
+<div
+  class="review-field"
+>
+  <div
+    class="govuk-grid-row review-field-row"
+  >
     <div
-      class="review-field"
+      class="govuk-grid-column-one-half"
     >
-      <div
-        class="govuk-grid-row review-field-row"
+      <span
+        class="govuk-label govuk-label--s"
       >
-        <div
-          class="govuk-grid-column-one-half"
-        >
-          <span
-            class="govuk-label govuk-label--s"
-          >
-            Date
-          </span>
-        </div>
-        <div
-          class="govuk-grid-column-one-third govuk-body review-field-column"
-          id="DATE_SUMMARY_TEST"
-          name="DATE_SUMMARY_TEST"
-          type="review-field"
-        >
-          01/11/2021
-        </div>
-        <div
-          class="grid-column-one-sixth-right-align govuk-body review-field-column"
-        >
-          <a
-            class="govuk-body govuk-link change-link"
-            href=""
-          >
-            Change 
-            <span
-              class="govuk-visually-hidden"
-            >
-              Date
-            </span>
-          </a>
-        </div>
-      </div>
+        Date
+      </span>
     </div>
-  </div>,
-  "debug": [Function],
-  "findAllByAltText": [Function],
-  "findAllByDisplayValue": [Function],
-  "findAllByLabelText": [Function],
-  "findAllByPlaceholderText": [Function],
-  "findAllByRole": [Function],
-  "findAllByTestId": [Function],
-  "findAllByText": [Function],
-  "findAllByTitle": [Function],
-  "findByAltText": [Function],
-  "findByDisplayValue": [Function],
-  "findByLabelText": [Function],
-  "findByPlaceholderText": [Function],
-  "findByRole": [Function],
-  "findByTestId": [Function],
-  "findByText": [Function],
-  "findByTitle": [Function],
-  "getAllByAltText": [Function],
-  "getAllByDisplayValue": [Function],
-  "getAllByLabelText": [Function],
-  "getAllByPlaceholderText": [Function],
-  "getAllByRole": [Function],
-  "getAllByTestId": [Function],
-  "getAllByText": [Function],
-  "getAllByTitle": [Function],
-  "getByAltText": [Function],
-  "getByDisplayValue": [Function],
-  "getByLabelText": [Function],
-  "getByPlaceholderText": [Function],
-  "getByRole": [Function],
-  "getByTestId": [Function],
-  "getByText": [Function],
-  "getByTitle": [Function],
-  "queryAllByAltText": [Function],
-  "queryAllByDisplayValue": [Function],
-  "queryAllByLabelText": [Function],
-  "queryAllByPlaceholderText": [Function],
-  "queryAllByRole": [Function],
-  "queryAllByTestId": [Function],
-  "queryAllByText": [Function],
-  "queryAllByTitle": [Function],
-  "queryByAltText": [Function],
-  "queryByDisplayValue": [Function],
-  "queryByLabelText": [Function],
-  "queryByPlaceholderText": [Function],
-  "queryByRole": [Function],
-  "queryByTestId": [Function],
-  "queryByText": [Function],
-  "queryByTitle": [Function],
-  "rerender": [Function],
-  "unmount": [Function],
-}
+    <div
+      class="govuk-grid-column-one-third govuk-body review-field-column"
+      id="DATE_SUMMARY_TEST"
+      name="DATE_SUMMARY_TEST"
+      type="review-field"
+    >
+      01/11/2021
+    </div>
+    <div
+      class="grid-column-one-sixth-right-align govuk-body review-field-column"
+    >
+      <a
+        class="govuk-body govuk-link change-link"
+        href=""
+      >
+        Change 
+        <span
+          class="govuk-visually-hidden"
+        >
+          Date
+        </span>
+      </a>
+    </div>
+  </div>
+</div>
 `;
 
 exports[`Review component should display a text summary of a text component 1`] = `
-Object {
-  "asFragment": [Function],
-  "baseElement": <body>
-    <div>
-      <div
-        class="review-field"
-      >
-        <div
-          class="govuk-grid-row review-field-row"
-        >
-          <div
-            class="govuk-grid-column-one-half"
-          >
-            <span
-              class="govuk-label govuk-label--s"
-            >
-              Text area
-            </span>
-          </div>
-          <div
-            class="govuk-grid-column-one-third govuk-body review-field-column"
-            id="TEXT_SUMMARY_TEST"
-            name="TEXT_SUMMARY_TEST"
-            type="review-field"
-          >
-            Here is some text.
-          </div>
-          <div
-            class="grid-column-one-sixth-right-align govuk-body review-field-column"
-          >
-            <a
-              class="govuk-body govuk-link change-link"
-              href=""
-            >
-              Change 
-              <span
-                class="govuk-visually-hidden"
-              >
-                Text area
-              </span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </body>,
-  "container": <div>
+<div
+  class="review-field"
+>
+  <div
+    class="govuk-grid-row review-field-row"
+  >
     <div
-      class="review-field"
+      class="govuk-grid-column-one-half"
     >
-      <div
-        class="govuk-grid-row review-field-row"
+      <span
+        class="govuk-label govuk-label--s"
       >
-        <div
-          class="govuk-grid-column-one-half"
-        >
-          <span
-            class="govuk-label govuk-label--s"
-          >
-            Text area
-          </span>
-        </div>
-        <div
-          class="govuk-grid-column-one-third govuk-body review-field-column"
-          id="TEXT_SUMMARY_TEST"
-          name="TEXT_SUMMARY_TEST"
-          type="review-field"
-        >
-          Here is some text.
-        </div>
-        <div
-          class="grid-column-one-sixth-right-align govuk-body review-field-column"
-        >
-          <a
-            class="govuk-body govuk-link change-link"
-            href=""
-          >
-            Change 
-            <span
-              class="govuk-visually-hidden"
-            >
-              Text area
-            </span>
-          </a>
-        </div>
-      </div>
+        Text area
+      </span>
     </div>
-  </div>,
-  "debug": [Function],
-  "findAllByAltText": [Function],
-  "findAllByDisplayValue": [Function],
-  "findAllByLabelText": [Function],
-  "findAllByPlaceholderText": [Function],
-  "findAllByRole": [Function],
-  "findAllByTestId": [Function],
-  "findAllByText": [Function],
-  "findAllByTitle": [Function],
-  "findByAltText": [Function],
-  "findByDisplayValue": [Function],
-  "findByLabelText": [Function],
-  "findByPlaceholderText": [Function],
-  "findByRole": [Function],
-  "findByTestId": [Function],
-  "findByText": [Function],
-  "findByTitle": [Function],
-  "getAllByAltText": [Function],
-  "getAllByDisplayValue": [Function],
-  "getAllByLabelText": [Function],
-  "getAllByPlaceholderText": [Function],
-  "getAllByRole": [Function],
-  "getAllByTestId": [Function],
-  "getAllByText": [Function],
-  "getAllByTitle": [Function],
-  "getByAltText": [Function],
-  "getByDisplayValue": [Function],
-  "getByLabelText": [Function],
-  "getByPlaceholderText": [Function],
-  "getByRole": [Function],
-  "getByTestId": [Function],
-  "getByText": [Function],
-  "getByTitle": [Function],
-  "queryAllByAltText": [Function],
-  "queryAllByDisplayValue": [Function],
-  "queryAllByLabelText": [Function],
-  "queryAllByPlaceholderText": [Function],
-  "queryAllByRole": [Function],
-  "queryAllByTestId": [Function],
-  "queryAllByText": [Function],
-  "queryAllByTitle": [Function],
-  "queryByAltText": [Function],
-  "queryByDisplayValue": [Function],
-  "queryByLabelText": [Function],
-  "queryByPlaceholderText": [Function],
-  "queryByRole": [Function],
-  "queryByTestId": [Function],
-  "queryByText": [Function],
-  "queryByTitle": [Function],
-  "rerender": [Function],
-  "unmount": [Function],
-}
+    <div
+      class="govuk-grid-column-one-third govuk-body review-field-column"
+      id="TEXT_SUMMARY_TEST"
+      name="TEXT_SUMMARY_TEST"
+      type="review-field"
+    >
+      Here is some text.
+    </div>
+    <div
+      class="grid-column-one-sixth-right-align govuk-body review-field-column"
+    >
+      <a
+        class="govuk-body govuk-link change-link"
+        href=""
+      >
+        Change 
+        <span
+          class="govuk-visually-hidden"
+        >
+          Text area
+        </span>
+      </a>
+    </div>
+  </div>
+</div>
 `;
 
 exports[`Review component should display multiple lines for a checkbox-grid component 1`] = `
-Object {
-  "asFragment": [Function],
-  "baseElement": <body>
-    <div>
-      <div
-        class="review-field"
-      >
-        <div
-          class="govuk-grid-row review-field-row"
-        >
-          <div
-            class="govuk-grid-column-one-half"
-          >
-            <span
-              class="govuk-label govuk-label--s"
-            >
-              Select checkboxes
-            </span>
-          </div>
-          <div
-            class="govuk-grid-column-one-third govuk-body review-field-column"
-            id="TEXT_SUMMARY_TEST"
-            name="TEXT_SUMMARY_TEST"
-            type="review-field"
-          >
-            label-1
-          </div>
-          <div
-            class="grid-column-one-sixth-right-align govuk-body review-field-column"
-          >
-            <a
-              class="govuk-body govuk-link change-link"
-              href=""
-            >
-              Change 
-              <span
-                class="govuk-visually-hidden"
-              >
-                Select checkboxes
-              </span>
-            </a>
-          </div>
-        </div>
-        <div
-          class="govuk-grid-row review-field-row"
-        >
-          <div
-            class="govuk-grid-column-one-half"
-          >
-            <span
-              class="govuk-label govuk-label--s"
-            />
-          </div>
-          <div
-            class="govuk-grid-column-one-third govuk-body review-field-column"
-            id="TEXT_SUMMARY_TEST"
-            name="TEXT_SUMMARY_TEST"
-            type="review-field"
-          >
-            label-3
-          </div>
-          <div
-            class="grid-column-one-sixth-right-align govuk-body review-field-column"
-          >
-            <a
-              class="govuk-body govuk-link change-link"
-              href=""
-            >
-              Change 
-              <span
-                class="govuk-visually-hidden"
-              >
-                Select checkboxes
-              </span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </body>,
-  "container": <div>
+<div
+  class="review-field"
+>
+  <div
+    class="govuk-grid-row review-field-row"
+  >
     <div
-      class="review-field"
+      class="govuk-grid-column-one-half"
     >
-      <div
-        class="govuk-grid-row review-field-row"
+      <span
+        class="govuk-label govuk-label--s"
       >
-        <div
-          class="govuk-grid-column-one-half"
-        >
-          <span
-            class="govuk-label govuk-label--s"
-          >
-            Select checkboxes
-          </span>
-        </div>
-        <div
-          class="govuk-grid-column-one-third govuk-body review-field-column"
-          id="TEXT_SUMMARY_TEST"
-          name="TEXT_SUMMARY_TEST"
-          type="review-field"
-        >
-          label-1
-        </div>
-        <div
-          class="grid-column-one-sixth-right-align govuk-body review-field-column"
-        >
-          <a
-            class="govuk-body govuk-link change-link"
-            href=""
-          >
-            Change 
-            <span
-              class="govuk-visually-hidden"
-            >
-              Select checkboxes
-            </span>
-          </a>
-        </div>
-      </div>
-      <div
-        class="govuk-grid-row review-field-row"
-      >
-        <div
-          class="govuk-grid-column-one-half"
-        >
-          <span
-            class="govuk-label govuk-label--s"
-          />
-        </div>
-        <div
-          class="govuk-grid-column-one-third govuk-body review-field-column"
-          id="TEXT_SUMMARY_TEST"
-          name="TEXT_SUMMARY_TEST"
-          type="review-field"
-        >
-          label-3
-        </div>
-        <div
-          class="grid-column-one-sixth-right-align govuk-body review-field-column"
-        >
-          <a
-            class="govuk-body govuk-link change-link"
-            href=""
-          >
-            Change 
-            <span
-              class="govuk-visually-hidden"
-            >
-              Select checkboxes
-            </span>
-          </a>
-        </div>
-      </div>
+        Select checkboxes
+      </span>
     </div>
-  </div>,
-  "debug": [Function],
-  "findAllByAltText": [Function],
-  "findAllByDisplayValue": [Function],
-  "findAllByLabelText": [Function],
-  "findAllByPlaceholderText": [Function],
-  "findAllByRole": [Function],
-  "findAllByTestId": [Function],
-  "findAllByText": [Function],
-  "findAllByTitle": [Function],
-  "findByAltText": [Function],
-  "findByDisplayValue": [Function],
-  "findByLabelText": [Function],
-  "findByPlaceholderText": [Function],
-  "findByRole": [Function],
-  "findByTestId": [Function],
-  "findByText": [Function],
-  "findByTitle": [Function],
-  "getAllByAltText": [Function],
-  "getAllByDisplayValue": [Function],
-  "getAllByLabelText": [Function],
-  "getAllByPlaceholderText": [Function],
-  "getAllByRole": [Function],
-  "getAllByTestId": [Function],
-  "getAllByText": [Function],
-  "getAllByTitle": [Function],
-  "getByAltText": [Function],
-  "getByDisplayValue": [Function],
-  "getByLabelText": [Function],
-  "getByPlaceholderText": [Function],
-  "getByRole": [Function],
-  "getByTestId": [Function],
-  "getByText": [Function],
-  "getByTitle": [Function],
-  "queryAllByAltText": [Function],
-  "queryAllByDisplayValue": [Function],
-  "queryAllByLabelText": [Function],
-  "queryAllByPlaceholderText": [Function],
-  "queryAllByRole": [Function],
-  "queryAllByTestId": [Function],
-  "queryAllByText": [Function],
-  "queryAllByTitle": [Function],
-  "queryByAltText": [Function],
-  "queryByDisplayValue": [Function],
-  "queryByLabelText": [Function],
-  "queryByPlaceholderText": [Function],
-  "queryByRole": [Function],
-  "queryByTestId": [Function],
-  "queryByText": [Function],
-  "queryByTitle": [Function],
-  "rerender": [Function],
-  "unmount": [Function],
-}
+    <div
+      class="govuk-grid-column-one-third govuk-body review-field-column"
+      id="TEXT_SUMMARY_TEST"
+      name="TEXT_SUMMARY_TEST"
+      type="review-field"
+    >
+      label-1
+    </div>
+    <div
+      class="grid-column-one-sixth-right-align govuk-body review-field-column"
+    >
+      <a
+        class="govuk-body govuk-link change-link"
+        href=""
+      >
+        Change 
+        <span
+          class="govuk-visually-hidden"
+        >
+          Select checkboxes
+        </span>
+      </a>
+    </div>
+  </div>
+  <div
+    class="govuk-grid-row review-field-row"
+  >
+    <div
+      class="govuk-grid-column-one-half"
+    >
+      <span
+        class="govuk-label govuk-label--s"
+      />
+    </div>
+    <div
+      class="govuk-grid-column-one-third govuk-body review-field-column"
+      id="TEXT_SUMMARY_TEST"
+      name="TEXT_SUMMARY_TEST"
+      type="review-field"
+    >
+      label-3
+    </div>
+    <div
+      class="grid-column-one-sixth-right-align govuk-body review-field-column"
+    >
+      <a
+        class="govuk-body govuk-link change-link"
+        href=""
+      >
+        Change 
+        <span
+          class="govuk-visually-hidden"
+        >
+          Select checkboxes
+        </span>
+      </a>
+    </div>
+  </div>
+</div>
 `;
 
 exports[`Review component should display the primary correspondent given the correspondents entity-list 1`] = `
-Object {
-  "asFragment": [Function],
-  "baseElement": <body>
-    <div>
-      <div
-        class="review-field"
-      >
-        <div
-          class="govuk-grid-row review-field-row"
-        >
-          <div
-            class="govuk-grid-column-one-half"
-          >
-            <span
-              class="govuk-label govuk-label--s"
-            >
-              Primary correspondent
-            </span>
-          </div>
-          <div
-            class="govuk-grid-column-one-third govuk-body review-field-column"
-            id="CORRESPONDENT"
-            name="CORRESPONDENT"
-            type="review-field"
-          >
-            Test
-          </div>
-          <div
-            class="grid-column-one-sixth-right-align govuk-body review-field-column"
-          >
-            <a
-              class="govuk-link"
-              href="/case/ea258af3-cdd6-479c-92a7-06b3e33125f1/stage/f36298c2-f400-4e7b-af17-a3eefb72e4a0/entity/correspondent/TEST-KEY/update?hideSidebar=false"
-            >
-              Change 
-              <span
-                class="govuk-visually-hidden"
-              >
-                Primary correspondent
-              </span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </body>,
-  "container": <div>
+<div
+  class="review-field"
+>
+  <div
+    class="govuk-grid-row review-field-row"
+  >
     <div
-      class="review-field"
+      class="govuk-grid-column-one-half"
     >
-      <div
-        class="govuk-grid-row review-field-row"
+      <span
+        class="govuk-label govuk-label--s"
       >
-        <div
-          class="govuk-grid-column-one-half"
-        >
-          <span
-            class="govuk-label govuk-label--s"
-          >
-            Primary correspondent
-          </span>
-        </div>
-        <div
-          class="govuk-grid-column-one-third govuk-body review-field-column"
-          id="CORRESPONDENT"
-          name="CORRESPONDENT"
-          type="review-field"
-        >
-          Test
-        </div>
-        <div
-          class="grid-column-one-sixth-right-align govuk-body review-field-column"
-        >
-          <a
-            class="govuk-link"
-            href="/case/ea258af3-cdd6-479c-92a7-06b3e33125f1/stage/f36298c2-f400-4e7b-af17-a3eefb72e4a0/entity/correspondent/TEST-KEY/update?hideSidebar=false"
-          >
-            Change 
-            <span
-              class="govuk-visually-hidden"
-            >
-              Primary correspondent
-            </span>
-          </a>
-        </div>
-      </div>
+        Primary correspondent
+      </span>
     </div>
-  </div>,
-  "debug": [Function],
-  "findAllByAltText": [Function],
-  "findAllByDisplayValue": [Function],
-  "findAllByLabelText": [Function],
-  "findAllByPlaceholderText": [Function],
-  "findAllByRole": [Function],
-  "findAllByTestId": [Function],
-  "findAllByText": [Function],
-  "findAllByTitle": [Function],
-  "findByAltText": [Function],
-  "findByDisplayValue": [Function],
-  "findByLabelText": [Function],
-  "findByPlaceholderText": [Function],
-  "findByRole": [Function],
-  "findByTestId": [Function],
-  "findByText": [Function],
-  "findByTitle": [Function],
-  "getAllByAltText": [Function],
-  "getAllByDisplayValue": [Function],
-  "getAllByLabelText": [Function],
-  "getAllByPlaceholderText": [Function],
-  "getAllByRole": [Function],
-  "getAllByTestId": [Function],
-  "getAllByText": [Function],
-  "getAllByTitle": [Function],
-  "getByAltText": [Function],
-  "getByDisplayValue": [Function],
-  "getByLabelText": [Function],
-  "getByPlaceholderText": [Function],
-  "getByRole": [Function],
-  "getByTestId": [Function],
-  "getByText": [Function],
-  "getByTitle": [Function],
-  "queryAllByAltText": [Function],
-  "queryAllByDisplayValue": [Function],
-  "queryAllByLabelText": [Function],
-  "queryAllByPlaceholderText": [Function],
-  "queryAllByRole": [Function],
-  "queryAllByTestId": [Function],
-  "queryAllByText": [Function],
-  "queryAllByTitle": [Function],
-  "queryByAltText": [Function],
-  "queryByDisplayValue": [Function],
-  "queryByLabelText": [Function],
-  "queryByPlaceholderText": [Function],
-  "queryByRole": [Function],
-  "queryByTestId": [Function],
-  "queryByText": [Function],
-  "queryByTitle": [Function],
-  "rerender": [Function],
-  "unmount": [Function],
-}
+    <div
+      class="govuk-grid-column-one-third govuk-body review-field-column"
+      id="CORRESPONDENT"
+      name="CORRESPONDENT"
+      type="review-field"
+    >
+      Test
+    </div>
+    <div
+      class="grid-column-one-sixth-right-align govuk-body review-field-column"
+    >
+      <a
+        class="govuk-link"
+        href="/case/ea258af3-cdd6-479c-92a7-06b3e33125f1/stage/f36298c2-f400-4e7b-af17-a3eefb72e4a0/entity/correspondent/TEST-KEY/update?hideSidebar=false"
+      >
+        Change 
+        <span
+          class="govuk-visually-hidden"
+        >
+          Primary correspondent
+        </span>
+      </a>
+    </div>
+  </div>
+</div>
 `;

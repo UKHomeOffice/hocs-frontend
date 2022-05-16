@@ -21,10 +21,10 @@ class Layout extends Component {
         return (
             <Fragment>
                 {apiStatus && <Notification {...apiStatus.status} />}
-                {header && <Header {...header} />}
-                {body && <Body {...body}>
+                <Header {...header} />
+                <Body {...body}>
                     {children}
-                </Body>}
+                </Body>
                 {footer.isVisible && <Footer {...footer} />}
             </Fragment>
         );
@@ -39,8 +39,10 @@ Layout.propTypes = {
 
 const WrappedLayout = props => (
     <ApplicationConsumer>
-        {({ apiStatus, layout }) =>
-            <Layout {...props} layout={layout} apiStatus={apiStatus} />}
+        {({
+            apiStatus,
+            layout
+        }) => <Layout {...props} layout={layout} apiStatus={apiStatus} />}
     </ApplicationConsumer>
 );
 

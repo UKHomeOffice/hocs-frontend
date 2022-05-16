@@ -1,8 +1,6 @@
 import React from 'react';
 import DateInput from '../date.jsx';
 import { advanceTo, clear } from 'jest-date-mock';
-import '@testing-library/jest-dom';
-import { fireEvent, render, screen } from '@testing-library/react';
 
 const maxYear = 2119;
 
@@ -15,106 +13,78 @@ describe('Form date component', () => {
         clear();
     });
 
-    test('should render with default props', () => {
-        const wrapper = render(
-            <DateInput updateState={() => null} name={'Date input'} />
-        );
-        expect(wrapper).toBeDefined();
+    it('should render with default props', () => {
+        expect(
+            render(<DateInput name="date-field" updateState={() => null} />)
+        ).toMatchSnapshot();
+    });
+    it('should render with value when passed', () => {
+        expect(
+            render(<DateInput name="date-field" maxYear={maxYear} value="2018-01-19" updateState={() => null} />)
+        ).toMatchSnapshot();
     });
 
-    test('should render with value when passed', () => {
-        const wrapper = render(
-            <DateInput name="date-field" maxYear={maxYear} value="2018-01-19" updateState={() => null} />
-        );
-        expect(wrapper).toBeDefined();
-        expect(screen.getAllByRole('spinbutton')[0]).toHaveValue(19);
-        expect(screen.getAllByRole('spinbutton')[1]).toHaveValue(1);
-        expect(screen.getAllByRole('spinbutton')[2]).toHaveValue(2018);
+    it('should render when maxYear is passed', () => {
+        expect(
+            render(<DateInput name="date-field" maxYear={maxYear} updateState={() => null} />)
+        ).toMatchSnapshot();
     });
 
-    test('should render when maxYear is passed', () => {
-        const wrapper = render(
-            <DateInput name="date-field" maxYear={maxYear} value="2018-01-19" updateState={() => null} />
-        );
-        expect(wrapper).toBeDefined();
-        expect(screen.getAllByRole('spinbutton')[2]).toHaveAttribute('max');
+    it('should render with label when passed', () => {
+        expect(
+            render(<DateInput name="date-field" maxYear={maxYear} label="My text field" updateState={() => null} />)
+        ).toMatchSnapshot();
     });
-
-    test('should render with label when passed', () => {
-        const wrapper = render(
-            <DateInput name="date-field" maxYear={maxYear} label="My text field" updateState={() => null} />
-        );
-        expect(wrapper).toBeDefined();
-        expect(screen.getByText('My text field')).toBeInTheDocument();
+    it('should render with hint when passed', () => {
+        expect(
+            render(<DateInput name="date-field" maxYear={maxYear} hint="Put some text in the box below" updateState={() => null} />)
+        ).toMatchSnapshot();
     });
-
-    test('should render with hint when passed', () => {
-        const wrapper = render(
-            <DateInput name="date-field" maxYear={maxYear} hint="Put some text in the box below" updateState={() => null} />
-        );
-        expect(wrapper).toBeDefined();
-        expect(screen.getByText('Put some text in the box below')).toBeInTheDocument();
+    it('should render with error when passed', () => {
+        expect(
+            render(<DateInput name="date-field" maxYear={maxYear} error="Some error message" updateState={() => null} />)
+        ).toMatchSnapshot();
     });
-
-    test('should render with error when passed', () => {
-        const wrapper = render(
-            <DateInput name="date-field" maxYear={maxYear} error="Some error message" updateState={() => null} />
-        );
-        expect(wrapper).toBeDefined();
-        expect(screen.getByText('Some error message')).toBeInTheDocument();
+    it('should render disabled when passed', () => {
+        expect(
+            render(<DateInput name="date-field" maxYear={maxYear} disabled={true} updateState={() => null} />)
+        ).toMatchSnapshot();
     });
-
-    test('should render disabled when passed', () => {
-        const wrapper = render(
-            <DateInput name="date-field" maxYear={maxYear} disabled={true} updateState={() => null} />
-        );
-        expect(wrapper).toBeDefined();
-        expect(screen.getByRole('group')).toHaveAttribute('disabled');
-    });
-
-    test('should execute callback on change', () => {
+    it('should execute callback on change', () => {
         const mockCallback = jest.fn();
-        const wrapper = render(
+        const wrapper = shallow(
             <DateInput name="date" updateState={mockCallback} />
         );
 
         let event = { target: { value: '19' } };
         mockCallback.mockReset();
-        fireEvent.change(wrapper.getAllByRole('spinbutton')[0],  event);
+        wrapper.find('#date-day').simulate('change', event);
         expect(mockCallback).toHaveBeenCalledTimes(1);
         expect(mockCallback).toHaveBeenCalledWith({ 'date': '--19' });
 
         mockCallback.mockReset();
         event = { target: { value: '01' } };
-        fireEvent.change(wrapper.getAllByRole('spinbutton')[1],  event);
+        wrapper.find('#date-month').simulate('change', event);
         expect(mockCallback).toHaveBeenCalledTimes(1);
         expect(mockCallback).toHaveBeenCalledWith({ 'date': '-01-' });
 
         mockCallback.mockReset();
         event = { target: { value: '2018' } };
-        fireEvent.change(wrapper.getAllByRole('spinbutton')[2],  event);
+        wrapper.find('#date-year').simulate('change', event);
         expect(mockCallback).toHaveBeenCalledTimes(1);
         expect(mockCallback).toHaveBeenCalledWith({ 'date': '2018--' });
     });
 
-    test('should populate date field with todays date when asked to', () => {
-        const wrapper = render(
-            <DateInput name="date-field" maxYear={maxYear} autopopulate={true} updateState={() => null} />
-        );
-        expect(wrapper).toBeDefined();
-        expect(screen.getAllByRole('spinbutton')[0]).toHaveValue(4);
-        expect(screen.getAllByRole('spinbutton')[1]).toHaveValue(3);
-        expect(screen.getAllByRole('spinbutton')[2]).toHaveValue(2019);
+    it('should populate date field with todays date when asked to', () => {
+        expect(
+            render(<DateInput name="date-field" maxYear={maxYear} autopopulate={true} updateState={() => null} />)
+        ).toMatchSnapshot();
     });
 
-    test('should not populate date field with todays date when not asked to', () => {
-        const wrapper = render(
-            <DateInput name="date-field" maxYear={maxYear} autopopulate={false} updateState={() => null} />
-        );
-        expect(wrapper).toBeDefined();
-        expect(screen.getAllByRole('spinbutton')[0]).not.toHaveValue(4);
-        expect(screen.getAllByRole('spinbutton')[1]).not.toHaveValue(3);
-        expect(screen.getAllByRole('spinbutton')[2]).not.toHaveValue(2019);
+    it('should not populate date field with todays date when not asked to', () => {
+        expect(
+            render(<DateInput name="date-field" maxYear={maxYear} autopopulate={false} updateState={() => null} />)
+        ).toMatchSnapshot();
     });
 });
 

@@ -1,210 +1,79 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`action-summary-interests.jsx should render one with details and one without 1`] = `
-Object {
-  "asFragment": [Function],
-  "baseElement": <body>
-    <div>
-      <h2
-        class="govuk-heading-m"
-      >
-        Interest
-      </h2>
-      <table
-        class="govuk-table margin-left--small"
-      >
-        <caption
-          class="govuk-table__caption margin-bottom--small"
-        >
-          Interest
-        </caption>
-        <tbody
-          class="govuk_table__body"
-        >
-          <tr
-            class="govuk-table__row"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              Party
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              Interested party 1
-            </td>
-          </tr>
-          <tr
-            class="govuk-table__row"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              Details
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              Details of interest
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <table
-        class="govuk-table margin-left--small"
-      >
-        <caption
-          class="govuk-table__caption margin-bottom--small"
-        >
-          Interest
-        </caption>
-        <tbody
-          class="govuk_table__body"
-        >
-          <tr
-            class="govuk-table__row"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              Party
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              Interested party 1
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </body>,
-  "container": <div>
-    <h2
-      class="govuk-heading-m"
+Array [
+  <h2
+    class="govuk-heading-m"
+  >
+    Interest
+  </h2>,
+  <table
+    class="govuk-table margin-left--small"
+  >
+    <caption
+      class="govuk-table__caption margin-bottom--small"
     >
       Interest
-    </h2>
-    <table
-      class="govuk-table margin-left--small"
+    </caption>
+    <tbody
+      class="govuk_table__body"
     >
-      <caption
-        class="govuk-table__caption margin-bottom--small"
+      <tr
+        class="govuk-table__row"
       >
-        Interest
-      </caption>
-      <tbody
-        class="govuk_table__body"
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
+        >
+          Party
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          Interested party 1
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__row"
       >
-        <tr
-          class="govuk-table__row"
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
         >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            Party
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            Interested party 1
-          </td>
-        </tr>
-        <tr
-          class="govuk-table__row"
+          Details
+        </th>
+        <td
+          class="govuk-table__cell"
         >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            Details
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            Details of interest
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <table
-      class="govuk-table margin-left--small"
+          Details of interest
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+  <table
+    class="govuk-table margin-left--small"
+  >
+    <caption
+      class="govuk-table__caption margin-bottom--small"
     >
-      <caption
-        class="govuk-table__caption margin-bottom--small"
+      Interest
+    </caption>
+    <tbody
+      class="govuk_table__body"
+    >
+      <tr
+        class="govuk-table__row"
       >
-        Interest
-      </caption>
-      <tbody
-        class="govuk_table__body"
-      >
-        <tr
-          class="govuk-table__row"
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-third"
         >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            Party
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            Interested party 1
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>,
-  "debug": [Function],
-  "findAllByAltText": [Function],
-  "findAllByDisplayValue": [Function],
-  "findAllByLabelText": [Function],
-  "findAllByPlaceholderText": [Function],
-  "findAllByRole": [Function],
-  "findAllByTestId": [Function],
-  "findAllByText": [Function],
-  "findAllByTitle": [Function],
-  "findByAltText": [Function],
-  "findByDisplayValue": [Function],
-  "findByLabelText": [Function],
-  "findByPlaceholderText": [Function],
-  "findByRole": [Function],
-  "findByTestId": [Function],
-  "findByText": [Function],
-  "findByTitle": [Function],
-  "getAllByAltText": [Function],
-  "getAllByDisplayValue": [Function],
-  "getAllByLabelText": [Function],
-  "getAllByPlaceholderText": [Function],
-  "getAllByRole": [Function],
-  "getAllByTestId": [Function],
-  "getAllByText": [Function],
-  "getAllByTitle": [Function],
-  "getByAltText": [Function],
-  "getByDisplayValue": [Function],
-  "getByLabelText": [Function],
-  "getByPlaceholderText": [Function],
-  "getByRole": [Function],
-  "getByTestId": [Function],
-  "getByText": [Function],
-  "getByTitle": [Function],
-  "queryAllByAltText": [Function],
-  "queryAllByDisplayValue": [Function],
-  "queryAllByLabelText": [Function],
-  "queryAllByPlaceholderText": [Function],
-  "queryAllByRole": [Function],
-  "queryAllByTestId": [Function],
-  "queryAllByText": [Function],
-  "queryAllByTitle": [Function],
-  "queryByAltText": [Function],
-  "queryByDisplayValue": [Function],
-  "queryByLabelText": [Function],
-  "queryByPlaceholderText": [Function],
-  "queryByRole": [Function],
-  "queryByTestId": [Function],
-  "queryByText": [Function],
-  "queryByTitle": [Function],
-  "rerender": [Function],
-  "unmount": [Function],
-}
+          Party
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          Interested party 1
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+]
 `;

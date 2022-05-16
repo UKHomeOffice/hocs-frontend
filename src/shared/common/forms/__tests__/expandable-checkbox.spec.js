@@ -1,7 +1,5 @@
 import React from 'react';
 import ExpandableCheckbox from '../expandable-checkbox.jsx';
-import '@testing-library/jest-dom';
-import { fireEvent, render, screen } from '@testing-library/react';
 
 const choice = {
     label: '__label__',
@@ -19,7 +17,13 @@ describe('When the component is rendered with a hint', () => {
     it('should match the snapshot', () => {
         expect(render(<ExpandableCheckbox choice={choice} data={{}} label="__label__" hint="__hint__" name="__name__" updateState={() => { }} />))
             .toMatchSnapshot();
-        expect(screen.getByText('__hint__')).toBeInTheDocument();
+    });
+});
+
+describe('When the component is rendered with a hint', () => {
+    it('should match the snapshot', () => {
+        expect(render(<ExpandableCheckbox choice={choice} data={{}} label="__label__" error="__error__" name="__name__" updateState={() => { }} />))
+            .toMatchSnapshot();
     });
 });
 
@@ -67,19 +71,21 @@ describe('When the component is rendered', () => {
 describe('When the Details link is clicked', () => {
     it('should show the child items', () => {
         const items = [{ component: 'inset', props: {} }, { component: 'inset', props: {} }, { component: 'inset', props: {} }];
-        render(<ExpandableCheckbox choice={choice} data={{}} items={items} label="__label__" name="__name__" updateState={() => { }} value="__value__" />);
-        fireEvent.click(screen.getByRole('link'));
-        expect(screen.getByText('Hide Details')).toBeInTheDocument();
+        const wrapper = mount(<ExpandableCheckbox choice={choice} data={{}} items={items} label="__label__" name="__name__" updateState={() => { }} value="__value__" />);
+        wrapper.find('.selectable-details-link a').at(0).simulate('click');
+        expect(wrapper.html())
+            .toMatchSnapshot();
     });
 });
 
 describe('When the Details link is clicked twice', () => {
     it('should not show the child items', () => {
         const items = [{ component: 'inset', props: {} }, { component: 'inset', props: {} }, { component: 'inset', props: {} }];
-        render(<ExpandableCheckbox choice={choice} data={{}} items={items} label="__label__" name="__name__" updateState={() => { }} value="__value__" />);
-        fireEvent.click(screen.getByRole('link'));
-        fireEvent.click(screen.getByRole('link'));
-        expect(screen.getByText('Show Details')).toBeInTheDocument();
+        const wrapper = mount(<ExpandableCheckbox choice={choice} data={{}} items={items} label="__label__" name="__name__" updateState={() => { }} value="__value__" />);
+        wrapper.find('.selectable-details-link a').at(0).simulate('click');
+        wrapper.find('.selectable-details-link a').at(0).simulate('click');
+        expect(wrapper.html())
+            .toMatchSnapshot();
     });
 });
 
@@ -92,16 +98,16 @@ describe('When the checkbox clicked', () => {
 
     describe('And it is currently not selected', () => {
         it('should call the callback with the selected value', () => {
-            render(<ExpandableCheckbox choice={choice} data={{}} items={items} label="__label__" name="__name__" updateState={updateStateMock} value="__notvalue__" />);
-            fireEvent.click(screen.getByRole('checkbox'));
+            const wrapper = mount(<ExpandableCheckbox choice={choice} data={{}} items={items} label="__label__" name="__name__" updateState={updateStateMock} value="__notvalue__" />);
+            wrapper.find('.govuk-checkboxes__input').at(0).simulate('change', { target: { value: '__value__' } });
             expect(updateStateMock).toHaveBeenCalledWith({ '__name__': '__value__' });
         });
     });
 
     describe('And it is currently selected', () => {
         it('should call the callback with empty', () => {
-            render(<ExpandableCheckbox choice={choice} data={{}} items={items} label="__label__" name="__name__" updateState={updateStateMock} value="__value__" />);
-            fireEvent.click(screen.getByRole('checkbox'));
+            const wrapper = mount(<ExpandableCheckbox choice={choice} data={{}} items={items} label="__label__" name="__name__" updateState={updateStateMock} value="__value__" />);
+            wrapper.find('.govuk-checkboxes__input').at(0).simulate('change', { target: { value: '__value__' } });
             expect(updateStateMock).toHaveBeenCalledWith({ '__name__': '' });
         });
     });
@@ -112,7 +118,7 @@ describe('When the component is rendered a child component has errors', () => {
     const items = [{ component: 'inset', props: { name: 'child1' } }, { component: 'inset', props: { name: 'child2' } }, { component: 'inset', props: { name: 'child3' } }];
     const errors = { child1: 'an error' };
     it('should render expanded', () => {
-        render(<ExpandableCheckbox choice={choice} data={{}} errors={errors} items={items} label="__label__" name="__name__" updateState={() => { }} />);
-        expect(screen.getByText('Hide Details')).toBeInTheDocument();
+        expect(render(<ExpandableCheckbox choice={choice} data={{}} errors={errors} items={items} label="__label__" name="__name__" updateState={() => { }} />))
+            .toMatchSnapshot();
     });
 });

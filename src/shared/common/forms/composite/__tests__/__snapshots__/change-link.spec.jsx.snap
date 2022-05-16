@@ -1,124 +1,34 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`The ChangeLink component should render with default props 1`] = `
-Object {
-  "asFragment": [Function],
-  "baseElement": <body>
-    <div>
-      <div
-        class="govuk-form-group"
-      >
-        <fieldset
-          class="govuk-fieldset"
-        >
-          <legend
-            class="govuk-fieldset__legend"
-          >
-            <span
-              class="govuk-fieldset__heading govuk-label--s"
-            >
-              some heading label
-            </span>
-          </legend>
-          <label
-            class="govuk-label"
-            for="some_name-changeLink"
-          >
-            change_me_please
-          </label>
-          <a
-            class="govuk-link"
-            href="/target"
-            id="some_name-changeLink"
-          >
-            Change
-          </a>
-        </fieldset>
-      </div>
-    </div>
-  </body>,
-  "container": <div>
-    <div
-      class="govuk-form-group"
+<div
+  class="govuk-form-group"
+>
+  <fieldset
+    class="govuk-fieldset"
+  >
+    <legend
+      class="govuk-fieldset__legend"
     >
-      <fieldset
-        class="govuk-fieldset"
+      <span
+        class="govuk-fieldset__heading govuk-label--s"
       >
-        <legend
-          class="govuk-fieldset__legend"
-        >
-          <span
-            class="govuk-fieldset__heading govuk-label--s"
-          >
-            some heading label
-          </span>
-        </legend>
-        <label
-          class="govuk-label"
-          for="some_name-changeLink"
-        >
-          change_me_please
-        </label>
-        <a
-          class="govuk-link"
-          href="/target"
-          id="some_name-changeLink"
-        >
-          Change
-        </a>
-      </fieldset>
-    </div>
-  </div>,
-  "debug": [Function],
-  "findAllByAltText": [Function],
-  "findAllByDisplayValue": [Function],
-  "findAllByLabelText": [Function],
-  "findAllByPlaceholderText": [Function],
-  "findAllByRole": [Function],
-  "findAllByTestId": [Function],
-  "findAllByText": [Function],
-  "findAllByTitle": [Function],
-  "findByAltText": [Function],
-  "findByDisplayValue": [Function],
-  "findByLabelText": [Function],
-  "findByPlaceholderText": [Function],
-  "findByRole": [Function],
-  "findByTestId": [Function],
-  "findByText": [Function],
-  "findByTitle": [Function],
-  "getAllByAltText": [Function],
-  "getAllByDisplayValue": [Function],
-  "getAllByLabelText": [Function],
-  "getAllByPlaceholderText": [Function],
-  "getAllByRole": [Function],
-  "getAllByTestId": [Function],
-  "getAllByText": [Function],
-  "getAllByTitle": [Function],
-  "getByAltText": [Function],
-  "getByDisplayValue": [Function],
-  "getByLabelText": [Function],
-  "getByPlaceholderText": [Function],
-  "getByRole": [Function],
-  "getByTestId": [Function],
-  "getByText": [Function],
-  "getByTitle": [Function],
-  "queryAllByAltText": [Function],
-  "queryAllByDisplayValue": [Function],
-  "queryAllByLabelText": [Function],
-  "queryAllByPlaceholderText": [Function],
-  "queryAllByRole": [Function],
-  "queryAllByTestId": [Function],
-  "queryAllByText": [Function],
-  "queryAllByTitle": [Function],
-  "queryByAltText": [Function],
-  "queryByDisplayValue": [Function],
-  "queryByLabelText": [Function],
-  "queryByPlaceholderText": [Function],
-  "queryByRole": [Function],
-  "queryByTestId": [Function],
-  "queryByText": [Function],
-  "queryByTitle": [Function],
-  "rerender": [Function],
-  "unmount": [Function],
-}
+        some heading label
+      </span>
+    </legend>
+    <label
+      class="govuk-label"
+      for="some_name-changeLink"
+    >
+      change_me_please
+    </label>
+    <a
+      class="govuk-link"
+      href="/target"
+      id="some_name-changeLink"
+    >
+      Change
+    </a>
+  </fieldset>
+</div>
 `;

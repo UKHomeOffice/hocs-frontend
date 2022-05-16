@@ -1,7 +1,5 @@
 import React from 'react';
 import DocumentSummary from '../document-summary.jsx';
-import '@testing-library/jest-dom';
-import { render } from '@testing-library/react';
 
 const mockDocuments = [
     {

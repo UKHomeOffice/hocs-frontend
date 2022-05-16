@@ -1,7 +1,5 @@
 import React from 'react';
 import Footer from '../footer.jsx';
-import '@testing-library/jest-dom';
-import { render } from '@testing-library/react';
 
 describe('Layout footer component', () => {
     it('should render with default props', () => {

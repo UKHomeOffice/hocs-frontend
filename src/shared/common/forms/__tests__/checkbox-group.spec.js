@@ -1,7 +1,5 @@
 import React from 'react';
 import CheckboxGroup from '../checkbox-group.jsx';
-import '@testing-library/jest-dom';
-import { fireEvent, render, screen } from '@testing-library/react';
 
 const choices = [
     { label: 'isA', value: 'A' },
@@ -11,58 +9,63 @@ const choices = [
 
 describe('Form checkbox group component', () => {
     it('should render with default props', () => {
-        const wrapper = render(<CheckboxGroup name="checkbox-group" choices={choices} updateState={() => null} />);
-        expect(wrapper).toBeDefined();
+        expect(
+            render(<CheckboxGroup name="checkbox-group" choices={choices} updateState={() => null} />)
+        ).toMatchSnapshot();
     });
-
     it('should render with value when passed', () => {
-        render(<CheckboxGroup name="checkbox-group" choices={choices} value={'A'} updateState={() => null} />);
-        expect(screen.getByText('isA')).toBeInTheDocument();
+        expect(
+            render(<CheckboxGroup name="checkbox-group" choices={choices} value={'A'} updateState={() => null} />)
+        ).toMatchSnapshot();
     });
-
     it('should render with label when passed', () => {
-        render(<CheckboxGroup name="checkbox-group" choices={choices} label="My text field" showLabel={true} updateState={() => null} />);
-        expect(screen.getByText('My text field')).toBeInTheDocument();
+        expect(
+            render(<CheckboxGroup name="checkbox-group" choices={choices} label="My text field" showLabel={true} updateState={() => null} />)
+        ).toMatchSnapshot();
     });
-
     it('should render with hint when passed', () => {
-        render(<CheckboxGroup name="checkbox-group" choices={choices} hint="Put some text in the box below" updateState={() => null} />);
-        expect(screen.getByText('Put some text in the box below')).toBeInTheDocument();
+        expect(
+            render(<CheckboxGroup name="checkbox-group" choices={choices} hint="Put some text in the box below" updateState={() => null} />)
+        ).toMatchSnapshot();
     });
-
     it('should render with error when passed', () => {
-        render(<CheckboxGroup name="checkbox-group" choices={choices} error="Some error message" updateState={() => null} />);
-        expect(screen.getByText('Some error message')).toBeInTheDocument();
+        expect(
+            render(<CheckboxGroup name="checkbox-group" choices={choices} error="Some error message" updateState={() => null} />)
+        ).toMatchSnapshot();
     });
-
     it('should render disabled when passed', () => {
-        render(<CheckboxGroup name="checkbox-group" choices={choices} disabled={true} updateState={() => null} />);
-        expect(screen.getByRole('group')).toBeDisabled();
+        expect(
+            render(<CheckboxGroup name="checkbox-group" choices={choices} disabled={true} updateState={() => null} />)
+        ).toMatchSnapshot();
     });
-
     it('should execute callback on initialization', () => {
         const mockCallback = jest.fn();
-        render(<CheckboxGroup name="checkbox-group" choices={choices} updateState={mockCallback} />);
+        shallow(
+            <CheckboxGroup name="checkbox-group" choices={choices} updateState={mockCallback} />
+        );
         expect(mockCallback).toHaveBeenCalledTimes(1);
         expect(mockCallback).toHaveBeenCalledWith({ 'checkbox-group': '' });
     });
-
     it('should execute callback on change', () => {
         const mockCallback = jest.fn();
-        const wrapper = render(<CheckboxGroup name="checkbox-group" choices={choices} updateState={mockCallback} />);
+        const firstValue = 'A';
+        const secondValue = 'B';
+        const wrapper = shallow(
+            <CheckboxGroup name="checkbox-group" choices={choices} updateState={mockCallback} />
+        );
         mockCallback.mockReset();
 
-        fireEvent.click(wrapper.getAllByRole('checkbox')[0]);
+        wrapper.find(`#checkbox-group_${firstValue}`).simulate('change', { target: { value: firstValue } });
         expect(mockCallback).toHaveBeenCalledTimes(1);
         expect(mockCallback).toHaveBeenCalledWith({ 'checkbox-group': 'A' });
 
-        fireEvent.click(wrapper.getAllByRole('checkbox')[1]);
+        wrapper.find(`#checkbox-group_${secondValue}`).simulate('change', { target: { value: secondValue } });
         expect(mockCallback).toHaveBeenCalledTimes(2);
         expect(mockCallback).toHaveBeenCalledWith({ 'checkbox-group': 'A,B' });
 
-        fireEvent.click(wrapper.getAllByRole('checkbox')[2]);
+        wrapper.find(`#checkbox-group_${firstValue}`).simulate('change', { target: { value: firstValue } });
         expect(mockCallback).toHaveBeenCalledTimes(3);
-        expect(mockCallback).toHaveBeenCalledWith({ 'checkbox-group': 'A,B,C' });
+        expect(mockCallback).toHaveBeenCalledWith({ 'checkbox-group': 'B' });
     });
 });
 

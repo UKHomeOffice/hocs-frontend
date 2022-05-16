@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { ApplicationConsumer } from '../../contexts/application.jsx';
 import { Link } from 'react-router-dom';
-import DocumentPanel from './document-panel.jsx';
+import DocumentPane from './document-pane.jsx';
 import CaseNotes from './case-notes.jsx';
 import StageSummary from './stage-summary.jsx';
 import People from './people.jsx';
@@ -89,7 +89,7 @@ class SideBar extends Component {
                             })
                         }
                     </ul>
-                    {this.isActive('DOCUMENTS') && <DocumentPanel />}
+                    {this.isActive('DOCUMENTS') && <DocumentPane />}
                     {this.isActive('SUMMARY') && <StageSummary />}
                     {this.isActive('TIMELINE') && <CaseNotes />}
                     {this.isActive('PEOPLE') && <People />}

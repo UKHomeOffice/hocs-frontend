@@ -1,6 +1,4 @@
 import { formComponentFactory, secondaryActionFactory } from '../form-repository';
-import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react';
 
 const mockCallback = jest.fn();
 
@@ -78,7 +76,8 @@ describe('Form repository', () => {
                 config: props,
                 callback: mockCallback
             });
-            expect(Component).not.toBeNull();
+            const wrapper = shallow(Component);
+            expect(wrapper).toBeDefined();
         });
     });
 
@@ -92,8 +91,10 @@ describe('Form repository', () => {
             errors: testValidationErrors,
             callback: mockCallback
         });
-        render(Component);
-        expect(screen.getByText('VALIDATION_ERROR')).toBeInTheDocument();
+        const wrapper = mount(Component);
+        expect(wrapper).toBeDefined();
+        expect(wrapper.find('Text').length).toEqual(1);
+        expect(wrapper.props().error).toEqual('VALIDATION_ERROR');
     });
 
     it('should pass data using the defaultDataAdapter when no other adapter passed', () => {
@@ -106,8 +107,26 @@ describe('Form repository', () => {
             data: testData,
             callback: mockCallback
         });
-        render(Component);
-        expect(screen.getByRole('textbox')).toHaveValue('TEST');
+        const wrapper = mount(Component);
+        expect(wrapper).toBeDefined();
+        expect(wrapper.find('Text').length).toEqual(1);
+        expect(wrapper.props().value).toEqual(testData[componentConfiguration.props.name]);
+    });
+
+    it('should pass defaultValue when populateFromCaseData is false', () => {
+        const componentConfiguration = supportedFormComponents
+            .filter(field => field.component === 'hidden')
+            .reduce((reducer, field) => reducer = field, null);
+        const Component = formComponentFactory(componentConfiguration.component, {
+            key: 1,
+            config: componentConfiguration.props,
+            data: testData,
+            callback: mockCallback
+        });
+        const wrapper = mount(Component);
+        expect(wrapper).toBeDefined();
+        expect(wrapper.find('hidden').length).toEqual(1);
+        expect(wrapper.props().value).toEqual('TEST');
     });
 
     it('should support components in the supportedSecondaryActions list', () => {
@@ -121,7 +140,8 @@ describe('Form repository', () => {
                     stageId: 'stageId1234'
                 }
             });
-            expect(Component).not.toBeNull();
+            const wrapper = shallow(Component);
+            expect(wrapper).toBeDefined();
         });
     });
 
@@ -141,8 +161,9 @@ describe('Form repository', () => {
             name: 'TEST'
         });
 
-        render(Component);
-        expect(screen.getAllByText('Test Label')[0]).toBeInTheDocument();
-        expect(screen.getByText('Test Value')).toBeInTheDocument();
+        const wrapper = mount(Component);
+        expect(wrapper).toBeDefined();
+        expect(wrapper.find('Test Label'));
+        expect(wrapper.find('Test Value'));
     });
 });
