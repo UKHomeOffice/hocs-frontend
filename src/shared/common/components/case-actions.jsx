@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useEffect, useCallback } from 'react';
+import React, { Fragment, useContext, useEffect } from 'react';
 import { Context } from '../../contexts/application.jsx';
 import PropTypes from 'prop-types';
 import axios from 'axios';
@@ -9,21 +9,19 @@ import { actionComponentFactory } from './case-action-factory.jsx';
 const CaseActions = () => {
     const { page, caseActionData, dispatch }  = useContext(Context);
 
-    const fetchCaseActionData = useCallback(async (caseId) => {
-        dispatch(updateApiStatus(status.REQUEST_CASE_ACTION_DATA));
-        axios.get(`/api/case/${caseId}/actions`)
-            .then( result => {
-                dispatch(updateApiStatus(status.REQUEST_CASE_ACTION_DATA_SUCCESS));
-                dispatch(updateCaseActionData(result.data));
-            }, error => {
-                dispatch(updateApiStatus(status.REQUEST_CASE_ACTION_DATA_FAILURE));
-                dispatch(setError(error.response));
-            });
-    }, [dispatch]);
+    useEffect(() => {
+        const fetchData = async () => {
+            return await axios.get(`/api/case/${page.params.caseId}/actions`);
+        };
 
-    useEffect(async () => {
-        await fetchCaseActionData(page.params.caseId, dispatch);
-    }, [fetchCaseActionData]);
+        fetchData().then( result => {
+            dispatch(updateApiStatus(status.REQUEST_CASE_ACTION_DATA_SUCCESS));
+            dispatch(updateCaseActionData(result.data));
+        }, error => {
+            dispatch(updateApiStatus(status.REQUEST_CASE_ACTION_DATA_FAILURE));
+            dispatch(setError(error.response));
+        });
+    }, []);
 
     return (
         <Fragment>
