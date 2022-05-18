@@ -1,23 +1,33 @@
-
-
 import React from 'react';
-import WrappedSomuList from '../somu-list.jsx';
+import SomuList from '../somu-list.jsx';
 import { MemoryRouter } from 'react-router-dom';
+import '@testing-library/jest-dom';
+import { render, screen } from '@testing-library/react';
+import { ApplicationProvider } from '../../../../contexts/application';
 
 describe('Somu list component', () => {
 
-    const PAGE = { params: { caseId: '1234', stageId: '5678' } };
+    const page = {
+        params: {
+            caseId: 'some_case_id',
+            stageId: 'some_stage_id',
+        }
+    };
     const NAME = 'somu_list';
     const ITEM_NAME = 'item';
     const BASE_URL = 'http://localhost:8080';
     const MOCK_CALLBACK = jest.fn();
-
+    const MOCK_CONFIG = {
+        page: page,
+        baseUrl: BASE_URL
+    };
     const DEFAULT_PROPS = {
-        page: PAGE,
+        page: page,
         name: NAME,
         itemName: ITEM_NAME,
         baseUrl: BASE_URL,
-        updateState: MOCK_CALLBACK
+        updateState: MOCK_CALLBACK,
+        config: MOCK_CONFIG
     };
 
     beforeEach(() => {
@@ -25,11 +35,15 @@ describe('Somu list component', () => {
     });
 
     it('should render with default props', () => {
-        const OUTER = shallow(<WrappedSomuList {...DEFAULT_PROPS} />);
-        const SomuList = OUTER.props().children;
-        const WRAPPER = render(<SomuList />);
-        expect(WRAPPER).toBeDefined();
-        expect(WRAPPER).toMatchSnapshot();
+
+        const wrapper = render(
+            <ApplicationProvider config={{ ...MOCK_CONFIG, ...DEFAULT_PROPS }}>
+                <MemoryRouter>
+                    <SomuList baseUrl={BASE_URL} name={NAME} updateState={MOCK_CALLBACK}/>
+                </MemoryRouter>
+            </ApplicationProvider>
+        );
+        expect(wrapper).toBeDefined();
     });
 
     it('should render with label when passed in props', () => {
@@ -37,11 +51,15 @@ describe('Somu list component', () => {
             ...DEFAULT_PROPS,
             label: 'Test somu list'
         };
-        const OUTER = shallow(<WrappedSomuList {...PROPS} />);
-        const SomuList = OUTER.props().children;
-        const WRAPPER = render(<SomuList />);
-        expect(WRAPPER).toBeDefined();
-        expect(WRAPPER).toMatchSnapshot();
+        const wrapper = render(
+            <ApplicationProvider config={{ ...MOCK_CONFIG, ...PROPS }}>
+                <MemoryRouter>
+                    <SomuList baseUrl={BASE_URL} name={NAME} updateState={MOCK_CALLBACK} {...PROPS} />
+                </MemoryRouter>
+            </ApplicationProvider>
+        );
+        expect(wrapper).toBeDefined();
+        expect(screen.getByText('Test somu list')).toBeInTheDocument();
     });
 
     it('should render with error when passed in props', () => {
@@ -49,23 +67,15 @@ describe('Somu list component', () => {
             ...DEFAULT_PROPS,
             error: 'Validation has failed'
         };
-        const OUTER = shallow(<WrappedSomuList {...PROPS} />);
-        const SomuList = OUTER.props().children;
-        const WRAPPER = render(<SomuList />);
-        expect(WRAPPER).toBeDefined();
-        expect(WRAPPER).toMatchSnapshot();
-    });
-
-    it('should render with additional when passed in props', () => {
-        const PROPS = {
-            ...DEFAULT_PROPS,
-            className: 'my-css-class'
-        };
-        const OUTER = shallow(<WrappedSomuList {...PROPS} />);
-        const SomuList = OUTER.props().children;
-        const WRAPPER = render(<SomuList />);
-        expect(WRAPPER).toBeDefined();
-        expect(WRAPPER).toMatchSnapshot();
+        const wrapper = render(
+            <ApplicationProvider config={{ ...MOCK_CONFIG, ...PROPS }}>
+                <MemoryRouter>
+                    <SomuList baseUrl={BASE_URL} name={NAME} updateState={MOCK_CALLBACK} {...PROPS} />
+                </MemoryRouter>
+            </ApplicationProvider>
+        );
+        expect(wrapper).toBeDefined();
+        expect(screen.getByText('Validation has failed')).toBeInTheDocument();
     });
 
     it('should render with item link passed in props', () => {
@@ -86,14 +96,15 @@ describe('Somu list component', () => {
                 }
             ]
         };
-        const OUTER = shallow(<WrappedSomuList {...PROPS} />);
-        const SomuList = OUTER.props().children;
-        const WRAPPER = render(
-            <MemoryRouter>
-                <SomuList page={PAGE} />
-            </MemoryRouter>);
-        expect(WRAPPER).toBeDefined();
-        expect(WRAPPER).toMatchSnapshot();
+        const wrapper = render(
+            <ApplicationProvider config={{ ...MOCK_CONFIG, ...PROPS }}>
+                <MemoryRouter>
+                    <SomuList baseUrl={BASE_URL} name={NAME} updateState={MOCK_CALLBACK} {...PROPS} />
+                </MemoryRouter>
+            </ApplicationProvider>
+        );
+        expect(wrapper).toBeDefined();
+        expect(screen.getByText('Remove')).toBeInTheDocument();
     });
 
     it('should render with MpamTable renderer', () => {
@@ -108,14 +119,15 @@ describe('Somu list component', () => {
             somuType,
             somuItems,
         };
-        const OUTER = shallow(<WrappedSomuList {...PROPS} />);
-        const SomuList = OUTER.props().children;
-        const WRAPPER = render(
-            <MemoryRouter>
-                <SomuList page={PAGE} />
-            </MemoryRouter>);
-        expect(WRAPPER).toBeDefined();
-        expect(WRAPPER).toMatchSnapshot();
+        const wrapper = render(
+            <ApplicationProvider config={{ ...MOCK_CONFIG, ...PROPS }}>
+                <MemoryRouter>
+                    <SomuList baseUrl={BASE_URL} name={NAME} updateState={MOCK_CALLBACK} {...PROPS} />
+                </MemoryRouter>
+            </ApplicationProvider>
+        );
+        expect(wrapper).toBeDefined();
+        expect(screen.getByText('TestBusinessArea - TestTeam')).toBeInTheDocument();
     });
 
     it('should render with default render when empty renderer added', () => {
@@ -130,14 +142,15 @@ describe('Somu list component', () => {
             somuType,
             somuItems,
         };
-        const OUTER = shallow(<WrappedSomuList {...PROPS} />);
-        const SomuList = OUTER.props().children;
-        const WRAPPER = render(
-            <MemoryRouter>
-                <SomuList page={PAGE} />
-            </MemoryRouter>);
-        expect(WRAPPER).toBeDefined();
-        expect(WRAPPER).toMatchSnapshot();
+        const wrapper = render(
+            <ApplicationProvider config={{ ...MOCK_CONFIG, ...PROPS }}>
+                <MemoryRouter>
+                    <SomuList baseUrl={BASE_URL} name={NAME} updateState={MOCK_CALLBACK} {...PROPS} />
+                </MemoryRouter>
+            </ApplicationProvider>
+        );
+        expect(wrapper).toBeDefined();
+        expect(screen.getByText('test')).toBeInTheDocument();
     });
 
     it('should render when CompTable renderer added', () => {
@@ -146,20 +159,21 @@ describe('Somu list component', () => {
             type: 'testType',
             schema: { renderers: { table: 'CompTable' } },
             active: true };
-        const somuItems = [{ uuid: 'test', data: { contributionBusinessArea: 'TestBusinessArea' }, deleted: false }];
+        const somuItems = [{ uuid: 'test', data: { contributionBusinessArea: 'CompBusinessArea' }, deleted: false }];
         const PROPS = {
             ...DEFAULT_PROPS,
             somuType,
             somuItems,
         };
-        const OUTER = shallow(<WrappedSomuList {...PROPS} />);
-        const SomuList = OUTER.props().children;
-        const WRAPPER = render(
-            <MemoryRouter>
-                <SomuList page={PAGE} />
-            </MemoryRouter>);
-        expect(WRAPPER).toBeDefined();
-        expect(WRAPPER).toMatchSnapshot();
+        const wrapper = render(
+            <ApplicationProvider config={{ ...MOCK_CONFIG, ...PROPS }}>
+                <MemoryRouter>
+                    <SomuList baseUrl={BASE_URL} name={NAME} updateState={MOCK_CALLBACK} {...PROPS} />
+                </MemoryRouter>
+            </ApplicationProvider>
+        );
+        expect(wrapper).toBeDefined();
+        expect(screen.getByText('CompBusinessArea')).toBeInTheDocument();
     });
 
     it('should render with default render when renderers object doesn\'t exist', () => {
@@ -174,14 +188,15 @@ describe('Somu list component', () => {
             somuType,
             somuItems,
         };
-        const OUTER = shallow(<WrappedSomuList {...PROPS} />);
-        const SomuList = OUTER.props().children;
-        const WRAPPER = render(
-            <MemoryRouter>
-                <SomuList page={PAGE} />
-            </MemoryRouter>);
-        expect(WRAPPER).toBeDefined();
-        expect(WRAPPER).toMatchSnapshot();
+        const wrapper = render(
+            <ApplicationProvider config={{ ...MOCK_CONFIG, ...PROPS }}>
+                <MemoryRouter>
+                    <SomuList baseUrl={BASE_URL} name={NAME} updateState={MOCK_CALLBACK} {...PROPS} />
+                </MemoryRouter>
+            </ApplicationProvider>
+        );
+        expect(wrapper).toBeDefined();
+        expect(screen.getByText('test')).toBeInTheDocument();
     });
 
     it('should render with choices when table renderer exists', () => {
@@ -200,14 +215,15 @@ describe('Somu list component', () => {
                 'label': 'Test Team'
             }]
         };
-        const OUTER = shallow(<WrappedSomuList {...PROPS} />);
-        const SomuList = OUTER.props().children;
-        const WRAPPER = render(
-            <MemoryRouter>
-                <SomuList page={PAGE} />
-            </MemoryRouter>);
-        expect(WRAPPER).toBeDefined();
-        expect(WRAPPER).toMatchSnapshot();
+        const wrapper = render(
+            <ApplicationProvider config={{ ...MOCK_CONFIG, ...PROPS }}>
+                <MemoryRouter>
+                    <SomuList baseUrl={BASE_URL} name={NAME} updateState={MOCK_CALLBACK} {...PROPS} />
+                </MemoryRouter>
+            </ApplicationProvider>
+        );
+        expect(wrapper).toBeDefined();
+        expect(screen.getByText('TestBusinessArea - Test Team')).toBeInTheDocument();
     });
 
     it('should render with add link when passed in props', () => {
@@ -224,59 +240,31 @@ describe('Somu list component', () => {
                 'label': 'Add'
             }
         };
-        const OUTER = shallow(<WrappedSomuList {...PROPS} />);
-        const SomuList = OUTER.props().children;
-        const WRAPPER = render(
-            <MemoryRouter>
-                <SomuList page={PAGE} />
-            </MemoryRouter>);
-        expect(WRAPPER).toBeDefined();
-        expect(WRAPPER).toMatchSnapshot();
+        const wrapper = render(
+            <ApplicationProvider config={{ ...MOCK_CONFIG, ...PROPS }}>
+                <MemoryRouter>
+                    <SomuList baseUrl={BASE_URL} name={NAME} updateState={MOCK_CALLBACK} {...PROPS} />
+                </MemoryRouter>
+            </ApplicationProvider>
+        );
+        expect(wrapper).toBeDefined();
+        expect(screen.getByText('Add')).toBeInTheDocument();
     });
 
     it('should execute callback on initialization', () => {
         const PROPS = {
             ...DEFAULT_PROPS,
         };
-        const OUTER = shallow(<WrappedSomuList {...PROPS} />);
-        const SomuList = OUTER.props().children;
-        mount(<SomuList />);
+        const wrapper = render(
+            <ApplicationProvider config={{ ...MOCK_CONFIG, ...PROPS }}>
+                <MemoryRouter>
+                    <SomuList baseUrl={BASE_URL} name={NAME} updateState={MOCK_CALLBACK} {...PROPS} />
+                </MemoryRouter>
+            </ApplicationProvider>
+        );
+        expect(wrapper).toBeDefined();
         expect(MOCK_CALLBACK).toHaveBeenCalledTimes(1);
         expect(MOCK_CALLBACK).toHaveBeenCalledWith({ [DEFAULT_PROPS.name]: '[]' });
-    });
-
-    it('should include hideSidebar query param on primary and item links', () => {
-        const somuType = { uuid: 'test',
-            caseType: 'tesCaseType',
-            type: 'testType',
-            schema: { renderers: { } },
-            active: true };
-        const somuItems = [{ uuid: 'test', data: { contributionBusinessArea: 'TestBusinessArea', contributionBusinessUnit: 'TestTeam' }, deleted: false }];
-        const PROPS = {
-            ...DEFAULT_PROPS,
-            somuType,
-            somuItems,
-            hideSidebar: true,
-            itemLinks: [
-                {
-                    'action': 'remove',
-                    'label': 'Remove'
-                }
-            ],
-            primaryLink: {
-                'action': 'add',
-                'label': 'Add'
-            }
-        };
-
-        const OUTER = shallow(<WrappedSomuList { ...PROPS} />);
-        const SomuList = OUTER.props().children;
-        const WRAPPER = render(
-            <MemoryRouter>
-                <SomuList page={PAGE} />
-            </MemoryRouter>);
-        expect(WRAPPER).toBeDefined();
-        expect(WRAPPER).toMatchSnapshot();
     });
 
     it('should render status column correctly', () => {
@@ -339,14 +327,17 @@ describe('Somu list component', () => {
             }
         };
 
-        const OUTER = shallow(<WrappedSomuList { ...PROPS} />);
-        const SomuList = OUTER.props().children;
-        const WRAPPER = render(
-            <MemoryRouter>
-                <SomuList page={PAGE} />
-            </MemoryRouter>);
-        expect(WRAPPER).toBeDefined();
-        expect(WRAPPER).toMatchSnapshot();
+        const wrapper = render(
+            <ApplicationProvider config={{ ...MOCK_CONFIG, ...PROPS }}>
+                <MemoryRouter>
+                    <SomuList baseUrl={BASE_URL} name={NAME} updateState={MOCK_CALLBACK} {...PROPS} />
+                </MemoryRouter>
+            </ApplicationProvider>
+        );
+        expect(wrapper).toBeDefined();
+        expect(screen.getByText('Cancelled')).toBeInTheDocument();
+        expect(screen.getByText('Complete')).toBeInTheDocument();
+        expect(screen.getByText('Overdue 01/01/2020')).toBeInTheDocument();
     });
 
     it('should render ApprovalTypeTable with Due', () => {
@@ -379,14 +370,15 @@ describe('Somu list component', () => {
                 'label': 'Test Team'
             }]
         };
-        const OUTER = shallow(<WrappedSomuList {...PROPS} />);
-        const SomuList = OUTER.props().children;
-        const WRAPPER = render(
-            <MemoryRouter>
-                <SomuList page={PAGE} />
-            </MemoryRouter>);
-        expect(WRAPPER).toBeDefined();
-        expect(WRAPPER).toMatchSnapshot();
+        const wrapper = render(
+            <ApplicationProvider config={{ ...MOCK_CONFIG, ...PROPS }}>
+                <MemoryRouter>
+                    <SomuList baseUrl={BASE_URL} name={NAME} updateState={MOCK_CALLBACK} {...PROPS} />
+                </MemoryRouter>
+            </ApplicationProvider>
+        );
+        expect(wrapper).toBeDefined();
+        expect(screen.getByText('Overdue 01/09/2021')).toBeInTheDocument();
     });
 
     it('should render ApprovalTypeTable with 1 Complete - approved, 1 Cancelled, 1 Complete - rejected', () => {
@@ -456,14 +448,17 @@ describe('Somu list component', () => {
                 'label': 'Test Team 4'
             }]
         };
-        const OUTER = shallow(<WrappedSomuList {...PROPS} />);
-        const SomuList = OUTER.props().children;
-        const WRAPPER = render(
-            <MemoryRouter>
-                <SomuList page={PAGE} />
-            </MemoryRouter>);
-        expect(WRAPPER).toBeDefined();
-        expect(WRAPPER).toMatchSnapshot();
+        const wrapper = render(
+            <ApplicationProvider config={{ ...MOCK_CONFIG, ...PROPS }}>
+                <MemoryRouter>
+                    <SomuList baseUrl={BASE_URL} name={NAME} updateState={MOCK_CALLBACK} {...PROPS} />
+                </MemoryRouter>
+            </ApplicationProvider>
+        );
+        expect(wrapper).toBeDefined();
+        expect(screen.getByText('Cancelled')).toBeInTheDocument();
+        expect(screen.getByText('Complete - approved')).toBeInTheDocument();
+        expect(screen.getByText('Complete - rejected')).toBeInTheDocument();
     });
 
 });

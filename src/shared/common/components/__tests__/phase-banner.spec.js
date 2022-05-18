@@ -1,5 +1,7 @@
 import React from 'react';
 import PhaseBanner from '../phase-banner.jsx';
+import '@testing-library/jest-dom';
+import { render } from '@testing-library/react';
 
 describe('Phase Banner component', () => {
     it('should render with default props', () => {

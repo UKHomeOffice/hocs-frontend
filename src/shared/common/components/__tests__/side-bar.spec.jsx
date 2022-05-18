@@ -2,6 +2,8 @@ import React from 'react';
 import { ApplicationProvider } from '../../../contexts/application';
 import { MemoryRouter } from 'react-router-dom';
 import SideBar from '../side-bar';
+import '@testing-library/jest-dom';
+import { render, screen } from '@testing-library/react';
 
 
 const page = {
@@ -22,13 +24,14 @@ describe('Side bar component', () => {
         const defaultProps = {
             summary: {
                 type: 'default'
-            }
+            },
+            page: page,
         };
 
         const WRAPPER = render(
             <ApplicationProvider config={{ ...MOCK_CONFIG, ...defaultProps }}>
                 <MemoryRouter>
-                    <SideBar/>
+                    <SideBar page={page} summary={defaultProps.summary} />
                 </MemoryRouter>
             </ApplicationProvider>
         );
@@ -60,7 +63,7 @@ describe('Side bar component', () => {
         const WRAPPER = render(
             <ApplicationProvider config={{ ...MOCK_CONFIG, ...props }}>
                 <MemoryRouter>
-                    <SideBar/>
+                    <SideBar page={page} summary={props.summary} />
                 </MemoryRouter>
             </ApplicationProvider>
         );
@@ -88,19 +91,38 @@ describe('Side bar component', () => {
             }
         };
 
-        // eslint-disable-next-line no-undef
-        window.history.pushState({}, 'Test Title', '/test?tab=TIMELINE');
-
-        const WRAPPER = mount(
+        const WRAPPER = render(
             <ApplicationProvider config={{ ...MOCK_CONFIG, ...props }}>
                 <MemoryRouter>
-                    <SideBar/>
+                    <SideBar page={page} summary={props.summary} />
                 </MemoryRouter>
             </ApplicationProvider>
         );
 
         expect(WRAPPER).toBeDefined();
-        expect(WRAPPER.find('WrappedTimeline').length).toEqual(1);
+        expect(WRAPPER).toMatchSnapshot();
+    });
+
+    it('should hide the people tab for WCS', () => {
+        const props = {
+            summary: {
+                type: 'WCS'
+            }
+        };
+
+        // eslint-disable-next-line no-undef
+        window.history.pushState({}, 'Test Title', '/test?tab=TIMELINE');
+
+        const WRAPPER = render(
+            <ApplicationProvider config={{ ...MOCK_CONFIG, ...props }}>
+                <MemoryRouter>
+                    <SideBar page={page} summary={props.summary} />
+                </MemoryRouter>
+            </ApplicationProvider>
+        );
+
+        expect(WRAPPER).toBeDefined();
+        expect(WRAPPER).toMatchSnapshot();
     });
 
     it('should show the leftmost tab when no param is passed', () => {
@@ -125,16 +147,19 @@ describe('Side bar component', () => {
             }
         };
 
-        const WRAPPER = mount(
+        // eslint-disable-next-line no-undef
+        window.history.pushState({}, 'Test Title', '/test?tab=TIMELINE');
+
+        const WRAPPER = render(
             <ApplicationProvider config={{ ...MOCK_CONFIG, ...props }}>
                 <MemoryRouter>
-                    <SideBar/>
+                    <SideBar page={page} summary={props.summary} />
                 </MemoryRouter>
             </ApplicationProvider>
         );
 
         expect(WRAPPER).toBeDefined();
-        expect(WRAPPER.find('WrappedTimeline').length).toEqual(1);
+        expect(screen.getByText('Add case note')).toBeInTheDocument();
     });
 
 });

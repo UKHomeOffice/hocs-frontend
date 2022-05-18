@@ -1,6 +1,8 @@
 import React from 'react';
 import { ApplicationProvider } from '../../../contexts/application.jsx';
 import FormEmbeddedWrapped from '../../forms/form-embedded-wrapped.jsx';
+import '@testing-library/jest-dom';
+import { render } from '@testing-library/react';
 
 describe('Form embedded wrapped component', () => {
 

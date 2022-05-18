@@ -1,6 +1,8 @@
 import React from 'react';
 import ConfirmationWithCaseRef from '../confirmation-with-case-ref.jsx';
 import { ApplicationProvider } from '../../../contexts/application.jsx';
+import '@testing-library/jest-dom';
+import { render } from '@testing-library/react';
 
 describe('Panel component', () => {
     const config = {

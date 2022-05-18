@@ -2,6 +2,8 @@ import React from 'react';
 import Summary from '../stage-summary.jsx';
 import { ApplicationProvider } from '../../../contexts/application';
 import { BrowserRouter } from 'react-router-dom';
+import '@testing-library/jest-dom';
+import { render } from '@testing-library/react';
 
 const config = {
     summary: {
@@ -46,6 +48,12 @@ const config = {
             uuid: '__previousCaseUuid__',
             reference: '__previousCaseReference__',
             stageUuid: '__previousCaseStage__'
+        }
+    },
+    page:{
+        params: {
+            caseId: 'some_case_id',
+            stageId: 'some_stage_id',
         }
     }
 };

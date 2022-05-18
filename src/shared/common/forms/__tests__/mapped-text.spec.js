@@ -1,5 +1,7 @@
 import React from 'react';
 import MappedText from '../mapped-text.jsx';
+import '@testing-library/jest-dom';
+import { render } from '@testing-library/react';
 
 const choices = [
     { label: 'isA', value: 'A' },
