@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, Fragment, useCallback, useState } from 'react';
 import { Context } from '../../contexts/application.jsx';
-import PropTypes from 'prop-types';
 import status from '../../helpers/api-status';
 import {
     updateApiStatus,
@@ -11,9 +10,10 @@ import {
 import getCaseData from '../../helpers/case-data-helper';
 import axios from 'axios';
 import FormEmbeddedWrapped from '../forms/form-embedded-wrapped.jsx';
+import updateSummary from '../../helpers/summary-helpers';
 
-const TabExGratia = (props) => {
-    const { caseData, dispatch, page } = useContext(Context);
+const TabExGratia = () => {
+    const { summary, caseData, dispatch, page } = useContext(Context);
     const [form, setForm] = useState(null);
     const [error, setError] = useState(null);
 
@@ -22,20 +22,31 @@ const TabExGratia = (props) => {
         getCaseData(page.params.caseId, dispatch);
     }, [getCaseData]);
 
+
+    // @TODO: Found a legit defect here, where on initial render the summary isnt populated
+    // so the form doesnt get retrieved. Confirmed exists on notprod.
+    const fetchCaseSummaryData = useCallback(() => {
+        dispatch(updateApiStatus(status.REQUEST_CASE_SUMMARY));
+        updateSummary(page.params.caseId, dispatch);
+        getForm();
+    }, [updateSummary]);
+
     useEffect(() => {
         fetchCaseData();
     }, [fetchCaseData]);
 
     useEffect(() => {
-        getForm();
+        fetchCaseSummaryData();
+        console.log('summary done redrdrdrdr')
         return function cleanup() {
             dispatch(unsetCaseData());
         };
-    }, []);
+    }, [fetchCaseSummaryData]);
 
     const getForm = () => {
         let schemaType = 'EX_GRATIA_TAB';
-        if (props.stages.length < 1) {
+        console.log(summary);
+        if (summary.stages.length < 1) {
             schemaType = 'EX_GRATIA_TAB_CLOSED';
         }
 
@@ -51,7 +62,7 @@ const TabExGratia = (props) => {
             setWrappedState({ submittingForm: true });
 
             let schemaType = 'EX_GRATIA_TAB';
-            if (props.stages.length < 1) {
+            if (summary.stages.length < 1) {
                 schemaType = 'EX_GRATIA_TAB_CLOSED';
             }
 
@@ -157,11 +168,6 @@ const TabExGratia = (props) => {
             }
         </Fragment>
     );
-};
-
-TabExGratia.propTypes = {
-    page: PropTypes.object,
-    stages: PropTypes.array.isRequired
 };
 
 export default TabExGratia;
