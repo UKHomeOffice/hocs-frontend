@@ -12,7 +12,7 @@ import getCaseData from '../../helpers/case-data-helper';
 import axios from 'axios';
 import FormEmbeddedWrapped from '../forms/form-embedded-wrapped.jsx';
 
-const TabExGratia = (props) => {
+const TabExGratia = () => {
     const { caseData, dispatch, page } = useContext(Context);
     const [form, setForm] = useState(null);
     const [error, setError] = useState(null);
