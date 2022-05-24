@@ -16,6 +16,9 @@ const TabExGratia = (props) => {
     const { caseData, dispatch, page } = useContext(Context);
     const [form, setForm] = useState(null);
     const [error, setError] = useState(null);
+    const [stages, setStages] = useState([]);
+    const SCHEMA_EX_GRATIA_TAB = 'EX_GRATIA_TAB';
+    const SCHEMA_EX_GRATIA_TAB_CLOSED = 'EX_GRATIA_TAB_CLOSED';
 
     const fetchCaseData = useCallback(() => {
         dispatch(updateApiStatus(status.REQUEST_CASE_DATA));
@@ -34,15 +37,36 @@ const TabExGratia = (props) => {
     }, []);
 
     const getForm = () => {
-        let schemaType = 'EX_GRATIA_TAB';
-        if (props.stages.length < 1) {
-            schemaType = 'EX_GRATIA_TAB_CLOSED';
+        let schemaType = SCHEMA_EX_GRATIA_TAB;
+        let activeStages = [];
+
+        function getSchema() {
+            if (activeStages.length < 1) {
+                schemaType = SCHEMA_EX_GRATIA_TAB_CLOSED;
+            }
+
+            dispatch(updateApiStatus(status.REQUEST_FORM))
+                .then(() => axios.get(`/api/schema/${schemaType}/fields`))
+                .then(response => setForm(response))
+                .then(() => dispatch(updateApiStatus(status.REQUEST_FORM_SUCCESS)));
         }
 
-        dispatch(updateApiStatus(status.REQUEST_FORM))
-            .then(() => axios.get(`/api/schema/${schemaType}/fields`))
-            .then(response => setForm(response))
-            .then(() => dispatch(updateApiStatus(status.REQUEST_FORM_SUCCESS)));
+        if (props.stages !== undefined) {
+            activeStages = props.stages;
+            getSchema();
+        } else {
+            dispatch(updateApiStatus(status.REQUEST_CASE_SUMMARY)).then(() => {
+                axios.get(`/api/case/${page.params.caseId}/summary`)
+                    .then(response => {
+                        setStages(response.data.stages);
+                        activeStages = response.data.stages;
+                    })
+                    .then(() => dispatch(updateApiStatus(status.REQUEST_CASE_SUMMARY_SUCCESS)))
+                    .then(() => {
+                        getSchema();
+                    });
+            });
+        }
     };
 
     const submitHandler = (wrappedState, setWrappedState, actionDispatch) => {
@@ -50,9 +74,9 @@ const TabExGratia = (props) => {
             e.preventDefault();
             setWrappedState({ submittingForm: true });
 
-            let schemaType = 'EX_GRATIA_TAB';
-            if (props.stages.length < 1) {
-                schemaType = 'EX_GRATIA_TAB_CLOSED';
+            let schemaType = SCHEMA_EX_GRATIA_TAB;
+            if (stages.length < 1) {
+                schemaType = SCHEMA_EX_GRATIA_TAB_CLOSED;
             }
 
             // eslint-disable-next-line no-undef
@@ -161,7 +185,7 @@ const TabExGratia = (props) => {
 
 TabExGratia.propTypes = {
     page: PropTypes.object,
-    stages: PropTypes.array.isRequired
+    stages: PropTypes.array
 };
 
 export default TabExGratia;
