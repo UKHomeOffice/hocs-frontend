@@ -264,6 +264,12 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
+        S_SMC_CSU_LIST: {
+            client: 'INFO',
+            endpoint: '/entity/list/SMC_CSU_LIST',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
         S_BF_CONTRIB_BUS_AREA: {
             client: 'INFO',
             endpoint: '/entity/list/BF_CONTRIB_BUS_AREA',
