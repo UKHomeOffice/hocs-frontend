@@ -13,6 +13,7 @@ Object {
       <details
         class="govuk-details"
       >
+<<<<<<< HEAD
         <summary
           class="govuk-details__summary"
         >
@@ -28,6 +29,15 @@ Object {
       >
         <caption
           class="govuk-table__caption margin-bottom--small"
+=======
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-half"
+        >
+          Consolatory payment offered:
+        </th>
+        <td
+          class="govuk-table__cell"
+>>>>>>> main
         >
           Summary
         </caption>
@@ -92,6 +102,7 @@ Object {
       <summary
         class="govuk-details__summary"
       >
+<<<<<<< HEAD
         <span
           class="govuk-details__summary-text"
         >
@@ -216,12 +227,46 @@ Object {
     <div>
       <h2
         class="govuk-heading-m"
+=======
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-half"
+        >
+          Ex-Gratia payment offered:
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          Yes
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+]
+`;
+
+exports[`Form component should render EX_GRATIA_TAB, when has empty stages 1`] = `
+Array [
+  <h2
+    class="govuk-heading-m"
+  >
+    Ex-Gratia
+  </h2>,
+  <details
+    class="govuk-details"
+  >
+    <summary
+      class="govuk-details__summary"
+    >
+      <span
+        class="govuk-details__summary-text"
+>>>>>>> main
       >
         Ex-Gratia
       </h2>
       <details
         class="govuk-details"
       >
+<<<<<<< HEAD
         <summary
           class="govuk-details__summary"
         >
@@ -242,6 +287,29 @@ Object {
         </caption>
         <tbody
           class="govuk-table__body"
+=======
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-half"
+        >
+          Amount requested by complainant:
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          £100
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__cell"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-half"
+        >
+          Consolatory payment offered:
+        </th>
+        <td
+          class="govuk-table__cell"
+>>>>>>> main
         >
           <tr
             class="govuk-table__cell"
@@ -371,6 +439,7 @@ Object {
       <summary
         class="govuk-details__summary"
       >
+<<<<<<< HEAD
         <span
           class="govuk-details__summary-text"
         >
@@ -419,6 +488,38 @@ Object {
         </tr>
         <tr
           class="govuk-table__cell"
+=======
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-half"
+        >
+          Consolatory payment offer sent to the complainant:
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          £50
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__cell"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-half"
+        >
+          Ex-Gratia payment offered:
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          No
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__cell"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-half"
+>>>>>>> main
         >
           <th
             class="govuk-table__header padding-left--small govuk-!-width-one-third"
@@ -434,6 +535,7 @@ Object {
         <tr
           class="govuk-table__cell"
         >
+<<<<<<< HEAD
           <th
             class="govuk-table__header padding-left--small govuk-!-width-one-third"
           >
@@ -447,6 +549,16 @@ Object {
         </tr>
         <tr
           class="govuk-table__cell"
+=======
+          £50
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__cell"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-half"
+>>>>>>> main
         >
           <th
             class="govuk-table__header padding-left--small govuk-!-width-one-third"
@@ -462,6 +574,7 @@ Object {
         <tr
           class="govuk-table__cell"
         >
+<<<<<<< HEAD
           <th
             class="govuk-table__header padding-left--small govuk-!-width-one-third"
           >
@@ -556,6 +669,14 @@ Object {
   "rerender": [Function],
   "unmount": [Function],
 }
+=======
+          £100
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+]
+>>>>>>> main
 `;
 
 exports[`Ex-Gratia tab component should render form when passed 1`] = `
@@ -571,6 +692,7 @@ Object {
       <details
         class="govuk-details"
       >
+<<<<<<< HEAD
         <summary
           class="govuk-details__summary"
         >
@@ -591,6 +713,29 @@ Object {
         </caption>
         <tbody
           class="govuk-table__body"
+=======
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-half"
+        >
+          Amount requested by complainant:
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          £100
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__cell"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-half"
+        >
+          Consolatory payment offered:
+        </th>
+        <td
+          class="govuk-table__cell"
+>>>>>>> main
         >
           <tr
             class="govuk-table__cell"
@@ -720,6 +865,7 @@ Object {
       <summary
         class="govuk-details__summary"
       >
+<<<<<<< HEAD
         <span
           class="govuk-details__summary-text"
         >
@@ -768,6 +914,38 @@ Object {
         </tr>
         <tr
           class="govuk-table__cell"
+=======
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-half"
+        >
+          Consolatory payment offer sent to the complainant:
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          £50
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__cell"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-half"
+        >
+          Ex-Gratia payment offered:
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          No
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__cell"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-half"
+>>>>>>> main
         >
           <th
             class="govuk-table__header padding-left--small govuk-!-width-one-third"
@@ -783,6 +961,7 @@ Object {
         <tr
           class="govuk-table__cell"
         >
+<<<<<<< HEAD
           <th
             class="govuk-table__header padding-left--small govuk-!-width-one-third"
           >
@@ -796,6 +975,16 @@ Object {
         </tr>
         <tr
           class="govuk-table__cell"
+=======
+          £50
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__cell"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-half"
+>>>>>>> main
         >
           <th
             class="govuk-table__header padding-left--small govuk-!-width-one-third"
@@ -811,6 +1000,7 @@ Object {
         <tr
           class="govuk-table__cell"
         >
+<<<<<<< HEAD
           <th
             class="govuk-table__header padding-left--small govuk-!-width-one-third"
           >
@@ -905,6 +1095,14 @@ Object {
   "rerender": [Function],
   "unmount": [Function],
 }
+=======
+          £100
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+]
+>>>>>>> main
 `;
 
 exports[`Ex-Gratia tab component should render with content when passed 1`] = `
@@ -920,6 +1118,7 @@ Object {
       <details
         class="govuk-details"
       >
+<<<<<<< HEAD
         <summary
           class="govuk-details__summary"
         >
@@ -940,6 +1139,29 @@ Object {
         </caption>
         <tbody
           class="govuk-table__body"
+=======
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-half"
+        >
+          Amount requested by complainant:
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          £100
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__cell"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-half"
+        >
+          Consolatory payment offered:
+        </th>
+        <td
+          class="govuk-table__cell"
+>>>>>>> main
         >
           <tr
             class="govuk-table__cell"
@@ -1069,6 +1291,7 @@ Object {
       <summary
         class="govuk-details__summary"
       >
+<<<<<<< HEAD
         <span
           class="govuk-details__summary-text"
         >
@@ -1117,6 +1340,38 @@ Object {
         </tr>
         <tr
           class="govuk-table__cell"
+=======
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-half"
+        >
+          Consolatory payment offer sent to the complainant:
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          £50
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__cell"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-half"
+        >
+          Ex-Gratia payment offered:
+        </th>
+        <td
+          class="govuk-table__cell"
+        >
+          No
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__cell"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-half"
+>>>>>>> main
         >
           <th
             class="govuk-table__header padding-left--small govuk-!-width-one-third"
@@ -1132,6 +1387,7 @@ Object {
         <tr
           class="govuk-table__cell"
         >
+<<<<<<< HEAD
           <th
             class="govuk-table__header padding-left--small govuk-!-width-one-third"
           >
@@ -1145,6 +1401,16 @@ Object {
         </tr>
         <tr
           class="govuk-table__cell"
+=======
+          £50
+        </td>
+      </tr>
+      <tr
+        class="govuk-table__cell"
+      >
+        <th
+          class="govuk-table__header padding-left--small govuk-!-width-one-half"
+>>>>>>> main
         >
           <th
             class="govuk-table__header padding-left--small govuk-!-width-one-third"
@@ -1160,6 +1426,7 @@ Object {
         <tr
           class="govuk-table__cell"
         >
+<<<<<<< HEAD
           <th
             class="govuk-table__header padding-left--small govuk-!-width-one-third"
           >
@@ -1254,4 +1521,12 @@ Object {
   "rerender": [Function],
   "unmount": [Function],
 }
+=======
+          £100
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+]
+>>>>>>> main
 `;

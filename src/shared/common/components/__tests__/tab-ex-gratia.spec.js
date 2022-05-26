@@ -28,14 +28,12 @@ describe('Ex-Gratia tab component', () => {
             }
         },
         caseData: {
-            PaymentTypeConsolatory: true,
-            PaymentTypeExGratia: true,
+            PaymentTypeConsolatory: 'Yes',
+            PaymentTypeExGratia: 'No',
             AmountComplainantRequested: 100,
-            AmountBusinessRequested: 50,
             ConsolatoryOfferSentToComplainant: 50,
             ExGratiaOfferSentToComplainant: 50,
             TotalOfferSentToComplainant: 100,
-            ComplainantAccepted: false
         }
     };
 
@@ -73,7 +71,7 @@ describe('Ex-Gratia tab component', () => {
         ).toMatchSnapshot();
     });
 
-    it('should render EX_GRATIA_TAB_CLOSED, when has empty stages', () => {
+    it('should render EX_GRATIA_TAB, when has empty stages', () => {
 
         const emptyStages = [];
 
@@ -90,16 +88,8 @@ describe('Ex-Gratia tab component', () => {
     it('should not render empty fields when passed', () => {
         const config = {
             caseData: {
-                PaymentTypeConsolatory: true,
-                PaymentTypeExGratia: true,
-                BusinessApprovedPayment: false,
-                ComplainantAccepted: false
-            },
-            page:{
-                params: {
-                    caseId: 'some_case_id',
-                    stageId: 'some_stage_id',
-                }
+                PaymentTypeConsolatory: 'Yes',
+                PaymentTypeExGratia: 'Yes',
             }
         };
 
