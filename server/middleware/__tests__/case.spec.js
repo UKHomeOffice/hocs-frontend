@@ -20,7 +20,7 @@ jest.mock('../../clients', () => ({
 }));
 
 const { caseworkService } = require('../../clients');
-const { caseDataMiddleware, createCaseNote, updateCaseNote } = require('../case');
+const { caseDataMiddleware, createCaseNote, updateCaseNote, caseConfigMiddleware } = require('../case');
 
 describe('Case middleware', () => {
 
@@ -173,6 +173,56 @@ describe('Case middleware', () => {
             req.listService.fetch.mockImplementation(() => Promise.reject(mockError));
             await caseSummaryMiddleware(req, res, next);
             expect(res.locals.summary).not.toBeDefined();
+            expect(next).toHaveBeenCalled();
+            expect(next).toHaveBeenCalledWith(mockError);
+        });
+    });
+
+    describe('Case config response middleware', () => {
+
+        let req = {};
+        let res = {};
+        const next = jest.fn();
+
+        beforeEach(() => {
+            req = {
+                params: {
+                    caseId: 'CASE_ID'
+                },
+                user: {
+                    id: 'test',
+                    roles: [],
+                    groups: []
+                },
+                listService: {
+                    fetch: jest.fn(async (list) => {
+                        if (list === 'CASE_CONFIG') {
+                            return Promise.resolve('MOCK_CONFIG');
+                        }
+                        return Promise.reject();
+                    })
+                }
+            };
+
+            res = {
+                status: null,
+                locals: {}
+            };
+            next.mockReset();
+        });
+
+        it('should add case config to res.locals if returned from call to API', async () => {
+            await caseConfigMiddleware(req, res, next);
+            expect(res.locals.caseConfig).toBeDefined();
+            expect(res.locals.caseConfig).toEqual('MOCK_CONFIG');
+            expect(next).toHaveBeenCalled();
+        });
+
+        it('should call next with error if call to API fails', async () => {
+            const mockError = new Error('Something went wrong');
+            req.listService.fetch.mockImplementation(() => Promise.reject(mockError));
+            await caseConfigMiddleware(req, res, next);
+            expect(res.locals.caseConfig).not.toBeDefined();
             expect(next).toHaveBeenCalled();
             expect(next).toHaveBeenCalledWith(mockError);
         });
