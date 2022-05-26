@@ -87,9 +87,13 @@ describe('Ex-Gratia tab component', () => {
 
     it('should not render empty fields when passed', () => {
         const config = {
+            page: {
+                params: {
+                    caseId: 'some_uuid'
+                }
+            },
             caseData: {
-                PaymentTypeConsolatory: 'Yes',
-                PaymentTypeExGratia: 'Yes',
+                PaymentTypeConsolatory: 'Yes'
             }
         };
 

@@ -13,7 +13,6 @@ Object {
       <details
         class="govuk-details"
       >
-<<<<<<< HEAD
         <summary
           class="govuk-details__summary"
         >
@@ -29,15 +28,6 @@ Object {
       >
         <caption
           class="govuk-table__caption margin-bottom--small"
-=======
-        <th
-          class="govuk-table__header padding-left--small govuk-!-width-one-half"
-        >
-          Consolatory payment offered:
-        </th>
-        <td
-          class="govuk-table__cell"
->>>>>>> main
         >
           Summary
         </caption>
@@ -48,42 +38,14 @@ Object {
             class="govuk-table__cell"
           >
             <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
+              class="govuk-table__header padding-left--small govuk-!-width-one-half"
             >
-              Consolatory payment type
+              Consolatory payment offered:
             </th>
             <td
               class="govuk-table__cell"
             >
               Yes
-            </td>
-          </tr>
-          <tr
-            class="govuk-table__cell"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              Ex-Gratia payment type
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              Yes
-            </td>
-          </tr>
-          <tr
-            class="govuk-table__cell"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              Complainant has accepted:
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              No
             </td>
           </tr>
         </tbody>
@@ -102,7 +64,6 @@ Object {
       <summary
         class="govuk-details__summary"
       >
-<<<<<<< HEAD
         <span
           class="govuk-details__summary-text"
         >
@@ -125,42 +86,14 @@ Object {
           class="govuk-table__cell"
         >
           <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
+            class="govuk-table__header padding-left--small govuk-!-width-one-half"
           >
-            Consolatory payment type
+            Consolatory payment offered:
           </th>
           <td
             class="govuk-table__cell"
           >
             Yes
-          </td>
-        </tr>
-        <tr
-          class="govuk-table__cell"
-        >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            Ex-Gratia payment type
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            Yes
-          </td>
-        </tr>
-        <tr
-          class="govuk-table__cell"
-        >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            Complainant has accepted:
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            No
           </td>
         </tr>
       </tbody>
@@ -220,53 +153,19 @@ Object {
 }
 `;
 
-exports[`Ex-Gratia tab component should render EX_GRATIA_TAB_CLOSED, when has empty stages 1`] = `
+exports[`Ex-Gratia tab component should render EX_GRATIA_TAB, when has empty stages 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
       <h2
         class="govuk-heading-m"
-=======
-        <th
-          class="govuk-table__header padding-left--small govuk-!-width-one-half"
-        >
-          Ex-Gratia payment offered:
-        </th>
-        <td
-          class="govuk-table__cell"
-        >
-          Yes
-        </td>
-      </tr>
-    </tbody>
-  </table>,
-]
-`;
-
-exports[`Form component should render EX_GRATIA_TAB, when has empty stages 1`] = `
-Array [
-  <h2
-    class="govuk-heading-m"
-  >
-    Ex-Gratia
-  </h2>,
-  <details
-    class="govuk-details"
-  >
-    <summary
-      class="govuk-details__summary"
-    >
-      <span
-        class="govuk-details__summary-text"
->>>>>>> main
       >
         Ex-Gratia
       </h2>
       <details
         class="govuk-details"
       >
-<<<<<<< HEAD
         <summary
           class="govuk-details__summary"
         >
@@ -287,69 +186,19 @@ Array [
         </caption>
         <tbody
           class="govuk-table__body"
-=======
-        <th
-          class="govuk-table__header padding-left--small govuk-!-width-one-half"
-        >
-          Amount requested by complainant:
-        </th>
-        <td
-          class="govuk-table__cell"
-        >
-          £100
-        </td>
-      </tr>
-      <tr
-        class="govuk-table__cell"
-      >
-        <th
-          class="govuk-table__header padding-left--small govuk-!-width-one-half"
-        >
-          Consolatory payment offered:
-        </th>
-        <td
-          class="govuk-table__cell"
->>>>>>> main
         >
           <tr
             class="govuk-table__cell"
           >
             <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              Consolatory payment type
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              Yes
-            </td>
-          </tr>
-          <tr
-            class="govuk-table__cell"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              Ex-Gratia payment type
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              Yes
-            </td>
-          </tr>
-          <tr
-            class="govuk-table__cell"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
+              class="govuk-table__header padding-left--small govuk-!-width-one-half"
             >
               Amount requested by complainant:
             </th>
             <td
               class="govuk-table__cell"
             >
+              £
               100
             </td>
           </tr>
@@ -357,27 +206,28 @@ Array [
             class="govuk-table__cell"
           >
             <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
+              class="govuk-table__header padding-left--small govuk-!-width-one-half"
             >
-              Amount requested from business/port:
+              Consolatory payment offered:
             </th>
             <td
               class="govuk-table__cell"
             >
-              50
+              Yes
             </td>
           </tr>
           <tr
             class="govuk-table__cell"
           >
             <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
+              class="govuk-table__header padding-left--small govuk-!-width-one-half"
             >
               Consolatory payment offer sent to the complainant:
             </th>
             <td
               class="govuk-table__cell"
             >
+              £
               50
             </td>
           </tr>
@@ -385,13 +235,28 @@ Array [
             class="govuk-table__cell"
           >
             <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
+              class="govuk-table__header padding-left--small govuk-!-width-one-half"
+            >
+              Ex-Gratia payment offered:
+            </th>
+            <td
+              class="govuk-table__cell"
+            >
+              No
+            </td>
+          </tr>
+          <tr
+            class="govuk-table__cell"
+          >
+            <th
+              class="govuk-table__header padding-left--small govuk-!-width-one-half"
             >
               Ex-Gratia payment offer sent to the complainant:
             </th>
             <td
               class="govuk-table__cell"
             >
+              £
               50
             </td>
           </tr>
@@ -399,28 +264,15 @@ Array [
             class="govuk-table__cell"
           >
             <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
+              class="govuk-table__header padding-left--small govuk-!-width-one-half"
             >
               Total payment offer sent to the complainant:
             </th>
             <td
               class="govuk-table__cell"
             >
+              £
               100
-            </td>
-          </tr>
-          <tr
-            class="govuk-table__cell"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              Complainant has accepted:
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              No
             </td>
           </tr>
         </tbody>
@@ -439,7 +291,6 @@ Array [
       <summary
         class="govuk-details__summary"
       >
-<<<<<<< HEAD
         <span
           class="govuk-details__summary-text"
         >
@@ -462,127 +313,72 @@ Array [
           class="govuk-table__cell"
         >
           <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            Consolatory payment type
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            Yes
-          </td>
-        </tr>
-        <tr
-          class="govuk-table__cell"
-        >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            Ex-Gratia payment type
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            Yes
-          </td>
-        </tr>
-        <tr
-          class="govuk-table__cell"
-=======
-        <th
-          class="govuk-table__header padding-left--small govuk-!-width-one-half"
-        >
-          Consolatory payment offer sent to the complainant:
-        </th>
-        <td
-          class="govuk-table__cell"
-        >
-          £50
-        </td>
-      </tr>
-      <tr
-        class="govuk-table__cell"
-      >
-        <th
-          class="govuk-table__header padding-left--small govuk-!-width-one-half"
-        >
-          Ex-Gratia payment offered:
-        </th>
-        <td
-          class="govuk-table__cell"
-        >
-          No
-        </td>
-      </tr>
-      <tr
-        class="govuk-table__cell"
-      >
-        <th
-          class="govuk-table__header padding-left--small govuk-!-width-one-half"
->>>>>>> main
-        >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
+            class="govuk-table__header padding-left--small govuk-!-width-one-half"
           >
             Amount requested by complainant:
           </th>
           <td
             class="govuk-table__cell"
           >
+            £
             100
           </td>
         </tr>
         <tr
           class="govuk-table__cell"
         >
-<<<<<<< HEAD
           <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
+            class="govuk-table__header padding-left--small govuk-!-width-one-half"
           >
-            Amount requested from business/port:
+            Consolatory payment offered:
           </th>
           <td
             class="govuk-table__cell"
           >
-            50
+            Yes
           </td>
         </tr>
         <tr
           class="govuk-table__cell"
-=======
-          £50
-        </td>
-      </tr>
-      <tr
-        class="govuk-table__cell"
-      >
-        <th
-          class="govuk-table__header padding-left--small govuk-!-width-one-half"
->>>>>>> main
         >
           <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
+            class="govuk-table__header padding-left--small govuk-!-width-one-half"
           >
             Consolatory payment offer sent to the complainant:
           </th>
           <td
             class="govuk-table__cell"
           >
+            £
             50
           </td>
         </tr>
         <tr
           class="govuk-table__cell"
         >
-<<<<<<< HEAD
           <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
+            class="govuk-table__header padding-left--small govuk-!-width-one-half"
+          >
+            Ex-Gratia payment offered:
+          </th>
+          <td
+            class="govuk-table__cell"
+          >
+            No
+          </td>
+        </tr>
+        <tr
+          class="govuk-table__cell"
+        >
+          <th
+            class="govuk-table__header padding-left--small govuk-!-width-one-half"
           >
             Ex-Gratia payment offer sent to the complainant:
           </th>
           <td
             class="govuk-table__cell"
           >
+            £
             50
           </td>
         </tr>
@@ -590,28 +386,15 @@ Array [
           class="govuk-table__cell"
         >
           <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
+            class="govuk-table__header padding-left--small govuk-!-width-one-half"
           >
             Total payment offer sent to the complainant:
           </th>
           <td
             class="govuk-table__cell"
           >
+            £
             100
-          </td>
-        </tr>
-        <tr
-          class="govuk-table__cell"
-        >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            Complainant has accepted:
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            No
           </td>
         </tr>
       </tbody>
@@ -669,14 +452,6 @@ Array [
   "rerender": [Function],
   "unmount": [Function],
 }
-=======
-          £100
-        </td>
-      </tr>
-    </tbody>
-  </table>,
-]
->>>>>>> main
 `;
 
 exports[`Ex-Gratia tab component should render form when passed 1`] = `
@@ -692,7 +467,6 @@ Object {
       <details
         class="govuk-details"
       >
-<<<<<<< HEAD
         <summary
           class="govuk-details__summary"
         >
@@ -713,69 +487,19 @@ Object {
         </caption>
         <tbody
           class="govuk-table__body"
-=======
-        <th
-          class="govuk-table__header padding-left--small govuk-!-width-one-half"
-        >
-          Amount requested by complainant:
-        </th>
-        <td
-          class="govuk-table__cell"
-        >
-          £100
-        </td>
-      </tr>
-      <tr
-        class="govuk-table__cell"
-      >
-        <th
-          class="govuk-table__header padding-left--small govuk-!-width-one-half"
-        >
-          Consolatory payment offered:
-        </th>
-        <td
-          class="govuk-table__cell"
->>>>>>> main
         >
           <tr
             class="govuk-table__cell"
           >
             <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              Consolatory payment type
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              Yes
-            </td>
-          </tr>
-          <tr
-            class="govuk-table__cell"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              Ex-Gratia payment type
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              Yes
-            </td>
-          </tr>
-          <tr
-            class="govuk-table__cell"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
+              class="govuk-table__header padding-left--small govuk-!-width-one-half"
             >
               Amount requested by complainant:
             </th>
             <td
               class="govuk-table__cell"
             >
+              £
               100
             </td>
           </tr>
@@ -783,27 +507,28 @@ Object {
             class="govuk-table__cell"
           >
             <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
+              class="govuk-table__header padding-left--small govuk-!-width-one-half"
             >
-              Amount requested from business/port:
+              Consolatory payment offered:
             </th>
             <td
               class="govuk-table__cell"
             >
-              50
+              Yes
             </td>
           </tr>
           <tr
             class="govuk-table__cell"
           >
             <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
+              class="govuk-table__header padding-left--small govuk-!-width-one-half"
             >
               Consolatory payment offer sent to the complainant:
             </th>
             <td
               class="govuk-table__cell"
             >
+              £
               50
             </td>
           </tr>
@@ -811,13 +536,28 @@ Object {
             class="govuk-table__cell"
           >
             <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
+              class="govuk-table__header padding-left--small govuk-!-width-one-half"
+            >
+              Ex-Gratia payment offered:
+            </th>
+            <td
+              class="govuk-table__cell"
+            >
+              No
+            </td>
+          </tr>
+          <tr
+            class="govuk-table__cell"
+          >
+            <th
+              class="govuk-table__header padding-left--small govuk-!-width-one-half"
             >
               Ex-Gratia payment offer sent to the complainant:
             </th>
             <td
               class="govuk-table__cell"
             >
+              £
               50
             </td>
           </tr>
@@ -825,28 +565,15 @@ Object {
             class="govuk-table__cell"
           >
             <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
+              class="govuk-table__header padding-left--small govuk-!-width-one-half"
             >
               Total payment offer sent to the complainant:
             </th>
             <td
               class="govuk-table__cell"
             >
+              £
               100
-            </td>
-          </tr>
-          <tr
-            class="govuk-table__cell"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              Complainant has accepted:
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              No
             </td>
           </tr>
         </tbody>
@@ -865,7 +592,6 @@ Object {
       <summary
         class="govuk-details__summary"
       >
-<<<<<<< HEAD
         <span
           class="govuk-details__summary-text"
         >
@@ -888,127 +614,72 @@ Object {
           class="govuk-table__cell"
         >
           <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            Consolatory payment type
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            Yes
-          </td>
-        </tr>
-        <tr
-          class="govuk-table__cell"
-        >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            Ex-Gratia payment type
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            Yes
-          </td>
-        </tr>
-        <tr
-          class="govuk-table__cell"
-=======
-        <th
-          class="govuk-table__header padding-left--small govuk-!-width-one-half"
-        >
-          Consolatory payment offer sent to the complainant:
-        </th>
-        <td
-          class="govuk-table__cell"
-        >
-          £50
-        </td>
-      </tr>
-      <tr
-        class="govuk-table__cell"
-      >
-        <th
-          class="govuk-table__header padding-left--small govuk-!-width-one-half"
-        >
-          Ex-Gratia payment offered:
-        </th>
-        <td
-          class="govuk-table__cell"
-        >
-          No
-        </td>
-      </tr>
-      <tr
-        class="govuk-table__cell"
-      >
-        <th
-          class="govuk-table__header padding-left--small govuk-!-width-one-half"
->>>>>>> main
-        >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
+            class="govuk-table__header padding-left--small govuk-!-width-one-half"
           >
             Amount requested by complainant:
           </th>
           <td
             class="govuk-table__cell"
           >
+            £
             100
           </td>
         </tr>
         <tr
           class="govuk-table__cell"
         >
-<<<<<<< HEAD
           <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
+            class="govuk-table__header padding-left--small govuk-!-width-one-half"
           >
-            Amount requested from business/port:
+            Consolatory payment offered:
           </th>
           <td
             class="govuk-table__cell"
           >
-            50
+            Yes
           </td>
         </tr>
         <tr
           class="govuk-table__cell"
-=======
-          £50
-        </td>
-      </tr>
-      <tr
-        class="govuk-table__cell"
-      >
-        <th
-          class="govuk-table__header padding-left--small govuk-!-width-one-half"
->>>>>>> main
         >
           <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
+            class="govuk-table__header padding-left--small govuk-!-width-one-half"
           >
             Consolatory payment offer sent to the complainant:
           </th>
           <td
             class="govuk-table__cell"
           >
+            £
             50
           </td>
         </tr>
         <tr
           class="govuk-table__cell"
         >
-<<<<<<< HEAD
           <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
+            class="govuk-table__header padding-left--small govuk-!-width-one-half"
+          >
+            Ex-Gratia payment offered:
+          </th>
+          <td
+            class="govuk-table__cell"
+          >
+            No
+          </td>
+        </tr>
+        <tr
+          class="govuk-table__cell"
+        >
+          <th
+            class="govuk-table__header padding-left--small govuk-!-width-one-half"
           >
             Ex-Gratia payment offer sent to the complainant:
           </th>
           <td
             class="govuk-table__cell"
           >
+            £
             50
           </td>
         </tr>
@@ -1016,28 +687,15 @@ Object {
           class="govuk-table__cell"
         >
           <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
+            class="govuk-table__header padding-left--small govuk-!-width-one-half"
           >
             Total payment offer sent to the complainant:
           </th>
           <td
             class="govuk-table__cell"
           >
+            £
             100
-          </td>
-        </tr>
-        <tr
-          class="govuk-table__cell"
-        >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            Complainant has accepted:
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            No
           </td>
         </tr>
       </tbody>
@@ -1095,14 +753,6 @@ Object {
   "rerender": [Function],
   "unmount": [Function],
 }
-=======
-          £100
-        </td>
-      </tr>
-    </tbody>
-  </table>,
-]
->>>>>>> main
 `;
 
 exports[`Ex-Gratia tab component should render with content when passed 1`] = `
@@ -1118,7 +768,6 @@ Object {
       <details
         class="govuk-details"
       >
-<<<<<<< HEAD
         <summary
           class="govuk-details__summary"
         >
@@ -1139,69 +788,19 @@ Object {
         </caption>
         <tbody
           class="govuk-table__body"
-=======
-        <th
-          class="govuk-table__header padding-left--small govuk-!-width-one-half"
-        >
-          Amount requested by complainant:
-        </th>
-        <td
-          class="govuk-table__cell"
-        >
-          £100
-        </td>
-      </tr>
-      <tr
-        class="govuk-table__cell"
-      >
-        <th
-          class="govuk-table__header padding-left--small govuk-!-width-one-half"
-        >
-          Consolatory payment offered:
-        </th>
-        <td
-          class="govuk-table__cell"
->>>>>>> main
         >
           <tr
             class="govuk-table__cell"
           >
             <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              Consolatory payment type
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              Yes
-            </td>
-          </tr>
-          <tr
-            class="govuk-table__cell"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              Ex-Gratia payment type
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              Yes
-            </td>
-          </tr>
-          <tr
-            class="govuk-table__cell"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
+              class="govuk-table__header padding-left--small govuk-!-width-one-half"
             >
               Amount requested by complainant:
             </th>
             <td
               class="govuk-table__cell"
             >
+              £
               100
             </td>
           </tr>
@@ -1209,27 +808,28 @@ Object {
             class="govuk-table__cell"
           >
             <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
+              class="govuk-table__header padding-left--small govuk-!-width-one-half"
             >
-              Amount requested from business/port:
+              Consolatory payment offered:
             </th>
             <td
               class="govuk-table__cell"
             >
-              50
+              Yes
             </td>
           </tr>
           <tr
             class="govuk-table__cell"
           >
             <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
+              class="govuk-table__header padding-left--small govuk-!-width-one-half"
             >
               Consolatory payment offer sent to the complainant:
             </th>
             <td
               class="govuk-table__cell"
             >
+              £
               50
             </td>
           </tr>
@@ -1237,13 +837,28 @@ Object {
             class="govuk-table__cell"
           >
             <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
+              class="govuk-table__header padding-left--small govuk-!-width-one-half"
+            >
+              Ex-Gratia payment offered:
+            </th>
+            <td
+              class="govuk-table__cell"
+            >
+              No
+            </td>
+          </tr>
+          <tr
+            class="govuk-table__cell"
+          >
+            <th
+              class="govuk-table__header padding-left--small govuk-!-width-one-half"
             >
               Ex-Gratia payment offer sent to the complainant:
             </th>
             <td
               class="govuk-table__cell"
             >
+              £
               50
             </td>
           </tr>
@@ -1251,28 +866,15 @@ Object {
             class="govuk-table__cell"
           >
             <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
+              class="govuk-table__header padding-left--small govuk-!-width-one-half"
             >
               Total payment offer sent to the complainant:
             </th>
             <td
               class="govuk-table__cell"
             >
+              £
               100
-            </td>
-          </tr>
-          <tr
-            class="govuk-table__cell"
-          >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-third"
-            >
-              Complainant has accepted:
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              No
             </td>
           </tr>
         </tbody>
@@ -1291,7 +893,6 @@ Object {
       <summary
         class="govuk-details__summary"
       >
-<<<<<<< HEAD
         <span
           class="govuk-details__summary-text"
         >
@@ -1314,127 +915,72 @@ Object {
           class="govuk-table__cell"
         >
           <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            Consolatory payment type
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            Yes
-          </td>
-        </tr>
-        <tr
-          class="govuk-table__cell"
-        >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            Ex-Gratia payment type
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            Yes
-          </td>
-        </tr>
-        <tr
-          class="govuk-table__cell"
-=======
-        <th
-          class="govuk-table__header padding-left--small govuk-!-width-one-half"
-        >
-          Consolatory payment offer sent to the complainant:
-        </th>
-        <td
-          class="govuk-table__cell"
-        >
-          £50
-        </td>
-      </tr>
-      <tr
-        class="govuk-table__cell"
-      >
-        <th
-          class="govuk-table__header padding-left--small govuk-!-width-one-half"
-        >
-          Ex-Gratia payment offered:
-        </th>
-        <td
-          class="govuk-table__cell"
-        >
-          No
-        </td>
-      </tr>
-      <tr
-        class="govuk-table__cell"
-      >
-        <th
-          class="govuk-table__header padding-left--small govuk-!-width-one-half"
->>>>>>> main
-        >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
+            class="govuk-table__header padding-left--small govuk-!-width-one-half"
           >
             Amount requested by complainant:
           </th>
           <td
             class="govuk-table__cell"
           >
+            £
             100
           </td>
         </tr>
         <tr
           class="govuk-table__cell"
         >
-<<<<<<< HEAD
           <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
+            class="govuk-table__header padding-left--small govuk-!-width-one-half"
           >
-            Amount requested from business/port:
+            Consolatory payment offered:
           </th>
           <td
             class="govuk-table__cell"
           >
-            50
+            Yes
           </td>
         </tr>
         <tr
           class="govuk-table__cell"
-=======
-          £50
-        </td>
-      </tr>
-      <tr
-        class="govuk-table__cell"
-      >
-        <th
-          class="govuk-table__header padding-left--small govuk-!-width-one-half"
->>>>>>> main
         >
           <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
+            class="govuk-table__header padding-left--small govuk-!-width-one-half"
           >
             Consolatory payment offer sent to the complainant:
           </th>
           <td
             class="govuk-table__cell"
           >
+            £
             50
           </td>
         </tr>
         <tr
           class="govuk-table__cell"
         >
-<<<<<<< HEAD
           <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
+            class="govuk-table__header padding-left--small govuk-!-width-one-half"
+          >
+            Ex-Gratia payment offered:
+          </th>
+          <td
+            class="govuk-table__cell"
+          >
+            No
+          </td>
+        </tr>
+        <tr
+          class="govuk-table__cell"
+        >
+          <th
+            class="govuk-table__header padding-left--small govuk-!-width-one-half"
           >
             Ex-Gratia payment offer sent to the complainant:
           </th>
           <td
             class="govuk-table__cell"
           >
+            £
             50
           </td>
         </tr>
@@ -1442,28 +988,15 @@ Object {
           class="govuk-table__cell"
         >
           <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
+            class="govuk-table__header padding-left--small govuk-!-width-one-half"
           >
             Total payment offer sent to the complainant:
           </th>
           <td
             class="govuk-table__cell"
           >
+            £
             100
-          </td>
-        </tr>
-        <tr
-          class="govuk-table__cell"
-        >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-third"
-          >
-            Complainant has accepted:
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            No
           </td>
         </tr>
       </tbody>
@@ -1521,12 +1054,4 @@ Object {
   "rerender": [Function],
   "unmount": [Function],
 }
-=======
-          £100
-        </td>
-      </tr>
-    </tbody>
-  </table>,
-]
->>>>>>> main
 `;
