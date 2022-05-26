@@ -1026,6 +1026,12 @@ module.exports = {
             endpoint: '/teams?unit=POGR_GRO_DRAFTING_TEAMS',
             type: listService.types.STATIC,
             adapter: teamsAdapter
+        },
+        S_SMC_COMP_ORIGIN: {
+            client: 'INFO',
+            endpoint: '/entity/list/SMC_COMP_ORIGIN',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
         }
     },
     clients: {
