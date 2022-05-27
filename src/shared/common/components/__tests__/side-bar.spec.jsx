@@ -37,49 +37,24 @@ describe('Side bar component', () => {
         expect(WRAPPER).toMatchSnapshot();
     });
 
-    it('should render with the actions tab for FOI', () => {
+    it('should render with supplied tabs', () => {
         const props = {
-            summary: {
-                type: 'FOI'
-            }
-        };
-
-        const WRAPPER = render(
-            <ApplicationProvider config={{ ...MOCK_CONFIG, ...props }}>
-                <MemoryRouter>
-                    <SideBar/>
-                </MemoryRouter>
-            </ApplicationProvider>
-        );
-
-        expect(WRAPPER).toBeDefined();
-        expect(WRAPPER).toMatchSnapshot();
-    });
-
-    it('should render with the defined BF tabs', () => {
-        const props = {
-            summary: {
-                type: 'BF'
-            }
-        };
-
-        const WRAPPER = render(
-            <ApplicationProvider config={{ ...MOCK_CONFIG, ...props }}>
-                <MemoryRouter>
-                    <SideBar/>
-                </MemoryRouter>
-            </ApplicationProvider>
-        );
-
-        expect(WRAPPER).toBeDefined();
-        expect(WRAPPER).toMatchSnapshot();
-    });
-
-    it('should hide the people tab for WCS', () => {
-        const props = {
-            summary: {
-                type: 'WCS'
-            }
+            caseConfig : {
+                type: 'case type',
+                tabs: [
+                    {
+                        name: 'documents',
+                        label: 'Documents',
+                        screen: 'DOCUMENTS'
+                    },
+                    {
+                        name: 'summary',
+                        label: 'Summary',
+                        screen: 'SUMMARY'
+                    },
+                ]
+            },
+            activeTab: 'DOCUMENTS'
         };
 
         const WRAPPER = render(
@@ -96,13 +71,59 @@ describe('Side bar component', () => {
 
     it('should show the correct tab when param is passed', () => {
         const props = {
-            summary: {
-                type: 'default'
+            caseConfig : {
+                type: 'case type',
+                tabs: [
+                    {
+                        name: 'documents',
+                        label: 'Documents',
+                        screen: 'DOCUMENTS'
+                    },
+                    {
+                        name: 'timeline',
+                        label: 'Timeline',
+                        screen: 'TIMELINE'
+                    },
+                ]
             }
         };
 
         // eslint-disable-next-line no-undef
         window.history.pushState({}, 'Test Title', '/test?tab=TIMELINE');
+
+        const WRAPPER = mount(
+            <ApplicationProvider config={{ ...MOCK_CONFIG, ...props }}>
+                <MemoryRouter>
+                    <SideBar/>
+                </MemoryRouter>
+            </ApplicationProvider>
+        );
+
+        expect(WRAPPER).toBeDefined();
+        expect(WRAPPER.find('WrappedTimeline').length).toEqual(1);
+    });
+
+    it('should show the leftmost tab when no param is passed', () => {
+        const props = {
+            summary: {
+                type: 'case type'
+            },
+            caseConfig : {
+                type: 'case type',
+                tabs: [
+                    {
+                        name: 'timeline',
+                        label: 'Timeline',
+                        screen: 'TIMELINE'
+                    },
+                    {
+                        name: 'summary',
+                        label: 'Summary',
+                        screen: 'SUMMARY'
+                    },
+                ]
+            }
+        };
 
         const WRAPPER = mount(
             <ApplicationProvider config={{ ...MOCK_CONFIG, ...props }}>

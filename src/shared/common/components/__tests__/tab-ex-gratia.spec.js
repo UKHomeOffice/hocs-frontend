@@ -26,14 +26,12 @@ describe('Form component', () => {
             }
         },
         caseData: {
-            PaymentTypeConsolatory: true,
-            PaymentTypeExGratia: true,
+            PaymentTypeConsolatory: 'Yes',
+            PaymentTypeExGratia: 'No',
             AmountComplainantRequested: 100,
-            AmountBusinessRequested: 50,
             ConsolatoryOfferSentToComplainant: 50,
             ExGratiaOfferSentToComplainant: 50,
             TotalOfferSentToComplainant: 100,
-            ComplainantAccepted: false
         }
     };
 
@@ -71,7 +69,7 @@ describe('Form component', () => {
         ).toMatchSnapshot();
     });
 
-    it('should render EX_GRATIA_TAB_CLOSED, when has empty stages', () => {
+    it('should render EX_GRATIA_TAB, when has empty stages', () => {
 
         const emptyStages = [];
 
@@ -88,10 +86,8 @@ describe('Form component', () => {
     it('should not render empty fields when passed', () => {
         const config = {
             caseData: {
-                PaymentTypeConsolatory: true,
-                PaymentTypeExGratia: true,
-                BusinessApprovedPayment: false,
-                ComplainantAccepted: false
+                PaymentTypeConsolatory: 'Yes',
+                PaymentTypeExGratia: 'Yes',
             }
         };
 

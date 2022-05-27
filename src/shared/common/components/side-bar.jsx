@@ -7,8 +7,8 @@ import CaseNotes from './case-notes.jsx';
 import StageSummary from './stage-summary.jsx';
 import People from './people.jsx';
 import CaseActions from './case-actions.jsx';
-import getTabsByShortCode from '../../helpers/case-type-sidebar-tabs-flags';
 import TabExGratia from './tab-ex-gratia.jsx';
+import updateCaseConfig from '../../helpers/case-config-helpers';
 
 class SideBar extends Component {
 
@@ -16,7 +16,7 @@ class SideBar extends Component {
         super(props);
 
         this.state = {
-            active: props.activeTab || 'DOCUMENTS'
+            active: props.activeTab
         };
     }
 
@@ -29,7 +29,16 @@ class SideBar extends Component {
             this.setState(  {
                 active: tabParam
             });
+        } else {
+            this.updateActiveTab();
         }
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.page.params !== this.props.page.params) {
+            this.updateTabs();
+        }
+        this.updateActiveTab();
     }
 
     setActive(e, tab) {
@@ -41,14 +50,10 @@ class SideBar extends Component {
         return this.state.active === tab;
     }
 
-    resolveTabsForCaseTypeByShortCode(type) {
-        return getTabsByShortCode(type);
-    }
-
     renderTabButton(label, value) {
         const { page } = this.props;
         return (
-            <li>
+            <li key={value}>
                 <Link onClick={(e) => this.setActive(e, value)} className={this.isActive(value) ? 'tab tab__active' : 'tab'} to={`${page.url}/?activeTab=${value}`}>
                     {label}
                 </Link>
@@ -56,19 +61,33 @@ class SideBar extends Component {
         );
     }
 
+    updateTabs() {
+        const { page, dispatch } = this.props;
+        if (page && page.params && page.params.caseId) {
+            updateCaseConfig(page.params.caseId, dispatch);
+        }
+    }
+
+    updateActiveTab() {
+        const { caseConfig } = this.props;
+
+        if (caseConfig && !this.state.active) {
+            this.setState({ active: caseConfig.tabs[0].screen });
+        }
+    }
+
     render() {
-        const { type } = this.props.summary;
-        const caseTabs = this.resolveTabsForCaseTypeByShortCode(type);
         return (
             <Fragment>
-                <div className='tabs'>
+                { this.props.caseConfig && <div className='tabs'>
                     <ul>
-                        {this.renderTabButton('Documents', 'DOCUMENTS')}
-                        {this.renderTabButton('Summary', 'SUMMARY')}
-                        {this.renderTabButton('Timeline', 'TIMELINE')}
-                        {caseTabs.people && this.renderTabButton('People', 'PEOPLE')}
-                        {caseTabs.case_actions && this.renderTabButton('Actions', 'CASE_ACTIONS')}
-                        {caseTabs.ex_gratia && this.renderTabButton('Ex-Gratia', 'EX_GRATIA')}
+                        {
+                            this.props.caseConfig.tabs.map(tab => {
+                                return (
+                                    this.renderTabButton(tab.label, tab.screen)
+                                );
+                            })
+                        }
                     </ul>
                     {this.isActive('DOCUMENTS') && <DocumentPane />}
                     {this.isActive('SUMMARY') && <StageSummary />}
@@ -76,7 +95,7 @@ class SideBar extends Component {
                     {this.isActive('PEOPLE') && <People />}
                     {this.isActive('CASE_ACTIONS') && <CaseActions />}
                     {this.isActive('EX_GRATIA') && <TabExGratia stages={this.props.summary.stages} />}
-                </div>
+                </div>}
             </Fragment>
         );
     }
@@ -86,13 +105,15 @@ class SideBar extends Component {
 SideBar.propTypes = {
     activeTab: PropTypes.string,
     page: PropTypes.object.isRequired,
-    summary: PropTypes.object.isRequired
+    dispatch: PropTypes.func.isRequired,
+    summary: PropTypes.object.isRequired,
+    caseConfig: PropTypes.object
 };
 
 const WrappedSideBar = props => (
     <ApplicationConsumer>
-        {({ page, activeTab, summary }) =>
-            <SideBar {...props} page={page} activeTab={activeTab} summary={summary}/>}
+        {({ page, activeTab, caseConfig, dispatch, summary }) =>
+            <SideBar {...props} page={page} activeTab={activeTab} caseConfig={caseConfig} dispatch={dispatch} summary={summary}/>}
     </ApplicationConsumer>
 );
 
