@@ -1,417 +1,1018 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`When the Details link is clicked should show the child items 1`] = `"<div class=\\"govuk-grid-row selectable-details\\"><div class=\\"govuk-grid-column-full\\"><div class=\\"selectable-details-header\\"><div class=\\"govuk-checkboxes\\" style=\\"display: inline-flex;\\"><div class=\\"govuk-checkboxes__item\\"><input id=\\"details-checkbox-__name__\\" type=\\"checkbox\\" name=\\"details-checkbox-__name__\\" class=\\"govuk-checkboxes__input\\" value=\\"__value__\\" checked=\\"\\"><label class=\\"govuk-label govuk-checkboxes__label\\" for=\\"details-checkbox-__name__\\">__label__</label></div></div><div class=\\"selectable-details-link\\"><a href=\\"#details-checkbox-__name__\\">Hide Details </a></div></div><div class=\\"selectable-details-content\\"><p class=\\"govuk-inset-text\\"> </p><p class=\\"govuk-inset-text\\"> </p><p class=\\"govuk-inset-text\\"> </p></div></div></div>"`;
-
-exports[`When the Details link is clicked twice should not show the child items 1`] = `"<div class=\\"govuk-grid-row selectable-details\\"><div class=\\"govuk-grid-column-full\\"><div class=\\"selectable-details-header\\"><div class=\\"govuk-checkboxes\\" style=\\"display: inline-flex;\\"><div class=\\"govuk-checkboxes__item\\"><input id=\\"details-checkbox-__name__\\" type=\\"checkbox\\" name=\\"details-checkbox-__name__\\" class=\\"govuk-checkboxes__input\\" value=\\"__value__\\" checked=\\"\\"><label class=\\"govuk-label govuk-checkboxes__label\\" for=\\"details-checkbox-__name__\\">__label__</label></div></div><div class=\\"selectable-details-link\\"><a href=\\"#details-checkbox-__name__\\">Show Details </a></div></div></div></div>"`;
-
-exports[`When the component is rendered a child component has errors should render expanded 1`] = `
-<div
-  class="govuk-grid-row selectable-details"
->
-  <div
-    class="govuk-grid-column-full"
-  >
-    <div
-      class="selectable-details-header"
-    >
-      <div
-        class="govuk-checkboxes"
-        style="display:inline-flex"
-      >
-        <div
-          class="govuk-checkboxes__item"
-        >
-          <input
-            class="govuk-checkboxes__input"
-            id="details-checkbox-__name__"
-            name="details-checkbox-__name__"
-            type="checkbox"
-            value="__value__"
-          />
-          <label
-            class="govuk-label govuk-checkboxes__label"
-            for="details-checkbox-__name__"
-          >
-            __label__
-          </label>
-        </div>
-      </div>
-      <div
-        class="selectable-details-link"
-      >
-        <a
-          href="#details-checkbox-__name__"
-        >
-          Hide Details 
-        </a>
-      </div>
-    </div>
-    <div
-      class="selectable-details-content"
-    >
-      <p
-        class="govuk-inset-text"
-      >
-         
-      </p>
-      <p
-        class="govuk-inset-text"
-      >
-         
-      </p>
-      <p
-        class="govuk-inset-text"
-      >
-         
-      </p>
-    </div>
-  </div>
-</div>
-`;
-
 exports[`When the component is rendered and it is checked and it has child components should match the snapshot - the child components should not be initially displayed by default 1`] = `
-<div
-  class="govuk-grid-row selectable-details"
->
-  <div
-    class="govuk-grid-column-full"
-  >
-    <div
-      class="selectable-details-header"
-    >
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
       <div
-        class="govuk-checkboxes"
-        style="display:inline-flex"
+        class="govuk-grid-row selectable-details"
       >
         <div
-          class="govuk-checkboxes__item"
+          class="govuk-grid-column-full"
         >
-          <input
-            checked=""
-            class="govuk-checkboxes__input"
-            id="details-checkbox-__name__"
-            name="details-checkbox-__name__"
-            type="checkbox"
-            value="__value__"
-          />
-          <label
-            class="govuk-label govuk-checkboxes__label"
-            for="details-checkbox-__name__"
+          <div
+            class="selectable-details-header"
           >
-            __label__
-          </label>
+            <div
+              class="govuk-checkboxes"
+              style="display: inline-flex;"
+            >
+              <div
+                class="govuk-checkboxes__item"
+              >
+                <input
+                  checked=""
+                  class="govuk-checkboxes__input"
+                  id="details-checkbox-__name__"
+                  name="details-checkbox-__name__"
+                  type="checkbox"
+                  value="__value__"
+                />
+                <label
+                  class="govuk-label govuk-checkboxes__label"
+                  for="details-checkbox-__name__"
+                >
+                  __label__
+                </label>
+              </div>
+            </div>
+            <div
+              class="selectable-details-link"
+            >
+              <a
+                href="#details-checkbox-__name__"
+              >
+                Show Details
+                 
+              </a>
+            </div>
+          </div>
         </div>
       </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="govuk-grid-row selectable-details"
+    >
       <div
-        class="selectable-details-link"
+        class="govuk-grid-column-full"
       >
-        <a
-          href="#details-checkbox-__name__"
+        <div
+          class="selectable-details-header"
         >
-          Show Details 
-        </a>
+          <div
+            class="govuk-checkboxes"
+            style="display: inline-flex;"
+          >
+            <div
+              class="govuk-checkboxes__item"
+            >
+              <input
+                checked=""
+                class="govuk-checkboxes__input"
+                id="details-checkbox-__name__"
+                name="details-checkbox-__name__"
+                type="checkbox"
+                value="__value__"
+              />
+              <label
+                class="govuk-label govuk-checkboxes__label"
+                for="details-checkbox-__name__"
+              >
+                __label__
+              </label>
+            </div>
+          </div>
+          <div
+            class="selectable-details-link"
+          >
+            <a
+              href="#details-checkbox-__name__"
+            >
+              Show Details
+               
+            </a>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;
 
 exports[`When the component is rendered and it is not checked and it has child components should match the snapshot - the child components should not be displayed 1`] = `
-<div
-  class="govuk-grid-row selectable-details"
->
-  <div
-    class="govuk-grid-column-full"
-  >
-    <div
-      class="selectable-details-header"
-    >
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
       <div
-        class="govuk-checkboxes"
-        style="display:inline-flex"
+        class="govuk-grid-row selectable-details"
       >
         <div
-          class="govuk-checkboxes__item"
+          class="govuk-grid-column-full"
         >
-          <input
-            class="govuk-checkboxes__input"
-            id="details-checkbox-__name__"
-            name="details-checkbox-__name__"
-            type="checkbox"
-            value="__value__"
-          />
-          <label
-            class="govuk-label govuk-checkboxes__label"
-            for="details-checkbox-__name__"
+          <div
+            class="selectable-details-header"
           >
-            __label__
-          </label>
+            <div
+              class="govuk-checkboxes"
+              style="display: inline-flex;"
+            >
+              <div
+                class="govuk-checkboxes__item"
+              >
+                <input
+                  class="govuk-checkboxes__input"
+                  id="details-checkbox-__name__"
+                  name="details-checkbox-__name__"
+                  type="checkbox"
+                  value="__value__"
+                />
+                <label
+                  class="govuk-label govuk-checkboxes__label"
+                  for="details-checkbox-__name__"
+                >
+                  __label__
+                </label>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
+  </body>,
+  "container": <div>
+    <div
+      class="govuk-grid-row selectable-details"
+    >
+      <div
+        class="govuk-grid-column-full"
+      >
+        <div
+          class="selectable-details-header"
+        >
+          <div
+            class="govuk-checkboxes"
+            style="display: inline-flex;"
+          >
+            <div
+              class="govuk-checkboxes__item"
+            >
+              <input
+                class="govuk-checkboxes__input"
+                id="details-checkbox-__name__"
+                name="details-checkbox-__name__"
+                type="checkbox"
+                value="__value__"
+              />
+              <label
+                class="govuk-label govuk-checkboxes__label"
+                for="details-checkbox-__name__"
+              >
+                __label__
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;
 
 exports[`When the component is rendered and it is selected and it has child components and the initiallyOpen prop should match the snapshot - the child components should be initially displayed 1`] = `
-<div
-  class="govuk-grid-row selectable-details"
->
-  <div
-    class="govuk-grid-column-full"
-  >
-    <div
-      class="selectable-details-header"
-    >
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
       <div
-        class="govuk-checkboxes"
-        style="display:inline-flex"
+        class="govuk-grid-row selectable-details"
       >
         <div
-          class="govuk-checkboxes__item"
+          class="govuk-grid-column-full"
         >
-          <input
-            checked=""
-            class="govuk-checkboxes__input"
-            id="details-checkbox-__name__"
-            name="details-checkbox-__name__"
-            type="checkbox"
-            value="__value__"
-          />
-          <label
-            class="govuk-label govuk-checkboxes__label"
-            for="details-checkbox-__name__"
+          <div
+            class="selectable-details-header"
           >
-            __label__
-          </label>
+            <div
+              class="govuk-checkboxes"
+              style="display: inline-flex;"
+            >
+              <div
+                class="govuk-checkboxes__item"
+              >
+                <input
+                  checked=""
+                  class="govuk-checkboxes__input"
+                  id="details-checkbox-__name__"
+                  name="details-checkbox-__name__"
+                  type="checkbox"
+                  value="__value__"
+                />
+                <label
+                  class="govuk-label govuk-checkboxes__label"
+                  for="details-checkbox-__name__"
+                >
+                  __label__
+                </label>
+              </div>
+            </div>
+            <div
+              class="selectable-details-link"
+            >
+              <a
+                href="#details-checkbox-__name__"
+              >
+                Hide Details
+                 
+              </a>
+            </div>
+          </div>
+          <div
+            class="selectable-details-content"
+          >
+            <p
+              class="govuk-inset-text"
+            >
+               
+              
+            </p>
+            <p
+              class="govuk-inset-text"
+            >
+               
+              
+            </p>
+            <p
+              class="govuk-inset-text"
+            >
+               
+              
+            </p>
+          </div>
         </div>
       </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="govuk-grid-row selectable-details"
+    >
       <div
-        class="selectable-details-link"
+        class="govuk-grid-column-full"
       >
-        <a
-          href="#details-checkbox-__name__"
+        <div
+          class="selectable-details-header"
         >
-          Hide Details 
-        </a>
+          <div
+            class="govuk-checkboxes"
+            style="display: inline-flex;"
+          >
+            <div
+              class="govuk-checkboxes__item"
+            >
+              <input
+                checked=""
+                class="govuk-checkboxes__input"
+                id="details-checkbox-__name__"
+                name="details-checkbox-__name__"
+                type="checkbox"
+                value="__value__"
+              />
+              <label
+                class="govuk-label govuk-checkboxes__label"
+                for="details-checkbox-__name__"
+              >
+                __label__
+              </label>
+            </div>
+          </div>
+          <div
+            class="selectable-details-link"
+          >
+            <a
+              href="#details-checkbox-__name__"
+            >
+              Hide Details
+               
+            </a>
+          </div>
+        </div>
+        <div
+          class="selectable-details-content"
+        >
+          <p
+            class="govuk-inset-text"
+          >
+             
+            
+          </p>
+          <p
+            class="govuk-inset-text"
+          >
+             
+            
+          </p>
+          <p
+            class="govuk-inset-text"
+          >
+             
+            
+          </p>
+        </div>
       </div>
     </div>
-    <div
-      class="selectable-details-content"
-    >
-      <p
-        class="govuk-inset-text"
-      >
-         
-      </p>
-      <p
-        class="govuk-inset-text"
-      >
-         
-      </p>
-      <p
-        class="govuk-inset-text"
-      >
-         
-      </p>
-    </div>
-  </div>
-</div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;
 
 exports[`When the component is rendered should match the snapshot 1`] = `
-<div
-  class="govuk-grid-row selectable-details"
->
-  <div
-    class="govuk-grid-column-full"
-  >
-    <div
-      class="selectable-details-header"
-    >
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
       <div
-        class="govuk-checkboxes"
-        style="display:inline-flex"
+        class="govuk-grid-row selectable-details"
       >
         <div
-          class="govuk-checkboxes__item"
+          class="govuk-grid-column-full"
         >
-          <input
-            class="govuk-checkboxes__input"
-            id="details-checkbox-__name__"
-            name="details-checkbox-__name__"
-            type="checkbox"
-            value="__value__"
-          />
-          <label
-            class="govuk-label govuk-checkboxes__label"
-            for="details-checkbox-__name__"
+          <div
+            class="selectable-details-header"
           >
-            __label__
-          </label>
+            <div
+              class="govuk-checkboxes"
+              style="display: inline-flex;"
+            >
+              <div
+                class="govuk-checkboxes__item"
+              >
+                <input
+                  class="govuk-checkboxes__input"
+                  id="details-checkbox-__name__"
+                  name="details-checkbox-__name__"
+                  type="checkbox"
+                  value="__value__"
+                />
+                <label
+                  class="govuk-label govuk-checkboxes__label"
+                  for="details-checkbox-__name__"
+                >
+                  __label__
+                </label>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
+  </body>,
+  "container": <div>
+    <div
+      class="govuk-grid-row selectable-details"
+    >
+      <div
+        class="govuk-grid-column-full"
+      >
+        <div
+          class="selectable-details-header"
+        >
+          <div
+            class="govuk-checkboxes"
+            style="display: inline-flex;"
+          >
+            <div
+              class="govuk-checkboxes__item"
+            >
+              <input
+                class="govuk-checkboxes__input"
+                id="details-checkbox-__name__"
+                name="details-checkbox-__name__"
+                type="checkbox"
+                value="__value__"
+              />
+              <label
+                class="govuk-label govuk-checkboxes__label"
+                for="details-checkbox-__name__"
+              >
+                __label__
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;
 
 exports[`When the component is rendered should render checked if the value matches 1`] = `
-<div
-  class="govuk-grid-row selectable-details"
->
-  <div
-    class="govuk-grid-column-full"
-  >
-    <div
-      class="selectable-details-header"
-    >
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
       <div
-        class="govuk-checkboxes"
-        style="display:inline-flex"
+        class="govuk-grid-row selectable-details"
       >
         <div
-          class="govuk-checkboxes__item"
+          class="govuk-grid-column-full"
         >
-          <input
-            checked=""
-            class="govuk-checkboxes__input"
-            id="details-checkbox-__name__"
-            name="details-checkbox-__name__"
-            type="checkbox"
-            value="__value__"
-          />
-          <label
-            class="govuk-label govuk-checkboxes__label"
-            for="details-checkbox-__name__"
+          <div
+            class="selectable-details-header"
           >
-            __label__
-          </label>
+            <div
+              class="govuk-checkboxes"
+              style="display: inline-flex;"
+            >
+              <div
+                class="govuk-checkboxes__item"
+              >
+                <input
+                  checked=""
+                  class="govuk-checkboxes__input"
+                  id="details-checkbox-__name__"
+                  name="details-checkbox-__name__"
+                  type="checkbox"
+                  value="__value__"
+                />
+                <label
+                  class="govuk-label govuk-checkboxes__label"
+                  for="details-checkbox-__name__"
+                >
+                  __label__
+                </label>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
+  </body>,
+  "container": <div>
+    <div
+      class="govuk-grid-row selectable-details"
+    >
+      <div
+        class="govuk-grid-column-full"
+      >
+        <div
+          class="selectable-details-header"
+        >
+          <div
+            class="govuk-checkboxes"
+            style="display: inline-flex;"
+          >
+            <div
+              class="govuk-checkboxes__item"
+            >
+              <input
+                checked=""
+                class="govuk-checkboxes__input"
+                id="details-checkbox-__name__"
+                name="details-checkbox-__name__"
+                type="checkbox"
+                value="__value__"
+              />
+              <label
+                class="govuk-label govuk-checkboxes__label"
+                for="details-checkbox-__name__"
+              >
+                __label__
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;
 
 exports[`When the component is rendered should render unchecked if the value doesnt match 1`] = `
-<div
-  class="govuk-grid-row selectable-details"
->
-  <div
-    class="govuk-grid-column-full"
-  >
-    <div
-      class="selectable-details-header"
-    >
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
       <div
-        class="govuk-checkboxes"
-        style="display:inline-flex"
+        class="govuk-grid-row selectable-details"
       >
         <div
-          class="govuk-checkboxes__item"
+          class="govuk-grid-column-full"
         >
-          <input
-            class="govuk-checkboxes__input"
-            id="details-checkbox-__name__"
-            name="details-checkbox-__name__"
-            type="checkbox"
-            value="__value__"
-          />
-          <label
-            class="govuk-label govuk-checkboxes__label"
-            for="details-checkbox-__name__"
+          <div
+            class="selectable-details-header"
           >
-            __label__
-          </label>
+            <div
+              class="govuk-checkboxes"
+              style="display: inline-flex;"
+            >
+              <div
+                class="govuk-checkboxes__item"
+              >
+                <input
+                  class="govuk-checkboxes__input"
+                  id="details-checkbox-__name__"
+                  name="details-checkbox-__name__"
+                  type="checkbox"
+                  value="__value__"
+                />
+                <label
+                  class="govuk-label govuk-checkboxes__label"
+                  for="details-checkbox-__name__"
+                >
+                  __label__
+                </label>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
+  </body>,
+  "container": <div>
+    <div
+      class="govuk-grid-row selectable-details"
+    >
+      <div
+        class="govuk-grid-column-full"
+      >
+        <div
+          class="selectable-details-header"
+        >
+          <div
+            class="govuk-checkboxes"
+            style="display: inline-flex;"
+          >
+            <div
+              class="govuk-checkboxes__item"
+            >
+              <input
+                class="govuk-checkboxes__input"
+                id="details-checkbox-__name__"
+                name="details-checkbox-__name__"
+                type="checkbox"
+                value="__value__"
+              />
+              <label
+                class="govuk-label govuk-checkboxes__label"
+                for="details-checkbox-__name__"
+              >
+                __label__
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;
 
 exports[`When the component is rendered with a hint should match the snapshot 1`] = `
-<div
-  class="govuk-grid-row selectable-details"
->
-  <div
-    class="govuk-grid-column-full"
-  >
-    <div
-      class="selectable-details-header"
-    >
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
       <div
-        class="govuk-checkboxes"
-        style="display:inline-flex"
+        class="govuk-grid-row selectable-details"
       >
         <div
-          class="govuk-checkboxes__item"
+          class="govuk-grid-column-full"
         >
-          <input
-            class="govuk-checkboxes__input"
-            id="details-checkbox-__name__"
-            name="details-checkbox-__name__"
-            type="checkbox"
-            value="__value__"
-          />
-          <label
-            class="govuk-label govuk-checkboxes__label"
-            for="details-checkbox-__name__"
+          <div
+            class="selectable-details-header"
           >
-            __label__
-          </label>
+            <div
+              class="govuk-checkboxes"
+              style="display: inline-flex;"
+            >
+              <div
+                class="govuk-checkboxes__item"
+              >
+                <input
+                  class="govuk-checkboxes__input"
+                  id="details-checkbox-__name__"
+                  name="details-checkbox-__name__"
+                  type="checkbox"
+                  value="__value__"
+                />
+                <label
+                  class="govuk-label govuk-checkboxes__label"
+                  for="details-checkbox-__name__"
+                >
+                  __label__
+                </label>
+              </div>
+            </div>
+          </div>
+          <span
+            class="govuk-hint"
+          >
+            __hint__
+          </span>
         </div>
       </div>
     </div>
-    <span
-      class="govuk-hint"
-    >
-      __hint__
-    </span>
-  </div>
-</div>
-`;
-
-exports[`When the component is rendered with a hint should match the snapshot 2`] = `
-<div
-  class="govuk-grid-row selectable-details"
->
-  <div
-    class="govuk-grid-column-full"
-  >
-    <span
-      class="govuk-error-message"
-      id="__name__-error"
-    >
-      __error__
-    </span>
+  </body>,
+  "container": <div>
     <div
-      class="selectable-details-header"
+      class="govuk-grid-row selectable-details"
     >
       <div
-        class="govuk-checkboxes"
-        style="display:inline-flex"
+        class="govuk-grid-column-full"
       >
         <div
-          class="govuk-checkboxes__item"
+          class="selectable-details-header"
         >
-          <input
-            class="govuk-checkboxes__input"
-            id="details-checkbox-__name__"
-            name="details-checkbox-__name__"
-            type="checkbox"
-            value="__value__"
-          />
-          <label
-            class="govuk-label govuk-checkboxes__label"
-            for="details-checkbox-__name__"
+          <div
+            class="govuk-checkboxes"
+            style="display: inline-flex;"
           >
-            __label__
-          </label>
+            <div
+              class="govuk-checkboxes__item"
+            >
+              <input
+                class="govuk-checkboxes__input"
+                id="details-checkbox-__name__"
+                name="details-checkbox-__name__"
+                type="checkbox"
+                value="__value__"
+              />
+              <label
+                class="govuk-label govuk-checkboxes__label"
+                for="details-checkbox-__name__"
+              >
+                __label__
+              </label>
+            </div>
+          </div>
         </div>
+        <span
+          class="govuk-hint"
+        >
+          __hint__
+        </span>
       </div>
     </div>
-  </div>
-</div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;

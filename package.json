@@ -15,12 +15,6 @@
         "lint-staged": "node_modules/lint-staged/index.js"
     },
     "jest": {
-        "setupFiles": [
-            "./test/jestsetup.js"
-        ],
-        "snapshotSerializers": [
-            "enzyme-to-json/serializer"
-        ],
         "moduleNameMapper": {
             "\\.(css|less|scss|sass)$": "identity-obj-proxy"
         },
@@ -73,20 +67,18 @@
         "@babel/preset-env": "^7.16.11",
         "@babel/preset-react": "^7.16.7",
         "@sinonjs/fake-timers": "^9.1.2",
-        "@wojtekmaj/enzyme-adapter-react-17": "^0.6.2",
+        "@testing-library/jest-dom": "^5.16.4",
+        "@testing-library/react": "^12.1.5",
         "autoprefixer": "^10.4.4",
         "babel-core": "7.0.0-bridge.0",
         "babel-jest": "^27.5.1",
         "babel-loader": "^8.2.5",
         "css-loader": "^6.7.1",
-        "enzyme": "^3.9.0",
-        "enzyme-to-json": "^3.3.5",
         "eslint": "^7.20.0",
         "eslint-plugin-react": "7.11.1",
         "identity-obj-proxy": "^3.0.0",
         "jest": "^25.2.4",
         "jest-date-mock": "^1.0.8",
-        "jest-enzyme": "^7.0.1",
         "lint-staged": "^7.3.0",
         "mini-css-extract-plugin": "^2.6.0",
         "nodemon": "^2.0.15",

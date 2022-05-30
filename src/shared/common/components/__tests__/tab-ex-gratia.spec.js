@@ -1,6 +1,8 @@
 import React from 'react';
 import TabExGratia from '../tab-ex-gratia';
 import { ApplicationProvider } from '../../../contexts/application.jsx';
+import '@testing-library/jest-dom';
+import { render } from '@testing-library/react';
 
 /* eslint-disable react/display-name*/
 jest.mock('../../forms/form-repository.jsx', () => {
@@ -14,7 +16,7 @@ jest.mock('../../forms/form-repository.jsx', () => {
 });
 /* eslint-enable react/display-name*/
 
-describe('Form component', () => {
+describe('Ex-Gratia tab component', () => {
 
     const page = {},
         stages = [{ type: 'test' }];
@@ -85,9 +87,13 @@ describe('Form component', () => {
 
     it('should not render empty fields when passed', () => {
         const config = {
+            page: {
+                params: {
+                    caseId: 'some_uuid'
+                }
+            },
             caseData: {
-                PaymentTypeConsolatory: 'Yes',
-                PaymentTypeExGratia: 'Yes',
+                PaymentTypeConsolatory: 'Yes'
             }
         };
 

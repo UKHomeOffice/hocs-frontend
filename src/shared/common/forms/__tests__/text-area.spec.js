@@ -1,65 +1,69 @@
 import React from 'react';
 import TextArea from '../text-area';
+import '@testing-library/jest-dom';
+import { fireEvent, render, screen } from '@testing-library/react';
 
 describe('Form text area component', () => {
-    it('should render with default props', () => {
-        expect(
-            render(<TextArea name="text-field" updateState={() => null} />)
-        ).toMatchSnapshot();
+    test('should render with default props', () => {
+        const wrapper = render(<TextArea name="text-field" updateState={() => null} />);
+        expect(wrapper).toBeDefined();
     });
-    it('should render with value when passed', () => {
-        expect(
-            render(<TextArea name="text-field" value="field value" updateState={() => null} />)
-        ).toMatchSnapshot();
+
+    test('should render with value when passed', () => {
+        const wrapper = render(<TextArea name="text-field" value="field value" updateState={() => null} />);
+        expect(wrapper).toBeDefined();
+        expect(screen.getByText('field value')).toBeInTheDocument();
     });
-    it('should render with label when passed', () => {
-        expect(
-            render(<TextArea name="text-field" label="My text field" updateState={() => null} />)
-        ).toMatchSnapshot();
+
+    test('should render with label when passed', () => {
+        const wrapper = render(<TextArea name="text-field" label="My text field" updateState={() => null} />);
+        expect(wrapper).toBeDefined();
+        expect(screen.getByText('My text field')).toBeInTheDocument();
     });
-    it('should render with hint when passed', () => {
-        expect(
-            render(<TextArea name="text-field" hint="Put some text in the box below" updateState={() => null} />)
-        ).toMatchSnapshot();
+
+    test('should render with hint when passed', () => {
+        const wrapper = render(<TextArea name="text-field" hint="Put some text in the box below" updateState={() => null} />);
+        expect(wrapper).toBeDefined();
+        expect(screen.getByText('Put some text in the box below')).toBeInTheDocument();
     });
-    it('should render with error when passed', () => {
-        expect(
-            render(<TextArea name="text-field" error="Some error message" updateState={() => null} />)
-        ).toMatchSnapshot();
+
+    test('should render with error when passed', () => {
+        const wrapper = render(<TextArea name="text-field" error="Some error message" updateState={() => null} />);
+        expect(wrapper).toBeDefined();
+        expect(screen.getByText('Some error message')).toBeInTheDocument();
     });
-    it('should render disabled when passed', () => {
-        expect(
-            render(<TextArea name="text-field" disabled={true} updateState={() => null} />)
-        ).toMatchSnapshot();
+
+    test('should render disabled when passed', () => {
+        const wrapper = render(<TextArea name="text-field" disabled={true} updateState={() => null} />);
+        expect(wrapper).toBeDefined();
+        expect(screen.getByRole('textbox')).toBeDisabled();
     });
-    it('should render of type when passed', () => {
-        expect(
-            render(<TextArea name="text-field" type="password" updateState={() => null} />)
-        ).toMatchSnapshot();
+
+    test('should render limit when passed', () => {
+        const value = 'this string is more than 20 characters long';
+        const wrapper = render(<TextArea name="text-field" limit={20} updateState={() => null} value={value} />);
+        expect(wrapper).toBeDefined();
+        expect(screen.getByText('You have -23 characters remaining')).toBeInTheDocument();
     });
-    it('should render limit when passed', () => {
-        expect(
-            render(<TextArea name="text-field" limit={2000} updateState={() => null} />)
-        ).toMatchSnapshot();
-    });
-    it('should execute callback on initialization', () => {
+
+    test('should execute callback on initialization', () => {
         const mockCallback = jest.fn();
         const fieldName = 'text-field';
-        shallow(
-            <TextArea name={fieldName} updateState={mockCallback} />
-        );
+        const wrapper = render(<TextArea name={fieldName} updateState={mockCallback} />);
+        expect(wrapper).toBeDefined();
         expect(mockCallback).toHaveBeenCalledTimes(1);
         expect(mockCallback).toHaveBeenCalledWith({ [fieldName]: '' });
     });
-    it('should execute callback on change', () => {
+
+    test('should execute callback on change', () => {
         const event = { target: { value: 'TextArea value' } };
         const mockCallback = jest.fn();
         const fieldName = 'text-field';
-        const wrapper = shallow(
-            <TextArea name={fieldName} updateState={mockCallback} />
-        );
+        const wrapper = render(<TextArea name={fieldName} updateState={mockCallback} />);
+        expect(wrapper).toBeDefined();
+
         mockCallback.mockReset();
-        wrapper.find('textarea').simulate('change', event);
+        fireEvent.change(wrapper.getByRole('textbox'),  event);
         expect(mockCallback).toHaveBeenCalledTimes(1);
         expect(mockCallback).toHaveBeenCalledWith({ [fieldName]: 'TextArea value' });
     });

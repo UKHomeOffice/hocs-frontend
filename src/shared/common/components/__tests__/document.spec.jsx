@@ -1,5 +1,7 @@
 import React from 'react';
 import Document from '../document.jsx';
+import '@testing-library/jest-dom';
+import { render } from '@testing-library/react';
 
 describe('Document preview component', () => {
 
