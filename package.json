@@ -30,7 +30,7 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "aws-sdk": "^2.1116.0",
+        "aws-sdk": "^2.1154.0",
         "axios": "^0.26.1",
         "body-parser": "^1.20.0",
         "classnames": "^2.2.6",
