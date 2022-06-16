@@ -912,4 +912,52 @@ describe('Process middleware', () => {
             expect(req.form.data).toEqual({ TestField1: 'Other', TestField2: 'Blah' });
         });
     });
+
+    describe('when passed fields that should not be processed', () => {
+        const req = {
+            body: {
+                'TestSomuList': '1',
+                'TestDisplay': '2',
+                'TestField': '3',
+            },
+            query: {},
+            form: {
+                schema: {
+                    fields: [
+                        {
+                            component: 'display',
+                            validation: [],
+                            props: {
+                                name: 'TestDisplay',
+                                label: 'Test Field 1'
+                            }
+                        },
+                        {
+                            component: 'somu-list',
+                            validation: ['required'],
+                            props: {
+                                name: 'TestSomuList',
+                                label: 'Test Field 2'
+                            }
+                        },
+                        {
+                            component: 'text-area',
+                            validation: ['required'],
+                            props: {
+                                name: 'TestField',
+                                label: 'Test Field 3'
+                            }
+                        }
+                    ]
+                }
+            }
+        };
+        const res = {};
+
+        it('should remove fields from response', () => {
+            processMiddleware(req, res, next);
+            expect(req.form.data).toEqual({ TestField: '3' });
+        });
+    });
+
 });
