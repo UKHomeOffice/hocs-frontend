@@ -25,7 +25,7 @@ const config = {
                 SECRET_ACCESS_KEY: process.env.S3_SECRET_ACCESS_KEY || 'UNSET',
                 ENDPOINT: isProduction ? null : process.env.S3_ENDPOINT || 'http://localhost:4566',
                 PROXY: isProduction ? process.env.OUTBOUND_PROXY : null,
-                REGION: isProduction ? process.env.S3_REGION : null,
+                REGION: isProduction ? process.env.S3_REGION : 'eu-west-2',
                 SSL_ENABLED: isProduction,
                 FORCE_PATH_STYLE: !isProduction,
                 SSE_KEY: isProduction ? process.env.S3_SSE_KEY : null

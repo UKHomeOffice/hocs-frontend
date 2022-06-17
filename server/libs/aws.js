@@ -1,4 +1,6 @@
-const aws = require('aws-sdk');
+const { S3Client } = require('@aws-sdk/client-s3');
+const { NodeHttpHandler } = require('@aws-sdk/node-http-handler');
+const HttpsProxyAgent = require('https-proxy-agent');
 
 const {
     S3: {
@@ -11,17 +13,20 @@ const {
     }
 } = require('../config').forContext('AWS');
 
-const s3 = new aws.S3({
-    signatureVersion: 'v4',
+const CREDENTIALS = {
     accessKeyId: ACCESS_KEY,
-    secretAccessKey: SECRET_ACCESS_KEY,
-    endpoint: ENDPOINT,
+    secretAccessKey: SECRET_ACCESS_KEY
+};
+
+const s3 = new S3Client({
     region: REGION,
-    sslEnabled: SSL_ENABLED,
-    s3ForcePathStyle: FORCE_PATH_STYLE,
-    httpOptions: {
-        proxy: PROXY
-    }
+    credentials: CREDENTIALS,
+    forcePathStyle: FORCE_PATH_STYLE,
+    endpoint: ENDPOINT,
+    tls: SSL_ENABLED,
+    ...(PROXY && { requestHandler: new NodeHttpHandler({
+        httpsAgent: new HttpsProxyAgent(PROXY)
+    }) })
 });
 
 module.exports = {
