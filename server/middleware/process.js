@@ -76,8 +76,8 @@ const createReducer = (data, req) => (reducer, field) => {
 };
 
 const byAcceptedFormData = (field) => {
-    return field.type !== 'display' &&
-        field.type !== 'somu-list';
+    return field.component !== 'display' &&
+        field.component !== 'somu-list';
 };
 
 function processMiddleware(req, res, next) {
