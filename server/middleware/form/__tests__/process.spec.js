@@ -1,7 +1,6 @@
 import { processMiddleware } from '../process';
 
 describe('Process middleware', () => {
-
     const next = jest.fn();
 
     beforeEach(() => {
@@ -50,9 +49,7 @@ describe('Process middleware', () => {
                     fields: [
                         {
                             component: 'text',
-                            validation: [
-                                'required'
-                            ],
+                            validation: [],
                             props: {
                                 name: 'test-field',
                             }
@@ -71,7 +68,7 @@ describe('Process middleware', () => {
         expect(next).toHaveBeenCalledTimes(1);
     });
 
-    it('should return data for fields with blank values', () => {
+    it('should throw error if validation fails', () => {
         const req = {
             body: {
                 ['test-field']: ''
@@ -85,6 +82,35 @@ describe('Process middleware', () => {
                             validation: [
                                 'required'
                             ],
+                            props: {
+                                name: 'test-field',
+                            }
+                        }
+                    ]
+                }
+            }
+        };
+        const res = {};
+
+        processMiddleware(req, res, next);
+        expect(req.form).toBeDefined();
+        expect(req.form.data).toBeUndefined();
+        expect(next).toHaveBeenCalled();
+        expect(next.mock.calls[0][0]).toBeInstanceOf(Error);
+    });
+
+    it('should return data for fields with blank values without validation', () => {
+        const req = {
+            body: {
+                ['test-field']: ''
+            },
+            query: {},
+            form: {
+                schema: {
+                    fields: [
+                        {
+                            component: 'text',
+                            validation: [],
                             props: {
                                 name: 'test-field',
                             }
@@ -162,8 +188,7 @@ describe('Process middleware', () => {
 
         processMiddleware(req, res, next);
         expect(req.form).toBeDefined();
-        expect(req.form.data).toBeDefined();
-        expect(req.form.data['test-field']).toBeUndefined();
+        expect(req.form.data).toBeUndefined();
         expect(next).toHaveBeenCalled();
         expect(next).toHaveBeenCalledTimes(1);
     });
@@ -403,9 +428,7 @@ describe('Process middleware', () => {
                     fields: [
                         {
                             component: 'checkbox',
-                            validation: [
-                                'required'
-                            ],
+                            validation: [],
                             props: {
                                 name: 'test-field',
                                 choices: [
@@ -477,9 +500,7 @@ describe('Process middleware', () => {
                     fields: [
                         {
                             component: 'add-document',
-                            validation: [
-                                'required'
-                            ],
+                            validation: [],
                             props: {
                                 name: 'test-field'
                             }
@@ -667,6 +688,7 @@ describe('Process middleware', () => {
         processMiddleware(req, res, next);
         expect(req.form.data).toEqual({ testField: 'SomeRadioValue' });
     });
+
     describe('when show/hide visibility props are passed through', () => {
         it('should not process fields that are not visible with visibility function', () => {
             const req = {

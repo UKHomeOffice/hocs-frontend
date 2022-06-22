@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const { fileMiddleware } = require('../../middleware/file');
-const { processMiddleware } = require('../../middleware/process');
-const { validationMiddleware } = require('../../middleware/validation');
+const { processMiddleware } = require('../../middleware/form/process');
 const { protect } = require('../../middleware/auth');
 const { stageApiResponseMiddleware, allocateCase, allocateCaseToTeamMember } = require('../../middleware/stage');
 const {
@@ -38,7 +37,6 @@ router.post([
 getFormForCase,
 fileMiddleware.any(),
 processMiddleware,
-validationMiddleware,
 caseApiResponseMiddleware
 );
 
@@ -50,7 +48,6 @@ caseActionDataMiddleware,
 getFormForCase,
 fileMiddleware.any(),
 processMiddleware,
-validationMiddleware,
 caseApiResponseMiddleware
 );
 
@@ -58,7 +55,6 @@ router.post(['/:caseId/stage/:stageId/somu/:somuTypeUuid/:somuType/:somuCaseType
     getFormForCase,
     fileMiddleware.any(),
     processMiddleware,
-    validationMiddleware,
     somuApiResponseMiddleware
 );
 
@@ -66,7 +62,6 @@ router.post(['/:caseId/stage/:stageId', '/:caseId/stage/:stageId/allocate'],
     getFormForStage,
     fileMiddleware.any(),
     processMiddleware,
-    validationMiddleware,
     stageApiResponseMiddleware
 );
 router.post('/:caseId/note',
@@ -83,7 +78,6 @@ router.post('/:caseId/stage/:stageId/schema/:schemaType/data',
     getFieldsForSchema,
     fileMiddleware.any(),
     processMiddleware,
-    validationMiddleware,
     caseDataUpdateMiddleware,
     (req, res) => {
         res.json({

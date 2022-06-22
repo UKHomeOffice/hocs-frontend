@@ -1,6 +1,7 @@
-const { FormSubmissionError } = require('../models/error');
-const showConditionFunctions = require('../../src/shared/helpers/show-condition-functions');
-const hideConditionFunctions = require('../../src/shared/helpers/hide-condition-functions');
+const { FormSubmissionError, ValidationError } = require('../../models/error');
+
+const { validateForm, isFieldVisible } = require('./validation');
+const { isFieldComponentOfType } = require('./fieldHelper');
 
 const customAdapters = {
     'radio': (reducer, field, data) => {
@@ -75,64 +76,47 @@ const createReducer = (data, req) => (reducer, field) => {
     return reducer;
 };
 
-const byAcceptedFormData = (field) => {
-    return field.component !== 'display' &&
-        field.component !== 'somu-list';
+
+
+/**
+ * Check to see if the field has a component type that should not be sent in the form payload.
+ * @param field the field to check
+ * @returns {boolean} whether the field is of type that should not be sent.
+ */
+const isUnacceptedDataFields = (field) => {
+    return isFieldComponentOfType(field, 'display') ||
+        isFieldComponentOfType(field, 'somu-list');
 };
 
 function processMiddleware(req, res, next) {
     try {
         const data = req.body;
-
         const { schema } = req.form;
 
+        const fieldData =
+            schema.fields
+                .filter(field => isFieldVisible(field.props, data))
+                .reduce(createReducer(data, req), {});
+
+        validateForm(schema, fieldData);
+
         req.form.data = schema.fields
-            .filter(byAcceptedFormData)
-            .filter(field => isFieldVisible(field.props, data))
-            .reduce(createReducer(data, req), {});
+            .filter(isUnacceptedDataFields)
+            .reduce((data, field) => stripUnacceptedFieldData(field.props, data), fieldData);
     } catch (error) {
+        if (error instanceof ValidationError) {
+            return next(error);
+        }
         return next(new FormSubmissionError('Unable to process form data'));
     }
+
     next();
 }
 
-function isFieldVisible({ visibilityConditions, hideConditions }, data) {
-    let isVisible = true;
-
-    // show component based on visibilityConditions
-    if (visibilityConditions) {
-        isVisible = false;
-
-        for (const condition of visibilityConditions) {
-            if (condition.function && Object.prototype.hasOwnProperty.call(showConditionFunctions, condition.function)) {
-                if (condition.conditionArgs) {
-                    isVisible = showConditionFunctions[condition.function](data, condition.conditionArgs);
-                } else {
-                    isVisible = hideConditionFunctions[condition.function](data);
-                }
-            } else if (data[condition.conditionPropertyName] && data[condition.conditionPropertyName] === condition.conditionPropertyValue) {
-                isVisible = true;
-            }
-        }
-    }
-
-    // hide component based on hideConditions
-    if (hideConditions) {
-        for (const condition of hideConditions) {
-            if (condition.function && Object.prototype.hasOwnProperty.call(hideConditions, condition.function)) {
-                if (condition.conditionPropertyName && condition.conditionPropertyValue) {
-                    isVisible = hideConditionFunctions[condition.function](data, condition.conditionPropertyName, condition.conditionPropertyValue);
-                } else {
-                    isVisible = hideConditionFunctions[condition.function](data);
-                }
-            } else if (data[condition.conditionPropertyName] && data[condition.conditionPropertyName] === condition.conditionPropertyValue) {
-                isVisible = false;
-            }
-        }
-    }
-
-    return isVisible;
-}
+const stripUnacceptedFieldData = ({ name }, data) => {
+    delete data[name];
+    return data;
+};
 
 /**
   * Dates that have leading zeros in a part are typically invalid and fail on a `new Date` or

@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const { secureFileMiddleware: processRequestBody } = require('../middleware/file');
-const { processMiddleware: processForm } = require('../middleware/process');
-const { validationMiddleware: validateForm } = require('../middleware/validation');
+const { processMiddleware: processForm } = require('../middleware/form/process');
 const { handleSearch } = require('../middleware/searchHandler');
 const { getForm, hydrateFields } = require('../services/form');
 const form = require('../services/forms/schemas/search');
@@ -18,7 +17,6 @@ router.post(['/search/results', '/api/search/results'],
     getForm(form, { submissionUrl: '/search/results' }),
     hydrateFields,
     processForm,
-    validateForm,
     (req, res, next) => Object.keys(req.form.data).length > 0 ? next() : res.json({ errors: { form: 'No search criteria specified' } }),
     handleSearch,
     (req, res, next) => {
