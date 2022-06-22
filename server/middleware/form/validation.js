@@ -1,8 +1,10 @@
-const { FormSubmissionError, ValidationError } = require('../models/error');
-const { DOCUMENT_WHITELIST, DOCUMENT_BULK_LIMIT, VALID_DAYS_RANGE } = require('../config').forContext('server');
-const { MIN_ALLOWABLE_YEAR, MAX_ALLOWABLE_YEAR } = require('../libs/dateHelpers');
-const showConditionFunctions = require('../../src/shared/helpers/show-condition-functions');
-const getLogger = require('../libs/logger');
+const { FormSubmissionError, ValidationError } = require('../../models/error');
+const { DOCUMENT_WHITELIST, DOCUMENT_BULK_LIMIT, VALID_DAYS_RANGE } = require('../../config').forContext('server');
+const { MIN_ALLOWABLE_YEAR, MAX_ALLOWABLE_YEAR } = require('../../libs/dateHelpers');
+const getLogger = require('../../libs/logger');
+const showConditionFunctions = require('../../../src/shared/helpers/show-condition-functions');
+const hideConditionFunctions = require('../../../src/shared/helpers/hide-condition-functions');
+const { isFieldComponentOfType } = require('./fieldHelper');
 
 const validationErrors = {
     required: label => `${label} is required`,
@@ -385,79 +387,48 @@ function validateConditionalAfterRadioContentIfExists(data, name, choices, valid
     }
 }
 
-function validationMiddleware(req, res, next) {
-    if (req.form) {
-        try {
-            const { data, schema } = req.form;
-            let validationSuppressor;
-            if (schema.props && schema.props.validationSuppressors) {
-                for (var i = 0; i < schema.props.validationSuppressors.length; i++) {
-                    const suppressor = schema.props.validationSuppressors[i];
-                    if (suppressor.fieldName === 'ALL' || data[suppressor.fieldName] === suppressor.value) {
-                        validationSuppressor = suppressor;
-                        break;
-                    }
-                }
+const validateForm = (schema, data = {}) => {
+    if (!schema) {
+        throw new FormSubmissionError('No form provided.');
+    }
+
+    let validationSuppressor;
+    if (schema.props && schema.props.validationSuppressors) {
+        for (var i = 0; i < schema.props.validationSuppressors.length; i++) {
+            const suppressor = schema.props.validationSuppressors[i];
+            if (suppressor.fieldName === 'ALL' || data[suppressor.fieldName] === suppressor.value) {
+                validationSuppressor = suppressor;
+                break;
             }
-
-            const fieldValidationErrors = schema.fields
-                .filter(field => field.type !== 'display')
-                .reduce((result, field) => {
-                    validateField(field, data, result, validationSuppressor);
-                    return result;
-                }, {});
-
-
-            let formValidationErrors = {};
-
-            // Add form validation here
-            if (schema.validation) {
-                const formValidationSchema = JSON.parse(schema.validation);
-
-                if (Object.keys(formValidationSchema).length > 0) {
-                    formValidationErrors = validateForm(data, formValidationSchema);
-                }
-            }
-
-            const validationErrors = { ...fieldValidationErrors, ...formValidationErrors };
-
-
-            if (Object.keys(validationErrors).length > 0) {
-                return next(new ValidationError('Form validation failed', validationErrors));
-            }
-
-
-        } catch (e) {
-            return next(new FormSubmissionError('Unable to validate form data'));
         }
     }
-    next();
 
-    function isFieldVisible(visibilityConditions, hideConditions, data) {
-        let isVisible = true;
-        if (visibilityConditions) {
-            isVisible = false;
+    const fieldValidationErrors = schema.fields
+        .filter(field => !isFieldComponentOfType(field, 'display'))
+        .reduce((result, field) => {
+            validateField(field, data, result, validationSuppressor);
+            return result;
+        }, {});
 
-            for (let condition of visibilityConditions) {
-                if (condition.function && Object.prototype.hasOwnProperty.call(showConditionFunctions, condition.function)) {
-                    if (condition.conditionArgs) {
-                        isVisible = showConditionFunctions[condition.function](data, condition.conditionArgs);
-                    }
-                } else if (data[condition.conditionPropertyName] && data[condition.conditionPropertyName] === condition.conditionPropertyValue) {
-                    isVisible = true;
-                }
-            }
+
+    let formValidationErrors = {};
+
+    // Add form validation here
+    if (schema.validation) {
+        const formValidationSchema = JSON.parse(schema.validation);
+
+        if (Object.keys(formValidationSchema).length > 0) {
+            formValidationErrors = validateForm(data, formValidationSchema);
         }
-
-        if (hideConditions) {
-            for (let condition of hideConditions) {
-                if (data[condition.conditionPropertyName] && data[condition.conditionPropertyName] === condition.conditionPropertyValue) {
-                    isVisible = false;
-                }
-            }
-        }
-        return isVisible;
     }
+
+    const validationErrors = { ...fieldValidationErrors, ...formValidationErrors };
+
+    if (Object.keys(validationErrors).length > 0) {
+        throw new ValidationError('Form validation failed', validationErrors);
+    }
+
+
 
     function runFormValidator(validation, data) {
         let message = '';
@@ -515,7 +486,7 @@ function validationMiddleware(req, res, next) {
             props: { name, label, sections, items, visibilityConditions, hideConditions, choices }
         } = field;
 
-        if (!isFieldVisible(visibilityConditions, hideConditions, data)) {
+        if (!isFieldVisible({ visibilityConditions, hideConditions }, data)) {
             return;
         }
 
@@ -605,9 +576,51 @@ function validationMiddleware(req, res, next) {
             }
         }
     }
+};
+
+function isFieldVisible({ visibilityConditions, hideConditions }, data) {
+    let isVisible = true;
+
+    // show component based on visibilityConditions
+    if (visibilityConditions) {
+        isVisible = false;
+
+        for (const condition of visibilityConditions) {
+            if (condition.function && Object.prototype.hasOwnProperty.call(showConditionFunctions, condition.function)) {
+                if (condition.conditionArgs) {
+                    isVisible = showConditionFunctions[condition.function](data, condition.conditionArgs);
+                } else {
+                    isVisible = showConditionFunctions[condition.function](data);
+                }
+            } else if (data[condition.conditionPropertyName] && data[condition.conditionPropertyName] === condition.conditionPropertyValue) {
+                isVisible = true;
+            }
+        }
+    }
+
+    // hide component based on hideConditions
+    if (hideConditions) {
+        for (const condition of hideConditions) {
+            if (condition.function && Object.prototype.hasOwnProperty.call(hideConditions, condition.function)) {
+                if (condition.conditionPropertyName && condition.conditionPropertyValue) {
+                    isVisible = hideConditionFunctions[condition.function](data, condition.conditionPropertyName, condition.conditionPropertyValue);
+                } else {
+                    isVisible = hideConditionFunctions[condition.function](data);
+                }
+            } else if (data[condition.conditionPropertyName] && data[condition.conditionPropertyName] === condition.conditionPropertyValue) {
+                isVisible = false;
+            }
+        }
+    }
+
+    return isVisible;
 }
 
+
+
+
 module.exports = {
-    validationMiddleware,
+    isFieldVisible,
+    validateForm,
     validators
 };

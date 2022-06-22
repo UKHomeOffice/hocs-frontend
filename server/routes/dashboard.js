@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const { secureFileMiddleware: processRequestBody } = require('../middleware/file');
-const { processMiddleware: processForm } = require('../middleware/process');
-const { validationMiddleware: validateForm } = require('../middleware/validation');
+const { processMiddleware: processForm } = require('../middleware/form/process');
 const { dashboardMiddleware: getDashboardData } = require('../middleware/dashboard');
 const { getForm } = require('../services/form');
 const form = require('../services/forms/schemas/dashboard-search');
@@ -21,7 +20,6 @@ router.post(['/search/reference', '/api/search/reference'],
     processRequestBody(form().getFields()),
     getForm(form, { submissionUrl: '/search/results' }),
     processForm,
-    validateForm,
     async (req, res, next) => {
         const logger = getLogger(req.requestId);
 
