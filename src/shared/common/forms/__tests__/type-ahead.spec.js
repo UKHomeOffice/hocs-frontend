@@ -52,7 +52,7 @@ describe('Form type ahead component (dropdown)', () => {
             updateState={() => null}
             disabled={true}
         />);
-        expect(screen.getByRole('textbox')).toBeDisabled();
+        expect(screen.getByRole('combobox', { hidden: true })).toBeDisabled();
     });
 
 });
@@ -65,4 +65,3 @@ describe('Form type ahead component (select)', () => {
         expect(mockCallback).toHaveBeenCalledWith({ 'dropdown': undefined });
     });
 });
-
