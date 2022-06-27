@@ -44,7 +44,7 @@
         "https-proxy-agent": "^5.0.1",
         "jsonwebtoken": "^8.5.1",
         "multer": "^1.4.4",
-        "multer-s3": "^3.0.0",
+        "multer-s3": "^3.0.1",
         "node-cron": "^3.0.0",
         "prop-types": "^15.8.1",
         "react": "^17.0.2",
