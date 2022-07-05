@@ -1,0 +1,811 @@
+{
+  "BF": [
+    {
+      "validation": [],
+      "props": {
+        "label": "Correspondent full name"
+      },
+      "name": "correspondent",
+      "component": "text"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Correspondent postcode"
+      },
+      "name": "correspondentPostcode",
+      "component": "text"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Correspondent email address"
+      },
+      "name": "correspondentEmail",
+      "component": "text"
+    },
+    {
+      "validation": [
+        "isValidDate",
+        "isBeforeToday"
+      ],
+      "props": {
+        "label": "Complainant date of birth"
+      },
+      "name": "ComplainantDOB",
+      "component": "date"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Case reference"
+      },
+      "name": "reference",
+      "component": "text"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Complainant Home Office Reference"
+      },
+      "name": "ComplainantHORef",
+      "component": "text"
+    }
+  ],
+  "BF2": [],
+  "COMP": [
+    {
+      "validation": [],
+      "props": {
+        "label": "Correspondent full name"
+      },
+      "name": "correspondent",
+      "component": "text"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Correspondent postcode"
+      },
+      "name": "correspondentPostcode",
+      "component": "text"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Correspondent email address"
+      },
+      "name": "correspondentEmail",
+      "component": "text"
+    },
+    {
+      "validation": [
+        "isValidDate",
+        "isBeforeToday"
+      ],
+      "props": {
+        "label": "Complainant date of birth"
+      },
+      "name": "ComplainantDOB",
+      "component": "date"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Case reference"
+      },
+      "name": "reference",
+      "component": "text"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Complainant Home Office Reference"
+      },
+      "name": "ComplainantHORef",
+      "component": "text"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Case type",
+        "choices": "CASE_TYPES_FOR_SEARCH"
+      },
+      "name": "caseTypes",
+      "component": "checkbox"
+    }
+  ],
+  "COMP2": [
+    {
+      "validation": [],
+      "props": {
+        "label": "Case type",
+        "choices": "CASE_TYPES_FOR_SEARCH"
+      },
+      "name": "caseTypes",
+      "component": "checkbox"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Correspondent full name"
+      },
+      "name": "correspondent",
+      "component": "text"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Correspondent postcode"
+      },
+      "name": "correspondentPostcode",
+      "component": "text"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Correspondent email address"
+      },
+      "name": "correspondentEmail",
+      "component": "text"
+    },
+    {
+      "validation": [
+        "isValidDate",
+        "isBeforeToday"
+      ],
+      "props": {
+        "label": "Complainant date of birth"
+      },
+      "name": "ComplainantDOB",
+      "component": "date"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Case reference"
+      },
+      "name": "reference",
+      "component": "text"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Complainant Home Office Reference"
+      },
+      "name": "ComplainantHORef",
+      "component": "text"
+    }
+  ],
+  "DCU": [
+    {
+      "validation": [],
+      "props": {
+        "label": "Case type",
+        "choices": "CASE_TYPES"
+      },
+      "name": "caseTypes",
+      "component": "checkbox"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Case reference"
+      },
+      "name": "reference",
+      "component": "text"
+    },
+    {
+      "validation": [
+        "isValidDate",
+        "isBeforeToday"
+      ],
+      "props": {
+        "label": "Received on or after"
+      },
+      "name": "dateReceivedFrom",
+      "component": "date"
+    },
+    {
+      "validation": [
+        "isValidDate",
+        "isBeforeToday"
+      ],
+      "props": {
+        "label": "Received on or before"
+      },
+      "name": "dateReceivedTo",
+      "component": "date"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Member of Parliament name",
+        "choices": "MEMBER_LIST"
+      },
+      "name": "correspondentExternalKey",
+      "component": "type-ahead"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Correspondent (non-MP)"
+      },
+      "name": "correspondentNameNotMember",
+      "component": "text"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Correspondent Postcode"
+      },
+      "name": "correspondentPostcode",
+      "component": "text"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Correspondent Email Address"
+      },
+      "name": "correspondentEmail",
+      "component": "text"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Topic"
+      },
+      "name": "topic",
+      "component": "text"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Sign-off team",
+        "choices": "PRIVATE_OFFICE_TEAMS"
+      },
+      "name": "signOffMinister",
+      "component": "dropdown"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Case status",
+        "choices": [
+          {
+            "label": "Include Active Cases only",
+            "value": "active"
+          }
+        ]
+      },
+      "name": "caseStatus",
+      "component": "checkbox"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Home Secretary Interest",
+        "choices": [
+          {
+            "label": "Include Home Secretary Interest Cases only",
+            "value": "true"
+          }
+        ]
+      },
+      "name": "HomeSecInterest",
+      "component": "checkbox"
+    }
+  ],
+  "FOI": [
+    {
+      "validation": [],
+      "props": {
+        "label": "Case type",
+        "choices": "CASE_TYPES"
+      },
+      "name": "caseTypes",
+      "component": "checkbox"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Case reference"
+      },
+      "name": "reference",
+      "component": "text"
+    },
+    {
+      "validation": [
+        "isValidDate",
+        "isBeforeToday"
+      ],
+      "props": {
+        "label": "Received on or after"
+      },
+      "name": "dateReceivedFrom",
+      "component": "date"
+    },
+    {
+      "validation": [
+        "isValidDate",
+        "isBeforeToday"
+      ],
+      "props": {
+        "label": "Received on or before"
+      },
+      "name": "dateReceivedTo",
+      "component": "date"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Correspondent (non-MP)"
+      },
+      "name": "correspondentNameNotMember",
+      "component": "text"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Topic"
+      },
+      "name": "topic",
+      "component": "text"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Case status",
+        "choices": [
+          {
+            "label": "Include Active Cases only",
+            "value": "active"
+          }
+        ]
+      },
+      "name": "caseStatus",
+      "component": "checkbox"
+    }
+  ],
+  "IEDET": [
+    {
+      "validation": [],
+      "props": {
+        "label": "Correspondent full name"
+      },
+      "name": "correspondent",
+      "component": "text"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Correspondent postcode"
+      },
+      "name": "correspondentPostcode",
+      "component": "text"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Correspondent email address"
+      },
+      "name": "correspondentEmail",
+      "component": "text"
+    },
+    {
+      "validation": [
+        "isValidDate",
+        "isBeforeToday"
+      ],
+      "props": {
+        "label": "Complainant date of birth"
+      },
+      "name": "ComplainantDOB",
+      "component": "date"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Case reference"
+      },
+      "name": "reference",
+      "component": "text"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Complainant Home Office Reference"
+      },
+      "name": "ComplainantHORef",
+      "component": "text"
+    }
+  ],
+  "MPAM": [
+    {
+      "validation": [],
+      "props": {
+        "label": "Case reference"
+      },
+      "name": "reference",
+      "component": "text"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Reference type",
+        "choices": [
+          {
+            "label": "Ministerial",
+            "value": "Ministerial"
+          },
+          {
+            "label": "Official",
+            "value": "Official"
+          }
+        ]
+      },
+      "name": "RefType",
+      "component": "dropdown"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Ministerial sign off team",
+        "choices": "S_MPAM_MIN_SIGN_OFF_TEAMS"
+      },
+      "name": "MinSignOffTeam",
+      "component": "dropdown"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Member of parliament name",
+        "choices": "MEMBER_LIST"
+      },
+      "name": "correspondentExternalKey",
+      "component": "type-ahead"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Correspondent full name (applicant or constituent)"
+      },
+      "name": "correspondentNameNotMember",
+      "component": "text"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Correspondent reference number"
+      },
+      "name": "correspondentReference",
+      "component": "text"
+    },
+    {
+      "validation": [
+        "isValidDate",
+        "isBeforeToday"
+      ],
+      "props": {
+        "label": "Received on or before"
+      },
+      "name": "dateReceivedTo",
+      "component": "date"
+    },
+    {
+      "validation": [
+        "isValidDate",
+        "isBeforeToday"
+      ],
+      "props": {
+        "label": "Received on or after"
+      },
+      "name": "dateReceivedFrom",
+      "component": "date"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Campaign",
+        "choices": "MPAM_CAMPAIGNS",
+        "defaultOptions": true
+      },
+      "name": "CampaignType",
+      "component": "type-ahead"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Case status",
+        "choices": [
+          {
+            "label": "Include Active Only",
+            "value": "active"
+          }
+        ]
+      },
+      "name": "caseStatus",
+      "component": "checkbox"
+    }
+  ],
+  "MTS": [
+    {
+      "validation": [],
+      "props": {
+        "label": "Case reference"
+      },
+      "name": "reference",
+      "component": "text"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Correspondent full name (applicant or constituent)"
+      },
+      "name": "correspondentNameNotMember",
+      "component": "text"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Correspondent reference number"
+      },
+      "name": "correspondentReference",
+      "component": "text"
+    },
+    {
+      "validation": [
+        "isValidDate",
+        "isBeforeToday"
+      ],
+      "props": {
+        "label": "Received on or before"
+      },
+      "name": "dateReceivedTo",
+      "component": "date"
+    },
+    {
+      "validation": [
+        "isValidDate",
+        "isBeforeToday"
+      ],
+      "props": {
+        "label": "Received on or after"
+      },
+      "name": "dateReceivedFrom",
+      "component": "date"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Case status",
+        "choices": [
+          {
+            "label": "Include Active Only",
+            "value": "active"
+          }
+        ]
+      },
+      "name": "caseStatus",
+      "component": "checkbox"
+    }
+  ],
+  "POGR": [],
+  "SMC": [
+    {
+      "validation": [],
+      "props": {
+        "label": "Correspondent full name"
+      },
+      "name": "correspondent",
+      "component": "text"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Correspondent postcode"
+      },
+      "name": "correspondentPostcode",
+      "component": "text"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Correspondent email address"
+      },
+      "name": "correspondentEmail",
+      "component": "text"
+    },
+    {
+      "validation": [
+        "isValidDate",
+        "isBeforeToday"
+      ],
+      "props": {
+        "label": "Complainant date of birth"
+      },
+      "name": "ComplainantDOB",
+      "component": "date"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Case reference"
+      },
+      "name": "reference",
+      "component": "text"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Complainant Home Office Reference"
+      },
+      "name": "ComplainantHORef",
+      "component": "text"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "PSU Reference"
+      },
+      "name": "PSURef",
+      "component": "text"
+    }
+  ],
+  "TO": [
+    {
+      "validation": [],
+      "props": {
+        "label": "Case type",
+        "choices": "CASE_TYPES_FOR_SEARCH"
+      },
+      "name": "caseTypes",
+      "component": "checkbox"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Case reference"
+      },
+      "name": "reference",
+      "component": "text"
+    },
+    {
+      "validation": [
+        "isValidDate",
+        "isBeforeToday"
+      ],
+      "props": {
+        "label": "Received on or after"
+      },
+      "name": "dateReceivedFrom",
+      "component": "date"
+    },
+    {
+      "validation": [
+        "isValidDate",
+        "isBeforeToday"
+      ],
+      "props": {
+        "label": "Received on or before"
+      },
+      "name": "dateReceivedTo",
+      "component": "date"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Correspondent full name"
+      },
+      "name": "correspondent",
+      "component": "text"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Correspondent postcode"
+      },
+      "name": "correspondentPostcode",
+      "component": "text"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Correspondent email address"
+      },
+      "name": "correspondentEmail",
+      "component": "text"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Correspondent reference number"
+      },
+      "name": "correspondentReference",
+      "component": "text"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Case status",
+        "choices": [
+          {
+            "label": "Include Active Cases only",
+            "value": "active"
+          }
+        ]
+      },
+      "name": "caseStatus",
+      "component": "checkbox"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Campaign",
+        "choices": "TROF_CAMPAIGNS",
+        "defaultOptions": true
+      },
+      "name": "CampaignType",
+      "component": "type-ahead"
+    }
+  ],
+  "WCS": [
+    {
+      "validation": [],
+      "props": {
+        "label": "WCS reference"
+      },
+      "name": "reference",
+      "component": "text"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Claimant Name"
+      },
+      "name": "claimantName",
+      "component": "text"
+    },
+    {
+      "validation": [
+        "isValidDate",
+        "isBeforeToday"
+      ],
+      "props": {
+        "label": "Claimant DOB"
+      },
+      "name": "claimantDOB",
+      "component": "date"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "National Insurance Number"
+      },
+      "name": "niNumber",
+      "component": "text"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Previous HOCS reference"
+      },
+      "name": "PrevHocsRef",
+      "component": "text"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Unworkable",
+        "choices": [
+          {
+            "label": "Unworkable Cases only",
+            "value": "true"
+          }
+        ]
+      },
+      "name": "Unworkable",
+      "component": "checkbox"
+    }
+  ]
+}
