@@ -1,0 +1,16 @@
+{
+    "cs": {
+      "displayName": "Correspondence System",
+      "bulkCreate": true,
+      "deadlines": true,
+      "autoCreateAndAllocate": false,
+      "viewStandardLines": true
+    },
+    "wcs": {
+      "displayName": "Windrush Compensation",
+      "bulkCreate": false,
+      "deadlines": false,
+      "autoCreateAndAllocate": true,
+      "viewStandardLines": false
+    }
+}

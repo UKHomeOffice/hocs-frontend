@@ -353,6 +353,8 @@ spec:
           {{ end }}
           - name: SHOW_STACKTRACE_ON_ERROR_PAGE
             value: '{{.SHOW_ERROR_STACKTRACE}}'
+          - name: TENANT
+            value: '{{.DOMAIN}}'
         resources:
           limits:
             cpu: 1600m
