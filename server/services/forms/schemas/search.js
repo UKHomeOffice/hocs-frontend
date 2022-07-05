@@ -2,33 +2,21 @@ const Form = require('../form-builder');
 const { Component } = require('../component-builder');
 const { infoService } = require('../../../clients');
 const User = require('../../../models/user');
-
+const { fetchSearchFieldsForCaseTypes } = require('../../../config/searchFields/searchFields');
 
 const search = async (options = {}) => {
-    const { submissionUrl, user, listService } = options;
+    const { submissionUrl, user } = options;
 
     let headers = {
         headers: User.createHeaders(user)
     };
-    const userProfileNames = (await infoService.get('/profileNames?initialCaseType=false', headers)).data;
-    const form = Form();
 
-    let fields = [];
-    const systemConfiguration = await listService.fetch('S_SYSTEM_CONFIGURATION');
-    await listService.fetch('CASE_TYPES_FOR_SEARCH');
-    systemConfiguration.profiles.map(profile => {
-        if (userProfileNames.includes(profile.profileName)) {
-            profile.searchFields.map(searchField => {
-                if (!fields.some(field => field.name === searchField.name && field.component === searchField.component)) {
-                    fields.push(searchField);
-                }
-            });
-        }
-    });
+    const { data: caseTypes } = await infoService.get('/profileNames?initialCaseType=false', headers);
 
-    fields.map(field => form.withField(Component(field.component, field.name, field).build()));
+    const fields = fetchSearchFieldsForCaseTypes(caseTypes);
 
-    return form.withTitle('Search')
+    const form = Form()
+        .withTitle('Search')
         .withPrimaryActionLabel('Search')
         .withSecondaryAction(
             Component('backlink')
@@ -37,6 +25,10 @@ const search = async (options = {}) => {
                 .build()
         )
         .withSubmissionUrl(submissionUrl);
+
+    fields.map(field => form.withField(Component(field.component, field.name, field).build()));
+
+    return form;
 };
 
 module.exports = search;
