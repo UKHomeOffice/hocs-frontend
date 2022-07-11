@@ -10,7 +10,7 @@
       "displayName": "Windrush Compensation",
       "bulkCreate": false,
       "deadlines": false,
-      "autoCreateAndAllocate": true,
+      "autoCreateAndAllocate": false,
       "viewStandardLines": false
     }
 }
