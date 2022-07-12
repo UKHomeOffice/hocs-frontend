@@ -1,4 +1,4 @@
-FROM node:14.18.1-alpine
+FROM node:14.20.0-alpine
 
 ENV USER node
 ENV USER_ID 1000
