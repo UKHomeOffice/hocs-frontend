@@ -1,5 +1,14 @@
+.github
 .idea
+build
+coverage
+kube
 node_modules
+*Dockerfile*
+*docker-compose*
+**/__tests__
 .iml
 .git
 .gitignore
+.npm
+.drone.yml
