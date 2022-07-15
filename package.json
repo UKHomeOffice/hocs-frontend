@@ -30,8 +30,8 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "@aws-sdk/client-s3": "^3.117.0",
-        "@aws-sdk/node-http-handler": "^3.118.1",
+        "@aws-sdk/client-s3": "^3.130.0",
+        "@aws-sdk/node-http-handler": "^3.127.0",
         "axios": "^0.26.1",
         "body-parser": "^1.20.0",
         "classnames": "^2.2.6",
