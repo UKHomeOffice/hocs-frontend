@@ -5,4 +5,4 @@ on:
 
 jobs:
   test:
-    uses: UKHomeOffice/hocs-ci-infrastructure/.github/workflows/test-javascript.yml@3cce2144f3f18e931db49399cd108f0d058fc31d
+    uses: UKHomeOffice/hocs-ci-infrastructure/.github/workflows/test-javascript.yml@dbc04ccabbdba13d4f7f780abfeabe1d4d544da0
