@@ -1,0 +1,8 @@
+name: 'Test'
+on:
+  pull_request:
+    types: [ opened, reopened, synchronize ]
+
+jobs:
+  test:
+    uses: UKHomeOffice/hocs-ci-infrastructure/.github/workflows/test-javascript.yml@500b3f26bc1c9816ef0deed9904d87f0d3c32805
