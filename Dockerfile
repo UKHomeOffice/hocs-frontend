@@ -1,19 +1,27 @@
-FROM node:14.20.0-alpine
+FROM alpine:3.14 as builder
 
-ENV USER node
-ENV USER_ID 1000
-ENV GROUP node
-ENV NAME hocs-frontend
+USER 0
 
-RUN mkdir -p /app && \
-    chown -R ${USER}:${GROUP} /app
+RUN apk add --no-cache nodejs npm
+
+COPY . .
+
+RUN npm --loglevel warn ci --production=false --no-optional
+RUN npm run build-prod
+RUN npm --loglevel warn ci --production --no-optional
+
+FROM alpine:3.14
+
+USER 0
+
+RUN addgroup -S group_hocs && adduser -S -u 10000 user_hocs -G group_hocs -h /app
+
+RUN apk add --no-cache nodejs dumb-init
+
+USER 10000
 
 WORKDIR /app
-COPY . /app
-RUN npm run build-prod && npm --loglevel warn ci --production --no-optional
 
-USER ${USER_ID}
+COPY --from=builder --chown=user_hocs:group_hocs . .
 
-EXPOSE 8080
-
-CMD npm start
+CMD ["dumb-init", "node", "index.js"]
