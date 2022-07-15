@@ -3,7 +3,9 @@ on:
   pull_request:
     types: [ opened, reopened, synchronize ]
     paths:
-      - 'src/main/java/**'
+      - 'src/**'
+      - 'server/**'
+      - 'index.js'
   schedule:
     - cron: '0 12 * * *'
 
