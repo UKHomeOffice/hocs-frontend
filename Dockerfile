@@ -2,6 +2,8 @@ FROM node:14-alpine as builder
 
 USER 0
 
+WORKDIR /app
+
 COPY . .
 
 RUN npm --loglevel warn ci --production=false --no-optional && npm run build-prod
@@ -18,10 +20,10 @@ USER 10000
 
 WORKDIR /app
 
-COPY --from=builder --chown=user_hocs:group_hocs . .
+COPY --from=builder --chown=user_hocs:group_hocs /app .
 
 RUN npm --loglevel warn ci --production --no-optional
 
 ENTRYPOINT ["dumb-init", "--"]
 
-CMD ["node", "--max-http-header-size=80000" , "index.js"]
+CMD ["node", "--max-http-header-size 80000" , "index.js"]
