@@ -1,20 +1,33 @@
-FROM node:14.20.0-alpine
+FROM node:14-alpine as base
 
-ENV USER node
-ENV USER_ID 1000
-ENV GROUP node
-ENV NAME hocs-frontend
+RUN addgroup -S group_hocs && adduser -S -u 10000 user_hocs -G group_hocs -h /app
 
-RUN mkdir -p /app && \
-    chown -R ${USER}:${GROUP} /app
+FROM base as builder-server
 
-WORKDIR /app
-COPY . /app
-COPY /build /app/build
+COPY ./package.json ./package.json
+COPY ./package-lock.json ./package-lock.json
+
 RUN npm --loglevel warn ci --production --no-optional
 
-USER ${USER_ID}
+FROM builder-server as builder-client
 
-EXPOSE 8080
+COPY . .
 
-CMD npm start
+RUN npm --loglevel warn ci && npm run build-prod
+
+FROM base AS production
+
+WORKDIR /app
+
+COPY --from=builder-client --chown=user_hocs:group_hocs ./scripts/run.sh ./
+COPY --from=builder-client --chown=user_hocs:group_hocs ./package.json ./
+COPY --from=builder-client --chown=user_hocs:group_hocs ./package-lock.json ./
+COPY --from=builder-client --chown=user_hocs:group_hocs ./build ./build
+COPY --from=builder-client --chown=user_hocs:group_hocs ./src ./src
+COPY --from=builder-client --chown=user_hocs:group_hocs ./server ./server
+COPY --from=builder-client --chown=user_hocs:group_hocs ./index.js ./
+COPY --from=builder-server --chown=user_hocs:group_hocs ./node_modules ./node_modules
+
+USER 10000
+
+CMD ["sh", "/app/run.sh"]
