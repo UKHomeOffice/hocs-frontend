@@ -11,14 +11,13 @@ FROM base as builder-server
 WORKDIR /app
 
 COPY ./package.json ./package.json
-
 COPY ./package-lock.json ./package-lock.json
 
 USER 10000
 
 RUN npm --loglevel warn ci --production --no-optional
 
-FROM base as builder-client
+FROM builder-server as builder-client
 
 WORKDIR /app
 
@@ -29,6 +28,8 @@ USER 10000
 RUN npm --loglevel warn ci && npm run build-prod
 
 FROM base AS production
+
+USER 0
 
 WORKDIR /app
 
