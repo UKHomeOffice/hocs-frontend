@@ -59,7 +59,7 @@
         "serialize-javascript": "^3.1.0",
         "spdy": "^4.0.0",
         "uuid": "^8.3.2",
-        "winston": "^2.4.2"
+        "winston": "^3.8.1"
     },
     "devDependencies": {
         "@babel/cli": "^7.18.6",
