@@ -1,7 +1,5 @@
 FROM node:14-alpine as base
 
-RUN addgroup -S group_hocs && adduser -S -u 10000 user_hocs -G group_hocs -h /app
-
 FROM base as builder-server
 
 COPY ./package.json ./package.json
@@ -16,6 +14,8 @@ COPY . .
 RUN npm --loglevel warn ci && npm run build-prod
 
 FROM base AS production
+
+RUN addgroup -S group_hocs && adduser -S -u 10000 user_hocs -G group_hocs -h /app
 
 WORKDIR /app
 
