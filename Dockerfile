@@ -15,7 +15,7 @@ RUN npm --loglevel warn ci && npm run build-prod
 
 FROM base AS production
 
-RUN addgroup -S group_hocs && adduser -S -u 10000 user_hocs -G group_hocs -h /app
+RUN addgroup -S group_hocs && adduser -S -u 1000 user_hocs -G group_hocs -h /app
 
 WORKDIR /app
 
@@ -28,6 +28,6 @@ COPY --from=builder-client --chown=user_hocs:group_hocs ./server ./server
 COPY --from=builder-client --chown=user_hocs:group_hocs ./index.js ./
 COPY --from=builder-server --chown=user_hocs:group_hocs ./node_modules ./node_modules
 
-USER 10000
+USER 1000
 
 CMD ["sh", "/app/run.sh"]
