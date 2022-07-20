@@ -16,7 +16,9 @@ const STATUS_OPTION = {
 
 const loadValue = async (value, choices, fromStaticList) => {
     const choice = await fromStaticList(choices, value);
-    return choice ? Promise.resolve(choice) : Promise.resolve(value);
+    return choice ?
+        Promise.resolve(choice).catch((error) => { logger.error(error)}) :
+        Promise.resolve(value).catch((error) => { logger.error(error)});
 };
 
 const getRequestStatus = (dueDate, { status, decision }) => {
@@ -59,7 +61,7 @@ async function getApprovalsStrings(approvalsArray, choices, fromStaticList) {
         );
 
         return `${businessLabel} ${approvalStatus}`;
-    }));
+    })).catch((error) => logger.error(error));
 }
 
 async function getContributionStrings(contributions, choices, fromStaticList) {
@@ -73,7 +75,7 @@ async function getContributionStrings(contributions, choices, fromStaticList) {
         );
 
         return `${businessLabel} ${status}`;
-    }));
+    })).catch((error) => logger.error(error));
 }
 
 async function parseApprovalRequests(approvalsJSONString, choices, fromStaticList) {
@@ -125,7 +127,7 @@ module.exports = async (template, { fromStaticList }) => {
             const stageName = await fromStaticList('S_STAGETYPES', stageId);
 
             return { title: stageName, items: stageFields };
-        }))).filter(stage => {
+        })).catch((error) => logger.error(error))).filter(stage => {
             return stage.items && stage.items.length > 0;
         }); // filter out empty sections
 
@@ -135,7 +137,7 @@ module.exports = async (template, { fromStaticList }) => {
             const { name } = fieldTemplate.props;
 
             return [name, await hydrateFields(fieldTemplate, template, fromStaticList, name)];
-        }, {})))
+        }, {})).catch((error) => logger.error(error)))
         .filter(([_, value]) => value) // filter out any hidden or empty fields
         .reduce((map, [name, value]) => { // assemble the hydrated fields into a map
             map[name] = value;

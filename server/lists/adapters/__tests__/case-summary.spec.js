@@ -79,7 +79,7 @@ const mockFetchList = jest.fn((list) => {
 describe('Case Summary Adapter', () => {
 
     it('should transform minimal case summary data', async () => {
-        caseworkService.get.mockImplementation(() => Promise.resolve({ data: { summaryDeadlineEnabled: true } }));
+        caseworkService.get.mockImplementation(() => Promise.resolve({ data: { summaryDeadlineEnabled: true } }).catch((error) => logger.error(error)));
         const mockConfiguration = {
             deadlinesEnabled: true
         };
@@ -104,7 +104,7 @@ describe('Case Summary Adapter', () => {
     });
 
     it('should transform actions data in case summary data', async () => {
-        caseworkService.get.mockImplementation(() => Promise.resolve({ data: { summaryDeadlineEnabled: true } }));
+        caseworkService.get.mockImplementation(() => Promise.resolve({ data: { summaryDeadlineEnabled: true } }).catch((error) => logger.error(error)));
         const mockConfiguration = {
             deadlinesEnabled: true
         };
@@ -226,7 +226,7 @@ describe('Case Summary Adapter', () => {
     });
 
     it('should transform fully populated case summary data', async () => {
-        caseworkService.get.mockImplementation(() => Promise.resolve({ data: { summaryDeadlineEnabled: true } }));
+        caseworkService.get.mockImplementation(() => Promise.resolve({ data: { summaryDeadlineEnabled: true } }).catch((error) => logger.error(error)));
         const mockConfiguration = {
             deadlinesEnabled: true
         };

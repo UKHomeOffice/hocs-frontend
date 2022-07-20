@@ -85,7 +85,7 @@ async function buildReasonChoicesConditionalChoiceArray(rawExtensionArray, optio
                         Choice(option.label, option.value)
                     )
                 );
-            }));
+            })).catch((error) => logger.error(error));
 
         return results;
     }

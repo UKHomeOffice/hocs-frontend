@@ -38,5 +38,5 @@ module.exports = async (actions, fetchList) => {
             note: appealEntry.note || null,
             dateSentRMS: formatDate(appealEntry.dateSentRMS) || null
         };
-    }));
+    })).catch((error) => logger.error(error));
 };

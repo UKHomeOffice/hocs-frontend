@@ -241,5 +241,5 @@ module.exports = async (data, { fromStaticList, fetchList, logger }) => {
         })
         .reverse()
         .map(convertNote(fromStaticList, fetchList))
-    );
+    ).catch((error) => logger.error(error));
 };

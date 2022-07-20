@@ -51,7 +51,7 @@ describe('Stage middleware', () => {
         const actionService = require('../../services/action.js');
         const mockError = new Error('TEST_ERROR');
         actionService.performAction.mockImplementation(() => {
-            return Promise.reject(mockError);
+            return Promise.reject(mockError).catch((error) => logger.error(error));
         });
         const { stageResponseMiddleware } = require('../stage.js');
         await stageResponseMiddleware(req, res, next);

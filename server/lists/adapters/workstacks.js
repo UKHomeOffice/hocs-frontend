@@ -271,7 +271,7 @@ class Card {
 
 const dashboardAdapter = async (data, { fromStaticList, logger, configuration }) => {
     const dashboardData = await Promise.all(data.stages
-        .map(bindDashboardElements(fromStaticList)));
+        .map(bindDashboardElements(fromStaticList))).catch((error) => logger.error(error));
 
     const userCard = dashboardData
         .reduce((card, stage) => {
@@ -307,7 +307,7 @@ const userAdapter = async (data, { fromStaticList, logger, configuration }) => {
     const workstackData = await Promise.all(data.stages
         .sort(defaultCaseSort)
         .sort(tagSort)
-        .map(bindDisplayElements(fromStaticList)));
+        .map(bindDisplayElements(fromStaticList))).catch((error) => logger.error(error));
 
     logger.debug('REQUEST_USER_WORKSTACK', { user_cases: workstackData.length });
 
@@ -325,7 +325,7 @@ const teamAdapter = async (data, { fromStaticList, logger, teamId, configuration
         .filter(stage => stage.teamUUID === teamId)
         .sort(defaultCaseSort)
         .sort(tagSort)
-        .map(bindDisplayElements(fromStaticList)));
+        .map(bindDisplayElements(fromStaticList))).catch((error) => logger.error(error));
     const workflowCards = workstackData
         .reduce((cards, stage) => {
             const index = cards.findIndex(({ value }) => value === stage.caseType);
@@ -372,7 +372,7 @@ const workflowAdapter = async (data, { fromStaticList, logger, workflowId, confi
         .filter(stage => stage.caseType === workflowId)
         .sort(defaultCaseSort)
         .sort(tagSort)
-        .map(bindDisplayElements(fromStaticList)));
+        .map(bindDisplayElements(fromStaticList))).catch((error) => logger.error(error));
     const stageCards = workstackData
         .reduce((cards, stage) => {
             const index = cards.findIndex(({ value }) => value === stage.stageType);
@@ -416,7 +416,7 @@ const stageAdapter = async (data, { fromStaticList, logger, workflowId, stageId,
         .filter(byWorkable)
         .filter(stage => stage.caseType === workflowId && stage.stageType === stageId)
         .sort(defaultCaseSort)
-        .map(bindDisplayElements(fromStaticList)));
+        .map(bindDisplayElements(fromStaticList))).catch((error) => logger.error(error));
     const stageDisplayName = await fromStaticList('S_STAGETYPES', stageId);
     logger.debug('REQUEST_STAGE_WORKSTACK', { stage: stageDisplayName, rows: workstackData.length });
     return {

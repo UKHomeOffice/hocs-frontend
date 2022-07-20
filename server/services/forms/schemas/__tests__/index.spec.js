@@ -1,18 +1,18 @@
 const formRepository = require('../index');
 
 jest.mock('../../../../middleware/somu', () => ({
-    getSomuItem: jest.fn(() => Promise.resolve({ data: {} }))
+    getSomuItem: jest.fn(() => Promise.resolve({ data: {} }).catch((error) => logger.error(error)))
 }));
 
 jest.mock('../../../../clients', () => ({
     caseworkService: {
-        get: jest.fn(() => Promise.resolve({ data: {} }))
+        get: jest.fn(() => Promise.resolve({ data: {} }).catch((error) => logger.error(error)))
     },
     workflowService: {
-        get: jest.fn(() => Promise.resolve({ data: {} }))
+        get: jest.fn(() => Promise.resolve({ data: {} }).catch((error) => logger.error(error)))
     },
     infoService: {
-        get: jest.fn(() => Promise.resolve({ data: {} }))
+        get: jest.fn(() => Promise.resolve({ data: {} }).catch((error) => logger.error(error)))
     }
 }));
 

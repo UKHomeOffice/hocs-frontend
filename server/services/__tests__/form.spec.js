@@ -5,7 +5,7 @@ jest.mock('../forms/index.js', () => ({
 
 jest.mock('../../clients', () => ({
     workflowService: {
-        get: jest.fn(() => Promise.resolve())
+        get: jest.fn(() => Promise.resolve().catch((error) => logger.error(error)))
     }
 }));
 
@@ -186,7 +186,7 @@ describe('getFormForStage', () => {
             }
         };
         const { workflowService } = require('../../clients');
-        workflowService.get.mockImplementation(() => Promise.resolve({ data: { form: mockActionForm } }));
+        workflowService.get.mockImplementation(() => Promise.resolve({ data: { form: mockActionForm } }).catch((error) => logger.error(error)));
         const { getFormForStage } = require('../form');
         await getFormForStage(req, res, next);
         expect(req.form).toBeDefined();
@@ -206,7 +206,7 @@ describe('getFormForStage', () => {
         };
 
         const { workflowService } = require('../../clients');
-        workflowService.get.mockImplementation(() => Promise.resolve({ data: { form: null } }));
+        workflowService.get.mockImplementation(() => Promise.resolve({ data: { form: null } }).catch((error) => logger.error(error)));
         const { getFormForStage } = require('../form');
         await getFormForStage(req, res, next);
 
@@ -227,7 +227,7 @@ describe('getFormForStage', () => {
             }
         };
         const { workflowService } = require('../../clients');
-        workflowService.get.mockImplementation(() => Promise.reject({ stack: 'ERR_STACK', response: { status: 500 } }));
+        workflowService.get.mockImplementation(() => Promise.reject({ stack: 'ERR_STACK', response: { status: 500 } }).catch((error) => logger.error(error)));
         const { getFormForStage } = require('../form');
         await getFormForStage(req, res, next);
         expect(req.form).toBeUndefined();
@@ -259,7 +259,7 @@ describe('when the hydrate method is called', () => {
                 }
             },
             listService: {
-                fetch: () => Promise.resolve(items)
+                fetch: () => Promise.resolve(items).catch((error) => logger.error(error))
             }
         };
         const next = jest.fn();
@@ -292,7 +292,7 @@ describe('when the hydrate method is called', () => {
                     response: {
                         status: 401
                     }
-                })
+                }).catch((error) => logger.error(error))
             }
         };
         const next = jest.fn();
@@ -319,7 +319,7 @@ describe('when the hydrate method is called', () => {
                 }
             },
             listService: {
-                fetch: () => Promise.reject(new AuthenticationError('PermissionError'))
+                fetch: () => Promise.reject(new AuthenticationError('PermissionError')).catch((error) => logger.error(error))
             }
         };
         const next = jest.fn();
@@ -350,7 +350,7 @@ describe('when the hydrate method is called', () => {
                     response: {
                         status: 404
                     }
-                })
+                }).catch((error) => logger.error(error))
             }
         };
         const next = jest.fn();
@@ -383,7 +383,7 @@ describe('when the hydrate method is called', () => {
                 }
             },
             listService: {
-                fetch: () => Promise.resolve(items)
+                fetch: () => Promise.resolve(items).catch((error) => logger.error(error))
             }
         };
         const next = jest.fn();
@@ -435,12 +435,12 @@ describe('when the hydrate method is called', () => {
 
         it('should hydrate the items', async () => {
             const req = { ...formSchema, listService: {
-                getFromStaticList: () => Promise.resolve(somuType),
+                getFromStaticList: () => Promise.resolve(somuType).catch((error) => logger.error(error)),
                 fetch: jest.fn(async (list, _) => {
                     if (list === 'TESTCHOICES') {
-                        return Promise.resolve(choices);
+                        return Promise.resolve(choices).catch((error) => logger.error(error));
                     } else {
-                        return Promise.resolve(somuItems);
+                        return Promise.resolve(somuItems).catch((error) => logger.error(error));
                     }
                 })
             } };
@@ -459,7 +459,7 @@ describe('when the hydrate method is called', () => {
                     response: {
                         status: 404
                     }
-                }),
+                }).catch((error) => logger.error(error)),
                 fetch: jest.fn(async (list, _) => {
                     if (list === 'TESTCHOICES') {
                         return Promise.resolve(choices);
