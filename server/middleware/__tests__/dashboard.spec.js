@@ -18,9 +18,9 @@ describe('Dashboard middleware', () => {
                 listService: {
                     fetch: jest.fn(async (list) => {
                         if (list === 'DASHBOARD') {
-                            return Promise.resolve('MOCK_DASHBOARD').catch((error) => {});
+                            return Promise.resolve('MOCK_DASHBOARD').catch(() => {});
                         }
-                        return Promise.reject().catch((error) => {});
+                        return Promise.reject().catch(() => {});
                     })
                 }
             };
@@ -35,7 +35,7 @@ describe('Dashboard middleware', () => {
         });
 
         it('should call next with an error if unable to retrieve dashboard data', async () => {
-            req.listService.fetch.mockImplementation(() => Promise.reject('MOCK_ERROR').catch((error) => {}));
+            req.listService.fetch.mockImplementation(() => Promise.reject('MOCK_ERROR').catch(() => {}));
             await dashboardMiddleware(req, res, next);
             expect(req.form.meta.dashboard).not.toBeDefined();
             expect(next).toHaveBeenCalled();

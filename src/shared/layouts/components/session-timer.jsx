@@ -32,7 +32,7 @@ const SessionTimer = () => {
                 setTargetDate(expiresAt.getTime());
             }
             return response;
-        }, (error) => Promise.reject(error).catch((error) => {}));
+        }, (error) => Promise.reject(error).catch(() => {}));
 
         // make sure we start with an up-to date expiry value;
         keepAlive();

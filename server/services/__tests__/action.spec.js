@@ -39,9 +39,9 @@ jest.mock('../../clients', () => {
                 data: {
                     reference: 'CASE_REFERENCE'
                 }
-            }).catch((error) => {});
+            }).catch(() => {});
         else
-            return Promise.reject('TEST_ERROR').catch((error) => {});
+            return Promise.reject('TEST_ERROR').catch(() => {});
     }
 
     return {
@@ -62,7 +62,7 @@ jest.mock('../../clients', () => {
                             form: {},
                             stageUUID: '123abc'
                         }
-                    }).catch((error) => {});
+                    }).catch(() => {});
                 }
                 mockRequestClient(body);
             },
@@ -118,7 +118,7 @@ jest.mock('../../clients', () => {
             }
         },
         infoService: {
-            get: jest.fn(() => Promise.resolve({ data: ['ORIGINAL', 'DRAFT'] }).catch((error) => {}))
+            get: jest.fn(() => Promise.resolve({ data: ['ORIGINAL', 'DRAFT'] }).catch(() => {}))
         }
     };
 });

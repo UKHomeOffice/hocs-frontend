@@ -43,15 +43,15 @@ describe('handleSearch', () => {
             listService: {
                 getFromStaticList: jest.fn(async (listId, key) => {
                     if (listId === 'S_ALL_TEAMS' && key === 'T1') {
-                        return Promise.resolve('TEAM1').catch((error) => {});
+                        return Promise.resolve('TEAM1').catch(() => {});
                     }
                     if (listId === 'S_CASETYPES' && key === 'CT1') {
-                        return Promise.resolve('CaseType1').catch((error) => {});
+                        return Promise.resolve('CaseType1').catch(() => {});
                     }
                     if (listId === 'S_STAGETYPES' && key === 'ST1') {
-                        return Promise.resolve('StageType1').catch((error) => {});
+                        return Promise.resolve('StageType1').catch(() => {});
                     }
-                    return Promise.reject().catch((error) => {});
+                    return Promise.reject().catch(() => {});
                 }),
                 fetch: jest.fn(async (listId) => {
                     if (listId === 'S_SYSTEM_CONFIGURATION') {

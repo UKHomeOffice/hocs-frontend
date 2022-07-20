@@ -5,9 +5,9 @@ jest.mock('axios', () => ({
     get: jest.fn((url) => {
         switch (url) {
             case '/api/case/case1234/':
-                return Promise.resolve({ data: { case: 'testCase' } }).catch((error) => {});
+                return Promise.resolve({ data: { case: 'testCase' } }).catch(() => {});
             case '/api/case/case1235/':
-                return Promise.reject({ response: 'Error' }).catch((error) => {});
+                return Promise.reject({ response: 'Error' }).catch(() => {});
         }
     })
 }));
@@ -20,7 +20,7 @@ describe('Case data helper', () => {
     let mockDispatch;
 
     beforeEach(() => {
-        mockDispatch = jest.fn(() => Promise.resolve().catch((error) => {}));
+        mockDispatch = jest.fn(() => Promise.resolve().catch(() => {}));
     });
 
     afterEach(() => {

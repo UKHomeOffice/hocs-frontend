@@ -61,7 +61,7 @@ async function getApprovalsStrings(approvalsArray, choices, fromStaticList) {
         );
 
         return `${businessLabel} ${approvalStatus}`;
-    })).catch((error) => {});
+    })).catch(() => {});
 }
 
 async function getContributionStrings(contributions, choices, fromStaticList) {
@@ -75,7 +75,7 @@ async function getContributionStrings(contributions, choices, fromStaticList) {
         );
 
         return `${businessLabel} ${status}`;
-    })).catch((error) => {});
+    })).catch(() => {});
 }
 
 async function parseApprovalRequests(approvalsJSONString, choices, fromStaticList) {
@@ -127,7 +127,7 @@ module.exports = async (template, { fromStaticList }) => {
             const stageName = await fromStaticList('S_STAGETYPES', stageId);
 
             return { title: stageName, items: stageFields };
-        })).catch((error) => {})).filter(stage => {
+        })).catch(() => {})).filter(stage => {
             return stage.items && stage.items.length > 0;
         }); // filter out empty sections
 
@@ -137,7 +137,7 @@ module.exports = async (template, { fromStaticList }) => {
             const { name } = fieldTemplate.props;
 
             return [name, await hydrateFields(fieldTemplate, template, fromStaticList, name)];
-        }, {})).catch((error) => {}))
+        }, {})).catch(() => {}))
         .filter(([_, value]) => value) // filter out any hidden or empty fields
         .reduce((map, [name, value]) => { // assemble the hydrated fields into a map
             map[name] = value;

@@ -36,11 +36,11 @@ describe('standard lines middlware', () => {
                 listService: {
                     fetch: jest.fn(async (list) => {
                         if (list === 'TOPICS') {
-                            return Promise.resolve(['MOCK_TOPICS']).catch((error) => {});
+                            return Promise.resolve(['MOCK_TOPICS']).catch(() => {});
                         } else if (list === 'DCU_POLICY_TEAM_FOR_TOPIC') {
-                            return Promise.resolve(['MOCK_TEAMS']).catch((error) => {});
+                            return Promise.resolve(['MOCK_TEAMS']).catch(() => {});
                         }
-                        return Promise.reject().catch((error) => {});
+                        return Promise.reject().catch(() => {});
                     })
                 },
                 user: mockUser,
@@ -52,7 +52,7 @@ describe('standard lines middlware', () => {
         });
 
         it('should call next with an error if unable to retrieve topics data', async () => {
-            req.listService.fetch.mockImplementation(() => Promise.reject('MOCK_ERROR').catch((error) => {}));
+            req.listService.fetch.mockImplementation(() => Promise.reject('MOCK_ERROR').catch(() => {}));
             await getUsersStandardLines(req, res, next);
             expect(res.locals.standardLines).not.toBeDefined();
             expect(next).toHaveBeenCalled();
@@ -62,9 +62,9 @@ describe('standard lines middlware', () => {
         it('should call next with an error if unable to retrieve topics data', async () => {
             req.listService.fetch.mockImplementation((list ) => {
                 if (list === 'TOPICS') {
-                    return Promise.resolve(['MOCK_TOPICS']).catch((error) => {});
+                    return Promise.resolve(['MOCK_TOPICS']).catch(() => {});
                 }
-                return Promise.reject('MOCK_ERROR').catch((error) => {});
+                return Promise.reject('MOCK_ERROR').catch(() => {});
             });
             await getUsersStandardLines(req, res, next);
             expect(res.locals.standardLines).not.toBeDefined();
@@ -85,7 +85,7 @@ describe('standard lines middlware', () => {
 
         it('should call the get method on the info service', async () => {
             User.createHeaders.mockImplementation(() => headers);
-            infoService.get.mockImplementation(() => Promise.resolve(MOCK_STANDARD_LINE).catch((error) => {}));
+            infoService.get.mockImplementation(() => Promise.resolve(MOCK_STANDARD_LINE).catch(() => {}));
             await getUsersStandardLines(req, res, next);
             expect(infoService.get).toHaveBeenCalledWith(`/user/${req.user.uuid}/standardLine`, { }, { headers: headers });
             expect(res.locals.standardLines).toEqual(
@@ -113,11 +113,11 @@ describe('standard lines middlware', () => {
                 listService: {
                     fetch: jest.fn(async (list) => {
                         if (list === 'TOPICS') {
-                            return Promise.resolve(['MOCK_TOPICS']).catch((error) => {});
+                            return Promise.resolve(['MOCK_TOPICS']).catch(() => {});
                         } else if (list === 'DCU_POLICY_TEAM_FOR_TOPIC') {
-                            return Promise.resolve(['MOCK_TEAMS']).catch((error) => {});
+                            return Promise.resolve(['MOCK_TEAMS']).catch(() => {});
                         }
-                        return Promise.reject().catch((error) => {});
+                        return Promise.reject().catch(() => {});
                     })
                 },
                 requestId: 'reqid',
@@ -128,7 +128,7 @@ describe('standard lines middlware', () => {
         });
 
         it('should call next with an error if unable to retrieve topics data', async () => {
-            req.listService.fetch.mockImplementation(() => Promise.reject('MOCK_ERROR').catch((error) => {}));
+            req.listService.fetch.mockImplementation(() => Promise.reject('MOCK_ERROR').catch(() => {}));
             await getAllStandardLines(req, res, next);
             expect(res.locals.standardLines).not.toBeDefined();
             expect(next).toHaveBeenCalled();

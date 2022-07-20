@@ -79,7 +79,7 @@ describe('when the skip middleware is called', () => {
             it('should call the next method with the error detail', async () => {
                 expect.assertions(4);
 
-                tenantConfig.layoutConfig.mockImplementationOnce(() => Promise.reject('Error').catch((error) => {}));
+                tenantConfig.layoutConfig.mockImplementationOnce(() => Promise.reject('Error').catch(() => {}));
 
                 await autoCreateAllocateApi(req, res, next);
 
@@ -141,7 +141,7 @@ describe('when the skip middleware is called', () => {
             it('should call the next method with the error detail', async () => {
                 expect.assertions(4);
 
-                tenantConfig.layoutConfig.mockImplementationOnce(() => Promise.reject('Error').catch((error) => {}));
+                tenantConfig.layoutConfig.mockImplementationOnce(() => Promise.reject('Error').catch(() => {}));
 
                 await autoCreateAllocateBrowser(req, res, next);
 
