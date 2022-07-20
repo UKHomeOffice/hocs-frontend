@@ -125,7 +125,7 @@ async function allocateToTeamMember(req, res, next) {
                 headers: User.createHeaders(req.user)
             }])
             .map(async options => sendAllocateUserRequest(req, res, options));
-        await Promise.all(requests).catch((error) => logger.error(error));
+        await Promise.all(requests).catch((error) => {});
     }
     next();
 }
@@ -161,7 +161,7 @@ async function moveTeam(req, res, next) {
                 ])
                 .map(async options => sendMoveTeamRequest(req, res, options));
 
-        await Promise.all([...updateCaseDataRequests, ...sendMoveTeamRequests]).catch((error) => logger.error(error));
+        await Promise.all([...updateCaseDataRequests, ...sendMoveTeamRequests]).catch((error) => {});
     }
     logger.debug('MOVING_CASE_TEAMS', { selected_cases, selected_team });
 
@@ -180,7 +180,7 @@ async function allocateToUser(req, res, next) {
                 headers: User.createHeaders(req.user)
             }])
             .map(async options => sendAllocateUserRequest(req, res, options));
-        await Promise.all(requests).catch((error) => logger.error(error));
+        await Promise.all(requests).catch((error) => {});
     }
     next();
 }
@@ -221,7 +221,7 @@ async function unallocate(req, res, next) {
                 headers: User.createHeaders(req.user)
             }])
             .map(async options => sendAllocateUserRequest(req, res, options));
-        await Promise.all(requests).catch((error) => logger.error(error));
+        await Promise.all(requests).catch((error) => {});
     }
     next();
 }

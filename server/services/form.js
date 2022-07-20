@@ -126,9 +126,9 @@ async function hydrateField(field, req) {
         } else if (sections) {
             const sectionRequests = sections.map(async section => {
                 const fieldRequests = section.items.map(async item => await hydrateField(item, req));
-                await Promise.all(fieldRequests).catch((error) => logger.error(error));
+                await Promise.all(fieldRequests).catch((error) => {});
             });
-            await Promise.all(sectionRequests).catch((error) => logger.error(error));
+            await Promise.all(sectionRequests).catch((error) => {});
         } else if (somuType) {
             const { choices, caseType, type } = somuType;
 
@@ -161,7 +161,7 @@ const hydrateFields = async (req, res, next) => {
         const requests = await schema.fields.map(async (field) => await hydrateField(field, req));
 
         try {
-            await Promise.all(requests).catch((error) => logger.error(error));
+            await Promise.all(requests).catch((error) => {});
         } catch (error) {
             if (error instanceof AuthenticationError) {
                 return next(error);

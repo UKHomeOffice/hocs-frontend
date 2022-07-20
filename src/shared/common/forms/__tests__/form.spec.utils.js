@@ -4,9 +4,9 @@ export const mockRequestClientValidationError = Promise.resolve({
     data: {
         errors: {}
     }
-}).catch((error) => logger.error(error));
+}).catch((error) => {});
 export const mockRequestClientNoRedirect = Promise.resolve({
     data: {
         redirect: ENDPOINT_SUCCEED_NO_REDIRECT
     }
-}).catch((error) => logger.error(error));
+}).catch((error) => {});

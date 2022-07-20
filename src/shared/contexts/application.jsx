@@ -105,9 +105,9 @@ export class ApplicationProvider extends Component {
             dispatch: action => {
                 try {
                     this.setState(state => reducer(state, action));
-                    return Promise.resolve().catch((error) => logger.error(error));
+                    return Promise.resolve().catch((error) => {});
                 } catch (error) {
-                    return Promise.reject(error).catch((error) => logger.error(error));
+                    return Promise.reject(error).catch((error) => {});
                 }
             },
             hasRole: (role) => {

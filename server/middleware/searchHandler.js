@@ -55,7 +55,7 @@ async function handleSearch(req, res, next) {
 
         const workstackData = await Promise.all(response.data.stages
             .sort(sortObjectByProp(workstackCase => workstackCase.caseReference))
-            .map(bindDisplayElements(fromStaticList))).catch((error) => logger.error(error));
+            .map(bindDisplayElements(fromStaticList))).catch((error) => {});
         const { workstackTypeColumns } = await req.listService.fetch('S_SYSTEM_CONFIGURATION');
 
         const workstackTypeForSearch =

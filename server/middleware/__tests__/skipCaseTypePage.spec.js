@@ -33,7 +33,7 @@ describe('when the skip middleware is called', () => {
         it('should send a callback URL', async () => {
             expect.assertions(2);
             const caseTypes = [{ key: 'casetype1' }];
-            req.listService.fetch.mockImplementation(() => Promise.resolve(caseTypes).catch((error) => logger.error(error)));
+            req.listService.fetch.mockImplementation(() => Promise.resolve(caseTypes).catch((error) => {}));
             const responseData = { redirect: `/action/create/${caseTypes[0].key}/DOCUMENT` };
 
             await skipCaseTypePageApi(req, res, next);
@@ -44,7 +44,7 @@ describe('when the skip middleware is called', () => {
 
         it('should call next with an error msg when list service is down', async () => {
             const mockError = new Error('TEST_ERROR');
-            req.listService.fetch.mockReturnValue(Promise.reject(mockError).catch((error) => logger.error(error)));
+            req.listService.fetch.mockReturnValue(Promise.reject(mockError).catch((error) => {}));
 
             await skipCaseTypePageApi(req, res, next);
 
@@ -74,7 +74,7 @@ describe('when the skip middleware is called', () => {
 
         it('should not redirect when there are multiple case types', async () => {
             const caseTypes = [{ key: 'casetype1' }, { key: 'casetype2' }, { key: 'casetype3' }];
-            req.listService.fetch.mockImplementation(() => Promise.resolve(caseTypes).catch((error) => logger.error(error)));
+            req.listService.fetch.mockImplementation(() => Promise.resolve(caseTypes).catch((error) => {}));
 
             await skipCaseTypePageApi(req, res, next);
 
@@ -86,7 +86,7 @@ describe('when the skip middleware is called', () => {
     describe('and it is a page route', () => {
         it('should send a redirect to the create casetype/document url', async () => {
             const caseTypes = [{ key: 'casetype1' }];
-            req.listService.fetch.mockImplementation(() => Promise.resolve(caseTypes).catch((error) => logger.error(error)));
+            req.listService.fetch.mockImplementation(() => Promise.resolve(caseTypes).catch((error) => {}));
 
             await skipCaseTypePage(req, res, next);
             expect(redirect).toHaveBeenCalledWith(`/action/create/${caseTypes[0].key}/DOCUMENT`);
@@ -94,7 +94,7 @@ describe('when the skip middleware is called', () => {
 
         it('should call next with an error msg when list service is down', async () => {
             const mockError = new Error('TEST_ERROR');
-            req.listService.fetch.mockReturnValue(Promise.reject(mockError).catch((error) => logger.error(error)));
+            req.listService.fetch.mockReturnValue(Promise.reject(mockError).catch((error) => {}));
 
             await skipCaseTypePage(req, res, next);
 
@@ -124,7 +124,7 @@ describe('when the skip middleware is called', () => {
 
         it('should not redirect when there are multiple case types', async () => {
             const caseTypes = [{ key: 'casetype1' }, { key: 'casetype2' }, { key: 'casetype3' }];
-            req.listService.fetch.mockImplementation(() => Promise.resolve(caseTypes).catch((error) => logger.error(error)));
+            req.listService.fetch.mockImplementation(() => Promise.resolve(caseTypes).catch((error) => {}));
 
             await skipCaseTypePage(req, res, next);
 

@@ -126,7 +126,7 @@ describe('The people component', () => {
         page
     };
 
-    const mockDispatch = jest.fn(() => Promise.resolve().catch((error) => logger.error(error)));
+    const mockDispatch = jest.fn(() => Promise.resolve().catch((error) => {}));
 
     test('should render successfully with 5 correspondent\'s', () => {
 

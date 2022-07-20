@@ -73,7 +73,7 @@ const initialise = async (lists = {}, clients = {}, initialState = {}) => {
             logger.error('INITIALISE_STATIC_LIST_FAILURE', { list: listId, message: error.message, stack: error.stack });
             handleFailure(listId);
         }
-    })).catch((error) => logger.error(error));
+    })).catch((error) => {});
 
     scheduleListRefresh(lists, flush);
 };

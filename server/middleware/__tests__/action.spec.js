@@ -37,7 +37,7 @@ describe('Action middleware', () => {
         it('should redirect if callbackUrl returned from performAction', async () => {
             const actionService = require('../../services/action.js');
             actionService.performAction.mockImplementation(() => {
-                return Promise.resolve({ callbackUrl: '/' }).catch((error) => logger.error(error));
+                return Promise.resolve({ callbackUrl: '/' }).catch((error) => {});
             });
             await actionResponseMiddleware(req, res, next);
             expect(res.redirect).toHaveBeenCalled();
@@ -47,7 +47,7 @@ describe('Action middleware', () => {
         it('should add confirmation to res.locals if returned from performAction', async () => {
             const actionService = require('../../services/action.js');
             actionService.performAction.mockImplementation(() => {
-                return Promise.resolve({ confirmation: 'Success!' }).catch((error) => logger.error(error));
+                return Promise.resolve({ confirmation: 'Success!' }).catch((error) => {});
             });
             await actionResponseMiddleware(req, res, next);
             expect(res.locals.confirmation).toBeDefined();
@@ -59,7 +59,7 @@ describe('Action middleware', () => {
             const actionService = require('../../services/action.js');
             const mockError = new Error('TEST_ERROR');
             actionService.performAction.mockImplementation(() => {
-                return Promise.reject(mockError).catch((error) => logger.error(error));
+                return Promise.reject(mockError).catch((error) => {});
             });
             await actionResponseMiddleware(req, res, next);
             expect(next).toHaveBeenCalled();
@@ -100,7 +100,7 @@ describe('Action middleware', () => {
         it('should redirect if callbackUrl returned from performAction', async () => {
             const actionService = require('../../services/action.js');
             actionService.performAction.mockImplementation(() => {
-                return Promise.resolve({ callbackUrl: '/' }).catch((error) => logger.error(error));
+                return Promise.resolve({ callbackUrl: '/' }).catch((error) => {});
             });
             await apiActionResponseMiddleware(req, res, next);
             expect(res.status).toHaveBeenCalled();
@@ -112,7 +112,7 @@ describe('Action middleware', () => {
         it('should add confirmation to res.locals if returned from performAction', async () => {
             const actionService = require('../../services/action.js');
             actionService.performAction.mockImplementation(() => {
-                return Promise.resolve({ confirmation: 'Success!' }).catch((error) => logger.error(error));
+                return Promise.resolve({ confirmation: 'Success!' }).catch((error) => {});
             });
             await apiActionResponseMiddleware(req, res, next);
             expect(res.status).toHaveBeenCalled();
@@ -125,7 +125,7 @@ describe('Action middleware', () => {
             const actionService = require('../../services/action.js');
             const mockError = new Error('TEST_ERROR');
             actionService.performAction.mockImplementation(() => {
-                return Promise.reject(mockError).catch((error) => logger.error(error));
+                return Promise.reject(mockError).catch((error) => {});
             });
             await apiActionResponseMiddleware(req, res, next);
             expect(next).toHaveBeenCalled();

@@ -6,7 +6,7 @@ import { render, screen } from '@testing-library/react';
 
 describe('Form back button component', () => {
 
-    const mockDispatch = jest.fn(() => Promise.resolve().catch((error) => logger.error(error)));
+    const mockDispatch = jest.fn(() => Promise.resolve().catch((error) => {}));
     const mockHistory = {};
 
     beforeEach(() => {

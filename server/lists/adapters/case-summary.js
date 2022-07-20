@@ -43,7 +43,7 @@ const formatCaseActions = async (caseActions, fetchList) => Promise.all(
                 items: await actionSummaryAdapterFactory(key, caseActions, fetchList)
             };
         }
-    )).catch((error) => logger.error(error));
+    )).catch((error) => {});
 
 const formatValueOnType = ({ label, value, type, choices }) => {
     switch (type) {
@@ -65,14 +65,14 @@ const createDeadlines = async (deadlines, fromStaticList) => await Promise.all(O
     .map(async ([stageId, deadline]) => ({
         label: await fromStaticList('S_STAGETYPES', stageId),
         value: formatDate(deadline)
-    }))).catch((error) => logger.error(error));
+    }))).catch((error) => {});
 
 const getActiveStages = async (deadlines, fromStaticList) => await Promise.all(deadlines
     .map(async ({ stage: stageId, assignedToUserUUID: userId, assignedToTeamUUID: teamId }) => ({
         stage: await fromStaticList('S_STAGETYPES', stageId),
         assignedUser: await fromStaticList('S_USERS', userId),
         assignedTeam: await fromStaticList('S_TEAMS', teamId)
-    }))).catch((error) => logger.error(error));
+    }))).catch((error) => {});
 
 const getPrimaryTopic = (topic) => topic ? topic.label : null;
 

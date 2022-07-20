@@ -38,7 +38,7 @@ describe('Document panel component', () => {
     ];
 
     beforeEach(() => {
-        mockDispatch = jest.fn(() => Promise.resolve().catch((error) => logger.error(error)));
+        mockDispatch = jest.fn(() => Promise.resolve().catch((error) => {}));
     });
 
     afterEach(() => {
