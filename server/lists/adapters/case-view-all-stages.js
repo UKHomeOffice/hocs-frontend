@@ -17,8 +17,8 @@ const STATUS_OPTION = {
 const loadValue = async (value, choices, fromStaticList) => {
     const choice = await fromStaticList(choices, value);
     return choice ?
-        Promise.resolve(choice).catch((error) => { logger.error(error)}) :
-        Promise.resolve(value).catch((error) => { logger.error(error)});
+        Promise.resolve(choice).catch(() => {}) :
+        Promise.resolve(value).catch(() => {});
 };
 
 const getRequestStatus = (dueDate, { status, decision }) => {
