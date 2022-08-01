@@ -75,7 +75,7 @@ async function createCaseNote(req, res, next) {
         const caseNote = req.body.caseNote?.trim();
         if (!caseNote) {
             res.locals.error = 'Case note must not be blank';
-            next();
+            return next();
         }
 
         await caseworkService.post(`/case/${req.params.caseId}/note`, {
@@ -85,6 +85,7 @@ async function createCaseNote(req, res, next) {
     } catch (error) {
         next(new Error(`Failed to attach case note to case ${req.params.caseId}`));
     }
+
     next();
 }
 
@@ -93,7 +94,7 @@ async function updateCaseNote({ body: { caseNote }, params: { caseId, noteId }, 
         caseNote = caseNote?.trim();
         if (!caseNote) {
             res.locals.error = 'Case note must not be blank';
-            next();
+            return next();
         }
 
         const updated = await caseworkService.put(`/case/${caseId}/note/${noteId}`, {
