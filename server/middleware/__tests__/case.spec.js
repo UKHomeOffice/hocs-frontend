@@ -419,6 +419,7 @@ describe('Case middleware', () => {
             await createCaseNote(req, res, next);
             expect(next).toHaveBeenCalled();
             expect(res.locals.error).toEqual('Case note must not be blank');
+            expect(caseworkService.post.mock.calls.length).toEqual(0);
         });
 
 
@@ -428,6 +429,7 @@ describe('Case middleware', () => {
             await createCaseNote(req, res, next);
             expect(next).toHaveBeenCalled();
             expect(res.locals.error).toEqual('Case note must not be blank');
+            expect(caseworkService.post.mock.calls.length).toEqual(0);
         });
 
         it('should call next after successful post', async () => {
@@ -487,6 +489,7 @@ describe('Case middleware', () => {
             await updateCaseNote(req, res, next);
             expect(next).toHaveBeenCalled();
             expect(res.locals.error).toEqual('Case note must not be blank');
+            expect(caseworkService.put.mock.calls.length).toEqual(0);
         });
 
 
@@ -496,6 +499,7 @@ describe('Case middleware', () => {
             await updateCaseNote(req, res, next);
             expect(next).toHaveBeenCalled();
             expect(res.locals.error).toEqual('Case note must not be blank');
+            expect(caseworkService.put.mock.calls.length).toEqual(0);
         });
 
         it('should call next after successful post', async () => {
