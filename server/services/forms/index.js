@@ -193,6 +193,13 @@ const formDefinitions = {
                     next: {
                         action: 'CONFIRMATION_SUMMARY'
                     }
+                },
+                POGR2: {
+                    builder: formRepository.escalateCase,
+                    action: CREATE_CASE,
+                    next: {
+                        action: 'CONFIRMATION_SUMMARY'
+                    }
                 }
             }
         },
