@@ -590,14 +590,15 @@
       "component": "checkbox"
     }
   ],
-  "POGR": [{
-    "validation": [],
-    "props": {
-      "label": "Correspondent full name"
+  "POGR": [
+    {
+      "validation": [],
+      "props": {
+        "label": "Correspondent full name"
+      },
+      "name": "correspondent",
+      "component": "text"
     },
-    "name": "correspondent",
-    "component": "text"
-  },
     {
       "validation": [],
       "props": {
@@ -631,14 +632,6 @@
         "label": "Case reference"
       },
       "name": "reference",
-      "component": "text"
-    },
-    {
-      "validation": [],
-      "props": {
-        "label": "Complainant Home Office Reference"
-      },
-      "name": "ComplainantHORef",
       "component": "text"
     },
     {
