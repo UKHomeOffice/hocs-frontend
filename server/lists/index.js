@@ -1026,6 +1026,270 @@ module.exports = {
             endpoint: '/entity/list/SMC_COMP_ORIGIN',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
+        },
+        HMPO_COMPLAINT_CATEGORIES: {
+            client: 'INFO',
+            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        HMPO_COMPLAINT_CATEGORIES_ABI: {
+            client: 'INFO',
+            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_ABI',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        HMPO_COMPLAINT_CATEGORIES_CUSTOMER_COMMUNICATIONS: {
+            client: 'INFO',
+            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_CUSTOMER_COMMUNICATIONS',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        HMPO_COMPLAINT_CATEGORIES_DHL: {
+            client: 'INFO',
+            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_DHL',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        HMPO_COMPLAINT_CATEGORIES_DISCRIMINATORY: {
+            client: 'INFO',
+            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_DISCRIMINATORY',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        HMPO_COMPLAINT_CATEGORIES_FEDEX: {
+            client: 'INFO',
+            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_FEDEX',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        HMPO_COMPLAINT_CATEGORIES_EXAMINATION: {
+            client: 'INFO',
+            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_EXAMINATION',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        HMPO_COMPLAINT_CATEGORIES_CSMT: {
+            client: 'INFO',
+            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_CSMT',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        HMPO_COMPLAINT_CATEGORIES_COUNTER_SERVICES: {
+            client: 'INFO',
+            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_COUNTER_SERVICES',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        HMPO_COMPLAINT_CATEGORIES_POLICY: {
+            client: 'INFO',
+            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_POLICY',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        HMPO_COMPLAINT_CATEGORIES_ID_CHECKS: {
+            client: 'INFO',
+            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_ID_CHECKS',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        HMPO_COMPLAINT_CATEGORIES_NATIONALITY: {
+            client: 'INFO',
+            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_NATIONALITY',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        HMPO_COMPLAINT_CATEGORIES_DIGITAL: {
+            client: 'INFO',
+            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_DIGITAL',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        HMPO_COMPLAINT_CATEGORIES_PAPER: {
+            client: 'INFO',
+            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_PAPER',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        HMPO_COMPLAINT_CATEGORIES_PARTNERS_OTHER: {
+            client: 'INFO',
+            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_PARTNERS_OTHER',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        HMPO_COMPLAINT_CATEGORIES_POL: {
+            client: 'INFO',
+            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_POL',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        HMPO_COMPLAINT_CATEGORIES_QUALITY: {
+            client: 'INFO',
+            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_QUALITY',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        HMPO_COMPLAINT_CATEGORIES_ROYAL_MAIL: {
+            client: 'INFO',
+            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_ROYAL_MAIL',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        HMPO_COMPLAINT_CATEGORIES_TP_ADVICELINE: {
+            client: 'INFO',
+            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_TP_ADVICELINE',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        HMPO_COMPLAINT_CATEGORIES_OAB: {
+            client: 'INFO',
+            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_OAB',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        HMPO_COMPLAINT_CATEGORIES_SOPRA_STERIA: {
+            client: 'INFO',
+            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_SOPRA_STERIA',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        HMPO_COMPLAINT_CATEGORIES_SVS: {
+            client: 'INFO',
+            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_SVS',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        GRO_COMPLAINT_CATEGORIES: {
+            client: 'INFO',
+            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        GRO_COMPLAINT_CATEGORIES_CSMT: {
+            client: 'INFO',
+            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_CSMT',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        GRO_COMPLAINT_CATEGORIES_PRODUCTION_STANDARD: {
+            client: 'INFO',
+            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_PRODUCTION_STANDARD',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        GRO_COMPLAINT_CATEGORIES_PRODUCTION_PRIORITIES: {
+            client: 'INFO',
+            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_PRODUCTION_PRIORITIES',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        GRO_COMPLAINT_CATEGORIES_PRODUCTION_EXCEPTIONS: {
+            client: 'INFO',
+            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_PRODUCTION_EXCEPTIONS',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        GRO_COMPLAINT_CATEGORIES_PRODUCTION_PDF: {
+            client: 'INFO',
+            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_PRODUCTION_PDF',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        GRO_COMPLAINT_CATEGORIES_PRODUCTION_EMAIL_TEAM: {
+            client: 'INFO',
+            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_PRODUCTION_EMAIL_TEAM',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        GRO_COMPLAINT_CATEGORIES_PRODUCTION_CCU_POST_TEAM: {
+            client: 'INFO',
+            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_PRODUCTION_CCU_POST_TEAM',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        GRO_COMPLAINT_CATEGORIES_PRODUCTION_KIT: {
+            client: 'INFO',
+            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_PRODUCTION_KIT',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        GRO_COMPLAINT_CATEGORIES_PRODUCTION_INDEXING: {
+            client: 'INFO',
+            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_PRODUCTION_INDEXING',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        GRO_COMPLAINT_CATEGORIES_SD_FDU: {
+            client: 'INFO',
+            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_SD_FDU',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        GRO_COMPLAINT_CATEGORIES_SD_ENGAGEMENT: {
+            client: 'INFO',
+            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_SD_ENGAGEMENT',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        GRO_COMPLAINT_CATEGORIES_SYSTEMS: {
+            client: 'INFO',
+            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_SYSTEMS',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        GRO_COMPLAINT_CATEGORIES_ARC_ADOPTIONS: {
+            client: 'INFO',
+            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_ARC_ADOPTIONS',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        GRO_COMPLAINT_CATEGORIES_ARC_CASEWORK: {
+            client: 'INFO',
+            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_ARC_CASEWORK',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        GRO_COMPLAINT_CATEGORIES_POLICY: {
+            client: 'INFO',
+            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_POLICY',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        GRO_COMPLAINT_CATEGORIES_POLICY_BUSINESS: {
+            client: 'INFO',
+            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_POLICY_BUSINESS',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        GRO_COMPLAINT_CATEGORIES_THIRD_PARTY_DHL: {
+            client: 'INFO',
+            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_THIRD_PARTY_DHL',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        GRO_COMPLAINT_CATEGORIES_THIRD_PARTY_ROYAL_MAIL: {
+            client: 'INFO',
+            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_THIRD_PARTY_ROYAL_MAIL',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        GRO_COMPLAINT_CATEGORIES_THIRD_PARTY_MAIL: {
+            client: 'INFO',
+            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_THIRD_PARTY_MAIL',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        GRO_COMPLAINT_CATEGORIES_THIRD_PARTY_WORLD_PAY: {
+            client: 'INFO',
+            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_THIRD_PARTY_WORLD_PAY',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        GRO_COMPLAINT_CATEGORIES_OTHER: {
+            client: 'INFO',
+            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_OTHER',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
         }
     },
     clients: {
