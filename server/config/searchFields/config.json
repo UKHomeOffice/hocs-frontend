@@ -590,7 +590,60 @@
       "component": "checkbox"
     }
   ],
-  "POGR": [],
+  "POGR": [
+    {
+      "validation": [],
+      "props": {
+        "label": "Correspondent full name"
+      },
+      "name": "correspondent",
+      "component": "text"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Correspondent postcode"
+      },
+      "name": "correspondentPostcode",
+      "component": "text"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Correspondent email address"
+      },
+      "name": "correspondentEmail",
+      "component": "text"
+    },
+    {
+      "validation": [
+        "isValidDate",
+        "isBeforeToday"
+      ],
+      "props": {
+        "label": "Complainant date of birth"
+      },
+      "name": "ComplainantDOB",
+      "component": "date"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Case reference"
+      },
+      "name": "reference",
+      "component": "text"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Case type",
+        "choices": "CASE_TYPES_FOR_SEARCH"
+      },
+      "name": "caseTypes",
+      "component": "checkbox"
+    }
+  ],
   "SMC": [
     {
       "validation": [],
