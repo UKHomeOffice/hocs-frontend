@@ -24,10 +24,18 @@ describe('Form embedded wrapped component', () => {
                 collapsable: {
                     hintText: 'Test'
                 }
-            }
+            },
+            summary: [
+                {
+                    label: 'Test Field',
+                    attribute: 'TestField'
+                }
+            ]
         },
         dispatch = (() => {}),
-        fieldData = {},
+        fieldData = {
+            TestField: 'True',
+        },
         submitHandler = (() => {}),
         action = '',
         baseUrl = '';
