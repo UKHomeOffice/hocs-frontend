@@ -29,6 +29,33 @@ Object {
           />
         </form>
       </details>
+      <table
+        class="govuk-table"
+      >
+        <caption
+          class="govuk-table__caption margin-bottom--small"
+        >
+          Summary
+        </caption>
+        <tbody
+          class="govuk-table__body"
+        >
+          <tr
+            class="govuk-table__cell"
+          >
+            <th
+              class="govuk-table__header padding-left--small govuk-!-width-one-half"
+            >
+              Test Field
+            </th>
+            <td
+              class="govuk-table__cell"
+            >
+              True
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </body>,
   "container": <div>
@@ -56,6 +83,33 @@ Object {
         />
       </form>
     </details>
+    <table
+      class="govuk-table"
+    >
+      <caption
+        class="govuk-table__caption margin-bottom--small"
+      >
+        Summary
+      </caption>
+      <tbody
+        class="govuk-table__body"
+      >
+        <tr
+          class="govuk-table__cell"
+        >
+          <th
+            class="govuk-table__header padding-left--small govuk-!-width-one-half"
+          >
+            Test Field
+          </th>
+          <td
+            class="govuk-table__cell"
+          >
+            True
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],

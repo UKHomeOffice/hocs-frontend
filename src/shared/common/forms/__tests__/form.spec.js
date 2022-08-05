@@ -100,4 +100,39 @@ describe('Form component', () => {
         expect(screen.getByText('Expand')).toBeInTheDocument();
     });
 
+    test('should render summary when passed', async () => {
+        const mockFormSchemaWithSummary = {
+            summary: [
+                {
+                    label: 'Test Label',
+                    attribute: 'Test'
+                }
+            ]
+        };
+
+        const wrapper = render(<Form {...mockProps} schema={mockFormSchemaWithSummary}/>);
+        expect(wrapper).toBeDefined();
+        expect(screen.getByText('Summary')).toBeInTheDocument();
+    });
+
+    test('should render summary with data rows when passed', async () => {
+        const mockFormSchemaWithSummary = {
+            summary: [
+                {
+                    label: 'Test Label',
+                    attribute: 'Test'
+                }
+            ]
+        };
+        const mockData = {
+            Test: 'Test Value'
+        };
+
+        const wrapper = render(<Form {...mockProps} schema={mockFormSchemaWithSummary} data={mockData}/>);
+        expect(wrapper).toBeDefined();
+        expect(screen.getByText('Summary')).toBeInTheDocument();
+        expect(screen.getByText('Test Label')).toBeInTheDocument();
+        expect(screen.getByText('Test Value')).toBeInTheDocument();
+    });
+
 });

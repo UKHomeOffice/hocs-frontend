@@ -4,6 +4,7 @@ import Submit from './submit.jsx';
 import ErrorSummary from './error-summary.jsx';
 import { formComponentFactory, secondaryActionFactory } from './form-repository.jsx';
 import Ribbon from '../forms/ribbon.jsx';
+import Summary from './summary.jsx';
 
 class Form extends Component {
 
@@ -84,6 +85,15 @@ class Form extends Component {
             </form>);
     }
 
+    renderSummary() {
+        const {
+            schema: { summary },
+            data
+        } = this.props;
+
+        return summary && <Summary summary={summary} data={data}/>;
+    }
+
     render() {
         const {
             errors,
@@ -99,6 +109,7 @@ class Form extends Component {
                 }
                 {errors && <ErrorSummary errors={errors} />}
                 { this.renderForm() }
+                { this.renderSummary() }
             </>
         );
     }
