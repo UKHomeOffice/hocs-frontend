@@ -7,15 +7,6 @@ import { render } from '@testing-library/react';
 describe('Form embedded wrapped component', () => {
 
     const config = {
-        caseData: {
-            PaymentTypeConsolatory: true,
-            PaymentTypeExGratia: true,
-            AmountComplainantRequested: 100,
-            AmountBusinessRequested: 50,
-            OfferSentToComplainant: 50,
-            BusinessApprovedPayment: false,
-            ComplainantAccepted: false
-        },
         page: {
             params: {
                 caseId: '12345678-12345-12345-12345678'
@@ -28,7 +19,13 @@ describe('Form embedded wrapped component', () => {
                 caseId: '12345678-12345-12345-12345678'
             }
         },
-        schema = {},
+        schema = {
+            props: {
+                collapsable: {
+                    hintText: 'Test'
+                }
+            }
+        },
         dispatch = (() => {}),
         fieldData = {},
         submitHandler = (() => {}),
@@ -51,5 +48,6 @@ describe('Form embedded wrapped component', () => {
             </ApplicationProvider>
         );
         expect(wrapper).toBeDefined();
+        expect(wrapper).toMatchSnapshot();
     });
 });
