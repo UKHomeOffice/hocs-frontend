@@ -3,7 +3,6 @@ const apiFormRouter = require('./form');
 const apiDocumentRouter = require('./document');
 const apiActionRouter = require('./action');
 const apiCaseRouter = require('./case');
-const schemaRouter = require('./schema');
 const apiWorkstackRouter = require('./workstack');
 const apiKeepaliveRouter = require('./keepalive');
 const apiStandardLines = require('./standardLines');
@@ -16,7 +15,6 @@ router.use('/case', apiCaseRouter);
 router.use('/workstack', apiWorkstackRouter);
 router.use('/keepalive', apiKeepaliveRouter);
 router.use('/standard-lines', apiStandardLines);
-router.use('/schema', schemaRouter);
 
 router.use('*', apiErrorMiddleware);
 

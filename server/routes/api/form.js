@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { allocateCase, moveByDirection } = require('../../middleware/stage');
-const { getFormForAction, getFormForCase, getFormForStage, hydrateFields, getSomuType } = require('../../services/form');
+const { getFormForAction, getFormForCase, getFormForStage, hydrateFields, getSomuType, getGlobalFormForCase } = require('../../services/form');
 const { skipCaseTypePageApi } = require('../../middleware/skipCaseTypePage');
 const { autoCreateAllocateApi } = require('../../middleware/autoCreateAllocate');
 const { caseActionDataMiddleware } = require('../../middleware/case');
@@ -21,6 +21,9 @@ router.all('/case/:caseId/stage/:stageId/direction/:flowDirection', moveByDirect
     res.json({ redirect: `/case/${req.params.caseId}/stage/${req.params.stageId}` });
 });
 router.all(['/case/:caseId/stage/:stageId', '/case/:caseId/stage/:stageId/allocate'], getFormForStage);
+
+router.all(['/:formId/case/:caseId'],
+    getGlobalFormForCase);
 
 router.get([
     '/case/:caseId/stage/:stageId/caseAction/:caseActionType/:caseAction',
@@ -45,7 +48,8 @@ router.all([
     '/case/:caseId/stage/:stageId/entity/:entity/:context/:action',
     '/case/:caseId/stage/:stageId/entity/:entity/:action',
     '/case/:caseId/stage/:stageId/somu/:somuTypeUuid/:somuType/:somuCaseType/:action',
-    '/case/:caseId/stage/:stageId/somu/:somuTypeUuid/:somuType/:somuCaseType/item/:somuItemUuid/:action'
+    '/case/:caseId/stage/:stageId/somu/:somuTypeUuid/:somuType/:somuCaseType/item/:somuItemUuid/:action',
+    '/:formId/case/:caseId'
 ], hydrateFields);
 router.get([
     '/action/:workflow/:context/:action/',
@@ -56,7 +60,8 @@ router.get([
     '/case/:caseId/stage/:stageId/entity/:entity/:context/:action',
     '/case/:caseId/stage/:stageId/entity/:entity/:action',
     '/case/:caseId/stage/:stageId/somu/:somuTypeUuid/:somuType/:somuCaseType/:action',
-    '/case/:caseId/stage/:stageId/somu/:somuTypeUuid/:somuType/:somuCaseType/item/:somuItemUuid/:action'
+    '/case/:caseId/stage/:stageId/somu/:somuTypeUuid/:somuType/:somuCaseType/item/:somuItemUuid/:action',
+    '/:formId/case/:caseId'
 ], (req, res) => {
     res.status(200).send(req.form);
 });

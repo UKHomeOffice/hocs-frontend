@@ -20,8 +20,7 @@ const {
     caseConfigApiResponseMiddleware
 } = require('../../middleware/case');
 const { somuApiResponseMiddleware } = require('../../middleware/somu');
-const { getFormForCase, getFormForStage } = require('../../services/form');
-const { getFieldsForSchema } = require('../../services/schema');
+const { getFormForCase, getFormForStage, getGlobalFormForCase } = require('../../services/form');
 
 router.get('/:caseId/stage/:stageId/allocate', allocateCase);
 router.post('/:caseId/stage/:stageId/allocate/team',
@@ -74,8 +73,8 @@ router.post('/:caseId/note',
     }
 );
 
-router.post('/:caseId/stage/:stageId/schema/:schemaType/data',
-    getFieldsForSchema,
+router.post('/:caseId/stage/:stageId/form/:formId/data',
+    getGlobalFormForCase,
     fileMiddleware.any(),
     processMiddleware,
     caseDataUpdateMiddleware,

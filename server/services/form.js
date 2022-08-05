@@ -84,6 +84,22 @@ async function getFormSchemaFromWorkflowService(requestId, options, user) {
     return { form: { schema, data, meta: { caseReference, stageUUID, allocationNote: mockAllocationNote } } };
 }
 
+async function getGlobalFormSchemaFromWorkflowService(options, user) {
+    const { caseId, formId } = options;
+    const headers = User.createHeaders(user);
+
+    let response;
+    try {
+        response = await workflowService.get(`/case/${caseId}/form/${formId}`, { headers });
+    } catch (error) {
+        return { error: new Error(`Failed to retrieve form: ${error.response.status}`) };
+    }
+
+    const { stageUUID, caseReference, allocationNote } = response.data;
+    const { schema, data } = response.data.form;
+    return { form: { schema, data, meta: { caseReference, stageUUID, allocationNote } } };
+}
+
 async function getFormSchemaForCase(options) {
     const form = await formRepository.getFormForCase(options);
     return form;
@@ -287,11 +303,31 @@ const getFormForStage = async (req, res, next) => {
     }
 };
 
+const getGlobalFormForCase = async (req, res, next) => {
+    const logger = getLogger(req.requestId);
+    logger.info('GET_FORM', { ...req.params });
+
+    const { user } = req;
+    try {
+        const { form, error } = await getGlobalFormSchemaFromWorkflowService(req.params, user);
+        if (error) {
+            return next(error);
+        }
+
+        req.form = form;
+        next();
+    } catch (error) {
+        logger.error('WORKFLOW_FORM_FAILURE', { message: error.message, stack: error.stack });
+        return next(new FormServiceError('Failed to fetch form'));
+    }
+};
+
 module.exports = {
     getForm,
     getFormForAction,
     getFormForCase,
     getFormForStage,
+    getGlobalFormForCase,
     hydrateFields,
     getSomuType,
     getSomuItemsByType,
