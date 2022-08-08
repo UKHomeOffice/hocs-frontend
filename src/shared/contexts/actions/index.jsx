@@ -21,9 +21,9 @@ export function updateCaseSummary(data) {
     };
 }
 
-export function updateCaseConfig(data) {
+export function updateCaseTabs(data) {
     return {
-        type: types.UPDATE_CASE_CONFIG,
+        type: types.UPDATE_CASE_TABS,
         payload: data
     };
 }
@@ -182,7 +182,7 @@ export function unsetCaseNotes() {
 
 export function unsetCaseConfig() {
     return {
-        type: types.UNSET_CASE_CONFIG,
+        type: types.UNSET_CASE_TABS,
         payload: null
     };
 }

@@ -20,7 +20,7 @@ jest.mock('../../clients', () => ({
 }));
 
 const { caseworkService } = require('../../clients');
-const { caseDataMiddleware, createCaseNote, updateCaseNote, caseConfigMiddleware } = require('../case');
+const { caseDataMiddleware, createCaseNote, updateCaseNote, caseTabMiddleware } = require('../case');
 
 describe('Case middleware', () => {
 
@@ -178,7 +178,7 @@ describe('Case middleware', () => {
         });
     });
 
-    describe('Case config response middleware', () => {
+    describe('Case tab response middleware', () => {
 
         let req = {};
         let res = {};
@@ -196,8 +196,8 @@ describe('Case middleware', () => {
                 },
                 listService: {
                     fetch: jest.fn(async (list) => {
-                        if (list === 'CASE_CONFIG') {
-                            return Promise.resolve('MOCK_CONFIG');
+                        if (list === 'CASE_TYPE') {
+                            return Promise.resolve('MOCK_TYPE');
                         }
                         return Promise.reject();
                     })
@@ -211,18 +211,18 @@ describe('Case middleware', () => {
             next.mockReset();
         });
 
-        it('should add case config to res.locals if returned from call to API', async () => {
-            await caseConfigMiddleware(req, res, next);
-            expect(res.locals.caseConfig).toBeDefined();
-            expect(res.locals.caseConfig).toEqual('MOCK_CONFIG');
-            expect(next).toHaveBeenCalled();
+        it('should add case tabs to res.locals if returned from call to API', async () => {
+            await caseTabMiddleware(req, res, next);
+            expect(res.locals.caseTabs).toBeDefined();
+            expect(res.locals.caseTabs).toEqual([]);
         });
 
         it('should call next with error if call to API fails', async () => {
             const mockError = new Error('Something went wrong');
             req.listService.fetch.mockImplementation(() => Promise.reject(mockError));
-            await caseConfigMiddleware(req, res, next);
-            expect(res.locals.caseConfig).not.toBeDefined();
+
+            await caseTabMiddleware(req, res, next);
+            expect(res.locals.caseTabs).not.toBeDefined();
             expect(next).toHaveBeenCalled();
             expect(next).toHaveBeenCalledWith(mockError);
         });

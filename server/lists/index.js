@@ -1,7 +1,8 @@
 const { caseworkService, infoService, workflowService } = require('../clients/index');
 const listService = require('../services/list');
 const statics = require('./adapters/statics');
-const caseTypeAdapter = require('./adapters/case-types');
+const caseTypeAdapter = require('./adapters/case-type');
+const caseTypesAdapter = require('./adapters/case-types');
 const caseTypeCommaSeparatedAdapter = require('./adapters/case-types-comma-separated');
 const workstack = require('./adapters/workstacks');
 const topicAdapter = require('./adapters/topics');
@@ -428,12 +429,12 @@ module.exports = {
         CASE_TYPES: {
             client: 'INFO',
             endpoint: '/caseType?bulkOnly=false',
-            adapter: caseTypeAdapter
+            adapter: caseTypesAdapter
         },
         CASE_TYPES_BULK: {
             client: 'INFO',
             endpoint: '/caseType?bulkOnly=true',
-            adapter: caseTypeAdapter
+            adapter: caseTypesAdapter
         },
         CASE_TYPES_COMMA_SEPARATED_FOR_SEARCH: {
             client: 'INFO',
@@ -443,7 +444,7 @@ module.exports = {
         CASE_TYPES_FOR_SEARCH: {
             client: 'INFO',
             endpoint: '/caseType?bulkOnly=false&initialCaseType=false',
-            adapter: caseTypeAdapter
+            adapter: caseTypesAdapter
         },
         COUNTRIES_CURRENT: {
             client: 'INFO',
@@ -644,15 +645,15 @@ module.exports = {
             endpoint: '/case/${caseId}/summary',
             adapter: caseSummaryAdapter
         },
-        CASE_CONFIG: {
-            client: 'CASEWORK',
-            endpoint: '/case/${caseId}/config',
-            adapter: (data) => data
-        },
         CASE_DATA: {
             client: 'CASEWORK',
-            endpoint: '/case/${caseId}/',
+            endpoint: '/case/${caseId}',
             adapter: caseDataAdapter
+        },
+        CASE_TYPE: {
+            client: 'CASEWORK',
+            endpoint: '/case/${caseId}/type',
+            adapter: caseTypeAdapter
         },
         CASE_ACTIONS: {
             client: 'CASEWORK',

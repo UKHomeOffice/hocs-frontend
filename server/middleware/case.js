@@ -3,6 +3,7 @@ const { caseworkService, workflowService } = require('../clients');
 const User = require('../models/user');
 const { formatDate } = require('../libs/dateHelpers');
 const { logger } = require('../libs/logger');
+const { fetchCaseTabsForCaseType } = require('../config/caseTabs/caseTabs');
 
 async function caseResponseMiddleware(req, res, next) {
     const { form, user } = req;
@@ -44,17 +45,18 @@ function caseSummaryApiResponseMiddleware(req, res) {
     return res.status(200).json(res.locals.summary);
 }
 
-async function caseConfigMiddleware(req, res, next) {
+async function caseTabMiddleware(req, res, next) {
     try {
-        res.locals.caseConfig = await req.listService.fetch('CASE_CONFIG', req.params);
+        const type = await req.listService.fetch('CASE_TYPE', req.params);
+        res.locals.caseTabs = fetchCaseTabsForCaseType(type);
         next();
     } catch (error) {
         next(error);
     }
 }
 
-function caseConfigApiResponseMiddleware(req, res) {
-    return res.status(200).json(res.locals.caseConfig);
+async function caseTabApiResponseMiddleware(req, res) {
+    return res.status(200).json(res.locals.caseTabs);
 }
 
 async function caseDataMiddleware(req, res, next) {
@@ -208,6 +210,6 @@ module.exports = {
     caseDataApiResponseMiddleware,
     caseDataMiddleware,
     caseDataUpdateMiddleware,
-    caseConfigMiddleware,
-    caseConfigApiResponseMiddleware,
+    caseTabMiddleware,
+    caseTabApiResponseMiddleware
 };

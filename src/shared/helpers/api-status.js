@@ -31,8 +31,6 @@ const status = {
     REQUEST_CASE_CORRESPONDENTS_ALL_FAILURE: { display: 'Unable to fetch case correspondents', level: 0, type: 'ERROR', timeoutPeriod: timeout.ERROR },
     REQUEST_CASE_SUMMARY_SUCCESS: { display: 'Case summary received', level: 3, type: 'OK', timeoutPeriod: timeout.STANDARD },
     REQUEST_CASE_SUMMARY_FAILURE: { display: 'Unable to fetch case summary', level: 0, type: 'ERROR', timeoutPeriod: timeout.ERROR },
-    REQUEST_CASE_CONFIG_SUCCESS: { display: 'Case config received', level: 1, type: 'OK', timeoutPeriod: timeout.STANDARD },
-    REQUEST_CASE_CONFIG_FAILURE: { display: 'Unable to fetch case config', level: 0, type: 'ERROR', timeoutPeriod: timeout.ERROR },
     REQUEST_DASHBOARD_DATA: { display: 'Requesting dashboard', level: 1, type: 'OK', timeoutPeriod: timeout.STANDARD },
     REQUEST_DASHBOARD_DATA_SUCCESS: { display: 'Dashboard data received', level: 3, type: 'OK', timeoutPeriod: timeout.STANDARD },
     REQUEST_DASHBOARD_DATA_FAILURE: { display: 'Unable to fetch dashboard', level: 0, type: 'ERROR', timeoutPeriod: timeout.ERROR },
