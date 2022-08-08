@@ -1,0 +1,276 @@
+{
+  "BF": [
+    {
+      "type": "DOCUMENTS",
+      "label": "Documents"
+    },
+    {
+      "type": "SUMMARY",
+      "label": "Summary"
+    },
+    {
+      "type": "TIMELINE",
+      "label": "Timeline"
+    },
+    {
+      "type": "PEOPLE",
+      "label": "People"
+    },
+    {
+      "type": "ACTIONS",
+      "label": "Actions"
+    },
+    {
+      "type": "EX_GRATIA",
+      "label": "Ex-Gratia",
+      "screen": "EX_GRATIA_TAB"
+    }
+  ],
+  "BF2": [
+    {
+      "type": "DOCUMENTS",
+      "label": "Documents"
+    },
+    {
+      "type": "SUMMARY",
+      "label": "Summary"
+    },
+    {
+      "type": "TIMELINE",
+      "label": "Timeline"
+    },
+    {
+      "type": "PEOPLE",
+      "label": "People"
+    },
+    {
+      "type": "ACTIONS",
+      "label": "Actions"
+    },
+    {
+      "type": "EX_GRATIA",
+      "label": "Ex-Gratia",
+      "screen": "EX_GRATIA_TAB"
+    }
+  ],
+  "COMP": [
+    {
+      "type": "DOCUMENTS",
+      "label": "Documents"
+    },
+    {
+      "type": "SUMMARY",
+      "label": "Summary"
+    },
+    {
+      "type": "TIMELINE",
+      "label": "Timeline"
+    },
+    {
+      "type": "PEOPLE",
+      "label": "People"
+    }
+  ],
+  "COMP2": [
+    {
+      "type": "DOCUMENTS",
+      "label": "Documents"
+    },
+    {
+      "type": "SUMMARY",
+      "label": "Summary"
+    },
+    {
+      "type": "TIMELINE",
+      "label": "Timeline"
+    },
+    {
+      "type": "PEOPLE",
+      "label": "People"
+    }
+  ],
+  "DTEN": [
+    {
+      "type": "DOCUMENTS",
+      "label": "Documents"
+    },
+    {
+      "type": "SUMMARY",
+      "label": "Summary"
+    },
+    {
+      "type": "TIMELINE",
+      "label": "Timeline"
+    },
+    {
+      "type": "PEOPLE",
+      "label": "People"
+    }
+  ],
+  "FOI": [
+    {
+      "type": "DOCUMENTS",
+      "label": "Documents"
+    },
+    {
+      "type": "SUMMARY",
+      "label": "Summary"
+    },
+    {
+      "type": "TIMELINE",
+      "label": "Timeline"
+    },
+    {
+      "type": "ACTIONS",
+      "label": "Actions"
+    }
+  ],
+  "IEDET": [
+    {
+      "type": "DOCUMENTS",
+      "label": "Documents"
+    },
+    {
+      "type": "SUMMARY",
+      "label": "Summary"
+    },
+    {
+      "type": "TIMELINE",
+      "label": "Timeline"
+    },
+    {
+      "type": "PEOPLE",
+      "label": "People"
+    }
+  ],
+  "MIN": [
+    {
+      "type": "DOCUMENTS",
+      "label": "Documents"
+    },
+    {
+      "type": "SUMMARY",
+      "label": "Summary"
+    },
+    {
+      "type": "TIMELINE",
+      "label": "Timeline"
+    },
+    {
+      "type": "PEOPLE",
+      "label": "People"
+    }
+  ],
+  "MPAM": [
+    {
+      "type": "DOCUMENTS",
+      "label": "Documents"
+    },
+    {
+      "type": "SUMMARY",
+      "label": "Summary"
+    },
+    {
+      "type": "TIMELINE",
+      "label": "Timeline"
+    },
+    {
+      "type": "PEOPLE",
+      "label": "People"
+    }
+  ],
+  "MTS": [
+    {
+      "type": "DOCUMENTS",
+      "label": "Documents"
+    },
+    {
+      "type": "SUMMARY",
+      "label": "Summary"
+    },
+    {
+      "type": "TIMELINE",
+      "label": "Timeline"
+    },
+    {
+      "type": "PEOPLE",
+      "label": "People"
+    }
+  ],
+  "POGR": [
+    {
+      "type": "DOCUMENTS",
+      "label": "Documents"
+    },
+    {
+      "type": "SUMMARY",
+      "label": "Summary"
+    },
+    {
+      "type": "TIMELINE",
+      "label": "Timeline"
+    },
+    {
+      "type": "PEOPLE",
+      "label": "People"
+    }
+  ],
+  "TO": [
+    {
+      "type": "DOCUMENTS",
+      "label": "Documents"
+    },
+    {
+      "type": "SUMMARY",
+      "label": "Summary"
+    },
+    {
+      "type": "TIMELINE",
+      "label": "Timeline"
+    },
+    {
+      "type": "PEOPLE",
+      "label": "People"
+    }
+  ],
+  "TRO": [
+    {
+      "type": "DOCUMENTS",
+      "label": "Documents"
+    },
+    {
+      "type": "SUMMARY",
+      "label": "Summary"
+    },
+    {
+      "type": "TIMELINE",
+      "label": "Timeline"
+    },
+    {
+      "type": "PEOPLE",
+      "label": "People"
+    }
+  ],
+  "SMC": [
+    {
+      "type": "DOCUMENTS",
+      "label": "Documents"
+    },
+    {
+      "type": "SUMMARY",
+      "label": "Summary"
+    },
+    {
+      "type": "TIMELINE",
+      "label": "Timeline"
+    },
+    {
+      "type": "PEOPLE",
+      "label": "People"
+    },
+    {
+      "type": "ACTIONS",
+      "label": "Actions"
+    }
+  ]
+}

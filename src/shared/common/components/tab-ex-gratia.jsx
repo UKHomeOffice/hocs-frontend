@@ -11,7 +11,7 @@ import {
 import axios from 'axios';
 import FormEmbeddedWrapped from '../forms/form-embedded-wrapped.jsx';
 
-const TabExGratia = () => {
+const TabExGratia = (props) => {
     const { dispatch, page } = useContext(Context);
     const [form, setForm] = useState(null);
     const [error, setError] = useState(null);
@@ -24,10 +24,10 @@ const TabExGratia = () => {
     }, []);
 
     const getForm = () => {
-        let schemaType = 'EX_GRATIA_TAB';
+        const { screen } = props;
 
         dispatch(updateApiStatus(status.REQUEST_FORM))
-            .then(() => axios.get(`/api/form/${schemaType}/case/${page.params.caseId}`))
+            .then(() => axios.get(`/api/form/${screen}/case/${page.params.caseId}`))
             .then(({ data }) => setForm(data))
             .then(() => dispatch(updateApiStatus(status.REQUEST_FORM_SUCCESS)));
     };
@@ -36,8 +36,7 @@ const TabExGratia = () => {
         return React.useCallback(e => {
             e.preventDefault();
             setWrappedState({ submittingForm: true });
-
-            let schemaType = 'EX_GRATIA_TAB';
+            const { screen } = props;
 
             // eslint-disable-next-line no-undef
             const formData = new FormData();
@@ -46,7 +45,7 @@ const TabExGratia = () => {
             }
             actionDispatch(updateApiStatus(status.UPDATE_CASE_DATA))
                 .then(() => {
-                    axios.post(`/api/case/${page.params.caseId}/stage/${page.params.stageId}/form/${schemaType}/data?type=EX_GRATIA_UPDATE`,
+                    axios.post(`/api/case/${page.params.caseId}/stage/${page.params.stageId}/form/${screen}/data?type=EX_GRATIA_UPDATE`,
                         formData,
                         { headers: { 'Content-Type': 'multipart/form-data' } })
                         .then((res) => {
@@ -97,6 +96,7 @@ const TabExGratia = () => {
 
 TabExGratia.propTypes = {
     page: PropTypes.object,
+    screen: PropTypes.string.isRequired
 };
 
 export default TabExGratia;

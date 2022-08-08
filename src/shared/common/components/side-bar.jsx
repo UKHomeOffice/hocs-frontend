@@ -8,7 +8,7 @@ import StageSummary from './stage-summary.jsx';
 import People from './people.jsx';
 import CaseActions from './case-actions.jsx';
 import TabExGratia from './tab-ex-gratia.jsx';
-import updateCaseConfig from '../../helpers/case-config-helpers';
+import updateCaseTabs from '../../helpers/case-tabs-helpers';
 
 class SideBar extends Component {
 
@@ -61,40 +61,67 @@ class SideBar extends Component {
         );
     }
 
+    renderActiveTab() {
+        const { active } = this.state;
+
+        const tab = this.getTabConfig(active);
+
+        switch(tab?.type) {
+            case 'DOCUMENTS':
+                return <DocumentPanel />;
+            case 'SUMMARY':
+                return <StageSummary />;
+            case 'TIMELINE':
+                return <CaseNotes />;
+            case 'PEOPLE':
+                return <People />;
+            case 'ACTIONS':
+                return <CaseActions />;
+            case 'EX_GRATIA':
+                return <TabExGratia screen={tab.screen} />;
+            default: return null;
+        }
+    }
+
     updateTabs() {
         const { page, dispatch } = this.props;
         if (page && page.params && page.params.caseId) {
-            updateCaseConfig(page.params.caseId, dispatch);
+            updateCaseTabs(page.params.caseId, dispatch);
         }
+        this.updateActiveTab();
     }
 
     updateActiveTab() {
-        const { caseConfig } = this.props;
+        const { caseTabs } = this.props;
+        const { active } = this.state;
 
-        if (caseConfig && !this.state.active) {
-            this.setState({ active: caseConfig.tabs[0].screen });
+        if (caseTabs && caseTabs.length > 0 && !active) {
+            this.setState({ active: caseTabs[0].type });
         }
     }
+
+    getTabConfig(type) {
+        const { caseTabs } = this.props;
+
+        return caseTabs
+            .find(tab => tab.type === type);
+    }
+
 
     render() {
         return (
             <Fragment>
-                { this.props.caseConfig && <div className='tabs'>
+                { this.props.caseTabs && <div className='tabs'>
                     <ul>
                         {
-                            this.props.caseConfig.tabs.map(tab => {
+                            this.props.caseTabs.map(tab => {
                                 return (
-                                    this.renderTabButton(tab.label, tab.screen)
+                                    this.renderTabButton(tab.label, tab.type)
                                 );
                             })
                         }
                     </ul>
-                    {this.isActive('DOCUMENTS') && <DocumentPanel />}
-                    {this.isActive('SUMMARY') && <StageSummary />}
-                    {this.isActive('TIMELINE') && <CaseNotes />}
-                    {this.isActive('PEOPLE') && <People />}
-                    {this.isActive('CASE_ACTIONS') && <CaseActions />}
-                    {this.isActive('EX_GRATIA') && <TabExGratia stages={this.props.summary.stages} />}
+                    {this.renderActiveTab()}
                 </div>}
             </Fragment>
         );
@@ -107,13 +134,13 @@ SideBar.propTypes = {
     page: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
     summary: PropTypes.object.isRequired,
-    caseConfig: PropTypes.object
+    caseTabs: PropTypes.array
 };
 
 const WrappedSideBar = props => (
     <ApplicationConsumer>
-        {({ page, activeTab, caseConfig, dispatch, summary }) =>
-            <SideBar {...props} page={page} activeTab={activeTab} caseConfig={caseConfig} dispatch={dispatch} summary={summary}/>}
+        {({ page, activeTab, caseTabs, dispatch, summary }) =>
+            <SideBar {...props} page={page} activeTab={activeTab} caseTabs={caseTabs} dispatch={dispatch} summary={summary}/>}
     </ApplicationConsumer>
 );
 
