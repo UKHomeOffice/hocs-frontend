@@ -1,12 +1,42 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Side bar component should hide the people tab for WCS 1`] = `
+exports[`Side bar component should not render tab when not enabled for type 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body>
-    <div />
+    <div>
+      <div
+        class="tabs"
+      >
+        <ul>
+          <li>
+            <a
+              class="tab"
+              href="/undefined/?activeTab=DOCUMENTS"
+            >
+              Documents
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
   </body>,
-  "container": <div />,
+  "container": <div>
+    <div
+      class="tabs"
+    >
+      <ul>
+        <li>
+          <a
+            class="tab"
+            href="/undefined/?activeTab=DOCUMENTS"
+          >
+            Documents
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>,
   "debug": [Function],
   "findAllByAltText": [Function],
   "findAllByDisplayValue": [Function],
@@ -142,9 +172,9 @@ Object {
           <li>
             <a
               class="tab"
-              href="/undefined/?activeTab=SUMMARY"
+              href="/undefined/?activeTab=TIMELINE"
             >
-              Summary
+              Timeline
             </a>
           </li>
         </ul>
@@ -181,9 +211,9 @@ Object {
         <li>
           <a
             class="tab"
-            href="/undefined/?activeTab=SUMMARY"
+            href="/undefined/?activeTab=TIMELINE"
           >
-            Summary
+            Timeline
           </a>
         </li>
       </ul>
@@ -268,7 +298,7 @@ Object {
         <ul>
           <li>
             <a
-              class="tab tab__active"
+              class="tab"
               href="/undefined/?activeTab=DOCUMENTS"
             >
               Documents
@@ -276,7 +306,7 @@ Object {
           </li>
           <li>
             <a
-              class="tab"
+              class="tab tab__active"
               href="/undefined/?activeTab=TIMELINE"
             >
               Timeline
@@ -289,12 +319,54 @@ Object {
           <div
             class="govuk-grid-column-full"
           >
-            <a
-              class="govuk-body govuk-link"
-              href="/case/some_case_id/stage/some_stage_id/entity/document/manage"
+            <details
+              class="govuk-details"
             >
-              Manage Documents
-            </a>
+              <summary
+                class="govuk-details__summary"
+              >
+                <span
+                  class="govuk-details__summary-text"
+                >
+                  Add case note
+                </span>
+              </summary>
+              <div
+                class="govuk-details__text"
+              >
+                <form
+                  action="/case/some_case_id/stage/some_stage_id/note"
+                >
+                  <div
+                    class="govuk-form-group"
+                  >
+                    <label
+                      class="govuk-label govuk-label--s"
+                      for="case-note"
+                      id="case-note-label"
+                    >
+                      Case note
+                    </label>
+                    <textarea
+                      class="govuk-textarea form-control-3-4"
+                      id="case-note"
+                      name="case-note"
+                      rows="5"
+                    />
+                  </div>
+                  <input
+                    class="govuk-button"
+                    type="submit"
+                    value="Add"
+                  />
+                </form>
+              </div>
+            </details>
+            <div
+              class="timeline"
+            >
+              <ul />
+            </div>
           </div>
         </div>
       </div>
@@ -307,7 +379,7 @@ Object {
       <ul>
         <li>
           <a
-            class="tab tab__active"
+            class="tab"
             href="/undefined/?activeTab=DOCUMENTS"
           >
             Documents
@@ -315,7 +387,7 @@ Object {
         </li>
         <li>
           <a
-            class="tab"
+            class="tab tab__active"
             href="/undefined/?activeTab=TIMELINE"
           >
             Timeline
@@ -328,12 +400,54 @@ Object {
         <div
           class="govuk-grid-column-full"
         >
-          <a
-            class="govuk-body govuk-link"
-            href="/case/some_case_id/stage/some_stage_id/entity/document/manage"
+          <details
+            class="govuk-details"
           >
-            Manage Documents
-          </a>
+            <summary
+              class="govuk-details__summary"
+            >
+              <span
+                class="govuk-details__summary-text"
+              >
+                Add case note
+              </span>
+            </summary>
+            <div
+              class="govuk-details__text"
+            >
+              <form
+                action="/case/some_case_id/stage/some_stage_id/note"
+              >
+                <div
+                  class="govuk-form-group"
+                >
+                  <label
+                    class="govuk-label govuk-label--s"
+                    for="case-note"
+                    id="case-note-label"
+                  >
+                    Case note
+                  </label>
+                  <textarea
+                    class="govuk-textarea form-control-3-4"
+                    id="case-note"
+                    name="case-note"
+                    rows="5"
+                  />
+                </div>
+                <input
+                  class="govuk-button"
+                  type="submit"
+                  value="Add"
+                />
+              </form>
+            </div>
+          </details>
+          <div
+            class="timeline"
+          >
+            <ul />
+          </div>
         </div>
       </div>
     </div>
