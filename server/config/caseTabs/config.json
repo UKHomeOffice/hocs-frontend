@@ -213,6 +213,34 @@
     {
       "type": "PEOPLE",
       "label": "People"
+    },
+    {
+      "type": "EX_GRATIA",
+      "label": "Ex-Gratia",
+      "screen": "POGR_EX_GRATIA_TAB"
+    }
+  ],
+  "POGR2": [
+    {
+      "type": "DOCUMENTS",
+      "label": "Documents"
+    },
+    {
+      "type": "SUMMARY",
+      "label": "Summary"
+    },
+    {
+      "type": "TIMELINE",
+      "label": "Timeline"
+    },
+    {
+      "type": "PEOPLE",
+      "label": "People"
+    },
+    {
+      "type": "EX_GRATIA",
+      "label": "Ex-Gratia",
+      "screen": "POGR_EX_GRATIA_TAB"
     }
   ],
   "TO": [
