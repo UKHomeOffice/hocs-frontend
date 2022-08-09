@@ -1291,6 +1291,24 @@ module.exports = {
             endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_OTHER',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
+        },
+        GRO_EX_GRATIA_TYPE_OF_REFUND: {
+            client: 'INFO',
+            endpoint: '/entity/list/POGR_GRO_EX_GRATIA_TYPE_OF_REFUND',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        GRO_EX_GRATIA_PRIMARY_REFUND_REASON: {
+            client: 'INFO',
+            endpoint: '/entity/list/POGR_GRO_EX_GRATIA_PRIMARY_REFUND_REASON',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        GRO_EX_GRATIA_PAYMENT_METHOD: {
+            client: 'INFO',
+            endpoint: '/entity/list/POGR_GRO_EX_GRATIA_PAYMENT_METHOD',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
         }
     },
     clients: {
