@@ -819,6 +819,36 @@ describe('Process middleware', () => {
             processMiddleware(req, res, next);
             expect(req.form.data).toEqual({ TestField1: 'Other', TestField2: 'Blah' });
         });
+        it('should process fields with visibility property condition outside of form data', () => {
+            const req = {
+                body: {
+                    'TestField1': 'Other',
+                    'TestField2': 'Blah',
+                },
+                query: {},
+                form: {
+                    schema: {
+                        fields: [
+                            {
+                                component: 'text-area',
+                                validation: ['required'],
+                                props: {
+                                    name: 'TestField2',
+                                    label: 'Test Field 2',
+                                    visibilityConditions: [{
+                                        conditionPropertyName: 'TestField1',
+                                        conditionPropertyValue: 'Other'
+                                    }]
+                                }
+                            }
+                        ]
+                    }
+                }
+            };
+            const res = {};
+            processMiddleware(req, res, next);
+            expect(req.form.data).toEqual({ TestField2: 'Blah' });
+        });
         it('should not process fields that are not visible with visibility property condition', () => {
             const req = {
                 body: {
