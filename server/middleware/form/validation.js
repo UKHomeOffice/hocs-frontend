@@ -2,8 +2,6 @@ const { FormSubmissionError, ValidationError } = require('../../models/error');
 const { DOCUMENT_WHITELIST, DOCUMENT_BULK_LIMIT, VALID_DAYS_RANGE } = require('../../config').forContext('server');
 const { MIN_ALLOWABLE_YEAR, MAX_ALLOWABLE_YEAR } = require('../../libs/dateHelpers');
 const getLogger = require('../../libs/logger');
-const showConditionFunctions = require('../../../src/shared/helpers/show-condition-functions');
-const hideConditionFunctions = require('../../../src/shared/helpers/hide-condition-functions');
 const { isFieldComponentOfType } = require('./fieldHelper');
 
 const validationErrors = {
@@ -428,8 +426,6 @@ const validateForm = (schema, data = {}) => {
         throw new ValidationError('Form validation failed', validationErrors);
     }
 
-
-
     function runFormValidator(validation, data) {
         let message = '';
         if (validation.message) {
@@ -483,17 +479,12 @@ const validateForm = (schema, data = {}) => {
         const {
             component,
             validation,
-            props: { name, label, sections, items, visibilityConditions, hideConditions, choices }
+            props: { name, label, sections, items, choices }
         } = field;
-
-        if (!isFieldVisible({ visibilityConditions, hideConditions }, data)) {
-            return;
-        }
 
         if (component === 'expandable-checkbox') {
             Array.isArray(items) && items.map(item => validateField(item, data, result, validationSuppressor));
         }
-
         if (component === 'accordion') {
             Array.isArray(sections) && sections.map(({ items }) => Array.isArray(items) && items.map(item => validateField(item, data, result, validationSuppressor)));
         } else {
@@ -578,49 +569,7 @@ const validateForm = (schema, data = {}) => {
     }
 };
 
-function isFieldVisible({ visibilityConditions, hideConditions }, data) {
-    let isVisible = true;
-
-    // show component based on visibilityConditions
-    if (visibilityConditions) {
-        isVisible = false;
-
-        for (const condition of visibilityConditions) {
-            if (condition.function && Object.prototype.hasOwnProperty.call(showConditionFunctions, condition.function)) {
-                if (condition.conditionArgs) {
-                    isVisible = showConditionFunctions[condition.function](data, condition.conditionArgs);
-                } else {
-                    isVisible = showConditionFunctions[condition.function](data);
-                }
-            } else if (data[condition.conditionPropertyName] && data[condition.conditionPropertyName] === condition.conditionPropertyValue) {
-                isVisible = true;
-            }
-        }
-    }
-
-    // hide component based on hideConditions
-    if (hideConditions) {
-        for (const condition of hideConditions) {
-            if (condition.function && Object.prototype.hasOwnProperty.call(hideConditions, condition.function)) {
-                if (condition.conditionPropertyName && condition.conditionPropertyValue) {
-                    isVisible = hideConditionFunctions[condition.function](data, condition.conditionPropertyName, condition.conditionPropertyValue);
-                } else {
-                    isVisible = hideConditionFunctions[condition.function](data);
-                }
-            } else if (data[condition.conditionPropertyName] && data[condition.conditionPropertyName] === condition.conditionPropertyValue) {
-                isVisible = false;
-            }
-        }
-    }
-
-    return isVisible;
-}
-
-
-
-
 module.exports = {
-    isFieldVisible,
     validateForm,
     validators
 };

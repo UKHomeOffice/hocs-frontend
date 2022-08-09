@@ -1,7 +1,9 @@
 const { FormSubmissionError, ValidationError } = require('../../models/error');
 
-const { validateForm, isFieldVisible } = require('./validation');
+const { validateForm } = require('./validation');
 const { isFieldComponentOfType } = require('./fieldHelper');
+const showConditionFunctions = require('../../../src/shared/helpers/show-condition-functions');
+const hideConditionFunctions = require('../../../src/shared/helpers/hide-condition-functions');
 
 const customAdapters = {
     'radio': (reducer, field, data) => {
@@ -93,16 +95,20 @@ function processMiddleware(req, res, next) {
         const data = req.body;
         const { schema } = req.form;
 
-        const fieldData =
-            schema.fields
-                .filter(field => isFieldVisible(field.props, data))
-                .reduce(createReducer(data, req), {});
+        let visibleFields = schema.fields
+            .reduce((fields, currField) => {
+                fields.push(...reduceVisibleComponent(currField, data));
+                return fields;
+            }, [])
+            .filter(Boolean);
 
-        validateForm(schema, fieldData);
+        const fieldData = visibleFields.reduce(createReducer(data, req), {});
 
-        req.form.data = schema.fields
+        validateForm({ ...schema, fields: visibleFields }, fieldData);
+
+        req.form.data = visibleFields
             .filter(isUnacceptedDataFields)
-            .reduce((data, field) => stripUnacceptedFieldData(field.props, data), fieldData);
+            .reduce((strippedData, field) => stripUnacceptedFieldData(field.props, strippedData), fieldData);
     } catch (error) {
         if (error instanceof ValidationError) {
             return next(error);
@@ -112,6 +118,74 @@ function processMiddleware(req, res, next) {
 
     next();
 }
+
+const reduceVisibleComponent = (field, data) => {
+    const {
+        component,
+        props: { sections = [], items = [], visibilityConditions, hideConditions }
+    } = field;
+
+    if (component === 'accordion') {
+        return sections.reduce((accordionFields, { items: sectionItems } = []) => {
+            accordionFields.push(
+                ...sectionItems.reduce((fields, item) => { return itemReducer(fields, item, data); }, []));
+            return accordionFields;
+        }, []);
+    } else if (component === 'expandable-checkbox') {
+        if (isFieldVisible(visibilityConditions, hideConditions, data)) {
+            return items.reduce((fields, item) => { return itemReducer(fields, item, data); }, [field]);
+        }
+    } else {
+        if (isFieldVisible(visibilityConditions, hideConditions, data)) {
+            return [field];
+        }
+    }
+
+    return [];
+};
+
+const itemReducer = (fields, item, data) => {
+    fields.push(...reduceVisibleComponent(item, data));
+    return fields;
+};
+
+const isFieldVisible = (visibilityConditions, hideConditions, data) => {
+    let isVisible = true;
+
+    // show component based on visibilityConditions
+    if (visibilityConditions) {
+        isVisible = false;
+
+        for (const condition of visibilityConditions) {
+            if (condition.function && Object.prototype.hasOwnProperty.call(showConditionFunctions, condition.function)) {
+                if (condition.conditionArgs) {
+                    isVisible = showConditionFunctions[condition.function](data, condition.conditionArgs);
+                } else {
+                    isVisible = showConditionFunctions[condition.function](data);
+                }
+            } else if (data[condition.conditionPropertyName] && data[condition.conditionPropertyName] === condition.conditionPropertyValue) {
+                isVisible = true;
+            }
+        }
+    }
+
+    // hide component based on hideConditions
+    if (hideConditions) {
+        for (const condition of hideConditions) {
+            if (condition.function && Object.prototype.hasOwnProperty.call(hideConditions, condition.function)) {
+                if (condition.conditionPropertyName && condition.conditionPropertyValue) {
+                    isVisible = hideConditionFunctions[condition.function](data, condition.conditionPropertyName, condition.conditionPropertyValue);
+                } else {
+                    isVisible = hideConditionFunctions[condition.function](data);
+                }
+            } else if (data[condition.conditionPropertyName] && data[condition.conditionPropertyName] === condition.conditionPropertyValue) {
+                isVisible = false;
+            }
+        }
+    }
+
+    return isVisible;
+};
 
 const stripUnacceptedFieldData = ({ name }, data) => {
     delete data[name];
