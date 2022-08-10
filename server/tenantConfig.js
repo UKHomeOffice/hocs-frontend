@@ -30,7 +30,7 @@ async function layoutConfig() {
             phaseBanner: {
                 isVisible: true,
                 phase: 'BETA',
-                feedback: 'mailto:HOCS@homeoffice.gov.uk',
+                feedback: 'mailto:DECSLiveSupport@digital.homeoffice.gov.uk',
                 isNotProd: isNotProd
             },
         },
