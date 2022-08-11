@@ -31,12 +31,12 @@ module.exports = options => Form()
     )
     .withField(
         Component('text', 'address1')
-            .withProp('label', 'Building')
+            .withProp('label', 'Address line 1')
             .build()
     )
     .withField(
         Component('text', 'address2')
-            .withProp('label', 'Street')
+            .withProp('label', 'Address line 2')
             .build()
     )
     .withField(
