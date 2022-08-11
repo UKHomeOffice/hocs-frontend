@@ -226,7 +226,7 @@ export function secondaryActionFactory(field, options) {
     const { key, data, config, page, switchDirection } = options;
     switch (field) {
         case 'backlink':
-            return renderFormComponent(BackLink, { data, key, config });
+            return renderFormComponent(BackLink, { data, key, config, page });
         case 'button':
             return renderFormComponent(Button, { data, key, config });
         case 'backButton':
