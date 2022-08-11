@@ -19,7 +19,7 @@ import {
 } from '../contexts/actions/index.jsx';
 import status from '../helpers/api-status.js';
 import BackLink from '../common/forms/backlink.jsx';
-import updateCaseConfig from '../helpers/case-config-helpers';
+import updateCaseTabs from '../helpers/case-tabs-helpers';
 
 function withForm(Page) {
 
@@ -71,7 +71,7 @@ function withForm(Page) {
                                     dispatch(unsetDocuments());
                                     dispatch(unsetCaseConfig());
                                     if (page.params.caseId) {
-                                        updateCaseConfig(page.params.caseId, dispatch);
+                                        updateCaseTabs(page.params.caseId, dispatch);
                                     }
                                 })
                                 .then(() => {

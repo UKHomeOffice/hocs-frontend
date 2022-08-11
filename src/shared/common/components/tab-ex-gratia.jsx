@@ -1,30 +1,17 @@
-import React, { useContext, useEffect, Fragment, useCallback, useState } from 'react';
+import React, { useContext, useEffect, Fragment, useState } from 'react';
 import { Context } from '../../contexts/application.jsx';
 import PropTypes from 'prop-types';
 import status from '../../helpers/api-status';
 import {
     updateApiStatus,
     unsetCaseData,
-    clearApiStatus,
-    updateCaseData,
 } from '../../contexts/actions/index.jsx';
-import getCaseData from '../../helpers/case-data-helper';
 import axios from 'axios';
 import FormEmbeddedWrapped from '../forms/form-embedded-wrapped.jsx';
 
-const TabExGratia = () => {
-    const { caseData, dispatch, page } = useContext(Context);
+const TabExGratia = (props) => {
+    const { dispatch, page } = useContext(Context);
     const [form, setForm] = useState(null);
-    const [error, setError] = useState(null);
-
-    const fetchCaseData = useCallback(() => {
-        dispatch(updateApiStatus(status.REQUEST_CASE_DATA));
-        getCaseData(page.params.caseId, dispatch);
-    }, [getCaseData]);
-
-    useEffect(() => {
-        fetchCaseData();
-    }, [fetchCaseData]);
 
     useEffect(() => {
         getForm();
@@ -34,115 +21,25 @@ const TabExGratia = () => {
     }, []);
 
     const getForm = () => {
-        let schemaType = 'EX_GRATIA_TAB';
+        const { screen } = props;
 
         dispatch(updateApiStatus(status.REQUEST_FORM))
-            .then(() => axios.get(`/api/schema/${schemaType}/fields`))
-            .then(response => setForm(response))
+            .then(() => axios.get(`/api/form/${screen}/case/${page.params.caseId}`))
+            .then(({ data }) => setForm(data))
             .then(() => dispatch(updateApiStatus(status.REQUEST_FORM_SUCCESS)));
-    };
-
-    const submitHandler = (wrappedState, setWrappedState, actionDispatch) => {
-        return React.useCallback(e => {
-            e.preventDefault();
-            setWrappedState({ submittingForm: true });
-
-            let schemaType = 'EX_GRATIA_TAB';
-
-            // eslint-disable-next-line no-undef
-            const formData = new FormData();
-            for (const [key, value] of Object.entries(wrappedState)) {
-                formData.append(key, value);
-            }
-            actionDispatch(updateApiStatus(status.UPDATE_CASE_DATA))
-                .then(() => {
-                    axios.post(`/api/case/${page.params.caseId}/stage/${page.params.stageId}/schema/${schemaType}/data?type=EX_GRATIA_UPDATE`,
-                        formData,
-                        { headers: { 'Content-Type': 'multipart/form-data' } })
-                        .then((res) => {
-                            if (res.data.errors) {
-                                actionDispatch(updateApiStatus(status.SUBMIT_FORM_VALIDATION_ERROR))
-                                    .then(() => setError(res.data.errors))
-                                    .then(() => setWrappedState({ submittingForm: false }));
-                            } else {
-                                actionDispatch(updateApiStatus(status.UPDATE_CASE_DATA_SUCCESS))
-                                    .then(() => setError(null))
-                                    .then(() => actionDispatch(updateCaseData(wrappedState)))
-                                    .then(() => setWrappedState({ submittingForm: false }));
-                            }
-                        })
-                        .then(() => {
-                            actionDispatch(clearApiStatus());
-                        })
-                        .catch(() => {
-                            actionDispatch(updateApiStatus(status.UPDATE_CASE_DATA_FAILURE))
-                                .then(() => setWrappedState({ submittingForm: false }));
-                        });
-                })
-                .catch(() => {
-                    actionDispatch(updateApiStatus(status.REQUEST_CASE_DATA_FAILURE))
-                        .then(() => setWrappedState({ submittingForm: false }));
-                });
-        }, [wrappedState]);
     };
 
     return (
         <Fragment>
-            {(caseData && Object.keys(caseData).length !== 0) &&
+            {form &&
             <Fragment>
-                <h2 className='govuk-heading-m'>Ex-Gratia</h2>
-                <details className='govuk-details'>
-                    <summary className='govuk-details__summary'>
-                        <span className='govuk-details__summary-text'>
-                                Update Ex-Gratia details
-                        </span>
-                    </summary>
-
-                    {form && form.data != null &&
-                        <FormEmbeddedWrapped
-                            schema={{ fields: form.data }}
-                            fieldData={ caseData }
-                            errors={ error }
-                            action={`/case/${page.params.caseId}/stage/${page.params.stageId}/data`}
-                            baseUrl={`/case/${page.params.caseId}/stage/${page.params.stageId}`}
-                            submitHandler={submitHandler}
-                        />
-                    }
-                </details>
-
-                <table className='govuk-table margin-left--small'>
-                    <caption className='govuk-table__caption margin-bottom--small'>Summary</caption>
-                    <tbody className='govuk-table__body'>
-                        {caseData.AmountComplainantRequested && <tr className='govuk-table__cell'>
-                            <th className='govuk-table__header padding-left--small govuk-!-width-one-half'>Amount requested by complainant:</th>
-                            <td className='govuk-table__cell'>£{caseData.AmountComplainantRequested}</td>
-                        </tr>}
-                        {caseData.PaymentTypeConsolatory && <tr className='govuk-table__cell'>
-                            <th className='govuk-table__header padding-left--small govuk-!-width-one-half'>Consolatory payment offered:</th>
-                            <td className='govuk-table__cell'>{caseData.PaymentTypeConsolatory}</td>
-                        </tr>}
-                        {caseData.ConsolatoryOfferSentToComplainant && <tr className='govuk-table__cell'>
-                            <th className='govuk-table__header padding-left--small govuk-!-width-one-half'>Consolatory payment offer sent to the complainant:</th>
-                            <td className='govuk-table__cell'>£{caseData.ConsolatoryOfferSentToComplainant}</td>
-                        </tr>}
-                        {caseData.PaymentTypeExGratia && <tr className='govuk-table__cell'>
-                            <th className='govuk-table__header padding-left--small govuk-!-width-one-half'>Ex-Gratia payment offered:</th>
-                            <td className='govuk-table__cell'>{caseData.PaymentTypeExGratia}</td>
-                        </tr>}
-                        {caseData.ExGratiaOfferSentToComplainant && <tr className='govuk-table__cell'>
-                            <th className='govuk-table__header padding-left--small govuk-!-width-one-half'>Ex-Gratia payment offer sent to the complainant:</th>
-                            <td className='govuk-table__cell'>£{caseData.ExGratiaOfferSentToComplainant}</td>
-                        </tr>}
-                        {caseData.TotalOfferSentToComplainant && <tr className='govuk-table__cell'>
-                            <th className='govuk-table__header padding-left--small govuk-!-width-one-half'>Total payment offer sent to the complainant:</th>
-                            <td className='govuk-table__cell'>£{caseData.TotalOfferSentToComplainant}</td>
-                        </tr>}
-                        {caseData.ComplainantAccepted && <tr className='govuk-table__cell'>
-                            <th className='govuk-table__header padding-left--small govuk-!-width-one-half'>Complainant has accepted:</th>
-                            <td className='govuk-table__cell'>{caseData.ComplainantAccepted}</td>
-                        </tr>}
-                    </tbody>
-                </table>
+                <h2 className='govuk-heading-m'>{form.schema.title}</h2>
+                <FormEmbeddedWrapped
+                    schema={ form.schema }
+                    fieldData={ form.data }
+                    action={`/api/case/${page.params.caseId}/stage/${page.params.stageId}/form/${props.screen}/data?type=EX_GRATIA_UPDATE`}
+                    baseUrl={`/case/${page.params.caseId}/stage/${page.params.stageId}`}
+                />
             </Fragment>
             }
         </Fragment>
@@ -151,7 +48,7 @@ const TabExGratia = () => {
 
 TabExGratia.propTypes = {
     page: PropTypes.object,
-    stages: PropTypes.array.isRequired
+    screen: PropTypes.string.isRequired
 };
 
 export default TabExGratia;

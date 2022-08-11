@@ -74,4 +74,65 @@ describe('Form component', () => {
         expect(mockSubmitHandler).toHaveBeenCalledTimes(1);
     });
 
+    test('should render form as collapsable when passed in props', async () => {
+        const mockFormSchemaWithCollapsableProp = {
+            props: {
+                collapsable: {
+                    hintText: 'Test Expand'
+                }
+            }
+        };
+
+        const wrapper = render(<Form {...mockProps} schema={mockFormSchemaWithCollapsableProp}/>);
+        expect(wrapper).toBeDefined();
+        expect(screen.getByText('Test Expand')).toBeInTheDocument();
+    });
+
+    test('should render form as collapsable with default text when hintText not provided', async () => {
+        const mockFormSchemaWithCollapsableProp = {
+            props: {
+                collapsable: {}
+            }
+        };
+
+        const wrapper = render(<Form {...mockProps} schema={mockFormSchemaWithCollapsableProp}/>);
+        expect(wrapper).toBeDefined();
+        expect(screen.getByText('Expand')).toBeInTheDocument();
+    });
+
+    test('should render summary when passed', async () => {
+        const mockFormSchemaWithSummary = {
+            summary: [
+                {
+                    label: 'Test Label',
+                    attribute: 'Test'
+                }
+            ]
+        };
+
+        const wrapper = render(<Form {...mockProps} schema={mockFormSchemaWithSummary}/>);
+        expect(wrapper).toBeDefined();
+        expect(screen.getByText('Summary')).toBeInTheDocument();
+    });
+
+    test('should render summary with data rows when passed', async () => {
+        const mockFormSchemaWithSummary = {
+            summary: [
+                {
+                    label: 'Test Label',
+                    attribute: 'Test'
+                }
+            ]
+        };
+        const mockData = {
+            Test: 'Test Value'
+        };
+
+        const wrapper = render(<Form {...mockProps} schema={mockFormSchemaWithSummary} data={mockData}/>);
+        expect(wrapper).toBeDefined();
+        expect(screen.getByText('Summary')).toBeInTheDocument();
+        expect(screen.getByText('Test Label')).toBeInTheDocument();
+        expect(screen.getByText('Test Value')).toBeInTheDocument();
+    });
+
 });

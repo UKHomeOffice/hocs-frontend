@@ -4,6 +4,7 @@ import Submit from './submit.jsx';
 import ErrorSummary from './error-summary.jsx';
 import { formComponentFactory, secondaryActionFactory } from './form-repository.jsx';
 import Ribbon from '../forms/ribbon.jsx';
+import Summary from './summary.jsx';
 
 class Form extends Component {
 
@@ -11,7 +12,26 @@ class Form extends Component {
         super(props);
     }
 
-    render() {
+    renderForm(form = this.getFormGroup()) {
+        const {
+            schema: { props }
+        } = this.props;
+
+        if (props?.collapsable) {
+            return (<details className='govuk-details'>
+                <summary className='govuk-details__summary margin-bottom--small'>
+                    <span className='govuk-details__summary-text'>
+                        { props.collapsable.hintText || 'Expand' }
+                    </span>
+                </summary>
+                {form}
+            </details>);
+        }
+
+        return form;
+    }
+
+    getFormGroup() {
         const {
             action,
             children,
@@ -26,6 +46,61 @@ class Form extends Component {
         } = this.props;
 
         return (
+            <form
+                action={action}
+                method={method}
+                onSubmit={this.props.submitHandler}
+                encType="multipart/form-data"
+            >
+                {children}
+                {
+                    schema && schema.fields && schema.fields.map((field, key) => {
+                        return formComponentFactory(field.component, {
+                            key,
+                            config: field.props,
+                            data,
+                            errors,
+                            callback: this.props.updateFormState,
+                            baseUrl: this.props.baseUrl,
+                            page,
+                            caseRef: meta ? meta.caseReference : undefined,
+                            switchDirection
+                        });
+                    })
+                }
+                {schema.showPrimaryAction !== false && <Submit label={schema.defaultActionLabel} disabled={submittingForm} />}
+                {
+                    schema && schema.secondaryActions && schema.secondaryActions.map((field, key) => {
+                        return secondaryActionFactory(field.component, {
+                            key,
+                            config: field.props,
+                            data,
+                            errors,
+                            callback: this.props.updateFormState,
+                            page,
+                            switchDirection
+                        });
+                    })
+                }
+            </form>);
+    }
+
+    renderSummary() {
+        const {
+            schema: { summary },
+            data
+        } = this.props;
+
+        return summary && <Summary summary={summary} data={data}/>;
+    }
+
+    render() {
+        const {
+            errors,
+            meta
+        } = this.props;
+
+        return (
             <>
                 {meta && meta.allocationNote &&
                     <Ribbon title={meta.allocationNote.type}>
@@ -33,43 +108,8 @@ class Form extends Component {
                     </Ribbon>
                 }
                 {errors && <ErrorSummary errors={errors} />}
-                <form
-                    action={action}
-                    method={method}
-                    onSubmit={this.props.submitHandler}
-                    encType="multipart/form-data"
-                >
-                    {children}
-                    {
-                        schema && schema.fields && schema.fields.map((field, key) => {
-                            return formComponentFactory(field.component, {
-                                key,
-                                config: field.props,
-                                data,
-                                errors,
-                                callback: this.props.updateFormState,
-                                baseUrl: this.props.baseUrl,
-                                page,
-                                caseRef: this.props.meta ? this.props.meta.caseReference : undefined,
-                                switchDirection
-                            });
-                        })
-                    }
-                    {schema.showPrimaryAction !== false && <Submit label={schema.defaultActionLabel} disabled={submittingForm} />}
-                    {
-                        schema && schema.secondaryActions && schema.secondaryActions.map((field, key) => {
-                            return secondaryActionFactory(field.component, {
-                                key,
-                                config: field.props,
-                                data,
-                                errors,
-                                callback: this.props.updateFormState,
-                                page,
-                                switchDirection
-                            });
-                        })
-                    }
-                </form>
+                { this.renderForm() }
+                { this.renderSummary() }
             </>
         );
     }
