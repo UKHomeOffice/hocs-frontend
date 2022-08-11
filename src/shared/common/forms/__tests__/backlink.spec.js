@@ -35,4 +35,12 @@ describe('Form backlink component', () => {
         );
         expect(screen.getByText('MY_LABEL')).toBeInTheDocument();
     });
+
+    it('should render with case and stage link with no action and page props passed', () => {
+        render(
+            <Backlink label='MY_LABEL' page={{ caseId: 'TEST_CASE', stageId: 'TEST_STAGE' }} />,
+            { wrapper: MemoryRouter }
+        );
+        expect(screen.getByRole('link')).toHaveAttribute('href', '/case/TEST_CASE/stage/TEST_STAGE');
+    });
 });

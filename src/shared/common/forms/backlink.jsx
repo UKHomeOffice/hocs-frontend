@@ -4,19 +4,31 @@ import { Link } from 'react-router-dom';
 
 class BackLink extends Component {
 
+    calculateTo() {
+        const { action, page: { caseId, stageId } } = this.props;
+
+        if (action) {
+            return action;
+        } else if (caseId && stageId) {
+            return `/case/${caseId}/stage/${stageId}`;
+        }
+
+        return '/';
+    }
+
     render() {
         const {
-            action,
             className,
             disabled,
             label
         } = this.props;
+
         return (
             <p>
                 <Link
                     className={`govuk-back-link${className ? ' ' + className : ''}`}
                     disabled={disabled}
-                    to={action}
+                    to={this.calculateTo()}
                 >{label}</Link>
             </p>
         );
@@ -24,16 +36,17 @@ class BackLink extends Component {
 }
 
 BackLink.propTypes = {
-    action: PropTypes.string.isRequired,
+    action: PropTypes.string,
     className: PropTypes.string,
     disabled: PropTypes.bool,
-    label: PropTypes.string
+    label: PropTypes.string,
+    page: PropTypes.object
 };
 
 BackLink.defaultProps = {
     disabled: false,
-    action: '/',
-    label: 'Back'
+    label: 'Back',
+    page: {}
 };
 
 export default BackLink;
