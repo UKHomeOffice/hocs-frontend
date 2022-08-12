@@ -210,10 +210,12 @@ describe('Somu list component', () => {
             ...DEFAULT_PROPS,
             somuType,
             somuItems,
-            choices: [ {
-                'value': 'TestTeam',
-                'label': 'Test Team'
-            }]
+            choices: {
+                contributionBusinessUnit: [ {
+                    'value': 'TestTeam',
+                    'label': 'Test Team'
+                } ]
+            }
         };
         const wrapper = render(
             <ApplicationProvider config={{ ...MOCK_CONFIG, ...PROPS }}>
