@@ -1309,6 +1309,72 @@ module.exports = {
             endpoint: '/entity/list/POGR_GRO_EX_GRATIA_PAYMENT_METHOD',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
+        },
+        TO_BF_BUSINESS_UNIT_TYPES: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_BF_BUSINESS_UNIT_TYPES',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        TO_BF_BUS_UNIT_POLICY: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_BF_BUS_UNIT_POLICY',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        TO_BF_BUS_UNIT_CENTRAL_REGION: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_BF_BUS_UNIT_CENTRAL_REGION',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        TO_BF_BUS_UNIT_EUROPE_REGION: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_BF_BUS_UNIT_EUROPE_REGION',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        TO_BF_BUS_UNIT_HEATHROW_REGION: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_BF_BUS_UNIT_HEATHROW_REGION',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        TO_BF_BUS_UNIT_NORTH_REGION: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_BF_BUS_UNIT_NORTH_REGION',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        TO_BF_BUS_UNIT_PRESS_OFFICE: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_BF_BUS_UNIT_PRESS_OFFICE',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        TO_BF_BUS_UNIT_SOUTH_EAST_REGION: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_BF_BUS_UNIT_SOUTH_EAST_REGION',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        TO_BF_BUS_UNIT_SOUTH_REGION: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_BF_BUS_UNIT_SOUTH_REGION',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        TO_BF_BUS_UNIT_WARNING_INDEX: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_BF_BUS_UNIT_WARNING_INDEX',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        TO_BF_BUS_UNIT_ALL: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_BF_BUSINESS_UNIT_ALL',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
         }
     },
     clients: {
