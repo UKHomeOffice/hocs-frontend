@@ -82,7 +82,7 @@ module.exports = {
                         .withField(
                             Component('text', 'Address1')
                                 .withValidator('required')
-                                .withProp('label', 'Building')
+                                .withProp('label', 'Address line 1')
                                 .withProp('visibilityConditions', [
                                     {
                                         'conditionPropertyName': 'OriginalChannel',
@@ -94,7 +94,7 @@ module.exports = {
                         .withField(
                             Component('text', 'Address2')
                                 .withValidator('required')
-                                .withProp('label', 'Street')
+                                .withProp('label', 'Address line 2')
                                 .withProp('visibilityConditions', [
                                     {
                                         'conditionPropertyName': 'OriginalChannel',
