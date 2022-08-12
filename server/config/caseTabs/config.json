@@ -300,5 +300,19 @@
       "type": "ACTIONS",
       "label": "Actions"
     }
+  ],
+  "WCS": [
+    {
+      "type": "DOCUMENTS",
+      "label": "Documents"
+    },
+    {
+      "type": "SUMMARY",
+      "label": "Summary"
+    },
+    {
+      "type": "TIMELINE",
+      "label": "Timeline"
+    }
   ]
 }
