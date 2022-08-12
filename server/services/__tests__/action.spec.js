@@ -449,25 +449,6 @@ describe('Action service', () => {
         expect(response).toHaveProperty('callbackUrl');
     });
 
-    it('should return a callback url when "ADD_CONTRIBUTION_REQUEST" action succeeds', async () => {
-        const testForm = {
-            schema: {},
-            data: {},
-            action: actionTypes.ADD_CONTRIBUTION
-        };
-        const response = await actionService.performAction('CASE', {
-            caseId: 1234,
-            stageId: 5678,
-            somuTypeUuid: '00000000-0000-0000-0000-000000000000',
-            entity: null,
-            context: null,
-            form: testForm,
-            user: mockUser
-        });
-        expect(mockRequestClient).toHaveBeenCalledTimes(1);
-        expect(response).toBeDefined();
-        expect(response).toHaveProperty('callbackUrl');
-    });
 
     it('should return a callback url when "APPLY_CASE_DEADLINE_EXTENSION" action succeeds', async () => {
         const originalNowFunc = Date.now;
@@ -544,51 +525,6 @@ describe('Action service', () => {
         })).rejects.toThrow('Failed to perform action');
 
         Date.now = originalNowFunc;
-    });
-
-    it('should return a callback when ADD_APPROVAL_REQUEST action succeeds', async () => {
-
-        const testForm = {
-            schema: {},
-            data: {},
-            action: actionTypes.ADD_APPROVAL_REQUEST,
-            next: {
-                action: 'CONFIRMATION_SUMMARY'
-            }
-        };
-        const response = await actionService.performAction('CASE', {
-            caseId: 1234,
-            stageId: 5678,
-            somuTypeUuid: '00000000-0000-0000-0000-000000000000',
-            entity: null,
-            context: null,
-            form: testForm,
-            user: mockUser
-        });
-        expect(mockRequestClient).toHaveBeenCalledTimes(1);
-        expect(response).toBeDefined();
-        expect(response).toHaveProperty('callbackUrl');
-    });
-
-    it('should return a callback when EDIT_APPROVAL_REQUEST action succeeds', async () => {
-
-        const testForm = {
-            schema: {},
-            data: {},
-            action: actionTypes.EDIT_APPROVAL_REQUEST
-        };
-        const response = await actionService.performAction('CASE', {
-            caseId: 1234,
-            stageId: 5678,
-            somuTypeUuid: '00000000-0000-0000-0000-000000000000',
-            entity: null,
-            context: null,
-            form: testForm,
-            user: mockUser
-        });
-        expect(mockRequestClient).toHaveBeenCalledTimes(1);
-        expect(response).toBeDefined();
-        expect(response).toHaveProperty('callbackUrl');
     });
 
     it('should return a CONFIRMATION when ADD_CASE_APPEAL action succeeds', async () => {
@@ -783,45 +719,5 @@ describe('Action service', () => {
         expect(response).toHaveProperty('confirmation');
     });
 
-    it('should return a callback when ADD_APPROVAL_REQUEST action succeeds', async () => {
 
-        const testForm = {
-            schema: {},
-            data: {},
-            action: actionTypes.ADD_APPROVAL_REQUEST
-        };
-        const response = await actionService.performAction('CASE', {
-            caseId: 1234,
-            stageId: 5678,
-            somuTypeUuid: '00000000-0000-0000-0000-000000000000',
-            entity: null,
-            context: null,
-            form: testForm,
-            user: mockUser
-        });
-        expect(mockRequestClient).toHaveBeenCalledTimes(1);
-        expect(response).toBeDefined();
-        expect(response).toHaveProperty('callbackUrl');
-    });
-
-    it('should return a callback when EDIT_APPROVAL_REQUEST action succeeds', async () => {
-
-        const testForm = {
-            schema: {},
-            data: {},
-            action: actionTypes.EDIT_APPROVAL_REQUEST
-        };
-        const response = await actionService.performAction('CASE', {
-            caseId: 1234,
-            stageId: 5678,
-            somuTypeUuid: '00000000-0000-0000-0000-000000000000',
-            entity: null,
-            context: null,
-            form: testForm,
-            user: mockUser
-        });
-        expect(mockRequestClient).toHaveBeenCalledTimes(1);
-        expect(response).toBeDefined();
-        expect(response).toHaveProperty('callbackUrl');
-    });
 });

@@ -162,7 +162,7 @@ const actions = {
         try {
 
             if (form && form.action) {
-                const { entity, somuTypeUuid, caseActionType } = options;
+                const { entity, caseActionType } = options;
 
                 if (entity || caseActionType) {
 
@@ -441,30 +441,6 @@ const actions = {
                                 };
                             return handleActionSuccess(clientResponse, {}, form);
                         }
-                    }
-                } else if (somuTypeUuid) {
-                    const { somuItemData, somuItemUuid } = options;
-
-                    switch (form.action) {
-                        case actionTypes.ADD_CONTRIBUTION:
-                        case actionTypes.ADD_ADDITIONAL_CONTRIBUTION:
-                            await caseworkService.post(`/case/${caseId}/item/${somuTypeUuid}`, { data: somuItemData }, headers);
-                            break;
-                        case actionTypes.EDIT_CONTRIBUTION:
-                            await caseworkService.post(`/case/${caseId}/item/${somuTypeUuid}`, {
-                                uuid: somuItemUuid,
-                                data: somuItemData
-                            }, headers);
-                            break;
-                        case actionTypes.ADD_APPROVAL_REQUEST:
-                            await caseworkService.post(`/case/${caseId}/item/${somuTypeUuid}`, { data: somuItemData }, headers);
-                            break;
-                        case actionTypes.EDIT_APPROVAL_REQUEST:
-                            await caseworkService.post(`/case/${caseId}/item/${somuTypeUuid}`, {
-                                uuid: somuItemUuid,
-                                data: somuItemData
-                            }, headers);
-                            break;
                     }
                 }
 

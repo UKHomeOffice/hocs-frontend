@@ -6,6 +6,7 @@ const { FormServiceError, AuthenticationError } = require('../models/error');
 const User = require('../models/user');
 const FormBuilder = require('./forms/form-builder');
 const { Component } = require('./forms/component-builder');
+const { getSomuItem } = require('../middleware/somu');
 
 async function returnReadOnlyCaseViewForm(requestId, user, caseId) {
     const { readOnlyCaseViewAdapter } = await listService
@@ -221,6 +222,16 @@ async function getSomuType(req, res, next) {
     next();
 }
 
+async function getSomuItemData(req, res, next) {
+    const { requestId, user, params: { caseId, somuItemUuid, somuTypeUuid } }  = req;
+
+    if (somuItemUuid) {
+        req.somuItemData = await getSomuItem({ caseId, somuTypeUuid, somuItemUuid, user, requestId });
+    }
+
+    next();
+}
+
 async function getList(req, res, next) {
     const { listName } = req.params;
 
@@ -322,14 +333,49 @@ const getGlobalFormForCase = async (req, res, next) => {
     }
 };
 
+const getFormForSomu = async (req, res, next) => {
+    const { requestId,
+        user,
+        params: { action, caseId },
+        somuType: { uuid, schema: { forms = {} } = {} } = {},
+        somuItemData } = req;
+    const logger = getLogger(requestId);
+
+    try {
+        const formName = forms[action];
+
+        if (!formName) {
+            return next(new FormServiceError(`Schema does not contain form definition for Somu Type: ${uuid}`));
+        }
+
+        const { form, error } = await getGlobalFormSchemaFromWorkflowService({ caseId: caseId, formId: formName }, user);
+        if (error) {
+            return next(error);
+        }
+
+        if (somuItemData) {
+            form.data = { ...form.data, ...somuItemData };
+        }
+
+        req.form = form;
+
+        next();
+    } catch (error) {
+        logger.error('CASEWORK_SOMU_FORM_FAILURE', { message: error.message, stack: error.stack });
+        return next(new FormServiceError(`Failed to fetch form for somuType: ${uuid} and action: ${action}`));
+    }
+};
+
 module.exports = {
     getForm,
     getFormForAction,
     getFormForCase,
     getFormForStage,
+    getFormForSomu,
     getGlobalFormForCase,
     hydrateFields,
     getSomuType,
     getSomuItemsByType,
+    getSomuItem: getSomuItemData,
     getList
 };
