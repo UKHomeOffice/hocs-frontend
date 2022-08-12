@@ -147,11 +147,7 @@ async function hydrateField(field, req) {
             });
             await Promise.all(sectionRequests);
         } else if (somuType) {
-            const { choices, caseType, type } = somuType;
-
-            if (choices) {
-                field.props.choices = await req.listService.fetch(choices, req.params);
-            }
+            const { caseType, type } = somuType;
 
             const somuTypeItem = await req.listService.getFromStaticList(
                 'SOMU_TYPES',
@@ -159,8 +155,22 @@ async function hydrateField(field, req) {
             );
             field.props.somuType = somuTypeItem;
 
-            const somuItem = await req.listService.fetch('CASE_SOMU_ITEM', { ...req.params, somuTypeId: somuTypeItem.uuid });
-            field.props.somuItems = somuItem;
+            if (choices && typeof choices === 'object') {
+                const choiceObj = {};
+
+                for (const [name, choice] of Object.entries(choices)) {
+                    if (choice) {
+                        Object.assign(choiceObj, { [name]: await req.listService.fetch(choice, req.params) });
+                    }
+                }
+
+                field.props.choices = choiceObj;
+            }
+
+            field.props.somuItems = await req.listService.fetch('CASE_SOMU_ITEM', {
+                ...req.params,
+                somuTypeId: somuTypeItem.uuid
+            });
         } else if (child && child.props && child.props.choices && typeof child.props.choices === 'string') {
             field.props.child.props.choices = await req.listService.fetch(child.props.choices, req.params);
         }
