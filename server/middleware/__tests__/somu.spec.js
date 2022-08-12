@@ -3,16 +3,10 @@ const {
     getSomuItem
 } = require('./../somu');
 
-jest.mock('../../services/action.js', () => {
-    return {
-        performAction: jest.fn()
-    };
-});
-const actionService = require('../../services/action');
-
 jest.mock('../../clients', () => ({
     caseworkService: {
-        get: jest.fn(() => Promise.resolve({ body: {} }))
+        get: jest.fn(() => Promise.resolve()),
+        post: jest.fn(() => Promise.resolve())
     }
 }));
 const clients = require('../../clients');
@@ -46,160 +40,29 @@ describe('Somu middleware', () => {
             res = { };
             next.mockReset();
             json.mockReset();
-            actionService.performAction.mockReset();
-            clients.caseworkService.get.mockReset();
+            clients.caseworkService.post.mockReset();
             res.status = jest.fn(() => ({ json }));
         });
 
         it('should send a 200/OK response and a callback URL', async () => {
-            actionService.performAction.mockImplementation(() => {
-                return { callbackUrl: '/' };
+            clients.caseworkService.post.mockImplementation(() => {
+                return Promise.resolve();
             });
-            await somuApiResponseMiddleware(req, res, next);
-            expect(res.status).toHaveBeenCalled();
-            expect(res.status).toHaveBeenCalledWith(200);
-            expect(json).toHaveBeenCalled();
-            expect(json).toHaveBeenCalledWith({ redirect: '/' });
-        });
 
-        it('should send an 200/OK response even if somuItems.data is not an array', async () => {
-            actionService.performAction.mockImplementation(() => {
-                return { callbackUrl: '/' };
-            });
-            clients.caseworkService.get.mockImplementation(() => {
-                return Promise.resolve({ data: { data: '{"test":1}' } });
-            });
             await somuApiResponseMiddleware(req, res, next);
-            expect(res.status).toHaveBeenCalled();
-            expect(res.status).toHaveBeenCalledWith(200);
-            expect(json).toHaveBeenCalled();
-            expect(json).toHaveBeenCalledWith({ redirect: '/' });
-        });
 
-        it('should send an 200/OK response even if no data is returned', async () => {
-            actionService.performAction.mockImplementation(() => {
-                return { callbackUrl: '/' };
-            });
-            clients.caseworkService.get.mockImplementation(() => {
-                return Promise.resolve({ });
-            });
-            await somuApiResponseMiddleware(req, res, next);
             expect(res.status).toHaveBeenCalled();
             expect(res.status).toHaveBeenCalledWith(200);
             expect(json).toHaveBeenCalled();
-            expect(json).toHaveBeenCalledWith({ redirect: '/' });
-        });
-
-        it('should send an 200/OK response even if somuItem.data is invalid JSON', async () => {
-            actionService.performAction.mockImplementation(() => {
-                return { callbackUrl: '/' };
-            });
-            clients.caseworkService.get.mockImplementation(() => {
-                return Promise.resolve({ data: { data: '{' } });
-            });
-            await somuApiResponseMiddleware(req, res, next);
-            expect(res.status).toHaveBeenCalled();
-            expect(res.status).toHaveBeenCalledWith(200);
-            expect(json).toHaveBeenCalled();
-            expect(json).toHaveBeenCalledWith({ redirect: '/' });
-        });
-
-        it('should return the original item back if somuItem.data is an array', async () => {
-            actionService.performAction.mockImplementation(() => {
-                return { callbackUrl: '/' };
-            });
-            clients.caseworkService.get.mockImplementation(() => {
-                return Promise.resolve({ data: [{ data: '[{"test":1}]' }] });
-            });
-            await somuApiResponseMiddleware(req, res, next);
-            expect(actionService.performAction).toHaveBeenCalled();
-            expect(actionService.performAction).toHaveBeenCalledWith(
-                'CASE',
-                expect.objectContaining({
-                    'caseId': 'CASE_ID',
-                    'somuTypeItems': expect.stringMatching(/.*?test.*?/)
-                })
-            );
-            expect(res.status).toHaveBeenCalled();
-            expect(res.status).toHaveBeenCalledWith(200);
-            expect(json).toHaveBeenCalled();
-            expect(json).toHaveBeenCalledWith({ redirect: '/' });
-        });
-
-        it('should update the item in the list if the somuItemUuid param matches', async () => {
-            req = { ...req, body: { somuItemUuid: 'SOMU_ITEM_ID' } };
-            actionService.performAction.mockImplementation(() => {
-                return { callbackUrl: '/' };
-            });
-            clients.caseworkService.get.mockImplementation(() => {
-                return Promise.resolve({ data: [{ uuid: 'SOMU_ITEM_ID', data: '{"blah":"test"}' }] });
-            });
-            req.params['somuItemUuid'] = 'SOMU_ITEM_ID';
-            await somuApiResponseMiddleware(req, res, next);
-            expect(actionService.performAction).toHaveBeenCalled();
-            expect(actionService.performAction).toHaveBeenCalledWith(
-                'CASE',
-                expect.objectContaining({
-                    'caseId': 'CASE_ID',
-                    'somuTypeItems':  '[{"uuid":"SOMU_ITEM_ID","data":{"dummy":"value"}}]'
-                })
-            );
-            expect(res.status).toHaveBeenCalled();
-            expect(res.status).toHaveBeenCalledWith(200);
-            expect(json).toHaveBeenCalled();
-            expect(json).toHaveBeenCalledWith({ redirect: '/' });
-        });
-
-        it('should append new item at the end of the list if the somuItemUuid param does not match', async () => {
-            actionService.performAction.mockImplementation(() => {
-                return { callbackUrl: '/' };
-            });
-            clients.caseworkService.get.mockImplementation(() => {
-                return Promise.resolve({ data: [{ uuid: 'SOMU_ITEM_ID', data: '{"blah":"test"}' }] });
-            });
-            req.params['somuItemUuid'] = 'def';
-            await somuApiResponseMiddleware(req, res, next);
-            expect(actionService.performAction).toHaveBeenCalled();
-            expect(actionService.performAction).toHaveBeenCalledWith(
-                'CASE',
-                expect.objectContaining({
-                    'caseId': 'CASE_ID',
-                    'somuTypeItems': '[{"uuid":"SOMU_ITEM_ID","data":{"blah":"test"}},{"data":{"dummy":"value"}}]'
-                })
-            );
-            expect(res.status).toHaveBeenCalled();
-            expect(res.status).toHaveBeenCalledWith(200);
-            expect(json).toHaveBeenCalled();
-            expect(json).toHaveBeenCalledWith({ redirect: '/' });
-        });
-
-        it('should append new item at the end of the list if no somuItemUuid param present', async () => {
-            actionService.performAction.mockImplementation(() => {
-                return { callbackUrl: '/' };
-            });
-            clients.caseworkService.get.mockImplementation(() => {
-                return Promise.resolve({ data: [{ uuid: 'SOMU_ITEM_ID', data: '{"blah":"test"}' }] });
-            });
-            await somuApiResponseMiddleware(req, res, next);
-            expect(actionService.performAction).toHaveBeenCalled();
-            expect(actionService.performAction).toHaveBeenCalledWith(
-                'CASE',
-                expect.objectContaining({
-                    'caseId': 'CASE_ID',
-                    'somuTypeItems': '[{"uuid":"SOMU_ITEM_ID","data":{"blah":"test"}},{"data":{"dummy":"value"}}]'
-                })
-            );
-            expect(res.status).toHaveBeenCalled();
-            expect(res.status).toHaveBeenCalledWith(200);
-            expect(json).toHaveBeenCalled();
-            expect(json).toHaveBeenCalledWith({ redirect: '/' });
+            expect(json).toHaveBeenCalledWith({ redirect: '/case/CASE_ID/stage/STAGE_ID' });
         });
 
         it('should create an ErrorModel instance on the response object if the call to Action Service fails', async () => {
             const mockError = new Error('TEST_ERROR');
-            actionService.performAction.mockImplementation(() => {
+            clients.caseworkService.post.mockImplementation(() => {
                 return Promise.reject(mockError);
             });
+
             await somuApiResponseMiddleware(req, res, next);
             expect(next).toHaveBeenCalled();
             expect(next).toHaveBeenCalledWith(mockError);
@@ -215,22 +78,24 @@ describe('Somu middleware', () => {
         const somuItemUuid = 'SOMU_ITEM_ID';
         const caseId = 'CASE_ID';
         const somuTypeUuid = 'SOMU_TYPE_ID';
+        const data = '{ "Test": "TestVal" }';
+
+        beforeEach(() => {
+            clients.caseworkService.get.mockReset();
+        });
 
         it('should return undefined if there is no match in the data object with passed in somuItemUuid', async () => {
-            clients.caseworkService.get.mockImplementation(() => {
-                return Promise.resolve({ data: [{ uuid: 'SOMU_ITEM_ID2', data: null }] });
-            });
+            clients.caseworkService.get.mockImplementation(() => Promise.resolve( { data: {} }));
+
             const result = await getSomuItem({ somuTypeUuid, caseId, user, somuItemUuid });
             expect(result).toBeUndefined();
         });
 
         it('should return the item if the uuid is the same as one passed in', async () => {
-            clients.caseworkService.get.mockImplementation(() => {
-                return Promise.resolve({ data: [{ uuid: 'SOMU_ITEM_ID', data: null }] });
-            });
+            clients.caseworkService.get.mockImplementation(() => Promise.resolve( { data: { uuid: 'SOMU_ITEM_ID', data: data } }));
+
             const result = await getSomuItem({ somuTypeUuid, caseId, user, somuItemUuid });
-            expect(result).toBeDefined();
-            expect(result).toEqual({ uuid: 'SOMU_ITEM_ID', data: null, deleted: undefined });
+            expect(result).toEqual(JSON.parse(data));
         });
     });
 });

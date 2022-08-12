@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const { allocateCase, moveByDirection } = require('../../middleware/stage');
-const { getFormForAction, getFormForCase, getFormForStage, hydrateFields, getSomuType, getGlobalFormForCase } = require('../../services/form');
+const { getFormForAction, getFormForCase, getFormForStage, hydrateFields, getSomuType, getGlobalFormForCase,
+    getFormForSomu, getSomuItem
+} = require('../../services/form');
 const { skipCaseTypePageApi } = require('../../middleware/skipCaseTypePage');
 const { autoCreateAllocateApi } = require('../../middleware/autoCreateAllocate');
 const { caseActionDataMiddleware } = require('../../middleware/case');
@@ -32,13 +34,17 @@ router.get([
 caseActionDataMiddleware, getFormForCase, hydrateFields,
 (req, res) => res.status(200).send({ ...res.locals.caseActionData, ...req.form }));
 
+router.get([
+    '/case/:caseId/stage/:stageId/somu/:somuTypeUuid/:somuType/:somuCaseType/:action',
+    '/case/:caseId/stage/:stageId/somu/:somuTypeUuid/:somuType/:somuCaseType/item/:somuItemUuid/:action'
+], getSomuType, getSomuItem, getFormForSomu);
+
 router.all([
     '/case/:caseId/stage/:stageId/entity/:entity/:context/:action',
     '/case/:caseId/stage/:stageId/entity/:entity/:context/:caseType/:action',
     '/case/:caseId/stage/:stageId/entity/:entity/:action',
-    '/case/:caseId/stage/:stageId/somu/:somuTypeUuid/:somuType/:somuCaseType/:action',
-    '/case/:caseId/stage/:stageId/somu/:somuTypeUuid/:somuType/:somuCaseType/item/:somuItemUuid/:action'
 ], getFormForCase);
+
 router.all([
     '/action/:workflow/:context/:action/',
     '/action/:workflow/:action/',
@@ -65,11 +71,5 @@ router.get([
 ], (req, res) => {
     res.status(200).send(req.form);
 });
-
-router.get('/somu/somuCaseType/:somuCaseType/somuType/:somuType/',
-    getSomuType,
-    (req, res) =>
-        res.status(200).send(req.somuType)
-);
 
 module.exports = router;
