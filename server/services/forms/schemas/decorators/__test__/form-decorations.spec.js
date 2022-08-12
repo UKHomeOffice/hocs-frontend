@@ -226,7 +226,7 @@ describe('Form schema decorations', function () {
                         ],
                         'props': {
                             'name': 'Address1',
-                            'label': 'Building',
+                            'label': 'Address line 1',
                             'visibilityConditions': [
                                 {
                                     'conditionPropertyName': 'OriginalChannel',
@@ -244,7 +244,7 @@ describe('Form schema decorations', function () {
                         ],
                         'props': {
                             'name': 'Address2',
-                            'label': 'Street',
+                            'label': 'Address line 2',
                             'visibilityConditions': [
                                 {
                                     'conditionPropertyName': 'OriginalChannel',
