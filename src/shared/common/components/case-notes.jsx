@@ -58,6 +58,15 @@ const TimelineItem = (refreshNotes) => ({ type, body, title, timelineItemUUID })
     );
 };
 
+TimelineItem.propTypes = {
+    type: PropTypes.string,
+    body: PropTypes.object,
+    title: PropTypes.string,
+    timelineItemUUID: PropTypes.string
+};
+
+TimelineItem.displayName = 'TimelineItem';
+
 class Timeline extends Component {
 
     constructor(props) {

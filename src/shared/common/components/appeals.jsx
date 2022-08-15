@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Context } from '../../contexts/application.jsx';
+import PropTypes from 'prop-types';
 
 const Appeals = (props) => {
     const { page } = useContext(Context);
@@ -76,3 +77,8 @@ const Appeals = (props) => {
 };
 
 export default Appeals;
+
+Appeals.propTypes = {
+    APPEAL: PropTypes.object,
+    props: PropTypes.object,
+};
