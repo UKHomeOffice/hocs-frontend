@@ -4,6 +4,9 @@
     "description": "",
     "repository": "github:UKHomeOffice/hocs-frontend",
     "main": "index.js",
+    "engines" : {
+        "node" : ">=16.16.0"
+    },
     "scripts": {
         "start": "node --max-http-header-size 80000 index.js",
         "build-dev": "webpack --mode development --env NODE_ENV=development",
@@ -78,7 +81,7 @@
         "babel-loader": "^8.2.5",
         "css-loader": "^6.7.1",
         "eslint": "^8.21.0",
-        "eslint-plugin-react": "7.11.1",
+        "eslint-plugin-react": "7.30.1",
         "identity-obj-proxy": "^3.0.0",
         "jest": "^26.0.0",
         "jest-date-mock": "^1.0.8",
