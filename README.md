@@ -3,7 +3,7 @@ React application and NodeJs Server for server rendered dynamic forms.
 ## How to run
 ### Prerequisites
 ```
-  NodeJs: >= v14.15.4 & < 16
+  NodeJs: >= v16.16.0 & < 18
   Docker: >= v18.09.2
   Docker-Compose: >= v1.23.2
 ```
@@ -25,7 +25,7 @@ React application and NodeJs Server for server rendered dynamic forms.
 HOCS Frontend consumes schemas from backend workflow services for display and validation purposes
 
 ### Schema
-Forms comprise of three objects. 
+Forms are comprised of three objects. 
 - The Schema defines properties of the form and includes and array of Components that describe the fields. 
 - The Data is a map of key/value pairs that correspond to the fields of the form, these values are injected in to the components at run time on the client when rendering the form. 
 - The Meta object contains key/value pairs of meta-data that is used outside of the form context.
