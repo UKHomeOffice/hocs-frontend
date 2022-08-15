@@ -1,6 +1,6 @@
 /**
  * @param object a object with a single value
- * @returns {boolean} array with index 0 being the name and index 1 being the value
+ * @returns {array} array with index 0 being the name and index 1 being the value
  */
 const getObjectNameValue = (object) => {
     if (object &&
