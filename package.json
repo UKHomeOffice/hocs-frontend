@@ -9,7 +9,7 @@
         "build-prod": "webpack --mode production --env NODE_ENV=production",
         "start-dev": "webpack -w --mode development --env NODE_ENV=development & nodemon --max-http-header-size 80000 index.js --env.NODE_ENV=development",
         "start-prod": "webpack -w --mode production --env NODE_ENV=production & nodemon --max-http-header-size 80000 index.js --env.NODE_ENV=production",
-        "test": "jest --coverage",
+        "test": "jest --coverage --reporters=default --reporters=jest-Junit",
         "jest": "node_modules/jest/bin/jest.js  .",
         "lint": "eslint ./ --ext js,jsx --ignore-path .gitignore",
         "lint-staged": "node_modules/lint-staged/index.js"
@@ -81,6 +81,7 @@
         "identity-obj-proxy": "^3.0.0",
         "jest": "^26.0.0",
         "jest-date-mock": "^1.0.8",
+        "jest-junit": "^12.0.0",
         "lint-staged": "^7.3.0",
         "mini-css-extract-plugin": "^2.6.1",
         "nodemon": "^2.0.19",
@@ -101,5 +102,14 @@
     "lint-staged": {
         "*.js": "node_modules/eslint/bin/eslint.js ./ --ignore-path .gitignore",
         "*.jsx": "node_modules/eslint/bin/eslint.js ./ --ext .jsx --ignore-path .gitignore"
+    },
+    "jest-junit": {
+        "outputDirectory": "reports",
+        "outputName": "jest-junit.xml",
+        "ancestorSeparator": " › ",
+        "uniqueOutputName": "false",
+        "suiteNameTemplate": "{filepath}",
+        "classNameTemplate": "{classname}",
+        "titleTemplate": "{title}"
     }
 }
