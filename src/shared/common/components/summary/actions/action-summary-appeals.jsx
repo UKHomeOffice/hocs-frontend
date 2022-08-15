@@ -34,3 +34,7 @@ const ActionSummaryAppeals = ({ items: appeals }) => {
 };
 
 export default ActionSummaryAppeals;
+
+ActionSummaryAppeals.propTypes = {
+    items: PropTypes.array
+};
