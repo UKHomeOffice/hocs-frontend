@@ -9,7 +9,7 @@
         "build-prod": "webpack --mode production --env NODE_ENV=production",
         "start-dev": "webpack -w --mode development --env NODE_ENV=development & nodemon --max-http-header-size 80000 index.js --env.NODE_ENV=development",
         "start-prod": "webpack -w --mode production --env NODE_ENV=production & nodemon --max-http-header-size 80000 index.js --env.NODE_ENV=production",
-        "test": "jest --coverage --reporters=default --reporters=jest-Junit",
+        "test": "jest --ci --coverage --reporters='default' --reporters='jest-Juni't",
         "jest": "node_modules/jest/bin/jest.js  .",
         "lint": "eslint ./ --ext js,jsx --ignore-path .gitignore",
         "lint-staged": "node_modules/lint-staged/index.js"
