@@ -5,6 +5,6 @@ on:
 
 jobs:
   test:
-    uses: UKHomeOffice/hocs-github-actions/.github/workflows/test-javascript.yml@a6eaa1ee75874c18d8886c32c17cabf48682629f
+    uses: UKHomeOffice/hocs-github-actions/.github/workflows/test-javascript.yml@afa246e8314083ff13f7b2669b3ea8d21485db38
     with:
       node-version-matrix: '[ 16.x , 18.x ]'
