@@ -3,7 +3,6 @@ const { createRepository } = require('./repository');
 const getLogger = require('../../libs/logger');
 const User = require('../../models/user');
 const { AuthenticationError, ForbiddenError } = require('../../models/error');
-const scheduleListRefresh = require('./scheduler');
 
 const configureEndpoint = (endpoint, data, baseUrl = '') => {
     if (data) {
@@ -74,8 +73,6 @@ const initialise = async (lists = {}, clients = {}, initialState = {}) => {
             handleFailure(listId);
         }
     }));
-
-    scheduleListRefresh(lists, flush);
 };
 
 const getInstance = (requestId, user) => {
