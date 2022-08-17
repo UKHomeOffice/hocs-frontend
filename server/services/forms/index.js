@@ -128,6 +128,10 @@ const formDefinitions = {
                     action: CREATE_CASE,
                     next: {
                         action: 'CONFIRMATION_SUMMARY'
+                    },
+                    customConfig: {
+                        documentRequired: false,
+                        documentLabel: 'Are there any documents to include?',
                     }
                 }
             }
@@ -383,8 +387,9 @@ module.exports = {
                 } else {
                     formDefinition = formDefinitions[context.toUpperCase()][workflow.toUpperCase()][action.toUpperCase()];
                 }
+                let customConfig = formDefinition.customConfig;
 
-                let form = await formDefinition.builder.call(this, { data });
+                let form = await formDefinition.builder.call(this, { data, customConfig });
                 form = formDecorator.call(this, formEnrichmentKeys, form);
 
                 return {
