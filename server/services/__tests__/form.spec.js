@@ -424,7 +424,9 @@ describe('when the hydrate method is called', () => {
                             somuType: {
                                 caseType: 'TESTCASETYPE',
                                 type: 'TEST',
-                                choices: 'TESTCHOICES'
+                            },
+                            choices: {
+                                'TEST': 'TESTCHOICES'
                             }
                         }
                     }],
@@ -448,7 +450,9 @@ describe('when the hydrate method is called', () => {
             await hydrateFields(req, null, next);
 
             expect(next).toHaveBeenCalled();
-            expect(req.form.schema.fields[0].props.choices).toEqual(choices);
+            expect(req.form.schema.fields[0].props.choices).toEqual({
+                'TEST': choices
+            });
             expect(req.form.schema.fields[0].props.somuType).toEqual(somuType);
             expect(req.form.schema.fields[0].props.somuItems).toEqual(somuItems);
         });

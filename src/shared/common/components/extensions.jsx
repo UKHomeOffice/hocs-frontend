@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Context } from '../../contexts/application.jsx';
 import { Link } from 'react-router-dom';
-import { isDateTodayOrAfter } from '../../helpers/date-helpers';
+import { isDateTodayOrAfter } from '../../helpers/dateHelpers';
 import PropTypes from 'prop-types';
 
 const Extensions = (props) => {
@@ -49,7 +49,6 @@ const Extensions = (props) => {
         </>
     );
 };
-
 
 Extensions.propTypes = {
     currentDeadline: PropTypes.string,
