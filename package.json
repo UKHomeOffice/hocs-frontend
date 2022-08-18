@@ -4,8 +4,8 @@
     "description": "",
     "repository": "github:UKHomeOffice/hocs-frontend",
     "main": "index.js",
-    "engines" : {
-        "node" : ">=16.16.0"
+    "engines": {
+        "node": ">=16.16.0"
     },
     "scripts": {
         "start": "node --max-http-header-size 80000 index.js",
