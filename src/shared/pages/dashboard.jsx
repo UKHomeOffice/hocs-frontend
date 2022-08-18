@@ -85,7 +85,8 @@ const Dashboard = ({  match, history }) => {
 Dashboard.propTypes = {
     match: PropTypes.object.isRequired,
     title: PropTypes.string.isRequired,
-    dashboard: PropTypes.array
+    dashboard: PropTypes.array,
+    history: PropTypes.array
 };
 
 export default Dashboard;

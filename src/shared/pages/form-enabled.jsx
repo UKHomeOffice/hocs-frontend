@@ -244,7 +244,9 @@ function withForm(Page) {
         dispatch: PropTypes.func.isRequired,
         form: PropTypes.object,
         history: PropTypes.object.isRequired,
-        match: PropTypes.object.isRequired
+        match: PropTypes.object.isRequired,
+        hasSidebar: PropTypes.bool,
+        page: PropTypes.object
     };
 
     return FormEnabled;

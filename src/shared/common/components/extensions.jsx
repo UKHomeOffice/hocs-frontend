@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Context } from '../../contexts/application.jsx';
 import { Link } from 'react-router-dom';
 import { isDateTodayOrAfter } from '../../helpers/dateHelpers';
+import PropTypes from 'prop-types';
 
 const Extensions = (props) => {
     const { currentDeadline, EXTENSION } = props.props;
@@ -47,6 +48,12 @@ const Extensions = (props) => {
             { !shouldAllowAddExtension(EXTENSION) && <span className="govuk-body full-width">No further extensions can be applied to this case.</span> }
         </>
     );
+};
+
+Extensions.propTypes = {
+    currentDeadline: PropTypes.string,
+    EXTENSION: PropTypes.array,
+    props: PropTypes.object
 };
 
 export default Extensions;

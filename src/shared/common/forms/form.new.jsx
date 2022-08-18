@@ -47,6 +47,9 @@ Form.propTypes = {
     data: PropTypes.object,
     meta: PropTypes.object,
     updateFormState: PropTypes.func.isRequired,
+    method: PropTypes.string,
+    submitHandler: PropTypes.func,
+    showErrorSummary: PropTypes.bool
 };
 
 export default Form;

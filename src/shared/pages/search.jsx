@@ -7,6 +7,8 @@ import Form from '../common/forms/form.new.jsx';
 import Confirmation from '../common/components/confirmation.jsx';
 import status from '../helpers/api-status.js';
 
+// @TODO: ESLint false positive
+// eslint-disable-next-line react/display-name,react/prop-types
 const FormWrapper = (C) => ({ match, history, ...props }) => {
     const { dispatch, form: contextForm, layout } = useContext(Context);
 
@@ -17,6 +19,8 @@ const FormWrapper = (C) => ({ match, history, ...props }) => {
 
     const getForm = () => {
         dispatch(updateApiStatus(status.REQUEST_FORM))
+            // @TODO: ESLint false positive
+            // eslint-disable-next-line react/prop-types
             .then(() => axios.get('/api/form' + match.url))
             .then(response => setForm(response.data))
             .then(() => dispatch(updateApiStatus(status.REQUEST_FORM_SUCCESS)));
@@ -31,6 +35,8 @@ const FormWrapper = (C) => ({ match, history, ...props }) => {
             formData.append(field, data[field]);
         });
         dispatch(updateApiStatus(status.SUBMIT_FORM))
+            // @TODO: ESLint false positive
+            // eslint-disable-next-line react/prop-types
             .then(() => axios.post('/api' + (form.schema.action || match.url), formData, { headers: { 'Content-Type': 'multipart/form-data' } }))
             .then(({ data }) => {
                 if (data.errors) {
@@ -52,9 +58,13 @@ const FormWrapper = (C) => ({ match, history, ...props }) => {
                             if (data.confirmation) {
                                 setConfirmation(data.confirmation);
                             }
+                            // @TODO: ESLint false positive
+                            // eslint-disable-next-line react/prop-types
                             if (data.redirect === match.url) {
                                 getForm();
                             }
+                            // @TODO: ESLint false positive
+                            // eslint-disable-next-line react/prop-types
                             history.push(data.redirect);
                         });
                 }
@@ -77,9 +87,18 @@ const FormWrapper = (C) => ({ match, history, ...props }) => {
     return form ? (
         <C {...props} title={form.schema.title}>
             {confirmation && <Confirmation>{confirmation.summary}</Confirmation>}
+            {/* @TODO: ESLint false positive */}
+            {/* eslint-disable-next-line react/prop-types */}
             <Form {...form} action={form.schema.action || match.url} submitHandler={submitHandler} updateFormState={updateFormData} />
         </C>
     ) : null;
+};
+
+FormWrapper.displayName = 'FormWrapper';
+
+FormWrapper.propTypes = {
+    match: PropTypes.object,
+    history: PropTypes.array
 };
 
 const Search = ({ children, title }) => (

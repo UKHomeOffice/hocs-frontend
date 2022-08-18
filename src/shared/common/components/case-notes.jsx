@@ -43,6 +43,9 @@ AuditEvent.propTypes = {
     note: PropTypes.string,
 };
 
+// Suppressing prop types here because they are set, but ESLint is still flagging as issues
+// @TODO: Fix false positive prop type warning
+// eslint-disable-next-line react/display-name,react/prop-types
 const TimelineItem = (refreshNotes) => ({ type, body, title, timelineItemUUID }) => {
     const isCaseNote = [
         'MANUAL', 'CLOSE_CASE_TELEPHONE', 'CONVERTED_CASE_TO_MINISTERIAL', 'CONVERTED_CASE_TO_OFFICIAL', 'ALLOCATE',
@@ -57,6 +60,15 @@ const TimelineItem = (refreshNotes) => ({ type, body, title, timelineItemUUID })
         </li>
     );
 };
+
+TimelineItem.propTypes = {
+    type: PropTypes.string,
+    body: PropTypes.object,
+    title: PropTypes.string,
+    timelineItemUUID: PropTypes.string
+};
+
+TimelineItem.displayName = 'TimelineItem';
 
 class Timeline extends Component {
 

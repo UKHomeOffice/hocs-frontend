@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { Context } from '../contexts/application.jsx';
 import { clearApiStatus } from '../contexts/actions/index.jsx';
 
+// @TODO: ESLint false positive
+// eslint-disable-next-line react/prop-types
 const Wrapper = (C) => function NotificationWrapper({ timeoutPeriod = 1000, ...props }) {
     const { dispatch } = useContext(Context);
 
@@ -22,7 +24,8 @@ const Notification = ({ type, display }) => (
 
 Notification.propTypes = {
     type: PropTypes.string.isRequired,
-    display: PropTypes.string.isRequired
+    display: PropTypes.string.isRequired,
+    timeoutPeriod: PropTypes.number
 };
 
 export default Wrapper(Notification);
