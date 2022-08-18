@@ -1399,6 +1399,18 @@ module.exports = {
             endpoint: '/entity/list/POGR_HMPO_EX_GRATIA_PAYMENT_METHOD',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
+        },
+        POGR_HMPO_DOCUMENT_DAMAGE_TYPE: {
+            client: 'INFO',
+            endpoint: '/entity/list/POGR_HMPO_DOCUMENT_DAMAGE_TYPE',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        POGR_HMPO_DOCUMENT_TYPE: {
+            client: 'INFO',
+            endpoint: '/entity/list/POGR_HMPO_DOCUMENT_TYPE',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
         }
     },
     clients: {
