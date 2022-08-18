@@ -1022,6 +1022,12 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: teamsAdapter
         },
+        S_POGR_CONTRIB_TYPE: {
+            client: 'INFO',
+            endpoint: '/entity/list/POGR_CONTRIB_TYPE',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
         S_SMC_COMP_ORIGIN: {
             client: 'INFO',
             endpoint: '/entity/list/SMC_COMP_ORIGIN',
