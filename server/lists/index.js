@@ -1381,6 +1381,24 @@ module.exports = {
             endpoint: '/entity/list/POGR_HMPO_LOCATIONS',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
+        },
+        POGR_HMPO_EX_GRATIA_TYPE_OF_REFUND: {
+            client: 'INFO',
+            endpoint: '/entity/list/POGR_HMPO_EX_GRATIA_TYPE_OF_REFUND',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        POGR_HMPO_EX_GRATIA_REFUND_REASON: {
+            client: 'INFO',
+            endpoint: '/entity/list/POGR_HMPO_EX_GRATIA_REFUND_REASON',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        POGR_HMPO_EX_GRATIA_PAYMENT_METHOD: {
+            client: 'INFO',
+            endpoint: '/entity/list/POGR_HMPO_EX_GRATIA_PAYMENT_METHOD',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
         }
     },
     clients: {
