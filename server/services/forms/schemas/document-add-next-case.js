@@ -5,8 +5,8 @@ const { MIN_ALLOWABLE_YEAR } = require('../../../libs/dateHelpers');
 
 module.exports = (options) => {
     const fromCaseUUID = options?.data?.from ? options.data.from : '';
-    const documentRequired = options.customConfig ? options.customConfig.documentRequired : true;
-    const documentLabel = options.customConfig ? options.customConfig.documentLabel : 'There must be a least 1 document to upload.';
+    const documentRequired = options.config ? options.config.documentRequired : true;
+    const documentLabel = options.config ? options.config.documentLabel : 'There must be a least 1 document to upload.';
 
     const documentComponent = Component('add-document', 'add_document')
         .withValidator('hasWhitelistedExtension')
@@ -14,10 +14,10 @@ module.exports = (options) => {
         .withProp('label', documentLabel)
         .withProp('hint', `There is a limit of ${DOCUMENT_BULK_LIMIT} documents`)
         .withProp('allowMultiple', true)
-        .withProp('whitelist', 'DOCUMENT_EXTENSION_WHITELIST')
+        .withProp('whitelist', 'DOCUMENT_EXTENSION_WHITELIST');
 
     if (documentRequired) {
-        documentComponent.withValidator('required')
+        documentComponent.withValidator('required');
     }
 
     return Form()
