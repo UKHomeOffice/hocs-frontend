@@ -6,3 +6,5 @@ on:
 jobs:
   test:
     uses: UKHomeOffice/hocs-github-actions/.github/workflows/test-javascript.yml@v1
+    with:
+      node-version-matrix: '[ "16.x" , "18.x" ]'
