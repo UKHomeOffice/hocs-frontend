@@ -1375,6 +1375,12 @@ module.exports = {
             endpoint: '/entity/list/TO_BF_BUSINESS_UNIT_ALL',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
+        },
+        POGR_HMPO_LOCATIONS: {
+            client: 'INFO',
+            endpoint: '/entity/list/POGR_HMPO_LOCATIONS',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
         }
     },
     clients: {
