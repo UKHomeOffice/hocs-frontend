@@ -1022,9 +1022,9 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: teamsAdapter
         },
-        S_POGR_CONTRIB_TYPE: {
+        POGR_CONTRIB_BUS_AREA: {
             client: 'INFO',
-            endpoint: '/entity/list/POGR_CONTRIB_TYPE',
+            endpoint: '/entity/list/POGR_CONTRIB_BUS_AREA',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
