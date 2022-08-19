@@ -1,7 +1,9 @@
 name: 'CodeQL'
 on:
+  push:
+    branches: [ main ]
   pull_request:
-    types: [ opened, reopened, synchronize ]
+    branches: [ main ]
     paths:
       - 'src/**'
       - 'server/**'
@@ -11,4 +13,4 @@ on:
 
 jobs:
   analyze:
-    uses: UKHomeOffice/hocs-github-actions/.github/workflows/codeql-analysis-javascript.yml@v1
+    uses: UKHomeOffice/hocs-github-actions/.github/workflows/codeql-analysis-javascript.yml@v2
