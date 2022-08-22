@@ -872,6 +872,36 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
+        TO_BF_ENQUIRY_SUBJECTS: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_BF_ENQUIRY_SUBJECTS',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        TO_BF_ENQUIRY_REASON_CUSTOMS: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_BF_ENQUIRY_REASON_CUSTOMS',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        TO_BF_ENQUIRY_REASON_IMMIGRATION: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_BF_ENQUIRY_REASON_IMMIGRATION',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        TO_BF_ENQUIRY_REASON_OUTWARD_BOUND: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_BF_ENQUIRY_REASON_OUTWARD_BOUND',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        TO_BF_ENQUIRY_REASON_OTHER: {
+            client: 'INFO',
+            endpoint: '/entity/list/TO_BF_ENQUIRY_REASON_OTHER',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
         TO_ENQUIRY_REASONS_ALL: {
             client: 'INFO',
             endpoint: '/entity/list/TO_ENQUIRY_REASONS_ALL',
