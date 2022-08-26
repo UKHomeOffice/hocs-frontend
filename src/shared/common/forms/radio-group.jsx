@@ -134,7 +134,7 @@ class Radio extends Component {
                         <span className="govuk-fieldset__heading govuk-label--s">{label}</span>
                     </legend>
 
-                    {hint && <span className="govuk-hint">{hint}</span>}
+                    {hint && <div className="govuk-hint">{hint}</div>}
                     {error && <span id={`${name}-error`} className="govuk-error-message">{error}</span>}
 
                     <div id={`${name}-radios`} className={'govuk-radios govuk-radios--conditional'} data-module="govuk-radios">

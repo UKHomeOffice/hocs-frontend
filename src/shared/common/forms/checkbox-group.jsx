@@ -53,7 +53,7 @@ class Checkbox extends Component {
                         <span className="govuk-fieldset__heading govuk-label--s">{showLabel && label}</span>
                     </legend>
 
-                    {hint && <span className="govuk-hint">{hint}</span>}
+                    {hint && <div className="govuk-hint">{hint}</div>}
                     {error && <span id={`${name}-error`} className="govuk-error-message">{error}</span>}
 
                     <div className={'govuk-checkboxes'}>

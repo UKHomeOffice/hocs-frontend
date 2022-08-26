@@ -58,7 +58,7 @@ const expandableCheckbox = ({ choice, data, error, errors, hint, initiallyOpen, 
                     </div>
                     }
                 </div>
-                {hint && <span className="govuk-hint">{hint}</span>}
+                {hint && <div className="govuk-hint">{hint}</div>}
                 {isOpen && items && items.length > 0 && <div className="selectable-details-content">
                     {Array.isArray(items) && items.map(createComponent)}
                 </div>}
