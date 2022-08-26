@@ -8,6 +8,7 @@ import { hydrateRoot } from 'react-dom/client';
 
 /* eslint-disable no-undef*/
 const container = document.getElementById('app');
+// eslint-disable-next-line no-unused-vars
 const root = hydrateRoot(container,
     <BrowserRouter>
         <HelmetProvider>

@@ -61,7 +61,8 @@ class DateInput extends Component {
                                 className={`govuk-input govuk-date-input__input govuk-input--width-2 ${error ? 'govuk-input--error' : ''}`}
                                 id={dayKey}
                                 name={dayKey}
-                                type="number"
+                                type="text"
+                                inputMode="numeric"
                                 pattern="[0-9]*"
                                 min="1"
                                 max="31"
@@ -77,7 +78,8 @@ class DateInput extends Component {
                                 className={`govuk-input govuk-date-input__input govuk-input--width-2 ${error ? 'govuk-input--error' : ''}`}
                                 id={monthKey}
                                 name={monthKey}
-                                type="number"
+                                type="text"
+                                inputMode="numeric"
                                 pattern="[0-9]*"
                                 min="1"
                                 max="12"
@@ -93,7 +95,8 @@ class DateInput extends Component {
                                 className={`govuk-input govuk-date-input__input govuk-input--width-4  ${error ? 'govuk-input--error' : ''}`}
                                 id={yearKey}
                                 name={yearKey}
-                                type="number"
+                                type="text"
+                                inputMode="numeric"
                                 pattern="[0-9]*"
                                 min={minYear}
                                 max={maxYear}
