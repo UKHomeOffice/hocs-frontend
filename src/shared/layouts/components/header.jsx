@@ -14,8 +14,8 @@ class Header extends Component {
                     </span>
                 </div>
                 <div className='govuk-header__content'>
-                    <nav>
-                        <ul id='navigation' className='govuk-header__navigation ' aria-label='Top Level Navigation'>
+                    <nav className='govuk-header__navigation' aria-label='Top Level Navigation'>
+                        <ul id='navigation' className={'govuk-header__navigation-list'}>
                             <li className='govuk-header__navigation-item'>
                                 <Link to='/action/create/workflow' className='govuk-header__link'>Create Single Case</Link>
                             </li>
