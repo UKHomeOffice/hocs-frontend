@@ -7,7 +7,7 @@ const getComponentFactoryInstance = (factory, options) => ({ component, props },
 const itemHasValidationError = errors => item => errors[item.props.name] || childControlHasValidationError(errors, item);
 const childControlHasValidationError = (errors, { props: { items } = {} } = {}) => Array.isArray(items) && items.some(itemHasValidationError(errors));
 
-function Section({ data, errors, index, items, title, updateState, page }) {
+function Section({ data, errors, index, items, title, updateState, page, visible = false }) {
     const createComponent = getComponentFactoryInstance(formComponentFactory, { data, errors: errors, meta: {}, callback: updateState, baseUrl: '/', page });
     const sectionHasValidationError = errors && Array.isArray(items) && items.some(itemHasValidationError(errors));
     const [isVisible, setVisible] = useState(sectionHasValidationError);
@@ -15,8 +15,17 @@ function Section({ data, errors, index, items, title, updateState, page }) {
     const [toggleText, setToggleText] = useState('Show');
 
     useEffect(() => {
+        setVisible(visible);
+        if (visible) {
+            setToggleText('Hide');
+        } else {
+            setToggleText('Show');
+        }
+    }, [visible]);
+
+    useEffect(() => {
         if (sectionHasValidationError) {
-            setVisible(true);
+            setVisible(false);
         }
     }, [errors]);
 
@@ -26,7 +35,7 @@ function Section({ data, errors, index, items, title, updateState, page }) {
     const clickHandler = React.useCallback(event => {
         event.preventDefault();
         setVisible(!isVisible);
-        if (toggleText === 'Show') {
+        if (!isVisible) {
             setToggleText('Hide');
         } else {
             setToggleText('Show');
@@ -73,16 +82,27 @@ Section.propTypes = {
     index: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     updateState: PropTypes.func.isRequired,
-    page: PropTypes.object.isRequired
+    page: PropTypes.object.isRequired,
+    visible: PropTypes.bool
 };
 
 const Accordion = function Accordion({ name, sections, data, updateState, errors, page }) {
     const [showError, setShowError] = useState(false);
     const [errorId, setErrorId] = useState('');
+    const [showAll, setShowAll] = useState(false);
 
     if (!name && sections[0].name) {
         name = sections[0].name;
     }
+
+    const clickHandler = React.useCallback(event => {
+        event.preventDefault();
+        if (showAll) {
+            setShowAll(false);
+        } else {
+            setShowAll(true);
+        }
+    }, [showAll]);
 
     useEffect(() => {
         if (errors && errors[name]) {
@@ -97,7 +117,26 @@ const Accordion = function Accordion({ name, sections, data, updateState, errors
     return (
         <div id={name} className={`govuk-accordion${showError ? ' govuk-form-group--error' : ''}`} data-module='accordion'>
             { showError && errors && <p id={errorId} className="govuk-error-message">{ errors[name] }</p> }
-            {Array.isArray(sections) && sections.map(({ items, title }, index) => <Section data={data} errors={errors} items={items} index={index} key={index} title={title} updateState={updateState} page={page} />)}
+            {Array.isArray(sections) && sections.length > 1 &&
+                <div className="govuk-accordion__controls">
+                    <button type="button" className="govuk-accordion__show-all" onClick={clickHandler} aria-expanded="false">
+                        <span className={classNames('govuk-accordion-nav__chevron', { 'govuk-accordion-nav__chevron--down' : !showAll })}></span>
+                        <span className="govuk-accordion__show-all-text">{ showAll ? 'Hide' : 'Show' } all sections</span>
+                    </button>
+                </div>
+            }
+            {Array.isArray(sections) && sections.map(({ items, title }, index) =>
+                <Section
+                    data={data}
+                    errors={errors}
+                    items={items}
+                    index={index}
+                    key={index}
+                    title={title}
+                    updateState={updateState}
+                    page={page}
+                    visible={showAll}
+                />)}
         </div>
     );
 };
@@ -105,7 +144,7 @@ const Accordion = function Accordion({ name, sections, data, updateState, errors
 Accordion.propTypes = {
     data: PropTypes.object.isRequired,
     errors: PropTypes.object,
-    name: PropTypes.string.isRequired,
+    name: PropTypes.string,
     sections: PropTypes.array.isRequired,
     updateState: PropTypes.func,
     page: PropTypes.object.isRequired
