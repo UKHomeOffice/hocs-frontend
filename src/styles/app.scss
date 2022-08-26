@@ -17,6 +17,12 @@ $govuk-font-family-tabular: 'helvetica neue',Arial, Helvetica, sans-serif !defau
   width: inherit;
 }
 
+// We're using the GOV UK Frontend nav but we're not a GOVUK service so we don't
+// display the nav with the GOVUK crown and title. The Frontend package assumes the layout has the branding.
+.govuk-header__navigation {
+  margin-top: 0;
+}
+
 .full-width {
   display: block;
   width: 100%;
@@ -109,10 +115,6 @@ $govuk-font-family-tabular: 'helvetica neue',Arial, Helvetica, sans-serif !defau
   margin-bottom: govuk-spacing(3);
 }
 
-// .govuk-typeahead__container {
-
-// }
-
 .govuk-typeahead__control {
   @extend %govuk-body-m;
   box-sizing: border-box;
@@ -171,14 +173,6 @@ $govuk-font-family-tabular: 'helvetica neue',Arial, Helvetica, sans-serif !defau
   box-sizing: border-box;
   padding: 0;
 }
-
-// .govuk-typeahead__placeholder {
-
-// }
-
-// .govuk-typeahead__input {
-
-// }
 
 .govuk-typeahead__indicators {
   -webkit-align-items: center;
