@@ -52,7 +52,7 @@ class DateInput extends Component {
             <fieldset id={name} disabled={disabled} className="govuk-fieldset" role="group">
                 <legend className="govuk-fieldset__legend govuk-label--s">{label}</legend>
                 {hint && <div className="govuk-hint">{hint}</div>}
-                {error && <span id={`${name}-error`} className="govuk-error-message">{error}</span>}
+                {error && <p id={`${name}-error`} className="govuk-error-message">{error}</p>}
                 <div className="govuk-date-input">
                     <div className="govuk-date-input__item">
                         <div className="govuk-form-group">

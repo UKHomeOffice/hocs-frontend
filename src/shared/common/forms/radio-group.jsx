@@ -135,7 +135,7 @@ class Radio extends Component {
                     </legend>
 
                     {hint && <div className="govuk-hint">{hint}</div>}
-                    {error && <span id={`${name}-error`} className="govuk-error-message">{error}</span>}
+                    {error && <p id={`${name}-error`} className="govuk-error-message">{error}</p>}
 
                     <div id={`${name}-radios`} className={'govuk-radios govuk-radios--conditional'} data-module="govuk-radios">
                         {choicesToUse && choicesToUse
@@ -164,9 +164,9 @@ class Radio extends Component {
                                                     {choice.conditionalContent.label}
                                                 </label>
                                                 {this.isConditionalContentError(errors, `${choice.value}Text`) &&
-                                                <span id={`${choice.value}Text-error`} className="govuk-error-message">
+                                                <p id={`${choice.value}Text-error`} className="govuk-error-message">
                                                     <span className="govuk-visually-hidden">Error:</span>{errors[`${choice.value}Text`]}
-                                                </span>
+                                                </p>
                                                 }
                                                 <textarea
                                                     className={`govuk-textarea ${this.isConditionalContentError(errors, `${choice.value}Text`) ? ' govuk-textarea--error' : ''}`}

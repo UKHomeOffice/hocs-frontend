@@ -34,7 +34,7 @@ class TextArea extends Component {
 
 
                 {hint && <div className="govuk-hint">{hint}</div>}
-                {error && <span id={`${name}-error`} className="govuk-error-message">{error}</span>}
+                {error && <p id={`${name}-error`} className="govuk-error-message">{error}</p>}
 
 
                 <textarea className={`govuk-textarea form-control-3-4 ${error ? 'govuk-textarea--error' : ''}`}

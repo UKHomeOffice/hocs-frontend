@@ -96,7 +96,7 @@ const Accordion = function Accordion({ name, sections, data, updateState, errors
 
     return (
         <div id={name} className={`govuk-accordion${showError ? ' govuk-form-group--error' : ''}`} data-module='accordion'>
-            { showError && errors && <span id={errorId} className="govuk-error-message">{ errors[name] }</span> }
+            { showError && errors && <p id={errorId} className="govuk-error-message">{ errors[name] }</p> }
             {Array.isArray(sections) && sections.map(({ items, title }, index) => <Section data={data} errors={errors} items={items} index={index} key={index} title={title} updateState={updateState} page={page} />)}
         </div>
     );

@@ -54,7 +54,7 @@ class Checkbox extends Component {
                     </legend>
 
                     {hint && <div className="govuk-hint">{hint}</div>}
-                    {error && <span id={`${name}-error`} className="govuk-error-message">{error}</span>}
+                    {error && <p id={`${name}-error`} className="govuk-error-message">{error}</p>}
 
                     <div className={'govuk-checkboxes'}>
                         {choices && choices.map((choice, i) => {
