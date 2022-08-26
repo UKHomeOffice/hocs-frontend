@@ -1,22 +1,17 @@
 import React from 'react';
+import { hydrate } from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import 'react-app-polyfill/stable';
 import App from '../shared/index.jsx';
 import { HelmetProvider } from 'react-helmet-async';
 import '../styles/app.scss';
-import { hydrateRoot } from 'react-dom/client';
-
 /* eslint-disable no-undef*/
-const container = document.getElementById('app');
-// eslint-disable-next-line no-unused-vars
-const root = hydrateRoot(container,
+hydrate(
     <BrowserRouter>
         <HelmetProvider>
             <App config={window.__INITIAL_DATA__} />
         </HelmetProvider>
-    </BrowserRouter>
+    </BrowserRouter>,
+    document.getElementById('app')
 );
 /* eslint-enable no-undef*/
-
-
-
