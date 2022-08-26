@@ -12,6 +12,7 @@ function Section({ data, errors, index, items, title, updateState, page }) {
     const sectionHasValidationError = errors && Array.isArray(items) && items.some(itemHasValidationError(errors));
     const [isVisible, setVisible] = useState(sectionHasValidationError);
     const [isFocussed, setFocussed] = useState(false);
+    const [toggleText, setToggleText] = useState('Show');
 
     useEffect(() => {
         if (sectionHasValidationError) {
@@ -25,15 +26,36 @@ function Section({ data, errors, index, items, title, updateState, page }) {
     const clickHandler = React.useCallback(event => {
         event.preventDefault();
         setVisible(!isVisible);
-    }, [isVisible]);
+        if (toggleText === 'Show') {
+            setToggleText('Hide');
+        } else {
+            setToggleText('Show');
+        }
+    }, [isVisible, toggleText]);
 
     return (
-        <div className="govuk-accordion" data-module="govuk-accordion" id="accordion-default">
+        <div data-module="govuk-accordion" id="accordion-default">
             <div key={index} className={classNames('govuk-accordion__section', { 'govuk-accordion__section--expanded': isVisible })}>
                 <div className={classNames('govuk-accordion__section-header', { 'govuk-accordion__section-header--focused': isFocussed })} onClick={clickHandler} onFocus={onFocus} onBlur={onBlur}>
                     <h2 className='govuk-accordion__section-heading'>
-                        <button type='button' className='govuk-accordion__section-button' id={`accordion-default-heading-${index}`}>
-                            {title}
+                        <button type='button'
+                            aria-controls={`accordion-default-content-${index}`}
+                            className='govuk-accordion__section-button'
+                            aria-expanded={isVisible}
+                        >
+                            <span className='govuk-accordion__section-heading-text' id={`accordion-default-heading-${index}`}>
+                                <span className='govuk-accordion__section-heading-text-focus'>
+                                    {title}
+                                </span>
+                            </span>
+                            <span className='govuk-accordion__section-toggle' data-nosnippet=''>
+                                <span className='govuk-accordion__section-toggle-focus'>
+                                    <span className={classNames('govuk-accordion-nav__chevron', { 'govuk-accordion-nav__chevron--down' : !isVisible })}></span>
+                                    <span className='govuk-accordion__section-toggle-text'>{toggleText}
+                                        <span className='govuk-visually-hidden'> this section</span>
+                                    </span>
+                                </span>
+                            </span>
                         </button>
                     </h2>
                 </div>
@@ -54,7 +76,7 @@ Section.propTypes = {
     page: PropTypes.object.isRequired
 };
 
-const Accordion = React.memo(function Accordion({ name, sections, data, updateState, errors, page }) {
+const Accordion = function Accordion({ name, sections, data, updateState, errors, page }) {
     const [showError, setShowError] = useState(false);
     const [errorId, setErrorId] = useState('');
 
@@ -78,7 +100,7 @@ const Accordion = React.memo(function Accordion({ name, sections, data, updateSt
             {Array.isArray(sections) && sections.map(({ items, title }, index) => <Section data={data} errors={errors} items={items} index={index} key={index} title={title} updateState={updateState} page={page} />)}
         </div>
     );
-});
+};
 
 Accordion.propTypes = {
     data: PropTypes.object.isRequired,

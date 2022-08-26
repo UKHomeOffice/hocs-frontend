@@ -5,7 +5,6 @@ import App from '../shared/index.jsx';
 import { HelmetProvider } from 'react-helmet-async';
 import '../styles/app.scss';
 import { hydrateRoot } from 'react-dom/client';
-const GOVUKFrontend = require('govuk-frontend');
 
 /* eslint-disable no-undef*/
 const container = document.getElementById('app');
@@ -17,9 +16,6 @@ const root = hydrateRoot(container,
     </BrowserRouter>
 );
 /* eslint-enable no-undef*/
-
-GOVUKFrontend.initAll();
-
 
 
 
