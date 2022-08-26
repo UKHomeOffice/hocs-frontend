@@ -63,7 +63,6 @@ class DateInput extends Component {
                                 name={dayKey}
                                 type="text"
                                 inputMode="numeric"
-                                pattern="[0-9]*"
                                 min="1"
                                 max="31"
                                 value={parts.day}
@@ -80,7 +79,6 @@ class DateInput extends Component {
                                 name={monthKey}
                                 type="text"
                                 inputMode="numeric"
-                                pattern="[0-9]*"
                                 min="1"
                                 max="12"
                                 value={parts.month}
@@ -97,7 +95,6 @@ class DateInput extends Component {
                                 name={yearKey}
                                 type="text"
                                 inputMode="numeric"
-                                pattern="[0-9]*"
                                 min={minYear}
                                 max={maxYear}
                                 value={parts.year}
