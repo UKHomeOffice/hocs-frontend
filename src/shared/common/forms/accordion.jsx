@@ -28,17 +28,18 @@ function Section({ data, errors, index, items, title, updateState, page }) {
     }, [isVisible]);
 
     return (
-        <div key={index} className={classNames('govuk-accordion__section', { 'govuk-accordion__section--expanded': isVisible })}>
-            <div className={classNames('govuk-accordion__section-header', { 'govuk-accordion__section-header--focused': isFocussed })} onClick={clickHandler} onFocus={onFocus} onBlur={onBlur}>
-                <h2 className='govuk-accordion__section-heading'>
-                    <button type='button' className='govuk-accordion__section-button' id={`accordion-default-heading-${index}`}>
-                        {title}
-                    </button>
-                </h2>
-                <span className='govuk-accordion__icon' aria-hidden='true'></span>
-            </div>
-            <div id={`accordion-default-content-${index}`} className='govuk-accordion__section-content' aria-labelledby={`accordion-default-heading-${index}`}>
-                {Array.isArray(items) && items.map(createComponent)}
+        <div className="govuk-accordion" data-module="govuk-accordion" id="accordion-default">
+            <div key={index} className={classNames('govuk-accordion__section', { 'govuk-accordion__section--expanded': isVisible })}>
+                <div className={classNames('govuk-accordion__section-header', { 'govuk-accordion__section-header--focused': isFocussed })} onClick={clickHandler} onFocus={onFocus} onBlur={onBlur}>
+                    <h2 className='govuk-accordion__section-heading'>
+                        <button type='button' className='govuk-accordion__section-button' id={`accordion-default-heading-${index}`}>
+                            {title}
+                        </button>
+                    </h2>
+                </div>
+                <div id={`accordion-default-content-${index}`} className='govuk-accordion__section-content' aria-labelledby={`accordion-default-heading-${index}`}>
+                    {Array.isArray(items) && items.map(createComponent)}
+                </div>
             </div>
         </div>
     );
@@ -53,7 +54,7 @@ Section.propTypes = {
     page: PropTypes.object.isRequired
 };
 
-function Accordion({ name, sections, data, updateState, errors, page }) {
+const Accordion = React.memo(function Accordion({ name, sections, data, updateState, errors, page }) {
     const [showError, setShowError] = useState(false);
     const [errorId, setErrorId] = useState('');
 
@@ -77,7 +78,7 @@ function Accordion({ name, sections, data, updateState, errors, page }) {
             {Array.isArray(sections) && sections.map(({ items, title }, index) => <Section data={data} errors={errors} items={items} index={index} key={index} title={title} updateState={updateState} page={page} />)}
         </div>
     );
-}
+});
 
 Accordion.propTypes = {
     data: PropTypes.object.isRequired,
