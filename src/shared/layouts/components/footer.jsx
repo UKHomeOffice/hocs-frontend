@@ -34,7 +34,7 @@ class Footer extends Component {
                             </ul>
                             {
                                 showOGL && (
-                                    <svg role="presentation" focusable="false" className="govuk-footer__licence-logo"
+                                    <svg aria-hidden="true" focusable="false" className="govuk-footer__licence-logo"
                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 483.2 195.7" height="17" width="41">
                                         <path
                                             fill="currentColor"
