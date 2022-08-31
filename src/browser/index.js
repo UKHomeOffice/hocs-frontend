@@ -6,7 +6,6 @@ import App from '../shared/index.jsx';
 import { HelmetProvider } from 'react-helmet-async';
 import '../styles/app.scss';
 /* eslint-disable no-undef*/
-document.body.className = 'govuk-template__body js-enabled';
 hydrate(
     <BrowserRouter>
         <HelmetProvider>

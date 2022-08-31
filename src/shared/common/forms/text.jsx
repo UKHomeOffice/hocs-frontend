@@ -28,8 +28,8 @@ class Text extends Component {
             <div className={`govuk-form-group${error ? ' govuk-form-group--error' : ''} ${className ? className : ''}`}>
 
                 <label htmlFor={name} id={`${name}-label`} className="govuk-label govuk-label--s">{label}</label>
-                {hint && <span className="govuk-hint">{hint}</span>}
-                {error && <span id={`${name}-error`} className="govuk-error-message">{error}</span>}
+                {hint && <div className="govuk-hint">{hint}</div>}
+                {error && <p id={`${name}-error`} className="govuk-error-message">{error}</p>}
                 <div>
                     <input className={classNames('govuk-input', { 'govuk-input--error': error }, elementClassName)}
                         id={name}

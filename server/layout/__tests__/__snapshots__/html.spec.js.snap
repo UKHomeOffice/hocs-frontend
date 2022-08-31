@@ -25,7 +25,7 @@ exports[`HTML module should default to proposition header when no title is passe
 </head>
 
 <body class=\\"govuk-template__body \\">
-
+    <script>document.body.className = (document.body.className ? document.body.className : '') + ' js-enabled';</script>
     <div id=\\"app\\"></div>
     <script src=\\"/public/all.js\\"></script>
 </body>
@@ -59,7 +59,7 @@ exports[`HTML module should include additional CSS and JS when passed 1`] = `
 </head>
 
 <body class=\\"govuk-template__body \\">
-
+    <script>document.body.className = (document.body.className ? document.body.className : '') + ' js-enabled';</script>
     <div id=\\"app\\"></div>
     <script src=\\"/public/all.js\\"></script>
 </body>
@@ -92,7 +92,7 @@ exports[`HTML module should include application props in the head when passed 1`
 </head>
 
 <body class=\\"govuk-template__body \\">
-
+    <script>document.body.className = (document.body.className ? document.body.className : '') + ' js-enabled';</script>
     <div id=\\"app\\"></div>
     <script src=\\"/public/all.js\\"></script>
 </body>
@@ -125,7 +125,7 @@ exports[`HTML module should include the appropriate react application bundle whe
 </head>
 
 <body class=\\"govuk-template__body \\">
-
+    <script>document.body.className = (document.body.className ? document.body.className : '') + ' js-enabled';</script>
     <div id=\\"app\\"></div>
     <script src=\\"/public/all.js\\"></script>
 </body>
@@ -158,7 +158,7 @@ exports[`HTML module should include the correct asset path when passed 1`] = `
 </head>
 
 <body class=\\"govuk-template__body \\">
-
+    <script>document.body.className = (document.body.className ? document.body.className : '') + ' js-enabled';</script>
     <div id=\\"app\\"></div>
     <script src=\\"some/public/folder/that/contains/my/assets/all.js\\"></script>
 </body>
@@ -191,7 +191,7 @@ exports[`HTML module should include the server rendered markup when passed 1`] =
 </head>
 
 <body class=\\"govuk-template__body \\">
-
+    <script>document.body.className = (document.body.className ? document.body.className : '') + ' js-enabled';</script>
     <div id=\\"app\\"><--- REACT APPLICATION ---></div>
     <script src=\\"/public/all.js\\"></script>
 </body>
@@ -224,7 +224,7 @@ exports[`HTML module should not contain the react bundle js when clientside is s
 </head>
 
 <body class=\\"govuk-template__body \\">
-
+    <script>document.body.className = (document.body.className ? document.body.className : '') + ' js-enabled';</script>
     <div id=\\"app\\"></div>
     <script src=\\"/public/all.js\\"></script>
 </body>
@@ -257,7 +257,7 @@ exports[`HTML module should return the default html when no additional configura
 </head>
 
 <body class=\\"govuk-template__body \\">
-
+    <script>document.body.className = (document.body.className ? document.body.className : '') + ' js-enabled';</script>
     <div id=\\"app\\"></div>
     <script src=\\"/public/all.js\\"></script>
 </body>
