@@ -11,21 +11,8 @@ const createAdditionalFields = async (additionalFields = [], fetchList) => {
 
     for (var i = 0; i < results.length; i++) {
         var field = results[i];
-        console.log('\nresult: ' + JSON.stringify(results[i]));
         if (field.choices && typeof field.choices === 'string') {
-            if (field.choices.includes(', ')) {
-                const choicesList = [];
-                const listNames = field.choices.split(', ');
-                for (var j = 0; j < listNames.length; j++) {
-                    const fetchedList = await fetchList(listNames[j]);
-                    for (var k = 0; k < fetchedList.length; k++) {
-                        choicesList.push(fetchedList[k]);
-                    }
-                }
-                field.choices = choicesList;
-            } else {
-                field.choices = await fetchList(field.choices);
-            }
+            field.choices = await fetchChoices(field.choices, fetchList);
         }
         if (field.choices) {
             for (var l = 0; l < field.choices.length; l++) {
@@ -38,16 +25,29 @@ const createAdditionalFields = async (additionalFields = [], fetchList) => {
                     }
                 }
                 if (choice.value && choice.value === field.value) {
-                    console.log('field current: ' + field.value);
                     field.value = choice.label;
-                    console.log('field set to: ' + choice.label);
                     break;
                 }
-
             }
         }
     }
     return results;
+};
+
+const fetchChoices = async (choices, fetchList) => {
+    if (choices.includes(', ')) {
+        const choicesList = [];
+        const listNames = choices.split(', ');
+        for (var j = 0; j < listNames.length; j++) {
+            const fetchedList = await fetchList(listNames[j]);
+            for (var k = 0; k < fetchedList.length; k++) {
+                choicesList.push(fetchedList[k]);
+            }
+        }
+        return choicesList;
+    }
+
+    return await fetchList(choices);
 };
 
 const formatCaseActions = async (caseActions, fetchList) => Promise.all(
