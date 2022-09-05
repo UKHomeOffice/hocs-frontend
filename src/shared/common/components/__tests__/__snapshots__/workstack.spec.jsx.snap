@@ -57,13 +57,13 @@ Object {
                   <div
                     class="workstack"
                   >
-                    <div
+                    <span
                       aria-live="polite"
                       class="govuk-hint"
                     >
                       9
                        Items
-                    </div>
+                    </span>
                     <table
                       class="govuk-table"
                     >
@@ -1041,13 +1041,13 @@ Object {
                         </tr>
                       </tbody>
                     </table>
-                    <div
+                    <span
                       aria-live="polite"
                       class="govuk-hint"
                     >
                       9
                        Items
-                    </div>
+                    </span>
                   </div>
                 </div>
               </div>
@@ -1145,13 +1145,13 @@ Object {
                 <div
                   class="workstack"
                 >
-                  <div
+                  <span
                     aria-live="polite"
                     class="govuk-hint"
                   >
                     9
                      Items
-                  </div>
+                  </span>
                   <table
                     class="govuk-table"
                   >
@@ -2129,13 +2129,13 @@ Object {
                       </tr>
                     </tbody>
                   </table>
-                  <div
+                  <span
                     aria-live="polite"
                     class="govuk-hint"
                   >
                     9
                      Items
-                  </div>
+                  </span>
                 </div>
               </div>
             </div>
@@ -2290,13 +2290,13 @@ Object {
                   <div
                     class="workstack"
                   >
-                    <div
+                    <span
                       aria-live="polite"
                       class="govuk-hint"
                     >
                       9
                        Items
-                    </div>
+                    </span>
                     <table
                       class="govuk-table"
                     >
@@ -3274,13 +3274,13 @@ Object {
                         </tr>
                       </tbody>
                     </table>
-                    <div
+                    <span
                       aria-live="polite"
                       class="govuk-hint"
                     >
                       9
                        Items
-                    </div>
+                    </span>
                   </div>
                 </div>
               </div>
@@ -3424,13 +3424,13 @@ Object {
                 <div
                   class="workstack"
                 >
-                  <div
+                  <span
                     aria-live="polite"
                     class="govuk-hint"
                   >
                     9
                      Items
-                  </div>
+                  </span>
                   <table
                     class="govuk-table"
                   >
@@ -4408,13 +4408,13 @@ Object {
                       </tr>
                     </tbody>
                   </table>
-                  <div
+                  <span
                     aria-live="polite"
                     class="govuk-hint"
                   >
                     9
                      Items
-                  </div>
+                  </span>
                 </div>
               </div>
             </div>
@@ -4615,13 +4615,13 @@ Object {
                   <div
                     class="workstack"
                   >
-                    <div
+                    <span
                       aria-live="polite"
                       class="govuk-hint"
                     >
                       9
                        Items
-                    </div>
+                    </span>
                     <table
                       class="govuk-table"
                     >
@@ -5599,13 +5599,13 @@ Object {
                         </tr>
                       </tbody>
                     </table>
-                    <div
+                    <span
                       aria-live="polite"
                       class="govuk-hint"
                     >
                       9
                        Items
-                    </div>
+                    </span>
                   </div>
                 </div>
               </div>
@@ -5703,13 +5703,13 @@ Object {
                 <div
                   class="workstack"
                 >
-                  <div
+                  <span
                     aria-live="polite"
                     class="govuk-hint"
                   >
                     9
                      Items
-                  </div>
+                  </span>
                   <table
                     class="govuk-table"
                   >
@@ -6687,13 +6687,13 @@ Object {
                       </tr>
                     </tbody>
                   </table>
-                  <div
+                  <span
                     aria-live="polite"
                     class="govuk-hint"
                   >
                     9
                      Items
-                  </div>
+                  </span>
                 </div>
               </div>
             </div>
@@ -6848,13 +6848,13 @@ Object {
                   <div
                     class="workstack"
                   >
-                    <div
+                    <span
                       aria-live="polite"
                       class="govuk-hint"
                     >
                       9
                        Items
-                    </div>
+                    </span>
                     <table
                       class="govuk-table"
                     >
@@ -7832,13 +7832,13 @@ Object {
                         </tr>
                       </tbody>
                     </table>
-                    <div
+                    <span
                       aria-live="polite"
                       class="govuk-hint"
                     >
                       9
                        Items
-                    </div>
+                    </span>
                   </div>
                 </div>
               </div>
@@ -7936,13 +7936,13 @@ Object {
                 <div
                   class="workstack"
                 >
-                  <div
+                  <span
                     aria-live="polite"
                     class="govuk-hint"
                   >
                     9
                      Items
-                  </div>
+                  </span>
                   <table
                     class="govuk-table"
                   >
@@ -8920,13 +8920,13 @@ Object {
                       </tr>
                     </tbody>
                   </table>
-                  <div
+                  <span
                     aria-live="polite"
                     class="govuk-hint"
                   >
                     9
                      Items
-                  </div>
+                  </span>
                 </div>
               </div>
             </div>

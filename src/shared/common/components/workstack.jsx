@@ -570,9 +570,9 @@ class WorkstackAllocate extends Component {
                                 <div className='govuk-grid-row'>
                                     <div className='govuk-grid-column-full'>
                                         <div className='workstack'>
-                                            <div className='govuk-hint' aria-live='polite'>
+                                            <span className='govuk-hint' aria-live='polite'>
                                                 {items.length} Items
-                                            </div>
+                                            </span>
                                             <table className='govuk-table'>
                                                 <thead className='govuk-table__head'>
                                                     <tr className='govuk-radios govuk-table__row'>
@@ -587,9 +587,9 @@ class WorkstackAllocate extends Component {
                                                         .map(item => this.renderRow(item, columns))}
                                                 </tbody>
                                             </table>
-                                            <div className='govuk-hint' aria-live='polite'>
+                                            <span className='govuk-hint' aria-live='polite'>
                                                 {items.length} Items
-                                            </div>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>

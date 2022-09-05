@@ -112,11 +112,11 @@ Object {
         >
           MappedText field
         </label>
-        <div
+        <span
           class="govuk-hint"
         >
           A hint for mapped-text field
-        </div>
+        </span>
         <label
           class="govuk-label govuk-label--s govuk-mapped-text"
           id="mapped-text-field"
@@ -137,11 +137,11 @@ Object {
       >
         MappedText field
       </label>
-      <div
+      <span
         class="govuk-hint"
       >
         A hint for mapped-text field
-      </div>
+      </span>
       <label
         class="govuk-label govuk-label--s govuk-mapped-text"
         id="mapped-text-field"

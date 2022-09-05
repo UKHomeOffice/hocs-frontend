@@ -102,8 +102,8 @@ class CheckboxGrid extends Component {
                         <span className="govuk-fieldset__heading govuk-label--s">{showLabel && label}</span>
                     </legend>
 
-                    {hint && <div className="govuk-hint">{hint}</div>}
-                    {error && <p id={`${name}-error`} className="govuk-error-message">{error}</p>}
+                    {hint && <span className="govuk-hint">{hint}</span>}
+                    {error && <span id={`${name}-error`} className="govuk-error-message">{error}</span>}
 
                     <div className={'govuk-checkboxes'} style={checkboxContainerStyle}>
                         {choices && choices.map((choice, i) => {

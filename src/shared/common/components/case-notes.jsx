@@ -146,7 +146,7 @@ class Timeline extends Component {
 
                                         <label htmlFor={'case-note'} id={'case-note-label'} className='govuk-label govuk-label--s'>Case note</label>
 
-                                        {submissionError && <p id={'case-note-error'} className='govuk-error-message'>{submissionError}</p>}
+                                        {submissionError && <span id={'case-note-error'} className='govuk-error-message'>{submissionError}</span>}
 
                                         <textarea className={'govuk-textarea form-control-3-4'}
                                             id='case-note'

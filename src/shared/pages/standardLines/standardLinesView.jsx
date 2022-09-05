@@ -47,9 +47,9 @@ const StandardLinesView = (props) => {
                         value={state.filter}
                         autoFocus={true}
                     />
-                    <div className="govuk-hint" aria-live="polite">
+                    <span className="govuk-hint" aria-live="polite">
                         {`${state.activeStandardLines.length} Items`}
-                    </div>
+                    </span>
                 </div>
                 <div className="govuk-grid-row margin-bottom--small">
                     <div className="govuk-grid-column-two-thirds govuk-label--s padding-top--small">Exclude expired</div>
