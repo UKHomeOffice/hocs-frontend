@@ -22,9 +22,9 @@ class MappedText extends Component {
             <div className={`govuk-form-group${error ? ' govuk-form-group--error' : ''}`}>
 
                 <label htmlFor={name} id={`${name}-label`} className="govuk-label govuk-label--s">{label}</label>
-                {hint && <div className="govuk-hint">{hint}</div>}
+                {hint && <span className="govuk-hint">{hint}</span>}
 
-                {error && <p id={`${name}-error`} className="govuk-error-message">{error}</p>}
+                {error && <span id={`${name}-error`} className="govuk-error-message">{error}</span>}
 
                 <label className="govuk-label govuk-label--s govuk-mapped-text"
                     id={name}

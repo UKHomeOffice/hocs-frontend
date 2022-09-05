@@ -41,7 +41,7 @@ const render = ({
 </head>
 
 <body class="govuk-template__body ">
-    <script>document.body.className = (document.body.className ? document.body.className : '') + ' js-enabled';</script>
+
     <div id="app">${markup}</div>
     <script src="${assetPath}/all.js"></script>
 </body>

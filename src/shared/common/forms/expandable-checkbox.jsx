@@ -36,7 +36,7 @@ const expandableCheckbox = ({ choice, data, error, errors, hint, initiallyOpen, 
     return <>
         <div className="govuk-grid-row selectable-details">
             <div className="govuk-grid-column-full">
-                {error && <p id={`${name}-error`} className="govuk-error-message">{error}</p>}
+                {error && <span id={`${name}-error`} className="govuk-error-message">{error}</span>}
                 <div className="selectable-details-header">
                     <div className={'govuk-checkboxes'} style={{ display: 'inline-flex' }}>
                         <div className="govuk-checkboxes__item">
@@ -58,7 +58,7 @@ const expandableCheckbox = ({ choice, data, error, errors, hint, initiallyOpen, 
                     </div>
                     }
                 </div>
-                {hint && <div className="govuk-hint">{hint}</div>}
+                {hint && <span className="govuk-hint">{hint}</span>}
                 {isOpen && items && items.length > 0 && <div className="selectable-details-content">
                     {Array.isArray(items) && items.map(createComponent)}
                 </div>}

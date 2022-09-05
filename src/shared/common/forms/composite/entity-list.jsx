@@ -63,7 +63,7 @@ class EntityList extends Component {
                     </legend>
 
                     {hint && <span className="govuk-form-hint">{hint}</span>}
-                    {error && <p id={`${name}-error`} className="govuk-error-message">{error}</p>}
+                    {error && <span id={`${name}-error`} className="govuk-error-message">{error}</span>}
 
                     <table className='govuk-table'>
                         <tbody className='govuk-table__body'>

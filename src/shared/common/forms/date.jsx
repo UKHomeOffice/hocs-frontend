@@ -51,8 +51,8 @@ class DateInput extends Component {
         return <div className={`govuk-form-group${error ? ' govuk-form-group--error' : ''}`}>
             <fieldset id={name} disabled={disabled} className="govuk-fieldset" role="group">
                 <legend className="govuk-fieldset__legend govuk-label--s">{label}</legend>
-                {hint && <div className="govuk-hint">{hint}</div>}
-                {error && <p id={`${name}-error`} className="govuk-error-message">{error}</p>}
+                {hint && <span className="govuk-hint">{hint}</span>}
+                {error && <span id={`${name}-error`} className="govuk-error-message">{error}</span>}
                 <div className="govuk-date-input">
                     <div className="govuk-date-input__item">
                         <div className="govuk-form-group">
@@ -61,8 +61,8 @@ class DateInput extends Component {
                                 className={`govuk-input govuk-date-input__input govuk-input--width-2 ${error ? 'govuk-input--error' : ''}`}
                                 id={dayKey}
                                 name={dayKey}
-                                type="text"
-                                inputMode="numeric"
+                                type="number"
+                                pattern="[0-9]*"
                                 min="1"
                                 max="31"
                                 value={parts.day}
@@ -77,8 +77,8 @@ class DateInput extends Component {
                                 className={`govuk-input govuk-date-input__input govuk-input--width-2 ${error ? 'govuk-input--error' : ''}`}
                                 id={monthKey}
                                 name={monthKey}
-                                type="text"
-                                inputMode="numeric"
+                                type="number"
+                                pattern="[0-9]*"
                                 min="1"
                                 max="12"
                                 value={parts.month}
@@ -93,8 +93,8 @@ class DateInput extends Component {
                                 className={`govuk-input govuk-date-input__input govuk-input--width-4  ${error ? 'govuk-input--error' : ''}`}
                                 id={yearKey}
                                 name={yearKey}
-                                type="text"
-                                inputMode="numeric"
+                                type="number"
+                                pattern="[0-9]*"
                                 min={minYear}
                                 max={maxYear}
                                 value={parts.year}

@@ -53,8 +53,8 @@ class SideBar extends Component {
     renderTabButton(label, value) {
         const { page } = this.props;
         return (
-            <li key={value} className={this.isActive(value) ? 'govuk-tabs__list-item govuk-tabs__list-item--selected' : 'govuk-tabs__list-item'}>
-                <Link onClick={(e) => this.setActive(e, value)} className={'govuk-tabs__tab'} to={`${page.url}/?activeTab=${value}`}>
+            <li key={value}>
+                <Link onClick={(e) => this.setActive(e, value)} className={this.isActive(value) ? 'tab tab__active' : 'tab'} to={`${page.url}/?activeTab=${value}`}>
                     {label}
                 </Link>
             </li>
@@ -66,23 +66,19 @@ class SideBar extends Component {
 
         const tab = this.getTabConfig(active);
 
-        const renderTab = (tab) => {
-            return (<div className={'govuk-tabs__panel'}> {tab} </div>);
-        };
-
         switch(tab?.type) {
             case 'DOCUMENTS':
-                return renderTab(<DocumentPanel />);
+                return <DocumentPanel />;
             case 'SUMMARY':
-                return renderTab(<StageSummary />);
+                return <StageSummary />;
             case 'TIMELINE':
-                return renderTab(<CaseNotes />);
+                return <CaseNotes />;
             case 'PEOPLE':
-                return renderTab(<People />);
+                return <People />;
             case 'ACTIONS':
-                return renderTab(<CaseActions />);
+                return <CaseActions />;
             case 'EX_GRATIA':
-                return renderTab(<TabExGratia screen={tab.screen} />);
+                return <TabExGratia screen={tab.screen} />;
             default: return null;
         }
     }
@@ -115,8 +111,8 @@ class SideBar extends Component {
     render() {
         return (
             <Fragment>
-                { this.props.caseTabs && <div className='govuk-tabs' data-module={'govuk-tabs'}>
-                    <ul className={'govuk-tabs__list'}>
+                { this.props.caseTabs && <div className='tabs'>
+                    <ul>
                         {
                             this.props.caseTabs.map(tab => {
                                 return (
