@@ -1,6 +1,7 @@
 const Form = require('../../services/forms/form-builder');
 const { Component } = require('../../services/forms/component-builder');
 const { formatDate, addDays } = require('../../libs/dateHelpers');
+const getObjectNameValue = require('../../libs/objectHelpers');
 
 const REQUEST_STATUS = {
     COMPLETE: 'Complete',
@@ -12,11 +13,6 @@ const REQUEST_STATUS = {
 const STATUS_OPTION = {
     CANCELLED: ['contributionCancelled', 'approvalRequestCancelled'],
     COMPLETE: ['contributionReceived', 'approvalRequestResponseReceived'],
-};
-
-const loadValue = async (value, choices, fromStaticList) => {
-    const choice = await fromStaticList(choices, value);
-    return choice ? Promise.resolve(choice) : Promise.resolve(value);
 };
 
 const getRequestStatus = (dueDate, { status, decision }) => {
@@ -38,103 +34,79 @@ const getRequestStatus = (dueDate, { status, decision }) => {
     }
 };
 
-async function composeBusinessLabel(choices, { businessArea, businessUnit }, fromStaticList) {
-    const businessUnitLabel = await loadValue(businessUnit, choices, fromStaticList);
-    if (businessArea && businessUnitLabel) {
-        return `${businessArea} - ${businessUnitLabel}`;
-    }
-    else {
-        return businessArea ? businessArea : businessUnitLabel;
-    }
+function parseApprovalRequests(items, choices) {
+    return items.map(item => {
+        const { approvalRequestStatus, approvalRequestForBusinessUnit, approvalRequestDueDate, approvalRequestDecision } = item.data;
+        const status = getRequestStatus(approvalRequestDueDate, { status: approvalRequestStatus, decision: approvalRequestDecision });
+        return `${getChoicesValue({ approvalRequestForBusinessUnit }, choices)} ${status}`;
+    }).join(', ');
 }
 
-async function getApprovalsStrings(approvalsArray, choices, fromStaticList) {
-    return await Promise.all(approvalsArray.map(async (approval) => {
-        const { approvalRequestStatus, approvalRequestForBusinessUnit, approvalRequestDueDate, approvalRequestDecision } = approval.data;
-        const approvalStatus = getRequestStatus(approvalRequestDueDate, { status: approvalRequestStatus, decision: approvalRequestDecision });
-        const businessLabel = await composeBusinessLabel(
-            choices,
-            { businessUnit: approvalRequestForBusinessUnit },
-            fromStaticList
-        );
-
-        return `${businessLabel} ${approvalStatus}`;
-    }));
-}
-
-async function getContributionStrings(contributions, choices, fromStaticList) {
-    return await Promise.all(contributions.map(async (contribution) => {
-        const { contributionStatus, contributionDueDate, contributionBusinessUnit, contributionBusinessArea } = contribution.data;
+function parseMultipleContributions(items, choices) {
+    return items.map(item => {
+        const { contributionStatus, contributionDueDate, contributionBusinessUnit, contributionBusinessArea } = item.data;
         const status = getRequestStatus(contributionDueDate, { status: contributionStatus });
-        const businessLabel = await composeBusinessLabel(
-            choices,
-            { businessArea: contributionBusinessArea, businessUnit: contributionBusinessUnit },
-            fromStaticList
-        );
-
-        return `${businessLabel} ${status}`;
-    }));
+        const contributionTitle = composeContributionTitle(contributionBusinessArea, contributionBusinessUnit, choices);
+        return `${contributionTitle} ${status}`;
+    }).join(', ');
 }
 
-async function parseApprovalRequests(approvalsJSONString, choices, fromStaticList) {
-    const approvalsArray = JSON.parse(approvalsJSONString);
-    const arrayOfApprovalStrings = await getApprovalsStrings(approvalsArray, choices, fromStaticList);
-    return arrayOfApprovalStrings.join(', ');
-}
+const composeContributionTitle = (contributionBusinessArea, contributionBusinessUnit, choices) => {
+    if (contributionBusinessArea && contributionBusinessUnit) {
+        return `${getChoicesValue({ contributionBusinessArea }, choices)} - ${getChoicesValue({ contributionBusinessUnit }, choices) }`;
+    }
+    if (contributionBusinessUnit) {
+        return getChoicesValue({ contributionBusinessUnit }, choices);
+    }
 
-async function parseMultipleContributions (value, choices, fromStaticList) {
-    const contributions = JSON.parse(value);
-    const contributionStrings = await getContributionStrings(contributions, choices, fromStaticList);
-    return contributionStrings.join(', ');
-}
+    return getChoicesValue({ contributionBusinessArea }, choices);
+};
 
-const renderSomuListItems = async ( { caseType, type, choices }, value, fromStaticList) => {
+const getChoicesValue = (choice, choices) => {
+    const [name, value = ''] = getObjectNameValue(choice);
+
+    const choiceList = choices[name] ?? [];
+    return choiceList.find(item => item.value === value)?.label ?? value;
+};
+
+const renderSomuListItems = async ( { caseType, type }, choices, { fromStaticList, fetchList, caseId }) => {
     const somuType = await fromStaticList('SOMU_TYPES', [caseType, type]);
 
     if (somuType && somuType.schema && somuType.schema.renderers) {
         const { unallocated } = somuType.schema.renderers;
-
         if (unallocated) {
+            const somuItems = await fetchList('CASE_SOMU_ITEM', {
+                caseId,
+                somuTypeId: somuType.uuid
+            });
+
+            if (somuItems.length === 0) {
+                return;
+            }
+
             switch (unallocated) {
                 case 'MultipleContributions': {
-                    const values = await parseMultipleContributions(value, choices, fromStaticList);
-                    return values;
+                    return parseMultipleContributions(somuItems, choices);
                 }
                 case 'ApprovalRequests': {
-                    const values = await parseApprovalRequests(value, choices, fromStaticList);
-                    return values;
+                    return parseApprovalRequests(somuItems, choices);
                 }
             }
         }
     }
-
-    return value;
 };
 
-module.exports = async (template, { fromStaticList }) => {
+module.exports = async (template, request) => {
     const builder = Form()
         .withTitle(template.caseReference)
         .withNoPrimaryAction();
-
-    const sections =
-        (await Promise.all(Object.entries(template.schema.fields).map(async ([stageId, fields]) => {
-
-            const stageFields = fields.map(
-                fieldTemplate => getComponentFromField(fieldTemplate, template))
-                .filter(component => component !== undefined); // remove empty elements caused by hidden fields .etc
-            const stageName = await fromStaticList('S_STAGETYPES', stageId);
-
-            return { title: stageName, items: stageFields };
-        }))).filter(stage => {
-            return stage.items && stage.items.length > 0;
-        }); // filter out empty sections
 
     const data = (await Promise.all(Object.entries(template.schema.fields)
         .flatMap(([_, fields]) => fields) // get a flat array of all the fields in the schema
         .map(async (fieldTemplate) => { // hydrate all of the fields
             const { name } = fieldTemplate.props;
 
-            return [name, await hydrateFields(fieldTemplate, template, fromStaticList, name)];
+            return [name, await hydrateFields(fieldTemplate, template, name, request)];
         }, {})))
         .filter(([_, value]) => value) // filter out any hidden or empty fields
         .reduce((map, [name, value]) => { // assemble the hydrated fields into a map
@@ -142,6 +114,20 @@ module.exports = async (template, { fromStaticList }) => {
 
             return map;
         }, {});
+
+    const sections =
+        (await Promise.all(Object.entries(template.schema.fields).map(async ([stageId, fields]) => {
+
+            const stageFields = fields
+                .filter(({ props }) => props && data[props.name])
+                .map(fieldTemplate => getComponentFromField(fieldTemplate))
+                .filter(component => component !== undefined); // remove empty elements caused by hidden fields .etc
+            const stageName = await request.fromStaticList('S_STAGETYPES', stageId);
+
+            return { title: stageName, items: stageFields };
+        }))).filter(stage => {
+            return stage.items && stage.items.length > 0;
+        }); // filter out empty sections
 
     builder.withField(
         Component('heading', 'case-view-heading')
@@ -157,44 +143,53 @@ module.exports = async (template, { fromStaticList }) => {
     return builder.withData(data).build();
 };
 
-const hydrateFields = async (fieldTemplate, template, fromStaticList, name) => {
-    const { somuType } = fieldTemplate.props;
-    const value = template.data[name];
-    let hydratedValue;
+const hydrateFields = async (fieldTemplate, template, name, request) => {
+    if (fieldTemplate.component === 'hidden') {
+        return;
+    }
 
-    if (fieldTemplate.component !== 'hidden') {
-        if (value) {
-            switch (fieldTemplate.component) {
-                case 'date':
-                    hydratedValue = formatDate(value);
-                    break;
-                case 'somu-list': {
-                    const somuString = await renderSomuListItems(somuType, value, fromStaticList);
-                    hydratedValue = somuString;
-                    break;
+    if (fieldTemplate.component === 'somu-list') {
+        const { somuType, choices } = fieldTemplate.props;
+        const choiceObj = {};
+
+        if (choices && typeof choices === 'object') {
+            for (const [name, choice] of Object.entries(choices)) {
+                if (choice) {
+                    //to
+                    Object.assign(choiceObj, { [name]: await request.fetchList(choice) });
                 }
-                default:
-                    hydratedValue = value;
             }
         }
 
-        return hydratedValue;
+        return await renderSomuListItems(somuType, choiceObj, request);
+    }
+
+    const value = template.data[name];
+    if (value) {
+        switch (fieldTemplate.component) {
+            case 'date':
+                return formatDate(value);
+            default:
+                return value;
+        }
     }
 };
 
-const getComponentFromField = ( { props, component }, template) => {
+const getComponentFromField = ( { props, component }) => {
     const { name, label, choices, conditionChoices } = props;
-    const value = template.data[name];
 
-    if (!value || component === 'hidden') {
+    if (component === 'hidden') {
         return;
     }
 
     let mappedDisplayComponent = Component('mapped-display', name)
         .withProp('component', component)
         .withProp('label', label)
-        .withProp('choices', choices)
         .withProp('conditionChoices', conditionChoices);
+
+    if (component !== 'somu-list') {
+        mappedDisplayComponent.withProp('choices', choices);
+    }
 
     if (component === 'checkbox') {
         mappedDisplayComponent.withProp('showLabel', props.showLabel);
