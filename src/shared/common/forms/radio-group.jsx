@@ -14,11 +14,6 @@ class Radio extends Component {
 
     componentDidMount() {
         this.props.updateState({ [this.props.name]: this.props.value });
-        // eslint-disable-next-line no-undef
-        if (window.GOVUKFrontend) {
-            // eslint-disable-next-line no-undef
-            window.GOVUKFrontend.initAll();
-        }
     }
 
     componentDidUpdate(prevProps) {
@@ -55,7 +50,7 @@ class Radio extends Component {
         const { choices, conditionChoices } = props;
         const newChoicesToUse = Radio.getChoicesToUse(choices, conditionChoices, props);
         if (!Radio.choicesEqual(choicesToUse, newChoicesToUse)) {
-            for (var i = 0; i < newChoicesToUse.length; i++) {
+            for (let i = 0; i < newChoicesToUse.length; i++) {
                 if (newChoicesToUse[i].value === props.value) {
                     return {
                         choicesToUse: newChoicesToUse,
@@ -79,7 +74,7 @@ class Radio extends Component {
     static choicesEqual(a, b) {
         if (a === b) return true;
         if (a == null || b == null) return false;
-        if (a.length != b.length) return false;
+        if (a.length !== b.length) return false;
 
         for (var i = 0; i < a.length; ++i) {
             if (a[i].label !== b[i].label || a[i].value !== b[i].value) {
@@ -157,7 +152,7 @@ class Radio extends Component {
                                             <label className="govuk-label govuk-radios__label" htmlFor={`${idName}`}>{choice.label}</label>
                                         </div>
                                         {choice.conditionalContent &&
-                                        <div className="govuk-radios__conditional govuk-radios__conditional--hidden"
+                                        <div className={`${Radio.choicesEqual(value, choice.value) ? 'govuk-radios__conditional' : 'govuk-radios__conditional govuk-radios__conditional--hidden' }`}
                                             id={`conditional-${idName}`}>
                                             <div className={`govuk-form-group ${this.isConditionalContentError(errors, `${choice.value}Text`) ? ' govuk-form-group--error' : ''}`}>
                                                 <label className="govuk-label" htmlFor={`${choice.value}Text`}>
