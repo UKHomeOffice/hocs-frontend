@@ -24,6 +24,20 @@ describe('When the Accordion component is rendered', () => {
         });
     });
 
+    describe('render the show/hide all section toggle', () => {
+        test('should render the toggle when more than one section in the accordion', () => {
+            const instance = render(<Accordion name="accordion" sections={sections} data={{}} updateState={updateState} page={{}} />);
+            expect(instance).toBeDefined();
+            expect(screen.getByText('Show all sections')).toBeInTheDocument();
+        });
+
+        test('should not render the toggle when only one section in the accordion', () => {
+            const instance = render(<Accordion name="accordion" sections={[sections[0]]} data={{}} updateState={updateState} page={{}} />);
+            expect(instance).toBeDefined();
+            expect(screen.queryByText('Show all sections')).not.toBeInTheDocument();
+        });
+    });
+
     describe('and there are validation errors', () => {
         test('should match the snapshot, having the effected section expanded', () => {
             const instance = render(

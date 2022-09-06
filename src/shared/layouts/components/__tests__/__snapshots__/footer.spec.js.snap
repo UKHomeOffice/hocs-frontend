@@ -381,10 +381,10 @@ Object {
                 </li>
               </ul>
               <svg
+                aria-hidden="true"
                 class="govuk-footer__licence-logo"
                 focusable="false"
                 height="17"
-                role="presentation"
                 viewBox="0 0 483.2 195.7"
                 width="41"
                 xmlns="http://www.w3.org/2000/svg"
@@ -454,10 +454,10 @@ Object {
               </li>
             </ul>
             <svg
+              aria-hidden="true"
               class="govuk-footer__licence-logo"
               focusable="false"
               height="17"
-              role="presentation"
               viewBox="0 0 483.2 195.7"
               width="41"
               xmlns="http://www.w3.org/2000/svg"

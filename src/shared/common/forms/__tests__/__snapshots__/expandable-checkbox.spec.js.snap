@@ -913,11 +913,11 @@ Object {
               </div>
             </div>
           </div>
-          <span
+          <div
             class="govuk-hint"
           >
             __hint__
-          </span>
+          </div>
         </div>
       </div>
     </div>
@@ -955,11 +955,11 @@ Object {
             </div>
           </div>
         </div>
-        <span
+        <div
           class="govuk-hint"
         >
           __hint__
-        </span>
+        </div>
       </div>
     </div>
   </div>,
