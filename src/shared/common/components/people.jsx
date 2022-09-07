@@ -64,15 +64,16 @@ class People extends Component {
                             <td className='govuk-table__cell'>{person.organisation}</td>
                         </tr>
                         }
-                        {person.address.address1 &&
+                        {(person.address.address1 || person.address.address2 || person.address.address3
+                                || person.address.postcode || person.address.country ) &&
                         <tr className='govuk-table__cell'>
                             <th className='govuk-table__header padding-left--small govuk-!-width-one-third'>Address</th>
                             <td className='govuk-table__cell'>
-                                {person.address.address1 && <> <span>{person.address.address1}</span> </>}
-                                {person.address.address2 && <> <br/> <span>{person.address.address2}</span> </>}
-                                {person.address.address3 && <> <br/> <span>{person.address.address3}</span> </>}
-                                {person.address.postcode && <> <br/> <span>{person.address.postcode}</span> </>}
-                                {person.address.country && <> <br/> <span>{person.address.country}</span> </>}
+                                {person.address.address1 && <> <span>{person.address.address1} </span> <br/></>}
+                                {person.address.address2 && <> <span>{person.address.address2} </span> <br/></>}
+                                {person.address.address3 && <> <span>{person.address.address3} </span> <br/></>}
+                                {person.address.postcode && <> <span>{person.address.postcode} </span> <br/> </>}
+                                {person.address.country && <>  <span>{person.address.country} </span> <br/> </>}
                             </td>
                         </tr>
                         }
