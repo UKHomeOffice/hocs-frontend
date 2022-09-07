@@ -109,6 +109,10 @@ $govuk-font-family-tabular: 'helvetica neue',Arial, Helvetica, sans-serif !defau
   margin-bottom: govuk-spacing(3);
 }
 
+// .govuk-typeahead__container {
+
+// }
+
 .govuk-typeahead__control {
   @extend %govuk-body-m;
   box-sizing: border-box;
@@ -167,6 +171,14 @@ $govuk-font-family-tabular: 'helvetica neue',Arial, Helvetica, sans-serif !defau
   box-sizing: border-box;
   padding: 0;
 }
+
+// .govuk-typeahead__placeholder {
+
+// }
+
+// .govuk-typeahead__input {
+
+// }
 
 .govuk-typeahead__indicators {
   -webkit-align-items: center;

@@ -192,7 +192,7 @@ class SomuList extends Component {
                         <span className="govuk-fieldset__heading govuk-label--s">{label}</span>
                     </legend>
 
-                    {error && <p id={`${name}-error`} className="govuk-error-message">{error}</p>}
+                    {error && <span id={`${name}-error`} className="govuk-error-message">{error}</span>}
 
                     <table className='govuk-table'>
                         <tbody className='govuk-table__body'>
