@@ -181,12 +181,6 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
-        S_IEDET_BUS_AREA: {
-            client: 'INFO',
-            endpoint: '/entity/list/IEDET_BUS_AREA',
-            type: listService.types.STATIC,
-            adapter: entityListItemsAdapter
-        },
         S_IEDET_COMP_ORIGIN: {
             client: 'INFO',
             endpoint: '/entity/list/IEDET_COMP_ORIGIN',
@@ -1445,6 +1439,30 @@ module.exports = {
         POGR_HMPO_DOCUMENT_TYPE: {
             client: 'INFO',
             endpoint: '/entity/list/POGR_HMPO_DOCUMENT_TYPE',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        IEDET_COMP_CATEGORIES_SERVICE: {
+            client: 'INFO',
+            endpoint: '/entity/list/IEDET_COMP_CATEGORIES_SERVICE',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        IEDET_COMP_CATEGORIES_SERIOUS_AND_MINOR: {
+            client: 'INFO',
+            endpoint: '/entity/list/IEDET_COMP_CATEGORIES_SERIOUS_AND_MINOR',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        IEDET_COMP_CATEGORIES_SERIOUS: {
+            client: 'INFO',
+            endpoint: '/entity/list/IEDET_COMP_CATEGORIES_SERIOUS',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
+        IEDET_BUSINESS_AREAS: {
+            client: 'INFO',
+            endpoint: '/entity/list/IEDET_BUSINESS_AREAS',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         }
