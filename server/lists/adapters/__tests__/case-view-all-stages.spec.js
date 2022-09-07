@@ -158,7 +158,6 @@ const sumoTypes = {
 };
 
 const mockFromStaticList = jest.fn((list, requiredData) => {
-
     if (list === 'S_STAGETYPES') {
         return requiredData;
     }
@@ -166,13 +165,54 @@ const mockFromStaticList = jest.fn((list, requiredData) => {
     if (list === 'SOMU_TYPES') {
         return sumoTypes[requiredData[0]][requiredData[1]];
     }
+});
 
+const mockFetchList = jest.fn((list, requiredData) => {
     if (list=== 'FOI_APPROVER_ROLES') {
-        return 'Dummy Approval Role';
+        return [
+            {
+                value: 'TestUnit',
+                label: 'Dummy Approval Role'
+            }
+        ];
     }
 
     if (list === 'RANDOM_LIST') {
-        return 'Random list value';
+        return [
+            {
+                value: 'TestArea',
+                label: 'Dummy Test Area'
+            },
+            {
+                value: 'TestUnit',
+                label: 'Dummy Test Unit'
+            }
+        ];
+    }
+
+    if (list === 'CASE_SOMU_ITEM') {
+        if (requiredData['somuTypeId'] === '338a9573-2232-4370-8d54-fc98bfe9759b') { // APPROVAL_REQS
+            return [
+                {
+                    data: {
+                        approvalRequestStatus: 'approvalRequestResponseReceived',
+                        approvalRequestDueDate: '2020-01-01',
+                        approvalRequestForBusinessUnit: 'TestUnit',
+                        approvalRequestDecision: 'approved'
+                    }
+                }
+            ];
+        } else {
+            return [
+                {
+                    data: {
+                        contributionDueDate: '2021-09-01',
+                        contributionBusinessUnit: 'TestUnit',
+                        contributionBusinessArea: 'TestArea'
+                    }
+                }
+            ];
+        }
     }
 });
 
@@ -207,9 +247,11 @@ const mockDataWithSumoApprovals = {
                         'approvalsFulfilled'
                     ],
                     props: {
+                        choices: {
+                            approvalRequestForBusinessUnit: 'FOI_APPROVER_ROLES'
+                        },
                         somuType: {
                             type: 'APPROVAL_REQS',
-                            choices: 'FOI_APPROVER_ROLES',
                             caseType: 'FOI'
                         },
                         itemLinks: [
@@ -232,7 +274,6 @@ const mockDataWithSumoApprovals = {
     data: {
         my_field: 'Some Value',
         stage_2_field_1: 'Some Label',
-        ApprovalRequests: '[{"uuid":"0fe92bae-712c-43d3-a76b-f99d4b38993a","data":{"approvalRequestStatus":"approvalRequestResponseReceived","approvalRequestDueDate":"2021-09-01","approvalRequestDecision":"approved","approvalRequestResponseBy":"Mr Tickle","approvalRequestCreatedDate":"2021-08-31","approvalRequestResponseNote":"asdcadsc","approvalRequestForBusinessUnit":"FOI_APPROVER_SPAD_PO","approvalRequestResponseReceivedDate":"2021-08-31"},"deleted":false}]'
     }
 };
 
@@ -267,9 +308,12 @@ const mockDataWithSumoMPAMContributions = {
                         'contributionsFulfilled'
                     ],
                     props: {
+                        choices: {
+                            contributionBusinessArea: 'RANDOM_LIST',
+                            contributionBusinessUnit: 'RANDOM_LIST'
+                        },
                         somuType: {
                             type: 'CONTRIBUTIONS',
-                            choices: 'RANDOM_LIST',
                             caseType: 'MPAM'
                         },
                         itemLinks: [
@@ -292,7 +336,6 @@ const mockDataWithSumoMPAMContributions = {
     data: {
         my_field: 'Some Value',
         stage_2_field_1: 'Some Label',
-        CaseContributions: '[{"data":{"contributionBusinessUnit":"FOI_DIRECTORATE_HOLA_ACCEPTANCE_TEAMS", "contributionBusinessArea": "Business area", "contributionRequestDate":"2021-08-31","contributionDueDate":"2021-09-01","contributionRequestNote":"Eggs please"}}]'
     }
 };
 
@@ -327,9 +370,12 @@ const mockDataWithSumoCOMPContributions = {
                         'contributionsFulfilled'
                     ],
                     props: {
+                        choices: {
+                            contributionBusinessArea: 'RANDOM_LIST',
+                            contributionBusinessUnit: 'RANDOM_LIST'
+                        },
                         somuType: {
                             type: 'CONTRIBUTIONS',
-                            choices: 'RANDOM_LIST',
                             caseType: 'MPAM'
                         },
                         itemLinks: [
@@ -352,7 +398,6 @@ const mockDataWithSumoCOMPContributions = {
     data: {
         my_field: 'Some Value',
         stage_2_field_1: 'Some Label',
-        CaseContributions: '[{"data":{"contributionBusinessArea": "Business area", "contributionRequestDate":"2021-08-31","contributionDueDate":"2021-09-01","contributionRequestNote":"Test"}}]'
     }
 };
 
@@ -468,7 +513,7 @@ const mockData = {
 describe('Case-view-all-stages Adapter', () => {
     it('should build a schema from the provided template and have sections maintain same order as schema object', async () => {
 
-        const result = await caseViewAllStagesAdapter(mockData, { fromStaticList: mockFromStaticList });
+        const result = await caseViewAllStagesAdapter(mockData, { fromStaticList: mockFromStaticList,  fetchList: mockFetchList });
 
         expect(result).toBeDefined();
         expect(result).toMatchSnapshot();
@@ -477,7 +522,7 @@ describe('Case-view-all-stages Adapter', () => {
 
     it('should render SOMU Approval case view sections', async () => {
 
-        const result = await caseViewAllStagesAdapter(mockDataWithSumoApprovals, { fromStaticList: mockFromStaticList });
+        const result = await caseViewAllStagesAdapter(mockDataWithSumoApprovals, { fromStaticList: mockFromStaticList,  fetchList: mockFetchList });
 
         expect(result).toBeDefined();
         expect(result).toMatchSnapshot();
@@ -485,7 +530,7 @@ describe('Case-view-all-stages Adapter', () => {
 
     it('should render SOMU MPAM Contributions case view sections', async () => {
 
-        const result = await caseViewAllStagesAdapter(mockDataWithSumoMPAMContributions, { fromStaticList: mockFromStaticList });
+        const result = await caseViewAllStagesAdapter(mockDataWithSumoMPAMContributions, { fromStaticList: mockFromStaticList, fetchList: mockFetchList });
 
         expect(result).toBeDefined();
         expect(result).toMatchSnapshot();
@@ -493,7 +538,7 @@ describe('Case-view-all-stages Adapter', () => {
 
     it('should render SOMU COMP Contributions case view sections', async () => {
 
-        const result = await caseViewAllStagesAdapter(mockDataWithSumoCOMPContributions, { fromStaticList: mockFromStaticList });
+        const result = await caseViewAllStagesAdapter(mockDataWithSumoCOMPContributions, { fromStaticList: mockFromStaticList,  fetchList: mockFetchList });
 
         expect(result).toBeDefined();
         expect(result).toMatchSnapshot();
@@ -539,7 +584,7 @@ describe('Case-view-all-stages Adapter', () => {
         };
 
 
-        const result = await caseViewAllStagesAdapter(mockData, { fromStaticList: mockFromStaticList });
+        const result = await caseViewAllStagesAdapter(mockData, { fromStaticList: mockFromStaticList, fetchList: mockFetchList });
 
         expect(result).toBeDefined();
         expect(result).toMatchSnapshot();
