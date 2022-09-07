@@ -155,7 +155,6 @@ const hydrateFields = async (fieldTemplate, template, name, request) => {
         if (choices && typeof choices === 'object') {
             for (const [name, choice] of Object.entries(choices)) {
                 if (choice) {
-                    //to
                     Object.assign(choiceObj, { [name]: await request.fetchList(choice) });
                 }
             }
