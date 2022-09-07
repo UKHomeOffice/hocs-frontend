@@ -178,7 +178,7 @@ Object {
 exports[`Case-view-all-stages Adapter should render SOMU COMP Contributions case view sections 1`] = `
 Object {
   "data": Object {
-    "CaseContributions": "Business area - Random list value Overdue 01/09/2021",
+    "CaseContributions": "Dummy Test Area - Dummy Test Unit Overdue 01/09/2021",
     "my_field": "Some Value",
     "stage_2_field_1": "Some Label",
   },
@@ -250,7 +250,7 @@ Object {
 exports[`Case-view-all-stages Adapter should render SOMU MPAM Contributions case view sections 1`] = `
 Object {
   "data": Object {
-    "CaseContributions": "Business area - Random list value Overdue 01/09/2021",
+    "CaseContributions": "Dummy Test Area - Dummy Test Unit Overdue 01/09/2021",
     "my_field": "Some Value",
     "stage_2_field_1": "Some Label",
   },
