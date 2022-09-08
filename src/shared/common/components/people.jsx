@@ -73,7 +73,7 @@ class People extends Component {
                                 {person.address.address2 && <> <span>{person.address.address2} </span> <br/></>}
                                 {person.address.address3 && <> <span>{person.address.address3} </span> <br/></>}
                                 {person.address.postcode && <> <span>{person.address.postcode} </span> <br/> </>}
-                                {person.address.country && <>  <span>{person.address.country} </span> <br/> </>}
+                                {person.address.country && <>  <span>{person.address.country} </span> </>}
                             </td>
                         </tr>
                         }
