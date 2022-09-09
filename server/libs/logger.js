@@ -43,7 +43,7 @@ exceptionTransports.push(
 );
 
 const logger = new (winston.Logger)({
-    level: isProduction ? 'info' : 'debug',
+    level: 'debug',
     transports: loggingTransports,
     exceptionHandlers: exceptionTransports,
     exitOnError: true,
