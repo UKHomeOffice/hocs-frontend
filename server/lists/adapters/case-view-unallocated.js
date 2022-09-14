@@ -2,6 +2,7 @@ const Form = require('../../services/forms/form-builder');
 const { Component } = require('../../services/forms/component-builder');
 const { formatDate, addDays } = require('../../libs/dateHelpers');
 const getObjectNameValue = require('../../libs/objectHelpers');
+const fetchUnallocatedConfigurationForCaseType = require('../../config/unallocated/unallocatedConfiguration');
 
 const REQUEST_STATUS = {
     COMPLETE: 'Complete',
@@ -16,7 +17,6 @@ const STATUS_OPTION = {
 };
 
 const getRequestStatus = (dueDate, { status, decision }) => {
-
     if (STATUS_OPTION.CANCELLED.includes(status)) {
         return REQUEST_STATUS.CANCELLED;
 
@@ -97,43 +97,52 @@ const renderSomuListItems = async ( { caseType, type }, choices, { fromStaticLis
 };
 
 module.exports = async (template, request) => {
-    const builder = Form()
-        .withTitle(template.caseReference)
-        .withNoPrimaryAction();
+    const config = fetchUnallocatedConfigurationForCaseType(template.type);
 
-    const data = (await Promise.all(Object.entries(template.schema.fields)
+    const data = (await Promise.all(Object.entries(template.fields)
         .flatMap(([_, fields]) => fields) // get a flat array of all the fields in the schema
         .map(async (fieldTemplate) => { // hydrate all of the fields
-            const { name } = fieldTemplate.props;
+            const { name } = fieldTemplate;
 
-            return [name, await hydrateFields(fieldTemplate, template, name, request)];
-        }, {})))
+            if (config.displayAsFields) {
+                return [name, template.data[name]];
+            }
+
+            return [name, await hydrateFields(fieldTemplate, template.data, name, request)];
+        })))
         .filter(([_, value]) => value) // filter out any hidden or empty fields
         .reduce((map, [name, value]) => { // assemble the hydrated fields into a map
             map[name] = value;
-
             return map;
         }, {});
 
     const sections =
-        (await Promise.all(Object.entries(template.schema.fields).map(async ([stageId, fields]) => {
+        (await Promise.all(Object.entries(template.fields).map(async ([groupName, fields = []]) => {
+            if (!config.displayAll) {
+                fields = fields.filter(({ name }) => data[name]);
+            }
 
-            const stageFields = fields
-                .filter(({ props }) => props && data[props.name])
-                .map(fieldTemplate => getComponentFromField(fieldTemplate))
-                .filter(component => component !== undefined); // remove empty elements caused by hidden fields .etc
-            const stageName = await request.fromStaticList('S_STAGETYPES', stageId);
+            if (config.displayAsFields) {
+                fields = fields.map(fieldTemplate => getField(fieldTemplate));
+            } else {
+                fields = fields.map(fieldTemplate => getMappedComponentFromField(fieldTemplate));
+            }
 
-            return { title: stageName, items: stageFields };
-        }))).filter(stage => {
-            return stage.items && stage.items.length > 0;
-        }); // filter out empty sections
+            return { title: groupName, items: fields };
+        }))).filter(({ items }) => items.length > 0);
 
-    builder.withField(
-        Component('heading', 'case-view-heading')
-            .withProp('label', 'Case Details')
-            .build()
-    );
+    const builder = Form()
+        .withTitle(template.reference)
+        .withNoPrimaryAction();
+
+    if (config.displayHeading) {
+        builder.withField(
+            Component('heading', 'case-view-heading')
+                .withProp('label', 'Case Details')
+                .build()
+        );
+    }
+
     builder.withField(
         Component('accordion', 'case-view')
             .withProp('sections', sections)
@@ -143,56 +152,71 @@ module.exports = async (template, request) => {
     return builder.withData(data).build();
 };
 
-const hydrateFields = async (fieldTemplate, template, name, request) => {
-    if (fieldTemplate.component === 'hidden') {
-        return;
-    }
+const hydrateFields = async (fieldTemplate, data, name, request) => {
+    const value = data[name];
 
-    if (fieldTemplate.component === 'somu-list') {
-        const { somuType, choices } = fieldTemplate.props;
-        const choiceObj = {};
-
-        if (choices && typeof choices === 'object') {
-            for (const [name, choice] of Object.entries(choices)) {
-                if (choice) {
-                    Object.assign(choiceObj, { [name]: await request.fetchList(choice) });
-                }
-            }
-        }
-
-        return await renderSomuListItems(somuType, choiceObj, request);
-    }
-
-    const value = template.data[name];
-    if (value) {
-        switch (fieldTemplate.component) {
-            case 'date':
-                return formatDate(value);
-            default:
-                return value;
-        }
+    switch (fieldTemplate.component) {
+        case 'date':
+            return formatDate(value);
+        case 'somu-list':
+            return await hydrateSomuList(fieldTemplate.props, data, request);
+        default:
+            return value;
     }
 };
 
-const getComponentFromField = ( { props, component }) => {
-    const { name, label, choices, conditionChoices } = props;
-
-    if (component === 'hidden') {
-        return;
+const hydrateSomuList = async ({ somuType, choices, conditionChoices }, data, request) => {
+    if (conditionChoices) {
+        for (const { conditionPropertyValue, conditionPropertyName, choices: choicesValue } of conditionChoices) {
+            if (conditionPropertyValue === data[conditionPropertyName]) {
+                choices = choicesValue;
+                break;
+            }
+        }
     }
+
+    const choiceObj = {};
+    if (choices && typeof choices === 'object') {
+        for (const [name, choice] of Object.entries(choices)) {
+            if (choice) {
+                Object.assign(choiceObj, { [name]: await request.fetchList(choice) });
+            }
+        }
+    }
+
+    return await renderSomuListItems(somuType, choiceObj, request);
+
+};
+
+const getMappedComponentFromField = ( { props, component, name, label }) => {
+    const { choices, conditionChoices, showLabel } = props || {};
 
     let mappedDisplayComponent = Component('mapped-display', name)
         .withProp('component', component)
-        .withProp('label', label)
-        .withProp('conditionChoices', conditionChoices);
+        .withProp('label', label);
+
+    if (component === 'checkbox') {
+        mappedDisplayComponent.withProp('showLabel', showLabel);
+    }
 
     if (component !== 'somu-list') {
         mappedDisplayComponent.withProp('choices', choices);
-    }
-
-    if (component === 'checkbox') {
-        mappedDisplayComponent.withProp('showLabel', props.showLabel);
+        mappedDisplayComponent.withProp('conditionChoices', conditionChoices);
     }
 
     return mappedDisplayComponent.build();
+};
+
+const getField = ( { props, component, name, label }) => {
+    let displayComponent = Component(component, name)
+        .withProp('label', label);
+
+    Object.entries(props ?? {})
+        .forEach(([key, value]) => {
+            displayComponent.withProp(key, value);
+        });
+
+    displayComponent.withProp('disabled', true);
+
+    return displayComponent.build();
 };
