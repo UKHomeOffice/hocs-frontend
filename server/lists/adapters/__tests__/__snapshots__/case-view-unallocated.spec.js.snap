@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Case-view-all-stages Adapter should build a schema from the provided template and have sections maintain same order as schema object 1`] = `
+exports[`Unallocated case view adapter should build a schema from the provided template and have sections maintain same order as schema object 1`] = `
 Object {
   "data": Object {
     "my_date_field": "19/01/2020",
@@ -44,7 +44,7 @@ Object {
                   "validation": Array [],
                 },
               ],
-              "title": "STAGE_NAME",
+              "title": "Test Stage 1",
             },
             Object {
               "items": Array [
@@ -67,7 +67,7 @@ Object {
                   "validation": Array [],
                 },
               ],
-              "title": "STAGE_NAME1",
+              "title": "Test Stage 2",
             },
             Object {
               "items": Array [
@@ -90,7 +90,7 @@ Object {
                   "validation": Array [],
                 },
               ],
-              "title": "STAGE_NAME2",
+              "title": "Test Stage 3",
             },
           ],
         },
@@ -98,12 +98,12 @@ Object {
       },
     ],
     "showPrimaryAction": false,
-    "title": "MIN/1234567/18",
+    "title": undefined,
   },
 }
 `;
 
-exports[`Case-view-all-stages Adapter should render SOMU Approval case view sections 1`] = `
+exports[`Unallocated case view adapter should render SOMU Approval case view sections 1`] = `
 Object {
   "data": Object {
     "ApprovalRequests": "Dummy Approval Role Complete - approved",
@@ -139,7 +139,7 @@ Object {
                   "validation": Array [],
                 },
               ],
-              "title": "STAGE_NAME",
+              "title": "Test Stage 1",
             },
             Object {
               "items": Array [
@@ -162,7 +162,7 @@ Object {
                   "validation": Array [],
                 },
               ],
-              "title": "STAGE_NAME_2",
+              "title": "Test Stage 2",
             },
           ],
         },
@@ -170,12 +170,12 @@ Object {
       },
     ],
     "showPrimaryAction": false,
-    "title": "FOI/0123456/21",
+    "title": undefined,
   },
 }
 `;
 
-exports[`Case-view-all-stages Adapter should render SOMU COMP Contributions case view sections 1`] = `
+exports[`Unallocated case view adapter should render SOMU COMP Contributions case view sections 1`] = `
 Object {
   "data": Object {
     "CaseContributions": "Dummy Test Area - Dummy Test Unit Overdue 01/09/2021",
@@ -211,7 +211,7 @@ Object {
                   "validation": Array [],
                 },
               ],
-              "title": "STAGE_NAME",
+              "title": "Test Stage 1",
             },
             Object {
               "items": Array [
@@ -234,7 +234,7 @@ Object {
                   "validation": Array [],
                 },
               ],
-              "title": "STAGE_NAME_2",
+              "title": "Test Stage 2",
             },
           ],
         },
@@ -242,12 +242,12 @@ Object {
       },
     ],
     "showPrimaryAction": false,
-    "title": "COMP/0123456/21",
+    "title": undefined,
   },
 }
 `;
 
-exports[`Case-view-all-stages Adapter should render SOMU MPAM Contributions case view sections 1`] = `
+exports[`Unallocated case view adapter should render SOMU MPAM Contributions case view sections 1`] = `
 Object {
   "data": Object {
     "CaseContributions": "Dummy Test Area - Dummy Test Unit Overdue 01/09/2021",
@@ -283,7 +283,7 @@ Object {
                   "validation": Array [],
                 },
               ],
-              "title": "STAGE_NAME",
+              "title": "Test Stage 1",
             },
             Object {
               "items": Array [
@@ -306,7 +306,7 @@ Object {
                   "validation": Array [],
                 },
               ],
-              "title": "STAGE_NAME_2",
+              "title": "Test Stage 2",
             },
           ],
         },
@@ -314,12 +314,12 @@ Object {
       },
     ],
     "showPrimaryAction": false,
-    "title": "MPAM/0123456/21",
+    "title": undefined,
   },
 }
 `;
 
-exports[`Case-view-all-stages Adapter should render checkboxes with custom label 1`] = `
+exports[`Unallocated case view adapter should render checkboxes with custom label 1`] = `
 Object {
   "data": Object {
     "checkbox_field_1": "Test",
@@ -376,7 +376,7 @@ Object {
                   "validation": Array [],
                 },
               ],
-              "title": "STAGE_NAME",
+              "title": "Test Stage 1",
             },
           ],
         },
@@ -384,7 +384,138 @@ Object {
       },
     ],
     "showPrimaryAction": false,
-    "title": "TEST/1234567/18",
+    "title": undefined,
+  },
+}
+`;
+
+exports[`Unallocated case view adapter should render with inverse default config 1`] = `
+Object {
+  "data": Object {
+    "my_date_field": "2020-01-19",
+    "my_field": "Some Value",
+  },
+  "meta": Object {},
+  "schema": Object {
+    "defaultActionLabel": "Submit",
+    "fields": Array [
+      Object {
+        "component": "accordion",
+        "props": Object {
+          "name": "case-view",
+          "sections": Array [
+            Object {
+              "items": Array [
+                Object {
+                  "component": "text",
+                  "props": Object {
+                    "disabled": true,
+                    "label": "My Field",
+                    "name": "my_field",
+                  },
+                  "validation": Array [],
+                },
+                Object {
+                  "component": "date",
+                  "props": Object {
+                    "disabled": true,
+                    "label": "My Date Field",
+                    "name": "my_date_field",
+                  },
+                  "validation": Array [],
+                },
+                Object {
+                  "component": "text",
+                  "props": Object {
+                    "disabled": true,
+                    "label": "My Empty Field",
+                    "name": "my_empty_field",
+                  },
+                  "validation": Array [],
+                },
+              ],
+              "title": "Test Stage 1",
+            },
+            Object {
+              "items": Array [
+                Object {
+                  "component": "text",
+                  "props": Object {
+                    "disabled": true,
+                    "label": "My Field",
+                    "name": "my_field",
+                  },
+                  "validation": Array [],
+                },
+                Object {
+                  "component": "date",
+                  "props": Object {
+                    "disabled": true,
+                    "label": "My Date Field",
+                    "name": "my_date_field",
+                  },
+                  "validation": Array [],
+                },
+                Object {
+                  "component": "text",
+                  "props": Object {
+                    "disabled": true,
+                    "label": "My Empty Field",
+                    "name": "my_empty_field",
+                  },
+                  "validation": Array [],
+                },
+              ],
+              "title": "Test Stage 2",
+            },
+            Object {
+              "items": Array [
+                Object {
+                  "component": "text",
+                  "props": Object {
+                    "disabled": true,
+                    "label": "My Field",
+                    "name": "my_field",
+                  },
+                  "validation": Array [],
+                },
+                Object {
+                  "component": "date",
+                  "props": Object {
+                    "disabled": true,
+                    "label": "My Date Field",
+                    "name": "my_date_field",
+                  },
+                  "validation": Array [],
+                },
+                Object {
+                  "component": "text",
+                  "props": Object {
+                    "disabled": true,
+                    "label": "My Empty Field",
+                    "name": "my_empty_field",
+                  },
+                  "validation": Array [],
+                },
+                Object {
+                  "component": "checkbox",
+                  "props": Object {
+                    "disabled": true,
+                    "label": "My Empty Field",
+                    "name": "my_empty_field",
+                  },
+                  "validation": Array [],
+                },
+              ],
+              "title": "Test Stage 3",
+            },
+          ],
+        },
+        "validation": Array [],
+      },
+    ],
+    "showPrimaryAction": false,
+    "title": undefined,
   },
 }
 `;

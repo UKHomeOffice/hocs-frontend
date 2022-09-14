@@ -20,8 +20,7 @@ const caseNoteAdapter = require('./adapters/case-notes');
 const caseSummaryAdapter = require('./adapters/case-summary');
 const caseActionDataAdapter = require('./adapters/case-action-data');
 const caseActionLabelAdapter = require('./adapters/case-action-label');
-const caseViewAllStagesAdapter = require('./adapters/case-view-all-stages');
-const caseViewReadOnlyAdapter = require('./adapters/case-view-read-only');
+const caseViewUnallocatedAdapter = require('./adapters/case-view-unallocated');
 const caseDataAdapter = require('./adapters/case-data');
 const {
     caseCorrespondentAdapter,
@@ -664,15 +663,10 @@ module.exports = {
             endpoint: '/actions/${actionId}/label',
             adapter: caseActionLabelAdapter
         },
-        CASE_VIEW_ALL_STAGES: {
-            client: 'WORKFLOW',
-            endpoint: '/case/${caseId}',
-            adapter: caseViewAllStagesAdapter
-        },
-        CASE_VIEW_READ_ONLY: {
-            client: 'WORKFLOW',
-            endpoint: '/case/details/${caseId}',
-            adapter: caseViewReadOnlyAdapter
+        CASE_VIEW_UNALLOCATED: {
+            client: 'CASEWORK',
+            endpoint: '/case/${caseId}/details',
+            adapter: caseViewUnallocatedAdapter
         },
         DCU_POLICY_TEAM_FOR_TOPIC: {
             client: 'INFO',
