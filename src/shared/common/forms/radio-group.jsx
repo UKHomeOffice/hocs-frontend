@@ -116,6 +116,7 @@ class Radio extends Component {
             hint,
             label,
             name,
+            showLabel,
             type,
             value
         } = this.props;
@@ -126,7 +127,7 @@ class Radio extends Component {
                 <fieldset id={name} className={`govuk-fieldset ${className ? className : ''}`} disabled={disabled}>
 
                     <legend id={`${name}-legend`} className="govuk-fieldset__legend">
-                        <span className="govuk-fieldset__heading govuk-label--s">{label}</span>
+                        <span className="govuk-fieldset__heading govuk-label--s">{showLabel && label}</span>
                     </legend>
 
                     {hint && <div className="govuk-hint">{hint}</div>}
@@ -198,6 +199,7 @@ Radio.propTypes = {
     hint: PropTypes.string,
     label: PropTypes.string,
     name: PropTypes.string.isRequired,
+    showLabel: PropTypes.bool,
     type: PropTypes.string,
     updateState: PropTypes.func.isRequired,
     value: PropTypes.string
@@ -208,6 +210,7 @@ Radio.defaultProps = {
     conditionChoices: [],
     data: {},
     disabled: false,
+    showLabel: true,
     type: 'radio'
 };
 
