@@ -50,7 +50,7 @@ class Checkbox extends Component {
                 <fieldset id={name} className={`govuk-fieldset ${className ? className : ''}`} disabled={disabled}>
 
                     <legend id={`${name}-legend`} className="govuk-fieldset__legend">
-                        <span className="govuk-fieldset__heading govuk-label--s">{showLabel && label}</span>
+                        <span className="govuk-fieldset__heading govuk-label--s" hidden={!showLabel}>{label}</span>
                     </legend>
 
                     {hint && <span className="govuk-hint">{hint}</span>}
