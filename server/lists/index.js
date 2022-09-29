@@ -624,6 +624,11 @@ module.exports = {
             endpoint: '/case/document/reference/${caseId}/?type=Draft',
             adapter: documentListAdapter
         },
+        CASE_DOCUMENT_LIST_IEDET_FINAL_RESPONSE: {
+            client: 'CASEWORK',
+            endpoint: '/case/document/reference/${caseId}/?type=Final%20response',
+            adapter: documentListAdapter
+        },
         CASE_DOCUMENT_TAGS: {
             client: 'CASEWORK',
             endpoint: '/case/${caseId}/documentTags',
