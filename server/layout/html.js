@@ -36,14 +36,12 @@ const render = ({
     ${clientSide ? js.map(script => `<script defer src="${assetPath}/js/${assets.js[script]}"></script>`).join('\n') : ''}
     ${clientSide ? `<script defer >window.__INITIAL_DATA__ = ${serialize(props)}</script>` : ''}
     ${clientSide ? `<script defer src="${assetPath}/js/${assets.js[react]}"></script>` : ''}
-    <script defer src="${assetPath}/all.js"></script>
     <meta property="og:image" content="${assetPath}/assets/images/govuk-opengraph-image.png">
 </head>
 
 <body class="govuk-template__body ">
-
+    <script>document.body.className = (document.body.className ? document.body.className : '') + ' js-enabled';</script>
     <div id="app">${markup}</div>
-    <script src="${assetPath}/all.js"></script>
 </body>
 
 </html>`);

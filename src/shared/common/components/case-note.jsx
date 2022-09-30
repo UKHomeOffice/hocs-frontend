@@ -64,7 +64,7 @@ const CaseNote = ({ author, date, modifiedBy, modifiedDate, note, refreshNotes, 
 
                 <label htmlFor={'case-note'} id={'case-note-label'} className='govuk-label govuk-label--s'>{title}.</label>
 
-                {submissionError && <span id={'case-note-error'} className='govuk-error-message'>{submissionError}</span>}
+                {submissionError && <p id={'case-note-error'} className='govuk-error-message'>{submissionError}</p>}
 
                 <textarea className={'govuk-textarea form-control-3-4'}
                     id='case-note'

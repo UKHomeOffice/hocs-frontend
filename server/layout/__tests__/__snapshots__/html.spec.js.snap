@@ -20,14 +20,12 @@ exports[`HTML module should default to proposition header when no title is passe
     
     <script defer >window.__INITIAL_DATA__ = {}</script>
     <script defer src=\\"/public/js/js/main.js\\"></script>
-    <script defer src=\\"/public/all.js\\"></script>
     <meta property=\\"og:image\\" content=\\"/public/assets/images/govuk-opengraph-image.png\\">
 </head>
 
 <body class=\\"govuk-template__body \\">
-
+    <script>document.body.className = (document.body.className ? document.body.className : '') + ' js-enabled';</script>
     <div id=\\"app\\"></div>
-    <script src=\\"/public/all.js\\"></script>
 </body>
 
 </html>"
@@ -54,14 +52,12 @@ exports[`HTML module should include additional CSS and JS when passed 1`] = `
 <script defer src=\\"/public/js/js/second.js\\"></script>
     <script defer >window.__INITIAL_DATA__ = {}</script>
     <script defer src=\\"/public/js/js/main.js\\"></script>
-    <script defer src=\\"/public/all.js\\"></script>
     <meta property=\\"og:image\\" content=\\"/public/assets/images/govuk-opengraph-image.png\\">
 </head>
 
 <body class=\\"govuk-template__body \\">
-
+    <script>document.body.className = (document.body.className ? document.body.className : '') + ' js-enabled';</script>
     <div id=\\"app\\"></div>
-    <script src=\\"/public/all.js\\"></script>
 </body>
 
 </html>"
@@ -87,14 +83,12 @@ exports[`HTML module should include application props in the head when passed 1`
     
     <script defer >window.__INITIAL_DATA__ = {\\"first\\":\\"value\\",\\"second\\":\\"value\\"}</script>
     <script defer src=\\"/public/js/js/main.js\\"></script>
-    <script defer src=\\"/public/all.js\\"></script>
     <meta property=\\"og:image\\" content=\\"/public/assets/images/govuk-opengraph-image.png\\">
 </head>
 
 <body class=\\"govuk-template__body \\">
-
+    <script>document.body.className = (document.body.className ? document.body.className : '') + ' js-enabled';</script>
     <div id=\\"app\\"></div>
-    <script src=\\"/public/all.js\\"></script>
 </body>
 
 </html>"
@@ -120,14 +114,12 @@ exports[`HTML module should include the appropriate react application bundle whe
     
     <script defer >window.__INITIAL_DATA__ = {}</script>
     <script defer src=\\"/public/js/js/myBundle.js\\"></script>
-    <script defer src=\\"/public/all.js\\"></script>
     <meta property=\\"og:image\\" content=\\"/public/assets/images/govuk-opengraph-image.png\\">
 </head>
 
 <body class=\\"govuk-template__body \\">
-
+    <script>document.body.className = (document.body.className ? document.body.className : '') + ' js-enabled';</script>
     <div id=\\"app\\"></div>
-    <script src=\\"/public/all.js\\"></script>
 </body>
 
 </html>"
@@ -153,14 +145,12 @@ exports[`HTML module should include the correct asset path when passed 1`] = `
     
     <script defer >window.__INITIAL_DATA__ = {}</script>
     <script defer src=\\"some/public/folder/that/contains/my/assets/js/js/main.js\\"></script>
-    <script defer src=\\"some/public/folder/that/contains/my/assets/all.js\\"></script>
     <meta property=\\"og:image\\" content=\\"some/public/folder/that/contains/my/assets/assets/images/govuk-opengraph-image.png\\">
 </head>
 
 <body class=\\"govuk-template__body \\">
-
+    <script>document.body.className = (document.body.className ? document.body.className : '') + ' js-enabled';</script>
     <div id=\\"app\\"></div>
-    <script src=\\"some/public/folder/that/contains/my/assets/all.js\\"></script>
 </body>
 
 </html>"
@@ -186,14 +176,12 @@ exports[`HTML module should include the server rendered markup when passed 1`] =
     
     <script defer >window.__INITIAL_DATA__ = {}</script>
     <script defer src=\\"/public/js/js/main.js\\"></script>
-    <script defer src=\\"/public/all.js\\"></script>
     <meta property=\\"og:image\\" content=\\"/public/assets/images/govuk-opengraph-image.png\\">
 </head>
 
 <body class=\\"govuk-template__body \\">
-
+    <script>document.body.className = (document.body.className ? document.body.className : '') + ' js-enabled';</script>
     <div id=\\"app\\"><--- REACT APPLICATION ---></div>
-    <script src=\\"/public/all.js\\"></script>
 </body>
 
 </html>"
@@ -219,14 +207,12 @@ exports[`HTML module should not contain the react bundle js when clientside is s
     
     
     
-    <script defer src=\\"/public/all.js\\"></script>
     <meta property=\\"og:image\\" content=\\"/public/assets/images/govuk-opengraph-image.png\\">
 </head>
 
 <body class=\\"govuk-template__body \\">
-
+    <script>document.body.className = (document.body.className ? document.body.className : '') + ' js-enabled';</script>
     <div id=\\"app\\"></div>
-    <script src=\\"/public/all.js\\"></script>
 </body>
 
 </html>"
@@ -252,14 +238,12 @@ exports[`HTML module should return the default html when no additional configura
     
     <script defer >window.__INITIAL_DATA__ = {}</script>
     <script defer src=\\"/public/js/js/main.js\\"></script>
-    <script defer src=\\"/public/all.js\\"></script>
     <meta property=\\"og:image\\" content=\\"/public/assets/images/govuk-opengraph-image.png\\">
 </head>
 
 <body class=\\"govuk-template__body \\">
-
+    <script>document.body.className = (document.body.className ? document.body.className : '') + ' js-enabled';</script>
     <div id=\\"app\\"></div>
-    <script src=\\"/public/all.js\\"></script>
 </body>
 
 </html>"
