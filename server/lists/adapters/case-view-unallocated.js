@@ -189,11 +189,12 @@ const hydrateSomuList = async ({ somuType, choices, conditionChoices }, data, re
 };
 
 const getMappedComponentFromField = ( { props, component, name, label }) => {
-    const { choices, conditionChoices, showLabel } = props || {};
+    const { choices, conditionChoices, showLabel, visibilityConditions } = props || {};
 
     let mappedDisplayComponent = Component('mapped-display', name)
         .withProp('component', component)
-        .withProp('label', label);
+        .withProp('label', label)
+        .withProp('visibilityConditions', visibilityConditions);
 
     if (component === 'checkbox') {
         mappedDisplayComponent.withProp('showLabel', showLabel);
