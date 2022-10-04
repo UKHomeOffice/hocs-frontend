@@ -5,6 +5,7 @@ const getLogger = require('../libs/logger');
 const User = require('../models/user');
 const doubleEncodeSlashes = require('../libs/encodingHelpers');
 const { isDateTodayOrAfter } = require('../libs/dateHelpers');
+const { fetchCaseTypeCreationDocumentTag } = require('../config/case-type/case-type');
 
 function createDocumentSummaryObjects(form, type) {
     return form.schema.fields.reduce((reducer, field) => {
@@ -50,10 +51,6 @@ function updateCase({ caseId, stageId, form }, headers) {
     return workflowService.post(`/case/${caseId}/stage/${stageId}`, { data: form.data }, headers);
 }
 
-function getDocumentTags(caseType) {
-    return infoService.get(`/caseType/${caseType}/documentTags`);
-}
-
 async function handleActionSuccess(response, workflow, form) {
     const { next, data } = form;
     if (response && response.callbackUrl) {
@@ -94,24 +91,36 @@ const actions = {
                 let clientResponse;
                 switch (form.action) {
                     case actionTypes.CREATE_CASE: {
-                        const { data: documentTags } = await getDocumentTags(context);
-                        response = await createCase('/case', { caseType: context, form }, documentTags[0], headers);
+                        const initialDocumentTag = fetchCaseTypeCreationDocumentTag(context);
+                        if (!initialDocumentTag) {
+                            throw new ActionError(`No initial document tag for casetype: ${context}`);
+                        }
+
+                        response = await createCase('/case', { caseType: context, form }, initialDocumentTag, headers);
                         clientResponse = { title: 'Case Created', child: { link: `${response.data.reference}` } };
                         return handleActionSuccess(clientResponse, workflow, form);
                     }
                     case actionTypes.CREATE_AND_ALLOCATE_CASE: {
-                        const { data: documentTags } = await getDocumentTags(context);
+                        const initialDocumentTag = fetchCaseTypeCreationDocumentTag(context);
+                        if (!initialDocumentTag) {
+                            throw new ActionError(`No initial document tag for casetype: ${context}`);
+                        }
+
                         const { data: { reference } } = await createCase('/case', {
                             caseType: context,
                             form
-                        }, documentTags[0], headers);
+                        }, initialDocumentTag, headers);
                         const { data: { stages } } = await caseworkService.get(`/case/${doubleEncodeSlashes(encodeURIComponent(reference))}/stage`, headers);
                         const { caseUUID, uuid: stageUUID } = stages[0];
                         return handleActionSuccess({ callbackUrl: `/case/${caseUUID}/stage/${stageUUID}/allocate` }, workflow, form);
                     }
                     case actionTypes.BULK_CREATE_CASE: {
-                        const { data: documentTags } = await getDocumentTags(context);
-                        response = await createCase('/case/bulk', { caseType: context, form }, documentTags[0], headers);
+                        const initialDocumentTag = fetchCaseTypeCreationDocumentTag(context);
+                        if (!initialDocumentTag) {
+                            throw new ActionError(`No initial document tag for casetype: ${context}`);
+                        }
+
+                        response = await createCase('/case/bulk', { caseType: context, form }, initialDocumentTag, headers);
                         clientResponse = {
                             title: `Created ${response.data.count} new case${response.data.count > 1 ? 's' : ''}`
                         };

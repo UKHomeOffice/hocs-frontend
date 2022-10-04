@@ -123,6 +123,12 @@ jest.mock('../../clients', () => {
     };
 });
 
+jest.mock('../../config/case-type/creation-document-tag.json', () => (
+    {
+        'SUPPORTED_CASETYPE': 'ORIGINAL'
+    }
+),
+{ virtual: true });
 
 const createCaseRequest = {
     type: 'SUPPORTED_CASETYPE',
