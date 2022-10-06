@@ -18,12 +18,7 @@ const renderCheckbox = (label, showLabel, choicesLabel) =>  {
 };
 
 const renderCheckboxGroup = (mappings, value, label) => {
-    let displayValue;
-
-    displayValue = mappings.get(value) ? mappings.get(value) : value;
-    if (displayValue.includes(',')) {
-        displayValue = displayValue.split(',').join(', ');
-    }
+    const displayValue = mappings.get(value) ? mappings.get(value) : value.split(',').join(', ');
 
     return (
         <span className='govuk-body full-width'><strong>{label}: </strong>{displayValue}</span>
