@@ -17,14 +17,6 @@ const renderCheckbox = (label, showLabel, choicesLabel) =>  {
     );
 };
 
-const renderCheckboxGroup = (mappings, value, label) => {
-    const displayValue = mappings.get(value) ? mappings.get(value) : value.split(',').join(', ');
-
-    return (
-        <span className='govuk-body full-width'><strong>{label}: </strong>{displayValue}</span>
-    );
-};
-
 class MappedDisplay extends Component {
 
     constructor(props) {
@@ -42,11 +34,9 @@ class MappedDisplay extends Component {
         const mappings = getMapOfChoicesAndChoiceOptions(choices);
         if (component === 'checkbox') {
             return (renderCheckbox(label, this.props.showLabel, choices[0].label));
-        } if (component === 'checkbox-group') {
-            return (renderCheckboxGroup(mappings, value, label));
         } else {
             return (
-                <span className='govuk-body full-width'><strong>{label}: </strong>{mappings.get(value) ? mappings.get(value) : value}</span>
+                <span className='govuk-body full-width'><strong>{label}: </strong>{mappings.get(value) ? mappings.get(value) : value.split(',').join(', ')}</span>
             );
         }
     }
