@@ -489,9 +489,14 @@ module.exports = {
             endpoint: '/team/${teamId}/move_options',
             adapter: teamsAdapter
         },
-        USERS_FOR_CASE: {
+        USERS_FOR_STAGE: {
             client: 'CASEWORK',
             endpoint: '/case/${caseId}/stage/${stageId}/team/members',
+            adapter: usersAdapter
+        },
+        USERS_FOR_CASE: {
+            client: 'CASEWORK',
+            endpoint: '/case/${caseId}/team/members',
             adapter: usersAdapter
         },
         USERS_IN_TEAM: {
