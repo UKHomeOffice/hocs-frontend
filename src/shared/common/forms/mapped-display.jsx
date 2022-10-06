@@ -36,7 +36,7 @@ class MappedDisplay extends Component {
             return (renderCheckbox(label, this.props.showLabel, choices[0].label));
         } else {
             return (
-                <span className='govuk-body full-width'><strong>{label}: </strong>{mappings.get(value) ? mappings.get(value) : value.split(',').join(', ')}</span>
+                <span className='govuk-body full-width'><strong>{label}: </strong>{mappings.get(value) ? mappings.get(value) : value.replaceAll(',', ', ')}</span>
             );
         }
     }
