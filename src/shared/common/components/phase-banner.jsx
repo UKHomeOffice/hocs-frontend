@@ -8,7 +8,7 @@ export default class PhaseBannerComponent extends Component {
         let envDisplay;
 
         if (isNotProd) {
-            envDisplay = <>This is a test system - do not upload real documents or information</>;
+            envDisplay = <>This is a test system – do not upload real documents or information</>;
         } else {
             envDisplay = <>This is a new service – your <a href={feedback}>feedback</a> will help us to improve it.</>;
         }
