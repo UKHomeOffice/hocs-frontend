@@ -89,7 +89,7 @@
         "postcss-loader": "^7.0.1",
         "pre-commit": "^1.2.2",
         "sass": "^1.53.0",
-        "sass-loader": "^13.0.2",
+        "sass-loader": "^13.1.0",
         "tar": "^6.1.11",
         "webpack": "^5.72.0",
         "webpack-assets-manifest": "^5.1.0",
