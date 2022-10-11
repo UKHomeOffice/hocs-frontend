@@ -1338,6 +1338,12 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
+        GRO_EX_GRATIA_SECONDARY_REFUND_REASON: {
+            client: 'INFO',
+            endpoint: '/entity/list/POGR_GRO_EX_GRATIA_SECONDARY_REFUND_REASON',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
         GRO_EX_GRATIA_PAYMENT_METHOD: {
             client: 'INFO',
             endpoint: '/entity/list/POGR_GRO_EX_GRATIA_PAYMENT_METHOD',
