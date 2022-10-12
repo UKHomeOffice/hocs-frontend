@@ -20,7 +20,7 @@ steps:
     name: cs-dev
     image: quay.io/ukhomeofficedigital/hocs-helm-kubectl:1.0.0
     environment:
-      CHART_NAME: hocs-audit
+      CHART_NAME: hocs-frontend
       KUBE_CLUSTER: acp-notprod
       KUBE_NAMESPACE: cs-dev
       KUBE_SERVER: https://kube-api-notprod.notprod.acp.homeoffice.gov.uk
@@ -51,7 +51,7 @@ trigger:
     - promote
 
 environment:
-  CHART_NAME: hocs-audit
+  CHART_NAME: hocs-frontend
   KUBE_CLUSTER: acp-notprod
   KUBE_SERVER: https://kube-api-notprod.notprod.acp.homeoffice.gov.uk
 
