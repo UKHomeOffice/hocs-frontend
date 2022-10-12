@@ -2,7 +2,6 @@ FROM node:16-alpine
 
 WORKDIR /app
 
-COPY --chown=node:node ./scripts/run.sh ./
 COPY --chown=node:node ./package.json ./
 COPY --chown=node:node ./package-lock.json ./
 COPY --chown=node:node ./build ./build
