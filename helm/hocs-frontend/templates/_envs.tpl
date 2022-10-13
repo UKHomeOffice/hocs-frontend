@@ -81,5 +81,5 @@
 - name: SHOW_STACKTRACE_ON_ERROR_PAGE
   value: '{{ .Values.app.env.isNotProd }}'
 - name: TENANT
-  value: '{{ .Values.keycloak.domain }}'
+  value: '{{ .Values.clusterPrefix }}'
 {{- end -}}
