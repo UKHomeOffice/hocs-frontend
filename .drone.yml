@@ -28,9 +28,9 @@ steps:
         from_secret: cs_notprod
       VERSION: ${DRONE_TAG}
       ALLOWED_IPS:
-        from_secret: POISE_IPS
+        from_secret: ALLOWED_IPS
     commands:
-      - ./ci/helm/helm-deploy.sh --values ./helm/values-notprod.yaml --values ./helm/values-dev.yaml --set hocs-generic-service.ingress.external.allowedIps='"$${ALLOWED_IPS}"'
+      - ./ci/helm/helm-deploy.sh --values ./helm/values-notprod.yaml --values ./helm/values-dev.yaml --set hocs-generic-service.ingress.external.allowedIps="$${ALLOWED_IPS}"
     depends_on:
       - checkout
 
@@ -39,7 +39,7 @@ steps:
     environment:
       KUBE_NAMESPACE: wcs-dev
     commands:
-      - ./ci/helm/helm-deploy.sh --values ./helm/values-notprod.yaml --values ./helm/values-wcs-notprod.yaml --values ./helm/values-dev.yaml --set hocs-generic-service.ingress.external.allowedIps='"$${ALLOWED_IPS}"'
+      - ./ci/helm/helm-deploy.sh --values ./helm/values-notprod.yaml --values ./helm/values-wcs-notprod.yaml --values ./helm/values-dev.yaml --set hocs-generic-service.ingress.external.allowedIps="$${ALLOWED_IPS}"
     depends_on:
       - cs-dev
 ---
@@ -70,9 +70,9 @@ steps:
       KUBE_TOKEN:
         from_secret: cs_notprod
       ALLOWED_IPS:
-        from_secret: POISE_IPS
+        from_secret: ALLOWED_IPS
     commands:
-      - ./ci/helm/helm-deploy.sh --values ./helm/values-notprod.yaml --values ./helm/values-dev.yaml --set hocs-generic-service.ingress.external.allowedIps='"$${ALLOWED_IPS}"'
+      - ./ci/helm/helm-deploy.sh --values ./helm/values-notprod.yaml --values ./helm/values-dev.yaml --set hocs-generic-service.ingress.external.allowedIps="$${ALLOWED_IPS}"
     depends_on:
       - checkout
     when:
@@ -86,9 +86,9 @@ steps:
       KUBE_TOKEN:
         from_secret: cs_notprod
       ALLOWED_IPS:
-        from_secret: POISE_IPS
+        from_secret: ALLOWED_IPS
     commands:
-      - ./ci/helm/helm-deploy.sh --values ./helm/values-notprod.yaml --values ./helm/values-wcs-notprod.yaml --values ./helm/values-dev.yaml --set hocs-generic-service.ingress.external.allowedIps='"$${ALLOWED_IPS}"'
+      - ./ci/helm/helm-deploy.sh --values ./helm/values-notprod.yaml --values ./helm/values-wcs-notprod.yaml --values ./helm/values-dev.yaml --set hocs-generic-service.ingress.external.allowedIps="$${ALLOWED_IPS}"
     depends_on:
       - checkout
     when:
@@ -102,9 +102,9 @@ steps:
       KUBE_TOKEN:
         from_secret: cs_notprod
       ALLOWED_IPS:
-        from_secret: POISE_IPS
+        from_secret: ALLOWED_IPS
     commands:
-      - ./ci/helm/helm-deploy.sh --values ./helm/values-notprod.yaml --values ./helm/values-qa.yaml --set hocs-generic-service.ingress.external.allowedIps='"$${ALLOWED_IPS}"'
+      - ./ci/helm/helm-deploy.sh --values ./helm/values-notprod.yaml --values ./helm/values-qa.yaml --set hocs-generic-service.ingress.external.allowedIps="$${ALLOWED_IPS}"
     depends_on:
       - checkout
     when:
@@ -119,9 +119,9 @@ steps:
       KUBE_TOKEN:
         from_secret: cs_notprod
       ALLOWED_IPS:
-        from_secret: POISE_IPS
+        from_secret: ALLOWED_IPS
     commands:
-      - ./ci/helm/helm-deploy.sh --values ./helm/values-notprod.yaml --values ./helm/values-wcs-notprod.yaml --values ./helm/values-qa.yaml --set hocs-generic-service.ingress.external.allowedIps='"$${ALLOWED_IPS}"'
+      - ./ci/helm/helm-deploy.sh --values ./helm/values-notprod.yaml --values ./helm/values-wcs-notprod.yaml --values ./helm/values-qa.yaml --set hocs-generic-service.ingress.external.allowedIps="$${ALLOWED_IPS}"
     depends_on:
       - cs-qa
     when:
@@ -136,9 +136,9 @@ steps:
       KUBE_TOKEN:
         from_secret: cs_notprod
       ALLOWED_IPS:
-        from_secret: POISE_IPS
+        from_secret: ALLOWED_IPS
     commands:
-      - ./ci/helm/helm-deploy.sh --values ./helm/values-notprod.yaml --values ./helm/values-demo.yaml --set hocs-generic-service.ingress.external.allowedIps='"$${ALLOWED_IPS}"'
+      - ./ci/helm/helm-deploy.sh --values ./helm/values-notprod.yaml --values ./helm/values-demo.yaml --set hocs-generic-service.ingress.external.allowedIps="$${ALLOWED_IPS}"
     depends_on:
       - checkout
     when:
@@ -152,9 +152,9 @@ steps:
       KUBE_TOKEN:
         from_secret: cs_notprod
       ALLOWED_IPS:
-        from_secret: POISE_IPS
+        from_secret: ALLOWED_IPS
     commands:
-      - ./ci/helm/helm-deploy.sh --values ./helm/values-notprod.yaml --values ./helm/values-wcs-notprod.yaml --values ./helm/values-demo.yaml --set hocs-generic-service.ingress.external.allowedIps='"$${ALLOWED_IPS}"'
+      - ./ci/helm/helm-deploy.sh --values ./helm/values-notprod.yaml --values ./helm/values-wcs-notprod.yaml --values ./helm/values-demo.yaml --set hocs-generic-service.ingress.external.allowedIps="$${ALLOWED_IPS}"
     depends_on:
       - checkout
     when:
@@ -168,9 +168,9 @@ steps:
       KUBE_TOKEN:
         from_secret: cs_notprod
       ALLOWED_IPS:
-        from_secret: POISE_IPS
+        from_secret: ALLOWED_IPS
     commands:
-      - ./ci/helm/helm-deploy.sh --values ./helm/values-notprod.yaml --values ./helm/values-qax.yaml --set hocs-generic-service.ingress.external.allowedIps='"$${ALLOWED_IPS}"'
+      - ./ci/helm/helm-deploy.sh --values ./helm/values-notprod.yaml --values ./helm/values-qax.yaml --set hocs-generic-service.ingress.external.allowedIps="$${ALLOWED_IPS}"
     depends_on:
       - checkout
     when:
@@ -186,9 +186,9 @@ steps:
       KUBE_TOKEN:
         from_secret: cs_prod
       ALLOWED_IPS:
-        from_secret: POISE_IPS
+        from_secret: ALLOWED_IPS
     commands:
-      - ./ci/helm/helm-deploy.sh --values ./helm/values-preprod.yaml --set hocs-generic-service.ingress.external.allowedIps='"$${ALLOWED_IPS}"'
+      - ./ci/helm/helm-deploy.sh --values ./helm/values-preprod.yaml --set hocs-generic-service.ingress.external.allowedIps="$${ALLOWED_IPS}"
     depends_on:
       - checkout
     when:
@@ -204,9 +204,9 @@ steps:
       KUBE_TOKEN:
         from_secret: cs_prod
       ALLOWED_IPS:
-        from_secret: POISE_IPS
+        from_secret: ALLOWED_IPS
     commands:
-      - ./ci/helm/helm-deploy.sh --set hocs-generic-service.ingress.external.allowedIps='"$${ALLOWED_IPS}"'
+      - ./ci/helm/helm-deploy.sh --set hocs-generic-service.ingress.external.allowedIps="$${ALLOWED_IPS}"
     depends_on:
       - checkout
     when:
@@ -222,9 +222,9 @@ steps:
       KUBE_TOKEN:
         from_secret: cs_prod
       ALLOWED_IPS:
-        from_secret: POISE_IPS
+        from_secret: ALLOWED_IPS
     commands:
-      - ./ci/helm/helm-deploy.sh --values ./helm/values-wcs-prod.yaml --set hocs-generic-service.ingress.external.allowedIps='"$${ALLOWED_IPS}"'
+      - ./ci/helm/helm-deploy.sh --values ./helm/values-wcs-prod.yaml --set hocs-generic-service.ingress.external.allowedIps="$${ALLOWED_IPS}"
     depends_on:
       - checkout
     when:
