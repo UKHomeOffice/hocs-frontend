@@ -1,0 +1,29 @@
+---
+hocs-generic-service:
+
+  isProd: false
+
+  autoscale:
+    enabled: false
+
+  deployment:
+    replicas: 1
+    annotations:
+      downscaler/downtime: "Mon-Sun 00:00-08:00 Europe/London,Mon-Sun 18:00-24:00 Europe/London"
+
+  keycloak:
+    realm: https://sso-dev.notprod.homeoffice.gov.uk/auth/realms/hocs-notprod
+    domain: cs-notprod.homeoffice.gov.uk
+
+  ingress:
+    internal:
+      enabled: true
+
+  app:
+    resources:
+      limits:
+        memory: 512Mi
+      requests:
+        memory: 512Mi
+    env:
+      isNotProd: 1
