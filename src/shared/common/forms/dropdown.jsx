@@ -38,13 +38,11 @@ class Dropdown extends Component {
         if (conditionChoices) {
             for (var i = 0; i < conditionChoices.length; i++) {
                 const conditionPropertyValue = props.data[conditionChoices[i].conditionPropertyName];
-                if (conditionPropertyValue) {
-                    if (conditionChoices[i].conditionPropertyValue === conditionPropertyValue) {
-                        choicesToUse = conditionChoices[i].choices;
-                        break;
-                    }
-                    choicesToUse = [];
+                if (conditionPropertyValue && conditionChoices[i].conditionPropertyValue === conditionPropertyValue) {
+                    choicesToUse = conditionChoices[i].choices;
+                    break;
                 }
+                choicesToUse = [];
             }
         }
         return choicesToUse;
