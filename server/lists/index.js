@@ -1056,6 +1056,12 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
+        HMPO_CONTRIBUTION_BUS_AREA: {
+            client: 'INFO',
+            endpoint: '/entity/list/HMPO_CONTRIBUTION_BUS_AREA',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
         S_SMC_COMP_ORIGIN: {
             client: 'INFO',
             endpoint: '/entity/list/SMC_COMP_ORIGIN',
