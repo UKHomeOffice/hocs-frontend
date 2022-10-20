@@ -638,6 +638,14 @@
     {
       "validation": [],
       "props": {
+        "label": "Application reference"
+      },
+      "name": "complainantApplicationReference",
+      "component": "text"
+    },
+    {
+      "validation": [],
+      "props": {
         "label": "Case reference"
       },
       "name": "reference",
@@ -688,6 +696,14 @@
       },
       "name": "ComplainantDOB",
       "component": "date"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Application reference"
+      },
+      "name": "complainantApplicationReference",
+      "component": "text"
     },
     {
       "validation": [],

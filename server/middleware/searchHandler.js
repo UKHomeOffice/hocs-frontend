@@ -32,6 +32,7 @@ async function handleSearch(req, res, next) {
                 FullName: formData['claimantName'],
                 DateOfBirth: formData['claimantDOB'],
                 ComplainantDOB: formData['ComplainantDOB'],
+                ComplainantApplicationReference: formData['complainantApplicationReference'],
                 NI: formData['niNumber'],
                 PrevHocsRef: formData['PrevHocsRef'],
                 RefType: formData['RefType'],
