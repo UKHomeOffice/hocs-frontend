@@ -17,6 +17,7 @@ class Text extends Component {
             className,
             disabled,
             elementClassName,
+            labelClassName,
             error,
             hint,
             label,
@@ -27,7 +28,7 @@ class Text extends Component {
         return (
             <div className={`govuk-form-group${error ? ' govuk-form-group--error' : ''} ${className ? className : ''}`}>
 
-                <label htmlFor={name} id={`${name}-label`} className="govuk-label govuk-label--s">{label}</label>
+                <label htmlFor={name} id={`${name}-label`} className={`govuk-label ${labelClassName ? labelClassName : 'govuk-label--s'}`}>{label}</label>
                 {hint && <div className="govuk-hint">{hint}</div>}
                 {error && <p id={`${name}-error`} className="govuk-error-message">{error}</p>}
                 <div>
@@ -50,6 +51,7 @@ Text.propTypes = {
     className: PropTypes.string,
     disabled: PropTypes.bool,
     elementClassName: PropTypes.string,
+    labelClassName: PropTypes.string,
     error: PropTypes.string,
     hint: PropTypes.string,
     label: PropTypes.string,
