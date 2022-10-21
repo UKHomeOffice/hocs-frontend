@@ -4,7 +4,7 @@ const { Component } = require('../component-builder');
 const { MIN_ALLOWABLE_YEAR } = require('../../../libs/dateHelpers');
 
 module.exports = () => Form()
-    .withTitle('Create Single Case')
+    .withTitle('Create single case')
     .withField(
         Component('date', 'DateReceived')
             .withValidator('required', 'Date received is required')
