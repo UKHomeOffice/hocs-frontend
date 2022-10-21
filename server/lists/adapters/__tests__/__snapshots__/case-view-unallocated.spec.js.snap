@@ -13,7 +13,7 @@ Object {
       Object {
         "component": "heading",
         "props": Object {
-          "label": "Case Details",
+          "label": "Case details",
           "name": "case-view-heading",
         },
         "validation": Array [],
@@ -117,7 +117,7 @@ Object {
       Object {
         "component": "heading",
         "props": Object {
-          "label": "Case Details",
+          "label": "Case details",
           "name": "case-view-heading",
         },
         "validation": Array [],
@@ -189,7 +189,7 @@ Object {
       Object {
         "component": "heading",
         "props": Object {
-          "label": "Case Details",
+          "label": "Case details",
           "name": "case-view-heading",
         },
         "validation": Array [],
@@ -261,7 +261,7 @@ Object {
       Object {
         "component": "heading",
         "props": Object {
-          "label": "Case Details",
+          "label": "Case details",
           "name": "case-view-heading",
         },
         "validation": Array [],
@@ -332,7 +332,7 @@ Object {
       Object {
         "component": "heading",
         "props": Object {
-          "label": "Case Details",
+          "label": "Case details",
           "name": "case-view-heading",
         },
         "validation": Array [],

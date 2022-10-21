@@ -138,7 +138,7 @@ module.exports = async (template, request) => {
     if (config.displayHeading) {
         builder.withField(
             Component('heading', 'case-view-heading')
-                .withProp('label', 'Case Details')
+                .withProp('label', 'Case details')
                 .build()
         );
     }
