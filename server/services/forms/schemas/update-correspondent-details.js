@@ -6,11 +6,11 @@ const User = require('../../../models/user');
 module.exports = async ({ caseId, stageId, context, user, requestId }) => {
     const { data: { address, ...data } } = await caseworkService.get(`/case/${caseId}/correspondent/${context}`, { headers: { ...User.createHeaders(user), 'X-Correlation-Id': requestId } });
     return Form()
-        .withTitle('Edit Correspondent Details')
+        .withTitle('Edit correspondent details')
         .withField(
             Component('text', 'fullname')
                 .withValidator('required', 'The correspondent\'s full name is required')
-                .withProp('label', 'Full Name')
+                .withProp('label', 'Full name')
                 .build()
         )
         .withField(
@@ -30,7 +30,7 @@ module.exports = async ({ caseId, stageId, context, user, requestId }) => {
         )
         .withField(
             Component('text', 'address3')
-                .withProp('label', 'Town or City')
+                .withProp('label', 'Town or city')
                 .build()
         )
         .withField(
@@ -54,7 +54,7 @@ module.exports = async ({ caseId, stageId, context, user, requestId }) => {
         )
         .withField(
             Component('text', 'email')
-                .withProp('label', 'Email Address')
+                .withProp('label', 'Email')
                 .build()
         )
         .withField(

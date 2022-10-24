@@ -10,18 +10,18 @@ function buildUrl(options) {
 }
 
 module.exports = options => Form()
-    .withTitle('Record Correspondent Details')
+    .withTitle('Record correspondent details')
     .withField(
         Component('dropdown', 'type')
             .withValidator('required', 'The correspondent must have a type')
-            .withProp('label', 'Correspondent Type')
+            .withProp('label', 'Correspondent type')
             .withProp('choices', 'SELECTABLE_CORRESPONDENT_TYPES')
             .build()
     )
     .withField(
         Component('text', 'fullname')
             .withValidator('required', 'The correspondent\'s full name is required')
-            .withProp('label', 'Full Name')
+            .withProp('label', 'Full name')
             .build()
     )
     .withField(
@@ -41,7 +41,7 @@ module.exports = options => Form()
     )
     .withField(
         Component('text', 'address3')
-            .withProp('label', 'Town or City')
+            .withProp('label', 'Town or city')
             .build()
     )
     .withField(
@@ -65,7 +65,7 @@ module.exports = options => Form()
     )
     .withField(
         Component('text', 'email')
-            .withProp('label', 'Email Address')
+            .withProp('label', 'Email')
             .build()
     )
     .withField(
