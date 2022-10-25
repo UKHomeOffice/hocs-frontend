@@ -519,7 +519,7 @@
         "label": "Case status",
         "choices": [
           {
-            "label": "Include Active Only",
+            "label": "Include Active Cases only",
             "value": "active"
           }
         ]
@@ -581,7 +581,7 @@
         "label": "Case status",
         "choices": [
           {
-            "label": "Include Active Only",
+            "label": "Include Active Cases only",
             "value": "active"
           }
         ]
