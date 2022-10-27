@@ -111,6 +111,7 @@ class Radio extends Component {
         const {
             className,
             disabled,
+            labelClassName,
             error,
             errors,
             hint,
@@ -127,7 +128,7 @@ class Radio extends Component {
                 <fieldset id={name} className={`govuk-fieldset ${className ? className : ''}`} disabled={disabled}>
 
                     <legend id={`${name}-legend`} className="govuk-fieldset__legend">
-                        <span className="govuk-fieldset__heading govuk-label--s" hidden={!showLabel}>{label}</span>
+                        <span className={`govuk-label ${labelClassName ? labelClassName : 'govuk-label--s'}`} hidden={!showLabel}>{label}</span>
                     </legend>
 
                     {hint && <div className="govuk-hint">{hint}</div>}
@@ -194,6 +195,7 @@ Radio.propTypes = {
     className: PropTypes.string,
     data: PropTypes.object,
     disabled: PropTypes.bool,
+    labelClassName: PropTypes.string,
     error: PropTypes.string,
     errors: PropTypes.object,
     hint: PropTypes.string,
