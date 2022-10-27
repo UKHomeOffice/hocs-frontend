@@ -75,7 +75,7 @@
         "@testing-library/react": "^12.1.5",
         "autoprefixer": "^10.4.7",
         "babel-jest": "^28.1.2",
-        "babel-loader": "^8.2.5",
+        "babel-loader": "^9.0.0",
         "css-loader": "^6.7.1",
         "eslint": "^8.21.0",
         "eslint-plugin-react": "7.30.1",
