@@ -128,7 +128,7 @@ class Radio extends Component {
                 <fieldset id={name} className={`govuk-fieldset ${className ? className : ''}`} disabled={disabled}>
 
                     <legend id={`${name}-legend`} className="govuk-fieldset__legend">
-                        <span className={`govuk-label ${labelClassName ? labelClassName : 'govuk-label--s'}`} hidden={!showLabel}>{label}</span>
+                        <span className={`govuk-fieldset__heading ${labelClassName ? labelClassName : 'govuk-label--s'}`} hidden={!showLabel}>{label}</span>
                     </legend>
 
                     {hint && <div className="govuk-hint">{hint}</div>}
