@@ -16,7 +16,7 @@
         "test": "jest --coverage",
         "jest": "node_modules/jest/bin/jest.js  .",
         "lint": "eslint ./ --ext js,jsx --ignore-path .gitignore",
-        "lint-staged": "node_modules/lint-staged/index.js"
+        "lint-staged": "node_modules/lint-staged/bin/lint-staged.js"
     },
     "jest": {
         "moduleNameMapper": {
@@ -83,7 +83,7 @@
         "identity-obj-proxy": "^3.0.0",
         "jest": "^26.0.0",
         "jest-date-mock": "^1.0.8",
-        "lint-staged": "^7.3.0",
+        "lint-staged": "^13.0.3",
         "mini-css-extract-plugin": "^2.6.1",
         "nodemon": "^2.0.19",
         "postcss-loader": "^7.0.1",
