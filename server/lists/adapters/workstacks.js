@@ -169,10 +169,20 @@ const bindDisplayElements = fromStaticList => async (stage) => {
         stage.assignedUserDisplay = await fromStaticList('S_USERS', stage.userUUID) || 'Allocated';
     }
     if (stage.data && stage.data.CampaignType) {
-        stage.campaignDisplay = await fromStaticList('S_MPAM_CAMPAIGNS', stage.data.CampaignType) || stage.data.CampaignType;
+        if (stage.caseType === 'MPAM') {
+            stage.campaignDisplay = await fromStaticList('S_MPAM_CAMPAIGNS', stage.data.CampaignType) || stage.data.CampaignType;
+        }
+        if (stage.caseType === 'TO') {
+            stage.campaignDisplay = await fromStaticList('S_TROF_CAMPAIGNS', stage.data.CampaignType) || stage.data.CampaignType;
+        }
     }
     if (stage.data && stage.data.MinSignOffTeam) {
         stage.MinSignOffTeamDisplay = await fromStaticList('S_MPAM_MIN_SIGN_OFF_TEAMS', stage.data.MinSignOffTeam) || stage.data.MinSignOffTeam;
+    }
+    if (stage.data && stage.data.EnquiryReason) {
+        if (stage.caseType === 'TO') {
+            stage.EnquiryReasonDisplay = await fromStaticList('TO_ENQUIRY_REASONS_ALL', stage.data.EnquiryReason) || stage.data.EnquiryReason;
+        }
     }
     stage.deadlineDisplay = formatDate(stage.deadline);
 
