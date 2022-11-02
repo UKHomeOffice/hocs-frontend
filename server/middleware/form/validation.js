@@ -96,9 +96,9 @@ const approvalRequestsFulfilled = (value, message, defaultError) => {
 const requestsFulfilled = ( value, message, statusField, cancelledValue, completeValue, defaultError ) => {
     const logger = getLogger();
 
-    let valid = true;
+    let valid = false;
     try {
-        const contributions = JSON.parse(value);
+        const contributions = value ? JSON.parse(value) : undefined;
 
         if (Array.isArray(contributions)) {
             const result = contributions.filter(contribution => {
@@ -106,14 +106,11 @@ const requestsFulfilled = ( value, message, statusField, cancelledValue, complet
                 return (!(contributionStatus === cancelledValue || contributionStatus === completeValue));
             });
 
-            if (result.length !== 0) {
-                valid = false;
+            if (result.length === 0) {
+                valid = true;
             }
-        } else {
-            valid = false;
         }
     } catch (error) {
-        valid = false;
         logger.error('REQUEST_FULFILLED_VALIDATION_ERROR', { message: error.message, stack: error.stack  });
     }
 
