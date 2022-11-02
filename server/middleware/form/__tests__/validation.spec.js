@@ -1,5 +1,5 @@
 import { FormSubmissionError, ValidationError } from '../../../models/error';
-import { validators, validateForm } from '../validation';
+import { validateForm, validators } from '../validation';
 
 jest.mock('../../../config.js', () => {
     return {
@@ -348,6 +348,9 @@ describe('Validators', () => {
         it('should reject if value passed in is undefined', () => {
             expect(validators.contributionsFulfilled({ value: undefined })).not.toEqual(null);
         });
+        it('should reject if value passed in is invalid JSON', () => {
+            expect(validators.contributionsFulfilled({ value: '{ "test": 1' })).not.toEqual(null);
+        });
         it('should reject if value passed in is not an array', () => {
             expect(validators.contributionsFulfilled({ value: '{ "test": 1 }' })).not.toEqual(null);
         });
@@ -358,7 +361,7 @@ describe('Validators', () => {
             expect(validators.contributionsFulfilled({ value: '[{ "data": { "contributionStatus": "test" } }]' })).not.toEqual(null);
         });
         it('should reject if one value has contributionStatus that is not cancelled or received', () => {
-            expect(validators.contributionsFulfilled({ value: '[{ "data": { "contributionStatus": "contributionReceived" }, { "contributionStatus": "test" } }]' })).not.toEqual(null);
+            expect(validators.contributionsFulfilled({ value: '[{ "data": { "contributionStatus": "contributionReceived" } }, { "data": { "contributionStatus": "test" } }]' })).not.toEqual(null);
         });
         it('should accept if value has contributionStatus as cancelled', () => {
             expect(validators.contributionsFulfilled({ value: '[{ "data": { "contributionStatus": "contributionCancelled" } }]' })).toEqual(null);
