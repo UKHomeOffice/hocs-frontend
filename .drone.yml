@@ -40,6 +40,6 @@ steps:
     environment:
       KUBE_NAMESPACE: wcs-dev
     commands:
-      - ./ci/helm/helm-deploy.sh --values ./helm/hocs-frontend.yaml --values ./helm/hocs-frontend-wcs.yaml  --set hocs-generic-service.ingress.external.allowedIps="$${ALLOWED_IPS}"
+      - ./ci/helm/helm-chart-deploy.sh --values ./helm/hocs-frontend.yaml --values ./helm/hocs-frontend-wcs.yaml  --set hocs-generic-service.ingress.external.allowedIps="$${ALLOWED_IPS}"
     depends_on:
       - cs-dev
