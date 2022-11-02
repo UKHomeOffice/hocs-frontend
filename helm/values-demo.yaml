@@ -1,8 +1,0 @@
----
-hocs-generic-service:
-
-  ingress:
-    external:
-      host: demo.{{ .Values.clusterPrefix }}-notprod.homeoffice.gov.uk
-    internal:
-      host: demo.internal.{{ .Values.clusterPrefix }}-notprod.homeoffice.gov.uk
