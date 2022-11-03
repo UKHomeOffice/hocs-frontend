@@ -21,7 +21,7 @@ steps:
     image: quay.io/ukhomeofficedigital/hocs-helm-kubectl:1.0.0
     environment:
       CHART_NAME: hocs-frontend
-      CHART_VERSION: 2.0.0
+      CHART_VERSION: 3.0.0
       KUBE_CLUSTER: acp-notprod
       KUBE_NAMESPACE: cs-dev
       KUBE_SERVER: https://kube-api-notprod.notprod.acp.homeoffice.gov.uk
@@ -40,6 +40,6 @@ steps:
     environment:
       KUBE_NAMESPACE: wcs-dev
     commands:
-      - ./ci/helm/helm-chart-deploy.sh --values ./helm/hocs-frontend.yaml --values ./helm/hocs-frontend-wcs.yaml  --set hocs-generic-service.ingress.external.allowedIps="$${ALLOWED_IPS}"
+      - ./ci/helm/helm-chart-deploy.sh --values ./helm/hocs-frontend.yaml --values ./helm/hocs-frontend-wcs.yaml --set hocs-generic-service.ingress.external.allowedIps="$${ALLOWED_IPS}"
     depends_on:
       - cs-dev
