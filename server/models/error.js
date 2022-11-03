@@ -75,6 +75,12 @@ class AuthenticationError extends ErrorModel {
     }
 }
 
+class GenericError extends ErrorModel {
+    constructor(message, status) {
+        super(message, status);
+    }
+}
+
 module.exports = {
     ActionError,
     AllocationError,
@@ -84,5 +90,6 @@ module.exports = {
     FormSubmissionError,
     FormServiceError,
     ValidationError,
-    AuthenticationError
+    AuthenticationError,
+    GenericError
 };
