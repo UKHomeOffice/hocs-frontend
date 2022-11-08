@@ -17,8 +17,10 @@ hocs-generic-service:
 
   ingress:
     external:
+      enabled: true
       host: dev.{{ .Values.clusterPrefix }}-notprod.homeoffice.gov.uk
     internal:
+      enabled: true
       host: dev.internal.{{ .Values.clusterPrefix }}-notprod.homeoffice.gov.uk
 
   app:
