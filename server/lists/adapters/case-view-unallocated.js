@@ -12,8 +12,8 @@ const REQUEST_STATUS = {
 };
 
 const STATUS_OPTION = {
-    CANCELLED: ['contributionCancelled', 'approvalRequestCancelled'],
-    COMPLETE: ['contributionReceived', 'approvalRequestResponseReceived'],
+    CANCELLED: [ 'contributionCancelled', 'approvalRequestCancelled' ],
+    COMPLETE: [ 'contributionReceived', 'approvalRequestResponseReceived' ],
 };
 
 const getRequestStatus = (dueDate, { status, decision }) => {
@@ -36,15 +36,28 @@ const getRequestStatus = (dueDate, { status, decision }) => {
 
 function parseApprovalRequests(items, choices) {
     return items.map(item => {
-        const { approvalRequestStatus, approvalRequestForBusinessUnit, approvalRequestDueDate, approvalRequestDecision } = item.data;
-        const status = getRequestStatus(approvalRequestDueDate, { status: approvalRequestStatus, decision: approvalRequestDecision });
+        const {
+            approvalRequestStatus,
+            approvalRequestForBusinessUnit,
+            approvalRequestDueDate,
+            approvalRequestDecision
+        } = item.data;
+        const status = getRequestStatus(approvalRequestDueDate, {
+            status: approvalRequestStatus,
+            decision: approvalRequestDecision
+        });
         return `${getChoicesValue({ approvalRequestForBusinessUnit }, choices)} ${status}`;
     }).join(', ');
 }
 
 function parseMultipleContributions(items, choices) {
     return items.map(item => {
-        const { contributionStatus, contributionDueDate, contributionBusinessUnit, contributionBusinessArea } = item.data;
+        const {
+            contributionStatus,
+            contributionDueDate,
+            contributionBusinessUnit,
+            contributionBusinessArea
+        } = item.data;
         const status = getRequestStatus(contributionDueDate, { status: contributionStatus });
         const contributionTitle = composeContributionTitle(contributionBusinessArea, contributionBusinessUnit, choices);
         return `${contributionTitle} ${status}`;
@@ -53,7 +66,7 @@ function parseMultipleContributions(items, choices) {
 
 const composeContributionTitle = (contributionBusinessArea, contributionBusinessUnit, choices) => {
     if (contributionBusinessArea && contributionBusinessUnit) {
-        return `${getChoicesValue({ contributionBusinessArea }, choices)} - ${getChoicesValue({ contributionBusinessUnit }, choices) }`;
+        return `${getChoicesValue({ contributionBusinessArea }, choices)} - ${getChoicesValue({ contributionBusinessUnit }, choices)}`;
     }
     if (contributionBusinessUnit) {
         return getChoicesValue({ contributionBusinessUnit }, choices);
@@ -63,18 +76,19 @@ const composeContributionTitle = (contributionBusinessArea, contributionBusiness
 };
 
 const getChoicesValue = (choice, choices) => {
-    const [name, value = ''] = getObjectNameValue(choice);
+    const [ name, value = '' ] = getObjectNameValue(choice);
 
     const choiceList = choices[name] ?? [];
     return choiceList.find(item => item.value === value)?.label ?? value;
 };
 
-const renderSomuListItems = async ( { caseType, type }, choices, { fromStaticList, fetchList, caseId }) => {
-    const somuType = await fromStaticList('SOMU_TYPES', [caseType, type]);
+const renderSomuListItems = async ({ caseType, type }, choices, { fromStaticList, fetchList, caseId }) => {
+    const somuType = await fromStaticList('SOMU_TYPES', [ caseType, type ]);
 
     if (somuType && somuType.schema && somuType.schema.renderers) {
         const { unallocated } = somuType.schema.renderers;
         if (unallocated) {
+
             const somuItems = await fetchList('CASE_SOMU_ITEM', {
                 caseId,
                 somuTypeId: somuType.uuid
@@ -100,24 +114,24 @@ module.exports = async (template, request) => {
     const config = fetchUnallocatedConfigurationForCaseType(template.type);
 
     const data = (await Promise.all(Object.entries(template.fields)
-        .flatMap(([_, fields]) => fields) // get a flat array of all the fields in the schema
+        .flatMap(([ _, fields ]) => fields) // get a flat array of all the fields in the schema
         .map(async (fieldTemplate) => { // hydrate all of the fields
             const { name } = fieldTemplate;
 
             if (config.displayAsFields) {
-                return [name, template.data[name]];
+                return [ name, template.data[name] ];
             }
 
-            return [name, await hydrateFields(fieldTemplate, template.data, name, request)];
+            return [ name, await hydrateFields(fieldTemplate, template.data, name, request) ];
         })))
-        .filter(([_, value]) => value) // filter out any hidden or empty fields
-        .reduce((map, [name, value]) => { // assemble the hydrated fields into a map
+        .filter(([ _, value ]) => value) // filter out any hidden or empty fields
+        .reduce((map, [ name, value ]) => { // assemble the hydrated fields into a map
             map[name] = value;
             return map;
         }, {});
 
     const sections =
-        (await Promise.all(Object.entries(template.fields).map(async ([groupName, fields = []]) => {
+        (await Promise.all(Object.entries(template.fields).map(async ([ groupName, fields = [] ]) => {
             if (!config.displayAll) {
                 fields = fields.filter(({ name }) => data[name]);
             }
@@ -150,10 +164,11 @@ module.exports = async (template, request) => {
     );
 
     return builder.withData(data).build();
-};
+}
+;
 
-const hydrateFields = async (fieldTemplate, data, name, request) => {
-    const value = data[name];
+const hydrateFields = async (fieldTemplate, data, request) => {
+    const value = data[fieldTemplate.name];
 
     switch (fieldTemplate.component) {
         case 'date':
@@ -177,7 +192,7 @@ const hydrateSomuList = async ({ somuType, choices, conditionChoices }, data, re
 
     const choiceObj = {};
     if (choices && typeof choices === 'object') {
-        for (const [name, choice] of Object.entries(choices)) {
+        for (const [ name, choice ] of Object.entries(choices)) {
             if (choice) {
                 Object.assign(choiceObj, { [name]: await request.fetchList(choice) });
             }
@@ -188,7 +203,7 @@ const hydrateSomuList = async ({ somuType, choices, conditionChoices }, data, re
 
 };
 
-const getMappedComponentFromField = ( { props, component, name, label }) => {
+const getMappedComponentFromField = ({ props, component, name, label }) => {
     const { choices, conditionChoices, showLabel, visibilityConditions } = props || {};
 
     let mappedDisplayComponent = Component('mapped-display', name)
@@ -208,12 +223,12 @@ const getMappedComponentFromField = ( { props, component, name, label }) => {
     return mappedDisplayComponent.build();
 };
 
-const getField = ( { props, component, name, label }) => {
+const getField = ({ props, component, name, label }) => {
     let displayComponent = Component(component, name)
         .withProp('label', label);
 
     Object.entries(props ?? {})
-        .forEach(([key, value]) => {
+        .forEach(([ key, value ]) => {
             displayComponent.withProp(key, value);
         });
 
