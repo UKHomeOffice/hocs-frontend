@@ -394,6 +394,7 @@ Object {
   "data": Object {
     "my_date_field": "2020-01-19",
     "my_field": "Some Value",
+    "test_hidden_field": "TEST",
   },
   "meta": Object {},
   "schema": Object {

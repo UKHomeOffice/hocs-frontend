@@ -113,22 +113,20 @@ const renderSomuListItems = async ({ caseType, type }, choices, { fromStaticList
 module.exports = async (template, request) => {
     const config = fetchUnallocatedConfigurationForCaseType(template.type);
 
-    const data = (await Promise.all(Object.entries(template.fields)
-        .flatMap(([ _, fields ]) => fields) // get a flat array of all the fields in the schema
-        .map(async (fieldTemplate) => { // hydrate all of the fields
-            const { name } = fieldTemplate;
-
-            if (config.displayAsFields) {
-                return [ name, template.data[name] ];
-            }
-
-            return [ name, await hydrateFields(fieldTemplate, template.data, name, request) ];
-        })))
-        .filter(([ _, value ]) => value) // filter out any hidden or empty fields
-        .reduce((map, [ name, value ]) => { // assemble the hydrated fields into a map
-            map[name] = value;
-            return map;
-        }, {});
+    let data = template.data;
+    if (!config.displayAsFields) {
+        data =
+            (await Promise.all(
+                Object.entries(template.fields).flatMap(([ _, fields ]) => fields) // get a flat array of all the fields in the schema
+                    .map(async (fieldTemplate) =>
+                        [ fieldTemplate.name, await hydrateFields(fieldTemplate, template.data, request) ]) // hydrate all of the fields
+            ))
+                .filter(([ _, value ]) => value) // filter out any hidden or empty fields
+                .reduce((map, [ name, value ]) => { // assemble the hydrated fields into a object
+                    map[name] = value;
+                    return map;
+                }, {});
+    }
 
     const sections =
         (await Promise.all(Object.entries(template.fields).map(async ([ groupName, fields = [] ]) => {
