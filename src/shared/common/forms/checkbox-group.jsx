@@ -5,7 +5,18 @@ class Checkbox extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { value: this.props.value.split(',').filter(cb => cb !== '') };
+        if (this.props.saveSeparately) {
+
+            let state = {};
+
+            this.props.choices.map(choice => {
+                state[choice.name] = this.props.data[choice.name] === choice.value ? choice.value : '';
+            });
+
+            this.state = state;
+        } else {
+            this.state = { value: this.props.value.split(',').filter(cb => cb !== '') };
+        }
     }
 
     stateString() {
@@ -14,22 +25,46 @@ class Checkbox extends Component {
     }
 
     componentDidMount() {
-        this.props.updateState({ [this.props.name]: this.stateString() });
+        if (this.props.saveSeparately) {
+            let state = {};
+
+            this.props.choices.map(choice => {
+                state[choice.name] = this.props.data[choice.name] === choice.value ? choice.value : '';
+            });
+
+            this.props.updateState(state);
+        } else {
+            this.props.updateState({ [this.props.name]: this.stateString() });
+        }
     }
 
     handleChange(e) {
-        const targetValue = e.target.value;
-        this.setState((currentState) => {
-            var selection = [];
-            if (currentState.value.includes(targetValue)) {
-                selection = currentState.value.filter(cb => cb !== targetValue);
-            } else {
-                selection = [...currentState.value, targetValue];
-            }
-            return { value: selection };
-        }, () => {
-            this.props.updateState({ [this.props.name]: this.stateString() });
-        });
+        if (this.props.saveSeparately) {
+            const target = e.target;
+            this.setState((currentState) => {
+                if (currentState[target.name]) {
+                    currentState[target.name] = '';
+                } else {
+                    currentState[target.name] = target.value;
+                }
+                return currentState;
+            }, () => {
+                this.props.updateState(this.state);
+            });
+        } else {
+            const targetValue = e.target.value;
+            this.setState((currentState) => {
+                var selection = [];
+                if (currentState.value.includes(targetValue)) {
+                    selection = currentState.value.filter(cb => cb !== targetValue);
+                } else {
+                    selection = [...currentState.value, targetValue];
+                }
+                return { value: selection };
+            }, () => {
+                this.props.updateState({ [this.props.name]: this.stateString() });
+            });
+        }
     }
 
     render() {
@@ -42,6 +77,7 @@ class Checkbox extends Component {
             label,
             name,
             showLabel,
+            saveSeparately,
             type
         } = this.props;
         return (
@@ -62,10 +98,10 @@ class Checkbox extends Component {
                                 <div key={i} className="govuk-checkboxes__item">
                                     <input id={`${name}_${choice.value}`}
                                         type={type}
-                                        name={name}
+                                        name={saveSeparately ? choice.name : name}
                                         value={choice.value}
                                         checked={
-                                            this.state.value.includes(`${choice.value}`)
+                                            saveSeparately ? this.state[choice.name] !== '' : this.state.value.includes(`${choice.value}`)
                                         }
                                         onChange={e => this.handleChange(e)}
                                         className={'govuk-checkboxes__input'}
@@ -94,14 +130,17 @@ Checkbox.propTypes = {
     showLabel: PropTypes.bool,
     type: PropTypes.string,
     updateState: PropTypes.func.isRequired,
-    value: PropTypes.string
+    value: PropTypes.string,
+    saveSeparately: PropTypes.bool,
+    data: PropTypes.object
 };
 
 Checkbox.defaultProps = {
     choices: [],
     disabled: false,
     type: 'checkbox',
-    value: ''
+    value: '',
+    saveSeparately: false
 };
 
 export default Checkbox;
