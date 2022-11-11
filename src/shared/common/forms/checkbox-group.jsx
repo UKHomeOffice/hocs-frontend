@@ -25,15 +25,7 @@ class Checkbox extends Component {
     }
 
     componentDidMount() {
-        if (this.props.saveSeparately) {
-            let state = {};
-
-            this.props.choices.map(choice => {
-                state[choice.name] = this.props.data[choice.name] === choice.value ? choice.value : '';
-            });
-
-            this.props.updateState(state);
-        } else {
+        if (!this.props.saveSeparately) {
             this.props.updateState({ [this.props.name]: this.stateString() });
         }
     }
