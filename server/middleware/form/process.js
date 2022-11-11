@@ -30,10 +30,17 @@ const customAdapters = {
         }
     },
     'checkbox': (reducer, field, data) => {
-        const { name } = field.props;
+        const { name, choices = [] } = field.props;
         if (Object.prototype.hasOwnProperty.call(data, name)) {
             reducer[name] = data[name];
         }
+        choices.map(choice => {
+            if (Object.prototype.hasOwnProperty.call(choice, 'name')) {
+                if (Object.prototype.hasOwnProperty.call(data, choice.name)) {
+                    reducer[choice.name] = data[choice.name];
+                }
+            }
+        });
     },
     'add-document': (reducer, field, data, req) => {
         const { name } = field.props;
