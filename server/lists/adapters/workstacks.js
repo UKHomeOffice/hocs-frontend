@@ -127,18 +127,11 @@ const returnTeamWorkstackColumns = (configuration, workstackData, teamId) => {
 
 const returnMyCasesWorkstackColumns = (configuration, workstackData) => {
     const defaultColumnConfig = 'DEFAULT';
-    const teamTypeForColumnConfig = workstackData.length > 0 ? workstackData[0].teamUUID : defaultColumnConfig;
     const caseTypeForColumnConfig = workstackData.length > 0 ? workstackData[0].caseType : defaultColumnConfig;
 
-    let getColumnsForMyCases = configuration.workstackTypeColumns.find(
-        item => item.workstackType === (teamTypeForColumnConfig + '_MY_CASES')
+    var getColumnsForMyCases = configuration.workstackTypeColumns.find(
+        item => item.workstackType === (caseTypeForColumnConfig + '_MY_CASES')
     );
-
-    if (getColumnsForMyCases === undefined) {
-        getColumnsForMyCases = configuration.workstackTypeColumns.find(
-            item => item.workstackType === (caseTypeForColumnConfig + '_MY_CASES')
-        );
-    }
 
     if (getColumnsForMyCases === undefined) {
         getColumnsForMyCases = configuration.workstackTypeColumns.find(
