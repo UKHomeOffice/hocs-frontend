@@ -173,6 +173,8 @@ const hydrateFields = async (fieldTemplate, data, request) => {
             return formatDate(value);
         case 'somu-list':
             return await hydrateSomuList(fieldTemplate.props, data, request);
+        case 'checkbox-group':
+            return hydrateCheckboxGroup(fieldTemplate.props, data);
         default:
             return value;
     }
@@ -199,6 +201,19 @@ const hydrateSomuList = async ({ somuType, choices, conditionChoices }, data, re
 
     return await renderSomuListItems(somuType, choiceObj, request);
 
+};
+
+const hydrateCheckboxGroup = ({ choices }, data ) => {
+    let dataArray = [];
+
+    choices.map( choice => {
+        if (Object.prototype.hasOwnProperty.call(choice, 'name') && data[choice.name] === choice.value) {
+            dataArray.push(choice.label);
+        }
+    });
+
+    console.log(dataArray)
+    return dataArray.join(', ');
 };
 
 const getMappedComponentFromField = ({ props, component, name, label }) => {
