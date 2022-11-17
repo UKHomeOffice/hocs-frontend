@@ -211,7 +211,7 @@ const hydrateCheckboxGroup = ({ choices }, data ) => {
             dataArray.push(choice.label);
         }
     });
-    
+
     return dataArray.join(', ');
 };
 
