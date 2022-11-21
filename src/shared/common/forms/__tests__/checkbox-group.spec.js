@@ -9,6 +9,12 @@ const choices = [
     { label: 'isC', value: 'C' }
 ];
 
+const choicesWithName = [
+    { label: 'isA', value: 'A', name: 'nameA' },
+    { label: 'isB', value: 'B', name: 'nameB' },
+    { label: 'isC', value: 'C', name: 'nameC' }
+];
+
 describe('Form checkbox group component', () => {
     it('should render with default props', () => {
         const wrapper = render(<CheckboxGroup name="checkbox-group" choices={choices} updateState={() => null} />);
@@ -38,6 +44,31 @@ describe('Form checkbox group component', () => {
     it('should render disabled when passed', () => {
         render(<CheckboxGroup name="checkbox-group" choices={choices} disabled={true} updateState={() => null} />);
         expect(screen.getByRole('group')).toBeDisabled();
+    });
+
+    it('should render separate values when showSeparately set', () => {
+        render(<CheckboxGroup name="checkbox-group" choices={choicesWithName} disabled={true} updateState={() => null} saveSeparately={true} data={{}}/>);
+        expect(screen.getByLabelText('isA').name).toBe('nameA');
+        expect(screen.getByLabelText('isB').name).toBe('nameB');
+        expect(screen.getByLabelText('isC').name).toBe('nameC');
+    });
+
+    it('should check the correct values when showSeparately set', () => {
+        const data = {
+            nameA: '',
+            nameB: 'B',
+            nameC: '',
+        };
+        render(<CheckboxGroup name="checkbox-group"
+            choices={choicesWithName}
+            disabled={true}
+            updateState={() => null}
+            saveSeparately={true}
+            data={data}
+        />);
+        expect(screen.getByLabelText('isA').checked).toBe(false);
+        expect(screen.getByLabelText('isB').checked).toBe(true);
+        expect(screen.getByLabelText('isC').checked).toBe(false);
     });
 
     it('should execute callback on initialization', () => {
