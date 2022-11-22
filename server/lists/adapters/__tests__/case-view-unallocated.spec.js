@@ -614,4 +614,46 @@ describe('Unallocated case view adapter', () => {
         expect(result).toBeDefined();
         expect(result).toMatchSnapshot();
     });
+
+    it('should render checkbox groups with separate values', async () => {
+        const data = {
+            type: 'TEST',
+            caseReference: 'TEST/1234567/18',
+            fields: {
+                'Test Stage 1': [
+                    {
+                        props: {
+                            choices: [
+                                {
+                                    name: 'nameA',
+                                    value: 'valueA',
+                                    label: 'label A'
+                                },
+                                {
+                                    name: 'nameB',
+                                    value: 'valueB',
+                                    label: 'label B'
+                                }
+                            ]
+                        },
+                        component: 'checkbox-group',
+                        name: 'checkbox_group',
+                        label: 'Checkbox Group'
+                    },
+                ],
+            },
+            data: {
+                nameA: 'valueA',
+                nameB: 'valueB'
+            }
+        };
+
+        const result = await caseViewUnallocatedAdapter(data, {
+            fromStaticList: mockFromStaticList,
+            fetchList: mockFetchList
+        });
+
+        expect(result).toBeDefined();
+        expect(result).toMatchSnapshot();
+    });
 });

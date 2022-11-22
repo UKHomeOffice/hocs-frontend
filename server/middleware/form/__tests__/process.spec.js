@@ -417,6 +417,48 @@ describe('Process middleware', () => {
         expect(next).toHaveBeenCalledTimes(1);
     });
 
+    it('should process checkbox data as separate values', () => {
+        const req = {
+            body: {
+                ['choiceOne']: 'A',
+                ['choiceTwo']: 'B',
+                ['choiceThree']: 'C',
+                ['test-field']: ''
+            },
+            query: {},
+            form: {
+                schema: {
+                    fields: [
+                        {
+                            component: 'checkbox',
+                            props: {
+                                name: 'test-field',
+                                choices: [
+                                    { label: 'A', value: 'A', name: 'choiceOne' },
+                                    { label: 'A', value: 'A', name: 'choiceTwo' },
+                                    { label: 'A', value: 'A', name: 'choiceThree' }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        };
+        const res = {};
+
+        processMiddleware(req, res, next);
+        expect(req.form).toBeDefined();
+        expect(req.form.data).toBeDefined();
+        expect(req.form.data['choiceOne']).toBeDefined();
+        expect(req.form.data['choiceTwo']).toBeDefined();
+        expect(req.form.data['choiceThree']).toBeDefined();
+        expect(req.form.data['choiceOne']).toEqual('A');
+        expect(req.form.data['choiceTwo']).toEqual('B');
+        expect(req.form.data['choiceThree']).toEqual('C');
+        expect(next).toHaveBeenCalled();
+        expect(next).toHaveBeenCalledTimes(1);
+    });
+
     describe('when empty checkbox data is passed', () => {
         const req = {
             body: {

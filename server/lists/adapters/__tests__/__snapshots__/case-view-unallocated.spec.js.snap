@@ -319,6 +319,65 @@ Object {
 }
 `;
 
+exports[`Unallocated case view adapter should render checkbox groups with separate values 1`] = `
+Object {
+  "data": Object {
+    "checkbox_group": "label A, label B",
+  },
+  "meta": Object {},
+  "schema": Object {
+    "defaultActionLabel": "Submit",
+    "fields": Array [
+      Object {
+        "component": "heading",
+        "props": Object {
+          "label": "Case details",
+          "name": "case-view-heading",
+        },
+        "validation": Array [],
+      },
+      Object {
+        "component": "accordion",
+        "props": Object {
+          "name": "case-view",
+          "sections": Array [
+            Object {
+              "items": Array [
+                Object {
+                  "component": "mapped-display",
+                  "props": Object {
+                    "choices": Array [
+                      Object {
+                        "label": "label A",
+                        "name": "nameA",
+                        "value": "valueA",
+                      },
+                      Object {
+                        "label": "label B",
+                        "name": "nameB",
+                        "value": "valueB",
+                      },
+                    ],
+                    "component": "checkbox-group",
+                    "label": "Checkbox Group",
+                    "name": "checkbox_group",
+                  },
+                  "validation": Array [],
+                },
+              ],
+              "title": "Test Stage 1",
+            },
+          ],
+        },
+        "validation": Array [],
+      },
+    ],
+    "showPrimaryAction": false,
+    "title": undefined,
+  },
+}
+`;
+
 exports[`Unallocated case view adapter should render checkboxes with custom label 1`] = `
 Object {
   "data": Object {
