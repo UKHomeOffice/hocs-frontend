@@ -78,20 +78,20 @@ describe('Form date component', () => {
             <DateInput name="date" updateState={mockCallback} />
         );
 
-        let event = { target: { value: '19' } };
+        let event = { target: { value: '19 ' } };
         mockCallback.mockReset();
         fireEvent.change(wrapper.getAllByRole('textbox')[0],  event);
         expect(mockCallback).toHaveBeenCalledTimes(1);
         expect(mockCallback).toHaveBeenCalledWith({ 'date': '--19' });
 
         mockCallback.mockReset();
-        event = { target: { value: '01' } };
+        event = { target: { value: ' 01' } };
         fireEvent.change(wrapper.getAllByRole('textbox')[1],  event);
         expect(mockCallback).toHaveBeenCalledTimes(1);
         expect(mockCallback).toHaveBeenCalledWith({ 'date': '-01-' });
 
         mockCallback.mockReset();
-        event = { target: { value: '2018' } };
+        event = { target: { value: ' 2018 ' } };
         fireEvent.change(wrapper.getAllByRole('textbox')[2],  event);
         expect(mockCallback).toHaveBeenCalledTimes(1);
         expect(mockCallback).toHaveBeenCalledWith({ 'date': '2018--' });
@@ -116,5 +116,5 @@ describe('Form date component', () => {
         expect(screen.getAllByRole('textbox')[1]).not.toHaveValue('03');
         expect(screen.getAllByRole('textbox')[2]).not.toHaveValue('2019');
     });
-});
 
+});

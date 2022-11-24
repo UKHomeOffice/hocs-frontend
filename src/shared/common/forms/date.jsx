@@ -10,7 +10,7 @@ class DateInput extends Component {
     _onChange(field, value) {
         const updatedPart = { [field]: value };
         const parts = { ...this.parseValue(this.props.value), ...updatedPart };
-        this.props.updateState({ [this.props.name]: `${parts.year}-${parts.month}-${parts.day}` });
+        this.props.updateState({ [this.props.name]: `${parts.year.trim()}-${parts.month.trim()}-${parts.day.trim()}` });
     }
 
     datePart(field) { return `${this.props.name}-${field}`; }
