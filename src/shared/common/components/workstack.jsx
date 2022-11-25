@@ -449,12 +449,13 @@ class WorkstackAllocate extends Component {
         }
     }
 
-    renderTeamsDropdown() {
+    renderTeamsDropdown(name) {
         const { teamMembers } = this.props;
         return (
             <Fragment>
-                <Dropdown label='Allocate to a team member' name='selected_user' updateState={this.props.updateFormData} choices={teamMembers} />
-                <Submit label='Allocate' name='allocate_to_team_member' callback={this.props.updateFormData}/>
+                <Dropdown label='Allocate to a team member' name={`selected_user_${name}`} updateState={this.props.updateFormData} choices={teamMembers} >
+                    <Submit label='Allocate' name={`allocate_to_team_member_${name}`} callback={this.props.updateFormData} className='govuk-!-margin-left-3'/>
+                </Dropdown>
             </Fragment>
         );
     }
@@ -491,6 +492,33 @@ class WorkstackAllocate extends Component {
                 </li>
             );
         }
+    }
+
+    renderCaseAllocation(name) {
+        const {
+            allocateToUserEndpoint,
+            allocateToWorkstackEndpoint,
+            baseUrl,
+            teamMembers,
+            moveTeamOptions,
+            submitHandler
+        } = this.props;
+
+        return (
+            <Fragment>
+                <ul className='govuk-list'>
+                    <li>
+                        {allocateToUserEndpoint && LinkButton({ label: 'Allocate selected to me', endpoint: (baseUrl + allocateToUserEndpoint), submitHandler })}
+                    </li>
+                    <li>
+                        {allocateToWorkstackEndpoint && LinkButton({ label: 'Unallocate selected', endpoint: (baseUrl + allocateToWorkstackEndpoint), submitHandler })}
+                    </li>
+                    {this.renderTakeNextCaseButton()}
+                </ul>
+                {teamMembers && this.renderTeamsDropdown(name)}
+                {moveTeamOptions && moveTeamOptions.length > 0 && this.renderMoveToAnotherTeamDropdown()}
+            </Fragment>
+        );
     }
 
     compareRows(a, b) {
@@ -558,7 +586,7 @@ class WorkstackAllocate extends Component {
 
     render() {
         const { isMounted, items, selectable, columns } = this.state;
-        const { baseUrl, teamMembers, moveTeamOptions, submitHandler, allocateToTeamEndpoint, allocateToWorkstackEndpoint, allocateToUserEndpoint } = this.props;
+        const { baseUrl, submitHandler, allocateToTeamEndpoint } = this.props;
         return (
             <Fragment>
                 {isMounted && this.renderFilter()}
@@ -573,6 +601,9 @@ class WorkstackAllocate extends Component {
                                             <div className='govuk-hint' aria-live='polite'>
                                                 {items.length} Items
                                             </div>
+                                            <hr/>
+                                            {this.renderCaseAllocation('top')}
+                                            <hr/>
                                             <table className='govuk-table'>
                                                 <thead className='govuk-table__head'>
                                                     <tr className='govuk-radios govuk-table__row'>
@@ -594,18 +625,8 @@ class WorkstackAllocate extends Component {
                                     </div>
                                 </div>
                                 <div className='govuk-grid-row'>
-                                    <div className='govuk-grid-column-one-third'>
-                                        <ul className='govuk-list'>
-                                            <li>
-                                                {allocateToUserEndpoint && LinkButton({ label: 'Allocate selected to me', endpoint: (baseUrl + allocateToUserEndpoint), submitHandler })}
-                                            </li>
-                                            <li>
-                                                {allocateToWorkstackEndpoint && LinkButton({ label: 'Unallocate selected', endpoint: (baseUrl + allocateToWorkstackEndpoint), submitHandler })}
-                                            </li>
-                                            {this.renderTakeNextCaseButton()}
-                                        </ul>
-                                        {teamMembers && this.renderTeamsDropdown()}
-                                        {moveTeamOptions && moveTeamOptions.length > 0 && this.renderMoveToAnotherTeamDropdown()}
+                                    <div className='govuk-grid-column-full'>
+                                        {this.renderCaseAllocation('bottom')}
                                     </div>
                                 </div>
                             </fieldset>

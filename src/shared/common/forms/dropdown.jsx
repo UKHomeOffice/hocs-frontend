@@ -100,7 +100,8 @@ class Dropdown extends Component {
             error,
             hint,
             label,
-            name
+            name,
+            children
         } = this.props;
         const { choicesToUse } = this.state;
         return (
@@ -123,6 +124,8 @@ class Dropdown extends Component {
                         );
                     })}
                 </select>
+
+                { children }
             </div>
         );
     }
@@ -138,7 +141,8 @@ Dropdown.propTypes = {
     label: PropTypes.string,
     name: PropTypes.string.isRequired,
     updateState: PropTypes.func.isRequired,
-    value: PropTypes.string
+    value: PropTypes.string,
+    children: PropTypes.node
 };
 
 Dropdown.defaultProps = {
