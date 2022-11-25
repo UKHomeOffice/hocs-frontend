@@ -1338,6 +1338,12 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
+        GRO_COMPLAINT_CATEGORIES_LOCAL_REGISTRATION_SERVICE: {
+            client: 'INFO',
+            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_LOCAL_REGISTRATION_SERVICE',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
         GRO_EX_GRATIA_TYPE_OF_REFUND: {
             client: 'INFO',
             endpoint: '/entity/list/POGR_GRO_EX_GRATIA_TYPE_OF_REFUND',
