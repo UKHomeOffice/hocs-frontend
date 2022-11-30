@@ -325,6 +325,7 @@ class WorkstackAllocate extends Component {
             case ColumnRenderer.CASE_LINK:
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>
                     <Link to={`/case/${row.caseUUID}/stage/${row.uuid}`} className='govuk-link govuk-!-margin-right-3'>{value}</Link>
+                    <Tags row={row} />
                 </td>;
             case ColumnRenderer.NEXT_CASE_LINK: {
                 // build a suitable FE link
