@@ -3,11 +3,7 @@ import { Link } from 'react-router-dom';
 import { ApplicationConsumer } from '../contexts/application.jsx';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import {
-    clearWorkstack,
-    updateApiStatus,
-    clearApiStatus
-} from '../contexts/actions/index.jsx';
+import { clearApiStatus, clearWorkstack, updateApiStatus } from '../contexts/actions/index.jsx';
 import status from '../helpers/api-status.js';
 import WrappedWorkstackAllocate from '../common/components/workstack.jsx';
 import Dashboard from '../common/components/dashboard.jsx';
@@ -106,6 +102,13 @@ class WorkstackPage extends Component {
 
 
     updateFormData(update) {
+        if (Object.prototype.hasOwnProperty.call(update, 'submitAction') && update.submitAction.includes('allocate_to_team_member')) {
+            const dropdownString = update.submitAction.replace('allocate_to_team_member', '');
+            update = {
+                selected_user: this.state.formData['selected_user' + dropdownString],
+                submitAction: 'allocate_to_team_member'
+            };
+        }
         this.setState(state => ({ ...state, formData: { ...state.formData, ...update } }));
     }
 
