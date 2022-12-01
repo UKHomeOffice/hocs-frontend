@@ -64,6 +64,35 @@ Object {
                       9
                        Items
                     </div>
+                    <hr />
+                    <ul
+                      class="govuk-list"
+                    >
+                      <li />
+                      <li>
+                        <button
+                          class="govuk-button--link govuk-link"
+                          formaction="base.urlapi/allocate"
+                          formenctype="multipart/form-data"
+                          formmethod="POST"
+                          type="submit"
+                        >
+                          Unallocate selected
+                        </button>
+                      </li>
+                      <li>
+                        <button
+                          class="govuk-button--link govuk-link"
+                          formaction="base.url/allocate/user/next"
+                          formenctype="multipart/form-data"
+                          formmethod="POST"
+                          type="submit"
+                        >
+                          Take next case
+                        </button>
+                      </li>
+                    </ul>
+                    <hr />
                     <table
                       class="govuk-table"
                     >
@@ -1055,7 +1084,7 @@ Object {
                 class="govuk-grid-row"
               >
                 <div
-                  class="govuk-grid-column-one-third"
+                  class="govuk-grid-column-full"
                 >
                   <ul
                     class="govuk-list"
@@ -1152,6 +1181,35 @@ Object {
                     9
                      Items
                   </div>
+                  <hr />
+                  <ul
+                    class="govuk-list"
+                  >
+                    <li />
+                    <li>
+                      <button
+                        class="govuk-button--link govuk-link"
+                        formaction="base.urlapi/allocate"
+                        formenctype="multipart/form-data"
+                        formmethod="POST"
+                        type="submit"
+                      >
+                        Unallocate selected
+                      </button>
+                    </li>
+                    <li>
+                      <button
+                        class="govuk-button--link govuk-link"
+                        formaction="base.url/allocate/user/next"
+                        formenctype="multipart/form-data"
+                        formmethod="POST"
+                        type="submit"
+                      >
+                        Take next case
+                      </button>
+                    </li>
+                  </ul>
+                  <hr />
                   <table
                     class="govuk-table"
                   >
@@ -2143,7 +2201,7 @@ Object {
               class="govuk-grid-row"
             >
               <div
-                class="govuk-grid-column-one-third"
+                class="govuk-grid-column-full"
               >
                 <ul
                   class="govuk-list"
@@ -2297,6 +2355,81 @@ Object {
                       9
                        Items
                     </div>
+                    <hr />
+                    <ul
+                      class="govuk-list"
+                    >
+                      <li />
+                      <li>
+                        <button
+                          class="govuk-button--link govuk-link"
+                          formaction="base.urlapi/allocate"
+                          formenctype="multipart/form-data"
+                          formmethod="POST"
+                          type="submit"
+                        >
+                          Unallocate selected
+                        </button>
+                      </li>
+                      <li>
+                        <button
+                          class="govuk-button--link govuk-link"
+                          formaction="base.url/allocate/user/next"
+                          formenctype="multipart/form-data"
+                          formmethod="POST"
+                          type="submit"
+                        >
+                          Take next case
+                        </button>
+                      </li>
+                    </ul>
+                    <div
+                      class="govuk-form-group"
+                    >
+                      <label
+                        class="govuk-label govuk-label--s"
+                        for="selected_team"
+                        id="selected_team-label"
+                      >
+                        Move to another team
+                      </label>
+                      <select
+                        class="govuk-select "
+                        id="selected_team"
+                        name="selected_team"
+                      >
+                        <option
+                          value=""
+                        />
+                        <option
+                          value="VALUE 1"
+                        >
+                          TEST TEAM 1
+                        </option>
+                        <option
+                          value="VALUE 2"
+                        >
+                          TEST TEAM 2
+                        </option>
+                        <option
+                          value="VALUE 3"
+                        >
+                          TEST TEAM 3
+                        </option>
+                        <option
+                          value="VALUE 4"
+                        >
+                          TEST TEAM 4
+                        </option>
+                      </select>
+                    </div>
+                    <input
+                      class="govuk-button"
+                      name="move_team"
+                      type="submit"
+                      value="Move to team"
+                    />
+                    <hr />
                     <table
                       class="govuk-table"
                     >
@@ -3288,7 +3421,7 @@ Object {
                 class="govuk-grid-row"
               >
                 <div
-                  class="govuk-grid-column-one-third"
+                  class="govuk-grid-column-full"
                 >
                   <ul
                     class="govuk-list"
@@ -3431,6 +3564,81 @@ Object {
                     9
                      Items
                   </div>
+                  <hr />
+                  <ul
+                    class="govuk-list"
+                  >
+                    <li />
+                    <li>
+                      <button
+                        class="govuk-button--link govuk-link"
+                        formaction="base.urlapi/allocate"
+                        formenctype="multipart/form-data"
+                        formmethod="POST"
+                        type="submit"
+                      >
+                        Unallocate selected
+                      </button>
+                    </li>
+                    <li>
+                      <button
+                        class="govuk-button--link govuk-link"
+                        formaction="base.url/allocate/user/next"
+                        formenctype="multipart/form-data"
+                        formmethod="POST"
+                        type="submit"
+                      >
+                        Take next case
+                      </button>
+                    </li>
+                  </ul>
+                  <div
+                    class="govuk-form-group"
+                  >
+                    <label
+                      class="govuk-label govuk-label--s"
+                      for="selected_team"
+                      id="selected_team-label"
+                    >
+                      Move to another team
+                    </label>
+                    <select
+                      class="govuk-select "
+                      id="selected_team"
+                      name="selected_team"
+                    >
+                      <option
+                        value=""
+                      />
+                      <option
+                        value="VALUE 1"
+                      >
+                        TEST TEAM 1
+                      </option>
+                      <option
+                        value="VALUE 2"
+                      >
+                        TEST TEAM 2
+                      </option>
+                      <option
+                        value="VALUE 3"
+                      >
+                        TEST TEAM 3
+                      </option>
+                      <option
+                        value="VALUE 4"
+                      >
+                        TEST TEAM 4
+                      </option>
+                    </select>
+                  </div>
+                  <input
+                    class="govuk-button"
+                    name="move_team"
+                    type="submit"
+                    value="Move to team"
+                  />
+                  <hr />
                   <table
                     class="govuk-table"
                   >
@@ -4422,7 +4630,7 @@ Object {
               class="govuk-grid-row"
             >
               <div
-                class="govuk-grid-column-one-third"
+                class="govuk-grid-column-full"
               >
                 <ul
                   class="govuk-list"
@@ -4622,6 +4830,35 @@ Object {
                       9
                        Items
                     </div>
+                    <hr />
+                    <ul
+                      class="govuk-list"
+                    >
+                      <li />
+                      <li>
+                        <button
+                          class="govuk-button--link govuk-link"
+                          formaction="base.urlapi/allocate"
+                          formenctype="multipart/form-data"
+                          formmethod="POST"
+                          type="submit"
+                        >
+                          Unallocate selected
+                        </button>
+                      </li>
+                      <li>
+                        <button
+                          class="govuk-button--link govuk-link"
+                          formaction="base.url/allocate/user/next"
+                          formenctype="multipart/form-data"
+                          formmethod="POST"
+                          type="submit"
+                        >
+                          Take next case
+                        </button>
+                      </li>
+                    </ul>
+                    <hr />
                     <table
                       class="govuk-table"
                     >
@@ -5613,7 +5850,7 @@ Object {
                 class="govuk-grid-row"
               >
                 <div
-                  class="govuk-grid-column-one-third"
+                  class="govuk-grid-column-full"
                 >
                   <ul
                     class="govuk-list"
@@ -5710,6 +5947,35 @@ Object {
                     9
                      Items
                   </div>
+                  <hr />
+                  <ul
+                    class="govuk-list"
+                  >
+                    <li />
+                    <li>
+                      <button
+                        class="govuk-button--link govuk-link"
+                        formaction="base.urlapi/allocate"
+                        formenctype="multipart/form-data"
+                        formmethod="POST"
+                        type="submit"
+                      >
+                        Unallocate selected
+                      </button>
+                    </li>
+                    <li>
+                      <button
+                        class="govuk-button--link govuk-link"
+                        formaction="base.url/allocate/user/next"
+                        formenctype="multipart/form-data"
+                        formmethod="POST"
+                        type="submit"
+                      >
+                        Take next case
+                      </button>
+                    </li>
+                  </ul>
+                  <hr />
                   <table
                     class="govuk-table"
                   >
@@ -6701,7 +6967,7 @@ Object {
               class="govuk-grid-row"
             >
               <div
-                class="govuk-grid-column-one-third"
+                class="govuk-grid-column-full"
               >
                 <ul
                   class="govuk-list"
@@ -6855,6 +7121,35 @@ Object {
                       9
                        Items
                     </div>
+                    <hr />
+                    <ul
+                      class="govuk-list"
+                    >
+                      <li />
+                      <li>
+                        <button
+                          class="govuk-button--link govuk-link"
+                          formaction="base.urlapi/allocate"
+                          formenctype="multipart/form-data"
+                          formmethod="POST"
+                          type="submit"
+                        >
+                          Unallocate selected
+                        </button>
+                      </li>
+                      <li>
+                        <button
+                          class="govuk-button--link govuk-link"
+                          formaction="base.url/allocate/user/next"
+                          formenctype="multipart/form-data"
+                          formmethod="POST"
+                          type="submit"
+                        >
+                          Take next case
+                        </button>
+                      </li>
+                    </ul>
+                    <hr />
                     <table
                       class="govuk-table"
                     >
@@ -7846,7 +8141,7 @@ Object {
                 class="govuk-grid-row"
               >
                 <div
-                  class="govuk-grid-column-one-third"
+                  class="govuk-grid-column-full"
                 >
                   <ul
                     class="govuk-list"
@@ -7943,6 +8238,35 @@ Object {
                     9
                      Items
                   </div>
+                  <hr />
+                  <ul
+                    class="govuk-list"
+                  >
+                    <li />
+                    <li>
+                      <button
+                        class="govuk-button--link govuk-link"
+                        formaction="base.urlapi/allocate"
+                        formenctype="multipart/form-data"
+                        formmethod="POST"
+                        type="submit"
+                      >
+                        Unallocate selected
+                      </button>
+                    </li>
+                    <li>
+                      <button
+                        class="govuk-button--link govuk-link"
+                        formaction="base.url/allocate/user/next"
+                        formenctype="multipart/form-data"
+                        formmethod="POST"
+                        type="submit"
+                      >
+                        Take next case
+                      </button>
+                    </li>
+                  </ul>
+                  <hr />
                   <table
                     class="govuk-table"
                   >
@@ -8934,7 +9258,7 @@ Object {
               class="govuk-grid-row"
             >
               <div
-                class="govuk-grid-column-one-third"
+                class="govuk-grid-column-full"
               >
                 <ul
                   class="govuk-list"
