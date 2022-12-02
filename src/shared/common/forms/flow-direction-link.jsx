@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import { ApplicationConsumer } from '../../contexts/application.jsx';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { withRouter } from 'react-router-dom';
 import {
     setError,
     updateApiStatus,
     clearApiStatus,
 } from '../../contexts/actions/index.jsx';
 import status from '../../helpers/api-status.js';
+import withRouter from '../../router/withRouter';
 
 export class FlowDirectionLink extends Component {
 

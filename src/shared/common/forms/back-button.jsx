@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { ApplicationConsumer } from '../../contexts/application.jsx';
 import { Link } from 'react-router-dom';
-import { withRouter } from 'react-router-dom';
+import withRouter from '../../router/withRouter';
 
 
 export class BackButton extends Component {

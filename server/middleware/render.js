@@ -1,6 +1,6 @@
 const React = require('react');
 const { renderToString } = require('react-dom/server');
-const { StaticRouter } = require('react-router-dom');
+const { StaticRouter } = require('react-router-dom/server');
 const { HelmetProvider } = require('react-helmet-async');
 const { default: App } = require('../../build/server/app.server');
 const html = require('../layout/html');

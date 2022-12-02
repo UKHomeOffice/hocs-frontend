@@ -83,7 +83,7 @@ const Dashboard = ({  match, history }) => {
 };
 
 Dashboard.propTypes = {
-    match: PropTypes.object.isRequired,
+    match: PropTypes.object,
     title: PropTypes.string.isRequired,
     dashboard: PropTypes.array,
     history: PropTypes.array

@@ -161,6 +161,7 @@ const routes = [
     },
     {
         component: Error,
+        path: '/error',
         error: { status: 404 }
     }
 ];

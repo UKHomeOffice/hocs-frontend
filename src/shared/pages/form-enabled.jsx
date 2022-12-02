@@ -57,6 +57,7 @@ function withForm(Page) {
         }
 
         getForm() {
+            console.log(this.props);
             const { dispatch, match: { url }, history, page } = this.props;
             const endpoint = '/api/form' + url;
             return dispatch(updateApiStatus(status.REQUEST_FORM))
@@ -241,10 +242,10 @@ function withForm(Page) {
 
     FormEnabled.propTypes = {
         confirmation: PropTypes.object,
-        dispatch: PropTypes.func.isRequired,
+        dispatch: PropTypes.func,
         form: PropTypes.object,
-        history: PropTypes.object.isRequired,
-        match: PropTypes.object.isRequired,
+        history: PropTypes.object,
+        match: PropTypes.object,
         hasSidebar: PropTypes.bool,
         page: PropTypes.object
     };

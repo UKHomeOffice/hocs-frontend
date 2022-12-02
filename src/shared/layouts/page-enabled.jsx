@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { ApplicationConsumer } from '../contexts/application.jsx';
 import { unsetError, clearApiStatus } from '../contexts/actions/index.jsx';
 import Error from './error.jsx';
+import withRouter from '../router/withRouter';
 
 class PageWrapper extends Component {
 
@@ -46,4 +47,4 @@ const PageEnabledWrapper = props => (
     </ApplicationConsumer>
 );
 
-export default PageEnabledWrapper;
+export default withRouter(PageEnabledWrapper);
