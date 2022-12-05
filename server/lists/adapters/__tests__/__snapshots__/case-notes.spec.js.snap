@@ -150,6 +150,17 @@ Array [
       "date": "5 January 2019 at 12:00",
       "modifiedBy": "MOCK_USER",
       "modifiedDate": null,
+    },
+    "timelineItemUUID": "__timelineItemUUID__",
+    "title": "Field Name changed to: Updated Value",
+    "type": "DATA_FIELD_UPDATED",
+  },
+  Object {
+    "body": Object {
+      "author": "MOCK_USER",
+      "date": "5 January 2019 at 12:00",
+      "modifiedBy": "MOCK_USER",
+      "modifiedDate": null,
       "note": "A test case note",
     },
     "timelineItemUUID": "__timelineItemUUID__",
@@ -179,6 +190,17 @@ Array [
     "timelineItemUUID": "__timelineItemUUID__",
     "title": "Change note",
     "type": "CHANGE",
+  },
+  Object {
+    "body": Object {
+      "author": "MOCK_USER",
+      "date": "5 January 2019 at 12:00",
+      "modifiedBy": "MOCK_USER",
+      "modifiedDate": null,
+    },
+    "timelineItemUUID": "__timelineItemUUID__",
+    "title": "Field Name: New Value",
+    "type": "DATA_FIELD_UPDATED",
   },
   Object {
     "body": Object {

@@ -73,7 +73,9 @@ describe('Case Notes Adapter', () => {
             { eventTime: '2019-01-05 12:00:02', type: 'APPEAL_UPDATED', userName: 'User A', body: { userUUID: 1, teamUUID: 1, stage: 1, caseTypeActionUuid: '__caseTypeActionUuid__' }, timelineItemUUID: '__timelineItemUUID__' },
             { eventTime: '2019-01-05 12:00:02', type: 'EXTERNAL_INTEREST_CREATED', userName: 'User A', body: { caseType: 'FOI', userUUID: 1, teamUUID: 1, stage: 1, note: 'Details of interest', partyType: '__partyType__' }, timelineItemUUID: '__timelineItemUUID__' },
             { eventTime: '2019-01-05 12:00:02', type: 'EXTERNAL_INTEREST_UPDATE', userName: 'User A', body: { caseType: 'FOI', userUUID: 1, teamUUID: 1, stage: 1, note: 'Updated details of interest', partyType: '__partyType_2__' }, timelineItemUUID: '__timelineItemUUID__' },
-            { eventTime: '2019-01-01 12:00:00', type: 'TEST_UNKNOWN_TYPE', userName: 'User A', timelineItemUUID: '__timelineItemUUID__' }
+            { eventTime: '2019-01-01 12:00:00', type: 'TEST_UNKNOWN_TYPE', userName: 'User A', timelineItemUUID: '__timelineItemUUID__' },
+            { eventTime: '2019-01-05 12:00:02', type: 'DATA_FIELD_UPDATED', userName: 'User A', body: { fieldName: 'fieldName', fieldNameLabel: 'Field Name', newValue: 'newValue', newValueLabel: 'New Value', previousValue: null, previousValueLabel: null }, timelineItemUUID: '__timelineItemUUID__' },
+            { eventTime: '2019-01-05 12:00:05', type: 'DATA_FIELD_UPDATED', userName: 'User A', body: { fieldName: 'fieldName', fieldNameLabel: 'Field Name', newValue: 'newValue', newValueLabel: 'Updated Value', previousValue: 'previousValue', previousValueLabel: 'Previous Value'}, timelineItemUUID: '__timelineItemUUID__' },
         ];
 
         const results = await caseNotesAdapter(mockData, { fromStaticList: mockFromStaticList, fetchList: mockFetchList, logger: mockLogger });

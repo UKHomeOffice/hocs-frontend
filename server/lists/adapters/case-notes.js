@@ -202,7 +202,10 @@ const typeAdaptors = {
     OFFLINE_CASE_TRANSFER : ({ note }) => ({
         note: note,
         title: 'Offline Case Transfer'
-    })
+    }),
+    DATA_FIELD_UPDATED: ({ body }) => ({
+        title: `${body.fieldNameLabel}${body.previousValue ? ' changed to' : ''}: ${body.newValueLabel}`
+    }),
 };
 
 const formatDate = (rawDate) => {
