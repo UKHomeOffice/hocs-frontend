@@ -8,4 +8,5 @@ jobs:
     uses: UKHomeOffice/hocs-github-actions/.github/workflows/docker-build-tag-npm.yml@v2
     with:
       images: 'quay.io/ukhomeofficedigital/hocs-frontend'
+      node-version: 18
     secrets: inherit
