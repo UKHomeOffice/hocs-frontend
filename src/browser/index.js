@@ -6,12 +6,14 @@ import App from '../shared/index.jsx';
 import { HelmetProvider } from 'react-helmet-async';
 import '../styles/app.scss';
 
-const container = document.getElementById('app');
 /* eslint-disable no-undef*/
+/* eslint-disable no-unused-vars*/
+const container = document.getElementById('app');
 const root = hydrateRoot(container, <BrowserRouter>
     <HelmetProvider>
         <App config={window.__INITIAL_DATA__} />
     </HelmetProvider>
 </BrowserRouter>);
+/* eslint-enable no-unused-vars*/
 /* eslint-enable no-undef*/
 
