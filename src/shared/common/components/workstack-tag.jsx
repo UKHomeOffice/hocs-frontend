@@ -1,12 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+const { fetchTagType } = require('../../../../server/config/tagType/tagType');
 
 export default function Tags(props) {
     let tags = [];
 
     if (props.row.tag && props.row.tag.length > 0) {
         tags = props.row.tag.map(tag => {
-            return <span key={tag} className="govuk-tag govuk-!-margin-right-1">{tag}</span>;
+            const tagDetails = fetchTagType([tag]);
+            let tagName = "DEFAULT";
+            let tagLabel= "govuk-tag govuk-!-margin-right-1";
+
+            if(tagDetails.length !=0) {
+                tagName = tagDetails[0].tagName;
+                tagLabel= tagDetails[0].tagLabel;
+            }
+
+            return <span key={tagName} className={tagLabel}>{tagName}</span>;
         });
     }
 
