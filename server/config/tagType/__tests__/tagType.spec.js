@@ -1,17 +1,16 @@
 jest.mock('../tagConfig.json', () => ({
-        'TEST': [
-            {
-                'tagName': 'TESTNAME',
-                'tagLabel': 'TEST-LABEL'
-            }
-        ],
-        '': [
-            {
-                'tagName': 'default',
-                'tagLabel': 'default-label'
-            }
-        ]
-    }),
+    'TEST': [
+    {
+        'tagName': 'NAME',
+        'tagLabel': 'TEST-LABEL'
+    }
+    ],
+    '': [
+    {
+        'tagName': 'default',
+        'tagLabel': 'default-label'
+    }]
+}),
     { virtual: true });
 const { fetchTagType } = require('../tagType');
 
@@ -23,7 +22,7 @@ describe('Tags configuration', () => {
         expect(tag).toEqual(
             expect.arrayContaining([
                 expect.objectContaining({
-                    'tagName': 'TESTNAME',
+                    'tagName': 'NAME',
                     'tagLabel': 'TEST-LABEL'
                 })
             ])
@@ -45,7 +44,7 @@ describe('Tags configuration', () => {
     });
 
 
-    test('should return empty array if type non-existant', () => {
+    test('should return empty array if type non-existent', () => {
         let tag;
         tag = fetchTagType('UNKNOWN');
         expect(tag.length).toEqual(0);
