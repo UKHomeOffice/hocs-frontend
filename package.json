@@ -5,7 +5,7 @@
     "repository": "github:UKHomeOffice/hocs-frontend",
     "main": "index.js",
     "engines": {
-        "node": ">=16.16.0"
+        "node": ">=18.12.1"
     },
     "scripts": {
         "start": "node --max-http-header-size 80000 index.js",
