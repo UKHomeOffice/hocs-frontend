@@ -455,7 +455,7 @@ class WorkstackAllocate extends Component {
         return (
             <Fragment>
                 <Dropdown label='Allocate to a team member' name={`selected_user_${name}`} updateState={this.props.updateFormData} choices={teamMembers} >
-                    <Submit label='Allocate' name={`allocate_to_team_member_${name}`} callback={this.props.updateFormData} className='govuk-!-margin-left-3'/>
+                    <Submit label='Allocate' name={`allocate_to_team_member_${name}`} callback={this.props.updateFormData} className='govuk-!-margin-left-3 govuk-!-margin-bottom-0'/>
                 </Dropdown>
             </Fragment>
         );
