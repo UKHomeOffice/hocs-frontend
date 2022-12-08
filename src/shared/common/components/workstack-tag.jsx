@@ -10,7 +10,7 @@ export default function Tags(props) {
             let tagDetails = fetchTagType(tag);
 
             return <span key={tag}
-                         className={tagDetails?.displayClass ?? 'govuk-tag govuk-!-margin-right-1'}>{tagDetails?.label ?? tag}</span>;
+                className={tagDetails?.displayClass ?? 'govuk-tag govuk-!-margin-right-1'}>{tagDetails?.label ?? tag}</span>;
         });
     }
 

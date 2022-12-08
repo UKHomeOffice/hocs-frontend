@@ -1,10 +1,10 @@
 jest.mock('../tagConfig.json', () => ({
-        'TEST': {
-            'label': 'TEST-LABEL',
-            'displayClass': 'TEST-DISPLAY-CLASS'
-        }
-    }),
-    { virtual: true });
+    'TEST': {
+        'label': 'TEST-LABEL',
+        'displayClass': 'TEST-DISPLAY-CLASS'
+    }
+}),
+{ virtual: true });
 const { fetchTagType } = require('../tagType');
 
 describe('Tags configuration', () => {
