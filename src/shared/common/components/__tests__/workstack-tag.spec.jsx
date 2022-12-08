@@ -18,6 +18,6 @@ describe('Workstack Tag component', () => {
                 tag: ['HS']
             }
         };
-        expect(Tags(props).length).toBe(1);
+        expect(Tags(props.row.tag)).toBeDefined();
     });
 });
