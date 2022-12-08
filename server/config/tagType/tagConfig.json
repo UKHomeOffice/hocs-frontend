@@ -1,14 +1,9 @@
 {
-  "REJECTED_BY_PSU": [
-    {
-      "tagName": "REJECTED BY PSU",
-      "tagLabel": "govuk-tag govuk-tag--red"
-    }
-  ],
-  "HS": [
-    {
-      "tagName" : "HS",
-      "tagLabel": "govuk-tag govuk-!-margin-right-1"
-    }
-  ]
+  "REJECTED_BY_PSU": {
+    "label": "REJECTED BY PSU",
+    "displayClass": "govuk-tag govuk-tag--red"
+  },
+  "HS": {
+    "label": "HS"
+  }
 }

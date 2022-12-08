@@ -325,7 +325,7 @@ class WorkstackAllocate extends Component {
             case ColumnRenderer.CASE_LINK:
                 return <td key={row.uuid + column.dataValueKey} className='govuk-table__cell'>
                     <Link to={`/case/${row.caseUUID}/stage/${row.uuid}`} className='govuk-link govuk-!-margin-right-3'>{value}</Link>
-                    <Tags row={row} />
+                    <Tags tags={row.tag} />
                 </td>;
             case ColumnRenderer.NEXT_CASE_LINK: {
                 // build a suitable FE link
@@ -348,7 +348,7 @@ class WorkstackAllocate extends Component {
                         value.primaryCorrespondentFullName &&
                         <span className='govuk-!-font-weight-bold'>{value.primaryCorrespondentFullName}<br/></span>
                     }
-                    <Tags row={row} />
+                    <Tags tags={row.tag} />
                     <Link to={`/case/${row.caseUUID}/stage/${row.uuid}`} className='govuk-link govuk-!-margin-right-3'>{value.caseReference}</Link>
                 </td>;
             case ColumnRenderer.MP_WITH_OWNER:
