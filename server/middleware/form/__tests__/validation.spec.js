@@ -748,4 +748,23 @@ describe('Validation middleware', () => {
         }).toThrow('Form validation failed');
     });
 
+    it('should validate form', () => {
+        const schema = {
+            fields: [
+                { props: { name: 'fieldOne', label: 'Field One' } },
+            ],
+            validation: [{
+                options: ['fieldOne'],
+                validator: 'oneOf'
+            }]
+        };
+        const data = {
+            'fieldOne': 'Yes',
+        };
+
+        expect(() => {
+            validateForm(schema, data);
+        }).not.toThrowError();
+    });
+
 });

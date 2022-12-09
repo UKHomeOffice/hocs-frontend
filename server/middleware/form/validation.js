@@ -410,11 +410,11 @@ const validateForm = (schema, data = {}) => {
 
     // Add form validation here
     if (schema.validation) {
-        const formValidationSchema = JSON.parse(schema.validation);
-
-        if (Object.keys(formValidationSchema).length > 0) {
-            formValidationErrors = validateForm(data, formValidationSchema);
-        }
+        schema.validation.map(validationSchema => {
+            if (Object.keys(validationSchema).length > 0) {
+                formValidationErrors = { ...formValidationErrors, ...validateForm(data, validationSchema) };
+            }
+        });
     }
 
     const validationErrors = { ...fieldValidationErrors, ...formValidationErrors };

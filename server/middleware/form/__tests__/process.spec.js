@@ -68,7 +68,7 @@ describe('Process middleware', () => {
         expect(next).toHaveBeenCalledTimes(1);
     });
 
-    it('should throw error if validation fails', () => {
+    it('should throw error if field validation fails', () => {
         const req = {
             body: {
                 ['test-field']: ''
@@ -97,6 +97,178 @@ describe('Process middleware', () => {
         expect(req.form.data).toBeUndefined();
         expect(next).toHaveBeenCalled();
         expect(next.mock.calls[0][0]).toBeInstanceOf(Error);
+    });
+
+    it('should return data if form validation succeeds', () => {
+        const req = {
+            body: {
+                ['test-field']: 'test'
+            },
+            query: {},
+            form: {
+                schema: {
+                    fields: [
+                        {
+                            component: 'text',
+                            props: {
+                                name: 'test-field',
+                            }
+                        }
+                    ],
+                    validation: [{
+                        options: ['test-field'],
+                        validator: 'oneOf'
+                    }]
+                }
+            }
+        };
+        const res = {};
+
+        processMiddleware(req, res, next);
+        expect(req.form).toBeDefined();
+        expect(req.form.data).toEqual({ 'test-field': 'test' });
+        expect(next).toHaveBeenCalled();
+    });
+
+    it('should throw error if form validation fails', () => {
+        const req = {
+            body: {
+                ['test-field']: ''
+            },
+            query: {},
+            form: {
+                schema: {
+                    fields: [
+                        {
+                            component: 'text',
+                            props: {
+                                name: 'test-field',
+                            }
+                        }
+                    ],
+                    validation: [{
+                        options: ['test-field'],
+                        validator: 'oneOf'
+                    }]
+                }
+            }
+        };
+        const res = {};
+
+        processMiddleware(req, res, next);
+        expect(req.form).toBeDefined();
+        expect(req.form.data).toBeUndefined();
+        expect(next).toHaveBeenCalled();
+        expect(next.mock.calls[0][0]).toBeInstanceOf(Error);
+    });
+
+    it('should return data if validation condition met and form validation succeeds', () => {
+        const req = {
+            body: {
+                ['test-field']: 'test',
+                field: 'value'
+            },
+            query: {},
+            form: {
+                schema: {
+                    fields: [
+                        {
+                            component: 'text',
+                            props: {
+                                name: 'test-field',
+                            }
+                        }
+                    ],
+                    validation: [{
+                        condition: {
+                            fieldName: 'field',
+                            value: 'value'
+                        },
+                        options: ['test-field'],
+                        validator: 'oneOf'
+                    }]
+                }
+            }
+        };
+        const res = {};
+
+        processMiddleware(req, res, next);
+        expect(req.form).toBeDefined();
+        expect(req.form.data).toEqual({ 'test-field': 'test' });
+        expect(next).toHaveBeenCalled();
+    });
+
+    it('should throw error if validation condition met and form validation fails', () => {
+        const req = {
+            body: {
+                ['test-field']: '',
+                field: 'value'
+            },
+            query: {},
+            form: {
+                schema: {
+                    fields: [
+                        {
+                            component: 'text',
+                            props: {
+                                name: 'test-field',
+                            }
+                        }
+                    ],
+                    validation: [{
+                        condition: {
+                            fieldName: 'field',
+                            value: 'value'
+                        },
+                        options: ['test-field'],
+                        validator: 'oneOf'
+                    }]
+                }
+            }
+        };
+        const res = {};
+
+        processMiddleware(req, res, next);
+        expect(req.form).toBeDefined();
+        expect(req.form.data).toBeUndefined();
+        expect(next).toHaveBeenCalled();
+        expect(next.mock.calls[0][0]).toBeInstanceOf(Error);
+    });
+
+    it('should return data if validation condition not met', () => {
+        const req = {
+            body: {
+                ['test-field']: '',
+                field: ''
+            },
+            query: {},
+            form: {
+                schema: {
+                    fields: [
+                        {
+                            component: 'text',
+                            props: {
+                                name: 'test-field',
+                            }
+                        }
+                    ],
+                    validation: [{
+                        condition: {
+                            fieldName: 'field',
+                            value: 'value'
+                        },
+                        options: ['test-field'],
+                        validator: 'oneOf'
+                    }]
+                }
+            }
+        };
+        const res = {};
+
+        processMiddleware(req, res, next);
+        expect(req.form).toBeDefined();
+        expect(req.form.data).toEqual({ 'test-field': '' });
+        expect(next).toHaveBeenCalled();
     });
 
     it('should return data for fields with blank values without validation', () => {
