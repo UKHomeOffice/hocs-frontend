@@ -19,4 +19,4 @@ Tags.propTypes = {
 
 Tags.defaultProps = {
     tags: []
-}
+};
