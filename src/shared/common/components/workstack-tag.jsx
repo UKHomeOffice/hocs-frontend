@@ -7,8 +7,7 @@ export default function Tags(props) {
     let tags = props.tags.map(tag => {
         let tagDetails = fetchTagType(tag);
 
-        return <span key={tag}
-                     className={tagDetails?.displayClass ?? 'govuk-tag govuk-!-margin-right-1'}>{tagDetails?.label ?? tag}</span>;
+        return <span key={tag} className={tagDetails?.displayClass ?? 'govuk-tag govuk-!-margin-right-1'}>{tagDetails?.label ?? tag}</span>;
     });
 
     return tags;
@@ -21,4 +20,3 @@ Tags.propTypes = {
 Tags.defaultProps = {
     tags: []
 }
-
