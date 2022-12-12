@@ -10,7 +10,10 @@ describe('Workstack Tag component', () => {
     });
 
     it('should return empty tags when passed none', () => {
-        const tags = {};
+        const tags = {
+            'tags':
+                []
+        };
 
         expect(Tags(tags).length).toBe(0);
     });
