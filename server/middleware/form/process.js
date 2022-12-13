@@ -105,7 +105,12 @@ function checkValidationCondition(validator, caseData) {
 }
 
 function getActiveValidators(validationSchemaJson, caseData) {
-    const validationSchema = typeof validationSchemaJson === 'string' ? JSON.parse(validationSchemaJson) : validationSchemaJson;
+    let validationSchema;
+    try {
+        validationSchema = JSON.parse(validationSchemaJson);
+    } catch (error) {
+        validationSchema = validationSchemaJson;
+    }
     if (!validationSchema) {
         return [];
     }
@@ -128,8 +133,6 @@ function processMiddleware(req, res, next) {
 
         const fieldData = visibleFields.reduce(createReducer(data, req), {});
         const activeValidation = getActiveValidators(schema.validation, data);
-
-        console.log(activeValidation);
 
         validateForm({ ...schema, fields: visibleFields, validation: activeValidation }, fieldData);
 
