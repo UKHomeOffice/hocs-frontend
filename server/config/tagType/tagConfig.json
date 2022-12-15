@@ -1,0 +1,9 @@
+{
+  "REJECTED_BY_PSU": {
+    "label": "REJECTED BY PSU",
+    "displayClass": "govuk-tag govuk-tag--red"
+  },
+  "HS": {
+    "label": "HS"
+  }
+}
