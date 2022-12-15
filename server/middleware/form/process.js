@@ -97,6 +97,28 @@ const isUnacceptedDataFields = (field) => {
         isFieldComponentOfType(field, 'somu-list');
 };
 
+function checkValidationCondition(validator, caseData) {
+    if (Object.prototype.hasOwnProperty.call(validator, 'condition') && caseData[validator.condition.fieldName] !== validator.condition.value) {
+        return false;
+    }
+    return true;
+}
+
+function getActiveValidators(validationSchemaJson, caseData) {
+    let validationSchema;
+    try {
+        validationSchema = JSON.parse(validationSchemaJson);
+    } catch (error) {
+        validationSchema = validationSchemaJson;
+    }
+    if (!validationSchema) {
+        return [];
+    }
+    const validationSchemaArray = Array.isArray(validationSchema) ? validationSchema : Array.of(validationSchema);
+
+    return validationSchemaArray.filter(validator => checkValidationCondition(validator, caseData));
+}
+
 function processMiddleware(req, res, next) {
     try {
         const data = req.body;
@@ -110,8 +132,9 @@ function processMiddleware(req, res, next) {
             .filter(Boolean);
 
         const fieldData = visibleFields.reduce(createReducer(data, req), {});
+        const activeValidation = getActiveValidators(schema.validation, data);
 
-        validateForm({ ...schema, fields: visibleFields }, fieldData);
+        validateForm({ ...schema, fields: visibleFields, validation: activeValidation }, fieldData);
 
         req.form.data = visibleFields
             .filter(isUnacceptedDataFields)
