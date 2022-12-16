@@ -70,7 +70,7 @@ router.post('/api/search/reference', async (req, res) => {
                 return res.json({ forwardProps: { workstack: res.locals.workstack }, redirect: '/search/reference' });
             }
         }
-        res.json({ errors: { 'case-reference': 'No active workflows for case' } });
+        res.json({ errors: { 'case-reference': 'No cases have that reference - check what you have entered and try again' } });
     } catch (error) {
         res.json({ errors: { 'case-reference': 'Failed to find case' } });
     }
