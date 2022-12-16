@@ -5,33 +5,27 @@ const {
     WORKFLOW_SERVICE,
     INFO_SERVICE,
     TEMPLATES_SERVICE,
-    DOCUMENT_SERVICE,
-    WORKFLOW_BASIC_AUTH
+    DOCUMENT_SERVICE
 } = require('../config').forContext('server');
 
 const caseworkService = createClient({
-    baseURL: CASEWORK_SERVICE,
-    auth: WORKFLOW_BASIC_AUTH
+    baseURL: CASEWORK_SERVICE
 });
 
 const workflowService = createClient({
-    baseURL: WORKFLOW_SERVICE,
-    auth: WORKFLOW_BASIC_AUTH
+    baseURL: WORKFLOW_SERVICE
 });
 
 const infoService = createClient({
-    baseURL: INFO_SERVICE,
-    auth: WORKFLOW_BASIC_AUTH
+    baseURL: INFO_SERVICE
 });
 
 const templatesService = createClient({
-    baseURL: TEMPLATES_SERVICE,
-    auth: WORKFLOW_BASIC_AUTH
+    baseURL: TEMPLATES_SERVICE
 });
 
 const documentService = createClient({
-    baseURL: DOCUMENT_SERVICE,
-    auth: WORKFLOW_BASIC_AUTH
+    baseURL: DOCUMENT_SERVICE
 });
 
 module.exports = {
