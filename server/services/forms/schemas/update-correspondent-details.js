@@ -8,6 +8,13 @@ module.exports = async ({ caseId, stageId, context, user, requestId }) => {
     return Form()
         .withTitle('Edit correspondent details')
         .withField(
+            Component('dropdown', 'type')
+                .withValidator('required', 'The correspondent must have a type')
+                .withProp('label', 'Correspondent type')
+                .withProp('choices', 'SELECTABLE_CORRESPONDENT_TYPES')
+                .build()
+        )
+        .withField(
             Component('text', 'fullname')
                 .withValidator('required', 'The correspondent\'s full name is required')
                 .withProp('label', 'Full name')
