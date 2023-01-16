@@ -21,7 +21,7 @@ module.exports = (options) => {
     }
 
     return Form()
-        .withTitle('Create Escalate Case')
+        .withTitle('Create stage 2 case')
         .withField(
             Component('date', 'DateReceived')
                 .withValidator('required', 'Date received is required')
