@@ -5,6 +5,7 @@ on:
 
 jobs:
   test:
-    uses: UKHomeOffice/hocs-github-actions/.github/workflows/test-npm.yml@v2
+    uses: UKHomeOffice/sas-github-workflows/.github/workflows/test-npm.yml@v1
     with:
-      node-version-matrix: '[ "18.x", "19.x" ]'
+      installCommand: 'ci --production=false --no-optional'
+      buildCommand: 'build-prod'
