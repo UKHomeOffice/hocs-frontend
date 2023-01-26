@@ -1,0 +1,13 @@
+name: 'SemVer Tag and Docker Build'
+on:
+  pull_request:
+    types: [ closed ]
+
+jobs:
+  build:
+    uses: UKHomeOffice/sas-github-workflows/.github/workflows/semver-tag-docker-npm.yml@v1
+    with:
+      installCommand: 'ci --production=false --no-optional'
+      buildCommand: 'build-prod'
+      image: 'quay.io/ukhomeofficedigital/hocs-frontend'
+    secrets: inherit
