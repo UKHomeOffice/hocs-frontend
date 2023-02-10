@@ -42,7 +42,9 @@ async function handleSearch(req, res, next) {
                 MinSignOffTeam: formData['MinSignOffTeam'],
                 OfficialEngagement: formData['OfficialEngagement'],
                 ComplainantHORef: formData['ComplainantHORef'],
-                PSURef: formData['PSURef']
+                PSURef: formData['PSURef'],
+                CompOrigin: formData['CompOrigin'],
+                BusinessArea: formData['BusinessArea']
             },
             activeOnly: formData['caseStatus'] === 'active'
         };
