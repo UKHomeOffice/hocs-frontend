@@ -423,10 +423,28 @@
     {
       "validation": [],
       "props": {
-        "label": "Complainant Home Office Reference"
+        "label": "Complainant Home Office reference"
       },
       "name": "ComplainantHORef",
       "component": "text"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Complaint origin",
+        "choices": "S_IEDET_COMP_ORIGIN"
+      },
+      "name": "CompOrigin",
+      "component": "dropdown"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "Business area",
+        "choices": "IEDET_BUSINESS_AREAS"
+      },
+      "name": "BusinessArea",
+      "component": "dropdown"
     }
   ],
   "MPAM": [
