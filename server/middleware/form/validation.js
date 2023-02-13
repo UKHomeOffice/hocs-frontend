@@ -14,7 +14,7 @@ const validationErrors = {
         return `${value} is a ${extension.toUpperCase()} file which is not allowed`;
     },
     fileLimit: () => `The number of files you have tried to upload exceeded the limit of ${DOCUMENT_BULK_LIMIT}`,
-    isValidDate: label => `${label} must be a date`,
+    isValidDate: label => `${label} must be a real date`,
     isBeforeToday: label => `${label} must be a date in the past`,
     isAfterToday: label => `${label} must be a date in the future`,
     isValidWithinDate: label => `${label} must be within the last ${VALID_DAYS_RANGE} days`,
