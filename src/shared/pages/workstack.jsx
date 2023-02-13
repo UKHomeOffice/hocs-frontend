@@ -79,15 +79,20 @@ class WorkstackPage extends Component {
         // TODO: Remove
         /* eslint-disable-next-line no-undef */
         const payload = new FormData();
-        Object.keys(formData).forEach(field => {
-            if (Array.isArray(formData[field])) {
-                formData[field].map(value => {
-                    payload.append(`${field}`, value);
+
+        for (const [key, value] of
+            Object.entries(formData)
+                .filter(([_, value]) => (value !== null && value !== undefined))) {
+            if (Array.isArray(value)) {
+                value.map(v => {
+                    payload.append(`${key}`, v);
                 });
             } else {
-                payload.append(field, formData[field]);
+                if (typeof value === 'string') {
+                    payload.append(key, value);
+                }
             }
-        });
+        }
 
         axios.post('/api' + endpoint, payload, { headers: { 'Content-Type': 'multipart/form-data' } })
             .then(({ data: { workstack, redirect } }) => {
