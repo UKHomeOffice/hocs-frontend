@@ -134,7 +134,7 @@ class Radio extends Component {
                     {hint && <div className="govuk-hint">{hint}</div>}
                     {error && <p id={`${name}-error`} className="govuk-error-message">{error}</p>}
 
-                    <div id={`${name}-radios`} className={'govuk-radios govuk-radios--conditional'} data-module="govuk-radios">
+                    <div id={`${name}-radios`} className={'govuk-radios govuk-radios--conditional govuk-radios--small'} data-module="govuk-radios">
                         {choicesToUse && choicesToUse
                             .filter((choice) => this.isChoiceVisible(choice))
                             .map((choice, i) => {
