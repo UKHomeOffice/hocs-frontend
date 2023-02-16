@@ -37,8 +37,8 @@ const expandableCheckbox = ({ choice, data, error, errors, hint, initiallyOpen, 
         <div className="govuk-grid-row selectable-details">
             <div className="govuk-grid-column-full">
                 {error && <p id={`${name}-error`} className="govuk-error-message">{error}</p>}
-                <div className="selectable-details-header">
-                    <div className={'govuk-checkboxes'} style={{ display: 'inline-flex' }}>
+                <div className="selectable-details-header govuk-!-margin-bottom-0">
+                    <div className={'govuk-checkboxes govuk-checkboxes--small'} style={{ display: 'inline-flex' }}>
                         <div className="govuk-checkboxes__item">
                             <input
                                 id={`details-checkbox-${name}`}
