@@ -84,11 +84,11 @@ class Checkbox extends Component {
                     {hint && <div className="govuk-hint">{hint}</div>}
                     {error && <p id={`${name}-error`} className="govuk-error-message">{error}</p>}
 
-                    <div className={'govuk-checkboxes'}>
+                    <div className={'govuk-checkboxes govuk-checkboxes--small'}>
                         {choices && choices.map((choice, i) => {
                             return (
                                 <div key={i} className="govuk-checkboxes__item">
-                                    <input id={`${name}_${choice.value}`}
+                                    <input id={`${name}_${choice.value}_${i}`}
                                         type={type}
                                         name={saveSeparately ? choice.name : name}
                                         value={choice.value}
@@ -98,7 +98,7 @@ class Checkbox extends Component {
                                         onChange={e => this.handleChange(e)}
                                         className={'govuk-checkboxes__input'}
                                     />
-                                    <label className="govuk-label govuk-checkboxes__label" htmlFor={`${name}_${choice.value}`}>{choice.label}</label>
+                                    <label className="govuk-label govuk-checkboxes__label" htmlFor={`${name}_${choice.value}_${i}`}>{choice.label}</label>
                                 </div>
                             );
                         })}
