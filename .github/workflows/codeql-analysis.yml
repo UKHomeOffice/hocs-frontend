@@ -13,4 +13,4 @@ on:
 
 jobs:
   analyze:
-    uses: UKHomeOffice/hocs-github-actions/.github/workflows/codeql-analysis-javascript.yml@v2
+    uses: UKHomeOffice/hocs-github-actions/.github/workflows/codeql-analysis-javascript.yml@v3
