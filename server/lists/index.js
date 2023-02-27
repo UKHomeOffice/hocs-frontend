@@ -68,211 +68,211 @@ module.exports = {
         },
         S_WCS_COHORTS: {
             client: 'INFO',
-            endpoint: '/entity/list/WCS_COHORTS?activeOnly=false',
+            endpoint: '/entity/list/WCS_COHORTS',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_WCS_I_STATUS: {
             client: 'INFO',
-            endpoint: '/entity/list/WCS_I_STATUS?activeOnly=false',
+            endpoint: '/entity/list/WCS_I_STATUS',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_WCS_I_STATUS_OUTCOME: {
             client: 'INFO',
-            endpoint: '/entity/list/WCS_I_STATUS_OUTCOME?activeOnly=false',
+            endpoint: '/entity/list/WCS_I_STATUS_OUTCOME',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_WCS_ELIG_REJ_REASON: {
             client: 'INFO',
-            endpoint: '/entity/list/WCS_ELIG_REJ_REASON?activeOnly=false',
+            endpoint: '/entity/list/WCS_ELIG_REJ_REASON',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_COMP_CCT_BUS_AREA: {
             client: 'INFO',
-            endpoint: '/entity/list/COMP_CCT_BUS_AREA?activeOnly=false',
+            endpoint: '/entity/list/COMP_CCT_BUS_AREA',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_COMP_CCT_CASE_OUTCOME: {
             client: 'INFO',
-            endpoint: '/entity/list/COMP_CCT_CASE_OUTCOME?activeOnly=false',
+            endpoint: '/entity/list/COMP_CCT_CASE_OUTCOME',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_COMP_CCT_ENQ_REASON: {
             client: 'INFO',
-            endpoint: '/entity/list/COMP_CCT_ENQ_REASON?activeOnly=false',
+            endpoint: '/entity/list/COMP_CCT_ENQ_REASON',
             type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
         },
         S_COMP_CSU_LIST: {
             client: 'INFO',
-            endpoint: '/entity/list/COMP_CSU_LIST?activeOnly=false',
+            endpoint: '/entity/list/COMP_CSU_LIST',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_COMP_CONTRIB_BUS_AREA: {
             client: 'INFO',
-            endpoint: '/entity/list/COMP_CONTRIB_BUS_AREA?activeOnly=false',
+            endpoint: '/entity/list/COMP_CONTRIB_BUS_AREA',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_COMP_CONTRIB_TYPE: {
             client: 'INFO',
-            endpoint: '/entity/list/COMP_CONTRIB_TYPE?activeOnly=false',
+            endpoint: '/entity/list/COMP_CONTRIB_TYPE',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         COMP_IANDP_BUS_AREA: {
             client: 'INFO',
-            endpoint: '/entity/list/COMP_IANDP_BUS_AREA?activeOnly=false',
+            endpoint: '/entity/list/COMP_IANDP_BUS_AREA',
             type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
         },
         COMP_RASI_BUS_AREA: {
             client: 'INFO',
-            endpoint: '/entity/list/COMP_RASI_BUS_AREA?activeOnly=false',
+            endpoint: '/entity/list/COMP_RASI_BUS_AREA',
             type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
         },
         COMP_VCIC_BUS_AREA: {
             client: 'INFO',
-            endpoint: '/entity/list/COMP_VCIC_BUS_AREA?activeOnly=false',
+            endpoint: '/entity/list/COMP_VCIC_BUS_AREA',
             type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
         },
         COMP_VCOS_BUS_AREA: {
             client: 'INFO',
-            endpoint: '/entity/list/COMP_VCOS_BUS_AREA?activeOnly=false',
+            endpoint: '/entity/list/COMP_VCOS_BUS_AREA',
             type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
         },
         COMP_OTHER_BUS_AREA: {
             client: 'INFO',
-            endpoint: '/entity/list/COMP_OTHER_BUS_AREA?activeOnly=false',
+            endpoint: '/entity/list/COMP_OTHER_BUS_AREA',
             type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
         },
         COMP_EUSS_FP_BUS_AREA: {
             client: 'INFO',
-            endpoint: '/entity/list/COMP_EUSS_FP_BUS_AREA?activeOnly=false',
+            endpoint: '/entity/list/COMP_EUSS_FP_BUS_AREA',
             type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
         },
         S_BF_CONTRIB_TYPE: {
             client: 'INFO',
-            endpoint: '/entity/list/BF_CONTRIB_TYPE?activeOnly=false',
+            endpoint: '/entity/list/BF_CONTRIB_TYPE',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_IEDET_CSU_LIST: {
             client: 'INFO',
-            endpoint: '/entity/list/IEDET_CSU_LIST?activeOnly=false',
+            endpoint: '/entity/list/IEDET_CSU_LIST',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_IEDET_CASE_OUTCOME: {
             client: 'INFO',
-            endpoint: '/entity/list/IEDET_CASE_OUTCOME?activeOnly=false',
+            endpoint: '/entity/list/IEDET_CASE_OUTCOME',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_IEDET_COMP_ORIGIN: {
             client: 'INFO',
-            endpoint: '/entity/list/IEDET_COMP_ORIGIN?activeOnly=false',
+            endpoint: '/entity/list/IEDET_COMP_ORIGIN',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_MPAM_ENQUIRY_SUBJECTS: {
             client: 'INFO',
-            endpoint: '/entity/list/MPAM_ENQUIRY_SUBJECTS?activeOnly=false',
+            endpoint: '/entity/list/MPAM_ENQUIRY_SUBJECTS',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         MPAM_ENQUIRY_REASONS_ALL: {
             client: 'INFO',
-            endpoint: '/entity/list/MPAM_ENQUIRY_REASONS_ALL?activeOnly=false',
+            endpoint: '/entity/list/MPAM_ENQUIRY_REASONS_ALL',
             type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
         },
         MPAM_ENQUIRY_REASONS_PER: {
             client: 'INFO',
-            endpoint: '/entity/list/MPAM_ENQUIRY_REASONS_PER?activeOnly=false',
+            endpoint: '/entity/list/MPAM_ENQUIRY_REASONS_PER',
             type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
         },
         MPAM_ENQUIRY_REASONS_GUI: {
             client: 'INFO',
-            endpoint: '/entity/list/MPAM_ENQUIRY_REASONS_GUI?activeOnly=false',
+            endpoint: '/entity/list/MPAM_ENQUIRY_REASONS_GUI',
             type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
         },
         MPAM_ENQUIRY_REASONS_DOC: {
             client: 'INFO',
-            endpoint: '/entity/list/MPAM_ENQUIRY_REASONS_DOC?activeOnly=false',
+            endpoint: '/entity/list/MPAM_ENQUIRY_REASONS_DOC',
             type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
         },
         MPAM_ENQUIRY_REASONS_TECH: {
             client: 'INFO',
-            endpoint: '/entity/list/MPAM_ENQUIRY_REASONS_TECH?activeOnly=false',
+            endpoint: '/entity/list/MPAM_ENQUIRY_REASONS_TECH',
             type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
         },
         MPAM_ENQUIRY_REASONS_DET: {
             client: 'INFO',
-            endpoint: '/entity/list/MPAM_ENQUIRY_REASONS_DET?activeOnly=false',
+            endpoint: '/entity/list/MPAM_ENQUIRY_REASONS_DET',
             type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
         },
         MPAM_ENQUIRY_REASONS_HMPO: {
             client: 'INFO',
-            endpoint: '/entity/list/MPAM_ENQUIRY_REASONS_HMPO?activeOnly=false',
+            endpoint: '/entity/list/MPAM_ENQUIRY_REASONS_HMPO',
             type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
         },
         MPAM_ENQUIRY_REASONS_OTHER: {
             client: 'INFO',
-            endpoint: '/entity/list/MPAM_ENQUIRY_REASONS_OTHER?activeOnly=false',
+            endpoint: '/entity/list/MPAM_ENQUIRY_REASONS_OTHER',
             type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
         },
         S_MPAM_BUS_UNITS_ALL: {
             client: 'INFO',
-            endpoint: '/entity/list/MPAM_BUS_UNITS_ALL?activeOnly=false',
+            endpoint: '/entity/list/MPAM_BUS_UNITS_ALL',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         MPAM_CONTRIBUTION_BUSINESS_AREAS: {
             client: 'INFO',
-            endpoint: '/entity/list/MPAM_CONTRIBUTION_BUSINESS_AREAS?activeOnly=false',
+            endpoint: '/entity/list/MPAM_CONTRIBUTION_BUSINESS_AREAS',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_SMC_BUS_AREA: {
             client: 'INFO',
-            endpoint: '/entity/list/SMC_BUS_AREA?activeOnly=false',
+            endpoint: '/entity/list/SMC_BUS_AREA',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_SMC_CSU_LIST: {
             client: 'INFO',
-            endpoint: '/entity/list/SMC_CSU_LIST?activeOnly=false',
+            endpoint: '/entity/list/SMC_CSU_LIST',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_BF_CONTRIB_BUS_AREA: {
             client: 'INFO',
-            endpoint: '/entity/list/BF_CONTRIB_BUS_AREA?activeOnly=false',
+            endpoint: '/entity/list/BF_CONTRIB_BUS_AREA',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_FOI_ALL_RESP_TEAMS: {
             client: 'INFO',
-            endpoint: '/entity/list/FOI_ALL_RESP_TEAMS?activeOnly=false',
+            endpoint: '/entity/list/FOI_ALL_RESP_TEAMS',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
@@ -284,139 +284,139 @@ module.exports = {
         },
         S_FOI_BORDER_FORCE_RESP_TEAMS: {
             client: 'INFO',
-            endpoint: '/entity/list/FOI_BORDER_FORCE_RESP_TEAMS?activeOnly=false',
+            endpoint: '/entity/list/FOI_BORDER_FORCE_RESP_TEAMS',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_FOI_COMMUNICATIONS_DIRECTORATE_RESP_TEAMS: {
             client: 'INFO',
-            endpoint: '/entity/list/FOI_COMMUNICATIONS_DIRECTORATE_RESP_TEAMS?activeOnly=false',
+            endpoint: '/entity/list/FOI_COMMUNICATIONS_DIRECTORATE_RESP_TEAMS',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_FOI_CORPORATE_ENABLERS_RESP_TEAMS: {
             client: 'INFO',
-            endpoint: '/entity/list/FOI_CORPORATE_ENABLERS_RESP_TEAMS?activeOnly=false',
+            endpoint: '/entity/list/FOI_CORPORATE_ENABLERS_RESP_TEAMS',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_FOI_DDAT_RESP_TEAMS: {
             client: 'INFO',
-            endpoint: '/entity/list/FOI_DDAT_RESP_TEAMS?activeOnly=false',
+            endpoint: '/entity/list/FOI_DDAT_RESP_TEAMS',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_FOI_HMPO_RESP_TEAMS: {
             client: 'INFO',
-            endpoint: '/entity/list/FOI_HMPO_RESP_TEAMS?activeOnly=false',
+            endpoint: '/entity/list/FOI_HMPO_RESP_TEAMS',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_FOI_HOME_OFFICE_LEGAL_ADVISORS_RESP_TEAMS: {
             client: 'INFO',
-            endpoint: '/entity/list/FOI_HOME_OFFICE_LEGAL_ADVISORS_RESP_TEAMS?activeOnly=false',
+            endpoint: '/entity/list/FOI_HOME_OFFICE_LEGAL_ADVISORS_RESP_TEAMS',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_FOI_HOMELAND_SECURITY_RESP_TEAMS: {
             client: 'INFO',
-            endpoint: '/entity/list/FOI_HOMELAND_SECURITY_RESP_TEAMS?activeOnly=false',
+            endpoint: '/entity/list/FOI_HOMELAND_SECURITY_RESP_TEAMS',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_FOI_IMMIGRATION_ENFORCEMENT_RESP_TEAMS: {
             client: 'INFO',
-            endpoint: '/entity/list/FOI_IMMIGRATION_ENFORCEMENT_RESP_TEAMS?activeOnly=false',
+            endpoint: '/entity/list/FOI_IMMIGRATION_ENFORCEMENT_RESP_TEAMS',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_FOI_MIGRATION_AND_BORDERS_GROUP_RESP_TEAMS: {
             client: 'INFO',
-            endpoint: '/entity/list/FOI_MIGRATION_AND_BORDERS_GROUP_RESP_TEAMS?activeOnly=false',
+            endpoint: '/entity/list/FOI_MIGRATION_AND_BORDERS_GROUP_RESP_TEAMS',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_FOI_PRIVATE_OFFICE_RESP_TEAMS: {
             client: 'INFO',
-            endpoint: '/entity/list/FOI_PRIVATE_OFFICE_RESP_TEAMS?activeOnly=false',
+            endpoint: '/entity/list/FOI_PRIVATE_OFFICE_RESP_TEAMS',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_FOI_PUBLIC_SAFETY_GROUP_RESP_TEAMS: {
             client: 'INFO',
-            endpoint: '/entity/list/FOI_PUBLIC_SAFETY_GROUP_RESP_TEAMS?activeOnly=false',
+            endpoint: '/entity/list/FOI_PUBLIC_SAFETY_GROUP_RESP_TEAMS',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_FOI_STARS_RESP_TEAMS: {
             client: 'INFO',
-            endpoint: '/entity/list/FOI_STARS_RESP_TEAMS?activeOnly=false',
+            endpoint: '/entity/list/FOI_STARS_RESP_TEAMS',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_FOI_UKVI_RESP_TEAMS: {
             client: 'INFO',
-            endpoint: '/entity/list/FOI_UKVI_RESP_TEAMS?activeOnly=false',
+            endpoint: '/entity/list/FOI_UKVI_RESP_TEAMS',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_MPAM_BUS_UNITS_1: {
             client: 'INFO',
-            endpoint: '/entity/list/MPAM_BUS_UNITS_1?activeOnly=false',
+            endpoint: '/entity/list/MPAM_BUS_UNITS_1',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_MPAM_BUS_UNITS_2: {
             client: 'INFO',
-            endpoint: '/entity/list/MPAM_BUS_UNITS_2?activeOnly=false',
+            endpoint: '/entity/list/MPAM_BUS_UNITS_2',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_MPAM_BUS_UNITS_3: {
             client: 'INFO',
-            endpoint: '/entity/list/MPAM_BUS_UNITS_3?activeOnly=false',
+            endpoint: '/entity/list/MPAM_BUS_UNITS_3',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_MPAM_BUS_UNITS_4: {
             client: 'INFO',
-            endpoint: '/entity/list/MPAM_BUS_UNITS_4?activeOnly=false',
+            endpoint: '/entity/list/MPAM_BUS_UNITS_4',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_MPAM_BUS_UNITS_5: {
             client: 'INFO',
-            endpoint: '/entity/list/MPAM_BUS_UNITS_5?activeOnly=false',
+            endpoint: '/entity/list/MPAM_BUS_UNITS_5',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_MPAM_BUS_UNITS_6: {
             client: 'INFO',
-            endpoint: '/entity/list/MPAM_BUS_UNITS_6?activeOnly=false',
+            endpoint: '/entity/list/MPAM_BUS_UNITS_6',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_MPAM_BUS_UNITS_7: {
             client: 'INFO',
-            endpoint: '/entity/list/MPAM_BUS_UNITS_7?activeOnly=false',
+            endpoint: '/entity/list/MPAM_BUS_UNITS_7',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_MPAM_CAMPAIGNS: {
             client: 'INFO',
-            endpoint: '/entity/list/MPAM_CAMPAIGNS?activeOnly=false',
+            endpoint: '/entity/list/MPAM_CAMPAIGNS',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_MPAM_MIN_SIGN_OFF_TEAMS: {
             client: 'INFO',
-            endpoint: '/entity/list/MPAM_MIN_SIGN_OFF_TEAMS?activeOnly=false',
+            endpoint: '/entity/list/MPAM_MIN_SIGN_OFF_TEAMS',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         MPAM_CAMPAIGNS: {
             client: 'INFO',
-            endpoint: '/entity/list/MPAM_CAMPAIGNS?activeOnly=false',
+            endpoint: '/entity/list/MPAM_CAMPAIGNS',
             adapter: entityListItemsAdapter
         },
         CASE_TYPES: {
@@ -692,67 +692,67 @@ module.exports = {
         },
         EX_GRATIA_BUS_REPS: {
             client: 'INFO',
-            endpoint: '/entity/list/EXGRATIA_BUS_REPS?activeOnly=false',
+            endpoint: '/entity/list/EXGRATIA_BUS_REPS',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         SECRETARIAT_LIST: {
             client: 'INFO',
-            endpoint: '/entity/list/SECRETARIAT_LIST?activeOnly=false',
+            endpoint: '/entity/list/SECRETARIAT_LIST',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         FOI_ACCOUNT_MANAGERS: {
             client: 'INFO',
-            endpoint: '/entity/list/FOI_ACCOUNT_MANAGERS?activeOnly=false',
+            endpoint: '/entity/list/FOI_ACCOUNT_MANAGERS',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         FOI_EXTENSION_REASONS: {
             client: 'INFO',
-            endpoint: '/entity/list/FOI_EXTENSION_REASONS?activeOnly=false',
+            endpoint: '/entity/list/FOI_EXTENSION_REASONS',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_FOI_TYPES: {
             client: 'INFO',
-            endpoint: '/entity/list/FOI_TYPES?activeOnly=false',
+            endpoint: '/entity/list/FOI_TYPES',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_FOI_DIRECTORATES: {
             client: 'INFO',
-            endpoint: '/entity/list/FOI_DIRECTORATES?activeOnly=false',
+            endpoint: '/entity/list/FOI_DIRECTORATES',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         FOI_APPROVER_ROLES: {
             client: 'INFO',
-            endpoint: '/entity/list/FOI_APPROVER_ROLES?activeOnly=false',
+            endpoint: '/entity/list/FOI_APPROVER_ROLES',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         FOI_EXEMPTIONS: {
             client: 'INFO',
-            endpoint: '/entity/list/FOI_EXEMPTIONS?activeOnly=false',
+            endpoint: '/entity/list/FOI_EXEMPTIONS',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         FOI_EIR_EXCEPTIONS: {
             client: 'INFO',
-            endpoint: '/entity/list/FOI_EIR_EXCEPTIONS?activeOnly=false',
+            endpoint: '/entity/list/FOI_EIR_EXCEPTIONS',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         FOI_APPEAL_TYPES: {
             client: 'INFO',
-            endpoint: '/entity/list/FOI_APPEAL_TYPES?activeOnly=false',
+            endpoint: '/entity/list/FOI_APPEAL_TYPES',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         FOI_INTERESTED_PARTIES: {
             client: 'INFO',
-            endpoint: '/entity/list/FOI_INTERESTED_PARTIES?activeOnly=false',
+            endpoint: '/entity/list/FOI_INTERESTED_PARTIES',
             type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
         },
@@ -764,289 +764,289 @@ module.exports = {
         },
         S_BF_CSU_LIST: {
             client: 'INFO',
-            endpoint: '/entity/list/BF_CSU_LIST?activeOnly=false',
+            endpoint: '/entity/list/BF_CSU_LIST',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         TO_RECIPIENTS: {
             client: 'INFO',
-            endpoint: '/entity/list/TO_RECIPIENTS?activeOnly=false',
+            endpoint: '/entity/list/TO_RECIPIENTS',
             type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
         },
         S_BF_BUS_AREA_NORTH_REGION: {
             client: 'INFO',
-            endpoint: '/entity/list/BF_BUS_AREA_NORTH_REGION?activeOnly=false',
+            endpoint: '/entity/list/BF_BUS_AREA_NORTH_REGION',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_BF_BUS_AREA_CENTRAL_REGION: {
             client: 'INFO',
-            endpoint: '/entity/list/BF_BUS_AREA_CENTRAL_REGION?activeOnly=false',
+            endpoint: '/entity/list/BF_BUS_AREA_CENTRAL_REGION',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_BF_BUS_AREA_HEATHROW_REGION: {
             client: 'INFO',
-            endpoint: '/entity/list/BF_BUS_AREA_HEATHROW_REGION?activeOnly=false',
+            endpoint: '/entity/list/BF_BUS_AREA_HEATHROW_REGION',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_BF_BUS_AREA_SOUTH_REGION: {
             client: 'INFO',
-            endpoint: '/entity/list/BF_BUS_AREA_SOUTH_REGION?activeOnly=false',
+            endpoint: '/entity/list/BF_BUS_AREA_SOUTH_REGION',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_BF_BUS_AREA_SOUTH_EAST_REGION: {
             client: 'INFO',
-            endpoint: '/entity/list/BF_BUS_AREA_SOUTH_EAST_REGION?activeOnly=false',
+            endpoint: '/entity/list/BF_BUS_AREA_SOUTH_EAST_REGION',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_BF_BUS_AREA_EUROPE_REGION: {
             client: 'INFO',
-            endpoint: '/entity/list/BF_BUS_AREA_EUROPE_REGION?activeOnly=false',
+            endpoint: '/entity/list/BF_BUS_AREA_EUROPE_REGION',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_BF_BUS_AREA_BF_INTEL: {
             client: 'INFO',
-            endpoint: '/entity/list/BF_BUS_AREA_BF_INTEL?activeOnly=false',
+            endpoint: '/entity/list/BF_BUS_AREA_BF_INTEL',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_BF_BUS_AREA_OPS_LOGISTICS: {
             client: 'INFO',
-            endpoint: '/entity/list/BF_BUS_AREA_OPS_LOGISTICS?activeOnly=false',
+            endpoint: '/entity/list/BF_BUS_AREA_OPS_LOGISTICS',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_BF_BUS_AREA_WARNING_INDEX_COMPLAINTS: {
             client: 'INFO',
-            endpoint: '/entity/list/BF_BUS_AREA_WARNING_INDEX_COMPLAINTS?activeOnly=false',
+            endpoint: '/entity/list/BF_BUS_AREA_WARNING_INDEX_COMPLAINTS',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_BF_BUS_AREA_UNKNOWN: {
             client: 'INFO',
-            endpoint: '/entity/list/BF_BUS_AREA_UNKNOWN?activeOnly=false',
+            endpoint: '/entity/list/BF_BUS_AREA_UNKNOWN',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_BF_REGION: {
             client: 'INFO',
-            endpoint: '/entity/list/BF_REGION?activeOnly=false',
+            endpoint: '/entity/list/BF_REGION',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_BF_COMPLAINT_REASON_FULL: {
             client: 'INFO',
-            endpoint: '/entity/list/BF_COMPLAINT_REASON_FULL?activeOnly=false',
+            endpoint: '/entity/list/BF_COMPLAINT_REASON_FULL',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_BF_COMPLAINT_REASON_SERVICE: {
             client: 'INFO',
-            endpoint: '/entity/list/BF_COMPLAINT_REASON_SERVICE?activeOnly=false',
+            endpoint: '/entity/list/BF_COMPLAINT_REASON_SERVICE',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         TO_BUS_UNIT_ALL: {
             client: 'INFO',
-            endpoint: '/entity/list/TO_BUS_UNIT_ALL?activeOnly=false',
+            endpoint: '/entity/list/TO_BUS_UNIT_ALL',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         TO_BUSINESS_UNIT_TYPES: {
             client: 'INFO',
-            endpoint: '/entity/list/TO_BUSINESS_UNIT_TYPES?activeOnly=false',
+            endpoint: '/entity/list/TO_BUSINESS_UNIT_TYPES',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         TO_ENQUIRY_SUBJECTS: {
             client: 'INFO',
-            endpoint: '/entity/list/TO_ENQUIRY_SUBJECTS?activeOnly=false',
+            endpoint: '/entity/list/TO_ENQUIRY_SUBJECTS',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         TO_BF_ENQUIRY_SUBJECTS: {
             client: 'INFO',
-            endpoint: '/entity/list/TO_BF_ENQUIRY_SUBJECTS?activeOnly=false',
+            endpoint: '/entity/list/TO_BF_ENQUIRY_SUBJECTS',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         TO_BF_ENQUIRY_REASON_CUSTOMS: {
             client: 'INFO',
-            endpoint: '/entity/list/TO_BF_ENQUIRY_REASON_CUSTOMS?activeOnly=false',
+            endpoint: '/entity/list/TO_BF_ENQUIRY_REASON_CUSTOMS',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         TO_BF_ENQUIRY_REASON_IMMIGRATION: {
             client: 'INFO',
-            endpoint: '/entity/list/TO_BF_ENQUIRY_REASON_IMMIGRATION?activeOnly=false',
+            endpoint: '/entity/list/TO_BF_ENQUIRY_REASON_IMMIGRATION',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         TO_BF_ENQUIRY_REASON_OUTWARD_BOUND: {
             client: 'INFO',
-            endpoint: '/entity/list/TO_BF_ENQUIRY_REASON_OUTWARD_BOUND?activeOnly=false',
+            endpoint: '/entity/list/TO_BF_ENQUIRY_REASON_OUTWARD_BOUND',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         TO_BF_ENQUIRY_REASON_OTHER: {
             client: 'INFO',
-            endpoint: '/entity/list/TO_BF_ENQUIRY_REASON_OTHER?activeOnly=false',
+            endpoint: '/entity/list/TO_BF_ENQUIRY_REASON_OTHER',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         TO_ENQUIRY_REASONS_ALL: {
             client: 'INFO',
-            endpoint: '/entity/list/TO_ENQUIRY_REASONS_ALL?activeOnly=false',
+            endpoint: '/entity/list/TO_ENQUIRY_REASONS_ALL',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         TO_ENQUIRY_REASON_COMP_HAND: {
             client: 'INFO',
-            endpoint: '/entity/list/TO_ENQUIRY_REASON_COMP_HAND?activeOnly=false',
+            endpoint: '/entity/list/TO_ENQUIRY_REASON_COMP_HAND',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         TO_ENQUIRY_REASON_COMP_REJ: {
             client: 'INFO',
-            endpoint: '/entity/list/TO_ENQUIRY_REASON_COMP_REJ?activeOnly=false',
+            endpoint: '/entity/list/TO_ENQUIRY_REASON_COMP_REJ',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         TO_ENQUIRY_REASON_DOC: {
             client: 'INFO',
-            endpoint: '/entity/list/TO_ENQUIRY_REASON_DOC?activeOnly=false',
+            endpoint: '/entity/list/TO_ENQUIRY_REASON_DOC',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         TO_ENQUIRY_REASON_GUID: {
             client: 'INFO',
-            endpoint: '/entity/list/TO_ENQUIRY_REASON_GUID?activeOnly=false',
+            endpoint: '/entity/list/TO_ENQUIRY_REASON_GUID',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         TO_ENQUIRY_REASON_IM_HEALTH_SUR: {
             client: 'INFO',
-            endpoint: '/entity/list/TO_ENQUIRY_REASON_IM_HEALTH_SUR?activeOnly=false',
+            endpoint: '/entity/list/TO_ENQUIRY_REASON_IM_HEALTH_SUR',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         TO_ENQUIRY_REASON_PERS: {
             client: 'INFO',
-            endpoint: '/entity/list/TO_ENQUIRY_REASON_PERS?activeOnly=false',
+            endpoint: '/entity/list/TO_ENQUIRY_REASON_PERS',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         TO_ENQUIRY_REASON_TECH: {
             client: 'INFO',
-            endpoint: '/entity/list/TO_ENQUIRY_REASON_TECH?activeOnly=false',
+            endpoint: '/entity/list/TO_ENQUIRY_REASON_TECH',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         TO_ENQUIRY_REASON_SRU: {
             client: 'INFO',
-            endpoint: '/entity/list/TO_ENQUIRY_REASON_SRU?activeOnly=false',
+            endpoint: '/entity/list/TO_ENQUIRY_REASON_SRU',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         TO_ENQUIRY_REASON_OTHER: {
             client: 'INFO',
-            endpoint: '/entity/list/TO_ENQUIRY_REASON_OTHER?activeOnly=false',
+            endpoint: '/entity/list/TO_ENQUIRY_REASON_OTHER',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         TO_BUS_UNIT_V_AND_C_OVERSEAS_EUROPE: {
             client: 'INFO',
-            endpoint: '/entity/list/TO_BUS_UNIT_V_AND_C_OVERSEAS_EUROPE?activeOnly=false',
+            endpoint: '/entity/list/TO_BUS_UNIT_V_AND_C_OVERSEAS_EUROPE',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         TO_BUS_UNIT_V_AND_C_ROTW: {
             client: 'INFO',
-            endpoint: '/entity/list/TO_BUS_UNIT_V_AND_C_ROTW?activeOnly=false',
+            endpoint: '/entity/list/TO_BUS_UNIT_V_AND_C_ROTW',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         TO_BUS_UNIT_V_AND_C_IN_COUNTRY: {
             client: 'INFO',
-            endpoint: '/entity/list/TO_BUS_UNIT_V_AND_C_IN_COUNTRY?activeOnly=false',
+            endpoint: '/entity/list/TO_BUS_UNIT_V_AND_C_IN_COUNTRY',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         TO_BUS_UNIT_I_AND_P: {
             client: 'INFO',
-            endpoint: '/entity/list/TO_BUS_UNIT_I_AND_P?activeOnly=false',
+            endpoint: '/entity/list/TO_BUS_UNIT_I_AND_P',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         TO_BUS_UNIT_IE: {
             client: 'INFO',
-            endpoint: '/entity/list/TO_BUS_UNIT_IE?activeOnly=false',
+            endpoint: '/entity/list/TO_BUS_UNIT_IE',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         TO_BUS_UNIT_E_SUPPORT: {
             client: 'INFO',
-            endpoint: '/entity/list/TO_BUS_UNIT_E_SUPPORT?activeOnly=false',
+            endpoint: '/entity/list/TO_BUS_UNIT_E_SUPPORT',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         TO_BUS_UNIT_GRO: {
             client: 'INFO',
-            endpoint: '/entity/list/TO_BUS_UNIT_GRO?activeOnly=false',
+            endpoint: '/entity/list/TO_BUS_UNIT_GRO',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         TO_BUS_UNIT_SRU: {
             client: 'INFO',
-            endpoint: '/entity/list/TO_BUS_UNIT_SRU?activeOnly=false',
+            endpoint: '/entity/list/TO_BUS_UNIT_SRU',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         TO_BUS_UNIT_OTHER: {
             client: 'INFO',
-            endpoint: '/entity/list/TO_BUS_UNIT_OTHER?activeOnly=false',
+            endpoint: '/entity/list/TO_BUS_UNIT_OTHER',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         TO_BUS_UNIT_RASI: {
             client: 'INFO',
-            endpoint: '/entity/list/TO_BUS_UNIT_RASI?activeOnly=false',
+            endpoint: '/entity/list/TO_BUS_UNIT_RASI',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_TROF_CAMPAIGNS: {
             client: 'INFO',
-            endpoint: '/entity/list/TROF_CAMPAIGNS?activeOnly=false',
+            endpoint: '/entity/list/TROF_CAMPAIGNS',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         TROF_CAMPAIGNS: {
             client: 'INFO',
-            endpoint: '/entity/list/TROF_CAMPAIGNS?activeOnly=false',
+            endpoint: '/entity/list/TROF_CAMPAIGNS',
             type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
         },
         TO_STOP_LIST: {
             client: 'INFO',
-            endpoint: '/entity/list/TO_STOP_LIST?activeOnly=false',
+            endpoint: '/entity/list/TO_STOP_LIST',
             type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
         },
         BF_INTERESTED_PARTIES: {
             client: 'INFO',
-            endpoint: '/entity/list/BF_INTERESTED_PARTIES?activeOnly=false',
+            endpoint: '/entity/list/BF_INTERESTED_PARTIES',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         BF2_INTERESTED_PARTIES: {
             client: 'INFO',
-            endpoint: '/entity/list/BF_INTERESTED_PARTIES?activeOnly=false',
+            endpoint: '/entity/list/BF_INTERESTED_PARTIES',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
@@ -1058,439 +1058,439 @@ module.exports = {
         },
         POGR_CONTRIB_BUS_AREA: {
             client: 'INFO',
-            endpoint: '/entity/list/POGR_CONTRIB_BUS_AREA?activeOnly=false',
+            endpoint: '/entity/list/POGR_CONTRIB_BUS_AREA',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         HMPO_CONTRIBUTION_BUS_AREA: {
             client: 'INFO',
-            endpoint: '/entity/list/HMPO_CONTRIBUTION_BUS_AREA?activeOnly=false',
+            endpoint: '/entity/list/HMPO_CONTRIBUTION_BUS_AREA',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_SMC_COMP_ORIGIN: {
             client: 'INFO',
-            endpoint: '/entity/list/SMC_COMP_ORIGIN?activeOnly=false',
+            endpoint: '/entity/list/SMC_COMP_ORIGIN',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         HMPO_COMPLAINT_CATEGORIES: {
             client: 'INFO',
-            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES?activeOnly=false',
+            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         HMPO_COMPLAINT_CATEGORIES_ABI: {
             client: 'INFO',
-            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_ABI?activeOnly=false',
+            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_ABI',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         HMPO_COMPLAINT_CATEGORIES_CUSTOMER_COMMUNICATIONS: {
             client: 'INFO',
-            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_CUSTOMER_COMMUNICATIONS?activeOnly=false',
+            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_CUSTOMER_COMMUNICATIONS',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         HMPO_COMPLAINT_CATEGORIES_DHL: {
             client: 'INFO',
-            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_DHL?activeOnly=false',
+            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_DHL',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         HMPO_COMPLAINT_CATEGORIES_DISCRIMINATORY: {
             client: 'INFO',
-            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_DISCRIMINATORY?activeOnly=false',
+            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_DISCRIMINATORY',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         HMPO_COMPLAINT_CATEGORIES_FEDEX: {
             client: 'INFO',
-            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_FEDEX?activeOnly=false',
+            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_FEDEX',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         HMPO_COMPLAINT_CATEGORIES_EXAMINATION: {
             client: 'INFO',
-            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_EXAMINATION?activeOnly=false',
+            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_EXAMINATION',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         HMPO_COMPLAINT_CATEGORIES_CSMT: {
             client: 'INFO',
-            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_CSMT?activeOnly=false',
+            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_CSMT',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         HMPO_COMPLAINT_CATEGORIES_COUNTER_SERVICES: {
             client: 'INFO',
-            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_COUNTER_SERVICES?activeOnly=false',
+            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_COUNTER_SERVICES',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         HMPO_COMPLAINT_CATEGORIES_POLICY: {
             client: 'INFO',
-            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_POLICY?activeOnly=false',
+            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_POLICY',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         HMPO_COMPLAINT_CATEGORIES_ID_CHECKS: {
             client: 'INFO',
-            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_ID_CHECKS?activeOnly=false',
+            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_ID_CHECKS',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         HMPO_COMPLAINT_CATEGORIES_NATIONALITY: {
             client: 'INFO',
-            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_NATIONALITY?activeOnly=false',
+            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_NATIONALITY',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         HMPO_COMPLAINT_CATEGORIES_DIGITAL: {
             client: 'INFO',
-            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_DIGITAL?activeOnly=false',
+            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_DIGITAL',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         HMPO_COMPLAINT_CATEGORIES_PAPER: {
             client: 'INFO',
-            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_PAPER?activeOnly=false',
+            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_PAPER',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         HMPO_COMPLAINT_CATEGORIES_PARTNERS_OTHER: {
             client: 'INFO',
-            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_PARTNERS_OTHER?activeOnly=false',
+            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_PARTNERS_OTHER',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         HMPO_COMPLAINT_CATEGORIES_POL: {
             client: 'INFO',
-            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_POL?activeOnly=false',
+            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_POL',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         HMPO_COMPLAINT_CATEGORIES_QUALITY: {
             client: 'INFO',
-            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_QUALITY?activeOnly=false',
+            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_QUALITY',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         HMPO_COMPLAINT_CATEGORIES_ROYAL_MAIL: {
             client: 'INFO',
-            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_ROYAL_MAIL?activeOnly=false',
+            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_ROYAL_MAIL',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         HMPO_COMPLAINT_CATEGORIES_TP_ADVICELINE: {
             client: 'INFO',
-            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_TP_ADVICELINE?activeOnly=false',
+            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_TP_ADVICELINE',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         HMPO_COMPLAINT_CATEGORIES_OAB: {
             client: 'INFO',
-            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_OAB?activeOnly=false',
+            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_OAB',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         HMPO_COMPLAINT_CATEGORIES_SOPRA_STERIA: {
             client: 'INFO',
-            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_SOPRA_STERIA?activeOnly=false',
+            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_SOPRA_STERIA',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         HMPO_COMPLAINT_CATEGORIES_SVS: {
             client: 'INFO',
-            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_SVS?activeOnly=false',
+            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_SVS',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         GRO_COMPLAINT_CATEGORIES: {
             client: 'INFO',
-            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES?activeOnly=false',
+            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         GRO_COMPLAINT_CATEGORIES_CSMT: {
             client: 'INFO',
-            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_CSMT?activeOnly=false',
+            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_CSMT',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         GRO_COMPLAINT_CATEGORIES_PRODUCTION_STANDARD: {
             client: 'INFO',
-            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_PRODUCTION_STANDARD?activeOnly=false',
+            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_PRODUCTION_STANDARD',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         GRO_COMPLAINT_CATEGORIES_PRODUCTION_PRIORITIES: {
             client: 'INFO',
-            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_PRODUCTION_PRIORITIES?activeOnly=false',
+            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_PRODUCTION_PRIORITIES',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         GRO_COMPLAINT_CATEGORIES_PRODUCTION_EXCEPTIONS: {
             client: 'INFO',
-            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_PRODUCTION_EXCEPTIONS?activeOnly=false',
+            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_PRODUCTION_EXCEPTIONS',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         GRO_COMPLAINT_CATEGORIES_PRODUCTION_PDF: {
             client: 'INFO',
-            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_PRODUCTION_PDF?activeOnly=false',
+            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_PRODUCTION_PDF',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         GRO_COMPLAINT_CATEGORIES_PRODUCTION_EMAIL_TEAM: {
             client: 'INFO',
-            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_PRODUCTION_EMAIL_TEAM?activeOnly=false',
+            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_PRODUCTION_EMAIL_TEAM',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         GRO_COMPLAINT_CATEGORIES_PRODUCTION_CCU_POST_TEAM: {
             client: 'INFO',
-            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_PRODUCTION_CCU_POST_TEAM?activeOnly=false',
+            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_PRODUCTION_CCU_POST_TEAM',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         GRO_COMPLAINT_CATEGORIES_PRODUCTION_KIT: {
             client: 'INFO',
-            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_PRODUCTION_KIT?activeOnly=false',
+            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_PRODUCTION_KIT',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         GRO_COMPLAINT_CATEGORIES_PRODUCTION_INDEXING: {
             client: 'INFO',
-            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_PRODUCTION_INDEXING?activeOnly=false',
+            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_PRODUCTION_INDEXING',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         GRO_COMPLAINT_CATEGORIES_SD_FDU: {
             client: 'INFO',
-            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_SD_FDU?activeOnly=false',
+            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_SD_FDU',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         GRO_COMPLAINT_CATEGORIES_SD_ENGAGEMENT: {
             client: 'INFO',
-            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_SD_ENGAGEMENT?activeOnly=false',
+            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_SD_ENGAGEMENT',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         GRO_COMPLAINT_CATEGORIES_SYSTEMS: {
             client: 'INFO',
-            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_SYSTEMS?activeOnly=false',
+            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_SYSTEMS',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         GRO_COMPLAINT_CATEGORIES_ARC_ADOPTIONS: {
             client: 'INFO',
-            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_ARC_ADOPTIONS?activeOnly=false',
+            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_ARC_ADOPTIONS',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         GRO_COMPLAINT_CATEGORIES_ARC_CASEWORK: {
             client: 'INFO',
-            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_ARC_CASEWORK?activeOnly=false',
+            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_ARC_CASEWORK',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         GRO_COMPLAINT_CATEGORIES_POLICY: {
             client: 'INFO',
-            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_POLICY?activeOnly=false',
+            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_POLICY',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         GRO_COMPLAINT_CATEGORIES_POLICY_BUSINESS: {
             client: 'INFO',
-            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_POLICY_BUSINESS?activeOnly=false',
+            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_POLICY_BUSINESS',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         GRO_COMPLAINT_CATEGORIES_THIRD_PARTY_DHL: {
             client: 'INFO',
-            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_THIRD_PARTY_DHL?activeOnly=false',
+            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_THIRD_PARTY_DHL',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         GRO_COMPLAINT_CATEGORIES_THIRD_PARTY_ROYAL_MAIL: {
             client: 'INFO',
-            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_THIRD_PARTY_ROYAL_MAIL?activeOnly=false',
+            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_THIRD_PARTY_ROYAL_MAIL',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         GRO_COMPLAINT_CATEGORIES_THIRD_PARTY_MAIL: {
             client: 'INFO',
-            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_THIRD_PARTY_MAIL?activeOnly=false',
+            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_THIRD_PARTY_MAIL',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         GRO_COMPLAINT_CATEGORIES_THIRD_PARTY_WORLD_PAY: {
             client: 'INFO',
-            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_THIRD_PARTY_WORLD_PAY?activeOnly=false',
+            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_THIRD_PARTY_WORLD_PAY',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         GRO_COMPLAINT_CATEGORIES_OTHER: {
             client: 'INFO',
-            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_OTHER?activeOnly=false',
+            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_OTHER',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         GRO_COMPLAINT_CATEGORIES_LOCAL_REGISTRATION_SERVICE: {
             client: 'INFO',
-            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_LOCAL_REGISTRATION_SERVICE?activeOnly=false',
+            endpoint: '/entity/list/GRO_COMPLAINT_CATEGORIES_LOCAL_REGISTRATION_SERVICE',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         GRO_EX_GRATIA_TYPE_OF_REFUND: {
             client: 'INFO',
-            endpoint: '/entity/list/POGR_GRO_EX_GRATIA_TYPE_OF_REFUND?activeOnly=false',
+            endpoint: '/entity/list/POGR_GRO_EX_GRATIA_TYPE_OF_REFUND',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         GRO_EX_GRATIA_PRIMARY_REFUND_REASON: {
             client: 'INFO',
-            endpoint: '/entity/list/POGR_GRO_EX_GRATIA_PRIMARY_REFUND_REASON?activeOnly=false',
+            endpoint: '/entity/list/POGR_GRO_EX_GRATIA_PRIMARY_REFUND_REASON',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         GRO_EX_GRATIA_SECONDARY_REFUND_REASON: {
             client: 'INFO',
-            endpoint: '/entity/list/POGR_GRO_EX_GRATIA_SECONDARY_REFUND_REASON?activeOnly=false',
+            endpoint: '/entity/list/POGR_GRO_EX_GRATIA_SECONDARY_REFUND_REASON',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         GRO_EX_GRATIA_PAYMENT_METHOD: {
             client: 'INFO',
-            endpoint: '/entity/list/POGR_GRO_EX_GRATIA_PAYMENT_METHOD?activeOnly=false',
+            endpoint: '/entity/list/POGR_GRO_EX_GRATIA_PAYMENT_METHOD',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         TO_BF_BUSINESS_UNIT_TYPES: {
             client: 'INFO',
-            endpoint: '/entity/list/TO_BF_BUSINESS_UNIT_TYPES?activeOnly=false',
+            endpoint: '/entity/list/TO_BF_BUSINESS_UNIT_TYPES',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         TO_BF_BUS_UNIT_POLICY: {
             client: 'INFO',
-            endpoint: '/entity/list/TO_BF_BUS_UNIT_POLICY?activeOnly=false',
+            endpoint: '/entity/list/TO_BF_BUS_UNIT_POLICY',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         TO_BF_BUS_UNIT_CENTRAL_REGION: {
             client: 'INFO',
-            endpoint: '/entity/list/TO_BF_BUS_UNIT_CENTRAL_REGION?activeOnly=false',
+            endpoint: '/entity/list/TO_BF_BUS_UNIT_CENTRAL_REGION',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         TO_BF_BUS_UNIT_EUROPE_REGION: {
             client: 'INFO',
-            endpoint: '/entity/list/TO_BF_BUS_UNIT_EUROPE_REGION?activeOnly=false',
+            endpoint: '/entity/list/TO_BF_BUS_UNIT_EUROPE_REGION',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         TO_BF_BUS_UNIT_HEATHROW_REGION: {
             client: 'INFO',
-            endpoint: '/entity/list/TO_BF_BUS_UNIT_HEATHROW_REGION?activeOnly=false',
+            endpoint: '/entity/list/TO_BF_BUS_UNIT_HEATHROW_REGION',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         TO_BF_BUS_UNIT_NORTH_REGION: {
             client: 'INFO',
-            endpoint: '/entity/list/TO_BF_BUS_UNIT_NORTH_REGION?activeOnly=false',
+            endpoint: '/entity/list/TO_BF_BUS_UNIT_NORTH_REGION',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         TO_BF_BUS_UNIT_PRESS_OFFICE: {
             client: 'INFO',
-            endpoint: '/entity/list/TO_BF_BUS_UNIT_PRESS_OFFICE?activeOnly=false',
+            endpoint: '/entity/list/TO_BF_BUS_UNIT_PRESS_OFFICE',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         TO_BF_BUS_UNIT_SOUTH_EAST_REGION: {
             client: 'INFO',
-            endpoint: '/entity/list/TO_BF_BUS_UNIT_SOUTH_EAST_REGION?activeOnly=false',
+            endpoint: '/entity/list/TO_BF_BUS_UNIT_SOUTH_EAST_REGION',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         TO_BF_BUS_UNIT_SOUTH_REGION: {
             client: 'INFO',
-            endpoint: '/entity/list/TO_BF_BUS_UNIT_SOUTH_REGION?activeOnly=false',
+            endpoint: '/entity/list/TO_BF_BUS_UNIT_SOUTH_REGION',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         TO_BF_BUS_UNIT_WARNING_INDEX: {
             client: 'INFO',
-            endpoint: '/entity/list/TO_BF_BUS_UNIT_WARNING_INDEX?activeOnly=false',
+            endpoint: '/entity/list/TO_BF_BUS_UNIT_WARNING_INDEX',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         TO_BF_BUS_UNIT_ALL: {
             client: 'INFO',
-            endpoint: '/entity/list/TO_BF_BUSINESS_UNIT_ALL?activeOnly=false',
+            endpoint: '/entity/list/TO_BF_BUSINESS_UNIT_ALL',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         POGR_HMPO_LOCATIONS: {
             client: 'INFO',
-            endpoint: '/entity/list/POGR_HMPO_LOCATIONS?activeOnly=false',
+            endpoint: '/entity/list/POGR_HMPO_LOCATIONS',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         POGR_HMPO_EX_GRATIA_TYPE_OF_REFUND: {
             client: 'INFO',
-            endpoint: '/entity/list/POGR_HMPO_EX_GRATIA_TYPE_OF_REFUND?activeOnly=false',
+            endpoint: '/entity/list/POGR_HMPO_EX_GRATIA_TYPE_OF_REFUND',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         POGR_HMPO_EX_GRATIA_REFUND_REASON: {
             client: 'INFO',
-            endpoint: '/entity/list/POGR_HMPO_EX_GRATIA_REFUND_REASON?activeOnly=false',
+            endpoint: '/entity/list/POGR_HMPO_EX_GRATIA_REFUND_REASON',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         POGR_HMPO_EX_GRATIA_PAYMENT_METHOD: {
             client: 'INFO',
-            endpoint: '/entity/list/POGR_HMPO_EX_GRATIA_PAYMENT_METHOD?activeOnly=false',
+            endpoint: '/entity/list/POGR_HMPO_EX_GRATIA_PAYMENT_METHOD',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         POGR_HMPO_DOCUMENT_DAMAGE_TYPE: {
             client: 'INFO',
-            endpoint: '/entity/list/POGR_HMPO_DOCUMENT_DAMAGE_TYPE?activeOnly=false',
+            endpoint: '/entity/list/POGR_HMPO_DOCUMENT_DAMAGE_TYPE',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         POGR_HMPO_DOCUMENT_TYPE: {
             client: 'INFO',
-            endpoint: '/entity/list/POGR_HMPO_DOCUMENT_TYPE?activeOnly=false',
+            endpoint: '/entity/list/POGR_HMPO_DOCUMENT_TYPE',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         IEDET_COMP_CATEGORIES_SERVICE: {
             client: 'INFO',
-            endpoint: '/entity/list/IEDET_COMP_CATEGORIES_SERVICE?activeOnly=false',
+            endpoint: '/entity/list/IEDET_COMP_CATEGORIES_SERVICE',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         IEDET_COMP_CATEGORIES_SERIOUS_AND_MINOR: {
             client: 'INFO',
-            endpoint: '/entity/list/IEDET_COMP_CATEGORIES_SERIOUS_AND_MINOR?activeOnly=false',
+            endpoint: '/entity/list/IEDET_COMP_CATEGORIES_SERIOUS_AND_MINOR',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         IEDET_COMP_CATEGORIES_SERIOUS: {
             client: 'INFO',
-            endpoint: '/entity/list/IEDET_COMP_CATEGORIES_SERIOUS?activeOnly=false',
+            endpoint: '/entity/list/IEDET_COMP_CATEGORIES_SERIOUS',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         IEDET_BUSINESS_AREAS: {
             client: 'INFO',
-            endpoint: '/entity/list/IEDET_BUSINESS_AREAS?activeOnly=false',
+            endpoint: '/entity/list/IEDET_BUSINESS_AREAS',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         }
