@@ -184,7 +184,7 @@ Object {
                             class="govuk-table__cell"
                           >
                             <div
-                              class="govuk-checkboxes"
+                              class="govuk-checkboxes govuk-checkboxes--small"
                             >
                               <div
                                 class="govuk-checkboxes__item"
@@ -286,7 +286,7 @@ Object {
                             class="govuk-table__cell"
                           >
                             <div
-                              class="govuk-checkboxes"
+                              class="govuk-checkboxes govuk-checkboxes--small"
                             >
                               <div
                                 class="govuk-checkboxes__item"
@@ -384,7 +384,7 @@ Object {
                             class="govuk-table__cell"
                           >
                             <div
-                              class="govuk-checkboxes"
+                              class="govuk-checkboxes govuk-checkboxes--small"
                             >
                               <div
                                 class="govuk-checkboxes__item"
@@ -482,7 +482,7 @@ Object {
                             class="govuk-table__cell"
                           >
                             <div
-                              class="govuk-checkboxes"
+                              class="govuk-checkboxes govuk-checkboxes--small"
                             >
                               <div
                                 class="govuk-checkboxes__item"
@@ -581,7 +581,7 @@ Object {
                             class="govuk-table__cell"
                           >
                             <div
-                              class="govuk-checkboxes"
+                              class="govuk-checkboxes govuk-checkboxes--small"
                             >
                               <div
                                 class="govuk-checkboxes__item"
@@ -676,7 +676,7 @@ Object {
                             class="govuk-table__cell"
                           >
                             <div
-                              class="govuk-checkboxes"
+                              class="govuk-checkboxes govuk-checkboxes--small"
                             >
                               <div
                                 class="govuk-checkboxes__item"
@@ -780,7 +780,7 @@ Object {
                             class="govuk-table__cell"
                           >
                             <div
-                              class="govuk-checkboxes"
+                              class="govuk-checkboxes govuk-checkboxes--small"
                             >
                               <div
                                 class="govuk-checkboxes__item"
@@ -875,7 +875,7 @@ Object {
                             class="govuk-table__cell"
                           >
                             <div
-                              class="govuk-checkboxes"
+                              class="govuk-checkboxes govuk-checkboxes--small"
                             >
                               <div
                                 class="govuk-checkboxes__item"
@@ -975,7 +975,7 @@ Object {
                             class="govuk-table__cell"
                           >
                             <div
-                              class="govuk-checkboxes"
+                              class="govuk-checkboxes govuk-checkboxes--small"
                             >
                               <div
                                 class="govuk-checkboxes__item"
@@ -1301,7 +1301,7 @@ Object {
                           class="govuk-table__cell"
                         >
                           <div
-                            class="govuk-checkboxes"
+                            class="govuk-checkboxes govuk-checkboxes--small"
                           >
                             <div
                               class="govuk-checkboxes__item"
@@ -1403,7 +1403,7 @@ Object {
                           class="govuk-table__cell"
                         >
                           <div
-                            class="govuk-checkboxes"
+                            class="govuk-checkboxes govuk-checkboxes--small"
                           >
                             <div
                               class="govuk-checkboxes__item"
@@ -1501,7 +1501,7 @@ Object {
                           class="govuk-table__cell"
                         >
                           <div
-                            class="govuk-checkboxes"
+                            class="govuk-checkboxes govuk-checkboxes--small"
                           >
                             <div
                               class="govuk-checkboxes__item"
@@ -1599,7 +1599,7 @@ Object {
                           class="govuk-table__cell"
                         >
                           <div
-                            class="govuk-checkboxes"
+                            class="govuk-checkboxes govuk-checkboxes--small"
                           >
                             <div
                               class="govuk-checkboxes__item"
@@ -1698,7 +1698,7 @@ Object {
                           class="govuk-table__cell"
                         >
                           <div
-                            class="govuk-checkboxes"
+                            class="govuk-checkboxes govuk-checkboxes--small"
                           >
                             <div
                               class="govuk-checkboxes__item"
@@ -1793,7 +1793,7 @@ Object {
                           class="govuk-table__cell"
                         >
                           <div
-                            class="govuk-checkboxes"
+                            class="govuk-checkboxes govuk-checkboxes--small"
                           >
                             <div
                               class="govuk-checkboxes__item"
@@ -1897,7 +1897,7 @@ Object {
                           class="govuk-table__cell"
                         >
                           <div
-                            class="govuk-checkboxes"
+                            class="govuk-checkboxes govuk-checkboxes--small"
                           >
                             <div
                               class="govuk-checkboxes__item"
@@ -1992,7 +1992,7 @@ Object {
                           class="govuk-table__cell"
                         >
                           <div
-                            class="govuk-checkboxes"
+                            class="govuk-checkboxes govuk-checkboxes--small"
                           >
                             <div
                               class="govuk-checkboxes__item"
@@ -2092,7 +2092,7 @@ Object {
                           class="govuk-table__cell"
                         >
                           <div
-                            class="govuk-checkboxes"
+                            class="govuk-checkboxes govuk-checkboxes--small"
                           >
                             <div
                               class="govuk-checkboxes__item"
@@ -2521,7 +2521,7 @@ Object {
                             class="govuk-table__cell"
                           >
                             <div
-                              class="govuk-checkboxes"
+                              class="govuk-checkboxes govuk-checkboxes--small"
                             >
                               <div
                                 class="govuk-checkboxes__item"
@@ -2623,7 +2623,7 @@ Object {
                             class="govuk-table__cell"
                           >
                             <div
-                              class="govuk-checkboxes"
+                              class="govuk-checkboxes govuk-checkboxes--small"
                             >
                               <div
                                 class="govuk-checkboxes__item"
@@ -2721,7 +2721,7 @@ Object {
                             class="govuk-table__cell"
                           >
                             <div
-                              class="govuk-checkboxes"
+                              class="govuk-checkboxes govuk-checkboxes--small"
                             >
                               <div
                                 class="govuk-checkboxes__item"
@@ -2819,7 +2819,7 @@ Object {
                             class="govuk-table__cell"
                           >
                             <div
-                              class="govuk-checkboxes"
+                              class="govuk-checkboxes govuk-checkboxes--small"
                             >
                               <div
                                 class="govuk-checkboxes__item"
@@ -2918,7 +2918,7 @@ Object {
                             class="govuk-table__cell"
                           >
                             <div
-                              class="govuk-checkboxes"
+                              class="govuk-checkboxes govuk-checkboxes--small"
                             >
                               <div
                                 class="govuk-checkboxes__item"
@@ -3013,7 +3013,7 @@ Object {
                             class="govuk-table__cell"
                           >
                             <div
-                              class="govuk-checkboxes"
+                              class="govuk-checkboxes govuk-checkboxes--small"
                             >
                               <div
                                 class="govuk-checkboxes__item"
@@ -3117,7 +3117,7 @@ Object {
                             class="govuk-table__cell"
                           >
                             <div
-                              class="govuk-checkboxes"
+                              class="govuk-checkboxes govuk-checkboxes--small"
                             >
                               <div
                                 class="govuk-checkboxes__item"
@@ -3212,7 +3212,7 @@ Object {
                             class="govuk-table__cell"
                           >
                             <div
-                              class="govuk-checkboxes"
+                              class="govuk-checkboxes govuk-checkboxes--small"
                             >
                               <div
                                 class="govuk-checkboxes__item"
@@ -3312,7 +3312,7 @@ Object {
                             class="govuk-table__cell"
                           >
                             <div
-                              class="govuk-checkboxes"
+                              class="govuk-checkboxes govuk-checkboxes--small"
                             >
                               <div
                                 class="govuk-checkboxes__item"
@@ -3730,7 +3730,7 @@ Object {
                           class="govuk-table__cell"
                         >
                           <div
-                            class="govuk-checkboxes"
+                            class="govuk-checkboxes govuk-checkboxes--small"
                           >
                             <div
                               class="govuk-checkboxes__item"
@@ -3832,7 +3832,7 @@ Object {
                           class="govuk-table__cell"
                         >
                           <div
-                            class="govuk-checkboxes"
+                            class="govuk-checkboxes govuk-checkboxes--small"
                           >
                             <div
                               class="govuk-checkboxes__item"
@@ -3930,7 +3930,7 @@ Object {
                           class="govuk-table__cell"
                         >
                           <div
-                            class="govuk-checkboxes"
+                            class="govuk-checkboxes govuk-checkboxes--small"
                           >
                             <div
                               class="govuk-checkboxes__item"
@@ -4028,7 +4028,7 @@ Object {
                           class="govuk-table__cell"
                         >
                           <div
-                            class="govuk-checkboxes"
+                            class="govuk-checkboxes govuk-checkboxes--small"
                           >
                             <div
                               class="govuk-checkboxes__item"
@@ -4127,7 +4127,7 @@ Object {
                           class="govuk-table__cell"
                         >
                           <div
-                            class="govuk-checkboxes"
+                            class="govuk-checkboxes govuk-checkboxes--small"
                           >
                             <div
                               class="govuk-checkboxes__item"
@@ -4222,7 +4222,7 @@ Object {
                           class="govuk-table__cell"
                         >
                           <div
-                            class="govuk-checkboxes"
+                            class="govuk-checkboxes govuk-checkboxes--small"
                           >
                             <div
                               class="govuk-checkboxes__item"
@@ -4326,7 +4326,7 @@ Object {
                           class="govuk-table__cell"
                         >
                           <div
-                            class="govuk-checkboxes"
+                            class="govuk-checkboxes govuk-checkboxes--small"
                           >
                             <div
                               class="govuk-checkboxes__item"
@@ -4421,7 +4421,7 @@ Object {
                           class="govuk-table__cell"
                         >
                           <div
-                            class="govuk-checkboxes"
+                            class="govuk-checkboxes govuk-checkboxes--small"
                           >
                             <div
                               class="govuk-checkboxes__item"
@@ -4521,7 +4521,7 @@ Object {
                           class="govuk-table__cell"
                         >
                           <div
-                            class="govuk-checkboxes"
+                            class="govuk-checkboxes govuk-checkboxes--small"
                           >
                             <div
                               class="govuk-checkboxes__item"
@@ -4950,7 +4950,7 @@ Object {
                             class="govuk-table__cell"
                           >
                             <div
-                              class="govuk-checkboxes"
+                              class="govuk-checkboxes govuk-checkboxes--small"
                             >
                               <div
                                 class="govuk-checkboxes__item"
@@ -5050,7 +5050,7 @@ Object {
                             class="govuk-table__cell"
                           >
                             <div
-                              class="govuk-checkboxes"
+                              class="govuk-checkboxes govuk-checkboxes--small"
                             >
                               <div
                                 class="govuk-checkboxes__item"
@@ -5150,7 +5150,7 @@ Object {
                             class="govuk-table__cell"
                           >
                             <div
-                              class="govuk-checkboxes"
+                              class="govuk-checkboxes govuk-checkboxes--small"
                             >
                               <div
                                 class="govuk-checkboxes__item"
@@ -5245,7 +5245,7 @@ Object {
                             class="govuk-table__cell"
                           >
                             <div
-                              class="govuk-checkboxes"
+                              class="govuk-checkboxes govuk-checkboxes--small"
                             >
                               <div
                                 class="govuk-checkboxes__item"
@@ -5349,7 +5349,7 @@ Object {
                             class="govuk-table__cell"
                           >
                             <div
-                              class="govuk-checkboxes"
+                              class="govuk-checkboxes govuk-checkboxes--small"
                             >
                               <div
                                 class="govuk-checkboxes__item"
@@ -5444,7 +5444,7 @@ Object {
                             class="govuk-table__cell"
                           >
                             <div
-                              class="govuk-checkboxes"
+                              class="govuk-checkboxes govuk-checkboxes--small"
                             >
                               <div
                                 class="govuk-checkboxes__item"
@@ -5543,7 +5543,7 @@ Object {
                             class="govuk-table__cell"
                           >
                             <div
-                              class="govuk-checkboxes"
+                              class="govuk-checkboxes govuk-checkboxes--small"
                             >
                               <div
                                 class="govuk-checkboxes__item"
@@ -5641,7 +5641,7 @@ Object {
                             class="govuk-table__cell"
                           >
                             <div
-                              class="govuk-checkboxes"
+                              class="govuk-checkboxes govuk-checkboxes--small"
                             >
                               <div
                                 class="govuk-checkboxes__item"
@@ -5739,7 +5739,7 @@ Object {
                             class="govuk-table__cell"
                           >
                             <div
-                              class="govuk-checkboxes"
+                              class="govuk-checkboxes govuk-checkboxes--small"
                             >
                               <div
                                 class="govuk-checkboxes__item"
@@ -6067,7 +6067,7 @@ Object {
                           class="govuk-table__cell"
                         >
                           <div
-                            class="govuk-checkboxes"
+                            class="govuk-checkboxes govuk-checkboxes--small"
                           >
                             <div
                               class="govuk-checkboxes__item"
@@ -6167,7 +6167,7 @@ Object {
                           class="govuk-table__cell"
                         >
                           <div
-                            class="govuk-checkboxes"
+                            class="govuk-checkboxes govuk-checkboxes--small"
                           >
                             <div
                               class="govuk-checkboxes__item"
@@ -6267,7 +6267,7 @@ Object {
                           class="govuk-table__cell"
                         >
                           <div
-                            class="govuk-checkboxes"
+                            class="govuk-checkboxes govuk-checkboxes--small"
                           >
                             <div
                               class="govuk-checkboxes__item"
@@ -6362,7 +6362,7 @@ Object {
                           class="govuk-table__cell"
                         >
                           <div
-                            class="govuk-checkboxes"
+                            class="govuk-checkboxes govuk-checkboxes--small"
                           >
                             <div
                               class="govuk-checkboxes__item"
@@ -6466,7 +6466,7 @@ Object {
                           class="govuk-table__cell"
                         >
                           <div
-                            class="govuk-checkboxes"
+                            class="govuk-checkboxes govuk-checkboxes--small"
                           >
                             <div
                               class="govuk-checkboxes__item"
@@ -6561,7 +6561,7 @@ Object {
                           class="govuk-table__cell"
                         >
                           <div
-                            class="govuk-checkboxes"
+                            class="govuk-checkboxes govuk-checkboxes--small"
                           >
                             <div
                               class="govuk-checkboxes__item"
@@ -6660,7 +6660,7 @@ Object {
                           class="govuk-table__cell"
                         >
                           <div
-                            class="govuk-checkboxes"
+                            class="govuk-checkboxes govuk-checkboxes--small"
                           >
                             <div
                               class="govuk-checkboxes__item"
@@ -6758,7 +6758,7 @@ Object {
                           class="govuk-table__cell"
                         >
                           <div
-                            class="govuk-checkboxes"
+                            class="govuk-checkboxes govuk-checkboxes--small"
                           >
                             <div
                               class="govuk-checkboxes__item"
@@ -6856,7 +6856,7 @@ Object {
                           class="govuk-table__cell"
                         >
                           <div
-                            class="govuk-checkboxes"
+                            class="govuk-checkboxes govuk-checkboxes--small"
                           >
                             <div
                               class="govuk-checkboxes__item"
@@ -7241,7 +7241,7 @@ Object {
                             class="govuk-table__cell"
                           >
                             <div
-                              class="govuk-checkboxes"
+                              class="govuk-checkboxes govuk-checkboxes--small"
                             >
                               <div
                                 class="govuk-checkboxes__item"
@@ -7343,7 +7343,7 @@ Object {
                             class="govuk-table__cell"
                           >
                             <div
-                              class="govuk-checkboxes"
+                              class="govuk-checkboxes govuk-checkboxes--small"
                             >
                               <div
                                 class="govuk-checkboxes__item"
@@ -7441,7 +7441,7 @@ Object {
                             class="govuk-table__cell"
                           >
                             <div
-                              class="govuk-checkboxes"
+                              class="govuk-checkboxes govuk-checkboxes--small"
                             >
                               <div
                                 class="govuk-checkboxes__item"
@@ -7539,7 +7539,7 @@ Object {
                             class="govuk-table__cell"
                           >
                             <div
-                              class="govuk-checkboxes"
+                              class="govuk-checkboxes govuk-checkboxes--small"
                             >
                               <div
                                 class="govuk-checkboxes__item"
@@ -7638,7 +7638,7 @@ Object {
                             class="govuk-table__cell"
                           >
                             <div
-                              class="govuk-checkboxes"
+                              class="govuk-checkboxes govuk-checkboxes--small"
                             >
                               <div
                                 class="govuk-checkboxes__item"
@@ -7733,7 +7733,7 @@ Object {
                             class="govuk-table__cell"
                           >
                             <div
-                              class="govuk-checkboxes"
+                              class="govuk-checkboxes govuk-checkboxes--small"
                             >
                               <div
                                 class="govuk-checkboxes__item"
@@ -7837,7 +7837,7 @@ Object {
                             class="govuk-table__cell"
                           >
                             <div
-                              class="govuk-checkboxes"
+                              class="govuk-checkboxes govuk-checkboxes--small"
                             >
                               <div
                                 class="govuk-checkboxes__item"
@@ -7932,7 +7932,7 @@ Object {
                             class="govuk-table__cell"
                           >
                             <div
-                              class="govuk-checkboxes"
+                              class="govuk-checkboxes govuk-checkboxes--small"
                             >
                               <div
                                 class="govuk-checkboxes__item"
@@ -8032,7 +8032,7 @@ Object {
                             class="govuk-table__cell"
                           >
                             <div
-                              class="govuk-checkboxes"
+                              class="govuk-checkboxes govuk-checkboxes--small"
                             >
                               <div
                                 class="govuk-checkboxes__item"
@@ -8358,7 +8358,7 @@ Object {
                           class="govuk-table__cell"
                         >
                           <div
-                            class="govuk-checkboxes"
+                            class="govuk-checkboxes govuk-checkboxes--small"
                           >
                             <div
                               class="govuk-checkboxes__item"
@@ -8460,7 +8460,7 @@ Object {
                           class="govuk-table__cell"
                         >
                           <div
-                            class="govuk-checkboxes"
+                            class="govuk-checkboxes govuk-checkboxes--small"
                           >
                             <div
                               class="govuk-checkboxes__item"
@@ -8558,7 +8558,7 @@ Object {
                           class="govuk-table__cell"
                         >
                           <div
-                            class="govuk-checkboxes"
+                            class="govuk-checkboxes govuk-checkboxes--small"
                           >
                             <div
                               class="govuk-checkboxes__item"
@@ -8656,7 +8656,7 @@ Object {
                           class="govuk-table__cell"
                         >
                           <div
-                            class="govuk-checkboxes"
+                            class="govuk-checkboxes govuk-checkboxes--small"
                           >
                             <div
                               class="govuk-checkboxes__item"
@@ -8755,7 +8755,7 @@ Object {
                           class="govuk-table__cell"
                         >
                           <div
-                            class="govuk-checkboxes"
+                            class="govuk-checkboxes govuk-checkboxes--small"
                           >
                             <div
                               class="govuk-checkboxes__item"
@@ -8850,7 +8850,7 @@ Object {
                           class="govuk-table__cell"
                         >
                           <div
-                            class="govuk-checkboxes"
+                            class="govuk-checkboxes govuk-checkboxes--small"
                           >
                             <div
                               class="govuk-checkboxes__item"
@@ -8954,7 +8954,7 @@ Object {
                           class="govuk-table__cell"
                         >
                           <div
-                            class="govuk-checkboxes"
+                            class="govuk-checkboxes govuk-checkboxes--small"
                           >
                             <div
                               class="govuk-checkboxes__item"
@@ -9049,7 +9049,7 @@ Object {
                           class="govuk-table__cell"
                         >
                           <div
-                            class="govuk-checkboxes"
+                            class="govuk-checkboxes govuk-checkboxes--small"
                           >
                             <div
                               class="govuk-checkboxes__item"
@@ -9149,7 +9149,7 @@ Object {
                           class="govuk-table__cell"
                         >
                           <div
-                            class="govuk-checkboxes"
+                            class="govuk-checkboxes govuk-checkboxes--small"
                           >
                             <div
                               class="govuk-checkboxes__item"

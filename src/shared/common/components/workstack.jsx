@@ -297,7 +297,7 @@ class WorkstackAllocate extends Component {
         return (
             <tr key={item.uuid} className='govuk-radios govuk-table__row'>
                 {this.state.selectable && <td className='govuk-table__cell'>
-                    <div className='govuk-checkboxes'>
+                    <div className='govuk-checkboxes govuk-checkboxes--small'>
                         <div key={checkboxKey} className='govuk-checkboxes__item'>
                             <input id={`selected_cases_${item.caseUUID}`}
                                 type='checkbox'
