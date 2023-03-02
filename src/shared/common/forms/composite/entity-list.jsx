@@ -70,7 +70,7 @@ class EntityList extends Component {
                             {choices && choices.map((choice, i) => {
                                 const checkedValue = this.props.checkedValue || this.state.value;
                                 return (
-                                    <tr className='govuk-radios govuk-table__row' key={i}>
+                                    <tr className='govuk-radios govuk-table__row govuk-radios--small' key={i}>
                                         <td className='govuk-table__cell'>
                                             <div className='govuk-radios__item'>
                                                 <input id={`${name}-${choice.value}`}
