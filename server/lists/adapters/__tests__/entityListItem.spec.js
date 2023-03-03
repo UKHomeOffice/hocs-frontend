@@ -11,9 +11,9 @@ describe('Entity List Items Adapter', () => {
 
     it('should transform data', async () => {
         const mockData = [
-            { simpleName: 'First', data: { title: 'Title First' } },
-            { simpleName: 'Second', data: { title: 'Title Second' } },
-            { simpleName: 'Third', data: { title: 'Title Third' } },
+            { simpleName: 'First', data: { title: 'Title First' }, active: true },
+            { simpleName: 'Second', data: { title: 'Title Second' }, active: true },
+            { simpleName: 'Third', data: { title: 'Title Third' }, active: false },
         ];
 
         const results = await entityListItemsAdapter(mockData, { logger: mockLogger });

@@ -3,14 +3,17 @@
 exports[`Entity List Items Adapter should transform data 1`] = `
 Array [
   Object {
+    "active": true,
     "label": "Title First",
     "value": "First",
   },
   Object {
+    "active": true,
     "label": "Title Second",
     "value": "Second",
   },
   Object {
+    "active": false,
     "label": "Title Third",
     "value": "Third",
   },

@@ -81,7 +81,7 @@ async function getFormSchemaFromWorkflowService(requestId, options, user) {
     const { stageUUID, caseReference, allocationNote } = response.data;
     const mockAllocationNote = allocationNote || null;
     const { schema, data } = response.data.form;
-    return { form: { schema, data, meta: { caseReference, stageUUID, allocationNote: mockAllocationNote } } };
+    return { form: { schema, data, meta: { caseReference, stageUUID, allocationNote: mockAllocationNote, activeForm: true } } };
 }
 
 async function getGlobalFormSchemaFromWorkflowService(options, user) {
@@ -134,6 +134,12 @@ async function hydrateField(field, req) {
                 choices,
                 { ...req.params, ...req.form.data }
             );
+
+            if (Object.prototype.hasOwnProperty.call(req.form, 'meta') &&
+                Object.prototype.hasOwnProperty.call(req.form.meta, 'activeForm') &&
+                req.form.meta.activeForm) {
+                field.props.choices = field.props.choices.filter(c => c.active !== false);
+            }
         } else if (items && typeof items === 'string') {
             field.props.items = await req.listService.fetch(
                 items,

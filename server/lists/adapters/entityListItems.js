@@ -3,6 +3,7 @@ module.exports = async (data, { logger }) => {
     return data
         .map(d => ({
             label: d.data.title,
-            value: d.simpleName
+            value: d.simpleName,
+            active: d.active
         }));
 };
