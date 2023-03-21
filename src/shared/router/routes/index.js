@@ -6,6 +6,8 @@ import MainPage from '../../pages/dashboard.jsx';
 import WorkstackPage from '../../pages/workstack.jsx';
 import Search from '../../pages/search.jsx';
 import StandardLinesView from '../../pages/standardLines/standardLinesView.jsx';
+import ReportListView from '../../reports/reportListView.tsx';
+import ReportView from '../../reports/reportView.tsx';
 
 const routes = [
     {
@@ -158,6 +160,18 @@ const routes = [
         exact: true,
         component: StandardLinesView,
         title: 'View Standard Lines'
+    },
+    {
+        path: '/report',
+        exact: true,
+        component: ReportListView,
+        title: 'Operational reports'
+    },
+    {
+        path: '/report/:reportSlug',
+        exact: true,
+        component: ReportView,
+        title: 'Operational reports'
     },
     {
         component: Error,

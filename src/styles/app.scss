@@ -463,6 +463,56 @@ td {
   }
 }
 
+[aria-sort] .sort-link {
+  background-color: rgba(0,0,0,0);
+  border-width: 0;
+  -webkit-box-shadow: 0 0 0 0;
+  -moz-box-shadow: 0 0 0 0;
+  box-shadow: 0 0 0 0;
+  color: #005ea5;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: inherit;
+  padding: 0 10px 0 0;
+  position: relative;
+  text-align: inherit;
+  font-size: 1em;
+  margin: 0;
+}
+
+[aria-sort="ascending"] .sort-link::after {
+  content: " ▲";
+  font-size: .8em;
+  position: absolute;
+  right: -5px;
+  top: 2px;
+}
+
+[aria-sort="descending"] .sort-link::after {
+  content: " ▼";
+  font-size: .8em;
+  position: absolute;
+  right: -5px;
+  top: 2px;
+}
+
+[aria-sort="none"] .sort-link::before {
+  content: " ▼";
+  position: absolute;
+  right: -1px;
+  top: 9px;
+  font-size: .5em;
+
+}
+
+[aria-sort="none"] .sort-link::after {
+  content: " ▲";
+  position: absolute;
+  right: -1px;
+  top: 1px;
+  font-size: .5em;
+}
+
 .timeline {
   @extend %govuk-body-m;
   padding: govuk-spacing(2);
@@ -867,4 +917,17 @@ $border-colour: govuk-colour("mid-grey");
 
 .width-one-sixth {
   width: 16.6666%;
+}
+
+.decs-filters {
+  background: #f3f2f1;
+  padding: 1rem;
+
+  .govuk-select {
+    width: 100%;
+  }
+
+  .govuk-checkboxes__label::before {
+    background-color: #ffffff;
+  }
 }

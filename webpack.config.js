@@ -21,7 +21,7 @@ const browserConfig = env => {
         module: {
             rules: [
                 {
-                    test: /\.(js|jsx)$/,
+                    test: /\.(js|jsx|ts|tsx)$/,
                     loader: 'babel-loader',
                     exclude: /node_modules/
                 },
@@ -61,7 +61,10 @@ const browserConfig = env => {
         resolve: {
             extensions: [
                 '.js',
-                '.jsx'
+                '.jsx',
+                '.ts',
+                '.tsx',
+                '...'
             ]
         },
         optimization: {
@@ -138,7 +141,7 @@ const serverConfig = {
     },
     module: {
         rules: [
-            { test: /\.(js|jsx)$/, loader: 'babel-loader', exclude: /node_modules/ },
+            { test: /\.(js|jsx|ts|tsx)$/, loader: 'babel-loader', exclude: /node_modules/ },
             { test: /\.scss$/, loader: 'css-loader/locals' }
         ]
     },
@@ -148,7 +151,14 @@ const serverConfig = {
         'react-router-dom': 'react-router-dom'
     },
     resolve: {
-        aliasFields: []
+        aliasFields: [],
+        extensions: [
+            '.js',
+            '.jsx',
+            '.ts',
+            '.tsx',
+            '...'
+        ]
     },
 };
 
