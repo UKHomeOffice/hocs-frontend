@@ -45,7 +45,7 @@ export const DataTable = ({
     page,
     pageSize
 }: DataTableProps) => {
-    return <table className='govuk-table'>
+    return <table className='govuk-table' data-testid={'data-table'}>
         <thead className='govuk-table__head'>
             <tr className='govuk-table__row'>
                 {columns
@@ -56,8 +56,11 @@ export const DataTable = ({
                             scope='col'
                             aria-sort={sortKey === column.key ? sortDirection : 'none'}
                         >
-                            <Link className='govuk-link sort-link'
-                                to={sortLinkProvider(column.key)}>
+                            <Link
+                                className='govuk-link sort-link'
+                                to={sortLinkProvider(column.key)}
+                                data-testid={`${column.key}--sort-link`}
+                            >
                                 {column.display_name}
                             </Link>
                         </th>

@@ -64,11 +64,14 @@ export const FilterForm = ({ columns, filterValues, filters, data, onSubmit, cle
         return null;
     }
 
-    return <form className='decs-filters' onSubmit={(e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        onSubmit(filterOptions);
-    }
-    }>
+    return <form
+        className='decs-filters'
+        onSubmit={(e: FormEvent<HTMLFormElement>) => {
+            e.preventDefault();
+            onSubmit(filterOptions);
+        }}
+        data-testid={'filters-form'}
+    >
         <fieldset className='govuk-fieldset'>
             <legend className='govuk-fieldset__legend govuk-fieldset__legend--m'>
                 <h2 className="govuk-fieldset__heading">Filter report</h2>

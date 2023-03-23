@@ -127,7 +127,7 @@ function buildFilterLink(
         ),
     };
 
-    return `${url}?${qs.stringify(queryParams)}`;
+    return `${url}?${qs.stringify(queryParams, { arrayFormat: 'brackets' })}`;
 }
 
 function toCsvRow(data: (string | number | boolean)[]): string {

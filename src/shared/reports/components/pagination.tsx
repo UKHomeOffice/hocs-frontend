@@ -15,7 +15,7 @@ const ShowingMessage = ({ currentPage, pageSize, filteredRecords, totalRecords }
     }
 
     if(filteredRecords === 0) {
-        return <p className='govuk-hint'>
+        return <p className='govuk-hint' data-testid='showing-message'>
             None of the {totalRecords} rows match your filters.
         </p>;
     }
@@ -24,10 +24,10 @@ const ShowingMessage = ({ currentPage, pageSize, filteredRecords, totalRecords }
     const end = Math.min((currentPage + 1) * pageSize, filteredRecords);
 
     const excludedRecords = totalRecords - filteredRecords;
-    return <p className='govuk-hint'>
+    return <p className='govuk-hint' data-testid='showing-message'>
         Showing rows {start} to {end} of {filteredRecords} matching result{filteredRecords !== 1 ? 's' : ''}.{' '}
-        {excludedRecords} result{excludedRecords !== 1 ? 's were' : ' are'} hidden because they don&apos;t match current
-        filters.
+        {excludedRecords} result{excludedRecords === 1 ? ' is' : 's were'} hidden because{' '}
+        {excludedRecords === 1 ? 'it' : 'they'} don&apos;t match current filters.
     </p>;
 };
 

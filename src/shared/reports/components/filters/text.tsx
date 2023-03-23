@@ -9,7 +9,7 @@ const TextInput: Component<FilterInputProps> = ({ column, value, onChange }: Fil
             id={column.key}
             name={column.key}
             type='text'
-            value={value as string}
+            value={value as string ?? ''}
             onChange={e => onChange(e.target.value)}
         />
     </FormGroup>;
@@ -25,9 +25,9 @@ export const exactTextFilter: Filter<string, string> = {
 
 export const containsTextFilter: Filter<string, string> = {
     Element: TextInput,
-    predicateBuilder: (key, filterValue) => [
-        (row) => row[key].toString().includes(filterValue)
-    ],
+    predicateBuilder: (key, filterValue) => filterValue.split(/[^a-zA-Z0-9]+/).map(
+        part => (row) => row[key].toString().includes(part)
+    ),
     mapInternalToQuery: (query: string) => query,
     mapQueryToInternal: (internal: string) => internal,
 };
