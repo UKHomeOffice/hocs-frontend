@@ -7,28 +7,17 @@ import { act, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { createMemoryHistory } from 'history';
 import { MemoryRouter, Router } from 'react-router-dom';
 import qs from 'qs';
-
-import { get } from 'axios';
 import { ReportMetadata, ReportRow } from '../components/dataTable';
 import { Route } from 'react-router';
+import { buildCompletablePromise } from './buildCompletablePromise.spec.utils';
+
+import { get } from 'axios';
 
 jest.mock('axios', () => ({
     get: jest.fn()
 }));
 
 const axiosGetMock = get as jest.Mock;
-
-function buildCompletablePromise<T>(): Promise<T> & {reject: (err: unknown) => void, resolve: (t: T) => void} {
-    let resolveFn, rejectFn;
-    const promise = new Promise((resolve, reject) => {
-        resolveFn = resolve;
-        rejectFn = reject;
-    });
-    promise.resolve = resolveFn;
-    promise.reject = rejectFn;
-
-    return promise;
-}
 
 function givenUrl({ reportSlug = 'test-report', caseType = 'COMP', searchQuery = {} }) {
     const baseUrl = `/report/${caseType}/${reportSlug}`;
@@ -166,7 +155,7 @@ async function givenTestDataRendered() {
 
     await waitFor(async () => {
         // Meta has loaded when the title is updated
-        expect(await screen.findByText('Test report')).toBeVisible();
+        expect(await screen.findByText('Test report - COMP')).toBeVisible();
         // Data is ready when the table renders a column header
         expect(await screen.findByTestId('ref--sort-link')).toBeDefined();
     });

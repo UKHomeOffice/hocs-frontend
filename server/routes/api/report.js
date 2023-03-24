@@ -1,10 +1,8 @@
 const router = require('express').Router();
-const { getReportList, streamReport, getReportMetadata } = require('../../middleware/report.js');
+const { getReportList, streamReport } = require('../../middleware/report.js');
 
-router.get('/', getReportList);
+router.get('/:caseType/', getReportList);
 
-router.get('/:reportSlug', streamReport);
-
-router.get('/:reportSlug/metadata', getReportMetadata);
+router.get('/:caseType/:reportSlug', streamReport);
 
 module.exports = router;

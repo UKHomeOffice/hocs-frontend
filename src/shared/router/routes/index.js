@@ -168,7 +168,7 @@ const routes = [
         title: 'Operational reports'
     },
     {
-        path: '/report/:reportSlug',
+        path: '/report/:caseType/:reportSlug',
         exact: true,
         component: ReportView,
         title: 'Operational reports'

@@ -172,7 +172,7 @@ function getFilterForType(type: FilterType): Filter<FilterValue, ParsedQsValue> 
     }
 }
 
-const ReportView = ({ match, location, history }: RouteComponentProps<{ reportSlug: string }>) => {
+const ReportView = ({ match, location, history }: RouteComponentProps<{ caseType: string, reportSlug: string }>) => {
     const [reportData, setReportData] = useState<ReportRow[] | null>(null);
     const [filteredData, setFilteredData] = useState<ReportRow[] | null>(null);
     const [sortedData, setSortedData] = useState<ReportRow[] | null>(null);
@@ -181,13 +181,13 @@ const ReportView = ({ match, location, history }: RouteComponentProps<{ reportSl
     const [searchParams, setSearchParams] = useState<SearchParams>({ sort: sortDefaults, appliedFilters: {} });
     const [error, setError] = useState<string | null>(null);
 
-    const { params: { reportSlug }, url } = match;
+    const { params: { caseType, reportSlug }, url } = match;
 
     const PAGE_SIZE = 50;
 
     useEffect(
         () => {
-            axios.get(`/api/report/${reportSlug}`)
+            axios.get(`/api/report/${caseType}/${reportSlug}`)
                 .then(response => {
                     setReportData(response.data.data);
                     setReportMeta(response.data.metadata);
@@ -279,7 +279,11 @@ const ReportView = ({ match, location, history }: RouteComponentProps<{ reportSl
         <Link to={'/report'} className='govuk-back-link'>Back to report list</Link>
         <div className='govuk-grid-row'>
             <div className='govuk-grid-column-two-thirds-from-desktop'>
-                <h1 className='govuk-heading-l'>{reportMeta.display_name ?? 'Loading'}</h1>
+                <h1 className='govuk-heading-l'>
+                    {reportMeta.display_name
+                        ? `${reportMeta.display_name} - ${caseType}`
+                        : 'Loading'}
+                </h1>
             </div>
             <div className='govuk-grid-column-one-third-from-desktop govuk-!-text-align-right'>
                 <button className='govuk-button' onClick={() => handleDownload()}>Download CSV</button>

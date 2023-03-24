@@ -24,7 +24,7 @@
             "\\.(css|less|scss|sass)$": "identity-obj-proxy"
         },
         "testPathIgnorePatterns": [
-            "\\.spec.utils.(js|jsx)$"
+            "\\.spec.utils.(js|jsx|ts|tsx)$"
         ],
         "collectCoverage": true,
         "collectCoverageFrom": [
