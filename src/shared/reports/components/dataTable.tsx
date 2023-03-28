@@ -106,6 +106,7 @@ const DataCell = ({ type, value, additional_metadata, row }: DataCellProps) => {
             case type === 'LINK' && !!additional_metadata?.link_pattern: {
                 return <Link
                     className='govuk-link'
+                    target='_blank'
                     to={additional_metadata.link_pattern.replace(
                         /\${([a-z0-9_]+)}/g,
                         (_, field) => {
