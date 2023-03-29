@@ -184,6 +184,11 @@ const bindDisplayElements = fromStaticList => async (stage) => {
             stage.EnquiryReasonDisplay = await fromStaticList('TO_ENQUIRY_REASONS_ALL', stage.data.EnquiryReason) || stage.data.EnquiryReason;
         }
     }
+    if (stage.data && stage.data.CompOrigin) {
+        if (stage.caseType === 'IEDET') {
+            stage.CompOriginDisplay = await fromStaticList('S_IEDET_COMP_ORIGIN', stage.data.CompOrigin) || stage.data.CompOrigin;
+        }
+    }
     stage.deadlineDisplay = formatDate(stage.deadline);
 
     stage.stageTypeWithDueDateDisplay = stage.stageTypeDisplay;
