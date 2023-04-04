@@ -89,6 +89,7 @@ const TEST_META: ReportMetadata = {
             type: 'NUMBER',
             render_on_dashboard: true,
             render_in_csv: true,
+            additional_fields: [],
         },
         {
             key: 'date',
@@ -97,6 +98,7 @@ const TEST_META: ReportMetadata = {
             render_on_dashboard: true,
             render_in_csv: true,
             filter_type: 'DATE_RANGE',
+            additional_fields: [],
         },
         {
             key: 'boolean',
@@ -105,6 +107,7 @@ const TEST_META: ReportMetadata = {
             render_on_dashboard: true,
             render_in_csv: false,
             filter_type: 'BOOLEAN',
+            additional_fields: [],
         },
         {
             key: 'string',
@@ -113,6 +116,7 @@ const TEST_META: ReportMetadata = {
             render_on_dashboard: true,
             render_in_csv: true,
             filter_type: 'CONTAINS_TEXT',
+            additional_fields: [],
         },
         {
             key: 'letter',
@@ -121,6 +125,7 @@ const TEST_META: ReportMetadata = {
             render_on_dashboard: false,
             render_in_csv: true,
             filter_type: 'SELECT',
+            additional_fields: [],
         },
     ],
     id_column_key: 'ref',
