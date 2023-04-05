@@ -1,4 +1,4 @@
-import React, { AriaAttributes, useEffect, useRef } from 'react';
+import React, { AriaAttributes } from 'react';
 import { Link, LinkProps } from 'react-router-dom';
 import dayjs from 'dayjs';
 import { FilterType } from './filterForm';

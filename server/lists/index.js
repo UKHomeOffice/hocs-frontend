@@ -22,7 +22,6 @@ const caseActionDataAdapter = require('./adapters/case-action-data');
 const caseActionLabelAdapter = require('./adapters/case-action-label');
 const caseViewUnallocatedAdapter = require('./adapters/case-view-unallocated');
 const caseDataAdapter = require('./adapters/case-data');
-const { adapter: reportAdapter } = require('./adapters/report');
 const {
     caseCorrespondentAdapter,
     correspondentTypeAdapter,
@@ -1495,12 +1494,6 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
-        OPERATIONAL_REPORTS: {
-            client: 'CASEWORK',
-            endpoint: '/report',
-            type: listService.types.STATIC,
-            adapter: reportAdapter,
-        }
     },
     clients: {
         CASEWORK: caseworkService,
