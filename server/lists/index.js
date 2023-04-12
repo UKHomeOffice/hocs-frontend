@@ -1494,6 +1494,12 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
+        HMPO_COMPLAINT_CATEGORIES_DOCUMENT_HANDLING: {
+            client: 'INFO',
+            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_DOCUMENT_HANDLING',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        }
     },
     clients: {
         CASEWORK: caseworkService,
