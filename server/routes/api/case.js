@@ -9,6 +9,7 @@ const {
     caseApiResponseMiddleware,
     createCaseNote,
     updateCaseNote,
+    reopenCase,
     caseCorrespondentsMiddleware,
     caseCorrespondentsApiResponseMiddleware,
     caseActionDataMiddleware,
@@ -26,6 +27,12 @@ router.get('/:caseId/stage/:stageId/allocate', allocateCase);
 router.post('/:caseId/stage/:stageId/allocate/team',
     fileMiddleware.any(),
     allocateCaseToTeamMember,
+    (req, res) => res.json({ redirect: '/' })
+);
+
+router.post('/:caseId/reopen',
+    fileMiddleware.any(),
+    reopenCase,
     (req, res) => res.json({ redirect: '/' })
 );
 

@@ -24,7 +24,16 @@ async function getFormSchemaFromWorkflowService(requestId, options, user) {
             case 401:
                 // handle no permission to allocate
                 try {
-                    return { form: await returnUnallocatedCaseViewForm(requestId, user, caseId) };
+                    let caseView =  await returnUnallocatedCaseViewForm(requestId, user, caseId);
+                    let response = FormBuilder(caseView)
+                        .withField(Component('heading', 'allocate-header')
+                            .withProp('label', 'Reopen Case')
+                            .build())
+                        .withPrimaryAction('Reopen')
+                        .withSubmissionUrl(`/case/${caseId}/reopen`)
+                        .build();
+
+                    return { form: response };
                 } catch (error) {
                     return { error: new AuthenticationError('You are not authorised to work on this case') };
                 }

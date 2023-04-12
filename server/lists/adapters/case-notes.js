@@ -67,6 +67,10 @@ const typeAdaptors = {
         stage,
         title: 'Case Created'
     }),
+    CASE_REOPENED: ({ stage }) => ({
+        stage,
+        title: 'Case Created'
+    }),
     CASE_COMPLETED: ({ stage }) => ({
         stage,
         title: 'Case Closed'

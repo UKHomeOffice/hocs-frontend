@@ -110,6 +110,19 @@ async function updateCaseNote({ body: { caseNote }, params: { caseId, noteId }, 
     return next();
 }
 
+async function reopenCase(req, res, next) {
+    const { caseId } = req.params;
+    try {
+        await workflowService.post('/migrate/case', {
+            userUUID: req.body['user-id'],
+            caseUUID: caseId
+        }, { headers: User.createHeaders(req.user) });
+    } catch (error) {
+        return next(error);
+    }
+    return next();
+}
+
 function returnToCase(req, res) {
     res.redirect(`/case/${req.params.caseId}/stage/${req.params.stageId}`);
 }
@@ -203,6 +216,7 @@ module.exports = {
     createCaseNote,
     returnToCase,
     updateCaseNote,
+    reopenCase,
     caseCorrespondentsMiddleware,
     caseCorrespondentsApiResponseMiddleware,
     caseActionDataMiddleware,
