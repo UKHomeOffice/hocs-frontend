@@ -463,4 +463,19 @@ describe('Somu list component', () => {
         expect(screen.getByText('Complete - rejected')).toBeInTheDocument();
     });
 
+    it('should render with hint when passed in props', () => {
+        const PROPS = {
+            ...DEFAULT_PROPS,
+            hint: 'Test Hint Text'
+        };
+        const wrapper = render(
+            <ApplicationProvider config={{ ...MOCK_CONFIG, ...PROPS }}>
+                <MemoryRouter>
+                    <SomuList baseUrl={BASE_URL} name={NAME} updateState={MOCK_CALLBACK} {...PROPS} />
+                </MemoryRouter>
+            </ApplicationProvider>
+        );
+        expect(wrapper).toBeDefined();
+        expect(screen.getByText('Test Hint Text')).toBeInTheDocument();
+    });
 });
