@@ -176,7 +176,8 @@ class SomuList extends Component {
             primaryLink,
             label,
             name,
-            className
+            className,
+            hint
         } = this.props;
 
         const { renderer } = this.state;
@@ -192,6 +193,7 @@ class SomuList extends Component {
                         <span className="govuk-fieldset__heading govuk-label--s">{label}</span>
                     </legend>
 
+                    {hint && <div className="govuk-hint">{hint}</div>}
                     {error && <p id={`${name}-error`} className="govuk-error-message">{error}</p>}
 
                     <table className='govuk-table'>
@@ -235,6 +237,7 @@ SomuList.propTypes = {
     somuItems: PropTypes.array,
     somuType: PropTypes.object.isRequired,
     updateState: PropTypes.func.isRequired,
+    hint: PropTypes.string
 };
 
 SomuList.defaultProps = {
