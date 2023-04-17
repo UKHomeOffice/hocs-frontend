@@ -68,7 +68,6 @@ Object {
                     <ul
                       class="govuk-list"
                     >
-                      <li />
                       <li>
                         <button
                           class="govuk-button--link govuk-link"
@@ -1089,7 +1088,6 @@ Object {
                   <ul
                     class="govuk-list"
                   >
-                    <li />
                     <li>
                       <button
                         class="govuk-button--link govuk-link"
@@ -1185,7 +1183,6 @@ Object {
                   <ul
                     class="govuk-list"
                   >
-                    <li />
                     <li>
                       <button
                         class="govuk-button--link govuk-link"
@@ -2206,7 +2203,6 @@ Object {
                 <ul
                   class="govuk-list"
                 >
-                  <li />
                   <li>
                     <button
                       class="govuk-button--link govuk-link"
@@ -2359,7 +2355,6 @@ Object {
                     <ul
                       class="govuk-list"
                     >
-                      <li />
                       <li>
                         <button
                           class="govuk-button--link govuk-link"
@@ -3426,7 +3421,6 @@ Object {
                   <ul
                     class="govuk-list"
                   >
-                    <li />
                     <li>
                       <button
                         class="govuk-button--link govuk-link"
@@ -3568,7 +3562,6 @@ Object {
                   <ul
                     class="govuk-list"
                   >
-                    <li />
                     <li>
                       <button
                         class="govuk-button--link govuk-link"
@@ -4635,7 +4628,6 @@ Object {
                 <ul
                   class="govuk-list"
                 >
-                  <li />
                   <li>
                     <button
                       class="govuk-button--link govuk-link"
@@ -4834,7 +4826,6 @@ Object {
                     <ul
                       class="govuk-list"
                     >
-                      <li />
                       <li>
                         <button
                           class="govuk-button--link govuk-link"
@@ -5855,7 +5846,6 @@ Object {
                   <ul
                     class="govuk-list"
                   >
-                    <li />
                     <li>
                       <button
                         class="govuk-button--link govuk-link"
@@ -5951,7 +5941,6 @@ Object {
                   <ul
                     class="govuk-list"
                   >
-                    <li />
                     <li>
                       <button
                         class="govuk-button--link govuk-link"
@@ -6972,7 +6961,6 @@ Object {
                 <ul
                   class="govuk-list"
                 >
-                  <li />
                   <li>
                     <button
                       class="govuk-button--link govuk-link"
@@ -7125,7 +7113,6 @@ Object {
                     <ul
                       class="govuk-list"
                     >
-                      <li />
                       <li>
                         <button
                           class="govuk-button--link govuk-link"
@@ -8146,7 +8133,6 @@ Object {
                   <ul
                     class="govuk-list"
                   >
-                    <li />
                     <li>
                       <button
                         class="govuk-button--link govuk-link"
@@ -8242,7 +8228,6 @@ Object {
                   <ul
                     class="govuk-list"
                   >
-                    <li />
                     <li>
                       <button
                         class="govuk-button--link govuk-link"
@@ -9263,7 +9248,6 @@ Object {
                 <ul
                   class="govuk-list"
                 >
-                  <li />
                   <li>
                     <button
                       class="govuk-button--link govuk-link"

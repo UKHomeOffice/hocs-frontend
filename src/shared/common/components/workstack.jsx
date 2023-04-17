@@ -507,15 +507,15 @@ class WorkstackAllocate extends Component {
 
         return (
             <Fragment>
-                <ul className='govuk-list'>
-                    <li>
-                        {allocateToUserEndpoint && LinkButton({ label: 'Allocate selected to me', endpoint: (baseUrl + allocateToUserEndpoint), submitHandler })}
-                    </li>
-                    <li>
-                        {allocateToWorkstackEndpoint && LinkButton({ label: 'Unallocate selected', endpoint: (baseUrl + allocateToWorkstackEndpoint), submitHandler })}
-                    </li>
+                {(allocateToUserEndpoint || allocateToWorkstackEndpoint) && <ul className='govuk-list'>
+                    {allocateToUserEndpoint && <li>
+                        {LinkButton({ label: 'Allocate selected to me', endpoint: (baseUrl + allocateToUserEndpoint), submitHandler })}
+                    </li>}
+                    {allocateToWorkstackEndpoint && <li>
+                        {LinkButton({ label: 'Unallocate selected', endpoint: (baseUrl + allocateToWorkstackEndpoint), submitHandler })}
+                    </li>}
                     {this.renderTakeNextCaseButton()}
-                </ul>
+                </ul>}
                 {teamMembers && this.renderTeamsDropdown(name)}
                 {moveTeamOptions && moveTeamOptions.length > 0 && this.renderMoveToAnotherTeamDropdown()}
             </Fragment>
