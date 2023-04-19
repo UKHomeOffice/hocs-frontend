@@ -13,13 +13,13 @@ const getMapOfChoicesAndChoiceOptions = (choices) => {
 
 const renderCheckbox = (label, showLabel, choicesLabel) =>  {
     return (
-        <span className='govuk-body full-width'><strong>{showLabel ? label : choicesLabel}: </strong>Yes</span>
+        <div className='govuk-body full-width'><strong>{showLabel ? label : choicesLabel}: </strong>Yes</div>
     );
 };
 
 const renderCheckboxGroup = (mappings, value, label) =>  {
     return (
-        <span className='govuk-body full-width'><strong>{label}: </strong>{mappings.get(value) ? mappings.get(value) : value.replaceAll(',', ', ')}</span>
+        <div className='govuk-body full-width'><strong>{label}: </strong>{mappings.get(value) ? mappings.get(value) : value.replaceAll(',', ', ')}</div>
     );
 };
 
@@ -44,7 +44,7 @@ class MappedDisplay extends Component {
             return (renderCheckboxGroup(mappings, value, label));
         } else {
             return (
-                <span className='govuk-body full-width'><strong>{label}: </strong>{mappings.get(value) ? mappings.get(value) : value}</span>
+                <div className='govuk-body full-width'><strong>{label}: </strong>{mappings.get(value) ? mappings.get(value) : value}</div>
             );
         }
     }
