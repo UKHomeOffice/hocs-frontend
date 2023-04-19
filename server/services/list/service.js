@@ -133,6 +133,12 @@ const getInstance = (requestId, user) => {
                         } else if (error.response.status === 403) {
                             throw new ForbiddenError('You are not authorised to view this page.');
                         }
+                        logger.error('FETCH_LIST_REQUEST_FAILURE', error.response);
+                    }
+                    else if(error.request) {
+                        logger.error('FETCH_LIST_REQUEST_FAILURE', error.request);
+                    } else if(error.message) {
+                        logger.error('FETCH_LIST_REQUEST_FAILURE', error.message);
                     }
                     throw new Error('Failed to request list');
                 }
