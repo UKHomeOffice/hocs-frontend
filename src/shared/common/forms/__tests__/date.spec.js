@@ -32,14 +32,6 @@ describe('Form date component', () => {
         expect(screen.getAllByRole('textbox')[2]).toHaveValue('2018');
     });
 
-    test('should render when maxYear is passed', () => {
-        const wrapper = render(
-            <DateInput name="date-field" maxYear={maxYear} value="2018-01-19" updateState={() => null} />
-        );
-        expect(wrapper).toBeDefined();
-        expect(screen.getAllByRole('textbox')[2]).toHaveAttribute('max');
-    });
-
     test('should render with label when passed', () => {
         const wrapper = render(
             <DateInput name="date-field" maxYear={maxYear} label="My text field" updateState={() => null} />

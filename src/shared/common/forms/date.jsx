@@ -31,8 +31,6 @@ class DateInput extends Component {
             error,
             hint,
             label,
-            minYear,
-            maxYear = new Date().getFullYear() + 100,
             value,
             autopopulate
         } = this.props;
@@ -63,8 +61,6 @@ class DateInput extends Component {
                                 name={dayKey}
                                 type="text"
                                 inputMode="numeric"
-                                min="1"
-                                max="31"
                                 value={parts.day}
                                 onChange={e => {this._onChange('day', e.target.value);}}
                             />
@@ -79,8 +75,6 @@ class DateInput extends Component {
                                 name={monthKey}
                                 type="text"
                                 inputMode="numeric"
-                                min="1"
-                                max="12"
                                 value={parts.month}
                                 onChange={e => {this._onChange('month', e.target.value);}}
                             />
@@ -95,8 +89,6 @@ class DateInput extends Component {
                                 name={yearKey}
                                 type="text"
                                 inputMode="numeric"
-                                min={minYear}
-                                max={maxYear}
                                 value={parts.year}
                                 onChange={e => {this._onChange('year', e.target.value);}}
                             />
@@ -116,15 +108,12 @@ DateInput.propTypes = {
     name: PropTypes.string.isRequired,
     updateState: PropTypes.func.isRequired,
     value: PropTypes.string,
-    maxYear: PropTypes.number,
-    minYear: PropTypes.number,
     autopopulate: PropTypes.bool
 };
 
 DateInput.defaultProps = {
     disabled: false,
-    value: '',
-    minYear: 1900
+    value: ''
 };
 
 export default DateInput;
