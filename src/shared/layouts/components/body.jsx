@@ -11,7 +11,7 @@ class Body extends Component {
         return (
             <div className="govuk-width-container">
                 {phaseBanner.isVisible && <PhaseBanner {...phaseBanner} />}
-                <main className="govuk-main-wrapper " id="main-content" role="main">
+                <main className="govuk-main-wrapper" id="main-content" role="main" tabIndex="-1">
                     {children}
                 </main>
             </div>

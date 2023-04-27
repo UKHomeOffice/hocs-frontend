@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import SkipLink from './skip-link.jsx';
 
 class Header extends Component {
 
     createLogotype(service, serviceLink, bulkCreateEnabled, viewStandardLinesEnabled) {
         return (
             <div className='govuk-header__container govuk-width-container'>
-                <a href='#main-content' className='govuk-skip-link' data-module='govuk-skip-link'>Skip to main content</a>
                 <div className='govuk-header__logo'>
                     <span className='govuk-header__logotype'>
                         <Link to={serviceLink} className='govuk-header__link govuk-header__link--homepage govuk-header__logotype-text'>{service}</Link>
@@ -42,9 +42,12 @@ class Header extends Component {
     render() {
         const { service, serviceLink, bulkCreateEnabled, viewStandardLinesEnabled } = this.props;
         return (
-            <header className='govuk-header ' role='banner' data-module='header'>
-                {this.createLogotype(service, serviceLink, bulkCreateEnabled, viewStandardLinesEnabled)}
-            </header>
+            <>
+                <SkipLink/>
+                <header className='govuk-header ' role='banner' data-module='header'>
+                    {this.createLogotype(service, serviceLink, bulkCreateEnabled, viewStandardLinesEnabled)}
+                </header>
+            </>
         );
     }
 
