@@ -20,7 +20,7 @@ const getReportList = async (req, res, next) => {
         res.json(reportsForCaseType);
     } catch (error) {
         logger.error('REQUEST_REPORT_LIST', { message: error.message, stack: error.stack });
-        next(error);
+        return next(error);
     }
 };
 
@@ -59,7 +59,7 @@ const streamReport = async (req, res, next) => {
         response.data.pipe(res);
     } catch (error) {
         logger.error('REQUEST_REPORT_DATA', { message: error.message, stack: error.stack });
-        next(error);
+        return next(error);
     }
 };
 

@@ -19,7 +19,7 @@ async function getTemplate(req, res, next) {
         response.data.pipe(res);
     } catch (error) {
         logger.error('REQUEST_TEMPLATE_FAILURE', { ...req.params });
-        next(new DocumentError('Unable to retrieve template'));
+        return next(new DocumentError('Unable to retrieve template'));
     }
 }
 

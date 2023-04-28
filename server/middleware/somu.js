@@ -32,7 +32,7 @@ async function somuApiResponseMiddleware(req, res, next) {
 
         return res.status(200).json({ redirect: `/case/${caseId}/stage/${stageId}` });
     } catch (error) {
-        next(error);
+        return next(error);
     }
 }
 

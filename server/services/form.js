@@ -204,7 +204,7 @@ const hydrateFields = async (req, res, next) => {
             return next(new FormServiceError('Failed to fetch form'));
         }
     }
-    next();
+    return next();
 };
 
 const getForm = (form, options) => {
@@ -217,10 +217,10 @@ const getForm = (form, options) => {
             const formBuilder = await form({ ...options, user: req.user, listService: req.listService });
             const { schema, data, meta } = formBuilder.build();
             req.form = { schema, data, meta };
-            next();
+            return next();
         } catch (error) {
             logger.error(error);
-            next('Something went wrong');
+            return next('Something went wrong');
         }
     };
 };
@@ -234,7 +234,7 @@ async function getSomuType(req, res, next) {
     );
 
     req.somuType = somuTypeData;
-    next();
+    return next();
 }
 
 async function getSomuItemData(req, res, next) {
@@ -244,7 +244,7 @@ async function getSomuItemData(req, res, next) {
         req.somuItemData = await getSomuItem({ caseId, somuTypeUuid, somuItemUuid, user, requestId });
     }
 
-    next();
+    return next();
 }
 
 async function getList(req, res, next) {
@@ -253,7 +253,7 @@ async function getList(req, res, next) {
     const listContent = await req.listService.fetch(listName);
 
     req.listContent = listContent;
-    next();
+    return next();
 }
 
 async function getSomuItemsByType(req, res, next) {
@@ -262,7 +262,7 @@ async function getSomuItemsByType(req, res, next) {
     const somuItems = await req.listService.fetch('CASE_SOMU_ITEM', { ...req.params, somuTypeId: somuTypeUuid });
     req.somuItems = somuItems;
 
-    next();
+    return next();
 }
 
 const getFormForAction = async (req, res, next) => {
@@ -296,7 +296,7 @@ const getFormForCase = async (req, res, next) => {
     try {
         const form = await getFormSchemaForCase({ ...req.params, user: req.user, requestId: req.requestId, caseActionData });
         req.form = form;
-        next();
+        return next();
     } catch (error) {
         logger.error('CASE_FORM_FAILURE', { message: error.message, stack: error.stack });
         if (error.response !== undefined && error.response.status === 401) {
@@ -318,7 +318,7 @@ const getFormForStage = async (req, res, next) => {
             return next(error);
         } else {
             req.form = form;
-            next();
+            return next();
         }
     } catch (error) {
         logger.error('WORKFLOW_FORM_FAILURE', { message: error.message, stack: error.stack });
@@ -341,7 +341,7 @@ const getGlobalFormForCase = async (req, res, next) => {
         }
 
         req.form = form;
-        next();
+        return next();
     } catch (error) {
         logger.error('WORKFLOW_FORM_FAILURE', { message: error.message, stack: error.stack });
         return next(new FormServiceError('Failed to fetch form'));
@@ -374,7 +374,7 @@ const getFormForSomu = async (req, res, next) => {
 
         req.form = form;
 
-        next();
+        return next();
     } catch (error) {
         logger.error('CASEWORK_SOMU_FORM_FAILURE', { message: error.message, stack: error.stack });
         return next(new FormServiceError(`Failed to fetch form for somuType: ${uuid} and action: ${action}`));

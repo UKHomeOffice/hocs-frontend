@@ -83,12 +83,11 @@ async function getDocumentList(req, res, next) {
     } catch (error) {
         res.locals.documents = [];
         if (error.response !== undefined && error.response.status === 401) {
-            return { error: new AuthenticationError('You are not authorised to work on this case') };
+            return next(new AuthenticationError('You are not authorised to work on this case'));
         }
         logger.info('CASE_DOCUMENT_LIST_RETURN_EMPTY');
-    } finally {
-        next();
     }
+    return next();
 }
 
 function apiGetDocumentList(req, res) {

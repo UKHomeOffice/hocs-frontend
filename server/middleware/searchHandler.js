@@ -70,10 +70,10 @@ async function handleSearch(req, res, next) {
             columns: workstackTypeForSearch.workstackColumns
         };
 
-        next();
+        return next();
     } catch (error) {
         logger.error('SEARCH_FAILED', { message: error.message, stack: error.stack });
-        next(error);
+        return next(error);
     }
 }
 

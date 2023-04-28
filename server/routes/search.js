@@ -25,7 +25,7 @@ router.post(['/search/results', '/api/search/results'],
             { to: '/search', label: 'Search' },
             { to: '/search/results', label: 'Results' }
         ];
-        next();
+        return next();
     }
 );
 

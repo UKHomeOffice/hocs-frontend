@@ -9,7 +9,7 @@ async function getCaseNotes(req, res, next) {
         logger.error('ERROR', { message: error.message, stack: error.stack });
         return next('Failed to fetch timeline');
     }
-    next();
+    return next();
 }
 
 async function getCaseNotesApiResponse(req, res) {

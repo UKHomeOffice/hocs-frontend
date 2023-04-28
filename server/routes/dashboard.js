@@ -44,7 +44,7 @@ router.post(['/search/reference', '/api/search/reference'],
                 items: workstackData
             };
 
-            next();
+            return next();
         } catch (error) {
             logger.error('SEARCH_REFERENCE_FAILED', { message: error.message, stack: error.stack });
             return res.json({ errors: { 'case-reference': 'Failed to perform search' } });
@@ -57,7 +57,7 @@ router.post('/search/reference', async (req, res, next) => {
         const { uuid, caseUUID } = res.locals.workstack.items[0];
         return res.redirect(`/case/${caseUUID}/stage/${uuid}`);
     }
-    next();
+    return next();
 });
 
 router.post('/api/search/reference', async (req, res) => {
