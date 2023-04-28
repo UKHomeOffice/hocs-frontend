@@ -7,7 +7,7 @@ async function getOriginalDocument(req, res, next) {
     const logger = getLogger(req.requestId);
     const { caseId, documentId } = req.params;
     let options = {
-        headers: User.createHeaders(req.user),
+        headers: { ...User.createHeaders(req.user), 'X-Correlation-Id': req.requestId },
         responseType: 'stream'
     };
     logger.info('REQUEST_DOCUMENT_ORIGINAL', { ...req.params });
@@ -32,7 +32,7 @@ async function getPdfDocument(req, res, next) {
     logger.info('REQUEST_DOCUMENT_PDF', { ...req.params });
 
     let options = {
-        headers: User.createHeaders(req.user),
+        headers: { ...User.createHeaders(req.user), 'X-Correlation-Id': req.requestId },
         responseType: 'stream'
     };
 
@@ -56,7 +56,7 @@ async function getPdfDocumentPreview(req, res, next) {
     const { caseId, documentId } = req.params;
 
     let options = {
-        headers: User.createHeaders(req.user),
+        headers: { ...User.createHeaders(req.user), 'X-Correlation-Id': req.requestId } ,
         responseType: 'stream'
     };
 

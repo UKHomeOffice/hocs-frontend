@@ -5,16 +5,19 @@ const {
 } = require('./../standardLine');
 
 jest.mock('../../clients/index');
-jest.mock('../../models/user');
 const { infoService, documentService } = require('../../clients/index');
-const User = require('../../models/user');
 
 const next = jest.fn();
 let req = {};
 let res = {};
 
 const mockUser = { username: 'TEST_USER', uuid: 'TEST', roles: [], groups: [] };
-const headers = '__headers__';
+const headers = {
+    'X-Auth-Groups': '',
+    'X-Auth-Roles': '',
+    'X-Auth-UserId': 'TEST',
+    'X-Correlation-Id': '00000000-0000-0000-0000-000000000000'
+};
 
 describe('standard lines middlware', () => {
 
@@ -44,7 +47,7 @@ describe('standard lines middlware', () => {
                     })
                 },
                 user: mockUser,
-                requestId: 'reqid',
+                requestId: '00000000-0000-0000-0000-000000000000'
             };
             res = {
                 locals: {}
@@ -72,19 +75,12 @@ describe('standard lines middlware', () => {
             expect(next).toHaveBeenCalledWith('MOCK_ERROR');
         });
 
-        it('should call the user create headers method', async () => {
-            await getUsersStandardLines(req, res, next);
-            expect(User.createHeaders).toHaveBeenCalled();
-        });
-
         it('should call the get method on the info service', async () => {
-            User.createHeaders.mockImplementation(() => headers);
             await getUsersStandardLines(req, res, next);
             expect(infoService.get).toHaveBeenCalledWith(`/user/${req.user.uuid}/standardLine`, { }, { headers: headers });
         });
 
         it('should call the get method on the info service', async () => {
-            User.createHeaders.mockImplementation(() => headers);
             infoService.get.mockImplementation(() => Promise.resolve(MOCK_STANDARD_LINE));
             await getUsersStandardLines(req, res, next);
             expect(infoService.get).toHaveBeenCalledWith(`/user/${req.user.uuid}/standardLine`, { }, { headers: headers });
@@ -120,7 +116,8 @@ describe('standard lines middlware', () => {
                         return Promise.reject();
                     })
                 },
-                requestId: 'reqid',
+                user: mockUser,
+                requestId: '00000000-0000-0000-0000-000000000000',
             };
             res = {
                 locals: {}
@@ -148,19 +145,12 @@ describe('standard lines middlware', () => {
             expect(next).toHaveBeenCalledWith('MOCK_ERROR');
         });
 
-        it('should call the user create headers method', async () => {
-            await getAllStandardLines(req, res, next);
-            expect(User.createHeaders).toHaveBeenCalled();
-        });
-
         it('should call the get method on the info service', async () => {
-            User.createHeaders.mockImplementation(() => headers);
             await getAllStandardLines(req, res, next);
             expect(infoService.get).toHaveBeenCalledWith('/standardLine/all', { }, { headers: headers });
         });
 
         it('should call the get method on the info service', async () => {
-            User.createHeaders.mockImplementation(() => headers);
             infoService.get.mockImplementation(() => Promise.resolve(MOCK_STANDARD_LINE));
             await getAllStandardLines(req, res, next);
             expect(infoService.get).toHaveBeenCalledWith('/standardLine/all', { }, { headers: headers });
@@ -177,7 +167,7 @@ describe('standard lines middlware', () => {
 
         beforeEach(() => {
             next.mockReset();
-            req = { params: { documentId: '1234' }, user: mockUser };
+            req = { params: { documentId: '1234' }, user: mockUser, requestId: '00000000-0000-0000-0000-000000000000' };
             res = { setHeader: jest.fn() };
             mockResponse.status = 200;
             mockResponse.data.on = jest.fn();

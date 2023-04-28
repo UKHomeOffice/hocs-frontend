@@ -50,7 +50,7 @@ const streamReport = async (req, res, next) => {
         const response = await caseworkService.get(
             `/report/${caseType}/${reportSlug}`,
             {
-                headers: User.createHeaders(req.user),
+                headers: { ...User.createHeaders(req.user), 'X-Correlation-Id': req.requestId } ,
                 responseType: 'stream'
             }
         );

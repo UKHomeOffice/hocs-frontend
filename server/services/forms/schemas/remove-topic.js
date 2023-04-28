@@ -4,7 +4,8 @@ const { caseworkService } = require('../../../clients');
 const User = require('../../../models/user');
 
 module.exports = async options => {
-    const response = await caseworkService.get(`/case/${options.caseId}/topic/${options.context}`, { headers: User.createHeaders(options.user) });
+    const response = await caseworkService.get(`/case/${options.caseId}/topic/${options.context}`,
+        { headers: { ...User.createHeaders(options.user), 'X-Correlation-Id': options.requestId } });
     const displayName = response.data.label;
     return Form()
         .withTitle('Remove Topic')

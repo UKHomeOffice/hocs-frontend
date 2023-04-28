@@ -122,7 +122,7 @@ async function allocateToTeamMember(req, res, next) {
         const requests = selected_cases
             .map(selected => selected.split(':'))
             .map(([caseId, stageId]) => [`/case/${caseId}/stage/${stageId}/user`, { userUUID: selected_user }, {
-                headers: User.createHeaders(req.user)
+                headers: { ...User.createHeaders(req.user), 'X-Correlation-Id': req.requestId }
             }])
             .map(async options => sendAllocateUserRequest(req, res, options));
         await Promise.all(requests);
@@ -148,7 +148,7 @@ async function moveTeam(req, res, next) {
                 .map(([caseId, stageId]) => [
                     `/case/${caseId}/stage/${stageId}/CaseworkTeamUUID`,
                     { value: selected_team },
-                    { headers: User.createHeaders(req.user) }
+                    { headers: { ...User.createHeaders(req.user), 'X-Correlation-Id': req.requestId }  }
                 ])
                 .map(async options => updateCaseDataMoveTeamRequest(req, res, options));
 
@@ -157,7 +157,7 @@ async function moveTeam(req, res, next) {
                 .map(([caseId, stageId]) => [
                     `/case/${caseId}/stage/${stageId}/team`,
                     { teamUUID: selected_team },
-                    { headers: User.createHeaders(req.user) }
+                    { headers: { ...User.createHeaders(req.user), 'X-Correlation-Id': req.requestId }  }
                 ])
                 .map(async options => sendMoveTeamRequest(req, res, options));
 
@@ -177,7 +177,7 @@ async function allocateToUser(req, res, next) {
         const requests = selected_cases
             .map(selected => selected.split(':'))
             .map(([caseId, stageId]) => [`/case/${caseId}/stage/${stageId}/user`, { userUUID: req.user.uuid }, {
-                headers: User.createHeaders(req.user)
+                headers: { ...User.createHeaders(req.user), 'X-Correlation-Id': req.requestId }
             }])
             .map(async options => sendAllocateUserRequest(req, res, options));
         await Promise.all(requests);
@@ -191,7 +191,7 @@ async function allocateNextCaseToUser(req, res, next) {
         res.locals.stage = await caseworkService.put(
             `/case/team/${req.params.teamId}/allocate/user/next`,
             {},
-            { headers: User.createHeaders(req.user) }
+            { headers: { ...User.createHeaders(req.user), 'X-Correlation-Id': req.requestId } }
         );
     } catch (error) {
         logger.error('ALLOCATE_NEXT_CASE_FAILED');
@@ -218,7 +218,7 @@ async function unallocate(req, res, next) {
         const requests = selected_cases
             .map(selected => selected.split(':'))
             .map(([caseId, stageId]) => [`/case/${caseId}/stage/${stageId}/user`, { userUUID: null }, {
-                headers: User.createHeaders(req.user)
+                headers: { ...User.createHeaders(req.user), 'X-Correlation-Id': req.requestId }
             }])
             .map(async options => sendAllocateUserRequest(req, res, options));
         await Promise.all(requests);
