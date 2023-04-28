@@ -27,7 +27,7 @@ async function caseApiResponseMiddleware(req, res, next) {
             return res.status(200).json({ redirect: callbackUrl });
         }
     } catch (error) {
-        next(error);
+        return next(error);
     }
 }
 
@@ -35,9 +35,9 @@ async function caseSummaryMiddleware(req, res, next) {
     try {
         const summary = await req.listService.fetch('CASE_SUMMARY', req.params);
         res.locals.summary = summary;
-        next();
+        return next();
     } catch (error) {
-        next(error);
+        return next(error);
     }
 }
 
@@ -49,9 +49,9 @@ async function caseTabMiddleware(req, res, next) {
     try {
         const type = await req.listService.fetch('CASE_TYPE', req.params);
         res.locals.caseTabs = fetchCaseTabsForCaseType(type);
-        next();
+        return next();
     } catch (error) {
-        next(error);
+        return next(error);
     }
 }
 
@@ -62,9 +62,9 @@ async function caseTabApiResponseMiddleware(req, res) {
 async function caseDataMiddleware(req, res, next) {
     try {
         res.locals.caseData = await req.listService.fetch('CASE_DATA', req.params);
-        next();
+        return next();
     } catch (error) {
-        next(error);
+        return next(error);
     }
 }
 
@@ -85,10 +85,10 @@ async function createCaseNote(req, res, next) {
             type: 'MANUAL'
         }, { headers: { ...User.createHeaders(req.user), 'X-Correlation-Id': req.requestId } });
     } catch (error) {
-        next(new Error(`Failed to attach case note to case ${req.params.caseId}`));
+        return next(new Error(`Failed to attach case note to case ${req.params.caseId}`));
     }
 
-    next();
+    return next();
 }
 
 async function updateCaseNote({ body: { caseNote }, params: { caseId, noteId }, user, requestId }, res, next) {
@@ -117,9 +117,9 @@ function returnToCase(req, res) {
 async function caseCorrespondentsMiddleware(req, res, next) {
     try {
         res.locals.correspondents = await req.listService.fetch('CASE_CORRESPONDENTS_ALL', req.params);
-        next();
+        return next();
     } catch (error) {
-        next(error);
+        return next(error);
     }
 }
 
@@ -168,9 +168,9 @@ async function caseActionDataMiddleware(req, res, next) {
         preppedData.remainingDays = actionData.remainingDaysUntilDeadline;
 
         res.locals.caseActionData = preppedData;
-        next();
+        return next();
     } catch (error) {
-        next(error);
+        return next(error);
     }
 }
 

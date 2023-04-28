@@ -16,10 +16,10 @@ const getUsersStandardLines = async (req, res, next) => {
         const response = await infoService.get(`/user/${userUUID}/standardLine`, {},
             { headers: { ...User.createHeaders(req.user), 'X-Correlation-Id': req.requestId }  });
         res.locals.standardLines = mapStandardLines(response.data, topicList, policyTeamForTopicList);
-        next();
+        return next();
     } catch (error) {
         logger.error('REQUEST_USER_STANDARD_LINES_FAILURE', { message: error.message, stack: error.stack });
-        next(error);
+        return next(error);
     }
 };
 
@@ -35,10 +35,10 @@ const getAllStandardLines = async (req, res, next) => {
         const response = await infoService.get('/standardLine/all', {},
             { headers: { ...User.createHeaders(req.user), 'X-Correlation-Id': req.requestId }  });
         res.locals.standardLines = mapStandardLines(response.data, topicList, policyTeamForTopicList);
-        next();
+        return next();
     } catch (error) {
         logger.error('REQUEST_STANDARD_LINES_FAILURE', { message: error.message, stack: error.stack });
-        next(error);
+        return next(error);
     }
 };
 

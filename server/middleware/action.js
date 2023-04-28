@@ -12,7 +12,7 @@ async function actionResponseMiddleware(req, res, next) {
         if (callbackUrl) {
             return await res.redirect(callbackUrl);
         }
-        next();
+        return next();
     } catch (e) {
         return next(e);
     }

@@ -17,7 +17,7 @@ router.get('/workstack/user', userWorkstackMiddleware, (req, res, next) => {
         { to: '/', label: 'Dashboard' },
         { to: '/workstack/user', label: 'User' }
     ];
-    next();
+    return next();
 });
 
 router.get('/workstack/team/:teamId`', teamWorkstackMiddleware, getTeamMembers, getMoveTeamOptions, (req, res, next) => {
@@ -25,7 +25,7 @@ router.get('/workstack/team/:teamId`', teamWorkstackMiddleware, getTeamMembers, 
         { to: '/', label: 'Dashboard' },
         { to: `/workstack/team/${req.params.teamId}`, label: 'Team' }
     ];
-    next();
+    return next();
 });
 
 router.get('/workstack/team/:teamId/workflow/:workflowId', workflowWorkstackMiddleware, getTeamMembers, getMoveTeamOptions, (req, res, next) => {
@@ -34,7 +34,7 @@ router.get('/workstack/team/:teamId/workflow/:workflowId', workflowWorkstackMidd
         { to: `/workstack/team/${req.params.teamId}`, label: 'Team' },
         { to: `/workstack/team/${req.params.teamId}/workflow/${req.params.workflowId}`, label: 'Workflow' }
     ];
-    next();
+    return next();
 });
 
 router.get('/workstack/team/:teamId/workflow/:workflowId/stage/:stageId', stageWorkstackMiddleware, getTeamMembers, getMoveTeamOptions, (req, res, next) => {
@@ -44,7 +44,7 @@ router.get('/workstack/team/:teamId/workflow/:workflowId/stage/:stageId', stageW
         { to: `/workstack/team/${req.params.teamId}/workflow/${req.params.workflowId}`, label: 'Workflow' },
         { to: `/workstack/team/${req.params.teamId}/workflow/${req.params.workflowId}/stage/${req.params.stageId}`, label: 'Stage' },
     ];
-    next();
+    return next();
 });
 
 router.post('/workstack/team/:teamId/allocate/user',

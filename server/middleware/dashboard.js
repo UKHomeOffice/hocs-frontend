@@ -2,9 +2,9 @@ async function dashboardMiddleware(req, res, next) {
     try {
         const response = await req.listService.fetch('DASHBOARD', req.params);
         req.form.meta.dashboard = response;
-        next();
+        return next();
     } catch (error) {
-        next(error);
+        return next(error);
     }
 }
 
