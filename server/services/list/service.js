@@ -144,7 +144,8 @@ const getInstance = (requestId, user) => {
                     configuration = await fetchList('S_SYSTEM_CONFIGURATION');
                 }
 
-                const listData = await applyAdapter(response.data, adapter, { ...options, user, fromStaticList, fetchList, logger, configuration });
+                const listData = await applyAdapter(response.data, adapter, { ...options, user, requestId,
+                    fromStaticList, fetchList, logger, configuration });
                 if (type === listType.STATIC && listData) {
                     listCache.store(listId, listData);
                 }
