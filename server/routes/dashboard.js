@@ -31,7 +31,7 @@ router.post(['/search/reference', '/api/search/reference'],
             const reference = doubleEncodeSlashes(encodeURIComponent(caseRef));
 
             const response = await caseworkService.get(`/case/${reference}/stage`, {
-                headers: User.createHeaders(req.user)
+                headers: { ...User.createHeaders(req.user), 'X-Correlation-Id': req.requestId }
             });
 
             const fromStaticList = req.listService.getFromStaticList;

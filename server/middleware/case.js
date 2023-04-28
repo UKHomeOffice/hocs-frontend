@@ -6,9 +6,9 @@ const { logger } = require('../libs/logger');
 const { fetchCaseTabsForCaseType } = require('../config/caseTabs/caseTabs');
 
 async function caseResponseMiddleware(req, res, next) {
-    const { form, user } = req;
+    const { form, user, requestId } = req;
     try {
-        const { callbackUrl } = await actionService.performAction('CASE', { ...req.params, form, user });
+        const { callbackUrl } = await actionService.performAction('CASE', { ...req.params, form, user, requestId });
         return res.redirect(callbackUrl);
     } catch (error) {
         return next(error);
@@ -16,10 +16,10 @@ async function caseResponseMiddleware(req, res, next) {
 }
 
 async function caseApiResponseMiddleware(req, res, next) {
-    const { form, user } = req;
+    const { form, user, requestId } = req;
     const { caseActionData } = res.locals;
     try {
-        const { callbackUrl, confirmation } = await actionService.performAction('CASE', { ...req.params, form, user, caseActionData });
+        const { callbackUrl, confirmation } = await actionService.performAction('CASE', { ...req.params, form, user, caseActionData, requestId });
 
         if (confirmation) {
             return res.status(200).json({ confirmation });
@@ -83,7 +83,7 @@ async function createCaseNote(req, res, next) {
         await caseworkService.post(`/case/${req.params.caseId}/note`, {
             text: caseNote,
             type: 'MANUAL'
-        }, { headers: User.createHeaders(req.user) });
+        }, { headers: { ...User.createHeaders(req.user), 'X-Correlation-Id': req.requestId } });
     } catch (error) {
         next(new Error(`Failed to attach case note to case ${req.params.caseId}`));
     }
@@ -91,7 +91,7 @@ async function createCaseNote(req, res, next) {
     next();
 }
 
-async function updateCaseNote({ body: { caseNote }, params: { caseId, noteId }, user }, res, next) {
+async function updateCaseNote({ body: { caseNote }, params: { caseId, noteId }, user, requestId }, res, next) {
     try {
         caseNote = caseNote?.trim();
         if (!caseNote) {
@@ -102,7 +102,7 @@ async function updateCaseNote({ body: { caseNote }, params: { caseId, noteId }, 
         const updated = await caseworkService.put(`/case/${caseId}/note/${noteId}`, {
             text: caseNote,
             type: 'MANUAL'
-        }, { headers: User.createHeaders(user) });
+        }, { headers: { ...User.createHeaders(user), 'X-Correlation-Id': requestId } });
         res.locals.caseNote = updated.data;
     } catch (error) {
         return next(new Error(`Failed to update case note ${noteId} on case ${caseId}`));
@@ -183,10 +183,10 @@ async function caseDataUpdateMiddleware(req, res, next) {
         let updated;
         if (req.query.type) {
             updated = await workflowService.put(`/case/${req.params.caseId}/stage/${req.params.stageId}/data?type=${req.query.type}`, req.body,
-                { headers: User.createHeaders(req.user) });
+                { headers: { ...User.createHeaders(req.user), 'X-Correlation-Id': req.requestId } });
         } else {
             updated = await workflowService.put(`/case/${req.params.caseId}/stage/${req.params.stageId}/data`, req.body,
-                { headers: User.createHeaders(req.user) });
+                { headers: { ...User.createHeaders(req.user), 'X-Correlation-Id': req.requestId } });
         }
         res.locals.formData = updated.data;
     } catch (error) {

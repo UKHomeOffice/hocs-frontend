@@ -115,6 +115,7 @@ describe('Workstack middleware', () => {
                 'X-Auth-Groups': 'some_groups',
                 'X-Auth-Roles': 'some_roles',
                 'X-Auth-UserId': 'userUuid',
+                'X-Correlation-Id': '00000000-0000-0000-0000-000000000000'
             }
         };
 
@@ -123,7 +124,12 @@ describe('Workstack middleware', () => {
             res = {};
 
             req = {
-                user: { uuid: 'userUuid', roles: { join: () => 'some_roles' }, groups: { join: () => 'some_groups' } }
+                user: {
+                    uuid: 'userUuid',
+                    roles: { join: () => 'some_roles' },
+                    groups: { join: () => 'some_groups' }
+                },
+                requestId: '00000000-0000-0000-0000-000000000000'
             };
 
             caseworkService.put.mockClear();

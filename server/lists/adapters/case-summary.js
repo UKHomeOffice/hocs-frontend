@@ -92,8 +92,9 @@ const getPreviousCase = previousCase => {
 };
 
 module.exports = async (summary, options) => {
-    const { fromStaticList, fetchList, configuration, user } = options;
-    const { data: caseProfile } = await caseworkService.get(`/case/profile/${options.caseId}`, { headers: User.createHeaders(user) });
+    const { fromStaticList, fetchList, configuration, user, requestId } = options;
+    const { data: caseProfile } = await caseworkService.get(`/case/profile/${options.caseId}`,
+        { headers: { ...User.createHeaders(user), 'X-Correlation-Id': requestId } });
     const stageDeadlineEnabled = caseProfile && caseProfile.summaryDeadlineEnabled;
     const deadlinesEnabled = configuration.deadlinesEnabled;
     return {

@@ -13,7 +13,8 @@ const getUsersStandardLines = async (req, res, next) => {
         const topicList = await req.listService.fetch('TOPICS', req.params);
         const policyTeamForTopicList = await req.listService.fetch('DCU_POLICY_TEAM_FOR_TOPIC', req.params);
 
-        const response = await infoService.get(`/user/${userUUID}/standardLine`, {}, { headers: User.createHeaders(req.user) });
+        const response = await infoService.get(`/user/${userUUID}/standardLine`, {},
+            { headers: { ...User.createHeaders(req.user), 'X-Correlation-Id': req.requestId }  });
         res.locals.standardLines = mapStandardLines(response.data, topicList, policyTeamForTopicList);
         next();
     } catch (error) {
@@ -31,7 +32,8 @@ const getAllStandardLines = async (req, res, next) => {
         const topicList = await req.listService.fetch('TOPICS', req.params);
         const policyTeamForTopicList = await req.listService.fetch('DCU_POLICY_TEAM_FOR_TOPIC', req.params);
 
-        const response = await infoService.get('/standardLine/all', {}, { headers: User.createHeaders(req.user) });
+        const response = await infoService.get('/standardLine/all', {},
+            { headers: { ...User.createHeaders(req.user), 'X-Correlation-Id': req.requestId }  });
         res.locals.standardLines = mapStandardLines(response.data, topicList, policyTeamForTopicList);
         next();
     } catch (error) {
@@ -54,7 +56,7 @@ const getOriginalDocument = async (req, res, next) => {
     const logger = getLogger(req.requestId);
     const { documentId } = req.params;
     let options = {
-        headers: User.createHeaders(req.user),
+        headers: { ...User.createHeaders(req.user), 'X-Correlation-Id': req.requestId } ,
         responseType: 'stream'
     };
     logger.info('REQUEST_DOCUMENT_ORIGINAL', { ...req.params });

@@ -79,11 +79,11 @@ function handleWorkflowSuccess(response, { caseId }) {
 }
 
 const actions = {
-    ACTION: async ({ workflow, context, form, user }) => {
+    ACTION: async ({ workflow, context, form, user, requestId }) => {
         let headers = {
-            headers: User.createHeaders(user)
+            headers: { ...User.createHeaders(user), 'X-Correlation-Id': requestId }
         };
-        const logger = getLogger();
+        const logger = getLogger(requestId);
         try {
             if (form && form.action) {
                 logger.info('ACTION', { action: form.action });
@@ -161,12 +161,12 @@ const actions = {
     },
     CASE: async (options) => {
 
-        const { caseId, stageId, context, form, user } = options;
+        const { caseId, stageId, context, form, user, requestId } = options;
 
         let headers = {
-            headers: User.createHeaders(user)
+            headers: { ...User.createHeaders(user), 'X-Correlation-Id': requestId }
         };
-        const logger = getLogger();
+        const logger = getLogger(requestId);
 
         try {
 
@@ -461,11 +461,11 @@ const actions = {
             throw new ActionError('Failed to perform action', status);
         }
     },
-    WORKFLOW: async ({ caseId, stageId, form, user }) => {
+    WORKFLOW: async ({ caseId, stageId, form, user, requestId }) => {
         let headers = {
-            headers: User.createHeaders(user)
+            headers: { ...User.createHeaders(user), 'X-Correlation-Id': requestId }
         };
-        const logger = getLogger();
+        const logger = getLogger(requestId);
         logger.info('WORKFLOW_ACTION', { action: actionTypes.UPDATE_CASE, case: caseId });
         try {
             const response = await updateCase({ caseId, stageId, form }, headers);

@@ -24,7 +24,8 @@ describe('Document middleware', () => {
 
         beforeEach(() => {
             next.mockReset();
-            req = { params: { documentId: '1234', caseId: '5522' }, user: mockUser };
+            req = { params: { documentId: '1234', caseId: '5522' }, user: mockUser,
+                requestId: '00000000-0000-0000-0000-000000000000' };
             res = { setHeader: jest.fn() };
             mockResponse.status = 200;
             mockResponse.data.on = jest.fn();
@@ -32,8 +33,12 @@ describe('Document middleware', () => {
 
         });
 
-        const expecteOptions = {
-            headers: { 'X-Auth-Groups': '', 'X-Auth-Roles': '', 'X-Auth-UserId': 'TEST' },
+        const expectedOptions = {
+            headers: { 'X-Auth-Groups': '',
+                'X-Auth-Roles': '',
+                'X-Auth-UserId': 'TEST',
+                'X-Correlation-Id': '00000000-0000-0000-0000-000000000000'
+            },
             responseType: 'stream'
         };
 
@@ -41,7 +46,7 @@ describe('Document middleware', () => {
             caseworkService.get.mockImplementation(() => Promise.resolve(mockResponse));
             await getOriginalDocument(req, res, next);
             expect(caseworkService.get).toHaveBeenCalled();
-            expect(caseworkService.get).toHaveBeenCalledWith('/case/5522/document/1234/file', expecteOptions);
+            expect(caseworkService.get).toHaveBeenCalledWith('/case/5522/document/1234/file', expectedOptions);
             expect(res.setHeader).toHaveBeenCalled();
             expect(res.setHeader).toHaveBeenCalledWith('Cache-Control', 'max-age=86400');
             expect(mockResponse.data.pipe).toHaveBeenCalled();
@@ -68,7 +73,8 @@ describe('Document middleware', () => {
 
         beforeEach(() => {
             next.mockReset();
-            req = { params: { documentId: '1234', caseId: '5522' }, user: mockUser };
+            req = { params: { documentId: '1234', caseId: '5522' }, user: mockUser,
+                requestId: '00000000-0000-0000-0000-000000000000' };
             res = { setHeader: jest.fn() };
             mockResponse.status = 200;
             mockResponse.data.on = jest.fn();
@@ -76,8 +82,13 @@ describe('Document middleware', () => {
 
         });
 
-        const expecteOptions = {
-            headers: { 'X-Auth-Groups': '', 'X-Auth-Roles': '', 'X-Auth-UserId': 'TEST' },
+        const expectedOptions = {
+            headers: {
+                'X-Auth-Groups': '',
+                'X-Auth-Roles': '',
+                'X-Auth-UserId': 'TEST',
+                'X-Correlation-Id': '00000000-0000-0000-0000-000000000000'
+            },
             responseType: 'stream'
         };
 
@@ -85,7 +96,7 @@ describe('Document middleware', () => {
             caseworkService.get.mockImplementation(() => Promise.resolve(mockResponse));
             await getPdfDocument(req, res, next);
             expect(caseworkService.get).toHaveBeenCalled();
-            expect(caseworkService.get).toHaveBeenCalledWith('/case/5522/document/1234/pdf', expecteOptions);
+            expect(caseworkService.get).toHaveBeenCalledWith('/case/5522/document/1234/pdf', expectedOptions);
             expect(res.setHeader).toHaveBeenCalled();
             expect(res.setHeader).toHaveBeenCalledWith('Cache-Control', 'max-age=86400');
             expect(mockResponse.data.pipe).toHaveBeenCalled();

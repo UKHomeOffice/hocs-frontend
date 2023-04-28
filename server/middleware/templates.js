@@ -6,9 +6,8 @@ const User = require('../models/user');
 async function getTemplate(req, res, next) {
     const logger = getLogger(req.requestId);
     const { caseId, templateId } = req.params;
-    const { user } = req;
     let options = {
-        headers: User.createHeaders(user),
+        headers: { ...User.createHeaders(req.user), 'X-Correlation-Id': req.requestId } ,
         responseType: 'stream'
     };
     logger.info('REQUEST_TEMPLATE', { ...req.params });

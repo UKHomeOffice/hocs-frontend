@@ -122,7 +122,8 @@ const getInstance = (requestId, user) => {
                 logger.info('FETCH_LIST', { list: listId, client, endpoint: configuredEndpoint });
                 let response;
                 try {
-                    response = await clientInstance.get(configuredEndpoint, { headers: { ...User.createHeaders(user), 'X-Correlation-Id': requestId } });
+                    response = await clientInstance.get(configuredEndpoint,
+                        { headers: { ...User.createHeaders(user), 'X-Correlation-Id': requestId } });
                 } catch (error) {
                     logger.error('FETCH_LIST_REQUEST_FAILURE', { list: listId, message: error.message, stack: error.stack });
                     if (error.response) {

@@ -5,10 +5,10 @@ const User = require('../../../models/user');
 const { fetchSearchFieldsForCaseTypes } = require('../../../config/searchFields/searchFields');
 
 const search = async (options = {}) => {
-    const { submissionUrl, user } = options;
+    const { submissionUrl, user, requestId } = options;
 
     let headers = {
-        headers: User.createHeaders(user)
+        headers: { ...User.createHeaders(user), 'X-Correlation-Id': requestId }
     };
 
     const { data: caseTypes } = await infoService.get('/profileNames?initialCaseType=false', headers);
