@@ -6,7 +6,8 @@ async function stageResponseMiddleware(req, res, next) {
     const { caseId, stageId } = req.params;
     const { form, user, requestId } = req;
     try {
-        const response = await actionService.performAction('WORKFLOW', { caseId, stageId, form, user, requestId }, { headers: User.createHeaders(user) });
+        const response = await actionService.performAction('WORKFLOW', { caseId, stageId, form, user, requestId },
+            { headers: { ...User.createHeaders(user), 'X-Correlation-Id': requestId } });
         const { callbackUrl } = response;
         return res.redirect(callbackUrl);
     } catch (error) {
@@ -18,7 +19,8 @@ async function stageApiResponseMiddleware(req, res, next) {
     const { caseId, stageId } = req.params;
     const { form, user, requestId } = req;
     try {
-        const response = await actionService.performAction('WORKFLOW', { caseId, stageId, form, user, requestId }, { headers: User.createHeaders(user) });
+        const response = await actionService.performAction('WORKFLOW', { caseId, stageId, form, user, requestId },
+            { headers: { ...User.createHeaders(user), 'X-Correlation-Id': requestId } });
         const { callbackUrl } = response;
         return res.status(200).json({ redirect: callbackUrl });
     } catch (error) {

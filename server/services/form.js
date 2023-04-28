@@ -15,7 +15,7 @@ async function returnUnallocatedCaseViewForm(requestId, user, caseId) {
 
 async function getFormSchemaFromWorkflowService(requestId, options, user) {
     const { caseId, stageId } = options;
-    const headers = User.createHeaders(user);
+    const headers = { ...User.createHeaders(user), 'X-Correlation-Id': requestId };
     let response;
     try {
         response = await workflowService.get(`/case/${caseId}/stage/${stageId}`, { headers });
@@ -84,9 +84,9 @@ async function getFormSchemaFromWorkflowService(requestId, options, user) {
     return { form: { schema, data, meta: { caseReference, stageUUID, allocationNote: mockAllocationNote, activeForm: true } } };
 }
 
-async function getGlobalFormSchemaFromWorkflowService(options, user) {
+async function getGlobalFormSchemaFromWorkflowService(options, user, requestId) {
     const { caseId, formId } = options;
-    const headers = User.createHeaders(user);
+    const headers = { ...User.createHeaders(user), 'X-Correlation-Id': requestId };
 
     let response;
     try {
@@ -333,9 +333,8 @@ const getGlobalFormForCase = async (req, res, next) => {
     const logger = getLogger(req.requestId);
     logger.info('GET_GLOBAL_FORM', { ...req.params });
 
-    const { user } = req;
     try {
-        const { form, error } = await getGlobalFormSchemaFromWorkflowService(req.params, user);
+        const { form, error } = await getGlobalFormSchemaFromWorkflowService(req.params, req.user, req.requestId );
         if (error) {
             return next(error);
         }
@@ -363,7 +362,8 @@ const getFormForSomu = async (req, res, next) => {
             return next(new FormServiceError(`Schema does not contain form definition for Somu Type: ${uuid}`));
         }
 
-        const { form, error } = await getGlobalFormSchemaFromWorkflowService({ caseId: caseId, formId: formName }, user);
+        const { form, error } = await getGlobalFormSchemaFromWorkflowService(
+            { caseId: caseId, formId: formName }, user, requestId);
         if (error) {
             return next(error);
         }
