@@ -268,7 +268,7 @@ async function getSomuItemsByType(req, res, next) {
 const getFormForAction = async (req, res, next) => {
 
     const logger = getLogger(req.requestId);
-    logger.info('GET_FORM', { ...req.params });
+    logger.info('GET_ACTION_FORM', { ...req.params });
 
     try {
         const { workflow, context, action } = req.params;
@@ -287,7 +287,7 @@ const getFormForAction = async (req, res, next) => {
 
 const getFormForCase = async (req, res, next) => {
     const logger = getLogger(req.requestId);
-    logger.info('GET_FORM', { ...req.params });
+    logger.info('GET_CASE_FORM', { ...req.params });
     let caseActionData;
     if (res.locals && res.locals.caseActionData) {
         caseActionData = res.locals.caseActionData;
@@ -309,7 +309,7 @@ const getFormForCase = async (req, res, next) => {
 const getFormForStage = async (req, res, next) => {
 
     const logger = getLogger(req.requestId);
-    logger.info('GET_FORM', { ...req.params });
+    logger.info('GET_STAGE_FORM', { ...req.params });
 
     const { user } = req;
     try {
@@ -331,7 +331,7 @@ const getFormForStage = async (req, res, next) => {
 
 const getGlobalFormForCase = async (req, res, next) => {
     const logger = getLogger(req.requestId);
-    logger.info('GET_FORM', { ...req.params });
+    logger.info('GET_GLOBAL_FORM', { ...req.params });
 
     const { user } = req;
     try {
