@@ -9,9 +9,10 @@ Object {
         class="govuk-width-container"
       >
         <main
-          class="govuk-main-wrapper "
+          class="govuk-main-wrapper"
           id="main-content"
           role="main"
+          tabindex="-1"
         />
       </div>
     </div>
@@ -21,9 +22,10 @@ Object {
       class="govuk-width-container"
     >
       <main
-        class="govuk-main-wrapper "
+        class="govuk-main-wrapper"
         id="main-content"
         role="main"
+        tabindex="-1"
       />
     </div>
   </div>,
@@ -112,9 +114,10 @@ Object {
           </p>
         </div>
         <main
-          class="govuk-main-wrapper "
+          class="govuk-main-wrapper"
           id="main-content"
           role="main"
+          tabindex="-1"
         />
       </div>
     </div>
@@ -146,9 +149,10 @@ Object {
         </p>
       </div>
       <main
-        class="govuk-main-wrapper "
+        class="govuk-main-wrapper"
         id="main-content"
         role="main"
+        tabindex="-1"
       />
     </div>
   </div>,

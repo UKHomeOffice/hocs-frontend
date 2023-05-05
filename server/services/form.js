@@ -15,7 +15,7 @@ async function returnUnallocatedCaseViewForm(requestId, user, caseId) {
 
 async function getFormSchemaFromWorkflowService(requestId, options, user) {
     const { caseId, stageId } = options;
-    const headers = User.createHeaders(user);
+    const headers = { ...User.createHeaders(user), 'X-Correlation-Id': requestId };
     let response;
     try {
         response = await workflowService.get(`/case/${caseId}/stage/${stageId}`, { headers });
@@ -84,9 +84,9 @@ async function getFormSchemaFromWorkflowService(requestId, options, user) {
     return { form: { schema, data, meta: { caseReference, stageUUID, allocationNote: mockAllocationNote, activeForm: true } } };
 }
 
-async function getGlobalFormSchemaFromWorkflowService(options, user) {
+async function getGlobalFormSchemaFromWorkflowService(options, user, requestId) {
     const { caseId, formId } = options;
-    const headers = User.createHeaders(user);
+    const headers = { ...User.createHeaders(user), 'X-Correlation-Id': requestId };
 
     let response;
     try {
@@ -204,7 +204,7 @@ const hydrateFields = async (req, res, next) => {
             return next(new FormServiceError('Failed to fetch form'));
         }
     }
-    next();
+    return next();
 };
 
 const getForm = (form, options) => {
@@ -214,13 +214,13 @@ const getForm = (form, options) => {
 
         logger.info('GET_FORM');
         try {
-            const formBuilder = await form({ ...options, user: req.user, listService: req.listService });
+            const formBuilder = await form({ ...options, user: req.user, requestId: req.requestId, listService: req.listService });
             const { schema, data, meta } = formBuilder.build();
             req.form = { schema, data, meta };
-            next();
+            return next();
         } catch (error) {
             logger.error(error);
-            next('Something went wrong');
+            return next('Something went wrong');
         }
     };
 };
@@ -234,7 +234,7 @@ async function getSomuType(req, res, next) {
     );
 
     req.somuType = somuTypeData;
-    next();
+    return next();
 }
 
 async function getSomuItemData(req, res, next) {
@@ -244,7 +244,7 @@ async function getSomuItemData(req, res, next) {
         req.somuItemData = await getSomuItem({ caseId, somuTypeUuid, somuItemUuid, user, requestId });
     }
 
-    next();
+    return next();
 }
 
 async function getList(req, res, next) {
@@ -253,7 +253,7 @@ async function getList(req, res, next) {
     const listContent = await req.listService.fetch(listName);
 
     req.listContent = listContent;
-    next();
+    return next();
 }
 
 async function getSomuItemsByType(req, res, next) {
@@ -262,13 +262,13 @@ async function getSomuItemsByType(req, res, next) {
     const somuItems = await req.listService.fetch('CASE_SOMU_ITEM', { ...req.params, somuTypeId: somuTypeUuid });
     req.somuItems = somuItems;
 
-    next();
+    return next();
 }
 
 const getFormForAction = async (req, res, next) => {
 
     const logger = getLogger(req.requestId);
-    logger.info('GET_FORM', { ...req.params });
+    logger.info('GET_ACTION_FORM', { ...req.params });
 
     try {
         const { workflow, context, action } = req.params;
@@ -287,7 +287,7 @@ const getFormForAction = async (req, res, next) => {
 
 const getFormForCase = async (req, res, next) => {
     const logger = getLogger(req.requestId);
-    logger.info('GET_FORM', { ...req.params });
+    logger.info('GET_CASE_FORM', { ...req.params });
     let caseActionData;
     if (res.locals && res.locals.caseActionData) {
         caseActionData = res.locals.caseActionData;
@@ -296,7 +296,7 @@ const getFormForCase = async (req, res, next) => {
     try {
         const form = await getFormSchemaForCase({ ...req.params, user: req.user, requestId: req.requestId, caseActionData });
         req.form = form;
-        next();
+        return next();
     } catch (error) {
         logger.error('CASE_FORM_FAILURE', { message: error.message, stack: error.stack });
         if (error.response !== undefined && error.response.status === 401) {
@@ -309,7 +309,7 @@ const getFormForCase = async (req, res, next) => {
 const getFormForStage = async (req, res, next) => {
 
     const logger = getLogger(req.requestId);
-    logger.info('GET_FORM', { ...req.params });
+    logger.info('GET_STAGE_FORM', { ...req.params });
 
     const { user } = req;
     try {
@@ -318,7 +318,7 @@ const getFormForStage = async (req, res, next) => {
             return next(error);
         } else {
             req.form = form;
-            next();
+            return next();
         }
     } catch (error) {
         logger.error('WORKFLOW_FORM_FAILURE', { message: error.message, stack: error.stack });
@@ -331,17 +331,16 @@ const getFormForStage = async (req, res, next) => {
 
 const getGlobalFormForCase = async (req, res, next) => {
     const logger = getLogger(req.requestId);
-    logger.info('GET_FORM', { ...req.params });
+    logger.info('GET_GLOBAL_FORM', { ...req.params });
 
-    const { user } = req;
     try {
-        const { form, error } = await getGlobalFormSchemaFromWorkflowService(req.params, user);
+        const { form, error } = await getGlobalFormSchemaFromWorkflowService(req.params, req.user, req.requestId );
         if (error) {
             return next(error);
         }
 
         req.form = form;
-        next();
+        return next();
     } catch (error) {
         logger.error('WORKFLOW_FORM_FAILURE', { message: error.message, stack: error.stack });
         return next(new FormServiceError('Failed to fetch form'));
@@ -363,7 +362,8 @@ const getFormForSomu = async (req, res, next) => {
             return next(new FormServiceError(`Schema does not contain form definition for Somu Type: ${uuid}`));
         }
 
-        const { form, error } = await getGlobalFormSchemaFromWorkflowService({ caseId: caseId, formId: formName }, user);
+        const { form, error } = await getGlobalFormSchemaFromWorkflowService(
+            { caseId: caseId, formId: formName }, user, requestId);
         if (error) {
             return next(error);
         }
@@ -374,7 +374,7 @@ const getFormForSomu = async (req, res, next) => {
 
         req.form = form;
 
-        next();
+        return next();
     } catch (error) {
         logger.error('CASEWORK_SOMU_FORM_FAILURE', { message: error.message, stack: error.stack });
         return next(new FormServiceError(`Failed to fetch form for somuType: ${uuid} and action: ${action}`));

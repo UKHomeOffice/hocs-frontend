@@ -6,9 +6,9 @@ const { logger } = require('../libs/logger');
 const { fetchCaseTabsForCaseType } = require('../config/caseTabs/caseTabs');
 
 async function caseResponseMiddleware(req, res, next) {
-    const { form, user } = req;
+    const { form, user, requestId } = req;
     try {
-        const { callbackUrl } = await actionService.performAction('CASE', { ...req.params, form, user });
+        const { callbackUrl } = await actionService.performAction('CASE', { ...req.params, form, user, requestId });
         return res.redirect(callbackUrl);
     } catch (error) {
         return next(error);
@@ -16,10 +16,10 @@ async function caseResponseMiddleware(req, res, next) {
 }
 
 async function caseApiResponseMiddleware(req, res, next) {
-    const { form, user } = req;
+    const { form, user, requestId } = req;
     const { caseActionData } = res.locals;
     try {
-        const { callbackUrl, confirmation } = await actionService.performAction('CASE', { ...req.params, form, user, caseActionData });
+        const { callbackUrl, confirmation } = await actionService.performAction('CASE', { ...req.params, form, user, caseActionData, requestId });
 
         if (confirmation) {
             return res.status(200).json({ confirmation });
@@ -27,7 +27,7 @@ async function caseApiResponseMiddleware(req, res, next) {
             return res.status(200).json({ redirect: callbackUrl });
         }
     } catch (error) {
-        next(error);
+        return next(error);
     }
 }
 
@@ -35,9 +35,9 @@ async function caseSummaryMiddleware(req, res, next) {
     try {
         const summary = await req.listService.fetch('CASE_SUMMARY', req.params);
         res.locals.summary = summary;
-        next();
+        return next();
     } catch (error) {
-        next(error);
+        return next(error);
     }
 }
 
@@ -49,9 +49,9 @@ async function caseTabMiddleware(req, res, next) {
     try {
         const type = await req.listService.fetch('CASE_TYPE', req.params);
         res.locals.caseTabs = fetchCaseTabsForCaseType(type);
-        next();
+        return next();
     } catch (error) {
-        next(error);
+        return next(error);
     }
 }
 
@@ -62,9 +62,9 @@ async function caseTabApiResponseMiddleware(req, res) {
 async function caseDataMiddleware(req, res, next) {
     try {
         res.locals.caseData = await req.listService.fetch('CASE_DATA', req.params);
-        next();
+        return next();
     } catch (error) {
-        next(error);
+        return next(error);
     }
 }
 
@@ -83,15 +83,15 @@ async function createCaseNote(req, res, next) {
         await caseworkService.post(`/case/${req.params.caseId}/note`, {
             text: caseNote,
             type: 'MANUAL'
-        }, { headers: User.createHeaders(req.user) });
+        }, { headers: { ...User.createHeaders(req.user), 'X-Correlation-Id': req.requestId } });
     } catch (error) {
-        next(new Error(`Failed to attach case note to case ${req.params.caseId}`));
+        return next(new Error(`Failed to attach case note to case ${req.params.caseId}`));
     }
 
-    next();
+    return next();
 }
 
-async function updateCaseNote({ body: { caseNote }, params: { caseId, noteId }, user }, res, next) {
+async function updateCaseNote({ body: { caseNote }, params: { caseId, noteId }, user, requestId }, res, next) {
     try {
         caseNote = caseNote?.trim();
         if (!caseNote) {
@@ -102,7 +102,7 @@ async function updateCaseNote({ body: { caseNote }, params: { caseId, noteId }, 
         const updated = await caseworkService.put(`/case/${caseId}/note/${noteId}`, {
             text: caseNote,
             type: 'MANUAL'
-        }, { headers: User.createHeaders(user) });
+        }, { headers: { ...User.createHeaders(user), 'X-Correlation-Id': requestId } });
         res.locals.caseNote = updated.data;
     } catch (error) {
         return next(new Error(`Failed to update case note ${noteId} on case ${caseId}`));
@@ -117,9 +117,9 @@ function returnToCase(req, res) {
 async function caseCorrespondentsMiddleware(req, res, next) {
     try {
         res.locals.correspondents = await req.listService.fetch('CASE_CORRESPONDENTS_ALL', req.params);
-        next();
+        return next();
     } catch (error) {
-        next(error);
+        return next(error);
     }
 }
 
@@ -168,9 +168,9 @@ async function caseActionDataMiddleware(req, res, next) {
         preppedData.remainingDays = actionData.remainingDaysUntilDeadline;
 
         res.locals.caseActionData = preppedData;
-        next();
+        return next();
     } catch (error) {
-        next(error);
+        return next(error);
     }
 }
 
@@ -183,10 +183,10 @@ async function caseDataUpdateMiddleware(req, res, next) {
         let updated;
         if (req.query.type) {
             updated = await workflowService.put(`/case/${req.params.caseId}/stage/${req.params.stageId}/data?type=${req.query.type}`, req.body,
-                { headers: User.createHeaders(req.user) });
+                { headers: { ...User.createHeaders(req.user), 'X-Correlation-Id': req.requestId } });
         } else {
             updated = await workflowService.put(`/case/${req.params.caseId}/stage/${req.params.stageId}/data`, req.body,
-                { headers: User.createHeaders(req.user) });
+                { headers: { ...User.createHeaders(req.user), 'X-Correlation-Id': req.requestId } });
         }
         res.locals.formData = updated.data;
     } catch (error) {

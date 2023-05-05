@@ -38,7 +38,7 @@ describe('handleSearch', () => {
                     'MinSignOffTeam': 'Test Min Sign Off Team'
                 }
             },
-            requestId: 'reqid',
+            requestId: '00000000-0000-0000-0000-000000000000',
             user: mockUser,
             listService: {
                 getFromStaticList: jest.fn(async (listId, key) => {
@@ -111,8 +111,13 @@ describe('handleSearch', () => {
             activeOnly: true
         };
 
-        const expecteHeaders = {
-            headers: { 'X-Auth-Groups': '', 'X-Auth-Roles': '', 'X-Auth-UserId': 'TEST' }
+        const expectedHeaders = {
+            headers: {
+                'X-Auth-Groups': '',
+                'X-Auth-Roles': '',
+                'X-Auth-UserId': 'TEST',
+                'X-Correlation-Id': '00000000-0000-0000-0000-000000000000'
+            }
         };
 
         expect(res.locals.workstack).toBeDefined();
@@ -129,6 +134,6 @@ describe('handleSearch', () => {
 
         expect(next).toHaveBeenCalled();
         expect(caseworkService.post).toHaveBeenCalled();
-        expect(caseworkService.post).toHaveBeenCalledWith('/search', expectedRequest, expecteHeaders);
+        expect(caseworkService.post).toHaveBeenCalledWith('/search', expectedRequest, expectedHeaders);
     });
 });

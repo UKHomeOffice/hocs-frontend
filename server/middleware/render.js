@@ -54,7 +54,7 @@ async function renderMiddleware(req, res, next) {
             markup
         });
     }
-    next();
+    return next();
 }
 
 function renderResponseMiddleware(req, res) {

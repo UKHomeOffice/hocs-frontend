@@ -6,6 +6,8 @@ async function getSomuItem({ caseId, somuTypeUuid, somuItemUuid, user, requestId
     const response = await caseworkService.get(`/case/${caseId}/item/${somuTypeUuid}/${somuItemUuid}`,
         { headers: { ...User.createHeaders(user), 'X-Correlation-Id': requestId } });
 
+    getLogger(requestId).info('SOMU_ITEM_FETCHED', { somuItemUuid } );
+
     const { data } = response.data;
     try {
         return JSON.parse(data);
@@ -16,11 +18,11 @@ async function getSomuItem({ caseId, somuTypeUuid, somuItemUuid, user, requestId
     }}
 
 async function somuApiResponseMiddleware(req, res, next) {
-    const { form, user, params: { caseId, stageId, somuItemUuid, somuTypeUuid } = {} } = req;
+    const { form, params: { caseId, stageId, somuItemUuid, somuTypeUuid } = {} } = req;
 
     try {
         let headers = {
-            headers: User.createHeaders(user)
+            headers: { ...User.createHeaders(req.user), 'X-Correlation-Id': req.requestId }
         };
 
         await caseworkService.post(`/case/${caseId}/item/${somuTypeUuid}`, {
@@ -30,7 +32,7 @@ async function somuApiResponseMiddleware(req, res, next) {
 
         return res.status(200).json({ redirect: `/case/${caseId}/stage/${stageId}` });
     } catch (error) {
-        next(error);
+        return next(error);
     }
 }
 

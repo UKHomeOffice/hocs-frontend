@@ -11,7 +11,8 @@ router.get('/api/form/search', (req, res) => res.json(req.form));
 
 router.post(['/search/results', '/api/search/results'],
     async (req, res, next) => {
-        const formBuilder = await form({ submissionUrl: '/search/results', user: req.user, listService: req.listService });
+        const formBuilder = await form({ submissionUrl: '/search/results', user: req.user,
+            requestId: req.requestId, listService: req.listService });
         processRequestBody(formBuilder.getFields())(req, res, next);
     },
     getForm(form, { submissionUrl: '/search/results' }),
@@ -25,7 +26,7 @@ router.post(['/search/results', '/api/search/results'],
             { to: '/search', label: 'Search' },
             { to: '/search/results', label: 'Results' }
         ];
-        next();
+        return next();
     }
 );
 

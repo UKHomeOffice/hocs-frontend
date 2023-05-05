@@ -13,12 +13,13 @@ const getUsersStandardLines = async (req, res, next) => {
         const topicList = await req.listService.fetch('TOPICS', req.params);
         const policyTeamForTopicList = await req.listService.fetch('DCU_POLICY_TEAM_FOR_TOPIC', req.params);
 
-        const response = await infoService.get(`/user/${userUUID}/standardLine`, {}, { headers: User.createHeaders(req.user) });
+        const response = await infoService.get(`/user/${userUUID}/standardLine`, {},
+            { headers: { ...User.createHeaders(req.user), 'X-Correlation-Id': req.requestId }  });
         res.locals.standardLines = mapStandardLines(response.data, topicList, policyTeamForTopicList);
-        next();
+        return next();
     } catch (error) {
         logger.error('REQUEST_USER_STANDARD_LINES_FAILURE', { message: error.message, stack: error.stack });
-        next(error);
+        return next(error);
     }
 };
 
@@ -31,12 +32,13 @@ const getAllStandardLines = async (req, res, next) => {
         const topicList = await req.listService.fetch('TOPICS', req.params);
         const policyTeamForTopicList = await req.listService.fetch('DCU_POLICY_TEAM_FOR_TOPIC', req.params);
 
-        const response = await infoService.get('/standardLine/all', {}, { headers: User.createHeaders(req.user) });
+        const response = await infoService.get('/standardLine/all', {},
+            { headers: { ...User.createHeaders(req.user), 'X-Correlation-Id': req.requestId }  });
         res.locals.standardLines = mapStandardLines(response.data, topicList, policyTeamForTopicList);
-        next();
+        return next();
     } catch (error) {
         logger.error('REQUEST_STANDARD_LINES_FAILURE', { message: error.message, stack: error.stack });
-        next(error);
+        return next(error);
     }
 };
 
@@ -54,7 +56,7 @@ const getOriginalDocument = async (req, res, next) => {
     const logger = getLogger(req.requestId);
     const { documentId } = req.params;
     let options = {
-        headers: User.createHeaders(req.user),
+        headers: { ...User.createHeaders(req.user), 'X-Correlation-Id': req.requestId } ,
         responseType: 'stream'
     };
     logger.info('REQUEST_DOCUMENT_ORIGINAL', { ...req.params });

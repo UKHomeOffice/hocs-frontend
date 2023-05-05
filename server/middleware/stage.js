@@ -4,9 +4,10 @@ const { caseworkService, workflowService } = require('../clients');
 
 async function stageResponseMiddleware(req, res, next) {
     const { caseId, stageId } = req.params;
-    const { form, user } = req;
+    const { form, user, requestId } = req;
     try {
-        const response = await actionService.performAction('WORKFLOW', { caseId, stageId, form, user }, { headers: User.createHeaders(user) });
+        const response = await actionService.performAction('WORKFLOW', { caseId, stageId, form, user, requestId },
+            { headers: { ...User.createHeaders(user), 'X-Correlation-Id': requestId } });
         const { callbackUrl } = response;
         return res.redirect(callbackUrl);
     } catch (error) {
@@ -16,9 +17,10 @@ async function stageResponseMiddleware(req, res, next) {
 
 async function stageApiResponseMiddleware(req, res, next) {
     const { caseId, stageId } = req.params;
-    const { form, user } = req;
+    const { form, user, requestId } = req;
     try {
-        const response = await actionService.performAction('WORKFLOW', { caseId, stageId, form, user }, { headers: User.createHeaders(user) });
+        const response = await actionService.performAction('WORKFLOW', { caseId, stageId, form, user, requestId },
+            { headers: { ...User.createHeaders(user), 'X-Correlation-Id': requestId } });
         const { callbackUrl } = response;
         return res.status(200).json({ redirect: callbackUrl });
     } catch (error) {
@@ -32,7 +34,7 @@ async function allocateCase(req, res, next) {
     try {
         await caseworkService.put(`/case/${caseId}/stage/${stageId}/user`, {
             userUUID: user.uuid,
-        }, { headers: User.createHeaders(user) });
+        }, { headers: { ...User.createHeaders(user), 'X-Correlation-Id': req.requestId }  });
     } catch (error) {
         return next(error);
     }
@@ -44,7 +46,7 @@ async function allocateCaseToTeamMember(req, res, next) {
     try {
         await caseworkService.put(`/case/${caseId}/stage/${stageId}/user`, {
             userUUID: req.body['user-id'],
-        }, { headers: User.createHeaders(req.user) });
+        }, { headers: { ...User.createHeaders(req.user), 'X-Correlation-Id': req.requestId }  });
     } catch (error) {
         return next(error);
     }
@@ -57,7 +59,7 @@ async function moveByDirection(req, res, next) {
     try {
         await workflowService.post(`/case/${caseId}/stage/${stageId}/direction/${flowDirection}`, {
             userUUID: user.uuid,
-        }, { headers: User.createHeaders(user) });
+        }, { headers: { ...User.createHeaders(req.user), 'X-Correlation-Id': req.requestId } });
     } catch (error) {
         return next(error);
     }

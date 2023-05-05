@@ -45,7 +45,7 @@ function errorMiddleware(err, req, res, next) {
             title: err.title
         };
     }
-    next();
+    return next();
 }
 
 function initRequest(req, res, next) {
@@ -54,7 +54,7 @@ function initRequest(req, res, next) {
     req.requestId = requestId;
     req.listService = listService.getInstance(requestId, req.user);
     logger(requestId).info('REQUEST_RECEIVED', { method: req.method, endpoint: req.originalUrl });
-    next();
+    return next();
 }
 
 module.exports = {

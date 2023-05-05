@@ -146,7 +146,7 @@ function processMiddleware(req, res, next) {
         return next(new FormSubmissionError('Unable to process form data'));
     }
 
-    next();
+    return next();
 }
 
 const reduceVisibleComponent = (field, data) => {

@@ -6,9 +6,9 @@ async function userWorkstackMiddleware(req, res, next) {
     try {
         const response = await req.listService.fetch('USER_WORKSTACK', { userUuid: req.user.uuid });
         res.locals.workstack = response;
-        next();
+        return next();
     } catch (error) {
-        next(error);
+        return next(error);
     }
 }
 
@@ -16,9 +16,9 @@ async function teamWorkstackMiddleware(req, res, next) {
     try {
         const response = await req.listService.fetch('TEAM_WORKSTACK', req.params);
         res.locals.workstack = response;
-        next();
+        return next();
     } catch (error) {
-        next(error);
+        return next(error);
     }
 }
 
@@ -26,9 +26,9 @@ async function workflowWorkstackMiddleware(req, res, next) {
     try {
         const response = await req.listService.fetch('WORKFLOW_WORKSTACK', req.params);
         res.locals.workstack = response;
-        next();
+        return next();
     } catch (error) {
-        next(error);
+        return next(error);
     }
 }
 
@@ -36,9 +36,9 @@ async function stageWorkstackMiddleware(req, res, next) {
     try {
         const response = await req.listService.fetch('STAGE_WORKSTACK', req.params);
         res.locals.workstack = response;
-        next();
+        return next();
     } catch (error) {
-        next(error);
+        return next(error);
     }
 }
 
@@ -46,9 +46,9 @@ async function getTeamMembers(req, res, next) {
     try {
         const response = await req.listService.fetch('USERS_IN_TEAM', req.params);
         res.locals.workstack.teamMembers = response;
-        next();
+        return next();
     } catch (error) {
-        next(error);
+        return next(error);
     }
 }
 
@@ -56,9 +56,9 @@ async function getMoveTeamOptions(req, res, next) {
     try {
         const response = await req.listService.fetch('MOVE_TEAM_OPTIONS', req.params);
         res.locals.workstack.moveTeamOptions = response;
-        next();
+        return next();
     } catch (error) {
-        next(error);
+        return next(error);
     }
 }
 
@@ -91,11 +91,9 @@ const sendAllocateUserRequest = async (req, res, [endpoint, body, headers]) => {
     const logger = getLogger(req.requestId);
     try {
         await caseworkService.put(endpoint, body, headers);
-        return;
     } catch (error) {
         logger.error('ALLOCATION_FAILED', { endpoint, body, status: error.response.status });
         res.locals.notification = 'Failed to allocate all cases';
-        return;
     }
 };
 
@@ -122,12 +120,12 @@ async function allocateToTeamMember(req, res, next) {
         const requests = selected_cases
             .map(selected => selected.split(':'))
             .map(([caseId, stageId]) => [`/case/${caseId}/stage/${stageId}/user`, { userUUID: selected_user }, {
-                headers: User.createHeaders(req.user)
+                headers: { ...User.createHeaders(req.user), 'X-Correlation-Id': req.requestId }
             }])
             .map(async options => sendAllocateUserRequest(req, res, options));
         await Promise.all(requests);
     }
-    next();
+    return next();
 }
 
 async function moveTeam(req, res, next) {
@@ -148,7 +146,7 @@ async function moveTeam(req, res, next) {
                 .map(([caseId, stageId]) => [
                     `/case/${caseId}/stage/${stageId}/CaseworkTeamUUID`,
                     { value: selected_team },
-                    { headers: User.createHeaders(req.user) }
+                    { headers: { ...User.createHeaders(req.user), 'X-Correlation-Id': req.requestId }  }
                 ])
                 .map(async options => updateCaseDataMoveTeamRequest(req, res, options));
 
@@ -157,7 +155,7 @@ async function moveTeam(req, res, next) {
                 .map(([caseId, stageId]) => [
                     `/case/${caseId}/stage/${stageId}/team`,
                     { teamUUID: selected_team },
-                    { headers: User.createHeaders(req.user) }
+                    { headers: { ...User.createHeaders(req.user), 'X-Correlation-Id': req.requestId }  }
                 ])
                 .map(async options => sendMoveTeamRequest(req, res, options));
 
@@ -165,7 +163,7 @@ async function moveTeam(req, res, next) {
     }
     logger.debug('MOVING_CASE_TEAMS', { selected_cases, selected_team });
 
-    next();
+    return next();
 }
 
 async function allocateToUser(req, res, next) {
@@ -177,12 +175,12 @@ async function allocateToUser(req, res, next) {
         const requests = selected_cases
             .map(selected => selected.split(':'))
             .map(([caseId, stageId]) => [`/case/${caseId}/stage/${stageId}/user`, { userUUID: req.user.uuid }, {
-                headers: User.createHeaders(req.user)
+                headers: { ...User.createHeaders(req.user), 'X-Correlation-Id': req.requestId }
             }])
             .map(async options => sendAllocateUserRequest(req, res, options));
         await Promise.all(requests);
     }
-    next();
+    return next();
 }
 
 async function allocateNextCaseToUser(req, res, next) {
@@ -191,13 +189,13 @@ async function allocateNextCaseToUser(req, res, next) {
         res.locals.stage = await caseworkService.put(
             `/case/team/${req.params.teamId}/allocate/user/next`,
             {},
-            { headers: User.createHeaders(req.user) }
+            { headers: { ...User.createHeaders(req.user), 'X-Correlation-Id': req.requestId } }
         );
     } catch (error) {
         logger.error('ALLOCATE_NEXT_CASE_FAILED');
         return next(error);
     }
-    next();
+    return next();
 }
 
 function sendCaseRedirectResponse(req, res) {
@@ -218,12 +216,12 @@ async function unallocate(req, res, next) {
         const requests = selected_cases
             .map(selected => selected.split(':'))
             .map(([caseId, stageId]) => [`/case/${caseId}/stage/${stageId}/user`, { userUUID: null }, {
-                headers: User.createHeaders(req.user)
+                headers: { ...User.createHeaders(req.user), 'X-Correlation-Id': req.requestId }
             }])
             .map(async options => sendAllocateUserRequest(req, res, options));
         await Promise.all(requests);
     }
-    next();
+    return next();
 }
 
 module.exports = {

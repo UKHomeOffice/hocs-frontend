@@ -6,7 +6,7 @@ const tenantConfig = require('../../tenantConfig');
 jest.mock('../../middleware/action');
 jest.mock('../../services/form', () => ({
     getFormForAction: jest.fn((_, _1, next) => {
-        next();
+        return next();
     })
 }));
 jest.mock('../../tenantConfig', () => ({

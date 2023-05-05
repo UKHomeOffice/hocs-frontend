@@ -51,7 +51,7 @@ async function handleSearch(req, res, next) {
 
         logger.info('SEARCH', { request });
         const response = await caseworkService.post('/search', request, {
-            headers: User.createHeaders(req.user)
+            headers: { ...User.createHeaders(req.user), 'X-Correlation-Id': req.requestId }
         });
 
         const fromStaticList = req.listService.getFromStaticList;
@@ -70,10 +70,10 @@ async function handleSearch(req, res, next) {
             columns: workstackTypeForSearch.workstackColumns
         };
 
-        next();
+        return next();
     } catch (error) {
         logger.error('SEARCH_FAILED', { message: error.message, stack: error.stack });
-        next(error);
+        return next(error);
     }
 }
 

@@ -45,7 +45,7 @@ router.get('/members/refresh',
             logger(req.requestId).info('REFRESH_MEMBERS', { user: req.user.email });
             res.status(200).send();
         } catch (error) {
-            next(error);
+            return next(error);
         }
     }
 );
@@ -58,7 +58,7 @@ router.get('/admin/list/flush',
             flush('S_USERS');
             res.status(200).send();
         } catch (error) {
-            next(error);
+            return next(error);
         }
     }
 );

@@ -21,7 +21,7 @@ function authMiddleware(req, res, next) {
         return next();
     }
     logger.error('AUTH_FAILURE');
-    next(new ForbiddenError('Unauthorised', 401));
+    return next(new ForbiddenError('Unauthorised', 401));
 
 }
 
@@ -31,7 +31,7 @@ function sessionExpiryMiddleware(req, res, next) {
     if (sessionExpiry) {
         res.setHeader('X-Auth-Session-ExpiresAt', sessionExpiry);
     }
-    next();
+    return next();
 }
 
 function getSessionExpiry(logger, req) {
@@ -99,7 +99,7 @@ function protect(permission) {
             return next();
         }
         logger.error('AUTH_FAILURE', { expected: permission, user: req.user.username, roles: req.user.roles });
-        next(new ForbiddenError('Unauthorised'));
+        return next(new ForbiddenError('Unauthorised'));
     };
 }
 

@@ -4,7 +4,8 @@ const { caseworkService } = require('../../../clients');
 const User = require('../../../models/user');
 
 module.exports = async ({ caseId, stageId, context, user, requestId }) => {
-    const { data: { address, ...data } } = await caseworkService.get(`/case/${caseId}/correspondent/${context}`, { headers: { ...User.createHeaders(user), 'X-Correlation-Id': requestId } });
+    const { data: { address, ...data } } = await caseworkService.get(`/case/${caseId}/correspondent/${context}`,
+        { headers: { ...User.createHeaders(user), 'X-Correlation-Id': requestId } });
     return Form()
         .withTitle('Edit correspondent details')
         .withField(
