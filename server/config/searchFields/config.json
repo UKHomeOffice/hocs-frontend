@@ -59,6 +59,14 @@
       },
       "name": "caseTypes",
       "component": "checkbox"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "PSU Reference"
+      },
+      "name": "PSURef",
+      "component": "text"
     }
   ],
   "BF2": [],
@@ -122,6 +130,14 @@
       },
       "name": "caseTypes",
       "component": "checkbox"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "PSU Reference"
+      },
+      "name": "PSURef",
+      "component": "text"
     }
   ],
   "COMP2": [
@@ -183,6 +199,14 @@
         "label": "Complainant Home Office Reference"
       },
       "name": "ComplainantHORef",
+      "component": "text"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "PSU Reference"
+      },
+      "name": "PSURef",
       "component": "text"
     }
   ],
@@ -445,6 +469,14 @@
       },
       "name": "BusinessArea",
       "component": "dropdown"
+    },
+    {
+      "validation": [],
+      "props": {
+        "label": "PSU Reference"
+      },
+      "name": "PSURef",
+      "component": "text"
     }
   ],
   "MPAM": [
