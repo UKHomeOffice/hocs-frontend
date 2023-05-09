@@ -23,7 +23,7 @@ Array [
         "label": "Document B",
         "status": "FAILED_CONVERSION",
         "tags": Array [
-          "Failed Conversion",
+          "Failed PDF Conversion",
         ],
         "timeStamp": "01-01-2019",
         "type": "type1",
@@ -32,10 +32,23 @@ Array [
       Object {
         "hasOriginalFile": false,
         "hasPdf": false,
-        "label": "Document E",
-        "status": "PENDING",
+        "label": "Document F",
+        "status": "AWAITING_MALWARE_SCAN",
         "tags": Array [
-          "Pending",
+          "Awaiting Malware Scan",
+          "Test Label",
+        ],
+        "timeStamp": "01-01-2019",
+        "type": "type1",
+        "value": 5,
+      },
+      Object {
+        "hasOriginalFile": false,
+        "hasPdf": false,
+        "label": "Document G",
+        "status": "AWAITING_CONVERSION",
+        "tags": Array [
+          "Awaiting Document Conversion",
           "Test Label",
         ],
         "timeStamp": "01-01-2019",
@@ -53,7 +66,7 @@ Array [
         "label": "Document C",
         "status": "FAILED_VIRUS",
         "tags": Array [
-          "Failed Virus Scan",
+          "Malware Found",
         ],
         "timeStamp": "03-01-2019",
         "type": "type2",
@@ -63,6 +76,18 @@ Array [
         "hasOriginalFile": false,
         "hasPdf": false,
         "label": "Document D",
+        "status": "FAILED_MALWARE_SCAN",
+        "tags": Array [
+          "Malware Scan Failed",
+        ],
+        "timeStamp": "03-01-2019",
+        "type": "type2",
+        "value": 3,
+      },
+      Object {
+        "hasOriginalFile": false,
+        "hasPdf": false,
+        "label": "Document E",
         "status": "INVALID",
         "tags": Array [
           "INVALID",
