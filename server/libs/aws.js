@@ -1,6 +1,6 @@
 const { S3Client } = require('@aws-sdk/client-s3');
 const { NodeHttpHandler } = require('@aws-sdk/node-http-handler');
-const HttpsProxyAgent = require('https-proxy-agent');
+const { HttpsProxyAgent } = require('https-proxy-agent');
 
 const {
     S3: {
