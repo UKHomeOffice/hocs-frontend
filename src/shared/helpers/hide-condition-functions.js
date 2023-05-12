@@ -17,6 +17,14 @@ function hasNoContributionsOrFulfilled(data) {
     }
 }
 
+function hasAnyValue(data, conditionArgs) {
+    if (data && data[conditionArgs.conditionPropertyName]) {
+        return false;
+    }
+    return true;
+}
+
 module.exports = {
+    hasAnyValue,
     hasNoContributionsOrFulfilled
 };
