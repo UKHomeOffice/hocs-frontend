@@ -1499,6 +1499,12 @@ module.exports = {
             endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_DOCUMENT_HANDLING',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
+        },
+        WCS_OUT_OF_CONTACT_TEAMS: {
+            client: 'INFO',
+            endpoint: '/entity/list/OUT_OF_CONTACT_TEAMS',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
         }
     },
     clients: {
