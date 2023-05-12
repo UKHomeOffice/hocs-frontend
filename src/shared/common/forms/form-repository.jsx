@@ -104,8 +104,12 @@ function isComponentVisible(config, data) {
     // hide component based on hideConditions
     if (hideConditions) {
         for (const condition of hideConditions) {
-            if (condition.function && Object.prototype.hasOwnProperty.call(hideConditions, condition.function)) {
-                isVisible = hideConditionFunctions[condition.function](data);
+            if (condition.function && Object.prototype.hasOwnProperty.call(hideConditionFunctions, condition.function)) {
+                if (condition.conditionArgs) {
+                    isVisible = hideConditionFunctions[condition.function](data, condition.conditionArgs);
+                } else {
+                    isVisible = hideConditionFunctions[condition.function](data);
+                }
             } else if (data && data[condition.conditionPropertyName] && data[condition.conditionPropertyName] === condition.conditionPropertyValue) {
                 isVisible = false;
             }
@@ -168,7 +172,7 @@ export function formComponentFactory(field, options) {
         case 'confirmation-with-team-name-and-case-ref':
             return renderFormComponent(ConfirmationWithTeamNameAndCaseRef, { key, data, config, caseRef });
         case 'paragraph':
-            return renderFormComponent(Paragraph, { key, config });
+            return renderFormComponent(Paragraph, { key, data, config });
         case 'entity-manager':
             return renderFormComponent(EntityManager, { key, config: { ...config, baseUrl: options.baseUrl } });
         case 'display':
