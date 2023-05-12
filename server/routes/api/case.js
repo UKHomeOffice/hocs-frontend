@@ -21,6 +21,7 @@ const {
 } = require('../../middleware/case');
 const { somuApiResponseMiddleware } = require('../../middleware/somu');
 const { getFormForCase, getFormForStage, getGlobalFormForCase, getSomuType, getFormForSomu } = require('../../services/form');
+const { allocationMiddleware } = require('../../middleware/allocate');
 
 router.get('/:caseId/stage/:stageId/allocate', allocateCase);
 router.post('/:caseId/stage/:stageId/allocate/team',
@@ -84,6 +85,13 @@ router.post('/:caseId/stage/:stageId/form/:formId/data',
             error: res.locals.error
         });
     }
+);
+
+router.post('/:caseId/stage/:stageId/form/:formId/allocate',
+    getGlobalFormForCase,
+    fileMiddleware.any(),
+    processMiddleware,
+    allocationMiddleware
 );
 
 router.put('/:caseId/note/:noteId',
