@@ -8,6 +8,8 @@ import StageSummary from './stage-summary.jsx';
 import People from './people.jsx';
 import CaseActions from './case-actions.jsx';
 import TabExGratia from './tab-ex-gratia.jsx';
+import TabOutOfContact from './tab-out-of-contact';
+
 import updateCaseTabs from '../../helpers/case-tabs-helpers';
 
 class SideBar extends Component {
@@ -83,6 +85,8 @@ class SideBar extends Component {
                 return renderTab(<CaseActions />);
             case 'EX_GRATIA':
                 return renderTab(<TabExGratia screen={tab.screen} />);
+            case 'OUT_OF_CONTACT':
+                return renderTab(<TabOutOfContact screen={tab.screen} history={this.props.history}/>);
             default: return null;
         }
     }
@@ -145,7 +149,7 @@ SideBar.propTypes = {
 const WrappedSideBar = props => (
     <ApplicationConsumer>
         {({ page, activeTab, caseTabs, dispatch, summary }) =>
-            <SideBar {...props} page={page} activeTab={activeTab} caseTabs={caseTabs} dispatch={dispatch} summary={summary}/>}
+            <SideBar {...props} page={page} activeTab={activeTab} caseTabs={caseTabs} dispatch={dispatch} summary={summary}  />}
     </ApplicationConsumer>
 );
 

@@ -313,6 +313,11 @@
     {
       "type": "TIMELINE",
       "label": "Timeline"
+    },
+    {
+      "type": "OUT_OF_CONTACT",
+      "label": "Out of Contact",
+      "screen": "TAB_OUT_OF_CONTACT"
     }
   ]
 }
