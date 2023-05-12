@@ -10,7 +10,8 @@ class Stage extends Component {
             children,
             form,
             title,
-            hasSidebar
+            hasSidebar,
+            history
         } = this.props;
 
         return (
@@ -23,7 +24,7 @@ class Stage extends Component {
                     {children}
                 </div>
                 {this.shouldDisplaySidebar(hasSidebar) && <div className="govuk-grid-column-two-thirds">
-                    <SideBar />
+                    <SideBar history={history}/>
                 </div>}
             </div>
         );
@@ -42,7 +43,8 @@ Stage.propTypes = {
     children: PropTypes.node,
     form: PropTypes.object,
     title: PropTypes.string,
-    hasSidebar: PropTypes.string
+    hasSidebar: PropTypes.string,
+    history: PropTypes.object
 };
 
 export default formEnabled(Stage);

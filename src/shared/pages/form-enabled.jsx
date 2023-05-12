@@ -203,12 +203,12 @@ function withForm(Page) {
         }
 
         renderForm() {
-            const { form, match: { url, params }, hasSidebar } = this.props;
+            const { form, match: { url, params }, hasSidebar, history } = this.props;
             const { form_data, form_meta, form_schema, submittingForm } = this.state;
             const { errors } = form || {};
             return (
                 <Page title={form_schema.title} form={form_meta}
-                    hasSidebar={hasSidebar || (form_schema.props && form_schema.props.hasSidebar)} >
+                    hasSidebar={hasSidebar || (form_schema.props && form_schema.props.hasSidebar)} history={history} >
                     {form_schema && <Form
                         {...{
                             schema: form_schema,

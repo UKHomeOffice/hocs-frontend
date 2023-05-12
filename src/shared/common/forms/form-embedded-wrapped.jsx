@@ -26,7 +26,7 @@ const FormEmbeddedWrapped = (props) => {
             return;
         }
 
-        const { action } = props;
+        const { action, history } = props;
         setSubmitting({ submittingForm: true });
 
         // eslint-disable-next-line no-undef
@@ -54,6 +54,8 @@ const FormEmbeddedWrapped = (props) => {
                         if (res.data.errors) {
                             dispatch(updateApiStatus(status.SUBMIT_FORM_VALIDATION_ERROR))
                                 .then(() => setError(res.data.errors));
+                        } else if (res.data.redirect) {
+                            history.push(res.data.redirect);
                         } else {
                             dispatch(updateApiStatus(status.UPDATE_CASE_DATA_SUCCESS))
                                 .then(() => setError(null));
@@ -99,7 +101,8 @@ FormEmbeddedWrapped.propTypes = {
     fieldData: PropTypes.object,
     submitHandler: PropTypes.func,
     action: PropTypes.string,
-    baseUrl: PropTypes.string
+    baseUrl: PropTypes.string,
+    history: PropTypes.object.isRequired
 };
 
 const FormEmbeddedWrappedWrapper = props => (
