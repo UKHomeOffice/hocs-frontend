@@ -202,9 +202,11 @@ const isFieldVisible = (visibilityConditions, hideConditions, data) => {
     // hide component based on hideConditions
     if (hideConditions) {
         for (const condition of hideConditions) {
-            if (condition.function && Object.prototype.hasOwnProperty.call(hideConditions, condition.function)) {
+            if (condition.function && Object.prototype.hasOwnProperty.call(hideConditionFunctions, condition.function)) {
                 if (condition.conditionPropertyName && condition.conditionPropertyValue) {
                     isVisible = hideConditionFunctions[condition.function](data, condition.conditionPropertyName, condition.conditionPropertyValue);
+                } else if (condition.conditionArgs) {
+                    isVisible = hideConditionFunctions[condition.function](data, condition.conditionArgs);
                 } else {
                     isVisible = hideConditionFunctions[condition.function](data);
                 }
