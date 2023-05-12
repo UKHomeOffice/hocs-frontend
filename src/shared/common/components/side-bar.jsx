@@ -137,6 +137,7 @@ SideBar.propTypes = {
     activeTab: PropTypes.string,
     page: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
+    history: PropTypes.object.isRequired,
     summary: PropTypes.object.isRequired,
     caseTabs: PropTypes.array
 };

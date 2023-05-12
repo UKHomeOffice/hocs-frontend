@@ -5,7 +5,6 @@ import SideBar from '../side-bar';
 import '@testing-library/jest-dom';
 import { render } from '@testing-library/react';
 
-
 const page = {
     params: {
         caseId: 'some_case_id',
@@ -16,6 +15,8 @@ const page = {
 const MOCK_CONFIG = {
     page
 };
+
+const history = {};
 
 describe('Side bar component', () => {
     it('should render with default props', () => {
@@ -29,7 +30,7 @@ describe('Side bar component', () => {
         const WRAPPER = render(
             <ApplicationProvider config={{ ...MOCK_CONFIG, ...defaultProps }}>
                 <MemoryRouter>
-                    <SideBar page={page} summary={defaultProps.summary} />
+                    <SideBar page={page} summary={defaultProps.summary} history={history}/>
                 </MemoryRouter>
             </ApplicationProvider>
         );
@@ -57,7 +58,7 @@ describe('Side bar component', () => {
         const WRAPPER = render(
             <ApplicationProvider config={{ ...MOCK_CONFIG, ...props }}>
                 <MemoryRouter>
-                    <SideBar page={page} summary={props.summary} />
+                    <SideBar page={page} summary={props.summary} history={history}/>
                 </MemoryRouter>
             </ApplicationProvider>
         );
@@ -87,7 +88,7 @@ describe('Side bar component', () => {
         const WRAPPER = render(
             <ApplicationProvider config={{ ...MOCK_CONFIG, ...props }}>
                 <MemoryRouter>
-                    <SideBar page={page} summary={props.summary} />
+                    <SideBar page={page} summary={props.summary} history={history}/>
                 </MemoryRouter>
             </ApplicationProvider>
         );
@@ -115,7 +116,7 @@ describe('Side bar component', () => {
         const WRAPPER = render(
             <ApplicationProvider config={{ ...MOCK_CONFIG, ...props }}>
                 <MemoryRouter>
-                    <SideBar page={page} summary={props.summary} />
+                    <SideBar page={page} summary={props.summary} history={history}/>
                 </MemoryRouter>
             </ApplicationProvider>
         );

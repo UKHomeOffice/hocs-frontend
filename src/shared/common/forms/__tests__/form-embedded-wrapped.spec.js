@@ -38,7 +38,8 @@ describe('Form embedded wrapped component', () => {
         },
         submitHandler = (() => {}),
         action = '',
-        baseUrl = '';
+        baseUrl = '',
+        history = {};
 
 
     it('should render with default props', () => {
@@ -52,6 +53,7 @@ describe('Form embedded wrapped component', () => {
                     submitHandler={submitHandler}
                     action={action}
                     baseUrl={baseUrl}
+                    history={history}
                 />
             </ApplicationProvider>
         );
