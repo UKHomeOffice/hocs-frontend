@@ -19,13 +19,12 @@ const customAdapters = {
     },
     'date': (reducer, field, data) => {
         const { name } = field.props;
-        const value = data[name];
-        const [year = '', month = '', day = ''] = (value || '').split('-');
+        const value = data[name] || '';
+        const [year = '', month = '', day = ''] = value.split('-');
 
         if (year && month && day) {
-            reducer[name] = `${sanitiseYearPart(year)}-${sanitiseDayMonthPart(month)}-${sanitiseDayMonthPart(day)}`;
-        }
-        else if (year + month + day === '') {
+            reducer[name] = `${sanitiseValueString(year, YEAR_REGEX)}-${sanitiseValueString(month, MONTH_REGEX, 2)}-${sanitiseValueString(day, DAY_REGEX, 2)}`;
+        } else {
             reducer[name] = '';
         }
     },
@@ -224,46 +223,24 @@ const stripUnacceptedFieldData = ({ name }, data) => {
     return data;
 };
 
-/**
-  * Dates that have leading zeros in a part are typically invalid and fail on a `new Date` or
-  * Javas `LocalDate.parse`. Those dates that are obvious i.e. single digit 1-9 in the right
-  * most character with any number of 0's before are clear so we can sanitise these and leave
-  * only one zero pre-pended.
-  *
-  * We pad the resultant with the correct amount of 0's for the part of the date, as this allows
-  * Java's `LocalDate.parse` to correctly parse the result.
-  *
-  * @param {String} value the date part to sanitise
-  * @param {Number} paddingZeros the amount of zero's that should be leading, defaults to 2
-  * @returns the sanitised date part.
-  */
-function sanitiseDayMonthPart(value, paddingZeros = 2) {
+const DAY_REGEX = /(?<!.)0*(?:[1-9]|[12]\d|3[01])(?!.)/;
+const MONTH_REGEX = /(?<!.)0*(?:[1-9]|1[0-2])(?!.)/;
+const YEAR_REGEX = /(?<!.)0*[1-9]\d{3}(?!.)/;
+
+function sanitiseValueString(value, pattern, padLength = 0) {
     if (value === '') {
         return value;
     }
 
-    const regexMatch = new RegExp('^0+[1-9]$');
+    const regexMatcher = new RegExp(pattern);
+    const regexMatch = regexMatcher.exec(value);
 
-    if (regexMatch.test(value)) {
-        return value.substring(value.length - 2);
+    if (regexMatch) {
+        return regexMatch[0]
+            .replace(/^0+/, '')
+            .padStart(padLength, '0');
     }
-    return value.padStart(paddingZeros, '0');
-}
-
-/**
- * Dates that have a year part that contains leading zeroes are currentyly saved to the system
- * with these leading zeroes. These zeroes add nothing to a year and can be safely stripped
- * without the year losing it's meaning.
- *
- * @param {String} value the date year to sanitise
- * @returns the sanitised date year part.
- */
-function sanitiseYearPart(value) {
-    if (value === '') {
-        return value;
-    }
-
-    return value.replace(/^0+/, '');
+    return '';
 }
 
 module.exports = {

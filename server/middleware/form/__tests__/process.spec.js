@@ -368,7 +368,7 @@ describe('Process middleware', () => {
     it('should pad single digit day and months with zeros', () => {
         const req = {
             body: {
-                ['test-field']: '1989-04-03'
+                ['test-field']: '1989-4-3'
             },
             query: {},
             form: {
@@ -429,38 +429,6 @@ describe('Process middleware', () => {
         expect(next).toHaveBeenCalledTimes(1);
     });
 
-    it('should not sanitise day and month with multiple connotations', () => {
-        const req = {
-            body: {
-                ['test-field']: '1989-012-023'
-            },
-            query: {},
-            form: {
-                schema: {
-                    fields: [
-                        {
-                            component: 'date',
-                            validation: [
-                                'required'
-                            ],
-                            props: {
-                                name: 'test-field',
-                            }
-                        }
-                    ]
-                }
-            }
-        };
-        const res = {};
-
-        processMiddleware(req, res, next);
-        expect(req.form).toBeDefined();
-        expect(req.form.data).toBeDefined();
-        expect(req.form.data['test-field']).toEqual('1989-012-023');
-        expect(next).toHaveBeenCalled();
-        expect(next).toHaveBeenCalledTimes(1);
-    });
-
     it('should return sanitised year on change', () => {
         const req = {
             body: {
@@ -511,6 +479,60 @@ describe('Process middleware', () => {
         expect(req.form.data['test-field-1']).toEqual('-01-01');
         expect(req.form.data['test-field-2']).toEqual('2021-01-01');
         expect(req.form.data['test-field-3']).toEqual('2000-01-01');
+        expect(next).toHaveBeenCalled();
+        expect(next).toHaveBeenCalledTimes(1);
+    });
+
+    it('should reject date fields if contains non-numerical characters', () => {
+        const req = {
+            body: {
+                ['test-field-1']: 'da2021-01-01',
+                ['test-field-2']: '2021-01/-01',
+                ['test-field-3']: '2000-01-/01',
+            },
+            query: {},
+            form: {
+                schema: {
+                    fields: [
+                        {
+                            component: 'date',
+                            validation: [
+                                'required'
+                            ],
+                            props: {
+                                name: 'test-field-1',
+                            }
+                        },
+                        {
+                            component: 'date',
+                            validation: [
+                                'required'
+                            ],
+                            props: {
+                                name: 'test-field-2',
+                            }
+                        },
+                        {
+                            component: 'date',
+                            validation: [
+                                'required'
+                            ],
+                            props: {
+                                name: 'test-field-3',
+                            }
+                        }
+                    ]
+                }
+            }
+        };
+        const res = {};
+
+        processMiddleware(req, res, next);
+        expect(req.form).toBeDefined();
+        expect(req.form.data).toBeDefined();
+        expect(req.form.data['test-field-1']).toEqual('-01-01');
+        expect(req.form.data['test-field-2']).toEqual('2021--01');
+        expect(req.form.data['test-field-3']).toEqual('2000-01-');
         expect(next).toHaveBeenCalled();
         expect(next).toHaveBeenCalledTimes(1);
     });
