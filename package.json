@@ -98,7 +98,7 @@
         "lint-staged": "^13.2.2",
         "mini-css-extract-plugin": "^2.7.6",
         "nodemon": "^2.0.19",
-        "postcss-loader": "^7.3.2",
+        "postcss-loader": "^7.3.3",
         "pre-commit": "^1.2.2",
         "sass": "^1.53.0",
         "sass-loader": "^13.3.2",
