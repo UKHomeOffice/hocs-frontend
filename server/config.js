@@ -26,6 +26,14 @@ const config = {
                 FORCE_PATH_STYLE: !isProduction,
                 SSE_KEY: isProduction ? process.env.S3_SSE_KEY : null
             }
+        },
+        AUTH: {
+            ISSUER: process.env.KEYCLOAK_ISSUER || 'http://localhost:9081/auth/realms/hocs',
+            CLIENT_ID: process.env.KEYCLOAK_CLIENT_ID || 'local-frontend',
+            CLIENT_SECRET: process.env.KEYCLOAK_CLIENT_SECTRET || 'CLIENT_SECRET',
+            //TODO: the following 2 values are application specific, should they be here?
+            REDIRECT_URI: process.env.REDIRECT_URI || 'http://localhost:8080/auth/callback',
+            LOGIN_URI: process.env.LOGIN_URI || 'http://localhost:8080/login',
         }
     }
 };

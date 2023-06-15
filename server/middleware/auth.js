@@ -1,29 +1,30 @@
-const crypto = require('crypto');
-const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const { ForbiddenError } = require('../models/error');
 const getLogger = require('../libs/logger');
+const passport = require('passport');
+const { KeycloakClient } = require('../libs/auth');
+const { forContext } = require('../config');
 
+const loginMiddleware = passport.authenticate('keycloak');
 
-function authMiddleware(req, res, next) {
-    const logger = getLogger(req.requestId);
-    if (req.get('X-Auth-Token')) {
-        if (!req.user) {
-            req.user = new User({
-                username: req.get('X-Auth-Username'),
-                id: req.get('X-Auth-UserId'),
-                groups: req.get('X-Auth-Groups'),
-                roles: req.get('X-Auth-Roles'),
-                email: req.get('X-Auth-Email'),
-                uuid: req.get('X-Auth-Subject')
-            });
+const loginCallbackMiddleware = passport.authenticate('keycloak', {
+    //TODO: is there a better way to handle this redirect?
+    successRedirect: 'back',
+    failureRedirect: '/login' // Redirect to the login page
+});
+
+const logoutMiddleware = (req, res, next) => {
+    req.logout((err) => {
+        if (err) {
+            return next(err);
         }
-        return next();
-    }
-    logger.error('AUTH_FAILURE');
-    return next(new ForbiddenError('Unauthorised', 401));
 
-}
+        req.session.destroy();
+        const { ISSUER, LOGIN_URI } = forContext('AUTH').ISSUER;
+        const keycloakLogoutUrl = `${ISSUER}/protocol/openid-connect/logout?redirect_uri=${encodeURIComponent(LOGIN_URI)}`;
+        res.redirect(keycloakLogoutUrl);
+    });
+};
 
 function sessionExpiryMiddleware(req, res, next) {
     const logger = getLogger(req.requestId);
@@ -34,62 +35,60 @@ function sessionExpiryMiddleware(req, res, next) {
     return next();
 }
 
-function getSessionExpiry(logger, req) {
-    const accessTokenExpiry = req.get('X-Auth-ExpiresIn');
-    logger.debug(`access token expires at: ${accessTokenExpiry}`);
-    try {
-        const encryptedRefreshToken = req.cookies['kc-state'];
-        if (encryptedRefreshToken && encryptedRefreshToken.length > 0) {
-            logger.debug(`encrypted refresh token: ${encryptedRefreshToken}`);
-            const tokenEncryptionKey = Buffer.from(process.env.ENCRYPTION_KEY || '');
-            if (tokenEncryptionKey.length > 0) {
-                logger.debug(`token encryption key: ${tokenEncryptionKey}`);
-                const decryptedToken = decrypt(encryptedRefreshToken, tokenEncryptionKey);
-                logger.debug(`decrypted token: ${decryptedToken}`);
-                if (decryptedToken) {
-                    const decodedToken = jwt.decode(decryptedToken);
-                    logger.debug(`decoded refresh token: ${decodedToken}`);
-                    const expiry = decodedToken.exp;
-                    logger.debug(`decoded refresh token expiry: ${expiry}`);
-                    if (expiry) {
-                        // Keycloak allows a 2 minute buffer so we need to add this
-                        const expiryMilliseconds = 120000 + (expiry * 1000);
-                        const expiresIn = (expiryMilliseconds - new Date().getTime()) / 1000;
-                        logger.debug(`decoded refresh token expires in: ${expiresIn}`);
-                        const expiresAt = new Date(expiryMilliseconds).toUTCString();
-                        logger.debug(`decoded refresh token expires at: ${expiresAt}`);
-                        return expiresAt;
-                    }
-                }
-            }
-        }
-    } catch (e) {
-        logger.error(`error decoding the refresh token: ${e}`);
+async function handleTokenRefresh(req, res, next) {
+    const {
+        accessTokenExpiry,
+        refreshTokenExpiry,
+        refreshToken
+    } = req.user.tokenSet;
+
+    if (accessTokenExpiry && accessTokenExpiry > (Date.now() / 1000)) {
+        return next();
     }
-    logger.info('unable to get session expiry from refresh token. Using access token expiry');
-    return accessTokenExpiry;
+
+    if (refreshTokenExpiry && refreshTokenExpiry > (Date.now() / 1000)) {
+        const client = await KeycloakClient().getClient();
+        let refreshedTokenSet;
+        try {
+            refreshedTokenSet = await client.refresh(refreshToken);
+        } catch (err) {
+            // Some instances we're identified within buffer period where token was marked invalid.
+            // TODO: if we handle the cookie expiry better, we can remove this
+            req.session.destroy();
+            return res.redirect('/login');
+        }
+
+        req.user.tokenSet = {
+            accessTokenExpiry: refreshedTokenSet.expires_at,
+            refreshTokenExpiry: Math.floor((Date.now() / 1000) + refreshedTokenSet.refresh_expires_in + 120),
+            refreshToken: refreshedTokenSet.refresh_token
+        };
+        req.session.passport.user = req.user;
+        req.session.save();
+        return next();
+    }
+
+    req.session.destroy();
+    return res.redirect('/login');
 }
 
-function decrypt(input, key) {
-    const ivLength = 12;
-    const tagLength = 16;
+function getSessionExpiry(logger, req) {
+    const {
+        accessTokenExpiry,
+        refreshTokenExpiry,
+    } = req.user.tokenSet;
 
-    const inputBuffer = Buffer.from(input, 'base64');
-    const iv = Buffer.allocUnsafe(ivLength);
-    const tag = Buffer.allocUnsafe(tagLength);
-    const data = Buffer.alloc(inputBuffer.length - ivLength - tagLength, 0);
+    logger.debug(`Access token expires at: ${accessTokenExpiry}`);
+    logger.debug(`Refresh token expiry: ${refreshTokenExpiry}`);
 
-    inputBuffer.copy(iv, 0, 0, ivLength);
-    inputBuffer.copy(tag, 0, inputBuffer.length - tagLength);
-    inputBuffer.copy(data, 0, ivLength);
+    if (refreshTokenExpiry) {
+        const expiresAt = new Date(refreshTokenExpiry * 1000);
+        logger.debug(`Refresh token expires at: ${expiresAt}`);
+        return expiresAt.toUTCString();
+    }
 
-    const decipher = crypto.createDecipheriv('aes-256-gcm', key, iv);
-
-    decipher.setAuthTag(tag);
-
-    let dec = decipher.update(data, null, 'utf8');
-    dec += decipher.final('utf8');
-    return dec;
+    logger.info('Unable to get session expiry from refresh token. Using access token expiry');
+    return new Date(accessTokenExpiry * 1000);
 }
 
 function protect(permission) {
@@ -104,7 +103,10 @@ function protect(permission) {
 }
 
 module.exports = {
-    authMiddleware,
+    loginMiddleware,
+    loginCallbackMiddleware,
+    logoutMiddleware,
     protect,
-    sessionExpiryMiddleware
+    sessionExpiryMiddleware,
+    handleTokenRefresh
 };

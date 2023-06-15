@@ -3,8 +3,8 @@ class user {
         this.id = id;
         this.email = email;
         this.username = username;
-        this.roles = roles ? roles.split(',').map(p => p.trim()) : [];
-        this.groups = groups ? groups.split(',').map(g => g.trim()) : [];
+        this.roles = roles ?? [];
+        this.groups = groups ?? [];
         this.uuid = uuid;
     }
 
