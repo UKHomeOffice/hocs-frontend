@@ -7,6 +7,7 @@ const getLogger = require('../libs/logger');
 
 function authMiddleware(req, res, next) {
     const logger = getLogger(req.requestId);
+    logger.info(req.headers);
     if (req.get('X-Auth-Token')) {
         if (!req.user) {
             req.user = new User({
@@ -15,7 +16,8 @@ function authMiddleware(req, res, next) {
                 groups: req.get('X-Auth-Groups'),
                 roles: req.get('X-Auth-Roles'),
                 email: req.get('X-Auth-Email'),
-                uuid: req.get('X-Auth-Subject')
+                uuid: req.get('X-Auth-Subject'),
+                tenant: req.get('X-Auth-Tenant')
             });
         }
         return next();
