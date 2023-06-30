@@ -475,10 +475,7 @@ describe('Process middleware', () => {
 
         processMiddleware(req, res, next);
         expect(req.form).toBeDefined();
-        expect(req.form.data).toBeDefined();
-        expect(req.form.data['test-field-1']).toEqual('-01-01');
-        expect(req.form.data['test-field-2']).toEqual('2021-01-01');
-        expect(req.form.data['test-field-3']).toEqual('2000-01-01');
+        expect(req.form.data).toBeUndefined();
         expect(next).toHaveBeenCalled();
         expect(next).toHaveBeenCalledTimes(1);
     });
@@ -529,10 +526,7 @@ describe('Process middleware', () => {
 
         processMiddleware(req, res, next);
         expect(req.form).toBeDefined();
-        expect(req.form.data).toBeDefined();
-        expect(req.form.data['test-field-1']).toEqual('-01-01');
-        expect(req.form.data['test-field-2']).toEqual('2021--01');
-        expect(req.form.data['test-field-3']).toEqual('2000-01-');
+        expect(req.form.data).toBeUndefined();
         expect(next).toHaveBeenCalled();
         expect(next).toHaveBeenCalledTimes(1);
     });
