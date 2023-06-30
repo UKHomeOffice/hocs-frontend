@@ -23,7 +23,15 @@ const customAdapters = {
         const [year = '', month = '', day = ''] = value.split('-');
 
         if (year && month && day) {
-            reducer[name] = `${sanitiseValueString(year, YEAR_REGEX)}-${sanitiseValueString(month, MONTH_REGEX, 2)}-${sanitiseValueString(day, DAY_REGEX, 2)}`;
+            const sanitisedYear = `${sanitiseValueString(year, YEAR_REGEX)}`;
+            const sanitisedMonth = `${sanitiseValueString(month, MONTH_REGEX, 2)}`;
+            const sanitisedDay = `${sanitiseValueString(day, DAY_REGEX, 2)}`;
+
+            if(sanitisedYear === '' || sanitisedMonth === '' ||  sanitisedDay === '') {
+                reducer[name] = '';
+            } else {
+                reducer[name] = `${sanitisedYear}-${sanitisedMonth}-${sanitisedDay}`;
+            }
         } else {
             reducer[name] = '';
         }
@@ -236,6 +244,7 @@ function sanitiseValueString(value, pattern, padLength = 0) {
     const regexMatch = regexMatcher.exec(value);
 
     if (regexMatch) {
+
         return regexMatch[0]
             .replace(/^0+/, '')
             .padStart(padLength, '0');
