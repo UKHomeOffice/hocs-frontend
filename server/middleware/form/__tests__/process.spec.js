@@ -432,7 +432,7 @@ describe('Process middleware', () => {
     it('should return sanitised year on change', () => {
         const req = {
             body: {
-                ['test-field-1']: '0000-01-01',
+                ['test-field-1']: '2000-01-01',
                 ['test-field-2']: '00002021-01-01',
                 ['test-field-3']: '002000-01-01',
             },
@@ -475,7 +475,10 @@ describe('Process middleware', () => {
 
         processMiddleware(req, res, next);
         expect(req.form).toBeDefined();
-        expect(req.form.data).toBeUndefined();
+        expect(req.form.data).toBeDefined();
+        expect(req.form.data['test-field-1']).toEqual('2000-01-01');
+        expect(req.form.data['test-field-2']).toEqual('2021-01-01');
+        expect(req.form.data['test-field-3']).toEqual('2000-01-01');
         expect(next).toHaveBeenCalled();
         expect(next).toHaveBeenCalledTimes(1);
     });
