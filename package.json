@@ -16,7 +16,7 @@
         "test": "jest --coverage",
         "jest": "node_modules/jest/bin/jest.js  .",
         "lint": "eslint ./ --ext js,jsx --ignore-path .gitignore",
-        "audit": "npm audit",
+        "audit": "npm audit --omit dev && npm audit --audit-level high",
         "lint-staged": "node_modules/lint-staged/bin/lint-staged.js"
     },
     "jest": {
@@ -95,7 +95,7 @@
         "identity-obj-proxy": "^3.0.0",
         "jest": "^26.0.0",
         "jest-date-mock": "^1.0.8",
-        "lint-staged": "^13.2.2",
+        "lint-staged": "^13.2.3",
         "mini-css-extract-plugin": "^2.7.6",
         "nodemon": "^2.0.19",
         "postcss-loader": "^7.3.3",
@@ -116,5 +116,8 @@
     "lint-staged": {
         "*.js": "node_modules/eslint/bin/eslint.js ./ --ignore-path .gitignore",
         "*.jsx": "node_modules/eslint/bin/eslint.js ./ --ext .jsx --ignore-path .gitignore"
+    },
+    "overrides": {
+        "semver": "^7.5.3"
     }
 }
