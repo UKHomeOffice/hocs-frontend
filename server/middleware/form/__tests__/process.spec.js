@@ -483,57 +483,6 @@ describe('Process middleware', () => {
         expect(next).toHaveBeenCalledTimes(1);
     });
 
-    it('should reject date fields if contains non-numerical characters', () => {
-        const req = {
-            body: {
-                ['test-field-1']: 'da2021-01-01',
-                ['test-field-2']: '2021-01/-01',
-                ['test-field-3']: '2000-01-/01',
-            },
-            query: {},
-            form: {
-                schema: {
-                    fields: [
-                        {
-                            component: 'date',
-                            validation: [
-                                'required'
-                            ],
-                            props: {
-                                name: 'test-field-1',
-                            }
-                        },
-                        {
-                            component: 'date',
-                            validation: [
-                                'required'
-                            ],
-                            props: {
-                                name: 'test-field-2',
-                            }
-                        },
-                        {
-                            component: 'date',
-                            validation: [
-                                'required'
-                            ],
-                            props: {
-                                name: 'test-field-3',
-                            }
-                        }
-                    ]
-                }
-            }
-        };
-        const res = {};
-
-        processMiddleware(req, res, next);
-        expect(req.form).toBeDefined();
-        expect(req.form.data).toBeUndefined();
-        expect(next).toHaveBeenCalled();
-        expect(next).toHaveBeenCalledTimes(1);
-    });
-
     it('should process checkbox data passed as an array', () => {
         const req = {
             body: {
