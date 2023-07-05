@@ -8,6 +8,7 @@ const passport = require('passport');
 const session = require('express-session');
 const { KeycloakClient } = require('./server/libs/auth');
 const { isProduction } = require('./server/config');
+const { getCachedUserToken, cacheUserToken } = require('./server/middleware/userTokenCache')
 
 const app = express();
 const port = process.env.PORT || 8080;
@@ -19,7 +20,7 @@ app.use('/public', express.static(path.join(__dirname, 'build', 'public'), { max
 //      we need to use a shared session store like redis.
 app.use(session({
     //TODO: This needs to be changed to a secure key
-    secret: 'super-secret',
+    secret: '',
     resave: false,
     saveUninitialized: false,
     //TODO: This should also set an applicable maxAge
@@ -33,11 +34,22 @@ app.use(passport.session());
 
 KeycloakClient().configureStrategy();
 
-passport.serializeUser((user, done) => {
+passport.serializeUser(async (req, user, done) => {
+    console.log("serializeUser")
+    user.tokenSet = await getCachedUserToken(user.uuid)
+    console.log(user.tokenSet)
     done(null, user);
 });
 
-passport.deserializeUser((user, done) => {
+passport.deserializeUser(async (req, user, done) => {
+    console.log("deserializeUser")
+
+    const serializedTokenSet = await getCachedUserToken(user.uuid)
+
+    const userDetails = serializedTokenSet !== null ? serializedTokenSet : await cacheUserToken(user)
+
+    user.tokenSet = userDetails.tokenSet
+    console.log(user.tokenSet)
     done(null, user);
 });
 

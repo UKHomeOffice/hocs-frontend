@@ -8,7 +8,13 @@ const getDefaultExpiryDate = defaultTimeoutSeconds => new Date().getTime() + def
 const getRemainingSeconds = targetDate => Math.floor((targetDate - new Date().getTime()) / 1000);
 const keepAlive = () => axios.get('/api/keepalive')
     // eslint-disable-next-line no-undef
-    .catch(() => window.location.reload());
+    .catch(() => window.location.replace('/login'));
+
+const refreshSession = () => {
+    console.log("refreshSession")
+    window.location.replace('/auth/refresh')
+    console.log("no error")
+}
 
 const isTimingOut = (countDownForSeconds, remainingSeconds) => remainingSeconds < countDownForSeconds && remainingSeconds > 0;
 const isTimedOut = remainingSeconds => remainingSeconds <= 0;
@@ -52,12 +58,15 @@ const SessionTimer = () => {
     }, [targetDate]);
 
     const onModalButtonClick = React.useCallback(() => {
+        console.log("onModalButtonClick")
         if (isTimingOut(countDownForSeconds, remainingSeconds)) {
+            console.log("if - yes")
             // need to call twice so that we can parse the updated refresh token
-            keepAlive().then(() => keepAlive());
+            refreshSession();
         } else {
+            console.log("if - no")
             // eslint-disable-next-line no-undef
-            window.location.reload();
+            window.location.href = '/logout'
         }
     }, [remainingSeconds]);
 

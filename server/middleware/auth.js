@@ -14,13 +14,18 @@ const loginCallbackMiddleware = passport.authenticate('keycloak', {
 });
 
 const logoutMiddleware = (req, res, next) => {
+    console.log("logoutMiddleware")
     req.logout((err) => {
         if (err) {
             return next(err);
         }
 
         req.session.destroy();
-        const { ISSUER, LOGIN_URI } = forContext('AUTH').ISSUER;
+        //const { ISSUER, LOGIN_URI } = forContext('AUTH').ISSUER;
+
+        const ISSUER = 'http://localhost:9081/auth/realms/hocs';
+        const LOGIN_URI = 'http://localhost:8080/login'
+
         const keycloakLogoutUrl = `${ISSUER}/protocol/openid-connect/logout?redirect_uri=${encodeURIComponent(LOGIN_URI)}`;
         res.redirect(keycloakLogoutUrl);
     });
@@ -36,6 +41,7 @@ function sessionExpiryMiddleware(req, res, next) {
 }
 
 async function handleTokenRefresh(req, res, next) {
+    console.log("handleTokenRefresh")
     const {
         accessTokenExpiry,
         refreshTokenExpiry,
@@ -52,7 +58,7 @@ async function handleTokenRefresh(req, res, next) {
         try {
             refreshedTokenSet = await client.refresh(refreshToken);
         } catch (err) {
-            // Some instances we're identified within buffer period where token was marked invalid.
+            // Some instances were identified within buffer period where token was marked invalid.
             // TODO: if we handle the cookie expiry better, we can remove this
             req.session.destroy();
             return res.redirect('/login');
