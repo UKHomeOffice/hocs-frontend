@@ -7,7 +7,7 @@ import { act, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { createMemoryHistory } from 'history';
 import { MemoryRouter, Router } from 'react-router-dom';
 import qs from 'qs';
-import { ReportMetadata, ReportRow } from '../components/dataTable';
+import { ColumnMetadata, ReportMetadata, ReportRow } from '../components/dataTable';
 import { Route } from 'react-router';
 import { buildCompletablePromise } from './buildCompletablePromise.spec.utils';
 
@@ -89,7 +89,7 @@ const TEST_META: ReportMetadata = {
             type: 'NUMBER',
             render_on_dashboard: true,
             render_in_csv: true,
-            additional_fields: [],
+            additional_fields: {},
         },
         {
             key: 'date',
@@ -98,7 +98,7 @@ const TEST_META: ReportMetadata = {
             render_on_dashboard: true,
             render_in_csv: true,
             filter_type: 'DATE_RANGE',
-            additional_fields: [],
+            additional_fields: {},
         },
         {
             key: 'boolean',
@@ -107,7 +107,7 @@ const TEST_META: ReportMetadata = {
             render_on_dashboard: true,
             render_in_csv: false,
             filter_type: 'BOOLEAN',
-            additional_fields: [],
+            additional_fields: {},
         },
         {
             key: 'string',
@@ -116,7 +116,7 @@ const TEST_META: ReportMetadata = {
             render_on_dashboard: true,
             render_in_csv: true,
             filter_type: 'CONTAINS_TEXT',
-            additional_fields: [],
+            additional_fields: {},
         },
         {
             key: 'letter',
@@ -125,7 +125,7 @@ const TEST_META: ReportMetadata = {
             render_on_dashboard: false,
             render_in_csv: true,
             filter_type: 'SELECT',
-            additional_fields: [],
+            additional_fields: {},
         },
     ],
     id_column_key: 'ref',
@@ -143,14 +143,11 @@ function renderReportViewWithRouter(history: ReturnType<createMemoryHistory>, ma
     );
 }
 
-async function givenTestDataRendered() {
+async function givenTestDataRendered({ data = TEST_DATA, metadata = TEST_META } = {}) {
     const { match, history } = givenUrl({});
 
     const response = {
-        data: {
-            data: TEST_DATA,
-            metadata: TEST_META
-        }
+        data: { data, metadata }
     };
 
     const result = Promise.resolve(response);
@@ -205,6 +202,17 @@ async function expectForAllCells<T extends Compar>(
         },
         identity
     );
+}
+
+function overrideColumnMeta(metadata: ReportMetadata, columnKey: string, replacementColumnMetadata: ColumnMetadata): ReportMetadata {
+    return {
+        ...metadata,
+        columns: metadata.columns.map(
+            existingMeta => existingMeta.key === columnKey
+                ? replacementColumnMetadata
+                : existingMeta
+        )
+    };
 }
 
 describe('Renders a report datatable', () => {
@@ -427,5 +435,68 @@ describe('Renders a report datatable', () => {
             },
             null
         );
+    });
+
+    it('can use custom labels for boolean values', async () => {
+        const metadata = overrideColumnMeta(
+            TEST_META,
+            'boolean',
+            {
+                key: 'boolean',
+                display_name: 'Boolean',
+                type: 'BOOLEAN',
+                render_on_dashboard: true,
+                render_in_csv: false,
+                filter_type: 'BOOLEAN',
+                additional_fields: {
+                    label_if_true: 'True',
+                    label_if_false: 'False',
+                },
+            }
+        );
+
+        await givenTestDataRendered({ metadata });
+
+        await expectForAllCells(
+            'boolean',
+            cell => cell.innerHTML,
+            (_, curr) => {
+                expect(['True', 'False'].includes(curr)).toBeTruthy();
+            },
+            null
+        );
+
+        const filtersForm = await screen.findByTestId('filters-form');
+        expect(filtersForm.querySelector('[for="boolean--yes"]').innerHTML).toEqual('True');
+        expect(filtersForm.querySelector('[for="boolean--no"]').innerHTML).toEqual('False');
+    });
+
+    it('can use custom options for select filters', async () => {
+        const metadata = overrideColumnMeta(
+            TEST_META,
+            'string',
+            {
+                key: 'string',
+                display_name: 'String',
+                type: 'STRING',
+                render_on_dashboard: true,
+                render_in_csv: false,
+                filter_type: 'SELECT',
+                additional_fields: {
+                    filter_values: JSON.stringify(['Option one', 'Option two'])
+                },
+            }
+        );
+
+        await givenTestDataRendered({ metadata });
+
+        const filtersForm = await screen.findByTestId('filters-form');
+        const actualFilterOptions = Object.fromEntries(
+            [...filtersForm.querySelectorAll('#string > option')].map(opt => [opt.value, opt.innerHTML])
+        );
+        expect(Object.keys(actualFilterOptions)).toHaveLength(3);
+        expect(actualFilterOptions['']).toEqual('Don\'t filter by string');
+        expect(actualFilterOptions['Option one']).toEqual('Option one');
+        expect(actualFilterOptions['Option two']).toEqual('Option two');
     });
 });

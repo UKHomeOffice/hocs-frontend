@@ -11,18 +11,25 @@ interface SelectProps {
 }
 
 const Select = ({ column, data, value, onChange }: SelectProps) => {
-    const [options, setOptions] = useState<string[]>([]);
-    useEffect(() => {
-        const set = data.reduce(
-            (acc, row) => acc.add(row[column.key].toString()),
-            new Set<string>()
-        );
-        const options: string[] = [];
-        set.forEach(opt => options.push(opt));
-        options.sort();
+    const [options, setOptions] = useState<string[]>([] );
 
-        setOptions(options);
-    }, [data]);
+    useEffect(() => {
+        if(column.additional_fields?.filter_values) {
+            setOptions(JSON.parse(column.additional_fields?.filter_values));
+        } else {
+            const uniqueValues: string[] = [];
+
+            data
+                .filter(row => row[column.key])
+                .reduce(
+                    (acc, row) => acc.add(row[column.key].toString()),
+                    new Set<string>()
+                )
+                .forEach(opt => uniqueValues.push(opt));
+            uniqueValues.sort();
+            setOptions(uniqueValues);
+        }
+    }, [data, column.additional_fields?.filter_options]);
 
     return <select
         className='govuk-select'

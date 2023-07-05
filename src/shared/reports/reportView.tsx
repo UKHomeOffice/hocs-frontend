@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import dayjs from 'dayjs';
 import { Pagination } from './components/pagination';
-import { DataTable, ReportMetadata, ReportRow } from './components/dataTable';
+import { ColumnMetadata, DataTable, ReportMetadata, ReportRow } from './components/dataTable';
 import {
     applyFilters,
     Filter,
@@ -130,7 +130,7 @@ function buildFilterLink(
     return `${url}?${qs.stringify(queryParams, { arrayFormat: 'brackets' })}`;
 }
 
-function toCsvRow(data: (string | number | boolean)[]): string {
+function toCsvRow(data: string[]): string {
     return data
         .map(
             v => v.toString().match(/",/)
@@ -140,10 +140,43 @@ function toCsvRow(data: (string | number | boolean)[]): string {
         .join(',');
 }
 
+function toCsvCellValue(columnMeta: ColumnMetadata, reportValue: string | number | boolean): string {
+    switch (columnMeta.type) {
+        case 'BOOLEAN':
+            return reportValue
+                ? columnMeta.additional_fields?.label_if_true ?? 'Yes'
+                : columnMeta.additional_fields?.label_if_false ?? 'No';
+
+        default:
+            return reportValue?.toString() ?? '';
+    }
+}
+
+function toExportRow(reportMeta: ReportMetadata, reportRow: ReportRow): string[] {
+    return reportMeta.columns.reduce(
+        (exportRow, columnMeta) => {
+            if(!columnMeta.render_in_csv) {
+                return exportRow;
+            }
+
+            const reportValue = reportRow[columnMeta.key];
+            const exportValue = toCsvCellValue(columnMeta, reportValue);
+            return [...exportRow, exportValue];
+        },
+        []
+    );
+}
+
 function downloadReportAsCSV(reportMeta: ReportMetadata, sortedData: ReportRow[]) {
     const csvData = [
-        toCsvRow(reportMeta.columns.filter(c => c.render_in_csv).map(r => r.display_name)),
-        ...sortedData.map(r => toCsvRow(Object.values(r)))
+        toCsvRow(
+            reportMeta.columns
+                .filter(c => c.render_in_csv)
+                .map(c => c.display_name)
+        ),
+        ...sortedData
+            .map(r => toExportRow(reportMeta, r))
+            .map(toCsvRow)
     ];
 
     const csvBlob = new Blob([csvData.join('\n')], { type: 'text/csv' });
