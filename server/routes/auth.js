@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { loginMiddleware, loginCallbackMiddleware, logoutMiddleware, handleTokenRefresh, sessionExpiryMiddleware} = require('../middleware/auth');
+const { loginMiddleware, loginCallbackMiddleware, logoutMiddleware, handleTokenRefresh, sessionExpiryMiddleware } = require('../middleware/auth');
 
 router.get('/login', loginMiddleware);
 

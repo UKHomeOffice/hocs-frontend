@@ -3,7 +3,7 @@ const { ForbiddenError } = require('../models/error');
 const getLogger = require('../libs/logger');
 const passport = require('passport');
 const { KeycloakClient } = require('../libs/auth');
-const { forContext } = require('../config');
+const { cacheUserToken } = require('../middleware/userTokenCache');
 
 const loginMiddleware = passport.authenticate('keycloak');
 
@@ -14,7 +14,6 @@ const loginCallbackMiddleware = passport.authenticate('keycloak', {
 });
 
 const logoutMiddleware = (req, res, next) => {
-    console.log("logoutMiddleware")
     req.logout((err) => {
         if (err) {
             return next(err);
@@ -24,7 +23,7 @@ const logoutMiddleware = (req, res, next) => {
         //const { ISSUER, LOGIN_URI } = forContext('AUTH').ISSUER;
 
         const ISSUER = 'http://localhost:9081/auth/realms/hocs';
-        const LOGIN_URI = 'http://localhost:8080/login'
+        const LOGIN_URI = 'http://localhost:8080/login';
 
         const keycloakLogoutUrl = `${ISSUER}/protocol/openid-connect/logout?redirect_uri=${encodeURIComponent(LOGIN_URI)}`;
         res.redirect(keycloakLogoutUrl);
@@ -41,16 +40,10 @@ function sessionExpiryMiddleware(req, res, next) {
 }
 
 async function handleTokenRefresh(req, res, next) {
-    console.log("handleTokenRefresh")
     const {
-        accessTokenExpiry,
-        refreshTokenExpiry,
-        refreshToken
+        refreshToken,
+        refreshTokenExpiry
     } = req.user.tokenSet;
-
-    if (accessTokenExpiry && accessTokenExpiry > (Date.now() / 1000)) {
-        return next();
-    }
 
     if (refreshTokenExpiry && refreshTokenExpiry > (Date.now() / 1000)) {
         const client = await KeycloakClient().getClient();
@@ -71,6 +64,8 @@ async function handleTokenRefresh(req, res, next) {
         };
         req.session.passport.user = req.user;
         req.session.save();
+        await cacheUserToken(req.user);
+
         return next();
     }
 
@@ -87,13 +82,7 @@ function getSessionExpiry(logger, req) {
     logger.debug(`Access token expires at: ${accessTokenExpiry}`);
     logger.debug(`Refresh token expiry: ${refreshTokenExpiry}`);
 
-    if (refreshTokenExpiry) {
-        const expiresAt = new Date(refreshTokenExpiry * 1000);
-        logger.debug(`Refresh token expires at: ${expiresAt}`);
-        return expiresAt.toUTCString();
-    }
-
-    logger.info('Unable to get session expiry from refresh token. Using access token expiry');
+    logger.info('Using access token expiry from refresh token as session expiry.');
     return new Date(accessTokenExpiry * 1000);
 }
 

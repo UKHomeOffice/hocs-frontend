@@ -2,7 +2,7 @@ const passport = require('passport');
 const { Issuer, Strategy } = require('openid-client');
 const User = require('../models/user');
 const { forContext } = require('../config');
-const { cacheUserToken } = require("../middleware/userTokenCache");
+const { cacheUserToken } = require('../middleware/userTokenCache');
 
 const KeycloakClient = () => {
     let client;
@@ -53,11 +53,7 @@ const KeycloakClient = () => {
                     refreshToken: tokenset.refresh_token
                 };
 
-                cacheUserToken(user)
-
-                console.log("verify")
-                console.log(user.tokenSet)
-
+                cacheUserToken(user);
                 return done(null, user);
             }));
         }

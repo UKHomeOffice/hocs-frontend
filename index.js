@@ -8,7 +8,7 @@ const passport = require('passport');
 const session = require('express-session');
 const { KeycloakClient } = require('./server/libs/auth');
 const { isProduction } = require('./server/config');
-const { getCachedUserToken, cacheUserToken } = require('./server/middleware/userTokenCache')
+const { getCachedUserToken, cacheUserToken } = require('./server/middleware/userTokenCache');
 
 const app = express();
 const port = process.env.PORT || 8080;
@@ -35,21 +35,14 @@ app.use(passport.session());
 KeycloakClient().configureStrategy();
 
 passport.serializeUser(async (req, user, done) => {
-    console.log("serializeUser")
-    user.tokenSet = await getCachedUserToken(user.uuid)
-    console.log(user.tokenSet)
+    user.tokenSet = await getCachedUserToken(user.uuid);
     done(null, user);
 });
 
 passport.deserializeUser(async (req, user, done) => {
-    console.log("deserializeUser")
-
-    const serializedTokenSet = await getCachedUserToken(user.uuid)
-
-    const userDetails = serializedTokenSet !== null ? serializedTokenSet : await cacheUserToken(user)
-
-    user.tokenSet = userDetails.tokenSet
-    console.log(user.tokenSet)
+    const serializedTokenSet = await getCachedUserToken(user.uuid);
+    const userDetails = serializedTokenSet !== null ? serializedTokenSet : await cacheUserToken(user);
+    user.tokenSet = userDetails.tokenSet;
     done(null, user);
 });
 
