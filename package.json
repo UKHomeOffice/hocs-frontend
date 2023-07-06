@@ -16,7 +16,7 @@
         "test": "jest --coverage",
         "jest": "node_modules/jest/bin/jest.js  .",
         "lint": "eslint ./ --ext js,jsx --ignore-path .gitignore",
-        "audit": "npm audit --omit dev && npm audit --audit-level high",
+        "audit": "npm audit",
         "lint-staged": "node_modules/lint-staged/bin/lint-staged.js"
     },
     "jest": {
@@ -118,6 +118,7 @@
         "*.jsx": "node_modules/eslint/bin/eslint.js ./ --ext .jsx --ignore-path .gitignore"
     },
     "overrides": {
-        "semver": "^7.5.3"
+        "semver": "^7.5.3",
+        "optionator": "0.9.3"
     }
 }
