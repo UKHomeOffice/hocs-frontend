@@ -317,7 +317,8 @@
     {
       "type": "OUT_OF_CONTACT",
       "label": "Out of Contact",
-      "screen": "TAB_OUT_OF_CONTACT"
+      "screen": "TAB_OUT_OF_CONTACT",
+      "required_role": "WCS_OUT_OF_CONTACT"
     }
   ]
 }

@@ -3,7 +3,7 @@ const { caseworkService, workflowService } = require('../clients');
 const User = require('../models/user');
 const { formatDate } = require('../libs/dateHelpers');
 const { logger } = require('../libs/logger');
-const { fetchCaseTabsForCaseType } = require('../config/caseTabs/caseTabs');
+const { fetchCaseTabsForCaseTypeAndUser } = require('../config/caseTabs/caseTabs');
 
 async function caseResponseMiddleware(req, res, next) {
     const { form, user, requestId } = req;
@@ -48,7 +48,7 @@ function caseSummaryApiResponseMiddleware(req, res) {
 async function caseTabMiddleware(req, res, next) {
     try {
         const type = await req.listService.fetch('CASE_TYPE', req.params);
-        res.locals.caseTabs = fetchCaseTabsForCaseType(type);
+        res.locals.caseTabs = fetchCaseTabsForCaseTypeAndUser(type, req.user);
         return next();
     } catch (error) {
         return next(error);
