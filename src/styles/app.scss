@@ -930,4 +930,11 @@ $border-colour: govuk-colour("mid-grey");
   .govuk-checkboxes__label::before {
     background-color: #ffffff;
   }
+
+}
+
+.govuk-radios__divider, .govuk-radios--small .govuk-radios__divider  {
+  width: 100%;
+  text-align: left;
+  float:left;
 }
