@@ -21,7 +21,6 @@ export const CASE_TYPES = [
     'MTS',
     'POGR',
     'POGR2',
-    'SMC',
     'TO',
     'TRO',
 ] as const;

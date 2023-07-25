@@ -252,18 +252,6 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
-        S_SMC_BUS_AREA: {
-            client: 'INFO',
-            endpoint: '/entity/list/SMC_BUS_AREA',
-            type: listService.types.STATIC,
-            adapter: entityListItemsAdapter
-        },
-        S_SMC_CSU_LIST: {
-            client: 'INFO',
-            endpoint: '/entity/list/SMC_CSU_LIST',
-            type: listService.types.STATIC,
-            adapter: entityListItemsAdapter
-        },
         S_BF_CONTRIB_BUS_AREA: {
             client: 'INFO',
             endpoint: '/entity/list/BF_CONTRIB_BUS_AREA',
@@ -1065,12 +1053,6 @@ module.exports = {
         HMPO_CONTRIBUTION_BUS_AREA: {
             client: 'INFO',
             endpoint: '/entity/list/HMPO_CONTRIBUTION_BUS_AREA',
-            type: listService.types.STATIC,
-            adapter: entityListItemsAdapter
-        },
-        S_SMC_COMP_ORIGIN: {
-            client: 'INFO',
-            endpoint: '/entity/list/SMC_COMP_ORIGIN',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
