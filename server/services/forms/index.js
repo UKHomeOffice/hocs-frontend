@@ -35,13 +35,6 @@ const formDefinitions = {
                         action: 'CONFIRMATION_SUMMARY'
                     }
                 },
-                SMC: {
-                    builder: formRepository.addDocument,
-                    action: CREATE_CASE,
-                    next: {
-                        action: 'CONFIRMATION_SUMMARY'
-                    }
-                },
                 IEDET: {
                     builder: formRepository.addDocument,
                     action: CREATE_CASE,
