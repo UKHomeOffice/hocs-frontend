@@ -39,7 +39,7 @@ class Dropdown extends Component {
             for (var i = 0; i < conditionChoices.length; i++) {
                 const conditionPropertyValue = props.data[conditionChoices[i].conditionPropertyName];
                 if (conditionPropertyValue && conditionChoices[i].conditionPropertyValue === conditionPropertyValue) {
-                    choicesToUse = conditionChoices[i].choices;
+                    choicesToUse = conditionChoices[i].choices.filter(choice => choice.active ?? true);
                     break;
                 }
                 choicesToUse = [];
