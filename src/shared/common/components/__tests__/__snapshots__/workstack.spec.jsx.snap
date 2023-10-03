@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Workstack component should not add link to headers with sortStrategy noSort 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": <body>
     <div>
@@ -2288,7 +2288,7 @@ Object {
 `;
 
 exports[`Workstack component should render the move team options 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": <body>
     <div>
@@ -4759,7 +4759,7 @@ Object {
 `;
 
 exports[`Workstack component should sort descending when the column heading is clicked twice 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": <body>
     <div>
@@ -7046,7 +7046,7 @@ Object {
 `;
 
 exports[`Workstack component should sort when the column heading is clicked 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": <body>
     <div>

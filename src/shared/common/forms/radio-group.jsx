@@ -140,7 +140,7 @@ class Radio extends Component {
                             .map((choice, i) => {
                                 const idName = this.getIdName(name, i);
                                 if (choice.type === 'divider') {
-                                    return <div className="govuk-radios__divider">{choice.label}</div>;
+                                    return <div key={i} className="govuk-radios__divider">{choice.label}</div>;
                                 }
                                 return (
                                     <Fragment key={i}>

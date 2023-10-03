@@ -5,6 +5,7 @@ class DocumentPreview extends Component {
 
     renderDocumentPreview() {
         const { activeDocument, caseId } = this.props;
+        /* eslint-disable react/no-unknown-property */
         return (
             <embed
                 id={`document-${activeDocument}`}
@@ -16,6 +17,7 @@ class DocumentPreview extends Component {
                 pluginspage='http://www.adobe.com/products/acrobat/readstep2.html'
             />
         );
+        /* eslint-enable react/no-unknown-property */
     }
 
     render() {

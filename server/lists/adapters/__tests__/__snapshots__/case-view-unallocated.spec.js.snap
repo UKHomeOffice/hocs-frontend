@@ -1,100 +1,100 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Unallocated case view adapter should build a schema from the provided template and have sections maintain same order as schema object 1`] = `
-Object {
-  "data": Object {
+{
+  "data": {
     "my_date_field": "19/01/2020",
     "my_field": "Some Value",
   },
-  "meta": Object {},
-  "schema": Object {
+  "meta": {},
+  "schema": {
     "defaultActionLabel": "Submit",
-    "fields": Array [
-      Object {
+    "fields": [
+      {
         "component": "heading",
-        "props": Object {
+        "props": {
           "label": "Case details",
           "name": "case-view-heading",
         },
-        "validation": Array [],
+        "validation": [],
       },
-      Object {
+      {
         "component": "accordion",
-        "props": Object {
+        "props": {
           "name": "case-view",
-          "sections": Array [
-            Object {
-              "items": Array [
-                Object {
+          "sections": [
+            {
+              "items": [
+                {
                   "component": "mapped-display",
-                  "props": Object {
+                  "props": {
                     "component": "text",
                     "label": "My Field",
                     "name": "my_field",
                   },
-                  "validation": Array [],
+                  "validation": [],
                 },
-                Object {
+                {
                   "component": "mapped-display",
-                  "props": Object {
+                  "props": {
                     "component": "date",
                     "label": "My Date Field",
                     "name": "my_date_field",
                   },
-                  "validation": Array [],
+                  "validation": [],
                 },
               ],
               "title": "Test Stage 1",
             },
-            Object {
-              "items": Array [
-                Object {
+            {
+              "items": [
+                {
                   "component": "mapped-display",
-                  "props": Object {
+                  "props": {
                     "component": "text",
                     "label": "My Field",
                     "name": "my_field",
                   },
-                  "validation": Array [],
+                  "validation": [],
                 },
-                Object {
+                {
                   "component": "mapped-display",
-                  "props": Object {
+                  "props": {
                     "component": "date",
                     "label": "My Date Field",
                     "name": "my_date_field",
                   },
-                  "validation": Array [],
+                  "validation": [],
                 },
               ],
               "title": "Test Stage 2",
             },
-            Object {
-              "items": Array [
-                Object {
+            {
+              "items": [
+                {
                   "component": "mapped-display",
-                  "props": Object {
+                  "props": {
                     "component": "text",
                     "label": "My Field",
                     "name": "my_field",
                   },
-                  "validation": Array [],
+                  "validation": [],
                 },
-                Object {
+                {
                   "component": "mapped-display",
-                  "props": Object {
+                  "props": {
                     "component": "date",
                     "label": "My Date Field",
                     "name": "my_date_field",
                   },
-                  "validation": Array [],
+                  "validation": [],
                 },
               ],
               "title": "Test Stage 3",
             },
           ],
         },
-        "validation": Array [],
+        "validation": [],
       },
     ],
     "showPrimaryAction": false,
@@ -104,69 +104,69 @@ Object {
 `;
 
 exports[`Unallocated case view adapter should render SOMU Approval case view sections 1`] = `
-Object {
-  "data": Object {
+{
+  "data": {
     "ApprovalRequests": "Dummy Approval Role Complete - approved",
     "my_field": "Some Value",
     "stage_2_field_1": "Some Label",
   },
-  "meta": Object {},
-  "schema": Object {
+  "meta": {},
+  "schema": {
     "defaultActionLabel": "Submit",
-    "fields": Array [
-      Object {
+    "fields": [
+      {
         "component": "heading",
-        "props": Object {
+        "props": {
           "label": "Case details",
           "name": "case-view-heading",
         },
-        "validation": Array [],
+        "validation": [],
       },
-      Object {
+      {
         "component": "accordion",
-        "props": Object {
+        "props": {
           "name": "case-view",
-          "sections": Array [
-            Object {
-              "items": Array [
-                Object {
+          "sections": [
+            {
+              "items": [
+                {
                   "component": "mapped-display",
-                  "props": Object {
+                  "props": {
                     "component": "text",
                     "label": "My Field",
                     "name": "my_field",
                   },
-                  "validation": Array [],
+                  "validation": [],
                 },
               ],
               "title": "Test Stage 1",
             },
-            Object {
-              "items": Array [
-                Object {
+            {
+              "items": [
+                {
                   "component": "mapped-display",
-                  "props": Object {
+                  "props": {
                     "component": "text",
                     "label": "Stage 2 Field 1",
                     "name": "stage_2_field_1",
                   },
-                  "validation": Array [],
+                  "validation": [],
                 },
-                Object {
+                {
                   "component": "mapped-display",
-                  "props": Object {
+                  "props": {
                     "component": "somu-list",
                     "label": "Approval Requests",
                     "name": "ApprovalRequests",
                   },
-                  "validation": Array [],
+                  "validation": [],
                 },
               ],
               "title": "Test Stage 2",
             },
           ],
         },
-        "validation": Array [],
+        "validation": [],
       },
     ],
     "showPrimaryAction": false,
@@ -176,69 +176,69 @@ Object {
 `;
 
 exports[`Unallocated case view adapter should render SOMU COMP Contributions case view sections 1`] = `
-Object {
-  "data": Object {
+{
+  "data": {
     "CaseContributions": "Dummy Test Area - Dummy Test Unit Overdue 01/09/2021",
     "my_field": "Some Value",
     "stage_2_field_1": "Some Label",
   },
-  "meta": Object {},
-  "schema": Object {
+  "meta": {},
+  "schema": {
     "defaultActionLabel": "Submit",
-    "fields": Array [
-      Object {
+    "fields": [
+      {
         "component": "heading",
-        "props": Object {
+        "props": {
           "label": "Case details",
           "name": "case-view-heading",
         },
-        "validation": Array [],
+        "validation": [],
       },
-      Object {
+      {
         "component": "accordion",
-        "props": Object {
+        "props": {
           "name": "case-view",
-          "sections": Array [
-            Object {
-              "items": Array [
-                Object {
+          "sections": [
+            {
+              "items": [
+                {
                   "component": "mapped-display",
-                  "props": Object {
+                  "props": {
                     "component": "text",
                     "label": "My Field",
                     "name": "my_field",
                   },
-                  "validation": Array [],
+                  "validation": [],
                 },
               ],
               "title": "Test Stage 1",
             },
-            Object {
-              "items": Array [
-                Object {
+            {
+              "items": [
+                {
                   "component": "mapped-display",
-                  "props": Object {
+                  "props": {
                     "component": "text",
                     "label": "Stage 2 Field 1",
                     "name": "stage_2_field_1",
                   },
-                  "validation": Array [],
+                  "validation": [],
                 },
-                Object {
+                {
                   "component": "mapped-display",
-                  "props": Object {
+                  "props": {
                     "component": "somu-list",
                     "label": "Case contributions",
                     "name": "CaseContributions",
                   },
-                  "validation": Array [],
+                  "validation": [],
                 },
               ],
               "title": "Test Stage 2",
             },
           ],
         },
-        "validation": Array [],
+        "validation": [],
       },
     ],
     "showPrimaryAction": false,
@@ -248,69 +248,69 @@ Object {
 `;
 
 exports[`Unallocated case view adapter should render SOMU MPAM Contributions case view sections 1`] = `
-Object {
-  "data": Object {
+{
+  "data": {
     "CaseContributions": "Dummy Test Area - Dummy Test Unit Overdue 01/09/2021",
     "my_field": "Some Value",
     "stage_2_field_1": "Some Label",
   },
-  "meta": Object {},
-  "schema": Object {
+  "meta": {},
+  "schema": {
     "defaultActionLabel": "Submit",
-    "fields": Array [
-      Object {
+    "fields": [
+      {
         "component": "heading",
-        "props": Object {
+        "props": {
           "label": "Case details",
           "name": "case-view-heading",
         },
-        "validation": Array [],
+        "validation": [],
       },
-      Object {
+      {
         "component": "accordion",
-        "props": Object {
+        "props": {
           "name": "case-view",
-          "sections": Array [
-            Object {
-              "items": Array [
-                Object {
+          "sections": [
+            {
+              "items": [
+                {
                   "component": "mapped-display",
-                  "props": Object {
+                  "props": {
                     "component": "text",
                     "label": "My Field",
                     "name": "my_field",
                   },
-                  "validation": Array [],
+                  "validation": [],
                 },
               ],
               "title": "Test Stage 1",
             },
-            Object {
-              "items": Array [
-                Object {
+            {
+              "items": [
+                {
                   "component": "mapped-display",
-                  "props": Object {
+                  "props": {
                     "component": "text",
                     "label": "Stage 2 Field 1",
                     "name": "stage_2_field_1",
                   },
-                  "validation": Array [],
+                  "validation": [],
                 },
-                Object {
+                {
                   "component": "mapped-display",
-                  "props": Object {
+                  "props": {
                     "component": "somu-list",
                     "label": "Case contributions",
                     "name": "CaseContributions",
                   },
-                  "validation": Array [],
+                  "validation": [],
                 },
               ],
               "title": "Test Stage 2",
             },
           ],
         },
-        "validation": Array [],
+        "validation": [],
       },
     ],
     "showPrimaryAction": false,
@@ -320,39 +320,39 @@ Object {
 `;
 
 exports[`Unallocated case view adapter should render checkbox groups with separate values 1`] = `
-Object {
-  "data": Object {
+{
+  "data": {
     "checkbox_group": "label A, label B",
   },
-  "meta": Object {},
-  "schema": Object {
+  "meta": {},
+  "schema": {
     "defaultActionLabel": "Submit",
-    "fields": Array [
-      Object {
+    "fields": [
+      {
         "component": "heading",
-        "props": Object {
+        "props": {
           "label": "Case details",
           "name": "case-view-heading",
         },
-        "validation": Array [],
+        "validation": [],
       },
-      Object {
+      {
         "component": "accordion",
-        "props": Object {
+        "props": {
           "name": "case-view",
-          "sections": Array [
-            Object {
-              "items": Array [
-                Object {
+          "sections": [
+            {
+              "items": [
+                {
                   "component": "mapped-display",
-                  "props": Object {
-                    "choices": Array [
-                      Object {
+                  "props": {
+                    "choices": [
+                      {
                         "label": "label A",
                         "name": "nameA",
                         "value": "valueA",
                       },
-                      Object {
+                      {
                         "label": "label B",
                         "name": "nameB",
                         "value": "valueB",
@@ -362,14 +362,14 @@ Object {
                     "label": "Checkbox Group",
                     "name": "checkbox_group",
                   },
-                  "validation": Array [],
+                  "validation": [],
                 },
               ],
               "title": "Test Stage 1",
             },
           ],
         },
-        "validation": Array [],
+        "validation": [],
       },
     ],
     "showPrimaryAction": false,
@@ -379,35 +379,35 @@ Object {
 `;
 
 exports[`Unallocated case view adapter should render checkboxes with custom label 1`] = `
-Object {
-  "data": Object {
+{
+  "data": {
     "checkbox_field_1": "Test",
     "checkbox_field_2": "Test",
   },
-  "meta": Object {},
-  "schema": Object {
+  "meta": {},
+  "schema": {
     "defaultActionLabel": "Submit",
-    "fields": Array [
-      Object {
+    "fields": [
+      {
         "component": "heading",
-        "props": Object {
+        "props": {
           "label": "Case details",
           "name": "case-view-heading",
         },
-        "validation": Array [],
+        "validation": [],
       },
-      Object {
+      {
         "component": "accordion",
-        "props": Object {
+        "props": {
           "name": "case-view",
-          "sections": Array [
-            Object {
-              "items": Array [
-                Object {
+          "sections": [
+            {
+              "items": [
+                {
                   "component": "mapped-display",
-                  "props": Object {
-                    "choices": Array [
-                      Object {
+                  "props": {
+                    "choices": [
+                      {
                         "label": "Test",
                         "value": "Test",
                       },
@@ -416,13 +416,13 @@ Object {
                     "label": "Checkbox Field 1",
                     "name": "checkbox_field_1",
                   },
-                  "validation": Array [],
+                  "validation": [],
                 },
-                Object {
+                {
                   "component": "mapped-display",
-                  "props": Object {
-                    "choices": Array [
-                      Object {
+                  "props": {
+                    "choices": [
+                      {
                         "label": "Test",
                         "value": "Test",
                       },
@@ -432,14 +432,14 @@ Object {
                     "name": "checkbox_field_2",
                     "showLabel": true,
                   },
-                  "validation": Array [],
+                  "validation": [],
                 },
               ],
               "title": "Test Stage 1",
             },
           ],
         },
-        "validation": Array [],
+        "validation": [],
       },
     ],
     "showPrimaryAction": false,
@@ -449,129 +449,129 @@ Object {
 `;
 
 exports[`Unallocated case view adapter should render with inverse default config 1`] = `
-Object {
-  "data": Object {
+{
+  "data": {
     "my_date_field": "2020-01-19",
     "my_field": "Some Value",
     "test_hidden_field": "TEST",
   },
-  "meta": Object {},
-  "schema": Object {
+  "meta": {},
+  "schema": {
     "defaultActionLabel": "Submit",
-    "fields": Array [
-      Object {
+    "fields": [
+      {
         "component": "accordion",
-        "props": Object {
+        "props": {
           "name": "case-view",
-          "sections": Array [
-            Object {
-              "items": Array [
-                Object {
+          "sections": [
+            {
+              "items": [
+                {
                   "component": "text",
-                  "props": Object {
+                  "props": {
                     "disabled": true,
                     "label": "My Field",
                     "name": "my_field",
                   },
-                  "validation": Array [],
+                  "validation": [],
                 },
-                Object {
+                {
                   "component": "date",
-                  "props": Object {
+                  "props": {
                     "disabled": true,
                     "label": "My Date Field",
                     "name": "my_date_field",
                   },
-                  "validation": Array [],
+                  "validation": [],
                 },
-                Object {
+                {
                   "component": "text",
-                  "props": Object {
+                  "props": {
                     "disabled": true,
                     "label": "My Empty Field",
                     "name": "my_empty_field",
                   },
-                  "validation": Array [],
+                  "validation": [],
                 },
               ],
               "title": "Test Stage 1",
             },
-            Object {
-              "items": Array [
-                Object {
+            {
+              "items": [
+                {
                   "component": "text",
-                  "props": Object {
+                  "props": {
                     "disabled": true,
                     "label": "My Field",
                     "name": "my_field",
                   },
-                  "validation": Array [],
+                  "validation": [],
                 },
-                Object {
+                {
                   "component": "date",
-                  "props": Object {
+                  "props": {
                     "disabled": true,
                     "label": "My Date Field",
                     "name": "my_date_field",
                   },
-                  "validation": Array [],
+                  "validation": [],
                 },
-                Object {
+                {
                   "component": "text",
-                  "props": Object {
+                  "props": {
                     "disabled": true,
                     "label": "My Empty Field",
                     "name": "my_empty_field",
                   },
-                  "validation": Array [],
+                  "validation": [],
                 },
               ],
               "title": "Test Stage 2",
             },
-            Object {
-              "items": Array [
-                Object {
+            {
+              "items": [
+                {
                   "component": "text",
-                  "props": Object {
+                  "props": {
                     "disabled": true,
                     "label": "My Field",
                     "name": "my_field",
                   },
-                  "validation": Array [],
+                  "validation": [],
                 },
-                Object {
+                {
                   "component": "date",
-                  "props": Object {
+                  "props": {
                     "disabled": true,
                     "label": "My Date Field",
                     "name": "my_date_field",
                   },
-                  "validation": Array [],
+                  "validation": [],
                 },
-                Object {
+                {
                   "component": "text",
-                  "props": Object {
+                  "props": {
                     "disabled": true,
                     "label": "My Empty Field",
                     "name": "my_empty_field",
                   },
-                  "validation": Array [],
+                  "validation": [],
                 },
-                Object {
+                {
                   "component": "checkbox",
-                  "props": Object {
+                  "props": {
                     "disabled": true,
                     "label": "My Empty Field",
                     "name": "my_empty_field",
                   },
-                  "validation": Array [],
+                  "validation": [],
                 },
               ],
               "title": "Test Stage 3",
             },
           ],
         },
-        "validation": Array [],
+        "validation": [],
       },
     ],
     "showPrimaryAction": false,
