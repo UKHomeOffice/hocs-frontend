@@ -1,16 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`String Sorted Adapter should transform and sort string data 1`] = `
-Array [
-  Object {
+[
+  {
     "label": "String A",
     "value": "String A",
   },
-  Object {
+  {
     "label": "String B",
     "value": "String B",
   },
-  Object {
+  {
     "label": "String C",
     "value": "String C",
   },

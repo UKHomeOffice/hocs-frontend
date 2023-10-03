@@ -1,16 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Country Sort Adapter should sort United Kingdom to top 1`] = `
-Array [
-  Object {
+[
+  {
     "label": "United Kingdom",
     "value": "United Kingdom",
   },
-  Object {
+  {
     "label": "Country A",
     "value": "Country A",
   },
-  Object {
+  {
     "label": "Country B",
     "value": "Country B",
   },
@@ -18,16 +18,16 @@ Array [
 `;
 
 exports[`Country Sort Adapter should transform and sort country data 1`] = `
-Array [
-  Object {
+[
+  {
     "label": "Country A",
     "value": "Country A",
   },
-  Object {
+  {
     "label": "Country B",
     "value": "Country B",
   },
-  Object {
+  {
     "label": "Country C",
     "value": "Country C",
   },

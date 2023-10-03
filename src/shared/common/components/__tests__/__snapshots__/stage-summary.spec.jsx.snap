@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Stage summary component should not render the "Active Stage" title, when there are no active stages 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": <body>
     <div>
@@ -562,7 +562,7 @@ Object {
 `;
 
 exports[`Stage summary component should not show the empty address lines 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": <body>
     <div>
@@ -1271,7 +1271,7 @@ Object {
 `;
 
 exports[`Stage summary component should not show the empty organisation 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": <body>
     <div>
@@ -1994,7 +1994,7 @@ Object {
 `;
 
 exports[`Stage summary component should not show the previous case table when not provided 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": <body>
     <div>
@@ -2663,7 +2663,7 @@ Object {
 `;
 
 exports[`Stage summary component should render when summary provided in context 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": <body>
     <div>

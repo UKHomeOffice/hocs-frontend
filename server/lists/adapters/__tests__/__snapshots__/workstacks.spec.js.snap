@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Dashboard Adapter should transform a stage array to a dashboard schema 1`] = `
-Object {
-  "teams": Array [
+{
+  "teams": [
     Card {
       "count": 0,
       "label": "MOCK_TEAM",
-      "tags": Object {
+      "tags": {
         "allocated": 0,
         "overdue": 0,
       },
@@ -16,7 +16,7 @@ Object {
     Card {
       "count": 2,
       "label": "MOCK_TEAM",
-      "tags": Object {
+      "tags": {
         "allocated": 1,
         "overdue": 1,
       },
@@ -26,7 +26,7 @@ Object {
     Card {
       "count": 0,
       "label": "MOCK_TEAM",
-      "tags": Object {
+      "tags": {
         "allocated": 0,
         "overdue": 0,
       },
@@ -34,11 +34,11 @@ Object {
       "value": 3,
     },
   ],
-  "user": Array [
+  "user": [
     Card {
       "count": 1,
       "label": "Cases",
-      "tags": Object {
+      "tags": {
         "allocated": 0,
         "overdue": 1,
       },
@@ -50,12 +50,12 @@ Object {
 `;
 
 exports[`Dashboard Adapter should transform a stage array to a dashboard schema when deadlines are disabled 1`] = `
-Object {
-  "teams": Array [
+{
+  "teams": [
     Card {
       "count": 0,
       "label": "MOCK_TEAM",
-      "tags": Object {
+      "tags": {
         "allocated": 0,
         "overdue": 0,
       },
@@ -65,7 +65,7 @@ Object {
     Card {
       "count": 2,
       "label": "MOCK_TEAM",
-      "tags": Object {
+      "tags": {
         "allocated": 1,
         "overdue": 0,
       },
@@ -75,7 +75,7 @@ Object {
     Card {
       "count": 0,
       "label": "MOCK_TEAM",
-      "tags": Object {
+      "tags": {
         "allocated": 0,
         "overdue": 0,
       },
@@ -83,11 +83,11 @@ Object {
       "value": 3,
     },
   ],
-  "user": Array [
+  "user": [
     Card {
       "count": 1,
       "label": "Cases",
-      "tags": Object {
+      "tags": {
         "allocated": 0,
         "overdue": 0,
       },
@@ -99,16 +99,16 @@ Object {
 `;
 
 exports[`Team Workstack Adapter should hide unworkable 1`] = `
-Object {
+{
   "allocateToTeamEndpoint": "/allocate/team",
   "allocateToUserEndpoint": "/allocate/user",
   "allocateToWorkstackEndpoint": "/unallocate/",
-  "columns": Array [],
-  "dashboard": Array [
+  "columns": [],
+  "dashboard": [
     Card {
       "count": 3,
       "label": "MOCK_CASETYPE",
-      "tags": Object {
+      "tags": {
         "allocated": 1,
         "overdue": 1,
       },
@@ -118,7 +118,7 @@ Object {
     Card {
       "count": 3,
       "label": "MOCK_CASETYPE",
-      "tags": Object {
+      "tags": {
         "allocated": 1,
         "overdue": 1,
       },
@@ -126,9 +126,9 @@ Object {
       "value": "WCS",
     },
   ],
-  "items": Array [
-    Object {
-      "FOIRequesterDisplay": Object {},
+  "items": [
+    {
+      "FOIRequesterDisplay": {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedTopic": "MOCK_TOPIC",
@@ -137,14 +137,14 @@ Object {
       "caseReference": "A/1234567/19",
       "caseType": "DEFAULT",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "data": Object {},
+      "data": {},
       "deadline": "2020-12-31",
       "deadlineDisplay": "31/12/2020",
-      "mpWithOwnerDisplay": Object {
+      "mpWithOwnerDisplay": {
         "mp": "",
         "owner": "MOCK_USER",
       },
-      "primaryCorrespondentAndRefDisplay": Object {
+      "primaryCorrespondentAndRefDisplay": {
         "caseReference": "A/1234567/19",
       },
       "stageType": "A",
@@ -153,8 +153,8 @@ Object {
       "teamUUID": 2,
       "userUUID": 1,
     },
-    Object {
-      "FOIRequesterDisplay": Object {},
+    {
+      "FOIRequesterDisplay": {},
       "active": false,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedTopic": "MOCK_TOPIC",
@@ -163,14 +163,14 @@ Object {
       "caseReference": "A/1234567/19",
       "caseType": "DEFAULT",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "data": Object {},
+      "data": {},
       "deadline": "2020-12-31",
       "deadlineDisplay": "31/12/2020",
-      "mpWithOwnerDisplay": Object {
+      "mpWithOwnerDisplay": {
         "mp": "",
         "owner": "MOCK_USER",
       },
-      "primaryCorrespondentAndRefDisplay": Object {
+      "primaryCorrespondentAndRefDisplay": {
         "caseReference": "A/1234567/19",
       },
       "stageType": "A",
@@ -179,8 +179,8 @@ Object {
       "teamUUID": 2,
       "userUUID": 1,
     },
-    Object {
-      "FOIRequesterDisplay": Object {},
+    {
+      "FOIRequesterDisplay": {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedTopic": "MOCK_TOPIC",
@@ -188,14 +188,14 @@ Object {
       "caseReference": "A/1234568/19",
       "caseType": "DEFAULT",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "data": Object {},
+      "data": {},
       "deadline": "1900-01-02",
       "deadlineDisplay": "02/01/1900",
-      "mpWithOwnerDisplay": Object {
+      "mpWithOwnerDisplay": {
         "mp": "",
         "owner": undefined,
       },
-      "primaryCorrespondentAndRefDisplay": Object {
+      "primaryCorrespondentAndRefDisplay": {
         "caseReference": "A/1234568/19",
       },
       "stageType": "A",
@@ -204,22 +204,22 @@ Object {
       "teamUUID": 2,
       "userUUID": null,
     },
-    Object {
-      "FOIRequesterDisplay": Object {},
+    {
+      "FOIRequesterDisplay": {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
       "caseReference": "A/1234568/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "data": Object {},
+      "data": {},
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
-      "mpWithOwnerDisplay": Object {
+      "mpWithOwnerDisplay": {
         "mp": "",
         "owner": "MOCK_USER",
       },
-      "primaryCorrespondentAndRefDisplay": Object {
+      "primaryCorrespondentAndRefDisplay": {
         "caseReference": "A/1234568/19",
       },
       "stageType": "A",
@@ -228,21 +228,21 @@ Object {
       "teamUUID": 2,
       "userUUID": 2,
     },
-    Object {
-      "FOIRequesterDisplay": Object {},
+    {
+      "FOIRequesterDisplay": {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "caseReference": "A/1234569/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "data": Object {},
+      "data": {},
       "deadline": "1900-01-04",
       "deadlineDisplay": "04/01/1900",
-      "mpWithOwnerDisplay": Object {
+      "mpWithOwnerDisplay": {
         "mp": "",
         "owner": undefined,
       },
-      "primaryCorrespondentAndRefDisplay": Object {
+      "primaryCorrespondentAndRefDisplay": {
         "caseReference": "A/1234569/19",
       },
       "stageType": "A",
@@ -251,22 +251,22 @@ Object {
       "teamUUID": 2,
       "userUUID": null,
     },
-    Object {
-      "FOIRequesterDisplay": Object {},
+    {
+      "FOIRequesterDisplay": {},
       "active": false,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
       "caseReference": "A/1234569/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "data": Object {},
+      "data": {},
       "deadline": "06-01-2200",
       "deadlineDisplay": null,
-      "mpWithOwnerDisplay": Object {
+      "mpWithOwnerDisplay": {
         "mp": "",
         "owner": "MOCK_USER",
       },
-      "primaryCorrespondentAndRefDisplay": Object {
+      "primaryCorrespondentAndRefDisplay": {
         "caseReference": "A/1234569/19",
       },
       "stageType": "A",
@@ -277,21 +277,21 @@ Object {
     },
   ],
   "label": "MOCK_TEAM",
-  "teamMembers": Array [],
+  "teamMembers": [],
 }
 `;
 
 exports[`Team Workstack Adapter should transform a stage array to a team workstack schema 1`] = `
-Object {
+{
   "allocateToTeamEndpoint": "/allocate/team",
   "allocateToUserEndpoint": "/allocate/user",
   "allocateToWorkstackEndpoint": "/unallocate/",
-  "columns": Array [],
-  "dashboard": Array [
+  "columns": [],
+  "dashboard": [
     Card {
       "count": 4,
       "label": "MOCK_CASETYPE",
-      "tags": Object {
+      "tags": {
         "allocated": 1,
         "overdue": 2,
       },
@@ -301,7 +301,7 @@ Object {
     Card {
       "count": 4,
       "label": "MOCK_CASETYPE",
-      "tags": Object {
+      "tags": {
         "allocated": 2,
         "overdue": 2,
       },
@@ -311,7 +311,7 @@ Object {
     Card {
       "count": 1,
       "label": "MOCK_CASETYPE",
-      "tags": Object {
+      "tags": {
         "allocated": 0,
         "overdue": 0,
       },
@@ -319,9 +319,9 @@ Object {
       "value": "FOI",
     },
   ],
-  "items": Array [
-    Object {
-      "FOIRequesterDisplay": Object {},
+  "items": [
+    {
+      "FOIRequesterDisplay": {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedTopic": "MOCK_TOPIC",
@@ -330,14 +330,14 @@ Object {
       "caseReference": "A/1234567/19",
       "caseType": "DEFAULT",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "data": Object {},
+      "data": {},
       "deadline": "1900-01-01",
       "deadlineDisplay": "01/01/1900",
-      "mpWithOwnerDisplay": Object {
+      "mpWithOwnerDisplay": {
         "mp": "",
         "owner": "MOCK_USER",
       },
-      "primaryCorrespondentAndRefDisplay": Object {
+      "primaryCorrespondentAndRefDisplay": {
         "caseReference": "A/1234567/19",
       },
       "stageType": "A",
@@ -346,8 +346,8 @@ Object {
       "teamUUID": 2,
       "userUUID": 1,
     },
-    Object {
-      "FOIRequesterDisplay": Object {},
+    {
+      "FOIRequesterDisplay": {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedTopic": "MOCK_TOPIC",
@@ -356,14 +356,14 @@ Object {
       "caseReference": "A/1234567/19",
       "caseType": "DEFAULT",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "data": Object {},
+      "data": {},
       "deadline": "2020-12-31",
       "deadlineDisplay": "31/12/2020",
-      "mpWithOwnerDisplay": Object {
+      "mpWithOwnerDisplay": {
         "mp": "",
         "owner": "MOCK_USER",
       },
-      "primaryCorrespondentAndRefDisplay": Object {
+      "primaryCorrespondentAndRefDisplay": {
         "caseReference": "A/1234567/19",
       },
       "stageType": "A",
@@ -372,8 +372,8 @@ Object {
       "teamUUID": 2,
       "userUUID": 1,
     },
-    Object {
-      "FOIRequesterDisplay": Object {},
+    {
+      "FOIRequesterDisplay": {},
       "active": false,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedTopic": "MOCK_TOPIC",
@@ -382,14 +382,14 @@ Object {
       "caseReference": "A/1234567/19",
       "caseType": "DEFAULT",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "data": Object {},
+      "data": {},
       "deadline": "2020-12-31",
       "deadlineDisplay": "31/12/2020",
-      "mpWithOwnerDisplay": Object {
+      "mpWithOwnerDisplay": {
         "mp": "",
         "owner": "MOCK_USER",
       },
-      "primaryCorrespondentAndRefDisplay": Object {
+      "primaryCorrespondentAndRefDisplay": {
         "caseReference": "A/1234567/19",
       },
       "stageType": "A",
@@ -398,8 +398,8 @@ Object {
       "teamUUID": 2,
       "userUUID": 1,
     },
-    Object {
-      "FOIRequesterDisplay": Object {},
+    {
+      "FOIRequesterDisplay": {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedTopic": "MOCK_TOPIC",
@@ -407,14 +407,14 @@ Object {
       "caseReference": "A/1234568/19",
       "caseType": "DEFAULT",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "data": Object {},
+      "data": {},
       "deadline": "1900-01-02",
       "deadlineDisplay": "02/01/1900",
-      "mpWithOwnerDisplay": Object {
+      "mpWithOwnerDisplay": {
         "mp": "",
         "owner": undefined,
       },
-      "primaryCorrespondentAndRefDisplay": Object {
+      "primaryCorrespondentAndRefDisplay": {
         "caseReference": "A/1234568/19",
       },
       "stageType": "A",
@@ -423,22 +423,22 @@ Object {
       "teamUUID": 2,
       "userUUID": null,
     },
-    Object {
-      "FOIRequesterDisplay": Object {},
+    {
+      "FOIRequesterDisplay": {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
       "caseReference": "A/1234568/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "data": Object {},
+      "data": {},
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
-      "mpWithOwnerDisplay": Object {
+      "mpWithOwnerDisplay": {
         "mp": "",
         "owner": "MOCK_USER",
       },
-      "primaryCorrespondentAndRefDisplay": Object {
+      "primaryCorrespondentAndRefDisplay": {
         "caseReference": "A/1234568/19",
       },
       "stageType": "A",
@@ -447,7 +447,7 @@ Object {
       "teamUUID": 2,
       "userUUID": 2,
     },
-    Object {
+    {
       "FOIRequesterDisplay": "testNameFOIRequester",
       "active": true,
       "applicantOrConstituentCorrespondentDisplay": "",
@@ -456,31 +456,31 @@ Object {
       "caseReference": "A/1234568/19",
       "caseType": "FOI",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "correspondents": Object {
-        "correspondents": Array [
-          Object {
+      "correspondents": {
+        "correspondents": [
+          {
             "fullname": "testNameFOIRequester",
             "is_primary": "true",
             "uuid": "uuid123",
           },
         ],
       },
-      "data": Object {
+      "data": {
         "CaseContributions": "[{}]",
       },
       "deadline": "2200-02-03",
       "deadlineDisplay": "03/02/2200",
       "memberCorrespondentDisplay": "",
-      "mpWithOwnerDisplay": Object {
+      "mpWithOwnerDisplay": {
         "mp": "",
         "owner": "MOCK_USER",
       },
-      "primaryCorrespondent": Object {
+      "primaryCorrespondent": {
         "fullname": "testNameFOIRequester",
         "is_primary": "true",
         "uuid": "uuid123",
       },
-      "primaryCorrespondentAndRefDisplay": Object {
+      "primaryCorrespondentAndRefDisplay": {
         "caseReference": "A/1234568/19",
         "primaryCorrespondentFullName": "testNameFOIRequester",
       },
@@ -490,21 +490,21 @@ Object {
       "teamUUID": 2,
       "userUUID": 2,
     },
-    Object {
-      "FOIRequesterDisplay": Object {},
+    {
+      "FOIRequesterDisplay": {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "caseReference": "A/1234569/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "data": Object {},
+      "data": {},
       "deadline": "1900-01-04",
       "deadlineDisplay": "04/01/1900",
-      "mpWithOwnerDisplay": Object {
+      "mpWithOwnerDisplay": {
         "mp": "",
         "owner": undefined,
       },
-      "primaryCorrespondentAndRefDisplay": Object {
+      "primaryCorrespondentAndRefDisplay": {
         "caseReference": "A/1234569/19",
       },
       "stageType": "A",
@@ -513,22 +513,22 @@ Object {
       "teamUUID": 2,
       "userUUID": null,
     },
-    Object {
-      "FOIRequesterDisplay": Object {},
+    {
+      "FOIRequesterDisplay": {},
       "active": false,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
       "caseReference": "A/1234569/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "data": Object {},
+      "data": {},
       "deadline": "06-01-2200",
       "deadlineDisplay": null,
-      "mpWithOwnerDisplay": Object {
+      "mpWithOwnerDisplay": {
         "mp": "",
         "owner": "MOCK_USER",
       },
-      "primaryCorrespondentAndRefDisplay": Object {
+      "primaryCorrespondentAndRefDisplay": {
         "caseReference": "A/1234569/19",
       },
       "stageType": "A",
@@ -537,21 +537,21 @@ Object {
       "teamUUID": 2,
       "userUUID": 1,
     },
-    Object {
-      "FOIRequesterDisplay": Object {},
+    {
+      "FOIRequesterDisplay": {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "caseReference": "A/1234570/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "data": Object {},
+      "data": {},
       "deadline": "1900-01-05",
       "deadlineDisplay": "05/01/1900",
-      "mpWithOwnerDisplay": Object {
+      "mpWithOwnerDisplay": {
         "mp": "",
         "owner": undefined,
       },
-      "primaryCorrespondentAndRefDisplay": Object {
+      "primaryCorrespondentAndRefDisplay": {
         "caseReference": "A/1234570/19",
       },
       "stageType": "A",
@@ -562,21 +562,21 @@ Object {
     },
   ],
   "label": "MOCK_TEAM",
-  "teamMembers": Array [],
+  "teamMembers": [],
 }
 `;
 
 exports[`Team Workstack Adapter should transform a stage array to a team workstack schema ordered by systemCalculatedPriority 1`] = `
-Object {
+{
   "allocateToTeamEndpoint": "/allocate/team",
   "allocateToUserEndpoint": "/allocate/user",
   "allocateToWorkstackEndpoint": "/unallocate/",
-  "columns": Array [],
-  "dashboard": Array [
+  "columns": [],
+  "dashboard": [
     Card {
       "count": 4,
       "label": "MOCK_CASETYPE",
-      "tags": Object {
+      "tags": {
         "allocated": 2,
         "overdue": 2,
       },
@@ -586,7 +586,7 @@ Object {
     Card {
       "count": 1,
       "label": "MOCK_CASETYPE",
-      "tags": Object {
+      "tags": {
         "allocated": 1,
         "overdue": 1,
       },
@@ -594,24 +594,24 @@ Object {
       "value": "DEFAULT",
     },
   ],
-  "items": Array [
-    Object {
-      "FOIRequesterDisplay": Object {},
+  "items": [
+    {
+      "FOIRequesterDisplay": {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "caseReference": "A/1234569/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "data": Object {
+      "data": {
         "systemCalculatedPriority": 97,
       },
       "deadline": "1900-01-04",
       "deadlineDisplay": "04/01/1900",
-      "mpWithOwnerDisplay": Object {
+      "mpWithOwnerDisplay": {
         "mp": "",
         "owner": undefined,
       },
-      "primaryCorrespondentAndRefDisplay": Object {
+      "primaryCorrespondentAndRefDisplay": {
         "caseReference": "A/1234569/19",
       },
       "stageType": "A",
@@ -620,24 +620,24 @@ Object {
       "teamUUID": 2,
       "userUUID": null,
     },
-    Object {
-      "FOIRequesterDisplay": Object {},
+    {
+      "FOIRequesterDisplay": {},
       "active": false,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
       "caseReference": "A/1234569/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "data": Object {
+      "data": {
         "systemCalculatedPriority": 56.3,
       },
       "deadline": "06-01-2200",
       "deadlineDisplay": null,
-      "mpWithOwnerDisplay": Object {
+      "mpWithOwnerDisplay": {
         "mp": "",
         "owner": "MOCK_USER",
       },
-      "primaryCorrespondentAndRefDisplay": Object {
+      "primaryCorrespondentAndRefDisplay": {
         "caseReference": "A/1234569/19",
       },
       "stageType": "A",
@@ -646,23 +646,23 @@ Object {
       "teamUUID": 2,
       "userUUID": 1,
     },
-    Object {
-      "FOIRequesterDisplay": Object {},
+    {
+      "FOIRequesterDisplay": {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "caseReference": "A/1234570/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "data": Object {
+      "data": {
         "systemCalculatedPriority": 43.9,
       },
       "deadline": "1900-01-05",
       "deadlineDisplay": "05/01/1900",
-      "mpWithOwnerDisplay": Object {
+      "mpWithOwnerDisplay": {
         "mp": "",
         "owner": undefined,
       },
-      "primaryCorrespondentAndRefDisplay": Object {
+      "primaryCorrespondentAndRefDisplay": {
         "caseReference": "A/1234570/19",
       },
       "stageType": "A",
@@ -671,8 +671,8 @@ Object {
       "teamUUID": 2,
       "userUUID": null,
     },
-    Object {
-      "FOIRequesterDisplay": Object {},
+    {
+      "FOIRequesterDisplay": {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedTopic": "MOCK_TOPIC",
@@ -680,16 +680,16 @@ Object {
       "caseReference": "A/1234568/19",
       "caseType": "DEFAULT",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "data": Object {
+      "data": {
         "systemCalculatedPriority": 35,
       },
       "deadline": "1900-01-02",
       "deadlineDisplay": "02/01/1900",
-      "mpWithOwnerDisplay": Object {
+      "mpWithOwnerDisplay": {
         "mp": "",
         "owner": undefined,
       },
-      "primaryCorrespondentAndRefDisplay": Object {
+      "primaryCorrespondentAndRefDisplay": {
         "caseReference": "A/1234568/19",
       },
       "stageType": "A",
@@ -698,24 +698,24 @@ Object {
       "teamUUID": 2,
       "userUUID": null,
     },
-    Object {
-      "FOIRequesterDisplay": Object {},
+    {
+      "FOIRequesterDisplay": {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
       "caseReference": "A/1234568/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "data": Object {
+      "data": {
         "systemCalculatedPriority": 13.43,
       },
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
-      "mpWithOwnerDisplay": Object {
+      "mpWithOwnerDisplay": {
         "mp": "",
         "owner": "MOCK_USER",
       },
-      "primaryCorrespondentAndRefDisplay": Object {
+      "primaryCorrespondentAndRefDisplay": {
         "caseReference": "A/1234568/19",
       },
       "stageType": "A",
@@ -726,17 +726,17 @@ Object {
     },
   ],
   "label": "MOCK_TEAM",
-  "teamMembers": Array [],
+  "teamMembers": [],
 }
 `;
 
 exports[`User Workstack Adapter should transform a stage array to a user workstack schema 1`] = `
-Object {
+{
   "allocateToWorkstackEndpoint": "/unallocate/",
-  "columns": Array [],
-  "items": Array [
-    Object {
-      "FOIRequesterDisplay": Object {},
+  "columns": [],
+  "items": [
+    {
+      "FOIRequesterDisplay": {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedTopic": "MOCK_TOPIC",
@@ -744,14 +744,14 @@ Object {
       "assignedUserDisplay": "MOCK_USER",
       "caseType": "DEFAULT",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "data": Object {},
+      "data": {},
       "deadline": "2200-01-01",
       "deadlineDisplay": "01/01/2200",
-      "mpWithOwnerDisplay": Object {
+      "mpWithOwnerDisplay": {
         "mp": "",
         "owner": "MOCK_USER",
       },
-      "primaryCorrespondentAndRefDisplay": Object {
+      "primaryCorrespondentAndRefDisplay": {
         "caseReference": undefined,
       },
       "stageType": "A",
@@ -760,21 +760,21 @@ Object {
       "teamUUID": 1,
       "userUUID": 1,
     },
-    Object {
-      "FOIRequesterDisplay": Object {},
+    {
+      "FOIRequesterDisplay": {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "data": Object {},
+      "data": {},
       "deadline": "2200-01-02",
       "deadlineDisplay": "02/01/2200",
-      "mpWithOwnerDisplay": Object {
+      "mpWithOwnerDisplay": {
         "mp": "",
         "owner": "MOCK_USER",
       },
-      "primaryCorrespondentAndRefDisplay": Object {
+      "primaryCorrespondentAndRefDisplay": {
         "caseReference": undefined,
       },
       "stageType": "A",
@@ -783,20 +783,20 @@ Object {
       "teamUUID": 2,
       "userUUID": 2,
     },
-    Object {
-      "FOIRequesterDisplay": Object {},
+    {
+      "FOIRequesterDisplay": {},
       "active": false,
       "assignedTeamDisplay": "MOCK_TEAM",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "data": Object {},
+      "data": {},
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
-      "mpWithOwnerDisplay": Object {
+      "mpWithOwnerDisplay": {
         "mp": "",
         "owner": undefined,
       },
-      "primaryCorrespondentAndRefDisplay": Object {
+      "primaryCorrespondentAndRefDisplay": {
         "caseReference": undefined,
       },
       "stageType": "A",
@@ -811,14 +811,14 @@ Object {
 `;
 
 exports[`Workflow Workstack Adapter should add the case ref and primary correspondent to primaryCorrespondentAndRefDisplay 1`] = `
-Object {
+{
   "allocateToTeamEndpoint": "/allocate/team",
   "allocateToUserEndpoint": "/allocate/user",
   "allocateToWorkstackEndpoint": "/unallocate/",
-  "columns": Array [],
-  "items": Array [
-    Object {
-      "FOIRequesterDisplay": Object {},
+  "columns": [],
+  "items": [
+    {
+      "FOIRequesterDisplay": {},
       "active": true,
       "applicantOrConstituentCorrespondentDisplay": "",
       "assignedTeamDisplay": "MOCK_TEAM",
@@ -826,9 +826,9 @@ Object {
       "caseReference": "A/1234568/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "correspondents": Object {
-        "correspondents": Array [
-          Object {
+      "correspondents": {
+        "correspondents": [
+          {
             "fullname": "testName",
             "is_primary": "true",
             "uuid": "uuid123",
@@ -838,16 +838,16 @@ Object {
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
       "memberCorrespondentDisplay": "",
-      "mpWithOwnerDisplay": Object {
+      "mpWithOwnerDisplay": {
         "mp": "",
         "owner": "MOCK_USER",
       },
-      "primaryCorrespondent": Object {
+      "primaryCorrespondent": {
         "fullname": "testName",
         "is_primary": "true",
         "uuid": "uuid123",
       },
-      "primaryCorrespondentAndRefDisplay": Object {
+      "primaryCorrespondentAndRefDisplay": {
         "caseReference": "A/1234568/19",
         "primaryCorrespondentFullName": "testName",
       },
@@ -859,18 +859,18 @@ Object {
     },
   ],
   "label": "MOCK_STAGETYPE",
-  "teamMembers": Array [],
+  "teamMembers": [],
 }
 `;
 
 exports[`Workflow Workstack Adapter should add the case ref and requester to primaryCorrespondentAndRefDisplay 1`] = `
-Object {
+{
   "allocateToTeamEndpoint": "/allocate/team",
   "allocateToUserEndpoint": "/allocate/user",
   "allocateToWorkstackEndpoint": "/unallocate/",
-  "columns": Array [],
-  "items": Array [
-    Object {
+  "columns": [],
+  "items": [
+    {
       "FOIRequesterDisplay": "testRequesterName",
       "active": true,
       "applicantOrConstituentCorrespondentDisplay": "",
@@ -879,31 +879,31 @@ Object {
       "caseReference": "A/1234568/21",
       "caseType": "FOI",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "correspondents": Object {
-        "correspondents": Array [
-          Object {
+      "correspondents": {
+        "correspondents": [
+          {
             "fullname": "testRequesterName",
             "is_primary": "true",
             "uuid": "uuid123",
           },
         ],
       },
-      "data": Object {
+      "data": {
         "CaseContributions": "[{}]",
       },
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
       "memberCorrespondentDisplay": "",
-      "mpWithOwnerDisplay": Object {
+      "mpWithOwnerDisplay": {
         "mp": "",
         "owner": "MOCK_USER",
       },
-      "primaryCorrespondent": Object {
+      "primaryCorrespondent": {
         "fullname": "testRequesterName",
         "is_primary": "true",
         "uuid": "uuid123",
       },
-      "primaryCorrespondentAndRefDisplay": Object {
+      "primaryCorrespondentAndRefDisplay": {
         "caseReference": "A/1234568/21",
         "primaryCorrespondentFullName": "testRequesterName",
       },
@@ -915,19 +915,19 @@ Object {
     },
   ],
   "label": "MOCK_STAGETYPE",
-  "teamMembers": Array [],
+  "teamMembers": [],
 }
 `;
 
 exports[`Workflow Workstack Adapter should add the fullname and postcode of primaryCorrespondent to primaryCorrespondent 1`] = `
-Object {
+{
   "allocateToTeamEndpoint": "/allocate/team",
   "allocateToUserEndpoint": "/allocate/user",
   "allocateToWorkstackEndpoint": "/unallocate/",
-  "columns": Array [],
-  "items": Array [
-    Object {
-      "FOIRequesterDisplay": Object {},
+  "columns": [],
+  "items": [
+    {
+      "FOIRequesterDisplay": {},
       "active": true,
       "applicantOrConstituentCorrespondentDisplay": "",
       "assignedTeamDisplay": "MOCK_TEAM",
@@ -935,15 +935,15 @@ Object {
       "caseReference": "COMP/1234568/19",
       "caseType": "COMP",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "correspondents": Object {
-        "correspondents": Array [
-          Object {
+      "correspondents": {
+        "correspondents": [
+          {
             "fullname": "testName",
             "is_primary": "false",
             "postcode": "postcode1",
             "uuid": "uuid123",
           },
-          Object {
+          {
             "fullname": "primaryC",
             "is_primary": "true",
             "postcode": "postcode2",
@@ -951,23 +951,23 @@ Object {
           },
         ],
       },
-      "data": Object {
+      "data": {
         "CaseContributions": "[{}]",
       },
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
       "memberCorrespondentDisplay": "",
-      "mpWithOwnerDisplay": Object {
+      "mpWithOwnerDisplay": {
         "mp": "",
         "owner": "MOCK_USER",
       },
-      "primaryCorrespondent": Object {
+      "primaryCorrespondent": {
         "fullname": "primaryC",
         "is_primary": "true",
         "postcode": "postcode2",
         "uuid": "uuid456",
       },
-      "primaryCorrespondentAndRefDisplay": Object {
+      "primaryCorrespondentAndRefDisplay": {
         "caseReference": "COMP/1234568/19",
         "primaryCorrespondentFullName": "primaryC",
       },
@@ -979,33 +979,33 @@ Object {
     },
   ],
   "label": "MOCK_STAGETYPE",
-  "teamMembers": Array [],
+  "teamMembers": [],
 }
 `;
 
 exports[`Workflow Workstack Adapter should add the primary correspondent to FOIRequester field for FOI case type 1`] = `
-Object {
+{
   "allocateToTeamEndpoint": "/allocate/team",
   "allocateToUserEndpoint": "/allocate/user",
   "allocateToWorkstackEndpoint": "/unallocate/",
-  "columns": Array [],
-  "items": Array [],
+  "columns": [],
+  "items": [],
   "label": "MOCK_STAGETYPE",
-  "teamMembers": Array [],
+  "teamMembers": [],
 }
 `;
 
 exports[`Workflow Workstack Adapter should hide unworkable 1`] = `
-Object {
+{
   "allocateToTeamEndpoint": "/allocate/team",
   "allocateToUserEndpoint": "/allocate/user",
   "allocateToWorkstackEndpoint": "/unallocate/",
-  "columns": Array [],
-  "dashboard": Array [
+  "columns": [],
+  "dashboard": [
     Card {
       "count": 3,
       "label": "MOCK_STAGETYPE",
-      "tags": Object {
+      "tags": {
         "allocated": 2,
         "overdue": 2,
       },
@@ -1015,7 +1015,7 @@ Object {
     Card {
       "count": 1,
       "label": "MOCK_STAGETYPE",
-      "tags": Object {
+      "tags": {
         "allocated": 1,
         "overdue": 1,
       },
@@ -1023,22 +1023,22 @@ Object {
       "value": "B",
     },
   ],
-  "items": Array [
-    Object {
-      "FOIRequesterDisplay": Object {},
+  "items": [
+    {
+      "FOIRequesterDisplay": {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "caseReference": "A/1234569/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "data": Object {},
+      "data": {},
       "deadline": "1900-01-04",
       "deadlineDisplay": "04/01/1900",
-      "mpWithOwnerDisplay": Object {
+      "mpWithOwnerDisplay": {
         "mp": "",
         "owner": undefined,
       },
-      "primaryCorrespondentAndRefDisplay": Object {
+      "primaryCorrespondentAndRefDisplay": {
         "caseReference": "A/1234569/19",
       },
       "stageType": "A",
@@ -1047,22 +1047,22 @@ Object {
       "teamUUID": 2,
       "userUUID": null,
     },
-    Object {
-      "FOIRequesterDisplay": Object {},
+    {
+      "FOIRequesterDisplay": {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
       "caseReference": "A/1234569/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "data": Object {},
+      "data": {},
       "deadline": "2200-01-06",
       "deadlineDisplay": "06/01/2200",
-      "mpWithOwnerDisplay": Object {
+      "mpWithOwnerDisplay": {
         "mp": "",
         "owner": "MOCK_USER",
       },
-      "primaryCorrespondentAndRefDisplay": Object {
+      "primaryCorrespondentAndRefDisplay": {
         "caseReference": "A/1234569/19",
       },
       "stageType": "A",
@@ -1071,21 +1071,21 @@ Object {
       "teamUUID": 2,
       "userUUID": 1,
     },
-    Object {
-      "FOIRequesterDisplay": Object {},
+    {
+      "FOIRequesterDisplay": {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "caseReference": "A/1234569/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "data": Object {},
+      "data": {},
       "deadline": "1900-01-07",
       "deadlineDisplay": "07/01/1900",
-      "mpWithOwnerDisplay": Object {
+      "mpWithOwnerDisplay": {
         "mp": "",
         "owner": undefined,
       },
-      "primaryCorrespondentAndRefDisplay": Object {
+      "primaryCorrespondentAndRefDisplay": {
         "caseReference": "A/1234569/19",
       },
       "stageType": "B",
@@ -1094,21 +1094,21 @@ Object {
       "teamUUID": 2,
       "userUUID": null,
     },
-    Object {
-      "FOIRequesterDisplay": Object {},
+    {
+      "FOIRequesterDisplay": {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "caseReference": "A/1234570/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "data": Object {},
+      "data": {},
       "deadline": "1900-01-05",
       "deadlineDisplay": "05/01/1900",
-      "mpWithOwnerDisplay": Object {
+      "mpWithOwnerDisplay": {
         "mp": "",
         "owner": undefined,
       },
-      "primaryCorrespondentAndRefDisplay": Object {
+      "primaryCorrespondentAndRefDisplay": {
         "caseReference": "A/1234570/19",
       },
       "stageType": "A",
@@ -1119,35 +1119,35 @@ Object {
     },
   ],
   "label": "MOCK_CASETYPE",
-  "teamMembers": Array [],
+  "teamMembers": [],
 }
 `;
 
 exports[`Workflow Workstack Adapter should transform a stage array to a workflow workstack at MPAM_QA_CLEARANCE_REQ with ClearanceDueDate 1`] = `
-Object {
+{
   "allocateToTeamEndpoint": "/allocate/team",
   "allocateToUserEndpoint": "/allocate/user",
   "allocateToWorkstackEndpoint": "/unallocate/",
-  "columns": Array [],
-  "items": Array [
-    Object {
-      "FOIRequesterDisplay": Object {},
+  "columns": [],
+  "items": [
+    {
+      "FOIRequesterDisplay": {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
       "caseReference": "A/1234568/19",
       "caseType": "MPAM",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "data": Object {
+      "data": {
         "ClearanceDueDate": "2020-12-10",
       },
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
-      "mpWithOwnerDisplay": Object {
+      "mpWithOwnerDisplay": {
         "mp": "",
         "owner": "MOCK_USER",
       },
-      "primaryCorrespondentAndRefDisplay": Object {
+      "primaryCorrespondentAndRefDisplay": {
         "caseReference": "A/1234568/19",
       },
       "stageType": "MPAM_QA_CLEARANCE_REQ",
@@ -1158,21 +1158,21 @@ Object {
     },
   ],
   "label": "MOCK_STAGETYPE",
-  "teamMembers": Array [],
+  "teamMembers": [],
 }
 `;
 
 exports[`Workflow Workstack Adapter should transform a stage array to a workflow workstack schema 1`] = `
-Object {
+{
   "allocateToTeamEndpoint": "/allocate/team",
   "allocateToUserEndpoint": "/allocate/user",
   "allocateToWorkstackEndpoint": "/unallocate/",
-  "columns": Array [],
-  "dashboard": Array [
+  "columns": [],
+  "dashboard": [
     Card {
       "count": 4,
       "label": "MOCK_STAGETYPE",
-      "tags": Object {
+      "tags": {
         "allocated": 2,
         "overdue": 2,
       },
@@ -1182,7 +1182,7 @@ Object {
     Card {
       "count": 1,
       "label": "MOCK_STAGETYPE",
-      "tags": Object {
+      "tags": {
         "allocated": 1,
         "overdue": 1,
       },
@@ -1190,23 +1190,23 @@ Object {
       "value": "B",
     },
   ],
-  "items": Array [
-    Object {
-      "FOIRequesterDisplay": Object {},
+  "items": [
+    {
+      "FOIRequesterDisplay": {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
       "caseReference": "A/1234568/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "data": Object {},
+      "data": {},
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
-      "mpWithOwnerDisplay": Object {
+      "mpWithOwnerDisplay": {
         "mp": "",
         "owner": "MOCK_USER",
       },
-      "primaryCorrespondentAndRefDisplay": Object {
+      "primaryCorrespondentAndRefDisplay": {
         "caseReference": "A/1234568/19",
       },
       "stageType": "A",
@@ -1215,21 +1215,21 @@ Object {
       "teamUUID": 2,
       "userUUID": 2,
     },
-    Object {
-      "FOIRequesterDisplay": Object {},
+    {
+      "FOIRequesterDisplay": {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "caseReference": "A/1234569/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "data": Object {},
+      "data": {},
       "deadline": "1900-01-04",
       "deadlineDisplay": "04/01/1900",
-      "mpWithOwnerDisplay": Object {
+      "mpWithOwnerDisplay": {
         "mp": "",
         "owner": undefined,
       },
-      "primaryCorrespondentAndRefDisplay": Object {
+      "primaryCorrespondentAndRefDisplay": {
         "caseReference": "A/1234569/19",
       },
       "stageType": "A",
@@ -1238,22 +1238,22 @@ Object {
       "teamUUID": 2,
       "userUUID": null,
     },
-    Object {
-      "FOIRequesterDisplay": Object {},
+    {
+      "FOIRequesterDisplay": {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
       "caseReference": "A/1234569/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "data": Object {},
+      "data": {},
       "deadline": "2200-01-06",
       "deadlineDisplay": "06/01/2200",
-      "mpWithOwnerDisplay": Object {
+      "mpWithOwnerDisplay": {
         "mp": "",
         "owner": "MOCK_USER",
       },
-      "primaryCorrespondentAndRefDisplay": Object {
+      "primaryCorrespondentAndRefDisplay": {
         "caseReference": "A/1234569/19",
       },
       "stageType": "A",
@@ -1262,21 +1262,21 @@ Object {
       "teamUUID": 2,
       "userUUID": 1,
     },
-    Object {
-      "FOIRequesterDisplay": Object {},
+    {
+      "FOIRequesterDisplay": {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "caseReference": "A/1234569/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "data": Object {},
+      "data": {},
       "deadline": "1900-01-07",
       "deadlineDisplay": "07/01/1900",
-      "mpWithOwnerDisplay": Object {
+      "mpWithOwnerDisplay": {
         "mp": "",
         "owner": undefined,
       },
-      "primaryCorrespondentAndRefDisplay": Object {
+      "primaryCorrespondentAndRefDisplay": {
         "caseReference": "A/1234569/19",
       },
       "stageType": "B",
@@ -1285,21 +1285,21 @@ Object {
       "teamUUID": 2,
       "userUUID": null,
     },
-    Object {
-      "FOIRequesterDisplay": Object {},
+    {
+      "FOIRequesterDisplay": {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "caseReference": "A/1234570/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "data": Object {},
+      "data": {},
       "deadline": "1900-01-05",
       "deadlineDisplay": "05/01/1900",
-      "mpWithOwnerDisplay": Object {
+      "mpWithOwnerDisplay": {
         "mp": "",
         "owner": undefined,
       },
-      "primaryCorrespondentAndRefDisplay": Object {
+      "primaryCorrespondentAndRefDisplay": {
         "caseReference": "A/1234570/19",
       },
       "stageType": "A",
@@ -1310,33 +1310,33 @@ Object {
     },
   ],
   "label": "MOCK_CASETYPE",
-  "teamMembers": Array [],
+  "teamMembers": [],
 }
 `;
 
 exports[`Workflow Workstack Adapter should transform a stage array to a workflow workstack schema 2`] = `
-Object {
+{
   "allocateToTeamEndpoint": "/allocate/team",
   "allocateToUserEndpoint": "/allocate/user",
   "allocateToWorkstackEndpoint": "/unallocate/",
-  "columns": Array [],
-  "items": Array [
-    Object {
-      "FOIRequesterDisplay": Object {},
+  "columns": [],
+  "items": [
+    {
+      "FOIRequesterDisplay": {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
       "caseReference": "A/1234568/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "data": Object {},
+      "data": {},
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
-      "mpWithOwnerDisplay": Object {
+      "mpWithOwnerDisplay": {
         "mp": "",
         "owner": "MOCK_USER",
       },
-      "primaryCorrespondentAndRefDisplay": Object {
+      "primaryCorrespondentAndRefDisplay": {
         "caseReference": "A/1234568/19",
       },
       "stageType": "A",
@@ -1345,21 +1345,21 @@ Object {
       "teamUUID": 2,
       "userUUID": 2,
     },
-    Object {
-      "FOIRequesterDisplay": Object {},
+    {
+      "FOIRequesterDisplay": {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "caseReference": "A/1234569/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "data": Object {},
+      "data": {},
       "deadline": "1900-01-04",
       "deadlineDisplay": "04/01/1900",
-      "mpWithOwnerDisplay": Object {
+      "mpWithOwnerDisplay": {
         "mp": "",
         "owner": undefined,
       },
-      "primaryCorrespondentAndRefDisplay": Object {
+      "primaryCorrespondentAndRefDisplay": {
         "caseReference": "A/1234569/19",
       },
       "stageType": "A",
@@ -1368,22 +1368,22 @@ Object {
       "teamUUID": 2,
       "userUUID": null,
     },
-    Object {
-      "FOIRequesterDisplay": Object {},
+    {
+      "FOIRequesterDisplay": {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
       "caseReference": "A/1234569/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "data": Object {},
+      "data": {},
       "deadline": "2200-01-06",
       "deadlineDisplay": "06/01/2200",
-      "mpWithOwnerDisplay": Object {
+      "mpWithOwnerDisplay": {
         "mp": "",
         "owner": "MOCK_USER",
       },
-      "primaryCorrespondentAndRefDisplay": Object {
+      "primaryCorrespondentAndRefDisplay": {
         "caseReference": "A/1234569/19",
       },
       "stageType": "A",
@@ -1392,21 +1392,21 @@ Object {
       "teamUUID": 2,
       "userUUID": 1,
     },
-    Object {
-      "FOIRequesterDisplay": Object {},
+    {
+      "FOIRequesterDisplay": {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "caseReference": "A/1234570/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "data": Object {},
+      "data": {},
       "deadline": "1900-01-05",
       "deadlineDisplay": "05/01/1900",
-      "mpWithOwnerDisplay": Object {
+      "mpWithOwnerDisplay": {
         "mp": "",
         "owner": undefined,
       },
-      "primaryCorrespondentAndRefDisplay": Object {
+      "primaryCorrespondentAndRefDisplay": {
         "caseReference": "A/1234570/19",
       },
       "stageType": "A",
@@ -1417,37 +1417,37 @@ Object {
     },
   ],
   "label": "MOCK_STAGETYPE",
-  "teamMembers": Array [],
+  "teamMembers": [],
 }
 `;
 
 exports[`Workflow Workstack Adapter should transform a stage array to a workflow workstack with DueDate with contributionDueDate 1`] = `
-Object {
+{
   "allocateToTeamEndpoint": "/allocate/team",
   "allocateToUserEndpoint": "/allocate/user",
   "allocateToWorkstackEndpoint": "/unallocate/",
-  "columns": Array [],
-  "items": Array [
-    Object {
-      "FOIRequesterDisplay": Object {},
+  "columns": [],
+  "items": [
+    {
+      "FOIRequesterDisplay": {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
       "caseReference": "A/1234568/19",
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
-      "data": Object {
+      "data": {
         "DueDate": "2020-12-10",
       },
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
       "dueContribution": "2020-12-12",
-      "mpWithOwnerDisplay": Object {
+      "mpWithOwnerDisplay": {
         "mp": "",
         "owner": "MOCK_USER",
       },
       "nextContributionDueDate": "12/12/2020",
-      "primaryCorrespondentAndRefDisplay": Object {
+      "primaryCorrespondentAndRefDisplay": {
         "caseReference": "A/1234568/19",
       },
       "stageType": "A",
@@ -1458,19 +1458,19 @@ Object {
     },
   ],
   "label": "MOCK_STAGETYPE",
-  "teamMembers": Array [],
+  "teamMembers": [],
 }
 `;
 
 exports[`Workflow Workstack Adapter should transform a stage array to a workflow workstack with a contributionDueDate 1`] = `
-Object {
+{
   "allocateToTeamEndpoint": "/allocate/team",
   "allocateToUserEndpoint": "/allocate/user",
   "allocateToWorkstackEndpoint": "/unallocate/",
-  "columns": Array [],
-  "items": Array [
-    Object {
-      "FOIRequesterDisplay": Object {},
+  "columns": [],
+  "items": [
+    {
+      "FOIRequesterDisplay": {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
@@ -1478,18 +1478,18 @@ Object {
       "caseType": "WCS",
       "caseTypeDisplayFull": "MOCK_CASETYPE",
       "contributions": "Due",
-      "data": Object {
-        "CaseContributions": "[{\\"data\\": {\\"contributionDueDate\\":\\"2020-12-12\\"}}]",
+      "data": {
+        "CaseContributions": "[{"data": {"contributionDueDate":"2020-12-12"}}]",
       },
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
       "dueContribution": "2020-12-12",
-      "mpWithOwnerDisplay": Object {
+      "mpWithOwnerDisplay": {
         "mp": "",
         "owner": "MOCK_USER",
       },
       "nextContributionDueDate": "12/12/2020",
-      "primaryCorrespondentAndRefDisplay": Object {
+      "primaryCorrespondentAndRefDisplay": {
         "caseReference": "A/1234568/19",
       },
       "stageType": "A",
@@ -1500,19 +1500,19 @@ Object {
     },
   ],
   "label": "MOCK_STAGETYPE",
-  "teamMembers": Array [],
+  "teamMembers": [],
 }
 `;
 
 exports[`Workflow Workstack Adapter should transform a stage array to a workflow workstack with at MPAM_DRAFT with contributions as Cancelled 1`] = `
-Object {
+{
   "allocateToTeamEndpoint": "/allocate/team",
   "allocateToUserEndpoint": "/allocate/user",
   "allocateToWorkstackEndpoint": "/unallocate/",
-  "columns": Array [],
-  "items": Array [
-    Object {
-      "FOIRequesterDisplay": Object {},
+  "columns": [],
+  "items": [
+    {
+      "FOIRequesterDisplay": {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
@@ -1522,11 +1522,11 @@ Object {
       "contributions": "Cancelled",
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
-      "mpWithOwnerDisplay": Object {
+      "mpWithOwnerDisplay": {
         "mp": "",
         "owner": "MOCK_USER",
       },
-      "primaryCorrespondentAndRefDisplay": Object {
+      "primaryCorrespondentAndRefDisplay": {
         "caseReference": "A/1234568/19",
       },
       "stageType": "MPAM_DRAFT",
@@ -1537,19 +1537,19 @@ Object {
     },
   ],
   "label": "MOCK_STAGETYPE",
-  "teamMembers": Array [],
+  "teamMembers": [],
 }
 `;
 
 exports[`Workflow Workstack Adapter should transform a stage array to a workflow workstack with at MPAM_DRAFT with contributions as Received 1`] = `
-Object {
+{
   "allocateToTeamEndpoint": "/allocate/team",
   "allocateToUserEndpoint": "/allocate/user",
   "allocateToWorkstackEndpoint": "/unallocate/",
-  "columns": Array [],
-  "items": Array [
-    Object {
-      "FOIRequesterDisplay": Object {},
+  "columns": [],
+  "items": [
+    {
+      "FOIRequesterDisplay": {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
@@ -1559,11 +1559,11 @@ Object {
       "contributions": "Received",
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
-      "mpWithOwnerDisplay": Object {
+      "mpWithOwnerDisplay": {
         "mp": "",
         "owner": "MOCK_USER",
       },
-      "primaryCorrespondentAndRefDisplay": Object {
+      "primaryCorrespondentAndRefDisplay": {
         "caseReference": "A/1234568/19",
       },
       "stageType": "MPAM_DRAFT",
@@ -1574,19 +1574,19 @@ Object {
     },
   ],
   "label": "MOCK_STAGETYPE",
-  "teamMembers": Array [],
+  "teamMembers": [],
 }
 `;
 
 exports[`Workflow Workstack Adapter should transform a stage array to a workflow workstack with at MPAM_DRAFT with contributions as null 1`] = `
-Object {
+{
   "allocateToTeamEndpoint": "/allocate/team",
   "allocateToUserEndpoint": "/allocate/user",
   "allocateToWorkstackEndpoint": "/unallocate/",
-  "columns": Array [],
-  "items": Array [
-    Object {
-      "FOIRequesterDisplay": Object {},
+  "columns": [],
+  "items": [
+    {
+      "FOIRequesterDisplay": {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
@@ -1596,11 +1596,11 @@ Object {
       "contributions": null,
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
-      "mpWithOwnerDisplay": Object {
+      "mpWithOwnerDisplay": {
         "mp": "",
         "owner": "MOCK_USER",
       },
-      "primaryCorrespondentAndRefDisplay": Object {
+      "primaryCorrespondentAndRefDisplay": {
         "caseReference": "A/1234568/19",
       },
       "stageType": "MPAM_DRAFT",
@@ -1611,19 +1611,19 @@ Object {
     },
   ],
   "label": "MOCK_STAGETYPE",
-  "teamMembers": Array [],
+  "teamMembers": [],
 }
 `;
 
 exports[`Workflow Workstack Adapter should transform a stage array to a workflow workstack with at MPAM_DRAFT_REQUESTED_CONTRIBUTION with dueContribution 1`] = `
-Object {
+{
   "allocateToTeamEndpoint": "/allocate/team",
   "allocateToUserEndpoint": "/allocate/user",
   "allocateToWorkstackEndpoint": "/unallocate/",
-  "columns": Array [],
-  "items": Array [
-    Object {
-      "FOIRequesterDisplay": Object {},
+  "columns": [],
+  "items": [
+    {
+      "FOIRequesterDisplay": {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
@@ -1634,12 +1634,12 @@ Object {
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
       "dueContribution": "2020-12-12",
-      "mpWithOwnerDisplay": Object {
+      "mpWithOwnerDisplay": {
         "mp": "",
         "owner": "MOCK_USER",
       },
       "nextContributionDueDate": "12/12/2020",
-      "primaryCorrespondentAndRefDisplay": Object {
+      "primaryCorrespondentAndRefDisplay": {
         "caseReference": "A/1234568/19",
       },
       "stageType": "MPAM_DRAFT_REQUESTED_CONTRIBUTION",
@@ -1650,19 +1650,19 @@ Object {
     },
   ],
   "label": "MOCK_STAGETYPE",
-  "teamMembers": Array [],
+  "teamMembers": [],
 }
 `;
 
 exports[`Workflow Workstack Adapter should transform a stage array to a workflow workstack with at MPAM_DRAFT_REQUESTED_CONTRIBUTION with dueContribution as null 1`] = `
-Object {
+{
   "allocateToTeamEndpoint": "/allocate/team",
   "allocateToUserEndpoint": "/allocate/user",
   "allocateToWorkstackEndpoint": "/unallocate/",
-  "columns": Array [],
-  "items": Array [
-    Object {
-      "FOIRequesterDisplay": Object {},
+  "columns": [],
+  "items": [
+    {
+      "FOIRequesterDisplay": {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
@@ -1672,11 +1672,11 @@ Object {
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
       "dueContribution": null,
-      "mpWithOwnerDisplay": Object {
+      "mpWithOwnerDisplay": {
         "mp": "",
         "owner": "MOCK_USER",
       },
-      "primaryCorrespondentAndRefDisplay": Object {
+      "primaryCorrespondentAndRefDisplay": {
         "caseReference": "A/1234568/19",
       },
       "stageType": "MPAM_DRAFT_REQUESTED_CONTRIBUTION",
@@ -1687,19 +1687,19 @@ Object {
     },
   ],
   "label": "MOCK_STAGETYPE",
-  "teamMembers": Array [],
+  "teamMembers": [],
 }
 `;
 
 exports[`Workflow Workstack Adapter should transform a stage array to a workflow workstack with at MPAM_TRIAGE with contributions as Cancelled 1`] = `
-Object {
+{
   "allocateToTeamEndpoint": "/allocate/team",
   "allocateToUserEndpoint": "/allocate/user",
   "allocateToWorkstackEndpoint": "/unallocate/",
-  "columns": Array [],
-  "items": Array [
-    Object {
-      "FOIRequesterDisplay": Object {},
+  "columns": [],
+  "items": [
+    {
+      "FOIRequesterDisplay": {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
@@ -1709,11 +1709,11 @@ Object {
       "contributions": "Cancelled",
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
-      "mpWithOwnerDisplay": Object {
+      "mpWithOwnerDisplay": {
         "mp": "",
         "owner": "MOCK_USER",
       },
-      "primaryCorrespondentAndRefDisplay": Object {
+      "primaryCorrespondentAndRefDisplay": {
         "caseReference": "A/1234568/19",
       },
       "stageType": "MPAM_TRIAGE",
@@ -1724,19 +1724,19 @@ Object {
     },
   ],
   "label": "MOCK_STAGETYPE",
-  "teamMembers": Array [],
+  "teamMembers": [],
 }
 `;
 
 exports[`Workflow Workstack Adapter should transform a stage array to a workflow workstack with at MPAM_TRIAGE with contributions as Received 1`] = `
-Object {
+{
   "allocateToTeamEndpoint": "/allocate/team",
   "allocateToUserEndpoint": "/allocate/user",
   "allocateToWorkstackEndpoint": "/unallocate/",
-  "columns": Array [],
-  "items": Array [
-    Object {
-      "FOIRequesterDisplay": Object {},
+  "columns": [],
+  "items": [
+    {
+      "FOIRequesterDisplay": {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
@@ -1746,11 +1746,11 @@ Object {
       "contributions": "Received",
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
-      "mpWithOwnerDisplay": Object {
+      "mpWithOwnerDisplay": {
         "mp": "",
         "owner": "MOCK_USER",
       },
-      "primaryCorrespondentAndRefDisplay": Object {
+      "primaryCorrespondentAndRefDisplay": {
         "caseReference": "A/1234568/19",
       },
       "stageType": "MPAM_TRIAGE",
@@ -1761,19 +1761,19 @@ Object {
     },
   ],
   "label": "MOCK_STAGETYPE",
-  "teamMembers": Array [],
+  "teamMembers": [],
 }
 `;
 
 exports[`Workflow Workstack Adapter should transform a stage array to a workflow workstack with at MPAM_TRIAGE with contributions as null 1`] = `
-Object {
+{
   "allocateToTeamEndpoint": "/allocate/team",
   "allocateToUserEndpoint": "/allocate/user",
   "allocateToWorkstackEndpoint": "/unallocate/",
-  "columns": Array [],
-  "items": Array [
-    Object {
-      "FOIRequesterDisplay": Object {},
+  "columns": [],
+  "items": [
+    {
+      "FOIRequesterDisplay": {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
@@ -1783,11 +1783,11 @@ Object {
       "contributions": null,
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
-      "mpWithOwnerDisplay": Object {
+      "mpWithOwnerDisplay": {
         "mp": "",
         "owner": "MOCK_USER",
       },
-      "primaryCorrespondentAndRefDisplay": Object {
+      "primaryCorrespondentAndRefDisplay": {
         "caseReference": "A/1234568/19",
       },
       "stageType": "MPAM_TRIAGE",
@@ -1798,19 +1798,19 @@ Object {
     },
   ],
   "label": "MOCK_STAGETYPE",
-  "teamMembers": Array [],
+  "teamMembers": [],
 }
 `;
 
 exports[`Workflow Workstack Adapter should transform a stage array to a workflow workstack with at MPAM_TRIAGE_REQUESTED_CONTRIBUTION with dueContribution 1`] = `
-Object {
+{
   "allocateToTeamEndpoint": "/allocate/team",
   "allocateToUserEndpoint": "/allocate/user",
   "allocateToWorkstackEndpoint": "/unallocate/",
-  "columns": Array [],
-  "items": Array [
-    Object {
-      "FOIRequesterDisplay": Object {},
+  "columns": [],
+  "items": [
+    {
+      "FOIRequesterDisplay": {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
@@ -1821,12 +1821,12 @@ Object {
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
       "dueContribution": "2020-12-12",
-      "mpWithOwnerDisplay": Object {
+      "mpWithOwnerDisplay": {
         "mp": "",
         "owner": "MOCK_USER",
       },
       "nextContributionDueDate": "12/12/2020",
-      "primaryCorrespondentAndRefDisplay": Object {
+      "primaryCorrespondentAndRefDisplay": {
         "caseReference": "A/1234568/19",
       },
       "stageType": "MPAM_TRIAGE_REQUESTED_CONTRIBUTION",
@@ -1837,19 +1837,19 @@ Object {
     },
   ],
   "label": "MOCK_STAGETYPE",
-  "teamMembers": Array [],
+  "teamMembers": [],
 }
 `;
 
 exports[`Workflow Workstack Adapter should transform a stage array to a workflow workstack with at MPAM_TRIAGE_REQUESTED_CONTRIBUTION with dueContribution as null 1`] = `
-Object {
+{
   "allocateToTeamEndpoint": "/allocate/team",
   "allocateToUserEndpoint": "/allocate/user",
   "allocateToWorkstackEndpoint": "/unallocate/",
-  "columns": Array [],
-  "items": Array [
-    Object {
-      "FOIRequesterDisplay": Object {},
+  "columns": [],
+  "items": [
+    {
+      "FOIRequesterDisplay": {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
@@ -1859,11 +1859,11 @@ Object {
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
       "dueContribution": null,
-      "mpWithOwnerDisplay": Object {
+      "mpWithOwnerDisplay": {
         "mp": "",
         "owner": "MOCK_USER",
       },
-      "primaryCorrespondentAndRefDisplay": Object {
+      "primaryCorrespondentAndRefDisplay": {
         "caseReference": "A/1234568/19",
       },
       "stageType": "MPAM_TRIAGE_REQUESTED_CONTRIBUTION",
@@ -1874,19 +1874,19 @@ Object {
     },
   ],
   "label": "MOCK_STAGETYPE",
-  "teamMembers": Array [],
+  "teamMembers": [],
 }
 `;
 
 exports[`Workflow Workstack Adapter should transform a stage array to a workflow workstack with no contributeDueDate and stage type not matching contributionReceivedStages 1`] = `
-Object {
+{
   "allocateToTeamEndpoint": "/allocate/team",
   "allocateToUserEndpoint": "/allocate/user",
   "allocateToWorkstackEndpoint": "/unallocate/",
-  "columns": Array [],
-  "items": Array [
-    Object {
-      "FOIRequesterDisplay": Object {},
+  "columns": [],
+  "items": [
+    {
+      "FOIRequesterDisplay": {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
@@ -1895,11 +1895,11 @@ Object {
       "caseTypeDisplayFull": "MOCK_CASETYPE",
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
-      "mpWithOwnerDisplay": Object {
+      "mpWithOwnerDisplay": {
         "mp": "",
         "owner": "MOCK_USER",
       },
-      "primaryCorrespondentAndRefDisplay": Object {
+      "primaryCorrespondentAndRefDisplay": {
         "caseReference": "A/1234568/19",
       },
       "stageType": "A",
@@ -1910,19 +1910,19 @@ Object {
     },
   ],
   "label": "MOCK_STAGETYPE",
-  "teamMembers": Array [],
+  "teamMembers": [],
 }
 `;
 
 exports[`Workflow Workstack Adapter should transform a stage array to a workflow workstack with no contributeDueDate but stage type matching contributionReceivedStages 1`] = `
-Object {
+{
   "allocateToTeamEndpoint": "/allocate/team",
   "allocateToUserEndpoint": "/allocate/user",
   "allocateToWorkstackEndpoint": "/unallocate/",
-  "columns": Array [],
-  "items": Array [
-    Object {
-      "FOIRequesterDisplay": Object {},
+  "columns": [],
+  "items": [
+    {
+      "FOIRequesterDisplay": {},
       "active": true,
       "assignedTeamDisplay": "MOCK_TEAM",
       "assignedUserDisplay": "MOCK_USER",
@@ -1931,11 +1931,11 @@ Object {
       "caseTypeDisplayFull": "MOCK_CASETYPE",
       "deadline": "2200-01-03",
       "deadlineDisplay": "03/01/2200",
-      "mpWithOwnerDisplay": Object {
+      "mpWithOwnerDisplay": {
         "mp": "",
         "owner": "MOCK_USER",
       },
-      "primaryCorrespondentAndRefDisplay": Object {
+      "primaryCorrespondentAndRefDisplay": {
         "caseReference": "A/1234568/19",
       },
       "stageType": "MPAM_TRIAGE",
@@ -1946,6 +1946,6 @@ Object {
     },
   ],
   "label": "MOCK_STAGETYPE",
-  "teamMembers": Array [],
+  "teamMembers": [],
 }
 `;

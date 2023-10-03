@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Form MappedText component should render with default props 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": <body>
     <div>
@@ -98,7 +98,7 @@ Object {
 `;
 
 exports[`Form MappedText component should render with hint when passed 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": <body>
     <div>
@@ -205,7 +205,7 @@ Object {
 `;
 
 exports[`Form MappedText component should render with label when passed 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": <body>
     <div>
@@ -302,7 +302,7 @@ Object {
 `;
 
 exports[`Form MappedText component should render with value when passed 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": <body>
     <div>
