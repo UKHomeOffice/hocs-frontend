@@ -1,3 +1,6 @@
+/**
+ * @jest-environment node
+ */
 const {
     getUsersStandardLines,
     getAllStandardLines,

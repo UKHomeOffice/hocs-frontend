@@ -1,3 +1,6 @@
+/**
+ * @jest-environment node
+ */
 /* eslint-disable no-undef */
 const formDecorator = require('../form-decorator');
 

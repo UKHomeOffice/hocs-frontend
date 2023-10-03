@@ -1,3 +1,6 @@
+/**
+ * @jest-environment node
+ */
 import { axiosErrorMiddleware, errorMiddleware, apiErrorMiddleware } from '../request';
 import { GenericError } from '../../models/error';
 

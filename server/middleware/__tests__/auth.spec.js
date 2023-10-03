@@ -1,3 +1,6 @@
+/**
+ * @jest-environment node
+ */
 import { authMiddleware, protect, sessionExpiryMiddleware } from '../auth';
 import User from '../../models/user';
 

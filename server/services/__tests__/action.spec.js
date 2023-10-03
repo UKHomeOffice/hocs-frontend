@@ -1,3 +1,6 @@
+/**
+ * @jest-environment node
+ */
 const actionService = require('../action');
 const actionTypes = require('../actions/types');
 
