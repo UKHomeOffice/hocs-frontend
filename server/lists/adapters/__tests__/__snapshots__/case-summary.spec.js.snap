@@ -1,16 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Case Summary Adapter should map additionalFields data values when choices are provided 1`] = `
-Object {
+{
   "actions": undefined,
-  "additionalFields": Array [
-    Object {
-      "choices": Array [
-        Object {
+  "additionalFields": [
+    {
+      "choices": [
+        {
           "label": "TestA text",
           "value": "TESTA",
         },
-        Object {
+        {
           "label": "TestB text",
           "value": "TESTB",
         },
@@ -19,34 +19,34 @@ Object {
       "value": "TestB text",
     },
   ],
-  "case": Object {
+  "case": {
     "created": "03/02/2019",
-    "deadLineExtensions": Array [],
+    "deadLineExtensions": [],
     "deadline": "01/01/2020",
     "received": "01/01/2019",
   },
-  "deadlines": Array [
-    Object {
+  "deadlines": [
+    {
       "label": "MOCK_STAGETYPE",
       "value": "01/01/2019",
     },
-    Object {
+    {
       "label": "MOCK_STAGETYPE",
       "value": "06/01/2019",
     },
-    Object {
+    {
       "label": "MOCK_STAGETYPE",
       "value": "01/01/2020",
     },
   ],
   "deadlinesEnabled": true,
-  "previousCase": Object {
+  "previousCase": {
     "reference": "__previousCaseReference__",
     "stageUuid": "__previousCaseStageUUID__",
     "uuid": "__previousCaseUuid__",
   },
-  "primaryCorrespondent": Object {
-    "address": Object {
+  "primaryCorrespondent": {
+    "address": {
       "address1": "__address1__",
       "address2": "__address2__",
       "address3": "__address3__",
@@ -56,8 +56,8 @@ Object {
     "fullname": "Test Correspondent",
   },
   "primaryTopic": "Topic A",
-  "stages": Array [
-    Object {
+  "stages": [
+    {
       "assignedTeam": "MOCK_TEAM",
       "assignedUser": "MOCK_USER",
       "stage": "MOCK_STAGETYPE",
@@ -68,16 +68,16 @@ Object {
 `;
 
 exports[`Case Summary Adapter should map additionalFields data values when choices are provided as list name 1`] = `
-Object {
+{
   "actions": undefined,
-  "additionalFields": Array [
-    Object {
-      "choices": Array [
-        Object {
+  "additionalFields": [
+    {
+      "choices": [
+        {
           "label": "TestA text",
           "value": "TESTA",
         },
-        Object {
+        {
           "label": "TestB text",
           "value": "TESTB",
         },
@@ -86,34 +86,34 @@ Object {
       "value": "TestB text",
     },
   ],
-  "case": Object {
+  "case": {
     "created": "03/02/2019",
-    "deadLineExtensions": Array [],
+    "deadLineExtensions": [],
     "deadline": "01/01/2020",
     "received": "01/01/2019",
   },
-  "deadlines": Array [
-    Object {
+  "deadlines": [
+    {
       "label": "MOCK_STAGETYPE",
       "value": "01/01/2019",
     },
-    Object {
+    {
       "label": "MOCK_STAGETYPE",
       "value": "06/01/2019",
     },
-    Object {
+    {
       "label": "MOCK_STAGETYPE",
       "value": "01/01/2020",
     },
   ],
   "deadlinesEnabled": true,
-  "previousCase": Object {
+  "previousCase": {
     "reference": "__previousCaseReference__",
     "stageUuid": "__previousCaseStageUUID__",
     "uuid": "__previousCaseUuid__",
   },
-  "primaryCorrespondent": Object {
-    "address": Object {
+  "primaryCorrespondent": {
+    "address": {
       "address1": "__address1__",
       "address2": "__address2__",
       "address3": "__address3__",
@@ -123,8 +123,8 @@ Object {
     "fullname": "Test Correspondent",
   },
   "primaryTopic": "Topic A",
-  "stages": Array [
-    Object {
+  "stages": [
+    {
       "assignedTeam": "MOCK_TEAM",
       "assignedUser": "MOCK_USER",
       "stage": "MOCK_STAGETYPE",
@@ -135,35 +135,35 @@ Object {
 `;
 
 exports[`Case Summary Adapter should not show deadlines when deadlines are disabled 1`] = `
-Object {
+{
   "actions": undefined,
-  "additionalFields": Array [
-    Object {
+  "additionalFields": [
+    {
       "choices": undefined,
       "label": "Test field",
       "value": "TEST",
     },
-    Object {
+    {
       "choices": undefined,
       "label": "Test additional field date",
       "value": "01/01/2020",
     },
   ],
-  "case": Object {
+  "case": {
     "created": "03/02/2019",
-    "deadLineExtensions": Array [],
+    "deadLineExtensions": [],
     "deadline": "01/01/2020",
     "received": "01/01/2019",
   },
   "deadlines": null,
   "deadlinesEnabled": false,
-  "previousCase": Object {
+  "previousCase": {
     "reference": "__previousCaseReference__",
     "stageUuid": "__previousCaseStageUUID__",
     "uuid": "__previousCaseUuid__",
   },
-  "primaryCorrespondent": Object {
-    "address": Object {
+  "primaryCorrespondent": {
+    "address": {
       "address1": "__address1__",
       "address2": "__address2__",
       "address3": "__address3__",
@@ -173,8 +173,8 @@ Object {
     "fullname": "Test Correspondent",
   },
   "primaryTopic": "Topic A",
-  "stages": Array [
-    Object {
+  "stages": [
+    {
       "assignedTeam": "MOCK_TEAM",
       "assignedUser": "MOCK_USER",
       "stage": "MOCK_STAGETYPE",
@@ -185,35 +185,35 @@ Object {
 `;
 
 exports[`Case Summary Adapter should not show deadlines when summary deadlines are disabled 1`] = `
-Object {
+{
   "actions": undefined,
-  "additionalFields": Array [
-    Object {
+  "additionalFields": [
+    {
       "choices": undefined,
       "label": "Test field",
       "value": "TEST",
     },
-    Object {
+    {
       "choices": undefined,
       "label": "Test additional field date",
       "value": "01/01/2020",
     },
   ],
-  "case": Object {
+  "case": {
     "created": "03/02/2019",
-    "deadLineExtensions": Array [],
+    "deadLineExtensions": [],
     "deadline": "01/01/2020",
     "received": "01/01/2019",
   },
   "deadlines": null,
   "deadlinesEnabled": true,
-  "previousCase": Object {
+  "previousCase": {
     "reference": "__previousCaseReference__",
     "stageUuid": "__previousCaseStageUUID__",
     "uuid": "__previousCaseUuid__",
   },
-  "primaryCorrespondent": Object {
-    "address": Object {
+  "primaryCorrespondent": {
+    "address": {
       "address1": "__address1__",
       "address2": "__address2__",
       "address3": "__address3__",
@@ -223,8 +223,8 @@ Object {
     "fullname": "Test Correspondent",
   },
   "primaryTopic": "Topic A",
-  "stages": Array [
-    Object {
+  "stages": [
+    {
       "assignedTeam": "MOCK_TEAM",
       "assignedUser": "MOCK_USER",
       "stage": "MOCK_STAGETYPE",
@@ -235,49 +235,49 @@ Object {
 `;
 
 exports[`Case Summary Adapter should populate fields when choices have nested options 1`] = `
-Object {
+{
   "actions": undefined,
-  "additionalFields": Array [
-    Object {
+  "additionalFields": [
+    {
       "choices": undefined,
       "label": "Test field",
       "value": "TEST",
     },
-    Object {
+    {
       "choices": undefined,
       "label": "Test additional field date",
       "value": "01/01/2020",
     },
-    Object {
+    {
       "choices": null,
       "label": "Topic 22",
       "value": "mock-value-2",
     },
   ],
-  "case": Object {
+  "case": {
     "created": "03/02/2019",
-    "deadLineExtensions": Array [],
+    "deadLineExtensions": [],
     "deadline": "01/01/2020",
     "received": "01/01/2019",
   },
-  "deadlines": Array [
-    Object {
+  "deadlines": [
+    {
       "label": "MOCK_STAGETYPE",
       "value": "01/01/2019",
     },
-    Object {
+    {
       "label": "MOCK_STAGETYPE",
       "value": "06/01/2019",
     },
-    Object {
+    {
       "label": "MOCK_STAGETYPE",
       "value": "01/01/2020",
     },
   ],
   "deadlinesEnabled": true,
   "previousCase": undefined,
-  "primaryCorrespondent": Object {
-    "address": Object {
+  "primaryCorrespondent": {
+    "address": {
       "address1": "__address1__",
       "address2": "__address2__",
       "address3": "__address3__",
@@ -287,8 +287,8 @@ Object {
     "fullname": "Test Correspondent",
   },
   "primaryTopic": "Topic A",
-  "stages": Array [
-    Object {
+  "stages": [
+    {
       "assignedTeam": "MOCK_TEAM",
       "assignedUser": "MOCK_USER",
       "stage": "MOCK_STAGETYPE",
@@ -299,11 +299,11 @@ Object {
 `;
 
 exports[`Case Summary Adapter should transform actions data in case summary data 1`] = `
-Object {
-  "actions": Array [
-    Object {
-      "items": Array [
-        Object {
+{
+  "actions": [
+    {
+      "items": [
+        {
           "complexCase": "Yes",
           "dateSentRMS": "26/10/2021",
           "note": "asdcasdc",
@@ -313,7 +313,7 @@ Object {
           "status": "Yes",
           "title": "Internal Review",
         },
-        Object {
+        {
           "complexCase": "Yes",
           "dateSentRMS": "12/10/2021",
           "note": "sdcasdc",
@@ -323,7 +323,7 @@ Object {
           "status": "Yes",
           "title": "Court of Appeal",
         },
-        Object {
+        {
           "complexCase": "Yes",
           "dateSentRMS": "26/10/2021",
           "note": "asdfasdf",
@@ -333,7 +333,7 @@ Object {
           "status": "Yes",
           "title": "First Tier Tribunal",
         },
-        Object {
+        {
           "complexCase": "Yes",
           "dateSentRMS": "12/10/2021",
           "note": "asdcasd",
@@ -343,7 +343,7 @@ Object {
           "status": "Yes",
           "title": "Court of Appeal",
         },
-        Object {
+        {
           "complexCase": "Yes",
           "dateSentRMS": "12/10/2021",
           "note": "sdcasdc",
@@ -357,13 +357,13 @@ Object {
       "title": "Appeals",
       "type": "appeals",
     },
-    Object {
-      "items": Object {
-        "caseActionData": Object {
-          "appeals": Array [
-            Object {
+    {
+      "items": {
+        "caseActionData": {
+          "appeals": [
+            {
               "actionType": "APPEAL",
-              "appealOfficerData": "{\\"IROfficerName\\": \\"638b31bc-6004-4f51-8394-45c3141e1f8a\\", \\"IROfficerDirectorate\\": \\"FOI_DIRECTORATE_HMPO_ACCEPTANCE_TEAMS\\"}",
+              "appealOfficerData": "{"IROfficerName": "638b31bc-6004-4f51-8394-45c3141e1f8a", "IROfficerDirectorate": "FOI_DIRECTORATE_HMPO_ACCEPTANCE_TEAMS"}",
               "caseTypeActionLabel": "Internal Review",
               "caseTypeActionUuid": "f2b625c9-7250-4293-9e68-c8f515e3043d",
               "complexCase": "Yes",
@@ -373,7 +373,7 @@ Object {
               "status": "Complete",
               "uuid": "72fd3cf4-f15a-4c20-90d4-90d1a663e2f5",
             },
-            Object {
+            {
               "actionType": "APPEAL",
               "appealOfficerData": null,
               "caseTypeActionLabel": "Court of Appeal",
@@ -385,7 +385,7 @@ Object {
               "status": "Complete",
               "uuid": "e2e033ef-a819-4ea8-b793-aa1b9eadf3e2",
             },
-            Object {
+            {
               "actionType": "APPEAL",
               "appealOfficerData": null,
               "caseTypeActionLabel": "First Tier Tribunal",
@@ -397,7 +397,7 @@ Object {
               "status": "Complete",
               "uuid": "f5868426-fdaa-4148-89ba-aa93c6989919",
             },
-            Object {
+            {
               "actionType": "APPEAL",
               "appealOfficerData": null,
               "caseTypeActionLabel": "Court of Appeal",
@@ -409,7 +409,7 @@ Object {
               "status": "Complete",
               "uuid": "50792f80-3f74-4eab-be86-a96e0e0749da",
             },
-            Object {
+            {
               "actionType": "APPEAL",
               "appealOfficerData": null,
               "caseTypeActionLabel": "Court of Appeal",
@@ -422,8 +422,8 @@ Object {
               "uuid": "5fcad74b-3577-49eb-893d-5923c771c2f4",
             },
           ],
-          "extensions": Array [
-            Object {
+          "extensions": [
+            {
               "actionType": "EXTENSION_OUT",
               "caseTypeActionLabel": "PIT Extension",
               "caseTypeActionUuid": "dd84d047-853b-428a-9ed7-94601623f344",
@@ -434,17 +434,17 @@ Object {
             },
           ],
         },
-        "caseTypeActionData": Array [
-          Object {
+        "caseTypeActionData": [
+          {
             "props": "{}",
             "uuid": "f84262c4-3b9e-4d1c-83c4-2ceacce5851d",
           },
-          Object {
+          {
             "props": "{}",
             "uuid": "e8313044-d0b1-4510-96e4-17af7fdaf754",
           },
-          Object {
-            "props": "{\\"appealOfficerData\\":{\\"officer\\":{\\"choices\\":\\"FAKE_USERS\\",\\"value\\":\\"IROfficerName\\"},\\"directorate\\":{\\"choices\\":\\"FAKE_TEAMS\\",\\"value\\":\\"IROfficerDirectorate\\"}}}",
+          {
+            "props": "{"appealOfficerData":{"officer":{"choices":"FAKE_USERS","value":"IROfficerName"},"directorate":{"choices":"FAKE_TEAMS","value":"IROfficerDirectorate"}}}",
             "uuid": "f2b625c9-7250-4293-9e68-c8f515e3043d",
           },
         ],
@@ -453,71 +453,71 @@ Object {
       "type": "extensions",
     },
   ],
-  "additionalFields": Array [],
-  "case": Object {
+  "additionalFields": [],
+  "case": {
     "created": "03/02/2019",
-    "deadLineExtensions": Array [],
+    "deadLineExtensions": [],
     "deadline": null,
     "received": "01/01/2019",
   },
-  "deadlines": Array [],
+  "deadlines": [],
   "deadlinesEnabled": true,
   "previousCase": undefined,
   "primaryCorrespondent": null,
   "primaryTopic": null,
-  "stages": Array [],
+  "stages": [],
   "type": "case",
 }
 `;
 
 exports[`Case Summary Adapter should transform fully populated case summary data 1`] = `
-Object {
+{
   "actions": undefined,
-  "additionalFields": Array [
-    Object {
+  "additionalFields": [
+    {
       "choices": undefined,
       "label": "Test field",
       "value": "TEST",
     },
-    Object {
+    {
       "choices": undefined,
       "label": "Test additional field date",
       "value": "01/01/2020",
     },
-    Object {
+    {
       "choices": undefined,
       "label": "Test additional field checkbox",
       "value": "this, is, a, test",
     },
   ],
-  "case": Object {
+  "case": {
     "created": "03/02/2019",
-    "deadLineExtensions": Array [],
+    "deadLineExtensions": [],
     "deadline": "01/01/2020",
     "received": "01/01/2019",
   },
-  "deadlines": Array [
-    Object {
+  "deadlines": [
+    {
       "label": "MOCK_STAGETYPE",
       "value": "01/01/2019",
     },
-    Object {
+    {
       "label": "MOCK_STAGETYPE",
       "value": "06/01/2019",
     },
-    Object {
+    {
       "label": "MOCK_STAGETYPE",
       "value": "01/01/2020",
     },
   ],
   "deadlinesEnabled": true,
-  "previousCase": Object {
+  "previousCase": {
     "reference": "__previousCaseReference__",
     "stageUuid": "__previousCaseStageUUID__",
     "uuid": "__previousCaseUuid__",
   },
-  "primaryCorrespondent": Object {
-    "address": Object {
+  "primaryCorrespondent": {
+    "address": {
       "address1": "__address1__",
       "address2": "__address2__",
       "address3": "__address3__",
@@ -529,8 +529,8 @@ Object {
     "telephone": "11111111111",
   },
   "primaryTopic": "Topic A",
-  "stages": Array [
-    Object {
+  "stages": [
+    {
       "assignedTeam": "MOCK_TEAM",
       "assignedUser": "MOCK_USER",
       "stage": "MOCK_STAGETYPE",
@@ -541,21 +541,21 @@ Object {
 `;
 
 exports[`Case Summary Adapter should transform minimal case summary data 1`] = `
-Object {
+{
   "actions": undefined,
-  "additionalFields": Array [],
-  "case": Object {
+  "additionalFields": [],
+  "case": {
     "created": "03/02/2019",
-    "deadLineExtensions": Array [],
+    "deadLineExtensions": [],
     "deadline": null,
     "received": "01/01/2019",
   },
-  "deadlines": Array [],
+  "deadlines": [],
   "deadlinesEnabled": true,
   "previousCase": undefined,
   "primaryCorrespondent": null,
   "primaryTopic": null,
-  "stages": Array [],
+  "stages": [],
   "type": "case",
 }
 `;
