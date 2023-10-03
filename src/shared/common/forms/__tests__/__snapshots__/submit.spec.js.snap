@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Form button component should render disabled when isDisabled is passed 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": <body>
     <div>
@@ -76,7 +76,7 @@ Object {
 `;
 
 exports[`Form button component should render with correct when label is passed 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": <body>
     <div>
@@ -149,7 +149,7 @@ Object {
 `;
 
 exports[`Form button component should render with default props 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": <body>
     <div>

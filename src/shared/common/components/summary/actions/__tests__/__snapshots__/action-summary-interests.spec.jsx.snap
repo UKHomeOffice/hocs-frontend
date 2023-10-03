@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`action-summary-interests.jsx should render one with details and one without 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": <body>
     <div>

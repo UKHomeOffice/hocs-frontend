@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Layout footer component should render with default props 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": <body>
     <div>
@@ -150,7 +150,7 @@ Object {
 `;
 
 exports[`Layout footer component should render with links when passed 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": <body>
     <div>
@@ -347,7 +347,7 @@ Object {
 `;
 
 exports[`Layout footer component should show OGL when asked 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": <body>
     <div>

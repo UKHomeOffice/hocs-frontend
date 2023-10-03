@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Suspensions Component should render component with link to remove suspension but not add a new one. 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": <body>
     <div>
@@ -104,7 +104,7 @@ Object {
 `;
 
 exports[`Suspensions Component should render component with link to remove suspension but not add a new one. And show historic 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": <body>
     <div>
@@ -249,7 +249,7 @@ Object {
 `;
 
 exports[`Suspensions Component should render component with link to submit suspension 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": <body>
     <div>
@@ -338,7 +338,7 @@ Object {
 `;
 
 exports[`Suspensions Component should render component with link to submit suspension and historic suspension 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": <body>
     <div>

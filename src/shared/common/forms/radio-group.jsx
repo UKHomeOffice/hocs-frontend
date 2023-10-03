@@ -139,6 +139,9 @@ class Radio extends Component {
                             .filter((choice) => this.isChoiceVisible(choice))
                             .map((choice, i) => {
                                 const idName = this.getIdName(name, i);
+                                if (choice.type === 'divider') {
+                                    return <div key={i} className="govuk-radios__divider">{choice.label}</div>;
+                                }
                                 return (
                                     <Fragment key={i}>
                                         <div className="govuk-radios__item">

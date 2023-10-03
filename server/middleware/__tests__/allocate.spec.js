@@ -51,7 +51,7 @@ describe('Allocate middleware', () => {
         expect(next).toHaveBeenCalledWith(new Error('Invalid type NOT_SUPPORTED for case CASE_ID allocation'));
     });
 
-    describe('should call updateOutOfContact if type is OUT_OF_CONTACT', async () => {
+    describe('should call updateOutOfContact if type is OUT_OF_CONTACT', () => {
 
         it('should set the teamUUID to OutOfContactTeam and saveLast to true if OutOfContactTeam is present',
             async () => {
