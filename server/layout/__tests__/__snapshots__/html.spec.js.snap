@@ -2,30 +2,30 @@
 
 exports[`HTML module should default to proposition header when no title is passed 1`] = `
 "<!DOCTYPE html>
-<html lang=\\"en\\" class=\\"govuk-template \\">
+<html lang="en" class="govuk-template ">
 
 <head>
-    <meta charset=\\"utf-8\\" />
+    <meta charset="utf-8" />
     <title>Proposition Header</title>
-    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <meta name=\\"theme-color\\" content=\\"#0b0c0c\\" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0b0c0c" />
 
-    <link rel=\\"shortcut icon\\" href=\\"/public/assets/images/favicon.ico\\" type=\\"image/x-icon\\" />
-    <link rel=\\"mask-icon\\" href=\\"/public/assets/images/govuk-mask-icon.svg\\" color=\\"#0b0c0c\\">
-    <link rel=\\"apple-touch-icon\\" sizes=\\"180x180\\" href=\\"/public/assets/images/govuk-apple-touch-icon-180x180.png\\">
-    <link rel=\\"apple-touch-icon\\" sizes=\\"167x167\\" href=\\"/public/assets/images/govuk-apple-touch-icon-167x167.png\\">
-    <link rel=\\"apple-touch-icon\\" sizes=\\"152x152\\" href=\\"/public/assets/images/govuk-apple-touch-icon-152x152.png\\">
-    <link rel=\\"apple-touch-icon\\" href=\\"/public/assets/images/govuk-apple-touch-icon.png\\">
+    <link rel="shortcut icon" href="/public/assets/images/favicon.ico" type="image/x-icon" />
+    <link rel="mask-icon" href="/public/assets/images/govuk-mask-icon.svg" color="#0b0c0c">
+    <link rel="apple-touch-icon" sizes="180x180" href="/public/assets/images/govuk-apple-touch-icon-180x180.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="/public/assets/images/govuk-apple-touch-icon-167x167.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/public/assets/images/govuk-apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" href="/public/assets/images/govuk-apple-touch-icon.png">
     
     
     <script defer >window.__INITIAL_DATA__ = {}</script>
-    <script defer src=\\"/public/js/js/main.js\\"></script>
-    <meta property=\\"og:image\\" content=\\"/public/assets/images/govuk-opengraph-image.png\\">
+    <script defer src="/public/js/js/main.js"></script>
+    <meta property="og:image" content="/public/assets/images/govuk-opengraph-image.png">
 </head>
 
-<body class=\\"govuk-template__body \\">
+<body class="govuk-template__body ">
     <script>document.body.className = (document.body.className ? document.body.className : '') + ' js-enabled';</script>
-    <div id=\\"app\\"></div>
+    <div id="app"></div>
 </body>
 
 </html>"
@@ -33,31 +33,31 @@ exports[`HTML module should default to proposition header when no title is passe
 
 exports[`HTML module should include additional CSS and JS when passed 1`] = `
 "<!DOCTYPE html>
-<html lang=\\"en\\" class=\\"govuk-template \\">
+<html lang="en" class="govuk-template ">
 
 <head>
-    <meta charset=\\"utf-8\\" />
+    <meta charset="utf-8" />
     <title>My React Application</title>
-    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <meta name=\\"theme-color\\" content=\\"#0b0c0c\\" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0b0c0c" />
 
-    <link rel=\\"shortcut icon\\" href=\\"/public/assets/images/favicon.ico\\" type=\\"image/x-icon\\" />
-    <link rel=\\"mask-icon\\" href=\\"/public/assets/images/govuk-mask-icon.svg\\" color=\\"#0b0c0c\\">
-    <link rel=\\"apple-touch-icon\\" sizes=\\"180x180\\" href=\\"/public/assets/images/govuk-apple-touch-icon-180x180.png\\">
-    <link rel=\\"apple-touch-icon\\" sizes=\\"167x167\\" href=\\"/public/assets/images/govuk-apple-touch-icon-167x167.png\\">
-    <link rel=\\"apple-touch-icon\\" sizes=\\"152x152\\" href=\\"/public/assets/images/govuk-apple-touch-icon-152x152.png\\">
-    <link rel=\\"apple-touch-icon\\" href=\\"/public/assets/images/govuk-apple-touch-icon.png\\">
-    <link rel=\\"stylesheet\\" media=\\"screen\\" href=\\"/public/styles/styles/first.css\\" />
-    <script defer src=\\"/public/js/js/first.js\\"></script>
-<script defer src=\\"/public/js/js/second.js\\"></script>
+    <link rel="shortcut icon" href="/public/assets/images/favicon.ico" type="image/x-icon" />
+    <link rel="mask-icon" href="/public/assets/images/govuk-mask-icon.svg" color="#0b0c0c">
+    <link rel="apple-touch-icon" sizes="180x180" href="/public/assets/images/govuk-apple-touch-icon-180x180.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="/public/assets/images/govuk-apple-touch-icon-167x167.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/public/assets/images/govuk-apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" href="/public/assets/images/govuk-apple-touch-icon.png">
+    <link rel="stylesheet" media="screen" href="/public/styles/styles/first.css" />
+    <script defer src="/public/js/js/first.js"></script>
+<script defer src="/public/js/js/second.js"></script>
     <script defer >window.__INITIAL_DATA__ = {}</script>
-    <script defer src=\\"/public/js/js/main.js\\"></script>
-    <meta property=\\"og:image\\" content=\\"/public/assets/images/govuk-opengraph-image.png\\">
+    <script defer src="/public/js/js/main.js"></script>
+    <meta property="og:image" content="/public/assets/images/govuk-opengraph-image.png">
 </head>
 
-<body class=\\"govuk-template__body \\">
+<body class="govuk-template__body ">
     <script>document.body.className = (document.body.className ? document.body.className : '') + ' js-enabled';</script>
-    <div id=\\"app\\"></div>
+    <div id="app"></div>
 </body>
 
 </html>"
@@ -65,30 +65,30 @@ exports[`HTML module should include additional CSS and JS when passed 1`] = `
 
 exports[`HTML module should include application props in the head when passed 1`] = `
 "<!DOCTYPE html>
-<html lang=\\"en\\" class=\\"govuk-template \\">
+<html lang="en" class="govuk-template ">
 
 <head>
-    <meta charset=\\"utf-8\\" />
+    <meta charset="utf-8" />
     <title>My React Application</title>
-    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <meta name=\\"theme-color\\" content=\\"#0b0c0c\\" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0b0c0c" />
 
-    <link rel=\\"shortcut icon\\" href=\\"/public/assets/images/favicon.ico\\" type=\\"image/x-icon\\" />
-    <link rel=\\"mask-icon\\" href=\\"/public/assets/images/govuk-mask-icon.svg\\" color=\\"#0b0c0c\\">
-    <link rel=\\"apple-touch-icon\\" sizes=\\"180x180\\" href=\\"/public/assets/images/govuk-apple-touch-icon-180x180.png\\">
-    <link rel=\\"apple-touch-icon\\" sizes=\\"167x167\\" href=\\"/public/assets/images/govuk-apple-touch-icon-167x167.png\\">
-    <link rel=\\"apple-touch-icon\\" sizes=\\"152x152\\" href=\\"/public/assets/images/govuk-apple-touch-icon-152x152.png\\">
-    <link rel=\\"apple-touch-icon\\" href=\\"/public/assets/images/govuk-apple-touch-icon.png\\">
+    <link rel="shortcut icon" href="/public/assets/images/favicon.ico" type="image/x-icon" />
+    <link rel="mask-icon" href="/public/assets/images/govuk-mask-icon.svg" color="#0b0c0c">
+    <link rel="apple-touch-icon" sizes="180x180" href="/public/assets/images/govuk-apple-touch-icon-180x180.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="/public/assets/images/govuk-apple-touch-icon-167x167.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/public/assets/images/govuk-apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" href="/public/assets/images/govuk-apple-touch-icon.png">
     
     
-    <script defer >window.__INITIAL_DATA__ = {\\"first\\":\\"value\\",\\"second\\":\\"value\\"}</script>
-    <script defer src=\\"/public/js/js/main.js\\"></script>
-    <meta property=\\"og:image\\" content=\\"/public/assets/images/govuk-opengraph-image.png\\">
+    <script defer >window.__INITIAL_DATA__ = {"first":"value","second":"value"}</script>
+    <script defer src="/public/js/js/main.js"></script>
+    <meta property="og:image" content="/public/assets/images/govuk-opengraph-image.png">
 </head>
 
-<body class=\\"govuk-template__body \\">
+<body class="govuk-template__body ">
     <script>document.body.className = (document.body.className ? document.body.className : '') + ' js-enabled';</script>
-    <div id=\\"app\\"></div>
+    <div id="app"></div>
 </body>
 
 </html>"
@@ -96,30 +96,30 @@ exports[`HTML module should include application props in the head when passed 1`
 
 exports[`HTML module should include the appropriate react application bundle when passed 1`] = `
 "<!DOCTYPE html>
-<html lang=\\"en\\" class=\\"govuk-template \\">
+<html lang="en" class="govuk-template ">
 
 <head>
-    <meta charset=\\"utf-8\\" />
+    <meta charset="utf-8" />
     <title>My React Application</title>
-    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <meta name=\\"theme-color\\" content=\\"#0b0c0c\\" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0b0c0c" />
 
-    <link rel=\\"shortcut icon\\" href=\\"/public/assets/images/favicon.ico\\" type=\\"image/x-icon\\" />
-    <link rel=\\"mask-icon\\" href=\\"/public/assets/images/govuk-mask-icon.svg\\" color=\\"#0b0c0c\\">
-    <link rel=\\"apple-touch-icon\\" sizes=\\"180x180\\" href=\\"/public/assets/images/govuk-apple-touch-icon-180x180.png\\">
-    <link rel=\\"apple-touch-icon\\" sizes=\\"167x167\\" href=\\"/public/assets/images/govuk-apple-touch-icon-167x167.png\\">
-    <link rel=\\"apple-touch-icon\\" sizes=\\"152x152\\" href=\\"/public/assets/images/govuk-apple-touch-icon-152x152.png\\">
-    <link rel=\\"apple-touch-icon\\" href=\\"/public/assets/images/govuk-apple-touch-icon.png\\">
+    <link rel="shortcut icon" href="/public/assets/images/favicon.ico" type="image/x-icon" />
+    <link rel="mask-icon" href="/public/assets/images/govuk-mask-icon.svg" color="#0b0c0c">
+    <link rel="apple-touch-icon" sizes="180x180" href="/public/assets/images/govuk-apple-touch-icon-180x180.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="/public/assets/images/govuk-apple-touch-icon-167x167.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/public/assets/images/govuk-apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" href="/public/assets/images/govuk-apple-touch-icon.png">
     
     
     <script defer >window.__INITIAL_DATA__ = {}</script>
-    <script defer src=\\"/public/js/js/myBundle.js\\"></script>
-    <meta property=\\"og:image\\" content=\\"/public/assets/images/govuk-opengraph-image.png\\">
+    <script defer src="/public/js/js/myBundle.js"></script>
+    <meta property="og:image" content="/public/assets/images/govuk-opengraph-image.png">
 </head>
 
-<body class=\\"govuk-template__body \\">
+<body class="govuk-template__body ">
     <script>document.body.className = (document.body.className ? document.body.className : '') + ' js-enabled';</script>
-    <div id=\\"app\\"></div>
+    <div id="app"></div>
 </body>
 
 </html>"
@@ -127,30 +127,30 @@ exports[`HTML module should include the appropriate react application bundle whe
 
 exports[`HTML module should include the correct asset path when passed 1`] = `
 "<!DOCTYPE html>
-<html lang=\\"en\\" class=\\"govuk-template \\">
+<html lang="en" class="govuk-template ">
 
 <head>
-    <meta charset=\\"utf-8\\" />
+    <meta charset="utf-8" />
     <title>My React Application</title>
-    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <meta name=\\"theme-color\\" content=\\"#0b0c0c\\" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0b0c0c" />
 
-    <link rel=\\"shortcut icon\\" href=\\"some/public/folder/that/contains/my/assets/assets/images/favicon.ico\\" type=\\"image/x-icon\\" />
-    <link rel=\\"mask-icon\\" href=\\"some/public/folder/that/contains/my/assets/assets/images/govuk-mask-icon.svg\\" color=\\"#0b0c0c\\">
-    <link rel=\\"apple-touch-icon\\" sizes=\\"180x180\\" href=\\"some/public/folder/that/contains/my/assets/assets/images/govuk-apple-touch-icon-180x180.png\\">
-    <link rel=\\"apple-touch-icon\\" sizes=\\"167x167\\" href=\\"some/public/folder/that/contains/my/assets/assets/images/govuk-apple-touch-icon-167x167.png\\">
-    <link rel=\\"apple-touch-icon\\" sizes=\\"152x152\\" href=\\"some/public/folder/that/contains/my/assets/assets/images/govuk-apple-touch-icon-152x152.png\\">
-    <link rel=\\"apple-touch-icon\\" href=\\"some/public/folder/that/contains/my/assets/assets/images/govuk-apple-touch-icon.png\\">
+    <link rel="shortcut icon" href="some/public/folder/that/contains/my/assets/assets/images/favicon.ico" type="image/x-icon" />
+    <link rel="mask-icon" href="some/public/folder/that/contains/my/assets/assets/images/govuk-mask-icon.svg" color="#0b0c0c">
+    <link rel="apple-touch-icon" sizes="180x180" href="some/public/folder/that/contains/my/assets/assets/images/govuk-apple-touch-icon-180x180.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="some/public/folder/that/contains/my/assets/assets/images/govuk-apple-touch-icon-167x167.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="some/public/folder/that/contains/my/assets/assets/images/govuk-apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" href="some/public/folder/that/contains/my/assets/assets/images/govuk-apple-touch-icon.png">
     
     
     <script defer >window.__INITIAL_DATA__ = {}</script>
-    <script defer src=\\"some/public/folder/that/contains/my/assets/js/js/main.js\\"></script>
-    <meta property=\\"og:image\\" content=\\"some/public/folder/that/contains/my/assets/assets/images/govuk-opengraph-image.png\\">
+    <script defer src="some/public/folder/that/contains/my/assets/js/js/main.js"></script>
+    <meta property="og:image" content="some/public/folder/that/contains/my/assets/assets/images/govuk-opengraph-image.png">
 </head>
 
-<body class=\\"govuk-template__body \\">
+<body class="govuk-template__body ">
     <script>document.body.className = (document.body.className ? document.body.className : '') + ' js-enabled';</script>
-    <div id=\\"app\\"></div>
+    <div id="app"></div>
 </body>
 
 </html>"
@@ -158,30 +158,30 @@ exports[`HTML module should include the correct asset path when passed 1`] = `
 
 exports[`HTML module should include the server rendered markup when passed 1`] = `
 "<!DOCTYPE html>
-<html lang=\\"en\\" class=\\"govuk-template \\">
+<html lang="en" class="govuk-template ">
 
 <head>
-    <meta charset=\\"utf-8\\" />
+    <meta charset="utf-8" />
     <title>My React Application</title>
-    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <meta name=\\"theme-color\\" content=\\"#0b0c0c\\" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0b0c0c" />
 
-    <link rel=\\"shortcut icon\\" href=\\"/public/assets/images/favicon.ico\\" type=\\"image/x-icon\\" />
-    <link rel=\\"mask-icon\\" href=\\"/public/assets/images/govuk-mask-icon.svg\\" color=\\"#0b0c0c\\">
-    <link rel=\\"apple-touch-icon\\" sizes=\\"180x180\\" href=\\"/public/assets/images/govuk-apple-touch-icon-180x180.png\\">
-    <link rel=\\"apple-touch-icon\\" sizes=\\"167x167\\" href=\\"/public/assets/images/govuk-apple-touch-icon-167x167.png\\">
-    <link rel=\\"apple-touch-icon\\" sizes=\\"152x152\\" href=\\"/public/assets/images/govuk-apple-touch-icon-152x152.png\\">
-    <link rel=\\"apple-touch-icon\\" href=\\"/public/assets/images/govuk-apple-touch-icon.png\\">
+    <link rel="shortcut icon" href="/public/assets/images/favicon.ico" type="image/x-icon" />
+    <link rel="mask-icon" href="/public/assets/images/govuk-mask-icon.svg" color="#0b0c0c">
+    <link rel="apple-touch-icon" sizes="180x180" href="/public/assets/images/govuk-apple-touch-icon-180x180.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="/public/assets/images/govuk-apple-touch-icon-167x167.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/public/assets/images/govuk-apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" href="/public/assets/images/govuk-apple-touch-icon.png">
     
     
     <script defer >window.__INITIAL_DATA__ = {}</script>
-    <script defer src=\\"/public/js/js/main.js\\"></script>
-    <meta property=\\"og:image\\" content=\\"/public/assets/images/govuk-opengraph-image.png\\">
+    <script defer src="/public/js/js/main.js"></script>
+    <meta property="og:image" content="/public/assets/images/govuk-opengraph-image.png">
 </head>
 
-<body class=\\"govuk-template__body \\">
+<body class="govuk-template__body ">
     <script>document.body.className = (document.body.className ? document.body.className : '') + ' js-enabled';</script>
-    <div id=\\"app\\"><--- REACT APPLICATION ---></div>
+    <div id="app"><--- REACT APPLICATION ---></div>
 </body>
 
 </html>"
@@ -189,30 +189,30 @@ exports[`HTML module should include the server rendered markup when passed 1`] =
 
 exports[`HTML module should not contain the react bundle js when clientside is set to false 1`] = `
 "<!DOCTYPE html>
-<html lang=\\"en\\" class=\\"govuk-template \\">
+<html lang="en" class="govuk-template ">
 
 <head>
-    <meta charset=\\"utf-8\\" />
+    <meta charset="utf-8" />
     <title>My React Application</title>
-    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <meta name=\\"theme-color\\" content=\\"#0b0c0c\\" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0b0c0c" />
 
-    <link rel=\\"shortcut icon\\" href=\\"/public/assets/images/favicon.ico\\" type=\\"image/x-icon\\" />
-    <link rel=\\"mask-icon\\" href=\\"/public/assets/images/govuk-mask-icon.svg\\" color=\\"#0b0c0c\\">
-    <link rel=\\"apple-touch-icon\\" sizes=\\"180x180\\" href=\\"/public/assets/images/govuk-apple-touch-icon-180x180.png\\">
-    <link rel=\\"apple-touch-icon\\" sizes=\\"167x167\\" href=\\"/public/assets/images/govuk-apple-touch-icon-167x167.png\\">
-    <link rel=\\"apple-touch-icon\\" sizes=\\"152x152\\" href=\\"/public/assets/images/govuk-apple-touch-icon-152x152.png\\">
-    <link rel=\\"apple-touch-icon\\" href=\\"/public/assets/images/govuk-apple-touch-icon.png\\">
+    <link rel="shortcut icon" href="/public/assets/images/favicon.ico" type="image/x-icon" />
+    <link rel="mask-icon" href="/public/assets/images/govuk-mask-icon.svg" color="#0b0c0c">
+    <link rel="apple-touch-icon" sizes="180x180" href="/public/assets/images/govuk-apple-touch-icon-180x180.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="/public/assets/images/govuk-apple-touch-icon-167x167.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/public/assets/images/govuk-apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" href="/public/assets/images/govuk-apple-touch-icon.png">
     
     
     
     
-    <meta property=\\"og:image\\" content=\\"/public/assets/images/govuk-opengraph-image.png\\">
+    <meta property="og:image" content="/public/assets/images/govuk-opengraph-image.png">
 </head>
 
-<body class=\\"govuk-template__body \\">
+<body class="govuk-template__body ">
     <script>document.body.className = (document.body.className ? document.body.className : '') + ' js-enabled';</script>
-    <div id=\\"app\\"></div>
+    <div id="app"></div>
 </body>
 
 </html>"
@@ -220,30 +220,30 @@ exports[`HTML module should not contain the react bundle js when clientside is s
 
 exports[`HTML module should return the default html when no additional configuration is passed 1`] = `
 "<!DOCTYPE html>
-<html lang=\\"en\\" class=\\"govuk-template \\">
+<html lang="en" class="govuk-template ">
 
 <head>
-    <meta charset=\\"utf-8\\" />
+    <meta charset="utf-8" />
     <title>My React Application</title>
-    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <meta name=\\"theme-color\\" content=\\"#0b0c0c\\" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0b0c0c" />
 
-    <link rel=\\"shortcut icon\\" href=\\"/public/assets/images/favicon.ico\\" type=\\"image/x-icon\\" />
-    <link rel=\\"mask-icon\\" href=\\"/public/assets/images/govuk-mask-icon.svg\\" color=\\"#0b0c0c\\">
-    <link rel=\\"apple-touch-icon\\" sizes=\\"180x180\\" href=\\"/public/assets/images/govuk-apple-touch-icon-180x180.png\\">
-    <link rel=\\"apple-touch-icon\\" sizes=\\"167x167\\" href=\\"/public/assets/images/govuk-apple-touch-icon-167x167.png\\">
-    <link rel=\\"apple-touch-icon\\" sizes=\\"152x152\\" href=\\"/public/assets/images/govuk-apple-touch-icon-152x152.png\\">
-    <link rel=\\"apple-touch-icon\\" href=\\"/public/assets/images/govuk-apple-touch-icon.png\\">
+    <link rel="shortcut icon" href="/public/assets/images/favicon.ico" type="image/x-icon" />
+    <link rel="mask-icon" href="/public/assets/images/govuk-mask-icon.svg" color="#0b0c0c">
+    <link rel="apple-touch-icon" sizes="180x180" href="/public/assets/images/govuk-apple-touch-icon-180x180.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="/public/assets/images/govuk-apple-touch-icon-167x167.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/public/assets/images/govuk-apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" href="/public/assets/images/govuk-apple-touch-icon.png">
     
     
     <script defer >window.__INITIAL_DATA__ = {}</script>
-    <script defer src=\\"/public/js/js/main.js\\"></script>
-    <meta property=\\"og:image\\" content=\\"/public/assets/images/govuk-opengraph-image.png\\">
+    <script defer src="/public/js/js/main.js"></script>
+    <meta property="og:image" content="/public/assets/images/govuk-opengraph-image.png">
 </head>
 
-<body class=\\"govuk-template__body \\">
+<body class="govuk-template__body ">
     <script>document.body.className = (document.body.className ? document.body.className : '') + ' js-enabled';</script>
-    <div id=\\"app\\"></div>
+    <div id="app"></div>
 </body>
 
 </html>"

@@ -1,40 +1,40 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Documents Adapter should transform document data and sort by creation date descending 1`] = `
-Array [
-  Array [
+[
+  [
     "type1",
-    Array [
-      Object {
+    [
+      {
         "hasOriginalFile": true,
         "hasPdf": true,
         "label": "Document A",
         "status": "PENDING",
-        "tags": Array [
+        "tags": [
           "Pending",
         ],
         "timeStamp": "02-01-2019",
         "type": "type1",
         "value": 1,
       },
-      Object {
+      {
         "hasOriginalFile": true,
         "hasPdf": false,
         "label": "Document B",
         "status": "FAILED_CONVERSION",
-        "tags": Array [
+        "tags": [
           "Failed PDF Conversion",
         ],
         "timeStamp": "01-01-2019",
         "type": "type1",
         "value": 2,
       },
-      Object {
+      {
         "hasOriginalFile": false,
         "hasPdf": false,
         "label": "Document F",
         "status": "AWAITING_MALWARE_SCAN",
-        "tags": Array [
+        "tags": [
           "Awaiting Malware Scan",
           "Test Label",
         ],
@@ -42,12 +42,12 @@ Array [
         "type": "type1",
         "value": 5,
       },
-      Object {
+      {
         "hasOriginalFile": false,
         "hasPdf": false,
         "label": "Document G",
         "status": "AWAITING_CONVERSION",
-        "tags": Array [
+        "tags": [
           "Awaiting Document Conversion",
           "Test Label",
         ],
@@ -57,39 +57,39 @@ Array [
       },
     ],
   ],
-  Array [
+  [
     "type2",
-    Array [
-      Object {
+    [
+      {
         "hasOriginalFile": false,
         "hasPdf": false,
         "label": "Document C",
         "status": "FAILED_VIRUS",
-        "tags": Array [
+        "tags": [
           "Malware Found",
         ],
         "timeStamp": "03-01-2019",
         "type": "type2",
         "value": 3,
       },
-      Object {
+      {
         "hasOriginalFile": false,
         "hasPdf": false,
         "label": "Document D",
         "status": "FAILED_MALWARE_SCAN",
-        "tags": Array [
+        "tags": [
           "Malware Scan Failed",
         ],
         "timeStamp": "03-01-2019",
         "type": "type2",
         "value": 3,
       },
-      Object {
+      {
         "hasOriginalFile": false,
         "hasPdf": false,
         "label": "Document E",
         "status": "INVALID",
-        "tags": Array [
+        "tags": [
           "INVALID",
         ],
         "timeStamp": "01-01-2019",
@@ -98,9 +98,9 @@ Array [
       },
     ],
   ],
-  Array [
+  [
     "type3",
-    Array [],
+    [],
   ],
 ]
 `;

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Form MappedDisplay component should render checkbox 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": <body>
     <div>
@@ -82,7 +82,7 @@ Object {
 `;
 
 exports[`Form MappedDisplay component should render checkbox with label if showLabel 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": <body>
     <div>
@@ -163,7 +163,7 @@ Object {
 `;
 
 exports[`Form MappedDisplay component should render choice option B1 value 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": <body>
     <div>
@@ -244,7 +244,7 @@ Object {
 `;
 
 exports[`Form MappedDisplay component should render date 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": <body>
     <div>
@@ -325,7 +325,7 @@ Object {
 `;
 
 exports[`Form MappedDisplay component should render radio 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": <body>
     <div>
@@ -406,7 +406,7 @@ Object {
 `;
 
 exports[`Form MappedDisplay component should render text 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": <body>
     <div>

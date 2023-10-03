@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Phase Banner component should display the correct feedback url when passed 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": <body>
     <div>
@@ -108,7 +108,7 @@ Object {
 `;
 
 exports[`Phase Banner component should display the correct phase when passed 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": <body>
     <div>
@@ -215,7 +215,7 @@ Object {
 `;
 
 exports[`Phase Banner component should display the correct test notice when isNotProd === 0 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": <body>
     <div>
@@ -322,7 +322,7 @@ Object {
 `;
 
 exports[`Phase Banner component should display the correct test notice when isNotProd === 1 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": <body>
     <div>
@@ -417,7 +417,7 @@ Object {
 `;
 
 exports[`Phase Banner component should render with default props 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": <body>
     <div>

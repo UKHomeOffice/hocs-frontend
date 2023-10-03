@@ -20,7 +20,7 @@ jest.mock('axios', () => ({
 }));
 
 
-describe('Out of contact', async () => {
+describe('Out of contact', () => {
     const customRender = (Component) => {
         const providerProps = {
             dispatch: () => { return Promise.resolve(); },
