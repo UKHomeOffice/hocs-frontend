@@ -5,8 +5,8 @@ import { fireEvent, render, screen } from '@testing-library/react';
 
 const choices = [
     { label: 'isA', value: 'A' },
-    { label: 'isB', value: 'B' },
-    { label: 'isC', value: 'C' }
+    { label: 'isB', value: 'B', 'active': true },
+    { label: 'isC', value: 'C', 'active': false }
 ];
 
 // update to add active flags
@@ -15,19 +15,18 @@ const conditionChoices = [
         'conditionPropertyName': 'conditionValue',
         'conditionPropertyValue': 'a',
         'choices': [
-            { 'label': 'isA', 'value': 'A' },
-            { 'label': 'isB', 'value': 'B', 'active': true },
-            { 'label': 'isC', 'value': 'C', 'active': false },
-            { 'label': 'isD', 'value': 'D', 'active': false }
+            { 'label': 'conditionA valueA', 'value': 'A' },
+            { 'label': 'conditionA valueB', 'value': 'B', 'active': true },
+            { 'label': 'conditionA valueC', 'value': 'C', 'active': false }
         ]
     },
     {
         'conditionPropertyName': 'conditionValue',
         'conditionPropertyValue': 'b',
         'choices': [
-            { 'label': 'isA', 'value': 'A' },
-            { 'label': 'isB', 'value': 'B', 'active': true },
-            { 'label': 'isC', 'value': 'C', 'active': false }
+            { 'label': 'conditionB valueA', 'value': 'A' },
+            { 'label': 'conditionB valueB', 'value': 'B', 'active': true },
+            { 'label': 'conditionB valueC', 'value': 'C', 'active': false }
         ]
     },
 ];
@@ -88,27 +87,35 @@ describe('Form dropdown component', () => {
         expect(mockCallback).toHaveBeenCalledWith({ 'dropdown': secondValue });
     });
 
-    test('should render only active options (one inactive dropdown value), default is active', () => {
-        const wrapper = render(<Dropdown name="radio-group" conditionChoices={conditionChoices}
-            data={{ 'conditionValue': 'b' }} updateState={() => null} />);
-
-        expect(wrapper).toBeDefined();
-
-        expect(screen.getByText('isA')).toBeInTheDocument();
-        expect(screen.getByText('isB')).toBeInTheDocument();
-        expect(screen.queryByText('isC')).not.toBeInTheDocument();
-    });
-
-    test('should render only active options and dont fetch inactive ones (multiple dropdown values), default is active', () => {
-        const wrapper = render(<Dropdown name="radio-group" conditionChoices={conditionChoices}
+    test('should render only active options (exclie inactive dropdown value), default is active', () => {
+        const wrapperConditionA = render(<Dropdown name="radio-group" conditionChoices={conditionChoices}
             data={{ 'conditionValue': 'a' }} updateState={() => null} />);
 
+        expect(wrapperConditionA).toBeDefined();
+
+        expect(screen.getByText('conditionA valueA')).toBeInTheDocument();
+        expect(screen.queryByText('conditionA valueB')).toBeInTheDocument();
+        expect(screen.queryByText('conditionA valueC')).not.toBeInTheDocument();
+
+        const wrapperConditionB = render(<Dropdown name="radio-group" conditionChoices={conditionChoices}
+            data={{ 'conditionValue': 'b' }} updateState={() => null} />);
+
+        expect(wrapperConditionB).toBeDefined();
+
+        expect(screen.getByText('conditionB valueA')).toBeInTheDocument();
+        expect(screen.getByText('conditionB valueB')).toBeInTheDocument();
+        expect(screen.queryByText('conditionB valueC')).not.toBeInTheDocument();
+
+    });
+
+    test('should render only active options, default is active', () => {
+        const wrapper = render(<Dropdown name="radio-group" choices={choices} updateState={() => null} />);
+
         expect(wrapper).toBeDefined();
 
-        expect(screen.getByText('isA')).toBeInTheDocument();
-        expect(screen.getByText('isB')).toBeInTheDocument();
-        expect(screen.queryByText('isC')).not.toBeInTheDocument();
-        expect(screen.queryByText('isD')).not.toBeInTheDocument();
+        expect(screen.queryByText('isA')).not.toBeNull(); // default is active
+        expect(screen.queryByText('isB')).not.toBeNull(); // explicitly active
+        expect(screen.queryByText('isC')).toBeNull(); // explicitly inactive
     });
 
 });

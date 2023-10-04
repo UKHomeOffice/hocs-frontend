@@ -34,7 +34,7 @@ class Dropdown extends Component {
     }
 
     static getChoicesToUse(defaultChoices, conditionChoices, props) {
-        var choicesToUse = defaultChoices;
+        var choicesToUse = Dropdown.filterActive(defaultChoices);
         if (conditionChoices) {
             for (var i = 0; i < conditionChoices.length; i++) {
                 const conditionPropertyValue = props.data[conditionChoices[i].conditionPropertyName];
