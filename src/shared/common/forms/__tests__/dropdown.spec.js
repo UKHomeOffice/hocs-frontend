@@ -88,23 +88,23 @@ describe('Form dropdown component', () => {
     });
 
     test('should render only active options (exclie inactive dropdown value), default is active', () => {
-        const wrapperConditionA = render(<Dropdown name="radio-group" conditionChoices={conditionChoices}
+        const wrapper = render(<Dropdown name="radio-group" conditionChoices={conditionChoices}
             data={{ 'conditionValue': 'a' }} updateState={() => null} />);
 
-        expect(wrapperConditionA).toBeDefined();
+        expect(wrapper).toBeDefined();
 
         expect(screen.getByText('conditionA valueA')).toBeInTheDocument();
         expect(screen.queryByText('conditionA valueB')).toBeInTheDocument();
         expect(screen.queryByText('conditionA valueC')).not.toBeInTheDocument();
+        expect(screen.queryByText('conditionB valueA')).not.toBeInTheDocument();
 
-        const wrapperConditionB = render(<Dropdown name="radio-group" conditionChoices={conditionChoices}
+        wrapper.rerender(<Dropdown name="radio-group" conditionChoices={conditionChoices}
             data={{ 'conditionValue': 'b' }} updateState={() => null} />);
-
-        expect(wrapperConditionB).toBeDefined();
 
         expect(screen.getByText('conditionB valueA')).toBeInTheDocument();
         expect(screen.getByText('conditionB valueB')).toBeInTheDocument();
         expect(screen.queryByText('conditionB valueC')).not.toBeInTheDocument();
+        expect(screen.queryByText('conditionA valueA')).not.toBeInTheDocument();
 
     });
 
