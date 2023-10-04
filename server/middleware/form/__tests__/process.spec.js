@@ -1,3 +1,6 @@
+/**
+ * @jest-environment node
+ */
 import { processMiddleware } from '../process';
 
 describe('Process middleware', () => {

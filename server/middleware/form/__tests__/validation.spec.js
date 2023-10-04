@@ -1,3 +1,6 @@
+/**
+ * @jest-environment node
+ */
 import { FormSubmissionError, ValidationError } from '../../../models/error';
 import { validateForm, validators } from '../validation';
 

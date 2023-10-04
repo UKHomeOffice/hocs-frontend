@@ -1,3 +1,6 @@
+/**
+ * @jest-environment node
+ */
 const { handleSearch } = require('../searchHandler.js');
 const { caseworkService } = require('../../clients');
 

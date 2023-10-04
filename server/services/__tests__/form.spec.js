@@ -1,3 +1,6 @@
+/**
+ * @jest-environment node
+ */
 jest.mock('../forms/index.js', () => ({
     getForm: jest.fn(),
     getFormForCase: jest.fn()

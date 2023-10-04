@@ -1,3 +1,6 @@
+/**
+ * @jest-environment node
+ */
 const logger = require('../logger');
 
 describe('logger', () => {
