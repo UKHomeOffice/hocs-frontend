@@ -10,8 +10,13 @@ const colors = {
     error: 'red'
 };
 
-const logstashFormat = statement => {
+const logstashFormat = (statement) => {
     const logstashStatement = Object.assign({}, statement);
+    if(typeof logstashStatement.message === 'object') {
+        const messageObj = logstashStatement.message;
+        delete logstashStatement.message;
+        Object.assign(logstashStatement, messageObj);
+    }
 
     if (logstashStatement.timestamp !== undefined) {
         logstashStatement['@timestamp'] = logstashStatement.timestamp;
@@ -21,33 +26,26 @@ const logstashFormat = statement => {
     return JSON.stringify(logstashStatement);
 };
 
-loggingTransports.push(
-    new (winston.transports.Console)({
-        json: isProduction,
-        timestamp: true,
-        colorize: true,
-        stringify: logstashFormat
-    })
-);
+const format = isProduction
+    ? winston.format.combine(
+        winston.format.timestamp(),
+        winston.format.printf(logstashFormat)
+    )
+    : winston.format.combine(
+        winston.format.timestamp(),
+        winston.format.printf(statement => `${statement.timestamp} ${`[${statement.level.toLocaleUpperCase()}]`.padStart(7)} ${JSON.stringify(statement.message)}`),
+        winston.format.colorize({ colors }),
+    );
 
-exceptionTransports.push(
-    new (winston.transports.Console)({
-        json: isProduction,
-        logstash: isProduction,
-        timestamp: true,
-        colorize: true,
-        stringify: function stringify(obj) {
-            return JSON.stringify(obj);
-        }
-    })
-);
+loggingTransports.push(new (winston.transports.Console)({ format }));
 
-const logger = new (winston.Logger)({
+exceptionTransports.push(new (winston.transports.Console)({ format }));
+
+const logger = winston.createLogger({
     level: isProduction ? 'info' : 'debug',
     transports: loggingTransports,
     exceptionHandlers: exceptionTransports,
-    exitOnError: true,
-    colors: colors
+    exitOnError: true
 });
 
 logger.info(`Logger mode: ${isProduction ? 'production' : 'development'}`);

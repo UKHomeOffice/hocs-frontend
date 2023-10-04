@@ -1,3 +1,6 @@
+/**
+ * @jest-environment node
+ */
 const { autoCreateAllocateBrowser, autoCreateAllocateApi } = require('../autoCreateAllocate.js');
 const { actionResponseMiddleware, apiActionResponseMiddleware } = require('../../middleware/action');
 const { getFormForAction } = require('../../services/form');
