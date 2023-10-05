@@ -27,7 +27,7 @@
         "@aws-sdk/node-http-handler": "^3.127.0",
         "axios": "^0.26.1",
         "body-parser": "^1.20.2",
-        "chart.js": "^4.3.0",
+        "chart.js": "^4.4.0",
         "classnames": "^2.3.2",
         "cookie-parser": "^1.4.6",
         "core-js": "^3.23.3",
