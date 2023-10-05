@@ -1487,6 +1487,54 @@ module.exports = {
             endpoint: '/entity/list/OUT_OF_CONTACT_TEAMS',
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
+        },
+        COMP_ASYLUM_AND_HUMAN_RIGHTS_BUS_AREA: {
+            client: 'INFO',
+            endpoint: '/entity/list/COMP_ASYLUM_AND_HUMAN_RIGHTS_BUS_AREA',
+            type: listService.types.DYNAMIC,
+            adapter: entityListItemsAdapter
+        },
+        COMP_ASYLUM_AND_SUPPORT_BUS_AREA: {
+            client: 'INFO',
+            endpoint: '/entity/list/COMP_ASYLUM_AND_SUPPORT_BUS_AREA',
+            type: listService.types.DYNAMIC,
+            adapter: entityListItemsAdapter
+        },
+        COMP_BORDER_FORCE_BUS_AREA: {
+            client: 'INFO',
+            endpoint: '/entity/list/COMP_BORDER_FORCE_BUS_AREA',
+            type: listService.types.DYNAMIC,
+            adapter: entityListItemsAdapter
+        },
+        COMP_COSS_BUS_AREA: {
+            client: 'INFO',
+            endpoint: '/entity/list/COMP_COSS_BUS_AREA',
+            type: listService.types.DYNAMIC,
+            adapter: entityListItemsAdapter
+        },
+        COMP_VSI_BUS_AREA: {
+            client: 'INFO',
+            endpoint: '/entity/list/COMP_VSI_BUS_AREA',
+            type: listService.types.DYNAMIC,
+            adapter: entityListItemsAdapter
+        },
+        COMP_RESETTLEMENT_BUS_AREA: {
+            client: 'INFO',
+            endpoint: '/entity/list/COMP_RESETTLEMENT_BUS_AREA',
+            type: listService.types.DYNAMIC,
+            adapter: entityListItemsAdapter
+        },
+        COMP_PCCR_BUS_AREA: {
+            client: 'INFO',
+            endpoint: '/entity/list/COMP_PCCR_BUS_AREA',
+            type: listService.types.DYNAMIC,
+            adapter: entityListItemsAdapter
+        },
+        COMP_IMMIGRATION_ENFORCEMENT_BUS_AREA: {
+            client: 'INFO',
+            endpoint: '/entity/list/COMP_IMMIGRATION_ENFORCEMENT_BUS_AREA',
+            type: listService.types.DYNAMIC,
+            adapter: entityListItemsAdapter
         }
     },
     clients: {
