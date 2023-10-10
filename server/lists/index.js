@@ -1500,12 +1500,6 @@ module.exports = {
             type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
         },
-        COMP_BORDER_FORCE_BUS_AREA: {
-            client: 'INFO',
-            endpoint: '/entity/list/COMP_BORDER_FORCE_BUS_AREA',
-            type: listService.types.DYNAMIC,
-            adapter: entityListItemsAdapter
-        },
         COMP_COSS_BUS_AREA: {
             client: 'INFO',
             endpoint: '/entity/list/COMP_COSS_BUS_AREA',
