@@ -56,7 +56,7 @@ class TextArea extends Component {
     }
 
     calculateRemaining() {
-        return this.props.limit - this.state.value.length;
+        return this.props.limit - this.state.value.replaceAll('\r\n', '\n').length;
     }
 }
 
