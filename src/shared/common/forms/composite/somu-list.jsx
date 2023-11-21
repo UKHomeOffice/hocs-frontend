@@ -76,11 +76,12 @@ class SomuTableRenderer {
 
     renderTable(status, title, dueDate, tableType, decision = undefined) {
         const metaLabel = status === REQUEST_STATUS.CANCELLED ? `Cancelled ${tableType} request: ${title}` : title;
+        const elementTitle = TABLE_TYPE.CONTRIBUTION ? 'Contribution type' : 'Approval type'
         return (<>
             <td className='govuk-table__cell'>
                 <label className={'govuk-label'}
                     aria-label={metaLabel}
-                    title={metaLabel}>
+                    title={elementTitle}>
                     {title}
                 </label>
             </td>
@@ -112,8 +113,7 @@ class SomuTableRenderer {
 
         return (<td className={`govuk-table__cell ${className}`}>
             <label className='govuk-label'
-                aria-label={title}
-                title={title}>
+                aria-label={title}>
                 {title}
             </label>
         </td>);
