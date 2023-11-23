@@ -78,13 +78,13 @@ class SomuTableRenderer {
         const metaLabel = status === REQUEST_STATUS.CANCELLED ? `Cancelled ${tableType} request: ${title}` : title;
         const elementTitle = TABLE_TYPE.CONTRIBUTION ? 'Contribution type' : 'Approval type';
         return (<>
-            <td className='govuk-table__cell'>
+            <dt className="govuk-summary-list__key">
                 <label className={'govuk-label'}
                     aria-label={metaLabel}
                     title={elementTitle}>
                     {title}
                 </label>
-            </td>
+            </dt>
             {this.renderStatusColumn(status, dueDate, decision)}
         </>);
     }
@@ -111,12 +111,12 @@ class SomuTableRenderer {
             }
         }
 
-        return (<td className={`govuk-table__cell ${className}`}>
+        return (<dd className={`govuk-summary-list__value ${className}`}>
             <label className='govuk-label'
                 aria-label={title}>
                 {title}
             </label>
-        </td>);
+        </dd>);
     }
 
     render(somuItem) {
@@ -133,9 +133,9 @@ class SomuTableRenderer {
                 return this.renderApprovalTable(somuItem.data);
         }
 
-        return (<td className='govuk-table__cell'>
+        return (<dt className="govuk-summary-list__key">
             <label className="govuk-label">{somuItem.uuid}</label>
-        </td>);
+        </dt>);
     }
 
 }
@@ -159,10 +159,10 @@ class SomuList extends Component {
         const { itemLinks, somuType, page, hideSidebar }  = this.props;
 
         return itemLinks.map(({ action, label }) => {
-            return (<td key={action} className='govuk-table__cell'>
+            return (<dd key={action} className="govuk-summary-list__actions">
                 <Link to={`/case/${page.params.caseId}/stage/${page.params.stageId}/somu/${somuType.uuid}/${somuType.type}/${somuType.caseType}/item/${somuItem.uuid}/${action}?hideSidebar=${hideSidebar}`}
                     className="govuk-link">{label}</Link>
-            </td>);
+            </dd>);
         });
     }
 
@@ -196,20 +196,18 @@ class SomuList extends Component {
                     {hint && <div className="govuk-hint">{hint}</div>}
                     {error && <p id={`${name}-error`} className="govuk-error-message">{error}</p>}
 
-                    <table className='govuk-table'>
-                        <tbody className='govuk-table__body'>
-                            {somuItems.map((somuItem, i) => {
-                                return (
-                                    <tr className='govuk-table__row' key={i}>
-                                        {
-                                            renderer.render(somuItem)
-                                        }
-                                        { this.renderItemLinks(somuItem) }
-                                    </tr>
-                                );
-                            })}
-                        </tbody>
-                    </table>
+                    <dl className="govuk-summary-list">
+                        {somuItems.map((somuItem, i) => {
+                            return (
+                                <div className="govuk-summary-list__row" key={i}>
+                                    {
+                                        renderer.render(somuItem)
+                                    }
+                                    { this.renderItemLinks(somuItem) }
+                                </div>
+                            );
+                        })}
+                    </dl>
                     {primaryLink &&
                         <p>
                             <Link to={`/case/${page.params.caseId}/stage/${page.params.stageId}/somu/${somuType.uuid}/${somuType.type}/${somuType.caseType}/${primaryLink.action}?hideSidebar=${hideSidebar}`} className="govuk-body govuk-link">{primaryLink.label}</Link>
