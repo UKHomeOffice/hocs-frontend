@@ -76,7 +76,7 @@ class SomuTableRenderer {
 
     renderTable(status, title, dueDate, tableType, decision = undefined) {
         const metaLabel = status === REQUEST_STATUS.CANCELLED ? `Cancelled ${tableType} request: ${title}` : title;
-        const elementTitle = TABLE_TYPE.CONTRIBUTION ? 'Contribution type' : 'Approval type'
+        const elementTitle = TABLE_TYPE.CONTRIBUTION ? 'Contribution type' : 'Approval type';
         return (<>
             <td className='govuk-table__cell'>
                 <label className={'govuk-label'}
