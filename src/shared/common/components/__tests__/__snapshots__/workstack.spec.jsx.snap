@@ -18,11 +18,12 @@ exports[`Workstack component should not add link to headers with sortStrategy no
               class="govuk-fieldset__legend"
               id="workstack-filter-legend"
             >
-              <span
+              <label
                 class="govuk-fieldset__heading govuk-label--s"
+                for="workstack-filter"
               >
                 Case Filter
-              </span>
+              </label>
             </legend>
             <input
               class="govuk-input"
@@ -1133,11 +1134,12 @@ exports[`Workstack component should not add link to headers with sortStrategy no
             class="govuk-fieldset__legend"
             id="workstack-filter-legend"
           >
-            <span
+            <label
               class="govuk-fieldset__heading govuk-label--s"
+              for="workstack-filter"
             >
               Case Filter
-            </span>
+            </label>
           </legend>
           <input
             class="govuk-input"
@@ -2305,11 +2307,12 @@ exports[`Workstack component should render the move team options 1`] = `
               class="govuk-fieldset__legend"
               id="workstack-filter-legend"
             >
-              <span
+              <label
                 class="govuk-fieldset__heading govuk-label--s"
+                for="workstack-filter"
               >
                 Case Filter
-              </span>
+              </label>
             </legend>
             <input
               class="govuk-input"
@@ -3512,11 +3515,12 @@ exports[`Workstack component should render the move team options 1`] = `
             class="govuk-fieldset__legend"
             id="workstack-filter-legend"
           >
-            <span
+            <label
               class="govuk-fieldset__heading govuk-label--s"
+              for="workstack-filter"
             >
               Case Filter
-            </span>
+            </label>
           </legend>
           <input
             class="govuk-input"
@@ -4776,11 +4780,12 @@ exports[`Workstack component should sort descending when the column heading is c
               class="govuk-fieldset__legend"
               id="workstack-filter-legend"
             >
-              <span
+              <label
                 class="govuk-fieldset__heading govuk-label--s"
+                for="workstack-filter"
               >
                 Case Filter
-              </span>
+              </label>
             </legend>
             <input
               class="govuk-input"
@@ -5891,11 +5896,12 @@ exports[`Workstack component should sort descending when the column heading is c
             class="govuk-fieldset__legend"
             id="workstack-filter-legend"
           >
-            <span
+            <label
               class="govuk-fieldset__heading govuk-label--s"
+              for="workstack-filter"
             >
               Case Filter
-            </span>
+            </label>
           </legend>
           <input
             class="govuk-input"
@@ -7063,11 +7069,12 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
               class="govuk-fieldset__legend"
               id="workstack-filter-legend"
             >
-              <span
+              <label
                 class="govuk-fieldset__heading govuk-label--s"
+                for="workstack-filter"
               >
                 Case Filter
-              </span>
+              </label>
             </legend>
             <input
               class="govuk-input"
@@ -8178,11 +8185,12 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
             class="govuk-fieldset__legend"
             id="workstack-filter-legend"
           >
-            <span
+            <label
               class="govuk-fieldset__heading govuk-label--s"
+              for="workstack-filter"
             >
               Case Filter
-            </span>
+            </label>
           </legend>
           <input
             class="govuk-input"
