@@ -29,33 +29,29 @@ exports[`Form embedded wrapped component should render with default props 1`] = 
           />
         </form>
       </details>
-      <table
-        class="govuk-table"
+      <dl
+        class="govuk-summary-list"
       >
         <caption
           class="govuk-table__caption margin-bottom--small"
         >
           Summary
         </caption>
-        <tbody
-          class="govuk-table__body"
+        <div
+          class="govuk-summary-list__row"
         >
-          <tr
-            class="govuk-table__cell"
+          <dt
+            class="govuk-summary-list__key padding-left--small govuk-!-width-one-half"
           >
-            <th
-              class="govuk-table__header padding-left--small govuk-!-width-one-half"
-            >
-              Test Field
-            </th>
-            <td
-              class="govuk-table__cell"
-            >
-              True
-            </td>
-          </tr>
-        </tbody>
-      </table>
+            Test Field
+          </dt>
+          <dt
+            class="govuk-summary-list__value"
+          >
+            True
+          </dt>
+        </div>
+      </dl>
     </div>
   </body>,
   "container": <div>
@@ -83,33 +79,29 @@ exports[`Form embedded wrapped component should render with default props 1`] = 
         />
       </form>
     </details>
-    <table
-      class="govuk-table"
+    <dl
+      class="govuk-summary-list"
     >
       <caption
         class="govuk-table__caption margin-bottom--small"
       >
         Summary
       </caption>
-      <tbody
-        class="govuk-table__body"
+      <div
+        class="govuk-summary-list__row"
       >
-        <tr
-          class="govuk-table__cell"
+        <dt
+          class="govuk-summary-list__key padding-left--small govuk-!-width-one-half"
         >
-          <th
-            class="govuk-table__header padding-left--small govuk-!-width-one-half"
-          >
-            Test Field
-          </th>
-          <td
-            class="govuk-table__cell"
-          >
-            True
-          </td>
-        </tr>
-      </tbody>
-    </table>
+          Test Field
+        </dt>
+        <dt
+          class="govuk-summary-list__value"
+        >
+          True
+        </dt>
+      </div>
+    </dl>
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],
