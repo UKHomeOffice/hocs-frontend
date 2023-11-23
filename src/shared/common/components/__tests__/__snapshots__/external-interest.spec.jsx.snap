@@ -105,27 +105,22 @@ exports[`Appeals Component should Render with table of existing external interes
       >
         Record Interest
       </h3>
-      <p
-        class="govuk-body"
+      <dl
+        class="govuk-summary-list"
       >
-        Recorded Interests:
-      </p>
-      <table
-        class="govuk-table"
-      >
-        <tr
-          class="govuk-table__row"
+        <div
+          class="govuk-summary-list__row"
         >
-          <td
-            class="govuk-table__cell width-one-sixth"
+          <dt
+            class="govuk-summary-list__key width-one-sixth"
           >
             TEST_PARTY_TYPE
-          </td>
-          <td
-            class="govuk-table__cell govuk-!-width-one-half"
+          </dt>
+          <dt
+            class="govuk-summary-list__value govuk-!-width-one-half"
           />
-          <td
-            class="govuk-table__cell"
+          <dt
+            class="govuk-summary-list__actions"
           >
             <a
               class="govuk-link"
@@ -133,21 +128,21 @@ exports[`Appeals Component should Render with table of existing external interes
             >
               Update
             </a>
-          </td>
-        </tr>
-        <tr
-          class="govuk-table__row"
+          </dt>
+        </div>
+        <div
+          class="govuk-summary-list__row"
         >
-          <td
-            class="govuk-table__cell width-one-sixth"
+          <dt
+            class="govuk-summary-list__key width-one-sixth"
           >
             TEST_PARTY_TYPE_2
-          </td>
-          <td
-            class="govuk-table__cell govuk-!-width-one-half"
+          </dt>
+          <dt
+            class="govuk-summary-list__value govuk-!-width-one-half"
           />
-          <td
-            class="govuk-table__cell"
+          <dt
+            class="govuk-summary-list__actions"
           >
             <a
               class="govuk-link"
@@ -155,9 +150,9 @@ exports[`Appeals Component should Render with table of existing external interes
             >
               Update
             </a>
-          </td>
-        </tr>
-      </table>
+          </dt>
+        </div>
+      </dl>
       <p
         class="govuk-body"
       >
@@ -177,27 +172,22 @@ exports[`Appeals Component should Render with table of existing external interes
     >
       Record Interest
     </h3>
-    <p
-      class="govuk-body"
+    <dl
+      class="govuk-summary-list"
     >
-      Recorded Interests:
-    </p>
-    <table
-      class="govuk-table"
-    >
-      <tr
-        class="govuk-table__row"
+      <div
+        class="govuk-summary-list__row"
       >
-        <td
-          class="govuk-table__cell width-one-sixth"
+        <dt
+          class="govuk-summary-list__key width-one-sixth"
         >
           TEST_PARTY_TYPE
-        </td>
-        <td
-          class="govuk-table__cell govuk-!-width-one-half"
+        </dt>
+        <dt
+          class="govuk-summary-list__value govuk-!-width-one-half"
         />
-        <td
-          class="govuk-table__cell"
+        <dt
+          class="govuk-summary-list__actions"
         >
           <a
             class="govuk-link"
@@ -205,21 +195,21 @@ exports[`Appeals Component should Render with table of existing external interes
           >
             Update
           </a>
-        </td>
-      </tr>
-      <tr
-        class="govuk-table__row"
+        </dt>
+      </div>
+      <div
+        class="govuk-summary-list__row"
       >
-        <td
-          class="govuk-table__cell width-one-sixth"
+        <dt
+          class="govuk-summary-list__key width-one-sixth"
         >
           TEST_PARTY_TYPE_2
-        </td>
-        <td
-          class="govuk-table__cell govuk-!-width-one-half"
+        </dt>
+        <dt
+          class="govuk-summary-list__value govuk-!-width-one-half"
         />
-        <td
-          class="govuk-table__cell"
+        <dt
+          class="govuk-summary-list__actions"
         >
           <a
             class="govuk-link"
@@ -227,9 +217,9 @@ exports[`Appeals Component should Render with table of existing external interes
           >
             Update
           </a>
-        </td>
-      </tr>
-    </table>
+        </dt>
+      </div>
+    </dl>
     <p
       class="govuk-body"
     >
