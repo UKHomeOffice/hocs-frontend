@@ -213,7 +213,7 @@ class WorkstackAllocate extends Component {
                 <div className='govuk-grid-column-one-third'>
                     <div className='govuk-form-group filter-row'>
                         <legend id={'workstack-filter-legend'} className='govuk-fieldset__legend'>
-                            <span className='govuk-fieldset__heading govuk-label--s'>Case Filter</span>
+                            <label className='govuk-fieldset__heading govuk-label--s' htmlFor={'workstack-filter'}>Case Filter</label>
                         </legend>
                         <input className='govuk-input'
                             id='workstack-filter'
