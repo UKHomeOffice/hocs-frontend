@@ -110,67 +110,93 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                           <th
                             class="govuk-table__header"
                           >
-                            Reference
+                            <span>
+                              Reference
+                            </span>
                           </th>
                           <th
                             class="govuk-link"
                           >
-                            Full Name
+                            <span>
+                              Full Name
+                            </span>
                           </th>
                           <th
                             class="govuk-link"
                           >
-                            Fullname
+                            <span>
+                              Fullname
+                            </span>
                           </th>
                           <th
                             class="govuk-link"
                           >
-                            Postcode
+                            <span>
+                              Postcode
+                            </span>
                           </th>
                           <th
                             class="govuk-link"
                           >
-                            Current Stage
+                            <span>
+                              Current Stage
+                            </span>
                           </th>
                           <th
                             class="govuk-link"
                           >
-                            Owner
+                            <span>
+                              Owner
+                            </span>
                           </th>
                           <th
                             class="govuk-link"
                           >
-                            Topic
+                            <span>
+                              Topic
+                            </span>
                           </th>
                           <th
                             class="govuk-link"
                           >
-                            Case Date
+                            <span>
+                              Case Date
+                            </span>
                           </th>
                           <th
                             class="govuk-link"
                           >
-                            Active
+                            <span>
+                              Active
+                            </span>
                           </th>
                           <th
                             class="govuk-link"
                           >
-                            Contribution Due Date
+                            <span>
+                              Contribution Due Date
+                            </span>
                           </th>
                           <th
                             class="govuk-link"
                           >
-                            Due Date
+                            <span>
+                              Due Date
+                            </span>
                           </th>
                           <th
                             class="govuk-link"
                           >
-                            Escalate Case
+                            <span>
+                              Escalate Case
+                            </span>
                           </th>
                           <th
                             class="govuk-link"
                           >
-                            Extended
+                            <span>
+                              Extended
+                            </span>
                           </th>
                         </tr>
                       </thead>
@@ -1226,67 +1252,93 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                         <th
                           class="govuk-table__header"
                         >
-                          Reference
+                          <span>
+                            Reference
+                          </span>
                         </th>
                         <th
                           class="govuk-link"
                         >
-                          Full Name
+                          <span>
+                            Full Name
+                          </span>
                         </th>
                         <th
                           class="govuk-link"
                         >
-                          Fullname
+                          <span>
+                            Fullname
+                          </span>
                         </th>
                         <th
                           class="govuk-link"
                         >
-                          Postcode
+                          <span>
+                            Postcode
+                          </span>
                         </th>
                         <th
                           class="govuk-link"
                         >
-                          Current Stage
+                          <span>
+                            Current Stage
+                          </span>
                         </th>
                         <th
                           class="govuk-link"
                         >
-                          Owner
+                          <span>
+                            Owner
+                          </span>
                         </th>
                         <th
                           class="govuk-link"
                         >
-                          Topic
+                          <span>
+                            Topic
+                          </span>
                         </th>
                         <th
                           class="govuk-link"
                         >
-                          Case Date
+                          <span>
+                            Case Date
+                          </span>
                         </th>
                         <th
                           class="govuk-link"
                         >
-                          Active
+                          <span>
+                            Active
+                          </span>
                         </th>
                         <th
                           class="govuk-link"
                         >
-                          Contribution Due Date
+                          <span>
+                            Contribution Due Date
+                          </span>
                         </th>
                         <th
                           class="govuk-link"
                         >
-                          Due Date
+                          <span>
+                            Due Date
+                          </span>
                         </th>
                         <th
                           class="govuk-link"
                         >
-                          Escalate Case
+                          <span>
+                            Escalate Case
+                          </span>
                         </th>
                         <th
                           class="govuk-link"
                         >
-                          Extended
+                          <span>
+                            Extended
+                          </span>
                         </th>
                       </tr>
                     </thead>
@@ -2445,67 +2497,93 @@ exports[`Workstack component should render the move team options 1`] = `
                           <th
                             class="govuk-link"
                           >
-                            Reference
+                            <span>
+                              Reference
+                            </span>
                           </th>
                           <th
                             class="govuk-link"
                           >
-                            Full Name
+                            <span>
+                              Full Name
+                            </span>
                           </th>
                           <th
                             class="govuk-link"
                           >
-                            Fullname
+                            <span>
+                              Fullname
+                            </span>
                           </th>
                           <th
                             class="govuk-link"
                           >
-                            Postcode
+                            <span>
+                              Postcode
+                            </span>
                           </th>
                           <th
                             class="govuk-link"
                           >
-                            Current Stage
+                            <span>
+                              Current Stage
+                            </span>
                           </th>
                           <th
                             class="govuk-link"
                           >
-                            Owner
+                            <span>
+                              Owner
+                            </span>
                           </th>
                           <th
                             class="govuk-link"
                           >
-                            Topic
+                            <span>
+                              Topic
+                            </span>
                           </th>
                           <th
                             class="govuk-link"
                           >
-                            Case Date
+                            <span>
+                              Case Date
+                            </span>
                           </th>
                           <th
                             class="govuk-link"
                           >
-                            Active
+                            <span>
+                              Active
+                            </span>
                           </th>
                           <th
                             class="govuk-link"
                           >
-                            Contribution Due Date
+                            <span>
+                              Contribution Due Date
+                            </span>
                           </th>
                           <th
                             class="govuk-link"
                           >
-                            Due Date
+                            <span>
+                              Due Date
+                            </span>
                           </th>
                           <th
                             class="govuk-link"
                           >
-                            Escalate Case
+                            <span>
+                              Escalate Case
+                            </span>
                           </th>
                           <th
                             class="govuk-link"
                           >
-                            Extended
+                            <span>
+                              Extended
+                            </span>
                           </th>
                         </tr>
                       </thead>
@@ -3653,67 +3731,93 @@ exports[`Workstack component should render the move team options 1`] = `
                         <th
                           class="govuk-link"
                         >
-                          Reference
+                          <span>
+                            Reference
+                          </span>
                         </th>
                         <th
                           class="govuk-link"
                         >
-                          Full Name
+                          <span>
+                            Full Name
+                          </span>
                         </th>
                         <th
                           class="govuk-link"
                         >
-                          Fullname
+                          <span>
+                            Fullname
+                          </span>
                         </th>
                         <th
                           class="govuk-link"
                         >
-                          Postcode
+                          <span>
+                            Postcode
+                          </span>
                         </th>
                         <th
                           class="govuk-link"
                         >
-                          Current Stage
+                          <span>
+                            Current Stage
+                          </span>
                         </th>
                         <th
                           class="govuk-link"
                         >
-                          Owner
+                          <span>
+                            Owner
+                          </span>
                         </th>
                         <th
                           class="govuk-link"
                         >
-                          Topic
+                          <span>
+                            Topic
+                          </span>
                         </th>
                         <th
                           class="govuk-link"
                         >
-                          Case Date
+                          <span>
+                            Case Date
+                          </span>
                         </th>
                         <th
                           class="govuk-link"
                         >
-                          Active
+                          <span>
+                            Active
+                          </span>
                         </th>
                         <th
                           class="govuk-link"
                         >
-                          Contribution Due Date
+                          <span>
+                            Contribution Due Date
+                          </span>
                         </th>
                         <th
                           class="govuk-link"
                         >
-                          Due Date
+                          <span>
+                            Due Date
+                          </span>
                         </th>
                         <th
                           class="govuk-link"
                         >
-                          Escalate Case
+                          <span>
+                            Escalate Case
+                          </span>
                         </th>
                         <th
                           class="govuk-link"
                         >
-                          Extended
+                          <span>
+                            Extended
+                          </span>
                         </th>
                       </tr>
                     </thead>
@@ -4872,67 +4976,93 @@ exports[`Workstack component should sort descending when the column heading is c
                           <th
                             class="govuk-link sorted-descending"
                           >
-                            Reference
+                            <span>
+                              Reference
+                            </span>
                           </th>
                           <th
                             class="govuk-link"
                           >
-                            Full Name
+                            <span>
+                              Full Name
+                            </span>
                           </th>
                           <th
                             class="govuk-link"
                           >
-                            Fullname
+                            <span>
+                              Fullname
+                            </span>
                           </th>
                           <th
                             class="govuk-link"
                           >
-                            Postcode
+                            <span>
+                              Postcode
+                            </span>
                           </th>
                           <th
                             class="govuk-link"
                           >
-                            Current Stage
+                            <span>
+                              Current Stage
+                            </span>
                           </th>
                           <th
                             class="govuk-link"
                           >
-                            Owner
+                            <span>
+                              Owner
+                            </span>
                           </th>
                           <th
                             class="govuk-link"
                           >
-                            Topic
+                            <span>
+                              Topic
+                            </span>
                           </th>
                           <th
                             class="govuk-link"
                           >
-                            Case Date
+                            <span>
+                              Case Date
+                            </span>
                           </th>
                           <th
                             class="govuk-link"
                           >
-                            Active
+                            <span>
+                              Active
+                            </span>
                           </th>
                           <th
                             class="govuk-link"
                           >
-                            Contribution Due Date
+                            <span>
+                              Contribution Due Date
+                            </span>
                           </th>
                           <th
                             class="govuk-link"
                           >
-                            Due Date
+                            <span>
+                              Due Date
+                            </span>
                           </th>
                           <th
                             class="govuk-link"
                           >
-                            Escalate Case
+                            <span>
+                              Escalate Case
+                            </span>
                           </th>
                           <th
                             class="govuk-link"
                           >
-                            Extended
+                            <span>
+                              Extended
+                            </span>
                           </th>
                         </tr>
                       </thead>
@@ -5988,67 +6118,93 @@ exports[`Workstack component should sort descending when the column heading is c
                         <th
                           class="govuk-link sorted-descending"
                         >
-                          Reference
+                          <span>
+                            Reference
+                          </span>
                         </th>
                         <th
                           class="govuk-link"
                         >
-                          Full Name
+                          <span>
+                            Full Name
+                          </span>
                         </th>
                         <th
                           class="govuk-link"
                         >
-                          Fullname
+                          <span>
+                            Fullname
+                          </span>
                         </th>
                         <th
                           class="govuk-link"
                         >
-                          Postcode
+                          <span>
+                            Postcode
+                          </span>
                         </th>
                         <th
                           class="govuk-link"
                         >
-                          Current Stage
+                          <span>
+                            Current Stage
+                          </span>
                         </th>
                         <th
                           class="govuk-link"
                         >
-                          Owner
+                          <span>
+                            Owner
+                          </span>
                         </th>
                         <th
                           class="govuk-link"
                         >
-                          Topic
+                          <span>
+                            Topic
+                          </span>
                         </th>
                         <th
                           class="govuk-link"
                         >
-                          Case Date
+                          <span>
+                            Case Date
+                          </span>
                         </th>
                         <th
                           class="govuk-link"
                         >
-                          Active
+                          <span>
+                            Active
+                          </span>
                         </th>
                         <th
                           class="govuk-link"
                         >
-                          Contribution Due Date
+                          <span>
+                            Contribution Due Date
+                          </span>
                         </th>
                         <th
                           class="govuk-link"
                         >
-                          Due Date
+                          <span>
+                            Due Date
+                          </span>
                         </th>
                         <th
                           class="govuk-link"
                         >
-                          Escalate Case
+                          <span>
+                            Escalate Case
+                          </span>
                         </th>
                         <th
                           class="govuk-link"
                         >
-                          Extended
+                          <span>
+                            Extended
+                          </span>
                         </th>
                       </tr>
                     </thead>
@@ -7161,67 +7317,93 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                           <th
                             class="govuk-link sorted-ascending"
                           >
-                            Reference
+                            <span>
+                              Reference
+                            </span>
                           </th>
                           <th
                             class="govuk-link"
                           >
-                            Full Name
+                            <span>
+                              Full Name
+                            </span>
                           </th>
                           <th
                             class="govuk-link"
                           >
-                            Fullname
+                            <span>
+                              Fullname
+                            </span>
                           </th>
                           <th
                             class="govuk-link"
                           >
-                            Postcode
+                            <span>
+                              Postcode
+                            </span>
                           </th>
                           <th
                             class="govuk-link"
                           >
-                            Current Stage
+                            <span>
+                              Current Stage
+                            </span>
                           </th>
                           <th
                             class="govuk-link"
                           >
-                            Owner
+                            <span>
+                              Owner
+                            </span>
                           </th>
                           <th
                             class="govuk-link"
                           >
-                            Topic
+                            <span>
+                              Topic
+                            </span>
                           </th>
                           <th
                             class="govuk-link"
                           >
-                            Case Date
+                            <span>
+                              Case Date
+                            </span>
                           </th>
                           <th
                             class="govuk-link"
                           >
-                            Active
+                            <span>
+                              Active
+                            </span>
                           </th>
                           <th
                             class="govuk-link"
                           >
-                            Contribution Due Date
+                            <span>
+                              Contribution Due Date
+                            </span>
                           </th>
                           <th
                             class="govuk-link"
                           >
-                            Due Date
+                            <span>
+                              Due Date
+                            </span>
                           </th>
                           <th
                             class="govuk-link"
                           >
-                            Escalate Case
+                            <span>
+                              Escalate Case
+                            </span>
                           </th>
                           <th
                             class="govuk-link"
                           >
-                            Extended
+                            <span>
+                              Extended
+                            </span>
                           </th>
                         </tr>
                       </thead>
@@ -8277,67 +8459,93 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                         <th
                           class="govuk-link sorted-ascending"
                         >
-                          Reference
+                          <span>
+                            Reference
+                          </span>
                         </th>
                         <th
                           class="govuk-link"
                         >
-                          Full Name
+                          <span>
+                            Full Name
+                          </span>
                         </th>
                         <th
                           class="govuk-link"
                         >
-                          Fullname
+                          <span>
+                            Fullname
+                          </span>
                         </th>
                         <th
                           class="govuk-link"
                         >
-                          Postcode
+                          <span>
+                            Postcode
+                          </span>
                         </th>
                         <th
                           class="govuk-link"
                         >
-                          Current Stage
+                          <span>
+                            Current Stage
+                          </span>
                         </th>
                         <th
                           class="govuk-link"
                         >
-                          Owner
+                          <span>
+                            Owner
+                          </span>
                         </th>
                         <th
                           class="govuk-link"
                         >
-                          Topic
+                          <span>
+                            Topic
+                          </span>
                         </th>
                         <th
                           class="govuk-link"
                         >
-                          Case Date
+                          <span>
+                            Case Date
+                          </span>
                         </th>
                         <th
                           class="govuk-link"
                         >
-                          Active
+                          <span>
+                            Active
+                          </span>
                         </th>
                         <th
                           class="govuk-link"
                         >
-                          Contribution Due Date
+                          <span>
+                            Contribution Due Date
+                          </span>
                         </th>
                         <th
                           class="govuk-link"
                         >
-                          Due Date
+                          <span>
+                            Due Date
+                          </span>
                         </th>
                         <th
                           class="govuk-link"
                         >
-                          Escalate Case
+                          <span>
+                            Escalate Case
+                          </span>
                         </th>
                         <th
                           class="govuk-link"
                         >
-                          Extended
+                          <span>
+                            Extended
+                          </span>
                         </th>
                       </tr>
                     </thead>
