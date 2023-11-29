@@ -79,11 +79,11 @@ class SomuTableRenderer {
         const elementTitle = TABLE_TYPE.CONTRIBUTION ? 'Contribution type' : 'Approval type';
         return (<>
             <dt className="govuk-summary-list__key">
-                <label className={'govuk-label'}
+                <span className={'govuk-label'}
                     aria-label={metaLabel}
                     title={elementTitle}>
                     {title}
-                </label>
+                </span>
             </dt>
             {this.renderStatusColumn(status, dueDate, decision)}
         </>);
@@ -112,10 +112,10 @@ class SomuTableRenderer {
         }
 
         return (<dd className={`govuk-summary-list__value ${className}`}>
-            <label className='govuk-label'
+            <span className='govuk-label'
                 aria-label={title}>
                 {title}
-            </label>
+            </span>
         </dd>);
     }
 
