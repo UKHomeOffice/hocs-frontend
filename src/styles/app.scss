@@ -34,6 +34,12 @@ $govuk-font-family-tabular: 'helvetica neue',Arial, Helvetica, sans-serif !defau
   margin:0;
 }
 
+.govuk-button--header {
+  @extend .govuk-button--link;
+  color: $govuk-text-colour;
+  font-weight: inherit;
+}
+
 .govuk-mapped-text {
   background-color: govuk-colour("light-grey");
   font-weight: 400;

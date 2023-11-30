@@ -113,64 +113,124 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                             Reference
                           </th>
                           <th
-                            class="govuk-link"
+                            class=""
                           >
-                            Full Name
+                            <button
+                              class="govuk-button--header"
+                              href=""
+                            >
+                              Full Name
+                            </button>
                           </th>
                           <th
-                            class="govuk-link"
+                            class=""
                           >
-                            Fullname
+                            <button
+                              class="govuk-button--header"
+                              href=""
+                            >
+                              Fullname
+                            </button>
                           </th>
                           <th
-                            class="govuk-link"
+                            class=""
                           >
-                            Postcode
+                            <button
+                              class="govuk-button--header"
+                              href=""
+                            >
+                              Postcode
+                            </button>
                           </th>
                           <th
-                            class="govuk-link"
+                            class=""
                           >
-                            Current Stage
+                            <button
+                              class="govuk-button--header"
+                              href=""
+                            >
+                              Current Stage
+                            </button>
                           </th>
                           <th
-                            class="govuk-link"
+                            class=""
                           >
-                            Owner
+                            <button
+                              class="govuk-button--header"
+                              href=""
+                            >
+                              Owner
+                            </button>
                           </th>
                           <th
-                            class="govuk-link"
+                            class=""
                           >
-                            Topic
+                            <button
+                              class="govuk-button--header"
+                              href=""
+                            >
+                              Topic
+                            </button>
                           </th>
                           <th
-                            class="govuk-link"
+                            class=""
                           >
-                            Case Date
+                            <button
+                              class="govuk-button--header"
+                              href=""
+                            >
+                              Case Date
+                            </button>
                           </th>
                           <th
-                            class="govuk-link"
+                            class=""
                           >
-                            Active
+                            <button
+                              class="govuk-button--header"
+                              href=""
+                            >
+                              Active
+                            </button>
                           </th>
                           <th
-                            class="govuk-link"
+                            class=""
                           >
-                            Contribution Due Date
+                            <button
+                              class="govuk-button--header"
+                              href=""
+                            >
+                              Contribution Due Date
+                            </button>
                           </th>
                           <th
-                            class="govuk-link"
+                            class=""
                           >
-                            Due Date
+                            <button
+                              class="govuk-button--header"
+                              href=""
+                            >
+                              Due Date
+                            </button>
                           </th>
                           <th
-                            class="govuk-link"
+                            class=""
                           >
-                            Escalate Case
+                            <button
+                              class="govuk-button--header"
+                              href=""
+                            >
+                              Escalate Case
+                            </button>
                           </th>
                           <th
-                            class="govuk-link"
+                            class=""
                           >
-                            Extended
+                            <button
+                              class="govuk-button--header"
+                              href=""
+                            >
+                              Extended
+                            </button>
                           </th>
                         </tr>
                       </thead>
@@ -1229,64 +1289,124 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                           Reference
                         </th>
                         <th
-                          class="govuk-link"
+                          class=""
                         >
-                          Full Name
+                          <button
+                            class="govuk-button--header"
+                            href=""
+                          >
+                            Full Name
+                          </button>
                         </th>
                         <th
-                          class="govuk-link"
+                          class=""
                         >
-                          Fullname
+                          <button
+                            class="govuk-button--header"
+                            href=""
+                          >
+                            Fullname
+                          </button>
                         </th>
                         <th
-                          class="govuk-link"
+                          class=""
                         >
-                          Postcode
+                          <button
+                            class="govuk-button--header"
+                            href=""
+                          >
+                            Postcode
+                          </button>
                         </th>
                         <th
-                          class="govuk-link"
+                          class=""
                         >
-                          Current Stage
+                          <button
+                            class="govuk-button--header"
+                            href=""
+                          >
+                            Current Stage
+                          </button>
                         </th>
                         <th
-                          class="govuk-link"
+                          class=""
                         >
-                          Owner
+                          <button
+                            class="govuk-button--header"
+                            href=""
+                          >
+                            Owner
+                          </button>
                         </th>
                         <th
-                          class="govuk-link"
+                          class=""
                         >
-                          Topic
+                          <button
+                            class="govuk-button--header"
+                            href=""
+                          >
+                            Topic
+                          </button>
                         </th>
                         <th
-                          class="govuk-link"
+                          class=""
                         >
-                          Case Date
+                          <button
+                            class="govuk-button--header"
+                            href=""
+                          >
+                            Case Date
+                          </button>
                         </th>
                         <th
-                          class="govuk-link"
+                          class=""
                         >
-                          Active
+                          <button
+                            class="govuk-button--header"
+                            href=""
+                          >
+                            Active
+                          </button>
                         </th>
                         <th
-                          class="govuk-link"
+                          class=""
                         >
-                          Contribution Due Date
+                          <button
+                            class="govuk-button--header"
+                            href=""
+                          >
+                            Contribution Due Date
+                          </button>
                         </th>
                         <th
-                          class="govuk-link"
+                          class=""
                         >
-                          Due Date
+                          <button
+                            class="govuk-button--header"
+                            href=""
+                          >
+                            Due Date
+                          </button>
                         </th>
                         <th
-                          class="govuk-link"
+                          class=""
                         >
-                          Escalate Case
+                          <button
+                            class="govuk-button--header"
+                            href=""
+                          >
+                            Escalate Case
+                          </button>
                         </th>
                         <th
-                          class="govuk-link"
+                          class=""
                         >
-                          Extended
+                          <button
+                            class="govuk-button--header"
+                            href=""
+                          >
+                            Extended
+                          </button>
                         </th>
                       </tr>
                     </thead>
@@ -2443,69 +2563,134 @@ exports[`Workstack component should render the move team options 1`] = `
                             Select
                           </th>
                           <th
-                            class="govuk-link"
+                            class=""
                           >
-                            Reference
+                            <button
+                              class="govuk-button--header"
+                              href=""
+                            >
+                              Reference
+                            </button>
                           </th>
                           <th
-                            class="govuk-link"
+                            class=""
                           >
-                            Full Name
+                            <button
+                              class="govuk-button--header"
+                              href=""
+                            >
+                              Full Name
+                            </button>
                           </th>
                           <th
-                            class="govuk-link"
+                            class=""
                           >
-                            Fullname
+                            <button
+                              class="govuk-button--header"
+                              href=""
+                            >
+                              Fullname
+                            </button>
                           </th>
                           <th
-                            class="govuk-link"
+                            class=""
                           >
-                            Postcode
+                            <button
+                              class="govuk-button--header"
+                              href=""
+                            >
+                              Postcode
+                            </button>
                           </th>
                           <th
-                            class="govuk-link"
+                            class=""
                           >
-                            Current Stage
+                            <button
+                              class="govuk-button--header"
+                              href=""
+                            >
+                              Current Stage
+                            </button>
                           </th>
                           <th
-                            class="govuk-link"
+                            class=""
                           >
-                            Owner
+                            <button
+                              class="govuk-button--header"
+                              href=""
+                            >
+                              Owner
+                            </button>
                           </th>
                           <th
-                            class="govuk-link"
+                            class=""
                           >
-                            Topic
+                            <button
+                              class="govuk-button--header"
+                              href=""
+                            >
+                              Topic
+                            </button>
                           </th>
                           <th
-                            class="govuk-link"
+                            class=""
                           >
-                            Case Date
+                            <button
+                              class="govuk-button--header"
+                              href=""
+                            >
+                              Case Date
+                            </button>
                           </th>
                           <th
-                            class="govuk-link"
+                            class=""
                           >
-                            Active
+                            <button
+                              class="govuk-button--header"
+                              href=""
+                            >
+                              Active
+                            </button>
                           </th>
                           <th
-                            class="govuk-link"
+                            class=""
                           >
-                            Contribution Due Date
+                            <button
+                              class="govuk-button--header"
+                              href=""
+                            >
+                              Contribution Due Date
+                            </button>
                           </th>
                           <th
-                            class="govuk-link"
+                            class=""
                           >
-                            Due Date
+                            <button
+                              class="govuk-button--header"
+                              href=""
+                            >
+                              Due Date
+                            </button>
                           </th>
                           <th
-                            class="govuk-link"
+                            class=""
                           >
-                            Escalate Case
+                            <button
+                              class="govuk-button--header"
+                              href=""
+                            >
+                              Escalate Case
+                            </button>
                           </th>
                           <th
-                            class="govuk-link"
+                            class=""
                           >
-                            Extended
+                            <button
+                              class="govuk-button--header"
+                              href=""
+                            >
+                              Extended
+                            </button>
                           </th>
                         </tr>
                       </thead>
@@ -3651,69 +3836,134 @@ exports[`Workstack component should render the move team options 1`] = `
                           Select
                         </th>
                         <th
-                          class="govuk-link"
+                          class=""
                         >
-                          Reference
+                          <button
+                            class="govuk-button--header"
+                            href=""
+                          >
+                            Reference
+                          </button>
                         </th>
                         <th
-                          class="govuk-link"
+                          class=""
                         >
-                          Full Name
+                          <button
+                            class="govuk-button--header"
+                            href=""
+                          >
+                            Full Name
+                          </button>
                         </th>
                         <th
-                          class="govuk-link"
+                          class=""
                         >
-                          Fullname
+                          <button
+                            class="govuk-button--header"
+                            href=""
+                          >
+                            Fullname
+                          </button>
                         </th>
                         <th
-                          class="govuk-link"
+                          class=""
                         >
-                          Postcode
+                          <button
+                            class="govuk-button--header"
+                            href=""
+                          >
+                            Postcode
+                          </button>
                         </th>
                         <th
-                          class="govuk-link"
+                          class=""
                         >
-                          Current Stage
+                          <button
+                            class="govuk-button--header"
+                            href=""
+                          >
+                            Current Stage
+                          </button>
                         </th>
                         <th
-                          class="govuk-link"
+                          class=""
                         >
-                          Owner
+                          <button
+                            class="govuk-button--header"
+                            href=""
+                          >
+                            Owner
+                          </button>
                         </th>
                         <th
-                          class="govuk-link"
+                          class=""
                         >
-                          Topic
+                          <button
+                            class="govuk-button--header"
+                            href=""
+                          >
+                            Topic
+                          </button>
                         </th>
                         <th
-                          class="govuk-link"
+                          class=""
                         >
-                          Case Date
+                          <button
+                            class="govuk-button--header"
+                            href=""
+                          >
+                            Case Date
+                          </button>
                         </th>
                         <th
-                          class="govuk-link"
+                          class=""
                         >
-                          Active
+                          <button
+                            class="govuk-button--header"
+                            href=""
+                          >
+                            Active
+                          </button>
                         </th>
                         <th
-                          class="govuk-link"
+                          class=""
                         >
-                          Contribution Due Date
+                          <button
+                            class="govuk-button--header"
+                            href=""
+                          >
+                            Contribution Due Date
+                          </button>
                         </th>
                         <th
-                          class="govuk-link"
+                          class=""
                         >
-                          Due Date
+                          <button
+                            class="govuk-button--header"
+                            href=""
+                          >
+                            Due Date
+                          </button>
                         </th>
                         <th
-                          class="govuk-link"
+                          class=""
                         >
-                          Escalate Case
+                          <button
+                            class="govuk-button--header"
+                            href=""
+                          >
+                            Escalate Case
+                          </button>
                         </th>
                         <th
-                          class="govuk-link"
+                          class=""
                         >
-                          Extended
+                          <button
+                            class="govuk-button--header"
+                            href=""
+                          >
+                            Extended
+                          </button>
                         </th>
                       </tr>
                     </thead>
@@ -4870,69 +5120,134 @@ exports[`Workstack component should sort descending when the column heading is c
                             Select
                           </th>
                           <th
-                            class="govuk-link sorted-descending"
+                            class="sorted-descending"
                           >
-                            Reference
+                            <button
+                              class="govuk-button--header"
+                              href=""
+                            >
+                              Reference
+                            </button>
                           </th>
                           <th
-                            class="govuk-link"
+                            class=""
                           >
-                            Full Name
+                            <button
+                              class="govuk-button--header"
+                              href=""
+                            >
+                              Full Name
+                            </button>
                           </th>
                           <th
-                            class="govuk-link"
+                            class=""
                           >
-                            Fullname
+                            <button
+                              class="govuk-button--header"
+                              href=""
+                            >
+                              Fullname
+                            </button>
                           </th>
                           <th
-                            class="govuk-link"
+                            class=""
                           >
-                            Postcode
+                            <button
+                              class="govuk-button--header"
+                              href=""
+                            >
+                              Postcode
+                            </button>
                           </th>
                           <th
-                            class="govuk-link"
+                            class=""
                           >
-                            Current Stage
+                            <button
+                              class="govuk-button--header"
+                              href=""
+                            >
+                              Current Stage
+                            </button>
                           </th>
                           <th
-                            class="govuk-link"
+                            class=""
                           >
-                            Owner
+                            <button
+                              class="govuk-button--header"
+                              href=""
+                            >
+                              Owner
+                            </button>
                           </th>
                           <th
-                            class="govuk-link"
+                            class=""
                           >
-                            Topic
+                            <button
+                              class="govuk-button--header"
+                              href=""
+                            >
+                              Topic
+                            </button>
                           </th>
                           <th
-                            class="govuk-link"
+                            class=""
                           >
-                            Case Date
+                            <button
+                              class="govuk-button--header"
+                              href=""
+                            >
+                              Case Date
+                            </button>
                           </th>
                           <th
-                            class="govuk-link"
+                            class=""
                           >
-                            Active
+                            <button
+                              class="govuk-button--header"
+                              href=""
+                            >
+                              Active
+                            </button>
                           </th>
                           <th
-                            class="govuk-link"
+                            class=""
                           >
-                            Contribution Due Date
+                            <button
+                              class="govuk-button--header"
+                              href=""
+                            >
+                              Contribution Due Date
+                            </button>
                           </th>
                           <th
-                            class="govuk-link"
+                            class=""
                           >
-                            Due Date
+                            <button
+                              class="govuk-button--header"
+                              href=""
+                            >
+                              Due Date
+                            </button>
                           </th>
                           <th
-                            class="govuk-link"
+                            class=""
                           >
-                            Escalate Case
+                            <button
+                              class="govuk-button--header"
+                              href=""
+                            >
+                              Escalate Case
+                            </button>
                           </th>
                           <th
-                            class="govuk-link"
+                            class=""
                           >
-                            Extended
+                            <button
+                              class="govuk-button--header"
+                              href=""
+                            >
+                              Extended
+                            </button>
                           </th>
                         </tr>
                       </thead>
@@ -5986,69 +6301,134 @@ exports[`Workstack component should sort descending when the column heading is c
                           Select
                         </th>
                         <th
-                          class="govuk-link sorted-descending"
+                          class="sorted-descending"
                         >
-                          Reference
+                          <button
+                            class="govuk-button--header"
+                            href=""
+                          >
+                            Reference
+                          </button>
                         </th>
                         <th
-                          class="govuk-link"
+                          class=""
                         >
-                          Full Name
+                          <button
+                            class="govuk-button--header"
+                            href=""
+                          >
+                            Full Name
+                          </button>
                         </th>
                         <th
-                          class="govuk-link"
+                          class=""
                         >
-                          Fullname
+                          <button
+                            class="govuk-button--header"
+                            href=""
+                          >
+                            Fullname
+                          </button>
                         </th>
                         <th
-                          class="govuk-link"
+                          class=""
                         >
-                          Postcode
+                          <button
+                            class="govuk-button--header"
+                            href=""
+                          >
+                            Postcode
+                          </button>
                         </th>
                         <th
-                          class="govuk-link"
+                          class=""
                         >
-                          Current Stage
+                          <button
+                            class="govuk-button--header"
+                            href=""
+                          >
+                            Current Stage
+                          </button>
                         </th>
                         <th
-                          class="govuk-link"
+                          class=""
                         >
-                          Owner
+                          <button
+                            class="govuk-button--header"
+                            href=""
+                          >
+                            Owner
+                          </button>
                         </th>
                         <th
-                          class="govuk-link"
+                          class=""
                         >
-                          Topic
+                          <button
+                            class="govuk-button--header"
+                            href=""
+                          >
+                            Topic
+                          </button>
                         </th>
                         <th
-                          class="govuk-link"
+                          class=""
                         >
-                          Case Date
+                          <button
+                            class="govuk-button--header"
+                            href=""
+                          >
+                            Case Date
+                          </button>
                         </th>
                         <th
-                          class="govuk-link"
+                          class=""
                         >
-                          Active
+                          <button
+                            class="govuk-button--header"
+                            href=""
+                          >
+                            Active
+                          </button>
                         </th>
                         <th
-                          class="govuk-link"
+                          class=""
                         >
-                          Contribution Due Date
+                          <button
+                            class="govuk-button--header"
+                            href=""
+                          >
+                            Contribution Due Date
+                          </button>
                         </th>
                         <th
-                          class="govuk-link"
+                          class=""
                         >
-                          Due Date
+                          <button
+                            class="govuk-button--header"
+                            href=""
+                          >
+                            Due Date
+                          </button>
                         </th>
                         <th
-                          class="govuk-link"
+                          class=""
                         >
-                          Escalate Case
+                          <button
+                            class="govuk-button--header"
+                            href=""
+                          >
+                            Escalate Case
+                          </button>
                         </th>
                         <th
-                          class="govuk-link"
+                          class=""
                         >
-                          Extended
+                          <button
+                            class="govuk-button--header"
+                            href=""
+                          >
+                            Extended
+                          </button>
                         </th>
                       </tr>
                     </thead>
@@ -7159,69 +7539,134 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                             Select
                           </th>
                           <th
-                            class="govuk-link sorted-ascending"
+                            class="sorted-ascending"
                           >
-                            Reference
+                            <button
+                              class="govuk-button--header"
+                              href=""
+                            >
+                              Reference
+                            </button>
                           </th>
                           <th
-                            class="govuk-link"
+                            class=""
                           >
-                            Full Name
+                            <button
+                              class="govuk-button--header"
+                              href=""
+                            >
+                              Full Name
+                            </button>
                           </th>
                           <th
-                            class="govuk-link"
+                            class=""
                           >
-                            Fullname
+                            <button
+                              class="govuk-button--header"
+                              href=""
+                            >
+                              Fullname
+                            </button>
                           </th>
                           <th
-                            class="govuk-link"
+                            class=""
                           >
-                            Postcode
+                            <button
+                              class="govuk-button--header"
+                              href=""
+                            >
+                              Postcode
+                            </button>
                           </th>
                           <th
-                            class="govuk-link"
+                            class=""
                           >
-                            Current Stage
+                            <button
+                              class="govuk-button--header"
+                              href=""
+                            >
+                              Current Stage
+                            </button>
                           </th>
                           <th
-                            class="govuk-link"
+                            class=""
                           >
-                            Owner
+                            <button
+                              class="govuk-button--header"
+                              href=""
+                            >
+                              Owner
+                            </button>
                           </th>
                           <th
-                            class="govuk-link"
+                            class=""
                           >
-                            Topic
+                            <button
+                              class="govuk-button--header"
+                              href=""
+                            >
+                              Topic
+                            </button>
                           </th>
                           <th
-                            class="govuk-link"
+                            class=""
                           >
-                            Case Date
+                            <button
+                              class="govuk-button--header"
+                              href=""
+                            >
+                              Case Date
+                            </button>
                           </th>
                           <th
-                            class="govuk-link"
+                            class=""
                           >
-                            Active
+                            <button
+                              class="govuk-button--header"
+                              href=""
+                            >
+                              Active
+                            </button>
                           </th>
                           <th
-                            class="govuk-link"
+                            class=""
                           >
-                            Contribution Due Date
+                            <button
+                              class="govuk-button--header"
+                              href=""
+                            >
+                              Contribution Due Date
+                            </button>
                           </th>
                           <th
-                            class="govuk-link"
+                            class=""
                           >
-                            Due Date
+                            <button
+                              class="govuk-button--header"
+                              href=""
+                            >
+                              Due Date
+                            </button>
                           </th>
                           <th
-                            class="govuk-link"
+                            class=""
                           >
-                            Escalate Case
+                            <button
+                              class="govuk-button--header"
+                              href=""
+                            >
+                              Escalate Case
+                            </button>
                           </th>
                           <th
-                            class="govuk-link"
+                            class=""
                           >
-                            Extended
+                            <button
+                              class="govuk-button--header"
+                              href=""
+                            >
+                              Extended
+                            </button>
                           </th>
                         </tr>
                       </thead>
@@ -8275,69 +8720,134 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                           Select
                         </th>
                         <th
-                          class="govuk-link sorted-ascending"
+                          class="sorted-ascending"
                         >
-                          Reference
+                          <button
+                            class="govuk-button--header"
+                            href=""
+                          >
+                            Reference
+                          </button>
                         </th>
                         <th
-                          class="govuk-link"
+                          class=""
                         >
-                          Full Name
+                          <button
+                            class="govuk-button--header"
+                            href=""
+                          >
+                            Full Name
+                          </button>
                         </th>
                         <th
-                          class="govuk-link"
+                          class=""
                         >
-                          Fullname
+                          <button
+                            class="govuk-button--header"
+                            href=""
+                          >
+                            Fullname
+                          </button>
                         </th>
                         <th
-                          class="govuk-link"
+                          class=""
                         >
-                          Postcode
+                          <button
+                            class="govuk-button--header"
+                            href=""
+                          >
+                            Postcode
+                          </button>
                         </th>
                         <th
-                          class="govuk-link"
+                          class=""
                         >
-                          Current Stage
+                          <button
+                            class="govuk-button--header"
+                            href=""
+                          >
+                            Current Stage
+                          </button>
                         </th>
                         <th
-                          class="govuk-link"
+                          class=""
                         >
-                          Owner
+                          <button
+                            class="govuk-button--header"
+                            href=""
+                          >
+                            Owner
+                          </button>
                         </th>
                         <th
-                          class="govuk-link"
+                          class=""
                         >
-                          Topic
+                          <button
+                            class="govuk-button--header"
+                            href=""
+                          >
+                            Topic
+                          </button>
                         </th>
                         <th
-                          class="govuk-link"
+                          class=""
                         >
-                          Case Date
+                          <button
+                            class="govuk-button--header"
+                            href=""
+                          >
+                            Case Date
+                          </button>
                         </th>
                         <th
-                          class="govuk-link"
+                          class=""
                         >
-                          Active
+                          <button
+                            class="govuk-button--header"
+                            href=""
+                          >
+                            Active
+                          </button>
                         </th>
                         <th
-                          class="govuk-link"
+                          class=""
                         >
-                          Contribution Due Date
+                          <button
+                            class="govuk-button--header"
+                            href=""
+                          >
+                            Contribution Due Date
+                          </button>
                         </th>
                         <th
-                          class="govuk-link"
+                          class=""
                         >
-                          Due Date
+                          <button
+                            class="govuk-button--header"
+                            href=""
+                          >
+                            Due Date
+                          </button>
                         </th>
                         <th
-                          class="govuk-link"
+                          class=""
                         >
-                          Escalate Case
+                          <button
+                            class="govuk-button--header"
+                            href=""
+                          >
+                            Escalate Case
+                          </button>
                         </th>
                         <th
-                          class="govuk-link"
+                          class=""
                         >
-                          Extended
+                          <button
+                            class="govuk-button--header"
+                            href=""
+                          >
+                            Extended
+                          </button>
                         </th>
                       </tr>
                     </thead>
