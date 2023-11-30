@@ -259,7 +259,9 @@ class WorkstackAllocate extends Component {
         if (column.sortStrategy === 'noSort') {
             return (
                 <th className='govuk-table__header' key={column.displayName}>
-                    {column.renderer !== ColumnRenderer.INDICATOR_BLUE && column.renderer !== ColumnRenderer.INDICATOR_GREEN && column.renderer !== ColumnRenderer.INDICATOR_RED && column.displayName}
+                    <span hidden={column.renderer === ColumnRenderer.INDICATOR_BLUE || column.renderer === ColumnRenderer.INDICATOR_GREEN || column.renderer === ColumnRenderer.INDICATOR_RED}>
+                        {column.displayName}
+                    </span>
                 </th>
             );
         } else {
@@ -273,7 +275,9 @@ class WorkstackAllocate extends Component {
                         'sorted-ascending': sorted && direction === SortDirection.ASCENDING,
                         'sorted-descending': sorted && direction === SortDirection.DESCENDING
                     })}>
-                    {column.renderer !== ColumnRenderer.INDICATOR_BLUE && column.renderer !== ColumnRenderer.INDICATOR_GREEN && column.renderer !== ColumnRenderer.INDICATOR_RED && column.displayName}
+                    <span hidden={column.renderer === ColumnRenderer.INDICATOR_BLUE || column.renderer === ColumnRenderer.INDICATOR_GREEN || column.renderer === ColumnRenderer.INDICATOR_RED}>
+                        {column.displayName}
+                    </span>
                 </th>
             );
         }
