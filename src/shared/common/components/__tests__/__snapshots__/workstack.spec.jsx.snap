@@ -110,14 +110,15 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                           <th
                             class="govuk-table__header"
                           >
-                            Reference
+                            <span>
+                              Reference
+                            </span>
                           </th>
                           <th
                             class=""
                           >
                             <button
                               class="govuk-button--header"
-                              href=""
                             >
                               Full Name
                             </button>
@@ -127,7 +128,6 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                           >
                             <button
                               class="govuk-button--header"
-                              href=""
                             >
                               Fullname
                             </button>
@@ -137,7 +137,6 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                           >
                             <button
                               class="govuk-button--header"
-                              href=""
                             >
                               Postcode
                             </button>
@@ -147,7 +146,6 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                           >
                             <button
                               class="govuk-button--header"
-                              href=""
                             >
                               Current Stage
                             </button>
@@ -157,7 +155,6 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                           >
                             <button
                               class="govuk-button--header"
-                              href=""
                             >
                               Owner
                             </button>
@@ -167,7 +164,6 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                           >
                             <button
                               class="govuk-button--header"
-                              href=""
                             >
                               Topic
                             </button>
@@ -177,7 +173,6 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                           >
                             <button
                               class="govuk-button--header"
-                              href=""
                             >
                               Case Date
                             </button>
@@ -187,7 +182,6 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                           >
                             <button
                               class="govuk-button--header"
-                              href=""
                             >
                               Active
                             </button>
@@ -197,7 +191,6 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                           >
                             <button
                               class="govuk-button--header"
-                              href=""
                             >
                               Contribution Due Date
                             </button>
@@ -207,7 +200,6 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                           >
                             <button
                               class="govuk-button--header"
-                              href=""
                             >
                               Due Date
                             </button>
@@ -217,7 +209,6 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                           >
                             <button
                               class="govuk-button--header"
-                              href=""
                             >
                               Escalate Case
                             </button>
@@ -227,7 +218,6 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                           >
                             <button
                               class="govuk-button--header"
-                              href=""
                             >
                               Extended
                             </button>
@@ -1286,14 +1276,15 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                         <th
                           class="govuk-table__header"
                         >
-                          Reference
+                          <span>
+                            Reference
+                          </span>
                         </th>
                         <th
                           class=""
                         >
                           <button
                             class="govuk-button--header"
-                            href=""
                           >
                             Full Name
                           </button>
@@ -1303,7 +1294,6 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                         >
                           <button
                             class="govuk-button--header"
-                            href=""
                           >
                             Fullname
                           </button>
@@ -1313,7 +1303,6 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                         >
                           <button
                             class="govuk-button--header"
-                            href=""
                           >
                             Postcode
                           </button>
@@ -1323,7 +1312,6 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                         >
                           <button
                             class="govuk-button--header"
-                            href=""
                           >
                             Current Stage
                           </button>
@@ -1333,7 +1321,6 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                         >
                           <button
                             class="govuk-button--header"
-                            href=""
                           >
                             Owner
                           </button>
@@ -1343,7 +1330,6 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                         >
                           <button
                             class="govuk-button--header"
-                            href=""
                           >
                             Topic
                           </button>
@@ -1353,7 +1339,6 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                         >
                           <button
                             class="govuk-button--header"
-                            href=""
                           >
                             Case Date
                           </button>
@@ -1363,7 +1348,6 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                         >
                           <button
                             class="govuk-button--header"
-                            href=""
                           >
                             Active
                           </button>
@@ -1373,7 +1357,6 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                         >
                           <button
                             class="govuk-button--header"
-                            href=""
                           >
                             Contribution Due Date
                           </button>
@@ -1383,7 +1366,6 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                         >
                           <button
                             class="govuk-button--header"
-                            href=""
                           >
                             Due Date
                           </button>
@@ -1393,7 +1375,6 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                         >
                           <button
                             class="govuk-button--header"
-                            href=""
                           >
                             Escalate Case
                           </button>
@@ -1403,7 +1384,6 @@ exports[`Workstack component should not add link to headers with sortStrategy no
                         >
                           <button
                             class="govuk-button--header"
-                            href=""
                           >
                             Extended
                           </button>
@@ -2567,7 +2547,6 @@ exports[`Workstack component should render the move team options 1`] = `
                           >
                             <button
                               class="govuk-button--header"
-                              href=""
                             >
                               Reference
                             </button>
@@ -2577,7 +2556,6 @@ exports[`Workstack component should render the move team options 1`] = `
                           >
                             <button
                               class="govuk-button--header"
-                              href=""
                             >
                               Full Name
                             </button>
@@ -2587,7 +2565,6 @@ exports[`Workstack component should render the move team options 1`] = `
                           >
                             <button
                               class="govuk-button--header"
-                              href=""
                             >
                               Fullname
                             </button>
@@ -2597,7 +2574,6 @@ exports[`Workstack component should render the move team options 1`] = `
                           >
                             <button
                               class="govuk-button--header"
-                              href=""
                             >
                               Postcode
                             </button>
@@ -2607,7 +2583,6 @@ exports[`Workstack component should render the move team options 1`] = `
                           >
                             <button
                               class="govuk-button--header"
-                              href=""
                             >
                               Current Stage
                             </button>
@@ -2617,7 +2592,6 @@ exports[`Workstack component should render the move team options 1`] = `
                           >
                             <button
                               class="govuk-button--header"
-                              href=""
                             >
                               Owner
                             </button>
@@ -2627,7 +2601,6 @@ exports[`Workstack component should render the move team options 1`] = `
                           >
                             <button
                               class="govuk-button--header"
-                              href=""
                             >
                               Topic
                             </button>
@@ -2637,7 +2610,6 @@ exports[`Workstack component should render the move team options 1`] = `
                           >
                             <button
                               class="govuk-button--header"
-                              href=""
                             >
                               Case Date
                             </button>
@@ -2647,7 +2619,6 @@ exports[`Workstack component should render the move team options 1`] = `
                           >
                             <button
                               class="govuk-button--header"
-                              href=""
                             >
                               Active
                             </button>
@@ -2657,7 +2628,6 @@ exports[`Workstack component should render the move team options 1`] = `
                           >
                             <button
                               class="govuk-button--header"
-                              href=""
                             >
                               Contribution Due Date
                             </button>
@@ -2667,7 +2637,6 @@ exports[`Workstack component should render the move team options 1`] = `
                           >
                             <button
                               class="govuk-button--header"
-                              href=""
                             >
                               Due Date
                             </button>
@@ -2677,7 +2646,6 @@ exports[`Workstack component should render the move team options 1`] = `
                           >
                             <button
                               class="govuk-button--header"
-                              href=""
                             >
                               Escalate Case
                             </button>
@@ -2687,7 +2655,6 @@ exports[`Workstack component should render the move team options 1`] = `
                           >
                             <button
                               class="govuk-button--header"
-                              href=""
                             >
                               Extended
                             </button>
@@ -3840,7 +3807,6 @@ exports[`Workstack component should render the move team options 1`] = `
                         >
                           <button
                             class="govuk-button--header"
-                            href=""
                           >
                             Reference
                           </button>
@@ -3850,7 +3816,6 @@ exports[`Workstack component should render the move team options 1`] = `
                         >
                           <button
                             class="govuk-button--header"
-                            href=""
                           >
                             Full Name
                           </button>
@@ -3860,7 +3825,6 @@ exports[`Workstack component should render the move team options 1`] = `
                         >
                           <button
                             class="govuk-button--header"
-                            href=""
                           >
                             Fullname
                           </button>
@@ -3870,7 +3834,6 @@ exports[`Workstack component should render the move team options 1`] = `
                         >
                           <button
                             class="govuk-button--header"
-                            href=""
                           >
                             Postcode
                           </button>
@@ -3880,7 +3843,6 @@ exports[`Workstack component should render the move team options 1`] = `
                         >
                           <button
                             class="govuk-button--header"
-                            href=""
                           >
                             Current Stage
                           </button>
@@ -3890,7 +3852,6 @@ exports[`Workstack component should render the move team options 1`] = `
                         >
                           <button
                             class="govuk-button--header"
-                            href=""
                           >
                             Owner
                           </button>
@@ -3900,7 +3861,6 @@ exports[`Workstack component should render the move team options 1`] = `
                         >
                           <button
                             class="govuk-button--header"
-                            href=""
                           >
                             Topic
                           </button>
@@ -3910,7 +3870,6 @@ exports[`Workstack component should render the move team options 1`] = `
                         >
                           <button
                             class="govuk-button--header"
-                            href=""
                           >
                             Case Date
                           </button>
@@ -3920,7 +3879,6 @@ exports[`Workstack component should render the move team options 1`] = `
                         >
                           <button
                             class="govuk-button--header"
-                            href=""
                           >
                             Active
                           </button>
@@ -3930,7 +3888,6 @@ exports[`Workstack component should render the move team options 1`] = `
                         >
                           <button
                             class="govuk-button--header"
-                            href=""
                           >
                             Contribution Due Date
                           </button>
@@ -3940,7 +3897,6 @@ exports[`Workstack component should render the move team options 1`] = `
                         >
                           <button
                             class="govuk-button--header"
-                            href=""
                           >
                             Due Date
                           </button>
@@ -3950,7 +3906,6 @@ exports[`Workstack component should render the move team options 1`] = `
                         >
                           <button
                             class="govuk-button--header"
-                            href=""
                           >
                             Escalate Case
                           </button>
@@ -3960,7 +3915,6 @@ exports[`Workstack component should render the move team options 1`] = `
                         >
                           <button
                             class="govuk-button--header"
-                            href=""
                           >
                             Extended
                           </button>
@@ -5124,7 +5078,6 @@ exports[`Workstack component should sort descending when the column heading is c
                           >
                             <button
                               class="govuk-button--header"
-                              href=""
                             >
                               Reference
                             </button>
@@ -5134,7 +5087,6 @@ exports[`Workstack component should sort descending when the column heading is c
                           >
                             <button
                               class="govuk-button--header"
-                              href=""
                             >
                               Full Name
                             </button>
@@ -5144,7 +5096,6 @@ exports[`Workstack component should sort descending when the column heading is c
                           >
                             <button
                               class="govuk-button--header"
-                              href=""
                             >
                               Fullname
                             </button>
@@ -5154,7 +5105,6 @@ exports[`Workstack component should sort descending when the column heading is c
                           >
                             <button
                               class="govuk-button--header"
-                              href=""
                             >
                               Postcode
                             </button>
@@ -5164,7 +5114,6 @@ exports[`Workstack component should sort descending when the column heading is c
                           >
                             <button
                               class="govuk-button--header"
-                              href=""
                             >
                               Current Stage
                             </button>
@@ -5174,7 +5123,6 @@ exports[`Workstack component should sort descending when the column heading is c
                           >
                             <button
                               class="govuk-button--header"
-                              href=""
                             >
                               Owner
                             </button>
@@ -5184,7 +5132,6 @@ exports[`Workstack component should sort descending when the column heading is c
                           >
                             <button
                               class="govuk-button--header"
-                              href=""
                             >
                               Topic
                             </button>
@@ -5194,7 +5141,6 @@ exports[`Workstack component should sort descending when the column heading is c
                           >
                             <button
                               class="govuk-button--header"
-                              href=""
                             >
                               Case Date
                             </button>
@@ -5204,7 +5150,6 @@ exports[`Workstack component should sort descending when the column heading is c
                           >
                             <button
                               class="govuk-button--header"
-                              href=""
                             >
                               Active
                             </button>
@@ -5214,7 +5159,6 @@ exports[`Workstack component should sort descending when the column heading is c
                           >
                             <button
                               class="govuk-button--header"
-                              href=""
                             >
                               Contribution Due Date
                             </button>
@@ -5224,7 +5168,6 @@ exports[`Workstack component should sort descending when the column heading is c
                           >
                             <button
                               class="govuk-button--header"
-                              href=""
                             >
                               Due Date
                             </button>
@@ -5234,7 +5177,6 @@ exports[`Workstack component should sort descending when the column heading is c
                           >
                             <button
                               class="govuk-button--header"
-                              href=""
                             >
                               Escalate Case
                             </button>
@@ -5244,7 +5186,6 @@ exports[`Workstack component should sort descending when the column heading is c
                           >
                             <button
                               class="govuk-button--header"
-                              href=""
                             >
                               Extended
                             </button>
@@ -6305,7 +6246,6 @@ exports[`Workstack component should sort descending when the column heading is c
                         >
                           <button
                             class="govuk-button--header"
-                            href=""
                           >
                             Reference
                           </button>
@@ -6315,7 +6255,6 @@ exports[`Workstack component should sort descending when the column heading is c
                         >
                           <button
                             class="govuk-button--header"
-                            href=""
                           >
                             Full Name
                           </button>
@@ -6325,7 +6264,6 @@ exports[`Workstack component should sort descending when the column heading is c
                         >
                           <button
                             class="govuk-button--header"
-                            href=""
                           >
                             Fullname
                           </button>
@@ -6335,7 +6273,6 @@ exports[`Workstack component should sort descending when the column heading is c
                         >
                           <button
                             class="govuk-button--header"
-                            href=""
                           >
                             Postcode
                           </button>
@@ -6345,7 +6282,6 @@ exports[`Workstack component should sort descending when the column heading is c
                         >
                           <button
                             class="govuk-button--header"
-                            href=""
                           >
                             Current Stage
                           </button>
@@ -6355,7 +6291,6 @@ exports[`Workstack component should sort descending when the column heading is c
                         >
                           <button
                             class="govuk-button--header"
-                            href=""
                           >
                             Owner
                           </button>
@@ -6365,7 +6300,6 @@ exports[`Workstack component should sort descending when the column heading is c
                         >
                           <button
                             class="govuk-button--header"
-                            href=""
                           >
                             Topic
                           </button>
@@ -6375,7 +6309,6 @@ exports[`Workstack component should sort descending when the column heading is c
                         >
                           <button
                             class="govuk-button--header"
-                            href=""
                           >
                             Case Date
                           </button>
@@ -6385,7 +6318,6 @@ exports[`Workstack component should sort descending when the column heading is c
                         >
                           <button
                             class="govuk-button--header"
-                            href=""
                           >
                             Active
                           </button>
@@ -6395,7 +6327,6 @@ exports[`Workstack component should sort descending when the column heading is c
                         >
                           <button
                             class="govuk-button--header"
-                            href=""
                           >
                             Contribution Due Date
                           </button>
@@ -6405,7 +6336,6 @@ exports[`Workstack component should sort descending when the column heading is c
                         >
                           <button
                             class="govuk-button--header"
-                            href=""
                           >
                             Due Date
                           </button>
@@ -6415,7 +6345,6 @@ exports[`Workstack component should sort descending when the column heading is c
                         >
                           <button
                             class="govuk-button--header"
-                            href=""
                           >
                             Escalate Case
                           </button>
@@ -6425,7 +6354,6 @@ exports[`Workstack component should sort descending when the column heading is c
                         >
                           <button
                             class="govuk-button--header"
-                            href=""
                           >
                             Extended
                           </button>
@@ -7543,7 +7471,6 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                           >
                             <button
                               class="govuk-button--header"
-                              href=""
                             >
                               Reference
                             </button>
@@ -7553,7 +7480,6 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                           >
                             <button
                               class="govuk-button--header"
-                              href=""
                             >
                               Full Name
                             </button>
@@ -7563,7 +7489,6 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                           >
                             <button
                               class="govuk-button--header"
-                              href=""
                             >
                               Fullname
                             </button>
@@ -7573,7 +7498,6 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                           >
                             <button
                               class="govuk-button--header"
-                              href=""
                             >
                               Postcode
                             </button>
@@ -7583,7 +7507,6 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                           >
                             <button
                               class="govuk-button--header"
-                              href=""
                             >
                               Current Stage
                             </button>
@@ -7593,7 +7516,6 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                           >
                             <button
                               class="govuk-button--header"
-                              href=""
                             >
                               Owner
                             </button>
@@ -7603,7 +7525,6 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                           >
                             <button
                               class="govuk-button--header"
-                              href=""
                             >
                               Topic
                             </button>
@@ -7613,7 +7534,6 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                           >
                             <button
                               class="govuk-button--header"
-                              href=""
                             >
                               Case Date
                             </button>
@@ -7623,7 +7543,6 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                           >
                             <button
                               class="govuk-button--header"
-                              href=""
                             >
                               Active
                             </button>
@@ -7633,7 +7552,6 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                           >
                             <button
                               class="govuk-button--header"
-                              href=""
                             >
                               Contribution Due Date
                             </button>
@@ -7643,7 +7561,6 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                           >
                             <button
                               class="govuk-button--header"
-                              href=""
                             >
                               Due Date
                             </button>
@@ -7653,7 +7570,6 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                           >
                             <button
                               class="govuk-button--header"
-                              href=""
                             >
                               Escalate Case
                             </button>
@@ -7663,7 +7579,6 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                           >
                             <button
                               class="govuk-button--header"
-                              href=""
                             >
                               Extended
                             </button>
@@ -8724,7 +8639,6 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                         >
                           <button
                             class="govuk-button--header"
-                            href=""
                           >
                             Reference
                           </button>
@@ -8734,7 +8648,6 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                         >
                           <button
                             class="govuk-button--header"
-                            href=""
                           >
                             Full Name
                           </button>
@@ -8744,7 +8657,6 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                         >
                           <button
                             class="govuk-button--header"
-                            href=""
                           >
                             Fullname
                           </button>
@@ -8754,7 +8666,6 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                         >
                           <button
                             class="govuk-button--header"
-                            href=""
                           >
                             Postcode
                           </button>
@@ -8764,7 +8675,6 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                         >
                           <button
                             class="govuk-button--header"
-                            href=""
                           >
                             Current Stage
                           </button>
@@ -8774,7 +8684,6 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                         >
                           <button
                             class="govuk-button--header"
-                            href=""
                           >
                             Owner
                           </button>
@@ -8784,7 +8693,6 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                         >
                           <button
                             class="govuk-button--header"
-                            href=""
                           >
                             Topic
                           </button>
@@ -8794,7 +8702,6 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                         >
                           <button
                             class="govuk-button--header"
-                            href=""
                           >
                             Case Date
                           </button>
@@ -8804,7 +8711,6 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                         >
                           <button
                             class="govuk-button--header"
-                            href=""
                           >
                             Active
                           </button>
@@ -8814,7 +8720,6 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                         >
                           <button
                             class="govuk-button--header"
-                            href=""
                           >
                             Contribution Due Date
                           </button>
@@ -8824,7 +8729,6 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                         >
                           <button
                             class="govuk-button--header"
-                            href=""
                           >
                             Due Date
                           </button>
@@ -8834,7 +8738,6 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                         >
                           <button
                             class="govuk-button--header"
-                            href=""
                           >
                             Escalate Case
                           </button>
@@ -8844,7 +8747,6 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
                         >
                           <button
                             class="govuk-button--header"
-                            href=""
                           >
                             Extended
                           </button>

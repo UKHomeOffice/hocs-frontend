@@ -261,7 +261,9 @@ class WorkstackAllocate extends Component {
         if (column.sortStrategy === 'noSort') {
             return (
                 <th className='govuk-table__header' key={column.displayName}>
-                    {column.renderer !== ColumnRenderer.INDICATOR_BLUE && column.renderer !== ColumnRenderer.INDICATOR_GREEN && column.renderer !== ColumnRenderer.INDICATOR_RED && column.displayName}
+                    <span hidden={column.renderer === ColumnRenderer.INDICATOR_BLUE || column.renderer === ColumnRenderer.INDICATOR_GREEN || column.renderer === ColumnRenderer.INDICATOR_RED}>
+                        {column.displayName}
+                    </span>
                 </th>
             );
         } else {
@@ -274,8 +276,10 @@ class WorkstackAllocate extends Component {
                     'sorted-descending': sorted && direction === SortDirection.DESCENDING
                 })}
                 key={column.displayName}>
-                    <button onClick={(e) => this.setSort(e, column)} href="" className='govuk-button--header'>
-                        {column.renderer !== ColumnRenderer.INDICATOR_BLUE && column.renderer !== ColumnRenderer.INDICATOR_GREEN && column.renderer !== ColumnRenderer.INDICATOR_RED && column.displayName}
+                    <button hidden={column.renderer === ColumnRenderer.INDICATOR_BLUE || column.renderer === ColumnRenderer.INDICATOR_GREEN || column.renderer === ColumnRenderer.INDICATOR_RED}
+                        onClick={(e) => this.setSort(e, column)}
+                        className='govuk-button--header'>
+                        {column.displayName}
                     </button>
                 </th>
             );
