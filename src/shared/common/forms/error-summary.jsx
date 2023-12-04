@@ -16,9 +16,10 @@ class ErrorSummary extends Component {
             elementLink.scrollIntoView();
         }
 
+        /* eslint-disable-next-line no-undef */
         const elementKey = document.getElementById(key);
         try {
-            const elementFocus = elementKey.getElementsByClassName(`errorFocus`);
+            const elementFocus = elementKey.getElementsByClassName('errorFocus');
             elementFocus[0].focus();
         }
         catch {
