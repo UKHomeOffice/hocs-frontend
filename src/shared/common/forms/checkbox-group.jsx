@@ -96,7 +96,7 @@ class Checkbox extends Component {
                                             saveSeparately ? this.state[choice.name] !== '' : this.state.value.includes(`${choice.value}`)
                                         }
                                         onChange={e => this.handleChange(e)}
-                                        className={'govuk-checkboxes__input'}
+                                        className={'govuk-checkboxes__input ' + (i === 0 ? 'errorFocus' : '')}
                                     />
                                     <label className="govuk-label govuk-checkboxes__label" htmlFor={`${name}_${choice.value}_${i}`}>{choice.label}</label>
                                 </div>

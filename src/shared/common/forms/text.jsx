@@ -32,7 +32,7 @@ class Text extends Component {
                 {hint && <div className="govuk-hint">{hint}</div>}
                 {error && <p id={`${name}-error`} className="govuk-error-message">{error}</p>}
                 <div>
-                    <input className={classNames('govuk-input', { 'govuk-input--error': error }, elementClassName)}
+                    <input className={classNames('govuk-input', 'errorFocus', { 'govuk-input--error': error }, elementClassName)}
                         id={name}
                         type={type}
                         name={name}

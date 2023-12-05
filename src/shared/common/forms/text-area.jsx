@@ -37,7 +37,7 @@ class TextArea extends Component {
                 {error && <p id={`${name}-error`} className="govuk-error-message">{error}</p>}
 
 
-                <textarea className={`govuk-textarea form-control-3-4 ${error ? 'govuk-textarea--error' : ''}`}
+                <textarea className={`govuk-textarea errorFocus form-control-3-4 ${error ? 'govuk-textarea--error' : ''}`}
                     id={name}
                     name={name}
                     disabled={disabled}

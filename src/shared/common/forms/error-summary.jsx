@@ -8,12 +8,22 @@ class ErrorSummary extends Component {
         this.ref = React.createRef();
     }
 
-    scrollInToView(e, link) {
+    scrollInToView(e, key, link) {
         e.preventDefault();
         /* eslint-disable-next-line no-undef */
-        const element = document.getElementById(link);
-        if (element) {
-            element.scrollIntoView();
+        const elementLink = document.getElementById(link);
+        if (elementLink) {
+            elementLink.scrollIntoView();
+        }
+
+        /* eslint-disable-next-line no-undef */
+        const elementKey = document.getElementById(key);
+        try {
+            const elementFocus = elementKey.getElementsByClassName('errorFocus');
+            elementFocus[0].focus();
+        }
+        catch {
+            elementKey.focus();
         }
     }
 
@@ -43,7 +53,7 @@ class ErrorSummary extends Component {
                             const link = `${key}-error`;
                             return (
                                 <li key={key}>
-                                    <a href={`#${link}`} onClick={(e) => this.scrollInToView(e, link)} >{value}</a>
+                                    <a href={`#${link}`} onClick={(e) => this.scrollInToView(e, key, link)} >{value}</a>
                                 </li>
                             );
                         })}
