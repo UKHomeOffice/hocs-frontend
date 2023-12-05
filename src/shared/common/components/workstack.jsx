@@ -227,7 +227,9 @@ class WorkstackAllocate extends Component {
         );
     }
 
-    setSort(selectedColumn) {
+    setSort(e, selectedColumn) {
+        e.preventDefault();
+
         this.setState((currentState) => {
             const { sort: { direction: currentDirection, column: currentColumn } } = currentState;
             let newDirection = SortDirection.ASCENDING;
@@ -269,15 +271,16 @@ class WorkstackAllocate extends Component {
             const sorted = sortColumn === column;
 
             return (
-                <th onClick={() => this.setSort(column)}
-                    key={column.displayName}
-                    className={classNames(column.headerClassName, 'govuk-link', {
-                        'sorted-ascending': sorted && direction === SortDirection.ASCENDING,
-                        'sorted-descending': sorted && direction === SortDirection.DESCENDING
-                    })}>
-                    <span hidden={column.renderer === ColumnRenderer.INDICATOR_BLUE || column.renderer === ColumnRenderer.INDICATOR_GREEN || column.renderer === ColumnRenderer.INDICATOR_RED}>
+                <th className={classNames(column.headerClassName, {
+                    'sorted-ascending': sorted && direction === SortDirection.ASCENDING,
+                    'sorted-descending': sorted && direction === SortDirection.DESCENDING
+                })}
+                key={column.displayName}>
+                    <button hidden={column.renderer === ColumnRenderer.INDICATOR_BLUE || column.renderer === ColumnRenderer.INDICATOR_GREEN || column.renderer === ColumnRenderer.INDICATOR_RED}
+                        onClick={(e) => this.setSort(e, column)}
+                        className='govuk-button--header'>
                         {column.displayName}
-                    </span>
+                    </button>
                 </th>
             );
         }
