@@ -56,7 +56,7 @@ class DateInput extends Component {
                         <div className="govuk-form-group">
                             <label className="govuk-label govuk-date-input__label" htmlFor={dayKey}>Day</label>
                             <input
-                                className={`govuk-input govuk-date-input__input govuk-input--width-2 ${error ? 'govuk-input--error' : ''}`}
+                                className={`govuk-input govuk-date-input__input govuk-input--width-2 errorFocus ${error ? 'govuk-input--error' : ''}`}
                                 id={dayKey}
                                 name={dayKey}
                                 type="text"
