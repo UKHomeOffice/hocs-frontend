@@ -599,6 +599,9 @@ class WorkstackAllocate extends Component {
                     <div className='govuk-grid-column-full'>
                         <form action={baseUrl + allocateToTeamEndpoint} method='POST' onSubmit={e => submitHandler(e, baseUrl + allocateToTeamEndpoint)} encType='multipart/form-data'>
                             <fieldset className='govuk-fieldset'>
+                                <legend className="govuk-fieldset__legend" hidden>
+                                    <span hidden>Allocate cases</span>
+                                </legend>
                                 <div className='govuk-grid-row'>
                                     <div className='govuk-grid-column-full'>
                                         <div className='workstack'>
