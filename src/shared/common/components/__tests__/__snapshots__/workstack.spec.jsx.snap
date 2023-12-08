@@ -49,6 +49,16 @@ exports[`Workstack component should not add link to headers with sortStrategy no
             <fieldset
               class="govuk-fieldset"
             >
+              <legend
+                class="govuk-fieldset__legend"
+                hidden=""
+              >
+                <span
+                  hidden=""
+                >
+                  Allocate cases
+                </span>
+              </legend>
               <div
                 class="govuk-grid-row"
               >
@@ -1215,6 +1225,16 @@ exports[`Workstack component should not add link to headers with sortStrategy no
           <fieldset
             class="govuk-fieldset"
           >
+            <legend
+              class="govuk-fieldset__legend"
+              hidden=""
+            >
+              <span
+                hidden=""
+              >
+                Allocate cases
+              </span>
+            </legend>
             <div
               class="govuk-grid-row"
             >
@@ -2438,6 +2458,16 @@ exports[`Workstack component should render the move team options 1`] = `
             <fieldset
               class="govuk-fieldset"
             >
+              <legend
+                class="govuk-fieldset__legend"
+                hidden=""
+              >
+                <span
+                  hidden=""
+                >
+                  Allocate cases
+                </span>
+              </legend>
               <div
                 class="govuk-grid-row"
               >
@@ -3698,6 +3728,16 @@ exports[`Workstack component should render the move team options 1`] = `
           <fieldset
             class="govuk-fieldset"
           >
+            <legend
+              class="govuk-fieldset__legend"
+              hidden=""
+            >
+              <span
+                hidden=""
+              >
+                Allocate cases
+              </span>
+            </legend>
             <div
               class="govuk-grid-row"
             >
@@ -5015,6 +5055,16 @@ exports[`Workstack component should sort descending when the column heading is c
             <fieldset
               class="govuk-fieldset"
             >
+              <legend
+                class="govuk-fieldset__legend"
+                hidden=""
+              >
+                <span
+                  hidden=""
+                >
+                  Allocate cases
+                </span>
+              </legend>
               <div
                 class="govuk-grid-row"
               >
@@ -6183,6 +6233,16 @@ exports[`Workstack component should sort descending when the column heading is c
           <fieldset
             class="govuk-fieldset"
           >
+            <legend
+              class="govuk-fieldset__legend"
+              hidden=""
+            >
+              <span
+                hidden=""
+              >
+                Allocate cases
+              </span>
+            </legend>
             <div
               class="govuk-grid-row"
             >
@@ -7408,6 +7468,16 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
             <fieldset
               class="govuk-fieldset"
             >
+              <legend
+                class="govuk-fieldset__legend"
+                hidden=""
+              >
+                <span
+                  hidden=""
+                >
+                  Allocate cases
+                </span>
+              </legend>
               <div
                 class="govuk-grid-row"
               >
@@ -8576,6 +8646,16 @@ exports[`Workstack component should sort when the column heading is clicked 1`] 
           <fieldset
             class="govuk-fieldset"
           >
+            <legend
+              class="govuk-fieldset__legend"
+              hidden=""
+            >
+              <span
+                hidden=""
+              >
+                Allocate cases
+              </span>
+            </legend>
             <div
               class="govuk-grid-row"
             >
