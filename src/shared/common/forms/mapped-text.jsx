@@ -26,13 +26,13 @@ class MappedText extends Component {
 
                 {error && <p id={`${name}-error`} className="govuk-error-message">{error}</p>}
 
-                <label className="govuk-label govuk-label--s govuk-mapped-text"
+                <output className="govuk-label govuk-label--s govuk-mapped-text"
                     id={name}
                     type={type}
                     name={name}
                 >
                     {mappings.get(value) ? mappings.get(value) : value}
-                </label>
+                </output>
             </div>
         );
     }
