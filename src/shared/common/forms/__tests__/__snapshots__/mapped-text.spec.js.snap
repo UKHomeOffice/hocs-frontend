@@ -15,7 +15,7 @@ exports[`Form MappedText component should render with default props 1`] = `
         >
           MappedText field
         </label>
-        <label
+        <output
           class="govuk-label govuk-label--s govuk-mapped-text"
           id="mapped-text-field"
           name="mapped-text-field"
@@ -35,7 +35,7 @@ exports[`Form MappedText component should render with default props 1`] = `
       >
         MappedText field
       </label>
-      <label
+      <output
         class="govuk-label govuk-label--s govuk-mapped-text"
         id="mapped-text-field"
         name="mapped-text-field"
@@ -117,7 +117,7 @@ exports[`Form MappedText component should render with hint when passed 1`] = `
         >
           A hint for mapped-text field
         </div>
-        <label
+        <output
           class="govuk-label govuk-label--s govuk-mapped-text"
           id="mapped-text-field"
           name="mapped-text-field"
@@ -142,7 +142,7 @@ exports[`Form MappedText component should render with hint when passed 1`] = `
       >
         A hint for mapped-text field
       </div>
-      <label
+      <output
         class="govuk-label govuk-label--s govuk-mapped-text"
         id="mapped-text-field"
         name="mapped-text-field"
@@ -219,7 +219,7 @@ exports[`Form MappedText component should render with label when passed 1`] = `
         >
           My mapped-text field
         </label>
-        <label
+        <output
           class="govuk-label govuk-label--s govuk-mapped-text"
           id="mapped-text-field"
           name="mapped-text-field"
@@ -239,7 +239,7 @@ exports[`Form MappedText component should render with label when passed 1`] = `
       >
         My mapped-text field
       </label>
-      <label
+      <output
         class="govuk-label govuk-label--s govuk-mapped-text"
         id="mapped-text-field"
         name="mapped-text-field"
@@ -316,14 +316,14 @@ exports[`Form MappedText component should render with value when passed 1`] = `
         >
           MappedText field
         </label>
-        <label
+        <output
           class="govuk-label govuk-label--s govuk-mapped-text"
           id="mapped-text-field"
           name="mapped-text-field"
           type="text"
         >
           isA
-        </label>
+        </output>
       </div>
     </div>
   </body>,
@@ -338,14 +338,14 @@ exports[`Form MappedText component should render with value when passed 1`] = `
       >
         MappedText field
       </label>
-      <label
+      <output
         class="govuk-label govuk-label--s govuk-mapped-text"
         id="mapped-text-field"
         name="mapped-text-field"
         type="text"
       >
         isA
-      </label>
+      </output>
     </div>
   </div>,
   "debug": [Function],
