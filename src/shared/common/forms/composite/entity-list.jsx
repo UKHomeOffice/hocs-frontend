@@ -98,7 +98,6 @@ class EntityList extends Component {
                                 </div>
                             );
                         })}
-                        <br />
                         {hasAddLink && <Link to={`/case/${page.params.caseId}/stage/${page.params.stageId}/entity/${entity}/${addUrlPath}?hideSidebar=${hideSidebar}`} className="govuk-body govuk-link errorFocus">{`Add a ${entity}`}</Link>}
                     </dl>
                 </fieldset>
