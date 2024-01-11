@@ -18,7 +18,7 @@ exports[`HTML module should default to proposition header when no title is passe
     <link rel="apple-touch-icon" href="/public/assets/images/govuk-apple-touch-icon.png">
     
     
-    <script defer >window.__INITIAL_DATA__ = {}</script>
+    <script>window.__INITIAL_DATA__ = {}</script>
     <script defer src="/public/js/js/main.js"></script>
     <meta property="og:image" content="/public/assets/images/govuk-opengraph-image.png">
 </head>
@@ -50,7 +50,7 @@ exports[`HTML module should include additional CSS and JS when passed 1`] = `
     <link rel="stylesheet" media="screen" href="/public/styles/styles/first.css" />
     <script defer src="/public/js/js/first.js"></script>
 <script defer src="/public/js/js/second.js"></script>
-    <script defer >window.__INITIAL_DATA__ = {}</script>
+    <script>window.__INITIAL_DATA__ = {}</script>
     <script defer src="/public/js/js/main.js"></script>
     <meta property="og:image" content="/public/assets/images/govuk-opengraph-image.png">
 </head>
@@ -81,7 +81,7 @@ exports[`HTML module should include application props in the head when passed 1`
     <link rel="apple-touch-icon" href="/public/assets/images/govuk-apple-touch-icon.png">
     
     
-    <script defer >window.__INITIAL_DATA__ = {"first":"value","second":"value"}</script>
+    <script>window.__INITIAL_DATA__ = {"first":"value","second":"value"}</script>
     <script defer src="/public/js/js/main.js"></script>
     <meta property="og:image" content="/public/assets/images/govuk-opengraph-image.png">
 </head>
@@ -112,7 +112,7 @@ exports[`HTML module should include the appropriate react application bundle whe
     <link rel="apple-touch-icon" href="/public/assets/images/govuk-apple-touch-icon.png">
     
     
-    <script defer >window.__INITIAL_DATA__ = {}</script>
+    <script>window.__INITIAL_DATA__ = {}</script>
     <script defer src="/public/js/js/myBundle.js"></script>
     <meta property="og:image" content="/public/assets/images/govuk-opengraph-image.png">
 </head>
@@ -143,7 +143,7 @@ exports[`HTML module should include the correct asset path when passed 1`] = `
     <link rel="apple-touch-icon" href="some/public/folder/that/contains/my/assets/assets/images/govuk-apple-touch-icon.png">
     
     
-    <script defer >window.__INITIAL_DATA__ = {}</script>
+    <script>window.__INITIAL_DATA__ = {}</script>
     <script defer src="some/public/folder/that/contains/my/assets/js/js/main.js"></script>
     <meta property="og:image" content="some/public/folder/that/contains/my/assets/assets/images/govuk-opengraph-image.png">
 </head>
@@ -174,7 +174,7 @@ exports[`HTML module should include the server rendered markup when passed 1`] =
     <link rel="apple-touch-icon" href="/public/assets/images/govuk-apple-touch-icon.png">
     
     
-    <script defer >window.__INITIAL_DATA__ = {}</script>
+    <script>window.__INITIAL_DATA__ = {}</script>
     <script defer src="/public/js/js/main.js"></script>
     <meta property="og:image" content="/public/assets/images/govuk-opengraph-image.png">
 </head>
@@ -236,7 +236,7 @@ exports[`HTML module should return the default html when no additional configura
     <link rel="apple-touch-icon" href="/public/assets/images/govuk-apple-touch-icon.png">
     
     
-    <script defer >window.__INITIAL_DATA__ = {}</script>
+    <script>window.__INITIAL_DATA__ = {}</script>
     <script defer src="/public/js/js/main.js"></script>
     <meta property="og:image" content="/public/assets/images/govuk-opengraph-image.png">
 </head>
