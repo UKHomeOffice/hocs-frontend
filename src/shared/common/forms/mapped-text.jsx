@@ -13,7 +13,6 @@ class MappedText extends Component {
             hint,
             label,
             name,
-            type,
             value,
             error
         } = this.props;
@@ -28,7 +27,6 @@ class MappedText extends Component {
 
                 <output className="govuk-label govuk-label--s govuk-mapped-text"
                     id={name}
-                    type={type}
                     name={name}
                 >
                     {mappings.get(value) ? mappings.get(value) : value}
@@ -43,7 +41,6 @@ MappedText.propTypes = {
     hint: PropTypes.string,
     label: PropTypes.string,
     name: PropTypes.string.isRequired,
-    type: PropTypes.string,
     value: PropTypes.string,
     error: PropTypes.string,
 };
@@ -51,7 +48,6 @@ MappedText.propTypes = {
 MappedText.defaultProps = {
     choices: [],
     label: 'MappedText field',
-    type: 'text',
     value: ''
 };
 
