@@ -38,27 +38,26 @@ const ExternalInterest = (props) => {
 
         return (
             <>
-                <p className='govuk-body'>Recorded Interests:</p>
-                <table className='govuk-table'>
+                <dl className="govuk-summary-list">
                     { externalInterestArray.length > 0 &&
                         externalInterestArray.map((externalInterest, i)=> {
                             return (
-                                <tr className='govuk-table__row' key={i}>
-                                    <td key={i} className='govuk-table__cell width-one-sixth'>
+                                <div className="govuk-summary-list__row" key={i}>
+                                    <dt key={i} className="govuk-summary-list__key width-one-sixth">
                                         { externalInterest.interestedPartyLabel }
-                                    </td>
-                                    <td key={i} className='govuk-table__cell govuk-!-width-one-half'>
+                                    </dt>
+                                    <dt key={i} className="govuk-summary-list__value govuk-!-width-one-half">
                                         { externalInterest.detailsOfInterest }
-                                    </td>
-                                    <td key={i} className='govuk-table__cell'>
+                                    </dt>
+                                    <dt key={i} className='govuk-summary-list__actions'>
                                         <Link to={`/case/${page.params.caseId}/stage/${page.params.stageId}/caseAction/record_interest/update/${externalInterest.id}?hideSidebar=false`}
                                             className="govuk-link">Update</Link>
-                                    </td>
-                                </tr>
+                                    </dt>
+                                </div>
                             );
                         })
                     }
-                </table>
+                </dl>
             </>
         );
     };

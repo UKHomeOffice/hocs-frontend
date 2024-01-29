@@ -152,7 +152,7 @@ class Radio extends Component {
                                                 checked={(value === choice.value)}
                                                 onChange={e => this.handleChange(e, choice)}
                                                 data-aria-controls={`conditional-${idName}`}
-                                                className={'govuk-radios__input'}
+                                                className={'govuk-radios__input ' + (i === 0 ? 'errorFocus' : '')}
                                             />
                                             <label className="govuk-label govuk-radios__label" htmlFor={`${idName}`}>{choice.label}</label>
                                         </div>

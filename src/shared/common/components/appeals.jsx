@@ -38,27 +38,26 @@ const Appeals = (props) => {
 
         return (
             <>
-                <p className='govuk-body'>Registered appeals:</p>
-                <table className='govuk-table'>
+                <dl className="govuk-summary-list">
                     { appealArray.length > 0 &&
                         appealArray.map((appeal, i)=> {
                             return (
-                                <tr className='govuk-table__row' key={i}>
-                                    <td key={i} className='govuk-table__cell'>
+                                <div className="govuk-summary-list__row" key={i}>
+                                    <dt key={i} className="govuk-summary-list__key">
                                         { appeal.label }
-                                    </td>
-                                    <td key={i} className='govuk-table__cell'>
+                                    </dt>
+                                    <dt key={i} className="govuk-summary-list__value">
                                         { appeal.status }
-                                    </td>
-                                    <td key={i} className='govuk-table__cell'>
+                                    </dt>
+                                    <dt key={i} className='govuk-summary-list__actions'>
                                         <Link to={`/case/${page.params.caseId}/stage/${page.params.stageId}/caseAction/appeal/update/${appeal.id}?hideSidebar=false`}
                                             className="govuk-link">Update</Link>
-                                    </td>
-                                </tr>
+                                    </dt>
+                                </div>
                             );
                         })
                     }
-                </table>
+                </dl>
             </>
         );
     };

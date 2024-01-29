@@ -65,40 +65,41 @@ class EntityList extends Component {
                     {hint && <span className="govuk-form-hint">{hint}</span>}
                     {error && <p id={`${name}-error`} className="govuk-error-message">{error}</p>}
 
-                    <table className='govuk-table'>
-                        <tbody className='govuk-table__body'>
-                            {choices && choices.map((choice, i) => {
-                                const checkedValue = this.props.checkedValue || this.state.value;
-                                return (
-                                    <tr className='govuk-radios govuk-table__row govuk-radios--small' key={i}>
-                                        <td className='govuk-table__cell'>
-                                            <div className='govuk-radios__item'>
-                                                <input id={`${name}-${choice.value}`}
-                                                    type={type}
-                                                    name={name}
-                                                    value={choice.value}
-                                                    defaultChecked={(choice.value === checkedValue)}
-                                                    onChange={e => this.handleChange(e)}
-                                                    className={'govuk-radios__input'}
-                                                />
-                                                <label className="govuk-label govuk-radios__label" htmlFor={`${name}-${choice.value}`}>
-                                                    {choice.label}
-                                                </label>
-                                            </div>
-                                        </td>
-                                        {hasEditLink && <td className='govuk-table__cell'>
-                                            <Link to={`/case/${page.params.caseId}/stage/${page.params.stageId}/entity/${entity}/${choice.value}/update?hideSidebar=${hideSidebar}`} className="govuk-link">Edit</Link>
-                                        </td>}
-                                        <td className='govuk-table__cell'>
-                                            {hasRemoveLink && (!hideRemovePrimary || choice.value !== this.initialCheckedValue) && <Link to={`/case/${page.params.caseId}/stage/${page.params.stageId}/entity/${entity}/${choice.value}/remove?hideSidebar=${hideSidebar}`} className="govuk-link">Remove</Link>}
-                                        </td>
-                                    </tr>
-                                );
-                            })}
-                            <br />
-                            {hasAddLink && <Link to={`/case/${page.params.caseId}/stage/${page.params.stageId}/entity/${entity}/${addUrlPath}?hideSidebar=${hideSidebar}`} className="govuk-body govuk-link">Add a {entity}</Link>}
-                        </tbody>
-                    </table>
+                    <dl className="govuk-summary-list">
+                        {choices && choices.map((choice, i) => {
+                            const checkedValue = this.props.checkedValue || this.state.value;
+                            return (
+                                <div className="govuk-summary-list__row govuk-radios govuk-radios--small" key={i}>
+                                    <dt className="govuk-summary-list__key padding-top--small">
+                                        <div className='govuk-radios__item'>
+                                            <input id={`${name}-${choice.value}`}
+                                                type={type}
+                                                name={name}
+                                                value={choice.value}
+                                                defaultChecked={(choice.value === checkedValue)}
+                                                onChange={e => this.handleChange(e)}
+                                                className={'govuk-radios__input'}
+                                            />
+                                            <label className="govuk-label govuk-radios__label" htmlFor={`${name}-${choice.value}`}>
+                                                {choice.label}
+                                            </label>
+                                        </div>
+                                    </dt>
+                                    <dd className="govuk-summary-list__actions">
+                                        <ul className="govuk-summary-list__actions-list">
+                                            {hasEditLink && <li className="govuk-summary-list__actions-list-item">
+                                                <Link to={`/case/${page.params.caseId}/stage/${page.params.stageId}/entity/${entity}/${choice.value}/update?hideSidebar=${hideSidebar}`} className="govuk-link">Edit</Link>
+                                            </li>}
+                                            <li className="govuk-summary-list__actions-list-item">
+                                                {hasRemoveLink && (!hideRemovePrimary || choice.value !== this.initialCheckedValue) && <Link to={`/case/${page.params.caseId}/stage/${page.params.stageId}/entity/${entity}/${choice.value}/remove?hideSidebar=${hideSidebar}`} className="govuk-link">Remove</Link>}
+                                            </li>
+                                        </ul>
+                                    </dd>
+                                </div>
+                            );
+                        })}
+                        {hasAddLink && <Link to={`/case/${page.params.caseId}/stage/${page.params.stageId}/entity/${entity}/${addUrlPath}?hideSidebar=${hideSidebar}`} className="govuk-body govuk-link errorFocus">{`Add a ${entity}`}</Link>}
+                    </dl>
                 </fieldset>
 
             </div>

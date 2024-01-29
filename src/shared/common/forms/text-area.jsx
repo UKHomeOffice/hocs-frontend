@@ -37,7 +37,7 @@ class TextArea extends Component {
                 {error && <p id={`${name}-error`} className="govuk-error-message">{error}</p>}
 
 
-                <textarea className={`govuk-textarea form-control-3-4 ${error ? 'govuk-textarea--error' : ''}`}
+                <textarea className={`govuk-textarea errorFocus form-control-3-4 ${error ? 'govuk-textarea--error' : ''}`}
                     id={name}
                     name={name}
                     disabled={disabled}
@@ -47,7 +47,7 @@ class TextArea extends Component {
                     defaultValue={this.state.value}
                 />
                 {!disabled &&
-                <div id="with-hint-info" className="govuk-hint govuk-character-count__message" aria-live="polite">
+                <div id={`${name}-hint`} className="govuk-hint govuk-character-count__message" aria-live="polite">
                     You have {this.calculateRemaining()} characters remaining
                 </div>
                 }
@@ -56,7 +56,7 @@ class TextArea extends Component {
     }
 
     calculateRemaining() {
-        return this.props.limit - this.state.value.length;
+        return this.props.limit - this.state.value.replaceAll('\r\n', '\n').length;
     }
 }
 

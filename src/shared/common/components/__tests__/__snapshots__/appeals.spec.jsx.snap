@@ -105,29 +105,24 @@ exports[`Appeals Component should Render with table of existing appeals 1`] = `
       >
         Appeals
       </h3>
-      <p
-        class="govuk-body"
+      <dl
+        class="govuk-summary-list"
       >
-        Registered appeals:
-      </p>
-      <table
-        class="govuk-table"
-      >
-        <tr
-          class="govuk-table__row"
+        <div
+          class="govuk-summary-list__row"
         >
-          <td
-            class="govuk-table__cell"
+          <dt
+            class="govuk-summary-list__key"
           >
             Court of Appeal
-          </td>
-          <td
-            class="govuk-table__cell"
+          </dt>
+          <dt
+            class="govuk-summary-list__value"
           >
             Complete
-          </td>
-          <td
-            class="govuk-table__cell"
+          </dt>
+          <dt
+            class="govuk-summary-list__actions"
           >
             <a
               class="govuk-link"
@@ -135,23 +130,23 @@ exports[`Appeals Component should Render with table of existing appeals 1`] = `
             >
               Update
             </a>
-          </td>
-        </tr>
-        <tr
-          class="govuk-table__row"
+          </dt>
+        </div>
+        <div
+          class="govuk-summary-list__row"
         >
-          <td
-            class="govuk-table__cell"
+          <dt
+            class="govuk-summary-list__key"
           >
             Court of Appeal
-          </td>
-          <td
-            class="govuk-table__cell"
+          </dt>
+          <dt
+            class="govuk-summary-list__value"
           >
             Complete
-          </td>
-          <td
-            class="govuk-table__cell"
+          </dt>
+          <dt
+            class="govuk-summary-list__actions"
           >
             <a
               class="govuk-link"
@@ -159,23 +154,23 @@ exports[`Appeals Component should Render with table of existing appeals 1`] = `
             >
               Update
             </a>
-          </td>
-        </tr>
-        <tr
-          class="govuk-table__row"
+          </dt>
+        </div>
+        <div
+          class="govuk-summary-list__row"
         >
-          <td
-            class="govuk-table__cell"
+          <dt
+            class="govuk-summary-list__key"
           >
             Court of Appeal
-          </td>
-          <td
-            class="govuk-table__cell"
+          </dt>
+          <dt
+            class="govuk-summary-list__value"
           >
             Complete
-          </td>
-          <td
-            class="govuk-table__cell"
+          </dt>
+          <dt
+            class="govuk-summary-list__actions"
           >
             <a
               class="govuk-link"
@@ -183,23 +178,23 @@ exports[`Appeals Component should Render with table of existing appeals 1`] = `
             >
               Update
             </a>
-          </td>
-        </tr>
-        <tr
-          class="govuk-table__row"
+          </dt>
+        </div>
+        <div
+          class="govuk-summary-list__row"
         >
-          <td
-            class="govuk-table__cell"
+          <dt
+            class="govuk-summary-list__key"
           >
             Court of Appeal
-          </td>
-          <td
-            class="govuk-table__cell"
+          </dt>
+          <dt
+            class="govuk-summary-list__value"
           >
             Complete
-          </td>
-          <td
-            class="govuk-table__cell"
+          </dt>
+          <dt
+            class="govuk-summary-list__actions"
           >
             <a
               class="govuk-link"
@@ -207,23 +202,23 @@ exports[`Appeals Component should Render with table of existing appeals 1`] = `
             >
               Update
             </a>
-          </td>
-        </tr>
-        <tr
-          class="govuk-table__row"
+          </dt>
+        </div>
+        <div
+          class="govuk-summary-list__row"
         >
-          <td
-            class="govuk-table__cell"
+          <dt
+            class="govuk-summary-list__key"
           >
             First Tier Tribunal
-          </td>
-          <td
-            class="govuk-table__cell"
+          </dt>
+          <dt
+            class="govuk-summary-list__value"
           >
             Complete
-          </td>
-          <td
-            class="govuk-table__cell"
+          </dt>
+          <dt
+            class="govuk-summary-list__actions"
           >
             <a
               class="govuk-link"
@@ -231,23 +226,23 @@ exports[`Appeals Component should Render with table of existing appeals 1`] = `
             >
               Update
             </a>
-          </td>
-        </tr>
-        <tr
-          class="govuk-table__row"
+          </dt>
+        </div>
+        <div
+          class="govuk-summary-list__row"
         >
-          <td
-            class="govuk-table__cell"
+          <dt
+            class="govuk-summary-list__key"
           >
             Internal Review
-          </td>
-          <td
-            class="govuk-table__cell"
+          </dt>
+          <dt
+            class="govuk-summary-list__value"
           >
             Complete
-          </td>
-          <td
-            class="govuk-table__cell"
+          </dt>
+          <dt
+            class="govuk-summary-list__actions"
           >
             <a
               class="govuk-link"
@@ -255,23 +250,23 @@ exports[`Appeals Component should Render with table of existing appeals 1`] = `
             >
               Update
             </a>
-          </td>
-        </tr>
-        <tr
-          class="govuk-table__row"
+          </dt>
+        </div>
+        <div
+          class="govuk-summary-list__row"
         >
-          <td
-            class="govuk-table__cell"
+          <dt
+            class="govuk-summary-list__key"
           >
             Upper Tribunal
-          </td>
-          <td
-            class="govuk-table__cell"
+          </dt>
+          <dt
+            class="govuk-summary-list__value"
           >
             Pending
-          </td>
-          <td
-            class="govuk-table__cell"
+          </dt>
+          <dt
+            class="govuk-summary-list__actions"
           >
             <a
               class="govuk-link"
@@ -279,9 +274,9 @@ exports[`Appeals Component should Render with table of existing appeals 1`] = `
             >
               Update
             </a>
-          </td>
-        </tr>
-      </table>
+          </dt>
+        </div>
+      </dl>
       <p
         class="govuk-body"
       >
@@ -301,29 +296,24 @@ exports[`Appeals Component should Render with table of existing appeals 1`] = `
     >
       Appeals
     </h3>
-    <p
-      class="govuk-body"
+    <dl
+      class="govuk-summary-list"
     >
-      Registered appeals:
-    </p>
-    <table
-      class="govuk-table"
-    >
-      <tr
-        class="govuk-table__row"
+      <div
+        class="govuk-summary-list__row"
       >
-        <td
-          class="govuk-table__cell"
+        <dt
+          class="govuk-summary-list__key"
         >
           Court of Appeal
-        </td>
-        <td
-          class="govuk-table__cell"
+        </dt>
+        <dt
+          class="govuk-summary-list__value"
         >
           Complete
-        </td>
-        <td
-          class="govuk-table__cell"
+        </dt>
+        <dt
+          class="govuk-summary-list__actions"
         >
           <a
             class="govuk-link"
@@ -331,23 +321,23 @@ exports[`Appeals Component should Render with table of existing appeals 1`] = `
           >
             Update
           </a>
-        </td>
-      </tr>
-      <tr
-        class="govuk-table__row"
+        </dt>
+      </div>
+      <div
+        class="govuk-summary-list__row"
       >
-        <td
-          class="govuk-table__cell"
+        <dt
+          class="govuk-summary-list__key"
         >
           Court of Appeal
-        </td>
-        <td
-          class="govuk-table__cell"
+        </dt>
+        <dt
+          class="govuk-summary-list__value"
         >
           Complete
-        </td>
-        <td
-          class="govuk-table__cell"
+        </dt>
+        <dt
+          class="govuk-summary-list__actions"
         >
           <a
             class="govuk-link"
@@ -355,23 +345,23 @@ exports[`Appeals Component should Render with table of existing appeals 1`] = `
           >
             Update
           </a>
-        </td>
-      </tr>
-      <tr
-        class="govuk-table__row"
+        </dt>
+      </div>
+      <div
+        class="govuk-summary-list__row"
       >
-        <td
-          class="govuk-table__cell"
+        <dt
+          class="govuk-summary-list__key"
         >
           Court of Appeal
-        </td>
-        <td
-          class="govuk-table__cell"
+        </dt>
+        <dt
+          class="govuk-summary-list__value"
         >
           Complete
-        </td>
-        <td
-          class="govuk-table__cell"
+        </dt>
+        <dt
+          class="govuk-summary-list__actions"
         >
           <a
             class="govuk-link"
@@ -379,23 +369,23 @@ exports[`Appeals Component should Render with table of existing appeals 1`] = `
           >
             Update
           </a>
-        </td>
-      </tr>
-      <tr
-        class="govuk-table__row"
+        </dt>
+      </div>
+      <div
+        class="govuk-summary-list__row"
       >
-        <td
-          class="govuk-table__cell"
+        <dt
+          class="govuk-summary-list__key"
         >
           Court of Appeal
-        </td>
-        <td
-          class="govuk-table__cell"
+        </dt>
+        <dt
+          class="govuk-summary-list__value"
         >
           Complete
-        </td>
-        <td
-          class="govuk-table__cell"
+        </dt>
+        <dt
+          class="govuk-summary-list__actions"
         >
           <a
             class="govuk-link"
@@ -403,23 +393,23 @@ exports[`Appeals Component should Render with table of existing appeals 1`] = `
           >
             Update
           </a>
-        </td>
-      </tr>
-      <tr
-        class="govuk-table__row"
+        </dt>
+      </div>
+      <div
+        class="govuk-summary-list__row"
       >
-        <td
-          class="govuk-table__cell"
+        <dt
+          class="govuk-summary-list__key"
         >
           First Tier Tribunal
-        </td>
-        <td
-          class="govuk-table__cell"
+        </dt>
+        <dt
+          class="govuk-summary-list__value"
         >
           Complete
-        </td>
-        <td
-          class="govuk-table__cell"
+        </dt>
+        <dt
+          class="govuk-summary-list__actions"
         >
           <a
             class="govuk-link"
@@ -427,23 +417,23 @@ exports[`Appeals Component should Render with table of existing appeals 1`] = `
           >
             Update
           </a>
-        </td>
-      </tr>
-      <tr
-        class="govuk-table__row"
+        </dt>
+      </div>
+      <div
+        class="govuk-summary-list__row"
       >
-        <td
-          class="govuk-table__cell"
+        <dt
+          class="govuk-summary-list__key"
         >
           Internal Review
-        </td>
-        <td
-          class="govuk-table__cell"
+        </dt>
+        <dt
+          class="govuk-summary-list__value"
         >
           Complete
-        </td>
-        <td
-          class="govuk-table__cell"
+        </dt>
+        <dt
+          class="govuk-summary-list__actions"
         >
           <a
             class="govuk-link"
@@ -451,23 +441,23 @@ exports[`Appeals Component should Render with table of existing appeals 1`] = `
           >
             Update
           </a>
-        </td>
-      </tr>
-      <tr
-        class="govuk-table__row"
+        </dt>
+      </div>
+      <div
+        class="govuk-summary-list__row"
       >
-        <td
-          class="govuk-table__cell"
+        <dt
+          class="govuk-summary-list__key"
         >
           Upper Tribunal
-        </td>
-        <td
-          class="govuk-table__cell"
+        </dt>
+        <dt
+          class="govuk-summary-list__value"
         >
           Pending
-        </td>
-        <td
-          class="govuk-table__cell"
+        </dt>
+        <dt
+          class="govuk-summary-list__actions"
         >
           <a
             class="govuk-link"
@@ -475,9 +465,9 @@ exports[`Appeals Component should Render with table of existing appeals 1`] = `
           >
             Update
           </a>
-        </td>
-      </tr>
-    </table>
+        </dt>
+      </div>
+    </dl>
     <p
       class="govuk-body"
     >

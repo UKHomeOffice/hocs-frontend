@@ -14,10 +14,10 @@ const SummaryRow = ({ label, data, renderer }) => {
     };
 
     return (
-        <tr className='govuk-table__cell'>
-            <th className='govuk-table__header padding-left--small govuk-!-width-one-half'>{label}</th>
-            <td className='govuk-table__cell'>{renderValue(data, renderer)}</td>
-        </tr>
+        <div className="govuk-summary-list__row">
+            <dt className='govuk-summary-list__key padding-left--small govuk-!-width-one-half'>{label}</dt>
+            <dt className='govuk-summary-list__value'>{renderValue(data, renderer)}</dt>
+        </div>
     );
 };
 
@@ -28,18 +28,16 @@ SummaryRow.propTypes = {
 };
 
 const Summary = ({ summary, data }) => (
-    <table className='govuk-table'>
+    <dl className="govuk-summary-list">
         <caption className='govuk-table__caption margin-bottom--small'>Summary</caption>
-        <tbody className='govuk-table__body'>
-            { data &&
-            summary.map((summaryItem) => {
-                const value = data[summaryItem.attribute];
-                return value && <SummaryRow key={summaryItem.attribute} data={value} label={summaryItem.label}
-                    renderer={summaryItem.renderer} />;
-            })
-            }
-        </tbody>
-    </table>
+        { data &&
+        summary.map((summaryItem) => {
+            const value = data[summaryItem.attribute];
+            return value && <SummaryRow key={summaryItem.attribute} data={value} label={summaryItem.label}
+                renderer={summaryItem.renderer} />;
+        })
+        }
+    </dl>
 );
 
 Summary.propTypes = {

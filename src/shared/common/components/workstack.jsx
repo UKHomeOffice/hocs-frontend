@@ -213,7 +213,7 @@ class WorkstackAllocate extends Component {
                 <div className='govuk-grid-column-one-third'>
                     <div className='govuk-form-group filter-row'>
                         <legend id={'workstack-filter-legend'} className='govuk-fieldset__legend'>
-                            <span className='govuk-fieldset__heading govuk-label--s'>Case Filter</span>
+                            <label className='govuk-fieldset__heading govuk-label--s' htmlFor={'workstack-filter'}>Case Filter</label>
                         </legend>
                         <input className='govuk-input'
                             id='workstack-filter'
@@ -227,7 +227,9 @@ class WorkstackAllocate extends Component {
         );
     }
 
-    setSort(selectedColumn) {
+    setSort(e, selectedColumn) {
+        e.preventDefault();
+
         this.setState((currentState) => {
             const { sort: { direction: currentDirection, column: currentColumn } } = currentState;
             let newDirection = SortDirection.ASCENDING;
@@ -259,7 +261,9 @@ class WorkstackAllocate extends Component {
         if (column.sortStrategy === 'noSort') {
             return (
                 <th className='govuk-table__header' key={column.displayName}>
-                    {column.renderer !== ColumnRenderer.INDICATOR_BLUE && column.renderer !== ColumnRenderer.INDICATOR_GREEN && column.renderer !== ColumnRenderer.INDICATOR_RED && column.displayName}
+                    <span hidden={column.renderer === ColumnRenderer.INDICATOR_BLUE || column.renderer === ColumnRenderer.INDICATOR_GREEN || column.renderer === ColumnRenderer.INDICATOR_RED}>
+                        {column.displayName}
+                    </span>
                 </th>
             );
         } else {
@@ -267,13 +271,16 @@ class WorkstackAllocate extends Component {
             const sorted = sortColumn === column;
 
             return (
-                <th onClick={() => this.setSort(column)}
-                    key={column.displayName}
-                    className={classNames(column.headerClassName, 'govuk-link', {
-                        'sorted-ascending': sorted && direction === SortDirection.ASCENDING,
-                        'sorted-descending': sorted && direction === SortDirection.DESCENDING
-                    })}>
-                    {column.renderer !== ColumnRenderer.INDICATOR_BLUE && column.renderer !== ColumnRenderer.INDICATOR_GREEN && column.renderer !== ColumnRenderer.INDICATOR_RED && column.displayName}
+                <th className={classNames(column.headerClassName, {
+                    'sorted-ascending': sorted && direction === SortDirection.ASCENDING,
+                    'sorted-descending': sorted && direction === SortDirection.DESCENDING
+                })}
+                key={column.displayName}>
+                    <button hidden={column.renderer === ColumnRenderer.INDICATOR_BLUE || column.renderer === ColumnRenderer.INDICATOR_GREEN || column.renderer === ColumnRenderer.INDICATOR_RED}
+                        onClick={(e) => this.setSort(e, column)}
+                        className='govuk-button--header'>
+                        {column.displayName}
+                    </button>
                 </th>
             );
         }
@@ -592,6 +599,9 @@ class WorkstackAllocate extends Component {
                     <div className='govuk-grid-column-full'>
                         <form action={baseUrl + allocateToTeamEndpoint} method='POST' onSubmit={e => submitHandler(e, baseUrl + allocateToTeamEndpoint)} encType='multipart/form-data'>
                             <fieldset className='govuk-fieldset'>
+                                <legend className="govuk-fieldset__legend" hidden>
+                                    <span hidden>Allocate cases</span>
+                                </legend>
                                 <div className='govuk-grid-row'>
                                     <div className='govuk-grid-column-full'>
                                         <div className='workstack'>
