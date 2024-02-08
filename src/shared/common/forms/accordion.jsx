@@ -44,7 +44,7 @@ function Section({ data, errors, index, items, title, updateState, page, visible
     }, [isVisible, toggleText]);
 
     return (
-        <div data-module="govuk-accordion" id="accordion-default">
+        <div data-module="govuk-accordion" id={`accordion-default-${index}`}>
             <div key={index} className={classNames('govuk-accordion__section', { 'govuk-accordion__section--expanded': isVisible })}>
                 <div className={classNames('govuk-accordion__section-header', { 'govuk-accordion__section-header--focused': isFocussed })} onClick={clickHandler} onFocus={onFocus} onBlur={onBlur}>
                     <h2 className='govuk-accordion__section-heading'>
