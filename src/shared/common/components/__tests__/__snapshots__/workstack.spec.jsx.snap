@@ -2522,6 +2522,7 @@ exports[`Workstack component should render the move team options 1`] = `
                         Move to another team
                       </label>
                       <select
+                        aria-describedby=""
                         class="govuk-select "
                         id="selected_team"
                         name="selected_team"
@@ -3640,6 +3641,7 @@ exports[`Workstack component should render the move team options 1`] = `
                       Move to another team
                     </label>
                     <select
+                      aria-describedby=""
                       class="govuk-select "
                       id="selected_team"
                       name="selected_team"
@@ -3792,6 +3794,7 @@ exports[`Workstack component should render the move team options 1`] = `
                       Move to another team
                     </label>
                     <select
+                      aria-describedby=""
                       class="govuk-select "
                       id="selected_team"
                       name="selected_team"
@@ -4910,6 +4913,7 @@ exports[`Workstack component should render the move team options 1`] = `
                     Move to another team
                   </label>
                   <select
+                    aria-describedby=""
                     class="govuk-select "
                     id="selected_team"
                     name="selected_team"
