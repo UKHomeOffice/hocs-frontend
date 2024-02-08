@@ -78,8 +78,6 @@ function withForm(Page) {
                                     if (response.data.redirect) {
                                         history.push(response.data.redirect);
                                     } else {
-                                        /* eslint-disable no-undef*/
-                                        document.getElementById('main-content').focus();
                                         this.setState({
                                             form_data: response.data.data,
                                             form_schema: response.data.schema,
