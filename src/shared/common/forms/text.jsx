@@ -40,6 +40,7 @@ class Text extends Component {
                         maxLength={limit}
                         value={this.props.value}
                         onChange={e => this._onChange(e)}
+                        aria-describedby={error ? `${name}-error` : ''}
                     />
                 </div>
             </div >

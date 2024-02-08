@@ -99,6 +99,7 @@ class TypeAhead extends Component {
                     loadOptions={this.getOptions.bind(this)}
                     defaultOptions={defaultOptions}
                     className={error ? ' govuk-typeahead__control--error' : null}
+                    aria-describedby={error ? `${name}-error` : ''}
                 />
             </div >
         );

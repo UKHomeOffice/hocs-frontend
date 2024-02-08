@@ -51,6 +51,7 @@ class DocumentAdd extends Component {
                         onChange={e => this.handleChange(e)}
                         multiple={allowMultiple}
                         disabled={disabled}
+                        aria-describedby={error ? `${name}-error` : ''}
                     />
                 </div>
             </Fragment>
