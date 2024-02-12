@@ -22,6 +22,7 @@ exports[`When the component is rendered and it is checked and it has child compo
                 class="govuk-checkboxes__item"
               >
                 <input
+                  aria-describedby=""
                   checked=""
                   class="govuk-checkboxes__input errorFocus"
                   id="details-checkbox-__name__"
@@ -70,6 +71,7 @@ exports[`When the component is rendered and it is checked and it has child compo
               class="govuk-checkboxes__item"
             >
               <input
+                aria-describedby=""
                 checked=""
                 class="govuk-checkboxes__input errorFocus"
                 id="details-checkbox-__name__"
@@ -175,6 +177,7 @@ exports[`When the component is rendered and it is not checked and it has child c
                 class="govuk-checkboxes__item"
               >
                 <input
+                  aria-describedby=""
                   class="govuk-checkboxes__input errorFocus"
                   id="details-checkbox-__name__"
                   name="details-checkbox-__name__"
@@ -212,6 +215,7 @@ exports[`When the component is rendered and it is not checked and it has child c
               class="govuk-checkboxes__item"
             >
               <input
+                aria-describedby=""
                 class="govuk-checkboxes__input errorFocus"
                 id="details-checkbox-__name__"
                 name="details-checkbox-__name__"
@@ -306,6 +310,7 @@ exports[`When the component is rendered and it is selected and it has child comp
                 class="govuk-checkboxes__item"
               >
                 <input
+                  aria-describedby=""
                   checked=""
                   class="govuk-checkboxes__input errorFocus"
                   id="details-checkbox-__name__"
@@ -373,6 +378,7 @@ exports[`When the component is rendered and it is selected and it has child comp
               class="govuk-checkboxes__item"
             >
               <input
+                aria-describedby=""
                 checked=""
                 class="govuk-checkboxes__input errorFocus"
                 id="details-checkbox-__name__"
@@ -497,6 +503,7 @@ exports[`When the component is rendered should match the snapshot 1`] = `
                 class="govuk-checkboxes__item"
               >
                 <input
+                  aria-describedby=""
                   class="govuk-checkboxes__input errorFocus"
                   id="details-checkbox-__name__"
                   name="details-checkbox-__name__"
@@ -534,6 +541,7 @@ exports[`When the component is rendered should match the snapshot 1`] = `
               class="govuk-checkboxes__item"
             >
               <input
+                aria-describedby=""
                 class="govuk-checkboxes__input errorFocus"
                 id="details-checkbox-__name__"
                 name="details-checkbox-__name__"
@@ -628,6 +636,7 @@ exports[`When the component is rendered should render checked if the value match
                 class="govuk-checkboxes__item"
               >
                 <input
+                  aria-describedby=""
                   checked=""
                   class="govuk-checkboxes__input errorFocus"
                   id="details-checkbox-__name__"
@@ -666,6 +675,7 @@ exports[`When the component is rendered should render checked if the value match
               class="govuk-checkboxes__item"
             >
               <input
+                aria-describedby=""
                 checked=""
                 class="govuk-checkboxes__input errorFocus"
                 id="details-checkbox-__name__"
@@ -761,6 +771,7 @@ exports[`When the component is rendered should render unchecked if the value doe
                 class="govuk-checkboxes__item"
               >
                 <input
+                  aria-describedby=""
                   class="govuk-checkboxes__input errorFocus"
                   id="details-checkbox-__name__"
                   name="details-checkbox-__name__"
@@ -798,6 +809,7 @@ exports[`When the component is rendered should render unchecked if the value doe
               class="govuk-checkboxes__item"
             >
               <input
+                aria-describedby=""
                 class="govuk-checkboxes__input errorFocus"
                 id="details-checkbox-__name__"
                 name="details-checkbox-__name__"
@@ -892,6 +904,7 @@ exports[`When the component is rendered with a hint should match the snapshot 1`
                 class="govuk-checkboxes__item"
               >
                 <input
+                  aria-describedby=""
                   class="govuk-checkboxes__input errorFocus"
                   id="details-checkbox-__name__"
                   name="details-checkbox-__name__"
@@ -934,6 +947,7 @@ exports[`When the component is rendered with a hint should match the snapshot 1`
               class="govuk-checkboxes__item"
             >
               <input
+                aria-describedby=""
                 class="govuk-checkboxes__input errorFocus"
                 id="details-checkbox-__name__"
                 name="details-checkbox-__name__"

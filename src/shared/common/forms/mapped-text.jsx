@@ -28,6 +28,7 @@ class MappedText extends Component {
                 <output className="govuk-label govuk-label--s govuk-mapped-text"
                     id={name}
                     name={name}
+                    aria-describedby={error ? `${name}-error` : ''}
                 >
                     {mappings.get(value) ? mappings.get(value) : value}
                 </output>

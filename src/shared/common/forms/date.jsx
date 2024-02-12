@@ -47,7 +47,7 @@ class DateInput extends Component {
         }
 
         return <div className={`govuk-form-group${error ? ' govuk-form-group--error' : ''}`}>
-            <fieldset id={name} disabled={disabled} className="govuk-fieldset" role="group">
+            <fieldset id={name} disabled={disabled} className="govuk-fieldset" role="group" aria-describedby={error ? `${name}-error` : ''}>
                 <legend className="govuk-fieldset__legend govuk-label--s">{label}</legend>
                 {hint && <div className="govuk-hint">{hint}</div>}
                 {error && <p id={`${name}-error`} className="govuk-error-message">{error}</p>}

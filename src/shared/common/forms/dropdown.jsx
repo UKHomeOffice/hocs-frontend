@@ -121,6 +121,7 @@ class Dropdown extends Component {
                     disabled={disabled}
                     onChange={e => this.handleChange(e)}
                     value={this.state.value}
+                    aria-describedby={error ? `${name}-error` : ''}
                 >
                     {choicesToUse && choicesToUse.map((choice, i) => {
                         return (

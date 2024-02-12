@@ -49,6 +49,7 @@ const expandableCheckbox = ({ choice, data, error, errors, hint, initiallyOpen, 
                                 checked={isChecked}
                                 onChange={onCheckBoxChange}
                                 disabled={disabled}
+                                aria-describedby={error ? `${name}-error` : ''}
                             />
                             <label className="govuk-label govuk-checkboxes__label" htmlFor={`details-checkbox-${name}`}>{label}</label>
                         </div>

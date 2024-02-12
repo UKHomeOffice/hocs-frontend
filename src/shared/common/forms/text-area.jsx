@@ -45,6 +45,7 @@ class TextArea extends Component {
                     onChange={e => this._onChange(e)}
                     value={this.state.value}
                     defaultValue={this.state.value}
+                    aria-describedby={error ? `${name}-error` : ''}
                 />
                 {!disabled &&
                 <div id={`${name}-hint`} className="govuk-hint govuk-character-count__message" aria-live="polite">
