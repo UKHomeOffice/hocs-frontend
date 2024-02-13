@@ -20,9 +20,9 @@ class Form extends Component {
         if (props?.collapsable) {
             return (<details className='govuk-details'>
                 <summary className='govuk-details__summary margin-bottom--small'>
-                    <span className='govuk-details__summary-text'>
+                    <a className='govuk-details__summary-text'>
                         { props.collapsable.hintText || 'Expand' }
-                    </span>
+                    </a>
                 </summary>
                 {form}
             </details>);
