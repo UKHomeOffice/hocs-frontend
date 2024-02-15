@@ -52,10 +52,11 @@ const StandardLinesView = (props) => {
                     </div>
                 </div>
                 <div className="govuk-grid-row margin-bottom--small">
-                    <div className="govuk-grid-column-two-thirds govuk-label--s padding-top--small">Exclude expired</div>
+                    <label className="govuk-grid-column-two-thirds govuk-label--s padding-top--small" htmlFor="exclude-expired">Exclude expired</label>
                     <div className="govuk-grid-column-one-third bigger">
                         <input
                             name="excludeExpired"
+                            id="exclude-expired"
                             type="checkbox"
                             checked={state.excludeExpired}
                             onChange={event => reducerDispatch({ type: 'ExcludeExpiredCheckTrigger', payload: event.target.checked })}
