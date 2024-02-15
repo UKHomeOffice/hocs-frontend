@@ -11,11 +11,11 @@ exports[`Form embedded wrapped component should render with default props 1`] = 
         <summary
           class="govuk-details__summary margin-bottom--small"
         >
-          <span
+          <a
             class="govuk-details__summary-text"
           >
             Test
-          </span>
+          </a>
         </summary>
         <form
           action=""
@@ -61,11 +61,11 @@ exports[`Form embedded wrapped component should render with default props 1`] = 
       <summary
         class="govuk-details__summary margin-bottom--small"
       >
-        <span
+        <a
           class="govuk-details__summary-text"
         >
           Test
-        </span>
+        </a>
       </summary>
       <form
         action=""
