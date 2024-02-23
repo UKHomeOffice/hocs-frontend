@@ -9,6 +9,7 @@ import {
 import status from '../helpers/api-status.js';
 import DashboardCards from '../common/components/dashboard.jsx';
 import Form from '../common/forms/form.new.jsx';
+import { Helmet } from 'react-helmet-async';
 
 const Dashboard = ({  match, history }) => {
     const { dispatch, form: contextForm } = useContext(Context);
@@ -63,6 +64,9 @@ const Dashboard = ({  match, history }) => {
 
     return form && form.schema ? (
         <Fragment>
+            {typeof window !== 'undefined' && <Helmet>
+                <title>{'Dashboard'}</title>
+            </Helmet>}
             <div className='govuk-grid-row'>
                 <div className='govuk-grid-column-one-third'>
                     {form.schema.title && <h1 className='govuk-heading-l'>{form.schema.title}</h1>}

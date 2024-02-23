@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import SkipLink from './skip-link.jsx';
+import { Helmet } from 'react-helmet-async';
 
 class Header extends Component {
 
@@ -44,6 +45,8 @@ class Header extends Component {
         return (
             <>
                 <SkipLink/>
+                {typeof window !== 'undefined' && <Helmet defaultTitle={service}
+                    titleTemplate={`%s - ${service}`}/>}
                 <header className='govuk-header ' role='banner' data-module='header'>
                     {this.createLogotype(service, serviceLink, bulkCreateEnabled, viewStandardLinesEnabled)}
                 </header>
