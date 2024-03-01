@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Helmet } from 'react-helmet-async';
 
 class Error extends Component {
 
@@ -72,6 +73,9 @@ class Error extends Component {
 
         return (
             <div className='govuk-grid-row'>
+                {typeof window !== 'undefined' && <Helmet>
+                    <title>{title ? title : defaultTitle}</title>
+                </Helmet>}
                 <div className='govuk-grid-column-full'>
                     <h1 className='govuk-heading-xl'>
                         {title ? title : defaultTitle}

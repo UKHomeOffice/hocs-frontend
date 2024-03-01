@@ -2,10 +2,13 @@ import React from 'react';
 import Error from '../error.jsx';
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
+import { HelmetProvider } from 'react-helmet-async';
 
 describe('Error component', () => {
     it('should render with default props', () => {
-        const wrapper = render(<Error />);
+        const wrapper = render(<HelmetProvider>
+            <Error />
+        </HelmetProvider>);
         expect(wrapper).toBeDefined();
     });
 
@@ -18,7 +21,9 @@ describe('Error component', () => {
                 }
             }
         };
-        render(<Error {...props} />);
+        render(<HelmetProvider>
+            <Error {...props} />
+        </HelmetProvider>);
         expect(screen.getByText('/SOME/UNSUPPORTED/ENDPOINT')).toBeInTheDocument();
     });
 
@@ -31,7 +36,9 @@ describe('Error component', () => {
                 }
             }
         };
-        render(<Error {...props} />);
+        render(<HelmetProvider>
+            <Error {...props} />
+        </HelmetProvider>);
         expect(screen.getByText('You do not have permission')).toBeInTheDocument();
     });
 
@@ -41,7 +48,9 @@ describe('Error component', () => {
                 stack: 'Stack trace...'
             }
         };
-        render(<Error {...props} />);
+        render(<HelmetProvider>
+            <Error {...props} />
+        </HelmetProvider>);
         expect(screen.getByText('Stack trace...')).toBeInTheDocument();
     });
 });

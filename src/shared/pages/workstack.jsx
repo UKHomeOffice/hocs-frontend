@@ -8,6 +8,7 @@ import status from '../helpers/api-status.js';
 import WrappedWorkstackAllocate from '../common/components/workstack.jsx';
 import Dashboard from '../common/components/dashboard.jsx';
 import ErrorSummary from '../common/forms/error-summary.jsx';
+import { Helmet } from 'react-helmet-async';
 
 const renderBreadCrumb = ({ key, label, to, isLast }) => (
     <li key={key} className='govuk-breadcrumbs__list-item'>
@@ -159,6 +160,9 @@ class WorkstackPage extends Component {
     renderWS({ breadcrumbs, label, dashboard, items }) {
         return (
             <Fragment>
+                {typeof window !== 'undefined' && <Helmet>
+                    <title>{label}</title>
+                </Helmet>}
                 {breadcrumbs && this.renderBreadCrumb(breadcrumbs)}
                 <h1 className='govuk-heading-l'>
                     {label}

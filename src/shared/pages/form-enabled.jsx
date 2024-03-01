@@ -20,6 +20,7 @@ import {
 import status from '../helpers/api-status.js';
 import BackLink from '../common/forms/backlink.jsx';
 import updateCaseTabs from '../helpers/case-tabs-helpers';
+import { Helmet } from 'react-helmet-async';
 
 function withForm(Page) {
 
@@ -196,6 +197,9 @@ function withForm(Page) {
         renderConfirmation() {
             return (
                 <Fragment>
+                    {typeof window !== 'undefined' && <Helmet>
+                        <title>{this.state.confirmation.title}</title>
+                    </Helmet>}
                     <Panel title={this.state.confirmation.title}>
                         {this.state.confirmation.child}
                     </Panel >
@@ -211,6 +215,9 @@ function withForm(Page) {
             return (
                 <Page title={form_schema.title} form={form_meta}
                     hasSidebar={hasSidebar || (form_schema.props && form_schema.props.hasSidebar)} history={history} >
+                    {typeof window !== 'undefined' && <Helmet>
+                        <title>{form_schema.title}</title>
+                    </Helmet>}
                     {form_schema && <Form
                         {...{
                             schema: form_schema,

@@ -3,15 +3,19 @@ import Header from '../header.jsx';
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 
 describe('Layout header component', () => {
     test('should render links', () => {
-        const wrapper = render(<Header
-            viewStandardLinesEnabled={false}
-            service={'Test Service'}
-            serviceLink={'myservicelink.gov.uk'}
-            bulkCreateEnabled={false}
-        />, { wrapper: MemoryRouter }
+        const wrapper = render(
+            <HelmetProvider>
+                <Header
+                    viewStandardLinesEnabled={false}
+                    service={'Test Service'}
+                    serviceLink={'myservicelink.gov.uk'}
+                    bulkCreateEnabled={false}
+                />
+            </HelmetProvider>, { wrapper: MemoryRouter }
         );
         expect(wrapper).toBeDefined();
         expect(screen.getByText('Test Service')).toBeInTheDocument();
@@ -21,12 +25,15 @@ describe('Layout header component', () => {
     });
 
     test('should render bulk create links', () => {
-        const wrapper = render(<Header
-            viewStandardLinesEnabled={false}
-            service={'Test Service'}
-            serviceLink={'myservicelink.gov.uk'}
-            bulkCreateEnabled={true}
-        />, { wrapper: MemoryRouter }
+        const wrapper = render(
+            <HelmetProvider>
+                <Header
+                    viewStandardLinesEnabled={false}
+                    service={'Test Service'}
+                    serviceLink={'myservicelink.gov.uk'}
+                    bulkCreateEnabled={true}
+                />
+            </HelmetProvider>, { wrapper: MemoryRouter }
         );
         expect(wrapper).toBeDefined();
         expect(screen.getByText('Test Service')).toBeInTheDocument();

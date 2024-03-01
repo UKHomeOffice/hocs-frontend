@@ -6,6 +6,7 @@ import reducer from './standardLinesReducer';
 import axios from 'axios';
 import status from '../../helpers/api-status.js';
 import Text from '../../common/forms/text.jsx';
+import { Helmet } from 'react-helmet-async';
 
 const StandardLinesView = (props) => {
 
@@ -119,6 +120,9 @@ const StandardLinesView = (props) => {
 
     return (<div className="govuk-form-group">
         <div>
+            {typeof window !== 'undefined' && <Helmet>
+                <title>{'View standard lines'}</title>
+            </Helmet>}
             <h1 className="govuk-heading-xl">View standard lines</h1>
             { state.activeStandardLines ?
                 <div>
