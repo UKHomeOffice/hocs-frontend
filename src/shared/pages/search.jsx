@@ -6,6 +6,7 @@ import { unsetForm, updateApiStatus, passForwardProps } from '../contexts/action
 import Form from '../common/forms/form.new.jsx';
 import Confirmation from '../common/components/confirmation.jsx';
 import status from '../helpers/api-status.js';
+import { Helmet } from 'react-helmet-async';
 
 // @TODO: ESLint false positive
 // eslint-disable-next-line react/display-name,react/prop-types
@@ -103,6 +104,9 @@ FormWrapper.propTypes = {
 
 const Search = ({ children, title }) => (
     <div className='govuk-grid-row'>
+        {typeof window !== 'undefined' && <Helmet>
+            <title>{title}</title>
+        </Helmet>}
         <div className='govuk-grid-column-one-half'>
             <h1 className='govuk-heading-l'>
                 {title}

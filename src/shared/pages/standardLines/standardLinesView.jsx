@@ -6,6 +6,7 @@ import reducer from './standardLinesReducer';
 import axios from 'axios';
 import status from '../../helpers/api-status.js';
 import Text from '../../common/forms/text.jsx';
+import { Helmet } from 'react-helmet-async';
 
 const StandardLinesView = (props) => {
 
@@ -52,10 +53,11 @@ const StandardLinesView = (props) => {
                     </div>
                 </div>
                 <div className="govuk-grid-row margin-bottom--small">
-                    <div className="govuk-grid-column-two-thirds govuk-label--s padding-top--small">Exclude expired</div>
+                    <label className="govuk-grid-column-two-thirds govuk-label--s padding-top--small" htmlFor="exclude-expired">Exclude expired</label>
                     <div className="govuk-grid-column-one-third bigger">
                         <input
                             name="excludeExpired"
+                            id="exclude-expired"
                             type="checkbox"
                             checked={state.excludeExpired}
                             onChange={event => reducerDispatch({ type: 'ExcludeExpiredCheckTrigger', payload: event.target.checked })}
@@ -118,6 +120,9 @@ const StandardLinesView = (props) => {
 
     return (<div className="govuk-form-group">
         <div>
+            {typeof window !== 'undefined' && <Helmet>
+                <title>{'View standard lines'}</title>
+            </Helmet>}
             <h1 className="govuk-heading-xl">View standard lines</h1>
             { state.activeStandardLines ?
                 <div>
