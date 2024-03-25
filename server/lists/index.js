@@ -105,7 +105,7 @@ module.exports = {
         S_COMP_CCT_ENQ_REASON: {
             client: 'INFO',
             endpoint: '/entity/list/COMP_CCT_ENQ_REASON',
-            type: listService.types.DYNAMIC,
+            type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         S_COMP_CSU_LIST: {
@@ -154,6 +154,12 @@ module.exports = {
             client: 'INFO',
             endpoint: '/entity/list/COMP_OTHER_BUS_AREA',
             type: listService.types.DYNAMIC,
+            adapter: entityListItemsAdapter
+        },
+        S_COMP_OTHER_BUS_AREA: {
+            client: 'INFO',
+            endpoint: '/entity/list/COMP_OTHER_BUS_AREA',
+            type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         COMP_EUSS_FP_BUS_AREA: {
@@ -1494,13 +1500,31 @@ module.exports = {
             type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
         },
+        S_COMP_ASYLUM_AND_HUMAN_RIGHTS_BUS_AREA: {
+            client: 'INFO',
+            endpoint: '/entity/list/COMP_ASYLUM_AND_HUMAN_RIGHTS_BUS_AREA',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
         COMP_ASYLUM_AND_SUPPORT_BUS_AREA: {
             client: 'INFO',
             endpoint: '/entity/list/COMP_ASYLUM_AND_SUPPORT_BUS_AREA',
             type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
         },
+        S_COMP_ASYLUM_AND_SUPPORT_BUS_AREA: {
+            client: 'INFO',
+            endpoint: '/entity/list/COMP_ASYLUM_AND_SUPPORT_BUS_AREA',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
         COMP_COSS_BUS_AREA: {
+            client: 'INFO',
+            endpoint: '/entity/list/COMP_COSS_BUS_AREA',
+            type: listService.types.DYNAMIC,
+            adapter: entityListItemsAdapter
+        },
+        S_COMP_COSS_BUS_AREA: {
             client: 'INFO',
             endpoint: '/entity/list/COMP_COSS_BUS_AREA',
             type: listService.types.DYNAMIC,
@@ -1512,10 +1536,22 @@ module.exports = {
             type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
         },
+        S_COMP_VSI_BUS_AREA: {
+            client: 'INFO',
+            endpoint: '/entity/list/COMP_VSI_BUS_AREA',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
         COMP_RESETTLEMENT_BUS_AREA: {
             client: 'INFO',
             endpoint: '/entity/list/COMP_RESETTLEMENT_BUS_AREA',
             type: listService.types.DYNAMIC,
+            adapter: entityListItemsAdapter
+        },
+        S_COMP_RESETTLEMENT_BUS_AREA: {
+            client: 'INFO',
+            endpoint: '/entity/list/COMP_RESETTLEMENT_BUS_AREA',
+            type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
         COMP_PCCR_BUS_AREA: {
@@ -1524,7 +1560,19 @@ module.exports = {
             type: listService.types.DYNAMIC,
             adapter: entityListItemsAdapter
         },
+        S_COMP_PCCR_BUS_AREA: {
+            client: 'INFO',
+            endpoint: '/entity/list/COMP_PCCR_BUS_AREA',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
         COMP_IMMIGRATION_ENFORCEMENT_BUS_AREA: {
+            client: 'INFO',
+            endpoint: '/entity/list/COMP_IMMIGRATION_ENFORCEMENT_BUS_AREA',
+            type: listService.types.DYNAMIC,
+            adapter: entityListItemsAdapter
+        },
+        S_COMP_IMMIGRATION_ENFORCEMENT_BUS_AREA: {
             client: 'INFO',
             endpoint: '/entity/list/COMP_IMMIGRATION_ENFORCEMENT_BUS_AREA',
             type: listService.types.DYNAMIC,

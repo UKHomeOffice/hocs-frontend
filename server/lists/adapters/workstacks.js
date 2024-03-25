@@ -184,6 +184,44 @@ const bindDisplayElements = fromStaticList => async (stage) => {
             stage.EnquiryReasonDisplay = await fromStaticList('TO_ENQUIRY_REASONS_ALL', stage.data.EnquiryReason) || stage.data.EnquiryReason;
         }
     }
+    if (stage.data && stage.data.EnqReason) {
+        if (stage.caseType === 'COMP' || stage.caseType === 'COMP2') {
+            stage.EnqReasonDisplay = await fromStaticList('S_COMP_CCT_ENQ_REASON', stage.data.EnqReason) || stage.data.EnqReason;
+        }
+    }
+
+    if (stage.data && stage.data.Directorate && stage.data.BusAreaBasedOnDirectorate) {
+        let BusAreaBasedOnDirectorateDisplay;
+        if (stage.caseType === 'COMP' || stage.caseType === 'COMP2') {
+            switch (stage.data.Directorate) {
+                case 'AsylumandHumanRights':
+                    BusAreaBasedOnDirectorateDisplay = await fromStaticList('S_COMP_ASYLUM_AND_HUMAN_RIGHTS_BUS_AREA', stage.data.BusAreaBasedOnDirectorate);
+                    break;
+                case 'AsylumSupport':
+                    BusAreaBasedOnDirectorateDisplay = await fromStaticList('S_COMP_ASYLUM_AND_SUPPORT_BUS_AREA', stage.data.BusAreaBasedOnDirectorate);
+                    break;
+                case 'COSS':
+                    BusAreaBasedOnDirectorateDisplay = await fromStaticList('S_COMP_COSS_BUS_AREA', stage.data.BusAreaBasedOnDirectorate);
+                    break;
+                case 'ImmigrationEnforcement':
+                    BusAreaBasedOnDirectorateDisplay = await fromStaticList('S_COMP_IMMIGRATION_ENFORCEMENT_BUS_AREA', stage.data.BusAreaBasedOnDirectorate);
+                    break;
+                case 'Other':
+                    BusAreaBasedOnDirectorateDisplay = await fromStaticList('S_COMP_OTHER_BUS_AREA', stage.data.BusAreaBasedOnDirectorate);
+                    break;
+                case 'PCCR':
+                    BusAreaBasedOnDirectorateDisplay = await fromStaticList('S_COMP_PCCR_BUS_AREA', stage.data.BusAreaBasedOnDirectorate);
+                    break;
+                case 'Resettlement':
+                    BusAreaBasedOnDirectorateDisplay = await fromStaticList('S_COMP_RESETTLEMENT_BUS_AREA', stage.data.BusAreaBasedOnDirectorate);
+                    break;
+                case 'VSI':
+                    BusAreaBasedOnDirectorateDisplay = await fromStaticList('S_COMP_VSI_BUS_AREA', stage.data.BusAreaBasedOnDirectorate);
+                    break;
+            }
+            stage.BusAreaBasedOnDirectorateDisplay = BusAreaBasedOnDirectorateDisplay || stage.data.BusAreaBasedOnDirectorate;
+        }
+    }
     if (stage.data && stage.data.CompOrigin) {
         if (stage.caseType === 'IEDET') {
             stage.CompOriginDisplay = await fromStaticList('S_IEDET_COMP_ORIGIN', stage.data.CompOrigin) || stage.data.CompOrigin;
