@@ -816,6 +816,12 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
+        S_BF_BUS_AREA_SBOC: {
+            client: 'INFO',
+            endpoint: '/entity/list/BF_BUS_AREA_SBOC',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
         S_BF_BUS_AREA_WARNING_INDEX_COMPLAINTS: {
             client: 'INFO',
             endpoint: '/entity/list/BF_BUS_AREA_WARNING_INDEX_COMPLAINTS',
