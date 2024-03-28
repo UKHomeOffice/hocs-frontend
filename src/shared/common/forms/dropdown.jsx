@@ -127,8 +127,8 @@ class Dropdown extends Component {
                         return (
                             <option
                                 key={i}
-                                value={choice.value === '' ? null : choice.value}
-                                label={choice.label}
+                                value={choice.value}
+                                label={choice.label || 'No option selected'}
                             >
                                 {choice.label}
                             </option>
