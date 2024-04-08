@@ -34,6 +34,20 @@ class SideBar extends Component {
         } else {
             this.updateActiveTab();
         }
+
+        // eslint-disable-next-line no-undef
+        const mql = window.matchMedia('(max-width: 640px)');
+
+        const scaleTabs = (e) => {
+            if (e.matches) {
+                this.setState({ renderAll: true });
+            } else {
+                this.setState({ renderAll: false });
+            }
+        };
+
+        scaleTabs({ matches: mql.matches });
+        mql.onchange = scaleTabs;
     }
 
     componentDidUpdate(prevProps) {
@@ -91,6 +105,37 @@ class SideBar extends Component {
         }
     }
 
+    renderAllTabs() {
+        const { caseTabs } = this.props;
+
+        const renderTab = (title, tab) => {
+            return (<div className={'govuk-tabs__panel'}><h2 className={'govuk-heading-l'}> {title} </h2> {tab} </div>);
+        };
+
+        return (<>
+            {caseTabs.map((tab) => {
+                switch (tab?.type) {
+                    case 'DOCUMENTS':
+                        return renderTab(tab.label, <DocumentPanel/>);
+                    case 'SUMMARY':
+                        return renderTab(tab.label, <StageSummary/>);
+                    case 'TIMELINE':
+                        return renderTab(tab.label, <CaseNotes/>);
+                    case 'PEOPLE':
+                        return renderTab(tab.label, <People/>);
+                    case 'ACTIONS':
+                        return renderTab(tab.label, <CaseActions/>);
+                    case 'EX_GRATIA':
+                        return renderTab(tab.label, <TabExGratia screen={tab.screen}/>);
+                    case 'OUT_OF_CONTACT':
+                        return renderTab(tab.label, <TabOutOfContact screen={tab.screen} history={this.props.history}/>);
+                    default:
+                        return null;
+                }
+            })}
+        </>);
+    }
+
     updateTabs() {
         const { page, dispatch } = this.props;
         if (page && page.params && page.params.caseId) {
@@ -129,7 +174,8 @@ class SideBar extends Component {
                             })
                         }
                     </ul>
-                    {this.renderActiveTab()}
+                    {this.state.renderAll && this.renderAllTabs()}
+                    {!this.state.renderAll && this.renderActiveTab()}
                 </div>}
             </Fragment>
         );
