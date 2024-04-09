@@ -2528,7 +2528,8 @@ exports[`Workstack component should render the move team options 1`] = `
                         name="selected_team"
                       >
                         <option
-                          label=""
+                          label="No option selected"
+                          value=""
                         />
                         <option
                           label="TEST TEAM 1"
@@ -3651,7 +3652,8 @@ exports[`Workstack component should render the move team options 1`] = `
                       name="selected_team"
                     >
                       <option
-                        label=""
+                        label="No option selected"
+                        value=""
                       />
                       <option
                         label="TEST TEAM 1"
@@ -3808,7 +3810,8 @@ exports[`Workstack component should render the move team options 1`] = `
                       name="selected_team"
                     >
                       <option
-                        label=""
+                        label="No option selected"
+                        value=""
                       />
                       <option
                         label="TEST TEAM 1"
@@ -4931,7 +4934,8 @@ exports[`Workstack component should render the move team options 1`] = `
                     name="selected_team"
                   >
                     <option
-                      label=""
+                      label="No option selected"
+                      value=""
                     />
                     <option
                       label="TEST TEAM 1"
