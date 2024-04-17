@@ -128,9 +128,9 @@ class Dropdown extends Component {
                             <option
                                 key={i}
                                 value={choice.value}
-                                label={choice.label || 'No option selected'}
+                                aria-label={choice.label || 'No option selected'}
                             >
-                                {choice.label}
+                                {choice.label || <>&nbsp;</>}
                             </option>
                         );
                     })}
