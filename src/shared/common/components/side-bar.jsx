@@ -174,8 +174,7 @@ class SideBar extends Component {
                             })
                         }
                     </ul>
-                    {this.state.renderAll && this.renderAllTabs()}
-                    {!this.state.renderAll && this.renderActiveTab()}
+                    {this.state.renderAll ? this.renderAllTabs() : this.renderActiveTab()}
                 </div>}
             </Fragment>
         );
