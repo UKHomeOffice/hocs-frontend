@@ -125,7 +125,13 @@ class Dropdown extends Component {
                 >
                     {choicesToUse && choicesToUse.map((choice, i) => {
                         return (
-                            <option key={i} value={choice.value} >{choice.label}</option>
+                            <option
+                                key={i}
+                                value={choice.value}
+                                aria-label={choice.label || 'No option selected'}
+                            >
+                                {choice.label || <>&nbsp;</>}
+                            </option>
                         );
                     })}
                 </select>

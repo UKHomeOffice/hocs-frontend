@@ -2528,24 +2528,31 @@ exports[`Workstack component should render the move team options 1`] = `
                         name="selected_team"
                       >
                         <option
+                          aria-label="No option selected"
                           value=""
-                        />
+                        >
+                           
+                        </option>
                         <option
+                          aria-label="TEST TEAM 1"
                           value="VALUE 1"
                         >
                           TEST TEAM 1
                         </option>
                         <option
+                          aria-label="TEST TEAM 2"
                           value="VALUE 2"
                         >
                           TEST TEAM 2
                         </option>
                         <option
+                          aria-label="TEST TEAM 3"
                           value="VALUE 3"
                         >
                           TEST TEAM 3
                         </option>
                         <option
+                          aria-label="TEST TEAM 4"
                           value="VALUE 4"
                         >
                           TEST TEAM 4
@@ -3647,24 +3654,31 @@ exports[`Workstack component should render the move team options 1`] = `
                       name="selected_team"
                     >
                       <option
+                        aria-label="No option selected"
                         value=""
-                      />
+                      >
+                         
+                      </option>
                       <option
+                        aria-label="TEST TEAM 1"
                         value="VALUE 1"
                       >
                         TEST TEAM 1
                       </option>
                       <option
+                        aria-label="TEST TEAM 2"
                         value="VALUE 2"
                       >
                         TEST TEAM 2
                       </option>
                       <option
+                        aria-label="TEST TEAM 3"
                         value="VALUE 3"
                       >
                         TEST TEAM 3
                       </option>
                       <option
+                        aria-label="TEST TEAM 4"
                         value="VALUE 4"
                       >
                         TEST TEAM 4
@@ -3800,24 +3814,31 @@ exports[`Workstack component should render the move team options 1`] = `
                       name="selected_team"
                     >
                       <option
+                        aria-label="No option selected"
                         value=""
-                      />
+                      >
+                         
+                      </option>
                       <option
+                        aria-label="TEST TEAM 1"
                         value="VALUE 1"
                       >
                         TEST TEAM 1
                       </option>
                       <option
+                        aria-label="TEST TEAM 2"
                         value="VALUE 2"
                       >
                         TEST TEAM 2
                       </option>
                       <option
+                        aria-label="TEST TEAM 3"
                         value="VALUE 3"
                       >
                         TEST TEAM 3
                       </option>
                       <option
+                        aria-label="TEST TEAM 4"
                         value="VALUE 4"
                       >
                         TEST TEAM 4
@@ -4919,24 +4940,31 @@ exports[`Workstack component should render the move team options 1`] = `
                     name="selected_team"
                   >
                     <option
+                      aria-label="No option selected"
                       value=""
-                    />
+                    >
+                       
+                    </option>
                     <option
+                      aria-label="TEST TEAM 1"
                       value="VALUE 1"
                     >
                       TEST TEAM 1
                     </option>
                     <option
+                      aria-label="TEST TEAM 2"
                       value="VALUE 2"
                     >
                       TEST TEAM 2
                     </option>
                     <option
+                      aria-label="TEST TEAM 3"
                       value="VALUE 3"
                     >
                       TEST TEAM 3
                     </option>
                     <option
+                      aria-label="TEST TEAM 4"
                       value="VALUE 4"
                     >
                       TEST TEAM 4
