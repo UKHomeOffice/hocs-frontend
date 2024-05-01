@@ -1146,6 +1146,12 @@ module.exports = {
             type: listService.types.STATIC,
             adapter: entityListItemsAdapter
         },
+        HMPO_COMPLAINT_CATEGORIES_DIGITAL_FAST_TRACK: {
+            client: 'INFO',
+            endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_DIGITAL_FAST_TRACK',
+            type: listService.types.STATIC,
+            adapter: entityListItemsAdapter
+        },
         HMPO_COMPLAINT_CATEGORIES_PAPER: {
             client: 'INFO',
             endpoint: '/entity/list/HMPO_COMPLAINT_CATEGORIES_PAPER',
