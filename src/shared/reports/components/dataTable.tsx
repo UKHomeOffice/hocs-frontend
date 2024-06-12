@@ -98,7 +98,9 @@ const DataCell = ({ type, value, additional_metadata, row }: DataCellProps) => {
     const renderValue = () => {
         switch (true) {
             case type === 'BOOLEAN':
-                return value ? 'Yes' : 'No';
+                return value
+                    ? additional_metadata?.label_if_true ?? 'Yes'
+                    : additional_metadata?.label_if_false ?? 'No';
 
             case type === 'DATE':
                 return typeof value === 'string' ? dayjs(value).format('D MMM YYYY') : value;

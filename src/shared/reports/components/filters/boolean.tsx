@@ -33,7 +33,9 @@ export const BooleanFieldset = ({ column, value, onChange }: BooleanFieldsetProp
                             type='checkbox'
                             onChange={handleChange('yes')}
                         />
-                        <label className='govuk-label govuk-checkboxes__label' htmlFor={`${column.key}--yes`}>Yes</label>
+                        <label className='govuk-label govuk-checkboxes__label' htmlFor={`${column.key}--yes`}>
+                            {column.additional_fields?.label_if_true ?? 'Yes'}
+                        </label>
                     </div>
                 </div>
                 <div className='govuk-grid-column-one-third'>
@@ -47,7 +49,9 @@ export const BooleanFieldset = ({ column, value, onChange }: BooleanFieldsetProp
                             type='checkbox'
                             onChange={handleChange('no')}
                         />
-                        <label className='govuk-label govuk-checkboxes__label' htmlFor={`${column.key}--no`}>No</label>
+                        <label className='govuk-label govuk-checkboxes__label' htmlFor={`${column.key}--no`}>
+                            {column.additional_fields?.label_if_false ?? 'No'}
+                        </label>
                     </div>
                 </div>
             </div>
